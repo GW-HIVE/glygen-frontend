@@ -1,0 +1,150 @@
+<html lang="en" ng-app="demoApp">
+
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Glycan Search</title>
+    
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.css">
+    
+  </head>
+
+  <body layout="column">
+    
+    <md-toolbar class="md-whiteframe-1dp">
+      <div class="md-toolbar-tools">
+        <div class="md-title">GlyGen GlyCan Search Results</div>
+      </div>
+    </md-toolbar>
+    
+    <md-content laout="column" flex ng-controller="GlycanController">
+      <md-card>
+        
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selected.length">
+          <div class="md-toolbar-tools">
+            <span>Glycan</span> <span>Glycan</span> <span>Glycan</span> <span>Glycan</span>
+          </div>
+        </md-toolbar>
+        
+        <md-toolbar class="md-table-toolbar alternate" ng-show="selected.length">
+          <div class="md-toolbar-tools">
+            <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+          </div>
+        </md-toolbar>
+        
+        <md-table-container>
+          <table md-table md-row-select ng-model="selected" md-progress="promise">
+            <thead fix-head md-head md-order="query.order">
+              <tr md-row>
+                <th md-column md-order-by="name.value"><span>Id</span></th>
+                <th md-column md-order-by="type.value"><span>Cartoon</span></th>
+                <th md-column md-numeric md-order-by="Type.value" md-desc><span>Type</span></th>
+                <th md-column md-numeric md-order-by="Species.value"><span>Species</span></th>
+                <th md-column md-numeric md-order-by="Mass.value"><span>Mass</span></th>
+                <th md-column md-numeric md-order-by="Reference.value"><span>Reference</span></th>
+                <th md-column md-numeric md-order-by="Gene.value" ><span>Gene</span></th>
+                <th md-column md-numeric md-order-by="Conjugates.value" ><span>Conjugates</span></th>
+                <th md-column md-numeric md-order-by="Motif.value" ><span>Motif</span></th>
+                
+                </th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row md-select="Glycan" md-auto-select ng-repeat="Glycan in Glycans.data | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <td md-cell>{{Glycan.name}}</td>
+                <td md-cell>
+                  <md-select ng-model="Glycan.type" placeholder="Other">
+                    <md-option ng-value="type" ng-repeat="type in getTypes()">{{type}}</md-option>
+                  </md-select>
+                </td>
+                <td md-cell>{{Glycan.Type.value}}</td>
+                <td md-cell>{{Glycan.Species.value | number: 2}}</td>
+                <td md-cell>{{Glycan.Mass.value}}</td>
+                <td md-cell>{{Glycan.Reference.value | number: 2}}</td>
+                <td md-cell hide-gt-xs show-gt-md>{{Glycan.Gene.value}}</td>
+                <td md-cell hide-gt-xs show-gt-lg>{{Glycan.Conjugates.value}}%</td>
+                <td md-cell hide-gt-xs show-gt-lg>{{Glycan.Motif.value}}%</td>
+                
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{Glycans.count}}" md-page-select></md-table-pagination>
+    
+      </md-card>
+    </md-content>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script src="https://rawgit.com/daniel-nagy/md-data-table/master/dist/md-data-table.js"></script>
+    <script src="https://rawgit.com/daniel-nagy/fixed-table-header/master/src/fixed-table-header.js"></script>
+    <script>
+        angular.module('demoApp', ['ngMaterial', 'md.data.table', 'fixed.table.header'])
+
+.config(['$mdThemingProvider', function ($mdThemingProvider) {
+    'use strict';
+    
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue');
+}])
+
+.controller('GlycanController', ['$mdEditDialog', '$scope', function ($mdEditDialog, $scope) {
+  'use strict';
+  
+  $scope.selected = [];
+  
+  $scope.query = {
+    order: 'name',
+    limit: 10,
+    page: 1
+  };
+  
+  
+  
+  $scope.editComment = function (event, Glycan) {
+    event.stopPropagation(); // in case autoselect is enabled
+    
+    var editDialog = {
+      modelValue: Glycan.comment,
+      placeholder: 'Add a comment',
+      save: function (input) {
+        if(input.$modelValue === 'y') {
+          return $q.reject();
+        }
+        if(input.$modelValue === 'n') {
+          return Glycan.comment = 'edit!'
+        }
+        Glycan.comment = input.$modelValue;
+      },
+      targetEvent: event,
+      title: 'Add a comment',
+      validators: {
+        'md-maxlength': 30
+      }
+    };
+    
+    var promise = $mdEditDialog.small(editDialog);
+    
+    promise.then(function (ctrl) {
+      var input = ctrl.getInput();
+      
+      input.$viewChangeListeners.push(function () {
+        input.$setValidity('test', input.$modelValue !== 'test');
+      });
+    });
+  };
+  
+  
+}]);
+    </script>
+  </body>
+</html>
