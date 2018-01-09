@@ -1,0 +1,421 @@
+ 
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>GlyGen</title>
+
+ 
+
+    <!-- Bootstrap -->
+
+    <!-- Latest compiled and minified CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+ 
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+  </head>
+  <style>
+    
+.panel-primary>.panel-heading a[aria-expanded="true"] {
+    background-color: #337ab7;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  
+  width: auto;
+}
+      .navbar-default {
+        background-color: coral;
+        border-color: coral;
+        
+    }
+    thead{
+        background-color:#337ab7;
+    }
+        .panel-primary {
+    border-color: #337ab7;
+    margin-top: 56px;
+}
+.wrapper {
+  max-width: 960px; /* 20px smaller, to fit the paddings on the sides */
+
+  padding-right: 10px;
+  padding-left: 10px;
+
+  /* ...  */
+}
+      .navbar-default {
+    background-color: #ef6c0d;
+    border-color: #e7e7e7;
+    }
+    toggle:hover {
+    background-color: #000000;
+}
+.navbar-default .navbar-brand {
+    color:  #000000
+}
+.navbar-default .navbar-nav>li>a
+{
+    color:  #000000
+}
+.navbar-default .navbar-toggle {
+    border-color: #000000;
+}
+thead{
+    background-color: #337ab7
+}
+  </style>
+
+  <body style="padding-top: 70px; padding-bottom: 90px;">
+
+ 
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+  <div class="container-fluid">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+
+   
+    <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">GlyGen</a>
+            <!-- <a class="navbar-brand" href="#"><img src="logox.png" alt="GlyGen">
+            </a> -->
+            
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                  
+              <!-- <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li> -->
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore More <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Glycan</a></li>
+                  <li><a href="#">Glycoprotein</a></li>
+                  <li><a href="#">Carbohydrate Active Enzyme</a></li>
+                  <li><a href="#">Gene</a></li>
+                  <li><a href="#">Navigate Biological Concepts</a></li>
+                  <li><a href="#">Visualize a Glycoprotein</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+ 
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-12 col-xs-12">
+
+            <table id="gen-table"
+
+                   data-pagination="true"
+
+                   data-search="true"
+
+                   data-toggle="table"
+
+                   data-detail-view="true"
+
+                   data-detail-formatter="DetailFormat">
+
+                <thead>
+
+                <tr>
+
+                    <th data-field="state" data-checkbox="true"></th>
+
+                    <th data-field="ID" data-sortable="true" data-formatter="PageFormat">ID</th>
+
+                    <th data-field="imageURL" data-formatter="ImageFormat">Image</th>
+
+                    <th data-field="type" data-sortable="true"data-formatter="LinkFormat">Type</th>
+
+                    <th data-field="subtype" data-sortable="true" data-formatter="LinkFormat">SubType</th>
+
+                    <th data-field="IUPAC" data-sortable="true" data-formatter="ShortFormat">IUPAC</th>
+
+                    <th data-field="GlycoCT" data-sortable="true" data-formatter="ShortFormat">GlycoCT</th>
+
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+
+         <!-- Compare window -->
+        <div class="col-md-3 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Available to compare
+                </div>
+                <div class="panel-body">
+                    <ul id="gen-compare">
+                    </ul>
+
+                </div>
+
+                <div class="panel-footer">
+
+                   <a class="btn btn-default" href="#" role="button">Compare</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+     </div>
+
+</div>
+
+ 
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style='max-height: 70px;'>
+
+  <div class="container">
+
+    <div class="col-sm-6 col-xs-12">
+
+        <p class="navbar-text">"The University of Georgia" Complex Carbohydrate Research Center <br />315 Riverbend Road Athens, Georgia 30602 USA</p>
+
+    </div>
+
+    <div class="col-sm-6 col-xs-12">
+
+        <p class="navbar-text">"The George Washington University" School of Medicine and Health Sciences <br />2300 Eye Street N.W., Washington, DC 20037 USA.</p>
+
+    </div>
+
+  </div>
+
+</nav>
+
+ 
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+ 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/editable/bootstrap-table-editable.min.js"></script>
+
+ 
+
+      <script type='text/javascript'>
+
+ 
+
+          String.prototype.trunc = String.prototype.trunc ||
+
+          function(n){
+
+              return (this.length > n) ? this.substr(0, n-1) + '&hellip;' : this;
+
+          };
+
+ 
+
+          function PageFormat(value, row, index, field){
+
+            return "<a href='glygenpage.html?Id=" + value + "'>" + value +  "</a>";
+
+          }
+
+ 
+
+ 
+
+          function ImageFormat(value, row, index, field){
+
+              return "<img src= http://glycomics.ccrc.uga.edu/ggtest/service/imagewebservice.php?action=get_user&id=3"+ value + "' alt='Cartoon' />" ;
+
+          }
+
+ 
+
+          function LinkFormat(value, row, index, field){
+
+              return "<a href='" + value + "'>" +  value + "</a>";
+
+          }
+
+ 
+
+          function ShortFormat(value, row, index, field){
+
+              var txt = value.trunc(20);
+
+              return "<a data-toggle='popover' data-trigger='hover' data-content='" + value + "' data-placement='bottom' >" + txt + "</a>"
+
+              return txt;
+
+          }
+
+ 
+
+          function DetailFormat(index, row){
+
+              var html = [];
+
+              html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.IUPAC + '</pre></div></div>');
+
+              html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.GlycoCT + '</pre></div></div>');
+
+              return html.join('');
+
+          }
+
+ 
+
+          function Selected() {
+
+            var $table = $('#gen-table');
+
+            return $.map($table.bootstrapTable('getSelections'), function (row) {
+
+                return row.ID
+
+            });
+
+          }
+
+ 
+
+          function LoadData(id){
+
+             var $table = $('#gen-table');
+
+             $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/Restfulapi.php?action=get_user&id=" + id,
+
+                function (data) {
+
+                    var item = data[0];
+
+                    $table.bootstrapTable('removeAll');
+
+                    $table.bootstrapTable('append', [{
+
+                        ID: data[0].ID,
+
+                        imageURL: data[0].imageURL,
+
+                        type: data[0].type,
+
+                        subtype: data[0].subtype,
+
+                        IUPAC: data[0].IUPAC,
+
+                        GlycoCT: data[0].GlycoCT
+
+                   }]);
+
+ 
+
+                    $('[data-toggle="popover"]').popover();
+
+ 
+
+                }
+
+            );
+
+          }
+
+ 
+
+ 
+
+          $(function () {
+
+                var $table = $('#gen-table');
+
+                var $selected = $("#gen-compare");
+
+                $table.on('check.bs.table', function (e, row, $el) {
+
+                    $selected.empty();
+
+                    $.each(Selected(), function(i, item){
+
+                        $selected.append("<li>" + item + "</li>");
+
+                    });
+
+                });
+
+                $table.on('uncheck.bs.table', function (e, row, $el) {
+
+                   $selected.empty();
+
+                   $.each(Selected(), function(i, item){
+
+                        $selected.append("<li>" + item + "</li>");
+
+                    });
+
+                });
+
+ 
+
+                LoadData(2);
+
+            });
+
+      </script>
+
+ 
+
+  </body>
+
+</html>
