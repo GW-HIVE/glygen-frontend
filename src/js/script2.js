@@ -58,11 +58,15 @@
                    var items = new Array();
                    //number of elements
                    console.log(data);
-                   for(var i=0; i < data.results.length; i++){
+                   for(var i=0; i < data.results.length; i++)
+                   {
+
+                if(data.results[i].ID == URI().search(true).ID){
+                  {
                        items.push({
                          ID: data.results[i].ID,
                          //imageURL: data[1][i],
-                         imageURL : data.results[i].imageURL,
+                          imageURL : data.results[i].imageURL,
                           type: data.results[i].type[0],
 
                          subtype: data.results[i].subtype[0],
@@ -70,6 +74,8 @@
                          GlycoCT: data.results[i].GlycoCT
                        })
                    }
+
+
 
 
                    $table.bootstrapTable('removeAll');
