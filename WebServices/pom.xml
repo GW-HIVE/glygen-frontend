@@ -52,6 +52,12 @@
           </goals>
           <configuration>
             <target>
+              <echo message="Deleting existing files from the server dir: ${remote.dest}"/>
+              <echo message="and copying your local files to the server..."/>
+              <!--Deleting the existing files on the server-->
+              <sshexec port="${port}" host="${server.IP}" trust="yes" username="${user}" password="${password}" command="rm -rf ${remote.dest}*" />
+
+              <!--Copying the local files to the server-->
               <scp port="${port}" remoteTodir="${user}@${server.IP}:${remote.dest}" verbose="true" password="${password}" trust="true">
                 <fileset dir="${local.src}">
                   <exclude name="pom.xml"/>
