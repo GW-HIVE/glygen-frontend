@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <!-- title for page -->
+        <title>sidebar </title>
+        <head>
+         <!-- CSS for page -->
+        
+         <link rel="stylesheet" type="text/css" href="css/style.css">
+         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+         <link rel="stylesheet" type="text/css" href="css/stylehead.css">
+         <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+         
+    </head>
+    
+   <!-- Navigation for sticky header starts here -->
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+             <div class="navbar-header1"><a class="navbar-brand" href="GlyGen"></a><img id="logo" src="images/logo.png"></div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="col-sm-3 col-md-3 pull-right">
+            <form class="navbar-form" role="search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                <div class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+            </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation for sticky header ends here -->
+        <!-- Navigation for menu starts here -->
+    <div class="navbar navbar-light" style="background-color: #545659;" role="navigation" style="padding-top: 30px;">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      </button>
+      </div>
+      <div class="navbar-collapse collapse" aria-expanded="false" style="height:10px;">
+        <ul class="nav navbar-nav pull-center">
+        <li><a href="#"> </a></li>
+        <li><a href="#"> </a></li>
+        <li><a href="#"> </a></li>
+        <li><a href="#"> </a></li>
+          <li><a href="#">Home</a></li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Explore<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Glycan Protein</a></li>
+                <li><a href="#">Proteoform</a></li>
+              </ul>
+            </li>
+          <li><a href="#">Swap Resources</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">QUICK SEARCH <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Group 1</a></li>
+              <li><a href="#">Group 2</a></li>
+              <li><a href="#">Group 3</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+  </div>
+
+<body>
+
+<nav class="navigation" id="sideNav">
+        <a class="navigation__link" href="#1">ID</a>
+        <a class="navigation__link" href="#2">Species</a>
+        <a class="navigation__link" href="#3">Motif</a>
+        <a class="navigation__link" href="#4">Found Glycojugates</a>
+            <a class="navigation__link" href="#5">Digital Sequences</a>
+            <a class="navigation__link" href="#6">Cross Referance</a>
+            <a class="navigation__link" href="#7">Enzyme</a>
+</nav>
+            <div id="content"class=container>
+        <script id="item_template" type="text/template">
+          <div class="panel panel-default">
+            <div class="panel-heading" id="1">{{ID}}</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <!--always try to use double quotes for HTML attributes. -->
+                    <img src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt="Cartoon" />
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                    {{#Mass}}
+                      <h5>  Mass:{{Mass}}</h5>
+                    {{/Mass}}
+                    <h5>Classification:</h5>
+                    {{#classification}}
+                        <li><a href="{{type.URL}}">{{type.NAME}}</a>  <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
+                    {{/classification}}
+                  
+                </div>
+              </div>
+              </div>
+            </div>
+              <div class="panel panel-default">
+              <div class="panel-heading"id="2"> Species </div>
+                <div class="panel-body">
+                     {{#species}}
+                     <div class="row">
+                    <div class='col-md-5 col-xs-5'>
+                        <h4>{{name}} <a href="{{"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"}}">{{taxid}}</a></h4>
+                        {{#evidence}}
+                      <li>{{database}} <a href="{{url}}">{{id}}</a></li>
+                      {{/evidence}}
+                  </div>
+                </div>
+                     {{/species}}
+                </div>
+              </div>
+            </div>
+           
+            
+      
+                <div class="panel panel-default">
+                <div class="panel-heading" id="3"> Motif </div>
+              {{#hasMotifs}}
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-5 col-xs-5">
+                            <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                        </div>
+                         
+                        <div class="col-md-5 col-xs-5">
+                                <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                            </div>
+                      </div>
+                      <div class="row">
+                            <div class="col-md-5 col-xs-5">
+                                    <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                </div>
+                                <div class="col-md-5 col-xs-5">
+                                        <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-5 col-xs-5">
+                                            <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                        </div>
+                                        <div class="col-md-5 col-xs-5">
+                                                <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                            </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col-md-5 col-xs-5">
+                                                    <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                        <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' /></div>
+                                                    </div>
+                                            </div>
+                    <ul>
+                      {{#motifs}}
+                      <div class="col-md-6 col-xs-6">
+                           <span> {{name}} {{id}} </span>
+                          </div>
+                          
+                      {{/motifs}}
+                    </ul>
+                  </div>
+                  {{/hasMotifs}}
+                </div>
+              </div>
+            <div class="panel panel-default">
+            <div class="panel-heading"id="4"> Found in Glycoconjugates</div>
+          <div class="panel-body">
+            <ul>
+              {{#glycosylate}}
+                <li>
+              {{protein_name}} 
+                </li>
+                  <li>  {{protein_name}}  Protein_ID: {{protein_id}}  <a href="{{"http://www.uniprot.org/uniprot/P03390"}}">{{position}}</a></li>
+                    <div class="row">
+                    <div class="col-md-3">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <span class="panel">
+                            <span class="span-heading" role="tab" id="headingOne">
+                                 <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">  
+                            </a>
+                          </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                      {{#evidence}}
+                        <li>
+                            Database: {{database}} </li>
+                            <li>
+                            ID: {{id}}</li>
+                            <li>
+                            url: {{url}}
+                        </li>
+                      {{/evidence}}
+                    </ul>
+                </li>
+              {{/glycosylate}}
+            </ul>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+          <div class="panel panel-default">
+          <div class="panel-heading"id="5"> Digital Sequence </div>
+            <div class="panel-body">
+              <pre>{{ glycoct }}</pre>
+              <pre>{{ wurcs}}</pre>
+                <pre>{{ iupac }}</pre>
+            </div>
+          </div>
+      <div class="panel panel-default">
+          <div class="panel-heading" id="6">Cross Reference </div>
+        <div class="panel-body">
+            {{#crossref}}
+            <li>
+                Database: {{database}} </li>
+                <li> <a href="{{url}}">{{id}}</a></li>
+          {{/crossref}}
+        </div>
+      </div>
+      <div class="panel panel-default">
+            <div class="panel-heading"id="7"> Enzyme </div>
+              <div class="panel-body">
+                    {{#enzymes}} 
+                   <li> {{protein_name}} <a href="{{"http://www.uniprot.org/uniprot/P03390"}}">{{protein_id}}</a></li>
+                 <li><a href="{{gene_link}}">{{gene}}</a> </li>
+                  {{/enzymes}}
+              </div>
+            </div>
+     </script>
+        
+          <!-- Footer Starts -->
+        <nav class="navbar navbar-inverse navbar-fixed-bottom" style="max-height: 100px;">
+          
+            <div class="col-sm-6 col-xs-12">
+                <img id="logo-uga" src="images/logo-uga6.png" style="margin:10px;"> 
+              <p class="navbar-text">"The University of Georgia" Complex Carbohydrate Research Center <br>315 Riverbend Road Athens, Georgia 30602 USA</p>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <img id="logo-gwu" src="images/logo-gwu.png" style="margin: 10px; "> 
+              <p class="navbar-text">"The George Washington University" School of Medicine and Health Sciences <br>2300 Eye Street N.W., Washington, DC 20037 USA.</p>
+            </div>
+        </nav>
+         <!-- Footer ends here-->
+        
+       
+</body>
+
+<script>
+    $(document).ready(function() {
+		$('a[href*=#]').bind('click', function(e) {
+				e.preventDefault(); // prevent hard jump, the default behavior
+
+				var target = $(this).attr("href"); // Set the target as variable
+
+				// perform animated scrolling by getting top-position of target-element and set it as scroll target
+				$('html, body').stop().animate({
+						scrollTop: $(target).offset().top
+				}, 600, function() {
+						location.hash = target; //attach the hash (#jumptarget) to the pageurl
+				});
+
+				return false;
+		});
+});
+
+$(window).scroll(function() {
+		var scrollDistance = $(window).scrollTop();
+
+		// Show/hide menu on scroll
+		if (scrollDistance >= 850) {
+				$('nav').fadeIn("fast");
+		} else {
+				$('nav').fadeOut("fast");
+		}
+	
+		// Assign active class to nav links while scolling
+		$('.page-section').each(function(i) {
+				if ($(this).position().top <= scrollDistance) {
+						$('.navigation a.active').removeClass('active');
+						$('.navigation a').eq(i).addClass('active');
+				}
+		});
+}).scroll();
+</script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+           <!--for navigation-->
+           <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+           <!-- Include all compiled plugins (below), or include individual files as needed -->
+           <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+           <script type="text/javascript" src="js/scriptdetail.js"></script>
+           <script type="text/javascript" src="js/mustache.js"></script>
+
+
+</html>
