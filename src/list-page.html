@@ -1,195 +1,126 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <title>GlyGen</title>
-
-
-
-    <!-- Bootstrap -->
-
-    <!-- Latest compiled and minified CSS -->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700' rel='stylesheet' type='text/css'>
-
-
-    
-<link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-      <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
+    <head>
+				<meta charset="utf-8">
+				<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <title>List Page</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
+          <link rel="stylesheet" type="text/css" href="css/style.css">
+          <link rel="stylesheet" type="text/css" href="css/stylehead.css">
+          
+    </head>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                 <div class="navbar-header1"><a class="navbar-brand" href="GlyGen"></a><img id="logo" src="images/logo.png"></div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">GlyGen</a>
-                <!-- <a class="navbar-brand" href="#"><img src="logox.png" alt="GlyGen">
-                </a> -->
-              </div>
-
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <!-- <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li> -->
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore More <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Glycan</a></li>
-                      <li><a href="#">Glycoprotein</a></li>
-                      <li><a href="#">Carbohydrate Active Enzyme</a></li>
-                      <li><a href="#">Gene</a></li>
-                      <li><a href="#">Navigate Biological Concepts</a></li>
-                      <li><a href="#">Visualize a Glycoprotein</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
-<div class="container-fluid">
-
-    <div class="row">
-
-        <div class="col-md-12 col-xs-12">
-
-            <table id="gen-table"
-
-                   data-pagination="true"
-
-                   data-search="true"
-
-                   data-toggle="table"
-
-                   data-detail-view="true"
-
-                   data-detail-formatter="DetailFormat"
-
-                   data-page-size="10"
-                   data-width= "10%" >
-
-                <thead>
-
-                <tr>
-
-                    <th data-field="state" data-checkbox="true"></th>
-
-                    <th data-field="ID" data-sortable="true" data-formatter="PageFormat">ID</th>
-
-                    <th data-field="imageURL"  data-formatter="ImageFormat">Image</th>
-
-                    <th data-field="type" data-sortable="true" data-formatter="TypeFormat">Type</th>
-
-                    <th data-field="subtype" data-sortable="true" data-formatter="TypeFormat">SubType</th>
-
-
-                    <!-- <th data-field="subtype"  data-sortable="true"data-formatter="LinkFormat">SubType</th> -->
-<!--
-                    <th data-field="IUPAC" data-formatter="ShortFormat">IUPAC</th>
-
-                    <th data-field="GlycoCT" data-formatter="ShortFormat">GlycoCT</th> -->
-
-                </tr>
-
-
-                </thead>
-
-            </table>
-
-        </div>
-
-        <!-- <div class="col-md-3 col-xs-12">
-
-            <div class="panel panel-primary">
-
-                <div class="panel-heading">
-
-                    Available to compare
-
-                </div>
-
-                <div class="panel-body">
-
-                    <ul id="gen-compare">
-
-
-
-                    </ul>
-
-                </div>
-
-                <div class="panel-footer">
-
-                   <a class="btn btn-default" href="#" role="button">Compare</a>
-
-                </div>
-
             </div>
+  
+            <div class="collapse navbar-collapse">
+                <div class="col-sm-3 col-md-3 pull-right">
+                <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+                </form>
+                </div>
+  
+            </div>
+        </div>
+        <div class="navbar navbar-light" style="background-color: #545659;" role="navigation" style="height: 10px;">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          </button>
+          </div>
+          <div class="navbar-collapse collapse" aria-expanded="false" style="height:10px;">
+            <ul class="nav navbar-nav pull-center">
+            <li><a href="#"> </a></li>
+            <li><a href="#"> </a></li>
+            <li><a href="#"> </a></li>
+            <li><a href="#"> </a></li>
+              <li><a href="#">Home</a></li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Explore<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Glycan Protein</a></li>
+                    <li><a href="#">Proteoform</a></li>
+                  </ul>
+                </li>
+              <li><a href="#">Swap Resources</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">QUICK SEARCH <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Group 1</a></li>
+                  <li><a href="#">Group 2</a></li>
+                  <li><a href="#">Group 3</a></li>
+                  
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+		
+		<div class="container-fluid">
+				<div class="row">
+						<div class="col-md-10 col-xs-12">
+								<table id="gen-table"
+											 data-pagination="true"
+											 data-search="true"
+											 data-toggle="table"
+											 data-detail-view="true"
+											 data-detail-formatter="DetailFormat"
+											 data-page-size="10">
+										<thead>
+										<tr>	
+												<th data-field="state" data-checkbox="true"></th>
+												<th data-field="ID" data-sortable="true" data-formatter="PageFormat" >ID</th>
+												<th data-field="imageURL" data-formatter="ImageFormat" style="width:10%" >Image</th>
+                        <th data-field="Classification" data-sortable="true" data-formatter="ClassificationFormat">Subtype</th>
+                        <th data-field="Mass" data-sortable="true" data-formatter="PageFormat" >Mass
+                          <th data-field="Protein" data-sortable="true" data-formatter="PageFormat" >Protein Summery</th>
+                        </th>
+                    </tr>
+										</thead>
+								</table>
+						</div>
+         </div>
+        </div>
+	
+		
+		<nav class="navbar navbar-inverse navbar-fixed-bottom" style="max-height: 100px;">
+				
+					<div class="col-sm-6 col-xs-12">
+							<img id="logo-uga" src="images/logo-uga6.png" style="margin:10px;"> 
+						<p class="navbar-text">"The University of Georgia" Complex Carbohydrate Research Center <br>315 Riverbend Road Athens, Georgia 30602 USA</p>
+					</div>
+					<div class="col-sm-6 col-xs-12">
+							 <img id="logo-gwu" src="images/logo-gwu.png" style="margin: 10px; "> 
+						<p class="navbar-text">"The George Washington University" School of Medicine and Health Sciences <br>2300 Eye Street N.W., Washington, DC 20037 USA.</p>
+					</div>
+				
+			</nav>
+	
+		
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+				<!-- Include all compiled plugins (below), or include individual files as needed -->
+				<!-- Latest compiled and minified JavaScript -->
+				
+        <script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
+      <script type="text/javascript" src="js/script.js"></script>
+      <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+		</html>
+		
 
-        </div> -->
-
-     </div>
-
-</div>
-
-
-
-<nav class="navbar navbar-inverse navbar-fixed-bottom" style='max-height: 70px;'>
-
-  <div class="container">
-
-    <div class="col-sm-6 col-xs-12">
-
-        <p class="navbar-text">"The University of Georgia" Complex Carbohydrate Research Center <br />315 Riverbend Road Athens, Georgia 30602 USA</p>
-
-    </div>
-
-    <div class="col-sm-6 col-xs-12">
-
-        <p class="navbar-text">"The George Washington University" School of Medicine and Health Sciences <br />2300 Eye Street N.W., Washington, DC 20037 USA.</p>
-
-    </div>
-
-  </div>
-
-</nav>
-
-  </body>
-
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-
-      <!-- Latest compiled and minified JavaScript -->
-
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.19.0/URI.min.js"></script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/editable/bootstrap-table-editable.min.js"></script>
-
-  <script type="text/javascript" src="js/script2.js"></script>
-
-</html>
