@@ -1,0 +1,64 @@
+.img-cartoon {
+  -webkit-transform: scale(0.8);
+  transform: scale(0.8);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  position: initial;
+  z-index: 1;
+  overflow:hidden ;
+  
+}
+
+.img-wrapper{
+  overflow:hidden;
+  z-index: -1;
+  padding-left:10px;
+  padding: 0.5em;
+  width:470px;
+  overflow:hidden;
+  margin-top:20px;
+  margin-bottom:0px;
+  margin-left:0px;
+  padding-bottom:-2px; 
+  padding-right:2px; 
+
+}
+.img-cartoon:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  box-shadow: 10px 10px 5px #ddd;
+  z-index: 99999;
+}
+
+.img-cartoon:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  box-shadow: 10px 10px 5px #ddd;
+  z-index: 99999;
+}
+
+
+body {
+padding-top: 50px;
+}
+
+.input-group {
+  width: 300px;
+}
+#glycanname{
+  padding-left:60px;
+
+}
+.container {
+  width: 850px;
+  padding-left: 150px;
+  padding-bottom: 150px;
+ 
+
+}
+
+

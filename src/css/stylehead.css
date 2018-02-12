@@ -1,0 +1,47 @@
+ 
+     .navbar-brand {
+  color: red;
+}
+
+a {
+  color: red;
+}
+
+.navbar-nav>li>a {
+  padding-top: 15px;
+
+}
+
+.navbar-inverse .navbar-form {
+  border-color: #d80a0a;
+}
+.navbar navbar-light {
+  margin-top: 10px;
+}
+.navbar-inverse .navbar-brand {
+color: red;
+}
+.navbar-light{
+  padding-top: 20px;
+}
+a{
+color:red;
+}
+.navbar-nav>li>a {
+padding-top: 15px;
+}
+
+.container-fluid{
+  padding-left:30px;
+  padding-right: 30px;
+  padding-bottom:150px;
+}
+.navbar-nav>li>a{
+  color:red
+}
+.panel-default > .panel-heading-custom {
+    background: rgb(207, 7, 44); color: green;
+}
+.navbar-light{
+  padding-top: 20px;
+}
