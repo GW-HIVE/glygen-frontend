@@ -56,7 +56,8 @@
 /*--- Footer ---*/
 
 #logo-uga {
-    float: right; padding-left: 18px;
+    float: right; 
+    padding-left: 18px;
     position: relative;
     margin-right: 15px;
 }
@@ -66,7 +67,12 @@
 }
 
 #bottom-row {
-    padding-top: 5px;
+    padding-bottom: 10px;
+    background-color:#5f5f5f; 
+    color: white; 
+    font-size: 17px; 
+    font-family: Helvetica Neue;   
+}
 }
 
 #bottom-row-left {
@@ -74,7 +80,7 @@
     padding-left: 45px;
 }
 
-.row {
+#top-row {
     background-color:#5f5f5f; 
     color: white; 
     font-size: 17px; 
