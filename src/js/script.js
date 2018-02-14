@@ -1,54 +1,36 @@
 
-
+// function (trunc) to string prototype
 String.prototype.trunc = String.prototype.trunc ||
 function(n){
     return (this.length > n) ? this.substr(0, n-1) + '&hellip;' : this;
 };
-
+//  For ID column 
 function PageFormat(value, row, index, field){
   return "<a href='details.html?id=" + value + "'>" + value +  "</a>";
 }
 
-function ClassificationFormat(value, row, index, field){
-  var html = [];
-  console.log(value);
-  if(value){
-    for(var i =0; i < value.length; i++){
-      html.push("<b>Subtype:</b> <a href='" + value[i].subtype.URL + "'>" + value[i].subtype.NAME + "</a>");
-      html.push("<br/>");
-      html.push("<b>Type:</b> <a href='" + value[i].type.URL + "'>" + value[i].type.NAME + "</a>");
-      html.push("<br/>");
-      html.push("<hr>");
-    }
-  }
-  else {
-    html.push("NA");
-  }
-  return html.join("");
-}
 
+//  For Image Column
 function ImageFormat(value, row, index, field){
    var url = 'http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id=' + row.ID;
    return "<div class='img-wrapper'><img class='img-cartoon'  src='"  + url + "' alt='Cartoon' /></div>"
 }
+//  For Mass column
 
-function LinkFormat(value, row, index, field){
-    return "<a href='" + value + "'>" +  value + "</a>";
-}
-
-function ShortFormat(value, row, index, field){
+function MassFormatter(value) {
   if(value){
-    var txt = value.trunc(20);
-    return "<a data-toggle='popover' data-trigger='hover' data-content='" + value + "' data-placement='bottom' >" + txt + "</a>"
+    var mass = value;
+    return  value + ' Da';
 
-
-    return txt;
+    return mass;
   }
   else {
     return "NA";
   }
 }
 
+
+//  For detail view of IUPAC AND Glycoct
 function DetailFormat(index, row){
     var html = [];
     var glyco = row.GlycoCT.replace(/ /g, '\n');
@@ -57,12 +39,7 @@ function DetailFormat(index, row){
     return html.join('');
 }
 
-function Selected() {
-  var $table = $('#gen-table');
-  return $.map($table.bootstrapTable('getSelections'), function (row) {
-      return row.ID
-  });
-}
+// I am calling parameter from serviceURL here in table
 
 function LoadData(id){
    var $table = $('#gen-table');
@@ -77,6 +54,9 @@ function LoadData(id){
 
               items.push({
                 ID: glycan.ID,
+                Mass:glycan.mass,
+                number_proteins:glycan.number_proteins,
+                number_enzymes:glycan.number_enzymes,
                 Classification: glycan.classification,
                 IUPAC: glycan.IUPAC,
                 GlycoCT: glycan.GlycoCT
@@ -96,15 +76,15 @@ function LoadData(id){
 
 
 
-//  function getParameterByName(name, url) {
-//   if (!url) url = window.location.href;
-//    name = name.replace(/[\[\]]/g, "\\$&");
-//    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-//        results = regex.exec(url);
-//    if (!results) return null;
-//   if (!results[2]) return '';
-//   return decodeURIComponent(results[2].replace(/\+/g, " "));
-//  }
+ function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+   name = name.replace(/[\[\]]/g, "\\$&");
+   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+       results = regex.exec(url);
+   if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+ }
 
 
        $(function () {
@@ -122,8 +102,8 @@ function LoadData(id){
                      $selected.append("<li>" + item + "</li>");
                  });
              });
-            //  var id = getParameterByName('id');
-             LoadData(2);
+             var id = getParameterByName('id');
+             LoadData(id);
            });
            
            
