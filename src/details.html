@@ -1,221 +1,169 @@
+<!--
+    @author: Rupali Mahadik
+    @description: UO1 Version-1.1.
+    @Date:19th Feb 2018
+ -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="utf-8">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <!-- title for page -->
-        <title>Side Navigation </title>
-        <head>
-         
-  
-          
-         <!-- CSS for page -->
-        
-         <link rel="stylesheet" type="text/css" href="css/style.css">
-         <link rel="stylesheet" type="text/css" href="css/styledetail.css">
-         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-       
-         <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-         
-    </head>
-   
-  <nav class="navbar navbar-inverse gg-menu gg-nav-inverse navbar-fixed-top" style="background-color:#5f5f5f;" style="border-color:#5f5f5f;">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                   
-        </button>
-        <a class="navbar-brand gg-brand" href="#"><img id="logo" src="images/logo.png"></a>
-      </div>
-       <div class="collapse navbar-collapse gg-collapse" id="myNavbar">
-      <ul class="nav navbar-nav gg-nav-nav">
-          <li><a href="#">HOME</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">EXPLORE <span class="caret"></span></a>
-            <ul class="dropdown-menu gg-dropd-menu">
-              <li><a class="gg-dropd-backr" href="#">Glycan</a></li>
-              <li><a class="gg-dropd-backr" href="#">Protein</a></li>
-              <li><a  class="gg-dropd-backr" href="#">Proteoform</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUICK SEARCH<span class="caret"></span></a>
-            <ul class="dropdown-menu gg-dropd-menu">
-              <li><a class="gg-dropd-backr" href="#">Group 1</a></li>
-              <li><a class="gg-dropd-backr" href="#">Group 2</a></li>
-              <li><a class="gg-dropd-backr" href="#">Group 3</a></li>
-            </ul>
-          </li>
-          <li><a href="#">RESOURCES</a></li>
-          <li><a href="#">ABOUT</a></li>
-        </ul>
-      <form class="navbar-form navbar-left" action="/action_page.php">
-        <div class="input-group">
-          <input type="text" class="form-control gg-form" placeholder="Search.." name="search">
-          <div class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-              <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </nav>
- <!-- Footer Starts -->
- <div class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container-fluid">
-   
-    <div class="clearfix visible-xs"></div>
-    <div class="row" id="top-row">
-     
-  <div class="col-xs-6 col-sm-2">
-    <img id="logo-uga" src="images/logo-uga6.png">
-  </div>
-  <div class="col-xs-6 col-sm-4" id="uga" style="padding-bottom: 10px;"><strong>University of Georgia</strong><br>Complex Carbohydrate Research Center
-  <br />315 Riverbend Road Athens, Georgia 30602 USA </div>
-  
-  <!-- Add clearfix for only the required viewport -->
-  <div class="clearfix visible-xs"></div>
-  
-  <div class="col-xs-6 col-sm-3"><img id="logo-gwu" src="images/logo-gwu.png"></div>
-  <div class="col-xs-6 col-sm-3" style="padding-bottom: 10px;"><strong>The George Washington University</strong><br>School of Medicine and Health Sciences
-  <br />2300 Eye Street N.W., Washington, DC 20037 USA</div>
-</div>
-  <div class="row" id="bottom-row">
-      
-      <div class="col-xs-6 col-sm-4" id="bottom-row-left"> 	<small>&copy; 2018 - All rights reserved</small>
-      </div>  
-      
-      <div class="col-xs-6 col-sm-8">Funded by NIH<span style="margin-left: 50px; color: white;">Grant # <a style="color: #c6c7ca;" href="http://grantome.com/grant/NIH/U01-GM125267-01">1U01GM125267-01</a></span>
-      </div>  
-  </div>
+<head>
+  <meta charset="utf-8">
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <!-- title for page -->
+  <title>sidebar </title>
+  <head>
+    <!-- CSS for page -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styledetail.css">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
 
-  </div>
-</div>
- <!-- Footer ends here-->
-<body>
-
-<nav class="navigation" id="sideNav">
-    <!-- <div id="result"></div> this for logging activity message-->
-        <a class="navigation__link" href="#1">ID</a>
-        <a class="navigation__link" href="#2">Species</a>
-        <a class="navigation__link" href="#3">Motif</a>
-        <a class="navigation__link" href="#4">Found Glycojugates</a>
-            <a class="navigation__link" href="#5">Digital Sequences</a>
-            <a class="navigation__link" href="#6">Cross Referance</a>
-            <a class="navigation__link" href="#7">Enzyme</a>
-</nav>
-            <div id="content"class=container>
-        <script id="item_template" type="text/template">
-          <div class="panel panel-default">
-            <div class="panel-heading" id="1">{{ID}}</div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-6 col-xs-6">
-                  <!--always try to use double quotes for HTML attributes. -->
-                  <div class='img-wrapper'><img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' />
-                  </div> 
-                </div>
-              </div>
-              <div class="col-md-6 col-xs-6">
-                    {{#Mass}}
-                    <h5>  Mass:{{Mass}}</h5> {{/Mass}}
-                    <h5>Classification:</h5> {{#classification}}
-                    <li><a href="{{type.URL}}">{{type.NAME}}</a> <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
-                    {{/classification}}
-                    {{^hasMasss}}
-                    No data available.
-                  {{/hasMasss}}
-                  </div>
-              </div>
-              </div>
-            </div>
-              <div class="panel panel-default">
-              <div class="panel-heading"id="2"> Species </div>
-                <div class="panel-body">
-                     {{#species}}
-                     <div class="row">
-                    <div class='col-md-5 col-xs-5'>
-                        <h4>{{name}} <a href="{{"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"}}">{{taxid}}</a></h4>
-                        {{#evidence}}
-                      <li>{{database}} <a href="{{url}}">{{id}}</a></li>
-                      {{/evidence}}
-                  </div>
-                </div>
-                     {{/species}}
-                     {{^hasspeciess}}
-                     No data available.
-                   {{/hasspeciess}}
-                </div>
-              </div>
-            </div>
-                
-            <div class="panel panel-default">
-               <div class="panel-heading" id="3"> Motif </div>
-                  <div class="panel-body">
-                    {{#hasMotifs}}
-                    {{#motifs}}
-                  <div class="col-md-12 col-xs-12">
-                       <div class='img-wrapper'> <img class='img-cartoon'  src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"  alt='Cartoon' size='33%' /><Br/>
-                   </div> 
-                   <span id="glycanname"> {{name}} {{id}} </span>  
-                  </div>       
-                  {{/motifs}}
-                  {{/hasMotifs}}
-                  {{^hasMotifs}}
-                    No data available.
-                  {{/hasMotifs}}
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-            <div class="panel-heading"id="4"> Found in Glycoconjugates</div>
+  <body>
+    <!-- Side navigation for page -->
+    <nav class="navigation" id="sideNav">
+      <a class="navigation__link" href="#1">ID</a>
+      <a class="navigation__link" href="#2">SPECIES</a>
+      <a class="navigation__link" href="#3">MOTIF</a>
+      <a class="navigation__link" href="#4">FOUND GLYCOCONJUTES</a>
+      <a class="navigation__link" href="#5">DIGITAL SEQUENCES</a>
+      <a class="navigation__link" href="#6">CROSS REFERANCE</a>
+      <a class="navigation__link" href="#7">ENZYME</a>
+    </nav>
+    <!-- main content for page -->
+    <div id="content" class=container>
+      <script id="item_template" type="text/template">
+        <!-- Glycan ID starts here for page -->
+        <div class="panel panel-default">
+          <div class="panel-heading" id="1">
+            <h4>{{ID}}</h4></div>
           <div class="panel-body">
-            {{#hasGlycosylate}}
-              <ul>
-                {{#glycosylate}}
-                  <li>
-                    <a href="#{{protein_id}}">{{protein_name}}</a>: {{position}}
-                  <!--</div>to keep button down the list. -->
-                      <button class="open-close-button">+</button>
-                      <ul style="display:none;">
-                          {{#evidence}}
-                            <li>{{database}} : <a href="{{{url}}}">{{id}}</a></li>
-                          {{/evidence}}
-                      </ul>
-                    </div>
-                  </li>
-                {{/glycosylate}}
-              </ul>
-              <div>
-            {{/hasGlycosylate}}
-            {{^hasGlycosylate}}
-              No data available.
-            {{/hasGlycosylate}} 
-          </div>
-        </div>
-      <div class="panel panel-default">
-            <div class="panel-heading"id="7"> Enzyme </div>
-              <div class="panel-body">
-                    {{#enzymes}} 
-                   <li> {{protein_name}} <a href="{{"http://www.uniprot.org/uniprot/P03390"}}">{{protein_id}}</a></li>
-                 <li><a href="{{gene_link}}">{{gene}}</a> </li>
-                  {{/enzymes}}
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <!--always try to use double quotes for HTML attributes. -->
+                <div class="col-md-12 col-xs-12">
+                  <div class='img-wrapper'> <img class='img-cartoon' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' size='33%' />
+                    <Br/>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xs-12">
+                  {{#Mass}}
+                  <h5>  Monoisotopic mass:{{Mass}}</h5> {{/Mass}}
+                  <h5>Classification:</h5> {{#classification}}
+                  <li><a href="{{type.URL}}">{{type.NAME}}</a> <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
+                  {{/classification}}
+                </div>
+                {{^classification}} No data available. {{/classification}}
               </div>
             </div>
-     </script>
-</body>
+          </div>
+        </div>
+          <!-- Glycan Species panel starts here for page -->
+        <div class="panel panel-default">
+          <div class="panel-heading" id="2">
+            <h4>Species</h4> </div>
+          <div class="panel-body">
+            <div class="row">
+              {{#species}}
+              <div class='col-md-12 col-xs-12'>
+                <h5>
+                  <button class="open-close-button">+</button>
+                  {{name}} <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>
+                </h5>
+                <ul style="display:none;">
+                  {{#evidence}}
+                  <li>{{database}} : <a href="{{{url}}}">{{id}}</a></li>
+                  {{/evidence}}
+                </ul>
+              </div>
+              {{/species}}
+            </div>
+            {{^species}} No data available. {{/species}}
+          </div>
+        </div>
+    </div>
+      <!-- Glycan MOTIF starts here for page -->
+    <div class="panel panel-default">
+      <div class="panel-heading" id="3">
+        <h4>Motif</h4> </div>
+      <div class="panel-body">
+        {{#hasMotifs}} {{#motifs}}
+        <div class="col-md-12 col-xs-12">
+          <div class='img-wrapper'> <img class='img-cartoon' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' size='33%' />
+            <Br/>
+          </div>
+          <span id="glycanname"> {{name}} {{id}} </span>
+        </div>
+        {{/motifs}} {{/hasMotifs}} {{^hasMotifs}} No data available. {{/hasMotifs}}
+      </div>
+    </div>
+  <!-- Glycan found Glycojugates starts here for page -->
+    <div class="panel panel-default">
+      <div class="panel-heading" id="4">
+        <h4> Found Glycojugates</h4> </div>
+      <div class="panel-body">
+        <div class="row">
+          {{#glycoprotein}}
+          <div class='col-md-12 col-xs-12'>
+<h5>
+            <button class="open-close-button">+</button>
+            {{protein_name}} <a href="{{url}}">{{protein_id}}</a>
+          </h5>
+            <ul style="display:none;">
+              {{#evidence}}
+              <li>{{database}} : <a href="{{{url}}}">{{id}}</a></li>
+              {{/evidence}}
+            </ul>
+          </div>
+          </li>
+          {{/glycoprotein}}
+        </div>
+        {{^glycoprotein}} No data available {{/glycoprotein}}
+      </div>
+    </div>
+    </div>
+      <!-- Glycan Cross Referance panel starts here for page -->
+    <div class="panel panel-default">
+      <div class="panel-heading" id="4">
+        <h4>Cross Referance</h4></div>
+      <div class="panel-body">
+        {{#crossref}}
+        <li>{{database}} <a href="{{url}}">{{id}}</a></li>
+        {{/crossref}} {{^crossref}} No data available. {{/crossref}}
+      </div>
+    </div>
+      <!-- Glycan Enzymes starts here for page -->
+    <div class="panel panel-default">
+      <div class="panel-heading" id="7">
+        <h4>Enzyme</h4> </div>
+      <div class="panel-body">
+        {{#enzymes}}
+        <li> {{protein_name}} <a href="{{http://www.uniprot.org/uniprot/P03390}}">({{protein_id}})</a></li>
+        <ul>Gene name:<a href="{{gene_link}}">{{gene}}</a></ul>
+        {{/enzymes}} {{^enzymes}} No data available. {{/enzymes}}
+      </div>
+    </div>
+      <!-- Glycan Digital Sequence starts here for page -->
+    <div class="panel panel-default">
+      <div class="panel-heading" id="5">
+        <h4>Digital Sequence</h4> </div>
+      <div class="panel-body">
+        GLYCOCT<pre>{{ glycoct }}</pre> WURCS
+        <pre>{{ wurcs}}</pre> IUPAC
+        <pre>{{ iupac }}</pre>
+      </div>
+    </div>
+    </script>
+  </body>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-           <!--for navigation-->
-           <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-           <!-- Include all compiled plugins (below), or include individual files as needed -->
-           <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-           <script type="text/javascript" src="js/scriptdetail.js"></script>
-           <script type="text/javascript" src="js/mustache.js"></script>
-           <script type="text/javascript" src="js/logging.js"></script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!--for navigation-->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/scriptdetail.js"></script>
+  <script type="text/javascript" src="js/mustache.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </html>
+
