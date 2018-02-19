@@ -1,10 +1,15 @@
+//@author: Rupali Mahadik 
+// @description: UO1 Version-1.1.
+//@Date:19th Feb 2018.
+
+
 
 // function (trunc) to string prototype
 String.prototype.trunc = String.prototype.trunc ||
 function(n){
     return (this.length > n) ? this.substr(0, n-1) + '&hellip;' : this;
 };
-//  For ID column 
+//  For ID column
 function PageFormat(value, row, index, field){
   return "<a href='details.html?id=" + value + "'>" + value +  "</a>";
 }
@@ -105,5 +110,3 @@ function LoadData(id){
              var id = getParameterByName('id');
              LoadData(id);
            });
-           
-           
