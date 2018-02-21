@@ -1,6 +1,6 @@
 function getWsUrl(request){
 
-    var logging_ws       = "/var/www/html/service/Logging.php";
+    var logging_ws       = "http://glycomics.ccrc.uga.edu/ggtest/service/Logging.php";
     var userID_ws        = logging_ws+"?action=get_id";
     
     switch (request) {
