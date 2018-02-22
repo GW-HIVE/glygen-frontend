@@ -1,59 +1,32 @@
-<!DOCTYPE html>
-  <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-        
-        <title>header</title>
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        
-         <!--[if lt IE 9]>
 
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
-        
-        <link rel="stylesheet" type="text/css" href="style.css">
-        
-    </head>
-    <body>
-
-    <nav class="navbar navbar-inverse gg-menu gg-nav-inverse" id="header_container">
+    <nav class="navbar navbar-inverse gg-menu gg-nav-inverse">
       <div class="container-fluid">
-        <div class="navbar-header" id="header">
+        <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                   
           </button>
-          <a class="navbar-brand gg-brand" href="#"><img id="logo" src="images/logo.png"></a>
+          <a class="navbar-brand gg-brand" href="index.html"><img id="logo" src="images/logo.png"></a>
         </div>
          <div class="collapse navbar-collapse gg-collapse" id="myNavbar">
         <ul class="nav navbar-nav gg-nav-nav">
-            <li><a href="#">HOME</a></li>
+            <li><a alt="home" href="index.html">HOME</a></li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">EXPLORE <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" alt="explore" href="#">EXPLORE <span class="caret"></span></a>
               <ul class="dropdown-menu gg-dropd-menu">
-                <li><a class="gg-dropd-backr" href="#">Glycan</a></li>
-                <li><a class="gg-dropd-backr" href="#">Protein</a></li>
-                <li><a  class="gg-dropd-backr" href="#">Proteoform</a></li>
+                <li><a class="gg-dropd-backr" alt="glycan" href="glycan_search.html">Glycan</a></li>
+                <li><a class="gg-dropd-backr" alt="protein" href="#">Protein</a></li>
+                <li><a  class="gg-dropd-backr" alt="proteoform" href="#">Proteoform</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">QUICK SEARCH<span class="caret"></span></a>
-              <ul class="dropdown-menu gg-dropd-menu">
-                <li><a class="gg-dropd-backr" href="#">Group 1</a></li>
-                <li><a class="gg-dropd-backr" href="#">Group 2</a></li>
-                <li><a class="gg-dropd-backr" href="#">Group 3</a></li>
-              </ul>
+              <a class="dropdown-toggle" data-toggle="dropdown" alt="quick search" href="quick_search.html">QUICK SEARCH
+              </a>
             </li>
-            <li><a href="#">RESOURCES</a></li>
-            <li><a href="#">ABOUT</a></li>
+            <li><a alt="resources" href="resources.html">RESOURCES</a></li>
+            <li><a alt="survey" href="#">SURVEY</a></li>
+            <li><a id="gg-main-menu-about" alt="about" href="#">ABOUT</a></li>
           </ul>
         <form class="navbar-form navbar-left" action="/action_page.php">
           <div class="input-group">
@@ -67,11 +40,4 @@
         </form>
       </div>
     </nav>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 
-      
-  </body>
-  </html>
+    
