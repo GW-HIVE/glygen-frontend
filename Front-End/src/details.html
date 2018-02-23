@@ -3,39 +3,50 @@
     @description: UO1 Version-1.1.
     @Date:19th Feb 2018
  -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-  <!-- title for page -->
-  <title>sidebar </title>
-  <head>
-    <!-- CSS for page -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styledetail.css">
-    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  </head>
+ <!DOCTYPE html>
+   <html lang="en">
+     <head>
+         <meta charset="utf-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+
+         <title>Details</title>
+
+         <!-- CSS for page -->
+
+         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+         <link rel="stylesheet" type="text/css" href="css/styledetail.css">
+         <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+         <link rel="stylesheet" type="text/css" href="css/style.css">
+         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
+
+     </head>
+
+
 
   <body>
+     <script src="https://www.w3schools.com/lib/w3.js"></script>
+     <div w3-include-html="header.html"></div>
+     <script>w3.includeHTML();</script>
     <!-- Side navigation for page -->
     <nav class="navigation" id="sideNav">
-      <a class="navigation__link" href="#panel1">ID</a>
-      <a class="navigation__link" href="#panel2">SPECIES</a>
-      <a class="navigation__link" href="#panel3">MOTIF</a>
-      <a class="navigation__link" href="#panel4">FOUND GLYCOCONJUTES</a>
-      <a class="navigation__link" href="#panel5">CROSS REFERANCE</a>
-      <a class="navigation__link" href="#panel6">ENZYME</a>
-        <a class="navigation__link" href="#panel7">DIGITAL SEQUENCES</a>
+      <a class="navigation__link" href="#panel1">Id</a>
+      <a class="navigation__link" href="#panel2">Species</a>
+      <a class="navigation__link" href="#panel3">Motif</a>
+      <a class="navigation__link" href="#panel4">Found Glycoconjugates</a>
+      <a class="navigation__link" href="#panel5">Cross Reference</a>
+      <a class="navigation__link" href="#panel6">Enzymes</a>
+        <a class="navigation__link" href="#panel7">Digital Sequence</a>
     </nav>
     <!-- main content for page -->
     <div id="content" class=container>
       <script id="item_template" type="text/template">
         <!-- Glycan ID starts here for page -->
         <div class="panel panel-default">
-          <div class="panel-heading" id="1">
+          <div class="panel-heading" id="panel1">
             <h4>{{ID}}</h4></div>
           <div class="panel-body">
             <div class="row">
@@ -48,19 +59,25 @@
                 </div>
                 <div class="col-md-12 col-xs-12">
                   {{#Mass}}
-                  <h5>  Monoisotopic mass:{{Mass}}</h5> {{/Mass}}
-                  <h5>Classification:</h5> {{#classification}}
-                  <li><a href="{{type.URL}}">{{type.NAME}}</a> <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
-                  {{/classification}}
-                </div>
-                {{^classification}} No data available. {{/classification}}
-              </div>
-            </div>
-          </div>
-        </div>
+                   <h5>Monoisotopic mass:{{Mass}} Da {{/Mass}}<br>
+                       Classification: {{#classification}}</h5>
+                              <ul class="popupmenu">
+
+                                    <li><a href="{{type.URL}}">{{type.NAME}}</a> <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
+
+                              </ul>
+                          {{/classification}}
+                    </div>
+                    {{^classification}} No data available. {{/classification}}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
+
           <!-- Glycan Species panel starts here for page -->
         <div class="panel panel-default">
-          <div class="panel-heading" id="2">
+          <div class="panel-heading" id="panel2">
             <h4>Species</h4> </div>
           <div class="panel-body">
             <div class="row">
@@ -68,7 +85,7 @@
               <div class='col-md-12 col-xs-12'>
                 <h5>
                   <button class="open-close-button">+</button>
-                  {{name}} <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>
+                  {{name}} (NCBI taxonomy ID:<a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>)
                 </h5>
                 <ul style="display:none;">
                   {{#evidence}}
@@ -84,30 +101,32 @@
     </div>
       <!-- Glycan MOTIF starts here for page -->
     <div class="panel panel-default">
-      <div class="panel-heading" id="3">
+      <div class="panel-heading" id="panel3">
         <h4>Motif</h4> </div>
       <div class="panel-body">
         {{#hasMotifs}} {{#motifs}}
         <div class="col-md-12 col-xs-12">
-          <div class='img-wrapper'> <img class='img-cartoon' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' size='33%' />
+          <div class='img-wrapper2'> <img class='img-cartoon' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' size='33%' />
             <Br/>
           </div>
-          <span id="glycanname"> {{name}} {{id}} </span>
+          <span id="glycanname"> <a href="{{{id}}}">{{name}}</a> </span>
         </div>
         {{/motifs}} {{/hasMotifs}} {{^hasMotifs}} No data available. {{/hasMotifs}}
       </div>
     </div>
   <!-- Glycan found Glycojugates starts here for page -->
     <div class="panel panel-default">
-      <div class="panel-heading" id="4">
-        <h4> Found Glycojugates</h4> </div>
+      <div class="panel-heading" id="panel4">
+        <h4> Found Glycoconjugates</h4> </div>
       <div class="panel-body">
         <div class="row">
           {{#glycoprotein}}
           <div class='col-md-12 col-xs-12'>
 <h5>
             <button class="open-close-button">+</button>
-            {{protein_name}} <a href="{{url}}">{{protein_id}}</a>
+            {{protein_name}},Position:{{position}}(Uniprot ID:<a href="{{url}}">{{protein_id}}</a>)
+            <!-- {{protein_name}}
+            {{position}} (<a href="{{url}}">{{protein_id}}</a>) -->
           </h5>
             <ul style="display:none;">
               {{#evidence}}
@@ -124,8 +143,8 @@
     </div>
       <!-- Glycan Cross Referance panel starts here for page -->
     <div class="panel panel-default">
-      <div class="panel-heading" id="4">
-        <h4>Cross Referance</h4></div>
+      <div class="panel-heading" id="panel5">
+        <h4>Cross Reference</h4></div>
       <div class="panel-body">
         {{#crossref}}
         <li>{{database}} <a href="{{url}}">{{id}}</a></li>
@@ -134,18 +153,18 @@
     </div>
       <!-- Glycan Enzymes starts here for page -->
     <div class="panel panel-default">
-      <div class="panel-heading" id="7">
+      <div class="panel-heading" id="panel6">
         <h4>Enzyme</h4> </div>
       <div class="panel-body">
         {{#enzymes}}
-        <li> {{protein_name}} <a href="{{http://www.uniprot.org/uniprot/P03390}}">({{protein_id}})</a></li>
+        <li> {{protein_name}} <a href="{{http://www.uniprot.org/uniprot/P03390}}">Uniprot_Id:({{protein_id}})</a></li>
         <ul>Gene name:<a href="{{gene_link}}">{{gene}}</a></ul>
         {{/enzymes}} {{^enzymes}} No data available. {{/enzymes}}
       </div>
     </div>
       <!-- Glycan Digital Sequence starts here for page -->
     <div class="panel panel-default">
-      <div class="panel-heading" id="5">
+      <div class="panel-heading" id="panel7">
         <h4>Digital Sequence</h4> </div>
       <div class="panel-body">
         GLYCOCT<pre>{{ glycoct }}</pre> WURCS
@@ -153,8 +172,10 @@
         <pre>{{ iupac }}</pre>
       </div>
     </div>
+
+
     </script>
-  </body>
+</div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <!--for navigation-->
@@ -163,7 +184,7 @@
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/scriptdetail.js"></script>
   <script type="text/javascript" src="js/mustache.js"></script>
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
+  <div w3-include-html="footer.html"></div>
+    </body>
 </html>
-
