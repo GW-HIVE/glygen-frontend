@@ -1,14 +1,15 @@
 function getWsUrl(request){
 
-    var logging_ws       = "http://glycomics.ccrc.uga.edu/ggtest/service/Logging.php";
-    var userID_ws        = logging_ws+"?action=get_id";
+    var ws_base       = "http://glycomics.ccrc.uga.edu/ggtest/service/";
+    var ws_logging     = ws_base+"Logging.php";
+    var ws_userID        = ws_logging;
     
     switch (request) {
         case "generate_ID":
-            return userID_ws;
+            return ws_userID;
             break;
         case "log_activity":
-            return logging_ws;
+            return ws_logging;
             break;
     
         default:

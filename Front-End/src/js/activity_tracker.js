@@ -27,7 +27,7 @@ function tracking() {
 function logID() {
     var txt = "Good choice!";
     var data = "No ID assigned";
-    $.get(getWsUrl("generate_ID"), function (response) {                        //$.get("http://localhost:8080/Logging.php?action=get_id", function(response) {
+    $.get(getWsUrl("generate_ID")+"?action=get_id", function (response) {              //$.get("http://localhost:8080/Logging.php?action=get_id", function(response) {
         data = response.user_id;
         localStorage.setItem("ID", data);                           //Store the ID from the webservice
         txt += "<br/>Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
