@@ -12,14 +12,16 @@
   <title>List Page</title>
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/stylelist.css">
+    <link rel="stylesheet" type="text/css" href="css/styleheaderfooter.css">
+
 </head>
-    <body>
+<!-- table starts here  -->
+<body>
 
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <div w3-include-html="header.html"></div>
 <script>w3.includeHTML();</script>
-<!-- table starts here  -->
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-xs-12">
@@ -32,7 +34,7 @@
             <th data-field="Mass" data-sortable="true" data-formatter="MassFormatter">Mass</th>
             <th data-field="number_proteins" data-sortable="true">No of Protein</th>
             <th data-field="number_enzymes" data-sortable="true">No of Enzymes</th>
-            </th>
+
           </tr>
         </thead>
       </table>
@@ -51,5 +53,6 @@
 <div w3-include-html="footer.html"></div>
 </body>
 </html>
+
 
 
