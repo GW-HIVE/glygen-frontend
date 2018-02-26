@@ -21,6 +21,15 @@ img-cartoon:hover {
 
 
 }
+.img-cartoon:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  box-shadow: 10px 10px 5px #ddd;
+  z-index: 99999;
+}
+
 
 .pagination>.active>a,
 .pagination>.active>a:focus,
