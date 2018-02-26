@@ -1,78 +1,104 @@
-<html>
-<title> search page </title>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+
+    <title>Glycan Search</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!--             <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">-->
+
+
+    <!--[if lt IE 9]>
+
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+            <![endif]-->
+    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">
+</head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    <div class="container">
+        <h3 style="text-align: center"> Glycan Search </h3>
+        <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" target="_blank" method="POST">
+            Mass:
+            <input type="text" name="Mass" placeholder="Mass of the glycan" id="autocomplete">
+            <br> Glycan type:
+            <select name="Glycan_type" class="biginput" id="type" placeholder="Glycan_type">
+                <option value=""></option>
+                <option value="N-Glycan">N-Glycan</option>
+                <option value="O-Glycan">O-Glycan</option>
+            </select>
+            <!-- <div id="searchfield"  class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div> -->
+            <br> Glycan subtype:
+            <select name="Glycan_subtype" class="biginput" id="sub_type" placeholder="Glycan_subtype">
+                <option value=""></option>
+                <option value="Core 1">Core 1</option>
+                <option value="Core 2">Core 2</option>
+                <option value="Core 3">Core 3</option>
+                <option value="Core 4">Core 4</option>
+                <option value="Core 5">Core 5</option>
+                <option value="Core 6">Core 6</option>
+                <option value="Core 7">Core 7</option>
+                <option value="Core 8">Core 8</option>
+            </select>
+            <!-- <select name="Glycan_subtype" class="biginput" id="type" placeholder="Glycan_subtype">
+                    <option value=""></option>
+                    <option value="Complex">N-Complex</option>
+                    <option value="High-mannose">High-mannose</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Bisected">Bisected</option>
+                  </select> -->
+
+            <br> Organism:
+            <select name="Organism" class="biginput" id="type" placeholder="Organism">
+                <option value=""></option>
+                <option value="Human">Human (Homo sapiens)</option>
+                <option value="Mouse">Mouse (Mus musculus)</option>
+            </select>
+            <br> Protein ID:
+            <input type="text" name="ProteinID" id="proteinid" placeholder="Uniprot ProteinID">
+            <br> Glycan Motif:
+            <input type="text" name="GlycanMotif" id="glycanmotif" placeholder="List of motifs that have been found in the glycan structure">
+            <br> Glycan ID:
+            <input type="text" name="GlycanID" id="glycanid" placeholder="GlycanID">
+            <br> Enzyme:
+            <input type="text" name="Enzyme" id="enzyme" placeholder="Enzyme">
+            <br>
+            <br>
+            <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
+            <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
+            <input type="submit" onclick="myFunction()" name="submit">
+            <br>
+        </form>
+    </div>
+
+
+
+    <div w3-include-html="footer.html"></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/jquery.autocomplete.min.js"></script>
     <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/currency-autocomplete.js"></script>
     <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
     <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script>
-    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">
-    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/style.css">
-</head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<body>
-    <div w3-include-html="header.html"></div>
-    <script>w3.includeHTML();</script>
-    <align="center">
-        <h3> Glycan Search </h3>
-        </align>
-        <div class="container">
-            <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" target="_blank" method="POST">
-                Mass:
-                <input type="text" name="Mass" placeholder="Mass of the glycan" id="autocomplete">
-        <br> Glycan type:
-        <select name="Glycan_type" class="biginput" id="type" placeholder="Glycan_type">
-            <option value=""></option>
-            <option value="N-Glycan">N-Glycan</option>
-            <option value="O-Glycan">O-Glycan</option>
-        </select>
-        <!-- <div id="searchfield"  class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div> -->
-        <br> Glycan subtype:
-        <select name="Glycan_subtype" class="biginput" id="type" placeholder="Glycan_subtype">
-            <option value=""></option>
-            <option value="Core 1">Core 1</option>
-            <option value="Core 2">Core 2</option>
-            <option value="Core 3">Core 3</option>
-            <option value="Core 4">Core 4</option>
-            <option value="Core 5">Core 5</option>
-            <option value="Core 6">Core 6</option>
-            <option value="Core 7">Core 7</option>
-            <option value="Core 8">Core 8</option>
-        </select>
-        <!-- <select name="Glycan_subtype" class="biginput" id="type" placeholder="Glycan_subtype">
-                        <option value=""></option>
-                        <option value="Complex">N-Complex</option>
-                        <option value="High-mannose">High-mannose</option>
-                        <option value="Hybrid">Hybrid</option>
-                        <option value="Bisected">Bisected</option>
-                      </select> -->
-
-        <br> Organism:
-        <select name="Organism" class="biginput" id="type" placeholder="Organism">
-            <option value=""></option>
-            <option value="Human">Human (Homo sapiens)</option>
-            <option value="Mouse">Mouse (Mus musculus)</option>
-        </select>
-        <br> Protein ID:
-        <input type="text" name="ProteinID" id="proteinid" placeholder="Uniprot ProteinID">
-        <br> Glycan Motif:
-        <input type="text" name="GlycanMotif" id="glycanmotif" placeholder="List of motifs that have been found in the glycan structure">
-        <br> Glycan ID:
-        <input type="text" name="GlycanID" id="glycanid" placeholder="GlycanID">
-        <br> Enzyme:
-        <input type="text" name="Enzyme" id="enzyme" placeholder="Enzyme">
-        <br>
-        <br>
-        <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
-        <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
-        <input type="submit" onclick="myFunction()" name="submit">
-        <br>
-        </form>
-        </div>
-        <div w3-include-html="footer.html"></div>
 </body>
 
 </html>
