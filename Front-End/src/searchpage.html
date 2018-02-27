@@ -10,8 +10,10 @@
     <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/currency-autocomplete.js"></script>
     <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
     <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script>
+    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
     <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css"></head>
-<body>
+<body onload="tracking()">
         <script>w3.includeHTML();</script> 
     <align="center">
         <h3> Glycan Search </h3>

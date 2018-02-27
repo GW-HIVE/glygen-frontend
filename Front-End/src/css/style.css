@@ -256,6 +256,7 @@ a:hover,a:active{color:#ff5249;}
     color: #eee;
     font-size: 17px;
     text-align: center;
+    z-index: 999;
 }
  .alert {
     padding: 8px !important;
@@ -288,7 +289,22 @@ a:hover,a:active{color:#ff5249;}
 .gg-btn-margin {
     margin-right: 20px;
     margin-left: 40px;
-}    
+}
+/* The Close alert Button */
+#close_banner {
+    /* color: white; */
+    /* float: right; */
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+#close_banner:hover,
+#close_banner:focus {
+    color: #979797;
+    text-decoration: none;
+    cursor: pointer;
+}
     
 
 

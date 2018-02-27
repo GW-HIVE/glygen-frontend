@@ -1,10 +1,12 @@
    
-<div class="alert navbar-fixed gg-alert fade in">
-    <span><strong>GlyGen</strong> wants to track your cookies for <strong><em>user search</em></strong> improvement. You can change your cookie settings at any time.</span>
+<div class="alert navbar-fixed gg-alert fade in" id="tracking_banner">
+    <span><strong>GlyGen</strong> wants to improve <strong><em>user search</em></strong>. Do you want us to remember your searches for better experience?</span>
 
-    <button type="button" class="btn btn-primary gg-btn-primary gg-btn-margin"><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Decline</a></button>
+    <button type="button" class="btn btn-primary gg-btn-primary gg-btn-margin" onclick='doNotLog()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Decline</a></button>
 
-    <button type="button" class="btn btn-primary gg-btn-primary"><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Allow</a></button>
+    <button type="button" class="btn btn-primary gg-btn-primary" onclick='logID()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Allow</a></button>
+
+    <span id="close_banner" style="float: right">&times;</span>
 </div>
 
 <nav class="navbar navbar-inverse gg-menu gg-nav-inverse">
