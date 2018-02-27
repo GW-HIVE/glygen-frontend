@@ -1,7 +1,7 @@
 function tracking() {
     var txt = '';
     var track_banner = document.getElementById("tracking_banner");
-    track_banner.style.display = "none";
+    // track_banner.style.display = "none";
     if (typeof (Storage) !== "undefined") {                  // Check browser support
         if (localStorage.getItem("ID") == "NO") {             // if user selected not to be tracked.
             var changeTo = "log";
@@ -28,7 +28,7 @@ function tracking() {
 }
 
 function logID() {
-    var txt = "Good choice! You can change this setting at any time under <strong>My GlyGen</strong> tab.";
+    var txt = "We will log your actions to improve the user experience. You can always change this setting in <strong>My GlyGen</strong>.";
     var data = "No ID assigned";
     $.get(getWsUrl("generate_ID")+"?action=get_id", function (response) {              //$.get("http://localhost:8080/Logging.php?action=get_id", function(response) {
         data = response.user_id;
@@ -41,7 +41,7 @@ function logID() {
 
 function doNotLog() {
     localStorage.setItem("ID", "NO");
-    var txt = "You <strong>Declined</strong> the offer! However, you can change this setting at any time under <strong>My GlyGen</strong> tab.";
+    var txt = "We will not log your actions. You can always change this setting in <strong>My GlyGen</strong>.";
     displayBannerMsg(txt);
 }
 
@@ -55,9 +55,11 @@ function clearLocalStore(changeTo) {
 
 function displayBannerMsg(txt) {
     document.getElementById("tracking_banner").innerHTML = "<span>"+txt+"</span><span id='close_banner' style='float: right'>&times;</span>";
-    document.getElementById("close_banner").onclick = function() {
+    var close = function() {
         document.getElementById("tracking_banner").style.display = "none";
-    }
+    };
+    setTimeout(close, 10000);
+    document.getElementById("close_banner").onclick = close;
 }
 
 function activityTracker() {

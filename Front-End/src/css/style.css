@@ -257,6 +257,7 @@ a:hover,a:active{color:#ff5249;}
     font-size: 17px;
     text-align: center;
     z-index: 999;
+    display: none;
 }
  .alert {
     padding: 8px !important;
