@@ -17,7 +17,7 @@ Primary style
 
 body {
   font-size: 18px;
-  font-family: "Verdana", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: "Verdana", "Arial", sans-serif;
   color: #4e5359;
   background-color: #f5f5f5;
 }
@@ -72,13 +72,12 @@ a:hover,a:active{color:#ff5249;}
 .gg-menu {
     background: #5f5f5f;
     border-color: #5f5f5f;
-    font-family: "Verdana", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 17px;
     padding: 10px;
     border-radius: none !important;
 }
 
 .gg-menu a {
+    font-family: "Verdana", "Arial", sans-serif;
     color: #ffffff !important;
     font-size: 17px;
 }
@@ -121,11 +120,6 @@ a:hover,a:active{color:#ff5249;}
     font-size: 17px;
 }
 
-..gg-menu a.active {
-    background-color: #4CAF50;
-    color: #ffffff;
-}
-
 /*--- Footer ---*/
 
 #logo-uga {
@@ -144,7 +138,7 @@ a:hover,a:active{color:#ff5249;}
     background-color:#5f5f5f; 
     color: white; 
     font-size: 14px; 
-    font-family: Helvetica Neue;   
+    font-family: "Verdana", "Arial", sans-serif;   
 }
 
 .bottom-row-left {
@@ -173,13 +167,13 @@ a:hover,a:active{color:#ff5249;}
     color: white; 
     font-size: 17px; 
     padding-top: 15px; 
-    font-family: Helvetica Neue;   
+    font-family: "Verdana", "Arial", sans-serif;  
 }
 
 .gg-headline_h1 {
    
     color: white; 
-    font-family: "Verdana", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Verdana", "Arial", sans-serif;
     font-size: 17px;
     font-style: italic;
 }
