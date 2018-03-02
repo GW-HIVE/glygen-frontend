@@ -100,4 +100,5 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $possible_url)) {
     }
 }
 // echo var_dump($value);
-exit(json_encode($value));
+//exit(json_encode($value));
+?>
