@@ -20,7 +20,7 @@ elseif(isset($_POST["log"])){        //&& $_POST["action"]=="logging"
     $log_data = $_POST[log];
     if ($log_data != null)
     {
-        $filename = "myfile.json";              
+        $filename = "activity_log.json";              
         $file = @fopen($filename, 'r+');        // read the file if present
         if ($file == null){                     // create the file if needed
             $file = fopen($filename, 'w+');
