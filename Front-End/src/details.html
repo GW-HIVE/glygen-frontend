@@ -38,47 +38,57 @@
       <a class="navigation__link" href="#panel3">Motif</a>
       <a class="navigation__link" href="#panel4">Found Glycoconjugates</a>
       <a class="navigation__link" href="#panel5">Cross Reference</a>
-      <a class="navigation__link" href="#panel6">Enzymes</a>
+      <a class="navigation__link" href="#panel6">Biosynthetic Enzymes</a>
         <a class="navigation__link" href="#panel7">Digital Sequence</a>
     </nav>
     <!-- main content for page -->
     <div id="content" class=container>
       <script id="item_template" type="text/template">
         <!-- Glycan ID starts here for page -->
-        <div class="panel panel-default">
-          <div class="panel-heading" id="panel1">
-            <h4>{{ID}}</h4></div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6 col-xs-6">
-                <!--always try to use double quotes for HTML attributes. -->
-                <div class="col-md-12 col-xs-12">
-                  <div class='img-wrapper1'> <img class='img-cartoon1' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' size='33%' />
-                    <Br/>
-                  </div>
+        <div class="panel panel-default ">
+            <div class="panel-heading panel-heading-custom">
+                <div class="panel-heading" id="panel1">
+                    <h4>{{ID}}</h4>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                  {{#Mass}}
-                   <h5>Monoisotopic mass:{{Mass}} Da {{/Mass}}<br>
-                       Classification: {{#classification}}</h5>
-                              <ul class="popupmenu">
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                        <!--always try to use double quotes for HTML attributes. -->
+                        <div class="col-md-12 col-xs-12">
+                            <div class='img-wrapper1'>
+                                <img class='img-cartoon1' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"
+                                     alt='Cartoon' size='33%' />
+                                <Br/>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xs-12">
+                            {{#Mass}}
+                            <h3>Monoisotopic mass:{{Mass}} Da {{/Mass}}
+                                <br> Classification: {{#classification}}</h3>
+                            <ul class="popupmenu">
 
-                                    <li><a href="{{type.URL}}">{{type.NAME}}</a> <a href="{{subtype.URL}}">{{subtype.NAME}}</a></li>
+                                <li>
+                                    <a href="{{type.URL}}">{{type.NAME}}</a>
+                                    <a href="{{subtype.URL}}">{{subtype.NAME}}</a>
+                                </li>
 
-                              </ul>
-                          {{/classification}}
+                            </ul>
+                            {{/classification}}
+                        </div>
+                        {{^classification}} No data available. {{/classification}}
                     </div>
-                    {{^classification}} No data available. {{/classification}}
-                    </div>
-                    </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
+        </div>
 
 
           <!-- Glycan Species panel starts here for page -->
         <div class="panel panel-default">
+            <div class="panel-heading panel-heading-custom">
           <div class="panel-heading" id="panel2">
             <h4>Species</h4> </div>
+            </div>
           <div class="panel-body">
             <div class="row">
               {{#species}}
@@ -101,8 +111,10 @@
     </div>
       <!-- Glycan MOTIF starts here for page -->
     <div class="panel panel-default">
+        <div class="panel-heading panel-heading-custom">
       <div class="panel-heading" id="panel3">
         <h4>Motif</h4> </div>
+        </div>
       <div class="panel-body">
         {{#hasMotifs}} {{#motifs}}
         <div class="col-md-12 col-xs-12">
@@ -116,8 +128,10 @@
     </div>
   <!-- Glycan found Glycojugates starts here for page -->
     <div class="panel panel-default">
+        <div class="panel-heading panel-heading-custom">
       <div class="panel-heading" id="panel4">
         <h4> Found Glycoconjugates</h4> </div>
+        </div>
       <div class="panel-body">
         <div class="row">
           {{#glycoprotein}}
@@ -143,8 +157,10 @@
     </div>
       <!-- Glycan Cross Referance panel starts here for page -->
     <div class="panel panel-default">
+        <div class="panel-heading panel-heading-custom">
       <div class="panel-heading" id="panel5">
         <h4>Cross Reference</h4></div>
+        </div>
       <div class="panel-body">
         {{#crossref}}
         <li>{{database}} <a href="{{url}}">{{id}}</a></li>
@@ -153,8 +169,10 @@
     </div>
       <!-- Glycan Enzymes starts here for page -->
     <div class="panel panel-default">
+        <div class="panel-heading panel-heading-custom">
       <div class="panel-heading" id="panel6">
-        <h4>Enzyme</h4> </div>
+        <h4>Biosynthetic Enzyme</h4> </div>
+        </div>
       <div class="panel-body">
         {{#enzymes}}
         <li> {{protein_name}} <a href="{{http://www.uniprot.org/uniprot/P03390}}">Uniprot_Id:({{protein_id}})</a></li>
@@ -164,12 +182,14 @@
     </div>
       <!-- Glycan Digital Sequence starts here for page -->
     <div class="panel panel-default">
+        <div class="panel-heading panel-heading-custom">
       <div class="panel-heading" id="panel7">
         <h4>Digital Sequence</h4> </div>
+        </div>
       <div class="panel-body">
-        GLYCOCT<pre>{{ glycoct }}</pre> WURCS
-        <pre>{{ wurcs}}</pre> IUPAC
-        <pre>{{ iupac }}</pre>
+        GLYCOCT<pre>{{ glycoct }}</pre>
+          WURCS<pre>{{ wurcs}}</pre>
+          IUPAC<pre>{{ iupac }}</pre>
       </div>
     </div>
 
