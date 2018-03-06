@@ -1,6 +1,6 @@
-img-cartoon:hover {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
+.img-cartoon {
+  -webkit-transform: scale(0.8);
+  transform: scale(0.8);
   -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
   box-shadow: 10px 10px 5px #ddd;
@@ -31,131 +31,34 @@ img-cartoon:hover {
 }
 
 
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
 
-  background-color: black;
+.breadcrumb{
+  /* background-color:rgb(172, 240, 217); */
+  background-color: #333;
+    font-size: 18px;
+    margin-top: -20px;
+  
 }
-
-.pagination>li>a,
-.pagination>li>span {
-  color: black;
-}
-
-.container {
-
-  padding-bottom: 100px;
-
-}
-
-.fixed-table-pagination .pagination-detail, .fixed-table-pagination div.pagination {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-bottom: 100px;
+.nextbutton:hover {
+background-color: white; /* Green */
+color: red;
 }
 
 
- /* To see menu bar */
 
 
-#logo {
-  margin: -4px;
-  margin-top:-20px; 
-  padding-top: 0;
-  padding-left: 35px;
-  padding-right: 15px; 
-  }
-.gg-brand {
-  padding: 0 0 55px;   
-  }
-
-.gg-menu {
-  background: #5f5f5f;
-  border-color: #5f5f5f;
-  font-family: Helvetica Neue;
-  font-size: 17px;
-  padding: 10px;
-  }
-
-.gg-menu a {
-  color: #ffffff !important;
-  font-size: 17px;
-  }
-
-.gg-menu a:hover,
-.gg-menu a:focus {
-  color: #ff5249 !important;
-  } 
-
-.gg-nav-inverse .gg-nav-nav>.open>a, 
-.gg-nav-inverse .gg-nav-nav>.open>a:focus, 
-.gg-nav-inverse .gg-nav-nav>.open>a:hover {
-  color: #fff;
-  background-color:transparent;
-  }
-
-.gg-dropd-menu {
-  background-color: #5f5f5f;
-  }
-
-.gg-dropd-menu>li>a:focus, .gg-dropd-menu>li>a:hover {
-  text-decoration: none;
-  background-color: #f5f5f5 !important;
-  }
-
-.gg-dropd-backr {
-  display: block;
-  background: #555;
-  } 
-
-.gg-form {
-  font-size: 17px;
-  }
-
-/*--- Footer ---*/
-
-#logo-uga {
-  float: right; 
-  padding-left: 18px;
-  position: relative;
-  margin-right: 15px;
+thead{
+background-color: #2F78B7
 }
-
-#logo-gwu {
-  float: right; 
-}
-
-#bottom-row {
-  padding-bottom: 10px;
-  background-color:#5f5f5f; 
-  color: white; 
-  font-size: 17px; 
-  font-family: Helvetica Neue;   
-}
-}
-
-#bottom-row-left {
-  padding-bottom: 10px;
- 
-}
-
-#top-row {
-  background-color:#5f5f5f; 
-  color: white; 
-  font-size: 17px; 
-  padding-top: 15px; 
-  font-family: Helvetica Neue;   
-}
-.navbar navbar-inverse gg-menu gg-nav-inverse{
-  background-color:#5f5f5f; 
-  border-color: #5f5f5f;
-}
+.fixed-table-container {
+  
+  margin-bottom: 150px;
 
 
+} 
+#sortbottom{
+  margin-top:-120px;
+}
 
 
 
