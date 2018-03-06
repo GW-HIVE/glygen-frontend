@@ -22,25 +22,104 @@
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <div w3-include-html="header.html"></div>
 <script>w3.includeHTML();</script>
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-xs-12">
-      <table id="gen-table" data-pagination="true" data-search="true" data-toggle="table" data-detail-view="true" data-detail-formatter="DetailFormat" data-page-size="10">
-        <thead>
-          <tr>
-            <th data-field="state" data-checkbox="true"></th>
-            <th data-field="ID" data-sortable="true" data-formatter="PageFormat">ID</th>
-            <th data-field="imageURL" data-formatter="ImageFormat" style="width:10%">Image</th>
-            <th data-field="Mass" data-sortable="true" data-formatter="MassFormatter">Mass</th>
-            <th data-field="number_proteins" data-sortable="true">No of Protein</th>
-            <th data-field="number_enzymes" data-sortable="true">No of Enzymes</th>
-
-          </tr>
-        </thead>
-      </table>
-    </div>
+    <!-- breadcrumbs for listpage -->
+    <div class="bs-example">
+    <ul class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="glycan_searchpage.html">GlycanSearch</a>
+      </li>
+      <li class="listpage.html">GlycanList</li>
+    </ul>
   </div>
-</div>
+    <!-- breadcrumbs for listpage end -->
+   <!-- page content starts here -->
+    <!-- sorting_top -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <form class="form-inline" onsubmit="return false;">
+          <label>Page</label>
+          <button type="button" class="btn btn-default" onclick="prev();">Prev</button>
+          <select id="page-select" class="form-control" onchange="xpage();">
+            <option selected>1</option>
+            <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          </select>
+          <button type="button" class="btn btn-default" onclick="next();">Next</button>
+          <label>Sort By</label>
+          <select id="sort-select" class="form-control" onchange="xsort();">
+            <option selected>ID</option>
+            <option>Type</option>
+            <option>No of Enzymes</option>
+            <option>No of Protein</option>
+          </select>
+          <select id="dir-select" class="form-control" onchange="xdir();">
+            <option selected>ASC</option>
+            <option>DESC</option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <!-- sorting_top-end -->
+    <!-- table  start here -->
+ <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <table id="gen-table" data-search="true" data-toggle="table" data-detail-view="true" data-detail-formatter="DetailFormat"
+          data-page-size="10">
+          <thead>
+            <tr>
+              <th data-field="state" data-checkbox="true"></th>
+              <th data-field="ID" data-formatter="PageFormat">ID</th>
+              <th data-field="imageURL" data-formatter="ImageFormat" style="width:10%">Image</th>
+              <th data-field="Mass" data-formatter="MassFormatter">Mass</th>
+              <th data-field="number_proteins">No of Protein</th>
+              <th data-field="number_enzymes">No of Enzymes</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <!-- table container ends here -->
+ <!-- sorting_bottom -->
+          <div class="col-md-12 col-xs-12">
+      <form class="form-inline" id="sortbottom" onsubmit="return false;">
+        <label>Page</label>
+        <button type="button" class="btn btn-default" onclick="prev();">Prev</button>
+        <select id="page-select" class="form-control" onchange="xpage();">
+          <option selected>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+        <button type="button" class="btn btn-default" onclick="next();">Next</button>
+        <label>Sort By</label>
+        <select id="sort-select" class="form-control" onchange="xsort();">
+          <option selected>ID</option>
+          <option>Type</option>
+        </select>
+        <select id="dir-select" class="form-control" onchange="xdir();">
+          <option selected>ASC</option>
+          <option>DESC</option>
+        </select>
+      </form>
+    </div>
+      </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
