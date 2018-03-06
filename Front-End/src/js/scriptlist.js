@@ -5,10 +5,55 @@
 
 
 // function (trunc) to string prototype
+/**
+   * Returns 
+   */
 String.prototype.trunc = String.prototype.trunc ||
 function(n){
     return (this.length > n) ? this.substr(0, n-1) + '&hellip;' : this;
 };
+
+var id = 4;
+    var page = 1;
+    var sort = 'ID';
+    var dir = 'ASC';
+    var url = "http://glycomics.ccrc.uga.edu/ggtest/service/listpage_json.php?action=get_user";
+
+
+
+    function next() {
+      page = page + 1;
+      if (page > 1122) {
+        page = 1122;
+      }
+      $("#page-select").val(page);
+      LoadData();
+    }
+
+    function prev() {
+      page = page - 1;
+      if (page < 1) {
+        page = 1;
+      }
+      $("#page-select").val(page);
+      LoadData();
+    }
+
+    function xpage() {
+      page = $("#page-select").val();
+      LoadData();
+    }
+
+    function xsort() {
+      sort = $("#sort-select").val();
+      LoadData();
+    }
+
+    function xdir() {
+      dir = $("#dir-select").val();
+      LoadData();
+    }
+
 //  For ID column
 function PageFormat(value, row, index, field){
   return "<a href='details.html?id=" + value + "'>" + value +  "</a>";
@@ -27,7 +72,7 @@ function MassFormatter(value) {
     var mass = value;
     return  value + ' Da';
 
-    return mass;
+    
   }
   else {
     return "NA";
@@ -44,20 +89,36 @@ function DetailFormat(index, row){
     return html.join('');
 }
 
-// I am calling parameter from serviceURL here in table
+    
 
-function LoadData(id){
-   var $table = $('#gen-table');
-   $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/restapi_bigjson.php?action=get_user&id=" + id,
-      function (data) {
+    function LoadData() {
+      var $table = $('#gen-table');
+      var $service = url;
+      $service = $service + "&id=" + id;
+
+  //real offset (initial record page x 10)
+    //  $service = $service + "&offset=" + ((page -1) * 10);
+
+//test offset = Page
+      $service = $service + "&offset=" + page;
+
+      $service = $service + "&limit=10";
+      $service = $service + "$sort=" + sort;
+      $service = $service + "&order=" + dir;
+
+      alert($service);
+
+      $.getJSON($service,
+        function(data) {
 
           var items = new Array();
           //number of elements
           console.log(data);
-          for(var i=0; i < data.results.length; i++){
-             var glycan = data.results[i];
+          if (data.results) {
+            for (var i = 0; i < data.results.length; i++) {
+              var glycan = data.results[i];
 
-              items.push({
+               items.push({
                 ID: glycan.ID,
                 Mass:glycan.mass,
                 number_proteins:glycan.number_proteins,
@@ -66,6 +127,7 @@ function LoadData(id){
                 IUPAC: glycan.IUPAC,
                 GlycoCT: glycan.GlycoCT
               })
+            }
           }
 
 
@@ -74,10 +136,10 @@ function LoadData(id){
 
           $('[data-toggle="popover"]').popover();
 
-      }
-  );
-}
- //I am getting query string values in JavaScript here
+        }
+      );
+    }
+//I am getting query string values in JavaScript here
 
 
 
@@ -91,22 +153,7 @@ function LoadData(id){
   return decodeURIComponent(results[2].replace(/\+/g, " "));
  }
 
-
-       $(function () {
-             var $table = $('#gen-table');
-             var $selected = $("#gen-compare");
-             $table.on('check.bs.table', function (e, row, $el) {
-                 $selected.empty();
-                 $.each(Selected(), function(i, item){
-                     $selected.append("<li>" + item + "</li>");
-                 });
-             });
-             $table.on('uncheck.bs.table', function (e, row, $el) {
-                $selected.empty();
-                $.each(Selected(), function(i, item){
-                     $selected.append("<li>" + item + "</li>");
-                 });
-             });
-             var id = getParameterByName('id');
-             LoadData(id);
-           });
+    
+      var id = getParameterByName('id');
+      LoadData(id);
+   
