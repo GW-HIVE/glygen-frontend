@@ -72,3 +72,48 @@ function activityTracker() {
     };
     $.post(getWsUrl("log_activity"), { log: data });
 }
+
+
+// @author: Tatiana Williamson
+// @description: UO1 Version-1.1.
+// @Date: 8th Mar 2018.
+	
+function switchHandler(el) {
+    $(document).ready(function() {
+        var $checkbox = $('[name="manageSettingsEnabled"]');
+        if(!$checkbox.is(':checked')) {
+            $checkbox.attr('checked', false);
+            $('#manageSettingsDisabled').css('display', 'block');
+            $('#manageSettingsEnabled').css('display', 'none');
+        } else {
+            $checkbox.attr('checked', true);
+            $('#manageSettingsDisabled').css('display', 'none');
+            $('#manageSettingsEnabled').css('display', 'block');
+        }
+    });
+}
+
+function setNavItemAsCurrent(itemText) {
+    $('.nav > li > a').each(function() {
+        if($(this).text().indexOf(itemText) >= 0) {
+            $(this).parent().addClass('current');
+        }
+    });
+}
+
+$(document).ready(function(){
+    var url = window.location.pathname;
+    var fullFilename = url.substring(url.lastIndexOf('/')+1);
+    var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
+    var navItemText = filename.replace('_', ' ').toUpperCase();
+    //alert(navItemText);
+    if(navItemText == 'INDEX') {
+        navItemText = 'HOME';
+    } else if(navItemText == 'GLYCAN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    }
+    $('.nav > li').removeClass('current');
+    setNavItemAsCurrent(navItemText);
+});
+
+// End @author: Tatiana Williamson
