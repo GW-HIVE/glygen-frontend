@@ -67,7 +67,11 @@
 }
 
 
-
+.panel-default > .panel-heading-custom{
+  background-image: none;
+  background-color: #545659;
+  color: #ffffff;
+}
 
 
 
