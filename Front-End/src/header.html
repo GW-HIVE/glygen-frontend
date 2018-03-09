@@ -1,54 +1,88 @@
-   
-<div class="alert navbar-fixed gg-alert fade in" id="tracking_banner">
-    <span><strong>GlyGen</strong> wants to improve <strong><em>user search</em></strong>. Do you want us to remember your searches for better experience?</span>
+ <div class="alert navbar-fixed gg-alert fade in" id="tracking_banner">
+    <span><strong>GlyGen</strong> wants to improve <strong><em>user experiens and search results</em></strong>. Do you want GlyGen to remember your searches? Please note that you can change this settings at any time in the “My GlyGen” section.</span>
 
-    <button type="button" class="btn btn-primary gg-btn-primary gg-btn-margin" onclick='doNotLog()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Decline</a></button>
+    <button type="button" class="btn btn-primary gg-btn-primary gg-btn-margin" onclick='doNotLog()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Don't Allow</a></button>
 
     <button type="button" class="btn btn-primary gg-btn-primary" onclick='logID()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Allow</a></button>
 
-    <span id="close_banner" style="float: right">&times;</span>
+<!--    <span id="close_banner" style="float: right; ">&times;</span>-->
 </div>
 
-<nav class="navbar navbar-inverse gg-menu gg-nav-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                   
-      </button>
-      <a class="navbar-brand gg-brand" href="index.html"><img id="logo" src="images/logo.png"></a>
-    </div>
-     <div class="collapse navbar-collapse gg-collapse" id="myNavbar">
-    <ul class="nav navbar-nav gg-nav-nav">
-        <li class="gg-home"><a alt="home" href="index.html">HOME</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" alt="explore" href="#">EXPLORE<span class="caret"></span></a>
-          <ul class="dropdown-menu gg-dropd-menu">
-            <li><a class="gg-dropd-backr" alt="glycan" href="glycan_searchpage.html">Glycan</a></li>
-            <li><a class="gg-dropd-backr" alt="protein" href="#">Protein</a></li>
-            <li><a  class="gg-dropd-backr" alt="proteoform" href="#">Glycoprotein</a></li>
-          </ul>
-        </li>
-        <li class="gg-quick-search"><a alt="quick search" href="quick_search.html">QUICK SEARCH</a>
-        </li>
-        <li class="gg-resources"><a alt="resources" href="resources.html">RESOURCES</a>
-        </li>
-        <li class="gg-survey"><a alt="survey" href="survey.html" class="selected">SURVEY</a>
-        </li>
-        <li class="gg-about"><a id="gg-main-menu-about" alt="about" href="about.html">ABOUT</a>
-        </li>
-      </ul>
-    <form class="navbar-form navbar-left" action="/action_page.php">
-      <div class="input-group">
-        <input type="text" class="form-control gg-form" placeholder="Search.." name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
+<nav class="navbar navbar-inverse gg-navbar gg-navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                   
+            </button>
+            <a class="navbar-brand gg-brand2" href="index.html"><img id="logo" src="images/glygenW_logo.png">
+            </a>
         </div>
-      </div>
-    </form>
-  </div>
+        
+        <div class="collapse navbar-collapse gg-collapse gg-nav-item" id="myNavbar"> 
+            <ul class="nav navbar-nav gg-nav-nav ">
+                <li>
+                    <a alt="home" href="index.html">HOME</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" alt="explore" href="#">EXPLORE 
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu gg-dropd-menu">
+                        <li>
+                            <a alt="glycan" href="glycan_searchpage.html">Glycan</a>
+                        </li>
+                        <li>
+                            <a alt="protein" href="#">Protein</a>
+                        </li>
+                        <li>
+                            <a alt="proteoform" href="#">Glycoprotein</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a alt="quick search" href="quick_search.html">QUICK SEARCH</a>
+                </li>
+                <li>
+                    <a alt="resources" href="resources.html">RESOURCES</a>
+                </li>
+                <li>
+                    <a alt="survey" href="survey.html" class="selected">SURVEY</a>
+                </li>
+                <li>
+                    <a alt="about" href="about.html">ABOUT</a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" action="/action_page.php">
+                <div class="input-group">
+                    <input type="text" class="form-control gg-form" placeholder="Search.." name="search">
+                    
+                    <div class="input-group-btn">
+                        <button class="btn btn-default gg-btn" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <ul class="nav navbar-nav gg-nav-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span> 
+                        MY GLYGEN 
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu gg-dropd-menu">
+                        <li>
+                            <a href="glygen_settings.html" class="gg-dropd-backr">
+                                <span class="glyphicon glyphicon-wrench"></span> Privacy Settings
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
     
    

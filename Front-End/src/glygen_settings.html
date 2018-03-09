@@ -6,7 +6,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 
-            <title>Privacy policy</title>
+            <title>Privacy settings</title>
 
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
              
@@ -22,28 +22,51 @@
             <![endif]-->
 
             <link rel="stylesheet" type="text/css" href="css/style.css">
-    
         </head>
+        
         <body>
+        
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <div w3-include-html="header.html"></div> 
         <script>w3.includeHTML();</script>
 
-        <div class="container" style="margin-bottom: 540px;"> 
+        <div class="gg-settings" style="margin-bottom: 360px;">
             <h3 style="text-align: center;">
                 <strong>
-                    Privacy policy
+                    Privacy settings
                 </strong>
             </h3>
+            
             <div class="caption text-left">
                 <p>
-                    We reserve the right to use information about visitors (IP addresses), date/time visited, page visited, referring website, etc. for site usage statistics and to improve our services.
+                    GlyGen is monitoring your activities to improve user experience
                 </p>
-            </div>  
+                
+                <hr>
+            
+                <div class="row">
+                    <div class="col-xs-10 text-left">
+                        Manage Settings
+                        <br/>
+                        <span id="manageSettingsDisabled" style="color: #999999;">Disabled</span>
+                        <span id="manageSettingsEnabled" style="color: #3277b7; display: none;">Enabled</span>
+                    </div>
+                    
+                    <div class="col-xs-2 text-right">
+                        <label class="switch">
+                            <input name="manageSettingsEnabled" type="checkbox">
+                            <span class="slider round" id="slider-round" onclick="return switchHandler(this);"></span>
+                        </label>
+                    </div>
+                </div>
+            </div> 
         </div>
+
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
     
     <div w3-include-html="footer.html"></div>
     </body>
