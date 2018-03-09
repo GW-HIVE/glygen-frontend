@@ -69,18 +69,24 @@
 
 .panel-default > .panel-heading-custom{
   background-image: none;
-  background-color: #545659;
+  background-color: #9d9d9d;
   color: #ffffff;
 }
 
-
-
-.container {
-  width: 950px;
-  padding-left: 150px;
-  padding-bottom: 150px;
- 
-
+.breadcrumb{
+  /* background-color:rgb(172, 240, 217); */
+  background-color: #333;
+    font-size: 18px;
+    margin-top: -20px;
+    
+  
 }
+.panelcontent{
+  font-size: 14px;
+}
+#panelmaincontent{
+  font-size: 16px;
+}
+
 
 
