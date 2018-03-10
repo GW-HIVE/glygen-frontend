@@ -1,28 +1,28 @@
+// @author: Gaurav Agarwal
+// @description: assigns ID and tracks user activity.
 function tracking() {
     var txt = '';
     var track_banner = document.getElementById("tracking_banner");
+    var $checkbox = $('[name="manageSettingsEnabled"]');
     // track_banner.style.display = "none";
     if (typeof (Storage) !== "undefined") {                  // Check browser support
         if (localStorage.getItem("ID") == "NO") {             // if user selected not to be tracked.
-            var changeTo = "log";
-            txt = "You have chosen NOT to record your activity.\nWant to -> <button onclick='clearLocalStore(\""+changeTo+"\")'>Start Logging</button>";
-            displayBannerMsg(txt);
+            $checkbox.attr('checked', false);
+            $('#manageSettingsDisabled').css('display', 'block');
+            $('#manageSettingsEnabled').css('display', 'none');
         }
         else if (localStorage.getItem("ID")) {                // if an ID exists other than "NO" so continue Logging activity.
-            var changeTo = "NoLog";
-            txt = "Your activity on this website is being tracked.\nWant to -> <button onclick='clearLocalStore(\""+changeTo+"\")'>Stop Logging</button>";
-            txt += "<br/>Your ID is:" + localStorage.getItem("ID");
-            displayBannerMsg(txt);
+            $checkbox.attr('checked', true);
+            $('#manageSettingsDisabled').css('display', 'none');
+            $('#manageSettingsEnabled').css('display', 'block');
             activityTracker();                              //pass the stored ID to web service
         }
         else {                                               // If nothing in the local storage then give the user a choice.
             track_banner.style.display = "block";
-            document.getElementById("close_banner").onclick = function() {
-                track_banner.style.display = "none";
-            }
+
         }
     } else {
-        txt = "Sorry, your browser does not support Web Storage... Please update it to the latest version";
+        txt = "Sorry, your browser does not support modern features... Please update it to the latest version";
         displayBannerMsg(txt);
     }
 }
@@ -45,12 +45,8 @@ function doNotLog() {
     displayBannerMsg(txt);
 }
 
-function clearLocalStore(changeTo) {
+function clearLocalStore() {
     localStorage.removeItem("ID");
-    if (changeTo == "log")
-        logID();
-    else
-        doNotLog();
 }
 
 function displayBannerMsg(txt) {
@@ -72,12 +68,12 @@ function activityTracker() {
     };
     $.post(getWsUrl("log_activity"), { log: data });
 }
-
+// End @author: Gaurav Agarwal
 
 // @author: Tatiana Williamson
 // @description: UO1 Version-1.1.
 // @Date: 8th Mar 2018.
-	
+
 function switchHandler(el) {
     $(document).ready(function() {
         var $checkbox = $('[name="manageSettingsEnabled"]');
@@ -85,10 +81,14 @@ function switchHandler(el) {
             $checkbox.attr('checked', false);
             $('#manageSettingsDisabled').css('display', 'block');
             $('#manageSettingsEnabled').css('display', 'none');
+            clearLocalStore();
+            doNotLog();
         } else {
             $checkbox.attr('checked', true);
             $('#manageSettingsDisabled').css('display', 'none');
             $('#manageSettingsEnabled').css('display', 'block');
+            clearLocalStore();
+            logID();
         }
     });
 }
