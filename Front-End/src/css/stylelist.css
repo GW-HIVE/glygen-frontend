@@ -32,33 +32,44 @@
 
 
 
-.breadcrumb{
+
+.breadcrumb {
   /* background-color:rgb(172, 240, 217); */
-  background-color: #333;
+/*    background-color: #333;*/
+    background-color: transparent; /* made changes here */
     font-size: 18px;
-    margin-top: -20px;
-  
+    margin-top: -30px; 
 }
-.nextbutton:hover {
-background-color: white; /* Green */
-color: red;
-}
-
-
-
 
 thead{
-background-color: #2F78B7
+    /*background-color: #2F78B7*/
+    background-color: #D8D8D8; /* made changes here */
+    color: #555; /* made changes here */
+    vertical-align: middle; /* made changes here */
+    padding: 3px 0; /* made changes here */
 }
+
+
+.table { /* made changes here */
+    border-color: white !important;
+    border-top-color: white !important;
+    border-right-color: white !important;
+    border-bottom-color: white !important;
+    border-left-color: white !important;
+}
+
 .fixed-table-container {
-  
-  margin-bottom: 150px;
-
-
+    margin-bottom: 150px;
 } 
 #sortbottom{
   margin-top:-120px;
 }
+
+#activepage{
+  color:#ddd;
+}
+
+
 
 
 
