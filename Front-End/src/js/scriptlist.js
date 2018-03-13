@@ -70,7 +70,7 @@ function ImageFormat(value, row, index, field){
 function MassFormatter(value) {
   if(value){
     var mass = value;
-    return  value + ' Da';
+    return  value ;
 
     
   }

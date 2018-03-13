@@ -30,8 +30,10 @@
   z-index: 99999;
 }
 
-
-
+/* table */
+.fixed-table-container {
+  margin-bottom: 150px;
+} 
 
 .breadcrumb {
   /* background-color:rgb(172, 240, 217); */
@@ -47,24 +49,49 @@ thead{
     color: #555; /* made changes here */
     vertical-align: middle; /* made changes here */
     padding: 3px 0; /* made changes here */
+  
 }
 
 
 .table { /* made changes here */
+<<<<<<< HEAD
     background-color: #fff;
+=======
+   
+    background-color: white;  
+>>>>>>> f671dbbbaa5afc92c3117a60609d0a21f83ea038
 }
 
+th {
+  text-align: center;
+}
+
+
+/* for applying #777 border to table */
 .fixed-table-container {
-    margin-bottom: 150px;
-} 
+  position: relative;
+  clear: both;
+  border: 1px solid #777777;
+}
+.bootstrap-table .table thead>tr>th{
+  border-color: #777777;
+}
+.fixed-table-container tbody td{
+  border-color: 1px solid #777777;
+}
+
+
 #sortbottom{
   margin-top:-120px;
 }
 
 #activepage{
-  color:#ddd;
+  color:#555;
 }
-
+/* Table hovering color */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color:#E6E6E6;
+}
 
 
 
