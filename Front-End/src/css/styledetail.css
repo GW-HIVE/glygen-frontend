@@ -74,6 +74,7 @@
   padding: 3px 15px; /* made changes here */
 }
 
+
 .breadcrumb {
   /* background-color:rgb(172, 240, 217); */
 /*    background-color: #333;*/
@@ -83,13 +84,16 @@
 }
 .panelcontent{
   font-size: 14px;
+  
 }
 #panelmaincontent{
   font-size: 16px;
 }
 #activepage{
-  color:#ddd;
+  color:#555;
 }
-
+.panel-heading{
+padding:2px 2px;
+}
 
 
