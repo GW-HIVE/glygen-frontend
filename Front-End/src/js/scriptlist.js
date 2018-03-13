@@ -103,7 +103,7 @@ function DetailFormat(index, row){
       $service = $service + "&offset=" + page;
 
       $service = $service + "&limit=10";
-      $service = $service + "$sort=" + sort;
+      $service = $service + "&sort=" + sort;
       $service = $service + "&order=" + dir;
 
       alert($service);
