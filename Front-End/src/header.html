@@ -1,5 +1,7 @@
  <div class="alert navbar-fixed gg-alert fade in" id="tracking_banner">
-    <span><strong>GlyGen</strong> wants to improve <em>user experiens and search results</em>. Do you want <strong>GlyGen</strong> to remember user searches? You can change this settings at any time in the <strong>My GlyGen</strong> section.</span>
+<!--    <span><strong>GlyGen</strong> wants to improve <em>user experients and search results</em>. Do you want <strong>GlyGen</strong> to remember your searches? You can change this settings at any time in the <strong>My GlyGen</strong> section.</span>-->
+    
+    <span>Do you want <strong>GlyGen</strong> to remember your searches for your future use? This can be changed at any time in the <strong>My GlyGen</strong> section.</span>
 
     <button type="button" class="btn btn-primary gg-btn-primary gg-btn-margin" onclick='logID()'><a href="#" class="gg-btn-primary" data-dismiss="alert" aria-label="close">Allow</a></button>
    
@@ -43,14 +45,22 @@
                 <li>
                     <a alt="quick search" href="quick_search.html">QUICK SEARCH</a>
                 </li>
-                <li>
-                    <a alt="resources" href="resources.html">RESOURCES</a>
-                </li>
-                <li>
-                    <a alt="survey" href="survey.html" class="selected">SURVEY</a>
-                </li>
-                <li>
-                    <a alt="about" href="about.html">ABOUT</a>
+                
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" alt="explore" href="#">MORE 
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu gg-dropd-menu">
+                        <li>
+                            <a alt="resources" href="resources.html">Resources</a>
+                        </li>
+                        <li>
+                            <a alt="survey" href="survey.html" class="selected">Survey </a>
+                        </li>
+                        <li>
+                            <a alt="about" href="about.html">About</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" action="/action_page.php">
