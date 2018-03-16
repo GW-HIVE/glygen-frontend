@@ -161,10 +161,12 @@
         <div class='col-md-12 col-xs-12'>
           <p id="panelmaincontent">
             <button class="open-close-button">+</button>
-            {{protein_name}},(Uniprot ID:
+            {{protein_name}}(Uniprot ID:
             <a href="{{url}}">{{protein_id}}</a>)
+            {{#position}}
             <br> Position:{{position}}
-            <!-- {{position}} (<a href="{{url}}">{{protein_id}}</a>) -->
+          {{/position}}
+            
           </p>
           <ul style="display:none;">
             {{#evidence}}
@@ -207,7 +209,7 @@
     </div>
     <div class="panel-body">
       {{#enzymes}}
-      <p id="panelmaincontent">{{protein_name}},(Uniprot ID:
+      <p id="panelmaincontent">{{protein_name}}(Uniprot ID:
         <a class="panelcontent" href="{{url}}">{{protein_id}}</a>)
         <ul>Gene name:
           <a class="panelcontent" href="{{gene_link}}">{{gene}}</a>

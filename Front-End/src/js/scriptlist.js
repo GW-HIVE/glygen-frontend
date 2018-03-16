@@ -99,10 +99,6 @@ function MassFormatter(value) {
 }
 
 
-
-
-
-
 /**
 
  * Format function of the detail table when opening each row [+]
@@ -138,7 +134,7 @@ function LoadData() {
 
   $service = getListWsUrl(id, page, sort, dir, 10);
 
-  // alert($service);
+  // alert($service);       just for testing:
 
   // Define ajax settings
   var ajaxConfig = {
@@ -159,7 +155,7 @@ function LoadData() {
   function ajaxSuccess(data) {
     var items = new Array();
     //number of elements
-    console.log(data);
+    // console.log(data);
     if (data.results) {
       for (var i = 0; i < data.results.length; i++) {
         var glycan = data.results[i];
@@ -188,12 +184,6 @@ function LoadData() {
   $.getJSON($service, ajaxSuccess);
 }
 
-
-
-
-
-
-
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -207,4 +197,5 @@ function getParameterByName(name, url) {
 
 var id = getParameterByName('id');
 $('#error-message').hide();
+ 
 LoadData();
