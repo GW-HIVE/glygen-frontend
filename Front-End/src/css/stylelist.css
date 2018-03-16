@@ -54,8 +54,12 @@ thead{
 
 
 .table { /* made changes here */
+<<<<<<< HEAD
+    background-color: #fff;
+=======
    
     background-color: white;  
+>>>>>>> f671dbbbaa5afc92c3117a60609d0a21f83ea038
 }
 
 th {
