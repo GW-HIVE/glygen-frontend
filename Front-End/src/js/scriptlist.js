@@ -196,6 +196,6 @@ function getParameterByName(name, url) {
 
 
 var id = getParameterByName('id');
-$('#error-message').hide();
+
  
 LoadData();
