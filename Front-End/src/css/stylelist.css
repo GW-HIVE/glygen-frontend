@@ -18,9 +18,8 @@
   margin-left:0px;
   padding-bottom:-2px;
   padding-right:2px;
-
-
 }
+
 .img-cartoon:hover {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
@@ -36,30 +35,20 @@
 } 
 
 .breadcrumb {
-  /* background-color:rgb(172, 240, 217); */
-/*    background-color: #333;*/
-    background-color: transparent; /* made changes here */
+    background-color: transparent; 
     font-size: 18px;
     margin-top: -30px; 
 }
 
 thead{
-    /*background-color: #2F78B7*/
-    background-color: #D8D8D8; /* made changes here */
-    color: #555; /* made changes here */
-    vertical-align: middle; /* made changes here */
-    padding: 3px 0; /* made changes here */
+    background-color: #D8D8D8; 
+    color: #555; 
+    vertical-align: middle; 
+    padding: 3px 0; 
   
 }
-
-
-.table { /* made changes here */
-<<<<<<< HEAD
+.table {
     background-color: #fff;
-=======
-   
-    background-color: white;  
->>>>>>> f671dbbbaa5afc92c3117a60609d0a21f83ea038
 }
 
 th {
