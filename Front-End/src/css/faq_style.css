@@ -44,6 +44,9 @@ body.cd-overlay::after {
   body::after {
     display: none;
   }
+  .container{
+    margin-bottom: 400px;
+  }
 }
 
 a {     /*This refers to the question headings*/
@@ -51,6 +54,7 @@ a {     /*This refers to the question headings*/
   text-decoration: none !important;
   outline: none !important;
 }
+
 
 /* -------------------------------- 
 
@@ -455,6 +459,9 @@ header h1 {
   font-size: 0.875rem;
   line-height: 1.4;
   color: #6c7d8e;
+}
+.cd-faq-content{
+  display: none;
 }
 @media only screen and (min-width: 768px) {
   .cd-faq-content {
