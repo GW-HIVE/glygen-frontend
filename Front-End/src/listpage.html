@@ -16,14 +16,7 @@
      <link rel="stylesheet" type="text/css" href="css/style.css">
      <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
  </head>
- <!-- <style>
-  #error-button {
-     border-radius: 10px;
-     padding-bottom: 20px;
-     margin-bottom: 50px;
-     background-color: aquamarine;
-   }
- </style> -->
+
  <!-- table starts here  -->
  <body onload="tracking()">
  
@@ -64,6 +57,13 @@
            <option>10</option>
            </select>
            <button type="button" class="btn btn-default" onclick="next();">Next</button>
+           <label>Records per page</label>
+            <select id="limit-select" class="form-control" onchange="xlimit();">
+              <option selected>10</option>
+              <option>20</option>
+              <option>50</option>
+              <option>70</option>
+            </select>
            <label>Sort By</label>
            <select id="sort-select" class="form-control" onchange="xsort();">
              <option selected>ID</option>
@@ -102,32 +102,41 @@
      <!-- table container ends here -->
   <!-- sorting_bottom -->
            <div class="col-md-12 col-xs-12">
-       <form class="form-inline" id="sortbottom" onsubmit="return false;">
-         <label>Page</label>
-         <button type="button" class="btn btn-default" onclick="prev();">Prev</button>
-         <select id="page-select" class="form-control" onchange="xpage();">
-           <option selected>1</option>
-           <option>2</option>
-           <option>3</option>
-           <option>4</option>
-           <option>5</option>
-           <option>6</option>
-           <option>7</option>
-           <option>8</option>
-           <option>9</option>
-           <option>10</option>
-         </select>
-         <button type="button" class="btn btn-default" onclick="next();">Next</button>
-         <label>Sort By</label>
-         <select id="sort-select" class="form-control" onchange="xsort();">
-           <option selected>ID</option>
-           <option>Type</option>
-         </select>
-         <select id="dir-select" class="form-control" onchange="xdir();">
-           <option selected>ASC</option>
-           <option>DESC</option>
-         </select>
-       </form>
+            <form class="form-inline" onsubmit="return false;">
+              <label>Page</label>
+              <button type="button" class="btn btn-default" onclick="prev();">Prev</button>
+              <select id="page-select" class="form-control" onchange="xpage();">
+                <option selected>1</option>
+                <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              </select>
+              <button type="button" class="btn btn-default" onclick="next();">Next</button>
+              <label>Records per page</label>
+               <select id="limit-select" class="form-control" onchange="xlimit();">
+                 <option selected>10</option>
+                 <option>20</option>
+                 <option>50</option>
+                 <option>70</option>
+               </select>
+              <label>Sort By</label>
+              <select id="sort-select" class="form-control" onchange="xsort();">
+                <option selected>ID</option>
+                <option>Type</option>
+                <option>No of Enzymes</option>
+                <option>No of Protein</option>
+              </select>
+              <select id="dir-select" class="form-control" onchange="xdir();">
+                <option selected>ASC</option>
+                <option>DESC</option>
+              </select>
+            </form>
      </div>
        </div>
        <div id="error-message">

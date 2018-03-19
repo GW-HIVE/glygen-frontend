@@ -6,6 +6,7 @@ function getWsUrl(request){
     var ws_image_service = ws_base + 'newimageservice.php';
 
     var ws_list = ws_base + 'listpage_json.php';
+    var ws_detail = ws_base + 'detailpage.php';
     
     switch (request) {
         case "generate_ID":
@@ -19,6 +20,9 @@ function getWsUrl(request){
             break;
         case "list":
             return ws_list;
+            break;
+            case "detail":
+            return ws_detail;
             break;
     
         default:
@@ -38,7 +42,6 @@ function getListWsUrl(id, page, sort, dir, limit) {
     var url = getWsUrl('list') + "?action=get_user";
 
     url = url + "&id=" + id;
-
     url = url + "&offset=" + ((page -1) * limit);
     url = url + "&limit=" + limit;
     url = url+ "$sort=" + sort;
@@ -46,3 +49,9 @@ function getListWsUrl(id, page, sort, dir, limit) {
 
     return url;
 }
+    function getDetailWsUrl(id) {
+       
+        var url = getWsUrl('detail') +  "?action=get_user";
+        url = url + "&id=" + id;
+        return url;
+    }

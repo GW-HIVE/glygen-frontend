@@ -18,7 +18,12 @@ var page = 1;
 var sort = 'ID';
 var dir = 'ASC';
 var url = getWsUrl('list') + "?action=get_user";
+var limit = 10;
 
+function xlimit(){
+  limit = $("#limit-select").val();
+  LoadData();
+}
 
 
 function next() {
@@ -131,8 +136,9 @@ function LoadData() {
   var $table = $('#gen-table');
   var $service = url;
 
+  $service = getListWsUrl(id, page , sort, dir, limit);
 
-  $service = getListWsUrl(id, page, sort, dir, 10);
+  //$service = getListWsUrl(id, page, sort, dir, 10);
 
   // alert($service);       just for testing:
 
