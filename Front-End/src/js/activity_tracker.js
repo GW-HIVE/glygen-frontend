@@ -111,7 +111,9 @@ $(document).ready(function(){
         navItemText = 'HOME';
     } else if(navItemText == 'GLYCAN SEARCHPAGE') {
         navItemText = 'EXPLORE';
-    }
+    } else if(navItemText == 'RESOURCES', 'SERVEY') {
+        navItemText = 'MORE';
+    } 
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
 });
