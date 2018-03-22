@@ -111,9 +111,25 @@ $(document).ready(function(){
         navItemText = 'HOME';
     } else if(navItemText == 'GLYCAN SEARCHPAGE') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'RESOURCES', 'SERVEY') {
+    } else if(navItemText == 'PROTEIN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    } else if(navItemText == 'GLYCOPROTEIN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    } else if(navItemText == 'ABOUT') {
         navItemText = 'MORE';
-    } 
+    } else if(navItemText == 'RESOURCES') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'SURVEY') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'CONTACT') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'GLYGEN SETTINGS') {
+        navItemText = 'MY GLYGEN';
+    }
+    
+    
+    
+    
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
 });
