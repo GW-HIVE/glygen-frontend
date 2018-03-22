@@ -85,7 +85,7 @@ p {
     color: #ddd !important;
     font-size: 1.4em;
     letter-spacing: 1px;
-    font-weight: 600;
+/*    font-weight: 600;*/
 }
 
 .gg-navbar-inverse .gg-nav-nav>.open>a, 
@@ -127,11 +127,10 @@ p {
     font-size: 1em;
 }
 
-.gg-dropd-menu>li>a:focus, .gg-dropd-menu>li>a:hover {
+ .gg-dropd-menu>li>a:hover {
     text-decoration: none;
     color: #333 !important;
-    background-color: #f5f5f5 !important;
-    font-weight: 400;
+    background-color: #fffff5 !important;
 }
 
 .gg-form {
