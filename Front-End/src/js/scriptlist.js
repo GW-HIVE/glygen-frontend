@@ -184,7 +184,7 @@ function LoadData() {
 
     $('[data-toggle="popover"]').popover();
 
-    $('#error-message').hide();
+    // $('#error-message').hide();
   }
 
   $.getJSON($service, ajaxSuccess);
@@ -203,5 +203,5 @@ function getParameterByName(name, url) {
 
 var id = getParameterByName('id');
 
- 
+     $('#error-message').hide();
 LoadData();

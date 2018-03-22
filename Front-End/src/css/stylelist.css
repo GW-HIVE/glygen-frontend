@@ -73,11 +73,11 @@ th {
 
 /* Table hovering color */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color:#E6E6E6;
+  background-color:#f0f0f0;
 }
 pre{
   
-    background-color:#e2e2e2;
+    background-color:#e6e6e6;
     
 }
 
