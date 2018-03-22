@@ -23,19 +23,7 @@
  <script src="https://www.w3schools.com/lib/w3.js"></script>
  <div w3-include-html="header.html"></div>
  <script>w3.includeHTML();</script>
-     <!-- breadcrumbs for listpage -->
-     <div class="bs-example">
-     <ul class="breadcrumb">
-       <li>
-         <a href="index.html">Home</a>
-       </li>
-       <li>
-         <a href="glycan_searchpage.html">GlycanSearch</a>
-       </li>
-       <li class="listpage.html">GlycanList</li>
-     </ul>
-   </div>
-     <!-- breadcrumbs for listpage end -->
+    
     <!-- page content starts here -->
      <!-- sorting_top -->
    <div class="container">
@@ -101,7 +89,7 @@
      </div>
      <!-- table container ends here -->
   <!-- sorting_bottom -->
-           <div class="col-md-12 col-xs-12">
+           <div class="col-md-12 col-xs-12" id="sortbottom">
             <form class="form-inline" onsubmit="return false;">
               <label>Page</label>
               <button type="button" class="btn btn-default" onclick="prev();">Prev</button>

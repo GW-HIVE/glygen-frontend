@@ -392,6 +392,13 @@ input:checked + .slider:before {
 }
 
 
+/* Do not uncomment its for future use-
+        Rupali */
+/* .breadcrumb {
+    background-color: transparent; 
+    font-size: 18px;
+    margin-top: -30px; 
+} */
 
 
 

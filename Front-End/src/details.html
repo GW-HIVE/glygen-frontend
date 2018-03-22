@@ -38,21 +38,7 @@
      w3.includeHTML();
    </script>
  
-   <!-- breadcrumbs for listpage -->
-   <div class="bs-example">
-     <ul class="breadcrumb">
-       <li>
-         <a href="index.html">Home</a>
-       </li>
-       <li>
-         <a href="glycan_searchpage.html">GlycanSearch</a>
-       </li>
-       <li>
-         <a href="listpage.html">GlycanList</a>
-       </li>
-       <li class="details.html">GlycanDetails</li>
-     </ul>
-   </div>
+   
  
    <section class="cd-faq">
      <ul class="cd-faq-categories">
@@ -111,13 +97,13 @@
                    {{#Mass}}
                    <p id="panelmaincontent">Monoisotopic mass:{{Mass}} Da {{/Mass}}
                      <br>Classification: {{#classification}}</p>
-                   <ul class="popupmenu">
+                   
  
-                     <li>
+                      <li class="list-group">
                        <a class="panelcontent" href="{{type.URL}}">{{type.NAME}}</a>
                        <a class="panelcontent" href="{{subtype.URL}}">{{subtype.NAME}}</a>
                      </li>
-                   </ul>
+            
                    {{/classification}}
                  </div>
                  {{^classification}} No data available. {{/classification}}
@@ -179,7 +165,7 @@
                <Br/>
              </div>
              <span id="glycanname">
-               <a class="panelcontent" href="{{{id}}}">{{name}}</a>
+                <center><a class="panelcontent" href="{{{id}}}">{{name}}</a></center>
              </span>
            </div>
            {{/motifs}} {{/hasMotifs}} {{^hasMotifs}} No data available. {{/hasMotifs}}
@@ -201,13 +187,13 @@
              <div class='col-md-12 col-xs-12'>
                <p id="panelmaincontent">
                  <button class="open-close-button">+</button>
-                 {{protein_name}},(Uniprot ID:
+                 {{protein_name}}(Uniprot ID:
                  <a href="{{url}}">{{protein_id}}</a>) {{#position}}
                  <br> Position:{{position}} {{/position}}
                </p>
                <ul style="display:none;">
                  {{#evidence}}
-                 <li>{{database}} :
+                 <li  class="list-group" id="panelmaincontent">{{database}}:
                    <a class="panelcontent" href="{{{url}}}">{{id}}</a>
                  </li>
                  {{/evidence}}
@@ -234,7 +220,7 @@
          <div class="panel-body" class="cd-faq-content"><!-- added new class -->
            {{#crossref}}
            <p id="panelmaincontent">
-             <li id="panelmaincontent">{{database}}
+             <li class="list-group" id="panelmaincontent">{{database}}:
                <a class="panelcontent" href="{{url}}">{{id}}</a>
              </li>
            </p>
@@ -254,11 +240,11 @@
          </div>
          <div class="panel-body" class="cd-faq-content"><!-- added new class -->
            {{#enzymes}}
-           <p id="panelmaincontent">{{protein_name}},(Uniprot ID:
+           <p id="panelmaincontent">{{protein_name}}(Uniprot ID:
              <a class="panelcontent" href="{{url}}">{{protein_id}}</a>)
-             <ul>Gene name:
+             <li class="list-group">Gene name:
                <a class="panelcontent" href="{{gene_link}}">{{gene}}</a>
-             </ul>
+             </li>
            </p>
            {{/enzymes}} {{^enzymes}} No data available. {{/enzymes}}
          </div>

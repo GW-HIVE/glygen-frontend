@@ -34,11 +34,7 @@
   margin-bottom: 150px;
 } 
 
-.breadcrumb {
-    background-color: transparent; 
-    font-size: 18px;
-    margin-top: -30px; 
-}
+
 
 thead{
     background-color: #D8D8D8; 
@@ -74,14 +70,16 @@ th {
   margin-top:-120px;
 }
 
-#activepage{
-  color:#555;
-}
+
 /* Table hovering color */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color:#E6E6E6;
 }
-
+pre{
+  
+    background-color:#e2e2e2;
+    
+}
 
 
 
