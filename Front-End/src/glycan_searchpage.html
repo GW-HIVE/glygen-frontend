@@ -29,12 +29,15 @@
 </head>
 
 <body onload="tracking()">
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
     <div class="container">
         <h3 style="text-align: center"> Glycan Search </h3>
-        <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" target="_blank" method="POST">
+        <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
             Mass:
             <input type="text" name="Mass" placeholder="Mass of the glycan" id="autocomplete">
             <br> Glycan type:
@@ -87,19 +90,19 @@
         </form>
     </div>
 
-
-
     <div w3-include-html="footer.html"></div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/jquery.autocomplete.min.js"></script>
-    <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/currency-autocomplete.js"></script>
-    <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
-    <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script>
+    <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="js/currency-autocomplete.js"></script>
+    <script src="js/searchpageDic.js"></script>
+    <script src="js/searchpage.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
-    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <script src="js/ws_url.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for logging activity -->
 
 </body>
 
