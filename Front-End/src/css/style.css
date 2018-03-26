@@ -1,24 +1,4 @@
 body {
-.nav > li a:hover {
-    color: #ffffff !important;
-}
-/*
-.nav li.current a {
-    color: #ffffff !important; 
-    border-bottom: 2px solid;
-    padding: 15px 0 9px 0;
-    margin-right: 15px;
-    margin-left: 15px;
-}  
-*/
-.nav li.current a {
-    color: #ffffff !important; 
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.nav li.current {
-    border-bottom: 4px solid #fff;
     /*  font-family: "Verdana", "Arial", sans-serif;*/
         font-family: "Verdana", "Geneva", sans-serif;
         color: #4A4A4A;
