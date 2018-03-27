@@ -279,7 +279,7 @@ header h1 {
   .cd-faq-items {
     float: none;
     width: 100%;
-    padding-left: 30px; /*220px;*/
+    padding-left: 18%; /*220px;*/
   }
   .no-js .cd-faq-items {
     padding-left: 0;
@@ -489,3 +489,9 @@ header h1 {
   border-color: #ccc;
   color: #F0F0F0;
 }   
+
+@media only screen and (min-width: 768px){
+  .gg-faq-margin{
+    margin-left: 40px;
+  }
+}
