@@ -89,6 +89,7 @@
 }
 #panelmaincontent{
   font-size: 16px;
+  overflow-wrap: break-word;
 }
 #activepage{
   color:#555;
@@ -154,7 +155,8 @@ padding:2px 2px;
 /* <!-- style to class for detail page --> */
 @media only screen and (min-width: 1024px){
 .cd-faq-categories .selected {
-    background: #2F78B7 !important;
+  background: #2F78B7 !important;
+  color: #FFFFFF;
    
 }
 }
@@ -174,4 +176,14 @@ pre{
   
   background-color:#e6e6e6;
   
+}
+.panelmaincontent1{
+
+  font-size: 16px;
+  margin-left: 10px;
+  list-style-type: circle;
+  overflow-wrap: break-word;
+}
+.no-touch .cd-faq-categories a:hover {
+  background: #337ab7;  /* #555b61; */
 }
