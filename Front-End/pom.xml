@@ -40,6 +40,27 @@
         </executions>
       </plugin>
     
+      <plugin>  <!-- first delete contents of the destination directory -->
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.5</version>
+          <executions>
+            <execution>
+              <id>auto-clean</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>clean</goal>
+              </goals>
+              <configuration>
+              <filesets>
+                  <fileset>
+                    <directory>${to}</directory>
+                  </fileset>
+                </filesets>
+              </configuration>
+            </execution>
+          </executions>
+      </plugin>
+
       <plugin>  <!-- to copy files locally -->
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.0.2</version>
