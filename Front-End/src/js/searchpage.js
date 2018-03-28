@@ -1,5 +1,5 @@
     function myFunction(){
-        $('#loading_image').show();
+        $('#loading_image').fadeIn();
         var data = {
          //   formvalues: document.getElementById("myForm")
            Mass: document.getElementById("Mass"),
@@ -13,6 +13,6 @@
         };
    // var formData = JSON.stringify($("#myForm").serializeArray());
     $.post("http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php", {formvalues: data},function(response){
-        $('#loading_image').hide();
+        $('#loading_image').fadeOut();
     });
     }
