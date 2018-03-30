@@ -13,7 +13,7 @@ String.prototype.trunc = String.prototype.trunc ||
     return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
   };
 
-var id = 4;
+// var id = 4;
 var page = 1;
 var sort = 'ID';
 var dir = 'ASC';

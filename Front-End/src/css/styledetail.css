@@ -178,7 +178,7 @@ pre{
   
 }
 .panelmaincontent1{
-
+ 
   font-size: 16px;
   margin-left: 10px;
   list-style-type: circle;
@@ -186,4 +186,9 @@ pre{
 }
 .no-touch .cd-faq-categories a:hover {
   background: #337ab7;  /* #555b61; */
+}
+#gene
+{
+padding-left: 45px;
+
 }
