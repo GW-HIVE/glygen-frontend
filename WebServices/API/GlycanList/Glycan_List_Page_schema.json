@@ -105,11 +105,11 @@
 					"type": "number",
 					"description": "The mass number of the glycan."
 				},
-				"number_monosaccharides": {
+				"number_sugar": {
 					"type": "number",
 					"description": "The number of sugar in the glycan."
 				},
-				"number_glycoproteins": {
+				"number_proteins": {
 					"type": "number",
 					"description": "The number of glycoproteins that contain the Glycan."
 				},
@@ -128,3 +128,9 @@
 			}
 		}
 	}
+
+
+
+
+
+
