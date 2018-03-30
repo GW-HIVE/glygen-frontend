@@ -138,7 +138,7 @@ padding:2px 2px;
   outline: none !important;
   font-size:14px;
 }
-@media only screen and (min-width: 1024px){
+ @media only screen and (min-width: 1024px){
 .cd-faq-categories {
     position: fixed;
     top: 7rem;
@@ -151,15 +151,13 @@ padding:2px 2px;
     width: 15%;
     margin-top:50px;
 }
-}
 /* <!-- style to class for detail page --> */
-@media only screen and (min-width: 1024px){
+/* @media only screen and (min-width: 1024px){
 .cd-faq-categories .selected {
   background: #2F78B7 !important;
   color: #FFFFFF;
    
-}
-}
+} */ 
 /* <!-- style to footer for detail page --> */
 .footer{
   margin-bottom: 0px;
@@ -184,9 +182,9 @@ pre{
   list-style-type: circle;
   overflow-wrap: break-word;
 }
-.no-touch .cd-faq-categories a:hover {
+/* .no-touch .cd-faq-categories a:hover {
   background: #337ab7;  /* #555b61; */
-}
+} */
 #gene
 {
 padding-left: 45px;
