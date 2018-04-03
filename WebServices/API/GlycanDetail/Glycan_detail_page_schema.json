@@ -80,7 +80,7 @@
 					"description": "Internal ID of the motif.",
 					"type": "string"
 				},
-				"ame": {
+				"name": {
 					"description": "Name of the motif (e.g. LewisX).",
 					"type": "string"
 				}
