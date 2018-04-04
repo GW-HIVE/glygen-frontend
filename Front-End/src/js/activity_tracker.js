@@ -70,6 +70,7 @@ function activityTracker() {
 }
 // End @author: Gaurav Agarwal
 
+
 // @author: Tatiana Williamson
 // @description: UO1 Version-1.1.
 // @Date: 8th Mar 2018.
@@ -116,7 +117,7 @@ $(document).ready(function(){
     } else if(navItemText == 'GLYCOPROTEIN SEARCHPAGE') {
         navItemText = 'EXPLORE';
     } else if(navItemText == 'ABOUT') {
-        navItemText = 'MORE';
+        navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {
         navItemText = 'MORE';
     } else if(navItemText == 'SURVEY') {
@@ -126,12 +127,16 @@ $(document).ready(function(){
     } else if(navItemText == 'GLYGEN SETTINGS') {
         navItemText = 'MY GLYGEN';
     }
-    
-    
-    
-    
+  
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
 });
+
+// Success massage button
+
+document.getElementById('success-btn').onclick = function(e) {
+    e.preventDefault()
+    document.getElementById('success-message').innerHTML = 'Success! Message received.';
+}
 
 // End @author: Tatiana Williamson
