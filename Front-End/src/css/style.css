@@ -534,5 +534,20 @@ input:checked + .slider:before {
 }
 
 .modal-body {padding: 2px 16px;}
-
 /* End of Pop up modal */
+
+/**
+    Color of placeholders
+    @author: Gaurav Agarwal
+    @date-added: 04/5/2018
+*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(128, 128, 128, 0.5);
+    /* opacity: 0.5; Firefox */
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(128, 128, 128, 0.5);
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(128, 128, 128, 0.5);
+  }
