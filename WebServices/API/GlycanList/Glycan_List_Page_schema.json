@@ -86,6 +86,8 @@
 				"sort": {
 					"type": "string",
 					"description": "Sort order of the total result set. Default is ID to sort by glycan ID."
+					               "Sort by "mass","number_enzymes","number_proteins","number_sugar"."
+     
 				},
 				"order": {
 					"type": "string",
