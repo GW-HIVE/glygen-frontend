@@ -63,6 +63,7 @@
                   <exclude name="pom.xml"/>
                   <exclude name="config.properties"/>
                   <exclude name="target/"/>
+                  <exclude name="**/.*/"/>  <!-- excluding hidden folders and files -->
                 </fileset>
               </scp>
             </target>
