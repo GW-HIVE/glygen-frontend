@@ -1,8 +1,0 @@
-#Ignoring Target folders created by Maven
-/**/target/
-
-#File auto created by Mac OS
-.DS_Store
-
-#Hidden files and folders
-.*
