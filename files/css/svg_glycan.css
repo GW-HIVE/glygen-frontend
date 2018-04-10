@@ -1,0 +1,14 @@
+    .gnode {
+      stroke: #000;
+      stroke-width: 2px;
+    }
+
+    .glink {
+      fill: none;
+      stroke: #000;
+      stroke-width: 3px;
+    }
+	
+    .gtext {
+      font-size: 14px; 
+    }

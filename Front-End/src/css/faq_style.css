@@ -14,7 +14,7 @@ Primary style
 }
 
 body {
-  font-size: 100%;
+  /* font-size: 100%; */
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; /* "Open Sans", sans-serif; */
   color: #4e5359;
   background-color: #F5F5F5;  /*#f3f3f5*/
@@ -159,7 +159,7 @@ header h1 {
   }
   .cd-faq-categories a {
     font-size: 24px;
-    font-size: 1rem;  /* 0.8125rem; */
+    font-size: 1.3em;  /* 0.8125rem; */
     font-weight: 600;
     padding-left: 24px;
     padding: 0 24px;
@@ -230,7 +230,7 @@ header h1 {
   padding: 0 5% 1em;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  z-index: 1;
+  z-index: 11; /*1*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transform: translateZ(0) translateX(100%);
@@ -285,6 +285,11 @@ header h1 {
     padding-left: 0;
   }
 }
+@media only screen and (min-width: 1900px) {  /*added by Gaurav*/
+  .cd-faq-items {
+    padding-left: 0;
+  }
+}
 
 .cd-close-panel {
   position: fixed;
@@ -296,7 +301,7 @@ header h1 {
   overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
-  z-index: 2;
+  z-index: 11; /*2*/
   /* Force Hardware Acceleration in WebKit */
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
@@ -362,7 +367,7 @@ header h1 {
   font-size: 24px;
   /* font-size: 0.75rem; */
   font-weight: 700;
-  color: #bbbbc7;
+  color: #5f5f5f; /* #bbbbc7 */
 }
 .no-js .cd-faq-group {
   display: block;
@@ -401,8 +406,8 @@ header h1 {
 @media only screen and (min-width: 768px) {
   .cd-faq-trigger {
     font-size: 24px;
-    font-size: 1.5rem;
-    font-weight: 300;
+    font-size: 1.3em; /*1.5rem*/
+    font-weight: 500; /*300*/
     margin: 0;
     padding: 24px 72px 24px 24px;
   }
@@ -456,7 +461,7 @@ header h1 {
 
 .cd-faq-content p {
   font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 1.3em; /*0.875rem*/
   line-height: 1.4;
   color: #6c7d8e;
 }
