@@ -19,21 +19,56 @@
             <![endif]-->
 
             <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+    <style>
+/*        image1 .item { height: 800px; }*/
+
+        #topImage {
+          background: url(images/sky.jpg) top center no-repeat; 
+            padding: 75px;  
+/*             background:url(images/sky.jpg);*/
+/*    background-repeat: no-repeat;*/
+    background-size: cover;
+             height:350px;
+/*    width:100%;*/
+           
+/*		background: url('../../images/sky.jpg') top center no-repeat;*/
+}
+        
+    </style>
         </head>
         <body>
         <script src="https://www.w3schools.com/lib/w3.js"></script>
         <div w3-include-html="header.html"></div> 
         <script>w3.includeHTML();</script>
-
-        <div class="container" style="margin-bottom: 550px;">
-            <h1 style="color: #ff5249;">Coming soon</h1> 
-            <h3><strong>About GlyGen</strong></h3>
-            <div class="caption text-left"></div> 
+        
+        
+        <div class="container">
+            <h2>About GlyGen</h2>
         </div>
+
+<div id="topImage">
+<h2>Our Mission</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos minus eos, quis unde recusandae provident deleniti voluptatem, nihil sequi eligendi, accusantium, cum!</p>
+</div>
+<div>
+<!--    <img src="images/sky.jpg" alt="">-->
+</div>
+<!--
+        <div class="container-fluid caption text-left" style="margin-bottom: 550px;">
+            <h1>About GlyGen</h1> 
+            <div class="caption text-left"></div> 
+            <div class="item" id="image1">
+						<div class="carousel-caption">
+							<h4>Web Hosting 101</h4>
+							<p>Learn how to buy a perfect domain name and hosting package, and get your website live on the web with ease.</p>
+						</div>
+					</div
+        </div>
+-->
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
     <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
     <div w3-include-html="footer.html"></div>
