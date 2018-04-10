@@ -404,6 +404,21 @@ input:checked + .slider:before {
 /*------------------------
     Contact Us 
 --------------------------*/
+
+#contact-header {
+    margin-bottom: 30px;
+}
+label {
+    color: #333;
+    font-size: 1.1em;
+}
+.btn-send {
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
 #google-container {
     position: relative;
     background-color: #e7eaf0;
@@ -435,7 +450,7 @@ input:checked + .slider:before {
     text-decoration: none;
 }
 
-#inputMessage {
+#message {
 	margin-bottom: 15px;
 }
 
