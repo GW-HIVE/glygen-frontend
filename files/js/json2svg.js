@@ -37,8 +37,7 @@ function handleResidueNode(thisNID) {
   }
   txt += "Absolute Configuration: " + nn[thisNID].absolute + "<br>";
   txt += "Ring Form: " + nn[thisNID].ring + "<br>";
-  txt += "GlycO ID: <b>" + nn[thisNID].residue_id + "</b><br>"; 
-  txt += "http://glycomics.ccrc.uga.edu/ontologies/GlycO#" + nn[thisNID].fullName + "<br>";
+  txt += "GlycO residue: " + nn[thisNID].fullName + " (<b>" + nn[thisNID].residue_id + "</b>)<br>";
   // alert("It is " + nn[thisNID].pubChem);
   var pcURL = "https://pubchem.ncbi.nlm.nih.gov/compound/" + nn[thisNID].pubChem;
   txt += "<a href='" + pcURL + "'  target='_blank'>PubChem Record</a><br>"; 

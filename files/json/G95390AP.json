@@ -1,0 +1,53 @@
+{
+  "glycan_id": "G95390AP",
+  "residues": [
+     {
+       "name": "Xyl",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "x",
+       "absolute": "D",
+       "ring": "p",
+       "site": "0",
+       "parent": "0",
+       "shape": "star",
+       "color": "#F47920",
+       "pubChem": "Xyl",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Xyl",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "2",
+       "parent": "1",
+       "shape": "star",
+       "color": "#F47920",
+       "pubChem": "Xyl",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Glc",
+       "residue_id": "3",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "2",
+       "parent": "2",
+       "shape": "circle",
+       "color": "#0090BC",
+       "pubChem": "Glc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

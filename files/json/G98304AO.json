@@ -1,0 +1,37 @@
+{
+  "glycan_id": "G98304AO",
+  "residues": [
+     {
+       "name": "GlcolNAc",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "o",
+       "absolute": "D",
+       "ring": "o",
+       "site": "0",
+       "parent": "0",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcolNAc",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Fuc",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "L",
+       "ring": "p",
+       "site": "6",
+       "parent": "1",
+       "shape": "triangle",
+       "color": "#ED1C24",
+       "pubChem": "Fuc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

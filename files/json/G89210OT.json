@@ -1,0 +1,85 @@
+{
+  "glycan_id": "G89210OT",
+  "residues": [
+     {
+       "name": "GalNAc",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "0",
+       "parent": "0",
+       "shape": "square",
+       "color": "#FFD400",
+       "pubChem": "GalNAc",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "3",
+       "parent": "1",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "5",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "3",
+       "parent": "4",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "4",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "3",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "GlcNAc",
+       "residue_id": "3",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "6",
+       "parent": "1",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

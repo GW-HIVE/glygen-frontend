@@ -1,0 +1,37 @@
+{
+  "glycan_id": "G86633LD",
+  "residues": [
+     {
+       "name": "GlcN",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "0",
+       "parent": "0",
+       "shape": "Crossed Square",
+       "color": "#0090BC",
+       "pubChem": "GlcN",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "GlcN",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "6",
+       "parent": "1",
+       "shape": "Crossed Square",
+       "color": "#0090BC",
+       "pubChem": "GlcN",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

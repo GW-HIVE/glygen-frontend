@@ -1,0 +1,37 @@
+{
+  "glycan_id": "G15833VM",
+  "residues": [
+     {
+       "name": "Manol",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "o",
+       "absolute": "D",
+       "ring": "o",
+       "site": "0",
+       "parent": "0",
+       "shape": "circle",
+       "color": "#00A651",
+       "pubChem": "Manol",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Fuc",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "L",
+       "ring": "p",
+       "site": "3",
+       "parent": "1",
+       "shape": "triangle",
+       "color": "#ED1C24",
+       "pubChem": "Fuc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

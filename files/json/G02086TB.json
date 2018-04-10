@@ -1,0 +1,53 @@
+{
+  "glycan_id": "G02086TB",
+  "residues": [
+     {
+       "name": "GalolNAc-S",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "o",
+       "absolute": "D",
+       "ring": "o",
+       "site": "0",
+       "parent": "0",
+       "shape": "square",
+       "color": "#FFD400",
+       "pubChem": "GalolNAc-S",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "GlcA",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "3",
+       "parent": "1",
+       "shape": "divided_diamond",
+       "color": "#0090BC",
+       "pubChem": "GlcA",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "GalNAc-S",
+       "residue_id": "3",
+       "fullName": "unassigned",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "2",
+       "shape": "square",
+       "color": "#FFD400",
+       "pubChem": "GalNAc-S",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}

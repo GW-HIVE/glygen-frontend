@@ -1,0 +1,37 @@
+{
+  "glycan_id": "G88357LX",
+  "residues": [
+     {
+       "name": "GlcNAc",
+       "residue_id": "1",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "0",
+       "parent": "0",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Fuc",
+       "residue_id": "2",
+       "fullName": "unassigned",
+       "anomer": "a",
+       "absolute": "L",
+       "ring": "p",
+       "site": "4",
+       "parent": "1",
+       "shape": "triangle",
+       "color": "#ED1C24",
+       "pubChem": "Fuc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}
