@@ -101,7 +101,7 @@
  <option selected value="id">ID</option>
  <option value="mass">Mass</option>
  <option value="number_enzymes">No of Enzymes</option>
- <option value="number_proteins">No of Protein</option>
+ <option value="number_proteins">No of Proteins</option>
  </select>
  <select class="dir-select form-control" onchange="xdir(this);">
  <option selected>ASC</option>
@@ -124,35 +124,42 @@
  <table class="table table-hover">
  <thead>
  <tr>
- <!-- <th>Name</th>
- <th>Value</th> -->
-   <th><Glycan Search></th>
-   <th></th>
+    <h4><center>Glycan Search Result</center></h4>
  </tr>
  </thead>
  <tbody>
- {{#enzyme.id}}
- <tr>
- <td>Enzyme</td>
- <td>{{enzyme.id}}</td>
- </tr>
- {{/enzyme.id}}
+    {{#query_type}}
+    <tr>
+    <h6>Your perfomed {{query_type}} query at ........time</h6>
+    </tr>
+    {{/query_type}}
+
+    <!-- {{execution_time}} -->
+
+    {{#glycan_id}}
+    <tr>
+    <td>Glycan Id</td>
+    <td>{{glycan_id}}</td>
+    </tr>
+    {{/glycan_id}}
  {{#mass}}
  <tr>
  <td>Mass</td>
  <td>{{mass.min}} - {{mass.max}} Da</td>
  </tr>
  {{/mass}}
- {{#glycan_id}}
+ {{#enzyme.id}}
  <tr>
- <td>Glycan Id</td>
- <td>{{glycan_id}}</td>
+ <td>Enzyme</td>
+ <td>{{enzyme.id}}</td>
  </tr>
- {{/glycan_id}}
+ {{/enzyme.id}}
  
  </tbody>
  </table>
- <!-- <button>Search Again</button> -->
+ <button type="button" class="btn btn-default" onclick="searchBack();">Search again</button>
+ <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+ <!-- <button>Edit Query</button> -->
  </script> 
 <!-- 
  <script id="summary-template" type="text/template">
@@ -192,9 +199,8 @@
  <script type="text/javascript" src="js/ws_url.js"></script> <!-- script for getting Web Service URLs -->
  <script type="text/javascript" src="js/scriptlist.js"></script>
  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
- 
  <script src="js/activity_tracker.js"></script> <!-- script for logging activity -->
- 
+ <script src="js/navbar.js"></script>
  <div w3-include-html="footer.html"></div>
  </body>
  </html>

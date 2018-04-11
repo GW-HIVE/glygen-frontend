@@ -97,7 +97,7 @@ function buildSummary (queryInfo) {
  @return -Details particular Glycan Id 
  */
 function PageFormat(value, row, index, field) {
- return "<a href='details.html/" + value + "'>" + value + "</a>";
+ return "<a href='details.html?id" + value + "'>" + value + "</a>";
 }
 
 /**

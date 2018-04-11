@@ -23,7 +23,7 @@ function getWsUrl(request){
     return ws_base + "/list";
     break;
     case "detail":
-    return ws_base +"/detail/' + glycanId";
+    return ws_base +"/detail/";
     break;
    
     default:
@@ -53,20 +53,28 @@ function getWsUrl(request){
    }
    
 
-      function getDetailPostData()
-   {
-    var data = "";
+//       function getDetailPostData()
+//    {
+//     var data = "";
     
-    data = data+ "/id="+id;
+//     // data = data+ "/id="+id;
 
-    return data;
-   }
+//     return data;
+//    }
  
+//    function getDetailPostData(id)
+//    {
+//     var query = {};
+//     query.id = id;
+//     return "query=" + JSON.stringify(query);
+//    }
    function getDetailPostData(id)
    {
-    var query = {};
-    query.id = id;
-    return "query=" + JSON.stringify(query);
+    // var data = {};
+   var data= getWsUrl("detail");
+    // data.id = id;
+    data = data + "?id=" + id;
+    return "data=" + JSON.stringify(data);
    }
    
    function getListWsUrl(id, page, sort, dir, limit) {
@@ -80,10 +88,10 @@ function getWsUrl(request){
    
     return url;
    }
-    function getDetailPostData(id) {
+//    function getDetailPostData(id) {
    
-    var url = getWsUrl("detail");
-     url = url + "\id=" + id;
-    return url;
-    }
+//     var url = getWsUrl("detail");
+//      url = url + "?id=" + id;
+//     return url;
+//     }
     
