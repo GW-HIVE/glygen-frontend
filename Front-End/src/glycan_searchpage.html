@@ -16,109 +16,109 @@
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
     <title>Glycan Search</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />
-<!--
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
--->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"> -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css"
         type="text/css" />
-<!--    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">-->
+    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">
     <link href="css/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/searchpage.css">
-    
+
     <!--***test-->
 </head>
 
 <body>
     <script src="js/nouislider.min.js"></script>
-<!--    <script src="js/navbar.js"></script>-->
+
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-        <div w3-include-html="header.html"></div> 
-        <script>w3.includeHTML();</script>
-    <div class="container">
-        <h3 style="text-align: center"> Glycan Search </h3>
-        <!-- <p id="demo1"></p> -->
-        <form id="myForm" name="myForm" action="" method="POST">
-            Glycan ID:
-            <input type="text" id="GlycanID" name="GlycanID" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
-            <br> Glycan Size:
-            <div class="form-group row">
-                <div class="col-xs-1">
-                    Min
-                    <div id="lower-value"> </div>
-                    <!-- <input type="text" id="name1" name="min1" size="5"> -->
-                </div>
-                <div class="col-xs-10">
-                    # of Sugar(range)
-                    <br>
-                    <div id="slider"> </div>
-                </div>
-                <div class="col-xs-1">
-                    Max
-                    <div id="upper-value"> </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-1">
-                    Min
-                    <div id="lower-value1"> </div>
-                </div>
-                <div class="col-xs-10">
-                    Native Mass(range)
-                    <div id="slider1"> </div>
-                </div>
-                <div class="col-xs-1">
-                    Max
-                    <div id="upper-value1"> </div>
-                </div>
-            </div>
-            <br> Organism:
-            <select size="1" class="organism" id="organism">
-                <option value=""></option>
-            </select>
-            <br> Glycan type:
-            <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
-                <option value=""></option>
-            </select>
-            <!-- <div id="searchfield"  class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div> -->
-            <br> Glycan subtype:
-            <select id="ddl2">
-            </select>
-            <br> Glycoprotein ID:
-            <input type="text" class="form-control proteinid" name="ProteinID" id="form-control autocomplete" placeholder="Provide the Uniprot protein ID of a glycoprotein">
-            <br> Glycan Motif:
-            <input type="text" name="GlycanMotif" class="form-control motif" id="form-control autocomplete" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
 
-            <br> Enzyme:
-            <input type="text" name="Enzyme" id="Enzyme" class="form-control enzyme" placeholder="Biosynthetic Enzyme">
-            <!-- <input id="provider-json" /> -->
-            <br>
-            <br>
-            <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
-            <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
-            <!-- <input type="submit" onclick="submitSearchquery()" name="search" value="search"> -->
-            <input type="submit" name="search" value="search" id="submit">
-            <br>
-        </form>
-        <!-- <button type="submit" class="btn btn-success " id="submitform">Search</button> -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
-    </div>
+    <!-- <div class="container"> -->
+    <h3 style="text-align: center"> Glycan Search </h3>
+    <!-- <p id="demo1"></p> -->
+    <form id="myForm" name="myForm" action="" method="POST">
+        Glycan ID:
+        <input type="text" id="GlycanID" name="GlycanID" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
+        <br> Glycan Size:
+        <div class="form-group row">
+            <div class="col-xs-1">
+                Min
+                <div id="lower-value"> </div>
+                <!-- <input type="text" id="name1" name="min1" size="5"> -->
+            </div>
+            <div class="col-xs-10">
+                # of Sugar(range)
+                <br>
+                <div id="slider"> </div>
+            </div>
+            <div class="col-xs-1">
+                Max
+                <div id="upper-value"> </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-xs-1">
+                Min
+                <div id="lower-value1"> </div>
+            </div>
+            <div class="col-xs-10">
+                Native Mass(range)
+                <div id="slider1"> </div>
+            </div>
+            <div class="col-xs-1">
+                Max
+                <div id="upper-value1"> </div>
+            </div>
+        </div>
+        <br> Organism:
+        <select size="1" class="organism" id="organism">
+            <option value=""></option>
+        </select>
+        <br> Glycan type:
+        <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
+            <option value=""></option>
+        </select>
+        <!-- <div id="searchfield"  class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div> -->
+        <br> Glycan subtype:
+        <select id="ddl2">
+        </select>
+        <br> Glycoprotein ID:
+        <input type="text" class="form-control proteinid" name="ProteinID" id="form-control autocomplete" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+        <br> Glycan Motif:
+        <input type="text" name="GlycanMotif" class="form-control motif" id="form-control autocomplete" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
+
+        <br> Enzyme:
+        <input type="text" name="Enzyme" id="Enzyme" class="form-control enzyme" placeholder="Biosynthetic Enzyme">
+        <!-- <input id="provider-json" /> -->
+        <br>
+        <br>
+        <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
+        <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
+        <!-- <input type="submit" onclick="submitSearchquery()" name="search" value="search"> -->
+        <input type="submit" name="search" value="search" id="submit">
+        <br>
+    </form>
+    <!-- <button type="submit" class="btn btn-success " id="submitform">Search</button> -->
+
+    <!-- </div> -->
     <div w3-include-html="footer.html"></div>
+    <script src="js/navbar.js"></script>
     <!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
-<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>-->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<!--    <script src="https://www.w3schools.com/lib/w3.js"></script>-->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <!-- <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
     <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
-<!--    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />-->
-    <script src="js/navbar.js"></script>
+
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" /> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 
     <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script> -->
@@ -234,7 +234,7 @@
 
         $.getJSON('http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1', function (data) {
 
-          //  document.getElementById("organism").innerHTML = data.organism;
+            //  document.getElementById("organism").innerHTML = data.organism;
             //  document.getElementById("demo").innerHTML = obj.min + ", " + obj.max;
 
         });
@@ -285,7 +285,7 @@
 
     <script>
         function configureDropDownLists(ddl1, ddl2) {
-             var nglycan;
+            var nglycan;
             var oglycan;
             // var nglycan={};
             $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
@@ -327,7 +327,7 @@
     <script>
         var json = {};
         var jsonform = {};
-        var formObject ={};
+        var formObject = {};
         // var Glycansearch ={};
         // var data ={};
         // var organism = {};
@@ -343,7 +343,7 @@
             var organism = document.getElementById("organism").value;
             var glycantype = document.getElementById("ddl").value;
             var glycansubtype = document.getElementById("ddl2").value;
-         //  alert(data[0].value)
+            //  alert(data[0].value)
             var formObject = {
                 glycan_id: data[0].value,
                 organism: organism,
@@ -351,21 +351,24 @@
                 glycansubtype: glycansubtype
 
             };
-      
-           
+
+
         });
-      //  var json= JSON.stringify( formObject);
-       // alert(json.glycan_id)
-      //  alert(data)
-       // alert(json[GlycanID])
+        //  var json= JSON.stringify( formObject);
+        // alert(json.glycan_id)
+        //  alert(data)
+        // alert(json[GlycanID])
         $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycansearch?query=" + formObject, function (data) {
-           // document.getElementById("demo1").innerHTML = result.search_results_id;
+            // document.getElementById("demo1").innerHTML = result.search_results_id;
             // document.getElementById("demo1").innerHTML = data.error_code;
             // alert(data.error_code)
-            alert(data.search_results_id)
+            if (data.search_results_id)
+                window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/listpage.html?id=" + data.search_results_id;
+
+            //alert(data.search_results_id)
         });
- 
-   
+
+
     </script>
     <!-- <script>
     $('#myForm').on('submit', function(event){
