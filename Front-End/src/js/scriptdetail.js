@@ -78,6 +78,9 @@ function ajaxSuccess(data) {
   var template = $('#item_template').html();
   data.hasMotifs = (data.motifs && (data.motifs.length > 0));
   data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
+
+  data.imagePath = getWsUrl('image_service', data.id);
+
   //var glyco = row.glycoct.replace(/ /g, '\n');
   var html = Mustache.to_html(template, data);
   var $container = $('#content');
@@ -122,12 +125,12 @@ function ajaxFailure() {
 //  * Returns the GWU services.
 //
 
-function LoadData() {
+function LoadData(id) {
 
   var ajaxConfig = {
     dataType: "json",
-    url: getWsUrl("detail"),
-    data: getDetailPostData(id),
+    url: getWsUrl("detail", id),
+    // data: getDetailPostData(id),
     method: 'POST',
     success: ajaxSuccess,
     error: ajaxFailure

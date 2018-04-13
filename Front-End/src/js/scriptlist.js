@@ -22,7 +22,7 @@ String.prototype.trunc = String.prototype.trunc ||
 var page = 1;
 var sort = 'id';
 var dir = 'asc';
- var url = getWsUrl('list') + "?action=get_user";
+var url = getWsUrl('list') + "?action=get_user";
 var limit = 10;
 
 function xlimit(element) {
@@ -33,19 +33,20 @@ function xlimit(element) {
 
 
 function next() {
+  if (page<1) {
   page = page + 1;
  $(".page-select").val(page);
  LoadData();
+  }
 }
 
 
 function prev() {
-  page = page - 1;
- if (page < 1) {
- page = 1;
- }
- $(".page-select").val(page);
- LoadData();
+  if (page > 1) {
+    page = page - 1;
+    $(".page-select").val(page);
+    LoadData();
+  }
 }
 
 function xpage(element) {
@@ -112,7 +113,8 @@ function PageFormat(value, row, index, field) {
 
 // For Image Column
 function ImageFormat(value, row, index, field) {
- var url = getImageWsUrl(row.ID);
+//  var url = getImageWsUrl(row.ID);
+var url = getWsUrl('image_service', row.ID);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 /**
@@ -153,6 +155,29 @@ function DetailFormat(index, row) {
  html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
  return html.join('');
 }
+
+
+// var lastSearch;
+
+
+// function searchAgain() {
+//   console.log(lastSearch.query);
+//   $.ajax({
+//     method: 'GET',
+//     dataType: "json",
+//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
+//     success: function (result) {
+//       if (result.search_results_id) {
+//         console.log(result);
+//         window.location = 'listpage.html?id=' + result.search_results_id;
+//       } else {
+//         // handle if no results
+//       }
+//     },
+//     error: ajaxFailure
+//   });
+// }
+
 
 /**
 
@@ -196,6 +221,8 @@ function ajaxSuccess(data) {
  buildPages(data.pagination);
 
  buildSummary(data.query);
+
+//  lastSearch = data;
 }
 
 

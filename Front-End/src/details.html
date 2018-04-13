@@ -84,7 +84,7 @@
                                    <!--always try to use double quotes for HTML attributes. -->
                                    <div class="col-md-6 col-xs-12">
                                        <div class='img-wrapper1'>
-                                           <img class='img-cartoon1' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}" alt='Cartoon' width='90%' />
+                                           <img class='img-cartoon1' src="{{imagePath}}" alt='Cartoon' width='90%' />
                                            <Br/>
                                        </div>
                                    </div>
@@ -250,11 +250,9 @@
                    <div class="panel-body" "cd-faq-content">
                        <!-- added new class -->
                        {{#enzymes}}
-   
                        <li class="panelmaincontent1">{{protein_name}}(Uniprot ID:
                            <a class="panelcontent" href="{{url}}">{{protein_id}}</a>)
                        </li>
-   
                        <li id="gene"> Gene name:
                            <a class="panelcontent" href="{{gene_link}}">{{gene}}</a>
                        </li>
@@ -289,6 +287,16 @@
           </script>
           </div>
        </section>
+
+        <!-- <div id="error-message"> -->
+    <div id='error-message' style='display:none' ;>
+        <h1 class="error-ErrorPage-heading display-inline font-semibold">Sorry...</h1>
+        <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
+        <div class="error-ErrorPage-links">
+            <button class="btn error-ErrorPage-link" id="error-button" href="index.html">Go to our homepage</button>
+
+        </div>
+    </div>
        
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/navbar.js"></script>
@@ -307,6 +315,7 @@
        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
        <script type="text/javascript" src="js/scriptdetail.js"></script>
        <script type="text/javascript" src="js/mustache.js"></script>
+       <script type="text/javascript" src="js/ws_url.js"></script>
        <script src="js/navbar.js"></script>
        <div w3-include-html="footer.html"></div>
    </body>
