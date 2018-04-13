@@ -19,7 +19,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>SampleWebApplication</finalName>
+    <finalName>CopyLocally</finalName>
     <plugins>
       <plugin>  <!-- to access config file -->
         <groupId>org.codehaus.mojo</groupId>
@@ -54,6 +54,10 @@
               <filesets>
                   <fileset>
                     <directory>${to}</directory>
+                    <includes>
+                      <!-- makes sure that the target ${to} directory is not itself deleted -->
+                      <include>**/*</include>
+                    </includes>
                   </fileset>
                 </filesets>
               </configuration>
