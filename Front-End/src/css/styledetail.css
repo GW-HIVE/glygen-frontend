@@ -77,12 +77,12 @@
 
 
 
-.breadcrumb {
+/* .breadcrumb {
 
-    background-color: transparent; /* made changes here */
+   background-color: transparent; 
     font-size: 18px;
     margin-top: -30px; 
-}
+} */ 
 .panelcontent{
   font-size: 14px;
   
@@ -99,27 +99,28 @@
 padding:2px 2px;
 }
 /* <!-- style to class for detail page --> */
-.cd-faq-item{
+ /* .cd-faq-item{
   padding: 5em;
-}
-.cd-close-panel {
-  right: 6%;
-  top:83px;
-  color: black;
-}
-.cd-faq-group{
-  margin-top:80px;
-}
-/* <!-- style to class for detail page --> */
-
-
-/* .cd-faq{
-  margin-top: 80px;
-  height:90px;
-  width:250px;
 } */
+ .cd-close-panel {
+margin-left:0px;
+  
+  color: black;
+} 
+.cd-faq-group{
+  margin-top:20px;
+  margin-right: 0px;
+} 
+
+#content{
+  overflow: hidden;
+}
 /* <!-- style to class for detail page --> */
-.cd-faq-categories a{
+
+
+
+/* <!-- style to class for detail page --> */
+/* .cd-faq-categories a{
   position: relative;
   display: block;
   overflow: hidden;
@@ -150,7 +151,7 @@ padding:2px 2px;
     height: 33%; 
     width: 15%;
     margin-top:50px;
-}
+} */
 /* <!-- style to class for detail page --> */
 /* @media only screen and (min-width: 1024px){
 .cd-faq-categories .selected {
@@ -158,12 +159,14 @@ padding:2px 2px;
   color: #FFFFFF;
    
 } */ 
-/* <!-- style to footer for detail page --> */
-.footer{
+
+
+
+ .footer{
   margin-bottom: 0px;
   margin-top: 470px;
 
-}
+} 
 .list-group{
 
   font-size: 14px;
@@ -184,7 +187,7 @@ pre{
 }
 /* .no-touch .cd-faq-categories a:hover {
   background: #337ab7;  /* #555b61; */
-} */
+
 #gene
 {
 padding-left: 45px;

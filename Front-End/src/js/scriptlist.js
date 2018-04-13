@@ -32,14 +32,21 @@ function xlimit(element) {
 }
 
 
-function next() {
-  if (page<1) {
-  page = page + 1;
- $(".page-select").val(page);
- LoadData();
-  }
-}
+// function next() {
+//   if (page>1) {
+//   page = page + 1;
+//  $(".page-select").val(page);
+//  LoadData();
+//   }
+// }
 
+
+
+function next() {
+page = page + 1;
+  $(".page-select").val(page);
+  LoadData();
+}
 
 function prev() {
   if (page > 1) {

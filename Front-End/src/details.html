@@ -16,7 +16,20 @@
    
        </style>
        <title>Details</title>
-       <!-- Please do not change Sequence-->
+
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+   <!-- detailpage style -->
+   <link rel="stylesheet" type="text/css" href="css/styledetail.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="css/faq_style.css">
+    <!-- Resource style -->
+   
+
+
+        <!-- Please do not change Sequence-->
        <!-- CSS for sidenavgation-->
        <link rel="stylesheet" href="css/faq_style.css">
        <!-- CSS reset -->
@@ -25,8 +38,8 @@
        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
        <!-- CSS common-->
        <link rel="stylesheet" href="css/style.css">
-       <!-- detailpage style -->
-       <link rel="stylesheet" type="text/css" href="css/styledetail.css">
+       <script src="js/modernizr.js"></script>
+       <!-- Modernizr -->
    </head>
    
    <body>
@@ -73,7 +86,7 @@
    
                            <div class="gg-panel-heading" "cd-faq-title">
                                <!-- added new class -->
-                               <h4>{{ID}}</h4>
+                               <h4>{{id}}</h4>
    
                            </div>
    
@@ -100,7 +113,7 @@
    
                                        {{/classification}}
                                    </div>
-                                   {{^classification}} No data available. {{/classification}}
+                                   {{^classification}}{{/classification}}
    
                                </div>
                            </div>
@@ -274,9 +287,14 @@
                    </div>
                    <div class="panel-body" "cd-faq-content">
                        <!-- added new class -->
-                       GLYCOCT
-                       <pre>{{ glycoct }}</pre> WURCS
-                       <pre>{{ wurcs}}</pre> IUPAC
+                      
+                        GLYCOCT
+                       <pre>{{ glycoct }}</pre>
+                        
+                    
+                        WURCS
+                       <pre>{{ wurcs}}</pre>
+                        IUPAC
                        <pre>{{ iupac }}</pre>
                    </div>
                </div>
@@ -299,10 +317,9 @@
     </div>
        
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/navbar.js"></script>
+       
         <script src="js/faq_main.js"></script>
-       <!-- Modernizr -->
-       <script src="js/modernizr.js"></script>
+     
        <script>
            //to open the drop down of the ID called from home page.
            var url_loc = $(location).attr('href');

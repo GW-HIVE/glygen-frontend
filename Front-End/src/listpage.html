@@ -19,8 +19,12 @@
 </head>
 <style>
     .panel-default {
-    border-color: #0c0a0a;}
-    .red-tooltip + .tooltip > .tooltip-inner {background-color:red;}
+        border-color: #0c0a0a;
+    }
+
+    .red-tooltip+.tooltip>.tooltip-inner {
+        background-color: red;
+    }
 </style>
 
 <!-- table starts here -->
@@ -75,7 +79,9 @@
             <div class="panel panel-default">
                 <div class="gg-panel-heading" "cd-faq-title">
                     <!-- added new class -->
-                    <h6><center>Result for Glycan Search On:{{execution_time}}</center></h6>
+                    <h6>
+                        <center>Result for Glycan Search On:{{execution_time}}</center>
+                    </h6>
                 </div>
                 <table class="table table-hover">
                     <tbody>
@@ -89,38 +95,31 @@
                         {{#mass}}
                         <tr>
                             <td>Mass</td>
-                            <td>{{mass.min}} - {{mass.max}} Da</td>
+                            {{#mass.min}} <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>{{/mass.max}}
                         </tr>
-                        {{/mass}}
-
+                        {{/mass}} 
+                        
                         {{#organism}}
                         <tr>
                             <td>Organism</td>
                             <td>{{organism}}</td>
                         </tr>
-                        {{/organism}}
-
-                        {{#glycan_type}}
+                        {{/organism}} {{#glycan_type}}
                         <tr>
                             <td>Glycan Type</td>
                             <td>{{glycan_type}}</td>
                         </tr>
-                        {{/glycan_type}}
-
-                        {{#glycan_subtype}}
+                        {{/glycan_type}} {{#glycan_subtype}}
                         <tr>
                             <td>Glycan SubType</td>
                             <td>{{glycan_subtype}}</td>
                         </tr>
-                        {{/glycan_subtype}} 
-
-                         {{#number_proteins}}
+                        {{/glycan_subtype}} {{#number_proteins}}
                         <tr>
                             <td>Glycosylated Protein</td>
                             <td>{{number_proteins}}</td>
                         </tr>
-                        {{/number_proteins}}
-                        {{#enzyme.id}}
+                        {{/number_proteins}} {{#enzyme.id}}
                         <tr>
                             <td>Eynthesizing Enzyme</td>
                             <td>{{enzyme.id}}</td>
@@ -129,26 +128,34 @@
 
                     </tbody>
                 </table>
-                
-                <p align="center">
-                    <!-- <a href="#" data-toggle="tooltip" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results.
-                    "><button type="button" class="btn btn-default" onclick="searchBack();">Search again</button></a> -->
 
-                    <a href="#" data-toggle="tooltip" data-placement="bottom"
+                <p align="center">
+
+
+                    <button type="button" class="btn btn-default" onclick="searchAgain();">Search again</button>
+                    &nbsp; &nbsp; &nbsp; 
+
+                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+
+                    <!-- May be for version two -->
+                    <!-- <a href="#" data-toggle="tooltip" data-placement="bottom"
        title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
        class="red-tooltip"><button type="button" class="btn btn-default" onclick="searchAgain();">Search again</button></a>
                     &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button> -->
                 </p>
         </script>
-    
+
         <!-- table start here -->
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <table id="gen-table"  data-search="true" data-show-export="true" data-toggle="table" data-detail-view="true" data-detail-formatter="DetailFormat" data-page-size="10">
+                <table id="gen-table" data-show-export="true" data-toggle="table" data-detail-view="true" data-detail-formatter="DetailFormat"
+                    data-page-size="10">
+                    <!-- <table id="gen-table"    data-search="true">    may be for version 2-->
+
                     <thead>
                         <tr>
-                            <th data-field="state" data-checkbox="true"></th>
+                            <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
                             <th data-field="id" data-formatter="PageFormat">ID</th>
                             <th data-field="imageURL" data-formatter="ImageFormat" style="width:10%">Glycan Image</th>
                             <th data-field="mass" data-formatter="MassFormatter">Native Mass
@@ -192,40 +199,40 @@
                 </select>
             </form>
         </div>
-    </div>
-    <!-- <div id="error-message"> -->
-    <div id='error-message' style='display:none' ;>
-        <h1 class="error-ErrorPage-heading display-inline font-semibold">Sorry...</h1>
-        <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
-        <div class="error-ErrorPage-links">
-            <button class="btn error-ErrorPage-link" id="error-button" href="index.html">Go to our homepage</button>
-
         </div>
-    </div>
-    
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script>
-        $(document).ready(function(){
-    $("button").tooltip();
-});
+        <!-- <div id="error-message"> -->
+        <div id='error-message' style='display:none' ;>
+            <h1 class="error-ErrorPage-heading display-inline font-semibold">Sorry...</h1>
+            <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
+            <div class="error-ErrorPage-links">
+                <button class="btn error-ErrorPage-link" id="error-button" href="index.html">Go to our homepage</button>
+
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- Latest compiled and minified JavaScript -->
+        <script>
+            $(document).ready(function () {
+                $("button").tooltip();
+            });
         </script>
 
 
-    <script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="js/mustache.js"></script>
-    <script type="text/javascript" src="js/ws_url.js"></script>
-    <!-- script for getting Web Service URLs -->
-    <script type="text/javascript" src="js/scriptlist.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    
-    <script src="js/activity_tracker.js"></script>
-    <!-- script for logging activity -->
-    <script src="js/navbar.js"></script>
-    <div w3-include-html="footer.html"></div>
+        <script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="js/mustache.js"></script>
+        <script type="text/javascript" src="js/ws_url.js"></script>
+        <!-- script for getting Web Service URLs -->
+        <script type="text/javascript" src="js/scriptlist.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="js/activity_tracker.js"></script>
+        <!-- script for logging activity -->
+        <script src="js/navbar.js"></script>
+        <div w3-include-html="footer.html"></div>
 </body>
 
 </html>
