@@ -728,7 +728,7 @@
 	function testTooltips ( parsed, entry ) {
 
 		if ( entry === false ) {
-			return;
+
 		}
 
 		else if ( entry === true ) {

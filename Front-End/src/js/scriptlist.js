@@ -93,6 +93,8 @@ function buildPages(paginationInfo){
 
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
+ queryInfo.execution_time = moment(queryInfo.execution_time, "MM-dd-yyyy");
+
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
 }
@@ -105,7 +107,7 @@ function buildSummary (queryInfo) {
  @return -Details particular Glycan Id 
  */
 function PageFormat(value, row, index, field) {
- return "<a href='details.html?id" + value + "'>" + value + "</a>";
+ return "<a href='details.html?id=" + value + "'>" + value + "</a>";
 }
 
 /**
@@ -199,7 +201,7 @@ function DetailFormat(index, row) {
 
 function ajaxSuccess(data) {
  var $table = $('#gen-table');
- var items = new Array();
+ var items = [];
  //number of elements
  // console.log(data);
  if (data.results) {
@@ -265,4 +267,4 @@ function getParameterByName(name, url) {
 var id = getParameterByName('id') || id;
 
 
-LoadData();
+LoadData(id);

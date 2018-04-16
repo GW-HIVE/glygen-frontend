@@ -10,6 +10,8 @@
     <meta charset="utf-8">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <title>List Page</title>
+   
+    
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylelist.css">
@@ -80,7 +82,8 @@
                 <div class="gg-panel-heading" "cd-faq-title">
                     <!-- added new class -->
                     <h6>
-                        <center>Result for Glycan Search On:{{execution_time}}</center>
+                        <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
+                        <center>Result for Glycan Search On:moment({{execution_time}}, "MM-DD-YYYY")</center>
                     </h6>
                 </div>
                 <table class="table table-hover">
@@ -201,17 +204,26 @@
         </div>
         </div>
         <!-- <div id="error-message"> -->
-        <div id='error-message' style='display:none' ;>
-            <h1 class="error-ErrorPage-heading display-inline font-semibold">Sorry...</h1>
-            <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
-            <div class="error-ErrorPage-links">
-                <button class="btn error-ErrorPage-link" id="error-button" href="index.html">Go to our homepage</button>
+<div class="col-md-12 col-xs-12">
+    <div class="row">
+        <div class="panel panel-default error-div">
 
+
+            <div class="error-message" style='display:none' ;>
+                <h1>
+                    <center> Sorry...</center>
+                </h1>
+                <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
+
+                <button class="btn btn-default error-button" href="index.html">Go to our homepage</button>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
         <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <!-- Latest compiled and minified JavaScript -->
@@ -223,6 +235,7 @@
 
 
         <script type="text/javascript" src="bootstrap/js/bootstrap-table.min.js"></script>
+        <script type="text/javascript" src="js/moment.js"></script>
         <script type="text/javascript" src="js/mustache.js"></script>
         <script type="text/javascript" src="js/ws_url.js"></script>
         <!-- script for getting Web Service URLs -->

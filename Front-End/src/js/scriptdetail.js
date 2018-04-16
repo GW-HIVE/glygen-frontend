@@ -168,6 +168,6 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-  var id = getParameterByName('id') || 'G00413UF';
+  var id = getParameterByName('id');
   LoadData(id);
 });
