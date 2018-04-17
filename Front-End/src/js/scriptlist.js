@@ -196,9 +196,6 @@ function DetailFormat(index, row) {
 
  */
 
-
-
-
 function ajaxSuccess(data) {
  var $table = $('#gen-table');
  var items = [];
