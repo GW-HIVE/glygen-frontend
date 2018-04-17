@@ -1,0 +1,51 @@
+<html>
+<title> search page </title>
+<head>
+        <div w3-include-html="header.html"></div>
+      
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/currency-autocomplete.js"></script>
+    <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
+    <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css"></head>
+<body onload="tracking()">
+        <script>w3.includeHTML();</script> 
+    <align="center">
+        <h3> Glycan Search </h3>
+        </align>
+
+        <div class="container">           
+        <form id="myForm" action= "http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" target="_blank" method="POST">
+            Mass:
+            <div id="searchfield" class="biginput" > <input type="text" name="Mass" placeholder="Mass of the glycan" id="autocomplete"> </div>
+            <br> Glycan type:
+            <div id="searchfield" class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div>
+            <br> Glycan subtype:
+            <div id="searchfield" class="biginput" > <input type="text" name="Glycan_subtype" id="subtype" placeholder="Glycan_subtype"></div>
+            <br> Organism:
+            <div id="searchfield" class="biginput" >  <input type="text" name="Organism" id="organism" placeholder="Organism"></div>
+            <br> Protein ID:
+            <div id="searchfield" class="biginput" >  <input type="text" name="ProteinID" id="proteinid" placeholder="Uniprot ProteinID"></div>
+            <br> Glycan Motif:
+            <div id="searchfield" class="biginput" >  <input type="text" name="GlycanMotif" id="glycanmotif" placeholder="List of motifs that have been found in the glycan structure"></div>
+            <br> Glycan ID:
+            <div id="searchfield" class="biginput" > <input type="text" name="GlycanID" id="glycanid" placeholder="GlycanID"></div>
+            <br> Enzyme:
+            <div id="searchfield" class="biginput" > <input type="text" name="Enzyme" id="enzyme" placeholder="Enzyme"></div>
+            <br>
+            <br>
+            <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
+            <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
+              <input type="submit" onclick="myFunction()" name="submit">
+            <br>
+        </form>
+    </div>
+    <div w3-include-html="footer.html"></div>
+</body>
+</html>

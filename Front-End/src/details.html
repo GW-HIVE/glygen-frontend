@@ -94,7 +94,7 @@
                 <div class="col-md-12 col-xs-6">
                     {{#mass}}
                     <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da {{/mass}}
-                        <br>Classification: {{#classification}}</p>
+                        {{#classification}} <br>Classification: </p>
 
                     <li class="list-group">
                         <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>

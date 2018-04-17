@@ -104,13 +104,22 @@ padding:2px 2px;
 } */
  .cd-close-panel {
 margin-left:0px;
-  
 } 
+.cd-faq-items {
+  float: none;
+  width: 100%;
+  padding-left: 18%;
+  margin-right: 0px;
+  padding-right: 0px;
+}
 .cd-faq-group{
   margin-top:20px;
   margin-right: 0px;
 } 
-
+.cd-faq-categories{
+  width:290px;
+  margin-top:50px;
+}
 #content{
   overflow: hidden;
 }

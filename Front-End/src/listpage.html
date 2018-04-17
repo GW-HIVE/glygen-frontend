@@ -83,7 +83,7 @@
                     <!-- added new class -->
                     <h6>
                         <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                        <center>Result for Glycan Search On:moment({{execution_time}}, "MM-DD-YYYY")</center>
+                        <center>Result for Glycan Search On:{{execution_time}}</center>
                     </h6>
                 </div>
                 <table class="table table-hover">
@@ -95,13 +95,22 @@
                         </tr>
                         {{/glycan_id}} 
 
-                        {{#mass}}
+                        <!-- {{#mass}}
                         <tr>
                             <td>Mass</td>
                             {{#mass.min}} <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>{{/mass.max}}
                         </tr>
-                        {{/mass}} 
+                        {{/mass}}  -->
                         
+
+
+
+                        {{#mass.min}}
+                        <tr>
+                            <td>Mass</td>
+                            {{#mass.min}} <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>{{/mass.max}}
+                        </tr>
+                        {{/mass.min}}
                         {{#organism}}
                         <tr>
                             <td>Organism</td>
@@ -122,7 +131,8 @@
                             <td>Glycosylated Protein</td>
                             <td>{{number_proteins}}</td>
                         </tr>
-                        {{/number_proteins}} {{#enzyme.id}}
+                        {{/number_proteins}} 
+                        {{#enzyme.id}}
                         <tr>
                             <td>Eynthesizing Enzyme</td>
                             <td>{{enzyme.id}}</td>

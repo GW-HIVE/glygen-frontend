@@ -93,7 +93,7 @@ function buildPages(paginationInfo){
 
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time, "MM-dd-yyyy");
+ queryInfo.execution_time = moment(queryInfo.execution_time).format("MM-DD-YYYY");
 
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
@@ -195,9 +195,6 @@ function DetailFormat(index, row) {
  * @param {int} id - The id of the user
 
  */
-
-
-
 
 function ajaxSuccess(data) {
  var $table = $('#gen-table');

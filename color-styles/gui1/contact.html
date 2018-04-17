@@ -1,0 +1,200 @@
+    <!DOCTYPE html>
+      <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+
+            <title>Contact Us</title>
+
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+             <!--[if lt IE 9]>
+
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+            <![endif]-->
+
+            <link rel="stylesheet" type="text/css" href="css/style.css">
+            
+    
+        </head>
+        <body>
+        <script src="https://www.w3schools.com/lib/w3.js"></script>
+        <div w3-include-html="header.html"></div> 
+        <script>w3.includeHTML();</script>
+
+        <div class="container">
+           
+            <div class="row" style="margin-bottom: 20px;">
+               
+                <h1>GET IN TOUCH</h1> 
+                
+                <p class="lead">We always welcome questions, comments, and suggestions regarding our web site and information we provide in general. We will make every effort to respond to you within a reasonable amount of time.</p>
+                
+            <section>     
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h3 id="contact-header">SEND US A MESSAGE</h3>
+                        
+                        <div class="col-lg-10 col-lg-offset-2">
+                        
+                        <form id="contact-form" method="post" action="contact.php" role="form">
+
+                        <div class="messages"></div>
+
+                        <div class="controls">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        
+                                        <label for="form_name">Firstname *</label>
+                                        
+                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_lastname">Lastname *</label>
+                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                              
+                                <div class="col-md-6">
+                                    <div class="form-group">  
+                                    
+                                        <label for="sell">Subject</label>
+                                
+                                        <select class="form-control" id="form_subject">
+                                            <option>General comment</option>
+                                            <option>Bug report</option>
+                                            <option>Need help</option>
+                                        </select>
+                                        
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                               
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="form_email">Email *</label>
+                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Message *</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder="Message for us *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-success btn-send pull-right" value="Send message">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted pull-right"><strong>*</strong> These fields are required.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="messages"></div>
+                            
+                        </div>
+
+                    </form>
+
+                    </div>
+                </div>
+            </section>    
+
+    <!--            <hr style="border: 1px solid #ddd;">-->
+            <section> 
+                <h3 id="contact-header">FIND US HERE</h3>
+                <div class="row">
+                    <div class="col-sm-6">
+                       <section id="google-map" style="position: relative;">
+
+                            <div id="google-container" style="position: relative; overflow: hidden;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.540596722352!2d-83.36922774981609!3d33.92722148054513!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f66c59c9de4d63%3A0xf492ef3dfc14c69d!2s315+Riverbend+Rd%2C+Athens%2C+GA+30602!5e0!3m2!1sen!2sus!4v1522076042582" width="600" height="250" frameborder="0" style="border:0" allowfullscreen >    
+                                </iframe>
+
+                                <div class="row" id="map-address">
+                                    <address id="address"><h4>UGA Athens Georgia</h4></address>
+                                </div>
+                            </div>
+                            <h3><span class="glyphicon glyphicon-map-marker"></span> UGA Location
+                            </h3>
+                            <address>
+                                <ul class="list">
+                                    <li><h4 style="margin: 0">University of Georgia</h4></li>
+                                    <li><strong>Complex Carbohydrate Research Center</strong></li>
+                                    <li>315 Riverbend Road Athens,</li>
+                                    <li>Georgia 30602 USA </li>
+                                </ul>
+                            </address>    
+                        </section>
+                    </div>
+
+                    <div class="col-sm-6">
+                       <section id="google-map" style="position: relative;">
+
+                            <div id="google-container" style="position: relative; overflow: hidden;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.051254159268!2d-77.05189609963956!3d38.89994322946998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7b10e3c7aa5%3A0xda7bf41bdc27a808!2sThe+George+Washington+University!5e0!3m2!1sen!2sus!4v1522081986609" width="600" height="250" frameborder="0" style="border:0" allowfullscreen>
+                                </iframe>
+                                <div class="row" id="map-address">
+                                    <address id="address"><h4>GWU Washington DC</h4></address>
+                                </div>
+                            </div>
+                            <h3><span class="glyphicon glyphicon-map-marker"></span> GWU Location
+                            </h3>
+                            <address>
+                                <ul class="list">
+                                    <li><h4 style="margin: 0">The George Washington University</h4></li>
+                                    <li><strong>School of Medicine and Health Sciences</strong></li>
+                                    <li>2300 Eye Street N.W.,</li>
+                                    <li>Washington, DC 20037 USA </li>
+                                </ul>
+                            </address>
+                        </section>
+                    </div>   
+                </div>
+            </section>     
+
+                <section>
+                    <h3 style="margin-top: 0;"><span class="glyphicon glyphicon-envelope"></span> Contact GlyGen via e-mail</h3>
+
+                    <p style="margin: 0">myGlyGen@gmail.com</p>
+
+                </section>
+
+            </div>
+        </div>
+    
+     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <script src="js/validator.js"></script>
+    <script src="js/contact.js"></script>
+    <div w3-include-html="footer.html"></div>
+    </body>
+</html>
