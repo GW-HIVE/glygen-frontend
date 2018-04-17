@@ -107,7 +107,11 @@ p {
 .gg-navbar-inverse .gg-nav-nav>.open>a:focus, 
 .gg-navbar-inverse .gg-nav-nav>.open>a:hover {
     background-color: #5f5f5f;
-    color: #fff !important;
+/*     background-color: #fff;*/
+/*    color: #00386F !important;*/
+/*    color: #5A99D8 !important;*/
+/*    color: #2E78B7 !important;*/
+  
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
@@ -474,13 +478,22 @@ label {
 
 /* About page */
 
-#missionImage {
-        
+.theMission {
+    font-size: 1.4em;    
 }
-
+.member-description{
+    background: #f5f5f5;
+    padding: 20px;
+}
+.member-description-even {
+    background: #fff;
+    padding: 20px;
+}
 #team-img {
     width: 150px;
     height: 150px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
     
 }
 #our-story {
