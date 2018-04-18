@@ -114,6 +114,8 @@ function ImageFormat(value, row, index, field) {
 var url = getWsUrl('image_service', row.id);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
+
+
 /**
 
  * Format function for column "MASS"
