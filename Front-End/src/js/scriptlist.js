@@ -111,7 +111,7 @@ function PageFormat(value, row, index, field) {
 // For Image Column
 function ImageFormat(value, row, index, field) {
 //  var url = getImageWsUrl(row.ID);
-var url = getWsUrl('image_service', row.ID);
+var url = getWsUrl('image_service', row.id);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 /**

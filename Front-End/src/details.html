@@ -94,18 +94,19 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-xs-6">
-                    {{#mass}}
-                    <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da {{/mass}}
-                        {{#classification}} <br>Classification: </p>
-
-                    <li class="list-group">
-                        <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
-                        <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
-                    </li>
-
-                    {{/classification}}
+                        {{#mass}}
+                        <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
+                             <br>Classification: 
+                             {{#classification}}
+                        <li class="list-group">
+                            <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
+                            <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
+                        </li>
+    
+                        {{/classification}}
+                        {{^classification}} No data available. {{/classification}}
+                    
                
-                {{^classification}}{{/classification}}
             </div>
             </div>
         </div>
