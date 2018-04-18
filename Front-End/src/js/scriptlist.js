@@ -31,17 +31,6 @@ function xlimit(element) {
  LoadData();
 }
 
-
-// function next() {
-//   if (page>1) {
-//   page = page + 1;
-//  $(".page-select").val(page);
-//  LoadData();
-//   }
-// }
-
-
-
 function next() {
 page = page + 1;
   $(".page-select").val(page);
@@ -89,7 +78,6 @@ function buildPages(paginationInfo){
 
  pageSelectors.val(page);
 }
-
 
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
@@ -164,28 +152,6 @@ function DetailFormat(index, row) {
  html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
  return html.join('');
 }
-
-
-// var lastSearch;
-
-
-// function searchAgain() {
-//   console.log(lastSearch.query);
-//   $.ajax({
-//     method: 'GET',
-//     dataType: "json",
-//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
-//     success: function (result) {
-//       if (result.search_results_id) {
-//         console.log(result);
-//         window.location = 'listpage.html?id=' + result.search_results_id;
-//       } else {
-//         // handle if no results
-//       }
-//     },
-//     error: ajaxFailure
-//   });
-// }
 
 
 /**

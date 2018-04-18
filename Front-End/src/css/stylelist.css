@@ -36,6 +36,15 @@
 } 
 
 
+tr {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.panel-default {
+  border-color: #0c0a0a;
+}
 
 thead{
     background-color: #D8D8D8; 

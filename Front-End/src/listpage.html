@@ -2,6 +2,7 @@
  @author: Rupali Mahadik
  @description: UO1 Version-1.1.
  @Date: 19th Feb 2018.
+ @Update: 17 April 2018
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,18 +20,6 @@
     <link rel="stylesheet" type="text/css" href="css/styledetail.css">
 
 </head>
-<style>
-    .panel-default {
-        border-color: #0c0a0a;
-    }
-
-    .red-tooltip+.tooltip>.tooltip-inner {
-        background-color: red;
-    }
-</style>
-
-<!-- table starts here -->
-
 <body onload="tracking()">
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -95,16 +84,7 @@
                         </tr>
                         {{/glycan_id}} 
 
-                        <!-- {{#mass}}
-                        <tr>
-                            <td>Mass</td>
-                            {{#mass.min}} <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>{{/mass.max}}
-                        </tr>
-                        {{/mass}}  -->
-                        
-
-
-
+    
                         {{#mass.min}}
                         <tr>
                             <td>Mass</td>
@@ -138,13 +118,11 @@
                             <td>{{enzyme.id}}</td>
                         </tr>
                         {{/enzyme.id}}
-
+                 
                     </tbody>
                 </table>
 
                 <p align="center">
-
-
                     <button type="button" class="btn btn-default" onclick="searchAgain();">Search again</button>
                     &nbsp; &nbsp; &nbsp; 
 
@@ -264,78 +242,3 @@
 
 
 
-<!-- For div and span summery section -->
-
-<!-- <script id="summary-template" type="text/template">
-<div class="panel panel-default" style="width: 50%;">
-   
-    <div class="gg-panel-heading" "cd-faq-title">
-        <!-- added new class -->
-<!-- <h6><center>Result for Glycan Search On: April-12th-2018{{execution_time}}</center></h6>
-    </div>
- 
- {{#enzyme.id}}
- <div>
- <span>Enzyme: </span>
- <span>{{enzyme.id}}</span>
- </div>
- {{/enzyme.id}}
- {{#mass}}
- <div>
- <span>Mass:</span>
- <span>{{mass.min}} - {{mass.max}} Da</span>
- </div>
- {{/mass}}
- 
- <div>
-        {{#glycan_id}}
- <li>Glycan-Id:{{glycan_id}}</li>
- {{/glycan_id}}
- <span></span>
- </div>
- 
- </div>
-
- <button>Search Again</button>
- </script>  -->
-
-
-
-<!-- Table summery section -->
-<!-- <script id="summary-template" type="text/template"> -->
-<!-- <table class="table table-hover">
-    <thead>
-    <tr>
-       <h4><center>Glycan Search Result</center></h4>
-    </tr>
-    </thead>
-    <tbody>
-       {{#query_type}}
-       <tr>
-       <h6>Your perfomed {{query_type}} query at ........time</h6>
-       </tr>
-       {{/query_type}}
-   
-       <!-- {{execution_time}} -->
-
-<!-- {{#glycan_id}}
-       <tr>
-       <td>Glycan Id</td>
-       <td>{{glycan_id}}</td>
-       </tr>
-       {{/glycan_id}}
-    {{#mass}}
-    <tr>
-    <td>Mass</td>
-    <td>{{mass.min}} - {{mass.max}} Da</td>
-    </tr>
-    {{/mass}}
-    {{#enzyme.id}}
-    <tr>
-    <td>Enzyme</td>
-    <td>{{enzyme.id}}</td>
-    </tr>
-    {{/enzyme.id}}
-    
-    </tbody>
-    </table> -->
