@@ -515,6 +515,7 @@ label {
 .team {
     text-align: center;
     vertical-align: middle;
+    padding-bottom: 20px;
     
 }
 
@@ -548,7 +549,6 @@ label {
     letter-spacing: 1px;
 }
 
-/*
 .member-description {
     background: #f5f5f5;
     padding: 20px;
@@ -558,7 +558,6 @@ label {
     background: #fff;
     padding: 20px;
 }
-*/
 
 /*
 @media (max-width: 800px) {
