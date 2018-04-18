@@ -192,22 +192,35 @@
         </div>
         </div>
         <!-- <div id="error-message"> -->
-<div class="col-md-12 col-xs-12">
-    <div class="row">
-        <div class="panel panel-default error-div">
-
-
-            <div class="error-message" style='display:none' ;>
-                <h1>
-                    <center> Sorry...</center>
-                </h1>
-                <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
-
-                <button class="btn btn-default error-button" href="index.html">Go to our homepage</button>
+                <div class="gg-settings" style="display:none">
+           <div class="error-message">
+                <div class="gg-panel-heading">
+           <h1> <center>Missing argument</center></h1>
+           <p class="error-ErrorPage-copy">Please provide valid search terms.</p>
+             <button class="btn btn-default error-button" id="demohome" onclick="redirectPage1()"value="Homepage- method1"/>Home</button>
+             <button class="btn btn-default error-button" id="demoserach" onclick="redirectPage2()"value="Searchpage - method2"/>Searchback</button>
+        
             </div>
-        </div>
-    </div>
-</div>
+         </div>
+         </div>
+
+
+
+        
+         
+         <script>
+         function redirectPage1()
+         {
+         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
+         }
+          function redirectPage2()
+         {
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
+         }   
+         </script>
+
+
+
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
