@@ -5,7 +5,6 @@
  -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -16,402 +15,83 @@
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
     <title>Glycan Search</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css"
-        type="text/css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />
     <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">
-    <link href="css/nouislider.min.css" rel="stylesheet">
+    <link href="nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="css/style.css">
-
-    <!--***test-->
 </head>
-
 <body>
-    <script src="js/nouislider.min.js"></script>
-
+    <script src="nouislider.min.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
-
     <div class="container">
-    <h3 style="text-align: center"> Glycan Search </h3>
-    <!-- <p id="demo1"></p> -->
-    <form id="myForm" name="myForm" action="" method="POST">
-        Glycan ID:
-        <input type="text" id="GlycanID" name="GlycanID" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
-        <br> Glycan Size:
-        <div class="form-group row">
-            <div class="col-xs-1">
-                Min
-                <div id="lower-value"> </div>
-                <!-- <input type="text" id="name1" name="min1" size="5"> -->
+        <h3 style="text-align: center"> Glycan Search </h3>
+        <form id="myForm" name="myForm">
+            Glycan ID:
+            <input type="text" id="GlycanID" name="GlycanID" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
+            <br> 
+            <!-- First range-->
+            Glycan Size:
+            <div class="form-group row">
+                <div class="col-xs-1">
+                    Min
+                    <div id="lower-value"> </div>
+                </div>
+                <div class="col-xs-10">
+                    Native Mass(range)
+                    <div id="slider"> </div>
+                </div>
+                <div class="col-xs-1">
+                    Max
+                    <div id="upper-value"> </div>
+                </div>
             </div>
-            <div class="col-xs-10">
-                # of Sugar(range)
-                <br>
-                <div id="slider"> </div>
+            <!-- second range-->
+            <div class="form-group row">
+                <div class="col-xs-1">
+                    Min
+                    <div id="lower-value1"> </div>
+                </div>
+                <div class="col-xs-10">
+                    Native Mass(range)
+                    <div id="slider1"> </div>
+                </div>
+                <div class="col-xs-1">
+                    Max
+                    <div id="upper-value1"> </div>
+                </div>
             </div>
-            <div class="col-xs-1">
-                Max
-                <div id="upper-value"> </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-xs-1">
-                Min
-                <div id="lower-value1"> </div>
-            </div>
-            <div class="col-xs-10">
-                Native Mass(range)
-                <div id="slider1"> </div>
-            </div>
-            <div class="col-xs-1">
-                Max
-                <div id="upper-value1"> </div>
-            </div>
-        </div>
-        <br> Organism:
-        <select size="1" class="organism" id="organism">
-            <option value=""></option>
-        </select>
-        <br> Glycan type:
-        <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
-            <option value=""></option>
-        </select>
-        <!-- <div id="searchfield"  class="biginput" > <input type="text" name="Glycan_type" id="type" placeholder="Glycan_type"></div> -->
-        <br> Glycan subtype:
-        <select id="ddl2">
-        </select>
-        <br> Glycoprotein ID:
-        <input type="text" class="form-control proteinid" name="ProteinID" id="form-control autocomplete" placeholder="Provide the Uniprot protein ID of a glycoprotein">
-        <br> Glycan Motif:
-        <input type="text" name="GlycanMotif" class="form-control motif" id="form-control autocomplete" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
-
-        <br> Enzyme:
-        <input type="text" name="Enzyme" id="Enzyme" class="form-control enzyme" placeholder="Biosynthetic Enzyme">
-        <!-- <input id="provider-json" /> -->
-        <br>
-        <br>
-        <!--a href="http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2">Submit</a -->
-        <!--input type="submit" onclick="window.location.href='http://glycomics.ccrc.uga.edu/ggtest/gui/src/listpage.html?action=get_user&id=2'" name="submit"-->
-        <!-- <input type="submit" onclick="submitSearchquery()" name="search" value="search"> -->
-        <input type="submit" name="search" value="search" id="submit">
-        <br>
-    </form>
-    <!-- <button type="submit" class="btn btn-success " id="submitform">Search</button> -->
-
+            <br> Organism:
+            <select size="1" class="organism" id="organism">
+                <option value=""></option>
+            </select>
+            <br> Glycan type:
+            <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
+                <option value=""></option>
+            </select>
+            <br> Glycan subtype:
+            <select id="ddl2">
+            </select>
+            <br> Glycoprotein ID:
+            <input type="text" class="form-control proteinid" name="ProteinID" id="proteinid" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+            <br> Glycan Motif:
+            <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
+            <br> Enzyme:
+            <input type="text" name="Enzyme" id="enzyme" class="form-control enzyme" placeholder="Biosynthetic Enzyme">
+            <br>
+            <br>
+            <input type="submit" name="search" value="search" id="submit">
+            <br>
+        </form>
     </div>
     <div w3-include-html="footer.html"></div>
-    <script src="js/navbar.js"></script>
-    <!-- <script src="//code.jquery.com/jquery-1.11.2.min.js"></script> -->
+ <script src="js/navbar.js"></script> 
+    <script type="text/javascript" src="js/glycan_searchpage.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <!-- <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpageDic.js"></script>
-    <script src="http://glycomics.ccrc.uga.edu/ggtest/gui/js/searchpage.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
-
-    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" /> -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script> -->
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>  -->
-    <!-- Functions to auto complete and retrieve the values from JSON-->
-    <script>
-        var test = 'http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_proteinid.php?action=get_user&id=1';
-        $.getJSON('http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_proteinid.php?action=get_user&id=1', function (data) {
-            //data is the JSON string
-            //  document.getElementById("demo").innerHTML = data;
-            $(function () {
-                $(".proteinid").autocomplete({
-                    source: function (request, response) {
-                        var results = $.ui.autocomplete.filter(data, request.term);
-                        response(results.slice(0, 5));
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        var test = 'http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_motif.php?action=get_user&id=1';
-        $.getJSON('http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_motif.php?action=get_user&id=1', function (data) {
-            //data is the JSON string
-            //  document.getElementById("demo").innerHTML = data;
-            $(function () {
-                $(".motif").autocomplete({
-                    source: function (request, response) {
-                        var results = $.ui.autocomplete.filter(data, request.term);
-                        response(results.slice(0, 5));
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        var test = 'http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_enzyme.php?action=get_user&id=1';
-        $.getJSON('http://glycomics.ccrc.uga.edu/ggtest/service/g_searchpage_enzyme.php?action=get_user&id=1', function (data) {
-            //data is the JSON string
-            //  document.getElementById("demo").innerHTML = data;
-            $(function () {
-                $(".enzyme").autocomplete({
-                    source: function (request, response) {
-                        var results = $.ui.autocomplete.filter(data, request.term);
-                        response(results.slice(0, 5));
-                    }
-                });
-            });
-        });
-    </script>
-
-    <!-- functions for range slider-->
-    <script>
-
-        var nonLinearSlider1 = document.getElementById('slider1');
-        noUiSlider.create(nonLinearSlider1, {
-            connect: true,
-            behaviour: 'tap',
-            start: [0, 10000],
-            range: {
-                'min': [0],
-                'max': [10000]
-            }
-        });
-        var nodes1 = [
-            document.getElementById('lower-value1'), // 0
-            document.getElementById('upper-value1')  // 1
-        ];
-        // Display the slider value and how far the handle moved
-        // from the left edge of the slider.
-        nonLinearSlider1.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
-            nodes1[handle].innerHTML = values[handle];
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-                min = result.glycan_mass.min;
-                max = result.glycan_mass.max;
-            });
-        });
-
-
-    </script>
-    <script>
-        var nonLinearSlider = document.getElementById('slider');
-        noUiSlider.create(nonLinearSlider, {
-            connect: true,
-            behaviour: 'tap',
-            start: [0, 10000],
-            range: {
-                'min': [0],
-                'max': [10000]
-            }
-        });
-        var nodes = [
-            document.getElementById('lower-value'), // 0
-            document.getElementById('upper-value')  // 1
-        ];
-        // Display the slider value and how far the handle moved
-        // from the left edge of the slider.
-        nonLinearSlider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
-            nodes[handle].innerHTML = values[handle];
-        });
-        nonLinearSlider.noUiSlider.on('update', function (values, handle, unencoded, isTap, positions) {
-            nodes[handle].innerHTML = values[handle];
-        });
-
-    </script>
-
-    <script>
-
-        $.getJSON('http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1', function (data) {
-
-            //  document.getElementById("organism").innerHTML = data.organism;
-            //  document.getElementById("demo").innerHTML = obj.min + ", " + obj.max;
-
-        });
-    </script>
-    <!-- functions for dropdowns organism -->
-    <script>
-        $(document).ready(function () {
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-
-                $(".organism").append("<option>" + result.organism[0] + "</option>");
-                $(".organism").append("<option>" + result.organism[1] + "</option>");
-
-            });
-        });
-    </script>
-    <!-- functions for dropdowns glycan type-->
-    <script>
-        $(document).ready(function () {
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-
-                $(".ddl").append("<option>" + result.type[0].name + "</option>");
-                $(".ddl").append("<option>" + result.type[1].name + "</option>");
-
-            });
-        });
-    </script>
-    <!-- functions for dropdowns glycan type N glycan sub type-->
-    <script>
-        $(document).ready(function () {
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-                $(".nglycan").append("<option>" + result.type[0].subtype + "</option>");
-
-            });
-        });
-    </script>
-    <!-- functions for dropdowns glycan type o-Glycan sub type -->
-    <script>
-        $(document).ready(function () {
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-
-                $(".oglycan").append("<option>" + result.type[1].subtype + "</option>");
-                // $(".glycantype").append("<option>"+result.type[0].subtype+"</option>");
-
-            });
-        });
-    </script>
-    <!--glycan sub type dropdown function -->
-
-    <script>
-        function configureDropDownLists(ddl1, ddl2) {
-            var nglycan;
-            var oglycan;
-            // var nglycan={};
-            $.getJSON("http://glycomics.ccrc.uga.edu/ggtest/service/formsearch.php?action=get_user&id=1", function (result) {
-                nglycan = result.type[0].subtype;
-                oglycan = result.type[1].subtype;
-                dataReady();
-            });
-            function dataReady() {
-                //  document.write(nglycan)
-
-                // document.write(nglycan);
-                switch (ddl1.value) {
-                    case 'N-Glycan':
-                        ddl2.options.length = 0;
-                        for (i = 0; i < nglycan.length; i++) {
-                            createOption(ddl2, nglycan[i], nglycan[i]);
-                        }
-                        break;
-                    case 'O-Glycan':
-                        ddl2.options.length = 0;
-                        for (i = 0; i < oglycan.length; i++) {
-                            createOption(ddl2, oglycan[i], oglycan[i]);
-                        }
-                        break;
-                    default:
-                        ddl2.options.length = 0;
-                        break;
-                }
-            }
-        }
-        function createOption(ddl, text, value) {
-            var opt = document.createElement('option');
-            opt.value = value;
-            opt.text = text;
-            ddl.options.add(opt);
-        }
-    </script>
-    <!-- converting form submit to JSON-->
-    <script>
-        var json = {};
-        var jsonform = {};
-        var formObject = {};
-        // var Glycansearch ={};
-        // var data ={};
-        // var organism = {};
-        // var glycantype={};
-        // var glycansubtype={};
-
-        // var formjson = $("#myForm").serialize();
-        $(document).on('click', "#submit", function () {
-            // var json = $("#myForm").serialize();
-            var Glycansearch = $("#myForm").serializeArray();
-            var jsonform = JSON.stringify(Glycansearch);
-            var data = JSON.parse(jsonform);
-            var organism = document.getElementById("organism").value;
-            var glycantype = document.getElementById("ddl").value;
-            var glycansubtype = document.getElementById("ddl2").value;
-            //  alert(data[0].value)
-            var formObject = {
-                glycan_id: data[0].value,
-                organism: organism,
-                glycantype: glycantype,
-                glycansubtype: glycansubtype
-
-            };
-
-
-        });
-        //  var json= JSON.stringify( formObject);
-        // alert(json.glycan_id)
-        //  alert(data)
-        // alert(json[GlycanID])
-        $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycansearch?query=" + formObject, function (data) {
-            // document.getElementById("demo1").innerHTML = result.search_results_id;
-            // document.getElementById("demo1").innerHTML = data.error_code;
-            // alert(data.error_code)
-            if (data.search_results_id)
-                window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/listpage.html?id=" + data.search_results_id;
-
-            //alert(data.search_results_id)
-        });
-
-
-    </script>
-    <!-- <script>
-    $('#myForm').on('submit', function(event){
-        var obj = $('myForm').serializeJSON();
-        alert(obj)
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8888/Glycan/Drwillyork/templates/searchpage.php',
-            dataType: 'json',
-            data: JSON.stringify(obj),
-            contentType : 'application/json',
-            success: function(data) {
-                alert(data)
-            }
-        });
-       return false;
-   });
-</script> -->
-    <!-- <script>
-$(document).ready(function(){
-    $("submit").click(function(){
-        var x = $("myForm").serializeArray();
-        $.each(x, function(i, field){
-            $("#results").append(field.name + ":" + field.value + " ");
-           // alert(field.value)
-        });
-    });
-});
-</script> -->
-    <!-- <script>
-    var formData = JSON.stringify($("#myForm").serializeArray());
-    $.ajax({
-  type: "POST",
-  url: "http://localhost:8888/Glycan/Drwillyork/templates/searchpage.php",
-  data: formData,
-  success: function(){
-      myForm.formData;
-  },
-  dataType: "json",
-  contentType : "application/json"
-});
-</script> -->
-    <script src="jsonserialize.js"></script>
 </body>
-
 </html>
