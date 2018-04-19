@@ -505,6 +505,10 @@ label {
 #collaborators {
 /*    background: #fff;*/
 }
+
+#grant-info {
+    background: #fff;
+}
 .about-block {
     padding-top: 30px;;
     padding-right: 80px;
@@ -559,6 +563,23 @@ label {
     padding: 20px;
 }
 
+.close {
+    float: left ;
+/*    float: right;*/
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #666 !important;
+/*    background: transparent;*/
+    border: none;
+    opacity: 1;
+    
+/*
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+*/
+}
 /*
 @media (max-width: 800px) {
     .cover {
