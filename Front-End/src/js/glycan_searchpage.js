@@ -205,7 +205,8 @@
         function redirect(obj) {
         $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query="+obj, function (result) {
        // alert(result.search_results_id) 
-        window.location = 'http://glygen-vm-tst.biochemistry.gwu.edu/listpage.html?id=' + result.search_results_id;
+        // window.location = 'http://glygen-vm-tst.biochemistry.gwu.edu/listpage.html?id=' + result.search_results_id;
+        window.location = './listpage.html?id=' + result.search_results_id;
             
 });
       }
