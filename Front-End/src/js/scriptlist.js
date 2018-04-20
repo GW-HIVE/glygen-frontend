@@ -87,6 +87,25 @@ function buildSummary (queryInfo) {
  $('#summary-table').html(summaryHtml);
 }
 
+function redirectPage1()
+         {
+         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
+         }
+          function redirectPage2()
+         {
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
+         } 
+         
+         
+         $(document).ready(function(){
+    $("demosearch").tooltip();
+}); 
+
+function editSearch(){
+  {
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
+    }
+}
 /**
 
  * Format function to create link to the details page
@@ -156,6 +175,64 @@ function DetailFormat(index, row) {
 }
 
 
+
+
+
+
+
+
+
+// var lastSearch;
+
+
+// function searchAgain() {
+//   console.log(lastSearch.query);
+//   $.ajax({
+//     method: 'GET',
+//     dataType: "json",
+//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
+//     success: function (result) {
+//       if (result.search_results_id) {
+//         console.log(result);
+//         window.location = 'listpage.html?id=' + result.search_results_id;
+//       } else {
+//         // handle if no results
+//       }
+//     },
+//     error: ajaxFailure
+//   });
+// }
+
+
+
+
+// var updateSearch;
+
+// function editSearch() {
+//   console.log(updateSearch.query);
+//   $.ajax({
+//     method: 'GET',
+//     dataType: "json",
+//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/list?query=' + JSON.stringify(updateSearch.query),
+//     success: function (result){
+//     if (result.edit_results_id) {
+//       console.log(result);
+//       // window.location = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id;
+//       window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
+//     } else {
+//       // handle if no results
+//     }
+//   },
+//   error: ajaxFailure
+// });
+// }
+
+function editSearch() {
+  {
+    window.location.replace("glycan_searchpage.html?id="+id);
+    }
+}
+
 /**
 
  * Call server for data
@@ -196,7 +273,8 @@ function ajaxSuccess(data) {
 
  buildSummary(data.query);
 
-//  lastSearch = data;
+ lastSearch = data;
+ updateSearch=data;
 }
 
 
