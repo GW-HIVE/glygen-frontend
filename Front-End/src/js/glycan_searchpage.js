@@ -1,4 +1,3 @@
-
 //  @author: Pradeep Kumar Ragu Chanthar
 //  @description: UO1 Version-1.1
 //  @Date: 19th Feb 2018
@@ -194,8 +193,6 @@
            var json = JSON.stringify(formObject);
            event.preventDefault();
           redirect(json)
-
-          
          // var listpage = reload(json)
        // alert(json)
         });  
@@ -205,7 +202,6 @@
 //           window.location = 'http://glygen-vm-tst.biochemistry.gwu.edu/listpage.html?id' + result.search_results_id;
 
 // });
-       
         function redirect(obj) {
         $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query="+obj, function (result) {
        // alert(result.search_results_id) 
