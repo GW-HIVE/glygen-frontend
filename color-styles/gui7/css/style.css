@@ -107,7 +107,8 @@ p {
 /*    color: #ddd !important;*/
     /*    color: #00386F !important;*/
 /*    color: #00D646 !important;*/
-    color: #88F907 !important;
+/*    color: #88F907 !important;*/
+     color: #fff !important;
 
     font-size: 1.4em;
     letter-spacing: 1px;
@@ -136,7 +137,9 @@ p {
 }
 
 .nav > li a:hover {
-    color: #ffffff !important;
+    display: block;
+    background: #fff !important;
+    color: #2E78B7 !important;
 }
 /*
 .nav li.current a {
@@ -148,14 +151,20 @@ p {
 }  
 */
 .nav li.current a {
-    color: #ffffff !important; 
+/*    color: #ffffff !important; */
+    color: #2E78B7 !important;
+/*
     margin-right: -15px;
     margin-left: -15px;
+*/
 }
 
 .nav li.current {
-    border-bottom: 4px solid #fff;
-    margin: 0 15px 3px; 
+/*    border-bottom: 4px solid #fff;*/
+/*    margin: 0 15px 3px; */
+    display: block;
+    background: #fff;
+    
 } 
 
 .gg-dropd-menu {
@@ -253,7 +262,10 @@ p {
 /*    color: #00D646;*/
 /*    color: #B7D2EC;*/
 /*    color: #00386F;*/
-    color: #88F907;
+/*    color: #88F907;*/
+    color: #AFD9FD;
+    
+   
 }
 
 /*  -- Homepage --  */
