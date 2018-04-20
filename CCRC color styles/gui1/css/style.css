@@ -212,7 +212,7 @@ p {
 /*    background-color: #2E78B7;*/
 /*    background-color:#00386F;*/
 /*    background: linear-gradient(#89C3FD, #4777A6);*/
-    color: white; 
+    color: #fff; 
     font-size: 1.2em; 
     font-family: "Verdana", "Geneva", sans-serif; 
     z-index: 9;
@@ -240,11 +240,12 @@ p {
 .copyrights a,
 .grant a, 
 .policy ul li a {
-    color: #c6c7ca;
+/*    color: #c6c7ca;*/
 /*    color: #013086;*/
 /*    color: #88F907;*/ 
 /*    color: #45BFFF;*/
 /*    color: #ddd;*/
+    color: #AFD9FD;
 }
 
 /*  -- Homepage --  */
@@ -411,11 +412,13 @@ p {
 }
 
 input:checked + .slider {
-    background-color: #3277b7;
+/*    background-color: #3277b7;*/
+    background-color: #2E78B7;
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #3277b7;
+/*    box-shadow: 0 0 1px #3277b7;*/
+    box-shadow: 0 0 1px #2E78B7;
 }
 
 input:checked + .slider:before {
@@ -548,7 +551,7 @@ label {
 
 .about-heading {
     color: #035AAF; 
-    color: #2E78B7;
+/*    color: #2E78B7;*/
 }
 
 .cover {
