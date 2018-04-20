@@ -102,7 +102,8 @@ p {
     font-family: "Verdana", "Geneva", sans-serif;
 /*    color: #ddd !important;*/
     /*    color: #00386F !important;*/
-    color: #00D646 !important;
+/*    color: #00D646 !important;*/
+    color: #88F907 !important;
     font-size: 1.4em;
     letter-spacing: 1px;
 /*    font-weight: 600;*/
@@ -233,7 +234,8 @@ p {
 .policy ul li a {
 /*    color: #c6c7ca;*/
 /*    color: #013086;*/
-    color: #00D646;
+/*    color: #00D646;*/
+    color: #88F907;
 }
 
 /*  -- Homepage --  */
