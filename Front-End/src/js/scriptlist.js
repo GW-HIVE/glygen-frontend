@@ -99,7 +99,9 @@ function redirectPage1()
          
          $(document).ready(function(){
     $("demosearch").tooltip();
-}); 
+});
+
+
 
 function editSearch(){
   {
