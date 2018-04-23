@@ -24,19 +24,27 @@ var sort = 'id';
 var dir = 'asc';
 var url = getWsUrl('list') + "?action=get_user";
 var limit = 10;
-
+/**
+ * Reads a new limit and reloads the data.
+ * @param {domNode} element - The element from which we take the new limit value
+ */
 function xlimit(element) {
  limit = $(element).val();
  $('.limit-select').val(limit);
  LoadData();
 }
 
+/**
+ * Loads the next page of results
+ */
 function next() {
 page = page + 1;
   $(".page-select").val(page);
   LoadData();
 }
-
+/**
+ * Loads the Previous page of results
+ */
 function prev() {
   if (page > 1) {
     page = page - 1;
@@ -45,11 +53,20 @@ function prev() {
   }
 }
 
+/**
+ * Reads a new page and reloads the data.
+ * @param {domNode} element - The element from which we take the new page value
+ */
 function xpage(element) {
  page = $(element).val();
  $('.page-select').val(page);
  LoadData();
 }
+
+/**
+ * Reads a new sort and reloads the data.
+ * @param {domNode} element - The element from which we take the new sort value
+ */
 
 function xsort(element) {
  sort = $(element).val();
@@ -57,16 +74,35 @@ function xsort(element) {
  LoadData();
 }
 
+/**
+ * Reads a new asc/dec dirction for data  and reloads the data.
+ * @param {domNode} element - The element from which we take the new direction value
+ */
+
 function xdir(element) {
  dir = $(element).val();
  $('.dir-select').val(dir);
  LoadData();
 }
 
+/**
+ * its calculate no of pages using limit and total_length.
+ * @param {integer} total_length - The total_length is total number of records
+ * @param {integer} limit - The limit is records per page 
+ * @returns {number} Number of pages
+ */
 function noOfPage(total_length,limit){
  var size = Math.ceil(total_length / limit);
  return size;
 }
+
+
+/**
+ * it creates user interface for pagination for dropdown
+ * @param {Object} paginationInfo - the dataset of pagination info is retun from server
+ * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
+ * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
+ */
 
 function buildPages(paginationInfo){
  var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
@@ -79,14 +115,26 @@ function buildPages(paginationInfo){
  pageSelectors.val(page);
 }
 
+
+/**
+ * it creates user interface for summary
+ * @param {Object} queryInfo - the dataset of pagination info is retun from server
+ * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
+ * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
+ */
+
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time).format("MM-DD-YYYY");
+ queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY");
 
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
 }
 
+
+/**
+ * Redirect to Page index page or search back
+ */
 function redirectPage1()
          {
          window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
@@ -97,11 +145,13 @@ function redirectPage1()
          } 
          
          
-         $(document).ready(function(){
+     $(document).ready(function(){
     $("demosearch").tooltip();
 });
 
-
+/**
+ * Redirect to  searchPage with id after clicking editSearch
+ */
 
 function editSearch(){
   {
@@ -184,50 +234,31 @@ function DetailFormat(index, row) {
 
 
 
-// var lastSearch;
+var lastSearch;
 
 
-// function searchAgain() {
-//   console.log(lastSearch.query);
-//   $.ajax({
-//     method: 'GET',
-//     dataType: "json",
-//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
-//     success: function (result) {
-//       if (result.search_results_id) {
-//         console.log(result);
-//         window.location = 'listpage.html?id=' + result.search_results_id;
-//       } else {
-//         // handle if no results
-//       }
-//     },
-//     error: ajaxFailure
-//   });
-// }
+function searchAgain() {
+  //console.log(lastSearch.query);
+  $.ajax({
+    method: 'GET',
+    dataType: "json",
+    url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
+    success: function (result) {
+      if (result.search_results_id) {
+        //console.log(result);
+        window.location = 'listpage.html?id=' + result.search_results_id;
+      } else {
+        // handle if no results
+      }
+    },
+    error: ajaxFailure
+  });
+}
 
 
 
 
-// var updateSearch;
 
-// function editSearch() {
-//   console.log(updateSearch.query);
-//   $.ajax({
-//     method: 'GET',
-//     dataType: "json",
-//     url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/list?query=' + JSON.stringify(updateSearch.query),
-//     success: function (result){
-//     if (result.edit_results_id) {
-//       console.log(result);
-//       // window.location = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id;
-//       window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
-//     } else {
-//       // handle if no results
-//     }
-//   },
-//   error: ajaxFailure
-// });
-// }
 
 function editSearch() {
   {
@@ -235,19 +266,19 @@ function editSearch() {
     }
 }
 
+
+
 /**
-
- * Call server for data
-
- * @param {int} id - The id of the user
-
+ * Handling a succesful call to the server for list page
+ * @param {Object} data - the data set returned from the server on success
+ * @param {Array} data.results - Array of individual results
+ * @param {Object} data.pagination - the dataset for pagination info
+ * @param {Object} data.query - the dataset for query
  */
 
 function ajaxSuccess(data) {
  var $table = $('#gen-table');
  var items = [];
- //number of elements
- // console.log(data);
  if (data.results) {
  for (var i = 0; i < data.results.length; i++) {
  var glycan = data.results[i];
@@ -262,11 +293,9 @@ function ajaxSuccess(data) {
  glycoct: glycan.glycoct
  });
  }
-//  buildSummary(data.query);
+
  $table.bootstrapTable('removeAll');
  $table.bootstrapTable('append', items);
-
- //$('[data-toggle="popover"]').popover();
 
  $('#error-message').hide();
  }
@@ -275,16 +304,24 @@ function ajaxSuccess(data) {
 
  buildSummary(data.query);
 
- lastSearch = data;
- updateSearch=data;
+ document.title='glycanlist';
+//  lastSearch = data;
+//  updateSearch=data;
 }
 
-
+/// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxFailure() {
  $('#error-message').show();
 }
 
-function LoadData() {
+/**
+
+ * LoadData function to configure and start the request to GWU  service
+
+ * @param {string} id - The glycan id to load
+ * */
+
+function LoadData(id) {
 
  var ajaxConfig = {
  dataType: "json",
@@ -294,9 +331,22 @@ function LoadData() {
  success: ajaxSuccess,
  error: ajaxFailure
  };
+
+ 
  // make the server call
  $.ajax(ajaxConfig);
 }
+
+/**
+
+ * getParameterByName function to EXtract query parametes from url
+
+ * @param {string} name - The name of the variable variable to extract from query string
+
+ * @param {string} url- The complete url with query string values
+ * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
+ */
+
 
 function getParameterByName(name, url) {
  if (!url) url = window.location.href;

@@ -29,7 +29,12 @@ function getWsUrl(request, id){
    }
    
 
-   
+
+   /**
+    * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
+ 
+     * @param {string} id -  serach ID
+  */
    
    function getListPostData(id, page, sort, dir, limit)
    {

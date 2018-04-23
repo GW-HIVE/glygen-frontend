@@ -9,9 +9,11 @@
 
 
 /**
- * @param {data} ajax (the callback function)to GWU service
+ * Handling a succesful call to the server for details page
+ * @param {Object} data - the data set returned from the server on success
+
+ 
  */
-//  * Returns the GWU services returns.
 function ajaxSuccess(data) {
   var template = $('#item_template').html();
   data.hasMotifs = (data.motifs && (data.motifs.length > 0));
