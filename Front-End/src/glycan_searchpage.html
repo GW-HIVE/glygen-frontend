@@ -5,9 +5,10 @@
  -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
     <meta charset="utf-8">
     <meta name="description" content="Search for glycan structures based on their GlyTouCan registry IDs, native mass, glycan type or organism. It is also possible to search for glycans based on enzymes that have been involved in the biosynthesis or proteins that this glycan was attached to">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,13 +16,15 @@
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
     <title>Glycan Search</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="http://glycomics.ccrc.uga.edu/ggtest/gui/css/searchpage.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css"
+        type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <link href="css/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
 </head>
+
 <body>
     <script src="js/nouislider.min.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -31,8 +34,8 @@
         <h3 style="text-align: center"> Glycan Search </h3>
         <form id="myForm" name="myForm">
             Glycan ID:
-            <input type="text" id="GlycanID" name="GlycanID" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
-            <br> 
+            <input type="text" id="glycan_id" name="glycan_id" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
+            <br>
             <!-- First range-->
             Glycan Size:
             <div class="form-group row">
@@ -56,7 +59,7 @@
                     <div id="lower-value1"> </div>
                 </div>
                 <div class="col-xs-10">
-                    Native Mass(range)
+                    Native Sugar(range)
                     <div id="slider1"> </div>
                 </div>
                 <div class="col-xs-1">
@@ -76,26 +79,23 @@
             <select id="ddl2">
             </select>
             <br> Glycoprotein ID:
-            <input type="text" class="form-control proteinid" name="ProteinID" id="proteinid"  onchange="proteinid()"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+            <input type="text" class="form-control proteinid" name="ProteinID" id="proteinid" onchange="proteinid()" placeholder="Provide the Uniprot protein ID of a glycoprotein">
             <br> Glycan Motif:
-            <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  onchange="motif()"     placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
+            <input type="text" name="GlycanMotif" class="form-control motif" id="motif" onchange="motif()" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
             <br> Enzyme:
             <input type="text" name="Enzyme" id="enzyme" class="form-control enzyme" onchange="enzyme()" placeholder="Biosynthetic Enzyme">
             <br>
             <br>
-            <!-- <input type="submit" name="search" value="search" id="submit"> -->
-             <button onclick="submitvalues()">Search</button> 
+            <input type="button" class="button-default" value="search" onclick="submitvalues()">
             <br>
         </form>
     </div>
     <div w3-include-html="footer.html"></div>
- <script src="js/navbar.js"></script> 
-
-    <script type="text/javascript" src="js/glycan_searchpage.js"></script>  
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+    <script src="js/navbar.js"></script>
+    <script type="text/javascript" src="js/glycan_searchpage.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    <script src="js/activity_tracker.js"></script>
+    <script type="text/javascript" src="js/ws_url.js"></script>
 </body>
+
 </html>
