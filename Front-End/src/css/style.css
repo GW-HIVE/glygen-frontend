@@ -66,33 +66,14 @@ p {
 
 /*---Header --- */
 
-/*
-#logo2 {
-  
-    padding-top: 0;
-    padding-left: 35px;
-    padding-right: 15px; 
-    
-    
-}
-*/
-
-/*
-.gg-brand2 {
-    padding: 0 0 55px; 
-}
-*/
-
 .navbar-brand {
-    padding: 9px 35px 3px 35px;
-     vertical-align: middle;
+    padding: 9px 25px 3px 25px;
+    vertical-align: middle;
     text-align: center;
 }
+
 .gg-navbar {
-        background: #5f5f5f;
-/*    background: #5A99D8;*/
-/*    border-color: #5f5f5f;*/
-/*    border-color: #89C3FD;*/
+    background: #5f5f5f;
     border: none;
     border-radius: 0 !important;
     margin-bottom: 30px;
@@ -105,15 +86,23 @@ p {
 .gg-nav-item a { 
     font-family: "Verdana", "Geneva", sans-serif;
     color: #fff !important;
-/*    color: #ddd !important;*/
-/*   color: #c6c7ca !important;*/
-/*        color: #00386F !important;*/
-/*    color: #88F907 !important;*/
-/*    color: #45BFFF !important;*/
-/*    color: #45A6FA !important;*/
     font-size: 1.1em;
     letter-spacing: 0.5px;
     font-weight: 600;
+}
+
+@media only screen and (max-width: 1350px) {
+    .gg-nav-item a { 
+        font-size: 1em;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .gg-nav-item a { 
+        font-size: 0.85em;
+        font-weight: 600;
+    }
 }
 
 .gg-navbar-inverse .gg-nav-nav>.open>a, 
@@ -125,7 +114,7 @@ p {
 /*    color: #5A99D8 !important;*/
 /*    color: #2E78B7 !important;*/
 /*    background-color: #2E78B7;*/
-  padding: 15px;
+  padding: 14px;
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
@@ -136,7 +125,7 @@ p {
     background: #2E78B7 !important;
     color: #ffffff !important;
 /*    color: #2E78B7 !important;*/
-     padding-bottom: 19px;
+/*     padding-bottom: 19px;*/
 }
 /*
 .nav li.current a {
@@ -150,7 +139,7 @@ p {
 .nav li.current a {
     color: #ffffff !important; 
     background: #2E78B7;
-    padding-bottom: 19px;
+/*    padding-bottom: 19px;*/
     display: inline-block;
     border-right: 5px solid #5f5f5f;
     border-left: 5px solid #5f5f5f;
@@ -317,10 +306,13 @@ p {
                  
 .gg-panel-links a {
     text-decoration: none !important;
-    padding-top:20px;
-    font-weight:600;  
+    padding-top: 20px;
+    font-weight: 600;  
 } 
 
+.home-headings {
+    margin-top: 10px;
+}
 /* -- Alert -- */
 
 .gg-alert {
@@ -354,8 +346,9 @@ p {
 } 
       
 .gg-btn-margin {
-    margin-right: 20px;
-    margin-left: 40px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
 }    
     
 /* The Close alert Button */
@@ -384,9 +377,7 @@ p {
         border-radius: 1em;
     }
     @media (max-width: 700px) {
-        body {
-            background-color: #fff;
-        }
+
          .gg-settings  {
             width: auto;
             margin: 0 auto;
