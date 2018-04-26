@@ -300,7 +300,7 @@ function ajaxSuccess(data) {
  buildSummary(data.query);
 
  document.title='glycan-list';
-/ lastSearch = data;
+lastSearch = data;
 //  updateSearch=data;
 }
 
