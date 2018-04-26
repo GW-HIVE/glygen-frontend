@@ -300,8 +300,8 @@ function ajaxSuccess(data) {
  buildSummary(data.query);
 
  document.title='glycan-list';
-lastSearch = data;
-//  updateSearch=data;
+  lastSearch = data;
+
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
