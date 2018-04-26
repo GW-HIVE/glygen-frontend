@@ -241,7 +241,7 @@ function updateSearch() {
         success: function (result) {
             if (result.search_results_id) {
                 console.log(result);
-                window.location = 'listpage.html?id=' + result.search_results_id;
+                window.location = 'glycan-list.html?id=' + result.search_results_id;
             } else {
                 // handle if no results
             }
