@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/glycan-list.css">
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/glycan-detail.css">
 
@@ -125,7 +126,7 @@
                 <p align="center">
                      <a href="#" data-toggle="tooltip" data-placement="left"
        title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
-       class="red-tooltip"><button type="button" class="btn btn-default" id="demosearch"onclick="searchAgain();">Update Search</button></a>
+       class="red-tooltip"><button type="button" class="btn btn-default" id="demosearch"onclick="updateSearch();">Update Search</button></a>
                     &nbsp;  &nbsp;  &nbsp;  &nbsp;  
                     <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
                 </p> 
@@ -229,7 +230,7 @@
         <!-- script for getting Web Service URLs -->
         <script type="text/javascript" src="js/glycan-list.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" src="js/alertify.js"></script>
         <script src="js/activity_tracker.js"></script>
         <!-- script for logging activity -->
         <script src="js/navbar.js"></script>
