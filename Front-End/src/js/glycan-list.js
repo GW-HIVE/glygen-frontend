@@ -125,7 +125,7 @@ function buildPages(paginationInfo){
 
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY");
+ queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
 
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
