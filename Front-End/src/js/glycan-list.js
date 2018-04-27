@@ -125,7 +125,7 @@ function buildPages(paginationInfo){
 
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY");
+ queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
 
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
@@ -300,8 +300,8 @@ function ajaxSuccess(data) {
  buildSummary(data.query);
 
  document.title='glycan-list';
-lastSearch = data;
-//  updateSearch=data;
+  lastSearch = data;
+
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
