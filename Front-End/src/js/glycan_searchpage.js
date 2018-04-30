@@ -70,6 +70,14 @@ $(document).ready(function () {
         var mass_max = result.glycan_mass.max;
         var mass_min = result.glycan_mass.min;
         mass(mass_min, mass_max)
+
+
+        // check for Id to see if we need to load search values
+        var id = getParameterByName('id') || id;
+
+        if(id){
+            LoadSearchvalues(id);
+        }
     });
 });
 
