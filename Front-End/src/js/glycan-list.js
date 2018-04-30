@@ -271,42 +271,67 @@ function editSearch() {
  * @param {Object} data.query - the dataset for query
  */
 
+//  function ajaxSuccess(serverResponse) {
+//     handleError(serverResponse, function (data) {
+//         var $table = $('#gen-table');
+//         var items = [];
+//         if (data.results) {
+//         for (var i = 0; i < data.results.length; i++) {
+//         var glycan = data.results[i];
+
+//         items.push({
+//             id: glycan.id,
+//             mass: glycan.mass,
+//             number_proteins: glycan.number_proteins,
+//             number_enzymes: glycan.number_enzymes,
+//             number_sugar: glycan.number_sugar,
+//             iupac: glycan.iupac,
+//             glycoct: glycan.glycoct
+//         });
+//     });
+//  }
+
 function ajaxSuccess(data) {
- var $table = $('#gen-table');
- var items = [];
- if (data.results) {
- for (var i = 0; i < data.results.length; i++) {
- var glycan = data.results[i];
+    if (data.code) {
+        displayErrorByCode(data.code);
+    } else {
+        var $table = $('#gen-table');
+        var items = [];
+        if (data.results) {
+            for (var i = 0; i < data.results.length; i++) {
+                var glycan = data.results[i];
 
- items.push({
- id: glycan.id,
- mass: glycan.mass,
- number_proteins: glycan.number_proteins,
- number_enzymes: glycan.number_enzymes,
- number_sugar: glycan.number_sugar,
- iupac: glycan.iupac,
- glycoct: glycan.glycoct
- });
- }
+                items.push({
+                    id: glycan.id,
+                    mass: glycan.mass,
+                    number_proteins: glycan.number_proteins,
+                    number_enzymes: glycan.number_enzymes,
+                    number_sugar: glycan.number_sugar,
+                    iupac: glycan.iupac,
+                    glycoct: glycan.glycoct
+                });
+            }
+        }
 
- $table.bootstrapTable('removeAll');
- $table.bootstrapTable('append', items);
+        $table.bootstrapTable('removeAll');
+        $table.bootstrapTable('append', items);
 
- $('#error-message').hide();
- }
+        //  $('#error-message').hide();
 
- buildPages(data.pagination);
+        buildPages(data.pagination);
 
- buildSummary(data.query);
+        buildSummary(data.query);
 
- document.title='glycan-list';
-  lastSearch = data;
+        document.title='glycan-list';
+        lastSearch = data;
+    }
 
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxFailure() {
- $('#error-message').show();
+//  $('#error-message').show();
+    displayErrorByCode('server_down');
 }
 
 /**
