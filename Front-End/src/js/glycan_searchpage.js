@@ -2,51 +2,86 @@
 //  @description: UO1 Version-1.1
 //  @Date: 19th Feb 2018
 
-//Functions to auto complete and retrieve the values from JSON
-//protein autocomple:
-function proteinid() {
-    var protein_id = document.getElementById("protein_id").value;
-    //alert(protein_id)
-    var proteinobj = {
-        field: "protein",
-        value: protein_id
-    }
-    var proteinjson =  "query=" +JSON.stringify(proteinobj);
-    $.ajax({
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/typehead', // path to protein WS
-        method: 'post', // POST request 
-        data: proteinjson, //post user input
-        success: function (data) {
-            alert("data");
-          //  $("#result").html("Successful");
-        },
-        error: function (error) {
-            alert("error");
-        }
-    });
+
+
+/** Protein field on change detect and suggest auto complete options from retrieved Json
+ * @proteinjson - forms the JSON to post
+ * @data-returns the protein ID's
+ * 
+*/ 
+$('#protein').on('input',function(){
+    var protein_id = document.getElementById("protein").value;
+var proteinobj = {
+    field: "protein",
+    value:  protein_id
 }
-
-
-//Motif autocomplete
-function motif() {
-    var motif = document.getElementById("motif").value;
-    $.getJSON('http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/typehead?query={"field":"motif","value":"' + motif + '"}', function (data) {
+var proteinjson = "query=" + JSON.stringify(proteinobj);
+$.ajax({
+    url: getWsUrl("typehead"), // path to protein WS
+    method: 'post', // POST request 
+    data: proteinjson, //post user input on change
+    success: function (data) {
         //data is the JSON string
         $(function () {
-            $(".motif").autocomplete({
+            $(".protein").autocomplete({
                 source: function (request, response) {
                     var results = $.ui.autocomplete.filter(data, request.term);
                     response(results.slice(0, 5));
                 }
             });
         });
-    });
-}
+    },
+});
+});
 
-//Enzyme autocomplete
-function enzyme() {
-    var enzyme = document.getElementById("enzyme").value;
-    $.getJSON('http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/typehead?query={"field":"enzyme","value":"' + enzyme + '"}', function (data) {
+/** Motif field on change detect and suggest auto complete options from retrieved Json
+ * @Motifjson - forms the JSON to post
+ * @data-returns the Motifs
+ * 
+*/ 
+    $('#motif').on('input',function(){
+        var motif_id = document.getElementById("motif").value;
+    var motifobj = {
+        field: "motif",
+        value:  motif_id
+    }
+    var motifjson = "query=" + JSON.stringify(motifobj);
+    $.ajax({
+        url: getWsUrl("typehead"), // path to protein WS
+        method: 'post', // POST request 
+        data: motifjson, //post user input on change
+        success: function (data) {
+            //data is the JSON string
+            $(function () {
+                $(".motif").autocomplete({
+                    source: function (request, response) {
+                        var results = $.ui.autocomplete.filter(data, request.term);
+                        response(results.slice(0, 5));
+                    }
+                });
+            });
+        },
+    });
+    });
+
+
+/** enzyme field on change detect and suggest auto complete options from retrieved Json
+ * @enzymejson - forms the JSON to post
+ * @data-returns the enzymes
+ * 
+*/ 
+$('#enzyme').on('input',function(){
+    var enzyme_id = document.getElementById("enzyme").value;
+var enzymeobj = {
+    field: "enzyme",
+    value:  enzyme_id
+}
+var enzymejson = "query=" + JSON.stringify(enzymeobj);
+$.ajax({
+    url: getWsUrl("typehead"), // path to protein WS
+    method: 'post', // POST request 
+    data: enzymejson, //post user input on change
+    success: function (data) {
         //data is the JSON string
         $(function () {
             $(".enzyme").autocomplete({
@@ -56,14 +91,18 @@ function enzyme() {
                 }
             });
         });
-    });
-}
+    },
+});
+});
 
-// functions for dropdowns organism 
+/** functions for dropdowns organism 
+ * get organism drop down values for search form
+ */
+ 
 var mass_max;
 var mass_min;
 $(document).ready(function () {
-    $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search_init", function (result) {
+    $.getJSON(getWsUrl("search_init"), function (result) {
         $(".organism").append("<option>" + result.organism[0] + "</option>");
         $(".organism").append("<option>" + result.organism[1] + "</option>");
         $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
@@ -74,7 +113,7 @@ $(document).ready(function () {
 });
 
 
-// sugar range
+//Sugar mass value
 var nonLinearSlider1 = document.getElementById('slider1');
 noUiSlider.create(nonLinearSlider1, {
 
@@ -96,7 +135,10 @@ nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
     nodes1[handle].innerHTML = values[handle];
 });
 
-//Mass range function
+/** Mass range function
+ * @param {numeric} mass_min - minimum value of the mass range
+ * @param {numeric} mass_max - maximum value of the mass range
+ */
 function mass(mass_min, mass_max) {
     var nonLinearSlider = document.getElementById('slider');
     noUiSlider.create(nonLinearSlider, {
@@ -108,7 +150,7 @@ function mass(mass_min, mass_max) {
             'max': mass_max
         }
     });
-   // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
+    // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
     var nodes = [
         document.getElementById('lower-value'), // 0
         document.getElementById('upper-value')  // 1
@@ -121,26 +163,27 @@ function mass(mass_min, mass_max) {
 
 }
 
-//glycan sub type dropdown function based on type field
+/** glycan sub type dropdown function based on type field
+ * @param {numeric} ddl1 - User selected glycan type 
+ * @param {numeric} ddl2 - Glycan sub type 
+ */
 
 function configureDropDownLists(ddl1, ddl2) {
     var nglycan;
     var oglycan;
     // var nglycan={};
-    $.getJSON("http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search_init", function (result) {
+    $.getJSON(getWsUrl("search_init"), function (result) {
         nglycan = result.glycan_type[0].subtype;
         // oglycan = result.glycan_type[1].subtype;
         dataReady();
     });
     function dataReady() {
-        //document.write(nglycan);
         switch (ddl1.value) {
             case 'N-glycan':
                 ddl2.options.length = 0;
                 for (i = 0; i < nglycan.length; i++) {
                     createOption(ddl2, nglycan[i], nglycan[i]);
                 }
-                // alert(nglycan)
                 break;
             case 'O-glycan':
                 ddl2.options.length = 0;
@@ -160,7 +203,9 @@ function createOption(ddl, text, value) {
     opt.text = text;
     ddl.options.add(opt);
 }
-//function to Convert form values to JSON 
+
+/** On submit, function forms the JSON and submits to the search web services
+ */
 function submitvalues() {
     var query_type = "search_glycan";
     var mass_slider = document.getElementById("slider").noUiSlider.get();
@@ -169,7 +214,7 @@ function submitvalues() {
     var organism = document.getElementById("organism").value;
     var glycantype = document.getElementById("ddl").value;
     var glycansubtype = document.getElementById("ddl2").value;
-    var proteinid = document.getElementById("protein_id").value;
+    var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
     var motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], organism, glycantype, glycansubtype, enzyme, proteinid, motif);
@@ -183,6 +228,21 @@ function submitvalues() {
         }
     });
 }
+
+/** Forms searchjson from the form values submitted
+ * @param input_query_type query search
+ * @param input_glycan_id user glycan id input
+ * @param mass_min user mass min input
+ * @param mass_max user mass max input
+ * @param input_organism user organism input 
+ * @param input_glycantype user glycan_type input
+ * @param input_glycansubtype user glycan_subtype input
+ * @param input_enzyme user enzyme input
+ * @param input_proteinid user protein_id input
+ * @param input_motif user motif input
+ */
+
+
 //form json from form submit
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
     var formjson = {
