@@ -1,11 +1,9 @@
 function getWsUrl(request, id){
-    
-    
+        
     var ws_base ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
     var ws_logging = "http://glycomics.ccrc.uga.edu/ggtest/service/Logging.php"; //ws_base+"Logging.php";
     var ws_userID = ws_logging;
     
-   
     switch (request) {
     case "generate_ID":
     return ws_userID;
@@ -21,6 +19,12 @@ function getWsUrl(request, id){
     break;
     case "detail":
     return ws_base +"/detail/" + id;
+    break;
+    case "typehead":
+    return ws_base +"/typehead";
+    break;
+    case "search_init":
+    return ws_base +"/search_init";
     break;
     default:
     return "";
