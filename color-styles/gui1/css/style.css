@@ -113,7 +113,7 @@ p {
 /*    color: #00386F !important;*/
 /*    color: #5A99D8 !important;*/
 /*    color: #2E78B7 !important;*/
-/*    background-color: #2E78B7;*/
+    background-color: #2E78B7;
   padding: 14px;
 }
 
@@ -127,6 +127,8 @@ p {
 /*    color: #2E78B7 !important;*/
 /*     padding-bottom: 19px;*/
 }
+
+
 /*
 .nav li.current a {
     color: #ffffff !important; 
@@ -136,11 +138,11 @@ p {
     margin-left: 15px;
 }  
 */
+
 .nav li.current a {
     color: #ffffff !important; 
     background: #2E78B7;
-/*    padding-bottom: 19px;*/
-    display: inline-block;
+/*    display: inline-block;*/
     border-right: 5px solid #5f5f5f;
     border-left: 5px solid #5f5f5f;
 /*
@@ -151,9 +153,7 @@ p {
 
 .nav li.current {
 /*    background: #2E78B7;*/
-/*    background: #035AAF;*/
- 
-   
+/*    background: #035AAF;*/  
 /*
     border-bottom: 4px solid #fff;
     margin: 0 15px 3px; 
@@ -175,9 +175,10 @@ p {
     color: #fff !important;
     background-color: #2E78B7 !important; 
      padding-bottom: 3px;
-/*     padding-top: 5px;*/
 }
-
+.gg-dropd-menu .current li a {
+    
+}
 .gg-form {
     font-family: "Verdana", "Geneva", sans-serif;
 /*    font-size: 14px;*/
