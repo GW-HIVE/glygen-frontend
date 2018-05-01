@@ -21,8 +21,9 @@
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <link href="css/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-
+     <link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+ 
 </head>
 
 <body>
@@ -79,11 +80,11 @@
             <select id="ddl2">
             </select>
             <br> Glycoprotein ID:
-            <input type="text" class="form-control proteinid" name="ProteinID" id="protein_id" onchange="proteinid()" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+            <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
             <br> Glycan Motif:
-            <input type="text" name="GlycanMotif" class="form-control motif" id="motif" onchange="motif()" placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
+            <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
             <br> Enzyme:
-            <input type="text" name="Enzyme" id="enzyme" class="form-control enzyme" onchange="enzyme()" placeholder="Biosynthetic Enzyme">
+            <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Biosynthetic Enzyme">
             <br>
             <br>
             <input type="button" class="button-default" value="search" onclick="submitvalues()">
@@ -91,12 +92,21 @@
         </form>
     </div>
     <div w3-include-html="footer.html"></div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
     <script src="js/navbar.js"></script>
     <script type="text/javascript" src="js/glycan_searchpage.js"></script>
-    <!--<script type="text/javascript" src="js/edit-search.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="js/activity_tracker.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
+    <script type="text/javascript" src="js/editsearch.js"></script>
+
 </body>
 
 </html>

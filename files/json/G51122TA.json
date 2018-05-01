@@ -2,6 +2,22 @@
   "glycan_id": "G51122TA",
   "residues": [
      {
+       "name": "Fuc",
+       "residue_id": "NE100",
+       "fullName": "N-glycan_a-L-Fucp_E100",
+       "anomer": "a",
+       "absolute": "L",
+       "ring": "p",
+       "site": "-1",
+       "parent": "NA",
+       "shape": "triangle",
+       "color": "#ED1C24",
+       "pubChem": "Fuc",
+       "enzymes":  [
+
+       ]
+     },
+     {
        "name": "GlcNAc",
        "residue_id": "NA",
        "fullName": "N-glycan_core_b-D-GlcpNAc_A",
@@ -13,22 +29,6 @@
        "shape": "square",
        "color": "#0090BC",
        "pubChem": "GlcNAc",
-       "enzymes":  [
-
-       ]
-     },
-     {
-       "name": "Fuc",
-       "residue_id": "2",
-       "fullName": "unassigned",
-       "anomer": "a",
-       "absolute": "L",
-       "ring": "p",
-       "site": "-1",
-       "parent": "NA",
-       "shape": "triangle",
-       "color": "#ED1C24",
-       "pubChem": "Fuc",
        "enzymes":  [
 
        ]
