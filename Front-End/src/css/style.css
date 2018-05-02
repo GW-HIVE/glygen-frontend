@@ -526,15 +526,20 @@ label {
 }
 
 .about-heading {
-/*    color: #00386F; */
-    color: #035AAF; 
+    color: #00386F; 
+/*    color: #035AAF; */
 }
 
 .about-link {
-    color: #035AAF;
+/*    color: #035AAF;*/
 /*    color: #4A4A4A;*/
-   
+/*    color: #337ab7;*/
+    color: #00386F;
     text-decoration: none !important;
+}
+
+.about-link:hover {
+    color: #337ab7;
 }
 
 .cover {
@@ -546,7 +551,6 @@ label {
     height: 350px;
     padding: 0 10%;
     box-shadow: inset 0 0 100px #ccc;
-
 }
 
 .cover-text {
@@ -562,31 +566,36 @@ label {
     letter-spacing: 1px;
 }
 
-/*
-@media (max-width: 800px) {
-    .cover {
-    background: rgba(0,0,0,1), url('../../images/sky.jpg') top center no-repeat;
-    background-size: cover;
-    display: table;
-    width: 100%;
-    height: 350px;
-    padding: 0 20%;
-    box-shadow: inset 0 0 100px #000;
-    }
-    .cover-text {
-        text-align: center;
-        color: #fff;
-        display: table-cell;
-        vertical-align: middle;
-    }
+/*Team members page*/
 
-    .cover-text h1 {
-        margin: 0;
-        font-size: 70px;
-        letter-spacing: -3px;
-    }
-} 
-*/
+
+.gg-team-cover {
+    margin: 0;
+    font-size: 1.2em;
+    letter-spacing: 1px; 
+    background: #00386F;
+    padding: 1% 20%;
+    box-shadow: inset 0 0 80px #ccc;
+}
+
+.gg-team-member {
+    margin-bottom: 50px;
+}
+
+.gg-team-panel {
+    display: block; 
+    background: #00386F;
+    height: 70px;
+    padding: 1% 4%;
+    vertical-align: middle;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+#team-member-img{
+    width: 200px;
+    height: 250px;
+}
 
 /**
     The page loading gif
