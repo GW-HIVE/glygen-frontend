@@ -23,7 +23,7 @@ var page = 1;
 var sort = 'id';
 var dir = 'asc';
 var url = getWsUrl('list') + "?action=get_user";
-var limit = 10;
+var limit =20;
 /**
  * Reads a new limit and reloads the data.
  * @param {domNode} element - The element from which we take the new limit value
@@ -290,11 +290,25 @@ function editSearch() {
 //         });
 //     });
 //  }
+//
+var id = getParameterByName('id') || id;
+
+
+LoadData(id);
+
 
 function ajaxSuccess(data) {
+    // console.log(data);
+    //console.log(data.code);
     if (data.code) {
-        displayErrorByCode(data.code);
+        //console.log(data.code);
+        // displayErrorByCode(data.code);
     } else {
+        // var id = getParameterByName('id') || id;
+        //
+        //
+        // LoadData(id);
+
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
@@ -312,7 +326,11 @@ function ajaxSuccess(data) {
                 });
             }
         }
-
+        // var id = getParameterByName('id') || id;
+        //
+        //
+        // LoadData(id);
+        LoadData(id);
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 
@@ -352,7 +370,7 @@ function LoadData(id) {
  error: ajaxFailure
  };
 
- 
+// console.log(id);
  // make the server call
  $.ajax(ajaxConfig);
 }
@@ -379,7 +397,7 @@ function getParameterByName(name, url) {
 }
 
 
-var id = getParameterByName('id') || id;
-
-
-LoadData(id);
+// var id = getParameterByName('id') || id;
+//
+//
+// LoadData(id);
