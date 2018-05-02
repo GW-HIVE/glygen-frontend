@@ -57,21 +57,11 @@
 
 
 .img-cartoon2:hover {
-  z-index: 9999;
-  padding-left:10px;
-  padding: 0.5em;
-  width:500px;
-  /* overflow:hidden; */
-  overflow: scroll;
-  margin-top:20px;
-  margin-bottom:0px;
-  margin-left:0px;
-  padding-bottom:-2px;
-  padding-right:2px;
-  display: flex;
-  margin: 0 5px;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.0);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  z-index: 99999;
 }
 
 
