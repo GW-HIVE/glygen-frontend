@@ -292,22 +292,17 @@ function editSearch() {
 //  }
 //
 var id = getParameterByName('id') || id;
-
-
 LoadData(id);
 
 
 function ajaxSuccess(data) {
     // console.log(data);
-    //console.log(data.code);
+    console.log(data.code);
     if (data.code) {
         //console.log(data.code);
-        // displayErrorByCode(data.code);
+        displayErrorByCode(data.code);
     } else {
-        // var id = getParameterByName('id') || id;
-        //
-        //
-        // LoadData(id);
+        
 
         var $table = $('#gen-table');
         var items = [];
@@ -326,11 +321,11 @@ function ajaxSuccess(data) {
                 });
             }
         }
-        // var id = getParameterByName('id') || id;
-        //
-        //
-        // LoadData(id);
-        LoadData(id);
+       
+        
+        
+         LoadData(id);
+        
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 
