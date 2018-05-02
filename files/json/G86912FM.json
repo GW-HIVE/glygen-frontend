@@ -3,34 +3,34 @@
   "residues": [
      {
        "name": "GlcNAc",
-       "residue_id": "N11",
-       "fullName": "N-glycan_b-D-GlcpNAc_11",
-       "anomer": "b",
+       "residue_id": "NA",
+       "fullName": "N-glycan_core_b-D-GlcpNAc_A",
+       "anomer": "x",
        "absolute": "D",
        "ring": "p",
-       "site": "4",
-       "parent": "NC",
+       "site": "0",
+       "parent": "no_id",
        "shape": "square",
        "color": "#0090BC",
        "pubChem": "GlcNAc",
        "enzymes":  [
-          { "RefSeq": "Q10470"}
+
        ]
      },
      {
-       "name": "Man",
-       "residue_id": "N4",
-       "fullName": "N-glycan_a-D-Manp_4",
-       "anomer": "a",
+       "name": "GlcNAc",
+       "residue_id": "N2",
+       "fullName": "N-glycan_b-D-GlcpNAc_2",
+       "anomer": "b",
        "absolute": "D",
        "ring": "p",
-       "site": "6",
-       "parent": "NC",
-       "shape": "circle",
-       "color": "#00A651",
-       "pubChem": "Man",
+       "site": "2",
+       "parent": "N1",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
        "enzymes":  [
-          { "RefSeq": "Q9DBE8"}
+          { "RefSeq": "P27808"}
        ]
      },
      {
@@ -50,20 +50,67 @@
        ]
      },
      {
-       "name": "GlcNAc",
-       "residue_id": "N9",
-       "fullName": "N-glycan_b-D-GlcpNAc_9",
-       "anomer": "b",
+       "name": "Man",
+       "residue_id": "N1",
+       "fullName": "N-glycan_a-D-Manp_1",
+       "anomer": "a",
        "absolute": "D",
        "ring": "p",
-       "site": "6",
-       "parent": "N4",
-       "shape": "square",
-       "color": "#0090BC",
-       "pubChem": "GlcNAc",
+       "site": "3",
+       "parent": "NC",
+       "shape": "circle",
+       "color": "#00A651",
+       "pubChem": "Man",
        "enzymes":  [
-          { "RefSeq": "Q8R4G6"},
-          { "RefSeq": "Q765H6"}
+          { "RefSeq": "Q9DBE8"}
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "NE124",
+       "fullName": "N-glycan_a-D-Galp_E124",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "N3",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "NE132",
+       "fullName": "N-glycan_a-D-Galp_E132",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "N10",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "NE14",
+       "fullName": "N-glycan_a-D-Galp_E14",
+       "anomer": "a",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "N8",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+
        ]
      },
      {
@@ -86,34 +133,72 @@
      },
      {
        "name": "Gal",
-       "residue_id": "16",
-       "fullName": "unassigned",
-       "anomer": "a",
+       "residue_id": "N3",
+       "fullName": "N-glycan_b-D-Galp_3",
+       "anomer": "b",
        "absolute": "D",
        "ring": "p",
        "site": "4",
-       "parent": "N10",
+       "parent": "N2",
        "shape": "circle",
        "color": "#FFD400",
        "pubChem": "Gal",
        "enzymes":  [
-
+          { "RefSeq": "P15535"},
+          { "RefSeq": "Q9Z2Y2"},
+          { "RefSeq": "Q91YY2"}
+       ]
+     },
+     {
+       "name": "Gal",
+       "residue_id": "N8",
+       "fullName": "N-glycan_b-D-Galp_8",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "N7",
+       "shape": "circle",
+       "color": "#FFD400",
+       "pubChem": "Gal",
+       "enzymes":  [
+          { "RefSeq": "P15535"},
+          { "RefSeq": "Q9Z2Y2"},
+          { "RefSeq": "Q91YY2"}
        ]
      },
      {
        "name": "GlcNAc",
-       "residue_id": "NA",
-       "fullName": "N-glycan_core_b-D-GlcpNAc_A",
-       "anomer": "x",
+       "residue_id": "N11",
+       "fullName": "N-glycan_b-D-GlcpNAc_11",
+       "anomer": "b",
        "absolute": "D",
        "ring": "p",
-       "site": "0",
-       "parent": "no_id",
+       "site": "4",
+       "parent": "NC",
        "shape": "square",
        "color": "#0090BC",
        "pubChem": "GlcNAc",
        "enzymes":  [
-
+          { "RefSeq": "Q10470"}
+       ]
+     },
+     {
+       "name": "GlcNAc",
+       "residue_id": "N7",
+       "fullName": "N-glycan_b-D-GlcpNAc_7",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "N1",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
+       "enzymes":  [
+          { "RefSeq": "Q812G0"},
+          { "RefSeq": "Q812F8"},
+          { "RefSeq": "Q9D306"}
        ]
      },
      {
@@ -152,12 +237,12 @@
      },
      {
        "name": "Man",
-       "residue_id": "N1",
-       "fullName": "N-glycan_a-D-Manp_1",
+       "residue_id": "N4",
+       "fullName": "N-glycan_a-D-Manp_4",
        "anomer": "a",
        "absolute": "D",
        "ring": "p",
-       "site": "3",
+       "site": "6",
        "parent": "NC",
        "shape": "circle",
        "color": "#00A651",
@@ -168,104 +253,19 @@
      },
      {
        "name": "GlcNAc",
-       "residue_id": "N2",
-       "fullName": "N-glycan_b-D-GlcpNAc_2",
+       "residue_id": "N9",
+       "fullName": "N-glycan_b-D-GlcpNAc_9",
        "anomer": "b",
        "absolute": "D",
        "ring": "p",
-       "site": "2",
-       "parent": "N1",
+       "site": "6",
+       "parent": "N4",
        "shape": "square",
        "color": "#0090BC",
        "pubChem": "GlcNAc",
        "enzymes":  [
-          { "RefSeq": "P27808"}
-       ]
-     },
-     {
-       "name": "Gal",
-       "residue_id": "N3",
-       "fullName": "N-glycan_b-D-Galp_3",
-       "anomer": "b",
-       "absolute": "D",
-       "ring": "p",
-       "site": "4",
-       "parent": "N2",
-       "shape": "circle",
-       "color": "#FFD400",
-       "pubChem": "Gal",
-       "enzymes":  [
-          { "RefSeq": "P15535"},
-          { "RefSeq": "Q9Z2Y2"},
-          { "RefSeq": "Q91YY2"}
-       ]
-     },
-     {
-       "name": "Gal",
-       "residue_id": "7",
-       "fullName": "unassigned",
-       "anomer": "a",
-       "absolute": "D",
-       "ring": "p",
-       "site": "4",
-       "parent": "N3",
-       "shape": "circle",
-       "color": "#FFD400",
-       "pubChem": "Gal",
-       "enzymes":  [
-
-       ]
-     },
-     {
-       "name": "GlcNAc",
-       "residue_id": "N7",
-       "fullName": "N-glycan_b-D-GlcpNAc_7",
-       "anomer": "b",
-       "absolute": "D",
-       "ring": "p",
-       "site": "4",
-       "parent": "N1",
-       "shape": "square",
-       "color": "#0090BC",
-       "pubChem": "GlcNAc",
-       "enzymes":  [
-          { "RefSeq": "Q812G0"},
-          { "RefSeq": "Q812F8"},
-          { "RefSeq": "Q9D306"}
-       ]
-     },
-     {
-       "name": "Gal",
-       "residue_id": "N8",
-       "fullName": "N-glycan_b-D-Galp_8",
-       "anomer": "b",
-       "absolute": "D",
-       "ring": "p",
-       "site": "4",
-       "parent": "N7",
-       "shape": "circle",
-       "color": "#FFD400",
-       "pubChem": "Gal",
-       "enzymes":  [
-          { "RefSeq": "P15535"},
-          { "RefSeq": "Q9Z2Y2"},
-          { "RefSeq": "Q91YY2"}
-       ]
-     },
-     {
-       "name": "Gal",
-       "residue_id": "10",
-       "fullName": "unassigned",
-       "anomer": "a",
-       "absolute": "D",
-       "ring": "p",
-       "site": "4",
-       "parent": "N8",
-       "shape": "circle",
-       "color": "#FFD400",
-       "pubChem": "Gal",
-       "enzymes":  [
-
+          { "RefSeq": "Q8R4G6"},
+          { "RefSeq": "Q765H6"}
        ]
      }
   ]
