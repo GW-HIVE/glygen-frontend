@@ -46,13 +46,14 @@
 }
 
 .img-wrapper2{
-  -webkit-transform: scale(1.0);
-  transform: scale(0.8);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  box-shadow: 10px 10px 5px #ddd;
-  z-index: 99999;
-  /* display: flex; */
+  overflow:hidden;
+  z-index: -9999;
+  padding: 0.5em;
+  width:100%;
+  overflow:scroll;
+  margin-top:20px;
+  margin-bottom:0px;
+  width:500px;
 }
 
 
