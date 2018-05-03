@@ -362,9 +362,6 @@ p {
         border-radius: 1em;
     }
     @media (max-width: 700px) {
-        body {
-            background-color: #fff;
-        }
          .gg-settings  {
             width: auto;
             margin: 0 auto;
@@ -526,20 +523,23 @@ label {
 }
 
 .about-heading {
-    color: #00386F; 
+/*    color: #00386F; */
 /*    color: #035AAF; */
+    color: #2F78B7;
 }
 
 .about-link {
 /*    color: #035AAF;*/
 /*    color: #4A4A4A;*/
 /*    color: #337ab7;*/
-    color: #00386F;
+/*    color: #00386F;*/
+    color: #2F78B7;
     text-decoration: none !important;
 }
 
 .about-link:hover {
-    color: #337ab7;
+/*    color: #337ab7;*/
+    color: #00386F;
 }
 
 .cover {
@@ -567,7 +567,6 @@ label {
 }
 
 /*Team members page*/
-
 
 .gg-team-cover {
     margin: 0;
@@ -597,6 +596,42 @@ label {
     height: 250px;
 }
 
+/*
+.gg-world-map {
+   background: linear-gradient(rgba(47, 120, 183, 0), rgba(0, 0, 0, 0.0) ), url('../images/world-map-about.png') top center no-repeat;
+
+    background-size: cover;
+    display: table;
+    width: 50%;
+    height: 310px;
+    padding: 0 10%;
+    box-shadow: inset 0 0 100px #fff;
+}
+*/
+
+/*
+@media (max-width: 1024px) {
+         .gg-world-map  {
+            width: 410px;
+            margin: 0 auto;
+        }
+    }
+
+@media (max-width: 768px) {
+         .gg-world-map  {
+            width: 220px;
+            margin: 15px 20px ;
+        }
+    }
+@media (max-width: 375px) {
+         .gg-world-map  {
+            width: 50%;
+            height: 50%;
+            margin: -20px;
+             
+        }
+    }
+*/
 /**
     The page loading gif
     @author: Gaurav Agaarwal
