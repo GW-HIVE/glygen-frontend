@@ -1,7 +1,7 @@
 <!--
    @author: Rupali Mahadik
    @description: UO1 Version-1.1.
-   @Date:19th Feb 2018 - detail mustach works 
+   @Date:19th Feb 2018 - detail mustach works
    @Date:20th March 2018 - different side naviagtion update
    @Update: 17 April 2018
    -->
@@ -19,24 +19,24 @@
 
 
     <!-- Please do not change Sequence-->
-    
     <!-- CSS for sidenavgation-->
     <link rel="stylesheet" href="css/faq_style.css">
     <!-- CSS reset -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- boots style -->
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-     <!-- CSS common-->
-     <link rel="stylesheet" href="css/style.css"> 
-     <!--detail style -->
-     <link rel="stylesheet" type="text/css" href="css/glycan-detail.css">
-   
-    <script src="js/modernizr.js"></script>
+    <!-- CSS common-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--detail style -->
+    <link rel="stylesheet" type="text/css" href="css/glycan-detail.css">
     <!-- Modernizr -->
+    <script src="js/modernizr.js"></script>
+
 </head>
 
 <body>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <!--<script src="https://www.w3schools.com/lib/w3.js"></script>-->
+    <script type="text/javascript" src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
     <script>
         w3.includeHTML();
@@ -67,87 +67,83 @@
         </ul>
         <!-- cd-faq-categories -->
         <!-- main content for page -->
-        <div class="cd-faq-items" id="content"style="margin-bottom: 400px;">
+        <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
             <!-- added new class -->
             <!-- <div id="content" class="container" "> -->
             <script id="item_template" type="text/template">
                 <!-- Glycan ID starts here for page -->
 
-<ul id="basics" class="cd-faq-group selected">
-    <!-- added new class -->
-    <div class="panel panel-default ">
+                <ul id="basics" class="cd-faq-group selected">
+                    <!-- added new class -->
+                    <div class="panel panel-default ">
 
-        <div class="gg-panel-heading" "cd-faq-title">
-            <!-- added new class -->
-            <h4>{{id}}</h4>
+                        <div class="gg-panel-heading" "cd-faq-title">
+                            <!-- added new class -->
+                            <h4>{{id}}</h4>
+                        </div>
+                        <div class="panel-body" "cd-faq-content">
+                            <!-- added new class -->
+                            <div class="row">
+                                <!--always try to use double quotes for HTML attributes. -->
+                                <div class="col-md-6 col-xs-12">
+                                    <div class='img-wrapper1'>
+                                        <img class='img-cartoon1' src="{{imagePath}}" alt='Cartoon' width='90%' />
+                                        <Br/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-6">
+                                    {{#mass}}
+                                    <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
+                                    <br>Classification: {{#classification}}
+                                    <li class="list-group">
+                                        <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
+                                        <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
+                                    </li>
 
-        </div>
+                                    {{/classification}} {{^classification}} No data available. {{/classification}}
 
-        <div class="panel-body" "cd-faq-content">
-            <!-- added new class -->
-            <div class="row">
-                <!--always try to use double quotes for HTML attributes. -->
-                <div class="col-md-6 col-xs-12">
-                    <div class='img-wrapper1'>
-                        <img class='img-cartoon1' src="{{imagePath}}" alt='Cartoon' width='90%' />
-                        <Br/>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12 col-xs-6">
-                        {{#mass}}
-                        <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
-                             <br>Classification: 
-                             {{#classification}}
-                        <li class="list-group">
-                            <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
-                            <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
-                        </li>
-    
-                        {{/classification}}
-                        {{^classification}} No data available. {{/classification}}
-                    
-               
-            </div>
-            </div>
-        </div>
-    </div>
-</ul>
+                </ul>
                 <!-- cd-faq-group -->
 
-<ul id="mobile" class="cd-faq-group selected">
-    <!-- added new class -->
-    <div class="panel panel-default">
+                <ul id="mobile" class="cd-faq-group selected">
+                    <!-- added new class -->
+                    <div class="panel panel-default">
 
-        <div class="gg-panel-heading" "cd-faq-title">
-            <!-- added new class -->
-            <h4>Species</h4>
+                        <div class="gg-panel-heading" "cd-faq-title">
+                            <!-- added new class -->
+                            <h4>Species</h4>
+                        </div>
+                        <div class="panel-body" "cd-faq-content">
+                            <!-- added new class -->
+                            <div class="row">
+                                {{#species}}
+                                <div class='col-md-12 col-xs-12'>
+                                    <p id="panelmaincontent">
+                                        <button class="open-close-button">+</button>
+                                        {{name}} (NCBI taxonomy ID:
+                                        <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>)
+                                    </p>
+                                    <ul style="display:none;">
+                                        {{#evidence}}
+                                        <li>{{database}} :
+                                            <a href="{{{url}}}">{{id}}</a>
+                                        </li>
+                                        {{/evidence}}
+                                    </ul>
+                                </div>
+                                {{/species}}
+                            </div>
+                            {{^species}} No data available. {{/species}}
+                        </div>
+                    </div>
         </div>
-        <div class="panel-body" "cd-faq-content">
-            <!-- added new class -->
-            <div class="row">
-                {{#species}}
-                <div class='col-md-12 col-xs-12'>
-                    <p id="panelmaincontent">
-                        <button class="open-close-button">+</button>
-                        {{name}} (NCBI taxonomy ID:
-                        <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>)
-                    </p>
-                    <ul style="display:none;">
-                        {{#evidence}}
-                        <li>{{database}} :
-                            <a href="{{{url}}}">{{id}}</a>
-                        </li>
-                        {{/evidence}}
-                    </ul>
-                </div>
-                {{/species}}
-            </div>
-            {{^species}} No data available. {{/species}}
-        </div>
-    </div>
-    </div>
 
-</ul>
+        </ul>
         <!-- cd-faq-group -->
 
         <ul id="account" class="cd-faq-group selected">
@@ -163,7 +159,9 @@
                     {{#hasMotifs}} {{#motifs}}
                     <div class="col-md-6 col-xs-12">
                         <div class='img-wrapper2'>
-                            <img class='img-cartoon2' src="http://glycomics.ccrc.uga.edu/ggtest/service/newimageservice.php?action=get_user&id={{ID}}"
+                     
+                                      
+                            <img class='img-cartoon2' src="{{imagePath}}"
                                 alt='Cartoon' width='90%' />
                             <Br/>
                         </div>
@@ -287,34 +285,12 @@
         </ul>
 
 
-        
+
         <a href="#0" class="cd-close-panel">Close</a>
         </script>
         </div>
     </section>
-
-    <!-- <div id="error-message"> -->
-<div class="col-md-12 col-xs-12">
-    <div class="row">
-        <div class="panel panel-default error-div">
-
-
-            <div class="error-message" style='display:none' ;>
-                <h1>
-                    <center> Sorry...</center>
-                </h1>
-                <p class="error-ErrorPage-copy">We're having technical difficulties and are looking into the problem now.</p>
-
-                <button class="btn btn-default error-button" href="index.html">Go to our homepage</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="js/faq_main.js"></script>
-
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script>
         //to open the drop down of the ID called from home page.
         var url_loc = $(location).attr('href');
@@ -325,10 +301,16 @@
     </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for detail page -->
     <script type="text/javascript" src="js/glycan-detail.js"></script>
-    <script type="text/javascript" src="js/mustache.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for webservice -->
     <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for navigation -->
     <script src="js/navbar.js"></script>
+    <!-- script for navigation -->
+    <!--<script src="js/faq_main.js"></script>-->
     <div w3-include-html="footer.html"></div>
 </body>
 

@@ -16,7 +16,7 @@ function getWsUrl(request, id){
     break;
     case "list":
     return ws_base + "/list";
-    break;
+        break;
     case "detail":
     return ws_base +"/detail/" + id;
     break;
