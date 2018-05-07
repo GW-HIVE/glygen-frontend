@@ -23,11 +23,14 @@
 </head>
 
 <body onload="tracking()">
-    <script type="text/javascript" src="libraries/w3.js"></script>
-    <div w3-include-html="header.html"></div>
-    <script>
-        w3.includeHTML();
-    </script>
+    <!--<script type="text/javascript" src="libraries/w3.js"></script>-->
+    <!--<div w3-include-html="header.html"></div>-->
+    <!---->
+    <!--<script>-->
+        <!--w3.includeHTML();-->
+    <!--</script>-->
+    <div id='header'></div>
+    <!--<div w3-include-html="footer.html"></div>-->
 
     <!-- page content starts here -->
     <!-- sorting_top -->
@@ -41,9 +44,9 @@
             <div class="col-md-12 col-xs-12">
                 <form class="form-inline" onsubmit="return false;">
                     <label>Page</label>
-                    <button type="button" class="btn btn-default" onclick="prev();">Prev</button>
+                    <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
                     <select class="page-select form-control" onchange="xpage(this);"></select>
-                    <button type="button" class="btn btn-default" onclick="next();">Next</button>
+                    <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
                     <label>Records per page</label>
                     <select class="limit-select form-control" onchange="xlimit(this);">
                         <option selected>10</option>
@@ -59,9 +62,10 @@
                         <option value="number_proteins">No of Protein</option>
                     </select>
                     <select class="dir-select form-control" onchange="xdir(this);">
-                        <option selected>ASC</option>
-                        <option>DESC</option>
+                        <option value="asc" selected>ASC</option>
+                        <option value="desc">DESC</option>
                     </select>
+                    <P class="searchresult"></P>
                 </form>
             </div>
         </div>
@@ -69,9 +73,10 @@
 
         <script id="summary-template" type="text/template">
             <div class="panel panel-default">
-                <div class="gg-panel-heading" "cd-faq-title">
+                <div class="gg-panel-heading cd-faq-title">
                     <!-- added new class -->
                     <h6>
+
                         <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
                         <center>Result for Glycan Search On:{{execution_time}}</center>
                     </h6>
@@ -115,12 +120,14 @@
                             <td>Synthesizing Enzyme</td>
                             <td>{{enzyme}}</td>
                         </tr>
-                        {{/enzyme}} {{#motif}}
+                        {{/enzyme}}
+                        {{#motif}}
                         <tr>
                             <td>Motif</td>
                             <td>{{motif}}</td>
                         </tr>
                         {{/motif}}
+
 
                     </tbody>
                 </table>
@@ -134,9 +141,12 @@
                     &nbsp; &nbsp; &nbsp; &nbsp;
                     <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
                 </p>
+            </div>
         </script>
 
+
         <!-- table start here -->
+
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <table id="gen-table" data-show-export="true" data-toggle="table" data-detail-view="true" data-detail-formatter="DetailFormat"
@@ -188,18 +198,19 @@
                     <option value="number_proteins">No of Proteins</option>
                 </select>
                 <select class="dir-select form-control" onchange="xdir(this);">
-                    <option selected>ASC</option>
-                    <option>DESC</option>
+                    <option value="asc" selected>ASC</option>
+                    <option value="desc">DESC</option>
                 </select>
+                <label class="searchresult"></label>
             </form>
+            <!--<label class="searchresult"></label>-->
         </div>
         </div>
 
         <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
         <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-        <script>
-        </script>
+
         <!-- script for table -->
         <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
         <!-- script for time for queryserach -->
@@ -221,7 +232,17 @@
         <!-- script for navaigation -->
         <script src="js/navbar.js"></script>
         <!--  w3 including footer-->
-        <div w3-include-html="footer.html"></div>
+
+    <div id='footer'></div>
+        <!--<div w3-include-html="footer.html"></div>-->
+
+
+    <script type='text/javascript'>
+        $(document).ready(function(){
+            $( "#footer" ).load( "footer.html" );
+            $( "#header" ).load( "header.html" );
+        });
+    </script>
 </body>
 
 </html>
