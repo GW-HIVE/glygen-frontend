@@ -17,7 +17,7 @@ $(function () {
             $.ajax({
                 type: "POST",
                 url: url,
-                data: $(this).serialize(),
+                data: $(this).serializeArray(),
                 success: function (data) {
                     // data = JSON object that contact.php returns
 
