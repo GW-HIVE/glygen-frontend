@@ -11,19 +11,20 @@
  * Adding function to String prototype to shortcut string to a desire length.
 
  * @param {int} n - The length of the string
-
+ * @returns {int} -Short String
  */
 
 String.prototype.trunc = String.prototype.trunc ||
  function(n) {
  return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
  };
-
+// var id = '';
 var page = 1;
 var sort = 'id';
-var dir = 'asc';
+var dir = $('.dir-select').val();
 var url = getWsUrl('list') + "?action=get_user";
-var limit =20;
+var limit =10;
+
 /**
  * Reads a new limit and reloads the data.
  * @param {domNode} element - The element from which we take the new limit value
@@ -31,7 +32,7 @@ var limit =20;
 function xlimit(element) {
  limit = $(element).val();
  $('.limit-select').val(limit);
- LoadData();
+ LoadDataList();
 }
 
 /**
@@ -40,7 +41,7 @@ function xlimit(element) {
 function next() {
 page = page + 1;
   $(".page-select").val(page);
-  LoadData();
+  LoadDataList();
 }
 /**
  * Loads the Previous page of results
@@ -49,7 +50,7 @@ function prev() {
   if (page > 1) {
     page = page - 1;
     $(".page-select").val(page);
-    LoadData();
+    LoadDataList();
   }
 }
 
@@ -60,7 +61,7 @@ function prev() {
 function xpage(element) {
  page = $(element).val();
  $('.page-select').val(page);
- LoadData();
+ LoadDataList();
 }
 
 /**
@@ -71,7 +72,7 @@ function xpage(element) {
 function xsort(element) {
  sort = $(element).val();
  $('.sort-select').val(sort);
- LoadData();
+ LoadDataList();
 }
 
 /**
@@ -82,7 +83,7 @@ function xsort(element) {
 function xdir(element) {
  dir = $(element).val();
  $('.dir-select').val(dir);
- LoadData();
+ LoadDataList();
 }
 
 /**
@@ -94,6 +95,16 @@ function xdir(element) {
 function noOfPage(total_length,limit){
  var size = Math.ceil(total_length / limit);
  return size;
+}
+
+
+/**
+ * totalNoSearch show user total search result.
+ * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
+ */
+function totalNoSearch(total_length){
+    $('.searchresult').html(" You Found  " + total_length +" results of glycan");
+
 }
 
 
@@ -111,8 +122,18 @@ function buildPages(paginationInfo){
  for(var i=1; i <= total_length; i++){
  pageSelectors.append($("<option></option>").attr("value", i).text(i));
  }
-
  pageSelectors.val(page);
+    /**
+     * this works for Showing user how many results they found .
+
+     */
+    totalNoSearch(paginationInfo.total_length);
+    /**
+     * this works for enabling and disable prev and next button.
+
+     */
+    $(".prevbutton").attr("disabled", (page==1));
+    $(".nextbutton").attr("disabled", (page==total_length));
 }
 
 
@@ -126,7 +147,6 @@ function buildPages(paginationInfo){
 function buildSummary (queryInfo) {
  var summaryTemplate = $('#summary-template').html();
  queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
-
  var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
  $('#summary-table').html(summaryHtml);
 }
@@ -229,9 +249,17 @@ function DetailFormat(index, row) {
 
 
 
+/**
+
+ * updateSearch function of the detail table when opening each row [+]
+
+ * @param {int} index - The row clicked
+
+ * @param {object} row - The data object binded to the row
+ * @return- detail view with IUPAC AND GLYCOCT
+ */
+
 var lastSearch;
-
-
 function updateSearch() {
     console.log(lastSearch.query);
     $.ajax({
@@ -271,35 +299,12 @@ function editSearch() {
  * @param {Object} data.query - the dataset for query
  */
 
-//  function ajaxSuccess(serverResponse) {
-//     handleError(serverResponse, function (data) {
-//         var $table = $('#gen-table');
-//         var items = [];
-//         if (data.results) {
-//         for (var i = 0; i < data.results.length; i++) {
-//         var glycan = data.results[i];
 
-//         items.push({
-//             id: glycan.id,
-//             mass: glycan.mass,
-//             number_proteins: glycan.number_proteins,
-//             number_enzymes: glycan.number_enzymes,
-//             number_sugar: glycan.number_sugar,
-//             iupac: glycan.iupac,
-//             glycoct: glycan.glycoct
-//         });
-//     });
-//  }
-//
-var id = getParameterByName('id') || id;
-LoadData(id);
-
-
-function ajaxSuccess(data) {
+function ajaxListSuccess(data) {
     // console.log(data);
-    console.log(data.code);
+    //console.log(data.code);
     if (data.code) {
-        //console.log(data.code);
+        console.log(data.code);
         displayErrorByCode(data.code);
     } else {
         
@@ -309,7 +314,6 @@ function ajaxSuccess(data) {
         if (data.results) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
-
                 items.push({
                     id: glycan.id,
                     mass: glycan.mass,
@@ -321,15 +325,9 @@ function ajaxSuccess(data) {
                 });
             }
         }
-       
-        
-        
-         LoadData(id);
-        
+
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
-        //  $('#error-message').hide();
 
         buildPages(data.pagination);
 
@@ -342,30 +340,29 @@ function ajaxSuccess(data) {
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxFailure() {
+function ajaxListFailure() {
 //  $('#error-message').show();
     displayErrorByCode('server_down');
 }
 
 /**
 
- * LoadData function to configure and start the request to GWU  service
+ * LoadDataList function to configure and start the request to GWU  service
 
  * @param {string} id - The glycan id to load
  * */
-
-function LoadData(id) {
+function LoadDataList() {
 
  var ajaxConfig = {
  dataType: "json",
  url: getWsUrl("list"),
  data: getListPostData(id, page, sort, dir, limit),
  method: 'POST',
- success: ajaxSuccess,
- error: ajaxFailure
+ success: ajaxListSuccess,
+ error: ajaxListFailure
  };
 
-// console.log(id);
+
  // make the server call
  $.ajax(ajaxConfig);
 }
@@ -391,8 +388,9 @@ function getParameterByName(name, url) {
  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+var id = getParameterByName('id');
+LoadDataList(id);
 
-// var id = getParameterByName('id') || id;
-//
-//
-// LoadData(id);
+
+
+
