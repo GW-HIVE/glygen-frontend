@@ -77,11 +77,11 @@
                     <!-- added new class -->
                     <div class="panel panel-default ">
 
-                        <div class="gg-panel-heading" "cd-faq-title">
+                        <div class="gg-panel-heading">
                             <!-- added new class -->
                             <h4>{{id}}</h4>
                         </div>
-                        <div class="panel-body" "cd-faq-content">
+                        <div class="panel-body">
                             <!-- added new class -->
                             <div class="row">
                                 <!--always try to use double quotes for HTML attributes. -->
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-md-12 col-xs-6">
                                     {{#mass}}
-                                    <p id="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
+                                    <p class="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
                                     <br>Classification: {{#classification}}
                                     <li class="list-group">
                                         <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
@@ -114,24 +114,24 @@
                     <!-- added new class -->
                     <div class="panel panel-default">
 
-                        <div class="gg-panel-heading" "cd-faq-title">
+                        <div class="gg-panel-heading">
                             <!-- added new class -->
                             <h4>Species</h4>
                         </div>
-                        <div class="panel-body" "cd-faq-content">
+                        <div class="panel-body">
                             <!-- added new class -->
                             <div class="row">
                                 {{#species}}
                                 <div class='col-md-12 col-xs-12'>
-                                    <p id="panelmaincontent">
+                                    <p class="panelmaincontent">
                                         <button class="open-close-button">+</button>
                                         {{name}} (NCBI taxonomy ID:
-                                        <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}">{{taxid}}</a>)
+                                        <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id" target="_blank">{{taxid}} </a>)
                                     </p>
                                     <ul style="display:none;">
                                         {{#evidence}}
                                         <li>{{database}} :
-                                            <a href="{{{url}}}">{{id}}</a>
+                                            <a href="{{{url}}}" target="_blank" >{{id}}</a>
                                         </li>
                                         {{/evidence}}
                                     </ul>
@@ -150,11 +150,11 @@
             <!-- added new class -->
             <!-- Glycan MOTIF starts here for page -->
             <div class="panel panel-default">
-                <div class="gg-panel-heading" "cd-faq-title">
+                <div class="gg-panel-heading">
                     <!-- added new class -->
                     <h4>Motif</h4>
                 </div>
-                <div class="panel-body" "cd-faq-content">
+                <div class="panel-body">
                     <!-- added new class -->
                     {{#hasMotifs}} {{#motifs}}
                     <div class="col-md-6 col-xs-12">
@@ -167,7 +167,7 @@
                         </div>
                         <span id="glycanname">
                             <center>
-                                <a class="panelcontent" href="{{{id}}}">{{name}}</a>
+                                <a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>
                             </center>
                         </span>
                     </div>
@@ -177,29 +177,29 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="payments" "cd-faq-group selected">
+        <ul id="payments"  class="cd-faq-group selected">
             <!-- added new class -->
             <div class="panel panel-default">
 
-                <div class="gg-panel-heading" "cd-faq-title">
+                <div class="gg-panel-heading">
                     <!-- added new class -->
                     <h4> Found Glycoconjugates</h4>
                 </div>
-                <div class="panel-body" "cd-faq-content">
+                <div class="panel-body">
                     <!-- added new class -->
                     <div class="row">
                         {{#glycoprotein}}
                         <div class='col-md-12 col-xs-12'>
-                            <p id="panelmaincontent">
+                            <p class="panelmaincontent">
                                 <button class="open-close-button">+</button>
                                 {{protein_name}}(Uniprot ID:
-                                <a href="{{url}}">{{protein_id}}</a>) {{#position}}
+                                <a href="{{url}}" target="_blank">{{protein_id}}</a>) {{#position}}
                                 <br> Position:{{position}} {{/position}}
                             </p>
                             <ul style="display:none;">
                                 {{#evidence}}
                                 <li class="list-group" id="panelmaincontent">{{database}}:
-                                    <a class="panelcontent" href="{{{url}}}">{{id}}</a>
+                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{id}}</a>
                                 </li>
                                 {{/evidence}}
                             </ul>
@@ -214,22 +214,22 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="privacy" "cd-faq-group selected">
+        <ul id="privacy" class="cd-faq-group selected">
             <!-- added new class -->
             <!-- Glycan Cross Referance panel starts here for page -->
             <div class="panel panel-default">
 
-                <div class="gg-panel-heading" "cd-faq-title">
+                <div class="gg-panel-heading">
                     <!-- added new class -->
                     <h4>Cross Reference</h4>
 
                 </div>
-                <div class="panel-body" "cd-faq-content">
+                <div class="panel-body">
                     <!-- added new class -->
                     {{#crossref}}
-                    <p id="panelmaincontent">
-                        <li class="list-group" id="panelmaincontent">{{database}}:
-                            <a class="panelcontent" href="{{url}}">{{id}}</a>
+                    <p class="panelmaincontent">
+                        <li class="list-group" id="panelmaincontent1">{{database}}:
+                            <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
                         </li>
                     </p>
                     {{/crossref}} {{^crossref}} No data available. {{/crossref}}
@@ -238,24 +238,23 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="delivery" "cd-faq-group selected">
+        <ul id="delivery" class="cd-faq-group selected">
             <!-- added new class -->
             <!-- Glycan Enzymes starts here for page -->
             <div class="panel panel-default">
 
-                <div class="gg-panel-heading" "cd-faq-title">
-                    <!-- added new class -->
+                <div class="gg-panel-heading">
                     <h4>Biosynthetic-Enzyme</h4>
 
                 </div>
-                <div class="panel-body" "cd-faq-content">
+                <div class="panel-body">
                     <!-- added new class -->
                     {{#enzymes}}
-                    <li class="panelmaincontent1">{{protein_name}}(Uniprot ID:
-                        <a class="panelcontent" href="{{url}}">{{protein_id}}</a>)
+                    <li class="panelmaincontent2">{{protein_name}}(Uniprot ID:
+                        <a class="panelcontent" href="{{url}}" target="_blank">{{protein_id}}</a>)
                     </li>
                     <li id="gene"> Gene name:
-                        <a class="panelcontent" href="{{gene_link}}">{{gene}}</a>
+                        <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>
                     </li>
                     </p>
                     {{/enzymes}} {{^enzymes}} No data available. {{/enzymes}}
@@ -268,12 +267,12 @@
             <!-- added new class -->
             <div class="panel panel-default">
 
-                <div class="gg-panel-heading" "cd-faq-title">
+                <div class="gg-panel-heading">
                     <!-- added new class -->
                     <h4>Digital Sequence</h4>
 
                 </div>
-                <div class="panel-body" "cd-faq-content">
+                <div class="panel-body">
                     <!-- added new class -->
 
                     GLYCOCT
@@ -310,7 +309,7 @@
     <!-- script for navigation -->
     <script src="js/navbar.js"></script>
     <!-- script for navigation -->
-    <!--<script src="js/faq_main.js"></script>-->
+    <script src="js/faq_main.js"></script>
     <div w3-include-html="footer.html"></div>
 </body>
 

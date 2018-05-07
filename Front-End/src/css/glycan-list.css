@@ -74,7 +74,7 @@ th {
   border-color: #777777;
 }
 .fixed-table-container tbody td{
-  border-color: 1px solid #777777;
+  border-color: #777777;
 }
 
 
@@ -98,15 +98,17 @@ pre{
 }
 
 
-.ajs-header{
-  color:red
-}
-.ajs-modal{
-  color:blue;
-  margin-top:290px;
-}
-
 .prevbutton[disabled],
 .nextbutton[disabled]{
   cursor: not-allowed;
+}
+
+/* error modal css */
+
+
+
+.ajs-modal{
+  color: #ea0a08;
+  margin-top:290px;
+
 }

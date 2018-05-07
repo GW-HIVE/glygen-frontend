@@ -112,7 +112,7 @@ pre{
   background-color:#e6e6e6;
   
 }
-.panelmaincontent1{
+.panelmaincontent{
  
   font-size: 16px;
   margin-left: 10px;
@@ -140,10 +140,7 @@ section{
   padding-left: 20px;
   
 }
-.cd-faq-items{
-  padding-left: 100px;
- 
-}
+
 .cd-faq{
   padding-left: 10px;
   margin-top: 2px;
