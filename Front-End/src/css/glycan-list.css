@@ -98,10 +98,15 @@ pre{
 }
 
 
-
 .ajs-header{
   color:red
 }
 .ajs-modal{
-  color:blue
+  color:blue;
+  margin-top:290px;
+}
+
+.prevbutton[disabled],
+.nextbutton[disabled]{
+  cursor: not-allowed;
 }
