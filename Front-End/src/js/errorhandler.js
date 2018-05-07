@@ -25,10 +25,7 @@ function displayErrorByCode(errorCode) {
     displayError(getErrorMessage(errorCode));
 }
 
-// function handleError(serverResult, successMethod) {
-//     if (serverResult.code) {
-//         displayErrorByCode(serverResult.code);
-//     } else {
-//         successMethod(serverResult);
-//     }
-// }
+$(document).ready(function(){
+    $( "#footer" ).load( "footer.html" );
+    $( "#header" ).load( "header.html" );
+});

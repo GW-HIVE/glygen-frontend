@@ -11,29 +11,21 @@
     <meta charset="utf-8">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
     <title>List Page</title>
-
-
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/glycan-list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/glycan-detail.css">
-
 </head>
 
 <body onload="tracking()">
-    <!--<script type="text/javascript" src="libraries/w3.js"></script>-->
-    <!--<div w3-include-html="header.html"></div>-->
-    <!---->
-    <!--<script>-->
-        <!--w3.includeHTML();-->
-    <!--</script>-->
+
     <div id='header'></div>
-    <!--<div w3-include-html="footer.html"></div>-->
+
 
     <!-- page content starts here -->
-    <!-- sorting_top -->
+
     <div class="container">
         <div class="row">
             <div id="summary-table" class="col-md-12 col-xs-12">
@@ -206,7 +198,7 @@
             <!--<label class="searchresult"></label>-->
         </div>
         </div>
-
+    <div id='footer'></div>
         <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
         <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
@@ -233,16 +225,9 @@
         <script src="js/navbar.js"></script>
         <!--  w3 including footer-->
 
-    <div id='footer'></div>
-        <!--<div w3-include-html="footer.html"></div>-->
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
 
-
-    <script type='text/javascript'>
-        $(document).ready(function(){
-            $( "#footer" ).load( "footer.html" );
-            $( "#header" ).load( "header.html" );
-        });
-    </script>
 </body>
 
 </html>
