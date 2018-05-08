@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utility.js</title>
+    <title>JSDoc: Source: glygen_settings.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utility.js</h1>
+    <h1 class="page-title">Source: glygen_settings.js</h1>
 
     
 
@@ -26,52 +26,34 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
-
-
-
-
-function getErrorMessage(errorCode) {
-    switch(errorCode) {
-        case 'GLIST01':
-            return 'Please provide an ID in the URL.';
-            break;
-        case 'GLIST02':
-            return 'Please provide an ID in the URL.';
-            break;
-        case 'GLIST04':
-            return 'Value is not in [asc/desc].';
-            break;
-        case 'server_down':
-            return 'sorry server is down';
-            break;
-    }
-
-    return 'Unknown error.';
-}
-/**
- * Display Error message using alertify
-
-
- */
-function displayError(message){
-    alertify.alert('Error', message).set('modal', false);
-}
-
-function displayErrorByCode(errorCode) {
-    displayError(getErrorMessage(errorCode));
-}
-
+            <pre class="prettyprint source linenums"><code>// @author: Tatiana Williamson
+// @description: UO1 Version-1.1.
+// @Date: 8th Mar 2018.
 
 /**
- * Js load for adding header and footer file into each page
-
-
+ * Represents a switch handler in glygen settings.
+ * @param {string} el - Managing GlyGen settings. Makes it enabled or disabled. 
  */
-$(document).ready(function(){
-    $( "#footer" ).load( "footer.html" );
-    $( "#header" ).load( "header.html" );
-});</code></pre>
+
+function switchHandler(el) {
+    $(document).ready(function() {
+        var $checkbox = $('[name="manageSettingsEnabled"]');
+        if(!$checkbox.is(':checked')) {
+            $checkbox.attr('checked', false);
+            $('#manageSettingsDisabled').css('display', 'block');
+            $('#manageSettingsEnabled').css('display', 'none');
+            clearLocalStore();
+            doNotLog();
+        } else {
+            $checkbox.attr('checked', true);
+            $('#manageSettingsDisabled').css('display', 'none');
+            $('#manageSettingsEnabled').css('display', 'block');
+            clearLocalStore();
+            logID();
+        }
+    });
+}
+// End @author: Tatiana Williamson</code></pre>
         </article>
     </section>
 
