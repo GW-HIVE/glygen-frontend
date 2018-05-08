@@ -2,6 +2,11 @@
 // @description: UO1 Version-1.1.
 // @Date: 8th Mar 2018.
 
+/**
+ * Represents a switch handler in glygen settings.
+ * @param {string} el - Managing GlyGen settings. The user can enable or disable cookies. 
+ */
+
 function switchHandler(el) {
     $(document).ready(function() {
         var $checkbox = $('[name="manageSettingsEnabled"]');

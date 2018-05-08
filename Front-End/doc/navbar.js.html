@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: glycan-detail.js</title>
+    <title>JSDoc: Source: navbar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: glycan-detail.js</h1>
+    <h1 class="page-title">Source: navbar.js</h1>
 
     
 
@@ -27,108 +27,55 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>
-//@author: Rupali Mahadik
+// @author: Tatiana Williamson
 // @description: UO1 Version-1.1.
-//@Date:19th Feb 2018.
-//@update: 3-April 2018.
-
-
-
-
+// @Date: 8th Mar 2018.
 
 /**
- * Handling a succesful call to the server for details page
- * @param {Object} data - the data set returned from the server on success
-
- 
+ * Represents a navbar.
+ * @param {string} itemText - Selected text on navigation bar.
  */
-function ajaxSuccess(data) {
-  var template = $('#item_template').html();
-  data.hasMotifs = (data.motifs &amp;&amp; (data.motifs.length > 0));
-  data.hasGlycosylate = (data.glycosylate &amp;&amp; (data.glycosylate.length > 0));
 
-  data.imagePath = getWsUrl('image_service', data.id);
-
-  //var glyco = row.glycoct.replace(/ /g, '\n');
-  var html = Mustache.to_html(template, data);
-  var $container = $('#content');
-
-  $container.html(html);
-
-  $container.find('.open-close-button').each(function (i, element) {
-    $(element).on('click', function () {
-      var $this = $(this);
-      var buttonText = $this.text();
-
-      if (buttonText === '+') {
-        $this.text('-');
-        $this.parent().next().show();
-      } else {
-        $this.text('+');
-        $this.parent().next().hide();
-      
-        $('#error-message').hide();
-      }
+function setNavItemAsCurrent(itemText) {
+    $('.nav > li > a').each(function() {
+        if($(this).text().indexOf(itemText) >= 0) {
+            $(this).parent().addClass('current');
+        }
     });
-  });
-
 }
 
-/**
- * @param {data} the callback function to GWU service if fails
- */
-//  * Returns the GWU services fails.
-
-function ajaxFailure() {
-  $('#error-message').show();
-}
-
-
-/**
- * @param {id} the LoadData function to configure and start the request to GWU  service
- */
-//  * Returns the GWU services.
-//
-
-function LoadData(id) {
-
-  var ajaxConfig = {
-    dataType: "json",
-    url: getWsUrl("detail", id),
-    // data: getDetailPostData(id),
-    method: 'POST',
-    success: ajaxSuccess,
-    error: ajaxFailure
-  };
-
+$(document).ready(function(){
+    var url = window.location.pathname;
+    var fullFilename = url.substring(url.lastIndexOf('/')+1);
+    var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
+    var navItemText = filename.replace('_', ' ').toUpperCase();
+    //alert(navItemText);
+    if(navItemText == 'INDEX') {
+        navItemText = 'HOME';
+    } else if(navItemText == 'GLYCAN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    } else if(navItemText == 'PROTEIN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    } else if(navItemText == 'GLYCOPROTEIN SEARCHPAGE') {
+        navItemText = 'EXPLORE';
+    } else if(navItemText == 'ABOUT') {
+        navItemText = 'ABOUT';
+    } else if(navItemText == 'RESOURCES') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'SURVEY') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'CONTACT') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'GLYGEN SETTINGS') {
+        navItemText = 'MY GLYGEN';
+    }
   
-  // calls the service
-  $.ajax(ajaxConfig);
+    $('.nav > li').removeClass('current');
+    setNavItemAsCurrent(navItemText);
+});
 
-}
-//getParameterByName function to extract query parametes from url
-/**
- * @param {name} string for the name of the variable variable to extract from query string
- * @param {url}string with the complete url with query string values
- */
-//  * Returns the GWU services.
-//
-
-
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&amp;");
-  var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-$(document).ready(function () {
-  var id = getParameterByName('id');
-  LoadData(id);
-});</code></pre>
+// End @author: Tatiana Williamson
+</code></pre>
         </article>
     </section>
 
