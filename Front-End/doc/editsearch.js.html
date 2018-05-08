@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: glycan-detail.js</title>
+    <title>JSDoc: Source: editsearch.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: glycan-detail.js</h1>
+    <h1 class="page-title">Source: editsearch.js</h1>
 
     
 
@@ -26,109 +26,73 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
-//@author: Rupali Mahadik
-// @description: UO1 Version-1.1.
-//@Date:19th Feb 2018.
-//@update: 3-April 2018.
-
-
-
-
-
-/**
- * Handling a succesful call to the server for details page
- * @param {Object} data - the data set returned from the server on success
-
- 
+            <pre class="prettyprint source linenums"><code>/**
+ * .setting the Form Values based on object data
+ * @param {object} data - The data is object with query value
+ * @param {object} data.query -
+ *
  */
-function ajaxSuccess(data) {
-  var template = $('#item_template').html();
-  data.hasMotifs = (data.motifs &amp;&amp; (data.motifs.length > 0));
-  data.hasGlycosylate = (data.glycosylate &amp;&amp; (data.glycosylate.length > 0));
 
-  data.imagePath = getWsUrl('image_service', data.id);
-
-  //var glyco = row.glycoct.replace(/ /g, '\n');
-  var html = Mustache.to_html(template, data);
-  var $container = $('#content');
-
-  $container.html(html);
-
-  $container.find('.open-close-button').each(function (i, element) {
-    $(element).on('click', function () {
-      var $this = $(this);
-      var buttonText = $this.text();
-
-      if (buttonText === '+') {
-        $this.text('-');
-        $this.parent().next().show();
-      } else {
-        $this.text('+');
-        $this.parent().next().hide();
-      
-        $('#error-message').hide();
-      }
-    });
-  });
-
+function setFormValues(data) {
+    if (data.query) {
+        $("#glycan_id").val(data.query.glycan_id);
+        if (data.query.mass) {
+            var massSlider = document.getElementById('slider');
+            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+        }
+        $("#organism").val(data.query.organism);
+        $("#ddl").val(data.query.glycantype);
+        $("#ddl2").val(data.query.glycansubtype);
+        $("#enzyme").val(data.query.enzyme);
+        $("#protein").val(data.query.proteinid);
+        $("#motif").val(data.query.motif);
+    }
 }
 
 /**
- * @param {data} the callback function to GWU service if fails
- */
-//  * Returns the GWU services fails.
+ * fail to to get search data
+* @param {object} data - The Retreive data
+*
+*
+*/
 
-function ajaxFailure() {
-  $('#error-message').show();
+
+function failToRetreiveSearch(data) {
+    displayErrorByCode('server_down');
 }
 
-
 /**
- * @param {id} the LoadData function to configure and start the request to GWU  service
+ * Loading data from list service
+ * @param {string} id - The serach id
+ *
+ *
  */
-//  * Returns the GWU services.
-//
+function LoadSearchvalues(id) {
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("list"),
+        data: getListPostData(id, 1, 'id', 'asc', 1),
+        method: 'POST',
+        success: setFormValues,
+        error: failToRetreiveSearch
+    };
 
-function LoadData(id) {
 
-  var ajaxConfig = {
-    dataType: "json",
-    url: getWsUrl("detail", id),
-    // data: getDetailPostData(id),
-    method: 'POST',
-    success: ajaxSuccess,
-    error: ajaxFailure
-  };
-
-  
-  // calls the service
-  $.ajax(ajaxConfig);
-
+    // make the server call
+    $.ajax(ajaxConfig);
 }
-//getParameterByName function to extract query parametes from url
-/**
- * @param {name} string for the name of the variable variable to extract from query string
- * @param {url}string with the complete url with query string values
- */
-//  * Returns the GWU services.
-//
-
 
 function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&amp;");
-  var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&amp;");
+    var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(document).ready(function () {
-  var id = getParameterByName('id');
-  LoadData(id);
-});</code></pre>
+</code></pre>
         </article>
     </section>
 
