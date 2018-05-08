@@ -21,7 +21,11 @@ function getErrorMessage(errorCode) {
 
     return 'Unknown error.';
 }
+/**
+ * Display Error message using alertify
 
+
+ */
 function displayError(message){
     alertify.alert('Error', message).set('modal', false);
 }
