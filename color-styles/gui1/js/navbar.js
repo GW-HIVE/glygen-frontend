@@ -3,6 +3,11 @@
 // @description: UO1 Version-1.1.
 // @Date: 8th Mar 2018.
 
+/**
+ * Represents a navbar.
+ * @param {string} itemText - Selected text on navigation bar.
+ */
+
 function setNavItemAsCurrent(itemText) {
     $('.nav > li > a').each(function() {
         if($(this).text().indexOf(itemText) >= 0) {
