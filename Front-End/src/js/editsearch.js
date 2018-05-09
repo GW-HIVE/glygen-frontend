@@ -14,7 +14,15 @@ function setFormValues(data) {
         }
         $("#organism").val(data.query.organism);
         $("#ddl").val(data.query.glycantype);
-        $("#ddl2").val(data.query.glycansubtype);
+
+
+       var types = document.getElementById('ddl');
+        var subtypes = document.getElementById('ddl2');
+
+        // create subtypes
+        configureDropDownLists(types, subtypes, function() {
+            $("#ddl2").val(data.query.glycansubtype);
+        });
         $("#enzyme").val(data.query.enzyme);
         $("#protein").val(data.query.proteinid);
         $("#motif").val(data.query.motif);
