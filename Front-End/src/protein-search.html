@@ -1,0 +1,147 @@
+<!--
+    @author: Pradeep Kumar Ragu Chanthar
+    @description: UO1 Version-1.1
+    @Date: 19th Feb 2018
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Search for glycan structures based on their GlyTouCan registry IDs, native mass, glycan type or organism. It is also possible to search for glycans based on enzymes that have been involved in the biosynthesis or proteins that this glycan was attached to">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
+    <title>Glycan Search</title>
+
+    <!--css  do not change seqence-->
+
+    <!--Stylesheet for slider-->
+    <link href="css/nouislider.min.css" rel="stylesheet">
+    <!--Bootstrap Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+    <!--search page Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/searchpage.css">
+    <!--main Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<style>
+    .footer{
+
+        margin-top: 190px;
+    }
+
+    .limitedNumbChosen, .limitedNumbSelect2{
+        width: 400px;
+    }
+    .noUi-connect{
+        background: #5384f5
+    }
+</style>
+
+<body>
+
+
+<div id='header'></div>
+<div class="container">
+    <h3 style="text-align: center"> GlycoProtein Search </h3>
+    <form id="myForm" name="myForm">
+        <br> <b>Glycoprotein ID</b>
+        <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+        <!-- First range-->
+        <b>GlycoProtein Size</b>
+        <div class="form-group row">
+            <div class="col-xs-1">
+                Min
+                <div id="lower-value"> </div>
+            </div>
+            <div class="col-xs-10">
+                Native Mass(range)
+                <div id="slider"> </div>
+            </div>
+            <div class="col-xs-1">
+                Max
+                <div id="upper-value"> </div>
+            </div>
+        </div>
+
+        <br> <b>Organism</b>
+        <select size="1" class="organism" id="organism">
+            <option value=""></option>
+        </select>
+        <br> <b>Gene Name</b>
+        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the gene name">
+        <br> <b>Pathway ID</b>
+        <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Pathway id">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+        <h4><b>Glycan</b></h4>
+        <select class="limitedNumbChosen" multiple="true">
+            <option value="1">Alanine</option>
+            <option value="2">Cysteine</option>
+            <option value="3">Aspartic acid</option>
+            <option value="4">Glutamic acid</option>
+            <option value="5">Phenylalanine</option>
+            <option value="6">Glycine</option>
+            <option value="7">Histidine</option>
+            <option value="8">Alanine</option>
+            <option value="9">Cysteine</option>
+            <option value="10">Aspartic acid</option>
+            <option value="11">Glutamic acid</option>
+            <option value="12">Phenylalanine</option>
+            <option value="13">Glycine</option>
+            <option value="14">Histidine</option>
+        </select>
+            </div>
+            <div class="col-md-6">
+                <h4><b>Amino acid</b></h4>
+                <select class="limitedNumbChosen2" multiple="true">
+                    <option value="1">Alanine</option>
+                    <option value="2">Cysteine</option>
+                    <option value="3">Aspartic acid</option>
+                    <option value="4">Glutamic acid</option>
+                    <option value="5">Phenylalanine</option>
+                    <option value="6">Glycine</option>
+                    <option value="7">Histidine</option>
+                    <option value="8">Alanine</option>
+                    <option value="9">Cysteine</option>
+                    <option value="10">Aspartic acid</option>
+                    <option value="11">Glutamic acid</option>
+                    <option value="12">Phenylalanine</option>
+                    <option value="13">Glycine</option>
+                    <option value="14">Histidine</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <!--<input type="button" class="button-default" value="search" onclick="submitvalues()">-->
+        <br>
+    </form>
+</div>
+<div id='footer'></div>
+<!-- script for jquery -->
+<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+<!-- script for choosing from listfield -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<!-- script for bootstrap js -->
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<!-- script for slider js -->
+<script src="js/nouislider.min.js"></script>
+<!-- script for navaigation bar js -->
+<script src="js/navbar.js"></script>
+<!-- script for searchpage js -->
+<script type="text/javascript" src="js/protein-search.js"></script>
+<!-- script for tracking js -->
+<script src="js/activity_tracker.js"></script>
+<!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="js/ws_url.js"></script>
+<!-- script for error-message/header-footer js -->
+<script src="js/utility.js"></script>
+</body>
+
+</html>
