@@ -28,13 +28,41 @@ input[type=submit] {
 
 input[type=submit]:hover {
     background-color: #f86868;
+    
 }
 
+/*
 .container {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
+*/
+
+.container {
+    width: 70%;
+    border-radius: 5px;
+/*    background-color: #e8e8e8;*/
+    background-color: rgb(46,120, 183, 0.1);
+    padding: 20px 80px; 
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.gg-text-example {
+    margin-top: 3px;
+    color: #2E78B7;    
+}
+
+h6 {
+    margin: 3px;
+}
+
+select {
+    height: 35px;
+    background-color: #F4F4F4;
+}
+
 
 .col-25 {
     float: left;

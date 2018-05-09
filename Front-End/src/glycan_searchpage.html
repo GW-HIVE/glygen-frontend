@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
+    
     <title>Glycan Search</title>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css"
@@ -30,64 +31,79 @@
     <script src="js/nouislider.min.js"></script>
 
     <div id='header'></div>
-    <div class="container">
-        <h3 style="text-align: center"> Glycan Search </h3>
+    <h3 class="about-heading" style="text-align: center"> Glycan Search </h3>
+    <div class="container gg-container">
+        
         <form id="myForm" name="myForm">
-            Glycan ID:
-            <input type="text" id="glycan_id" name="glycan_id" placeholder="Provide an universal glycan identifier from GlyTouCan.org"> Glycan ID Example:e.g.G109565BM
+            <h6>Glycan ID:</h6>
+                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org"> 
+                <div class="gg-text-example">Glycan ID Example:e.g.G109565BM</div>
             <br>
             <!-- First range-->
-            Glycan Size:
-            <div class="form-group row">
-                <div class="col-xs-1">
-                    Min
-                    <div id="lower-value"> </div>
+            <h6>Glycan Size:</h6>
+                <div class="form-group row">
+                    <div class="col-xs-2" style="padding-right: 125px;">
+                        <h6>Min</h6>
+                        <div id="lower-value"> </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <h6>Native Mass (range)</h6>
+                        <div id="slider"> </div>
+                    </div>
+                    <div class="col-xs-2" style="padding-left: 70px;">
+                        <h6>Max</h6>
+                        <div id="upper-value"> </div>
+                    </div>
                 </div>
-                <div class="col-xs-10">
-                    Native Mass(range)
-                    <div id="slider"> </div>
+                <!-- second range-->
+                <div class="form-group row">
+                    <div class="col-xs-2" style="padding-right: 125px;">
+                        <h6>Min</h6>
+                        <div id="lower-value1"> </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <h6>Native Sugar (range)</h6>
+                        <div id="slider1" > </div>
+                    </div>
+                    <div class="col-xs-2" style="padding-left: 70px;">
+                        <h6>Max</h6>
+                        <div id="upper-value1"> </div>
+                    </div>
                 </div>
-                <div class="col-xs-1">
-                    Max
-                    <div id="upper-value"> </div>
-                </div>
-            </div>
-            <!-- second range-->
-            <div class="form-group row">
-                <div class="col-xs-1">
-                    Min
-                    <div id="lower-value1"> </div>
-                </div>
-                <div class="col-xs-10">
-                    Native Sugar(range)
-                    <div id="slider1"> </div>
-                </div>
-                <div class="col-xs-1">
-                    Max
-                    <div id="upper-value1"> </div>
-                </div>
-            </div>
-            <br> Organism:
-            <select size="1" class="organism" id="organism">
-                <option value=""></option>
-            </select>
-            <br> Glycan type:
-            <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
-                <option value=""></option>
-            </select>
-            <br> Glycan subtype:
-            <select id="ddl2">
-            </select>
-            <br> Glycoprotein ID:
-            <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
-            <br> Glycan Motif:
-            <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
-            <br> Enzyme:
-            <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Biosynthetic Enzyme">
+            <br> 
+            <h6>Organism:</h6>
+                <select class="organism" id="organism">
+                    <option value="">Select organism</option>
+                </select>
+                <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
             <br>
+                <h6>Glycan type:</h6>
+                <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
+                    <option value="">Select glycan type</option>
+                </select>
+                <div class="gg-text-example">Glycan Example e.g N-glycan</div>               
+            <br>                
+                <h6>Glycan subtype:</h6>
+                <select id="ddl2">
+                    <option value="">Select glycan subtype</option>
+                </select> 
+                <div class="gg-text-example">Glycan Example e.g </div>           
+            <br> 
+            <h6>Glycoprotein ID:</h6>
+                <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+                <div class="gg-text-example">Glycoprotein Example e.g </div>
+            <br> 
+            <h6>Glycan Motif:</h6>
+                <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
+                <div class="gg-text-example">Glycan Motif Example e.g </div>
+            <br> 
+            <h6>Enzyme:</h6>
+                <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Biosynthetic Enzyme">
+                <div class="gg-text-example">Enzyme Example e.g </div>
             <br>
-            <input type="button" class="button-default" value="search" onclick="submitvalues()">
-            <br>
+            
+            <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">
+        
         </form>
     </div>
     <div id='footer'></div>
@@ -105,10 +121,10 @@
 
     <script src="js/activity_tracker.js"></script>
     <script src="js/errorhandler.js"></script>
-    <script src="js/editsearch.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
+    <script src="js/editsearch.js"></script>
 
 
 </body>

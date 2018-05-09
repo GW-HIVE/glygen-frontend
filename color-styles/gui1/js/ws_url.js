@@ -1,11 +1,9 @@
 function getWsUrl(request, id){
-    
-    // var ws_base = "http://glygen-vm-prd.biochemistry.gwu.edu/api";
+        
     var ws_base ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
-    var ws_logging = ws_base+"Logging.php";
-    var ws_userID = ws_logging;
-     //var ws_image_service = ws_base + 'newimageservice.php';
-   
+    var ws_logging = ws_base+"/auth/logging";
+    var ws_userID = ws_base+"/auth/userid";
+    
     switch (request) {
     case "generate_ID":
     return ws_userID;
@@ -13,11 +11,8 @@ function getWsUrl(request, id){
     case "log_activity":
     return ws_logging;
     break;
-    // case "image_service":
-    // return ws_image_service;
      case "image_service":
-    return ws_base + "/image/" + id;
-    
+    return ws_base + "/image/" + id; 
     break;
     case "list":
     return ws_base + "/list";
@@ -25,20 +20,25 @@ function getWsUrl(request, id){
     case "detail":
     return ws_base +"/detail/" + id;
     break;
-   
+    case "typehead":
+    return ws_base +"/typehead";
+    break;
+    case "search_init":
+    return ws_base +"/search_init";
+    break;
     default:
     return "";
     break;
     }
    }
    
-   // Example creating an image url
-   // getWsUrl('image_service') + '?action=get_user&id='
-   
-//    function getImageWsUrl(id) {
-//     return getWsUrl('image_service') + '?action=get_user&id=' + id;
-//    }
-   
+
+
+   /**
+    * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
+ 
+     * @param {string} id -  serach ID
+  */
    
    function getListPostData(id, page, sort, dir, limit)
    {
@@ -53,45 +53,3 @@ function getWsUrl(request, id){
    }
    
 
-//       function getDetailPostData()
-//    {
-//     var data = "";
-    
-//     // data = data+ "/id="+id;
-
-//     return data;
-//    }
- 
-//    function getDetailPostData(id)
-//    {
-//     var query = {};
-//     query.id = id;
-//     return "query=" + JSON.stringify(query);
-//    }
-//    function getDetailPostData(id)
-//    {
-//     // var data = {};
-//    var data= getWsUrl("detail");
-//     // data.id = id;
-//     data = data + "?id=" + id;
-//     return "data=" + JSON.stringify(data);
-//    }
-   
-//    function getListWsUrl(id, page, sort, dir, limit) {
-//     var url = getWsUrl("list");
-   
-//     url = url + "&id=" + id;
-//     url = url + "&offset=" + ((page) * limit);
-//     url = url + "&limit=" + limit;
-//     url = url+ "$sort=" + sort;
-//     url = url + "&order=" + dir;
-   
-//     return url;
-//    }
-//    function getDetailPostData(id) {
-   
-//     var url = getWsUrl("detail");
-//      url = url + "?id=" + id;
-//     return url;
-//     }
-    
