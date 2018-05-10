@@ -65,9 +65,14 @@ input[type=submit]:hover {
 }
 
 .min-value-alighnment {
-        margin-left: 0;
         padding-left: 0;
     }
+
+.max-value-alighnment {
+    text-align: right;
+    padding-right: 0;
+}
+
 .gg-text-example {
     margin-top: 3px;
     color: #2E78B7;    
