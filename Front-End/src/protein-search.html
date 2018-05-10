@@ -1,8 +1,4 @@
-<!--
-    @author: Pradeep Kumar Ragu Chanthar
-    @description: UO1 Version-1.1
-    @Date: 19th Feb 2018
- -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
-    <title>Glycan Search</title>
+    <title>Protein_Search</title>
 
     <!--css  do not change seqence-->
 
@@ -36,68 +32,58 @@
     .limitedNumbChosen, .limitedNumbSelect2{
         width: 400px;
     }
-    .noUi-connect{
-        background: #5384f5
-    }
+
 </style>
 
 <body>
 
 
 <div id='header'></div>
-<div class="container">
-    <h3 style="text-align: center"> GlycoProtein Search </h3>
+<h3 class="about-heading" style="text-align: center"> GlycoProtein Search </h3>
+<div class="container gg-container">
+
     <form id="myForm" name="myForm">
-        <br> <b>Glycoprotein ID</b>
-        <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+        <h6>GlycoProtein ID:</h6>
+        <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org">
+        <div class="gg-text-example">Glycan ID Example:e.g.G109565BM</div>
+        <br>
         <!-- First range-->
-        <b>GlycoProtein Size</b>
+        <h6>GlycoProtein Size:</h6>
         <div class="form-group row">
-            <div class="col-xs-1">
-                Min
+            <div class="col-xs-2" style="padding-right: 125px;">
+                <h6>Min</h6>
                 <div id="lower-value"> </div>
             </div>
-            <div class="col-xs-10">
-                Native Mass(range)
+            <div class="col-xs-6">
+                <h6>Native Mass (range)</h6>
                 <div id="slider"> </div>
             </div>
-            <div class="col-xs-1">
-                Max
+            <div class="col-xs-2" style="padding-left: 70px;">
+                <h6>Max</h6>
                 <div id="upper-value"> </div>
             </div>
         </div>
-
-        <br> <b>Organism</b>
-        <select size="1" class="organism" id="organism">
-            <option value=""></option>
+        <h6>Organism:</h6>
+        <div class="col-xs-12 col-md-12">
+        <select class="form-control organism" id="organism">
+            <option value="">Select organism</option>
         </select>
-        <br> <b>Gene Name</b>
+        </div>
+        <h6>Protein Name</h6>
+        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the protein name">
+        <h6>Gene Name</h6>
         <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the gene name">
-        <br> <b>Pathway ID</b>
-        <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Pathway id">
-        <br>
-        <div class="row">
-            <div class="col-md-6">
-        <h4><b>Glycan</b></h4>
-        <select class="limitedNumbChosen" multiple="true">
-            <option value="1">Alanine</option>
-            <option value="2">Cysteine</option>
-            <option value="3">Aspartic acid</option>
-            <option value="4">Glutamic acid</option>
-            <option value="5">Phenylalanine</option>
-            <option value="6">Glycine</option>
-            <option value="7">Histidine</option>
-            <option value="8">Alanine</option>
-            <option value="9">Cysteine</option>
-            <option value="10">Aspartic acid</option>
-            <option value="11">Glutamic acid</option>
-            <option value="12">Phenylalanine</option>
-            <option value="13">Glycine</option>
-            <option value="14">Histidine</option>
-        </select>
-            </div>
-            <div class="col-md-6">
-                <h4><b>Amino acid</b></h4>
+        <h6>Glycan</h6>
+        <div class="col-md-6">
+        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the Glycan ID">
+        </div>
+        <div class="col-md-6">
+            <select class="form-control organism" id="organism">
+                <option value="">Select Relation</option>
+            </select>
+        </div>
+        <div class="col-md-12">
+                <h6>Amino acid</h6>
                 <select class="limitedNumbChosen2" multiple="true">
                     <option value="1">Alanine</option>
                     <option value="2">Cysteine</option>
@@ -115,12 +101,17 @@
                     <option value="14">Histidine</option>
                 </select>
             </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="comment">Sequences:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+            <h6>Pathway ID</h6>
+            <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Pathway id">
+            <br>
+
         </div>
-        <br>
-        <br>
-        <br>
-        <!--<input type="button" class="button-default" value="search" onclick="submitvalues()">-->
-        <br>
+        <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">
     </form>
 </div>
 <div id='footer'></div>
