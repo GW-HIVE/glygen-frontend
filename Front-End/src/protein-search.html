@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
@@ -44,7 +45,7 @@
 
     <form id="myForm" name="myForm">
         <h6>GlycoProtein ID:</h6>
-        <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org">
+        <input type="text" name="protein_id" class="form-control protein" id="protein_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org">
         <div class="gg-text-example">Glycan ID Example:e.g.G109565BM</div>
         <br>
         <!-- First range-->
@@ -70,15 +71,15 @@
         </select>
         </div>
         <h6>Protein Name</h6>
-        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the protein name">
+        <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name"  placeholder="Provide the protein name">
         <h6>Gene Name</h6>
-        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the gene name">
+        <input type="text" name="GeneName" class="form-control gene_name" id="gene_name"  placeholder="Provide the gene name">
         <h6>Glycan</h6>
         <div class="col-md-6">
-        <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the Glycan ID">
+        <input type="text" name="Glycan" class="form-control motif" id="glycan"  placeholder="Provide the Glycan ID">
         </div>
         <div class="col-md-6">
-            <select class="form-control organism" id="organism">
+            <select class="form-control glycan_relation" id="relation">
                 <option value="">Select Relation</option>
             </select>
         </div>
@@ -99,40 +100,33 @@
                     <option value="12">Tryptophan - Trp - W</option>
                     <option value="13">Alanine - Ala - A</option>
                     <option value="14">Isoleucine - Ile - I</option>
-                    <option value="13">Leucine - Leu - L</option>
-                    <option value="14">Methionine - Met - M</option>
-                    <option value="13">Phenylalanine - Phe - F</option>
-                    <option value="14">Valine - Val - V</option>
-                    <option value="13">Proline - Pro - P</option>
-                    <option value="14">Glycine - Gly - G </option>
+                    <option value="15">Leucine - Leu - L</option>
+                    <option value="16">Methionine - Met - M</option>
+                    <option value="17">Phenylalanine - Phe - F</option>
+                    <option value="18">Valine - Val - V</option>
+                    <option value="19">Proline - Pro - P</option>
+                    <option value="20">Glycine - Gly - G </option>
                 </select>
-
-
-
-
-
-
-
-          
             </div>
         <div class="row">
             <div class="form-group">
-                <label for="comment">Sequences:</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <label for="sequences">Sequences:</label>
+                <textarea class="form-control" rows="5" id="sequences"></textarea>
             </div>
             <h6>Pathway ID</h6>
-            <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Pathway id">
+            <input type="text" name="pathway"  class="form-control pathway"  id="pathway" placeholder="Pathway id">
             <br>
 
         </div>
-        <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">
+        <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="submitvalues()" style="float: right;">
     </form>
 </div>
 <div id='footer'></div>
 <!-- script for jquery -->
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 <!-- script for choosing from listfield -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>-->
+<script type="text/javascript" src="libraries/chosen.js"></script>
 <!-- script for bootstrap js -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- script for slider js -->

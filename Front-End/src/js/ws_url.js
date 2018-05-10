@@ -1,8 +1,9 @@
 function getWsUrl(request, id){
         
-    var ws_base ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
-    var ws_logging = ws_base+"/auth/logging";
-    var ws_userID = ws_base+"/auth/userid";
+    var ws_base_glycan ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
+    var ws_base_protein ="http://glygen-vm-prd.biochemistry.gwu.edu/api/protein";
+    var ws_logging = ws_base_glycan+"/auth/logging";
+    var ws_userID = ws_base_glycan+"/auth/userid";
     
     switch (request) {
     case "generate_ID":
@@ -12,20 +13,26 @@ function getWsUrl(request, id){
     return ws_logging;
     break;
      case "image_service":
-    return ws_base + "/image/" + id; 
+    return ws_base_glycan + "/image/" + id;
     break;
     case "list":
-    return ws_base + "/list";
+    return ws_base_glycan + "/list";
     break;
     case "detail":
-    return ws_base +"/detail/" + id;
+    return ws_base_glycan +"/detail/" + id;
     break;
     case "typehead":
-    return ws_base +"/typehead";
+    return ws_base_glycan +"/typehead";
     break;
     case "search_init":
-    return ws_base +"/search_init";
+    return ws_base_glycan +"/search_init";
     break;
+    case "typehead":
+            return ws_base_protein +"/typehead";
+            break;
+            case "search_init":
+            return ws_base_protein +"/search_init";
+            break;
     default:
     return "";
     break;
