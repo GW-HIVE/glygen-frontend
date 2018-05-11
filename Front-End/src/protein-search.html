@@ -28,7 +28,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
-    .footer{
+
+    #footer{
 
         margin-top: 190px;
     }
@@ -43,24 +44,7 @@
         padding-right: 0px;
     }
 
-    /*.chosen-container {*/
-    /*display: block;*/
-    /*width: 100%;*/
-    /*height: 34px;*/
-    /*padding: 6px 12px;*/
-    /*font-size: 14px;*/
-    /*line-height: 1.42857143;*/
-    /*color: #555;*/
-    /*background-color: #fff;*/
-    /*background-image: none;*/
-    /*border: 1px solid #ccc;*/
-    /*border-radius: 4px;*/
-    /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
-    /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
-    /*-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
-    /*-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
-    /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
-    /*}*/
+
     .chosen-container-multi .chosen-choices {
         display: block;
 
@@ -102,14 +86,12 @@
             <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
             <div class="gg-text-example">Glycoprotein Example e.g </div>
         </div>
-
-
         <!-- First range-->
-        <div class="gg-form-group row">
-            <h6>GlycanProtein Size:</h6>
+        <div class="gg-form-group row1">
+            <h6>GlycoProtein Size:</h6>
             <div class="col-xs-2 min-value-alighnment">
                 <h6>Min</h6>
-                <div id="lower-value" style="padding-right2: 15px;"> </div>
+                <div id="lower-value"> </div>
             </div>
             <div class="col-xs-8">
                 <h6 class="align-center">Native Mass Range</h6>
@@ -135,14 +117,14 @@
         <div class="gg-form-group row">
         <h6>Protein Name</h6>
         <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name"  placeholder="Provide the protein name">
-            <div class="gg-text-example">Glycoprotein Example e.g </div>
+            <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
         </div>
 
         <!-- Gene Name-->
         <div class="gg-form-group row">
         <h6>Gene Name</h6>
         <input type="text" name="GeneName" class="form-control gene_name" id="gene_name"  placeholder="Provide the gene name">
-            <div class="gg-text-example">Glycoprotein Example e.g </div>
+            <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
         </div>
 
 
@@ -152,14 +134,20 @@
             <!-- Glycanid-->
         <div class="col-md-6" id="glycanrow">
         <input type="text" name="Glycan" class="form-control motif" id="glycan"  placeholder="Provide the Glycan ID">
+            <div class="gg-text-example">Glycan ID Example e.g:</div>
         </div>
+
+
             <!-- Glycanrelation-->
         <div class="col-md-6" id="glycanrelationrow">
             <select class="form-control glycan_relation" id="relation">
                 <option value="">Select Relation</option>
+                <div class="gg-text-example">Choose Glycan Relation </div>
             </select>
         </div>
         </div>
+
+
         <!-- amino acid-->
         <!--<div class="col-md-12" id="amino">-->
         <div class="gg-form-group row">
@@ -186,9 +174,9 @@
                     <option value="19">Proline - Pro - P</option>
                     <option value="20">Glycine - Gly - G </option>
                 </select>
-            <div class="gg-text-example">Amino acid Example e.g:Tyrosine - Tyr - Y </div>
+            <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
         </div>
-    
+
         <!-- Sequences-->
         <div class="gg-form-group row">
             <div class="form-group">
@@ -196,13 +184,13 @@
                 <textarea class="form-control" rows="5" id="sequences"></textarea>
 
             </div>
-            <div class="gg-text-example">Glycoprotein Example e.g </div>
+            <div class="gg-text-example">Sequences Example e.g: </div>
         </div>
         <!-- Pathway-->
             <div class="gg-form-group row">
             <h6>Pathway ID</h6>
             <input type="text" name="pathway"  class="form-control pathway"  id="pathway" placeholder="Pathway id">
-                <div class="gg-text-example">Glycoprotein Example e.g </div>
+                <div class="gg-text-example">Pathway Example e.g </div>
 
         </div>
 

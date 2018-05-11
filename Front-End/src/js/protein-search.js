@@ -112,12 +112,6 @@ $('#protein').on('input',function(){
 });
 
 
-
-
-
-
-
-
 /** functions for dropdowns organism
  * get organism drop down values for search form
  */
@@ -126,9 +120,9 @@ var mass_max;
 var mass_min;
 $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_protein"), function (result) {
-        $(".organism").append("<option>" + result.organism[0] + "</option>");
-        $(".organism").append("<option>" + result.organism[1] + "</option>");
-
+        for (var x = 0; x < result.organism.length; x++) {
+            $("#organism").append("<option>" + result.organism[x] + "</option>");
+        }
         var mass_max = result.protein_mass.max;
         var mass_min = result.protein_mass.min;
         mass(mass_min, mass_max)
@@ -174,7 +168,7 @@ function submitvalues() {
     var query_type = "search_protein";
 
     var organism= $("#organism").val();
-    var protein = $("#protein").val();
+    var protein = $("#protein_id").val();
     // var mass_slider = $("slider").val().noUiSlider.get();
     // var organism = document.getElementById("organism").value;
     // var protein = document.getElementById("protein").value;
