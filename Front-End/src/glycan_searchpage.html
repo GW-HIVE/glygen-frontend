@@ -35,72 +35,90 @@
     <div class="container gg-container">
         
         <form id="myForm" name="myForm">
-            <h6>Glycan ID:</h6>
+            <div class="gg-form-group row">
+                <h6>Glycan ID:</h6>
+                
                 <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org"> 
+                
                 <div class="gg-text-example">Glycan ID Example:e.g.G109565BM</div>
-            <br>
+            </div>
+                
             <!-- First range-->
-            <h6>Glycan Size:</h6>
-                <div class="form-group row">
-                    <div class="col-xs-2" style="padding-right: 125px;">
-                        <h6>Min</h6>
-                        <div id="lower-value"> </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <h6>Native Mass (range)</h6>
-                        <div id="slider"> </div>
-                    </div>
-                    <div class="col-xs-2" style="padding-left: 70px;">
-                        <h6>Max</h6>
-                        <div id="upper-value"> </div>
-                    </div>
+            <div class="gg-form-group row">
+                <h6>Glycan Size:</h6>
+                 
+                <div class="col-xs-2 min-value-alighnment">
+                    <h6>Min</h6>
+                    <div id="lower-value" style="padding-right2: 15px;"> </div>
+                </div>                
+                <div class="col-xs-8">
+                    <h6 class="align-center">Native Mass Range</h6>
+                    <div id="slider"> </div>
+                </div>               
+                <div class="col-xs-2 max-value-alighnment">
+                    <h6>Max</h6>
+                    <div id="upper-value"> </div>
+                </div>                
+            </div>
+            
+            <!-- second range-->
+            <div class="gg-form-group row">
+                <div class="col-xs-2 min-value-alighnment" >
+                    <h6>Min</h6>
+                    <div id="lower-value1"> </div>
                 </div>
-                <!-- second range-->
-                <div class="form-group row">
-                    <div class="col-xs-2" style="padding-right: 125px;">
-                        <h6>Min</h6>
-                        <div id="lower-value1"> </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <h6>Native Sugar (range)</h6>
-                        <div id="slider1" > </div>
-                    </div>
-                    <div class="col-xs-2" style="padding-left: 70px;">
-                        <h6>Max</h6>
-                        <div id="upper-value1"> </div>
-                    </div>
+                
+                <div class="col-xs-8">
+                    <h6 class="align-center">Native Sugar Range</h6>
+                    <div id="slider1"> </div>
                 </div>
-            <br> 
-            <h6>Organism:</h6>
+                <div class="col-xs-2 max-value-alighnment">
+                    <h6>Max</h6>
+                    <div id="upper-value1"> </div>
+                </div>
+            </div>
+               
+            <div class="gg-form-group row">    
+                <h6>Organism:</h6>
                 <select class="organism" id="organism">
-                    <option value="">Select organism</option>
+                    <option value="organism">Select organism</option>
                 </select>
                 <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
-            <br>
+            </div>
+               
+            <div class="gg-form-group row">
                 <h6>Glycan type:</h6>
                 <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
-                    <option value="">Select glycan type</option>
+                    <option value="glycan-type">Select glycan type</option>
                 </select>
-                <div class="gg-text-example">Glycan Example e.g N-glycan</div>               
-            <br>                
+                <div class="gg-text-example">Glycan Example e.g N-glycan</div>
+            </div>               
+            
+            <div class="gg-form-group row">                
                 <h6>Glycan subtype:</h6>
                 <select id="ddl2">
-                    <option value="">Select glycan subtype</option>
+                    <option value="glycan-subtype">Select glycan subtype</option>
                 </select> 
                 <div class="gg-text-example">Glycan Example e.g </div>           
-            <br> 
-            <h6>Glycoprotein ID:</h6>
+            </div>
+            
+            <div class="gg-form-group row"> 
+                <h6>Glycoprotein ID:</h6>
                 <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
                 <div class="gg-text-example">Glycoprotein Example e.g </div>
-            <br> 
-            <h6>Glycan Motif:</h6>
+            </div>
+            
+            <div class="gg-form-group row"> 
+                <h6>Glycan Motif:</h6>
                 <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
                 <div class="gg-text-example">Glycan Motif Example e.g </div>
-            <br> 
-            <h6>Enzyme:</h6>
+            </div>
+            
+            <div class="gg-form-group row"> 
+                <h6>Enzyme:</h6>
                 <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Biosynthetic Enzyme">
                 <div class="gg-text-example">Enzyme Example e.g </div>
-            <br>
+            </div>
             
             <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">
         
@@ -125,7 +143,6 @@
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
     <script src="js/editsearch.js"></script>
-
 
 </body>
 

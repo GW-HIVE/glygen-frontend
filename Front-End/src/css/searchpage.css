@@ -2,10 +2,10 @@
     box-sizing: border-box;
 }
 
-input[type=text], select, textarea{
+input[type=text], select, textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
+/*    padding: 12px;*/
+    border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
     resize: vertical;
@@ -39,7 +39,7 @@ input[type=submit]:hover {
 }
 */
 
-.container {
+.gg-container {
     width: 70%;
     border-radius: 5px;
 /*    background-color: #e8e8e8;*/
@@ -49,9 +49,37 @@ input[type=submit]:hover {
     margin-bottom: 60px;
 }
 
+@media only screen and (max-width: 768px) {
+    .gg-container {
+        width: 100%;
+        border-radius: 5px;
+        background-color: rgb(46,120, 183, 0.1);
+        padding: 40px;
+        margin-top: 30px;
+        margin-bottom: 60px;
+    }
+    
+}
+.align-center {
+    text-align: center !important;
+}
+
+.min-value-alighnment {
+        padding-left: 0;
+    }
+
+.max-value-alighnment {
+    text-align: right;
+    padding-right: 0;
+}
+
 .gg-text-example {
     margin-top: 3px;
     color: #2E78B7;    
+}
+
+.gg-form-group {
+    padding-bottom: 20px;
 }
 
 h6 {
