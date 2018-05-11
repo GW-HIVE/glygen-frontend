@@ -16,12 +16,15 @@
     <!--Stylesheet for slider-->
     <link href="css/nouislider.min.css" rel="stylesheet">
     <!--Bootstrap Stylesheet-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
-    <link rel="stylesheet" type="text/css" href="css/chosen.css">
+
+
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
@@ -44,9 +47,13 @@
 <div class="container gg-container">
 
     <form id="myForm" name="myForm">
-        <h6>GlycoProtein ID:</h6>
-        <input type="text" name="protein_id" class="form-control protein" id="protein_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org">
-        <div class="gg-text-example">Glycan ID Example:e.g.G109565BM</div>
+
+
+
+
+        <h6>Glycoprotein ID:</h6>
+        <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+        <div class="gg-text-example">Glycoprotein Example e.g </div>
         <br>
         <!-- First range-->
         <h6>GlycoProtein Size:</h6>
@@ -83,6 +90,7 @@
                 <option value="">Select Relation</option>
             </select>
         </div>
+        <div class="row">
         <div class="col-md-12">
                 <h6>Amino acid</h6>
                 <select class="limitedNumbChosen2" multiple="true">
@@ -108,6 +116,7 @@
                     <option value="20">Glycine - Gly - G </option>
                 </select>
             </div>
+        </div>
         <div class="row">
             <div class="form-group">
                 <label for="sequences">Sequences:</label>
@@ -124,8 +133,9 @@
 <div id='footer'></div>
 <!-- script for jquery -->
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+<!-- script for UI autocomplte -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- script for choosing from listfield -->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>-->
 <script type="text/javascript" src="libraries/chosen.js"></script>
 <!-- script for bootstrap js -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
