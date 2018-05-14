@@ -1,71 +1,4 @@
 
-//
-// $(document).ready(function(){
-//     //Chosen
-//     $(".limitedNumbChosen").chosen({
-//         // max_selected_options: 10,
-//         placeholder_text_multiple: "choose amino acid"
-//     })
-//         .bind("chosen:maxselected", function (){
-//             window.alert("You reached your limited number of selections which is 2 selections!");
-//         })
-//     //Select2
-//     $(".limitedNumbChosen2").chosen({
-//         // max_selected_options: 10,
-//         placeholder_text_multiple: "choose amino acid"
-//     })
-//         .bind("chosen:maxselected2", function (){
-//             window.alert("You reached your limited number of selections which is 2 selections!");
-//         });
-//
-// });
-//
-// function ajaxTypeHeadSuccess(data){
-//     $('#protein').autocomplete({
-//         source: data.slice(0,5)
-//     });
-// }
-//
-// function ajaxTypeHeadFailure(){
-//
-// }
-//
-// function LoadDatatypeahead() {
-//
-//     var ajaxConfig = {
-//         dataType: "json",
-//         url: getWsUrl("typehead_protein"),
-//         data: getProteinSearchPostdata('protein', $("#protein").val().toUpperCase()),
-//         method: 'POST',
-//         success: ajaxTypeHeadSuccess,
-//         error: ajaxTypeHeadFailure
-//     };
-//
-//
-//     // make the server call
-//     $.ajax(ajaxConfig);
-// }
-// $(document).ready(function(){
-//
-//     /** Protein field on change detect and suggest auto complete options from retrieved Json
-//      * @proteinjson - forms the JSON to post
-//      * @data-returns the protein ID's
-//      *
-//      */
-//     $('#protein').keyup(function(){
-//        LoadDatatypeahead();
-//     });
-//
-//
-// });
-
-
-
-
-
-
-
-
 $(document).ready(function(){
     //Chosen
     $(".limitedNumbChosen").chosen({
@@ -86,30 +19,71 @@ $(document).ready(function(){
 
 });
 
-$('#protein').on('input',function(){
-    var protein_id = document.getElementById("protein").value;
-    var proteinobj = {
-        field: "protein",
-        value:  protein_id
+
+
+
+
+$( "#protein" ).autocomplete({
+    source: function(request, response) {
+        var searchData = {
+            field: "protein",
+            value: request.term
+        };
+        var queryUrl = "http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/typehead?query=" + JSON.stringify(searchData);
+
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function( event, ui ) {
+        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
     }
-    var proteinjson = "query=" + JSON.stringify(proteinobj);
-    $.ajax({
-        url: getWsUrl("typehead"), // path to protein WS
-        method: 'post', // POST request
-        data: proteinjson, //post user input on change
-        success: function (data) {
-            //data is the JSON string
-            $(function () {
-                $(".protein").autocomplete({
-                    source: function (request, response) {
-                        var results = $.ui.autocomplete.filter(data, request.term);
-                        response(results.slice(0, 5));
-                    }
-                });
-            });
-        },
-    });
 });
+
+$( "#protein_name" ).autocomplete({
+    source: function(request, response) {
+        var searchData = {
+            field: "protein_name_short",
+            value: request.term
+        };
+        var queryUrl = "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/typehead?query=" + JSON.stringify(searchData);
+
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function( event, ui ) {
+        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    }
+});
+
+$( "#gene_name" ).autocomplete({
+    source: function(request, response) {
+        var searchData = {
+            field: "gene_name",
+            value: request.term
+        };
+        var queryUrl = "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/typehead?query=" + JSON.stringify(searchData);
+
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function( event, ui ) {
+        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    }
+});
+
+
 
 
 /** functions for dropdowns organism
@@ -169,16 +143,16 @@ function submitvalues() {
 
     var organism= $("#organism").val();
     var protein = $("#protein_id").val();
-    // var mass_slider = $("slider").val().noUiSlider.get();
+    //var mass_slider = $("slider").val().noUiSlider.get();
     // var organism = document.getElementById("organism").value;
     // var protein = document.getElementById("protein").value;
-    var mass_slider = document.getElementById("slider").noUiSlider.get();
+     var mass_slider = document.getElementById("slider").noUiSlider.get();
 
-    // var protein_name = $("#protein_name").val();
+    var protein_name_long = $("#protein_name_long").val();
+    var gene_name = $("#gene_name").val();
 
 
-
-    var formObject = getProteinSearchPostdata(query_type,organism,protein,mass_slider[0], mass_slider[1]);
+    var formObject = getProteinSearchPostdata(query_type,organism,protein,mass_slider[0], mass_slider[1], protein_name_long,gene_name);
 
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
@@ -202,13 +176,14 @@ function submitvalues() {
 
 
 //form json from form submit
-function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max) {
+function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name) {
     var formjson = {
         query_type: query_type,
         organism: organism,
         protein: protein,
-        mass: { "min": mass_min, "max": mass_max }
-
+        mass: { "min": mass_min, "max": mass_max },
+        protein_name_long:protein_name_long,
+        gene_name:gene_name
 
     };
     return formjson;
