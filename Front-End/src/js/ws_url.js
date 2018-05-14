@@ -27,18 +27,29 @@ function getWsUrl(request, id){
     case "search_init":
     return ws_base_glycan +"/search_init";
     break;
+        case "Search_protein":
+            return ws_base_protein +"/search";
+            break;
     case "typehead_protein":
-            return ws_base_glycan +"/typehead";
+        return ws_base_glycan +"/typehead";
+        break;
+
+
+        case "typehead_protein_name":
+            return ws_base_protein +"/typehead";
             break;
-            case "search_init_protein":
-            return ws_base_protein +"/search_init";
+
+        case "typehead_gene":
+            return ws_base_protein +"/typehead";
             break;
+    case "search_init_protein":
+        return ws_base_protein +"/search_init";
+        break;
     default:
     return "";
     break;
     }
    }
-   
 
 
    /**
@@ -59,8 +70,9 @@ function getWsUrl(request, id){
     return "query=" + JSON.stringify(query);
    }
 
-   function getSearchtypeheadData(field, value){
-       var query = {};
+
+    function getSearchtypeheadData(field, value){
+        var query = {};
        query.field = field;
        query.value = value;
        return "query=" + JSON.stringify(query);
@@ -84,12 +96,12 @@ function getWsUrl(request, id){
 //     return "query=" + JSON.stringify(query);
 // }
 
-// function getProteinSearchPostdata(organism,protein,mass,gene_name) {
+// function getProteinSearchPostdata(organism,protein,mass,gene_name,protein_id) {
 //     var query = {};
 //     query.mass =  mass;
 //     query.organism = organism ;
 //     query.protein = protein;
-//
+//     query.protein_id = protein_id;
 //     query.gene_name = gene_name;
 //     return "query=" + JSON.stringify(query);
 // }

@@ -22,51 +22,11 @@
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
-
-
+    <link rel="stylesheet" type="text/css" href="css/protein-search.css">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
-
-    #footer{
-
-        margin-top: 190px;
-    }
-
-    .limitedNumbChosen, .limitedNumbSelect2{
-        width: 400px;
-    }
-    #glycanrow{
-        padding-left: 0px;
-    }
-    #glycanrelationrow{
-        padding-right: 0px;
-    }
-
-
-    .chosen-container-multi .chosen-choices {
-        display: block;
-
-        height: 34px;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        color: #555;
-        background-color: #fff;
-        background-image: none;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    }
-
-
-
-
 
 </style>
 
@@ -84,7 +44,7 @@
         <div class="gg-form-group row">
             <h6>Glycoprotein ID:</h6>
             <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
-            <div class="gg-text-example">Glycoprotein Example e.g </div>
+            <div class="gg-text-example">Glycoprotein Example e.g:P0116</div>
         </div>
         <!-- First range-->
         <div class="gg-form-group row">
@@ -150,29 +110,32 @@
 
         <!-- amino acid-->
         <!--<div class="col-md-12" id="amino">-->
+
         <div class="gg-form-group row">
-                <h6>Amino acid</h6>
+            <h6>Amino acid</h6>
+                <h6 id =aminos>Click to Highlight Multiple Select</h6>
+
                 <select class="limitedNumbChosen2" multiple="true" >
-                    <option value="1">Arginine - Arg - R </option>
-                    <option value="2">Lysine - Lys - K </option>
-                    <option value="3">Aspartic acid - Asp - D </option>
-                    <option value="4">Glutamic acid - Glu - E </option>
-                    <option value="5">Glutamine - Gln - Q </option>
-                    <option value="6">Asparagine - Asn - N </option>
-                    <option value="7">Histidine - His - H </option>
-                    <option value="8">Serine - Ser - S </option>
-                    <option value="9">Threonine - Thr - T</option>
-                    <option value="10">Tyrosine - Tyr - Y</option>
-                    <option value="11">Cysteine - Cys - C</option>
-                    <option value="12">Tryptophan - Trp - W</option>
-                    <option value="13">Alanine - Ala - A</option>
-                    <option value="14">Isoleucine - Ile - I</option>
-                    <option value="15">Leucine - Leu - L</option>
-                    <option value="16">Methionine - Met - M</option>
-                    <option value="17">Phenylalanine - Phe - F</option>
-                    <option value="18">Valine - Val - V</option>
-                    <option value="19">Proline - Pro - P</option>
-                    <option value="20">Glycine - Gly - G </option>
+                    <option value="R">Arginine - Arg - R </option>
+                    <option value="K">Lysine - Lys - K </option>
+                    <option value="D">Aspartic acid - Asp - D </option>
+                    <option value="E">Glutamic acid - Glu - E </option>
+                    <option value="Q">Glutamine - Gln - Q </option>
+                    <option value="N">Asparagine - Asn - N </option>
+                    <option value="H">Histidine - His - H </option>
+                    <option value="S">Serine - Ser - S </option>
+                    <option value="T">Threonine - Thr - T</option>
+                    <option value="Y">Tyrosine - Tyr - Y</option>
+                    <option value="C">Cysteine - Cys - C</option>
+                    <option value="W">Tryptophan - Trp - W</option>
+                    <option value="A">Alanine - Ala - A</option>
+                    <option value="I">Isoleucine - Ile - I</option>
+                    <option value="L">Leucine - Leu - L</option>
+                    <option value="M">Methionine - Met - M</option>
+                    <option value="F">Phenylalanine - Phe - F</option>
+                    <option value="V">Valine - Val - V</option>
+                    <option value="P">Proline - Pro - P</option>
+                    <option value="G">Glycine - Gly - G </option>
                 </select>
             <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
         </div>
@@ -194,7 +157,7 @@
 
         </div>
 
-        <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="submitvalues()" style="float: right;">
+        <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
     </form>
 </div>
