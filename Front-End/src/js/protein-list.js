@@ -1,11 +1,6 @@
-//@author: Rupali Mahadik
-
+//@author: Pradeep Kumar
 // @description: UO1 Version-1.1.
-
-//@Date:19th Feb 2018.
-
-//@update:3 April 2018.
-
+//@Date:10th May 2018.
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -18,12 +13,13 @@ String.prototype.trunc = String.prototype.trunc ||
  function(n) {
  return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
  };
-// var id = '';
+//var id = '';
 var page = 1;
-var sort = 'id';
+var sort = 'protein_name_long';
 var dir = $('.dir-select').val();
-var url = getWsUrl('list') + "?action=get_user";
-var limit =10;
+//var url = getWsUrl('list') + "?action=get_user";
+var url = getWsUrl('list');
+var limit =25;
 
 /**
  * Reads a new limit and reloads the data.
@@ -103,7 +99,7 @@ function noOfPage(total_length,limit){
  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
  */
 function totalNoSearch(total_length){
-    $('.searchresult').html(" You Found  " + total_length +" results of glycan");
+    $('.searchresult').html(" You Found  " + total_length +" results of protein");
 
 }
 
@@ -161,7 +157,7 @@ function redirectPage1()
          }
           function redirectPage2()
          {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/protein-search.html";
          } 
          
          
@@ -175,7 +171,7 @@ function redirectPage1()
 
 function editSearch(){
   {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/protein-search.html?id="+id);
     }
 }
 /**
@@ -186,7 +182,7 @@ function editSearch(){
  @return -Details particular Glycan Id 
  */
 function PageFormat(value, row, index, field) {
- return "<a href='glycan-detail.html?id=" + value + "'>" + value + "</a>";
+ return "<a href='protein-detail.html?id=" + value + "'>" + value + "</a>";
 }
 
 /**
@@ -278,14 +274,9 @@ function updateSearch() {
     });
 }
 
-
-
-
-
-
 function editSearch() {
   {
-    window.location.replace("glycan_searchpage.html?id="+id);
+    window.location.replace("protein-search.html?id="+id);
     }
 }
 
@@ -313,15 +304,14 @@ function ajaxListSuccess(data) {
         var items = [];
         if (data.results) {
             for (var i = 0; i < data.results.length; i++) {
-                var glycan = data.results[i];
+                var protein = data.results[i];
                 items.push({
-                    id: glycan.id,
-                    mass: glycan.mass,
-                    number_proteins: glycan.number_proteins,
-                    number_enzymes: glycan.number_enzymes,
-                    number_sugar: glycan.number_sugar,
-                    iupac: glycan.iupac,
-                    glycoct: glycan.glycoct
+                    protein_ID: protein.protein_id,
+                    mass: protein.mass,
+                    gene_name: protein.gene_name,
+                    protein_name_long: protein.protein_name_long,
+                    protein_name_short: protein.protein_name_short,
+                    organism: protein.organism
                 });
             }
         }
@@ -333,7 +323,7 @@ function ajaxListSuccess(data) {
 
         buildSummary(data.query);
 
-        document.title='glycan-list';
+        document.title='protein-list';
         lastSearch = data;
     }
 
@@ -389,6 +379,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+
 LoadDataList(id);
 
 
