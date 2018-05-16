@@ -12,6 +12,8 @@ function getWsUrl(request, id){
     case "log_activity":
     return ws_logging;
     break;
+
+        //Glycan webservices
      case "image_service":
     return ws_base_glycan + "/image/" + id;
     break;
@@ -27,14 +29,15 @@ function getWsUrl(request, id){
     case "search_init":
     return ws_base_glycan +"/search_init";
     break;
-        case "Search_protein":
-            return ws_base_protein +"/search";
+
+
+    //Protein webservices
+    case "Search_protein":
+        return ws_base_protein +"/search";
             break;
     case "typehead_protein":
         return ws_base_glycan +"/typehead";
         break;
-
-
         case "typehead_protein_name":
             return ws_base_protein +"/typehead";
             break;

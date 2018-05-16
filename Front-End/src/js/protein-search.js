@@ -12,9 +12,6 @@ $(document).ready(function(){
 });
 
 
-
-
-
 $( "#protein" ).autocomplete({
     source: function(request, response) {
         var queryUrl = getWsUrl("typehead_protein") + "?" + getSearchtypeheadData( "protein", request.term);
@@ -63,7 +60,16 @@ $( "#gene_name" ).autocomplete({
     }
 });
 
-
+function allLetter(textarea) {
+    var letters = /^[RKDEQNHSTYCWAILMFVPGrkdqnhstycwailmfvpg]+$/;
+    if (textarea.value.match(letters)) {
+        document.getElementById("msg").innerHTML = "";
+        return true;
+    } else {
+        document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+        return false;
+    }
+}
 
 
 /** functions for dropdowns organism
@@ -122,8 +128,8 @@ function ajaxProteinSearchSuccess() {
 
     var organism= $("#organism").val();
     var protein_id = $("#protein").val();
-    // var mass_slider = $("#slider").get(0).noUiSlider.get();
-    var mass_slider = document.getElementById("slider").noUiSlider.get();
+    var mass_slider = $("#slider").get(0).noUiSlider.get();
+    // var mass_slider = document.getElementById("slider").noUiSlider.get();
     // var gene_name=$("#gene_name").val();
     // var protein_name_long = $("#protein_name_long").val();
     var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id);

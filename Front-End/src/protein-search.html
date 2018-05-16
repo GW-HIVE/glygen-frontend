@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,12 +21,11 @@
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
-    <link rel="stylesheet" type="text/css" href="css/protein-search.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <style>
-
 </style>
 
 <body>
@@ -37,13 +35,13 @@
 <h3 class="about-heading" style="text-align: center"> Glycoprotein Search </h3>
 <div class="container gg-container">
 
-<form id="myForm" name="myForm">
+    <form id="myForm" name="myForm">
 
 
         <!-- GlycoProtein_ID-->
         <div class="gg-form-group row">
             <h6>Glycoprotein ID:</h6>
-            <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
+            <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
             <div class="gg-text-example">Glycoprotein Example e.g:P0116</div>
         </div>
         <!-- First range-->
@@ -58,8 +56,8 @@
                 <div id="slider"> </div>
             </div>
             <!--<div class="col-xs-2 max-value-alighnment">-->
-                <h6>Max</h6>
-                <div id="upper-value"> </div>
+            <h6>Max</h6>
+            <div id="upper-value"> </div>
             <!--</div>-->
         </div>
 
@@ -68,43 +66,47 @@
         <div class="gg-form-group row">
             <h6>Organism:</h6>
             <select class="organism" id="organism">
-                <option value="organism">Select organism</option>
+                <option value="">Select organism</option>
             </select>
             <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
         </div>
 
         <!-- Protein-->
         <div class="gg-form-group row">
-        <h6>Protein Name</h6>
-        <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name"  placeholder="Provide the protein name">
+            <h6>Protein Name</h6>
+            <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
             <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
         </div>
 
         <!-- Gene Name-->
         <div class="gg-form-group row">
-        <h6>Gene Name</h6>
-        <input type="text" name="GeneName" class="form-control gene_name" id="gene_name"  placeholder="Provide the gene name">
+            <h6>Gene Name</h6>
+            <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
             <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
         </div>
 
 
         <!-- Glycan-->
         <div class="gg-form-group row">
-        <h6>Glycan</h6>
+            <h6>Glycan</h6>
             <!-- Glycanid-->
-        <div class="col-md-6" id="glycanrow">
-        <input type="text" name="Glycan" class="form-control motif" id="glycan"  placeholder="Provide the Glycan ID">
-            <div class="gg-text-example">Glycan ID Example e.g:</div>
-        </div>
+            <div class="col-md-6" id="glycanrow">
+                <input type="text" name="Glycan" class="form-control motif" id="glycan" placeholder="Provide the Glycan ID">
+                <div class="gg-text-example">Glycan ID Example e.g:</div>
+            </div>
 
 
             <!-- Glycanrelation-->
-        <div class="col-md-6" id="glycanrelationrow">
-            <select class="form-control glycan_relation" id="relation">
-                <option value="">Select Relation</option>
-                <div class="gg-text-example">Choose Glycan Relation </div>
-            </select>
-        </div>
+            <div class="col-md-6" id="glycanrelationrow">
+                <select class="form-control glycan_relation" id="relation">
+                    <option value="">Select Relation</option>
+                        <option value="attached">attached</option>
+                        <option value="binding">binding</option>
+                        <option value="any">any</option>
+
+                    <div class="gg-text-example">Choose Glycan Relation </div>
+                </select>
+            </div>
         </div>
 
 
@@ -113,49 +115,49 @@
 
         <div class="gg-form-group row">
             <h6>Amino acid</h6>
-                <h6 id =aminos>Click to Highlight Multiple Select</h6>
+            <h6 id=aminos>Click to Highlight Multiple Select</h6>
 
-                <select class="limitedNumbChosen2" multiple="true" >
-                    <option value="R">Arginine - Arg - R </option>
-                    <option value="K">Lysine - Lys - K </option>
-                    <option value="D">Aspartic acid - Asp - D </option>
-                    <option value="E">Glutamic acid - Glu - E </option>
-                    <option value="Q">Glutamine - Gln - Q </option>
-                    <option value="N">Asparagine - Asn - N </option>
-                    <option value="H">Histidine - His - H </option>
-                    <option value="S">Serine - Ser - S </option>
-                    <option value="T">Threonine - Thr - T</option>
-                    <option value="Y">Tyrosine - Tyr - Y</option>
-                    <option value="C">Cysteine - Cys - C</option>
-                    <option value="W">Tryptophan - Trp - W</option>
-                    <option value="A">Alanine - Ala - A</option>
-                    <option value="I">Isoleucine - Ile - I</option>
-                    <option value="L">Leucine - Leu - L</option>
-                    <option value="M">Methionine - Met - M</option>
-                    <option value="F">Phenylalanine - Phe - F</option>
-                    <option value="V">Valine - Val - V</option>
-                    <option value="P">Proline - Pro - P</option>
-                    <option value="G">Glycine - Gly - G </option>
-                </select>
+            <select class="limitedNumbChosen2" multiple="true">
+                <option value="R">Arginine - Arg - R </option>
+                <option value="K">Lysine - Lys - K </option>
+                <option value="D">Aspartic acid - Asp - D </option>
+                <option value="E">Glutamic acid - Glu - E </option>
+                <option value="Q">Glutamine - Gln - Q </option>
+                <option value="N">Asparagine - Asn - N </option>
+                <option value="H">Histidine - His - H </option>
+                <option value="S">Serine - Ser - S </option>
+                <option value="T">Threonine - Thr - T</option>
+                <option value="Y">Tyrosine - Tyr - Y</option>
+                <option value="C">Cysteine - Cys - C</option>
+                <option value="W">Tryptophan - Trp - W</option>
+                <option value="A">Alanine - Ala - A</option>
+                <option value="I">Isoleucine - Ile - I</option>
+                <option value="L">Leucine - Leu - L</option>
+                <option value="M">Methionine - Met - M</option>
+                <option value="F">Phenylalanine - Phe - F</option>
+                <option value="V">Valine - Val - V</option>
+                <option value="P">Proline - Pro - P</option>
+                <option value="G">Glycine - Gly - G </option>
+            </select>
             <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
         </div>
-
-        <!-- Sequences-->
         <div class="gg-form-group row">
             <div class="form-group">
-                <label for="sequences">Sequences:</label>
-                <textarea class="form-control" rows="5" id="sequences"></textarea>
-
+                <form name="form1" action="#">
+                    <textarea id ="sequences" class="textbox"  name='text1'rows="10" cols="50" onkeyup="allLetter(document.form1.text1)"></textarea>
+                    <label id='msg' class="rq"></label>
+                </form>
+                <div class="gg-text-example">Sequence Example e.g: R </div>
             </div>
-            <div class="gg-text-example">Sequences Example e.g: </div>
         </div>
-        <!-- Pathway-->
-            <div class="gg-form-group row">
+
+        <div class="gg-form-group row">
             <h6>Pathway ID</h6>
-            <input type="text" name="pathway"  class="form-control pathway"  id="pathway" placeholder="Pathway id">
-                <div class="gg-text-example">Pathway Example e.g </div>
+            <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
+            <div class="gg-text-example">Pathway Example e.g </div>
 
         </div>
+
 
         <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
@@ -163,6 +165,7 @@
 </div>
 <div id='footer'></div>
 <!-- script for jquery -->
+
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 <!-- script for UI autocomplte -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
