@@ -2,8 +2,8 @@ function getWsUrl(request, id){
         
     var ws_base_glycan ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
     var ws_base_protein ="http://glygen-vm-tst.biochemistry.gwu.edu/api/protein";
-    var ws_logging = ws_base_glycan+"/auth/logging";
-    var ws_userID = ws_base_glycan+"/auth/userid";
+    var ws_logging = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/logging";
+    var ws_userID = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/userid";
     
     switch (request) {
     case "generate_ID":
