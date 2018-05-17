@@ -28,19 +28,6 @@ function tracking() {
     }
 }
 
-// function logID() {
-//     var txt = "We will log your actions to improve the user experience. You can always change this setting in <strong>My GlyGen</strong>.";
-//     var data = "No ID assigned";
-//     $.get(getWsUrl("generate_ID") + "?action=get_id", function (response) { 
-//         // $.get(getWsUrl("generate_ID"), function (response) {               //$.get("http://localhost:8080/Logging.php?action=get_id", function(response) {
-//         data = response.userid;
-//         localStorage.setItem("ID", data);                           //Store the ID from the webservice
-//         txt += " Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
-//         displayBannerMsg(txt);
-//         activityTracker("user", "", "some message");
-//     });
-// }
-
 function logID()
 {
     var txt = "We will log your actions to improve the user experience. You can always change this setting in <strong>My GlyGen</strong>.";
@@ -48,9 +35,9 @@ function logID()
     $.ajax({
         type: 'post',
         url: getWsUrl("generate_ID"),
-       // data: json,
+        data: 'json',
         success: function (results) {
-            data = results.userid;
+            data = results.user;
             localStorage.setItem("ID", data);                           //Store the ID from the webservice
             txt += " Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
             displayBannerMsg(txt);
