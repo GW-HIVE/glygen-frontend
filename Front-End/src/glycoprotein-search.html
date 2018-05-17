@@ -11,40 +11,38 @@
     <title>Protein_Search</title>
 
     <!--css  do not change seqence-->
-    <style>
-        .chosen-container chosen-container-multi {
-            width: 100%;
-        }
 
-        #msg {
-            color: #a94442;
-        }
-    </style>
     <!--Stylesheet for slider-->
     <link href="css/nouislider.min.css" rel="stylesheet">
     <!--Bootstrap Stylesheet-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen-sprite@2x.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen-sprite.png">
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
-    <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
+
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+<style>
+</style>
 
 <body>
-    <div id='header'></div>
-    <h3 class="about-heading" style="text-align: center"> Protein Search </h3>
-    <div class="container gg-container">
+
+
+<div id='header'></div>
+<h3 class="about-heading" style="text-align: center"> Glycoprotein Search </h3>
+<div class="container gg-container">
+
+    <form id="myForm" name="myForm">
+
+
         <!-- GlycoProtein_ID-->
         <div class="gg-form-group row">
-            <h6>Protein ID:</h6>
+            <h6>Glycoprotein ID:</h6>
             <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
-            <div class="gg-text-example">Protein Example e.g:P0116</div>
+            <div class="gg-text-example">Glycoprotein Example e.g:P0116</div>
         </div>
         <!-- First range-->
         <div class="gg-form-group row">
@@ -57,11 +55,12 @@
                 <h6 class="align-center">Native Mass Range</h6>
                 <div id="slider"> </div>
             </div>
-
+            <!--<div class="col-xs-2 max-value-alighnment">-->
             <h6>Max</h6>
             <div id="upper-value"> </div>
             <!--</div>-->
         </div>
+
 
         <!-- Organism-->
         <div class="gg-form-group row">
@@ -101,23 +100,20 @@
             <div class="col-md-6" id="glycanrelationrow">
                 <select class="form-control glycan_relation" id="relation">
                     <option value="">Select Relation</option>
-                    <option value="attached">attached</option>
-                    <option value="binding">binding</option>
-                    <option value="any">any</option>
                     <div class="gg-text-example">Choose Glycan Relation </div>
                 </select>
             </div>
         </div>
 
-<!-- Glycan end-->
-        <!-- amino acid-->
 
+        <!-- amino acid-->
+        <!--<div class="col-md-12" id="amino">-->
 
         <div class="gg-form-group row">
             <h6>Amino acid</h6>
             <h6 id=aminos>Click to Highlight Multiple Select</h6>
 
-            <select class="glycosylated_aa" multiple="true">
+            <select class="limitedNumbChosen2" multiple="true">
                 <option value="R">Arginine - Arg - R </option>
                 <option value="K">Lysine - Lys - K </option>
                 <option value="D">Aspartic acid - Asp - D </option>
@@ -141,54 +137,60 @@
             </select>
             <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
         </div>
-
-        <!-- End amino acid-->
-        <!-- Sequences-->
         <div class="gg-form-group row">
             <div class="form-group">
                 <form name="form1" action="#">
-                    <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                    <textarea="text" class="textbox" id="sequences" name='text1' rows="10" cols="50" onkeyup="allLetter(document.form1.text1)"></textarea>
                     <label id='msg' class="rq"></label>
                 </form>
             </div>
         </div>
- <!-- end Sequences-->
 
- <!--Pathway-->
         <div class="gg-form-group row">
             <h6>Pathway ID</h6>
             <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
             <div class="gg-text-example">Pathway Example e.g </div>
 
         </div>
-<!--End Pathway-->
+
 
         <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
-        <!--</form>-->
-    </div>
-    <div id='footer'></div>
-    <!-- script for jquery -->
-
-    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <!-- script for UI autocomplte -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- script for choosing from listfield -->
-    <script type="text/javascript" src="libraries/chosen.js"></script>
-    <!-- script for bootstrap js -->
-    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-    <!-- script for slider js -->
-    <script src="js/nouislider.min.js"></script>
-    <!-- script for navaigation bar js -->
-    <script src="js/navbar.js"></script>
-    <!-- script for searchpage js -->
-    <script type="text/javascript" src="js/protein-search.js"></script>
-    <!-- script for tracking js -->
-    <script src="js/activity_tracker.js"></script>
-    <!-- script for getting Web Service URLs -->
-    <script type="text/javascript" src="js/ws_url.js"></script>
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
+    </form>
+</div>
+<div id='footer'></div>
+<!-- script for jquery -->
+<script>
+    function allLetter(textareatxt) {
+        var letters = /^[RKDEQNHSTYCWAILMFVPG]+$/;
+        if (textareatxt.value.match(letters)) {
+            document.getElementById("msg").innerHTML = "";
+            return true;
+        } else {
+            document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+            return false;
+        }
+    }
+</script>
+<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+<!-- script for UI autocomplte -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- script for choosing from listfield -->
+<script type="text/javascript" src="libraries/chosen.js"></script>
+<!-- script for bootstrap js -->
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<!-- script for slider js -->
+<script src="js/nouislider.min.js"></script>
+<!-- script for navaigation bar js -->
+<script src="js/navbar.js"></script>
+<!-- script for searchpage js -->
+<script type="text/javascript" src="js/protein-search.js"></script>
+<!-- script for tracking js -->
+<script src="js/activity_tracker.js"></script>
+<!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="js/ws_url.js"></script>
+<!-- script for error-message/header-footer js -->
+<script src="js/utility.js"></script>
 </body>
 
 </html>
