@@ -8,42 +8,42 @@
  * @proteinjson - forms the JSON to post
  * @data-returns the protein ID's
  * 
-*/ 
-$('#protein').on('input',function(){
+*/
+$('#protein').on('input', function () {
     var protein_id = document.getElementById("protein").value;
-var proteinobj = {
-    field: "protein",
-    value:  protein_id
-}
-var proteinjson = "query=" + JSON.stringify(proteinobj);
-$.ajax({
-    url: getWsUrl("typehead"), // path to protein WS
-    method: 'post', // POST request 
-    data: proteinjson, //post user input on change
-    success: function (data) {
-        //data is the JSON string
-        $(function () {
-            $(".protein").autocomplete({
-                source: function (request, response) {
-                    var results = $.ui.autocomplete.filter(data, request.term);
-                    response(results.slice(0, 5));
-                }
+    var proteinobj = {
+        field: "protein",
+        value: protein_id
+    }
+    var proteinjson = "query=" + JSON.stringify(proteinobj);
+    $.ajax({
+        url: getWsUrl("typehead"), // path to protein WS
+        method: 'post', // POST request 
+        data: proteinjson, //post user input on change
+        success: function (data) {
+            //data is the JSON string
+            $(function () {
+                $(".protein").autocomplete({
+                    source: function (request, response) {
+                        var results = $.ui.autocomplete.filter(data, request.term);
+                        response(results.slice(0, 5));
+                    }
+                });
             });
-        });
-    },
-});
+        },
+    });
 });
 
 /** Motif field on change detect and suggest auto complete options from retrieved Json
  * @Motifjson - forms the JSON to post
  * @data-returns the Motifs
  * 
-*/ 
-    $('#motif').on('input',function(){
-        var motif_id = document.getElementById("motif").value;
+*/
+$('#motif').on('input', function () {
+    var motif_id = document.getElementById("motif").value;
     var motifobj = {
         field: "motif",
-        value:  motif_id
+        value: motif_id
     }
     var motifjson = "query=" + JSON.stringify(motifobj);
     $.ajax({
@@ -62,43 +62,43 @@ $.ajax({
             });
         },
     });
-    });
+});
 
 
 /** enzyme field on change detect and suggest auto complete options from retrieved Json
  * @enzymejson - forms the JSON to post
  * @data-returns the enzymes
  * 
-*/ 
-$('#enzyme').on('input',function(){
+*/
+$('#enzyme').on('input', function () {
     var enzyme_id = document.getElementById("enzyme").value;
-var enzymeobj = {
-    field: "enzyme",
-    value:  enzyme_id
-}
-var enzymejson = "query=" + JSON.stringify(enzymeobj);
-$.ajax({
-    url: getWsUrl("typehead"), // path to protein WS
-    method: 'post', // POST request 
-    data: enzymejson, //post user input on change
-    success: function (data) {
-        //data is the JSON string
-        $(function () {
-            $(".enzyme").autocomplete({
-                source: function (request, response) {
-                    var results = $.ui.autocomplete.filter(data, request.term);
-                    response(results.slice(0, 5));
-                }
+    var enzymeobj = {
+        field: "enzyme",
+        value: enzyme_id
+    }
+    var enzymejson = "query=" + JSON.stringify(enzymeobj);
+    $.ajax({
+        url: getWsUrl("typehead"), // path to protein WS
+        method: 'post', // POST request 
+        data: enzymejson, //post user input on change
+        success: function (data) {
+            //data is the JSON string
+            $(function () {
+                $(".enzyme").autocomplete({
+                    source: function (request, response) {
+                        var results = $.ui.autocomplete.filter(data, request.term);
+                        response(results.slice(0, 5));
+                    }
+                });
             });
-        });
-    },
-});
+        },
+    });
 });
 
 /** functions for dropdowns organism 
  * get organism drop down values for search form
  */
- 
+
 var mass_max;
 var mass_min;
 $(document).ready(function () {
@@ -108,41 +108,40 @@ $(document).ready(function () {
         $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
         var mass_max = result.glycan_mass.max;
         var mass_min = result.glycan_mass.min;
+        var sugar_mass_min = result.number_monosaccharides.min;
+        var sugar_mass_max = result.number_monosaccharides.max;
         mass(mass_min, mass_max)
-
-
-        // check for Id to see if we need to load search values
-        //Please do not remove this code as it is required for prepolluting search values.
-        var id = getParameterByName('id') || id;
-
-        if(id){
-            LoadSearchvalues(id);
-        }
+        sugarmass(sugar_mass_min, sugar_mass_max)
     });
 });
 
 
-//Sugar mass value
-var nonLinearSlider1 = document.getElementById('slider1');
-noUiSlider.create(nonLinearSlider1, {
+/** Sugar Mass range function
+ * @param {numeric} sugar_mass_min - minimum value of the sugar mass range
+ * @param {numeric} sugar_mass_max - maximum value of the sugar mass range
+ */
+function sugarmass(sugar_mass_min, sugar_mass_max) {
+    var nonLinearSlider1 = document.getElementById('slider1');
+    noUiSlider.create(nonLinearSlider1, {
 
-    connect: true,
-    behaviour: 'tap',
-    start: [0, 10000],
-    range: {
-        'min': [0],
-        'max': [10000]
-    }
-});
-var nodes1 = [
-    document.getElementById('lower-value1'), // 0
-    document.getElementById('upper-value1')  // 1
-];
-// Display the slider value and how far the handle moved
-// from the left edge of the slider.
-nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
-    nodes1[handle].innerHTML = values[handle];
-});
+        connect: true,
+        behaviour: 'tap',
+        start: [0, 10000],
+        range: {
+            'min': sugar_mass_min,
+            'max': sugar_mass_max
+        }
+    });
+    var nodes1 = [
+        document.getElementById('lower-value1'), // 0
+        document.getElementById('upper-value1')  // 1
+    ];
+    // Display the slider value and how far the handle moved
+    // from the left edge of the slider.
+    nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
+        nodes1[handle].innerHTML = values[handle];
+    });
+}
 
 /** Mass range function
  * @param {numeric} mass_min - minimum value of the mass range
@@ -177,7 +176,7 @@ function mass(mass_min, mass_max) {
  * @param {numeric} ddl2 - Glycan sub type 
  */
 
-function configureDropDownLists(ddl1, ddl2,callback) {
+function configureDropDownLists(ddl1, ddl2) {
     var nglycan;
     var oglycan;
     // var nglycan={};
@@ -203,9 +202,6 @@ function configureDropDownLists(ddl1, ddl2,callback) {
             default:
                 ddl2.options.length = 0;
                 break;
-        }
-        if(callback) {
-            callback();
         }
     }
 }
@@ -236,13 +232,13 @@ function submitvalues() {
         url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search',
         data: json,
         success: function (results) {
-            if(results.search_results_id){
+            if (results.search_results_id) {
                 window.location = './glycan-list.html?id=' + results.search_results_id;
             }
-            else{
+            else {
                 displayErrorByCode("1")
             }
-            
+
         }
     });
 }
