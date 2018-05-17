@@ -156,3 +156,22 @@ select {
 #searchfield form .biginput:focus {
   color: #858585;
 }
+
+.chosen-container chosen-container-multi chosen-with-drop chosen-container-active {
+    width: 100%;
+    overflow: hidden;
+    margin-right: 100px;
+}
+.chosen-container-multi .chosen-choices{
+    width: 100%;
+    overflow: hidden;
+    margin-right: 100px;
+}
+.chosen-container .chosen-drop{
+    width: 100%;
+    overflow: hidden;
+    margin-right: 100px;
+}
+#msg {
+    color: #a94442;
+}

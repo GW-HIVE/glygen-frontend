@@ -125,6 +125,7 @@ function mass(mass_min, mass_max) {
 }
 
 
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
