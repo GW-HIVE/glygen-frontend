@@ -32,7 +32,7 @@
                 <!-- Summary Table Goes Here -->
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="paginationctrl1">
             <div class="col-md-12 col-xs-12">
                 <form class="form-inline" onsubmit="return false;">
                     <label>Page</label>
@@ -57,7 +57,7 @@
                         <option value="asc" selected>ASC</option>
                         <option value="desc">DESC</option>
                     </select>
-                    <P class="searchresult"></P>
+                    <label class="searchresult"></label>
                 </form>
             </div>
         </div>
@@ -84,15 +84,17 @@
                         <tr>
                             <td>Mass</td>
                             {{#mass.min}}
-                            <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
+                            <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} -Da</td>
                             {{/mass.max}}
                         </tr>
-                        {{/mass.min}} {{#organism}}
+                        {{/mass.min}}
+                        {{#organism}}
                         <tr>
                             <td>Organism</td>
                             <td>{{organism}}</td>
                         </tr>
-                        {{/organism}} {{#glycantype}}
+                        {{/organism}}
+                        {{#glycantype}}
                         <tr>
                             <td>Glycan Type</td>
                             <td>{{glycantype}}</td>
@@ -102,12 +104,14 @@
                             <td>Glycan SubType</td>
                             <td>{{glycansubtype}}</td>
                         </tr>
-                        {{/glycansubtype}} {{#proteinid}}
+                        {{/glycansubtype}}
+                        {{#proteinid}}
                         <tr>
                             <td>Glycosylated Protein</td>
                             <td>{{proteinid}}</td>
                         </tr>
-                        {{/proteinid}} {{#enzyme}}
+                        {{/proteinid}}
+                        {{#enzyme}}
                         <tr>
                             <td>Synthesizing Enzyme</td>
                             <td>{{enzyme}}</td>

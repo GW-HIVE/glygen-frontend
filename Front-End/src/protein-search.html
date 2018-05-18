@@ -26,11 +26,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<STYLE>
-    .form1{
-        paddingbottom:0px;
-    }
-</STYLE>
+
 <body>
 <div id='header'></div>
 <h3 class="about-heading" style="text-align: center">Protein Search </h3>
@@ -144,9 +140,11 @@
         <div class="form-group">
             <form name="form1" action="#">
                 <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
                 <label id='msg' class="rq"></label></form>
+
         </div>
-        <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
+
     </div>
     <!-- end Sequences-->
 
@@ -159,17 +157,15 @@
     <!--</div>-->
     <!--End Pathway-->
 
-    <!--<div class="gg-form-group row" id="glycosylation_evidence">-->
-        <!--<h6>Glycosylation Evidences</h6>-->
-        <!--<select class="form-control>-->
-            <!--<option value="">Select Relation</option>-->
-        <!--<option value="calculated">attached</option>-->
-        <!--<option value="experimental">binding</option>-->
-        <!--<option value="any">any</option>-->
+    <div class="gg-form-group row" id="glycosylation_evidence" style="display: none">
+        <h6>Glycosylation Evidences</h6>
+        <select class="form-control>
+            <option value="">none</option>
+
         <!--<option value="any">none</option>-->
 
-        <!--</select>-->
-    <!--</div>-->
+        </select>
+    </div>
     <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
     <!--</form>-->
