@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen-sprite@2x.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.5/chosen-sprite.png">
+
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
@@ -27,10 +26,14 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
+<STYLE>
+    .form1{
+        paddingbottom:0px;
+    }
+</STYLE>
 <body>
 <div id='header'></div>
-<h3 class="about-heading" style="text-align: center"> GlycoProtein Search </h3>
+<h3 class="about-heading" style="text-align: center">Protein Search </h3>
 <div class="container gg-container">
     <!-- GlycoProtein_ID-->
     <div class="gg-form-group row">
@@ -148,12 +151,12 @@
     <!-- end Sequences-->
 
     <!--Pathway-->
-    <div class="gg-form-group row">
+    <!--<div class="gg-form-group row">-->
         <h6>Pathway ID:</h6>
         <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
         <div class="gg-text-example">Pathway Example e.g:P77731 </div>
 
-    </div>
+    <!--</div>-->
     <!--End Pathway-->
 
     <!--<div class="gg-form-group row" id="glycosylation_evidence">-->
@@ -167,7 +170,7 @@
 
         <!--</select>-->
     <!--</div>-->
-    <input type="button" class="btn-lg btn-primary" value="Search GlycoProtein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
+    <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
     <!--</form>-->
 </div>
