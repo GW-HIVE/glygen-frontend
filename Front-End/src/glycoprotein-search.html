@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -88,7 +87,6 @@
             <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
         </div>
 
-
         <!-- Glycanrelation-->
         <div class="col-md-6" id="glycanrelationrow">
             <select class="form-control glycan_relation" id="relation">
@@ -141,9 +139,10 @@
         <div class="form-group">
             <form name="form1" action="#">
                 <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
                 <label id='msg' class="rq"></label></form>
         </div>
-        <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
+
     </div>
     <!-- end Sequences-->
 
@@ -155,15 +154,14 @@
 
     </div>
     <!--End Pathway-->
-
     <div class="gg-form-group row" id="glycosylation_evidence">
         <h6>Glycosylation Evidences</h6>
         <select class="form-control>
             <option value="">Select Relation</option>
-            <option value="calculated">attached</option>
-            <option value="experimental">binding</option>
+            <option value="calculated">calculated</option>
+            <option value="experimental">experimental</option>
             <option value="any">any</option>
-        <option value="any">none</option>
+        <option value="none">none</option>
 
         </select>
     </div>
