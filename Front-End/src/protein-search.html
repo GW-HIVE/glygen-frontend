@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
 
     <!--search page Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
@@ -157,15 +158,17 @@
     <!--</div>-->
     <!--End Pathway-->
 
-    <div class="gg-form-group row" id="glycosylation_evidence" style="display: none">
-        <h6>Glycosylation Evidences</h6>
-        <select class="form-control>
-            <option value="">none</option>
+    <!--<input id="glycosylation_evidence" type="hidden" name="glycosylation_evidence" value="none" />-->
 
-        <!--<option value="any">none</option>-->
+    <!--<div class="gg-form-group row" id="glycosylation_evidence" style="display: none">-->
+        <!--<h6>Glycosylation Evidences</h6>-->
+        <!--<select class="form-control">-->
+            <!--<option value="none" selected="selected">none</option>-->
 
-        </select>
-    </div>
+        <!--&lt;!&ndash;<option value="any">none</option>&ndash;&gt;-->
+
+        <!--</select>-->
+    <!--</div>-->
     <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
     <!--</form>-->
@@ -186,6 +189,8 @@
 <script src="js/navbar.js"></script>
 <!-- script for searchpage js -->
 <script type="text/javascript" src="js/protein-search.js"></script>
+<!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="libraries/alertify.js"></script>
 <!-- script for tracking js -->
 <script src="js/activity_tracker.js"></script>
 <!-- script for getting Web Service URLs -->

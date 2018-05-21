@@ -81,6 +81,23 @@ $( "#gene_name" ).autocomplete({
  * get organism drop down values for search form
  */
 
+
+
+// function addCommas(nStr) {
+//     nStr += '';
+//     var x = nStr.split('.');
+//     var x1 = x[0];
+//     var x2 = x.length > 1 ? '.' + x[1] : '';
+//     var rgx = /(\d+)(\d{3})/;
+//
+//     while (rgx.test(x1)) {
+//         x1 = x1.replace(rgx, '$1' + ',' + '$2');
+//     }
+//
+//     return x1 + x2;
+// }
+
+
 var mass_max;
 var mass_min;
 $(document).ready(function () {
@@ -120,6 +137,7 @@ function mass(mass_min, mass_max) {
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
         nodes[handle].innerHTML = values[handle];
+        // nodes[handle].innerHTML = addCommas(values[handle]);
     });
 
 }
@@ -140,10 +158,10 @@ function ajaxProteinSearchSuccess() {
     var pathway_id=$("#pathway").val();
     var sequence=$("#sequences").val();
     var glycosylated_aa= $("#glycosylated_aa").val();
-    var glycosylation_evidence= $("#glycosylation_evidence").val();
+    var glycosylation_evidence= 'none';
     var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence);
         // , protein_name_long,gene_name);
-    var json = "query=" + JSON.stringify(formObject);
+    var json = "query=" + (JSON.stringify(formObject));
     $.ajax({
         type: 'post',
         url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
@@ -175,7 +193,7 @@ function ajaxProteinSearchSuccess() {
         pathway_id:pathway_id,
         sequence: sequence,
         glycosylated_aa: glycosylated_aa,
-        glycosylation_evidence:glycosylation_evidence
+        // glycosylation_evidence:glycosylation_evidence
 
     };
     return formjson;

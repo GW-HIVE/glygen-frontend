@@ -180,7 +180,14 @@ function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_ma
 }
 
 
+$(window).on('resize', function () {
+    var $element = $('.chosen-container');
 
+    var $element2=$('#Glycanid');
+    $element.width($element.parent().width());
+    // $element1.width($element.parent().width());
+    $element2.width($element.parent().width());
+})
 
 
 

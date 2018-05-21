@@ -79,7 +79,7 @@
 
 
     <!-- Glycan-->
-    <div class="gg-form-group row">
+    <div class="gg-form-group row" id="Glycanid">
         <h6>Attached Glycan:</h6>
         <!-- Glycanid-->
         <div class="col-md-6" id="glycanrow">
@@ -137,7 +137,8 @@
     <div class="gg-form-group row">
         <h6>Protein/Peptide-Sequences:</h6>
         <div class="form-group">
-            <form name="form1" action="#">
+            <form name="form1" action="#"
+                 style="height: 220px;">
                 <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
                 <label id='msg' class="rq"></label></form>
@@ -156,7 +157,7 @@
     <!--End Pathway-->
     <div class="gg-form-group row" id="glycosylation_evidence">
         <h6>Glycosylation Evidences</h6>
-        <select class="form-control>
+        <select class="form-control">
             <option value="">Select Relation</option>
             <option value="calculated">calculated</option>
             <option value="experimental">experimental</option>
@@ -184,7 +185,7 @@
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
     <!-- script for searchpage js -->
-    <script type="text/javascript" src="js/protein-search.js"></script>
+    <script type="text/javascript" src="js/glycoprotein-search.js"></script>
     <!-- script for tracking js -->
     <script src="js/activity_tracker.js"></script>
     <!-- script for getting Web Service URLs -->
