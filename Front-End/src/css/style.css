@@ -151,13 +151,14 @@ p {
     margin-left: 15px;
 }  
 */
-.nav li.current a {
-    color: #B7D2EC !important; 
+
+.nav li.current a  {
+/*    color: #B7D2EC !important; */
     margin-right: -15px;
     margin-left: -15px;
 }
 
-.nav li.current {
+.nav li.current  {
     border-bottom: 4px solid #B7D2EC;
     margin: 0 15px;  
 } 
@@ -555,7 +556,7 @@ label {
 
 .cover {
 /*   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/sky.jpg') top center no-repeat;*/
-    background: linear-gradient(rgba(46, 120, 160, 0.5), rgba(46, 120, 183, 0.6) ), url('../images/sky.jpg') top center no-repeat;
+    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(46, 120, 183, 0.1) ), url('../images/sky2.png') top center no-repeat;
     background-size: cover;
     display: table;
     width: 100%;
