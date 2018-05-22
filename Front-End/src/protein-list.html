@@ -48,9 +48,11 @@
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
                         <!-- <option selected value="id">ID</option> -->
-                        <option value="mass">Mass</option>
-                        <option value="Protein_ID">Protein ID</option>
+                        <option value="protein_id">Protein ID</option>
+                        <option value="gene_name">Gene Name</option>
                         <option value="protein_name_long">Protein Name</option>
+                        <option value="mass">Mass</option>
+                        <option value="organism">Organism</option>
                     </select>
                     <select class="dir-select form-control" onchange="xdir(this);">
                         <option value="asc" selected>ASC</option>
@@ -141,21 +143,25 @@
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <table id="gen-table" data-show-export="true" data-toggle="table">
-                  <!--  <table id="gen-table"    data-search="true">    may be for version 2 -->
+                    <!--  <table id="gen-table"    data-search="true">    may be for version 2 -->
 
                     <thead>
                         <tr>
-                            <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
+                            <!-- <th data-field="state" data-checkbox="true"> </th> may be for version 2 -->
                             <!-- <th data-field="id" data-formatter="PageFormat">ID</th> -->
                             <!-- <th data-field="glycan_image" data-formatter="ImageFormat" style="width:10%">Glycan Image</th> -->
-                            <th data-field="mass" data-formatter="MassFormatter">Native Mass
-                                <br>(Da)
-                            </th>
+
                             <th data-field="protein_ID">Protein ID
+                            </th>
+
+                            <th data-field="gene_name">Gene Name
                             </th>
                             <th data-field="protein_name_long">Protein Name
                             </th>
-                            <th data-field="gene_name">Gene Name
+                            <th data-field="mass" data-formatter="MassFormatter">Native Mass
+                                <br>(Da)
+                            </th>
+                            <th data-field="organism">Organism
                             </th>
                         </tr>
                     </thead>
@@ -179,9 +185,11 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option value="mass">Mass</option>
                     <option value="Protein_ID">Protein ID</option>
+                    <option value="gene_name">Gene Name</option>
                     <option value="protein_name_long">Protein Name</option>
+                    <option value="mass">Mass</option>
+                    <option value="organism">Organism</option>
                 </select>
                 <select class="dir-select form-control" onchange="xdir(this);">
                     <option value="asc" selected>ASC</option>
@@ -191,33 +199,33 @@
             </form>
             <!--<label class="searchresult"></label>-->
         </div>
-        </div>
+    </div>
     <div id='footer'></div>
-        <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
+    <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
-        <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
-        <!-- script for table -->
-        <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-        <!-- script for time for queryserach -->
-        <script type="text/javascript" src="libraries/moment.js"></script>
-        <!-- script for template engine -->
-        <script type="text/javascript" src="libraries/mustache.js"></script>
-        <!-- script for getting Web Service URLs -->
-        <script type="text/javascript" src="js/ws_url_protein.js"></script>
-        <!-- script for handling errror -->
-        <script type="text/javascript" src="js/errorhandler.js"></script>
-        <!-- script for glycan list page -->
-        <script type="text/javascript" src="js/protein-list.js"></script>
-        <!-- script for third party-->
-        <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-        <!-- script for getting Web Service URLs -->
-        <script type="text/javascript" src="libraries/alertify.js"></script>
-        <!-- script for third party alert-->
-        <script src="js/activity_tracker.js"></script>
-        <!-- script for navaigation -->
-        <script src="js/navbar.js"></script>
-        <!--  w3 including footer-->
+    <!-- script for table -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- script for time for queryserach -->
+    <script type="text/javascript" src="libraries/moment.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/ws_url_protein.js"></script>
+    <!-- script for handling errror -->
+    <script type="text/javascript" src="js/errorhandler.js"></script>
+    <!-- script for glycan list page -->
+    <script type="text/javascript" src="js/protein-list.js"></script>
+    <!-- script for third party-->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- script for third party alert-->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for navaigation -->
+    <script src="js/navbar.js"></script>
+    <!--  w3 including footer-->
 
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>

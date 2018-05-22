@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="description" content="Search for glycan structures based on their GlyTouCan registry IDs, native mass, glycan type or organism. It is also possible to search for glycans based on enzymes that have been involved in the biosynthesis or proteins that this glycan was attached to">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
+    <title>GlycoProtein_Search</title>
+
+    <!--css  do not change seqence-->
+
+    <!--Stylesheet for slider-->
+    <link href="css/nouislider.min.css" rel="stylesheet">
+    <!--Bootstrap Stylesheet-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+
+
+    <!--search page Stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/searchpage.css">
+    <!--main Stylesheet-->
+    <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<div id='header'></div>
+<h3 class="about-heading" style="text-align: center"> GlycoProtein Search </h3>
+<div class="container gg-container">
+    <!-- GlycoProtein_ID-->
+    <div class="gg-form-group row">
+        <h6>Protein ID:</h6>
+        <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+        <div class="gg-text-example">Protein Example e.g:P0116</div>
+    </div>
+    <!-- First range-->
+    <div class="gg-form-group row">
+        <h6>GlycoProtein Size:</h6>
+        <div class="col-xs-2 min-value-alighnment">
+            <h6>Min</h6>
+            <div id="lower-value"> </div>
+        </div>
+        <div class="col-xs-8">
+            <h6 class="align-center">Native Mass Range</h6>
+            <div id="slider"> </div>
+        </div>
+
+        <h6>Max</h6>
+        <div id="upper-value"> </div>
+        <!--</div>-->
+    </div>
+
+    <!-- Organism-->
+    <div class="gg-form-group row">
+        <h6>Organism:</h6>
+        <select class="organism" id="organism">
+            <option value="">Select organism</option>
+        </select>
+        <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
+    </div>
+
+    <!-- Protein-->
+    <div class="gg-form-group row">
+        <h6>Protein Name:</h6>
+        <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
+        <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
+    </div>
+
+    <!-- Gene Name-->
+    <div class="gg-form-group row">
+        <h6>Gene Name:</h6>
+        <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
+        <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
+    </div>
+
+
+    <!-- Glycan-->
+    <div class="gg-form-group row" id="Glycanid">
+        <h6>Attached Glycan:</h6>
+        <!-- Glycanid-->
+        <div class="col-md-6" id="glycanrow">
+            <input type="text" name="Glycan" class="form-control motif" id="glycan" placeholder="Provide the Glycan ID">
+            <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
+        </div>
+
+        <!-- Glycanrelation-->
+        <div class="col-md-6" id="glycanrelationrow">
+            <select class="form-control glycan_relation" id="relation">
+                <option value="">Select Relation</option>
+                <option value="attached">attached</option>
+                <option value="binding">binding</option>
+                <option value="any">any</option>
+                <div class="gg-text-example">Choose Glycan Relation </div>
+            </select>
+        </div>
+    </div>
+
+    <!-- Glycan end-->
+    <!-- amino acid-->
+
+
+    <div class="gg-form-group row">
+        <h6>Glycosylated Amino Acid:</h6>
+        <h6 id=aminos>Click to Highlight Multiple Select</h6>
+
+        <select class="glycosylated_aa" multiple="true">
+            <option value="R">Arginine - Arg - R </option>
+            <option value="K">Lysine - Lys - K </option>
+            <option value="D">Aspartic acid - Asp - D </option>
+            <option value="E">Glutamic acid - Glu - E </option>
+            <option value="Q">Glutamine - Gln - Q </option>
+            <option value="N">Asparagine - Asn - N </option>
+            <option value="H">Histidine - His - H </option>
+            <option value="S">Serine - Ser - S </option>
+            <option value="T">Threonine - Thr - T</option>
+            <option value="Y">Tyrosine - Tyr - Y</option>
+            <option value="C">Cysteine - Cys - C</option>
+            <option value="W">Tryptophan - Trp - W</option>
+            <option value="A">Alanine - Ala - A</option>
+            <option value="I">Isoleucine - Ile - I</option>
+            <option value="L">Leucine - Leu - L</option>
+            <option value="M">Methionine - Met - M</option>
+            <option value="F">Phenylalanine - Phe - F</option>
+            <option value="V">Valine - Val - V</option>
+            <option value="P">Proline - Pro - P</option>
+            <option value="G">Glycine - Gly - G </option>
+        </select>
+        <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
+    </div>
+
+    <!-- End amino acid-->
+    <!-- Sequences-->
+    <div class="gg-form-group row">
+        <h6>Protein/Peptide-Sequences:</h6>
+        <div class="form-group">
+            <form name="form1" action="#"
+                 style="height: 220px;">
+                <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
+                <label id='msg' class="rq"></label></form>
+        </div>
+
+    </div>
+    <!-- end Sequences-->
+
+    <!--Pathway-->
+    <div class="gg-form-group row">
+        <h6>Pathway ID:</h6>
+        <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
+        <div class="gg-text-example">Pathway Example e.g:P77731 </div>
+
+    </div>
+    <!--End Pathway-->
+    <div class="gg-form-group row" id="glycosylation_evidence">
+        <h6>Glycosylation Evidences</h6>
+        <select class="form-control">
+            <option value="">Select Relation</option>
+            <option value="calculated">calculated</option>
+            <option value="experimental">experimental</option>
+            <option value="any">any</option>
+        <option value="none">none</option>
+
+        </select>
+    </div>
+        <input type="button" class="btn-lg btn-primary" value="Search GlycoProtein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
+
+        <!--</form>-->
+    </div>
+    <div id='footer'></div>
+    <!-- script for jquery -->
+
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <!-- script for UI autocomplte -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- script for choosing from listfield -->
+    <script type="text/javascript" src="libraries/chosen.js"></script>
+    <!-- script for bootstrap js -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for slider js -->
+    <script src="js/nouislider.min.js"></script>
+    <!-- script for navaigation bar js -->
+    <script src="js/navbar.js"></script>
+    <!-- script for searchpage js -->
+    <script type="text/javascript" src="js/glycoprotein-search.js"></script>
+    <!-- script for tracking js -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+</body>
+
+</html>

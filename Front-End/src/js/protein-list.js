@@ -179,28 +179,12 @@ function editSearch(){
  * Format function to create link to the details page
 
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Glycan Id 
+ @return -Details particular Protein Id 
  */
 function PageFormat(value, row, index, field) {
  return "<a href='protein-detail.html?id=" + value + "'>" + value + "</a>";
 }
 
-/**
-
- * Format function for column that contains the cartoon
-
- * @param {object} value - The data binded to that particular cell.
-
- * @param {object} row - The data binded to that particular row.
- * @return- Glycanimage
- */
-
-// For Image Column
-// function ImageFormat(value, row, index, field) {
-// //  var url = getImageWsUrl(row.ID);
-// var url = getWsUrl('image_service', row.id);
-//  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
-// }
 
 
 /**
@@ -208,7 +192,7 @@ function PageFormat(value, row, index, field) {
  * Format function for column "MASS"
 
  * @param {object} value - The data binded to that particular cell.
- * @return- Glycan Mass if available else NA
+ * @return- Protein Mass if available else NA
  */
 
 function MassFormatter(value) {
@@ -339,7 +323,7 @@ function ajaxListFailure() {
 
  * LoadDataList function to configure and start the request to GWU  service
 
- * @param {string} id - The glycan id to load
+ * @param {string} id - The protein id to load
  * */
 function LoadDataList() {
 

@@ -1,5 +1,6 @@
 // @author: Gaurav Agarwal
 // @description: assigns ID and tracks user activity.
+//@modified: Pradeep Kumar on 10 May 2018
 function tracking() {
     var txt = '';
     var track_banner = document.getElementById("tracking_banner");
@@ -27,17 +28,24 @@ function tracking() {
     }
 }
 
-function logID() {
+function logID()
+{
     var txt = "We will log your actions to improve the user experience. You can always change this setting in <strong>My GlyGen</strong>.";
     var data = "No ID assigned";
-    // $.get(getWsUrl("generate_ID") + "?action=get_id", function (response) { 
-        $.get(getWsUrl("generate_ID"), function (response) {               //$.get("http://localhost:8080/Logging.php?action=get_id", function(response) {
-        data = response.user_id;
-        localStorage.setItem("ID", data);                           //Store the ID from the webservice
-        txt += " Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
-        displayBannerMsg(txt);
-        activityTracker("user", "", "some message");
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("generate_ID"),
+        data: 'json',
+        success: function (results) {
+            data = results.user;
+            localStorage.setItem("ID", data);                           //Store the ID from the webservice
+            txt += " Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
+            displayBannerMsg(txt);
+            activityTracker("user", "", "some message");
+
+        }
     });
+
 }
 
 function doNotLog() {

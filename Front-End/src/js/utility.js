@@ -6,13 +6,23 @@
 function getErrorMessage(errorCode) {
     switch(errorCode) {
         case 'GLIST01':
-            return 'Please provide an ID in the URL.';
+            return 'Entry Error has occurred. Please Provide valid ID in URL.';
             break;
         case 'GLIST02':
-            return 'Please provide an ID in the URL.';
+            return 'Entry Error has occurred. You can not leave this empty.';
+            break;
+        case 'GLIST03':
+            return 'Entry Error has occurred. Please Provide valid ID. Your Entry should be number.';
             break;
         case 'GLIST04':
-            return 'Value is not in [asc/desc].';
+            return 'Entry Error has occurred. Your Entry should be between lowest and highest Numbers.';
+            break;
+        case 'GLIST05':
+            return 'Entry Error has occurred. Please Provide valid ID.';
+            break;
+        case 'LIBGLIST01':
+            return 'Selection Error has occurred.'
+                   'Please choose a different number of records per page.';
             break;
         case 'server_down':
             return 'sorry server is down';

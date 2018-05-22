@@ -85,7 +85,7 @@ th {
 
 /* Table hovering color */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color:#f0f0f0;
+  background-color:#e2e8ef;
 }
 pre{
   
@@ -111,4 +111,7 @@ pre{
   color: #ea0a08;
   margin-top:290px;
 
+}
+#paginationctrl1{
+  padding-top: 0px;
 }
