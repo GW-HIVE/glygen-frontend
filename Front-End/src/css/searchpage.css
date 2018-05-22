@@ -42,8 +42,9 @@ input[type=submit]:hover {
 .gg-container {
     width: 70%;
     border-radius: 5px;
-/*    background-color: #e8e8e8;*/
-    background-color: rgb(46,120, 183, 0.1);
+
+    background-color:#dfe5ed;
+
     padding: 20px 80px; 
     margin-top: 30px;
     margin-bottom: 60px;
@@ -53,13 +54,15 @@ input[type=submit]:hover {
     .gg-container {
         width: 100%;
         border-radius: 5px;
-        background-color: rgb(46,120, 183, 0.1);
+
+        background-color:#dfe5ed;
+
         padding: 40px;
         margin-top: 30px;
         margin-bottom: 60px;
     }
     
-    .min-value-alighnment {
+    .min-value-alignment {
         padding-left: 0;
         margin-left: 0 !important;
     }
@@ -68,11 +71,11 @@ input[type=submit]:hover {
     text-align: center !important;
 }
 
-.min-value-alighnment {
+.min-value-alignment {
         margin-left: 25px;
     }
 
-.max-value-alighnment {
+.max-value-alignment {
     text-align: right;
     padding-right: 0;
 }

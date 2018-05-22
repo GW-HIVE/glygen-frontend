@@ -65,8 +65,9 @@ function getWsUrl(request, id){
    {
     var query = {};
     query.id = id;
-    query.offset = ((page - 1) * limit) + 1;
+    query.offset = parseInt(page);
     query.sort = sort;
+    // query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;
    

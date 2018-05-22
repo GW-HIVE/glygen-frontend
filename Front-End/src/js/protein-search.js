@@ -136,7 +136,7 @@ function mass(mass_min, mass_max) {
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = values[handle];
+        // nodes[handle].innerHTML = values[handle];
         // nodes[handle].innerHTML = addCommas(values[handle]);
     });
 
@@ -193,12 +193,16 @@ function ajaxProteinSearchSuccess() {
         pathway_id:pathway_id,
         sequence: sequence,
         glycosylated_aa: glycosylated_aa,
-        // glycosylation_evidence:glycosylation_evidence
+        glycosylation_evidence:glycosylation_evidence
 
     };
     return formjson;
 }
+$(window).on('resize', function () {
+    var $element = $('.chosen-container');
+    $element.width($element.parent().width());
 
+})
 
 
 
