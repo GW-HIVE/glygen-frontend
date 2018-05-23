@@ -20,7 +20,7 @@ $(document).ready(function(){
     var url = window.location.pathname;
     var fullFilename = url.substring(url.lastIndexOf('/')+1);
     var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
-    var navItemText = filename.replace('_', ' ').toUpperCase();
+    var navItemText = filename.replace('_', '-', ' ').toUpperCase();
     //alert(navItemText);
     if(navItemText == 'INDEX') {
         navItemText = 'HOME';
