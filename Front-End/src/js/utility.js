@@ -6,28 +6,16 @@
 function getErrorMessage(errorCode) {
     switch(errorCode) {
         case 'GLIST01':
-            return {
-                message: 'Entry Error has occurred. Please Provide valid ID in URL.',
-                title: "Invalid"
-            };
+            return 'Entry Error has occurred. Please Provide valid ID in URL.';
             break;
         case 'GLIST02':
-            return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
-            };
+            return 'Entry Error has occurred. You can not leave this empty.';
             break;
         case 'GLIST03':
-            return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
-            };
+            return 'Entry Error has occurred. Please Provide valid ID. Your Entry should be number.';
             break;
         case 'GLIST04':
-            return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
-            };
+            return 'Entry Error has occurred. Your Entry should be between lowest and highest Numbers.';
             break;
         case 'GLIST05':
             return 'Entry Error has occurred. Please Provide valid ID.';
@@ -48,13 +36,12 @@ function getErrorMessage(errorCode) {
 
 
  */
-function displayError(message,title){
-    alertify.alert(title, message).set('modal', false);
+function displayError(message){
+    alertify.alert('Error', message).set('modal', false);
 }
 
 function displayErrorByCode(errorCode) {
-    var error = getErrorMessage(errorCode);
-    displayError(error.message,error.title);
+    displayError(getErrorMessage(errorCode));
 }
 
 
