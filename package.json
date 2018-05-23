@@ -1,0 +1,24 @@
+{
+  "name": "glygen-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GW-HIVE/glygen-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GW-HIVE/glygen-frontend/issues"
+  },
+  "homepage": "https://github.com/GW-HIVE/glygen-frontend#readme",
+  "devDependencies": {
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^0.1.0"
+  }
+}
