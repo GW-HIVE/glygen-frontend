@@ -37,13 +37,9 @@ function getErrorMessage(errorCode) {
             break;
         case 'LIBGLIST01':
             return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
             };
-            break;
-            return 'Selection Error has occurred.'
-            'Please choose a different number of records per page.';
-            break;
         case 'server_down':
             return 'sorry server is down';
             break;
