@@ -26,9 +26,9 @@ $(document).ready(function(){
         navItemText = 'HOME';
     } else if(navItemText == 'GLYCAN SEARCHPAGE') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'PROTEIN SEARCHPAGE') {
+    } else if(navItemText == 'PROTEIN SEARCH') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'GLYCOPROTEIN SEARCHPAGE') {
+    } else if(navItemText == 'GLYCOPROTEIN SEARCH') {
         navItemText = 'EXPLORE';
     } else if(navItemText == 'ABOUT') {
         navItemText = 'ABOUT';
