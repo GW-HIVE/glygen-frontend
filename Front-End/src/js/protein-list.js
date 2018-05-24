@@ -157,7 +157,7 @@ function redirectPage1()
          }
           function redirectPage2()
          {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/protein-search.html";
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html";
          } 
          
          
@@ -171,7 +171,7 @@ function redirectPage1()
 
 function editSearch(){
   {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/protein-search.html?id="+id);
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html?id="+id);
     }
 }
 /**

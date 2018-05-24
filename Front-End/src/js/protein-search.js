@@ -157,10 +157,10 @@ function ajaxProteinSearchSuccess() {
     var protein_name_long = $("#protein_name_long").val();
     var pathway_id=$("#pathway").val();
     var sequence=$("#sequences").val();
-    var glycosylated_aa= $("#glycosylated_aa").val();
-    var glycosylation_evidence= 'none';
-    var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence);
-        // , protein_name_long,gene_name);
+    // var glycosylated_aa= $("#glycosylated_aa").val();
+    // var glycosylation_evidence= 'none';
+    var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence);
+        // , protein_name_long,gene_name glycosylated_aa,glycosylation_evidence);
     var json = "query=" + (JSON.stringify(formObject));
     $.ajax({
         type: 'post',
@@ -178,8 +178,8 @@ function ajaxProteinSearchSuccess() {
     });
 }
 
-// function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name,pathway_id, sequence, glycosylated_aa) {
- function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence)
+// function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name,pathway_id, sequence, glycosylated_aa,glycosylation_evidence) {
+ function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id, sequence)
                                    // ,protein_name_long,gene_name)
 {
     var formjson = {
@@ -192,8 +192,8 @@ function ajaxProteinSearchSuccess() {
         gene_name:gene_name,
         pathway_id:pathway_id,
         sequence: sequence,
-        glycosylated_aa: glycosylated_aa,
-        glycosylation_evidence:glycosylation_evidence
+        // glycosylated_aa: glycosylated_aa,
+        // glycosylation_evidence:glycosylation_evidence
 
     };
     return formjson;
