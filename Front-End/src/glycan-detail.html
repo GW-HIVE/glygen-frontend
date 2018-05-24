@@ -32,8 +32,12 @@
 
 </head>
 
-<body>
-<div id='header'></div>
+<body onload="tracking()">
+<script type="text/javascript" src="libraries/w3.js"></script>
+
+<div w3-include-html="header.html"></div>
+<script>w3.includeHTML();</script>
+
     <section class="cd-faq">
         <ul class="cd-faq-categories">
             <li>
@@ -282,16 +286,17 @@
         </script>
         </div>
     </section>
-    <div id='footer'></div>
+<div w3-include-html="footer.html"></div>
+<script>w3.includeHTML();</script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <script>
-        //to open the drop down of the ID called from home page.
-        var url_loc = $(location).attr('href');
-        if (url_loc.match('#')) {
-            var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
-            $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-        }
-    </script>
+    <!--<script>-->
+        <!--//to open the drop down of the ID called from home page.-->
+        <!--var url_loc = $(location).attr('href');-->
+        <!--if (url_loc.match('#')) {-->
+            <!--var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));-->
+            <!--$(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');-->
+        <!--}-->
+    <!--</script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <!-- script for detail page -->

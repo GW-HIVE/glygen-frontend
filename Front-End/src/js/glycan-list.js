@@ -185,7 +185,7 @@ function editSearch(){
  * @param {object} value - The data binded to that particular cell.
  @return -Details particular Glycan Id 
  */
-function PageFormat(value, row, index, field) {
+function pageFormat(value, row, index, field) {
  return "<a href='glycan-detail.html?id=" + value + "'>" + value + "</a>";
 }
 
@@ -200,7 +200,7 @@ function PageFormat(value, row, index, field) {
  */
 
 // For Image Column
-function ImageFormat(value, row, index, field) {
+function imageFormat(value, row, index, field) {
 //  var url = getImageWsUrl(row.ID);
 var url = getWsUrl('image_service', row.id);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
@@ -215,7 +215,7 @@ var url = getWsUrl('image_service', row.id);
  * @return- Glycan Mass if available else NA
  */
 
-function MassFormatter(value) {
+function massFormatter(value) {
  if (value) {
  var mass = value;
  return value;
@@ -238,7 +238,7 @@ function MassFormatter(value) {
  */
 
 
-function DetailFormat(index, row) {
+function detailFormat(index, row) {
  var html = [];
  var glyco = row.glycoct.replace(/ /g, '\n');
  html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
