@@ -11,6 +11,19 @@ $(document).ready(function(){
 
 });
 
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
 
 
 function aminoLetter(textareatxt)
@@ -119,7 +132,7 @@ function mass(mass_min, mass_max) {
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = values[handle];
+        nodes[handle].innerHTML = addCommas(values[handle]);
     });
 
 }
