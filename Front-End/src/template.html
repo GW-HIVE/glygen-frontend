@@ -22,7 +22,10 @@
 
 </head>
 <body>
-    <div id='header'></div>
+<!--     <div id='header'></div> -->
+    <script src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
     <div class="container" style="margin-bottom: 480px;"> 
         <h3> Your content goes here</h3>
@@ -34,6 +37,7 @@
     <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
     <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
     <script src="js/utility.js"></script>
-    <div id='footer'></div>
+<!--     <div id='footer'></div> -->
+    <div w3-include-html="footer.html"></div>
 </body>
 </html>
