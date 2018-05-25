@@ -553,10 +553,12 @@ label {
 /*    color: #337ab7;*/
     color: #00386F;
 }
+.mission-img {
+    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/team/about-mission.png') top center no-repeat;        
+}
 
 .cover {
 /*   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/sky.jpg') top center no-repeat;*/
-    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(46, 120, 183, 0.1) ), url('../images/sky2.png') top center no-repeat;
     background-size: cover;
     display: table;
     width: 100%;
@@ -567,9 +569,9 @@ label {
 
 .cover-text {
     text-align: center;
-    color: white;
+    color: #fff;
     display: table-cell;
-    vertical-align: middle;    
+    vertical-align: middle; 
 }
 
 .cover-text ul  {
@@ -644,6 +646,50 @@ label {
         }
     }
 */
+
+/* ------------------------------------------
+    Resources
+--------------------------------------------*/
+.resources-top-img {  
+    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/resources/resources_top_img.png') top center no-repeat; 
+    width: 99%;
+}
+
+.margin-top {
+    margin-top: 40px;
+}
+
+.panel-heading-glycan {
+    background: #2E78B7 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.panel-heading-protein {
+    background: #599194 !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+.panel-heading-glycoProtein {
+    background: lightcoral !important;
+    color: #fff !important;
+    text-align: center;
+}
+
+#glycoProtein-content {
+    border: 2px solid lightcoral;
+}
+
+#protein-content {
+    border: 2px solid #599194;
+}
+
+#glycan-content {
+    border: 2px solid #2E78B7;
+}
+
+
 /**
     The page loading gif
     @author: Gaurav Agaarwal
