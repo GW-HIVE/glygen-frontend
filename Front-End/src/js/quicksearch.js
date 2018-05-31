@@ -10,11 +10,12 @@ function glycanx() {
         url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
         success: function (results) {
-            if (results.search_results_id) {
-                window.location = './protein-list.html?id=' + results.search_results_id;
+            var result = JSON.parse(results);
+            if (result.search_results_id) {
+                window.location = './protein-list.html?id=' + result.search_results_id;
             }
             else {
-                alert("failed to connect with server")
+                alert(results.search_results_id)
             }
 
         }
@@ -22,7 +23,31 @@ function glycanx() {
 }
 
 
+
+
 //quick search by enzyme 6th question
+
+function enzymex() {
+    var enzyme = document.getElementById("enzyme").value;
+    var formObject = {relation:"attached", enzyme: enzyme};
+    var json = 'query={"glycan"'+":" + JSON.stringify(formObject)+"}";
+    alert(json)
+    $.ajax({
+        type: 'post',
+        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
+        data: json,
+        success: function (results) {
+            var result = JSON.parse(results);
+            if (result.search_results_id) {
+                window.location = './protein-list.html?id=' + result.search_results_id;
+            }
+            else {
+                alert(results.search_results_id)
+            }
+
+        }
+    });
+}
 
 function enzymex() {
     var query_type = "search_glycan";
@@ -40,11 +65,12 @@ function enzymex() {
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
+        url: 'http://glygen-vm-prod.biochemistry.gwu.edu/api/glycan/search',
         data: json,
         success: function (results) {
-            if (results.search_results_id) {
-                window.location = './protein-list.html?id=' + results.search_results_id;
+            var result = JSON.parse(results);
+            if (result.search_results_id) {
+                window.location = './glycan-list.html?id=' + result.search_results_id;
             }
             else {
                 displayErrorByCode("1")
