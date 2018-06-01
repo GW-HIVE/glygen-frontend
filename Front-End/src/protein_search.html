@@ -24,7 +24,16 @@
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <!--main Stylesheet-->
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
+    <!--[if lt IE 9]>
 
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -37,7 +46,7 @@
 <div class="container gg-container">
     <!-- GlycoProtein_ID-->
     <div class="gg-form-group row">
-        <h6>Protein ID:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Protein ID:</h6>
         <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
         <div class="gg-text-example">Protein Example e.g:P0116</div>
     </div>
@@ -60,7 +69,7 @@
 
     <!-- Organism-->
     <div class="gg-form-group row">
-        <h6>Organism:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Organism:</h6>
         <select class="organism" id="organism">
             <option value="">Select organism</option>
         </select>
@@ -69,20 +78,20 @@
 
     <!-- Protein-->
     <div class="gg-form-group row">
-        <h6>Protein Name:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Protein Name:</h6>
         <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
         <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
     </div>
 
     <!-- Gene Name-->
     <div class="gg-form-group row">
-        <h6>Gene Name:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Gene Name:</h6>
         <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
         <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
     </div>
 
     <div class="gg-form-group row">
-        <h6>Glycosylated Amino Acid:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Glycosylated Amino Acid:</h6>
         <h6 id=aminos>Click to Highlight Multiple Select</h6>
 
         <select class="glycosylated_aa" multiple="true">
@@ -114,25 +123,22 @@
     <!-- End amino acid-->
     <!-- Sequences-->
     <div class="gg-form-group row">
-        <h6>Protein/Peptide-Sequences:</h6>
+        <h6><span><i class="far fa-question-circle"></i></span> Protein/Peptide-Sequences:</h6>
         <div class="form-group">
             <form name="form1" action="#">
                 <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
                 <label id='msg' class="rq"></label></form>
-
         </div>
-
     </div>
     <!-- end Sequences-->
 
     <!--Pathway-->
-    <!--<div class="gg-form-group row">-->
-        <h6>Pathway ID:</h6>
+    <div class="gg-form-group row">
+        <h6><span><i class="far fa-question-circle"></i></span> Pathway ID:</h6>
         <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
         <div class="gg-text-example">Pathway Example e.g:P77731 </div>
-
-    <!--</div>-->
+    </div>
     <!--End Pathway-->
 
     <!--<input id="glycosylation_evidence" type="hidden" name="glycosylation_evidence" value="none" />-->
@@ -157,7 +163,7 @@
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 <!-- script for UI autocomplte -->
 
-    <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
 <!-- script for choosing from listfield -->
 <script type="text/javascript" src="libraries/chosen.js"></script>
 <!-- script for bootstrap js -->
