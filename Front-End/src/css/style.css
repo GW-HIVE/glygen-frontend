@@ -204,7 +204,7 @@ p {
 }
 
 #logo-gwu {
-    width: 70px;
+    width: 50px;
 }
 
 .footer {
@@ -502,7 +502,9 @@ label {
     color: #4cae4c;    
 }
 
-/* About us page */
+/* ----------------------------
+        About us page
+-------------------------------*/
 
 #about {
     padding: 0 80px ;    
@@ -555,7 +557,7 @@ label {
 }
 .mission-img {
 /*    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/team/about-mission.png') top center no-repeat; */
-     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/sky.jpg') top center no-repeat;
+     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/about-mission.png') top center no-repeat;
 }
 
 .cover {
@@ -579,6 +581,11 @@ label {
     margin: 0;
     font-size: 1.6em;
     letter-spacing: 1px;
+}
+
+.about-map-img {
+    background-size: cover;
+    width: 99%;
 }
 
 /*Team members page*/
@@ -665,6 +672,10 @@ label {
 #glycan-content {
     border: 2px solid #2E78B7;
 }
+
+/* -----------------------------
+    Glycan Help hover img  
+-------------------------------*/
 
 
 /**
