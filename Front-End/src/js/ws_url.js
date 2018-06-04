@@ -2,10 +2,13 @@ function getWsUrl(request, id){
         
     var ws_base_glycan ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
     var ws_base_protein ="http://glygen-vm-tst.biochemistry.gwu.edu/api/protein";
+    var ws_base_typeahead ="http://glygen-vm-tst.biochemistry.gwu.edu/api/typeahead";
     var ws_logging = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/logging";
     var ws_userID = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/userid";
     
     switch (request) {
+
+        //Auth Webservices.
     case "generate_ID":
     return ws_userID;
     break;
@@ -23,28 +26,35 @@ function getWsUrl(request, id){
     case "detail":
     return ws_base_glycan +"/detail/" + id;
     break;
-    case "typehead":
-    return ws_base_glycan +"/typehead";
-    break;
+
+
     case "search_init":
     return ws_base_glycan +"/search_init";
     break;
 
 
+    //Typeahead webservices
+
+        case "typehead":
+            return ws_base_typeahead +"/glycan";
+        case "typehead":
+            return ws_base_typeahead +"/protein";
+        case "typehead":
+            return ws_base_typeahead +"/protein_name";
+        case "typehead":
+            return ws_base_typeahead +"/gene";
+        case "typehead":
+            return ws_base_typeahead +"/pathway";
+        case "typehead":
+            return ws_base_typeahead +"/motif";
+        case "typehead":
+            return ws_base_typeahead +"/enzyme";
+
     //Protein webservices
     case "Search_protein":
         return ws_base_protein +"/search";
             break;
-    case "typehead_protein":
-        return ws_base_glycan +"/typehead";
-        break;
-        case "typehead_protein_name":
-            return ws_base_protein +"/typehead";
-            break;
 
-        case "typehead_gene":
-            return ws_base_protein +"/typehead";
-            break;
     case "search_init_protein":
         return ws_base_protein +"/search_init";
         break;
@@ -84,28 +94,3 @@ function getWsUrl(request, id){
 
 
 
-// function getProteinsearchPostdata(protein_name_long,organism,glycosylation_evidence,pathway_id,protein_id,massmin,massmax,gene_name) {
-//     var query = {};
-//     query.mass = {
-//         min: massmin,
-//         max: massmax
-//     };
-//     query.protein_name_long = protein_name_long;
-//     query.organism = organism ;
-//     query.glycosylation_evidence = glycosylation_evidence;
-//     query.pathway_id = pathway_id;
-//     query.protein_id = protein_id;
-//
-//     query.gene_name = gene_name;
-//     return "query=" + JSON.stringify(query);
-// }
-
-// function getProteinSearchPostdata(organism,protein,mass,gene_name,protein_id) {
-//     var query = {};
-//     query.mass =  mass;
-//     query.organism = organism ;
-//     query.protein = protein;
-//     query.protein_id = protein_id;
-//     query.gene_name = gene_name;
-//     return "query=" + JSON.stringify(query);
-// }
