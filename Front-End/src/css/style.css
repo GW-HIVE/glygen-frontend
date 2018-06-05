@@ -513,8 +513,7 @@ label {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 1px solid #ccc;
-    
+    border: 2px solid #ccc;
 }
 
 .about-section {
@@ -588,36 +587,6 @@ label {
     width: 99%;
 }
 
-/*Team members page*/
-
-.gg-team-cover {
-    margin: 0;
-    font-size: 1.2em;
-    letter-spacing: 1px; 
-    background: #00386F;
-    padding: 1% 20%;
-    box-shadow: inset 0 0 80px #ccc;
-}
-
-.gg-team-member {
-    margin-bottom: 50px;
-}
-
-.gg-team-panel {
-    display: block; 
-    background: #00386F;
-    height: 70px;
-    padding: 1% 4%;
-    vertical-align: middle;
-    color: #fff;
-    margin-bottom: 30px;
-}
-
-#team-member-img{
-    width: 200px;
-    height: 250px;
-}
-
 /* ------------------------------------------
     Resources
 --------------------------------------------*/
@@ -656,7 +625,7 @@ label {
 }
 
 #img-hr {
-    width: 300px;
+    width: 200px;
     border-top: 2px solid #f8f8f8;
     border-bottom: 2px solid rgba(0,0,0,0.2);
 }
