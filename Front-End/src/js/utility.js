@@ -65,13 +65,13 @@ function getErrorMessage(errorCode) {
     }
 
 
-    /**
-     * Js load for adding header and footer file into each page
-
-
-     */
-    $(document).ready(function () {
-        $("#footer").load("footer.html");
-        $("#header").load("header.html");
-    });
+    // /**
+    //  * Js load for adding header and footer file into each page
+    //
+    //
+    //  */
+    // $(document).ready(function () {
+    //     $("#footer").load("footer.html");
+    //     $("#header").load("header.html");
+    // });
 }
