@@ -84,6 +84,12 @@ $( "#protein" ).autocomplete({
     }
 });
 
+
+/** protein_name field on change detect and suggest auto complete options from retrieved Json
+ * @proteinjson - forms the JSON to post
+ * @data-returns the protein_name.
+ *
+ */
 $( "#protein_name" ).autocomplete({
     source: function(request, response) {
         var queryUrl = getWsUrl("typehead_protein_name") + "?" + getSearchtypeheadData( "protein_name_short", request.term);
@@ -98,6 +104,12 @@ $( "#protein_name" ).autocomplete({
         console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
     }
 });
+
+/** pgene_name field on change detect and suggest auto complete options from retrieved Json
+ * @proteinjson - forms the JSON to post
+ * @data-returns the gene_name.
+ *
+ */
 
 $( "#gene_name" ).autocomplete({
     source: function(request, response) {
@@ -116,6 +128,12 @@ $( "#gene_name" ).autocomplete({
         console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
     }
 });
+
+/** glycan_id field on change detect and suggest auto complete options from retrieved Json
+ * @glycan_idjson - forms the JSON to post
+ * @data-returns the glycan_id.
+ *
+ */
 
 $( "#glycan_id" ).autocomplete({
     source: function(request, response) {
@@ -220,6 +238,20 @@ function ajaxProteinSearchSuccess() {
         }
     });
 }
+
+
+/** Forms searchjson from the form values submitted
+ * @param input_query_type query search
+ * @param input_glycan_id user glycan id input
+ * @param mass_min user mass min input
+ * @param mass_max user mass max input
+ * @param input_organism user organism input
+ * @param input_glycantype user glycan_type input
+ * @param input_glycansubtype user glycan_subtype input
+ * @param input_enzyme user enzyme input
+ * @param input_proteinid user protein_id input
+ * @param input_motif user motif input
+ */
 
 // function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name,pathway_id, sequence, glycosylated_aa) {
 function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id, relation,glycan_id, type, aa_sequence,glycosylated_aa,glycosylation_evidence)
