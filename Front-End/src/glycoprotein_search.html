@@ -102,12 +102,12 @@
         <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Attached Glycan:</h6>
         <!-- Glycanid-->
         <div class="col-md-6" id="glycanrow">
-            <input type="text" name="Glycan" class="form-control motif" id="glycan" placeholder="Provide the Glycan ID">
+            <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Provide the Glycan ID">
             <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
         </div>
         <!-- Glycanrelation-->
         <div class="col-md-6" id="glycanrelationrow">
-            <select class="form-control glycan_relation" id="relation">
+            <select class="form-control glycan_relation" id="glycan_relation">
                 <option value="">Select Relation</option>
                 <option value="attached">attached</option>
                 <option value="binding">binding</option>
@@ -209,14 +209,15 @@ $(document).ready(function(){
     <script src="js/nouislider.min.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
     <!-- script for searchpage js -->
     <script type="text/javascript" src="js/glycoprotein_search.js"></script>
     <!-- script for tracking js -->
     <script src="js/activity_tracker.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url.js"></script>
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
+
 <script type="text/javascript" src="libraries/alertify.js"></script>
 </body>
 

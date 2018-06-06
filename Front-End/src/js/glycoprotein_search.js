@@ -1,16 +1,4 @@
 
-$(document).ready(function(){
-
-    $(".glycosylated_aa").chosen({
-        // max_selected_options: 10,
-        placeholder_text_multiple: "choose amino acid"
-    })
-        .bind("chosen:maxselected2", function (){
-            window.alert("You reached your limited number of selections which is 2 selections!");
-        });
-
-});
-
 
 
 
@@ -71,7 +59,7 @@ function aminoLetter(textareatxt)
  */
 $( "#protein" ).autocomplete({
     source: function(request, response) {
-        var queryUrl = getWsUrl("typehead_protein") + "?" + getSearchtypeheadData( "protein", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "protein", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -92,7 +80,7 @@ $( "#protein" ).autocomplete({
  */
 $( "#protein_name" ).autocomplete({
     source: function(request, response) {
-        var queryUrl = getWsUrl("typehead_protein_name") + "?" + getSearchtypeheadData( "protein_name_short", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData("protein_name", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 10);
 
@@ -114,7 +102,7 @@ $( "#protein_name" ).autocomplete({
 $( "#gene_name" ).autocomplete({
     source: function(request, response) {
 
-        var queryUrl = getWsUrl("typehead_gene") + "?" + getSearchtypeheadData( "gene_name", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "gene", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -138,7 +126,7 @@ $( "#gene_name" ).autocomplete({
 $( "#glycan_id" ).autocomplete({
     source: function(request, response) {
 
-        var queryUrl = getWsUrl("typehead_glycan") + "?" + getSearchtypeheadData( "glycan_id", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "glycan", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -161,6 +149,14 @@ $( "#glycan_id" ).autocomplete({
 var mass_max;
 var mass_min;
 $(document).ready(function () {
+    $(".glycosylated_aa").chosen({
+        // max_selected_options: 10,
+        placeholder_text_multiple: "choose amino acid"
+    })
+        .bind("chosen:maxselected2", function (){
+            window.alert("You reached your limited number of selections which is 2 selections!");
+        });
+
     $.getJSON(getWsUrl("search_init_protein"), function (result) {
         for (var x = 0; x < result.organism.length; x++) {
             $("#organism").append("<option>" + result.organism[x] + "</option>");
@@ -206,11 +202,11 @@ function mass(mass_min, mass_max) {
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
-    var operation="AND";
-    var query_type = "search_protein";
     var organism= $("#organism").val();
     var protein_id = $("#protein").val();
     var mass_slider = $("#slider").get(0).noUiSlider.get();
+    var mass_min = mass_slider[0];
+    var mass_max = mass_slider[1];
     // var mass_slider = document.getElementById("slider").noUiSlider.get();
     var gene_name=$("#gene_name").val();
     var protein_name_long = $("#protein_name_long").val();
@@ -220,8 +216,34 @@ function ajaxProteinSearchSuccess() {
     var glycan_relation= $("#glycan_relation").val();
     var glycosylated_aa= $(".glycosylated_aa").val();
     var glycosylation_evidence= $("#glycosylation_evidence").val();
-    var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence);
+    //var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence);
     // , protein_name_long,gene_name);
+    var formObject = {
+        operation: "AND",
+        query_type: "search_protein",
+        organism: organism,
+        protein_id: protein_id,
+        mass:
+            {
+                min: mass_min,
+                max: mass_max
+            },
+        protein_name_long: protein_name_long,
+        glycan:
+            {
+                relation : glycan_relation,
+                glycan_id: glycan_id
+            },
+        gene_name: gene_name,
+        pathway_id: pathway_id,
+        sequence:
+            {
+                type: "exact",
+                aa_sequence: sequence
+            },
+        glycosylated_aa: glycosylated_aa,
+        glycosylation_evidence:glycosylation_evidence
+    };
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -254,7 +276,7 @@ function ajaxProteinSearchSuccess() {
  */
 
 // function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name,pathway_id, sequence, glycosylated_aa) {
-function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id, relation,glycan_id, type, aa_sequence,glycosylated_aa,glycosylation_evidence)
+function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id,relation,glycan_id, type, aa_sequence,glycosylated_aa,glycosylation_evidence)
 // ,protein_name_long,gene_name)
 {
     var formjson = {

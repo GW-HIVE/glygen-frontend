@@ -50,6 +50,8 @@ function getErrorMessage(errorCode) {
         title: "Unexpected error"
     };
 
+}
+
     /**
      * Display Error message using alertify
 
@@ -74,4 +76,3 @@ function getErrorMessage(errorCode) {
     //     $("#footer").load("footer.html");
     //     $("#header").load("header.html");
     // });
-}

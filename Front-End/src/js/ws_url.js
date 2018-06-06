@@ -36,19 +36,7 @@ function getWsUrl(request, id){
     //Typeahead webservices
 
         case "typehead":
-            return ws_base_typeahead +"/glycan";
-        case "typehead":
-            return ws_base_typeahead +"/protein";
-        case "typehead":
-            return ws_base_typeahead +"/protein_name";
-        case "typehead":
-            return ws_base_typeahead +"/gene";
-        case "typehead":
-            return ws_base_typeahead +"/pathway";
-        case "typehead":
-            return ws_base_typeahead +"/motif";
-        case "typehead":
-            return ws_base_typeahead +"/enzyme";
+            return ws_base_typeahead;
 
     //Protein webservices
     case "Search_protein":
