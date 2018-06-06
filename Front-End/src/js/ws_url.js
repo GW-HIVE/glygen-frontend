@@ -1,3 +1,10 @@
+//@author: Rupali Mahadik
+
+// @description: UO1 Version-1.1.
+
+//@update:6 June 2018
+
+
 function getWsUrl(request, id){
         
     var ws_base_glycan ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";

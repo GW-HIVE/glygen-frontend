@@ -1,6 +1,10 @@
 
 
+//@author: Rupali Mahadik
 
+// @description: UO1 Version-1.1.
+
+//@update:6 June 2018
 
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
