@@ -1,13 +1,7 @@
-
-<!--@author: Rupali Mahadik-->
-
- <!--@description: UO1 Version-1.1.-->
-<!--@update:6 June 2018-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="description" content="Search for glycan structures based on their GlyTouCan registry IDs, native mass, glycan type or organism. It is also possible to search for glycans based on enzymes that have been involved in the biosynthesis or proteins that this glycan was attached to">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,12 +35,9 @@
     
     <link rel="stylesheet" type="text/css" href="css/style.css">
     
-
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
 </head>
 <body>
@@ -107,12 +98,12 @@
         <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Attached Glycan:</h6>
         <!-- Glycanid-->
         <div class="col-md-6" id="glycanrow">
-            <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Provide the Glycan ID">
+            <input type="text" name="Glycan" class="form-control motif" id="glycan" placeholder="Provide the Glycan ID">
             <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
         </div>
         <!-- Glycanrelation-->
         <div class="col-md-6" id="glycanrelationrow">
-            <select class="form-control glycan_relation" id="glycan_relation">
+            <select class="form-control glycan_relation" id="relation">
                 <option value="">Select Relation</option>
                 <option value="attached">attached</option>
                 <option value="binding">binding</option>
@@ -195,14 +186,14 @@
     </div>
     <div w3-include-html="footer.html"></div>
     <script>w3.includeHTML();</script>
-    <!-- script for jquery -->
 
-   <script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-});
-</script>
-   
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+    </script>
+    
+<!-- script for jquery -->   
 <!--    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>-->
     <!-- script for UI autocomplte -->
     <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
@@ -214,16 +205,15 @@ $(document).ready(function(){
     <script src="js/nouislider.min.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
     <!-- script for searchpage js -->
     <script type="text/javascript" src="js/glycoprotein_search.js"></script>
     <!-- script for tracking js -->
     <script src="js/activity_tracker.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url.js"></script>
-
-<script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <script type="text/javascript" src="libraries/alertify.js"></script>
 </body>
 
 </html>
