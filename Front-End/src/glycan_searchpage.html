@@ -19,7 +19,8 @@
     
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css"
-        type="text/css" />
+        type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">   
         
     <!--[if lt IE 9]>
 
@@ -28,14 +29,20 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/searchpage.css">
     <link href="css/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
-    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -50,7 +57,7 @@
     <div class="container gg-container">
 
         <div class="gg-form-group row">
-            <h6><span><i class="far fa-question-circle"></i></span> Glycan ID:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycan ID:</h6>
                 
             <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org"> 
 
@@ -58,8 +65,8 @@
         </div>
 
         <!-- First range-->
-        <div class="gg-form-group row">
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Glycan Size:</h6>
+        <div class="gg-form-group row">  
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycan Size:</h6>
 
             <div class="col-xs-2 min-value-alighnment">
                 <h6>Min</h6>
@@ -93,7 +100,7 @@
         </div>
 
         <div class="gg-form-group row">    
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Organism:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Organism:</h6>
             <select class="organism" id="organism">
                 <option value="">Select organism</option>
             </select>
@@ -101,7 +108,7 @@
         </div>
 
         <div class="gg-form-group row">
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Glycan type:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycan type:</h6>
             <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
                 <option value="">Select glycan type</option>
             </select>
@@ -109,7 +116,7 @@
         </div>               
 
         <div class="gg-form-group row">                
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Glycan subtype:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycan subtype:</h6>
             <select id="ddl2">
                 <option value="">Select glycan subtype</option>
             </select> 
@@ -117,39 +124,41 @@
         </div>
 
         <div class="gg-form-group row"> 
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Glycoprotein ID:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycoprotein ID:</h6>
             <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
             <div class="gg-text-example">Glycoprotein Example e.g </div>
         </div>
 
         <div class="gg-form-group row"> 
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Glycan Motif:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycan Motif:</h6>
             <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
             <div class="gg-text-example">Glycan Motif Example e.g </div>
         </div>
 
         <div class="gg-form-group row"> 
-            <h6><span><i class="far fa-question-circle help-sign"></i></span> Enzyme:</h6>
+            <h6><span><a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Enzyme:</h6>
             <input type="text" name="Enzyme"  class="form-control enzyme"  id="enzyme" placeholder="Biosynthetic Enzyme">
             <div class="gg-text-example">Enzyme Example e.g </div>
         </div>
 
         <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">        
     </div>
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     
     <!-- <div id='footer'></div>-->
     <div w3-include-html="footer.html"></div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
+    </script>
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
     <script src="js/navbar.js"></script>
     <script type="text/javascript" src="js/glycan_searchpage.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+    <script>jQuery.noConflict();</script>
     <script src="js/activity_tracker.js"></script>
     <script src="js/errorhandler.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
