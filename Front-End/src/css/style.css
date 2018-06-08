@@ -596,7 +596,10 @@ label {
 }
 
 .margin-top {
-    margin-top: 40px;
+    margin-top: 50px;
+}
+.margin-bottom {
+    margin-bottom: 50px;
 }
 
 .panel-heading-glycan {
@@ -615,6 +618,14 @@ label {
     background: lightcoral !important;
     color: #fff !important;
     text-align: center;
+}
+
+#resources {
+    background: lightcoral;
+}
+
+#resources th {
+    color: #fff;
 }
 
 .content{
