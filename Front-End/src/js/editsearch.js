@@ -34,7 +34,7 @@ function setFormValues(data) {
  *
  */
 function setproteinFormValues(data) {
-//alert(data.query.protein_id)
+//alert(data.results.protein_id)
   //data1 = JSON.parse(data);
     if (data.query) {
         $("#protein").val(data.query.protein_id);
@@ -51,6 +51,7 @@ function setproteinFormValues(data) {
         $("#glycosylation_evidence").val(data.query.glycosylation_evidence);  
     }
 }
+
 /**
  * fail to to get search data
 * @param {object} data - The Retreive data
@@ -70,7 +71,7 @@ function LoadproteinSearchvalues(id) {
     var ajaxConfig = {
         dataType: "json",
         url: "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/list",
-        data: getListPostData(id, 1, 'id', 'asc', 1),
+        data: getListPostData(id, 1, 'protein_id', 'asc', 1),
         method: 'POST',
         success: setproteinFormValues,
         error: failToRetreiveSearch
