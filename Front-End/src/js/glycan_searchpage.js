@@ -1,4 +1,6 @@
-
+//  @author: Pradeep Kumar Ragu Chanthar
+//  @description: UO1 Version-1.1
+//  @Date: 19th Feb 2018
 
 
 
@@ -109,6 +111,12 @@ $(document).ready(function () {
         var sugar_mass_min = result.number_monosaccharides.min;
         var sugar_mass_max = result.number_monosaccharides.max;
         mass(mass_min, mass_max)
+        //check for ID to see if we need to load search values
+        //please do not remove rhis code as it is required prepopulate search values
+        var id =getParameterByName('id') || id;
+        if(id){
+            LoadSearchvalues(id);
+        }
         sugarmass(sugar_mass_min, sugar_mass_max)
     });
 });
@@ -174,7 +182,7 @@ function mass(mass_min, mass_max) {
  * @param {numeric} ddl2 - Glycan sub type 
  */
 
-function configureDropDownLists(ddl1, ddl2) {
+function configureDropDownLists(ddl1, ddl2,callback) {
     var nglycan;
     var oglycan;
     // var nglycan={};
@@ -201,6 +209,9 @@ function configureDropDownLists(ddl1, ddl2) {
                 ddl2.options.length = 0;
                 break;
         }
+        if(callback) {
+                        callback();
+                   }
     }
 }
 function createOption(ddl, text, value) {
