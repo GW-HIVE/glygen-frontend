@@ -169,6 +169,13 @@ $(document).ready(function () {
         var mass_min = result.protein_mass.min;
         mass(mass_min, mass_max)
 
+        //check for ID to see if we need to load search values
+        //please do not remove rhis code as it is required prepopulate search values
+        var id =getParameterByName('id') || id;
+        if(id){
+            LoadSearchvalues(id);
+        }
+
     });
 });
 
@@ -253,7 +260,7 @@ function ajaxProteinSearchSuccess() {
         data: json,
         success: function (results) {
             if(results.search_results_id){
-                window.location = './protein-list.html?id=' + results.search_results_id;
+                window.location = './protein_list.html?id=' + results.search_results_id;
             }
             else{
                 displayErrorByCode("server-down")
