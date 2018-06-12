@@ -23,6 +23,37 @@ function getWsUrl(request, id){
     return ws_logging;
     break;
 
+
+        //Typeahead webservices
+
+        case "typehead":
+            return ws_base_typeahead;
+
+        //Protein webservices
+        case "Search_protein":
+            return ws_base_protein +"/search";
+            break;
+
+        case "search_init_protein":
+            return ws_base_protein +"/search_init";
+            break;
+        default:
+            return "";
+            break;
+
+
+        //Protein webservices
+        //Glycan webservices
+        case "image_service":
+            return ws_base_glycan + "/image/" + id;
+            break;
+        case "list":
+            return ws_base_glycan + "/list";
+            break;
+        case "detail":
+            return ws_base_glycan +"/detail/" + id;
+            break;
+
         //Glycan webservices
      case "image_service":
     return ws_base_glycan + "/image/" + id;
@@ -40,22 +71,7 @@ function getWsUrl(request, id){
     break;
 
 
-    //Typeahead webservices
 
-        case "typehead":
-            return ws_base_typeahead;
-
-    //Protein webservices
-    case "Search_protein":
-        return ws_base_protein +"/search";
-            break;
-
-    case "search_init_protein":
-        return ws_base_protein +"/search_init";
-        break;
-    default:
-    return "";
-    break;
     }
    }
 

@@ -220,8 +220,6 @@ function ajaxProteinSearchSuccess() {
     var glycan_relation= $("#glycan_relation").val();
     var glycosylated_aa= $(".glycosylated_aa").val();
     var glycosylation_evidence= $("#glycosylation_evidence").val();
-    //var formObject = getProteinSearchPostdata(operation,query_type,organism,mass_slider[0], mass_slider[1],protein_id,gene_name,protein_name_long,pathway_id, sequence, glycosylated_aa,glycosylation_evidence);
-    // , protein_name_long,gene_name);
     var formObject = {
         operation: "AND",
         query_type: "search_protein",
@@ -251,7 +249,8 @@ function ajaxProteinSearchSuccess() {
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
+        url: getWsUrl("Search_protein"),
+        //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
         success: function (results) {
             if(results.search_results_id){
@@ -290,7 +289,7 @@ function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_ma
         protein_id: protein_id,
         mass: { "min": mass_min, "max": mass_max },
         protein_name_long:protein_name_long,
-        glycan:{"relation":"","glycan_id":" "},
+        glycan:{"relation":"","glycan_id":""},
         gene_name:gene_name,
         pathway_id:pathway_id,
         sequence: {"type":"exact", "aa_sequence":""},
