@@ -6,6 +6,7 @@
  */
 
 function setFormValues(data) {
+   
     if (data.query) {
         $("#glycan_id").val(data.query.glycan_id);
         if (data.query.mass) {
@@ -14,11 +15,8 @@ function setFormValues(data) {
         }
         $("#organism").val(data.query.organism);
         $("#ddl").val(data.query.glycantype);
-
-
        var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
-
         // create subtypes
         configureDropDownLists(types, subtypes, function() {
             $("#ddl2").val(data.query.glycansubtype);
@@ -30,19 +28,60 @@ function setFormValues(data) {
 }
 
 /**
+ * .setting the Form Values based on object data
+ * @param {object} data - The data is object with query value
+ * @param {object} data.query -
+ *
+ */
+function setproteinFormValues(data) {
+//alert(data.results.protein_id)
+  //data1 = JSON.parse(data);
+    if (data.query) {
+        $("#protein").val(data.query.protein_id);
+        if (data.query.mass) {
+            var massSlider = document.getElementById('slider');
+            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+        }
+        $("#organism").val(data.query.organism);
+        $("#gene_name").val(data.query.gene_name);
+        $("#protein_name_long").val(data.query.protein_name_long);
+        $("#pathway").val(data.query.pathway_id);
+        $("#sequences").val(data.query.sequence);
+        $("#glycosylated_aa").val(data.query.glycosylated_aa);
+        $("#glycosylation_evidence").val(data.query.glycosylation_evidence);  
+    }
+}
+
+/**
  * fail to to get search data
 * @param {object} data - The Retreive data
 *
 *
 */
-
-
 function failToRetreiveSearch(data) {
     displayErrorByCode('server_down');
 }
+/**
+ * Loading data from protein list service
+ * @param {string} id - The serach id
+ *
+ *
+ */
+function LoadproteinSearchvalues(id) {
+    var ajaxConfig = {
+        dataType: "json",
+        url: "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/list",
+        data: getListPostData(id, 1, 'protein_id', 'asc', 1),
+        method: 'POST',
+        success: setproteinFormValues,
+        error: failToRetreiveSearch
+    };
+    // make the server call
+    $.ajax(ajaxConfig);
+}
 
 /**
- * Loading data from list service
+ * Loading data from glycan list service
  * @param {string} id - The serach id
  *
  *
@@ -56,8 +95,6 @@ function LoadSearchvalues(id) {
         success: setFormValues,
         error: failToRetreiveSearch
     };
-
-
     // make the server call
     $.ajax(ajaxConfig);
 }
