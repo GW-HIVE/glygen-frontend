@@ -622,6 +622,7 @@ label {
 
 #resources {
     background: lightcoral;
+    background: #2E78B7
 }
 
 #resources th {
@@ -641,16 +642,14 @@ label {
     border-bottom: 2px solid rgba(0,0,0,0.2);
 }
 
-#glycoProtein-content {
-    border: 2px solid lightcoral;
+.table {
+    background: #fff;
+    width: 99% !important;
 }
 
-#protein-content {
-    border: 2px solid #599194;
-}
-
-#glycan-content {
-    border: 2px solid #2E78B7;
+.table-hover tbody tr:hover td, 
+.table-hover tbody tr:hover th {
+  background-color:#e2e8ef;
 }
 
 /* -----------------------------
@@ -678,3 +677,4 @@ label {
     height: auto;
     top: 33%;
 }
+
