@@ -644,7 +644,8 @@ label {
 
 .table {
     background: #fff;
-    width: 99% !important;
+    width: 99.9999% !important;
+    float: right;
 }
 
 .table-hover tbody tr:hover td, 
