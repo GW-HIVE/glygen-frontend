@@ -48,7 +48,9 @@
 </head>
 
 <body>
-<div id='header'></div>
+    <script src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
     <div class="container">
         <!-- <h1 style="color: #ff5249;">Coming soon</h1> 
@@ -252,7 +254,7 @@
         <!-- cd-faq -->
 
     </div>
-<div id='footer'></div>
+    <div w3-include-html="footer.html"></div>
      <!-- script for jquery -->
    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
