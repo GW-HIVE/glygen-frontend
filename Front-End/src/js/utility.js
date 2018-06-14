@@ -5,41 +5,49 @@
 
 function getErrorMessage(errorCode) {
     switch (errorCode) {
-        case 'GLIST01':
+        case 'open-connection-failed':
             return {
-                message: 'Entry Error has occurred. Please Provide valid ID in URL.',
-                title: "Invalid"
+                message: 'Display error occurred.we are looking into problem.',
+                title: "Unexpected error"
             };
             break;
-        case 'GLIST02':
+        case 'invalid-query-json':
             return {
                 message: 'Display error occurred.we are looking into problem',
                 title: "Unexpected error"
             };
             break;
-        case 'GLIST03':
+        case 'unexpected-field-in-query':
             return {
                 message: 'Display error occurred.we are looking into problem',
                 title: "Unexpected error"
             };
             break;
-        case 'GLIST04':
+        case 'invalid-parameter-value':
             return {
                 message: 'Display error occurred.we are looking into problem',
                 title: "Unexpected error"
             };
             break;
-        case 'GLIST05':
+        case 'invalid-parameter-value-length':
             return {
-                message: 'Entry Error has occurred. Please Provide valid ID.',
+                message: 'Display error occurred.we are looking into problem',
                 title: "Unexpected error"
             };
             break;
-        case 'LIBGLIST01':
+        case 'no-search-criteria-submitted':
             return {
-                message: 'Please choose a different number of records per page.',
-                title: "selection error"
+                message: 'Display error occurred.we are looking into problem',
+                title: "Unexpected error"
             };
+            break;
+        case 'non-existent-record':
+            return {
+                message: 'Display error occurred.we are looking into problem',
+                title: "Unexpected error"
+            };
+            break;
+
         case 'server_down':
             return 'sorry server is down';
             break;
