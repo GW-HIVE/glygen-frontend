@@ -156,6 +156,7 @@ header h1 {
     width: 20%;
     float: left;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    /* overflow-y: hidden; */
   }
   .cd-faq-categories a {
     font-size: 24px;
@@ -181,11 +182,11 @@ header h1 {
 @media only screen and (min-width: 1024px) {
   .cd-faq-categories {
     position: fixed;
-    top: 7rem;
+    top: 100px; /*7rem*/
     left: 0;
     width: 200px;
     z-index: 2;
-
+    /* overflow-y: hidden; */
     padding-top: 1rem;
     background-color: #E6E6E6;
     height: 100%;
@@ -498,5 +499,15 @@ header h1 {
 @media only screen and (min-width: 768px){
   .gg-faq-margin{
     margin-left: 40px;
+  }
+}
+
+/** Side navbar top margin adjust
+  * @author Gaurav Agarwal 
+  * @date-modified 06/14/2018
+  */
+@media only screen and (min-width: 1408px) {
+  .cd-faq-categories{
+    top: 50px;
   }
 }
