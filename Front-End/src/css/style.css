@@ -654,6 +654,49 @@ label {
     background-image:url(../images/resources/desc-arrow.png);
 }
 
+/* ----------------------------
+    Survey
+--------------------------------*/
+@media (max-width: 1280px) {
+    #google-forms  {
+        width: 1200px;   
+    }
+}
+@media (max-width: 1024px) {
+    #google-forms  {
+        width: 900px;   
+    }
+} 
+
+@media (max-width: 850px) {
+    #google-forms  {
+        width: 700px;   
+    }
+}
+
+@media (max-width: 768px) {
+    #google-forms  {
+        width: 660px;
+        height: 720px;
+    }
+} 
+@media (max-width: 600px) {
+    #google-forms  {
+        width: 380px;
+        height: 500px;
+    }
+} 
+@media (max-width: 328px) {
+    #google-forms  {
+        width: 180px;
+        height: 400px;
+        text-align: center;
+    }
+} 
+
+
+
+
 /** ---------------------------------
     The page loading gif
     @author: Gaurav Agaarwal
