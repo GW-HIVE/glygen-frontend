@@ -1,31 +1,21 @@
 
-
-
-
-
 function getErrorMessage(errorCode) {
     switch (errorCode) {
-        case 'open-connection-failed':
-            return {
-                message: 'Display error occurred.we are looking into problem.',
-                title: "Unexpected error"
-            };
-            break;
         case 'invalid-query-json':
             return {
-                message: 'Display error occurred.we are looking into problem',
+                message: 'Submitted query JSON is not valid.',
+                title: "Invalid"
+            };
+            break;
+        case 'open-connection-failed':
+            return {
+                message: 'Unable to connect to database.',
                 title: "Unexpected error"
             };
             break;
         case 'unexpected-field-in-query':
             return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
-            };
-            break;
-        case 'invalid-parameter-value':
-            return {
-                message: 'Display error occurred.we are looking into problem',
+                message: 'Unexpected field in query JSON',
                 title: "Unexpected error"
             };
             break;
@@ -37,16 +27,30 @@ function getErrorMessage(errorCode) {
             break;
         case 'no-search-criteria-submitted':
             return {
-                message: 'Display error occurred.we are looking into problem',
+                message: 'Entry Error has occurred. Please Provide valid ID.',
                 title: "Unexpected error"
             };
             break;
         case 'non-existent-record':
             return {
-                message: 'Display error occurred.we are looking into problem',
-                title: "Unexpected error"
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
             };
-            break;
+        case 'invalid-parameter-value':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
+        case 'non-existent-search-result':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
+        case 'missing parameter':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
 
         case 'server_down':
             return 'sorry server is down';
@@ -62,8 +66,6 @@ function getErrorMessage(errorCode) {
 
     /**
      * Display Error message using alertify
-
-
      */
     function displayError(message, title) {
         alertify.alert(title, message).set('modal', false);

@@ -1,4 +1,3 @@
-
 //@author: Rupali Mahadik
 
 // @description: UO1 Version-1.1.
@@ -36,19 +35,15 @@ function addCommas(nStr) {
 
 
  * @param {string} strings of characters
- * @returns {number} if matches returns true or not false
+ * @returns {string} if matches returns true or not false
  */
 
-function aminoLetter(textareatxt)
-{
+function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPG]+$/gi;
-    if(textareatxt.value.match(letters))
-    {
+    if (textareatxt.value.match(letters)) {
         document.getElementById("msg").innerHTML = "";
         return true;
-    }
-    else
-    {
+    } else {
         document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
         return false;
     }
@@ -61,9 +56,9 @@ function aminoLetter(textareatxt)
  * @data-returns the protein ID's
  *
  */
-$( "#protein" ).autocomplete({
-    source: function(request, response) {
-        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "protein", request.term);
+$("#protein").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData("protein", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -71,8 +66,8 @@ $( "#protein" ).autocomplete({
         });
     },
     minLength: 1,
-    select: function( event, ui ) {
-        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
 
@@ -82,8 +77,8 @@ $( "#protein" ).autocomplete({
  * @data-returns the protein_name.
  *
  */
-$( "#protein_name" ).autocomplete({
-    source: function(request, response) {
+$("#protein_name").autocomplete({
+    source: function (request, response) {
         var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData("protein_name", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 10);
@@ -92,8 +87,8 @@ $( "#protein_name" ).autocomplete({
         });
     },
     minLength: 1,
-    select: function( event, ui ) {
-        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
 
@@ -103,10 +98,10 @@ $( "#protein_name" ).autocomplete({
  *
  */
 
-$( "#gene_name" ).autocomplete({
-    source: function(request, response) {
+$("#gene_name").autocomplete({
+    source: function (request, response) {
 
-        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "gene", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData("gene", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -116,8 +111,8 @@ $( "#gene_name" ).autocomplete({
         });
     },
     minLength: 1,
-    select: function( event, ui ) {
-        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
 
@@ -127,10 +122,10 @@ $( "#gene_name" ).autocomplete({
  *
  */
 
-$( "#glycan_id" ).autocomplete({
-    source: function(request, response) {
+$("#glycan_id").autocomplete({
+    source: function (request, response) {
 
-        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData( "glycan", request.term);
+        var queryUrl = getWsUrl("typehead") + "?" + getSearchtypeheadData("glycan", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -140,8 +135,8 @@ $( "#glycan_id" ).autocomplete({
         });
     },
     minLength: 1,
-    select: function( event, ui ) {
-        console.log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
 
@@ -150,14 +145,16 @@ $( "#glycan_id" ).autocomplete({
  * get organism drop down values for search form
  */
 
+
+
 var mass_max;
 var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
-        // max_selected_options: 10,
-        placeholder_text_multiple: "choose amino acid"
-    })
-        .bind("chosen:maxselected2", function (){
+            // max_selected_options: 10,
+            placeholder_text_multiple: "choose amino acid"
+        })
+        .bind("chosen:maxselected2", function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
@@ -170,9 +167,9 @@ $(document).ready(function () {
         mass(mass_min, mass_max)
 
         //check for ID to see if we need to load search values
-        //please do not remove rhis code as it is required prepopulate search values
-        var id =getParameterByName('id') || id;
-        if(id){
+        //please do not remove this code as it is required prepopulate search values
+        var id = getParameterByName('id') || id;
+        if (id) {
             LoadSearchvalues(id);
         }
 
@@ -191,52 +188,56 @@ function mass(mass_min, mass_max) {
 
         start: [mass_min, mass_max],
         range: {
-            'min': mass_min,
-            'max': mass_max
+            'min': (mass_min),
+            'max': (mass_max)
         }
+
     });
     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
     var nodes = [
         document.getElementById('lower-value'), // 0
-        document.getElementById('upper-value')  // 1
+        document.getElementById('upper-value') // 1
     ];
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = addCommas(values[handle]);
+        var values = values[handle];
+        var round = Math.round(values);
+        var commas = addCommas(round);
+        nodes[handle].innerHTML = commas + ' Da';
     });
 
 }
 
 
 
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
-    var organism= $("#organism").val();
+    var organism = $("#organism").val();
     var protein_id = $("#protein").val();
     var mass_slider = $("#slider").get(0).noUiSlider.get();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
     // var mass_slider = document.getElementById("slider").noUiSlider.get();
-    var gene_name=$("#gene_name").val();
+    var gene_name = $("#gene_name").val();
     var protein_name_long = $("#protein_name_long").val();
-    var pathway_id=$("#pathway").val();
-    var sequence=$("#sequences").val();
+    var pathway_id = $("#pathway").val();
+    var sequence = $("#sequences").val();
 
-    var glycosylated_aa= $(".glycosylated_aa").val();
-    var glycosylation_evidence= $("#glycosylation_evidence").val();
+    var glycosylated_aa = $(".glycosylated_aa").val();
+    var glycosylation_evidence = $("#glycosylation_evidence").val();
 
     var formObject = {
         operation: "AND",
         query_type: "search_protein",
         organism: organism,
         protein_id: protein_id,
-        mass:
-            {
-                min: mass_min,
-                max: mass_max
-            },
+        mass: {
+            min: mass_min,
+            max: mass_max
+        },
         protein_name_long: protein_name_long,
         // glycan:
         //     {
@@ -245,13 +246,12 @@ function ajaxProteinSearchSuccess() {
         //     },
         gene_name: gene_name,
         pathway_id: pathway_id,
-        sequence:
-            {
-                type: "exact",
-                aa_sequence: sequence
-            },
+        sequence: {
+            type: "exact",
+            aa_sequence: sequence
+        },
         glycosylated_aa: glycosylated_aa,
-        glycosylation_evidence:glycosylation_evidence
+        glycosylation_evidence: glycosylation_evidence
     };
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
@@ -259,10 +259,9 @@ function ajaxProteinSearchSuccess() {
         url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
         success: function (results) {
-            if(results.search_results_id){
+            if (results.search_results_id) {
                 window.location = './protein_list.html?id=' + results.search_results_id;
-            }
-            else{
+            } else {
                 displayErrorByCode("server-down")
             }
 
@@ -285,22 +284,28 @@ function ajaxProteinSearchSuccess() {
  */
 
 // function getProteinSearchPostdata(query_type,organism,protein,mass_min,mass_max,protein_name_long,gene_name,pathway_id, sequence, glycosylated_aa) {
-function getProteinSearchPostdata(operation,query_type,organism,mass_min,mass_max,protein_id,gene_name,protein_name_long,pathway_id,relation,glycan_id, type, aa_sequence,glycosylated_aa,glycosylation_evidence)
+function getProteinSearchPostdata(operation, query_type, organism, mass_min, mass_max, protein_id, gene_name, protein_name_long, pathway_id, relation, glycan_id, type, aa_sequence, glycosylated_aa, glycosylation_evidence)
 // ,protein_name_long,gene_name)
 {
     var formjson = {
-        operation:operation,
+        operation: operation,
         query_type: query_type,
         organism: organism,
         protein_id: protein_id,
-        mass: { "min": mass_min, "max": mass_max },
-        protein_name_long:protein_name_long,
+        mass: {
+            "min": mass_min,
+            "max": mass_max
+        },
+        protein_name_long: protein_name_long,
         // glycan:{"relation":"","glycan_id":" "},
-        gene_name:gene_name,
-        pathway_id:pathway_id,
-        sequence: {"type":"exact", "aa_sequence":""},
+        gene_name: gene_name,
+        pathway_id: pathway_id,
+        sequence: {
+            "type": "exact",
+            "aa_sequence": ""
+        },
         glycosylated_aa: glycosylated_aa,
-        glycosylation_evidence:glycosylation_evidence
+        glycosylation_evidence: glycosylation_evidence
 
     };
     return formjson;
@@ -312,7 +317,3 @@ $(window).on('resize', function () {
     $element.width($element.parent().width());
 
 })
-
-
-
-
