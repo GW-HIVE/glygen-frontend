@@ -1,8 +1,4 @@
 
-
-
-
-
 function getErrorMessage(errorCode) {
     switch (errorCode) {
         case 'invalid-query-json':
@@ -23,23 +19,39 @@ function getErrorMessage(errorCode) {
                 title: "Unexpected error"
             };
             break;
-        case 'GLIST04':
+        case 'invalid-parameter-value-length':
             return {
                 message: 'Display error occurred.we are looking into problem',
                 title: "Unexpected error"
             };
             break;
-        case 'GLIST05':
+        case 'no-search-criteria-submitted':
             return {
                 message: 'Entry Error has occurred. Please Provide valid ID.',
                 title: "Unexpected error"
             };
             break;
-        case 'LIBGLIST01':
+        case 'non-existent-record':
             return {
                 message: 'Please choose a different number of records per page.',
                 title: "selection error"
             };
+        case 'invalid-parameter-value':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
+        case 'non-existent-search-result':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
+        case 'missing parameter':
+            return {
+                message: 'Please choose a different number of records per page.',
+                title: "selection error"
+            };
+
         case 'server_down':
             return 'sorry server is down';
             break;
