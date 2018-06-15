@@ -181,8 +181,8 @@
      },
      {
        "name": "Fuc",
-       "residue_id": "NE79",
-       "fullName": "N-glycan_x-L-Fucp_E79",
+       "residue_id": "12",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "L",
        "ring": "p",

@@ -3,8 +3,8 @@
   "residues": [
      {
        "name": "Fuc",
-       "residue_id": "NE76",
-       "fullName": "N-glycan_x-L-Fucp_E76",
+       "residue_id": "2",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "L",
        "ring": "p",

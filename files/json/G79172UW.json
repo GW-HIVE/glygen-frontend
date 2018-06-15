@@ -69,8 +69,8 @@
      },
      {
        "name": "GlcNAc",
-       "residue_id": "NE131",
-       "fullName": "N-glycan_x-D-GlcNAcp_E131",
+       "residue_id": "6",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "D",
        "ring": "p",
