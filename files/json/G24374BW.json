@@ -3,8 +3,8 @@
   "residues": [
      {
        "name": "GlcNAc",
-       "residue_id": "NE54",
-       "fullName": "N-glycan_x-D-GlcNAcp_E54",
+       "residue_id": "7",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "D",
        "ring": "p",
@@ -19,8 +19,8 @@
      },
      {
        "name": "GlcNAc",
-       "residue_id": "NE54",
-       "fullName": "N-glycan_x-D-GlcNAcp_E54",
+       "residue_id": "9",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "D",
        "ring": "p",

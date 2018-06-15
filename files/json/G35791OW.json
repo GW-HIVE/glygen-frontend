@@ -3,8 +3,8 @@
   "residues": [
      {
        "name": "Neu5Ac",
-       "residue_id": "NE74",
-       "fullName": "N-glycan_a-D-Neu5Acp_E74",
+       "residue_id": "12",
+       "fullName": "unassigned",
        "anomer": "a",
        "absolute": "D",
        "ring": "p",

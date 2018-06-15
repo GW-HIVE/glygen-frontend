@@ -3,8 +3,8 @@
   "residues": [
      {
        "name": "Man",
-       "residue_id": "NE52",
-       "fullName": "N-glycan_a-D-Manp_E52",
+       "residue_id": "6",
+       "fullName": "unassigned",
        "anomer": "a",
        "absolute": "D",
        "ring": "p",
