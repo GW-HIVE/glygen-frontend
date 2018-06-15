@@ -60,14 +60,16 @@ p {
     margin: .5em 0 1em;
     font-size: 1.3em;
 }
+
 .title {
     margin: 0 0 .5em 0;
 }
 
-/*---Header --- */
+/*-------------------------
+    Header 
+--------------------------- */
 
 #logo {
-/*    margin: 44px;*/
     padding-top: 0;
     padding-left: 35px;
     padding-right: 15px; 
@@ -80,30 +82,18 @@ p {
 .navbar-brand {
     padding: 8px 10px 0 0;
 }
+
 .gg-navbar {
-/*    position: relative;*/
-/*        background: #9f9f9f;*/
     background: #2E78B7;
-   
-/*    border-color: #9f9f9f;*/
     border-color: #2E78B7;
     border-radius: 0 !important;
     margin-bottom: 30px;
     z-index: 9;
-    
-/*    background: linear-gradient(-90deg, #5A99D8, #304372);*/
-/*     background: linear-gradient(#89C3FD, #4777A6);*/
 }
 
 .gg-nav-item a { 
     font-family: "Verdana", "Geneva", sans-serif;
-/*    color: #ddd !important;*/
-/*    color: #00386F !important;*/
     color: #fff !important;
-/*
-    font-size: 1.4em;
-    letter-spacing: 1px;
-*/
     font-size: 1.1em;
     letter-spacing: 0.5px;
     font-weight: 600;
@@ -127,12 +117,7 @@ p {
 .gg-navbar-inverse .gg-nav-nav>.open>a, 
 .gg-navbar-inverse .gg-nav-nav>.open>a:focus, 
 .gg-navbar-inverse .gg-nav-nav>.open>a:hover {
-    background-color: #2E78B7;
-/*     background-color: #fff;*/
-/*    color: #00386F !important;*/
-/*    color: #5A99D8 !important;*/
-/*    color: #2E78B7 !important;*/
-  
+    background-color: #2E78B7; 
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
@@ -153,7 +138,6 @@ p {
 */
 
 .nav li.current a  {
-/*    color: #B7D2EC !important; */
     margin-right: -15px;
     margin-left: -15px;
 }
@@ -176,7 +160,6 @@ p {
 
 .gg-form {
     font-family: "Verdana", "Geneva", sans-serif;
-/*    font-size: 14px;*/
 }
 
 .gg-btn {
@@ -193,11 +176,11 @@ p {
 } */
 
 
-/*--- Footer ---*/
+/*------------------------
+    Footer 
+-------------------------*/
 
 #logo-uga {
-/*    float: left; */
-/*    position: relative;*/
     width: 70px;
     padding-right: 20px;
    
@@ -211,9 +194,6 @@ p {
     position: relative;
     padding-top: 10px;
     background-color:#2E78B7;
-/*    background-color: #2E78B7;*/
-/*    background-color:#00386F;*/
-/*    background: linear-gradient(#89C3FD, #4777A6);*/
     color: white; 
     font-size: 1.2em; 
     font-family: "Verdana", "Geneva", sans-serif; 
@@ -251,7 +231,9 @@ p {
     text-decoration: none;
 }
 
-/*  -- Homepage --  */
+/*  -------------------------
+    Homepage 
+-----------------------------  */
 
 #glygen-h1 {
     font-family: Georgia, sans-serif; 
@@ -310,7 +292,9 @@ p {
     font-weight:600;  
 } 
 
-/* -- Alert -- */
+/* -------------------------
+    Alert 
+---------------------------- */
 
 .gg-alert {
     padding-top: 8px;
@@ -336,9 +320,9 @@ p {
     font-weight: 600;
 }
 .btn-default:hover {
-  background-color: #5F5F5F; 
-  border-color: #ccc;
-  color: #F0F0F0 !important;
+    background-color: #5F5F5F; 
+    border-color: #ccc;
+    color: #F0F0F0 !important;
     font-weight: 600;
 } 
       
@@ -348,7 +332,9 @@ p {
     margin-top: 10px;
 }    
     
-/* The Close alert Button */
+/* --------------------------
+    The Close alert Button 
+-----------------------------*/
 #close_banner {
     /* color: white; */
     /* float: right; */
@@ -364,25 +350,29 @@ p {
     cursor: pointer;
 }
   
-/* -- GlyGen settings Enaibled Disabled page --*/
+/* -----------------------------------------------
+    GlyGen settings Enaibled Disabled page 
+-------------------------------------------------*/
 
-    .gg-settings {
-        width: 700px;
-        margin: 5em auto;
-        padding: 50px;
-        background-color: #fff;
-        border-radius: 1em;
+.gg-settings {
+    width: 700px;
+    margin: 5em auto;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 1em;
+}
+@media (max-width: 700px) {
+     .gg-settings  {
+        width: auto;
+        margin: 0 auto;
+        border-radius: 0;
+        padding: 1em;
     }
-    @media (max-width: 700px) {
-         .gg-settings  {
-            width: auto;
-            margin: 0 auto;
-            border-radius: 0;
-            padding: 1em;
-        }
-    } 
+} 
         
-/* Toggle button       */
+/* ---------------------------
+    Toggle button       
+------------------------------*/
 .switch {
     position: relative;
     display: inline-block;
@@ -430,7 +420,9 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
+/* ------------------------------
+    Rounded sliders 
+--------------------------------*/
 .slider.round {
     border-radius: 20px;
 }
@@ -525,7 +517,7 @@ label {
     padding-right: 80px;
     padding-left: 80px;
     padding-bottom: 10px;
-   border: 1px solid #dadada;
+    border: 1px solid #dadada;
 }
 
 .team {
@@ -536,31 +528,23 @@ label {
 }
 
 .about-heading {
-/*    color: #00386F; */
-/*    color: #035AAF; */
     color: #2F78B7;
 }
 
 .about-link {
-/*    color: #035AAF;*/
-/*    color: #4A4A4A;*/
-/*    color: #337ab7;*/
-/*    color: #00386F;*/
     color: #2F78B7;
     text-decoration: none !important;
 }
 
 .about-link:hover {
-/*    color: #337ab7;*/
     color: #00386F;
 }
 .mission-img {
 /*    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/team/about-mission.png') top center no-repeat; */
-     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/about-mission.png') top center no-repeat;
+     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4) ), url('../images/about-mission.png') top center no-repeat;
 }
 
 .cover {
-/*   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) ), url('../images/sky.jpg') top center no-repeat;*/
     background-size: cover;
     display: table;
     width: 100%;
@@ -591,10 +575,19 @@ label {
     Resources
 --------------------------------------------*/
 .resources-top-img {  
-    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/resources/resources_top_img.png') top center no-repeat; 
+/*    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/resources/resources_top_img.png') top center no-repeat; */
+    background: linear-gradient(rgba(46, 120, 160, 0.5), rgba(46, 120, 160, 0.7), rgba(46, 120, 183, 0.7) ), url('../images/resources/resources-top-img.png') top center no-repeat; 
     background-size: cover;
 }
 
+.cover-resources {
+    background-size: cover;
+    display: table;
+    width: 99%;
+    height: 350px;
+    padding: 0 20%;
+    box-shadow: inset 0 0 200px #333;
+}
 .margin-top {
     margin-top: 50px;
 }
@@ -653,16 +646,19 @@ label {
   background-color:#e2e8ef;
 }
 
-/* -----------------------------
-    Glycan Help hover img  
--------------------------------*/
+.fixed-table-container thead th .asc {
+    background-image:url(../images/resources/asc-arrow.png);
+}
 
+.fixed-table-container thead th .desc {
+    background-image:url(../images/resources/desc-arrow.png);
+}
 
-/**
+/** ---------------------------------
     The page loading gif
     @author: Gaurav Agaarwal
     @date-added: 03/26/2018
- */
+ ------------------------------------*/
 #loading_image{
     background: rgba( 255, 255, 255, 0.8 );
     display: none;
