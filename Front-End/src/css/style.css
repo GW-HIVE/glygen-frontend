@@ -657,11 +657,11 @@ label {
         .cover-resources {
             padding: 40px;
             text-align: center;
+            width: 97%;
     }
     .resource-img {
-        padding-left: 60px;   
+        padding-left: 110px;
     }
-
 }
 
 /* ----------------------------
