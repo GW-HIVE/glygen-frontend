@@ -7,7 +7,7 @@
 
 function getWsUrl(request, id) {
 
-    var ws_base_glycan = "http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
+    var ws_base_glycan = "http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan";
     var ws_base_protein = "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein";
     var ws_base_typeahead = "http://glygen-vm-tst.biochemistry.gwu.edu/api/typeahead";
     var ws_logging = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/logging";
@@ -22,6 +22,8 @@ function getWsUrl(request, id) {
         case "log_activity":
             return ws_logging;
             break;
+
+
 
             //Glycan webservices
         case "search_init":
@@ -41,6 +43,8 @@ function getWsUrl(request, id) {
             return ws_base_glycan + "/detail/" + id;
             break;
 
+
+
             //Protein webservices
         case "search_init_protein":
             return ws_base_protein + "/search_init";
@@ -48,15 +52,17 @@ function getWsUrl(request, id) {
         case "Search_protein":
             return ws_base_protein + "/search";
             break;
-        case "image_service":
+        case "protein_image_service":
             return ws_base_glycan + "/image/" + id;
             break;
-        case "list":
+        case "protein_list":
             return ws_base_glycan + "/list";
             break;
-        case "detail":
+        case "protein_detail":
             return ws_base_glycan + "/detail/" + id;
             break;
+
+
             //Typeahead webservices
 
         case "typehead":
@@ -78,9 +84,9 @@ function getWsUrl(request, id) {
 function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
-    query.offset = parseInt(page);
+    // query.offset = parseInt(page);
     query.sort = sort;
-    // query.offset = ((page - 1) * limit) + 1;
+    query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;
 
@@ -92,5 +98,5 @@ function getSearchtypeheadData(field, value) {
     var query = {};
     query.field = field;
     query.value = value;
-    return "query=" + JSON.stringify(query);
+    return "query= " + JSON.stringify(query);
 }
