@@ -702,13 +702,28 @@ label {
 } 
 @media (max-width: 600px) {
     #google-forms  {
-        width: 380px;
+        width: 420px;
         height: 500px;
     }
 } 
+@media (max-width: 420px) {
+    #google-forms  {
+        width: 390px;
+        height: 550px;
+        text-align: center;
+    }
+} 
+@media (max-width: 360px) {
+    #google-forms  {
+        width: 300px;
+        height: 380px;
+        text-align: center;
+    }
+} 
+
 @media (max-width: 328px) {
     #google-forms  {
-        width: 180px;
+        width: 300px;
         height: 380px;
         text-align: center;
     }
