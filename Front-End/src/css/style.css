@@ -708,14 +708,14 @@ label {
 } 
 @media (max-width: 420px) {
     #google-forms  {
-        width: 390px;
+        width: 370px;
         height: 550px;
         text-align: center;
     }
 } 
-@media (max-width: 360px) {
+@media (max-width: 375px) {
     #google-forms  {
-        width: 300px;
+        width: 360px;
         height: 380px;
         text-align: center;
     }
@@ -728,9 +728,6 @@ label {
         text-align: center;
     }
 } 
-
-
-
 
 /** ---------------------------------
     The page loading gif
