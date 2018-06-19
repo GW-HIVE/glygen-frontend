@@ -430,6 +430,14 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+/*----------------------------
+    License
+------------------------------*/
+#license-tabble {
+    border: 1px solid #ddd;
+    width: 99.999%; 
+    text-indent: 10px;
+}
 
 .panel-heading {
     background-color: #E8E8E8 !important;
@@ -687,7 +695,7 @@ label {
 @media (max-width: 768px) {
     #google-forms  {
         width: 660px;
-        height: 720px;
+        height: 520px;
     }
 } 
 @media (max-width: 600px) {
