@@ -677,12 +677,14 @@ label {
 --------------------------------*/
 @media (max-width: 1280px) {
     #google-forms  {
-        width: 1200px;   
+        width: 1200px; 
+        height: 550px;
     }
 }
 @media (max-width: 1024px) {
     #google-forms  {
-        width: 900px;   
+        width: 900px; 
+        height: 500px;
     }
 } 
 
@@ -695,7 +697,7 @@ label {
 @media (max-width: 768px) {
     #google-forms  {
         width: 660px;
-        height: 520px;
+        height: 500px;
     }
 } 
 @media (max-width: 600px) {
@@ -707,7 +709,7 @@ label {
 @media (max-width: 328px) {
     #google-forms  {
         width: 180px;
-        height: 400px;
+        height: 380px;
         text-align: center;
     }
 } 
