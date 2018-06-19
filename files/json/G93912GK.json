@@ -3,8 +3,8 @@
   "residues": [
      {
        "name": "Xyl",
-       "residue_id": "NE139",
-       "fullName": "N-glycan_b-D-Xylf_E139",
+       "residue_id": "4",
+       "fullName": "unassigned",
        "anomer": "b",
        "absolute": "D",
        "ring": "f",

@@ -115,8 +115,8 @@
      },
      {
        "name": "Glc",
-       "residue_id": "NE128",
-       "fullName": "N-glycan_x-D-Glcp_E128",
+       "residue_id": "7",
+       "fullName": "unassigned",
        "anomer": "x",
        "absolute": "D",
        "ring": "p",

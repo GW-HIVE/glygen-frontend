@@ -28,24 +28,24 @@
     
     <h2 id="about" class="about-heading">Resources</h2>
     <div class="row">
-        <div class="cover resources-top-img">
+        <div class="cover-resources resources-top-img">
             <div class="cover-text">
                 <div class="content">
                     <h1>GlyGen's online library of resources for science in glycobiology.</h1>
                     <hr id="img-hr">
-                    <div class="col-sm-12 cover-text">
+                    <div class="col-sm-12 cover-text resource-img" style="text-align: center;">
                         <div class="col-md-4">
-                            <img src="images/glycan.png" alt="glycan image" style="width: 160px; text-align: center;">
+                            <img src="images/glycan.png" alt="glycan image" style="width: 160px; text-align2: center;">
                             <h6>Glycan</h6>
                         </div>
                 
                         <div class="col-md-4">
-                            <img src="images/protein.png" alt="glycan image" style="width: 160px; text-align: center;">
+                            <img src="images/protein.png" alt="glycan image" style="width: 160px; text-align2: center;">
                             <h6>Protein</h6>
                         </div>
 
                          <div class="col-md-4">
-                            <img src="images/glycoprotein.png" alt="glycan image" style="width: 160px; text-align: center;">
+                            <img src="images/glycoprotein.png" alt="glycan image" style="width: 160px; text-align2: center;">
                             <h6>GlycoProtein</h6>
                         </div>
                     </div>
@@ -125,6 +125,15 @@
                         <td>LipidBank</td>
                         <td>Description</td>
                         <td><a href="http://jcbl.jp/wiki/Main_Page" target="_blank">link</a></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>GlyConnect</td>
+                        <td>Is a platform integrating sources of information to help characterise the molecular components of protein glycosylation.</td>
+                        <td><a href="https://glyconnect.expasy.org/" target="_blank">link</a></td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
@@ -234,14 +243,16 @@
             
         </div>
     </div> 
-
+    <div w3-include-html="footer.html"></div>
+    
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <script>jQuery.noConflict();</script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
     <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->    
     <script src="js/utility.js"></script>
-    <div w3-include-html="footer.html"></div>
+    
 </body>
 </html>
