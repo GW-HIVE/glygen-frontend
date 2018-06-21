@@ -130,23 +130,46 @@ padding-left: 45px;
 }
 
 .cd-faq-categories{
-  margin-top: 100px;
-  width:290px;
-  padding-left: 0px;
-  margin-left:0px;
+  /* margin-top: 100px; */
+  width:auto;
+  /* padding-left: 0px;
+  margin-left:0px; */
 
 }
-section{
+
+/** Overriding the code of faq_style.css for Detail page.
+  * @author Gaurav Agarwal
+  * @date 21 June 2018
+  */
+.cd-faq-items {
+  overflow-x: hidden !important; 
+}
+@media only screen and (min-width: 1024px) {
+  .cd-faq-categories{
+    width: 290px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1300px) {
+.cd-faq-items {
+  padding-left: 300px;
+}
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .cd-faq-items {
+    width: 62%;
+  }
+}
+/* section{
   padding-left: 20px;
   
-}
+} */
 
-.cd-faq{
+/* .cd-faq{
   padding-left: 10px;
   margin-top: 2px;
   padding-right:50px; 
   margin-bottom:30px;
-}
+} */
 h4{
   overflow: auto;
 }

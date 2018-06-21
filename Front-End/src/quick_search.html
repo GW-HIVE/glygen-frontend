@@ -61,23 +61,23 @@
                 </div>  -->
 
         <section class="cd-faq">
-                <ul class="cd-faq-categories">
-                    <li>
-                        <a class="selected" href="#search_glycan">Glycan</a>
-                    </li>
-                    <li>
-                        <a href="#search_protein">Protein</a>
-                    </li>
-                    <li>
-                        <a href="#search_species">Species</a>
-                    </li>
-                    <li>
-                        <a href="#search_disease">Disease</a>
-                    </li>
-                    <!-- <li><a href="#privacy">Privacy</a></li>
+            <ul class="cd-faq-categories">
+                <li>
+                    <a class="selected" href="#search_glycan">Glycan</a>
+                </li>
+                <li>
+                    <a href="#search_protein">Protein</a>
+                </li>
+                <li>
+                    <a href="#search_species">Species</a>
+                </li>
+                <li>
+                    <a href="#search_disease">Disease</a>
+                </li>
+                <!-- <li><a href="#privacy">Privacy</a></li>
                                                 <li><a href="#delivery">Delivery</a></li> -->
-                </ul>
-                <!-- cd-faq-categories -->
+            </ul>
+            <!-- cd-faq-categories -->
 
             <div class="cd-faq-items">
                 <ul id="search_glycan" class="cd-faq-group">
@@ -278,7 +278,11 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 
-    <script>        //to open the drop down of the ID called from home page.
+    <script>       
+        //calls the script in faq_main.js file 
+        faqMain();
+
+        //to open the drop down of the ID called from home page.
         var url_loc = $(location).attr('href');
         if (url_loc.match('#')) {
             var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
