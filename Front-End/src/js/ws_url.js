@@ -13,7 +13,7 @@ function getWsUrl(request, id) {
     var ws_logging = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/logging";
     var ws_userID = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/userid";
 
-    switch (request) {
+    switch (request.toLowerCase()) {
 
         //Auth Webservices.
         case "generate_ID":
@@ -30,7 +30,7 @@ function getWsUrl(request, id) {
             return ws_base_glycan + "/search_init";
             break;
 
-        case "Search_glycan":
+        case "search_glycan":
             return ws_base_protein + "/search";
             break;
         case "image_service":
@@ -49,7 +49,7 @@ function getWsUrl(request, id) {
         case "search_init_protein":
             return ws_base_protein + "/search_init";
             break;
-        case "Search_protein":
+        case "search_protein":
             return ws_base_protein + "/search";
             break;
         case "protein_image_service":
@@ -65,7 +65,7 @@ function getWsUrl(request, id) {
 
             //Typeahead webservices
 
-        case "typehead":
+        case "type-ahead":
             return ws_base_typeahead;
         default:
             return "WWW.GOOGLE.COM";
@@ -84,9 +84,9 @@ function getWsUrl(request, id) {
 function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
-    // query.offset = parseInt(page);
+    query.offset = parseInt(page);
     query.sort = sort;
-    query.offset = ((page - 1) * limit) + 1;
+    //query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;
 
@@ -98,5 +98,5 @@ function getSearchtypeheadData(field, value) {
     var query = {};
     query.field = field;
     query.value = value;
-    return "query= " + JSON.stringify(query);
+    return "query=" + JSON.stringify(query);
 }
