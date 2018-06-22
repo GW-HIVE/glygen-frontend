@@ -4,6 +4,7 @@
    @Date:19th Feb 2018 - detail mustach.js works
    @Date:20th March 2018 - different side navigation update
    @Update: 17 April 2018
+   @Update: 21 June 2018 - Gaurav Agarwal - sidebar issue resolved and proper object placements for different screen size.
    -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +18,14 @@
 
 
     <!-- Please do not change Sequence-->
-    <!-- CSS for sidenavgation-->
-    <link rel="stylesheet" href="css/faq_style.css">
     <!-- CSS reset -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- boots style -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
+    <!-- CSS for sidenavgation-->
+    <link rel="stylesheet" href="css/faq_style.css">
     <!--detail style -->
     <link rel="stylesheet" type="text/css" href="css/glycan-detail.css">
     <!-- Modernizr -->
@@ -33,10 +34,10 @@
 </head>
 
 <body onload="tracking()">
-<script type="text/javascript" src="libraries/w3.js"></script>
+    <script type="text/javascript" src="libraries/w3.js"></script>
 
-<div w3-include-html="header.html"></div>
-<script>w3.includeHTML();</script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
     <section class="cd-faq">
         <ul class="cd-faq-categories">
@@ -64,13 +65,14 @@
         </ul>
         <!-- cd-faq-categories -->
         <!-- main content for page -->
-        <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
+        <div class="cd-faq-items" id="content">
             <!-- added new class -->
             <!-- <div id="content" class="container" "> -->
             <script id="item_template" type="text/template">
                 <!-- Glycan ID starts here for page -->
 
-                <ul id="basics" class="cd-faq-group selected">
+                <ul id="basics" class="cd-faq-group">
+                        <li class="cd-faq-title" />
                     <!-- added new class -->
                     <div class="panel panel-default ">
 
@@ -107,7 +109,8 @@
                 </ul>
                 <!-- cd-faq-group -->
 
-                <ul id="mobile" class="cd-faq-group selected">
+                <ul id="mobile" class="cd-faq-group">
+                        <li class="cd-faq-title" />
                     <!-- added new class -->
                     <div class="panel panel-default">
 
@@ -143,7 +146,8 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="account" class="cd-faq-group selected">
+        <ul id="account" class="cd-faq-group">
+                <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan MOTIF starts here for page -->
             <div class="panel panel-default">
@@ -174,7 +178,8 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="payments"  class="cd-faq-group selected">
+        <ul id="payments"  class="cd-faq-group">
+                <li class="cd-faq-title" />
             <!-- added new class -->
             <div class="panel panel-default">
 
@@ -211,7 +216,8 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="privacy" class="cd-faq-group selected">
+        <ul id="privacy" class="cd-faq-group">
+                <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan Cross Referance panel starts here for page -->
             <div class="panel panel-default">
@@ -235,7 +241,8 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="delivery" class="cd-faq-group selected">
+        <ul id="delivery" class="cd-faq-group">
+                <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan Enzymes starts here for page -->
             <div class="panel panel-default">
@@ -260,7 +267,8 @@
         </ul>
 
         <!-- cd-faq-group -->
-        <ul id="delivery1" class="cd-faq-group selected">
+        <ul id="delivery1" class="cd-faq-group">
+                <li class="cd-faq-title" />
             <!-- added new class -->
             <div class="panel panel-default">
 
@@ -286,17 +294,10 @@
         </script>
         </div>
     </section>
-<div w3-include-html="footer.html"></div>
-<script>w3.includeHTML();</script>
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <!--<script>-->
-        <!--//to open the drop down of the ID called from home page.-->
-        <!--var url_loc = $(location).attr('href');-->
-        <!--if (url_loc.match('#')) {-->
-            <!--var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));-->
-            <!--$(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');-->
-        <!--}-->
-    <!--</script>-->
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <!-- script for detail page -->
@@ -310,10 +311,15 @@
     <!-- script for side navigation -->
     <script src="js/faq_main.js"></script>
 
-    
+    <script type="text/javascript">
+        $(document).ajaxStop(function () {
+            // calls the sidebar function only when all ajax calls are completed
+            faqMain();
+        });
+    </script>
+
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
-
 </body>
 
 </html>
