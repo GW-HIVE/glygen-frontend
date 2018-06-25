@@ -237,7 +237,7 @@ function submitvalues() {
         data: json,
         success: function (results) {
             if(results.search_results_id){
-                window.location = './glycan-list.html?id=' + results.search_results_id;
+                window.location = './glycan_list.html?id=' + results.search_results_id;
             }
             else{
                 displayErrorByCode("1")

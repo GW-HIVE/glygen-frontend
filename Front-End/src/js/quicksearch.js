@@ -38,7 +38,7 @@ function enzymex() {
             //var result = JSON.parse(results);
            // alert(results.search_results_id)
             if (results.search_results_id) {
-                window.location = './glycan-list.html?id=' + results.search_results_id;
+                window.location = './glycan_list.html?id=' + results.search_results_id;
             }
             else {
             //  alert(results.search_results_id)
