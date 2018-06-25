@@ -186,7 +186,7 @@ function editSearch(){
  @return -Details particular Glycan Id 
  */
 function PageFormat(value, row, index, field) {
- return "<a href='glycan-detail.html?id=" + value + "'>" + value + "</a>";
+ return "<a href='glycan_detail.html?id=" + value + "'>" + value + "</a>";
 }
 
 /**
