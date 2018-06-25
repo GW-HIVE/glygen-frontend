@@ -535,7 +535,7 @@ label {
     padding-top: 10px;
 }
 
-.about-heading {
+.page-heading {
     color: #2F78B7;
 }
 
@@ -642,6 +642,94 @@ label {
     border-bottom: 2px solid rgba(0,0,0,0.2);
 }
 
+.research-menu {
+    display: block;
+    width: 300px;
+    height: 180px;
+    background: #FFF;
+    border-radius: 8px;
+    margin-left: 65px;
+}
+#research-data {
+    border: 1px solid #2E78B7; 
+/*    color: #2E78B7;*/
+}
+#research-data h5 {
+    color: #2E78B7; 
+    text-align:center;
+}
+#research-data:hover {
+    background: #E5EEF6;
+}
+
+#learn-glycobiology {
+    border: 1px solid #663399; 
+}
+#learn-glycobiology h5 {
+    color: #663399; 
+    text-align:center;
+}
+
+#learn-glycobiology:hover {
+    background: #EFEAF4;
+}
+
+#website-tour {
+    border: 1px solid #EE7475;
+}
+#website-tour h5 {
+    color: #EE7475; 
+    text-align:center;
+}
+#website-tour:hover {
+     background: #F4E7E7;
+}
+
+#glycan-search {
+    border: 1px solid #0431FA;
+}
+
+#glycan-search h5 {
+    color: #0431FA; 
+    text-align:center;
+}
+
+#glycan-search:hover {
+    background: #E5EAFE;
+}
+
+#protein-search {
+    border: 1px solid #599194;
+}
+#protein-search h5 {
+    color: #599194; 
+    text-align:center;
+}
+#protein-search:hover {
+    background: #E5EBEB;
+}
+
+#glycoProtein-search {
+    border: 1px solid #0FA4AC;
+}
+#glycoProtein-search h5 {
+    color: #0FA4AC; 
+    text-align:center;
+}
+#glycoProtein-search:hover {
+    background: #E2F4F5;
+}
+
+.resources-menu-icon {
+    padding-left: 100px; 
+    margin-top: 5px;
+}
+
+.resources-menu-icon2 {
+    padding-left: 70px; 
+    margin-top: 10px;
+}
+
 .table {
     background: #fff;
     width: 99.9999% !important;
@@ -668,7 +756,7 @@ label {
             width: 97%;
     }
     .resource-img {
-        padding-left: 80px;
+        padding-left: 70px;
     }
 }
 
