@@ -31,7 +31,7 @@ function getWsUrl(request, id) {
             break;
 
         case "search_glycan":
-            return ws_base_protein + "/search";
+            return ws_base_glycan + "/search";
             break;
         case "image_service":
             return ws_base_glycan + "/image/" + id;
@@ -39,7 +39,7 @@ function getWsUrl(request, id) {
         case "list":
             return ws_base_glycan + "/list";
             break;
-        case "detail":
+        case "glycan-detail":
             return ws_base_glycan + "/detail/" + id;
             break;
 
@@ -58,8 +58,8 @@ function getWsUrl(request, id) {
         case "protein_list":
             return ws_base_glycan + "/list";
             break;
-        case "protein_detail":
-            return ws_base_glycan + "/detail/" + id;
+        case "protein_details":
+            return ws_base_protein + "/detail/" + id;
             break;
 
 
