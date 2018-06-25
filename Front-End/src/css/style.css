@@ -643,16 +643,21 @@ label {
 }
 
 .research-menu {
-    display: block;
-    width: 300px;
+/*    display: block;*/
+    width: 350px;
     height: 180px;
     background: #FFF;
     border-radius: 8px;
-    margin-left: 65px;
+/*    float: left;*/
+    margin: 20px; 
 }
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
 #research-data {
     border: 1px solid #2E78B7; 
-/*    color: #2E78B7;*/
 }
 #research-data h5 {
     color: #2E78B7; 
@@ -720,16 +725,6 @@ label {
     background: #E2F4F5;
 }
 
-.resources-menu-icon {
-    padding-left: 100px; 
-    margin-top: 5px;
-}
-
-.resources-menu-icon2 {
-    padding-left: 70px; 
-    margin-top: 10px;
-}
-
 .table {
     background: #fff;
     width: 99.9999% !important;
@@ -749,7 +744,7 @@ label {
     background-image:url(../images/resources/desc-arrow.png);
 }
 
-@media (max-width: 767px){
+@media (max-width: 767px) {
         .cover-resources {
             padding: 40px;
             text-align: center;
