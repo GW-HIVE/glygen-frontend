@@ -100,7 +100,7 @@
 
 $("#glycan_id").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glycan_id", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glycan_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -117,7 +117,7 @@ $("#glycan_id").autocomplete({
 
 $("#protein").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_id", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -148,7 +148,7 @@ $("#motif").autocomplete({
 
 $("#enzyme").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("enzyme_protein_id", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("enzyme_protein_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -168,7 +168,7 @@ $("#enzyme").autocomplete({
 var mass_max;
 var mass_min;
 $(document).ready(function () {
-    $.getJSON(getWsUrl("search_init"), function (result) {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
         $(".organism").append("<option>" + result.organism[0] + "</option>");
         $(".organism").append("<option>" + result.organism[1] + "</option>");
         $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
@@ -255,7 +255,8 @@ function configureDropDownLists(ddl1, ddl2,callback) {
     // var nglycan={};
     $.getJSON(getWsUrl("search_init"), function (result) {
         nglycan = result.glycan_type[0].subtype;
-        // oglycan = result.glycan_type[1].subtype;
+        oglycan = result.glycan_type[1].subtype;
+
         dataReady();
     });
     function dataReady() {
@@ -303,24 +304,18 @@ function submitvalues() {
     var motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0],sugar_slider[1],organism, glycan_type, glycan_subtype, enzyme, proteinid);
     var json = "query=" + JSON.stringify(formObject);
+
     $.ajax({
         type: 'post',
-       // url:"http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/search",
-        // url: 'getWsUrl("search_glycan")',
+        url: getWsUrl("glycan_search"),
         data: json,
-        // success: function (results) {
-        //     if (results.search_results_id) {
-        //         window.location = './glycan_list.html?id=' + results.search_results_id;
-        //     }
-        //     else {
-        //         displayErrorByCode("1")
-        //     }
             success: function (results) {
-                if (results.list_id) {
-                    window.location = './glycan-list.html?id=' + results.list_id;
-                }
-                else {
-                    displayErrorByCode("1")
+                if (results.error_code) {
+                    displayErrorByCode(results.error_code);
+                } else if (results.list_id && (results.list_id.length === 0)) {
+                    displayErrorByCode('no-results-found');
+                } else {
+                    window.location = './glycan_list.html?id=' + results.list_id;
                 }
         }
     });
@@ -339,20 +334,23 @@ function submitvalues() {
  * @param input_motif user motif input
  */
 
-
 //form json from form submit
-function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min,sugar_max,input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid) {
+function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min,sugar_max,input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid,input_motif) {
     var formjson = {
+        "operation":"AND",
         query_type: input_query_type,
         mass: { "min": mass_min, "max": mass_max },
         number_monosaccharides: {"min":sugar_min,"max":sugar_max},
-        glycan_id: input_glycan_id,
+        enzyme:{
+            "id":input_enzyme,
+            "type":"gene"
+        },
+        glycan_ac: input_glycan_id,
         organism: input_organism,
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
-        enzyme: input_enzyme,
-        protein: input_proteinid,
-        // motif: input_motif
+        protein_ac: input_proteinid,
+        glycan_motif: input_motif
     };
     return formjson;
 }

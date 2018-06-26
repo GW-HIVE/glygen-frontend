@@ -26,20 +26,20 @@ function getWsUrl(request, id) {
 
 
             //Glycan webservices
-        case "search_init":
+        case "search_init_glycan":
             return ws_base_glycan + "/search_init";
             break;
 
-        case "search_glycan":
+        case "glycan_search":
             return ws_base_glycan + "/search";
             break;
-        case "image_service":
+        case "glycan_image":
             return ws_base_glycan + "/image/" + id;
             break;
-        case "list":
+        case "glycan_list":
             return ws_base_glycan + "/list";
             break;
-        case "glycan-detail":
+        case "glycan_detail":
             return ws_base_glycan + "/detail/" + id;
             break;
 
