@@ -621,14 +621,6 @@ label {
     text-align: center;
 }
 
-#resources {
-    background: #2E78B7;
-}
-
-#resources th {
-    color: #fff;
-}
-
 .content{
 	text-align: center;
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
@@ -656,37 +648,55 @@ label {
     margin: 0 auto;
 }
 
-#research-data {
+.research-data-menu {
     border: 1px solid #2E78B7; 
 }
-#research-data h5 {
+.research-data-menu h5 {
     color: #2E78B7; 
     text-align:center;
 }
-#research-data:hover {
+.research-data-menu:hover {
     background: #E5EEF6;
 }
+.research-data-table thead {
+    background: #2E78B7;
+}
 
-#learn-glycobiology {
+.research-data-table th {
+    color: #fff;
+}
+.research-data-table h3 {
+    color: #2E78B7
+}
+
+.learn-glycobiology-menu {
     border: 1px solid #663399; 
 }
-#learn-glycobiology h5 {
+.learn-glycobiology-menu h5 {
     color: #663399; 
     text-align:center;
 }
 
-#learn-glycobiology:hover {
+.learn-glycobiology-menu:hover {
     background: #EFEAF4;
 }
+.learn-glycobiology-table thead {
+    background: #663399 !important;
+    color: #fff;
+}
+.learn-glycobiology-table h3 {
+    color: #663399; 
+}
 
-#website-tour {
+
+.website-tour-menu {
     border: 1px solid #EE7475;
 }
-#website-tour h5 {
+.website-tour-menu h5 {
     color: #EE7475; 
     text-align:center;
 }
-#website-tour:hover {
+.website-tour-menu:hover {
      background: #F4E7E7;
 }
 
@@ -725,6 +735,11 @@ label {
     background: #E2F4F5;
 }
 
+.panel-heading-resources {
+    text-align: center;
+    padding-bottom: 0;
+    padding-top: 3px;    
+}
 .table {
     background: #fff;
     width: 99.9999% !important;
