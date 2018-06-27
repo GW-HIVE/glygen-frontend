@@ -19,7 +19,7 @@ function ajaxSuccess(data) {
   data.hasMotifs = (data.motifs && (data.motifs.length > 0));
   data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
 
-  data.imagePath = getWsUrl('image_service', data.id);
+  data.imagePath = getWsUrl('glycan_image', data.glycan_ac);
 
   //var glyco = row.glycoct.replace(/ /g, '\n');
   var html = Mustache.to_html(template, data);
@@ -62,11 +62,11 @@ function ajaxFailure() {
 //  * Returns the GWU services.
 //
 
-function LoadData(id) {
+function LoadData(glycan_ac) {
 
   var ajaxConfig = {
     dataType: "json",
-    url: getWsUrl("detail", id),
+    url: getWsUrl("glycan_detail", glycan_ac),
     // data: getDetailPostData(id),
     method: 'POST',
     success: ajaxSuccess,
@@ -98,6 +98,6 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-  var id = getParameterByName('id');
-  LoadData(id);
+  var glycan_ac = getParameterByName('glycan_ac');
+  LoadData(glycan_ac);
 });
