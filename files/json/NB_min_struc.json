@@ -1,0 +1,37 @@
+{
+  "glycan_id": "NB_min_struc",
+  "residues": [
+     {
+       "name": "GlcNAc",
+       "residue_id": "NA",
+       "fullName": "N-glycan_core_b-D-GlcpNAc_A",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "0",
+       "parent": "no_id",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
+       "enzymes":  [
+
+       ]
+     },
+     {
+       "name": "GlcNAc",
+       "residue_id": "NB",
+       "fullName": "N-glycan_core_b-D-GlcpNAc_B",
+       "anomer": "b",
+       "absolute": "D",
+       "ring": "p",
+       "site": "4",
+       "parent": "NA",
+       "shape": "square",
+       "color": "#0090BC",
+       "pubChem": "GlcNAc",
+       "enzymes":  [
+
+       ]
+     }
+  ]
+}
