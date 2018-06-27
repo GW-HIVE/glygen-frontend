@@ -660,6 +660,12 @@ label {
 .research-data-menu:active {
     background: #E5EEF6;
 }
+
+.research-data-table {
+    width: 99.98%;
+    float: left;   
+}
+
 .research-data-table thead {
     background: #2E78B7;
 }
