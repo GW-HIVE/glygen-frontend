@@ -161,7 +161,7 @@ function redirectPage1()
          }
           function redirectPage2()
          {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html";
          } 
          
          
@@ -175,7 +175,7 @@ function redirectPage1()
 
 function editSearch(){
   {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id="+id);
     }
 }
 /**
@@ -285,7 +285,7 @@ function updateSearch() {
 
 function editSearch() {
   {
-    window.location.replace("glycan_searchpage.html?id="+id);
+    window.location.replace("glycan_search.html?id="+id);
     }
 }
 
