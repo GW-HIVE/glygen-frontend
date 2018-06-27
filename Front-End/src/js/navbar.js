@@ -24,7 +24,7 @@ $(document).ready(function(){
     //alert(navItemText);
     if(navItemText == 'INDEX') {
         navItemText = 'HOME';
-    } else if(navItemText == 'GLYCAN SEARCHPAGE') {
+    } else if(navItemText == 'GLYCAN SEARCH') {
         navItemText = 'EXPLORE';
     } else if(navItemText == 'PROTEIN SEARCH') {
         navItemText = 'EXPLORE';
