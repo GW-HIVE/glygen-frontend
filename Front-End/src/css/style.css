@@ -506,7 +506,7 @@ label {
         About us page
 -------------------------------*/
 
-#about {
+#top-heading {
     padding: 0 80px ;    
 }
 #team-img {
@@ -700,41 +700,45 @@ label {
      background: #F4E7E7;
 }
 
-#glycan-search {
+.glycan-search-menu {
     border: 1px solid #0431FA;
 }
 
-#glycan-search h5 {
+.glycan-search-menu h5 {
     color: #0431FA; 
     text-align:center;
 }
 
-#glycan-search:hover {
+.glycan-search-menu:hover {
     background: #E5EAFE;
 }
 
-#protein-search {
+.protein-search-menu {
     border: 1px solid #599194;
 }
-#protein-search h5 {
+.protein-search-menu h5 {
     color: #599194; 
     text-align:center;
 }
-#protein-search:hover {
+.protein-search-menu:hover {
     background: #E5EBEB;
 }
 
-#glycoProtein-search {
+.glycoProtein-search-menu {
     border: 1px solid #0FA4AC;
 }
-#glycoProtein-search h5 {
+.glycoProtein-search-menu h5 {
     color: #0FA4AC; 
     text-align:center;
 }
-#glycoProtein-search:hover {
+.glycoProtein-search-menu:hover {
     background: #E2F4F5;
 }
-
+.goToTop {
+    float: right;
+    padding: 5px 15px 0 0;
+    color: #2E78B7;
+}
 .panel-heading-resources {
     text-align: center;
     padding-bottom: 0;

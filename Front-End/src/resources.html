@@ -26,7 +26,7 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
     
-    <h2 id="about" class="page-heading">Resources</h2>
+    <h2 id="top-heading" class="page-heading">Resources</h2>
     <div class="row">
         <div class="cover-resources resources-top-img">
             <div class="cover-text">
@@ -66,19 +66,19 @@
                     <li>Tools</li>
                 </ul>
                 <div class="text-center">
-                    <img src="images/icons/database.png" alt="database image">
+                    <a href="#research-data"><img src="images/icons/database.png" alt="database image"></a>
                 </div>  
             </div>
             
             <div class="col-xs-4 col-lg-6 research-menu learn-glycobiology-menu">
-                <h5>Learn Glycobiology</h3>
+                <h5>Learn Glycobiology</h5>
                 <ul>
                     <li>Learn how to do Glycobiology</li>
                     <li>Different knowladge levels</li>
-                    <li>Videos</li>
+                    <li><a href="#glycans-table">Glycans</a>, <a href="#proteins-table">Protens</a>, and <a href="#glycoproteins-table">GlycoProteins</a></li>
                 </ul>
                 <div class="text-center">
-                    <img src="images/icons/university.png" alt="university image">
+                    <a href="#learn-glycobiology"><img src="images/icons/university.png" alt="university image"></a>
                 </div>
             </div>
             
@@ -94,7 +94,7 @@
                 </div> 
             </div>
             
-            <div id="glycan-search" class="col-xs-4 col-lg-6 research-menu">
+            <div class="col-xs-4 col-lg-6 research-menu glycan-search-menu">
                 <h5>Glycan Search</h3>
                 <ul>
                     <li>Learn how to do Glycan research</li>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             
-            <div id="protein-search" class="col-xs-4 col-lg-6 research-menu">
+            <div class="col-xs-4 col-lg-6 research-menu protein-search-menu">
                 <h5>Protein Search</h5>
                 <ul>
                     <li>Learn how to do Protein research</li>
@@ -113,7 +113,7 @@
                     <img src="images/icons/protein-icon.png" alt="protein image">
                 </div>  
             </div>
-            <div id="glycoProtein-search" class="col-xs-4 col-lg-6 research-menu">
+            <div class="col-xs-4 col-lg-6 research-menu glycoProtein-search-menu">
                 <h5>GlycoProtein Search</h3>
                 <ul>
                     <li>Learn how to do GlycoProtein research</li>
@@ -128,7 +128,7 @@
     
     <div class="container">
         <div class="row margin-top2 margin-bottom research-data-table">
-            <h3>Research Data</h3>
+            <h3 id="research-data">Research Data</h3>
             <table class="table-striped" data-toggle="table"
             data-sort-name="stargazers_count"
             data-sort-order="desc">
@@ -310,21 +310,22 @@
                         <td>-</td>
                     </tr>
                 </tbody>
-            </table>    
+            </table>
+            <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>    
         </div>
     </div>
     
     <div class="container">
         <div class="row learn-glycobiology-table margin-bottom">
-            <h3 class="page-heading">Learn Glycobiology</h3> 
+            <h3 id="learn-glycobiology" class="page-heading">Learn Glycobiology</h3> 
             <div class="margin-bottom">
                 <table class="table table-striped table-bordered table-hover" data-toggle="table"
                 data-sort-name="stargazers_count"
                 data-sort-order="desc">
                     <div class="panel-heading panel-heading-resources">
-                        <h4 class="page-heading">Glycans</h4>
+                        <h4 id="glycans-table" class="page-heading">Glycans</h4>
                     </div>
-                    <thead>
+                    <thead id="glycan">
                     <tr>
                          <th data-field="category" 
                             data-sortable="true">
@@ -365,6 +366,7 @@
                         </tr>                 
                     </tbody>
                 </table>
+                <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
             </div>
             
             <div class="margin-bottom"> 
@@ -372,7 +374,7 @@
                 data-sort-name="stargazers_count"
                 data-sort-order="desc">
                     <div class="panel-heading panel-heading-resources">
-                        <h4 class="page-heading">Proteins</h4>
+                        <h4 id="proteins-table" class="page-heading">Proteins</h4>
                     </div>
                     <thead>
                     <tr>
@@ -411,13 +413,14 @@
 -->                        
                     </tbody>
                 </table>
+                <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
             </div>
             
             <table class="table table-striped table-bordered table-hover" data-toggle="table"
             data-sort-name="stargazers_count"
             data-sort-order="desc">
                 <div class="panel-heading panel-heading-resources">
-                    <h4 class="page-heading">GlycoProteins</h4>
+                    <h4 id="glycoproteins-table" class="page-heading">GlycoProteins</h4>
                 </div>
                 <thead>
                 <tr>
@@ -453,7 +456,8 @@
                         <td><a href="https://www.youtube.com/watch?v=u38LjCOvDZU" target="_blank">Video</a></td>
                     </tr>                 
                 </tbody>
-            </table> 
+            </table>
+            <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div> 
         </div>
     </div>
      
