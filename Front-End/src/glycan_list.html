@@ -22,7 +22,7 @@
 
     <!--<![endif]&ndash;&gt;-->
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
-    <link rel="stylesheet" type="text/css" href="css/glycan-list.css">
+    <link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!--<link rel="stylesheet" type="text/css" href="css/detail.css">-->
@@ -61,7 +61,7 @@
                     </select>
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
-                        <option selected value="id">ID</option>
+                        <option selected value="glycan_ac">ID</option>
                         <option value="mass">Mass</option>
                         <option value="number_enzymes">No of Enzymes</option>
                         <option value="number_proteins">No of Protein</option>
@@ -88,12 +88,12 @@
                 </div>
                 <table class="table table-hover">
                     <tbody>
-                        {{#glycan_id}}
+                        {{#glycan_ac}}
                         <tr>
                             <td>GlycoToucan Id</td>
-                            <td>{{glycan_id}}</td>
+                            <td>{{glycan_ac}}</td>
                         </tr>
-                        {{/glycan_id}} {{#mass.min}}
+                        {{/glycan_ac}} {{#mass.min}}
                         <tr>
                             <td>Mass</td>
                             {{#mass.min}}
@@ -107,35 +107,35 @@
                             <td>{{organism}}</td>
                         </tr>
                         {{/organism}}
-                        {{#glycantype}}
+                        {{#glycan_type}}
                         <tr>
                             <td>Glycan Type</td>
-                            <td>{{glycantype}}</td>
+                            <td>{{glycan_type}}</td>
                         </tr>
-                        {{/glycantype}} {{#glycansubtype}}
+                        {{/glycan_type}} {{#glycan_subtype}}
                         <tr>
                             <td>Glycan SubType</td>
-                            <td>{{glycansubtype}}</td>
+                            <td>{{glycan_subtype}}</td>
                         </tr>
-                        {{/glycansubtype}}
-                        {{#proteinid}}
+                        {{/glycan_subtype}}
+                        {{#protein_ac}}
                         <tr>
                             <td>Glycosylated Protein</td>
-                            <td>{{proteinid}}</td>
+                            <td>{{protein_ac}}</td>
                         </tr>
-                        {{/proteinid}}
-                        {{#enzyme}}
-                        <tr>
-                            <td>Synthesizing Enzyme</td>
-                            <td>{{enzyme}}</td>
-                        </tr>
-                        {{/enzyme}}
-                        {{#motif}}
+                        {{/protein_ac}}
+                        <!--{{#enzyme}}-->
+                        <!--<tr>-->
+                            <!--<td>Synthesizing Enzyme</td>-->
+                            <!--<td>{{enzyme}}</td>-->
+                        <!--</tr>-->
+                        <!--{{/enzyme}}-->
+                        {{#glycan_motif}}
                         <tr>
                             <td>Motif</td>
-                            <td>{{motif}}</td>
+                            <td>{{glycan_motif}}</td>
                         </tr>
-                        {{/motif}}
+                        {{/glycan_motif}}
 
 
                     </tbody>
@@ -165,12 +165,12 @@
                     <thead>
                         <tr>
                             <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
-                            <th data-field="id" data-formatter="pageFormat">ID</th>
+                            <th data-field="glycan_ac" data-formatter="pageFormat">ID</th>
                             <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Glycan Image</th>
                             <th data-field="mass" data-formatter="massFormatter">Native Mass
                                 <br>(Da)
                             </th>
-                            <th data-field="number_sugar">No of
+                            <th data-field="number_monosaccharides">No of
                                 <br>Monosaccharides
                             </th>
                             <th data-field="number_proteins">On How Many
@@ -201,7 +201,7 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option selected value="id">ID</option>
+                    <option selected value="glycan_ac">ID</option>
                     <option value="mass">Mass</option>
                     <option value="number_enzymes">No of Enzymes</option>
                     <option value="number_proteins">No of Proteins</option>

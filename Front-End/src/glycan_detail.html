@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <!-- boots style -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <!-- CSS for sidenavgation-->
@@ -78,7 +79,7 @@
 
                         <div class="gg-panel-heading">
                             <!-- added new class -->
-                            <h4>{{id}}</h4>
+                            <h4>{{glycan_ac}}</h4>
                         </div>
                         <div class="panel-body">
                             <!-- added new class -->
@@ -255,7 +256,7 @@
                     <!-- added new class -->
                     {{#enzymes}}
                     <li class="panelmaincontent2">{{protein_name}}(Uniprot ID:
-                        <a class="panelcontent" href="{{url}}" target="_blank">{{protein_id}}</a>)
+                        <a class="panelcontent" href="{{url}}" target="_blank">{{protein_ac}}</a>)
                     </li>
                     <li id="gene"> Gene name:
                         <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>

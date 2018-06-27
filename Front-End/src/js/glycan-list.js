@@ -18,11 +18,11 @@ String.prototype.trunc = String.prototype.trunc ||
  function(n) {
  return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
  };
-// var id = '';
+var id = '';
 var page = 1;
-var sort = 'id';
+var sort = 'glycan_ac';
 var dir = $('.dir-select').val();
-var url = getWsUrl('list') + "?action=get_user";
+var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit =10;
 
 /**
@@ -161,13 +161,13 @@ function redirectPage1()
          }
           function redirectPage2()
          {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
+         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html";
          } 
          
          
-     $(document).ready(function(){
-    $("demosearch").tooltip();
-});
+//      $(document).ready(function(){
+//      // $("demosearch").tooltip();
+// });
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
@@ -175,7 +175,7 @@ function redirectPage1()
 
 function editSearch(){
   {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id="+id);
     }
 }
 /**
@@ -186,7 +186,7 @@ function editSearch(){
  @return -Details particular Glycan Id 
  */
 function pageFormat(value, row, index, field) {
- return "<a href='glycan_detail.html?id=" + value + "'>" + value + "</a>";
+ return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>";
 }
 
 /**
@@ -202,7 +202,7 @@ function pageFormat(value, row, index, field) {
 // For Image Column
 function imageFormat(value, row, index, field) {
 //  var url = getImageWsUrl(row.ID);
-var url = getWsUrl('image_service', row.id);
+var url = getWsUrl('glycan_image', row.glycan_ac);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
@@ -225,6 +225,17 @@ function massFormatter(value) {
  return "NA";
  }
 }
+
+// function massFormatter(value) {
+//     if (value) {
+//         var number_monosaccharides= value;
+//         return value;
+//
+//
+//     } else {
+//         return "NA";
+//     }
+// }
 
 
 /**
@@ -265,11 +276,11 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
+        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
-            if (result.search_results_id) {
+            if (result.list_id) {
                 console.log(result);
-                window.location = 'glycan_list.html?id=' + result.search_results_id;
+                window.location = 'glycan_list.html?id=' + result.list_id;
             } else {
                 // handle if no results
             }
@@ -285,7 +296,7 @@ function updateSearch() {
 
 function editSearch() {
   {
-    window.location.replace("glycan_searchpage.html?id="+id);
+    window.location.replace("glycan_search.html?id="+id);
     }
 }
 
@@ -315,11 +326,11 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
-                    id: glycan.id,
+                    glycan_ac: glycan.glycan_ac,
                     mass: glycan.mass,
                     number_proteins: glycan.number_proteins,
                     number_enzymes: glycan.number_enzymes,
-                    number_sugar: glycan.number_sugar,
+                    number_monosaccharides: glycan.number_monosaccharides,
                     iupac: glycan.iupac,
                     glycoct: glycan.glycoct
                 });
@@ -333,7 +344,7 @@ function ajaxListSuccess(data) {
 
         buildSummary(data.query);
 
-        document.title='glycan-list';
+        // document.title='glycan-list';
         lastSearch = data;
     }
 
@@ -355,7 +366,7 @@ function LoadDataList() {
 
  var ajaxConfig = {
  dataType: "json",
- url: getWsUrl("list"),
+ url: getWsUrl("glycan_list"),
  data: getListPostData(id, page, sort, dir, limit),
  method: 'POST',
  success: ajaxListSuccess,
