@@ -253,10 +253,13 @@ function configureDropDownLists(ddl1, ddl2,callback) {
     var nglycan;
     var oglycan;
     // var nglycan={};
-    $.getJSON(getWsUrl("search_init"), function (result) {
-        nglycan = result.glycan_type[0].subtype;
-        oglycan = result.glycan_type[1].subtype;
-
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        if(result.glycan_type[0]) {
+            nglycan = result.glycan_type[0].subtype;
+        }
+        if(result.glycan_type[1]) {
+            oglycan = result.glycan_type[1].subtype;
+        }
         dataReady();
     });
     function dataReady() {
