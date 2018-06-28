@@ -114,6 +114,16 @@ $("#glycan_id").autocomplete({
 });
 
 
+// <!--
+//     //@author: Rupali Mahadik
+// // @description: UO1 Version-1.1.
+// //@refactored at :June-27-2017
+//     -->
+
+
+
+
+
 
 $("#protein").autocomplete({
     source: function (request, response) {
