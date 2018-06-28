@@ -82,6 +82,7 @@ input[type=submit]:hover {
 
 .gg-text-example {
     margin-top: 3px;
+    padding-left: 4px;
     color: #2E78B7;    
 }
 
