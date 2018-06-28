@@ -13,12 +13,12 @@ String.prototype.trunc = String.prototype.trunc ||
  function(n) {
  return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
  };
-//var id = '';
+var id = '';
 var page = 1;
-var sort = 'protein_name_long';
+var sort = 'protein_ac';
 var dir = $('.dir-select').val();
-//var url = getWsUrl('list') + "?action=get_user";
-var url = getWsUrl('list');
+var url = getWsUrl('protein_list') + "?action=get_user";
+
 var limit =25;
 
 /**
@@ -171,7 +171,7 @@ function redirectPage1()
 
 function editSearch(){
   {
-    // window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html?id="+id);
+
       window.location.replace("glycoprotein_search.html?id="+id);
     }
 }
@@ -183,7 +183,7 @@ function editSearch(){
  @return -Details particular Protein Id 
  */
 function PageFormat(value, row, index, field) {
- return "<a href='protein-detail.html?id=" + value + "'>" + value + "</a>";
+ return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
 }
 
 
@@ -250,7 +250,7 @@ function updateSearch() {
         success: function (result) {
             if (result.search_results_id) {
                 console.log(result);
-                window.location = 'protein-list.html?id=' + result.search_results_id;
+                window.location = 'protein_list.html?id=' + result.search_results_id;
             } else {
                 // handle if no results
             }
@@ -291,11 +291,10 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var protein = data.results[i];
                 items.push({
-                    protein_ID: protein.protein_id,
+                    protein_ac: protein.protein_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
-                    protein_name_long: protein.protein_name_long,
-                    protein_name_short: protein.protein_name_short,
+                    protein_name: protein.protein_name_long,
                     organism: protein.organism
                 });
             }

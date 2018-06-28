@@ -1,3 +1,11 @@
+<!--
+  //@author: Rupali Mahadik
+// @description: UO1 Version-1.1.
+//@Date:20th June 2018.
+//@refactored at :June-27-2017
+   -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,195 +16,248 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
     <title>GlycoProtein_Search</title>
-
-    <!--css  do not change seqence-->
-
-    <!--Stylesheet for slider-->
-    <link href="css/nouislider.min.css" rel="stylesheet">
-    <!--Bootstrap Stylesheet-->
+    <!-- CSS for UI Typeahead -->
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <!--This does not work as downloaded version so UX using this as CDN for font.css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <!-- CSS for chosen -->
     <link rel="stylesheet" type="text/css" href="css/chosen.css">
+    <!-- CSS for boots -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
-
-
-    <!--search page Stylesheet-->
-    <link rel="stylesheet" type="text/css" href="css/searchpage.css">
-    <!--main Stylesheet-->
-    <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    
-    <!--[if lt IE 9]>
-
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
-    
+    <!-- CSS for serach page -->
+    <link rel="stylesheet" type="text/css" href="css/search.css">
+    <!-- CSS for alertify -->
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
+    <!-- CSS for sliderUI-->
+    <link href="css/nouislider.min.css" rel="stylesheet">
+    <!-- CSS for all pages-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
+    <!--Script for jquery-->
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    
+    <!--Script for bootstrap-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 
+
+
+
+
 </head>
+
 <body>
-    
+
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
-    <script>w3.includeHTML();</script>
-    
-<h3 class="about-heading" style="text-align: center">Glyco-Protein Search </h3>
-<div class="container gg-container">
-    <!-- GlycoProtein_ID-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Protein ID" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Protein ID:</h6>
-        <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
-        <div class="gg-text-example">Protein Example e.g:P0116</div>
-    </div>
-    <!-- First range-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Protein Size:</h6>
-        <div class="col-xs-2 min-value-alignment">
-            <h6>Min</h6>
-            <div id="lower-value"> </div>
+    <script>
+        w3.includeHTML();
+    </script>
+
+    <h3 class="about-heading" style="text-align: center">Glyco-Protein Search </h3>
+    <div class="container gg-container">
+        <!-- GlycoProtein_ID-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Protein ID" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein ID:</h6>
+            <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+            <div class="gg-text-example">Protein Example e.g:P0116</div>
         </div>
-        <div class="col-xs-8">
-            <h6 class="align-center">Native Mass Range</h6>
-            <div id="slider"> </div>
+        <!-- First range-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein Size:</h6>
+            <div class="col-xs-2 min-value-alignment">
+                <h6>Min</h6>
+                <div id="lower-value"> </div>
+            </div>
+            <div class="col-xs-8">
+                <h6 class="align-center">Native Mass Range</h6>
+                <div id="slider"> </div>
+            </div>
+
+            <h6>Max</h6>
+            <div id="upper-value"> </div>
+            <!--</div>-->
         </div>
 
-        <h6>Max</h6>
-        <div id="upper-value"> </div>
-        <!--</div>-->
-    </div>
-
-    <!-- Organism-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Organism" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Organism:</h6>
-        <select class="organism" id="organism">
-            <option value="">Select organism</option>
-        </select>
-        <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
-    </div>
-
-    <!-- Protein-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Protein Name:</h6>
-        <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
-        <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
-    </div>
-
-    <!-- Gene Name-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Gene Name:</h6>
-        <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
-        <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
-    </div>
-    <!-- Glycan-->
-    <div class="gg-form-group row" id="Glycanid">
-        <h6><span><a href="#" title="Attached Glycan" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Attached Glycan:</h6>
-        <!-- Glycanid-->
-        <div class="col-md-6" id="glycanrow">
-            <input type="text" name="Glycan" class="form-control motif" id="glycan" placeholder="Provide the Glycan ID">
-            <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
+        <!-- Organism-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Organism" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Organism:</h6>
+            <select class="organism" id="organism">
+                <option value="">Select organism</option>
+            </select>
+            <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
         </div>
-        <!-- Glycanrelation-->
-        <div class="col-md-6" id="glycanrelationrow">
-            <select class="form-control glycan_relation" id="relation">
+
+        <!-- Protein-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein Name:</h6>
+            <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
+            <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
+        </div>
+
+        <!-- Gene Name-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Gene Name:</h6>
+            <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
+            <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
+        </div>
+        <!-- Glycan-->
+
+        <div class="gg-form-group row" id="Glycanid">
+            <h6>
+                <span>
+                    <a href="#" title="Attached Glycan" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Attached Glycan:</h6>
+            <!-- Glycanid-->
+            <div class="col-md-6" id="glycanrow">
+                <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Provide the Glycan ID">
+                <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
+            </div>
+
+            <!-- Glycanrelation-->
+            <div class="col-md-6" id="glycanrelationrow">
+                <select class="form-control glycan_relation" id="relation">
+                    <option value="">Select Relation</option>
+                    <option value="attached">attached</option>
+                    <option value="binding">binding</option>
+                    <option value="any">any</option>
+                    <div class="gg-text-example">Choose Glycan Relation </div>
+                </select>
+            </div>
+        </div>
+
+        <!-- Glycan end-->
+
+        <!-- amino acid-->
+
+
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Glycosylated Amino Acid:</h6>
+            <h6 id=aminos>Click to Highlight Multiple Select</h6>
+
+            <select class="glycosylated_aa" multiple="true">
+                <option value="R">Arginine - Arg - R </option>
+                <option value="K">Lysine - Lys - K </option>
+                <option value="D">Aspartic acid - Asp - D </option>
+                <option value="E">Glutamic acid - Glu - E </option>
+                <option value="Q">Glutamine - Gln - Q </option>
+                <option value="N">Asparagine - Asn - N </option>
+                <option value="H">Histidine - His - H </option>
+                <option value="S">Serine - Ser - S </option>
+                <option value="T">Threonine - Thr - T</option>
+                <option value="Y">Tyrosine - Tyr - Y</option>
+                <option value="C">Cysteine - Cys - C</option>
+                <option value="W">Tryptophan - Trp - W</option>
+                <option value="A">Alanine - Ala - A</option>
+                <option value="I">Isoleucine - Ile - I</option>
+                <option value="L">Leucine - Leu - L</option>
+                <option value="M">Methionine - Met - M</option>
+                <option value="F">Phenylalanine - Phe - F</option>
+                <option value="V">Valine - Val - V</option>
+                <option value="P">Proline - Pro - P</option>
+                <option value="G">Glycine - Gly - G </option>
+            </select>
+            <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
+        </div>
+
+        <!-- End amino acid-->
+        <!-- Sequences-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Protein/Peptide-Sequences" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein/Peptide-Sequences:</h6>
+            <div class="form-group">
+                <form name="form1" action="#" style="height: 220px;">
+                    <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                    <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
+                    <label id='msg' class="rq"></label>
+                </form>
+            </div>
+
+        </div>
+        <!-- end Sequences-->
+
+        <!--Pathway-->
+        <div class="gg-form-group row">
+            <h6>
+                <span>
+                    <a href="#" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Pathway ID:</h6>
+            <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
+            <div class="gg-text-example">Pathway Example e.g:P77731 </div>
+        </div>
+        <!--End Pathway-->
+
+
+
+        <div class="gg-form-group row" id="glycosylation_evidence">
+            <h6>
+                <span>
+                    <a href="#" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Content">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Glycosylation Evidences</h6>
+            <select class="form-control">
                 <option value="">Select Relation</option>
-                <option value="attached">attached</option>
-                <option value="binding">binding</option>
+                <option value="calculated">calculated</option>
+                <option value="experimental">experimental</option>
                 <option value="any">any</option>
-                <div class="gg-text-example">Choose Glycan Relation </div>
+                <option value="none">none</option>
+
             </select>
         </div>
-    </div>
-
-    <!-- Glycan end-->
-    <!-- amino acid-->
-
-
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycosylated Amino Acid:</h6>
-        <h6 id=aminos>Click to Highlight Multiple Select</h6>
-
-        <select class="glycosylated_aa" multiple="true">
-            <option value="R">Arginine - Arg - R </option>
-            <option value="K">Lysine - Lys - K </option>
-            <option value="D">Aspartic acid - Asp - D </option>
-            <option value="E">Glutamic acid - Glu - E </option>
-            <option value="Q">Glutamine - Gln - Q </option>
-            <option value="N">Asparagine - Asn - N </option>
-            <option value="H">Histidine - His - H </option>
-            <option value="S">Serine - Ser - S </option>
-            <option value="T">Threonine - Thr - T</option>
-            <option value="Y">Tyrosine - Tyr - Y</option>
-            <option value="C">Cysteine - Cys - C</option>
-            <option value="W">Tryptophan - Trp - W</option>
-            <option value="A">Alanine - Ala - A</option>
-            <option value="I">Isoleucine - Ile - I</option>
-            <option value="L">Leucine - Leu - L</option>
-            <option value="M">Methionine - Met - M</option>
-            <option value="F">Phenylalanine - Phe - F</option>
-            <option value="V">Valine - Val - V</option>
-            <option value="P">Proline - Pro - P</option>
-            <option value="G">Glycine - Gly - G </option>
-        </select>
-        <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y </div>
-    </div>
-
-    <!-- End amino acid-->
-    <!-- Sequences-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Protein/Peptide-Sequences" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Protein/Peptide-Sequences:</h6>
-        <div class="form-group">
-            <form name="form1" action="#"
-                 style="height: 220px;">
-                <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
-                <label id='msg' class="rq"></label></form>
-        </div>
-
-    </div>
-    <!-- end Sequences-->
-
-    <!--Pathway-->
-    <div class="gg-form-group row">
-        <h6><span><a href="#" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</h6>
-        <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
-        <div class="gg-text-example">Pathway Example e.g:P77731 </div>
-
-    </div>
-    <!--End Pathway-->
-    <div class="gg-form-group row" id="glycosylation_evidence">
-        <h6><span><a href="#" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycosylation Evidences</h6>
-        <select class="form-control">
-            <option value="">Select Relation</option>
-            <option value="calculated">calculated</option>
-            <option value="experimental">experimental</option>
-            <option value="any">any</option>
-        <option value="none">none</option>
-
-        </select>
-    </div>
         <input type="button" class="btn-lg btn-primary" value="Search GlycoProtein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
 
         <!--</form>-->
     </div>
     <div w3-include-html="footer.html"></div>
-    <script>w3.includeHTML();</script>
-    
-<!-- script for jquery -->   
-<!--    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>-->
+    <script>
+        w3.includeHTML();
+    </script>
+
+
     <!-- script for UI autocomplte -->
     <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
     <!-- script for choosing from listfield -->
     <script type="text/javascript" src="libraries/chosen.js"></script>
-    <!-- script for bootstrap js -->
-<!--    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>-->
     <!-- script for slider js -->
-    <script src="js/nouislider.min.js"></script>
+    <script src="libraries/nouislider.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
     <!-- script for searchpage js -->
@@ -207,6 +268,8 @@
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
+    <!-- script for error handling alerts -->
+
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <script src="js/popover.js"></script>
 </body>

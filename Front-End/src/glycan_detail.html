@@ -3,8 +3,9 @@
    @description: UO1 Version-1.1.
    @Date:19th Feb 2018 - detail mustach.js works
    @Date:20th March 2018 - different side navigation update
-   @Update: 17 April 2018
+   @Update: 17 April 2018 - new web services
    @Update: 21 June 2018 - Gaurav Agarwal - sidebar issue resolved and proper object placements for different screen size.
+   @Update: 27 June 2018 -  web services major changes
    -->
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,9 @@
     <script type="text/javascript" src="libraries/w3.js"></script>
 
     <div w3-include-html="header.html"></div>
-    <script>w3.includeHTML();</script>
+    <script>
+        w3.includeHTML();
+    </script>
 
     <section class="cd-faq">
         <ul class="cd-faq-categories">
@@ -73,7 +76,7 @@
                 <!-- Glycan ID starts here for page -->
 
                 <ul id="basics" class="cd-faq-group">
-                        <li class="cd-faq-title" />
+                    <li class="cd-faq-title" />
                     <!-- added new class -->
                     <div class="panel panel-default ">
 
@@ -111,7 +114,7 @@
                 <!-- cd-faq-group -->
 
                 <ul id="mobile" class="cd-faq-group">
-                        <li class="cd-faq-title" />
+                    <li class="cd-faq-title" />
                     <!-- added new class -->
                     <div class="panel panel-default">
 
@@ -132,7 +135,7 @@
                                     <ul style="display:none;">
                                         {{#evidence}}
                                         <li>{{database}} :
-                                            <a href="{{{url}}}" target="_blank" >{{id}}</a>
+                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
                                         </li>
                                         {{/evidence}}
                                     </ul>
@@ -148,7 +151,7 @@
         <!-- cd-faq-group -->
 
         <ul id="account" class="cd-faq-group">
-                <li class="cd-faq-title" />
+            <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan MOTIF starts here for page -->
             <div class="panel panel-default">
@@ -161,10 +164,9 @@
                     {{#hasMotifs}} {{#motifs}}
                     <div class="col-md-6 col-xs-12">
                         <div class='img-wrapper2'>
-                     
-                                      
-                            <img class='img-cartoon2' src="{{imagePath}}"
-                                alt='Cartoon' width='90%' />
+
+
+                            <img class='img-cartoon2' src="{{imagePath}}" alt='Cartoon' width='90%' />
                             <Br/>
                         </div>
                         <span id="glycanname">
@@ -179,8 +181,8 @@
         </ul>
         <!-- cd-faq-group -->
 
-        <ul id="payments"  class="cd-faq-group">
-                <li class="cd-faq-title" />
+        <ul id="payments" class="cd-faq-group">
+            <li class="cd-faq-title" />
             <!-- added new class -->
             <div class="panel panel-default">
 
@@ -218,7 +220,7 @@
         <!-- cd-faq-group -->
 
         <ul id="privacy" class="cd-faq-group">
-                <li class="cd-faq-title" />
+            <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan Cross Referance panel starts here for page -->
             <div class="panel panel-default">
@@ -243,7 +245,7 @@
         <!-- cd-faq-group -->
 
         <ul id="delivery" class="cd-faq-group">
-                <li class="cd-faq-title" />
+            <li class="cd-faq-title" />
             <!-- added new class -->
             <!-- Glycan Enzymes starts here for page -->
             <div class="panel panel-default">
@@ -254,22 +256,34 @@
                 </div>
                 <div class="panel-body">
                     <!-- added new class -->
-                    {{#enzymes}}
-                    <li class="panelmaincontent2">{{protein_name}}(Uniprot ID:
+                    {{#enzyme}}
+                    <li class="list-group">Protein name:{{protein_name}}
+                    </li>
+                    <li class="list-group">{{protein_ac}}(Uniprot ID:
                         <a class="panelcontent" href="{{url}}" target="_blank">{{protein_ac}}</a>)
                     </li>
-                    <li id="gene"> Gene name:
+                    <li class=list-group id="gene"> Gene name:
                         <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>
                     </li>
-                    </p>
-                    {{/enzymes}} {{^enzymes}} No data available. {{/enzymes}}
+
+                    {{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}
                 </div>
             </div>
         </ul>
 
-        <!-- cd-faq-group -->
+
+
+
+
+
+
+
+
+
+
+                <!-- cd-faq-group -->
         <ul id="delivery1" class="cd-faq-group">
-                <li class="cd-faq-title" />
+            <li class="cd-faq-title" />
             <!-- added new class -->
             <div class="panel panel-default">
 
@@ -296,7 +310,9 @@
         </div>
     </section>
     <div w3-include-html="footer.html"></div>
-    <script>w3.includeHTML();</script>
+    <script>
+        w3.includeHTML();
+    </script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
