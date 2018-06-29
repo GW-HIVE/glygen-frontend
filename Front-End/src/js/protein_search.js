@@ -28,8 +28,6 @@ function addCommas(nStr) {
 }
 
 
-
-
 /**
  * function aminoLetter is a to select value of text-input
 
@@ -161,7 +159,7 @@ $(document).ready(function () {
         var mass_min = result.protein_mass.min;
         mass(mass_min, mass_max)
         // check for ID to see if we need to load search values
-        // please do not remove rhis code as it is required prepopulate search values
+        // please do not remove this code as it is required prepopulate search values
         // var id = getParameterByName('id') || id;
         // if (id) {
         //     LoadSearchvalues(id);

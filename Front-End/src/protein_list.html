@@ -1,42 +1,28 @@
-<!--
- @author: Pradeep Kumar
- @description: UO1 Version-1.1.
- @Date: 10th May 2018.
- -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-
     <title>List Page</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
-    
-    <!--[if lt IE 9]>
-
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-    <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="css/glycan-list.css">
+    <link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
 <body onload="tracking()">
-   
-    <script src="libraries/w3.js"></script>
-    <div w3-include-html="header.html"></div>
-    <script>w3.includeHTML();</script>
+<script type="text/javascript" src="libraries/w3.js"></script>
+
+<div w3-include-html="header.html"></div>
+<script>w3.includeHTML();</script>
+
 
     <!-- page content starts here -->
+
     <div class="container">
         <div class="row">
             <div id="summary-table" class="col-md-12 col-xs-12">
@@ -59,10 +45,9 @@
                     </select>
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
-                        <!-- <option selected value="id">ID</option> -->
-                        <option value="protein_id">Protein ID</option>
+                        <option value="protein_ac">Protein ID</option>
                         <option value="gene_name">Gene Name</option>
-                        <option value="protein_name_long">Protein Name</option>
+                        <option value="protein_name">Protein Name</option>
                         <option value="mass">Mass</option>
                         <option value="organism">Organism</option>
                     </select>
@@ -70,84 +55,85 @@
                         <option value="asc" selected>ASC</option>
                         <option value="desc">DESC</option>
                     </select>
-                    <P class="searchresult"></P>
+                    <label class="searchresult"></label>
                 </form>
             </div>
         </div>
         <!-- sorting_top-end -->
 
-        <script id="summary-template" type="text/template">
-            <div class="panel panel-default">
-                <div class="gg-panel-heading cd-faq-title">
-                    <!-- added new class -->
-                    <h6>
+        <!--<script id="summary-template" type="text/template">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="gg-panel-heading cd-faq-title">-->
+                    <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                    <!--<h6>-->
 
-                        <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                        <center>Result for Protein Search On:{{execution_time}}</center>
-                    </h6>
-                </div>
-                <table class="table table-hover">
-                    <tbody>
-                        {{#protein_id}}
-                        <tr>
-                            <td>Protein Id</td>
-                            <td>{{protein_id}}</td>
-                        </tr>
-                        {{/protein_id}} {{#mass.min}}
-                        <tr>
-                            <td>Mass</td>
-                            {{#mass.min}}
-                            <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
-                            {{/mass.max}}
-                        </tr>
-                        {{/mass.min}} {{#organism}}
-                        <tr>
-                            <td>Organism</td>
-                            <td>{{organism}}</td>
-                        </tr>
-                        <!-- {{/organism}} {{#glycantype}} -->
-                        <!-- <tr>
-                            <td>Glycan Type</td>
-                            <td>{{glycantype}}</td>
-                        </tr>
-                        {{/glycantype}} {{#glycansubtype}}
-                        <tr>
-                            <td>Glycan SubType</td>
-                            <td>{{glycansubtype}}</td>
-                        </tr> -->
-                        <!-- {{/glycansubtype}} {{#proteinid}} -->
-                        <tr>
-                            <td>Protein</td>
-                            <td>{{proteinid}}</td>
-                        </tr>
-                        <!-- {{/proteinid}} {{#enzyme}}
-                        <tr>
-                            <td>Synthesizing Enzyme</td>
-                            <td>{{enzyme}}</td>
-                        </tr>
-                        {{/enzyme}}
-                        {{#motif}}
-                        <tr>
-                            <td>Motif</td>
-                            <td>{{motif}}</td>
-                        </tr>
-                        {{/motif}} -->
+                        <!--&lt;!&ndash; <center>Result for Glycan Search On:{{execution_time}}</center> &ndash;&gt;-->
+                        <!--<center>Result for Protein Search On:{{execution_time}}</center>-->
+                    <!--</h6>-->
+                <!--</div>-->
+                <!--<table class="table table-hover">-->
+                    <!--<tbody>-->
+                        <!--{{#protein_id}}-->
+                        <!--<tr>-->
+                            <!--<td>Protein Id</td>-->
+                            <!--<td>{{protein_id}}</td>-->
+                        <!--</tr>-->
+                        <!--{{/protein_id}} {{#mass.min}}-->
+                        <!--<tr>-->
+                            <!--<td>Mass</td>-->
+                            <!--{{#mass.min}}-->
+                            <!--<td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>-->
+                            <!--{{/mass.max}}-->
+                        <!--</tr>-->
+                        <!--{{/mass.min}} {{#organism}}-->
+                        <!--<tr>-->
+                            <!--<td>Organism</td>-->
+                            <!--<td>{{organism}}</td>-->
+                        <!--</tr>-->
+                        <!--&lt;!&ndash; {{/organism}} {{#glycantype}} &ndash;&gt;-->
+                        <!--&lt;!&ndash; <tr>-->
+                            <!--<td>Glycan Type</td>-->
+                            <!--<td>{{glycantype}}</td>-->
+                        <!--</tr>-->
+                        <!--{{/glycantype}} {{#glycansubtype}}-->
+                        <!--<tr>-->
+                            <!--<td>Glycan SubType</td>-->
+                            <!--<td>{{glycansubtype}}</td>-->
+                        <!--</tr> &ndash;&gt;-->
+                        <!--&lt;!&ndash; {{/glycansubtype}} {{#proteinid}} &ndash;&gt;-->
+                        <!--<tr>-->
+                            <!--<td>Protein</td>-->
+                            <!--<td>{{proteinid}}</td>-->
+                        <!--</tr>-->
+                        <!--&lt;!&ndash; {{/proteinid}} {{#enzyme}}-->
+                        <!--<tr>-->
+                            <!--<td>Synthesizing Enzyme</td>-->
+                            <!--<td>{{enzyme}}</td>-->
+                        <!--</tr>-->
+                        <!--{{/enzyme}}-->
+                        <!--{{#motif}}-->
+                        <!--<tr>-->
+                            <!--<td>Motif</td>-->
+                            <!--<td>{{motif}}</td>-->
+                        <!--</tr>-->
+                        <!--{{/motif}} &ndash;&gt;-->
 
 
-                    </tbody>
-                </table>
+                    <!--</tbody>-->
+                <!--</table>-->
 
-                <p align="center">
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
-                        class="red-tooltip">
-                        <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search
-                        </button>
-                    </a>
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
-                </p>
-            </div>
-        </script>
+                <!--<p align="center">-->
+                    <!--<a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."-->
+                        <!--class="red-tooltip">-->
+                        <!--<button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search-->
+                        <!--</button>-->
+                    <!--</a>-->
+                    <!--&nbsp; &nbsp; &nbsp; &nbsp;-->
+                    <!--<button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>-->
+                <!--</p>-->
+            <!--</div>-->
+        <!--</script>-->
+
 
         <!-- table start here -->
 
@@ -162,12 +148,12 @@
                             <!-- <th data-field="id" data-formatter="PageFormat">ID</th> -->
                             <!-- <th data-field="glycan_image" data-formatter="ImageFormat" style="width:10%">Glycan Image</th> -->
 
-                            <th data-field="protein_ID">Protein ID
-                            </th>
+                            <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
+
 
                             <th data-field="gene_name">Gene Name
                             </th>
-                            <th data-field="protein_name_long">Protein Name
+                            <th data-field="protein_name">Protein Name
                             </th>
                             <th data-field="mass" data-formatter="MassFormatter">Native Mass
                                 <br>(Da)
@@ -196,7 +182,7 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option value="Protein_ID">Protein ID</option>
+                    <option value="Protein_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
                     <option value="protein_name_long">Protein Name</option>
                     <option value="mass">Mass</option>
@@ -212,7 +198,7 @@
         </div>
     </div>
 <div w3-include-html="footer.html"></div>
-<!--<script>w3.includeHTML();</script>-->
+<script>w3.includeHTML();</script>
     <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
@@ -225,10 +211,10 @@
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url_protein.js"></script>
-    <!-- script for handling errror -->
+    <!-- script for handling error -->
 
     <!-- script for glycan list page -->
-    <script type="text/javascript" src="js/protein-list.js"></script>
+    <script type="text/javascript" src="js/protein_list.js"></script>
     <!-- script for third party-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <!-- script for getting Web Service URLs -->
@@ -241,6 +227,7 @@
 
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
+
 </body>
 
 </html>

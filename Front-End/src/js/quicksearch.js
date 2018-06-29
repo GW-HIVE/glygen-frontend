@@ -13,7 +13,7 @@ function glycanx() {
             //var result = JSON.parse(results);
             if (results.search_results_id) {
              //   alert(results.search_results_id)
-                window.location = './protein-list.html?id=' + results.search_results_id;
+                window.location = './protein_list.html?id=' + results.search_results_id;
             }
             else {
                // alert(results.search_results_id)
@@ -65,7 +65,7 @@ function speciesx() {
           // var result = JSON.parse(results);
           //alert(result.search_results_id)
             if (results.search_results_id) {
-                window.location = './protein-list.html?id=' + results.search_results_id;
+                window.location = './protein_list.html?id=' + results.search_results_id;
             }
             else {
               //  alert(results.search_results_id)

@@ -202,7 +202,6 @@ function pageFormat(value, row, index, field) {
 
 // For Image Column
 function imageFormat(value, row, index, field) {
-//  var url = getImageWsUrl(row.ID);
 var url = getWsUrl('glycan_image', row.glycan_ac);
  return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
@@ -227,16 +226,6 @@ function massFormatter(value) {
  }
 }
 
-// function massFormatter(value) {
-//     if (value) {
-//         var number_monosaccharides= value;
-//         return value;
-//
-//
-//     } else {
-//         return "NA";
-//     }
-// }
 
 
 /**
