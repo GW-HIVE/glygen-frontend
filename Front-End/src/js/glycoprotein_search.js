@@ -187,7 +187,7 @@ $(document).ready(function () {
         // please do not remove rhis code as it is required prepopulate search values
         var id = getParameterByName('id') || id;
         if (id) {
-            LoadSearchvalues(id);
+            LoadProteinSearchvalues(id);
         }
     });
 });

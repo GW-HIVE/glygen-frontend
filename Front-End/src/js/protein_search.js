@@ -160,10 +160,10 @@ $(document).ready(function () {
         mass(mass_min, mass_max)
         // check for ID to see if we need to load search values
         // please do not remove this code as it is required prepopulate search values
-        // var id = getParameterByName('id') || id;
-        // if (id) {
-        //     LoadSearchvalues(id);
-        // }
+        var id = getParameterByName('id') || id;
+        if (id) {
+            LoadProteinSearchvalues(id);
+        }
     });
 });
 

@@ -39,7 +39,38 @@ function ajaxSuccess(data) {
         });
     });
 
+
+    // var items = [];
+    // if (data.glycosylation) {
+    //     for (var i = 0; i < data.glycosylation.length; i++) {
+    //         var glycan = data.glycosylation[i];
+    //         items.push({
+    //             glycan_ac: glycan.glycan_ac
+    //         });
+    //     }
+    // }
+    //
+    // $('#glycosylation-table').bootstrapTable({
+    //     columns: [{
+    //         field: 'glycan_ac',
+    //         title: 'Glycan'
+    //     }],
+    //     pagination : 10,
+    //     data: items,
+    //     detailview: true,
+    //     detailFormatter: function(row){
+    //         return "<li>Hello</li>";
+    //     }
+    // });
+
+
 }
+
+
+
+
+
+
 
 /**
  * @param {data} the callback function to GWU service if fails
@@ -58,11 +89,11 @@ function ajaxFailure() {
 //  * Returns the GWU services.
 //
 
-function LoadData(accession) {
+function LoadData(protein_ac) {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("protein_details",accession ),
+        url: getWsUrl("protein_details",protein_ac ),
         // data: getDetailPostData(id),
         method: 'POST',
         success: ajaxSuccess,
@@ -94,6 +125,6 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    var accession = getParameterByName('accession');
-    LoadData(accession);
+    var protein_ac = getParameterByName('protein_ac');
+    LoadData(protein_ac);
 });

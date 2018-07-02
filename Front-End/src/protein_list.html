@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
 </head>
 
 <body onload="tracking()">
@@ -61,37 +60,41 @@
         </div>
         <!-- sorting_top-end -->
 
-        <!--<script id="summary-template" type="text/template">-->
-            <!--<div class="panel panel-default">-->
-                <!--<div class="gg-panel-heading cd-faq-title">-->
-                    <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                    <!--<h6>-->
+        <script id="summary-template" type="text/template">
+            <div class="panel panel-default">
+                <div class="gg-panel-heading cd-faq-title">
+                    <!-- added new class -->
+                    <h6>
 
-                        <!--&lt;!&ndash; <center>Result for Glycan Search On:{{execution_time}}</center> &ndash;&gt;-->
-                        <!--<center>Result for Protein Search On:{{execution_time}}</center>-->
-                    <!--</h6>-->
-                <!--</div>-->
-                <!--<table class="table table-hover">-->
-                    <!--<tbody>-->
-                        <!--{{#protein_id}}-->
+                        <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
+                        <center>Result for Protein Search On:{{execution_time}}</center>
+                    </h6>
+                </div>
+                <table class="table table-hover">
+                    <tbody>
+                        {{#protein_ac}}
+                        <tr>
+                            <td>Protein Id</td>
+                            <td>{{protein_ac}}</td>
+                        </tr>
+                        {{/protein_ac}}
+
+                        {{#mass.min}}
+                        <tr>
+                            <td>Mass</td>
+                            {{#mass.min}}
+                            <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
+                            {{/mass.max}}
+                        </tr>
+                        {{/mass.min}} {{#organism}}
+                        <tr>
+                            <td>Organism</td>
+                            <td>{{organism}}</td>
+                        </tr>
+                         {{/organism}}
+
+                         <!--{{#glycantype}} &ndash;&gt;-->
                         <!--<tr>-->
-                            <!--<td>Protein Id</td>-->
-                            <!--<td>{{protein_id}}</td>-->
-                        <!--</tr>-->
-                        <!--{{/protein_id}} {{#mass.min}}-->
-                        <!--<tr>-->
-                            <!--<td>Mass</td>-->
-                            <!--{{#mass.min}}-->
-                            <!--<td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>-->
-                            <!--{{/mass.max}}-->
-                        <!--</tr>-->
-                        <!--{{/mass.min}} {{#organism}}-->
-                        <!--<tr>-->
-                            <!--<td>Organism</td>-->
-                            <!--<td>{{organism}}</td>-->
-                        <!--</tr>-->
-                        <!--&lt;!&ndash; {{/organism}} {{#glycantype}} &ndash;&gt;-->
-                        <!--&lt;!&ndash; <tr>-->
                             <!--<td>Glycan Type</td>-->
                             <!--<td>{{glycantype}}</td>-->
                         <!--</tr>-->
@@ -99,8 +102,9 @@
                         <!--<tr>-->
                             <!--<td>Glycan SubType</td>-->
                             <!--<td>{{glycansubtype}}</td>-->
-                        <!--</tr> &ndash;&gt;-->
-                        <!--&lt;!&ndash; {{/glycansubtype}} {{#proteinid}} &ndash;&gt;-->
+                        <!--</tr>-->
+                  <!--{{/glycansubtype}}-->
+                        <!--{{#proteinid}}-->
                         <!--<tr>-->
                             <!--<td>Protein</td>-->
                             <!--<td>{{proteinid}}</td>-->
@@ -119,20 +123,20 @@
                         <!--{{/motif}} &ndash;&gt;-->
 
 
-                    <!--</tbody>-->
-                <!--</table>-->
+                    </tbody>
+                </table>
 
-                <!--<p align="center">-->
-                    <!--<a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."-->
-                        <!--class="red-tooltip">-->
-                        <!--<button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search-->
-                        <!--</button>-->
-                    <!--</a>-->
-                    <!--&nbsp; &nbsp; &nbsp; &nbsp;-->
-                    <!--<button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>-->
-                <!--</p>-->
-            <!--</div>-->
-        <!--</script>-->
+                <p align="center">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
+                        class="red-tooltip">
+                        <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search
+                        </button>
+                    </a>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+                </p>
+            </div>
+        </script>
 
 
         <!-- table start here -->
