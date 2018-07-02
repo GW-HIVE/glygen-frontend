@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,18 +32,20 @@
             
     <h3 class="page-heading" style="text-align: center"> Glycan Search </h3>
 <!-- Glycan-->
-    <div class="container gg-container">
+    <div class="container gg-search-container form-horizontal">
 
         <div class="gg-form-group row">
+           
             <h6><span><a href="#" title="GlyTouCan accession number" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan accession number of your glycan (see https://glytoucan.org/)"><i class="far fa-question-circle help-sign"></i></a></span> GlyTouCan accession number:</h6>
-                
-            <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org"> 
-
-            <div class="gg-text-example">Example: G109565BM</div>
+            <div class="input">    
+                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org"> 
+            </div>
+            <div class="gg-text-example">Example: G109565BM</div> 
         </div>
 
         <!-- First range-->
-        <div class="gg-form-group row">  
+        <div class="gg-form-group form-horizontal row">
+            <div class="form-group">  
             <h6><span><a href="#" title="Glycan Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> Glycan Size:</h6>
 
             <div class="col-xs-2 min-value-alighnment">
@@ -58,6 +59,7 @@
             <div class="col-xs-2 max-value-alighnment">
                 <h6>Max</h6>
                 <div id="upper-value"> </div>
+            </div>
             </div>
         </div>
 
@@ -125,7 +127,10 @@
 
         <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right;">        
     </div>
- <!-- End Enzyme-->
+
+
+
+
 
 <!--Horizontal form-->
     <h2 style="text-align: center">Horizontal form</h2>
@@ -256,6 +261,7 @@
     
   </form>
 </div>
+
     <div w3-include-html="footer.html"></div>
 <!--Script for jquery-->
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
@@ -282,14 +288,8 @@
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
     <!-- script for editing users search  -->
-    <script src="js/editsearch.js"></script>
+<script src="js/editsearch.js"></script>
     <!-- script for help icon ? -->
     <script src="js/popover.js"></script>
-
-
-
-
-
-
 </body>
 </html>
