@@ -33,7 +33,7 @@ function setFormValues(data) {
  * @param {object} data.query -
  *
  */
-function setproteinFormValues(data) {
+function setProteinFormValues(data) {
 //alert(data.results.protein_id)
   //data1 = JSON.parse(data);
     if (data.query) {
@@ -67,13 +67,13 @@ function failToRetreiveSearch(data) {
  *
  *
  */
-function LoadproteinSearchvalues(id) {
+function LoadProteinSearchvalues(id) {
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
         data: getListPostData(id, 1, 'protein_ac', 'asc', 1),
         method: 'POST',
-        success: setproteinFormValues,
+        success: setProteinFormValues,
         error: failToRetreiveSearch
     };
     // make the server call

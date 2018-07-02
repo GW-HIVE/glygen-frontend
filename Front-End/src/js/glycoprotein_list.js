@@ -171,8 +171,7 @@ $(document).ready(function(){
 
 function editSearch(){
     {
-        // window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html?id="+id);
-        window.location.replace("glycoprotein_search.html?id="+id);
+        window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html?id="+id);
     }
 }
 /**
@@ -248,9 +247,9 @@ function updateSearch() {
         dataType: "json",
         url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
-            if (result.search_results_id) {
+            if (result.list_id) {
                 console.log(result);
-                window.location = 'glycoprotein_list.html?id=' + result.search_results_id;
+                window.location = 'glycoprotein_list.html?id=' + result.list_id;
             } else {
                 // handle if no results
             }
@@ -291,7 +290,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var protein = data.results[i];
                 items.push({
-                    protein_ID: protein.protein_id,
+                    protein_ID: protein.protein_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
