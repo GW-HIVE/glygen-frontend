@@ -34,21 +34,17 @@ input[type=submit]:hover {
     
 }
 
-.gg-search-container {
+
+
+.gg-container {
     width: 70%;
-    border-radius: 8px;
+    border-radius: 5px;
+
     background-color:#dfe5ed;
+
     padding: 20px 80px; 
     margin-top: 30px;
     margin-bottom: 60px;
-}
-
-.row-margin-top {
-    margin-top: 30px;
-}
-
-.row-margin-bottom {
-    margin-bottom: 30px;
 }
 
 @media only screen and (max-width: 768px) {
