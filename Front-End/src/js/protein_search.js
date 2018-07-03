@@ -221,7 +221,6 @@ function ajaxProteinSearchSuccess() {
             max: mass_max
         },
         protein_name: protein_name_long,
-
         gene_name: gene_name,
         pathway_id: pathway_id,
         sequence: {

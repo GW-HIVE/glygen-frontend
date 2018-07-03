@@ -172,7 +172,7 @@ function redirectPage1()
 function editSearch(){
   {
 
-      window.location.replace("glycoprotein_search.html?id="+id);
+      window.location.replace("protein_search.html?id="+id);
     }
 }
 /**
@@ -246,11 +246,11 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
+        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
-            if (result.search_results_id) {
+            if (result.list_id) {
                 console.log(result);
-                window.location = 'protein_list.html?id=' + result.search_results_id;
+                window.location = 'protein_list.html?id=' + result.list_id;
             } else {
                 // handle if no results
             }
@@ -261,7 +261,7 @@ function updateSearch() {
 
 function editSearch() {
   {
-    window.location.replace("protein-search.html?id="+id);
+    window.location.replace("protein_search.html?id="+id);
     }
 }
 
