@@ -56,7 +56,7 @@ function getWsUrl(request, id) {
             return ws_base_glycan + "/image/" + id;
             break;
         case "protein_list":
-            return ws_base_glycan + "/list";
+            return ws_base_protein + "/list";
             break;
         case "protein_details":
             return ws_base_protein + "/detail/" + id;

@@ -46,7 +46,7 @@ function setProteinFormValues(data) {
         $("#gene_name").val(data.query.gene_name);
         $("#protein_name_long").val(data.query.protein_name_long);
         $("#pathway").val(data.query.pathway_id);
-        $("#sequences").val(data.query.sequence);
+        $("#sequences").val(data.query.sequence.aa_sequence);
         $("#glycosylated_aa").val(data.query.glycosylated_aa);
         $("#glycosylation_evidence").val(data.query.glycosylation_evidence);  
     }

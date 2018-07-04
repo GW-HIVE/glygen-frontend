@@ -1,3 +1,8 @@
+//@author: Rupali Mahadik
+
+
+
+
 //@author: Pradeep Kumar
 // @description: UO1 Version-1.1.
 //@Date:10th May 2018.
@@ -10,15 +15,15 @@
  */
 
 String.prototype.trunc = String.prototype.trunc ||
- function(n) {
- return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
- };
-var id = '';
+    function(n) {
+        return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
+    };
+//var id = '';
 var page = 1;
-var sort = 'protein_ac';
+var sort = 'protein_name_long';
 var dir = $('.dir-select').val();
-var url = getWsUrl('protein_list') + "?action=get_user";
-
+//var url = getWsUrl('list') + "?action=get_user";
+var url = getWsUrl('protein_list');
 var limit =25;
 
 /**
@@ -26,28 +31,28 @@ var limit =25;
  * @param {domNode} element - The element from which we take the new limit value
  */
 function xlimit(element) {
- limit = $(element).val();
- $('.limit-select').val(limit);
- LoadDataList();
+    limit = $(element).val();
+    $('.limit-select').val(limit);
+    LoadDataList();
 }
 
 /**
  * Loads the next page of results
  */
 function next() {
-page = page + 1;
-  $(".page-select").val(page);
-  LoadDataList();
+    page = page + 1;
+    $(".page-select").val(page);
+    LoadDataList();
 }
 /**
  * Loads the Previous page of results
  */
 function prev() {
-  if (page > 1) {
-    page = page - 1;
-    $(".page-select").val(page);
-    LoadDataList();
-  }
+    if (page > 1) {
+        page = page - 1;
+        $(".page-select").val(page);
+        LoadDataList();
+    }
 }
 
 /**
@@ -55,9 +60,9 @@ function prev() {
  * @param {domNode} element - The element from which we take the new page value
  */
 function xpage(element) {
- page = $(element).val();
- $('.page-select').val(page);
- LoadDataList();
+    page = $(element).val();
+    $('.page-select').val(page);
+    LoadDataList();
 }
 
 /**
@@ -66,9 +71,9 @@ function xpage(element) {
  */
 
 function xsort(element) {
- sort = $(element).val();
- $('.sort-select').val(sort);
- LoadDataList();
+    sort = $(element).val();
+    $('.sort-select').val(sort);
+    LoadDataList();
 }
 
 /**
@@ -77,20 +82,20 @@ function xsort(element) {
  */
 
 function xdir(element) {
- dir = $(element).val();
- $('.dir-select').val(dir);
- LoadDataList();
+    dir = $(element).val();
+    $('.dir-select').val(dir);
+    LoadDataList();
 }
 
 /**
  * its calculate no of pages using limit and total_length.
  * @param {integer} total_length - The total_length is total number of records
- * @param {integer} limit - The limit is records per page 
+ * @param {integer} limit - The limit is records per page
  * @returns {number} Number of pages
  */
 function noOfPage(total_length,limit){
- var size = Math.ceil(total_length / limit);
- return size;
+    var size = Math.ceil(total_length / limit);
+    return size;
 }
 
 
@@ -112,13 +117,13 @@ function totalNoSearch(total_length){
  */
 
 function buildPages(paginationInfo){
- var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
- var pageSelectors = $(".page-select");
- pageSelectors.empty();
- for(var i=1; i <= total_length; i++){
- pageSelectors.append($("<option></option>").attr("value", i).text(i));
- }
- pageSelectors.val(page);
+    var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
+    var pageSelectors = $(".page-select");
+    pageSelectors.empty();
+    for(var i=1; i <= total_length; i++){
+        pageSelectors.append($("<option></option>").attr("value", i).text(i));
+    }
+    pageSelectors.val(page);
     /**
      * this works for Showing user how many results they found .
 
@@ -141,10 +146,10 @@ function buildPages(paginationInfo){
  */
 
 function buildSummary (queryInfo) {
- var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
- var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
- $('#summary-table').html(summaryHtml);
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
 }
 
 
@@ -152,16 +157,16 @@ function buildSummary (queryInfo) {
  * Redirect to Page index page or search back
  */
 function redirectPage1()
-         {
-         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-         }
-          function redirectPage2()
-         {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html";
-         } 
-         
-         
-     $(document).ready(function(){
+{
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
+}
+function redirectPage2()
+{
+    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html";
+}
+
+
+$(document).ready(function(){
     $("demosearch").tooltip();
 });
 
@@ -169,10 +174,14 @@ function redirectPage1()
  * Redirect to  searchPage with id after clicking editSearch
  */
 
-function editSearch(){
-  {
 
-      window.location.replace("protein_search.html?id="+id);
+
+
+
+
+function editSearch() {
+    {
+        window.location.replace("glycoprotein_search.html?id="+id);
     }
 }
 /**
@@ -180,10 +189,10 @@ function editSearch(){
  * Format function to create link to the details page
 
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Protein Id 
+ @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
- return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
 }
 
 
@@ -197,14 +206,14 @@ function PageFormat(value, row, index, field) {
  */
 
 function MassFormatter(value) {
- if (value) {
- var mass = value;
- return value;
+    if (value) {
+        var mass = value;
+        return value;
 
 
- } else {
- return "NA";
- }
+    } else {
+        return "NA";
+    }
 }
 
 
@@ -220,11 +229,11 @@ function MassFormatter(value) {
 
 
 function DetailFormat(index, row) {
- var html = [];
- var glyco = row.glycoct.replace(/ /g, '\n');
- html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
- html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
- return html.join('');
+    var html = [];
+    var glyco = row.glycoct.replace(/ /g, '\n');
+    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
+    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
+    return html.join('');
 }
 
 
@@ -250,7 +259,7 @@ function updateSearch() {
         success: function (result) {
             if (result.list_id) {
                 console.log(result);
-                window.location = 'protein_list.html?id=' + result.list_id;
+                window.location = 'glycoprotein_list.html?id=' + result.list_id;
             } else {
                 // handle if no results
             }
@@ -259,11 +268,7 @@ function updateSearch() {
     });
 }
 
-function editSearch() {
-  {
-    window.location.replace("protein_search.html?id="+id);
-    }
-}
+
 
 
 
@@ -283,7 +288,7 @@ function ajaxListSuccess(data) {
         console.log(data.code);
         displayErrorByCode(data.code);
     } else {
-        
+
 
         var $table = $('#gen-table');
         var items = [];
@@ -294,7 +299,8 @@ function ajaxListSuccess(data) {
                     protein_ac: protein.protein_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
-                    protein_name: protein.protein_name_long,
+                    protein_name_long: protein.protein_name_long,
+                    protein_name_short: protein.protein_name_short,
                     organism: protein.organism
                 });
             }
@@ -307,7 +313,7 @@ function ajaxListSuccess(data) {
 
         buildSummary(data.query);
 
-        document.title='protein-list';
+        document.title='Glycoprotein-list';
         lastSearch = data;
     }
 
@@ -327,18 +333,18 @@ function ajaxListFailure() {
  * */
 function LoadDataList() {
 
- var ajaxConfig = {
- dataType: "json",
- url: getWsUrl("list"),
- data: getListPostData(id, page, sort, dir, limit),
- method: 'POST',
- success: ajaxListSuccess,
- error: ajaxListFailure
- };
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("protein_list"),
+        data: getListPostData(id, page, sort, dir, limit),
+        method: 'POST',
+        success: ajaxListSuccess,
+        error: ajaxListFailure
+    };
 
 
- // make the server call
- $.ajax(ajaxConfig);
+    // make the server call
+    $.ajax(ajaxConfig);
 }
 
 /**
@@ -353,13 +359,13 @@ function LoadDataList() {
 
 
 function getParameterByName(name, url) {
- if (!url) url = window.location.href;
- name = name.replace(/[\[\]]/g, "\\$&");
- var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
- results = regex.exec(url);
- if (!results) return null;
- if (!results[2]) return '';
- return decodeURIComponent(results[2].replace(/\+/g, " "));
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 var id = getParameterByName('id');

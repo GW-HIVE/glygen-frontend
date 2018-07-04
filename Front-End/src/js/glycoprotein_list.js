@@ -1,6 +1,4 @@
-//@author: Pradeep Kumar
-// @description: UO1 Version-1.1.
-//@Date:10th May 2018.
+//@author: Rupali Mahadik
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -13,12 +11,11 @@ String.prototype.trunc = String.prototype.trunc ||
     function(n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
-//var id = '';
+var id = '';
 var page = 1;
 var sort = 'protein_name_long';
 var dir = $('.dir-select').val();
-//var url = getWsUrl('list') + "?action=get_user";
-var url = getWsUrl('list');
+var url = getWsUrl('protein_list');
 var limit =25;
 
 /**
@@ -169,9 +166,14 @@ $(document).ready(function(){
  * Redirect to  searchPage with id after clicking editSearch
  */
 
-function editSearch(){
+
+
+
+
+
+function editSearch() {
     {
-        window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html?id="+id);
+        window.location.replace("glycoprotein_search.html?id="+id);
     }
 }
 /**
@@ -182,7 +184,7 @@ function editSearch(){
  @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='protein-detail.html?id=" + value + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
 }
 
 
@@ -245,7 +247,7 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
+        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
             if (result.list_id) {
                 console.log(result);
@@ -258,11 +260,7 @@ function updateSearch() {
     });
 }
 
-function editSearch() {
-    {
-        window.location.replace("glycoprotein_search.html?id="+id);
-    }
-}
+
 
 
 
@@ -276,8 +274,6 @@ function editSearch() {
 
 
 function ajaxListSuccess(data) {
-    // console.log(data);
-    //console.log(data.code);
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
@@ -329,7 +325,7 @@ function LoadDataList() {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("list"),
+        url: getWsUrl("protein_list"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
         success: ajaxListSuccess,
