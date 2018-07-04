@@ -764,11 +764,11 @@ label {
 }
 .table {
     background: #fff;
-    width: 99.9999% !important;
-    float: right;
+    /*width: 99.9999% !important;*/
+    /*float: right;*/
 }
 
-.table-hover tbody tr:hover td, 
+.table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
   background-color:#e2e8ef;
 }
@@ -870,3 +870,9 @@ label {
     top: 33%;
 }
 
+.limit-text-size {
+    max-width: 200px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

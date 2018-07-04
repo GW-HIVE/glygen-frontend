@@ -55,15 +55,15 @@ thead{
     padding: 3px 0; 
   
 }
-.table {
-    background-color: #fff;
-    WIDTH:99.99%  !important;
-    float: right;
-}
+/*.table {*/
+    /*background-color: #fff;*/
+    /*WIDTH:99.99%  !important;*/
+    /*float: right;*/
+/*}*/
 
-th {
-  text-align: center;
-}
+/*th {*/
+  /*text-align: center;*/
+/*}*/
 
 
 /* for applying #777 border to table */
