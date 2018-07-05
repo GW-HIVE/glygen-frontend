@@ -112,14 +112,13 @@
                 {{/mass.min}}
 
 
-                {{#glycan.relation}}
+                {{#glycan.glycan_ac}}
                 <tr>
-                    <td>Mass</td>
-                    {{#glycan.relation}}
-                    <td>{{glycan.relation}}{{/glycan.relation}} {{#glycan.glycan_ac}}{{glycan.glycan_ac}} Da</td>
-                    {{/glycan.glycan_ac}}
+                    <td>glycan</td>
+                    <td>{{glycan.glycan_ac}} {{glycan.relation}}</td>
                 </tr>
-                {{/glycan.relation}}
+                {{/glycan.glycan_ac}}
+
 
                 {{#organism}}
                 <tr>
@@ -130,7 +129,24 @@
 
 
 
+                {{#sequence.aa_sequence}}
+                <tr>
+                    <td>Sequence</td>
+                    <td><abbr class="limit-text-size" title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
+                </tr>
+                {{/sequence.aa_sequence}}
 
+
+                {{#glycosylated_aa_exists}}
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        {{#glycosylated_aa}}
+                            {{.}}<br/>
+                        {{/glycosylated_aa}}
+                    </td>
+                </tr>
+                {{/glycosylated_aa_exists}}
 
 
 
@@ -184,26 +200,17 @@
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <table id="gen-table" data-show-export="true" data-toggle="table">
-                <!--  <table id="gen-table"    data-search="true">    may be for version 2 -->
-
                 <thead>
                 <tr>
-                    <!-- <th data-field="state" data-checkbox="true"> </th> may be for version 2 -->
-                    <!-- <th data-field="id" data-formatter="PageFormat">ID</th> -->
-                    <!-- <th data-field="glycan_image" data-formatter="ImageFormat" style="width:10%">Glycan Image</th> -->
+                    <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
+                    <th data-field="gene_name">Gene Name </th>
+                    <th data-field="protein_name">Protein Name</th>
 
-                    <th data-field="protein_ac">Protein ID</th>
-
-
-                    <th data-field="gene_name">Gene Name
-                    </th>
-                    <th data-field="protein_name">Protein Name
-                    </th>
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
                         <br>(Da)
                     </th>
-                    <th data-field="organism">Organism
-                    </th>
+                    <th data-field="organism">Organism </th>
+
                 </tr>
                 </thead>
             </table>
@@ -254,7 +261,7 @@
 <!-- script for template engine -->
 <script type="text/javascript" src="libraries/mustache.js"></script>
 <!-- script for getting Web Service URLs -->
-<script type="text/javascript" src="js/ws_url_protein.js"></script>
+<script type="text/javascript" src="js/ws_url.js"></script>
 <!-- script for handling errror -->
 
 <!-- script for glycan list page -->

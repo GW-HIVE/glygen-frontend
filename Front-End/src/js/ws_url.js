@@ -58,7 +58,7 @@ function getWsUrl(request, id) {
         case "protein_list":
             return ws_base_protein + "/list";
             break;
-        case "protein_details":
+        case "protein_detail":
             return ws_base_protein + "/detail/" + id;
             break;
 
