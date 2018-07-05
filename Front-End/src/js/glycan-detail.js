@@ -41,7 +41,7 @@ function ajaxSuccess(data) {
         $this.text('+');
         $this.parent().next().hide();
       
-        $('#error-message').hide();
+
       }
     });
   });
@@ -53,12 +53,11 @@ function ajaxSuccess(data) {
  */
 //  * Returns the GWU services fails.
 
+
 function ajaxFailure() {
-  $('#error-message').show();
-  activityTracker("error", data.glycan_ac, "server down");
+    displayErrorByCode();
+    activityTracker("error", data.glycan_ac, "server down");
 }
-
-
 /**
  * @param {id} the LoadData function to configure and start the request to GWU  service
  */
