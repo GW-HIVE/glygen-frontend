@@ -34,12 +34,12 @@
     <h3 class="page-heading" style="text-align: center"> Glycan Search </h3>
 
     <div class="container gg-container">
-        <form class="form-horizontal">
+        <form class="form-horizontal2">
             <!-- Glycan-->
-            <div class="top-table-margin">
+            <div class="gg-form-group2 row top-table-margin">
                 <label class="control-label col-sm-4" for="GlyTouCan-accession-number" <span><a href="#" title="GlyTouCan accession number" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan accession number of your glycan (see https://glytoucan.org/)"><i class="far fa-question-circle help-sign"></i></a></span> GlyTouCan accession number:</label>
 
-                <div class="col-sm-7 gg-form-group">
+                <div class="col-sm-8 gg-form-group">
                     <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id"  placeholder="Provide an universal glycan identifier from GlyTouCan.org">
 
                     <div class="gg-text-example">Example: G109565BM</div>
@@ -62,14 +62,14 @@
                             <h6 class="align-center">Native Mass Range</h6>
                             <div id="slider"> </div>
                         </div>
-                        <div class="col-xs-2 max-value-alighnment">
+                        <div class="col-xs-2 max-value-alighnment" style="margin-left: 40px;">
                             <h6>Max</h6>
                             <div id="upper-value"> </div>
                         </div>
                     </div>
                     <!-- second range-->
                     <div class="gg-form-group row">
-                        <div class="col-xs-2 min-value-alighnment" >
+                        <div class="col-xs-2 min-value-alighnment">
                             <h6>Min</h6>
                             <div id="lower-value1"> </div>
                         </div>
@@ -78,7 +78,7 @@
                             <h6 class="align-center">Native Sugar Range</h6>
                             <div id="slider1"> </div>
                         </div>
-                        <div class="col-xs-2 max-value-alighnment">
+                        <div class="col-xs-2 max-value-alighnment2" style="margin-bottom: 40px; margin-left: 40px;">
                             <h6>Max</h6>
                             <div id="upper-value1"> </div>
                         </div>
@@ -91,7 +91,7 @@
             <div class="form-group gg-form-group row">
             <label class="control-label col-sm-4" for="organism" <span><a href="#" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an organism that makes your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> Organism:</label>
 
-            <div class="col-sm-7">
+            <div class="col-sm-8">
                 <select class="organism" id="organism">
                     <option value="">Select organism</option>
                 </select>
@@ -103,7 +103,7 @@
             <div class="form-group gg-form-group row">
                 <label class="control-label col-sm-4" for="glycan-type" <span><a href="#" title="Glycan type" data-toggle="popover" data-placement="left" data-content="Click to select a glycan type"><i class="far fa-question-circle help-sign"></i></a></span> Glycan type:</label>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <select class="ddl" id="ddl" onchange="configureDropDownLists(this,document.getElementById('ddl2'))">
                         <option value="">Select glycan type</option>
                     </select>
@@ -115,7 +115,7 @@
             <div class="form-group gg-form-group row">
                 <label class="control-label col-sm-4" for="glycan-subtype" <span><a href="#" title="Glycan subtype" data-toggle="popover" data-placement="left" data-content="Click to select a glycan subtype"><i class="far fa-question-circle help-sign"></i></a></span> Glycan subtype:</label>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <select id="ddl2">
                         <option value="">Select glycan subtype</option>
                     </select> 
@@ -123,11 +123,11 @@
                 </div>   
             </div>
 
-            <!-- Protein-->
+            <!-- UniProt ID-->
             <div class="form-group gg-form-group row">
-                <label class="control-label col-sm-4" for="protein" <span><a href="#" title="UniProt ID" data-toggle="popover" data-placement="left" data-content="Enter the UniProt ID of a glycoprotein that bears your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> UniProt ID:</label>
+                <label class="control-label col-sm-4" for="UniProt ID" <span><a href="#" title="UniProt ID" data-toggle="popover" data-placement="left" data-content="Enter the UniProt ID of a glycoprotein that bears your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> UniProt ID:</label>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <input type="text" name="ProteinID" class="form-control protein"  id="protein"  placeholder="Provide the Uniprot protein ID of a glycoprotein">
                     <div class="gg-text-example">Example: P01588 (Human Erythropoietin) </div>
                 </div>   
@@ -137,7 +137,7 @@
             <div class="form-group gg-form-group row">
                 <label class="control-label col-sm-4" for="motif" <span><a href="#" title="Glycan Motif" data-toggle="popover" data-placement="left" data-content="Enter a structural motif comprising part of your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> Glycan Motif:</label>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <input type="text" name="GlycanMotif" class="form-control motif" id="motif"  placeholder="Provide the name of a glycan motif to search by (e.g. LewisX)">
 
                     <div class="gg-text-example">Example: Lewis X</div>
@@ -147,7 +147,7 @@
             <div class="form-group gg-form-group row">
                 <label class="control-label col-sm-4" for="enzyme" <span><a href="#" title="Biosynthetic Enzyme" data-toggle="popover" data-placement="left" data-content="Enter the UniProt ID of an enzyme that particpates in the biosynthesis of your glycan(s)"><i class="far fa-question-circle help-sign"></i></a></span> Biosynthetic Enzyme:</label>
 
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <input type="text" name="Enzyme"  class="form-control enzyme" id="enzyme" placeholder="Biosynthetic Enzyme">
 
                     <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>
