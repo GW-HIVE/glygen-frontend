@@ -1,6 +1,3 @@
-
-
-
 * {
     box-sizing: border-box;
 }
@@ -34,17 +31,21 @@ input[type=submit]:hover {
     
 }
 
-
-
 .gg-container {
     width: 70%;
     border-radius: 5px;
-
     background-color:#dfe5ed;
-
     padding: 20px 80px; 
     margin-top: 30px;
     margin-bottom: 60px;
+}
+
+.top-table-margin {
+    margin-top: 30px;
+}
+
+.bottom-table-margin {
+    margin-bottom: 30px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -154,10 +155,10 @@ select {
   -moz-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
+
 #searchfield form .biginput:focus {
   color: #858585;
 }
-
 
 #msg {
     color: #a94442;
