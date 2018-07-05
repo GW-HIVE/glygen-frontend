@@ -4,6 +4,7 @@
 //@Date:19th Feb 2018. with dummy web service
 //@update: 3-April 2018. with real web service
 //@update: June 26-2018- with web service changes
+// @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 
 
 
@@ -44,7 +45,7 @@ function ajaxSuccess(data) {
       }
     });
   });
-
+  activityTracker("user", data.glycan_ac, "successful response");
 }
 
 /**
@@ -54,6 +55,7 @@ function ajaxSuccess(data) {
 
 function ajaxFailure() {
   $('#error-message').show();
+  activityTracker("error", data.glycan_ac, "server down");
 }
 
 

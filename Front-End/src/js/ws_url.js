@@ -16,7 +16,7 @@ function getWsUrl(request, id) {
     switch (request.toLowerCase()) {
 
         //Auth Webservices.
-        case "generate_ID":
+        case "generate_id":
             return ws_userID;
             break;
         case "log_activity":
