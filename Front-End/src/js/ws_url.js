@@ -42,7 +42,7 @@ function getWsUrl(request, id) {
             return ws_base_glycan + "/list";
             break;
         case "glycan_detail":
-            return ws_base_glycan + "/detail1/" + id;
+            return ws_base_glycan + "/detail/" + id;
             break;
 
 
