@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -11,18 +9,12 @@
     <link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
 </head>
-
 <body onload="tracking()">
 <script type="text/javascript" src="libraries/w3.js"></script>
-
 <div w3-include-html="header.html"></div>
 <script>w3.includeHTML();</script>
-
-
 <!-- page content starts here -->
-
 <div class="container">
     <div class="row">
         <div id="summary-table" class="col-md-12 col-xs-12">
@@ -61,7 +53,6 @@
         </div>
     </div>
     <!-- sorting_top-end -->
-
     <script id="summary-template" type="text/template">
         <div class="panel panel-default">
             <div class="gg-panel-heading cd-faq-title">
@@ -74,6 +65,8 @@
             </div>
             <table class="table table-hover">
                 <tbody>
+
+                <!--Protein Typeahead-->
                 {{#protein_ac}}
                 <tr>
                     <td>Protein Id</td>
@@ -81,26 +74,7 @@
                 </tr>
                 {{/protein_ac}}
 
-
-
-
-                {{#protein_name}}
-                <tr>
-                    <td>Protein Name</td>
-                    <td>{{protein_name}}</td>
-                </tr>
-                {{/protein_name}}
-
-
-
-                {{#gene_name}}
-                <tr>
-                    <td>Gene Name</td>
-                    <td>{{gene_name}}</td>
-                </tr>
-                {{/gene_name}}
-
-
+                <!--mass-->
 
                 {{#mass.min}}
                 <tr>
@@ -112,6 +86,35 @@
                 {{/mass.min}}
 
 
+                <!--Organism-->
+                {{#organism}}
+                <tr>
+                    <td>Organism</td>
+                    <td>{{organism}}</td>
+                </tr>
+                {{/organism}}
+
+                <!--Protein name Typeahead-->
+
+                {{#protein_name}}
+                <tr>
+                    <td>Protein Name</td>
+                    <td>{{protein_name}}</td>
+                </tr>
+                {{/protein_name}}
+
+                <!--Gene Typeahead-->
+
+                {{#gene_name}}
+                <tr>
+                    <td>Gene Name</td>
+                    <td>{{gene_name}}</td>
+                </tr>
+                {{/gene_name}}
+
+
+
+                <!--Glycan Typeahead-->
                 {{#glycan.glycan_ac}}
                 <tr>
                     <td>glycan</td>
@@ -120,15 +123,9 @@
                 {{/glycan.glycan_ac}}
 
 
-                {{#organism}}
-                <tr>
-                    <td>Organism</td>
-                    <td>{{organism}}</td>
-                </tr>
-                 {{/organism}}
 
 
-
+                <!--peptide seq-->
                 {{#sequence.aa_sequence}}
                 <tr>
                     <td>Sequence</td>
@@ -136,47 +133,35 @@
                 </tr>
                 {{/sequence.aa_sequence}}
 
-
+                <!--amino acid-->
                 {{#glycosylated_aa_exists}}
                 <tr>
-                    <td>Title</td>
+                    <td>Glycosylated Amino Acid</td>
                     <td>
                         {{#glycosylated_aa}}
-                            {{.}}<br/>
+                        {{.}}<br/>
                         {{/glycosylated_aa}}
                     </td>
                 </tr>
                 {{/glycosylated_aa_exists}}
 
+                <!--pathway Typeahead-->
+                {{#pathway_id}}
+                <tr>
+                    <td>PATHWAY ID</td>
+                    <td>{{pathway_id}}</td>
+                </tr>
+                {{/pathway_id}}
+
+                <!--Glycosylation Evidences-->
+                {{#glycosylation_evidence}}
+                <tr>
+                    <td>Glycosylation_evidence</td>
+                    <td>{{glycosylation_evidence}}</td>
+                </tr>
+                {{/glycosylation_evidence}}
 
 
-                <!--{{#glycantype}} &ndash;&gt;-->
-                <!-- <tr>
-                    <td>Glycan Type</td>
-                    <td>{{glycantype}}</td>
-                </tr>
-                {{/glycantype}} {{#glycansubtype}}
-                <tr>
-                    <td>Glycan SubType</td>
-                    <td>{{glycansubtype}}</td>
-                </tr> -->
-                <!-- {{/glycansubtype}} {{#proteinid}} -->
-                <!--<tr>-->
-                    <!--<td>Protein</td>-->
-                    <!--<td>{{proteinid}}</td>-->
-                <!--</tr>-->
-                <!-- {{/proteinid}} {{#enzyme}}
-                <tr>
-                    <td>Synthesizing Enzyme</td>
-                    <td>{{enzyme}}</td>
-                </tr>
-                {{/enzyme}}
-                {{#motif}}
-                <tr>
-                    <td>Motif</td>
-                    <td>{{motif}}</td>
-                </tr>
-                {{/motif}} -->
 
 
                 </tbody>
@@ -193,10 +178,6 @@
             </p>
         </div>
     </script>
-
-
-
-
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <table id="gen-table" data-show-export="true" data-toggle="table">
@@ -205,12 +186,10 @@
                     <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
                     <th data-field="gene_name">Gene Name </th>
                     <th data-field="protein_name">Protein Name</th>
-
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
                         <br>(Da)
                     </th>
                     <th data-field="organism">Organism </th>
-
                 </tr>
                 </thead>
             </table>
@@ -251,9 +230,7 @@
 <div w3-include-html="footer.html"></div>
 <script>w3.includeHTML();</script>
 <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
-
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-
 <!-- script for table -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
 <!-- script for time for queryserach -->
@@ -263,9 +240,8 @@
 <!-- script for getting Web Service URLs -->
 <script type="text/javascript" src="js/ws_url.js"></script>
 <!-- script for handling errror -->
-
 <!-- script for glycan list page -->
-<script type="text/javascript" src="js/protein_list.js"></script>
+<script type="text/javascript" src="js/glycoprotein_list.js"></script>
 <!-- script for third party-->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- script for getting Web Service URLs -->
@@ -279,7 +255,5 @@
 <script src="js/editsearch.js"></script>
 <!-- script for error-message/header-footer js -->
 <script src="js/utility.js"></script>
-
 </body>
-
 </html>

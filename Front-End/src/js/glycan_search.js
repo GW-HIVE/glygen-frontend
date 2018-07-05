@@ -1,6 +1,7 @@
 // //  @author: Pradeep Kumar Ragu Chanthar
 // //  @description: UO1 Version-1.1
 // //  @Date: 19th Feb 2018
+// //  @Update: July 5, 2018 - Gaurav Agarwal - added error tracking on search
 //
 //
 //
@@ -325,8 +326,10 @@ function submitvalues() {
             success: function (results) {
                 if (results.error_code) {
                     displayErrorByCode(results.error_code);
+                    activityTracker("error", "", results.error_code);
                 } else if (results.list_id && (results.list_id.length === 0)) {
                     displayErrorByCode('no-results-found');
+                    activityTracker("user", "", "no result found");
                 } else {
                     window.location = './glycan_list.html?id=' + results.list_id;
                 }

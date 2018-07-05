@@ -1,4 +1,6 @@
-//@author: Rupali Mahadik
+//@author:Gaurav agarwal
+
+//update: Rupali Mahadik
 
 // @description: UO1 Version-1.1.
 
@@ -16,7 +18,7 @@ function getWsUrl(request, id) {
     switch (request.toLowerCase()) {
 
         //Auth Webservices.
-        case "generate_ID":
+        case "generate_id":
             return ws_userID;
             break;
         case "log_activity":
@@ -40,7 +42,7 @@ function getWsUrl(request, id) {
             return ws_base_glycan + "/list";
             break;
         case "glycan_detail":
-            return ws_base_glycan + "/detail/" + id;
+            return ws_base_glycan + "/detail1/" + id;
             break;
 
 

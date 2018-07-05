@@ -89,12 +89,18 @@
                 </div>
                 <table class="table table-hover">
                     <tbody>
+
+                    <!--glycan typeahead-->
                         {{#glycan_ac}}
                         <tr>
                             <td>GlycoToucan Id</td>
                             <td>{{glycan_ac}}</td>
                         </tr>
-                        {{/glycan_ac}} {{#mass.min}}
+                        {{/glycan_ac}}
+
+                    <!--glycan mass-->
+
+                    {{#mass.min}}
                         <tr>
                             <td>Mass</td>
                             {{#mass.min}}
@@ -102,35 +108,47 @@
                             {{/mass.max}}
                         </tr>
                         {{/mass.min}}
+
+                    <!--organism-->
                         {{#organism}}
                         <tr>
                             <td>Organism</td>
                             <td>{{organism}}</td>
                         </tr>
                         {{/organism}}
+
+                    <!--glycan type-->
                         {{#glycan_type}}
                         <tr>
                             <td>Glycan Type</td>
                             <td>{{glycan_type}}</td>
                         </tr>
-                        {{/glycan_type}} {{#glycan_subtype}}
+                        {{/glycan_type}}
+
+                    <!--glycan subtype-->
+                    {{#glycan_subtype}}
                         <tr>
                             <td>Glycan SubType</td>
                             <td>{{glycan_subtype}}</td>
                         </tr>
                         {{/glycan_subtype}}
+
+                    <!--protein typeahead-->
                         {{#protein_ac}}
                         <tr>
                             <td>Glycosylated Protein</td>
                             <td>{{protein_ac}}</td>
                         </tr>
                         {{/protein_ac}}
-                        <!--{{#enzyme}}-->
-                        <!--<tr>-->
-                            <!--<td>Synthesizing Enzyme</td>-->
-                            <!--<td>{{enzyme}}</td>-->
-                        <!--</tr>-->
-                        <!--{{/enzyme}}-->
+                    <!--enzyme typeahead-->
+                        {{#enzyme}}
+                        <tr>
+                            <td>Synthesizing Enzyme</td>
+                            <td>{{enzyme}}</td>
+                        </tr>
+                        {{/enzyme}}
+                    
+                    <!--glycanmotif typeahead-->
                         {{#glycan_motif}}
                         <tr>
                             <td>Motif</td>

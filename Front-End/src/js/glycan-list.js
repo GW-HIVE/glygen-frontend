@@ -6,6 +6,7 @@
 
 //@update:3 April 2018. with real web service
 //@update: June 26-2018- with web service changes.
+//@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 
 /**
 
@@ -34,6 +35,7 @@ function xlimit(element) {
  limit = $(element).val();
  $('.limit-select').val(limit);
  LoadDataList();
+ activityTracker("user", id, "page limit: "+limit);
 }
 
 /**
@@ -43,6 +45,7 @@ function next() {
 page = page + 1;
   $(".page-select").val(page);
   LoadDataList();
+  activityTracker("user", id, "page: "+page);
 }
 /**
  * Loads the Previous page of results
@@ -52,6 +55,7 @@ function prev() {
     page = page - 1;
     $(".page-select").val(page);
     LoadDataList();
+    activityTracker("user", id, "page: "+page);
   }
 }
 
@@ -63,6 +67,7 @@ function xpage(element) {
  page = $(element).val();
  $('.page-select').val(page);
  LoadDataList();
+ activityTracker("user", id, "page: "+page);
 }
 
 /**
@@ -74,6 +79,7 @@ function xsort(element) {
  sort = $(element).val();
  $('.sort-select').val(sort);
  LoadDataList();
+ activityTracker("user", id, "sort: "+sort);
 }
 
 /**
@@ -85,6 +91,7 @@ function xdir(element) {
  dir = $(element).val();
  $('.dir-select').val(dir);
  LoadDataList();
+ activityTracker("user", id, "sort direction: "+dir);
 }
 
 /**
@@ -244,6 +251,7 @@ function detailFormat(index, row) {
  var glyco = row.glycoct.replace(/ /g, '\n');
  html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
  html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
+ activityTracker("user", id, "Detail view of "+row.glycan_ac);
  return html.join('');
 }
 
@@ -307,6 +315,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: "+data.code);
     } else {
         
 
@@ -336,6 +345,7 @@ function ajaxListSuccess(data) {
 
         // document.title='glycan-list';
         lastSearch = data;
+        activityTracker("user", id, "successful response");
     }
 
 }
@@ -344,6 +354,7 @@ function ajaxListSuccess(data) {
 function ajaxListFailure() {
 //  $('#error-message').show();
     displayErrorByCode('server_down');
+    activityTracker("error", id, "server down");
 }
 
 /**

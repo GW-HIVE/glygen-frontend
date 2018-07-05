@@ -1,11 +1,5 @@
-
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
-
-
-
-
-
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -14,15 +8,13 @@
  */
 function ajaxSuccess(data) {
     var template = $('#item_template').html();
-
-    //var glyco = row.glycoct.replace(/ /g, '\n');
     var html = Mustache.to_html(template, data);
     var $container = $('#content');
 
     $container.html(html);
 
-    $container.find('.open-close-button').each(function (i, element) {
-        $(element).on('click', function () {
+    $container.find('.open-close-button').each(function(i, element) {
+        $(element).on('click', function() {
             var $this = $(this);
             var buttonText = $this.text();
 
@@ -89,7 +81,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     var protein_ac = getParameterByName('protein_ac');
     LoadData(protein_ac);
 });
