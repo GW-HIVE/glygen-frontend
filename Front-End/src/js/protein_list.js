@@ -22,7 +22,6 @@ String.prototype.trunc = String.prototype.trunc ||
 var page = 1;
 var sort = 'protein_name_long';
 var dir = $('.dir-select').val();
-//var url = getWsUrl('list') + "?action=get_user";
 var url = getWsUrl('protein_list');
 var limit =25;
 
@@ -288,8 +287,6 @@ function ajaxListSuccess(data) {
         console.log(data.code);
         displayErrorByCode(data.code);
     } else {
-
-
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {

@@ -93,34 +93,16 @@
                         </tr>
                          {{/organism}}
 
-                         <!--{{#glycan_type}} &ndash;&gt;-->
-                        <!--<tr>-->
-                            <!--<td>Glycan Type</td>-->
-                            <!--<td>{{glycan_type}}</td>-->
-                        <!--</tr>-->
-                        <!--{{/glycantype}} {{#glycansubtype}}-->
-                        <!--<tr>-->
-                            <!--<td>Glycan SubType</td>-->
-                            <!--<td>{{glycansubtype}}</td>-->
-                        <!--</tr>-->
-                  <!--{{/glycansubtype}}-->
-                        <!--{{#proteinid}}-->
-                        <!--<tr>-->
-                            <!--<td>Protein</td>-->
-                            <!--<td>{{proteinid}}</td>-->
-                        <!--</tr>-->
-                        <!--&lt;!&ndash; {{/proteinid}} {{#enzyme}}-->
-                        <!--<tr>-->
-                            <!--<td>Synthesizing Enzyme</td>-->
-                            <!--<td>{{enzyme}}</td>-->
-                        <!--</tr>-->
-                        <!--{{/enzyme}}-->
-                        <!--{{#motif}}-->
-                        <!--<tr>-->
-                            <!--<td>Motif</td>-->
-                            <!--<td>{{motif}}</td>-->
-                        <!--</tr>-->
-                        <!--{{/motif}} &ndash;&gt;-->
+                        {{#glycan.relation}}
+                        <tr>
+                            <td>glycan</td>
+                            {{#glycan.relation}}
+                            <td>{{glycan.relation}}{{/glycan.relation}} {{#glycan.glycan_ac}}{{glycan.glycan_ac}} Da</td>
+                            {{/glycan.glycan_ac}}
+                        </tr>
+                        {{/glycan.relation}}
+
+
 
 
                     </tbody>
@@ -214,7 +196,8 @@
     <!-- script for template engine -->
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for getting Web Service URLs -->
-    <script type="text/javascript" src="js/ws_url_protein.js"></script>
+    <!--<script type="text/javascript" src="js/ws_url_protein.js"></script>-->
+<script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for handling error -->
 
     <!-- script for glycan list page -->

@@ -1,7 +1,10 @@
 
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
-//@Date:20th June 2018.
+
+
+
+
 
 /**
  * Handling a succesful call to the server for details page
@@ -11,10 +14,6 @@
  */
 function ajaxSuccess(data) {
     var template = $('#item_template').html();
-    data.hasMotifs = (data.motifs && (data.motifs.length > 0));
-    data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
-
-    data.imagePath = getWsUrl('image_service', data.id);
 
     //var glyco = row.glycoct.replace(/ /g, '\n');
     var html = Mustache.to_html(template, data);
@@ -34,43 +33,12 @@ function ajaxSuccess(data) {
                 $this.text('+');
                 $this.parent().next().hide();
 
-                $('#error-message').hide();
+
             }
         });
     });
 
-
-    // var items = [];
-    // if (data.glycosylation) {
-    //     for (var i = 0; i < data.glycosylation.length; i++) {
-    //         var glycan = data.glycosylation[i];
-    //         items.push({
-    //             glycan_ac: glycan.glycan_ac
-    //         });
-    //     }
-    // }
-    //
-    // $('#glycosylation-table').bootstrapTable({
-    //     columns: [{
-    //         field: 'glycan_ac',
-    //         title: 'Glycan'
-    //     }],
-    //     pagination : 10,
-    //     data: items,
-    //     detailview: true,
-    //     detailFormatter: function(row){
-    //         return "<li>Hello</li>";
-    //     }
-    // });
-
-
 }
-
-
-
-
-
-
 
 /**
  * @param {data} the callback function to GWU service if fails
@@ -78,10 +46,8 @@ function ajaxSuccess(data) {
 //  * Returns the GWU services fails.
 
 function ajaxFailure() {
-    // $('#error-message').show();
     displayErrorByCode();
 }
-
 
 /**
  * @param {id} the LoadData function to configure and start the request to GWU  service
@@ -93,8 +59,7 @@ function LoadData(protein_ac) {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("protein_details",protein_ac ),
-        // data: getDetailPostData(id),
+        url: getWsUrl("protein_detail", protein_ac),
         method: 'POST',
         success: ajaxSuccess,
         error: ajaxFailure
@@ -105,7 +70,7 @@ function LoadData(protein_ac) {
     $.ajax(ajaxConfig);
 
 }
-//getParameterByName function to extract query parameter from url
+//getParameterByName function to extract query parametes from url
 /**
  * @param {name} string for the name of the variable variable to extract from query string
  * @param {url}string with the complete url with query string values
