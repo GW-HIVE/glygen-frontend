@@ -1,5 +1,3 @@
-
-
 //@author: Rupali Mahadik
 
 
@@ -68,25 +66,25 @@ function getErrorMessage(errorCode) {
 
 }
 
-    /**
-     * Display Error message using alertify
-     */
-    function displayError(message, title) {
-        alertify.alert(title, message).set('modal', false);
-    }
+/**
+ * Display Error message using alertify
+ */
+function displayError(message, title) {
+    alertify.alert(title, message).set('modal', false);
+}
 
-    function displayErrorByCode(errorCode) {
-        var error = getErrorMessage(errorCode);
-        displayError(error.message, error.title);
-    }
+function displayErrorByCode(errorCode) {
+    var error = getErrorMessage(errorCode);
+    displayError(error.message, error.title);
+}
 
 
-    // /**
-    //  * Js load for adding header and footer file into each page
-    //
-    //
-    //  */
-    // $(document).ready(function () {
-    //     $("#footer").load("footer.html");
-    //     $("#header").load("header.html");
-    // });
+// /**
+//  * Js load for adding header and footer file into each page
+//
+//
+//  */
+// $(document).ready(function () {
+//     $("#footer").load("footer.html");
+//     $("#header").load("header.html");
+// });
