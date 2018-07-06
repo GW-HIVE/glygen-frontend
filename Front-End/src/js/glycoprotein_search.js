@@ -4,6 +4,7 @@
 //@update: 26 June 2018-web services changes updated
 
 
+
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
 
@@ -27,6 +28,8 @@ function addCommas(nStr) {
 }
 
 
+
+
 /**
  * function aminoLetter is a to select value of text-input
 
@@ -45,6 +48,7 @@ function aminoLetter(textareatxt) {
         return false;
     }
 }
+
 
 
 /** Protein field on change detect and suggest auto complete options from retrieved Json
@@ -165,9 +169,9 @@ var mass_max;
 var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
-        // max_selected_options: 10,
-        placeholder_text_multiple: "choose amino acid"
-    })
+            // max_selected_options: 10,
+            placeholder_text_multiple: "choose amino acid"
+        })
         .bind("chosen:maxselected2", function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
@@ -218,6 +222,7 @@ function mass(mass_min, mass_max) {
 }
 
 
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
@@ -263,6 +268,7 @@ function ajaxProteinSearchSuccess() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_protein"),
+        //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
         success: function (results) {
             if (results.list_id) {
@@ -274,6 +280,7 @@ function ajaxProteinSearchSuccess() {
         }
     });
 }
+
 
 
 // to resizing choosen field

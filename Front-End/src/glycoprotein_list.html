@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -11,204 +10,24 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
 <body onload="tracking()">
-    <script type="text/javascript" src="libraries/w3.js"></script>
-    <div w3-include-html="header.html"></div>
-    <script>
-        w3.includeHTML();
-    </script>
-    <!-- page content starts here -->
-    <div class="container">
-        <div class="row">
-            <div id="summary-table" class="col-md-12 col-xs-12">
-                <!-- Summary Table Goes Here -->
-            </div>
+<script type="text/javascript" src="libraries/w3.js"></script>
+<div w3-include-html="header.html"></div>
+<script>w3.includeHTML();</script>
+<!-- page content starts here -->
+<div class="container">
+    <div class="row">
+        <div id="summary-table" class="col-md-12 col-xs-12">
+            <!-- Summary Table Goes Here -->
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <form class="form-inline" onsubmit="return false;">
-                    <label>Page</label>
-                    <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
-                    <select class="page-select form-control" onchange="xpage(this);"></select>
-                    <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
-                    <label>Records per page</label>
-                    <select class="limit-select form-control" onchange="xlimit(this);">
-                        <option selected>25</option>
-                        <option>50</option>
-                        <option>75</option>
-                        <option>100</option>
-                    </select>
-                    <label>Sort By</label>
-                    <select class="sort-select form-control" onchange="xsort(this);">
-                        <!-- <option selected value="id">ID</option> -->
-                        <option value="protein_ac">Protein ID</option>
-                        <option value="gene_name">Gene Name</option>
-                        <option value="protein_name">Protein Name</option>
-                        <option value="mass">Mass</option>
-                        <option value="organism">Organism</option>
-                    </select>
-                    <select class="dir-select form-control" onchange="xdir(this);">
-                        <option value="asc" selected>ASC</option>
-                        <option value="desc">DESC</option>
-                    </select>
-                    <label class="searchresult"></label>
-                </form>
-            </div>
-        </div>
-        <!-- sorting_top-end -->
-        <script id="summary-template" type="text/template">
-            <div class="panel panel-default">
-                <div class="gg-panel-heading cd-faq-title">
-                    <!-- added new class -->
-                    <h6>
-
-                        <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                        <center>Result for Protein Search On:{{execution_time}}</center>
-                    </h6>
-                </div>
-                <table class="table table-hover">
-                    <tbody>
-
-                        <!--Protein Typeahead-->
-                        {{#protein_ac}}
-                        <tr>
-                            <td>Protein Id</td>
-                            <td>{{protein_ac}}</td>
-                        </tr>
-                        {{/protein_ac}}
-
-                        <!--mass-->
-
-                        {{#mass.min}}
-                        <tr>
-                            <td>Mass</td>
-                            {{#mass.min}}
-                            <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
-                            {{/mass.max}}
-                        </tr>
-                        {{/mass.min}}
-
-
-                        <!--Organism-->
-                        {{#organism}}
-                        <tr>
-                            <td>Organism</td>
-                            <td>{{organism}}</td>
-                        </tr>
-                        {{/organism}}
-
-                        <!--Protein name Typeahead-->
-
-                        {{#protein_name}}
-                        <tr>
-                            <td>Protein Name</td>
-                            <td>{{protein_name}}</td>
-                        </tr>
-                        {{/protein_name}}
-
-                        <!--Gene Typeahead-->
-
-                        {{#gene_name}}
-                        <tr>
-                            <td>Gene Name</td>
-                            <td>{{gene_name}}</td>
-                        </tr>
-                        {{/gene_name}}
-
-
-
-                        <!--Glycan Typeahead-->
-                        {{#glycan.glycan_ac}}
-                        <tr>
-                            <td>glycan</td>
-                            <td>{{glycan.glycan_ac}} {{glycan.relation}}</td>
-                        </tr>
-                        {{/glycan.glycan_ac}}
-
-
-
-
-                        <!--peptide seq-->
-                        {{#sequence.aa_sequence}}
-                        <tr>
-                            <td>Sequence</td>
-                            <td>
-                                <abbr class="limit-text-size" title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
-                                <span style="display:inline-block; overflow: auto;">{{sequence.type}}</span>
-                            </td>
-                        </tr>
-                        {{/sequence.aa_sequence}}
-
-                        <!--amino acid-->
-                        {{#glycosylated_aa_exists}}
-                        <tr>
-                            <td>Glycosylated Amino Acid</td>
-                            <td>
-                                {{#glycosylated_aa}} {{.}}
-                                <br/> {{/glycosylated_aa}}
-                            </td>
-                        </tr>
-                        {{/glycosylated_aa_exists}}
-
-                        <!--pathway Typeahead-->
-                        {{#pathway_id}}
-                        <tr>
-                            <td>PATHWAY ID</td>
-                            <td>{{pathway_id}}</td>
-                        </tr>
-                        {{/pathway_id}}
-
-                        <!--Glycosylation Evidences-->
-                        {{#glycosylation_evidence}}
-                        <tr>
-                            <td>Glycosylation_evidence</td>
-                            <td>{{glycosylation_evidence}}</td>
-                        </tr>
-                        {{/glycosylation_evidence}}
-
-
-
-
-                    </tbody>
-                </table>
-
-                <p align="center">
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
-                        class="red-tooltip">
-                        <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search
-                        </button>
-                    </a>
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-                    <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
-                </p>
-            </div>
-        </script>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <table id="gen-table" data-show-export="true" data-toggle="table">
-                    <thead>
-                        <tr>
-                            <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
-                            <th data-field="gene_name">Gene Name </th>
-                            <th data-field="protein_name">Protein Name</th>
-                            <th data-field="mass" data-formatter="MassFormatter">Native Mass
-                                <br>(Da)
-                            </th>
-                            <th data-field="organism">Organism </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-        <!-- table container ends here -->
-        <!-- sorting_bottom -->
-        <div class="col-md-12 col-xs-12" id="sortbottom">
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
             <form class="form-inline" onsubmit="return false;">
                 <label>Page</label>
-                <button type="button previ" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
+                <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
                 <select class="page-select form-control" onchange="xpage(this);"></select>
-                <button type="button next" class="btn btn-default nextbutton" onclick="next();">Next</button>
+                <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
                 <label>Records per page</label>
                 <select class="limit-select form-control" onchange="xlimit(this);">
                     <option selected>25</option>
@@ -218,9 +37,10 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option value="Protein_ac">Protein ID</option>
+                    <!-- <option selected value="id">ID</option> -->
+                    <option value="protein_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
-                    <option value="protein_name_long">Protein Name</option>
+                    <option value="protein_name">Protein Name</option>
                     <option value="mass">Mass</option>
                     <option value="organism">Organism</option>
                 </select>
@@ -230,39 +50,210 @@
                 </select>
                 <label class="searchresult"></label>
             </form>
-            <!--<label class="searchresult"></label>-->
         </div>
     </div>
-    <div w3-include-html="footer.html"></div>
-    <script>
-        w3.includeHTML();
-    </script>
-    <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
-    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <!-- script for table -->
-    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-    <!-- script for time for queryserach -->
-    <script type="text/javascript" src="libraries/moment.js"></script>
-    <!-- script for template engine -->
-    <script type="text/javascript" src="libraries/mustache.js"></script>
-    <!-- script for getting Web Service URLs -->
-    <script type="text/javascript" src="js/ws_url.js"></script>
-    <!-- script for handling errror -->
-    <!-- script for glycan list page -->
-    <script type="text/javascript" src="js/glycoprotein_list.js"></script>
-    <!-- script for third party-->
-    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-    <!-- script for getting Web Service URLs -->
-    <script type="text/javascript" src="libraries/alertify.js"></script>
-    <!-- script for third party alert-->
-    <script src="js/activity_tracker.js"></script>
-    <!-- script for navaigation -->
-    <script src="js/navbar.js"></script>
-    <!--  w3 including footer-->
-    <!-- script for editing users search  -->
-    <script src="js/editsearch.js"></script>
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
-</body>
+    <!-- sorting_top-end -->
+    <script id="summary-template" type="text/template">
+        <div class="panel panel-default">
+            <div class="gg-panel-heading cd-faq-title">
+                <!-- added new class -->
+                <h6>
 
+                    <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
+                    <center>Result for Protein Search On:{{execution_time}}</center>
+                </h6>
+            </div>
+            <table class="table table-hover">
+                <tbody>
+
+                <!--Protein Typeahead-->
+                {{#protein_ac}}
+                <tr>
+                    <td>Protein Id</td>
+                    <td>{{protein_ac}}</td>
+                </tr>
+                {{/protein_ac}}
+
+                <!--mass-->
+
+                {{#mass.min}}
+                <tr>
+                    <td>Mass</td>
+                    {{#mass.min}}
+                    <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
+                    {{/mass.max}}
+                </tr>
+                {{/mass.min}}
+
+
+                <!--Organism-->
+                {{#organism}}
+                <tr>
+                    <td>Organism</td>
+                    <td>{{organism}}</td>
+                </tr>
+                {{/organism}}
+
+                <!--Protein name Typeahead-->
+
+                {{#protein_name}}
+                <tr>
+                    <td>Protein Name</td>
+                    <td>{{protein_name}}</td>
+                </tr>
+                {{/protein_name}}
+
+                <!--Gene Typeahead-->
+
+                {{#gene_name}}
+                <tr>
+                    <td>Gene Name</td>
+                    <td>{{gene_name}}</td>
+                </tr>
+                {{/gene_name}}
+
+
+
+                <!--Glycan Typeahead-->
+                {{#glycan.glycan_ac}}
+                <tr>
+                    <td>glycan</td>
+                    <td>{{glycan.glycan_ac}} {{glycan.relation}}</td>
+                </tr>
+                {{/glycan.glycan_ac}}
+
+
+
+
+                <!--peptide seq-->
+                {{#sequence.aa_sequence}}
+                <tr>
+                    <td>Sequence</td>
+                    <td><abbr class="limit-text-size" title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
+                </tr>
+                {{/sequence.aa_sequence}}
+
+                <!--amino acid-->
+                {{#glycosylated_aa_exists}}
+                <tr>
+                    <td>Glycosylated Amino Acid</td>
+                    <td>
+                        {{#glycosylated_aa}}
+                        {{.}}<br/>
+                        {{/glycosylated_aa}}
+                    </td>
+                </tr>
+                {{/glycosylated_aa_exists}}
+
+                <!--pathway Typeahead-->
+                {{#pathway_id}}
+                <tr>
+                    <td>PATHWAY ID</td>
+                    <td>{{pathway_id}}</td>
+                </tr>
+                {{/pathway_id}}
+
+                <!--Glycosylation Evidences-->
+                {{#glycosylation_evidence}}
+                <tr>
+                    <td>Glycosylation_evidence</td>
+                    <td>{{glycosylation_evidence}}</td>
+                </tr>
+                {{/glycosylation_evidence}}
+
+
+
+
+                </tbody>
+            </table>
+
+            <p align="center">
+                <a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
+                   class="red-tooltip">
+                    <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search
+                    </button>
+                </a>
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+            </p>
+        </div>
+    </script>
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <table id="gen-table" data-show-export="true" data-toggle="table">
+                <thead>
+                <tr>
+                    <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
+                    <th data-field="gene_name">Gene Name </th>
+                    <th data-field="protein_name">Protein Name</th>
+                    <th data-field="mass" data-formatter="MassFormatter">Native Mass
+                        <br>(Da)
+                    </th>
+                    <th data-field="organism">Organism </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- table container ends here -->
+    <!-- sorting_bottom -->
+    <div class="col-md-12 col-xs-12" id="sortbottom">
+        <form class="form-inline" onsubmit="return false;">
+            <label>Page</label>
+            <button type="button previ" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
+            <select class="page-select form-control" onchange="xpage(this);"></select>
+            <button type="button next" class="btn btn-default nextbutton" onclick="next();">Next</button>
+            <label>Records per page</label>
+            <select class="limit-select form-control" onchange="xlimit(this);">
+                <option selected>25</option>
+                <option>50</option>
+                <option>75</option>
+                <option>100</option>
+            </select>
+            <label>Sort By</label>
+            <select class="sort-select form-control" onchange="xsort(this);">
+                <option value="Protein_ac">Protein ID</option>
+                <option value="gene_name">Gene Name</option>
+                <option value="protein_name_long">Protein Name</option>
+                <option value="mass">Mass</option>
+                <option value="organism">Organism</option>
+            </select>
+            <select class="dir-select form-control" onchange="xdir(this);">
+                <option value="asc" selected>ASC</option>
+                <option value="desc">DESC</option>
+            </select>
+            <label class="searchresult"></label>
+        </form>
+        <!--<label class="searchresult"></label>-->
+    </div>
+</div>
+<div w3-include-html="footer.html"></div>
+<script>w3.includeHTML();</script>
+<!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
+<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+<!-- script for table -->
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+<!-- script for time for queryserach -->
+<script type="text/javascript" src="libraries/moment.js"></script>
+<!-- script for template engine -->
+<script type="text/javascript" src="libraries/mustache.js"></script>
+<!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="js/ws_url.js"></script>
+<!-- script for handling errror -->
+<!-- script for glycan list page -->
+<script type="text/javascript" src="js/glycoprotein_list.js"></script>
+<!-- script for third party-->
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="libraries/alertify.js"></script>
+<!-- script for third party alert-->
+<script src="js/activity_tracker.js"></script>
+<!-- script for navaigation -->
+<script src="js/navbar.js"></script>
+<!--  w3 including footer-->
+<!-- script for editing users search  -->
+<script src="js/editsearch.js"></script>
+<!-- script for error-message/header-footer js -->
+<script src="js/utility.js"></script>
+</body>
 </html>

@@ -6,7 +6,7 @@
  */
 
 function setFormValues(data) {
-
+   
     if (data.query) {
         $("#glycan_id").val(data.query.glycan_ac);
         if (data.query.mass) {
@@ -15,10 +15,10 @@ function setFormValues(data) {
         }
         $("#organism").val(data.query.organism);
         $("#ddl").val(data.query.glycan_type);
-        var types = document.getElementById('ddl');
+       var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
         // create subtypes
-        configureDropDownLists(types, subtypes, function () {
+        configureDropDownLists(types, subtypes, function() {
             $("#ddl2").val(data.query.glycan_subtype);
         });
         // $("#enzyme").val(data.query.enzyme);
@@ -34,8 +34,8 @@ function setFormValues(data) {
  *
  */
 function setProteinFormValues(data) {
-    //alert(data.results.protein_id)
-    //data1 = JSON.parse(data);
+//alert(data.results.protein_id)
+  //data1 = JSON.parse(data);
     if (data.query) {
         $("#protein").val(data.query.protein_ac);
         if (data.query.mass) {
@@ -48,16 +48,16 @@ function setProteinFormValues(data) {
         $("#pathway").val(data.query.pathway_id);
         $("#sequences").val(data.query.sequence.aa_sequence);
         $("#glycosylated_aa").val(data.query.glycosylated_aa);
-        $("#glycosylation_evidence").val(data.query.glycosylation_evidence);
+        $("#glycosylation_evidence").val(data.query.glycosylation_evidence);  
     }
 }
 
 /**
  * fail to to get search data
- * @param {object} data - The Retreive data
- *
- *
- */
+* @param {object} data - The Retreive data
+*
+*
+*/
 function failToRetreiveSearch(data) {
     displayErrorByCode('server_down');
 }
@@ -110,3 +110,4 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+

@@ -13,8 +13,8 @@ function ajaxSuccess(data) {
 
     $container.html(html);
 
-    $container.find('.open-close-button').each(function (i, element) {
-        $(element).on('click', function () {
+    $container.find('.open-close-button').each(function(i, element) {
+        $(element).on('click', function() {
             var $this = $(this);
             var buttonText = $this.text();
 
@@ -62,7 +62,6 @@ function LoadData(protein_ac) {
     $.ajax(ajaxConfig);
 
 }
-
 //getParameterByName function to extract query parametes from url
 /**
  * @param {name} string for the name of the variable variable to extract from query string
@@ -82,7 +81,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     var protein_ac = getParameterByName('protein_ac');
     LoadData(protein_ac);
 });

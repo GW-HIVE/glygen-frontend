@@ -4,6 +4,7 @@
 //@update: 26 June 2018-web services changes updated
 
 
+
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
 
@@ -45,6 +46,7 @@ function aminoLetter(textareatxt) {
         return false;
     }
 }
+
 
 
 /** Protein field on change detect and suggest auto complete options from retrieved Json
@@ -195,6 +197,7 @@ function mass(mass_min, mass_max) {
 }
 
 
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
@@ -241,6 +244,7 @@ function ajaxProteinSearchSuccess() {
         }
     });
 }
+
 
 
 // to resizing choosen field
