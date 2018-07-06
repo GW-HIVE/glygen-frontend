@@ -29,11 +29,12 @@
     <!-- Modernizr -->
     <script src="js/modernizr.js"></script>
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
 <style>
-    .fasta{
+    .fasta {
 
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -89,7 +90,7 @@
             <!-- Accession  starts here for page -->
 
             <ul id="basics0" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
+                <li class="cd-faq-title"/>
                 <!-- added new class -->
                 <div class="panel panel-default ">
 
@@ -105,16 +106,21 @@
                                 {{#protein_id}}
                                 <li class="list-group">Uniprot-Entry Name:
                                     <a class="panelcontent" href="http://www.uniprot.org/uniprot/accession"
-                                        target="_blank">{{protein_id}}</a>
-                                </li>{{/protein_id}}
+                                       target="_blank">{{protein_id}}</a>
+                                </li>
+                                {{/protein_id}}
 
-                                <li class="list-group">Monoisotopic Mass:{{mass.monoisotopic_mass}} Da </li>
+                                <li class="list-group">Monoisotopic Mass:{{mass.monoisotopic_mass}} Da</li>
                                 <li class="list-group">Chemical Mass:{{mass.chemical_mass}}</li>
-                                {{#recommendedname}}<li class="list-group">Recommended Name:{{recommendedname.full}}{{ecommendedname.short}}</li>{{/recommendedname}}
+                                {{#recommendedname}}
+                                <li class="list-group">Recommended
+                                    Name:{{recommendedname.full}}{{ecommendedname.short}}
+                                </li>
+                                {{/recommendedname}}
                                 <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
-                             <!--{{#hasFullName }} <p class="panelmaincontent">Name:{{recommendedName.full}}({{recommendedName.short}}) {{/hasFullName }}-->
-                           {{#alternativenames}}
-                                 <li class="list-group">{{full}}  ({{short}})</li>
+                                <!--{{#hasFullName }} <p class="panelmaincontent">Name:{{recommendedName.full}}({{recommendedName.short}}) {{/hasFullName }}-->
+                                {{#alternativenames}}
+                                <li class="list-group">{{full}} ({{short}})</li>
                                 {{/alternativenames}}
 
                             </div>
@@ -127,7 +133,7 @@
             <!-- cd-faq-group -->
 
             <ul id="basics1" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
+                <li class="cd-faq-title"/>
                 <!-- added new class -->
                 <div class="panel panel-default">
 
@@ -143,7 +149,9 @@
                                 <p class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     {{name}} (NCBI taxonomy ID:
-                                    <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id" target="_blank">{{taxid}} </a>)
+                                    <a class="panelcontent"
+                                       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id"
+                                       target="_blank">{{taxid}} </a>)
                                 </p>
                                 <ul style="display:none;">
                                     {{#evidence}}
@@ -158,156 +166,151 @@
                         {{^species}} No data available. {{/species}}
                     </div>
                 </div>
-    </div>
-
-    </ul>
-    <!-- cd-faq-group -->
-
-
-
-
-    <!-- cd-faq-group -->
-    <ul id="basics2" class="cd-faq-group selected">
-        <li class="cd-faq-title" />
-        <!-- added new class -->
-        <div class="panel panel-default">
-
-            <div class="gg-panel-heading">
-                <!-- added new class -->
-                <h4>Sequence</h4>
-
-            </div>
-            <div class="panel-body">
-                <!-- added new class -->
-                <span class="fasta">{{ sequence.sequence }}</span>
-
-            </div>
-        </div>
-    </ul>
-
-
-
-
-
-    <ul id="basics3" class="cd-faq-group selected">
-        <!-- added new class -->
-        <!-- Glycan Cross Referance panel starts here for page -->
-        <div class="panel panel-default">
-
-            <div class="gg-panel-heading">
-                <!-- added new class -->
-                <h4>Cross Reference</h4>
-
-            </div>
-            <div class="panel-body">
-                <!-- added new class -->
-                {{#crossref}}
-                <p class="panelmaincontent">
-                    <li class="list-group" id="panelmaincontent1">{{database}}:
-                        <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
-                    </li>
-                </p>
-                {{/crossref}} {{^crossref}} No data available. {{/crossref}}
-            </div>
-        </div>
-    </ul>
-    <!-- cd-faq-group -->
-
-    <ul id="basics4" class="cd-faq-group selected">
-        <li class="cd-faq-title" />
-        <!-- added new class -->
-        <div class="panel panel-default">
-
-            <div class="gg-panel-heading">
-                <!-- added new class -->
-                <h4>Keywords</h4>
-            </div>
-            <div class="panel-body">
-                <!-- added new class -->
-                <div class="row">
-                    <div class='col-md-12 col-xs-12'>
-                    {{#keywords}}
-
-                    <li class="list-group">{{.}}</li>
-
-                    {{/keywords}}
                 </div>
-                </div>
-                {{^keywords}} No data available. {{/keywords}}
-            </div>
-        </div>
-        </div>
 
-    </ul>
+            </ul>
+            <!-- cd-faq-group -->
 
-    <ul id="basics5" class="cd-faq-group selected">
-        <li class="cd-faq-title" />
-        <!-- added new class -->
-        <div class="panel panel-default">
 
-            <div class="gg-panel-heading">
+            <!-- cd-faq-group -->
+            <ul id="basics2" class="cd-faq-group selected">
+                <li class="cd-faq-title"/>
                 <!-- added new class -->
-                <h4>Isoforms</h4>
-            </div>
-            <div class="panel-body">
-                <!-- added new class -->
-                <div class="row">
-                    {{#isoforms}}
-                    <div class='col-md-12 col-xs-12'>
-                        <p class="panelmaincontent">
+                <div class="panel panel-default">
 
-                            <a href="{{{url}}}" target="_blank">{{id}}</a>
-                            <!--<a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id" target="_blank">{{taxid}} </a>)-->
-                        </p>
-                        <span class="fasta">{{sequence.sequence}}</span>
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Sequence</h4>
+
                     </div>
-                    {{/isoforms}}
+                    <div class="panel-body">
+                        <!-- added new class -->
+                        <span class="fasta">{{ sequence.sequence }}</span>
+
+                    </div>
                 </div>
-                {{^isoforms}} No data available. {{/isoforms}}
-            </div>
-        </div>
-        </div>
+            </ul>
 
-    </ul>
 
-    <!--<ul id="basics6" class="cd-faq-group selected">-->
-        <!--<li class="cd-faq-title" />-->
-        <!--&lt;!&ndash; added new class &ndash;&gt;-->
-        <!--<div class="panel panel-default">-->
+            <ul id="basics3" class="cd-faq-group selected">
+                <!-- added new class -->
+                <!-- Glycan Cross Referance panel starts here for page -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Cross Reference</h4>
+
+                    </div>
+                    <div class="panel-body">
+                        <!-- added new class -->
+                        {{#crossref}}
+                        <p class="panelmaincontent">
+                        <li class="list-group" id="panelmaincontent1">{{database}}:
+                            <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
+                        </li>
+                        </p>
+                        {{/crossref}} {{^crossref}} No data available. {{/crossref}}
+                    </div>
+                </div>
+            </ul>
+            <!-- cd-faq-group -->
+
+            <ul id="basics4" class="cd-faq-group selected">
+                <li class="cd-faq-title"/>
+                <!-- added new class -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Keywords</h4>
+                    </div>
+                    <div class="panel-body">
+                        <!-- added new class -->
+                        <div class="row">
+                            <div class='col-md-12 col-xs-12'>
+                                {{#keywords}}
+
+                                <li class="list-group">{{.}}</li>
+
+                                {{/keywords}}
+                            </div>
+                        </div>
+                        {{^keywords}} No data available. {{/keywords}}
+                    </div>
+                </div>
+                </div>
+
+            </ul>
+
+            <ul id="basics5" class="cd-faq-group selected">
+                <li class="cd-faq-title"/>
+                <!-- added new class -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Isoforms</h4>
+                    </div>
+                    <div class="panel-body">
+                        <!-- added new class -->
+                        <div class="row">
+                            {{#isoforms}}
+                            <div class='col-md-12 col-xs-12'>
+                                <p class="panelmaincontent">
+
+                                    <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                    <!--<a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id" target="_blank">{{taxid}} </a>)-->
+                                </p>
+                                <span class="fasta">{{sequence.sequence}}</span>
+                            </div>
+                            {{/isoforms}}
+                        </div>
+                        {{^isoforms}} No data available. {{/isoforms}}
+                    </div>
+                </div>
+                </div>
+
+            </ul>
+
+            <!--<ul id="basics6" class="cd-faq-group selected">-->
+            <!--<li class="cd-faq-title" />-->
+            <!--&lt;!&ndash; added new class &ndash;&gt;-->
+            <!--<div class="panel panel-default">-->
 
             <!--<div class="gg-panel-heading">-->
-                <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                <!--<h4>Glycosylation</h4>-->
+            <!--&lt;!&ndash; added new class &ndash;&gt;-->
+            <!--<h4>Glycosylation</h4>-->
             <!--</div>-->
             <!--<div class="panel-body">-->
-                <!--<div class="row">-->
-                    <!--<table id="glycosylation-table"></table>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                <!--<div class="row">-->
-                    <!--{{#glycosylation}}-->
-                    <!--<div class='col-md-12 col-xs-12'>-->
-                        <!--<p class="panelmaincontent">-->
-                            <!--<button class="open-close-button">+</button>-->
-                            <!--{{residue}}{{position}}- -->
-                            <!--<a href="http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_detail.html?id={{glycan_ac}}">{{glycan_ac}}</a>-{{glycan_type}}-->
-                        <!--</p>-->
-                        <!--<ul style="display:none;">-->
-                            <!--{{#evidence}}-->
-                            <!--<li>{{database}} :-->
-                                <!--<a href="{{{url}}}" target="_blank">{{id}}</a>-->
-                            <!--</li>-->
-                            <!--{{/evidence}}-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                    <!--{{/glycosylation}}-->
-                <!--</div>-->
-                <!--{{^glycosylation}} No data available. {{/glycosylation}}-->
+            <!--<div class="row">-->
+            <!--<table id="glycosylation-table"></table>-->
             <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+            <!--&lt;!&ndash; added new class &ndash;&gt;-->
+            <!--<div class="row">-->
+            <!--{{#glycosylation}}-->
+            <!--<div class='col-md-12 col-xs-12'>-->
+            <!--<p class="panelmaincontent">-->
+            <!--<button class="open-close-button">+</button>-->
+            <!--{{residue}}{{position}}- -->
+            <!--<a href="http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_detail.html?id={{glycan_ac}}">{{glycan_ac}}</a>-{{glycan_type}}-->
+            <!--</p>-->
+            <!--<ul style="display:none;">-->
+            <!--{{#evidence}}-->
+            <!--<li>{{database}} :-->
+            <!--<a href="{{{url}}}" target="_blank">{{id}}</a>-->
+            <!--</li>-->
+            <!--{{/evidence}}-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--{{/glycosylation}}-->
+            <!--</div>-->
+            <!--{{^glycosylation}} No data available. {{/glycosylation}}-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
 
-    <!--</ul>-->
+            <!--</ul>-->
             <ul id="basics6" class="cd-faq-group selected">
                 <!-- added new class -->
                 <div class="panel panel-default">
@@ -318,7 +321,8 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <table id="glycosylation-table" data-sortable="true" data-toggle="table" data-detail-view="true" data-detail-formatter="detailFormat"
+                            <table id="glycosylation-table" data-sortable="true" data-toggle="table"
+                                   data-detail-view="true" data-detail-formatter="detailFormat"
                                    data-page-size="10">
                             </table>
                         </div>
@@ -349,38 +353,30 @@
             </ul>
 
 
-
-
-
-
-
-
-
-
-
-    <ul id="basics7" class="cd-faq-group selected">
-        <li class="cd-faq-title" />
-        <!-- added new class -->
-        <!-- Glycan Enzymes starts here for page -->
-        <div class="panel panel-default">
-
-            <div class="gg-panel-heading">
-                <h4>Publication</h4>
-
-            </div>
-            <div class="panel-body">
+            <ul id="basics7" class="cd-faq-group selected">
+                <li class="cd-faq-title"/>
                 <!-- added new class -->
-                {{#publication}}
-                <li class="panelmaincontent2">
-                    <li>Journal:{{journal}}</li>
-                    <li>{{title}}</li>
-                    <li>
-                        <i class="fas fa-book"></i><a href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}">{{pmid}}</a>
-                    </li>
-                    {{/publication}} {{^publication}} No data available. {{/publication}}
-            </div>
-        </div>
-    </ul>
+                <!-- Glycan Enzymes starts here for page -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <h4>Publication</h4>
+
+                    </div>
+                    <div class="panel-body">
+                        <!-- added new class -->
+                        {{#publication}}
+                        <li class="panelmaincontent2">
+                        <li>Journal:{{journal}}</li>
+                        <li>{{title}}</li>
+                        <li>
+                            <i class="fas fa-book"></i><a
+                                href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}">{{pmid}}</a>
+                        </li>
+                        {{/publication}} {{^publication}} No data available. {{/publication}}
+                    </div>
+                </div>
+            </ul>
 
 
             <a href="#0" class="cd-close-panel">Close</a>

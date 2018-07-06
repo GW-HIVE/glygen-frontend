@@ -1,4 +1,3 @@
-
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
 //@Date:19th Feb 2018. with dummy web service
@@ -7,45 +6,42 @@
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 
 
-
-
-
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
 
- 
+
  */
 function ajaxSuccess(data) {
-  var template = $('#item_template').html();
-  data.hasMotifs = (data.motifs && (data.motifs.length > 0));
-  data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
+    var template = $('#item_template').html();
+    data.hasMotifs = (data.motifs && (data.motifs.length > 0));
+    data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
 
-  data.imagePath = getWsUrl('glycan_image', data.glycan_ac);
+    data.imagePath = getWsUrl('glycan_image', data.glycan_ac);
 
-  //var glyco = row.glycoct.replace(/ /g, '\n');
-  var html = Mustache.to_html(template, data);
-  var $container = $('#content');
+    //var glyco = row.glycoct.replace(/ /g, '\n');
+    var html = Mustache.to_html(template, data);
+    var $container = $('#content');
 
-  $container.html(html);
+    $container.html(html);
 
-  $container.find('.open-close-button').each(function (i, element) {
-    $(element).on('click', function () {
-      var $this = $(this);
-      var buttonText = $this.text();
+    $container.find('.open-close-button').each(function (i, element) {
+        $(element).on('click', function () {
+            var $this = $(this);
+            var buttonText = $this.text();
 
-      if (buttonText === '+') {
-        $this.text('-');
-        $this.parent().next().show();
-      } else {
-        $this.text('+');
-        $this.parent().next().hide();
-      
+            if (buttonText === '+') {
+                $this.text('-');
+                $this.parent().next().show();
+            } else {
+                $this.text('+');
+                $this.parent().next().hide();
 
-      }
+
+            }
+        });
     });
-  });
-  activityTracker("user", data.glycan_ac, "successful response");
+    activityTracker("user", data.glycan_ac, "successful response");
 }
 
 /**
@@ -58,6 +54,7 @@ function ajaxFailure() {
     displayErrorByCode();
     activityTracker("error", data.glycan_ac, "server down");
 }
+
 /**
  * @param {id} the LoadData function to configure and start the request to GWU  service
  */
@@ -66,20 +63,21 @@ function ajaxFailure() {
 
 function LoadData(glycan_ac) {
 
-  var ajaxConfig = {
-    dataType: "json",
-    url: getWsUrl("glycan_detail", glycan_ac),
-    // data: getDetailPostData(id),
-    method: 'POST',
-    success: ajaxSuccess,
-    error: ajaxFailure
-  };
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("glycan_detail", glycan_ac),
+        // data: getDetailPostData(id),
+        method: 'POST',
+        success: ajaxSuccess,
+        error: ajaxFailure
+    };
 
-  
-  // calls the service
-  $.ajax(ajaxConfig);
+
+    // calls the service
+    $.ajax(ajaxConfig);
 
 }
+
 //getParameterByName function to extract query parametes from url
 /**
  * @param {name} string for the name of the variable variable to extract from query string
@@ -90,16 +88,16 @@ function LoadData(glycan_ac) {
 
 
 function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 $(document).ready(function () {
-  var glycan_ac = getParameterByName('glycan_ac');
-  LoadData(glycan_ac);
+    var glycan_ac = getParameterByName('glycan_ac');
+    LoadData(glycan_ac);
 });

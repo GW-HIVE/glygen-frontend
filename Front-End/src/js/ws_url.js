@@ -27,7 +27,7 @@ function getWsUrl(request, id) {
 
 
 
-            //Glycan webservices
+        //Glycan webservices
         case "search_init_glycan":
             return ws_base_glycan + "/search_init";
             break;
@@ -47,7 +47,7 @@ function getWsUrl(request, id) {
 
 
 
-            //Protein webservices
+        //Protein webservices
         case "search_init_protein":
             return ws_base_protein + "/search_init";
             break;
@@ -65,7 +65,7 @@ function getWsUrl(request, id) {
             break;
 
 
-            //Typeahead webservices
+        //Typeahead webservices
 
         case "type-ahead":
             return ws_base_typeahead;
@@ -78,10 +78,10 @@ function getWsUrl(request, id) {
 
 
 /**
-    * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
- 
-     * @param {string} id -  serach ID
-  */
+ * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
+
+ * @param {string} id -  serach ID
+ */
 
 function getListPostData(id, page, sort, dir, limit) {
     var query = {};

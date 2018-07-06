@@ -8,7 +8,7 @@
  */
 
 String.prototype.trunc = String.prototype.trunc ||
-    function(n) {
+    function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
 var id = '';
@@ -16,7 +16,7 @@ var page = 1;
 var sort = 'protein_name_long';
 var dir = $('.dir-select').val();
 var url = getWsUrl('protein_list');
-var limit =25;
+var limit = 25;
 
 /**
  * Reads a new limit and reloads the data.
@@ -36,6 +36,7 @@ function next() {
     $(".page-select").val(page);
     LoadDataList();
 }
+
 /**
  * Loads the Previous page of results
  */
@@ -85,7 +86,7 @@ function xdir(element) {
  * @param {integer} limit - The limit is records per page
  * @returns {number} Number of pages
  */
-function noOfPage(total_length,limit){
+function noOfPage(total_length, limit) {
     var size = Math.ceil(total_length / limit);
     return size;
 }
@@ -95,8 +96,8 @@ function noOfPage(total_length,limit){
  * totalNoSearch show user total search result.
  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
  */
-function totalNoSearch(total_length){
-    $('.searchresult').html(" You Found  " + total_length +" results of protein");
+function totalNoSearch(total_length) {
+    $('.searchresult').html(" You Found  " + total_length + " results of protein");
 
 }
 
@@ -108,11 +109,11 @@ function totalNoSearch(total_length){
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildPages(paginationInfo){
+function buildPages(paginationInfo) {
     var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
     var pageSelectors = $(".page-select");
     pageSelectors.empty();
-    for(var i=1; i <= total_length; i++){
+    for (var i = 1; i <= total_length; i++) {
         pageSelectors.append($("<option></option>").attr("value", i).text(i));
     }
     pageSelectors.val(page);
@@ -125,8 +126,8 @@ function buildPages(paginationInfo){
      * this works for enabling and disable prev and next button.
 
      */
-    $(".prevbutton").attr("disabled", (page==1));
-    $(".nextbutton").attr("disabled", (page==total_length));
+    $(".prevbutton").attr("disabled", (page == 1));
+    $(".nextbutton").attr("disabled", (page == total_length));
 }
 
 
@@ -137,7 +138,7 @@ function buildPages(paginationInfo){
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildSummary (queryInfo) {
+function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -148,17 +149,16 @@ function buildSummary (queryInfo) {
 /**
  * Redirect to Page index page or search back
  */
-function redirectPage1()
-{
+function redirectPage1() {
     window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
 }
-function redirectPage2()
-{
+
+function redirectPage2() {
     window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html";
 }
 
 
-$(document).ready(function(){
+$(document).ready(function () {
     $("demosearch").tooltip();
 });
 
@@ -173,9 +173,10 @@ $(document).ready(function(){
 
 function editSearch() {
     {
-        window.location.replace("glycoprotein_search.html?id="+id);
+        window.location.replace("glycoprotein_search.html?id=" + id);
     }
 }
+
 /**
 
  * Format function to create link to the details page
@@ -186,7 +187,6 @@ function editSearch() {
 function PageFormat(value, row, index, field) {
     return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
 }
-
 
 
 /**
@@ -229,8 +229,6 @@ function DetailFormat(index, row) {
 }
 
 
-
-
 /**
 
  * updateSearch function of the detail table when opening each row [+]
@@ -242,6 +240,7 @@ function DetailFormat(index, row) {
  */
 
 var lastSearch;
+
 function updateSearch() {
     console.log(lastSearch.query);
     $.ajax({
@@ -259,9 +258,6 @@ function updateSearch() {
         error: ajaxFailure
     });
 }
-
-
-
 
 
 /**
@@ -286,7 +282,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var protein = data.results[i];
                 items.push({
-                    protein_ID: protein.protein_ac,
+                    protein_ac: protein.protein_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
@@ -303,7 +299,7 @@ function ajaxListSuccess(data) {
 
         buildSummary(data.query);
 
-        document.title='Glycoprotein-list';
+        document.title = 'Glycoprotein-list';
         lastSearch = data;
     }
 
@@ -311,7 +307,6 @@ function ajaxListSuccess(data) {
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure() {
-//  $('#error-message').show();
     displayErrorByCode('server_down');
 }
 

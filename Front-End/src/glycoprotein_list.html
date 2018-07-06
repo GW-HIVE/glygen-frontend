@@ -1,3 +1,8 @@
+<!--//@author: Rupali Mahadik-->
+<!--// @description: UO1 Version-1.1.-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,7 +118,6 @@
                 {{/gene_name}}
 
 
-
                 <!--Glycan Typeahead-->
                 {{#glycan.glycan_ac}}
                 <tr>
@@ -123,13 +127,13 @@
                 {{/glycan.glycan_ac}}
 
 
-
-
                 <!--peptide seq-->
                 {{#sequence.aa_sequence}}
                 <tr>
                     <td>Sequence</td>
-                    <td><abbr class="limit-text-size" title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
+                    <td><abbr class="limit-text-size"
+                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span
+                            style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
                 </tr>
                 {{/sequence.aa_sequence}}
 
@@ -162,15 +166,15 @@
                 {{/glycosylation_evidence}}
 
 
-
-
                 </tbody>
             </table>
 
             <p align="center">
-                <a href="#" data-toggle="tooltip" data-placement="left" title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
+                <a href="#" data-toggle="tooltip" data-placement="left"
+                   title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
                    class="red-tooltip">
-                    <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update Search
+                    <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update
+                        Search
                     </button>
                 </a>
                 &nbsp; &nbsp; &nbsp; &nbsp;
@@ -184,12 +188,12 @@
                 <thead>
                 <tr>
                     <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
-                    <th data-field="gene_name">Gene Name </th>
+                    <th data-field="gene_name">Gene Name</th>
                     <th data-field="protein_name">Protein Name</th>
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
                         <br>(Da)
                     </th>
-                    <th data-field="organism">Organism </th>
+                    <th data-field="organism">Organism</th>
                 </tr>
                 </thead>
             </table>
