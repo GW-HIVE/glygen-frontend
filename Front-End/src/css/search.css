@@ -73,11 +73,6 @@ input[type=submit]:hover {
         margin-left: 25px;
     }
 
-.max-value-alignment {
-    text-align: right;
-    padding-right: 0;
-}
-
 .gg-text-example {
     margin-top: 3px;
     padding-left: 4px;
@@ -85,7 +80,7 @@ input[type=submit]:hover {
 }
 
 .gg-form-group {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 h6 {
@@ -201,5 +196,6 @@ select {
 }
 #aminos{
     color:#2E78B7;
+    text-align: center;
 }
 
