@@ -132,6 +132,7 @@ function getParameterByName(name, url) {
 
 $(document).ready(function () {
     var protein_ac = getParameterByName('protein_ac');
+    document.title = protein_ac + " Detail";   //updates title with the protein ID
     LoadData(protein_ac);
 });
 
