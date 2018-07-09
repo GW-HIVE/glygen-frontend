@@ -44,7 +44,8 @@ function logID() {
             displayBannerMsg(txt);
             activityTracker("user", "", "");
 
-        }
+        },
+        failure: console.log(data.error_code)
     });
 
 }
@@ -77,14 +78,28 @@ function activityTracker(type, id, message) {
         user = "Anonymous";
     }
     var data = {
-        user_id: user,
-        page: window.location.pathname,
-        type: type,                       //we can pass this value from onclick function "user"
-        id: id,             //we can get the value either from the url or from the web service. "glycan/search ID"
-        message: message
+        "id": id,                         //  "glycan/search ID"
+        "user": user,
+        "type": type,                     //    "user" or "error"
+        "page": window.location.pathname,
+        "message": message
     };
     console.log(data);
-    $.post(getWsUrl("log_activity"), { log: data });
+    $.post(getWsUrl("log_activity"), { query: JSON.stringify(data) })
+        .done(function(resp){
+            console.log(resp);
+        })
+        .fail(function (resp) {
+            console.log(resp);
+        });
+    // $.ajax({
+    //     dataType: "json",
+    //     method: "POST",
+    //     url: getWsUrl("log_activity"),
+    //     data: data,
+    //     success: function(resp){console.log(resp); console.log(data);},
+    //     error: function(resp){console.log(resp)}
+    //   });
 }
 // End @author: Gaurav Agarwal
 
