@@ -9,11 +9,13 @@
 
 function getWsUrl(request, id) {
 
-    var ws_base_glycan = "http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan";
-    var ws_base_protein = "http://glygen-vm-tst.biochemistry.gwu.edu/api/protein";
-    var ws_base_typeahead = "http://glygen-vm-tst.biochemistry.gwu.edu/api/typeahead";
-    var ws_logging = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/logging";
-    var ws_userID = "http://glygen-vm-prd.biochemistry.gwu.edu/api/auth/userid";
+    var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
+    
+    var ws_base_glycan = ws_base+"glycan";
+    var ws_base_protein = ws_base+"protein";
+    var ws_base_typeahead = ws_base+"typeahead";
+    var ws_logging = ws_base+"auth/logging";
+    var ws_userID = ws_base+"auth/userid";
 
     switch (request.toLowerCase()) {
 

@@ -99,5 +99,6 @@ function getParameterByName(name, url) {
 
 $(document).ready(function () {
     var glycan_ac = getParameterByName('glycan_ac');
+    document.title = glycan_ac + " Detail";   //updates title with the glycan ID
     LoadData(glycan_ac);
 });
