@@ -109,6 +109,17 @@
                 </tr>
                 {{/mass.min}}
 
+                <!--glycan sugar-->
+
+                {{#number_monosaccharides.min}}
+                <tr>
+                    <td>No.of Sugar</td>
+                    {{#number_monosaccharides.min}}
+                    <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}} {{#number_monosaccharides.max}}{{number_monosaccharides.max}} -Da</td>
+                    {{/number_monosaccharides.max}}
+                </tr>
+                {{/number_monosaccharides.min}}
+
                 <!--organism-->
                 {{#organism}}
                 <tr>
@@ -140,13 +151,17 @@
                     <td>{{protein_ac}}</td>
                 </tr>
                 {{/protein_ac}}
+
                 <!--enzyme typeahead-->
-                {{#enzyme}}
+
+                {{#enzyme.id}}
                 <tr>
                     <td>Synthesizing Enzyme</td>
-                    <td>{{enzyme}}</td>
+                    <td><abbr class="limit-text-size"
+                              title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
+                            style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
                 </tr>
-                {{/enzyme}}
+                {{/enzyme.id}}
 
                 <!--glycanmotif typeahead-->
                 {{#glycan_motif}}
@@ -240,20 +255,18 @@
 
 <div w3-include-html="footer.html"></div>
 <script>w3.includeHTML();</script>
-<!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
+
 
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
 <!-- script for table -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- script for time for queryserach -->
+<!-- script for time for query-serach -->
 <script type="text/javascript" src="libraries/moment.js"></script>
 <!-- script for template engine -->
 <script type="text/javascript" src="libraries/mustache.js"></script>
 <!-- script for getting Web Service URLs -->
 <script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for handling errror -->
-<!--<script type="text/javascript" src="js/errorhandler.js"></script>-->
 <!-- script for glycan list page -->
 <script type="text/javascript" src="js/glycan-list.js"></script>
 <!-- script for third party-->

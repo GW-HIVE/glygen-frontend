@@ -273,44 +273,7 @@
 
             </ul>
 
-            <!--<ul id="basics6" class="cd-faq-group selected">-->
-            <!--<li class="cd-faq-title" />-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<div class="panel panel-default">-->
 
-            <!--<div class="gg-panel-heading">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<h4>Glycosylation</h4>-->
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--<div class="row">-->
-            <!--<table id="glycosylation-table"></table>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<div class="row">-->
-            <!--{{#glycosylation}}-->
-            <!--<div class='col-md-12 col-xs-12'>-->
-            <!--<p class="panelmaincontent">-->
-            <!--<button class="open-close-button">+</button>-->
-            <!--{{residue}}{{position}}- -->
-            <!--<a href="http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_detail.html?id={{glycan_ac}}">{{glycan_ac}}</a>-{{glycan_type}}-->
-            <!--</p>-->
-            <!--<ul style="display:none;">-->
-            <!--{{#evidence}}-->
-            <!--<li>{{database}} :-->
-            <!--<a href="{{{url}}}" target="_blank">{{id}}</a>-->
-            <!--</li>-->
-            <!--{{/evidence}}-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--{{/glycosylation}}-->
-            <!--</div>-->
-            <!--{{^glycosylation}} No data available. {{/glycosylation}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--</ul>-->
             <ul id="basics6" class="cd-faq-group selected">
                 <!-- added new class -->
                 <div class="panel panel-default">
@@ -321,34 +284,12 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <table id="glycosylation-table" data-sortable="true" data-toggle="table"
-                                   data-detail-view="true" data-detail-formatter="detailFormat"
-                                   data-page-size="10">
-                            </table>
-                        </div>
-                        <!-- added new class -->
-                        <div class="row">
-                            {{#glycosylation}}
                             <div class='col-md-12 col-xs-12'>
-                                <p class="panelmaincontent">
-                                    <button class="open-close-button">+</button>
-                                    {{residue}}{{position}}-
-                                    <a href="http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_detail.html?id={{glycan_id}}">{{glycan_ac}}</a>-{{glycan_type}}
-                                </p>
-                                <ul style="display:none;">
-                                    {{#evidence}}
-                                    <li>{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
-                                    </li>
-                                    {{/evidence}}
-                                </ul>
+                                <table id="glycosylation-table">
+                                </table>
                             </div>
-                            {{/glycosylation}}
                         </div>
-                        {{^glycosylation}} No data available. {{/glycosylation}}
-                    </div>
-                </div>
-                </div>
+
 
             </ul>
 

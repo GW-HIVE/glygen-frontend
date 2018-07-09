@@ -10,6 +10,20 @@ function ajaxSuccess(data) {
     var template = $('#item_template').html();
     var html = Mustache.to_html(template, data);
     var $container = $('#content');
+    var items = [];
+    if (data.glycosylation) {
+        for (var i = 0; i < data.glycosylation.length; i++) {
+            var glycan = data.glycosylation[i];
+            items.push({
+                glycan_ac: glycan.glycan_ac,
+                residue: glycan.residue + glycan.position,
+                type:glycan.type,
+                evidence:glycan.evidence
+
+
+            });
+        }
+    }
 
     $container.html(html);
 
@@ -17,7 +31,6 @@ function ajaxSuccess(data) {
         $(element).on('click', function () {
             var $this = $(this);
             var buttonText = $this.text();
-
             if (buttonText === '+') {
                 $this.text('-');
                 $this.parent().next().show();
@@ -30,7 +43,42 @@ function ajaxSuccess(data) {
         });
     });
 
+    $('#glycosylation-table').bootstrapTable({
+        columns: [{
+            field: 'glycan_ac',
+            title: 'Glycan',
+            sortable: true
+        },{
+            field: 'type',
+            title: 'Type',
+            sortable: true
+        },
+
+            {
+            field: 'residue',
+            title: 'Residue',
+            sortable: true
+        }],
+        pagination: 10,
+        data: items,
+        detailView : true,
+        detailFormatter : function(index, row) {
+            var html = [];
+            var evidences = row.evidence;
+            for (var i = 0; i < evidences.length; i++) {
+                var evidence = evidences[i];
+                html.push("<div class='row'>");
+                html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                html.push("</div>");
+            }
+            return html.join('');
+        }
+    });
+
 }
+
+
+
 
 /**
  * @param {data} the callback function to GWU service if fails
@@ -86,3 +134,10 @@ $(document).ready(function () {
     var protein_ac = getParameterByName('protein_ac');
     LoadData(protein_ac);
 });
+
+
+
+
+
+
+

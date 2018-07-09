@@ -1,103 +1,8 @@
-// //  @author: Pradeep Kumar Ragu Chanthar
-// //  @description: UO1 Version-1.1
-// //  @Date: 19th Feb 2018
-// //  @Update: July 5, 2018 - Gaurav Agarwal - added error tracking on search
-//
-//
-//
-// /** Protein field on change detect and suggest auto complete options from retrieved Json
-//  * @proteinjson - forms the JSON to post
-//  * @data-returns the protein ID's
-//  *
-// */
-// // $('#protein').on('input', function () {
-// //     var protein_id = document.getElementById("protein").value;
-// //     var proteinobj = {
-// //         field: "protein",
-// //         value: protein_id
-// //     }
-// //     var proteinjson = "query=" + JSON.stringify(proteinobj);
-// //     $.ajax({
-// //         url: getWsUrl("type-ahead"), // path to protein WS
-// //         method: 'post', // POST request
-// //         data: proteinjson, //post user input on change
-// //         success: function (data) {
-// //             //data is the JSON string
-// //             $(function () {
-// //                 $("#protein").autocomplete({
-// //                     source: function (request, response) {
-// //                         var results = $.ui.autocomplete.filter(data, request.term);
-// //                         response(results.slice(0, 5));
-// //                     }
-// //                 });
-// //             });
-// //         },
-// //     });
-// // });
-//
-//
-//
-//
-// /** Motif field on change detect and suggest auto complete options from retrieved Json
-//  * @Motifjson - forms the JSON to post
-//  * @data-returns the Motifs
-//  *
-// */
-// $('#motif').on('input', function () {
-//     var motif_id = document.getElementById("motif").value;
-//     var motifobj = {
-//         field: "motif",
-//         value: motif_id
-//     }
-//     var motifjson = "query=" + JSON.stringify(motifobj);
-//     $.ajax({
-//         url: getWsUrl("type-ahead"), // path to protein WS
-//         method: 'post', // POST request
-//         data: motifjson, //post user input on change
-//         success: function (data) {
-//             //data is the JSON string
-//             $(function () {
-//                 $("#motif").autocomplete({
-//                     source: function (request, response) {
-//                         var results = $.ui.autocomplete.filter(data, request.term);
-//                         response(results.slice(0, 5));
-//                     }
-//                 });
-//             });
-//         },
-//     });
-// });
-//
-//
-// /** enzyme field on change detect and suggest auto complete options from retrieved Json
-//  * @enzymejson - forms the JSON to post
-//  * @data-returns the enzymes
-//  *
-// */
-// $('#enzyme').on('input', function () {
-//     var enzyme_id = document.getElementById("enzyme").value;
-//     var enzymeobj = {
-//         field: "enzyme",
-//         value: enzyme_id
-//     }
-//     var enzymejson = "query=" + JSON.stringify(enzymeobj);
-//     $.ajax({
-//         url: getWsUrl("type-ahead"), // path to protein WS
-//         method: 'post', // POST request
-//         data: enzymejson, //post user input on change
-//         success: function (data) {
-//             //data is the JSON string
-//             $(function () {
-//                 $(".enzyme").autocomplete({
-//                     source: function (request, response) {
-//                         var results = $.ui.autocomplete.filter(data, request.term);
-//                         response(results.slice(0, 5));
-//                     }
-//                 });
-//             });
-//         },
-//     });
-// });
+// <!--
+//     //@author: Rupali Mahadik
+// // @description: UO1 Version-1.1.
+// //@refactored  :June-27-2017
+//     -->
 
 $("#glycan_id").autocomplete({
     source: function (request, response) {
@@ -115,11 +20,7 @@ $("#glycan_id").autocomplete({
 });
 
 
-// <!--
-//     //@author: Rupali Mahadik
-// // @description: UO1 Version-1.1.
-// //@refactored at :June-27-2017
-//     -->
+
 
 
 $("#protein").autocomplete({
