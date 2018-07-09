@@ -255,7 +255,7 @@ function updateSearch() {
                 // handle if no results
             }
         },
-        error: ajaxFailure
+        error: ajaxListFailure
     });
 }
 
