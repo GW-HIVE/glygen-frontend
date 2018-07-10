@@ -43,12 +43,17 @@ function ajaxSuccess(data) {
         });
     });
 
+
+
     $('#glycosylation-table').bootstrapTable({
         columns: [{
             field: 'glycan_ac',
             title: 'Glycan',
-            sortable: true
-        },{
+            sortable: true,
+            formatter: function(value, row, index, field){
+                return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>"}
+        },
+            {
             field: 'type',
             title: 'Type',
             sortable: true
@@ -72,7 +77,8 @@ function ajaxSuccess(data) {
                 html.push("</div>");
             }
             return html.join('');
-        }
+        },
+
     });
 
 }
@@ -137,7 +143,9 @@ $(document).ready(function () {
 });
 
 
-
+function pageFormat(value, row, index, field) {
+    return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>";
+}
 
 
 
