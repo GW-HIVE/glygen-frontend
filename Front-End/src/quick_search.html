@@ -30,7 +30,7 @@
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <script src="libraries/jquery/jquery-ui.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
 
     <!--[if lt IE 9]>
@@ -91,7 +91,7 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="enzymes">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
+                            <form id="myForm1" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
                                 Glycan X:
                                 <input type="text" name="GlytoucanID" placeholder="GlyTouCan ID" id="search1">
                                 <input type="submit" name="submit" onclick="myFunction()" class="btn btn-primary gg-faq-button">
@@ -103,11 +103,11 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm">
+                            <form id="myForm2">
                                 Glycan X:
                                 <input type="text" name="Glytoucan" placeholder="GlyTouCan" id="search2">
                                 <!-- <input type="submit" name="submit" onclick="glycanx()" class="btn btn-primary gg-faq-button"> -->
-                                <input type="button" class="btn btn-primary gg-faq-button" value="submit" onclick="glycanx()">
+                                <input type="submit" class="btn btn-primary gg-faq-button" value="submit" onclick="glycanx()">
                             </form>
                         </div>
                         <!-- cd-faq-content -->
@@ -116,7 +116,7 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
+                            <form id="myForm3" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
                                 Glycan X:
                                 <input type="text" name="Glytoucan" placeholder="GlyTouCan ID" id="search3">
                                 <input type="submit" name="submit" onclick="myFunction()" class="btn btn-primary gg-faq-button">
@@ -135,7 +135,7 @@
                         <a class="cd-faq-trigger" href="#0" id="">What are the orthologues of protein X and how does a glycosylation site and glycan structure change
                             in different species?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm1">
+                            <form id="myForm4">
                                 Protein:
                                 <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Uniprot Protein ID">
                                 <input type="submit" name="submit" class="btn btn-primary gg-faq-button">
@@ -145,28 +145,33 @@
                         <!-- cd-faq-content -->
                     </li>
 
+
+
+
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">What are the functions of protein X?</a>
                         <div class="cd-faq-content">
-                            <!-- <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST"> -->
-                            <form id="myForm2">
+
+
                                 Protein:
-                                <input type="text" name="Protein" placeholder="Uniprot Protein ID" class="form-control protein" id="protein">
-                                <input type="submit" name="submit" onclick="myFunction()" class="btn btn-primary gg-faq-button">
-                            </form>
+                                <input type="text" name="Protein" placeholder="Uniprot Protein ID" class="form-control protein" id="protein2">
+                                <button type="button" name="submit" onclick="myProteinDetail()" class="btn btn-primary gg-faq-button">submit</button>
+
                         </div>
                         <!-- cd-faq-content -->
                     </li>
+
+
 
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">Which glycans might have been synthesized in mouse using enzyme X?</a>
                         <div class="cd-faq-content">
                             <!-- <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST"> -->
-                            <form id="myForm3">
+                            <form id="myForm6">
                                 Enzyme:
                                 <!-- <input type="text" name="enzyme" placeholder="Protein ID or gene name" class="form-control enzyme" id="enzyme"> -->
                                 <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Protein ID or gene name">
-                                <input type="button" class="btn btn-primary gg-faq-button" value="submit" onclick="enzymex()">
+                                <button type="button" class="btn btn-primary gg-faq-button" value="submit" onclick="enzymex()"> submit</button>
                             </form>
                         </div>
                         <!-- cd-faq-content -->
@@ -181,7 +186,7 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">What are the glycosyltransferases in species X?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
+                            <form id="myForm7" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
                                 Species:
                                 <!-- <input type="text" name="species" placeholder="scientific name" id=""> -->
                                 <select size="1" class="organism" id="organism">
@@ -196,7 +201,7 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">What are the glycohydrolases in species X?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
+                            <form id="myForm8" action="http://glycomics.ccrc.uga.edu/ggtest/service/searchpage.php" method="POST">
                                 Species:
                                 <!-- <input type="text" name="species" placeholder="scientific name" id=""> -->
                                 <select size="1" class="organism" id="organism">
@@ -211,7 +216,7 @@
                     <li>
                         <a class="cd-faq-trigger" href="#0" id="">What are the reported or predicted glycosylated proteins in species X?</a>
                         <div class="cd-faq-content">
-                            <form id="myForm">
+                            <form id="myForm9">
                                 Species:
                                 <!-- <input type="text" name="species" placeholder="scientific name" id=""> -->
                                 <select size="1" class="organism" id="organism">
@@ -305,9 +310,18 @@
     </script>
 
     <!-- script for error-message/header-footer js -->
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <!-- script for UI range bar -->
+    <script type="text/javascript" src="libraries/jquery/jquery-1.9.1.js"></script>
+    <!-- script for Bootstrap -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- CSS for UI  -->
+    <script type="text/javascript" src="libraries/jquery/1.10.1-jquery-ui.js"></script>
+    <!-- script for UI autocomplte -->
+    <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
     <script type="text/javascript" src="js/utility.js"></script>
     <script type="text/javascript" src="js/quicksearch.js"></script>
-    <script type="text/javascript" src="js/glycan_search.js"></script>
+    <!--<script type="text/javascript" src="js/glycan_search.js"></script>-->
     <!-- <script type="text/javascript" src="js/protein_search.js"></script> -->
 
 </body>
