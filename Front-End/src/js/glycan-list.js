@@ -309,7 +309,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -339,7 +339,7 @@ function ajaxListSuccess(data) {
 
         // document.title='glycan-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response");
+        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
@@ -348,7 +348,7 @@ function ajaxListSuccess(data) {
 function ajaxListFailure() {
 //  $('#error-message').show();
     displayErrorByCode('server_down');
-    activityTracker("error", id, "server down");
+    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
