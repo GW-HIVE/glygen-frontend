@@ -4,6 +4,7 @@
 //@author: Pradeep Kumar
 // @description: UO1 Version-1.1.
 //@Date:10th May 2018.
+//@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -31,6 +32,7 @@ function xlimit(element) {
     limit = $(element).val();
     $('.limit-select').val(limit);
     LoadDataList();
+    activityTracker("user", id, "page limit: " + limit);
 }
 
 /**
@@ -40,6 +42,7 @@ function next() {
     page = page + 1;
     $(".page-select").val(page);
     LoadDataList();
+    activityTracker("user", id, "page: " + page);
 }
 
 /**
@@ -50,6 +53,7 @@ function prev() {
         page = page - 1;
         $(".page-select").val(page);
         LoadDataList();
+        activityTracker("user", id, "page: " + page);
     }
 }
 
@@ -61,6 +65,7 @@ function xpage(element) {
     page = $(element).val();
     $('.page-select').val(page);
     LoadDataList();
+    activityTracker("user", id, "page: " + page);
 }
 
 /**
@@ -72,6 +77,7 @@ function xsort(element) {
     sort = $(element).val();
     $('.sort-select').val(sort);
     LoadDataList();
+    activityTracker("user", id, "sort: " + sort);
 }
 
 /**
@@ -83,6 +89,7 @@ function xdir(element) {
     dir = $(element).val();
     $('.dir-select').val(dir);
     LoadDataList();
+    activityTracker("user", id, "sort direction: " + dir);
 }
 
 /**
@@ -280,6 +287,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
         var $table = $('#gen-table');
         var items = [];
@@ -306,6 +314,7 @@ function ajaxListSuccess(data) {
 
         document.title = 'Glycoprotein-list';
         lastSearch = data;
+        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
@@ -314,6 +323,7 @@ function ajaxListSuccess(data) {
 function ajaxListFailure() {
 //  $('#error-message').show();
     displayErrorByCode('server_down');
+    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
