@@ -69,6 +69,8 @@ $("#enzyme").autocomplete({
     }
 });
 
+
+
 /** functions for dropdowns organism
  * get organism drop down values for search form
  */

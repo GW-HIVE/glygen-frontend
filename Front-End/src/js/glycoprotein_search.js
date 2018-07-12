@@ -266,15 +266,21 @@ function ajaxProteinSearchSuccess() {
         //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
         success: function (results) {
-            if (results.list_id) {
-                window.location = './glycoprotein_list.html?id=' + results.list_id;
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
+                activityTracker("error", "", results.error_code);
+            } else if (results.list_id && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
             } else {
-                displayErrorByCode("server-down")
+                window.location = './glycoprotein_list.html?id=' + results.list_id;
             }
-
         }
     });
 }
+
+
+
 
 
 // to resizing choosen field
