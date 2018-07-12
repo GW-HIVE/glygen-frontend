@@ -50,9 +50,9 @@
         <div class="col-md-12 col-xs-12">
             <form class="form-inline" onsubmit="return false;">
                 <label>Page</label>
-                <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
+                <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
                 <select class="page-select form-control" onchange="xpage(this);"></select>
-                <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
+                <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
                 <label>Records per page</label>
                 <select class="limit-select form-control" onchange="xlimit(this);">
                     <option selected>10</option>
@@ -179,12 +179,12 @@
                 <a href="#" data-toggle="tooltip" data-placement="left"
                    title="the contents of the data store are frequently updated and that repeating execution of an old query now may provide additional results."
                    class="red-tooltip">
-                    <button type="button" class="btn btn-default" id="demosearch" onclick="updateSearch();">Update
+                    <button type="button" class="btn btn-primary" id="demosearch" onclick="updateSearch();">Update
                         Search
                     </button>
                 </a>
                 &nbsp; &nbsp; &nbsp; &nbsp;
-                <button type="button" class="btn btn-default" onclick="editSearch();">Edit Query</button>
+                <button type="button" class="btn btn-primary" onclick="editSearch();">Edit Query</button>
             </p>
         </div>
     </script>
@@ -223,33 +223,35 @@
     </div>
     <!-- table container ends here -->
     <!-- sorting_bottom -->
-    <div class="col-md-12 col-xs-12" id="sortbottom">
-        <form class="form-inline" onsubmit="return false;">
-            <label>Page</label>
-            <button type="button previ" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
-            <select class="page-select form-control" onchange="xpage(this);"></select>
-            <button type="button next" class="btn btn-default nextbutton" onclick="next();">Next</button>
-            <label>Records per page</label>
-            <select class="limit-select form-control" onchange="xlimit(this);">
-                <option selected>10</option>
-                <option>20</option>
-                <option>50</option>
-                <option>70</option>
-            </select>
-            <label>Sort By</label>
-            <select class="sort-select form-control" onchange="xsort(this);">
-                <option selected value="glycan_ac">ID</option>
-                <option value="mass">Mass</option>
-                <option value="number_enzymes">No of Enzymes</option>
-                <option value="number_proteins">No of Proteins</option>
-            </select>
-            <select class="dir-select form-control" onchange="xdir(this);">
-                <option value="asc" selected>ASC</option>
-                <option value="desc">DESC</option>
-            </select>
-            <label class="searchresult"></label>
-        </form>
-        <!--<label class="searchresult"></label>-->
+    <div class="row"> 
+        <div class="col-md-12 col-xs-12" id="sortbottom">
+            <form class="form-inline" onsubmit="return false;">
+                <label>Page</label>
+                <button type="button previ" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
+                <select class="page-select form-control" onchange="xpage(this);"></select>
+                <button type="button next" class="btn btn-primary nextbutton" onclick="next();">Next</button>
+                <label>Records per page</label>
+                <select class="limit-select form-control" onchange="xlimit(this);">
+                    <option selected>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>70</option>
+                </select>
+                <label>Sort By</label>
+                <select class="sort-select form-control" onchange="xsort(this);">
+                    <option selected value="glycan_ac">ID</option>
+                    <option value="mass">Mass</option>
+                    <option value="number_enzymes">No of Enzymes</option>
+                    <option value="number_proteins">No of Proteins</option>
+                </select>
+                <select class="dir-select form-control" onchange="xdir(this);">
+                    <option value="asc" selected>ASC</option>
+                    <option value="desc">DESC</option>
+                </select>
+                <label class="searchresult"></label>
+            </form>
+            <!--<label class="searchresult"></label>-->
+        </div>
     </div>
 </div>
 

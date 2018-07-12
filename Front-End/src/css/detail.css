@@ -1,77 +1,70 @@
 .img-cartoon1 {
-  display: block;
-  max-width: 500px;
-  max-height: 160px;
-  width: auto;
-  height: auto;
-  -webkit-transform: scale(1.0);
-  transform: scale(0.8);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  box-shadow: 10px 10px 5px #ddd;
-  z-index: 99999;
+    display: block;
+    max-width: 500px;
+    max-height: 160px;
+    width: auto;
+    height: auto;
+    -webkit-transform: scale(1.0);
+    transform: scale(0.8);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    box-shadow: 10px 10px 5px #ddd;
+    z-index: 99999;
 }
 .img-wrapper1{
-  overflow:hidden;
-  z-index: -9999;
-  padding: 0.5em;
-  width:100%;
-  overflow:scroll;
-  margin-top:20px;
-  margin-bottom:0px;
-  width:500px;
+    overflow:hidden;
+    z-index: -9999;
+    padding: 0.5em;
+    width:100%;
+    overflow:scroll;
+    margin-top:20px;
+    margin-bottom:0px;
+    width:500px;
 
 }
 .img-cartoon1:hover {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.0);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  z-index: 99999;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.0);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    z-index: 99999;
 }
 /* motif images */
 .img-cartoon2 {
-  display: block;
-  max-width: 500px;
-  max-height: 160px;
-  width: auto;
-  height: auto;
-  -webkit-transform: scale(1.0);
-  transform: scale(0.8);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  box-shadow: 10px 10px 5px #ddd;
-  z-index: 99999;
-  
+    display: block;
+    max-width: 500px;
+    max-height: 160px;
+    width: auto;
+    height: auto;
+    -webkit-transform: scale(1.0);
+    transform: scale(0.8);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    box-shadow: 10px 10px 5px #ddd;
+    z-index: 99999; 
 }
-
 .img-wrapper2{
-  overflow:hidden;
-  z-index: -9999;
-  padding: 0.5em;
-  width:100%;
-  overflow:scroll;
-  margin-top:20px;
-  margin-bottom:0px;
-  width:500px;
+    overflow:hidden;
+    z-index: -9999;
+    padding: 0.5em;
+    width:100%;
+    overflow:scroll;
+    margin-top:20px;
+    margin-bottom:0px;
+    width:500px;
 }
-
-
 .img-cartoon2:hover {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.0);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  z-index: 99999;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.0);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    z-index: 99999;
 }
-
-
-
 .panel-default > .gg-panel-heading { /* renamed class in both files */
-  background-image: none;
-  background-color: #D8D8D8; /* made changes here */
-  color: #555; /* made changes here */
-  padding: 3px 15px; /* made changes here */
+    background-image: none;
+    background-color: #D8D8D8; /* made changes here */
+    color: #555; /* made changes here */
+    padding: 3px 15px; /* made changes here */
 }
 
 /* .breadcrumb {
@@ -81,83 +74,72 @@
     margin-top: -30px; 
 } */ 
 .panelcontent{
-  font-size: 14px;
-  
+    font-size: 14px; 
 }
 #panelmaincontent{
-  font-size: 16px;
-  overflow-wrap: break-word;
+    font-size: 16px;
+    overflow-wrap: break-word;
 }
 #activepage{
-  color:#555;
+    color:#555;
 }
 /* <!-- style to class for detail page --> */
 .panel-heading{
-padding:2px 2px;
+    padding: 2px 2px;
 }
 
  .footer{
-  margin-bottom: 0px;
-  margin-top: 470px;
+    margin-bottom: 0px;
+    margin-top: 470px;
 
 } 
 .list-group{
-
-  font-size: 14px;
-  margin-left: 17px;
-  list-style-type: circle;
+    font-size: 14px;
+    margin-left: 10px;
+    list-style-type: circle;
 }
-pre{
-  
-  background-color:#e6e6e6;
-  
+pre { 
+    background-color:#e6e6e6; 
 }
 .panelmaincontent{
- 
-  font-size: 16px;
-  margin-left: 10px;
-  list-style-type: circle;
-  overflow-wrap: break-word;
+    font-size: 16px;
+    margin-left: 10px;
+    list-style-type: circle;
+    overflow-wrap: break-word;
 }
 .cd-close-panel {
-  right:25px;
+    right:25px;
 }
-
-#gene
-{
-padding-left: 45px;
-
+#gene {
+    padding-left: 45px;
 }
-
 .cd-faq-categories{
-  /* margin-top: 100px; */
-  width:auto;
-  /* padding-left: 0px;
-  margin-left:0px; */
-
+    /* margin-top: 100px; */
+    width:auto;
+    /* padding-left: 0px;
+    margin-left:0px; */
 }
-
 /** Overriding the code of faq_style.css for Detail page.
   * @author Gaurav Agarwal
   * @date 21 June 2018
   */
 .cd-faq-items {
-  overflow-x: hidden !important; 
+    overflow-x: hidden !important; 
 }
 @media only screen and (min-width: 1024px) {
-  .cd-faq-categories{
-    width: 290px;
-  }
+    .cd-faq-categories{
+        width: 290px;
+    }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1300px) {
-.cd-faq-items {
-  padding-left: 300px;
-}
+    .cd-faq-items {
+        padding-left: 300px;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .cd-faq-items {
-    width: 62%;
-  }
+    .cd-faq-items {
+        width: 62%;
+    }
 }
 /* section{
   padding-left: 20px;
@@ -170,6 +152,6 @@ padding-left: 45px;
   padding-right:50px; 
   margin-bottom:30px;
 } */
-h4{
-  overflow: auto;
+h4 {
+    overflow: auto;
 }
