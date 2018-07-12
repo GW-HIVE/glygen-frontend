@@ -9,7 +9,7 @@
 
 function getWsUrl(request, id) {
 
-    var ws_base = "http://glygen-vm-dev.biochemistry.gwu.edu/api/";
+    var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
     
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";

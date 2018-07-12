@@ -56,7 +56,7 @@ function aminoLetter(textareatxt) {
 
 $("#protein").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -199,7 +199,7 @@ function mass(mass_min, mass_max) {
  */
 function ajaxProteinSearchSuccess() {
     var organism = $("#organism").val();
-    var protein_id = $("#protein").val();
+    var uniprot_id = $("#protein").val();
     var mass_slider = document.getElementById("slider").noUiSlider.get();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
@@ -212,7 +212,7 @@ function ajaxProteinSearchSuccess() {
         operation: "AND",
         query_type: "search_protein",
         organism: organism,
-        protein_ac: protein_id,
+        uniprot_canonical_ac: uniprot_id,
         mass: {
             min: mass_min,
             max: mass_max

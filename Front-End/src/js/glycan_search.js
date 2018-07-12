@@ -6,7 +6,7 @@
 
 $("#glycan_id").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glycan_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -25,7 +25,7 @@ $("#glycan_id").autocomplete({
 
 $("#protein").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -56,7 +56,7 @@ $("#motif").autocomplete({
 
 $("#enzyme").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("enzyme_protein_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("enzyme_uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -214,8 +214,8 @@ function submitvalues() {
     var glycan_subtype = document.getElementById("ddl2").value;
     var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
-    var motif = document.getElementById("motif").value;
-    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid);
+    var glycan_motif = document.getElementById("motif").value;
+    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid,glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
 
     $.ajax({
@@ -245,12 +245,12 @@ function submitvalues() {
  * @param input_glycantype user glycan_type input
  * @param input_glycansubtype user glycan_subtype input
  * @param input_enzyme user enzyme input
- * @param input_proteinid user protein_id input
+ * @param input_proteinid user uniprot_id input
  * @param input_motif user motif input
  */
 
 //form json from form submit
-function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif,max_count) {
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
@@ -260,12 +260,13 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
             "id": input_enzyme,
             "type": "gene"
         },
-        glycan_ac: input_glycan_id,
+        glytoucan_ac: input_glycan_id,
         organism: input_organism,
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
-        protein_ac: input_proteinid,
-        glycan_motif: input_motif
+        uniprot_canonical_ac: input_proteinid,
+        glycan_motif: input_motif,
+        max_results_count:max_count
     };
     return formjson;
 }

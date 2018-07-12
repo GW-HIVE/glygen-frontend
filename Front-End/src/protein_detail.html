@@ -70,7 +70,7 @@
             <a href="#basics4">keywords</a>
         </li>
         <li>
-            <a href="#basics5">Isoform</a>
+            <a id= "basics5x" href="#basics5">Isoform</a>
         </li>
         <li>
             <a href="#basics6">Glycosylation</a>
@@ -96,25 +96,25 @@
 
                     <div class="gg-panel-heading">
                         <!-- added new class -->
-                        <h4>{{protein_ac}}</h4>
+                        <h4>{{uniprot_canonical_ac}}</h4>
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
                         <div class="row">
                             <!--always try to use double quotes for HTML attributes. -->
                             <div class="col-md-12 col-xs-6">
-                                {{#protein_id}}
+                                {{#uniprot_id}}
                                 <li class="list-group">Uniprot-Entry Name:
                                     <a class="panelcontent" href="http://www.uniprot.org/uniprot/accession"
-                                       target="_blank">{{protein_id}}</a>
+                                       target="_blank">{{uniprot_id}}</a>
                                 </li>
-                                {{/protein_id}}
+                                {{/uniprot_id}}
 
                                 <li class="list-group">Monoisotopic Mass:{{mass.monoisotopic_mass}} Da</li>
                                 <li class="list-group">Chemical Mass:{{mass.chemical_mass}}</li>
                                 {{#recommendedname}}
                                 <li class="list-group">Recommended
-                                    Name:{{recommendedname.full}}{{ecommendedname.short}}
+                                    Name:{{recommendedname.full}}{{recommendedname.short}}
                                 </li>
                                 {{/recommendedname}}
                                 <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
@@ -350,7 +350,34 @@
     $(document).ajaxStop(function () {
         // calls the sidebar function only when all ajax calls are completed
         faqMain();
+
+
+
+
+    // <script>
+    //     //calls the script in faq_main.js file
+    //     faqMain();
+
+        //to open the drop down of the ID called from home page.
+        var url_loc = $(location).attr('href');
+        if (url_loc.match('#')) {
+            // var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
+            var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
+            //to scroll to the particular sub section.
+            // $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+            if ($(window).width() < 768) {   //mobile view
+                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().addClass('selected');
+                $('.cd-close-panel').addClass('move-left');
+                $('body').addClass('cd-overlay');
+            } else {
+                $('body,html').animate({ 'scrollTop': $(faq_trigger_id).offset().top - 19 }, 200);
+            }
+        }
+
     });
+
+
+
 </script>
 
 <!-- script for error-message/header-footer js -->

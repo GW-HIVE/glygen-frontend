@@ -56,7 +56,7 @@ function aminoLetter(textareatxt) {
 
 $("#protein").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
@@ -123,7 +123,7 @@ $("#gene_name").autocomplete({
 $("#glycan_id").autocomplete({
     source: function (request, response) {
 
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glycan_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -222,7 +222,7 @@ function mass(mass_min, mass_max) {
  */
 function ajaxProteinSearchSuccess() {
     var organism = $("#organism").val();
-    var protein_id = $("#protein").val();
+    var uniprot_id = $("#protein").val();
     // var mass_slider = $("#slider").get(0).noUiSlider.get();
 
     var mass_slider = document.getElementById("slider").noUiSlider.get();
@@ -240,7 +240,7 @@ function ajaxProteinSearchSuccess() {
         operation: "AND",
         query_type: "search_protein",
         organism: organism,
-        protein_ac: protein_id,
+        uniprot_canonical_ac: uniprot_id,
         mass: {
             min: mass_min,
             max: mass_max
@@ -248,7 +248,7 @@ function ajaxProteinSearchSuccess() {
         protein_name: protein_name_long,
         glycan: {
             relation: glycan_relation,
-            glycan_ac: glycan_id
+            glytoucan_ac: glycan_id
         },
         gene_name: gene_name,
         pathway_id: pathway_id,

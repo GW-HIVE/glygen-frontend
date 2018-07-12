@@ -15,7 +15,7 @@ function ajaxSuccess(data) {
         for (var i = 0; i < data.glycosylation.length; i++) {
             var glycan = data.glycosylation[i];
             items.push({
-                glycan_ac: glycan.glycan_ac,
+                glytoucan_ac: glycan.glytoucan_ac,
                 residue: glycan.residue + glycan.position,
                 type:glycan.type,
                 evidence:glycan.evidence
@@ -43,15 +43,16 @@ function ajaxSuccess(data) {
         });
     });
 
+    // $container.find('#basics5x').click();
 
 
     $('#glycosylation-table').bootstrapTable({
         columns: [{
-            field: 'glycan_ac',
+            field: 'glytoucan_ac',
             title: 'Glycan',
             sortable: true,
             formatter: function(value, row, index, field){
-                return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>"}
+                return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"}
         },
             {
             field: 'type',
@@ -101,11 +102,11 @@ function ajaxFailure() {
 //  * Returns the GWU services.
 //
 
-function LoadData(protein_ac) {
+function LoadData(uniprot_canonical_ac) {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("protein_detail", protein_ac),
+        url: getWsUrl("protein_detail", uniprot_canonical_ac),
         method: 'POST',
         success: ajaxSuccess,
         error: ajaxFailure
@@ -137,15 +138,13 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    var protein_ac = getParameterByName('protein_ac');
-    document.title = protein_ac + " Detail";   //updates title with the protein ID
-    LoadData(protein_ac);
+    var uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
+    document.title = uniprot_canonical_ac + " Detail";   //updates title with the protein ID
+    LoadData(uniprot_canonical_ac);
 });
 
 
-function pageFormat(value, row, index, field) {
-    return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>";
-}
+
 
 
 

@@ -22,7 +22,7 @@ String.prototype.trunc = String.prototype.trunc ||
     };
 var id = '';
 var page = 1;
-var sort = 'glycan_ac';
+var sort = 'glytoucan_ac';
 var dir = $('.dir-select').val();
 var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 10;
@@ -195,7 +195,7 @@ function editSearch() {
  @return -Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
-    return "<a href='glycan_detail.html?glycan_ac=" + value + "'>" + value + "</a>";
+    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
 }
 
 /**
@@ -210,7 +210,7 @@ function pageFormat(value, row, index, field) {
 
 // For Image Column
 function imageFormat(value, row, index, field) {
-    var url = getWsUrl('glycan_image', row.glycan_ac);
+    var url = getWsUrl('glycan_image', row.glytoucan_ac);
     return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
@@ -251,7 +251,7 @@ function detailFormat(index, row) {
     var glyco = row.glycoct.replace(/ /g, '\n');
     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-    activityTracker("user", id, "Detail view of " + row.glycan_ac);
+    activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
     return html.join('');
 }
 
@@ -319,7 +319,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
-                    glycan_ac: glycan.glycan_ac,
+                    glytoucan_ac: glycan.glytoucan_ac,
                     mass: glycan.mass,
                     number_proteins: glycan.number_proteins,
                     number_enzymes: glycan.number_enzymes,

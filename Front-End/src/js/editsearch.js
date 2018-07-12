@@ -12,7 +12,7 @@
 function setFormValues(data) {
    
     if (data.query) {
-        $("#glycan_id").val(data.query.glycan_ac);
+        $("#glycan_id").val(data.query.glytoucan_ac);
         if (data.query.mass) {
             var massSlider = document.getElementById('slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
@@ -31,7 +31,7 @@ function setFormValues(data) {
             $("#ddl2").val(data.query.glycan_subtype);
         });
          $("#enzyme").val(data.query.enzyme.id);
-        $("#protein").val(data.query.protein_ac);
+        $("#protein").val(data.query.uniprot_canonical_ac);
         $("#motif").val(data.query.glycan_motif);
     }
 }
@@ -43,10 +43,10 @@ function setFormValues(data) {
  *
  */
 function setProteinFormValues(data) {
-//alert(data.results.protein_id)
+//alert(data.results.uniprot_id)
   //data1 = JSON.parse(data);
     if (data.query) {
-        $("#protein").val(data.query.protein_ac);
+        $("#protein").val(data.query.uniprot_canonical_ac);
         if (data.query.mass) {
             var massSlider = document.getElementById('slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
@@ -80,7 +80,7 @@ function LoadProteinSearchvalues(id) {
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
-        data: getListPostData(id, 1, 'protein_ac', 'asc', 1),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'asc', 1),
         method: 'POST',
         success: setProteinFormValues,
         error: failToRetreiveSearch
@@ -101,7 +101,7 @@ function LoadSearchvalues(id) {
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("glycan_list"),
-        data: getListPostData(id, 1, 'glycan_ac', 'asc', 1),
+        data: getListPostData(id, 1, 'glytoucan_ac', 'asc', 1),
         method: 'POST',
         success: setFormValues,
         error: failToRetreiveSearch

@@ -197,7 +197,7 @@ function editSearch() {
  @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='protein_detail.html?protein_ac=" + value + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
 }
 
 
@@ -295,7 +295,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var protein = data.results[i];
                 items.push({
-                    protein_ac: protein.protein_ac,
+                    uniprot_canonical_ac: protein.uniprot_canonical_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,

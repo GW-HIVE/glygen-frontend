@@ -17,7 +17,7 @@ function ajaxSuccess(data) {
     data.hasMotifs = (data.motifs && (data.motifs.length > 0));
     data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
 
-    data.imagePath = getWsUrl('glycan_image', data.glycan_ac);
+    data.imagePath = getWsUrl('glycan_image', data.glytoucan_ac);
 
     //var glyco = row.glycoct.replace(/ /g, '\n');
     var html = Mustache.to_html(template, data);
@@ -41,7 +41,7 @@ function ajaxSuccess(data) {
             }
         });
     });
-    activityTracker("user", data.glycan_ac, "successful response");
+    activityTracker("user", data.glytoucan_ac, "successful response");
 }
 
 /**
@@ -52,7 +52,7 @@ function ajaxSuccess(data) {
 
 function ajaxFailure() {
     displayErrorByCode();
-    activityTracker("error", data.glycan_ac, "server down");
+    activityTracker("error", data.glytoucan_ac, "server down");
 }
 
 /**
@@ -61,11 +61,11 @@ function ajaxFailure() {
 //  * Returns the GWU services.
 //
 
-function LoadData(glycan_ac) {
+function LoadData(glytoucan_ac) {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("glycan_detail", glycan_ac),
+        url: getWsUrl("glycan_detail", glytoucan_ac),
         // data: getDetailPostData(id),
         method: 'POST',
         success: ajaxSuccess,
@@ -98,7 +98,7 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    var glycan_ac = getParameterByName('glycan_ac');
-    document.title = glycan_ac + " Detail";   //updates title with the glycan ID
-    LoadData(glycan_ac);
+    var glytoucan_ac = getParameterByName('glytoucan_ac');
+    document.title = glytoucan_ac + " Detail";   //updates title with the glycan ID
+    LoadData(glytoucan_ac);
 });
