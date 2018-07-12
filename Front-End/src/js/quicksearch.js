@@ -91,10 +91,14 @@ $("#protein2").autocomplete({
     }
 });
 
+
+
+
+
 function myProteinDetail(){
    //  // var id= document.getElementById("protein2").value;
    var id = $("#protein2").val();
-    // window.location = "protein_detail.html?protein_ac=" + id;
+    // window.location = "protein_detail.html?uniprot_canonical_ac=" + id;
 
 
    $.ajax({
@@ -106,7 +110,7 @@ function myProteinDetail(){
                 displayErrorByCode("invalid id")
             }
             else {
-                window.location = "protein_detail.html?protein_ac=" + id +'#basics5';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
             }
 
             }
