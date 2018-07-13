@@ -252,12 +252,12 @@ function submitvalues() {
  */
 
 //form json from form submit
-function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif,max_count) {
+function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
-        mass: {"min": mass_min, "max": mass_max},
-        number_monosaccharides: {"min": sugar_min, "max": sugar_max},
+        mass: {"min":parseInt(mass_min), "max":parseInt(mass_max)},
+        number_monosaccharides: {"min":parseInt(sugar_min), "max":parseInt(sugar_max)},
         enzyme: {
             "id": input_enzyme,
             "type": "gene"
@@ -268,7 +268,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         glycan_subtype: input_glycansubtype,
         uniprot_canonical_ac: input_proteinid,
         glycan_motif: input_motif,
-        max_results_count:max_count
+
     };
     return formjson;
 }
