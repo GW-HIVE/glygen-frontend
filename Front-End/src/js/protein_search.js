@@ -217,10 +217,11 @@ function ajaxProteinSearchSuccess() {
         query_type: "search_protein",
         organism: organism,
         uniprot_canonical_ac: uniprot_id,
-        mass: {
-            min: mass_min,
-            max: mass_max
-        },
+        // mass: {
+        //     min: mass_min,
+        //     max: mass_max
+        // },
+        mass: {"min":parseInt(mass_min), "max":parseInt(mass_max)},
         protein_name: protein_name_long,
         gene_name: gene_name,
         pathway_id: pathway_id,
