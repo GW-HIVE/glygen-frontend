@@ -481,7 +481,11 @@ header h1 {
     display: block;
   }
 }
-
+.gg-faq-formInput {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+/*
 .gg-faq-button {
   background-color: #F0F0F0; 
   border-color: #ccc;
@@ -495,12 +499,15 @@ header h1 {
   border-color: #ccc;
   color: #F0F0F0;
 }   
+*/
 
+/*
 @media only screen and (min-width: 768px){
-  .gg-faq-margin{
-    margin-left: 40px;
+  .gg-faq-margin {
+    margin-bottom: 10px;
   }
 }
+*/
 
 /** Side navbar top margin adjust
   * @author Gaurav Agarwal 
