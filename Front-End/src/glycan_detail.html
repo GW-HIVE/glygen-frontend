@@ -261,12 +261,11 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#enzyme}}
-                        <li class="list-group">Protein name:{{protein_name}}
+                        <li class="list-group"><strong>Protein name:</strong>{{protein_name}}
                         </li>
-                        <li class="list-group">{{uniprot_canonical_ac}}(Uniprot ID:
+                        <li class="list-group"><strong>Protein Id:</strong>{{uniprot_canonical_ac}}(Uniprot ID:
                             <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac}}</a>)
-                        </li>
-                        <li class=list-group id="gene"> Gene name:
+                            <br><strong>Gene name:</strong>
                             <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>
                         </li>
 
@@ -331,7 +330,7 @@
 <script type="text/javascript">
     $(document).ajaxStop(function () {
         // calls the sidebar function only when all ajax calls are completed
-        faqMain();
+    faqMain();
     });
 </script>
 

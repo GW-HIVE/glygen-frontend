@@ -43,7 +43,7 @@
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
                     <!-- <option selected value="id">ID</option> -->
-                    <option value="protein_ac">Protein ID</option>
+                    <option value="uniprot_canonical_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
                     <option value="protein_name">Protein Name</option>
                     <option value="mass">Mass</option>
@@ -72,12 +72,12 @@
                 <tbody>
 
                 <!--Protein Typeahead-->
-                {{#protein_ac}}
+                {{#uniprot_canonical_ac}}
                 <tr>
                     <td>Protein Id</td>
-                    <td>{{protein_ac}}</td>
+                    <td>{{uniprot_canonical_ac}}</td>
                 </tr>
-                {{/protein_ac}}
+                {{/uniprot_canonical_ac}}
 
                 <!--mass-->
 
@@ -119,12 +119,12 @@
 
 
                 <!--Glycan Typeahead-->
-                {{#glycan.glycan_ac}}
+                {{#glycan.glytoucan_ac}}
                 <tr>
                     <td>glycan</td>
-                    <td>{{glycan.glycan_ac}} {{glycan.relation}}</td>
+                    <td>{{glycan.glytoucan_ac}} {{glycan.relation}}</td>
                 </tr>
-                {{/glycan.glycan_ac}}
+                {{/glycan.glytoucan_ac}}
 
 
                 <!--peptide seq-->
@@ -187,7 +187,7 @@
             <table id="gen-table" data-show-export="true" data-toggle="table">
                 <thead>
                 <tr>
-                    <th data-field="protein_ac" data-formatter="PageFormat">Protein ID</th>
+                    <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
                     <th data-field="gene_name">Gene Name</th>
                     <th data-field="protein_name">Protein Name</th>
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
@@ -216,7 +216,7 @@
             </select>
             <label>Sort By</label>
             <select class="sort-select form-control" onchange="xsort(this);">
-                <option value="Protein_ac">Protein ID</option>
+                <option value="uniprot_canonical_ac">Protein ID</option>
                 <option value="gene_name">Gene Name</option>
                 <option value="protein_name_long">Protein Name</option>
                 <option value="mass">Mass</option>
