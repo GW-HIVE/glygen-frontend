@@ -95,6 +95,10 @@ $(document).ready(function () {
             LoadSearchvalues(id);
         }
 
+    })
+    .fail(function(){
+        activityTracker("error", "", result.error_code);
+        console.log("error in search_init");
     });
 });
 

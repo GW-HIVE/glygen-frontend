@@ -162,6 +162,10 @@ $(document).ready(function () {
         if (id) {
             LoadProteinSearchvalues(id);
         }
+    })
+    .fail(function(){
+        activityTracker("error", "", result.error_code);
+        console.log("error in search_init");
     });
 });
 
@@ -236,7 +240,8 @@ function ajaxProteinSearchSuccess() {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
             } else {
-                displayErrorByCode("server-down")
+                displayErrorByCode("server-down");
+                activityTracker("error", "", results.error_code);
             }
 
         }
