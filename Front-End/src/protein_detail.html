@@ -28,6 +28,8 @@
     <link rel="stylesheet" type="text/css" href="css/detail.css">
     <!-- Modernizr -->
     <script src="js/modernizr.js"></script>
+    <!-- CSS for alertify -->
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -70,7 +72,7 @@
             <a href="#basics4">keywords</a>
         </li>
         <li>
-            <a id= "basics5x" href="#basics5">Isoform</a>
+            <a href="#basics5">Isoform</a>
         </li>
         <li>
             <a href="#basics6">Glycosylation</a>
@@ -206,7 +208,7 @@
                         <!-- added new class -->
                         {{#crossref}}
                         <p class="panelmaincontent">
-                        <li class="list-group" id="panelmaincontent1">{{database}}:
+                        <li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>
                             <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
                         </li>
                         </p>
@@ -348,37 +350,28 @@
 
 <script type="text/javascript">
     $(document).ajaxStop(function () {
-        // calls the sidebar function only when all ajax calls are completed
-        faqMain();
 
-
-
-
-    // <script>
-    //     //calls the script in faq_main.js file
-    //     faqMain();
-
-        //to open the drop down of the ID called from home page.
-        var url_loc = $(location).attr('href');
-        if (url_loc.match('#')) {
-            // var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
-            var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
+        // calls the hash function only when all ajax calls are completed
+        function scrollToPanel(hash) {
             //to scroll to the particular sub section.
-            // $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+            // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
             if ($(window).width() < 768) {   //mobile view
-                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().addClass('selected');
+                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
                 $('.cd-close-panel').addClass('move-left');
                 $('body').addClass('cd-overlay');
             } else {
-                $('body,html').animate({ 'scrollTop': $(faq_trigger_id).offset().top - 19 }, 200);
+                $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
             }
         }
 
+        if (window.location.hash) {
+            scrollToPanel(window.location.hash);
+        }
     });
-
-
-
 </script>
+
+
+
 
 <!-- script for error-message/header-footer js -->
 <script src="js/utility.js"></script>
