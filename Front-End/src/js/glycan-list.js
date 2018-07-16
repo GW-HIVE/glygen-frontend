@@ -278,8 +278,10 @@ function updateSearch() {
             if (result.list_id) {
                 console.log(result);
                 window.location = 'glycan_list.html?id=' + result.list_id;
+                activityTracker("user", id, "update search");
             } else {
                 // handle if no results
+                activityTracker("error", id, "update search: no result found");
             }
         },
         error: ajaxFailure
@@ -290,6 +292,7 @@ function updateSearch() {
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
+        activityTracker("user", id, "edit search");
     }
 }
 
