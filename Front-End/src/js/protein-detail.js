@@ -1,5 +1,8 @@
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
+// @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
+
+var uniprot_canonical_ac;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -81,7 +84,7 @@ function ajaxSuccess(data) {
         },
 
     });
-
+    activityTracker("user", data.uniprot_canonical_ac, "successful response");
 }
 
 
@@ -94,6 +97,7 @@ function ajaxSuccess(data) {
 
 function ajaxFailure() {
     displayErrorByCode();
+    activityTracker("error", uniprot_canonical_ac, "server down");
 }
 
 /**
@@ -138,7 +142,7 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    var uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
+    uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
     document.title = uniprot_canonical_ac + " Detail";   //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
 });

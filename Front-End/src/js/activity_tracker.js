@@ -2,6 +2,7 @@
 // @description: assigns ID and tracks user activity.
 //@modified: Pradeep Kumar on 10 May 2018
 // @update: July 5, 2018 - Gaurav Agarwal - Anonymous user logging for those users who opt out.
+// @update: July 16, 2018 - Gaurav Agarwal - javascript errors and exception logging
 function tracking() {
     var txt = '';
     var track_banner = document.getElementById("tracking_banner");
@@ -86,7 +87,7 @@ function activityTracker(type, id, message) {
     };
     console.log(data);
     $.post(getWsUrl("log_activity"), { query: JSON.stringify(data) })
-        .done(function(resp){
+        .done(function (resp) {
             console.log(resp);
         })
         .fail(function (resp) {
@@ -101,5 +102,31 @@ function activityTracker(type, id, message) {
     //     error: function(resp){console.log(resp)}
     //   });
 }
+
+//to get the attribute value from the url, modified to give only one attribute value.
+function getUrlVars() {
+    var vars = {};
+    var attr="";
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+        attr = value;
+    });
+    return attr;
+    // return vars;
+};
+
+//javascript errors and exceptions
+window.onerror = function (msg, url, line, col, error) {
+    // Note that col & error are new to the HTML 5 spec and may not be 
+    // supported in every browser.  It worked for me in Chrome.
+    //    var extra = !col ? '' : '\ncolumn: ' + col;
+    //    extra += !error ? '' : '\nerror: ' + error;
+    activityTracker("error", getUrlVars(), "Error: " + msg + "\nurl: " + url + "\nline: " + line);
+
+    // var suppressErrorAlert = true;
+    // If you return true, then error alerts (like in older versions of 
+    // Internet Explorer) will be suppressed.
+    // return suppressErrorAlert;
+};
 // End @author: Gaurav Agarwal
 

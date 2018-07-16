@@ -5,7 +5,7 @@
 //@update: June 26-2018- with web service changes
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 
-
+var glytoucan_ac;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -52,7 +52,7 @@ function ajaxSuccess(data) {
 
 function ajaxFailure() {
     displayErrorByCode();
-    activityTracker("error", data.glytoucan_ac, "server down");
+    activityTracker("error", glytoucan_ac, "server down");
 }
 
 /**
@@ -98,7 +98,7 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    var glytoucan_ac = getParameterByName('glytoucan_ac');
+    glytoucan_ac = getParameterByName('glytoucan_ac');
     document.title = glytoucan_ac + " Detail";   //updates title with the glycan ID
     LoadData(glytoucan_ac);
 });
