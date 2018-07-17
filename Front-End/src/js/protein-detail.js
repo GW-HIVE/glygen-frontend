@@ -20,8 +20,8 @@ function ajaxSuccess(data) {
             items.push({
                 glytoucan_ac: glycan.glytoucan_ac,
                 residue: glycan.residue + glycan.position,
-                type:glycan.type,
-                evidence:glycan.evidence
+                type: glycan.type,
+                evidence: glycan.evidence
 
 
             });
@@ -54,24 +54,25 @@ function ajaxSuccess(data) {
             field: 'glytoucan_ac',
             title: 'Glycan',
             sortable: true,
-            formatter: function(value, row, index, field){
-                return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"}
+            formatter: function (value, row, index, field) {
+                return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
+            }
         },
-            {
+        {
             field: 'type',
             title: 'Type',
             sortable: true
         },
 
-            {
+        {
             field: 'residue',
             title: 'Residue',
             sortable: true
         }],
         pagination: 10,
         data: items,
-        detailView : true,
-        detailFormatter : function(index, row) {
+        detailView: true,
+        detailFormatter: function (index, row) {
             var html = [];
             var evidences = row.evidence;
             for (var i = 0; i < evidences.length; i++) {
@@ -84,7 +85,11 @@ function ajaxSuccess(data) {
         },
 
     });
-    activityTracker("user", data.uniprot_canonical_ac, "successful response");
+
+    if (data.error_code)
+        activityTracker("error", uniprot_canonical_ac, data.error_code);
+    else
+        activityTracker("user", data.uniprot_canonical_ac, "successful response");
 }
 
 
