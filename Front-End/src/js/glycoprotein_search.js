@@ -293,5 +293,7 @@ function ajaxProteinSearchSuccess() {
 $(window).on('resize', function () {
     var $element = $('.chosen-container');
     $element.width($element.parent().width());
+    var $element1 = $('.textbox');
+    $element1.width($element1.parent().width());
 
 })
