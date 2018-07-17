@@ -26,6 +26,7 @@ function xlimit(element) {
     limit = $(element).val();
     $('.limit-select').val(limit);
     LoadDataList();
+    activityTracker("user", id, "page limit: " + limit);
 }
 
 /**
@@ -35,6 +36,7 @@ function next() {
     page = page + 1;
     $(".page-select").val(page);
     LoadDataList();
+    activityTracker("user", id, "page: " + page);
 }
 
 /**
@@ -45,6 +47,7 @@ function prev() {
         page = page - 1;
         $(".page-select").val(page);
         LoadDataList();
+        activityTracker("user", id, "page: " + page);
     }
 }
 
@@ -56,6 +59,7 @@ function xpage(element) {
     page = $(element).val();
     $('.page-select').val(page);
     LoadDataList();
+    activityTracker("user", id, "page: " + page);
 }
 
 /**
@@ -67,6 +71,7 @@ function xsort(element) {
     sort = $(element).val();
     $('.sort-select').val(sort);
     LoadDataList();
+    activityTracker("user", id, "sort: " + sort);
 }
 
 /**
@@ -78,6 +83,7 @@ function xdir(element) {
     dir = $(element).val();
     $('.dir-select').val(dir);
     LoadDataList();
+    activityTracker("user", id, "sort direction: " + dir);
 }
 
 /**
@@ -174,6 +180,7 @@ $(document).ready(function () {
 function editSearch() {
     {
         window.location.replace("glycoprotein_search.html?id=" + id);
+        activityTracker("user", id, "edit search");
     }
 }
 
@@ -251,8 +258,10 @@ function updateSearch() {
             if (result.list_id) {
                 console.log(result);
                 window.location = 'glycoprotein_list.html?id=' + result.list_id;
+                activityTracker("user", id, "update search");
             } else {
                 // handle if no results
+                activityTracker("error", id, "update search: no result found");
             }
         },
         error: ajaxListFailure
@@ -273,6 +282,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -301,6 +311,7 @@ function ajaxListSuccess(data) {
 
         document.title = 'Glycoprotein-list';
         lastSearch = data;
+        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
@@ -308,6 +319,7 @@ function ajaxListSuccess(data) {
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure() {
     displayErrorByCode('server_down');
+    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**

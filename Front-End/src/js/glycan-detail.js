@@ -41,7 +41,10 @@ function ajaxSuccess(data) {
             }
         });
     });
-    activityTracker("user", data.glytoucan_ac, "successful response");
+    if (data.error_code)
+        activityTracker("error", glytoucan_ac, data.error_code);
+    else
+        activityTracker("user", data.glytoucan_ac, "successful response");
 }
 
 /**

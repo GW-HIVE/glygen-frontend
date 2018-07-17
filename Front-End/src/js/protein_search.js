@@ -163,8 +163,8 @@ $(document).ready(function () {
             LoadProteinSearchvalues(id);
         }
     })
-    .fail(function(){
-        activityTracker("error", "", result.error_code);
+    .fail(function(result){
+        activityTracker("error", "", result.status +": search_init WS error");
         console.log("error in search_init");
     });
 });

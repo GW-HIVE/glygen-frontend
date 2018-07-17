@@ -41,7 +41,7 @@
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body onload="tracking()">
 
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
@@ -184,10 +184,10 @@
             <div class="col-sm-8">
                 <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y</div>
-                <label id='msg' class="rq"></label>
                 </form>
             </div>
         </div>
+        <label id='msg' class="rq"></label>
         <!-- end Sequences-->
 
         <!--Pathway-->
