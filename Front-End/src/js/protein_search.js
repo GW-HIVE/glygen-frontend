@@ -70,6 +70,27 @@ $("#protein").autocomplete({
 });
 
 
+
+
+
+
+
+
+$("#refseq").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("refseq_ac", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
 /** protein_name field on change detect and suggest auto complete options from retrieved Json
  * @proteinjson - forms the JSON to post
  * @data-returns the protein_name.
@@ -204,6 +225,7 @@ function mass(mass_min, mass_max) {
 function ajaxProteinSearchSuccess() {
     var organism = $("#organism").val();
     var uniprot_id = $("#protein").val();
+    var refseq_id=$("#refseq").val();
     var mass_slider = document.getElementById("slider").noUiSlider.get();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
@@ -217,6 +239,7 @@ function ajaxProteinSearchSuccess() {
         query_type: "search_protein",
         organism: organism,
         uniprot_canonical_ac: uniprot_id,
+        refseq_ac:refseq_id,
         // mass: {
         //     min: mass_min,
         //     max: mass_max
