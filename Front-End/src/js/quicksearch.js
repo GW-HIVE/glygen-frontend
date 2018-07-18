@@ -53,7 +53,7 @@
 // }
 
 
-$("#protein2").autocomplete({
+$("#proteinfunction").autocomplete({
     source: function (request, response) {
         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
@@ -72,9 +72,9 @@ $("#protein2").autocomplete({
 
 
 
-function myProteinDetail(){
+function proteinFunction(){
 
-    var id = $("#protein2").val();
+    var id = $("#proteinfunction").val();
     $.ajax({
         type: 'post',
         url: getWsUrl("protein_detail",id),
