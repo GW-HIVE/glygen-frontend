@@ -56,7 +56,7 @@
             <div class="col-sm-8 gg-form-group">   
                 <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
                 
-                <div class="gg-text-example">Protein Example e.g:P0116</div>
+                <div class="gg-text-example">Example: P0116</div>
             </div>
         </div>
 
@@ -77,7 +77,7 @@
                 <label class="control-label col-sm-4" for="slider"><span><a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your proteins(s)"><i class="far fa-question-circle help-sign"></i></a></span> Protein Size:</label>
             </div>
         
-            <div class="col-sm-offset-1 col-sm-10 row">         
+            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">         
                 <!-- First range-->
                 <div class="col-xs-2 min-value-alignment">
                     <h6>Min</h6>
@@ -101,7 +101,7 @@
                 <select class="organism" id="organism">
                     <option value="">Select organism</option>
                 </select>
-                <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
+                <div class="gg-text-example">Example: Homo sapiens (Taxonomy ID: 9606)</div>
             </div>
         </div>
 
@@ -111,7 +111,7 @@
 
             <div class="col-sm-8">
                 <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
-                <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO</div>
+                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO</div>
             </div>
         </div>
 
@@ -122,27 +122,27 @@
             <div class="col-sm-8">
                 <input type="text" name="GeneName" class="form-control gene_name" id="gene_name"
                    placeholder="Provide the gene name">
-                <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1</div>
+                <div class="gg-text-example">Example: ERVMER34-1</div>
             </div>
         </div>
         
         <!--Attached Glycan-->
         <div class="gg-form-group row" id="Glycanid">
-             <label class="control-label col-sm-4" for="glycan_id"><span><a href="javascript://" title="Attached Glycan" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Attached Glycan:</label>
+             <label class="control-label col-sm-4" for="glycan_id"><span><a href="javascript://" title="Interacting Glycan" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan ID of a glycan that is covalently attached to or non-covalently binds to your protein(s)"><i class="far fa-question-circle help-sign"></i></a></span> Interacting Glycan:</label>
 
             <!-- Glycanid-->
             <div class="col-md-4" id="glycanrow">
                 <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Provide the Glycan ID">
-                <div class="gg-text-example">Glycan ID Example e.g:G109565BM</div>
+                <div class="gg-text-example">Example: G1095658M</div>
             </div>
 
             <!-- Glycanrelation-->
             <div class="col-md-4" id="glycanrelationrow">
                 <select class="form-control glycan_relation" id="relation">
-                    <option value="">Select Relation</option>
-                    <option value="attached">attached</option>
-                    <option value="binding">binding</option>
-                    <option value="any">any</option>
+                    <option value="">Select Interaction Type</option>
+                    <option value="covalent">covalent</option>
+                    <option value="non-covalent">non-covalent</option>
+                    <option value="all">All</option>
                     <div class="gg-text-example">Choose Glycan Relation</div>
                 </select>
             </div>
@@ -176,7 +176,7 @@
                     <option value="P">Proline - Pro - P</option>
                     <option value="G">Glycine - Gly - G</option>
                 </select>
-                <div class="gg-text-example">Amino acid Example e.g: Tyrosine - Tyr - Y</div>
+                <div class="gg-text-example">Example: Asparagine or Asn or N</div>
             </div>
         </div>
         <!-- End amino acid-->
@@ -194,7 +194,7 @@
             </div>
             <div class="col-sm-8">
                 <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y</div>
+                <div class="gg-text-example">Example: Asparagine or Asn or N</div>
                 </form>
             </div>
         </div>
@@ -208,23 +208,21 @@
             <div class="col-sm-8">
                 <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
                 
-                <div class="gg-text-example">Pathway Example e.g:P77731</div>
+                <div class="gg-text-example">Example:P77731</div>
             </div>
         </div>
         <!--End Pathway-->
 
         <!-- Glycosylation Evidences-->
         <div class="gg-form-group row" id="glycosylation_evidence">
-            <label class="control-label col-sm-4" for="organism"><span><a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycosylation Evidences</label>
+            <label class="control-label col-sm-4" for="organism"><span><a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Glycosylation Evidence</label>
         
             <div class="col-sm-8">
                 <select class="form-control">
-                    <option value="">Select Relation</option>
-                    <option value="calculated">calculated</option>
-                    <option value="experimental">experimental</option>
-                    <option value="any">any</option>
-                    <option value="none">none</option>
-
+                    <option value="">Select Evidence Type</option>
+                    <option value="experiment">experiment</option>
+                    <option value="calculation">calculation</option>
+                    <option value="any">Any</option>
                 </select>
             </div>
         </div>
