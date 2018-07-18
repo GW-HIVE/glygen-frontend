@@ -1,6 +1,6 @@
 // @author: Tatiana Williamson
 // @description: UO1 Version-1.1.
-// @Date: 8th Mar 2018.
+// @Date: March 08, 2018.
 
 /**
  * Represents a switch handler in glygen settings.
@@ -14,12 +14,16 @@ function switchHandler(el) {
             $checkbox.attr('checked', false);
             $('#manageSettingsDisabled').css('display', 'block');
             $('#manageSettingsEnabled').css('display', 'none');
+            $('#textManageSettingsDisabled').css('display', 'block');
+            $('#textManageSettingsEnabled').css('display', 'none');
             clearLocalStore();
             doNotLog();
         } else {
             $checkbox.attr('checked', true);
             $('#manageSettingsDisabled').css('display', 'none');
             $('#manageSettingsEnabled').css('display', 'block');
+            $('#textManageSettingsDisabled').css('display', 'none');
+            $('#textManageSettingsEnabled').css('display', 'block');
             clearLocalStore();
             logID();
         }
