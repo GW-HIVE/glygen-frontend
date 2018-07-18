@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body onload="tracking()">
+<body>
 
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
@@ -57,8 +57,7 @@
     
     <div class="container">
         <div class="row margin-top">
-           <div class="col-centered"> 
-            <div class="col-xs-4 col-lg-6 research-menu research-data-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu research-data-menu">
                 <h5>Research Data</h3>
                 <ul>
                     <li>Databases</li>
@@ -70,19 +69,19 @@
                 </div>  
             </div>
             
-            <div class="col-xs-4 col-lg-6 research-menu learn-glycobiology-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu learn-glycobiology-menu">
                 <h5>Learn Glycobiology</h5>
                 <ul>
                     <li>Learn how to do Glycobiology</li>
                     <li>Different knowladge levels</li>
-                    <li><a href="#glycans-table">Glycans</a>, <a href="#proteins-table">Protens</a>, and <a href="#glycoproteins-table">GlycoProteins</a></li>
+                    <li>Glycans, Protens, and GlycoProteins</a></li>
                 </ul>
                 <div class="text-center">
                     <a href="#learn-glycobiology"><img src="images/icons/university.png" alt="university image"></a>
                 </div>
             </div>
             
-            <div class="col-xs-4 col-lg-6 research-menu website-tour-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu website-tour-menu">
                 <h5>Website Tour</h3>
                 <ul>
                     <li>Take a tour of GlyGen website</li>
@@ -94,7 +93,7 @@
                 </div> 
             </div>
             
-            <div class="col-xs-4 col-lg-6 research-menu glycan-search-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu glycan-search-menu">
                 <h5>Glycan Search</h3>
                 <ul>
                     <li>Learn how to do Glycan research</li>
@@ -104,7 +103,7 @@
                 </div>
             </div>
             
-            <div class="col-xs-4 col-lg-6 research-menu protein-search-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu protein-search-menu">
                 <h5>Protein Search</h5>
                 <ul>
                     <li>Learn how to do Protein research</li>
@@ -113,7 +112,7 @@
                     <img src="images/icons/protein-icon.png" alt="protein image">
                 </div>  
             </div>
-            <div class="col-xs-4 col-lg-6 research-menu glycoProtein-search-menu" aria-haspopup="true">
+            <div class="col-xs-4 col-lg-6 research-menu glycoProtein-search-menu">
                 <h5>GlycoProtein Search</h3>
                 <ul>
                     <li>Learn how to do GlycoProtein research</li>
@@ -123,292 +122,18 @@
                 </div>  
             </div>
         </div>
-        </div>
-<!--    </div>-->
-    
-<!--    <div class="container">-->
-        <div class="row margin-bottom research-data-table">
-            <h3 id="research-data">Research Data</h3>
-            <table class="table-striped" data-toggle="table"
-            data-sort-name="stargazers_count"
-            data-sort-order="desc">
-                <thead>
-                <tr>
-                    <th data-field="name" 
-                        data-sortable="true">
-                            Name
-                    </th>
-                    <th data-field="resource" 
-                        data-sortable="true">
-                            Resource
-                    </th>
-                    <th data-field="description" 
-                        data-sortable="false">
-                            Description
-                    </th>
-                    <th data-field="glycan"
-                        data-align="center" 
-                        data-sortable="true">
-                            Glycan
-                    </th>
-                    <th data-field="protein"
-                        data-align="center" 
-                        data-sortable="true">
-                            Protein
-                    </th>
-                    <th data-field="glycoprotein"
-                        data-align="center" 
-                        data-sortable="true">
-                            GlycoProtein
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Database</td>
-                        <td><a href="http://www.cazy.org/" target="_blank">CAZy</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>  
-                    <tr>
-                        <td>Database</td>
-                        <td><a href="http://csdb.glycoscience.ru" target="_blank">CSDB: Carbohydrate Structure Database</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Database</td>
-                        <td><a href="https://www.expasy.org/glycomics" target="_blank">Glycomics@ExPASy</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Database</td>
-                        <td><a href="http://jcbl.jp/wiki/Main_Page" target="_blank">LipidBank</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Database</td>
-                        <td><a href="https://glyconnect.expasy.org/" target="_blank">GlyConnect</a></td>
-                        <td>Is a platform integrating sources of information to help characterise the molecular components of protein glycosylation.</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Knowledgebase</td>
-                        <td><a href="https://www.cazypedia.org/index.php/Main_Page" target="_blank">CAYypedia</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Knowledgebase</td>
-                        <td><a href="https://www.glycopedia.eu/" target="_blank">Glycopedia</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Knowledgebase</td>
-                        <td><a href="http://www.unicarbkb.org" target="_blank">UniCarbKB</a></td>
-                        <td>Is a knowledge base for curated glycoconjugate information and their annotations.</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Informatics Initiative</td>
-                        <td><a href="https://glic.glycoinfo.org/" target="_blank">GLIC: Glycoinformatics Consortium</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Database/Tool</td>
-                        <td><a href="https://www.glycostore.org/" target="_blank">GlycoStore</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Data-processing Tool</td>
-                        <td><a href="http://www.grits-toolbox.org/" target="_blank">GRITS Toolbox</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Tools</td>
-                        <td><a href="https://virtualglycome.org/" target="_blank">VirtualGlycome</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Integrated Databases</td>
-                        <td><a href="https://acgg.asia/db/" target="_blank">ACGG-DB</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Consortium/Inititative</td>
-                        <td><a href="http://www.beilstein-institut.de/en/projects/mirage" target="_blank">MIRAGE</a></td>
-                        <td>Description</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Structure Repository</td>
-                        <td><a href="https://glytoucan.org/" target="_blank">GlyTouCan</a></td>
-                        <td>Is the international glycan structure repository. It assigns globally unique accession numbers to any submitted glycan.</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Structure Repository</td>
-                        <td><a href="http://www.uniprot.org/" target="_blank">UniProt</a></td>
-                        <td>Is a freely available, comprehensive resource of high quality protein sequences and functional annotations.</td>
-                        <td>-</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div> 
-        </div>
-<!--    </div>-->
-    
-<!--    <div class="container">-->
-        <div class="row margin-bottom learn-glycobiology-table">
-            <h3 id="research-data">Learn Glycobiology</h3>
-            <table class="table-striped" data-toggle="table"
-            data-sort-name="stargazers_count"
-            data-sort-order="desc">
-                <thead>
-                <tr>
-                    <th data-field="name" 
-                        data-sortable="false">
-                            Name
-                    </th>
-                    <th data-field="type" 
-                        data-sortable="true">
-                            Type
-                    </th>
-                    <th data-field="description" 
-                        data-sortable="false">
-                            Description
-                    </th>
-
-                    <th data-field="glycan" 
-                        data-align="center"
-                        data-sortable="true">
-                            Glycan
-                    </th>
-                    <th data-field="protein" 
-                        data-align="center"
-                        data-sortable="true">
-                            Protein
-                    </th>
-                    <th data-field="glycoprotein"
-                        data-align="center" 
-                        data-sortable="true">
-                            GlycoProtein
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Essentials of Glycobiology</td>
-                        <td><a href="https://www.ncbi.nlm.nih.gov/books/NBK310274/" target="_blank">e-Book</a></td>
-                        <td> Glycobiology is the study of the structure, biosynthesis, biology, and evolution of saccharides that are widely distributed in nature in all living life forms.</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Glycan assembly</td>
-                        <td><a href="https://www.youtube.com/watch?v=Vu8t7c310m0" target="_blank">Video</a></td>
-                        <td>Types of glycans found on human glycoproteins, and enzymatic glycan synthesis.</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr> 
-                    <tr>
-                        <td>Glycans</td>
-                        <td><a href="https://www.youtube.com/watch?v=BgZ61TxnxKo" target="_blank">Video</a></td>
-                        <td>Where are glycans and what do they do?</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr> 
-                    <tr>
-                        <td>Inner Life of the Cell</td>
-                        <td><a href="https://www.youtube.com/watch?v=FzcTgrxMzZk" target="_blank">Video</a></td>
-                        <td>Full version of inner life of the cell, narrated.</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Biochemistry</td>
-                        <td><a href="https://www.youtube.com/watch?v=ZfsuDfui0oU&index=12&list=PL9jo2wQj1WCNTJhgaXpsI1tzi0bemyl4j" target="_blank">Video</a></td>
-                        <td>Introduction to Proteins</td>
-                        <td>-</td>
-                        <td>Yes</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Tools for Glycoprotein analysis</td>
-                        <td><a href="https://www.youtube.com/watch?v=9wcxfVZHGNg" target="_blank">Video</a></td>
-                        <td>This tutorial introduces the function N- and O-glycans, and discusses enzymes used in deglycosylation.</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Tools for Glycoprotein analysis</td>
-                        <td><a href="https://www.youtube.com/watch?v=u38LjCOvDZU" target="_blank">Video</a></td>
-                        <td>NDSU Virtual Cell Animations Project animation 'Protein Modification (Golgi)'.</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>Yes</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div> 
-        </div>
     </div>
     
-<!--
-    <div class="container">
-        <div class="row learn-glycobiology-table margin-bottom">
-            <h3 id="learn-glycobiology" class="page-heading">Learn Glycobiology</h3> 
+    <div class="container ">
+        <div class="row research-data-table">
+            <h3 id="research-data">Research Data</h3>
             <div class="margin-bottom">
                 <table class="table table-striped table-bordered table-hover" data-toggle="table"
                 data-sort-name="stargazers_count"
                 data-sort-order="desc">
                     <div class="panel-heading panel-heading-resources">
-                        <h4 id="glycans-table" class="page-heading">Glycans</h4>
+                        <h4 id="glycans-table" class="page-heading">Data resources</h4>
+                        <p class="lead">A list of publicly avilable databases, repositories and knowledgebases providing glycan relates information.</p>
                     </div>
                     <thead id="glycan">
                     <tr>
@@ -416,133 +141,319 @@
                             data-sortable="true">
                                 Category
                         </th>
-                        <th data-field="level" 
+                        <th data-field="website" 
                             data-sortable="true">
-                                Level
+                                Website
                         </th>
                         <th data-field="description" 
                             data-sortable="false">
                                 Description
                         </th>
-                        <th data-field="link" 
+                        <th data-field="Publication" 
                             data-sortable="true">
-                                Link
+                                Contains Publication 
+                        </th>
+                        <th data-field="Experimental" 
+                            data-sortable="true">
+                                Experimental data 
+                        </th>
+                        <th data-field="Curated" 
+                            data-sortable="true">
+                                Curated 
                         </th>
                     </tr>
                     </thead>
                     <tbody>  
                         <tr>
-                            <td>Glycan assembly</td>
-                            <td>-</td>
-                            <td>Types of glycans found on human glycoproteins, and enzymatic glycan synthesis.</td>
-                            <td><a href="https://www.youtube.com/watch?v=Vu8t7c310m0" target="_blank">Video</a></td>
+                            <td>Database</td>
+                            <td><a href="http://www.cazy.org/" target="_blank">CAZy</a></td>
+                            <td>The CAZy database describes the families of structurally-related catalytic and carbohydrate-binding modules (or functional domains) of enzymes that degrade, modify, or create glycosidic bonds.</td>
+                            <td></td>
+                            <td></td>
+                            <td>Yes</td>
                         </tr>  
-                        <tr>
-                            <td>Glycans</td>
-                            <td>-</td>
-                            <td>Where are glycans and what do they do?</td>
-                            <td><a href="https://www.youtube.com/watch?v=BgZ61TxnxKo" target="_blank">Video</a></td>
+                         <tr>
+                            <td>Knowledgebase</td>
+                            <td><a href="https://www.cazypedia.org/index.php/Main_Page" target="_blank">CAYypedia</a></td>
+                            <td>CAZypedia is a community-driven resource to assemble a comprehensive encyclopedia of the carbohydrate-active enzymes and associated carbohydrate-binding modules involved in the synthesis and degradation of complex carbohydrates. CAZypedia is closely connected with, the actively curated CAZy Database.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
+                         <tr>
+                            <td>Database</td>
+                            <td><a href="http://csdb.glycoscience.ru/" target="_blank">CSDB: Carbohydrate Structure Database</a></td>
+                            <td>A set of manual curated carbohydrate structure databases with associated metadata (taxonomic annotation, bibliography, and NMR data). There are subdatabases focusing on bacterial carbohydrates, plant and fungal carbohydrates as well as a database for glycosyltransferases.</td>
+                            <td>Yes</td>
+                            <td>NMR</td>
+                            <td>Yes</td>
+                        </tr>
+                         <tr>
+                            <td>Database</td>
+                            <td><a href="https://www.glycostore.org/" target="_blank">GlycoStore</a></td>
+                            <td>The CAZy database describes the families of structurally-related catalytic and carbohydrate-binding modules (or functional domains) of enzymes that degrade, modify, or create glycosidic bonds.</td>
+                            <td>Yes</td>
+                            <td>UPLC, HILIC-UPLC, CE-LIF, HILIC-HPLC, PGC-LC-ESI-MS/MS</td>
+                            <td></td>
+                        </tr>
+                         <tr>
+                            <td>Repository</td>
+                            <td><a href="https://glytoucan.org/" target="_blank">GlyTouCan</a></td>
+                            <td>GlyTouCan is the international glycan structure repository. This repository is the uncurated registry for glycan structures that assigns globally unique accession numbers to any glycan independent of the level of information provided by the experimental method used to identify the structure.</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td></td>
+                        </tr> 
                         <tr>
-                            <td>Inner Life of the Cell</td>
-                            <td>-</td>
-                            <td>Full version of inner life of the cell, narrated.</td>
-                            <td><a href="https://www.youtube.com/watch?v=FzcTgrxMzZk" target="_blank">Video</a></td>
-                        </tr>                 
+                            <td>Knowledgebase</td>
+                            <td><a href="http://www.unicarbkb.org/" target="_blank">UniCarbKB</a></td>
+                            <td>GlyTouCan is the international glycan structure repository. This repository is the uncurated registry for glycan structures that assigns globally unique accession numbers to any glycan independent of the level of information provided by the experimental method used to identify the structure.</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td>Yes</td>
+                        </tr> 
+                        <tr>
+                            <td>Knowledgebase</td>
+                            <td><a href="https://jcggdb.jp/GlycoPOD/protocolListShow" target="_blank">GlycoPOD</a></td>
+                            <td>GlycoPOD is the glycosciences protocol database. This resources contains an extensive and curated list of experimental protocols and detailed instructures on the execution of these protocols as well as the necessary reagents and hardware.</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td>Yes</td>
+                        </tr>              
                     </tbody>
                 </table>
                 <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
             </div>
             
-            <div class="margin-bottom"> 
+            <div class="margin-bottom">
                 <table class="table table-striped table-bordered table-hover" data-toggle="table"
                 data-sort-name="stargazers_count"
                 data-sort-order="desc">
                     <div class="panel-heading panel-heading-resources">
-                        <h4 id="proteins-table" class="page-heading">Proteins</h4>
+                        <h4 id="glycans-table" class="page-heading">Tools</h4>
+                        <p class="lead">A list of tools, tool collections or link pages to glycomics related tools.</p>
                     </div>
-                    <thead>
+                    <thead id="glycan">
                     <tr>
                          <th data-field="category" 
                             data-sortable="true">
                                 Category
                         </th>
-                        <th data-field="level" 
+                        <th data-field="website" 
                             data-sortable="true">
-                                Level
+                                Website
                         </th>
                         <th data-field="description" 
                             data-sortable="false">
                                 Description
                         </th>
-                        <th data-field="link" 
+                        <th data-field="Experimental" 
                             data-sortable="true">
-                                Link
+                                Experimental data 
+                        </th>
+                        <th data-field="Availabilty" 
+                            data-sortable="true">
+                                Availabilty 
                         </th>
                     </tr>
                     </thead>
                     <tbody>  
                         <tr>
-                            <td>Biochemistry</td>
-                            <td>-</td>
-                            <td>Introduction to Proteins</td>
-                            <td><a href="https://www.youtube.com/watch?v=ZfsuDfui0oU&index=12&list=PL9jo2wQj1WCNTJhgaXpsI1tzi0bemyl4j" target="_blank">Video</a></td>
+                            <td>Tools</td>
+                            <td><a href="http://www.grits-toolbox.org/" target="_blank">GRITS Toolbox</a></td>
+                            <td>GRITS Toolbox is a modular software suite for processing, annotating and archiving of glycomics data with a focus on MS data.The software allows users to upload their instrument MS data files in open file formats (either as mzXML or mzML) and annotated them  using the integration annotation module Glycomics Elucidation and Annotation Tool (GELATO). Extentions are available to process glycollipid MS data and glycan array data.</td>
+                            <td>MS, glycan array</td>
+                            <td>Free</td>
                         </tr>  
-                        <tr>
+                         <tr>
+                            <td>Tool collection</td>
+                            <td><a href="https://virtualglycome.org/" target="_blank">VirtualGlycome</a></td>
+                            <td>A set of tools for the processing of glycoproteomics MS data and for the drawing of glycan structures consistent with the SNFG structure format.</td>
+                            <td>MS</td>
+                            <td>Free</td>
+                        </tr>
+                         <tr>
+                            <td>Tool collection</td>
+                            <td><a href="http://rings.t.soka.ac.jp/" target="_blank">RINGS</a></td>
+                            <td>RINGS is a web resource providing algorithmic and data mining tools to aid glycobiology research. There are also many tools for converting between different carbohydrate sequence formats, predicting glycan pathways and mapping glycans to organs in human and mouse.</td>
+                            <td></td>
+                            <td>Free</td>
+                        </tr>
+                         <tr>
+                            <td>Link page</td>
+                            <td><a href="https://www.expasy.org/glycomics" target="_blank">ExPASy Bioinformatics Resource Portal</a></td>
+                            <td>A link page providing links and information about glycan related dtabases and software tools.</td>
+                            <td></td>
+                            <td>Free</td>
+                        </tr>             
                     </tbody>
                 </table>
                 <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
             </div>
             
-            <table class="table table-striped table-bordered table-hover" data-toggle="table"
-            data-sort-name="stargazers_count"
-            data-sort-order="desc">
-                <div class="panel-heading panel-heading-resources">
-                    <h4 id="glycoproteins-table" class="page-heading">GlycoProteins</h4>
+            
+            
+            <div class="margin-bottom">
+                <table class="table table-striped table-bordered table-hover" data-toggle="table"
+                data-sort-name="stargazers_count"
+                data-sort-order="desc">
+                    <div class="panel-heading panel-heading-resources">
+                        <h4 id="glycans-table" class="page-heading">Organization</h4>
+                        <p class="lead">List of glycomics related organizations.</p>
+                    </div>
+                    <thead id="glycan">
+                    <tr>
+                         <th data-field="category" 
+                            data-sortable="true">
+                                Category
+                        </th>
+                        <th data-field="website" 
+                            data-sortable="true">
+                                Website
+                        </th>
+                        <th data-field="description" 
+                            data-sortable="false">
+                                Description
+                        </th>
+                        <th data-field="Experimental" 
+                            data-sortable="true">
+                                Domain 
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>  
+                        <tr>
+                            <td>Consortium/Inititative</td>
+                            <td><a href="http://www.beilstein-institut.de/en/projects/mirage" target="_blank">MIRAGE</a></td>
+                            <td>MIRAGE stands for “Minimum Information Required for A Glycomics Experiment”. The aim of the MIRAGE project is to improve the quality of glycomics data in the scientific literature be provding minimum reporting guidelines.</td>
+                            <td>Glycomics</td>
+                        </tr>  
+                         <tr>
+                            <td>Consortium/Inititative</td>
+                            <td><a href="https://glic.glycoinfo.org/" target="_blank">GLIC</a></td>
+                            <td>GLIC is the Glycoinformatics Consortium. The purpose of Glycoinformatics Consortium(GLIC) is to provide and maintain a centralized source of software repository for the glycoscientists. In addition, it is aimed to be provided as a communication point for glycoscientists and glycoinformaticians.</td>
+                            <td>Glycomics</td>
+                        </tr>            
+                    </tbody>
+                </table>
+                <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
+                
+                <div>
+                    <p>*** If you want to see your tools and/or data resources on our website, please contact us <a href="contact.html"> here</a>.***</p>
                 </div>
-                <thead>
-                <tr>
-                     <th data-field="category" 
-                        data-sortable="true">
-                            Category
-                    </th>
-                    <th data-field="level" 
-                        data-sortable="true">
-                            Level
-                    </th>
-                    <th data-field="description" 
-                        data-sortable="false">
-                            Description
-                    </th>
-                    <th data-field="link" 
-                        data-sortable="true">
-                            Link
-                    </th>
-                </tr>
-                </thead>
-                <tbody>  
-                    <tr>
-                        <td>Tools for Glycoprotein analysis</td>
-                        <td>-</td>
-                        <td>This tutorial introduces the function N- and O-glycans, and discusses enzymes used in deglycosylation.</td>
-                        <td><a href="https://www.youtube.com/watch?v=9wcxfVZHGNg" target="_blank">Video</a></td>
-                    </tr>  
-                    <tr>
-                        <td>Protein Modification (Golgi)</td>
-                        <td>-</td>
-                        <td>NDSU Virtual Cell Animations Project animation 'Protein Modification (Golgi)'.</td>
-                        <td><a href="https://www.youtube.com/watch?v=u38LjCOvDZU" target="_blank">Video</a></td>
-                    </tr>                 
-                </tbody>
-            </table>
-            <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div> 
+            </div>
         </div>
     </div>
--->
+    
+    <div class="container margin-bottom">
+        <div class="row margin-bottom learn-glycobiology-table2">
+            <div class="learn-glycobiology-table"> 
+                <h3 id="learn-glycobiology">Learn Glycobiology</h3>
+                <table class="table table-resources table-striped" data-toggle="table"
+                data-sort-name="stargazers_count"
+                data-sort-order="desc">
+                    <thead>
+                    <tr>
+                        <th data-field="name" 
+                            data-sortable="false">
+                                Name
+                        </th>
+                        <th data-field="type" 
+                            data-sortable="true">
+                                Type
+                        </th>
+                        <th data-field="description" 
+                            data-sortable="false">
+                                Description
+                        </th>
+
+                        <th data-field="glycan" 
+                            data-align="center"
+                            data-sortable="true">
+                                Glycan
+                        </th>
+                        <th data-field="protein" 
+                            data-align="center"
+                            data-sortable="true">
+                                Protein
+                        </th>
+                        <th data-field="glycoprotein"
+                            data-align="center" 
+                            data-sortable="true">
+                                GlycoProtein
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Essentials of Glycobiology</td>
+                            <td><a href="https://www.ncbi.nlm.nih.gov/books/NBK310274/" target="_blank">e-Book</a></td>
+                            <td> Glycobiology is the study of structure, biosynthesis, biology, and evolution of saccharides that are widely distributed in nature in all living life forms.</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Glycan assembly</td>
+                            <td><a href="https://www.youtube.com/watch?v=Vu8t7c310m0" target="_blank">Video</a></td>
+                            <td>Types of glycans found on human glycoproteins, and enzymatic glycan synthesis.</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td></td>
+                        </tr> 
+                        <tr>
+                            <td>Glycans</td>
+                            <td><a href="https://www.youtube.com/watch?v=BgZ61TxnxKo" target="_blank">Video</a></td>
+                            <td>Where are glycans and what do they do?</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td></td>
+                        </tr> 
+                        <tr>
+                            <td>Inner Life of the Cell</td>
+                            <td><a href="https://www.youtube.com/watch?v=FzcTgrxMzZk" target="_blank">Video</a></td>
+                            <td>Full version of inner life of the cell, narrated.</td>
+                            <td>Yes</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Biochemistry</td>
+                            <td><a href="https://www.youtube.com/watch?v=ZfsuDfui0oU&index=12&list=PL9jo2wQj1WCNTJhgaXpsI1tzi0bemyl4j" target="_blank">Video</a></td>
+                            <td>Introduction to Proteins</td>
+                            <td></td>
+                            <td>Yes</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Tools for Glycoprotein analysis</td>
+                            <td><a href="https://www.youtube.com/watch?v=9wcxfVZHGNg" target="_blank">Video</a></td>
+                            <td>This tutorial introduces the function N- and O-glycans, and discusses enzymes used in deglycosylation.</td>
+                            <td></td>
+                            <td></td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Tools for Glycoprotein analysis</td>
+                            <td><a href="https://www.youtube.com/watch?v=u38LjCOvDZU" target="_blank">Video</a></td>
+                            <td>NDSU Virtual Cell Animations Project animation 'Protein Modification (Golgi)'.</td>
+                            <td></td>
+                            <td></td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="goToTop"><a href="#top-heading">to top <span class="glyphicon glyphicon-arrow-up"></span></a></div>
+                
+                <div>
+                    <p>*** If you want to see your tools and/or data resources on our website, please contact us <a href="contact.html"> here</a>.***</p>
+                </div> 
+            </div>
+        </div>
+    </div>
      
     <div w3-include-html="footer.html"></div>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <!-- <script>jQuery.noConflict();</script> -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
     <script src="js/navbar.js"></script>
