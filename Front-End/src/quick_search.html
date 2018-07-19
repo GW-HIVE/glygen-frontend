@@ -34,6 +34,8 @@
     <script src="js/modernizr.js"></script>
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
+    <!-- NAVIGATION -->
+    <script src="js/navbar.js"></script>
 </head>
 
 <body onload="tracking()">
@@ -72,7 +74,7 @@
                     <div class="cd-faq-content">
                         <strong>Glycan X:</strong>
                         <input class="gg-faq-formInput" type="text" name="GlytoucanID" placeholder="GlyTouCan ID" id="bioenzyme">
-                        <button type="button" name="submit" onclick="()" class="btn-sm btn-primary">submit</button>
+                        <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">submit</button>
                     </div>
                 </li>
 
@@ -154,7 +156,9 @@
                     <div class="cd-faq-content">
                         <strong>Species:</strong>
                         <select size="1" class="gg-faq-formInput organism" id="species1">
-                            <option value=""></option>
+                            <option value=" ">select species</option>
+                            <option value="9606">Homo Sepian</option>
+                            <option value="10090">Mouse</option>
                         </select>
 
                         <button type="button" name="submit" onclick="myFunction()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">submit</button>
@@ -169,7 +173,9 @@
                         <strong>Species:</strong>
                         <!-- <input type="text" name="species" placeholder="scientific name" id=""> -->
                         <select size="1" class="gg-faq-formInput organism" id="species2">
-                            <option value=""></option>
+                            <option value=" ">select species</option>
+                            <option value="9606">Homo Sepian</option>
+                            <option value="10090">Mouse</option>
                         </select>
                         <button type="button" name="submit" onclick="myFunction()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">submit</button>
 
@@ -184,7 +190,9 @@
 
                         <strong>Species:</strong>
                         <select size="1" class="gg-faq-formInput" id="species3">
-                            <option value=""></option>
+                            <option value=" ">select species</option>
+                            <option value="9606">Homo Sepian</option>
+                            <option value="10090">Mouse</option>
                         </select>
                         <strong>Type:</strong>
                         <select name="species_type" class="biginput gg-faq-formInput" id="species">
@@ -230,13 +238,12 @@
 <script src="libraries/jquery/jquery-3.1.js"></script>
 <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- script for getting Web Service URLs -->
+
 <script src="js/ws_url.js"></script>
 <!-- script for logging activity -->
 <script src="js/activity_tracker.js"></script>
 <!-- SIDE NAVIAGTION -->
 <script src="js/faq_main.js"></script>
-<!-- NAVIGATION -->
-<script src="js/navbar.js"></script>
 <!-- Resource jQuery -->
 <script src="libraries/jquery/jquery-ui.js"></script>
 <!-- Error Handling -->
@@ -245,6 +252,7 @@
 <script type="text/javascript" src="js/quicksearch.js"></script>
 <!-- alertify-->
 <script type="text/javascript" src="libraries/alertify.js"></script>
+
 <script>
     //calls the script in faq_main.js file
     faqMain();
@@ -265,5 +273,6 @@
         }
     }
 </script>
+
 
 </html>
