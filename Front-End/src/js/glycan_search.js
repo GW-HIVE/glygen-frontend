@@ -4,6 +4,23 @@
 // //@refactored  :June-27-2017
 //     -->
 
+
+
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
+
+
 $("#glycan_id").autocomplete({
     source: function (request, response) {
         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
@@ -126,7 +143,7 @@ function sugarmass(sugar_mass_min, sugar_mass_max) {
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
-        nodes1[handle].innerHTML = values[handle];
+        nodes[handle].innerHTML = addCommas(values[handle]);
     });
 }
 
@@ -153,7 +170,7 @@ function mass(mass_min, mass_max) {
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = values[handle];
+        nodes[handle].innerHTML = addCommas(values[handle]);
     });
 
 }
@@ -228,16 +245,27 @@ function submitvalues() {
         type: 'post',
         url: getWsUrl("glycan_search"),
         data: json,
-        success: function (results) {
-            if (results.error_code) {
-                displayErrorByCode(results.error_code);
-                activityTracker("error", "", results.error_code);
-            } else if (results.list_id && (results.list_id.length === 0)) {
-                displayErrorByCode('no-results-found');
-                activityTracker("user", "", "no result found");
-            } else {
+        // success: function (results) {
+        //     if (results.error_code) {
+        //         displayErrorByCode(results.error_code);
+        //         activityTracker("error", "", results.error_code);
+        //     } else if (results.list_id && (results.list_id.length === 0)) {
+        //         displayErrorByCode(results.error_code);
+        //         activityTracker("user", "", "no result found");
+        //     } else {
+        //         window.location = './glycan_list.html?id=' + results.list_id;
+        //     }
+        // }
+
+        success: function(results) {
+            if (results.list_id) {
                 window.location = './glycan_list.html?id=' + results.list_id;
             }
+            else {
+                displayErrorByCode(results.error_code);
+                activityTracker("error", "", results.error_code);
+            }
+
         }
     });
 }
