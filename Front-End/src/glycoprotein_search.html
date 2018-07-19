@@ -63,18 +63,18 @@
 
         <!-- RefSeq Accession_ID-->
         <div class="row top-table-margin">
-            <label class="control-label col-sm-4" for="refseq"><span><a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> RefSeq Accession number:</label>
+            <label class="control-label col-sm-4" for="refseq"><span><a href="javascript://" title="RefSeq Accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> RefSeq Accession number:</label>
 
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Provide the RefSeq Accession of a glycoprotein">
 
-                <div class="gg-text-example">RefSeq Accession:</div>
+                <div class="gg-text-example">Example: </div>
             </div>
         </div>
         <!-- Protein Size -->
         <div class="gg-form-group row">
             <div>
-                <label class="control-label col-sm-4" for="slider"><span><a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your proteins(s)"><i class="far fa-question-circle help-sign"></i></a></span> Protein Size:</label>
+                <label class="control-label col-sm-4" for="slider"><span><a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a mass range for your protein(s)"><i class="far fa-question-circle help-sign"></i></a></span> Protein Size:</label>
             </div>
         
             <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">         
@@ -140,8 +140,8 @@
             <div class="col-md-4" id="glycanrelationrow">
                 <select class="form-control glycan_relation" id="relation">
                     <option value="">Select Interaction Type</option>
-                    <option value="covalent">covalent</option>
-                    <option value="non-covalent">non-covalent</option>
+                    <option value="covalent">Covalent</option>
+                    <option value="non-covalent">Non-covalent</option>
                     <option value="all">All</option>
                     <div class="gg-text-example">Choose Glycan Relation</div>
                 </select>
@@ -182,19 +182,19 @@
         <!-- End amino acid-->
     
         <!-- Sequences-->
-        <div class="gg-form-group row" style="margin-bottom: 40px;">
-            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="Protein/Peptide-Sequences" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Protein/Peptide-Sequences:</label>
+        <div class="gg-form-group row">
+            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="ContentEnter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
-                    <option value="">Select Sequence_type</option>
-                    <option value="blast">Blast</option>
-                    <option value="exact">Exact</option>
+                    <option value="">Select SEQUENCE_TYPE</option>
+                    <option value="blast">BLAST</option>
+                    <option value="exact">EXACT</option>
                 </select>
             </div>
             <div class="col-sm-8">
                 <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                <div class="gg-text-example">Example: Asparagine or Asn or N</div>
+                <div class="gg-text-example">Example: SEQUENCE _A MSGGTRYLGHEI</div>
                 </form>
             </div>
         </div>
@@ -203,12 +203,12 @@
 
         <!--Pathway-->
         <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Content"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
+            <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Uniprot pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
             
             <div class="col-sm-8">
-                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
+                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Provide a UniProt Pathway ID">
                 
-                <div class="gg-text-example">Example:P77731</div>
+                <div class="gg-text-example">Example: P77731</div>
             </div>
         </div>
         <!--End Pathway-->
@@ -220,8 +220,8 @@
             <div class="col-sm-8">
                 <select class="form-control">
                     <option value="">Select Evidence Type</option>
-                    <option value="experiment">experiment</option>
-                    <option value="calculation">calculation</option>
+                    <option value="experiment">Experiment</option>
+                    <option value="calculation">Calculation</option>
                     <option value="any">Any</option>
                 </select>
             </div>

@@ -123,25 +123,25 @@
 
             <div class="col-sm-8">
                 <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
-                <div class="gg-text-example">Example: ERVMER34-1  </div>
+                <div class="gg-text-example">Example: ERVMER34-1</div>
             </div>
         </div>
 
         <!-- Sequences-->
-        <div class="gg-form-group row" style="margin-bottom: 40px;">
-            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="Protein/Peptide-Sequences" data-toggle="popover" data-placement="left" data-content="Enter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide sequence(s):</label>
+        <div class="gg-form-group row">
+            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="“Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="Enter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
-                    <option value="">Select Sequence_type</option>
+                    <option value="">Select SEQUENCE_TYPE</option>
                     <option value="blast">BLAST</option>
                     <option value="exact">EXACT</option>
                 </select>
             </div>
             <div class="col-sm-8">
                 <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                    <div class="gg-text-example">Example: <br> SEQUENCE _A <br> MSGGTRYLGHEI</div>
-
+                
+                <div class="gg-text-example">Example: SEQUENCE _A MSGGTRYLGHEI</div>
                 </form>
             </div>
         </div>
