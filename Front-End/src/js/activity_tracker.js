@@ -11,12 +11,16 @@ function tracking() {
     if (typeof (Storage) !== "undefined") {                  // Check browser support
         if (localStorage.getItem("ID") == "NO") {             // if user selected not to be tracked.
             $checkbox.attr('checked', false);
+            $('#textManageSettingsDisabled').css('display', 'block');
+            $('#textManageSettingsEnabled').css('display', 'none');
             $('#manageSettingsDisabled').css('display', 'block');
             $('#manageSettingsEnabled').css('display', 'none');
             activityTracker("user", "", "");
         }
         else if (localStorage.getItem("ID")) {                // if an ID exists other than "NO" so continue Logging activity.
             $checkbox.attr('checked', true);
+            $('#textManageSettingsDisabled').css('display', 'none');
+            $('#textManageSettingsEnabled').css('display', 'block');
             $('#manageSettingsDisabled').css('display', 'none');
             $('#manageSettingsEnabled').css('display', 'block');
             activityTracker("user", "", "");

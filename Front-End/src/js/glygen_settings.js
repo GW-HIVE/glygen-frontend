@@ -12,21 +12,29 @@ function switchHandler(el) {
         var $checkbox = $('[name="manageSettingsEnabled"]');
         if(!$checkbox.is(':checked')) {
             $checkbox.attr('checked', false);
-            $('#manageSettingsDisabled').css('display', 'block');
-            $('#manageSettingsEnabled').css('display', 'none');
             $('#textManageSettingsDisabled').css('display', 'block');
             $('#textManageSettingsEnabled').css('display', 'none');
+            $('#manageSettingsDisabled').css('display', 'block');
+            $('#manageSettingsEnabled').css('display', 'none');
+            
             clearLocalStore();
             doNotLog();
         } else {
             $checkbox.attr('checked', true);
-            $('#manageSettingsDisabled').css('display', 'none');
-            $('#manageSettingsEnabled').css('display', 'block');
             $('#textManageSettingsDisabled').css('display', 'none');
             $('#textManageSettingsEnabled').css('display', 'block');
+            $('#manageSettingsDisabled').css('display', 'none');
+            $('#manageSettingsEnabled').css('display', 'block');
+            
             clearLocalStore();
             logID();
         }
     });
 }
+
+$(document).ready(function(){
+    $("textManageSettingsDisabled").reset(function(event){
+        event.preventDefault();
+    });
+});
 // End @author: Tatiana Williamson
