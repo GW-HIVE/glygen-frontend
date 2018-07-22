@@ -136,6 +136,21 @@ function buildPages(paginationInfo) {
     $(".nextbutton").attr("disabled", (page == total_length));
 }
 
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
+
+
 
 /**
  * it creates user interface for summary
@@ -147,6 +162,8 @@ function buildPages(paginationInfo) {
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
+    queryInfo.mass.min = addCommas(queryInfo.mass.min);
+    queryInfo.mass.max = addCommas(queryInfo.mass.max);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
@@ -298,6 +315,8 @@ function ajaxListSuccess(data) {
                     protein_name_long: protein.protein_name_long,
                     protein_name_short: protein.protein_name_short,
                     organism: protein.organism
+                    // refseq_name:protein.refseq_name,
+                    // refseq_id:protein.refseq_id
                 });
             }
         }
