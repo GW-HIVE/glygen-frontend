@@ -69,7 +69,7 @@
                 <a href="#basics3">Cross Reference</a>
             </li>
             <li>
-                <a href="#basics4">keywords</a>
+                <a href="#basics4">Pathway</a>
             </li>
             <li>
                 <a href="#basics5">Isoform</a>
@@ -107,23 +107,30 @@
                             <div class="col-md-12 col-xs-6">
                                 {{#uniprot_id}}
                                 <li class="list-group">Uniprot-Entry Name:
-                                    <a class="panelcontent" href="http://www.uniprot.org/uniprot/accession"
+                                    <a class="panelcontent" href="http://www.uniprot.org/uniprot/{{uniprot_id}}"
                                        target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
 
-                                <li class="list-group">Monoisotopic Mass:{{mass.monoisotopic_mass}} Da</li>
-                                <li class="list-group">Chemical Mass:{{mass.chemical_mass}}</li>
+                                <li class="list-group">Monoisotopic Mass:{{mass.monoisotopic_mass}}-Da</li>
+                                <li class="list-group">Chemical Mass:{{mass.chemical_mass}}- Da</li>
                                 {{#recommendedname}}
                                 <li class="list-group">Recommended
                                     Name:{{recommendedname.full}}{{recommendedname.short}}
                                 </li>
                                 {{/recommendedname}}
+                                {{#gene}}
+                                <li class="list-group">Gene Name:
+                                    <a href="{{{url}}}" target="_blank">{{name}}</a>
+                                </li>
+                                {{/gene}}
+
+
                                 <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
                                 <!--{{#hasFullName }} <p class="panelmaincontent">Name:{{recommendedName.full}}({{recommendedName.short}}) {{/hasFullName }}-->
-                                {{#alternativenames}}
-                                <li class="list-group">{{full}} ({{short}})</li>
-                                {{/alternativenames}}
+                                <!--{{#alternativenames}}-->
+                                <!--<li class="list-group">{{full}} ({{short}})</li>-->
+                                <!--{{/alternativenames}}-->
 
                             </div>
                         </div>
@@ -152,7 +159,7 @@
                                     <button class="open-close-button">+</button>
                                     {{name}} (NCBI taxonomy ID:
                                     <a class="panelcontent"
-                                       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id"
+                                       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"
                                        target="_blank">{{taxid}} </a>)
                                 </p>
                                 <ul style="display:none;">
@@ -188,7 +195,7 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         <span class="fasta">{{ sequence.sequence }}</span>
-
+                        <div>{{ sequence.length }}</div>
                     </div>
                 </div>
             </ul>
@@ -218,30 +225,47 @@
             </ul>
             <!-- cd-faq-group -->
 
+            <!--<ul id="basics4" class="cd-faq-group selected">-->
+                <!--<li class="cd-faq-title"/>-->
+                <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                <!--<div class="panel panel-default">-->
+
+                    <!--<div class="gg-panel-heading">-->
+                        <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                        <!--<h4>Keywords</h4>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                        <!--<div class="row">-->
+                            <!--<div class='col-md-12 col-xs-12'>-->
+                                <!--{{#keywords}}-->
+
+                                <!--<li class="list-group">{{.}}</li>-->
+
+                                <!--{{/keywords}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--{{^keywords}} No data available. {{/keywords}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
             <ul id="basics4" class="cd-faq-group selected">
-                <li class="cd-faq-title"/>
-                <!-- added new class -->
-                <div class="panel panel-default">
+            <li class="cd-faq-title"/>
+            <!-- added new class -->
+            <div class="panel panel-default">
 
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Keywords</h4>
-                    </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            <div class='col-md-12 col-xs-12'>
-                                {{#keywords}}
+            <div class="gg-panel-heading">
+            <!-- added new class -->
+                <h4>Pathway</h4>
+            </div>
+            {{#pathway}}
+                <li class="list-group">{{resource}} :{{name}}({{id}})
 
-                                <li class="list-group">{{.}}</li>
-
-                                {{/keywords}}
-                            </div>
-                        </div>
-                        {{^keywords}} No data available. {{/keywords}}
-                    </div>
+            </li>
+            {{/pathway}}
                 </div>
-                </div>
+
 
             </ul>
 
@@ -261,7 +285,7 @@
                             <div class='col-md-12 col-xs-12'>
                                 <p class="panelmaincontent">
 
-                                    <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                    <a href="{{{url}}}" target="_blank">{{isoform_ac}}</a>
                                     <!--<a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id" target="_blank">{{taxid}} </a>)-->
                                 </p>
                                 <span class="fasta">{{sequence.sequence}}</span>
@@ -314,7 +338,7 @@
                         <li>{{title}}</li>
                         <li>
                             <i class="fas fa-book"></i><a
-                                href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}">{{pmid}}</a>
+                                href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" target="_blank">{{pmid}}</a>
                         </li>
                         {{/publication}} {{^publication}} No data available. {{/publication}}
                     </div>
@@ -352,7 +376,7 @@
 
     <script type="text/javascript">
         $(document).ajaxStop(function () {
-
+faqMain()
             // calls the hash function only when all ajax calls are completed
             function scrollToPanel(hash) {
                 //to scroll to the particular sub section.
