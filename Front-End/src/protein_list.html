@@ -50,7 +50,7 @@
                     <!-- <option selected value="id">ID</option> -->
                     <option value="uniprot_canonical_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
-                    <option value="protein_name">Protein Name</option>
+                    <option value="protein_name_short">Protein Name</option>
                     <option value="mass">Mass</option>
                     <option value="organism">Organism</option>
                 </select>
@@ -91,7 +91,7 @@
                 <tr>
                     <td>Mass</td>
                     {{#mass.min}}
-                    <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} Da</td>
+                    <td>{{mass.min}}{{/mass.min}} {{#mass.max}}{{mass.max}} - Da</td>
                     {{/mass.max}}
                 </tr>
                 {{/mass.min}}
@@ -169,7 +169,7 @@
                 <tr>
                     <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
                     <th data-field="gene_name">Gene Name</th>
-                    <th data-field="protein_name">Protein Name</th>
+                    <th data-field="protein_name_short">Protein Name</th>
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
                         <br>(Da)
                     </th>
