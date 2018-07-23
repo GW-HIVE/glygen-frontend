@@ -51,10 +51,10 @@
     <div class="container gg-container">
         <!-- GlycoProtein_ID-->
         <div class="row top-table-margin">
-            <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="Uniprot accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> Uniprot accession number:</label>
+            <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="UniProt accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> UniProt accession number:</label>
             
             <div class="col-sm-8 gg-form-group">   
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the UniProt protein ID of a glycoprotein">
                 
                 <div class="gg-text-example">Example: P01215</div>
             </div>
@@ -140,9 +140,9 @@
             <div class="col-md-4" id="glycanrelationrow">
                 <select class="form-control glycan_relation" id="relation">
                     <option value="">Select Interaction Type</option>
-                    <option value="covalent">Covalent</option>
-                    <option value="non-covalent">Non-covalent</option>
-                    <option value="all">All</option>
+                    <option value="attached">Covalent</option>
+                    <option value="binding">Non-covalent</option>
+                    <option value="any">All</option>
                     <div class="gg-text-example">Choose Glycan Relation</div>
                 </select>
             </div>
@@ -182,28 +182,33 @@
         <!-- End amino acid-->
     
         <!-- Sequences-->
-        <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="ContentEnter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
+        <div class="gg-form-group2 row">
+            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="Enter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
-                    <option value="">Select SEQUENCE_TYPE</option>
-                    <option value="blast">BLAST</option>
-                    <option value="exact">EXACT</option>
+                    <option value="">Select Sequence_type</option>
+                    <option value="blast">Blast</option>
+                    <option value="exact">Exact</option>
                 </select>
             </div>
             <div class="col-sm-8">
-                <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                <div class="gg-text-example">Example: SEQUENCE _A MSGGTRYLGHEI</div>
-                </form>
+                <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea></form>
+                
+                <h6 id='msg' class="rq"></h6>
+                
+                <div class="gg-text-example">Example: 
+                <br>>SEQUENCE _A 
+                <br>MSGGTRYLGHEI</div>
+                
             </div>
         </div>
-        <label id='msg' class="rq"></label>
+<!--        <label id='msg' class="rq"></label>-->
         <!-- end Sequences-->
 
         <!--Pathway-->
         <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Uniprot pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
+            <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a UniProt pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
             
             <div class="col-sm-8">
                 <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Provide a UniProt Pathway ID">
@@ -220,9 +225,9 @@
             <div class="col-sm-8">
                 <select class="form-control">
                     <option value="">Select Evidence Type</option>
-                    <option value="experiment">Experiment</option>
-                    <option value="calculation">Calculation</option>
-                    <option value="any">Any</option>
+                    <option value="experimental">Experiment</option>
+                    <option value="calculated">Calculation</option>
+                    <option value="none">Any</option>
                 </select>
             </div>
         </div>

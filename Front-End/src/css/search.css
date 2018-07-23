@@ -66,7 +66,11 @@ input[type=submit]:hover {
     }
 }
 .align-center {
-    text-align: center !important;
+    text-align: center !important; 
+}
+
+.glycanSizeMargin h6 {
+    margin-bottom: 10px;
 }
 
 .min-value-alignment {
