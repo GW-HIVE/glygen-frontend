@@ -1,3 +1,6 @@
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -31,20 +34,20 @@ input[type=submit]:hover {
     
 }
 
-.gg-container {
+.gg-search-container {
     width: 70%;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color:#dfe5ed;
     padding: 20px 80px; 
     margin-top: 30px;
     margin-bottom: 60px;
 }
 
-.top-table-margin {
+.row-margin-top {
     margin-top: 30px;
 }
 
-.bottom-table-margin {
+.row-margin-bottom {
     margin-bottom: 30px;
 }
 
@@ -73,6 +76,11 @@ input[type=submit]:hover {
         margin-left: 25px;
     }
 
+.max-value-alignment {
+    text-align: right;
+    padding-right: 0;
+}
+
 .gg-text-example {
     margin-top: 3px;
     padding-left: 4px;
@@ -80,7 +88,7 @@ input[type=submit]:hover {
 }
 
 .gg-form-group {
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 h6 {
@@ -150,10 +158,10 @@ select {
   -moz-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-
 #searchfield form .biginput:focus {
   color: #858585;
 }
+
 
 #msg {
     color: #a94442;
@@ -196,16 +204,5 @@ select {
 }
 #aminos{
     color:#2E78B7;
-    text-align: center;
 }
 
-.textbox{
- margin-bottom: 10px;
-    margin-top:19px;
-}
-#pathway{
-    margin-top:20px;
-}
-#msg{
-    margin-top:0px;
-}
