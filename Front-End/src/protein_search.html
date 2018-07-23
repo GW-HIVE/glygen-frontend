@@ -15,15 +15,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="glycan, carbohydrate, search, mass search, glycoprotein search">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-    <title>GlycoProtein_Search</title>
+    <title>Protein Search</title>
     <!-- CSS for UI Typeahead -->
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <!--This does not work as downloaded version so UX using this as CDN for font.css-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- CSS for chosen -->
-<!--    <link rel="stylesheet" type="text/css" href="css/chosen.css">-->
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <!-- CSS for boots -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!-- CSS for serach page -->
@@ -39,157 +37,156 @@
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <!--Script for bootstrap-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-
-
-
-
-
 </head>
+<body onload="tracking()">
 
-<body>
+    <script src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
-<script src="libraries/w3.js"></script>
-<div w3-include-html="header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
+    <h3 class="page-heading" style="text-align: center">Protein Search </h3>
+    <div class="container gg-container">
+        <!-- GlycoProtein_ID-->
+        <div class="row top-table-margin">
+            <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="Uniprot accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a>
+            </span> Uniprot accession number:</label>
 
-<h3 class="page-heading" style="text-align: center">Glyco-Protein Search </h3>
-<div class="container gg-container">
-    <!-- GlycoProtein_ID-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Uniprot accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Uniprot accession number:</h6>
-        <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
-        <div class="gg-text-example">Protein Example e.g:P0116</div>
-    </div>
-    <!-- First range-->
-    <div class="gg-form-group row">
-        <h6>
-                 <span>
-                    <a href="#" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your proteins(s)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span>Protein Size:</h6>
-        <div class="col-xs-2 min-value-alignment">
-            <h6>Min</h6>
-            <div id="lower-value"> </div>
-        </div>
-        <div class="col-xs-8">
-            <h6 class="align-center">Native Mass Range</h6>
-            <div id="slider"> </div>
+            <div class="col-sm-8 gg-form-group">
+                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Provide the Uniprot protein ID of a glycoprotein">
+
+                <div class="gg-text-example">Protein Example: P01215</div>
+            </div>
         </div>
 
-        <h6>Max</h6>
-        <div id="upper-value"> </div>
-        <!--</div>-->
-    </div>
+        <!-- RefSeq Accession_ID-->
+        <div class="row top-table-margin">
+            <label class="control-label col-sm-4" for="refseq"><span><a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> RefSeq Accession number:</label>
 
-    <!-- Organism-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an organism that makes your protein(s)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Organism:</h6>
-        <select class="organism" id="organism">
-            <option value="">Select organism</option>
-        </select>
-        <div class="gg-text-example">Organism Example e.g Homo sapiens (Taxonomy ID: 9606)</div>
-    </div>
+            <div class="col-sm-8 gg-form-group">
+                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Provide the RefSeq Accession of a glycoprotein">
 
-    <!-- Protein-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the name of your protein">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Protein Name:</h6>
-        <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
-        <div class="gg-text-example">Protein Name Example e.g: Endogenous retroviral envelope protein HEMO </div>
-    </div>
-
-    <!-- Gene Name-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the name of the gene encoding your protein">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Gene Name:</h6>
-        <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
-        <div class="gg-text-example">Gene Name Example e.g: ERVMER34-1 </div>
-    </div>
-
-    <!-- Sequences-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Protein/Peptide-Sequences" data-toggle="popover" data-placement="left" data-content="Content">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Protein/Peptide-Sequences:</h6>
-        <div class="form-group">
-            <form name="form1" action="#" style="height: 220px;">
-                <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                <div class="gg-text-example">Protein/Peptide-Sequences Example e.g:Y </div>
-                <label id='msg' class="rq"></label>
-            </form>
+                <div class="gg-text-example">RefSeq Accession:</div>
+            </div>
         </div>
 
+        <!-- Protein size-->
+        <div class="gg-form-group row">
+            <div> 
+                <label class="control-label col-sm-4" for="slider"><span><a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a  mass range for your proteins(s)"><i class="far fa-question-circle help-sign"></i></a>
+                </span>Protein Size:</label>
+            </div>
+            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">    
+                <!-- First range-->
+                <div> 
+                <div class="col-xs-2 min-value-alignment">
+                    <h6>Min</h6>
+                    <div id="lower-value"> </div>
+                </div>
+                <div class="col-xs-7">
+                    <h6 class="align-center">Native Mass Range</h6>
+                    <div id="slider"> </div>
+                </div>
+
+                <div class="col-xs-2" style="margin-bottom: 40px; padding-left: 35px;">
+                    <h6>Max</h6>
+                    <div id="upper-value"> </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organism-->
+        <div class="form-group gg-form-group row">
+            <label class="control-label col-sm-4" for="organism"><span><a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an organism that makes your protein(s)"><i class="far fa-question-circle help-sign"></i></a></span> Organism:</label>
+
+            <div class="col-sm-8">
+                <select class="organism" id="organism">
+                    <option value="">Select organism</option>
+                </select>
+                <div class="gg-text-example">Example: Homo Sapiens (Taxonomy ID: 9606)</div>
+            </div>
+        </div>
+
+        <!-- Protein name-->
+        <div class="form-group gg-form-group row">
+            <label class="control-label col-sm-4" for="protein_name"><span><a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the name of your protein"><i class="far fa-question-circle help-sign"></i></a></span> Protein Name:</label>
+
+            <div class="col-sm-8">
+                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Provide the protein name">
+                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO  </div>
+            </div>
+        </div>
+
+        <!-- Gene Name-->
+        <div class="form-group gg-form-group row">
+            <label class="control-label col-sm-4" for="gene_name"><span><a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the name of the gene encoding your protein"><i class="far fa-question-circle help-sign"></i></a></span> Gene Name: </label>
+
+            <div class="col-sm-8">
+                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Provide the gene name">
+                <div class="gg-text-example">Example: ERVMER34-1</div>
+            </div>
+        </div>
+
+        <!-- Sequences-->
+        <div class="gg-form-group row">
+            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="“Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="Enter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
+
+            <div class="col-sm-8" id="sequence_type">
+                <select class="form-control sequence_type" id="type">
+                    <option value="">Select SEQUENCE_TYPE</option>
+                    <option value="blast">BLAST</option>
+                    <option value="exact">EXACT</option>
+                </select>
+            </div>
+            <div class="col-sm-8">
+                <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                
+                <div class="gg-text-example">Example: SEQUENCE _A MSGGTRYLGHEI</div>
+                </form>
+            </div>
+        </div>
+        <label id='msg' class="rq"></label>
+        <!--Pathway-->
+        <div class="form-group gg-form-group row">
+            <label class="control-label col-sm-4" for="pathway">
+            <span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Uniprot pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
+
+            <div class="col-sm-8">    
+                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Provide a UniProt Pathway ID">
+                <div class="gg-text-example">Example: P77731 </div>
+            </div>
+        </div>
+
+        <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
     </div>
-    <!-- end Sequences-->
+    
+      
+    <div w3-include-html="footer.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
 
-    <!--Pathway-->
-    <div class="gg-form-group row">
-        <h6>
-                <span>
-                    <a href="#" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Content">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Pathway ID:</h6>
-        <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Pathway id">
-        <div class="gg-text-example">Pathway Example e.g:P77731 </div>
-    </div>
-    <!--End Pathway-->
-
-    <input type="button" class="btn-lg btn-primary" value="Search GlycoProtein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
-
-    <!--</form>-->
-</div>
-<div w3-include-html="footer.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-
-
-<!-- script for UI autocomplte -->
-<script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
-<!-- script for choosing from listfield -->
-<script type="text/javascript" src="libraries/chosen.js"></script>
-<!-- script for slider js -->
-<script src="libraries/nouislider.js"></script>
-<!-- script for navaigation bar js -->
-<script src="js/navbar.js"></script>
-<!-- script for searchpage js -->
-<script type="text/javascript" src="js/protein_search.js"></script>
-<!-- script for tracking js -->
-<script src="js/activity_tracker.js"></script>
-<!-- script for getting Web Service URLs -->
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
-<!-- script for editing users search  -->
-<script src="js/editsearch.js"></script>
-<!-- script for error handling alerts -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
-<script src="js/popover.js"></script>
+    <!-- script for UI autocomplte -->
+    <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
+    <!-- script for choosing from listfield -->
+    <script type="text/javascript" src="libraries/chosen.js"></script>
+    <!-- script for slider js -->
+    <script src="libraries/nouislider.js"></script>
+    <!-- script for navaigation bar js -->
+    <script src="js/navbar.js"></script>
+    <!-- script for searchpage js -->
+    <script type="text/javascript" src="js/protein_search.js"></script>
+    <!-- script for tracking js -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <!-- script for editing users search  -->
+    <script src="js/editsearch.js"></script>
+    <!-- script for error handling alerts -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+    <script src="js/popover.js"></script>
 </body>
 
 </html>
