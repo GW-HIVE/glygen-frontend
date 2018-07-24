@@ -180,7 +180,7 @@ function redirectPage1() {
 }
 
 function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html";
+    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html";
 }
 
 
@@ -199,7 +199,7 @@ $(document).ready(function () {
 
 function editSearch() {
     {
-        window.location.replace("glycoprotein_search.html?id=" + id);
+        window.location.replace("protein_search.html?id=" + id);
         activityTracker("user", id, "edit search");
     }
 }
@@ -277,7 +277,7 @@ function updateSearch() {
         success: function (result) {
             if (result.list_id) {
                 console.log(result);
-                window.location = 'glycoprotein_list.html?id=' + result.list_id;
+                window.location = 'protein_list.html?id=' + result.list_id;
                 activityTracker("user", id, "update search");
             } else {
                 // handle if no results
@@ -331,7 +331,7 @@ function ajaxListSuccess(data) {
 
         buildSummary(data.query);
 
-        document.title = 'Glycoprotein-list';
+        document.title = 'Protein-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
