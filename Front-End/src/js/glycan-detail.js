@@ -17,6 +17,7 @@ function ajaxSuccess(data) {
     data.hasMotifs = (data.motifs && (data.motifs.length > 0));
     data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
     data.imagePath = getWsUrl('glycan_image', data.glytoucan_ac);
+    // data.imagePath1 = getWsUrl('glycan_motif_image', data.motif.id);
 
     //var glyco = row.glycoct.replace(/ /g, '\n');
     var html = Mustache.to_html(template, data);
