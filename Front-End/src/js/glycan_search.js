@@ -143,7 +143,7 @@ function sugarmass(sugar_mass_min, sugar_mass_max) {
     // Display the slider value and how far the handle moved
     // from the left edge of the slider.
     nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = addCommas(values[handle]);
+        nodes1[handle].innerHTML = addCommas(values[handle]);
     });
 }
 
@@ -195,21 +195,19 @@ function configureDropDownLists(ddl1, ddl2, callback) {
     });
 
     function dataReady() {
+        ddl2.options.length = 0;
+        createOption(ddl2, '', '');
+
         switch (ddl1.value) {
             case 'N-glycan':
-                ddl2.options.length = 0;
                 for (i = 0; i < nglycan.length; i++) {
                     createOption(ddl2, nglycan[i], nglycan[i]);
                 }
                 break;
             case 'O-glycan':
-                ddl2.options.length = 0;
                 for (i = 0; i < oglycan.length; i++) {
                     createOption(ddl2, oglycan[i], oglycan[i]);
                 }
-                break;
-            default:
-                ddl2.options.length = 0;
                 break;
         }
         if (callback) {
