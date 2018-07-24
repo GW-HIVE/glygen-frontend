@@ -21,23 +21,22 @@ $(document).ready(function(){
     var fullFilename = url.substring(url.lastIndexOf('/')+1);
     var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
     var navItemText = filename.replace('_', ' ').toUpperCase();
-    //alert(navItemText);
+//    alert(navItemText);
     if(navItemText == 'INDEX') {
         navItemText = 'HOME';
-    } else if(navItemText == 'QUICK SEARCH') {
-        navItemText = 'QUICK SEARCH';
-    }
-    else if(navItemText == 'GLYCAN SEARCH') {
+    } else if(navItemText == 'GLYCAN SEARCH') {
         navItemText = 'EXPLORE';
     } else if(navItemText == 'PROTEIN SEARCH') {
         navItemText = 'EXPLORE';
     } else if(navItemText == 'GLYCOPROTEIN SEARCH') {
         navItemText = 'EXPLORE';
+    } else if(navItemText == 'QUICK SEARCH') {
+        navItemText = 'QUICK SEARCH'; 
     } else if(navItemText == 'ABOUT') {
         navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {
         navItemText = 'MORE';
-    } else if(navItemText == 'SURVEY') {
+    } else if(navItemText == 'FEEDBACK') {
         navItemText = 'MORE';
     } else if(navItemText == 'CONTACT') {
         navItemText = 'MORE';
