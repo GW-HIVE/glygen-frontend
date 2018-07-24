@@ -34,8 +34,9 @@
     <script src="js/modernizr.js"></script>
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
-    <!-- NAVIGATION -->
-    <script src="js/navbar.js"></script>
+    <!-- script for jquery -->
+    <script src="libraries/jquery/jquery-3.1.js"></script>
+    <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body onload="tracking()">
@@ -84,7 +85,7 @@
                     <div class="cd-faq-content">
                         <strong>Glycan X:</strong>
                         <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan" id="glycansite">
-                        <button type="button" name="submit" onclick="()" class="btn-sm btn-primary">submit</button>
+                        <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">submit</button>
                     </div>
                 </li>
 
@@ -94,7 +95,7 @@
                     <div class="cd-faq-content">
                         <strong>Glycan X:</strong>
                         <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan ID" id="glycangene">
-                        <button type="button" name="submit" onclick="()" class="btn-sm btn-primary">submit</button>
+                        <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">submit</button>
                     </div>
                 </li>
 
@@ -110,11 +111,11 @@
 
                 <!--Q.4 What are the orthologues of protein X in different species? -->
                 <li>
-                    <a class="cd-faq-trigger" id="Q4">“What are the orthologues of protein X in different species?”</a>
+                    <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
                     <div class="cd-faq-content">
                         <strong>Protein:</strong>
                         <input class="gg-faq-formInput" type="text" name="ProteinID" placeholder="Uniprot Protein ID" id="proteinorthologues">
-                        <button type="button" name="submit" onclick="()" class="btn-sm btn-primary">submit</button>
+                        <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">submit</button>
                     </div>
                 </li>
 
@@ -136,7 +137,7 @@
                     <div class="cd-faq-content">
                         <strong>Enzyme:</strong>
                         <input class="gg-faq-formInput" type="text" name="Enzyme" id="glycanenzyme" placeholder="Protein ID or gene name">
-                        <button type="button" name="submit" onclick="()" class="btn-sm btn-primary">submit</button>
+                        <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">submit</button>
                     </div>
                 </li>
             </ul>
@@ -234,9 +235,8 @@
 <div w3-include-html="footer.html"></div>
 
 </body>
-<!-- script for jquery -->
-<script src="libraries/jquery/jquery-3.1.js"></script>
-<script src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<!-- Resource jQuery -->
+<script src="libraries/jquery/jquery-ui.js"></script>
 <!-- script for getting Web Service URLs -->
 
 <script src="js/ws_url.js"></script>
@@ -244,15 +244,16 @@
 <script src="js/activity_tracker.js"></script>
 <!-- SIDE NAVIAGTION -->
 <script src="js/faq_main.js"></script>
-<!-- Resource jQuery -->
-<script src="libraries/jquery/jquery-ui.js"></script>
+
 <!-- Error Handling -->
 <script type="text/javascript" src="js/utility.js"></script>
-<!-- Quick_Search -->
-<script type="text/javascript" src="js/quicksearch.js"></script>
+
 <!-- alertify-->
 <script type="text/javascript" src="libraries/alertify.js"></script>
-
+<!-- NAVIGATION -->
+<script src="js/navbar.js"></script>
+<!-- Quick_Search -->
+<script type="text/javascript" src="js/quicksearch.js"></script>
 <script>
     //calls the script in faq_main.js file
     faqMain();
@@ -273,6 +274,7 @@
         }
     }
 </script>
+
 
 
 </html>
