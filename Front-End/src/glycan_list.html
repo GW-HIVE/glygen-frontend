@@ -62,7 +62,7 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option selected value="glycan_ac">ID</option>
+                    <option selected value="glytoucan_ac">ID</option>
                     <option value="mass">Mass</option>
                     <option value="number_enzymes">No of Enzymes</option>
                     <option value="number_proteins">No of Protein</option>
@@ -91,12 +91,12 @@
                 <tbody>
 
                 <!--glycan typeahead-->
-                {{#glycan_ac}}
+                {{#glytoucan_ac}}
                 <tr>
                     <td>GlycoToucan Id</td>
-                    <td>{{glycan_ac}}</td>
+                    <td>{{glytoucan_ac}}</td>
                 </tr>
-                {{/glycan_ac}}
+                {{/glytoucan_ac}}
 
                 <!--glycan mass-->
 
@@ -202,7 +202,7 @@
 
                 <thead>
                 <tr>
-                    <th data-field="glycan_ac" data-formatter="pageFormat">ID</th>
+                    <th data-field="glytoucan_ac" data-formatter="pageFormat">ID</th>
                     <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Glycan Image</th>
                     <th data-field="mass" data-formatter="massFormatter">Native Mass
                         <br>(Da)
@@ -239,7 +239,7 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option selected value="glycan_ac">ID</option>
+                    <option selected value="glytoucan_ac">ID</option>
                     <option value="mass">Mass</option>
                     <option value="number_enzymes">No of Enzymes</option>
                     <option value="number_proteins">No of Proteins</option>
