@@ -36,6 +36,11 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
 
 </head>
+<style>
+    {
+        white-space: pre;
+    }
+</style>
 
 <body>
 <script type="text/javascript" src="libraries/w3.js"></script>
@@ -98,7 +103,7 @@
                             </div>
                             <div class="col-md-12 col-xs-6">
                                 {{#mass}}
-                                <p class="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
+                                <p class="panelmaincontent">Monoisotopic mass:{{mass}}-Da </p> {{/mass}}
                                 <br>Classification: {{#classification}}
                                 <li class="list-group">
                                     <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
@@ -133,7 +138,7 @@
                                     <button class="open-close-button">+</button>
                                     {{name}} (NCBI taxonomy ID:
                                     <a class="panelcontent"
-                                       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id"
+                                       href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"
                                        target="_blank">{{taxid}} </a>)
                                 </p>
                                 <ul style="display:none;">
@@ -174,9 +179,9 @@
                                 <Br/>
                             </div>
                             <span id="glycanname">
-                            <center>
-                                <a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>
-                            </center>
+                                <a >{{id}}- {{name}}</a>
+                                <!--<a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>-->
+
                         </span>
                         </div>
                         {{/motifs}} {{/hasMotifs}} {{^hasMotifs}} No data available. {{/hasMotifs}}
@@ -202,7 +207,7 @@
                                 <p class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     {{protein_name}}(Uniprot ID:
-                                    <a href="{{url}}" target="_blank">{{uniprot_id}}</a>) {{#position}}
+                                    <a href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a> {{#position}}
                                     <br> Position:{{position}} {{/position}}
                                 </p>
                                 <ul style="display:none;">
@@ -261,10 +266,9 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#enzyme}}
-                        <li class="list-group"><strong>Protein name:</strong>{{protein_name}}
-                        </li>
-                        <li class="list-group"><strong>Protein Id:</strong>{{uniprot_canonical_ac}}(Uniprot ID:
-                            <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac}}</a>)
+                        <li class="list-group"><strong>Protein name:</strong>{{protein_name}}<br>
+                      <strong>Protein Id:</strong>(Uniprot ID:
+                            <a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a>
                             <br><strong>Gene name:</strong>
                             <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>
                         </li>
@@ -309,7 +313,7 @@
     w3.includeHTML();
 </script>
 <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-
+<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- script for detail page -->

@@ -1,21 +1,23 @@
 //@author:Gaurav agarwal
 
-//update: Rupali Mahadik
+//update: Rupali Mahadik:  //Glycan webservices, //Protein webservices
 
 // @description: UO1 Version-1.1.
 
 //@update:6 June 2018
 
+//update:20 july://usecases search webservices
 
 function getWsUrl(request, id) {
 
-    var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
+    var ws_base = "http://glygen-vm-dev.biochemistry.gwu.edu/api/";
     
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
     var ws_base_typeahead = ws_base+"typeahead";
     var ws_logging = ws_base+"auth/logging";
     var ws_userID = ws_base+"auth/userid";
+    var ws_useCaseSearch=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
 
@@ -67,12 +69,20 @@ function getWsUrl(request, id) {
             break;
 
 
+
+
         //Typeahead webservices
 
         case "type-ahead":
             return ws_base_typeahead;
         default:
             return "WWW.GOOGLE.COM";
+            break;
+
+        //Usecases search webservices
+
+        case "search_bioenzyme":
+            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes" + id;
             break;
 
     }
@@ -88,9 +98,9 @@ function getWsUrl(request, id) {
 function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
-    query.offset = parseInt(page);
+    //query.offset = parseInt(page);
     query.sort = sort;
-    //query.offset = ((page - 1) * limit) + 1;
+    query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;
 

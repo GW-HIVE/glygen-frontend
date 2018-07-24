@@ -46,6 +46,18 @@ function aminoLetter(textareatxt) {
     }
 }
 
+function validatePathway(input) {
+    // ^[A-Z]{1,2}[0-9]{5}$
+    var letters = /^[A-Z]{1}[0-9]{5}$/i;
+    if (input.value.match(letters)) {
+        document.getElementById("pathwayMsg").innerHTML = "";
+        return true;
+    } else {
+        document.getElementById("pathwayMsg").innerHTML = "Enter a valid pathway.";
+        return false;
+    }
+}
+
 
 /** Protein field on change detect and suggest auto complete options from retrieved Json
  * @proteinjson - forms the JSON to post
@@ -238,9 +250,24 @@ function mass(mass_min, mass_max) {
 }
 
 
+function validateForm(){
+    var aminoAcidValid = (document.getElementById("msg").innerHTML.length === 0);
+    var pathwayValid = (document.getElementById("pathwayMsg").innerHTML.length === 0);
+
+    var formValid = (aminoAcidValid && pathwayValid);
+
+    return formValid;
+}
+
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
+    if (!validateForm()) {
+        return false;
+    }
+
+
     var organism = $("#organism").val();
     var uniprot_id = $("#protein").val();
     var refseq_id=$("#refseq").val();
@@ -288,16 +315,26 @@ function ajaxProteinSearchSuccess() {
         url: getWsUrl("search_protein"),
         //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
+    //     success: function (results) {
+    //         if (results.error_code) {
+    //             displayErrorByCode(results.error_code);
+    //             activityTracker("error", "", results.error_code);
+    //         } else if (results.list_id && (results.list_id.length === 0)) {
+    //             displayErrorByCode('no-results-found');
+    //             activityTracker("user", "", "no result found");
+    //         } else {
+    //             window.location = './glycoprotein_list.html?id=' + results.list_id;
+    //         }
+    //     }
+    // });
         success: function (results) {
-            if (results.error_code) {
-                displayErrorByCode(results.error_code);
-                activityTracker("error", "", results.error_code);
-            } else if (results.list_id && (results.list_id.length === 0)) {
-                displayErrorByCode('no-results-found');
-                activityTracker("user", "", "no result found");
-            } else {
+            if (results.list_id) {
                 window.location = './glycoprotein_list.html?id=' + results.list_id;
+            } else {
+                displayErrorByCode("server-down");
+                activityTracker("error", "", results.error_code);
             }
+
         }
     });
 }

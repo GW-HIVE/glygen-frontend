@@ -65,7 +65,7 @@ function prev() {
  * @param {domNode} element - The element from which we take the new page value
  */
 function xpage(element) {
-    page = $(element).val();
+    page = parseInt($(element).val(), 10);
     $('.page-select').val(page);
     LoadDataList();
     activityTracker("user", id, "page: " + page);

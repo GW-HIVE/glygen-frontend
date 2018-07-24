@@ -16,13 +16,25 @@ function ajaxSuccess(data) {
     var template = $('#item_template').html();
     data.hasMotifs = (data.motifs && (data.motifs.length > 0));
     data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
-
     data.imagePath = getWsUrl('glycan_image', data.glytoucan_ac);
 
     //var glyco = row.glycoct.replace(/ /g, '\n');
     var html = Mustache.to_html(template, data);
     var $container = $('#content');
+    var items = [];
+    if (data.glycosylation) {
+        for (var i = 0; i < data.glycosylation.length; i++) {
+            var glycan = data.glycosylation[i];
+            items.push({
+                uniprot_canonical_ac: glycan.uniprot_canonical_ac,
+                gene: glycan.gene,
+                protein_name: glycan.protein_name
 
+
+
+            });
+        }
+    }
     $container.html(html);
 
     $container.find('.open-close-button').each(function (i, element) {
@@ -40,6 +52,47 @@ function ajaxSuccess(data) {
 
             }
         });
+    });
+
+
+    $('#glycosylation-table').bootstrapTable({
+        columns: [{
+            field: 'uniprot_canonical_ac',
+            title: 'Protein',
+            // sortable: true,
+            formatter: function (value, row, index, field) {
+                return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
+            }
+        },
+            {
+                field: 'gene',
+                title: 'Gene Name',
+                // sortable: true
+                // formatter: function (value, row, index, field) {
+                //     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
+                // }
+            },
+
+            {
+                field: 'protein_name',
+                title: 'Protein Name',
+                // sortable: true
+            }],
+        // pagination: 10,
+        data: items,
+        // detailView: true,
+        // detailFormatter: function (index, row) {
+        //     var html = [];
+        //     var evidences = row.evidence;
+        //     for (var i = 0; i < evidences.length; i++) {
+        //         var evidence = evidences[i];
+        //         html.push("<div class='row'>");
+        //         html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+        //         html.push("</div>");
+        //     }
+        //     return html.join('');
+        // },
+
     });
     if (data.error_code)
         activityTracker("error", glytoucan_ac, data.error_code);

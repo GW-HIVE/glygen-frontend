@@ -53,11 +53,18 @@ function getErrorMessage(errorCode) {
                 message: 'Please choose a different number of records per page.',
                 title: "selection error"
             };
+        case 'no-results-found':
+            return {
+                message: 'No Result found.',
+                title: "selection error"
+            };
 
         case 'server_down':
             return 'sorry server is down';
             break;
     }
+
+
 
     return {
         message: 'Display error occurred.we are looking into problem',
