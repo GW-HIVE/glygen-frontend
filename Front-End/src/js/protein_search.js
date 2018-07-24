@@ -264,7 +264,7 @@ function ajaxProteinSearchSuccess() {
                 window.location = './protein_list.html?id=' + results.list_id;
             } else {
                 displayErrorByCode("server-down");
-                activityTracker("error", "", results.error_code);
+                activityTracker("error", "", "no result found for "+json);
             }
 
         }

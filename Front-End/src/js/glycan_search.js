@@ -261,7 +261,7 @@ function submitvalues() {
             }
             else {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", results.error_code);
+                activityTracker("error", "", "no result found for "+json);
             }
 
         }
