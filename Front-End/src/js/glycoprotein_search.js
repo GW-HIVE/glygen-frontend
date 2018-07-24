@@ -321,7 +321,7 @@ function ajaxProteinSearchSuccess() {
     //             activityTracker("error", "", results.error_code);
     //         } else if (results.list_id && (results.list_id.length === 0)) {
     //             displayErrorByCode('no-results-found');
-    //             activityTracker("user", "", "no result found");
+    //             activityTracker("error", "", "no result found for "+json);
     //         } else {
     //             window.location = './glycoprotein_list.html?id=' + results.list_id;
     //         }
@@ -333,6 +333,7 @@ function ajaxProteinSearchSuccess() {
             } else {
                 displayErrorByCode("server-down");
                 activityTracker("error", "", results.error_code);
+
             }
 
         }
