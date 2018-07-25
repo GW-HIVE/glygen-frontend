@@ -161,6 +161,7 @@ function addCommas(nStr) {
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time = moment(queryinfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
     queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
     queryInfo.mass.min = addCommas(queryInfo.mass.min);
     queryInfo.mass.max = addCommas(queryInfo.mass.max);

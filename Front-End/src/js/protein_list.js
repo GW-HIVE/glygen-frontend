@@ -1,9 +1,7 @@
 
 
 
-//@author: Pradeep Kumar
-// @description: UO1 Version-1.1.
-//@Date:10th May 2018.
+//@Author:Rupali Mahadik.
 //@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 /**
 
@@ -164,7 +162,8 @@ function addCommas(nStr) {
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
+    queryInfo.execution_time = moment(queryinfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
+    queryInfo.execution_time = moment(queryInfo.execution_time).ptc().format("MM/DD/YYYY.h:mm:ss a");
     queryInfo.mass.min = addCommas(queryInfo.mass.min);
     queryInfo.mass.max = addCommas(queryInfo.mass.max);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -316,7 +315,7 @@ function ajaxListSuccess(data) {
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
-                    protein_name_short: protein.protein_name_short,
+                    // protein_name_short: protein.protein_name_short,
                     organism: protein.organism
                     // refseq_name:protein.refseq_name,
                     // refseq_id:protein.refseq_id
