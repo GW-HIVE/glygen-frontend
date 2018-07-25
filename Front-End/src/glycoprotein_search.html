@@ -51,10 +51,10 @@
 <div class="container gg-container">
     <!-- GlycoProtein_ID-->
     <div class="row top-table-margin">
-        <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="Uniprot accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> Uniprot accession number:</label>
+        <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="UniProt accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> UniProt accession number:</label>
 
         <div class="col-sm-8 gg-form-group">
-            <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the Uniprot protein ID of a glycoprotein">
+            <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt protein ID of a glycoprotein">
 
             <div class="gg-text-example">Example: P01215</div>
         </div>
@@ -68,7 +68,7 @@
         <div class="col-sm-8 gg-form-group">
             <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of a glycoprotein">
 
-            <div class="gg-text-example">Example: </div>
+            <div class="gg-text-example">RefSeq Example: </div>
         </div>
     </div>
     <!-- Protein Size -->
@@ -202,19 +202,19 @@
             <h6 id='msg' class="rq"></h6>
                           <div class="gg-text-example">Example:
                            <br>SEQUENCE _A
-                           <br>MSGGTRYLGHEI</div>
+                           <br>MQPR</div>
         </div>
     </div>
     <!-- end Sequences-->
 
     <!--Pathway-->
     <div class="gg-form-group row">
-        <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Uniprot pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
+        <label class="control-label col-sm-4" for="pathway"><span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a UniProt pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
 
         <div class="col-sm-8">
             <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a UniProt Pathway ID" onkeyup="validatePathway(this)">
 
-            <div class="gg-text-example">Example: 2158</div>
+            <div class="gg-text-example">Example: hsa:2158</div>
         </div>
     </div>
     <label id='pathwayMsg' class="rq"></label>
