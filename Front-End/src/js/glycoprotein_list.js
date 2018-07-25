@@ -182,9 +182,7 @@ function redirectPage2() {
 }
 
 
-$(document).ready(function () {
-    $("demosearch").tooltip();
-});
+
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
