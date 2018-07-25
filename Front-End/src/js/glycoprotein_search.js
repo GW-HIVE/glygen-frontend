@@ -36,7 +36,7 @@ function addCommas(nStr) {
  */
 
 function aminoLetter(textareatxt) {
-    var letters = /^[RKDEQNHSTYCWAILMFVPG]+$/gi;
+    var letters = /^[RKDEQNHSTYCWAILMFVPGX]+$/gi;
     if (textareatxt.value.match(letters)) {
         document.getElementById("msg").innerHTML = "";
         return true;
@@ -333,6 +333,7 @@ function ajaxProteinSearchSuccess() {
             } else {
                 displayErrorByCode("server-down");
                 activityTracker("error", "", results.error_code);
+                activityTracker("error", "", "no result found for "+json);
 
             }
 

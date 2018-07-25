@@ -36,7 +36,7 @@ function addCommas(nStr) {
  */
 
 function aminoLetter(textareatxt) {
-    var letters = /^[RKDEQNHSTYCWAILMFVPG]+$/gi;
+    var letters = /^[RKDEQNHSTYCWAILMFVPGX]+$/gi;
     if (textareatxt.value.match(letters)) {
         document.getElementById("msg").innerHTML = "";
         return true;
@@ -68,12 +68,6 @@ $("#protein").autocomplete({
         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
-
-
-
-
-
-
 
 
 $("#refseq").autocomplete({
