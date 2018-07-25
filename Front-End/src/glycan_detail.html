@@ -102,8 +102,17 @@
                                 </div>
                             </div>
                             <div class="col-md-12 col-xs-6">
+                                {{#glytoucan_ac}}
+                                <p class="panelcontent">Glytoucan accession:  <a class="panelcontent"
+                                href="https://glytoucan.org/Structures/Glycans/{{glytoucan_ac}}"
+                                                            target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan_ac}}</p>
+
+
                                 {{#mass}}
-                                <p class="panelmaincontent">Monoisotopic mass:{{mass}} Da </p> {{/mass}}
+                                <p class="panelcontent">Monoisotopic mass: {{mass}} Da </p> {{/mass}}
+
+
+
                                 <br>Classification: {{#classification}}
                                 <li class="list-group">
                                     <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
@@ -175,11 +184,14 @@
                             <div class='img-wrapper2'>
 
 
-                                <img class='img-cartoon2' src="{{imagePath1}}" alt='Cartoon' width='90%'/>
+                                <img class='img-cartoon2' src="{{imagePath}}" alt='Cartoon' width='90%'/>
                                 <Br/>
                             </div>
                             <span id="glycanname">
-                                <a >{{id}}- {{name}}</a>
+                                <a class="panelcontent"
+                                   href="https://glytoucan.org/Structures/Glycans/{{id}}"
+                                   target="_blank">{{id}}-{{name}} </a>
+
                                 <!--<a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>-->
 
                         </span>
