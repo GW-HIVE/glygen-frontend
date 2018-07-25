@@ -2,6 +2,7 @@
 //     //@author: Rupali Mahadik
 // // @description: UO1 Version-1.1.
 // //@refactored  :June-27-2017
+// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 //     -->
 
 
@@ -113,10 +114,10 @@ $(document).ready(function () {
         }
 
     })
-    .fail(function(result){
-        activityTracker("error", "", result.status +": search_init WS error");
-        console.log("error in search_init");
-    });
+        .fail(function (result) {
+            activityTracker("error", "", result.status + ": search_init WS error");
+            console.log("error in search_init");
+        });
 });
 
 
@@ -226,6 +227,9 @@ function createOption(ddl, text, value) {
 /** On submit, function forms the JSON and submits to the search web services
  */
 function submitvalues() {
+    // displays the loading gif when the ajax call starts
+    $('#loading_image').fadeIn();
+
     var query_type = "search_glycan";
     var mass_slider = document.getElementById("slider").noUiSlider.get();
     var sugar_slider = document.getElementById("slider1").noUiSlider.get();
@@ -236,7 +240,7 @@ function submitvalues() {
     var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
     var glycan_motif = document.getElementById("motif").value;
-    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid,glycan_motif);
+    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
 
     $.ajax({
@@ -255,15 +259,18 @@ function submitvalues() {
         //     }
         // }
 
-        success: function(results) {
+        success: function (results) {
             if (results.list_id) {
                 window.location = './glycan_list.html?id=' + results.list_id;
+                // hides the loading gif when the ajax call returns a response.
+                $('#loading_image').fadeOut();
             }
             else {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "no result found for "+json);
+                activityTracker("error", "", "no result found for " + json);
+                // hides the loading gif when the ajax call returns a response.
+                $('#loading_image').fadeOut();
             }
-
         }
     });
 }
@@ -286,8 +293,8 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
-        mass: {"min":parseInt(mass_min), "max":parseInt(mass_max)},
-        number_monosaccharides: {"min":parseInt(sugar_min), "max":parseInt(sugar_max)},
+        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        number_monosaccharides: { "min": parseInt(sugar_min), "max": parseInt(sugar_max) },
         enzyme: {
             "id": input_enzyme,
             "type": "gene"
@@ -302,3 +309,12 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     };
     return formjson;
 }
+
+/**
+ * hides the loading gif and displays the page after the search_init results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});

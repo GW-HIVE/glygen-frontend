@@ -851,18 +851,22 @@ label {
     @date-added: 03/26/2018
  ------------------------------------*/
 #loading_image{
-    background: rgba( 255, 255, 255, 0.8 );
-    display: none;
+    background: rgba( 255, 255, 255, 0.85 );
+    display: block;
     height: 100%;
     position: fixed;
     width: 100%;
     z-index: 99;
+    align-content: center;
 }
 #loading_image img{
-    left: 40%;
-    position: absolute;
-    width: 20%;
+    display: block;
+    /* left: 45%; */
+    margin-left: auto;
+    margin-right: auto;
+    /* position: absolute; */
+    width: 5%;
     height: auto;
-    top: 33%;
+    padding-top: 30vh;
 }
 

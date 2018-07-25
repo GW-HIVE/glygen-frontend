@@ -43,43 +43,46 @@
 </style>
 
 <body>
-<script type="text/javascript" src="libraries/w3.js"></script>
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
+    <script type="text/javascript" src="libraries/w3.js"></script>
 
-<div w3-include-html="header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
+    <div w3-include-html="header.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
 
-<section class="cd-faq">
-    <ul class="cd-faq-categories">
-        <li>
-            <a class="selected" href="#basics">Id</a>
-        </li>
-        <li>
-            <a href="#mobile">Species</a>
-        </li>
-        <li>
-            <a href="#account">Motif</a>
-        </li>
-        <li>
-            <a href="#payments">Found Glycoconjugates</a>
-        </li>
-        <li>
-            <a href="#privacy">Cross Reference</a>
-        </li>
-        <li>
-            <a href="#delivery">Biosynthetic-Enzyme</a>
-        </li>
-        <li>
-            <a href="#delivery1">Digital Sequence</a>
-        </li>
-    </ul>
-    <!-- cd-faq-categories -->
-    <!-- main content for page -->
-    <div class="cd-faq-items" id="content">
-        <!-- added new class -->
-        <!-- <div id="content" class="container" "> -->
-        <script id="item_template" type="text/template">
+    <section class="cd-faq">
+        <ul class="cd-faq-categories">
+            <li>
+                <a class="selected" href="#basics">Id</a>
+            </li>
+            <li>
+                <a href="#mobile">Species</a>
+            </li>
+            <li>
+                <a href="#account">Motif</a>
+            </li>
+            <li>
+                <a href="#payments">Found Glycoconjugates</a>
+            </li>
+            <li>
+                <a href="#privacy">Cross Reference</a>
+            </li>
+            <li>
+                <a href="#delivery">Biosynthetic-Enzyme</a>
+            </li>
+            <li>
+                <a href="#delivery1">Digital Sequence</a>
+            </li>
+        </ul>
+        <!-- cd-faq-categories -->
+        <!-- main content for page -->
+        <div class="cd-faq-items" id="content">
+            <!-- added new class -->
+            <!-- <div id="content" class="container" "> -->
+            <script id="item_template" type="text/template">
             <!-- Glycan ID starts here for page -->
 
             <ul id="basics" class="cd-faq-group">
@@ -318,40 +321,40 @@
 
             <a href="#0" class="cd-close-panel">Close</a>
         </script>
-    </div>
-</section>
-<div w3-include-html="footer.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-<!-- script for detail page -->
-<script type="text/javascript" src="js/glycan-detail.js"></script>
-<!-- script for template engine -->
-<script type="text/javascript" src="libraries/mustache.js"></script>
-<!-- script for webservice -->
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for navigation -->
-<script src="js/navbar.js"></script>
-<!-- script for side navigation -->
-<script src="js/faq_main.js"></script>
-<!-- script for user activity tracking and error logging -->
-<script src="js/activity_tracker.js"></script>
-<!-- script for error handling alerts -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
+        </div>
+    </section>
+    <div w3-include-html="footer.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for detail page -->
+    <script type="text/javascript" src="js/glycan-detail.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for webservice -->
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for navigation -->
+    <script src="js/navbar.js"></script>
+    <!-- script for side navigation -->
+    <script src="js/faq_main.js"></script>
+    <!-- script for user activity tracking and error logging -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for error handling alerts -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
 
-<script type="text/javascript">
-    $(document).ajaxStop(function () {
-        // calls the sidebar function only when all ajax calls are completed
-    faqMain();
-    });
-</script>
+    <script type="text/javascript">
+        $(document).ajaxStop(function () {
+            // calls the sidebar function only when all ajax calls are completed
+            faqMain();
+        });
+    </script>
 
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
 </body>
 
 </html>

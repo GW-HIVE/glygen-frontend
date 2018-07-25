@@ -46,6 +46,9 @@
 </style>
 
 <body>
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
     <script type="text/javascript" src="libraries/w3.js"></script>
 
     <div w3-include-html="header.html"></div>
@@ -376,7 +379,7 @@
 
     <script type="text/javascript">
         $(document).ajaxStop(function () {
-faqMain()
+            faqMain()
             // calls the hash function only when all ajax calls are completed
             function scrollToPanel(hash) {
                 //to scroll to the particular sub section.

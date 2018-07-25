@@ -1,6 +1,7 @@
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
 // @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
+// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 
 var uniprot_canonical_ac;
 /**
@@ -10,86 +11,90 @@ var uniprot_canonical_ac;
 
  */
 function ajaxSuccess(data) {
-    var template = $('#item_template').html();
-    var html = Mustache.to_html(template, data);
-    var $container = $('#content');
-    var items = [];
-    if (data.glycosylation) {
-        for (var i = 0; i < data.glycosylation.length; i++) {
-            var glycan = data.glycosylation[i];
-            items.push({
-                glytoucan_ac: glycan.glytoucan_ac,
-                residue: glycan.residue + glycan.position,
-                type: glycan.type,
-                evidence: glycan.evidence
 
-
-            });
-        }
-    }
-
-    $container.html(html);
-
-    $container.find('.open-close-button').each(function (i, element) {
-        $(element).on('click', function () {
-            var $this = $(this);
-            var buttonText = $this.text();
-            if (buttonText === '+') {
-                $this.text('-');
-                $this.parent().next().show();
-            } else {
-                $this.text('+');
-                $this.parent().next().hide();
-
-
-            }
-        });
-    });
-
-    // $container.find('#basics5x').click();
-
-
-    $('#glycosylation-table').bootstrapTable({
-        columns: [{
-            field: 'glytoucan_ac',
-            title: 'Glycan',
-            sortable: true,
-            formatter: function (value, row, index, field) {
-                return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
-            }
-        },
-        {
-            field: 'type',
-            title: 'Type',
-            sortable: true
-        },
-
-        {
-            field: 'residue',
-            title: 'Residue',
-            sortable: true
-        }],
-        pagination: 10,
-        data: items,
-        detailView: true,
-        detailFormatter: function (index, row) {
-            var html = [];
-            var evidences = row.evidence;
-            for (var i = 0; i < evidences.length; i++) {
-                var evidence = evidences[i];
-                html.push("<div class='row'>");
-                html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
-                html.push("</div>");
-            }
-            return html.join('');
-        },
-
-    });
-
-    if (data.error_code)
+    if (data.error_code) {
         activityTracker("error", uniprot_canonical_ac, data.error_code);
-    else
+        // alertify.alert('Error occured', data.error_code);
+    }
+    else {
         activityTracker("user", data.uniprot_canonical_ac, "successful response");
+        var template = $('#item_template').html();
+        var html = Mustache.to_html(template, data);
+        var $container = $('#content');
+        var items = [];
+        if (data.glycosylation) {
+            for (var i = 0; i < data.glycosylation.length; i++) {
+                var glycan = data.glycosylation[i];
+                items.push({
+                    glytoucan_ac: glycan.glytoucan_ac,
+                    residue: glycan.residue + glycan.position,
+                    type: glycan.type,
+                    evidence: glycan.evidence
+
+
+                });
+            }
+        }
+
+        $container.html(html);
+
+        $container.find('.open-close-button').each(function (i, element) {
+            $(element).on('click', function () {
+                var $this = $(this);
+                var buttonText = $this.text();
+                if (buttonText === '+') {
+                    $this.text('-');
+                    $this.parent().next().show();
+                } else {
+                    $this.text('+');
+                    $this.parent().next().hide();
+
+
+                }
+            });
+        });
+
+        // $container.find('#basics5x').click();
+
+
+        $('#glycosylation-table').bootstrapTable({
+            columns: [{
+                field: 'glytoucan_ac',
+                title: 'Glycan',
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
+                }
+            },
+            {
+                field: 'type',
+                title: 'Type',
+                sortable: true
+            },
+
+            {
+                field: 'residue',
+                title: 'Residue',
+                sortable: true
+            }],
+            pagination: 10,
+            data: items,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var html = [];
+                var evidences = row.evidence;
+                for (var i = 0; i < evidences.length; i++) {
+                    var evidence = evidences[i];
+                    html.push("<div class='row'>");
+                    html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                    html.push("</div>");
+                }
+                return html.join('');
+            },
+
+        });
+    }
+    $('#loading_image').fadeOut();
 }
 
 
@@ -103,6 +108,7 @@ function ajaxSuccess(data) {
 function ajaxFailure() {
     displayErrorByCode();
     activityTracker("error", uniprot_canonical_ac, "server down");
+    $('#loading_image').fadeOut();
 }
 
 /**

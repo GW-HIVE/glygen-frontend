@@ -2,6 +2,7 @@
 // @description: UO1 Version-1.1.
 //@update:6 June 2018
 //@update: 26 June 2018-web services changes updated
+// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 
 
 /**
@@ -214,10 +215,10 @@ $(document).ready(function () {
             LoadProteinSearchvalues(id);
         }
     })
-    .fail(function(result){
-        activityTracker("error", "", result.status +": search_init WS error");
-        console.log("error in search_init");
-    });
+        .fail(function (result) {
+            activityTracker("error", "", result.status + ": search_init WS error");
+            console.log("error in search_init");
+        });
 });
 
 /** Mass range function
@@ -250,7 +251,7 @@ function mass(mass_min, mass_max) {
 }
 
 
-function validateForm(){
+function validateForm() {
     var aminoAcidValid = (document.getElementById("msg").innerHTML.length === 0);
     var pathwayValid = (document.getElementById("pathwayMsg").innerHTML.length === 0);
 
@@ -266,11 +267,13 @@ function ajaxProteinSearchSuccess() {
     if (!validateForm()) {
         return false;
     }
+    // displays the loading gif when the ajax call starts
+    $('#loading_image').fadeIn();
 
 
     var organism = $("#organism").val();
     var uniprot_id = $("#protein").val();
-    var refseq_id=$("#refseq").val();
+    var refseq_id = $("#refseq").val();
     // var mass_slider = $("#slider").get(0).noUiSlider.get();
 
     var mass_slider = document.getElementById("slider").noUiSlider.get();
@@ -289,12 +292,12 @@ function ajaxProteinSearchSuccess() {
         query_type: "search_protein",
         organism: organism,
         uniprot_canonical_ac: uniprot_id,
-        refseq_ac:refseq_id,
+        refseq_ac: refseq_id,
         // mass: {
         //     min: mass_min,
         //     max: mass_max
         // },
-        mass: {"min":parseInt(mass_min), "max":parseInt(mass_max)},
+        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
         protein_name: protein_name_long,
         glycan: {
             relation: glycan_relation,
@@ -315,26 +318,27 @@ function ajaxProteinSearchSuccess() {
         url: getWsUrl("search_protein"),
         //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
-    //     success: function (results) {
-    //         if (results.error_code) {
-    //             displayErrorByCode(results.error_code);
-    //             activityTracker("error", "", results.error_code);
-    //         } else if (results.list_id && (results.list_id.length === 0)) {
-    //             displayErrorByCode('no-results-found');
-    //             activityTracker("error", "", "no result found for "+json);
-    //         } else {
-    //             window.location = './glycoprotein_list.html?id=' + results.list_id;
-    //         }
-    //     }
-    // });
+        //     success: function (results) {
+        //         if (results.error_code) {
+        //             displayErrorByCode(results.error_code);
+        //             activityTracker("error", "", results.error_code);
+        //         } else if (results.list_id && (results.list_id.length === 0)) {
+        //             displayErrorByCode('no-results-found');
+        //             activityTracker("error", "", "no result found for "+json);
+        //         } else {
+        //             window.location = './glycoprotein_list.html?id=' + results.list_id;
+        //         }
+        //     }
+        // });
         success: function (results) {
             if (results.list_id) {
                 window.location = './glycoprotein_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
             } else {
                 displayErrorByCode("server-down");
                 activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "no result found for "+json);
-
+                activityTracker("error", "", "no result found for " + json);
+                $('#loading_image').fadeOut();
             }
 
         }
@@ -354,3 +358,13 @@ $(window).on('resize', function () {
     $element1.width($element1.parent().width());
 
 })
+
+
+/**
+ * hides the loading gif and displays the page after the search_init results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});

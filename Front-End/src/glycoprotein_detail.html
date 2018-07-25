@@ -17,57 +17,57 @@
 </head>
 
 <body onload="tracking()">
-<script type="text/javascript" src="libraries/w3.js"></script>
+    <script type="text/javascript" src="libraries/w3.js"></script>
 
-<div w3-include-html="header.html"></div>
-<script>w3.includeHTML();</script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
 
 
-<!-- page content starts here -->
+    <!-- page content starts here -->
 
-<div class="container">
-    <div class="row">
-        <div id="summary-table" class="col-md-12 col-xs-12">
-            <!-- Summary Table Goes Here -->
+    <div class="container">
+        <div class="row">
+            <div id="summary-table" class="col-md-12 col-xs-12">
+                <!-- Summary Table Goes Here -->
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <form class="form-inline" onsubmit="return false;">
-                <label>Page</label>
-                <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
-                <select class="page-select form-control" onchange="xpage(this);"></select>
-                <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
-                <label>Records per page</label>
-                <select class="limit-select form-control" onchange="xlimit(this);">
-                    <option selected>25</option>
-                    <option>50</option>
-                    <option>75</option>
-                    <option>100</option>
-                </select>
-                <label>Sort By</label>
-                <select class="sort-select form-control" onchange="xsort(this);">
-                    <!-- <option selected value="id">ID</option> -->
-                    <option value="uniprot_canonical_ac">Protein ID</option>
-                    <option value="gene_name">Gene Name</option>
-                    <option value="protein_name_short">Protein Name</option>
-                    <option value="mass">Mass</option>
-                    <option value="organism">Organism</option>
-                    <option value="refseq_name">RefSeq Name</option>
-                    <option value="refseq_ac">RefSeq Acc</option>
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <form class="form-inline" onsubmit="return false;">
+                    <label>Page</label>
+                    <button type="button" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
+                    <select class="page-select form-control" onchange="xpage(this);"></select>
+                    <button type="button" class="btn btn-default nextbutton" onclick="next();">Next</button>
+                    <label>Records per page</label>
+                    <select class="limit-select form-control" onchange="xlimit(this);">
+                        <option selected>25</option>
+                        <option>50</option>
+                        <option>75</option>
+                        <option>100</option>
+                    </select>
+                    <label>Sort By</label>
+                    <select class="sort-select form-control" onchange="xsort(this);">
+                        <!-- <option selected value="id">ID</option> -->
+                        <option value="uniprot_canonical_ac">Protein ID</option>
+                        <option value="gene_name">Gene Name</option>
+                        <option value="protein_name_short">Protein Name</option>
+                        <option value="mass">Mass</option>
+                        <option value="organism">Organism</option>
+                        <option value="refseq_name">RefSeq Name</option>
+                        <option value="refseq_ac">RefSeq Acc</option>
 
-                </select>
-                <select class="dir-select form-control" onchange="xdir(this);">
-                    <option value="asc" selected>ASC</option>
-                    <option value="desc">DESC</option>
-                </select>
-                <label class="searchresult"></label>
-            </form>
+                    </select>
+                    <select class="dir-select form-control" onchange="xdir(this);">
+                        <option value="asc" selected>ASC</option>
+                        <option value="desc">DESC</option>
+                    </select>
+                    <label class="searchresult"></label>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- sorting_top-end -->
+        <!-- sorting_top-end -->
 
-    <script id="summary-template" type="text/template">
+        <script id="summary-template" type="text/template">
         <div class="panel panel-default">
             <div class="gg-panel-heading cd-faq-title">
                 <!-- added new class -->
@@ -165,90 +165,90 @@
     </script>
 
 
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <table id="gen-table" data-show-export="true" data-toggle="table">
-                <thead>
-                <tr>
-                    <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
-                    <th data-field="gene_name">Gene Name</th>
-                    <th data-field="protein_name_short">Protein Name</th>
-                    <th data-field="mass" data-formatter="MassFormatter">Native Mass
-                        <br>(Da)
-                    </th>
-                    <th data-field="organism">Organism</th>
-                    <th data-field="refseq_name">RefSeq Name</th>
-                    <th data-field="refseq_ac">RefSeq Acc</th>
-                </tr>
-                </thead>
-            </table>
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <table id="gen-table" data-show-export="true" data-toggle="table">
+                    <thead>
+                        <tr>
+                            <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
+                            <th data-field="gene_name">Gene Name</th>
+                            <th data-field="protein_name_short">Protein Name</th>
+                            <th data-field="mass" data-formatter="MassFormatter">Native Mass
+                                <br>(Da)
+                            </th>
+                            <th data-field="organism">Organism</th>
+                            <th data-field="refseq_name">RefSeq Name</th>
+                            <th data-field="refseq_ac">RefSeq Acc</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- table container ends here -->
+        <!-- sorting_bottom -->
+        <div class="col-md-12 col-xs-12" id="sortbottom">
+            <form class="form-inline" onsubmit="return false;">
+                <label>Page</label>
+                <button type="button previ" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
+                <select class="page-select form-control" onchange="xpage(this);"></select>
+                <button type="button next" class="btn btn-default nextbutton" onclick="next();">Next</button>
+                <label>Records per page</label>
+                <select class="limit-select form-control" onchange="xlimit(this);">
+                    <option selected>25</option>
+                    <option>50</option>
+                    <option>75</option>
+                    <option>100</option>
+                </select>
+                <label>Sort By</label>
+                <select class="sort-select form-control" onchange="xsort(this);">
+                    <option value="uniprot_canonical_ac">Protein ID</option>
+                    <option value="gene_name">Gene Name</option>
+                    <option value="protein_name_long">Protein Name</option>
+                    <option value="mass">Mass</option>
+                    <option value="organism">Organism</option>
+                    <option value="refseq_name">RefSeq Name</option>
+                    <option value="refseq_ac">RefSeq Acc</option>
+                </select>
+                <select class="dir-select form-control" onchange="xdir(this);">
+                    <option value="asc" selected>ASC</option>
+                    <option value="desc">DESC</option>
+                </select>
+                <label class="searchresult"></label>
+            </form>
+            <!--<label class="searchresult"></label>-->
         </div>
     </div>
-    <!-- table container ends here -->
-    <!-- sorting_bottom -->
-    <div class="col-md-12 col-xs-12" id="sortbottom">
-        <form class="form-inline" onsubmit="return false;">
-            <label>Page</label>
-            <button type="button previ" class="btn btn-default prevbutton" onclick="prev();">Prev</button>
-            <select class="page-select form-control" onchange="xpage(this);"></select>
-            <button type="button next" class="btn btn-default nextbutton" onclick="next();">Next</button>
-            <label>Records per page</label>
-            <select class="limit-select form-control" onchange="xlimit(this);">
-                <option selected>25</option>
-                <option>50</option>
-                <option>75</option>
-                <option>100</option>
-            </select>
-            <label>Sort By</label>
-            <select class="sort-select form-control" onchange="xsort(this);">
-                <option value="uniprot_canonical_ac">Protein ID</option>
-                <option value="gene_name">Gene Name</option>
-                <option value="protein_name_long">Protein Name</option>
-                <option value="mass">Mass</option>
-                <option value="organism">Organism</option>
-                <option value="refseq_name">RefSeq Name</option>
-                <option value="refseq_ac">RefSeq Acc</option>
-            </select>
-            <select class="dir-select form-control" onchange="xdir(this);">
-                <option value="asc" selected>ASC</option>
-                <option value="desc">DESC</option>
-            </select>
-            <label class="searchresult"></label>
-        </form>
-        <!--<label class="searchresult"></label>-->
-    </div>
-</div>
-<div w3-include-html="footer.html"></div>
-<script>w3.includeHTML();</script>
-<!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+    <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
-<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
-<!-- script for table -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- script for time for queryserach -->
-<script type="text/javascript" src="libraries/moment.js"></script>
-<!-- script for template engine -->
-<script type="text/javascript" src="libraries/mustache.js"></script>
-<!-- script for getting Web Service URLs -->
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for handling errror -->
+    <!-- script for table -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- script for time for queryserach -->
+    <script type="text/javascript" src="libraries/moment.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for handling errror -->
 
-<!-- script for glycan list page -->
-<script type="text/javascript" src="js/protein_list.js"></script>
-<!-- script for third party-->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-<!-- script for getting Web Service URLs -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
-<!-- script for third party alert-->
-<script src="js/activity_tracker.js"></script>
-<!-- script for navaigation -->
-<script src="js/navbar.js"></script>
-<!--  w3 including footer-->
-<!-- script for editing users search  -->
-<script src="js/editsearch.js"></script>
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
+    <!-- script for glycan list page -->
+    <script type="text/javascript" src="js/protein_list.js"></script>
+    <!-- script for third party-->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- script for third party alert-->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for navaigation -->
+    <script src="js/navbar.js"></script>
+    <!--  w3 including footer-->
+    <!-- script for editing users search  -->
+    <script src="js/editsearch.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
 
 </body>
 

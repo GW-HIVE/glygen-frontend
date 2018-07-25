@@ -404,5 +404,12 @@ var id = getParameterByName('id');
 LoadDataList(id);
 
 
-
+/**
+ * hides the loading gif and displays the page after the results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
 

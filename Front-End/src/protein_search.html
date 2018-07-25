@@ -19,7 +19,8 @@
     <!-- CSS for UI Typeahead -->
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <!--This does not work as downloaded version so UX using this as CDN for font.css-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
     <!-- CSS for chosen -->
     <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <!-- CSS for boots -->
@@ -38,8 +39,11 @@
     <!--Script for bootstrap-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body onload="tracking()">
 
+<body onload="tracking()">
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
@@ -48,8 +52,12 @@
     <div class="container gg-container">
         <!-- GlycoProtein_ID-->
         <div class="row top-table-margin">
-            <label class="control-label col-sm-4" for="protein"><span><a href="javascript://" title="UniProt accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a>
-            </span> UniProt accession number:</label>
+            <label class="control-label col-sm-4" for="protein">
+                <span>
+                    <a href="javascript://" title="UniProt accession number" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> UniProt accession number:</label>
 
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt protein ID of a glycoprotein">
@@ -60,7 +68,12 @@
 
         <!-- RefSeq Accession_ID-->
         <div class="row top-table-margin">
-            <label class="control-label col-sm-4" for="refseq"><span><a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)"><i class="far fa-question-circle help-sign"></i></a></span> RefSeq Accession number:</label>
+            <label class="control-label col-sm-4" for="refseq">
+                <span>
+                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt accession number of your protein (see https://www.uniprot.org/)">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> RefSeq Accession number:</label>
 
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of a glycoprotein">
@@ -71,33 +84,42 @@
 
         <!-- Protein size-->
         <div class="gg-form-group row">
-            <div> 
-                <label class="control-label col-sm-4" for="slider"><span><a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a  mass range for your proteins(s)"><i class="far fa-question-circle help-sign"></i></a>
-                </span>Protein Size:</label>
+            <div>
+                <label class="control-label col-sm-4" for="slider">
+                    <span>
+                        <a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a  mass range for your proteins(s)">
+                            <i class="far fa-question-circle help-sign"></i>
+                        </a>
+                    </span>Protein Size:</label>
             </div>
-            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">    
+            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div> 
-                <div class="col-xs-2 min-value-alignment">
-                    <h6>Min</h6>
-                    <div id="lower-value"> </div>
-                </div>
-                <div class="col-xs-7">
-                    <h6 class="align-center">Native Mass Range</h6>
-                    <div id="slider"> </div>
-                </div>
+                <div>
+                    <div class="col-xs-2 min-value-alignment">
+                        <h6>Min</h6>
+                        <div id="lower-value"> </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <h6 class="align-center">Native Mass Range</h6>
+                        <div id="slider"> </div>
+                    </div>
 
-                <div class="col-xs-2" style="margin-bottom: 40px; padding-left: 35px;">
-                    <h6>Max</h6>
-                    <div id="upper-value"> </div>
-                </div>
+                    <div class="col-xs-2" style="margin-bottom: 40px; padding-left: 35px;">
+                        <h6>Max</h6>
+                        <div id="upper-value"> </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Organism-->
         <div class="form-group gg-form-group row">
-            <label class="control-label col-sm-4" for="organism"><span><a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an organism that makes your protein(s)"><i class="far fa-question-circle help-sign"></i></a></span> Organism:</label>
+            <label class="control-label col-sm-4" for="organism">
+                <span>
+                    <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an organism that makes your protein(s)">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Organism:</label>
 
             <div class="col-sm-8">
                 <select class="organism" id="organism">
@@ -109,17 +131,27 @@
 
         <!-- Protein name-->
         <div class="form-group gg-form-group row">
-            <label class="control-label col-sm-4" for="protein_name"><span><a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the name of your protein"><i class="far fa-question-circle help-sign"></i></a></span> Protein Name:</label>
+            <label class="control-label col-sm-4" for="protein_name">
+                <span>
+                    <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the name of your protein">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein Name:</label>
 
             <div class="col-sm-8">
                 <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the protein name">
-                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO  </div>
+                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO </div>
             </div>
         </div>
 
         <!-- Gene Name-->
         <div class="form-group gg-form-group row">
-            <label class="control-label col-sm-4" for="gene_name"><span><a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the name of the gene encoding your protein"><i class="far fa-question-circle help-sign"></i></a></span> Gene Name: </label>
+            <label class="control-label col-sm-4" for="gene_name">
+                <span>
+                    <a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the name of the gene encoding your protein">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Gene Name: </label>
 
             <div class="col-sm-8">
                 <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the gene name">
@@ -129,7 +161,13 @@
 
         <!-- Sequences-->
         <div class="gg-form-group2 row">
-            <label class="control-label col-sm-4" for="sequences"><span><a href="javascript://" title="“Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left" data-content="Enter a protein or peptide sequence(s) in FASTA format"><i class="far fa-question-circle help-sign"></i></a></span> Protein or Peptide Sequence(s):</label>
+            <label class="control-label col-sm-4" for="sequences">
+                <span>
+                    <a href="javascript://" title="“Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left"
+                        data-content="Enter a protein or peptide sequence(s) in FASTA format">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Protein or Peptide Sequence(s):</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
@@ -138,34 +176,41 @@
                     <option value="exact">Exact</option>
                 </select>
             </div>
-            
+
             <div class="col-sm-8">
-                <form name="form1" action="#" style="height: 220px;"><textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea></form>
-                
+                <form name="form1" action="#" style="height: 220px;">
+                    <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                </form>
+
                 <h6 id='msg' class="rq"></h6>
-                
-                <div class="gg-text-example">Example: 
-                    <br> >SEQUENCE _A 
+
+                <div class="gg-text-example">Example:
+                    <br> >SEQUENCE _A
                     <br>IYKE</div>
             </div>
         </div>
-<!--        <label id='msg' class="rq"></label>-->
+        <!--        <label id='msg' class="rq"></label>-->
 
         <!--Pathway-->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="pathway">
-            <span><a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a UniProt pathway ID”. See https://www.uniprot.org/help/pathway"><i class="far fa-question-circle help-sign"></i></a></span> Pathway ID:</label>
+                <span>
+                    <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a UniProt pathway ID”. See https://www.uniprot.org/help/pathway">
+                        <i class="far fa-question-circle help-sign"></i>
+                    </a>
+                </span> Pathway ID:</label>
 
-            <div class="col-sm-8">    
+            <div class="col-sm-8">
                 <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a UniProt Pathway ID">
                 <div class="gg-text-example">Example: 2155 </div>
             </div>
         </div>
 
-        <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right;">
+        <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
+            style="float: right;">
     </div>
-    
-      
+
+
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();

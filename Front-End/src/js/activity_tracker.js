@@ -121,6 +121,9 @@ function getUrlVars() {
 
 //javascript errors and exceptions
 window.onerror = function (msg, url, line, col, error) {
+    // hide the loading gif
+    $('#loading_image').fadeOut();
+
     // Note that col & error are new to the HTML 5 spec and may not be 
     // supported in every browser.  It worked for me in Chrome.
     //    var extra = !col ? '' : '\ncolumn: ' + col;

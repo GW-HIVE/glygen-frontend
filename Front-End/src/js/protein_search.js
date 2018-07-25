@@ -2,7 +2,7 @@
 // @description: UO1 Version-1.1.
 //@update:6 June 2018
 //@update: 26 June 2018-web services changes updated
-
+// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
@@ -178,10 +178,10 @@ $(document).ready(function () {
             LoadProteinSearchvalues(id);
         }
     })
-    .fail(function(result){
-        activityTracker("error", "", result.status +": search_init WS error");
-        console.log("error in search_init");
-    });
+        .fail(function (result) {
+            activityTracker("error", "", result.status + ": search_init WS error");
+            console.log("error in search_init");
+        });
 });
 
 /** Mass range function
@@ -217,9 +217,12 @@ function mass(mass_min, mass_max) {
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
+    // displays the loading gif when the ajax call starts
+    $('#loading_image').fadeIn();
+
     var organism = $("#organism").val();
     var uniprot_id = $("#protein").val();
-    var refseq_id=$("#refseq").val();
+    var refseq_id = $("#refseq").val();
     var mass_slider = document.getElementById("slider").noUiSlider.get();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
@@ -233,12 +236,12 @@ function ajaxProteinSearchSuccess() {
         query_type: "search_protein",
         organism: organism,
         uniprot_canonical_ac: uniprot_id,
-        refseq_ac:refseq_id,
+        refseq_ac: refseq_id,
         // mass: {
         //     min: mass_min,
         //     max: mass_max
         // },
-        mass: {"min":parseInt(mass_min), "max":parseInt(mass_max)},
+        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
         protein_name: protein_name_long,
         gene_name: gene_name,
         pathway_id: pathway_id,
@@ -256,9 +259,11 @@ function ajaxProteinSearchSuccess() {
         success: function (results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
             } else {
                 displayErrorByCode("server-down");
-                activityTracker("error", "", "no result found for "+json);
+                activityTracker("error", "", "no result found for " + json);
+                $('#loading_image').fadeOut();
             }
 
         }
@@ -273,3 +278,12 @@ $(window).on('resize', function () {
     $element.width($element.parent().width());
 
 })
+
+/**
+ * hides the loading gif and displays the page after the search_init results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
