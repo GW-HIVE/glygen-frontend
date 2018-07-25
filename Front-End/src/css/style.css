@@ -558,7 +558,7 @@ label {
     width: 100%;
     height: 350px;
     padding: 0 10%;
-    box-shadow: inset 0 0 100px #ccc;
+    box-shadow: inset 0 0 60px #aaa;
 }
 
 .cover-text {
