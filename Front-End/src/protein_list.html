@@ -50,7 +50,7 @@
                     <!-- <option selected value="id">ID</option> -->
                     <option value="uniprot_canonical_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
-                    <option value="protein_name_short">Protein Name</option>
+                    <option value="protein_name_long">Protein Name</option>
                     <option value="mass">Mass</option>
                     <option value="organism">Organism</option>
                     <option value="refseq_name">RefSeq Name</option>
@@ -94,7 +94,7 @@
                 <tr>
                     <td>Mass</td>
                     {{#mass.min}}
-                    <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}} - Da</td>
+                    <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
                     {{/mass.max}}
                 </tr>
                 {{/mass.min}}
@@ -172,7 +172,7 @@
                 <tr>
                     <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
                     <th data-field="gene_name">Gene Name</th>
-                    <th data-field="protein_name_short">Protein Name</th>
+                    <th data-field="protein_name_long">Protein Name</th>
                     <th data-field="mass" data-formatter="MassFormatter">Native Mass
                         <br>(Da)
                     </th>
@@ -228,6 +228,7 @@
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
 <!-- script for time for queryserach -->
 <script type="text/javascript" src="libraries/moment.js"></script>
+<script type="text/javascript" src="libraries/momentzone.js"></script>
 <!-- script for template engine -->
 <script type="text/javascript" src="libraries/mustache.js"></script>
 <!-- script for getting Web Service URLs -->
