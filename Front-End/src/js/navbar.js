@@ -22,7 +22,10 @@ $(document).ready(function(){
     var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
     var navItemText = filename.replace('_', ' ').toUpperCase();
 //    alert(navItemText);
-    if(navItemText == 'INDEX') {
+    
+    if(navItemText == '') {
+        navItemText = 'HOME';
+    } else if(navItemText == 'INDEX') {
         navItemText = 'HOME';
     } else if(navItemText == 'GLYCAN SEARCH') {
         navItemText = 'EXPLORE';
