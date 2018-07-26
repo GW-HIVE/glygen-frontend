@@ -81,11 +81,36 @@ function getWsUrl(request, id) {
             break;
 
         //Usecases search webservices
-
+//Usecases search webservices Q1-Q2-Q3
         case "search_bioenzyme":
-            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes" + id;
+            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
+            break;
+        case "search_glycansite":
+            return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
+            break;
+        case "search_glycangene":
+            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/all/" + id;
             break;
 
+        //Usecases search webservices Q4-Q6
+        case "search_proteinorthologues":
+            return ws_useCaseSearch + "/protein_to_orthologs/" + id;
+            break;
+
+        case "search_glycanenzyme":
+            return ws_useCaseSearch + "/biosynthesis_enzyme_to_glycans/10090/" + id;
+            break;
+        //Usecases search webservices Q7-Q8-Q9
+
+        // case "search_bioenzyme":
+        //     return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
+        //     break;
+        // case "search_glycansite":
+        //     return ws_useCaseSearch + "/glycan_to_glycoproteins/all/" + id;
+        //     break;
+        // case "search_glycangene":
+        //     return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/all/" + id;
+        //     break;
     }
 }
 

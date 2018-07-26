@@ -86,15 +86,13 @@ function bioEnzyme(){
     //it seems  need that taxID m can we just set it to 10090 ?
     $.ajax({
         type: 'POST',
-        // url: getWsUrl("search_bioenzyme",id),
-        url:'http://glygen-vm-dev.biochemistry.gwu.edu/api/usecases/glycan_to_biosynthesis_enzymes/9606/' + id,
-        // data: json,
+         url: getWsUrl("search_bioenzyme",id),
         success: function(results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
             }
             else {
-               alert("No valid List ID returned");
+                displayErrorByCode('no-results-found');
             }
 
         }
@@ -135,15 +133,13 @@ function glycanSite(){
     //it seems  need that taxID m can we just set it to 10090 ?
     $.ajax({
         type: 'POST',
-        // url: getWsUrl("search_bioenzyme",id),
-        url:'http://glygen-vm-dev.biochemistry.gwu.edu/api/usecases/glycan_to_glycoproteins/9606/' + id,
-        // data: json,
+        url: getWsUrl("search_glycansite",id),
         success: function(results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
             }
             else {
-                alert("No valid List ID returned");
+                displayErrorByCode('no-results-found');
             }
 
         }
@@ -184,15 +180,13 @@ function glycanGene(){
     //it seems  need that taxID m can we just set it to 10090 ?
     $.ajax({
         type: 'POST',
-        // url: getWsUrl("search_bioenzyme",id),
-        url:'http://glygen-vm-dev.biochemistry.gwu.edu/api/usecases/glycan_to_glycoproteins/9606/' + id,
-        // data: json,
+        url: getWsUrl("search_glycangene",id),
         success: function(results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
             }
             else {
-                alert("No valid List ID returned");
+                displayErrorByCode('no-results-found');
             }
 
         }
@@ -228,14 +222,15 @@ function proteinOrthologues(){
     var id = $("#proteinorthologues").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("protein_detail",id),
+        url: getWsUrl("search_proteinorthologues",id),
         // data: json,
         success: function (results) {
-            if (results.error_code) {
-                displayErrorByCode("Invalid ID")
+            if (results.list_id) {
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+                displayErrorByCode('no-results-found');
             }
 
         }
@@ -271,11 +266,12 @@ function proteinFunction(){
         url: getWsUrl("protein_detail",id),
         // data: json,
         success: function (results) {
-            if (results.error_code) {
-                displayErrorByCode("Invalid ID")
+            if (results.list_id){
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+                displayErrorByCode('no-results-found');
             }
 
         }
@@ -284,7 +280,7 @@ function proteinFunction(){
 }
 
 
-//Q.5- Which glycans might have been synthesized in mouse using enzyme X?
+//Q.6- Which glycans might have been synthesized in mouse using enzyme X?
 
 $("#glycanenzyme").autocomplete({
     source: function (request, response) {
@@ -310,20 +306,23 @@ function glycanEnzyme(){
     var id = $("#glycanenzyme").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("protein_detail",id),
+        url: getWsUrl("search_glycanenzyme",id),
         // data: json,
         success: function (results) {
-            if (results.error_code) {
-                displayErrorByCode("Invalid ID")
+            if (results.list_id) {
+                window.location = './glycan_list.html?id=' + results.list_id;
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+
+                displayErrorByCode('no-results-found');
             }
 
         }
 
     })
 }
+
+//Q.7- What are the glycosyltransferases in species X?
 
 
 
