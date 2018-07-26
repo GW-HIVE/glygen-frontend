@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
 
     <title>Home</title>
 
@@ -19,42 +23,45 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="css/reset.css">    
+    <link rel="stylesheet" href="css/reset.css">
 </head>
-        
+
 <body onload="tracking()">
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
-            
-    <div class="container-fluid text-center" style="padding-left: 40px; padding-right: 40px;"> 
-        <div class="row"> 
+
+    <div class="container-fluid text-center" style="padding-left: 40px; padding-right: 40px;">
+        <div class="row">
             <div class="col-sm-9">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default text-left card">
                             <div class="panel-body">
                                 <div class="col-lg-12 col-lg-3 glygenIconIndex">
-                                    <img class="glygenIconIndex"  src="images/glygen-icon.svg" style="width: 100%; padding-top: 30px;">
+                                    <img class="glygenIconIndex" src="images/glygen-icon.svg" style="width: 100%; padding-top: 30px;">
                                 </div>
                                 <div class="col-lg-12 col-lg-9">
 
-                                   <h1 id="glygen-h1">GlyGen</h1>
-                                   <h3 class="title">
-                                       Computational and Informatics Resources for Glycoscience Research
-                                   </h3>
+                                    <h1 id="glygen-h1">GlyGen</h1>
+                                    <h3 class="title">
+                                        Computational and Informatics Resources for Glycoscience Research
+                                    </h3>
                                     <p>
-                                        GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This webportal allows exploring this data and to perform unique searches that cannot be executed in any of the integrated databases alone.
+                                        GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves
+                                        information from multiple international data sources and integrates and harmonizes
+                                        this data. This webportal allows exploring this data and to perform unique searches
+                                        that cannot be executed in any of the integrated databases alone.
                                     </p>
-                                </div> 
-                            </div> 
-                        </div> 
-                    </div> 
-                </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
-                    <div class="col-sm-4"> 
-                        <div class="thumbnail card">          
+                    <div class="col-sm-4">
+                        <div class="thumbnail card">
                             <a class="gg-img-card" href="glycan_search.html">
                                 <img src="images/glycan.png" alt="Glycan" style="width: 90%;">
                             </a>
@@ -74,7 +81,7 @@
 
                     <div class="col-sm-4">
                         <div class="thumbnail card">
-                            <a class="gg-img-card" href="glycoprotein_search.html">            
+                            <a class="gg-img-card" href="glycoprotein_search.html">
                                 <img src="images/glycoprotein.png" alt="Glycoprotein" style="width: 90%;">
                             </a>
                             <div class="caption text-left">
@@ -86,14 +93,14 @@
                                     <a href="glycoprotein_search.html" class="btn btn-link btn-block">Explore
                                     </a>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="col-sm-4">
                         <div class="thumbnail card">
-                            <a class="gg-img-card" href="protein_search.html">   
-                                <img src="images/protein.png" alt="protein" style="width: 90%;">         
+                            <a class="gg-img-card" href="protein_search.html">
+                                <img src="images/protein.png" alt="protein" style="width: 90%;">
                             </a>
                             <div class="caption text-left">
                                 <h3 class="title">Protein</h3>
@@ -104,12 +111,12 @@
                                     <a href="protein_search.html" class="btn btn-link btn-block">Explore
                                     </a>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </div>  
-                </div> 
+                    </div>
+                </div>
 
-                <div class="row"> 
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default text-left card">
                             <div class="panel-body">
@@ -121,32 +128,33 @@
                                 <div class="list-group">
                                     <p>
                                         <a href="quick_search.html#search_glycan#enzymes" class="list-group-item">
-                                            What are the enzymes involved in the biosynthesis of 
+                                            What are the enzymes involved in the biosynthesis of
                                             <span style="color: #2F78B7;"> glycan X </span> in human?
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            Which proteins have been shown to bear 
+                                            Which proteins have been shown to bear
                                             <span style="color: #2F78B7;"> glycan X </span> and which site is this glycan attached to?
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            What are the orthologues of 
-                                            <span style="color: #2F78B7;"> protein X </span> and how does a glycosylation site and glycan structure change in different species?
+                                            What are the orthologues of
+                                            <span style="color: #2F78B7;"> protein X </span> and how does a glycosylation site and glycan structure change
+                                            in different species?
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            Which glycans might have been synthesized in mouse using 
+                                            Which glycans might have been synthesized in mouse using
                                             <span style="color: #2F78B7;"> enzyme X? </span>
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            What are the glycosyltransferases in 
+                                            What are the glycosyltransferases in
                                             <span style="color: #2F78B7;"> species X </span>?
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            Which glycosyltransferases are known to be involved in 
+                                            Which glycosyltransferases are known to be involved in
                                             <span style="color: #2F78B7;"> disease X? </span>
                                         </a>
                                     </p>
@@ -160,9 +168,9 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
-                <div class="row"> 
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-default text-left card">
                             <div class="panel-body">
@@ -174,13 +182,14 @@
                                 <div class="list-group">
                                     <p>
                                         <a href="#" class="list-group-item">
-                                            What are the enzymes involved in the biosynthesis of 
+                                            What are the enzymes involved in the biosynthesis of
                                             <span style="color: #2F78B7;"> Man5 </span>in human?
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            Which proteins have been shown to bear 
-                                            <span style="color: #2F78B7;"> a bi-antennary fully sialated N-Glycan </span>and which site is this glycan attached to?
+                                            Which proteins have been shown to bear
+                                            <span style="color: #2F78B7;"> a bi-antennary fully sialated N-Glycan </span>and which site is this glycan attached
+                                            to?
                                         </a>
 
                                         <a href="#" class="list-group-item">
@@ -189,13 +198,13 @@
                                         </a>
 
                                         <a href="#" class="list-group-item">
-                                            What are the glycosyltransferases in 
+                                            What are the glycosyltransferases in
                                             <span style="color: #2F78B7;"> Man5 </span>Human?
                                         </a>
                                     </p>
                                 </div>
 
-<!--
+                                <!--
                                 <div class="gg-card-see-all">
                                     <a href="#" class="btn btn-link btn-block">
                                         See All
@@ -206,8 +215,8 @@
                             </div>
                         </div>
                     </div>
-                </div>                    
-            </div> 
+                </div>
+            </div>
 
             <div class="row" style="padding-bottom: 18px;">
                 <div class="col-sm-3">
@@ -219,17 +228,17 @@
                         <a href="feedback.html">
                             <img style="width: 50%" src="images/survey6F.png" alt="Survey">
                         </a>
-                        <div class="caption text-left">  
+                        <div class="caption text-left">
                             <p>
-                                Please provide feedback and suggestion to help us improve the GlyGen portal  and make it more useful for the community.
+                                Please provide feedback and suggestion to help us improve the GlyGen portal and make it more useful for the community.
                             </p>
                             <div class="gg-card-explore">
                                 <a href="feedback.html" class="btn btn-link btn-block">
                                     Leave Feedback
                                 </a>
-                                
-                            </div> 
-                        </div> 
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="panel panel-default thumbnail card">
@@ -240,37 +249,42 @@
                         <div class="caption text-left">
                             <p>
                                 <a href="https://glytoucan.org/" target="_blank" style="text-decoration: none;">
-                                    <strong><em> GlyTouCan </em></strong>
+                                    <strong>
+                                        <em> GlyTouCan </em>
+                                    </strong>
                                 </a>
-                                <br> 
-                                    is the international glycan structure repository. It assigns globally unique accession numbers to any submitted glycan.
+                                <br> is the international glycan structure repository. It assigns globally unique accession numbers
+                                to any submitted glycan.
                             </p>
 
                             <p>
                                 <a href="http://www.uniprot.org/" target="_blank" style="text-decoration: none;">
-                                    <strong><em> UniProt </em></strong>
+                                    <strong>
+                                        <em> UniProt </em>
+                                    </strong>
                                 </a>
-                                <br>
-                                    is a freely available, comprehensive resource of high quality protein sequences and functional annotations.
+                                <br> is a freely available, comprehensive resource of high quality protein sequences and functional
+                                annotations.
                                 <br>
                             </p>
 
                             <p>
                                 <a href="http://www.unicarbkb.org/" target="_blank" style="text-decoration: none;">
-                                    <strong><em> UniCarbKB </em></strong>
+                                    <strong>
+                                        <em> UniCarbKB </em>
+                                    </strong>
                                 </a>
-                                <br>
-                                    is a knowledge base for curated glycoconjugate information and their annotations.
+                                <br> is a knowledge base for curated glycoconjugate information and their annotations.
                                 <br>
                             </p>
-                        </div> 
+                        </div>
 
                         <div class="gg-card-explore">
                             <a href="resources.html" class="btn btn-link btn-block">
                                 Explore
                             </a>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="panel panel-default thumbnail card">
                         <div class="media">
@@ -283,16 +297,9 @@
                             </div>
                         </div>
 
-                        <div class="caption"> 
-                            <a 
-                                class="twitter-timeline" href="https://twitter.com/gly_gen" 
-                                data-height="200"
-                                data-chrome="nofooter"
-                                data-link-color="#337ab7"
-                                data-font-size="1.2em"
-                                data-font-weight="600"
-                                data-font-family="Verdana, Arial, sens-serif"
-                                data-tweet-limit="3">My tweets
+                        <div class="caption">
+                            <a class="twitter-timeline" href="https://twitter.com/gly_gen" data-height="200" data-chrome="nofooter" data-link-color="#337ab7"
+                                data-font-size="1.2em" data-font-weight="600" data-font-family="Verdana, Arial, sens-serif" data-tweet-limit="3">My tweets
                             </a>
                             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
                             </script>
@@ -303,10 +310,10 @@
 
                             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
                             </script>
-                        </div> 
+                        </div>
                     </div>
 
-<!--
+                    <!--
                     <div class="panel panel-default thumbnail card">
                         <h3 class="home-headings">
                             Website Tour 
@@ -321,17 +328,20 @@
                    </div>
 -->
 
-                </div> 
-            </div> 
-        </div> 
+                </div>
+            </div>
+        </div>
     </div>
     <div w3-include-html="footer.html"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script> 
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/navbar.js"></script>
-    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
-    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <script src="js/ws_url.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for logging activity -->
     <script src="js/utility.js"></script>
 </body>
+
 </html>
