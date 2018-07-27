@@ -4,6 +4,7 @@
 //@Author:Rupali Mahadik.
 //@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -275,14 +276,14 @@ function updateSearch() {
         dataType: "json",
         url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
-            if (result.list_id) {
+            // if (result.list_id) {
                 console.log(result);
-                window.location = 'protein_list.html?id=' + result.list_id;
                 activityTracker("user", id, "update search");
-            } else {
-                // handle if no results
-                activityTracker("error", id, "update search: no result found");
-            }
+                window.location = 'protein_list.html?id=' + result.list_id;
+            // } else {
+            //     // handle if no results
+            //     activityTracker("error", id, "update search: no result found");
+            // }
         },
         error: ajaxFailure
     });

@@ -7,6 +7,7 @@
 //@update:3 April 2018. with real web service
 //@update: June 26-2018- with web service changes.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
+// @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 
 /**
 
@@ -278,14 +279,14 @@ function updateSearch() {
         dataType: "json",
         url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
         success: function (result) {
-            if (result.list_id) {
+            // if (result.list_id) {
                 console.log(result);
-                window.location = 'glycan_list.html?id=' + result.list_id;
                 activityTracker("user", id, "update search");
-            } else {
-                // handle if no results
-                activityTracker("error", id, "update search: no result found");
-            }
+                window.location = 'glycan_list.html?id=' + result.list_id;
+            // } else {
+            //     // handle if no results
+            //     activityTracker("error", id, "update search: no result found");
+            // }
         },
         error: ajaxFailure
     });
