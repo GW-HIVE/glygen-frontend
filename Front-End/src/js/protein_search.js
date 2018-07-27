@@ -152,7 +152,7 @@ $("#pathway").autocomplete({
 /** functions for dropdowns organism
  * get organism drop down values for search form
  */
-
+var searchInitValues;
 var mass_max;
 var mass_min;
 $(document).ready(function () {
@@ -164,10 +164,13 @@ $(document).ready(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
+
     $.getJSON(getWsUrl("search_init_protein"), function (result) {
-        for (var x = 0; x < result.organism.length; x++) {
-            $("#organism").append("<option>" + result.organism[x] + "</option>");
-        }
+        searchInitValues = result;
+
+        var orgElement = $(".organism").get(0);
+        createOption(orgElement, result.organism[0].name, result.organism[0].id);
+        createOption(orgElement, result.organism[1].name, result.organism[1].id);
         var mass_max = result.protein_mass.max;
         var mass_min = result.protein_mass.min;
         mass(mass_min, mass_max)
@@ -213,7 +216,12 @@ function mass(mass_min, mass_max) {
 
 }
 
-
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
