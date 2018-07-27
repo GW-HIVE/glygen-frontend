@@ -342,6 +342,7 @@ function ajaxProteinSearchSuccess() {
                 $('#loading_image').fadeOut();
                 } else {
                     window.location = './glycoprotein_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
                 }
             }
         });

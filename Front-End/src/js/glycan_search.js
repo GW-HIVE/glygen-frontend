@@ -292,6 +292,7 @@ function submitvalues() {
                 $('#loading_image').fadeOut();
             } else {
                 window.location = './glycan_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
             }
         }
 
