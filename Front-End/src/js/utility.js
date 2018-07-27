@@ -5,8 +5,10 @@ function getErrorMessage(errorCode) {
     switch (errorCode) {
         case 'invalid-query-json':
             return {
-                message: "This is not a valid JSON query. Please try again.",
-                title: "Invalid Submission"
+                message: "This is not a valid entry. Please try again.",
+                title: "Invalid Entry Error"
+//                message: "This is not a valid JSON query. Please try again.",
+//                title: "Invalid Submission"
             };
             break;
         case 'open-connection-failed':
@@ -17,14 +19,18 @@ function getErrorMessage(errorCode) {
             break;
         case 'unexpected-field-in-query':
             return {
-                message: "Unexpected field in query JSON.",
-                title: "Unexpected Error"
+                message: "This is unexpected field entry. Please try again",
+                title: "Unexpected Field Entry Error"
+//                message: "Unexpected field in query JSON.",
+//                title: "Unexpected Error"
             };
             break;
         case 'invalid-parameter-value-length':
             return {
-                message: "Display error occurred. We are looking into this problem.",
-                title: "Unexpected Error"
+                message: "Please adjust length of your entry and try again.",
+                title: "Invalid Value Length Error"
+//                message: "Display error occurred. We are looking into this problem.",
+//                title: "Unexpected Error"
             };
             break;
         case 'no-search-criteria-submitted':
