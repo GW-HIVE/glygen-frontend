@@ -303,7 +303,7 @@ function ajaxProteinSearchSuccess() {
         operation: "AND",
         query_type: "search_protein",
         // organism: organism,
-        tax_id: input_organism ? parseInt(input_organism) : '',
+        tax_id: organism ? parseInt(organism) : '',
         uniprot_canonical_ac: uniprot_id,
         refseq_ac: refseq_id,
         // mass: {
