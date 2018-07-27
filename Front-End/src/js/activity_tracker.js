@@ -44,8 +44,7 @@ function logID() {
         data: 'json',
         success: function (results) {
             data = results.user;
-            localStorage.setItem("ID", data);                           //Store the ID from the webservice
-            txt += " Your ID is:" + localStorage.getItem("ID");     // Retrieve ID from localStorage
+            localStorage.setItem("ID", data);     //Store the ID from the webservice
             displayBannerMsg(txt);
             activityTracker("user", "", "");
 
