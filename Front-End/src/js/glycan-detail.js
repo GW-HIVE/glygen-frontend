@@ -16,6 +16,7 @@ var glytoucan_ac;
 function ajaxSuccess(data) {
     if (data.error_code) {
         activityTracker("error", glytoucan_ac, data.error_code);
+        // added by Gaurav on July 27, 2018. Web service error display.
         alertify.alert('Error occured', data.error_code);
     }
     else {
