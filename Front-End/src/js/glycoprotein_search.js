@@ -290,7 +290,8 @@ function ajaxProteinSearchSuccess() {
     var formObject = {
         operation: "AND",
         query_type: "search_protein",
-        organism: organism,
+        // organism: organism,
+        tax_id: input_organism ? parseInt(input_organism) : '',
         uniprot_canonical_ac: uniprot_id,
         refseq_ac: refseq_id,
         // mass: {
@@ -318,31 +319,33 @@ function ajaxProteinSearchSuccess() {
         url: getWsUrl("search_protein"),
         //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
-        //     success: function (results) {
-        //         if (results.error_code) {
-        //             displayErrorByCode(results.error_code);
-        //             activityTracker("error", "", results.error_code);
-        //         } else if (results.list_id && (results.list_id.length === 0)) {
-        //             displayErrorByCode('no-results-found');
-        //             activityTracker("error", "", "no result found for "+json);
-        //         } else {
-        //             window.location = './glycoprotein_list.html?id=' + results.list_id;
-        //         }
-        //     }
-        // });
         success: function (results) {
-            if (results.list_id) {
-                window.location = './glycoprotein_list.html?id=' + results.list_id;
-                $('#loading_image').fadeOut();
-            } else {
-                displayErrorByCode("server-down");
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
                 activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "no result found for " + json);
                 $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
+                $('#loading_image').fadeOut();
+                } else {
+                    window.location = './glycoprotein_list.html?id=' + results.list_id;
+                }
             }
-
-        }
-    });
+        });
+    //     success: function (results) {
+    //         if (results.list_id) {
+    //             window.location = './glycoprotein_list.html?id=' + results.list_id;
+    //             $('#loading_image').fadeOut();
+    //         } else {
+    //             displayErrorByCode("server-down");
+    //             activityTracker("error", "", results.error_code);
+    //             activityTracker("error", "", "no result found for " + json);
+    //             $('#loading_image').fadeOut();
+    //         }
+    //
+    //     }
+    // });
 }
 
 

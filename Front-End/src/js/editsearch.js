@@ -22,7 +22,7 @@ function setFormValues(data) {
             var massSlider1 = document.getElementById('slider1');
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
-        $("#organism").val(data.query.organism);
+        $("#organism").val(data.query.tax_id);
         $("#ddl").val(data.query.glycan_type);
        var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
@@ -51,7 +51,7 @@ function setProteinFormValues(data) {
             var massSlider = document.getElementById('slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
         }
-        $("#organism").val(data.query.organism);
+        $("#organism").val(data.query.tax_id);
         $("#gene_name").val(data.query.gene_name);
         $("#protein_name_long").val(data.query.protein_name_long);
         $("#pathway").val(data.query.pathway_id);
