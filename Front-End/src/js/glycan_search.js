@@ -93,13 +93,25 @@ $("#enzyme").autocomplete({
  * get organism drop down values for search form
  */
 
+var searchInitValues;
+
 var mass_max;
 var mass_min;
 $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        $(".organism").append("<option>" + result.organism[0] + "</option>");
-        $(".organism").append("<option>" + result.organism[1] + "</option>");
-        $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
+        searchInitValues = result;
+
+        var orgElement = $(".organism").get(0);
+        createOption(orgElement, result.organism[0].name, result.organism[0].id);
+        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+
+        var glycanElement = $(".ddl").get(0);
+
+        for(var x = 0; x < result.glycan_type.length; x++) {
+            createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
+        }
+
+        // $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
         var mass_max = result.glycan_mass.max;
         var mass_min = result.glycan_mass.min;
         var sugar_mass_min = result.number_monosaccharides.min;
@@ -182,38 +194,60 @@ function mass(mass_min, mass_max) {
  */
 
 function configureDropDownLists(ddl1, ddl2, callback) {
-    var nglycan;
-    var oglycan;
-    // var nglycan={};
-    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        if (result.glycan_type[0]) {
-            nglycan = result.glycan_type[0].subtype;
-        }
-        if (result.glycan_type[1]) {
-            oglycan = result.glycan_type[1].subtype;
-        }
-        dataReady();
-    });
+    var glyan_type_name = ddl1.value;
 
-    function dataReady() {
-        ddl2.options.length = 0;
-        createOption(ddl2, '', '');
+    // clears existing options
+    ddl2.options.length = 0;
 
-        switch (ddl1.value) {
-            case 'N-glycan':
-                for (i = 0; i < nglycan.length; i++) {
-                    createOption(ddl2, nglycan[i], nglycan[i]);
-                }
-                break;
-            case 'O-glycan':
-                for (i = 0; i < oglycan.length; i++) {
-                    createOption(ddl2, oglycan[i], oglycan[i]);
-                }
-                break;
+    createOption(ddl2, '', '');
+
+    for (var x = 0; x < searchInitValues.glycan_type.length; x++) {
+        var glycan_type = searchInitValues.glycan_type[x];
+
+        // find glycan type by name
+        if(glycan_type.name === glyan_type_name) {
+
+            for (i = 0; i < glycan_type.subtype.length; i++) {
+                var subtype = glycan_type.subtype[i];
+
+                createOption(ddl2, subtype, subtype);
+            }
+
+            break;
         }
-        if (callback) {
-            callback();
-        }
+    }
+
+
+    // var nglycan;
+    // var oglycan;
+    //
+    // //searchInitValues
+    //
+    // // var nglycan={};
+    // if (searchInitValues.glycan_type[0]) {
+    //     nglycan = searchInitValues.glycan_type[0].subtype;
+    // }
+    // if (searchInitValues.glycan_type[1]) {
+    //     oglycan = searchInitValues.glycan_type[1].subtype;
+    // }
+    //
+    //
+    //
+    // switch (ddl1.value) {
+    //     case 'N-glycan':
+    //         for (i = 0; i < nglycan.length; i++) {
+    //             createOption(ddl2, nglycan[i], nglycan[i]);
+    //         }
+    //         break;
+    //     case 'O-glycan':
+    //         for (i = 0; i < oglycan.length; i++) {
+    //             createOption(ddl2, oglycan[i], oglycan[i]);
+    //         }
+    //         break;
+    // }
+
+    if (callback) {
+        callback();
     }
 }
 
@@ -247,33 +281,38 @@ function submitvalues() {
         type: 'post',
         url: getWsUrl("glycan_search"),
         data: json,
-        // success: function (results) {
-        //     if (results.error_code) {
-        //         displayErrorByCode(results.error_code);
-        //         activityTracker("error", "", results.error_code);
-        //     } else if (results.list_id && (results.list_id.length === 0)) {
-        //         displayErrorByCode(results.error_code);
-        //         activityTracker("user", "", "no result found");
-        //     } else {
-        //         window.location = './glycan_list.html?id=' + results.list_id;
-        //     }
-        // }
-
         success: function (results) {
-            if (results.list_id) {
-                window.location = './glycan_list.html?id=' + results.list_id;
-                // hides the loading gif when the ajax call returns a response.
-                $('#loading_image').fadeOut();
-            }
-            else {
+            if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "no result found for " + json);
-                // hides the loading gif when the ajax call returns a response.
+                activityTracker("error", "", results.error_code);
                 $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
+                $('#loading_image').fadeOut();
+            } else {
+                window.location = './glycan_list.html?id=' + results.list_id;
             }
         }
+
+        // success: function (results) {
+        //     if (results.list_id) {
+        //         window.location = './glycan_list.html?id=' + results.list_id;
+        //         // hides the loading gif when the ajax call returns a response.
+        //         $('#loading_image').fadeOut();
+        //     }
+        //     else {
+        //         displayErrorByCode(results.error_code);
+        //         activityTracker("error", "", "no result found for " + json);
+        //         // hides the loading gif when the ajax call returns a response.
+        //         $('#loading_image').fadeOut();
+        //     }
+        // }
     });
 }
+
+// {"operation":"AND","query_type":"search_glycan","mass":{"min":164,"max":6750},"number_monosaccharides":{"min":1,"max":37},"enzyme":{                     },"glycan_type":"N-glycan","glycan_subtype":"hybrid"}
+// {"operation":"AND","query_type":"search_glycan","mass":{"min":164,"max":6750},"number_monosaccharides":{"min":1,"max":37},"enzyme":{"id":"","type":"gene"},"glycan_type":"N-glycan","glycan_subtype":"hybrid","uniprot_canonical_ac":"","glycan_motif":"", "glytoucan_ac":"","tax_id":""}
 
 /** Forms searchjson from the form values submitted
  * @param input_query_type query search
@@ -300,7 +339,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
             "type": "gene"
         },
         glytoucan_ac: input_glycan_id,
-        organism: input_organism,
+        tax_id: input_organism ? parseInt(input_organism) : '',
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
         uniprot_canonical_ac: input_proteinid,
@@ -309,6 +348,18 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     };
     return formjson;
 }
+
+// function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+//     var formJson = {};
+//
+//     if (input_organism) {
+//         formJson.tax_id = parseInt(input_organism);
+//     }
+//
+//     ...
+//
+//     return formjson;
+// }
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
