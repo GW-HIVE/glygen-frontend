@@ -165,13 +165,11 @@
                     <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
                     <div class="cd-faq-content">
                         <strong>Species:</strong>
-                        <select size="1" class="gg-faq-formInput organism" id="species1">
-                            <option value=" ">select species</option>
-                            <option value="9606">Homo Sepian</option>
-                            <option value="10090">Mouse</option>
+                        <select class="gg-faq-formInput organism" id="organism1">
+                            <option value="0">Select organism</option>
                         </select>
 
-                        <button type="button" name="submit" onclick="myFunction()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">submit</button>
+                        <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">submit</button>
 
                     </div>
                     <!-- cd-faq-content -->
@@ -181,13 +179,11 @@
                     <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
                     <div class="cd-faq-content">
                         <strong>Species:</strong>
-                        <!-- <input type="text" name="species" placeholder="scientific name" id=""> -->
-                        <select size="1" class="gg-faq-formInput organism" id="species2">
-                            <option value=" ">select species</option>
-                            <option value="9606">Homo Sepian</option>
-                            <option value="10090">Mouse</option>
+
+                        <select class="gg-faq-formInput organism" id="organism2">
+                            <option value="0">Select organism</option>
                         </select>
-                        <button type="button" name="submit" onclick="myFunction()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">submit</button>
+                        <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">submit</button>
 
                     </div>
                     <!-- cd-faq-content -->
@@ -199,10 +195,8 @@
                     <div class="cd-faq-content">
 
                         <strong>Species:</strong>
-                        <select size="1" class="gg-faq-formInput" id="species3">
-                            <option value=" ">select species</option>
-                            <option value="9606">Homo Sepian</option>
-                            <option value="10090">Mouse</option>
+                        <select class="gg-faq-formInput organism" id="organism3">
+                            <option value="0">Select organism</option>
                         </select>
                         <strong>Type:</strong>
                         <select name="species_type" class="biginput gg-faq-formInput" id="species">
@@ -211,7 +205,7 @@
                             <option value="predicted">Predicted</option>
                             <option value="both">Both</option>
                         </select>
-                        <button type="button" name="submit" onclick="myFunction()" class="btn-sm btn-primary gg-faq-button" id="glycosylatedprotein">submit</button>
+                        <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">submit</button>
 
                     </div>
 

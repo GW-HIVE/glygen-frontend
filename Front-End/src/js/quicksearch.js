@@ -1,9 +1,8 @@
-//
-// //@author:Rupali Mahadik.
-//
-//
-//
-// $("#protein2").autocomplete({
+
+//@author:Rupali Mahadik.
+
+
+//$("#protein2").autocomplete({
 //     source: function (request, response) {
 //
 //         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
@@ -51,6 +50,7 @@
 //
 //     })
 // }
+
 
 
 
@@ -153,97 +153,105 @@ function glycanSite(){
 
 
 
-$("#glycangene").autocomplete({
-    source: function (request, response) {
-
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
-
-
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-
-function glycanGene(){
-
-    var id = $("#glycangene").val();
-    //
-    //it seems  need that taxID m can we just set it to 10090 ?
-    $.ajax({
-        type: 'POST',
-        url: getWsUrl("search_glycangene",id),
-        success: function(results) {
-            if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
-            }
-            else {
-                displayErrorByCode('no-results-found');
-            }
-
-        }
-
-    })
-}
-//end
-
-
-
-//Q4.What are the orthologues of protein X in different species?
-$("#proteinorthologues").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
+// $("#glycangene").autocomplete({
+//     source: function (request, response) {
+//
+//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+//
+//
+//         $.getJSON(queryUrl, function (suggestions) {
+//             suggestions.length = Math.min(suggestions.length, 10);
+//
+//             response(suggestions);
+//         });
+//     },
+//     minLength: 1,
+//     select: function (event, ui) {
+//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+//     }
+// });
+//
+//
+//
+// function glycanGene(){
+//
+//     var id = $("#glycangene").val();
+//     //
+//     //it seems  need that taxID m can we just set it to 10090 ?
+//     $.ajax({
+//         type: 'POST',
+//         url: getWsUrl("search_glycangene",id),
+//         success: function(results) {
+//             if (results.list_id) {
+//                 window.location = './protein_list.html?id=' + results.list_id;
+//             }
+//             else {
+//                 displayErrorByCode('no-results-found');
+//             }
+//
+//         }
+//
+//     })
+// }
+// //end
 
 
 
+// //Q4.What are the orthologues of protein X in different species?
+// $("#proteinorthologues").autocomplete({
+//     source: function (request, response) {
+//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
+//         $.getJSON(queryUrl, function (suggestions) {
+//             suggestions.length = Math.min(suggestions.length, 5);
+//
+//             response(suggestions);
+//         });
+//     },
+//     minLength: 1,
+//     select: function (event, ui) {
+//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+//     }
+// });
+//
+//
+//
+//
+//
+// function proteinOrthologues(){
+//
+//     var id = $("#proteinorthologues").val();
+//     $.ajax({
+//         type: 'post',
+//         url: getWsUrl("search_proteinorthologues",id),
+//         // data: json,
+//         success: function (results) {
+//             if (results.list_id) {
+//                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+//
+//             }
+//             else {
+//                 displayErrorByCode('no-results-found');
+//             }
+//
+//         }
+//
+//     })
+// }
 
-
-function proteinOrthologues(){
-
-    var id = $("#proteinorthologues").val();
-    $.ajax({
-        type: 'post',
-        url: getWsUrl("search_proteinorthologues",id),
-        // data: json,
-        success: function (results) {
-            if (results.list_id) {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
-
-            }
-            else {
-                displayErrorByCode('no-results-found');
-            }
-
-        }
-
-    })
-}
-
-//Q.5- What are the functions of protein X?
+// //Q.5- What are the functions of protein X?
 $("#proteinfunction").autocomplete({
     source: function (request, response) {
+
         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
+
+            // if only one suggestion, and suggestion matches value
+            // if ((suggestions.length === 1) && (suggestions[0].toLowerCase() === request.term.toLowerCase())) {
+
+            // }
+
+            // if suggestions.length > 0 then show exact match text
 
             response(suggestions);
         });
@@ -251,33 +259,33 @@ $("#proteinfunction").autocomplete({
     minLength: 1,
     select: function (event, ui) {
         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+
     }
 });
-
-
-
 
 
 function proteinFunction(){
 
-    var id = $("#proteinfunction").val();
-    $.ajax({
+   var id = $("#proteinfunction").val();
+
+
+   $.ajax({
         type: 'post',
         url: getWsUrl("protein_detail",id),
-        // data: json,
         success: function (results) {
-            if (results.list_id){
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
-
+            if (results.error_code) {
+         displayErrorByCode("Invalid ID");
             }
             else {
-                displayErrorByCode('no-results-found');
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
             }
-
         }
 
     })
 }
+
+
+
 
 
 //Q.6- Which glycans might have been synthesized in mouse using enzyme X?
@@ -326,4 +334,182 @@ function glycanEnzyme(){
 
 
 
+var searchInitValues;
 
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+
+        var orgElement = $("#organism1").get(0);
+        createOption(orgElement, result.organism[0].name, result.organism[0].id);
+        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+
+    });
+});
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycosylTransferases(){
+
+    var id = $("#glycosyltransferases").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycosyltransferases",id),
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+
+
+//Q.8- What are the glycohydrolases in species X?
+
+
+
+var searchInitValues;
+
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+
+        var orgElement = $("#organism2").get(0);
+        createOption(orgElement, result.organism[0].name, result.organism[0].id);
+        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+
+    });
+});
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycoHydrolases(){
+
+    var id = $("#glycohydrolases").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycohydrolases",id),
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+
+
+
+
+//Q.9- What are the reported or predicted glycosylated proteins in species X?
+
+
+
+var searchInitValues;
+
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+
+        var orgElement = $("#organism3").get(0);
+        createOption(orgElement, result.organism[0].name, result.organism[0].id);
+        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+
+    });
+});
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycoProteins(){
+
+    var id = $("#glycoproteins").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycoproteins",id),
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+
+
+
+$("#bioenzyme").autocomplete({
+    source: function (request, response) {
+
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+
+
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
+//Q.9- What are the reported or predicted glycosylated proteins in species X?
+
+function bioEnzyme(){
+
+    var id = $("#bioenzyme").val();
+    //
+    //it seems  need that taxID m can we just set it to 10090 ?
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_bioenzyme",id),
+        success: function(results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+
+//Q.1-END.
