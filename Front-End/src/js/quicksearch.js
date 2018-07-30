@@ -469,12 +469,12 @@ function glycoProteins(){
     })
 }
 
+//Q.9- What are the reported or predicted glycosylated proteins in species X?
 
-
-$("#bioenzyme").autocomplete({
+$("#glycosyltransferasesdisease").autocomplete({
     source: function (request, response) {
 
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("disease_name", request.term);
 
 
         $.getJSON(queryUrl, function (suggestions) {
@@ -489,16 +489,16 @@ $("#bioenzyme").autocomplete({
     }
 });
 
-//Q.9- What are the reported or predicted glycosylated proteins in species X?
 
-function bioEnzyme(){
 
-    var id = $("#bioenzyme").val();
+function glycosyTtransferasesDisease(){
+
+    var id = $("#glycosyltransferasesdisease").val();
     //
     //it seems  need that taxID m can we just set it to 10090 ?
     $.ajax({
         type: 'POST',
-        url: getWsUrl("search_bioenzyme",id),
+        url: getWsUrl("search_glycosyltransferases_disease",id),
         success: function(results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
@@ -512,4 +512,5 @@ function bioEnzyme(){
     })
 }
 
-//Q.1-END.
+//Q.10.
+
