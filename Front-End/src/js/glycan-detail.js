@@ -35,20 +35,7 @@ function ajaxSuccess(data) {
         //var glyco = row.glycoct.replace(/ /g, '\n');
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
-        var items = [];
-        if (data.glycosylation) {
-            for (var i = 0; i < data.glycosylation.length; i++) {
-                var glycan = data.glycosylation[i];
-                items.push({
-                    uniprot_canonical_ac: glycan.uniprot_canonical_ac,
-                    gene: glycan.gene,
-                    protein_name: glycan.protein_name
-
-
-
-                });
-            }
-        }
+        var items = data.enzyme ? data.enzyme : [];
         $container.html(html);
 
         $container.find('.open-close-button').each(function (i, element) {
@@ -81,10 +68,10 @@ function ajaxSuccess(data) {
             {
                 field: 'gene',
                 title: 'Gene Name',
-                // sortable: true
-                // formatter: function (value, row, index, field) {
-                //     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
-                // }
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                    return "<a href='" + row.gene_link + "'>" + value + "</a>"
+                }
             },
 
             {
