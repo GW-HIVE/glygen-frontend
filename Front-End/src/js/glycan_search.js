@@ -284,7 +284,8 @@ function submitvalues() {
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", results.error_code);
+                // activityTracker("error", "", results.error_code);
+                activityTracker("error", "", "no result found for "+json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
