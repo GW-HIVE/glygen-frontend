@@ -317,11 +317,15 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class='col-md-12 col-xs-12'>
-                                <table id="glycosylation-table">
-                                </table>
+                                {{#glycosylation}}
+                                    <table id="glycosylation-table">
+                                    </table>
+                                {{/glycosylation}}
+                                {{^glycosylation}}
+                                    No data available.
+                                {{/glycosylation}}
                             </div>
                         </div>
-
 
             </ul>
 
