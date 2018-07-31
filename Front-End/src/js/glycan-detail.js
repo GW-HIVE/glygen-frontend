@@ -55,12 +55,11 @@ function ajaxSuccess(data) {
             });
         });
 
-
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'uniprot_canonical_ac',
                 title: 'Protein',
-                // sortable: true,
+                sortable: true,
                 formatter: function (value, row, index, field) {
                     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
                 }
@@ -70,14 +69,14 @@ function ajaxSuccess(data) {
                 title: 'Gene Name',
                 sortable: true,
                 formatter: function (value, row, index, field) {
-                    return "<a href='" + row.gene_link + "'>" + value + "</a>"
+                    return "<a href='" + row.gene_link + " ' target='_blank'>" + value + "</a>"
                 }
             },
 
             {
                 field: 'protein_name',
                 title: 'Protein Name',
-                // sortable: true
+                sortable: true
             }],
             // pagination: 10,
             data: items,
