@@ -107,12 +107,12 @@
 
 
                 <!--Organism-->
-                {{#organism}}
+                {{#tax_id}}
                 <tr>
                     <td>Organism</td>
-                    <td>{{organism}}</td>
+                    <td>{{tax_id}}</td>
                 </tr>
-                {{/organism}}
+                {{/tax_id}}
 
                 <!--Protein name Typeahead-->
 
@@ -138,8 +138,10 @@
                 <tr>
                     <td>Sequence</td>
                     <td><abbr class="limit-text-size"
-                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span
-                            style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
+                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
+                        <!--<span-->
+                            <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
+                    </td>
                 </tr>
                 {{/sequence.aa_sequence}}
 
