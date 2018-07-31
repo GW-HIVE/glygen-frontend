@@ -271,30 +271,59 @@
             </ul>
             <!-- cd-faq-group -->
 
+            <!--<ul id="delivery" class="cd-faq-group">-->
+                <!--<li class="cd-faq-title"/>-->
+                <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                <!--&lt;!&ndash; Glycan Enzymes starts here for page &ndash;&gt;-->
+                <!--<div class="panel panel-default">-->
+
+                    <!--<div class="gg-panel-heading">-->
+                        <!--<h4>Biosynthetic-Enzyme</h4>-->
+
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--&lt;!&ndash; added new class &ndash;&gt;-->
+                        <!--{{#enzyme}}-->
+                        <!--<li class="list-group"><strong>Protein name:</strong>{{protein_name}}<br>-->
+                      <!--<strong>Protein Id:</strong>(Uniprot ID:-->
+                            <!--<a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a>-->
+                            <!--<br><strong>Gene name:</strong>-->
+                            <!--<a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>-->
+                        <!--</li>-->
+
+                        <!--{{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</ul>-->
+
+             <!--cd-faq-group -->
+
             <ul id="delivery" class="cd-faq-group">
-                <li class="cd-faq-title"/>
-                <!-- added new class -->
-                <!-- Glycan Enzymes starts here for page -->
-                <div class="panel panel-default">
+            <li class="cd-faq-title"/>
+            <!-- added new class -->
+            <!-- Glycan Enzymes starts here for page -->
+            <div class="panel panel-default">
 
-                    <div class="gg-panel-heading">
-                        <h4>Biosynthetic-Enzyme</h4>
+            <div class="gg-panel-heading">
+            <h4>Biosynthetic-Enzyme</h4>
 
-                    </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        {{#enzyme}}
-                        <li class="list-group"><strong>Protein name:</strong>{{protein_name}}<br>
-                      <strong>Protein Id:</strong>(Uniprot ID:
-                            <a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a>
-                            <br><strong>Gene name:</strong>
-                            <a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>
-                        </li>
+            </div>
+            <div class="panel-body">
+            <!-- added new class -->
+            {{#enzyme}}
+                <table id="glycosylation-table">
+                </table>
 
-                        {{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}
-                    </div>
-                </div>
+            {{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}
+            </div>
+            </div>
             </ul>
+
+
+
+
+
+
 
 
             <!-- cd-faq-group -->

@@ -2,10 +2,10 @@
 
 // @description: UO1 Version-1.1.
 
-//@Date:19th Feb 2018.- with dummy webservice
+//@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
 
-//@update:3 April 2018. with real web service
-//@update: June 26-2018- with web service changes.
+//@update:3 April 2018. with Rupali Mahadik real web service
+//@update: June 26-2018- with Rupali Mahadik web service changes.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 
@@ -23,7 +23,7 @@ String.prototype.trunc = String.prototype.trunc ||
     };
 var id = '';
 var page = 1;
-var sort = 'glytoucan_ac';
+var sort = 'mass';
 var dir = $('.dir-select').val();
 var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 10;
@@ -156,11 +156,15 @@ function buildPages(paginationInfo) {
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
+    var excutionDate= new Date(queryInfo.execution_time);
+    queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 
     // queryInfo.execution_time = moment(queryInfo.execution_time).pst().format("MM/DD/YYYY.h:mm:ss a");
-    queryInfo.execution_time = moment(queryInfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
+    // queryInfo.execution_time = moment(queryInfo.execution_time).tz("America/New_York").format("MM/DD/YYYY hh:mm:ss a");
+    // queryInfo.execution_time = moment().tz("America/New_York").format("MM/DD/YYYY hh:mm:ss a");
+    // queryInfo.execution_time =moment().tz("American/Los Angeles");
 
 }
 
@@ -301,6 +305,8 @@ function editSearch() {
 }
 
 
+
+
 /**
  * Handling a succesful call to the server for list page
  * @param {Object} data - the data set returned from the server on success
@@ -339,14 +345,14 @@ function ajaxListSuccess(data) {
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query);
 
         // document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+
+        addSortOptions();
     }
 
 }

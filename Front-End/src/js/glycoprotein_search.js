@@ -240,6 +240,12 @@ function mass(mass_min, mass_max) {
             'min': mass_min,
             'max': mass_max
         }
+        // range: {
+        //     'min': mass_min,
+        //     '60%' : [1000],
+        //     'max': mass_max
+        // },
+        // tooltips: true,
     });
     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
     var nodes = [
@@ -259,6 +265,10 @@ function createOption(ddl, text, value) {
     opt.value = value;
     opt.text = text;
     ddl.options.add(opt);
+}
+
+function ajaxSearchFailure() {
+    displayErrorByCode('server_down');
 }
 
 
@@ -331,6 +341,7 @@ function ajaxProteinSearchSuccess() {
         url: getWsUrl("search_protein"),
         //url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search',
         data: json,
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -347,19 +358,7 @@ function ajaxProteinSearchSuccess() {
                 }
             }
         });
-    //     success: function (results) {
-    //         if (results.list_id) {
-    //             window.location = './glycoprotein_list.html?id=' + results.list_id;
-    //             $('#loading_image').fadeOut();
-    //         } else {
-    //             displayErrorByCode("server-down");
-    //             activityTracker("error", "", results.error_code);
-    //             activityTracker("error", "", "no result found for " + json);
-    //             $('#loading_image').fadeOut();
-    //         }
-    //
-    //     }
-    // });
+
 }
 
 

@@ -29,8 +29,6 @@ function getWsUrl(request, id) {
             return ws_logging;
             break;
 
-
-
         //Glycan webservices
         case "search_init_glycan":
             return ws_base_glycan + "/search_init";
@@ -105,17 +103,26 @@ function getWsUrl(request, id) {
         case "search_glycanenzyme":
             return ws_useCaseSearch + "/biosynthesis_enzyme_to_glycans/10090/" + id;
             break;
+
+
         //Usecases search webservices Q7-Q8-Q9
 
-        // case "search_bioenzyme":
-        //     return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
-        //     break;
-        // case "search_glycansite":
-        //     return ws_useCaseSearch + "/glycan_to_glycoproteins/all/" + id;
-        //     break;
-        // case "search_glycangene":
-        //     return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/all/" + id;
-        //     break;
+        case "search_glycosyltransferases":
+            return ws_useCaseSearch + "/species_to_glycosyltransferases/9606/" + id;
+            break;
+        case "search_glycohydrolases":
+            return ws_useCaseSearch + "/species_to_glycohydrolases/0/" + id;
+            break;
+        case "search_glycoproteins":
+            return ws_useCaseSearch + "/species_to_glycoproteins/9606/both/" + id;
+            break;
+
+
+
+        //Usecases DISEASE webservices Q.10
+        case "search_glycosyltransferases_disease":
+            return ws_useCaseSearch + "/disease_to_glycosyltransferases/0/0050560/" + id;
+            break;
     }
 }
 

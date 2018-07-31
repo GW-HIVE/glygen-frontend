@@ -68,8 +68,9 @@
                     </select>
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
-                        <option selected value="glytoucan_ac">ID</option>
-                        <option value="mass">Mass</option>
+                        <option value="glytoucan_ac">ID</option>
+                        <option selected value="mass">Mass</option>
+                        <option value="number_monosaccharides">No of Monosac.</option>
                         <option value="number_enzymes">No of Enzymes</option>
                         <option value="number_proteins">No of Protein</option>
                     </select>
@@ -84,55 +85,57 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
-        <div class="panel panel-default">
-            <div class="gg-panel-heading cd-faq-title">
+ 
+        <div class="panel panel-default results-table-top">
+            <div class="panel-heading"><center><h3>Please review your results for Glycan Search</h3></center></div>
+            
+            <div class="marginTopBottom">
                 <!-- added new class -->
                 <h6>
-
                     <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Result for Glycan Search On:{{execution_time}}</center>
+                    <center>Date and Time: {{execution_time}}<br> Found total_length results </center>
                 </h6>
             </div>
-            <table class="table table-hover">
-                <tbody>
+            
+            <div class="marginTopBottom">
+                <table class="table table-hover">
+                    <tbody class="col-sm-offset-4 col-sm-8">
 
-                <!--glycan typeahead-->
-                {{#glytoucan_ac}}
-                <tr>
-                    <td>GlycoToucan Id</td>
-                    <td>{{glytoucan_ac}}</td>
-                </tr>
-                {{/glytoucan_ac}}
+                    <!--glycan typeahead-->
+                    {{#glytoucan_ac}}
+                    <tr>
+                        <td>GlycoToucan Id</td>
+                        <td>{{glytoucan_ac}}</td>
+                    </tr>
+                    {{/glytoucan_ac}}
 
-                <!--glycan mass-->
+                    <!--glycan mass-->
 
-                {{#mass.min}}
-                <tr>
-                    <td>Mass</td>
                     {{#mass.min}}
-                    <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
-                    {{/mass.max}}
-                </tr>
-                {{/mass.min}}
+                    <tr>
+                        <td>Mass</td>
+                        {{#mass.min}}
+                        <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
+                        {{/mass.max}}
+                    </tr>
+                    {{/mass.min}}
 
-                <!--glycan sugar-->
+                    <!--glycan sugar-->
 
-                {{#number_monosaccharides.min}}
-                <tr>
-                    <td>No.of Sugar</td>
                     {{#number_monosaccharides.min}}
+
                     <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
                     {{/number_monosaccharides.max}}
                 </tr>
                 {{/number_monosaccharides.min}}
 
                 <!--organism-->
-                {{#organism}}
+                {{#tax_id}}
                 <tr>
                     <td>Organism</td>
-                    <td>{{organism}}</td>
+                    <td>{{tax_id}}</td>
                 </tr>
-                {{/organism}}
+                {{/tax_id}}
 
                 <!--glycan type-->
                 {{#glycan_type}}
@@ -181,14 +184,16 @@
                 </tbody>
             </table>
 
-            <p align="center">
-                <button type="button" class="btn btn-primary"  onclick="updateSearch();">Update
-                    Search
-                </button>
+            <div align="center">
+                <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
+
                 <!--</a>-->
                 &nbsp; &nbsp; &nbsp; &nbsp;
-                <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
-            </p>
+                
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Search</button>
+            
+                <p>By clicking “Update Search”, your search result will be updated with up to date database data.</p>
+            </div>
         </div>
     </script>
 
@@ -241,8 +246,9 @@
                     </select>
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
-                        <option selected value="glytoucan_ac">ID</option>
-                        <option value="mass">Mass</option>
+                        <option value="glytoucan_ac">ID</option>
+                        <option selected value="mass">Mass</option>
+                        <option value="number_monosaccharides">No of Monosac.</option>
                         <option value="number_enzymes">No of Enzymes</option>
                         <option value="number_proteins">No of Proteins</option>
                     </select>
