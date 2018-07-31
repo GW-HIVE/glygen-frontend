@@ -85,57 +85,68 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
- 
-        <div class="panel panel-default results-table-top">
-            <div class="panel-heading"><center><h3>Please review your results for Glycan Search</h3></center></div>
-            
-            <div class="marginTopBottom">
+        <div class="panel panel-default">
+            <div class="gg-panel-heading cd-faq-title">
                 <!-- added new class -->
                 <h6>
+
                     <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Date and Time: {{execution_time}}<br> Found total_length results </center>
+                    <center>Result for Glycan Search On:{{execution_time}}</center>
                 </h6>
             </div>
-            
-            <div class="marginTopBottom">
-                <table class="table table-hover">
-                    <tbody class="col-sm-offset-4 col-sm-8">
+            <table class="table table-hover">
+                <tbody>
 
-                    <!--glycan typeahead-->
-                    {{#glytoucan_ac}}
-                    <tr>
-                        <td>GlycoToucan Id</td>
-                        <td>{{glytoucan_ac}}</td>
-                    </tr>
-                    {{/glytoucan_ac}}
+                <!--glycan typeahead-->
+                {{#glytoucan_ac}}
+                <tr>
+                    <td>GlycoToucan Id</td>
+                    <td>{{glytoucan_ac}}</td>
+                </tr>
+                {{/glytoucan_ac}}
 
-                    <!--glycan mass-->
+                <!--glycan mass-->
 
+                {{#mass.min}}
+                <tr>
+                    <td>Mass</td>
                     {{#mass.min}}
-                    <tr>
-                        <td>Mass</td>
-                        {{#mass.min}}
-                        <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
-                        {{/mass.max}}
-                    </tr>
-                    {{/mass.min}}
+                    <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
+                    {{/mass.max}}
+                </tr>
+                {{/mass.min}}
 
-                    <!--glycan sugar-->
+                <!--glycan sugar-->
 
+                {{#number_monosaccharides.min}}
+                <tr>
+                    <td>No.of Sugar</td>
                     {{#number_monosaccharides.min}}
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
                     <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
                     {{/number_monosaccharides.max}}
                 </tr>
                 {{/number_monosaccharides.min}}
 
                 <!--organism-->
+<<<<<<< HEAD
                 {{#tax_id}}
                 <tr>
                     <td>Organism</td>
                     <td>{{tax_id}}</td>
                 </tr>
                 {{/tax_id}}
+=======
+                {{#organism}}
+                <tr>
+                    <td>Organism</td>
+                    <td>{{organism}}</td>
+                </tr>
+                {{/organism}}
+>>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
 
                 <!--glycan type-->
                 {{#glycan_type}}
@@ -184,6 +195,7 @@
                 </tbody>
             </table>
 
+<<<<<<< HEAD
             <div align="center">
                 <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
 
@@ -194,6 +206,16 @@
             
                 <p>By clicking “Update Search”, your search result will be updated with up to date database data.</p>
             </div>
+=======
+            <p align="center">
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update
+                    Search
+                </button>
+                <!--</a>-->
+                &nbsp; &nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
+            </p>
+>>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
         </div>
     </script>
 
