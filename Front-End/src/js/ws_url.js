@@ -7,10 +7,12 @@
 //@update:6 June 2018
 
 //update:20 july://usecases search webservices
+//update:31 july:// New base URL updated.
 
 function getWsUrl(request, id) {
 
-    var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
+    // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
+    var ws_base = "http://tst.api.glygen.org/";
     
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
