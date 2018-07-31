@@ -56,7 +56,7 @@
                         <!-- <option selected value="id">ID</option> -->
                         <option value="uniprot_canonical_ac">Protein ID</option>
                         <option value="gene_name">Gene Name</option>
-                        <option value="protein_name_long">Protein Name</option>
+                        <option selected value="protein_name_long">Protein Name</option>
                         <option value="mass">Mass</option>
                         <option value="organism">Organism</option>
                         <option value="refseq_name">RefSeq Name</option>
@@ -107,12 +107,12 @@
 
 
                 <!--Organism-->
-                {{#organism}}
+                {{#tax_id}}
                 <tr>
                     <td>Organism</td>
-                    <td>{{organism}}</td>
+                    <td>{{tax_id}}</td>
                 </tr>
-                {{/organism}}
+                {{/tax_id}}
 
                 <!--Protein name Typeahead-->
 
@@ -138,8 +138,10 @@
                 <tr>
                     <td>Sequence</td>
                     <td><abbr class="limit-text-size"
-                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span
-                            style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
+                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
+                        <!--<span-->
+                            <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
+                    </td>
                 </tr>
                 {{/sequence.aa_sequence}}
 
@@ -206,7 +208,7 @@
                 <select class="sort-select form-control" onchange="xsort(this);">
                     <option value="uniprot_canonical_ac">Protein ID</option>
                     <option value="gene_name">Gene Name</option>
-                    <option value="protein_name_long">Protein Name</option>
+                    <option selected value="protein_name_long">Protein Name</option>
                     <option value="mass">Mass</option>
                     <option value="organism">Organism</option>
                     <option value="refseq_name">RefSeq Name</option>

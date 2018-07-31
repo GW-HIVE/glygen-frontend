@@ -123,77 +123,76 @@
                     <!--glycan sugar-->
 
                     {{#number_monosaccharides.min}}
-                    <tr>
-                        <td>No.of Sugar</td>
-                        {{#number_monosaccharides.min}}
-                        <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
-                        {{/number_monosaccharides.max}}
-                    </tr>
-                    {{/number_monosaccharides.min}}
 
-                    <!--organism-->
-                    {{#organism}}
-                    <tr>
-                        <td>Organism</td>
-                        <td>{{organism}}</td>
-                    </tr>
-                    {{/organism}}
+                    <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
+                    {{/number_monosaccharides.max}}
+                </tr>
+                {{/number_monosaccharides.min}}
 
-                    <!--glycan type-->
-                    {{#glycan_type}}
-                    <tr>
-                        <td>Glycan Type</td>
-                        <td>{{glycan_type}}</td>
-                    </tr>
-                    {{/glycan_type}}
+                <!--organism-->
+                {{#tax_id}}
+                <tr>
+                    <td>Organism</td>
+                    <td>{{tax_id}}</td>
+                </tr>
+                {{/tax_id}}
 
-                    <!--glycan subtype-->
-                    {{#glycan_subtype}}
-                    <tr>
-                        <td>Glycan SubType</td>
-                        <td>{{glycan_subtype}}</td>
-                    </tr>
-                    {{/glycan_subtype}}
+                <!--glycan type-->
+                {{#glycan_type}}
+                <tr>
+                    <td>Glycan Type</td>
+                    <td>{{glycan_type}}</td>
+                </tr>
+                {{/glycan_type}}
 
-                    <!--protein typeahead-->
-                    {{#protein_ac}}
-                    <tr>
-                        <td>Glycosylated Protein</td>
-                        <td>{{protein_ac}}</td>
-                    </tr>
-                    {{/protein_ac}}
+                <!--glycan subtype-->
+                {{#glycan_subtype}}
+                <tr>
+                    <td>Glycan SubType</td>
+                    <td>{{glycan_subtype}}</td>
+                </tr>
+                {{/glycan_subtype}}
 
-                    <!--enzyme typeahead-->
+                <!--protein typeahead-->
+                {{#protein_ac}}
+                <tr>
+                    <td>Glycosylated Protein</td>
+                    <td>{{protein_ac}}</td>
+                </tr>
+                {{/protein_ac}}
 
-                    {{#enzyme.id}}
-                    <tr>
-                        <td>Synthesizing Enzyme</td>
-                        <td><abbr class="limit-text-size"
-                                  title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
-                                style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
-                    </tr>
-                    {{/enzyme.id}}
+                <!--enzyme typeahead-->
 
-                    <!--glycanmotif typeahead-->
-                    {{#glycan_motif}}
-                    <tr>
-                        <td>Motif</td>
-                        <td>{{glycan_motif}}</td>
-                    </tr>
-                    {{/glycan_motif}}
+                {{#enzyme.id}}
+                <tr>
+                    <td>Synthesizing Enzyme</td>
+                    <td><abbr class="limit-text-size"
+                              title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
+                            style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
+                </tr>
+                {{/enzyme.id}}
 
-                    </tbody>
-                </table>
-            </div>    
+                <!--glycanmotif typeahead-->
+                {{#glycan_motif}}
+                <tr>
+                    <td>Motif</td>
+                    <td>{{glycan_motif}}</td>
+                </tr>
+                {{/glycan_motif}}
+
+
+                </tbody>
+            </table>
 
             <div align="center">
                 <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
-                
+
                 <!--</a>-->
                 &nbsp; &nbsp; &nbsp; &nbsp;
+                
                 <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Search</button>
             
-            <p>By clicking “Update Search”, your search result will be updated with up to date database data.</p>
+                <p>By clicking “Update Search”, your search result will be updated with up to date database data.</p>
             </div>
         </div>
     </script>

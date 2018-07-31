@@ -170,10 +170,16 @@ function mass(mass_min, mass_max) {
         connect: true,
         behaviour: 'tap',
         start: [0, 10000],
+
         range: {
-            'min': mass_min,
-            'max': mass_max
+            'min': [1],
+            '60%': [10],
+            'max': [1000]
         }
+        // range: {
+        //     'min': mass_min,
+        //     'max': mass_max
+        // }
     });
     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
     var nodes = [
@@ -210,41 +216,19 @@ function configureDropDownLists(ddl1, ddl2, callback) {
             for (i = 0; i < glycan_type.subtype.length; i++) {
                 var subtype = glycan_type.subtype[i];
 
+                // document.getElementById("ddl2").innerHTML = subtype;
+                //
+                // function myFunction() {
+                //     subtype.sort();
+                //     document.getElementById("ddl2").innerHTML = subtype;
+                // }
+
                 createOption(ddl2, subtype, subtype);
             }
 
             break;
         }
     }
-
-
-    // var nglycan;
-    // var oglycan;
-    //
-    // //searchInitValues
-    //
-    // // var nglycan={};
-    // if (searchInitValues.glycan_type[0]) {
-    //     nglycan = searchInitValues.glycan_type[0].subtype;
-    // }
-    // if (searchInitValues.glycan_type[1]) {
-    //     oglycan = searchInitValues.glycan_type[1].subtype;
-    // }
-    //
-    //
-    //
-    // switch (ddl1.value) {
-    //     case 'N-glycan':
-    //         for (i = 0; i < nglycan.length; i++) {
-    //             createOption(ddl2, nglycan[i], nglycan[i]);
-    //         }
-    //         break;
-    //     case 'O-glycan':
-    //         for (i = 0; i < oglycan.length; i++) {
-    //             createOption(ddl2, oglycan[i], oglycan[i]);
-    //         }
-    //         break;
-    // }
 
     if (callback) {
         callback();
@@ -257,6 +241,11 @@ function createOption(ddl, text, value) {
     opt.text = text;
     ddl.options.add(opt);
 }
+
+function ajaxSearchFailure() {
+    displayErrorByCode('server_down');
+}
+
 
 /** On submit, function forms the JSON and submits to the search web services
  */
@@ -281,6 +270,7 @@ function submitvalues() {
         type: 'post',
         url: getWsUrl("glycan_search"),
         data: json,
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -295,26 +285,12 @@ function submitvalues() {
                 window.location = './glycan_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
+
         }
 
-        // success: function (results) {
-        //     if (results.list_id) {
-        //         window.location = './glycan_list.html?id=' + results.list_id;
-        //         // hides the loading gif when the ajax call returns a response.
-        //         $('#loading_image').fadeOut();
-        //     }
-        //     else {
-        //         displayErrorByCode(results.error_code);
-        //         activityTracker("error", "", "no result found for " + json);
-        //         // hides the loading gif when the ajax call returns a response.
-        //         $('#loading_image').fadeOut();
-        //     }
-        // }
     });
 }
 
-// {"operation":"AND","query_type":"search_glycan","mass":{"min":164,"max":6750},"number_monosaccharides":{"min":1,"max":37},"enzyme":{                     },"glycan_type":"N-glycan","glycan_subtype":"hybrid"}
-// {"operation":"AND","query_type":"search_glycan","mass":{"min":164,"max":6750},"number_monosaccharides":{"min":1,"max":37},"enzyme":{"id":"","type":"gene"},"glycan_type":"N-glycan","glycan_subtype":"hybrid","uniprot_canonical_ac":"","glycan_motif":"", "glytoucan_ac":"","tax_id":""}
 
 /** Forms searchjson from the form values submitted
  * @param input_query_type query search
