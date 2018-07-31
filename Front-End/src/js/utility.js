@@ -44,39 +44,40 @@ function getErrorMessage(errorCode) {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
             };
+            break;
         case 'invalid-parameter-value':
             return {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
             };
+            break;
         case 'non-existent-search-result':
             return {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
             };
+            break;
         case 'missing parameter':
             return {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
             };
+            break;
         case 'no-results-found':
             return {
                 message: "Sorry, we couldn't find any results matching your selection.",
                 title: "Selection Error"
             };
 
-        case 'server_down':
-//            return 'Sorry server is down';
-            return "We're sorry, a server error occurred. Please wait a bit and try again"
             break;
+        default:
+            return {
+                message: "Something is wrong. Cannot connect to the server!",
+                title: "Error"
+            };
+
+
     }
-
-    return {
-        message: "This is not a valid entry, please try again.",
-//        message: 'Invalid entry error occurred. Please provide a valid entry and try again.',
-        title: "Invalid Entry Error"
-    };
-
 }
 
 /**

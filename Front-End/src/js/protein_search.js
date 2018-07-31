@@ -222,6 +222,11 @@ function createOption(ddl, text, value) {
     opt.text = text;
     ddl.options.add(opt);
 }
+
+function ajaxSearchFailure() {
+    displayErrorByCode('server_down');
+}
+
 /** On submit, function forms the JSON and submits to the search web services
  */
 function ajaxProteinSearchSuccess() {
@@ -265,7 +270,7 @@ function ajaxProteinSearchSuccess() {
         type: 'post',
         url: getWsUrl("search_protein"),
         data: json,
-
+        error: ajaxSearchFailure,
 
         success: function (results) {
             if (results.error_code) {
