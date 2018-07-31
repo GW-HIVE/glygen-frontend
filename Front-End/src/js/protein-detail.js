@@ -2,6 +2,7 @@
 // @description: UO1 Version-1.1.
 // @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update: July 31 2018 - Gaurav Agarwal - added mutation table.
 
 var uniprot_canonical_ac;
 /**
@@ -22,17 +23,37 @@ function ajaxSuccess(data) {
         var template = $('#item_template').html();
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
-        var items = [];
+        var itemsGlycosyl = [];
+        var itemsMutate = [];
+
+        // filling in glycosylation data
         if (data.glycosylation) {
             for (var i = 0; i < data.glycosylation.length; i++) {
                 var glycan = data.glycosylation[i];
-                items.push({
+                itemsGlycosyl.push({
                     glytoucan_ac: glycan.glytoucan_ac,
                     residue: glycan.residue + glycan.position,
                     type: glycan.type,
                     evidence: glycan.evidence
 
 
+                });
+            }
+        }
+
+        // filling in mutation data
+        if (data.mutation) {
+            for (var i = 0; i < data.mutation.length; i++) {
+                var mutate = data.mutation[i];
+                itemsMutate.push({
+                    annotation: mutate.annotation,
+                    disease: mutate.disease,
+                    type: mutate.type,
+                    start_pos: mutate.start_pos,
+                    end_pos: mutate.end_pos,
+                    // merging the two sequences, separated by arrow symbol.
+                    sequence: mutate.sequence_org + " &#8594 " + mutate.sequence_mut,
+                    evidence: mutate.evidence
                 });
             }
         }
@@ -57,7 +78,7 @@ function ajaxSuccess(data) {
 
         // $container.find('#basics5x').click();
 
-
+        // glycosylation table
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'glytoucan_ac',
@@ -79,7 +100,7 @@ function ajaxSuccess(data) {
                 sortable: true
             }],
             pagination: 10,
-            data: items,
+            data: itemsGlycosyl,
             detailView: true,
             detailFormatter: function (index, row) {
                 var html = [];
@@ -88,6 +109,58 @@ function ajaxSuccess(data) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
                     html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                    html.push("</div>");
+                }
+                return html.join('');
+            },
+
+        });
+
+        // mutation table
+        $('#mutation-table').bootstrapTable({
+            columns: [{
+                field: 'annotation',
+                title: 'Annotation name',
+                sortable: true
+            },
+            {
+                field: 'disease',
+                title: 'Disease',
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                    return value.name + " (ICD10:"+ value.icd10 +" ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)"
+                }
+            },
+            {
+                field: 'start_pos',
+                title: 'Start pos',
+                sortable: true
+            },
+            {
+                field: 'end_pos',
+                title: 'End pos',
+                sortable: true
+            },
+            {
+                field: 'sequence',
+                title: 'Sequence',
+                sortable: true
+            },
+            {
+                field: 'type',
+                title: 'Type',
+                sortable: true
+            }],
+            pagination: 10,
+            data: itemsMutate,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var html = [];
+                var evidences = row.evidence;
+                for (var i = 0; i < evidences.length; i++) {
+                    var evidence = evidences[i];
+                    html.push("<div class='row'>");
+                    html.push("<div class='col-xs-12'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
                     html.push("</div>");
                 }
                 return html.join('');
