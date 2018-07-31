@@ -85,117 +85,110 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
-        <div class="panel panel-default">
-            <div class="gg-panel-heading cd-faq-title">
+        <div class="panel panel-default results-table-top">
+            <div class="panel-heading"><center><h3>Please review your results for Glycan Search</h3></center></div>
+            
+            <div>
                 <!-- added new class -->
                 <h6>
 
                     <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Result for Glycan Search On:{{execution_time}}</center>
+                    <center>Date and Time: {{execution_time}}<br> Found total_length results </center>
                 </h6>
             </div>
-            <table class="table table-hover">
-                <tbody>
+            
+            <div class="marginTopBottom">    
+                <table class="table table-hover">
+                    <tbody class="col-sm-offset-4 col-sm-8">
 
-                <!--glycan typeahead-->
-                {{#glytoucan_ac}}
-                <tr>
-                    <td>GlycoToucan Id</td>
-                    <td>{{glytoucan_ac}}</td>
-                </tr>
-                {{/glytoucan_ac}}
+                    <!--glycan typeahead-->
+                    {{#glytoucan_ac}}
+                    <tr>
+                        <td>GlycoToucan Id</td>
+                        <td>{{glytoucan_ac}}</td>
+                    </tr>
+                    {{/glytoucan_ac}}
 
-                <!--glycan mass-->
+                    <!--glycan mass-->
 
-                {{#mass.min}}
-                <tr>
-                    <td>Mass</td>
                     {{#mass.min}}
-                    <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
-                    {{/mass.max}}
-                </tr>
-                {{/mass.min}}
+                    <tr>
+                        <td>Mass</td>
+                        {{#mass.min}}
+                        <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
+                        {{/mass.max}}
+                    </tr>
+                    {{/mass.min}}
 
-                <!--glycan sugar-->
+                    <!--glycan sugar-->
 
-                {{#number_monosaccharides.min}}
-                <tr>
-                    <td>No.of Sugar</td>
                     {{#number_monosaccharides.min}}
-<<<<<<< HEAD
+                    <tr>
+                        <td>No.of Sugar</td>
+                        {{#number_monosaccharides.min}}
 
-=======
->>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
-                    <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
-                    {{/number_monosaccharides.max}}
-                </tr>
-                {{/number_monosaccharides.min}}
+                        <td>{{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}</td>
+                        {{/number_monosaccharides.max}}
+                    </tr>
+                    {{/number_monosaccharides.min}}
 
-                <!--organism-->
-<<<<<<< HEAD
-                {{#tax_id}}
-                <tr>
-                    <td>Organism</td>
-                    <td>{{tax_id}}</td>
-                </tr>
-                {{/tax_id}}
-=======
-                {{#organism}}
-                <tr>
-                    <td>Organism</td>
-                    <td>{{organism}}</td>
-                </tr>
-                {{/organism}}
->>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
+                    <!--organism-->
 
-                <!--glycan type-->
-                {{#glycan_type}}
-                <tr>
-                    <td>Glycan Type</td>
-                    <td>{{glycan_type}}</td>
-                </tr>
-                {{/glycan_type}}
+                    {{#tax_id}}
+                    <tr>
+                        <td>Organism</td>
+                        <td>{{tax_id}}</td>
+                    </tr>
+                    {{/tax_id}}
 
-                <!--glycan subtype-->
-                {{#glycan_subtype}}
-                <tr>
-                    <td>Glycan SubType</td>
-                    <td>{{glycan_subtype}}</td>
-                </tr>
-                {{/glycan_subtype}}
+                    <!--glycan type-->
+                    {{#glycan_type}}
+                    <tr>
+                        <td>Glycan Type</td>
+                        <td>{{glycan_type}}</td>
+                    </tr>
+                    {{/glycan_type}}
 
-                <!--protein typeahead-->
-                {{#protein_ac}}
-                <tr>
-                    <td>Glycosylated Protein</td>
-                    <td>{{protein_ac}}</td>
-                </tr>
-                {{/protein_ac}}
+                    <!--glycan subtype-->
+                    {{#glycan_subtype}}
+                    <tr>
+                        <td>Glycan SubType</td>
+                        <td>{{glycan_subtype}}</td>
+                    </tr>
+                    {{/glycan_subtype}}
 
-                <!--enzyme typeahead-->
+                    <!--protein typeahead-->
+                    {{#protein_ac}}
+                    <tr>
+                        <td>Glycosylated Protein</td>
+                        <td>{{protein_ac}}</td>
+                    </tr>
+                    {{/protein_ac}}
 
-                {{#enzyme.id}}
-                <tr>
-                    <td>Synthesizing Enzyme</td>
-                    <td><abbr class="limit-text-size"
-                              title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
-                            style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
-                </tr>
-                {{/enzyme.id}}
+                    <!--enzyme typeahead-->
 
-                <!--glycanmotif typeahead-->
-                {{#glycan_motif}}
-                <tr>
-                    <td>Motif</td>
-                    <td>{{glycan_motif}}</td>
-                </tr>
-                {{/glycan_motif}}
+                    {{#enzyme.id}}
+                    <tr>
+                        <td>Synthesizing Enzyme</td>
+                        <td><abbr class="limit-text-size"
+                                  title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
+                                style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
+                    </tr>
+                    {{/enzyme.id}}
+
+                    <!--glycanmotif typeahead-->
+                    {{#glycan_motif}}
+                    <tr>
+                        <td>Motif</td>
+                        <td>{{glycan_motif}}</td>
+                    </tr>
+                    {{/glycan_motif}}
 
 
-                </tbody>
-            </table>
-
-<<<<<<< HEAD
+                    </tbody>
+                </table>
+            </div>
+        
             <div align="center">
                 <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
 
@@ -206,16 +199,6 @@
             
                 <p>By clicking “Update Search”, your search result will be updated with up to date database data.</p>
             </div>
-=======
-            <p align="center">
-                <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update
-                    Search
-                </button>
-                <!--</a>-->
-                &nbsp; &nbsp; &nbsp; &nbsp;
-                <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
-            </p>
->>>>>>> parent of d8e1d46... Redesigned resalts top table for glycan search
         </div>
     </script>
 
