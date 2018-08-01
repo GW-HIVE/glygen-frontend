@@ -149,51 +149,51 @@ function glycanSite(){
 //end
 
 
-//Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?
+// Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?
 
 
 
-// $("#glycangene").autocomplete({
-//     source: function (request, response) {
-//
-//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
-//
-//
-//         $.getJSON(queryUrl, function (suggestions) {
-//             suggestions.length = Math.min(suggestions.length, 10);
-//
-//             response(suggestions);
-//         });
-//     },
-//     minLength: 1,
-//     select: function (event, ui) {
-//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-//     }
-// });
-//
-//
-//
-// function glycanGene(){
-//
-//     var id = $("#glycangene").val();
-//     //
-//     //it seems  need that taxID m can we just set it to 10090 ?
-//     $.ajax({
-//         type: 'POST',
-//         url: getWsUrl("search_glycangene",id),
-//         success: function(results) {
-//             if (results.list_id) {
-//                 window.location = './protein_list.html?id=' + results.list_id;
-//             }
-//             else {
-//                 displayErrorByCode('no-results-found');
-//             }
-//
-//         }
-//
-//     })
-// }
-// //end
+$("#glycangene").autocomplete({
+    source: function (request, response) {
+
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+
+
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
+
+
+function glycanGene(){
+
+    var id = $("#glycangene").val();
+    //
+    //it seems  need that taxID m can we just set it to 10090 ?
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_glycangene",id),
+        success: function(results) {
+            if (results.list_id) {
+                window.location = './locus_list.html?id=' + results.list_id;
+            }
+            else {
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+//end
 
 
 
@@ -277,7 +277,7 @@ function proteinFunction(){
          displayErrorByCode("Invalid ID");
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics7';
             }
         }
 

@@ -20,6 +20,7 @@ function getWsUrl(request, id) {
     var ws_logging = ws_base+"auth/logging";
     var ws_userID = ws_base+"auth/userid";
     var ws_useCaseSearch=ws_base+"usecases";
+    var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
 
@@ -89,10 +90,14 @@ function getWsUrl(request, id) {
             return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
             break;
         case "search_glycangene":
-            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/all/" + id;
+            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/0/" + id;
             break;
         case "list_glycangene":
             return ws_useCaseSearch + "/ortholog_list";
+            break;
+        // usecases/genelocus_list
+        case "loci_list":
+            return ws_base_loci + "/genelocus_list";
             break;
 
 
