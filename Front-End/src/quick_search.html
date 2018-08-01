@@ -12,7 +12,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    
+
     <title>Quick search</title>
     <meta name="description" content="Search for glycan structures based on their GlyTouCan registry IDs, native mass, glycan type or organism. It is also possible to search for glycans based on enzymes that have been involved in the biosynthesis or proteins that this glycan was attached to">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,199 +43,199 @@
 </head>
 
 <body onload="tracking()">
-<script src="libraries/w3.js"></script>
-<div w3-include-html="header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<div class="container">
-    <section class="cd-faq">
-        <ul class="cd-faq-categories">
-            <li>
-                <a class="selected" href="#search_glycan">Glycan</a>
-            </li>
-            <li>
-                <a href="#search_protein">Protein</a>
-            </li>
-            <li>
-                <a href="#search_species">Species</a>
-            </li>
-            <li>
-                <a href="#search_disease">Disease</a>
-            </li>
-        </ul>
-
-        <!--Search by Glycan-->
-        <!-- cd-faq-categories -->
-        <div class="cd-faq-items">
-            <ul id="search_glycan" class="cd-faq-group">
-                <li class="cd-faq-title">
-                    <h2>Search by Glycan</h2>
-                </li>
-                <!--What are the enzymes involved in the biosynthesis of glycan X in human -->
+    <script src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <div class="container">
+        <section class="cd-faq">
+            <ul class="cd-faq-categories">
                 <li>
-                    <a class="cd-faq-trigger" id="Q1">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
-                    <div class="cd-faq-content">
-                        <strong>Glycan X:</strong>
-                        <input class="gg-faq-formInput" type="text" name="GlytoucanID" placeholder="GlyTouCan ID" id="bioenzyme">
-                        <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: G00279YF </div>
-                    </div>
+                    <a class="selected" href="#search_glycan">Glycan</a>
                 </li>
-
-                <!--Which proteins have been shown to bear glycan X and which site is this glycan attached to -->
                 <li>
-                    <a class="cd-faq-trigger" id="Q2 ">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
-                    <div class="cd-faq-content">
-                        <strong>Glycan X:</strong>
-                        <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan" id="glycansite">
-                        <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: G74290AC </div>
-                    </div>
+                    <a href="#search_protein">Protein</a>
                 </li>
-
-                <!--Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human? -->
                 <li>
-                    <a class="cd-faq-trigger" id="Q3">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
-                    <div class="cd-faq-content">
-                        <strong>Glycan X:</strong>
-                        <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan ID" id="glycangene">
-                        <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: G74290AC </div>
-                    </div>
+                    <a href="#search_species">Species</a>
                 </li>
-
-            </ul>
-            <!-- cd-faq-group -->
-
-
-            <!--  Search by Protein -->
-            <ul id="search_protein" class="cd-faq-group">
-                <li class="cd-faq-title">
-                    <h2>Search by Protein</h2>
-                </li>
-
-                <!--Q.4 What are the orthologues of protein X in different species? -->
                 <li>
-                    <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
-                    <div class="cd-faq-content">
-                        <strong>Protein:</strong>
-                        <input class="gg-faq-formInput" type="text" name="ProteinID" placeholder="Uniprot Protein ID" id="proteinorthologues">
-                        <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: P26572-1</div>
-                    </div>
-                </li>
-
-
-                <!--Q.5 What are the functions of protein X? -->
-                <li>
-                    <a class="cd-faq-trigger" id="Q5">What are the functions of protein X?</a>
-                    <div class="cd-faq-content">
-                        <strong>Protein:</strong>
-                        <input class="gg-faq-formInput" type="text" name="Protein" placeholder="Uniprot Protein ID" id="proteinfunction">
-                        <!--//<label id="protein-error">no result found</label>-->
-                        <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: P26572-1 </div>
-                    </div>
-                </li>
-
-                <!--Q.6 Which glycans might have been synthesized in mouse using enzyme X? -->
-                <li>
-                    <a class="cd-faq-trigger" id="Q6">Which glycans might have been synthesized in mouse using enzyme X?</a>
-                    <div class="cd-faq-content">
-                        <strong>Enzyme:</strong>
-                        <input class="gg-faq-formInput" type="text" name="Enzyme" id="glycanenzyme" placeholder="Protein ID or gene name">
-                        <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">submit</button>
-                        <div class="gg-text-example"> Example: P26572-1 </div>
-                    </div>
+                    <a href="#search_disease">Disease</a>
                 </li>
             </ul>
 
+            <!--Search by Glycan-->
+            <!-- cd-faq-categories -->
+            <div class="cd-faq-items">
+                <ul id="search_glycan" class="cd-faq-group">
+                    <li class="cd-faq-title">
+                        <h2>Search by Glycan</h2>
+                    </li>
+                    <!--What are the enzymes involved in the biosynthesis of glycan X in human -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q1">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
+                        <div class="cd-faq-content">
+                            <strong>Glycan X:</strong>
+                            <input class="gg-faq-formInput" type="text" name="GlytoucanID" placeholder="GlyTouCan ID" id="bioenzyme">
+                            <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: G00279YF </div>
+                        </div>
+                    </li>
+
+                    <!--Which proteins have been shown to bear glycan X and which site is this glycan attached to -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q2">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
+                        <div class="cd-faq-content">
+                            <strong>Glycan X:</strong>
+                            <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan" id="glycansite">
+                            <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: G74290AC </div>
+                        </div>
+                    </li>
+
+                    <!--Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q3">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
+                        <div class="cd-faq-content">
+                            <strong>Glycan X:</strong>
+                            <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan ID" id="glycangene">
+                            <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: G74290AC </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- cd-faq-group -->
 
 
-            <!-- Search by Species-->
-            <!-- cd-faq-group -->
-            <ul id="search_species" class="cd-faq-group">
-                <li class="cd-faq-title">
-                    <h2>Search by Species</h2>
-                </li>
+                <!--  Search by Protein -->
+                <ul id="search_protein" class="cd-faq-group">
+                    <li class="cd-faq-title">
+                        <h2>Search by Protein</h2>
+                    </li>
 
-                <!--Q.7 What are the glycosyltransferases in species X? -->
-                <li>
-                    <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
-                    <div class="cd-faq-content">
-                        <strong>Species:</strong>
-                        <select class="gg-faq-formInput organism" id="organism1">
-                            <option value="0">Select organism</option>
-                        </select>
+                    <!--Q.4 What are the orthologues of protein X in different species? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
+                        <div class="cd-faq-content">
+                            <strong>Protein:</strong>
+                            <input class="gg-faq-formInput" type="text" name="ProteinID" placeholder="Uniprot Protein ID" id="proteinorthologues">
+                            <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: P26572-1</div>
+                        </div>
+                    </li>
 
-                        <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">submit</button>
 
-                    </div>
-                    <!-- cd-faq-content -->
-                </li>
-                <!--Q.8 What are the glycohydrolases in species X? -->
-                <li>
-                    <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
-                    <div class="cd-faq-content">
-                        <strong>Species:</strong>
+                    <!--Q.5 What are the functions of protein X? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q5">What are the functions of protein X?</a>
+                        <div class="cd-faq-content">
+                            <strong>Protein:</strong>
+                            <input class="gg-faq-formInput" type="text" name="Protein" placeholder="Uniprot Protein ID" id="proteinfunction">
+                            <!--//<label id="protein-error">no result found</label>-->
+                            <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: P26572-1 </div>
+                        </div>
+                    </li>
 
-                        <select class="gg-faq-formInput organism" id="organism2">
-                            <option value="0">Select organism</option>
-                        </select>
-                        <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">submit</button>
+                    <!--Q.6 Which glycans might have been synthesized in mouse using enzyme X? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q6">Which glycans might have been synthesized in mouse using enzyme X?</a>
+                        <div class="cd-faq-content">
+                            <strong>Enzyme:</strong>
+                            <input class="gg-faq-formInput" type="text" name="Enzyme" id="glycanenzyme" placeholder="Protein ID or gene name">
+                            <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">submit</button>
+                            <div class="gg-text-example"> Example: P26572-1 </div>
+                        </div>
+                    </li>
+                </ul>
 
-                    </div>
-                    <!-- cd-faq-content -->
-                </li>
 
-                <!--Q.9 What are the reported or predicted glycosylated proteins in species X? -->
-                <li>
-                    <a class="cd-faq-trigger" id="Q9">What are the reported or predicted glycosylated proteins in species X?</a>
-                    <div class="cd-faq-content">
 
-                        <strong>Species:</strong>
-                        <select class="gg-faq-formInput organism" id="organism3">
-                            <option value="0">Select organism</option>
-                        </select>
-                        <strong>Type:</strong>
-                        <select name="species_type" class="biginput gg-faq-formInput" id="species">
-                            <option value="">Select type of species</option>
-                            <option value="reported">Reported</option>
-                            <option value="predicted">Predicted</option>
-                            <option value="both">Both</option>
-                        </select>
-                        <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">submit</button>
+                <!-- Search by Species-->
+                <!-- cd-faq-group -->
+                <ul id="search_species" class="cd-faq-group">
+                    <li class="cd-faq-title">
+                        <h2>Search by Species</h2>
+                    </li>
 
-                    </div>
+                    <!--Q.7 What are the glycosyltransferases in species X? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
+                        <div class="cd-faq-content">
+                            <strong>Species:</strong>
+                            <select class="gg-faq-formInput organism" id="organism1">
+                                <option value="0">Select organism</option>
+                            </select>
 
-                    <!-- cd-faq-content -->
-                </li>
-            </ul>
-            <!-- cd-faq-group -->
-            <ul id="search_disease" class="cd-faq-group">
-                <li class="cd-faq-title">
-                    <h2>Search by Disease</h2>
-                </li>
-                <li>
-                    <!--Q.10 Which glycosyltransferases are known to be involved in disease X? -->
-                    <a class="cd-faq-trigger" href="#0" id="Q10">Which glycosyltransferases are known to be involved in disease X?</a>
-                    <div class="cd-faq-content">
-                        <strong>Disease:</strong>
-                        <input class="gg-faq-formInput" type="text" name="disease" placeholder="scientific name" id="glycosyltransferasesdisease">
-                        <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">submit</button>
-                    </div>
-                    <!-- cd-faq-content -->
-                </li>
-            </ul>
-            <!-- cd-faq-group -->
-        </div>
-        <!-- cd-faq-items -->
-        <a href="#0" class="cd-close-panel">Close</a>
-    </section>
-    <!-- cd-faq -->
-</div>
-<div w3-include-html="footer.html"></div>
+                            <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">submit</button>
+
+                        </div>
+                        <!-- cd-faq-content -->
+                    </li>
+                    <!--Q.8 What are the glycohydrolases in species X? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
+                        <div class="cd-faq-content">
+                            <strong>Species:</strong>
+
+                            <select class="gg-faq-formInput organism" id="organism2">
+                                <option value="0">Select organism</option>
+                            </select>
+                            <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">submit</button>
+
+                        </div>
+                        <!-- cd-faq-content -->
+                    </li>
+
+                    <!--Q.9 What are the reported or predicted glycosylated proteins in species X? -->
+                    <li>
+                        <a class="cd-faq-trigger" id="Q9">What are the reported or predicted glycosylated proteins in species X?</a>
+                        <div class="cd-faq-content">
+
+                            <strong>Species:</strong>
+                            <select class="gg-faq-formInput organism" id="organism3">
+                                <option value="0">Select organism</option>
+                            </select>
+                            <strong>Type:</strong>
+                            <select name="species_type" class="biginput gg-faq-formInput" id="species">
+                                <option value="">Select type of species</option>
+                                <option value="reported">Reported</option>
+                                <option value="predicted">Predicted</option>
+                                <option value="both">Both</option>
+                            </select>
+                            <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">submit</button>
+
+                        </div>
+
+                        <!-- cd-faq-content -->
+                    </li>
+                </ul>
+                <!-- cd-faq-group -->
+                <ul id="search_disease" class="cd-faq-group">
+                    <li class="cd-faq-title">
+                        <h2>Search by Disease</h2>
+                    </li>
+                    <li>
+                        <!--Q.10 Which glycosyltransferases are known to be involved in disease X? -->
+                        <a class="cd-faq-trigger" href="#0" id="Q10">Which glycosyltransferases are known to be involved in disease X?</a>
+                        <div class="cd-faq-content">
+                            <strong>Disease:</strong>
+                            <input class="gg-faq-formInput" type="text" name="disease" placeholder="scientific name" id="glycosyltransferasesdisease">
+                            <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">submit</button>
+                        </div>
+                        <!-- cd-faq-content -->
+                    </li>
+                </ul>
+                <!-- cd-faq-group -->
+            </div>
+            <!-- cd-faq-items -->
+            <a href="#0" class="cd-close-panel">Close</a>
+        </section>
+        <!-- cd-faq -->
+    </div>
+    <div w3-include-html="footer.html"></div>
 
 </body>
 <!-- Resource jQuery -->
@@ -260,22 +260,23 @@
 <script>
     //calls the script in faq_main.js file
     faqMain();
-
-    //to open the drop down of the ID called from home page.
-    var url_loc = $(location).attr('href');
-    if (url_loc.match('#')) {
-        var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
-        var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
-        //to scroll to the particular sub section.
-        $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-        if ($(window).width() < 768) {   //mobile view
-            $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(faq_trigger_id).addClass('selected');
-            $('.cd-close-panel').addClass('move-left');
-            $('body').addClass('cd-overlay');
-        } else {
-            $('body,html').animate({ 'scrollTop': $(faq_trigger_id).offset().top - 19 }, 200);
+    $(document).ready(function () {
+        //to open the drop down of the ID called from home page.
+        var url_loc = $(location).attr('href');
+        if (url_loc.match('#')) {
+            var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
+            var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
+            //to scroll to the particular sub section.
+            $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+            if ($(window).width() < 768) {   //mobile view
+                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(faq_trigger_id).addClass('selected');
+                $('.cd-close-panel').addClass('move-left');
+                $('body').addClass('cd-overlay');
+            } else {
+                $('body,html').animate({ 'scrollTop': $(faq_trigger_id).offset().top - 19 }, 200);
+            }
         }
-    }
+    });
 </script>
 
 

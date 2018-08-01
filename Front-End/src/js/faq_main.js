@@ -2,7 +2,7 @@ function faqMain() {
 	jQuery(document).ready(function ($) {
 		//update these values if you change these breakpoints in the style.css file (or _layout.scss if you use SASS)
 		var MqM = 768,
-			MqMid = 1408,	// "browser width when navbar changes" added by Gaurav on 06/14/2018
+			// MqMid = 1408,	// "browser width when navbar changes" added by Gaurav on 06/14/2018
 			MqL = 1024;
 
 		var faqsSections = $('.cd-faq-group'),
@@ -98,8 +98,9 @@ function faqMain() {
 		function updateCategoryPosition() {
 			var top = $('.cd-faq').offset().top,
 				height = jQuery('.cd-faq').height() - jQuery('.cd-faq-categories').height(),
-				margin = 20;
-			if (top - margin <= $(window).scrollTop()) {	//&& top - margin + height > $(window).scrollTop() 
+				margin = 20,
+				navbarVal = parseInt($('.navbar').css('height')) + parseInt($('.navbar').offset().top);
+			if (navbarVal <= $(window).scrollTop()) {	//top - margin <= $(window).scrollTop() && top - margin + height > $(window).scrollTop() 
 				var leftValue = 0, //faqsCategoriesContainer.offset().left,
 					widthValue = faqsCategoriesContainer.width();
 				faqsCategoriesContainer.addClass('is-fixed').css({
@@ -111,10 +112,10 @@ function faqMain() {
 					'-o-transform': 'translateZ(0)',
 					'transform': 'translateZ(0)',
 
-					'-webkit-transition': 'all 0.4s ease',
-					'-moz-transition': 'all 0.4s ease',
-					'-o-transition': 'all 0.4s ease',
-					'transition': 'all 0.4s ease',
+					// '-webkit-transition': 'all 0.4s ease',
+					// '-moz-transition': 'all 0.4s ease',
+					// '-o-transition': 'all 0.4s ease',
+					// 'transition': 'all 0.4s ease',
 				});
 				// } else if( top - margin + height <= $(window).scrollTop()) {
 				// 	var delta = top - margin + height - $(window).scrollTop();
@@ -126,28 +127,31 @@ function faqMain() {
 				// 		'transform': 'translateZ(0) translateY('+delta+'px)',
 				// 	});
 			} else {
-				if ($(window).width() >= MqMid) {
-					faqsCategoriesContainer.css({	//removeClass('is-fixed')
-						'left': 0,
-						'top': '50px',	/*7rem*/
+				// if ($(window).width() >= MqMid) {
+				// 	faqsCategoriesContainer.css({	//removeClass('is-fixed')
+				// 		'left': 0,
+				// 		'top': '50px',	/*7rem*/
 
-						'-webkit-transition': 'all 0.4s ease',
-						'-moz-transition': 'all 0.4s ease',
-						'-o-transition': 'all 0.4s ease',
-						'transition': 'all 0.4s ease',
-					});
-				}
-				else if ($(window).width() < MqMid) {
-					faqsCategoriesContainer.css({	//removeClass('is-fixed')
-						'left': 0,
-						'top': '100px',	/*7rem*/
+				// 		'-webkit-transition': 'all 0.4s ease',
+				// 		'-moz-transition': 'all 0.4s ease',
+				// 		'-o-transition': 'all 0.4s ease',
+				// 		'transition': 'all 0.4s ease',
+				// 	});
+				// }
+				// else if ($(window).width() < MqMid) {
+				// navbarVal will have the bottom position of the navbar.
+				// var navbarVal = parseInt($('.navbar').css('height')) + parseInt($('.navbar').offset().top);
+				navbarVal = navbarVal - $(window).scrollTop();
+				faqsCategoriesContainer.css({	//removeClass('is-fixed')
+					'left': 0,
+					'top': navbarVal + 'px',	//'100px',	/*7rem*/
 
-						'-webkit-transition': 'all 0.4s ease',
-						'-moz-transition': 'all 0.4s ease',
-						'-o-transition': 'all 0.4s ease',
-						'transition': 'all 0.4s ease',
-					});
-				}
+					// '-webkit-transition': 'all 0.4s ease',
+					// '-moz-transition': 'all 0.4s ease',
+					// '-o-transition': 'all 0.4s ease',
+					// 'transition': 'all 0.4s ease',
+				});
+				// }
 			}
 		}
 
