@@ -37,6 +37,7 @@ function getWsUrl(request, id) {
         case "glycan_search":
             return ws_base_glycan + "/search";
             break;
+            
         case "glycan_image":
             return ws_base_glycan + "/image/" + id;
             break;

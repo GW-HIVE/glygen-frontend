@@ -65,15 +65,17 @@ function getErrorMessage(errorCode) {
             break;
         case 'no-results-found':
             return {
-                message: "Sorry, we couldn't find any results matching your selection.",
-                title: "Selection Error"
+                message: "This is not a valid entry. Please try again.",
+                title: "Invalid Entry Error"
+//                message: "Sorry, we couldn't find any results matching your selection.",
+//                title: "Selection Error"
             };
 
             break;
         default:
             return {
-                message: "Something is wrong. Cannot connect to the server!",
-                title: "Error"
+                message: "Oops, something went wrong. Please try again later.",
+                title: "Unexpected Error"
             };
 
 
