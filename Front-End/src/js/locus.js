@@ -229,7 +229,6 @@ function ajaxListSuccess(data) {
                     protein_name: glycan.protein_name,
                     organism: glycan.organism,
                     chromosome: glycan.chromosome,
-                    number_monosaccharides: glycan.number_monosaccharides,
                     start_pos: glycan.start_pos,
                     end_pos: glycan.end_pos,
                     tax_id: glycan.tax_id
@@ -242,7 +241,7 @@ function ajaxListSuccess(data) {
 
         buildPages(data.pagination);
 
-        buildSummary(data.query);
+        // buildSummary(data.query);
 
 
 
