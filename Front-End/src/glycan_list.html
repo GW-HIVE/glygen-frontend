@@ -86,18 +86,11 @@
 
         <script id="summary-template" type="text/template">
         <div class="panel panel-default results-table-top">
-            <div class="panel-heading"><center><h4>Summary of your Glycan Search<h4></center></div>
+            <div class="panel-heading"><center><h3>Summary of your Glycan Search<h3></center></div>
             
-            <div>
-                <!-- added new class -->
-                <h6>
-
-                    <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Performed on: {{execution_time}}</center>
-                </h6>
-            </div>
+            <h6><center>Performed on: {{execution_time}}</center></h6>
             
-            <div class="marginTopBottom">    
+            <div>    
                 <table class="table table-hover">
                     <tbody class="col-sm-offset-4 col-sm-8">
 
@@ -184,7 +177,6 @@
                     </tr>
                     {{/glycan_motif}}
 
-
                     </tbody>
                 </table>
             </div>
@@ -196,8 +188,7 @@
                 
                 <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Results</button>
             
-                <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the search again by using the current version of database.</p>
-                
+                <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the search again by using the current version of database.</p> 
             </div>
         </div>
     </script>

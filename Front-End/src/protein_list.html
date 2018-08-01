@@ -74,98 +74,96 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
-        <div class="panel panel-default">
-            <div class="gg-panel-heading cd-faq-title">
-                <!-- added new class -->
-                <h6>
+        <div class="panel panel-default results-table-top">
+            <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
 
-                    <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Result for Protein Search On:{{execution_time}}</center>
-                </h6>
-            </div>
-            <table class="table table-hover">
-                <tbody>
+            <h6><center>Performed on: {{execution_time}}</center></h6>
+            
+            <div>
+                <table class="table table-hover">
+                    <tbody class="col-sm-offset-4 col-sm-8">
 
-                <!--Protein Typeahead-->
-                {{#uniprot_canonical_ac}}
-                <tr>
-                    <td>Protein Id</td>
-                    <td>{{uniprot_canonical_ac}}</td>
-                </tr>
-                {{/uniprot_canonical_ac}}
+                    <!--Protein Typeahead-->
+                    {{#uniprot_canonical_ac}}
+                    <tr>
+                        <td>Protein Id</td>
+                        <td>{{uniprot_canonical_ac}}</td>
+                    </tr>
+                    {{/uniprot_canonical_ac}}
 
-                <!--mass-->
+                    <!--mass-->
 
-                {{#mass.min}}
-                <tr>
-                    <td>Mass</td>
                     {{#mass.min}}
-                    <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
-                    {{/mass.max}}
-                </tr>
-                {{/mass.min}}
+                    <tr>
+                        <td>Mass</td>
+                        {{#mass.min}}
+                        <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
+                        {{/mass.max}}
+                    </tr>
+                    {{/mass.min}}
 
 
-                <!--Organism-->
-                {{#tax_id}}
-                <tr>
-                    <td>Organism</td>
-                    <td>{{tax_id}}</td>
-                </tr>
-                {{/tax_id}}
+                    <!--Organism-->
+                    {{#tax_id}}
+                    <tr>
+                        <td>Organism</td>
+                        <td>{{tax_id}}</td>
+                    </tr>
+                    {{/tax_id}}
 
-                <!--Protein name Typeahead-->
+                    <!--Protein name Typeahead-->
 
-                {{#protein_name}}
-                <tr>
-                    <td>Protein Name</td>
-                    <td>{{protein_name}}</td>
-                </tr>
-                {{/protein_name}}
+                    {{#protein_name}}
+                    <tr>
+                        <td>Protein Name</td>
+                        <td>{{protein_name}}</td>
+                    </tr>
+                    {{/protein_name}}
 
-                <!--Gene Typeahead-->
+                    <!--Gene Typeahead-->
 
-                {{#gene_name}}
-                <tr>
-                    <td>Gene Name</td>
-                    <td>{{gene_name}}</td>
-                </tr>
-                {{/gene_name}}
-
-
-                <!--peptide seq-->
-                {{#sequence.aa_sequence}}
-                <tr>
-                    <td>Sequence</td>
-                    <td><abbr class="limit-text-size"
-                              title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
-                        <!--<span-->
-                            <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
-                    </td>
-                </tr>
-                {{/sequence.aa_sequence}}
+                    {{#gene_name}}
+                    <tr>
+                        <td>Gene Name</td>
+                        <td>{{gene_name}}</td>
+                    </tr>
+                    {{/gene_name}}
 
 
-                <!--pathway Typeahead-->
-                {{#pathway_id}}
-                <tr>
-                    <td>PATHWAY ID</td>
-                    <td>{{pathway_id}}</td>
-                </tr>
-                {{/pathway_id}}
+                    <!--peptide seq-->
+                    {{#sequence.aa_sequence}}
+                    <tr>
+                        <td>Sequence</td>
+                        <td><abbr class="limit-text-size"
+                                  title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
+                            <!--<span-->
+                                <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
+                        </td>
+                    </tr>
+                    {{/sequence.aa_sequence}}
 
 
-                </tbody>
-            </table>
+                    <!--pathway Typeahead-->
+                    {{#pathway_id}}
+                    <tr>
+                        <td>PATHWAY ID</td>
+                        <td>{{pathway_id}}</td>
+                    </tr>
+                    {{/pathway_id}}
 
-            <p align="center">
-                <button type="button" class="btn btn-primary"  onclick="updateSearch();">Update
-                    Search
-                </button>
-                <!--</a>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <div align="center">
+                <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
+                 
                 &nbsp; &nbsp; &nbsp; &nbsp;
-                <button type="button" class="btn btn-primary"  onclick="editSearch();">Back to Search</button>
-            </p>
+                
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Results</button>
+               
+                <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the search again by using the current version of database.</p>
+            </div>
         </div>
     </script>
 
