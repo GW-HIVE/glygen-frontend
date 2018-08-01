@@ -12,6 +12,17 @@ function faqMain() {
 			faqsCategories = faqsCategoriesContainer.find('a'),
 			closeFaqsContainer = $('.cd-close-panel');
 
+		// added by Gaurav on Aug 1st, 2018 - bottom margin for the container.
+		// It helps keep the last element of side bar highlighted
+		// and also avoids too much space between the footer and the last content box.
+		if ($(window).width() > MqM){
+			var marginBottom = $(window).height() - $('#search_disease').height() - 80;
+			marginBottom = (marginBottom < 0)?0:marginBottom;
+			$('.container').css({
+				'marginBottom': marginBottom,
+			});
+		}
+
 		//select a faq section 
 		faqsCategories.on('click', function (event) {
 			event.preventDefault();
