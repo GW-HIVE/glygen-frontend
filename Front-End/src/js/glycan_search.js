@@ -171,15 +171,15 @@ function mass(mass_min, mass_max) {
         behaviour: 'tap',
         start: [0, 10000],
 
-        range: {
-            'min': [1],
-            '60%': [10],
-            'max': [1000]
-        }
         // range: {
-        //     'min': mass_min,
-        //     'max': mass_max
+        //     'min': [1],
+        //     '60%': [10],
+        //     'max': [1000]
         // }
+        range: {
+            'min': mass_min,
+            'max': mass_max
+        }
     });
     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
     var nodes = [
@@ -212,16 +212,26 @@ function configureDropDownLists(ddl1, ddl2, callback) {
 
         // find glycan type by name
         if(glycan_type.name === glyan_type_name) {
+            glycan_type.subtype.sort(function(a,b){
+                var Atokens = a.split(' ');
+                var Btokens = b.split(' ');
+                var Atext = Atokens[0];
+                var Btext = Btokens[0];
+                var Anumber = parseInt(Atokens[1]);
+                var Bnumber = parseInt(Btokens[1]);
+                if(isNaN(Anumber) || isNaN(Bnumber)){
+                    return Atext > Btext;
+                }
+                else {
+                    return Anumber - Bnumber;
+                }
+            });
+
 
             for (i = 0; i < glycan_type.subtype.length; i++) {
                 var subtype = glycan_type.subtype[i];
 
-                // document.getElementById("ddl2").innerHTML = subtype;
-                //
-                // function myFunction() {
-                //     subtype.sort();
-                //     document.getElementById("ddl2").innerHTML = subtype;
-                // }
+
 
                 createOption(ddl2, subtype, subtype);
             }
