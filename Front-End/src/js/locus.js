@@ -1,12 +1,8 @@
 //@author: Rupali Mahadik
-
 // @description: UO1 Version-1.1.
+//31st july
 
-//@Date:19th Feb 2018.- with dummy webservice
 
-//@update:3 April 2018. with real web service
-//@update: June 26-2018- with web service changes.
-//@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 
 /**
 
@@ -22,9 +18,9 @@ String.prototype.trunc = String.prototype.trunc ||
     };
 var id = '';
 var page = 1;
-var sort = 'glytoucan_ac';
+var sort = 'uniprot_canonical_ac';
 var dir = $('.dir-select').val();
-var url = getWsUrl('glycan_list') + "?action=get_user";
+var url = getWsUrl('loci_list') + "?action=get_user";
 var limit = 10;
 
 /**
@@ -146,49 +142,7 @@ function buildPages(paginationInfo) {
 }
 
 
-/**
- * it creates user interface for summary
- * @param {Object} queryInfo - the dataset of pagination info is retun from server
- * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
- * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
- */
 
-function buildSummary(queryInfo) {
-    var summaryTemplate = $('#summary-template').html();
-    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
-    $('#summary-table').html(summaryHtml);
-
-    // queryInfo.execution_time = moment(queryInfo.execution_time).pst().format("MM/DD/YYYY.h:mm:ss a");
-    queryInfo.execution_time = moment(queryInfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
-
-}
-
-
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1() {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-}
-
-function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html";
-}
-
-
-//      $(document).ready(function(){
-//      // $("demosearch").tooltip();
-// });
-
-/**
- * Redirect to  searchPage with id after clicking editSearch
- */
-
-function editSearch() {
-    {
-        window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
-    }
-}
 
 /**
 
@@ -198,44 +152,17 @@ function editSearch() {
  @return -Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
-    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
 }
 
-/**
-
- * Format function for column that contains the cartoon
-
- * @param {object} value - The data binded to that particular cell.
-
- * @param {object} row - The data binded to that particular row.
- * @return- Glycanimage
- */
-
-// For Image Column
-function imageFormat(value, row, index, field) {
-    var url = getWsUrl('glycan_image', row.glytoucan_ac);
-    return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
+function pageFormat1(value, row, index, field) {
+    return "<a href='" + row.gene_link + " ' target='_blank'>" + value + "</a>"
 }
 
 
-/**
-
- * Format function for column "MASS"
-
- * @param {object} value - The data binded to that particular cell.
- * @return- Glycan Mass if available else NA
- */
-
-function massFormatter(value) {
-    if (value) {
-        var mass = value;
-        return value;
 
 
-    } else {
-        return "NA";
-    }
-}
+
 
 
 /**
@@ -251,45 +178,16 @@ function massFormatter(value) {
 
 function detailFormat(index, row) {
     var html = [];
-    var glyco = row.glycoct.replace(/ /g, '\n');
-    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
-    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-    activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
+    // var glyco = row.start_pos.replace(/ /g, '\n');
+    html.push('<li>Chromosome:' + row.chromosome + '</li>');
+    html.push('<li>Start Position:' + row.start_pos + '</li>');
+    html.push('<li>End Position:' + row.end_pos + '</li>');
+
+
+    activityTracker("user", id, "Detail view of " + row.uniprot_canonical_ac);
     return html.join('');
 }
 
-
-/**
-
- * updateSearch function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-var lastSearch;
-
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            if (result.list_id) {
-                console.log(result);
-                window.location = 'glycan_list.html?id=' + result.list_id;
-                activityTracker("user", id, "update search");
-            } else {
-                // handle if no results
-                activityTracker("error", id, "update search: no result found");
-            }
-        },
-        error: ajaxFailure
-    });
-}
 
 
 function editSearch() {
@@ -325,13 +223,15 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
-                    glytoucan_ac: glycan.glytoucan_ac,
-                    mass: glycan.mass,
-                    number_proteins: glycan.number_proteins,
-                    number_enzymes: glycan.number_enzymes,
-                    number_monosaccharides: glycan.number_monosaccharides,
-                    iupac: glycan.iupac,
-                    glycoct: glycan.glycoct
+                    uniprot_canonical_ac: glycan.uniprot_canonical_ac,
+                    gene_link: glycan.gene_link,
+                    gene_name: glycan.gene_name,
+                    protein_name: glycan.protein_name,
+                    organism: glycan.organism,
+                    chromosome: glycan.chromosome,
+                    start_pos: glycan.start_pos,
+                    end_pos: glycan.end_pos,
+                    tax_id: glycan.tax_id
                 });
             }
         }
@@ -341,10 +241,10 @@ function ajaxListSuccess(data) {
 
         buildPages(data.pagination);
 
-        buildSummary(data.query);
+        // buildSummary(data.query);
 
-        // document.title='glycan-list';
-        lastSearch = data;
+
+
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
@@ -367,7 +267,7 @@ function LoadDataList() {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("glycan_list"),
+        url: getWsUrl("loci_list"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
         success: ajaxListSuccess,

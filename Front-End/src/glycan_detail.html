@@ -42,7 +42,15 @@
 <style>
     {
         white-space: pre;
+
     }
+    #glycosylation-table {
+        border-color:black;
+    }
+    .fixed-table-footer{
+        display: block;
+    }
+
 </style>
 
 <body>
@@ -109,23 +117,25 @@
                             </div>
                             <div class="col-md-12 col-xs-6">
                                 {{#glytoucan_ac}}
-                                <p class="panelcontent">Glytoucan accession:  <a class="panelcontent"
+                                <li class="list-group"><strong>Glytoucan accession:</strong>   <a class="panelcontent"
                                 href="https://glytoucan.org/Structures/Glycans/{{glytoucan_ac}}"
-                                                            target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan_ac}}</p>
+                                                            target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan_ac}}</li>
 
 
                                 {{#mass}}
-                                <p class="panelcontent">Monoisotopic mass: {{mass}} Da </p> {{/mass}}
+                                <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass}} Da </p> {{/mass}}</li>
 
 
 
-                                <br>Classification: {{#classification}}
+                                 {{#classification}}
+
                                 <li class="list-group">
+                                    <strong>Classification:</strong>
                                     <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
                                     <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
                                 </li>
 
-                                {{/classification}} {{^classification}} No data available. {{/classification}}
+                                {{/classification}} {{^classification}}  {{/classification}}
 
 
                             </div>
@@ -186,7 +196,7 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#hasMotifs}} {{#motifs}}
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-6 col-xs-6">
                             <div class='img-wrapper2'>
 
 
@@ -260,11 +270,11 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#crossref}}
-                        <p class="panelmaincontent">
-                        <li class="list-group" id="panelmaincontent1">{{database}}:
+
+                        <li class="list-group" id="panelmaincontent1"><Strong>{{database}}:</Strong>
                             <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
                         </li>
-                        </p>
+
                         {{/crossref}} {{^crossref}} No data available. {{/crossref}}
                     </div>
                 </div>
@@ -321,11 +331,6 @@
 
 
 
-
-
-
-
-
             <!-- cd-faq-group -->
             <ul id="delivery1" class="cd-faq-group">
                 <li class="cd-faq-title"/>
@@ -340,11 +345,11 @@
                     <div class="panel-body">
                         <!-- added new class -->
 
-                        GLYCOCT
+                        <strong>GLYCOCT</strong>
                         <pre>{{ glycoct }}</pre>
-                        WURCS
+                        <strong>WURCS</strong>
                         <pre>{{ wurcs}}</pre>
-                        IUPAC
+                        <strong>IUPAC</strong>
                         <pre>{{ iupac }}</pre>
                     </div>
                 </div>

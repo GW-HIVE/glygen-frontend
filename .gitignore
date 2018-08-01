@@ -1,11 +1,11 @@
 #Ignoring Target folders created by Maven
 /**/target/
 
-#File auto created by Mac OS
+#Ignore file auto created by Mac OS
 .DS_Store
 
-#Hidden files and folders
+#Ignore hidden files and folders
 .*
-
-#include gitignore files
+#except include following files
+!.htaccess
 !.gitignore

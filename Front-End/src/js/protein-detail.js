@@ -99,7 +99,7 @@ function ajaxSuccess(data) {
                 title: 'Residue',
                 sortable: true
             }],
-            pagination: 10,
+            //pagination: 10,
             data: itemsGlycosyl,
             detailView: true,
             detailFormatter: function (index, row) {

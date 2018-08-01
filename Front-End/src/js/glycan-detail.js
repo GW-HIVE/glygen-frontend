@@ -78,7 +78,7 @@ function ajaxSuccess(data) {
                 title: 'Protein Name',
                 sortable: true
             }],
-            // pagination: 10,
+            pagination: 10,
             data: items,
             // detailView: true,
             // detailFormatter: function (index, row) {
