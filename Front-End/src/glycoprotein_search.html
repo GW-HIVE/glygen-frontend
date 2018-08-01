@@ -194,13 +194,14 @@
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="glycosylated_aa">
                 <span>
-                    <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Content">
+                    <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Click to Highlight Multiple Selections for glycosylated amino acid">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Glycosylated Amino Acid: </label>
-            <h6 id=aminos>Click to Highlight Multiple Select</h6>
+            
 
             <div class="col-sm-8">
+                <h6 id=aminos>Click to Highlight Multiple Selections</h6>
                 <select id="glycosylated_aa" class="glycosylated_aa" multiple="true">
                     <option value="R">Arginine - Arg - R</option>
                     <option value="K">Lysine - Lys - K</option>
@@ -232,15 +233,15 @@
         <div class="gg-form-group2 row">
             <label class="control-label col-sm-4" for="sequences">
                 <span>
-                    <a href="javascript://" title="Protein or Peptide Sequence(s)" data-toggle="popover" data-placement="left"
-                        data-content="ContentEnter a protein or peptide sequence(s) in FASTA format">
+                    <a href="javascript://" title="Protein or Peptide Sequence" data-toggle="popover" data-placement="left"
+                        data-content="Click to select sequence type and enter protein or peptide sequence">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> Protein or Peptide Sequence(s):</label>
+                </span> Protein or Peptide Sequence:</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
-                    <option value="">Select Sequence_type</option>
+                    <option value="">Select Sequence Type</option>
                     <option value="blast">Blast</option>
                     <option value="exact">Exact</option>
                 </select>
@@ -251,9 +252,7 @@
 
                 </form>
                 <h6 id='msg' class="rq"></h6>
-                <div class="gg-text-example">Example:
-                    <br>SEQUENCE _A
-                    <br>MQPR</div>
+                <div class="gg-text-example">Example: MQPR</div>
             </div>
         </div>
         <!-- end Sequences-->
@@ -262,25 +261,26 @@
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="pathway">
                 <span>
-                    <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a UniProt pathway ID. See https://www.uniprot.org/help/pathway">
+                    <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter Pathway ID from KEGG or Reactome.">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Pathway ID:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a UniProt Pathway ID" onkeyup="validatePathway(this)">
+                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathway(this)">
 
-                <div class="gg-text-example">Example: hsa:2158</div>
+                <div class="gg-text-example">KEGG Example: hsa:3593 <br>Reactome Example: R-HSA-447115</div>
+                
+                <label id='pathwayMsg' class="rq"></label>
             </div>
         </div>
-        <label id='pathwayMsg' class="rq"></label>
         <!--End Pathway-->
 
         <!-- Glycosylation Evidences-->
         <div class="gg-form-group row" id="glycosylation_evidence">
             <label class="control-label col-sm-4" for="organism">
                 <span>
-                    <a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Content">
+                    <a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation evidence type">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Glycosylation Evidence</label>

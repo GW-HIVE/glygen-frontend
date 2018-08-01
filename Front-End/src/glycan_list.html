@@ -86,18 +86,17 @@
 
         <script id="summary-template" type="text/template">
         <div class="panel panel-default results-table-top">
-            <div class="panel-heading"><center><h4>Summary of your Glycan Search performed on: {{execution_time}} PT</h4></center></div>
+            <div class="panel-heading"><center><h4>Summary of your Glycan Search<h4></center></div>
             
-            <!--
             <div>
                 <!-- added new class -->
                 <h6>
 
                     <!-- <center>Result for Glycan Search On:{{execution_time}}</center> -->
-                    <center>Date and Time: {{execution_time}}</center>
+                    <center>Performed on: {{execution_time}}</center>
                 </h6>
             </div>
-            -->
+            
             <div class="marginTopBottom">    
                 <table class="table table-hover">
                     <tbody class="col-sm-offset-4 col-sm-8">
@@ -193,14 +192,12 @@
             <div align="center">
                 <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
 
-                <!--</a>-->
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 
                 <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Results</button>
             
-                <p class="small">** By clicking “Modify Search”, you will perform the search again by using the current version of database.</p>
+                <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the search again by using the current version of database.</p>
                 
-                <!-- <p class="small">** By clicking “Modify Search”, your search result will be updated with up to date database data.</p> -->
             </div>
         </div>
     </script>

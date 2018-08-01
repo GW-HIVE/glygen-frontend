@@ -196,7 +196,7 @@ var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
         // max_selected_options: 10,
-        placeholder_text_multiple: "choose amino acid"
+        placeholder_text_multiple: "Select and choose amino acid(s)"
     })
         .bind("chosen:maxselected2", function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
