@@ -197,46 +197,47 @@ function glycanGene(){
 
 
 
-// //Q4.What are the orthologues of protein X in different species?
-// $("#proteinorthologues").autocomplete({
-//     source: function (request, response) {
-//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-//         $.getJSON(queryUrl, function (suggestions) {
-//             suggestions.length = Math.min(suggestions.length, 5);
-//
-//             response(suggestions);
-//         });
-//     },
-//     minLength: 1,
-//     select: function (event, ui) {
-//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-//     }
-// });
-//
-//
-//
-//
-//
-// function proteinOrthologues(){
-//
-//     var id = $("#proteinorthologues").val();
-//     $.ajax({
-//         type: 'post',
-//         url: getWsUrl("search_proteinorthologues",id),
-//         // data: json,
-//         success: function (results) {
-//             if (results.list_id) {
-//                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
-//
-//             }
-//             else {
-//                 displayErrorByCode('no-results-found');
-//             }
-//
-//         }
-//
-//     })
-// }
+//Q4.What are the orthologues of protein X in different species?
+$("#proteinorthologues").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
+
+
+
+
+function proteinOrthologues(){
+
+    var id = $("#proteinorthologues").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_proteinorthologues",id),
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+
+                window.location = './protein_orthologus.html?id=' + results.list_id;
+
+            }
+            else {
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
 
 // //Q.5- What are the functions of protein X?
 $("#proteinfunction").autocomplete({
