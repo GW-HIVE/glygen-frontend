@@ -74,7 +74,7 @@ $("#motif").autocomplete({
 
 $("#enzyme").autocomplete({
     source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("enzyme_uniprot_canonical_ac", request.term);
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("gene_name", request.term);
         $.getJSON(queryUrl, function (suggestions) {
             suggestions.length = Math.min(suggestions.length, 5);
 
