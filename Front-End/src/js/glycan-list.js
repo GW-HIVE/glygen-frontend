@@ -281,7 +281,7 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
+        url: getWsUrl('glycan_search')+"?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
             // if (result.list_id) {
                 console.log(result);
@@ -306,7 +306,9 @@ function editSearch() {
 
 
 
-
+function ajaxFailure() {
+    displayErrorByCode();
+}
 /**
  * Handling a succesful call to the server for list page
  * @param {Object} data - the data set returned from the server on success

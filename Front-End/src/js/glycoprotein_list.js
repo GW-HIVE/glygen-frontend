@@ -271,7 +271,8 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
+        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
+        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
             // if (result.list_id) {
                 console.log(result);
