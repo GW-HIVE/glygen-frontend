@@ -1,4 +1,4 @@
-//@author:Gaurav agarwal
+//@author: Gaurav Agarwal
 
 //update: Rupali Mahadik:  //Glycan webservices, //Protein webservices
 
