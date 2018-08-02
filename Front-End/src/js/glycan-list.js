@@ -161,10 +161,7 @@ function buildSummary(queryInfo) {
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 
-    // queryInfo.execution_time = moment(queryInfo.execution_time).pst().format("MM/DD/YYYY.h:mm:ss a");
-    // queryInfo.execution_time = moment(queryInfo.execution_time).tz("America/New_York").format("MM/DD/YYYY hh:mm:ss a");
-    // queryInfo.execution_time = moment().tz("America/New_York").format("MM/DD/YYYY hh:mm:ss a");
-    // queryInfo.execution_time =moment().tz("American/Los Angeles");
+
 
 }
 
