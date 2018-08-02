@@ -222,8 +222,9 @@
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
-                        <span class="fasta">{{ sequence.sequence }}</span>
-                        <div>{{ sequence.length }}</div>
+                        <!--<span class="fasta">{{ sequence.sequence }}</span>-->
+                        <div class="fasta"><pre>{{{sequence.sequence}}}</pre></div>
+                        <!--<div class="fasta"><pre>{{ sequence.length }}</pre></div>-->
                     </div>
                 </div>
             </ul>
@@ -327,7 +328,8 @@
                                     {{/evidence}}
                                 </ul>
                                 {{/locus}}
-                                <span class="fasta">{{sequence.sequence}}</span>
+                                <!--<span class="fasta">{{sequence.sequence}}</span>-->
+                                <div class="fasta"><pre>{{{sequence.sequence}}}</pre></div>
                                 <hr/>
                             </div>
                             {{/isoforms}}
