@@ -317,15 +317,27 @@ function submitvalues() {
 
 //form json from form submit
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+    var enzymes={}
+    if(input_enzyme){
+        enzyme = {
+            "id":input_enzyme,
+                "type":"gene"
+        }
+
+    }
+
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
         mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
-        number_monosaccharides: { "min": parseInt(sugar_min), "max": parseInt(sugar_max) },
-        enzyme: {
-            "id": input_enzyme,
-            "type": "gene"
+        number_monosaccharides: { "min": parseInt(sugar_min),
+            "max": parseInt(sugar_max)
         },
+        // enzyme: {
+        //     "id": input_enzyme,
+        //     "type": "gene"
+        // },
+        enzyme:enzymes,
         glytoucan_ac: input_glycan_id,
         tax_id: input_organism ? parseInt(input_organism) : '',
         glycan_type: input_glycantype,
