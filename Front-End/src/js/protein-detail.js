@@ -21,6 +21,23 @@ function ajaxSuccess(data) {
     else {
         activityTracker("user", data.uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
+        var string = data.sequence.sequence;
+
+        var perLine = 60;
+
+        var output = '';
+
+        for(var x = 0; x < string.length; x += perLine) {
+            /* console.log(x+1) */;
+            var y = string.substr(x, perLine);
+            /* console.log(y) */
+
+            output += (x+1) + ' ' + y + '<Br/>';
+
+        }
+
+        data.sequence.sequence = output;
+        // data.sequence.sequence = output;
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
         var itemsGlycosyl = [];
