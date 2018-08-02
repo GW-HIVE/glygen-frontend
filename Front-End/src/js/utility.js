@@ -65,8 +65,8 @@ function getErrorMessage(errorCode) {
             break;
         case 'no-results-found':
             return {
-                message: "This is not a valid entry. Please try again.",
-                title: "Invalid Entry Error"
+                message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
+                title: "No Results Found Error"
 //                message: "Sorry, we couldn't find any results matching your selection.",
 //                title: "Selection Error"
             };

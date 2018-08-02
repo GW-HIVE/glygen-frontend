@@ -39,6 +39,8 @@ $(document).ready(function(){
         navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {
         navItemText = 'MORE';
+    } else if(navItemText == 'GLYGEN DATA') {
+        navItemText = 'MORE';
     } else if(navItemText == 'FEEDBACK') {
         navItemText = 'MORE';
     } else if(navItemText == 'CONTACT') {
