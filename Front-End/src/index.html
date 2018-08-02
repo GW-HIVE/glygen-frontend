@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-sm-4">
                         <div class="thumbnail card">
                             <a class="gg-img-card" href="glycoprotein_search.html">
@@ -181,7 +181,7 @@
 
                                 <div class="list-group">
                                     <p>
-                                        <a href="#" class="list-group-item">
+                                        <a href="#void" class="list-group-item" onclick="tryBioEnzyme()">
                                             What are the enzymes involved in the biosynthesis of
                                             <span style="color: #2F78B7;"> Man5 </span>in human?
                                         </a>
@@ -242,11 +242,13 @@
                     <div class="panel panel-default thumbnail card">
                         <h3 class="home-headings">Explore Other Resources</h3>
                         <br>
-                        <a href="resources.html"><img src="images/resources/Resources-hands.png" alt="resources"></a>
+                        <a href="resources.html">
+                            <img src="images/resources/Resources-hands.png" alt="resources">
+                        </a>
                         <p class="caption text-left">Glygen is pleased to provide user with viriety of resources in glycobiology.</p>
-                        
 
-<!--
+
+                        <!--
                         <div class="caption text-left">
                             <p>
                                 <a href="https://glytoucan.org/" target="_blank" style="text-decoration: none;">
@@ -342,8 +344,12 @@
     <script src="js/ws_url.js"></script>
     <!-- script for getting Web Service URLs -->
     <script src="js/activity_tracker.js"></script>
+    <!-- alertify-->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
     <!-- script for logging activity -->
     <script src="js/utility.js"></script>
+    <!-- Quick_Search -->
+    <script type="text/javascript" src="js/try_me.js"></script>
 </body>
 
 </html>

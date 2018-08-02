@@ -457,7 +457,10 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class='col-md-12 col-xs-12'>
+                                {{#mutation}}
                                 <table id="mutation-table"></table>
+                                {{/mutation}}
+                                {{^mutation}}No data available.{{/mutation}}
                             </div>
                         </div>
                     </div>

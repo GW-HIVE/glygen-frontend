@@ -145,7 +145,12 @@ function ajaxSuccess(data) {
                 title: 'Disease',
                 sortable: true,
                 formatter: function (value, row, index, field) {
-                    return value.name + " (ICD10:"+ value.icd10 +" ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)"
+                    var diss;
+                    if(value.icd10)
+                        diss = value.name + " (ICD10:"+ value.icd10 +" ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                    else
+                        diss = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                    return diss;
                 }
             },
             {
