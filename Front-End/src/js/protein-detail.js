@@ -31,17 +31,23 @@ function ajaxSuccess(data) {
             /* console.log(x+1) */;
             var y = string.substr(x, perLine);
             /* console.log(y) */
-
-            output += (x+1) + ' ' + y + '<Br/>';
+            //
+            // output += (x+1) + ' ' + y + '<Br/>';
+            var xwithpadding = ("        " + (x+1)).slice(-5);
+            output += xwithpadding + '  ' + y + '<br/>';
 
         }
 
         data.sequence.sequence = output;
-        // data.sequence.sequence = output;
+
+
+
+
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
         var itemsGlycosyl = [];
         var itemsMutate = [];
+
 
         // filling in glycosylation data
         if (data.glycosylation) {
@@ -74,6 +80,9 @@ function ajaxSuccess(data) {
                 });
             }
         }
+
+
+
 
         $container.html(html);
 
