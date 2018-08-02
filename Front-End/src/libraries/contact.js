@@ -12,19 +12,30 @@ $(function () {
         if (!e.isDefaultPrevented()) {
             e.preventDefault();
             var url = getWsUrl("contact");
-
+            var formVal = $(this).serializeArray();
+            var formData = {
+                "fname": formVal[0].value,
+                "lname": formVal[1].value,
+                "email": formVal[3].value,
+                "subject": formVal[2].value,
+                "message": formVal[4].value
+            }
             // POST values in the background the the script URL
             $.ajax({
                 type: "POST",
                 url: url,
-                data: $(this).serializeArray(),
-                success: function (data) {
+                data: "query="+JSON.stringify(formData),
+                success: function (result) {
                     // data = JSON object that contact.php returns
-
-                    // we recieve the type of the message: success x danger and apply it to the 
-                    var messageAlert = 'alert-' + data.type;
-                    var messageText = data.message;
-
+                    var messageAlert, messageText;
+                    if (result.error_code) {
+                        messageAlert = 'alert-danger';
+                        messageText = result.error_code;
+                    } else {
+                        // we recieve the type of the message: success x danger and apply it to the 
+                        messageAlert = result.type;
+                        messageText = result.message;
+                    }
                     contactReply(messageAlert, messageText);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -32,7 +43,7 @@ $(function () {
                     var messageAlert = 'alert-danger';
                     var messageText = "Oops, something went wrong! We did not receive your message. Please try again later. " + errorThrown;
                     contactReply(messageAlert, messageText);
-                    activityTracker("error", "", textStatus+": "+errorThrown);
+                    activityTracker("error", "", textStatus + ": " + errorThrown);
                 }
             });
             return false;

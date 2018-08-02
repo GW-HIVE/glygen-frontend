@@ -316,10 +316,12 @@
                                     <li class="list-group"><strong>Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
                                 </p>
                                 {{#locus}}
+                                {{#chromosome}}
                                 <p class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     Chromosome: {{chromosome}} ({{start_pos}} - {{end_pos}})
                                 </p>
+                                {{/chromosome}}
                                 <ul style="display:none;">
                                     {{#evidence}}
                                     <li class="list-group">{{database}} :

@@ -19,6 +19,7 @@ function getWsUrl(request, id) {
     var ws_base_typeahead = ws_base+"typeahead";
     var ws_logging = ws_base+"auth/logging";
     var ws_userID = ws_base+"auth/userid";
+    var ws_contact = ws_base+"auth/contact";
     var ws_useCaseSearch=ws_base+"usecases";
     var ws_base_loci=ws_base+"usecases";
 
@@ -31,7 +32,10 @@ function getWsUrl(request, id) {
         case "log_activity":
             return ws_logging;
             break;
-
+        case "contact":
+            return ws_contact;
+            break;
+            
         //Glycan webservices
         case "search_init_glycan":
             return ws_base_glycan + "/search_init";
@@ -51,7 +55,6 @@ function getWsUrl(request, id) {
         case "glycan_detail":
             return ws_base_glycan + "/detail/" + id;
             break;
-
 
 
         //Protein webservices
