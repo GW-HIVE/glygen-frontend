@@ -280,14 +280,14 @@ function updateSearch() {
         dataType: "json",
         url: getWsUrl('glycan_search')+"?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
-            // if (result.list_id) {
+            if (result.list_id) {
                 console.log(result);
                 activityTracker("user", id, "update search");
                 window.location = 'glycan_list.html?id=' + result.list_id;
-            // } else {
-            //     // handle if no results
-            //     activityTracker("error", id, "update search: no result found");
-            // }
+            } else {
+                // handle if no results
+                activityTracker("error", id, "update search: no result found");
+            }
         },
         error: ajaxFailure
     });
@@ -303,9 +303,7 @@ function editSearch() {
 
 
 
-function ajaxFailure() {
-    displayErrorByCode();
-}
+
 /**
  * Handling a succesful call to the server for list page
  * @param {Object} data - the data set returned from the server on success
@@ -351,7 +349,7 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
-        addSortOptions();
+        // addSortOptions();
     }
 
 }
