@@ -183,17 +183,11 @@ function detailFormat(index, row) {
     for (var i = 0; i < evidences.length; i++) {
         var evidence = evidences[i];
         html.push("<div class='row'>");
-        html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+        html.push("<ul><li>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></ul>");
         html.push("</div>");
     }
     return html.join('');
 }
-
-
-
-
-
-
 
 
 
@@ -235,9 +229,9 @@ function ajaxListSuccess(data) {
                     gene_name: glycan.gene_name,
                     protein_name: glycan.protein_name,
                     organism: glycan.organism,
-                    chromosome: glycan.chromosome,
-                    start_pos: glycan.start_pos,
-                    end_pos: glycan.end_pos,
+                    evidence: glycan.evidence,
+                    // start_pos: glycan.start_pos,
+                    // end_pos: glycan.end_pos,
                     tax_id: glycan.tax_id
                 });
             }
