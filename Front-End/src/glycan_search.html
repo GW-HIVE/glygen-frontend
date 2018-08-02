@@ -45,14 +45,14 @@
         <div class="row top-table-margin">
             <label class="control-label col-sm-4" for="glycan_id">
                 <span>
-                    <a href="javascript://" title="GlyTouCan accession" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan accession of your glycan (see https://glytoucan.org/)">
+                    <a href="javascript://" title="GlyTouCan accession" data-toggle="popover" data-placement="left" data-content="Enter complete or partial GlyTouCan accession of your glycan (see https://glytoucan.org/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> GlyTouCan accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter an universal glycan identifier from GlyTouCan.org">
-
+                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan accession from GlyTouCan.org">
+                <!--Enter an universal glycan identifier from GlyTouCan.org-->
                 <div class="gg-text-example">Example: G10106TL</div>
             </div>
         </div>
@@ -179,7 +179,7 @@
                 </span> Glycan Motif:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a glycan motif to search by (e.g. LewisX)">
+                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a structural motif contained in your glycan">
 
                 <div class="gg-text-example">Example: Lewis X</div>
             </div>
