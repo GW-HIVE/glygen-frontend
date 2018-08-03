@@ -76,14 +76,16 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
+              <nonFilteredFileExtensions>
+                <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+              </nonFilteredFileExtensions>
               <outputDirectory>${to}</outputDirectory> 
               <resources>          
                 <resource>
                   <directory>${from}</directory>
                   <filtering>true</filtering>
-                  <excludes>
-                    <exclude>static/fonts/**</exclude>
-                  </excludes>
                 </resource>
               </resources>              
             </configuration>            
