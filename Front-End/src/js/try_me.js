@@ -52,7 +52,7 @@ function tryBioEnzyme() {
  */
 function tryGlycanSite() {
     loadingImg();
-    var id = "G77252PU";
+    var id = "G73866ZM";
     $.ajax({
         type: 'POST',
         url: getWsUrl("search_glycansite", id),
