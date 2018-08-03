@@ -32,13 +32,16 @@ function ajaxSuccess(data) {
             var y = string.substr(x, perLine);
             /* console.log(y) */
             //
-            // output += (x+1) + ' ' + y + '<Br/>';
-            var xwithpadding = ("        " + (x+1)).slice(-5);
-            output += xwithpadding + '  ' + y + '<br/>';
+            output += (x+1) + ' ' + y + '<Br/>';
+            // var xwithpadding = ("        " + (x+1)).slice(-5);
+            // output += xwithpadding + '  ' + y + '<br/>';
 
         }
 
         data.sequence.sequence = output;
+
+
+
 
 
 
@@ -63,6 +66,27 @@ function ajaxSuccess(data) {
                 });
             }
         }
+
+        var isoforms =[];
+        function formatSequence(seq){
+            var perLine = 60;
+            var output = '';
+
+            for(var x = 0; x < seq.length; x += perLine) {
+                var y = seq.substr(x, perLine);
+                output += ("00000" + (x+1)).slice(-5) + ' ' + y + '<Br/>';
+            }
+            currentIsoform.sequence.sequence=output;
+        }
+
+        if (data.isoforms) {
+            for (var i = 0; i < data.isoforms.length; i++) {
+                var currentIsoform = data.isoforms[i];
+                currentIsoform.sequence.sequence = formatSequence(currentIsoform.sequence.sequence);
+            }
+        }
+
+
 
         // filling in mutation data
         if (data.mutation) {
