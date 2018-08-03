@@ -81,6 +81,16 @@
                 <resource>
                   <directory>${from}</directory>
                   <filtering>true</filtering>
+                  <excludes>
+                    <exclude>static/fonts/**</exclude>
+                  </excludes>
+                </resource>
+                <resource>
+                  <directory>${from}</directory>
+                  <filtering>false</filtering>
+                  <includes>
+                      <include>static/fonts/**</include>
+                  </includes>
                 </resource>
               </resources>              
             </configuration>            
