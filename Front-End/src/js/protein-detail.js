@@ -11,6 +11,25 @@ var uniprot_canonical_ac;
 
 
  */
+
+
+// Sequence formatting Function
+function formatSequence (sequenceString) {
+    var perLine = 60;
+    var output = '';
+
+    for(var x = 0; x < sequenceString.length; x += perLine) {
+        var y = sequenceString.substr(x, perLine);
+        output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
+    }
+
+    // return the newly created string
+    return output;
+}
+
+
+
+
 function ajaxSuccess(data) {
 
     if (data.error_code) {
@@ -23,27 +42,17 @@ function ajaxSuccess(data) {
         var template = $('#item_template').html();
         var string = data.sequence.sequence;
 
-        var perLine = 60;
 
-        var output = '';
+        data.sequence.sequence = formatSequence(string);
 
-        for(var x = 0; x < string.length; x += perLine) {
-            /* console.log(x+1) */;
-            var y = string.substr(x, perLine);
-            /* console.log(y) */
-            //
-            output += (x+1) + ' ' + y + '<Br/>';
-            // var xwithpadding = ("        " + (x+1)).slice(-5);
-            // output += xwithpadding + '  ' + y + '<br/>';
 
+
+        if (data.isoforms) {
+            for (var i = 0; i < data.isoforms.length; i++) {
+                // assign the newly result of running formatSequence() to replace the old value
+                data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
+            }
         }
-
-        data.sequence.sequence = output;
-
-
-
-
-
 
 
         var html = Mustache.to_html(template, data);
@@ -67,25 +76,11 @@ function ajaxSuccess(data) {
             }
         }
 
-        var isoforms =[];
-        function formatSequence(seq){
-            var perLine = 60;
-            var output = '';
 
-            for(var x = 0; x < seq.length; x += perLine) {
-                var y = seq.substr(x, perLine);
-                output += ("00000" + (x+1)).slice(-5) + ' ' + y + '<Br/>';
-            }
-            currentIsoform.sequence.sequence=output;
-        }
+// log it to see what would get sent to mustache
+        console.log(data);
 
-        if (data.isoforms) {
-            for (var i = 0; i < data.isoforms.length; i++) {
-                var currentIsoform = data.isoforms[i];
-                currentIsoform.sequence.sequence = formatSequence(currentIsoform.sequence.sequence);
-            }
-        }
-
+// Mustache.render(template, data);hgbgghvythvhgtfkgyhjhsgghg
 
 
         // filling in mutation data
