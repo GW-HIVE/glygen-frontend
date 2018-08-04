@@ -223,6 +223,7 @@ function proteinOrthologues(){
     $.ajax({
         type: 'post',
         url: getWsUrl("search_proteinorthologues",id),
+        // url: getWsUrl("search_proteinorthologues",id+"/"),
         // data: json,
         success: function (results) {
             if (results.list_id) {
