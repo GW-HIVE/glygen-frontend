@@ -234,8 +234,14 @@
                             <div class='col-md-12 col-xs-12'>
                                 <p class="panelmaincontent">
                                     <button class="open-close-button">+</button>
-                                    {{protein_name}}(Uniprot ID:
-                                    <a href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a> {{#position}}
+                                    {{protein_name}}
+
+                                    <strong>Uniprot ID:</strong>
+                                    <a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'>{{uniprot_canonical_ac}}</a>
+
+
+                                    <!--<a href="protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}"></a>-->
+                                    {{#position}}
                                     <br> Position:{{position}} {{/position}}
                                 </p>
                                 <ul style="display:none;">
