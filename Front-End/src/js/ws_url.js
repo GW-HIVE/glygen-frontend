@@ -133,7 +133,7 @@ function getWsUrl(request, id) {
 
 
         //Usecases DISEASE webservices Q.10
-        case "search_glycosyltransferases_disease":
+        case "search_disease":
             return ws_useCaseSearch + "/disease_to_glycosyltransferases/0/0050560/" + id;
             break;
     }
