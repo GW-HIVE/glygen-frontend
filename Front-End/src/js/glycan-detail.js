@@ -6,6 +6,22 @@
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 
+
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
+
+
 var glytoucan_ac;
 /**
  * Handling a succesful call to the server for details page
@@ -32,10 +48,16 @@ function ajaxSuccess(data) {
             }
         }
 
-        //var glyco = row.glycoct.replace(/ /g, '\n');
+         //Adding break
+         data.glycoct = data.glycoct.replace(/ /g, '<br>');
+         data.wurcs = data.wurcs.replace(/ /g, '<br>');
+
+        data.mass = addCommas(data.mass);
+
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
         var items = data.enzyme ? data.enzyme : [];
+
         $container.html(html);
 
         $container.find('.open-close-button').each(function (i, element) {
@@ -64,6 +86,7 @@ function ajaxSuccess(data) {
                     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
                 }
             },
+
             {
                 field: 'gene',
                 title: 'Gene Name',
