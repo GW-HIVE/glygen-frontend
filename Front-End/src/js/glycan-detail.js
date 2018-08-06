@@ -153,6 +153,6 @@ function getParameterByName(name, url) {
 
 $(document).ready(function () {
     glytoucan_ac = getParameterByName('glytoucan_ac');
-    document.title = glytoucan_ac + " Detail";   //updates title with the glycan ID
+    document.title = glytoucan_ac + " Detail - glygen";   //updates title with the glycan ID
     LoadData(glytoucan_ac);
 });
