@@ -509,6 +509,12 @@ header h1 {
 }
 */
 
+.gg-text-example {
+    margin-top: 3px;
+    padding-left: 4px;
+    color: #2E78B7;    
+}
+
 /** Side navbar top margin adjust
   * @author Gaurav Agarwal 
   * @date-modified 06/14/2018
