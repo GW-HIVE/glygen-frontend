@@ -128,15 +128,12 @@
 
                                 {{#mass}}
                                 <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass}} Da </p> {{/mass}}</li>
-
-
-
                                  {{#classification}}
 
-                                <li class="list-group">
-                                    <strong>Classification:</strong>
-                                    <a class="panelcontent" href="{{type.URL}}">{{type.name}}</a>
-                                    <a class="panelcontent" href="{{subtype.URL}}">{{subtype.name}}</a>
+                                <li class="list-group"><strong>Classification:</strong>
+
+                                    {{type.name}}
+                                    {{subtype.name}}
                                 </li>
 
                                 {{/classification}} {{^classification}}  {{/classification}}
@@ -333,7 +330,6 @@
             {{#enzyme}}
                 <table id="glycosylation-table">
                 </table>
-
             {{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}
             </div>
             </div>
@@ -354,13 +350,19 @@
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
-
+                        {{ #glycoct}}
                         <strong>GLYCOCT</strong>
-                        <pre>{{ glycoct }}</pre>
+                        <pre id="break">{{{ glycoct}}}</pre>
+                        {{ /glycoct}}
+
+                        {{ #wurcs}}
                         <strong>WURCS</strong>
-                        <pre>{{ wurcs}}</pre>
+                        <pre>{{{ wurcs}}}</pre>
+                        {{/wurcs}}
+
+                        {{ #iupac }}
                         <strong>IUPAC</strong>
-                        <pre>{{ iupac }}</pre>
+                     <pre>{{{iupac }}}</pre>{{/iupac }}
                     </div>
                 </div>
             </ul>
