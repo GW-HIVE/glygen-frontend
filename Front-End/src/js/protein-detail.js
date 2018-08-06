@@ -67,6 +67,7 @@ function ajaxSuccess(data) {
                 var glycan = data.glycosylation[i];
                 itemsGlycosyl.push({
                     glytoucan_ac: glycan.glytoucan_ac,
+
                     residue: glycan.residue + glycan.position,
                     type: glycan.type,
                     evidence: glycan.evidence
@@ -132,7 +133,16 @@ function ajaxSuccess(data) {
                 formatter: function (value, row, index, field) {
                     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
                 }
-            },
+             },
+                {
+                    field: 'imageFormat',
+                    title: 'Glycan_image',
+                    sortable: true,
+                    formatter: function imageFormat(value, row, index, field) {
+                        var url = getWsUrl('glycan_image', row.glytoucan_ac);
+                        return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
+                    }
+                },
             {
                 field: 'type',
                 title: 'Type',

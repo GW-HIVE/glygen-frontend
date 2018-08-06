@@ -294,7 +294,7 @@
                     <div class="panel-body">
                         {{#pathway}}
                         <p class="panelmaincontent">
-                            <li class="list-group">{{resource}} : {{name}} ({{id}})</li>
+                            <li class="list-group"><strong>{{resource}}</strong> : {{name}} ({{id}})</li>
                         </p>
                         {{/pathway}}
                         {{^pathway}} No data available. {{/pathway}}
@@ -490,7 +490,7 @@
                         <li>Journal:{{journal}}</li>
                         <li>{{title}}</li>
                         <li>
-                            <i class="fas fa-book"></i><a
+                            <i class="fas fa-book"></i>PMID:<a
                                 href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" target="_blank">{{pmid}}</a>
                         </li>
                         {{/publication}} {{^publication}} No data available. {{/publication}}
