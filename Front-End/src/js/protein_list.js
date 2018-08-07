@@ -322,7 +322,7 @@ function ajaxListSuccess(data) {
                     // protein_name_short: protein.protein_name_short,
                     organism: protein.organism,
                      refseq_name:protein.refseq_name,
-                     refseq_id:protein.refseq_id
+                    refseq_ac:protein.refseq_id
                 });
             }
         }
