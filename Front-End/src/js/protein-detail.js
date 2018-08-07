@@ -127,7 +127,7 @@ function ajaxSuccess(data) {
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
             columns: [{
-                field: 'glytoucan ac',
+                field: 'glytoucan_ac',
                 title: 'GlytouCan Ac',
                 sortable: true,
                 formatter: function (value, row, index, field) {
