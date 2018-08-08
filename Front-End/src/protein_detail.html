@@ -126,33 +126,33 @@
                             <!--always try to use double quotes for HTML attributes. -->
                             <div class="col-md-12 col-xs-6">
                                 {{#uniprot_id}}
-                                <li class="list-group"><strong>Uniprot Name:</strong> 
+                                <li class="list-group"><strong>UniProt ID:</strong> 
                                     <a class="panelcontent" href="http://www.uniprot.org/uniprot/{{uniprot_id}}"
                                        target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
 
-                                <li class="list-group"><strong>Uniprot Accession:</strong> {{uniprot_canonical_ac}}</li>
+                                <li class="list-group"><strong>UniProt accession:</strong> {{uniprot_canonical_ac}}</li>
 
                                 {{#refseq}}
-                                <li class="list-group"><strong>RefSeq ID:</strong> 
+                                <li class="list-group"><strong>RefSeq accession:</strong> 
                                     <a class="panelcontent" href="{{{url}}}" target="_blank">{{ac}}</a>
                                 </li>
                                 <li class="list-group"><strong>RefSeq name:</strong> {{name}}</li>
                                 {{/refseq}}
 
-                                <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
-                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass.monoisotopic_mass}} Da</li>
+                                <li class="list-group"><strong>Chemical mass:</strong> {{mass.chemical_mass}} Da</li>
                                 {{#recommendedname}}
                                 {{#full}}
-                                <li class="list-group"><strong>Recommended
-                                    Name:</strong> {{recommendedname.full}} 
+                                <li class="list-group"><strong>UniProt recommended
+                                    name:</strong> {{recommendedname.full}} 
                                     {{#short}} ({{recommendedname.short}}) {{/short}}
                                 </li>
                                 {{/full}}
                                 {{/recommendedname}}
                                 {{#gene}}
-                                <li class="list-group"><strong>Gene Name:</strong> 
+                                <li class="list-group"><strong>Gene name:</strong> 
                                     <a href="{{{url}}}" target="_blank">{{name}}</a>
                                 </li>
                                 {{/gene}}
@@ -317,7 +317,7 @@
                             {{#isoforms}}
                             <div class='col-md-12 col-xs-12'>
                                 <p class="panelmaincontent">
-                                    <li class="list-group"><strong>Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
+                                    <li class="list-group"><strong>UniProt isoform accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
                                 </p>
                                 {{#locus}}
                                 {{#chromosome}}
