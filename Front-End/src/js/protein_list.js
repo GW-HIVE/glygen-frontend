@@ -318,10 +318,9 @@ function ajaxListSuccess(data) {
                     uniprot_canonical_ac: protein.uniprot_canonical_ac,
                     mass: protein.mass,
                     gene_name: protein.gene_name,
-                    protein_name_long: protein.protein_name_long,
-
+                    protein_short_long: protein.protein_name_long,
                     organism: protein.organism,
-                     refseq_name:protein.refseq_name,
+                    refseq_name:protein.refseq_name,
                     refseq_ac:protein.refseq_ac
                 });
             }
