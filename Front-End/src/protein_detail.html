@@ -97,6 +97,13 @@
             <li>
                 <a href="#basics9">Mutation</a>
             </li>
+
+            <li>
+                <a href="#basics11">Expression Tissue</a>
+            </li>
+            <li>
+                <a href="#basics12">Expression Disease</a>
+            </li>
             <li>
                 <a href="#basics10">Publication</a>
             </li>
@@ -132,10 +139,10 @@
                                 </li>
                                 {{/uniprot_id}}
 
-                                <li class="list-group"><strong>UniProt accession:</strong> {{uniprot_canonical_ac}}</li>
+                                <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
 
                                 {{#refseq}}
-                                <li class="list-group"><strong>RefSeq accession:</strong> 
+                                <li class="list-group"><strong>RefSeq Accession:</strong>
                                     <a class="panelcontent" href="{{{url}}}" target="_blank">{{ac}}</a>
                                 </li>
                                 <li class="list-group"><strong>RefSeq name:</strong> {{name}}</li>
@@ -471,6 +478,52 @@
                         </div>
                     </div>
                 </div>
+            </ul>
+
+
+            <ul id="basics11" class="cd-faq-group selected">
+                <!-- added new class -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Expression Tissue</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class='col-md-12 col-xs-12'>
+                                {{#expression_tissue}}
+                                <table id="expressionTissue-table">
+                                </table>
+                                {{/expression_tissue}}
+                                {{^expression_tissue}}
+                                No data available.
+                                {{/expression_tissue}}
+                            </div>
+                        </div>
+            </ul>
+
+
+            <ul id="basics12" class="cd-faq-group selected">
+                <!-- added new class -->
+                <div class="panel panel-default">
+
+                    <div class="gg-panel-heading">
+                        <!-- added new class -->
+                        <h4>Expression Disease</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class='col-md-12 col-xs-12'>
+                                {{#expression_disease}}
+                                <table id="expressionDisease-table">
+                                </table>
+                                {{/expression_disease}}
+                                {{^expression_disease}}
+                                No data available.
+                                {{/expression_disease}}
+                            </div>
+                        </div>
             </ul>
 
             <ul id="basics10" class="cd-faq-group selected">

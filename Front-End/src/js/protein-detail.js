@@ -22,11 +22,8 @@ function formatSequence (sequenceString) {
         var y = sequenceString.substr(x, perLine);
         output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
     }
-
-    // return the newly created string
     return output;
 }
-
 
 
 
@@ -46,7 +43,6 @@ function ajaxSuccess(data) {
         data.sequence.sequence = formatSequence(string);
 
 
-
         if (data.isoforms) {
             for (var i = 0; i < data.isoforms.length; i++) {
                 // assign the newly result of running formatSequence() to replace the old value
@@ -59,7 +55,8 @@ function ajaxSuccess(data) {
         var $container = $('#content');
         var itemsGlycosyl = [];
         var itemsMutate = [];
-
+        var itemsExpressionTissue = [];
+        var itemsExpressionDisease = [];
 
         // filling in glycosylation data
         if (data.glycosylation) {
@@ -67,7 +64,6 @@ function ajaxSuccess(data) {
                 var glycan = data.glycosylation[i];
                 itemsGlycosyl.push({
                     glytoucan_ac: glycan.glytoucan_ac,
-
                     residue: glycan.residue + glycan.position,
                     type: glycan.type,
                     evidence: glycan.evidence
@@ -77,6 +73,39 @@ function ajaxSuccess(data) {
             }
         }
 
+
+// filling in expression_disease
+        if (data.expression_disease) {
+            for (var i = 0; i < data.expression_disease.length; i++) {
+                var expressionD = data.expression_disease[i];
+                itemsExpressionDisease.push({
+                    name: expressionD.name,
+                    disease: expressionD.disease,
+                    significant: expressionD.significant,
+                    trend: expressionD.trend,
+                    evidence: expressionD.evidence
+                    // "significant":"yes",
+                    // "trend":"down",
+
+                });
+            }
+        }
+
+
+// filling in expression_tissue
+        if (data.expression_tissue) {
+            for (var i = 0; i < data.expression_tissue.length; i++) {
+                var expressionT = data.expression_tissue[i];
+                itemsExpressionTissue.push({
+                    name: expressionT.name,
+                    tissue: expressionT.tissue,
+                    present: expressionT.present,
+                    evidence: expressionT.evidence
+
+
+                });
+            }
+        }
 
 // log it to see what would get sent to mustache
         console.log(data);
@@ -100,8 +129,6 @@ function ajaxSuccess(data) {
                 });
             }
         }
-
-
 
 
         $container.html(html);
@@ -133,7 +160,7 @@ function ajaxSuccess(data) {
                 formatter: function (value, row, index, field) {
                     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
                 }
-             },
+            },
                 {
                     field: 'imageFormat',
                     title: 'Glycan_image',
@@ -143,17 +170,17 @@ function ajaxSuccess(data) {
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
                     }
                 },
-            {
-                field: 'type',
-                title: 'Type',
-                sortable: true
-            },
+                {
+                    field: 'type',
+                    title: 'Type',
+                    sortable: true
+                },
 
-            {
-                field: 'residue',
-                title: 'Residue',
-                sortable: true
-            }],
+                {
+                    field: 'residue',
+                    title: 'Residue',
+                    sortable: true
+                }],
             pagination: 10,
             data: itemsGlycosyl,
             detailView: true,
@@ -170,7 +197,7 @@ function ajaxSuccess(data) {
             },
 
         });
-
+        $('#loading_image').fadeOut();
         // mutation table
         $('#mutation-table').bootstrapTable({
             columns: [{
@@ -178,39 +205,39 @@ function ajaxSuccess(data) {
                 title: 'Annotation name',
                 sortable: true
             },
-            {
-                field: 'disease',
-                title: 'Disease',
-                sortable: true,
-                formatter: function (value, row, index, field) {
-                    var diss;
-                    if(value.icd10)
-                        diss = value.name + " (ICD10:"+ value.icd10 +" ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
-                    else
-                        diss = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
-                    return diss;
-                }
-            },
-            {
-                field: 'start_pos',
-                title: 'Start pos',
-                sortable: true
-            },
-            {
-                field: 'end_pos',
-                title: 'End pos',
-                sortable: true
-            },
-            {
-                field: 'sequence',
-                title: 'Sequence',
-                sortable: true
-            },
-            {
-                field: 'type',
-                title: 'Type',
-                sortable: true
-            }],
+                {
+                    field: 'disease',
+                    title: 'Disease',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var diss;
+                        if (value.icd10)
+                            diss = value.name + " (ICD10:" + value.icd10 + " ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                        else
+                            diss = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                        return diss;
+                    }
+                },
+                {
+                    field: 'start_pos',
+                    title: 'Start pos',
+                    sortable: true
+                },
+                {
+                    field: 'end_pos',
+                    title: 'End pos',
+                    sortable: true
+                },
+                {
+                    field: 'sequence',
+                    title: 'Sequence',
+                    sortable: true
+                },
+                {
+                    field: 'type',
+                    title: 'Type',
+                    sortable: true
+                }],
             pagination: 10,
             data: itemsMutate,
             detailView: true,
@@ -226,10 +253,106 @@ function ajaxSuccess(data) {
                 return html.join('');
             },
 
+
         });
-    }
-    $('#loading_image').fadeOut();
+
+        $('#loading_image').fadeOut();
+
+
+// expression Disease table
+        $('#expressionDisease-table').bootstrapTable({
+            columns: [
+                {
+                    field: 'disease',
+                    title: 'Disease',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var diss1;
+                        if (value.icd10)
+                            diss1 = value.name + " (ICD10:" + value.icd10 + " ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                        else
+                            diss1 = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                        return diss1;
+                    }
+                },
+
+
+                {
+                    field: 'significant',
+                    title: 'Significant',
+                    sortable: true
+                },
+                {
+                    field: 'trend',
+                    title: 'Expression Trend',
+                    sortable: true
+                },
+            ],
+            pagination: 10,
+            data: itemsExpressionDisease,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var html = [];
+                var evidences = row.evidence;
+                for (var i = 0; i < evidences.length; i++) {
+                    var evidence = evidences[i];
+                    html.push("<div class='row'>");
+                    html.push("<li class='col-xs-12'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li>");
+                    html.push("</div>");
+                }
+                return html.join('');
+            },
+
+        });
+
+        $('#loading_image').fadeOut();
+
+
+
+// expression Disease table
+    $('#expressionTissue-table').bootstrapTable({
+        columns: [
+            {
+                field: 'tissue',
+                title: 'Tissue',
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                        return value.name + " (UBERON:<a href='" + value.url + "' target='_blank'>"  + value.uberon + "</a>)"
+                }
+            },
+            {
+                field: 'present',
+                title: 'Present',
+                sortable: true
+            }
+
+        ],
+
+
+
+
+
+        pagination: 10,
+        data: itemsExpressionTissue,
+        detailView: true,
+        detailFormatter: function (index, row) {
+            var html = [];
+            var evidences = row.evidence;
+            for (var i = 0; i < evidences.length; i++) {
+                var evidence = evidences[i];
+                html.push("<div class='row'>");
+                html.push("<div class='col-xs-12'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                html.push("</div>");
+            }
+            return html.join('');
+        },
+
+    });
 }
+$('#loading_image').fadeOut();
+}
+
+
 
 
 
