@@ -61,7 +61,7 @@
                         <option value="mass">Mass</option>
                         <option value="organism">Organism</option>
                         <option value="refseq_name">RefSeq Name</option>
-                        <option value="refseq_ac">RefSeq Acc</option>
+                        <option value="refseq_ac">RefSeq Accession</option>
                     </select>
                     <select class="dir-select form-control" onchange="xdir(this);">
                         <option value="asc" selected>ASC</option>
@@ -132,7 +132,7 @@
                     <!--Glycan Typeahead-->
                     {{#glycan.glytoucan_ac}}
                     <tr>
-                        <td>glycan</td>
+                        <td>Glycan</td>
                         <td>{{glycan.glytoucan_ac}} {{glycan.relation}}</td>
                     </tr>
                     {{/glycan.glytoucan_ac}}
@@ -163,7 +163,7 @@
                     <!--pathway Typeahead-->
                     {{#pathway_id}}
                     <tr>
-                        <td>PATHWAY ID</td>
+                        <td>Pathway Id</td>
                         <td>{{pathway_id}}</td>
                     </tr>
                     {{/pathway_id}}
@@ -205,7 +205,7 @@
                             </th>
                             <th data-field="organism">Organism</th>
                             <th data-field="refseq_name">RefSeq Name</th>
-                            <th data-field="refseq_ac">RefSeq Acc</th>
+                            <th data-field="refseq_ac">RefSeq Accession</th>
 
                         </tr>
                     </thead>
