@@ -25,7 +25,19 @@ function formatSequence (sequenceString) {
     return output;
 }
 
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
 
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
 
 function ajaxSuccess(data) {
 
@@ -38,18 +50,17 @@ function ajaxSuccess(data) {
         activityTracker("user", data.uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
         var string = data.sequence.sequence;
-
-
         data.sequence.sequence = formatSequence(string);
 
 
-        if (data.isoforms) {
-            for (var i = 0; i < data.isoforms.length; i++) {
-                // assign the newly result of running formatSequence() to replace the old value
-                data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
-            }
-        }
 
+        for (var i = 0; i < data.isoforms.length; i++) {
+            // assign the newly result of running formatSequence() to replace the old value
+            data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
+            data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
+            data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+            // console.log(data.isoforms[i]);
+        }
 
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
