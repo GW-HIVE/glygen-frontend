@@ -108,7 +108,8 @@ pre {
     overflow-wrap: break-word;
 }
 .cd-close-panel {
-    right:25px;
+    padding-right:70px;
+    top:20px;
 }
 #gene {
     padding-left: 45px;

@@ -301,7 +301,7 @@
                     <div class="panel-body">
                         {{#pathway}}
                         <p class="panelmaincontent">
-                            <li class="list-group"><strong>{{resource}}</strong> : {{name}} ({{id}})</li>
+                            <li class="list-group"><strong>{{resource}}</strong> : {{name}} <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a></li>
                         </p>
                         {{/pathway}}
                         {{^pathway}} No data available. {{/pathway}}
@@ -539,17 +539,34 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#publication}}
-                        <li class="panelmaincontent2">
-                        <li>Journal:{{journal}}</li>
-                        <li>{{title}}</li>
-                        <li>
-                            <i class="fas fa-book"></i>PMID:<a
-                                href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" target="_blank">{{pmid}}</a>
-                        </li>
+                        <p class="panelmaincontent">
+                            <li class="list-group" id="panelmaincontent1"><i class="fas fa-book"></i>PMID:<a
+                                    href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" target="_blank">{{pmid}}</a><br>
+                                <strong>Journal:</strong>{{journal}}<br>
+                        <strong>Title:</strong>{{title}}</li>
+
                         {{/publication}} {{^publication}} No data available. {{/publication}}
                     </div>
                 </div>
             </ul>
+
+
+
+
+            <!--{{#crossref}}-->
+            <!--<p class="panelmaincontent">-->
+            <!--<li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>-->
+                <!--<a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>-->
+            <!--</li>-->
+            <!--</p>-->
+            <!--{{/crossref}} {{^crossref}} No data available. {{/crossref}}-->
+
+
+
+
+
+
+
 
 
             <a href="#0" class="cd-close-panel">Close</a>
