@@ -94,7 +94,7 @@ function getWsUrl(request, id, id1) {
             return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
             break;
         case "search_glycangene":
-            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/0/" + id;
+            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/9606/" + id;
             break;
 
         // usecases list API Q3 and 4
