@@ -21,7 +21,7 @@ function getWsUrl(request, id) {
     var ws_userID = ws_base+"auth/userid";
     var ws_contact = ws_base+"auth/contact";
     var ws_useCaseSearch=ws_base+"usecases";
-    var ws_base_loci=ws_base+"usecases";
+    // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
 
@@ -121,13 +121,15 @@ function getWsUrl(request, id) {
         //Usecases search webservices Q7-Q8-Q9
 
         case "search_glycosyltransferases":
-            return ws_useCaseSearch + "/species_to_glycosyltransferases/9606/" + id;
+            return ws_useCaseSearch + "/species_to_glycosyltransferases/" + id;
             break;
         case "search_glycohydrolases":
-            return ws_useCaseSearch + "/species_to_glycohydrolases/0/" + id;
+            return ws_useCaseSearch + "/species_to_glycohydrolases/" + id;
             break;
         case "search_glycoproteins":
-            return ws_useCaseSearch + "/species_to_glycoproteins/9606/both/" + id;
+            // return ws_useCaseSearch + "/species_to_glycoproteins/" +id/ +id1;
+
+            return ws_useCaseSearch + "/species_to_glycoproteins/ "+id/"both/";
             break;
 
 
