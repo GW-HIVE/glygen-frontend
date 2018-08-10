@@ -242,17 +242,22 @@
                             <div class="col-sm-3 gg-form-group">
                                 <select class="form-control organism" id="organism3">
                                 <option value="0">Select Organism</option>
-                            </select>
-                            <strong>Type:</strong>
-                            <select name="species_type" class="biginput gg-faq-formInput" id="species">
-                                <option value="">Select Type </option>
-                                <option value="reported">Reported</option>
-                                <option value="predicted">Predicted</option>
-                                <option value="both">Both</option>
-                            </select>
-                            <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Submit</button>
-
->>>>>>> 0d7e4bbb0a8ee284f1546c2ce4996472c826687c
+                                </select>
+                            </div>
+                            
+                            <label class="control-label col-sm-1">Type:</label>
+                            
+                            <div class="col-sm-3 gg-form-group">
+                                <select name="species_type" class="biginput form-control" id="species">
+                                    <option value="">Select Type </option>
+                                    <option value="reported">Reported</option>
+                                    <option value="predicted">Predicted</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Submit</button>
+                            </div>
                         </div>
 
                         <!-- cd-faq-content -->
