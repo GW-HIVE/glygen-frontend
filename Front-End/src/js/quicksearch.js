@@ -358,7 +358,7 @@ function createOption(ddl, text, value) {
 
 function glycosylTransferases(){
 
-    var id = $("#glycosyltransferases").val();
+    var id = $("#organism1").val();
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycosyltransferases",id),
@@ -404,7 +404,7 @@ function createOption(ddl, text, value) {
 
 function glycoHydrolases(){
 
-    var id = $("#glycohydrolases").val();
+    var id = $("#organism2").val();
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycohydrolases",id),
@@ -452,10 +452,13 @@ function createOption(ddl, text, value) {
 
 function glycoProteins(){
 
-    var id = $("#glycoproteins").val();
+    // var id = $("#organism3").val();
+    var id=$("#glycosyltransferasesdisease").val();
+
+    // var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins",id),
+        url: getWsUrl("search_glycoproteins" ,id),
         // data: json,
         success: function (results) {
             if (results.list_id) {
