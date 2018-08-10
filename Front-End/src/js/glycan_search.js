@@ -319,7 +319,7 @@ function submitvalues() {
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
     var enzymes={}
     if(input_enzyme){
-        enzyme = {
+        enzymes = {
             "id":input_enzyme,
                 "type":"gene"
         }

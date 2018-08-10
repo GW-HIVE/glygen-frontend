@@ -309,6 +309,7 @@ function ajaxProteinSearchSuccess() {
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
     var glycosylation_evidence = $("#glycosylation_evidence").val();
+
     var formObject = {
         operation: "AND",
         query_type: "search_protein",

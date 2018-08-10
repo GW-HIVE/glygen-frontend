@@ -281,7 +281,7 @@
         <!--End Pathway-->
 
         <!-- Glycosylation Evidences-->
-        <div class="gg-form-group row" id="glycosylation_evidence" style="margin-top: -20px;">
+        <div class="gg-form-group row" id="glycosylation_evidence_xx" style="margin-top: -20px;">
             <label class="control-label col-sm-4" for="organism">
                 <span>
                     <a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
@@ -290,12 +290,10 @@
                 </span> Glycosylation Evidence</label>
 
             <div class="col-sm-8">
-                <select class="form-control">
-
-                    <option value="any">Select Glycosylation Evidence Type</option>
-                    <option value="experimental">Experiment</option>
-                    <option value="calculated">Predicted</option>
-                    <option value="none">Any</option>
+                <select id="glycosylation_evidence" class="form-control">
+                    <option value="both">Select Glycosylation Evidence Type</option>
+                    <option value="reported">Reported</option>
+                    <option value="predicted">Predicted</option>
                 </select>
             </div>
         </div>
