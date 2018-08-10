@@ -79,33 +79,52 @@
                     <!--What are the enzymes involved in the biosynthesis of glycan X in human -->
                     <li>
                         <a class="cd-faq-trigger" id="Q1">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
-                        <div class="cd-faq-content">
-                            <strong>Glycan X:</strong>
-                            <input class="gg-faq-formInput" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme">
-                            <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: G00279YF </div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
+                            
+                            <div class="col-sm-6 gg-form-group"> 
+                                <input class="form-control" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme">
+                                
+                                <div class="gg-text-example"> Example: G00279YF </div>
+                            </div>
+                            <div>     
+                                <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Submit</button>
+                            </div>
                         </div>
                     </li>
 
                     <!--Which proteins have been shown to bear glycan X and which site is this glycan attached to -->
                     <li>
                         <a class="cd-faq-trigger" id="Q2">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
-                        <div class="cd-faq-content">
-                            <strong>Glycan X:</strong>
-                            <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite">
-                            <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example">Example: G74290AC </div>
+                        
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
+                            
+                            <div class="col-sm-6 gg-form-group"> 
+                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite">
+                                
+                                <div class="gg-text-example">Example: G74290AC </div>
+                            </div>
+                            <div> 
+                                <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Submit</button>
+                            </div>
                         </div>
                     </li>
 
                     <!--Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q3">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
-                        <div class="cd-faq-content">
-                            <strong>Glycan X:</strong>
-                            <input class="gg-faq-formInput" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene">
-                            <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: G74290AC </div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
+                            
+                            <div class="col-sm-6 gg-form-group">
+                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene">
+                                
+                                <div class="gg-text-example"> Example: G74290AC </div>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Submit</button>
+                            </div>   
                         </div>
                     </li>
 
@@ -122,11 +141,16 @@
                     <!--Q.4 What are the orthologues of protein X in different species? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
-                        <div class="cd-faq-content">
-                            <strong>Protein:</strong>
-                            <input class="gg-faq-formInput" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues">
-                            <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: P26572-1</div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Protein:</label>
+                            <div class="col-sm-6 gg-form-group">
+                                <input class="form-control" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues">
+                                
+                                <div class="gg-text-example"> Example: P26572-1</div>
+                            </div>
+                            <div>
+                               <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Submit</button> 
+                            </div>   
                         </div>
                     </li>
 
@@ -134,23 +158,33 @@
                     <!--Q.5 What are the functions of protein X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q5">What are the functions of protein X?</a>
-                        <div class="cd-faq-content">
-                            <strong>Protein:</strong>
-                            <input class="gg-faq-formInput" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction">
-                            <!--//<label id="protein-error">no result found</label>-->
-                            <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: P26572-1 </div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Protein:</label>
+                            <div class="col-sm-6 gg-form-group">
+                                <input class="form-control" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction">
+                                <!--//<label id="protein-error">no result found</label>-->
+                                <div class="gg-text-example"> Example: P26572-1 </div>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Submit</button>
+                            </div>  
                         </div>
                     </li>
 
                     <!--Q.6 Which glycans might have been synthesized in mouse using enzyme X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q6">Which glycans might have been synthesized in mouse using enzyme X?</a>
-                        <div class="cd-faq-content">
-                            <strong>Enzyme:</strong>
-                            <input class="gg-faq-formInput" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession">
-                            <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: P26572-1 </div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Enzyme:</label>
+                            
+                            <div class="col-sm-6 gg-form-group">
+                                <input class="form-control" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession">
+                                
+                                <div class="gg-text-example"> Example: P26572-1 </div>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Submit</button>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -167,28 +201,33 @@
                     <!--Q.7 What are the glycosyltransferases in species X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
-                        <div class="cd-faq-content">
-                            <strong>Species:</strong>
-                            <select class="gg-faq-formInput organism" id="organism1">
-                                <option value="0">Select Organism</option>
-                            </select>
-
-                            <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">Submit</button>
-
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Species:</label>
+                            <div class="col-sm-6 gg-form-group">
+                                <select class="form-control organism" id="organism1">
+                                    <option value="0">Select Organism</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">Submit</button>
+                            </div>
                         </div>
                         <!-- cd-faq-content -->
                     </li>
                     <!--Q.8 What are the glycohydrolases in species X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
-                        <div class="cd-faq-content">
-                            <strong>Species:</strong>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Species:</label>
 
-                            <select class="gg-faq-formInput organism" id="organism2">
+                            <div class="col-sm-6 gg-form-group"> 
+                                <select class="form-control organism" id="organism2">
                                 <option value="0">Select Organism</option>
-                            </select>
-                            <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">Submit</button>
-
+                                </select>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">Submit</button>
+                            </div>
                         </div>
                         <!-- cd-faq-content -->
                     </li>
@@ -196,21 +235,28 @@
                     <!--Q.9 What are the reported or predicted glycosylated proteins in species X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q9">What are the reported or predicted glycosylated proteins in species X?</a>
-                        <div class="cd-faq-content">
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
 
-                            <strong>Species:</strong>
-                            <select class="gg-faq-formInput organism" id="organism3">
+                            <label class="control-label col-sm-2">Species:</label>
+                            
+                            <div class="col-sm-3 gg-form-group">
+                                <select class="form-control organism" id="organism3">
                                 <option value="0">Select Organism</option>
-                            </select>
-                            <strong>Type:</strong>
-                            <select name="species_type" class="biginput gg-faq-formInput" id="species">
-                                <option value="">Select Type of Species</option>
-                                <option value="reported">Reported</option>
-                                <option value="predicted">Predicted</option>
-                                <option value="both">Both</option>
-                            </select>
-                            <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Submit</button>
-
+                                </select>
+                            </div>
+                            
+                            <label class="control-label col-sm-1">Type:</label>
+                            <div class="col-sm-3 gg-form-group">
+                                <select name="species_type" class="biginput form-control" id="species">
+                                    <option value="">Select Type of Species</option>
+                                    <option value="reported">Reported</option>
+                                    <option value="predicted">Predicted</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Submit</button>
+                            </div>
                         </div>
 
                         <!-- cd-faq-content -->
@@ -224,11 +270,17 @@
                     <li>
                         <!--Q.10 Which glycosyltransferases are known to be involved in disease X? -->
                         <a class="cd-faq-trigger" href="#0" id="Q10">Which glycosyltransferases are known to be involved in disease X?</a>
-                        <div class="cd-faq-content">
-                            <strong>Disease:</strong>
-                            <input class="gg-faq-formInput" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease">
-                            <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Submit</button>
-                            <div class="gg-text-example"> Example: Gilbert syndrome </div>
+                        <div class="cd-faq-content form-group form-horizontal padding-bottom">
+                            <label class="control-label col-sm-2">Disease:</label>
+                            
+                            <div class="col-sm-6 gg-form-group"> 
+                                <input class="form-control" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease">
+                                
+                                <div class="gg-text-example"> Example: Gilbert syndrome </div>
+                            </div>
+                            <div>
+                                <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Submit</button>
+                            </div>    
                         </div>
                         <!-- cd-faq-content -->
                     </li>
