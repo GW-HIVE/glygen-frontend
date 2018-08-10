@@ -124,7 +124,7 @@ function getWsUrl(request, id) {
             return ws_useCaseSearch + "/species_to_glycosyltransferases/9606/" + id;
             break;
         case "search_glycohydrolases":
-            return ws_useCaseSearch + "/species_to_glycohydrolases/0/" + id;
+            return ws_useCaseSearch + "/species_to_glycohydrolases/9606/" + id;
             break;
         case "search_glycoproteins":
             return ws_useCaseSearch + "/species_to_glycoproteins/9606/both/" + id;
