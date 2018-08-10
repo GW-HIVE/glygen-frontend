@@ -337,7 +337,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         //     "id": input_enzyme,
         //     "type": "gene"
         // },
-        enzymes:enzymes,
+        enzyme:enzymes,
         glytoucan_ac: input_glycan_id,
         tax_id: input_organism ? parseInt(input_organism) : '',
         glycan_type: input_glycantype,
