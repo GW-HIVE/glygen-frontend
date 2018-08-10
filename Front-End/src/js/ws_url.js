@@ -88,7 +88,7 @@ function getWsUrl(request, id) {
         //Usecases search webservices
 //Usecases search webservices Q1-Q2-Q3
         case "search_bioenzyme":
-            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/" + id;
+            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
             break;
         case "search_glycansite":
             return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
@@ -129,7 +129,7 @@ function getWsUrl(request, id) {
         case "search_glycoproteins":
             // return ws_useCaseSearch + "/species_to_glycoproteins/" +id/ +id1;
 
-            return ws_useCaseSearch + "/species_to_glycoproteins/9606/both/" + id;
+            return ws_useCaseSearch + "/species_to_glycoproteins/ "+id/"both/";
             break;
 
 
