@@ -292,6 +292,12 @@ p {
     padding-top: 10px;
 }
 
+.statistics-table tr td {
+    border: none !important;
+    padding-bottom: 0 !important; 
+    padding-top: 0 !important;
+/*    padding: 0 18px !important;*/
+}
 /* -------------------------
     Alert 
 ---------------------------- */

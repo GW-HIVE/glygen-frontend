@@ -48,11 +48,10 @@ function ajaxSuccess(data) {
             }
         }
 
-         //Adding break
+         //Adding breaklines
          data.glycoct = data.glycoct.replace(/ /g, '<br>');
          data.wurcs = data.wurcs.replace(/ /g, '<br>');
-
-        data.mass = addCommas(data.mass);
+         data.mass = addCommas(data.mass);
 
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
@@ -71,8 +70,6 @@ function ajaxSuccess(data) {
                 } else {
                     $this.text('+');
                     $this.parent().next().hide();
-
-
                 }
             });
         });

@@ -358,7 +358,7 @@ function createOption(ddl, text, value) {
 
 function glycosylTransferases(){
 
-    var id = $("#glycosyltransferases").val();
+    var id = $("#organism1").val();
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycosyltransferases",id),
@@ -404,7 +404,7 @@ function createOption(ddl, text, value) {
 
 function glycoHydrolases(){
 
-    var id = $("#glycohydrolases").val();
+    var id = $("#organism2").val();
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycohydrolases",id),
@@ -452,10 +452,13 @@ function createOption(ddl, text, value) {
 
 function glycoProteins(){
 
-    var id = $("#glycoproteins").val();
+    var id = $("#organism3").val();
+    // var id=$("#glycosyltransferasesdisease").val();
+
+    var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins",id),
+        url: getWsUrl("search_glycoproteins" ,id,id1),
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -474,46 +477,82 @@ function glycoProteins(){
 
 //Q.10- What are the reported or predicted glycosylated proteins in species X?
 
-// $("#glycosyltransferasesdisease").autocomplete({
-//     source: function (request, response) {
-//
-//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("disease_name", request.term);
-//
-//
-//         $.getJSON(queryUrl, function (suggestions) {
-//             suggestions.length = Math.min(suggestions.length, 10);
-//
-//             response(suggestions);
-//         });
-//     },
-//     minLength: 1,
-//     select: function (event, ui) {
-//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-//     }
-// });
+$("#glycosyltransferasesdisease").autocomplete({
+    source: function (request, response) {
+
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("disease_name", request.term);
 
 
-//
-// function glycosyTtransferasesDisease(){
-//
-//     var id = $("#glycosyltransferasesdisease").val();
-//
-//     //it seems  need that taxID m can we just set it to 10090 ?
-//     $.ajax({
-//         type: 'POST',
-//         url: getWsUrl("search_disease",id),
-//         success: function(results) {
-//             if (results.list_id) {
-//                 window.location = './protein_list.html?id=' + results.list_id;
-//             }
-//             else {
-//                 displayErrorByCode('no-results-found');
-//             }
-//
-//         }
-//
-//     })
-// }
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 10);
 
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
+
+
+function glycosyTtransferasesDisease(){
+
+    var id = $("#glycosyltransferasesdisease").val();
+
+    //it seems  need that taxID m can we just set it to 10090 ?
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_disease",id),
+        success: function(results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
+
+
+
+
+
+
+function glycosyTtransferasesDisease(){
+    // displays the loading gif when the ajax call starts
+    $('#loading_image').fadeIn();
+
+
+    var disease = $("#glycosyltransferasesdisease").val();
+
+
+
+    var formObject = {
+        do_name: disease,
+        tax_id: 0
+
+    };
+    var json = "query=" + JSON.stringify(formObject);
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_disease"),
+        data: json,
+        success: function(results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+            }
+            else {
+                displayErrorByCode('no-results-found');
+            }
+
+        }
+
+    })
+}
 //Q.10.
 

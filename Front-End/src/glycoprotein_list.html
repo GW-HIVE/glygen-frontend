@@ -55,13 +55,13 @@
                     <label>Sort By</label>
                     <select class="sort-select form-control" onchange="xsort(this);">
                         <!-- <option selected value="id">ID</option> -->
-                        <option value="uniprot_canonical_ac">Protein ID</option>
+                        <option value="uniprot_canonical_ac">UniProt Accession</option>
                         <option value="gene_name">Gene Name</option>
-                        <option value="protein_name_short">Protein Name</option>
+                        <option value="protein_name_short">UniProt Name</option>
                         <option value="mass">Mass</option>
                         <option value="organism">Organism</option>
                         <option value="refseq_name">RefSeq Name</option>
-                        <option value="refseq_ac">RefSeq Acc</option>
+                        <option value="refseq_ac">RefSeq Accession</option>
                     </select>
                     <select class="dir-select form-control" onchange="xdir(this);">
                         <option value="asc" selected>ASC</option>
@@ -85,7 +85,7 @@
                     <!--Protein Typeahead-->
                     {{#uniprot_canonical_ac}}
                     <tr>
-                        <td>Protein Id</td>
+                        <td>UniProt Accession</td>
                         <td>{{uniprot_canonical_ac}}</td>
                     </tr>
                     {{/uniprot_canonical_ac}}
@@ -132,7 +132,7 @@
                     <!--Glycan Typeahead-->
                     {{#glycan.glytoucan_ac}}
                     <tr>
-                        <td>glycan</td>
+                        <td>Glycan</td>
                         <td>{{glycan.glytoucan_ac}} {{glycan.relation}}</td>
                     </tr>
                     {{/glycan.glytoucan_ac}}
@@ -163,7 +163,7 @@
                     <!--pathway Typeahead-->
                     {{#pathway_id}}
                     <tr>
-                        <td>PATHWAY ID</td>
+                        <td>Pathway Id</td>
                         <td>{{pathway_id}}</td>
                     </tr>
                     {{/pathway_id}}
@@ -197,15 +197,15 @@
                 <table id="gen-table" data-show-export="true" data-toggle="table">
                     <thead>
                         <tr>
-                            <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">Protein ID</th>
+                            <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">UniProt Accession</th>
                             <th data-field="gene_name">Gene Name</th>
-                            <th data-field="protein_name__short">Protein Name</th>
+                            <th data-field="protein_name__short">UniProt Name</th>
                             <th data-field="mass" data-formatter="MassFormatter">Native Mass
                                 <br>(Da)
                             </th>
                             <th data-field="organism">Organism</th>
                             <th data-field="refseq_name">RefSeq Name</th>
-                            <th data-field="refseq_ac">RefSeq Acc</th>
+                            <th data-field="refseq_ac">RefSeq Accession</th>
 
                         </tr>
                     </thead>
@@ -229,9 +229,9 @@
                 </select>
                 <label>Sort By</label>
                 <select class="sort-select form-control" onchange="xsort(this);">
-                    <option value="uniprot_canonical_ac">Protein ID</option>
+                    <option value="uniprot_canonical_ac">UniProt Accession</option>
                     <option value="gene_name">Gene Name</option>
-                    <option value="protein_name_long">Protein Name</option>
+                    <option value="protein_name_long">UniProt Name</option>
                     <option value="mass">Mass</option>
                     <option value="organism">Organism</option>
                     <option value="refseq_name">RefSeq Name</option>

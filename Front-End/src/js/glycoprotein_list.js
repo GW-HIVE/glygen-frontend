@@ -316,10 +316,10 @@ function ajaxListSuccess(data) {
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
-                    protein_name_short: protein.protein_name_short,
-                    organism: protein.organism
-                    // refseq_name:protein.refseq_name,
-                    // refseq_id:protein.refseq_id
+                    //protein_name_short: protein.protein_name_short,
+                    organism: protein.organism,
+                    refseq_name:protein.refseq_name,
+                    refseq_ac:protein.refseq_ac
                 });
             }
         }

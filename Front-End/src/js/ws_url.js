@@ -9,7 +9,7 @@
 //update:20 july://usecases search webservices
 //update:31 july:// New base URL updated.
 
-function getWsUrl(request, id) {
+function getWsUrl(request, id, id1) {
 
     // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
     var ws_base = "http://tst.api.glygen.org/";
@@ -21,7 +21,7 @@ function getWsUrl(request, id) {
     var ws_userID = ws_base+"auth/userid";
     var ws_contact = ws_base+"auth/contact";
     var ws_useCaseSearch=ws_base+"usecases";
-    var ws_base_loci=ws_base+"usecases";
+    // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
 
@@ -94,7 +94,7 @@ function getWsUrl(request, id) {
             return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
             break;
         case "search_glycangene":
-            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/0/" + id;
+            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/9606/" + id;
             break;
 
         // usecases list API Q3 and 4
@@ -121,20 +121,20 @@ function getWsUrl(request, id) {
         //Usecases search webservices Q7-Q8-Q9
 
         case "search_glycosyltransferases":
-            return ws_useCaseSearch + "/species_to_glycosyltransferases/9606/" + id;
+            return ws_useCaseSearch + "/species_to_glycosyltransferases/" + id;
             break;
         case "search_glycohydrolases":
-            return ws_useCaseSearch + "/species_to_glycohydrolases/0/" + id;
+            return ws_useCaseSearch + "/species_to_glycohydrolases/" + id;
             break;
         case "search_glycoproteins":
-            return ws_useCaseSearch + "/species_to_glycoproteins/9606/both/" + id;
+             return ws_useCaseSearch + "/species_to_glycoproteins/" +id + "/" + id1;
             break;
 
 
 
         //Usecases DISEASE webservices Q.10
         case "search_disease":
-            return ws_useCaseSearch + "/disease_to_glycosyltransferases/0/0050560/" + id;
+            return ws_useCaseSearch + "/disease_to_glycosyltransferases";
             break;
     }
 }
