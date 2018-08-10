@@ -9,7 +9,7 @@
 //update:20 july://usecases search webservices
 //update:31 july:// New base URL updated.
 
-function getWsUrl(request, id) {
+function getWsUrl(request, id, id1) {
 
     // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
     var ws_base = "http://tst.api.glygen.org/";
@@ -127,9 +127,7 @@ function getWsUrl(request, id) {
             return ws_useCaseSearch + "/species_to_glycohydrolases/" + id;
             break;
         case "search_glycoproteins":
-            // return ws_useCaseSearch + "/species_to_glycoproteins/" +id/ +id1;
-
-            return ws_useCaseSearch + "/species_to_glycoproteins/ "+id/"both/";
+             return ws_useCaseSearch + "/species_to_glycoproteins/" +id + "/" + id1;
             break;
 
 

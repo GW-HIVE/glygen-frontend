@@ -452,13 +452,13 @@ function createOption(ddl, text, value) {
 
 function glycoProteins(){
 
-    // var id = $("#organism3").val();
-    var id=$("#glycosyltransferasesdisease").val();
+    var id = $("#organism3").val();
+    // var id=$("#glycosyltransferasesdisease").val();
 
-    // var id1 = $("#species").val();
+    var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins" ,id),
+        url: getWsUrl("search_glycoproteins" ,id,id1),
         // data: json,
         success: function (results) {
             if (results.list_id) {
