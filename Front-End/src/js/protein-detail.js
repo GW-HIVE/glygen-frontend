@@ -166,21 +166,12 @@ function ajaxSuccess(data) {
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'glytoucan_ac',
-                title: 'GlytouCan Ac',
+                title: 'GlyTouCan Accession',
                 sortable: true,
                 formatter: function (value, row, index, field) {
                     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
                 }
             },
-                {
-                    field: 'imageFormat',
-                    title: 'Glycan_image',
-                    sortable: true,
-                    formatter: function imageFormat(value, row, index, field) {
-                        var url = getWsUrl('glycan_image', row.glytoucan_ac);
-                        return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
-                    }
-                },
                 {
                     field: 'type',
                     title: 'Type',
@@ -191,7 +182,17 @@ function ajaxSuccess(data) {
                     field: 'residue',
                     title: 'Residue',
                     sortable: true
-                }],
+                },
+                {
+                    field: 'imageFormat',
+                    title: 'Glycan Image',
+                    sortable: true,
+                    formatter: function imageFormat(value, row, index, field) {
+                        var url = getWsUrl('glycan_image', row.glytoucan_ac);
+                        return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
+                    }
+                }
+                ],
             pagination: 10,
             data: itemsGlycosyl,
             detailView: true,
