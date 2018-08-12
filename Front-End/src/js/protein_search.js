@@ -3,6 +3,7 @@
 //@update:6 June 2018
 //@update: 26 June 2018-web services changes updated
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
@@ -148,6 +149,26 @@ $("#pathway").autocomplete({
     }
 });
 
+/**
+ * gives appropriate search_init WS error message.
+ * @param {*} jqXHR 
+ * @param {*} textStatus 
+ * @param {*} errorThrown 
+ */
+function searchInitFailure(jqXHR, textStatus, errorThrown) {
+    var err = '';
+        if(textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror'){
+            err = textStatus;
+        }
+        else if (jqXHR.status === 0 || jqXHR.status == 404 || jqXHR.status == 500) {
+            err = jqXHR.status;
+        } else {
+            err = textStatus;
+        }
+    displayErrorByCode(err);
+    activityTracker("error", "", err+": "+errorThrown+": search_init WS error");
+    $('#loading_image').fadeOut();
+}
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
@@ -164,27 +185,49 @@ $(document).ready(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
-
-    $.getJSON(getWsUrl("search_init_protein"), function (result) {
-        searchInitValues = result;
-
-        var orgElement = $(".organism").get(0);
-        createOption(orgElement, result.organism[0].name, result.organism[0].id);
-        createOption(orgElement, result.organism[1].name, result.organism[1].id);
-        var mass_max = result.protein_mass.max;
-        var mass_min = result.protein_mass.min;
-        mass(mass_min, mass_max)
-        // check for ID to see if we need to load search values
-        // please do not remove this code as it is required prepopulate search values
-        var id = getParameterByName('id') || id;
-        if (id) {
-            LoadProteinSearchvalues(id);
-        }
-    })
-        .fail(function (result) {
-            activityTracker("error", "", result.status + ": search_init WS error");
-            console.log("error in search_init");
+        $.ajax({
+            dataType: "json",
+            url: getWsUrl("search_init_protein"),
+            timeout: 0,
+            error: searchInitFailure,
+            success: function (result) {
+                searchInitValues = result;
+        
+                var orgElement = $(".organism").get(0);
+                createOption(orgElement, result.organism[0].name, result.organism[0].id);
+                createOption(orgElement, result.organism[1].name, result.organism[1].id);
+                var mass_max = result.protein_mass.max;
+                var mass_min = result.protein_mass.min;
+                mass(mass_min, mass_max)
+                // check for ID to see if we need to load search values
+                // please do not remove this code as it is required prepopulate search values
+                var id = getParameterByName('id') || id;
+                if (id) {
+                    LoadProteinSearchvalues(id);
+                }
+            }
         });
+
+    // $.getJSON(getWsUrl("search_init_protein"), function (result) {
+    //     searchInitValues = result;
+
+    //     var orgElement = $(".organism").get(0);
+    //     createOption(orgElement, result.organism[0].name, result.organism[0].id);
+    //     createOption(orgElement, result.organism[1].name, result.organism[1].id);
+    //     var mass_max = result.protein_mass.max;
+    //     var mass_min = result.protein_mass.min;
+    //     mass(mass_min, mass_max)
+    //     // check for ID to see if we need to load search values
+    //     // please do not remove this code as it is required prepopulate search values
+    //     var id = getParameterByName('id') || id;
+    //     if (id) {
+    //         LoadProteinSearchvalues(id);
+    //     }
+    // })
+    //     .fail(ajaxSearchFailure,function (result) {
+    //         activityTracker("error", "", result.status + ": search_init WS error");
+    //         console.log("error in search_init");
+    //     });
 });
 
 /** Mass range function
@@ -223,8 +266,25 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function ajaxSearchFailure() {
-    displayErrorByCode('server_down');
+/**
+ * gives appropriate search WS error message.
+ * @param {*} jqXHR 
+ * @param {*} textStatus 
+ * @param {*} errorThrown 
+ */
+function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
+    var err = '';
+        if(textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror'){
+            err = textStatus;
+        }
+        else if (jqXHR.status === 0 || jqXHR.status == 404 || jqXHR.status == 500) {
+            err = jqXHR.status;
+        } else {
+            err = textStatus;
+        }
+    displayErrorByCode(err);
+    activityTracker("error", "", err+": "+errorThrown);
+    $('#loading_image').fadeOut();
 }
 
 /** On submit, function forms the JSON and submits to the search web services
@@ -270,6 +330,7 @@ function ajaxProteinSearchSuccess() {
         type: 'post',
         url: getWsUrl("search_protein"),
         data: json,
+        timeout: 0,
         error: ajaxSearchFailure,
 
         success: function (results) {

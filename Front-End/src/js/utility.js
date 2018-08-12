@@ -1,14 +1,16 @@
 //@author: Rupali Mahadik
+// @update: Aug 6, 2018 - Gaurav Agarwal - added ajax error cases.
 
 
 function getErrorMessage(errorCode) {
+    var contactUsMsg = " If the problem persists then you may <a href='contact.html' >contact us</a>";
     switch (errorCode) {
         case 'invalid-query-json':
             return {
                 message: "This is not a valid entry. Please try again.",
                 title: "Invalid Entry Error"
-//                message: "This is not a valid JSON query. Please try again.",
-//                title: "Invalid Submission"
+                //                message: "This is not a valid JSON query. Please try again.",
+                //                title: "Invalid Submission"
             };
             break;
         case 'open-connection-failed':
@@ -21,16 +23,16 @@ function getErrorMessage(errorCode) {
             return {
                 message: "This is unexpected field entry. Please try again",
                 title: "Unexpected Field Entry Error"
-//                message: "Unexpected field in query JSON.",
-//                title: "Unexpected Error"
+                //                message: "Unexpected field in query JSON.",
+                //                title: "Unexpected Error"
             };
             break;
         case 'invalid-parameter-value-length':
             return {
                 message: "Please adjust length of your entry and try again.",
                 title: "Invalid Value Length Error"
-//                message: "Display error occurred. We are looking into this problem.",
-//                title: "Unexpected Error"
+                //                message: "Display error occurred. We are looking into this problem.",
+                //                title: "Unexpected Error"
             };
             break;
         case 'no-search-criteria-submitted':
@@ -67,14 +69,51 @@ function getErrorMessage(errorCode) {
             return {
                 message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
                 title: "No Results Found"
-//                message: "Sorry, we couldn't find any results matching your selection.",
-//                title: "Selection Error"
+                //                message: "Sorry, we couldn't find any results matching your selection.",
+                //                title: "Selection Error"
             };
 
             break;
+
+        case 'timeout':
+            return {
+                message: "Sorry, the server didn't respond. Please try again later." + contactUsMsg,
+                title: "TimeOut Error"
+            };
+
+        case 'parsererror':
+            return {
+                message: "There was an error in the data received. We are looking into it." + contactUsMsg,
+                title: "Parsing Error"
+            };
+
+        case 'abort':
+            return {
+                message: "Sorry, your requested was aborted. Please try again." + contactUsMsg,
+                title: "Request Aborted"
+            };
+
+        case 0:
+            return {
+                message: "Could not connect to the server." + contactUsMsg,
+                title: "Not Connected"
+            };
+
+        case 404:
+            return {
+                message: "Could not connect to the server." + contactUsMsg,
+                title: "Server not found"
+            };
+
+        case 500:
+            return {
+                message: "An Internal server error occured. We are doing our best to resolve it." + contactUsMsg,
+                title: "Server error"
+            };
+
         default:
             return {
-                message: "Oops, something went wrong. Please try again later.",
+                message: "Oops, something went wrong. Please try again later." + contactUsMsg,
                 title: "Unexpected Error"
             };
 
