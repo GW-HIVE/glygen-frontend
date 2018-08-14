@@ -58,8 +58,13 @@
 
     <h3 class="page-heading" style="text-align: center">Protein Search </h3>
     <div class="container gg-container">
+        
+        <div class="row"> 
+            <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
+            style="float: right; margin: 20px 15px 35px 0;">
+        </div>    
         <!-- GlycoProtein_ID-->
-        <div class="row top-table-margin">
+        <div class="row">  
             <label class="control-label col-sm-4" for="protein">
                 <span>
                     <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
@@ -166,7 +171,7 @@
         </div>
 
         <!-- Sequences-->
-        <div class="gg-form-group2 row">
+        <div class="row">
             <label class="control-label col-sm-4" for="sequences">
                 <span>
                     <a href="javascript://" title="“Protein or Peptide Sequence" data-toggle="popover" data-placement="left"
@@ -195,7 +200,7 @@
         </div>
        
         <!--Pathway-->
-        <div class="gg-form-group row">
+        <div class="row">
             <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
                 <span>
                     <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Pathway ID from KEGG or Reactome.">
@@ -210,9 +215,10 @@
                 <label id='pathwayMsg' class="rq"></label>
             </div>
         </div>
-
-        <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
-            style="float: right;">
+        <div class="row"> 
+            <input type="button" class="btn-lg btn-primary" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
+            style="float: right; margin: -20px 15px 20px;">
+        </div>
     </div>
 
 
