@@ -55,21 +55,21 @@
                         <option>75</option>
                         <option>100</option>
                     </select>
-                    <label>Sort By</label>
-                    <select class="sort-select form-control" onchange="xsort(this);">
-                        <!-- <option selected value="id">ID</option> -->
-                        <option value="uniprot_canonical_ac">UniProt Accession</option>
-                        <option value="gene_name">Gene Name</option>
-                        <option selected value="protein_name_long">UniProt Name</option>
-                        <option value="mass">Mass</option>
-                        <option value="organism">Organism</option>
-                        <option value="refseq_name">RefSeq Name</option>
-                        <option value="refseq_ac">RefSeq Accession</option>
-                    </select>
-                    <select class="dir-select form-control" onchange="xdir(this);">
-                        <option value="asc" selected>ASC</option>
-                        <option value="desc">DESC</option>
-                    </select>
+                    <!--<label>Sort By</label>-->
+                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                        <!--&lt;!&ndash; <option selected value="id">ID</option> &ndash;&gt;-->
+                        <!--<option value="uniprot_canonical_ac">UniProt Accession</option>-->
+                        <!--<option value="gene_name">Gene Name</option>-->
+                        <!--<option selected value="protein_name_long">UniProt Name</option>-->
+                        <!--<option value="mass">Mass</option>-->
+                        <!--<option value="organism">Organism</option>-->
+                        <!--<option value="refseq_name">RefSeq Name</option>-->
+                        <!--<option value="refseq_ac">RefSeq Accession</option>-->
+                    <!--</select>-->
+                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
+                        <!--<option value="asc" selected>ASC</option>-->
+                        <!--<option value="desc">DESC</option>-->
+                    <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
             </div>
@@ -176,15 +176,15 @@
                 <table id="gen-table" data-show-export="true" data-toggle="table">
                     <thead>
                         <tr>
-                            <th data-field="uniprot_canonical_ac" data-formatter="PageFormat">UniProt Accession</th>
-                            <th data-field="gene_name">Gene Name</th>
-                            <th data-field="protein_name_long">UniProt Name</th>
-                            <th data-field="mass" data-formatter="MassFormatter">Native Mass
+                            <th data-field="uniprot_canonical_ac" data-formatter="PageFormat" data-sortable="true">UniProt Accession</th>
+                            <th data-field="gene_name" data-sortable="true">Gene Name</th>
+                            <th data-field="protein_name_long" data-sortable="true">UniProt Name</th>
+                            <th data-field="mass" data-formatter="MassFormatter" data-sortable="true">Native Mass
                                 <br>(Da)
                             </th>
-                            <th data-field="organism">Organism</th>
-                            <th data-field="refseq_name">RefSeq Name</th>
-                            <th data-field="refseq_ac">RefSeq Accession</th>
+                            <th data-field="organism" data-sortable="true">Organism</th>
+                            <th data-field="refseq_name" data-sortable="true">RefSeq Name</th>
+                            <th data-field="refseq_ac" data-sortable="true">RefSeq Accession</th>
                         </tr>
                     </thead>
                 </table>
@@ -206,16 +206,16 @@
                         <option>75</option>
                         <option>100</option>
                     </select>
-                    <label>Sort By</label>
-                    <select class="sort-select form-control" onchange="xsort(this);">
-                        <option value="uniprot_canonical_ac">UniProt Accession</option>
-                        <option value="gene_name">Gene Name</option>
-                        <option selected value="protein_name_long">UniProt Name</option>
-                        <option value="mass">Mass</option>
-                        <option value="organism">Organism</option>
-                        <option value="refseq_name">RefSeq Name</option>
-                        <option value="refseq_ac">RefSeq Accession</option>
-                    </select>
+                    <!--<label>Sort By</label>-->
+                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                        <!--<option value="uniprot_canonical_ac">UniProt Accession</option>-->
+                        <!--<option value="gene_name">Gene Name</option>-->
+                        <!--<option selected value="protein_name_long">UniProt Name</option>-->
+                        <!--<option value="mass">Mass</option>-->
+                        <!--<option value="organism">Organism</option>-->
+                        <!--<option value="refseq_name">RefSeq Name</option>-->
+                        <!--<option value="refseq_ac">RefSeq Accession</option>-->
+                    <!--</select>-->
                     <select class="dir-select form-control" onchange="xdir(this);">
                         <option value="asc" selected>ASC</option>
                         <option value="desc">DESC</option>

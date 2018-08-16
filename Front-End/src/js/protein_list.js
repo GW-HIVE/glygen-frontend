@@ -404,4 +404,15 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
+$(document).ready(function(){
+    $('#gen-table').on("sort.bs.table", function(event,field,order){
+        // event.preventDefault();
+        event.stopPropagation();
+        sort = field;
+        dir = order;
+        LoadDataList();
+        activityTracker("user", id, "sort: " + sort);
+        return false;
+    });
+});
 

@@ -9,6 +9,10 @@
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 
+
+
+
+
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -83,6 +87,7 @@ function xsort(element) {
     LoadDataList();
     activityTracker("user", id, "sort: " + sort);
 }
+
 
 /**
  * Reads a new asc/dec dirction for data  and reloads the data.
@@ -302,6 +307,21 @@ function editSearch() {
 }
 
 
+// function addSortOptions () {
+//     var headerOption = $('#gen-table thead th').not('.detail');
+//     var afterImage = headerOption.slice(2).toArray();
+//     var idHeader = headerOption.get(0)
+//     var sortableHeaders = $([idHeader].concat(afterImage));
+//     sortableHeaders.addClass('sortable');
+//     sortableHeaders.on('click', function () {
+//         var field = $(this).attr('data-field');
+//
+//         $('.sort-select').val(field);
+//
+//         xsort($('.sort-select').get(0));
+//     });
+// }
+
 
 
 /**
@@ -348,6 +368,9 @@ function ajaxListSuccess(data) {
         // document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+
+
+
 
         // addSortOptions();
     }
@@ -417,3 +440,14 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
+$(document).ready(function(){
+    $('#gen-table').on("sort.bs.table", function(event,field,order){
+        // event.preventDefault();
+        event.stopPropagation();
+        sort = field;
+        dir = order;
+        LoadDataList();
+        activityTracker("user", id, "sort: " + sort);
+       return false;
+    });
+});
