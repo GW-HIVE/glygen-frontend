@@ -50,7 +50,7 @@
 
     <!-- page content starts here -->
 
-    <div class="container">
+    <div class="container-fluid" id="listview">
         <div class="row">
             <div id="summary-table" class="col-md-12 col-xs-12">
                 <!-- Summary Table Goes Here -->
@@ -200,16 +200,17 @@
 
         <!-- table start here -->
 
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <table id="gen-table" data-show-export="true" data-toggle="table" data-detail-view="true" data-detail-formatter="detailFormat"
+        <!--<div class="row">-->
+            <!--<div class="col-md-12 col-xs-12">-->
+                <!--<div class="table-responsive">-->
+                <table id="gen-table" data-show-export="true" data-toggle="table"
                     data-page-size="10">
-                    <!-- <table id="gen-table"    data-search="true">    may be for version 2-->
+                    <!-- <table id="gen-table"   data-detail-formatter="detailFormat" data-detail-view="true" data-search="true">    may be for version 2-->
                     <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
 
                     <thead>
                         <tr>
-                            <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">GlyToucan Accession</th>
+                            <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">GlyToucan <br>Accession</th>
                             <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Glycan Image</th>
                             <th data-field="mass" data-formatter="massFormatter" data-sortable="true">Native Mass
                                 <br>(Da)
@@ -226,8 +227,9 @@
                         </tr>
                     </thead>
                 </table>
-            </div>
-        </div>
+            <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <!-- table container ends here -->
         <!-- sorting_bottom -->
         <div class="row">
@@ -284,6 +286,8 @@
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!--<script type="text/javascript" src="js/glycan_search.js"></script>-->
+    <!-- script for pagination page -->
+    <script type="text/javascript" src="js/pagination.js"></script>
     <!-- script for glycan list page -->
     <script type="text/javascript" src="js/glycan-list.js"></script>
 

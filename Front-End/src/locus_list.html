@@ -42,7 +42,7 @@
 
 <!-- page content starts here -->
 
-<div class="container">
+<div class="container-fluid" id="listview">
     <div class="row">
         <div id="summary-table" class="col-md-12 col-xs-12">
             <!-- Summary Table Goes Here -->
@@ -89,11 +89,11 @@
 
                 <thead>
                 <tr>
-                    <th data-field="uniprot_canonical_ac" data-formatter="pageFormat">UniProt Accession</th>
-                    <th data-field="gene_name" data-formatter="pageFormat1" >Gene Name</th>
-                    <th data-field="protein_name">Protein Name </th>
-                    <th data-field="organism">Organism</th>
-                    <th data-field="tax_id">Tax_ID</th>
+                    <th data-field="uniprot_canonical_ac" data-formatter="pageFormat" data-sortable="true">UniProt Accession</th>
+                    <th data-field="gene_name" data-formatter="pageFormat1" data-sortable="true" >Gene Name</th>
+                    <th data-field="protein_name" data-sortable="true">Protein Name </th>
+                    <th data-field="organism" data-sortable="true">Organism</th>
+                    <th data-field="tax_id" data-sortable="true">Tax_ID</th>
                 </tr>
                 </thead>
             </table>
@@ -149,6 +149,9 @@
 <!-- script for getting Web Service URLs -->
 <script type="text/javascript" src="js/ws_url.js"></script>
 <!-- script for glycan list page -->
+<!-- script for pagination page -->
+<script type="text/javascript" src="js/pagination.js"></script>
+
 <script type="text/javascript" src="js/locus.js"></script>
 <!-- script for third party-->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>

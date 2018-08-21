@@ -64,7 +64,6 @@ function prev() {
         activityTracker("user", id, "page: " + page);
     }
 }
-
 /**
  * Reads a new page and reloads the data.
  * @param {domNode} element - The element from which we take the new page value

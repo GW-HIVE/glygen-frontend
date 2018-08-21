@@ -50,8 +50,11 @@
 */
 
 thead{
-    background-color: #659bc9;
-    color: #555; 
+    /*background-color: #659bc9;*/
+    /*color: #555;*/
+
+    background-color: #2e78b7;
+    color:#fff;
     vertical-align: middle; 
     padding: 3px 0; 
   
@@ -104,6 +107,7 @@ thead{
 }
 pre {
     background-color: #e6e6e6;
+    width:70%;
 }
 
 #demosearch{
@@ -142,4 +146,11 @@ pre {
 .panel-heading h3 {
     margin-top: 0;
     margin-bottom: 0
+}
+
+#listview{
+    padding-right: 35px;
+    padding-left: 35px;
+    margin-right: auto;
+    margin-left: auto;
 }
