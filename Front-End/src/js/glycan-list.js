@@ -12,7 +12,6 @@
 
 
 
-
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -33,125 +32,6 @@ var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 10;
 
 /**
- * Reads a new limit and reloads the data.
- * @param {domNode} element - The element from which we take the new limit value
- */
-function xlimit(element) {
-    limit = $(element).val();
-    $('.limit-select').val(limit);
-    LoadDataList();
-    activityTracker("user", id, "page limit: " + limit);
-}
-
-/**
- * Loads the next page of results
- */
-function next() {
-    page = page + 1;
-    $(".page-select").val(page);
-    LoadDataList();
-    activityTracker("user", id, "page: " + page);
-}
-
-/**
- * Loads the Previous page of results
- */
-function prev() {
-    if (page > 1) {
-        page = page - 1;
-        $(".page-select").val(page);
-        LoadDataList();
-        activityTracker("user", id, "page: " + page);
-    }
-}
-/**
- * Reads a new page and reloads the data.
- * @param {domNode} element - The element from which we take the new page value
- */
-function xpage(element) {
-    page = parseInt($(element).val(), 10);
-    $('.page-select').val(page);
-    LoadDataList();
-    activityTracker("user", id, "page: " + page);
-}
-
-/**
- * Reads a new sort and reloads the data.
- * @param {domNode} element - The element from which we take the new sort value
- */
-
-function xsort(element) {
-    sort = $(element).val();
-    $('.sort-select').val(sort);
-    LoadDataList();
-    activityTracker("user", id, "sort: " + sort);
-}
-
-
-/**
- * Reads a new asc/dec dirction for data  and reloads the data.
- * @param {domNode} element - The element from which we take the new direction value
- */
-
-function xdir(element) {
-    dir = $(element).val();
-    $('.dir-select').val(dir);
-    LoadDataList();
-    activityTracker("user", id, "sort direction: " + dir);
-}
-
-/**
- * its calculate no of pages using limit and total_length.
- * @param {integer} total_length - The total_length is total number of records
- * @param {integer} limit - The limit is records per page
- * @returns {number} Number of pages
- */
-function noOfPage(total_length, limit) {
-    var size = Math.ceil(total_length / limit);
-    return size;
-}
-
-
-/**
- * totalNoSearch show user total search result.
- * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
- */
-function totalNoSearch(total_length) {
-    $('.searchresult').html(" You Found  " + total_length + " results of glycan");
-
-}
-
-
-/**
- * it creates user interface for pagination for dropdown
- * @param {Object} paginationInfo - the dataset of pagination info is retun from server
- * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
- * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
- */
-
-function buildPages(paginationInfo) {
-    var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
-    var pageSelectors = $(".page-select");
-    pageSelectors.empty();
-    for (var i = 1; i <= total_length; i++) {
-        pageSelectors.append($("<option></option>").attr("value", i).text(i));
-    }
-    pageSelectors.val(page);
-    /**
-     * this works for Showing user how many results they found .
-
-     */
-    totalNoSearch(paginationInfo.total_length);
-    /**
-     * this works for enabling and disable prev and next button.
-
-     */
-    $(".prevbutton").attr("disabled", (page == 1));
-    $(".nextbutton").attr("disabled", (page == total_length));
-}
-
-
-/**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
  * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
@@ -169,7 +49,6 @@ function buildSummary(queryInfo) {
 
 }
 
-
 /**
  * Redirect to Page index page or search back
  */
@@ -180,7 +59,6 @@ function redirectPage1() {
 function redirectPage2() {
     window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html";
 }
-
 
 //      $(document).ready(function(){
 //      // $("demosearch").tooltip();
@@ -255,14 +133,14 @@ function massFormatter(value) {
  */
 
 
-function detailFormat(index, row) {
-    var html = [];
-    var glyco = row.glycoct.replace(/ /g, '\n');
-    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
-    html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-    activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
-    return html.join('');
-}
+// function detailFormat(index, row) {
+//     var html = [];
+//     var glyco = row.glycoct.replace(/ /g, '\n');
+//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
+//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
+//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
+//     return html.join('');
+// }
 
 
 /**
@@ -304,23 +182,6 @@ function editSearch() {
         activityTracker("user", id, "edit search");
     }
 }
-
-
-// function addSortOptions () {
-//     var headerOption = $('#gen-table thead th').not('.detail');
-//     var afterImage = headerOption.slice(2).toArray();
-//     var idHeader = headerOption.get(0)
-//     var sortableHeaders = $([idHeader].concat(afterImage));
-//     sortableHeaders.addClass('sortable');
-//     sortableHeaders.on('click', function () {
-//         var field = $(this).attr('data-field');
-//
-//         $('.sort-select').val(field);
-//
-//         xsort($('.sort-select').get(0));
-//     });
-// }
-
 
 
 /**
@@ -368,10 +229,6 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
-
-
-
-        // addSortOptions();
     }
 
 }
@@ -439,14 +296,4 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function(){
-    $('#gen-table').on("sort.bs.table", function(event,field,order){
-        // event.preventDefault();
-        event.stopPropagation();
-        sort = field;
-        dir = order;
-        LoadDataList();
-        activityTracker("user", id, "sort: " + sort);
-       return false;
-    });
-});
+
