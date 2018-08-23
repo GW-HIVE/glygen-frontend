@@ -160,16 +160,16 @@
                         <div class="row">
                             {{#species}}
                             <div class='col-md-12 col-xs-12'>
-                                <p class="panelmaincontent">
+                                <div class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     {{name}} (NCBI taxonomy ID:
                                     <a class="panelcontent"
                                        href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"
                                        target="_blank">{{taxid}} </a>)
-                                </p>
+                                </div>
                                 <ul style="display:none;">
                                     {{#evidence}}
-                                    <li class="list-group">{{database}} :
+                                    <li class="list-group-indent">{{database}} :
                                         <a href="{{{url}}}" target="_blank">{{id}}</a>
                                     </li>
                                     {{/evidence}}
@@ -233,7 +233,7 @@
                         <div class="row">
                             {{#glycoprotein}}
                             <div class='col-md-12 col-xs-12'>
-                                <p class="panelmaincontent">
+                                <div class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     {{protein_name}}
 
@@ -242,12 +242,14 @@
 
 
                                     <!--<a href="protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}"></a>-->
+                                    <br>
                                     {{#position}}
-                                    <br> Position:{{position}} {{/position}}
-                                </p>
-                                <ul style="display:none;">
+                                    Position: {{position}} {{/position}}
+                                </div>
+                                
+                                <ul style="display:none; margin-bottom: 10px;">
                                     {{#evidence}}
-                                    <li class="list-group" id="panelmaincontent">{{database}}:
+                                    <li class="list-group-indent" id="panelmaincontent">{{database}}:
                                         <a class="panelcontent" href="{{{url}}}" target="_blank">{{id}}</a>
                                     </li>
                                     {{/evidence}}

@@ -73,9 +73,7 @@
     font-size: 18px;
     margin-top: -30px; 
 } */ 
-.panelcontent{
-    font-size: 14px; 
-}
+
 #panelmaincontent{
     font-size: 16px;
     overflow-wrap: break-word;
@@ -93,19 +91,32 @@
     margin-top: 470px;
 
 } 
-.list-group{
-    font-size: 14px;
-    margin-left: 20px;
-    list-style-type: circle;
-}
+
 pre { 
     background-color:#e6e6e6; 
 }
-.panelmaincontent{
+
+
+.panelmaincontent {
     font-size: 16px;
-    margin-left: 10px;
-    list-style-type: circle;
-    overflow-wrap: break-word;
+/*    margin-left: 10px;*/
+/*    list-style-type: circle;*/
+/*    overflow-wrap: break-word;*/
+}
+.panelcontent2 {
+    font-size: 14px; 
+}
+.list-group{
+    font-size: 16px;
+/*    margin-left: 20px;*/
+/*    list-style-type: circle;*/
+    list-style-type: square;
+    margin: 0 0 0 20px;
+}
+.list-group-indent {
+/*    font-size: 12px;*/
+    margin-left: 60px;
+    list-style-type: square; 
 }
 .cd-close-panel {
     padding-right:70px;
