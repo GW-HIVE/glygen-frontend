@@ -213,3 +213,25 @@ select {
 #msg{
     margin-top:0px;
 }
+
+.sliderbox-input-min1{
+    margin-top:10px;
+    display: inline-block;
+    width: 35%;
+}
+.sliderbox-input-min{
+    margin-top:10px;
+    display: inline-block;
+    width: 35%;
+}
+
+.sliderbox-input-max{
+    margin-top:10px;
+    display: inline-block;
+    width: 35%;
+}
+.sliderbox-input-max1{
+    margin-top:10px;
+    display: inline-block;
+    width: 35%;
+}

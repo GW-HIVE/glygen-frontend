@@ -97,6 +97,8 @@ var searchInitValues;
 
 var mass_max;
 var mass_min;
+var sugar_mass_min;
+var sugar_mass_max;
 $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_glycan"), function (result) {
         searchInitValues = result;
@@ -116,14 +118,36 @@ $(document).ready(function () {
         var mass_min = result.glycan_mass.min;
         var sugar_mass_min = result.number_monosaccharides.min;
         var sugar_mass_max = result.number_monosaccharides.max;
-        mass(mass_min, mass_max);
-        sugarmass(sugar_mass_min, sugar_mass_max)
+        // mass(mass_min, mass_max);
+        // sugarmass(sugar_mass_min, sugar_mass_max)
         // check for ID to see if we need to load search values
         // please do not remove rhis code as it is required prepopulate search values
         var id = getParameterByName('id') || id;
         if (id) {
             LoadSearchvalues(id);
         }
+        new Sliderbox({
+            target: '.sliderbox',
+            start: [ mass_min, mass_max ], // Handle start position
+            connect: true, // Display a colored bar between the handles
+            behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+            range: { // Slider can select '0' to '100'
+                'min': mass_min,
+                'max': mass_max
+
+            }
+        });
+        new Sliderbox1({
+            target: '.sliderbox1',
+            start: [ sugar_mass_min,sugar_mass_max ], // Handle start position
+            connect: true, // Display a colored bar between the handles
+            behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+            range: { // Slider can select '0' to '100'
+                'min': sugar_mass_min,
+                'max':  sugar_mass_max
+
+            }
+        });
 
     })
         .fail(function (result) {
@@ -133,66 +157,187 @@ $(document).ready(function () {
 });
 
 
-/** Sugar Mass range function
- * @param {numeric} sugar_mass_min - minimum value of the sugar mass range
- * @param {numeric} sugar_mass_max - maximum value of the sugar mass range
- */
-function sugarmass(sugar_mass_min, sugar_mass_max) {
-    var nonLinearSlider1 = document.getElementById('slider1');
-    noUiSlider.create(nonLinearSlider1, {
 
-        connect: true,
-        behaviour: 'tap',
-        start: [0, 10000],
-        range: {
-            'min': sugar_mass_min,
-            'max': sugar_mass_max
+
+
+
+
+
+
+///New slider
+
+Sliderbox = function(options) {
+
+    this.options = options;
+
+    this.init();
+
+};
+
+Sliderbox.prototype.init = function() {
+
+    var box = document.querySelectorAll(this.options.target),
+        len = box.length,
+        i = 0;
+
+    for (; i < len; i++) {
+
+        this.handler(box[i]);
+
+    }
+
+};
+
+Sliderbox.prototype.handler = function(target) {
+
+    var slider = target.querySelector('.sliderbox-slider'),
+        inpMin = target.querySelector('.sliderbox-input-min'),
+        inpMax = target.querySelector('.sliderbox-input-max');
+
+    noUiSlider.create(slider, this.options);
+
+    slider.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            inpMax.value = addCommas(parseInt(values[handle]));
+        } else {
+            inpMin.value = addCommas(parseInt(values[handle]));
         }
     });
-    var nodes1 = [
-        document.getElementById('lower-value1'), // 0
-        document.getElementById('upper-value1')  // 1
-    ];
-    // Display the slider value and how far the handle moved
-    // from the left edge of the slider.
-    nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
-        nodes1[handle].innerHTML = addCommas(values[handle]);
+
+    target.addEventListener('change', function(e) {
+
+        if (e.target === inpMin) {
+
+            slider.noUiSlider.set([e.target.value]);
+
+        }
+        else {
+
+            slider.noUiSlider.set([null, e.target.value]);
+
+        }
+
     });
-}
 
-/** Mass range function
- * @param {numeric} mass_min - minimum value of the mass range
- * @param {numeric} mass_max - maximum value of the mass range
- */
-function mass(mass_min, mass_max) {
-    var nonLinearSlider = document.getElementById('slider');
-    noUiSlider.create(nonLinearSlider, {
-        connect: true,
-        behaviour: 'tap',
-        start: [0, 10000],
+};
+///New slider
 
-        // range: {
-        //     'min': [1],
-        //     '60%': [10],
-        //     'max': [1000]
-        // }
-        range: {
-            'min': mass_min,
-            'max': mass_max
+Sliderbox1 = function(options) {
+
+    this.options = options;
+
+    this.init();
+
+};
+
+Sliderbox1.prototype.init = function() {
+
+    var box = document.querySelectorAll(this.options.target),
+        len = box.length,
+        i = 0;
+
+    for (; i < len; i++) {
+
+        this.handler(box[i]);
+
+    }
+
+};
+
+Sliderbox1.prototype.handler = function(target) {
+
+    var slider1 = target.querySelector('.sliderbox-slider1'),
+        inpMin1 = target.querySelector('.sliderbox-input-min1'),
+        inpMax1 = target.querySelector('.sliderbox-input-max1');
+
+    noUiSlider.create(slider1, this.options);
+
+    slider1.noUiSlider.on('update', function( values, handle ) {
+        if ( handle ) {
+            inpMax1.value = addCommas(parseInt(values[handle]));
+        } else {
+            inpMin1.value = addCommas(parseInt(values[handle]));
         }
     });
-    // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
-    var nodes = [
-        document.getElementById('lower-value'), // 0
-        document.getElementById('upper-value')  // 1
-    ];
-    // Display the slider value and how far the handle moved
-    // from the left edge of the slider.
-    nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = addCommas(values[handle]);
+
+    target.addEventListener('change', function(e) {
+
+        if (e.target === inpMin1) {
+
+            slider1.noUiSlider.set([e.target.value]);
+
+        }
+        else {
+
+            slider1.noUiSlider.set([null, e.target.value]);
+
+        }
+
     });
 
-}
+};
+
+//
+// /** Sugar Mass range function
+//  * @param {numeric} sugar_mass_min - minimum value of the sugar mass range
+//  * @param {numeric} sugar_mass_max - maximum value of the sugar mass range
+//  */
+// function sugarmass(sugar_mass_min, sugar_mass_max) {
+//     var nonLinearSlider1 = document.getElementById('slider1');
+//     noUiSlider.create(nonLinearSlider1, {
+//
+//         connect: true,
+//         behaviour: 'tap',
+//         start: [0, 10000],
+//         range: {
+//             'min': sugar_mass_min,
+//             'max': sugar_mass_max
+//         }
+//     });
+//     var nodes1 = [
+//         document.getElementById('lower-value1'), // 0
+//         document.getElementById('upper-value1')  // 1
+//     ];
+//     // Display the slider value and how far the handle moved
+//     // from the left edge of the slider.
+//     nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
+//         nodes1[handle].innerHTML = addCommas(values[handle]);
+//     });
+// }
+//
+// /** Mass range function
+//  * @param {numeric} mass_min - minimum value of the mass range
+//  * @param {numeric} mass_max - maximum value of the mass range
+//  */
+// function mass(mass_min, mass_max) {
+//     var nonLinearSlider = document.getElementById('slider');
+//     noUiSlider.create(nonLinearSlider, {
+//         connect: true,
+//         behaviour: 'tap',
+//         start: [0, 10000],
+//
+//         // range: {
+//         //     'min': [1],
+//         //     '60%': [10],
+//         //     'max': [1000]
+//         // }
+//         range: {
+//             'min': mass_min,
+//             'max': mass_max
+//         }
+//     });
+//     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
+//     var nodes = [
+//         document.getElementById('lower-value'), // 0
+//         document.getElementById('upper-value')  // 1
+//     ];
+//     // Display the slider value and how far the handle moved
+//     // from the left edge of the slider.
+//     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
+//         nodes[handle].innerHTML = addCommas(values[handle]);
+//     });
+//
+// }
 
 /** glycan sub type dropdown function based on type field
  * @param {numeric} ddl1 - User selected glycan type
@@ -264,8 +409,10 @@ function submitvalues() {
     $('#loading_image').fadeIn();
 
     var query_type = "search_glycan";
-    var mass_slider = document.getElementById("slider").noUiSlider.get();
-    var sugar_slider = document.getElementById("slider1").noUiSlider.get();
+    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
+    var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
+    // var mass_slider = document.getElementById("slider").noUiSlider.get();
+    // var sugar_slider = document.getElementById("slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
     var organism = document.getElementById("organism").value;
     var glycan_type = document.getElementById("ddl").value;
@@ -273,7 +420,7 @@ function submitvalues() {
     var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
     var glycan_motif = document.getElementById("motif").value;
-    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
+    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1],organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
 
     $.ajax({
@@ -301,6 +448,9 @@ function submitvalues() {
     });
 }
 
+
+//
+//
 
 /** Forms searchjson from the form values submitted
  * @param input_query_type query search

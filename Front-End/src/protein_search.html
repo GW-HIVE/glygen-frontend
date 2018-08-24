@@ -96,7 +96,7 @@
         <!-- Protein size-->
         <div class="gg-form-group row">
             <div>
-                <label class="control-label col-sm-4" for="slider">
+                <label class="control-label col-sm-4">
                     <span>
                         <a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Mass Range for your proteins(s)">
                             <i class="far fa-question-circle help-sign"></i>
@@ -105,19 +105,20 @@
             </div>
             <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div>
+                <div class="row">
                     <div class="col-xs-2 min-value-alignment">
-                        <h6>Min</h6>
-                        <div id="lower-value"> </div>
-                    </div>
-                    <div class="col-xs-7">
-                        <h6 class="align-center">Native Mass Range</h6>
-                        <div id="slider"> </div>
-                    </div>
 
-                    <div class="col-xs-2" style="margin-bottom: 40px; padding-left: 35px;">
-                        <h6>Max</h6>
-                        <div id="upper-value"> </div>
+                    </div>
+                    <span><strong>Max</strong></span><div class="col-xs-7" id="slider"><span><strong>Min</strong></span>
+                  <!--<div class="col-xs-7" id="slider">-->
+                        <h6 class="align-center">Native Mass Range</h6>
+                        <div class="sliderbox">
+                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                            <span><strong>Min</strong></span>
+                            <input class="sliderbox-input-min form-control">
+                             <span><strong>Max</strong></span>
+                            <input class="sliderbox-input-max form-control">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -235,6 +236,7 @@
     <script src="libraries/nouislider.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
+
     <!-- script for searchpage js -->
     <script type="text/javascript" src="js/protein_search.js"></script>
     <!-- script for tracking js -->

@@ -174,8 +174,8 @@ function searchInitFailure(jqXHR, textStatus, errorThrown) {
  * get organism drop down values for search form
  */
 var searchInitValues;
-var mass_max;
-var mass_min;
+ var mass_max;
+ var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
         // max_selected_options: 10,
@@ -198,66 +198,132 @@ $(document).ready(function () {
                 createOption(orgElement, result.organism[1].name, result.organism[1].id);
                 var mass_max = result.protein_mass.max;
                 var mass_min = result.protein_mass.min;
-                mass(mass_min, mass_max)
+                // mass(mass_min, mass_max);
                 // check for ID to see if we need to load search values
                 // please do not remove this code as it is required prepopulate search values
                 var id = getParameterByName('id') || id;
                 if (id) {
                     LoadProteinSearchvalues(id);
                 }
+
+                new Sliderbox({
+                    target: '.sliderbox',
+
+                    start: [ 435, 3906488.00 ], // Handle start position
+
+                    connect: true, // Display a colored bar between the handles
+                    behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+                    range: { // Slider can select '0' to '100'
+                        'min': mass_min,
+                        '1%':mass_max/1024,
+                        '10%': mass_max/512,
+                        '20%': mass_max/256,
+                        '30%': mass_max/128,
+                        '40%': mass_max/64,
+                        '50%': mass_max/32,
+                        '60%': mass_max/16,
+                        '70%': mass_max/8,
+                        '80%': mass_max/4,
+                        '90%': mass_max/2,
+                        'max': mass_max
+                        // 'min': 435,
+                        // 'max': 3906488.00
+                    }
+                });
+
+
             }
         });
 
-    // $.getJSON(getWsUrl("search_init_protein"), function (result) {
-    //     searchInitValues = result;
 
-    //     var orgElement = $(".organism").get(0);
-    //     createOption(orgElement, result.organism[0].name, result.organism[0].id);
-    //     createOption(orgElement, result.organism[1].name, result.organism[1].id);
-    //     var mass_max = result.protein_mass.max;
-    //     var mass_min = result.protein_mass.min;
-    //     mass(mass_min, mass_max)
-    //     // check for ID to see if we need to load search values
-    //     // please do not remove this code as it is required prepopulate search values
-    //     var id = getParameterByName('id') || id;
-    //     if (id) {
-    //         LoadProteinSearchvalues(id);
-    //     }
-    // })
-    //     .fail(ajaxSearchFailure,function (result) {
-    //         activityTracker("error", "", result.status + ": search_init WS error");
-    //         console.log("error in search_init");
-    //     });
+///New slider
+
+    Sliderbox = function(options) {
+
+        this.options = options;
+
+        this.init();
+
+    };
+
+    Sliderbox.prototype.init = function() {
+
+        var box = document.querySelectorAll(this.options.target),
+            len = box.length,
+            i = 0;
+
+        for (; i < len; i++) {
+
+            this.handler(box[i]);
+
+        }
+
+    };
+
+    Sliderbox.prototype.handler = function(target) {
+
+        var slider = target.querySelector('.sliderbox-slider'),
+            inpMin = target.querySelector('.sliderbox-input-min'),
+            inpMax = target.querySelector('.sliderbox-input-max');
+
+        noUiSlider.create(slider, this.options);
+
+        slider.noUiSlider.on('update', function( values, handle ) {
+            if ( handle ) {
+                inpMax.value = addCommas(values[handle]);
+            } else {
+                inpMin.value = addCommas(values[handle]);
+            }
+        });
+
+        target.addEventListener('change', function(e) {
+
+            if (e.target === inpMin) {
+
+                slider.noUiSlider.set([e.target.value]);
+
+            }
+            else {
+
+                slider.noUiSlider.set([null, e.target.value]);
+
+            }
+
+        });
+
+    };
+
+//
 });
 
 /** Mass range function
  * @param {numeric} mass_min - minimum value of the mass range
  * @param {numeric} mass_max - maximum value of the mass range
  */
-function mass(mass_min, mass_max) {
-    var nonLinearSlider = document.getElementById('slider');
-    noUiSlider.create(nonLinearSlider, {
-        connect: true,
-        behaviour: 'tap',
-
-        start: [mass_min, mass_max],
-        range: {
-            'min': mass_min,
-            'max': mass_max
-        }
-    });
-    // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
-    var nodes = [
-        document.getElementById('lower-value'), // 0
-        document.getElementById('upper-value') // 1
-    ];
-    // Display the slider value and how far the handle moved
-    // from the left edge of the slider.
-    nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-        nodes[handle].innerHTML = addCommas(values[handle]);
-    });
-
-}
+// function mass(mass_min, mass_max) {
+//     var nonLinearSlider = document.getElementById('slider');
+//     noUiSlider.create(nonLinearSlider, {
+//         connect: true,
+//         behaviour: 'tap',
+//
+//         start: [mass_min, mass_max],
+//         range: {
+//             'min': mass_min,
+//             'max': mass_max
+//         }
+//     });
+//     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
+//     var nodes = [
+//         document.getElementById('lower-value'), // 0
+//         document.getElementById('upper-value') // 1
+//     ];
+//     // Display the slider value and how far the handle moved
+//     // from the left edge of the slider.
+//     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
+//         nodes[handle].innerHTML = addCommas(values[handle]);
+//     });
+//
+// }
 
 function createOption(ddl, text, value) {
     var opt = document.createElement('option');
@@ -296,7 +362,8 @@ function ajaxProteinSearchSuccess() {
     var organism = $("#organism").val();
     var uniprot_id = $("#protein").val();
     var refseq_id = $("#refseq").val();
-    var mass_slider = document.getElementById("slider").noUiSlider.get();
+    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
+    // var mass_slider =$(".sliderbox-slider").val();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
     var gene_name = $("#gene_name").val();
@@ -307,15 +374,12 @@ function ajaxProteinSearchSuccess() {
     var formObject = {
         operation: "AND",
         query_type: "search_protein",
-        // organism: organism,
         tax_id: organism ? parseInt(organism) : '',
         uniprot_canonical_ac: uniprot_id,
         refseq_ac: refseq_id,
-        // mass: {
-        //     min: mass_min,
-        //     max: mass_max
-        // },
-        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        mass: { "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
+        },
         protein_name: protein_name_long,
         gene_name: gene_name,
         pathway_id: pathway_id,
