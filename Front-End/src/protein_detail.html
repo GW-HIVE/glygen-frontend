@@ -194,13 +194,13 @@
                         <div class="row">
                             {{#species}}
                             <div class='col-md-12 col-xs-12'>
-                                <p class="panelmaincontent">
+                                <div class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     {{name}} (NCBI taxonomy ID:
                                     <a class="panelcontent"
                                        href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}"
                                        target="_blank">{{taxid}} </a>)
-                                </p>
+                                </div>
                                 <ul style="display:none;">
                                     {{#evidence}}
                                     <li class="list-group-indent">{{database}} :
@@ -254,11 +254,11 @@
                     <div class="panel-body">
                         <!-- added new class -->
                         {{#crossref}}
-                        <p class="panelmaincontent">
-                        <li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>
+                        <div class="panelmaincontent">
+                            <li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>
                             <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
-                        </li>
-                        </p>
+                            </li>
+                        </div>
                         {{/crossref}} {{^crossref}} No data available. {{/crossref}}
                     </div>
                 </div>
@@ -300,9 +300,9 @@
                     </div>
                     <div class="panel-body">
                         {{#pathway}}
-                        <p class="panelmaincontent">
+                        <div class="panelmaincontent">
                             <li class="list-group"><strong>{{resource}}</strong> : {{name}} <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a></li>
-                        </p>
+                        </div>
                         {{/pathway}}
                         {{^pathway}} No data available. {{/pathway}}
                     </div>
@@ -323,15 +323,15 @@
                         <div class="row">
                             {{#isoforms}}
                             <div class='col-md-12 col-xs-12'>
-                                <p class="panelmaincontent">
+                                <div class="panelmaincontent">
                                     <li class="list-group"><strong>UniProt isoform accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
-                                </p>
+                                </div>
                                 {{#locus}}
                                 {{#chromosome}}
-                                <p class="panelmaincontent">
+                                <div class="panelmaincontent">
                                     <button class="open-close-button">+</button>
                                     Chromosome: {{chromosome}} ({{start_pos}} - {{end_pos}})
-                                </p>
+                                </div>
                                 {{/chromosome}}
                                 <ul style="display:none; margin-bottom: 15px;">
                                     {{#evidence}}
@@ -340,10 +340,11 @@
                                     </li>
                                     {{/evidence}}
                                 </ul>
+                                <div class="plus-button-margin-bottom"></div>
                                 {{/locus}}
                                 <!--<span class="fasta">{{sequence.sequence}}</span>-->
                                 <div id="fasta"><pre>{{{sequence.sequence}}}</pre></div>
-                                <hr/>
+                                <br>
                             </div>
                             {{/isoforms}}
                         </div>
@@ -388,7 +389,7 @@
 
                             <div class='col-md-12 col-xs-12'>
 
-                                <ul class="nav nav-tabs">
+                                <ul  style="margin-bottom: 20px;" class="nav nav-tabs">
                                     <li class="active">
                                         <a  href="#1a" data-toggle="tab">Characterised</a>
                                     </li>
@@ -397,7 +398,7 @@
                                 </ul>
                             </div>
                             <div class="tab-content clearfix">
-                                <div class="tab-pane active EmptyFind" id="1a">
+                                <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
                                     {{#glycosylation}}
                                     <table id="glycosylation-table">
                                     </table>
@@ -440,12 +441,12 @@
                             <div class="row">
                                 {{#function}}
                                 <div class='col-md-12 col-xs-12'>
-                                    <p class="panelmaincontent">
+                                    <div class="panelmaincontent">
                                         <button class="open-close-button">+</button>
                                         <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
                                         {{annotation}}
-                                    </p>
-                                    <ul style="display:none;">
+                                    </div>
+                                    <ul style="display:none; margin-bottom: 8px;">
                                         {{#evidence}}
                                         <li class="list-group-indent">{{database}} :
                                             <a href="{{{url}}}" target="_blank">{{id}}</a>
@@ -453,7 +454,7 @@
                                         {{/evidence}}
                                         {{^evidence}} (No evidence data available.) {{/evidence}}
                                     </ul>
-                                    <hr/>
+                                    <div class="plus-button-margin-bottom"></div>
                                 </div>
                                 {{/function}}
                             </div>
@@ -481,11 +482,11 @@
                             <div class="row">
                                 {{#disease}}
                                 <div class='col-md-12 col-xs-12'>
-                                    <p class="panelmaincontent">
+                                    <div class="panelmaincontent">
                                         <button class="open-close-button">+</button>
                                         {{name}} (ICD10: {{icd10}}; DOID: 
                                         <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>)
-                                    </p>
+                                    </div>
                                     <ul style="display:none;">
                                         {{#evidence}}
                                         <li class="list-group-indent">{{database}} :
@@ -494,7 +495,7 @@
                                         {{/evidence}}
                                         {{^evidence}} (No evidence data available.) {{/evidence}}
                                     </ul>
-                                    <hr/>
+                                    <div class="plus-button-margin-bottom"></div>
                                 </div>
                                 {{/disease}}
                             </div>

@@ -14,12 +14,12 @@ function setFormValues(data) {
     if (data.query) {
         $("#glycan_id").val(data.query.glytoucan_ac);
         if (data.query.mass) {
-            var massSlider = document.getElementById('slider');
+            var massSlider = document.getElementById('sliderbox-slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
         }
 
         if (data.query.number_monosaccharides) {
-            var massSlider1 = document.getElementById('slider1');
+            var massSlider1 = document.getElementById('sliderbox-slider1');
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
         $("#organism").val(data.query.tax_id);
@@ -48,7 +48,7 @@ function setProteinFormValues(data) {
     if (data.query) {
         $("#protein").val(data.query.uniprot_canonical_ac);
         if (data.query.mass) {
-            var massSlider = document.getElementById('slider');
+            var massSlider = document.getElementById('sliderbox-slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
         }
         $("#organism").val(data.query.tax_id);
