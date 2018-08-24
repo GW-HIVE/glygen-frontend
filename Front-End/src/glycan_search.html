@@ -33,6 +33,10 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
+<style>
+
+</style>
+
 
 <body onload="tracking()">
     <div id="loading_image">
@@ -64,51 +68,99 @@
             </div>
         </div>
 
-        <!-- Glycan size-->
+        <!--&lt;!&ndash; Glycan size&ndash;&gt;-->
+        <!--<div class="gg-form-group row">-->
+            <!--<div>-->
+                <!--<label class="control-label col-sm-4" for="slider">-->
+                    <!--<span>-->
+                        <!--<a href="javascript://" title="Glycan Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your glycan(s)">-->
+                            <!--<i class="far fa-question-circle help-sign"></i>-->
+                        <!--</a>-->
+                    <!--</span> Glycan Size:</label>-->
+            <!--</div>-->
+
+            <!--<div class="col-sm-offset-2 col-sm-10 row glycanSizeMargin">-->
+                <!--&lt;!&ndash; First range&ndash;&gt;-->
+                <!--<div class="gg-form-group row">-->
+                    <!--<div class="col-xs-2">-->
+                        <!--<h6>Min</h6>-->
+                        <!--<div id="lower-value"> </div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-7">-->
+                        <!--<h6 class="align-center">Native Mass Range</h6>-->
+                        <!--<div id="slider"> </div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-2 max-value-alighnment" style="padding-left: 35px;">-->
+                        <!--<h6>Max</h6>-->
+                        <!--<div id="upper-value"> </div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; second range&ndash;&gt;-->
+                <!--<div class="gg-form-group row">-->
+                    <!--<div class="col-xs-2 min-value-alighnment">-->
+                        <!--<h6>Min</h6>-->
+                        <!--<div id="lower-value1"> </div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-7">-->
+                        <!--<h6 class="align-center">Native Sugar Range</h6>-->
+                        <!--<div id="slider1"> </div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-2 max-value-alighnment2" style="margin-bottom: 40px; padding-left: 35px;">-->
+                        <!--<h6>Max</h6>-->
+                        <!--<div id="upper-value1"> </div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+
         <div class="gg-form-group row">
             <div>
-                <label class="control-label col-sm-4" for="slider">
+                <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Glycan Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your glycan(s)">
+                        <a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Mass Range for your proteins(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
-                    </span> Glycan Size:</label>
+                    </span>Protein Size:</label>
             </div>
-
-            <div class="col-sm-offset-2 col-sm-10 row glycanSizeMargin">
+            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div class="gg-form-group row">
-                    <div class="col-xs-2">
-                        <h6>Min</h6>
-                        <div id="lower-value"> </div>
+                <div class="row">
+                    <div class="col-xs-2 min-value-alignment">
+
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-xs-7" id="slider">
                         <h6 class="align-center">Native Mass Range</h6>
-                        <div id="slider"> </div>
-                    </div>
-                    <div class="col-xs-2 max-value-alighnment" style="padding-left: 35px;">
-                        <h6>Max</h6>
-                        <div id="upper-value"> </div>
+                        <div class="sliderbox">
+                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                            <span>Min</span>
+                            <input class="sliderbox-input-min">
+                            <span>Max</span>
+                            <input class="sliderbox-input-max">
+                        </div>
                     </div>
                 </div>
-                <!-- second range-->
-                <div class="gg-form-group row">
-                    <div class="col-xs-2 min-value-alighnment">
-                        <h6>Min</h6>
-                        <div id="lower-value1"> </div>
-                    </div>
 
-                    <div class="col-xs-7">
-                        <h6 class="align-center">Native Sugar Range</h6>
-                        <div id="slider1"> </div>
+                <div class="row">
+                    <div class="col-xs-2 min-value-alignment">
+
                     </div>
-                    <div class="col-xs-2 max-value-alighnment2" style="margin-bottom: 40px; padding-left: 35px;">
-                        <h6>Max</h6>
-                        <div id="upper-value1"> </div>
+                    <div class="col-xs-7" id="slider1">
+                        <h6 class="align-center">Native Sugar Range</h6>
+                        <div class="sliderbox1">
+                            <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
+                            <span>Min</span>
+                            <input class="sliderbox-input-min1">
+                            <span>Max</span>
+                            <input class="sliderbox-input-max1">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Organism-->
         <div class="gg-form-group row">
