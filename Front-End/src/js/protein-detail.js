@@ -62,27 +62,49 @@ function ajaxSuccess(data) {
             // console.log(data.isoforms[i]);
         }
 
+   // CrossRef
+        //
+        //
+
+
+//mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
+
+// getting array
         var itemsGlycosyl = [];
+        var itemsGlycosyl2 = [];
         var itemsMutate = [];
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
 
+
         // filling in glycosylation data
         if (data.glycosylation) {
+
             for (var i = 0; i < data.glycosylation.length; i++) {
+
                 var glycan = data.glycosylation[i];
-                itemsGlycosyl.push({
-                    glytoucan_ac: glycan.glytoucan_ac,
-                    residue: glycan.residue + glycan.position,
-                    type: glycan.type,
-                    evidence: glycan.evidence
+                if(glycan.glytoucan_ac){
+                    itemsGlycosyl.push({
+                        glytoucan_ac: glycan.glytoucan_ac,
+                        residue: glycan.residue + glycan.position,
+                        type: glycan.type,
+                        evidence: glycan.evidence
 
-
-                });
+                    });
+                }
+                else{
+                    itemsGlycosyl2.push({
+                        residue: glycan.residue + glycan.position,
+                        type: glycan.type,
+                        evidence: glycan.evidence
+                    });
+                }
             }
         }
+
+
 
 
 // filling in expression_disease
@@ -163,6 +185,10 @@ function ajaxSuccess(data) {
         // $container.find('#basics5x').click();
 
         // glycosylation table
+
+
+
+
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'glytoucan_ac',
@@ -208,6 +234,50 @@ function ajaxSuccess(data) {
                 return html.join('');
             },
 
+        });
+
+
+        // glycosylation table
+        $('#glycosylation-table2').bootstrapTable({
+            columns: [
+
+                {
+                    field: 'type',
+                    title: 'Type',
+                    sortable: true
+                },
+
+                {
+                    field: 'residue',
+                    title: 'Residue',
+                    sortable: true
+                }
+
+
+            ],
+            pagination: 10,
+            data: itemsGlycosyl2,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var html = [];
+                var evidences = row.evidence;
+                for (var i = 0; i < evidences.length; i++) {
+                    var evidence = evidences[i];
+                    html.push("<div class='row'>");
+                    html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                    html.push("</div>");
+                }
+                return html.join('');
+            },
+
+        });
+
+        $(".EmptyFind").each(function() {
+            var $tid = $(this).attr("id");
+            var $txt = $(this).text();
+            if ($txt == "") {
+                $('a[data-target=#' + $tid + ']').closest('li').hide();
+            }
         });
         $('#loading_image').fadeOut();
         // mutation table
@@ -339,10 +409,6 @@ function ajaxSuccess(data) {
             }
 
         ],
-
-
-
-
 
         pagination: 10,
         data: itemsExpressionTissue,

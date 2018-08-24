@@ -354,28 +354,75 @@
             </ul>
 
 
+                       <!--<ul id="basics6" class="cd-faq-group selected">-->
+            <!--&lt;!&ndash; added new class &ndash;&gt;-->
+            <!--<div class="panel panel-default">-->
+
+            <!--<div class="gg-panel-heading">-->
+            <!--&lt;!&ndash; added new class &ndash;&gt;-->
+            <!--<h4>Glycosylation</h4>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+            <!--<div class="row">-->
+            <!--<div class='col-md-12 col-xs-12'>-->
+            <!--{{#glycosylation}}-->
+            <!--<table id="glycosylation-table">-->
+            <!--</table>-->
+            <!--{{/glycosylation}}-->
+            <!--{{^glycosylation}}-->
+            <!--No data available.-->
+            <!--{{/glycosylation}}-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</ul>-->
+
+
             <ul id="basics6" class="cd-faq-group selected">
                 <!-- added new class -->
                 <div class="panel panel-default">
-
                     <div class="gg-panel-heading">
                         <!-- added new class -->
-                        <h4>Glycosylation</h4>
+                        <h4>Glycosylation sites</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
+
                             <div class='col-md-12 col-xs-12'>
-                                {{#glycosylation}}
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a  href="#1a" data-toggle="tab">Characterised</a>
+                                    </li>
+                                    <li><a href="#2a" data-toggle="tab">Uncharacterised</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content clearfix">
+                                <div class="tab-pane active EmptyFind" id="1a">
+                                    {{#glycosylation}}
                                     <table id="glycosylation-table">
                                     </table>
-                                {{/glycosylation}}
+                                    {{/glycosylation}}
+                                    {{^glycosylation}}
+
+                                    {{/glycosylation}}
+                                </div>
+                                <div class="tab-pane active EmptyFind" id="2a">
+                                    {{#glycosylation}}
+                                    <table id="glycosylation-table2">
+                                    </table>
+                                    {{/glycosylation}}
+                                    {{^glycosylation}}
+
+                                    {{/glycosylation}}
+                                </div>
                                 {{^glycosylation}}
-                                    No data available.
+                                No data available.
                                 {{/glycosylation}}
                             </div>
-                        </div>
-            </ul>
 
+                    </div>
+                </div>
+            </ul>
 
             <!-- cd-faq-group -->
             <!-- Function -->
