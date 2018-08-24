@@ -1,0 +1,31 @@
+Step 1:
+VPN to GW server; go.vpn.gwu.edu
+ 
+Step 2:
+Log into GW server;
+ssh pradeepkumar@glygen-vm-prd.biochemistry.gwu.edu
+username: ***
+Password: ***
+ 
+Step 3:
+/* New users install/clone GITHUB 
+git clone https://github.com/GW-HIVE/glygen-frontend.git */
+move to folder glygen-frontend
+ 
+
+update the glygen-frontend folder to updated GitHub repository
+run git pull
+GitHub user name and password
+ 
+Step 4:
+ 
+move to folder glygen-frontend/Front-End
+run maven, mvn compile
+ 
+
+ 
+ 
+
+
+
+
