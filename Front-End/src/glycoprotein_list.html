@@ -85,7 +85,7 @@
                     <!--Protein Typeahead-->
                     {{#uniprot_canonical_ac}}
                     <tr>
-                        <td>UniProt Accession</td>
+                        <td>UniProt Accession:</td>
                         <td>{{uniprot_canonical_ac}}</td>
                     </tr>
                     {{/uniprot_canonical_ac}}
@@ -94,7 +94,7 @@
 
                     {{#mass.min}}
                     <tr>
-                        <td>Mass</td>
+                        <td>Mass:</td>
                         {{#mass.min}}
                         <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}} -Da</td>
                         {{/mass.max}}
@@ -105,7 +105,7 @@
                     <!--Organism-->
                     {{#organism}}
                     <tr>
-                        <td>Organism</td>
+                        <td>Organism:</td>
                         <td>{{organism}}</td>
                     </tr>
                     {{/organism}}
@@ -114,7 +114,7 @@
 
                     {{#protein_name}}
                     <tr>
-                        <td>Protein Name</td>
+                        <td>Protein Name:</td>
                         <td>{{protein_name}}</td>
                     </tr>
                     {{/protein_name}}
@@ -123,7 +123,7 @@
 
                     {{#gene_name}}
                     <tr>
-                        <td>Gene Name</td>
+                        <td>Gene Name:</td>
                         <td>{{gene_name}}</td>
                     </tr>
                     {{/gene_name}}
@@ -132,7 +132,7 @@
                     <!--Glycan Typeahead-->
                     {{#glycan.glytoucan_ac}}
                     <tr>
-                        <td>Glycan</td>
+                        <td>Glycan:</td>
                         <td>{{glycan.glytoucan_ac}} {{glycan.relation}}</td>
                     </tr>
                     {{/glycan.glytoucan_ac}}
@@ -141,29 +141,34 @@
                     <!--peptide seq-->
                     {{#sequence.aa_sequence}}
                     <tr>
-                        <td>Sequence</td>
+                        <td>Sequence:</td>
                         <td><abbr class="limit-text-size"
                                   title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span
                                 style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
                     </tr>
                     {{/sequence.aa_sequence}}
 
-                    <!--amino acid-->
-                    {{#glycosylated_aa_exists}}
-                    <tr>
-                        <td>Glycosylated Amino Acid</td>
-                        <td>
-                            {{#glycosylated_aa}}
-                            {{.}}<br/>
-                            {{/glycosylated_aa}}
-                        </td>
-                    </tr>
-                    {{/glycosylated_aa_exists}}
+
+                    <!--{{#glycosylated_aa_exists}}-->
+                    <!--<tr>-->
+                        <!--<td>Glycosylated Amino Acid</td>-->
+                        <!--<td>-->
+                            <!--{{#glycosylated_aa}}-->
+                            <!--{{.}}<br/>-->
+                            <!--{{/glycosylated_aa}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--{{/glycosylated_aa_exists}}-->
+
+                    {{#glycosylated_aa}}
+                    <td>Amino acid:</td>
+                   <td>    {{.}}   </td>
+                    {{/glycosylated_aa}}
 
                     <!--pathway Typeahead-->
                     {{#pathway_id}}
                     <tr>
-                        <td>Pathway Id</td>
+                        <td>Pathway Id:</td>
                         <td>{{pathway_id}}</td>
                     </tr>
                     {{/pathway_id}}

@@ -371,6 +371,10 @@ function ajaxProteinSearchSuccess() {
     var protein_name_long = $("#protein_name_long").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val();
+    var glycan_id = $("#glycan_id").val();
+    var glycan_relation = $("#glycan_relation").val();
+    var glycosylated_aa = $(".glycosylated_aa").val();
+    var glycosylation_evidence = $("#glycosylation_evidence").val();
 
     var formObject = {
         operation: "AND",
@@ -388,6 +392,12 @@ function ajaxProteinSearchSuccess() {
             type: "exact",
             aa_sequence: sequence
         },
+        glycan: {
+            relation: glycan_relation,
+            glytoucan_ac: glycan_id
+        },
+        glycosylated_aa: glycosylated_aa,
+        glycosylation_evidence: glycosylation_evidence
 
     };
     var json = "query=" + JSON.stringify(formObject);
@@ -409,7 +419,7 @@ function ajaxProteinSearchSuccess() {
                 activityTracker("user", "", "no result found");
                 $('#loading_image').fadeOut();
             } else {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './glycoprotein_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
         }
