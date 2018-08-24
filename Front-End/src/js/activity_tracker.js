@@ -27,10 +27,12 @@ function tracking() {
         }
         else {                                               // If nothing in the local storage then give the user a choice.
             track_banner.style.display = "block";
-
+            $('#textManageSettingsDisabled').css('display', 'block');
+            $('#textManageSettingsEnabled').css('display', 'none');
+            $('#textManageSettingsDisabled').html("Do you want GlyGen to remember your searches for your future use? You can improve/streamline your searches by allowing GlyGen to monitor your interaction with our system. For example, your searches can be recorded so you can review them at a later date. This can be changed at any time in this section.");
         }
     } else {
-        txt = "Sorry, your browser does not support modern features... Please update it to the latest version";
+        txt = "Please update your browser to the latest version in order to access all our website features.";
         displayBannerMsg(txt);
     }
 }
