@@ -294,40 +294,6 @@ $(document).ready(function () {
     };
 
 //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // $.getJSON(getWsUrl("search_init_protein"), function (result) {
-    //     searchInitValues = result;
-
-    //     var orgElement = $(".organism").get(0);
-    //     createOption(orgElement, result.organism[0].name, result.organism[0].id);
-    //     createOption(orgElement, result.organism[1].name, result.organism[1].id);
-    //     var mass_max = result.protein_mass.max;
-    //     var mass_min = result.protein_mass.min;
-    //     mass(mass_min, mass_max)
-    //     // check for ID to see if we need to load search values
-    //     // please do not remove this code as it is required prepopulate search values
-    //     var id = getParameterByName('id') || id;
-    //     if (id) {
-    //         LoadProteinSearchvalues(id);
-    //     }
-    // })
-    //     .fail(ajaxSearchFailure,function (result) {
-    //         activityTracker("error", "", result.status + ": search_init WS error");
-    //         console.log("error in search_init");
-    //     });
 });
 
 /** Mass range function
@@ -408,15 +374,12 @@ function ajaxProteinSearchSuccess() {
     var formObject = {
         operation: "AND",
         query_type: "search_protein",
-        // organism: organism,
         tax_id: organism ? parseInt(organism) : '',
         uniprot_canonical_ac: uniprot_id,
         refseq_ac: refseq_id,
-        // mass: {
-        //     min: mass_min,
-        //     max: mass_max
-        // },
-        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        mass: { "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
+        },
         protein_name: protein_name_long,
         gene_name: gene_name,
         pathway_id: pathway_id,
