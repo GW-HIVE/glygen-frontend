@@ -203,7 +203,7 @@
                                 </p>
                                 <ul style="display:none;">
                                     {{#evidence}}
-                                    <li class="list-group">{{database}} :
+                                    <li class="list-group-indent">{{database}} :
                                         <a href="{{{url}}}" target="_blank">{{id}}</a>
                                     </li>
                                     {{/evidence}}
@@ -333,9 +333,9 @@
                                     Chromosome: {{chromosome}} ({{start_pos}} - {{end_pos}})
                                 </p>
                                 {{/chromosome}}
-                                <ul style="display:none;">
+                                <ul style="display:none; margin-bottom: 15px;">
                                     {{#evidence}}
-                                    <li class="list-group">{{database}} :
+                                    <li class="list-group-indent">{{database}} :
                                         <a href="{{{url}}}" target="_blank">{{id}}</a>
                                     </li>
                                     {{/evidence}}
@@ -442,11 +442,12 @@
                                 <div class='col-md-12 col-xs-12'>
                                     <p class="panelmaincontent">
                                         <button class="open-close-button">+</button>
-                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a>
+                                        <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
+                                        {{annotation}}
                                     </p>
                                     <ul style="display:none;">
                                         {{#evidence}}
-                                        <li>{{database}} :
+                                        <li class="list-group-indent">{{database}} :
                                             <a href="{{{url}}}" target="_blank">{{id}}</a>
                                         </li>
                                         {{/evidence}}
@@ -487,7 +488,7 @@
                                     </p>
                                     <ul style="display:none;">
                                         {{#evidence}}
-                                        <li>{{database}} :
+                                        <li class="list-group-indent">{{database}} :
                                             <a href="{{{url}}}" target="_blank">{{id}}</a>
                                         </li>
                                         {{/evidence}}
