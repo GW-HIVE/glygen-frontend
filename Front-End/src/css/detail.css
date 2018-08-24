@@ -103,20 +103,35 @@ pre {
 /*    list-style-type: circle;*/
 /*    overflow-wrap: break-word;*/
 }
-.panelcontent2 {
-    font-size: 14px; 
+.panelcontent {
+    font-size: 15px; 
 }
-.list-group{
+.list-group {
     font-size: 16px;
-/*    margin-left: 20px;*/
-/*    list-style-type: circle;*/
     list-style-type: square;
     margin: 0 0 0 20px;
 }
 .list-group-indent {
-/*    font-size: 12px;*/
+    font-size: 15px;
     margin-left: 60px;
+/*    margin-bottom: 5px;*/
     list-style-type: square; 
+}
+.plus-button-margin-bottom {
+    margin-bottom: 15px;
+}
+hr.hr-style { 
+    clear:both;
+    display:block;
+    width: 96%;
+    border: 0; 
+    height: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0); 
 }
 .cd-close-panel {
     padding-right:70px;
