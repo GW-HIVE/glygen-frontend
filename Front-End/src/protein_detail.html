@@ -386,9 +386,7 @@
                         <h4>Glycosylation sites</h4>
                     </div>
                     <div class="panel-body">
-
                             <div class='col-md-12 col-xs-12'>
-
                                 <ul  style="margin-bottom: 20px;" class="nav nav-tabs">
                                     <li class="active">
                                         <a  href="#1a" data-toggle="tab">Characterised</a>
@@ -398,23 +396,24 @@
                                 </ul>
                             </div>
                             <div class="tab-content clearfix">
+                                {{#glycosylation}}
                                 <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
-                                    {{#glycosylation}}
+
+
                                     <table id="glycosylation-table">
                                     </table>
-                                    {{/glycosylation}}
-                                    {{^glycosylation}}
-
-                                    {{/glycosylation}}
                                 </div>
-                                <div class="tab-pane active EmptyFind" id="2a">
-                                    {{#glycosylation}}
+                                    <div class="tab-pane" id="2a">
                                     <table id="glycosylation-table2">
                                     </table>
+                                    </div>
                                     {{/glycosylation}}
-                                    {{^glycosylation}}
+                                </div>
 
-                                    {{/glycosylation}}
+                                    {{#glycosylation}}
+
+
+
                                 </div>
                                 {{^glycosylation}}
                                 No data available.
