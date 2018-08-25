@@ -368,7 +368,7 @@ function ajaxProteinSearchSuccess() {
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
     var gene_name = $("#gene_name").val();
-    var protein_name_long = $("#protein_name_long").val();
+    var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val();
     var glycan_id = $("#glycan_id").val();
@@ -385,7 +385,7 @@ function ajaxProteinSearchSuccess() {
         mass: { "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-        protein_name: protein_name_long,
+        protein_name: protein_name,
         gene_name: gene_name,
         pathway_id: pathway_id,
         sequence: {

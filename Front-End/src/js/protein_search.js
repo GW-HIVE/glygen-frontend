@@ -30,8 +30,6 @@ function addCommas(nStr) {
 
 /**
  * function aminoLetter is a to select value of text-input
-
-
  * @param {string} strings of characters
  * @returns {number} if matches returns true or not false
  */
@@ -106,7 +104,7 @@ $("#protein_name").autocomplete({
     }
 });
 
-/** pgene_name field on change detect and suggest auto complete options from retrieved Json
+/** gene_name field on change detect and suggest auto complete options from retrieved Json
  * @proteinjson - forms the JSON to post
  * @data-returns the gene_name.
  *
@@ -363,11 +361,10 @@ function ajaxProteinSearchSuccess() {
     var uniprot_id = $("#protein").val();
     var refseq_id = $("#refseq").val();
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
-    // var mass_slider =$(".sliderbox-slider").val();
     var mass_min = mass_slider[0];
     var mass_max = mass_slider[1];
     var gene_name = $("#gene_name").val();
-    var protein_name_long = $("#protein_name_long").val();
+    var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val();
 
@@ -380,7 +377,7 @@ function ajaxProteinSearchSuccess() {
         mass: { "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-        protein_name: protein_name_long,
+        protein_name: protein_name,
         gene_name: gene_name,
         pathway_id: pathway_id,
         sequence: {
