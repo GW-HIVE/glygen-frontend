@@ -120,19 +120,17 @@ pre {
 .plus-button-margin-bottom {
     margin-bottom: 15px;
 }
-hr.hr-style { 
-    clear:both;
-    display:block;
-    width: 96%;
-    border: 0; 
-    height: 1px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-image: -webkit-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
-    background-image: -moz-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
-    background-image: -ms-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0);
-    background-image: -o-linear-gradient(left, #f0f0f0, #c1c1c1, #f0f0f0); 
+
+
+
+thead {
+    background: #659BC9;
+    color: #fff;
 }
+
+
+
+
 .cd-close-panel {
     padding-right:70px;
     top:20px;

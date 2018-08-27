@@ -53,11 +53,10 @@ thead{
     /*background-color: #659bc9;*/
     /*color: #555;*/
 
-    background-color: #2e78b7;
-    color:#fff;
+    background-color: #659BC9;
+    color: #fff;
     vertical-align: middle; 
-    padding: 3px 0; 
-  
+    padding: 3px 0;   
 }
 .results-table-top {
     width: 70%; 
