@@ -876,3 +876,9 @@ label.labelContactUs {
     padding-top: 30vh;
 }
 
+/* ---------------------------------
+    Disclaimer & Privacy Policy
+____________________________________  */
+.section-margin section {
+    margin-top: 40px;
+}
