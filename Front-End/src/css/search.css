@@ -34,7 +34,7 @@ input[type=submit]:hover {
 .gg-container {
     width: 70%;
     border-radius: 5px;
-    background-color:#dfe5ed;
+    background-color: #dfe5ed;
     padding: 20px 80px; 
     margin-top: 30px;
     margin-bottom: 60px;
@@ -48,34 +48,14 @@ input[type=submit]:hover {
     margin-bottom: 30px;
 }
 
-@media only screen and (max-width: 768px) {
-    .gg-container {
-        width: 100%;
-        border-radius: 5px;
-
-        background-color:#dfe5ed;
-
-        padding: 40px;
-        margin-top: 30px;
-        margin-bottom: 60px;
-    }
-    
-    .min-value-alignment {
-        padding-left: 0;
-        margin-left: 0 !important;
-    }
-}
 .align-center {
     text-align: center !important; 
 }
 
 .glycanSizeMargin h6 {
     margin-bottom: 10px;
+    margin-top: 0;
 }
-
-.min-value-alignment {
-        margin-left: 25px;
-    }
 
 .gg-text-example {
     margin-top: 3px;
@@ -115,12 +95,56 @@ select {
     display: table;
     clear: both;
 }
+@media only screen and (max-width: 900px) {
+    .protein-size-alignment {
+        margin-left: 30%;
+        margin-top: 20px !important;
+        overflow: auto;
+        width: 100% !important;
+    } 
+}
+@media only screen and (max-width: 768px) {
+    .gg-container {
+        width: 100%;
+        border-radius: 5px;
+        background-color: #dfe5ed;
+        padding: 40px;
+        margin-top: 30px;
+        margin-bottom: 60px;
+    }
+    
+    .protein-size-alignment {
+        margin-left: 10%;
+        margin-top: 20px !important;
+        width: 80% !important; 
+    }    
+}
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
     .col-25, .col-75, input[type=submit] {
         width: 100%;
         margin-top: 0;
+    }
+    
+    .protein-size-alignment {
+        margin-left: 5%;
+        margin-top: 20px !important;
+        width: 90% !important;
+/*        overflow: auto;*/
+    }
+    
+}
+
+@media (max-width: 360px) {
+    .max-label {
+        margin-left: 0 !important;
+    }
+     .protein-size-alignment {
+        margin-left: 5%;
+        margin-top: 20px !important;
+        width: 90% !important;
+/*        overflow: auto;*/
     }
 }
 
@@ -199,13 +223,13 @@ select {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 #aminos{
-    color:#2E78B7;
+    color: #2E78B7;
     text-align: center;
 }
 
 .textbox{
- margin-bottom: 10px;
-    margin-top:19px;
+    margin-bottom: 10px;
+    margin-top: 19px;
 }
 #pathway{
     margin-top:20px;
@@ -214,24 +238,31 @@ select {
     margin-top:0px;
 }
 
-.sliderbox-input-min1{
-    margin-top:10px;
+.sliderbox-input-min {
+    margin-top: 20px;
     display: inline-block;
-    width: 35%;
+    width: 30%;
 }
-.sliderbox-input-min{
-    margin-top:10px;
+.sliderbox-input-min1 {
+    margin-top: 20px;
     display: inline-block;
-    width: 35%;
+    width: 30%;
 }
 
 .sliderbox-input-max{
-    margin-top:10px;
+    margin-top: 10px;
     display: inline-block;
-    width: 35%;
+    width: 30%;
 }
-.sliderbox-input-max1{
-    margin-top:10px;
+.sliderbox-input-max1 {
+    margin-top: 10px;
     display: inline-block;
-    width: 35%;
+    width: 30%;
+}
+.max-label {
+    margin-left: 5%;
+}
+
+.min-label {
+    margin-left: 5%;
 }

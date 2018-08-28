@@ -77,10 +77,8 @@
                 <div class="gg-text-example">Example: P01215</div>
             </div>
         </div>
-
-
-        <!-- RefSeq Accession_ID-->
-        <div class="row top-table-margin">
+       <!-- RefSeq Accession_ID-->
+        <div class="row">
             <label class="control-label col-sm-4" for="refseq">
                 <span>
                     <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
@@ -133,23 +131,20 @@
                         </a>
                     </span>Protein Size:</label>
             </div>
-            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">
+            <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div class="row">
-                    <div class="col-xs-2 min-value-alignment">
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
 
-                    </div>
-                    <span><strong>Max</strong></span><div class="col-xs-7" id="slider"><span><strong>Min</strong></span>
-                    <!--<div class="col-xs-7" id="slider">-->
-                    <h6 class="align-center">Native Mass Range</h6>
+                    <h6 class="align-center">Native Mass</h6>
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                        <span><strong>Min</strong></span>
-                        <input class="sliderbox-input-min form-control">
-                        <span><strong>Max</strong></span>
-                        <input class="sliderbox-input-max form-control">
+                        <div class="row"> 
+                            <span  class="min-label"><strong>Min</strong></span>
+                            <input class="sliderbox-input-min form-control">
+                            <span class="max-label"><strong>Max</strong></span>
+                            <input class="sliderbox-input-max form-control">
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -287,12 +282,11 @@
                 </select>
             </div>
             <div class="col-sm-8">
-                <form name="form1" action="#" style="height: 220px;">
-                    <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-
+                <form name="form1" action="#">
+                    <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 </form>
-                <h6 id='msg' class="rq" style="margin-top: 8px;"></h6>
-                <div class="gg-text-example">Example: MQPR</div>
+                <div style="margin-top: -10px;" class="gg-text-example">Example: MQPR</div>
+                <h6 id='msg' class="rq"></h6>
             </div>
         </div>
         <!-- end Sequences-->
@@ -317,7 +311,7 @@
         <!--End Pathway-->
 
         <!-- Glycosylation Evidences-->
-        <div class="gg-form-group row" id="glycosylation_evidence_xx" style="margin-top: -20px;">
+        <div class="gg-form-group row" id="glycosylation_evidence_xx">
             <label class="control-label col-sm-4" for="organism">
                 <span>
                     <a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
