@@ -63,8 +63,77 @@ function ajaxSuccess(data) {
         }
 
    // CrossRef
-        //
-        //
+
+
+        // define variable to for itemscrossref
+        var itemscrossRef=[];
+//check data.
+        if(data.crossref){
+            for (var i = 0; i < data.crossref.length; i++) {
+                var crossrefitem = data.crossref[i];
+                var found = '';
+                for(var j=0; j < itemscrossRef.length; j++){
+                    var databaseitem  = itemscrossRef[j];
+                    if(databaseitem.database === crossrefitem.database){
+                        found = true;
+                        databaseitem.links.push(
+                            {
+                                url: crossrefitem.url,
+                                id: crossrefitem.id
+                            }
+                        );
+                    }
+                }
+                if(!found){
+                    itemscrossRef.push({
+                        database: crossrefitem.database,
+                        links: [{
+                            url: crossrefitem.url,
+                            id: crossrefitem.id
+                        }]
+                    });
+                }
+            }
+
+            data.itemscrossRef = itemscrossRef;
+
+        }
+       // //pathway
+        var itemsPathway=[];
+        if(data.pathway){
+            for (var i = 0; i < data.pathway.length; i++) {
+                var pathwayitem = data.pathway[i];
+                var found = false;
+                for(var j=0; j < itemsPathway.length; j++){
+                    var databaseitem1  = itemsPathway[j];
+                    if(databaseitem1. resource === pathwayitem. resource){
+                        found = true;
+                        databaseitem1.links.push(
+
+                            {
+                                url: pathwayitem.url,
+                                id: pathwayitem.id,
+                                name: pathwayitem.name
+
+                            }
+                        );
+                    }
+                }
+                if(!found){
+                    itemsPathway.push({
+                        resource: pathwayitem. resource,
+                        links: [{
+                            url: pathwayitem.url,
+                            id: pathwayitem.id
+                        }]
+                    });
+                }
+            }
+
+            data.itemsPathway = itemsPathway;
+
+        }
+
 
 
 //mustach rending
@@ -77,8 +146,6 @@ function ajaxSuccess(data) {
         var itemsMutate = [];
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
-
-
         // filling in glycosylation data
         if (data.glycosylation) {
 
@@ -276,7 +343,7 @@ function ajaxSuccess(data) {
             var $tid = $(this).attr("id");
             var $txt = $(this).text();
             if ($txt == "") {
-                $('a[data-target=#' + $tid + ']').closest('li').hide();
+                $('a[data-target=#' + $tid + ']').closest('table').hide();
             }
         });
         $('#loading_image').fadeOut();
