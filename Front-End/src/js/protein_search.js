@@ -268,9 +268,9 @@ $(document).ready(function () {
 
         slider.noUiSlider.on('update', function( values, handle ) {
             if ( handle ) {
-                inpMax.value = addCommas(values[handle]);
+                inpMax.value = addCommas(parseInt(values[handle]));
             } else {
-                inpMin.value = addCommas(values[handle]);
+                inpMin.value = addCommas(parseInt(values[handle]));
             }
         });
 
