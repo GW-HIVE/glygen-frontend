@@ -89,7 +89,7 @@
                     <!--Protein Typeahead-->
                     {{#uniprot_canonical_ac}}
                     <tr>
-                        <td>UniProt Ac</td>
+                        <td>UniProt Accession:</td>
                         <td>{{uniprot_canonical_ac}}</td>
                     </tr>
                     {{/uniprot_canonical_ac}}
@@ -98,7 +98,7 @@
 
                     {{#mass.min}}
                     <tr>
-                        <td>Mass</td>
+                        <td>Mass:</td>
                         {{#mass.min}}
                         <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
                         {{/mass.max}}
@@ -109,7 +109,7 @@
                     <!--Organism-->
                     {{#tax_id}}
                     <tr>
-                        <td>Organism</td>
+                        <td>Organism:</td>
                         <td>{{tax_id}}</td>
                     </tr>
                     {{/tax_id}}
@@ -118,7 +118,7 @@
 
                     {{#protein_name}}
                     <tr>
-                        <td>Protein Name</td>
+                        <td>Protein Name:</td>
                         <td>{{protein_name}}</td>
                     </tr>
                     {{/protein_name}}
@@ -127,7 +127,7 @@
 
                     {{#gene_name}}
                     <tr>
-                        <td>Gene Name</td>
+                        <td>Gene Name:</td>
                         <td>{{gene_name}}</td>
                     </tr>
                     {{/gene_name}}
@@ -136,7 +136,7 @@
                     <!--peptide seq-->
                     {{#sequence.aa_sequence}}
                     <tr>
-                        <td>Sequence</td>
+                        <td>Sequence:</td>
                         <td><abbr class="limit-text-size"
                                   title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
                             <!--<span-->
@@ -149,7 +149,7 @@
                     <!--pathway Typeahead-->
                     {{#pathway_id}}
                     <tr>
-                        <td>Pathway Id</td>
+                        <td>Pathway Id:</td>
                         <td>{{pathway_id}}</td>
                     </tr>
                     {{/pathway_id}}

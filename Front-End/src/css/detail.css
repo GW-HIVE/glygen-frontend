@@ -103,13 +103,23 @@ pre {
 /*    list-style-type: circle;*/
 /*    overflow-wrap: break-word;*/
 }
+.panelmaincontent2 {
+    margin-right:20px;
+    padding-right:10px;
+}
 .panelcontent {
     font-size: 15px; 
 }
 .list-group {
     font-size: 16px;
     list-style-type: square;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 20px !important;
+}
+
+.list-group2{
+    font-size: 16px;
+    list-style-type: square;
+    margin: 0 0 0 35px;
 }
 .list-group-indent {
     font-size: 15px;
@@ -120,7 +130,6 @@ pre {
 .plus-button-margin-bottom {
     margin-bottom: 15px;
 }
-
 
 
 thead {

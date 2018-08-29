@@ -63,7 +63,7 @@
             <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: 20px 15px 35px 0;">
         </div>    
-        <!-- GlycoProtein_ID-->
+        <!-- Protein_ID-->
         <div class="row">  
             <label class="control-label col-sm-4" for="protein">
                 <span>
@@ -78,7 +78,8 @@
                 <div class="gg-text-example">Example: P01215</div>
             </div>
         </div>
-        <div class="row top-table-margin">
+        <!-- RefSeq Accession_ID-->
+        <div class="row">
             <label class="control-label col-sm-4" for="refseq">
                 <span>
                     <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
@@ -101,26 +102,23 @@
                         <a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Mass Range for your proteins(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
-                    </span>Protein Size:</label>
+                    </span>Protein Size:
+                </label>
             </div>
-            <div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">
+            <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div class="row">
-                    <div class="col-xs-2 min-value-alignment">
-
-                    </div>
-                    <span><strong>Max</strong></span><div class="col-xs-7" id="slider"><span><strong>Min</strong></span>
-                  <!--<div class="col-xs-7" id="slider">-->
-                        <h6 class="align-center">Native Mass Range</h6>
-                        <div class="sliderbox">
-                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                            <span><strong>Min</strong></span>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
+                    <h6 class="align-center">Native Mass</h6>
+                    <div class="sliderbox">
+                        <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                        <div class="row">
+                            <span class="min-label"><strong>Min</strong></span>
                             <input class="sliderbox-input-min form-control">
-                             <span><strong>Max</strong></span>
+                            <span class="max-label"><strong>Max</strong></span>
                             <input class="sliderbox-input-max form-control">
                         </div>
                     </div>
-                </div>
+                </div>    
             </div>
         </div>
 
@@ -176,7 +174,7 @@
             <label class="control-label col-sm-4" for="sequences">
                 <span>
                     <a href="javascript://" title="“Protein or Peptide Sequence" data-toggle="popover" data-placement="left"
-                        data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence">
+                        data-content="Click to Select Sequence Type and Enter a Protein or Peptide Sequence">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Protein or Peptide Sequence:</label>
@@ -190,13 +188,11 @@
             </div>
 
             <div class="col-sm-8">
-                <form name="form1" action="#" style="height: 220px;">
-                    <textarea name="text1" class="textbox" id="sequences" rows="10" cols="50" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                <form name="form1" action="#">
+                    <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 </form>
-
-                <h6 id='msg' class="rq" style="margin-top: 8px;"></h6>
-
-                <div class="gg-text-example">Example: IYKE</div>
+                <div style="margin-top: -10px;" class="gg-text-example">Example: IYKE</div>
+                <h6 id='msg' class="rq"></h6>    
             </div>
         </div>
        
@@ -212,7 +208,7 @@
             <div class="col-sm-8">
                 <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome Pathway ID">
                 <div class="gg-text-example">KEGG Example: hsa:3593 <br>Reactome Example: R-HSA-447115</div>
-                
+
                 <label id='pathwayMsg' class="rq"></label>
             </div>
         </div>
