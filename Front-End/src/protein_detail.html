@@ -274,15 +274,12 @@
 
 
             <ul id="basics3" class="cd-faq-group selected">
-                <!-- added new class -->
                 <!-- Glycan Cross Referance panel starts here for page -->
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
-                        <!-- added new class -->
                         <h4>Cross Reference</h4>
                     </div>
                     <div class="panel-body">
-                        <!-- added new class -->
                         {{#itemscrossRef}}
                         <div class="panelmaincontent">
                             <div class="row">
@@ -345,26 +342,23 @@
 
             <ul id="basics4" class="cd-faq-group selected">
                 <li class="cd-faq-title"/>
-                <!-- added new class -->
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
-                        <!-- added new class -->
                         <h4>Pathway</h4>
                     </div>
                     <div class="panel-body">
-                        <!-- added new class -->
                         {{#itemsPathway}}
-
                         <div class="panelmaincontent">
                             <div class="row">
-                                <li class="list-group2"> <strong>{{resource}}:</strong></li>
+                                <li class="list-group2"><strong>{{resource}}:</strong></li>
                                 {{#links}}
-                                <div class="col-xs-12 col-sm-6"><li class="list-group-indent">{{name}}&nbsp &nbsp <a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li></div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>
+                                </div>
                                 {{/links}}
                             </div>
                         </div>
                         {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
-
                     </div>
                 </div>
             </ul>

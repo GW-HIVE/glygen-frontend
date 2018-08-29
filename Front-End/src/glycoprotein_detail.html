@@ -253,13 +253,18 @@
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
-                        {{#crossref}}
+                        {{#itemscrossRef}}
                         <div class="panelmaincontent">
-                            <li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>
-                                <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
-                            </li>
+                            <div class="row">
+                                <li class="list-group2"><strong>{{database}}:</strong></li>
+                                {{#links}}
+                                <div class="col-xs-6 col-sm-3">
+                                    <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
+                                </div>
+                                {{/links}}
+                            </div>
                         </div>
-                        {{/crossref}} {{^crossref}} No data available. {{/crossref}}
+                        {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
                     </div>
                 </div>
             </ul>
@@ -292,19 +297,24 @@
 
             <ul id="basics4" class="cd-faq-group selected">
                 <li class="cd-faq-title"/>
-                <!-- added new class -->
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
-                        <!-- added new class -->
                         <h4>Pathway</h4>
                     </div>
                     <div class="panel-body">
-                        {{#pathway}}
+                        {{#itemsPathway}}
                         <div class="panelmaincontent">
-                            <li class="list-group"><strong>{{resource}}</strong> : {{name}} <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a></li>
+                            <div class="row">
+                                <li class="list-group2"><strong>{{resource}}:</strong></li>
+                                {{#links}}
+                                <div class="col-xs-12 col-sm-6">
+                                    <li class="list-group-indent">
+                                    {{name}}&nbsp<a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a></li>
+                                </div>
+                                {{/links}}
+                            </div>
                         </div>
-                        {{/pathway}}
-                        {{^pathway}} No data available. {{/pathway}}
+                        {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
                     </div>
                 </div>
             </ul>
