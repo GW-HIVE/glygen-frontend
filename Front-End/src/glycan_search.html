@@ -64,7 +64,7 @@
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession">
                 
-                <div class="gg-text-example">Example: G10106TL</div>
+                <div class="gg-text-example textExample">Example: <a2 href="">G10106TL</a></div>
             </div>
         </div>
 
@@ -197,7 +197,7 @@
                 </span> Glycan Type:</label>
 
             <div class="col-sm-8">
-                <select class="ddl" id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
+                <select class="ddl glycanType" id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
                     <option value="">Select Glycan Type</option>
                 </select>
                 <div class="gg-text-example">Examples: N-glycan or O-glycan</div>
@@ -231,8 +231,8 @@
                 </span>UniProt Accession:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein">
-                <div class="gg-text-example">Example: P01588 (Human Erythropoietin) </div>
+                <input type="text" name="ProteinID" class="form-control protein textExampleInput" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein">
+                <div class="gg-text-example textExample2">Example: <a2 href="">P01588</a> (Human Erythropoietin) </div>
             </div>
         </div>
 
@@ -248,7 +248,7 @@
             <div class="col-sm-8">
                 <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a structural Motif contained in your glycan">
 
-                <div class="gg-text-example">Example: Lewis X</div>
+                <div class="gg-text-example textExample3">Example: <a2 href="">Lewis X</a></div>
             </div>
         </div>
 
@@ -264,7 +264,7 @@
             <div class="col-sm-8">
                 <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme">
 
-                <div class="gg-text-example">Example: B4GALT1</div>
+                <div class="gg-text-example textExample4">Example: <a2 href="">B4GALT1</a></div>
                 <!-- <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>-->
 
             </div>
