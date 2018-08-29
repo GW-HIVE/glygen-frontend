@@ -5,6 +5,7 @@
 //@update: June 26-2018- with web service changes
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
 
 
 function addCommas(nStr) {
@@ -124,9 +125,11 @@ function ajaxSuccess(data) {
 //  * Returns the GWU services fails.
 
 
-function ajaxFailure() {
-    displayErrorByCode();
-    activityTracker("error", glytoucan_ac, "server down");
+function ajaxFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", glytoucan_ac, err + ": " + errorThrown);
     $('#loading_image').fadeOut();
 }
 
@@ -143,6 +146,7 @@ function LoadData(glytoucan_ac) {
         url: getWsUrl("glycan_detail", glytoucan_ac),
         // data: getDetailPostData(id),
         method: 'POST',
+        timeout: getTimeout("detail_glycan"),
         success: ajaxSuccess,
         error: ajaxFailure
     };

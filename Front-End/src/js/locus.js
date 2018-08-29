@@ -96,7 +96,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -128,16 +128,17 @@ function ajaxListSuccess(data) {
 
 
 
-        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-//  $('#error-message').show();
-    displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
@@ -153,6 +154,7 @@ function LoadDataList() {
         url: getWsUrl("loci_list"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
+        timeout: getTimeout("loci_list"),
         success: ajaxListSuccess,
         error: ajaxListFailure
     };

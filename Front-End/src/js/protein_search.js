@@ -147,26 +147,6 @@ $("#pathway").autocomplete({
     }
 });
 
-/**
- * gives appropriate search_init WS error message.
- * @param {*} jqXHR 
- * @param {*} textStatus 
- * @param {*} errorThrown 
- */
-function searchInitFailure(jqXHR, textStatus, errorThrown) {
-    var err = '';
-        if(textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror'){
-            err = textStatus;
-        }
-        else if (jqXHR.status === 0 || jqXHR.status == 404 || jqXHR.status == 500) {
-            err = jqXHR.status;
-        } else {
-            err = textStatus;
-        }
-    displayErrorByCode(err);
-    activityTracker("error", "", err+": "+errorThrown+": search_init WS error");
-    $('#loading_image').fadeOut();
-}
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
@@ -186,7 +166,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: "json",
             url: getWsUrl("search_init_protein"),
-            timeout: 0,
+            timeout: getTimeout("search_init_protein"),
             error: searchInitFailure,
             success: function (result) {
                 searchInitValues = result;
@@ -330,26 +310,6 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-/**
- * gives appropriate search WS error message.
- * @param {*} jqXHR 
- * @param {*} textStatus 
- * @param {*} errorThrown 
- */
-function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
-    var err = '';
-        if(textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror'){
-            err = textStatus;
-        }
-        else if (jqXHR.status === 0 || jqXHR.status == 404 || jqXHR.status == 500) {
-            err = jqXHR.status;
-        } else {
-            err = textStatus;
-        }
-    displayErrorByCode(err);
-    activityTracker("error", "", err+": "+errorThrown);
-    $('#loading_image').fadeOut();
-}
 
 /** On submit, function forms the JSON and submits to the search web services
  */
@@ -391,7 +351,7 @@ function ajaxProteinSearchSuccess() {
         type: 'post',
         url: getWsUrl("search_protein"),
         data: json,
-        timeout: 0,
+        timeout: getTimeout("search_protein"),
         error: ajaxSearchFailure,
 
         success: function (results) {

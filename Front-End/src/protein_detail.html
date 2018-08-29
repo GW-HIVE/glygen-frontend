@@ -642,47 +642,50 @@
             <a href="#0" class="cd-close-panel">Close</a>
 
         </script>
-    </div>
-</section>
-<div w3-include-html="footer.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+        </div>
+    </section>
+    <div w3-include-html="footer.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- script for table -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- script for detail page -->
-<script type="text/javascript" src="js/protein-detail.js"></script>
-<!-- script for template engine -->
-<script type="text/javascript" src="libraries/mustache.js"></script>
-<!-- script for webservice -->
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for navigation -->
-<script src="js/navbar.js"></script>
-<!-- script for side navigation -->
-<script src="js/faq_main.js"></script>
-<!-- script for user activity tracking and error logging -->
-<script src="js/activity_tracker.js"></script>
-<!-- script for error handling alerts -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- script for table -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <!-- script for detail page -->
+    <script type="text/javascript" src="js/protein-detail.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for webservice -->
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for navigation -->
+    <script src="js/navbar.js"></script>
+    <!-- script for side navigation -->
+    <script src="js/faq_main.js"></script>
+    <!-- script for user activity tracking and error logging -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for error handling alerts -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
 
-<script type="text/javascript">
-    $(document).ajaxStop(function () {
-        faqMain()
-        // calls the hash function only when all ajax calls are completed
-        function scrollToPanel(hash) {
-            //to scroll to the particular sub section.
-            // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-            if ($(window).width() < 768) {   //mobile view
-                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
-                $('.cd-close-panel').addClass('move-left');
-                $('body').addClass('cd-overlay');
-            } else {
-                $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
+    <script type="text/javascript">
+        $(document).ajaxStop(function () {
+            faqMain()
+            // calls the hash function only when all ajax calls are completed
+            function scrollToPanel(hash) {
+                //to scroll to the particular sub section.
+                // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+                if ($(window).width() < 768) {   //mobile view
+                    $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+                    $('.cd-close-panel').addClass('move-left');
+                    $('body').addClass('cd-overlay');
+                } else {
+                    $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
+                }
             }
         }
 
@@ -692,11 +695,6 @@
     });
 </script>
 
-
-
-
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
 </body>
 
 </html>

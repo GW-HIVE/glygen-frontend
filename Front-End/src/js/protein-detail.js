@@ -507,9 +507,11 @@ $('#loading_image').fadeOut();
  */
 //  * Returns the GWU services fails.
 
-function ajaxFailure() {
-    displayErrorByCode();
-    activityTracker("error", uniprot_canonical_ac, "server down");
+function ajaxFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", uniprot_canonical_ac, err + ": " + errorThrown);
     $('#loading_image').fadeOut();
 }
 
@@ -525,6 +527,7 @@ function LoadData(uniprot_canonical_ac) {
         dataType: "json",
         url: getWsUrl("protein_detail", uniprot_canonical_ac),
         method: 'POST',
+        timeout: getTimeout("detail_protein"),
         success: ajaxSuccess,
         error: ajaxFailure
     };

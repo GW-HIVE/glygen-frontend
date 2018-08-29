@@ -3,6 +3,7 @@
 // // @description: UO1 Version-1.1.
 // //@refactored  :June-27-2017
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 //     -->
 
 
@@ -88,7 +89,6 @@ $("#enzyme").autocomplete({
 });
 
 
-
 /** functions for dropdowns organism
  * get organism drop down values for search form
  */
@@ -100,73 +100,67 @@ var mass_min;
 var sugar_mass_min;
 var sugar_mass_max;
 $(document).ready(function () {
-    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        searchInitValues = result;
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("search_init_glycan"),
+        timeout: getTimeout("search_init_glycan"),
+        error: searchInitFailure,
+        success: function (result) {
+            searchInitValues = result;
 
-        var orgElement = $(".organism").get(0);
-        createOption(orgElement, result.organism[0].name, result.organism[0].id);
-        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+            var orgElement = $(".organism").get(0);
+            createOption(orgElement, result.organism[0].name, result.organism[0].id);
+            createOption(orgElement, result.organism[1].name, result.organism[1].id);
 
-        var glycanElement = $(".ddl").get(0);
+            var glycanElement = $(".ddl").get(0);
 
-        for(var x = 0; x < result.glycan_type.length; x++) {
-            createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
-        }
-
-        // $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
-        var mass_max = result.glycan_mass.max;
-        var mass_min = result.glycan_mass.min;
-        var sugar_mass_min = result.number_monosaccharides.min;
-        var sugar_mass_max = result.number_monosaccharides.max;
-        // mass(mass_min, mass_max);
-        // sugarmass(sugar_mass_min, sugar_mass_max)
-        // check for ID to see if we need to load search values
-        // please do not remove rhis code as it is required prepopulate search values
-        var id = getParameterByName('id') || id;
-        if (id) {
-            LoadSearchvalues(id);
-        }
-        new Sliderbox({
-            target: '.sliderbox',
-            start: [ mass_min, mass_max ], // Handle start position
-            connect: true, // Display a colored bar between the handles
-            behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-            range: { // Slider can select '0' to '100'
-                'min': mass_min,
-                'max': mass_max
-
+            for (var x = 0; x < result.glycan_type.length; x++) {
+                createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
             }
-        });
-        new Sliderbox1({
-            target: '.sliderbox1',
-            start: [ sugar_mass_min,sugar_mass_max ], // Handle start position
-            connect: true, // Display a colored bar between the handles
-            behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-            range: { // Slider can select '0' to '100'
-                'min': sugar_mass_min,
-                'max':  sugar_mass_max
 
+            // $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
+            var mass_max = result.glycan_mass.max;
+            var mass_min = result.glycan_mass.min;
+            var sugar_mass_min = result.number_monosaccharides.min;
+            var sugar_mass_max = result.number_monosaccharides.max;
+            // mass(mass_min, mass_max);
+            // sugarmass(sugar_mass_min, sugar_mass_max)
+            // check for ID to see if we need to load search values
+            // please do not remove rhis code as it is required prepopulate search values
+            var id = getParameterByName('id') || id;
+            if (id) {
+                LoadSearchvalues(id);
             }
-        });
+            new Sliderbox({
+                target: '.sliderbox',
+                start: [mass_min, mass_max], // Handle start position
+                connect: true, // Display a colored bar between the handles
+                behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+                range: { // Slider can select '0' to '100'
+                    'min': mass_min,
+                    'max': mass_max
 
-    })
-        .fail(function (result) {
-            activityTracker("error", "", result.status + ": search_init WS error");
-            console.log("error in search_init");
-        });
+                }
+            });
+            new Sliderbox1({
+                target: '.sliderbox1',
+                start: [sugar_mass_min, sugar_mass_max], // Handle start position
+                connect: true, // Display a colored bar between the handles
+                behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+                range: { // Slider can select '0' to '100'
+                    'min': sugar_mass_min,
+                    'max': sugar_mass_max
+
+                }
+            });
+
+        }
 });
-
-
-
-
-
-
-
-
+});
 
 ///New slider
 
-Sliderbox = function(options) {
+Sliderbox = function (options) {
 
     this.options = options;
 
@@ -174,7 +168,7 @@ Sliderbox = function(options) {
 
 };
 
-Sliderbox.prototype.init = function() {
+Sliderbox.prototype.init = function () {
 
     var box = document.querySelectorAll(this.options.target),
         len = box.length,
@@ -188,7 +182,7 @@ Sliderbox.prototype.init = function() {
 
 };
 
-Sliderbox.prototype.handler = function(target) {
+Sliderbox.prototype.handler = function (target) {
 
     var slider = target.querySelector('.sliderbox-slider'),
         inpMin = target.querySelector('.sliderbox-input-min'),
@@ -196,15 +190,15 @@ Sliderbox.prototype.handler = function(target) {
 
     noUiSlider.create(slider, this.options);
 
-    slider.noUiSlider.on('update', function( values, handle ) {
-        if ( handle ) {
+    slider.noUiSlider.on('update', function (values, handle) {
+        if (handle) {
             inpMax.value = addCommas(parseInt(values[handle]));
         } else {
             inpMin.value = addCommas(parseInt(values[handle]));
         }
     });
 
-    target.addEventListener('change', function(e) {
+    target.addEventListener('change', function (e) {
 
         if (e.target === inpMin) {
 
@@ -222,7 +216,7 @@ Sliderbox.prototype.handler = function(target) {
 };
 ///New slider
 
-Sliderbox1 = function(options) {
+Sliderbox1 = function (options) {
 
     this.options = options;
 
@@ -230,7 +224,7 @@ Sliderbox1 = function(options) {
 
 };
 
-Sliderbox1.prototype.init = function() {
+Sliderbox1.prototype.init = function () {
 
     var box = document.querySelectorAll(this.options.target),
         len = box.length,
@@ -244,7 +238,7 @@ Sliderbox1.prototype.init = function() {
 
 };
 
-Sliderbox1.prototype.handler = function(target) {
+Sliderbox1.prototype.handler = function (target) {
 
     var slider1 = target.querySelector('.sliderbox-slider1'),
         inpMin1 = target.querySelector('.sliderbox-input-min1'),
@@ -252,15 +246,15 @@ Sliderbox1.prototype.handler = function(target) {
 
     noUiSlider.create(slider1, this.options);
 
-    slider1.noUiSlider.on('update', function( values, handle ) {
-        if ( handle ) {
+    slider1.noUiSlider.on('update', function (values, handle) {
+        if (handle) {
             inpMax1.value = addCommas(parseInt(values[handle]));
         } else {
             inpMin1.value = addCommas(parseInt(values[handle]));
         }
     });
 
-    target.addEventListener('change', function(e) {
+    target.addEventListener('change', function (e) {
 
         if (e.target === inpMin1) {
 
@@ -356,15 +350,15 @@ function configureDropDownLists(ddl1, ddl2, callback) {
         var glycan_type = searchInitValues.glycan_type[x];
 
         // find glycan type by name
-        if(glycan_type.name === glyan_type_name) {
-            glycan_type.subtype.sort(function(a,b){
+        if (glycan_type.name === glyan_type_name) {
+            glycan_type.subtype.sort(function (a, b) {
                 var Atokens = a.split(' ');
                 var Btokens = b.split(' ');
                 var Atext = Atokens[0];
                 var Btext = Btokens[0];
                 var Anumber = parseInt(Atokens[1]);
                 var Bnumber = parseInt(Btokens[1]);
-                if(isNaN(Anumber) || isNaN(Bnumber)){
+                if (isNaN(Anumber) || isNaN(Bnumber)) {
                     return Atext > Btext;
                 }
                 else {
@@ -397,10 +391,6 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function ajaxSearchFailure() {
-    displayErrorByCode('server_down');
-}
-
 
 /** On submit, function forms the JSON and submits to the search web services
  */
@@ -420,19 +410,20 @@ function submitvalues() {
     var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
     var glycan_motif = document.getElementById("motif").value;
-    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1],organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
+    var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
 
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search"),
         data: json,
+        timeout: getTimeout("search_glycan"),
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "no result found for "+json);
+                activityTracker("error", "", results.error_code+" for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -467,11 +458,11 @@ function submitvalues() {
 
 //form json from form submit
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-    var enzymes={}
-    if(input_enzyme){
+    var enzymes = {}
+    if (input_enzyme) {
         enzymes = {
-            "id":input_enzyme,
-                "type":"gene"
+            "id": input_enzyme,
+            "type": "gene"
         }
 
     }
@@ -480,14 +471,15 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         "operation": "AND",
         query_type: input_query_type,
         mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
-        number_monosaccharides: { "min": parseInt(sugar_min),
+        number_monosaccharides: {
+            "min": parseInt(sugar_min),
             "max": parseInt(sugar_max)
         },
         // enzyme: {
         //     "id": input_enzyme,
         //     "type": "gene"
         // },
-        enzyme:enzymes,
+        enzyme: enzymes,
         glytoucan_ac: input_glycan_id,
         tax_id: input_organism ? parseInt(input_organism) : '',
         glycan_type: input_glycantype,

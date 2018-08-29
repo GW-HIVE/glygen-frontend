@@ -12,7 +12,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123338976-1"></script>
     <script async src="js/ga.js" type="text/javascript"></script>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
@@ -72,15 +72,15 @@
                     </select>
                     <!--<label>Sort By</label>-->
                     <!--<select class="sort-select form-control" onchange="xsort(this);">-->
-                        <!--<option value="glytoucan_ac">GlyTouCan Accession</option>-->
-                        <!--<option selected value="mass">Mass</option>-->
-                        <!--<option value="number_monosaccharides">No. of Monosac.</option>-->
-                        <!--<option value="number_enzymes">No of Enzymes</option>-->
-                        <!--<option value="number_proteins">No of Protein</option>-->
+                    <!--<option value="glytoucan_ac">GlyTouCan Accession</option>-->
+                    <!--<option selected value="mass">Mass</option>-->
+                    <!--<option value="number_monosaccharides">No. of Monosac.</option>-->
+                    <!--<option value="number_enzymes">No of Enzymes</option>-->
+                    <!--<option value="number_proteins">No of Protein</option>-->
                     <!--</select>-->
                     <!--<select class="dir-select form-control" onchange="xdir(this);">-->
-                        <!--<option value="asc" >ASC</option>-->
-                        <!--&lt;!&ndash;<option value="desc" selected>DESC</option>&ndash;&gt;-->
+                    <!--<option value="asc" >ASC</option>-->
+                    <!--&lt;!&ndash;<option value="desc" selected>DESC</option>&ndash;&gt;-->
                     <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
@@ -201,34 +201,33 @@
         <!-- table start here -->
 
         <!--<div class="row">-->
-            <!--<div class="col-md-12 col-xs-12">-->
-                <!--<div class="table-responsive">-->
-                <table id="gen-table" data-show-export="true" data-toggle="table"
-                    data-page-size="10">
-                    <!-- <table id="gen-table"   data-detail-formatter="detailFormat" data-detail-view="true" data-search="true">    may be for version 2-->
-                    <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
+        <!--<div class="col-md-12 col-xs-12">-->
+        <!--<div class="table-responsive">-->
+        <table id="gen-table" data-show-export="true" data-toggle="table" data-page-size="10">
+            <!-- <table id="gen-table"   data-detail-formatter="detailFormat" data-detail-view="true" data-search="true">    may be for version 2-->
+            <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
 
-                    <thead>
-                        <tr>
-                            <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">GlyToucan <br>Accession</th>
-                            <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Glycan Image</th>
-                            <th data-field="mass" data-formatter="massFormatter" data-sortable="true">Native Mass
-                                <br>(Da)
-                            </th>
-                            <th data-field="number_monosaccharides" data-sortable="true">No of
-                                <br>Monosaccharides
-                            </th>
-                            <th data-field="number_proteins" data-sortable="true">On How Many
-                                <br>Glycoproteins
-                            </th>
-                            <th data-field="number_enzymes" data-sortable="true">How Many
-                                <br>Enzymes
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            <!--</div>-->
-            <!--</div>-->
+            <thead>
+                <tr>
+                    <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">GlyToucan <br>Accession</th>
+                    <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Glycan Image</th>
+                    <th data-field="mass" data-formatter="massFormatter" data-sortable="true">Native Mass
+                        <br>(Da)
+                    </th>
+                    <th data-field="number_monosaccharides" data-sortable="true">No of
+                        <br>Monosaccharides
+                    </th>
+                    <th data-field="number_proteins" data-sortable="true">On How Many
+                        <br>Glycoproteins
+                    </th>
+                    <th data-field="number_enzymes" data-sortable="true">How Many
+                        <br>Enzymes
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
         <!-- table container ends here -->
         <!-- sorting_bottom -->
@@ -255,7 +254,7 @@
                         <option value="number_proteins">No of Proteins</option>
                     </select>
                     <select class="dir-select form-control" onchange="xdir(this);">
-                        <option value="asc" >ASC</option>
+                        <option value="asc">ASC</option>
                         <option value="desc" selected>DESC</option>
                     </select>
                     <label class="searchresult"></label>
@@ -285,6 +284,8 @@
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
     <!--<script type="text/javascript" src="js/glycan_search.js"></script>-->
     <!-- script for pagination page -->
     <script type="text/javascript" src="js/pagination.js"></script>
@@ -304,8 +305,6 @@
     <script src="js/navbar.js"></script>
     <!--  w3 including footer-->
 
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
 
 </body>
 
