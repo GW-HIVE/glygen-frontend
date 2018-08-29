@@ -8,6 +8,7 @@
 //@update: June 26-2018- with Rupali Mahadik web service changes.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+// @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
 
 
 
@@ -199,7 +200,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -227,17 +228,19 @@ function ajaxListSuccess(data) {
 
         // document.title='glycan-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
     }
 
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-//  $('#error-message').show();
-    displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    // $('#loading_image').fadeOut();
 }
 
 /**
@@ -253,6 +256,7 @@ function LoadDataList() {
         url: getWsUrl("glycan_list"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
+        timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
         error: ajaxListFailure
     };

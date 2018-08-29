@@ -79,6 +79,8 @@ function displayBannerMsg(txt) {
 
 function activityTracker(type, id, message) {
     var user = localStorage.getItem("ID");
+    var pagePath = window.location.pathname;
+
     if (user == "NO" || user == null) {
         // logging the user's who have opted out of activity logging as Anonymous users.
         user = "Anonymous";
@@ -87,14 +89,14 @@ function activityTracker(type, id, message) {
         "id": id,                         //  "glycan/search ID"
         "user": user,
         "type": type,                     //    "user" or "error"
-        "page": window.location.pathname,
+        "page": pagePath.substring(pagePath.lastIndexOf('/')+1),
         "message": message
     };
     console.log(data);
     $.post(getWsUrl("log_activity"), { query: JSON.stringify(data) })
-        .done(function (resp) {
-            console.log(resp);
-        })
+        // .done(function (resp) {
+        //     console.log(resp);
+        // })
         .fail(function (resp) {
             console.log(resp);
         });
@@ -129,7 +131,7 @@ window.onerror = function (msg, url, line, col, error) {
     // supported in every browser.  It worked for me in Chrome.
     //    var extra = !col ? '' : '\ncolumn: ' + col;
     //    extra += !error ? '' : '\nerror: ' + error;
-    activityTracker("error", getUrlVars(), "Error: " + msg + "\nurl: " + url + "\nline: " + line);
+    activityTracker("error", getUrlVars(), "JS Error: " + msg + "\nurl: " + url + "\nline: " + line);
 
     // var suppressErrorAlert = true;
     // If you return true, then error alerts (like in older versions of 

@@ -1,5 +1,6 @@
 //@author: Rupali Mahadik
 // @update: Aug 6, 2018 - Gaurav Agarwal - added ajax error cases.
+// @update: Aug 27, 2018 - Gaurav Agarwal - function to return ajax timeout values and ajax error-failure handling functions.
 
 
 function getErrorMessage(errorCode) {
@@ -134,12 +135,142 @@ function displayErrorByCode(errorCode) {
 }
 
 
-// /**
-//  * Js load for adding header and footer file into each page
-//
-//
-//  */
-// $(document).ready(function () {
-//     $("#footer").load("footer.html");
-//     $("#header").load("header.html");
-// });
+/**
+ * Gives the timeout value for ajax calls to repective web services.
+ * @param {string} ajaxWebService - The name of web service being called.
+ * @return timeout value in milliseconds.
+ */
+function getTimeout(ajaxWebService) {
+    // useCase question
+    var usecaseQ1 = 10000,
+        usecaseQ2 = 10000,
+        usecaseQ3 = 10000,
+        usecaseQ4 = 10000,
+        usecaseQ5 = 10000,
+        usecaseQ6 = 10000,
+        usecaseQ7 = 10000,
+        usecaseQ8 = 10000,
+        usecaseQ9 = 10000;
+
+    // search Init
+    var searchInitGlycan = 10000,
+        searchInitProtein = 10000,
+        searchInitGlycoP = 10000;
+
+    // search
+    var searchGlycan = 10000,
+        searchProtein = 10000;
+
+    // list
+    var listGlycan = 5000,
+        listProtein = 5000,
+        listLocus = 5000;
+
+    // detail
+    var detailGlycan = 5000,
+        detailProtein = 5000;
+
+    // contact us
+    var contact = 5000;
+
+    switch (ajaxWebService.toLowerCase()) {
+        // glycan
+        case "search_init_glycan":
+            return searchInitGlycan;
+        case "search_glycan":
+            return searchGlycan;
+        case "list_glycan":
+            return listGlycan;
+        case "detail_glycan":
+            return detailGlycan;
+
+        // protein
+        case "search_init_protein":
+            return searchInitProtein;
+        case "search_protein":
+            return searchProtein;
+        case "list_protein":
+            return listProtein;
+        case "detail_protein":
+            return detailProtein;
+
+        // Glycoprotein
+        case "search_init_glycoprotein":
+            return searchInitGlycoP;
+
+        // useCase
+        case "usecase_q1":
+            return usecaseQ1;
+        case "usecase_q1":
+            return usecaseQ2;
+        case "usecase_q1":
+            return usecaseQ3;
+        case "usecase_q1":
+            return usecaseQ4;
+        case "usecase_q1":
+            return usecaseQ5;
+        case "usecase_q1":
+            return usecaseQ6;
+        case "usecase_q1":
+            return usecaseQ7;
+        case "usecase_q1":
+            return usecaseQ8;
+        case "usecase_q1":
+            return usecaseQ9;
+
+        // locus list
+        case "loci_list":
+            return listLocus;
+
+        // contact us
+        case "contact":
+            return contact;
+
+        default:
+            return 5000;
+    }
+}
+
+/**
+ * logs appropriate search_init WS error message.
+ * @param {*} jqXHR
+ * @param {*} textStatus
+ * @param {*} errorThrown
+ */
+function searchInitFailure(jqXHR, textStatus, errorThrown) {
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    activityTracker("error", "", err + ": " + errorThrown + ": search_init WS error");
+    $('#loading_image').fadeOut();
+}
+
+/**
+ * displays and logs appropriate search WS error message.
+ * @param {*} jqXHR
+ * @param {*} textStatus
+ * @param {*} errorThrown
+ */
+function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", "", err + ": " + errorThrown);
+    $('#loading_image').fadeOut();
+}
+
+/**
+ * gives general error message for the ajax call.
+ * @param {*} jqStatus 
+ * @param {*} textStatus 
+ * @return error message.
+ */
+function decideAjaxError(jqStatus, textStatus){
+    var err = '';
+    if (textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror') {
+        err = textStatus;
+    }
+    else if (jqStatus === 0 || jqStatus === 404 || jqStatus === 500) {
+        err = jqStatus;
+    } else {
+        err = textStatus;
+    }
+    return err;
+}
