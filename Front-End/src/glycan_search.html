@@ -119,56 +119,54 @@
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Mass Range for your proteins(s)">
+                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass Range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
-                    </span>Protein Size:
+                    </span>Chemical Mass:
                 </label>
             </div>
             <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div class="row">
-<!--
-                    <div class="col-xs-2 min-value-alignment">
-
-                    </div>
--->
-                    <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
-                        <h6 class="align-center">Native Mass</h6>
-                        <div class="sliderbox">
-                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                            <div class="row"> 
-                                <span class="min-label"><strong>Min</strong></span>
-                                <input class="sliderbox-input-min form-control">
-                                <span class="max-label"><strong>Max</strong></span>
-                                <input class="sliderbox-input-max form-control">
-                            </div>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
+                    <h6 class="align-center">Chemical Mass</h6>
+                    <div class="sliderbox">
+                        <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                        <div class="row"> 
+                            <span class="min-label"><strong>Min</strong></span>
+                            <input class="sliderbox-input-min form-control">
+                            <span class="max-label"><strong>Max</strong></span>
+                            <input class="sliderbox-input-max form-control">
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-<!--
-                    <div class="col-xs-2 min-value-alignment">
-
-                    </div>
--->
-                    <div class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider1">
-                        <h6 class="align-center">Number of Sugars</h6>
-                        <div class="sliderbox1">
-                            <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
-                            <div class="row"> 
-                                <span class="min-label"><strong>Min</strong></span>
-                                <input class="sliderbox-input-min1 form-control">
-                                <span class="max-label"><strong>Max</strong></span>
-                                <input class="sliderbox-input-max1 form-control">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
             </div>
         </div>
-
+               
+        <div class="gg-form-group row">
+            <div>
+                <label class="control-label col-sm-4">
+                    <span>
+                        <a href="javascript://" title="Number of Sugars" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Number of Sugars Range for your protein(s)">
+                            <i class="far fa-question-circle help-sign"></i>
+                        </a>
+                    </span>Number of Sugars:
+                </label>
+            </div>       
+            <div class="col-sm-10 row glycanSizeMargin">       
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider1">
+                    <h6 class="align-center">Number of Sugars</h6>
+                    <div class="sliderbox1">
+                        <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
+                        <div class="row"> 
+                            <span class="min-label"><strong>Min</strong></span>
+                            <input class="sliderbox-input-min1 form-control">
+                            <span class="max-label"><strong>Max</strong></span>
+                            <input class="sliderbox-input-max1 form-control">
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
 
         <!-- Organism-->
         <div class="gg-form-group row">
@@ -183,7 +181,6 @@
                 <select class="organism" id="organism">
                     <option value="0">Select Organism</option>
                 </select>
-                <div class="gg-text-example">Example: Homo Sapiens</div>
             </div>
         </div>
 
@@ -200,7 +197,6 @@
                 <select class="ddl glycanType" id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
                     <option value="">Select Glycan Type</option>
                 </select>
-                <div class="gg-text-example">Examples: N-glycan or O-glycan</div>
             </div>
         </div>
 
@@ -217,7 +213,6 @@
                 <select id="ddl2">
                     <option value="">Select Glycan Subtype</option>
                 </select>
-                <div class="gg-text-example">Example: Hybrid or Complex (for N-glycans)</div>
             </div>
         </div>
 
