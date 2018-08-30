@@ -42,30 +42,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
-<style>
-    .fasta {
-
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        word-break: break-all;
-
-    }
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
-
-
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-</style>
 
 <body>
 <div id="loading_image">
@@ -81,7 +57,7 @@
 <section class="cd-faq">
     <ul class="cd-faq-categories">
         <li>
-            <a class="selected" href="#basics0">UniProt Accession</a>
+            <a class="selected" href="#basics0">General</a>
         </li>
         <li>
             <a href="#basics1">Species</a>
@@ -91,7 +67,7 @@
         </li>
 
         <li>
-            <a href="#basics3">Cross Reference</a>
+            <a href="#basics3">Cross References</a>
         </li>
         <li>
             <a href="#basics4">Pathway</a>
@@ -119,7 +95,7 @@
             <a href="#basics12">Expression Disease</a>
         </li>
         <li>
-            <a href="#basics10">Publication</a>
+            <a href="#basics10">Publications</a>
         </li>
     </ul>
 
@@ -254,7 +230,7 @@
 
             <!--<div class="gg-panel-heading">-->
             <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<h4>Cross Reference</h4>-->
+            <!--<h4>Cross References</h4>-->
 
             <!--</div>-->
             <!--<div class="panel-body">-->
@@ -277,7 +253,7 @@
                 <!-- Glycan Cross Referance panel starts here for page -->
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
-                        <h4>Cross Reference</h4>
+                        <h4>Cross References</h4>
                     </div>
                     <div class="panel-body">
                         {{#itemscrossRef}}
@@ -349,14 +325,10 @@
                     <div class="panel-body">
                         {{#itemsPathway}}
                         <div class="panelmaincontent">
-                            <div class="row">
-                                <li class="list-group2"><strong>{{resource}}:</strong></li>
-                                {{#links}}
-                                <div class="col-xs-12 col-sm-6">
-                                    <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>
-                                </div>
-                                {{/links}}
-                            </div>
+                            <li class="list-group"><strong>{{resource}}:</strong></li>
+                            {{#links}}    
+                            <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>   
+                            {{/links}}
                         </div>
                         {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
                     </div>
@@ -615,7 +587,7 @@
                 <div class="panel panel-default">
 
                     <div class="gg-panel-heading">
-                        <h4>Publication</h4>
+                        <h4>Publications</h4>
 
                     </div>
                     <div class="panel-body">
