@@ -150,10 +150,11 @@
                                 {{/recommendedname}}
 
                                 {{#refseq}}
-                                <li class="list-group"><strong>RefSeq Accession:</strong>
+                                {{#refseq.ac}} <li class="list-group"><strong>RefSeq Accession:</strong>
                                     <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
                                 </li>
                                 <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
+                                {{/refseq.ac}}
                                 {{/refseq}}
 
 
@@ -282,6 +283,7 @@
                                     <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
                                 </div>
                                 {{/links}}
+                                {{^link}}  {{/link}}
                             </div>
                         </div>
                         {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
@@ -676,12 +678,12 @@
                     $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
                 }
             }
-        }
+        });
 
         if (window.location.hash) {
             scrollToPanel(window.location.hash);
         }
-    });
+
 </script>
 
 </body>

@@ -122,32 +122,50 @@
                         <div class="row">
                             <!--always try to use double quotes for HTML attributes. -->
                             <div class="col-md-12 col-xs-6">
+                                {{#gene}}
+                                <li class="list-group"><strong>Gene Name:</strong>
+                                    <a href="{{{url}}}" target="_blank">{{name}}</a>
+                                </li>
+                                {{/gene}}
+                                {{^gene}}  {{/gene}}
+
                                 {{#uniprot_id}}
                                 <li class="list-group"><strong>UniProt ID:</strong>
                                     <a class="panelcontent" href="http://www.uniprot.org/uniprot/{{uniprot_id}}" target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
+                                {{^uniprot_id}}  {{/uniprot_id}}
 
+                                {{#uniprot_canonical_ac}}
                                 <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
+                                {{/uniprot_canonical_ac}}
+                                {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
 
-                                {{#refseq}}
-                                <li class="list-group"><strong>RefSeq Accession:</strong>
-                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{ac}}</a>
-                                </li>
-                                <li class="list-group"><strong>RefSeq Name:</strong> {{name}}</li>
-                                {{/refseq}}
-
-                                <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass.monoisotopic_mass}} Da</li>
-                                <li class="list-group"><strong>Chemical mass:</strong> {{mass.chemical_mass}} Da</li>
                                 {{#recommendedname}} {{#full}}
                                 <li class="list-group"><strong>UniProt entry
-                                    name:</strong> {{recommendedname.full}} {{#short}} ({{recommendedname.short}}) {{/short}}
+                                    name:</strong> {{recommendedname.full}}
+                                    {{#short}} ({{recommendedname.short}}) {{/short}}
                                 </li>
-                                {{/full}} {{/recommendedname}} {{#gene}}
-                                <li class="list-group"><strong>Gene Name:</strong>
-                                    <a href="{{{url}}}" target="_blank">{{name}}</a>
-                                </li>
-                                {{/gene}}
+                                {{/full}}
+                                {{/recommendedname}}
+
+                                {{#refseq}}
+                                {{#refseq.ac}} <li class="list-group"><strong>RefSeq Accession:</strong>
+                                <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
+                            </li>
+                                <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
+                                {{/refseq.ac}}
+                                {{/refseq}}
+
+
+                                {{#mass.monoisotopic_mass}}
+                                <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass.monoisotopic_mass}} Da</li>
+                                {{/mass.monoisotopic_mass}}
+                                {{^mass.monoisotopic_mass}}  {{/mass.monoisotopic_mass}}
+
+                                <li class="list-group"><strong>Chemical mass:</strong> {{mass.chemical_mass}} Da</li>
+
+
                                 <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
                                 <!--{{#hasFullName }} <p class="panelmaincontent">Name:{{recommendedName.full}}({{recommendedName.short}}) {{/hasFullName }}-->
                                 <!--{{#alternativenames}}-->
@@ -326,8 +344,8 @@
                         {{#itemsPathway}}
                         <div class="panelmaincontent">
                             <li class="list-group"><strong>{{resource}}:</strong></li>
-                            {{#links}}    
-                            <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>   
+                            {{#links}}
+                            <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>
                             {{/links}}
                         </div>
                         {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
@@ -627,6 +645,8 @@
 
 <!-- script for table -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+<!-- script for error-message/header-footer js -->
+<script src="js/utility.js"></script>
 <!-- script for detail page -->
 <script type="text/javascript" src="js/protein-detail.js"></script>
 <!-- script for template engine -->
@@ -657,18 +677,14 @@
                 $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
             }
         }
-
-        if (window.location.hash) {
-            scrollToPanel(window.location.hash);
-        }
     });
+
+    if (window.location.hash) {
+        scrollToPanel(window.location.hash);
+    }
+
 </script>
 
-
-
-
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
 </body>
 
 </html>
