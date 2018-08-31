@@ -62,17 +62,17 @@
                     <option>50</option>
                     <option>70</option>
                 </select>
-                <label>Sort By</label>
-                <select class="sort-select form-control" onchange="xsort(this);">
-                    <option selected value="uniprot_canonical_ac">ID</option>
-                    <option value="tax_id">tax_id</option>
-                    <option value="protein_name">protein_name</option>
-                    <option value="organism">organism</option>
-                </select>
-                <select class="dir-select form-control" onchange="xdir(this);">
-                    <option value="asc" selected>ASC</option>
-                    <option value="desc">DESC</option>
-                </select>
+                <!--<label>Sort By</label>-->
+                <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                    <!--<option selected value="uniprot_canonical_ac">ID</option>-->
+                    <!--<option value="tax_id">tax_id</option>-->
+                    <!--<option value="protein_name">protein_name</option>-->
+                    <!--<option value="organism">organism</option>-->
+                <!--</select>-->
+                <!--<select class="dir-select form-control" onchange="xdir(this);">-->
+                    <!--<option value="asc" selected>ASC</option>-->
+                    <!--<option value="desc">DESC</option>-->
+                <!--</select>-->
                 <label class="searchresult"></label>
             </form>
         </div>
@@ -89,11 +89,11 @@
 
                 <thead>
                 <tr>
-                    <th data-field="uniprot_canonical_ac" data-formatter="pageFormat">Protein ID</th>
-                    <th data-field="protein_name">Protein Name  </th>
-                    <th data-field="organism">Organism
+                    <th data-field="uniprot_canonical_ac"  data-sortable="true" data-formatter="pageFormat">UniProt Accession</th>
+                    <th data-field="protein_name" data-sortable="true">Protein Name  </th>
+                    <th data-field="organism" data-sortable="true">Organism
                     </th>
-                    <th data-field="tax_id">Tax_ID
+                    <th data-field="tax_id" data-sortable="true">Tax_ID
                 </th>
 
                 </tr>
@@ -117,17 +117,17 @@
                     <option>50</option>
                     <option>70</option>
                 </select>
-                <label>Sort By</label>
-                <select class="sort-select form-control" onchange="xsort(this);">
-                    <option selected value="uniprot_canonical_ac">ID</option>
-                    <option value="tax_id">tax id</option>
-                    <option value="protein_name">protein_name</option>
-                    <option value="organism">organism</option>
-                </select>
-                <select class="dir-select form-control" onchange="xdir(this);">
-                    <option value="asc" selected>ASC</option>
-                    <option value="desc">DESC</option>
-                </select>
+                <!--<label>Sort By</label>-->
+                <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                    <!--<option selected value="uniprot_canonical_ac">ID</option>-->
+                    <!--<option value="tax_id">tax id</option>-->
+                    <!--<option value="protein_name">protein_name</option>-->
+                    <!--<option value="organism">organism</option>-->
+                <!--</select>-->
+                <!--<select class="dir-select form-control" onchange="xdir(this);">-->
+                    <!--<option value="asc" selected>ASC</option>-->
+                    <!--<option value="desc">DESC</option>-->
+                <!--</select>-->
                 <label class="searchresult"></label>
             </form>
             <!--<label class="searchresult"></label>-->
@@ -150,10 +150,11 @@
 <script type="text/javascript" src="libraries/mustache.js"></script>
 <!-- script for getting Web Service URLs -->
 <script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for pagination page -->
-<script type="text/javascript" src="js/pagination.js"></script>
+
 <!-- script for glycan list page -->
 <script type="text/javascript" src="js/orthologus.js"></script>
+<!-- script for pagination page -->
+<script type="text/javascript" src="js/pagination.js"></script>
 <!-- script for third party-->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- script for getting Web Service URLs -->

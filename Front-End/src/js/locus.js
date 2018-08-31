@@ -73,6 +73,12 @@ function detailFormat(index, row) {
 
 
 
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
+
+}
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);

@@ -11,7 +11,17 @@ var uniprot_canonical_ac;
 
 
  */
-
+function scrollToPanel(hash) {
+    //to scroll to the particular sub section.
+    // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+    if ($(window).width() < 768) {   //mobile view
+        $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+        $('.cd-close-panel').addClass('move-left');
+        $('body').addClass('cd-overlay');
+    } else {
+        $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
+    }
+}
 
 // Sequence formatting Function
 function formatSequence (sequenceString) {
@@ -134,26 +144,15 @@ function ajaxSuccess(data) {
 
         }
 
-
-
-//mustach rending
-        var html = Mustache.to_html(template, data);
-        var $container = $('#content');
-
-// getting array
-        var itemsGlycosyl = [];
-        var itemsGlycosyl2 = [];
-        var itemsMutate = [];
-        var itemsExpressionTissue = [];
-        var itemsExpressionDisease = [];
-        // filling in glycosylation data
+        data.itemsGlycosyl = [];
+        data.itemsGlycosyl2 = [];
         if (data.glycosylation) {
 
             for (var i = 0; i < data.glycosylation.length; i++) {
 
                 var glycan = data.glycosylation[i];
                 if(glycan.glytoucan_ac){
-                    itemsGlycosyl.push({
+                    data.itemsGlycosyl.push({
                         glytoucan_ac: glycan.glytoucan_ac,
                         residue: glycan.residue + glycan.position,
                         type: glycan.type,
@@ -162,7 +161,7 @@ function ajaxSuccess(data) {
                     });
                 }
                 else{
-                    itemsGlycosyl2.push({
+                    data.itemsGlycosyl2.push({
                         residue: glycan.residue + glycan.position,
                         type: glycan.type,
                         evidence: glycan.evidence
@@ -170,6 +169,20 @@ function ajaxSuccess(data) {
                 }
             }
         }
+
+
+
+//mustach rending
+        var html = Mustache.to_html(template, data);
+        var $container = $('#content');
+
+// getting array
+
+        var itemsMutate = [];
+        var itemsExpressionTissue = [];
+        var itemsExpressionDisease = [];
+        // filling in glycosylation data
+
 
 
 
@@ -287,7 +300,7 @@ function ajaxSuccess(data) {
                 }
                 ],
             pagination: 10,
-            data: itemsGlycosyl,
+            data: data.itemsGlycosyl,
             detailView: true,
             detailFormatter: function (index, row) {
                 var html = [];
@@ -300,7 +313,9 @@ function ajaxSuccess(data) {
                 }
                 return html.join('');
             },
-
+            onPageChange: function(){
+                scrollToPanel("#basics6");
+            }
         });
 
 
@@ -323,7 +338,7 @@ function ajaxSuccess(data) {
 
             ],
             pagination: 10,
-            data: itemsGlycosyl2,
+            data: data.itemsGlycosyl2,
             detailView: true,
             detailFormatter: function (index, row) {
                 var html = [];

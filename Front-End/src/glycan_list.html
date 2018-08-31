@@ -133,7 +133,7 @@
 
                     {{#tax_id}}
                     <tr>
-                        <td>Organism:</td>
+                        <td>Taxonomy ID:</td>
                         <td>{{tax_id}}</td>
                     </tr>
                     {{/tax_id}}
@@ -155,23 +155,31 @@
                     {{/glycan_subtype}}
 
                     <!--protein typeahead-->
-                    {{#protein_ac}}
+                    {{#uniprot_canonical_ac}}
                     <tr>
                         <td>Glycosylated Protein:</td>
-                        <td>{{protein_ac}}</td>
+                        <td>{{uniprot_canonical_ac}}</td>
                     </tr>
-                    {{/protein_ac}}
+                    {{/uniprot_canonical_ac}}
 
                     <!--enzyme typeahead-->
+
 
                     {{#enzyme.id}}
                     <tr>
                         <td>Synthesizing Enzyme:</td>
-                        <td><abbr class="limit-text-size"
-                                  title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span
-                                style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>
+                        <td>
+                            {{enzyme.id}}</td>
                     </tr>
                     {{/enzyme.id}}
+                    <!--{{#enzyme.id}}-->
+                    <!--<tr>-->
+                    <!--<td>Synthesizing Enzyme:</td>-->
+                    <!--<td><abbr class="limit-text-size"-->
+                    <!--title="{{sequence.aa_sequence}}">{{enzyme.id}}</abbr><span-->
+                    <!--style="display:inline-block; overflow: auto;">{{enzyme.type}}</span></td>-->
+                    <!--</tr>-->
+                    <!--{{/enzyme.id}}-->
 
                     <!--glycanmotif typeahead-->
                     {{#glycan_motif}}
@@ -245,18 +253,18 @@
                         <option>50</option>
                         <option>70</option>
                     </select>
-                    <label>Sort By</label>
-                    <select class="sort-select form-control" onchange="xsort(this);">
-                        <option value="glytoucan_ac">GlyTouCan Ac</option>
-                        <option selected value="mass">Mass</option>
-                        <option value="number_monosaccharides">No of Monosac.</option>
-                        <option value="number_enzymes">No of Enzymes</option>
-                        <option value="number_proteins">No of Proteins</option>
-                    </select>
-                    <select class="dir-select form-control" onchange="xdir(this);">
-                        <option value="asc">ASC</option>
-                        <option value="desc" selected>DESC</option>
-                    </select>
+                    <!--<label>Sort By</label>-->
+                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                        <!--<option value="glytoucan_ac">GlyTouCan Ac</option>-->
+                        <!--<option selected value="mass">Mass</option>-->
+                        <!--<option value="number_monosaccharides">No of Monosac.</option>-->
+                        <!--<option value="number_enzymes">No of Enzymes</option>-->
+                        <!--<option value="number_proteins">No of Proteins</option>-->
+                    <!--</select>-->
+                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
+                        <!--<option value="asc">ASC</option>-->
+                        <!--<option value="desc" selected>DESC</option>-->
+                    <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
                 <!--<label class="searchresult"></label>-->

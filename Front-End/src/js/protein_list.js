@@ -79,7 +79,11 @@ function redirectPage2() {
  */
 
 
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
+}
 
 
 

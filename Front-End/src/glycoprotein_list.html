@@ -105,7 +105,7 @@
                     <!--Organism-->
                     {{#organism}}
                     <tr>
-                        <td>Organism:</td>
+                        <td>Taxonomy ID:</td>
                         <td>{{organism}}</td>
                     </tr>
                     {{/organism}}
@@ -233,20 +233,20 @@
                         <option>75</option>
                         <option>100</option>
                     </select>
-                    <label>Sort By</label>
-                    <select class="sort-select form-control" onchange="xsort(this);">
-                        <option value="uniprot_canonical_ac">UniProt Accession</option>
-                        <option value="gene_name">Gene Name</option>
-                        <option value="protein_name_long">UniProt Name</option>
-                        <option value="mass">Mass</option>
-                        <option value="organism">Organism</option>
-                        <option value="refseq_name">RefSeq Name</option>
-                        <option value="refseq_ac">RefSeq Acc</option>
-                    </select>
-                    <select class="dir-select form-control" onchange="xdir(this);">
-                        <option value="asc" selected>ASC</option>
-                        <option value="desc">DESC</option>
-                    </select>
+                    <!--<label>Sort By</label>-->
+                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
+                        <!--<option value="uniprot_canonical_ac">UniProt Accession</option>-->
+                        <!--<option value="gene_name">Gene Name</option>-->
+                        <!--<option value="protein_name_long">UniProt Name</option>-->
+                        <!--<option value="mass">Mass</option>-->
+                        <!--<option value="organism">Organism</option>-->
+                        <!--<option value="refseq_name">RefSeq Name</option>-->
+                        <!--<option value="refseq_ac">RefSeq Acc</option>-->
+                    <!--</select>-->
+                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
+                        <!--<option value="asc" selected>ASC</option>-->
+                        <!--<option value="desc">DESC</option>-->
+                    <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
                 <!--<label class="searchresult"></label>-->

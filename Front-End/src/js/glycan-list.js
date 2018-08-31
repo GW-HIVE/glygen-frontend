@@ -65,6 +65,14 @@ function redirectPage2() {
 //      // $("demosearch").tooltip();
 // });
 
+
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
+
+}
+
 /**
  * Redirect to  searchPage with id after clicking editSearch
  */

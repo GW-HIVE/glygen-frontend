@@ -90,10 +90,11 @@ function noOfPage(total_length, limit) {
  * totalNoSearch show user total search result.
  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
  */
-function totalNoSearch(total_length) {
-    $('.searchresult').html(" You Found  " + total_length + " results of glycan");
-
-}
+// function totalNoSearch(total_length) {
+//     $('.searchresult').html( "\""  + total_length + "glycan were found\"");
+//     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
+//
+// }
 
 
 /**

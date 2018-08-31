@@ -38,7 +38,7 @@ function addCommas(nStr) {
  */
 
 function aminoLetter(textareatxt) {
-    var letters = /^[RKDEQNHSTYCWAILMFVPGX]+$/gi;
+    var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
     if (textareatxt.value.match(letters)) {
         document.getElementById("msg").innerHTML = "";
         return true;
