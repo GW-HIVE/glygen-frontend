@@ -66,7 +66,7 @@
         <div class="row top-table-margin">
             <label class="control-label col-sm-4" for="protein">
                 <span>
-                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your Protein (see https://www.uniprot.org/)">
+                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> UniProt Accession:</label>
@@ -81,7 +81,7 @@
         <div class="row">
             <label class="control-label col-sm-4" for="refseq">
                 <span>
-                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your Protein (see https://www.uniprot.org/)">
+                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.uniprot.org/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> RefSeq Accession:</label>
@@ -92,50 +92,20 @@
                 <div class="gg-text-example">Example: NP_001239312.1</div>
             </div>
         </div>
-        <!--&lt;!&ndash; Protein Size &ndash;&gt;-->
-        <!--<div class="gg-form-group row">-->
-            <!--<div>-->
-                <!--<label class="control-label col-sm-4" for="slider">-->
-                    <!--<span>-->
-                        <!--<a href="javascript://" title="Protein Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Mass Range for your protein(s)">-->
-                            <!--<i class="far fa-question-circle help-sign"></i>-->
-                        <!--</a>-->
-                    <!--</span> Protein Size:</label>-->
-            <!--</div>-->
 
-            <!--<div class="col-sm-offset-1 col-sm-10 row glycanSizeMargin">-->
-                <!--&lt;!&ndash; First range&ndash;&gt;-->
-                <!--<div class="col-xs-2 min-value-alignment">-->
-                    <!--<h6>Min</h6>-->
-                    <!--<div id="lower-value"></div>-->
-                <!--</div>-->
-                <!--<div class="col-xs-7">-->
-                    <!--<h6 class="align-center">Native Mass Range</h6>-->
-                    <!--<div id="slider"></div>-->
-                <!--</div>-->
-                <!--<div class="col-xs-2" style="margin-bottom: 40px; padding-left: 35px;">-->
-                    <!--<h6>Max</h6>-->
-                    <!--<div id="upper-value"></div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!-- Protein size-->
+        <!-- Chemical Mass-->
         <div class="gg-form-group row">
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass Range for your protein(s)">
+                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
                     </span>Chemical Mass:</label>
             </div>
             <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
-
-                    <h6 class="align-center">Chemical Mass</h6>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
                         <div class="row"> 
