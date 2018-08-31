@@ -158,8 +158,8 @@ function getTimeout(ajaxWebService) {
         searchInitGlycoP = 10000;
 
     // search
-    var searchGlycan = 0,   //10000,
-        searchProtein = 0;  //10000;
+    var searchGlycan = 60000,   //10000,
+        searchProtein = 60000;  //10000;
 
     // list
     var listGlycan = 5000,
@@ -258,8 +258,8 @@ function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
 
 /**
  * gives general error message for the ajax call.
- * @param {*} jqStatus 
- * @param {*} textStatus 
+ * @param {*} jqStatus
+ * @param {*} textStatus
  * @return error message.
  */
 function decideAjaxError(jqStatus, textStatus){
