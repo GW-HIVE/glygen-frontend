@@ -158,8 +158,8 @@ function getTimeout(ajaxWebService) {
         searchInitGlycoP = 10000;
 
     // search
-    var searchGlycan = 0,   //10000,
-        searchProtein = 0;  //10000;
+    var searchGlycan = 60000,
+        searchProtein = 60000;  //10000;
 
     // list
     var listGlycan = 5000,

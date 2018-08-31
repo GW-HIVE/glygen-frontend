@@ -52,7 +52,13 @@
 // }
 
 
-
+function ajaxFailure(jqXHR, textStatus, errorThrown){
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var apiCalled = this.url;
+    displayErrorByCode(err);
+    activityTracker("error", apiCalled.substring(apiCalled.lastIndexOf('/') + 1), err + ": " + errorThrown + ": "+apiCalled);
+}
 
 
 
@@ -87,6 +93,8 @@ function bioEnzyme(){
     $.ajax({
         type: 'POST',
          url: getWsUrl("search_bioenzyme",id),
+         timeout: getTimeout("usecase_q1"),
+         error: ajaxFailure,
         success: function(results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
