@@ -41,8 +41,10 @@ var limit = 10;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    var excutionDate= new Date(queryInfo.execution_time);
-    queryInfo.execution_time = excutionDate.toLocaleString();
+    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
+
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 
