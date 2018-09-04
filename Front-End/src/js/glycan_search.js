@@ -558,3 +558,43 @@ $('.textExample4 a').click(function() {
     return false;
 });
 */
+
+// select already you input element for re-use
+var $tagsInput = $('.glycan');
+
+// bind a click event to links within ".textExample" element
+$('#textExample').click(function() {
+    // append link text to the input field value
+    $tagsInput[0].value = $(this).text();
+    return false;
+});
+
+// select already you input element for re-use
+var $tagsInput2 = $('.protein');
+
+// bind a click event to links within ".textExample2" element
+$('.textExample2 a').click(function() {
+    // append link text to the input field value
+    $tagsInput2[0].value = $(this).text();
+    return false;
+});
+
+// select already you input element for re-use
+var $tagsInput3 = $('.motif');
+
+// bind a click event to links within ".textExample3" element
+$('.textExample3 a').click(function() {
+    // append link text to the input field value
+    $tagsInput3[0].value = $(this).text();
+    return false;
+});
+
+// select already you input element for re-use
+var $tagsInput4 = $('.enzyme');
+
+// bind a click event to links within ".textExample4" element
+$('.textExample4 a').click(function() {
+    // append link text to the input field value
+    $tagsInput4[0].value = $(this).text();
+    return false;
+});
