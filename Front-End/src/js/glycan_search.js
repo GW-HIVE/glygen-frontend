@@ -517,7 +517,10 @@ $(document).ajaxStop(function () {
  * @author Tatiana Williamson
  * @date August 29, 2018
  */
-/**
+
+document.getElementById("textExample").onclick function(){
+    var textInput =""
+}
 // select already you input element for re-use
 var $tagsInput = $('.glycan');
 
@@ -557,4 +560,4 @@ $('.textExample4 a').click(function() {
     $tagsInput4[0].value = $(this).text();
     return false;
 });
-*/
+
