@@ -153,3 +153,10 @@ pre {
     margin-right: auto;
     margin-left: auto;
 }
+
+.limit-text-size{
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -31,21 +31,39 @@ function addCommas(nStr) {
 
 /**
  * function aminoLetter is a to select value of text-input
-
-
  * @param {string} strings of characters
  * @returns {number} if matches returns true or not false
  */
 
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
-    if (textareatxt.value.match(letters)) {
-        document.getElementById("msg").innerHTML = "";
-        return true;
-    } else {
-        document.getElementById("msg").innerHTML = "Enter a valid amino sequence.";
-        return false;
-    }
+
+    var validLength = (textareatxt.value.length <= 3356);
+    var validCharacters = textareatxt.value.match(letters);
+
+    var validEntry = (validLength && validCharacters);
+
+    document.getElementById("msg").innerHTML = "";
+    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
+    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
+
+    return validEntry;
+
+    // if (validCharacters) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
+    //
+    // if (validLength) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
 }
 
 
