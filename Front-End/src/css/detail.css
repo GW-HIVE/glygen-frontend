@@ -16,7 +16,7 @@
     z-index: -9999;
     padding: 0.5em;
     width:100%;
-
+    overflow:hidden;
     margin-top:20px;
     margin-bottom:0px;
     width:500px;
@@ -48,7 +48,6 @@
     z-index: -9999;
     padding: 0.5em;
     width:100%;
-    overflow:scroll;
     margin-top:20px;
     margin-bottom:0px;
     width:500px;
@@ -220,3 +219,11 @@ h4 {
 .fixed-table-footer {
     display: block;
 }
+
+.fixed-table-footer{
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+    border-bottom: 1px solid silver;
+}
+
