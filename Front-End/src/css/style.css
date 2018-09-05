@@ -142,6 +142,7 @@ p {
     border-bottom: 4px solid #B7D2EC;
     margin: 0 15px;  
 }
+/*
 .dropdown.dropdown-toggle.dropdown-menu {
     z-index: 9999 !important;
 }
@@ -151,18 +152,19 @@ p {
 .dropdown-menu {
     z-index: 9999; !important;
 }
+*/
 
 .gg-dropd-menu {
     background-color: #2E78B7;
     font-size: 1em;
-    z-index: 9999 !important;
+/*    z-index: 9999 !important;*/
 }
 
  .gg-dropd-menu>li>a:hover {
     text-decoration: none;
     color: #1C4E78 !important;
     background-color: #eee !important;
-    z-index: 9999 !important;
+/*    z-index: 9999 !important;*/
 }
 
 .gg-form {

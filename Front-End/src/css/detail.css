@@ -92,13 +92,17 @@ pre {
 
 .panel-heading{
     padding: 2px 2px;
+/*
     z-index: -9999 !important;
     position: relative;
+*/
 }
+/*
 .panel.panel-default {
     z-index: -9999 !important;
     position: relative;
 }
+*/
 .cd-faq-items {
     margin-top: 75px;
 }
