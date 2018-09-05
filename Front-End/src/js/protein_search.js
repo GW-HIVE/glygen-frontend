@@ -401,3 +401,46 @@ $(window).on('resize', function () {
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
+
+
+
+//Tatiana
+
+//button to toggle between hiding and showing the advanced search
+function advancedSearchButton() {
+    var x = document.getElementById("advancedSearch");
+//    var elementSimple = document.getElementById("simplifiedSearch");
+//    var elementAdvanced = document.getElementById("advancedSearch");
+//    elementSimple.classList.remove("removeSimplifiedSearch");
+//    x.classList.remove("removeAdvancedSearch");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+//function advancedSearchButton() {
+//   var element = document.getElementById("simplifiedSearch");
+//   element.classList.remove("removeSimplifiedSearch");
+//}
+
+
+//function advancedSearchButton() {
+//    var element = document.getElementById("advancedSearchButton");
+//
+//    if (element.classList) { 
+//        element.classList.toggle("mystyle");
+//    } else {
+//        var classes = element.className.split(" ");
+//        var i = classes.indexOf("mystyle");
+//
+//        if (i >= 0) 
+//            classes.splice(i, 1);
+//        else 
+//            classes.push("mystyle");
+//            element.className = classes.join(" "); 
+//    }
+//}
+
+

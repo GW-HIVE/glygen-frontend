@@ -561,3 +561,13 @@ $('.textExample4 a').click(function() {
     return false;
 });
 
+//button to toggle between hiding and showing the advanced search
+function advancedSearchButton() {
+    var x = document.getElementById("advanced");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+

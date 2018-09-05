@@ -57,17 +57,48 @@
     <script>w3.includeHTML();</script>
 
     <h3 class="page-heading" style="text-align: center">Protein Search </h3>
-    <div class="container gg-container">
+    
+    <div id="simplifiedSearch" class="container gg-container removeSimplifiedSearch">
+        <div class="row text-right" style="margin-right: -30px;">
+            <button class="btn btn-link" onclick="advancedSearchButton()">
+            <label class="control-label col-sm-3" for="simplifiedSearch">Advanced Search</label></button>
+        </div>
         
-        <div class="row"> 
+        <div class="row">
+            <div class="col-sm-3">
+                <select>
+                    <option value="select">Select options</option>
+                    <option value="UniProtAccession">UniProt Accession</option>
+                    <option value="RefSeqAccession">RefSeq Accession</option>
+                    <option value="ProteinName">Protein Name</option>
+                    <option value="GeneName">Gene Name</option>
+                    <option value="PathwayID">Pathway ID</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Protein">
+            </div>
+            <div class="col-sm-3"> 
             <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
-            style="float: right; margin: 20px 15px 35px 0;">
+            style="margin: -5px 0 20px;">
+        </div>
+        </div>
+    </div>
+    
+    <div id="advancedSearch" class="removeAdvancedSearch container gg-container">    
+        <div class="row text-right" style="margin-right: -20px;">
+            <button class="btn btn-link" onclick="advancedSearchButton()">
+            <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
+        </div>
+        <div class="row"> 
+            <input type="button" class="btn-lg btn-primary" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
+            style="float: right; margin: -5px 15px 35px 0;">
         </div>    
         <!-- Protein_ID-->
         <div class="row">  
             <label class="control-label col-sm-4" for="protein">
                 <span>
-                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your Protein (see https://www.uniprot.org/)">
+                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> UniProt Accession:</label>
@@ -82,7 +113,7 @@
         <div class="row">
             <label class="control-label col-sm-4" for="refseq">
                 <span>
-                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your Protein (see https://www.uniprot.org/)">
+                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.uniprot.org/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> RefSeq Accession:</label>
@@ -99,7 +130,7 @@
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass Range for your protein(s)">
+                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
                     </span>Chemical Mass:
@@ -107,8 +138,7 @@
             </div>
             <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
-                    <h6 class="align-center">Chemical Mass</h6>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
                         <div class="row">
