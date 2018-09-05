@@ -141,9 +141,15 @@ p {
 .nav li.current  {
     border-bottom: 4px solid #B7D2EC;
     margin: 0 15px;  
-} 
-.dropdown-menu {
+}
+.dropdown.dropdown-toggle.dropdown-menu {
     z-index: 9999 !important;
+}
+.dropdown {
+    z-index: 9999 !important;
+}
+.dropdown-menu {
+    z-index: 9999; !important;
 }
 
 .gg-dropd-menu {

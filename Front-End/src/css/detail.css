@@ -81,20 +81,27 @@
     color:#555;
 }
 /* <!-- style to class for detail page --> */
-.panel-heading{
-    padding: 2px 2px;
-}
-
- .footer{
+.footer{
     margin-bottom: 0px;
     margin-top: 470px;
-
 } 
 
 pre { 
     background-color:#e6e6e6; 
 }
 
+.panel-heading{
+    padding: 2px 2px;
+    z-index: -9999 !important;
+    position: relative;
+}
+.panel.panel-default {
+    z-index: -9999 !important;
+    position: relative;
+}
+.cd-faq-items {
+    margin-top: 75px;
+}
 
 .panelmaincontent {
     font-size: 16px;
