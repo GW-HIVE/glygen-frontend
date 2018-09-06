@@ -576,6 +576,8 @@
                                 {{/expression_tissue}} {{^expression_tissue}} No data available. {{/expression_tissue}}
                             </div>
                         </div>
+                    </div>
+                </div>
             </ul>
 
 
@@ -596,6 +598,8 @@
                                 {{/expression_disease}} {{^expression_disease}} No data available. {{/expression_disease}}
                             </div>
                         </div>
+                    </div>
+                </div>
             </ul>
 
             <ul id="basics10" class="cd-faq-group selected">
@@ -667,7 +671,6 @@
     $(document).ajaxStop(function () {
         // calls the sidebar function only when all ajax calls are completed
         faqMain();
-
         function scrollToPanel(hash) {
             //to scroll to the particular sub section.
             $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
