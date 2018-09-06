@@ -83,9 +83,9 @@
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
                             <div class="col-sm-6 gg-form-group"> 
-                                <input class="form-control" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme">
-                                
-                                <div class="gg-text-example"> Example: G88495BI</div>
+                                <input class="form-control" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme" onkeyup="validateGlycanAcc(this)">
+                                <div class="gg-text-example"> Example: G88495BI
+                                <span id='glycanAccMsg' class="validation-message-quick"></span></div>
                             </div>
                             <div>     
                                 <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Submit</button>
@@ -100,9 +100,10 @@
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
                             <div class="col-sm-6 gg-form-group"> 
-                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite">
+                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite" onkeyup="validateGlycanAcc(this)">
                                 
-                                <div class="gg-text-example">Example: G88495BI</div>
+                                <div class="gg-text-example">Example: G88495BI
+                                <span id='glycanAccMsg' class="validation-message"></span></div>
                             </div>
                             <div> 
                                 <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Submit</button>
@@ -116,9 +117,10 @@
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
                             <div class="col-sm-6 gg-form-group">
-                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene">
+                                <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene" onkeyup="validateGlycanAcc(this)">
                                 
-                                <div class="gg-text-example"> Example: G88495BI</div>
+                                <div class="gg-text-example"> Example: G88495BI
+                                <span id='glycanAccMsg' class="validation-message"></span></div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Submit</button>
@@ -139,9 +141,12 @@
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Protein&nbsp;X:</label>
                             <div class="col-sm-6 gg-form-group">
-                                <input class="form-control" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues">
+                                <input class="form-control" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues" onkeyup="validateProteinAcc(this)">
                                 
-                                <div class="gg-text-example"> Example: P14210-1</div>
+                                <div class="gg-text-example"> Example: P14210-1
+
+                                    <span id='proteinAccMsg'class="validation-message-quick"></span>
+                                </div>
                             </div>
                             <div>
                                <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Submit</button> 
@@ -154,10 +159,14 @@
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Protein&nbsp;X:</label>
                             <div class="col-sm-6 gg-form-group">
-                                <input class="form-control" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction">
+                                <input class="form-control" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction" onkeyup="validateProteinAcc(this)">
+
+                                <div class="gg-text-example"> Example: P14210-1
+
+                                    <span id='proteinAccMsg'class="validation-message-quick"></span>
+                                </div>
                                 <!--//<label id="protein-error">no result found</label>-->
-                                <div class="gg-text-example"> Example: P14210-1 </div>
-                            </div>
+
                             <div>
                                 <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Submit</button>
                             </div>  
@@ -170,10 +179,12 @@
                             <label class="control-label col-sm-2">Enzyme&nbsp;X:</label>
                             
                             <div class="col-sm-6 gg-form-group">
-                                <input class="form-control" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession">
-                                
-                                <div class="gg-text-example"> Example: P14210-1</div>
-                            </div>
+                                <input class="form-control" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession"onkeyup="validateProteinAcc(this)">
+
+                                <div class="gg-text-example"> Example: P14210-1
+
+                                    <span id='proteinAccMsg'class="validation-message-quick"></span>
+                                </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Submit</button>
                             </div>
@@ -262,9 +273,12 @@
                             <label class="control-label col-sm-2">Disease:</label>
                             
                             <div class="col-sm-6 gg-form-group"> 
-                                <input class="form-control" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease">
+                                <input class="form-control" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease" onkeyup="validateDiseaseName(this)">
                                 
-                                <div class="gg-text-example"> Example: Ehlers-Danlos syndrome progeroid type</div>
+                                <div class="gg-text-example"> Example: Ehlers-Danlos syndrome progeroid type
+                                    <span id='diseaseNameMsg'class="validation-message-quick"></span>
+
+                                </div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Submit</button>
@@ -300,6 +314,8 @@
 <script type="text/javascript" src="libraries/alertify.js"></script>
 <!-- NAVIGATION -->
 <script src="js/navbar.js"></script>
+<!-- script for client validation -->
+<script src="js/validation.js"></script>
 <!-- Quick_Search -->
 <script type="text/javascript" src="js/quicksearch.js"></script>
 <script>
