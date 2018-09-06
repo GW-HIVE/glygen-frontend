@@ -74,9 +74,10 @@
                 </span> UniProt Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein">
+                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein" onkeyup="validateProteinAcc(this)">
 
                 <div class="gg-text-example">Example: P14210-1</div>
+                <h6 id='proteinAccMsg' class="validation-message"></h6>
             </div>
         </div>
         
@@ -90,9 +91,9 @@
                 </span>RefSeq Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein">
-
+                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein" onkeyup="validateRefAcc(this)">
                 <div class="gg-text-example">Example: XP_016867587.1</div>
+                <h6 id='refAccMsg' class="validation-message"></h6>
             </div>
         </div>
         
@@ -148,8 +149,9 @@
                 </span> Protein Name:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name">
+                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
                 <div class="gg-text-example">Example: Hepatocyte growth factor</div>
+                <h6 id='proteinNameMsg' class="validation-message"></h6>
             </div>
         </div>
 
@@ -163,8 +165,9 @@
                 </span>Gene Name:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name">
+                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
                 <div class="gg-text-example">Example: HGF</div>
+                <h6 id='geneNameMsg' class="validation-message"></h6>
             </div>
         </div>
 
@@ -205,9 +208,10 @@
                 </span> Pathway ID:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome Pathway ID">
-                <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
+                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathwayID(this)">
 
+                <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
+                <label id='pathwayIDMsg' class="validation-message"></label>
                 <label id='pathwayMsg' class="rq"></label>
             </div>
         </div>
@@ -231,6 +235,8 @@
     <script src="libraries/nouislider.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
+    <!-- script for client validation -->
+    <script src="js/validation.js"></script>
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
     <!-- script for searchpage js -->
