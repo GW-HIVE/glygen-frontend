@@ -52,7 +52,8 @@
         <div class="row"> 
             <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search For Glycan" onclick="submitvalues()" style="float: right; margin: 20px 15px 10px 0;">
         </div>
-        <!-- Glycan-->
+        
+        <!-- GlyTouCan Accession -->
         <div class="row top-table-margin">
             <label class="control-label col-sm-4" for="glycan_id">
                 <span>
@@ -68,67 +69,20 @@
             </div>
         </div>
 
-        <!--&lt;!&ndash; Glycan size&ndash;&gt;-->
-        <!--<div class="gg-form-group row">-->
-            <!--<div>-->
-                <!--<label class="control-label col-sm-4" for="slider">-->
-                    <!--<span>-->
-                        <!--<a href="javascript://" title="Glycan Size" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a degree of polymerization or mass range for your glycan(s)">-->
-                            <!--<i class="far fa-question-circle help-sign"></i>-->
-                        <!--</a>-->
-                    <!--</span> Glycan Size:</label>-->
-            <!--</div>-->
-
-            <!--<div class="col-sm-offset-2 col-sm-10 row glycanSizeMargin">-->
-                <!--&lt;!&ndash; First range&ndash;&gt;-->
-                <!--<div class="gg-form-group row">-->
-                    <!--<div class="col-xs-2">-->
-                        <!--<h6>Min</h6>-->
-                        <!--<div id="lower-value"> </div>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-7">-->
-                        <!--<h6 class="align-center">Native Mass Range</h6>-->
-                        <!--<div id="slider"> </div>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 max-value-alighnment" style="padding-left: 35px;">-->
-                        <!--<h6>Max</h6>-->
-                        <!--<div id="upper-value"> </div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; second range&ndash;&gt;-->
-                <!--<div class="gg-form-group row">-->
-                    <!--<div class="col-xs-2 min-value-alighnment">-->
-                        <!--<h6>Min</h6>-->
-                        <!--<div id="lower-value1"> </div>-->
-                    <!--</div>-->
-
-                    <!--<div class="col-xs-7">-->
-                        <!--<h6 class="align-center">Native Sugar Range</h6>-->
-                        <!--<div id="slider1"> </div>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-2 max-value-alighnment2" style="margin-bottom: 40px; padding-left: 35px;">-->
-                        <!--<h6>Max</h6>-->
-                        <!--<div id="upper-value1"> </div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        
         <!-- Protein size-->
         <div class="gg-form-group row">
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
+                        <a href="javascript://" title="Monoisotopic Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Monoisotopic Mass range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
-                    </span>Chemical Mass:
+                    </span>Monoisotopic Mass:
                 </label>
             </div>
             <div class="col-sm-10 row glycanSizeMargin">
                 <!-- First range-->
-                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider">
-                    <h6 class="align-center">Chemical Mass</h6>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
                         <div class="row"> 
@@ -153,8 +107,7 @@
                 </label>
             </div>       
             <div class="col-sm-10 row glycanSizeMargin">       
-                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group protein-size-alignment" id="slider1">
-                    <h6 class="align-center">Number of Sugars</h6>
+                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider1">
                     <div class="sliderbox1">
                         <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
                         <div class="row"> 
