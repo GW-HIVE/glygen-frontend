@@ -267,3 +267,7 @@ select {
 .min-label {
     margin-left: 5%;
 }
+
+.validation-message{
+    color: darkred;
+}
