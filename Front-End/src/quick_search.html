@@ -76,7 +76,7 @@
                     <li class="cd-faq-title">
                         <h2>Search by Glycan</h2>
                     </li>
-                    <!--What are the enzymes involved in the biosynthesis of glycan X in human -->
+                   
                     <li>
                         <a class="cd-faq-trigger" id="Q1">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -85,7 +85,7 @@
                             <div class="col-sm-6 gg-form-group"> 
                                 <input class="form-control" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme">
                                 
-                                <div class="gg-text-example"> Example: G00279YF </div>
+                                <div class="gg-text-example"> Example: G88495BI</div>
                             </div>
                             <div>     
                                 <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Submit</button>
@@ -93,7 +93,6 @@
                         </div>
                     </li>
 
-                    <!--Which proteins have been shown to bear glycan X and which site is this glycan attached to -->
                     <li>
                         <a class="cd-faq-trigger" id="Q2">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
                         
@@ -103,7 +102,7 @@
                             <div class="col-sm-6 gg-form-group"> 
                                 <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite">
                                 
-                                <div class="gg-text-example">Example: G74290AC </div>
+                                <div class="gg-text-example">Example: G88495BI</div>
                             </div>
                             <div> 
                                 <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Submit</button>
@@ -111,7 +110,6 @@
                         </div>
                     </li>
 
-                    <!--Q.3 What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q3">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -120,17 +118,15 @@
                             <div class="col-sm-6 gg-form-group">
                                 <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene">
                                 
-                                <div class="gg-text-example"> Example: G74290AC </div>
+                                <div class="gg-text-example"> Example: G88495BI</div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Submit</button>
                             </div>   
                         </div>
                     </li>
-
                 </ul>
-                <!-- cd-faq-group -->
-
+                <!-- End seach by Glycan -->
 
                 <!--  Search by Protein -->
                 <ul id="search_protein" class="cd-faq-group">
@@ -138,7 +134,6 @@
                         <h2>Search by Protein</h2>
                     </li>
 
-                    <!--Q.4 What are the orthologues of protein X in different species? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -146,7 +141,7 @@
                             <div class="col-sm-6 gg-form-group">
                                 <input class="form-control" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues">
                                 
-                                <div class="gg-text-example"> Example: P26572-1</div>
+                                <div class="gg-text-example"> Example: P14210-1</div>
                             </div>
                             <div>
                                <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Submit</button> 
@@ -154,8 +149,6 @@
                         </div>
                     </li>
 
-
-                    <!--Q.5 What are the functions of protein X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q5">What are the functions of protein X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -163,7 +156,7 @@
                             <div class="col-sm-6 gg-form-group">
                                 <input class="form-control" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction">
                                 <!--//<label id="protein-error">no result found</label>-->
-                                <div class="gg-text-example"> Example: P26572-1 </div>
+                                <div class="gg-text-example"> Example: P14210-1 </div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Submit</button>
@@ -171,7 +164,6 @@
                         </div>
                     </li>
 
-                    <!--Q.6 Which glycans might have been synthesized in mouse using enzyme X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q6">Which glycans might have been synthesized in mouse using enzyme X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -180,7 +172,7 @@
                             <div class="col-sm-6 gg-form-group">
                                 <input class="form-control" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession">
                                 
-                                <div class="gg-text-example"> Example: P26572-1 </div>
+                                <div class="gg-text-example"> Example: P14210-1</div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Submit</button>
@@ -189,8 +181,6 @@
                     </li>
                 </ul>
 
-
-
                 <!-- Search by Species-->
                 <!-- cd-faq-group -->
                 <ul id="search_species" class="cd-faq-group">
@@ -198,7 +188,6 @@
                         <h2>Search by Species</h2>
                     </li>
 
-                    <!--Q.7 What are the glycosyltransferases in species X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -214,7 +203,7 @@
                         </div>
                         <!-- cd-faq-content -->
                     </li>
-                    <!--Q.8 What are the glycohydrolases in species X? -->
+
                     <li>
                         <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -232,7 +221,6 @@
                         <!-- cd-faq-content -->
                     </li>
 
-                    <!--Q.9 What are the reported or predicted glycosylated proteins in species X? -->
                     <li>
                         <a class="cd-faq-trigger" id="Q9">What are the reported or predicted glycosylated proteins in species X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
@@ -263,13 +251,12 @@
                         <!-- cd-faq-content -->
                     </li>
                 </ul>
-                <!--&lt;!&ndash; cd-faq-group &ndash;&gt;-->
+                <!--Search by Disease-->
                 <ul id="search_disease" class="cd-faq-group">
                     <li class="cd-faq-title">
                         <h2>Search by Disease</h2>
                     </li>
                     <li>
-                        <!--Q.10 Which glycosyltransferases are known to be involved in disease X? -->
                         <a class="cd-faq-trigger" href="#0" id="Q10">Which glycosyltransferases are known to be involved in disease X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Disease:</label>
@@ -277,7 +264,7 @@
                             <div class="col-sm-6 gg-form-group"> 
                                 <input class="form-control" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease">
                                 
-                                <div class="gg-text-example"> Example: Gilbert syndrome </div>
+                                <div class="gg-text-example"> Example: Ehlers-Danlos syndrome progeroid type</div>
                             </div>
                             <div>
                                 <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Submit</button>

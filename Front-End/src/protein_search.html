@@ -62,8 +62,9 @@
         <div class="row"> 
             <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: 20px 15px 35px 0;">
-        </div>    
-        <!-- Protein_ID-->
+        </div> 
+           
+        <!-- UniProt Accession-->
         <div class="row">  
             <label class="control-label col-sm-4" for="protein">
                 <span>
@@ -75,9 +76,10 @@
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein">
 
-                <div class="gg-text-example">Example: P01215</div>
+                <div class="gg-text-example">Example: P14210-1</div>
             </div>
         </div>
+        
         <!-- RefSeq Accession_ID-->
         <div class="row">
             <label class="control-label col-sm-4" for="refseq">
@@ -85,16 +87,16 @@
                     <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.ncbi.nlm.nih.gov/refseq/)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> RefSeq Accession:</label>
+                </span>RefSeq Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
                 <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein">
 
-                <div class="gg-text-example">Example: NP_001239312.1</div>
+                <div class="gg-text-example">Example: XP_016867587.1</div>
             </div>
         </div>
-
-        <!-- Protein size-->
+        
+        <!-- Chemical Mass-->
         <div class="gg-form-group row">
             <div>
                 <label class="control-label col-sm-4">
@@ -106,7 +108,6 @@
                 </label>
             </div>
             <div class="col-sm-10 row glycanSizeMargin">
-                <!-- First range-->
                 <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
@@ -128,7 +129,7 @@
                     <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an Organism that makes your protein(s)">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> Organism:</label>
+                </span>Organism:</label>
 
             <div class="col-sm-8">
                 <select class="organism" id="organism">
@@ -148,7 +149,7 @@
 
             <div class="col-sm-8">
                 <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name">
-                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO </div>
+                <div class="gg-text-example">Example: Hepatocyte growth factor</div>
             </div>
         </div>
 
@@ -159,11 +160,11 @@
                     <a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of the Gene encoding your protein">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> Gene Name: </label>
+                </span>Gene Name:</label>
 
             <div class="col-sm-8">
                 <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name">
-                <div class="gg-text-example">Example: ERVMER34-1</div>
+                <div class="gg-text-example">Example: HGF</div>
             </div>
         </div>
 
@@ -175,7 +176,7 @@
                         data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> Protein or Peptide Sequence:</label>
+                </span>Protein or Peptide Sequence:</label>
 
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
@@ -189,7 +190,7 @@
                 <form name="form1" action="#">
                     <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 </form>
-                <div style="margin-top: -10px;" class="gg-text-example">Example: IYKE</div>
+                <div style="margin-top: -10px;" class="gg-text-example">Example: MWVTKLLPA</div>
                 <h6 id='msg' class="rq"></h6>    
             </div>
         </div>
@@ -205,7 +206,7 @@
 
             <div class="col-sm-8">
                 <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome Pathway ID">
-                <div class="gg-text-example">KEGG Example: hsa:3593 <br>Reactome Example: R-HSA-447115</div>
+                <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
 
                 <label id='pathwayMsg' class="rq"></label>
             </div>
