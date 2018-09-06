@@ -28,6 +28,21 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+//
+// function validatePathway(input) {
+//     // ^[A-Z]{1,2}[0-9]{5}$
+//     // var letters = /^[A-Z]{1}[0-9]{5}$/i;
+//     var validLength = (input.value.length <= 3);
+//
+//
+//     if (validLength) {
+//         document.getElementById("pathwayMsg").innerHTML = "";
+//         return true;
+//     } else {
+//         document.getElementById("pathwayMsg").innerHTML = "Enter a valid amino seq.";
+//         return false;
+//     }
+// }
 
 /**
  * function aminoLetter is a to select value of text-input
@@ -168,6 +183,24 @@ $("#pathway").autocomplete({
     }
 });
 
+
+
+
+
+$("#glycan_id").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
