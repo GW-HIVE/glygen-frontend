@@ -28,24 +28,57 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+//
+// function validatePathway(input) {
+//     // ^[A-Z]{1,2}[0-9]{5}$
+//     // var letters = /^[A-Z]{1}[0-9]{5}$/i;
+//     var validLength = (input.value.length <= 3);
+//
+//
+//     if (validLength) {
+//         document.getElementById("pathwayMsg").innerHTML = "";
+//         return true;
+//     } else {
+//         document.getElementById("pathwayMsg").innerHTML = "Enter a valid amino seq.";
+//         return false;
+//     }
+// }
 
 /**
  * function aminoLetter is a to select value of text-input
-
-
  * @param {string} strings of characters
  * @returns {number} if matches returns true or not false
  */
 
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
-    if (textareatxt.value.match(letters)) {
-        document.getElementById("msg").innerHTML = "";
-        return true;
-    } else {
-        document.getElementById("msg").innerHTML = "Enter a valid amino sequence.";
-        return false;
-    }
+
+    var validLength = (textareatxt.value.length <= 3356);
+    var validCharacters = textareatxt.value.match(letters);
+
+    var validEntry = (validLength && validCharacters);
+
+    document.getElementById("msg").innerHTML = "";
+    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
+    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
+
+    return validEntry;
+
+    // if (validCharacters) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
+    //
+    // if (validLength) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
 }
 
 
@@ -150,6 +183,24 @@ $("#pathway").autocomplete({
     }
 });
 
+
+
+
+
+$("#glycan_id").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
 
 /** functions for dropdowns organism
  * get organism drop down values for search form

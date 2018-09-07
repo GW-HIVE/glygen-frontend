@@ -570,4 +570,3 @@ function advancedSearchButton() {
         x.style.display = "none";
     }
 }
-

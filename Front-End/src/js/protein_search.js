@@ -36,13 +36,33 @@ function addCommas(nStr) {
 
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
-    if (textareatxt.value.match(letters)) {
-        document.getElementById("msg").innerHTML = "";
-        return true;
-    } else {
-        document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
-        return false;
-    }
+
+    var validLength = (textareatxt.value.length <= 3356);
+    var validCharacters = textareatxt.value.match(letters);
+
+    var validEntry = (validLength && validCharacters);
+
+    document.getElementById("msg").innerHTML = "";
+    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
+    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
+
+    return validEntry;
+
+    // if (validCharacters) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
+    //
+    // if (validLength) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
 }
 
 
@@ -326,7 +346,7 @@ function ajaxProteinSearchSuccess() {
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
-    var sequence = $("#sequences").val();
+    var sequence = $("#sequences").val().replace(/\n/g, "");
 
     var formObject = {
         operation: "AND",

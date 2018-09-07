@@ -16,7 +16,7 @@
     z-index: -9999;
     padding: 0.5em;
     width:100%;
-    overflow:scroll;
+    overflow:hidden;
     margin-top:20px;
     margin-bottom:0px;
     width:500px;
@@ -48,7 +48,6 @@
     z-index: -9999;
     padding: 0.5em;
     width:100%;
-    overflow:scroll;
     margin-top:20px;
     margin-bottom:0px;
     width:500px;
@@ -82,20 +81,31 @@
     color:#555;
 }
 /* <!-- style to class for detail page --> */
-.panel-heading{
-    padding: 2px 2px;
-}
-
- .footer{
+.footer{
     margin-bottom: 0px;
     margin-top: 470px;
-
 } 
 
 pre { 
     background-color:#e6e6e6; 
 }
 
+.panel-heading{
+    padding: 2px 2px;
+/*
+    z-index: -9999 !important;
+    position: relative;
+*/
+}
+/*
+.panel.panel-default {
+    z-index: -9999 !important;
+    position: relative;
+}
+*/
+.cd-faq-items {
+    margin-top: 75px;
+}
 
 .panelmaincontent {
     font-size: 16px;
@@ -131,14 +141,10 @@ pre {
     margin-bottom: 15px;
 }
 
-
 thead {
     background: #659BC9;
     color: #fff;
 }
-
-
-
 
 .cd-close-panel {
     padding-right:70px;
@@ -160,19 +166,29 @@ thead {
 .cd-faq-items {
     overflow-x: hidden !important; 
 }
+
 @media only screen and (min-width: 1024px) {
     .cd-faq-categories{
         width: 290px;
+    }
+    .pull-left {
+        width: 50%;
     }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1300px) {
     .cd-faq-items {
         padding-left: 300px;
     }
+    .pull-left {
+        width: 100%;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .cd-faq-items {
         width: 62%;
+    }
+    .pull-left {
+        width: 100%;
     }
 }
 /* section{
@@ -214,9 +230,28 @@ h4 {
 }
 
 #glycosylation-table {
-    border-color:black;
+    border-bottom: 1px solid #ccc !important;
 }
 
+#glycosylation-table1 {
+    border-bottom: 1px solid #ccc !important;
+}
 .fixed-table-footer {
     display: block;
+}
+
+.fixed-table-footer{
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+    border-bottom: 1px solid silver;
+}
+
+.non-selection{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
