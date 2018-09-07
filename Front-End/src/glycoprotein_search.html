@@ -62,7 +62,7 @@
            <input type="button" class="btn-lg btn-primary" value="Search For Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: 20px 15px 10px 0;">
        </div>
-        <!-- Glycoprotein_ID-->
+        <!-- UniProt Accession -->
         <div class="row top-table-margin">
             <label class="control-label col-sm-4" for="protein">
                 <span>
@@ -72,24 +72,26 @@
                 </span> UniProt Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your Protein">
+                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein" onkeyup="validateProteinAcc(this)">
 
-                <div class="gg-text-example">Example: P01215</div>
+                <div class="gg-text-example">Example: P14210-1</div>
+                <h6 id='proteinAccMsg' class="validation-message"></h6>
             </div>
         </div>
-       <!-- RefSeq Accession_ID-->
+       <!-- RefSeq Accession -->
         <div class="row">
             <label class="control-label col-sm-4" for="refseq">
                 <span>
-                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.uniprot.org/)">
+                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.ncbi.nlm.nih.gov/refseq/)">
+
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> RefSeq Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your Protein">
-
-                <div class="gg-text-example">Example: NP_001239312.1</div>
+                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein" onkeyup="validateRefAcc(this)">
+                <div class="gg-text-example">Example: XP_016867587.1</div>
+                <h6 id='refAccMsg' class="validation-message"></h6>
             </div>
         </div>
 
@@ -108,7 +110,7 @@
                 <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                        <div class="row"> 
+                        <div class="row">
                             <span  class="min-label"><strong>Min</strong></span>
                             <input class="sliderbox-input-min form-control">
                             <span class="max-label"><strong>Max</strong></span>
@@ -138,14 +140,15 @@
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="protein_name">
                 <span>
-                    <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of your Protein">
+                    <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of your protein">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Protein Name:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name">
-                <div class="gg-text-example">Example: Endogenous retroviral envelope protein HEMO</div>
+                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
+                <div class="gg-text-example">Example: Hepatocyte growth factor</div>
+                <h6 id='proteinNameMsg' class="validation-message"></h6>
             </div>
         </div>
 
@@ -159,12 +162,13 @@
                 </span> Gene Name:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name">
-                <div class="gg-text-example">Example: ERVMER34-1</div>
+                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
+                <div class="gg-text-example">Example: HGF</div>
+                <h6 id='geneNameMsg' class="validation-message"></h6>
             </div>
         </div>
 
-        <!--Attached Glycan-->
+        <!--Interacting Glycan-->
         <div class="gg-form-group row" id="Glycanid">
             <label class="control-label col-sm-4" for="glycan_id">
                 <span>
@@ -173,13 +177,13 @@
                     </a>
                 </span> Interacting Glycan:</label>
 
-            <!-- Glycanid-->
             <div class="col-md-4" id="glycanrow">
-                <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Enter the GlyTouCan Accession">
-                <div class="gg-text-example">Example: G1095658M</div>
+                <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Enter the GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                <div class="gg-text-example">Example: G88495BI </div>
+                <h6 id='glycanAccMsg' class="validation-message"></h6>
             </div>
 
-            <!-- Glycanrelation-->
+            <!-- Select Interaction Type-->
             <div class="col-md-4" id="glycanrelationrow">
                 <select class="form-control glycan_relation" id="relation">
                     <option value="">Select Interaction Type</option>
@@ -198,11 +202,11 @@
         <div class="gg-form-group row">
             <label style="margin-top: 30px;" class="control-label col-sm-4" for="glycosylated_aa">
                 <span>
-                    <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Click to Highlight Multiple Selections for Glycosylated Amino Acid">
+                    <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Click to highlight multiple selections for Glycosylated Amino Acid">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Glycosylated Amino Acid: </label>
-            
+
 
             <div class="col-sm-8">
                 <h6 id=aminos>Click to Highlight Multiple Selections</h6>
@@ -231,9 +235,8 @@
                 <div class="gg-text-example">Example: Asparagine or Asn or N</div>
             </div>
         </div>
-        <!-- End amino acid-->
 
-        <!-- Sequences-->
+        <!-- Protein or Peptide Sequence -->
         <div class="gg-form-group2 row">
             <label class="control-label col-sm-4" for="sequences">
                 <span>
@@ -246,7 +249,7 @@
             <div class="col-sm-8" id="sequence_type">
                 <select class="form-control sequence_type" id="type">
                     <option value="">Select Sequence Type</option>
-                    <option value="blast">Blast</option>
+                    <!--<option value="blast">Blast</option>-->
                     <option value="exact">Exact</option>
                 </select>
             </div>
@@ -254,13 +257,12 @@
                 <form name="form1" action="#">
                     <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                 </form>
-                <div style="margin-top: -10px;" class="gg-text-example">Example: MQPR</div>
-                <h6 id='msg' class="rq"></h6>
+                <div style="margin-top: -10px;" class="gg-text-example">Example: MWVTKLLPA</div>
+                <h6 id='msg' class="validation-message"></h6>
             </div>
         </div>
-        <!-- end Sequences-->
 
-        <!--Pathway-->
+        <!--Pathway ID-->
         <div class="gg-form-group2 row">
             <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
                 <span>
@@ -270,27 +272,26 @@
                 </span> Pathway ID:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathway(this)">
+                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathwayID(this)">
 
-                <div class="gg-text-example">KEGG Example: hsa:3593 <br>Reactome Example: R-HSA-447115</div>
-                
-                <label id='pathwayMsg' class="rq"></label>
+                <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
+                <label id='pathwayIDMsg' class="validation-message"></label>
             </div>
         </div>
-        <!--End Pathway-->
 
         <!-- Glycosylation Evidences-->
         <div class="gg-form-group row" id="glycosylation_evidence_xx">
             <label class="control-label col-sm-4" for="organism">
                 <span>
-                    <a href="javascript://" title="Glycosylation Evidences" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
+                    <a href="javascript://" title="Glycosylation Evidences Type" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
-                </span> Glycosylation Evidence</label>
+                </span> Glycosylation Evidence Type</label>
 
             <div class="col-sm-8">
                 <select id="glycosylation_evidence" class="form-control">
-                    <option value="both">Select Glycosylation Evidence Type</option>
+                    <option value="">Select Glycosylation Evidence Type</option>
+                    <option value="both">Both</option>
                     <option value="reported">Reported</option>
                     <option value="predicted">Predicted</option>
                 </select>
@@ -316,6 +317,8 @@
     <script src="libraries/nouislider.js"></script>
     <!-- script for navaigation bar js -->
     <script src="js/navbar.js"></script>
+    <!-- script for client validation -->
+    <script src="js/validation.js"></script>
     <!-- script for searchpage js -->
     <script type="text/javascript" src="js/glycoprotein_search.js"></script>
     <!-- script for tracking js -->
@@ -324,7 +327,10 @@
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
-    <!-- script for error handling alerts -->
+
+
+
+
     <!-- script for editing users search  -->
     <script src="js/editsearch.js"></script>
     <script type="text/javascript" src="libraries/alertify.js"></script>

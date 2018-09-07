@@ -142,7 +142,7 @@
                                 {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
 
                                 {{#recommendedname}} {{#full}}
-                                <li class="list-group"><strong>UniProt entry
+                                <li class="list-group"><strong>UniProt Entry
                                     name:</strong> {{recommendedname.full}}
                                     {{#short}} ({{recommendedname.short}}) {{/short}}
                                 </li>
@@ -159,11 +159,11 @@
 
 
                                 {{#mass.monoisotopic_mass}}
-                                <li class="list-group"><strong>Monoisotopic mass:</strong> {{mass.monoisotopic_mass}} Da</li>
+                                <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
                                 {{/mass.monoisotopic_mass}}
                                 {{^mass.monoisotopic_mass}}  {{/mass.monoisotopic_mass}}
 
-                                <li class="list-group"><strong>Chemical mass:</strong> {{mass.chemical_mass}} Da</li>
+                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
 
 
                                 <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
@@ -369,7 +369,7 @@
                             {{#isoforms}}
                             <div class='col-md-12 col-xs-12'>
                                 <div class="panelmaincontent">
-                                    <li class="list-group"><strong>UniProt isoform accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
+                                    <li class="list-group"><strong>UniProt Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
                                 </div>
                                 {{#locus}} {{#chromosome}}
                                 <div class="panelmaincontent">
@@ -576,6 +576,8 @@
                                 {{/expression_tissue}} {{^expression_tissue}} No data available. {{/expression_tissue}}
                             </div>
                         </div>
+                    </div>
+                </div>
             </ul>
 
 
@@ -596,6 +598,8 @@
                                 {{/expression_disease}} {{^expression_disease}} No data available. {{/expression_disease}}
                             </div>
                         </div>
+                    </div>
+                </div>
             </ul>
 
             <ul id="basics10" class="cd-faq-group selected">
@@ -662,13 +666,14 @@
 <!-- script for error handling alerts -->
 <script type="text/javascript" src="libraries/alertify.js"></script>
 
+<!-- Please do not change this it breaks hash scroll code-->
 <script type="text/javascript">
     $(document).ajaxStop(function () {
-        faqMain()
-        // calls the hash function only when all ajax calls are completed
+        // calls the sidebar function only when all ajax calls are completed
+        faqMain();
         function scrollToPanel(hash) {
             //to scroll to the particular sub section.
-            // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+            $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
             if ($(window).width() < 768) {   //mobile view
                 $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
                 $('.cd-close-panel').addClass('move-left');
@@ -677,12 +682,11 @@
                 $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
             }
         }
+
+        if (window.location.hash) {
+            scrollToPanel(window.location.hash);
+        }
     });
-
-    if (window.location.hash) {
-        scrollToPanel(window.location.hash);
-    }
-
 </script>
 
 </body>

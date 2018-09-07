@@ -145,6 +145,7 @@ select {
     .max-label {
         margin-left: 0 !important;
     }
+
     .slider-alignment {
         margin-left: 5%;
         margin-top: 0 !important;
@@ -273,4 +274,8 @@ select {
 
 .min-label {
     margin-left: 5%;
+}
+
+.validation-message{
+    color: darkred;
 }

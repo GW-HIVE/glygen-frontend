@@ -55,7 +55,9 @@ a {     /*This refers to the question headings*/
   outline: none !important;
 }
 
-
+.validation-message-quick{
+    color: darkred;
+}
 /* -------------------------------- 
 
 Main components 
