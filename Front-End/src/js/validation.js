@@ -27,6 +27,36 @@ function validateProteinAcc(input) {
     }
 }
 
+function validateProteinAcc1(input) {
+
+    var validLength = (input.value.length <=12);
+    if (validLength) {
+        document.getElementById("proteinAccMsg1").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("proteinAccMsg1").innerHTML = "Entry is too long - max length is 12.";
+        return false;
+    }
+}
+
+function validateProteinAcc2(input) {
+
+    var validLength = (input.value.length <= 12);
+    if (validLength) {
+        document.getElementById("proteinAccMsg2").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("proteinAccMsg2").innerHTML = "Entry is too long - max length is 12.";
+        return false;
+    }
+}
+
+
+
+
+
+
+
 function validateProteinName(input) {
 
     var validLength = (input.value.length <= 111);
@@ -129,6 +159,30 @@ function validateGlycanAcc(input) {
         return false;
     }
 }
+
+
+function validateGlycanAcc1(input) {
+    var validLength = (input.value.length <= 8);
+    if (validLength) {
+        document.getElementById("glycanAccMsg1").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("glycanAccMsg1").innerHTML = "Entry is too long - max length is 8.";
+        return false;
+    }
+}
+
+function validateGlycanAcc2(input) {
+    var validLength = (input.value.length <= 8);
+    if (validLength) {
+        document.getElementById("glycanAccMsg2").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("glycanAccMsg2").innerHTML = "Entry is too long - max length is 8.";
+        return false;
+    }
+}
+
 
 function validateGeneName(input) {
     var validLength = (input.value.length <=25);
