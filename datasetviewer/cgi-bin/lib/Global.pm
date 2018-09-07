@@ -39,13 +39,16 @@ sub getHeaderDivOne{
 #################################
 sub getHeaderDivTwoNew{
 
-        my $icon = GetModuleIcon(15, 3, 7, $PHASH->{modulemenufg});
+    #my $icon = GetModuleIcon(15, 3, 7, $PHASH->{modulemenufg});
+        my $icon = "";
+
         my $searchBoxDiv = qq{<div class="modulesearchboxcn" id=modulesearchboxcn></div>};
         my $moduleHeaderClass = qq{moduleheaderwrapper};
         if($PHASH->{queryform}{nosearch}){
                 $searchBoxDiv = qq{};
                 $moduleHeaderClass = qq{moduleheaderwrappernosearch};
         }
+        
         my $menuTitleDiv = qq{
                 <div id=pagelinkscn style="width:100%;height:20;text-align:right;"></div>
 		<div class=$moduleHeaderClass style="background:$PHASH->{modulemenubg};">
