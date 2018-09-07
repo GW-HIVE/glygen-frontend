@@ -52,8 +52,13 @@ input[type=submit]:hover {
     text-align: center !important; 
 }
 
-.glycanSizeMargin h6 {
-    margin-bottom: 10px;
+.glycanSizeMargin  {
+    margin-bottom: -10px;
+    margin-top: 0;
+}
+
+.glycanSizeMargin2  {
+    margin-bottom: -20px;
     margin-top: 0;
 }
 
@@ -140,7 +145,8 @@ select {
     .max-label {
         margin-left: 0 !important;
     }
-     .slider-alignment {
+
+    .slider-alignment {
         margin-left: 5%;
         margin-top: 0 !important;
         margin-bottom: 0;
@@ -233,16 +239,17 @@ select {
     margin-top: 19px;
 }
 #pathway{
-    margin-top:20px;
+    margin-top: 20px;
 }
 #msg{
-    margin-top:0px;
+    margin-top: 0px;
 }
 
 .sliderbox-input-min {
     margin-top: 20px;
     display: inline-block;
     width: 30%;
+    margin-bottom: 0;
 }
 .sliderbox-input-min1 {
     margin-top: 20px;
@@ -250,10 +257,11 @@ select {
     width: 30%;
 }
 
-.sliderbox-input-max{
+.sliderbox-input-max {
     margin-top: 10px;
     display: inline-block;
     width: 30%;
+    margin-bottom: 0;
 }
 .sliderbox-input-max1 {
     margin-top: 10px;
