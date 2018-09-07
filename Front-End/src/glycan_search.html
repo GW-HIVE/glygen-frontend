@@ -48,7 +48,8 @@
         <div class="row"> 
             <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search For Glycan" onclick="submitvalues()" style="float: right; margin: 20px 15px 10px 0;">
         </div>
-        <!-- GlyTouCan Accession-->
+        
+        <!-- GlyTouCan Accession -->
         <div class="row top-table-margin">
             <label class="control-label col-sm-4" for="glycan_id">
                 <span>
@@ -58,24 +59,26 @@
                 </span> GlyTouCan Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession">
-                
-                <div class="gg-text-example">Example: <a id="textExample" href="">G10106TL</a></div>
+                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                <div class="gg-text-example textExample">Example: <a2 href="">G88495BI</a></div>
+                <h6 id='glycanAccMsg' class="validation-message"></h6>
             </div>
         </div>
-        
-        <!-- Chemical Mass-->
+
+        <!-- Monoisotopic Mass-->
         <div class="gg-form-group row">
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass Range for your protein(s)">
+                        <a href="javascript://" title="Monoisotopic Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Monoisotopic Mass range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
-                    </span>Chemical Mass:
+                    </span>Monoisotopic Mass:
                 </label>
             </div>
-            <div class="col-sm-10 row glycanSizeMargin2">
+          
+            <div class="col-sm-10 row glycanSizeMargin">
+                <!-- First range-->
                 <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
                     <div class="sliderbox">
                         <div class="sliderbox-slider" id="sliderbox-slider"></div>
@@ -95,7 +98,7 @@
             <div>
                 <label class="control-label col-sm-4">
                     <span>
-                        <a href="javascript://" title="Number of Sugars" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Number of Sugars Range for your protein(s)">
+                        <a href="javascript://" title="Number of Sugars" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Number of Sugars range for your protein(s)">
                             <i class="far fa-question-circle help-sign"></i>
                         </a>
                     </span>Number of Sugars:
@@ -164,7 +167,7 @@
             </div>
         </div>
 
-        <!-- UniProt ID-->
+        <!-- UniProt Accession-->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="protein">
                 <span>
@@ -174,28 +177,30 @@
                 </span>UniProt Accession:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="ProteinID" class="form-control protein textExampleInput" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein">
-                <div class="gg-text-example textExample2">Example: <a href="">P01588</a> (Human Erythropoietin) </div>
+                <input type="text" name="ProteinID" class="form-control protein textExampleInput" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein" onkeyup="validateProteinAcc(this)">
+                <div class="gg-text-example textExample2">Example: <a2 href="">P14210-1</a> (Human Erythropoietin) </div>
+                <h6 id='proteinAccMsg' class="validation-message"></h6>
             </div>
         </div>
 
-        <!-- Motif-->
+        <!-- Glycan Motif -->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="motif">
                 <span>
-                    <a href="javascript://" title="Glycan Motif" data-toggle="popover" data-placement="left" data-content="Enter a structural Motif comprising part of your glycan(s)">
+                    <a href="javascript://" title="Glycan Motif" data-toggle="popover" data-placement="left" data-content="Enter a Glycan Motif comprising part of your glycan(s)" >
                         <i class="far fa-question-circle help-sign"></i>
                     </a>
                 </span> Glycan Motif:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a structural Motif contained in your glycan">
+                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
 
-                <div class="gg-text-example textExample3">Example: <a href="">Lewis X</a></div>
+                <div class="gg-text-example textExample3">Example: <a2 href="">N-Glycan complex</a></div>
+                <h6 id='motifNameMsg' class="validation-message"></h6>
             </div>
         </div>
 
-        <!-- Enzyme-->
+        <!-- Biosynthetic Enzyme -->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="enzyme">
                 <span>
@@ -205,11 +210,11 @@
                 </span> Biosynthetic Enzyme:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme">
+                <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
 
                 <div class="gg-text-example textExample4">Example: <a href="">B4GALT1</a></div>
                 <!-- <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>-->
-
+                <h6 id='enzymeAccMsg' class="validation-message"></h6>
             </div>
         </div>
         <div class="row"> 
@@ -231,6 +236,8 @@
     <script src="libraries/nouislider.js"></script>
     <!-- script for navigation -->
     <script src="js/navbar.js"></script>
+    <!-- script for client validation -->
+    <script src="js/validation.js"></script>
     <!-- main script for search -->
     <script type="text/javascript" src="js/glycan_search.js"></script>
     <!-- script to resolve jquery conflict -->

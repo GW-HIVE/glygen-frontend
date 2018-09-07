@@ -30,7 +30,8 @@ function formatSequence (sequenceString) {
 
     for(var x = 0; x < sequenceString.length; x += perLine) {
         var y = sequenceString.substr(x, perLine);
-        output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
+        // output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
+        output += '<span class="non-selection">' + ("     " + (x+1)).slice(-5) + ' </span>' + y + '\n'
     }
     return output;
 }
@@ -61,9 +62,6 @@ function ajaxSuccess(data) {
         var template = $('#item_template').html();
         var string = data.sequence.sequence;
         data.sequence.sequence = formatSequence(string);
-
-
-
         for (var i = 0; i < data.isoforms.length; i++) {
             // assign the newly result of running formatSequence() to replace the old value
             data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);

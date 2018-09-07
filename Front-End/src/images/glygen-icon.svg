@@ -75,9 +75,9 @@
                         <tspan x="43" y="52" fill="#058AFF">G</tspan>
                         <tspan x="73.8787109" y="52" fill="#00C832">P</tspan>
                     </text>
-                    <text id="Glyco--Protein" font-family="Verdana-Bold, Verdana" font-size="24" font-weight="bold" letter-spacing="0.161904782" fill="#035AAF">
+                    <text id="Glyco--protein" font-family="Verdana-Bold, Verdana" font-size="24" font-weight="bold" letter-spacing="0.161904782" fill="#035AAF">
                         <tspan x="28.8111607" y="79">Glyco-</tspan>
-                        <tspan x="22.3493489" y="108">Protein</tspan>
+                        <tspan x="22.7536458" y="108">protein</tspan>
                     </text>
                 </g>
                 <g id="GlyGen" transform="translate(133.000000, 90.000000)" fill="#2E78B7" font-family="Georgia-Bold, Georgia" font-size="48" font-weight="bold" letter-spacing="0.266666681">

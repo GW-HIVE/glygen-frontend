@@ -31,8 +31,6 @@
 
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
-
-
     <!-- page content starts here -->
 
     <div class="container-fluid" id="listview">
@@ -80,7 +78,7 @@
         <div class="panel panel-default results-table-top">
             <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
 
-            <h6><center>Performed on: {{execution_time}} (PT)</center></h6>
+            <h6><center>Performed on: {{execution_time}} (EST)</center></h6>
             
             <div>
                 <table class="table table-hover">
@@ -182,7 +180,7 @@
                                 Accession</th>
                             <th data-field="gene_name" data-sortable="true">Gene Name</th>
                             <th data-field="protein_name_long" data-sortable="true">UniProt Name</th>
-                            <th data-field="mass" data-formatter="MassFormatter" data-sortable="true">Native Mass
+                            <th data-field="mass" data-formatter="MassFormatter" data-sortable="true">Chemical Mass
                                 <br>(Da)
                             </th>
                             <th data-field="organism" data-sortable="true">Organism</th>
