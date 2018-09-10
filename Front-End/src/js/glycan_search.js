@@ -511,4 +511,3 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
-
