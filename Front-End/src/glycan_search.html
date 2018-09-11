@@ -59,12 +59,12 @@
                 </span> GlyTouCan Accession:</label>
 
             <div class="col-sm-8 gg-form-group">
-                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
-                <div class="gg-text-example textExampleGlycan">Example: <a href="">G88495BI</a></div>
+                <input type="text" name="glycan_id" class="form-control" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                <div class="gg-text-example">Example: <a href="" id="textExampleGlycan">G88495BI</a></div>
                 <h6 id='glycanAccMsg' class="validation-message"></h6>
             </div>
         </div>
-
+        
         <!-- Monoisotopic Mass-->
         <div class="gg-form-group row">
             <div>
@@ -91,8 +91,8 @@
                     </div>
                 </div> 
             </div>
-        </div>
-        
+        </div> 
+              
         <!-- Number of Sugars -->
         <div class="gg-form-group row">
             <div>
@@ -177,8 +177,8 @@
                 </span>UniProt Accession:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein" onkeyup="validateProteinAcc(this)">
-                <div class="gg-text-example textExampleProtein">Example: <a href="">P14210-1</a> (Human Erythropoietin) </div>
+                <input type="text" name="ProteinID" class="form-control" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein" onkeyup="validateProteinAcc(this)">
+                <div class="gg-text-example">Example: <a href="" id="textExampleProtein">P14210-1</a> (Human Erythropoietin) </div>
                 <h6 id='proteinAccMsg' class="validation-message"></h6>
             </div>
         </div>
@@ -193,9 +193,9 @@
                 </span> Glycan Motif:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
+                <input type="text" name="GlycanMotif" class="form-control" id="motif" placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
 
-                <div class="gg-text-example textExampleMotif">Example: <a href="">N-Glycan complex</a></div>
+                <div class="gg-text-example">Example: <a href="" id="textExampleMotif">N-Glycan complex</a></div>
                 <h6 id='motifNameMsg' class="validation-message"></h6>
             </div>
         </div>
@@ -210,9 +210,9 @@
                 </span> Biosynthetic Enzyme:</label>
 
             <div class="col-sm-8">
-                <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
+                <input type="text" name="Enzyme" class="form-control" id="enzyme" placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
 
-                <div class="gg-text-example textExampleEnzyme">Example: <a href="">B4GALT1</a></div>
+                <div class="gg-text-example">Example: <a href="" id="textExampleEnzyme">B4GALT1</a></div>
                 <!-- <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>-->
                 <h6 id='enzymeAccMsg' class="validation-message"></h6>
             </div>
@@ -221,7 +221,6 @@
             <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search For Glycan" onclick="submitvalues()" style="float: right; margin: 0 15px 20px;">
         </div>
     </div>
-
 
     <div w3-include-html="footer.html"></div>
     <!--Script for jquery-->
@@ -254,14 +253,6 @@
     <script src="js/editsearch.js"></script>
     <!-- script for help icon ? -->
     <script src="js/popover.js"></script>
-    <script src="js/example_text.js"></script>
-    
-
-
-
-
-
-
+    <script src="js/text_example.js"></script>    
 </body>
-
 </html>
