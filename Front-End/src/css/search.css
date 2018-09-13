@@ -279,3 +279,11 @@ select {
 .validation-message{
     color: darkred;
 }
+
+/* --------------------------
+    Simplified Search 
+-----------------------------*/
+
+#advancedSearch {
+     display: none;
+}

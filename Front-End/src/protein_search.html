@@ -1,8 +1,12 @@
 <!--
-  //@author: Rupali Mahadik
+//@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
 //@Date:20th June 2018.
 //@refactored:June-27-2017
+  
+//@author: Tatiana Williamson
+//@date: September 12, 2018 
+//@description: UO1 Version-1.1.0
    -->
 
 
@@ -58,41 +62,35 @@
 
     <h3 class="page-heading" style="text-align: center">Protein Search </h3>
     
-    <div id="simplifiedSearch" class="container gg-container removeSimplifiedSearch">
-        <div class="row text-right" style="margin-right: -30px;">
-            <button class="btn btn-link" onclick="advancedSearchButton()">
+    <div id="simplifiedSearch" class="container gg-container" style="margin-bottom: 300px;">
+        <div class="row text-right" style="margin-right: -20px">
+            <button class="btn btn-link" onclick="hideSimplSearchButton()">
             <label class="control-label col-sm-3" for="simplifiedSearch">Advanced Search</label></button>
         </div>
         
-        <div class="row">
+        <div class="row" style="margin-right: -63px;">
             <div class="col-sm-3">
                 <select>
-                    <option value="select">Select options</option>
-                    <option value="UniProtAccession">UniProt Accession</option>
-                    <option value="RefSeqAccession">RefSeq Accession</option>
-                    <option value="ProteinName">Protein Name</option>
-                    <option value="GeneName">Gene Name</option>
-                    <option value="PathwayID">Pathway ID</option>
+                    <option value="select">Any</option>
                 </select>
             </div>
             <div class="col-sm-6">
                 <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Protein">
             </div>
-            <div class="col-sm-3"> 
-            <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
-
+            <div class="col-sm-3" style="text-align:2 right"> 
+            <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
             style="margin: -5px 0 20px;">
+            </div>
         </div>
-        </div>
-    </div>
+    </div> <!--    End Simplified Search Div-->
     
-    <div id="advancedSearch" class="removeAdvancedSearch container gg-container">    
+    <div id="advancedSearch" class="container gg-container">    
         <div class="row text-right" style="margin-right: -20px;">
-            <button class="btn btn-link" onclick="advancedSearchButton()">
+            <button class="btn btn-link" onclick="hideAdvSearchButton()">
             <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
         </div>
         <div class="row"> 
-            <input type="button" class="btn-lg btn-primary" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
+            <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: -5px 15px 35px 0;">
         </div>    
         <!-- Protein_ID-->
@@ -249,7 +247,7 @@
             </div>
         </div>
         <div class="row"> 
-            <input type="button" class="btn-lg btn-primary" value="Search For Protein" onclick="ajaxProteinSearchSuccess()"
+            <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: -20px 15px 20px;">
         </div>
     </div>
@@ -283,6 +281,7 @@
     <!-- script for error handling alerts -->
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <script src="js/popover.js"></script>
+    <script src="js/simplified_search.js"></script>
 </body>
 
 </html>
