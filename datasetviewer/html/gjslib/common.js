@@ -50,6 +50,7 @@ function getSections(){
 
 	var closeBtn = '<DIV id=closemodulemenu style="'+s+'">&times;</DIV>'	
 
+
     	return '<table width=100% height=100% style="border:1px solid #fff;">' + 
 		'<tr height=50><td align=right valign=top>'+closeBtn+'</td></tr>' + 
 		rows + 

@@ -44,9 +44,9 @@
 	,"prd":{
                 "dbinfo":{
                         "dbhost":"127.0.0.1"
-                        ,"dbname":"glygen"
-                        ,"dbuserid":"dataservieweradmin"
-                        ,"dbpassword":"dataserviewerpass"
+                        ,"dbname":"$dbname"
+                        ,"dbuserid":"$userid"
+                        ,"dbpassword":"$dbpassword"
                 }
                 ,"rootinfo":{
                         "baseurl":""
@@ -59,18 +59,18 @@
                 ,"pathinfo":{
                         "htmlpath":"/var/www/html/datasetviewer/"
                         ,"cgipath":"/var/www/cgi-bin/datasetviewer/"
-                        ,"apierrorlogpath":"/data/projects/glygen/apierrorlog/"
-                        ,"apicachepath":"/data/projects/glygen/apicache/"
-                        ,"jsondbpath":"/data/projects/glygen/jsondb/"
-                        ,"debuglogfile":"/data/projects/glygen/apierrorlog/debug.txt"
+                        ,"apierrorlogpath":"<project_data_dir>/apierrorlog/"
+                        ,"apicachepath":"<project_data_dir>/apicache/"
+                        ,"jsondbpath":"<project_data_dir>/jsondb/"
+                        ,"debuglogfile":"<project_data_dir>/apierrorlog/debug.txt"
                 }
         }
 	,"beta":{
                 "dbinfo":{
                         "dbhost":"127.0.0.1"
-                        ,"dbname":"glygen"
-                        ,"dbuserid":"dataservieweradmin"
-                        ,"dbpassword":"dataserviewerpass"
+                        ,"dbname":"$dbname"
+                        ,"dbuserid":"$userid"
+                        ,"dbpassword":"$dbpassword"
                 }
                 ,"rootinfo":{
 			"baseurl":""
@@ -83,18 +83,18 @@
 		,"pathinfo":{
                         "htmlpath":"/var/www/html/beta/datasetviewer/"
                         ,"cgipath":"/var/www/cgi-bin/beta/datasetviewer/"
-                	,"apierrorlogpath":"/data/projects/glygen/apierrorlog/"
-			,"apicachepath":"/data/projects/glygen/apicache/"
-			,"jsondbpath":"/data/projects/glygen/jsondb/"
-			,"debuglogfile":"/data/projects/glygen/apierrorlog/debug.txt"
+                	,"apierrorlogpath":"<project_data_dir>/apierrorlog/"
+			,"apicachepath":"<project_data_dir>/apicache/"
+			,"jsondbpath":"<project_data_dir>/jsondb/"
+			,"debuglogfile":"<project_data_dir>/apierrorlog/debug.txt"
 		}
 	}
 	,"tst":{
                 "dbinfo":{
                         "dbhost":"127.0.0.1"
-                        ,"dbname":"glygen"
-                        ,"dbuserid":"dataservieweradmin"
-                        ,"dbpassword":"dataserviewerpass"
+                        ,"dbname":"$dbname"
+                        ,"dbuserid":"$userid"
+                        ,"dbpassword":"$dbpassword"
                 }
                 ,"rootinfo":{
                         "baseurl":""
@@ -107,10 +107,10 @@
                 ,"pathinfo":{
                         "htmlpath":"/var/www/html/datasetviewer/"
                         ,"cgipath":"/var/www/cgi-bin/datasetviewer/"
-                        ,"apierrorlogpath":"/data/projects/glygen/apierrorlog/"
-                        ,"apicachepath":"/data/projects/glygen/apicache/"
-                        ,"jsondbpath":"/data/projects/glygen/jsondb/"
-                        ,"debuglogfile":"/data/projects/glygen/apierrorlog/debug.txt"
+                        ,"apierrorlogpath":"<project_data_dir>/apierrorlog/"
+                        ,"apicachepath":"<project_data_dir>/apicache/"
+                        ,"jsondbpath":"<project_data_dir>/jsondb/"
+                        ,"debuglogfile":"<project_data_dir>/apierrorlog/debug.txt"
                 }
         }
 	,"dev":{
@@ -131,10 +131,10 @@
                 ,"pathinfo":{
                         "htmlpath":"/var/www/html/datasetviewer/"
                         ,"cgipath":"/var/www/cgi-bin/datasetviewer/"
-                        ,"apierrorlogpath":"/data/projects/glygen/apierrorlog/"
-                        ,"apicachepath":"/data/projects/glygen/apicache/"
-                        ,"jsondbpath":"/data/projects/glygen/jsondb/"
-                        ,"debuglogfile":"/data/projects/glygen/apierrorlog/debug.txt"
+                        ,"apierrorlogpath":"<project_data_dir>/apierrorlog/"
+                        ,"apicachepath":"<project_data_dir>/apicache/"
+                        ,"jsondbpath":"<project_data_dir>/jsondb/"
+                        ,"debuglogfile":"<project_data_dir>/apierrorlog/debug.txt"
                 }
         }
 }
