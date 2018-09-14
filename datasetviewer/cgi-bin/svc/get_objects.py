@@ -29,7 +29,7 @@ def main():
         query_obj = {}
 
         out_json = {"datasets":[]}
-        for doc in db[coll].find(query_obj).sort("_id", 1):
+	for doc in db[coll].find(query_obj):
             doc = json.loads(json_util.dumps(doc))
             out_json["datasets"].append(doc)
         

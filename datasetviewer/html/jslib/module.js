@@ -12,7 +12,7 @@ var readMeFile = '';
 var objId = '';
 var resJson = {};
 var filterHash = {};
-var seen = {"category":{}, "species":{}, "filetype":{}, "datasetcount":{}, "status":{}};       
+var seen = {"category":{}, "species":{}, "filetype":{}, "datasetcount":{}};       
 
 
 
@@ -22,33 +22,12 @@ $(document ).ready(function() {
 
 	setGlobalMenuCn();        
 	var sections = getSections();
-        //$("#modulesectionscn").html(sections);
+        $("#modulesectionscn").html(sections);
 	$("#modulesearchboxcn").html(getSearchBoxCn());
-
+       
 	setPageFrame();
 	fillFrameCn();
-        modifyMenuLinks();
-
 });
-
-
-/////////////////////////
-function modifyMenuLinks(){
-
-    $('.glygenmenu').each(function() {
-        console.log(this.href);
-
-        var lastPart = this.href.split("/").pop();
-        var url_one = "http://glygen.org/" + lastPart;
-        var url_two = "http://" + server + ".glygen.org/" + lastPart;
-        var menuUrl = (server == "prd" ? url_one : url_two);
-        this.href = menuUrl;
-        //console.log(this.href);
-    });
-    return;
-}
-
-
 
 ////////////////////////////
 function setPageFrame(){
@@ -74,10 +53,7 @@ function fillFrameCn(){
 	if(pageId == 'browse'){
 		fillGridViewCn("1");
         }
-        else if(pageId == 'view'){
-            fillEntryViewCn();
-        }
-        else if(server == "dev" && pageId == 'edit'){
+	else if(server == "dev" && pageId == 'edit'){
 		fillJsonTextCn();
 	}
 	else if(server == "dev" && pageId == 'create'){
@@ -101,6 +77,7 @@ function fillGridViewCn(){
 	var reqObj = new XMLHttpRequest();
 	reqObj.open("POST", url, true);
 	reqObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
         reqObj.onreadystatechange = function() {
                 if (reqObj.readyState == 4 && reqObj.status == 200) {
                         //console.log('response='+reqObj.responseText);
@@ -113,121 +90,6 @@ function fillGridViewCn(){
 	console.log(postData);
 
 }
-
-////////////////////////////
-function fillEntryViewCn(){
-
-        var url = cgiRoot + '/servlet.cgi';
-        var reqObj = new XMLHttpRequest();
-        reqObj.open("POST", url, true);
-        reqObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        reqObj.onreadystatechange = function() {
-                if (reqObj.readyState == 4 && reqObj.status == 200) {
-                        //console.log('response='+reqObj.responseText);
-                        resJson = JSON.parse(reqObj.responseText);
-                        rndrEntryContent();
-                }
-        };
-        objId = objId.replace("/", "");
-        var postData = 'mode=json&svc=get_dataset&objid='+objId;
-        reqObj.send(postData);
-        console.log(postData);
-}
-
-
-/////////////////////
-function rndrEntryContent(){
-
-        var datasetName = resJson["info"]["filename"];
-        var downloadUrl = htmlRoot + '/datasets/reviewed/'+datasetName
-        var readmeUrl = '/' + resJson["info"]["objid"] + '/readme';
-        var links = '<a href="'+readmeUrl+'" style="font-size:12px;" target=_>README</a>';
-        links += ' | <a href="'+downloadUrl+'" download="'+datasetName+'" style="font-size:12px;">DOWNLOAD</a>';
-	var linkId = "obj_" + parseInt(resJson["info"]["objid"].replace("GLYDS", ""));
-	links += ' | <a id="'+linkId+'" class=commentlink style="font-size:12px;">COMMENT</a>';
-         
-
-
-        var s1 = 'font-size:18px;font-weight:bold;color:#004065;';
-       
-        var d1 = 'position:static;width:100%;';
-        var divcn = '<div style="'+d1+'" id=datasetcn></div>';
-        //var cn = JSON.stringify(resJson);
-        var cn = '<table width=100% style="font-size:13px;" border=0>';
-        cn += '<tr height=30><td>&nbsp;</td></tr>';
-        cn += '<tr><td>'+resJson["info"]["objid"]+'</td></tr>';
-        cn += '<tr><td style="'+s1+'">'+resJson["info"]["title"]+'</td></tr>';
-        cn += '<tr><td>'+resJson["info"]["description"]+'</td></tr>';
-        cn += '<tr height=30><td align=right style="border-bottom:1px solid #ccc;">'+links+'</td></tr>';
-        cn += '</table>';
-        cn += divcn;
-        $("#pagecn").html(cn);
-       
-        
-        if (resJson["info"]["filetype"] == "csv"){
-            drawTable(resJson["dataframe"], "datasetcn", {"pagesize":100});
-        }
-        else if (resJson["info"]["filetype"] == "fasta"){
-            drawFasta(resJson["seqobjects"], "#datasetcn");
-        }
-        else if (["rdf", "aln", "gp", "gb"].indexOf(resJson["info"]["filetype"]) != -1){
-            drawPlainText(resJson["txtbuffer"], "#datasetcn");
-        }
-        else if (["png"].indexOf(resJson["info"]["filetype"]) != -1){
-            drawHtmlText(resJson["txtbuffer"], "#datasetcn");
-        }
-        return
-}
-
-
-////////////////////////////////////////
-function drawFasta(seqObjs, containerId){
-
-    var cn = '<table width=100% style="font-size:12px;" border=0>';
-    for (var i in seqObjs){
-        var obj = seqObjs[i];
-        cn += '<tr><td>>'+ obj.seqid + ' ' + obj.seqdesc + '</td></tr>';
-        var seq = "";
-        var lineLen = 100;
-        for (var j=0; j < parseInt(obj.seqbody.length/lineLen) + 1; j++){
-            var startPos = j*lineLen;
-            endPos = startPos + lineLen;
-            endPos = (endPos > obj.seqbody.length - 1 ? obj.seqbody.length - 1: endPos);
-            seq += obj.seqbody.substring(startPos, endPos) + '\n';
-        }
-        cn += '<tr><td><pre>'+seq+'</pre></td></tr>';
-        cn += '<tr height=30><td>&nbsp;</td></tr>';
-    }
-    cn += '</table>';
-    $(containerId).html(cn);
-
-    return;
-}
-
-
-////////////////////////////////////
-function drawPlainText(txtBuffer, containerId){
-
-    var cnBody = '<textarea style="width:100%;" rows=45>'+txtBuffer+'</textarea>';
-    var cn = '<table width=100% style="font-size:12px;" border=0>';
-    cn += '<tr><td><pre>'+cnBody+'<pre></td></tr>';
-    cn += '</table>';
-    $(containerId).html(cn);
-    return;
-}
-
-////////////////////////////////////
-function drawHtmlText(txtBuffer, containerId){
-
-    var cn = '<table width=100% style="font-size:12px;" border=0>';
-    cn += '<tr><td><pre>'+txtBuffer+'<pre></td></tr>';
-    cn += '</table>';
-    $(containerId).html(cn);
-    return;
-}
-
-
-
 
 ///////////////////////////
 function fillJsonTextCn(){
@@ -302,11 +164,11 @@ function rndrGridContent(){
 	var gridWidth = 250;
 	var gridHeight = 140;
 	var npass = 0;
-	seen = {"category":{}, "species":{}, "filetype":{}, "datasetcount":{}, "total":0, "status":{}}
+	seen = {"category":{}, "species":{}, "filetype":{}, "datasetcount":{}, "total":0}
 	var gridDivs = '<div class="grid_section grid_group">';
 	for (var i in resJson["datasets"]){
-                        var obj = resJson["datasets"][i];
-                        if (obj["status"] == -1){
+			var obj = resJson["datasets"][i];
+			if (obj["status"] == -1){
 				continue;
 			}
 			var ii = parseInt(i) + 1;
@@ -316,43 +178,39 @@ function rndrGridContent(){
 			seen["total"] += 1;
 			var fileType = obj["filetype"];
 			var species = obj["species"];
-                        var fileStatus = obj["status"];
 			seen["filetype"][fileType] = true;
 			seen["species"][species] = true;
-			seen["status"][fileStatus] = true;
+			if("category" in filterHash && !(cat in filterHash["category"])){
+                        	continue;
+                	}
+			if("species" in filterHash && !(species in filterHash["species"])){
+                                continue;
+                        }
+			npass += 1;
 			var xPos = i*(gridWidth + 80);
 			var iconFileName = obj["iconfilename"];
                         seen["datasetcount"][species] = (!(species in seen["datasetcount"]) ? 1 : 
 					seen["datasetcount"][species] + 1); 
 			seen["datasetcount"][fileType] = (!(fileType in seen["datasetcount"]) ? 1 :
                                         seen["datasetcount"][fileType] + 1);
-			seen["datasetcount"][fileStatus] = (!(fileStatus in seen["datasetcount"]) ? 1 :
-                                        seen["datasetcount"][fileStatus] + 1);
-                        if("filetype" in filterHash && !(fileType in filterHash["filetype"])){
+			if("filetype" in filterHash && !(fileType in filterHash["filetype"])){
                         	continue;
                 	}
 			if("species" in filterHash && !(species in filterHash["species"])){
                                 continue;
                         }
-			if("status" in filterHash && !(fileStatus in filterHash["status"])){
-                                continue;
-                        }
-                        if("category" in filterHash && !(cat in filterHash["category"])){
-                                continue;
-                        } 
-                        var miniTable = '';
+			var miniTable = '';
 			if ("minitable" in obj){
 				miniTable = rndrMiniTable(obj["minitable"]);
 			}
-	        
-                        npass += 1;
+		
                         gridDivs += '<div class="grid_col grid_span_1_of_3">';
 			var s = 'position:absolute;;width:45%;height:15px;border:0px solid red;';
                         s += 'left:5%;top:0%;color:#333;';
                         s += 'padding:15px 0px 0px 0px;font-size:11px;text-align:left;';
-                        objId = "GLYDS00000".substring(0, 10 - String(obj["_id"]).length) + String(obj["_id"]);
+                        objId = "000000".substring(0, 6 - String(obj["_id"]).length) + String(obj["_id"]);
                         gridDivs += '<div style="'+s+'">';
-                        gridDivs += (obj["status"] == 1 ? cat + ' ' + objId  + " " :
+                        gridDivs += (obj["status"] == 1 ? cat + ' object ' + objId  + " " + obj["_id"]:
                                                 cat + ' ('+objId+')' + ' <font color=red>in progress</font>');
                         gridDivs += '</div>';
                         var s = 'position:absolute;width:45%;height:15px;border:0px solid red;';
@@ -365,12 +223,9 @@ function rndrGridContent(){
                         var s = 'position:absolute;left:15%;top:60px;width:70%;height:50px;font-size:18px;';
 			s += 'font-weight:bold;color:#004065;vertical-align:bottom;';
                         s += 'border:0px solid red;';
-			var detailsUrl = '/' + objId ;
-			gridDivs += '<a href="'+detailsUrl+'" style="font-size:12px;">';
 			gridDivs += '<div style="'+s+'">';
 			gridDivs += obj["title"];
 			gridDivs += '</div>';
-			gridDivs += '</a>';
 		
 			var iconUrl = htmlRoot + '/content/' + iconFileName;
 			var s = 'position:absolute;left:10%;top:120px;width:80%;height:130px;font-size:18px;';
@@ -384,23 +239,21 @@ function rndrGridContent(){
                         s += 'font-size:12px;border:0px solid red;';
 			gridDivs += '<div style="'+s+'">';
 			gridDivs += obj["description"];
-                        gridDivs += '<a href="'+detailsUrl+'" style="font-size:12px;"> ... view details</a>';
 			gridDivs += '</div>';	
+			var datasetName = obj["filename"];
+		 	var url1 = htmlRoot + '/datasets/reviewed/'+datasetName
 			
-			//var datasetName = obj["filename"];
-		 	//var url1 = htmlRoot + '/datasets/reviewed/'+datasetName
-			//var s = 'position:absolute;left:5%;top:300px;width:90%;height:20px;';
-                        //s += 'font-size:13px;text-align:center;color:#004065;cursor:hand;border:0px solid red;';
-			//var linkId = "dataset_" + i;
-			//gridDivs += '<div style="'+s+'">';
-			//var readmeUrl = '/' + objId + '/readme';
-                        //gridDivs += '<a href="'+readmeUrl+'" style="font-size:12px;" target=_>README</a>';
-                        //gridDivs += ' | <a id="'+linkId+'" class=previewlink style="font-size:12px;">PREVIEW</a>';
-			//gridDivs += ' | <a href="'+url1+'" download="'+datasetName+'" style="font-size:12px;">DOWNLOAD</a>';
+			var s = 'position:absolute;left:5%;top:300px;width:90%;height:20px;';
+                        s += 'font-size:13px;text-align:center;color:#004065;cursor:hand;border:0px solid red;';
+			var linkId = "dataset_" + i;
+			gridDivs += '<div style="'+s+'">';
+			gridDivs += '<a id="'+linkId+'" class=readmelink style="font-size:12px;">README</a>';
+			gridDivs += ' | <a id="'+linkId+'" class=previewlink style="font-size:12px;">PREVIEW</a>';
+			gridDivs += ' | <a href="'+url1+'" download="'+datasetName+'" style="font-size:12px;">DOWNLOAD</a>';
                        
-			//var linkId = "obj_" + obj["_id"];
-			//gridDivs += ' | <a id="'+linkId+'" class=commentlink style="font-size:12px;">COMMENT</a>';
-			//gridDivs += '</div>';
+			var linkId = "obj_" + obj["_id"];
+			gridDivs += ' | <a id="'+linkId+'" class=commentlink style="font-size:12px;">COMMENT</a>';
+			gridDivs += '</div>';
 			gridDivs += '</div>';
 	}
 	gridDivs += '</div>';
@@ -417,7 +270,7 @@ function rndrGridContent(){
 			chkd = (filterHash["category"][x] == true ? "checked" : "");
 		}
 		var chkbox = '<input class=filtercheckbox type=checkbox name=category '+chkd+' width=15 value="'+x+'">';
-		filters1 += '&nbsp;&nbsp;&nbsp;' + chkbox + " " + label + '<br>';
+		filters1 += '&nbsp;&nbsp;&nbsp;' + chkbox + label + '<br>';
 	}	
 
 	var filters2 = '<b>Filter by species</b><br>';
@@ -429,7 +282,7 @@ function rndrGridContent(){
                         chkd = (filterHash["species"][x] == true ? "checked" : "");
                 }
                 var chkbox = '<input class=filtercheckbox type=checkbox name=species '+chkd+' width=15 value="'+x+'">';
-        	filters2 += '&nbsp;&nbsp;&nbsp;' + chkbox + " " + label + '<br>';
+        	filters2 += '&nbsp;&nbsp;&nbsp;' + chkbox + label + '<br>';
 	}
 
 
@@ -442,21 +295,8 @@ function rndrGridContent(){
                         chkd = (filterHash["filetype"][x] == true ? "checked" : "");
                 }
 		var chkbox = '<input class=filtercheckbox type=checkbox name=filetype '+chkd+' width=15 value="'+x+'">';
-		filters3 += '&nbsp;&nbsp;&nbsp;' + chkbox + " " + label + '<br>';
+		filters3 += '&nbsp;&nbsp;&nbsp;' + chkbox + label + '<br>';
 	}
-       
-        var statusHash = {"0":"in progress", "1":"reviewed"}
-        var filters4 = '<b>Filter by status</b><br>';
-        for (var x in seen["status"]){
-                var n = (x in seen["datasetcount"] ? seen["datasetcount"][x] : 0);
-                var label = statusHash[x] + ' (' + n + ')';
-                var chkd = "checked";
-                if ("status" in filterHash){
-                        chkd = (filterHash["status"][x] == true ? "checked" : "");
-                }
-                var chkbox = '<input class=filtercheckbox type=checkbox name=status '+chkd+' width=15 value="'+x+'">';
-                filters4 += '&nbsp;&nbsp;&nbsp;' + chkbox + " " + label + '<br>';
-        }
 
 
 	var s =  'width:80px;height:25px;';
@@ -470,9 +310,8 @@ function rndrGridContent(){
 	var filters = '<table width=100% border=0 style="font-size:13px;">' +
        			'<tr><td valign=top>'+filters1+'</td>'+ 
 				'<td valign=top>'+filters2+'</td>'+
-				'<td valign=top>'+filters4+'</td>' + 
-			        '<td valign=top>'+filters3+'</td></tr>' +
-                        '</table>';	
+				'<td valign=top>'+filters3+'</td></tr>' + 
+			'</table>';	
 	var filterTable = '<table width=100% border=0 style="font-size:13px;">' +
 			'<tr style="border-bottom:1px solid #ccc;">' + 
 			'<td >Total of '+ seen["total"]+ ' datasets ('+npass +' passed filter)</td>' + 
@@ -638,6 +477,19 @@ function isValidJson(str) {
 
 
 
+//////////////////////Event handlers
+$(document).on('click', '.glygenmenu', function (event) {
+        event.preventDefault();
+
+	var lastPart = this.href.split("/").pop()
+	if (server == "prd"){
+		window.location.href = "http://glygen.org/" + lastPart;
+	}
+	else{
+		window.location.href = "http://" + server + ".glygen.org/" + lastPart;
+	}
+});
+
 
 
 $(document).on('click', '#filterlink', function (event) {
@@ -729,7 +581,7 @@ $(document).on('click', '.filtercheckbox', function (event) {
 	
 	event.preventDefault();
 	
-	filterHash = {"category":{}, "species":{}, "filetype":{}, "status":{}};
+	filterHash = {"category":{}, "species":{}, "filetype":{}};
 	$("input[type=checkbox][name=category]:checked").each(function () {
 		filterHash["category"][$(this).val()] = true;
 	});
@@ -741,10 +593,6 @@ $(document).on('click', '.filtercheckbox', function (event) {
 	$("input[type=checkbox][name=filetype]:checked").each(function () {
                 filterHash["filetype"][$(this).val()] = true;
         });	
-        
-        $("input[type=checkbox][name=status]:checked").each(function () {
-                filterHash["status"][$(this).val()] = true;
-        });
 
 	rndrGridContent();
 

@@ -94,19 +94,7 @@
 			print "$jsonText";
 			exit;
 		}
-                elsif($VHASH{SVC} eq "get_readme_txt"){
-                        my $cmd = qq{python $PHASH->{$SERVER}{pathinfo}{cgipath}/svc/get_readme_txt.py -o $VHASH{OBJID}};
-                        my $jsonText = `$cmd`;
-                        print "$jsonText";
-                        exit;
-                }
-                elsif($VHASH{SVC} eq "get_dataset"){
-                        my $cmd = qq{python $PHASH->{$SERVER}{pathinfo}{cgipath}/svc/get_dataset.py -o $VHASH{OBJID}};
-                        my $jsonText = `$cmd`;
-                        print "$jsonText";
-                        exit;
-                }
-        }
+	}
 
 
 

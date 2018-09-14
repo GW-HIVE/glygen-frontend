@@ -4,8 +4,6 @@
 #Ignore file auto created by Mac OS
 .DS_Store
 
-datasetviewer/deploy.sh
-
 #Ignore hidden files and folders
 .*
 #except include following files
