@@ -28,179 +28,19 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-//
-// function validatePathway(input) {
-//     // ^[A-Z]{1,2}[0-9]{5}$
-//     // var letters = /^[A-Z]{1}[0-9]{5}$/i;
-//     var validLength = (input.value.length <= 3);
-//
-//
-//     if (validLength) {
-//         document.getElementById("pathwayMsg").innerHTML = "";
-//         return true;
-//     } else {
-//         document.getElementById("pathwayMsg").innerHTML = "Enter a valid amino seq.";
-//         return false;
-//     }
-// }
-
-/**
- * function aminoLetter is a to select value of text-input
- * @param {string} strings of characters
- * @returns {number} if matches returns true or not false
- */
-
-function aminoLetter(textareatxt) {
-    var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
-
-    var validLength = (textareatxt.value.length <= 3356);
-    var validCharacters = textareatxt.value.match(letters);
-
-    var validEntry = (validLength && validCharacters);
-
-    document.getElementById("msg").innerHTML = "";
-    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
-    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
-
-    return validEntry;
-
-    // if (validCharacters) {
-    //     document.getElementById("msg").innerHTML = "";
-    //
-    // } else {
-    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
-    //
-    // }
-    //
-    // if (validLength) {
-    //     document.getElementById("msg").innerHTML = "";
-    //
-    // } else {
-    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
-    //
-    // }
+function sortDropdown(a, b)
+{
+    if (a.name < b.name)
+    {
+        return -1;
+    }
+    else if (b.name < a.name)
+    {
+        return 1;
+    }
+    return 0;
 }
 
-
-/** Protein field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the protein ID's
- *
- */
-
-
-$("#protein").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-$("#refseq").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("refseq_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-/** protein_name field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the protein_name.
- *
- */
-$("#protein_name").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_name", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-/** pgene_name field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the gene_name.
- *
- */
-
-$("#gene_name").autocomplete({
-    source: function (request, response) {
-
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("gene_name", request.term);
-
-
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-$("#pathway").autocomplete({
-    source: function (request, response) {
-
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("pathway_id", request.term);
-
-
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-
-
-
-$("#glycan_id").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
@@ -227,8 +67,11 @@ $(document).ready(function () {
             searchInitValues = result;
 
             var orgElement = $(".organism").get(0);
-            createOption(orgElement, result.organism[0].name, result.organism[0].id);
-            createOption(orgElement, result.organism[1].name, result.organism[1].id);
+            result.organism.sort(sortDropdown);
+            for (var x = 0; x < result.organism.length; x++)
+            {
+                createOption(orgElement, result.organism[x].name, result.organism[x].name);
+            }
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
             // mass(mass_min, mass_max);
