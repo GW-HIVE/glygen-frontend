@@ -194,3 +194,51 @@ function validateGeneName(input) {
         return false;
     }
 }
+
+
+function aminoLetter(textareatxt) {
+    var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
+
+    var validLength = (textareatxt.value.length <= 3356);
+    var validCharacters = textareatxt.value.match(letters);
+
+    var validEntry = (validLength && validCharacters);
+
+    document.getElementById("msg").innerHTML = "";
+    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
+    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
+
+    return validEntry;
+
+    // if (validCharacters) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
+    //
+    // if (validLength) {
+    //     document.getElementById("msg").innerHTML = "";
+    //
+    // } else {
+    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
+    //
+    // }
+}
+
+//
+// function validatePathway(input) {
+//     // ^[A-Z]{1,2}[0-9]{5}$
+//     // var letters = /^[A-Z]{1}[0-9]{5}$/i;
+//     var validLength = (input.value.length <= 3);
+//
+//
+//     if (validLength) {
+//         document.getElementById("pathwayMsg").innerHTML = "";
+//         return true;
+//     } else {
+//         document.getElementById("pathwayMsg").innerHTML = "Enter a valid amino seq.";
+//         return false;
+//     }
+// }
