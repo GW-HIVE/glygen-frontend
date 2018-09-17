@@ -62,30 +62,30 @@
 
     <h3 class="page-heading" style="text-align: center">Protein Search </h3>
     
-    <div id="simplifiedSearch" class="container gg-container" style="margin-bottom: 300px;">
-        <div class="row text-right" style="margin-right: -20px">
+    <div id="simplifiedSearch" class="container gg-container-simplified-search" style="margin-bottom:2 300px;">
+        <div class="row text-right advancedButton">
             <button class="btn btn-link" onclick="hideSimplSearchButton()">
-            <label class="control-label col-sm-3" for="simplifiedSearch">Advanced Search</label></button>
+            <label class="control-label" for="simplifiedSearch">Advanced Search</label></button>
         </div>
         
-        <div class="row" style="margin-right: -63px;">
-            <div class="col-sm-3">
+        <div class="row">
+            <div class="col-sm-3 gg-form-group">
                 <select>
                     <option value="select">Any</option>
                 </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 gg-form-group">
                 <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Protein">
             </div>
-            <div class="col-sm-3" style="text-align:2 right"> 
-            <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
+            <div class="col-sm-3 text-right">     
+            <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()"
             style="margin: -5px 0 20px;">
             </div>
         </div>
     </div> <!--    End Simplified Search Div-->
     
     <div id="advancedSearch" class="container gg-container">    
-        <div class="row text-right" style="margin-right: -20px;">
+        <div class="row text-right" style="margin-right:2 -20px;">
             <button class="btn btn-link" onclick="hideAdvSearchButton()">
             <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
         </div>
