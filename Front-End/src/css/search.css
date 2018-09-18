@@ -43,6 +43,21 @@ input[type=submit]:hover {
     margin-bottom: 60px;
 }
 
+.gg-container-simplified-searchGlycoproten {
+    width: 70%;
+    border-radius: 5px;
+    background-color: #dfe5ed;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 3%;
+    padding-right: 10%;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+.advancedButtonGlycoprotein {
+    margin-right: -2%;
+}
+
 .gg-container {
     width: 70%;
     border-radius: 5px;
@@ -113,14 +128,23 @@ select {
     clear: both;
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1024px) {
      .gg-container-simplified-search {
-        padding-left: 3% !important;
+        padding-left: 6% !important;
         padding-right: 13% !important;
     }
     .advancedButton {
         margin-right: -12% !important;
     }
+    
+    .advancedButtonGlycoprotein {
+        margin-right: -24% !important;  
+    }
+    .gg-container-simplified-searchGlycoproten {
+        padding-left: 4%;
+        padding-right: 18% !important;
+    }
+    
     .slider-alignment {
         margin-left: 45%;
         width: 80% !important; 
@@ -134,12 +158,20 @@ select {
         overflow: auto;
         width: 100% !important;
     } 
-     .gg-container-simplified-search {
+    .gg-container-simplified-search {
         padding-left: 5%;
         padding-right: 15% !important;
     }
     .advancedButton {
         margin-right: -25% !important;
+    }
+    
+    .advancedButtonGlycoprotein {
+        margin-right: -45% !important;  
+    }
+    .gg-container-simplified-searchGlycoproten {
+        padding-left: 4%;
+        padding-right: 25% !important;
     }
 }
 @media only screen and (max-width: 768px) {
@@ -154,15 +186,24 @@ select {
     
     .gg-container-simplified-search {
         width: 100%;
+        padding-left: 6% !important;
         padding-right: 9% !important;
-        padding-left: 10% !important;
+        
     }
     .advancedButton {
         margin-right: -5% !important;
     }
     
+    .advancedButtonGlycoprotein {
+        margin-right: -4% !important;  
+    }
+    .gg-container-simplified-searchGlycoproten {
+        width: 100%;
+        padding-left: 4%;
+        padding-right: 15% !important;
+    }
     .slider-alignment {
-        margin-left: 45%;
+        margin-left: 18%;
         margin-top: 0 !important;
         margin-bottom: 20px;
         width: 78% !important; 
@@ -181,7 +222,15 @@ select {
         margin-top: 0 !important;
         margin-bottom: 0;
         width: 90% !important;
-    }    
+    } 
+    .advancedButtonGlycoprotein {
+        margin-right: -7% !important;  
+    }
+    .gg-container-simplified-searchGlycoproten {
+        width: 100%;
+        padding-left: 10%;
+        padding-right: 10% !important;
+    }
 }
 
 @media (max-width: 360px) {

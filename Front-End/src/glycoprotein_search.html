@@ -62,23 +62,23 @@
 
     <h3 class="page-heading" style="text-align: center">Glycoprotein Search </h3>
     
-    <div id="simplifiedSearch" class="container gg-container" style="margin-bottom: 300px;">
-        <div class="row text-right">
+    <div id="simplifiedSearch" class="container gg-container-simplified-searchGlycoproten" style="margin-bottom:2 300px;">
+        <div class="row text-right advancedButtonGlycoprotein">
             <button class="btn btn-link" onclick="hideSimplSearchButton()">
-            <label class="control-label col-sm-3" for="simplifiedSearch">Advanced Search</label></button>
+            <label class="control-label" for="simplifiedSearch">Advanced Search</label></button>
         </div>
         
-        <div class="row2" style="margin-left: -25px;">
-            <div class="col-sm-3">
+        <div class="row">
+            <div class="col-sm-3 gg-form-group">
                 <select>
                     <option value="select">Any</option>
                 </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 gg-form-group">
                 <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Glycoprotein">
             </div>
-            <div class="col-sm-3"> 
-            <input type="button" class="btn-lg btn-primary bottom-table-margin2" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
+            <div class="col-sm-3 text-right"> 
+            <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="margin: -5px 0 20px;">
             </div>
         </div>
