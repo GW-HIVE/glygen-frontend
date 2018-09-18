@@ -30,15 +30,21 @@ input[type=submit]:hover {
     background-color: #f86868;
     
 }
+/* --------------------------
+    Simplified Search 
+-----------------------------*/
 
+#advancedSearch {
+     display: none;
+}
 .gg-container-simplified-search {
     width: 70%;
     border-radius: 5px;
     background-color: #dfe5ed;
     padding-top: 20px;
     padding-bottom: 20px;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 5%;
+    padding-right: 5%;
     margin-top: 30px;
     margin-bottom: 60px;
 }
@@ -53,9 +59,6 @@ input[type=submit]:hover {
     padding-right: 10%;
     margin-top: 30px;
     margin-bottom: 60px;
-}
-.advancedButtonGlycoprotein {
-    margin-right: -2%;
 }
 
 .gg-container {
@@ -372,18 +375,5 @@ select {
     color: darkred;
 }
 
-/* --------------------------
-    Simplified Search 
------------------------------*/
 
-#advancedSearch2 {
-     display: none;
-}
 
-.gg-container-simplified-search {
-        padding-left: 5%;
-        padding-right: -5%;
-    }
-    .advancedButton {
-        margin-right: -2%;
-    }
