@@ -89,7 +89,7 @@ function bioEnzyme(){
          url: getWsUrl("search_bioenzyme",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q1";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -136,7 +136,7 @@ function glycanSite(){
         url: getWsUrl("search_glycansite",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q2";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -183,7 +183,7 @@ function glycanGene(){
         url: getWsUrl("search_glycangene",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './locus_list.html?id=' + results.list_id;
+                window.location = './locus_list.html?id=' + results.list_id + "&source=1&question=q3";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -228,7 +228,7 @@ function proteinOrthologues(){
         success: function (results) {
             if (results.list_id) {
 
-                window.location = './protein_orthologus.html?id=' + results.list_id;
+                window.location = './protein_orthologus.html?id=' + results.list_id+ "&source=1&question=q4";
 
             }
             else {
@@ -320,7 +320,7 @@ function glycanEnzyme(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './glycan_list.html?id=' + results.list_id;
+                window.location = './glycan_list.html?id=' + results.list_id + "&source=1&question=q6";
             }
             else {
 
@@ -365,7 +365,7 @@ function glycosylTransferases(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q7";
             }
             else {
 
@@ -411,7 +411,7 @@ function glycoHydrolases(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q8";
             }
             else {
 
@@ -462,7 +462,7 @@ function glycoProteins(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q9";
             }
             else {
 
@@ -497,26 +497,26 @@ $("#glycosyltransferasesdisease").autocomplete({
 
 
 
-function glycosyTtransferasesDisease(){
-
-    var id = $("#glycosyltransferasesdisease").val();
-
-    //it seems  need that taxID m can we just set it to 10090 ?
-    $.ajax({
-        type: 'POST',
-        url: getWsUrl("search_disease",id),
-        success: function(results) {
-            if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
-            }
-            else {
-                displayErrorByCode('no-results-found');
-            }
-
-        }
-
-    })
-}
+// function glycosyTtransferasesDisease(){
+//
+//     var id = $("#glycosyltransferasesdisease").val();
+//
+//     //it seems  need that taxID m can we just set it to 10090 ?
+//     $.ajax({
+//         type: 'POST',
+//         url: getWsUrl("search_disease",id),
+//         success: function(results) {
+//             if (results.list_id) {
+//                 window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q10";
+//             }
+//             else {
+//                 displayErrorByCode('no-results-found');
+//             }
+//
+//         }
+//
+//     })
+// }
 
 
 
@@ -544,7 +544,7 @@ function glycosyTtransferasesDisease(){
         data: json,
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id+ "&source=1&question=q10";
             }
             else {
                 displayErrorByCode('no-results-found');

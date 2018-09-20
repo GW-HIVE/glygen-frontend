@@ -46,21 +46,32 @@ function addCommas(nStr) {
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildSummary(queryInfo) {
+function buildSummary(queryInfo, question) {
+
+    //quick search
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = moment(queryInfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
-    // var excutionDate= new Date(queryInfo.execution_time);
-    // queryInfo.execution_time = excutionDate.toLocaleString();
-    queryInfo.mass.min = addCommas(queryInfo.mass.min);
-    queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
 
 
+/**
+ * Redirect to Page index page or search back
+ */
+function redirectPage1() {
+    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
+}
+
+function redirectPage2() {
+    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/quick_search.html";
+}
 
 
+// $(document).ready(function () {
+//     $("demosearch").tooltip();
+// });
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
@@ -77,7 +88,7 @@ function totalNoSearch(total_length) {
 
 function editSearch() {
     {
-        window.location.replace("protein_search.html?id=" + id);
+        window.location.replace("quick_search.html?id=" + id);
         activityTracker("user", id, "edit search");
     }
 }
@@ -137,9 +148,9 @@ function updateSearch() {
         url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
             // if (result.list_id) {
-                console.log(result);
-                activityTracker("user", id, "update search");
-                window.location = 'protein_list.html?id=' + result.list_id;
+            console.log(result);
+            activityTracker("user", id, "update search");
+            window.location = 'protein_list.html?id=' + result.list_id;
             // } else {
             //     // handle if no results
             //     activityTracker("error", id, "update search: no result found");
@@ -189,7 +200,7 @@ function ajaxListSuccess(data) {
 
         buildPages(data.pagination);
 
-        buildSummary(data.query);
+        buildSummary(data.query, question);
 
         document.title = 'Protein-list';
         lastSearch = data;
@@ -251,6 +262,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 
 LoadDataList(id);
 
