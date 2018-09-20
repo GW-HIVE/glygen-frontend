@@ -155,7 +155,8 @@ function getTimeout(ajaxWebService) {
     // search Init
     var searchInitGlycan = 10000,
         searchInitProtein = 10000,
-        searchInitGlycoP = 10000;
+        searchInitGlycoP = 10000,
+        homeInit = 10000;
 
     // search
     var searchGlycan = 60000,   //10000,
@@ -183,6 +184,8 @@ function getTimeout(ajaxWebService) {
             return listGlycan;
         case "detail_glycan":
             return detailGlycan;
+        case "home_init":
+            return homeInit;
 
         // protein
         case "search_init_protein":

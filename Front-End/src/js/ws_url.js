@@ -13,7 +13,7 @@ function getWsUrl(request, id, id1) {
 
     // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
     var ws_base = "http://tst.api.glygen.org/";
-    
+    var ws_home_init = ws_base+"pages/home_init";
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
     var ws_base_typeahead = ws_base+"typeahead";
@@ -36,6 +36,10 @@ function getWsUrl(request, id, id1) {
             return ws_contact;
             break;
             
+        //Homepage webservices
+        case "home_init":
+            return ws_home_init;
+            break;
         //Glycan webservices
         case "search_init_glycan":
             return ws_base_glycan + "/search_init";
