@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    
+<script>
+       
+    window.onload=function() {
+        // get the svg contentDocument
+        var svgObj = document.getElementById("mySVG");
+        var svgDoc = svgObj.contentDocument;
+        // set the extFlag value to "1" - clicking on svg nodes will now use external methods,
+        //     specified in its interface and instantiated here
+        svgDoc.getElementById("extFlag").setAttribute("value", "1");
+        //  verify that this worked
+        document.getElementById("infoDiv").innerHTML = "flag is now " + svgDoc.getElementById("extFlag").getAttribute("value") + 
+            "<br>If flag is 1, clicking on an svg node invokes methods " + 
+            "in this html document, rather than methods defined in the svg header.";
+    }
+    
+    function extClick(nodeIndex) {
+        document.getElementById("infoDiv").innerHTML = "You clicked node " + nodeIndex + 
+            "<br>(information provided by the extClick() method implemented within this html document)";
+    }
+    
+    function extOver(nodeIndex) {
+        document.getElementById("infoDiv").innerHTML = "You moved the mouse over node " + nodeIndex + 
+            "<br>(information provided by the extOver() method implemented within this html document)";
+    }
+
+    function extLeave(nodeIndex) {
+        document.getElementById("infoDiv").innerHTML = "You moved the mouse out of node " + nodeIndex + 
+            "<br>(information provided by the extLeave() method implemented within this html document)";
+    }
+
+    </script>
+    
+</head>
+<body>
+    
+<center>
+    
+<h2>HTML implementation of SVG interface</h2>
+
+<object type="image/svg+xml" id="mySVG" width="860" height="400" style="background: #EEFFEE" data="svg/glycan-8.svg">
+  Your browser does not support SVG
+</object>
+
+<br>
+<div id="infoDiv">
+    Information goes here ....
+</div>
+</center>    
+
+    
+</body>
+</html>

@@ -6,12 +6,18 @@
     window.onload=function () {
         var sugarNode = document.getElementsByClassName("sugar");
         for (var i = 0; i < sugarNode.length; i++) {
-            sugarNode[i].addEventListener('click', doClick, false);
+            sugarNode[i].addEventListener('click', mClick, false);
+            sugarNode[i].addEventListener('mouseover', mOver, false);
+            sugarNode[i].addEventListener('mouseleave', mLeave, false);
         }
     }
 
+
+    // It seems that a clever programmer could combine the mClick, mOver, and mLeave
+    //   methods, and have the method sense the event, but I am not that clever
+
     // To access this function, it must be outside the scope of the onload function
-    function doClick() {
+    function mClick() {
         var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
         if (useExternalMethod == "0") {
             // perform the function (in this case, go to pubchem) to use when the svg file is used in isolation
@@ -25,6 +31,25 @@
         }
     }
 
+    function mOver() {
+        var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
+        if (useExternalMethod == "1") {
+            // perform the function defined in the enclosing (parent) html document
+            // This constitutes an INTERFACE to the extOver method defined in the parent html document
+            var nodeId = this.getAttribute("nodeIndex");
+            window.parent.extOver(nodeId);
+        }
+    }
+
+    function mLeave() {
+        var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
+        if (useExternalMethod == "1") {
+            // perform the function defined in the enclosing (parent) html document
+            // This constitutes an INTERFACE to the extLeave method defined in the parent html document
+            var nodeId = this.getAttribute("nodeIndex");
+            window.parent.extLeave(nodeId);
+        }
+    }
 
     ]]>
   </script>
