@@ -4,8 +4,8 @@
   <groupId>com.glygen</groupId>
   <artifactId>WebGUI</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>Maven Webapp to copy Front end files</name>
+  <version>1.0.1</version>
+  <name>Maven Webapp to copy Front end files to the server</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,80 +18,317 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <finalName>CopyLocally</finalName>
-    <plugins>
-      <plugin>  <!-- to access config file -->
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <version>1.0-alpha-2</version>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>read-project-properties</goal>
-            </goals>
-            <configuration>
-              <files>
-                <file>config.properties</file>
-              </files>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    
-      <plugin>  <!-- first delete contents of the destination directory -->
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>2.5</version>
-          <executions>
-            <execution>
-              <id>auto-clean</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>clean</goal>
-              </goals>
-              <configuration>
-              <filesets>
-                  <fileset>
-                    <directory>${to}</directory>
-                    <includes>
-                      <!-- makes sure that the target ${to} directory is not itself deleted -->
-                      <include>**/*</include>
-                    </includes>
-                  </fileset>
-                </filesets>
-              </configuration>
-            </execution>
-          </executions>
-      </plugin>
 
-      <plugin>  <!-- to copy files locally -->
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.0.2</version>
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <nonFilteredFileExtensions>
-                <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-              </nonFilteredFileExtensions>
-              <outputDirectory>${to}</outputDirectory> 
-              <resources>          
-                <resource>
-                  <directory>${from}</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>              
-            </configuration>            
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <!-- Defined below are three different profiles viz. test, beta, prod. 
+  The only difference in their scripts is the config file being accessed. -->
+  <profiles>
+    <!-- TEST server profile -->
+    <profile>
+      <id>test</id>
+      <build>
+        <finalName>CopyLocallyToTest</finalName>
+        <plugins>
+          <plugin>  <!-- to access config file -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0-alpha-2</version>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>read-project-properties</goal>
+                </goals>
+                <configuration>
+                  <files>
+                    <file>config-test.properties</file>
+                  </files>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        
+          <plugin>  <!-- first delete contents of the destination directory -->
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>2.5</version>
+              <executions>
+                <execution>
+                  <id>auto-clean</id>
+                  <phase>validate</phase>
+                  <goals>
+                    <goal>clean</goal>
+                  </goals>
+                  <configuration>
+                  <filesets>
+                      <fileset>
+                        <directory>${to}</directory>
+                        <includes>
+                          <!-- makes sure that the target ${to} directory is not itself deleted -->
+                          <include>**/*</include>
+                        </includes>
+                      </fileset>
+                    </filesets>
+                  </configuration>
+                </execution>
+              </executions>
+          </plugin>
+
+          <plugin>  <!-- to copy files locally -->
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.0.2</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <nonFilteredFileExtensions>
+                    <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                  </nonFilteredFileExtensions>
+                  <outputDirectory>${to}</outputDirectory> 
+                  <resources>          
+                    <resource>
+                      <directory>${from}</directory>
+                      <filtering>true</filtering>
+                      <excludes>
+                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        Copied separately in the below plugin -->
+                        <exclude>${wsUrl}*</exclude>
+                      </excludes>
+                    </resource>
+                  </resources>              
+                </configuration>            
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>  <!-- copies the server specific ws_url file and renames it -->
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- BETA server profile -->
+    <profile>
+      <id>beta</id>
+      <build>
+        <finalName>CopyLocallyToBeta</finalName>
+        <plugins>
+          <plugin>  <!-- to access config file -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0-alpha-2</version>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>read-project-properties</goal>
+                </goals>
+                <configuration>
+                  <files>
+                    <file>config-beta.properties</file>
+                  </files>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        
+          <plugin>  <!-- first delete contents of the destination directory -->
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>2.5</version>
+              <executions>
+                <execution>
+                  <id>auto-clean</id>
+                  <phase>validate</phase>
+                  <goals>
+                    <goal>clean</goal>
+                  </goals>
+                  <configuration>
+                  <filesets>
+                      <fileset>
+                        <directory>${to}</directory>
+                        <includes>
+                          <!-- makes sure that the target ${to} directory is not itself deleted -->
+                          <include>**/*</include>
+                        </includes>
+                      </fileset>
+                    </filesets>
+                  </configuration>
+                </execution>
+              </executions>
+          </plugin>
+
+          <plugin>  <!-- to copy files locally -->
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.0.2</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <nonFilteredFileExtensions>
+                    <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                  </nonFilteredFileExtensions>
+                  <outputDirectory>${to}</outputDirectory> 
+                  <resources>          
+                    <resource>
+                      <directory>${from}</directory>
+                      <filtering>true</filtering>
+                      <excludes>
+                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        Copied separately in the below plugin -->
+                        <exclude>${wsUrl}*</exclude>
+                      </excludes>
+                    </resource>
+                  </resources>              
+                </configuration>            
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>  <!-- copies the server specific ws_url file and renames it -->
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- PRODUCTION server profile -->
+    <profile>
+      <id>prod</id>
+      <build>
+        <finalName>CopyLocallyToProd</finalName>
+        <plugins>
+          <plugin>  <!-- to access config file -->
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0-alpha-2</version>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>read-project-properties</goal>
+                </goals>
+                <configuration>
+                  <files>
+                    <file>config-prod.properties</file>
+                  </files>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        
+          <plugin>  <!-- first delete contents of the destination directory -->
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>2.5</version>
+              <executions>
+                <execution>
+                  <id>auto-clean</id>
+                  <phase>validate</phase>
+                  <goals>
+                    <goal>clean</goal>
+                  </goals>
+                  <configuration>
+                  <filesets>
+                      <fileset>
+                        <directory>${to}</directory>
+                        <includes>
+                          <!-- makes sure that the target ${to} directory is not itself deleted -->
+                          <include>**/*</include>
+                        </includes>
+                      </fileset>
+                    </filesets>
+                  </configuration>
+                </execution>
+              </executions>
+          </plugin>
+
+          <plugin>  <!-- to copy files locally -->
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.0.2</version>
+            <executions>
+              <execution>
+                <id>copy-resources</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <nonFilteredFileExtensions>
+                    <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                  </nonFilteredFileExtensions>
+                  <outputDirectory>${to}</outputDirectory> 
+                  <resources>          
+                    <resource>
+                      <directory>${from}</directory>
+                      <filtering>true</filtering>
+                      <excludes>
+                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        Copied separately in the below plugin -->
+                        <exclude>${wsUrl}*</exclude>
+                      </excludes>
+                    </resource>
+                  </resources>              
+                </configuration>            
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>  <!-- copies the server specific ws_url file and renames it -->
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
