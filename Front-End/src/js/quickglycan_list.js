@@ -1,10 +1,18 @@
+//@author: Rupali Mahadik
 
+// @description: UO1 Version-1.1.
 
+//@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
 
-//@Author:Rupali Mahadik.
-//@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
-// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+//@update:3 April 2018. with Rupali Mahadik real web service
+//@update: June 26-2018- with Rupali Mahadik web service changes.
+//@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+// @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
+
+
+
+
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -17,15 +25,12 @@ String.prototype.trunc = String.prototype.trunc ||
     function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
-// var id = '';
+var id = '';
 var page = 1;
-var sort = 'protein_name_long';
-var dir = 'desc'
-var url = getWsUrl('protein_list');
-var limit = 25;
-
-
-
+var sort = 'mass';
+var dir = $('.dir-select').val();
+var url = getWsUrl('glycan_list') + "?action=get_user";
+var limit = 10;
 
 /**
  * it creates user interface for summary
@@ -34,65 +39,77 @@ var limit = 25;
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildSummary(queryInfo, question) {
-
-    //quick search
+function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
-    queryInfo[question] = true;
-    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
-    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
-    // queryInfo.questionText = getMessageText(question, queryInfo);
+    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
+
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
+
+
+
 }
 
+// /**
+//  * Redirect to Page index page or search back
+//  */
+// function redirectPage1() {
+//     window.location.replace("index.html");
+// }
+//
+// function redirectPage2() {
+//     window.location.href = "glycan_search.html";
+// }
+//
+// //      $(document).ready(function(){
+// //      // $("demosearch").tooltip();
+// // });
 
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1() {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
+
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
+
 }
-
-function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/quick_search.html";
-}
-
-
-// $(document).ready(function () {
-//     $("demosearch").tooltip();
-// });
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
  */
 
-
-function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
-}
-
-
-
-function editSearch() {
-    var question =  getParameterByName('question');
-
-    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-    activityTracker("user", id, "edit search");
-}
+// function editSearch() {
+//     {
+//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
+//     }
+// }
 
 /**
 
  * Format function to create link to the details page
 
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Protein Id
+ @return -Details particular Glycan Id
  */
-function PageFormat(value, row, index, field) {
-    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
+function pageFormat(value, row, index, field) {
+    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
+}
+
+/**
+
+ * Format function for column that contains the cartoon
+
+ * @param {object} value - The data binded to that particular cell.
+
+ * @param {object} row - The data binded to that particular row.
+ * @return- Glycanimage
+ */
+
+// For Image Column
+function imageFormat(value, row, index, field) {
+    var url = getWsUrl('glycan_image', row.glytoucan_ac);
+    return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
 
@@ -101,10 +118,10 @@ function PageFormat(value, row, index, field) {
  * Format function for column "MASS"
 
  * @param {object} value - The data binded to that particular cell.
- * @return- Protein Mass if available else NA
+ * @return- Glycan Mass if available else NA
  */
 
-function MassFormatter(value) {
+function massFormatter(value) {
     if (value) {
         var mass = value;
         return value;
@@ -116,6 +133,25 @@ function MassFormatter(value) {
 }
 
 
+/**
+
+ * Format function of the detail table when opening each row [+]
+
+ * @param {int} index - The row clicked
+
+ * @param {object} row - The data object binded to the row
+ * @return- detail view with IUPAC AND GLYCOCT
+ */
+
+
+// function detailFormat(index, row) {
+//     var html = [];
+//     var glyco = row.glycoct.replace(/ /g, '\n');
+//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
+//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
+//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
+//     return html.join('');
+// }
 
 
 /**
@@ -135,20 +171,27 @@ function updateSearch() {
     $.ajax({
         method: 'GET',
         dataType: "json",
-        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
-        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
+        url: getWsUrl('glycan_search')+"?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
-            // if (result.list_id) {
-            console.log(result);
-            activityTracker("user", id, "update search");
-            window.location = 'protein_list.html?id=' + result.list_id;
-            // } else {
-            //     // handle if no results
-            //     activityTracker("error", id, "update search: no result found");
-            // }
+            if (result.list_id) {
+                console.log(result);
+                activityTracker("user", id, "update search");
+                window.location = 'glycan_list.html?id=' + result.list_id;
+            } else {
+                // handle if no results
+                activityTracker("error", id, "update search: no result found");
+            }
         },
         error: ajaxListFailure
     });
+}
+
+
+function editSearch() {
+    {
+        window.location.replace("glycan_search.html?id=" + id);
+        activityTracker("user", id, "edit search");
+    }
 }
 
 
@@ -169,35 +212,43 @@ function ajaxListSuccess(data) {
         displayErrorByCode(data.code);
         activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
+
+
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
             for (var i = 0; i < data.results.length; i++) {
-                var protein = data.results[i];
+                var glycan = data.results[i];
                 items.push({
-                    uniprot_canonical_ac: protein.uniprot_canonical_ac,
-                    mass: protein.mass,
-                    gene_name: protein.gene_name,
-                    protein_name_long: protein.protein_name_long,
-                    organism: protein.organism,
-                    refseq_name:protein.refseq_name,
-                    refseq_ac:protein.refseq_ac
+                    glytoucan_ac: glycan.glytoucan_ac,
+                    mass: glycan.mass,
+                    number_proteins: glycan.number_proteins,
+                    number_enzymes: glycan.number_enzymes,
+                    number_monosaccharides: glycan.number_monosaccharides,
+                    iupac: glycan.iupac,
+                    glycoct: glycan.glycoct
                 });
             }
         }
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query, question);
 
-        document.title = 'Quick_Protein-list';
+        document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+
     }
 
+}
+
+function editSearch() {
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -206,22 +257,23 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
     activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    // $('#loading_image').fadeOut();
 }
 
 /**
 
  * LoadDataList function to configure and start the request to GWU  service
 
- * @param {string} id - The protein id to load
+ * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("protein_list"),
+        url: getWsUrl("glycan_list"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
-        timeout: getTimeout("list_protein"),
+        timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
@@ -254,7 +306,6 @@ function getParameterByName(name, url) {
 
 var id = getParameterByName('id');
 var question = getParameterByName('question');
-
 LoadDataList(id);
 
 
@@ -267,15 +318,4 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function(){
-    $('#gen-table').on("sort.bs.table", function(event,field,order){
-        // event.preventDefault();
-        event.stopPropagation();
-        sort = field;
-        dir = order;
-        LoadDataList();
-        activityTracker("user", id, "sort: " + sort);
-        return false;
-    });
-});
 

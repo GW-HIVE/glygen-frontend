@@ -129,14 +129,24 @@ function ajaxListSuccess(data) {
         $table.bootstrapTable('append', items);
 
         buildPages(data.pagination);
+        buildSummary(data.query, question);
 
         // buildSummary(data.query);
+        document.title = 'loci-list';
 
 
 
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
+}
+
+
+function editSearch() {
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -192,6 +202,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 LoadDataList(id);
 
 
