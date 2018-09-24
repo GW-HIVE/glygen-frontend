@@ -305,10 +305,14 @@ p {
     padding-top: 10px;
 }
 
-.statistics-table tr td {
+.statistics-table {
+/*
     border: none !important;
     padding-bottom: 0 !important; 
     padding-top: 0 !important;
+*/
+    margin-bottom: 25px;
+
 /*    padding: 0 18px !important;*/
 }
 /* -------------------------

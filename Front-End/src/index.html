@@ -30,9 +30,11 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
+    <style>
+    </style>
 </head>
 
 <body onload="tracking()">
@@ -233,11 +235,11 @@
                         <h5 class="home-headings">Version</h5>
                         
                         <div class="caption text-left">
-                            <strong><span id="version_data_component"></span>:</strong> <span id="version_data_number"></span>, <br><span id="version_data_date">.</span>
+                            <strong><span id="version_data_component"></span>:</strong> <span id="version_data_number"></span>, <span id="version_data_date">.</span>
                             <br>
-                            <strong><span id="version_software_component"></span>:</strong> <span id="version_software_number"></span>, <br><span id="version_software_date">.</span>
+                            <strong><span id="version_software_component"></span>:</strong> <span id="version_software_number"></span>, <span id="version_software_date">.</span>
                             <br>
-                            <strong><span id="version_api_component"></span>:</strong> <span id="version_api_number"></span>, <br><span id="version_api_date">.</span>
+                            <strong><span id="version_api_component"></span>:</strong> <span id="version_api_number"></span>, <span id="version_api_date">.</span>
                                 
                         </div>
                     </div>
@@ -265,7 +267,8 @@
                         <h3 class="home-headings">GlyGen Statistics</h3>
 
                         <div class="caption"><p>GlyGen's Database Statistics.</p></div>
-                        <div style="padding-left: 18px;">
+                        <div id="statistics-display" class="container"  style="padding-left: 18px; margin2: 0 auto; text-align: center;">
+<!--
                             <h5 class="text-left">Human</h5>
                             
                                 <table class="table table-hover text-left" style="margin-bottom: 15px;">
@@ -304,6 +307,8 @@
                                     </tr>
                                 </tbody>
                             </table>
+-->
+
                         </div>
                     </div>
                    
@@ -416,9 +421,11 @@
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <!-- script for logging activity -->
     <script src="js/utility.js"></script>
+    <script type="text/javascript" src="libraries/moment.js"></script>
     <script src="js/homepage.js"></script>
     <!-- Quick_Search -->
     <script type="text/javascript" src="js/try_me.js"></script>
+    <script type="text/javascript" src="libraries/alertify.js"></script>
 
     <script type="text/javascript">
         (function (d, t) {
