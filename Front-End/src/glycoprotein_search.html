@@ -61,8 +61,8 @@
     <script>w3.includeHTML();</script>
 
     <h3 class="page-heading" style="text-align: center">Glycoprotein Search </h3>
-    
-    <div id="simplifiedSearch" class="container gg-container-simplified-searchGlycoproten" style="margin-bottom: 300px;">
+<div id="simplifiedSearch">     
+    <div id="simplifiedSearch2" class="container gg-container-simplified-searchGlycoproten" style="margin-bottom:2 300px;">
         <div class="row text-right advancedButtonGlycoprotein">
             <button class="btn btn-link" onclick="hideSimplSearchButton()">
             <label class="control-label" for="simplifiedSearch">Advanced Search</label></button>
@@ -81,11 +81,35 @@
             <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="margin: -5px 0 20px;">
             </div>
-        </div>
+        </div>        
     </div> <!--    End Simplified Search Div-->
-    
-    
-    <div id="advancedSearch" class="container gg-container">
+    <section>
+        <div class="row">
+            <div class="container text-center" >
+                <div class="col-sm-4">
+                    <h4>Simplified Search</h4>
+                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Advanced Search</h4>
+                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                </div>
+                <div class="col-sm-4">
+                    <h4>Advanced Search</h4>
+                    <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
+                </div>    
+            </div>    
+        </div>
+        <div style="margin-bottom: 30px;"> </div>
+    </section>
+</div> <!--   End Simplified Search    -->
+
+
+<!--Start Advanced Search-->
+<div id="advancedSearch" class="container advancedSearchMarginTop ">
+    <!--    Left Search Section     -->
+    <div id="advancedSearch2" class="advancedSearch-container col-sm-8">
         <div class="row text-right">
             <button class="btn btn-link" onclick="hideAdvSearchButton()">
             <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
@@ -333,8 +357,36 @@
             <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: 10px 15px 20px;">
         </div>
-    </div>
+    </div> <!-- End Left Search section -->
+    
 
+    <div class="row">
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-default thumbnail"> 
+                <h4>Simplified Search</h4>
+                <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-default thumbnail">
+                <h4>Advanced Search</h4>
+                <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-default thumbnail"> 
+                <h4 >Advanced Search</h4>
+                <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
+            </div>
+        </div>    
+<!--            </div>    -->
+    </div><!--End Right section Tutorial-->
+        <div style="margin-bottom:2 30px;"> </div>
+<!--
+    </section>
+    </div>
+-->
+</div> <!--End edvanced search-->
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
