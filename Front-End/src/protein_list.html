@@ -130,7 +130,12 @@
                     </tr>
                     {{/gene_name}}
 
-
+                    {{#refseq_ac}}
+                    <tr>
+                        <td>RefSeq Accession:</td>
+                        <td>{{refseq_ac}}</td>
+                    </tr>
+                    {{/refseq_ac}}
                     <!--peptide seq-->
                     {{#sequence.aa_sequence}}
                     <tr>
