@@ -72,6 +72,18 @@ function detailFormat(index, row) {
 }
 
 
+function buildSummary(queryInfo, question) {
+
+    //quick search
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo[question] = true;
+    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
+    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
+    // queryInfo.questionText = getMessageText(question, queryInfo);
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+}
 
 
 function totalNoSearch(total_length) {

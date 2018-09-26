@@ -526,12 +526,7 @@ $("#glycosyltransferasesdisease").autocomplete({
 function glycosyTtransferasesDisease(){
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
-
     var disease = $("#glycosyltransferasesdisease").val();
-
-
-
     var formObject = {
         do_name: disease,
         tax_id: 0
@@ -562,22 +557,39 @@ function populateLastGlycanSearch(question, id) {
         url: getWsUrl("glycan_list"),
         data: getListPostData(id, 1, 'mass', 'desc', 1),
         method: 'POST',
-        timeout: getTimeout("list_glycan")
+        timeout: getTimeout("list_glycan"),
+        success: function (data) {
+            $('#glycanenzyme').val(data.query.uniprot_canonical_ac);
+        }
     });
 }
 
 function populateLastLocusSearch(question, id) {
     $.ajax({
         dataType: "json",
-        url: getWsUrl("loci_list"),
-        data: getListPostData(id, 1, 'protein_name_long', 'desc', 1),
+        url: getWsUrl("list_glycangene"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
         method: 'POST',
-        timeout: getTimeout("loci_protein")
+        timeout: getTimeout("list_glycangene"),
+        success: function (data) {
+            $('#glycangene').val(data.query.glytoucan_ac);
+        }
+    });
+}
+function populateLastOrthougusSearch(question, id) {
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("loci_list"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
+        method: 'POST',
+        timeout: getTimeout("loci_protein"),
+        success: function (data) {
+            $('#proteinorthologues').val(data.query.glytoucan_ac);
+        }
     });
 }
 
-
-function populateLastProtienSearch(question, id) {
+function populateLastProteinSearch(question, id) {
     // make the server call
     $.ajax({
         dataType: "json",
@@ -595,20 +607,12 @@ function populateLastProtienSearch(question, id) {
                 case 'QUESTION_2':
                     $('#glycansite').val(data.query.glytoucan_ac);
                     break;
-                case 'QUESTION_3':
-                    $('#glycangene').val(data.query.glytoucan_ac);
-                    break;
-                case 'QUESTION_4':
-                    $('#proteinorthologues').val(data.query.glytoucan_ac);
-                    break;
                 case 'QUESTION_5':
                     $('#proteinfunction').val(data.query.glytoucan_ac);
                     break;
-                case 'QUESTION_6':
-                    $('#glycanenzyme').val(data.query.uniprot_canonical_ac);
-                    break;
                 case 'QUESTION_7':
                     $('#organism1').val(data.query.tax_id);
+                    break;
                 case 'QUESTION_8':
                     $('#organism2').val(data.query.tax_id);
                     break;
@@ -634,21 +638,19 @@ function populateLastSearch(question, id) {
     // make the ajax call to whichever endpoint
     switch(question) {
         case 'QUESTION_6':
-
             // call API for this type
             populateLastGlycanSearch(question, id);
             break;
-        case 'QUESTION_1':
-        case 'QUESTION_2':
-        case 'QUESTION_4':
-        case 'QUESTION_7':
-        case 'QUESTION_8':
-        case 'QUESTION_9':
-        case 'QUESTION_10':
-            // call API for all others
+        case 'QUESTION_3':
             populateLastLocusSearch(question, id);
             break;
+        case 'QUESTION_4':
+            populateLastOrthougusSearch(question, id);
+            break;
         default:
+            // call API for all others
+            populateLastProteinSearch(question, id);
+            break;
     }
 }
 
