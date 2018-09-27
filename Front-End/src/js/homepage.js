@@ -1,26 +1,46 @@
-$.ajax({
-            dataType: "json",
-            url: getWsUrl("home_init"),
-            timeout: getTimeout("home_init"),
-            success: displayHomeInitData,
-            error: displayFailHomeInitData
+/** ---------------------------------
+    The homepage.js
+    @author: Tatiana Williamson
+    @date-created: 09/24/2018
+ ------------------------------------*/
 
+$.ajax({
+    dataType: "json",
+    url: getWsUrl("home_init"),
+    timeout: getTimeout("home_init"),
+    success: displayHomeInitData,
+    error: displayFailHomeInitData,
+    complete: function () { 
+        $("#loadVersion").css("display","none")
+        $("#loadStatistics").css("display","none")
+        }
 });
 
-//All SUcsess functions go here 
-function displayHomeInitData(jsonResponse) {
-    $("#version_data_component").text(jsonResponse.version[0].component.replace(/\b\w/g, function(l){ return l.toUpperCase() }));
-    $("#version_data_number").text(jsonResponse.version[0].version);
-    $("#version_data_date").text(jsonResponse.version[0].release_date); 
-    $("#version_data_date").text(moment(jsonResponse.version[0].release_date).format('MMMM Do YYYY'));  
-    $("#version_software_component").text(jsonResponse.version[1].component.replace(/\b\w/g, function(l){ return l.toUpperCase() }));
-    $("#version_software_number").text(jsonResponse.version[1].version);
-    $("#version_software_date").text(moment(jsonResponse.version[1].release_date).format('MMMM Do YYYY'));
-    
-    $("#version_api_component").text(jsonResponse.version[2].component.toUpperCase());
-    $("#version_api_number").text(jsonResponse.version[2].version);
-    $("#version_api_date").text(moment(jsonResponse.version[2].release_date).format('MMMM Do YYYY'));
-    
+        $(document).ajaxStop(function () {
+            $('#loadVersion #loadStatistics').fadeOut(1000);
+        });
+
+//All Sucsess functions go here 
+function displayHomeInitData(jsonResponse) {   
+    var versionDisplay = document.getElementById('version-display');
+
+    jsonResponse.version.forEach(function (component) {
+       var componentName = component.component;
+       var componentVersion = component.version;
+       var componentDate = component.release_date;
+        switch (componentName) {
+            case "api": 
+                $("#apiVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                break;
+            case "data": 
+                $("#dataVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                break;
+            case "software": 
+                $("#softwareVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                break;            
+        }
+    })
+
     var statisticsDisplay = document.getElementById('statistics-display');
 
     jsonResponse.statistics.forEach(function (statistic) {
@@ -33,7 +53,6 @@ function displayHomeInitData(jsonResponse) {
 
     var table = document.createElement('table');
     var tbody = document.createElement('tbody');
-//    table.className = 'table-hover table col-sm-3';
     tbody.className = 'statistics-table';
 
     var row1 = document.createElement('tr');
@@ -41,8 +60,8 @@ function displayHomeInitData(jsonResponse) {
     var row3 = document.createElement('tr');
 
     var row1cell1 = document.createElement('td');
-    var row1cell2 = document.createElement('td');
-    // var row3ce = document.createElement('tr');
+    var row1cell2 = document.createElement('td'); 
+        
     row1cell1.innerHTML = 'Glycans';
     row1cell2.innerHTML = statistic.glycans;
     row1.appendChild(row1cell1);
@@ -50,7 +69,6 @@ function displayHomeInitData(jsonResponse) {
 
     var row2cell1 = document.createElement('td');
     var row2cell2 = document.createElement('td');
-    // var row3ce = document.createElement('tr');
     row2cell1.innerHTML = 'Proteins';
     row2cell2.innerHTML = statistic.proteins;
     row2.appendChild(row2cell1);
@@ -58,7 +76,6 @@ function displayHomeInitData(jsonResponse) {
 
     var row3cell1 = document.createElement('td');
     var row3cell2 = document.createElement('td');
-    // var row3ce = document.createElement('tr');
     row3cell1.innerHTML = 'Glycoproteins';
     row3cell2.innerHTML = statistic.glycoproteins;
     row3.appendChild(row3cell1);
@@ -69,11 +86,17 @@ function displayHomeInitData(jsonResponse) {
     tbody.appendChild(row3);
     table.appendChild(tbody);
     statisticsDisplay.appendChild(table);
-
     }
     )};
 
+// ajaxFailure is the callback function when ajax to GWU service fails
+function displayFailHomeInitData(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    //log error on server 
+    activityTracker("error", err + ": " + errorThrown + ": home_init WS error"); 
+    $("#version-display").text("Data is not available.").addClass("errorMessageHomepage");
+    $("#statistics-display").text("Data is not available.").addClass("errorMessageHomepage");
+}
 
-    function displayFailHomeInitData() {
-        displayErrorByCode();
-    } 
+

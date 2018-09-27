@@ -33,8 +33,7 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
-    <style>
-    </style>
+    <style></style>
 </head>
 
 <body onload="tracking()">
@@ -233,14 +232,11 @@
                 <div class="col-sm-3">
                     <div class=" panel panel-default thumbnail card">
                         <h5 class="home-headings">Version</h5>
-                        
-                        <div class="caption text-left">
-                            <strong><span id="version_data_component"></span>:</strong> <span id="version_data_number"></span>, <span id="version_data_date">.</span>
-                            <br>
-                            <strong><span id="version_software_component"></span>:</strong> <span id="version_software_number"></span>, <span id="version_software_date">.</span>
-                            <br>
-                            <strong><span id="version_api_component"></span>:</strong> <span id="version_api_number"></span>, <span id="version_api_date">.</span>
-                                
+                        <div id="loadVersion" class="loading-indicator"> <img src="images/page_loading.gif" /></div>
+                        <div id="version-display" class="caption text-left">
+                            <strong>Portal:</strong> <span id="softwareVersion"></span><br>
+                            <strong>Webservice: </strong><span id="apiVersion"></span><br>
+                            <strong>Data: </strong><span id="dataVersion"></span> 
                         </div>
                     </div>
             
@@ -264,52 +260,12 @@
                     </div>
 
                    <div class="panel panel-default thumbnail card">
+                       
                         <h3 class="home-headings">GlyGen Statistics</h3>
 
                         <div class="caption"><p>GlyGen's Database Statistics.</p></div>
-                        <div id="statistics-display" class="container"  style="padding-left: 18px; margin2: 0 auto; text-align: center;">
-<!--
-                            <h5 class="text-left">Human</h5>
-                            
-                                <table class="table table-hover text-left" style="margin-bottom: 15px;">
-                                    <tbody  class="statistics-table">
-                                       <tr>
-                                            <td>Glycans</td>
-                                            <td>3300</td> 
-                                        </tr>
-                                        <tr>
-                                            <td>Proteins</td>
-                                            <td>20997</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Glycoproteins</td>
-                                            <td>4429</td> 
-                                        </tr>
-                                    </tbody>
-                                </table>
-      
-                            
-                            <h5 class="text-left">Mouse</h5>
-                            <table class="table table-hover text-left" style="margin-bottom: 15px;">
-                               
-                                <tbody class="statistics-table">
-                                    <tr>
-                                        <td>Glycans</td>
-                                        <td>517</td> 
-                                    </tr>
-                                    <tr>
-                                        <td>Proteins</td>
-                                        <td>22273</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Glycoproteins</td>
-                                        <td>3765</td> 
-                                    </tr>
-                                </tbody>
-                            </table>
--->
-
-                        </div>
+                        <div id="loadStatistics" class="loading-indicator"> <img src="images/page_loading.gif" /></div>
+                        <div id="statistics-display" class="caption text-left table-hover statistics-table"  style="padding-left: 18px;"></div>
                     </div>
                    
                     <div class="panel panel-default thumbnail card">
@@ -319,42 +275,6 @@
                             <img src="images/resources/Resources-hands.png" alt="resources">
                         </a>
                         <p class="caption text-left">GlyGen is pleased to provide users with a variety of resources in glycobiology.</p>
-
-
-                        <!--
-                        <div class="caption text-left">
-                            <p>
-                                <a href="https://glytoucan.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> GlyTouCan </em>
-                                    </strong>
-                                </a>
-                                <br> is the international glycan structure repository. It assigns globally unique accession numbers
-                                to any submitted glycan.
-                            </p>
-
-                            <p>
-                                <a href="http://www.uniprot.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> UniProt </em>
-                                    </strong>
-                                </a>
-                                <br> is a freely available, comprehensive resource of high quality protein sequences and functional
-                                annotations.
-                                <br>
-                            </p>
-
-                            <p>
-                                <a href="http://www.unicarbkb.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> UniCarbKB </em>
-                                    </strong>
-                                </a>
-                                <br> is a knowledge base for curated glycoconjugate information and their annotations.
-                                <br>
-                            </p>
-                        </div>
--->
 
                         <div class="gg-card-explore">
                             <a href="resources.html" class="btn btn-link btn-block">
@@ -389,22 +309,6 @@
                             </script>
                         </div>
                     </div>
-
-                    <!--
-                    <div class="panel panel-default thumbnail card">
-                        <h3 class="home-headings">
-                            Website Tour 
-                        </h3>
-
-                        <div class="caption">
-
-                            <iframe
-                                   width="290" height="290" src="https://www.youtube.com/embed/4UnF-7Q79Mg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                            </iframe>
-                        </div> 
-                   </div>
--->
-
                 </div>
             </div>
         </div>
