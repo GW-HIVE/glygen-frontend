@@ -10,9 +10,6 @@
 //update:31 july:// New base URL updated.
 
 function getWsUrl(request, id, id1) {
-
-    // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
-    var ws_base = "http://tst.api.glygen.org/";
     var ws_home_init = ws_base+"pages/home_init";
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
