@@ -148,7 +148,13 @@
                     </tr>
                     {{/sequence.aa_sequence}}
 
-
+                    <!--RefSeq Accession: Typeahead-->
+                    {{#refseq_ac}}
+                    <tr>
+                        <td>RefSeq Accession:</td>
+                        <td>{{refseq_ac}}</td>
+                    </tr>
+                    {{/refseq_ac}}
                     <!--{{#glycosylated_aa_exists}}-->
                     <!--<tr>-->
                         <!--<td>Glycosylated Amino Acid</td>-->

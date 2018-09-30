@@ -152,6 +152,14 @@
                     </tr>
                     {{/pathway_id}}
 
+                    <!--RefSeq Accession: Typeahead-->
+                    {{#refseq_ac}}
+                    <tr>
+                        <td>RefSeq Accession:</td>
+                        <td>{{refseq_ac}}</td>
+                    </tr>
+                    {{/refseq_ac}}
+
                     </tbody>
                 </table>
             </div>
@@ -243,6 +251,7 @@
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/ws_url.js"></script>
+    <script type="text/javascript" src="js/domain_url.js"></script>
     <!-- script for handling errror -->
     <!-- script for pagination page -->
     <script type="text/javascript" src="js/pagination.js"></script>
