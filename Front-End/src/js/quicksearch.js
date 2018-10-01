@@ -572,7 +572,7 @@ function populateLastLocusSearch(question, id) {
         method: 'POST',
         timeout: getTimeout("list_glycangene"),
         success: function (data) {
-            $('#glycangene').val(data.query.glytoucan_ac);
+            $('#glycangene').val(data.query.uniprot_canonical_ac);
         }
     });
 }
@@ -582,10 +582,13 @@ function populateLastOrthougusSearch(question, id) {
         url: getWsUrl("loci_list"),
         data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
         method: 'POST',
-        timeout: getTimeout("loci_protein"),
+        timeout: getTimeout("loci_list"),
         success: function (data) {
             $('#proteinorthologues').val(data.query.glytoucan_ac);
         }
+
+
+
     });
 }
 
@@ -611,13 +614,13 @@ function populateLastProteinSearch(question, id) {
                     $('#proteinfunction').val(data.query.glytoucan_ac);
                     break;
                 case 'QUESTION_7':
-                    $('#organism1').val(data.query.tax_id);
+                    $('#organism1').val(data.query.organism.name);
                     break;
                 case 'QUESTION_8':
-                    $('#organism2').val(data.query.tax_id);
+                    $('#organism2').val(data.query.organism.name);
                     break;
                 case 'QUESTION_9':
-                    $('#organism3').val(data.query.tax_id);
+                    $('#organism3').val(data.query.organism.name);
                     $('#species').val(data.query.evidence_type);
                     break;
                 case 'QUESTION_10':

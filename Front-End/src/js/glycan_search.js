@@ -23,6 +23,7 @@ function addCommas(nStr) {
 }
 
 
+
 function sortDropdown(a, b)
 {    if (a.name < b.name)
 {        return -1;
@@ -56,13 +57,12 @@ $(document).ready(function () {
             searchInitValues = result;
 
 
-            var orgElement = $(".organism").get(0);
+            var orgElement = $("#species").get(0);
             result.organism.sort(sortDropdown);
             for (var x = 0; x < result.organism.length; x++)
             {
-                createOption(orgElement, result.organism[x].name, result.organism[x].name);
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
             }
-
 
             var glycanElement = $(".ddl").get(0);
             result.glycan_type.sort(sortDropdown);
@@ -286,12 +286,12 @@ function createOption(ddl, text, value) {
 function submitvalues() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
     var query_type = "search_glycan";
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
-    var organism = document.getElementById("organism").value;
+    var selected_species = document.getElementById("species");
+    var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
     var glycan_type = document.getElementById("ddl").value;
     var glycan_subtype = document.getElementById("ddl2").value;
     var proteinid = document.getElementById("protein").value;
@@ -299,7 +299,7 @@ function submitvalues() {
     var glycan_motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
-
+debugger;
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search"),
@@ -308,7 +308,7 @@ function submitvalues() {
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-                displayErrorByCode(results.error_code);
+                displayErrorByCode(results.error_code,results.field);
                 // activityTracker("error", "", results.error_code);
                 activityTracker("error", "", results.error_code+" for " + json);
                 $('#loading_image').fadeOut();
@@ -344,8 +344,11 @@ function submitvalues() {
  */
 
 //form json from form submit
-function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-    var enzymes = {}
+//function searchjson(input_query_type, input_glycan_id, input_mass, input_sugar, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+    function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif)
+{
+
+        var enzymes = {}
     if (input_enzyme) {
         enzymes = {
             "id": input_enzyme,
@@ -353,22 +356,29 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         }
 
     }
+    var organisms = {
+        "id": 0,
+        "name": "All"
+    }
+
+    if (input_organism.id !== "0") {
+        organisms.id = input_organism.id;
+        organisms.name = input_organism.name;
+    }
+
 
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
         mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        // mass:masses,
         number_monosaccharides: {
             "min": parseInt(sugar_min),
             "max": parseInt(sugar_max)
         },
-        // enzyme: {
-        //     "id": input_enzyme,
-        //     "type": "gene"
-        // },
         enzyme: enzymes,
         glytoucan_ac: input_glycan_id,
-        tax_id: input_organism ? parseInt(input_organism) : '',
+        organism: organisms,
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
         uniprot_canonical_ac: input_proteinid,
@@ -378,17 +388,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     return formjson;
 }
 
-// function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-//     var formJson = {};
-//
-//     if (input_organism) {
-//         formJson.tax_id = parseInt(input_organism);
-//     }
-//
-//     ...
-//
-//     return formjson;
-// }
+
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.

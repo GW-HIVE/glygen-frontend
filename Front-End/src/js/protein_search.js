@@ -71,11 +71,11 @@ $(document).ready(function () {
             success: function (result) {
                 searchInitValues = result;
 
-                var orgElement = $(".organism").get(0);
+                var orgElement = $("#species").get(0);
                 result.organism.sort(sortDropdown);
                 for (var x = 0; x < result.organism.length; x++)
                 {
-                    createOption(orgElement, result.organism[x].name, result.organism[x].name);
+                    createOption(orgElement, result.organism[x].name, result.organism[x].id);
                 }
                 var mass_max = result.protein_mass.max;
                 var mass_min = result.protein_mass.min;
@@ -190,36 +190,17 @@ function createOption(ddl, text, value) {
 function ajaxProteinSearchSuccess() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
-    var organism = $("#organism").val();
+    var query_type = "search_protein";
+    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get(0);
+    var selected_species = document.getElementById("species");
+    var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
     var uniprot_id = $("#protein").val();
     var refseq_id = $("#refseq").val();
-    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
-    var mass_min = mass_slider[0];
-    var mass_max = mass_slider[1];
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
-    var sequence = $("#sequences").val().replace(/\n/g, "");
-
-    var formObject = {
-        operation: "AND",
-        query_type: "search_protein",
-        tax_id: organism ? parseInt(organism) : '',
-        uniprot_canonical_ac: uniprot_id,
-        refseq_ac: refseq_id,
-        mass: { "min": parseInt(mass_min),
-            "max": parseInt(mass_max)
-        },
-        protein_name: protein_name,
-        gene_name: gene_name,
-        pathway_id: pathway_id,
-        sequence: {
-            type: "exact",
-            aa_sequence: sequence
-        },
-
-    };
+     var sequence = $("#sequences").val().replace(/\n/g, "");
+    var formObject = searchJson(query_type,mass_slider[0], mass_slider[1],organism,uniprot_id,refseq_id,gene_name,protein_name,pathway_id,sequence)
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -258,7 +239,43 @@ function ajaxProteinSearchSuccess() {
     // });
 }
 
+function searchJson(input_query_type,  mass_min, mass_max,input_organism,input_protein_id,
+                    input_refseq_id, input_gene_name,input_protein_name,input_pathway_id,input_sequence)
+{
 
+    var  sequences = {}
+    if (input_sequence) {
+    sequences = {
+        "type": "exact",
+        "aa_sequence": input_sequence
+        }
+
+    }
+    var organisms = {
+        "id": 0,
+        "name": "All"
+    }
+
+    if (input_organism.id !== "0") {
+        organisms.id = input_organism.id;
+        organisms.name = input_organism.name;
+    }
+
+
+    var formjson = {
+        "operation": "AND",
+        query_type: input_query_type,
+        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        sequence:  sequences,
+        organism: organisms,
+        refseq_ac: input_refseq_id,
+        protein_name: input_protein_name,
+        gene_name: input_gene_name,
+        pathway_id: input_pathway_id,
+        uniprot_canonical_ac: input_protein_id
+    };
+    return formjson;
+}
 // to resizing choosen field
 
 $(window).on('resize', function () {
