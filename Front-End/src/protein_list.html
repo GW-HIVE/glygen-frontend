@@ -105,12 +105,13 @@
 
 
                     <!--Organism-->
-                    {{#tax_id}}
+                    {{#organism.name}}
                     <tr>
-                        <td>Taxonomy ID:</td>
-                        <td>{{tax_id}}</td>
+                        <td>Species:</td>
+                        <td>
+                            {{organism.name}}</td>
                     </tr>
-                    {{/tax_id}}
+                    {{/organism.name}}
 
                     <!--Protein name Typeahead-->
 
