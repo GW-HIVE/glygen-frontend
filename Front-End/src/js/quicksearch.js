@@ -1,62 +1,6 @@
 
 //@author:Rupali Mahadik.
 
-
-//$("#protein2").autocomplete({
-//     source: function (request, response) {
-//
-//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-//         $.getJSON(queryUrl, function (suggestions) {
-//             suggestions.length = Math.min(suggestions.length, 5);
-//
-//             // if only one suggestion, and suggestion matches value
-//            // if ((suggestions.length === 1) && (suggestions[0].toLowerCase() === request.term.toLowerCase())) {
-//
-//            // }
-//
-//             // if suggestions.length > 0 then show exact match text
-//
-//             response(suggestions);
-//         });
-//     },
-//     minLength: 1,
-//     select: function (event, ui) {
-//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-//
-//     }
-// });
-//
-//
-//
-//
-//
-// function myProteinDetail(){
-//
-//    var id = $("#protein2").val();
-//
-//
-//    $.ajax({
-//         type: 'post',
-//         url: getWsUrl("protein_detail",id),
-//         success: function (results) {
-//             if (results.error_code && (results.error_code === 'non-existent-record')) {
-//             } else if (results.error_code) {
-//                     displayErrorByCode("Invalid ID");
-//             }
-//             else {
-//                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
-//             }
-//         }
-//
-//     })
-// }
-
-
-
-
-
-
-
 //Q.1- What are the enzymes involved in the biosynthesis of glycan X in human?
 
 $("#bioenzyme").autocomplete({
@@ -223,8 +167,6 @@ function proteinOrthologues(){
     $.ajax({
         type: 'post',
         url: getWsUrl("search_proteinorthologues",id),
-        // url: getWsUrl("search_proteinorthologues",id+"/"),
-        // data: json,
         success: function (results) {
             if (results.list_id) {
 
@@ -453,8 +395,6 @@ function createOption(ddl, text, value) {
 function glycoProteins(){
 
     var id = $("#organism3").val();
-    // var id=$("#glycosyltransferasesdisease").val();
-
     var id1 = $("#species").val();
     $.ajax({
         type: 'post',
@@ -494,34 +434,6 @@ $("#glycosyltransferasesdisease").autocomplete({
         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
     }
 });
-
-
-
-// function glycosyTtransferasesDisease(){
-//
-//     var id = $("#glycosyltransferasesdisease").val();
-//
-//     //it seems  need that taxID m can we just set it to 10090 ?
-//     $.ajax({
-//         type: 'POST',
-//         url: getWsUrl("search_disease",id),
-//         success: function(results) {
-//             if (results.list_id) {
-//                 window.location = './quick_protein_list.html?id=' + results.list_id + "&source=1&question=q10";
-//             }
-//             else {
-//                 displayErrorByCode('no-results-found');
-//             }
-//
-//         }
-//
-//     })
-// }
-
-
-
-
-
 
 function glycosyTtransferasesDisease(){
     // displays the loading gif when the ajax call starts
@@ -572,7 +484,7 @@ function populateLastLocusSearch(question, id) {
         method: 'POST',
         timeout: getTimeout("list_glycangene"),
         success: function (data) {
-            $('#glycangene').val(data.query.uniprot_canonical_ac);
+            $('#glycangene').val(data.query.glytoucan_ac);
         }
     });
 }

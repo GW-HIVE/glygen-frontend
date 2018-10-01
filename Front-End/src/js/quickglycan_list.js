@@ -1,14 +1,13 @@
-//@author: Rupali Mahadik
-
+//@Author: Rupali Mahadik
 // @description: UO1 Version-1.1.
-
 //@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
-
 //@update:3 April 2018. with Rupali Mahadik real web service
 //@update: June 26-2018- with Rupali Mahadik web service changes.
+// @update: pagination change Rupali Mahadik.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
+// @update: :New organism spec Rupali Mahadik.
 
 
 
@@ -41,31 +40,14 @@ var limit = 10;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
-
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = excutionDate.toLocaleString();
+    queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 
 
 
 }
-
-// /**
-//  * Redirect to Page index page or search back
-//  */
-// function redirectPage1() {
-//     window.location.replace("index.html");
-// }
-//
-// function redirectPage2() {
-//     window.location.href = "glycan_search.html";
-// }
-//
-// //      $(document).ready(function(){
-// //      // $("demosearch").tooltip();
-// // });
 
 
 
@@ -78,12 +60,14 @@ function totalNoSearch(total_length) {
 /**
  * Redirect to  searchPage with id after clicking editSearch
  */
+function editSearch() {
+    var question =  getParameterByName('question');
 
-// function editSearch() {
-//     {
-//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
-//     }
-// }
+        window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+        activityTracker("user", id, "edit search");
+
+}
+
 
 /**
 
@@ -166,33 +150,9 @@ function massFormatter(value) {
 
 var lastSearch;
 
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        url: getWsUrl('glycan_search')+"?query=" + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            if (result.list_id) {
-                console.log(result);
-                activityTracker("user", id, "update search");
-                window.location = 'glycan_list.html?id=' + result.list_id;
-            } else {
-                // handle if no results
-                activityTracker("error", id, "update search: no result found");
-            }
-        },
-        error: ajaxListFailure
-    });
-}
 
 
-function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
-}
+
 
 
 /**
@@ -234,21 +194,14 @@ function ajaxListSuccess(data) {
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
         buildPages(data.pagination);
+        // buildSummary(data.query);
         buildSummary(data.query, question);
-
         document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
     }
 
-}
-
-function editSearch() {
-    var question =  getParameterByName('question');
-
-    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-    activityTracker("user", id, "edit search");
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails

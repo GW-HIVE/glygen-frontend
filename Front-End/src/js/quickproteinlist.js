@@ -1,10 +1,14 @@
 
-
-
-//@Author:Rupali Mahadik.
+//@Author: Rupali Mahadik.
+// @description: UO1 Version-1.1.
+//@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
+//@update:3 April 2018. with Rupali Mahadik real web service
+//@update: June 26-2018- with Rupali Mahadik web service changes.
+// @update: pagination change Rupali Mahadik.
 //@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+// @update: :New organism spec Rupali Mahadik.
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -35,37 +39,19 @@ var limit = 25;
  */
 
 function buildSummary(queryInfo, question) {
-
-    //quick search
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
     queryInfo[question] = true;
-    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
-    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
-    // queryInfo.questionText = getMessageText(question, queryInfo);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
 
 
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1() {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-}
 
-function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/quick_search.html";
-}
-
-
-// $(document).ready(function () {
-//     $("demosearch").tooltip();
-// });
 
 /**
- * Redirect to  searchPage with id after clicking editSearch
+ * Total number of pages for each list
+ * @param {string} total_length - the dataset of pagination info is retun from server
  */
 
 
@@ -75,6 +61,10 @@ function totalNoSearch(total_length) {
 
 }
 
+/**
+ * Redirect to  searchPage with id after clicking editSearch
+ *
+ */
 
 
 function editSearch() {
@@ -118,38 +108,11 @@ function MassFormatter(value) {
 
 
 
-/**
 
- * updateSearch function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
 
 var lastSearch;
 
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
-        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            // if (result.list_id) {
-            console.log(result);
-            activityTracker("user", id, "update search");
-            window.location = 'protein_list.html?id=' + result.list_id;
-            // } else {
-            //     // handle if no results
-            //     activityTracker("error", id, "update search: no result found");
-            // }
-        },
-        error: ajaxListFailure
-    });
-}
+
 
 
 /**
