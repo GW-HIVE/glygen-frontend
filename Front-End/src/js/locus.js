@@ -19,7 +19,7 @@ String.prototype.trunc = String.prototype.trunc ||
 var id = '';
 var page = 1;
 var sort = 'uniprot_canonical_ac';
-var dir = $('.dir-select').val();
+var dir = 'desc';
 var url = getWsUrl('loci_list') + "?action=get_user";
 var limit = 10;
 
@@ -92,10 +92,10 @@ function totalNoSearch(total_length) {
 
 }
 function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
 }
 
 
@@ -154,12 +154,7 @@ function ajaxListSuccess(data) {
 }
 
 
-function editSearch() {
-    var question =  getParameterByName('question');
 
-    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-    activityTracker("user", id, "edit search");
-}
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {

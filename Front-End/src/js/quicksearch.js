@@ -479,10 +479,10 @@ function populateLastGlycanSearch(question, id) {
 function populateLastLocusSearch(question, id) {
     $.ajax({
         dataType: "json",
-        url: getWsUrl("list_glycangene"),
+        url: getWsUrl("loci_list"),
         data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
         method: 'POST',
-        timeout: getTimeout("list_glycangene"),
+        timeout: getTimeout("loci_list"),
         success: function (data) {
             $('#glycangene').val(data.query.glytoucan_ac);
         }
@@ -491,12 +491,12 @@ function populateLastLocusSearch(question, id) {
 function populateLastOrthougusSearch(question, id) {
     $.ajax({
         dataType: "json",
-        url: getWsUrl("loci_list"),
+        url: getWsUrl("list_glycangene"),
         data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
         method: 'POST',
-        timeout: getTimeout("loci_list"),
+        timeout: getTimeout("list_glycangene"),
         success: function (data) {
-            $('#proteinorthologues').val(data.query.glytoucan_ac);
+            $('#proteinorthologues').val(data.query.uniprot_canonical_ac);
         }
 
 
@@ -526,17 +526,17 @@ function populateLastProteinSearch(question, id) {
                     $('#proteinfunction').val(data.query.glytoucan_ac);
                     break;
                 case 'QUESTION_7':
-                    $('#organism1').val(data.query.organism.name);
+                    $('#organism1').val(data.query.organism.id);
                     break;
                 case 'QUESTION_8':
-                    $('#organism2').val(data.query.organism.name);
+                    $('#organism2').val(data.query.organism.id);
                     break;
                 case 'QUESTION_9':
-                    $('#organism3').val(data.query.organism.name);
+                    $('#organism3').val(data.query.organism.id);
                     $('#species').val(data.query.evidence_type);
                     break;
                 case 'QUESTION_10':
-                    $('#glycosyltransferasesdisease').val(data.query.disease_name);
+                    $('#glycosyltransferasesdisease').val(data.query.do_name);
 
                     break;
                 default:

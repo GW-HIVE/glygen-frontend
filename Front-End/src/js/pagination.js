@@ -135,10 +135,10 @@ function buildPages(paginationInfo) {
 $(document).ready(function(){
     $('#gen-table').on("sort.bs.table", function(event,field,order){
         // event.preventDefault();
-        // event.stopPropagation();
+         // event.stopPropagation();
         sort = field;
         dir = order;
-        // LoadDataList();
+         //LoadDataList();
         activityTracker("user", id, "sort: " + sort);
         return false;
     });
