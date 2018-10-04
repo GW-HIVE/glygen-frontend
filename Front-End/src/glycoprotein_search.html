@@ -62,7 +62,7 @@
 
     <h3 class="page-heading" style="text-align: center">Glycoprotein Search </h3>
 <div id="simplifiedSearch">     
-    <div id="simplifiedSearch2" class="container gg-container-simplified-searchGlycoproten" style="margin-bottom:2 300px;">
+    <div id="simplifiedSearch2" class="container simplified-searchGlycoproten" style="margin-bottom:2 300px;">
         <div class="row text-right advancedButtonGlycoprotein">
             <button class="btn btn-link" onclick="hideSimplSearchButton()">
             <label class="control-label" for="simplifiedSearch">Advanced Search</label></button>
@@ -83,7 +83,7 @@
             </div>
         </div>        
     </div> <!--    End Simplified Search Div-->
-    <section>
+    <section> <!--   Vidios for Simplified Search   -->
         <div class="row">
             <div class="container text-center" >
                 <div class="col-sm-4">
@@ -109,11 +109,13 @@
 <!--Start Advanced Search-->
 <div id="advancedSearch" class="container advancedSearchMarginTop ">
     <!--    Left Search Section     -->
-    <div id="advancedSearch2" class="advancedSearch-container col-sm-8">
+    <div class="advancedSearch-container col-sm-8">
+        <!-- Advanced Top bbutton-->
         <div class="row text-right">
             <button class="btn btn-link" onclick="hideAdvSearchButton()">
             <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
         </div>
+        <!-- Top Button-->
         <div class="row"> 
            <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: -5px 15px 10px 0;">
@@ -150,7 +152,6 @@
                 <h6 id='refAccMsg' class="validation-message"></h6>
             </div>
         </div>
-
         <!-- Chemical Mass-->
         <div class="gg-form-group row">
             <div>
@@ -176,7 +177,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Organism-->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="organism">
@@ -191,7 +191,6 @@
                 </select>
             </div>
         </div>
-
         <!-- Protein name-->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="protein_name">
@@ -207,7 +206,6 @@
                 <h6 id='proteinNameMsg' class="validation-message"></h6>
             </div>
         </div>
-
         <!-- Gene Name-->
         <div class="gg-form-group row">
             <label class="control-label col-sm-4" for="gene_name">
@@ -223,7 +221,6 @@
                 <h6 id='geneNameMsg' class="validation-message"></h6>
             </div>
         </div>
-
         <!--Interacting Glycan-->
         <div class="gg-form-group row" id="Glycanid">
             <label class="control-label col-sm-4" for="glycan_id">
@@ -253,7 +250,6 @@
                 </select>
             </div>
         </div>
-
         <!--Glycosylated amino acid-->
         <div class="gg-form-group row">
             <label style="margin-top: 30px;" class="control-label col-sm-4" for="glycosylated_aa">
@@ -291,7 +287,6 @@
                 <div class="gg-text-example">Example: Asparagine or Asn or N</div>
             </div>
         </div>
-
         <!-- Protein or Peptide Sequence -->
         <div class="gg-form-group2 row">
             <label class="control-label col-sm-4" for="sequences">
@@ -317,7 +312,6 @@
                 <h6 id='msg' class="validation-message"></h6>
             </div>
         </div>
-
         <!--Pathway ID-->
         <div class="gg-form-group2 row">
             <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
@@ -334,7 +328,6 @@
                 <label id='pathwayIDMsg' class="validation-message"></label>
             </div>
         </div>
-
         <!-- Glycosylation Evidences-->
         <div class="gg-form-group row" id="glycosylation_evidence_xx">
             <label class="control-label col-sm-4" for="organism">
@@ -353,13 +346,13 @@
                 </select>
             </div>
         </div>
+        <!-- Bottom button-->
         <div class="row"> 
             <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
             style="float: right; margin: 10px 15px 20px;">
         </div>
     </div> <!-- End Left Search section -->
-    
-
+    <!-- Videos Advanced search -->
     <div class="row">
         <div class="col-sm-4 text-center">
             <div class="panel panel-default thumbnail"> 
@@ -379,7 +372,6 @@
                 <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
             </div>
         </div>    
-<!--            </div>    -->
     </div><!--End Right section Tutorial-->
         <div style="margin-bottom:2 30px;"> </div>
 <!--

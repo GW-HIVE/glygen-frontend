@@ -4,9 +4,7 @@
 
 input[type=text], select, textarea {
     width: 100%;
-/*    padding: 12px;*/
     border: 1px solid #ddd;
-    border-radius: 4px;
     box-sizing: border-box;
     resize: vertical;
 }
@@ -27,9 +25,18 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #f86868;
-    
+    background-color: #f86868;    
 }
+
+h6 {
+    margin: 3px;
+}
+
+select {
+    height: 35px;
+    background-color: #F4F4F4;
+}
+
 /* --------------------------
     Simplified Search 
 -----------------------------*/
@@ -37,17 +44,27 @@ input[type=submit]:hover {
 #advancedSearch {
      display: none;
 }
-.gg-container-simplified-search {
+
+.simplified-search { 
     width: 90%;
     border-radius: 5px;
-    background-color: #dfe5ed;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    padding-left: 5%;
-    padding-right: 5%;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    border: 2px solid #dfe5ed;
+    padding: 45px 40px 20px; 
+    margin: 0 auto;
+    overflow: auto;
+    margin-top: 15%;
+    margin-bottom: 16%;
 }
+.simplified-search input[type=text] {
+    padding: 21px;
+    border-radius: 6px;
+}
+
+.simplified-search select {
+    height: 45px !important;
+    background-color: #fff;
+}
+
 
 .gg-container-simplified-searchGlycoproten {
 /*    width: 70%;*/
@@ -61,25 +78,25 @@ input[type=submit]:hover {
     margin-bottom: 30px;
 }
 
-.gg-container {
-    width: 70%;
+.advancedSearch-container {
+    width: 90%;
     border-radius: 5px;
     background-color: #dfe5ed;
-    padding: 20px 80px; 
-    margin-top: 30px;
-    margin-bottom: 60px;
+    padding: 40px 80px 20px; 
+    margin: 0 auto;
+    overflow: auto;
+    margin-top: 40px;
+    margin-bottom: 40px; 
 }
 
-.advancedSearch-container {
-/*    width: 70%;*/
-    border-radius: 5px;
-    background-color: #dfe5ed;
-    padding: 20px 80px; 
-/*    margin-top: 30px;*/
-    margin-bottom: 60px;
+.tutorial {
+    width: 90%;
+    margin: 0 auto; 
+    overflow: auto;
 }
-.advancedSearchMarginTop {
-    margin-top: 30px;
+
+.tutorialSection{
+    margin-top: 40px;
 }
 
 .top-table-margin {
@@ -114,15 +131,6 @@ input[type=submit]:hover {
     margin-bottom: 20px;
 }
 
-h6 {
-    margin: 3px;
-}
-
-select {
-    height: 35px;
-    background-color: #F4F4F4;
-}
-
 
 .col-25 {
     float: left;
@@ -143,11 +151,148 @@ select {
     clear: both;
 }
 
+.gg-link-btn ul li {
+    display: inline;
+    padding: 0;
+}
+.gg-link-btn ul li button:hover, a:hover{
+    text-decoration: none !important;
+}
+.gg-link-btn ul li button {
+    font-size: 1.1em;
+    margin-top: 190px;
+}
+
+.gg-link-btn-adv ul li {
+    display: inline;
+    padding: 0;
+}
+.gg-link-btn-adv ul li button:hover, a:hover{
+    text-decoration: none !important;
+}
+.gg-link-btn-adv ul li button {
+    font-size: 1.1em;
+    margin-top: 20px;
+}
+
+.videoWrapperLeft {
+	position: relative;
+	padding-bottom: 19%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    margin-bottom: 20px;
+}
+.videoWrapperLeft iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90%;
+	height: 100%;
+}
+.videoWrapperLeft {
+	position: relative;
+	padding-bottom: 19%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    margin-bottom: 20px;
+}
+.videoWrapperLeft iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 90%;
+	height: 100%;
+}
+.videoWrapperRight {
+	position: relative;
+	padding-bottom: 19%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+    margin-bottom: 20px;
+}
+.videoWrapperRight iframe {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 90%;
+	height: 100%;
+}
+/* -------------------------
+        Tabs style
+---------------------------- */
+/* Tabs panel */
+.tabbable-panel {
+/*  border: 1px solid #eee;*/
+  padding: 10px;     
+}
+
+/* Default mode */
+.tabbable-line > .nav-tabs {
+    border: none;
+    margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+/*  border: 0;*/
+    border: 1px solid #D0D8E3;
+  background: #eee;  
+  margin-right: 0;
+/*  color: #737373;*/
+    color: #2F78B7;
+}
+/*
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+*/
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+/*  border-bottom: 4px solid #C0D3ED;*/
+      border-top: 4px solid #C0D3ED;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+/*  color: #333333;*/
+    color: #6E9FE2 !important;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+/*  border-bottom: 4px solid #2F78B7;*/
+    border-top: 4px solid #2F78B7;
+    position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+    border: 0;
+    color: #333333;
+    background: #fff;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+min-width: inherit;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
+}
+/* ---- End tab style ----*/
+
 @media (max-width: 1024px) {
-     .gg-container-simplified-search {
-        padding-left: 6% !important;
-        padding-right: 13% !important;
-    }
+
     .advancedButton {
         margin-right: -12% !important;
     }
@@ -164,6 +309,13 @@ select {
         margin-left: 45%;
         width: 80% !important; 
     }
+    .tabbable-line > .nav-tabs {
+        padding-left: 3%;
+    }
+    
+     .simplified-search {
+        margin-bottom: 19% !important;
+    }
 }
 
 @media only screen and (max-width: 900px) {
@@ -173,10 +325,6 @@ select {
         overflow: auto;
         width: 100% !important;
     } 
-    .gg-container-simplified-search {
-        padding-left: 5%;
-        padding-right: 15% !important;
-    }
     .advancedButton {
         margin-right: -25% !important;
     }
@@ -188,6 +336,7 @@ select {
         padding-left: 4%;
         padding-right: 25% !important;
     }
+
 }
 @media only screen and (max-width: 768px) {
     .gg-container {
@@ -196,14 +345,11 @@ select {
         background-color: #dfe5ed;
         padding: 40px;
         margin-top: 30px;
-        margin-bottom: 60px;
+        margin-bottom: 60px;  
     }
     
-    .gg-container-simplified-search {
-        width: 100%;
-        padding-left: 6% !important;
-        padding-right: 9% !important;
-        
+    .simplified-search {
+        margin-bottom: 19% !important;
     }
     .advancedButton {
         margin-right: -5% !important;
@@ -222,7 +368,10 @@ select {
         margin-top: 0 !important;
         margin-bottom: 20px;
         width: 78% !important; 
-    }    
+    } 
+    .tabbable-line > .nav-tabs {
+        padding-left: 3%;
+    }
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
@@ -233,10 +382,8 @@ select {
     }
     
     .slider-alignment {
-        margin-left: 5%;
-        margin-top: 0 !important;
-        margin-bottom: 0;
-        width: 90% !important;
+        margin: 0;
+        width: 100% !important;
     } 
     .advancedButtonGlycoprotein {
         margin-right: -7% !important;  
@@ -246,19 +393,40 @@ select {
         padding-left: 10%;
         padding-right: 10% !important;
     }
+    .simplified-search {
+        margin-bottom: 11% !important;
+    }
+    .gg-link-btn ul li button {
+    margin-top: 30px;
+    }
 }
 
 @media (max-width: 360px) {
     .max-label {
-        margin-left: 0 !important;
+        margin: 0 !important;
+    }
+    .min-label {
+        margin: 0 !important;
     }
 
     .slider-alignment {
-        margin-left: 5%;
-        margin-top: 0 !important;
-        margin-bottom: 0;
-        width: 90% !important;
-/*        overflow: auto;*/
+        width: 100% !important;  
+        margin: 0;   
+    } 
+    .gg-link-btn ul li button {
+    margin-top: 5px;
+    }
+    .simplified-search {
+        margin-bottom: 10px !important;
+    }
+}
+
+@media (max-width: 300px) {
+    .gg-link-btn ul li button {
+    margin-top: 5px;
+    }
+    .simplified-search {
+        margin-bottom: 10px !important;
     }
 }
 
@@ -386,70 +554,5 @@ select {
 .validation-message{
     color: darkred;
 }
-
-/* -------------------------
-        Tabs style
----------------------------- */
-/* Tabs panel */
-.tabbable-panel {
-  border:1px solid #eee;
-  padding: 10px;
-}
-
-/* Default mode */
-.tabbable-line > .nav-tabs {
-  border: none;
-  margin: 0px;
-}
-.tabbable-line > .nav-tabs > li {
-  margin-right: 2px;
-}
-.tabbable-line > .nav-tabs > li > a {
-  border: 0;
-  margin-right: 0;
-  color: #737373;
-}
-.tabbable-line > .nav-tabs > li > a > i {
-  color: #a6a6a6;
-}
-.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
-  border-bottom: 4px solid #C0D3ED;
-}
-/*
-.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
-  border: 0;
-  background: none !important;
-  color: #333333;
-}
-.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
-  color: #a6a6a6;
-}
-*/
-
-.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
-  margin-top: 0px;
-}
-.tabbable-line > .nav-tabs > li.active {
-  border-bottom: 4px solid #2F78B7;
-  position: relative;
-}
-.tabbable-line > .nav-tabs > li.active > a {
-  border: 0;
-  color: #333333;
-}
-.tabbable-line > .nav-tabs > li.active > a > i {
-  color: #404040;
-}
-.tabbable-line > .tab-content {
-  margin-top: -3px;
-  background-color: #fff;
-  border: 0;
-  border-top: 1px solid #eee;
-  padding: 15px 0;
-}
-.portlet .tabbable-line > .tab-content {
-  padding-bottom: 0;
-}
-
 
 
