@@ -383,6 +383,12 @@ $(document).ready(function () {
         createOption(orgElement, result.organism[0].name, result.organism[0].id);
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
 
+
+        var question =  getParameterByName('question');
+        var id =  getParameterByName('id');
+
+        populateLastSearch(question, id);
+
     });
 });
 function createOption(ddl, text, value) {
@@ -568,12 +574,3 @@ function populateLastSearch(question, id) {
             break;
     }
 }
-
-$(document).ready(function () {
-    setTimeout(function () {
-        var question =  getParameterByName('question');
-        var id =  getParameterByName('id');
-
-        populateLastSearch(question, id);
-    }, 250);
-});
