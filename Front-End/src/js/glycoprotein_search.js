@@ -553,8 +553,8 @@ function searchJson(input_query_type,  mass_min, mass_max,input_organism,input_p
     var  glycans = {}
     if (input_glycan) {
         glycans= {
-            "relation": input_relation,
-            "glytoucan_ac": input_glycan
+            relation: input_relation,
+            glytoucan_ac: input_glycan
         }
 }
 
@@ -569,14 +569,15 @@ function searchJson(input_query_type,  mass_min, mass_max,input_organism,input_p
         gene_name: input_gene_name,
         pathway_id: input_pathway_id,
         uniprot_canonical_ac: input_protein_id,
-        glycan:glycans,
-        // glycan: {
-        //     "relation": input_relation,
-        //     "glytoucan_ac": input_glycan
-        // },
+         glycan:glycans,
+
         glycosylated_aa: input_glycosylated_aa,
         glycosylation_evidence: input_glycosylation_evidence
     };
+    // formjson.glycan = {
+    //     relation: input_relation,
+    //     glytoucan_ac: input_glycan
+    // }
     return formjson;
 }
 // to resizing choosen field
