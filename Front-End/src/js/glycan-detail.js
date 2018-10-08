@@ -42,7 +42,7 @@ function ajaxSuccess(data) {
         var template = $('#item_template').html();
         data.hasMotifs = (data.motifs && (data.motifs.length > 0));
         data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
-        data.imagePath = getWsUrl('glycan_image', data.glytoucan_ac);
+        data.imagePath = getWsUrl('glycan_image', data.glytoucan.glytoucan_ac);
         if (data.imagePath) {
             for (var i = 0; i < data.motifs.length; i++) {
                 data.motifs[i].imagePath = getWsUrl('glycan_image', data.motifs[i].id);
@@ -101,18 +101,6 @@ function ajaxSuccess(data) {
             }],
             pagination: 10,
             data: items,
-            // detailView: true,
-            // detailFormatter: function (index, row) {
-            //     var html = [];
-            //     var evidences = row.evidence;
-            //     for (var i = 0; i < evidences.length; i++) {
-            //         var evidence = evidences[i];
-            //         html.push("<div class='row'>");
-            //         html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
-            //         html.push("</div>");
-            //     }
-            //     return html.join('');
-            // },
 
         });
     }
