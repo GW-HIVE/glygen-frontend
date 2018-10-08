@@ -108,7 +108,9 @@
 
                     <div class="gg-panel-heading">
                         <!-- added new class -->
+                        {{#glytoucan}}
                         <h4>{{glytoucan_ac}}</h4>
+                        {{/glytoucan}}
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
@@ -121,10 +123,10 @@
                                 </div>
                             </div>
                             <div class="col-md-12 col-xs-6">
-                                {{#glytoucan_ac}}
+                                {{#glytoucan}}
                                 <li class="list-group"><strong>GlyTouCan Accession:</strong>   <a class="panelcontent"
-                                href="https://glytoucan.org/Structures/Glycans/{{glytoucan_ac}}"
-                                                            target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan_ac}}</li>
+                                href="{{glytoucan_url}}"
+                                                            target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan}}</li>
 
 
                                 {{#mass}}

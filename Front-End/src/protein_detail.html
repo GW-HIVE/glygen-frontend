@@ -115,7 +115,9 @@
 
                     <div class="gg-panel-heading">
                         <!-- added new class -->
+                       {{#uniprot}}
                         <h4>{{uniprot_canonical_ac}}</h4>
+                        {{/uniprot}}
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
@@ -129,12 +131,13 @@
                                 {{/gene}}
                                 {{^gene}}  {{/gene}}
 
-                                {{#uniprot_id}}
+                                {{#uniprot}}
                                 <li class="list-group"><strong>UniProt ID:</strong>
-                                    <a class="panelcontent" href="http://www.uniprot.org/uniprot/{{uniprot_id}}" target="_blank">{{uniprot_id}}</a>
+                                    {{#uniprot_id}} <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
                                 {{^uniprot_id}}  {{/uniprot_id}}
+                                {{/uniprot}}
 
                                 {{#uniprot_canonical_ac}}
                                 <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
@@ -220,19 +223,15 @@
                 <li class="cd-faq-title" />
                 <!-- added new class -->
                 <div class="panel panel-default">
-
                     <div class="gg-panel-heading">
                         <!-- added new class -->
                         <h4>Sequence</h4>
-
                     </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <!--<span class="fasta">{{ sequence.sequence }}</span>-->
+                        <span class="fasta">{{ sequence.sequence }}</span>
                         <div class="fasta">
                             <pre>{{{sequence.sequence}}}</pre>
                         </div>
-                        <!--<div class="fasta"><pre>{{ sequence.length }}</pre></div>-->
+                        <div class="fasta"><pre>{{ sequence.length }}</pre></div>
                     </div>
                 </div>
             </ul>
