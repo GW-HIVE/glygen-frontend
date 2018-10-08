@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<!--
+    
+License: Attribution 4.0 International (CC BY 4.0) 
+    
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+This license is acceptable for Free Cultural Works.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+    No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+
+ <title>SVG Concentric Inteface - Copyright WS York - 2018 </title>
+ 
+ <script src = "js/popArc.js"></script> 
+    
+ <script>
+  // SET GLOBAL VARIABLES if default global variable values (inside popArc.js file) are not appropriate
+  // arcX and arcY are the center coordinates of the arcs (within the svg canvas)
+  arcX = 200;
+  arcY = 200;
+  // gap is the space (in radians) between arcs with the same radius
+  gap = pi / 180;
+  // spacing is the increase in radius for successive rings of arcs
+  spacing = 20;
+  // arcThickness is the width of the arc renering
+  arcThickness = Math.round(0.9 * spacing);
+  // colors are taken in turn to show different top-class sets
+  colors = ["green", "blue", "orange", "red"]; 
+
+  window.onload=function() {
+     fetchData("json/AnHierarchy.json");  
+  }
+   
+    
+  // fetchData should be called by the "onload" method of the html document, which specifies the json input URL
+  function fetchData(theURL) {
+   // alert("sending request: " + theURL);
+   var xhttp = new XMLHttpRequest();
+   xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+       // alert(this.responseText);
+       processArcs(JSON.parse(this.responseText));
+    }
+   };
+   var jsonURL = theURL;
+   xhttp.open("GET", jsonURL, true);
+   xhttp.send();
+  }
+
+     
+  function showSVG(svgStr) {
+      var svgArcs = document.getElementById("svgArcs");
+      svgArcs.innerHTML = svgStr;
+  }
+     
+     
+  // modify the following mouse event response methods
+  function mClick(i) {
+    alert("Here, you could invoke a search or show expanded data using the parameter \"" + groups[i].name + "\"");
+  }
+     
+  function mOver(i) {
+    var info = document.getElementById("infoDiv");
+    info.innerHTML = "Group [" + i + "]:   name is " + groups[i].name + " and population is " + groups[i].count;
+  }
+     
+  function mLeave(i) {  
+  } 
+     
+  function dblClick(i) {
+  }
+
+</script> 
+</head>
+  
+<body>
+  
+<div id="infoDiv">Information goes here</div>
+    
+<object type="image/svg+xml" id="svgArcs">
+  Your browser does not support SVG
+</object>
+
+</body>
+</html>

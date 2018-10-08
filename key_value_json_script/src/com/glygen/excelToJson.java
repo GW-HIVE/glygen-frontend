@@ -17,8 +17,7 @@ import java.util.regex.Matcher;
 
 /**
  * This program will access the excel file and generate a json key-value file
- * from the excel sheet data. You need to set the column position of the headers
- * in the main method.
+ * from the excel sheet data. Column positions are assigned in the getColumnCount(r) method.
  * 
  * @author Gaurav Agarwal
  * @date Oct 8, 2018
@@ -35,9 +34,21 @@ public class excelToJson {
     public static final String RESULT_FILE_NAME = "Front-End/src/content/key-value.json";
 
     /**
+     * Column positions in excel.
+     */
+    public static int DISPLAY_NAME, 
+    				ABREVIATED_TERM, 
+    				KEY, 
+    				PROPERTY, 
+    				TOOL_TIP, 
+    				DESCRIPTION, 
+    				EXAMPLE, 
+    				DATA_TYPE;
+    
+    /**
      * This calculates the number of columns in the sheet by checking the heading of
      * the columns. If the heading is found to be blank, that means there are no
-     * more columns ahead.
+     * more columns ahead. Also, it assigns appropriate column position index to the headers.
      * 
      * @param r the first row containing the headers.
      * @return the number of columns having data.
@@ -47,6 +58,22 @@ public class excelToJson {
         while (true) {
             if (r.getCell(col) == null || r.getCell(col).getCellType() == CellType.BLANK) {
                 break;
+            } else if(r.getCell(col).toString().toLowerCase().contains("display")){
+            	DISPLAY_NAME = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("abreviate")){
+            	ABREVIATED_TERM = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("key")){
+            	KEY = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("property")){
+            	PROPERTY = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("tool")){
+            	TOOL_TIP = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("description")){
+            	DESCRIPTION = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("example")){
+            	EXAMPLE = col;
+            } else if(r.getCell(col).toString().toLowerCase().contains("type")){
+            	DATA_TYPE = col;
             }
             col++;
         }
@@ -54,7 +81,6 @@ public class excelToJson {
     }
 
     /**
-     * You need to set the column position of the headers here.
      * 
      * @param args not being used here.
      */
@@ -67,16 +93,6 @@ public class excelToJson {
             // int numOfColumns = (int) last_column - 64;
             int numOfRows = sheet.getLastRowNum();
             int numOfColumns = getColumnCount(sheet.getRow(0));
-
-            // column positions in excel.
-            final int DISPLAY_NAME = (int) 'A' - 65;
-            final int ABREVIATED_TERM = (int) 'B' - 65;
-            final int KEY = (int) 'C' - 65;
-            final int PROPERTY = (int) 'D' - 65;
-            final int TOOL_TIP = (int) 'E' - 65;
-            final int DESCRIPTION = (int) 'F' - 65;
-            final int EXAMPLE = (int) 'G' - 65;
-            final int DATA_TYPE = (int) 'H' - 65;
 
             ArrayList<Object> rowElements = new ArrayList<>();
             String op = "{";
