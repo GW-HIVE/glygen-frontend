@@ -26,62 +26,175 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>function getWsUrl(request, id){
-        
-    var ws_base ="http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan";
-    var ws_logging = ws_base+"/auth/logging";
-    var ws_userID = ws_base+"/auth/userid";
-    
-    switch (request) {
-    case "generate_ID":
-    return ws_userID;
-    break;
-    case "log_activity":
-    return ws_logging;
-    break;
-     case "image_service":
-    return ws_base + "/image/" + id; 
-    break;
-    case "list":
-    return ws_base + "/list";
-    break;
-    case "detail":
-    return ws_base +"/detail/" + id;
-    break;
-    case "typehead":
-    return ws_base +"/typehead";
-    break;
-    case "search_init":
-    return ws_base +"/search_init";
-    break;
-    default:
-    return "";
-    break;
+            <pre class="prettyprint source linenums"><code>//@author: Gaurav Agarwal
+
+//update: Rupali Mahadik:  //Glycan webservices, //Protein webservices
+
+// @description: UO1 Version-1.1.
+
+//@update:6 June 2018
+
+//update:20 july://usecases search webservices
+//update:31 july:// New base URL updated.
+
+function getWsUrl(request, id, id1) {
+    var ws_home_init = ws_base+"pages/home_init";
+    var ws_base_glycan = ws_base+"glycan";
+    var ws_base_protein = ws_base+"protein";
+    var ws_base_typeahead = ws_base+"typeahead";
+    var ws_logging = ws_base+"auth/logging";
+    var ws_userID = ws_base+"auth/userid";
+    var ws_contact = ws_base+"auth/contact";
+    var ws_useCaseSearch=ws_base+"usecases";
+    // var ws_base_loci=ws_base+"usecases";
+
+    switch (request.toLowerCase()) {
+
+        //Auth Webservices.
+        case "generate_id":
+            return ws_userID;
+            break;
+        case "log_activity":
+            return ws_logging;
+            break;
+        case "contact":
+            return ws_contact;
+            break;
+            
+        //Homepage webservices
+        case "home_init":
+            return ws_home_init;
+            break;
+        //Glycan webservices
+        case "search_init_glycan":
+            return ws_base_glycan + "/search_init";
+            break;
+
+        case "glycan_search":
+            return ws_base_glycan + "/search";
+            break;
+            
+        case "glycan_image":
+            return ws_base_glycan + "/image/" + id;
+            break;
+       
+        case "glycan_list":
+            return ws_base_glycan + "/list";
+            break;
+        case "glycan_detail":
+            return ws_base_glycan + "/detail/" + id;
+            break;
+
+
+        //Protein webservices
+        case "search_init_protein":
+            return ws_base_protein + "/search_init";
+            break;
+        case "search_protein":
+            return ws_base_protein + "/search";
+            break;
+        case "protein_image_service":
+            return ws_base_glycan + "/image/" + id;
+            break;
+        case "protein_list":
+            return ws_base_protein + "/list";
+            break;
+        case "protein_detail":
+            return ws_base_protein + "/detail/" + id;
+            break;
+
+
+
+
+        //Typeahead webservices
+
+        case "type-ahead":
+            return ws_base_typeahead;
+        default:
+            return "WWW.GOOGLE.COM";
+            break;
+
+        //Usecases search webservices
+//Usecases search webservices Q1-Q2-Q3
+        case "search_bioenzyme":
+            return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
+            break;
+        case "search_glycansite":
+            return ws_useCaseSearch + "/glycan_to_glycoproteins/9606/" + id;
+            break;
+        case "search_glycangene":
+            return ws_useCaseSearch + "/glycan_to_enzyme_gene_loci/9606/" + id;
+            break;
+
+        // usecases list API Q3 and 4
+        case "list_glycangene":
+            return ws_useCaseSearch + "/ortholog_list";
+            break;
+
+        case "loci_list":
+            return ws_useCaseSearch + "/genelocus_list";
+            break;
+
+
+
+        //Usecases search webservices Q4-Q6
+        case "search_proteinorthologues":
+            return ws_useCaseSearch + "/protein_to_orthologs/" + id;
+            break;
+
+        case "search_glycanenzyme":
+            return ws_useCaseSearch + "/biosynthesis_enzyme_to_glycans/10090/" + id;
+            break;
+
+
+        //Usecases search webservices Q7-Q8-Q9
+
+        case "search_glycosyltransferases":
+            return ws_useCaseSearch + "/species_to_glycosyltransferases/" + id;
+            break;
+        case "search_glycohydrolases":
+            return ws_useCaseSearch + "/species_to_glycohydrolases/" + id;
+            break;
+        case "search_glycoproteins":
+             return ws_useCaseSearch + "/species_to_glycoproteins/" +id + "/" + id1;
+            break;
+
+
+
+        //Usecases DISEASE webservices Q.10
+        case "search_disease":
+            return ws_useCaseSearch + "/disease_to_glycosyltransferases";
+            break;
     }
-   }
-   
+}
 
 
-   /**
-    * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
- 
-     * @param {string} id -  serach ID
-  */
-   
-   function getListPostData(id, page, sort, dir, limit)
-   {
+/**
+ * getListPostData  function that returns the string with the correct format the GWU service need to get the list for a specific Id
+
+ * @param {string} id -  serach ID
+ */
+
+function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
-    query.offset = ((page - 1) * limit) + 1;
+    //query.offset = parseInt(page);
     query.sort = sort;
+    query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;
-   
-    return "query=" + JSON.stringify(query);
-   }
-   
 
-</code></pre>
+    return "query=" + JSON.stringify(query);
+}
+
+
+function getSearchtypeheadData(field, value) {
+    var query = {};
+    query.field = field;
+    query.value = value;
+    query.limit = 100;
+    return "query=" + JSON.stringify(query);
+}</code></pre>
         </article>
     </section>
 
@@ -91,13 +204,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#DetailFormat">DetailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#ImageFormat">ImageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#mass">mass</a></li><li><a href="global.html#mass_max">mass_max</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 08 2018 13:26:42 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

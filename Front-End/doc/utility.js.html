@@ -26,52 +26,305 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
+            <pre class="prettyprint source linenums"><code>//@author: Rupali Mahadik
+// @update: Aug 6, 2018 - Gaurav Agarwal - added ajax error cases.
+// @update: Aug 27, 2018 - Gaurav Agarwal - function to return ajax timeout values and ajax error-failure handling functions.
 
 
+function getErrorMessage(errorCode,field) {
+    var contactUsMsg = " If the problem persists then you may &lt;a href='contact.html' >contact us&lt;/a>";
+    switch (errorCode) {
+        case 'invalid-query-json':
+            return {
+                message: "This is not a valid entry. Please try again.",
+                title: "Invalid Entry Error"
+                //                message: "This is not a valid JSON query. Please try again.",
+                //                title: "Invalid Submission"
+            };
+            break;
+        case 'open-connection-failed':
+            return {
+                message: "Sorry, we couldn't connect to database.",
+                title: "Unexpected Error"
+            };
+            break;
+        case 'unexpected-field-in-query':
+            return {
+                message: "This is unexpected field entry. Please try again",
+                title: "Unexpected Field Entry Error"
+                //                message: "Unexpected field in query JSON.",
+                //                title: "Unexpected Error"
+            };
+            break;
+        case 'invalid-parameter-value-length':
+            return {
+                message: "Please adjust length of your entry and try again.",
+                title: "Invalid Value Length Error"
+                //                message: "Display error occurred. We are looking into this problem.",
+                //                title: "Unexpected Error"
+            };
+        case 'invalid-parameter-value':
+            return {
+                message: "Please check the value of the field '" +field + "'",
+                title: "Invalid Value Length Error",
+
+                //                message: "Display error occurred. We are looking into this problem.",
+                //                title: "Unexpected Error"
+            };
+            break;
+        case 'no-search-criteria-submitted':
+            return {
+                message: "Entry error occurred. Please provide a valid ID.",
+                title: "Unexpected Error"
+            };
+            break;
+        case 'non-existent-record':
+            return {
+                message: "Please choose a different number of records per page.",
+                title: "Selection Error"
+            };
+            break;
+        case 'invalid-parameter-value':
+            return {
+                message: "Please choose a different number of records per page.",
+                title: "Selection Error"
+            };
+            break;
+        case 'non-existent-search-result':
+            return {
+                message: "Please choose a different number of records per page.",
+                title: "Selection Error"
+            };
+            break;
+        case 'missing parameter':
+            return {
+                message: "Please choose a different number of records per page.",
+                title: "Selection Error"
+            };
+            break;
+        case 'no-results-found':
+            return {
+                message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
+                title: "No Results Found"
+                //                message: "Sorry, we couldn't find any results matching your selection.",
+                //                title: "Selection Error"
+            };
+
+            break;
+
+        case 'timeout':
+            return {
+                message: "Sorry, the server didn't respond. Please try again later." + contactUsMsg,
+                title: "TimeOut Error"
+            };
+
+        case 'parsererror':
+            return {
+                message: "There was an error in the data received. We are looking into it." + contactUsMsg,
+                title: "Parsing Error"
+            };
+
+        case 'abort':
+            return {
+                message: "Sorry, your requested was aborted. Please try again." + contactUsMsg,
+                title: "Request Aborted"
+            };
+
+        case 0:
+            return {
+                message: "Could not connect to the server." + contactUsMsg,
+                title: "Not Connected"
+            };
+
+        case 404:
+            return {
+                message: "Could not connect to the server." + contactUsMsg,
+                title: "Server not found"
+            };
+
+        case 500:
+            return {
+                message: "An Internal server error occured. We are doing our best to resolve it." + contactUsMsg,
+                title: "Server error"
+            };
+
+        default:
+            return {
+                message: "Oops, something went wrong. Please try again later." + contactUsMsg,
+                title: "Unexpected Error"
+            };
 
 
-function getErrorMessage(errorCode) {
-    switch(errorCode) {
-        case 'GLIST01':
-            return 'Please provide an ID in the URL.';
-            break;
-        case 'GLIST02':
-            return 'Please provide an ID in the URL.';
-            break;
-        case 'GLIST04':
-            return 'Value is not in [asc/desc].';
-            break;
-        case 'server_down':
-            return 'sorry server is down';
-            break;
     }
-
-    return 'Unknown error.';
 }
+
 /**
  * Display Error message using alertify
-
-
  */
-function displayError(message){
-    alertify.alert('Error', message).set('modal', false);
+function displayError(message, title) {
+    alertify.alert(title, message).set('modal', false);
 }
 
-function displayErrorByCode(errorCode) {
-    displayError(getErrorMessage(errorCode));
+function displayErrorByCode(errorCode, field) {
+    var error = getErrorMessage(errorCode, field);
+    displayError(error.message, error.title);
 }
 
 
 /**
- * Js load for adding header and footer file into each page
-
-
+ * Gives the timeout value for ajax calls to repective web services.
+ * @param {string} ajaxWebService - The name of web service being called.
+ * @return timeout value in milliseconds.
  */
-$(document).ready(function(){
-    $( "#footer" ).load( "footer.html" );
-    $( "#header" ).load( "header.html" );
-});</code></pre>
+function getTimeout(ajaxWebService) {
+    // useCase question
+    var usecaseQ1 = 10000,
+        usecaseQ2 = 10000,
+        usecaseQ3 = 10000,
+        usecaseQ4 = 10000,
+        usecaseQ5 = 10000,
+        usecaseQ6 = 10000,
+        usecaseQ7 = 10000,
+        usecaseQ8 = 10000,
+        usecaseQ9 = 10000;
+
+    // search Init
+    var searchInitGlycan = 10000,
+        searchInitProtein = 10000,
+        searchInitGlycoP = 10000,
+        homeInit = 10000;
+
+    // search
+    var searchGlycan = 60000,   //10000,
+        searchProtein = 60000;  //10000;
+
+    // list
+    var listGlycan = 5000,
+        listProtein = 5000,
+        listLocus = 5000;
+
+    // detail
+    var detailGlycan = 5000,
+        detailProtein = 5000;
+
+    // contact us
+    var contact = 5000;
+
+    switch (ajaxWebService.toLowerCase()) {
+        // glycan
+        case "search_init_glycan":
+            return searchInitGlycan;
+        case "search_glycan":
+            return searchGlycan;
+        case "list_glycan":
+            return listGlycan;
+        case "detail_glycan":
+            return detailGlycan;
+        case "home_init":
+            return homeInit;
+
+        // protein
+        case "search_init_protein":
+            return searchInitProtein;
+        case "search_protein":
+            return searchProtein;
+        case "list_protein":
+            return listProtein;
+        case "detail_protein":
+            return detailProtein;
+
+        // Glycoprotein
+        case "search_init_glycoprotein":
+            return searchInitGlycoP;
+
+        // useCase
+        case "usecase_q1":
+            return usecaseQ1;
+        case "usecase_q1":
+            return usecaseQ2;
+        case "usecase_q1":
+            return usecaseQ3;
+        case "usecase_q1":
+            return usecaseQ4;
+        case "usecase_q1":
+            return usecaseQ5;
+        case "usecase_q1":
+            return usecaseQ6;
+        case "usecase_q1":
+            return usecaseQ7;
+        case "usecase_q1":
+            return usecaseQ8;
+        case "usecase_q1":
+            return usecaseQ9;
+
+        // locus list
+        case "loci_list":
+            return listLocus;
+
+        // contact us
+        case "contact":
+            return contact;
+
+        default:
+            return 5000;
+    }
+}
+
+/**
+ * logs appropriate search_init WS error message.
+ * @param {*} jqXHR
+ * @param {*} textStatus
+ * @param {*} errorThrown
+ */
+function searchInitFailure(jqXHR, textStatus, errorThrown) {
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    activityTracker("error", "", err + ": " + errorThrown + ": search_init WS error");
+    $('#loading_image').fadeOut();
+}
+
+/**
+ * displays and logs appropriate search WS error message.
+ * @param {*} jqXHR
+ * @param {*} textStatus
+ * @param {*} errorThrown
+ */
+function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", "", err + ": " + errorThrown);
+    $('#loading_image').fadeOut();
+}
+
+/**
+ * gives general error message for the ajax call.
+ * @param {*} jqStatus
+ * @param {*} textStatus
+ * @return error message.
+ */
+function decideAjaxError(jqStatus, textStatus){
+    var err = '';
+    if (textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror') {
+        err = textStatus;
+    }
+    else if (jqStatus === 0 || jqStatus === 404 || jqStatus === 500) {
+        err = jqStatus;
+    } else {
+        err = textStatus;
+    }
+    return err;
+}
+
+/**
+ * for the pageproofer feedback.
+ */
+(function (d, t) {
+    var pp = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    pp.src = '//app.pageproofer.com/overlay/js/3434/1775';
+    pp.type = 'text/javascript';
+    pp.async = true;
+    s.parentNode.insertBefore(pp, s);
+ })(document, 'script');
+</code></pre>
         </article>
     </section>
 
@@ -81,13 +334,13 @@ $(document).ready(function(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#DetailFormat">DetailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#ImageFormat">ImageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#mass">mass</a></li><li><a href="global.html#mass_max">mass_max</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 08 2018 13:26:42 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

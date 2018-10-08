@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: glycan-list.js</title>
+    <title>JSDoc: Source: orthologus.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: glycan-list.js</h1>
+    <h1 class="page-title">Source: orthologus.js</h1>
 
     
 
@@ -27,17 +27,8 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>//@author: Rupali Mahadik
-
 // @description: UO1 Version-1.1.
-
-//@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
-
-//@update:3 April 2018. with Rupali Mahadik real web service
-//@update: June 26-2018- with Rupali Mahadik web service changes.
-//@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
-// @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
-// @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
-
+//31st july
 
 
 
@@ -55,63 +46,13 @@ String.prototype.trunc = String.prototype.trunc ||
     };
 var id = '';
 var page = 1;
-var sort = 'mass';
+var sort = 'uniprot_canonical_ac';
 var dir = $('.dir-select').val();
-var url = getWsUrl('glycan_list') + "?action=get_user";
+var url = getWsUrl('list_glycangene') + "?action=get_user";
 var limit = 10;
 
-/**
- * it creates user interface for summary
- * @param {Object} queryInfo - the dataset of pagination info is retun from server
- * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
- * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
- */
-
-function buildSummary(queryInfo) {
-    var summaryTemplate = $('#summary-template').html();
-    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
-
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = excutionDate.toLocaleString();
-    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
-    $('#summary-table').html(summaryHtml);
 
 
-
-}
-
-// /**
-//  * Redirect to Page index page or search back
-//  */
-// function redirectPage1() {
-//     window.location.replace("index.html");
-// }
-//
-// function redirectPage2() {
-//     window.location.href = "glycan_search.html";
-// }
-//
-// //      $(document).ready(function(){
-// //      // $("demosearch").tooltip();
-// // });
-
-
-
-function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
-    // $('.searchresult').html( "&amp;#34;"  + total_length + " results of glycan&amp;#34;");
-
-}
-
-/**
- * Redirect to  searchPage with id after clicking editSearch
- */
-
-// function editSearch() {
-//     {
-//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
-//     }
-// }
 
 /**
 
@@ -121,44 +62,15 @@ function totalNoSearch(total_length) {
  @return -Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
-    return "&lt;a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "&lt;/a>";
+    return "&lt;a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "&lt;/a>";
 }
 
-/**
-
- * Format function for column that contains the cartoon
-
- * @param {object} value - The data binded to that particular cell.
-
- * @param {object} row - The data binded to that particular row.
- * @return- Glycanimage
- */
-
-// For Image Column
-function imageFormat(value, row, index, field) {
-    var url = getWsUrl('glycan_image', row.glytoucan_ac);
-    return "&lt;div class='img-wrapper'>&lt;img class='img-cartoon' src='" + url + "' alt='Cartoon' />&lt;/div>";
+function pageFormat1(value, row, index, field) {
+    return "&lt;a href='" + row.gene_link + " ' target='_blank'>" + value + "&lt;/a>"
 }
 
 
-/**
 
- * Format function for column "MASS"
-
- * @param {object} value - The data binded to that particular cell.
- * @return- Glycan Mass if available else NA
- */
-
-function massFormatter(value) {
-    if (value) {
-        var mass = value;
-        return value;
-
-
-    } else {
-        return "NA";
-    }
-}
 
 
 /**
@@ -172,35 +84,44 @@ function massFormatter(value) {
  */
 
 
-// function detailFormat(index, row) {
-//     var html = [];
-//     var glyco = row.glycoct.replace(/ /g, '\n');
-//     html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>IUPAC&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + row.iupac + '&lt;/pre>&lt;/div>&lt;/div>');
-//     html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>GlycoCT&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + glyco + '&lt;/pre>&lt;/div>&lt;/div>');
-//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
-//     return html.join('');
-// }
+function detailFormat(index, row) {
+    // var html = [];
+    var html = [];
+    var evidences = row.evidence;
+    for (var i = 0; i &lt; evidences.length; i++) {
+        var evidence = evidences[i];
+        html.push("&lt;div class='row'>");
+        html.push("&lt;ul>&lt;li>" + evidence.database + ":&lt;a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "&lt;/a>&lt;/li>&lt;/ul>");
+        html.push("&lt;/div>");
+    }
+    return html.join('');
+}
 
+function buildSummary(queryInfo, question) {
 
-/**
-
- * updateSearch function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-var lastSearch;
-
-
+    //quick search
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo[question] = true;
+    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
+    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
+    // queryInfo.questionText = getMessageText(question, queryInfo);
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+}
 
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
         activityTracker("user", id, "edit search");
     }
+}
+
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+    // $('.searchresult').html( "&amp;#34;"  + total_length + " results of glycan&amp;#34;");
+
 }
 
 
@@ -219,7 +140,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -229,37 +150,48 @@ function ajaxListSuccess(data) {
             for (var i = 0; i &lt; data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
-                    glytoucan_ac: glycan.glytoucan_ac,
-                    mass: glycan.mass,
-                    number_proteins: glycan.number_proteins,
-                    number_enzymes: glycan.number_enzymes,
-                    number_monosaccharides: glycan.number_monosaccharides,
-                    iupac: glycan.iupac,
-                    glycoct: glycan.glycoct
+                    uniprot_canonical_ac: glycan.uniprot_canonical_ac,
+                    gene_link: glycan.gene_link,
+                    gene_name: glycan.gene_name,
+                    protein_name: glycan.protein_name,
+                    organism: glycan.organism,
+                    evidence: glycan.evidence,
+                    // start_pos: glycan.start_pos,
+                    // end_pos: glycan.end_pos,
+                    tax_id: glycan.tax_id
                 });
             }
         }
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-        buildPages(data.pagination);
-        buildSummary(data.query);
-        // buildSummary(data.query, question);
-        // document.title='glycan-list';
-        lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
+        buildPages(data.pagination);
+        buildSummary(data.query, question);
+
+        document.title = 'Orthologus-list';
+        // buildSummary(data.query);
+
+
+
+        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
 
+function editSearch() {
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&amp;question=' + question);
+    activityTracker("user", id, "edit search");
+}
+
+
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
-    // $('#loading_image').fadeOut();
+function ajaxListFailure() {
+//  $('#error-message').show();
+    displayErrorByCode('server_down');
+    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
@@ -272,10 +204,9 @@ function LoadDataList() {
 
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("glycan_list"),
+        url: getWsUrl("list_glycangene"),
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
-        timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
@@ -307,6 +238,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 LoadDataList(id);
 
 
@@ -318,7 +250,6 @@ LoadDataList(id);
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
-
 
 </code></pre>
         </article>

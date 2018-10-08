@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: glycan-list.js</title>
+    <title>JSDoc: Source: quickglycan_list.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: glycan-list.js</h1>
+    <h1 class="page-title">Source: quickglycan_list.js</h1>
 
     
 
@@ -26,17 +26,16 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>//@author: Rupali Mahadik
-
+            <pre class="prettyprint source linenums"><code>//@Author: Rupali Mahadik
 // @description: UO1 Version-1.1.
-
 //@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
-
 //@update:3 April 2018. with Rupali Mahadik real web service
 //@update: June 26-2018- with Rupali Mahadik web service changes.
+// @update: pagination change Rupali Mahadik.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
+// @update: :New organism spec Rupali Mahadik.
 
 
 
@@ -69,31 +68,14 @@ var limit = 10;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
-
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = excutionDate.toLocaleString();
+    queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 
 
 
 }
-
-// /**
-//  * Redirect to Page index page or search back
-//  */
-// function redirectPage1() {
-//     window.location.replace("index.html");
-// }
-//
-// function redirectPage2() {
-//     window.location.href = "glycan_search.html";
-// }
-//
-// //      $(document).ready(function(){
-// //      // $("demosearch").tooltip();
-// // });
 
 
 
@@ -106,12 +88,14 @@ function totalNoSearch(total_length) {
 /**
  * Redirect to  searchPage with id after clicking editSearch
  */
+function editSearch() {
+    var question =  getParameterByName('question');
 
-// function editSearch() {
-//     {
-//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
-//     }
-// }
+        window.location.replace("quick_search.html?id=" + id + '&amp;question=' + question);
+        activityTracker("user", id, "edit search");
+
+}
+
 
 /**
 
@@ -196,12 +180,7 @@ var lastSearch;
 
 
 
-function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
-}
+
 
 
 /**
@@ -243,9 +222,9 @@ function ajaxListSuccess(data) {
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
         buildPages(data.pagination);
-        buildSummary(data.query);
-        // buildSummary(data.query, question);
-        // document.title='glycan-list';
+        // buildSummary(data.query);
+        buildSummary(data.query, question);
+        document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
@@ -307,6 +286,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 LoadDataList(id);
 
 
