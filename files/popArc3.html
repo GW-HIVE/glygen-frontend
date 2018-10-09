@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<!--
+    
+License: Attribution 4.0 International (CC BY 4.0) 
+    
+You are free to:
+
+    Share — copy and redistribute the material in any medium or format
+    Adapt — remix, transform, and build upon the material
+    for any purpose, even commercially.
+
+This license is acceptable for Free Cultural Works.
+
+    The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+
+    Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+    No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+Notices:
+
+    You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+    No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+-->
+
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+
+ <title>SVG Concentric Interface - Copyright WS York - 2018 </title>
+ 
+ <script src = "js/popArc3.js"></script> 
+ <script src = "js/svg.min.js"></script> 
+    
+ <script>
+  // SET GLOBAL VARIABLES HERE if default global variable values (in popArc3.js) are not appropriate
+  // svgW and svgH are the width and height of the svg canvas for the arcs
+  svgW = 300;
+  svgH = 300;
+  // arcX and arcY are the center coordinates of the arcs (within the svg canvas)
+  arcX = 100;
+  arcY = 100;
+  // gap is the space (in radians) between arcs with the same radius
+  gap = Math.PI / 180;
+  // spacing is the increase in radius for successive rings of arcs
+  spacing = 20;
+  // arcThickness is the width of the arc rendering
+  arcThickness = Math.round(0.9 * spacing);
+  // colors are taken in turn to show different top-class sets
+  colors = ["green", "blue", "orange", "red"]; 
+
+  window.onload=function() {
+     fetchData("json/AnHierarchy.json");  
+  }
+   
+    
+  // fetchData should be called by the "onload" method of the html document, where the json URL is specified
+  function fetchData(theURL) {
+   // alert("sending request: " + theURL);
+   var xhttp = new XMLHttpRequest();
+   xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+       // alert(this.responseText);
+       //  processArcs sets up the svg, and is specified in popArc2.js
+       processArcs(JSON.parse(this.responseText));        
+    }
+   };
+   var jsonURL = theURL;
+   xhttp.open("GET", jsonURL, true);
+   xhttp.send();
+  }
+
+  // modify the following mouse event response methods
+  function mClick(i) {
+    var info = document.getElementById("infoDiv");
+    info.innerHTML = "<p align='center'>You clicked on the arc corresponding to the group name \"" + groups[i].name +
+          "\". <br> Here, you could invoke a search or show expanded data using the group's name (" + groups[i].name +
+          ") or the group's population (" + groups[i].count + ")</p>";
+  }
+     
+  function mOver(i) {
+    var info = document.getElementById("infoDiv");
+    info.innerHTML = "<p align='center'>Mouse over Group [" + i + "]:   name is " + groups[i].name + " and population is " + groups[i].count;
+  }
+     
+  function mLeave(i) {  
+    var info = document.getElementById("infoDiv");
+    info.innerHTML = "<p align='center'>Look here for information";
+  } 
+     
+  function mDbl(i) {
+    var info = document.getElementById("infoDiv");
+    info.innerHTML = "<p align='center'>You double-clicked on the arc corresponding to the group name \"" + groups[i].name + "\"";
+  }
+
+</script> 
+</head>
+  
+<body>
+<center>
+<h2>Demonstration of hierarchical population arcs using SVG</h2>  
+
+<div id="svgArcs"></div>
+
+<div id="infoDiv">Information goes here</div>
+
+<div id="jsonDiv"></div>
+
+</center>
+
+</body>
+</html>
