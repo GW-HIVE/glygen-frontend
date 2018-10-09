@@ -24,14 +24,13 @@ function addCommas(nStr) {
 
 
 
-function sortDropdown(a, b)
-{    if (a.name < b.name)
-{        return -1;
-}
-else if (b.name < a.name)
-{        return 1;
-}
-return 0;
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
 }
 
 
@@ -59,8 +58,7 @@ $(document).ready(function () {
 
             var orgElement = $("#species").get(0);
             result.organism.sort(sortDropdown);
-            for (var x = 0; x < result.organism.length; x++)
-            {
+            for (var x = 0; x < result.organism.length; x++) {
                 createOption(orgElement, result.organism[x].name, result.organism[x].id);
             }
 
@@ -111,7 +109,7 @@ $(document).ready(function () {
             });
 
         }
-});
+    });
 });
 
 ///New slider
@@ -160,8 +158,7 @@ Sliderbox.prototype.handler = function (target) {
 
             slider.noUiSlider.set([e.target.value]);
 
-        }
-        else {
+        } else {
 
             slider.noUiSlider.set([null, e.target.value]);
 
@@ -216,8 +213,7 @@ Sliderbox1.prototype.handler = function (target) {
 
             slider1.noUiSlider.set([e.target.value]);
 
-        }
-        else {
+        } else {
 
             slider1.noUiSlider.set([null, e.target.value]);
 
@@ -233,9 +229,34 @@ Sliderbox1.prototype.handler = function (target) {
  * @param {numeric} ddl1 - User selected glycan type
  * @param {numeric} ddl2 - Glycan sub type
  */
+function hideSubtype() {
+    var x = document.getElementById("ddl2");
+    var y = document.getElementById("ddl");
+    x.style.display = "none";
+    y.style.display = "block";
+}
+
+function showSubtype() {
+    var x = document.getElementById("ddl");
+    var y = document.getElementById("ddl2");
+    x.style.display = "none";
+    y.style.display = "block";
+}
 
 function configureDropDownLists(ddl1, ddl2, callback) {
     var glyan_type_name = ddl1.value;
+    var subtypeDiv = document.getElementById("showSubtype");
+        if (subtypeDiv.style.display = "block"){
+            if (ddl1.value == ""){
+                subtypeDiv.style.display = "none";
+            }
+                
+        }
+        else {
+            subtypeDiv.style.display = "block" ;
+        }
+    
+        
 
     // clears existing options
     ddl2.options.length = 0;
@@ -256,8 +277,7 @@ function configureDropDownLists(ddl1, ddl2, callback) {
                 var Bnumber = parseInt(Btokens[1]);
                 if (isNaN(Anumber) || isNaN(Bnumber)) {
                     return Atext > Btext;
-                }
-                else {
+                } else {
                     return Anumber - Bnumber;
                 }
             });
@@ -298,7 +318,10 @@ function submitvalues() {
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
     var selected_species = document.getElementById("species");
-    var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
+    var organism = {
+        "id": parseInt(selected_species.value),
+        "name": selected_species.options[selected_species.selectedIndex].text
+    };
     var glycan_type = document.getElementById("ddl").value;
     var glycan_subtype = document.getElementById("ddl2").value;
     var proteinid = document.getElementById("protein").value;
@@ -315,9 +338,9 @@ function submitvalues() {
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-                displayErrorByCode(results.error_code,results.field);
+                displayErrorByCode(results.error_code, results.field);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", results.error_code+" for " + json);
+                activityTracker("error", "", results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -347,10 +370,9 @@ function submitvalues() {
  */
 
 //form json from form submit
-    function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif)
-{
+function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
 
-        var enzymes = {}
+    var enzymes = {}
     if (input_enzyme) {
         enzymes = {
             "id": input_enzyme,
@@ -372,7 +394,10 @@ function submitvalues() {
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
-        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        mass: {
+            "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
+        },
         // mass:masses,
         number_monosaccharides: {
             "min": parseInt(sugar_min),
@@ -438,9 +463,9 @@ function searchGlycanSimple() {
     var query_type = "glycan_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
     var term = document.getElementById("simplifiedSearch").value;
-    var formObject1 = searchjson1(query_type,term_category,term);
+    var formObject1 = searchjson1(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObject1);
-// call web services 
+    // call web services 
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search_simple"),
@@ -465,12 +490,12 @@ function searchGlycanSimple() {
     });
 }
 //formjason from form submit 
-function searchjson1(input_query_type,input_category,input_term) {
+function searchjson1(input_query_type, input_category, input_term) {
     var formjson1 = {
         "operation": "AND",
         query_type: input_query_type,
         term: input_term,
-        term_category: input_category    
+        term_category: input_category
     };
     return formjson1;
 }
