@@ -155,11 +155,14 @@ function getTimeout(ajaxWebService) {
     // search Init
     var searchInitGlycan = 10000,
         searchInitProtein = 10000,
-        searchInitGlycoP = 10000;
+        searchInitGlycoP = 10000,
+        homeInit = 10000;
+        
 
     // search
     var searchGlycan = 60000,   //10000,
-        searchProtein = 60000;  //10000;
+        searchProtein = 60000,  //10000;
+        searchSimpleGlycan = 60000;
 
     // list
     var listGlycan = 5000,
@@ -183,6 +186,11 @@ function getTimeout(ajaxWebService) {
             return listGlycan;
         case "detail_glycan":
             return detailGlycan;
+        case "home_init":
+            return homeInit;
+        case "glycan_search_simple":
+            return searchSimpleGlycan;
+            
 
         // protein
         case "search_init_protein":
@@ -274,3 +282,14 @@ function decideAjaxError(jqStatus, textStatus){
     }
     return err;
 }
+
+/**
+ * for the pageproofer feedback.
+ */
+(function (d, t) {
+    var pp = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    pp.src = '//app.pageproofer.com/overlay/js/3434/1775';
+    pp.type = 'text/javascript';
+    pp.async = true;
+    s.parentNode.insertBefore(pp, s);
+ })(document, 'script');

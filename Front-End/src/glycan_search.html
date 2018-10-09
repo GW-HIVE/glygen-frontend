@@ -58,274 +58,266 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="tabbable-panel">
-				<div class="tabbable-line">
-					<ul class="nav nav-tabs ">
-						<li class="active">
-							<a href="#tab_default_1" data-toggle="tab">
-							Simplified Search </a>
-						</li>
-						<li>
-							<a href="#tab_default_2" data-toggle="tab">
-							Advanced Search </a>
-						</li>
-						<li>
-							<a href="#tab_default_3" data-toggle="tab">
-							Tutorial </a>
-						</li>
-					</ul>
-					<div class="tab-content container">
-                        <!-- Start Tab 1 Simplified search -->
-						<div class="tab-pane fade in active" id="tab_default_1">
-				            <div class="container"> 
-                                <div class="row simplified-search">
-                                    <div class="col-sm-3 gg-form-group">
-                                        <select>
-                                            <option value="select" style="background-color: #fff;"> Any</option>
-                                        </select>
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                Simplified Search </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                Advanced Search </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">
+                                Tutorial </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content container">
+                            <!-- Start Tab 1 Simplified search -->
+                            <div class="tab-pane fade in active" id="tab_default_1">
+                                <div class="container"> 
+                                    <div class="row simplified-search">
+                                        <div class="col-sm-3 gg-form-group">
+                                            <select id="simplifiedCategory">
+                                                <option value="select">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-7 gg-form-group">
+                                            <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Glycan">
+                                        </div>
+                                        <div class="col-sm-2 gg-form-group text-right"> 
+                                        <input type="button" class="btn-lg btn-primary" value="Search" onclick="searchGlycanSimple()">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-7 gg-form-group">
-                                        <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Glycan">
-                                    </div>
-                                    <div class="col-sm-2 gg-form-group text-right"> 
-                                    <input type="button" class="btn-lg btn-primary" value="Search" onclick="submitvalues()">
-                                    </div>
-                                </div>
-                            </div> <!--    End Simplified Search Div-->
-						</div> <!--  End first Tab -->
-                        
-                        <!-- Start Tab 2 Advanced search-->
-						<div class="tab-pane fade in" id="tab_default_2">
-                            <div class="row ">
-                                <div class="container">
-                                    <div class="advancedSearch-container">
-                                        <!-- Top button-->
-                                        <div class="row"> 
-                                            <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Glycan" onclick="submitvalues()" style="float: right; margin: -5px 15px 10px 0;">
-                                        </div>
-                                        <!-- GlyTouCan Accession -->
-                                        <div class="row top-table-margin">
-                                            <label class="control-label col-sm-4" for="glycan_id">
-                                                <span>
-                                                    <a href="javascript://" title="GlyTouCan Accession" data-toggle="popover" data-placement="left" data-content="Enter complete or partial GlyTouCan Accession of your glycan (see https://glytoucan.org/)">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> GlyTouCan Accession:</label>
-                                            <div class="col-sm-8 gg-form-group">
-                                                <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
-                                                <div class="gg-text-example textExample">Example: <a2 href="">G88495BI</a></div>
-                                                <h6 id='glycanAccMsg' class="validation-message"></h6>
-                                            </div>
-                                        </div>
-                                        <!-- Monoisotopic Mass-->
-                                        <div class="gg-form-group row">
-                                            <div>
-                                                <label class="control-label col-sm-4">
-                                                    <span>
-                                                        <a href="javascript://" title="Monoisotopic Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Monoisotopic Mass range for your protein(s)">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
-                                                    </span>Monoisotopic Mass:
-                                                </label>
-                                            </div>
-                                            <div class="col-sm-10 row glycanSizeMargin">
-                                                <!-- First range-->
-                                                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
-                                                    <div class="sliderbox">
-                                                        <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                                                        <div class="row"> 
-                                                            <span class="min-label"><strong>Min</strong></span>
-                                                            <input class="sliderbox-input-min form-control">
-                                                            <span class="max-label"><strong>Max</strong></span>
-                                                            <input class="sliderbox-input-max form-control">
-                                                        </div>
-                                                    </div>
-                                                </div> 
-                                            </div>
-                                        </div>
-                                        <!-- Number of Sugars -->
-                                        <div class="gg-form-group row">
-                                            <div>
-                                                <label class="control-label col-sm-4">
-                                                    <span>
-                                                        <a href="javascript://" title="Number of Sugars" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Number of Sugars range for your protein(s)">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
-                                                    </span>Number of Sugars:
-                                                </label>
-                                            </div>       
-                                            <div class="col-sm-10 row glycanSizeMargin">       
-                                                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider1">
-                                                    <div class="sliderbox1">
-                                                        <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
-                                                        <div class="row"> 
-                                                            <span class="min-label"><strong>Min</strong></span>
-                                                            <input class="sliderbox-input-min1 form-control">
-                                                            <span class="max-label"><strong>Max</strong></span>
-                                                            <input class="sliderbox-input-max1 form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>    
-                                            </div>
-                                        </div>
-                                        <!-- Organism-->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="organism">
-                                                <span>
-                                                    <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an Organism that makes your glycan(s)">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Organism:</label>
-                                            <div class="col-sm-8">
-                                                <select class="organism" id="organism">
-                                                    <option value="0">Select Organism</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- Glycan type-->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="ddl">
-                                                <span>
-                                                    <a href="javascript://" title="Glycan Type" data-toggle="popover" data-placement="left" data-content="Click to select a Glycan Type">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Glycan Type:</label>
-                                            <div class="col-sm-8">
-                                                <select class="ddl glycanType" id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
-                                                    <option value="">Select Glycan Type</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- Glycan subtype-->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="ddl2">
-                                                <span>
-                                                    <a href="javascript://" title="Glycan Subtype" data-toggle="popover" data-placement="left" data-content="Click to select a Glycan Subtype">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Glycan Subtype:</label>
-                                            <div class="col-sm-8">
-                                                <select id="ddl2">
-                                                    <option value="">Select Glycan Subtype</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <!-- UniProt Accession-->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="protein">
-                                                <span>
-                                                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of a glycoprotein that bears your glycan(s)">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span>UniProt Accession:</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="ProteinID" class="form-control protein textExampleInput" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein" onkeyup="validateProteinAcc(this)">
-                                                <div class="gg-text-example textExample2">Example: <a2 href="">P14210-1</a> (Human Erythropoietin) </div>
-                                                <h6 id='proteinAccMsg' class="validation-message"></h6>
-                                            </div>
-                                        </div>
-                                        <!-- Glycan Motif -->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="motif">
-                                                <span>
-                                                    <a href="javascript://" title="Glycan Motif" data-toggle="popover" data-placement="left" data-content="Enter a Glycan Motif comprising part of your glycan(s)" >
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Glycan Motif:</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
+                                    <div id="search-simple-display"></div>
+                                </div> <!--    End Simplified Search Div-->
+                            </div> <!--  End first Tab -->
 
-                                                <div class="gg-text-example textExample3">Example: <a2 href="">N-Glycan complex</a></div>
-                                                <h6 id='motifNameMsg' class="validation-message"></h6>
+                            <!-- Start Tab 2 Advanced search-->
+                            <div class="tab-pane fade in" id="tab_default_2">
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="advancedSearch-container">
+                                            <!-- Top button-->
+                                            <div class="row"> 
+                                                <input type="button" class="btn-lg btn-primary" value="Search Glycan" onclick="submitvalues()" style="float: right; margin: -5px 15px 10px 0;">
+                                            </div>
+                                            <!-- GlyTouCan Accession -->
+                                            <div class="row top-table-margin">
+                                                <label class="control-label col-sm-4" for="glycan_id">
+                                                    <span>
+                                                        <a href="javascript://" title="GlyTouCan Accession" data-toggle="popover" data-placement="left" data-content="Enter complete or partial GlyTouCan Accession of your glycan (see https://glytoucan.org/)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> GlyTouCan Accession:</label>
+                                                <div class="col-sm-8 gg-form-group">
+                                                    <input type="text" name="glycan_id" class="form-control glycan" id="glycan_id" placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                                                    <div class="gg-text-example textExample">Example: <a2 href="">G88495BI</a></div>
+                                                    <h6 id='glycanAccMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Monoisotopic Mass-->
+                                            <div class="gg-form-group row">
+                                                <div>
+                                                    <label class="control-label col-sm-4">
+                                                        <span>
+                                                            <a href="javascript://" title="Monoisotopic Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Monoisotopic Mass range for your protein(s)">
+                                                                <i class="far fa-question-circle help-sign"></i>
+                                                            </a>
+                                                        </span>Monoisotopic Mass:
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-10 row glycanSizeMargin">
+                                                    <!-- First range-->
+                                                    <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
+                                                        <div class="sliderbox">
+                                                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                                                            <div class="row"> 
+                                                                <span class="min-label"><strong>Min</strong></span>
+                                                                <input class="sliderbox-input-min form-control">
+                                                                <span class="max-label"><strong>Max</strong></span>
+                                                                <input class="sliderbox-input-max form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <!-- Number of Sugars -->
+                                            <div class="gg-form-group row">
+                                                <div>
+                                                    <label class="control-label col-sm-4">
+                                                        <span>
+                                                            <a href="javascript://" title="Number of Sugars" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Number of Sugars range for your protein(s)">
+                                                                <i class="far fa-question-circle help-sign"></i>
+                                                            </a>
+                                                        </span>Number of Sugars:
+                                                    </label>
+                                                </div>       
+                                                <div class="col-sm-10 row glycanSizeMargin">       
+                                                    <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider1">
+                                                        <div class="sliderbox1">
+                                                            <div class="sliderbox-slider1" id="sliderbox-slider1"></div>
+                                                            <div class="row"> 
+                                                                <span class="min-label"><strong>Min</strong></span>
+                                                                <input class="sliderbox-input-min1 form-control">
+                                                                <span class="max-label"><strong>Max</strong></span>
+                                                                <input class="sliderbox-input-max1 form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            <!-- Organism-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="species">
+                                                    <span>
+                                                        <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an Organism that makes your glycan(s)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Organism:</label>
+
+                                                <div class="col-sm-8">
+                                                    <select class="organism" id="species">
+                                                        <option value="0">Select Organism</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Glycan type-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="ddl">
+                                                    <span>
+                                                        <a href="javascript://" title="Glycan Type" data-toggle="popover" data-placement="left" data-content="Click to select a Glycan Type">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Glycan Type:</label>
+                                                <div class="col-sm-8">
+                                                    <select class="ddl glycanType" id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
+                                                        <option value="">Select Glycan Type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Glycan subtype-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="ddl2">
+                                                    <span>
+                                                        <a href="javascript://" title="Glycan Subtype" data-toggle="popover" data-placement="left" data-content="Click to select a Glycan Subtype">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Glycan Subtype:</label>
+                                                <div class="col-sm-8">
+                                                    <select id="ddl2">
+                                                        <option value="">Select Glycan Subtype</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- UniProt Accession-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="protein">
+                                                    <span>
+                                                        <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of a glycoprotein that bears your glycan(s)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span>UniProt Accession:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="ProteinID" class="form-control protein textExampleInput" id="protein" placeholder="Enter the UniProt Accession of a glycoprotein" onkeyup="validateProteinAcc(this)">
+                                                    <div class="gg-text-example textExample2">Example: <a2 href="">P14210-1</a> (Human Erythropoietin) </div>
+                                                    <h6 id='proteinAccMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Glycan Motif -->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="motif">
+                                                    <span>
+                                                        <a href="javascript://" title="Glycan Motif" data-toggle="popover" data-placement="left" data-content="Enter a Glycan Motif comprising part of your glycan(s)" >
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Glycan Motif:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="GlycanMotif" class="form-control motif" id="motif" placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
+
+                                                    <div class="gg-text-example textExample3">Example: <a2 href="">N-Glycan complex</a></div>
+                                                    <h6 id='motifNameMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Biosynthetic Enzyme -->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="enzyme">
+                                                    <span>
+                                                        <a href="javascript://" title="Biosynthetic Enzyme" data-toggle="popover" data-placement="left" data-content="Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Biosynthetic Enzyme:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
+                                                    <div class="gg-text-example textExample4">Example: <a href="">B4GALT1</a></div>
+                                                    <!-- <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>-->
+                                                    <h6 id='enzymeAccMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Bottom button  -->
+                                            <div class="row"> 
+                                                <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Glycan" onclick="submitvalues()" style="float: right; margin: 0 15px 20px;">
                                             </div>
                                         </div>
-                                        <!-- Biosynthetic Enzyme -->
-                                        <div class="gg-form-group row">
-                                            <label class="control-label col-sm-4" for="enzyme">
-                                                <span>
-                                                    <a href="javascript://" title="Biosynthetic Enzyme" data-toggle="popover" data-placement="left" data-content="Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s)">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Biosynthetic Enzyme:</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" name="Enzyme" class="form-control enzyme" id="enzyme" placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
-                                                <div class="gg-text-example textExample4">Example: <a href="">B4GALT1</a></div>
-                                                <!-- <div class="gg-text-example">Example: P26572 (MGAT1_HUMAN)</div>-->
-                                                <h6 id='enzymeAccMsg' class="validation-message"></h6>
-                                            </div>
-                                        </div>
-                                        <!-- Bottom button  -->
-                                        <div class="row"> 
-                                            <input type="button" class="btn-lg btn-primary bottom-table-margin" value="Search Glycan" onclick="submitvalues()" style="float: right; margin: 0 15px 20px;">
-    </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Start Tab Tutorial -->
+                            <div class="tab-pane fade in" id="tab_default_3">
+                                <div class="container"> 
+                                    <div class="row tutorial">
+                                        <section class="glycanSearch">
+                                            <div class="row ">
+                                                <div class="tutorialSection">
+                                                    <div class="text-left2 videoWrapperLeft col-sm-5">
+                                                        <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <h4 class="media-heading">Simplified Search</h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row"> 
+                                                <div class="tutorialSection">
+
+                                                    <div class="col-sm-7">
+                                                        <h4 class="media-heading">Advanced Search</h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                    </div>
+                                                    <div class="videoWrapperRight col-sm-5 text-right">
+                                                        <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="tutorialSection">
+                                                    <div class="videoWrapperLeft col-sm-5">
+                                                        <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <h4 class="media-heading">Advanced Search</h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                    </div>
+                                                </div>           
+                                            </div>
+                                    </div>
+                                </div> 
+                            </div> <!--  End Tab 3 Tutorial -->
                         </div>
-                        
-                        <!-- Start Tab Tutorial -->
-						<div class="tab-pane fade in" id="tab_default_3">
-				            <div class="container"> 
-                                <div class="row tutorial">
-                                    <section class="glycanSearch">
-<!--                                        <center><h3 class="page-heading">How to Do Glycan Search</h3></center>-->
-                                        <div class="row ">
-                                            <div class="tutorialSection">
-                                                <div class="text-left2 videoWrapperLeft col-sm-5">
-                                                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <h4 class="media-heading">Simplified Search</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row"> 
-                                            <div class="tutorialSection">
-                                                
-                                                <div class="col-sm-7">
-                                                    <h4 class="media-heading">Advanced Search</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
-                                                </div>
-                                                <div class="videoWrapperRight col-sm-5 text-right">
-                                                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="tutorialSection">
-                                                <div class="videoWrapperLeft col-sm-5">
-                                                    <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <h4 class="media-heading">Advanced Search</h4>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
-                                                </div>
-                                            </div>           
-                                        </div>
-<!--
-                                    </section>
-                                    <section class="proteinSearch">
-                                        <h2 class="page-heading">Protein Search</h2>
-                                    </section>
-                                    <section class="glycoproteinSearch">
-                                        <h2 class="page-heading">Glycoprotein Search</H2>
-                                    </section>
--->
-                                </div>
-                            </div> <!--    End Simplified Search Div-->
-						</div> <!--  End first Tab -->
-				    </div>
-			    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    
+
 
     <div w3-include-html="footer.html"></div>
     <!--Script for jquery-->
@@ -349,6 +341,7 @@
     <!-- script for user activity  -->
     <script src="js/activity_tracker.js"></script>
     <!-- script for webservice-->
+    <script src="js/domain_url_test.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for error handling alerts -->
     <script type="text/javascript" src="libraries/alertify.js"></script>
@@ -358,7 +351,7 @@
     <script src="js/editsearch.js"></script>
     <!-- script for help icon ? -->
     <script src="js/popover.js"></script>
-    <script src="js/simplified_search.js"></script>
+    
 
 </body>
 

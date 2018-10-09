@@ -11,8 +11,9 @@
 
 function getWsUrl(request, id, id1) {
 
-    // var ws_base = "http://glygen-vm-tst.biochemistry.gwu.edu/api/";
+
     var ws_base = "http://tst.api.glygen.org/";
+ 
     
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
@@ -21,6 +22,9 @@ function getWsUrl(request, id, id1) {
     var ws_userID = ws_base+"auth/userid";
     var ws_contact = ws_base+"auth/contact";
     var ws_useCaseSearch=ws_base+"usecases";
+    var ws_homeInit=ws_base+"pages/home_init";
+
+
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
@@ -35,7 +39,12 @@ function getWsUrl(request, id, id1) {
         case "contact":
             return ws_contact;
             break;
-            
+
+
+        //Glycan webservices
+        case "home_init":
+            return ws_homeInit + "/search_init";
+            break;
         //Glycan webservices
         case "search_init_glycan":
             return ws_base_glycan + "/search_init";
@@ -44,6 +53,11 @@ function getWsUrl(request, id, id1) {
         case "glycan_search":
             return ws_base_glycan + "/search";
             break;
+
+            case "glycan_search_simple":
+            return ws_base_glycan + "/search_simple";
+            break;
+            
             
         case "glycan_image":
             return ws_base_glycan + "/image/" + id;

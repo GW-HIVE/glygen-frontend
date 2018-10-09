@@ -23,70 +23,18 @@ function addCommas(nStr) {
 }
 
 
-$("#glycan_id").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("glytoucan_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
 
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
+function sortDropdown(a, b)
+{    if (a.name < b.name)
+{        return -1;
+}
+else if (b.name < a.name)
+{        return 1;
+}
+return 0;
+}
 
 
-
-
-
-$("#protein").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-$("#motif").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("motif_name", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-$("#enzyme").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("gene_name", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
 
 
 /** functions for dropdowns organism
@@ -108,25 +56,33 @@ $(document).ready(function () {
         success: function (result) {
             searchInitValues = result;
 
-            var orgElement = $(".organism").get(0);
-            createOption(orgElement, result.organism[0].name, result.organism[0].id);
-            createOption(orgElement, result.organism[1].name, result.organism[1].id);
+
+            var orgElement = $("#species").get(0);
+            result.organism.sort(sortDropdown);
+            for (var x = 0; x < result.organism.length; x++)
+            {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
+
+
+            var categoryType = $("#simplifiedCategory").get(0);
+            result.simple_search_category.sort(sortDropdownSimple);
+            for (var x = 0; x < result.simple_search_category.length; x++) {
+                createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
+            }
 
             var glycanElement = $(".ddl").get(0);
+            result.glycan_type.sort(sortDropdown);
 
             for (var x = 0; x < result.glycan_type.length; x++) {
                 createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
             }
 
-            // $(".ddl").append("<option>" + result.glycan_type[0].name + "</option>");
             var mass_max = result.glycan_mass.max;
             var mass_min = result.glycan_mass.min;
             var sugar_mass_min = result.number_monosaccharides.min;
             var sugar_mass_max = result.number_monosaccharides.max;
-            // mass(mass_min, mass_max);
-            // sugarmass(sugar_mass_min, sugar_mass_max)
-            // check for ID to see if we need to load search values
-            // please do not remove rhis code as it is required prepopulate search values
+
             var id = getParameterByName('id') || id;
             if (id) {
                 LoadSearchvalues(id);
@@ -271,67 +227,7 @@ Sliderbox1.prototype.handler = function (target) {
 
 };
 
-//
-// /** Sugar Mass range function
-//  * @param {numeric} sugar_mass_min - minimum value of the sugar mass range
-//  * @param {numeric} sugar_mass_max - maximum value of the sugar mass range
-//  */
-// function sugarmass(sugar_mass_min, sugar_mass_max) {
-//     var nonLinearSlider1 = document.getElementById('slider1');
-//     noUiSlider.create(nonLinearSlider1, {
-//
-//         connect: true,
-//         behaviour: 'tap',
-//         start: [0, 10000],
-//         range: {
-//             'min': sugar_mass_min,
-//             'max': sugar_mass_max
-//         }
-//     });
-//     var nodes1 = [
-//         document.getElementById('lower-value1'), // 0
-//         document.getElementById('upper-value1')  // 1
-//     ];
-//     // Display the slider value and how far the handle moved
-//     // from the left edge of the slider.
-//     nonLinearSlider1.noUiSlider.on('update', function (values, handle) {
-//         nodes1[handle].innerHTML = addCommas(values[handle]);
-//     });
-// }
-//
-// /** Mass range function
-//  * @param {numeric} mass_min - minimum value of the mass range
-//  * @param {numeric} mass_max - maximum value of the mass range
-//  */
-// function mass(mass_min, mass_max) {
-//     var nonLinearSlider = document.getElementById('slider');
-//     noUiSlider.create(nonLinearSlider, {
-//         connect: true,
-//         behaviour: 'tap',
-//         start: [0, 10000],
-//
-//         // range: {
-//         //     'min': [1],
-//         //     '60%': [10],
-//         //     'max': [1000]
-//         // }
-//         range: {
-//             'min': mass_min,
-//             'max': mass_max
-//         }
-//     });
-//     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
-//     var nodes = [
-//         document.getElementById('lower-value'), // 0
-//         document.getElementById('upper-value')  // 1
-//     ];
-//     // Display the slider value and how far the handle moved
-//     // from the left edge of the slider.
-//     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-//         nodes[handle].innerHTML = addCommas(values[handle]);
-//     });
-//
-// }
+
 
 /** glycan sub type dropdown function based on type field
  * @param {numeric} ddl1 - User selected glycan type
@@ -397,14 +293,12 @@ function createOption(ddl, text, value) {
 function submitvalues() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
     var query_type = "search_glycan";
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
-    // var mass_slider = document.getElementById("slider").noUiSlider.get();
-    // var sugar_slider = document.getElementById("slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
-    var organism = document.getElementById("organism").value;
+    var selected_species = document.getElementById("species");
+    var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
     var glycan_type = document.getElementById("ddl").value;
     var glycan_subtype = document.getElementById("ddl2").value;
     var proteinid = document.getElementById("protein").value;
@@ -421,7 +315,7 @@ function submitvalues() {
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-                displayErrorByCode(results.error_code);
+                displayErrorByCode(results.error_code,results.field);
                 // activityTracker("error", "", results.error_code);
                 activityTracker("error", "", results.error_code+" for " + json);
                 $('#loading_image').fadeOut();
@@ -439,10 +333,6 @@ function submitvalues() {
     });
 }
 
-
-//
-//
-
 /** Forms searchjson from the form values submitted
  * @param input_query_type query search
  * @param input_glycan_id user glycan id input
@@ -457,8 +347,10 @@ function submitvalues() {
  */
 
 //form json from form submit
-function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-    var enzymes = {}
+    function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif)
+{
+
+        var enzymes = {}
     if (input_enzyme) {
         enzymes = {
             "id": input_enzyme,
@@ -466,22 +358,29 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         }
 
     }
+    var organisms = {
+        "id": 0,
+        "name": "All"
+    }
+
+    if (input_organism.id !== "0") {
+        organisms.id = input_organism.id;
+        organisms.name = input_organism.name;
+    }
+
 
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
         mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        // mass:masses,
         number_monosaccharides: {
             "min": parseInt(sugar_min),
             "max": parseInt(sugar_max)
         },
-        // enzyme: {
-        //     "id": input_enzyme,
-        //     "type": "gene"
-        // },
         enzyme: enzymes,
         glytoucan_ac: input_glycan_id,
-        tax_id: input_organism ? parseInt(input_organism) : '',
+        organism: organisms,
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
         uniprot_canonical_ac: input_proteinid,
@@ -491,18 +390,90 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     return formjson;
 }
 
-// function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-//     var formJson = {};
-//
-//     if (input_organism) {
-//         formJson.tax_id = parseInt(input_organism);
-//     }
-//
-//     ...
-//
-//     return formjson;
-// }
 
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
+}
+
+
+function sortDropdownSimple(c, d) {
+    if (c.id < d.id) {
+        return -1;
+    } else if (d.id < c.id) {
+        return 1;
+    }
+    return 0;
+}
+
+
+
+
+
+/* ---------------------- 
+    Simplified search 
+------------------------- */
+
+/**
+ * sorting drop down list in simplified search page.
+ * @author Tatiana Williamson
+ * @date October 2, 2018
+ */
+function sortDropdownSimple(c, d) {
+    if (c.id < d.id) {
+        return -1;
+    } else if (d.id < c.id) {
+        return 1;
+    }
+    return 0;
+}
+
+function searchGlycanSimple() {
+
+    // Get values from form fields
+    var query_type = "glycan_search_simple";
+    var term_category = document.getElementById("simplifiedCategory").value;
+    var term = document.getElementById("simplifiedSearch").value;
+    var formObject1 = searchjson1(query_type,term_category,term);
+    var json = "query=" + JSON.stringify(formObject1);
+// call web services 
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("glycan_search_simple"),
+        data: json,
+        timeout: getTimeout("search_simple_glycan"),
+        //error: ajaxSearchFailureSimple,
+        success: function (results) {
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
+                // activityTracker("error", "", results.error_code);
+                activityTracker("error", "", results.error_code + " for " + json);
+                $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
+                $('#loading_image').fadeOut();
+            } else {
+                window.location = './glycan_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
+            }
+        }
+    });
+}
+//formjason from form submit 
+function searchjson1(input_query_type,input_category,input_term) {
+    var formjson1 = {
+        "operation": "AND",
+        query_type: input_query_type,
+        term: input_term,
+        term_category: input_category    
+    };
+    return formjson1;
+}
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
  * @author Gaurav Agarwal
@@ -511,4 +482,3 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
-

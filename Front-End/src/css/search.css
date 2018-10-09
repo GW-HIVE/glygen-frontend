@@ -81,7 +81,8 @@ select {
 .advancedSearch-container {
     width: 90%;
     border-radius: 5px;
-    background-color: #dfe5ed;
+    border: 2px solid #dfe5ed;
+/*    background-color: #dfe5ed;*/
     padding: 40px 80px 20px; 
     margin: 0 auto;
     overflow: auto;
@@ -555,4 +556,7 @@ min-width: inherit;
     color: darkred;
 }
 
-
+.errorMessageSimpleSearch {
+    font-weight: bold;
+    text-align: center;  
+}

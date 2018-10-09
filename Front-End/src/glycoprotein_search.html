@@ -60,325 +60,345 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <h3 class="page-heading" style="text-align: center">Glycoprotein Search </h3>
-<div id="simplifiedSearch">     
-    <div id="simplifiedSearch2" class="container simplified-searchGlycoproten" style="margin-bottom:2 300px;">
-        <div class="row text-right advancedButtonGlycoprotein">
-            <button class="btn btn-link" onclick="hideSimplSearchButton()">
-            <label class="control-label" for="simplifiedSearch">Advanced Search</label></button>
-        </div>
-        
+    <h3 class="page-heading" style="text-align: center">Glycoprotein Search </h3>  
+    <!-- Start Simplified Search-->    
+    <div class="container">
         <div class="row">
-            <div class="col-sm-3 gg-form-group">
-                <select>
-                    <option value="select">Any</option>
-                </select>
-            </div>
-            <div class="col-sm-6 gg-form-group">
-                <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Glycoprotein">
-            </div>
-            <div class="col-sm-3 text-right"> 
-            <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
-            style="margin: -5px 0 20px;">
-            </div>
-        </div>        
-    </div> <!--    End Simplified Search Div-->
-    <section> <!--   Vidios for Simplified Search   -->
-        <div class="row">
-            <div class="container text-center" >
-                <div class="col-sm-4">
-                    <h4>Simplified Search</h4>
-                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Advanced Search</h4>
-                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="col-md-12">
+                <div class="tabbable-panel">
+                    <div class="tabbable-line">
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                Simplified Search </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                Advanced Search </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_3" data-toggle="tab">
+                                Tutorial </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content container">
+                            <!-- Start Tab 1 Simplified search -->
+                            <div class="tab-pane fade in active" id="tab_default_1">
+                                <div class="container"> 
+                                    <div class="row simplified-search">
+                                        <div class="col-sm-3 gg-form-group">
+                                            <select id="simplifiedCategory">
+                                                <option value="select">Select type</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-7 gg-form-group">
+                                            <input type="text" name="simplifiedSearch" class="form-control" id="simplifiedSearch" placeholder="Search for Glycan">
+                                        </div>
+                                        <div class="col-sm-2 gg-form-group text-right"> 
+                                        <input type="button" class="btn-lg btn-primary" value="Search" onclick="searchGlycanSimple()">
+                                        </div>
+                                        <div id="search-simple-display"></div>
+                                    </div>
+                                </div> <!--    End Simplified Search Div-->
+                            </div> <!--  End first Tab -->
 
-                </div>
-                <div class="col-sm-4">
-                    <h4>Advanced Search</h4>
-                    <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
-                </div>    
-            </div>    
-        </div>
-        <div style="margin-bottom: 30px;"> </div>
-    </section>
-</div> <!--   End Simplified Search    -->
+                            <!--Start Tab 2 Advanced Search-->
+                            <div class="tab-pane fade in" id="tab_default_2">
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="advancedSearch-container">
+                                            <!-- Top Button-->
+                                            <div class="row"> 
+                                               <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
+                                                style="float: right; margin: -5px 15px 10px 0;">
+                                            </div>
+                                            <!-- UniProt Accession -->
+                                            <div class="row top-table-margin">
+                                                <label class="control-label col-sm-4" for="protein">
+                                                    <span>
+                                                        <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> UniProt Accession:</label>
+
+                                                <div class="col-sm-8 gg-form-group">
+                                                    <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein" onkeyup="validateProteinAcc(this)">
+
+                                                    <div class="gg-text-example">Example: P14210-1</div>
+                                                    <h6 id='proteinAccMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- RefSeq Accession -->
+                                            <div class="row">
+                                                <label class="control-label col-sm-4" for="refseq">
+                                                    <span>
+                                                        <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.ncbi.nlm.nih.gov/refseq/)">
+
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> RefSeq Accession:</label>
+
+                                                <div class="col-sm-8 gg-form-group">
+                                                    <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein" onkeyup="validateRefAcc(this)">
+                                                    <div class="gg-text-example">Example: XP_016867587.1</div>
+                                                    <h6 id='refAccMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Chemical Mass-->
+                                            <div class="gg-form-group row">
+                                                <div>
+                                                    <label class="control-label col-sm-4">
+                                                        <span>
+                                                            <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
+                                                                <i class="far fa-question-circle help-sign"></i>
+                                                            </a>
+                                                        </span>Chemical Mass:</label>
+                                                </div>
+                                                <div class="col-sm-10 row glycanSizeMargin">
+                                                    <!-- First range-->
+                                                    <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
+                                                        <div class="sliderbox">
+                                                            <div class="sliderbox-slider" id="sliderbox-slider"></div>
+                                                            <div class="row">
+                                                                <span  class="min-label"><strong>Min</strong></span>
+                                                                <input class="sliderbox-input-min form-control">
+                                                                <span class="max-label"><strong>Max</strong></span>
+                                                                <input class="sliderbox-input-max form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Organism-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="organism">
+                                                    <span>
+                                                        <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an Organism that makes your protein(s)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Organism:</label>
+                                                <div class="col-sm-8">
+                                                    <select class="organism" id="organism">
+                                                        <option value="0">Select Organism</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Protein name-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="protein_name">
+                                                    <span>
+                                                        <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of your protein">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Protein Name:</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
+                                                    <div class="gg-text-example">Example: Hepatocyte growth factor</div>
+                                                    <h6 id='proteinNameMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!-- Gene Name-->
+                                            <div class="gg-form-group row">
+                                                <label class="control-label col-sm-4" for="gene_name">
+                                                    <span>
+                                                        <a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of the Gene encoding your protein">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Gene Name:</label>
+
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
+                                                    <div class="gg-text-example">Example: HGF</div>
+                                                    <h6 id='geneNameMsg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!--Interacting Glycan-->
+                                            <div class="gg-form-group row" id="Glycanid">
+                                                <label class="control-label col-sm-4" for="glycan_id">
+                                                    <span>
+                                                        <a href="javascript://" title="Interacting Glycan" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s)">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Interacting Glycan:</label>
+
+                                                <div class="col-md-4" id="glycanrow">
+                                                    <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Enter the GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                                                    <div class="gg-text-example">Example: G88495BI </div>
+                                                    <h6 id='glycanAccMsg' class="validation-message"></h6>
+                                                </div>
+
+                                                <!-- Select Interaction Type-->
+                                                <div class="col-md-4" id="glycanrelationrow">
+                                                    <select class="form-control glycan_relation" id="relation">
+                                                        <option value="">Select Interaction Type</option>
+                                                        <!--<option value="covalent">Covalent</option>-->
+                                                        <!--<option value="non-covalent">Non-covalent</option>-->
+                                                        <!--<option value="all">All</option>-->
+                                                        <option value="attached">Covalent</option>
+                                                        <option value="binding">Non-covalent</option>
+                                                        <option value="any">All</option>
+                                                        <div class="gg-text-example">Choose Glycan Relation</div>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--Glycosylated amino acid-->
+                                            <div class="gg-form-group row">
+                                                <label style="margin-top: 30px;" class="control-label col-sm-4" for="glycosylated_aa">
+                                                    <span>
+                                                        <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Click to highlight multiple selections for Glycosylated Amino Acid">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Glycosylated Amino Acid: </label>
 
 
-<!--Start Advanced Search-->
-<div id="advancedSearch" class="container advancedSearchMarginTop ">
-    <!--    Left Search Section     -->
-    <div class="advancedSearch-container col-sm-8">
-        <!-- Advanced Top bbutton-->
-        <div class="row text-right">
-            <button class="btn btn-link" onclick="hideAdvSearchButton()">
-            <label class="control-label col-sm-3" for="simplifiedSearch">Simplified Search</label></button>
-        </div>
-        <!-- Top Button-->
-        <div class="row"> 
-           <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
-            style="float: right; margin: -5px 15px 10px 0;">
-        </div>
-        <!-- UniProt Accession -->
-        <div class="row top-table-margin">
-            <label class="control-label col-sm-4" for="protein">
-                <span>
-                    <a href="javascript://" title="UniProt Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProt Accession of your protein (see https://www.uniprot.org/)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> UniProt Accession:</label>
+                                                <div class="col-sm-8">
+                                                    <h6 id=aminos>Click to Highlight Multiple Selections</h6>
+                                                    <select id="glycosylated_aa" class="glycosylated_aa" multiple="true">
+                                                        <option value="R">Arginine - Arg - R</option>
+                                                        <option value="K">Lysine - Lys - K</option>
+                                                        <option value="D">Aspartic acid - Asp - D</option>
+                                                        <option value="E">Glutamic acid - Glu - E</option>
+                                                        <option value="Q">Glutamine - Gln - Q</option>
+                                                        <option value="N">Asparagine - Asn - N</option>
+                                                        <option value="H">Histidine - His - H</option>
+                                                        <option value="S">Serine - Ser - S</option>
+                                                        <option value="T">Threonine - Thr - T</option>
+                                                        <option value="Y">Tyrosine - Tyr - Y</option>
+                                                        <option value="C">Cysteine - Cys - C</option>
+                                                        <option value="W">Tryptophan - Trp - W</option>
+                                                        <option value="A">Alanine - Ala - A</option>
+                                                        <option value="I">Isoleucine - Ile - I</option>
+                                                        <option value="L">Leucine - Leu - L</option>
+                                                        <option value="M">Methionine - Met - M</option>
+                                                        <option value="F">Phenylalanine - Phe - F</option>
+                                                        <option value="V">Valine - Val - V</option>
+                                                        <option value="P">Proline - Pro - P</option>
+                                                        <option value="G">Glycine - Gly - G</option>
+                                                    </select>
+                                                    <div class="gg-text-example">Example: Asparagine or Asn or N</div>
+                                                </div>
+                                            </div>
+                                            <!-- Protein or Peptide Sequence -->
+                                            <div class="gg-form-group2 row">
+                                                <label class="control-label col-sm-4" for="sequences">
+                                                    <span>
+                                                        <a href="javascript://" title="Protein or Peptide Sequence" data-toggle="popover" data-placement="left"
+                                                            data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Protein or Peptide Sequence:</label>
 
-            <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProt Accession of your protein" onkeyup="validateProteinAcc(this)">
+                                                <div class="col-sm-8" id="sequence_type">
+                                                    <select class="form-control sequence_type" id="type">
+                                                        <option value="">Select Sequence Type</option>
+                                                        <!--<option value="blast">Blast</option>-->
+                                                        <option value="exact">Exact</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <form name="form1" action="#">
+                                                        <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                                                    </form>
+                                                    <div style="margin-top: -10px;" class="gg-text-example">Example: MWVTKLLPA</div>
+                                                    <h6 id='msg' class="validation-message"></h6>
+                                                </div>
+                                            </div>
+                                            <!--Pathway ID-->
+                                            <div class="gg-form-group2 row">
+                                                <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
+                                                    <span>
+                                                        <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Pathway ID from KEGG or Reactome.">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Pathway ID:</label>
 
-                <div class="gg-text-example">Example: P14210-1</div>
-                <h6 id='proteinAccMsg' class="validation-message"></h6>
-            </div>
-        </div>
-       <!-- RefSeq Accession -->
-        <div class="row">
-            <label class="control-label col-sm-4" for="refseq">
-                <span>
-                    <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.ncbi.nlm.nih.gov/refseq/)">
+                                                <div class="col-sm-8">
+                                                    <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathwayID(this)">
 
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> RefSeq Accession:</label>
+                                                    <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
+                                                    <label id='pathwayIDMsg' class="validation-message"></label>
+                                                </div>
+                                            </div>
+                                            <!-- Glycosylation Evidences-->
+                                            <div class="gg-form-group row" id="glycosylation_evidence_xx">
+                                                <label class="control-label col-sm-4" for="organism">
+                                                    <span>
+                                                        <a href="javascript://" title="Glycosylation Evidences Type" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
+                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        </a>
+                                                    </span> Glycosylation Evidence Type</label>
 
-            <div class="col-sm-8 gg-form-group">
-                <input type="text" name="ProteinID" class="form-control protein" id="refseq" placeholder="Enter the RefSeq Accession of your protein" onkeyup="validateRefAcc(this)">
-                <div class="gg-text-example">Example: XP_016867587.1</div>
-                <h6 id='refAccMsg' class="validation-message"></h6>
-            </div>
-        </div>
-        <!-- Chemical Mass-->
-        <div class="gg-form-group row">
-            <div>
-                <label class="control-label col-sm-4">
-                    <span>
-                        <a href="javascript://" title="Chemical Mass" data-toggle="popover" data-placement="left" data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
-                            <i class="far fa-question-circle help-sign"></i>
-                        </a>
-                    </span>Chemical Mass:</label>
-            </div>
-            <div class="col-sm-10 row glycanSizeMargin">
-                <!-- First range-->
-                <div style="margin-top: -35px;" class="col-xs-8 col-sm-offset-6 gg-form-group slider-alignment" id="slider">
-                    <div class="sliderbox">
-                        <div class="sliderbox-slider" id="sliderbox-slider"></div>
-                        <div class="row">
-                            <span  class="min-label"><strong>Min</strong></span>
-                            <input class="sliderbox-input-min form-control">
-                            <span class="max-label"><strong>Max</strong></span>
-                            <input class="sliderbox-input-max form-control">
-                        </div>
+                                                <div class="col-sm-8">
+                                                    <select id="glycosylation_evidence" class="form-control">
+                                                        <option value="">Select Glycosylation Evidence Type</option>
+                                                        <option value="both">Both</option>
+                                                        <option value="reported">Reported</option>
+                                                        <option value="predicted">Predicted</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Bottom button-->
+                                            <div class="row"> 
+                                                <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
+                                                style="float: right; margin: 10px 15px 20px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!--   End Tab 2 Advanced search-->
+                            <!-- Start Tab Tutorial -->
+                            <div class="tab-pane fade in" id="tab_default_3">
+                                <div class="container"> 
+                                    <div class="row tutorial">
+                                        <div class="row">
+                                            <div class="tutorialSection">
+                                                <div class="text-left2 videoWrapperLeft col-sm-5">
+                                                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <h4 class="media-heading">Simplified Search</h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row"> 
+                                            <div class="tutorialSection">
+
+                                                <div class="col-sm-7">
+                                                    <h4 class="media-heading">Advanced Search</h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                </div>
+                                                <div class="videoWrapperRight col-sm-5 text-right">
+                                                    <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="tutorialSection">
+                                                <div class="videoWrapperLeft col-sm-5">
+                                                    <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
+                                                </div>
+                                                <div class="col-sm-7">
+                                                    <h4 class="media-heading">Advanced Search</h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores error molestiae quos magnam cumque, ipsa odio nostrum quaerat magni et quis nam quam, laborum blanditiis. Maxime molestiae adipisci eligendi.</p>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere assumenda excepturi dolor quibusdam sunt accusantium non mollitia, veniam ad rerum quod magni earum quo omnis eveniet obcaecati pariatur, accusamus, consectetur!</p>
+                                                </div>
+                                            </div>           
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div> <!--  End Tab 3 Tutorial -->
+                       </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Organism-->
-        <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="organism">
-                <span>
-                    <a href="javascript://" title="Organism" data-toggle="popover" data-placement="left" data-content="Click to select an Organism that makes your protein(s)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Organism:</label>
-            <div class="col-sm-8">
-                <select class="organism" id="organism">
-                    <option value="0">Select Organism</option>
-                </select>
-            </div>
-        </div>
-        <!-- Protein name-->
-        <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="protein_name">
-                <span>
-                    <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of your protein">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Protein Name:</label>
-
-            <div class="col-sm-8">
-                <input type="text" name="ProteinName" class="form-control protein_name" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
-                <div class="gg-text-example">Example: Hepatocyte growth factor</div>
-                <h6 id='proteinNameMsg' class="validation-message"></h6>
-            </div>
-        </div>
-        <!-- Gene Name-->
-        <div class="gg-form-group row">
-            <label class="control-label col-sm-4" for="gene_name">
-                <span>
-                    <a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of the Gene encoding your protein">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Gene Name:</label>
-
-            <div class="col-sm-8">
-                <input type="text" name="GeneName" class="form-control gene_name" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
-                <div class="gg-text-example">Example: HGF</div>
-                <h6 id='geneNameMsg' class="validation-message"></h6>
-            </div>
-        </div>
-        <!--Interacting Glycan-->
-        <div class="gg-form-group row" id="Glycanid">
-            <label class="control-label col-sm-4" for="glycan_id">
-                <span>
-                    <a href="javascript://" title="Interacting Glycan" data-toggle="popover" data-placement="left" data-content="Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s)">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Interacting Glycan:</label>
-
-            <div class="col-md-4" id="glycanrow">
-                <input type="text" name="Glycan" class="form-control motif" id="glycan_id" placeholder="Enter the GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
-                <div class="gg-text-example">Example: G88495BI </div>
-                <h6 id='glycanAccMsg' class="validation-message"></h6>
-            </div>
-
-            <!-- Select Interaction Type-->
-            <div class="col-md-4" id="glycanrelationrow">
-                <select class="form-control glycan_relation" id="relation">
-                    <option value="">Select Interaction Type</option>
-                    <!--<option value="covalent">Covalent</option>-->
-                    <!--<option value="non-covalent">Non-covalent</option>-->
-                    <!--<option value="all">All</option>-->
-                    <option value="attached">Covalent</option>
-                    <option value="binding">Non-covalent</option>
-                    <option value="any">All</option>
-                    <div class="gg-text-example">Choose Glycan Relation</div>
-                </select>
-            </div>
-        </div>
-        <!--Glycosylated amino acid-->
-        <div class="gg-form-group row">
-            <label style="margin-top: 30px;" class="control-label col-sm-4" for="glycosylated_aa">
-                <span>
-                    <a href="javascript://" title="Glycosylated Amino Acid" data-toggle="popover" data-placement="left" data-content="Click to highlight multiple selections for Glycosylated Amino Acid">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Glycosylated Amino Acid: </label>
-
-
-            <div class="col-sm-8">
-                <h6 id=aminos>Click to Highlight Multiple Selections</h6>
-                <select id="glycosylated_aa" class="glycosylated_aa" multiple="true">
-                    <option value="R">Arginine - Arg - R</option>
-                    <option value="K">Lysine - Lys - K</option>
-                    <option value="D">Aspartic acid - Asp - D</option>
-                    <option value="E">Glutamic acid - Glu - E</option>
-                    <option value="Q">Glutamine - Gln - Q</option>
-                    <option value="N">Asparagine - Asn - N</option>
-                    <option value="H">Histidine - His - H</option>
-                    <option value="S">Serine - Ser - S</option>
-                    <option value="T">Threonine - Thr - T</option>
-                    <option value="Y">Tyrosine - Tyr - Y</option>
-                    <option value="C">Cysteine - Cys - C</option>
-                    <option value="W">Tryptophan - Trp - W</option>
-                    <option value="A">Alanine - Ala - A</option>
-                    <option value="I">Isoleucine - Ile - I</option>
-                    <option value="L">Leucine - Leu - L</option>
-                    <option value="M">Methionine - Met - M</option>
-                    <option value="F">Phenylalanine - Phe - F</option>
-                    <option value="V">Valine - Val - V</option>
-                    <option value="P">Proline - Pro - P</option>
-                    <option value="G">Glycine - Gly - G</option>
-                </select>
-                <div class="gg-text-example">Example: Asparagine or Asn or N</div>
-            </div>
-        </div>
-        <!-- Protein or Peptide Sequence -->
-        <div class="gg-form-group2 row">
-            <label class="control-label col-sm-4" for="sequences">
-                <span>
-                    <a href="javascript://" title="Protein or Peptide Sequence" data-toggle="popover" data-placement="left"
-                        data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Protein or Peptide Sequence:</label>
-
-            <div class="col-sm-8" id="sequence_type">
-                <select class="form-control sequence_type" id="type">
-                    <option value="">Select Sequence Type</option>
-                    <!--<option value="blast">Blast</option>-->
-                    <option value="exact">Exact</option>
-                </select>
-            </div>
-            <div class="col-sm-8">
-                <form name="form1" action="#">
-                    <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
-                </form>
-                <div style="margin-top: -10px;" class="gg-text-example">Example: MWVTKLLPA</div>
-                <h6 id='msg' class="validation-message"></h6>
-            </div>
-        </div>
-        <!--Pathway ID-->
-        <div class="gg-form-group2 row">
-            <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
-                <span>
-                    <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Pathway ID from KEGG or Reactome.">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Pathway ID:</label>
-
-            <div class="col-sm-8">
-                <input type="text" name="pathway" class="form-control pathway" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathwayID(this)">
-
-                <div class="gg-text-example">KEGG Example: hsa:3082 <br>Reactome Example: R-HSA-114608</div>
-                <label id='pathwayIDMsg' class="validation-message"></label>
-            </div>
-        </div>
-        <!-- Glycosylation Evidences-->
-        <div class="gg-form-group row" id="glycosylation_evidence_xx">
-            <label class="control-label col-sm-4" for="organism">
-                <span>
-                    <a href="javascript://" title="Glycosylation Evidences Type" data-toggle="popover" data-placement="left" data-content="Click to select Glycosylation Evidence Type">
-                        <i class="far fa-question-circle help-sign"></i>
-                    </a>
-                </span> Glycosylation Evidence Type</label>
-
-            <div class="col-sm-8">
-                <select id="glycosylation_evidence" class="form-control">
-                    <option value="">Select Glycosylation Evidence Type</option>
-                    <option value="both">Both</option>
-                    <option value="reported">Reported</option>
-                    <option value="predicted">Predicted</option>
-                </select>
-            </div>
-        </div>
-        <!-- Bottom button-->
-        <div class="row"> 
-            <input type="button" class="btn-lg btn-primary" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()"
-            style="float: right; margin: 10px 15px 20px;">
-        </div>
-    </div> <!-- End Left Search section -->
-    <!-- Videos Advanced search -->
-    <div class="row">
-        <div class="col-sm-4 text-center">
-            <div class="panel panel-default thumbnail"> 
-                <h4>Simplified Search</h4>
-                <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-sm-4 text-center">
-            <div class="panel panel-default thumbnail">
-                <h4>Advanced Search</h4>
-                <iframe width="340" height="290" src="https://www.youtube.com/embed/ply1RPwQPvk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-sm-4 text-center">
-            <div class="panel panel-default thumbnail"> 
-                <h4 >Advanced Search</h4>
-                <iframe src="//www.slideshare.net/slideshow/embed_code/key/1Fxs44OyqvR4Hg" width="340" height="290" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> 
-            </div>
-        </div>    
-    </div><!--End Right section Tutorial-->
-        <div style="margin-bottom:2 30px;"> </div>
-<!--
-    </section>
     </div>
--->
-</div> <!--End edvanced search-->
+
+   
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
