@@ -229,34 +229,19 @@ Sliderbox1.prototype.handler = function (target) {
  * @param {numeric} ddl1 - User selected glycan type
  * @param {numeric} ddl2 - Glycan sub type
  */
-function hideSubtype() {
-    var x = document.getElementById("ddl2");
-    var y = document.getElementById("ddl");
-    x.style.display = "none";
-    y.style.display = "block";
-}
-
-function showSubtype() {
-    var x = document.getElementById("ddl");
-    var y = document.getElementById("ddl2");
-    x.style.display = "none";
-    y.style.display = "block";
-}
 
 function configureDropDownLists(ddl1, ddl2, callback) {
     var glyan_type_name = ddl1.value;
+    // Hides Subtype by default and shows glycan type when it's selected
     var subtypeDiv = document.getElementById("showSubtype");
         if (subtypeDiv.style.display = "block"){
             if (ddl1.value == ""){
                 subtypeDiv.style.display = "none";
-            }
-                
+            }         
         }
         else {
-            subtypeDiv.style.display = "block" ;
-        }
-    
-        
+            subtypeDiv.style.display = "block";
+        }     
 
     // clears existing options
     ddl2.options.length = 0;
