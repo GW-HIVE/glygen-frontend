@@ -4,6 +4,192 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 31 2018 - Gaurav Agarwal - added mutation table.
 
+// Object to hold highlight data in state
+var highlight = {};
+
+// [ { postion } ]
+function getGlycosylationHighlightData(glycosylationData, type) {
+    var result = [];
+    var positions = {};
+
+    for(var x = 0; x < glycosylationData.length; x++) {
+        if (!positions[glycosylationData[x].position] && (glycosylationData[x].type === type)) {
+            positions[glycosylationData[x].position] = true;
+
+            result.push({
+                start: glycosylationData[x].position,
+                length: 1
+            });
+        }
+    }
+
+    return result;
+}
+
+
+function getMutationHighlightData(mutationData) {
+    var result = [];
+    var positions = {};
+
+    for(var x = 0; x < mutationData.length; x++) {
+        if (!positions[mutationData[x].start_pos]) {
+            positions[mutationData[x].start_pos] = true;
+
+            result.push({
+                start: mutationData[x].start_pos,
+                length: (mutationData[x].end_pos - mutationData[x].start_pos) + 1
+            });
+        }
+    }
+
+    return result;
+}
+
+function isHighlighted(position, selection) {
+    var result = false;
+
+    for (var x = 0; x < selection.length; x ++) {
+        var start = selection[x].start;
+        var end = selection[x].start + selection[x].length - 1;
+
+        if ((start <= position) && (position <= end)) {
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+function buildHighlightData (sequence, highlightData) {
+    var result = [];
+
+    for(var x = 0; x < sequence.length; x++) {
+        var position = x + 1;
+
+        result.push({
+            character: sequence[x],
+            // true = highlight,
+            n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
+            o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
+            mutation: isHighlighted(position, highlightData.mutation)
+        })
+    }
+
+    return result;
+}
+
+function buildRowText(rowData) {
+    var text = [];
+
+    for (var x = 0; x < rowData.length; x++) {
+        text.push(rowData[x].character);
+    }
+
+    return text.join('');
+
+    // return rowData.map(function (row) {
+    //     return row.character;
+    // }).join('');
+}
+
+function buildRowHighlight(rowData, type) {
+    var highlight = [];
+    for (var x = 0; x < rowData.length; x++) {
+        // console.log(x, type, rowData[x][type]);
+        if (rowData[x][type]) {
+            highlight.push('<span class="highlight-highlight-area">&nbsp;</span>');
+        } else {
+            highlight.push('&nbsp;');
+        }
+    }
+    return highlight.join('');
+}
+
+
+
+// // var $conditionalInput = $('input.highlight-highlight-loaded');
+// var $checkInput = $('input[name="check"]');
+//
+// // $conditionalInput.hide();
+// $checkInput.on('click', function(){
+//     if ( $(this).is(':checked') )
+//         $('.highlight-highlight[data-type="mutation"]').show()
+//     else
+//         $('.highlight-highlight').hide()
+// });
+//  // $('.highlight-highlight').hide()
+//  // $('.highlight-highlight[data-type="mutation"]').show()
+
+function createHighlightRow(start, rowData) {
+    //        <div class="highlight-row">
+    //        <span class="highlight-line-number">    1 </span>
+    //        <span class="highlight-section">
+    //    <span class="highlight-text">MTEYKLVVVGAGGVGKSALTIQLIQNHFVDEYDPTIEDSYRKQVVIDGETCLLDILDTAG
+    //        </span>
+    //        <span class="highlight-highlight" data-type="mutation">&nbsp;&nbsp;<span class="highlight-highlight-area">&nbsp;&nbsp;&nbsp;</span></span>
+    //    <span class="highlight-highlight" data-type="glycosylation">
+    //
+    //        </span>
+    //        </span>
+    //        </div>
+    var $row = $('<div class="highlight-row"></div>');
+
+    $('<span class="highlight-line-number"></span>')
+        .text(("     " + (start + 1)).slice(-5) + ' ')
+        .appendTo($row);
+
+    var $section  = $('<span class="highlight-section"></span>');
+
+    $('<span class="highlight-text"></span>')
+        .html(buildRowText(rowData))
+        .appendTo($section);
+
+    $('<span class="highlight-highlight"></span>')
+        .attr('data-type', 'mutation')
+        .html(buildRowHighlight(rowData, 'mutation'))
+        .hide()
+        .appendTo($section);
+
+    $('<span class="highlight-highlight"></span>')
+        .attr('data-type', 'n_link_glycosylation')
+        .html(buildRowHighlight(rowData, 'n_link_glycosylation'))
+        .hide()
+        .appendTo($section);
+
+    $('<span class="highlight-highlight"></span>')
+        .attr('data-type', 'o_link_glycosylation')
+        .html(buildRowHighlight(rowData, 'o_link_glycosylation'))
+        .hide()
+        .appendTo($section);
+
+    $section.appendTo($row);
+
+    return $row;
+}
+
+function createHighlightUi (highlightData, perLine) {
+ // <div class="highlight-display">
+ // ...
+ //        </div>;
+
+    var $ui = $('<div class="highlight-display"></div>');
+
+    // var output = '';
+
+    for(var x = 0; x < highlightData.length; x += perLine) {
+        var rowData = highlightData.slice(x, x + perLine - 1);
+
+        var $row = createHighlightRow(x, rowData);
+
+        $ui.append($row);
+
+    }
+
+
+    $('#sequnce_highlight').append($ui);
+}
+
 var uniprot_canonical_ac;
 /**
  * Handling a succesful call to the server for details page
@@ -60,8 +246,8 @@ function ajaxSuccess(data) {
     else {
         activityTracker("user", data.uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
-        var string = data.sequence.sequence;
-        data.sequence.sequence = formatSequence(string);
+        var originalSequence = data.sequence.sequence;
+        data.sequence.sequence = formatSequence(originalSequence);
         for (var i = 0; i < data.isoforms.length; i++) {
             // assign the newly result of running formatSequence() to replace the old value
             data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
@@ -144,7 +330,12 @@ function ajaxSuccess(data) {
 
         data.itemsGlycosyl = [];
         data.itemsGlycosyl2 = [];
+
         if (data.glycosylation) {
+
+            // Get data for sequence highlight
+            highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
+            highlight.n_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'N-linked');
 
             for (var i = 0; i < data.glycosylation.length; i++) {
 
@@ -226,6 +417,9 @@ function ajaxSuccess(data) {
 
         // filling in mutation data
         if (data.mutation) {
+            // Get data for sequence highlight
+            highlight.mutation = getMutationHighlightData(data.mutation);
+
             for (var i = 0; i < data.mutation.length; i++) {
                 var mutate = data.mutation[i];
                 itemsMutate.push({
@@ -241,9 +435,16 @@ function ajaxSuccess(data) {
             }
         }
 
+        var sequenceData = buildHighlightData(originalSequence, highlight);
+        console.log(sequenceData);
+
 
         $container.html(html);
-
+        if(window.innerWidth <= 900) {
+            createHighlightUi(sequenceData, 10);
+        } else {
+            createHighlightUi(sequenceData, 60);
+        }
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -568,6 +769,36 @@ function getParameterByName(name, url) {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+// function seq_n_lin_change(element)
+// {
+//     if (element.checked) {
+//         $('[data-type="n_link_glycosylation"]').show();
+//     } else {
+//         $('[data-type="n_link_glycosylation"]').hide();
+//     }
+// }
+// function seq_o_lin_change(element){
+//     checkUncheck('o_link_glycosylation', element);
+//
+//     // $('[data-type="o_link_glycosylation"]').toggle(element.checked);
+//
+// }
+//
+// function seq_muta_change(element){
+//     checkUncheck('mutation', element);
+// }
+
+function checkUncheck(type, element){
+    var $elements = $('[data-type="' + type + '"]');
+
+    if (element.checked) {
+        $elements.show();
+    } else {
+        $elements.hide();
+    }
+
 }
 
 $(document).ready(function () {
