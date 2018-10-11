@@ -28,215 +28,100 @@ function addCommas(nStr) {
 }
 
 
-/**
- * function aminoLetter is a to select value of text-input
- * @param {string} strings of characters
- * @returns {number} if matches returns true or not false
- */
 
-function aminoLetter(textareatxt) {
-    var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
 
-    var validLength = (textareatxt.value.length <= 3356);
-    var validCharacters = textareatxt.value.match(letters);
-
-    var validEntry = (validLength && validCharacters);
-
-    document.getElementById("msg").innerHTML = "";
-    document.getElementById("msg").innerHTML += (validCharacters ? '' : "Enter a valid amino seq.");
-    document.getElementById("msg").innerHTML += (validLength ? '' : " Entry is too long - max length ");
-
-    return validEntry;
-
-    // if (validCharacters) {
-    //     document.getElementById("msg").innerHTML = "";
-    //
-    // } else {
-    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
-    //
-    // }
-    //
-    // if (validLength) {
-    //     document.getElementById("msg").innerHTML = "";
-    //
-    // } else {
-    //     document.getElementById("msg").innerHTML = "Enter a valid amino seq.";
-    //
-    // }
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
 }
 
 
-/** Protein field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the protein ID's
- *
- */
 
 
-$("#protein").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-$("#refseq").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("refseq_ac", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 5);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-/** protein_name field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the protein_name.
- *
- */
-$("#protein_name").autocomplete({
-    source: function (request, response) {
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("protein_name", request.term);
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-/** gene_name field on change detect and suggest auto complete options from retrieved Json
- * @proteinjson - forms the JSON to post
- * @data-returns the gene_name.
- *
- */
-
-$("#gene_name").autocomplete({
-    source: function (request, response) {
-
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("gene_name", request.term);
-
-
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
-
-
-$("#pathway").autocomplete({
-    source: function (request, response) {
-
-        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("pathway_id", request.term);
-
-
-        $.getJSON(queryUrl, function (suggestions) {
-            suggestions.length = Math.min(suggestions.length, 10);
-
-            response(suggestions);
-        });
-    },
-    minLength: 1,
-    select: function (event, ui) {
-        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-    }
-});
 
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
  */
 var searchInitValues;
- var mass_max;
- var mass_min;
+var mass_max;
+var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
-        // max_selected_options: 10,
-        placeholder_text_multiple: "Choose Amino Acid"
-    })
+            // max_selected_options: 10,
+            placeholder_text_multiple: "Choose Amino Acid"
+        })
         .bind("chosen:maxselected2", function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
-        $.ajax({
-            dataType: "json",
-            url: getWsUrl("search_init_protein"),
-            timeout: getTimeout("search_init_protein"),
-            error: searchInitFailure,
-            success: function (result) {
-                searchInitValues = result;
-        
-                var orgElement = $(".organism").get(0);
-                createOption(orgElement, result.organism[0].name, result.organism[0].id);
-                createOption(orgElement, result.organism[1].name, result.organism[1].id);
-                var mass_max = result.protein_mass.max;
-                var mass_min = result.protein_mass.min;
-                // mass(mass_min, mass_max);
-                // check for ID to see if we need to load search values
-                // please do not remove this code as it is required prepopulate search values
-                var id = getParameterByName('id') || id;
-                if (id) {
-                    LoadProteinSearchvalues(id);
-                }
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("search_init_protein"),
+        timeout: getTimeout("search_init_protein"),
+        error: searchInitFailure,
+        success: function (result) {
+            searchInitValues = result;
 
-                new Sliderbox({
-                    target: '.sliderbox',
-
-                    start: [ 435, 3906488.00 ], // Handle start position
-
-                    connect: true, // Display a colored bar between the handles
-                    behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-                    range: { // Slider can select '0' to '100'
-                        'min': mass_min,
-                        '1%':mass_max/1024,
-                        '10%': mass_max/512,
-                        '20%': mass_max/256,
-                        '30%': mass_max/128,
-                        '40%': mass_max/64,
-                        '50%': mass_max/32,
-                        '60%': mass_max/16,
-                        '70%': mass_max/8,
-                        '80%': mass_max/4,
-                        '90%': mass_max/2,
-                        'max': mass_max
-                        // 'min': 435,
-                        // 'max': 3906488.00
-                    }
-                });
-
-
+            var orgElement = $("#species").get(0);
+            result.organism.sort(sortDropdown);
+            for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
             }
-        });
+            // Sorting Simple search 
+            var categoryType = $("#simplifiedCategory").get(0);
+            result.simple_search_category.sort(sortDropdownSimple);
+            for (var x = 0; x < result.simple_search_category.length; x++) {
+                createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
+            }
+
+            var mass_max = result.protein_mass.max;
+            var mass_min = result.protein_mass.min;
+            // mass(mass_min, mass_max);
+            // check for ID to see if we need to load search values
+            // please do not remove this code as it is required prepopulate search values
+            var id = getParameterByName('id') || id;
+            if (id) {
+                LoadProteinSearchvalues(id);
+            }
+
+            new Sliderbox({
+                target: '.sliderbox',
+
+                start: [435, 3906488.00], // Handle start position
+
+                connect: true, // Display a colored bar between the handles
+                behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+                range: { // Slider can select '0' to '100'
+                    'min': mass_min,
+                    '1%': mass_max / 1024,
+                    '10%': mass_max / 512,
+                    '20%': mass_max / 256,
+                    '30%': mass_max / 128,
+                    '40%': mass_max / 64,
+                    '50%': mass_max / 32,
+                    '60%': mass_max / 16,
+                    '70%': mass_max / 8,
+                    '80%': mass_max / 4,
+                    '90%': mass_max / 2,
+                    'max': mass_max
+                    // 'min': 435,
+                    // 'max': 3906488.00
+                }
+            });
 
 
-///New slider
+        }
+    });
 
-    Sliderbox = function(options) {
+
+    ///New slider
+
+    Sliderbox = function (options) {
 
         this.options = options;
 
@@ -244,7 +129,7 @@ $(document).ready(function () {
 
     };
 
-    Sliderbox.prototype.init = function() {
+    Sliderbox.prototype.init = function () {
 
         var box = document.querySelectorAll(this.options.target),
             len = box.length,
@@ -258,7 +143,7 @@ $(document).ready(function () {
 
     };
 
-    Sliderbox.prototype.handler = function(target) {
+    Sliderbox.prototype.handler = function (target) {
 
         var slider = target.querySelector('.sliderbox-slider'),
             inpMin = target.querySelector('.sliderbox-input-min'),
@@ -266,22 +151,21 @@ $(document).ready(function () {
 
         noUiSlider.create(slider, this.options);
 
-        slider.noUiSlider.on('update', function( values, handle ) {
-            if ( handle ) {
+        slider.noUiSlider.on('update', function (values, handle) {
+            if (handle) {
                 inpMax.value = addCommas(parseInt(values[handle]));
             } else {
                 inpMin.value = addCommas(parseInt(values[handle]));
             }
         });
 
-        target.addEventListener('change', function(e) {
+        target.addEventListener('change', function (e) {
 
             if (e.target === inpMin) {
 
                 slider.noUiSlider.set([e.target.value]);
 
-            }
-            else {
+            } else {
 
                 slider.noUiSlider.set([null, e.target.value]);
 
@@ -291,37 +175,8 @@ $(document).ready(function () {
 
     };
 
-//
+    //
 });
-
-/** Mass range function
- * @param {numeric} mass_min - minimum value of the mass range
- * @param {numeric} mass_max - maximum value of the mass range
- */
-// function mass(mass_min, mass_max) {
-//     var nonLinearSlider = document.getElementById('slider');
-//     noUiSlider.create(nonLinearSlider, {
-//         connect: true,
-//         behaviour: 'tap',
-//
-//         start: [mass_min, mass_max],
-//         range: {
-//             'min': mass_min,
-//             'max': mass_max
-//         }
-//     });
-//     // nonLinearSlider.noUiSlider.set([mass_min, mass_max]);
-//     var nodes = [
-//         document.getElementById('lower-value'), // 0
-//         document.getElementById('upper-value') // 1
-//     ];
-//     // Display the slider value and how far the handle moved
-//     // from the left edge of the slider.
-//     nonLinearSlider.noUiSlider.on('update', function (values, handle) {
-//         nodes[handle].innerHTML = addCommas(values[handle]);
-//     });
-//
-// }
 
 function createOption(ddl, text, value) {
     var opt = document.createElement('option');
@@ -336,36 +191,20 @@ function createOption(ddl, text, value) {
 function ajaxProteinSearchSuccess() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
-    var organism = $("#organism").val();
+    var query_type = "search_protein";
+    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get(0);
+    var selected_species = document.getElementById("species");
+    var organism = {
+        "id": parseInt(selected_species.value),
+        "name": selected_species.options[selected_species.selectedIndex].text
+    };
     var uniprot_id = $("#protein").val();
     var refseq_id = $("#refseq").val();
-    var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
-    var mass_min = mass_slider[0];
-    var mass_max = mass_slider[1];
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val().replace(/\n/g, "");
-
-    var formObject = {
-        operation: "AND",
-        query_type: "search_protein",
-        tax_id: organism ? parseInt(organism) : '',
-        uniprot_canonical_ac: uniprot_id,
-        refseq_ac: refseq_id,
-        mass: { "min": parseInt(mass_min),
-            "max": parseInt(mass_max)
-        },
-        protein_name: protein_name,
-        gene_name: gene_name,
-        pathway_id: pathway_id,
-        sequence: {
-            type: "exact",
-            aa_sequence: sequence
-        },
-
-    };
+    var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name, protein_name, pathway_id, sequence)
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -378,7 +217,7 @@ function ajaxProteinSearchSuccess() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "no result found for "+json);
+                activityTracker("error", "", "no result found for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -404,7 +243,45 @@ function ajaxProteinSearchSuccess() {
     // });
 }
 
+function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
+    input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
 
+    var sequences = {}
+    if (input_sequence) {
+        sequences = {
+            "type": "exact",
+            "aa_sequence": input_sequence
+        }
+
+    }
+    var organisms = {
+        "id": 0,
+        "name": "All"
+    }
+
+    if (input_organism.id !== "0") {
+        organisms.id = input_organism.id;
+        organisms.name = input_organism.name;
+    }
+
+
+    var formjson = {
+        "operation": "AND",
+        query_type: input_query_type,
+        mass: {
+            "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
+        },
+        sequence: sequences,
+        organism: organisms,
+        refseq_ac: input_refseq_id,
+        protein_name: input_protein_name,
+        gene_name: input_gene_name,
+        pathway_id: input_pathway_id,
+        uniprot_canonical_ac: input_protein_id
+    };
+    return formjson;
+}
 // to resizing choosen field
 
 $(window).on('resize', function () {
@@ -421,3 +298,63 @@ $(window).on('resize', function () {
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
+
+/* ---------------------- 
+    Simplified search 
+------------------------- */
+
+/**
+ * sorting drop down list in simplified search page.
+ * @author Tatiana Williamson
+ * @date October 11, 2018
+ */
+function sortDropdownSimple(c, d) {
+    if (c.id < d.id) {
+        return -1;
+    } else if (d.id < c.id) {
+        return 1;
+    }
+    return 0;
+}
+
+function searchProteinSimple() {
+    // Get values from form fields
+    var query_type = "protein_search_simple";
+    var term_category = document.getElementById("simplifiedCategory").value;
+    var term = document.getElementById("simplifiedSearch").value;
+    var formObjectSimple = searchjsonSimpleP(query_type, term_category, term);
+    var json = "query=" + JSON.stringify(formObjectSimple);
+    // call web services 
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("protein_search_simple"),
+        data: json,
+        timeout: getTimeout("search_simple_protein"),
+        error: ajaxSearchFailure,
+        success: function (results) {
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
+                // activityTracker("error", "", results.error_code);
+                activityTracker("error", "", results.error_code + " for " + json);
+                $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
+                $('#loading_image').fadeOut();
+            } else {
+                window.location = './protein_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
+            }
+        }
+    });
+}
+//formjason from form submit 
+function searchjsonSimpleP(input_query_type, input_category, input_term) {
+    var formjsonSimple = {
+        "operation": "AND",
+        query_type: input_query_type,
+        term: input_term,
+        term_category: input_category
+    };
+    return formjsonSimple;
+}

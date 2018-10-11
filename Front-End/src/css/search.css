@@ -7,6 +7,11 @@ input[type=text], select, textarea {
     border: 1px solid #ddd;
     box-sizing: border-box;
     resize: vertical;
+    background-color: #f9f9f9;
+}
+
+input[type=text]:hover {
+    background-color: #f7f7f7;
 }
 
 label {
@@ -34,8 +39,8 @@ h6 {
 
 select {
     height: 35px;
-    background-color: #F4F4F4;
 }
+
 
 /* --------------------------
     Simplified Search 
@@ -62,27 +67,12 @@ select {
 
 .simplified-search select {
     height: 45px !important;
-    background-color: #fff;
-}
-
-
-.gg-container-simplified-searchGlycoproten {
-/*    width: 70%;*/
-    border-radius: 5px;
-    background-color: #dfe5ed;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 3%;
-    padding-right: 10%;
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 .advancedSearch-container {
     width: 90%;
     border-radius: 5px;
     border: 2px solid #dfe5ed;
-/*    background-color: #dfe5ed;*/
     padding: 40px 80px 20px; 
     margin: 0 auto;
     overflow: auto;
@@ -100,11 +90,7 @@ select {
     margin-top: 40px;
 }
 
-.top-table-margin {
-    margin-top: 30px;
-}
-
-.bottom-table-margin {
+.bottom-table-margin2 {
     margin-bottom: 30px;
 }
 
@@ -482,7 +468,7 @@ min-width: inherit;
 #glycanrelationrow{
     padding-right: -5px;
 }
-.form-control motif{
+.form-control motif {
     padding-left: -10px;
     margin-left: 0px;
 }

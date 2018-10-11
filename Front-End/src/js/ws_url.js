@@ -54,7 +54,7 @@ function getWsUrl(request, id, id1) {
             return ws_base_glycan + "/search";
             break;
 
-            case "glycan_search_simple":
+        case "glycan_search_simple":
             return ws_base_glycan + "/search_simple";
             break;
             
@@ -78,6 +78,9 @@ function getWsUrl(request, id, id1) {
         case "search_protein":
             return ws_base_protein + "/search";
             break;
+        case "protein_search_simple":
+            return ws_base_protein + "/search_simple";
+            break;
         case "protein_image_service":
             return ws_base_glycan + "/image/" + id;
             break;
@@ -87,9 +90,6 @@ function getWsUrl(request, id, id1) {
         case "protein_detail":
             return ws_base_protein + "/detail/" + id;
             break;
-
-
-
 
         //Typeahead webservices
 

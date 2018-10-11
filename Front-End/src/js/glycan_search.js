@@ -234,14 +234,13 @@ function configureDropDownLists(ddl1, ddl2, callback) {
     var glyan_type_name = ddl1.value;
     // Hides Subtype by default and shows glycan type when it's selected
     var subtypeDiv = document.getElementById("showSubtype");
-        if (subtypeDiv.style.display = "block"){
-            if (ddl1.value == ""){
-                subtypeDiv.style.display = "none";
-            }         
+    if (subtypeDiv.style.display = "block") {
+        if (ddl1.value == "") {
+            subtypeDiv.style.display = "none";
         }
-        else {
-            subtypeDiv.style.display = "block";
-        }     
+    } else {
+        subtypeDiv.style.display = "block";
+    }
 
     // clears existing options
     ddl2.options.length = 0;
@@ -410,19 +409,14 @@ function sortDropdown(a, b) {
     return 0;
 }
 
-
-function sortDropdownSimple(c, d) {
-    if (c.id < d.id) {
-        return -1;
-    } else if (d.id < c.id) {
-        return 1;
-    }
-    return 0;
-}
-
-
-
-
+/**
+ * hides the loading gif and displays the page after the search_init results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
 
 /* ---------------------- 
     Simplified search 
@@ -448,15 +442,15 @@ function searchGlycanSimple() {
     var query_type = "glycan_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
     var term = document.getElementById("simplifiedSearch").value;
-    var formObject1 = searchjson1(query_type, term_category, term);
-    var json = "query=" + JSON.stringify(formObject1);
+    var formObjectSimple = searchjsonSimple(query_type, term_category, term);
+    var json = "query=" + JSON.stringify(formObjectSimple);
     // call web services 
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search_simple"),
         data: json,
         timeout: getTimeout("search_simple_glycan"),
-        //error: ajaxSearchFailureSimple,
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -475,20 +469,12 @@ function searchGlycanSimple() {
     });
 }
 //formjason from form submit 
-function searchjson1(input_query_type, input_category, input_term) {
-    var formjson1 = {
+function searchjsonSimple(input_query_type, input_category, input_term) {
+    var formjsonSimple = {
         "operation": "AND",
         query_type: input_query_type,
         term: input_term,
         term_category: input_category
     };
-    return formjson1;
+    return formjsonSimple;
 }
-/**
- * hides the loading gif and displays the page after the search_init results are loaded.
- * @author Gaurav Agarwal
- * @date July 25, 2018
- */
-$(document).ajaxStop(function () {
-    $('#loading_image').fadeOut();
-});
