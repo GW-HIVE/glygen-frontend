@@ -1,5 +1,5 @@
 /**
- * This file just holds the base url to the Production server
+ * This file just holds the base url to the test server
  * @author Gaurav Agarwal
  */
 
