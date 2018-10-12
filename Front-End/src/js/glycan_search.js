@@ -233,10 +233,6 @@ function configureDropDownLists(ddl1, ddl2, callback) {
         }
     } else {
         subtypeDiv.style.display = "block";
-        //        var option = document.createElement("selectSubtype");
-        //        option.value = "";
-        //        option.text = "Select Glycan Subtype";
-        //        ddl2.add(option);
     }
 
     // clears existing options
@@ -433,7 +429,6 @@ function sortDropdownSimple(c, d) {
 }
 
 function searchGlycanSimple() {
-
     // Get values from form fields
     var query_type = "glycan_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
@@ -464,6 +459,12 @@ function searchGlycanSimple() {
         }
     });
 }
+
+
+function searchGlycanSimple() {
+
+}
+
 //formjason from form submit 
 function searchjsonSimple(input_query_type, input_category, input_term) {
     var formjsonSimple = {
