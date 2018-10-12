@@ -460,11 +460,6 @@ function searchGlycanSimple() {
     });
 }
 
-
-function searchGlycanSimple() {
-
-}
-
 //formjason from form submit 
 function searchjsonSimple(input_query_type, input_category, input_term) {
     var formjsonSimple = {
