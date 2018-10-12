@@ -27,12 +27,19 @@ public class excelToJson {
      * the name with path of the excel file. Path is relative to the jar file.
      */
     public static final String INPUT_FILE_NAME = "key-value.xlsx";
+    
     /**
      * the name with path of the resulting JSON file. Path is relative to the jar
      * file.
      */
     public static final String RESULT_FILE_NAME = "Front-End/src/content/key-value.json";
-
+    
+    /**
+     * When true the output will only be few essential columns, 
+     * else all the columns of the excel sheet are output.
+     */
+    public static final boolean ESSENTIAL_COLUMNS_ONLY = true;
+    
     /**
      * Column positions in excel.
      */
@@ -81,6 +88,9 @@ public class excelToJson {
     }
 
     /**
+     * Every column of every row is iterated over to get the cell values and are 
+     * appended to a String object in a json string format. 
+     * The output is eventually written to a json file.
      * 
      * @param args not being used here.
      */
@@ -116,11 +126,17 @@ public class excelToJson {
                         rowElements.add("\"" + s + "\"");
                     }
                 }
-                op += rowElements.get(KEY) + ": { \"display_name\": " + rowElements.get(DISPLAY_NAME)
-                        + ", \"abreviated_term\": " + rowElements.get(ABREVIATED_TERM) + ", \"property\": "
-                        + rowElements.get(PROPERTY) + ", \"tooltip\":" + rowElements.get(TOOL_TIP)
-                        + ", \"description\": " + rowElements.get(DESCRIPTION) + ", \"example\": "
-                        + rowElements.get(EXAMPLE) + ", \"data_type\": " + rowElements.get(DATA_TYPE) + " }";
+                if(ESSENTIAL_COLUMNS_ONLY) {
+                	op += rowElements.get(KEY) + ": { \"display_name\": " + rowElements.get(DISPLAY_NAME)
+                    + ", \"abreviated_term\": " + rowElements.get(ABREVIATED_TERM) + ", \"tooltip\":" + rowElements.get(TOOL_TIP)
+                    + " }";
+                } else {
+	                op += rowElements.get(KEY) + ": { \"display_name\": " + rowElements.get(DISPLAY_NAME)
+	                        + ", \"abreviated_term\": " + rowElements.get(ABREVIATED_TERM) + ", \"property\": "
+	                        + rowElements.get(PROPERTY) + ", \"tooltip\":" + rowElements.get(TOOL_TIP)
+	                        + ", \"description\": " + rowElements.get(DESCRIPTION) + ", \"example\": "
+	                        + rowElements.get(EXAMPLE) + ", \"data_type\": " + rowElements.get(DATA_TYPE) + " }";
+                }
                 op += ",";
                 rowElements.clear();
             }
