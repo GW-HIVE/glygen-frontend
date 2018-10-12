@@ -233,12 +233,16 @@ function configureDropDownLists(ddl1, ddl2, callback) {
         }
     } else {
         subtypeDiv.style.display = "block";
+        //        var option = document.createElement("selectSubtype");
+        //        option.value = "";
+        //        option.text = "Select Glycan Subtype";
+        //        ddl2.add(option);
     }
 
     // clears existing options
     ddl2.options.length = 0;
 
-    createOption(ddl2, '', '');
+    createOption(ddl2, 'Select Glycan Subtype', '');
 
     for (var x = 0; x < searchInitValues.glycan_type.length; x++) {
         var glycan_type = searchInitValues.glycan_type[x];
@@ -306,7 +310,7 @@ function submitvalues() {
     var glycan_motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
-debugger;
+    debugger;
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search"),
