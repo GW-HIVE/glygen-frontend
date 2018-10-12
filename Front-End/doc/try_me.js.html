@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: try_me.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: try_me.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description ajax calls for the try me questions with static values on the index page.
+ * @author Gaurav Agarwal
+ * @since Aug 2, 2018
+ */
+
+function tryMeAjaxFailure() {
+    displayErrorByCode('server_down');
+    activityTracker("error", "", "Try me failure");
+    $('#loading_image').fadeOut();
+}
+
+/**
+ * @description this prepends the loading image code to the body.
+ */
+function loadingImg() {
+    // style explicitly set to display none so fade In effect can work.
+    $('body').prepend("&lt;div id='loading_image' style='display: none;'>" +
+        "&lt;img src='images/page_loading.gif' />" +
+        "&lt;/div>");
+    $('#loading_image').fadeIn();
+}
+
+/**
+ * Q1. - What are the enzymes involved in the biosynthesis of Man5 in human?
+ */
+function tryBioEnzyme() {
+    loadingImg();
+    var id = "G55220VL";    // Man5 glycan ID
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_bioenzyme", id),
+        error: tryMeAjaxFailure,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './protein_list.html?id=' + results.list_id;
+                activityTracker("user", id, "Try me - Q1 - Man5 BioEnzyme");
+                $('#loading_image').fadeOut();
+            }
+            else {
+                displayErrorByCode('no-results-found');
+                activityTracker("error", id, "Try me - Q1 - Man5 BioEnzyme: no result found");
+                $('#loading_image').fadeOut();
+            }
+        }
+    })
+}
+
+/**
+ * Q2. -  Which proteins have been shown to bear a bi-antennary fully sialated N-Glycan
+ *  and which site is this glycan attached to?
+ */
+function tryGlycanSite() {
+    loadingImg();
+    var id = "G73866ZM";
+    $.ajax({
+        type: 'POST',
+        url: getWsUrl("search_glycansite", id),
+        error: tryMeAjaxFailure,
+        success: function (results) {
+            if (results.list_id) {
+                activityTracker("user", id, "Try me - Q2 - bi-antennary fully sialated N-Glycan");
+                window.location = './protein_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
+            }
+            else {
+                displayErrorByCode('no-results-found');
+                activityTracker("error", id, "Try me - Q2 - bi-antennary fully sialated N-Glycan: no result found");
+                $('#loading_image').fadeOut();
+            }
+        }
+    })
+}
+
+/**
+ * Q3. - Which glycans might have been synthesized in mouse using Mgat1?
+ */
+function tryMouseGlycans() {
+    loadingImg();
+    var jsonData = {
+        "operation": "AND",
+        "query_type": "search_glycan",
+        "mass": {},
+        "number_monosaccharides": {},
+        "enzyme": { "type": "gene", "id": "MGAT1" },
+        "tax_id": 10090
+    };
+    var json = "query=" + JSON.stringify(jsonData);
+
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("glycan_search"),
+        data: json,
+        error: tryMeAjaxFailure,
+        success: function (results) {
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
+                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: "+results.error_code+" for " + json);
+                $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) &amp;&amp; (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1: no result found for "+json);
+                $('#loading_image').fadeOut();
+            } else {
+                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1");
+                window.location = './glycan_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
+            }
+        }
+    });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -30,9 +30,16 @@
 
 // @description: UO1 Version-1.1.
 
-//@Date:19th Feb 2018.
+//@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
 
-//@update:3 April 2018.
+//@update:3 April 2018. with Rupali Mahadik real web service
+//@update: June 26-2018- with Rupali Mahadik web service changes.
+//@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
+// @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+// @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
+
+
+
 
 /**
 
@@ -43,127 +50,15 @@
  */
 
 String.prototype.trunc = String.prototype.trunc ||
- function(n) {
- return (this.length > n) ? this.substr(0, n - 1) + '&amp;hellip;' : this;
- };
-// var id = '';
+    function (n) {
+        return (this.length > n) ? this.substr(0, n - 1) + '&amp;hellip;' : this;
+    };
+var id = '';
 var page = 1;
-var sort = 'id';
+var sort = 'mass';
 var dir = $('.dir-select').val();
-var url = getWsUrl('list') + "?action=get_user";
-var limit =10;
-
-/**
- * Reads a new limit and reloads the data.
- * @param {domNode} element - The element from which we take the new limit value
- */
-function xlimit(element) {
- limit = $(element).val();
- $('.limit-select').val(limit);
- LoadDataList();
-}
-
-/**
- * Loads the next page of results
- */
-function next() {
-page = page + 1;
-  $(".page-select").val(page);
-  LoadDataList();
-}
-/**
- * Loads the Previous page of results
- */
-function prev() {
-  if (page > 1) {
-    page = page - 1;
-    $(".page-select").val(page);
-    LoadDataList();
-  }
-}
-
-/**
- * Reads a new page and reloads the data.
- * @param {domNode} element - The element from which we take the new page value
- */
-function xpage(element) {
- page = $(element).val();
- $('.page-select').val(page);
- LoadDataList();
-}
-
-/**
- * Reads a new sort and reloads the data.
- * @param {domNode} element - The element from which we take the new sort value
- */
-
-function xsort(element) {
- sort = $(element).val();
- $('.sort-select').val(sort);
- LoadDataList();
-}
-
-/**
- * Reads a new asc/dec dirction for data  and reloads the data.
- * @param {domNode} element - The element from which we take the new direction value
- */
-
-function xdir(element) {
- dir = $(element).val();
- $('.dir-select').val(dir);
- LoadDataList();
-}
-
-/**
- * its calculate no of pages using limit and total_length.
- * @param {integer} total_length - The total_length is total number of records
- * @param {integer} limit - The limit is records per page 
- * @returns {number} Number of pages
- */
-function noOfPage(total_length,limit){
- var size = Math.ceil(total_length / limit);
- return size;
-}
-
-
-/**
- * totalNoSearch show user total search result.
- * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
- */
-function totalNoSearch(total_length){
-    $('.searchresult').html(" You Found  " + total_length +" results of glycan");
-
-}
-
-
-/**
- * it creates user interface for pagination for dropdown
- * @param {Object} paginationInfo - the dataset of pagination info is retun from server
- * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
- * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
- */
-
-function buildPages(paginationInfo){
- var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
- var pageSelectors = $(".page-select");
- pageSelectors.empty();
- for(var i=1; i &lt;= total_length; i++){
- pageSelectors.append($("&lt;option>&lt;/option>").attr("value", i).text(i));
- }
- pageSelectors.val(page);
-    /**
-     * this works for Showing user how many results they found .
-
-     */
-    totalNoSearch(paginationInfo.total_length);
-    /**
-     * this works for enabling and disable prev and next button.
-
-     */
-    $(".prevbutton").attr("disabled", (page==1));
-    $(".nextbutton").attr("disabled", (page==total_length));
-}
-
+var url = getWsUrl('glycan_list') + "?action=get_user";
+var limit = 10;
 
 /**
  * it creates user interface for summary
@@ -172,49 +67,61 @@ function buildPages(paginationInfo){
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildSummary (queryInfo) {
- var summaryTemplate = $('#summary-template').html();
- queryInfo.execution_time = moment(queryInfo.execution_time).format("MM/DD/YYYY.h:mm:ss a");
- var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
- $('#summary-table').html(summaryHtml);
+function buildSummary(queryInfo) {
+    var summaryTemplate = $('#summary-template').html();
+    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
+
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    // queryInfo.execution_time = excutionDate.toLocaleString();
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+
+
+
 }
 
+// /**
+//  * Redirect to Page index page or search back
+//  */
+// function redirectPage1() {
+//     window.location.replace("index.html");
+// }
+//
+// function redirectPage2() {
+//     window.location.href = "glycan_search.html";
+// }
+//
+// //      $(document).ready(function(){
+// //      // $("demosearch").tooltip();
+// // });
 
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1()
-         {
-         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-         }
-          function redirectPage2()
-         {
-         window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html";
-         } 
-         
-         
-     $(document).ready(function(){
-    $("demosearch").tooltip();
-});
+
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+    // $('.searchresult').html( "&amp;#34;"  + total_length + " results of glycan&amp;#34;");
+
+}
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
  */
 
-function editSearch(){
-  {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_searchpage.html?id="+id);
-    }
-}
+// function editSearch() {
+//     {
+//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
+//     }
+// }
+
 /**
 
  * Format function to create link to the details page
 
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Glycan Id 
+ @return -Details particular Glycan Id
  */
-function PageFormat(value, row, index, field) {
- return "&lt;a href='glycan-detail.html?id=" + value + "'>" + value + "&lt;/a>";
+function pageFormat(value, row, index, field) {
+    return "&lt;a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "&lt;/a>";
 }
 
 /**
@@ -228,10 +135,9 @@ function PageFormat(value, row, index, field) {
  */
 
 // For Image Column
-function ImageFormat(value, row, index, field) {
-//  var url = getImageWsUrl(row.ID);
-var url = getWsUrl('image_service', row.id);
- return "&lt;div class='img-wrapper'>&lt;img class='img-cartoon' src='" + url + "' alt='Cartoon' />&lt;/div>";
+function imageFormat(value, row, index, field) {
+    var url = getWsUrl('glycan_image', row.glytoucan_ac);
+    return "&lt;div class='img-wrapper'>&lt;img class='img-cartoon' src='" + url + "' alt='Cartoon' />&lt;/div>";
 }
 
 
@@ -243,15 +149,15 @@ var url = getWsUrl('image_service', row.id);
  * @return- Glycan Mass if available else NA
  */
 
-function MassFormatter(value) {
- if (value) {
- var mass = value;
- return value;
+function massFormatter(value) {
+    if (value) {
+        var mass = value;
+        return value;
 
 
- } else {
- return "NA";
- }
+    } else {
+        return "NA";
+    }
 }
 
 
@@ -266,15 +172,14 @@ function MassFormatter(value) {
  */
 
 
-function DetailFormat(index, row) {
- var html = [];
- var glyco = row.glycoct.replace(/ /g, '\n');
- html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>IUPAC&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + row.iupac + '&lt;/pre>&lt;/div>&lt;/div>');
- html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>GlycoCT&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + glyco + '&lt;/pre>&lt;/div>&lt;/div>');
- return html.join('');
-}
-
-
+// function detailFormat(index, row) {
+//     var html = [];
+//     var glyco = row.glycoct.replace(/ /g, '\n');
+//     html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>IUPAC&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + row.iupac + '&lt;/pre>&lt;/div>&lt;/div>');
+//     html.push('&lt;div class="row">&lt;div class="col-md-2 col-xs-12">&lt;strong>GlycoCT&lt;/strong>&lt;/div>&lt;div class="col-md-10 col-xs-12">&lt;pre>' + glyco + '&lt;/pre>&lt;/div>&lt;/div>');
+//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
+//     return html.join('');
+// }
 
 
 /**
@@ -288,35 +193,15 @@ function DetailFormat(index, row) {
  */
 
 var lastSearch;
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        url: 'http://glygen-vm-prd.biochemistry.gwu.edu/api/glycan/search?query=' + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            if (result.search_results_id) {
-                console.log(result);
-                window.location = 'glycan-list.html?id=' + result.search_results_id;
-            } else {
-                // handle if no results
-            }
-        },
-        error: ajaxFailure
-    });
-}
-
-
-
 
 
 
 function editSearch() {
-  {
-    window.location.replace("glycan_searchpage.html?id="+id);
+    {
+        window.location.replace("glycan_search.html?id=" + id);
+        activityTracker("user", id, "edit search");
     }
 }
-
 
 
 /**
@@ -334,8 +219,9 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
-        
+
 
         var $table = $('#gen-table');
         var items = [];
@@ -343,11 +229,11 @@ function ajaxListSuccess(data) {
             for (var i = 0; i &lt; data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
-                    id: glycan.id,
+                    glytoucan_ac: glycan.glytoucan_ac,
                     mass: glycan.mass,
                     number_proteins: glycan.number_proteins,
                     number_enzymes: glycan.number_enzymes,
-                    number_sugar: glycan.number_sugar,
+                    number_monosaccharides: glycan.number_monosaccharides,
                     iupac: glycan.iupac,
                     glycoct: glycan.glycoct
                 });
@@ -356,21 +242,24 @@ function ajaxListSuccess(data) {
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query);
-
-        document.title='glycan-list';
+        // buildSummary(data.query, question);
+        // document.title='glycan-list';
         lastSearch = data;
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+
     }
 
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-//  $('#error-message').show();
-    displayErrorByCode('server_down');
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    // $('#loading_image').fadeOut();
 }
 
 /**
@@ -381,18 +270,19 @@ function ajaxListFailure() {
  * */
 function LoadDataList() {
 
- var ajaxConfig = {
- dataType: "json",
- url: getWsUrl("list"),
- data: getListPostData(id, page, sort, dir, limit),
- method: 'POST',
- success: ajaxListSuccess,
- error: ajaxListFailure
- };
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("glycan_list"),
+        data: getListPostData(id, page, sort, dir, limit),
+        method: 'POST',
+        timeout: getTimeout("list_glycan"),
+        success: ajaxListSuccess,
+        error: ajaxListFailure
+    };
 
 
- // make the server call
- $.ajax(ajaxConfig);
+    // make the server call
+    $.ajax(ajaxConfig);
 }
 
 /**
@@ -407,19 +297,27 @@ function LoadDataList() {
 
 
 function getParameterByName(name, url) {
- if (!url) url = window.location.href;
- name = name.replace(/[\[\]]/g, "\\$&amp;");
- var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
- results = regex.exec(url);
- if (!results) return null;
- if (!results[2]) return '';
- return decodeURIComponent(results[2].replace(/\+/g, " "));
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&amp;");
+    var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 var id = getParameterByName('id');
 LoadDataList(id);
 
 
+/**
+ * hides the loading gif and displays the page after the results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
 
 
 </code></pre>
@@ -432,13 +330,13 @@ LoadDataList(id);
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#DetailFormat">DetailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#ImageFormat">ImageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#mass">mass</a></li><li><a href="global.html#mass_max">mass_max</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 08 2018 13:26:42 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

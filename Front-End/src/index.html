@@ -1,3 +1,9 @@
+<!--
+// @author: Tatiana Williamson
+// @description: UO1 Version-1.1.0
+// @Date: June 1, 2018
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,9 +30,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
+    <style></style>
 </head>
 
 <body onload="tracking()">
@@ -53,7 +60,7 @@
                                     <p>
                                         GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves
                                         information from multiple international data sources and integrates and harmonizes
-                                        this data. This web portal allows exploring this data and to perform unique searches
+                                        this data. This web portal allows exploring this data and performing unique searches
                                         that cannot be executed in any of the integrated databases alone.
                                     </p>
                                 </div>
@@ -225,11 +232,11 @@
                 <div class="col-sm-3">
                     <div class=" panel panel-default thumbnail card">
                         <h5 class="home-headings">Version</h5>
-                        
-                        <div class="caption text-left">
-                            <strong>Software/API:</strong> 1.0.0 (9/1/2018)
-                            <br>
-                            <strong>Data:</strong> 1.0.0 (9/1/2018)    
+                        <div id="loadVersion" class="loading-indicator"> <img src="images/page_loading.gif" /></div>
+                        <div id="version-display" class="caption text-left">
+                            <strong>Portal:</strong> <span id="softwareVersion"></span><br>
+                            <strong>Webservice: </strong><span id="apiVersion"></span><br>
+                            <strong>Data: </strong><span id="dataVersion"></span> 
                         </div>
                     </div>
             
@@ -241,7 +248,7 @@
                         </a>
                         <div class="caption text-left">
                             <p>
-                                Please provide feedback and suggestion to help us improve the GlyGen portal and make it more useful for the community.
+                                Please provide feedback and suggestions to help us improve the GlyGen portal and make it more useful for the community.
                             </p>
                             <div class="gg-card-explore">
                                 <a href="feedback.html" class="btn btn-link btn-block">
@@ -253,49 +260,12 @@
                     </div>
 
                    <div class="panel panel-default thumbnail card">
+                       
                         <h3 class="home-headings">GlyGen Statistics</h3>
 
                         <div class="caption"><p>GlyGen's Database Statistics.</p></div>
-                        <div style="padding-left: 18px;">
-                            <h5 class="text-left">Human</h5>
-                            
-                                <table class="table table-hover text-left" style="margin-bottom: 15px;">
-                                    <tbody class="statistics-table">
-                                        <tr>
-                                            <td>Proteins</td>
-                                            <td>20997</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Glycoproteins</td>
-                                            <td>4429</td> 
-                                        </tr>
-                                        <tr>
-                                            <td>Glycans</td>
-                                            <td>3300</td> 
-                                        </tr>
-                                    </tbody>
-                                </table>
-      
-                            
-                            <h5 class="text-left">Mouse</h5>
-                            <table class="table table-hover text-left" style="margin-bottom: 15px;">
-                               
-                                <tbody class="statistics-table">
-                                    <tr>
-                                        <td>Proteins</td>
-                                        <td>22273</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Glycoproteins</td>
-                                        <td>3765</td> 
-                                    </tr>
-                                    <tr>
-                                        <td>Glycans</td>
-                                        <td>517</td> 
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <div id="loadStatistics" class="loading-indicator"> <img src="images/page_loading.gif" /></div>
+                        <div id="statistics-display" class="caption text-left table-hover statistics-table"  style="padding-left: 18px;"></div>
                     </div>
                    
                     <div class="panel panel-default thumbnail card">
@@ -305,42 +275,6 @@
                             <img src="images/resources/Resources-hands.png" alt="resources">
                         </a>
                         <p class="caption text-left">GlyGen is pleased to provide users with a variety of resources in glycobiology.</p>
-
-
-                        <!--
-                        <div class="caption text-left">
-                            <p>
-                                <a href="https://glytoucan.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> GlyTouCan </em>
-                                    </strong>
-                                </a>
-                                <br> is the international glycan structure repository. It assigns globally unique accession numbers
-                                to any submitted glycan.
-                            </p>
-
-                            <p>
-                                <a href="http://www.uniprot.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> UniProt </em>
-                                    </strong>
-                                </a>
-                                <br> is a freely available, comprehensive resource of high quality protein sequences and functional
-                                annotations.
-                                <br>
-                            </p>
-
-                            <p>
-                                <a href="http://www.unicarbkb.org/" target="_blank" style="text-decoration: none;">
-                                    <strong>
-                                        <em> UniCarbKB </em>
-                                    </strong>
-                                </a>
-                                <br> is a knowledge base for curated glycoconjugate information and their annotations.
-                                <br>
-                            </p>
-                        </div>
--->
 
                         <div class="gg-card-explore">
                             <a href="resources.html" class="btn btn-link btn-block">
@@ -375,22 +309,6 @@
                             </script>
                         </div>
                     </div>
-
-                    <!--
-                    <div class="panel panel-default thumbnail card">
-                        <h3 class="home-headings">
-                            Website Tour 
-                        </h3>
-
-                        <div class="caption">
-
-                            <iframe
-                                   width="290" height="290" src="https://www.youtube.com/embed/4UnF-7Q79Mg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-                            </iframe>
-                        </div> 
-                   </div>
--->
-
                 </div>
             </div>
         </div>
@@ -400,6 +318,8 @@
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/navbar.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/domain_url.js"></script>
     <script src="js/ws_url.js"></script>
     <!-- script for getting Web Service URLs -->
     <script src="js/activity_tracker.js"></script>
@@ -407,8 +327,12 @@
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <!-- script for logging activity -->
     <script src="js/utility.js"></script>
+    <script type="text/javascript" src="libraries/moment.js"></script>
+    <script src="js/homepage.js"></script>
     <!-- Quick_Search -->
     <script type="text/javascript" src="js/try_me.js"></script>
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+                                 
 </body>
 
 </html>

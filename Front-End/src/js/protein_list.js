@@ -20,7 +20,7 @@ String.prototype.trunc = String.prototype.trunc ||
 //var id = '';
 var page = 1;
 var sort = 'protein_name_long';
-var dir = $('.dir-select').val();
+var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 25;
 
@@ -59,21 +59,8 @@ function buildSummary(queryInfo) {
 }
 
 
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1() {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-}
-
-function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/protein_search.html";
-}
 
 
-// $(document).ready(function () {
-//     $("demosearch").tooltip();
-// });
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
@@ -158,7 +145,7 @@ function updateSearch() {
             //     activityTracker("error", id, "update search: no result found");
             // }
         },
-        error: ajaxFailure
+        error: ajaxListFailure
     });
 }
 

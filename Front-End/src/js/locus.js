@@ -19,7 +19,7 @@ String.prototype.trunc = String.prototype.trunc ||
 var id = '';
 var page = 1;
 var sort = 'uniprot_canonical_ac';
-var dir = $('.dir-select').val();
+var dir = 'desc';
 var url = getWsUrl('loci_list') + "?action=get_user";
 var limit = 10;
 
@@ -72,6 +72,18 @@ function detailFormat(index, row) {
 }
 
 
+function buildSummary(queryInfo, question) {
+
+    //quick search
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo[question] = true;
+    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
+    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
+    // queryInfo.questionText = getMessageText(question, queryInfo);
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+}
 
 
 function totalNoSearch(total_length) {
@@ -80,10 +92,10 @@ function totalNoSearch(total_length) {
 
 }
 function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
 }
 
 
@@ -129,8 +141,10 @@ function ajaxListSuccess(data) {
         $table.bootstrapTable('append', items);
 
         buildPages(data.pagination);
+        buildSummary(data.query, question);
 
         // buildSummary(data.query);
+        document.title = 'loci-list';
 
 
 
@@ -138,6 +152,9 @@ function ajaxListSuccess(data) {
     }
 
 }
+
+
+
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
@@ -192,6 +209,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 LoadDataList(id);
 
 

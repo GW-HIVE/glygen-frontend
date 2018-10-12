@@ -23,12 +23,8 @@ function addCommas(nStr) {
     while (rgx.test(x1)) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
-
     return x1 + x2;
 }
-
-
-
 
 function sortDropdown(a, b) {
     if (a.name < b.name) {
@@ -38,11 +34,6 @@ function sortDropdown(a, b) {
     }
     return 0;
 }
-
-
-
-
-
 
 /** functions for dropdowns organism
  * get organism drop down values for search form
@@ -113,8 +104,6 @@ $(document).ready(function () {
                     // 'max': 3906488.00
                 }
             });
-
-
         }
     });
 
@@ -242,7 +231,6 @@ function ajaxProteinSearchSuccess() {
     //     }
     // });
 }
-
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
 
@@ -252,7 +240,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "type": "exact",
             "aa_sequence": input_sequence
         }
-
     }
     var organisms = {
         "id": 0,
@@ -263,8 +250,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
-
-
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
@@ -358,3 +343,4 @@ function searchjsonSimpleP(input_query_type, input_category, input_term) {
     };
     return formjsonSimple;
 }
+

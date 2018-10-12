@@ -22,8 +22,6 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-
-
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;
@@ -32,8 +30,6 @@ function sortDropdown(a, b) {
     }
     return 0;
 }
-
-
 
 
 /** functions for dropdowns organism
@@ -61,7 +57,6 @@ $(document).ready(function () {
             for (var x = 0; x < result.organism.length; x++) {
                 createOption(orgElement, result.organism[x].name, result.organism[x].id);
             }
-
 
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
@@ -223,8 +218,6 @@ Sliderbox1.prototype.handler = function (target) {
 
 };
 
-
-
 /** glycan sub type dropdown function based on type field
  * @param {numeric} ddl1 - User selected glycan type
  * @param {numeric} ddl2 - Glycan sub type
@@ -313,7 +306,7 @@ function submitvalues() {
     var glycan_motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
-
+debugger;
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search"),
@@ -355,7 +348,6 @@ function submitvalues() {
 
 //form json from form submit
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-
     var enzymes = {}
     if (input_enzyme) {
         enzymes = {
@@ -399,7 +391,6 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     return formjson;
 }
 
-
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;
@@ -423,10 +414,11 @@ $(document).ajaxStop(function () {
 ------------------------- */
 
 /**
- * sorting drop down list in simplified search page.
+ * sorting drop down list for category in simplified search page.
  * @author Tatiana Williamson
  * @date October 2, 2018
  */
+
 function sortDropdownSimple(c, d) {
     if (c.id < d.id) {
         return -1;

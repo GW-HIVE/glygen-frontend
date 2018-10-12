@@ -1,62 +1,6 @@
 
 //@author:Rupali Mahadik.
 
-
-//$("#protein2").autocomplete({
-//     source: function (request, response) {
-//
-//         var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
-//         $.getJSON(queryUrl, function (suggestions) {
-//             suggestions.length = Math.min(suggestions.length, 5);
-//
-//             // if only one suggestion, and suggestion matches value
-//            // if ((suggestions.length === 1) && (suggestions[0].toLowerCase() === request.term.toLowerCase())) {
-//
-//            // }
-//
-//             // if suggestions.length > 0 then show exact match text
-//
-//             response(suggestions);
-//         });
-//     },
-//     minLength: 1,
-//     select: function (event, ui) {
-//         console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
-//
-//     }
-// });
-//
-//
-//
-//
-//
-// function myProteinDetail(){
-//
-//    var id = $("#protein2").val();
-//
-//
-//    $.ajax({
-//         type: 'post',
-//         url: getWsUrl("protein_detail",id),
-//         success: function (results) {
-//             if (results.error_code && (results.error_code === 'non-existent-record')) {
-//             } else if (results.error_code) {
-//                     displayErrorByCode("Invalid ID");
-//             }
-//             else {
-//                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics5';
-//             }
-//         }
-//
-//     })
-// }
-
-
-
-
-
-
-
 //Q.1- What are the enzymes involved in the biosynthesis of glycan X in human?
 
 $("#bioenzyme").autocomplete({
@@ -89,7 +33,7 @@ function bioEnzyme(){
          url: getWsUrl("search_bioenzyme",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -136,7 +80,7 @@ function glycanSite(){
         url: getWsUrl("search_glycansite",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_2";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -183,7 +127,7 @@ function glycanGene(){
         url: getWsUrl("search_glycangene",id),
         success: function(results) {
             if (results.list_id) {
-                window.location = './locus_list.html?id=' + results.list_id;
+                window.location = './locus_list.html?id=' + results.list_id + "&question=QUESTION_3";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -223,12 +167,10 @@ function proteinOrthologues(){
     $.ajax({
         type: 'post',
         url: getWsUrl("search_proteinorthologues",id),
-        // url: getWsUrl("search_proteinorthologues",id+"/"),
-        // data: json,
         success: function (results) {
             if (results.list_id) {
 
-                window.location = './protein_orthologus.html?id=' + results.list_id;
+                window.location = './protein_orthologus.html?id=' + results.list_id+ "&question=QUESTION_4";
 
             }
             else {
@@ -320,7 +262,7 @@ function glycanEnzyme(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './glycan_list.html?id=' + results.list_id;
+                window.location = './quick_glycan_list.html?id=' + results.list_id + "&question=QUESTION_6";
             }
             else {
 
@@ -365,7 +307,7 @@ function glycosylTransferases(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_7";
             }
             else {
 
@@ -411,7 +353,7 @@ function glycoHydrolases(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_8";
             }
             else {
 
@@ -441,6 +383,12 @@ $(document).ready(function () {
         createOption(orgElement, result.organism[0].name, result.organism[0].id);
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
 
+
+        var question =  getParameterByName('question');
+        var id =  getParameterByName('id');
+
+        populateLastSearch(question, id);
+
     });
 });
 function createOption(ddl, text, value) {
@@ -453,8 +401,6 @@ function createOption(ddl, text, value) {
 function glycoProteins(){
 
     var id = $("#organism3").val();
-    // var id=$("#glycosyltransferasesdisease").val();
-
     var id1 = $("#species").val();
     $.ajax({
         type: 'post',
@@ -462,7 +408,7 @@ function glycoProteins(){
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_9";
             }
             else {
 
@@ -495,43 +441,10 @@ $("#glycosyltransferasesdisease").autocomplete({
     }
 });
 
-
-
-function glycosyTtransferasesDisease(){
-
-    var id = $("#glycosyltransferasesdisease").val();
-
-    //it seems  need that taxID m can we just set it to 10090 ?
-    $.ajax({
-        type: 'POST',
-        url: getWsUrl("search_disease",id),
-        success: function(results) {
-            if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
-            }
-            else {
-                displayErrorByCode('no-results-found');
-            }
-
-        }
-
-    })
-}
-
-
-
-
-
-
 function glycosyTtransferasesDisease(){
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
-
-
     var disease = $("#glycosyltransferasesdisease").val();
-
-
-
     var formObject = {
         do_name: disease,
         tax_id: 0
@@ -544,7 +457,7 @@ function glycosyTtransferasesDisease(){
         data: json,
         success: function(results) {
             if (results.list_id) {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './quick_protein_list.html?id=' + results.list_id+ "&question=QUESTION_10";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -556,3 +469,108 @@ function glycosyTtransferasesDisease(){
 }
 //Q.10.
 
+function populateLastGlycanSearch(question, id) {
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("glycan_list"),
+        data: getListPostData(id, 1, 'mass', 'desc', 1),
+        method: 'POST',
+        timeout: getTimeout("list_glycan"),
+        success: function (data) {
+            $('#glycanenzyme').val(data.query.uniprot_canonical_ac);
+        }
+    });
+}
+
+function populateLastLocusSearch(question, id) {
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("loci_list"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
+        method: 'POST',
+        timeout: getTimeout("loci_list"),
+        success: function (data) {
+            $('#glycangene').val(data.query.glytoucan_ac);
+        }
+    });
+}
+function populateLastOrthougusSearch(question, id) {
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("list_glycangene"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'desc', 1),
+        method: 'POST',
+        timeout: getTimeout("list_glycangene"),
+        success: function (data) {
+            $('#proteinorthologues').val(data.query.uniprot_canonical_ac);
+        }
+
+
+
+    });
+}
+
+function populateLastProteinSearch(question, id) {
+    // make the server call
+    $.ajax({
+        dataType: "json",
+        url: getWsUrl("protein_list"),
+        data: getListPostData(id, 1, 'protein_name_long', 'desc', 1),
+        method: 'POST',
+        timeout: getTimeout("list_protein"),
+        success: function (data) {
+
+
+            switch(question) {
+                case 'QUESTION_1':
+                    $('#bioenzyme').val(data.query.glytoucan_ac);
+                    break;
+                case 'QUESTION_2':
+                    $('#glycansite').val(data.query.glytoucan_ac);
+                    break;
+                case 'QUESTION_5':
+                    $('#proteinfunction').val(data.query.glytoucan_ac);
+                    break;
+                case 'QUESTION_7':
+                    $('#organism1').val(data.query.organism.id);
+                    break;
+                case 'QUESTION_8':
+                    $('#organism2').val(data.query.organism.id);
+                    break;
+                case 'QUESTION_9':
+                    $('#organism3').val(data.query.organism.id);
+                    $('#species').val(data.query.evidence_type);
+                    break;
+                case 'QUESTION_10':
+                    $('#glycosyltransferasesdisease').val(data.query.do_name);
+
+                    break;
+                default:
+                    break;
+            }
+        },
+        // error: ajaxListFailure
+    });
+}
+
+function populateLastSearch(question, id) {
+    $('#' + question).trigger('click');
+
+    // make the ajax call to whichever endpoint
+    switch(question) {
+        case 'QUESTION_6':
+            // call API for this type
+            populateLastGlycanSearch(question, id);
+            break;
+        case 'QUESTION_3':
+            populateLastLocusSearch(question, id);
+            break;
+        case 'QUESTION_4':
+            populateLastOrthougusSearch(question, id);
+            break;
+        default:
+            // call API for all others
+            populateLastProteinSearch(question, id);
+            break;
+    }
+}

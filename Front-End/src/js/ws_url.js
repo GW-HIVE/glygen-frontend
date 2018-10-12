@@ -10,11 +10,7 @@
 //update:31 july:// New base URL updated.
 
 function getWsUrl(request, id, id1) {
-
-
-    var ws_base = "http://tst.api.glygen.org/";
- 
-    
+    var ws_home_init = ws_base+"pages/home_init";
     var ws_base_glycan = ws_base+"glycan";
     var ws_base_protein = ws_base+"protein";
     var ws_base_typeahead = ws_base+"typeahead";
@@ -38,12 +34,10 @@ function getWsUrl(request, id, id1) {
             break;
         case "contact":
             return ws_contact;
-            break;
-
-
-        //Glycan webservices
+            break;           
+        //Homepage webservices
         case "home_init":
-            return ws_homeInit + "/search_init";
+            return ws_home_init;
             break;
         //Glycan webservices
         case "search_init_glycan":
@@ -57,7 +51,6 @@ function getWsUrl(request, id, id1) {
         case "glycan_search_simple":
             return ws_base_glycan + "/search_simple";
             break;
-            
             
         case "glycan_image":
             return ws_base_glycan + "/image/" + id;

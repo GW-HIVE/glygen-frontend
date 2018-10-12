@@ -4,14 +4,14 @@
 	,"title":"Dataset Collection v1.0"
 	,"desc":""
 	,"sections":[
-		{"id":"about", "label":"About", "access":"111"}
-		,{"id":"browse", "label":"Browse Objects", "access":"111"}
-		,{"id":"create", "label":"Create New Object", "access":"111"}
-		,{"id":"edit", "label":"Edit Object", "access":"111"}
-		,{"id":"schema", "label":"Data Schema", "access":"111"}
-		,{"id":"deposit", "label":"Submissions", "access":"111"}
-		,{"id":"releasenotes", "label":"Release Notes", "access":"111"}
-		,{"id":"faq", "label":"FAQs", "access":"111"}
+		{"id":"about", "label":"About", "access":"000"}
+		,{"id":"browse", "label":"Browse Objects", "access":"000"}
+		,{"id":"create", "label":"Create New Object", "access":"000"}
+		,{"id":"edit", "label":"Edit Object", "access":"000"}
+		,{"id":"schema", "label":"Data Schema", "access":"000"}
+		,{"id":"deposit", "label":"Submissions", "access":"000"}
+		,{"id":"releasenotes", "label":"Release Notes", "access":"000"}
+		,{"id":"faq", "label":"FAQs", "access":"000"}
 	]
 	,"modulemenubg":"#eee"
 	,"modulemenufg":"#333"

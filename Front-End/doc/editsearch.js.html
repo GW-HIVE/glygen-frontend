@@ -26,7 +26,11 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
+            <pre class="prettyprint source linenums"><code>//@author: Rupali Mahadik
+// @description: UO1 Version-1.1.
+
+
+/**
  * .setting the Form Values based on object data
  * @param {object} data - The data is object with query value
  * @param {object} data.query -
@@ -34,18 +38,64 @@
  */
 
 function setFormValues(data) {
+   
     if (data.query) {
-        $("#glycan_id").val(data.query.glycan_id);
+        $("#glycan_id").val(data.query.glytoucan_ac);
         if (data.query.mass) {
-            var massSlider = document.getElementById('slider');
+            var massSlider = document.getElementById('sliderbox-slider');
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
         }
-        $("#organism").val(data.query.organism);
-        $("#ddl").val(data.query.glycantype);
-        $("#ddl2").val(data.query.glycansubtype);
-        $("#enzyme").val(data.query.enzyme);
-        $("#protein").val(data.query.proteinid);
-        $("#motif").val(data.query.motif);
+        if (data.query.number_monosaccharides) {
+            var massSlider1 = document.getElementById('sliderbox-slider1');
+            massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
+        }
+
+        // if (data.query.organism.name){
+        //     $("#species").val(data.query.organism.name);
+        //    // var selected_species = document.getElementById("species");
+        //     var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
+        //
+        //
+        // }
+
+
+         $("#species").val(data.query.organism.name);
+        $("#ddl").val(data.query.glycan_type);
+       var types = document.getElementById('ddl');
+        var subtypes = document.getElementById('ddl2');
+        // create subtypes
+        configureDropDownLists(types, subtypes, function() {
+            $("#ddl2").val(data.query.glycan_subtype);
+        });
+        // $("#enzyme").val(data.query.enzyme.id);
+        $("#protein").val(data.query.uniprot_canonical_ac);
+        $("#motif").val(data.query.glycan_motif);
+    }
+}
+
+/**
+ * .setting the Form Values based on object data
+ * @param {object} data - The data is object with query value
+ * @param {object} data.query -
+ *
+ */
+function setProteinFormValues(data) {
+//alert(data.results.uniprot_id)
+  //data1 = JSON.parse(data);
+    if (data.query) {
+        $("#protein").val(data.query.uniprot_canonical_ac);
+        if (data.query.mass) {
+            var massSlider = document.getElementById('sliderbox-slider');
+            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+        }
+        $("#species").val(data.query.organism.name);
+        $("#gene_name").val(data.query.gene_name);
+        $("#protein_name_long").val(data.query.protein_name_long);
+        $("#pathway").val(data.query.pathway_id);
+        $("#sequences").val(data.query.sequence.aa_sequence);
+        $("#glycosylated_aa").val(data.query.glycosylated_aa);
+        $("#glycosylation_evidence").val(data.query.glycosylation_evidence);
+        $("#refseq").val(data.query.refseq_ac);
     }
 }
 
@@ -55,29 +105,45 @@ function setFormValues(data) {
 *
 *
 */
-
-
 function failToRetreiveSearch(data) {
     displayErrorByCode('server_down');
 }
-
 /**
- * Loading data from list service
+ * Loading data from protein list service
  * @param {string} id - The serach id
  *
  *
  */
+function LoadProteinSearchvalues(id) {
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("protein_list"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'asc', 1),
+        method: 'POST',
+        success: setProteinFormValues,
+        error: failToRetreiveSearch
+    };
+    // make the server call
+    $.ajax(ajaxConfig);
+}
+
+/**
+ * Loading data from glycan list service
+ * @param {string} id - The serach id
+ *
+ *
+ */
+
+//Here I am defining ajax call here.
 function LoadSearchvalues(id) {
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("list"),
-        data: getListPostData(id, 1, 'id', 'asc', 1),
+        url: getWsUrl("glycan_list"),
+        data: getListPostData(id, 1, 'glytoucan_ac', 'asc', 1),
         method: 'POST',
         success: setFormValues,
         error: failToRetreiveSearch
     };
-
-
     // make the server call
     $.ajax(ajaxConfig);
 }
@@ -102,13 +168,13 @@ function getParameterByName(name, url) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#DetailFormat">DetailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#ImageFormat">ImageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#mass">mass</a></li><li><a href="global.html#mass_max">mass_max</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 08 2018 13:26:42 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>

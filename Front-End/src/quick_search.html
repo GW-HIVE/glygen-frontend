@@ -78,50 +78,49 @@
                     </li>
                    
                     <li>
-                        <a class="cd-faq-trigger" id="Q1">What are the enzymes involved in the biosynthesis of glycan X in human?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_1" data-key="QUESTION_1"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
-                            <div class="col-sm-6 gg-form-group"> 
+                            <div class="col-sm-6"> 
                                 <input class="form-control" type="text" name="GlytoucanID" placeholder="GlyTouCan Accession" id="bioenzyme" onkeyup="validateGlycanAcc(this)">
                                 
-                                <div class="gg-text-example"> Example: G88495BI   <span id="glycanAccMsg" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleBioenzyme">G17689DH</a>   <span id="glycanAccMsg" class="validation-message-quick"></span></div>
                             </div>
                             <div>     
-                                <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="bioEnzyme()" class="btn-sm btn-primary">Search</button>
                             </div>
                         </div>
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q2">Which proteins have been shown to bear glycan X and which site is this glycan attached to?</a>
-                        
+                        <a class="cd-faq-trigger localized" id="QUESTION_2" data-key="QUESTION_2"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
-                            <div class="col-sm-6 gg-form-group"> 
+                            <div class="col-sm-6"> 
                                 <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycansite" onkeyup="validateGlycanAcc1(this)">
 
-                                <div class="gg-text-example"> Example: G88495BI   <span id="glycanAccMsg1" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleGlycansite">G17689DH</a>   <span id="glycanAccMsg1" class="validation-message-quick"></span></div>
                             </div>
                             <div> 
-                                <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="glycanSite()" class="btn-sm btn-primary">Search</button>
                             </div>
                         </div>
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q3">What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_3" data-key="QUESTION_3"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Glycan&nbsp;X:</label>
                             
-                            <div class="col-sm-6 gg-form-group">
+                            <div class="col-sm-6">
                                 <input class="form-control" type="text" name="Glytoucan" placeholder="GlyTouCan Accession" id="glycangene" onkeyup="validateGlycanAcc2(this)">
 
-                                <div class="gg-text-example"> Example: G88495BI   <span id="glycanAccMsg2" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleGlycangene">G17689DH</a>   <span id="glycanAccMsg2" class="validation-message-quick"></span></div>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="glycanGene()" class="btn-sm btn-primary">Search</button>
                             </div>   
                         </div>
                     </li>
@@ -135,48 +134,48 @@
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q4">What are the orthologues of protein X in different species?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_4" data-key="QUESTION_4"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Protein&nbsp;X:</label>
-                            <div class="col-sm-6 gg-form-group">
+                            <div class="col-sm-6">
                                 <input class="form-control" type="text" name="ProteinID" placeholder="UniProt Accession" id="proteinorthologues" onkeyup="validateProteinAcc(this)">
                                 
-                                <div class="gg-text-example"> Example: P14210-1
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleOrthologues">P14210-1</a>
                                 <span id="proteinAccMsg" class="validation-message-quick"></span></div>
                             </div>
                             <div>
-                               <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Submit</button> 
+                               <button type="button" name="submit" onclick="proteinOrthologues()" class="btn-sm btn-primary">Search</button> 
                             </div>   
                         </div>
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q5">What are the functions of protein X?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_5" data-key="QUESTION_5"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Protein&nbsp;X:</label>
                             <div class="col-sm-6 gg-form-group">
                                 <input class="form-control" type="text" name="Protein" placeholder="UniProt Accession" id="proteinfunction" onkeyup="validateProteinAcc1(this)">
                                 <!--//<label id="protein-error">no result found</label>-->
-                                <div class="gg-text-example"> Example: P14210-1 <span id="proteinAccMsg1" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleFunction">P14210-1</a> <span id="proteinAccMsg1" class="validation-message-quick"></span></div>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="proteinFunction()" class="btn-sm btn-primary">Search</button>
                             </div>  
                         </div>
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q6">Which glycans might have been synthesized in mouse using enzyme X?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_6" data-key="QUESTION_6"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Enzyme&nbsp;X:</label>
                             
-                            <div class="col-sm-6 gg-form-group">
+                            <div class="col-sm-6">
                                 <input class="form-control" type="text" name="Enzyme" id="glycanenzyme" placeholder="UniProt Accession" onkeyup="validateProteinAcc2(this)">
 
-                                <div class="gg-text-example"> Example: P14210-1 <span id="proteinAccMsg2" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExampleGlycanenzyme">P15291-1</a> <span id="proteinAccMsg2" class="validation-message-quick"></span></div>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="glycanEnzyme()" class="btn-sm btn-primary">Search</button>
                             </div>
                         </div>
                     </li>
@@ -190,45 +189,45 @@
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q7">What are the glycosyltransferases in species X?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_7" data-key="QUESTION_7"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Species:</label>
-                            <div class="col-sm-6 gg-form-group">
+                            <div class="col-sm-6">
                                 <select class="form-control organism" id="organism1">
                                     <option value="0">Select Organism</option>
                                 </select>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">Submit</button>
+                                <button type="button" name="submit" onclick="glycosylTransferases()" class="btn-sm btn-primary gg-faq-button" id="glycosyltransferases">Search</button>
                             </div>
                         </div>
                         <!-- cd-faq-content -->
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q8">What are the glycohydrolases in species X?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_8" data-key="QUESTION_8"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Species:</label>
 
-                            <div class="col-sm-6 gg-form-group"> 
+                            <div class="col-sm-6"> 
                                 <select class="form-control organism" id="organism2">
                                 <option value="0">Select Organism</option>
                                 </select>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">Submit</button>
+                                <button type="button" name="submit" onclick="glycoHydrolases()" class="btn-sm btn-primary gg-faq-button" id="glycohydrolases">Search</button>
                             </div>
                         </div>
                         <!-- cd-faq-content -->
                     </li>
 
                     <li>
-                        <a class="cd-faq-trigger" id="Q9">What are the reported or predicted glycosylated proteins in species X?</a>
+                        <a class="cd-faq-trigger localized" id="QUESTION_9" data-key="QUESTION_9"></a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
 
                             <label class="control-label col-sm-2">Species:</label>
                             
-                            <div class="col-sm-3 gg-form-group">
+                            <div class="col-sm-3">
                                 <select class="form-control organism" id="organism3">
                                 <option value="0">Select Organism</option>
                                 </select>
@@ -236,7 +235,7 @@
                             
                             <label class="control-label col-sm-1">Type:</label>
                             
-                            <div class="col-sm-3 gg-form-group">
+                            <div class="col-sm-3">
                                 <select name="species_type" class="biginput form-control" id="species">
                                     <option value="">Select Type </option>
                                     <option value="reported">Reported</option>
@@ -245,7 +244,7 @@
                                 </select>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Submit</button>
+                                <button type="button" name="submit" onclick="glycoProteins()" class="btn-sm btn-primary gg-faq-button" id="glycoproteins">Search</button>
                             </div>
                         </div>
 
@@ -258,17 +257,17 @@
                         <h2>Search by Disease</h2>
                     </li>
                     <li>
-                        <a class="cd-faq-trigger" href="#0" id="Q10">Which glycosyltransferases are known to be involved in disease X?</a>
+                        <a class="cd-faq-trigger" href="#0" id="QUESTION_10">Which glycosyltransferases are known to be involved in disease X?</a>
                         <div class="cd-faq-content form-group form-horizontal padding-bottom">
                             <label class="control-label col-sm-2">Disease:</label>
                             
-                            <div class="col-sm-6 gg-form-group"> 
+                            <div class="col-sm-6"> 
                                 <input class="form-control" type="text" name="disease" placeholder="Disease Name" id="glycosyltransferasesdisease" onkeyup="validateDiseaseName(this)">
                                 
-                                <div class="gg-text-example"> Example: Ehlers-Danlos syndrome progeroid type <span id="diseaseNameMsg" class="validation-message-quick"></span></div>
+                                <div class="gg-text-example"> Example: <a href="" id="textExGlycosyltransferasesdisease">Ehlers-Danlos syndrome progeroid type</a> <span id="diseaseNameMsg" class="validation-message-quick"></span></div>
                             </div>
                             <div>
-                                <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Submit</button>
+                                <button type="button" name="submit" onclick="glycosyTtransferasesDisease()" class="btn-sm btn-primary">Search</button>
                             </div>    
                         </div>
                         <!-- cd-faq-content -->
@@ -287,7 +286,7 @@
 <!-- Resource jQuery -->
 <script src="libraries/jquery/jquery-ui.js"></script>
 <!-- script for getting Web Service URLs -->
-
+<script type="text/javascript" src="js/domain_url.js"></script>
 <script src="js/ws_url.js"></script>
 <!-- script for logging activity -->
 <script src="js/activity_tracker.js"></script>
@@ -305,6 +304,7 @@
 <script src="js/validation.js"></script>
 <!-- Quick_Search -->
 <script type="text/javascript" src="js/quicksearch.js"></script>
+<script src="js/text_example.js"></script>
 <script>
     //calls the script in faq_main.js file
     faqMain();
@@ -326,6 +326,7 @@
         }
     });
 </script>
+<script src="js/config.js"></script>
 
 
 

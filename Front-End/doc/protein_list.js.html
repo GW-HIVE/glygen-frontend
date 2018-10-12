@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: protein_list.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: protein_list.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+
+
+//@Author:Rupali Mahadik.
+//@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
+// @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+/**
+
+ * Adding function to String prototype to shortcut string to a desire length.
+
+ * @param {int} n - The length of the string
+ * @returns {int} -Short String
+ */
+
+String.prototype.trunc = String.prototype.trunc ||
+    function (n) {
+        return (this.length > n) ? this.substr(0, n - 1) + '&amp;hellip;' : this;
+    };
+//var id = '';
+var page = 1;
+var sort = 'protein_name_long';
+var dir = 'desc'
+var url = getWsUrl('protein_list');
+var limit = 25;
+
+
+
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
+/**
+ * it creates user interface for summary
+ * @param {Object} queryInfo - the dataset of pagination info is retun from server
+ * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
+ * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
+ */
+
+function buildSummary(queryInfo) {
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    // queryInfo.execution_time = moment(queryInfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
+    // var excutionDate= new Date(queryInfo.execution_time);
+    // queryInfo.execution_time = excutionDate.toLocaleString();
+    queryInfo.mass.min = addCommas(queryInfo.mass.min);
+    queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+}
+
+
+
+
+
+/**
+ * Redirect to  searchPage with id after clicking editSearch
+ */
+
+
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+    // $('.searchresult').html( "&amp;#34;"  + total_length + " results of glycan&amp;#34;");
+
+}
+
+
+
+function editSearch() {
+    {
+        window.location.replace("protein_search.html?id=" + id);
+        activityTracker("user", id, "edit search");
+    }
+}
+
+/**
+
+ * Format function to create link to the details page
+
+ * @param {object} value - The data binded to that particular cell.
+ @return -Details particular Protein Id
+ */
+function PageFormat(value, row, index, field) {
+    return "&lt;a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "&lt;/a>";
+}
+
+
+/**
+
+ * Format function for column "MASS"
+
+ * @param {object} value - The data binded to that particular cell.
+ * @return- Protein Mass if available else NA
+ */
+
+function MassFormatter(value) {
+    if (value) {
+        var mass = value;
+        return value;
+
+
+    } else {
+        return "NA";
+    }
+}
+
+
+
+
+/**
+
+ * updateSearch function of the detail table when opening each row [+]
+
+ * @param {int} index - The row clicked
+
+ * @param {object} row - The data object binded to the row
+ * @return- detail view with IUPAC AND GLYCOCT
+ */
+
+var lastSearch;
+
+function updateSearch() {
+    console.log(lastSearch.query);
+    $.ajax({
+        method: 'GET',
+        dataType: "json",
+        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
+        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
+        success: function (result) {
+            // if (result.list_id) {
+                console.log(result);
+                activityTracker("user", id, "update search");
+                window.location = 'protein_list.html?id=' + result.list_id;
+            // } else {
+            //     // handle if no results
+            //     activityTracker("error", id, "update search: no result found");
+            // }
+        },
+        error: ajaxListFailure
+    });
+}
+
+
+/**
+ * Handling a succesful call to the server for list page
+ * @param {Object} data - the data set returned from the server on success
+ * @param {Array} data.results - Array of individual results
+ * @param {Object} data.pagination - the dataset for pagination info
+ * @param {Object} data.query - the dataset for query
+ */
+
+
+function ajaxListSuccess(data) {
+    // console.log(data);
+    //console.log(data.code);
+    if (data.code) {
+        console.log(data.code);
+        displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    } else {
+        var $table = $('#gen-table');
+        var items = [];
+        if (data.results) {
+            for (var i = 0; i &lt; data.results.length; i++) {
+                var protein = data.results[i];
+                items.push({
+                    uniprot_canonical_ac: protein.uniprot_canonical_ac,
+                    mass: protein.mass,
+                    gene_name: protein.gene_name,
+                    protein_name_long: protein.protein_name_long,
+                    organism: protein.organism,
+                    refseq_name:protein.refseq_name,
+                    refseq_ac:protein.refseq_ac
+                });
+            }
+        }
+
+        $table.bootstrapTable('removeAll');
+        $table.bootstrapTable('append', items);
+
+        buildPages(data.pagination);
+
+        buildSummary(data.query);
+
+        document.title = 'Protein-list';
+        lastSearch = data;
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    }
+
+}
+
+/// ajaxFailure is the callback function when ajax to GWU service fails
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+}
+
+/**
+
+ * LoadDataList function to configure and start the request to GWU  service
+
+ * @param {string} id - The protein id to load
+ * */
+function LoadDataList() {
+
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("protein_list"),
+        data: getListPostData(id, page, sort, dir, limit),
+        method: 'POST',
+        timeout: getTimeout("list_protein"),
+        success: ajaxListSuccess,
+        error: ajaxListFailure
+    };
+
+
+    // make the server call
+    $.ajax(ajaxConfig);
+}
+
+/**
+
+ * getParameterByName function to EXtract query parametes from url
+
+ * @param {string} name - The name of the variable variable to extract from query string
+
+ * @param {string} url- The complete url with query string values
+ * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
+ */
+
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&amp;");
+    var regex = new RegExp("[?&amp;]" + name + "(=([^&amp;#]*)|&amp;|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var id = getParameterByName('id');
+
+LoadDataList(id);
+
+
+/**
+ * hides the loading gif and displays the page after the results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
+
+$(document).ready(function(){
+    $('#gen-table').on("sort.bs.table", function(event,field,order){
+        // event.preventDefault();
+        event.stopPropagation();
+        sort = field;
+        dir = order;
+        LoadDataList();
+        activityTracker("user", id, "sort: " + sort);
+        return false;
+    });
+});
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#redirectPage1">redirectPage1</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 02 2018 16:53:22 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

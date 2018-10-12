@@ -117,8 +117,6 @@ function getErrorMessage(errorCode) {
                 message: "Oops, something went wrong. Please try again later." + contactUsMsg,
                 title: "Unexpected Error"
             };
-
-
     }
 }
 
@@ -157,7 +155,6 @@ function getTimeout(ajaxWebService) {
         searchInitProtein = 10000,
         searchInitGlycoP = 10000,
         homeInit = 10000;
-        
 
     // search
     var searchGlycan = 60000,   //10000,
@@ -191,7 +188,6 @@ function getTimeout(ajaxWebService) {
             return homeInit;
         case "glycan_search_simple":
             return searchSimpleGlycan;
-            
 
         // protein
         case "search_init_protein":

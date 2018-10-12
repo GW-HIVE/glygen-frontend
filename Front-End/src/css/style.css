@@ -1,3 +1,9 @@
+/** ---------------------------------
+    The homepage
+    @author: Tatiana Williamson
+    @date-created: 01/21/2018
+ ------------------------------------*/
+
 body {
     font-family: "Verdana", "Geneva", sans-serif;
     color: #4A4A4A;
@@ -56,6 +62,16 @@ p {
     margin: .5em 0 1em;
     font-size: 1.3em;
 }
+
+td {
+    width: 83%;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+   }
+table, th, td {
+    border: 1px solid transparent;
+    }
 
 .title {
     margin: 0 0 .5em 0;
@@ -123,15 +139,6 @@ p {
 .nav > li a:hover {
     color: #AFD9FD !important;
 }
-/*
-.nav li.current a {
-    color: #ffffff !important; 
-    border-bottom: 2px solid;
-    padding: 15px 0 9px 0;
-    margin-right: 15px;
-    margin-left: 15px;
-}  
-*/
 
 .nav li.current a  {
     margin-right: -15px;
@@ -310,12 +317,15 @@ p {
     padding-top: 10px;
 }
 
-.statistics-table tr td {
-    border: none !important;
-    padding-bottom: 0 !important; 
-    padding-top: 0 !important;
-/*    padding: 0 18px !important;*/
+.statistics-table {
+    margin-bottom: 10px;
 }
+
+.errorMessageHomepage {
+    font-weight: bold;
+    text-align: center;  
+}
+
 /* -------------------------
     Alert 
 ---------------------------- */
@@ -892,6 +902,33 @@ label.labelContactUs {
     width: 5%;
     height: auto;
     padding-top: 30vh;
+}
+#loadVersion {
+    background: rgba( 255, 255, 255, 0.85 );
+    display: block;
+    height: 4%;
+    position: absolute;
+    width: 88%;
+    z-index: 9;
+    align-content: center;
+}
+#loadStatistics{
+    background: rgba( 255, 255, 255, 0.85 );
+    display: block;
+    height: 9%;
+    position: absolute;
+    width: 88%;
+    z-index: 9;
+    align-content: center;
+}
+
+#loadVersion img,
+#loadStatistics img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    height: auto;
 }
 
 /* ---------------------------------

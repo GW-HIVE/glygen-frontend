@@ -131,12 +131,20 @@
 
                     <!--organism-->
 
-                    {{#tax_id}}
+                    <!--{{#tax_id}}-->
+                    <!--<tr>-->
+                        <!--<td>Taxonomy ID:</td>-->
+                        <!--<td>{{tax_id}}</td>-->
+                    <!--</tr>-->
+                    <!--{{/tax_id}}-->
+
+                    {{#organism.name}}
                     <tr>
-                        <td>Taxonomy ID:</td>
-                        <td>{{tax_id}}</td>
+                        <td>Species:</td>
+                        <td>
+                            {{organism.name}}</td>
                     </tr>
-                    {{/tax_id}}
+                    {{/organism.name}}
 
                     <!--glycan type-->
                     {{#glycan_type}}
@@ -198,7 +206,7 @@
 
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 
-                <button type="button" class="btn btn-primary-updateSearch"  onclick="updateSearch();">Update Results</button>
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
             
                 <!-- <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the same search again using the current version of the database.</p> -->
                 
@@ -293,6 +301,7 @@
     <!-- script for template engine -->
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for getting Web Service URLs -->
+    <script type="text/javascript" src="js/domain_url.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>

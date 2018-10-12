@@ -255,3 +255,51 @@ h4 {
     -ms-user-select: none;
     user-select: none;
 }
+
+/*
+    Sequence Highlighting
+ */
+.highlight-row {
+    font-family: monospace;
+}
+.highlight-line-number {
+    white-space: pre;
+}
+
+.highlight-section {
+    position: relative;
+}
+.highlight-highlight {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.highlight-highlight[data-type="mutation"] .highlight-highlight-area {
+    background: rgba(0, 0, 256, .5); // red
+}
+
+.highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
+    background: rgba(0, 256, 0, .9);//green
+}
+
+.highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
+    background: rgba(256, 0, 0, .5);//blue
+
+}
+
+
+#sequnce_highlight {
+    display: block;
+    padding: 9.5px;
+    margin:25px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #e6e6e6;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+

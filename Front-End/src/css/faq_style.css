@@ -89,6 +89,23 @@ header h1 {
   }
 } */
 
+/* download class added by Gaurav 09/24/2018 */
+.gg-download{
+  box-shadow: none !important;
+  margin-bottom: 1em;
+}
+@media only screen and (min-width: 1301px) and (max-width: 1900px) {
+  .gg-download{
+    margin-left: 18%;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1300px) {
+  .gg-download{
+    margin-left: 29%;
+  }
+}
+/* end of download class */
+
 .cd-faq {
   width: 90%;
   max-width: 1024px;

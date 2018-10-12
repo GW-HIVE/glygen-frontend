@@ -57,7 +57,7 @@ function pageFormat1(value, row, index, field) {
 
 
 function detailFormat(index, row) {
-    var html = [];
+    // var html = [];
     var html = [];
     var evidences = row.evidence;
     for (var i = 0; i < evidences.length; i++) {
@@ -69,7 +69,18 @@ function detailFormat(index, row) {
     return html.join('');
 }
 
+function buildSummary(queryInfo, question) {
 
+    //quick search
+    var summaryTemplate = $('#summary-template').html();
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo[question] = true;
+    // queryInfo.species = getMessageText(queryInfo.tax_id, queryInfo);
+    // queryInfo.questionText = DYNAMIC_MESSAGES[question](queryInfo);
+    // queryInfo.questionText = getMessageText(question, queryInfo);
+    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    $('#summary-table').html(summaryHtml);
+}
 
 function editSearch() {
     {
@@ -128,7 +139,9 @@ function ajaxListSuccess(data) {
         $table.bootstrapTable('append', items);
 
         buildPages(data.pagination);
+        buildSummary(data.query, question);
 
+        document.title = 'Orthologus-list';
         // buildSummary(data.query);
 
 
@@ -137,6 +150,14 @@ function ajaxListSuccess(data) {
     }
 
 }
+
+function editSearch() {
+    var question =  getParameterByName('question');
+
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
+}
+
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure() {
@@ -189,6 +210,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
+var question = getParameterByName('question');
 LoadDataList(id);
 
 

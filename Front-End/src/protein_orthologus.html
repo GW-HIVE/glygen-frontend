@@ -62,23 +62,34 @@
                     <option>50</option>
                     <option>70</option>
                 </select>
-                <!--<label>Sort By</label>-->
-                <!--<select class="sort-select form-control" onchange="xsort(this);">-->
-                    <!--<option selected value="uniprot_canonical_ac">ID</option>-->
-                    <!--<option value="tax_id">tax_id</option>-->
-                    <!--<option value="protein_name">protein_name</option>-->
-                    <!--<option value="organism">organism</option>-->
-                <!--</select>-->
-                <!--<select class="dir-select form-control" onchange="xdir(this);">-->
-                    <!--<option value="asc" selected>ASC</option>-->
-                    <!--<option value="desc">DESC</option>-->
-                <!--</select>-->
+
                 <label class="searchresult"></label>
             </form>
         </div>
     </div>
-    <!-- sorting_top-end -->
-    <!-- table start here -->
+    <script id="summary-template" type="text/template">
+        <div class="panel panel-default results-table-top">
+            <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
+            <h5><center>Performed on: {{execution_time}} (EST)</center></h5>
+
+            {{#QUESTION_4}}
+            <center><p>What are the orthologues of <b>{{#uniprot_canonical_ac}}{{uniprot_canonical_ac}}{{/uniprot_canonical_ac}}</b> in different species?  </p></center>
+            {{/QUESTION_4}}
+
+
+            <div align="center">
+                <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
+
+                &nbsp; &nbsp; &nbsp; &nbsp;
+
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
+
+                <!-- <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the same search again using the current version of the database.</p> -->
+
+                <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
+            </div>
+        </div>
+    </script>
 
     <div class="row">
         <div class="col-md-12 col-xs-12">
@@ -86,15 +97,13 @@
                    data-page-size="10">
                 <!-- <table id="gen-table"    data-search="true">    may be for version 2-->
                 <!-- <th data-field="state" data-checkbox="true"></th>           may be for version 2 -->
-
                 <thead>
                 <tr>
                     <th data-field="uniprot_canonical_ac"  data-sortable="true" data-formatter="pageFormat">UniProt Accession</th>
                     <th data-field="protein_name" data-sortable="true">Protein Name  </th>
                     <th data-field="organism" data-sortable="true">Organism
                     </th>
-                    <th data-field="tax_id" data-sortable="true">Tax_ID
-                </th>
+                    <th data-field="tax_id" data-sortable="true">Tax_ID</th>
 
                 </tr>
                 </thead>
@@ -149,10 +158,15 @@
 <!-- script for template engine -->
 <script type="text/javascript" src="libraries/mustache.js"></script>
 <!-- script for getting Web Service URLs -->
+<script type="text/javascript" src="js/domain_url.js"></script>
 <script type="text/javascript" src="js/ws_url.js"></script>
+
 
 <!-- script for glycan list page -->
 <script type="text/javascript" src="js/orthologus.js"></script>
+<script type="text/javascript" src="js/quicksearch.js"></script>
+
+<script type="text/javascript" src="js/quickproteinlist.js"></script>
 <!-- script for pagination page -->
 <script type="text/javascript" src="js/pagination.js"></script>
 <!-- script for third party-->
