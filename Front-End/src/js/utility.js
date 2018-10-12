@@ -117,8 +117,6 @@ function getErrorMessage(errorCode) {
                 message: "Oops, something went wrong. Please try again later." + contactUsMsg,
                 title: "Unexpected Error"
             };
-
-
     }
 }
 
@@ -160,7 +158,9 @@ function getTimeout(ajaxWebService) {
 
     // search
     var searchGlycan = 60000,   //10000,
-        searchProtein = 60000;  //10000;
+        searchProtein = 60000,  //10000;
+        searchSimpleGlycan = 60000,
+        searchSimpleProtein = 60000; 
 
     // list
     var listGlycan = 5000,
@@ -186,6 +186,8 @@ function getTimeout(ajaxWebService) {
             return detailGlycan;
         case "home_init":
             return homeInit;
+        case "glycan_search_simple":
+            return searchSimpleGlycan;
 
         // protein
         case "search_init_protein":
@@ -196,6 +198,8 @@ function getTimeout(ajaxWebService) {
             return listProtein;
         case "detail_protein":
             return detailProtein;
+        case "protein_search_simple":
+            return searchSimpleProtein;
 
         // Glycoprotein
         case "search_init_glycoprotein":

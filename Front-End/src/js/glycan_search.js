@@ -22,19 +22,14 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-
-
-function sortDropdown(a, b)
-{    if (a.name < b.name)
-{        return -1;
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
 }
-else if (b.name < a.name)
-{        return 1;
-}
-return 0;
-}
-
-
 
 
 /** functions for dropdowns organism
@@ -59,9 +54,14 @@ $(document).ready(function () {
 
             var orgElement = $("#species").get(0);
             result.organism.sort(sortDropdown);
-            for (var x = 0; x < result.organism.length; x++)
-            {
+            for (var x = 0; x < result.organism.length; x++) {
                 createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
+
+            var categoryType = $("#simplifiedCategory").get(0);
+            result.simple_search_category.sort(sortDropdownSimple);
+            for (var x = 0; x < result.simple_search_category.length; x++) {
+                createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
             }
 
             var glycanElement = $(".ddl").get(0);
@@ -104,7 +104,7 @@ $(document).ready(function () {
             });
 
         }
-});
+    });
 });
 
 ///New slider
@@ -153,8 +153,7 @@ Sliderbox.prototype.handler = function (target) {
 
             slider.noUiSlider.set([e.target.value]);
 
-        }
-        else {
+        } else {
 
             slider.noUiSlider.set([null, e.target.value]);
 
@@ -209,8 +208,7 @@ Sliderbox1.prototype.handler = function (target) {
 
             slider1.noUiSlider.set([e.target.value]);
 
-        }
-        else {
+        } else {
 
             slider1.noUiSlider.set([null, e.target.value]);
 
@@ -220,8 +218,6 @@ Sliderbox1.prototype.handler = function (target) {
 
 };
 
-
-
 /** glycan sub type dropdown function based on type field
  * @param {numeric} ddl1 - User selected glycan type
  * @param {numeric} ddl2 - Glycan sub type
@@ -229,6 +225,15 @@ Sliderbox1.prototype.handler = function (target) {
 
 function configureDropDownLists(ddl1, ddl2, callback) {
     var glyan_type_name = ddl1.value;
+    // Hides Subtype by default and shows glycan type when it's selected
+    var subtypeDiv = document.getElementById("showSubtype");
+    if (subtypeDiv.style.display = "block") {
+        if (ddl1.value == "") {
+            subtypeDiv.style.display = "none";
+        }
+    } else {
+        subtypeDiv.style.display = "block";
+    }
 
     // clears existing options
     ddl2.options.length = 0;
@@ -249,8 +254,7 @@ function configureDropDownLists(ddl1, ddl2, callback) {
                 var Bnumber = parseInt(Btokens[1]);
                 if (isNaN(Anumber) || isNaN(Bnumber)) {
                     return Atext > Btext;
-                }
-                else {
+                } else {
                     return Anumber - Bnumber;
                 }
             });
@@ -291,7 +295,10 @@ function submitvalues() {
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
     var selected_species = document.getElementById("species");
-    var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
+    var organism = {
+        "id": parseInt(selected_species.value),
+        "name": selected_species.options[selected_species.selectedIndex].text
+    };
     var glycan_type = document.getElementById("ddl").value;
     var glycan_subtype = document.getElementById("ddl2").value;
     var proteinid = document.getElementById("protein").value;
@@ -308,9 +315,9 @@ debugger;
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-                displayErrorByCode(results.error_code,results.field);
+                displayErrorByCode(results.error_code, results.field);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", results.error_code+" for " + json);
+                activityTracker("error", "", results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -326,10 +333,6 @@ debugger;
     });
 }
 
-
-//
-//
-
 /** Forms searchjson from the form values submitted
  * @param input_query_type query search
  * @param input_glycan_id user glycan id input
@@ -344,11 +347,8 @@ debugger;
  */
 
 //form json from form submit
-//function searchjson(input_query_type, input_glycan_id, input_mass, input_sugar, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
-    function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif)
-{
-
-        var enzymes = {}
+function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+    var enzymes = {}
     if (input_enzyme) {
         enzymes = {
             "id": input_enzyme,
@@ -370,7 +370,10 @@ debugger;
     var formjson = {
         "operation": "AND",
         query_type: input_query_type,
-        mass: { "min": parseInt(mass_min), "max": parseInt(mass_max) },
+        mass: {
+            "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
+        },
         // mass:masses,
         number_monosaccharides: {
             "min": parseInt(sugar_min),
@@ -388,7 +391,14 @@ debugger;
     return formjson;
 }
 
-
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
+}
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
@@ -398,3 +408,65 @@ debugger;
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
+
+/* ---------------------- 
+    Simplified search 
+------------------------- */
+
+/**
+ * sorting drop down list for category in simplified search page.
+ * @author Tatiana Williamson
+ * @date October 2, 2018
+ */
+
+function sortDropdownSimple(c, d) {
+    if (c.id < d.id) {
+        return -1;
+    } else if (d.id < c.id) {
+        return 1;
+    }
+    return 0;
+}
+
+function searchGlycanSimple() {
+
+    // Get values from form fields
+    var query_type = "glycan_search_simple";
+    var term_category = document.getElementById("simplifiedCategory").value;
+    var term = document.getElementById("simplifiedSearch").value;
+    var formObjectSimple = searchjsonSimple(query_type, term_category, term);
+    var json = "query=" + JSON.stringify(formObjectSimple);
+    // call web services 
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("glycan_search_simple"),
+        data: json,
+        timeout: getTimeout("search_simple_glycan"),
+        error: ajaxSearchFailure,
+        success: function (results) {
+            if (results.error_code) {
+                displayErrorByCode(results.error_code);
+                // activityTracker("error", "", results.error_code);
+                activityTracker("error", "", results.error_code + " for " + json);
+                $('#loading_image').fadeOut();
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+                displayErrorByCode('no-results-found');
+                activityTracker("user", "", "no result found");
+                $('#loading_image').fadeOut();
+            } else {
+                window.location = './glycan_list.html?id=' + results.list_id;
+                $('#loading_image').fadeOut();
+            }
+        }
+    });
+}
+//formjason from form submit 
+function searchjsonSimple(input_query_type, input_category, input_term) {
+    var formjsonSimple = {
+        "operation": "AND",
+        query_type: input_query_type,
+        term: input_term,
+        term_category: input_category
+    };
+    return formjsonSimple;
+}

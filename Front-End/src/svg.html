@@ -1,0 +1,102 @@
+
+<?xml version="1.0"?>
+    <svg viewbox="0 0 400 860" xmlns="http://www.w3.org/2000/svg">
+    <script type="text/ecmascript">
+    <![CDATA[
+
+    window.onload=function () {
+        var sugarNode = document.getElementsByClassName("sugar");
+        for (var i = 0; i < sugarNode.length; i++) {
+            sugarNode[i].addEventListener('click', mClick, false);
+            sugarNode[i].addEventListener('mouseover', mOver, false);
+            sugarNode[i].addEventListener('mouseleave', mLeave, false);
+        }
+    }
+
+
+    // It seems that a clever programmer could combine the mClick, mOver, and mLeave
+    //   methods, and have the method sense the event, but I am not that clever
+
+    // To access this function, it must be outside the scope of the onload function
+    function mClick() {
+        var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
+        if (useExternalMethod == "0") {
+            // perform the function (in this case, go to pubchem) to use when the svg file is used in isolation
+            var nodeName = this.getAttribute("sugarName");
+            window.open("https://pubchem.ncbi.nlm.nih.gov/compound/" + nodeName)
+        } else {
+            // perform the function defined in the enclosing (parent) html document
+            // This constitutes an INTERFACE to the extClick method defined in the parent html document
+            var nodeId = this.getAttribute("nodeIndex");
+            window.parent.extClick(nodeId);
+        }
+    }
+
+    function mOver() {
+        var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
+        if (useExternalMethod == "1") {
+            // perform the function defined in the enclosing (parent) html document
+            // This constitutes an INTERFACE to the extOver method defined in the parent html document
+            var nodeId = this.getAttribute("nodeIndex");
+            window.parent.extOver(nodeId);
+        }
+    }
+
+    function mLeave() {
+        var useExternalMethod = document.getElementById("extFlag").getAttribute("value");
+        if (useExternalMethod == "1") {
+            // perform the function defined in the enclosing (parent) html document
+            // This constitutes an INTERFACE to the extLeave method defined in the parent html document
+            var nodeId = this.getAttribute("nodeIndex");
+            window.parent.extLeave(nodeId);
+        }
+    }
+
+    ]]>
+  </script>
+
+<desc value="0" id="extFlag"/>
+        
+<line stroke="black" x1="780" y1="220" x2="720" y2="220"></line>
+<text text-anchor="middle" dominant-baseline="central" x="750" y="210">&#x3b2;4</text>
+<line stroke="black" x1="720" y1="220" x2="660" y2="220"></line>
+<text text-anchor="middle" dominant-baseline="central" x="690" y="210">&#x3b2;4</text>
+<line stroke="black" x1="660" y1="220" x2="600" y2="295"></line>
+<text text-anchor="middle" dominant-baseline="central" x="621" y="251.5">&#x3b1;3</text>
+<line stroke="black" x1="600" y1="295" x2="540" y2="320"></line>
+<text text-anchor="middle" dominant-baseline="central" x="565" y="298.5">&#x3b2;2</text>
+<line stroke="black" x1="540" y1="320" x2="480" y2="320"></line>
+<text text-anchor="middle" dominant-baseline="central" x="510" y="310">&#x3b2;4</text>
+<line stroke="black" x1="600" y1="295" x2="540" y2="270"></line>
+<text text-anchor="middle" dominant-baseline="central" x="575" y="273.5">&#x3b2;4</text>
+<line stroke="black" x1="540" y1="270" x2="480" y2="270"></line>
+<text text-anchor="middle" dominant-baseline="central" x="510" y="260">&#x3b2;4</text>
+<line stroke="black" x1="660" y1="220" x2="600" y2="145"></line>
+<text text-anchor="middle" dominant-baseline="central" x="639" y="176.5">&#x3b1;6</text>
+<line stroke="black" x1="600" y1="145" x2="540" y2="170"></line>
+<text text-anchor="middle" dominant-baseline="central" x="565" y="148.5">&#x3b2;2</text>
+<line stroke="black" x1="540" y1="170" x2="540" y2="220"></line>
+<text text-anchor="middle" dominant-baseline="central" x="528" y="195">&#x3b1;3</text>
+<line stroke="black" x1="540" y1="170" x2="480" y2="170"></line>
+<text text-anchor="middle" dominant-baseline="central" x="510" y="160">&#x3b2;4</text>
+<line stroke="black" x1="600" y1="145" x2="540" y2="120"></line>
+<text text-anchor="middle" dominant-baseline="central" x="575" y="123.5">&#x3b2;6</text>
+<line stroke="black" x1="540" y1="120" x2="480" y2="120"></line>
+<text text-anchor="middle" dominant-baseline="central" x="510" y="110">&#x3b2;4</text>
+<rect class="sugar" width="24" height="24" x="768" y="208" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="0"></rect>
+<rect class="sugar" width="24" height="24" x="708" y="208" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="1"></rect>
+<circle class="sugar" r="12" cx="660" cy="220" fill="#00A651" stroke="black" sugarName="Man" nodeIndex="2"></circle>
+<circle class="sugar" r="12" cx="600" cy="295" fill="#00A651" stroke="black" sugarName="Man" nodeIndex="3"></circle>
+<rect class="sugar" width="24" height="24" x="528" y="308" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="4"></rect>
+<circle class="sugar" r="12" cx="480" cy="320" fill="#FFD400" stroke="black" sugarName="Gal" nodeIndex="5"></circle>
+<rect class="sugar" width="24" height="24" x="528" y="258" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="6"></rect>
+<circle class="sugar" r="12" cx="480" cy="270" fill="#FFD400" stroke="black" sugarName="Gal" nodeIndex="7"></circle>
+<circle class="sugar" r="12" cx="600" cy="145" fill="#00A651" stroke="black" sugarName="Man" nodeIndex="8"></circle>
+<rect class="sugar" width="24" height="24" x="528" y="158" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="9"></rect>
+<polygon class="sugar" points="528,232 552,232 540,208" fill="#ED1C24" stroke="black" sugarName="Fuc" nodeIndex="10"></polygon>
+<circle class="sugar" r="12" cx="480" cy="170" fill="#FFD400" stroke="black" sugarName="Gal" nodeIndex="11"></circle>
+<rect class="sugar" width="24" height="24" x="528" y="108" fill="#0090BC" stroke="black" sugarName="GlcNAc" nodeIndex="12"></rect>
+<circle class="sugar" r="12" cx="480" cy="120" fill="#FFD400" stroke="black" sugarName="Gal" nodeIndex="13"></circle>
+
+
+</svg>

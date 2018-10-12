@@ -18,6 +18,9 @@ function getWsUrl(request, id, id1) {
     var ws_userID = ws_base+"auth/userid";
     var ws_contact = ws_base+"auth/contact";
     var ws_useCaseSearch=ws_base+"usecases";
+    var ws_homeInit=ws_base+"pages/home_init";
+
+
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
@@ -31,8 +34,7 @@ function getWsUrl(request, id, id1) {
             break;
         case "contact":
             return ws_contact;
-            break;
-            
+            break;           
         //Homepage webservices
         case "home_init":
             return ws_home_init;
@@ -44,6 +46,10 @@ function getWsUrl(request, id, id1) {
 
         case "glycan_search":
             return ws_base_glycan + "/search";
+            break;
+
+        case "glycan_search_simple":
+            return ws_base_glycan + "/search_simple";
             break;
             
         case "glycan_image":
@@ -65,6 +71,9 @@ function getWsUrl(request, id, id1) {
         case "search_protein":
             return ws_base_protein + "/search";
             break;
+        case "protein_search_simple":
+            return ws_base_protein + "/search_simple";
+            break;
         case "protein_image_service":
             return ws_base_glycan + "/image/" + id;
             break;
@@ -74,9 +83,6 @@ function getWsUrl(request, id, id1) {
         case "protein_detail":
             return ws_base_protein + "/detail/" + id;
             break;
-
-
-
 
         //Typeahead webservices
 
