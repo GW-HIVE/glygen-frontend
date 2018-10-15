@@ -41,8 +41,6 @@ var limit = 10;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    // var excutionDate= new Date(Date.UTC(queryInfo.execution_time));
-
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
     // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -52,38 +50,18 @@ function buildSummary(queryInfo) {
 
 }
 
-// /**
-//  * Redirect to Page index page or search back
-//  */
-// function redirectPage1() {
-//     window.location.replace("index.html");
-// }
-//
-// function redirectPage2() {
-//     window.location.href = "glycan_search.html";
-// }
-//
-// //      $(document).ready(function(){
-// //      // $("demosearch").tooltip();
-// // });
 
+/**
 
+ * Format function of the for the getting total result for each search   [+]
+ * @param {total_length} paginationInfo.total_length -
+ */
 
 function totalNoSearch(total_length) {
     $('.searchresult').html( "\""  + total_length + " glycans were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
 }
-
-/**
- * Redirect to  searchPage with id after clicking editSearch
- */
-
-// function editSearch() {
-//     {
-//         window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/glycan_search.html?id=" + id);
-//     }
-// }
 
 /**
 
@@ -132,28 +110,6 @@ function massFormatter(value) {
     }
 }
 
-
-/**
-
- * Format function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-
-// function detailFormat(index, row) {
-//     var html = [];
-//     var glyco = row.glycoct.replace(/ /g, '\n');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
-//     return html.join('');
-// }
-
-
 /**
 
  * updateSearch function of the detail table when opening each row [+]
@@ -165,28 +121,6 @@ function massFormatter(value) {
  */
 
 var lastSearch;
-
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        url: getWsUrl('glycan_search')+"?query=" + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            if (result.list_id) {
-                console.log(result);
-                activityTracker("user", id, "update search");
-                window.location = 'glycan_list.html?id=' + result.list_id;
-            } else {
-                // handle if no results
-                activityTracker("error", id, "update search: no result found");
-            }
-        },
-        error: ajaxListFailure
-    });
-}
-
-
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
@@ -226,16 +160,20 @@ function ajaxListSuccess(data) {
                     number_enzymes: glycan.number_enzymes,
                     number_monosaccharides: glycan.number_monosaccharides,
                     iupac: glycan.iupac,
-                    glycoct: glycan.glycoct
+                        glycoct: glycan.glycoct
                 });
             }
+        }
+
+        if(data.query.organism && (data.query.organism.id === 0)){
+            data.query.organism.name = "All";
         }
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
         buildPages(data.pagination);
         buildSummary(data.query);
-
+        // buildSummary(data.query, question);
         // document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
