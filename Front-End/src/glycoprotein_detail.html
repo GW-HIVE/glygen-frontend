@@ -21,7 +21,6 @@
     <meta http-equiv="Expires" content="0" />
 
     <title>Details - glygen</title>
-
     <!-- Please do not change Sequence-->
     <!-- CSS reset -->
     <link rel="stylesheet" href="css/reset.css">
@@ -39,7 +38,8 @@
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
 
 </head>
 
@@ -115,7 +115,9 @@
 
                     <div class="gg-panel-heading">
                         <!-- added new class -->
+                        {{#uniprot}}
                         <h4>{{uniprot_canonical_ac}}</h4>
+                        {{/uniprot}}
                     </div>
                     <div class="panel-body">
                         <!-- added new class -->
@@ -129,12 +131,13 @@
                                 {{/gene}}
                                 {{^gene}}  {{/gene}}
 
-                                {{#uniprot_id}}
+                                {{#uniprot}}
                                 <li class="list-group"><strong>UniProt ID:</strong>
-                                    <a class="panelcontent" href="http://www.uniprot.org/uniprot/{{uniprot_id}}" target="_blank">{{uniprot_id}}</a>
+                                    {{#uniprot_id}} <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
                                 {{^uniprot_id}}  {{/uniprot_id}}
+                                {{/uniprot}}
 
                                 {{#uniprot_canonical_ac}}
                                 <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
@@ -148,7 +151,6 @@
                                 </li>
                                 {{/full}}
                                 {{/recommendedname}}
-
                                 {{#refseq}}
                                 {{#refseq.ac}} <li class="list-group"><strong>RefSeq Accession:</strong>
                                 <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
@@ -156,8 +158,6 @@
                                 <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
                                 {{/refseq.ac}}
                                 {{/refseq}}
-
-
                                 {{#mass.monoisotopic_mass}}
                                 <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
                                 {{/mass.monoisotopic_mass}}
@@ -165,12 +165,6 @@
 
                                 <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
 
-
-                                <!--{{# alternativeNames}} {{ full }}	{{ short }}{{/ alternativeNames}}-->
-                                <!--{{#hasFullName }} <p class="panelmaincontent">Name:{{recommendedName.full}}({{recommendedName.short}}) {{/hasFullName }}-->
-                                <!--{{#alternativenames}}-->
-                                <!--<li class="list-group">{{full}} ({{short}})</li>-->
-                                <!--{{/alternativenames}}-->
 
                             </div>
                         </div>
@@ -197,7 +191,7 @@
                             <div class='col-md-12 col-xs-12'>
                                 <div class="panelmaincontent">
                                     <button class="open-close-button">+</button> {{name}} (NCBI taxonomy ID:
-                                    <a class="panelcontent" href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id={{taxid}}" target="_blank">{{taxid}}</a>)
+                                    <a class="panelcontent"      href="{{url}}" target="_blank">{{taxid}}</a>)
                                 </div>
                                 <ul style="display:none;">
                                     {{#evidence}}
@@ -223,21 +217,29 @@
                 <li class="cd-faq-title" />
                 <!-- added new class -->
                 <div class="panel panel-default">
-
                     <div class="gg-panel-heading">
                         <!-- added new class -->
                         <h4>Sequence</h4>
 
                     </div>
                     <div class="panel-body">
-                        <!-- added new class -->
-                        <!--<span class="fasta">{{ sequence.sequence }}</span>-->
-                        <div class="fasta">
-                            <pre>{{{sequence.sequence}}}</pre>
+
+                        <div class="sequence-panel" id="sequnce_highlight">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" name="checkbox" id="seq_n_link" onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span class="sequnce1">N-linked Glycosylation</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="checkbox" onchange="checkUncheck('o_link_glycosylation', this)"/>&nbsp;<span class="sequnce2">O-linked Glycosylation</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="checkbox" onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>
+                                </li>
+                            </ul>
                         </div>
-                        <!--<div class="fasta"><pre>{{ sequence.length }}</pre></div>-->
                     </div>
                 </div>
+
             </ul>
 
 
@@ -283,6 +285,7 @@
                                     <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
                                 </div>
                                 {{/links}}
+                                {{^link}}  {{/link}}
                             </div>
                         </div>
                         {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
@@ -515,7 +518,7 @@
                             {{#disease}}
                             <div class='col-md-12 col-xs-12'>
                                 <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button> {{name}} (ICD10: {{icd10}}; DOID:
+                                    <button class="open-close-button">+</button> {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID:
                                     <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>)
                                 </div>
                                 <ul style="display:none;">
@@ -618,9 +621,12 @@
                         <p class="panelmaincontent">
                         <li class="list-group" id="panelmaincontent1"> <strong>Journal:</strong> {{journal}}<br>
                             <strong>Title:</strong> {{title}}<br>
-                            <i class="fas fa-book"></i> PMID:<a href="https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}" target="_blank">{{pmid}}</a></li>
+                            <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
 
 
+
+
+                        <!--{{url}}{{pmid}}https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}-->
                         {{/publication}} {{^publication}} No data available. {{/publication}}
                     </div>
                 </div>
@@ -658,7 +664,6 @@
 <!-- script for webservice -->
 <script type="text/javascript" src="js/domain_url.js"></script>
 <script type="text/javascript" src="js/ws_url.js"></script>
-<script type="text/javascript" src="js/domain_url.js"></script>
 <!-- script for navigation -->
 <script src="js/navbar.js"></script>
 <!-- script for side navigation -->
@@ -673,6 +678,7 @@
     $(document).ajaxStop(function () {
         // calls the sidebar function only when all ajax calls are completed
         faqMain();
+
         function scrollToPanel(hash) {
             //to scroll to the particular sub section.
             $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
