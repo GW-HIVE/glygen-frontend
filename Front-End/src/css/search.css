@@ -12,8 +12,9 @@ textarea {
     background-color: #f9f9f9;
 }
 
-input[type=text]:hover {
-    background-color: #f7f7f7;
+input[type=text]:hover,
+input[type=text]:focus {
+    background-color: #F5F5F5;
 }
 
 label {
@@ -79,7 +80,6 @@ select {
     border: 2px solid #dfe5ed;
     padding: 40px 80px 20px;
     margin: 0 auto;
-    overflow: auto;
     margin-top: 40px;
     margin-bottom: 40px;
 }
