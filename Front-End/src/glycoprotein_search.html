@@ -82,11 +82,11 @@
                         <div class="tab-content container">
                             <!-- Start Tab 1 Simplified search -->
                             <div class="tab-pane fade in active" id="tab_default_1">
-                                <div class="container">
+                                <div class="container simpleContainer">
                                     <div class="row simplified-search">
                                         <div class="col-sm-3 gg-form-group">
                                             <select id="simplifiedCategory">
-                                                <option value="select">Select</option>
+                                                <option value="any">Select</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-7 gg-form-group">
@@ -99,7 +99,6 @@
                                     </div>
                                 </div> <!--    End Simplified Search Div-->
                             </div> <!--  End first Tab -->
-
                             <!--Start Tab 2 Advanced Search-->
                             <div class="tab-pane fade in" id="tab_default_2">
                                 <div class="row">
@@ -273,6 +272,7 @@
                                                     <div class="gg-text-example">Example: Asparagine or Asn or N</div>
                                                 </div>
                                             </div>
+
                                             <!-- Protein or Peptide Sequence -->
                                             <div class="gg-form-group2 row">
                                                 <label class="control-label col-sm-4" for="sequences">
@@ -392,7 +392,6 @@
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
-
     </script>
     <!-- script for UI autocomplte -->
     <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>

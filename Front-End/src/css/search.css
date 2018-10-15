@@ -44,6 +44,22 @@ select {
     height: 35px;
 }
 
+/*
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.simpleContainer {
+    min-height: 100%;
+    margin-bottom: -150px;
+}
+
+.footer {
+    height: 50px;
+}
+*/
 
 /* --------------------------
     Simplified Search 
@@ -61,8 +77,8 @@ select {
     margin: 0 auto;
     overflow: auto;
     vertical-align: middle;
-    margin-top: 15%;
-    margin-bottom: 19%;
+    margin-top: 17%;
+    margin-bottom: 17%;
 }
 
 .simplified-search input[type=text] {
@@ -179,9 +195,9 @@ select {
     height: 100%;
 }
 
-/* -------------------------
-        Tabs style
----------------------------- */
+/* ---------------------------------
+    Tabs style Simplified Search
+------------------------------------- */
 /* Tabs panel */
 .tabbable-panel {
     padding: 10px;
