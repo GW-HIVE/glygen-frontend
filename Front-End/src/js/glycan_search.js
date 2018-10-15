@@ -6,22 +6,9 @@
 // @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 //     -->
 
-
-
-function addCommas(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-
-    return x1 + x2;
-}
-
+/** functions for sorted dropdowns organism
+ * get organism drop down values for search form
+ */
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;
@@ -30,11 +17,6 @@ function sortDropdown(a, b) {
     }
     return 0;
 }
-
-
-/** functions for dropdowns organism
- * get organism drop down values for search form
- */
 
 var searchInitValues;
 
@@ -242,8 +224,6 @@ function configureDropDownLists(ddl1, ddl2, callback) {
 
     for (var x = 0; x < searchInitValues.glycan_type.length; x++) {
         var glycan_type = searchInitValues.glycan_type[x];
-
-        // find glycan type by name
         if (glycan_type.name === glyan_type_name) {
             glycan_type.subtype.sort(function (a, b) {
                 var Atokens = a.split(' ');
@@ -277,6 +257,10 @@ function configureDropDownLists(ddl1, ddl2, callback) {
     }
 }
 
+
+/** functions for dropdown option
+ *
+ */
 function createOption(ddl, text, value) {
     var opt = document.createElement('option');
     opt.value = value;
@@ -460,7 +444,7 @@ function searchGlycanSimple() {
     });
 }
 
-//formjason from form submit 
+
 function searchjsonSimple(input_query_type, input_category, input_term) {
     var formjsonSimple = {
         "operation": "AND",

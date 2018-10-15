@@ -20,140 +20,6 @@ var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 25;
 
-// /**
-//  * Reads a new limit and reloads the data.
-//  * @param {domNode} element - The element from which we take the new limit value
-//  */
-// function xlimit(element) {
-//     limit = $(element).val();
-//     $('.limit-select').val(limit);
-//     LoadDataList();
-//     activityTracker("user", id, "page limit: " + limit);
-// }
-//
-// /**
-//  * Loads the next page of results
-//  */
-// function next() {
-//     page = page + 1;
-//     $(".page-select").val(page);
-//     LoadDataList();
-//     activityTracker("user", id, "page: " + page);
-// }
-//
-// /**
-//  * Loads the Previous page of results
-//  */
-// function prev() {
-//     if (page > 1) {
-//         page = page - 1;
-//         $(".page-select").val(page);
-//         LoadDataList();
-//         activityTracker("user", id, "page: " + page);
-//     }
-// }
-//
-// /**
-//  * Reads a new page and reloads the data.
-//  * @param {domNode} element - The element from which we take the new page value
-//  */
-// function xpage(element) {
-//     page = $(element).val();
-//     $('.page-select').val(page);
-//     LoadDataList();
-//     activityTracker("user", id, "page: " + page);
-// }
-//
-// /**
-//  * Reads a new sort and reloads the data.
-//  * @param {domNode} element - The element from which we take the new sort value
-//  */
-//
-// function xsort(element) {
-//     sort = $(element).val();
-//     $('.sort-select').val(sort);
-//     LoadDataList();
-//     activityTracker("user", id, "sort: " + sort);
-// }
-//
-// /**
-//  * Reads a new asc/dec dirction for data  and reloads the data.
-//  * @param {domNode} element - The element from which we take the new direction value
-//  */
-//
-// function xdir(element) {
-//     dir = $(element).val();
-//     $('.dir-select').val(dir);
-//     LoadDataList();
-//     activityTracker("user", id, "sort direction: " + dir);
-// }
-//
-// /**
-//  * its calculate no of pages using limit and total_length.
-//  * @param {integer} total_length - The total_length is total number of records
-//  * @param {integer} limit - The limit is records per page
-//  * @returns {number} Number of pages
-//  */
-// function noOfPage(total_length, limit) {
-//     var size = Math.ceil(total_length / limit);
-//     return size;
-// }
-//
-//
-// /**
-//  * totalNoSearch show user total search result.
-//  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
-//  */
-// function totalNoSearch(total_length) {
-//     $('.searchresult').html(" You Found  " + total_length + " results of protein");
-//
-// }
-//
-//
-// /**
-//  * it creates user interface for pagination for dropdown
-//  * @param {Object} paginationInfo - the dataset of pagination info is retun from server
-//  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
-//  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
-//  */
-//
-// function buildPages(paginationInfo) {
-//     var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
-//     var pageSelectors = $(".page-select");
-//     pageSelectors.empty();
-//     for (var i = 1; i <= total_length; i++) {
-//         pageSelectors.append($("<option></option>").attr("value", i).text(i));
-//     }
-//     pageSelectors.val(page);
-//     /**
-//      * this works for Showing user how many results they found .
-//
-//      */
-//     totalNoSearch(paginationInfo.total_length);
-//     /**
-//      * this works for enabling and disable prev and next button.
-//
-//      */
-//     $(".prevbutton").attr("disabled", (page == 1));
-//     $(".nextbutton").attr("disabled", (page == total_length));
-// }
-
-function addCommas(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-
-    return x1 + x2;
-}
-
-
-
 /**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
@@ -166,24 +32,12 @@ function addCommas(nStr) {
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // var excutionDate= new Date(queryInfo.execution_time);
-    // queryInfo.execution_time = excutionDate.toLocaleString();
     queryInfo.mass.min = addCommas(queryInfo.mass.min);
     queryInfo.mass.max = addCommas(queryInfo.mass.max);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
 
-/**
- * Redirect to Page index page or search back
- */
-function redirectPage1() {
-    window.location.replace("http://glycomics.ccrc.uga.edu/ggtest/gui/index.html");
-}
-
-function redirectPage2() {
-    window.location.href = "http://glycomics.ccrc.uga.edu/ggtest/gui/glycoprotein_search.html";
-}
 
 
 function totalNoSearch(total_length) {
@@ -235,61 +89,6 @@ function MassFormatter(value) {
     }
 }
 
-
-/**
-
- * Format function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-
-// function DetailFormat(index, row) {
-//     var html = [];
-//     var glyco = row.glycoct.replace(/ /g, '\n');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-//     return html.join('');
-// }
-
-
-/**
-
- * updateSearch function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-var lastSearch;
-
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
-        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            // if (result.list_id) {
-                console.log(result);
-                activityTracker("user", id, "update search");
-                window.location = 'glycoprotein_list.html?id=' + result.list_id;
-            // } else {
-            //     // handle if no results
-            //     activityTracker("error", id, "update search: no result found");
-            // }
-        },
-        error: ajaxListFailure
-    });
-}
-
-
 /**
  * Handling a succesful call to the server for list page
  * @param {Object} data - the data set returned from the server on success
@@ -317,7 +116,6 @@ function ajaxListSuccess(data) {
                     mass: protein.mass,
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
-                    //protein_name_short: protein.protein_name_short,
                     organism: protein.organism,
                     refseq_name:protein.refseq_name,
                     refseq_ac:protein.refseq_ac

@@ -3,6 +3,10 @@
 // @description: UO1 Version-1.1.
 //6sep-18
 
+
+/** validation for each field
+
+ */
 function validatePathwayID(input) {
     var validLength = (input.value.length <=13);
     if (validLength) {
@@ -14,7 +18,9 @@ function validatePathwayID(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function validateProteinAcc(input) {
 
     var validLength = (input.value.length <=12);
@@ -27,6 +33,9 @@ function validateProteinAcc(input) {
     }
 }
 
+/** validation for each field
+
+ */
 function validateProteinAcc1(input) {
 
     var validLength = (input.value.length <=12);
@@ -39,6 +48,9 @@ function validateProteinAcc1(input) {
     }
 }
 
+/** validation for each field
+
+ */
 function validateProteinAcc2(input) {
 
     var validLength = (input.value.length <= 12);
@@ -51,11 +63,9 @@ function validateProteinAcc2(input) {
     }
 }
 
+/** validation for each field
 
-
-
-
-
+ */
 
 function validateProteinName(input) {
 
@@ -69,7 +79,9 @@ function validateProteinName(input) {
     }
 }
 
+/** validation for each field
 
+ */
 
 function validateEnzymeAcc(input) {
 
@@ -83,7 +95,9 @@ function validateEnzymeAcc(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function validateProteinID(input) {
 
     var validLength = (input.value.length <= 16);
@@ -96,7 +110,9 @@ function validateProteinID(input) {
     }
 }
 
+/** validation for each field
 
+ */
 
 function validateDiseaseName(input) {
 
@@ -111,6 +127,9 @@ function validateDiseaseName(input) {
 }
 
 
+/** validation for each field
+
+ */
 function validatePathwayName(input) {
 
     var validLength = (input.value.length <=141);
@@ -123,7 +142,9 @@ function validatePathwayName(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function validateRefAcc(input) {
 
     var validLength = (input.value.length <=14);
@@ -136,6 +157,9 @@ function validateRefAcc(input) {
     }
 }
 
+/** validation for each field
+
+ */
 function validateMotifName(input) {
     var validLength = (input.value.length <=47);
     if (validLength) {
@@ -148,7 +172,9 @@ function validateMotifName(input) {
 }
 
 
+/** validation for each field
 
+ */
 function validateGlycanAcc(input) {
     var validLength = (input.value.length <= 8);
     if (validLength) {
@@ -160,7 +186,9 @@ function validateGlycanAcc(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function validateGlycanAcc1(input) {
     var validLength = (input.value.length <= 8);
     if (validLength) {
@@ -172,6 +200,9 @@ function validateGlycanAcc1(input) {
     }
 }
 
+/** validation for each field
+
+ */
 function validateGlycanAcc2(input) {
     var validLength = (input.value.length <= 8);
     if (validLength) {
@@ -183,7 +214,9 @@ function validateGlycanAcc2(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function validateGeneName(input) {
     var validLength = (input.value.length <=25);
     if (validLength) {
@@ -195,7 +228,9 @@ function validateGeneName(input) {
     }
 }
 
+/** validation for each field
 
+ */
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
 

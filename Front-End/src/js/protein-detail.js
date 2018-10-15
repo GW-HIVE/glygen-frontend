@@ -8,6 +8,13 @@
 var highlight = {};
 
 // [ { postion } ]
+
+/**
+ *get glycosylation data
+ * @param {array} glycosylationData
+ * @param {string} type
+ * @return an array of highlight info.
+ */
 function getGlycosylationHighlightData(glycosylationData, type) {
     var result = [];
     var positions = {};
@@ -26,7 +33,11 @@ function getGlycosylationHighlightData(glycosylationData, type) {
     return result;
 }
 
-
+/**
+ * Getting mutation data
+ * @param {array} mutationData
+ * @return an array of highlight info.
+ */
 function getMutationHighlightData(mutationData) {
     var result = [];
     var positions = {};
@@ -45,6 +56,15 @@ function getMutationHighlightData(mutationData) {
     return result;
 }
 
+
+
+
+/**
+ * checking is highlighted or not
+ * @param {number} position
+ * @param {array} selection
+ * @return:boolean if position in the ranges
+ */
 function isHighlighted(position, selection) {
     var result = false;
 
@@ -60,6 +80,15 @@ function isHighlighted(position, selection) {
 
     return result;
 }
+
+
+/**
+ * building highlight
+ * @param {string} sequence
+ * @param {object} highlightData:
+ * @returns an array of each charcter of the sequence and is highlighted by its each type
+ */
+
 
 function buildHighlightData (sequence, highlightData) {
     var result = [];
@@ -79,6 +108,13 @@ function buildHighlightData (sequence, highlightData) {
     return result;
 }
 
+
+
+/**
+ * building row
+ * @param {array} rowData
+ * @returns string of sequence
+ */
 function buildRowText(rowData) {
     var text = [];
 
@@ -88,11 +124,16 @@ function buildRowText(rowData) {
 
     return text.join('');
 
-    // return rowData.map(function (row) {
-    //     return row.character;
-    // }).join('');
 }
 
+
+
+/**
+ * building rowhighlight
+ * @param {array} rowData
+ * @param {string}type
+ * @returns string of sequence
+ */
 function buildRowHighlight(rowData, type) {
     var highlight = [];
     for (var x = 0; x < rowData.length; x++) {
@@ -108,31 +149,17 @@ function buildRowHighlight(rowData, type) {
 
 
 
-// // var $conditionalInput = $('input.highlight-highlight-loaded');
-// var $checkInput = $('input[name="check"]');
-//
-// // $conditionalInput.hide();
-// $checkInput.on('click', function(){
-//     if ( $(this).is(':checked') )
-//         $('.highlight-highlight[data-type="mutation"]').show()
-//     else
-//         $('.highlight-highlight').hide()
-// });
-//  // $('.highlight-highlight').hide()
-//  // $('.highlight-highlight[data-type="mutation"]').show()
 
+
+
+
+/**
+ * creating row
+ * @param {number} start
+ * @param {array} rowData
+ * @returns jquery object of the row
+ */
 function createHighlightRow(start, rowData) {
-    //        <div class="highlight-row">
-    //        <span class="highlight-line-number">    1 </span>
-    //        <span class="highlight-section">
-    //    <span class="highlight-text">MTEYKLVVVGAGGVGKSALTIQLIQNHFVDEYDPTIEDSYRKQVVIDGETCLLDILDTAG
-    //        </span>
-    //        <span class="highlight-highlight" data-type="mutation">&nbsp;&nbsp;<span class="highlight-highlight-area">&nbsp;&nbsp;&nbsp;</span></span>
-    //    <span class="highlight-highlight" data-type="glycosylation">
-    //
-    //        </span>
-    //        </span>
-    //        </div>
     var $row = $('<div class="highlight-row"></div>');
 
     $('<span class="highlight-line-number"></span>')
@@ -168,22 +195,21 @@ function createHighlightRow(start, rowData) {
     return $row;
 }
 
+
+/**
+ * creating UI perline
+ * @param {object} highlightData
+ * @param {number} perLine
+
+ */
+
+
 function createHighlightUi (highlightData, perLine) {
- // <div class="highlight-display">
- // ...
- //        </div>;
-
     var $ui = $('<div class="highlight-display"></div>');
-
-    // var output = '';
-
     for(var x = 0; x < highlightData.length; x += perLine) {
         var rowData = highlightData.slice(x, x + perLine - 1);
-
         var $row = createHighlightRow(x, rowData);
-
         $ui.append($row);
-
     }
 
 
@@ -209,7 +235,11 @@ function scrollToPanel(hash) {
     }
 }
 
-// Sequence formatting Function
+
+/**
+ * Sequence formatting Function
+ */
+//
 function formatSequence (sequenceString) {
     var perLine = 60;
     var output = '';
@@ -222,6 +252,10 @@ function formatSequence (sequenceString) {
     return output;
 }
 
+
+/**
+ * adding commas to numbers
+ */
 function addCommas(nStr) {
     nStr += '';
     var x = nStr.split('.');
@@ -236,6 +270,11 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+
+/**
+ * AjaxSuccess
+ * @param {Object} data - the data set returned from the server on success
+ */
 function ajaxSuccess(data) {
 
     if (data.error_code) {
@@ -253,10 +292,10 @@ function ajaxSuccess(data) {
             data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
             data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
             data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
-            // console.log(data.isoforms[i]);
+
         }
 
-   // CrossRef
+
 
 
         // define variable to for itemscrossref
@@ -440,7 +479,7 @@ function ajaxSuccess(data) {
 
 
         $container.html(html);
-        if(window.innerWidth <= 900) {
+        if(window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
         } else {
             createHighlightUi(sequenceData, 60);
@@ -752,12 +791,12 @@ function LoadData(uniprot_canonical_ac) {
 
 }
 
-//getParameterByName function to extract query parametes from url
+
 /**
  * @param {name} string for the name of the variable variable to extract from query string
  * @param {url}string with the complete url with query string values
  */
-//  * Returns the GWU services.
+
 //
 
 
@@ -771,24 +810,11 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-// function seq_n_lin_change(element)
-// {
-//     if (element.checked) {
-//         $('[data-type="n_link_glycosylation"]').show();
-//     } else {
-//         $('[data-type="n_link_glycosylation"]').hide();
-//     }
-// }
-// function seq_o_lin_change(element){
-//     checkUncheck('o_link_glycosylation', element);
-//
-//     // $('[data-type="o_link_glycosylation"]').toggle(element.checked);
-//
-// }
-//
-// function seq_muta_change(element){
-//     checkUncheck('mutation', element);
-// }
+/**
+ * to check checkbox selected not selected
+ @param {string} type
+ for
+ */
 
 function checkUncheck(type, element){
     var $elements = $('[data-type="' + type + '"]');

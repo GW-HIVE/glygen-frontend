@@ -26,19 +26,6 @@ var limit = 25;
 
 
 
-function addCommas(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-
-    return x1 + x2;
-}
 /**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
@@ -49,9 +36,6 @@ function addCommas(nStr) {
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = moment(queryInfo.execution_time).tz("PST").format("MM/DD/YYYY hh:mm:ss a");
-    // var excutionDate= new Date(queryInfo.execution_time);
-    // queryInfo.execution_time = excutionDate.toLocaleString();
     queryInfo.mass.min = addCommas(queryInfo.mass.min);
     queryInfo.mass.max = addCommas(queryInfo.mass.max);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -112,9 +96,6 @@ function MassFormatter(value) {
         return "NA";
     }
 }
-
-
-
 
 /**
 

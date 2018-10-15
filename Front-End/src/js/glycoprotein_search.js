@@ -5,24 +5,8 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
-/**
- * function addCommas is a regular expression is used on nStr to add the commas
- * @param {integer} nstr gets divide
- * @returns {number} Number with commas
- */
-function addCommas(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
 
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
 
-    return x1 + x2;
-}
 
 function sortDropdown(a, b) {
     if (a.name < b.name) {
@@ -268,10 +252,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         glycosylated_aa: input_glycosylated_aa,
         glycosylation_evidence: input_glycosylation_evidence
     };
-    // formjson.glycan = {
-    //     relation: input_relation,
-    //     glytoucan_ac: input_glycan
-    // }
     return formjson;
 }
 // to resizing choosen field
