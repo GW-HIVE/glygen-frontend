@@ -44,28 +44,6 @@ select {
     height: 35px;
 }
 
-/*
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
-
-.simpleContainer {
-    min-height: 100%;
-    margin-bottom: -150px;
-}
-
-.footer {
-    height: 50px;
-}
-*/
-/*
-.container {
-    margin-bottom: 3%;
-}
-*/
-
 /* --------------------------
     Simplified Search 
 -----------------------------*/
