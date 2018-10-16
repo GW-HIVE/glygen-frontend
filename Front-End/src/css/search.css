@@ -60,6 +60,11 @@ body {
     height: 50px;
 }
 */
+/*
+.container {
+    margin-bottom: 3%;
+}
+*/
 
 /* --------------------------
     Simplified Search 
@@ -78,7 +83,7 @@ body {
     overflow: auto;
     vertical-align: middle;
     margin-top: 17%;
-    margin-bottom: 17%;
+    margin-bottom: 16%;
 }
 
 .simplified-search input[type=text] {
@@ -271,6 +276,13 @@ body {
 }
 
 /* ---- End tab style ----*/
+
+.adv-top-button {
+    float: right;
+    /*    margin: 20px 15px 40px 0;*/
+    margin-bottom: 40px;
+    margin-right: 15px;
+}
 
 @media (max-width: 1024px) {
 
