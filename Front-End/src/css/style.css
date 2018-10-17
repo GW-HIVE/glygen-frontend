@@ -193,10 +193,6 @@ p {
     font-size: 14.5px !important;
 }
 
-.tweeterMarginBottom {
-    margin-bottom: 20% !important;
-}
-
 /* Do not uncomment its for future use-
         Rupali */
 /* .breadcrumb {
@@ -282,6 +278,12 @@ body {
 #glygen-h1 {
     font-family: Georgia, sans-serif;
     color: #2E78B7;
+}
+
+.homepageContainer {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 60px;
 }
 
 .card {
@@ -878,61 +880,41 @@ label.labelContactUs {
 /* ----------------------------
     Feedback
 --------------------------------*/
-@media (max-width: 1280px) {
-    #google-forms {
-        width: 1150px;
-        height: 550px;
-    }
-}
 
 @media (max-width: 1024px) {
     #google-forms {
-        width: 900px;
-        height: 500px;
-    }
-}
-
-@media (max-width: 850px) {
-    #google-forms {
-        width: 700px;
+        height: 1366px;
+        margin-bottom: 5%;
     }
 }
 
 @media (max-width: 768px) {
     #google-forms {
-        width: 660px;
-        height: 500px;
+        margin-bottom: 8%;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 668px) {
     #google-forms {
-        width: 420px;
-        height: 500px;
+        margin-bottom: 30%;
     }
 }
 
 @media (max-width: 420px) {
     #google-forms {
-        width: 370px;
-        height: 550px;
-        text-align: center;
+        margin-bottom: 40%;
     }
 }
 
 @media (max-width: 375px) {
     #google-forms {
-        width: 360px;
-        height: 380px;
-        text-align: center;
+        margin-bottom: 45%;
     }
 }
 
 @media (max-width: 328px) {
     #google-forms {
-        width: 300px;
-        height: 380px;
-        text-align: center;
+        margin-bottom: 50%;
     }
 }
 
