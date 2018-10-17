@@ -38,8 +38,7 @@
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 </head>
 
@@ -106,19 +105,15 @@
             <!-- added new class -->
             <!-- <div id="content" class="container" "> -->
             <script id="item_template" type="text/template">
-            <!-- Accession  starts here for page -->
-
+                <!-- Accession  starts here for page -->
+            <center><h2 class="page-heading" style="margin-top: -5px;">Detailed results of protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
+                
             <ul id="basics0" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
                 <!-- added new class -->
                 <div class="panel panel-default ">
 
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                       {{#uniprot}}
-                        <h4>{{uniprot_canonical_ac}}</h4>
-                        {{/uniprot}}
-                    </div>
+                    <div class="gg-panel-heading"><h4>General</h4></div>
                     <div class="panel-body">
                         <!-- added new class -->
                         <div class="row">
@@ -647,6 +642,7 @@
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
+
     </script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
 
@@ -658,7 +654,7 @@
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
     <!-- script for detail page -->
-   <script type="text/javascript" src="js/protein_detail.js"></script>
+    <script type="text/javascript" src="js/protein_detail.js"></script>
     <!-- script for template engine -->
     <script type="text/javascript" src="libraries/mustache.js"></script>
     <!-- script for webservice -->
@@ -675,19 +671,21 @@
 
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
-        $(document).ajaxStop(function () {
+        $(document).ajaxStop(function() {
             // calls the sidebar function only when all ajax calls are completed
             faqMain();
 
             function scrollToPanel(hash) {
                 //to scroll to the particular sub section.
                 $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-                if ($(window).width() < 768) {   //mobile view
+                if ($(window).width() < 768) { //mobile view
                     $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
                     $('.cd-close-panel').addClass('move-left');
                     $('body').addClass('cd-overlay');
                 } else {
-                    $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
+                    $('body,html').animate({
+                        'scrollTop': $(hash).offset().top - 19
+                    }, 200);
                 }
             }
 
@@ -695,6 +693,7 @@
                 scrollToPanel(window.location.hash);
             }
         });
+
     </script>
 
 </body>
