@@ -1,3 +1,7 @@
+
+//comment for
+
+
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
 
@@ -21,15 +25,6 @@ function setFormValues(data) {
             var massSlider1 = document.getElementById('sliderbox-slider1');
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
-
-        // if (data.query.organism.name){
-        //     $("#species").val(data.query.organism.name);
-        //    // var selected_species = document.getElementById("species");
-        //     var organism = {"id":parseInt(selected_species.value), "name": selected_species.options[selected_species.selectedIndex].text};
-        //
-        //
-        // }
-
 
          $("#species").val(data.query.organism.id);
         $("#ddl").val(data.query.glycan_type);
