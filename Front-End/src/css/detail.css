@@ -132,8 +132,8 @@ pre {
 }
 
 .dropdown-menu {
-    min-width: 150px !important;
-    margin-right: 3% !important;
+  min-width: 150px !important;
+  margin-right: 3%;
 }
 
 .panelmaincontent {
