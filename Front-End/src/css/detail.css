@@ -1,3 +1,11 @@
+/* ---------------------------------------------------------------------
+@author: Rupali Mahadik.
+@ao-author: Tatian Williamson.
+@description: UO1 Version-1.0.1
+@date-created: January 2018
+@update: October 12 2018 - Tatiana Williamson - Added headline and styled download button.
+-------------------------------------------------------------------------*/
+
 .img-cartoon1 {
     display: block;
     max-width: 500px;
@@ -21,7 +29,6 @@
     margin-top: 20px;
     margin-bottom: 0px;
     width: 500px;
-
 }
 
 .img-cartoon1:hover {
@@ -32,7 +39,9 @@
     z-index: 99999;
 }
 
-/* motif images */
+/* -----------------------------
+    motif images 
+--------------------------------*/
 .img-cartoon2 {
     display: block;
     max-width: 500px;
@@ -66,14 +75,10 @@
 }
 
 .panel-default > .gg-panel-heading {
-    /* renamed class in both files */
     background-image: none;
     background-color: #D8D8D8;
-    /* made changes here */
     color: #555;
-    /* made changes here */
     padding: 3px 15px;
-    /* made changes here */
 }
 
 /* .breadcrumb {
@@ -92,7 +97,6 @@
     color: #555;
 }
 
-/* <!-- style to class for detail page --> */
 .footer {
     margin-bottom: 0px;
     margin-top: 470px;
@@ -104,23 +108,11 @@ pre {
 
 .panel-heading {
     padding: 2px 2px;
-    /*
-    z-index: -9999 !important;
-    position: relative;
-*/
 }
 
-/*
-.panel.panel-default {
-    z-index: -9999 !important;
-    position: relative;
-}
-*/
-/* October 17 
-.cd-faq-items {
-    margin-top: 75px;
-}
-*/
+/*---------------------------------------
+    Tatiana Williamson October 17, 2018
+-----------------------------------------*/
 .btn-link-detail {
     text-decoration: none !important;
     font-size: 1.4em !important;
@@ -132,15 +124,14 @@ pre {
 }
 
 .dropdown-menu {
-  min-width: 150px !important;
-  margin-right: 3%;
+    min-width: 150px !important;
+    margin-right: 3%;
 }
+
+/*------   End   --------*/
 
 .panelmaincontent {
     font-size: 16px;
-    /*    margin-left: 10px;*/
-    /*    list-style-type: circle;*/
-    /*    overflow-wrap: break-word;*/
 }
 
 .panelmaincontent2 {
@@ -167,7 +158,6 @@ pre {
 .list-group-indent {
     font-size: 15px;
     margin-left: 50px;
-    /*    margin-bottom: 5px;*/
     list-style-type: square;
 }
 
@@ -190,10 +180,7 @@ thead {
 }
 
 .cd-faq-categories {
-    /* margin-top: 100px; */
     width: auto;
-    /* padding-left: 0px;
-    margin-left:0px; */
 }
 
 /** Overriding the code of faq_style.css for Detail page.
@@ -234,17 +221,6 @@ thead {
     }
 }
 
-/* section{
-  padding-left: 20px;
-  
-} */
-
-/* .cd-faq{
-  padding-left: 10px;
-  margin-top: 2px;
-  padding-right:50px; 
-  margin-bottom:30px;
-} */
 h4 {
     overflow: auto;
 }
@@ -267,10 +243,6 @@ h4 {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-}
-
-    {
-    white-space: pre;
 }
 
 #glycosylation-table {
@@ -301,9 +273,9 @@ h4 {
     user-select: none;
 }
 
-/*
+/* --------------------------
     Sequence Highlighting
- */
+ ----------------------------*/
 .highlight-row {
     font-family: monospace;
 }
@@ -334,7 +306,6 @@ h4 {
     background: rgba(256, 0, 0, .5); //red
 
 }
-
 
 #sequnce_highlight {
     display: block;

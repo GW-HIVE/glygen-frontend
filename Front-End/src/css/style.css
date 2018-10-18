@@ -1,8 +1,14 @@
-/** ---------------------------------
-    The homepage
-    @author: Tatiana Williamson
-    @date-created: January 21, 2018
+/* ---------------------------------
+The homepage
+@author: Tatiana Williamson
+@description: UO1 Version-1.0.1
+@date-created: January 21, 2018
+@updated: October 18, 2018
  ------------------------------------*/
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 body {
     font-family: "Verdana", "Geneva", sans-serif;
@@ -12,6 +18,8 @@ body {
     min-height: 100%;
     margin: 0;
     padding: 0;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility\9;
@@ -88,7 +96,6 @@ p {
 /*-------------------------
     Header 
 --------------------------- */
-
 #logo {
     padding-top: 0;
     padding-left: 35px;
@@ -160,29 +167,15 @@ p {
     margin: 0 15px;
 }
 
-/*
-.dropdown.dropdown-toggle.dropdown-menu {
-    z-index: 9999 !important;
-}
-.dropdown {
-    z-index: 9999 !important;
-}
-.dropdown-menu {
-    z-index: 9999; !important;
-}
-*/
-
 .gg-dropd-menu {
     background-color: #2E78B7;
     font-size: 1em;
-    /*    z-index: 9999 !important;*/
 }
 
 .gg-dropd-menu > li > a:hover {
     text-decoration: none;
     color: #1C4E78 !important;
     background-color: #eee !important;
-    /*    z-index: 9999 !important;*/
 }
 
 .gg-form {
@@ -201,20 +194,9 @@ p {
     margin-top: -30px; 
 } */
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-
 /*------------------------
     Footer 
 -------------------------*/
-
 #logo-uga {
     width: 70px;
     padding-right: 20px;
@@ -275,7 +257,6 @@ body {
 /*  -------------------------
     Homepage 
 -----------------------------  */
-
 #glygen-h1 {
     font-family: Georgia, sans-serif;
     color: #2E78B7;
@@ -312,7 +293,6 @@ body {
 
 .gg-card-explore {
     border-top: 1px solid #D4D4D4;
-
 }
 
 .gg-card-explore a,
@@ -357,7 +337,6 @@ body {
 /* -------------------------
     Alert 
 ---------------------------- */
-
 .gg-alert {
     padding-top: 8px;
     padding-bottom: 2px;
@@ -417,7 +396,6 @@ body {
 /* -----------------------------------------------
     GlyGen settings Enaibled Disabled page 
 -------------------------------------------------*/
-
 .gg-settings {
     width: 700px;
     margin: 5em auto;
@@ -515,7 +493,6 @@ input:checked + .slider:before {
 /*------------------------
     Contact Us 
 --------------------------*/
-
 #contact-header {
     margin-bottom: 30px;
 }
@@ -574,7 +551,6 @@ label.labelContactUs {
 /* ----------------------------
         About us page
 -------------------------------*/
-
 #top-heading {
     padding: 0 80px;
 }
@@ -620,7 +596,6 @@ label.labelContactUs {
 }
 
 .mission-img {
-    /*    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/team/about-mission.png') top center no-repeat; */
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about-mission.png') top center no-repeat;
 }
 
@@ -655,7 +630,6 @@ label.labelContactUs {
     Resources
 --------------------------------------------*/
 .resources-top-img {
-    /*    background: linear-gradient(rgba(46, 120, 160, 0.1), rgba(0, 0, 0, 0.3), rgba(46, 120, 183, 0.1) ), url('../images/resources/resources_top_img.png') top center no-repeat; */
     background: linear-gradient(rgba(46, 120, 160, 0.8), rgba(46, 120, 180, 0.9), rgba(46, 120, 183, 0.8)), url('../images/resources/resources-top-img.png') top center no-repeat;
     background-size: cover;
 }
@@ -709,7 +683,6 @@ label.labelContactUs {
 }
 
 .research-menu {
-    /*    display: block;*/
     width: 350px;
     height: 180px;
     background: #FFF;
@@ -881,7 +854,6 @@ label.labelContactUs {
 /* ----------------------------
     Feedback
 --------------------------------*/
-
 @media (max-width: 1024px) {
     #google-forms {
         height: 1366px;

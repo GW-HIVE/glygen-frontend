@@ -1,3 +1,10 @@
+/* ---------------------------------------------------------------------
+@author: Rupali Mahadik.
+@ao-author: Tatiana Williamson
+@description: UO1 Version-1.0.1
+@date-created: January 2018
+@update: October 12 2018 - Tatiana Williamson - Added simplified search.
+-------------------------------------------------------------------------*/
 * {
     box-sizing: border-box;
 }
@@ -47,7 +54,6 @@ select {
 /* --------------------------
     Simplified Search 
 -----------------------------*/
-
 #advancedSearch {
     display: none;
 }

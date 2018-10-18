@@ -1,9 +1,10 @@
-<!--
-  //@author: Rupali Mahadik
-// @description: UO1 Version-1.1.
+<!--------------------------------------------------------------------------
+@author: Rupali Mahadik
+@description: UO1 Version-1.0.1
+@createDate June 5, 2018
+@update: October 24,2018
 @update: July 31, 2018 - Gaurav Agarwal - added function, disease and mutation boxes. updated and added various other fields. few UI changes.
-
-   -->
+----------------------------------------------------------------------------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +65,6 @@
             <li>
                 <a href="#basics2">Sequence</a>
             </li>
-
             <li>
                 <a href="#basics3">Cross References</a>
             </li>
@@ -100,553 +100,392 @@
         <!-- cd-faq-categories -->
         <!-- main content for page -->
         <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
-            <!-- added new class -->
             <!-- <div id="content" class="container" "> -->
             <script id="item_template" type="text/template">
                 <!-- Accession  starts here for page -->
-            <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
-                
-            <ul id="basics0" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default ">
+                <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
 
-                    <div class="gg-panel-heading"><h4>General</h4></div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            <!--always try to use double quotes for HTML attributes. -->
-                            <div class="col-md-12 col-xs-6">
-                                {{#gene}}
-                                <li class="list-group"><strong>Gene Name:</strong>
-                                    <a href="{{{url}}}" target="_blank">{{name}}</a>
-                                </li>
-                                {{/gene}}
-                                {{^gene}}  {{/gene}}
-
-                                {{#uniprot}}
-                                <li class="list-group"><strong>UniProt ID:</strong>
-                                    {{#uniprot_id}} <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
-                                </li>
-                                {{/uniprot_id}}
-                                {{^uniprot_id}}  {{/uniprot_id}}
-                                {{/uniprot}}
-
-                                {{#uniprot_canonical_ac}}
-                                <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
-                                {{/uniprot_canonical_ac}}
-                                {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
-
-                                {{#recommendedname}} {{#full}}
-                                <li class="list-group"><strong>UniProt Entry
-                                    name:</strong> {{recommendedname.full}}
-                                    {{#short}} ({{recommendedname.short}}) {{/short}}
-                                </li>
-                                {{/full}}
-                                {{/recommendedname}}
-                                {{#refseq}}
-                                {{#refseq.ac}} <li class="list-group"><strong>RefSeq Accession:</strong>
-                                    <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
-                                </li>
-                                <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
-                                {{/refseq.ac}}
-                                {{/refseq}}
-                                {{#mass.monoisotopic_mass}}
-                                <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
-                                {{/mass.monoisotopic_mass}}
-                                {{^mass.monoisotopic_mass}}  {{/mass.monoisotopic_mass}}
-
-                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-
-
-            <!-- cd-faq-group -->
-
-            <ul id="basics1" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default">
-
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Species</h4>
-                    </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            {{#species}}
-                            <div class='col-md-12 col-xs-12'>
-                                <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button> {{name}} (NCBI taxonomy ID:
-                                    <a class="panelcontent"      href="{{url}}" target="_blank">{{taxid}}</a>)
-                                </div>
-                                <ul style="display:none;">
-                                    {{#evidence}}
-                                    <li class="list-group-indent">{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
-                                    </li>
-                                    {{/evidence}}
-                                </ul>
-                            </div>
-                            {{/species}}
-                        </div>
-                        {{^species}} No data available. {{/species}}
-                    </div>
-                </div>
-                </div>
-
-            </ul>
-            <!-- cd-faq-group -->
-
-
-            <!-- cd-faq-group -->
-            <ul id="basics2" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Sequence</h4>
-
-                    </div>
-                    <div class="panel-body">
-
-                             <div class="sequence-panel" id="sequnce_highlight">
-                                 <ul>
-                                     <li>
-                                         <input type="checkbox" name="checkbox" id="seq_n_link" onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span class="sequnce1">N-linked Glycosylation</span>
-                                     </li>
-                                     <li>
-                                         <input type="checkbox" name="checkbox" onchange="checkUncheck('o_link_glycosylation', this)"/>&nbsp;<span class="sequnce2">O-linked Glycosylation</span>
-                                     </li>
-                                     <li>
-                                         <input type="checkbox" name="checkbox" onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>
-                                     </li>
-                                 </ul>
-                             </div>
-                     </div>
-                    </div>
-
-            </ul>
-
-
-            <!--<ul id="basics3" class="cd-faq-group selected">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--&lt;!&ndash; Glycan Cross Referance panel starts here for page &ndash;&gt;-->
-            <!--<div class="panel panel-default">-->
-
-            <!--<div class="gg-panel-heading">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<h4>Cross References</h4>-->
-
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--{{#crossref}}-->
-            <!--<div class="panelmaincontent">-->
-            <!--<li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>-->
-            <!--<a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>-->
-            <!--</li>-->
-            <!--</div>-->
-            <!--{{/crossref}} {{^crossref}} No data available. {{/crossref}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</ul>-->
-
-
-
-
-            <ul id="basics3" class="cd-faq-group selected">
-                <!-- Glycan Cross Referance panel starts here for page -->
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <h4>Cross References</h4>
-                    </div>
-                    <div class="panel-body">
-                        {{#itemscrossRef}}
-                        <div class="panelmaincontent">
+                <ul id="basics0" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default ">
+                        <div class="gg-panel-heading"><h4>General</h4></div>
+                        <div class="panel-body">
                             <div class="row">
-                                <li class="list-group2"><strong>{{database}}:</strong></li>
+                                <!--always try to use double quotes for HTML attributes. -->
+                                <div class="col-md-12 col-xs-6">
+                                    {{#gene}}
+                                    <li class="list-group"><strong>Gene Name:</strong>
+                                        <a href="{{{url}}}" target="_blank">{{name}}</a>
+                                    </li>
+                                    {{/gene}}
+                                    {{^gene}}  {{/gene}}
+
+                                    {{#uniprot}}
+                                    <li class="list-group"><strong>UniProt ID:</strong>
+                                        {{#uniprot_id}} <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
+                                    </li>
+                                    {{/uniprot_id}}
+                                    {{^uniprot_id}}  {{/uniprot_id}}
+                                    {{/uniprot}}
+
+                                    {{#uniprot_canonical_ac}}
+                                    <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
+                                    {{/uniprot_canonical_ac}}
+                                    {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
+
+                                    {{#recommendedname}} {{#full}}
+                                    <li class="list-group"><strong>UniProt Entry
+                                        name:</strong> {{recommendedname.full}}
+                                        {{#short}} ({{recommendedname.short}}) {{/short}}
+                                    </li>
+                                    {{/full}}
+                                    {{/recommendedname}}
+                                    {{#refseq}}
+                                    {{#refseq.ac}} <li class="list-group"><strong>RefSeq Accession:</strong>
+                                        <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
+                                    </li>
+                                    <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
+                                    {{/refseq.ac}}
+                                    {{/refseq}}
+                                    {{#mass.monoisotopic_mass}}
+                                    <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
+                                    {{/mass.monoisotopic_mass}}
+                                    {{^mass.monoisotopic_mass}}  {{/mass.monoisotopic_mass}}
+
+                                    <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+
+                <!-- cd-faq-group -->
+                <ul id="basics1" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Species</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                {{#species}}
+                                <div class='col-md-12 col-xs-12'>
+                                    <div class="panelmaincontent">
+                                        <button class="open-close-button">+</button> {{name}} (NCBI taxonomy ID:
+                                        <a class="panelcontent"      href="{{url}}" target="_blank">{{taxid}}</a>)
+                                    </div>
+                                    <ul style="display:none;">
+                                        {{#evidence}}
+                                        <li class="list-group-indent">{{database}} :
+                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                        </li>
+                                        {{/evidence}}
+                                    </ul>
+                                </div>
+                                {{/species}}
+                            </div>
+                            {{^species}} No data available. {{/species}}
+                        </div>
+                    </div>
+                    </div>
+                </ul>
+
+                <!-- cd-faq-group -->
+                <ul id="basics2" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Sequence</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="sequence-panel" id="sequnce_highlight">
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" name="checkbox" id="seq_n_link" onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span class="sequnce1">N-linked Glycosylation</span>
+                                    </li>
+                                    <li>
+                                         <input type="checkbox" name="checkbox" onchange="checkUncheck('o_link_glycosylation', this)"/>&nbsp;<span class="sequnce2">O-linked Glycosylation</span>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" name="checkbox" onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+
+                <ul id="basics3" class="cd-faq-group selected">
+                    <!-- Glycan Cross Referance panel starts here for page -->
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Cross References</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#itemscrossRef}}
+                            <div class="panelmaincontent">
+                                <div class="row">
+                                    <li class="list-group2"><strong>{{database}}:</strong></li>
+                                    {{#links}}
+                                    <div class=" col-xs-6 col-sm-3">
+                                        <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
+                                    </div>
+                                    {{/links}}
+                                    {{^link}}  {{/link}}
+                                </div>
+                            </div>
+                            {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
+                        </div>
+                    </div>
+                </ul>
+
+                <!-- cd-faq-group -->
+                <ul id="basics4" class="cd-faq-group selected">
+                    <li class="cd-faq-title"/>
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Pathway</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#itemsPathway}}
+                            <div class="panelmaincontent">
+                                <li class="list-group"><strong>{{resource}}:</strong></li>
                                 {{#links}}
-                                <div class=" col-xs-6 col-sm-3">
-                                    <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
-                                </div>
+                                <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>
                                 {{/links}}
-                                {{^link}}  {{/link}}
                             </div>
+                            {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
                         </div>
-                        {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
                     </div>
-                </div>
-            </ul>
-            <!-- cd-faq-group -->
+                </ul>
 
-            <!--<ul id="basics4" class="cd-faq-group selected">-->
-            <!--<li class="cd-faq-title"/>-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<div class="panel panel-default">-->
-
-            <!--<div class="gg-panel-heading">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<h4>Keywords</h4>-->
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<div class="row">-->
-            <!--<div class='col-md-12 col-xs-12'>-->
-            <!--{{#keywords}}-->
-
-            <!--<li class="list-group">{{.}}</li>-->
-
-            <!--{{/keywords}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--{{^keywords}} No data available. {{/keywords}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--<ul id="basics4" class="cd-faq-group selected">-->
-                <!--<li class="cd-faq-title" />-->
-                <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                <!--<div class="panel panel-default">-->
-                    <!--<div class="gg-panel-heading">-->
-                        <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                        <!--<h4>Pathway</h4>-->
-                    <!--</div>-->
-                    <!--<div class="panel-body">-->
-                        <!--{{#pathway}}-->
-                        <!--<div class="panelmaincontent">-->
-                            <!--<li class="list-group"><strong>{{resource}}</strong> : {{name}} <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a></li>-->
-                        <!--</div>-->
-                        <!--{{/pathway}} {{^pathway}} No data available. {{/pathway}}-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</ul>-->
-
-            <ul id="basics4" class="cd-faq-group selected">
-                <li class="cd-faq-title"/>
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <h4>Pathway</h4>
-                    </div>
-                    <div class="panel-body">
-                        {{#itemsPathway}}
-                        <div class="panelmaincontent">
-                            <li class="list-group"><strong>{{resource}}:</strong></li>
-                            {{#links}}
-                            <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent"  href="{{url}}" target="_blank">{{id}}</a></li>
-                            {{/links}}
+                <ul id="basics5" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Isoforms</h4>
                         </div>
-                        {{/itemsPathway}} {{^itemsPathway}} No data available. {{/itemsPathway}}
+                        <div class="panel-body">
+                            <div class="row">
+                                {{#isoforms}}
+                                <div class='col-md-12 col-xs-12'>
+                                    <div class="panelmaincontent">
+                                        <li class="list-group"><strong>UniProt Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
+                                    </div>
+                                    {{#locus}} {{#chromosome}}
+                                    <div class="panelmaincontent">
+                                        <button class="open-close-button">+</button> Chromosome: {{chromosome}} ({{start_pos}} - {{end_pos}})
+                                    </div>
+                                    {{/chromosome}}
+                                    <ul style="display:none; margin-bottom: 15px;">
+                                        {{#evidence}}
+                                        <li class="list-group-indent">{{database}} :
+                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                        </li>
+                                        {{/evidence}}
+                                    </ul>
+                                    <div class="plus-button-margin-bottom"></div>
+                                    {{/locus}}
+                                    <div id="fasta">
+                                        <pre>{{{sequence.sequence}}}</pre>
+                                    </div>
+                                    <br>
+                                </div>
+                                {{/isoforms}}
+                            </div>
+                            {{^isoforms}} No data available. {{/isoforms}}
+                        </div>
                     </div>
-                </div>
-            </ul>
-
-
-            <ul id="basics5" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default">
-
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Isoforms</h4>
                     </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            {{#isoforms}}
+                </ul>
+
+                <ul id="basics6" class="cd-faq-group selected">
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Glycosylation sites</h4>
+                        </div>
+                        <div class="panel-body">
                             <div class='col-md-12 col-xs-12'>
-                                <div class="panelmaincontent">
-                                    <li class="list-group"><strong>UniProt Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
-                                </div>
-                                {{#locus}} {{#chromosome}}
-                                <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button> Chromosome: {{chromosome}} ({{start_pos}} - {{end_pos}})
-                                </div>
-                                {{/chromosome}}
-                                <ul style="display:none; margin-bottom: 15px;">
-                                    {{#evidence}}
-                                    <li class="list-group-indent">{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                <ul style="margin-bottom: 20px;" class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#1a" data-toggle="tab">With Reported Glycans</a>
                                     </li>
-                                    {{/evidence}}
-                                </ul>
-                                <div class="plus-button-margin-bottom"></div>
-                                {{/locus}}
-                                <!--<span class="fasta">{{sequence.sequence}}</span>-->
-                                <div id="fasta">
-                                    <pre>{{{sequence.sequence}}}</pre>
-                                </div>
-                                <br>
-                            </div>
-                            {{/isoforms}}
-                        </div>
-                        {{^isoforms}} No data available. {{/isoforms}}
-                    </div>
-                </div>
-                </div>
-            </ul>
-
-
-            <!--<ul id="basics6" class="cd-faq-group selected">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<div class="panel panel-default">-->
-
-            <!--<div class="gg-panel-heading">-->
-            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-            <!--<h4>Glycosylation</h4>-->
-            <!--</div>-->
-            <!--<div class="panel-body">-->
-            <!--<div class="row">-->
-            <!--<div class='col-md-12 col-xs-12'>-->
-            <!--{{#glycosylation}}-->
-            <!--<table id="glycosylation-table">-->
-            <!--</table>-->
-            <!--{{/glycosylation}}-->
-            <!--{{^glycosylation}}-->
-            <!--No data available.-->
-            <!--{{/glycosylation}}-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</ul>-->
-
-
-            <ul id="basics6" class="cd-faq-group selected">
-                <!-- added new class -->
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Glycosylation sites</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class='col-md-12 col-xs-12'>
-                            <ul style="margin-bottom: 20px;" class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#1a" data-toggle="tab">With Reported Glycans</a>
-                                </li>
-                                <li><a href="#2a" data-toggle="tab">Without Reported Glycans</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content clearfix">
-
-                            <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
-                                {{#glycosylation}}
-                                <table id="glycosylation-table">
-                                </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
-
-                            </div>
-                            <div class="tab-pane" id="2a">
-                                {{#glycosylation}}
-                                <table id="glycosylation-table2">
-                                </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
-                            </div>
-
-                        </div>
-            </ul>
-
-            <!-- cd-faq-group -->
-            <!-- Function -->
-            <ul id="basics7" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Function</h4>
-                    </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            {{#function}}
-                            <div class='col-md-12 col-xs-12'>
-                                <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button>
-                                    <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
-                                    {{annotation}}
-                                </div>
-                                <ul style="display:none; margin-bottom: 8px;">
-                                    {{#evidence}}
-                                    <li class="list-group-indent">{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                    <li><a href="#2a" data-toggle="tab">Without Reported Glycans</a>
                                     </li>
-                                    {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
                                 </ul>
-                                <div class="plus-button-margin-bottom"></div>
                             </div>
-                            {{/function}}
-                        </div>
-                        {{^function}} No data available. {{/function}}
-                    </div>
-                </div>
-                </div>
-
-            </ul>
-            <!-- cd-faq-group -->
-
-            <!-- cd-faq-group -->
-            <!-- Disease -->
-            <ul id="basics8" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <div class="panel panel-default">
-
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Disease</h4>
-                    </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        <div class="row">
-                            {{#disease}}
-                            <div class='col-md-12 col-xs-12'>
-                                <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button> {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID:
-                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>)
+                            <div class="tab-content clearfix">
+                                <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
+                                    {{#glycosylation}}
+                                    <table id="glycosylation-table">
+                                    </table>
+                                    {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
                                 </div>
-                                <ul style="display:none;">
-                                    {{#evidence}}
-                                    <li class="list-group-indent">{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
-                                    </li>
-                                    {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
-                                </ul>
-                                <div class="plus-button-margin-bottom"></div>
+                                <div class="tab-pane" id="2a">
+                                    {{#glycosylation}}
+                                    <table id="glycosylation-table2">
+                                    </table>
+                                    {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                                </div>
                             </div>
-                            {{/disease}}
+                </ul>
+
+                <!-- cd-faq-group -->
+                <!-- Function -->
+                <ul id="basics7" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Function</h4>
                         </div>
-                        {{^disease}} No data available. {{/disease}}
-                    </div>
-                </div>
-                </div>
-
-            </ul>
-            <!-- cd-faq-group -->
-
-            <!-- cd-faq-group -->
-            <!-- Mutation -->
-            <ul id="basics9" class="cd-faq-group selected">
-                <!-- added new class -->
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Mutation</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class='col-md-12 col-xs-12'>
-                                {{#mutation}}
-                                <table id="mutation-table"></table>
-                                {{/mutation}} {{^mutation}}No data available.{{/mutation}}
+                        <div class="panel-body">
+                            <div class="row">
+                                {{#function}}
+                                <div class='col-md-12 col-xs-12'>
+                                    <div class="panelmaincontent">
+                                        <button class="open-close-button">+</button>
+                                        <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
+                                        {{annotation}}
+                                    </div>
+                                    <ul style="display:none; margin-bottom: 8px;">
+                                        {{#evidence}}
+                                        <li class="list-group-indent">{{database}} :
+                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                        </li>
+                                        {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
+                                    </ul>
+                                    <div class="plus-button-margin-bottom"></div>
+                                </div>
+                                {{/function}}
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-
-
-            <ul id="basics11" class="cd-faq-group selected">
-                <!-- added new class -->
-                <div class="panel panel-default">
-
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Expression Tissue</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class='col-md-12 col-xs-12'>
-                                {{#expression_tissue}}
-                                <table id="expressionTissue-table">
-                                </table>
-                                {{/expression_tissue}} {{^expression_tissue}} No data available. {{/expression_tissue}}
-                            </div>
+                            {{^function}} No data available. {{/function}}
                         </div>
                     </div>
-                </div>
-            </ul>
-
-
-            <ul id="basics12" class="cd-faq-group selected">
-                <!-- added new class -->
-                <div class="panel panel-default">
-
-                    <div class="gg-panel-heading">
-                        <!-- added new class -->
-                        <h4>Expression Disease</h4>
                     </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class='col-md-12 col-xs-12'>
-                                {{#expression_disease}}
-                                <table id="expressionDisease-table">
-                                </table>
-                                {{/expression_disease}} {{^expression_disease}} No data available. {{/expression_disease}}
+                </ul>
+                <!-- cd-faq-group -->
+
+                <!-- cd-faq-group -->
+                <!-- Disease -->
+                <ul id="basics8" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+
+                        <div class="gg-panel-heading">
+                            <h4>Disease</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                {{#disease}}
+                                <div class='col-md-12 col-xs-12'>
+                                    <div class="panelmaincontent">
+                                        <button class="open-close-button">+</button> {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID:
+                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>)
+                                    </div>
+                                    <ul style="display:none;">
+                                        {{#evidence}}
+                                        <li class="list-group-indent">{{database}} :
+                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                        </li>
+                                        {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
+                                    </ul>
+                                    <div class="plus-button-margin-bottom"></div>
+                                </div>
+                                {{/disease}}
+                            </div>
+                            {{^disease}} No data available. {{/disease}}
+                        </div>
+                    </div>
+                    </div>
+                </ul>
+                <!-- cd-faq-group -->
+
+                <!-- cd-faq-group -->
+                <!-- Mutation -->
+                <ul id="basics9" class="cd-faq-group selected">
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Mutation</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class='col-md-12 col-xs-12'>
+                                    {{#mutation}}
+                                    <table id="mutation-table"></table>
+                                    {{/mutation}} {{^mutation}}No data available.{{/mutation}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </ul>
+                </ul>
 
-            <ul id="basics10" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <!-- added new class -->
-                <!-- Glycan Enzymes starts here for page -->
-                <div class="panel panel-default">
+                <ul id="basics11" class="cd-faq-group selected">
+                    <div class="panel panel-default">
 
-                    <div class="gg-panel-heading">
-                        <h4>Publications</h4>
-
+                        <div class="gg-panel-heading">
+                            <h4>Expression Tissue</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class='col-md-12 col-xs-12'>
+                                    {{#expression_tissue}}
+                                    <table id="expressionTissue-table">
+                                    </table>
+                                    {{/expression_tissue}} {{^expression_tissue}} No data available. {{/expression_tissue}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <!-- added new class -->
-                        {{#publication}}
-                        <p class="panelmaincontent">
-                        <li class="list-group" id="panelmaincontent1"> <strong>Journal:</strong> {{journal}}<br>
-                            <strong>Title:</strong> {{title}}<br>
-                            <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+                </ul>
 
-
-
-
-                        <!--{{url}}{{pmid}}https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}-->
-                        {{/publication}} {{^publication}} No data available. {{/publication}}
+                <ul id="basics12" class="cd-faq-group selected">
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Expression Disease</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class='col-md-12 col-xs-12'>
+                                    {{#expression_disease}}
+                                    <table id="expressionDisease-table">
+                                    </table>
+                                    {{/expression_disease}} {{^expression_disease}} No data available. {{/expression_disease}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </ul>
+                </ul>
 
-            <!--{{#crossref}}-->
-            <!--<p class="panelmaincontent">-->
-            <!--<li class="list-group" id="panelmaincontent1"><strong>{{database}}:</strong>-->
-            <!--<a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>-->
-            <!--</li>-->
-            <!--</p>-->
-            <!--{{/crossref}} {{^crossref}} No data available. {{/crossref}}-->
-            <a href="#0" class="cd-close-panel">Close</a>
-
-        </script>
+                <ul id="basics10" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <!-- Glycan Enzymes starts here for page -->
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Publications</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#publication}}
+                            <p class="panelmaincontent">
+                            <li class="list-group" id="panelmaincontent1"> <strong>Journal:</strong> {{journal}}<br>
+                                <strong>Title:</strong> {{title}}<br>
+                                <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+                            <!--{{url}}{{pmid}}https://www.ncbi.nlm.nih.gov/pubmed/{{pmid}}-->
+                            {{/publication}} {{^publication}} No data available. {{/publication}}
+                        </div>
+                    </div>
+                </ul>
+                <a href="#0" class="cd-close-panel">Close</a>
+            </script>
         </div>
     </section>
+    
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
-
     </script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-
     <!-- script for table -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
     <!-- script for error-message/header-footer js -->
@@ -666,7 +505,6 @@
     <script src="js/activity_tracker.js"></script>
     <!-- script for error handling alerts -->
     <script type="text/javascript" src="libraries/alertify.js"></script>
-
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
         $(document).ajaxStop(function() {
@@ -691,7 +529,6 @@
                 scrollToPanel(window.location.hash);
             }
         });
-
     </script>
 
 </body>

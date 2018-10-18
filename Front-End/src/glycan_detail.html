@@ -1,12 +1,12 @@
-<!--
-   @author: Rupali Mahadik.
-   @description: UO1 Version-1.1.
-   @Date:19th Feb 2018 - detail mustach.js works
-   @Date:20th March 2018 - different side navigation update
-   @Update: 17 April 2018 - new web services
-   @Update: 21 June 2018 - Gaurav Agarwal - sidebar issue resolved and proper object placements for different screen size.
-   @Update: 27 June 2018 -  web services major changes
-   -->
+<!-------------------------------------------------------------
+@author: Rupali Mahadik.
+@description: UO1 Version-1.0.1
+@date:19th Feb 2018 - detail mustach.js works
+@date:20th March 2018 - different side navigation update
+@update: 17 April 2018 - new web services
+@update: 21 June 2018 - Gaurav Agarwal - sidebar issue resolved and proper object placements for different screen size.
+@update: 27 June 2018 - web services major changes
+--------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -254,32 +254,6 @@
                         </div>
                     </div>
                 </ul>
-                
-                <!-- cd-faq-group -->
-                <!--<ul id="delivery" class="cd-faq-group">-->
-                    <!--<li class="cd-faq-title"/>-->
-                    <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                    <!--&lt;!&ndash; Glycan Enzymes starts here for page &ndash;&gt;-->
-                    <!--<div class="panel panel-default">-->
-
-                        <!--<div class="gg-panel-heading">-->
-                            <!--<h4>Biosynthetic Enzyme</h4>-->
-
-                        <!--</div>-->
-                        <!--<div class="panel-body">-->
-                            <!--&lt;!&ndash; added new class &ndash;&gt;-->
-                            <!--{{#enzyme}}-->
-                            <!--<li class="list-group"><strong>Protein name:</strong>{{protein_name}}<br>-->
-                          <!--<strong>Protein Id:</strong>(Uniprot ID:-->
-                                <!--<a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'></a>-->
-                                <!--<br><strong>Gene name:</strong>-->
-                                <!--<a class="panelcontent" href="{{gene_link}}" target="_blank">{{gene}}</a>-->
-                            <!--</li>-->
-
-                            <!--{{/enzyme}} {{^enzyme}} No data available. {{/enzyme}}-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</ul>-->
 
                  <!--cd-faq-group -->
                 <ul id="delivery" class="cd-faq-group">
@@ -330,7 +304,6 @@
     <div w3-include-html="footer.html"></div>
     <script>
         w3.includeHTML();
-
     </script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
@@ -357,7 +330,6 @@
             // calls the sidebar function only when all ajax calls are completed
             faqMain();
         });
-
     </script>
 
     <!-- script for error-message/header-footer js -->
