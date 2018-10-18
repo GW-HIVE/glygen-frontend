@@ -134,8 +134,8 @@ function buildPages(paginationInfo) {
 
 $(document).ready(function(){
     $('#gen-table').on("sort.bs.table", function(event,field,order){
-        // event.preventDefault();
-        // event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
         sort = field;
         dir = order;
         // LoadDataList();
