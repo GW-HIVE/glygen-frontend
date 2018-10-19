@@ -6,8 +6,7 @@ var MESSAGES = {}
 
 // Questions
 
-// MESSAGES.QUESTION_1 = "What are the enzymes involved in the biosynthesis of glycan X in human?";
-MESSAGES.QUESTION_1 = "Who changed the damn question here?";
+MESSAGES.QUESTION_1 = "What are the enzymes involved in the biosynthesis of glycan X in human?";
 MESSAGES.QUESTION_2 = "Which proteins have been shown to bear glycan X and which site is this glycan attached to?";
 MESSAGES.QUESTION_3 = "What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?";
 MESSAGES.QUESTION_4 = "What are the orthologues of protein X in different species?";
