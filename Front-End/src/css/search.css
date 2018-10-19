@@ -133,46 +133,17 @@ select {
     clear: both;
 }
 
+.videoWrapperRight,
 .videoWrapperLeft {
     position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-    margin-bottom: 20px;
-}
-
-.videoWrapperLeft iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
+    padding-bottom: 20%; /*16:9*/
+    padding-top: 34px; 
+    height: 0; 
+    overflow: hidden;
+    margin-top: 40px;
 }
 
 .videoWrapperLeft {
-    position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-    margin-bottom: 20px;
-}
-
-.videoWrapperLeft iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
-}
-
-.videoWrapperRight {
-    position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
     margin-bottom: 20px;
 }
 
@@ -180,6 +151,14 @@ select {
     position: absolute;
     top: 0;
     right: 0;
+    width: 90%;
+    height: 100%;
+}
+
+.videoWrapperLeft iframe {
+    position: absolute;
+    top: 0;
+    left: 12px;
     width: 90%;
     height: 100%;
 }
