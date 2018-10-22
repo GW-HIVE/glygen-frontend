@@ -1,6 +1,9 @@
-<!--@author:Rupali-->
-
-
+<!-------------------------------------
+@author: Rupali Mahadik
+@description: UO1 Version-1.0.1
+@createDate July 18, 2018
+@update: October 24, 2018 
+---------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +18,8 @@
     <meta http-equiv="Expires" content="0" />
 
     <title>List Page - glygen</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/list.css">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -53,21 +56,6 @@
                         <option>75</option>
                         <option>100</option>
                     </select>
-                    <!--<label>Sort By</label>-->
-                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
-                    <!--&lt;!&ndash; <option selected value="id">ID</option> &ndash;&gt;-->
-                    <!--<option value="uniprot_canonical_ac">UniProt Accession</option>-->
-                    <!--<option value="gene_name">Gene Name</option>-->
-                    <!--<option selected value="protein_name_long">UniProt Name</option>-->
-                    <!--<option value="mass">Mass</option>-->
-                    <!--<option value="organism">Organism</option>-->
-                    <!--<option value="refseq_name">RefSeq Name</option>-->
-                    <!--<option value="refseq_ac">RefSeq Accession</option>-->
-                    <!--</select>-->
-                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
-                    <!--<option value="asc" selected>ASC</option>-->
-                    <!--<option value="desc">DESC</option>-->
-                    <!--</select>-->
                     <label class="searchresult"></label>
                     <button type="button" class="btn btn-primary downloadButton" id="downloadButton" onclick="downloadPrompt();">Download
                         <i class="glyphicon glyphicon-save"></i></button>
@@ -77,110 +65,123 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
-        <div class="panel panel-default results-table-top">
-            <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
+            <div class="panel panel-default results-table-top">
+                <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
 
-            <h6><center>Performed on: {{execution_time}} (EST)</center></h6>
-            
-            <div>
-                <table class="table table-hover">
-                    <tbody class="col-sm-offset-4 col-sm-8">
+                <h6><center>Performed on: {{execution_time}} (EST)</center></h6>
 
-                    <!--Protein Typeahead-->
-                    {{#uniprot_canonical_ac}}
-                    <tr>
-                        <td>UniProt Accession:</td>
-                        <td>{{uniprot_canonical_ac}}</td>
-                    </tr>
-                    {{/uniprot_canonical_ac}}
+                <div>
+                    <table class="table table-hover">
+                        <tbody class="col-sm-offset-4 col-sm-8">
 
-                    <!--mass-->
+                        <!--Protein Typeahead-->
+                        {{#uniprot_canonical_ac}}
+                        <tr>
+                            <td>UniProt Accession:</td>
+                            <td>{{uniprot_canonical_ac}}</td>
+                        </tr>
+                        {{/uniprot_canonical_ac}}
 
-                    {{#mass.min}}
-                    <tr>
-                        <td>Mass:</td>
+                        <!--mass-->
+
                         {{#mass.min}}
-                        <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
-                        {{/mass.max}}
-                    </tr>
-                    {{/mass.min}}
+                        <tr>
+                            <td>Mass:</td>
+                            {{#mass.min}}
+                            <td>{{mass.min}}{{/mass.min}} - {{#mass.max}}{{mass.max}}  Da</td>
+                            {{/mass.max}}
+                        </tr>
+                        {{/mass.min}}
 
 
-                    <!--Organism-->
-                    {{#organism.name}}
-                    <tr>
-                        <td>Species:</td>
-                        <td>
-                            {{organism.name}}</td>
-                    </tr>
-                    {{/organism.name}}
+                        <!--Organism-->
+                        {{#organism.name}}
+                        <tr>
+                            <td>Species:</td>
+                            <td>
+                                {{organism.name}}</td>
+                        </tr>
+                        {{/organism.name}}
 
-                    <!--Protein name Typeahead-->
+                        <!--Protein name Typeahead-->
 
-                    {{#protein_name}}
-                    <tr>
-                        <td>Protein Name:</td>
-                        <td>{{protein_name}}</td>
-                    </tr>
-                    {{/protein_name}}
+                        {{#protein_name}}
+                        <tr>
+                            <td>Protein Name:</td>
+                            <td>{{protein_name}}</td>
+                        </tr>
+                        {{/protein_name}}
 
-                    <!--Gene Typeahead-->
+                        <!--Gene Typeahead-->
 
-                    {{#gene_name}}
-                    <tr>
-                        <td>Gene Name:</td>
-                        <td>{{gene_name}}</td>
-                    </tr>
-                    {{/gene_name}}
-
-
-                    <!--peptide seq-->
-                    {{#sequence.aa_sequence}}
-                    <tr>
-                        <td>Sequence:</td>
-                        <td><abbr class="limit-text-size"
-                                  title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
-                            <!--<span-->
-                                <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
-                        </td>
-                    </tr>
-                    {{/sequence.aa_sequence}}
+                        {{#gene_name}}
+                        <tr>
+                            <td>Gene Name:</td>
+                            <td>{{gene_name}}</td>
+                        </tr>
+                        {{/gene_name}}
 
 
-                    <!--pathway Typeahead-->
-                    {{#pathway_id}}
-                    <tr>
-                        <td>Pathway Id:</td>
-                        <td>{{pathway_id}}</td>
-                    </tr>
-                    {{/pathway_id}}
+                        <!--peptide seq-->
+                        {{#sequence.aa_sequence}}
+                        <tr>
+                            <td>Sequence:</td>
+                            <td><abbr class="limit-text-size"
+                                      title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr>
+                                <!--<span-->
+                                    <!--style="display:inline-block; overflow: auto;">{{sequence.type}}</span>-->
+                            </td>
+                        </tr>
+                        {{/sequence.aa_sequence}}
 
-                    <!--RefSeq Accession: Typeahead-->
-                    {{#refseq_ac}}
-                    <tr>
-                        <td>RefSeq Accession:</td>
-                        <td>{{refseq_ac}}</td>
-                    </tr>
-                    {{/refseq_ac}}
 
-                    </tbody>
-                </table>
+                        <!--pathway Typeahead-->
+                        {{#pathway_id}}
+                        <tr>
+                            <td>Pathway Id:</td>
+                            <td>{{pathway_id}}</td>
+                        </tr>
+                        {{/pathway_id}}
+
+                        <!--RefSeq Accession: Typeahead-->
+                        {{#refseq_ac}}
+                        <tr>
+                            <td>RefSeq Accession:</td>
+                            <td>{{refseq_ac}}</td>
+                        </tr>
+                        {{/refseq_ac}}
+
+                        {{#term_category}}
+                        <tr>
+                            <td>Term Category:</td>
+                            <td>{{term_category}}</td>
+                        </tr>
+                        {{/term_category}}
+
+                        {{#term}}
+                        <tr>
+                            <td>Term:</td>
+                            <td>{{term}}</td>
+                        </tr>
+                        {{/term}}
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div align="center">
+                    <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
+
+                    <!-- <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the same search again using the current version of the database.</p> -->
+
+                    <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p> 
+                </div>
             </div>
-
-            <div align="center">
-                <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
-                 
-                &nbsp; &nbsp; &nbsp; &nbsp;
-                
-                <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
-               
-                <!-- <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the same search again using the current version of the database.</p> -->
-                
-                <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p> 
-            </div>
-        </div>
-    </script>
-
+        </script>
 
         <div class="row">
             <div class="col-md-12 col-xs-12">
@@ -218,20 +219,6 @@
                         <option>75</option>
                         <option>100</option>
                     </select>
-                    <!--<label>Sort By</label>-->
-                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
-                    <!--<option value="uniprot_canonical_ac">UniProt Accession</option>-->
-                    <!--<option value="gene_name">Gene Name</option>-->
-                    <!--<option selected value="protein_name_long">UniProt Name</option>-->
-                    <!--<option value="mass">Mass</option>-->
-                    <!--<option value="organism">Organism</option>-->
-                    <!--<option value="refseq_name">RefSeq Name</option>-->
-                    <!--<option value="refseq_ac">RefSeq Accession</option>-->
-                    <!--</select>-->
-                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
-                    <!--<option value="asc" selected>ASC</option>-->
-                    <!--<option value="desc">DESC</option>-->
-                    <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
                 <!--<label class="searchresult"></label>-->
@@ -244,7 +231,6 @@
     <!--&lt;!&ndash; jQuery (necessary for Bootstrap's JavaScript plugins) &ndash;&gt;-->
 
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-
     <!-- script for table -->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
     <!-- script for time for queryserach -->
@@ -256,7 +242,7 @@
     <script type="text/javascript" src="js/domain_url.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
     <script type="text/javascript" src="js/domain_url.js"></script>
-    <!-- script for handling errror -->
+    <!-- script for handling error -->
     <!-- script for pagination page -->
     <script type="text/javascript" src="js/pagination.js"></script>
     <!-- script for error-message/header-footer js -->
@@ -273,9 +259,10 @@
     <script src="js/navbar.js"></script>
     <!--  w3 including footer-->
     <!-- script for editing users search  -->
-    <script src="js/editsearch.js"></script>
+    <script src="js/edit_search.js"></script>
     <!-- downloading files js -->
     <script src="libraries/download.js"></script>
+
 
 </body>
 

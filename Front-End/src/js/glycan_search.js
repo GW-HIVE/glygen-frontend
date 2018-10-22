@@ -1,3 +1,5 @@
+
+
 // <!--
 //     //@author: Rupali Mahadik
 // // @description: UO1 Version-1.1.
@@ -5,6 +7,33 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 //     -->
+
+
+
+
+function resetAdvanced() {
+    setFormValues(
+        {
+            query: {
+                query_type: "search_glycan",
+                mass: {
+                    "min": 164,
+                    "max": 6750
+                },
+                number_monosaccharides: {
+                    "min": 1,
+                    "max": 37
+                },
+                enzyme: {},
+                glytoucan_ac: "",
+                organism: "",
+                glycan_type: "",
+                glycan_subtype: "",
+                uniprot_canonical_ac: "",
+                glycan_motif: ""
+            }
+        });
+}
 
 /** functions for sorted dropdowns organism
  * get organism drop down values for search form
@@ -85,9 +114,15 @@ $(document).ready(function () {
                 }
             });
 
+            var id = getParameterByName('id');
+            if(id){
+                LoadDataList(id);
+            }
+
         }
     });
 });
+
 
 ///New slider
 
@@ -144,6 +179,9 @@ Sliderbox.prototype.handler = function (target) {
     });
 
 };
+
+
+
 ///New slider
 
 Sliderbox1 = function (options) {
@@ -393,8 +431,8 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-/* ---------------------- 
-    Simplified search 
+/* ----------------------
+    Simplified search
 ------------------------- */
 
 /**
@@ -419,7 +457,7 @@ function searchGlycanSimple() {
     var term = document.getElementById("simplifiedSearch").value;
     var formObjectSimple = searchjsonSimple(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObjectSimple);
-    // call web services 
+    // call web services
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search_simple"),
@@ -454,3 +492,98 @@ function searchjsonSimple(input_query_type, input_category, input_term) {
     };
     return formjsonSimple;
 }
+
+
+
+/* ----------------------
+ Start-Prepopulating search results after clicking modify button on glycan list summary section
+ * @author Rupali
+ * @date October 18, 2018
+------------------------- */
+
+
+
+/**
+
+ * LoadDataList function to configure and start the request to GWU  service
+
+ * @param {string} id - The glycan id to load
+ * */
+function LoadDataList(id) {
+
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("glycan_list"),
+        data: getListPostData(id, 1,'mass', 'asc',10),
+        method: 'POST',
+        timeout: getTimeout("list_glycan"),
+        success: ajaxListSuccess,
+        error: ajaxListFailure
+    };
+
+
+    // make the server call
+    $.ajax(ajaxConfig);
+}
+
+
+
+
+/**
+ * Handling a succesful call to the server for list page
+ * @param {Object} data - the data set returned from the server on success
+ * @param {Array} data.results - Array of individual results
+ * @param {Object} data.pagination - the dataset for pagination info
+ * @param {Object} data.query - the dataset for query
+ */
+
+
+function ajaxListSuccess(data) {
+
+    if (data.code) {
+        console.log(data.code);
+        displayErrorByCode(data.code);
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    } else {
+
+
+        if (data.query)
+        {
+            if(data.query.query_type ==="glycan_search_simple"){
+                $('.nav-tabs a[href="#tab_default_1"]').tab('show');
+                $("#simplifiedCategory").val(data.query.term_category);
+                $("#simplifiedSearch").val(data.query.term);
+
+            }
+            else{
+                $('.nav-tabs a[href="#tab_default_2"]').tab('show');
+            }
+        }
+
+
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+
+    }
+
+}
+
+/// ajaxFailure is the callback function when ajax to GWU service fails
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    displayErrorByCode(err);
+    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    // $('#loading_image').fadeOut();
+}
+/* ----------------------
+ End-Prepopulating search results after clicking modify button on glycan list summary section
+ * @author Rupali Mahadik
+ * @date October 18, 2018
+------------------------- */
+
+
+
+
+
+
+

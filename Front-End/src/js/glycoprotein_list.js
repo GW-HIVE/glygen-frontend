@@ -28,17 +28,16 @@ var limit = 25;
  */
 
 
-
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    queryInfo.mass.min = addCommas(queryInfo.mass.min);
-    queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    if(queryInfo.mass) {
+        queryInfo.mass.min = addCommas(queryInfo.mass.min);
+        queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    }
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
-
-
 
 function totalNoSearch(total_length) {
     $('.searchresult').html( "\""  + total_length + " Proteins were found\"");

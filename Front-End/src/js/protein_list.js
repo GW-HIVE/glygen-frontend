@@ -22,8 +22,6 @@ var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 25;
 
-
-
 /**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
@@ -33,16 +31,14 @@ var limit = 25;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
-    queryInfo.mass.min = addCommas(queryInfo.mass.min);
-    queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    if(queryInfo.mass) {
+        queryInfo.mass.min = addCommas(queryInfo.mass.min);
+        queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    }
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
-
-
-
-
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
@@ -54,8 +50,6 @@ function totalNoSearch(total_length) {
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
 }
-
-
 
 function editSearch() {
     {
@@ -104,29 +98,6 @@ function MassFormatter(value) {
  * @param {object} row - The data object binded to the row
  * @return- detail view with IUPAC AND GLYCOCT
  */
-
-var lastSearch;
-
-function updateSearch() {
-    console.log(lastSearch.query);
-    $.ajax({
-        method: 'GET',
-        dataType: "json",
-        // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
-        url: getWsUrl('search_protein') + "?query=" + JSON.stringify(lastSearch.query),
-        success: function (result) {
-            // if (result.list_id) {
-            console.log(result);
-            activityTracker("user", id, "update search");
-            window.location = 'protein_list.html?id=' + result.list_id;
-            // } else {
-            //     // handle if no results
-            //     activityTracker("error", id, "update search: no result found");
-            // }
-        },
-        error: ajaxListFailure
-    });
-}
 
 
 /**

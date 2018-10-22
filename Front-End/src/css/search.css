@@ -1,3 +1,10 @@
+/* ---------------------------------------------------------------------
+@author: Rupali Mahadik.
+@ao-author: Tatiana Williamson
+@description: UO1 Version-1.0.1
+@date-created: January 2018
+@update: October 12 2018 - Tatiana Williamson - Added simplified search.
+-------------------------------------------------------------------------*/
 * {
     box-sizing: border-box;
 }
@@ -44,27 +51,9 @@ select {
     height: 35px;
 }
 
-/*
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
-
-.simpleContainer {
-    min-height: 100%;
-    margin-bottom: -150px;
-}
-
-.footer {
-    height: 50px;
-}
-*/
-
 /* --------------------------
     Simplified Search 
 -----------------------------*/
-
 #advancedSearch {
     display: none;
 }
@@ -78,7 +67,7 @@ body {
     overflow: auto;
     vertical-align: middle;
     margin-top: 17%;
-    margin-bottom: 17%;
+    margin-bottom: 16%;
 }
 
 .simplified-search input[type=text] {
@@ -96,6 +85,7 @@ body {
     border: 2px solid #dfe5ed;
     padding: 40px 80px 20px;
     margin: 0 auto;
+    overflow: auto;
     margin-top: 40px;
     margin-bottom: 40px;
 }
@@ -144,46 +134,17 @@ body {
     clear: both;
 }
 
+.videoWrapperRight,
 .videoWrapperLeft {
     position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-    margin-bottom: 20px;
-}
+    padding-bottom: 20%; /*16:9*/
+    padding-top: 34px; 
+    height: 0; 
 
-.videoWrapperLeft iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
+    margin-top: 40px;
 }
 
 .videoWrapperLeft {
-    position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-    margin-bottom: 20px;
-}
-
-.videoWrapperLeft iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100%;
-}
-
-.videoWrapperRight {
-    position: relative;
-    padding-bottom: 19%;
-    /* 16:9 */
-    padding-top: 25px;
-    height: 0;
     margin-bottom: 20px;
 }
 
@@ -191,6 +152,14 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+    width: 90%;
+    height: 100%;
+}
+
+.videoWrapperLeft iframe {
+    position: absolute;
+    top: 0;
+    left: 12px;
     width: 90%;
     height: 100%;
 }
@@ -272,6 +241,13 @@ body {
 
 /* ---- End tab style ----*/
 
+.adv-top-button {
+    float: right;
+    /*    margin: 20px 15px 40px 0;*/
+    margin-bottom: 40px;
+    margin-right: 15px;
+}
+
 @media (max-width: 1024px) {
 
     .slider-alignment {
@@ -319,7 +295,14 @@ body {
     }
 
     .tabbable-line > .nav-tabs {
-        padding-left: 3%;
+    margin-left: -3%; 
+    }
+    .advancedSearch-container {
+        width: 95%;
+        padding: 40px 20px 20px;
+    }
+    .container {
+	    width: 99%;
     }
 }
 
@@ -359,6 +342,7 @@ body {
 
     .simplified-search {
         margin-bottom: 10px !important;
+        padding: 30px 0;
     }
 }
 
@@ -366,7 +350,7 @@ body {
 
     .simplified-search {
         margin-bottom: 10px !important;
-    }
+    }  
 }
 
 /* search box*/
@@ -488,6 +472,10 @@ body {
 
 #msg {
     margin-top: 0px;
+}
+
+.simplebutton{
+    float:left;
 }
 
 .sliderbox-input-min {

@@ -3,7 +3,24 @@
 // @update: Aug 27, 2018 - Gaurav Agarwal - function to return ajax timeout values and ajax error-failure handling functions.
 // @added: Oct 19, 2018 - Gaurav Agarwal - data download function.
 
+/**
+ * function addCommas is a regular expression is used on nStr to add the commas
+ * @param {integer} nstr gets divide
+ * @returns {number} Number with commas
+ */
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
 
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+}
 function getErrorMessage(errorCode) {
     var contactUsMsg = " If the problem persists then you may <a href='contact.html' >contact us</a>";
     switch (errorCode) {

@@ -1,13 +1,13 @@
-<!--
-//@author: Rupali Mahadik
-// @description: UO1 Version-1.1.
-//@Date:20th June 2018.
-//@refactored:June-27-2017
+<!--------------------------------------------------
+@author: Rupali Mahadik
+@description: UO1 Version-1.0.1
+@Date:20th June 2018.
+@refactored:June-27-2017
   
-//@author: Tatiana Williamson
-//@date: September 12, 2018 
-//@description: UO1 Version-1.1.0
-   -->
+@author: Tatiana Williamson
+@description: UO1 Version-1.0.1
+@date: September 12, 2018 Added simplified search
+---------------------------------------------------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,11 +67,11 @@
                     <div class="tabbable-line">
                         <ul class="nav nav-tabs ">
                             <li class="active">
-                                <a href="#tab_default_1" data-toggle="tab">
+                                <a href="#tab_default_1" data-toggle="tab" id="tab-simple">
                                     Simplified Search </a>
                             </li>
                             <li>
-                                <a href="#tab_default_2" data-toggle="tab">
+                                <a href="#tab_default_2" data-toggle="tab" id="tab-advance">
                                     Advanced Search </a>
                             </li>
                             <li>
@@ -108,7 +108,7 @@
                                         <div class="advancedSearch-container">
                                             <!--  Top button-->
                                             <div class="row">
-                                                <input type="button" class="btn-lg btn-primary" value="Search Protein" onclick="ajaxProteinSearchSuccess()" style="float: right; margin: 20px 15px 35px 0;">
+                                                <input type="button" class="btn-lg btn-primary adv-top-button" value="Search Protein" onclick="ajaxProteinSearchSuccess()">
                                             </div>
                                             <!-- UniProt Accession-->
                                             <div class="row">
@@ -334,7 +334,7 @@
     <script type="text/javascript" src="js/domain_url.js"></script>
     <script type="text/javascript" src="js/ws_url.js"></script>
     <!-- script for editing users search  -->
-    <script src="js/editsearch.js"></script>
+    <script src="js/edit_search.js"></script>
     <!-- script for error handling alerts -->
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <script src="js/popover.js"></script>
