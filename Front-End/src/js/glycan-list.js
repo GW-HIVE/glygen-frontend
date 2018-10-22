@@ -9,6 +9,7 @@
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxListFailure function
+// @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 
 
 
@@ -248,4 +249,25 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
+/**
+ * Shows an alert box which has different selection criteria for downloading the page data.
+ * @author Gaurav Agarwal
+ * @since Oct 22, 2018.
+ */
+function downloadPrompt() {
+    var page_type = "glycan_list";
+    var alert_msg = "<label>Download format </label> "
+        + " <select id='data_format'>"
+        + "<option value='csv'>CSV</option>"
+        + "<option value='json'>JSON</option>"
+        + "</select> <br/>"
+        + "<label>Compressed </label> "
+        + " <input type='checkbox' id='data_compression' />";
 
+    alertify.confirm("Download this list", alert_msg, function () {
+        downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+    },
+        function () {
+            alertify.confirm().close();
+        }).set({ transition: 'zoom', movable: false });
+}

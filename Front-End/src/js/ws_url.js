@@ -10,15 +10,16 @@
 //update:31 july:// New base URL updated.
 
 function getWsUrl(request, id, id1) {
-    var ws_home_init = ws_base+"pages/home_init";
-    var ws_base_glycan = ws_base+"glycan";
-    var ws_base_protein = ws_base+"protein";
-    var ws_base_typeahead = ws_base+"typeahead";
-    var ws_logging = ws_base+"auth/logging";
-    var ws_userID = ws_base+"auth/userid";
-    var ws_contact = ws_base+"auth/contact";
-    var ws_useCaseSearch=ws_base+"usecases";
-    var ws_homeInit=ws_base+"pages/home_init";
+    var ws_home_init = ws_base + "pages/home_init";
+    var ws_base_glycan = ws_base + "glycan";
+    var ws_base_protein = ws_base + "protein";
+    var ws_base_typeahead = ws_base + "typeahead";
+    var ws_logging = ws_base + "auth/logging";
+    var ws_userID = ws_base + "auth/userid";
+    var ws_contact = ws_base + "auth/contact";
+    var ws_useCaseSearch = ws_base + "usecases";
+    var ws_homeInit = ws_base + "pages/home_init";
+    var ws_dataDownload = ws_base + "data/download";
 
 
     // var ws_base_loci=ws_base+"usecases";
@@ -34,7 +35,7 @@ function getWsUrl(request, id, id1) {
             break;
         case "contact":
             return ws_contact;
-            break;           
+            break;
         //Homepage webservices
         case "home_init":
             return ws_home_init;
@@ -51,11 +52,11 @@ function getWsUrl(request, id, id1) {
         case "glycan_search_simple":
             return ws_base_glycan + "/search_simple";
             break;
-            
+
         case "glycan_image":
             return ws_base_glycan + "/image/" + id;
             break;
-       
+
         case "glycan_list":
             return ws_base_glycan + "/list";
             break;
@@ -93,7 +94,7 @@ function getWsUrl(request, id, id1) {
             break;
 
         //Usecases search webservices
-//Usecases search webservices Q1-Q2-Q3
+        //Usecases search webservices Q1-Q2-Q3
         case "search_bioenzyme":
             return ws_useCaseSearch + "/glycan_to_biosynthesis_enzymes/9606/" + id;
             break;
@@ -134,7 +135,7 @@ function getWsUrl(request, id, id1) {
             return ws_useCaseSearch + "/species_to_glycohydrolases/" + id;
             break;
         case "search_glycoproteins":
-             return ws_useCaseSearch + "/species_to_glycoproteins/" +id + "/" + id1;
+            return ws_useCaseSearch + "/species_to_glycoproteins/" + id + "/" + id1;
             break;
 
 
@@ -143,6 +144,9 @@ function getWsUrl(request, id, id1) {
         case "search_disease":
             return ws_useCaseSearch + "/disease_to_glycosyltransferases";
             break;
+
+        case "data_download":
+            return ws_dataDownload;
     }
 }
 

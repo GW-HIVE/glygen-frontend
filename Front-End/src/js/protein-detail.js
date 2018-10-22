@@ -3,6 +3,7 @@
 // @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 31 2018 - Gaurav Agarwal - added mutation table.
+// @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 
 // Object to hold highlight data in state
 var highlight = {};
@@ -833,9 +834,26 @@ $(document).ready(function () {
     LoadData(uniprot_canonical_ac);
 });
 
+/**
+ * Shows an alert box which has different selection criteria for downloading the page data.
+ * @author Gaurav Agarwal
+ * @since Oct 22, 2018.
+ */
+function downloadPrompt() {
+    var page_type = "protein_detail";
+    var alert_msg = "<label>Download format </label> "
+        + " <select id='data_format'>"
+        // + "<option value='csv'>CSV</option>"
+        + "<option value='fasta'>FASTA</option>"
+        + "<option value='json'>JSON</option>"
+        + "</select> <br/>"
+        + "<label>Compressed </label> "
+        + " <input type='checkbox' id='data_compression' />";
 
-
-
-
-
-
+    alertify.confirm("Download this list", alert_msg, function () {
+        downloadFromServer(uniprot_canonical_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+    },
+        function () {
+            alertify.confirm().close();
+        }).set({ transition: 'zoom', movable: false });
+}

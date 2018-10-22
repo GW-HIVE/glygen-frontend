@@ -1,6 +1,7 @@
-//@author: Rupali Mahadik
+// @author: Rupali Mahadik
 // @update: Aug 6, 2018 - Gaurav Agarwal - added ajax error cases.
 // @update: Aug 27, 2018 - Gaurav Agarwal - function to return ajax timeout values and ajax error-failure handling functions.
+// @added: Oct 19, 2018 - Gaurav Agarwal - data download function.
 
 
 function getErrorMessage(errorCode) {
@@ -160,7 +161,7 @@ function getTimeout(ajaxWebService) {
     var searchGlycan = 60000,   //10000,
         searchProtein = 60000,  //10000;
         searchSimpleGlycan = 60000,
-        searchSimpleProtein = 60000; 
+        searchSimpleProtein = 60000;
 
     // list
     var listGlycan = 5000,
@@ -269,7 +270,7 @@ function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
  * @param {*} textStatus
  * @return error message.
  */
-function decideAjaxError(jqStatus, textStatus){
+function decideAjaxError(jqStatus, textStatus) {
     var err = '';
     if (textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror') {
         err = textStatus;
@@ -280,4 +281,64 @@ function decideAjaxError(jqStatus, textStatus){
         err = textStatus;
     }
     return err;
+}
+
+/**
+ * This will download the data of the respective page in the user selected format.
+ * @author Gaurav Agarwal
+ * @since 19th Oct 2018.
+ * 
+ * @param {string} id the ID of the glycan or protein page. (ex.: uniprot_canonical_ac)
+ * @param {string} format the file format or mimeType of the data to be received.
+ * @param {boolean} compressed "true" to receive compressed data otherwise it is "false".
+ * @param {string} type the page whose data needs to be downloaded.
+ */
+function downloadFromServer(id, format, compressed, type) {
+    var download_query = {
+        "id": id,
+        "type": type,
+        "format": format,
+        "compressed": compressed
+    };
+    $('#loading_image').fadeIn();
+
+    var mimeType = "text";
+    if (format === "csv") {
+        mimeType = "text/csv";
+    } else if (format === "fasta") {
+        mimeType = "text/plain";
+    } else if (format === "json") {
+        mimeType = "application/json";
+    } else if (format === "image") {
+        mimeType = "image/png";
+    } else if (format === "tsv") {
+        mimeType = "text/tsv";
+    }
+
+    $.ajax({
+        method: 'POST',
+        dataType: "text",
+        url: getWsUrl('data_download') + "?query=" + JSON.stringify(download_query),
+        success: function (result) {
+            // var response = JSON.parse(result);
+            // if ((response).error_list) {
+            //     displayErrorByCode(response.error_list['error_code']);
+            //     activityTracker("error", id, "download: "+response.error_list['error_code']);
+            // } else {
+            // saveAs(result, "");
+            // var element = document.createElement('a');
+            // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(result));
+            // element.setAttribute('download', "protein_list_test."+format);
+            // element.style.display = 'none';
+            // document.body.appendChild(element);
+            // element.click();
+            // document.body.removeChild(element);
+
+            //uses the download.js library.
+            download(result, type + "_" + id, mimeType);        // + "." + format
+            // }
+            $('#loading_image').fadeOut();
+        },
+        error: ajaxListFailure
+    });
 }

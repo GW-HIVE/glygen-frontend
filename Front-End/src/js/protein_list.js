@@ -1,10 +1,8 @@
-
-
-
 //@Author:Rupali Mahadik.
 //@update: July 11, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
+// @added: Oct 19, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 /**
 
  * Adding function to String prototype to shortcut string to a desire length.
@@ -35,7 +33,7 @@ var limit = 25;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     queryInfo.mass.min = addCommas(queryInfo.mass.min);
     queryInfo.mass.max = addCommas(queryInfo.mass.max);
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -52,7 +50,7 @@ function buildSummary(queryInfo) {
 
 
 function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+    $('.searchresult').html("\"" + total_length + " Proteins were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
 }
@@ -115,12 +113,12 @@ function updateSearch() {
         method: 'GET',
         dataType: "json",
         // url: 'http://glygen-vm-tst.biochemistry.gwu.edu/api/protein/search?query=' + JSON.stringify(lastSearch.query),
-        url: getWsUrl('search_protein')+"?query=" + JSON.stringify(lastSearch.query),
+        url: getWsUrl('search_protein') + "?query=" + JSON.stringify(lastSearch.query),
         success: function (result) {
             // if (result.list_id) {
-                console.log(result);
-                activityTracker("user", id, "update search");
-                window.location = 'protein_list.html?id=' + result.list_id;
+            console.log(result);
+            activityTracker("user", id, "update search");
+            window.location = 'protein_list.html?id=' + result.list_id;
             // } else {
             //     // handle if no results
             //     activityTracker("error", id, "update search: no result found");
@@ -146,7 +144,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
         var $table = $('#gen-table');
         var items = [];
@@ -159,8 +157,8 @@ function ajaxListSuccess(data) {
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
                     organism: protein.organism,
-                    refseq_name:protein.refseq_name,
-                    refseq_ac:protein.refseq_ac
+                    refseq_name: protein.refseq_name,
+                    refseq_ac: protein.refseq_ac
                 });
             }
         }
@@ -174,7 +172,7 @@ function ajaxListSuccess(data) {
 
         document.title = 'Protein-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 
 }
@@ -182,9 +180,10 @@ function ajaxListSuccess(data) {
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
+    $('#loading_image').fadeOut();
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
 }
 
 /**
@@ -245,8 +244,8 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function(){
-    $('#gen-table').on("sort.bs.table", function(event,field,order){
+$(document).ready(function () {
+    $('#gen-table').on("sort.bs.table", function (event, field, order) {
         // event.preventDefault();
         event.stopPropagation();
         sort = field;
@@ -257,3 +256,26 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * Shows an alert box which has different selection criteria for downloading the page data.
+ * @author Gaurav Agarwal
+ * @since Oct 19, 2018.
+ */
+function downloadPrompt() {
+    var page_type = "protein_list";
+    var alert_msg = "<label>Download format </label> "
+        + " <select id='data_format'>"
+        + "<option value='csv'>CSV</option>"
+        + "<option value='fasta'>FASTA</option>"
+        + "<option value='json'>JSON</option>"
+        + "</select> <br/>"
+        + "<label>Compressed </label> "
+        + " <input type='checkbox' id='data_compression' />";
+
+    alertify.confirm("Download this list", alert_msg, function () {
+        downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+    },
+        function () {
+            alertify.confirm().close();
+        }).set({ transition: 'zoom', movable: false });
+}

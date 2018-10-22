@@ -988,3 +988,7 @@ ____________________________________  */
 .section-margin section {
     margin-top: 40px;
 }
+
+.downloadButton {
+    float: right;
+}

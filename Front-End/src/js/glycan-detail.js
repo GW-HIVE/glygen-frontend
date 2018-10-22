@@ -6,6 +6,7 @@
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
+// @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 
 
 function addCommas(nStr) {
@@ -168,3 +169,25 @@ $(document).ready(function () {
     document.title = glytoucan_ac + " Detail - glygen";   //updates title with the glycan ID
     LoadData(glytoucan_ac);
 });
+
+/**
+ * Shows an alert box which has different selection criteria for downloading the page data.
+ * @author Gaurav Agarwal
+ * @since Oct 22, 2018.
+ */
+function downloadPrompt() {
+    var page_type = "glycan_detail";
+    var alert_msg = "<label>Download format </label> "
+        + " <select id='data_format'>"
+        + "<option value='json'>JSON</option>"
+        + "</select> <br/>"
+        + "<label>Compressed </label> "
+        + " <input type='checkbox' id='data_compression' />";
+
+    alertify.confirm("Download this list", alert_msg, function () {
+        downloadFromServer(glytoucan_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+    },
+        function () {
+            alertify.confirm().close();
+        }).set({ transition: 'zoom', movable: false });
+}
