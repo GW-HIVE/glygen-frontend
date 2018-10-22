@@ -458,3 +458,4 @@ function fitChosenContainertoParent() {
 $(window).on('resize', fitChosenContainertoParent);
 
 $('#tab-advance').on('click', fitChosenContainertoParent);
+$('#tab-advance').on('click', fitChosenContainertoParent);

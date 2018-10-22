@@ -108,7 +108,14 @@
                                         <div class="advancedSearch-container">
                                             <!--  Top button-->
                                             <div class="row">
-                                                <input type="button" class="btn-lg btn-primary adv-top-button" value="Search Protein" onclick="ajaxProteinSearchSuccess()">
+                                                <div class="col-12 col-sm-6 col-md-6">
+                                                    <input type="button"
+                                                           class="btn-lg btn-primary adv-top-button simplebutton"
+                                                           value="Reset Search" onclick="resetAdvanced()">
+                                                </div>
+                                                <div class="col-12 col-sm-6 col-md-6">
+                                                    <input type="button" class="btn-lg btn-primary adv-top-button" value="Search Glycoprotein" onclick="ajaxProteinSearchSuccess()">
+                                                </div>
                                             </div>
                                             <!-- UniProt Accession-->
                                             <div class="row">

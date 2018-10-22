@@ -38,6 +38,9 @@ function setFormValues(data) {
     }
 }
 
+
+
+
 /**
  * .setting the Form Values based on object data
  * @param {object} data - The data is object with query value
@@ -45,8 +48,6 @@ function setFormValues(data) {
  *
  */
 function setProteinFormValues(data) {
-//alert(data.results.uniprot_id)
-    //data1 = JSON.parse(data);
     if (data.query) {
         $("#protein").val(data.query.uniprot_canonical_ac);
         if (data.query.mass) {
@@ -55,9 +56,34 @@ function setProteinFormValues(data) {
         }
         $("#species").val(data.query.organism.id);
         $("#gene_name").val(data.query.gene_name);
-        $("#protein_name_long").val(data.query.protein_name_long);
+        $("#protein_name").val(data.query.protein_name);
         $("#pathway").val(data.query.pathway_id);
         $("#sequences").val(data.query.sequence.aa_sequence);
+        $("#sequence_type").val(data.query.sequence.type);
+        $("#refseq").val(data.query.refseq_ac);
+    }
+}
+/**
+ * .setting the Form Values based on object data
+ * @param {object} data - The data is object with query value
+ * @param {object} data.query -
+ *
+ */
+function setGlycoProteinFormValues(data) {
+    if (data.query) {
+        $("#protein").val(data.query.uniprot_canonical_ac);
+        if (data.query.mass) {
+            var massSlider = document.getElementById('sliderbox-slider');
+            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+        }
+        $("#species").val(data.query.organism.id);
+        $("#gene_name").val(data.query.gene_name);
+        $("#glycan_id").val(data.query.glycan.glytoucan_ac);
+        $("#relation").val(data.query.glycan.relation);
+        $("#protein_name").val(data.query.protein_name);
+        $("#pathway").val(data.query.pathway_id);
+        $("#sequences").val(data.query.sequence.aa_sequence);
+        $("#sequence_type").val(data.query.sequence.type);
         $("#glycosylated_aa").val(data.query.glycosylated_aa);
         $("#glycosylation_evidence").val(data.query.glycosylation_evidence);
         $("#refseq").val(data.query.refseq_ac);
@@ -87,6 +113,26 @@ function LoadProteinSearchvalues(id) {
         data: getListPostData(id, 1, 'uniprot_canonical_ac', 'asc', 1),
         method: 'POST',
         success: setProteinFormValues,
+        error: failToRetreiveSearch
+    };
+    // make the server call
+    $.ajax(ajaxConfig);
+}
+
+
+/**
+ * Loading data from protein list service
+ * @param {string} id - The serach id
+ *
+ *
+ */
+function LoadGlycoProteinSearchvalues(id) {
+    var ajaxConfig = {
+        dataType: "json",
+        url: getWsUrl("protein_list"),
+        data: getListPostData(id, 1, 'uniprot_canonical_ac', 'asc', 1),
+        method: 'POST',
+        success: setGlycoProteinFormValues,
         error: failToRetreiveSearch
     };
     // make the server call
