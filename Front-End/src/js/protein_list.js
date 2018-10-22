@@ -24,8 +24,6 @@ var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 25;
 
-
-
 /**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
@@ -35,14 +33,14 @@ var limit = 25;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
+    if(queryInfo.mass) {
+        queryInfo.mass.min = addCommas(queryInfo.mass.min);
+        queryInfo.mass.max = addCommas(queryInfo.mass.max);
+    }
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
-
-
-
-
 
 /**
  * Redirect to  searchPage with id after clicking editSearch
@@ -54,8 +52,6 @@ function totalNoSearch(total_length) {
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
 }
-
-
 
 function editSearch() {
     {
