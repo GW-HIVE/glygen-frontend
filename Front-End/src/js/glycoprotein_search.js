@@ -16,7 +16,7 @@ function resetAdvanced() {
                     "max": 3906488
                 },
                 sequence: "",
-                organism: "",
+                organism: {id:"0"},
                 refseq_ac: "",
                 protein_name: "",
                 gene_name: "",
@@ -55,7 +55,7 @@ $(document).ready(function () {
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
             placeholder_text_multiple: "Click to select multiple Amino Acids",
-            width:"700px"
+            width:"565px"
         })
         .bind(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
