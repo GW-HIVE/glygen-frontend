@@ -383,7 +383,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         "name": "All"
     }
 
-    if (input_organism.id !== "0") {
+    if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
