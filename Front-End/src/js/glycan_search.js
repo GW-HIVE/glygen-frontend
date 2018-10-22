@@ -328,7 +328,7 @@ function submitvalues() {
     var glycan_motif = document.getElementById("motif").value;
     var formObject = searchjson(query_type, glycan_id, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
     var json = "query=" + JSON.stringify(formObject);
-    debugger;
+    
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search"),

@@ -15,7 +15,7 @@ function tracking() {
             $('#textManageSettingsEnabled').css('display', 'none');
             $('#manageSettingsDisabled').css('display', 'block');
             $('#manageSettingsEnabled').css('display', 'none');
-            activityTracker("user", "", "");
+            // activityTracker("user", "", "");
         }
         else if (localStorage.getItem("ID")) {                // if an ID exists other than "NO" so continue Logging activity.
             $checkbox.attr('checked', true);
@@ -23,7 +23,7 @@ function tracking() {
             $('#textManageSettingsEnabled').css('display', 'block');
             $('#manageSettingsDisabled').css('display', 'none');
             $('#manageSettingsEnabled').css('display', 'block');
-            activityTracker("user", "", "");
+            // activityTracker("user", "", "");
         }
         else {                                               // If nothing in the local storage then give the user a choice.
             track_banner.style.display = "block";
@@ -31,6 +31,7 @@ function tracking() {
             $('#textManageSettingsEnabled').css('display', 'none');
             $('#textManageSettingsDisabled').html("Do you want GlyGen to remember your searches for your future use? You can improve/streamline your searches by allowing GlyGen to monitor your interaction with our system. For example, your searches can be recorded so you can review them at a later date. This can be changed at any time in this section.");
         }
+        activityTracker("user", "", "");
     } else {
         txt = "Please update your browser to the latest version in order to access all our website features.";
         displayBannerMsg(txt);
@@ -81,15 +82,19 @@ function activityTracker(type, id, message) {
     var user = localStorage.getItem("ID");
     var pagePath = window.location.pathname;
 
-    if (user == "NO" || user == null) {
-        // logging the user's who have opted out of activity logging as Anonymous users.
+    if (user == "NO") {
+        // defining the users who have opted out of activity logging.
         user = "Anonymous";
+    } else if (user == null) {
+        // defining the users who have not yet decided an option of activity logging.
+        user = "Undecided";
     }
+
     var data = {
         "id": id,                         //  "glycan/search ID"
         "user": user,
         "type": type,                     //    "user" or "error"
-        "page": pagePath.substring(pagePath.lastIndexOf('/')+1),
+        "page": pagePath.substring(pagePath.lastIndexOf('/') + 1),
         "message": message
     };
     console.log(data);
@@ -113,8 +118,8 @@ function activityTracker(type, id, message) {
 //to get the attribute value from the url, modified to give only one attribute value.
 function getUrlVars() {
     var vars = {};
-    var attr="";
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    var attr = "";
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
         attr = value;
     });

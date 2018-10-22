@@ -356,6 +356,8 @@ function downloadFromServer(id, format, compressed, type) {
             // }
             $('#loading_image').fadeOut();
         },
-        error: ajaxListFailure
+        error: function(response){
+            alertify.alert("Some error... error function yet to be completely implemented");
+        }
     });
 }
