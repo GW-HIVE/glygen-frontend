@@ -1,3 +1,5 @@
+
+
 // <!--
 //     //@author: Rupali Mahadik
 // // @description: UO1 Version-1.1.
@@ -5,6 +7,33 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 //     -->
+
+
+
+
+function resetAdvanced() {
+    setFormValues(
+        {
+            query: {
+                query_type: "search_glycan",
+                mass: {
+                    "min": 164,
+                    "max": 6750
+                },
+                number_monosaccharides: {
+                    "min": 1,
+                    "max": 37
+                },
+                enzyme: {},
+                glytoucan_ac: "",
+                organism: "",
+                glycan_type: "",
+                glycan_subtype: "",
+                uniprot_canonical_ac: "",
+                glycan_motif: ""
+            }
+        });
+}
 
 /** functions for sorted dropdowns organism
  * get organism drop down values for search form
@@ -402,8 +431,8 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-/* ---------------------- 
-    Simplified search 
+/* ----------------------
+    Simplified search
 ------------------------- */
 
 /**
@@ -428,7 +457,7 @@ function searchGlycanSimple() {
     var term = document.getElementById("simplifiedSearch").value;
     var formObjectSimple = searchjsonSimple(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObjectSimple);
-    // call web services 
+    // call web services
     $.ajax({
         type: 'post',
         url: getWsUrl("glycan_search_simple"),
@@ -551,7 +580,6 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
  * @author Rupali Mahadik
  * @date October 18, 2018
 ------------------------- */
-
 
 
 

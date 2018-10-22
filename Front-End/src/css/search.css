@@ -474,6 +474,10 @@ select {
     margin-top: 0px;
 }
 
+.simplebutton{
+    float:left;
+}
+
 .sliderbox-input-min {
     margin-top: 20px;
     display: inline-block;

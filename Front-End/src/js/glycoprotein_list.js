@@ -28,7 +28,6 @@ var limit = 25;
  */
 
 
-
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
@@ -39,8 +38,6 @@ function buildSummary(queryInfo) {
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
-
-
 
 function totalNoSearch(total_length) {
     $('.searchresult').html( "\""  + total_length + " Proteins were found\"");

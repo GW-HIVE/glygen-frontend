@@ -1,9 +1,7 @@
-
-//comment for
-
-
-//@author: Rupali Mahadik
+// @author: Rupali Mahadik
 // @description: UO1 Version-1.1.
+// @Date:20th June 2018.
+// @refactored:June-27-2017
 
 
 /**
@@ -14,7 +12,7 @@
  */
 
 function setFormValues(data) {
-   
+
     if (data.query) {
         $("#glycan_id").val(data.query.glytoucan_ac);
         if (data.query.mass) {
@@ -26,15 +24,15 @@ function setFormValues(data) {
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
 
-         $("#species").val(data.query.organism.id);
+        $("#species").val(data.query.organism.id);
         $("#ddl").val(data.query.glycan_type);
-       var types = document.getElementById('ddl');
+        var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
         // create subtypes
-        configureDropDownLists(types, subtypes, function() {
+        configureDropDownLists(types, subtypes, function () {
             $("#ddl2").val(data.query.glycan_subtype);
         });
-        // $("#enzyme").val(data.query.enzyme.id);
+        $("#enzyme").val(data.query.enzyme.id);
         $("#protein").val(data.query.uniprot_canonical_ac);
         $("#motif").val(data.query.glycan_motif);
     }
@@ -48,7 +46,7 @@ function setFormValues(data) {
  */
 function setProteinFormValues(data) {
 //alert(data.results.uniprot_id)
-  //data1 = JSON.parse(data);
+    //data1 = JSON.parse(data);
     if (data.query) {
         $("#protein").val(data.query.uniprot_canonical_ac);
         if (data.query.mass) {
@@ -68,13 +66,14 @@ function setProteinFormValues(data) {
 
 /**
  * fail to to get search data
-* @param {object} data - The Retreive data
-*
-*
-*/
+ * @param {object} data - The Retreive data
+ *
+ *
+ */
 function failToRetreiveSearch(data) {
     displayErrorByCode('server_down');
 }
+
 /**
  * Loading data from protein list service
  * @param {string} id - The serach id
@@ -115,6 +114,7 @@ function LoadSearchvalues(id) {
     $.ajax(ajaxConfig);
 }
 
+//Do not remove this code
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
