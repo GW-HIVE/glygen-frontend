@@ -34,6 +34,8 @@ function resetAdvanced() {
 
             }
         })
+
+    $("#glycosylated_aa").val('').trigger("chosen:updated");
 }
 
 function sortDropdown(a, b) {
@@ -206,10 +208,15 @@ function ajaxProteinSearchSuccess() {
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
-    var sequence = $("#sequences").val().replace(/\n/g, "");
+    // var sequence =
+    var sequence ={
+            "type": $("#type").val(),
+            "aa_sequence": $("#sequences").val().replace(/\n/g, "")
+        };
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
+
     var glycosylation_evidence = $("#glycosylation_evidence").val();
     var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name,
         protein_name, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylation_evidence)
@@ -243,12 +250,13 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
 
-    var sequences = {}
-    if (input_sequence) {
-        sequences = {
-            "type": "exact",
-            "aa_sequence": input_sequence
-        }
+    var sequences = {
+        "type": "exact",
+        "aa_sequence": input_sequence
+    };
+    if (input_sequence != "") {
+        sequences.type = input_sequence.type;
+        sequences.aa_sequence = input_sequence.aa_sequence;
     }
     var organisms = {
         "id": 0,
