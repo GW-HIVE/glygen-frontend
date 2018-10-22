@@ -6,7 +6,35 @@
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
 
+function resetAdvanced() {
+    setGlycoProteinFormValues(
+        {
+            query: {
+                query_type: "search_protein",
+                mass: {
+                    "min": 435,
+                    "max": 3906488
+                },
+                sequence: "",
+                organism: "",
+                refseq_ac: "",
+                protein_name: "",
+                gene_name: "",
+                pathway_id: "",
+                uniprot_canonical_ac: "",
+                glycan:{
+                    relation:"",
+                    glytoucan_ac:""
+                },
+                sequence:{
+                    glycosylated_aa: "",
+                    type:""
+                },
+                glycosylation_evidence:""
 
+            }
+        })
+}
 
 function sortDropdown(a, b) {
     if (a.name < b.name) {
@@ -26,9 +54,10 @@ var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
-            placeholder_text_multiple: "Click to select multiple Amino Acids"
+            placeholder_text_multiple: "Click to select multiple Amino Acids",
+            width:"700px"
         })
-        .bind("chosen:maxselected2", function () {
+        .bind(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
@@ -57,7 +86,7 @@ $(document).ready(function () {
             // please do not remove this code as it is required prepopulate search values
             var id = getParameterByName('id') || id;
             if (id) {
-                LoadProteinSearchvalues(id);
+                LoadGlycoProteinSearchvalues(id);
             }
 
             new Sliderbox({
@@ -226,7 +255,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "name": "All"
     }
 
-    if (input_organism.id !== "0") {
+    if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
@@ -259,13 +288,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     };
     return formjson;
 }
-// to resizing choosen field
 
-$(window).on('resize', function () {
-    var $element = $('.chosen-container');
-    $element.width($element.parent().width());
-
-})
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
@@ -402,7 +425,7 @@ function ajaxListSuccess(data) {
         }
 
 
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
     }
 
@@ -424,3 +447,14 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
  * @author Rupali Mahadik
  * @date October 18, 2018
 ------------------------- */
+function fitChosenContainertoParent() {
+    setTimeout(function () {
+        var $element = $('.chosen-container');
+        var width = $element.parent().width();
+        $element.width(width);
+    }, 500);
+}
+
+$(window).on('resize', fitChosenContainertoParent);
+
+$('#tab-advance').on('click', fitChosenContainertoParent);
