@@ -920,7 +920,10 @@ ____________________________________  */
 @media only screen and (max-width: 1350px) {
     .gg-nav-item a {
         font-size: 1em;
-        font-weight: 600;
+        font-weight: 550;
+    }
+    .glygenIconIndex {
+        width: 55% !important;
     }
 }
 
