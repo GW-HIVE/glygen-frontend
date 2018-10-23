@@ -14,7 +14,7 @@ function getWsUrl(request, id, id1) {
     var ws_base_glycan = ws_base + "glycan";
     var ws_base_protein = ws_base + "protein";
     var ws_base_typeahead = ws_base + "typeahead";
-    var ws_logging = ws_base + "auth/logging";
+    var ws_logging = ws_base + "log/logging";
     var ws_userID = ws_base + "auth/userid";
     var ws_contact = ws_base + "auth/contact";
     var ws_useCaseSearch = ws_base + "usecases";

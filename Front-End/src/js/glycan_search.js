@@ -62,7 +62,7 @@
              var categoryType = $("#simplifiedCategory").get(0);
              result.simple_search_category.sort(sortDropdownSimple);
              for (var x = 0; x < result.simple_search_category.length; x++) {
-                 createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
+                 createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
              }
              var glycanElement = $(".ddl").get(0);
              result.glycan_type.sort(sortDropdown);
@@ -369,9 +369,9 @@
   */
 
  function sortDropdownSimple(c, d) {
-     if (c.id < d.id) {
+     if (c.display < d.display) {
          return -1;
-     } else if (d.id < c.id) {
+     } else if (d.display < c.display) {
          return 1;
      }
      return 0;
@@ -397,7 +397,7 @@
          type: 'post',
          url: getWsUrl("glycan_search_simple"),
          data: json,
-         timeout: getTimeout("search_simple_glycan"),
+         //timeout: getTimeout("search_simple_glycan"),
          error: ajaxSearchFailure,
          success: function (results) {
              if (results.error_code) {
