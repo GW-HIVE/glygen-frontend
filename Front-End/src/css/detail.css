@@ -110,27 +110,6 @@ pre {
     padding: 2px 2px;
 }
 
-/*---------------------------------------
-    Tatiana Williamson October 17, 2018
------------------------------------------*/
-.btn-link-detail {
-    text-decoration: none !important;
-    font-size: 1.4em !important;
-    font-weight: bold;
-}
-
-.caret {
-    border-width: 7px !important;
-    line-height: 
-}
-
-.dropdown-menu {
-    min-width: 150px !important;
-    margin-right: 3%;
-}
-
-/*------   End   --------*/
-
 .panelmaincontent {
     font-size: 16px;
 }

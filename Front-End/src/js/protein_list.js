@@ -31,8 +31,8 @@ var limit = 25;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
-    if(queryInfo.mass) {
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    if (queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
         queryInfo.mass.max = addCommas(queryInfo.mass.max);
     }
@@ -234,19 +234,22 @@ $(document).ready(function () {
  */
 function downloadPrompt() {
     var page_type = "protein_list";
-    var alert_msg = "<label>Download format </label> "
-        + " <select id='data_format'>"
-        + "<option value='csv'>CSV</option>"
-        + "<option value='fasta'>FASTA</option>"
-        + "<option value='json'>JSON</option>"
-        + "</select> <br/>"
-        + "<label>Compressed </label> "
-        + " <input type='checkbox' id='data_compression' />";
+    var alert_msg = "<label>Download format </label> " +
+        " <select id='data_format'>" +
+        "<option value='csv'>CSV</option>" +
+        "<option value='fasta'>FASTA</option>" +
+        "<option value='json'>JSON</option>" +
+        "</select> <br/>" +
+        "<label>Compressed </label> " +
+        " <input type='checkbox' id='data_compression' />";
 
     alertify.confirm("Download this list", alert_msg, function () {
-        downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-    },
+            downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+        },
         function () {
             alertify.confirm().close();
-        }).set({ transition: 'zoom', movable: false });
+        }).set({
+        transition: 'zoom',
+        movable: false
+    });
 }

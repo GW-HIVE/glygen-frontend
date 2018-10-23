@@ -42,7 +42,7 @@ var limit = 10;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
@@ -59,7 +59,7 @@ function buildSummary(queryInfo) {
  */
 
 function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+    $('.searchresult').html("\"" + total_length + " glycans were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 
 }
@@ -122,6 +122,7 @@ function massFormatter(value) {
  */
 
 var lastSearch;
+
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
@@ -145,7 +146,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
 
 
@@ -161,12 +162,12 @@ function ajaxListSuccess(data) {
                     number_enzymes: glycan.number_enzymes,
                     number_monosaccharides: glycan.number_monosaccharides,
                     iupac: glycan.iupac,
-                        glycoct: glycan.glycoct
+                    glycoct: glycan.glycoct
                 });
             }
         }
 
-        if(data.query.organism && (data.query.organism.id === 0)){
+        if (data.query.organism && (data.query.organism.id === 0)) {
             data.query.organism.name = "All";
         }
 
@@ -177,7 +178,7 @@ function ajaxListSuccess(data) {
         // buildSummary(data.query, question);
         // document.title='glycan-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
 
     }
 
@@ -188,7 +189,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
 }
 
@@ -256,18 +257,21 @@ $(document).ajaxStop(function () {
  */
 function downloadPrompt() {
     var page_type = "glycan_list";
-    var alert_msg = "<label>Download format </label> "
-        + " <select id='data_format'>"
-        + "<option value='csv'>CSV</option>"
-        + "<option value='json'>JSON</option>"
-        + "</select> <br/>"
-        + "<label>Compressed </label> "
-        + " <input type='checkbox' id='data_compression' />";
+    var alert_msg = "<label>Download format </label> " +
+        "<select id='data_format'>" +
+        "<option value='csv'>CSV</option>" +
+        "<option value='json'>JSON</option>" +
+        "</select> <br/>" +
+        "<label>Compressed </label> " +
+        " <input type='checkbox' id='data_compression' />";
 
     alertify.confirm("Download this list", alert_msg, function () {
-        downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-    },
+            downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+        },
         function () {
             alertify.confirm().close();
-        }).set({ transition: 'zoom', movable: false });
+        }).set({
+        transition: 'zoom',
+        movable: false
+    });
 }

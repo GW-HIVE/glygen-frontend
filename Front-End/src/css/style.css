@@ -997,3 +997,25 @@ ____________________________________  */
 .downloadButton {
     float: right;
 }
+
+/*---------------------------------------
+    Download link button 
+    for detail and link pages
+    Updated October 17, 2018
+-----------------------------------------*/
+.btn-link-detail {
+    text-decoration: none !important;
+    font-size: 1em !important;
+    font-weight: bold;
+}
+
+.caret {
+    border-width: 5px !important;
+}
+
+.dropdown-menu {
+    min-width: 159px !important;
+    margin-right: 1%;
+}
+
+/*------   End   --------*/

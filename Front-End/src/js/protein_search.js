@@ -7,8 +7,6 @@
 
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
-
-
  * @param {integer} nstr gets divide
  * @returns {number} Number with commas
  */
@@ -57,7 +55,6 @@ $(document).ready(function () {
         error: searchInitFailure,
         success: function (result) {
             searchInitValues = result;
-
             var orgElement = $("#species").get(0);
             result.organism.sort(sortDropdown);
             for (var x = 0; x < result.organism.length; x++) {
@@ -69,7 +66,6 @@ $(document).ready(function () {
             for (var x = 0; x < result.simple_search_category.length; x++) {
                 createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
             }
-
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
             // mass(mass_min, mass_max);
@@ -82,9 +78,7 @@ $(document).ready(function () {
 
             new Sliderbox({
                 target: '.sliderbox',
-
                 start: [435, 3906488.00], // Handle start position
-
                 connect: true, // Display a colored bar between the handles
                 behaviour: 'tap-drag', // Move handle on tap, bar is draggable
                 range: { // Slider can select '0' to '100'
@@ -100,8 +94,6 @@ $(document).ready(function () {
                     '80%': mass_max / 4,
                     '90%': mass_max / 2,
                     'max': mass_max
-                    // 'min': 435,
-                    // 'max': 3906488.00
                 }
             });
             var id = getParameterByName('id');
@@ -111,39 +103,26 @@ $(document).ready(function () {
         }
     });
 
-
     ///New slider
-
     Sliderbox = function (options) {
-
         this.options = options;
-
         this.init();
-
     };
 
     Sliderbox.prototype.init = function () {
-
         var box = document.querySelectorAll(this.options.target),
             len = box.length,
             i = 0;
-
         for (; i < len; i++) {
-
             this.handler(box[i]);
-
         }
-
     };
 
     Sliderbox.prototype.handler = function (target) {
-
         var slider = target.querySelector('.sliderbox-slider'),
             inpMin = target.querySelector('.sliderbox-input-min'),
             inpMax = target.querySelector('.sliderbox-input-max');
-
         noUiSlider.create(slider, this.options);
-
         slider.noUiSlider.on('update', function (values, handle) {
             if (handle) {
                 inpMax.value = addCommas(parseInt(values[handle]));
@@ -153,22 +132,13 @@ $(document).ready(function () {
         });
 
         target.addEventListener('change', function (e) {
-
             if (e.target === inpMin) {
-
                 slider.noUiSlider.set([e.target.value]);
-
             } else {
-
                 slider.noUiSlider.set([null, e.target.value]);
-
             }
-
         });
-
     };
-
-    //
 });
 
 function createOption(ddl, text, value) {
@@ -177,7 +147,6 @@ function createOption(ddl, text, value) {
     opt.text = text;
     ddl.options.add(opt);
 }
-
 
 /** On submit, function forms the JSON and submits to the search web services
  */
@@ -205,7 +174,6 @@ function ajaxProteinSearchSuccess() {
         data: json,
         timeout: getTimeout("search_protein"),
         error: ajaxSearchFailure,
-
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -222,18 +190,6 @@ function ajaxProteinSearchSuccess() {
             }
         }
     });
-    //     success: function (results) {
-    //         if (results.list_id) {
-    //             window.location = './protein_list.html?id=' + results.list_id;
-    //             $('#loading_image').fadeOut();
-    //         } else {
-    //             displayErrorByCode("server-down");
-    //             activityTracker("error", "", "no result found for " + json);
-    //             $('#loading_image').fadeOut();
-    //         }
-    //
-    //     }
-    // });
 }
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
@@ -305,7 +261,14 @@ function sortDropdownSimple(c, d) {
     }
     return 0;
 }
-
+/** On submit, function forms the JSON and submits to the search web services
+  * @link {link} glycan_search_simple webservices.
+  * @param {string} input_query_type - The user's query_type input to load.
+  * @class {string} simplifiedCategory for protein.
+  * @class {string} simplifiedSearch for protein.
+  * @param {function} formObjectSimpleSearch JSON for simplified searc.
+  * @param JSON call function formObjectSimple.
+  */
 function searchProteinSimple() {
     // Get values from form fields
     var query_type = "protein_search_simple";
@@ -337,7 +300,12 @@ function searchProteinSimple() {
         }
     });
 }
-//formjason from form submit 
+/**
+  * formjason from form submit.
+  * @param {string} input_query_type - The user's query_type input to load.
+  * @param {string} input_category - The user's term_category input to load.
+  * @param {string} input_term - The user's term input to load.
+  * */
 function searchjsonSimpleP(input_query_type, input_category, input_term) {
     var formjsonSimple = {
         "operation": "AND",
@@ -353,17 +321,11 @@ function searchjsonSimpleP(input_query_type, input_category, input_term) {
  * @author Rupali
  * @date October 18, 2018
 ------------------------- */
-
-
-
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The protein id to load
  * */
 function LoadDataList(id) {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
@@ -374,12 +336,9 @@ function LoadDataList(id) {
         error: ajaxListFailure
     };
 
-
     // make the server call
     $.ajax(ajaxConfig);
 }
-
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -389,7 +348,6 @@ function LoadDataList(id) {
  * @param {Object} data.query - the dataset for query
  */
 
-
 function ajaxListSuccess(data) {
 
     if (data.code) {
@@ -397,8 +355,6 @@ function ajaxListSuccess(data) {
         displayErrorByCode(data.code);
         activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
-
-
         if (data.query)
         {
             if(data.query.query_type ==="protein_search_simple"){
@@ -411,15 +367,9 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-
-
         activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
-
     }
-
 }
-
-
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
