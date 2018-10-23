@@ -30,6 +30,7 @@ var limit = 25;
 
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
+    queryInfo.glycosylated_aa = queryInfo.glycosylated_aa.join(', ');
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
     if(queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
@@ -42,7 +43,6 @@ function buildSummary(queryInfo) {
 function totalNoSearch(total_length) {
     $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
 }
 
 /**

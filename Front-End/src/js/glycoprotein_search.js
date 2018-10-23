@@ -6,7 +6,37 @@
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
 
+function resetAdvanced() {
+    setGlycoProteinFormValues(
+        {
+            query: {
+                query_type: "search_protein",
+                mass: {
+                    "min": 435,
+                    "max": 3906488
+                },
+                sequence: "",
+                organism: {id:"0"},
+                refseq_ac: "",
+                protein_name: "",
+                gene_name: "",
+                pathway_id: "",
+                uniprot_canonical_ac: "",
+                glycan:{
+                    relation:"",
+                    glytoucan_ac:""
+                },
+                sequence:{
+                    glycosylated_aa: "",
+                    type:""
+                },
+                glycosylation_evidence:""
 
+            }
+        })
+
+    $("#glycosylated_aa").val('').trigger("chosen:updated");
+}
 
 function sortDropdown(a, b) {
     if (a.name < b.name) {
@@ -26,9 +56,10 @@ var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
-            placeholder_text_multiple: "Click to select multiple Amino Acids"
+            placeholder_text_multiple: "Click to select multiple Amino Acids",
+            width:"565px"
         })
-        .bind("chosen:maxselected2", function () {
+        .bind(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
         });
 
@@ -57,7 +88,7 @@ $(document).ready(function () {
             // please do not remove this code as it is required prepopulate search values
             var id = getParameterByName('id') || id;
             if (id) {
-                LoadProteinSearchvalues(id);
+                LoadGlycoProteinSearchvalues(id);
             }
 
             new Sliderbox({
@@ -177,10 +208,15 @@ function ajaxProteinSearchSuccess() {
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
-    var sequence = $("#sequences").val().replace(/\n/g, "");
+    // var sequence =
+    var sequence ={
+            "type": $("#type").val(),
+            "aa_sequence": $("#sequences").val().replace(/\n/g, "")
+        };
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
+
     var glycosylation_evidence = $("#glycosylation_evidence").val();
     var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name,
         protein_name, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylation_evidence)
@@ -214,19 +250,20 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
 
-    var sequences = {}
-    if (input_sequence) {
-        sequences = {
-            "type": "exact",
-            "aa_sequence": input_sequence
-        }
+    var sequences = {
+        "type": "exact",
+        "aa_sequence": input_sequence
+    };
+    if (input_sequence != "") {
+        sequences.type = input_sequence.type;
+        sequences.aa_sequence = input_sequence.aa_sequence;
     }
     var organisms = {
         "id": 0,
         "name": "All"
     }
 
-    if (input_organism.id !== "0") {
+    if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
@@ -259,13 +296,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     };
     return formjson;
 }
-// to resizing choosen field
 
-$(window).on('resize', function () {
-    var $element = $('.chosen-container');
-    $element.width($element.parent().width());
-
-})
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
@@ -402,7 +433,7 @@ function ajaxListSuccess(data) {
         }
 
 
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
     }
 
@@ -424,3 +455,15 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
  * @author Rupali Mahadik
  * @date October 18, 2018
 ------------------------- */
+function fitChosenContainertoParent() {
+    setTimeout(function () {
+        var $element = $('.chosen-container');
+        var width = $element.parent().width();
+        $element.width(width);
+    }, 500);
+}
+
+$(window).on('resize', fitChosenContainertoParent);
+
+$('#tab-advance').on('click', fitChosenContainertoParent);
+$('#tab-advance').on('click', fitChosenContainertoParent);

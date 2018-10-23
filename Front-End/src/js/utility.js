@@ -342,20 +342,19 @@ function downloadFromServer(id, format, compressed, type) {
             //     displayErrorByCode(response.error_list['error_code']);
             //     activityTracker("error", id, "download: "+response.error_list['error_code']);
             // } else {
-            // saveAs(result, "");
-            // var element = document.createElement('a');
-            // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(result));
-            // element.setAttribute('download', "protein_list_test."+format);
-            // element.style.display = 'none';
-            // document.body.appendChild(element);
-            // element.click();
-            // document.body.removeChild(element);
 
             //uses the download.js library.
             download(result, type + "_" + id, mimeType);        // + "." + format
             // }
             $('#loading_image').fadeOut();
         },
-        error: ajaxListFailure
+        error: function(response){
+            alertify.alert("Some error... error function yet to be completely implemented");
+        }
     });
 }
+
+// for stopping the download dropdown to close on click.
+$(document).on('click', '.gg-download', function (e) {
+    e.stopPropagation();
+  });

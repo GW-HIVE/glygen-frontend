@@ -5,6 +5,33 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
+
+function resetAdvanced() {
+    setProteinFormValues(
+        {
+            query: {
+                query_type: "search_protein",
+                mass: {
+                    "min": 435,
+                    "max": 3906488
+                },
+                sequence: "",
+                organism: "",
+                refseq_ac: "",
+                protein_name: "",
+                gene_name: "",
+                pathway_id: "",
+                uniprot_canonical_ac: "",
+                sequence:{
+                    glycosylated_aa: "",
+                    type:""
+                }
+
+
+            }
+        })
+}
+
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
  * @param {integer} nstr gets divide
@@ -206,7 +233,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "name": "All"
     }
 
-    if (input_organism.id !== "0") {
+    if (input_organism.id == "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }

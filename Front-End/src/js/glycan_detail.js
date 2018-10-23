@@ -6,7 +6,7 @@
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
-// @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
+// @update: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gets selected creteria for downloading data.
 
 
 function addCommas(nStr) {
@@ -171,23 +171,15 @@ $(document).ready(function () {
 });
 
 /**
- * Shows an alert box which has different selection criteria for downloading the page data.
+ * Gets the values selected in the download dropdown 
+ * and sends to the downloadFromServer() function in utility.js
  * @author Gaurav Agarwal
  * @since Oct 22, 2018.
  */
 function downloadPrompt() {
     var page_type = "glycan_detail";
-    var alert_msg = "<label>Download format </label> "
-        + " <select id='data_format'>"
-        + "<option value='json'>JSON</option>"
-        + "</select> <br/>"
-        + "<label>Compressed </label> "
-        + " <input type='checkbox' id='data_compression' />";
+    var format = $('#download_format').val();
+    var IsCompressed = $('#download_compression').is(':checked');
 
-    alertify.confirm("Download this list", alert_msg, function () {
-        downloadFromServer(glytoucan_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-    },
-        function () {
-            alertify.confirm().close();
-        }).set({ transition: 'zoom', movable: false });
+    downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }
