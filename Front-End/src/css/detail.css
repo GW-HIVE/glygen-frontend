@@ -121,12 +121,13 @@ pre {
 
 .caret {
     border-width: 7px !important;
-    line-height: 
+    /* line-height:  */
 }
 
 .dropdown-menu {
     min-width: 150px !important;
     margin-right: 3%;
+    padding: 10px;
 }
 
 /*------   End   --------*/
