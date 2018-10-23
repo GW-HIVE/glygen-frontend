@@ -62,7 +62,7 @@
              var categoryType = $("#simplifiedCategory").get(0);
              result.simple_search_category.sort(sortDropdownSimple);
              for (var x = 0; x < result.simple_search_category.length; x++) {
-                 createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
+                 createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
              }
              var glycanElement = $(".ddl").get(0);
              result.glycan_type.sort(sortDropdown);
@@ -369,9 +369,9 @@
   */
 
  function sortDropdownSimple(c, d) {
-     if (c.display < d.display) {
+     if (c.id < d.id) {
          return -1;
-     } else if (d.display < c.display) {
+     } else if (d.id < c.id) {
          return 1;
      }
      return 0;
@@ -409,7 +409,7 @@
                  activityTracker("user", "", "no result found");
                  $('#loading_image').fadeOut();
              } else {
-                 window.location = './glycan_list.html?display=' + results.list_id;
+                 window.location = './glycan_list.html?id=' + results.list_id;
                  $('#loading_image').fadeOut();
              }
          }

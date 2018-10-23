@@ -91,7 +91,7 @@ $(document).ready(function () {
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
             for (var x = 0; x < result.simple_search_category.length; x++) {
-                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
+                createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
             }
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
@@ -281,9 +281,9 @@ $(document).ajaxStop(function () {
  * @date October 11, 2018
  */
 function sortDropdownSimple(c, d) {
-    if (c.display < d.display) {
+    if (c.id < d.id) {
         return -1;
-    } else if (d.display < c.display) {
+    } else if (d.id < c.id) {
         return 1;
     }
     return 0;
