@@ -127,20 +127,6 @@ p {
     margin-bottom: -6px;
 }
 
-@media only screen and (max-width: 1350px) {
-    .gg-nav-item a {
-        font-size: 1em;
-        font-weight: 600;
-    }
-}
-
-@media only screen and (max-width: 1280px) {
-    .gg-nav-item a {
-        font-size: 0.85em;
-        font-weight: 600;
-    }
-}
-
 .gg-navbar-inverse .gg-nav-nav > .open > a,
 .gg-navbar-inverse .gg-nav-nav > .open > a:focus,
 .gg-navbar-inverse .gg-nav-nav > .open > a:hover {
@@ -254,41 +240,7 @@ p {
     color: #AFD9FD;
     text-decoration: none;
 }
-@media (max-width: 768px) {
-     body  {
-        margin-bottom: 15%;
-    }
-    .homepageContainer {
-        padding-bottom: 5%;
-    }
-}
 
-@media (max-width: 420px) {
-     body  {
-        margin-bottom: 55%;
-    }
-     .homepageContainer {
-        padding-bottom: 25%;
-    }
-}
-
-@media (max-width: 375px) {
-     body  {
-        margin-bottom: 65%;
-    }
-     .homepageContainer {
-        padding-bottom: 25%;
-    }
-}
-
-@media (max-width: 330px) {
-     body  {
-        margin-bottom: 75%;
-    }
-     .homepageContainer {
-        padding-bottom: 30%;
-    }
-}
 .tweeterMarginBottom {
     margin: 0;
     overflow: hidden;
@@ -443,15 +395,6 @@ p {
     padding: 50px;
     background-color: #fff;
     border-radius: 1em;
-}
-
-@media (max-width: 700px) {
-    .gg-settings {
-        width: auto;
-        margin: 0 auto;
-        border-radius: 0;
-        padding: 1em;
-    }
 }
 
 /* ---------------------------
@@ -788,7 +731,6 @@ label.labelContactUs {
     color: #663399;
 }
 
-
 .website-tour-menu {
     border: 1px solid #EE7475;
 }
@@ -880,58 +822,6 @@ label.labelContactUs {
     background-image: url(../images/resources/desc-arrow.png);
 }
 
-@media (max-width: 767px) {
-    .cover-resources {
-        padding: 40px;
-        text-align: center;
-        width: 97%;
-    }
-
-    .resource-img {
-        padding-left: 70px;
-    }
-}
-
-/* ----------------------------
-    Feedback
---------------------------------*/
-@media (max-width: 1024px) {
-    #google-forms {
-        height: 1366px;
-        margin-bottom: 5%;
-    }
-}
-
-@media (max-width: 768px) {
-    #google-forms {
-        margin-bottom: 8%;
-    }
-}
-
-@media (max-width: 668px) {
-    #google-forms {
-        margin-bottom: 30%;
-    }
-}
-
-@media (max-width: 420px) {
-    #google-forms {
-        margin-bottom: 40%;
-    }
-}
-
-@media (max-width: 375px) {
-    #google-forms {
-        margin-bottom: 45%;
-    }
-}
-
-@media (max-width: 328px) {
-    #google-forms {
-        margin-bottom: 50%;
-    }
-}
-
 /** ---------------------------------
     The page loading gif
     @author: Gaurav Agaarwal
@@ -1017,5 +907,92 @@ ____________________________________  */
     min-width: 159px !important;
     margin-right: 1%;
 }
-
 /*------   End   --------*/
+.container-contact {
+    background: #fff; 
+    margin-bottom: 35px;
+    padding: 2% 5% 0;
+}
+
+/* ----------------------------
+    @media Mobile screen adjustment 
+--------------------------------*/
+@media only screen and (max-width: 1350px) {
+    .gg-nav-item a {
+        font-size: 1em;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    .gg-nav-item a {
+        font-size: 0.85em;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .glygenIconIndex {
+        width: 60% !important;
+    }
+     body  {
+        margin-bottom: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    body  {
+        margin-bottom: 15%;
+    }
+    .homepageContainer {
+        padding-bottom: 5%;
+    }
+    .cover-resources {
+        padding: 40px;
+        text-align: center;
+        width: 97%;
+    }
+    .resource-img {
+        padding-left: 70px;
+    }
+}
+
+@media (max-width: 700px) {
+    .gg-settings {
+        width: auto;
+        margin: 0 auto;
+        border-radius: 0;
+        padding: 1em;
+    }
+}
+
+@media (max-width: 420px) {
+    body  {
+        margin-bottom: 55%;
+    }
+    .homepageContainer {
+        padding-bottom: 25%;
+    }
+}
+
+@media (max-width: 375px) {
+     body  {
+        margin-bottom: 65%;
+    }
+     .homepageContainer {
+        padding-bottom: 25%;
+    }
+}
+
+@media (max-width: 330px) {
+     body  {
+        margin-bottom: 75%;
+    }
+     .homepageContainer {
+        padding-bottom: 30%;
+    }
+}
+
+@media (max-width: 320px) {
+
+}
