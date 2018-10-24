@@ -111,10 +111,10 @@ function ajaxSuccess(data) {
         if(data.pathway){
             for (var i = 0; i < data.pathway.length; i++) {
                 var pathwayitem = data.pathway[i];
-                var found = false;
+                var found = '';
                 for(var j=0; j < itemsPathway.length; j++){
                     var databaseitem1  = itemsPathway[j];
-                    if(databaseitem1. resource === pathwayitem. resource){
+                    if(databaseitem1.resource === pathwayitem. resource){
                         found = true;
                         databaseitem1.links.push(
 
@@ -132,7 +132,8 @@ function ajaxSuccess(data) {
                         resource: pathwayitem. resource,
                         links: [{
                             url: pathwayitem.url,
-                            id: pathwayitem.id
+                            id: pathwayitem.id,
+                            name: pathwayitem.name
                         }]
                     });
                 }
