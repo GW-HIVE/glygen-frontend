@@ -32,10 +32,8 @@ function resetAdvanced() {
                     type:""
                 },
                 glycosylation_evidence:""
-
             }
         })
-
     $("#glycosylated_aa").val('').trigger("chosen:updated");
 }
 
@@ -94,9 +92,7 @@ $(document).ready(function () {
 
             new Sliderbox({
                 target: '.sliderbox',
-
                 start: [435, 3906488.00], // Handle start position
-
                 connect: true, // Display a colored bar between the handles
                 behaviour: 'tap-drag', // Move handle on tap, bar is draggable
                 range: { // Slider can select '0' to '100'
@@ -112,8 +108,6 @@ $(document).ready(function () {
                     '80%': mass_max / 4,
                     '90%': mass_max / 2,
                     'max': mass_max
-                    // 'min': 435,
-                    // 'max': 3906488.00
                 }
             });
 
@@ -124,39 +118,27 @@ $(document).ready(function () {
         }
     });
 
-
     ///New slider
-
     Sliderbox = function (options) {
-
         this.options = options;
-
         this.init();
-
     };
 
     Sliderbox.prototype.init = function () {
-
         var box = document.querySelectorAll(this.options.target),
             len = box.length,
             i = 0;
-
         for (; i < len; i++) {
-
             this.handler(box[i]);
-
         }
-
     };
 
     Sliderbox.prototype.handler = function (target) {
-
         var slider = target.querySelector('.sliderbox-slider'),
             inpMin = target.querySelector('.sliderbox-input-min'),
             inpMax = target.querySelector('.sliderbox-input-max');
 
         noUiSlider.create(slider, this.options);
-
         slider.noUiSlider.on('update', function (values, handle) {
             if (handle) {
                 inpMax.value = addCommas(parseInt(values[handle]));
@@ -166,22 +148,13 @@ $(document).ready(function () {
         });
 
         target.addEventListener('change', function (e) {
-
             if (e.target === inpMin) {
-
                 slider.noUiSlider.set([e.target.value]);
-
             } else {
-
                 slider.noUiSlider.set([null, e.target.value]);
-
             }
-
         });
-
     };
-
-    //
 });
 
 function createOption(ddl, text, value) {
@@ -190,7 +163,6 @@ function createOption(ddl, text, value) {
     opt.text = text;
     ddl.options.add(opt);
 }
-
 
 /** On submit, function forms the JSON and submits to the search web services
  */
@@ -217,7 +189,6 @@ function ajaxProteinSearchSuccess() {
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
-
     var glycosylation_evidence = $("#glycosylation_evidence").val();
     var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name,
         protein_name, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylation_evidence)
@@ -298,7 +269,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     return formjson;
 }
 
-
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
  * @author Gaurav Agarwal
@@ -327,7 +297,6 @@ function sortDropdownSimple(c, d) {
 }
 
 function searchProteinSimple() {
-
     // Get values from form fields
     var query_type = "protein_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
@@ -375,17 +344,11 @@ function searchjsonSimple(input_query_type, input_category, input_term) {
  * @date October 18, 2018
 ------------------------- */
 
-
-
-
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The protein id to load
  * */
 function LoadDataList(id) {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
@@ -395,12 +358,9 @@ function LoadDataList(id) {
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
-
-
     // make the server call
     $.ajax(ajaxConfig);
 }
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -409,39 +369,26 @@ function LoadDataList(id) {
  * @param {Object} data.pagination - the dataset for pagination info
  * @param {Object} data.query - the dataset for query
  */
-
-
 function ajaxListSuccess(data) {
-
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
         activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
-
-
         if (data.query)
         {
             if(data.query.query_type ==="protein_search_simple"){
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-
             }
             else{
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-
-
         activityTracker("user", "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
-
     }
-
 }
-
-
-
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {

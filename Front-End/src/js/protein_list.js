@@ -3,10 +3,9 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 // @added: Oct 19, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
+
 /**
-
  * Adding function to String prototype to shortcut string to a desire length.
-
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
@@ -44,11 +43,9 @@ function buildSummary(queryInfo) {
  * Redirect to  searchPage with id after clicking editSearch
  */
 
-
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " Proteins were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
 }
 
 function editSearch() {
@@ -59,9 +56,7 @@ function editSearch() {
 }
 
 /**
-
  * Format function to create link to the details page
-
  * @param {object} value - The data binded to that particular cell.
  @return -Details particular Protein Id
  */
@@ -69,11 +64,8 @@ function PageFormat(value, row, index, field) {
     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
 }
 
-
 /**
-
  * Format function for column "MASS"
-
  * @param {object} value - The data binded to that particular cell.
  * @return- Protein Mass if available else NA
  */
@@ -82,23 +74,17 @@ function MassFormatter(value) {
     if (value) {
         var mass = value;
         return value;
-
-
     } else {
         return "NA";
     }
 }
 
 /**
-
  * updateSearch function of the detail table when opening each row [+]
-
  * @param {int} index - The row clicked
-
  * @param {object} row - The data object binded to the row
  * @return- detail view with IUPAC AND GLYCOCT
  */
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -107,7 +93,6 @@ function MassFormatter(value) {
  * @param {Object} data.pagination - the dataset for pagination info
  * @param {Object} data.query - the dataset for query
  */
-
 
 function ajaxListSuccess(data) {
     // console.log(data);
@@ -148,7 +133,6 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
-
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -161,13 +145,10 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The protein id to load
  * */
 function LoadDataList() {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
@@ -177,22 +158,16 @@ function LoadDataList() {
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
-
-
     // make the server call
     $.ajax(ajaxConfig);
 }
 
 /**
-
  * getParameterByName function to EXtract query parametes from url
-
  * @param {string} name - The name of the variable variable to extract from query string
-
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -203,11 +178,8 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 var id = getParameterByName('id');
-
 LoadDataList(id);
-
 
 /**
  * hides the loading gif and displays the page after the results are loaded.

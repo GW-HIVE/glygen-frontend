@@ -20,7 +20,9 @@
              },
              enzyme: {},
              glytoucan_ac: "",
-             organism: {id:"0"},
+             organism: {
+                 id: "0"
+             },
              glycan_type: "",
              glycan_subtype: "",
              uniprot_canonical_ac: "",

@@ -1,9 +1,6 @@
 //@author: Rupali Mahadik
-
 // @description: UO1 Version-1.1.
-
 //@Date:19th Feb 2018.- with Rupali Mahadik dummy webservice
-
 //@update:3 April 2018. with Rupali Mahadik real web service
 //@update: June 26-2018- with Rupali Mahadik web service changes.
 //@update: July 5, 2018 - Gaurav Agarwal - added user tracking navigation on pagination table.
@@ -12,12 +9,8 @@
 // @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 
 
-
-
 /**
-
  * Adding function to String prototype to shortcut string to a desire length.
-
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
@@ -46,14 +39,9 @@ function buildSummary(queryInfo) {
     // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
-
-
-
 }
 
-
 /**
-
  * Format function of the for the getting total result for each search   [+]
  * @param {total_length} paginationInfo.total_length -
  */
@@ -61,13 +49,10 @@ function buildSummary(queryInfo) {
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " glycans were found\"");
     // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
 }
 
 /**
-
  * Format function to create link to the details page
-
  * @param {object} value - The data binded to that particular cell.
  @return -Details particular Glycan Id
  */
@@ -76,11 +61,8 @@ function pageFormat(value, row, index, field) {
 }
 
 /**
-
  * Format function for column that contains the cartoon
-
  * @param {object} value - The data binded to that particular cell.
-
  * @param {object} row - The data binded to that particular row.
  * @return- Glycanimage
  */
@@ -91,11 +73,8 @@ function imageFormat(value, row, index, field) {
     return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
-
 /**
-
  * Format function for column "MASS"
-
  * @param {object} value - The data binded to that particular cell.
  * @return- Glycan Mass if available else NA
  */
@@ -104,32 +83,25 @@ function massFormatter(value) {
     if (value) {
         var mass = value;
         return value;
-
-
     } else {
         return "NA";
     }
 }
 
 /**
-
  * updateSearch function of the detail table when opening each row [+]
-
  * @param {int} index - The row clicked
-
  * @param {object} row - The data object binded to the row
  * @return- detail view with IUPAC AND GLYCOCT
  */
 
 var lastSearch;
-
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
         activityTracker("user", id, "edit search");
     }
 }
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -139,7 +111,6 @@ function editSearch() {
  * @param {Object} data.query - the dataset for query
  */
 
-
 function ajaxListSuccess(data) {
     // console.log(data);
     //console.log(data.code);
@@ -148,8 +119,6 @@ function ajaxListSuccess(data) {
         displayErrorByCode(data.code);
         activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
-
-
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
@@ -166,11 +135,9 @@ function ajaxListSuccess(data) {
                 });
             }
         }
-
         if (data.query.organism && (data.query.organism.id === 0)) {
             data.query.organism.name = "All";
         }
-
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
         buildPages(data.pagination);
@@ -179,9 +146,7 @@ function ajaxListSuccess(data) {
         // document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-
     }
-
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -194,13 +159,10 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("glycan_list"),
@@ -210,22 +172,16 @@ function LoadDataList() {
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
-
-
     // make the server call
     $.ajax(ajaxConfig);
 }
 
 /**
-
  * getParameterByName function to EXtract query parametes from url
-
  * @param {string} name - The name of the variable variable to extract from query string
-
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -239,7 +195,6 @@ function getParameterByName(name, url) {
 
 var id = getParameterByName('id');
 LoadDataList(id);
-
 
 /**
  * hides the loading gif and displays the page after the results are loaded.

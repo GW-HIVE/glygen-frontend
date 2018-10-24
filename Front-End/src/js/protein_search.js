@@ -8,26 +8,26 @@
 
 function resetAdvanced() {
     setProteinFormValues(
-        {
-            query: {
-                query_type: "search_protein",
-                mass: {
-                    "min": 435,
-                    "max": 3906488
-                },
-                sequence: "",
-                organism: {id:"0"},
-                refseq_ac: "",
-                protein_name: "",
-                gene_name: "",
-                pathway_id: "",
-                uniprot_canonical_ac: "",
-                sequence:{
-                    glycosylated_aa: "",
-                    type:""
-                }
+    {
+        query: {
+            query_type: "search_protein",
+            mass: {
+                "min": 435,
+                "max": 3906488
+            },
+            sequence: "",
+            organism: {id:"0"},
+            refseq_ac: "",
+            protein_name: "",
+            gene_name: "",
+            pathway_id: "",
+            uniprot_canonical_ac: "",
+            sequence:{
+                glycosylated_aa: "",
+                type:""
             }
-        })
+        }
+    })
 }
 
 /**
@@ -155,7 +155,6 @@ $(document).ready(function () {
                 inpMin.value = addCommas(parseInt(values[handle]));
             }
         });
-
         target.addEventListener('change', function (e) {
             if (e.target === inpMin) {
                 slider.noUiSlider.set([e.target.value]);
@@ -218,7 +217,6 @@ function ajaxProteinSearchSuccess() {
 }
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
-
     var sequences = {}
     if (input_sequence) {
         sequences = {
@@ -230,7 +228,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "id": 0,
         "name": "All"
     }
-
     if (input_organism.id == "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
@@ -257,7 +254,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
 $(window).on('resize', function () {
     var $element = $('.chosen-container');
     $element.width($element.parent().width());
-
 })
 
 /**
@@ -360,7 +356,6 @@ function LoadDataList(id) {
         success: ajaxListSuccess,
         error: ajaxListFailure
     };
-
     // make the server call
     $.ajax(ajaxConfig);
 }
@@ -374,7 +369,6 @@ function LoadDataList(id) {
  */
 
 function ajaxListSuccess(data) {
-
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
@@ -386,7 +380,6 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-
             }
             else{
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
