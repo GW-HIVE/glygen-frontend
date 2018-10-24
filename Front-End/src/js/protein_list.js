@@ -134,6 +134,9 @@ function ajaxListSuccess(data) {
             }
         }
 
+        if (data.query.organism && (data.query.organism.id === 0)) {
+            data.query.organism.name = "All";
+        }
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 

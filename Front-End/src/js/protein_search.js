@@ -16,7 +16,7 @@ function resetAdvanced() {
                     "max": 3906488
                 },
                 sequence: "",
-                organism: "",
+                organism: {id:"0"},
                 refseq_ac: "",
                 protein_name: "",
                 gene_name: "",

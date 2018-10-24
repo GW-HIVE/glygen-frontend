@@ -125,14 +125,14 @@
                     {{/glycan.glytoucan_ac}}
 
                     <!--peptide seq-->
-                    {{#sequence}}
+                    {{#sequence.aa_sequence}}
                     <tr>
                         <td>Sequence:</td>
                         <td><abbr class="limit-text-size"
                                   title="{{sequence.aa_sequence}}">{{sequence.aa_sequence}}</abbr><span
                                 style="display:inline-block; overflow: auto;">{{sequence.type}}</span></td>
                     </tr>
-                    {{/sequence}}
+                    {{/sequence.aa_sequence}}
 
                     <!--RefSeq Accession: Typeahead-->
                     {{#refseq_ac}}

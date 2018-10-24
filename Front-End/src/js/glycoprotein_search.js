@@ -16,6 +16,7 @@ function resetAdvanced() {
                     "max": 3906488
                 },
                 sequence: "",
+                // organism: "",
                 organism: {id:"0"},
                 refseq_ac: "",
                 protein_name: "",
@@ -79,7 +80,7 @@ $(document).ready(function () {
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
             for (var x = 0; x < result.simple_search_category.length; x++) {
-                createOption(categoryType, result.simple_search_category[x].id, result.simple_search_category[x].id);
+                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
             }
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
@@ -317,9 +318,9 @@ $(document).ajaxStop(function () {
  * @date October 11, 2018
  */
 function sortDropdownSimple(c, d) {
-    if (c.id < d.id) {
+    if (c.display < d.display) {
         return -1;
-    } else if (d.id < c.id) {
+    } else if (d.display < c.display) {
         return 1;
     }
     return 0;
@@ -338,7 +339,7 @@ function searchProteinSimple() {
         type: 'post',
         url: getWsUrl("protein_search_simple"),
         data: json,
-        timeout: getTimeout("search_simple_protein"),
+        //timeout: getTimeout("search_simple_protein"),
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {

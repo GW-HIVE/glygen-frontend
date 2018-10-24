@@ -1,4 +1,5 @@
 //@author: Rupali Mahadik
+// (Mustache template, Glycosylation table, Highlighting sequence)
 // @description: UO1 Version-1.1.
 // @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
@@ -20,7 +21,7 @@ function getGlycosylationHighlightData(glycosylationData, type) {
     var result = [];
     var positions = {};
 
-    for(var x = 0; x < glycosylationData.length; x++) {
+    for (var x = 0; x < glycosylationData.length; x++) {
         if (!positions[glycosylationData[x].position] && (glycosylationData[x].type === type)) {
             positions[glycosylationData[x].position] = true;
 
@@ -43,7 +44,7 @@ function getMutationHighlightData(mutationData) {
     var result = [];
     var positions = {};
 
-    for(var x = 0; x < mutationData.length; x++) {
+    for (var x = 0; x < mutationData.length; x++) {
         if (!positions[mutationData[x].start_pos]) {
             positions[mutationData[x].start_pos] = true;
 
@@ -58,8 +59,6 @@ function getMutationHighlightData(mutationData) {
 }
 
 
-
-
 /**
  * checking is highlighted or not
  * @param {number} position
@@ -69,7 +68,7 @@ function getMutationHighlightData(mutationData) {
 function isHighlighted(position, selection) {
     var result = false;
 
-    for (var x = 0; x < selection.length; x ++) {
+    for (var x = 0; x < selection.length; x++) {
         var start = selection[x].start;
         var end = selection[x].start + selection[x].length - 1;
 
@@ -91,10 +90,10 @@ function isHighlighted(position, selection) {
  */
 
 
-function buildHighlightData (sequence, highlightData) {
+function buildHighlightData(sequence, highlightData) {
     var result = [];
 
-    for(var x = 0; x < sequence.length; x++) {
+    for (var x = 0; x < sequence.length; x++) {
         var position = x + 1;
 
         result.push({
@@ -108,7 +107,6 @@ function buildHighlightData (sequence, highlightData) {
 
     return result;
 }
-
 
 
 /**
@@ -126,7 +124,6 @@ function buildRowText(rowData) {
     return text.join('');
 
 }
-
 
 
 /**
@@ -149,11 +146,6 @@ function buildRowHighlight(rowData, type) {
 }
 
 
-
-
-
-
-
 /**
  * creating row
  * @param {number} start
@@ -167,7 +159,7 @@ function createHighlightRow(start, rowData) {
         .text(("     " + (start + 1)).slice(-5) + ' ')
         .appendTo($row);
 
-    var $section  = $('<span class="highlight-section"></span>');
+    var $section = $('<span class="highlight-section"></span>');
 
     $('<span class="highlight-text"></span>')
         .html(buildRowText(rowData))
@@ -205,9 +197,9 @@ function createHighlightRow(start, rowData) {
  */
 
 
-function createHighlightUi (highlightData, perLine) {
+function createHighlightUi(highlightData, perLine) {
     var $ui = $('<div class="highlight-display"></div>');
-    for(var x = 0; x < highlightData.length; x += perLine) {
+    for (var x = 0; x < highlightData.length; x += perLine) {
         var rowData = highlightData.slice(x, x + perLine - 1);
         var $row = createHighlightRow(x, rowData);
         $ui.append($row);
@@ -218,6 +210,7 @@ function createHighlightUi (highlightData, perLine) {
 }
 
 var uniprot_canonical_ac;
+
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -232,7 +225,7 @@ function scrollToPanel(hash) {
         $('.cd-close-panel').addClass('move-left');
         $('body').addClass('cd-overlay');
     } else {
-        $('body,html').animate({ 'scrollTop': $(hash).offset().top - 19 }, 200);
+        $('body,html').animate({'scrollTop': $(hash).offset().top - 19}, 200);
     }
 }
 
@@ -241,14 +234,14 @@ function scrollToPanel(hash) {
  * Sequence formatting Function
  */
 //
-function formatSequence (sequenceString) {
+function formatSequence(sequenceString) {
     var perLine = 60;
     var output = '';
 
-    for(var x = 0; x < sequenceString.length; x += perLine) {
+    for (var x = 0; x < sequenceString.length; x += perLine) {
         var y = sequenceString.substr(x, perLine);
         // output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
-        output += '<span class="non-selection">' + ("     " + (x+1)).slice(-5) + ' </span>' + y + '\n'
+        output += '<span class="non-selection">' + ("     " + (x + 1)).slice(-5) + ' </span>' + y + '\n'
     }
     return output;
 }
@@ -297,18 +290,16 @@ function ajaxSuccess(data) {
         }
 
 
-
-
         // define variable to for itemscrossref
-        var itemscrossRef=[];
+        var itemscrossRef = [];
 //check data.
-        if(data.crossref){
+        if (data.crossref) {
             for (var i = 0; i < data.crossref.length; i++) {
                 var crossrefitem = data.crossref[i];
                 var found = '';
-                for(var j=0; j < itemscrossRef.length; j++){
-                    var databaseitem  = itemscrossRef[j];
-                    if(databaseitem.database === crossrefitem.database){
+                for (var j = 0; j < itemscrossRef.length; j++) {
+                    var databaseitem = itemscrossRef[j];
+                    if (databaseitem.database === crossrefitem.database) {
                         found = true;
                         databaseitem.links.push(
                             {
@@ -318,7 +309,7 @@ function ajaxSuccess(data) {
                         );
                     }
                 }
-                if(!found){
+                if (!found) {
                     itemscrossRef.push({
                         database: crossrefitem.database,
                         links: [{
@@ -332,18 +323,17 @@ function ajaxSuccess(data) {
             data.itemscrossRef = itemscrossRef;
 
         }
-       // //pathway
-        var itemsPathway=[];
-        if(data.pathway){
+        // //pathway
+        var itemsPathway = [];
+        if (data.pathway) {
             for (var i = 0; i < data.pathway.length; i++) {
                 var pathwayitem = data.pathway[i];
                 var found = false;
-                for(var j=0; j < itemsPathway.length; j++){
-                    var databaseitem1  = itemsPathway[j];
-                    if(databaseitem1. resource === pathwayitem. resource){
+                for (var j = 0; j < itemsPathway.length; j++) {
+                    var databaseitem1 = itemsPathway[j];
+                    if (databaseitem1.resource === pathwayitem.resource) {
                         found = true;
                         databaseitem1.links.push(
-
                             {
                                 url: pathwayitem.url,
                                 id: pathwayitem.id,
@@ -353,9 +343,9 @@ function ajaxSuccess(data) {
                         );
                     }
                 }
-                if(!found){
+                if (!found) {
                     itemsPathway.push({
-                        resource: pathwayitem. resource,
+                        resource: pathwayitem.resource,
                         links: [{
                             url: pathwayitem.url,
                             id: pathwayitem.id
@@ -380,7 +370,7 @@ function ajaxSuccess(data) {
             for (var i = 0; i < data.glycosylation.length; i++) {
 
                 var glycan = data.glycosylation[i];
-                if(glycan.glytoucan_ac){
+                if (glycan.glytoucan_ac) {
                     data.itemsGlycosyl.push({
                         glytoucan_ac: glycan.glytoucan_ac,
                         residue: glycan.residue + glycan.position,
@@ -389,7 +379,7 @@ function ajaxSuccess(data) {
 
                     });
                 }
-                else{
+                else {
                     data.itemsGlycosyl2.push({
                         residue: glycan.residue + glycan.position,
                         type: glycan.type,
@@ -398,7 +388,6 @@ function ajaxSuccess(data) {
                 }
             }
         }
-
 
 
 //mustach rending
@@ -411,9 +400,6 @@ function ajaxSuccess(data) {
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
         // filling in glycosylation data
-
-
-
 
 
 // filling in expression_disease
@@ -480,7 +466,7 @@ function ajaxSuccess(data) {
 
 
         $container.html(html);
-        if(window.innerWidth <= 500) {
+        if (window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
         } else {
             createHighlightUi(sequenceData, 60);
@@ -504,8 +490,6 @@ function ajaxSuccess(data) {
         // $container.find('#basics5x').click();
 
         // glycosylation table
-
-
 
 
         $('#glycosylation-table').bootstrapTable({
@@ -537,7 +521,7 @@ function ajaxSuccess(data) {
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
                     }
                 }
-                ],
+            ],
             pagination: 10,
             data: data.itemsGlycosyl,
             detailView: true,
@@ -552,7 +536,7 @@ function ajaxSuccess(data) {
                 }
                 return html.join('');
             },
-            onPageChange: function(){
+            onPageChange: function () {
                 scrollToPanel("#basics6");
             }
         });
@@ -593,7 +577,7 @@ function ajaxSuccess(data) {
 
         });
 
-        $(".EmptyFind").each(function() {
+        $(".EmptyFind").each(function () {
             var $tid = $(this).attr("id");
             var $txt = $(this).text();
             if ($txt == "") {
@@ -711,49 +695,44 @@ function ajaxSuccess(data) {
         $('#loading_image').fadeOut();
 
 
-
 // expression Disease table
-    $('#expressionTissue-table').bootstrapTable({
-        columns: [
-            {
-                field: 'tissue',
-                title: 'Tissue',
-                sortable: true,
-                formatter: function (value, row, index, field) {
-                        return value.name + " (UBERON:<a href='" + value.url + "' target='_blank'>"  + value.uberon + "</a>)"
+        $('#expressionTissue-table').bootstrapTable({
+            columns: [
+                {
+                    field: 'tissue',
+                    title: 'Tissue',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        return value.name + " (UBERON:<a href='" + value.url + "' target='_blank'>" + value.uberon + "</a>)"
+                    }
+                },
+                {
+                    field: 'present',
+                    title: 'Present',
+                    sortable: true
                 }
+
+            ],
+
+            pagination: 10,
+            data: itemsExpressionTissue,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var html = [];
+                var evidences = row.evidence;
+                for (var i = 0; i < evidences.length; i++) {
+                    var evidence = evidences[i];
+                    html.push("<div class='row'>");
+                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+                    html.push("</div>");
+                }
+                return html.join('');
             },
-            {
-                field: 'present',
-                title: 'Present',
-                sortable: true
-            }
 
-        ],
-
-        pagination: 10,
-        data: itemsExpressionTissue,
-        detailView: true,
-        detailFormatter: function (index, row) {
-            var html = [];
-            var evidences = row.evidence;
-            for (var i = 0; i < evidences.length; i++) {
-                var evidence = evidences[i];
-                html.push("<div class='row'>");
-                html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                html.push("</div>");
-            }
-            return html.join('');
-        },
-
-    });
+        });
+    }
+    $('#loading_image').fadeOut();
 }
-$('#loading_image').fadeOut();
-}
-
-
-
-
 
 
 /**
@@ -817,7 +796,7 @@ function getParameterByName(name, url) {
  for
  */
 
-function checkUncheck(type, element){
+function checkUncheck(type, element) {
     var $elements = $('[data-type="' + type + '"]');
 
     if (element.checked) {
@@ -851,9 +830,9 @@ function downloadPrompt() {
         + " <input type='checkbox' id='data_compression' />";
 
     alertify.confirm("Download this list", alert_msg, function () {
-        downloadFromServer(uniprot_canonical_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-    },
+            downloadFromServer(uniprot_canonical_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
+        },
         function () {
             alertify.confirm().close();
-        }).set({ transition: 'zoom', movable: false });
+        }).set({transition: 'zoom', movable: false});
 }
