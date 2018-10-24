@@ -31,6 +31,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
+    
+    <!--This does not work as downloaded version so UX using this as CDN for font.css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
@@ -116,7 +120,7 @@
                                 <img src="images/glycoprotein.png" alt="Glycoprotein" style="width: 90%;">
                             </a>
                             <div class="caption text-left">
-                                <h3 class="title">Glycoprotein</h3>
+                                <h3 class="title glycoprotein">Glycoprotein</h3>
                                 <p>
                                     Search for glycoproteins based on the protein or glycan structures involved.
                                 </p>
@@ -254,7 +258,7 @@
                                 Please provide feedback and suggestions to help us improve the GlyGen portal and make it more useful for the community.
                             </p>
                             <div class="gg-card-explore">
-                                <a href="feedback.html" class="btn btn-link btn-block">
+                                <a href="feedback.html" class="btn btn-link btn-block feedback">
                                     Leave Feedback
                                 </a>
 
@@ -289,16 +293,7 @@
                     </div>
 
                     <div class="panel panel-default thumbnail card tweeterMarginBottom">
-                        <div class="media">
-                            <div class="media-left" style="padding: 10px 20px 0 30px;">
-                                <img src="images/tweeter.png" class="media-object" style="width:40px">
-                            </div>
-
-                            <div class="media-left">
-                                <h3 class="home-headings">News</h3>
-                            </div>
-                        </div>
-
+                        <h3 class="home-headings">News</h3>
                         <div class="caption">
                             <a class="twitter-timeline" href="https://twitter.com/gly_gen" data-height="200" data-chrome="nofooter" data-link-color="#337ab7" data-font-size="1.2em" data-font-weight="600" data-font-family="Verdana, Arial, sens-serif" data-tweet-limit="3">My tweets
                             </a>

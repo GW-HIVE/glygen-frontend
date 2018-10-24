@@ -958,6 +958,14 @@ ____________________________________  */
     .resource-img {
         padding-left: 70px;
     }
+    .twitter-timeline {
+        padding-right: 40px !important;
+    }
+    .feedback, 
+    .glycoprotein {
+        margin: 0 auto;
+        overflow: auto;
+    }
 }
 
 @media (max-width: 700px) {
@@ -975,6 +983,9 @@ ____________________________________  */
     }
     .homepageContainer {
         padding-bottom: 25%;
+    }
+     .twitter-timeline {
+        padding-right: 0 !important;
     }
 }
 
