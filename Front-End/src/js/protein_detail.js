@@ -93,7 +93,7 @@ function isHighlighted(position, selection) {
 function buildHighlightData(sequence, highlightData) {
     var result = [];
 
-    for (var x = 0; x < sequence.length; x++) {
+    for (var x = 0; sequence && x < sequence.length; x++) {
         var position = x + 1;
 
         result.push({
@@ -279,13 +279,16 @@ function ajaxSuccess(data) {
     else {
         activityTracker("user", data.uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
-        var originalSequence = data.sequence.sequence;
-        data.sequence.sequence = formatSequence(originalSequence);
-        for (var i = 0; i < data.isoforms.length; i++) {
-            // assign the newly result of running formatSequence() to replace the old value
-            data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
-            data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
-            data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+        if(data.sequence) {
+            var originalSequence = data.sequence.sequence;
+            data.sequence.sequence = formatSequence(originalSequence);
+            for (var i = 0; i < data.isoforms.length; i++) {
+               // assign the newly result of running formatSequence() to replace the old value
+                data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
+                data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
+                data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+            }
+
 
         }
 
@@ -328,7 +331,7 @@ function ajaxSuccess(data) {
         if (data.pathway) {
             for (var i = 0; i < data.pathway.length; i++) {
                 var pathwayitem = data.pathway[i];
-                var found = false;
+                var found = '';
                 for (var j = 0; j < itemsPathway.length; j++) {
                     var databaseitem1 = itemsPathway[j];
                     if (databaseitem1.resource === pathwayitem.resource) {
@@ -348,7 +351,8 @@ function ajaxSuccess(data) {
                         resource: pathwayitem.resource,
                         links: [{
                             url: pathwayitem.url,
-                            id: pathwayitem.id
+                            id: pathwayitem.id,
+                            name: pathwayitem.name
                         }]
                     });
                 }

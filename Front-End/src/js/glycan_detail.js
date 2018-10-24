@@ -44,7 +44,7 @@ function ajaxSuccess(data) {
         data.hasMotifs = (data.motifs && (data.motifs.length > 0));
         data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
         data.imagePath = getWsUrl('glycan_image', data.glytoucan.glytoucan_ac);
-        if (data.imagePath) {
+        if (data.imagePath && data.hasMotifs &&  data.hasGlycosylate) {
             for (var i = 0; i < data.motifs.length; i++) {
                 data.motifs[i].imagePath = getWsUrl('glycan_image', data.motifs[i].id);
             }
