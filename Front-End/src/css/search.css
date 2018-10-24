@@ -79,6 +79,10 @@ select {
     height: 45px !important;
 }
 
+/*------------------------
+    Advanced Search
+-------------------------*/
+
 .advancedSearch-container {
     width: 90%;
     border-radius: 5px;
@@ -88,6 +92,23 @@ select {
     overflow: auto;
     margin-top: 40px;
     margin-bottom: 40px;
+}
+
+.adv-top-button {
+    float: right;
+    margin-bottom: 40px;
+    margin-right: 15px;
+}
+.btn-primary-clear-fields {
+    color: #204d74;
+    background-color: #fff;
+    border-color: #337ab7;   
+}
+
+.btn-primary-clear-fields:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
 }
 
 .tutorial {
@@ -240,13 +261,6 @@ select {
 }
 
 /* ---- End tab style ----*/
-
-.adv-top-button {
-    float: right;
-    /*    margin: 20px 15px 40px 0;*/
-    margin-bottom: 40px;
-    margin-right: 15px;
-}
 
 @media (max-width: 1024px) {
 
