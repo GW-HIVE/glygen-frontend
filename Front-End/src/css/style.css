@@ -115,7 +115,7 @@ p {
     border-color: #2E78B7;
     border-radius: 0 !important;
     margin-bottom: 30px;
-    z-index: 9;
+    z-index: 12;
 }
 
 .gg-nav-item a {
@@ -156,6 +156,7 @@ p {
 .gg-dropd-menu {
     background-color: #2E78B7;
     font-size: 1em;
+    padding-bottom: 10px;
 }
 
 .gg-dropd-menu > li > a:hover {
