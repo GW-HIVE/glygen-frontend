@@ -54,10 +54,11 @@ function ajaxSuccess(data) {
         }
 
          //Adding breaklines
-         data.glycoct = data.glycoct.replace(/ /g, '<br>');
+        if (data.glycoct){
+         data.glycoct = data.glycoct.replace(/ /g, '<br>');}
          data.wurcs = data.wurcs.replace(/ /g, '<br>');
-         data.mass = addCommas(data.mass);
-
+        if (data.mass){
+         data.mass = addCommas(data.mass);}
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
         var items = data.enzyme ? data.enzyme : [];

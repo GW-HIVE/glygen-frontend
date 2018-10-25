@@ -114,17 +114,18 @@
                                 {{^gene}}  {{/gene}}
 
                                 {{#uniprot}}
+                                {{#uniprot_id}}
                                 <li class="list-group"><strong>UniProt ID:</strong>
-                                    {{#uniprot_id}} <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
+                                   <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
                                 {{^uniprot_id}}  {{/uniprot_id}}
-                                {{/uniprot}}
 
                                 {{#uniprot_canonical_ac}}
                                 <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
                                 {{/uniprot_canonical_ac}}
                                 {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
+                                {{/uniprot}}
 
                                 {{#recommendedname}} {{#full}}
                                 <li class="list-group"><strong>UniProt Entry
@@ -141,13 +142,13 @@
                                 <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
                                 {{/refseq.ac}}
                                 {{/refseq}}
-
+                                {{#mass}}
                                 {{#mass.monoisotopic_mass}}
                                 <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da</li>
                                 {{/mass.monoisotopic_mass}}
                                 {{^mass.monoisotopic_mass}}  {{/mass.monoisotopic_mass}}
 
-                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>{{/mass}}
                             </div>
                         </div>
                     </div>

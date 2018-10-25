@@ -288,11 +288,13 @@ function ajaxSuccess(data) {
         if(data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
-            for (var i = 0; i < data.isoforms.length; i++) {
-               // assign the newly result of running formatSequence() to replace the old value
-                data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
-                data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
-                data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+            if(data.isoforms) {
+                for (var i = 0; i < data.isoforms.length; i++) {
+                    // assign the newly result of running formatSequence() to replace the old value
+                    data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
+                    data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
+                    data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+                }
             }
         }
 
@@ -397,7 +399,7 @@ function ajaxSuccess(data) {
             }
         }
 
-        data.sequence = undefined;
+       // data.sequence = undefined;
 //mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
