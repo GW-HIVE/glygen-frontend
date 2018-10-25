@@ -193,6 +193,7 @@
                         <h4>Sequence</h4>
                     </div>
                     <div class="panel-body">
+                        {{#sequence}}
                         <div class="sequence-panel" id="sequnce_highlight">
                             <ul>
                                 <li>
@@ -206,7 +207,10 @@
                                 </li>
                             </ul>
                         </div>
+                        {{/sequence}}
+                        {{^sequence}} No data available. {{/sequence}}
                     </div>
+
                 </div>
             </ul>
 

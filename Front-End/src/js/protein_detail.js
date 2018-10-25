@@ -67,18 +67,21 @@ function getMutationHighlightData(mutationData) {
  */
 function isHighlighted(position, selection) {
     var result = false;
+    if (selection){
+        for (var x = 0; x < selection.length; x++) {
+            var start = selection[x].start;
+            var end = selection[x].start + selection[x].length - 1;
 
-    for (var x = 0; x < selection.length; x++) {
-        var start = selection[x].start;
-        var end = selection[x].start + selection[x].length - 1;
-
-        if ((start <= position) && (position <= end)) {
-            result = true;
-            break;
+            if ((start <= position) && (position <= end)) {
+                result = true;
+                break;
+            }
         }
-    }
 
-    return result;
+        return result;
+    }
+    return false;
+
 }
 
 
@@ -93,19 +96,22 @@ function isHighlighted(position, selection) {
 function buildHighlightData(sequence, highlightData) {
     var result = [];
 
-    for (var x = 0; sequence && x < sequence.length; x++) {
-        var position = x + 1;
+    if(sequence) {
+        for (var x = 0; x < sequence.length; x++) {
+            var position = x + 1;
 
-        result.push({
-            character: sequence[x],
-            // true = highlight,
-            n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
-            o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
-            mutation: isHighlighted(position, highlightData.mutation)
-        })
+            result.push({
+                character: sequence[x],
+                // true = highlight,
+                n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
+                o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
+                mutation: isHighlighted(position, highlightData.mutation)
+            })
+        }
+
+        return result;
     }
-
-    return result;
+    return [];
 }
 
 
@@ -288,8 +294,6 @@ function ajaxSuccess(data) {
                 data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
                 data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
             }
-
-
         }
 
 
@@ -393,7 +397,7 @@ function ajaxSuccess(data) {
             }
         }
 
-
+        data.sequence = undefined;
 //mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');

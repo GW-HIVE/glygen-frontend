@@ -44,9 +44,12 @@ function ajaxSuccess(data) {
         data.hasMotifs = (data.motifs && (data.motifs.length > 0));
         data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
         data.imagePath = getWsUrl('glycan_image', data.glytoucan.glytoucan_ac);
-        if (data.imagePath && data.hasMotifs &&  data.hasGlycosylate) {
+
+        if (data.imagePath && data.hasMotifs ) {
             for (var i = 0; i < data.motifs.length; i++) {
-                data.motifs[i].imagePath = getWsUrl('glycan_image', data.motifs[i].id);
+                if(data.motifs[i].id) {
+                    data.motifs[i].imagePath = getWsUrl('glycan_image', data.motifs[i].id);
+                }
             }
         }
 
@@ -134,6 +137,7 @@ function LoadData(glytoucan_ac) {
         dataType: "json",
         url: getWsUrl("glycan_detail", glytoucan_ac),
         // data: getDetailPostData(id),
+        // url: test.json, glytoucan_ac),
         method: 'POST',
         timeout: getTimeout("detail_glycan"),
         success: ajaxSuccess,
