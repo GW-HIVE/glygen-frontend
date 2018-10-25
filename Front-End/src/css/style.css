@@ -923,7 +923,7 @@ ____________________________________  */
         font-weight: 550;
     }
     .glygenIconIndex {
-        width: 55% !important;
+        width: 50% !important;
     }
 }
 
@@ -936,7 +936,7 @@ ____________________________________  */
 
 @media only screen and (max-width: 1024px) {
     .glygenIconIndex {
-        width: 60% !important;
+        width: 50% !important;
     }
      body  {
         margin-bottom: 15%;
@@ -960,6 +960,8 @@ ____________________________________  */
     }
     .twitter-timeline {
         padding-right: 40px !important;
+        font-size: 10px !important;
+        font-weight: 200 !important;
     }
     .feedback, 
     .glycoprotein {
@@ -999,7 +1001,7 @@ ____________________________________  */
 }
 
 @media (max-width: 330px) {
-     body  {
+    body  {
         margin-bottom: 75%;
     }
      .homepageContainer {
@@ -1008,5 +1010,5 @@ ____________________________________  */
 }
 
 @media (max-width: 320px) {
-
+    
 }
