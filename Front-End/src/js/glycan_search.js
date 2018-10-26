@@ -6,30 +6,7 @@
  // @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
  //     -->
 
- function resetAdvanced() {
-     setFormValues({
-         query: {
-             query_type: "search_glycan",
-             mass: {
-                 "min": 164,
-                 "max": 6750
-             },
-             number_monosaccharides: {
-                 "min": 1,
-                 "max": 37
-             },
-             enzyme: {},
-             glytoucan_ac: "",
-             organism: {
-                 id: "0"
-             },
-             glycan_type: "",
-             glycan_subtype: "",
-             uniprot_canonical_ac: "",
-             glycan_motif: ""
-         }
-     });
- }
+
 
  /** functions for sorted dropdowns organism
   * get organism drop down values for search form
@@ -283,6 +260,31 @@
                  window.location = './glycan_list.html?id=' + results.list_id;
                  $('#loading_image').fadeOut();
              }
+         }
+     });
+ }
+
+ function resetAdvanced() {
+     setFormValues({
+         query: {
+             query_type: "search_glycan",
+             mass: {
+                 "min": 164,
+                 "max": 6750
+             },
+             number_monosaccharides: {
+                 "min": 1,
+                 "max": 37
+             },
+             enzyme: {},
+             glytoucan_ac: "",
+             organism: {
+                 id: "0"
+             },
+             glycan_type: "",
+             glycan_subtype: "",
+             uniprot_canonical_ac: "",
+             glycan_motif: ""
          }
      });
  }
