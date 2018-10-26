@@ -95,15 +95,19 @@ select {
 }
 
 .adv-top-button {
-    float: right;
     margin-bottom: 35px;
     margin-right: 15px;
+}
+
+.adv-search-top-btns {
+    text-align: right;
 }
 
 .btn-primary-clear-fields {
     color: #204d74;
     background-color: #fff;
-    border-color: #337ab7;   
+    border-color: #337ab7; 
+    float: right;
 }
 
 .btn-primary-clear-fields:hover {
@@ -494,10 +498,6 @@ select {
 
 #msg {
     margin-top: 0px;
-}
-
-.simplebutton{
-    float:left;
 }
 
 .sliderbox-input-min {
