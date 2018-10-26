@@ -541,7 +541,7 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
