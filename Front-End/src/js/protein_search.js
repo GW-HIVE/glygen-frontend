@@ -332,7 +332,7 @@ function searchjsonSimpleP(input_query_type, input_category, input_term) {
         "operation": "AND",
         query_type: input_query_type,
         term: input_term,
-        term_category: input_category
+        term_category: input_category.toLowerCase()
     };
     return formjsonSimple;
 }
@@ -378,7 +378,7 @@ function ajaxListSuccess(data) {
         {
             if(data.query.query_type ==="protein_search_simple"){
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
-                $("#simplifiedCategory").val(data.query.term_category);
+                $("#simplifiedCategory").val(data.query.term_category.toUpperCase());
                 $("#simplifiedSearch").val(data.query.term);
             }
             else{

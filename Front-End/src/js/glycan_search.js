@@ -429,7 +429,7 @@
          "operation": "AND",
          query_type: input_query_type,
          term: input_term,
-         term_category: input_category
+         term_category: input_category.toLowerCase()
      };
      return formjsonSimple;
  }

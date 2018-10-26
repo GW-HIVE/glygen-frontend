@@ -105,6 +105,10 @@ function ajaxListSuccess(data) {
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
+            if (data.query.organism && (data.query.organism.id === 0)) {
+                data.query.organism.name = "All";
+            }
+
             for (var i = 0; i < data.results.length; i++) {
                 var protein = data.results[i];
                 items.push({
@@ -119,9 +123,10 @@ function ajaxListSuccess(data) {
             }
         }
 
-        if (data.query.organism && (data.query.organism.id === 0)) {
-            data.query.organism.name = "All";
-        }
+        // if (data.query.organism.id === 0) {
+        //     data.query.organism.name = "All";
+        // }
+
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 

@@ -38,7 +38,7 @@ function getWsUrl(request, id, id1) {
             break;
         //Homepage webservices
         case "home_init":
-            return ws_home_init;
+            return ws_homeInit;
             break;
         //Glycan webservices
         case "search_init_glycan":
@@ -160,7 +160,7 @@ function getWsUrl(request, id, id1) {
 function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
-    //query.offset = parseInt(page);
+    // query.offset = parseInt(page);
     query.sort = sort;
     query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
