@@ -205,28 +205,17 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
+
 /**
- * Shows an alert box which has different selection criteria for downloading the page data.
+ * Gets the values selected in the download dropdown 
+ * and sends to the downloadFromServer() function in utility.js
  * @author Gaurav Agarwal
  * @since Oct 22, 2018.
  */
 function downloadPrompt() {
     var page_type = "glycan_list";
-    var alert_msg = "<label>Download format </label> " +
-        "<select id='data_format'>" +
-        "<option value='csv'>CSV</option>" +
-        "<option value='json'>JSON</option>" +
-        "</select> <br/>" +
-        "<label>Compressed </label> " +
-        " <input type='checkbox' id='data_compression' />";
+    var format = $('#download_format').val();
+    var IsCompressed = $('#download_compression').is(':checked');
 
-    alertify.confirm("Download this list", alert_msg, function () {
-            downloadFromServer(id, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-        },
-        function () {
-            alertify.confirm().close();
-        }).set({
-        transition: 'zoom',
-        movable: false
-    });
+    downloadFromServer(id, format, IsCompressed, page_type);
 }
