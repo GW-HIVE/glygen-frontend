@@ -213,3 +213,18 @@ $(document).ready(function(){
         return false;
     });
 });
+
+
+/**
+ * Gets the values selected in the download dropdown 
+ * and sends to the downloadFromServer() function in utility.js
+ * @author Gaurav Agarwal
+ * @since Oct 22, 2018.
+ */
+function downloadPrompt() {
+    var page_type = "protein_list";
+    var format = $('#download_format').val();
+    var IsCompressed = $('#download_compression').is(':checked');
+
+    downloadFromServer(id, format, IsCompressed, page_type);
+}
