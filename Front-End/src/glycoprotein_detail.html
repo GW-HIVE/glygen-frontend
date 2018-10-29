@@ -7,6 +7,7 @@
 ----------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123338976-1"></script>
@@ -35,67 +36,97 @@
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
 </head>
+
 <body>
-<div id="loading_image">
-    <img src="images/page_loading.gif" />
-</div>
-<script type="text/javascript" src="libraries/w3.js"></script>
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
+    <script type="text/javascript" src="libraries/w3.js"></script>
 
-<div w3-include-html="header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
+    <div w3-include-html="header.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
 
-<section class="cd-faq">
-    <ul class="cd-faq-categories">
-        <li>
-            <a class="selected" href="#basics0">General</a>
-        </li>
-        <li>
-            <a href="#basics1">Species</a>
-        </li>
-        <li>
-            <a href="#basics2">Sequence</a>
-        </li>
-        <li>
-            <a href="#basics3">Cross References</a>
-        </li>
-        <li>
-            <a href="#basics4">Pathway</a>
-        </li>
-        <li>
-            <a href="#basics5">Isoform</a>
-        </li>
-        <li>
-            <a href="#basics6">Glycosylation Sites</a>
-        </li>
-        <li>
-            <a href="#basics7">Function</a>
-        </li>
-        <li>
-            <a href="#basics8">Disease</a>
-        </li>
-        <li>
-            <a href="#basics9">Mutation</a>
-        </li>
-        <li>
-            <a href="#basics11">Expression Tissue</a>
-        </li>
-        <li>
-            <a href="#basics12">Expression Disease</a>
-        </li>
-        <li>
-            <a href="#basics10">Publications</a>
-        </li>
-    </ul>
-    <!-- cd-faq-categories -->
-    <!-- main content for page -->
-    <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
-        <script id="item_template" type="text/template">
+    <section class="cd-faq">
+        <ul class="cd-faq-categories">
+            <li>
+                <a class="selected" href="#basics0">General</a>
+            </li>
+            <li>
+                <a href="#basics1">Species</a>
+            </li>
+            <li>
+                <a href="#basics2">Sequence</a>
+            </li>
+            <li>
+                <a href="#basics3">Cross References</a>
+            </li>
+            <li>
+                <a href="#basics4">Pathway</a>
+            </li>
+            <li>
+                <a href="#basics5">Isoform</a>
+            </li>
+            <li>
+                <a href="#basics6">Glycosylation Sites</a>
+            </li>
+            <li>
+                <a href="#basics7">Function</a>
+            </li>
+            <li>
+                <a href="#basics8">Disease</a>
+            </li>
+            <li>
+                <a href="#basics9">Mutation</a>
+            </li>
+            <li>
+                <a href="#basics11">Expression Tissue</a>
+            </li>
+            <li>
+                <a href="#basics12">Expression Disease</a>
+            </li>
+            <li>
+                <a href="#basics10">Publications</a>
+            </li>
+        </ul>
+        <!-- cd-faq-categories -->
+        <!-- main content for page -->
+        <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
+            <script id="item_template" type="text/template">
              <!--Accession  starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
+            <div class="row" style="margin-bottom: -40px;">
+                    <div class="dropdown gg-download text-right">
+                        <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="glyphicon glyphicon-save"></i> Download
+                            <span class="caret"></span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
+                            <div class="row">
+                                <div class="col-md-7"><label>Download&nbsp;format: </label> </div>
+                                <div class="col-md-5"><select id='download_format'>
+                                    <option value='fasta'>FASTA</option>
+                                    <option value='json'>JSON</option>
+                                </select></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7"><label>Compressed: </label></div>
+                                <div class="col-md-5"><input type='checkbox' id='download_compression' /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9"></div>
+                                <div class="col-md-3">
+                                    <button class="btn-default" onclick="downloadPrompt();">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
             <ul id="basics0" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
                 <!-- General-->
@@ -462,58 +493,61 @@
 
             <a href="#0" class="cd-close-panel">Close</a>
         </script>
-    </div>
-</section>
+        </div>
+    </section>
 
-<div w3-include-html="footer.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-<!-- script for table -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
-<!-- script for detail page -->
-<script type="text/javascript" src="js/protein_detail.js"></script>
-<!-- script for template engine -->
-<script type="text/javascript" src="libraries/mustache.js"></script>
-<!-- script for webservice -->
-<script type="text/javascript" src="js/domain_url.js"></script>
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for navigation -->
-<script src="js/navbar.js"></script>
-<!-- script for side navigation -->
-<script src="js/faq_main.js"></script>
-<!-- script for user activity tracking and error logging -->
-<script src="js/activity_tracker.js"></script>
-<!-- script for error handling alerts -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
-<!-- Please do not change this it breaks hash scroll code-->
-<script type="text/javascript">
-    $(document).ajaxStop(function() {
-        // calls the sidebar function only when all ajax calls are completed
-        faqMain();
-        function scrollToPanel(hash) {
-            //to scroll to the particular sub section.
-            $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-            if ($(window).width() < 768) { //mobile view
-                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
-                $('.cd-close-panel').addClass('move-left');
-                $('body').addClass('cd-overlay');
-            } else {
-                $('body,html').animate({
-                    'scrollTop': $(hash).offset().top - 19
-                }, 200);
+    <div w3-include-html="footer.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for table -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <!-- script for detail page -->
+    <script type="text/javascript" src="js/protein_detail.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for webservice -->
+    <script type="text/javascript" src="js/domain_url.js"></script>
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for navigation -->
+    <script src="js/navbar.js"></script>
+    <!-- script for side navigation -->
+    <script src="js/faq_main.js"></script>
+    <!-- script for user activity tracking and error logging -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for error handling alerts -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- downloading files js -->
+    <script src="libraries/download.js"></script>
+    
+    <!-- Please do not change this it breaks hash scroll code-->
+    <script type="text/javascript">
+        $(document).ajaxStop(function () {
+            // calls the sidebar function only when all ajax calls are completed
+            faqMain();
+            function scrollToPanel(hash) {
+                //to scroll to the particular sub section.
+                $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+                if ($(window).width() < 768) { //mobile view
+                    $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+                    $('.cd-close-panel').addClass('move-left');
+                    $('body').addClass('cd-overlay');
+                } else {
+                    $('body,html').animate({
+                        'scrollTop': $(hash).offset().top - 19
+                    }, 200);
+                }
             }
-        }
-        if (window.location.hash) {
-            scrollToPanel(window.location.hash);
-        }
-    });
-</script>
+            if (window.location.hash) {
+                scrollToPanel(window.location.hash);
+            }
+        });
+    </script>
 
 </body>
 

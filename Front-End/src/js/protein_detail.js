@@ -283,7 +283,7 @@ function ajaxSuccess(data) {
         alertify.alert('Error occured', data.error_code);
     }
     else {
-        activityTracker("user", data.uniprot_canonical_ac, "successful response");
+        activityTracker("user", uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
         if(data.sequence) {
             var originalSequence = data.sequence.sequence;
@@ -751,8 +751,9 @@ function ajaxSuccess(data) {
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", uniprot_canonical_ac, err + ": " + errorThrown);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", uniprot_canonical_ac, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
 }
 
@@ -821,26 +822,17 @@ $(document).ready(function () {
     LoadData(uniprot_canonical_ac);
 });
 
+
 /**
- * Shows an alert box which has different selection criteria for downloading the page data.
+ * Gets the values selected in the download dropdown 
+ * and sends to the downloadFromServer() function in utility.js
  * @author Gaurav Agarwal
  * @since Oct 22, 2018.
  */
 function downloadPrompt() {
     var page_type = "protein_detail";
-    var alert_msg = "<label>Download format </label> "
-        + " <select id='data_format'>"
-        // + "<option value='csv'>CSV</option>"
-        + "<option value='fasta'>FASTA</option>"
-        + "<option value='json'>JSON</option>"
-        + "</select> <br/>"
-        + "<label>Compressed </label> "
-        + " <input type='checkbox' id='data_compression' />";
+    var format = $('#download_format').val();
+    var IsCompressed = $('#download_compression').is(':checked');
 
-    alertify.confirm("Download this list", alert_msg, function () {
-            downloadFromServer(uniprot_canonical_ac, $('#data_format').val(), $('#data_compression').is(':checked'), page_type);
-        },
-        function () {
-            alertify.confirm().close();
-        }).set({transition: 'zoom', movable: false});
+    downloadFromServer(uniprot_canonical_ac, format, IsCompressed, page_type);
 }

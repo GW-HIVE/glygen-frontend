@@ -243,10 +243,12 @@
  }
 
  /** On submit, function forms the JSON and submits to the search web services
+  * Advanced Search
   */
  function submitvalues() {
      // displays the loading gif when the ajax call starts
      $('#loading_image').fadeIn();
+     activityTracker("user", null, "Performing Advanced Search");
      var query_type = "search_glycan";
      var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
      var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
@@ -273,11 +275,11 @@
              if (results.error_code) {
                  displayErrorByCode(results.error_code, results.field);
                  // activityTracker("error", "", results.error_code);
-                 activityTracker("error", "", results.error_code + " for " + json);
+                 activityTracker("error", "", "Advanced Search: "+results.error_code + " for " + json);
                  $('#loading_image').fadeOut();
              } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                  displayErrorByCode('no-results-found');
-                 activityTracker("user", "", "no result found");
+                 activityTracker("user", "", "Advanced Search: no result found for " + json);
                  $('#loading_image').fadeOut();
              } else {
                  window.location = './glycan_list.html?id=' + results.list_id;
@@ -387,6 +389,10 @@
   * @param JSON call function formObjectSimple.
   */
  function searchGlycanSimple() {
+     // displays the loading gif when the ajax call starts
+     $('#loading_image').fadeIn();
+     activityTracker("user", null, "Performing Simplified Search");
+
      // Get values from form fields
      var query_type = "glycan_search_simple";
      var term_category = document.getElementById("simplifiedCategory").value;
@@ -403,11 +409,11 @@
          success: function (results) {
              if (results.error_code) {
                  displayErrorByCode(results.error_code);
-                 activityTracker("error", "", results.error_code + " for " + json);
+                 activityTracker("error", "", "Simplified Search: "+results.error_code + " for " + json);
                  $('#loading_image').fadeOut();
              } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                  displayErrorByCode('no-results-found');
-                 activityTracker("user", "", "no result found");
+                 activityTracker("user", "", "Simplified Search: no result found for " + json);
                  $('#loading_image').fadeOut();
              } else {
                  window.location = './glycan_list.html?id=' + results.list_id;

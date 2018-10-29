@@ -177,6 +177,7 @@ function createOption(ddl, text, value) {
 function ajaxProteinSearchSuccess() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
+    activityTracker("user", null, "Performing Advanced Search");
     var query_type = "search_protein";
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get(0);
     var selected_species = document.getElementById("species");
@@ -202,11 +203,11 @@ function ajaxProteinSearchSuccess() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "no result found for " + json);
+                activityTracker("error", "", "Advanced Search: "+results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
-                activityTracker("user", "", "no result found");
+                activityTracker("user", "", "Advanced Search: no result found for " + json);
                 $('#loading_image').fadeOut();
             } else {
                 window.location = './protein_list.html?id=' + results.list_id;
@@ -291,6 +292,10 @@ function sortDropdownSimple(c, d) {
   * @param JSON call function formObjectSimple.
   */
 function searchProteinSimple() {
+     // displays the loading gif when the ajax call starts
+     $('#loading_image').fadeIn();
+     activityTracker("user", null, "Performing Simplified Search");
+
     // Get values from form fields
     var query_type = "protein_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
@@ -308,11 +313,11 @@ function searchProteinSimple() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", results.error_code + " for " + json);
+                activityTracker("error", "", "Simplified Search: "+results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
-                activityTracker("user", "", "no result found");
+                activityTracker("user", "", "Simplified Search: no result found for " + json);
                 $('#loading_image').fadeOut();
             } else {
                 window.location = './protein_list.html?id=' + results.list_id;

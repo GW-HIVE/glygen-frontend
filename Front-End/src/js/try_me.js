@@ -95,11 +95,11 @@ function tryMouseGlycans() {
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: "+results.error_code+" for " + json);
+                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: "+results.error_code);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
-                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1: no result found for "+json);
+                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1: no result found");
                 $('#loading_image').fadeOut();
             } else {
                 activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1");

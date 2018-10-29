@@ -94,7 +94,7 @@ function displayFailHomeInitData(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     //log error on server 
-    activityTracker("error", err + ": " + errorThrown + ": home_init WS error"); 
+    activityTracker("error", null, err + ": " + errorThrown + ": home_init WS error"); 
     $("#version-display").text("Data is not available.").addClass("errorMessageHomepage");
     $("#statistics-display").text("Data is not available.").addClass("errorMessageHomepage");
 }

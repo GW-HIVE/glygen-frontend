@@ -97,6 +97,34 @@
             <script id="item_template" type="text/template">
             <!--Accession  starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
+            <div class="row" style="margin-bottom: -40px;">
+                <div class="dropdown gg-download text-right">
+                    <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="glyphicon glyphicon-save"></i> Download
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
+                        <div class="row">
+                            <div class="col-md-7"><label>Download&nbsp;format: </label> </div>
+                            <div class="col-md-5"><select id='download_format'>
+                                <option value='fasta'>FASTA</option>
+                                <option value='json'>JSON</option>
+                            </select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7"><label>Compressed: </label></div>
+                            <div class="col-md-5"><input type='checkbox' id='download_compression' /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+                                <button class="btn-default" onclick="downloadPrompt();">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <ul id="basics0" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
                 <!-- General-->

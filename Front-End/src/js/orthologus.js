@@ -146,7 +146,7 @@ function ajaxListSuccess(data) {
 
 
 
-        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
@@ -160,10 +160,12 @@ function editSearch() {
 
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-//  $('#error-message').show();
-    displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + "(page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**

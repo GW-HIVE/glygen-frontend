@@ -34,11 +34,10 @@ var glytoucan_ac;
 function ajaxSuccess(data) {
     if (data.error_code) {
         activityTracker("error", glytoucan_ac, data.error_code);
-        // added by Gaurav on July 27, 2018. Web service error display.
         alertify.alert('Error occured', data.error_code);
     }
     else {
-        activityTracker("user", data.glytoucan_ac, "successful response");
+        activityTracker("user", glytoucan_ac, "successful response");
 
         var template = $('#item_template').html();
         data.hasMotifs = (data.motifs && (data.motifs.length > 0));
@@ -120,8 +119,9 @@ function ajaxSuccess(data) {
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", glytoucan_ac, err + ": " + errorThrown);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", glytoucan_ac, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
 }
 

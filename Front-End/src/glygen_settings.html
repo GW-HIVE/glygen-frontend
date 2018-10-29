@@ -5,11 +5,12 @@
 ------------------------------->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123338976-1"></script>
     <script async src="js/ga.js" type="text/javascript"></script>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +32,11 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-        
+
 <body>
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
     <script src="libraries/w3.js"></script>
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
@@ -41,17 +45,20 @@
         <h3 style="text-align: center;"><strong>Privacy settings</strong></h3>
 
         <div class="caption text-left">
-            <p id="textManageSettingsEnabled">GlyGen is monitoring your searches to improve/streamline your interaction with our system</p>
-            
-            <p id="textManageSettingsDisabled">GlyGen is NOT currently monitoring your searches; you can improve/streamline your searches by allowing GlyGen to monitor your interaction with our system. For example, your searches can be recorded so you can review them at a later date.</p>
-            
+            <p id="textManageSettingsEnabled">GlyGen is monitoring your searches to improve/streamline your interaction
+                with our system</p>
+
+            <p id="textManageSettingsDisabled">GlyGen is NOT currently monitoring your searches; you can
+                improve/streamline your searches by allowing GlyGen to monitor your interaction with our system. For
+                example, your searches can be recorded so you can review them at a later date.</p>
+
 
             <hr>
 
             <div class="row">
                 <div class="col-xs-10 text-left">
                     Manage Settings
-                    <br/>
+                    <br />
                     <span id="manageSettingsDisabled" style="color: #999999;">Disabled</span>
                     <span id="manageSettingsEnabled" style="color: #3277b7; display: none;">Enabled</span>
                 </div>
@@ -63,19 +70,45 @@
                     </label>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     <div w3-include-html="footer.html"></div>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>        
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/glygen_settings.js"></script>
     <script type="text/javascript" src="js/domain_url.js"></script>
-    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
-    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <script src="js/ws_url.js"></script> <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script> <!-- script for logging activity -->
     <script>
-        tracking();
+        $(document).ready(function () {
+            tracking();
+            var $checkbox = $('[name="manageSettingsEnabled"]');
+            if (localStorage.getItem("ID") === "Anonymous") {             // if user selected not to be tracked.
+                $checkbox.attr('checked', false);
+                $('#textManageSettingsDisabled').css('display', 'block');
+                $('#textManageSettingsEnabled').css('display', 'none');
+                $('#manageSettingsDisabled').css('display', 'block');
+                $('#manageSettingsEnabled').css('display', 'none');
+                // activityTracker("user", "", "");
+            }
+            else if (localStorage.getItem("ID")) {                // if an ID exists other than "Anonymous" so continue Logging activity.
+                $checkbox.attr('checked', true);
+                $('#textManageSettingsDisabled').css('display', 'none');
+                $('#textManageSettingsEnabled').css('display', 'block');
+                $('#manageSettingsDisabled').css('display', 'none');
+                $('#manageSettingsEnabled').css('display', 'block');
+                // activityTracker("user", "", "");
+            }
+            else {                                               // If nothing in the local storage then give the user a choice.
+                $('#textManageSettingsDisabled').css('display', 'block');
+                $('#textManageSettingsEnabled').css('display', 'none');
+                $('#textManageSettingsDisabled').html("Do you want GlyGen to remember your searches for your future use? You can improve/streamline your searches by allowing GlyGen to monitor your interaction with our system. For example, your searches can be recorded so you can review them at a later date. This can be changed at any time in this section.");
+            }
+            $('#loading_image').fadeOut();
+        })
     </script>
     <script src="js/utility.js"></script>
 </body>
+
 </html>

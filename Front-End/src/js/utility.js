@@ -72,7 +72,7 @@ function getErrorMessage(errorCode) {
                 title: "Selection Error"
             };
             break;
-        case 'non-existent-search-result':
+        case 'non-existent-search-results':
             return {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
@@ -345,11 +345,15 @@ function downloadFromServer(id, format, compressed, type) {
 
             //uses the download.js library.
             download(result, type + "_" + id, mimeType);        // + "." + format
+            activityTracker("user", id, "successful download");
             // }
             $('#loading_image').fadeOut();
         },
-        error: function(response){
-            alertify.alert("Some error... error function yet to be completely implemented");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code;
+            displayError(errorMessage, errorThrown);
+            activityTracker("error", id, "Download error: "+ errorMessage);
+            $('#loading_image').fadeOut();
         }
     });
 }
@@ -357,4 +361,4 @@ function downloadFromServer(id, format, compressed, type) {
 // for stopping the download dropdown to close on click.
 $(document).on('click', '.gg-download', function (e) {
     e.stopPropagation();
-  });
+});

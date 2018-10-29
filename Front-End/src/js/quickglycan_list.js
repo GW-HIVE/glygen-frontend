@@ -70,22 +70,19 @@ function editSearch() {
 
 
 /**
-
  * Format function to create link to the details page
-
+ *
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Glycan Id
+ * @return -Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
 }
 
 /**
-
  * Format function for column that contains the cartoon
-
+ * 
  * @param {object} value - The data binded to that particular cell.
-
  * @param {object} row - The data binded to that particular row.
  * @return- Glycanimage
  */
@@ -98,9 +95,8 @@ function imageFormat(value, row, index, field) {
 
 
 /**
-
  * Format function for column "MASS"
-
+ * 
  * @param {object} value - The data binded to that particular cell.
  * @return- Glycan Mass if available else NA
  */
@@ -198,7 +194,7 @@ function ajaxListSuccess(data) {
         buildSummary(data.query, question);
         document.title='glycan-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 
     }
 
@@ -208,8 +204,9 @@ function ajaxListSuccess(data) {
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     // $('#loading_image').fadeOut();
 }
 
