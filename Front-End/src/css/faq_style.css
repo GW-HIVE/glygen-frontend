@@ -296,7 +296,7 @@ header h1 {
   padding: 0 5% 1em;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  /*  z-index: 11Commented out Oct 18 by Tatiana; */
+  z-index: 11;
   /*1*/
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

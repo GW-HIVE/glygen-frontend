@@ -31,7 +31,6 @@ function getGlycosylationHighlightData(glycosylationData, type) {
             });
         }
     }
-
     return result;
 }
 
@@ -54,7 +53,6 @@ function getMutationHighlightData(mutationData) {
             });
         }
     }
-
     return result;
 }
 
@@ -81,7 +79,6 @@ function isHighlighted(position, selection) {
         return result;
     }
     return false;
-
 }
 
 
@@ -92,14 +89,13 @@ function isHighlighted(position, selection) {
  * @returns an array of each charcter of the sequence and is highlighted by its each type
  */
 
-
 function buildHighlightData(sequence, highlightData) {
     var result = [];
 
     if(sequence) {
         for (var x = 0; x < sequence.length; x++) {
             var position = x + 1;
-
+            
             result.push({
                 character: sequence[x],
                 // true = highlight,
@@ -108,12 +104,10 @@ function buildHighlightData(sequence, highlightData) {
                 mutation: isHighlighted(position, highlightData.mutation)
             })
         }
-
         return result;
     }
     return [];
 }
-
 
 /**
  * building row
@@ -126,11 +120,8 @@ function buildRowText(rowData) {
     for (var x = 0; x < rowData.length; x++) {
         text.push(rowData[x].character);
     }
-
     return text.join('');
-
 }
-
 
 /**
  * building rowhighlight
@@ -188,9 +179,7 @@ function createHighlightRow(start, rowData) {
         .html(buildRowHighlight(rowData, 'o_link_glycosylation'))
         .hide()
         .appendTo($section);
-
     $section.appendTo($row);
-
     return $row;
 }
 
@@ -199,9 +188,7 @@ function createHighlightRow(start, rowData) {
  * creating UI perline
  * @param {object} highlightData
  * @param {number} perLine
-
  */
-
 
 function createHighlightUi(highlightData, perLine) {
     var $ui = $('<div class="highlight-display"></div>');
@@ -210,8 +197,6 @@ function createHighlightUi(highlightData, perLine) {
         var $row = createHighlightRow(x, rowData);
         $ui.append($row);
     }
-
-
     $('#sequnce_highlight').append($ui);
 }
 
@@ -220,8 +205,6 @@ var uniprot_canonical_ac;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
-
-
  */
 function scrollToPanel(hash) {
     //to scroll to the particular sub section.
@@ -288,11 +271,13 @@ function ajaxSuccess(data) {
         if(data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
-            for (var i = 0; i < data.isoforms.length; i++) {
-               // assign the newly result of running formatSequence() to replace the old value
-                data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
-                data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
-                data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+            if(data.isoforms) {
+                for (var i = 0; i < data.isoforms.length; i++) {
+                    // assign the newly result of running formatSequence() to replace the old value
+                    data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
+                    data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
+                    data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+                }
             }
         }
 
@@ -328,7 +313,6 @@ function ajaxSuccess(data) {
             }
 
             data.itemscrossRef = itemscrossRef;
-
         }
         // //pathway
         var itemsPathway = [];
@@ -345,7 +329,6 @@ function ajaxSuccess(data) {
                                 url: pathwayitem.url,
                                 id: pathwayitem.id,
                                 name: pathwayitem.name
-
                             }
                         );
                     }
@@ -363,7 +346,6 @@ function ajaxSuccess(data) {
             }
 
             data.itemsPathway = itemsPathway;
-
         }
 
         data.itemsGlycosyl = [];
@@ -384,7 +366,6 @@ function ajaxSuccess(data) {
                         residue: glycan.residue + glycan.position,
                         type: glycan.type,
                         evidence: glycan.evidence
-
                     });
                 }
                 else {
@@ -397,13 +378,12 @@ function ajaxSuccess(data) {
             }
         }
 
-        data.sequence = undefined;
+       // data.sequence = undefined;
 //mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
 
 // getting array
-
         var itemsMutate = [];
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
@@ -422,7 +402,6 @@ function ajaxSuccess(data) {
                     evidence: expressionD.evidence
                     // "significant":"yes",
                     // "trend":"down",
-
                 });
             }
         }
@@ -437,8 +416,6 @@ function ajaxSuccess(data) {
                     tissue: expressionT.tissue,
                     present: expressionT.present,
                     evidence: expressionT.evidence
-
-
                 });
             }
         }
@@ -447,7 +424,6 @@ function ajaxSuccess(data) {
         console.log(data);
 
 // Mustache.render(template, data);hgbgghvythvhgtfkgyhjhsgghg
-
 
         // filling in mutation data
         if (data.mutation) {
@@ -472,7 +448,6 @@ function ajaxSuccess(data) {
         var sequenceData = buildHighlightData(originalSequence, highlight);
         console.log(sequenceData);
 
-
         $container.html(html);
         if (window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
@@ -489,16 +464,12 @@ function ajaxSuccess(data) {
                 } else {
                     $this.text('+');
                     $this.parent().next().hide();
-
-
                 }
             });
         });
 
         // $container.find('#basics5x').click();
-
         // glycosylation table
-
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -539,7 +510,7 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
@@ -553,7 +524,6 @@ function ajaxSuccess(data) {
         // glycosylation table
         $('#glycosylation-table2').bootstrapTable({
             columns: [
-
                 {
                     field: 'type',
                     title: 'Type',
@@ -565,8 +535,6 @@ function ajaxSuccess(data) {
                     title: 'Residue',
                     sortable: true
                 }
-
-
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
@@ -577,12 +545,11 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
             },
-
         });
 
         $(".EmptyFind").each(function () {
@@ -642,17 +609,14 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
             },
-
-
         });
 
         $('#loading_image').fadeOut();
-
 
 // expression Disease table
         $('#expressionDisease-table').bootstrapTable({
@@ -692,16 +656,14 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
             },
-
         });
 
         $('#loading_image').fadeOut();
-
 
 // expression Disease table
         $('#expressionTissue-table').bootstrapTable({
@@ -731,12 +693,11 @@ function ajaxSuccess(data) {
                 for (var i = 0; i < evidences.length; i++) {
                     var evidence = evidences[i];
                     html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
                     html.push("</div>");
                 }
                 return html.join('');
             },
-
         });
     }
     $('#loading_image').fadeOut();
@@ -774,20 +735,14 @@ function LoadData(uniprot_canonical_ac) {
         error: ajaxFailure
     };
 
-
     // calls the service
     $.ajax(ajaxConfig);
-
 }
-
 
 /**
  * @param {name} string for the name of the variable variable to extract from query string
  * @param {url}string with the complete url with query string values
  */
-
-//
-
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -813,7 +768,6 @@ function checkUncheck(type, element) {
     } else {
         $elements.hide();
     }
-
 }
 
 $(document).ready(function () {

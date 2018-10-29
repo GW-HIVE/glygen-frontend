@@ -95,14 +95,19 @@ select {
 }
 
 .adv-top-button {
-    float: right;
-    margin-bottom: 40px;
+    margin-bottom: 35px;
     margin-right: 15px;
 }
+
+.adv-search-top-btns {
+    text-align: right;
+}
+
 .btn-primary-clear-fields {
     color: #204d74;
     background-color: #fff;
-    border-color: #337ab7;   
+    border-color: #337ab7; 
+    float: right;
 }
 
 .btn-primary-clear-fields:hover {
@@ -318,6 +323,9 @@ select {
     .container {
 	    width: 99%;
     }
+    .adv-top-button {
+    margin-bottom: 15px;
+    }
 }
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
@@ -340,7 +348,7 @@ select {
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 420px) {
     .max-label {
         margin: 0 !important;
     }
@@ -350,13 +358,18 @@ select {
     }
 
     .slider-alignment {
-        width: 100% !important;
-        margin: 0;
+        width: 95% !important;
+        padding-left: 10%;
     }
 
     .simplified-search {
         margin-bottom: 10px !important;
-        padding: 30px 0;
+        padding: 30px 5px 10px;
+    }
+    .advancedSearch-container {
+        padding: 30px 15px 10px;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -485,10 +498,6 @@ select {
 
 #msg {
     margin-top: 0px;
-}
-
-.simplebutton{
-    float:left;
 }
 
 .sliderbox-input-min {

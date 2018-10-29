@@ -131,9 +131,14 @@
                                 <div class="col-md-12 col-xs-6">
                                     {{#glytoucan}}
                                     <li class="list-group"><strong>GlyTouCan Accession:</strong>   <a class="panelcontent"
-                                    href="{{glytoucan_url}}" target="_blank">  {{glytoucan_ac}} </a>{{/glytoucan}}</li>
+                                    href="{{glytoucan_url}}" target="_blank">  {{glytoucan_ac}} </a></li>{{/glytoucan}}
+
                                     {{#mass}}
-                                    <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass}} Da {{/mass}}</li>
+                                    <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass}} Da </li>{{/mass}}
+
+
+
+
                                      {{#classification}}
                                     <li class="list-group"><strong>Glycan Type/Subtype:</strong>
                                         {{type.name}}
@@ -306,6 +311,7 @@
                             {{ #iupac }}
                             <strong>IUPAC</strong>
                          <pre>{{{iupac }}}</pre>{{/iupac }}
+
                         </div>
                     </div>
                 </ul>
