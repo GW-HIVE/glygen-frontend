@@ -101,7 +101,7 @@ function displayBannerMsg(txt) {
 function activityTracker(type, id, message) {
     type = type || "user";
     id = id || "";
-    message = message || "optional";
+    message = message || "page access";
     var user = localStorage.getItem("ID");
     var pagePath = window.location.pathname;
 

@@ -62,13 +62,13 @@ function getErrorMessage(errorCode) {
             break;
         case 'non-existent-record':
             return {
-                message: "Please choose a different number of records per page.",
+                message: "No records exist. Please choose a different number of records per page.",
                 title: "Selection Error"
             };
             break;
         case 'invalid-parameter-value':
             return {
-                message: "Please choose a different number of records per page.",
+                message: "Please input correct field values",
                 title: "Selection Error"
             };
             break;
@@ -92,7 +92,16 @@ function getErrorMessage(errorCode) {
                 //                title: "Selection Error"
             };
 
-            break;
+        case 'missing-parameter':
+            return {
+                message: "Missing parameter",
+                title: "Selection Error"
+            };
+        case 'download-type-format-combination-not-supported':
+            return {
+                message: "Download format not supported for this page",
+                title: "Selection Error"
+            };
 
         case 'timeout':
             return {
@@ -350,9 +359,11 @@ function downloadFromServer(id, format, compressed, type) {
             $('#loading_image').fadeOut();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code;
-            displayError(errorMessage, errorThrown);
-            activityTracker("error", id, "Download error: "+ errorMessage);
+            // getting the appropriate error message from this function in utility.js file
+            var err = decideAjaxError(jqXHR.status, textStatus);
+            var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+            displayErrorByCode(errorMessage);
+            activityTracker("error", id, "Download error: " + errorMessage);
             $('#loading_image').fadeOut();
         }
     });
