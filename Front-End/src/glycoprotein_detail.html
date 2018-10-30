@@ -60,6 +60,12 @@
                 <a href="#basics1">Species</a>
             </li>
             <li>
+                <a href="#basics7">Function</a>
+            </li>
+            <li>
+                <a href="#basics6">Glycosylation</a>
+            </li>
+            <li>
                 <a href="#basics2">Sequence</a>
             </li>
             <li>
@@ -70,12 +76,6 @@
             </li>
             <li>
                 <a href="#basics5">Isoform</a>
-            </li>
-            <li>
-                <a href="#basics6">Glycosylation Sites</a>
-            </li>
-            <li>
-                <a href="#basics7">Function</a>
             </li>
             <li>
                 <a href="#basics8">Disease</a>
@@ -97,39 +97,39 @@
         <!-- main content for page -->
         <div class="cd-faq-items" id="content" style="margin-bottom: 400px;">
             <script id="item_template" type="text/template">
-             <!--Accession  starts here for page -->
+            <!--Accession  starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span></h2></center>
             <div class="row" style="margin-bottom: -40px;">
-                    <div class="dropdown gg-download text-right">
-                        <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="glyphicon glyphicon-save"></i> Download
-                            <span class="caret"></span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
-                            <div class="row">
-                                <div class="col-md-7"><label>Download&nbsp;format: </label> </div>
-                                <div class="col-md-5"><select id='download_format'>
-                                    <option value='fasta'>FASTA</option>
-                                    <option value='json'>JSON</option>
-                                </select></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-7"><label>Compressed: </label></div>
-                                <div class="col-md-5"><input type='checkbox' id='download_compression' /></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9"></div>
-                                <div class="col-md-3">
-                                    <button class="btn-default" onclick="downloadPrompt();">OK</button>
-                                </div>
+                <div class="dropdown gg-download text-right">
+                    <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="glyphicon glyphicon-save"></i> Download
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
+                        <div class="row">
+                            <div class="col-md-7"><label>Download&nbsp;format: </label> </div>
+                            <div class="col-md-5"><select id='download_format'>
+                                <option value='fasta'>FASTA</option>
+                                <option value='json'>JSON</option>
+                            </select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7"><label>Compressed: </label></div>
+                            <div class="col-md-5"><input type='checkbox' id='download_compression' /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+                                <button class="btn-default" onclick="downloadPrompt();">OK</button>
                             </div>
                         </div>
                     </div>
                 </div>
-    
+            </div>
+                
+            <!-- General-->
             <ul id="basics0" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
-                <!-- General-->
                 <div class="panel panel-default ">
                     <div class="gg-panel-heading"><h4>General</h4></div>
                     <div class="panel-body">
@@ -213,6 +213,72 @@
                 </div>
             </ul>
 
+            <!-- Function -->
+            <ul id="basics7" class="cd-faq-group selected">
+                <li class="cd-faq-title" />
+                <div class="panel panel-default">
+                    <div class="gg-panel-heading">
+                        <h4>Function</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {{#function}}
+                            <div class='col-md-12 col-xs-12'>
+                                <div class="panelmaincontent">
+                                    <button class="open-close-button">+</button>
+                                    <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
+                                    {{annotation}}
+                                </div>
+                                <ul style="display:none; margin-bottom: 8px;">
+                                    {{#evidence}}
+                                    <li class="list-group-indent">{{database}} :
+                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
+                                    </li>
+                                    {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
+                                </ul>
+                                <div class="plus-button-margin-bottom"></div>
+                            </div>
+                            {{/function}}
+                        </div>
+                        {{^function}} No data available. {{/function}}
+                    </div>
+                </div>
+            </ul>
+            
+            <!--Glycosylation-->
+            <ul id="basics6" class="cd-faq-group selected">
+                <div class="panel panel-default">
+                    <div class="gg-panel-heading">
+                        <h4>Glycosylation</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class='col-md-12 col-xs-12'>
+                            <ul style="margin-bottom: 20px;" class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#1a" data-toggle="tab">With Reported Glycans</a>
+                                </li>
+                                <li><a href="#2a" data-toggle="tab">Without Reported Glycans</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content clearfix">
+                            <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
+                                {{#glycosylation}}
+                                <table id="glycosylation-table">
+                                </table>
+                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                            </div>
+                            <div class="tab-pane" id="2a">
+                                {{#glycosylation}}
+                                <table id="glycosylation-table2">
+                                </table>
+                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+            
             <!-- Sequence -->
             <ul id="basics2" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
@@ -238,7 +304,7 @@
                 </div>
             </ul>
 
-             <!--Cross References-->
+            <!--Cross References-->
             <ul id="basics3" class="cd-faq-group selected">
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
@@ -282,7 +348,7 @@
                 </div>
             </ul>
 
-             <!--Isoforms-->
+            <!--Isoforms-->
             <ul id="basics5" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
                 <div class="panel panel-default">
@@ -322,71 +388,7 @@
                 </div>
                 </div>
             </ul>
-
-             <!--Glycosylation sites-->
-            <ul id="basics6" class="cd-faq-group selected">
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <h4>Glycosylation Sites</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class='col-md-12 col-xs-12'>
-                            <ul style="margin-bottom: 20px;" class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#1a" data-toggle="tab">With Reported Glycans</a>
-                                </li>
-                                <li><a href="#2a" data-toggle="tab">Without Reported Glycans</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content clearfix">
-                            <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
-                                {{#glycosylation}}
-                                <table id="glycosylation-table">
-                                </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
-                            </div>
-                            <div class="tab-pane" id="2a">
-                                {{#glycosylation}}
-                                <table id="glycosylation-table2">
-                                </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ul>
-            <!-- Function -->
-            <ul id="basics7" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                <div class="panel panel-default">
-                    <div class="gg-panel-heading">
-                        <h4>Function</h4>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            {{#function}}
-                            <div class='col-md-12 col-xs-12'>
-                                <div class="panelmaincontent">
-                                    <button class="open-close-button">+</button>
-                                    <!-- <a class="panelcontent" href="{{{url}}}" target="_blank">{{annotation}}</a> -->
-                                    {{annotation}}
-                                </div>
-                                <ul style="display:none; margin-bottom: 8px;">
-                                    {{#evidence}}
-                                    <li class="list-group-indent">{{database}} :
-                                        <a href="{{{url}}}" target="_blank">{{id}}</a>
-                                    </li>
-                                    {{/evidence}} {{^evidence}} (No evidence data available.) {{/evidence}}
-                                </ul>
-                                <div class="plus-button-margin-bottom"></div>
-                            </div>
-                            {{/function}}
-                        </div>
-                        {{^function}} No data available. {{/function}}
-                    </div>
-                </div>
-            </ul>
+            
             <!-- Disease -->
             <ul id="basics8" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
@@ -419,6 +421,7 @@
                 </div>
                 </div>
             </ul>
+            
             <!-- Mutation -->
             <ul id="basics9" class="cd-faq-group selected">
                 <div class="panel panel-default">
@@ -436,10 +439,10 @@
                     </div>
                 </div>
             </ul>
-             <!-- Expression Tissue -->
+            
+            <!-- Expression Tissue -->
             <ul id="basics11" class="cd-faq-group selected">
                 <div class="panel panel-default">
-
                     <div class="gg-panel-heading">
                         <h4>Expression Tissue</h4>
                     </div>
@@ -455,7 +458,8 @@
                     </div>
                 </div>
             </ul>
-             <!-- Expression Disease -->
+            
+            <!-- Expression Disease -->
             <ul id="basics12" class="cd-faq-group selected">
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
@@ -473,7 +477,8 @@
                     </div>
                 </div>
             </ul>
-             <!--Publications-->
+            
+            <!--Publications-->
             <ul id="basics10" class="cd-faq-group selected">
                 <li class="cd-faq-title" />
                 <div class="panel panel-default">

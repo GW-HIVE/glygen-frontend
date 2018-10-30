@@ -85,6 +85,13 @@ $(document).ready(function () {
             }
         }
     });
+    // Submit input value on enter in Simplified search 
+    $("#simplifiedSearch").keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            searchGlycanSimple();
+        }
+    });
 });
 
 ///New slider
@@ -386,6 +393,7 @@ function sortDropdownSimple(c, d) {
  * updates the example on the simplified search on select option.
  */
 $('#simplifiedCategory').on('change', function () {
+    $('#simplifiedSearch').val('');
     var value = $(this).val();
     var name = $("#simplifiedCategory option:selected").text();
     var example = "";
@@ -404,11 +412,10 @@ $('#simplifiedCategory').on('change', function () {
             break;
     }
     if (name != "Search by" && name != "Any") {
-        $('#simplifiedSearch').attr('placeholder', "Enter the "+name);
+        $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
         $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
         clickableExample();
-    }
-    else {
+    } else {
         $('#simpleCatSelectedOptionExample').text('');
         $('#simplifiedSearch').attr('placeholder', "Enter the value");
     }
@@ -420,6 +427,7 @@ $('#simplifiedCategory').on('change', function () {
 function clickableExample() {
     $('#simpleTextExample').click(function () {
         $('#simplifiedSearch').val($(this).text());
+        $('#simplifiedSearch').focus();
         return false;
     });
 }
@@ -545,8 +553,8 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
 }
- /* ----------------------
-  End-Prepopulating search results after clicking modify button on glycan list summary section
-  * @author Rupali Mahadik
-  * @date October 18, 2018
- ------------------------- */
+/* ----------------------
+ End-Prepopulating search results after clicking modify button on glycan list summary section
+ * @author Rupali Mahadik
+ * @date October 18, 2018
+------------------------- */
