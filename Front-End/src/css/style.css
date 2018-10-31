@@ -898,6 +898,7 @@ ____________________________________  */
     text-decoration: none !important;
     font-size: 1em !important;
     font-weight: bold;
+    margin-right: 1%;
 }
 
 .caret {
@@ -907,6 +908,11 @@ ____________________________________  */
 .dropdown-menu {
     min-width: 159px !important;
     margin-right: 1%;
+    padding: 1%;
+}
+
+.dropdown-menu-detail {
+    padding: 2%;
 }
 /*------   End   --------*/
 .container-contact {
