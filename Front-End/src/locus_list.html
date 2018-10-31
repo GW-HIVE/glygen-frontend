@@ -82,27 +82,19 @@
             <div class="panel-heading"><center><h3>Summary of your Protein Search<h3></center></div>
             <h5><center>Performed on: {{execution_time}} (EST)</center></h5>
 
-
-
             {{#QUESTION_3}}
                 <center><p>What are the gene locations of the enzymes involved in the biosynthesis of <b>{{#glytoucan_ac}}{{glytoucan_ac}}{{/glytoucan_ac}}</b> in human?</p></center>
             {{/QUESTION_3}}
 
+            <div align="center">
+                <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
 
+                &nbsp; &nbsp;
 
+                <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
 
-
-                <div align="center">
-                    <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
-
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-
-                    <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
-
-                    <!-- <p class="small">** By clicking <strong>“Update Results”</strong>, you will perform the same search again using the current version of the database.</p> -->
-
-                    <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
-                </div>
+                <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
+            </div>
         </div>
     </script>
 
