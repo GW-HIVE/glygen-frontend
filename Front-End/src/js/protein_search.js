@@ -7,8 +7,7 @@
 
 
 function resetAdvanced() {
-    setProteinFormValues(
-    {
+    setProteinFormValues({
         query: {
             query_type: "search_protein",
             mass: {
@@ -16,15 +15,17 @@ function resetAdvanced() {
                 "max": 3906488
             },
             sequence: "",
-            organism: {id:"0"},
+            organism: {
+                id: "0"
+            },
             refseq_ac: "",
             protein_name: "",
             gene_name: "",
             pathway_id: "",
             uniprot_canonical_ac: "",
-            sequence:{
+            sequence: {
                 glycosylated_aa: "",
-                type:""
+                type: ""
             }
         }
     })
@@ -89,7 +90,7 @@ $(document).ready(function () {
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
             for (var x = 0; x < result.simple_search_category.length; x++) {
-                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
+                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].id);
             }
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
@@ -122,7 +123,7 @@ $(document).ready(function () {
                 }
             });
             var id = getParameterByName('id');
-            if(id){
+            if (id) {
                 LoadDataList(id);
             }
         }
@@ -163,6 +164,16 @@ $(document).ready(function () {
             }
         });
     };
+
+/**
+* Submit input value on enter in Simplified search 
+*/
+    $("#simplifiedSearch").keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            searchProteinSimple();
+        }
+    });
 });
 
 function createOption(ddl, text, value) {
@@ -203,7 +214,7 @@ function ajaxProteinSearchSuccess() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "Advanced Search: "+results.error_code + " for " + json);
+                activityTracker("error", "", "Advanced Search: " + results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -216,6 +227,7 @@ function ajaxProteinSearchSuccess() {
         }
     });
 }
+
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
     var sequences = {}
@@ -229,7 +241,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "id": 0,
         "name": "All"
     }
-    if (input_organism.id == "0") {
+    if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
@@ -283,18 +295,68 @@ function sortDropdownSimple(c, d) {
     }
     return 0;
 }
+
+
+/**
+ * updates the example on the simplified search on select option.
+ */
+$('#simplifiedCategory').on('change', function () {
+    $('#simplifiedSearch').val('');
+    var value = $(this).val();
+    var name = $("#simplifiedCategory option:selected").text();
+    var example = "";
+    switch (name.toLowerCase()) {
+        case "disease":
+            example = "Deafness";
+            break;
+        case "glycan":
+            example = "G17689DH";
+            break;
+        case "organism":
+            example = "Homo sapiens";
+            break;
+        case "pathway":
+            example = "hsa:3082";
+            break;
+        case "protein":
+            example = "P14210-1";
+            break;
+    }
+    if (name != "Search by" && name != "Any") {
+        $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
+        $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
+        clickableExample();
+    } else {
+        $('#simpleCatSelectedOptionExample').text('');
+        $('#simplifiedSearch').attr('placeholder', "Enter the value");
+    }
+});
+
+/**
+ * make the example clickable and inserts it into the search input field.
+ */
+function clickableExample() {
+    $('#simpleTextExample').click(function () {
+    $('#simplifiedSearch').val($(this).text());
+    $('#simplifiedSearch').focus();
+        return false;
+    });
+}
+
+
 /** On submit, function forms the JSON and submits to the search web services
-  * @link {link} glycan_search_simple webservices.
-  * @param {string} input_query_type - The user's query_type input to load.
-  * @class {string} simplifiedCategory for protein.
-  * @class {string} simplifiedSearch for protein.
-  * @param {function} formObjectSimpleSearch JSON for simplified searc.
-  * @param JSON call function formObjectSimple.
-  */
+ * @link {link} glycan_search_simple webservices.
+ * @param {string} input_query_type - The user's query_type input to load.
+ * @class {string} simplifiedCategory for protein.
+ * @class {string} simplifiedSearch for protein.
+ * @param {function} formObjectSimpleSearch JSON for simplified searc.
+ * @param JSON call function formObjectSimple.
+ */
+
 function searchProteinSimple() {
-     // displays the loading gif when the ajax call starts
-     $('#loading_image').fadeIn();
-     activityTracker("user", null, "Performing Simplified Search");
+    // displays the loading gif when the ajax call starts
+    $('#loading_image').fadeIn();
+    activityTracker("user", null, "Performing Simplified Search");
 
     // Get values from form fields
     var query_type = "protein_search_simple";
@@ -307,13 +369,13 @@ function searchProteinSimple() {
         type: 'post',
         url: getWsUrl("protein_search_simple"),
         data: json,
-       // timeout: getTimeout("search_simple_protein"),
+        // timeout: getTimeout("search_simple_protein"),
         error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "Simplified Search: "+results.error_code + " for " + json);
+                activityTracker("error", "", "Simplified Search: " + results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -327,11 +389,11 @@ function searchProteinSimple() {
     });
 }
 /**
-  * formjason from form submit.
-  * @param {string} input_query_type - The user's query_type input to load.
-  * @param {string} input_category - The user's term_category input to load.
-  * @param {string} input_term - The user's term input to load.
-  * */
+ * formjason from form submit.
+ * @param {string} input_query_type - The user's query_type input to load.
+ * @param {string} input_category - The user's term_category input to load.
+ * @param {string} input_term - The user's term input to load.
+ * */
 function searchjsonSimpleP(input_query_type, input_category, input_term) {
     var formjsonSimple = {
         "operation": "AND",
@@ -355,7 +417,7 @@ function LoadDataList(id) {
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
-        data: getListPostData(id, 1,'mass', 'asc',10),
+        data: getListPostData(id, 1, 'mass', 'asc', 10),
         method: 'POST',
         timeout: getTimeout("list_protein"),
         success: ajaxListSuccess,
@@ -377,20 +439,18 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
-        if (data.query)
-        {
-            if(data.query.query_type ==="protein_search_simple"){
+        if (data.query) {
+            if (data.query.query_type === "protein_search_simple") {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
-                $("#simplifiedCategory").val(data.query.term_category.toUpperCase());
+                $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-            }
-            else{
+            } else {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
 
@@ -399,7 +459,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
 }
 /* ----------------------

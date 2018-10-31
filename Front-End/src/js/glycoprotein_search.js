@@ -78,7 +78,7 @@ $(document).ready(function () {
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
             for (var x = 0; x < result.simple_search_category.length; x++) {
-                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].display);
+                createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].id);
             }
             var mass_max = result.protein_mass.max;
             var mass_min = result.protein_mass.min;
@@ -155,6 +155,15 @@ $(document).ready(function () {
             }
         });
     };
+/**
+* Submit input value on enter in Simplified search 
+*/
+    $("#simplifiedSearch").keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            searchProteinSimple();
+        }
+    });
 });
 
 function createOption(ddl, text, value) {
@@ -216,13 +225,11 @@ function ajaxProteinSearchSuccess() {
             }
         }
     });
-
 }
 
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
-
     var sequences = {
         "type": "exact",
         "aa_sequence": input_sequence
@@ -296,6 +303,62 @@ function sortDropdownSimple(c, d) {
     }
     return 0;
 }
+
+
+/**
+ * updates the example on the simplified search on select option.
+ */
+$('#simplifiedCategory').on('change', function () {
+    $('#simplifiedSearch').val('');
+    var value = $(this).val();
+    var name = $("#simplifiedCategory option:selected").text();
+    var example = "";
+    switch (name.toLowerCase()) {
+        case "disease":
+            example = "Deafness";
+            break;
+        case "glycan":
+            example = "G17689DH";
+            break;
+        case "organism":
+            example = "Homo sapiens";
+            break;
+        case "pathway":
+            example = "hsa:3082";
+            break;
+        case "protein":
+            example = "P14210-1";
+            break;
+    }
+    if (name != "Search by" && name != "Any") {
+        $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
+        $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
+        clickableExample();
+    } else {
+        $('#simpleCatSelectedOptionExample').text('');
+        $('#simplifiedSearch').attr('placeholder', "Enter the value");
+    }
+});
+
+/**
+ * make the example clickable and inserts it into the search input field.
+ */
+function clickableExample() {
+    $('#simpleTextExample').click(function () {
+    $('#simplifiedSearch').val($(this).text());
+    $('#simplifiedSearch').focus();
+        return false;
+    });
+}
+
+/** On submit, function forms the JSON and submits to the search web services
+ * @link {link} glycan_search_simple webservices.
+ * @param {string} input_query_type - The user's query_type input to load.
+ * @class {string} simplifiedCategory for protein.
+ * @class {string} simplifiedSearch for protein.
+ * @param {function} formObjectSimpleSearch JSON for simplified searc.
+ * @param JSON call function formObjectSimple.
+ */
 
 function searchProteinSimple() {
     // displays the loading gif when the ajax call starts

@@ -347,7 +347,6 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         glycan_subtype: input_glycansubtype,
         uniprot_canonical_ac: input_proteinid,
         glycan_motif: input_motif,
-
     };
     return formjson;
 }
