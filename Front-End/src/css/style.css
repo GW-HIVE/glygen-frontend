@@ -156,7 +156,7 @@ p {
 .gg-dropd-menu {
     background-color: #2E78B7;
     font-size: 1em;
-    padding-bottom: 10px;
+    padding-bottom: 10px !important;
 }
 
 .gg-dropd-menu > li > a:hover {

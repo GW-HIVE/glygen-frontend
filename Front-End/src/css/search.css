@@ -152,7 +152,7 @@ select {
 }
 
 /*------------------------------------
-    Tutorial Sectio
+    Tutorial Section
 -------------------------------------*/
 .tutorial {
     width: 90%;
@@ -188,6 +188,7 @@ select {
     width: 90%;
     height: 100%;
 }
+
 
 /* ---------------------------------
     Tabs style Simplified Search
@@ -265,7 +266,17 @@ select {
 }
 
 /* ---- End tab style ----*/
-
+@media (max-width: 1200px) {
+    .box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    }
+    .active {
+        order: -1;
+        flex: 1 0 100%;
+    }
+}
 @media (max-width: 1024px) {
 
     .slider-alignment {
@@ -283,28 +294,6 @@ select {
     
      .tabbable-line > .nav-tabs {
     margin-left: -3%; 
-    }
-    
-    .box {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        }
-    .active {
-        order: -1;
-        flex: 1 0 100%;
-    }
-}
-
-@media only screen and (max-width: 960px) {
-    .box {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        }
-    .active {
-        order: -1;
-        flex: 1 0 100%;
     }
 }
 
