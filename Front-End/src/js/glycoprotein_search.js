@@ -7,33 +7,34 @@
 
 
 function resetAdvanced() {
-    setGlycoProteinFormValues(
-        {
-            query: {
-                query_type: "search_protein",
-                mass: {
-                    "min": 435,
-                    "max": 3906488
-                },
-                sequence: "",
-                // organism: "",
-                organism: {id:"0"},
-                refseq_ac: "",
-                protein_name: "",
-                gene_name: "",
-                pathway_id: "",
-                uniprot_canonical_ac: "",
-                glycan:{
-                    relation:"",
-                    glytoucan_ac:""
-                },
-                sequence:{
-                    glycosylated_aa: "",
-                    type:""
-                },
-                glycosylation_evidence:""
-            }
-        })
+    setGlycoProteinFormValues({
+        query: {
+            query_type: "search_protein",
+            mass: {
+                "min": 435,
+                "max": 3906488
+            },
+            sequence: "",
+            // organism: "",
+            organism: {
+                id: "0"
+            },
+            refseq_ac: "",
+            protein_name: "",
+            gene_name: "",
+            pathway_id: "",
+            uniprot_canonical_ac: "",
+            glycan: {
+                relation: "",
+                glytoucan_ac: ""
+            },
+            sequence: {
+                glycosylated_aa: "",
+                type: ""
+            },
+            glycosylation_evidence: ""
+        }
+    })
     $("#glycosylated_aa").val('').trigger("chosen:updated");
 }
 
@@ -53,10 +54,11 @@ var searchInitValues;
 var mass_max;
 var mass_min;
 $(document).ready(function () {
+    $("#simpleCatSelectedOptionExample").hide();
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
             placeholder_text_multiple: "Click to select multiple Amino Acids",
-            width:"565px"
+            width: "565px"
         })
         .bind(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
@@ -112,7 +114,7 @@ $(document).ready(function () {
             });
 
             var id = getParameterByName('id');
-            if(id){
+            if (id) {
                 LoadDataList(id);
             }
         }
@@ -155,9 +157,9 @@ $(document).ready(function () {
             }
         });
     };
-/**
-* Submit input value on enter in Simplified search 
-*/
+    /**
+     * Submit input value on enter in Simplified search 
+     */
     $("#simplifiedSearch").keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -192,10 +194,10 @@ function ajaxProteinSearchSuccess() {
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
     // var sequence =
-    var sequence ={
-            "type": $("#type").val(),
-            "aa_sequence": $("#sequences").val().replace(/\n/g, "")
-        };
+    var sequence = {
+        "type": $("#type").val(),
+        "aa_sequence": $("#sequences").val().replace(/\n/g, "")
+    };
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
@@ -213,7 +215,7 @@ function ajaxProteinSearchSuccess() {
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "Advanced Search: "+results.error_code + " for " + json);
+                activityTracker("error", "", "Advanced Search: " + results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
@@ -308,9 +310,14 @@ function sortDropdownSimple(c, d) {
 /**
  * updates the example on the simplified search on select option.
  */
-$('#simplifiedCategory').on('change', function () {
-    $('#simplifiedSearch').val('');
-    var value = $(this).val();
+$('#simplifiedCategory').on('change', populateExample);
+
+function populateExample(clearSearchTerm = true) {
+    $('#simpleCatSelectedOptionExample').show();
+    if (clearSearchTerm) {
+        $('#simplifiedSearch').val('');
+    }
+    var value = $('#simplifiedCategory').val();
     var name = $("#simplifiedCategory option:selected").text();
     var example = "";
     switch (name.toLowerCase()) {
@@ -332,21 +339,22 @@ $('#simplifiedCategory').on('change', function () {
     }
     if (name != "Search by" && name != "Any") {
         $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
-        $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
+        $('#simpleTextExample').text(example);
         clickableExample();
     } else {
-        $('#simpleCatSelectedOptionExample').text('');
+        $('#simpleCatSelectedOptionExample').hide();
+        $('#simpleTextExample').text('');
         $('#simplifiedSearch').attr('placeholder', "Enter the value");
     }
-});
+}
 
 /**
  * make the example clickable and inserts it into the search input field.
  */
 function clickableExample() {
     $('#simpleTextExample').click(function () {
-    $('#simplifiedSearch').val($(this).text());
-    $('#simplifiedSearch').focus();
+        $('#simplifiedSearch').val($(this).text());
+        $('#simplifiedSearch').focus();
         return false;
     });
 }
@@ -368,6 +376,9 @@ function searchProteinSimple() {
     // Get values from form fields
     var query_type = "protein_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
+    if (term_category === "") {
+        term_category = "any";
+    }
     var term = document.getElementById("simplifiedSearch").value;
     var formObjectSimple = searchjsonSimple(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObjectSimple);
@@ -382,14 +393,14 @@ function searchProteinSimple() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "Simplified Search: "+results.error_code + " for " + json);
+                activityTracker("error", "", "Simplified Search: " + results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
                 activityTracker("user", "", "Simplified Search: no result found for " + json);
                 $('#loading_image').fadeOut();
             } else {
-                window.location = './protein_list.html?id=' + results.list_id;
+                window.location = './glycoprotein_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
         }
@@ -420,7 +431,7 @@ function LoadDataList(id) {
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
-        data: getListPostData(id, 1,'mass', 'asc',10),
+        data: getListPostData(id, 1, 'mass', 'asc', 10),
         method: 'POST',
         timeout: getTimeout("list_protein"),
         success: ajaxListSuccess,
@@ -441,20 +452,19 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
-        if (data.query)
-        {
-            if(data.query.query_type ==="protein_search_simple"){
+        if (data.query) {
+            if (data.query.query_type === "protein_search_simple") {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-            }
-            else{
+                populateExample(false);
+            } else {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
 
@@ -463,7 +473,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
 }
 /* ----------------------

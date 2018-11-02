@@ -66,6 +66,7 @@ var searchInitValues;
 var mass_max;
 var mass_min;
 $(document).ready(function () {
+    $("#simpleCatSelectedOptionExample").hide();
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
             placeholder_text_multiple: "Choose Amino Acid"
@@ -165,9 +166,9 @@ $(document).ready(function () {
         });
     };
 
-/**
-* Submit input value on enter in Simplified search 
-*/
+    /**
+     * Submit input value on enter in Simplified search 
+     */
     $("#simplifiedSearch").keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -296,13 +297,17 @@ function sortDropdownSimple(c, d) {
     return 0;
 }
 
-
 /**
  * updates the example on the simplified search on select option.
  */
-$('#simplifiedCategory').on('change', function () {
-    $('#simplifiedSearch').val('');
-    var value = $(this).val();
+$('#simplifiedCategory').on('change', populateExample);
+
+function populateExample(clearSearchTerm = true) {
+    $('#simpleCatSelectedOptionExample').show();
+    if (clearSearchTerm) {
+        $('#simplifiedSearch').val('');
+    }
+    var value = $('#simplifiedCategory').val();
     var name = $("#simplifiedCategory option:selected").text();
     var example = "";
     switch (name.toLowerCase()) {
@@ -324,13 +329,14 @@ $('#simplifiedCategory').on('change', function () {
     }
     if (name != "Search by" && name != "Any") {
         $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
-        $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
+        $('#simpleTextExample').text(example);
         clickableExample();
     } else {
-        $('#simpleCatSelectedOptionExample').text('');
+        $('#simpleCatSelectedOptionExample').hide();
+        $('#simpleTextExample').text('');
         $('#simplifiedSearch').attr('placeholder', "Enter the value");
     }
-});
+}
 
 /**
  * make the example clickable and inserts it into the search input field.
@@ -361,6 +367,9 @@ function searchProteinSimple() {
     // Get values from form fields
     var query_type = "protein_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
+    if(term_category===""){
+        term_category = "any";
+    }
     var term = document.getElementById("simplifiedSearch").value;
     var formObjectSimple = searchjsonSimpleP(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObjectSimple);
@@ -446,6 +455,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
+                populateExample(false);
             } else {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }

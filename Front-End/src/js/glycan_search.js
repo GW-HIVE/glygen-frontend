@@ -26,6 +26,7 @@ var mass_min;
 var sugar_mass_min;
 var sugar_mass_max;
 $(document).ready(function () {
+    $("#simpleCatSelectedOptionExample").hide();
     $.ajax({
         dataType: "json",
         url: getWsUrl("search_init_glycan"),
@@ -85,7 +86,10 @@ $(document).ready(function () {
             }
         }
     });
-    // Submit input value on enter in Simplified search 
+
+    /**
+     * Submit input value on enter in Simplified search 
+     */
     $("#simplifiedSearch").keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -391,9 +395,14 @@ function sortDropdownSimple(c, d) {
 /**
  * updates the example on the simplified search on select option.
  */
-$('#simplifiedCategory').on('change', function () {
-    $('#simplifiedSearch').val('');
-    var value = $(this).val();
+$('#simplifiedCategory').on('change', populateExample);
+
+function populateExample(clearSearchTerm = true) {
+    $('#simpleCatSelectedOptionExample').show();
+    if (clearSearchTerm) {
+        $('#simplifiedSearch').val('');
+    }
+    var value = $('#simplifiedCategory').val();
     var name = $("#simplifiedCategory option:selected").text();
     var example = "";
     switch (name.toLowerCase()) {
@@ -412,13 +421,14 @@ $('#simplifiedCategory').on('change', function () {
     }
     if (name != "Search by" && name != "Any") {
         $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
-        $('#simpleCatSelectedOptionExample').html("Example: <a href='' id='simpleTextExample'>" + example + "</a>");
+        $('#simpleTextExample').text(example);
         clickableExample();
     } else {
-        $('#simpleCatSelectedOptionExample').text('');
+        $('#simpleCatSelectedOptionExample').hide();
+        $('#simpleTextExample').text('');
         $('#simplifiedSearch').attr('placeholder', "Enter the value");
     }
-});
+}
 
 /**
  * make the example clickable and inserts it into the search input field.
@@ -447,6 +457,9 @@ function searchGlycanSimple() {
     // Get values from form fields
     var query_type = "glycan_search_simple";
     var term_category = document.getElementById("simplifiedCategory").value;
+    if (term_category === "") {
+        term_category = "any";
+    }
     var term = document.getElementById("simplifiedSearch").value;
     var formObjectSimple = searchjsonSimple(query_type, term_category, term);
     var json = "query=" + JSON.stringify(formObjectSimple);
@@ -535,7 +548,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-
+                populateExample(false);
             } else {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
