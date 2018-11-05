@@ -104,7 +104,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
 
 
@@ -137,15 +137,18 @@ function ajaxListSuccess(data) {
 
         document.title = 'Glycoprotein-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-    displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
@@ -205,17 +208,17 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function(){
-    $('#gen-table').on("sort.bs.table", function(event,field,order){
-        // event.preventDefault();
-        event.stopPropagation();
-        sort = field;
-        dir = order;
-        LoadDataList();
-        activityTracker("user", id, "sort: " + sort);
-        return false;
-    });
-});
+// $(document).ready(function(){
+//     $('#gen-table').on("sort.bs.table", function(event,field,order){
+//         // event.preventDefault();
+//         event.stopPropagation();
+//         sort = field;
+//         dir = order;
+//         LoadDataList();
+//         activityTracker("user", id, "sort: " + sort);
+//         return false;
+//     });
+// });
 
 
 /**
