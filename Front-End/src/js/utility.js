@@ -22,7 +22,9 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 function getErrorMessage(errorCode) {
+    // This can appended to the end of the error message displayed for the user to be able to quickly contact us.
     var contactUsMsg = " If the problem persists then you may <a href='contact.html' >contact us</a>";
+
     switch (errorCode) {
         case 'invalid-query-json':
             return {
@@ -31,13 +33,11 @@ function getErrorMessage(errorCode) {
                 //                message: "This is not a valid JSON query. Please try again.",
                 //                title: "Invalid Submission"
             };
-            break;
         case 'open-connection-failed':
             return {
                 message: "Sorry, we couldn't connect to database.",
                 title: "Unexpected Error"
             };
-            break;
         case 'unexpected-field-in-query':
             return {
                 message: "This is unexpected field entry. Please try again",
@@ -45,7 +45,6 @@ function getErrorMessage(errorCode) {
                 //                message: "Unexpected field in query JSON.",
                 //                title: "Unexpected Error"
             };
-            break;
         case 'invalid-parameter-value-length':
             return {
                 message: "Please adjust length of your entry and try again.",
@@ -53,37 +52,31 @@ function getErrorMessage(errorCode) {
                 //                message: "Display error occurred. We are looking into this problem.",
                 //                title: "Unexpected Error"
             };
-            break;
         case 'no-search-criteria-submitted':
             return {
-                message: "Entry error occurred. Please provide a valid ID.",
+                message: "Entry error occurred. Please provide input a term to search for.",
                 title: "Unexpected Error"
             };
-            break;
         case 'non-existent-record':
             return {
-                message: "No records exist. Please choose a different number of records per page.",
+                message: "No record exist for the submitted ID",
                 title: "Selection Error"
             };
-            break;
         case 'invalid-parameter-value':
             return {
                 message: "Please input correct field values",
                 title: "Selection Error"
             };
-            break;
         case 'non-existent-search-results':
             return {
-                message: "Please choose a different number of records per page.",
+                message: "No results found for your search query",
                 title: "Selection Error"
             };
-            break;
         case 'missing parameter':
             return {
                 message: "Please choose a different number of records per page.",
                 title: "Selection Error"
             };
-            break;
         case 'no-results-found':
             return {
                 message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
@@ -97,9 +90,24 @@ function getErrorMessage(errorCode) {
                 message: "Missing parameter",
                 title: "Selection Error"
             };
+        case 'missing-query-key-in-query-json':
+            return {
+                message: "Incorrectly formatted request.",
+                title: "Format error"
+            };
         case 'download-type-format-combination-not-supported':
             return {
-                message: "Download format not supported for this page",
+                message: "Selected Download format is not supported for this page",
+                title: "Selection Error"
+            };
+        case 'download-type-not-supported':
+            return {
+                message: "Downloading this page is not supported.",
+                title: "Selection Error"
+            };
+        case 'non-existent-mime-type-for-submitted-format':
+            return {
+                message: "Sorry. We do not support the requested file format.",
                 title: "Selection Error"
             };
 
