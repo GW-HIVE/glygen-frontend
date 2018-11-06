@@ -11,3 +11,5 @@ datasetviewer/deploy.sh
 #except include following files
 !.htaccess
 !.gitignore
+Front-End/src/js/glycoprotein_list.js
+Front-End/src/js/glycoprotein_list.js

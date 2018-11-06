@@ -2,7 +2,6 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 
-
 /**
  * Adding function to String prototype to shortcut string to a desire length.
  * @param {int} n - The length of the string
@@ -32,7 +31,6 @@ function buildSummary(queryInfo) {
     if (queryInfo.glycosylated_aa) {
         queryInfo.glycosylated_aa = queryInfo.glycosylated_aa.join(', ');
     }
-
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     if (queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
@@ -75,7 +73,6 @@ function PageFormat(value, row, index, field) {
  * @param {object} value - The data binded to that particular cell.
  * @return- Protein Mass if available else NA
  */
-
 function MassFormatter(value) {
     if (value) {
         var mass = value;
@@ -128,10 +125,12 @@ function ajaxListSuccess(data) {
     }
 }
 
-/// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure() {
-    displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
@@ -191,7 +190,6 @@ $(document).ready(function () {
         return false;
     });
 });
-
 
 /**
  * Gets the values selected in the download dropdown 

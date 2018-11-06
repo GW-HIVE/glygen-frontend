@@ -138,11 +138,12 @@ function ajaxListSuccess(data) {
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    // getting the appropriate error message from this function in utility.js file
     $('#loading_image').fadeOut();
+    // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
 }
 
 /**
@@ -191,17 +192,17 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function () {
-    $('#gen-table').on("sort.bs.table", function (event, field, order) {
-        // event.preventDefault();
-        event.stopPropagation();
-        sort = field;
-        dir = order;
-        LoadDataList();
-        activityTracker("user", id, "sort: " + sort);
-        return false;
-    });
-});
+// $(document).ready(function () {
+//     $('#gen-table').on("sort.bs.table", function (event, field, order) {
+//         // event.preventDefault();
+//         event.stopPropagation();
+//         sort = field;
+//         dir = order;
+//         LoadDataList();
+//         // activityTracker("user", id, "sort: " + sort);
+//         return false;
+//     });
+// });
 
 /**
  * Gets the values selected in the download dropdown 
