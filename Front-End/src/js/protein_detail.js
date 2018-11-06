@@ -6,13 +6,13 @@
 // @update: July 31 2018 - Gaurav Agarwal - added mutation table.
 // @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 
-// Object to hold highlight data in state
+/**
+ * Object to hold highlight data in state
+ */
 var highlight = {};
 
-// [ { postion } ]
-
 /**
- *get glycosylation data
+ * get glycosylation data
  * @param {array} glycosylationData
  * @param {string} type
  * @return an array of highlight info.
@@ -20,7 +20,6 @@ var highlight = {};
 function getGlycosylationHighlightData(glycosylationData, type) {
     var result = [];
     var positions = {};
-
     for (var x = 0; x < glycosylationData.length; x++) {
         if (!positions[glycosylationData[x].position] && (glycosylationData[x].type === type)) {
             positions[glycosylationData[x].position] = true;
@@ -42,11 +41,9 @@ function getGlycosylationHighlightData(glycosylationData, type) {
 function getMutationHighlightData(mutationData) {
     var result = [];
     var positions = {};
-
     for (var x = 0; x < mutationData.length; x++) {
         if (!positions[mutationData[x].start_pos]) {
             positions[mutationData[x].start_pos] = true;
-
             result.push({
                 start: mutationData[x].start_pos,
                 length: (mutationData[x].end_pos - mutationData[x].start_pos) + 1
@@ -55,7 +52,6 @@ function getMutationHighlightData(mutationData) {
     }
     return result;
 }
-
 
 /**
  * checking is highlighted or not
@@ -75,12 +71,10 @@ function isHighlighted(position, selection) {
                 break;
             }
         }
-
         return result;
     }
     return false;
 }
-
 
 /**
  * building highlight
@@ -88,14 +82,11 @@ function isHighlighted(position, selection) {
  * @param {object} highlightData:
  * @returns an array of each charcter of the sequence and is highlighted by its each type
  */
-
 function buildHighlightData(sequence, highlightData) {
     var result = [];
-
     if(sequence) {
         for (var x = 0; x < sequence.length; x++) {
             var position = x + 1;
-            
             result.push({
                 character: sequence[x],
                 // true = highlight,
@@ -142,7 +133,6 @@ function buildRowHighlight(rowData, type) {
     return highlight.join('');
 }
 
-
 /**
  * creating row
  * @param {number} start
@@ -151,13 +141,11 @@ function buildRowHighlight(rowData, type) {
  */
 function createHighlightRow(start, rowData) {
     var $row = $('<div class="highlight-row"></div>');
-
     $('<span class="highlight-line-number"></span>')
         .text(("     " + (start + 1)).slice(-5) + ' ')
         .appendTo($row);
 
     var $section = $('<span class="highlight-section"></span>');
-
     $('<span class="highlight-text"></span>')
         .html(buildRowText(rowData))
         .appendTo($section);
@@ -183,13 +171,11 @@ function createHighlightRow(start, rowData) {
     return $row;
 }
 
-
 /**
  * creating UI perline
  * @param {object} highlightData
  * @param {number} perLine
  */
-
 function createHighlightUi(highlightData, perLine) {
     var $ui = $('<div class="highlight-display"></div>');
     for (var x = 0; x < highlightData.length; x += perLine) {
@@ -208,7 +194,6 @@ var uniprot_canonical_ac;
  */
 function scrollToPanel(hash) {
     //to scroll to the particular sub section.
-    // $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
     if ($(window).width() < 768) {   //mobile view
         $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
         $('.cd-close-panel').addClass('move-left');
@@ -218,11 +203,11 @@ function scrollToPanel(hash) {
     }
 }
 
-
 /**
  * Sequence formatting Function
+ * @param {string} sequenceString 
+ * @return {string} 
  */
-//
 function formatSequence(sequenceString) {
     var perLine = 60;
     var output = '';
@@ -235,9 +220,10 @@ function formatSequence(sequenceString) {
     return output;
 }
 
-
 /**
- * adding commas to numbers
+ * Prints a number with commas as thousands separator
+ * @param {object} nStr 
+ * @return {integer} - returns number with comma ex. 1,000
  */
 function addCommas(nStr) {
     nStr += '';
@@ -249,17 +235,14 @@ function addCommas(nStr) {
     while (rgx.test(x1)) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
-
     return x1 + x2;
 }
 
-
 /**
- * AjaxSuccess
+ * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
  */
 function ajaxSuccess(data) {
-
     if (data.error_code) {
         activityTracker("error", uniprot_canonical_ac, data.error_code);
         // added by Gaurav on July 27, 2018. Web service error display.
@@ -281,10 +264,9 @@ function ajaxSuccess(data) {
             }
         }
 
-
         // define variable to for itemscrossref
         var itemscrossRef = [];
-//check data.
+        //check data.
         if (data.crossref) {
             for (var i = 0; i < data.crossref.length; i++) {
                 var crossrefitem = data.crossref[i];
@@ -358,7 +340,6 @@ function ajaxSuccess(data) {
             highlight.n_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'N-linked');
 
             for (var i = 0; i < data.glycosylation.length; i++) {
-
                 var glycan = data.glycosylation[i];
                 if (glycan.glytoucan_ac) {
                     data.itemsGlycosyl.push({
@@ -378,19 +359,18 @@ function ajaxSuccess(data) {
             }
         }
 
-       // data.sequence = undefined;
-//mustach rending
+        // data.sequence = undefined;
+        //mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
 
-// getting array
+        // getting array
         var itemsMutate = [];
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
         // filling in glycosylation data
 
-
-// filling in expression_disease
+        // filling in expression_disease
         if (data.expression_disease) {
             for (var i = 0; i < data.expression_disease.length; i++) {
                 var expressionD = data.expression_disease[i];
@@ -406,8 +386,7 @@ function ajaxSuccess(data) {
             }
         }
 
-
-// filling in expression_tissue
+        // filling in expression_tissue
         if (data.expression_tissue) {
             for (var i = 0; i < data.expression_tissue.length; i++) {
                 var expressionT = data.expression_tissue[i];
@@ -618,7 +597,7 @@ function ajaxSuccess(data) {
 
         $('#loading_image').fadeOut();
 
-// expression Disease table
+        // expression Disease table
         $('#expressionDisease-table').bootstrapTable({
             columns: [
                 {
@@ -634,7 +613,6 @@ function ajaxSuccess(data) {
                         return diss1;
                     }
                 },
-
 
                 {
                     field: 'significant',
@@ -665,7 +643,7 @@ function ajaxSuccess(data) {
 
         $('#loading_image').fadeOut();
 
-// expression Disease table
+        // expression Disease table
         $('#expressionTissue-table').bootstrapTable({
             columns: [
                 {
@@ -706,9 +684,8 @@ function ajaxSuccess(data) {
 
 /**
  * @param {data} the callback function to GWU service if fails
+ * Returns the GWU services fails.
  */
-//  * Returns the GWU services fails.
-
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
@@ -719,10 +696,9 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
- * @param {id} the LoadData function to configure and start the request to GWU  service
+ * @param {id} the LoadData function to configure and start the request to GWU service
+ * Returns the GWU services.
  */
-//  * Returns the GWU services.
-//
 
 function LoadData(uniprot_canonical_ac) {
 
@@ -740,8 +716,10 @@ function LoadData(uniprot_canonical_ac) {
 }
 
 /**
+ * getParameterByName function to extract query parametes from url
  * @param {name} string for the name of the variable variable to extract from query string
- * @param {url}string with the complete url with query string values
+ * @param {url} string with the complete url with query string values
+ * Returns the GWU services.
  */
 
 function getParameterByName(name, url) {
@@ -756,8 +734,7 @@ function getParameterByName(name, url) {
 
 /**
  * to check checkbox selected not selected
- @param {string} type
- for
+ * @param {string} type
  */
 
 function checkUncheck(type, element) {
@@ -787,6 +764,5 @@ function downloadPrompt() {
     var page_type = "protein_detail";
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
-
     downloadFromServer(uniprot_canonical_ac, format, IsCompressed, page_type);
 }

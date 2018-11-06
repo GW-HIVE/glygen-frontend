@@ -10,16 +10,11 @@
 // @update: :New organism spec Rupali Mahadik.
 
 
-
-
 /**
-
  * Adding function to String prototype to shortcut string to a desire length.
-
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
-
 String.prototype.trunc = String.prototype.trunc ||
     function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
@@ -44,34 +39,27 @@ function buildSummary(queryInfo) {
     queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
-
-
-
-}
-
-
-
-function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
 }
 
 /**
- * Redirect to  searchPage with id after clicking editSearch
+ * Returns total number of pages for each list
+ * @param {string} total_length the dataset of pagination info is retun from server
+ */
+function totalNoSearch(total_length) {
+    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+}
+
+/**
+ * Redirect to searchPage with id after clicking editSearch
  */
 function editSearch() {
     var question =  getParameterByName('question');
-
         window.location.replace("quick_search.html?id=" + id + '&question=' + question);
         activityTracker("user", id, "edit search");
-
 }
-
 
 /**
  * Format function to create link to the details page
- *
  * @param {object} value - The data binded to that particular cell.
  * @return -Details particular Glycan Id
  */
@@ -81,7 +69,6 @@ function pageFormat(value, row, index, field) {
 
 /**
  * Format function for column that contains the cartoon
- * 
  * @param {object} value - The data binded to that particular cell.
  * @param {object} row - The data binded to that particular row.
  * @return- Glycanimage
@@ -93,63 +80,21 @@ function imageFormat(value, row, index, field) {
     return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
-
 /**
  * Format function for column "MASS"
- * 
  * @param {object} value - The data binded to that particular cell.
  * @return- Glycan Mass if available else NA
  */
-
 function massFormatter(value) {
     if (value) {
         var mass = value;
         return value;
-
-
     } else {
         return "NA";
     }
 }
 
-
-/**
-
- * Format function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
-
-// function detailFormat(index, row) {
-//     var html = [];
-//     var glyco = row.glycoct.replace(/ /g, '\n');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>IUPAC</strong></div><div class="col-md-10 col-xs-12"><pre>' + row.iupac + '</pre></div></div>');
-//     html.push('<div class="row"><div class="col-md-2 col-xs-12"><strong>GlycoCT</strong></div><div class="col-md-10 col-xs-12"><pre>' + glyco + '</pre></div></div>');
-//     activityTracker("user", id, "Detail view of " + row.glytoucan_ac);
-//     return html.join('');
-// }
-
-
-/**
-
- * updateSearch function of the detail table when opening each row [+]
-
- * @param {int} index - The row clicked
-
- * @param {object} row - The data object binded to the row
- * @return- detail view with IUPAC AND GLYCOCT
- */
-
 var lastSearch;
-
-
-
-
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -158,8 +103,6 @@ var lastSearch;
  * @param {Object} data.pagination - the dataset for pagination info
  * @param {Object} data.query - the dataset for query
  */
-
-
 function ajaxListSuccess(data) {
     // console.log(data);
     //console.log(data.code);
@@ -168,8 +111,6 @@ function ajaxListSuccess(data) {
         displayErrorByCode(data.code);
         activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
-
-
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
@@ -195,9 +136,7 @@ function ajaxListSuccess(data) {
         document.title='glycan-list';
         lastSearch = data;
         activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
-
     }
-
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -211,13 +150,10 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("glycan_list"),
@@ -228,22 +164,16 @@ function LoadDataList() {
         error: ajaxListFailure
     };
 
-
     // make the server call
     $.ajax(ajaxConfig);
 }
 
 /**
-
  * getParameterByName function to EXtract query parametes from url
-
  * @param {string} name - The name of the variable variable to extract from query string
-
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -258,7 +188,6 @@ var id = getParameterByName('id');
 var question = getParameterByName('question');
 LoadDataList(id);
 
-
 /**
  * hides the loading gif and displays the page after the results are loaded.
  * @author Gaurav Agarwal
@@ -267,5 +196,3 @@ LoadDataList(id);
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
-
-

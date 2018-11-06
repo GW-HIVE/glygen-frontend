@@ -5,7 +5,10 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
-
+/**
+ * Cleares all fields in advinced search
+ * Clear fields button
+ */
 function resetAdvanced() {
     setGlycoProteinFormValues({
         query: {
@@ -38,6 +41,12 @@ function resetAdvanced() {
     $("#glycosylated_aa").val('').trigger("chosen:updated");
 }
 
+/**
+ * Sorts dropdown list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
+ */
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;
@@ -157,6 +166,7 @@ $(document).ready(function () {
             }
         });
     };
+    
     /**
      * Submit input value on enter in Simplified search 
      */
@@ -175,8 +185,9 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-/** On submit, function forms the JSON and submits to the search web services
- */
+/** 
+* On submit, function forms the JSON and submits to the search web services
+*/
 function ajaxProteinSearchSuccess() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
@@ -228,7 +239,20 @@ function ajaxProteinSearchSuccess() {
         }
     });
 }
-
+/**
+ * Forms searchjson from the form values submitted
+ * @param {string} input_query_type query search
+ * @param {string} mass_min user mass min input
+ * @param {string} mass_max user mass max input
+ * @param {string} user organism input
+ * @param {string} input_protein_id user protein input
+ * @param {string} input_refseq_id user input
+ * @param {string} input_gene_name user input
+ * @param {string} input_protein_name user input
+ * @param {string} input_pathway_id user input
+ * @param {string} input_sequence user input
+ * @return {string} returns text or id
+ */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
@@ -293,9 +317,15 @@ $(document).ajaxStop(function () {
 ------------------------- */
 
 /**
- * sorting drop down list in simplified search page.
  * @author Tatiana Williamson
  * @date October 11, 2018
+ */
+
+/**
+ * Sorts dropdown list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
  */
 function sortDropdownSimple(c, d) {
     if (c.display < d.display) {
@@ -305,7 +335,6 @@ function sortDropdownSimple(c, d) {
     }
     return 0;
 }
-
 
 /**
  * updates the example on the simplified search on select option.
@@ -476,6 +505,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
 }
+
 /* ----------------------
  End-Prepopulating search results after clicking modify button on protein list summary section
  * @author Rupali Mahadik

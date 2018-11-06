@@ -2,10 +2,9 @@
 
 var MESSAGES = {}
 
-
-
-// Questions
-
+/**
+ * Quick search questions
+ */
 MESSAGES.QUESTION_1 = "What are the enzymes involved in the biosynthesis of glycan X in human?";
 MESSAGES.QUESTION_2 = "Which proteins have been shown to bear glycan X and which site is this glycan attached to?";
 MESSAGES.QUESTION_3 = "What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?";
@@ -17,7 +16,9 @@ MESSAGES.QUESTION_8 = "What are the glycohydrolases in species X?";
 MESSAGES.QUESTION_9 = "What are the reported or predicted glycosylated proteins in species X?";
 MESSAGES.QUESTION_10 = "Which glycosyltransferases are known to be involved in disease X?";
 
-
+/**
+ * @param {string} target [[Displays each question in quick search page on page load]]
+ */
 function localizeLabels(target) {
     var $target = (target || document);
 
@@ -33,7 +34,6 @@ function localizeLabels(target) {
 $(document).ready(function () {
     localizeLabels();
 });
-
 
 
 function getParameterByName(name, url) {

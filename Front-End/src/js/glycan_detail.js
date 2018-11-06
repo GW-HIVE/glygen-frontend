@@ -8,7 +8,11 @@
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
 // @update: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gets selected creteria for downloading data.
 
-
+/**
+ * Prints a number with commas as thousands separator
+ * @param {object} nStr 
+ * @return {integer} - returns number with comma ex. 1,000
+ */
 function addCommas(nStr) {
     nStr += '';
     var x = nStr.split('.');
@@ -19,17 +23,13 @@ function addCommas(nStr) {
     while (rgx.test(x1)) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
-
     return x1 + x2;
 }
-
 
 var glytoucan_ac;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
-
-
  */
 function ajaxSuccess(data) {
     if (data.error_code) {
@@ -52,7 +52,7 @@ function ajaxSuccess(data) {
             }
         }
 
-         //Adding breaklines
+        //Adding breaklines
         if (data.glycoct){
          data.glycoct = data.glycoct.replace(/ /g, '<br>');}
          data.wurcs = data.wurcs.replace(/ /g, '<br>');
@@ -63,7 +63,6 @@ function ajaxSuccess(data) {
         var items = data.enzyme ? data.enzyme : [];
 
         $container.html(html);
-
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -113,9 +112,8 @@ function ajaxSuccess(data) {
 
 /**
  * @param {data} the callback function to GWU service if fails
+ * Returns the GWU services fails.
  */
-//  * Returns the GWU services fails.
-
 
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
@@ -127,13 +125,11 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
- * @param {id} the LoadData function to configure and start the request to GWU  service
+ * @param {id} the LoadData function to configure and start the request to GWU service
+ * Returns the GWU services.
  */
-//  * Returns the GWU services.
-//
 
 function LoadData(glytoucan_ac) {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("glycan_detail", glytoucan_ac),
@@ -145,19 +141,16 @@ function LoadData(glytoucan_ac) {
         error: ajaxFailure
     };
 
-
     // calls the service
     $.ajax(ajaxConfig);
 }
 
-//getParameterByName function to extract query parametes from url
 /**
+ * getParameterByName function to extract query parametes from url
  * @param {name} string for the name of the variable variable to extract from query string
- * @param {url}string with the complete url with query string values
+ * @param {url} string with the complete url with query string values
+ * Returns the GWU services.
  */
-//  * Returns the GWU services.
-//
-
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -185,6 +178,5 @@ function downloadPrompt() {
     var page_type = "glycan_detail";
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
-
     downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }

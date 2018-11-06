@@ -12,7 +12,6 @@
  */
 
 function setFormValues(data) {
-
     if (data.query) {
         $("#glycan_id").val(data.query.glytoucan_ac);
         if (data.query.mass) {
@@ -37,9 +36,6 @@ function setFormValues(data) {
         $("#motif").val(data.query.glycan_motif);
     }
 }
-
-
-
 
 /**
  * .setting the Form Values based on object data
@@ -94,8 +90,6 @@ function setGlycoProteinFormValues(data) {
 /**
  * fail to to get search data
  * @param {object} data - The Retreive data
- *
- *
  */
 function failToRetreiveSearch(data) {
     displayErrorByCode('server_down');
@@ -104,8 +98,6 @@ function failToRetreiveSearch(data) {
 /**
  * Loading data from protein list service
  * @param {string} id - The serach id
- *
- *
  */
 function LoadProteinSearchvalues(id) {
     var ajaxConfig = {
@@ -124,8 +116,6 @@ function LoadProteinSearchvalues(id) {
 /**
  * Loading data from protein list service
  * @param {string} id - The serach id
- *
- *
  */
 function LoadGlycoProteinSearchvalues(id) {
     var ajaxConfig = {
@@ -143,8 +133,6 @@ function LoadGlycoProteinSearchvalues(id) {
 /**
  * Loading data from glycan list service
  * @param {string} id - The serach id
- *
- *
  */
 
 //Here I am defining ajax call here.

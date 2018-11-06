@@ -7,34 +7,46 @@
 /* --------------------------
     Glycan Search Page 
 ---------------------------- */
-
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycan
+ */
 // select already you input element for re-use
 var $tagsInputGlycan = $('#glycan_id');
 // bind a click event to links within ".textExample" element
 $('#textExampleGlycan').click(function() {
     // append link text to the input field value
-    $tagsInputGlycan[0].value = $(this).text();
+    $tagsInputGlycan.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Protein
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputProtein
+ */
 var $tagsInputProtein = $('#protein');
 $('#textExampleProtein').click(function() {
-    $tagsInputProtein[0].value = $(this).text();
+    $tagsInputProtein.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Motif
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputMotif
+ */
 var $tagsInputMotif = $('#motif');
 $('#textExampleMotif').click(function() {
-    $tagsInputMotif[0].value = $(this).text();
+    $tagsInputMotif.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Enzyme
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputEnzyme
+ */
 var $tagsInputEnzyme = $('#enzyme');
 $('#textExampleEnzyme').click(function() {
-    $tagsInputEnzyme[0].value = $(this).text();
+    $tagsInputEnzyme.val($(this).text());
     return false;
 });
 
@@ -42,98 +54,125 @@ $('#textExampleEnzyme').click(function() {
     Protein and Glycoprotein Search Pages 
 ---------------------------------------------- */
 
-// append link text to the input field value for RefSeq Accession
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputRefseq
+ */
 var $tagsInputRefseq = $('#refseq');
 $('#textExampleRefseq').click(function() {
-    $tagsInputRefseq[0].value = $(this).text();
+     $tagsInputRefseq.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Protein Name
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputProteinName
+ */
 var $tagsInputProteinName = $('#protein_name');
 $('#textExampleProteinName').click(function() {
-    $tagsInputProteinName[0].value = $(this).text();
+    $tagsInputProteinName.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Gene Name
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGeneName
+ */
 var $tagsInputGeneName = $('#gene_name');
 $('#textExampleGeneName').click(function() {
-    $tagsInputGeneName[0].value = $(this).text();
+     $tagsInputGeneName.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Protein Sequence
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputSequences
+ */
 var $tagsInputSequences = $('#sequences');
 $('#textExampleSequences').click(function() {
-    $tagsInputSequences[0].value = $(this).text();
+    $tagsInputSequences.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Pathway ID
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputPathwayID
+ */
 var $tagsInputPathwayID = $('#pathway');
 $('.textExampleKegg.textExampleReactome a').click(function() {
-    $tagsInputPathwayID[0].value = $(this).text();
+    $tagsInputPathwayID.val($(this).text());
     return false;
 });
 
 /* -----------------------------------------
     Quick Search Page
 --------------------------------------------*/
-// append link text to the input field value for Search by Glycan in Quick Search
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputBioenzyme
+ */
 var $tagsInputBioenzyme = $('#bioenzyme');
 $('#textExampleBioenzyme').click(function() {
-    $tagsInputBioenzyme[0].value = $(this).text();
+    $tagsInputBioenzyme.val($(this).text());
     return false;
 });
 
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycansite
+ */
 var $tagsInputGlycansite = $('#glycansite');
 $('#textExampleGlycansite').click(function() {
-    $tagsInputGlycansite[0].value = $(this).text();
+    $tagsInputGlycansite.val($(this).text());
     return false;
 });
 
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycangene
+ */
 var $tagsInputGlycangene = $('#glycangene');
 $('#textExampleGlycangene').click(function() {
-    $tagsInputGlycangene[0].value = $(this).text();
+    $tagsInputGlycangene.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Search by Protein in Quick Search
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputOrthologues
+ */
 var $tagsInputOrthologues = $('#proteinorthologues');
 $('#textExampleOrthologues').click(function() {
-    $tagsInputOrthologues[0].value = $(this).text();
+    $tagsInputOrthologues.val($(this).text());
     return false;
 });
 
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputFunction
+ */
 var $tagsInputFunction = $('#proteinfunction');
 $('#textExampleFunction').click(function() {
-    $tagsInputFunction[0].value = $(this).text();
+    $tagsInputFunction.val($(this).text());
     return false;
 });
 
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycanenzyme
+ */
 var $tagsInputGlycanenzyme = $('#glycanenzyme');
 $('#textExampleGlycanenzyme').click(function() {
-    $tagsInputGlycanenzyme[0].value = $(this).text();
+    $tagsInputGlycanenzyme.val($(this).text());
     return false;
 });
 
-// append link text to the input field value for Search by Disease in Quick Search
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycosyltransferasesd
+ */
 var $tagsInputGlycosyltransferasesd = $('#glycosyltransferasesdisease');
 $('#textExGlycosyltransferasesdisease').click(function() {
-    $tagsInputGlycosyltransferasesd[0].value = $(this).text();
+    $tagsInputGlycosyltransferasesd.val($(this).text());
     return false;
 });
-
-
-
-//button to toggle between hiding and showing the advanced search
-function advancedSearchButton() {
-    var x = document.getElementById("advanced");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-

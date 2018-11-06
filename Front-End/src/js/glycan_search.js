@@ -6,10 +6,11 @@
 // @update on Aug 27, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 //     -->
 
-
-
-/** functions for sorted dropdowns organism
- * get organism drop down values for search form
+/**
+ * Sorts dropdown organism list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
  */
 function sortDropdown(a, b) {
     if (a.name < b.name) {
@@ -220,8 +221,8 @@ function configureDropDownLists(ddl1, ddl2, callback) {
     }
 }
 
-/** functions for dropdown option
- *
+/** 
+ * Functions for dropdown option
  */
 function createOption(ddl, text, value) {
     var opt = document.createElement('option');
@@ -277,6 +278,10 @@ function submitvalues() {
     });
 }
 
+/**
+ * Cleares all fields in advinced search
+ * Clear fields button
+ */
 function resetAdvanced() {
     setFormValues({
         query: {
@@ -302,20 +307,20 @@ function resetAdvanced() {
     });
 }
 
-/** Forms searchjson from the form values submitted
- * @param input_query_type query search
- * @param input_glycan_id user glycan id input
- * @param mass_min user mass min input
- * @param mass_max user mass max input
- * @param input_organism user organism input
- * @param input_glycantype user glycan_type input
- * @param input_glycansubtype user glycan_subtype input
- * @param input_enzyme user enzyme input
- * @param input_proteinid user uniprot_id input
- * @param input_motif user motif input
+/** 
+ * Forms searchjson from the form values submitted
+ * @param {string} input_query_type query search
+ * @param {string} input_glycan_id user glycan id input
+ * @param {string} mass_min user mass min input
+ * @param {string} mass_max user mass max input
+ * @param {string} input_organism user organism input
+ * @param {string} input_glycantype user glycan_type input
+ * @param {string} input_glycansubtype user glycan_subtype input
+ * @param {string} input_enzyme user enzyme input
+ * @param {string} input_proteinid user uniprot_id input
+ * @param {string} input_motif user motif input
+ * @return {string} returns text or id
  */
-
-//form json from form submit
 function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
     var enzymes = {}
     if (input_enzyme) {
@@ -355,6 +360,12 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
     return formjson;
 }
 
+/**
+ * Sorts dropdown organism list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
+ */
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;

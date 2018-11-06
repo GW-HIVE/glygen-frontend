@@ -5,7 +5,10 @@
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
 
-
+/**
+ * Cleares all fields in advinced search
+ * Clear fields button
+ */
 function resetAdvanced() {
     setProteinFormValues({
         query: {
@@ -36,7 +39,6 @@ function resetAdvanced() {
  * @param {integer} nstr gets divide
  * @returns {number} Number with commas
  */
-
 function addCommas(nStr) {
     nStr += '';
     var x = nStr.split('.');
@@ -50,6 +52,12 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+/**
+ * Sorts dropdown organism list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
+ */
 function sortDropdown(a, b) {
     if (a.name < b.name) {
         return -1;
@@ -59,9 +67,6 @@ function sortDropdown(a, b) {
     return 0;
 }
 
-/** functions for dropdowns organism
- * get organism drop down values for search form
- */
 var searchInitValues;
 var mass_max;
 var mass_min;
@@ -177,6 +182,9 @@ $(document).ready(function () {
     });
 });
 
+/** 
+ * Functions for dropdown option
+ */
 function createOption(ddl, text, value) {
     var opt = document.createElement('option');
     opt.value = value;
@@ -184,8 +192,9 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-/** On submit, function forms the JSON and submits to the search web services
- */
+/** 
+* On submit, function forms the JSON and submits to the search web services
+*/
 function ajaxProteinSearchSuccess() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
@@ -229,6 +238,20 @@ function ajaxProteinSearchSuccess() {
     });
 }
 
+/**
+ * Forms searchjson from the form values submitted
+ * @param {string} input_query_type query search
+ * @param {string} mass_min user mass min input
+ * @param {string} mass_max user mass max input
+ * @param {string} user organism input
+ * @param {string} input_protein_id user protein input
+ * @param {string} input_refseq_id user input
+ * @param {string} input_gene_name user input
+ * @param {string} input_protein_name user input
+ * @param {string} input_pathway_id user input
+ * @param {string} input_sequence user input
+ * @return {string} returns text or id
+ */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
     var sequences = {}

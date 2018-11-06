@@ -36,25 +36,23 @@ var limit = 20;
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
-    // queryInfo.execution_time = excutionDate.toLocaleString();
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
 
 /**
- * Format function of the for the getting total result for each search   [+]
+ * Format function of getting total result for each search   [+]
  * @param {total_length} paginationInfo.total_length -
  */
 
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " glycans were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 }
 
 /**
  * Format function to create link to the details page
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Glycan Id
+ * @return - Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
@@ -96,6 +94,7 @@ function massFormatter(value) {
  */
 
 var lastSearch;
+
 function editSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
@@ -216,6 +215,5 @@ function downloadPrompt() {
     var page_type = "glycan_list";
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
-
     downloadFromServer(id, format, IsCompressed, page_type);
 }

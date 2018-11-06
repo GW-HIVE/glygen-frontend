@@ -1,10 +1,10 @@
 //@author: Rupali Mahadik
-/**
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 
- * Adding function to String prototype to shortcut string to a desire length.
 
+/**
+ * Adding function to String prototype to shortcut string to a desire length.
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
@@ -27,15 +27,14 @@ var limit = 25;
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    if(queryInfo.glycosylated_aa) {
+    if (queryInfo.glycosylated_aa) {
         queryInfo.glycosylated_aa = queryInfo.glycosylated_aa.join(', ');
     }
-    
-queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
-    if(queryInfo.mass) {
+
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
+    if (queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
         queryInfo.mass.max = addCommas(queryInfo.mass.max);
     }
@@ -43,16 +42,18 @@ queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
     $('#summary-table').html(summaryHtml);
 }
 
+/**
+ * Format function of getting total result for each search   [+]
+ * @param {total_length} paginationInfo.total_length
+ */
 function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
+    $('.searchresult').html("\"" + total_length + " Proteins were found\"");
 }
 
 /**
- * Redirect to  searchPage with id after clicking editSearch
+ * Redirect to a search page with id after clicking editSearch
+ * @function [[editSearch]] returns to search page with prefield fields
  */
-
-
 function editSearch() {
     {
         window.location.replace("glycoprotein_search.html?id=" + id);
@@ -61,21 +62,16 @@ function editSearch() {
 }
 
 /**
-
  * Format function to create link to the details page
-
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Protein Id
+ * @return - Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
     return "<a href='glycoprotein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
 }
 
-
 /**
-
  * Format function for column "MASS"
-
  * @param {object} value - The data binded to that particular cell.
  * @return- Protein Mass if available else NA
  */
@@ -84,8 +80,6 @@ function MassFormatter(value) {
     if (value) {
         var mass = value;
         return value;
-
-
     } else {
         return "NA";
     }
@@ -98,16 +92,12 @@ function MassFormatter(value) {
  * @param {Object} data.pagination - the dataset for pagination info
  * @param {Object} data.query - the dataset for query
  */
-
-
 function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
-
-
         var $table = $('#gen-table');
         var items = [];
         if (data.results) {
@@ -119,8 +109,8 @@ function ajaxListSuccess(data) {
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
                     organism: protein.organism,
-                    refseq_name:protein.refseq_name,
-                    refseq_ac:protein.refseq_ac
+                    refseq_name: protein.refseq_name,
+                    refseq_ac: protein.refseq_ac
                 });
             }
         }
@@ -130,32 +120,25 @@ function ajaxListSuccess(data) {
         }
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query);
-
         document.title = 'Glycoprotein-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
-
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure() {
     displayErrorByCode('server_down');
-    activityTracker("error", id, "server down (page: "+ page+", sort:"+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, "server down (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
 }
 
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The protein id to load
- * */
+ **/
 function LoadDataList() {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
@@ -165,22 +148,16 @@ function LoadDataList() {
         error: ajaxListFailure
     };
 
-
     // make the server call
     $.ajax(ajaxConfig);
 }
 
 /**
-
  * getParameterByName function to EXtract query parametes from url
-
  * @param {string} name - The name of the variable variable to extract from query string
-
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -192,9 +169,7 @@ function getParameterByName(name, url) {
 }
 
 var id = getParameterByName('id');
-
 LoadDataList(id);
-
 
 /**
  * hides the loading gif and displays the page after the results are loaded.
@@ -205,8 +180,8 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function(){
-    $('#gen-table').on("sort.bs.table", function(event,field,order){
+$(document).ready(function () {
+    $('#gen-table').on("sort.bs.table", function (event, field, order) {
         // event.preventDefault();
         event.stopPropagation();
         sort = field;
@@ -228,6 +203,5 @@ function downloadPrompt() {
     var page_type = "protein_list";
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
-
     downloadFromServer(id, format, IsCompressed, page_type);
 }

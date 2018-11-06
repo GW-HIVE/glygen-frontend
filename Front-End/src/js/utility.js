@@ -30,8 +30,6 @@ function getErrorMessage(errorCode) {
             return {
                 message: "This is not a valid entry. Please try again.",
                 title: "Invalid Entry Error"
-                //                message: "This is not a valid JSON query. Please try again.",
-                //                title: "Invalid Submission"
             };
         case 'open-connection-failed':
             return {
@@ -42,15 +40,11 @@ function getErrorMessage(errorCode) {
             return {
                 message: "This is unexpected field entry. Please try again",
                 title: "Unexpected Field Entry Error"
-                //                message: "Unexpected field in query JSON.",
-                //                title: "Unexpected Error"
             };
         case 'invalid-parameter-value-length':
             return {
                 message: "Please adjust length of your entry and try again.",
                 title: "Invalid Value Length Error"
-                //                message: "Display error occurred. We are looking into this problem.",
-                //                title: "Unexpected Error"
             };
         case 'no-search-criteria-submitted':
             return {
@@ -81,8 +75,6 @@ function getErrorMessage(errorCode) {
             return {
                 message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
                 title: "No Results Found"
-                //                message: "Sorry, we couldn't find any results matching your selection.",
-                //                title: "Selection Error"
             };
 
         case 'missing-parameter':
@@ -166,7 +158,6 @@ function displayErrorByCode(errorCode) {
     var error = getErrorMessage(errorCode);
     displayError(error.message, error.title);
 }
-
 
 /**
  * Gives the timeout value for ajax calls to repective web services.
@@ -354,16 +345,9 @@ function downloadFromServer(id, format, compressed, type) {
         dataType: "text",
         url: getWsUrl('data_download') + "?query=" + JSON.stringify(download_query),
         success: function (result) {
-            // var response = JSON.parse(result);
-            // if ((response).error_list) {
-            //     displayErrorByCode(response.error_list['error_code']);
-            //     activityTracker("error", id, "download: "+response.error_list['error_code']);
-            // } else {
-
             //uses the download.js library.
             download(result, type + "_" + id, mimeType);        // + "." + format
             activityTracker("user", id, "successful download");
-            // }
             $('#loading_image').fadeOut();
         },
         error: function (jqXHR, textStatus, errorThrown) {

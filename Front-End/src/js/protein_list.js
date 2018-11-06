@@ -40,14 +40,17 @@ function buildSummary(queryInfo) {
 }
 
 /**
- * Redirect to  searchPage with id after clicking editSearch
+ * Format function of getting total result for each search   [+]
+ * @param {total_length} paginationInfo.total_length
  */
-
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " Proteins were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
 }
 
+/**
+ * Redirect to a search page with id after clicking editSearch
+ * @function [[editSearch]] returns to search page with prefield fields
+ */
 function editSearch() {
     {
         window.location.replace("protein_search.html?id=" + id);
@@ -58,7 +61,7 @@ function editSearch() {
 /**
  * Format function to create link to the details page
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Protein Id
+ * @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
@@ -123,17 +126,10 @@ function ajaxListSuccess(data) {
             }
         }
 
-        // if (data.query.organism.id === 0) {
-        //     data.query.organism.name = "All";
-        // }
-
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query);
-
         document.title = 'Protein-list';
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
@@ -207,7 +203,6 @@ $(document).ready(function () {
     });
 });
 
-
 /**
  * Gets the values selected in the download dropdown 
  * and sends to the downloadFromServer() function in utility.js
@@ -218,6 +213,5 @@ function downloadPrompt() {
     var page_type = "protein_list";
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
-
     downloadFromServer(id, format, IsCompressed, page_type);
 }

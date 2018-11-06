@@ -1,11 +1,7 @@
 //@author: Gaurav Agarwal
-
 //update: Rupali Mahadik:  //Glycan webservices, //Protein webservices
-
 // @description: UO1 Version-1.1.
-
 //@update:6 June 2018
-
 //update:20 july://usecases search webservices
 //update:31 july:// New base URL updated.
 
@@ -20,12 +16,9 @@ function getWsUrl(request, id, id1) {
     var ws_useCaseSearch = ws_base + "usecases";
     var ws_homeInit = ws_base + "pages/home_init";
     var ws_dataDownload = ws_base + "data/download";
-
-
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
-
         //Auth Webservices.
         case "generate_id":
             return ws_userID;
@@ -116,7 +109,6 @@ function getWsUrl(request, id, id1) {
 
         case "search_glycoproteins":
             return ws_useCaseSearch + "/species_to_glycoproteins/" + id + "/" + id1;
-
 
         //Usecases DISEASE webservices Q.10
         case "search_disease":

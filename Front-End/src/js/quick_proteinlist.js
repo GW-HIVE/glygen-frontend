@@ -10,9 +10,7 @@
 // @update: July 27, 2018 - Gaurav Agarwal - commented out the conditional statements in update search.
 // @update: :New organism spec Rupali Mahadik.
 /**
-
  * Adding function to String prototype to shortcut string to a desire length.
-
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
@@ -21,15 +19,11 @@ String.prototype.trunc = String.prototype.trunc ||
     function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
-// var id = '';
 var page = 1;
 var sort = 'protein_name_long';
 var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 25;
-
-
-
 
 /**
  * it creates user interface for summary
@@ -37,7 +31,6 @@ var limit = 25;
  * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
-
 function buildSummary(queryInfo, question) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -46,74 +39,48 @@ function buildSummary(queryInfo, question) {
     $('#summary-table').html(summaryHtml);
 }
 
-
-
-
 /**
- * Total number of pages for each list
- * @param {string} total_length - the dataset of pagination info is retun from server
+ * Returns total number of pages for each list
+ * @param {string} total_length the dataset of pagination info is retun from server
  */
-
-
 function totalNoSearch(total_length) {
     $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
-    // $('.searchresult').html( "&#34;"  + total_length + " results of glycan&#34;");
-
 }
 
 /**
- * Redirect to  searchPage with id after clicking editSearch
+ * Redirect to searchPage with id after clicking editSearch
  *
  */
-
-
 function editSearch() {
     var question =  getParameterByName('question');
-
     window.location.replace("quick_search.html?id=" + id + '&question=' + question);
     activityTracker("user", id, "edit search");
 }
 
 /**
-
  * Format function to create link to the details page
-
  * @param {object} value - The data binded to that particular cell.
- @return -Details particular Protein Id
+ * @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
 }
 
-
 /**
-
  * Format function for column "MASS"
-
  * @param {object} value - The data binded to that particular cell.
  * @return- Protein Mass if available else NA
  */
-
 function MassFormatter(value) {
     if (value) {
         var mass = value;
         return value;
-
-
     } else {
         return "NA";
     }
 }
 
-
-
-
-
-
 var lastSearch;
-
-
-
 
 /**
  * Handling a succesful call to the server for list page
@@ -122,8 +89,6 @@ var lastSearch;
  * @param {Object} data.pagination - the dataset for pagination info
  * @param {Object} data.query - the dataset for query
  */
-
-
 function ajaxListSuccess(data) {
     // console.log(data);
     //console.log(data.code);
@@ -151,16 +116,12 @@ function ajaxListSuccess(data) {
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
-
         buildPages(data.pagination);
-
         buildSummary(data.query, question);
-
         document.title = 'Quick_Protein-list';
         lastSearch = data;
         activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
-
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -173,13 +134,10 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
-
  * LoadDataList function to configure and start the request to GWU  service
-
  * @param {string} id - The protein id to load
  * */
 function LoadDataList() {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_list"),
@@ -190,22 +148,16 @@ function LoadDataList() {
         error: ajaxListFailure
     };
 
-
     // make the server call
     $.ajax(ajaxConfig);
 }
 
 /**
-
  * getParameterByName function to EXtract query parametes from url
-
  * @param {string} name - The name of the variable variable to extract from query string
-
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -218,9 +170,7 @@ function getParameterByName(name, url) {
 
 var id = getParameterByName('id');
 var question = getParameterByName('question');
-
 LoadDataList(id);
-
 
 /**
  * hides the loading gif and displays the page after the results are loaded.
@@ -242,4 +192,3 @@ $(document).ready(function(){
         return false;
     });
 });
-
