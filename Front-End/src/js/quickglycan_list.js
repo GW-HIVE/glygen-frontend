@@ -32,7 +32,6 @@ var limit = 10;
  * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
-
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')

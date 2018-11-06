@@ -1,13 +1,12 @@
 /**
- * This file just holds the base url to the test server
- * and
- * the snippet for pageproofer live commenting tool
- * @author Gaurav Agarwal
+ * @author: Gaurav Agarwal
+ * version 1.1.0
+ * @description: This file just holds the base url to the test server
+ * and the snippet for pageproofer live commenting tool
+ * @date: September 5, 2018 
  */
 
 var ws_base = "http://tst.api.glygen.org/";
-
-
 
 /**
  * for the pageproofer feedback.

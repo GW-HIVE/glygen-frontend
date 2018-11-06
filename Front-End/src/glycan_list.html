@@ -44,9 +44,7 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-
     <!-- page content starts here -->
-
     <div class="container-fluid" id="listview">
         <div class="row">
             <div id="summary-table" class="col-md-12 col-xs-12">
@@ -102,138 +100,134 @@
         <!-- sorting_top-end -->
 
         <script id="summary-template" type="text/template">
-        <div class="panel panel-default results-table-top">
-            <div class="panel-heading">
-                <center>
-                    <h3>Summary of your Glycan Search<h3>
-                </center>
-            </div>
+            <div class="panel panel-default results-table-top">
+                <div class="panel-heading">
+                    <center>
+                        <h3>Summary of your Glycan Search<h3>
+                    </center>
+                </div>
 
-            <h6>
-                <center>Performed on: {{execution_time}} (EST)</center>
-            </h6>
+                <h6><center>Performed on: {{execution_time}} (EST)</center></h6>
 
-            <div>
-                <table class="table table-hover">
-                    <tbody class="col-sm-offset-3 col-sm-9">
+                <div>
+                    <table class="table table-hover">
+                        <tbody class="col-sm-offset-3 col-sm-9">
 
-                    <!--glycan typeahead-->
-                    {{#glytoucan_ac}}
-                    <tr>
-                        <td>GlyTouCan Accession:</td>
-                        <td>{{glytoucan_ac}}</td>
-                    </tr>
-                    {{/glytoucan_ac}}
+                        <!--glycan typeahead-->
+                        {{#glytoucan_ac}}
+                        <tr>
+                            <td>GlyTouCan Accession:</td>
+                            <td>{{glytoucan_ac}}</td>
+                        </tr>
+                        {{/glytoucan_ac}}
 
-                    <!--glycan mass-->
+                        <!--glycan mass-->
 
-                    {{#mass.min}}
-                    <tr>
-                        <td>Mass:</td>
                         {{#mass.min}}
-                        <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
-                        {{/mass.max}}
-                    </tr>
-                    {{/mass.min}}
+                        <tr>
+                            <td>Mass:</td>
+                            {{#mass.min}}
+                            <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
+                            {{/mass.max}}
+                        </tr>
+                        {{/mass.min}}
 
-                    <!--glycan sugar-->
+                        <!--glycan sugar-->
 
-                    {{#number_monosaccharides.min}}
-                    <tr>
-                        <td>No. of Sugars:</td>
                         {{#number_monosaccharides.min}}
+                        <tr>
+                            <td>No. of Sugars:</td>
+                            {{#number_monosaccharides.min}}
 
-                        <td>
-                            {{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}
-                        </td>
-                        {{/number_monosaccharides.max}}
-                    </tr>
-                    {{/number_monosaccharides.min}}
+                            <td>
+                                {{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}
+                            </td>
+                            {{/number_monosaccharides.max}}
+                        </tr>
+                        {{/number_monosaccharides.min}}
 
-                    <!--organism-->
-                    {{#organism.name}}
-                    <tr>
-                        <td>Species:</td>
-                        <td>
-                            {{organism.name}}
-                        </td>
-                    </tr>
-                    {{/organism.name}}
+                        <!--organism-->
+                        {{#organism.name}}
+                        <tr>
+                            <td>Species:</td>
+                            <td>
+                                {{organism.name}}
+                            </td>
+                        </tr>
+                        {{/organism.name}}
 
-                    <!--glycan type-->
-                    {{#glycan_type}}
-                    <tr>
-                        <td>Glycan Type:</td>
-                        <td>{{glycan_type}}</td>
-                    </tr>
-                    {{/glycan_type}}
+                        <!--glycan type-->
+                        {{#glycan_type}}
+                        <tr>
+                            <td>Glycan Type:</td>
+                            <td>{{glycan_type}}</td>
+                        </tr>
+                        {{/glycan_type}}
 
-                    <!--glycan subtype-->
-                    {{#glycan_subtype}}
-                    <tr>
-                        <td>Glycan SubType:</td>
-                        <td>{{glycan_subtype}}</td>
-                    </tr>
-                    {{/glycan_subtype}}
+                        <!--glycan subtype-->
+                        {{#glycan_subtype}}
+                        <tr>
+                            <td>Glycan SubType:</td>
+                            <td>{{glycan_subtype}}</td>
+                        </tr>
+                        {{/glycan_subtype}}
 
-                    <!--protein typeahead-->
-                    {{#uniprot_canonical_ac}}
-                    <tr>
-                        <td>UniProt Accession:</td>
-                        <td>{{uniprot_canonical_ac}}</td>
-                    </tr>
-                    {{/uniprot_canonical_ac}}
-                    <!--enzyme typeahead-->
-                    {{#enzyme.id}}
-                    <tr>
-                        <td>Synthesizing Enzyme:</td>
-                        <td>
-                            {{enzyme.id}}
-                        </td>
-                    </tr>
-                    {{/enzyme.id}}
-                    <!--glycanmotif typeahead-->
-                    {{#glycan_motif}}
-                    <tr>
-                        <td>Motif:</td>
-                        <td>{{glycan_motif}}</td>
-                    </tr>
-                    {{/glycan_motif}}
+                        <!--protein typeahead-->
+                        {{#uniprot_canonical_ac}}
+                        <tr>
+                            <td>UniProt Accession:</td>
+                            <td>{{uniprot_canonical_ac}}</td>
+                        </tr>
+                        {{/uniprot_canonical_ac}}
+                        <!--enzyme typeahead-->
+                        {{#enzyme.id}}
+                        <tr>
+                            <td>Synthesizing Enzyme:</td>
+                            <td>
+                                {{enzyme.id}}
+                            </td>
+                        </tr>
+                        {{/enzyme.id}}
+                        <!--glycanmotif typeahead-->
+                        {{#glycan_motif}}
+                        <tr>
+                            <td>Motif:</td>
+                            <td>{{glycan_motif}}</td>
+                        </tr>
+                        {{/glycan_motif}}
 
-                    {{#term_category}}
-                    <tr>
-                        <td>Term Category:</td>
-                        <td>{{term_category}}</td>
-                    </tr>
-                    {{/term_category}}
+                        {{#term_category}}
+                        <tr>
+                            <td>Term Category:</td>
+                            <td>{{term_category}}</td>
+                        </tr>
+                        {{/term_category}}
 
-                    {{#term}}
-                    <tr>
-                        <td>Term:</td>
-                        <td>{{term}}</td>
-                    </tr>
-                    {{/term}}
+                        {{#term}}
+                        <tr>
+                            <td>Term:</td>
+                            <td>{{term}}</td>
+                        </tr>
+                        {{/term}}
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div align="center">
+                    <button type="button" class="btn btn-primary-updateSearch" onclick="LoadDataList();">Update Results
+                    </button>
+
+                    &nbsp; &nbsp;
+
+                    <button type="button" class="btn btn-primary" onclick="editSearch();">Modify Search</button>
+
+                    <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
+                </div>
             </div>
-
-            <div align="center">
-                <button type="button" class="btn btn-primary-updateSearch" onclick="LoadDataList();">Update Results
-                </button>
-
-                &nbsp; &nbsp;
-
-                <button type="button" class="btn btn-primary" onclick="editSearch();">Modify Search</button>
-
-                <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
-            </div>
-        </div>
-    </script>
-
+        </script>
 
         <!-- table start here -->
-
         <table id="gen-table" data-show-export="true" data-toggle="table" data-page-size="10">
             <thead>
                 <tr>
@@ -253,8 +247,8 @@
                     </th>
                 </tr>
             </thead>
-        </table>
-        <!-- table container ends here -->
+        </table><!-- table container ends here -->
+        
         <!-- sorting_bottom -->
         <div class="row">
             <div class="col-md-12 col-xs-12" id="sortbottom">
@@ -276,15 +270,12 @@
         </div>
     </div>
 
-
     <div w3-include-html="footer.html"></div>
     <script>w3.includeHTML();</script>
-
 
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <!-- CSS for UI  -->
     <script type="text/javascript" src="libraries/jquery/1.10.1-jquery-ui.js"></script>
-
     <!-- CSS for UI  -->
     <script type="text/javascript" src="libraries/jquery/1.10.1-jquery-ui.js"></script>
     <!-- script for table -->
@@ -304,8 +295,6 @@
     <script type="text/javascript" src="js/pagination.js"></script>
     <!-- script for glycan list page -->
     <script type="text/javascript" src="js/glycan_list.js"></script>
-
-
     <!-- script for third party-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <!-- script for getting Web Service URLs -->
@@ -317,8 +306,6 @@
     <!--  w3 including footer-->
     <!-- downloading files js -->
     <script src="libraries/download.js"></script>
-
-
 </body>
 
 </html>

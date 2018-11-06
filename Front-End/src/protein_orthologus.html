@@ -1,7 +1,6 @@
 <!--
  @author: Rupali Mahadik
  @description: UO1 Version-1.0.1-31-July
-
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +35,6 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-
     <!-- page content starts here -->
     <div class="container-fluid" id="listview">
         <div class="row">
@@ -58,7 +56,6 @@
                         <option>50</option>
                         <option>70</option>
                     </select>
-
                     <label class="searchresult"></label>
                 </form>
             </div>
@@ -71,7 +68,6 @@
                 {{#QUESTION_4}}
                 <center><p>What are the orthologues of <b>{{#uniprot_canonical_ac}}{{uniprot_canonical_ac}}{{/uniprot_canonical_ac}}</b> in different species?  </p></center>
                 {{/QUESTION_4}}
-
 
                 <div align="center">
                     <button type="button" class="btn btn-primary-updateSearch"  onclick="LoadDataList();">Update Results</button>
@@ -98,13 +94,12 @@
                         <th data-field="organism" data-sortable="true">Organism
                         </th>
                         <th data-field="tax_id" data-sortable="true">Tax_ID</th>
-
                     </tr>
                     </thead>
                 </table>
             </div>
-        </div>
-        <!-- table container ends here -->
+        </div><!-- table container ends here -->
+        
         <!-- sorting_bottom -->
         <div class="row">
             <div class="col-md-12 col-xs-12" id="sortbottom">
@@ -120,20 +115,8 @@
                         <option>50</option>
                         <option>70</option>
                     </select>
-                    <!--<label>Sort By</label>-->
-                    <!--<select class="sort-select form-control" onchange="xsort(this);">-->
-                        <!--<option selected value="uniprot_canonical_ac">ID</option>-->
-                        <!--<option value="tax_id">tax id</option>-->
-                        <!--<option value="protein_name">protein_name</option>-->
-                        <!--<option value="organism">organism</option>-->
-                    <!--</select>-->
-                    <!--<select class="dir-select form-control" onchange="xdir(this);">-->
-                        <!--<option value="asc" selected>ASC</option>-->
-                        <!--<option value="desc">DESC</option>-->
-                    <!--</select>-->
                     <label class="searchresult"></label>
                 </form>
-                <!--<label class="searchresult"></label>-->
             </div>
         </div>
     </div>
@@ -167,7 +150,6 @@
     <!-- script for navaigation -->
     <script src="js/navbar.js"></script>
     <!--  w3 including footer-->
-
     <!-- script for error-message/header-footer js -->
     <script src="js/utility.js"></script>
 

@@ -1,4 +1,9 @@
-
+/**
+ * @author: Gaurav Agarwal
+ * version 1.1.0
+ * @description: Displays each question in quick search page on page load
+ * @date: July 5, 2018 
+ */
 
 var MESSAGES = {}
 
@@ -34,8 +39,12 @@ function localizeLabels(target) {
 $(document).ready(function () {
     localizeLabels();
 });
-
-
+/**
+ * Get parameter by name for url
+ * @param {string} name 
+ * @param {string} url 
+ * @return {string} 
+ */
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

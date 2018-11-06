@@ -9,7 +9,6 @@
  * @param {int} n - The length of the string
  * @returns {int} -Short String
  */
-
 String.prototype.trunc = String.prototype.trunc ||
     function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
@@ -27,7 +26,6 @@ var limit = 25;
  * @param {string} queryInfo.execution_time - The queryInfo.execution_time gives execution_time of query in the form of date.
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
-
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -72,7 +70,6 @@ function PageFormat(value, row, index, field) {
  * @param {object} value - The data binded to that particular cell.
  * @return- Protein Mass if available else NA
  */
-
 function MassFormatter(value) {
     if (value) {
         var mass = value;
@@ -170,7 +167,6 @@ function LoadDataList() {
  * @param {string} url- The complete url with query string values
  * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
  */
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -191,18 +187,6 @@ LoadDataList(id);
 $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
-
-// $(document).ready(function () {
-//     $('#gen-table').on("sort.bs.table", function (event, field, order) {
-//         // event.preventDefault();
-//         event.stopPropagation();
-//         sort = field;
-//         dir = order;
-//         LoadDataList();
-//         // activityTracker("user", id, "sort: " + sort);
-//         return false;
-//     });
-// });
 
 /**
  * Gets the values selected in the download dropdown 

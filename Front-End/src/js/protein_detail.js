@@ -23,7 +23,6 @@ function getGlycosylationHighlightData(glycosylationData, type) {
     for (var x = 0; x < glycosylationData.length; x++) {
         if (!positions[glycosylationData[x].position] && (glycosylationData[x].type === type)) {
             positions[glycosylationData[x].position] = true;
-
             result.push({
                 start: glycosylationData[x].position,
                 length: 1
@@ -449,7 +448,6 @@ function ajaxSuccess(data) {
 
         // $container.find('#basics5x').click();
         // glycosylation table
-
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'glytoucan_ac',
@@ -498,7 +496,6 @@ function ajaxSuccess(data) {
                 scrollToPanel("#basics6");
             }
         });
-
 
         // glycosylation table
         $('#glycosylation-table2').bootstrapTable({
@@ -681,7 +678,6 @@ function ajaxSuccess(data) {
     $('#loading_image').fadeOut();
 }
 
-
 /**
  * @param {data} the callback function to GWU service if fails
  * Returns the GWU services fails.
@@ -701,7 +697,6 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
  */
 
 function LoadData(uniprot_canonical_ac) {
-
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("protein_detail", uniprot_canonical_ac),
@@ -736,7 +731,6 @@ function getParameterByName(name, url) {
  * to check checkbox selected not selected
  * @param {string} type
  */
-
 function checkUncheck(type, element) {
     var $elements = $('[data-type="' + type + '"]');
 
@@ -752,7 +746,6 @@ $(document).ready(function () {
     document.title = uniprot_canonical_ac + " Detail - glygen";   //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
 });
-
 
 /**
  * Gets the values selected in the download dropdown 

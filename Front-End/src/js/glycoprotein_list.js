@@ -125,6 +125,12 @@ function ajaxListSuccess(data) {
     }
 }
 
+/**
+ * ajaxFailure is the callback function when ajax to GWU service fails
+ * @param {string} jqXHR getting the appropriate error message 
+ * @param {string} textStatus getting the appropriate error message 
+ * @param {string} errorThrown Displays error message
+ */
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);

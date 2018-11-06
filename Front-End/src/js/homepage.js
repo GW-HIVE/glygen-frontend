@@ -15,15 +15,17 @@ $.ajax({
         $("#loadStatistics").css("display","none")
         }
 });
-
         $(document).ajaxStop(function () {
             $('#loadVersion #loadStatistics').fadeOut(1000);
         });
 
-//All Sucsess functions go here 
-function displayHomeInitData(jsonResponse) {   
+/**
+ * All Sucsess functions go here 
+ * @param {string} jsonResponse 
+ */
+function displayHomeInitData(jsonResponse) {  
+    //VERSION: Displays component name, version number, and date
     var versionDisplay = document.getElementById('version-display');
-
     jsonResponse.version.forEach(function (component) {
        var componentName = component.component;
        var componentVersion = component.version;
@@ -40,7 +42,8 @@ function displayHomeInitData(jsonResponse) {
                 break;            
         }
     })
-
+    
+    //STATISTICS: Displays statistics table - name and number
     var statisticsDisplay = document.getElementById('statistics-display');
 
     jsonResponse.statistics.forEach(function (statistic) {
@@ -87,7 +90,7 @@ function displayHomeInitData(jsonResponse) {
     table.appendChild(tbody);
     statisticsDisplay.appendChild(table);
     }
-    )};
+)};
 
 // ajaxFailure is the callback function when ajax to GWU service fails
 function displayFailHomeInitData(jqXHR, textStatus, errorThrown) {
@@ -98,5 +101,3 @@ function displayFailHomeInitData(jqXHR, textStatus, errorThrown) {
     $("#version-display").text("Data is not available.").addClass("errorMessageHomepage");
     $("#statistics-display").text("Data is not available.").addClass("errorMessageHomepage");
 }
-
-

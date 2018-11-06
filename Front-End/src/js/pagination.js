@@ -1,6 +1,4 @@
-
 //@author: Rupali Mahadik
-
 // @description: UO1 Version-1.1.
 
 /**
@@ -63,12 +61,10 @@ function xsort(element) {
     activityTracker("user", id, "sort: " + sort);
 }
 
-
 /**
  * Reads a new asc/dec dirction for data  and reloads the data.
  * @param {domNode} element - The element from which we take the new direction value
  */
-
 function xdir(element) {
     dir = $(element).val();
     $('.dir-select').val(dir);
@@ -105,7 +101,6 @@ function noOfPage(total_length, limit) {
  * @param {integer} paginationInfo.total_length - The paginationInfo.total_length gives total number of records from pagination object
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
-
 function buildPages(paginationInfo) {
     var total_length = noOfPage(paginationInfo.total_length, paginationInfo.limit);
     var pageSelectors = $(".page-select");
@@ -114,23 +109,20 @@ function buildPages(paginationInfo) {
         pageSelectors.append($("<option></option>").attr("value", i).text(i));
     }
     pageSelectors.val(page);
+    
     /**
      * this works for Showing user how many results they found .
-
      */
     totalNoSearch(paginationInfo.total_length);
+    
     /**
      * this works for enabling and disable prev and next button.
-
      */
     $(".prevbutton").attr("disabled", (page == 1));
     $(".nextbutton").attr("disabled", (page == total_length));
     $('html, body').animate({scrollTop:0}, 'slow');
     return false;
 }
-
-
-
 
 $(document).ready(function(){
     $('#gen-table').on("sort.bs.table", function(event,field,order){
