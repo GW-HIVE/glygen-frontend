@@ -93,7 +93,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
         var $table = $('#gen-table');
         var items = [];
@@ -121,7 +121,7 @@ function ajaxListSuccess(data) {
         buildSummary(data.query);
         document.title = 'Glycoprotein-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response (page: " + page + ", sort:" + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
 
