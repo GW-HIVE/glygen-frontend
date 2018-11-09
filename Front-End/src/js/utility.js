@@ -151,7 +151,13 @@ function getErrorMessage(errorCode) {
  * Display Error message using alertify
  */
 function displayError(message, title) {
-    alertify.alert(title, message).set('modal', false);
+    var pagePath = window.location.pathname;
+    if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
+        // for all list pages, if any error occurs, it will go back to the previous page.
+        alertify.alert(title, message, function(){ window.history.back(); }).set('modal', false);;
+    } else {
+        alertify.alert(title, message).set('modal', false);
+    }
 }
 
 function displayErrorByCode(errorCode) {
