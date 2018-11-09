@@ -1,4 +1,3 @@
-
 // @author: Tatiana Williamson
 // @description: UO1 Version-1.1.
 // @Date: 8th Mar 2018.
@@ -35,11 +34,11 @@ $(document).ready(function(){
         navItemText = 'EXPLORE';
     } else if(navItemText == 'QUICK SEARCH') {
         navItemText = 'QUICK SEARCH'; 
+    } else if(navItemText == 'GLYGEN DATA') {
+        navItemText = 'GLYGEN DATA';   
     } else if(navItemText == 'ABOUT') {
         navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {
-        navItemText = 'MORE';
-    } else if(navItemText == 'GLYGEN DATA') {
         navItemText = 'MORE';
     } else if(navItemText == 'FEEDBACK') {
         navItemText = 'MORE';
