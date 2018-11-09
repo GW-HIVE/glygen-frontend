@@ -4,9 +4,12 @@
  * @since Aug 2, 2018
  */
 
-function tryMeAjaxFailure() {
-    displayErrorByCode('server_down');
-    activityTracker("error", "", "Try me failure");
+function tryMeAjaxFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
 }
 
@@ -83,7 +86,7 @@ function tryMouseGlycans() {
         "mass": {},
         "number_monosaccharides": {},
         "enzyme": { "type": "gene", "id": "MGAT1" },
-        "tax_id": 10090
+        "organism": { "id": 10090, "name": "Mus musculus" }
     };
     var json = "query=" + JSON.stringify(jsonData);
 
@@ -95,7 +98,7 @@ function tryMouseGlycans() {
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: "+results.error_code);
+                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: " + results.error_code);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
