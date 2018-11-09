@@ -470,7 +470,7 @@ function ajaxSuccess(data) {
                 },
                 {
                     field: 'imageFormat',
-                    title: 'Glycan Image',
+                    title: 'Image of Glycan Structure',
                     sortable: true,
                     formatter: function imageFormat(value, row, index, field) {
                         var url = getWsUrl('glycan_image', row.glytoucan_ac);
