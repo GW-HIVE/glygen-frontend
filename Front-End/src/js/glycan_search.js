@@ -21,6 +21,21 @@ function sortDropdown(a, b) {
     return 0;
 }
 
+/**
+ * This helps retain the search tab on pressing the back button from the list page.
+ */
+$(function () {
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+    $('.nav-tabs a').click(function (e) {
+        $(this).tab('show');
+        var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+        window.location.hash = this.hash;
+        $('html,body').scrollTop(scrollmem);
+    });
+});
+
 var searchInitValues;
 var mass_max;
 var mass_min;
@@ -552,7 +567,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("error", null, "error code: " + data.code);
     } else {
         if (data.query) {
             if (data.query.query_type === "glycan_search_simple") {
@@ -564,7 +579,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("user", null, "successful response");
     }
 }
 
