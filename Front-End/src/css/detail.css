@@ -275,15 +275,15 @@ h4 {
 }
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
-    background: rgba(0, 0, 256, .5); // blue
+    background: rgba(0, 0, 256, .5); /* blue */
 }
 
 .highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
-    background: rgba(100, 236, 100, 0.9); //green
+    background: rgba(100, 236, 100, 0.9); /* green */
 }
 
 .highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
-    background: rgba(256, 0, 0, .5); //red
+    background: rgba(256, 0, 0, .5); /* red */
 
 }
 
@@ -310,5 +310,5 @@ h4 {
 }
 
 .sequnce3 {
-    color: rgba(0, 0, 256, .5); // blue
+    color: rgba(0, 0, 256, .5); /* blue */
 }
