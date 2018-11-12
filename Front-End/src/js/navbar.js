@@ -34,8 +34,8 @@ $(document).ready(function(){
         navItemText = 'EXPLORE';
     } else if(navItemText == 'QUICK SEARCH') {
         navItemText = 'QUICK SEARCH'; 
-    } else if(navItemText == 'GLYGEN DATA') {
-        navItemText = 'GLYGEN DATA';   
+    } else if(navItemText == 'DATA') {
+        navItemText = 'DATA';   
     } else if(navItemText == 'ABOUT') {
         navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {

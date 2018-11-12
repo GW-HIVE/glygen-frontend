@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------
 @author: Rupali Mahadik.
-@ao-author: Tatiana Williamson
+@co-author: Tatiana Williamson
 @description: UO1 Version-1.0.1
 @date-created: January 2018
 @update: October 12 2018 - Tatiana Williamson - Added simplified search.
@@ -74,7 +74,6 @@ select {
 .simplified-search input[type=text] {
     padding: 21px;
     border-radius: 6px;
-/*    text-indent: 5px !important;*/
 }
 
 .simplified-search select {
