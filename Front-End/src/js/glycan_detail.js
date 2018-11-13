@@ -81,7 +81,7 @@ function ajaxSuccess(data) {
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'uniprot_canonical_ac',
-                title: 'UniProt Accession',
+                title: 'UniProtKB Accession',
                 sortable: true,
                 formatter: function (value, row, index, field) {
                     return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"

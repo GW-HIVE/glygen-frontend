@@ -144,20 +144,20 @@
 
                                 {{#uniprot}}
                                 {{#uniprot_id}}
-                                <li class="list-group"><strong>UniProt ID:</strong>
+                                <li class="list-group"><strong>UniProtKB ID:</strong>
                                    <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
                                 </li>
                                 {{/uniprot_id}}
                                 {{^uniprot_id}}  {{/uniprot_id}}
 
                                 {{#uniprot_canonical_ac}}
-                                <li class="list-group"><strong>UniProt Accession:</strong> {{uniprot_canonical_ac}}</li>
+                                <li class="list-group"><strong>UniProtKB Accession:</strong> {{uniprot_canonical_ac}}</li>
                                 {{/uniprot_canonical_ac}}
                                 {{^uniprot_canonical_ac}}  {{/uniprot_canonical_ac}}
                                 {{/uniprot}}
 
                                 {{#recommendedname}} {{#full}}
-                                <li class="list-group"><strong>UniProt Entry
+                                <li class="list-group"><strong>UniProtKB Entry
                                     name:</strong> {{recommendedname.full}}
                                     {{#short}} ({{recommendedname.short}}) {{/short}}
                                 </li>
@@ -365,7 +365,7 @@
                             {{#isoforms}}
                             <div class='col-md-12 col-xs-12'>
                                 <div class="panelmaincontent">
-                                    <li class="list-group"><strong>UniProt Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
+                                    <li class="list-group"><strong>UniProtKB Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a></li>
                                 </div>
                                 {{#locus}} {{#chromosome}}
                                 <div class="panelmaincontent">
