@@ -39,11 +39,11 @@ $(document).ready(function(){
     } else if(navItemText == 'ABOUT') {
         navItemText = 'ABOUT';
     } else if(navItemText == 'RESOURCES') {
-        navItemText = 'MORE';
+        navItemText = 'HELP';
     } else if(navItemText == 'FEEDBACK') {
-        navItemText = 'MORE';
+        navItemText = 'HELP';
     } else if(navItemText == 'CONTACT') {
-        navItemText = 'MORE';
+        navItemText = 'HELP';
     } else if(navItemText == 'GLYGEN SETTINGS') {
         navItemText = 'MY GLYGEN';
     }
