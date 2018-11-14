@@ -40,9 +40,9 @@ function pageFormat1(value, row, index, field) {
 function detailFormat(index, row) {
     var html = [];
     // var glyco = row.start_pos.replace(/ /g, '\n');
-    html.push('<li>Chromosome:' + row.chromosome + '</li>');
-    html.push('<li>Start Position:' + row.start_pos + '</li>');
-    html.push('<li>End Position:' + row.end_pos + '</li>');
+    html.push('<li class="list-group-indent">Chromosome:' + row.chromosome + '</li>');
+    html.push('<li class="list-group-indent">Start Position:' + row.start_pos + '</li>');
+    html.push('<li class="list-group-indent">End Position:' + row.end_pos + '</li>');
 
     activityTracker("user", id, "Detail view of " + row.uniprot_canonical_ac);
     return html.join('');
