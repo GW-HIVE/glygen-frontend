@@ -94,9 +94,10 @@
                       <directory>${from}</directory>
                       <filtering>true</filtering>
                       <excludes>
-                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        <!-- not copying any of the ws_url_xxxx.js and server_****.css files.
                         Copied separately in the below plugin -->
                         <exclude>${wsUrl}*</exclude>
+                        <exclude>${serverCss}*</exclude>
                       </excludes>
                     </resource>
                   </resources>              
@@ -116,6 +117,7 @@
                 <configuration>
                   <tasks>
                     <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                    <copy file="${srcServerCss}" tofile="${desServerCss}"/>
                   </tasks>
                 </configuration>
               </execution>
@@ -197,9 +199,10 @@
                       <directory>${from}</directory>
                       <filtering>true</filtering>
                       <excludes>
-                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        <!-- not copying any of the ws_url_xxxx.js and server_****.css files. 
                         Copied separately in the below plugin -->
                         <exclude>${wsUrl}*</exclude>
+                        <exclude>${serverCss}*</exclude>
                       </excludes>
                     </resource>
                   </resources>              
@@ -219,6 +222,7 @@
                 <configuration>
                   <tasks>
                     <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                    <copy file="${srcServerCss}" tofile="${desServerCss}"/>
                   </tasks>
                 </configuration>
               </execution>
@@ -300,9 +304,10 @@
                       <directory>${from}</directory>
                       <filtering>true</filtering>
                       <excludes>
-                        <!-- not copying any of the ws_url_xxxx.js files. 
+                        <!-- not copying any of the ws_url_xxxx.js and server_****.css files.
                         Copied separately in the below plugin -->
                         <exclude>${wsUrl}*</exclude>
+                        <exclude>${serverCss}*</exclude>
                       </excludes>
                     </resource>
                   </resources>              
@@ -322,6 +327,7 @@
                 <configuration>
                   <tasks>
                     <copy file="${srcWsUrl}" tofile="${desWsUrl}"/>
+                    <copy file="${srcServerCss}" tofile="${desServerCss}"/>
                   </tasks>
                 </configuration>
               </execution>
