@@ -446,7 +446,7 @@ function ajaxSuccess(data) {
             });
         });
 
-        // $container.find('#basics5x').click();
+        // $container.find('#isoform').click();
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -493,7 +493,7 @@ function ajaxSuccess(data) {
                 return html.join('');
             },
             onPageChange: function () {
-                scrollToPanel("#basics6");
+                scrollToPanel("#glycosylation");
             }
         });
 

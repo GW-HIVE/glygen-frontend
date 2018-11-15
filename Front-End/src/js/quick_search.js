@@ -160,7 +160,7 @@ function proteinFunction(){
          displayErrorByCode("Invalid ID");
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics7';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#function';
             }
         }
     })
