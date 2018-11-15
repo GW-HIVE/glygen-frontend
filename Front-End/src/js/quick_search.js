@@ -18,12 +18,13 @@ $("#bioenzyme").autocomplete({
     }
 });
 
-function bioEnzyme(){
+function bioEnzyme() {
     var id = $("#bioenzyme").val();
     $.ajax({
         type: 'POST',
-         url: getWsUrl("search_bioenzyme",id),
-        success: function(results) {
+        url: getWsUrl("search_bioenzyme", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
             }
@@ -51,12 +52,13 @@ $("#glycansite").autocomplete({
     }
 });
 
-function glycanSite(){
+function glycanSite() {
     var id = $("#glycansite").val();
     $.ajax({
         type: 'POST',
-        url: getWsUrl("search_glycansite",id),
-        success: function(results) {
+        url: getWsUrl("search_glycansite", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_2";
             }
@@ -84,12 +86,13 @@ $("#glycangene").autocomplete({
     }
 });
 
-function glycanGene(){
+function glycanGene() {
     var id = $("#glycangene").val();
     $.ajax({
         type: 'POST',
-        url: getWsUrl("search_glycangene",id),
-        success: function(results) {
+        url: getWsUrl("search_glycangene", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './locus_list.html?id=' + results.list_id + "&question=QUESTION_3";
             }
@@ -117,14 +120,15 @@ $("#proteinorthologues").autocomplete({
     }
 });
 
-function proteinOrthologues(){
+function proteinOrthologues() {
     var id = $("#proteinorthologues").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_proteinorthologues",id),
+        url: getWsUrl("search_proteinorthologues", id),
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_orthologus.html?id=' + results.list_id+ "&question=QUESTION_4";
+                window.location = './protein_orthologus.html?id=' + results.list_id + "&question=QUESTION_4";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -150,17 +154,18 @@ $("#proteinfunction").autocomplete({
     }
 });
 
-function proteinFunction(){
-   var id = $("#proteinfunction").val();
-   $.ajax({
+function proteinFunction() {
+    var id = $("#proteinfunction").val();
+    $.ajax({
         type: 'post',
-        url: getWsUrl("protein_detail",id),
+        url: getWsUrl("protein_detail", id),
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-         displayErrorByCode("Invalid ID");
+                displayErrorByCode("Invalid ID");
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics7';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id + '#basics7';
             }
         }
     })
@@ -183,11 +188,12 @@ $("#glycanenzyme").autocomplete({
     }
 });
 
-function glycanEnzyme(){
+function glycanEnzyme() {
     var id = $("#glycanenzyme").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycanenzyme",id),
+        url: getWsUrl("search_glycanenzyme", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -221,11 +227,12 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycosylTransferases(){
+function glycosylTransferases() {
     var id = $("#organism1").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycosyltransferases",id),
+        url: getWsUrl("search_glycosyltransferases", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -259,11 +266,12 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycoHydrolases(){
+function glycoHydrolases() {
     var id = $("#organism2").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycohydrolases",id),
+        url: getWsUrl("search_glycohydrolases", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -288,8 +296,8 @@ $(document).ready(function () {
         var orgElement = $("#organism3").get(0);
         createOption(orgElement, result.organism[0].name, result.organism[0].id);
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
-        var question =  getParameterByName('question');
-        var id =  getParameterByName('id');
+        var question = getParameterByName('question');
+        var id = getParameterByName('id');
         populateLastSearch(question, id);
     });
 });
@@ -301,12 +309,13 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycoProteins(){
+function glycoProteins() {
     var id = $("#organism3").val();
     var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins" ,id,id1),
+        url: getWsUrl("search_glycoproteins", id, id1),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -336,7 +345,7 @@ $("#glycosyltransferasesdisease").autocomplete({
     }
 });
 
-function glycosyTtransferasesDisease(){
+function glycosyTtransferasesDisease() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
     var disease = $("#glycosyltransferasesdisease").val();
@@ -349,9 +358,10 @@ function glycosyTtransferasesDisease(){
         type: 'POST',
         url: getWsUrl("search_disease"),
         data: json,
-        success: function(results) {
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id+ "&question=QUESTION_10";
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_10";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -410,7 +420,7 @@ function populateLastProteinSearch(question, id) {
         timeout: getTimeout("list_protein"),
         success: function (data) {
 
-            switch(question) {
+            switch (question) {
                 case 'QUESTION_1':
                     $('#bioenzyme').val(data.query.glytoucan_ac);
                     break;
@@ -446,7 +456,7 @@ function populateLastSearch(question, id) {
     $('#' + question).trigger('click');
 
     // make the ajax call to whichever endpoint
-    switch(question) {
+    switch (question) {
         case 'QUESTION_6':
             // call API for this type
             populateLastGlycanSearch(question, id);

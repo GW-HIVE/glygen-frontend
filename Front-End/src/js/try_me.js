@@ -4,12 +4,14 @@
  * @since Aug 2, 2018
  */
 
+var question = "";
+
 function tryMeAjaxFailure(jqXHR, textStatus, errorThrown) {
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
-    activityTracker("error", id, err + ": " + errorMessage);
+    activityTracker("error", id, question+": "+err + ": " + errorMessage);
     $('#loading_image').fadeOut();
 }
 
@@ -29,6 +31,7 @@ function loadingImg() {
  */
 function tryBioEnzyme() {
     loadingImg();
+    question = "Try me - Q1 - Man5 BioEnzyme";
     var id = "G55220VL";    // Man5 glycan ID
     $.ajax({
         type: 'POST',
@@ -37,12 +40,12 @@ function tryBioEnzyme() {
         success: function (results) {
             if (results.list_id) {
                 window.location = './protein_list.html?id=' + results.list_id;
-                activityTracker("user", id, "Try me - Q1 - Man5 BioEnzyme");
+                activityTracker("user", id, question);
                 $('#loading_image').fadeOut();
             }
             else {
                 displayErrorByCode('no-results-found');
-                activityTracker("error", id, "Try me - Q1 - Man5 BioEnzyme: no result found");
+                activityTracker("error", id, question+": no result found");
                 $('#loading_image').fadeOut();
             }
         }
@@ -55,6 +58,7 @@ function tryBioEnzyme() {
  */
 function tryGlycanSite() {
     loadingImg();
+    question = "Try me - Q2 - bi-antennary fully sialated N-Glycan";
     var id = "G77252PU";
     $.ajax({
         type: 'POST',
@@ -62,13 +66,13 @@ function tryGlycanSite() {
         error: tryMeAjaxFailure,
         success: function (results) {
             if (results.list_id) {
-                activityTracker("user", id, "Try me - Q2 - bi-antennary fully sialated N-Glycan");
+                activityTracker("user", id, question);
                 window.location = './protein_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
             else {
                 displayErrorByCode('no-results-found');
-                activityTracker("error", id, "Try me - Q2 - bi-antennary fully sialated N-Glycan: no result found");
+                activityTracker("error", id, question+": no result found");
                 $('#loading_image').fadeOut();
             }
         }
@@ -80,6 +84,7 @@ function tryGlycanSite() {
  */
 function tryMouseGlycans() {
     loadingImg();
+    question = "Try me - Q3 - glycans in mouse using MGAT1";
     var jsonData = {
         "operation": "AND",
         "query_type": "search_glycan",
@@ -98,14 +103,14 @@ function tryMouseGlycans() {
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
-                activityTracker("error", "", "Try me - Q3 - glycans in mouse using MGAT1: " + results.error_code);
+                activityTracker("error", "", question+": " + results.error_code);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
-                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1: no result found");
+                activityTracker("user", "", question+": no result found");
                 $('#loading_image').fadeOut();
             } else {
-                activityTracker("user", "", "Try me - Q3 - glycans in mouse using MGAT1");
+                activityTracker("user", "", question);
                 window.location = './glycan_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
