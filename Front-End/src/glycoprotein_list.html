@@ -68,8 +68,22 @@
         </div>
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <div class="row" style="margin-bottom: -40px;">
-                    <div class="dropdown gg-download text-right">
+                <form class="form-inline col-sm-10" onsubmit="return false;">
+                    <label>Page</label>
+                    <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
+                    <select class="page-select form-control" onchange="xpage(this);"></select>
+                    <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
+                    <label>Records per page</label>
+                    <select class="limit-select form-control" onchange="xlimit(this);">
+                        <option selected>25</option>
+                        <option>50</option>
+                        <option>75</option>
+                        <option>100</option>
+                    </select>
+                    <label class="searchresult"></label>
+                </form>
+                <div class="row" class="gg-download-btn">
+                    <div class="dropdown gg-download text-right col-sm-2">
                         <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button" id="download"
                             alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="glyphicon glyphicon-save"></i> Download
@@ -97,20 +111,6 @@
                         </div>
                     </div>
                 </div>
-                <form class="form-inline" onsubmit="return false;">
-                    <label>Page</label>
-                    <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
-                    <select class="page-select form-control" onchange="xpage(this);"></select>
-                    <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
-                    <label>Records per page</label>
-                    <select class="limit-select form-control" onchange="xlimit(this);">
-                        <option selected>25</option>
-                        <option>50</option>
-                        <option>75</option>
-                        <option>100</option>
-                    </select>
-                    <label class="searchresult"></label>
-                </form>
             </div>
         </div>
         <!-- sorting_top-end -->
