@@ -359,29 +359,41 @@ $('#simplifiedCategory').on('change', populateExample);
 
 function populateExample() {
     $('#simpleCatSelectedOptionExample').show();
-    var value = $('#simplifiedCategory').val();
+//    var value = $('#simplifiedCategory').val();
     var name = $("#simplifiedCategory option:selected").text();
-    var example = "";
+    var examples = [];
+    var exampleText = "Example";
+    
     switch (name.toLowerCase()) {
         case "disease":
-            example = "Deafness";
+            examples = ["Deafness"];
             break;
         case "glycan":
-            example = "G17689DH";
+            examples = ["G17689DH"];
             break;
         case "organism":
-            example = "Homo sapiens";
+            examples = ["Homo sapiens"];
             break;
         case "pathway":
-            example = "hsa:3082";
+            examples = ["hsa:3082"];
             break;
         case "protein":
-            example = "P14210-1";
+            examples = ["P14210-1"];
+            break;
+        case "any":
+            examples = ["Deafness", "G17689DH", "Homo sapiens", "hsa:3082", "P14210-1"];
+            exampleText += "s";
             break;
     }
-    if (name != "Search by" && name != "Any") {
+    if (name != "Search by") {
+        $('#simpleCatSelectedOptionExample')[0].innerHTML = exampleText + ": ";
+        $.each(examples, function(i, example) {
+            $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample'>" + example + "</a>, ";
+        });
+        //remove last comma and space
+        $('#simpleCatSelectedOptionExample')[0].innerHTML = $('#simpleCatSelectedOptionExample')[0].innerHTML.slice(0, -2);
+
         $('#simplifiedSearch').attr('placeholder', "Enter the " + getPlaceHolder(name));
-        $('#simpleTextExample').text(example);
         clickableExample();
     } else {
         $('#simpleCatSelectedOptionExample').hide();
@@ -398,7 +410,9 @@ function getPlaceHolder(type) {
         case "glycan":
             return "GlyTouCan Accession";
         case "protein":
-            return "UniProtKB Accession";   
+            return "UniProtKB Accession";
+        case "any":
+            return "value";
         default:
             return type;
     }
@@ -408,7 +422,7 @@ function getPlaceHolder(type) {
  * make the example clickable and inserts it into the search input field.
  */
 function clickableExample() {
-    $('#simpleTextExample').click(function () {
+    $('.simpleTextExample').click(function () {
         $('#simplifiedSearch').val($(this).text());
         $('#simplifiedSearch').focus();
         return false;
