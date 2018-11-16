@@ -906,9 +906,10 @@ ____________________________________  */
 }
 
 .dropdown-menu {
-    min-width: 159px !important;
+    min-width: 260px !important;
     margin-right: 1%;
-    padding: 1%;
+    padding: 4%;
+/*    padding-right: 2%;*/
 }
 
 .dropdown-menu-detail {

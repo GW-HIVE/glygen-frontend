@@ -398,7 +398,7 @@ function populateExample() {
     } else {
         $('#simpleCatSelectedOptionExample').hide();
         $('#simpleTextExample').text('');
-        $('#simplifiedSearch').attr('placeholder', "Enter the value");
+        $('#simplifiedSearch').attr('placeholder', "Enter the search term");
     }
 }
 /**
@@ -412,7 +412,7 @@ function getPlaceHolder(type) {
         case "protein":
             return "UniProtKB Accession";
         case "any":
-            return "value";
+            return "search term";
         default:
             return type;
     }
