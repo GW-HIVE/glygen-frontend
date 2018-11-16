@@ -1,8 +1,8 @@
 /* for beta server */
-
 .beta-btn {
-    display: none;
+    display: none !important;
 }
-
-#watermark {
+.watermark {
+    background: url('../images/icons/beta-watermark.png') top center;
+    background-repeat: space;
 }
