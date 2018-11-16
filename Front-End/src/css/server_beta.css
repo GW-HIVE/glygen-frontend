@@ -1,1 +1,8 @@
 /* for beta server */
+
+.beta-btn {
+    display: none;
+}
+
+#watermark {
+}
