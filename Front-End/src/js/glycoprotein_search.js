@@ -357,11 +357,8 @@ function sortDropdownSimple(c, d) {
  */
 $('#simplifiedCategory').on('change', populateExample);
 
-function populateExample(clearSearchTerm = true) {
+function populateExample() {
     $('#simpleCatSelectedOptionExample').show();
-    if (clearSearchTerm) {
-        $('#simplifiedSearch').val('');
-    }
     var value = $('#simplifiedCategory').val();
     var name = $("#simplifiedCategory option:selected").text();
     var example = "";
@@ -383,13 +380,27 @@ function populateExample(clearSearchTerm = true) {
             break;
     }
     if (name != "Search by" && name != "Any") {
-        $('#simplifiedSearch').attr('placeholder', "Enter the " + name);
+        $('#simplifiedSearch').attr('placeholder', "Enter the " + getPlaceHolder(name));
         $('#simpleTextExample').text(example);
         clickableExample();
     } else {
         $('#simpleCatSelectedOptionExample').hide();
         $('#simpleTextExample').text('');
         $('#simplifiedSearch').attr('placeholder', "Enter the value");
+    }
+}
+/**
+ * Adds a different placeholder text in simple search 
+ * @param {string} type [Changes a different placeholer text]
+ */
+function getPlaceHolder(type) {
+    switch(type.toLowerCase()) {
+        case "glycan":
+            return "GlyTouCan Accession";
+        case "protein":
+            return "UniProtKB Accession";   
+        default:
+            return type;
     }
 }
 
@@ -504,7 +515,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_1"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
-                populateExample(false);
+                populateExample();
             } else {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }

@@ -17,7 +17,7 @@ function faqMain() {
 		// and also avoids too much space between the footer and the last content box.
 		if ($(window).width() > MqM){
 			var marginBottom = $(window).height() - $('#search_disease').height() - 80;
-			// var marginBottomDetail = $(window).height() - $('#basics10').height() - 80;
+			// var marginBottomDetail = $(window).height() - $('#publications').height() - 80;
 			// var marginBottom = marginBottomQs ? marginBottomQs : marginBottomDetail;
 			marginBottom = (marginBottom < 0)?0:marginBottom;
 			$('.container').css({

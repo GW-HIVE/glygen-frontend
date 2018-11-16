@@ -278,7 +278,8 @@ function getTimeout(ajaxWebService) {
  */
 function searchInitFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
-    activityTracker("error", "", err + ": " + errorThrown + ": search_init WS error");
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || errorThrown;
+    activityTracker("error", "", err + ": " + errorMessage + ": search_init WS error");
     $('#loading_image').fadeOut();
 }
 
@@ -289,9 +290,11 @@ function searchInitFailure(jqXHR, textStatus, errorThrown) {
  * @param {*} errorThrown
  */
 function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
+    // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", "", err + ": " + errorThrown);
+    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", null, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
 }
 
