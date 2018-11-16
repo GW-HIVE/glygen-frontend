@@ -10,6 +10,8 @@
  * Object to hold highlight data in state
  */
 var highlight = {};
+var SEQUENCE_ROW_RUN_LENGTH = 10;
+var SEQUENCE_SPACES_BETWEEN_RUNS = 2;
 
 /**
  * get glycosylation data
@@ -88,11 +90,10 @@ function buildHighlightData(sequence, highlightData) {
             var position = x + 1;
             result.push({
                 character: sequence[x],
-                // true = highlight,
                 n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
                 o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
                 mutation: isHighlighted(position, highlightData.mutation)
-            })
+            });
         }
         return result;
     }
@@ -177,8 +178,25 @@ function createHighlightRow(start, rowData) {
  */
 function createHighlightUi(highlightData, perLine) {
     var $ui = $('<div class="highlight-display"></div>');
+    var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 +10         +20         +30         +40         +50</pre>";
+    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                  |           |           |           |           |</pre>";
+    $ui.append(seqTopIndex);
+    $ui.append(seqTopIndexLines);
     for (var x = 0; x < highlightData.length; x += perLine) {
-        var rowData = highlightData.slice(x, x + perLine - 1);
+        var rowDataTemp = adjustSequenceRuns(highlightData.slice(x, x + perLine));
+        var rowData = [];
+        for (var i = 0; i < rowDataTemp.length; i++) {
+            for(var s = 0; s < SEQUENCE_SPACES_BETWEEN_RUNS; s++) {
+                rowDataTemp[i].push({
+                    character: '&nbsp;',
+                    n_link_glycosylation: false,
+                    o_link_glycosylation: false,
+                    mutation: false
+                });
+            }            
+            $.merge(rowData, rowDataTemp[i]);
+        }
+
         var $row = createHighlightRow(x, rowData);
         $ui.append($row);
     }
@@ -210,13 +228,29 @@ function scrollToPanel(hash) {
 function formatSequence(sequenceString) {
     var perLine = 60;
     var output = '';
+    var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 +10         +20         +30         +40         +50</pre>";
+    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                  |           |           |           |           |</pre>";
+    output += seqTopIndex;
+    output += seqTopIndexLines;
 
     for (var x = 0; x < sequenceString.length; x += perLine) {
-        var y = sequenceString.substr(x, perLine);
-        // output += ("     " + (x+1)).slice(-5) + ' ' + y + '\n';
+        var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(' '.repeat(SEQUENCE_SPACES_BETWEEN_RUNS));
         output += '<span class="non-selection">' + ("     " + (x + 1)).slice(-5) + ' </span>' + y + '\n'
     }
     return output;
+}
+
+/**
+ * Adjusts a sequence array by splitting it into multiple arrays of max length defined by the constant SEQUENCE_ROW_RUN_LENGTH
+ * @author Sanath Bhat
+ * @since Nov 15, 2018.
+ */
+function adjustSequenceRuns(sequence) {
+    var y_arr = [];
+    for (var i = 0; i<sequence.length; i += SEQUENCE_ROW_RUN_LENGTH) {
+        y_arr.push(sequence.slice(i, i + SEQUENCE_ROW_RUN_LENGTH));
+    }
+    return y_arr;
 }
 
 /**
