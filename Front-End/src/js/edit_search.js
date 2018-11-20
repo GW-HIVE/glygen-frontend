@@ -29,9 +29,9 @@ function setFormValues(data) {
         configureDropDownLists(types, subtypes, function () {
             $("#ddl2").val(data.query.glycan_subtype);
         });
-        $("#enzyme").val(data.query.enzyme.id);
-        $("#protein").val(data.query.uniprot_canonical_ac);
-        $("#motif").val(data.query.glycan_motif);
+        $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
+        $("#protein").val(data.query.uniprot_canonical_ac || "");
+        $("#motif").val(data.query.glycan_motif || "");
     }
 }
 
