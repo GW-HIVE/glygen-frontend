@@ -32,13 +32,13 @@ function displayHomeInitData(jsonResponse) {
        var componentDate = component.release_date;
         switch (componentName) {
             case "api": 
-                $("#apiVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                $("#apiVersion").text(componentVersion + " " + "("+ getDateMMDDYYYY(componentDate) +")");
                 break;
             case "data": 
-                $("#dataVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                $("#dataVersion").text(componentVersion + " " + "("+ getDateMMDDYYYY(componentDate) +")");
                 break;
             case "software": 
-                $("#softwareVersion").text(componentVersion + " " + "("+(moment(componentDate).format('MM/DD/YYYY'))+")");
+                $("#softwareVersion").text(componentVersion + " " + "("+ getDateMMDDYYYY(componentDate) +")");
                 break;            
         }
     })
