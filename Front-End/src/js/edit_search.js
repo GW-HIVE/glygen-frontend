@@ -21,8 +21,8 @@ function setFormValues(data) {
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
 
-        $("#species").val(data.query.organism.id);
-        $("#ddl").val(data.query.glycan_type);
+        $("#species").val(data.query.organism? data.query.organism.id : "");
+        $("#ddl").val(data.query.glycan_type || "");
         var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
         // create subtypes
