@@ -319,9 +319,12 @@
                         <h4>Sequence</h4>
                     </div>
                     <div class="panel-body">
+                        
                         {{#sequence}}
-                        <div class="sequence-panel" id="sequnce_highlight">
-                            <ul>
+                        
+                        <div class="col-sm-9 sequence-panel" id="sequnce_highlight"></div>
+                        <div class="col-sm-3">
+                            <ul class="highlight-panel-categories"
                                 <li>
                                     <input type="checkbox" name="checkbox" id="seq_n_link" onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span class="sequnce1">N-linked Glycosylation</span>
                                 </li>
@@ -332,6 +335,7 @@
                                     <input type="checkbox" name="checkbox" onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>
                                 </li>
                             </ul>
+                            
                         </div>
                         {{/sequence}}
                         {{^sequence}} No data available. {{/sequence}}
