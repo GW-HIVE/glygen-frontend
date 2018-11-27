@@ -123,7 +123,6 @@ function buildRowText(rowData) {
 function buildRowHighlight(rowData, type) {
     var highlight = [];
     for (var x = 0; x < rowData.length; x++) {
-        // console.log(x, type, rowData[x][type]);
         if (rowData[x][type]) {
             highlight.push('<span class="highlight-highlight-area">&nbsp;</span>');
         } else {
@@ -297,7 +296,6 @@ function ajaxSuccess(data) {
             }
         }
 
-        // define variable to for itemscrossref
         var itemscrossRef = [];
         //check data.
         if (data.crossref) {
@@ -329,7 +327,7 @@ function ajaxSuccess(data) {
 
             data.itemscrossRef = itemscrossRef;
         }
-        // //pathway
+
         var itemsPathway = [];
         if (data.pathway) {
             for (var i = 0; i < data.pathway.length; i++) {
@@ -392,16 +390,12 @@ function ajaxSuccess(data) {
             }
         }
 
-        // data.sequence = undefined;
-        //mustach rending
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
 
-        // getting array
         var itemsMutate = [];
         var itemsExpressionTissue = [];
         var itemsExpressionDisease = [];
-        // filling in glycosylation data
 
         // filling in expression_disease
         if (data.expression_disease) {
@@ -432,11 +426,6 @@ function ajaxSuccess(data) {
             }
         }
 
-// log it to see what would get sent to mustache
-        console.log(data);
-
-// Mustache.render(template, data);hgbgghvythvhgtfkgyhjhsgghg
-
         // filling in mutation data
         if (data.mutation) {
             // Get data for sequence highlight
@@ -458,7 +447,6 @@ function ajaxSuccess(data) {
         }
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
-        console.log(sequenceData);
 
         $container.html(html);
         if (window.innerWidth <= 500) {
@@ -480,7 +468,6 @@ function ajaxSuccess(data) {
             });
         });
 
-        // $container.find('#isoform').click();
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -713,7 +700,7 @@ function ajaxSuccess(data) {
 }
 
 /**
- * @param {data} the callback function to GWU service if fails
+ * @param {data} the callback function to logging service on failure
  * Returns the GWU services fails.
  */
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
