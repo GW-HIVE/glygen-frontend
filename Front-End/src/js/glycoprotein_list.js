@@ -157,22 +157,6 @@ function LoadDataList() {
     $.ajax(ajaxConfig);
 }
 
-/**
- * getParameterByName function to EXtract query parametes from url
- * @param {string} name - The name of the variable variable to extract from query string
- * @param {string} url- The complete url with query string values
- * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
- */
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
 var id = getParameterByName('id');
 LoadDataList(id);
 

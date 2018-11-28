@@ -519,10 +519,11 @@ function LoadDataList(id) {
  * @param {Object} data.query - the dataset for query
  */
 function ajaxListSuccess(data) {
+    id = getParameterByName("id")
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("error", id, "error code: " + data.code);
     } else {
         if (data.query) {
             if (data.query.query_type === "protein_search_simple") {
@@ -534,7 +535,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("user", id, "search modification initiated");
     }
 }
 
