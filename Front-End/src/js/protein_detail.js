@@ -11,7 +11,7 @@
  */
 var highlight = {};
 var SEQUENCE_ROW_RUN_LENGTH = 10;
-var SEQUENCE_SPACES_BETWEEN_RUNS = 2;
+var SEQUENCE_SPACES_BETWEEN_RUNS = 1;
 
 /**
  * get glycosylation data
