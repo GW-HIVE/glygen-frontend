@@ -21,17 +21,17 @@ function setFormValues(data) {
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
 
-        $("#species").val(data.query.organism.id);
-        $("#ddl").val(data.query.glycan_type);
+        $("#species").val(data.query.organism? data.query.organism.id : "");
+        $("#ddl").val(data.query.glycan_type || "");
         var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
         // create subtypes
         configureDropDownLists(types, subtypes, function () {
             $("#ddl2").val(data.query.glycan_subtype);
         });
-        $("#enzyme").val(data.query.enzyme.id);
-        $("#protein").val(data.query.uniprot_canonical_ac);
-        $("#motif").val(data.query.glycan_motif);
+        $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
+        $("#protein").val(data.query.uniprot_canonical_ac || "");
+        $("#motif").val(data.query.glycan_motif || "");
     }
 }
 

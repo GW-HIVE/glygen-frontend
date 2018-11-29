@@ -374,3 +374,12 @@ function downloadFromServer(id, format, compressed, type) {
 $(document).on('click', '.gg-download', function (e) {
     e.stopPropagation();
 });
+
+/**
+ * 
+ * @param {String} date Date string returned by backend (format: YYYY-MM-DD hh:mm:ss Z offset)
+ * returns date string in MM/DD/YYYY format
+ */
+function getDateMMDDYYYY(date) {
+    return date.slice(5, 7) + '/' + date.slice(8, 10) + '/' + date.slice(0, 4);
+}
