@@ -179,7 +179,7 @@ function createHighlightRow(start, rowData) {
 function createHighlightUi(highlightData, perLine) {
     var $ui = $('<div class="highlight-display"></div>');
     var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 +10         +20         +30         +40         +50</pre>";
-    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                  |           |           |           |           |</pre>";
+    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 |           |          |           |          |</pre>";
     $ui.append(seqTopIndex);
     $ui.append(seqTopIndexLines);
     for (var x = 0; x < highlightData.length; x += perLine) {
@@ -229,7 +229,7 @@ function formatSequence(sequenceString) {
     var perLine = 60;
     var output = '';
     var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 +10         +20         +30         +40         +50</pre>";
-    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                  |           |           |           |           |</pre>";
+    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px'>                 |          |          |          |          |</pre>";
     output += seqTopIndex;
     output += seqTopIndexLines;
 
@@ -485,7 +485,7 @@ function ajaxSuccess(data) {
         $('#glycosylation-table').bootstrapTable({
             columns: [{
                 field: 'glytoucan_ac',
-                title: 'GlyTouCan Accession',
+                title: 'GlyTouCan <br/> Accession',
                 sortable: true,
                 formatter: function (value, row, index, field) {
                     return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
