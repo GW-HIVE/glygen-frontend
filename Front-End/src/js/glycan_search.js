@@ -589,10 +589,11 @@ function LoadDataList(id) {
  */
 
 function ajaxListSuccess(data) {
+    id = getParameterByName("id")
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", null, "error code: " + data.code);
+        activityTracker("error", id, "error code: " + data.code);
     } else {
         if (data.query) {
             if (data.query.query_type === "glycan_search_simple") {
@@ -604,7 +605,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", null, "successful response");
+        activityTracker("user", id, "Search modification initiated");
     }
 }
 

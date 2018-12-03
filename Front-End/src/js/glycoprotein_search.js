@@ -535,7 +535,7 @@ function ajaxListSuccess(data) {
                 $('.nav-tabs a[href="#tab_default_2"]').tab('show');
             }
         }
-        activityTracker("user", id, "search modification initiated");
+        activityTracker("user", id, "Search modification initiated");
     }
 }
 
