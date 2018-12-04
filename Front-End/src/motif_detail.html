@@ -94,7 +94,7 @@
         <!-- main content for page -->
         <div class="cd-faq-items" id="content">
             <!-- <div id="content" class="container" "> -->
-            <h2>Motif Details</h2>
+           
             <script id="item_template" type="text/template">
                 <!-- Glycan ID starts here for page -->
                 <center><h2 class="page-heading" style="margin-top: -5px;">Motif Details for <span> 
@@ -159,48 +159,70 @@
                     </div>
                 </ul>
                 
-                <!-- Glycans -->
+                <!-- Glycans Containing this Motif-->
+                    <!-- Top pagination and download btn-->
+                <div class="row" id="paginationctrl1">
+                    <div class="col-md-12 col-xs-12">
+                        <form class="form-inline" onsubmit="return false;">
+                            <label>Page</label>
+                            <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
+                            <select class="page-select form-control" onchange="xpage(this);"></select>
+                            <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
+                            <label>Records per page</label>
+                            <select class="limit-select form-control" onchange="xlimit(this);">
+                                <option selected>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>70</option>
+                            </select>
+                            <label class="searchresult"></label>
+                        </form>
+                    </div>
+                </div>
+                    <!-- List table-->
                 <ul id="glycans" class="cd-faq-group">
                     <li class="cd-faq-title"/>
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Glycans Containing This Motif</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                glycan table goes here
+                        <div class="panel panel-default">
+                            <div class="gg-panel-heading">
+                                <h4>Glycans Containing This Motif</h4>
                             </div>
-                            {{^species}} No data available. {{/species}}
-                        </div>
-                    </div>
-                    </div>
-                </ul>
-                
-                <!-- Motif -->
-                <ul id="motif" class="cd-faq-group">
-                    <li class="cd-faq-title"/>
-                    <!-- Glycan MOTIF starts here for page -->
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Motif</h4>
-                        </div>
-                        <div class="panel-body">
-                            {{#hasMotifs}} {{#motifs}}
-                            <div class="col-md-6 col-xs-6">
-                                <div class='img-wrapper2'>
-                                    <img class='img-cartoon2' src="{{imagePath}}" alt='Cartoon' width='90%'/>
-                                    <Br/>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <!-- table start here -->
+                                    <table id="gen-table" data-show-export="true" data-toggle="table" data-sort-name="glytoucan_ac" data-sort-order="asc" data-page-size="10">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">GlyTouCan <br>Accession</th>
+                                                
+                                                <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Image of <br>Glycan Structure</th>
+                                            </tr>
+                                        </thead>
+                                    </table><!-- table container ends here -->
                                 </div>
-                                <span id="glycanname">
-                                    <a class="panelcontent" href="https://glytoucan.org/Structures/Glycans/{{id}}"
-                                       target="_blank">{{id}}-{{name}} </a>
-                                    <!--<a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>-->
-                                </span>
+                                {{^species}} No data available. {{/species}}
                             </div>
-                            {{/motifs}} {{/hasMotifs}} {{^hasMotifs}} No data available. {{/hasMotifs}}
                         </div>
                     </div>
                 </ul>
+                    <!-- Bottom pagination and download btn-->
+                <div class="row" style="padding-left: 1%;">
+                    <div class="col-md-12 col-xs-12" id="sortbottom">
+                        <form class="form-inline" onsubmit="return false;">
+                            <label>Page</label>
+                            <button type="button previ" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
+                            <select class="page-select form-control" onchange="xpage(this);"></select>
+                            <button type="button next" class="btn btn-primary nextbutton" onclick="next();">Next</button>
+                            <label>Records per page</label>
+                            <select class="limit-select form-control" onchange="xlimit(this);">
+                                <option selected>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                                <option>70</option>
+                            </select>
+                            <label class="searchresult"></label>
+                        </form>
+                    </div>
+                </div>
                 
                 <!--Publications-->
                 <ul id="publications" class="cd-faq-group selected">
@@ -221,6 +243,7 @@
                 </ul>
                 <a href="#0" class="cd-close-panel">Close</a>
             </script>
+          
         </div>
     </section>
     <div w3-include-html="footer.html"></div>
@@ -247,18 +270,17 @@
     <script src="js/activity_tracker.js"></script>
     <!-- script for error handling alerts -->
     <script type="text/javascript" src="libraries/alertify.js"></script>
-
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <!-- downloading files js -->
+    <script src="libraries/download.js"></script>
+    
     <script type="text/javascript">
         $(document).ajaxStop(function () {
             // calls the sidebar function only when all ajax calls are completed
             faqMain();
         });
     </script>
-
-    <!-- script for error-message/header-footer js -->
-    <script src="js/utility.js"></script>
-    <!-- downloading files js -->
-    <script src="libraries/download.js"></script>
 </body>
 
 </html>
