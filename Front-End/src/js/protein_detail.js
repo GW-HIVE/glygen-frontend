@@ -780,3 +780,26 @@ function downloadPrompt() {
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(uniprot_canonical_ac, format, IsCompressed, page_type);
 }
+
+
+// *********** Please do not change this as it may break the hash scroll code ***********
+$(document).ajaxStop(function () {
+    // calls the sidebar function only when all ajax calls are completed
+    faqMain();
+    function scrollToPanel(hash) {
+        //to scroll to the particular sub section.
+        $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+        if ($(window).width() < 768) { //mobile view
+            $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+            $('.cd-close-panel').addClass('move-left');
+            $('body').addClass('cd-overlay');
+        } else {
+            $('body,html').animate({
+                'scrollTop': $(hash).offset().top - 19
+            }, 200);
+        }
+    }
+    if (window.location.hash) {
+        scrollToPanel(window.location.hash);
+    }
+});
