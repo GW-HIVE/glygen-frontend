@@ -46,12 +46,13 @@ $("#bioenzyme").autocomplete({
     }
 });
 
-function bioEnzyme(){
+function bioEnzyme() {
     var id = $("#bioenzyme").val();
     $.ajax({
         type: 'POST',
-         url: getWsUrl("search_bioenzyme",id),
-        success: function(results) {
+        url: getWsUrl("search_bioenzyme", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&amp;question=QUESTION_1";
             }
@@ -79,12 +80,13 @@ $("#glycansite").autocomplete({
     }
 });
 
-function glycanSite(){
+function glycanSite() {
     var id = $("#glycansite").val();
     $.ajax({
         type: 'POST',
-        url: getWsUrl("search_glycansite",id),
-        success: function(results) {
+        url: getWsUrl("search_glycansite", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&amp;question=QUESTION_2";
             }
@@ -112,12 +114,13 @@ $("#glycangene").autocomplete({
     }
 });
 
-function glycanGene(){
+function glycanGene() {
     var id = $("#glycangene").val();
     $.ajax({
         type: 'POST',
-        url: getWsUrl("search_glycangene",id),
-        success: function(results) {
+        url: getWsUrl("search_glycangene", id),
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
                 window.location = './locus_list.html?id=' + results.list_id + "&amp;question=QUESTION_3";
             }
@@ -145,14 +148,15 @@ $("#proteinorthologues").autocomplete({
     }
 });
 
-function proteinOrthologues(){
+function proteinOrthologues() {
     var id = $("#proteinorthologues").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_proteinorthologues",id),
+        url: getWsUrl("search_proteinorthologues", id),
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.list_id) {
-                window.location = './protein_orthologus.html?id=' + results.list_id+ "&amp;question=QUESTION_4";
+                window.location = './protein_orthologus.html?id=' + results.list_id + "&amp;question=QUESTION_4";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -178,17 +182,18 @@ $("#proteinfunction").autocomplete({
     }
 });
 
-function proteinFunction(){
-   var id = $("#proteinfunction").val();
-   $.ajax({
+function proteinFunction() {
+    var id = $("#proteinfunction").val();
+    $.ajax({
         type: 'post',
-        url: getWsUrl("protein_detail",id),
+        url: getWsUrl("protein_detail", id),
+        error: ajaxSearchFailure,
         success: function (results) {
             if (results.error_code) {
-         displayErrorByCode("Invalid ID");
+                displayErrorByCode("Invalid ID");
             }
             else {
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#basics7';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#function';
             }
         }
     })
@@ -211,11 +216,12 @@ $("#glycanenzyme").autocomplete({
     }
 });
 
-function glycanEnzyme(){
+function glycanEnzyme() {
     var id = $("#glycanenzyme").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycanenzyme",id),
+        url: getWsUrl("search_glycanenzyme", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -249,11 +255,12 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycosylTransferases(){
+function glycosylTransferases() {
     var id = $("#organism1").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycosyltransferases",id),
+        url: getWsUrl("search_glycosyltransferases", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -287,11 +294,12 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycoHydrolases(){
+function glycoHydrolases() {
     var id = $("#organism2").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycohydrolases",id),
+        url: getWsUrl("search_glycohydrolases", id),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -316,8 +324,8 @@ $(document).ready(function () {
         var orgElement = $("#organism3").get(0);
         createOption(orgElement, result.organism[0].name, result.organism[0].id);
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
-        var question =  getParameterByName('question');
-        var id =  getParameterByName('id');
+        var question = getParameterByName('question');
+        var id = getParameterByName('id');
         populateLastSearch(question, id);
     });
 });
@@ -329,12 +337,13 @@ function createOption(ddl, text, value) {
     ddl.options.add(opt);
 }
 
-function glycoProteins(){
+function glycoProteins() {
     var id = $("#organism3").val();
     var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins" ,id,id1),
+        url: getWsUrl("search_glycoproteins", id, id1),
+        error: ajaxSearchFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -364,7 +373,7 @@ $("#glycosyltransferasesdisease").autocomplete({
     }
 });
 
-function glycosyTtransferasesDisease(){
+function glycosyTtransferasesDisease() {
     // displays the loading gif when the ajax call starts
     $('#loading_image').fadeIn();
     var disease = $("#glycosyltransferasesdisease").val();
@@ -377,9 +386,10 @@ function glycosyTtransferasesDisease(){
         type: 'POST',
         url: getWsUrl("search_disease"),
         data: json,
-        success: function(results) {
+        error: ajaxSearchFailure,
+        success: function (results) {
             if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id+ "&amp;question=QUESTION_10";
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&amp;question=QUESTION_10";
             }
             else {
                 displayErrorByCode('no-results-found');
@@ -438,7 +448,7 @@ function populateLastProteinSearch(question, id) {
         timeout: getTimeout("list_protein"),
         success: function (data) {
 
-            switch(question) {
+            switch (question) {
                 case 'QUESTION_1':
                     $('#bioenzyme').val(data.query.glytoucan_ac);
                     break;
@@ -474,7 +484,7 @@ function populateLastSearch(question, id) {
     $('#' + question).trigger('click');
 
     // make the ajax call to whichever endpoint
-    switch(question) {
+    switch (question) {
         case 'QUESTION_6':
             // call API for this type
             populateLastGlycanSearch(question, id);
@@ -501,13 +511,13 @@ function populateLastSearch(question, id) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="searchGlycanSimple.html">searchGlycanSimple</a></li><li><a href="searchProteinSimple.html">searchProteinSimple</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$tagsInputBioenzyme">$tagsInputBioenzyme</a></li><li><a href="global.html#$tagsInputEnzyme">$tagsInputEnzyme</a></li><li><a href="global.html#$tagsInputFunction">$tagsInputFunction</a></li><li><a href="global.html#$tagsInputGeneName">$tagsInputGeneName</a></li><li><a href="global.html#$tagsInputGlycanenzyme">$tagsInputGlycanenzyme</a></li><li><a href="global.html#$tagsInputGlycangene">$tagsInputGlycangene</a></li><li><a href="global.html#$tagsInputGlycansite">$tagsInputGlycansite</a></li><li><a href="global.html#$tagsInputGlycosyltransferasesd">$tagsInputGlycosyltransferasesd</a></li><li><a href="global.html#$tagsInputMotif">$tagsInputMotif</a></li><li><a href="global.html#$tagsInputOrthologues">$tagsInputOrthologues</a></li><li><a href="global.html#$tagsInputPathwayID">$tagsInputPathwayID</a></li><li><a href="global.html#$tagsInputProtein">$tagsInputProtein</a></li><li><a href="global.html#$tagsInputProteinName">$tagsInputProteinName</a></li><li><a href="global.html#$tagsInputRefseq">$tagsInputRefseq</a></li><li><a href="global.html#$tagsInputSequences">$tagsInputSequences</a></li><li><a href="global.html#%255B%255BeditSearch%255D%255Dreturnstosearchpagewithprefieldfields">[[editSearch]] returns to search page with prefield fields</a></li><li><a href="global.html#activityTracker">activityTracker</a></li><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListFailure">ajaxListFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#aminoLetter">aminoLetter</a></li><li><a href="global.html#buildHighlightData">buildHighlightData</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildRowHighlight">buildRowHighlight</a></li><li><a href="global.html#buildRowText">buildRowText</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#checkUncheck">checkUncheck</a></li><li><a href="global.html#clearLocalStore">clearLocalStore</a></li><li><a href="global.html#clickableExample">clickableExample</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#createHighlightRow">createHighlightRow</a></li><li><a href="global.html#createHighlightUi">createHighlightUi</a></li><li><a href="global.html#createOption">createOption</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayBannerMsg">displayBannerMsg</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#displayHomeInitData">displayHomeInitData</a></li><li><a href="global.html#doNotLog">doNotLog</a></li><li><a href="global.html#downloadFromServer">downloadFromServer</a></li><li><a href="global.html#downloadPrompt">downloadPrompt</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#formatSequence">formatSequence</a></li><li><a href="global.html#getGlycosylationHighlightData">getGlycosylationHighlightData</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getMutationHighlightData">getMutationHighlightData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#getUrlVars">getUrlVars</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#isHighlighted">isHighlighted</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadGlycoProteinSearchvalues">LoadGlycoProteinSearchvalues</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#localizeLabels">localizeLabels</a></li><li><a href="global.html#logID">logID</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#MESSAGES">MESSAGES</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#resetAdvanced">resetAdvanced</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchJson">searchJson</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#searchjsonSimple">searchjsonSimple</a></li><li><a href="global.html#searchjsonSimpleP">searchjsonSimpleP</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setGlycoProteinFormValues">setGlycoProteinFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#sortDropdown">sortDropdown</a></li><li><a href="global.html#sortDropdownSimple">sortDropdownSimple</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tracking">tracking</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMeAjaxFailure">tryMeAjaxFailure</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#validateDiseaseName">validateDiseaseName</a></li><li><a href="global.html#validateEnzymeAcc">validateEnzymeAcc</a></li><li><a href="global.html#validateGeneName">validateGeneName</a></li><li><a href="global.html#validateGlycanAcc">validateGlycanAcc</a></li><li><a href="global.html#validateGlycanAcc1">validateGlycanAcc1</a></li><li><a href="global.html#validateGlycanAcc2">validateGlycanAcc2</a></li><li><a href="global.html#validateMotifName">validateMotifName</a></li><li><a href="global.html#validatePathwayID">validatePathwayID</a></li><li><a href="global.html#validatePathwayName">validatePathwayName</a></li><li><a href="global.html#validateProteinAcc">validateProteinAcc</a></li><li><a href="global.html#validateProteinAcc1">validateProteinAcc1</a></li><li><a href="global.html#validateProteinAcc2">validateProteinAcc2</a></li><li><a href="global.html#validateProteinID">validateProteinID</a></li><li><a href="global.html#validateProteinName">validateProteinName</a></li><li><a href="global.html#validateRefAcc">validateRefAcc</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="searchGlycanSimple.html">searchGlycanSimple</a></li><li><a href="searchProteinSimple.html">searchProteinSimple</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$tagsInputBioenzyme">$tagsInputBioenzyme</a></li><li><a href="global.html#$tagsInputEnzyme">$tagsInputEnzyme</a></li><li><a href="global.html#$tagsInputFunction">$tagsInputFunction</a></li><li><a href="global.html#$tagsInputGeneName">$tagsInputGeneName</a></li><li><a href="global.html#$tagsInputGlycanenzyme">$tagsInputGlycanenzyme</a></li><li><a href="global.html#$tagsInputGlycangene">$tagsInputGlycangene</a></li><li><a href="global.html#$tagsInputGlycansite">$tagsInputGlycansite</a></li><li><a href="global.html#$tagsInputGlycosyltransferasesd">$tagsInputGlycosyltransferasesd</a></li><li><a href="global.html#$tagsInputMotif">$tagsInputMotif</a></li><li><a href="global.html#$tagsInputOrthologues">$tagsInputOrthologues</a></li><li><a href="global.html#$tagsInputPathwayID">$tagsInputPathwayID</a></li><li><a href="global.html#$tagsInputProtein">$tagsInputProtein</a></li><li><a href="global.html#$tagsInputProteinName">$tagsInputProteinName</a></li><li><a href="global.html#$tagsInputRefseq">$tagsInputRefseq</a></li><li><a href="global.html#$tagsInputSequences">$tagsInputSequences</a></li><li><a href="global.html#%255B%255BeditSearch%255D%255Dreturnstosearchpagewithprefieldfields">[[editSearch]] returns to search page with prefield fields</a></li><li><a href="global.html#activityTracker">activityTracker</a></li><li><a href="global.html#addCommas">addCommas</a></li><li><a href="global.html#adjustSequenceRuns">adjustSequenceRuns</a></li><li><a href="global.html#ajaxFailure">ajaxFailure</a></li><li><a href="global.html#ajaxListFailure">ajaxListFailure</a></li><li><a href="global.html#ajaxListSuccess">ajaxListSuccess</a></li><li><a href="global.html#ajaxProteinSearchSuccess">ajaxProteinSearchSuccess</a></li><li><a href="global.html#ajaxSearchFailure">ajaxSearchFailure</a></li><li><a href="global.html#ajaxSuccess">ajaxSuccess</a></li><li><a href="global.html#aminoLetter">aminoLetter</a></li><li><a href="global.html#buildHighlightData">buildHighlightData</a></li><li><a href="global.html#buildPages">buildPages</a></li><li><a href="global.html#buildRowHighlight">buildRowHighlight</a></li><li><a href="global.html#buildRowText">buildRowText</a></li><li><a href="global.html#buildSummary">buildSummary</a></li><li><a href="global.html#checkUncheck">checkUncheck</a></li><li><a href="global.html#clearLocalStore">clearLocalStore</a></li><li><a href="global.html#clickableExample">clickableExample</a></li><li><a href="global.html#configureDropDownLists">configureDropDownLists</a></li><li><a href="global.html#createHighlightRow">createHighlightRow</a></li><li><a href="global.html#createHighlightUi">createHighlightUi</a></li><li><a href="global.html#createOption">createOption</a></li><li><a href="global.html#decideAjaxError">decideAjaxError</a></li><li><a href="global.html#detailFormat">detailFormat</a></li><li><a href="global.html#displayBannerMsg">displayBannerMsg</a></li><li><a href="global.html#displayError">displayError</a></li><li><a href="global.html#displayHomeInitData">displayHomeInitData</a></li><li><a href="global.html#doNotLog">doNotLog</a></li><li><a href="global.html#downloadFromServer">downloadFromServer</a></li><li><a href="global.html#downloadPrompt">downloadPrompt</a></li><li><a href="global.html#editSearch">editSearch</a></li><li><a href="global.html#failToRetreiveSearch">failToRetreiveSearch</a></li><li><a href="global.html#formatSequence">formatSequence</a></li><li><a href="global.html#getDateMMDDYYYY">getDateMMDDYYYY</a></li><li><a href="global.html#getGlycosylationHighlightData">getGlycosylationHighlightData</a></li><li><a href="global.html#getListPostData">getListPostData</a></li><li><a href="global.html#getMutationHighlightData">getMutationHighlightData</a></li><li><a href="global.html#getParameterByName">getParameterByName</a></li><li><a href="global.html#getPlaceHolder">getPlaceHolder</a></li><li><a href="global.html#getTimeout">getTimeout</a></li><li><a href="global.html#getUrlVars">getUrlVars</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#imageFormat">imageFormat</a></li><li><a href="global.html#isHighlighted">isHighlighted</a></li><li><a href="global.html#lastSearch">lastSearch</a></li><li><a href="global.html#LoadData">LoadData</a></li><li><a href="global.html#LoadDataList">LoadDataList</a></li><li><a href="global.html#LoadGlycoProteinSearchvalues">LoadGlycoProteinSearchvalues</a></li><li><a href="global.html#loadingImg">loadingImg</a></li><li><a href="global.html#LoadProteinSearchvalues">LoadProteinSearchvalues</a></li><li><a href="global.html#LoadSearchvalues">LoadSearchvalues</a></li><li><a href="global.html#localizeLabels">localizeLabels</a></li><li><a href="global.html#logID">logID</a></li><li><a href="global.html#MassFormatter">MassFormatter</a></li><li><a href="global.html#massFormatter">massFormatter</a></li><li><a href="global.html#MESSAGES">MESSAGES</a></li><li><a href="global.html#next">next</a></li><li><a href="global.html#noOfPage">noOfPage</a></li><li><a href="global.html#pageFormat">pageFormat</a></li><li><a href="global.html#PageFormat">PageFormat</a></li><li><a href="global.html#prev">prev</a></li><li><a href="global.html#question">question</a></li><li><a href="global.html#resetAdvanced">resetAdvanced</a></li><li><a href="global.html#scrollToPanel">scrollToPanel</a></li><li><a href="global.html#searchInitFailure">searchInitFailure</a></li><li><a href="global.html#searchInitValues">searchInitValues</a></li><li><a href="global.html#searchjson">searchjson</a></li><li><a href="global.html#searchJson">searchJson</a></li><li><a href="global.html#searchjsonSimple">searchjsonSimple</a></li><li><a href="global.html#searchjsonSimpleP">searchjsonSimpleP</a></li><li><a href="global.html#setFormValues">setFormValues</a></li><li><a href="global.html#setGlycoProteinFormValues">setGlycoProteinFormValues</a></li><li><a href="global.html#setNavItemAsCurrent">setNavItemAsCurrent</a></li><li><a href="global.html#setProteinFormValues">setProteinFormValues</a></li><li><a href="global.html#sortDropdown">sortDropdown</a></li><li><a href="global.html#sortDropdownSimple">sortDropdownSimple</a></li><li><a href="global.html#submitvalues">submitvalues</a></li><li><a href="global.html#switchHandler">switchHandler</a></li><li><a href="global.html#totalNoSearch">totalNoSearch</a></li><li><a href="global.html#tracking">tracking</a></li><li><a href="global.html#tryBioEnzyme">tryBioEnzyme</a></li><li><a href="global.html#tryGlycanSite">tryGlycanSite</a></li><li><a href="global.html#tryMouseGlycans">tryMouseGlycans</a></li><li><a href="global.html#validateDiseaseName">validateDiseaseName</a></li><li><a href="global.html#validateEnzymeAcc">validateEnzymeAcc</a></li><li><a href="global.html#validateGeneName">validateGeneName</a></li><li><a href="global.html#validateGlycanAcc">validateGlycanAcc</a></li><li><a href="global.html#validateGlycanAcc1">validateGlycanAcc1</a></li><li><a href="global.html#validateGlycanAcc2">validateGlycanAcc2</a></li><li><a href="global.html#validateMotifName">validateMotifName</a></li><li><a href="global.html#validatePathwayID">validatePathwayID</a></li><li><a href="global.html#validatePathwayName">validatePathwayName</a></li><li><a href="global.html#validateProteinAcc">validateProteinAcc</a></li><li><a href="global.html#validateProteinAcc1">validateProteinAcc1</a></li><li><a href="global.html#validateProteinAcc2">validateProteinAcc2</a></li><li><a href="global.html#validateProteinID">validateProteinID</a></li><li><a href="global.html#validateProteinName">validateProteinName</a></li><li><a href="global.html#validateRefAcc">validateRefAcc</a></li><li><a href="global.html#ws_base">ws_base</a></li><li><a href="global.html#xdir">xdir</a></li><li><a href="global.html#xlimit">xlimit</a></li><li><a href="global.html#xpage">xpage</a></li><li><a href="global.html#xsort">xsort</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Nov 09 2018 14:25:47 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 12:58:29 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>
