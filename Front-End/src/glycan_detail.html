@@ -242,7 +242,7 @@
                             <h4> Found Glycoproteins</h4>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
+                            <!-- <div class="row">
                                 {{#glycoprotein}}
                                 <div class='col-md-12 col-xs-12'>
                                     <div class="panelmaincontent">
@@ -251,7 +251,6 @@
 
                                         <strong>UniProtKB Accession:</strong>
                                         <a class="panelcontent" href='protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}'>{{uniprot_canonical_ac}}</a>
-                                        <!--<a href="protein_detail.html?uniprot_canonical_ac={{uniprot_canonical_ac}}"></a>-->
                                         <br>
                                         {{#position}}
                                         Position: {{position}} {{/position}}
@@ -269,7 +268,9 @@
                                 </li>
                                 {{/glycoprotein}}
                             </div>
-                            {{^glycoprotein}} No data available {{/glycoprotein}}
+                            {{^glycoprotein}} No data available {{/glycoprotein}} -->
+                            <table id="tbl_found_glycoproteins">
+                            </table>
                         </div>
                     </div>
                     </div>

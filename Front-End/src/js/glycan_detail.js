@@ -106,6 +106,43 @@ function ajaxSuccess(data) {
             data: items,
 
         });
+
+        //Table view for found glycoproteins
+        items = data.glycoprotein ? data.glycoprotein : [];
+        $('#tbl_found_glycoproteins').bootstrapTable({
+            columns: [
+                {
+                    field: 'protein_name',
+                    title: 'Protein Name',
+                    sortable: true
+                },
+                {
+                    field: 'uniprot_canonical_ac',
+                    title: 'UniProtKB Accession',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
+                    }
+                },
+                {
+                    field: 'position',
+                    title: 'Position',
+                    sortable: false
+                }
+            ],
+            pagination: 10,
+            data: items,
+            detailView: true,
+            detailFormatter: function (index, row) {
+                var detail_view = "";
+                row.evidence.forEach(function (e) {
+                    detail_view += "<div class='row'>";                    
+                    detail_view += "<div class='col-xs-12'><li class='list-group-indent'>" + e.database + ":<a href=' " + e.url + " ' target='_blank'>" + e.id + "</a></li></div>";
+                    detail_view += "</div>";
+                });
+                return detail_view;
+            }
+        });
     }
     $('#loading_image').fadeOut();
 }
