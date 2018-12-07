@@ -13,7 +13,7 @@ Primary style
 
 *::after,
 *::before {
-  content: '';
+  content: none;
 }
 
 body {
