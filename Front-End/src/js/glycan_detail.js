@@ -129,6 +129,18 @@ function ajaxSuccess(data) {
                     title: 'Position',
                     sortable: false
                 }
+                // {
+                //     field: 'evidence',
+                //     title: 'Evidence',
+                //     sortable: true,
+                //     formatter: function (value, row, index, field) {
+                //         var evidence_list = "";
+                //         value.forEach(function (e) {
+                //             evidence_list += e.database + ": <a class='panelcontent' href='" + e.url + "' target='_blank'>" + e.id + "</a><br>";
+                //         });
+                //         return evidence_list;
+                //     }
+                // }
             ],
             pagination: 10,
             data: items,
@@ -137,7 +149,7 @@ function ajaxSuccess(data) {
                 var detail_view = "";
                 row.evidence.forEach(function (e) {
                     detail_view += "<div class='row'>";                    
-                    detail_view += "<div class='col-xs-12'><li class='list-group-indent'>" + e.database + ":<a href=' " + e.url + " ' target='_blank'>" + e.id + "</a></li></div>";
+                    detail_view += "<div><li class='list-group-indent'>" + e.database + ":<a href=' " + e.url + " ' target='_blank'>" + e.id + "</a></li></div>";
                     detail_view += "</div>";
                 });
                 return detail_view;
