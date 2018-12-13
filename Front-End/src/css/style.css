@@ -608,7 +608,8 @@ label.labelContactUs {
 
 .about-map-img {
     background-size: cover;
-    width: 99%;
+    margin-top: -60px;
+   
 }
 
 /* ------------------------------------------
@@ -934,6 +935,9 @@ ____________________________________  */
     .glygenIconIndex {
         width: 50% !important;
     }
+    .about-map-img {
+        margin-top: 0;
+    }
 }
 
 @media only screen and (max-width: 1280px) {
@@ -941,6 +945,9 @@ ____________________________________  */
         font-size: 0.85em;
         font-weight: 600;
     }
+    .about-map-img {
+        margin-top: 0;
+    } 
 }
 
 @media only screen and (max-width: 1024px) {
@@ -950,6 +957,9 @@ ____________________________________  */
      body  {
         margin-bottom: 15%;
     }
+    .about-map-img {
+        margin-top: 0;
+    } 
 }
 
 @media (max-width: 768px) {
@@ -978,6 +988,10 @@ ____________________________________  */
         margin: 0 auto;
         overflow: auto;
     }
+    .about-map-img {
+        margin-top: 0;
+        width: 99%;
+    } 
 }
 
 @media (max-width: 700px) {
