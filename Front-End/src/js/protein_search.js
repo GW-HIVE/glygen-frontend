@@ -523,12 +523,12 @@ function ajaxListSuccess(data) {
     } else {
         if (data.query) {
             if (data.query.query_type === "protein_search_simple") {
-                $('.nav-tabs a[href="#tab_default_1"]').tab('show');
+                $('.nav-tabs a[href="#simple_search"]').tab('show');
                 $("#simplifiedCategory").val(data.query.term_category);
                 $("#simplifiedSearch").val(data.query.term);
                 populateExample();
             } else {
-                $('.nav-tabs a[href="#tab_default_2"]').tab('show');
+                $('.nav-tabs a[href="#advanced_search"]').tab('show');
             }
         }
         activityTracker("user", id, "Search modification initiated");
