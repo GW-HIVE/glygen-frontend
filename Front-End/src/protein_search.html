@@ -155,7 +155,7 @@
                                                 <div class="col-sm-8 gg-form-group">
                                                     <input type="text" name="ProteinID" class="form-control protein" id="protein" placeholder="Enter the UniProtKB Accession of your protein" onkeyup="validateProteinAcc(this)">
 
-                                                    <div class="gg-text-example">Example: <a href="" id="textExampleProtein">P14210-1</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://www.uniprot.org/help/accession_numbers" target="_blank">UniProtKB Accession</a></div>
+                                                    <div>Example: <a href="" id="textExampleProtein" class="gg-text-example">P14210-1</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my <a class="gg-text-example" href="https://www.uniprot.org/help/accession_numbers" target="_blank">UniProtKB Accession</a></div>
                                                     <h6 id='proteinAccMsg' class="validation-message"></h6>
                                                 </div>
                                             </div>
@@ -170,7 +170,7 @@
 
                                                 <div class="col-sm-8 gg-form-group">
                                                     <input type="text" name="ProteinID" class="form-control" id="refseq" placeholder="Enter the RefSeq Accession of your protein" onkeyup="validateRefAcc(this)">
-                                                    <div class="gg-text-example">Example: <a href="" id="textExampleRefseq">NP_000592.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://www.ncbi.nlm.nih.gov/refseq/" target="_blank">RefSeq Accession</a></div>
+                                                    <div>Example: <a class="gg-text-example" href="" id="textExampleRefseq">NP_000592.3</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my <a class="gg-text-example" href="https://www.ncbi.nlm.nih.gov/refseq/" target="_blank">RefSeq Accession</a></div>
                                                     <h6 id='refAccMsg' class="validation-message"></h6>
                                                 </div>
                                             </div>
@@ -223,7 +223,7 @@
                                                     </span> Protein Name:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" name="ProteinName" class="form-control" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
-                                                    <div class="gg-text-example">Example: <a href="" id="textExampleProteinName">Hepatocyte growth factor</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://www.uniprot.org/help/protein_names" target="_blank">Protein Name</a></div>
+                                                    <div>Example: <a class="gg-text-example" href="" id="textExampleProteinName">Hepatocyte growth factor</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my <a class="gg-text-example" href="https://www.uniprot.org/help/protein_names" target="_blank">Protein Name</a></div>
                                                     <h6 id='proteinNameMsg' class="validation-message"></h6>
                                                 </div>
                                             </div>
@@ -237,7 +237,7 @@
                                                     </span>Gene Name:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" name="GeneName" class="form-control" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
-                                                    <div class="gg-text-example">Example: <a href="" id="textExampleGeneName">HGF</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://www.ncbi.nlm.nih.gov/gene" target="_blank">Gene Name</a></div>
+                                                    <div>Example: <a class="gg-text-example" href="" id="textExampleGeneName">HGF</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my <a class="gg-text-example"href="https://www.ncbi.nlm.nih.gov/gene" target="_blank">Gene Name</a></div>
                                                     <h6 id='geneNameMsg' class="validation-message"></h6>
                                                 </div>
                                             </div>
@@ -261,7 +261,7 @@
                                                     <form name="form1" action="#">
                                                         <textarea name="text1" class="textbox" id="sequences" rows="5" cols="50" placeholder="Enter a Protein or Peptide Sequence" onkeyup="aminoLetter(document.form1.text1)"></textarea>
                                                     </form>
-                                                    <div style="margin-top: -10px;" class="gg-text-example">Example: <a href="" id="textExampleSequences">MWVTKLLPA</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://www.ncbi.nlm.nih.gov/protein" target="_blank"> Protein</a> or <a href="https://www.uniprot.org/help/peptide" target="_blank"> Peptide</a> Sequence</div>
+                                                    <div style="margin-top: -10px;" >Example: <a class="gg-text-example" href="" id="textExampleSequences">MWVTKLLPA</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my <a class="gg-text-example" href="https://www.ncbi.nlm.nih.gov/protein" target="_blank"> Protein</a> or <a href="https://www.uniprot.org/help/peptide" target="_blank"> Peptide</a> Sequence</div>
                                                     <h6 id='msg' class="rq"></h6>
                                                 </div>
                                             </div>
@@ -276,9 +276,9 @@
                                                 <div class="col-sm-8">
                                                     <input type="text" name="pathway" class="form-control" id="pathway" placeholder="Enter a KEGG or Reactome ID" onkeyup="validatePathwayID(this)">
 
-                                                    <div class="gg-text-example
-                                                        textExampleKegg textExampleReactome">KEGG Example: <a href="">hsa:3082</a> &nbsp;&nbsp;&nbsp;&nbsp;Reactome Example: <a href="">R-HSA-114608</a></div>
-                                                        <div class="gg-text-example">Find <a href="https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a>&nbsp;&nbsp;&nbsp;&nbsp;Find <a href="https://reactome.org/" target="_blank">Reactome</a></div>
+                                                    <div class="
+                                                        textExampleKegg textExampleReactome">KEGG Example: <a class="gg-text-example" href="">hsa:3082</a> &nbsp;&nbsp;&nbsp;&nbsp;Reactome Example: <a class="gg-text-example" href="">R-HSA-114608</a></div>
+                                                        <div>Find my<a  class="gg-text-example"href="https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a>&nbsp;&nbsp;&nbsp;&nbsp;Find my<a  class="gg-text-example"href="https://reactome.org/" target="_blank">Reactome</a></div>
                                                     <label id='pathwayIDMsg' class="validation-message"></label>
                                                 </div>
                                             </div>
