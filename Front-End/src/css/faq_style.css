@@ -11,7 +11,10 @@ Primary style
   box-sizing: border-box;
 }
 
-*::after,
+*::after {
+  content: "";
+}
+
 *::before {
   content: none;
 }
