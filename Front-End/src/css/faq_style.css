@@ -11,11 +11,12 @@ Primary style
   box-sizing: border-box;
 }
 
-*::after {
+*::after,
+*::before {
   content: "";
 }
 
-*::before {
+.table td:before, .table td:after, .table tbody:before, .table tbody:after {
   content: none;
 }
 
