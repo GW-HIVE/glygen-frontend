@@ -297,7 +297,7 @@ header h1 {
   position: fixed;
   height: 100%;
   width: 90%;
-  top: 0;
+  top: 40px;
   right: 0;
   background: #ffffff;
   padding: 15% 5% 1em;
