@@ -147,8 +147,14 @@
                                             <div class="row">
                                                 <label class="control-label col-sm-4" for="protein">
                                                     <span>
-                                                        <a href="javascript://" title="UniProtKB Accession" data-toggle="popover" data-placement="left" data-content="Enter the UniProtKB Accession of your protein (see https://www.uniprot.org/)">
-                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        <a href="javascript://" 
+                                                            title="UniProtKB Accession" 
+                                                            data-toggle="popover" 
+                                                            data-placement="left" 
+                                                            data-trigger="click"
+                                                            data-html="true"
+                                                            data-content="Enter the UniProtKB Accession of your protein. Find <a href='https://www.uniprot.org/' target='_blank'>UniProtKB Accession</a>">
+                                                           <i class="far fa-question-circle help-sign"></i>
                                                         </a>
                                                     </span> UniProtKB Accession:</label>
 
@@ -163,8 +169,13 @@
                                             <div class="row">
                                                 <label class="control-label col-sm-4" for="refseq">
                                                     <span>
-                                                        <a href="javascript://" title="RefSeq Accession" data-toggle="popover" data-placement="left" data-content="Enter the RefSeq Accession of your protein (see https://www.ncbi.nlm.nih.gov/refseq/)">
-                                                            <i class="far fa-question-circle help-sign"></i>
+                                                        <a href="javascript://" title="RefSeq Accession"
+                                                       data-toggle="popover" 
+                                                       data-placement="left"
+                                                       data-trigger="click"
+                                                       data-html="true"
+                                                       data-content="Enter the RefSeq Accession of your protein. Find <a href='https://www.ncbi.nlm.nih.gov/refseq/' target='_blank'> RefSeq Accession">
+                                                        <i class="far fa-question-circle help-sign"></i>
                                                         </a>
                                                     </span>RefSeq Accession:</label>
 
@@ -217,9 +228,14 @@
                                             <div class="form-group gg-form-group row">
                                                 <label class="control-label col-sm-4" for="protein_name">
                                                     <span>
-                                                        <a href="javascript://" title="Protein Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of your protein">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
+                                                        <a href="javascript://"            title="Protein Name"
+                                                       data-toggle="popover" 
+                                                       data-placement="left"
+                                                       data-trigger="click"
+                                                       data-html="true"
+                                                       data-content="Enter the Name of your protein. Find <a href='https://www.uniprot.org/help/protein_names' target='_blank'> Protein Name </a>">
+                                                        <i class="far fa-question-circle help-sign"></i>
+                                                    </a>
                                                     </span> Protein Name:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" name="ProteinName" class="form-control" id="protein_name" placeholder="Enter the Protein Name" onkeyup="validateProteinName(this)">
@@ -231,9 +247,14 @@
                                             <div class="form-group gg-form-group row">
                                                 <label class="control-label col-sm-4" for="gene_name">
                                                     <span>
-                                                        <a href="javascript://" title="Gene Name" data-toggle="popover" data-placement="left" data-content="Enter the Name of the Gene encoding your protein">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
+                                                        <a href="javascript://"            title="Gene Name" 
+                                                        data-toggle="popover"
+                                                        data-placement="left"
+                                                        data-trigger="click"
+                                                        data-html="true"
+                                                        data-content="Enter the Name of the Gene encoding your protein. Find <a href='https://www.ncbi.nlm.nih.gov/gene'  target='_blank'> Gene Name">
+                                                        <i class="far fa-question-circle help-sign"></i>
+                                                    </a>
                                                     </span>Gene Name:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" name="GeneName" class="form-control" id="gene_name" placeholder="Enter the Gene Name" onkeyup="validateGeneName(this)">
@@ -245,9 +266,15 @@
                                             <div class="row">
                                                 <label class="control-label col-sm-4" for="sequences">
                                                     <span>
-                                                        <a href="javascript://" title="“Protein or Peptide Sequence" data-toggle="popover" data-placement="left" data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
+                                                        <a href="javascript://"
+                                                        title="Protein or Peptide Sequence"
+                                                        data-toggle="popover" 
+                                                        data-placement="left"
+                                                        data-trigger="click"
+                                                        data-html="true"
+                                                        data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence. Find <a href='https://www.ncbi.nlm.nih.gov/protein' target='_blank'> Protein</a> or <a href='https://www.uniprot.org/help/peptide' target='_blank'> Peptide Sequence</a>">
+                                                        <i class="far fa-question-circle help-sign"></i>
+                                                    </a>
                                                     </span>Protein or Peptide Sequence:
                                                 </label>
                                                 <div class="col-sm-8" id="sequence_type" style="display: none;">
@@ -269,7 +296,11 @@
                                             <div class="row">
                                                 <label style="margin-top: 20px;" class="control-label col-sm-4" for="pathway">
                                                     <span>
-                                                        <a href="javascript://" title="Pathway ID" data-toggle="popover" data-placement="left" data-content="Enter a Pathway ID from KEGG or Reactome">
+                                                        <a href="javascript://"         title="Pathway ID"         data-toggle="popover"
+                                                            data-placement="left"
+                                                            data-trigger="click"
+                                                            data-html="true"
+                                                            data-content="Enter a Pathway ID from KEGG or Reactome. Find <a href='https://www.genome.jp/kegg/pathway.html' target='_blank'> KEGG</a> or <a href='https://reactome.org/' target='_blank'> Peptide Sequence</a>">
                                                             <i class="far fa-question-circle help-sign"></i>
                                                         </a>
                                                     </span> Pathway ID:</label>
