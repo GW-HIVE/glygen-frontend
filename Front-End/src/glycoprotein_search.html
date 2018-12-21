@@ -152,62 +152,58 @@
                                         <!-- UniProtKB Accession -->
                                         <div class="row top-table-margin">
                                             <label class="control-label col-sm-4" for="protein">
-                                                <span>
-                                                    <a href="javascript://" 
-                                                        title="UniProtKB Accession"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Enter the UniProtKB Accession of your protein. Find <a href='https://www.uniprot.org/' target='_blank'>UniProtKB Accession</a>">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> UniProtKB Accession:</label>
+                                                <span><a href="javascript://" 
+                                                    title="UniProtKB Accession"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the UniProtKB Accession of your protein. Find <a href='https://www.uniprot.org/' target='_blank'>UniProtKB Accession</a>">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> UniProtKB Accession:
+                                            </label>
 
                                             <div class="col-sm-8 gg-form-group">
                                                 <input type="text" 
                                                     name="ProteinID" 
                                                     class="form-control" 
                                                     id="protein"
-                                                    placeholder="Enter the UniProtKB Accession of your protein"
-                                                    onkeyup="validateProteinAcc(this)">
-                                                       
-                                                <div><a href="https://www.uniprot.org/help/accession_numbers" 
-                                                target="_blank" 
-                                                data-toggle="tooltip" 
-                                                data-placement="bottom" 
-                                                title="Find my UniProtKB Accession">UniProtKB Acc.</a> 
-                                                Example: <a class="gg-text-example" 
-                                                href="#P14210-1" id="textExampleProtein"
-                                                data-toggle="tooltip" 
-                                                data-placement="bottom"
-                                                title="Click to insert">P14210-1</a></div>
+                                                    placeholder="Enter the UniProtKB Accession of your protein" onkeyup="validateProteinAcc(this)">      
+                                                <div><a 
+                                                    href="https://www.uniprot.org/help/accession_numbers" 
+                                                    target="_blank" 
+                                                    data-toggle="tooltip" 
+                                                    data-placement="bottom" 
+                                                    title="Find my UniProtKB Accession">UniProtKB Acc.</a> 
+                                                    Example: <a class="gg-text-example" 
+                                                    href="#P14210-1" id="textExampleProtein"
+                                                    data-toggle="tooltip" 
+                                                    data-placement="bottom"
+                                                    title="Click to insert">P14210-1
+                                                </a></div>
                                                 <h6 id='proteinAccMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
                                         <!-- RefSeq Accession -->
                                         <div class="row">
                                             <label class="control-label col-sm-4" for="refseq">
-                                                <span>
-                                                    <a href="javascript://" 
-                                                        title="RefSeq Accession"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Enter the RefSeq Accession of your protein. Find <a href='https://www.ncbi.nlm.nih.gov/refseq/' target='_blank'> RefSeq Accession">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> RefSeq Accession:</label>
-
+                                                <span><a href="javascript://" 
+                                                    title="RefSeq Accession"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the RefSeq Accession of your protein. Find <a href='https://www.ncbi.nlm.nih.gov/refseq/' target='_blank'> RefSeq Accession">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span>RefSeq Accession:
+                                            </label>
                                             <div class="col-sm-8 gg-form-group">
                                                 <input type="text" 
                                                     name="ProteinID"
                                                     class="form-control protein"
                                                     id="refseq"
                                                     placeholder="Enter the RefSeq Accession of your protein"
-                                                    onkeyup="validateRefAcc(this)">
-                                                        
+                                                    onkeyup="validateRefAcc(this)">        
                                                 <div><a href="https://www.ncbi.nlm.nih.gov/refseq/" 
                                                     target="_blank" 
                                                     data-toggle="tooltip" 
@@ -217,7 +213,8 @@
                                                     href="#NP_000592.3" id="textExampleRefseq" 
                                                     data-toggle="tooltip" 
                                                     data-placement="bottom" 
-                                                    title="Click to insert">NP_000592.3</a></div>
+                                                    title="Click to insert">NP_000592.3
+                                                </a></div>
                                                 <h6 id='refAccMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
@@ -225,13 +222,14 @@
                                         <div class="gg-form-group row">
                                             <div>
                                                 <label class="control-label col-sm-4">
-                                                    <span>
-                                                        <a href="javascript://" title="Chemical Mass"
-                                                           data-toggle="popover" data-placement="left"
-                                                           data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
-                                                    </span>Chemical Mass:</label>
+                                                    <span><a href="javascript://" 
+                                                        title="Chemical Mass"
+                                                        data-toggle="popover" 
+                                                        data-placement="left"
+                                                        data-content="Use the sliders to select a Chemical Mass range for your protein(s)">
+                                                        <i class="far fa-question-circle help-sign"></i></a>
+                                                    </span>Chemical Mass:
+                                                </label>
                                             </div>
                                             <div class="col-sm-10 row glycanSizeMargin">
                                                 <!-- First range-->
@@ -253,15 +251,14 @@
                                         <!-- Organism-->
                                         <div class="gg-form-group row">
                                             <label class="control-label col-sm-4" for="species">
-                                                <span>
-                                                    <a href="javascript://" 
-                                                        title="Organism" 
-                                                        data-toggle="popover"
-                                                        data-placement="left"
-                                                        data-content="Click to select an Organism that makes your protein(s)">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Organism:</label>
+                                                <span><a href="javascript://" 
+                                                    title="Organism" 
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-content="Click to select an Organism that makes your protein(s)">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Organism:
+                                            </label>
                                             <div class="col-sm-8">
                                                 <select class="organism" id="species">
                                                     <option value="0">Select Organism</option>
@@ -269,20 +266,18 @@
                                             </div>
                                         </div>
                                         <!-- Protein name-->
-                                        <div class="gg-form-group row">
+                                        <div class="form-group gg-form-group row">
                                             <label class="control-label col-sm-4" for="protein_name">
-                                                <span>
-                                                    <a href="javascript://" 
-                                                        title="Protein Name"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Enter the Name of your protein. Find <a href='https://www.uniprot.org/help/protein_names' target='_blank'> Protein Name </a>">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Protein Name:</label>
-
+                                                <span><a href="javascript://" 
+                                                    title="Protein Name"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the Name of your protein. Find <a href='https://www.uniprot.org/help/protein_names' target='_blank'> Protein Name </a>">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Protein Name:
+                                            </label>
                                             <div class="col-sm-8">
                                                 <input type="text" 
                                                     name="ProteinName" 
@@ -290,7 +285,6 @@
                                                     id="protein_name" 
                                                     placeholder="Enter the Protein Name"
                                                     onkeyup="validateProteinName(this)">
-                                                
                                                 <div><a href="https://www.uniprot.org/help/protein_names"
                                                     target="_blank"
                                                     data-toggle="tooltip" 
@@ -307,25 +301,23 @@
                                         <!-- Gene Name-->
                                         <div class="gg-form-group row">
                                             <label class="control-label col-sm-4" for="gene_name">
-                                                <span>
-                                                    <a href="javascript://" 
-                                                        title="Gene Name" 
-                                                        data-toggle="popover"
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Enter the Name of the Gene encoding your protein.  Find<a href='https://www.ncbi.nlm.nih.gov/gene'  target='_blank'> Gene Name">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Gene Name:</label>
+                                                <span><a href="javascript://" 
+                                                    title="Gene Name" 
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the Name of the Gene encoding your protein.  Find<a href='https://www.ncbi.nlm.nih.gov/gene'  target='_blank'> Gene Name">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Gene Name:
+                                            </label>
                                             <div class="col-sm-8">
                                                 <input type="text" 
                                                     name="GeneName" 
                                                     class="form-control gene_name"
                                                     id="gene_name" 
                                                     placeholder="Enter the Gene Name"
-                                                    onkeyup="validateGeneName(this)">
-                                                    
+                                                    onkeyup="validateGeneName(this)">  
                                                 <div><a href="https://www.ncbi.nlm.nih.gov/gene"  
                                                     target="_blank"
                                                     data-toggle="tooltip" 
@@ -342,25 +334,23 @@
                                         <!--Interacting Glycan-->
                                         <div class="gg-form-group row" id="Glycanid">
                                             <label class="control-label col-sm-4" for="glycan_id">
-                                                <span>
-                                                    <a href="javascript://"             title="Interacting Glycan"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s). <a href='https://glytoucan.org/' target='_blank'> Find GlyTouCan Accession</a>">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Interacting Glycan:</label>
-
+                                                <span><a href="javascript://" 
+                                                    title="Interacting Glycan"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s). <a href='https://glytoucan.org/' target='_blank'> Find GlyTouCan Accession</a>">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Interacting Glycan:
+                                            </label>
                                             <div class="col-lg-4 col-sm-8" id="glycanrow">
                                                 <input type="text" 
                                                     name="Glycan" 
                                                     class="form-control" 
                                                     id="glycan_id"
                                                     placeholder="Enter the GlyTouCan Accession"
-                                                    onkeyup="validateGlycanAcc(this)">
-                                                    
+                                                    onkeyup="validateGlycanAcc(this)">    
                                                 <div><a href="https://glytoucan.org/" 
                                                     target="_blank"
                                                     data-toggle="tooltip" 
@@ -390,15 +380,14 @@
                                         <div class="gg-form-group row">
                                             <label style="margin-top:2 30px;" class="control-label col-sm-4"
                                                    for="glycosylated_aa">
-                                                <span>
-                                                    <a href="javascript://"
-                                                        title="Glycosylated Amino Acid"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-content="Click to highlight multiple selections for Glycosylated Amino Acid">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
-                                                </span> Glycosylated Amino Acid: </label>
+                                                <span><a href="javascript://"
+                                                    title="Glycosylated Amino Acid"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-content="Click to highlight multiple selections for Glycosylated Amino Acid">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Glycosylated Amino Acid: 
+                                            </label>
                                             <div class="col-sm-8">
                                                 <select id="glycosylated_aa" class="glycosylated_aa" multiple="true">
                                                     <option value="R">Arginine - Arg - R</option>
@@ -429,20 +418,17 @@
                                         </div>
 
                                         <!-- Protein or Peptide Sequence -->
-                                        <div class="gg-form-group2 row">
+                                        <div class="row">
                                             <label class="control-label col-sm-4" for="sequences">
-                                                <span>
-                                                    <a href="javascript://"
-                                                        title="Protein or Peptide Sequence"
-                                                        data-toggle="popover" 
-                                                        data-placement="left"
-                                                        data-trigger="click"
-                                                        data-html="true"
-                                                        data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence. Find <a href='https://www.ncbi.nlm.nih.gov/protein' target='_blank'> Protein</a> or <a href='https://www.uniprot.org/help/peptide' target='_blank'> Peptide Sequence</a>">
-                                                        <i class="far fa-question-circle help-sign"></i>
-                                                    </a>
+                                                <span><a href="javascript://"
+                                                    title="Protein or Peptide Sequence"
+                                                    data-toggle="popover" 
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Click to select Sequence Type and enter a Protein or Peptide Sequence. Find <a href='https://www.ncbi.nlm.nih.gov/protein' target='_blank'> Protein</a> or <a href='https://www.uniprot.org/help/peptide' target='_blank'> Peptide Sequence</a>">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> Protein or Peptide Sequence:</label>
-
                                             <div class="col-sm-8" id="sequence_type" style="display: none;">
                                                 <select class="form-control sequence_type" id="type">
                                                     <option value="">Select Sequence Type</option>
@@ -456,7 +442,8 @@
                                                         rows="5"
                                                         cols="50"
                                                         placeholder="Enter a Protein or Peptide Sequence"
-                                                        onkeyup="aminoLetter(document.form1.text1)"></textarea>
+                                                        onkeyup="aminoLetter(document.form1.text1)">
+                                                    </textarea>
                                                 </form>
                                                 <div style="margin-top: -10px;">
                                                 <a href="https://www.ncbi.nlm.nih.gov/protein" 
@@ -479,20 +466,19 @@
                                             </div>
                                         </div>
                                         <!--Pathway ID-->
-                                        <div class="gg-form-group2 row">
+                                        <div class="row">
                                             <label style="margin-top: 20px;" class="control-label col-sm-4"
-                                                   for="pathway">
-                                                    <span>
-                                                        <a href="javascript://" 
-                                                            title="Pathway ID" 
-                                                            data-toggle="popover"
-                                                            data-placement="left"
-                                                            data-trigger="click"
-                                                            data-html="true"
-                                                            data-content="Enter a Pathway ID from KEGG or Reactome. Find <a href='https://www.genome.jp/kegg/pathway.html' target='_blank'> KEGG</a> or <a href='https://reactome.org/' target='_blank'> Peptide Sequence</a>">
-                                                            <i class="far fa-question-circle help-sign"></i>
-                                                        </a>
-                                                    </span> Pathway ID:</label>
+                                                for="pathway">
+                                                <span><a href="javascript://" 
+                                                    title="Pathway ID" 
+                                                    data-toggle="popover"
+                                                    data-placement="left"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter a Pathway ID from KEGG or Reactome. Find <a href='https://www.genome.jp/kegg/pathway.html' target='_blank'> KEGG</a> or <a href='https://reactome.org/' target='_blank'> Peptide Sequence</a>">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Pathway ID:
+                                            </label>
                                             <div class="col-sm-8">
                                                 <input 
                                                     type="text" 
@@ -501,7 +487,6 @@
                                                     id="pathway" 
                                                     placeholder="Enter a KEGG or Reactome ID"
                                                     onkeyup="validatePathwayID(this)">
-
                                                 <div><a class="gg-text-example"
                                                     href="https://www.genome.jp/kegg/pathway.html" target="_blank"
                                                     data-toggle="tooltip" 
@@ -518,7 +503,7 @@
                                                     data-toggle="tooltip" 
                                                     data-placement="bottom" 
                                                     title="Find my Reactome">Reactome</a> 
-                                                    Example: <a class="gg-text-example ttextExamplePathway" 
+                                                    Example: <a class="gg-text-example textExamplePathway" 
                                                     href="#R-HSA-114608"
                                                     data-toggle="tooltip" 
                                                     data-placement="bottom" 
