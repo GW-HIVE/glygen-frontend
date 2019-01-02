@@ -68,6 +68,18 @@
         <meta name="msapplication-square150x150logo" content="images/icons/favicomatic/mstile-150x150.png" />
         <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
         <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
+
+
+    <style>
+        #evidence_div{
+            width: 50%;
+            padding: 5px;
+            background-color: #ccc;
+            color: #0a0a0a;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body onload="tracking()">
@@ -174,6 +186,42 @@
                     </div>
                 </ul>
                 
+                <!--&lt;!&ndash; Species &ndash;&gt;-->
+                <!--<ul id="species" class="cd-faq-group">-->
+                    <!--<li class="cd-faq-title"/>-->
+                    <!--<div class="panel panel-default">-->
+                        <!--<div class="gg-panel-heading">-->
+                            <!--<h4>Species</h4>-->
+                        <!--</div>-->
+                        <!--<div class="panel-body">-->
+                            <!--<div class="row">-->
+                                <!--{{#species}}-->
+                                <!--<div class='col-md-12 col-xs-12'>-->
+                                    <!--<div class="panelmaincontent">-->
+                                        <!--<button class="open-close-button">+</button>-->
+                                        <!--{{name}} (NCBI taxonomy ID:-->
+                                        <!--<a class="panelcontent"-->
+                                           <!--href="{{url}}"-->
+                                           <!--target="_blank">{{taxid}}</a>)-->
+                                    <!--</div>-->
+                                    <!--<ul style="display:none;">-->
+                                        <!--{{#evidence}}-->
+                                        <!--<li class="list-group-indent">{{database}}:-->
+                                            <!--<a href="{{{url}}}" target="_blank">{{id}}</a>-->
+                                        <!--</li>-->
+                                        <!--{{/evidence}}-->
+                                    <!--</ul>-->
+                                <!--</div>-->
+                                <!--{{/species}}-->
+                            <!--</div>-->
+                            <!--{{^species}} No data available. {{/species}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                <!--</ul>-->
+
+
+
                 <!-- Species -->
                 <ul id="species" class="cd-faq-group">
                     <li class="cd-faq-title"/>
@@ -182,32 +230,49 @@
                             <h4>Species</h4>
                         </div>
                         <div class="panel-body">
+                            {{#species}}
                             <div class="row">
-                                {{#species}}
                                 <div class='col-md-12 col-xs-12'>
-                                    <div class="panelmaincontent">
-                                        <button class="open-close-button">+</button>
-                                        {{name}} (NCBI taxonomy ID:
-                                        <a class="panelcontent"
-                                           href="{{url}}"
-                                           target="_blank">{{taxid}}</a>)
+
+                                    <div class="row">
+                                        {{#databases}}
+
+                                        <div class='col-md-6 col-xs-6'>
+                                            {{name}}: <button class="btn btn-primary" type="button" style="background-color:{{color}}"
+                                                              onclick="show_evidence('{{taxid}}','{{database}}')">
+                                            {{database}} <span class="badge">{{links.length}}</span>
+                                        </button>
+                                        </div>
+                                        {{/databases}}
                                     </div>
-                                    <ul style="display:none;">
-                                        {{#evidence}}
-                                        <li class="list-group-indent">{{database}}:
-                                            <a href="{{{url}}}" target="_blank">{{id}}</a>
-                                        </li>
-                                        {{/evidence}}
-                                    </ul>
                                 </div>
-                                {{/species}}
+                                <!--{{#databases}}-->
+                                <!--<div class='col-md-6 col-xs-6'>-->
+                                <!--<button class="btn btn-primary" type="button" style="background-color:{{color}}" onclick="show_evidence('{{database}}')">-->
+                                <!--{{database}} <span class="badge">{{links.length}}</span>-->
+                                <!--</button>-->
+                                <!--</div>-->
+                                <!--{{/databases}}-->
+                                <!--{{#databases}}-->
+                                <div class='col-md-12 col-xs-12 hidden evidence_links' id="evidence_{{taxid}}_{{database}}">
+                                    {{#links}}
+                                    <div class='col-md-6 col-xs-6' id="evidence_div"><li>id:<a href="{{url}}">{{id}}</a></li></div>
+                                    {{/links}}
+                                </div>
+                                <!--{{/databases}}-->
+
                             </div>
+                            {{/species}}
                             {{^species}} No data available. {{/species}}
+
                         </div>
-                    </div>
-                    </div>
+
+                        <!--</div>-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                 </ul>
-                
                 <!-- Motif -->
                 <ul id="motif" class="cd-faq-group">
                     <li class="cd-faq-title"/>

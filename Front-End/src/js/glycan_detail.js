@@ -52,6 +52,48 @@ function ajaxSuccess(data) {
             }
         }
 
+        //check data.
+        if (data.species) {
+
+            for (var i = 0; i < data.species.length; i++) {
+                var speciesitem = data.species[i];
+                var databases = [];
+                for(var j = 0; j < speciesitem.evidence.length; j++){
+                    var evidenceitem = speciesitem.evidence[j];
+                    var found = '';
+                    for(var x = 0; x < databases.length; x++){
+                        var databaseitem = databases[x];
+                        if(databaseitem.database === evidenceitem.database){
+                            found = true;
+                            databaseitem.links.push({
+                                url:  evidenceitem.url,
+                                id: evidenceitem.id
+                            });
+                        }
+                    }
+                    if(!found){
+                        databases.push({
+                            database: evidenceitem.database,
+                            color: databasecolor(evidenceitem.database),
+                            links: [{
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            }]
+                        })
+                    }
+                }
+
+                data.species[i].databases = databases;
+
+            }
+
+        }
+
+        console.log(data.species);
+
+
+
+
         //Adding breaklines
         if (data.glycoct){
          data.glycoct = data.glycoct.replace(/ /g, '<br>');}
@@ -192,6 +234,12 @@ function LoadData(glytoucan_ac) {
 
     // calls the service
     $.ajax(ajaxConfig);
+}
+
+
+function show_evidence(species, database){
+    $(".evidence_links").addClass("hidden");
+    $("#evidence_" + species + "_" + database).removeClass("hidden");
 }
 
 /**

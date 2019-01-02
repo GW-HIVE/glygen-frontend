@@ -21,6 +21,15 @@ function addCommas(nStr) {
 
     return x1 + x2;
 }
+
+function databasecolor(name){
+    switch(name){
+        case 'GlycomeDB': return 'red';
+        case 'UniCarbKB': return 'green';
+    }
+}
+
+
 function getErrorMessage(errorCode) {
     // This can appended to the end of the error message displayed for the user to be able to quickly contact us.
     var contactUsMsg = " If the problem persists then you may <a href='contact.html' >contact us</a>";
