@@ -270,6 +270,46 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+
+function formatEvidences (item) {
+    if (item && item.length) {
+        for (var i = 0; i < item.length; i++) {
+            var currentItem = item[i];
+            var databases = [];
+
+            for (var j = 0; j < currentItem.evidence.length; j++) {
+                var evidenceitem = currentItem.evidence[j];
+                var found = '';
+
+                for (var x = 0; x < databases.length; x++) {
+                    var databaseitem = databases[x];
+                    if (databaseitem.database === evidenceitem.database) {
+                        found = true;
+                        databaseitem.links.push({
+                            url: evidenceitem.url,
+                            id: evidenceitem.id
+                        });
+                    }
+                }
+
+                if (!found) {
+                    databases.push({
+                        database: evidenceitem.database,
+                        color: databasecolor(evidenceitem.database),
+                        links: [{
+                            url: evidenceitem.url,
+                            id: evidenceitem.id
+                        }]
+                    })
+                }
+            }
+
+            currentItem.databases = databases;
+        }
+    }
+}
+
+
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -295,6 +335,57 @@ function ajaxSuccess(data) {
                 }
             }
         }
+        formatEvidences(data.species);
+        formatEvidences(data.function);
+        formatEvidences(data.disease);
+        //formatEvidences(data.isoforms);
+
+
+
+
+
+
+        //check data.
+        // if (data.species) {
+
+            // for (var i = 0; i < data.species.length; i++) {
+            //     var speciesitem = data.species[i];
+            //     var databases = [];
+            //     for(var j = 0; j < speciesitem.evidence.length; j++){
+            //         var evidenceitem = speciesitem.evidence[j];
+            //         var found = '';
+            //         for(var x = 0; x < databases.length; x++){
+            //             var databaseitem = databases[x];
+            //             if(databaseitem.database === evidenceitem.database){
+            //                 found = true;
+            //                 databaseitem.links.push({
+            //                     url:  evidenceitem.url,
+            //                     id: evidenceitem.id
+            //                 });
+            //             }
+            //         }
+            //         if(!found){
+            //             databases.push({
+            //                 database: evidenceitem.database,
+            //                 color: databasecolor(evidenceitem.database),
+            //                 links: [{
+            //                     url: evidenceitem.url,
+            //                     id: evidenceitem.id
+            //                 }]
+            //             })
+            //         }
+            //     }
+            //
+            //     data.species[i].databases = databases;
+            //
+            // }
+            // formatEvidences(data.species);
+
+        // }
+
+        console.log(data.species);
+
+
 
         var itemscrossRef = [];
         //check data.
@@ -449,6 +540,8 @@ function ajaxSuccess(data) {
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
         $container.html(html);
+        setupEvidenceList();
+
         if (window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
         } else {
@@ -729,6 +822,31 @@ function LoadData(uniprot_canonical_ac) {
 
     // calls the service
     $.ajax(ajaxConfig);
+}
+
+function setupEvidenceList () {
+    var $evidenceBadges = $('.evidence_badge');
+
+    $evidenceBadges.each(function () {
+        $(this).find('button').on('click', show_evidence);
+    });
+}
+
+
+function show_evidence(){
+    var $evidenceList = $(this).next();
+    var isHidden = $evidenceList.hasClass('hidden');
+    $(".evidence_links").addClass("hidden");
+
+    if (isHidden) {
+        $evidenceList.removeClass("hidden");
+    } else {
+        $evidenceList.addClass("hidden");
+    }
+
+    // console.log(button);
+    // $("#evidence_" + species + "_" + database).removeClass("hidden");
+    // $evidenceList.removeClass("hidden");
 }
 
 /**

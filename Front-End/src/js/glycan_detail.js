@@ -26,6 +26,43 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+function formatEvidences (item) {
+    if (item && item.length) {
+        for (var i = 0; i < item.length; i++) {
+            var currentItem = item[i];
+            var databases = [];
+
+            for (var j = 0; j < currentItem.evidence.length; j++) {
+                var evidenceitem = currentItem.evidence[j];
+                var found = '';
+
+                for (var x = 0; x < databases.length; x++) {
+                    var databaseitem = databases[x];
+                    if (databaseitem.database === evidenceitem.database) {
+                        found = true;
+                        databaseitem.links.push({
+                            url: evidenceitem.url,
+                            id: evidenceitem.id
+                        });
+                    }
+                }
+
+                if (!found) {
+                    databases.push({
+                        database: evidenceitem.database,
+                        color: databasecolor(evidenceitem.database),
+                        links: [{
+                            url: evidenceitem.url,
+                            id: evidenceitem.id
+                        }]
+                    })
+                }
+            }
+
+            currentItem.databases = databases;
+        }
+    }
+}
 var glytoucan_ac;
 /**
  * Handling a succesful call to the server for details page
@@ -51,49 +88,7 @@ function ajaxSuccess(data) {
                 }
             }
         }
-
-        //check data.
-        if (data.species) {
-
-            for (var i = 0; i < data.species.length; i++) {
-                var speciesitem = data.species[i];
-                var databases = [];
-                for(var j = 0; j < speciesitem.evidence.length; j++){
-                    var evidenceitem = speciesitem.evidence[j];
-                    var found = '';
-                    for(var x = 0; x < databases.length; x++){
-                        var databaseitem = databases[x];
-                        if(databaseitem.database === evidenceitem.database){
-                            found = true;
-                            databaseitem.links.push({
-                                url:  evidenceitem.url,
-                                id: evidenceitem.id
-                            });
-                        }
-                    }
-                    if(!found){
-                        databases.push({
-                            database: evidenceitem.database,
-                            color: databasecolor(evidenceitem.database),
-                            links: [{
-                                url: evidenceitem.url,
-                                id: evidenceitem.id
-                            }]
-                        })
-                    }
-                }
-
-                data.species[i].databases = databases;
-
-            }
-
-        }
-
-        console.log(data.species);
-
-
-
-
+        formatEvidences(data.species);
         //Adding breaklines
         if (data.glycoct){
          data.glycoct = data.glycoct.replace(/ /g, '<br>');}
@@ -105,6 +100,7 @@ function ajaxSuccess(data) {
         var items = data.enzyme ? data.enzyme : [];
 
         $container.html(html);
+        setupEvidenceList();
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -171,18 +167,6 @@ function ajaxSuccess(data) {
                     title: 'Position',
                     sortable: false
                 }
-                // {
-                //     field: 'evidence',
-                //     title: 'Evidence',
-                //     sortable: true,
-                //     formatter: function (value, row, index, field) {
-                //         var evidence_list = "";
-                //         value.forEach(function (e) {
-                //             evidence_list += e.database + ": <a class='panelcontent' href='" + e.url + "' target='_blank'>" + e.id + "</a><br>";
-                //         });
-                //         return evidence_list;
-                //     }
-                // }
             ],
             pagination: 10,
             data: items,
@@ -237,9 +221,34 @@ function LoadData(glytoucan_ac) {
 }
 
 
-function show_evidence(species, database){
+// function show_evidence(species, database){
+//     $(".evidence_links").addClass("hidden");
+//     $("#evidence_" + species + "_" + database).removeClass("hidden");
+// }
+
+function setupEvidenceList () {
+    var $evidenceBadges = $('.evidence_badge');
+
+    $evidenceBadges.each(function () {
+        $(this).find('button').on('click', show_evidence);
+    });
+}
+
+
+function show_evidence(){
+    var $evidenceList = $(this).next();
+    var isHidden = $evidenceList.hasClass('hidden');
     $(".evidence_links").addClass("hidden");
-    $("#evidence_" + species + "_" + database).removeClass("hidden");
+
+    if (isHidden) {
+        $evidenceList.removeClass("hidden");
+    } else {
+        $evidenceList.addClass("hidden");
+    }
+
+    // console.log(button);
+    // $("#evidence_" + species + "_" + database).removeClass("hidden");
+    // $evidenceList.removeClass("hidden");
 }
 
 /**
