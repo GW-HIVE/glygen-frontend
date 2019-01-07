@@ -1,5 +1,5 @@
 /**
- * @author: Gaurav Agarwal
+ * @author: Rupali Mahadik
  * version 1.1.0
  * @description: Displays each question in quick search page on page load
  * @date: July 5, 2018 
