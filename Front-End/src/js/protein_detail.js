@@ -276,34 +276,34 @@ function formatEvidences (item) {
         for (var i = 0; i < item.length; i++) {
             var currentItem = item[i];
             var databases = [];
+            if (currentItem && currentItem.evidence.length) {
+                for (var j = 0; j < currentItem.evidence.length; j++) {
+                    var evidenceitem = currentItem.evidence[j];
+                    var found = '';
 
-            for (var j = 0; j < currentItem.evidence.length; j++) {
-                var evidenceitem = currentItem.evidence[j];
-                var found = '';
+                    for (var x = 0; x < databases.length; x++) {
+                        var databaseitem = databases[x];
+                        if (databaseitem.database === evidenceitem.database) {
+                            found = true;
+                            databaseitem.links.push({
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            });
+                        }
+                    }
 
-                for (var x = 0; x < databases.length; x++) {
-                    var databaseitem = databases[x];
-                    if (databaseitem.database === evidenceitem.database) {
-                        found = true;
-                        databaseitem.links.push({
-                            url: evidenceitem.url,
-                            id: evidenceitem.id
-                        });
+                    if (!found) {
+                        databases.push({
+                            database: evidenceitem.database,
+                            color: databasecolor(evidenceitem.database),
+                            links: [{
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            }]
+                        })
                     }
                 }
-
-                if (!found) {
-                    databases.push({
-                        database: evidenceitem.database,
-                        color: databasecolor(evidenceitem.database),
-                        links: [{
-                            url: evidenceitem.url,
-                            id: evidenceitem.id
-                        }]
-                    })
-                }
             }
-
             currentItem.databases = databases;
         }
     }
@@ -326,19 +326,33 @@ function ajaxSuccess(data) {
         if(data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
+
             if(data.isoforms) {
                 for (var i = 0; i < data.isoforms.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
                     data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
                     data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
                     data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
+                    if(data.isoforms[i].locus && data.isoforms[i].locus.evidence) {
+                        data.isoforms[i].evidence = data.isoforms[i].locus.evidence;
+                        formatEvidences([data.isoforms[i]]);
+                    }
                 }
             }
+
+
         }
+
+        console.log("isoforms");
+        console.log(data.isoforms);
+
+        console.log("mutation");
+        console.log(data.mutation);
+
         formatEvidences(data.species);
         formatEvidences(data.function);
         formatEvidences(data.disease);
-        //formatEvidences(data.isoforms);
+
 
 
 
@@ -383,7 +397,7 @@ function ajaxSuccess(data) {
 
         // }
 
-        console.log(data.species);
+        console.log(data.isoforms.locus);
 
 
 
@@ -524,6 +538,8 @@ function ajaxSuccess(data) {
 
             for (var i = 0; i < data.mutation.length; i++) {
                 var mutate = data.mutation[i];
+                formatEvidences([mutate]);
+
                 itemsMutate.push({
                     annotation: mutate.annotation,
                     disease: mutate.disease,
@@ -532,10 +548,15 @@ function ajaxSuccess(data) {
                     end_pos: mutate.end_pos,
                     // merging the two sequences, separated by arrow symbol.
                     sequence: mutate.sequence_org + " &#8594 " + mutate.sequence_mut,
-                    evidence: mutate.evidence
+                    evidence: mutate.evidence,
+                    database: mutate.databases
                 });
             }
         }
+
+
+
+
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
@@ -652,7 +673,22 @@ function ajaxSuccess(data) {
         $('#loading_image').fadeOut();
         // mutation table
         $('#mutation-table').bootstrapTable({
-            columns: [{
+            columns: [
+                {
+                    field: 'database',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var but;
+                        if (value.evidence)
+                            but =value.database+"<a href='\" + value.url + \"' target='_blank'>\" + value.id + \"</a>)";
+                        else
+                            but =value.database+"<a href='\" + value.url + \"' target='_blank'>\" + value.id + \"</a>)";
+                        return '<button class="btn btn-primary" type="button"></button>';
+                    }
+                },
+                
+                {
                 field: 'annotation',
                 title: 'Annotation name',
                 sortable: true
@@ -692,18 +728,18 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var html = [];
-                var evidences = row.evidence;
-                for (var i = 0; i < evidences.length; i++) {
-                    var evidence = evidences[i];
-                    html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                    html.push("</div>");
-                }
-                return html.join('');
-            },
+            //detailView: true,
+            // //detailFormatter: function (index, row) {
+            //     var html = [];
+            //     var evidences = row.evidence;
+            //     for (var i = 0; i < evidences.length; i++) {
+            //         var evidence = evidences[i];
+            //         html.push("<div class='row'>");
+            //         html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
+            //         html.push("</div>");
+            //     }
+            //     return html.join('');
+            // },
         });
 
         $('#loading_image').fadeOut();
