@@ -27,11 +27,12 @@ function databasecolor(name){
         case 'GlycomeDB': return 'red';
         case 'UniCarbKB': return 'green';
         case 'UniProtKB': return '#ff6462';
-        case 'PubMed': return '#beefb8';
+        case 'PubMed': return '#e8efcb';
         case 'RefSeq': return '#42a6ac';
         case 'Ensembl Peptide': return '#e2bfef';
         case 'Ensembl Transcript': return '#91aaac';
         case 'OMIM': return '#ac8d12';
+        case 'BioMuta': return '#9eabac';
 
     }
 }

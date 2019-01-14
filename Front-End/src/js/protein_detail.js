@@ -310,6 +310,26 @@ function formatEvidences (item) {
 }
 
 
+function EvidencebadgeFormator (value, row, index, field) {
+    var buttonsHtml = "";
+    $.each(value, function(i, v) {
+        var linksHtml = "";
+        $.each(v.links,function(i, w) {
+            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 20px; padding-top: 1px">id:' +
+                '<a href="' + w.url + '">' + w.id + '</a></li>'
+        });
+
+        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 20px; padding-bottom: 30px">' +
+            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: '+ v.color + '">' + v.database +
+            '&nbsp;<span class="badge">'+v.links.length+'</span>' +
+            '</button>' +
+            '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
+                '<ul>' + linksHtml + '</ul>' +
+            '</div>' +
+        '</span>';
+    });
+    return buttonsHtml;
+}
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -343,61 +363,12 @@ function ajaxSuccess(data) {
 
         }
 
-        console.log("isoforms");
-        console.log(data.isoforms);
-
-        console.log("mutation");
-        console.log(data.mutation);
-
         formatEvidences(data.species);
         formatEvidences(data.function);
-        formatEvidences(data.disease);
-
-
-
-
-
-
-
-        //check data.
-        // if (data.species) {
-
-            // for (var i = 0; i < data.species.length; i++) {
-            //     var speciesitem = data.species[i];
-            //     var databases = [];
-            //     for(var j = 0; j < speciesitem.evidence.length; j++){
-            //         var evidenceitem = speciesitem.evidence[j];
-            //         var found = '';
-            //         for(var x = 0; x < databases.length; x++){
-            //             var databaseitem = databases[x];
-            //             if(databaseitem.database === evidenceitem.database){
-            //                 found = true;
-            //                 databaseitem.links.push({
-            //                     url:  evidenceitem.url,
-            //                     id: evidenceitem.id
-            //                 });
-            //             }
-            //         }
-            //         if(!found){
-            //             databases.push({
-            //                 database: evidenceitem.database,
-            //                 color: databasecolor(evidenceitem.database),
-            //                 links: [{
-            //                     url: evidenceitem.url,
-            //                     id: evidenceitem.id
-            //                 }]
-            //             })
-            //         }
-            //     }
-            //
-            //     data.species[i].databases = databases;
-            //
-            // }
-            // formatEvidences(data.species);
-
-        // }
-
-        console.log(data.isoforms.locus);
+        formatEvidences(data.mutation);
+        formatEvidences(data.glycosylation);
+        formatEvidences(data.expression_disease);
+        formatEvidences(data.expression_tissue);
 
 
 
@@ -466,70 +437,33 @@ function ajaxSuccess(data) {
             data.itemsPathway = itemsPathway;
         }
 
-        data.itemsGlycosyl = [];
-        data.itemsGlycosyl2 = [];
-
         if (data.glycosylation) {
-
-            // Get data for sequence highlight
             highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
             highlight.n_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'N-linked');
+        }
 
-            for (var i = 0; i < data.glycosylation.length; i++) {
-                var glycan = data.glycosylation[i];
-                if (glycan.glytoucan_ac) {
-                    data.itemsGlycosyl.push({
-                        glytoucan_ac: glycan.glytoucan_ac,
-                        residue: glycan.residue + glycan.position,
-                        type: glycan.type,
-                        evidence: glycan.evidence
-                    });
-                }
-                else {
-                    data.itemsGlycosyl2.push({
-                        residue: glycan.residue + glycan.position,
-                        type: glycan.type,
-                        evidence: glycan.evidence
-                    });
-                }
-            }
+        function hasGlycanId(item) {
+            return (item.glytoucan_ac !== undefined);
+        }
+
+        if (data.glycosylation) {
+            data.glycosylation = data.glycosylation.map(function (item) {
+                item.residue = item.residue + item.position;
+                return item;
+            });
+
+            data.itemsGlycosyl = data.glycosylation.filter(hasGlycanId);
+
+            data.itemsGlycosyl2 = data.glycosylation.filter(function (item) {
+                return !(hasGlycanId(item));
+            });
         }
 
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
 
         var itemsMutate = [];
-        var itemsExpressionTissue = [];
-        var itemsExpressionDisease = [];
 
-        // filling in expression_disease
-        if (data.expression_disease) {
-            for (var i = 0; i < data.expression_disease.length; i++) {
-                var expressionD = data.expression_disease[i];
-                itemsExpressionDisease.push({
-                    name: expressionD.name,
-                    disease: expressionD.disease,
-                    significant: expressionD.significant,
-                    trend: expressionD.trend,
-                    evidence: expressionD.evidence
-                    // "significant":"yes",
-                    // "trend":"down",
-                });
-            }
-        }
-
-        // filling in expression_tissue
-        if (data.expression_tissue) {
-            for (var i = 0; i < data.expression_tissue.length; i++) {
-                var expressionT = data.expression_tissue[i];
-                itemsExpressionTissue.push({
-                    name: expressionT.name,
-                    tissue: expressionT.tissue,
-                    present: expressionT.present,
-                    evidence: expressionT.evidence
-                });
-            }
-        }
 
         // filling in mutation data
         if (data.mutation) {
@@ -554,14 +488,10 @@ function ajaxSuccess(data) {
             }
         }
 
-
-
-
-
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
         $container.html(html);
-        setupEvidenceList();
+       // setupEvidenceList();
 
         if (window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
@@ -584,7 +514,14 @@ function ajaxSuccess(data) {
 
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
-            columns: [{
+            columns: [
+                {
+                    field: 'databases',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: EvidencebadgeFormator
+                },
+                {
                 field: 'glytoucan_ac',
                 title: 'GlyTouCan <br/> Accession',
                 sortable: true,
@@ -615,18 +552,6 @@ function ajaxSuccess(data) {
             ],
             pagination: 10,
             data: data.itemsGlycosyl,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var html = [];
-                var evidences = row.evidence;
-                for (var i = 0; i < evidences.length; i++) {
-                    var evidence = evidences[i];
-                    html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                    html.push("</div>");
-                }
-                return html.join('');
-            },
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
             }
@@ -635,6 +560,12 @@ function ajaxSuccess(data) {
         // glycosylation table
         $('#glycosylation-table2').bootstrapTable({
             columns: [
+                {
+                    field: 'databases',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: EvidencebadgeFormator
+                },
                 {
                     field: 'type',
                     title: 'Type',
@@ -649,18 +580,6 @@ function ajaxSuccess(data) {
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var html = [];
-                var evidences = row.evidence;
-                for (var i = 0; i < evidences.length; i++) {
-                    var evidence = evidences[i];
-                    html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ":<a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                    html.push("</div>");
-                }
-                return html.join('');
-            },
         });
 
         $(".EmptyFind").each(function () {
@@ -678,14 +597,7 @@ function ajaxSuccess(data) {
                     field: 'database',
                     title: 'Sources',
                     sortable: true,
-                    formatter: function (value, row, index, field) {
-                        var but;
-                        if (value.evidence)
-                            but =value.database+"<a href='\" + value.url + \"' target='_blank'>\" + value.id + \"</a>)";
-                        else
-                            but =value.database+"<a href='\" + value.url + \"' target='_blank'>\" + value.id + \"</a>)";
-                        return '<button class="btn btn-primary" type="button"></button>';
-                    }
+                    formatter: EvidencebadgeFormator
                 },
                 
                 {
@@ -728,18 +640,6 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
-            //detailView: true,
-            // //detailFormatter: function (index, row) {
-            //     var html = [];
-            //     var evidences = row.evidence;
-            //     for (var i = 0; i < evidences.length; i++) {
-            //         var evidence = evidences[i];
-            //         html.push("<div class='row'>");
-            //         html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-            //         html.push("</div>");
-            //     }
-            //     return html.join('');
-            // },
         });
 
         $('#loading_image').fadeOut();
@@ -747,6 +647,12 @@ function ajaxSuccess(data) {
         // expression Disease table
         $('#expressionDisease-table').bootstrapTable({
             columns: [
+                {
+                    field: 'databases',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: EvidencebadgeFormator
+                },
                 {
                     field: 'disease',
                     title: 'Disease',
@@ -773,19 +679,7 @@ function ajaxSuccess(data) {
                 },
             ],
             pagination: 10,
-            data: itemsExpressionDisease,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var html = [];
-                var evidences = row.evidence;
-                for (var i = 0; i < evidences.length; i++) {
-                    var evidence = evidences[i];
-                    html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                    html.push("</div>");
-                }
-                return html.join('');
-            },
+            data: data.expression_disease
         });
 
         $('#loading_image').fadeOut();
@@ -793,6 +687,12 @@ function ajaxSuccess(data) {
         // expression Disease table
         $('#expressionTissue-table').bootstrapTable({
             columns: [
+                {
+                    field: 'databases',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: EvidencebadgeFormator
+                },
                 {
                     field: 'tissue',
                     title: 'Tissue',
@@ -810,21 +710,11 @@ function ajaxSuccess(data) {
             ],
 
             pagination: 10,
-            data: itemsExpressionTissue,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var html = [];
-                var evidences = row.evidence;
-                for (var i = 0; i < evidences.length; i++) {
-                    var evidence = evidences[i];
-                    html.push("<div class='row'>");
-                    html.push("<div class='col-xs-12'><li class='list-group-indent'>" + evidence.database + ": <a href=' " + evidence.url + " ' target='_blank'>" + evidence.id + "</a></li></div>");
-                    html.push("</div>");
-                }
-                return html.join('');
-            },
+            data: data.expression_tissue
         });
     }
+
+    setupEvidenceList();
     $('#loading_image').fadeOut();
 }
 
@@ -862,7 +752,6 @@ function LoadData(uniprot_canonical_ac) {
 
 function setupEvidenceList () {
     var $evidenceBadges = $('.evidence_badge');
-
     $evidenceBadges.each(function () {
         $(this).find('button').on('click', show_evidence);
     });
