@@ -303,7 +303,7 @@
                                                     data-placement="left"
                                                     data-trigger="click"
                                                     data-html="true"
-                                                    data-content="Enter the UniProtKB Accession of your protein. Explore <a href='https://www.uniprot.org/' target='_blank'>UniProtKB</a>">
+                                                    data-content="Enter the UniProtKB Accession for a  protein that bears your glycan. Explore <a href='https://www.uniprot.org/' target='_blank'>UniProtKB</a>">
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> UniProtKB Accession:
                                             </label>
@@ -391,7 +391,31 @@
                                                     <div class="gg-text-right">Explore <a 
                                                     href="https://enzyme.expasy.org/" 
                                                     target="_blank"
+                                                    data-toggle="modal" 
+                                                    data-target="#biosyntEnz"
                                                     data-tippy="Explore Biosynthetic Enzyme Database">Biosynthetic Enzyme</a></div>
+                                                    
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="biosyntEnz" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                      <!-- Modal content-->
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                          <h4 class="modal-title">Biosynthetic Enzyme Database</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          <p>Some text in the modal.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                      </div>
+
+                                                    </div>
+                                                    </div>
+                                                    
                                                 </div>
                                                 <br>
                                                 <h6 id='enzymeAccMsg' class="validation-message"></h6>
