@@ -455,7 +455,7 @@ function populateExample() {
     if (name != "Search by") {
         $('#simpleCatSelectedOptionExample')[0].innerHTML = exampleText + ": ";
         $.each(examples, function(i, example) {
-            $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample' data-tippy='Click to insert'>" + example + "</a>, ";
+            $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample' data-tippy='Click to Insert'>" + example + "</a>, ";
         });
         //remove last comma and space
         $('#simpleCatSelectedOptionExample')[0].innerHTML = $('#simpleCatSelectedOptionExample')[0].innerHTML.slice(0, -2);

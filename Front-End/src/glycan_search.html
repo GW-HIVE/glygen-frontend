@@ -160,7 +160,7 @@
                                                     data-placement="left"
                                                     data-trigger="click"
                                                     data-html="true" 
-                                                    data-content="Enter complete or partial GlyTouCan Accession of your glycan. Find my <a href='https://glytoucan.org/' target='_blank'>GlyTouCan Accession</a>">
+                                                    data-content="Enter complete or partial GlyTouCan Accession of your glycan. Explore <a href='https://glytoucan.org/' target='_blank'>GlyTouCan Accession</a>">
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> GlyTouCan Accession:
                                             </label>
@@ -170,14 +170,16 @@
                                                     class="form-control glycan" 
                                                     id="glycan_id"
                                                     placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
-                                                <div><a
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a
+                                                    href="#G17689DH" id="textExampleGlycan"
+                                                    data-tippy="Click to Insert">G17689DH</a></div>
+                                                    
+                                                    <div class="gg-text-right">Explore <a
                                                     href="https://glytoucan.org/" 
                                                     target="_blank"
-                                                    data-tippy="Explore GlyTouCan">GlyTouCan Acc.</a>
-                                                    Example: <a class="gg-text-example" 
-                                                    href="#G17689DH" id="textExampleGlycan"
-                                                    data-tippy="Click to insert">G17689DH
-                                                </a></div>
+                                                    data-tippy="Explore GlyTouCan Database">GlyTouCan Acc.</a></div>
+                                                </div>
                                                 <h6 id='glycanAccMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
@@ -269,8 +271,7 @@
                                             </label>
                                             <div class="col-sm-8">
                                                 <select class="ddl glycanType" 
-                                                    id="ddl" 
-                                                    onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
+                                                    id="ddl" onchange="configureDropDownLists(this, document.getElementById('ddl2'))">
                                                     <option value="">Select Glycan Type</option>
                                                 </select>
                                             </div>
@@ -312,14 +313,18 @@
                                                     class="form-control" 
                                                     id="protein" 
                                                     placeholder="Enter the UniProtKB Accession of your protein" onkeyup="validateProteinAcc(this)">
-                                                <div><a href="https://www.uniprot.org/help/accession_numbers" 
-                                                    target="_blank" 
-                                                    data-tippy="Explore UniProtKB">UniProtKB Acc.</a> 
-                                                    Example: <a class="gg-text-example" 
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a 
                                                     href="#P14210-1" 
                                                     id="textExampleProtein"
-                                                    data-tippy="Click to insert">P14210-1
-                                                </a></div>
+                                                    data-tippy="Click to Insert">P14210-1
+                                                    </a></div>
+                                                   
+                                                    <div class="gg-text-right">Explore <a href="https://www.uniprot.org/help/accession_numbers" 
+                                                    target="_blank" 
+                                                    data-tippy="Explore UniProtKB Database">UniProtKB Acc.</a></div>
+                                                </div>
+                                                <br>
                                                 <h6 id='proteinAccMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
@@ -332,7 +337,7 @@
                                                     data-placement="left" 
                                                     data-trigger="click"
                                                     data-html="true"
-                                                    data-content="Enter a Glycan Motif comprising part of your glycan(s). Find my <a href='https://www.uniprot.org/help/carbohyd' target='_blank'>Glycan Motif</a>">
+                                                    data-content="Enter a Glycan Motif comprising part of your glycan(s). Explore <a href='https://www.uniprot.org/help/carbohyd' target='_blank'>Glycan Motif</a>">
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> Glycan Motif:
                                             </label>
@@ -341,18 +346,19 @@
                                                     name="GlycanMotif" 
                                                     class="form-control motif" 
                                                     id="motif"
-                                                    placeholder="Enter the name of a Glycan Motif contained in your glycan"
-                                                    onkeyup="validateMotifName(this)">
-                                                <div><a
-                                                    href="https://www.uniprot.org/help/carbohyd" target="_blank"
-                                                     
-                                                    data-tippy="Find my Glycan Motif">Glycan Motif</a>
-                                                    Example: <a class="gg-text-example" 
+                                                    placeholder="Enter the name of a Glycan Motif contained in your glycan" onkeyup="validateMotifName(this)">
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a 
                                                     href="#N-Glycan complex" 
                                                     id="textExampleMotif"
+                                                    data-tippy="Click to Insert">N-Glycan complex
+                                                    </a></div>
                                                     
-                                                    data-tippy="Click to insert">N-Glycan complex
-                                                </a></div>
+                                                    <div class="gg-text-right">Explore <a
+                                                    href="https://www.uniprot.org/help/carbohyd" target="_blank" 
+                                                    data-tippy="Explore Glycan Motif Database">Glycan Motif</a></div>
+                                                </div>
+                                                <br>
                                                 <h6 id='motifNameMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
@@ -365,7 +371,7 @@
                                                     data-placement="left" 
                                                     data-trigger="click"
                                                     data-html="true"
-                                                    data-content="Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Find my <a href='https://enzyme.expasy.org/' target='_blank'>Biosynthetic Enzyme</a>">
+                                                    data-content="Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore <a href='https://enzyme.expasy.org/' target='_blank'>Biosynthetic Enzyme</a>">
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> Biosynthetic Enzyme:</label>
                                             <div class="col-sm-8">
@@ -375,17 +381,19 @@
                                                     class="form-control enzyme" 
                                                     id="enzyme"
                                                     placeholder="Enter the Gene Name of an enzyme" onkeyup="validateEnzymeAcc(this)">
-                                                <div><a 
-                                                    href="https://enzyme.expasy.org/" 
-                                                    target="_blank"
-                                                    
-                                                    data-tippy="Find my Biosynthetic Enzyme">Biosynthetic Enzyme</a>
-                                                    Example: <a class="gg-text-example" 
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a 
                                                     href="B4GALT1" 
                                                     id="textExampleEnzyme"
-                                                    
-                                                    data-tippy="Click to insert">B4GALT1
-                                                </a></div>
+                                                    data-tippy="Click to Insert">B4GALT1
+                                                    </a></div>
+                                                
+                                                    <div class="gg-text-right">Explore <a 
+                                                    href="https://enzyme.expasy.org/" 
+                                                    target="_blank"
+                                                    data-tippy="Explore Biosynthetic Enzyme Database">Biosynthetic Enzyme</a></div>
+                                                </div>
+                                                <br>
                                                 <h6 id='enzymeAccMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
