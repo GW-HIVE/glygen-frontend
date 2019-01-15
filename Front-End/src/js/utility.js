@@ -218,7 +218,8 @@ function getTimeout(ajaxWebService) {
 
     // detail
     var detailGlycan = 5000,
-        detailProtein = 5000;
+        detailProtein = 5000,
+        detailMotif = 5000;
 
     // contact us
     var contact = 5000;
@@ -233,6 +234,8 @@ function getTimeout(ajaxWebService) {
             return listGlycan;
         case "detail_glycan":
             return detailGlycan;
+        case "detail_motif":
+            return detailMotif;
         case "home_init":
             return homeInit;
         case "glycan_search_simple":

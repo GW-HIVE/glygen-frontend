@@ -337,3 +337,27 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
         flex: 1 0 100%;
     }
 }
+/*---------------------------
+    Motif details 
+-----------------------------*/
+.motif-panel-space {
+    margin-bottom: 20px;
+}
+
+
+.btn-primary-motif {
+    color: #204d74;
+    background-color: #fff;
+    border-color: #337ab7; 
+}
+
+.btn-primary-motif:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+
+
+
+
