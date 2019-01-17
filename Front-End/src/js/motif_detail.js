@@ -3,18 +3,18 @@
 // @Date: November 30, 2018
 
 
-var glytoucan_ac;
+var query;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
  */
 function ajaxSuccess(data) {
     if (data.error_code) {
-        activityTracker("error", glytoucan_ac, data.error_code);
+        activityTracker("error", query, data.error_code);
         alertify.alert('Error occured', data.error_code);
     }
     else {
-        activityTracker("user", glytoucan_ac, "successful response");
+        activityTracker("user", query, "successful response");
 
         var templateDetail = $('#item_template_detail').html();
         var templatePubl = $('#item_template_publ').html();
@@ -130,9 +130,9 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    glytoucan_ac = getParameterByName('glytoucan_ac');
-    document.title = glytoucan_ac + " Motif details - glygen";   //updates title with the glycan ID
-    LoadData(glytoucan_ac);
+    query = getParameterByName('glytoucan_ac');
+    document.title = query + " Motif details - glygen";   //updates title with the glycan ID
+    LoadData(query);
 });
 
 /**
