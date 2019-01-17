@@ -461,7 +461,6 @@ function ajaxSuccess(data) {
 
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
-
         var itemsMutate = [];
 
 
@@ -554,6 +553,7 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
+                setupEvidenceList();
             }
         });
 
@@ -580,6 +580,10 @@ function ajaxSuccess(data) {
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
+            onPageChange: function () {
+                scrollToPanel("#glycosylation");
+                setupEvidenceList();
+            }
         });
 
         $(".EmptyFind").each(function () {
@@ -769,9 +773,6 @@ function show_evidence(){
         $evidenceList.addClass("hidden");
     }
 
-    // console.log(button);
-    // $("#evidence_" + species + "_" + database).removeClass("hidden");
-    // $evidenceList.removeClass("hidden");
 }
 
 /**

@@ -31,38 +31,61 @@ function formatEvidences (item) {
         for (var i = 0; i < item.length; i++) {
             var currentItem = item[i];
             var databases = [];
+            if (currentItem && currentItem.evidence.length) {
+                for (var j = 0; j < currentItem.evidence.length; j++) {
+                    var evidenceitem = currentItem.evidence[j];
+                    var found = '';
 
-            for (var j = 0; j < currentItem.evidence.length; j++) {
-                var evidenceitem = currentItem.evidence[j];
-                var found = '';
+                    for (var x = 0; x < databases.length; x++) {
+                        var databaseitem = databases[x];
+                        if (databaseitem.database === evidenceitem.database) {
+                            found = true;
+                            databaseitem.links.push({
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            });
+                        }
+                    }
 
-                for (var x = 0; x < databases.length; x++) {
-                    var databaseitem = databases[x];
-                    if (databaseitem.database === evidenceitem.database) {
-                        found = true;
-                        databaseitem.links.push({
-                            url: evidenceitem.url,
-                            id: evidenceitem.id
-                        });
+                    if (!found) {
+                        databases.push({
+                            database: evidenceitem.database,
+                            color: databasecolor(evidenceitem.database),
+                            links: [{
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            }]
+                        })
                     }
                 }
-
-                if (!found) {
-                    databases.push({
-                        database: evidenceitem.database,
-                        color: databasecolor(evidenceitem.database),
-                        links: [{
-                            url: evidenceitem.url,
-                            id: evidenceitem.id
-                        }]
-                    })
-                }
             }
-
             currentItem.databases = databases;
         }
     }
 }
+
+
+function EvidencebadgeFormator (value, row, index, field) {
+    var buttonsHtml = "";
+    $.each(value, function(i, v) {
+        var linksHtml = "";
+        $.each(v.links,function(i, w) {
+            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 20px; padding-top: 1px">id:' +
+                '<a href="' + w.url + '">' + w.id + '</a></li>'
+        });
+
+        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 20px; padding-bottom: 30px">' +
+            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: '+ v.color + '">' + v.database +
+            '&nbsp;<span class="badge">'+v.links.length+'</span>' +
+            '</button>' +
+            '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
+            '<ul>' + linksHtml + '</ul>' +
+            '</div>' +
+            '</span>';
+    });
+    return buttonsHtml;
+}
+
 var glytoucan_ac;
 /**
  * Handling a succesful call to the server for details page
@@ -89,6 +112,8 @@ function ajaxSuccess(data) {
             }
         }
         formatEvidences(data.species);
+        formatEvidences(data.glycoprotein);
+
         //Adding breaklines
         if (data.glycoct){
          data.glycoct = data.glycoct.replace(/ /g, '<br>');}
@@ -100,7 +125,7 @@ function ajaxSuccess(data) {
         var items = data.enzyme ? data.enzyme : [];
 
         $container.html(html);
-        setupEvidenceList();
+        //setupEvidenceList();
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -146,9 +171,15 @@ function ajaxSuccess(data) {
         });
 
         //Table view for found glycoproteins
-        items = data.glycoprotein ? data.glycoprotein : [];
+        //items = data.glycoprotein ? data.glycoprotein : [];
         $('#tbl_found_glycoproteins').bootstrapTable({
             columns: [
+                {
+                    field: 'databases',
+                    title: 'Sources',
+                    sortable: true,
+                    formatter: EvidencebadgeFormator
+                },
                 {
                     field: 'protein_name',
                     title: 'Protein Name',
@@ -169,19 +200,13 @@ function ajaxSuccess(data) {
                 }
             ],
             pagination: 10,
-            data: items,
-            detailView: true,
-            detailFormatter: function (index, row) {
-                var detail_view = "";
-                row.evidence.forEach(function (e) {
-                    detail_view += "<div class='row'>";                    
-                    detail_view += "<div><li class='list-group-indent'>" + e.database + ":<a href=' " + e.url + " ' target='_blank'>" + e.id + "</a></li></div>";
-                    detail_view += "</div>";
-                });
-                return detail_view;
+            data: data.glycoprotein,
+            onPageChange: function () {
+                setupEvidenceList();
             }
         });
     }
+    setupEvidenceList();
     $('#loading_image').fadeOut();
 }
 
@@ -221,14 +246,10 @@ function LoadData(glytoucan_ac) {
 }
 
 
-// function show_evidence(species, database){
-//     $(".evidence_links").addClass("hidden");
-//     $("#evidence_" + species + "_" + database).removeClass("hidden");
-// }
+
 
 function setupEvidenceList () {
     var $evidenceBadges = $('.evidence_badge');
-
     $evidenceBadges.each(function () {
         $(this).find('button').on('click', show_evidence);
     });
@@ -246,9 +267,6 @@ function show_evidence(){
         $evidenceList.addClass("hidden");
     }
 
-    // console.log(button);
-    // $("#evidence_" + species + "_" + database).removeClass("hidden");
-    // $evidenceList.removeClass("hidden");
 }
 
 /**
