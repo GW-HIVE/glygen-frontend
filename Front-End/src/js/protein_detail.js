@@ -644,6 +644,9 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
+            onPageChange: function () {
+                setupEvidenceList();
+            }
         });
 
         $('#loading_image').fadeOut();
@@ -683,7 +686,11 @@ function ajaxSuccess(data) {
                 },
             ],
             pagination: 10,
-            data: data.expression_disease
+            data: data.expression_disease,
+            onPageChange: function () {
+
+                setupEvidenceList();
+            }
         });
 
         $('#loading_image').fadeOut();
@@ -714,7 +721,11 @@ function ajaxSuccess(data) {
             ],
 
             pagination: 10,
-            data: data.expression_tissue
+            data: data.expression_tissue,
+            onPageChange: function () {
+
+                setupEvidenceList();
+            }
         });
     }
 
