@@ -16,6 +16,7 @@ function getWsUrl(request, id, id1) {
     var ws_useCaseSearch = ws_base + "usecases";
     var ws_homeInit = ws_base + "pages/home_init";
     var ws_dataDownload = ws_base + "data/download";
+    var ws_globalSearch = ws_base + "globalsearch/search";
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
@@ -116,6 +117,9 @@ function getWsUrl(request, id, id1) {
 
         case "data_download":
             return ws_dataDownload;
+
+        case "global_search":
+            return ws_globalSearch;
     }
 }
 
