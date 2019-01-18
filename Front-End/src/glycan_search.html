@@ -53,6 +53,7 @@
     <link rel="stylesheet" type="text/css" href="css/server.css">
     <!-- CSS for serach page -->
     <link rel="stylesheet" type="text/css" href="css/search.css">
+    <link rel="stylesheet" type="text/css" href="css/list.css">
 
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
@@ -399,19 +400,38 @@
                                                     <div class="modal fade" id="biosyntEnz" role="dialog">
                                                     <div class="modal-dialog">
 
-                                                      <!-- Modal content-->
-                                                      <div class="modal-content">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
                                                         <div class="modal-header">
-                                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                          <h4 class="modal-title">Biosynthetic Enzyme Database</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Biosynthetic Enzyme Database</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                          <p>Some text in the modal.</p>
+                                                            <p>Biosynthetic Enzyme Database Table.</p>
+                                                            <!-- table start here -->
+                                                            <table id="gen-table" data-show-export="true" data-toggle="table" data-sort-name="glytoucan_ac" data-sort-order="asc" data-page-size="10">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="glytoucan_ac" data-formatter="pageFormat" data-sortable="true">Gene name</th>
+                                                                        <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Cazy Family</th>
+                                                                        <th data-field="mass" data-formatter="massFormatter" data-sortable="true">UniprotKB Acc.
+                                                                        </th>
+                                                                        <th data-field="number_monosaccharides" data-sortable="true">Organizm
+                                                                        </th>
+                                                                        <th data-field="number_proteins" data-sortable="true">On How Many
+                                                                            <br>Glycoproteins
+                                                                        </th>
+                                                                        <th data-field="number_enzymes" data-sortable="true">How Many
+                                                                            <br>Enzymes
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table><!-- table container ends here -->
                                                         </div>
                                                         <div class="modal-footer">
-                                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div>
-                                                      </div>
+                                                    </div>
 
                                                     </div>
                                                     </div>
