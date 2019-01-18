@@ -6,6 +6,8 @@
 @update: 17 April 2018 - new web services
 @update: 21 June 2018 - Gaurav Agarwal - sidebar issue resolved and proper object placements for different screen size.
 @update: 27 June 2018 - web services major changes
+@update: Cross Ref grouping - Rupali Mahadik
+@update: Evidance badge - Rupali Mahadik. Jan.17-2019
 --------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -132,7 +134,7 @@
 
             <div class="row">
                 <div class="dropdown gg-download text-right">
-                    <button class="btn btn-default2 btn-link btn-link-detail dropdown-toggle" type="button"
+                    <button class="btn btn-link btn-link-detail dropdown-toggle" type="button"
                             id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="true">
                         <i class="glyphicon glyphicon-save"></i> Download
@@ -252,8 +254,7 @@
                                 <Br/>
                             </div>
                             <span id="glycanname">
-                                    <a class="panelcontent" href="https://glytoucan.org/Structures/Glycans/{{id}}"
-                                       target="_blank">{{id}}-{{name}} </a>
+                                    <a class="panelcontent" href="motif_detail.html?glytoucan_ac={{id}}">{{id}}-{{name}} </a>
                                 <!--<a class="panelcontent" href="{{id}}" target="_blank">{{name}}</a>-->
                                 </span>
                         </div>

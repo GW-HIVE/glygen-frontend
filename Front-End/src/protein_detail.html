@@ -1,9 +1,12 @@
 <!--------------------------------------------------------------------------
 @author: Rupali Mahadik
 @description: UO1 Version-1.0.1
-@createDate June 5, 2018
-@update: October 24,2018
+@createDate June 5, 2018-Rupali Mahadik
+@update: October 24,2018-Rupali Mahadik
+@update: Cross Ref and Pathway grouping - Rupali Mahadik
+@update: Bootstrap table for glycosylation  - Rupali Mahadik.
 @update: July 31, 2018 - Gaurav Agarwal - added function, disease and mutation boxes. updated and added various other fields. few UI changes.
+@update: Evidance badge - Rupali Mahadik. Jan.17-2019
 ----------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -241,7 +244,7 @@
                                         {{#databases}}
                                         <span class="evidence_badge"
                                               style="position: relative; display: inline-block; padding-left: 20px; padding-bottom: 20px">
-                                    <button class="btn btn-primary tagg" type="button"
+                                    <button class="btn btn-primary color-{{database}}" type="button"
                                             style="background-color:{{color}}">
                                         {{database}} <span class="badge">{{links.length}}</span>
                                      </button>

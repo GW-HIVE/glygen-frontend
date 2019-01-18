@@ -17,6 +17,7 @@ function getWsUrl(request, id, id1) {
     var ws_homeInit = ws_base + "pages/home_init";
     var ws_dataDownload = ws_base + "data/download";
     var ws_globalSearch = ws_base + "globalsearch/search";
+    var ws_base_motif = ws_base + "motif";   
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
@@ -48,7 +49,9 @@ function getWsUrl(request, id, id1) {
 
         case "glycan_detail":
             return ws_base_glycan + "/detail/" + id;
-
+            
+        case "motif_detail":
+            return ws_base_motif + "/detail/" + id;
         //Protein webservices
         case "search_init_protein":
             return ws_base_protein + "/search_init";

@@ -83,50 +83,67 @@
                 <a class="selected" href="#general">General</a>
             </li>
             <li>
-                <a href="#publications">Publications</a>
+                <a href="#glycans">Glycans</a>
             </li>
             <li>
-                <a href="#glycans">Glycans</a>
+                <a href="#publications">Publications</a>
             </li>
         </ul>
         <!--  ?glytoucan_ac=G17689DH         -->
         <!-- cd-faq-categories -->
         <!-- main content for page -->
-        <div class="cd-faq-items" id="content">
+        <div class="cd-faq-items motif-panel-space" id="content_detail">
             <!-- <div id="content" class="container" "> -->
 
-            <script id="item_template" type="text/template">
-                <!-- Glycan ID starts here for page -->
-                <center><h2 class="page-heading" style="margin-top: -5px;">Motif Details for <span> 
+            <script id="item_template_detail" type="text/template">
+                <!-- Glycan ID Title -->
+                <center><h2 class="page-heading motif-panel-space" style="margin-top: -5px;">Motif Details for <span> 
                 {{#glytoucan}}{{glytoucan_ac}}{{/glytoucan}}</span></h2></center>
                 
+                <!-- Buttons -->
                 <div class="row">
-                    <div class="dropdown gg-download text-right">
-                        <button class="btn btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="glyphicon glyphicon-save"></i> Download
-                            <span class="caret"></span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-detail dropdown-menu-right" aria-labelledby="download">
-                            <div class="row">
-                                <div class="col-md-7"><label>Download&nbsp;format: </label> </div>
-                                <div class="col-md-5"><select id='download_format'>
-                                    <option value='json'>JSON</option>
-                                </select></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-7"><label>Compressed: </label></div>
-                                <div class="col-md-5"><input type='checkbox' id='download_compression' /></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9"></div>
-                                <div class="col-md-3">
-                                    <button class="btn-default" onclick="downloadPrompt();">OK</button>
-                                </div>
+                    <!-- Go back buttons -->
+                    <div class="col-lg-12m col-md-10 col-sm-6">
+                        <!--    <button type="button" class="btn btn-primary-motif" onclick="backGlycanDetail();">Back to Glycan Details</button> -->
+                    
+                        <!-- <button type="button" class="btn btn-primary-motif onclick="window.history.go(-3)">Back to Search</button> -->
+
+                    <!-- <button type="button" class="btn btn-primary-motif onclick="window.history.go(-1)">Go Back</button> -->
+                </div>
+                    
+                    <!-- Download button -->
+                    <!-- <div class="col-md-2 col-sm-6"> -->
+                    <div class="dropdown gg-download5 text-right">
+                    <button class="btn btn-link btn-link-detail dropdown-toggle" type="button"
+                            id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                        <i class="glyphicon glyphicon-save"></i> Download
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-motif dropdown-menu-right" aria-labelledby="download">
+                        <div class="row">
+                            <div class="col-md-7"><label>Download&nbsp;format: </label></div>
+                            <div class="col-md-5"><select id='download_format'>
+                                <option value='json'>JSON</option>
+                            </select></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7"><label>Compressed: </label></div>
+                            <div class="col-md-5"><input type='checkbox' id='download_compression'/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9"></div>
+                            <div class="col-md-3">
+                                <button class="btn-default" onclick="downloadPrompt();">OK</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- General -->
+                 <!-- </div> -->
+                </div>
+                
+ 
+                <!-- General Panel-->
                 <ul id="general" class="cd-faq-group">
                     <li class="cd-faq-title"/>
                     <div class="panel panel-default">
@@ -158,28 +175,9 @@
                         </div>
                     </div>
                 </ul>
-                
-                <!--Publications-->
-                <ul id="publications" class="cd-faq-group selected">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Publications</h4>
-                        </div>
-                        <div class="panel-body">
-                            {{#publication}}
-                                <p class="panelmaincontent">
-                                    <li class="list-group" id="panelmaincontent1"> <strong>Journal:</strong> {{journal}}<br>
-                                        <strong>Title:</strong> {{title}}<br>
-                                        <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
-                            {{/publication}} {{^publication}} No data available. {{/publication}}
-                        </div>
-                    </div>
-                </ul>
-        
             </script>
         </div>
-        <div class="cd-faq-items" id="content" style="margin-bottom: 100px;">
+        <div class="cd-faq-items motif-panel-space" id="content">        
             <!-- Glycans Containing this Motif-->
             <!--        <div class="cd-faq-items">-->
             <!-- Top pagination -->
@@ -246,6 +244,29 @@
                 </div>
             </div>
         </div>
+        <div class="cd-faq-items" id="content_publ" style="margin-bottom: 600px;">
+            <script id="item_template_publ" type="text/template">    
+                <!--Publications-->
+                <ul id="publications" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Publications</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#publication}}
+                                <p class="panelmaincontent">
+                                    <li class="list-group" id="panelmaincontent1"> <strong>Journal:</strong> {{journal}}<br>
+                                        <strong>Title:</strong> {{title}}<br>
+                                        <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+                            {{/publication}} {{^publication}} No data available. {{/publication}}
+                        </div>
+                    </div>
+                </ul>
+        
+            </script>
+        </div>
+    </div>
 
         <a href="#0" class="cd-close-panel">Close</a>
     </section>

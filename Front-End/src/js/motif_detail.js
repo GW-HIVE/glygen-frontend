@@ -3,20 +3,21 @@
 // @Date: November 30, 2018
 
 
-var glytoucan_ac;
+var query;
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
  */
 function ajaxSuccess(data) {
     if (data.error_code) {
-        activityTracker("error", glytoucan_ac, data.error_code);
+        activityTracker("error", query, data.error_code);
         alertify.alert('Error occured', data.error_code);
     }
     else {
-        activityTracker("user", glytoucan_ac, "successful response");
+        activityTracker("user", query, "successful response");
 
-        var template = $('#item_template').html();
+        var templateDetail = $('#item_template_detail').html();
+        var templatePubl = $('#item_template_publ').html();
         data.hasMotifs = (data.motifs && (data.motifs.length > 0));
         data.hasGlycosylate = (data.glycosylate && (data.glycosylate.length > 0));
         data.imagePath = getWsUrl('glycan_image', data.glytoucan.glytoucan_ac);
@@ -35,25 +36,14 @@ function ajaxSuccess(data) {
          data.wurcs = data.wurcs.replace(/ /g, '<br>');
         if (data.mass){
          data.mass = addCommas(data.mass);}
-        var html = Mustache.to_html(template, data);
-        var $container = $('#content');
+        var htmlDetail = Mustache.to_html(templateDetail, data);
+        var htmlPubl = Mustache.to_html(templatePubl, data);
+        var $containerDetail = $('#content_detail');
+        var $containerPubl = $('#content_publ');
         var items = data.enzyme ? data.enzyme : [];
 
-        $container.html(html);
-        $container.find('.open-close-button').each(function (i, element) {
-            $(element).on('click', function () {
-                var $this = $(this);
-                var buttonText = $this.text();
-
-                if (buttonText === '+') {
-                    $this.text('-');
-                    $this.parent().next().show();
-                } else {
-                    $this.text('+');
-                    $this.parent().next().hide();
-                }
-            });
-        });
+        $containerDetail.html(htmlDetail);
+        $containerPubl.html(htmlPubl);
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -109,11 +99,11 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
 function LoadData(glytoucan_ac) {
     var ajaxConfig = {
         dataType: "json",
-        url: getWsUrl("glycan_detail", glytoucan_ac),
+        url: getWsUrl("motif_detail", glytoucan_ac),
         // data: getDetailPostData(id),
         // url: test.json, glytoucan_ac),
         method: 'POST',
-        timeout: getTimeout("detail_glycan"),
+        timeout: getTimeout("detail_motif"),
         success: ajaxSuccess,
         error: ajaxFailure
     };
@@ -140,9 +130,9 @@ function getParameterByName(name, url) {
 }
 
 $(document).ready(function () {
-    glytoucan_ac = getParameterByName('glytoucan_ac');
-    document.title = glytoucan_ac + " Motif details - glygen";   //updates title with the glycan ID
-    LoadData(glytoucan_ac);
+    query = getParameterByName('glytoucan_ac');
+    document.title = query + " Motif details - glygen";   //updates title with the glycan ID
+    LoadData(query);
 });
 
 /**
@@ -179,12 +169,12 @@ var limit = 20;
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 
-function buildSummary(queryInfo) {
-    var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
-    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
-    $('#summary-table').html(summaryHtml);
-}
+//function buildSummary(queryInfo) {
+//    var summaryTemplate = $('#summary-template').html();
+//    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
+//    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+//    $('#summary-table').html(summaryHtml);
+//}
 
 /**
  * Format function of getting total result for each search   [+]
@@ -241,13 +231,19 @@ function massFormatter(value) {
 
 var lastSearch;
 
-function editSearch() {
+function editMotifSearch() {
     {
         window.location.replace("glycan_search.html?id=" + id);
         activityTracker("user", id, "edit search");
     }
 }
 
+function backGlycanDetail() {
+    {
+        window.location.replace("glycan_detail.html?glytoucan_ac=" + id);
+        activityTracker("user", id, "edit search");
+    }
+}
 /**
  * Handling a succesful call to the server for list page
  * @param {Object} data - the data set returned from the server on success
