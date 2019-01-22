@@ -62,7 +62,7 @@ function getMutationHighlightData(mutationData) {
  */
 function isHighlighted(position, selection) {
     var result = false;
-    if (selection){
+    if (selection) {
         for (var x = 0; x < selection.length; x++) {
             var start = selection[x].start;
             var end = selection[x].start + selection[x].length - 1;
@@ -85,7 +85,7 @@ function isHighlighted(position, selection) {
  */
 function buildHighlightData(sequence, highlightData) {
     var result = [];
-    if(sequence) {
+    if (sequence) {
         for (var x = 0; x < sequence.length; x++) {
             var position = x + 1;
             result.push({
@@ -185,14 +185,14 @@ function createHighlightUi(highlightData, perLine) {
         var rowDataTemp = adjustSequenceRuns(highlightData.slice(x, x + perLine));
         var rowData = [];
         for (var i = 0; i < rowDataTemp.length; i++) {
-            for(var s = 0; s < SEQUENCE_SPACES_BETWEEN_RUNS; s++) {
+            for (var s = 0; s < SEQUENCE_SPACES_BETWEEN_RUNS; s++) {
                 rowDataTemp[i].push({
                     character: '&nbsp;',
                     n_link_glycosylation: false,
                     o_link_glycosylation: false,
                     mutation: false
                 });
-            }            
+            }
             $.merge(rowData, rowDataTemp[i]);
         }
 
@@ -210,12 +210,14 @@ var uniprot_canonical_ac;
  */
 function scrollToPanel(hash) {
     //to scroll to the particular sub section.
-    if ($(window).width() < 768) {   //mobile view
+    if ($(window).width() < 768) { //mobile view
         $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
         $('.cd-close-panel').addClass('move-left');
         $('body').addClass('cd-overlay');
     } else {
-        $('body,html').animate({'scrollTop': $(hash).offset().top - 19}, 200);
+        $('body,html').animate({
+            'scrollTop': $(hash).offset().top - 19
+        }, 200);
     }
 }
 
@@ -246,7 +248,7 @@ function formatSequence(sequenceString) {
  */
 function adjustSequenceRuns(sequence) {
     var y_arr = [];
-    for (var i = 0; i<sequence.length; i += SEQUENCE_ROW_RUN_LENGTH) {
+    for (var i = 0; i < sequence.length; i += SEQUENCE_ROW_RUN_LENGTH) {
         y_arr.push(sequence.slice(i, i + SEQUENCE_ROW_RUN_LENGTH));
     }
     return y_arr;
@@ -271,7 +273,7 @@ function addCommas(nStr) {
 }
 
 
-function formatEvidences (item) {
+function formatEvidences(item) {
     if (item && item.length) {
         for (var i = 0; i < item.length; i++) {
             var currentItem = item[i];
@@ -310,23 +312,23 @@ function formatEvidences (item) {
 }
 
 
-function EvidencebadgeFormator (value, row, index, field) {
+function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
-    $.each(value, function(i, v) {
+    $.each(value, function (i, v) {
         var linksHtml = "";
-        $.each(v.links,function(i, w) {
-            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 20px; padding-top: 1px">id:' +
+        $.each(v.links, function (i, w) {
+            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px">id: ' +
                 '<a href="' + w.url + '">' + w.id + '</a></li>'
         });
 
-        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 20px; padding-bottom: 30px">' +
-            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: '+ v.color + '">' + v.database +
-            '&nbsp;<span class="badge">'+v.links.length+'</span>' +
+        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 30px">' +
+            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
+            '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
             '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
-                '<ul>' + linksHtml + '</ul>' +
+            '<ul>' + linksHtml + '</ul>' +
             '</div>' +
-        '</span>';
+            '</span>';
     });
     return buttonsHtml;
 }
@@ -339,21 +341,20 @@ function ajaxSuccess(data) {
         activityTracker("error", uniprot_canonical_ac, data.error_code);
         // added by Gaurav on July 27, 2018. Web service error display.
         alertify.alert('Error occured', data.error_code);
-    }
-    else {
+    } else {
         activityTracker("user", uniprot_canonical_ac, "successful response");
         var template = $('#item_template').html();
-        if(data.sequence) {
+        if (data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
 
-            if(data.isoforms) {
+            if (data.isoforms) {
                 for (var i = 0; i < data.isoforms.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
                     data.isoforms[i].sequence.sequence = formatSequence(data.isoforms[i].sequence.sequence);
                     data.isoforms[i].locus.start_pos = addCommas(data.isoforms[i].locus.start_pos);
                     data.isoforms[i].locus.end_pos = addCommas(data.isoforms[i].locus.end_pos);
-                    if(data.isoforms[i].locus && data.isoforms[i].locus.evidence) {
+                    if (data.isoforms[i].locus && data.isoforms[i].locus.evidence) {
                         data.isoforms[i].evidence = data.isoforms[i].locus.evidence;
                         formatEvidences([data.isoforms[i]]);
                     }
@@ -382,12 +383,10 @@ function ajaxSuccess(data) {
                     var databaseitem = itemscrossRef[j];
                     if (databaseitem.database === crossrefitem.database) {
                         found = true;
-                        databaseitem.links.push(
-                            {
-                                url: crossrefitem.url,
-                                id: crossrefitem.id
-                            }
-                        );
+                        databaseitem.links.push({
+                            url: crossrefitem.url,
+                            id: crossrefitem.id
+                        });
                     }
                 }
                 if (!found) {
@@ -413,13 +412,11 @@ function ajaxSuccess(data) {
                     var databaseitem1 = itemsPathway[j];
                     if (databaseitem1.resource === pathwayitem.resource) {
                         found = true;
-                        databaseitem1.links.push(
-                            {
-                                url: pathwayitem.url,
-                                id: pathwayitem.id,
-                                name: pathwayitem.name
-                            }
-                        );
+                        databaseitem1.links.push({
+                            url: pathwayitem.url,
+                            id: pathwayitem.id,
+                            name: pathwayitem.name
+                        });
                     }
                 }
                 if (!found) {
@@ -490,7 +487,7 @@ function ajaxSuccess(data) {
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
         $container.html(html);
-       // setupEvidenceList();
+        // setupEvidenceList();
 
         if (window.innerWidth <= 500) {
             createHighlightUi(sequenceData, 10);
@@ -521,12 +518,12 @@ function ajaxSuccess(data) {
                     formatter: EvidencebadgeFormator
                 },
                 {
-                field: 'glytoucan_ac',
-                title: 'GlyTouCan <br/> Accession',
-                sortable: true,
-                formatter: function (value, row, index, field) {
-                    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
-                }
+                    field: 'glytoucan_ac',
+                    title: 'GlyTouCan <br/> Accession',
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
+                    }
             },
                 {
                     field: 'type',
@@ -603,11 +600,11 @@ function ajaxSuccess(data) {
                     sortable: true,
                     formatter: EvidencebadgeFormator
                 },
-                
+
                 {
-                field: 'annotation',
-                title: 'Annotation name',
-                sortable: true
+                    field: 'annotation',
+                    title: 'Annotation name',
+                    sortable: true
             },
                 {
                     field: 'disease',
@@ -616,9 +613,9 @@ function ajaxSuccess(data) {
                     formatter: function (value, row, index, field) {
                         var diss;
                         if (value.icd10)
-                            diss = value.name + " (ICD10:" + value.icd10 + " ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                            diss = value.name + " (ICD10: " + value.icd10 + " ; DOID: <a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
                         else
-                            diss = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                            diss = value.name + " (DOID: <a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
                         return diss;
                     }
                 },
@@ -667,9 +664,9 @@ function ajaxSuccess(data) {
                     formatter: function (value, row, index, field) {
                         var diss1;
                         if (value.icd10)
-                            diss1 = value.name + " (ICD10:" + value.icd10 + " ; DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                            diss1 = value.name + " (ICD10: " + value.icd10 + " ; DOID: <a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
                         else
-                            diss1 = value.name + " (DOID:<a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
+                            diss1 = value.name + " (DOID: <a href='" + value.url + "' target='_blank'>" + value.doid + "</a>)";
                         return diss1;
                     }
                 },
@@ -709,7 +706,7 @@ function ajaxSuccess(data) {
                     title: 'Tissue',
                     sortable: true,
                     formatter: function (value, row, index, field) {
-                        return value.name + " (UBERON:<a href='" + value.url + "' target='_blank'>" + value.uberon + "</a>)"
+                        return value.name + " (UBERON: <a href='" + value.url + "' target='_blank'>" + value.uberon + "</a>)"
                     }
                 },
                 {
@@ -765,7 +762,7 @@ function LoadData(uniprot_canonical_ac) {
     $.ajax(ajaxConfig);
 }
 
-function setupEvidenceList () {
+function setupEvidenceList() {
     var $evidenceBadges = $('.evidence_badge');
     $evidenceBadges.each(function () {
         $(this).find('button').on('click', show_evidence);
@@ -773,7 +770,7 @@ function setupEvidenceList () {
 }
 
 
-function show_evidence(){
+function show_evidence() {
     var $evidenceList = $(this).next();
     var isHidden = $evidenceList.hasClass('hidden');
     $(".evidence_links").addClass("hidden");
@@ -819,7 +816,7 @@ function checkUncheck(type, element) {
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
-    document.title = uniprot_canonical_ac + " Detail - glygen";   //updates title with the protein ID
+    document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
 });
 
