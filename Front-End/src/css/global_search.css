@@ -1,0 +1,23 @@
+/* ---------------------------------------------------------------------
+@author: Gaurav Agarwal.
+@description: used on the global search result page
+@date-created: January 2019
+-------------------------------------------------------------------------*/
+
+.result-count{
+    position: absolute;
+    background-color: #2E78B7;
+    color: white !important;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: 10px;
+    right: 0;
+}
+
+a.result-count{
+    text-decoration: none;
+}
+
+.result-count-inactive{
+    background-color: #6B6B6B;
+}
