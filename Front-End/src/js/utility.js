@@ -24,15 +24,17 @@ function addCommas(nStr) {
 
 function databasecolor(name){
     switch(name){
-        case 'GlycomeDB': return 'red';
-        case 'UniCarbKB': return 'green';
-        case 'UniProtKB': return '#ff6462';
-        case 'PubMed': return '#e8efcb';
-        case 'RefSeq': return '#42a6ac';
-        case 'Ensembl Peptide': return '#e2bfef';
-        case 'Ensembl Transcript': return '#91aaac';
-        case 'OMIM': return '#ac8d12';
-        case 'BioMuta': return '#9eabac';
+        case 'GlycomeDB': return '#a06868';
+        case 'UniCarbKB': return '#6b7f71';
+        case 'UniProtKB': return '#4b8aa0';
+        case 'PubMed': return '#7c985d';
+        case 'RefSeq': return '#3ea2ad';
+        case 'Ensembl Peptide': return '#936caf';
+        case 'Ensembl Transcript': return '#b971a6';
+        case 'OMIM': return '#7a73d5';
+        case 'BioMuta': return '#7975af';
+        case 'Bgee': return '#798bae';
+        case 'BioXpress': return '#7f989a';
 
     }
 }
