@@ -5,7 +5,7 @@
 //update:20 july://usecases search webservices
 //update:31 july:// New base URL updated.
 
-function getWsUrl(request, id, id1) {
+function getWsUrl(request, id, id1,glytoucan_ac) {
     var ws_home_init = ws_base + "pages/home_init";
     var ws_base_glycan = ws_base + "glycan";
     var ws_base_protein = ws_base + "protein";
@@ -16,7 +16,7 @@ function getWsUrl(request, id, id1) {
     var ws_useCaseSearch = ws_base + "usecases";
     var ws_homeInit = ws_base + "pages/home_init";
     var ws_dataDownload = ws_base + "data/download";
-     var ws_base_motif = ws_base + "motif";   
+    var ws_base_motif = ws_base + "motif";
     // var ws_base_loci=ws_base+"usecases";
 
     switch (request.toLowerCase()) {
@@ -50,7 +50,8 @@ function getWsUrl(request, id, id1) {
             return ws_base_glycan + "/detail/" + id;
             
         case "motif_detail":
-            return ws_base_motif + "/detail/" + id;
+            return ws_base_motif + "/detail";
+
         //Protein webservices
         case "search_init_protein":
             return ws_base_protein + "/search_init";
@@ -145,5 +146,17 @@ function getSearchtypeheadData(field, value) {
     query.field = field;
     query.value = value;
     query.limit = 100;
+    return "query=" + JSON.stringify(query);
+}
+
+function getListPostMotifData(glytoucan_ac, page, sort, dir, limit) {
+    var query = {};
+    query.glytoucan_ac = glytoucan_ac;
+    // query.offset = parseInt(page);
+    query.sort = sort;
+    query.offset = ((page - 1) * limit) + 1;
+    query.limit = parseInt(limit);
+    query.order = dir;
+
     return "query=" + JSON.stringify(query);
 }
