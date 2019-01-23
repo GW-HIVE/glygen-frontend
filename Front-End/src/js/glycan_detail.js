@@ -64,7 +64,6 @@ function formatEvidences(item) {
     }
 }
 
-
 function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
     $.each(value, function (i, v) {
@@ -74,9 +73,9 @@ function EvidencebadgeFormator(value, row, index, field) {
                 '<a href="' + w.url + '">' + w.id + '</a></li>'
         });
 
-        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 20px; padding-bottom: 30px">' +
-            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '">' + v.database +
-            '&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
+        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 30px">' +
+            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
+            '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
             '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
             '<ul>' + linksHtml + '</ul>' +
