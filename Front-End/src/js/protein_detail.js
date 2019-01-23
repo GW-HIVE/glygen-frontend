@@ -762,13 +762,17 @@ function LoadData(uniprot_canonical_ac) {
     $.ajax(ajaxConfig);
 }
 
-function setupEvidenceList() {
+function setupEvidenceList () {
     var $evidenceBadges = $('.evidence_badge');
     $evidenceBadges.each(function () {
-        $(this).find('button').on('click', show_evidence);
+        var $badge = $(this);
+
+        if (!$badge.attr('data-badge')) {
+            $badge.find('button').on('click', show_evidence);
+            $badge.attr('data-badge', true);
+        }
     });
 }
-
 
 function show_evidence() {
     var $evidenceList = $(this).next();
