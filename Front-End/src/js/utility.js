@@ -421,3 +421,23 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+/**
+ * 
+ * @param {} labelId 
+ * @param {} key 
+ */
+/**
+ * Populates a label using the key-value json file
+ * @param {String} controlId The id of the control to populate
+ * @param {String} key Key of the value to populuate
+ * @param {String} prefix Prefix to the value
+ * @param {String} suffix Suffix to the value
+ * @param {integer} contentsIndex The index in the contents() array of the control where the text is to be put
+ */
+
+function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex=0) {
+    $.getJSON("content/key-value.json", function(jsonData) {
+        $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
+    });
+}
