@@ -42,6 +42,13 @@ var mass_min;
 var sugar_mass_min;
 var sugar_mass_max;
 $(document).ready(function () {
+    //Section for populating label names from key-value.json
+    populateFromKeyValueStore("lbl_glytoucan_acc", "GLYTOUCAN_ACCESSION", "", ":", 2);
+    populateFromKeyValueStore("lbl_monoiso_mass", "MONOISOTOPIC_MASS", "", ":", 2);
+
+
+    //End section for populating label names from key-value.json
+
     $("#simpleCatSelectedOptionExample").hide();
     $.ajax({
         dataType: "json",
