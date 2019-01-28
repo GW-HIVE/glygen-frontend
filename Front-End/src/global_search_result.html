@@ -61,9 +61,19 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <div class="container" id="result">
-        <!-- using mustache.js templating -->
-        <script id="result_template" type="text/template">
+    <div class="container">
+        <!-- <div class="row"> -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <center>
+                        <h3>Search results for "<span id="display_search_term"></span>"<h3>
+                    </center>
+                </div>
+            </div>
+        <!-- </div> -->
+        <div id="result">
+            <!-- using mustache.js templating -->
+            <script id="result_template" type="text/template">
             <div class="row">
                 <!-- glycan results -->
                 <div class="col-sm-4">
@@ -186,6 +196,7 @@
             </div>
             
         </script>
+        </div>
     </div>
 
     <div w3-include-html="footer.html"></div>

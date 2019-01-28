@@ -15,7 +15,9 @@ var term = '';
  * and calls the ajax function.
  */
 $(document).ready(function () {
-    term = encodeURIComponent(getParameterByName('search_query'));
+    term = getParameterByName('search_query');
+    $('#display_search_term').text(term);
+    term = encodeURIComponent(term);
     loadResult();
 });
 
