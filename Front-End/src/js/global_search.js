@@ -61,7 +61,8 @@ function loadResult() {
     $.ajax({
         dataType: "json",
         url: getWsUrl("global_search") + "?query=" + JSON.stringify(search_query),
-        method: 'POST',
+        method: 'GET',
+        cache: false,
         success: ajaxSuccess,
         error: ajaxFailure
     });
