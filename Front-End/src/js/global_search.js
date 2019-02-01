@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 /**
  * This is the success handling function for the ajax call.
- * @param {*} result the json data received from web service
+ * @param {JSON} result the json data received from web service
  */
 function ajaxSuccess(result) {
     // $('#result').text(JSON.stringify(result));
@@ -45,7 +45,7 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
-    activityTracker("error", term, "error: "+errorMessage);
+    activityTracker("error", term, "error: " + errorMessage);
 
     $('#loading_image').fadeOut();
 }
@@ -62,7 +62,6 @@ function loadResult() {
         dataType: "json",
         url: getWsUrl("global_search") + "?query=" + JSON.stringify(search_query),
         method: 'GET',
-        cache: false,
         success: ajaxSuccess,
         error: ajaxFailure
     });

@@ -436,7 +436,8 @@ function getParameterByName(name, url) {
  * @param {integer} contentsIndex The index in the contents() array of the control where the text is to be put
  */
 
-function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex=0) {
+function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex) {
+    contentsIndex = contentsIndex || 0;
     $.getJSON("content/key-value.json", function(jsonData) {
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
