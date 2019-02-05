@@ -21,8 +21,9 @@ Primary style
 }
 
 body {
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  color: #4e5359;
+  font-family: "Verdana", "Geneva", sans-serif;
+/*  color: #4e5359;*/
+  color: #4A4A4A;
   background-color: #F5F5F5;
   /*#f3f3f5*/
 }
@@ -539,11 +540,11 @@ header h1 {
 }
 
 .cd-faq-content p {
-  font-size: 14px;
   font-size: 1.3em;
   /*0.875rem*/
   line-height: 1.4;
   color: #6c7d8e;
+  font-family: "Verdana", "Geneva", sans-serif;
 }
 
 .cd-faq-content {
@@ -607,4 +608,7 @@ header h1 {
   .cd-faq-categories {
     top: 50px;
   }
+}
+.quick-search-visible {
+  border: solid 1px #2F78B7;
 }

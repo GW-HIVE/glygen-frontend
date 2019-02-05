@@ -351,7 +351,7 @@
             var faq_trigger_id = url_loc.substring(url_loc.indexOf('#'), url_loc.lastIndexOf('#'));
             var faq_id = url_loc.substring(url_loc.lastIndexOf('#'));
             //to scroll to the particular sub section.
-            $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+            $(faq_id).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible quick-search-visible');
             if ($(window).width() < 768) {   //mobile view
                 $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(faq_trigger_id).addClass('selected');
                 $('.cd-close-panel').addClass('move-left');
