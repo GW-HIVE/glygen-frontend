@@ -72,12 +72,12 @@ select {
 }
 
 .simplified-search input[type=text] {
-    padding: 21px;
+    padding: 4%;
     border-radius: 6px;
 }
 
 .simplified-search select {
-    height: 45px !important;
+    height: 43px !important;
     text-indent: 15px;
 }
 
