@@ -389,7 +389,7 @@ function populateExample() {
             exampleText += "s";
             break;
     }
-    if (name != "Search by") {
+    if (name != "Choose category") {
         $('#simpleCatSelectedOptionExample')[0].innerHTML = exampleText + ": ";
         $.each(examples, function(i, example) {
             $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample' data-tippy='Click to Insert'>" + example + "</a>, ";
