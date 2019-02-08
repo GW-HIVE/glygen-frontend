@@ -1,10 +1,12 @@
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
+// @author: Tatiana Williamson
+// @description: protein_search.js
 //@update:6 June 2018
 //@update: 26 June 2018-web services changes updated
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update on Aug 12, 2018 - Gaurav Agarwal - added ajax timeout and error handling functions
-
+// @update on Feb 8, 2019 - Tatiana Williamson
 
 /**
  * This helps retain the search tab on pressing the back button from the list page.
@@ -87,7 +89,6 @@ var searchInitValues;
 var mass_max;
 var mass_min;
 $(document).ready(function () {
-    $("#simpleCatSelectedOptionExample").hide();
     $(".glycosylated_aa").chosen({
             // max_selected_options: 10,
             placeholder_text_multiple: "Choose Amino Acid"
@@ -196,6 +197,7 @@ $(document).ready(function () {
             searchProteinSimple();
         }
     });
+    populateExample();
 });
 
 /** 
@@ -367,39 +369,41 @@ function populateExample() {
         case "protein":
             examples = ["P14210-1"];
             break;
-        case "any":
+        default:
             examples = ["Deafness", "G17689DH", "Homo sapiens", "hsa:3082", "P14210-1"];
             exampleText += "s";
             break;
     }
-    if (name != "Choose category") {
-        $('#simpleCatSelectedOptionExample')[0].innerHTML = exampleText + ": ";
-        $.each(examples, function(i, example) {
-            $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample' data-tippy='Click to Insert'>" + example + "</a>, ";
-        });
-        //remove last comma and space
-        $('#simpleCatSelectedOptionExample')[0].innerHTML = $('#simpleCatSelectedOptionExample')[0].innerHTML.slice(0, -2);
+    
+    //    if (name != "Choose category") {
+    $('#simpleCatSelectedOptionExample')[0].innerHTML = exampleText + ": ";
+    $.each(examples, function(i, example) {
+        $('#simpleCatSelectedOptionExample')[0].innerHTML += "<a href='' class='simpleTextExample' data-tippy='Click to Insert'>" + example + "</a>, ";
+    });
+    //remove last comma and space
+    $('#simpleCatSelectedOptionExample')[0].innerHTML = $('#simpleCatSelectedOptionExample')[0].innerHTML.slice(0, -2);
 
-        $('#simplifiedSearch').attr('placeholder', "Enter the " + getPlaceHolder(name));
-        $('[data-toggle="tooltip"]').tooltip();
-        clickableExample();
-    } else {
-        $('#simpleCatSelectedOptionExample').hide();
-        $('#simpleTextExample').text('');
-        $('#simplifiedSearch').attr('placeholder', "Enter the search term");
-    }
+    $('#simplifiedSearch').attr('placeholder', "Enter the " + getPlaceHolder(name));
+    $('[data-toggle="tooltip"]').tooltip();
+    clickableExample();
+    //    } else {
+    //        $('#simpleCatSelectedOptionExample').hide();
+    //        $('#simpleTextExample').text('');
+    //        $('#simplifiedSearch').attr('placeholder', "Enter the search term");
+    //    }
 }
 /**
  * Assigns a different text in simple search placeholder
  * @param {string} type [Changes a different placeholer text]
  */
 function getPlaceHolder(type) {
-    switch(type.toLowerCase()) {
+    switch (type.toLowerCase()) {
         case "glycan":
             return "GlyTouCan Accession";
         case "protein":
             return "UniProtKB Accession";
         case "any":
+        case "choose category":
             return "search term";
         default:
             return type;
