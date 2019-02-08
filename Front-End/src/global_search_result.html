@@ -77,11 +77,11 @@
                 <div class="col-sm-4">
                     <div class="thumbnail card">
                         <div class="caption text-left">
-                            <h3 class="title">Glycan</h3>
+                            <h3 class="title">Glycans</h3>
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#glycan}}
-                                <li class="list-group-item">n-glycan 
+                                <li class="list-group-item">N-Glycan 
                                 {{#n_glycan}}
                                     {{#list_id}}
                                         <a class="result-count" href="glycan_list.html?id={{list_id}}">{{count}}</a>
@@ -91,7 +91,7 @@
                                     {{/list_id}}
                                 {{/n_glycan}}
                                 </li>
-                                <li class="list-group-item">o-glycan 
+                                <li class="list-group-item">O-Glycan 
                                 {{#o_glycan}}
                                     {{#list_id}}
                                         <a class="result-count" href="glycan_list.html?id={{list_id}}">{{count}}</a>
@@ -110,10 +110,20 @@
                 <div class="col-sm-4">
                     <div class="thumbnail card">
                         <div class="caption text-left">
-                            <h3 class="title">Protein</h3>
+                            <h3 class="title">Proteins</h3>
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#protein}}
+                                <li class="list-group-item">Protein 
+                                {{#protein}}
+                                    {{#list_id}}
+                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
+                                    {{/list_id}}
+                                    {{^list_id}}
+                                        <span class="result-count result-count-inactive">{{count}}</span>
+                                    {{/list_id}}
+                                {{/protein}}
+                                </li>
                                 <li class="list-group-item">Gene 
                                 {{#gene}}
                                     {{#list_id}}
@@ -153,10 +163,20 @@
                 <div class="col-sm-4">
                     <div class="thumbnail card">
                         <div class="caption text-left">
-                            <h3 class="title">Glycoprotein</h3>
+                            <h3 class="title">Glycoproteins</h3>
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#glycoprotein}}
+                                <li class="list-group-item">Protein 
+                                {{#protein}}
+                                    {{#list_id}}
+                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
+                                    {{/list_id}}
+                                    {{^list_id}}
+                                        <span class="result-count result-count-inactive">{{count}}</span>
+                                    {{/list_id}}
+                                {{/protein}}
+                                </li>
                                 <li class="list-group-item">Gene 
                                 {{#gene}}
                                     {{#list_id}}
