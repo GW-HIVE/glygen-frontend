@@ -317,7 +317,7 @@ function EvidencebadgeFormator(value, row, index, field) {
     $.each(value, function (i, v) {
         var linksHtml = "";
         $.each(v.links, function (i, w) {
-            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px">id: ' +
+            linksHtml += '<li style="position: relative; display:block; padding-left: 5px; padding-top: 5px">id: ' +
                 '<a href="' + w.url + '">' + w.id + '</a></li>'
         });
 
