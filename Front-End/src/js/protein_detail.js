@@ -370,6 +370,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.glycosylation);
         formatEvidences(data.expression_disease);
         formatEvidences(data.expression_tissue);
+        formatEvidences(data.disease);
 
 
 
