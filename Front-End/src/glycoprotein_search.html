@@ -115,12 +115,12 @@
                         <div class="tab-pane fade in active" id="simple_search">
                             <div class="container simpleContainer">
                                 <div class="row simplified-search">
-                                    <div class="col-sm-3 gg-form-group">
+                                    <div class="col-sm-4 gg-form-group">
                                         <select id="simplifiedCategory">
                                             <option value="">Choose category</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-7 gg-form-group">
+                                    <div class="col-sm-6 gg-form-group">
                                         <input type="text" 
                                             name="simplifiedSearch" 
                                             class="form-control" 
@@ -177,7 +177,7 @@
                                                     href="#P14210-1" id="textExampleProtein"
                                                     data-tippy="Click to Insert">P14210-1</a></div>
                                                     
-                                                    <div class="gg-text-right">Explore <a href="https://www.uniprot.org/help/accession_nu mbers" 
+                                                    <div class="gg-text-right">Explore <a href="https://www.uniprot.org/help/accession_numbers" 
                                                     target="_blank"
                                                     data-tippy="Explore UniProtKB Database">UniProtKB Acc.</a></div> 
                                                 </div>
@@ -415,15 +415,19 @@
                                                     <option value="P">Proline - Pro - P</option>
                                                     <option value="G">Glycine - Gly - G</option>
                                                 </select>
-                                                <div>Example: <span
+                                                <div style="padding-bottom: 20px;">
+<!--
+                                                Example: <span
                                                 class="gg-text-example"
-                                                data-tippy="Click to Highlight Multiple Selections">Asparagine - Asn - N</span></div>
+                                                data-tippy="Click to Highlight Multiple Selections">Asparagine - Asn - N</span>
+-->
+                                                </div>
                                             </div>
                                         </div>
 
                                         <!-- Protein or Peptide Sequence -->
                                         <div class="row">
-                                            <label class="control-label col-sm-4" for="sequences">
+                                            <label class="control-label col-sm-4 sequence-label" for="sequences">
                                                 <span><a href="javascript://"
                                                     title="Protein or Peptide Sequence"
                                                     data-toggle="popover" 
@@ -461,7 +465,7 @@
                                         </div>
                                         <!--Pathway ID-->
                                         <div class="row">
-                                            <label style="margin-top: 20px;" class="control-label col-sm-4"
+                                            <label class="control-label col-sm-4 pathway-label"
                                                 for="pathway">
                                                 <span><a href="javascript://" 
                                                     title="Pathway ID" 
