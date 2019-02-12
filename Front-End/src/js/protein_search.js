@@ -112,6 +112,7 @@ $(document).ready(function () {
             // Sorting Simple search 
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
+            result.simple_search_category[0].display = "Any category";
             for (var x = 0; x < result.simple_search_category.length; x++) {
                 createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].id);
             }
@@ -149,6 +150,7 @@ $(document).ready(function () {
             if (id) {
                 LoadDataList(id);
             }
+            populateExample();
         }
     });
 
@@ -197,7 +199,6 @@ $(document).ready(function () {
             searchProteinSimple();
         }
     });
-    populateExample();
 });
 
 /** 
@@ -403,7 +404,6 @@ function getPlaceHolder(type) {
         case "protein":
             return "UniProtKB Accession";
         case "any":
-        case "choose category":
             return "search term";
         default:
             return type;
