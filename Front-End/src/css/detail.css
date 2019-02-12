@@ -357,7 +357,10 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
     border-color: #204d74;
 }
 
-
+.highlight-text{
+    font-family:monospace;
+    font-size:14px;
+}
 
 
 
