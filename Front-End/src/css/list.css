@@ -119,13 +119,11 @@ pre {
 }
 
 /* error modal css */
-.ajs-modal{
-/*    color: #333;*/
-    color: #ccc;
+.ajs-modal {
     margin-top: 290px;
-
 }
-#paginationctrl1{
+
+#paginationctrl15 {
     padding-top: 0px;
 }
 
@@ -146,14 +144,14 @@ pre {
     margin-bottom: 0
 }
 
-#listview{
+#listview {
     padding-right: 35px;
     padding-left: 35px;
     margin-right: auto;
     margin-left: auto;
 }
 
-.limit-text-size{
+.limit-text-size {
     display: inline-block;
     max-width: 200px;
     overflow: hidden;
