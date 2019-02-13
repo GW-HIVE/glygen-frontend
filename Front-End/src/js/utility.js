@@ -47,8 +47,8 @@ function getErrorMessage(errorCode) {
     switch (errorCode) {
         case 'invalid-query-json':
             return {
-                message: "This is not a valid entry. Please try again.",
-                title: "Invalid Entry Error"
+                message: "This is not a valid input. Please try again.",
+                title: "Invalid Input Error"
             };
         case 'open-connection-failed':
             return {
@@ -57,17 +57,17 @@ function getErrorMessage(errorCode) {
             };
         case 'unexpected-field-in-query':
             return {
-                message: "This is unexpected field entry. Please try again",
-                title: "Unexpected Field Entry Error"
+                message: "This is unexpected field input. Please try again",
+                title: "Unexpected Field Input Error"
             };
         case 'invalid-parameter-value-length':
             return {
-                message: "Please adjust length of your entry and try again.",
+                message: "Please adjust length of your input and try again.",
                 title: "Invalid Value Length Error"
             };
         case 'no-search-criteria-submitted':
             return {
-                message: "Entry error occurred. Please provide input a term to search for.",
+                message: "Input error occurred. Please provide input a term to search for.",
                 title: "Unexpected Error"
             };
         case 'non-existent-record':
@@ -92,13 +92,13 @@ function getErrorMessage(errorCode) {
             };
         case 'no-results-found':
             return {
-                message: "Sorry, we couldn't find any data matching your entry. Please change your parameters and try again.",
+                message: "Sorry, we couldn't find any data matching your input. Please change your search term and try again.",
                 title: "No Results Found"
             };
 
         case 'missing-parameter':
             return {
-                message: "Missing parameter",
+                message: "Missing search term",
                 title: "Selection Error"
             };
         case 'missing-query-key-in-query-json':
