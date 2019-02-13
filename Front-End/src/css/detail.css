@@ -362,5 +362,7 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
     font-size:14px;
 }
 
-
+.upper-case {
+    text-transform: capitalize;
+}
 
