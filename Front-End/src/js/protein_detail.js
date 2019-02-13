@@ -373,6 +373,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
+       
 
 
         var itemscrossRef = [];
@@ -542,6 +543,7 @@ function ajaxSuccess(data) {
                     field: 'imageFormat',
                     title: 'Image of Glycan Structure',
                     sortable: true,
+               
                     formatter: function imageFormat(value, row, index, field) {
                         var url = getWsUrl('glycan_image', row.glytoucan_ac);
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
@@ -714,7 +716,8 @@ function ajaxSuccess(data) {
                 {
                     field: 'present',
                     title: 'Present',
-                    sortable: true
+                    sortable: true,
+                    class: 'upper-case'
                 }
 
             ],
