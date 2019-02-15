@@ -62,8 +62,8 @@ function getErrorMessage(errorCode) {
             };
         case 'invalid-parameter-value-length':
             return {
-                message: "Please adjust length of your input and try again.",
-                title: "Invalid Value Length Error"
+                message: "Please input a value and try again.",
+                title: "Missing Input Value"
             };
         case 'no-search-criteria-submitted':
             return {
