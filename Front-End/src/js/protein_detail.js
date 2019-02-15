@@ -373,7 +373,17 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
-       
+        data.glycosylation.sort(function (a, b) {
+            // compare residue firs
+            if (a.residue < b.residue) { return -1; }
+            else if (b.residue < a.residue) { return 1; }
+            // compare position
+            else if (a.position < b.position) { return -1; }
+            else if (b.position < a.position) { return 1; }
+
+            // else the same
+            return 0;
+        });
 
 
         var itemscrossRef = [];
