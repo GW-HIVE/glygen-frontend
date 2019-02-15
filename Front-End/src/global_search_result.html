@@ -15,8 +15,8 @@
     <title>Global search - glygen</title>
 
     <!--This does not work as downloaded version so UX using this as CDN for font.css-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+        integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <!-- CSS for boots -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!-- CSS for alertify -->
@@ -32,13 +32,17 @@
 
     <!-- favicomatic-->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/icons/favicomatic/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+        href="images/icons/favicomatic/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/icons/favicomatic/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/icons/favicomatic/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120"
+        href="images/icons/favicomatic/apple-touch-icon-120x120.png" />
     <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icons/favicomatic/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/icons/favicomatic/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152"
+        href="images/icons/favicomatic/apple-touch-icon-152x152.png" />
     <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-196x196.png" sizes="196x196" />
     <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-32x32.png" sizes="32x32" />
@@ -81,26 +85,32 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#glycan}}
-                                <li class="list-group-item">N-Glycan 
                                 {{#n_glycan}}
+                                <li class="list-group-item"> 
                                     {{#list_id}}
-                                        <a class="result-count" href="glycan_list.html?id={{list_id}}">{{count}}</a>
+                                        <a href="glycan_list.html?id={{list_id}}">N-Glycan
+                                            <span class="result-count">{{count}}</span>
+                                        </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        N-Glycan
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
+                                </li>
                                 {{/n_glycan}}
-                                </li>
-                                <li class="list-group-item">O-Glycan 
                                 {{#o_glycan}}
+                                <li class="list-group-item"> 
                                     {{#list_id}}
-                                        <a class="result-count" href="glycan_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="glycan_list.html?id={{list_id}}">O-Glycan
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        O-Glycan
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
-                                {{/o_glycan}}
                                 </li>
+                                {{/o_glycan}}
                             {{/glycan}}
                         </ul>
                     </div>
@@ -114,42 +124,41 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#protein}}
-                                <li class="list-group-item">Protein 
-                                {{#protein}}
-                                    {{#list_id}}
-                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
-                                    {{/list_id}}
-                                    {{^list_id}}
-                                        <span class="result-count result-count-inactive">{{count}}</span>
-                                    {{/list_id}}
-                                {{/protein}}
-                                </li>
-                                <li class="list-group-item">Gene 
+                                <li class="list-group-item"> 
                                 {{#gene}}
                                     {{#list_id}}
-                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="protein_list.html?id={{list_id}}">Gene
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Gene
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/gene}}
                                 </li>
-                                <li class="list-group-item">Function 
+                                <li class="list-group-item"> 
                                 {{#function}}
                                     {{#list_id}}
-                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="protein_list.html?id={{list_id}}">Function
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Function
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/function}}
                                 </li>
-                                <li class="list-group-item">Disease 
+                                <li class="list-group-item"> 
                                 {{#disease}}
                                     {{#list_id}}
-                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="protein_list.html?id={{list_id}}">Disease
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Disease
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/disease}}
@@ -167,42 +176,41 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#glycoprotein}}
-                                <li class="list-group-item">Protein 
-                                {{#protein}}
-                                    {{#list_id}}
-                                        <a class="result-count" href="protein_list.html?id={{list_id}}">{{count}}</a>
-                                    {{/list_id}}
-                                    {{^list_id}}
-                                        <span class="result-count result-count-inactive">{{count}}</span>
-                                    {{/list_id}}
-                                {{/protein}}
-                                </li>
-                                <li class="list-group-item">Gene 
+                                <li class="list-group-item"> 
                                 {{#gene}}
                                     {{#list_id}}
-                                        <a class="result-count" href="glycoprotein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="glycoprotein_list.html?id={{list_id}}">Gene
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Gene
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/gene}}
                                 </li>
-                                <li class="list-group-item">Function 
+                                <li class="list-group-item"> 
                                 {{#function}}
                                     {{#list_id}}
-                                        <a class="result-count" href="glycoprotein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="glycoprotein_list.html?id={{list_id}}">Function
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Function
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/function}}
                                 </li>
-                                <li class="list-group-item">Disease 
+                                <li class="list-group-item"> 
                                 {{#disease}}
                                     {{#list_id}}
-                                        <a class="result-count" href="glycoprotein_list.html?id={{list_id}}">{{count}}</a>
+                                    <a href="glycoprotein_list.html?id={{list_id}}">Disease
+                                        <span class="result-count">{{count}}</span>
+                                    </a>
                                     {{/list_id}}
                                     {{^list_id}}
+                                        Disease
                                         <span class="result-count result-count-inactive">{{count}}</span>
                                     {{/list_id}}
                                 {{/disease}}
