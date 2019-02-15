@@ -31,15 +31,15 @@ function buildSummary(queryInfo) {
     var summaryHtml;
 
     summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     if (queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
         queryInfo.mass.max = addCommas(queryInfo.mass.max);
     }
     var question = getParameterByName('question');
     if (question) {
-        queryInfo.question = MESSAGES[question];
+        queryInfo = {question: MESSAGES[question]};
     }
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }

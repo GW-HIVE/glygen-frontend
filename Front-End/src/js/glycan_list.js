@@ -37,11 +37,12 @@ function buildSummary(queryInfo) {
     var summaryTemplate;
     var summaryHtml;
     summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
+ 
     var question = getParameterByName('question');
     if (question) {
-        queryInfo.question = MESSAGES[question];
+        queryInfo = {question: MESSAGES[question]};
     }
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
