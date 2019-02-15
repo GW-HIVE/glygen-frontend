@@ -125,8 +125,9 @@
                                             name="simplifiedSearch" 
                                             class="form-control" 
                                             id="simplifiedSearch" 
-                                            placeholder="Enter the search term">
+                                            placeholder="Enter the search term" onkeyup="validateSimpleCategory(this)">
                                         <div id="simpleCatSelectedOptionExample"></div>
+                                        <h6 id='simpleCategoryMsg' class="validation-message"></h6>
                                     </div>
                                     <div class="col-sm-2 gg-form-group text-right">
                                         <input type="button" class="btn-lg btn-primary" value="Search" onclick="searchProteinSimple()">
