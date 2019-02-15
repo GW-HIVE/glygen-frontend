@@ -34,12 +34,17 @@ var limit = 20;
  */
 
 function buildSummary(queryInfo) {
-    var summaryTemplate = $('#summary-template').html();
+    var summaryTemplate;
+    var summaryHtml;
+    summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
-    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    var question = getParameterByName('question');
+    if (question) {
+        queryInfo.question = MESSAGES[question];
+    }
+    summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
-
 /**
  * Format function of getting total result for each search   [+]
  * @param {total_length} paginationInfo.total_length -
@@ -96,10 +101,18 @@ function massFormatter(value) {
 var lastSearch;
 
 function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
+    var question = getParameterByName('question');
+    var newUrl;
+    if (question && (question === 'QUESTION_TRY3')) {
+       
+        newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_6';
     }
+    else{
+        newUrl = "glycan_search.html?id=" + id;
+    }
+
+    window.location.replace(newUrl);
+    activityTracker("user", id, "edit search");
 }
 
 /**

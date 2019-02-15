@@ -27,13 +27,20 @@ var limit = 25;
  * @param {integer} paginationInfo.limit - The paginationInfo.limit givesrecords per page from pagination object
  */
 function buildSummary(queryInfo) {
-    var summaryTemplate = $('#summary-template').html();
+    var summaryTemplate;
+    var summaryHtml;
+
+    summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     if (queryInfo.mass) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
         queryInfo.mass.max = addCommas(queryInfo.mass.max);
     }
-    var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
+    var question = getParameterByName('question');
+    if (question) {
+        queryInfo.question = MESSAGES[question];
+    }
+    summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
 
@@ -51,7 +58,20 @@ function totalNoSearch(total_length) {
  */
 function editSearch() {
     {
-        window.location.replace("protein_search.html?id=" + id);
+        var question = getParameterByName('question');
+        var newUrl;
+
+        if (question && (question === 'QUESTION_TRY1')) {
+            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
+        }
+        else if (question && (question === 'QUESTION_TRY2')) {
+            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
+        }
+          else{
+            newUrl = "protein_search.html?id=" + id;
+        }
+
+        window.location.replace(newUrl);
         activityTracker("user", id, "edit search");
     }
 }

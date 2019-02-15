@@ -326,7 +326,7 @@ function EvidencebadgeFormator(value, row, index, field) {
             '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
             '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
-            '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
+            '<div class="hidden evidence_links" style="left: 0; width: 200px;">' +
             '<ul>' + linksHtml + '</ul>' +
             '</div>' +
             '</span>';
@@ -577,6 +577,7 @@ function ajaxSuccess(data) {
                     field: 'residue',
                     title: 'Residue',
                     sortable: true
+                   
                 }
             ],
             pagination: 10,
