@@ -39,7 +39,7 @@ function displayHomeInitData(jsonResponse) {
                 $("#dataVersion").text(componentVersion + " " + "(" + getDateMMDDYYYY(componentDate) + ")");
                 break;
             case "software":
-                $("#softwareVersion").text(componentVersion + " " + "(" + getDateMMDDYYYY(componentDate) + ")");
+                $("#softwareVersion").append("<a href='https://github.com/glygener/glygen-frontend/wiki/Release-notes' target='_blank'>" + componentVersion + "</a> (" + getDateMMDDYYYY(componentDate) + ")");
                 break;
         }
     })
