@@ -1,10 +1,16 @@
 //@author: Rupali Mahadik
 // (Mustache template, Glycosylation table, Highlighting sequence)
 // @description: UO1 Version-1.1.
+//@Date:19th Feb 2018. Rupali Mahadik-with dummy web service
+//@update: 3-April 2018. Rupali Mahadik-with real web service
+//@update: June 26-2018- Rupali Mahadik-with web service changes
 // @update: July 16, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
 // @update: July 31 2018 - Gaurav Agarwal - added mutation table.
+// @update: Aug 1, 2018 - Rupali Mahadik - Table for Biosynthetic enzyme and found glycoprotein
+// @update: Aug 6, 2018 - Rupali Mahadik - Grouping for cross ref
 // @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
+// @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
 
 /**
  * Object to hold highlight data in state
@@ -318,15 +324,15 @@ function EvidencebadgeFormator(value, row, index, field) {
     $.each(value, function (i, v) {
         var linksHtml = "";
         $.each(v.links, function (i, w) {
-            linksHtml += '<li style="position: relative; display:block; padding-left: 5px; padding-top: 5px">id: ' +
+            linksHtml += '<li class="linkHtml">id: ' +
                 '<a href="' + w.url + '">' + w.id + '</a></li>'
         });
 
-        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 30px">' +
+        buttonsHtml += '<span class="evidence_badge">' +
             '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
             '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
-            '<div class="hidden evidence_links" style="left: 0; width: 200px;">' +
+            '<div class="hidden evidence_links">' +
             '<ul>' + linksHtml + '</ul>' +
             '</div>' +
             '</span>';

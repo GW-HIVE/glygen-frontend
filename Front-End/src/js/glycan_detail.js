@@ -1,12 +1,15 @@
 //@author: Rupali Mahadik
 // @description: UO1 Version-1.1.
-//@Date:19th Feb 2018. with dummy web service
-//@update: 3-April 2018. with real web service
-//@update: June 26-2018- with web service changes
+//@Date:19th Feb 2018. Rupali Mahadik-with dummy web service
+//@update: 3-April 2018. Rupali Mahadik-with real web service
+//@update: June 26-2018- Rupali Mahadik-with web service changes
 // @update: July 5, 2018 - Gaurav Agarwal - Error and page visit logging
 // @update on July 25 2018 - Gaurav Agarwal - added code for loading gif.
+// @update: Aug 1, 2018 - Rupali Mahadik - Table for Biosynthetic enzyme and found glycoprotein
+// @update: Aug 6, 2018 - Rupali Mahadik - Grouping for cross ref
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
 // @update: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gets selected creteria for downloading data.
+// @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
 
 /**
  * Prints a number with commas as thousands separator
@@ -64,20 +67,25 @@ function formatEvidences(item) {
     }
 }
 
+/**
+ * Creating Evidence badges for bootstrap table
+ *  @param {value} string for the name of the variable variable to extract from query string
+ * @param {url} string with the complete url with query string values
+ * Returns the GWU services. */
 function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
     $.each(value, function (i, v) {
         var linksHtml = "";
         $.each(v.links, function (i, w) {
-            linksHtml += '<li style="position: relative; display: inline-block; padding-left: 20px; padding-top: 1px">id: ' +
+            linksHtml += '<li style="linksHtml">id: ' +
                 '<a href="' + w.url + '">' + w.id + '</a></li>'
         });
 
-        buttonsHtml += '<span class="evidence_badge" style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 30px">' +
+        buttonsHtml += '<span class="evidence_badge">' +
             '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
             '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
-            '<div class="hidden evidence_links" style="position: absolute; left: 0; width: 200px;">' +
+            '<div class="hidden evidence_links">' +
             '<ul>' + linksHtml + '</ul>' +
             '</div>' +
             '</span>';
@@ -247,7 +255,7 @@ function LoadData(glytoucan_ac) {
 
 
 
-
+ // show and hide evidences 
 function setupEvidenceList() {
     var $evidenceBadges = $('.evidence_badge');
     $evidenceBadges.each(function () {
