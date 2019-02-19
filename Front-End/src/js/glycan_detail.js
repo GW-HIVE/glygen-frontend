@@ -252,9 +252,6 @@ function LoadData(glytoucan_ac) {
     // calls the service
     $.ajax(ajaxConfig);
 }
-
-
-
  // show and hide evidences 
 function setupEvidenceList() {
     var $evidenceBadges = $('.evidence_badge');

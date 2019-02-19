@@ -85,12 +85,10 @@ function massFormatter(value) {
  */
 
 function ajaxListSuccess(data) {
-    // console.log(data);
-    //console.log(data.code);
-    if (data.code) {
-        console.log(data.code);
-        displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+    if (data.error_code) {
+        console.log(data.error_code);
+        displayErrorByCode(data.error_code);
+        activityTracker("error", id, "error code: " + data.error_code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
         data.imagePath = getWsUrl('glycan_image', data.glytoucan.glytoucan_ac);
 
