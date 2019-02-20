@@ -1,5 +1,5 @@
 //@author: Rupali Mahadik
-// (Mustache template, Glycosylation table, Highlighting sequence)
+// (Rupali Mahadik-Mustache template, Glycosylation table, Highlighting sequence)
 // @description: UO1 Version-1.1.
 //@Date:19th Feb 2018. Rupali Mahadik-with dummy web service
 //@update: 3-April 2018. Rupali Mahadik-with real web service
@@ -285,7 +285,7 @@ function formatEvidences(item) {
         for (var i = 0; i < item.length; i++) {
             var currentItem = item[i];
             var databases = [];
-            if (currentItem && currentItem.evidence.length) {
+            if (currentItem && currentItem.evidence && currentItem.evidence.length) {
                 for (var j = 0; j < currentItem.evidence.length; j++) {
                     var evidenceitem = currentItem.evidence[j];
                     var found = '';
@@ -379,17 +379,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
-        data.glycosylation.sort(function (a, b) {
-            // compare residue firs
-            if (a.residue < b.residue) { return -1; }
-            else if (b.residue < a.residue) { return 1; }
-            // compare position
-            else if (a.position < b.position) { return -1; }
-            else if (b.position < a.position) { return 1; }
-
-            // else the same
-            return 0;
-        });
+      
 
 
         var itemscrossRef = [];
@@ -456,6 +446,20 @@ function ajaxSuccess(data) {
         if (data.glycosylation) {
             highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
             highlight.n_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'N-linked');
+       
+            data.glycosylation.sort(function (a, b) {
+                // compare residue firs
+                if (a.residue < b.residue) { return -1; }
+                else if (b.residue < a.residue) { return 1; }
+                // compare position
+                else if (a.position < b.position) { return -1; }
+                else if (b.position < a.position) { return 1; }
+    
+                // else the same
+                return 0;
+            });
+       
+       
         }
 
         function hasGlycanId(item) {
