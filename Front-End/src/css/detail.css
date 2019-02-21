@@ -385,3 +385,8 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
    padding-left: 5px; 
    padding-top: 5px"
 }
+.evidence_id{
+    position: relative; 
+    display: inline-block; 
+    padding-top: 5px"
+}
