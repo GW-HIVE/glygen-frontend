@@ -227,11 +227,11 @@ function ajaxProteinSearchSuccess() {
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var pathway_id = $("#pathway").val();
-    // var sequence =
-    var sequence = {
-        "type": $("#type").val(),
-        "aa_sequence": $("#sequences").val().replace(/\n/g, "")
-    };
+    var sequence = $("#sequences").val().replace(/\n/g, "");
+    // var sequence = {
+    //     "type": $("#type").val(),
+    //     "aa_sequence": $("#sequences").val().replace(/\n/g, "")
+    // };
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
@@ -280,50 +280,48 @@ function ajaxProteinSearchSuccess() {
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
-    var sequences = {
-        "type": "exact",
-        "aa_sequence": input_sequence
-    };
-    if (input_sequence != "") {
-        sequences.type = input_sequence.type;
-        sequences.aa_sequence = input_sequence.aa_sequence;
+    var sequences = null;
+    if (input_sequence) {
+        sequences = {
+            "type": "exact",
+            "aa_sequence": input_sequence
+        }
     }
-    var organisms = {
-        "id": 0,
-        "name": "All"
-    }
-
-    if (input_organism.id != "0") {
-        organisms.id = input_organism.id;
-        organisms.name = input_organism.name;
-    }
-
-    var glycans = {}
+    // if (input_sequence != "") {
+    //     sequences.type = input_sequence.type;
+    //     sequences.aa_sequence = input_sequence.aa_sequence;
+    // }
+    var glycans = null;
     if (input_glycan) {
         glycans = {
             relation: input_relation,
             glytoucan_ac: input_glycan
         }
     }
-
-    var formjson = {
+    var organisms = null;
+    if (input_organism.id != "0") {
+        organisms.id = input_organism.id;
+        organisms.name = input_organism.name;
+    }
+    var formjson = $.extend({}, {
         "operation": "AND",
         query_type: input_query_type,
         mass: {
             "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-        sequence: sequences,
-        organism: organisms,
-        refseq_ac: input_refseq_id,
-        protein_name: input_protein_name,
-        gene_name: input_gene_name,
-        pathway_id: input_pathway_id,
-        uniprot_canonical_ac: input_protein_id,
-        glycan: glycans,
+
+        sequence: sequences ?sequences:undefined,
+        organism: organisms ?organisms:undefined,
+        refseq_ac: input_refseq_id? input_refseq_id: undefined,
+        protein_name: input_protein_name? input_protein_name: undefined,
+        gene_name: input_gene_name?input_gene_name: undefined,
+        pathway_id: input_pathway_id ?input_pathway_id: undefined,
+        uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined,
+        glycan: glycans?glycans: undefined,
         glycosylated_aa: input_glycosylated_aa,
-        glycosylation_evidence: input_glycosylation_evidence
-    };
+        glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
+    });
     return formjson;
 }
 

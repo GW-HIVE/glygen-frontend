@@ -277,36 +277,35 @@ function ajaxProteinSearchSuccess() {
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
-    var sequences = {}
+    var sequences = null;
     if (input_sequence) {
         sequences = {
             "type": "exact",
             "aa_sequence": input_sequence
         }
     }
-    var organisms = {
-        "id": 0,
-        "name": "All"
-    }
+    
+    var organisms = null;
     if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
-    var formjson = {
+    var formjson = $.extend({}, {
         "operation": "AND",
         query_type: input_query_type,
         mass: {
             "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-        sequence: sequences,
-        organism: organisms,
-        refseq_ac: input_refseq_id,
-        protein_name: input_protein_name,
-        gene_name: input_gene_name,
-        pathway_id: input_pathway_id,
-        uniprot_canonical_ac: input_protein_id
-    };
+
+        sequence: sequences ?sequences:undefined,
+        organism: organisms ?organisms:undefined,
+        refseq_ac: input_refseq_id? input_refseq_id: undefined,
+        protein_name: input_protein_name? input_protein_name: undefined,
+        gene_name: input_gene_name?input_gene_name: undefined,
+        pathway_id: input_pathway_id ?input_pathway_id: undefined,
+        uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined
+    });
     return formjson;
 }
 // to resizing choosen field
