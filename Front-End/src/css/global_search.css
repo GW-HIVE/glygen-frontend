@@ -30,3 +30,13 @@ a.result-count{
 .result-count-inactive{
     background-color: #6B6B6B;
 }
+
+#display_search_term{
+    color: #2E78B7;
+}
+
+/* the count displayed beside the heading */
+.title>.result-count{
+    right: 10px;
+    font-size: 2rem;
+}
