@@ -22,8 +22,8 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-function databasecolor(name){
-    switch(name){
+function databasecolor(name) {
+    switch (name) {
         case 'GlycomeDB': return '#a06868';
         case 'UniCarbKB': return '#6b7f71';
         case 'UniProtKB': return '#4b8aa0';
@@ -140,6 +140,14 @@ function getErrorMessage(errorCode) {
                 title: "Request Aborted"
             };
 
+        case 'js_error':
+            return {
+                message: "Oops, there seems to be some issue on this page. "
+                    + "Sorry, for the inconvenience. "
+                    + "We've recorded this issue and are looking into it." + contactUsMsg,
+                title: "Website Error"
+            };
+
         case 0:
             return {
                 message: "Could not connect to the server." + contactUsMsg,
@@ -173,7 +181,7 @@ function displayError(message, title) {
     var pagePath = window.location.pathname;
     if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
         // for all list pages, if any error occurs, it will go back to the previous page.
-        alertify.alert(title, message, function(){ window.history.back(); }).set('modal', false);;
+        alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);;
     } else {
         alertify.alert(title, message).set('modal', false);
     }
@@ -438,7 +446,7 @@ function getParameterByName(name, url) {
 
 function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex) {
     contentsIndex = contentsIndex || 0;
-    $.getJSON("content/key-value.json", function(jsonData) {
+    $.getJSON("content/key-value.json", function (jsonData) {
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
 }
