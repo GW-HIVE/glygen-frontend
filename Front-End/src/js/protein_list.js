@@ -18,7 +18,9 @@ var page = 1;
 var sort = 'protein_name_long';
 var dir = 'desc'
 var url = getWsUrl('protein_list');
-var limit = 25;
+var limit = 20;
+
+var id = getParameterByName('id');;
 
 /**
  * it creates user interface for summary
@@ -182,24 +184,6 @@ function LoadDataList() {
 }
 
 /**
- * getParameterByName function to EXtract query parametes from url
- * @param {string} name - The name of the variable variable to extract from query string
- * @param {string} url- The complete url with query string values
- * @return- A new string representing the decoded version of the given encoded Uniform Resource Identifier (URI) component.
- */
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-var id = getParameterByName('id');
-LoadDataList(id);
-
-/**
  * hides the loading gif and displays the page after the results are loaded.
  * @author Gaurav Agarwal
  * @date July 25, 2018
@@ -220,3 +204,9 @@ function downloadPrompt() {
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(id, format, IsCompressed, page_type);
 }
+
+
+$(document).ready(function () {
+    // limit = $(element).val();
+    LoadDataList();
+});
