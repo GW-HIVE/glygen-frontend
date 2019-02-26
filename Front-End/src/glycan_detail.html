@@ -221,10 +221,12 @@
                                                     {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                                  </button>
                                                 <div class='hidden evidence_links' id="evidence_{{taxid}}_{{database}}"
-                                                     style="position: absolute; left: 0; width: 200px;">
+                                                     style="position:absolute; left: 0; width: 200px;">
                                                     <ul>
-                                                        <li class="evidence_id">id: <a
-                                                            href="{{url}}">{{id}}</a></li>
+                                                         {{#links}}
+                                                        <li class="evidence_id">id:<a
+                                                         href="{{url}}">{{id}}</a></li>
+                                                         {{/links}}
                                                     </ul>
                                                 </div>
                                             </span>
