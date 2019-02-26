@@ -153,6 +153,9 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
  * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
+    if(!id){
+        id= getParameterByName('id');
+    }
     var ajaxConfig = {
         dataType: "json",
         url: getWsUrl("glycan_list"),
