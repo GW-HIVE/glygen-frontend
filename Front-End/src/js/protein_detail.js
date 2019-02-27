@@ -324,8 +324,8 @@ function EvidencebadgeFormator(value, row, index, field) {
     $.each(value, function (i, v) {
         var linksHtml = "";
         $.each(v.links, function (i, w) {
-            linksHtml += '<li class="linkHtml">id: ' +
-                '<a href="' + w.url + '">' + w.id + '</a></li>'
+            linksHtml += '<li class="linkHtml5">' +
+                '<a href="' + w.url + '" target="_blank">' + w.id + '</a></li>'
         });
 
         buttonsHtml += '<span class="evidence_badge">' +
