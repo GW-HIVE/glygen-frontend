@@ -1,3 +1,11 @@
+/* ---------------------------------------------------------------------
+@author: Rupali Mahadik
+@co-author: Tatiana Williamson
+@description: list.css 
+@date-created: January 2018
+@update: February 27 2019 - Tatiana Williamson - Updated summary table style
+-------------------------------------------------------------------------*/
+
 .img-cartoon {
     display: block;
     max-width: 500px;
@@ -160,7 +168,7 @@ pre {
 
 @media (max-width: 1300px) {
     .table tbody {
-        left: 15%;
+        left: 25%;
     }
 }
 
@@ -176,4 +184,6 @@ pre {
     }
 }
 
-
+.table tbody {
+    width: 50%;
+    }
