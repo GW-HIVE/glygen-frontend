@@ -206,6 +206,9 @@
                         <h4>Species</h4>
                     </div>
                     <div class="panel-body">
+                    <table class="table">
+                            <thead>
+                                <tr>
                         {{#species}}
                         <div class="row">
                             <div class='col-lg-9 col-md-12 col-xs-12'>
@@ -214,7 +217,7 @@
                                         <b>{{name}}:</b>
                                         {{#databases}}
                                         <span class="evidence_badge"
-                                              style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 40px">
+                                              style="position: relative; display: inline-block; padding-left: 15px; padding-bottom5: 40px">
                                                 <button class="btn btn-primary" type="button"
                                                         style="background-color:{{color}}; border-color:{{color}}"
                                                         onclick="show_evidence('{{taxid}}','{{database}}')">
@@ -237,6 +240,9 @@
                                 {{/species}}
                                 {{^species}} No data available. {{/species}}
                         </div>
+                            </tr>
+                        </thead>
+                    </table>
                     </div>
             </ul>
             <!-- Motif -->

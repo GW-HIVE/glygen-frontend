@@ -803,7 +803,7 @@ function setupEvidenceList () {
 function show_evidence() {
     var $evidenceList = $(this).next();
     var isHidden = $evidenceList.hasClass('hidden');
-    $(".evidence_links").addClass("hidden");
+    //$(".evidence_links").addClass("hidden");
 
     if (isHidden) {
         $evidenceList.removeClass("hidden");
