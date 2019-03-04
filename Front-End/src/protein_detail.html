@@ -251,8 +251,9 @@
                                     <div class='hidden evidence_links'
                                          style="position: absolute; left: 0; width: 200px;">
                                         <ul>
+                                            id:
                                             {{#links}}
-                                                <li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px">id: <a
+                                            <li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px"> <a
                                                         href="{{url}}">{{id}}</a></li>
                                             {{/links}}
                                         </ul>
@@ -335,16 +336,16 @@
                         </div>
                         <div class="tab-content clearfix">
                             <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
-                                {{#glycosylation}}
+                                {{#hasGlycosylation}}
                                 <table id="glycosylation-table">
                                 </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                                {{/hasGlycosylation}} {{^hasGlycosylation}} No data available. {{/hasGlycosylation}}
                             </div>
                             <div class="tab-pane" id="2a">
-                                {{#glycosylation}}
+                                {{#hasGlycosylation}}
                                 <table id="glycosylation-table2">
                                 </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                                {{/hasGlycosylation}} {{^hasGlycosylation}} No data available. {{/hasGlycosylation}}
                             </div>
                         </div>
                     </div>
@@ -464,8 +465,8 @@
                                 <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
                                     <ul>
                                         {{#links}}
-                                            <li class="evidence_id">id: <a
-                                                    href="{{url}}">{{id}}</a></li>
+                                            <li class="evidence_id"> <a
+                                                    href="{{url}}" target="_blank">{{id}} </a></li>
                                         {{/links}}
                                     </ul>
                                 </div>

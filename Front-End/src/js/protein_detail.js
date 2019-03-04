@@ -379,7 +379,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
-      
+     
 
 
         var itemscrossRef = [];
@@ -459,7 +459,7 @@ function ajaxSuccess(data) {
                 return 0;
             });
        
-       
+            data.hasGlycosylation = (data.glycosylation.length > 0);
         }
 
         function hasGlycanId(item) {
