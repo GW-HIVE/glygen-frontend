@@ -317,8 +317,6 @@ function formatEvidences(item) {
         }
     }
 }
-
-
 function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
     $.each(value, function (i, v) {
