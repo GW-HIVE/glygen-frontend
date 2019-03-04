@@ -253,8 +253,8 @@
                                         <ul>
                                             id:
                                             {{#links}}
-                                            <li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px"> <a
-                                                        href="{{url}}">{{id}}</a></li>
+                                                <li style="position: relative; display: inline-block; padding-left: 5px;"><a
+                                                        href="{{url}}" target="_blank">{{id}}</a></li>
                                             {{/links}}
                                         </ul>
                                     </div>
@@ -298,8 +298,7 @@
                                     <ul>
                                         {{#links}}
                                         <!--  <div class='col-md-6 col-xs-6' id="evidence_div"> -->
-                                            <li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 5px">id: <a
-                                                    href="{{url}}">{{id}}</a></li>
+                                            <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a></li>
                                         <!--</div>- -->
                                         {{/links}}
                                     </ul>
@@ -457,13 +456,14 @@
                                     {{#databases}}
                                    <!-- <div class='col-md-6 col-xs-6'> -->
                                <span class="evidence_badge"
-                                     style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 20px; padding-top: 5px;">
+                                     style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
                                 <button class="btn btn-primary" type="button" style="background-color:{{color}}; border-color:{{color}}">
                                     {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                  </button>
 
-                                <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
                                     <ul>
+                                        id:
                                         {{#links}}
                                             <li class="evidence_id"> <a
                                                     href="{{url}}" target="_blank">{{id}} </a></li>
@@ -503,7 +503,7 @@
                                 <div class='col-md-12 col-xs-12'>
                                     <div class='col-md-6 col-xs-6'>
                                         {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID: 
-                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}} </a>): 
+                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>): 
                                     </div>
                                     {{#databases}}
                                     <div class='col-md-6 col-xs-6'>
@@ -516,8 +516,7 @@
                                 <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
                                     <ul>
                                         {{#links}}
-                                            <li style="position: relative; display: inline-block;  padding-left: 5px; padding-top: 5px">id: <a
-                                                    href="{{url}}">{{id}}</a></li>
+                                            <li style="position: relative; display: inline-block;"><a href="{{url}}" target="_blank">{{id}}</a></li>
                                         {{/links}}
                                     </ul>
                                 </div>

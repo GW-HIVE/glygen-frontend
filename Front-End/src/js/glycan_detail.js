@@ -77,8 +77,8 @@ function EvidencebadgeFormator(value, row, index, field) {
     $.each(value, function (i, v) {
         var linksHtml = "";
         $.each(v.links, function (i, w) {
-            linksHtml += '<li style="linksHtml">id: ' +
-                '<a href="' + w.url + '">' + w.id + '</a></li>'
+            linksHtml += '<li style="linksHtml">' +
+                '<a href="' + w.url + '" target="_blank">' + w.id + '</a></li>'
         });
 
         buttonsHtml += '<span class="evidence_badge">' +
@@ -264,7 +264,7 @@ function setupEvidenceList() {
 function show_evidence() {
     var $evidenceList = $(this).next();
     var isHidden = $evidenceList.hasClass('hidden');
-    $(".evidence_links").addClass("hidden");
+    // $(".evidence_links").addClass("hidden");
 
     if (isHidden) {
         $evidenceList.removeClass("hidden");
