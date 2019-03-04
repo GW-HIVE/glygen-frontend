@@ -223,9 +223,10 @@
                                                 <div class='hidden evidence_links' id="evidence_{{taxid}}_{{database}}"
                                                      style="position:absolute; left: 0; width: 200px;">
                                                     <ul>
+                                                            id:
                                                          {{#links}}
-                                                        <li class="evidence_id">id:<a
-                                                         href="{{url}}">{{id}}</a></li>
+                                                        <li class="evidence_id"><a
+                                                         href="{{url}}" target="_blank">{{id}}</a></li>
                                                          {{/links}}
                                                     </ul>
                                                 </div>
@@ -336,7 +337,7 @@
 
                         {{ #iupac }}
                         <strong>IUPAC</strong>
-                        <pre>{{{iupac }}}</pre>
+                        <pre>{{{iupac}}}</pre>
                         {{/iupac }}
 
                     </div>
