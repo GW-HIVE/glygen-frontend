@@ -3,9 +3,9 @@
 @description: UO1 Version-1.0.1
 @createDate June 5, 2018-Rupali Mahadik
 @update: October 24,2018-Rupali Mahadik
+@update: Cross Ref and Pathway grouping - Rupali Mahadik
 @update: Bootstrap table for glycosylation  - Rupali Mahadik.
 @update: July 31, 2018 - Gaurav Agarwal - added function, disease and mutation boxes. updated and added various other fields. few UI changes.
-@update: Cross Ref and Pathway grouping - Rupali Mahadik
 @update: Evidance badge - Rupali Mahadik. Jan.17-2019
 ----------------------------------------------------------------------------->
 <!DOCTYPE html>
@@ -132,7 +132,7 @@
     <div class="cd-faq-items" id="content" style="margin-bottom: 400px; margin-right: 0;">
         <script id="item_template" type="text/template">
             <!--Accession  starts here for page -->
-            <center><h2 class="page-heading" style="margin-top: -5px;">Details for glycoprotein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span>
+            <center><h2 class="page-heading" style="margin-top: -5px;">Details for Glycoprotein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span>
             </h2></center>
 
             <div class="row">
@@ -251,8 +251,10 @@
                                     <div class='hidden evidence_links'
                                          style="position: absolute; left: 0; width: 200px;">
                                         <ul>
+                                            id:
                                             {{#links}}
-                                                <li style="position: relative; display: inline-block; padding-left: 5px; padding-top: 0"><a href="{{url}}" target="_blank">{{id}}</a></li>
+                                                <li style="position: relative; display: inline-block; padding-left: 5px;"><a
+                                                        href="{{url}}" target="_blank">{{id}}</a></li>
                                             {{/links}}
                                         </ul>
                                     </div>
@@ -282,21 +284,23 @@
                             <div class="row">
                                 <div class='col-md-12 col-xs-12'>
                                     <div class='col-md-9 col-xs-8' style="position: relative; display:block; padding-left: 20px; padding-bottom: 5px; padding-top: 5px">
-                                        {{annotation}}</div>
+                                  {{annotation}}</div>
                                     {{#databases}}
                                     <div class='col-md-3 col-xs-4' style="position: relative; display:block; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
                                     <span class="evidence_badge"
                                           style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
                                 <button class="btn btn-primary" type="button"
-                                        style="background-color:{{color}}">
+                                        style="background-color:{{color}}; border-color:{{color}}">
                                     {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                  </button>
 
-                                <div class='hidden evidence_links' style="position: absolute; left: 5px; width: 200px;">
+                                <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
                                     <ul>
+                                        id:
                                         {{#links}}
-                                        <li><a
-                                            href="{{url}}" target="_blank">{{id}}</a></li>
+                                        <!--  <div class='col-md-6 col-xs-6' id="evidence_div"> -->
+                                            <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a></li>
+                                        <!--</div>- -->
                                         {{/links}}
                                     </ul>
                                 </div>
@@ -332,16 +336,16 @@
                         </div>
                         <div class="tab-content clearfix">
                             <div style="margin-bottom: 20px;" class="tab-pane active EmptyFind" id="1a">
-                                {{#glycosylation}}
+                                {{#hasGlycosylation}}
                                 <table id="glycosylation-table">
                                 </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                                {{/hasGlycosylation}} {{^hasGlycosylation}} No data available. {{/hasGlycosylation}}
                             </div>
                             <div class="tab-pane" id="2a">
-                                {{#glycosylation}}
+                                {{#hasGlycosylation}}
                                 <table id="glycosylation-table2">
                                 </table>
-                                {{/glycosylation}} {{^glycosylation}} No data available. {{/glycosylation}}
+                                {{/hasGlycosylation}} {{^hasGlycosylation}} No data available. {{/hasGlycosylation}}
                             </div>
                         </div>
                     </div>
@@ -361,7 +365,7 @@
                         <div class="box">
                             <div class="col-lg-9 col-md-12 col-xs-12 sequence-panel" id="sequnce_highlight"></div>
                             <div class="col-lg-3 col-md-12 col-sm-12 active">
-                                <ul class="highlight-panel-categories">
+                                <ul class="highlight-panel-categories" style="width:100%;">
                                     <li>
                                         <input type="checkbox" name="checkbox" id="seq_n_link"
                                                onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span
@@ -422,7 +426,7 @@
                         <div class="panelmaincontent">
                             <li class="list-group"><strong>{{resource}}:</strong></li>
                             {{#links}}
-                            <li class="list-group-indent">{{name}}&nbsp<a class="panelcontent" href="{{url}}"
+                            <li class="list-group-indent">{{name}} &nbsp<a class="panelcontent" href="{{url}}"
                                                                           target="_blank">{{id}}</a></li>
                             {{/links}}
                         </div>
@@ -447,35 +451,33 @@
                                             class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a>
                                     </li>
                                 </div>
-
                                 <div class="panelmaincontent list-group">
-
                                     Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
                                 </div>
-
-                                {{#databases}}
-                                <div class='col-md-6 col-xs-6'>
+                                    {{#databases}}
+                                   <!-- <div class='col-md-6 col-xs-6'> -->
                                <span class="evidence_badge"
-                                     style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 15px; padding-top: 5px;">
+                                     style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
                                 <button class="btn btn-primary" type="button" style="background-color:{{color}}; border-color:{{color}}">
                                     {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                  </button>
 
-                                <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
                                     <ul>
+                                        id:
                                         {{#links}}
-                                            <li style="position: relative; display: inline-block;  padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a></li>
+                                            <li class="evidence_id"> <a
+                                                    href="{{url}}" target="_blank">{{id}} </a></li>
                                         {{/links}}
                                     </ul>
                                 </div>
                               </span>
-                                </div>
-                                {{/databases}}
+                                   <!-- </div>  -->
+                                    {{/databases}}
                                 {{^databases}} {{/databases}}
                                 <div class="plus-button-margin-bottom"></div>
-
                                 <div id="fasta">
-                                    <pre>{{{sequence.sequence}}}</pre>
+                                    <pre class="highlight-text">{{{sequence.sequence}}}</pre>
                                 </div>
                                 <br>
                             </div>
@@ -500,21 +502,22 @@
                             <div class="row">
                                 <div class='col-md-12 col-xs-12'>
                                     <div class='col-md-6 col-xs-6'>
-                                        {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID:
-                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>):
+                                        {{name}} ({{#icd10}}ICD10: {{icd10}}; {{/icd10}}DOID: 
+                                        <a class="panelcontent" href="{{{url}}}" target="_blank">{{doid}}</a>): 
                                     </div>
                                     {{#databases}}
                                     <div class='col-md-6 col-xs-6'>
                                <span class="evidence_badge"
-                                     style="position: relative; display: inline-block;  padding-left: 5px; padding-bottom: 30px">
+                              style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 30px">
                                 <button class="btn btn-primary" type="button" style="background-color:{{color}}; border-color:{{color}}">
                                     {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                  </button>
 
                                 <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
                                     <ul>
+                                        id:
                                         {{#links}}
-                                            <li style="position: relative; display: inline-block;  padding-left: 5px; padding-top5: 5px"><a href="{{url}}" target="_blank">{{id}}</a></li>
+                                            <li style="position: relative; display: inline-block;"><a href="{{url}}" target="_blank">{{id}}</a></li>
                                         {{/links}}
                                     </ul>
                                 </div>
@@ -527,7 +530,6 @@
                         </div>
                         {{^disease}} No data available. {{/disease}}
                     </div>
-                </div>
                 </div>
             </ul>
 
