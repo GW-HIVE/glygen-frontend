@@ -366,7 +366,7 @@ $('#simplifiedCategory').on('change', populateExample);
 function populateExample() {
     $('#simpleCatSelectedOptionExample').show();
 //    var value = $('#simplifiedCategory').val();
-    var name = $("#simplifiedCategory option:selected").text();
+    var name = $("#simplifiedCategory option:selected").val();
     var examples = [];
     var exampleText = "Example";
     
