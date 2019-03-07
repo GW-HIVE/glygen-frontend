@@ -291,14 +291,14 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     //     sequences.type = input_sequence.type;
     //     sequences.aa_sequence = input_sequence.aa_sequence;
     // }
-    var glycans = null;
+    var glycans = {};
     if (input_glycan) {
         glycans = {
             relation: input_relation,
             glytoucan_ac: input_glycan
         }
     }
-    var organisms = '';
+    var organisms ={};
     if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;

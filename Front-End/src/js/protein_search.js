@@ -277,7 +277,7 @@ function ajaxProteinSearchSuccess() {
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
-    var sequences = null;
+    var sequences = {};
     if (input_sequence) {
         sequences = {
             "type": "exact",
@@ -285,7 +285,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         }
     }
     
-    var organisms = '';
+    var organisms = {};
     if (input_organism.id != "0") {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
@@ -297,7 +297,6 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-
         sequence: sequences ?sequences:undefined,
         organism: organisms ?organisms:undefined,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,
