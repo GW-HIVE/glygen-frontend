@@ -176,9 +176,9 @@ $(document).ready(function () {
         noUiSlider.create(slider, this.options);
         slider.noUiSlider.on('update', function (values, handle) {
             if (handle) {
-                inpMax.value = addCommas(parseInt(values[handle]));
+                inpMax.value = addCommas(parseFloat(values[handle]));
             } else {
-                inpMin.value = addCommas(parseInt(values[handle]));
+                inpMin.value = addCommas(parseFloat(values[handle]));
             }
         });
         target.addEventListener('change', function (e) {
@@ -294,8 +294,8 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "operation": "AND",
         query_type: input_query_type,
         mass: {
-            "min": parseInt(mass_min),
-            "max": parseInt(mass_max)
+            "min": parseFloat(mass_min),
+            "max": parseFloat(mass_max)
         },
         sequence: sequences ?sequences:undefined,
         organism: organisms ?organisms:undefined,
