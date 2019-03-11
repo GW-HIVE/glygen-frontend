@@ -25,6 +25,8 @@ Notices:
     No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
 
 */
+
+
 function getNprocessData(theURL) {
   // alert("sending request: " + theURL);
   var xhttp = new XMLHttpRequest();
@@ -40,7 +42,8 @@ function getNprocessData(theURL) {
 }
   
 function handleResidueNode(thisNID) {
-  // nodes is an array of svg "gnode" objects
+  // nodes is an array of svg "gnode" objects - nodes is declared globally in the javascript code 
+  //   that uses the methods defined in this API
   var t2 = "class: " + nodes[thisNID].getAttribute("class") + "\n";
   // alert("nodes is array of svg elements\n" + t2);
 
@@ -190,11 +193,12 @@ function renderLines(node, xCoord, yCoord, level) {
       yChild = top - place * node.gap * yScale;
       place++;  // incremented only for non-fucosyl substituents
     }
+// alert("nid for line is " + nid);
    //  alert("Drawing lines for node " + node.residue_id + " xChild is " + xChild + " and yChild is " + yChild);
-    svgStr += "<line class='glink' x1='" + (width - margin - node.x) + "' y1='" + (margin + node.y) + "' x2='" + (width - margin - xChild) + "' y2='" + (margin + yChild) + "'/>\n";
+    svgStr += "<line class='glink' stroke='black' x1='" + (width - margin - node.x) + "' y1='" + (margin + node.y) + "' x2='" + (width - margin - xChild) + "' y2='" + (margin + yChild) + "' edgeID='" + nid + "'/>\n";
     
     // label edges
-    xSpan = (node.x - xChild);
+    xSpan = (node.x - xChild); 
     ySpan = (yChild - node.y);
     // the x and y test offsets depend on the angle of the line connecting the nodes
     xOffset = Math.round(0.2 * xScale * Math.sin(-Math.atan2(ySpan, xSpan)));
@@ -213,9 +217,10 @@ function renderLines(node, xCoord, yCoord, level) {
       else if (node.children[i].anomer === 'b') txt = '&#x3b2;' + node.children[i].site
 		else txt = node.children[i].site;
 	svgStr += "<text class='gtext' text-anchor='middle' dominant-baseline='central' x='"
-	            + tx + "' y='" + ty + "'>" + txt + "</text>\n"; 
+	            + tx + "' y='" + ty + "' labelID='" + nid + "'>" + txt + "</text>\n"; 
 
 
+    nid++;
     renderLines(node.children[i], xChild, yChild, level + 1);
   }
 }
@@ -237,6 +242,7 @@ function renderNodes(node) {
   //   associate mouse-over and click functionality to each node using data
    var xx = width - margin - node.x;
    var yy = margin + node.y;
+
    var radius = 0.5 * nodeSize;
    nn[nid] = node;
    // alert("Drawing node " + node.residue_id + " xx is " + xx + " and yy is " + yy);
@@ -244,17 +250,18 @@ function renderNodes(node) {
    nodeColor[nid] = node.color;
 
    // draw the nodes and add functionality to them
+   var idStr = "' nodeID='" + nid;
    var clickStr = "' onclick='handleResidueNode(" + nid + ")'/>\n";
    var partStr = "";
    switch(node.shape) {
     case "circle":
-        partStr = "<circle class='gnode' r='" + radius + "' cx='" + xx + "' cy='" + yy + "' fill='" + node.color; 
+        partStr = "<circle class='gnode' sugarName='" + node.pubChem + "' r='" + radius + "' cx='" + xx + "' cy='" + yy + "' stroke='black' fill='" + node.color; 
         break;
     case "square":
         xx1 = xx - radius;
         yy1 = yy - radius;
-        partStr = "<rect class='gnode' width='" + nodeSize + "' height='" + nodeSize 
-               + "' x='" + xx1 + "' y='" + yy1 + "' fill='" + node.color; 
+        partStr = "<rect class='gnode' sugarName='" + node.pubChem + "' width='" + nodeSize + "' height='" + nodeSize 
+               + "' x='" + xx1 + "' y='" + yy1 + "' stroke='black' fill='" + node.color; 
         break;
     case "triangle":
         // up or down, depending on linkage
@@ -269,8 +276,8 @@ function renderNodes(node) {
           yy2 = yy1;
           yy3 = yy1 + nodeSize;
         }
-        partStr = "<polygon class='gnode' points='" + xx1 + ","  + yy1 + " "  + xx2 + ","  + yy2 + " "  
-               + xx3 + "," + yy3 + "' fill='" + node.color;
+        partStr = "<polygon class='gnode' sugarName='" + node.pubChem + "' points='" + xx1 + ","  + yy1 + " "  + 
+            xx2 + ","  + yy2 + " "  + xx3 + "," + yy3 + "' stroke='black' fill='" + node.color;
         break;
     case "diamond":
         var xx1 = xx,
@@ -281,8 +288,8 @@ function renderNodes(node) {
         yy3 = yy1 + nodeSize;
         xx4 = xx1 - radius;
         yy4 = yy1 + radius;
-        partStr = "<polygon class='gnode' points='" + xx1 + ","  + yy1 + " "  + xx2 + ","  + yy2 + " "  
-               + xx3 + "," + yy3 + " " + xx4 + "," + yy4 + "' fill='" + node.color;
+        partStr = "<polygon class='gnode' sugarName='" + node.pubChem + "' points='" + xx1 + ","  + yy1 + " "  + xx2 + ","  + yy2 + " "  
+               + xx3 + "," + yy3 + " " + xx4 + "," + yy4 + "' stroke='black' fill='" + node.color;
         break;
     case "star":
         var xx1 = xx,
@@ -295,17 +302,17 @@ function renderNodes(node) {
         yy4 = yy + 0.81 * radius;
         xx5 = xx - 0.95 * radius;
         yy5 = yy - 0.31 * radius;
-        partStr = "<polygon class='gnode' points='" + xx1 + ","  + yy1 + " "  + xx3 + ","  + yy3 + " "  
-               + xx5 + "," + yy5 + " " + xx2 + "," + yy2 + " " + xx4 + "," + yy4 + "' fill='" + node.color;
+        partStr = "<polygon class='gnode' sugarName='" + node.pubChem + "' points='" + xx1 + ","  + yy1 + " "  + xx3 + ","  + yy3 + " "  
+               + xx5 + "," + yy5 + " " + xx2 + "," + yy2 + " " + xx4 + "," + yy4 + "' stroke='black' fill='" + node.color;
          break;
    default:
         alert("shape (" + node.shape + ") not supported");
-        partStr = "<circle class='gnode' r='" + radius/3 + "' cx='" + xx + "' cy='" + yy + "' fill='black"; 
+        partStr = "<circle class='gnode' sugarName='" + node.pubChem + "' r='" + radius/3 + "' cx='" + xx + "' cy='" + yy + "' stroke='black' fill='black"; 
   }
 
   // svgStr contains click functionality, svgStrOut does not
-  svgStr += partStr + clickStr;
-  svgStrOut += partStr + "'/>\n";
+  svgStr += partStr + idStr + clickStr;
+  svgStrOut += partStr + idStr + "'/>\n";
  
   if (showIDs == true) {
   // label each node with the GlycO "residue-id"
@@ -320,6 +327,9 @@ function renderNodes(node) {
   for (var i = 0; i < node.cCount; i++) {
     renderNodes(node.children[i]);
   }
+  // alert("svgStr is: \n" + svgStr);
+  // alert("svgStrOut is: \n" + svgStrOut);
+
 }
 
 function findRoot(data, rCount) {
@@ -342,7 +352,31 @@ function processData(jsonData) {
   nodeColor = new Array(50);
   nid = 0;
   lastNID = 0;
-  svgStr = "<svg width='" + width + "' height='" + height + "'>\n";
+    
+  svgStr = "<svg viewbox='0 0 " + width + " " + height + "' xmlns=\"http://www.w3.org/2000/svg\">\n" +
+    "<script type=\"text/ecmascript\">\n" +
+    "<![CDATA[\n\n" +
+    "window.onload=function () {\n" +
+    "    var sugarNode = document.getElementsByClassName(\"gnode\");\n" +
+    "    for (var i = 0; i < sugarNode.length; i++) {\n" +
+    "        sugarNode[i].addEventListener(\"click\", mClick, false);\n" +
+    "   }\n" +
+    "}\n\n" +
+
+    "function mClick() {\n" +
+    "    var useExternalMethod = document.getElementById(\"extFlag\").getAttribute(\"value\");\n" +
+    "    if (useExternalMethod == \"0\") {\n" +
+    "        var nodeName = this.getAttribute(\"sugarName\");\n" +
+    "        window.open(\"https://pubchem.ncbi.nlm.nih.gov/compound/\" + nodeName)\n" +
+    "    }\n" +
+    "}\n" +
+    "]]>\n\n" +
+    "</script>\n\n" +
+
+    "<desc value=\"0\" id=\"extFlag\"/>";
+
+  // alert(svgStr);
+    
   // the string svgStrOut is for external consumption, and has "no onClick"" functionality
   svgStrOut = "";	
   // nodes is an array of svg "gnode" objects that are sequentially generated by renderNodes
@@ -359,9 +393,11 @@ function processData(jsonData) {
   
   initialDepth = 1;
   firstX = initialDepth * xScale;
+  nid = 1;
   renderLines(root, firstX, height/2, initialDepth);
   svgStrOut = svgStr;
   
+  nid = 0;
   renderNodes(root);
   nodes = document.getElementsByClassName("gnode");
   
