@@ -84,7 +84,7 @@ function editSearch() {
  * @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID="+id+"'>" + value + "</a>";
 }
 
 /**

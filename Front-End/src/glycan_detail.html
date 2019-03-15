@@ -9,6 +9,7 @@
 @update: 27 June 2018 - web services major changes
 @update: Cross Ref grouping - Rupali Mahadik
 @update: Evidance badge - Rupali Mahadik. Jan.17-2019
+@update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumb
 --------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -129,6 +130,16 @@
     <div class="cd-faq-items" id="content">
         <!-- <div id="content" class="container" "> -->
         <script id="item_template" type="text/template">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <!-- breadcrumb filled by javascript -->
+                    <ul class="gg-breadcrumb">
+                        <li><a href="#" id="breadcrumb-search">Glycan Search</a></li>
+                        <li><a href="#" id="breadcrumb-list">Glycan List</a></li>
+                        <li>Glycan Detail</li>
+                    </ul>
+                </div>
+            </div>
             <!-- Glycan ID starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for glycan <span>
                 {{#glytoucan}}{{glytoucan_ac}}{{/glytoucan}}</span></h2></center>

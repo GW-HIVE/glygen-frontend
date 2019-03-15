@@ -1081,3 +1081,39 @@ ____________________________________  */
 @media (max-width: 320px) {
     
 }
+
+/* --- css for breadcrumb starts --- */
+/* Style the list */
+ul.gg-breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+  
+  /* Display list items side by side */
+  ul.gg-breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  
+  /* Add a slash symbol (/) before/behind each list item */
+  ul.gg-breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  
+  /* Add a color to all links inside the list */
+  ul.gg-breadcrumb li a {
+    color: rgb(94, 108, 132);
+    text-decoration: none;
+  }
+  
+  /* Add a color on mouse-over */
+  ul.gg-breadcrumb li a:hover {
+    color: rgb(94, 108, 132);/*#01447e;*/
+    text-decoration: underline !important;
+  }
+  /* --- css for breadcrumb ends --- */

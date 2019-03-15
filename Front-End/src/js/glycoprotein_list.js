@@ -65,7 +65,7 @@ function editSearch() {
  * @return - Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='glycoprotein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>";
+    return "<a href='glycoprotein_detail.html?uniprot_canonical_ac=" + value + "&listID="+id + "'>" + value + "</a>";
 }
 
 /**
@@ -171,7 +171,7 @@ $(document).ajaxStop(function () {
 });
 
 $(document).ready(function () {
-    var id = getParameterByName('id');
+    id = getParameterByName('id');
     LoadDataList(id);
     $('#gen-table').on("sort.bs.table", function (event, field, order) {
         // event.preventDefault();
