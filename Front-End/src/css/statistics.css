@@ -1,0 +1,47 @@
+/*
+@author Tatiana Williamson
+@createDate March 11, 2019
+*/
+
+/*Bar-Chart*/
+.bar-chart, .bar-chart-scale {
+	background-color: #e2e8ef;
+/*	color: #2f78b7;*/
+}
+
+.bar {
+    fill: #115D8C;
+}
+
+/*Horizontal bar Chart*/
+.chart div {
+	font: 14px sans-serif;
+	background-color: steelblue;
+	text-align: right;
+	padding: 6px;
+	margin: 5px;
+	color: white;
+}
+#dashboard {
+  width: 520px;
+/*  border: 1px solid black;*/
+}
+
+.chart h4 {
+	text-align: center;
+}
+
+/*Creating SVG elements*/
+.svg-container {
+    background-color: #FFC988;
+}
+
+/*Pie chart*/
+/*
+html, body {
+    margin: 0;
+    padding: 0;
+}
+*/
+
+
