@@ -2,6 +2,49 @@
 @author Tatiana Williamson
 @createDate March 11, 2019
 */
+/*----------------------------------
+    statistics.js
+-------------------------------------*/
+/*
+path {
+  stroke: #fff;
+  fill-rule: evenodd;
+}
+
+text {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+*/
+
+body5 {
+        font-family: Sans-serif;
+        font-size: 11px;
+    }
+
+.slice {
+    cursor: pointer;
+}
+
+.slice .main-arc {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+.slice .hidden-arc {
+    fill: none;
+}
+
+.slice text {
+    pointer-events: none;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-size: 9px;
+}
+/*--------------------------------------------*/
+
+
+
 
 /*Bar-Chart*/
 .bar-chart, .bar-chart-scale {
