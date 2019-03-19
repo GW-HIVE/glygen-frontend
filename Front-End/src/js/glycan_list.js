@@ -61,7 +61,7 @@ function totalNoSearch(total_length) {
  * @return - Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
-    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>";
+    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "&listID="+id + "'>" + value + "</a>";
 }
 
 /**

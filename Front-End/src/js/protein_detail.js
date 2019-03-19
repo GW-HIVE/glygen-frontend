@@ -11,6 +11,7 @@
 // @update: Aug 6, 2018 - Rupali Mahadik - Grouping for cross ref
 // @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 // @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
+// @update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumbs
 
 /**
  * Object to hold highlight data in state
@@ -752,6 +753,7 @@ function ajaxSuccess(data) {
 
     setupEvidenceList();
     $('#loading_image').fadeOut();
+    updateBreadcrumbLinks();
 }
 
 /**
@@ -845,8 +847,21 @@ function checkUncheck(type, element) {
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
-    LoadData(uniprot_canonical_ac);
+    LoadData(uniprot_canonical_ac);     
+
+    updateBreadcrumbLinks();
 });
+
+/**
+ * this function gets the URL query values from the fillBreadcrumb() function in utility.js
+ * and updates the respective links on the breadcrumb fields.
+ */
+function updateBreadcrumbLinks(){
+    var listID = getParameterByName("listID");
+    var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
+    $('#breadcrumb-search').attr("href", glycanPageType+"_search.html?id="+listID);
+    $('#breadcrumb-list').attr("href", glycanPageType+"_list.html?id="+listID);
+}
 
 /**
  * Gets the values selected in the download dropdown 

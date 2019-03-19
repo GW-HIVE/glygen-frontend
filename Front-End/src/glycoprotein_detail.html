@@ -7,6 +7,7 @@
 @update: Bootstrap table for glycosylation  - Rupali Mahadik.
 @update: July 31, 2018 - Gaurav Agarwal - added function, disease and mutation boxes. updated and added various other fields. few UI changes.
 @update: Evidance badge - Rupali Mahadik. Jan.17-2019
+@update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumb
 ----------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -131,6 +132,16 @@
     <!-- main content for page -->
     <div class="cd-faq-items" id="content" style="margin-bottom: 400px; margin-right: 0;">
         <script id="item_template" type="text/template">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <!-- breadcrumb filled by javascript -->
+                    <ul class="gg-breadcrumb">
+                        <li><a href="#" id="breadcrumb-search">Glycoprotein Search</a></li>
+                        <li><a href="#" id="breadcrumb-list">Glycoprotein List</a></li>
+                        <li>Glycoprotein Detail</li>
+                    </ul>
+                </div>
+            </div>
             <!--Accession  starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for Glycoprotein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span>
             </h2></center>

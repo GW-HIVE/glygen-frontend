@@ -7,6 +7,7 @@
 @update: Bootstrap table for glycosylation  - Rupali Mahadik.
 @update: July 31, 2018 - Gaurav Agarwal - added function, disease and mutation boxes. updated and added various other fields. few UI changes.
 @update: Evidance badge - Rupali Mahadik. Jan.17-2019
+@update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumb
 ----------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +19,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Details - glygen</title>
     <!-- Please do not change Sequence-->
     <!-- CSS reset -->
@@ -46,91 +47,101 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-          crossorigin="anonymous">
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/server.css">
 
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
-          href="images/icons/favicomatic/apple-touch-icon-114x114.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png"/>
+        href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
-          href="images/icons/favicomatic/apple-touch-icon-144x144.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/icons/favicomatic/apple-touch-icon-60x60.png"/>
+        href="images/icons/favicomatic/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/icons/favicomatic/apple-touch-icon-60x60.png" />
     <link rel="apple-touch-icon-precomposed" sizes="120x120"
-          href="images/icons/favicomatic/apple-touch-icon-120x120.png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icons/favicomatic/apple-touch-icon-76x76.png"/>
+        href="images/icons/favicomatic/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icons/favicomatic/apple-touch-icon-76x76.png" />
     <link rel="apple-touch-icon-precomposed" sizes="152x152"
-          href="images/icons/favicomatic/apple-touch-icon-152x152.png"/>
-    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-196x196.png" sizes="196x196"/>
-    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-96x96.png" sizes="96x96"/>
-    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-16x16.png" sizes="16x16"/>
-    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-128.png" sizes="128x128"/>
-    <meta name="application-name" content="GlyGen"/>
-    <meta name="msapplication-TileColor" content="#FFFFFF"/>
-    <meta name="msapplication-TileImage" content="images/icons/favicomatic/mstile-144x144.png"/>
-    <meta name="msapplication-square70x70logo" content="images/icons/favicomatic/mstile-70x70.png"/>
-    <meta name="msapplication-square150x150logo" content="images/icons/favicomatic/mstile-150x150.png"/>
-    <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png"/>
-    <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png"/>
+        href="images/icons/favicomatic/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="GlyGen" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="images/icons/favicomatic/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="images/icons/favicomatic/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="images/icons/favicomatic/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
 </head>
 
 <body onload="tracking()">
-<div id="loading_image">
-    <img src="images/page_loading.gif"/>
-</div>
-<script type="text/javascript" src="libraries/w3.js"></script>
-<div w3-include-html="header.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<section class="cd-faq">
-    <ul class="cd-faq-categories">
-        <li>
-            <a class="selected" href="#general">General</a>
-        </li>
-        <li>
-            <a href="#species">Species</a>
-        </li>
-        <li>
-            <a href="#function">Function</a>
-        </li>
-        <li>
-            <a href="#glycosylation">Glycosylation</a>
-        </li>
-        <li>
-            <a href="#sequence">Sequence</a>
-        </li>
-        <li>
-            <a href="#crossReferences">Cross References</a>
-        </li>
-        <li>
-            <a href="#pathway">Pathway</a>
-        </li>
-        <li>
-            <a href="#isoform">Isoform</a>
-        </li>
-        <li>
-            <a href="#disease">Disease</a>
-        </li>
-        <li>
-            <a href="#mutation">Mutation</a>
-        </li>
-        <li>
-            <a href="#expressionTissue">Expression Tissue</a>
-        </li>
-        <li>
-            <a href="#expressionDisease">Expression Disease</a>
-        </li>
-        <li>
-            <a href="#publications">Publications</a>
-        </li>
-    </ul>
-    <!-- cd-faq-categories -->
-    <!-- main content for page -->
-    <div class="cd-faq-items" id="content" style="margin-bottom: 400px; margin-right: 0;">
-        <script id="item_template" type="text/template">
+    <div id="loading_image">
+        <img src="images/page_loading.gif" />
+    </div>
+    <script type="text/javascript" src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <section class="cd-faq">
+        <ul class="cd-faq-categories">
+            <li>
+                <a class="selected" href="#general">General</a>
+            </li>
+            <li>
+                <a href="#species">Species</a>
+            </li>
+            <li>
+                <a href="#function">Function</a>
+            </li>
+            <li>
+                <a href="#glycosylation">Glycosylation</a>
+            </li>
+            <li>
+                <a href="#sequence">Sequence</a>
+            </li>
+            <li>
+                <a href="#crossReferences">Cross References</a>
+            </li>
+            <li>
+                <a href="#pathway">Pathway</a>
+            </li>
+            <li>
+                <a href="#isoform">Isoform</a>
+            </li>
+            <li>
+                <a href="#disease">Disease</a>
+            </li>
+            <li>
+                <a href="#mutation">Mutation</a>
+            </li>
+            <li>
+                <a href="#expressionTissue">Expression Tissue</a>
+            </li>
+            <li>
+                <a href="#expressionDisease">Expression Disease</a>
+            </li>
+            <li>
+                <a href="#publications">Publications</a>
+            </li>
+        </ul>
+        <!-- cd-faq-categories -->
+        <!-- main content for page -->
+        <div class="cd-faq-items" id="content" style="margin-bottom: 400px; margin-right: 0;">
+            <script id="item_template" type="text/template">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <!-- breadcrumb filled by javascript -->
+                        <ul class="gg-breadcrumb">
+                            <li><a href="#" id="breadcrumb-search">Protein Search</a></li>
+                            <li><a href="#" id="breadcrumb-list">Protein List</a></li>
+                            <!-- <li><a href="#">Protein Detail</a></li> -->
+                            <li>Protein Detail</li>
+                        </ul>
+                    </div>
+                </div>
             <!--Accession  starts here for page -->
             <center><h2 class="page-heading" style="margin-top: -5px;">Details for protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span>
             </h2></center>
@@ -611,63 +622,63 @@
 
             <a href="#0" class="cd-close-panel">Close</a>
         </script>
-    </div>
-</section>
+        </div>
+    </section>
 
-<div w3-include-html="footer.html"></div>
-<script>
-    w3.includeHTML();
-</script>
-<script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
-<!-- script for table -->
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
-<!-- script for error-message/header-footer js -->
-<script src="js/utility.js"></script>
-<!-- script for detail page -->
-<script type="text/javascript" src="js/protein_detail.js"></script>
-<!-- script for template engine -->
-<script type="text/javascript" src="libraries/mustache.js"></script>
-<!-- script for webservice -->
-<script type="text/javascript" src="js/domain_url.js"></script>
-<script type="text/javascript" src="js/ws_url.js"></script>
-<!-- script for navigation -->
-<script src="js/navbar.js"></script>
-<!-- script for side navigation -->
-<script src="js/faq_main.js"></script>
-<!-- script for user activity tracking and error logging -->
-<script src="js/activity_tracker.js"></script>
-<!-- script for error handling alerts -->
-<script type="text/javascript" src="libraries/alertify.js"></script>
-<!-- downloading files js -->
-<script src="libraries/download.js"></script>
+    <div w3-include-html="footer.html"></div>
+    <script>
+        w3.includeHTML();
+    </script>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- script for table -->
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap-table.min.js"></script>
+    <!-- script for error-message/header-footer js -->
+    <script src="js/utility.js"></script>
+    <!-- script for detail page -->
+    <script type="text/javascript" src="js/protein_detail.js"></script>
+    <!-- script for template engine -->
+    <script type="text/javascript" src="libraries/mustache.js"></script>
+    <!-- script for webservice -->
+    <script type="text/javascript" src="js/domain_url.js"></script>
+    <script type="text/javascript" src="js/ws_url.js"></script>
+    <!-- script for navigation -->
+    <script src="js/navbar.js"></script>
+    <!-- script for side navigation -->
+    <script src="js/faq_main.js"></script>
+    <!-- script for user activity tracking and error logging -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for error handling alerts -->
+    <script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- downloading files js -->
+    <script src="libraries/download.js"></script>
 
-<!-- Please do not change this it breaks hash scroll code-->
-<script type="text/javascript">
-    $(document).ajaxStop(function () {
-        // calls the sidebar function only when all ajax calls are completed
-        faqMain();
+    <!-- Please do not change this it breaks hash scroll code-->
+    <script type="text/javascript">
+        $(document).ajaxStop(function () {
+            // calls the sidebar function only when all ajax calls are completed
+            faqMain();
 
-        function scrollToPanel(hash) {
-            //to scroll to the particular sub section.
-            $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-            if ($(window).width() < 768) { //mobile view
-                $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
-                $('.cd-close-panel').addClass('move-left');
-                $('body').addClass('cd-overlay');
-            } else {
-                $('body,html').animate({
-                    'scrollTop': $(hash).offset().top - 19
-                }, 200);
+            function scrollToPanel(hash) {
+                //to scroll to the particular sub section.
+                $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+                if ($(window).width() < 768) { //mobile view
+                    $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+                    $('.cd-close-panel').addClass('move-left');
+                    $('body').addClass('cd-overlay');
+                } else {
+                    $('body,html').animate({
+                        'scrollTop': $(hash).offset().top - 19
+                    }, 200);
+                }
             }
-        }
 
-        if (window.location.hash) {
-            scrollToPanel(window.location.hash);
-        }
-    });
-</script>
+            if (window.location.hash) {
+                scrollToPanel(window.location.hash);
+            }
+        });
+    </script>
 
 </body>
 

@@ -6,7 +6,7 @@
 
 /**
  * This is a global variable for the searched term. 
- * It's kept global because it's accessed in all the functions.
+ * It's kept global because it is accessed in all the functions.
  */
 var term = '';
 
@@ -17,9 +17,9 @@ var term = '';
 $(document).ready(function () {
     term = getParameterByName('search_query');
     $('#display_search_term').text(term);
-    term = encodeURIComponent(term);
     loadResult();
 });
+
 
 /**
  * This is the success handling function for the ajax call.
@@ -30,6 +30,7 @@ function ajaxSuccess(result) {
     var template = $('#result_template').html();
     var content = Mustache.to_html(template, result);
     $('#result').html(content);
+    $(".gg-search-term").text("\""+term+"\"");
     $('#loading_image').fadeOut();
     activityTracker("user", term, "successful search");
 }

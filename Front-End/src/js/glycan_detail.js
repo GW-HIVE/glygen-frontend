@@ -10,6 +10,7 @@
 // @update on Aug 28 2018 - Gaurav Agarwal - updated ajaxFailure function
 // @update: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gets selected creteria for downloading data.
 // @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
+// @update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumbs
 
 /**
  * Prints a number with commas as thousands separator
@@ -216,6 +217,7 @@ function ajaxSuccess(data) {
     }
     setupEvidenceList();
     $('#loading_image').fadeOut();
+    updateBreadcrumbLinks();
 }
 
 /**
@@ -295,7 +297,18 @@ $(document).ready(function () {
     glytoucan_ac = getParameterByName('glytoucan_ac');
     document.title = glytoucan_ac + " Detail - glygen"; //updates title with the glycan ID
     LoadData(glytoucan_ac);
+    updateBreadcrumbLinks();
 });
+
+/**
+ * this function gets the URL query values from the getParameterByName() function in utility.js
+ * and updates the respective links on the breadcrumb fields.
+ */
+function updateBreadcrumbLinks(){
+    var listID = getParameterByName("listID");
+    $('#breadcrumb-search').attr("href", "glycan_search.html?id="+listID);
+    $('#breadcrumb-list').attr("href", "glycan_list.html?id="+listID);
+}
 
 /**
  * Gets the values selected in the download dropdown 
