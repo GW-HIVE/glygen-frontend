@@ -18,11 +18,11 @@
                     },
                     {
                         "name":"glycoproteins",
-                        "size":8800
+                        "size":4434
                     },
                     {
                         "name":"other",
-                        "size":15000
+                        "size":11363
                     }
                     
                 ]
@@ -32,11 +32,11 @@
                 "children":[
                     {
                         "name":"N-glycan",
-                        "size":700
+                        "size":2502
                     },
                     {
                         "name":"O-glycans",
-                        "size":200
+                        "size":800
                     }
                 ]
             },
@@ -68,11 +68,11 @@
                     },
                     {
                         "name":"glycoproteins",
-                        "size":9000
+                        "size":3767
                     },
                     {
                         "name":"other",
-                        "size":15000
+                        "size":13756
                     }
                     
                 ]
@@ -82,11 +82,11 @@
                 "children":[
                     {
                         "name":"N-glycan",
-                        "size":715
+                        "size":392
                     },
                     {
                         "name":"O-glycans",
-                        "size":195
+                        "size":125
                     }
                 ]
             },

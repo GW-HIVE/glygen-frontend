@@ -4,7 +4,7 @@
 //d3.json("statistics.json", function(data){
   const width = 560,
       height = 300,
-      maxRadius = (Math.min(width, height) / 2) - 10;
+      maxRadius = (Math.min(width, height) / 2) - 20;
 
   const formatNumber = d3.format(',d');
 
