@@ -128,7 +128,7 @@ $(document).ready(function () {
 
             new Sliderbox({
                 target: '.sliderbox',
-                start: [435, 3906488.00], // Handle start position
+                start: [400, 4000000.00], // Handle start position
                 connect: true, // Display a colored bar between the handles
                 behaviour: 'tap-drag', // Move handle on tap, bar is draggable
                 range: { // Slider can select '0' to '100'

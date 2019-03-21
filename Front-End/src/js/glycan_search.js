@@ -263,7 +263,6 @@ function submitvalues() {
 
     var prevListId = getParameterByName("id") || "";
     activityTracker("user", prevListId, "Performing Advanced Search");
-
     var query_type = "search_glycan";
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
