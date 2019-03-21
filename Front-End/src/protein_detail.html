@@ -198,7 +198,7 @@
                                 </li>
                                 {{/uniprot_id}}
                                 {{^uniprot_id}} {{/uniprot_id}}
-
+                                
                                 {{#uniprot_canonical_ac}}
                                 <li class="list-group"><strong>UniProtKB Accession:</strong>
                                     <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac}}</a>
@@ -206,6 +206,14 @@
                                 {{/uniprot_canonical_ac}}
                                 {{^uniprot_canonical_ac}} {{/uniprot_canonical_ac}}
                                 {{/uniprot}}
+
+                                {{#uniprot_canonical_ac_length}}
+                                <li class="list-group"><strong>UniProtKB Accession Length:</strong>
+                                    <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac_length}}</a>
+                                </li>
+                                {{/uniprot_canonical_ac_length}}
+                                {{^uniprot_canonical_ac_length}} {{/uniprot_canonical_ac_length}}
+                            
 
                                 {{#recommendedname}} {{#full}}
                                 <li class="list-group"><strong>UniProtKB Entry
