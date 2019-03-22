@@ -55,11 +55,12 @@ function faqMain() {
 			$(this).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
 		});
 
+		// properly alligns sidebar on docuement ready.
+		sidebarUpdate();
+
 		//update category sidebar while scrolling
 		$(window).on('scroll', function () {
-			if ($(window).width() >= MqL) {
-				(!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory);
-			}
+			sidebarUpdate();
 		});
 
 		/**
@@ -91,11 +92,19 @@ function faqMain() {
 		 * @since 06/14/2018
 		 */
 		$(window).on('resize', function () {
+			sidebarUpdate();
+		});
+
+		/**
+		 * This code is being used at several places in this file,
+		 * so I created a function for the same.
+		 * @author Gaurav Agarwal
+		 */
+		function sidebarUpdate(){
 			if ($(window).width() >= MqL) {
 				(!window.requestAnimationFrame) ? updateCategory() : window.requestAnimationFrame(updateCategory);
 			}
-		});
-
+		}
 		function closePanel(e) {
 			e.preventDefault();
 			faqsContainer.removeClass('slide-in').find('li').show();
