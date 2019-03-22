@@ -415,8 +415,20 @@ $(document).on('click', '.gg-download', function (e) {
  * returns date string in MM/DD/YYYY format
  */
 function getDateMMDDYYYY(date) {
-    return date.slice(5, 7) + '/' + date.slice(8, 10) + '/' + date.slice(0, 4);
+    var monthNames = [
+        "Jan", "Feb", "Mar",
+        "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct",
+        "Nov", "Dec"
+    ];
+    
+    var day = date.slice(8, 10);
+    var monthIndex = parseInt(date.slice(5, 7)) - 1;
+    var year = date.slice(0, 4);
+    
+    return day + '/' + monthNames[monthIndex] + '/' + year;
 }
+
 
 /**
  * getParameterByName function to Extract query parameters from url
