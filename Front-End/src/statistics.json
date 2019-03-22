@@ -1,0 +1,105 @@
+{
+    "name":"molecules",
+    "children":[
+        {
+            "name":"Human molecules",
+            "children":[
+        
+            {
+                "name":"proteins",
+                "children":[
+                    {
+                        "name":"enzymes",
+                        "size":5000
+                    },
+                    {
+                        "name":"lectins",
+                        "size":200
+                    },
+                    {
+                        "name":"glycoproteins",
+                        "size":4434
+                    },
+                    {
+                        "name":"other",
+                        "size":11363
+                    }
+                    
+                ]
+            },
+            {
+                "name":"glycans",
+                "children":[
+                    {
+                        "name":"N-glycan",
+                        "size":2502
+                    },
+                    {
+                        "name":"O-glycans",
+                        "size":800
+                    }
+                ]
+            },
+            {
+                "name":"genes",
+                "children":[
+                    {
+                        "name":"human genes",
+                        "size":18000
+                    }
+                ]
+            }]
+        
+        },
+        {
+            "name":"Mouse molecules",
+            "children":[
+        
+            {
+                "name":"proteins",
+                "children":[
+                    {
+                        "name":"enzymes",
+                        "size":4500
+                    },
+                    {
+                        "name":"lectins",
+                        "size":250
+                    },
+                    {
+                        "name":"glycoproteins",
+                        "size":3767
+                    },
+                    {
+                        "name":"other",
+                        "size":13756
+                    }
+                    
+                ]
+            },
+            {
+                "name":"glycans",
+                "children":[
+                    {
+                        "name":"N-glycan",
+                        "size":392
+                    },
+                    {
+                        "name":"O-glycans",
+                        "size":125
+                    }
+                ]
+            },
+            {
+                "name":"genes",
+                "children":[
+                    {
+                        "name":"mouse genes",
+                        "size":17500
+                    }
+                ]
+            }]
+        
+        }
+    ]
+}
