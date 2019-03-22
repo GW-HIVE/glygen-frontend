@@ -552,11 +552,13 @@ function ajaxListSuccess(data) {
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
 function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     displayErrorByCode(err);
     activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
+    showJsError = false;
 }
 
 /* ----------------------

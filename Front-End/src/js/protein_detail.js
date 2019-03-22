@@ -761,12 +761,14 @@ function ajaxSuccess(data) {
  * Returns the GWU services fails.
  */
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
+    showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
     activityTracker("error", uniprot_canonical_ac, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
+    showJsError = false;
 }
 
 /**

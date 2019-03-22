@@ -7,12 +7,14 @@
 var question = "";
 
 function tryMeAjaxFailure(jqXHR, textStatus, errorThrown) {
+    showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
     activityTracker("error", id, question+": "+err + ": " + errorMessage);
     $('#loading_image').fadeOut();
+    showJsError = false;
 }
 
 /**
@@ -102,9 +104,11 @@ function tryMouseGlycans() {
         error: tryMeAjaxFailure,
         success: function (results) {
             if (results.error_code) {
+                showJsError = true;
                 displayErrorByCode(results.error_code);
                 activityTracker("error", "", question+": " + results.error_code);
                 $('#loading_image').fadeOut();
+                showJsError = false;
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
                 activityTracker("user", "", question+": no result found");

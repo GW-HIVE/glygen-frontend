@@ -88,7 +88,9 @@ function setGlycoProteinFormValues(data) {
  * @param {object} data - The Retreive data
  */
 function failToRetreiveSearch(data) {
+    showJsError = true;
     displayErrorByCode('server_down');
+    showJsError = false;
 }
 
 /**

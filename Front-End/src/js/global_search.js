@@ -42,6 +42,7 @@ function ajaxSuccess(result) {
  * @param {*} errorThrown 
  */
 function ajaxFailure(jqXHR, textStatus, errorThrown) {
+    showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
@@ -49,6 +50,7 @@ function ajaxFailure(jqXHR, textStatus, errorThrown) {
     activityTracker("error", term, "error: " + errorMessage);
 
     $('#loading_image').fadeOut();
+    showJsError = false;
 }
 
 /**
