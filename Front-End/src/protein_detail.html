@@ -207,12 +207,12 @@
                                 {{^uniprot_canonical_ac}} {{/uniprot_canonical_ac}}
                                 {{/uniprot}}
 
-                                {{#uniprot_canonical_ac_length}}
+                                {{#length}}
                                 <li class="list-group"><strong>UniProtKB Accession Length:</strong>
-                                    <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac_length}}</a>
+                                    <a class="panelcontent" href="{{url}}" target="_blank">{{length}}</a>
                                 </li>
-                                {{/uniprot_canonical_ac_length}}
-                                {{^uniprot_canonical_ac_length}} {{/uniprot_canonical_ac_length}}
+                                {{/length}}
+                                {{^length}} {{/length}}
                             
 
                                 {{#recommendedname}} {{#full}}
