@@ -855,7 +855,7 @@ $(document).ready(function () {
 });
 
 /**
- * this function gets the URL query values from the fillBreadcrumb() function in utility.js
+ * this function gets the URL query values
  * and updates the respective links on the breadcrumb fields.
  */
 function updateBreadcrumbLinks(){
