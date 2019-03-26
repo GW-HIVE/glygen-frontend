@@ -379,7 +379,7 @@ function populateLastGlycanSearch(question, id) {
         method: 'POST',
         timeout: getTimeout("list_glycan"),
         success: function (data) {
-            $('#glycanenzyme').val(data.query.uniprot_canonical_ac);
+            $('#glycanenzyme').val(data.query.uniprot_canonical_ac || "Mgat1");
         }
     });
 }
