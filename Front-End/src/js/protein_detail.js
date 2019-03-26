@@ -388,7 +388,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
-     
+
 
 
         var itemscrossRef = [];
@@ -455,7 +455,7 @@ function ajaxSuccess(data) {
         if (data.glycosylation) {
             highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
             highlight.n_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'N-linked');
-       
+
             data.glycosylation.sort(function (a, b) {
                 // compare residue firs
                 if (a.residue < b.residue) { return -1; }
@@ -463,11 +463,11 @@ function ajaxSuccess(data) {
                 // compare position
                 else if (a.position < b.position) { return -1; }
                 else if (b.position < a.position) { return 1; }
-    
+
                 // else the same
                 return 0;
             });
-       
+
             data.hasGlycosylation = (data.glycosylation.length > 0);
         }
 
@@ -556,7 +556,7 @@ function ajaxSuccess(data) {
                     formatter: function (value, row, index, field) {
                         return "<a href='glycan_detail.html?glytoucan_ac=" + value + "'>" + value + "</a>"
                     }
-            },
+                },
                 {
                     field: 'type',
                     title: 'Type',
@@ -572,7 +572,7 @@ function ajaxSuccess(data) {
                     field: 'imageFormat',
                     title: 'Image of Glycan Structure',
                     sortable: true,
-               
+
                     formatter: function imageFormat(value, row, index, field) {
                         var url = getWsUrl('glycan_image', row.glytoucan_ac);
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
@@ -606,7 +606,7 @@ function ajaxSuccess(data) {
                     field: 'residue',
                     title: 'Residue',
                     sortable: true
-                   
+
                 }
             ],
             pagination: 10,
@@ -639,7 +639,7 @@ function ajaxSuccess(data) {
                     field: 'annotation',
                     title: 'Annotation name',
                     sortable: true
-            },
+                },
                 {
                     field: 'disease',
                     title: 'Disease',
@@ -800,7 +800,7 @@ function LoadData(uniprot_canonical_ac) {
     $.ajax(ajaxConfig);
 }
 
-function setupEvidenceList () {
+function setupEvidenceList() {
     var $evidenceBadges = $('.evidence_badge');
     $evidenceBadges.each(function () {
         var $badge = $(this);
@@ -859,7 +859,7 @@ function checkUncheck(type, element) {
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
-    LoadData(uniprot_canonical_ac);     
+    LoadData(uniprot_canonical_ac);
 
     updateBreadcrumbLinks();
 });
@@ -868,11 +868,11 @@ $(document).ready(function () {
  * this function gets the URL query values
  * and updates the respective links on the breadcrumb fields.
  */
-function updateBreadcrumbLinks(){
+function updateBreadcrumbLinks() {
     var listID = getParameterByName("listID");
     var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
-    $('#breadcrumb-search').attr("href", glycanPageType+"_search.html?id="+listID);
-    $('#breadcrumb-list').attr("href", glycanPageType+"_list.html?id="+listID);
+    $('#breadcrumb-search').attr("href", glycanPageType + "_search.html?id=" + listID);
+    $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID);
 }
 
 /**
