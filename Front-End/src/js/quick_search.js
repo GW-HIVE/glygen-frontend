@@ -218,6 +218,15 @@ $(document).ready(function () {
         createOption(orgElement, result.organism[0].name, result.organism[0].id);
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
     });
+     /** 
+    * @param {string} No results found 
+    * @return {string} Alert message in all searches
+    * @author Tatiana Williamson
+    */
+    $(".alert").hide();
+    $(document).on('click', function(e) {
+        $(".alert").hide();
+    })
 });
 
 function createOption(ddl, text, value) {

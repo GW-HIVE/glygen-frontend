@@ -179,12 +179,17 @@ function getErrorMessage(errorCode) {
  */
 function displayError(message, title) {
     var pagePath = window.location.pathname;
-    if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
+    if (title=="No Results Found") {
+        $(".alert").show();
+    }
+    else {
+        if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
         // for all list pages, if any error occurs, it will go back to the previous page.
-        alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);;
+        alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);
     } else {
         alertify.alert(title, message).set('modal', false);
-    }
+        }
+    }    
 }
 
 function displayErrorByCode(errorCode) {

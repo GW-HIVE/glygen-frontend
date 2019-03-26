@@ -28,7 +28,7 @@
 
     <title>Glycan search - glygen</title>
     <!-- CSS for UI Typeahead -->
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <!--This does not work as downloaded version so UI using this as CDN for font.css-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!-- CSS for tippy tooltip -->
 <!--    <link rel="stylesheet" type="text/css" href="css/tippy.min.css">-->
-    <link rel="stylesheet" type="text/css" href="css/tippy.css">
+<!--    <link rel="stylesheet" type="text/css" href="css/tippy.css">-->
         <!--detail style -->
     <link rel="stylesheet" type="text/css" href="css/detail.css">
     
@@ -116,6 +116,7 @@
                         </li>
                     </ul>
                     <div class="tab-content container">
+                        <div class="alert alert-danger"><strong>No Results Found</strong><br>Sorry, we couldn't find any data matching your input. Please change your search term and try again.</div>
                         <!-- Start Tab 1 Simplified search -->
                         <div class="tab-pane fade in active" id="simple_search">
                             <div class="container">
@@ -158,18 +159,17 @@
                                                 value="Search Glycan"
                                                 onclick="submitvalues()">
                                         </div>
-
                                         <!-- GlyTouCan Accession -->
                                         <div class="row">
                                             <label id="lbl_glytoucan_acc" class="control-label col-sm-4" for="glycan_id">
                                                 <span><a href="javascript://"
-                                                    title="GlyTouCan Accession"  
-                                                    data-toggle="popover"
+                                                    tooltip-title="Unique accessions assigned to the registered glycan structures in GlyTouCan database" 
+                                                    popover-title="GlyTouCan Accession" 
+                                                    popover-content="Unique accessions assigned to the registered glycan structures in GlyTouCan database. Explore <a href='https://glytoucan.org/Structures/graphical' target='_blank'>GlyTouCan</a>"
                                                     data-placement="top"
                                                     data-trigger="click"
                                                     data-html="true" 
-                                                    data-content="Enter complete or partial GlyTouCan Accession of your glycan. Explore <a href='https://glytoucan.org/Structures/graphical' target='_blank'>GlyTouCan Accession</a>"
-                                                    data-tippy="Help">
+                                                    >
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> 
                                             </label>
@@ -422,6 +422,7 @@
                                                 value="Search Glycan" onclick="submitvalues()" style="float: right; margin: 0 15px 20px;">
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -530,6 +531,7 @@
                                 </div>
                             </div>
                         </div> <!--  End Tab 3 Tutorial -->
+                    <div class="alert alert-danger"><strong>No Results Found</strong><br>Sorry, we couldn't find any data matching your input. Please change your search term and try again.</div>
                     </div>
                 </div>
             </div>
@@ -546,7 +548,7 @@
 <!-- script for Bootstrap -->
 <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
 <!-- CSS for UI  -->
-<script type="text/javascript" src="libraries/jquery/1.10.1-jquery-ui.js"></script>
+<script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
 <!-- script for tippy library tooltip-->
 <!--<script type="text/javascript" src="libraries/tippy.all.min.js"></script>-->
 <!-- script for range bar to work-->
@@ -579,9 +581,21 @@
 <script src="js/text_example.js"></script>
 
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
+//$(document).ready(function(){
+//    $('[data-toggle="tooltip"]').tooltip();   
+//});
+    $('a').each(function() {
+  $(this).popover({    
+    content : $(this).attr("popover-content"),
+    title : $(this).attr("popover-title")         
+  });    
+  $(this).tooltip({    
+    placement : 'bottom',  
+    content : $(this).attr("tooltip-title")
+  });
+    $(this).tooltip('option', 'tooltipClass', 'tooltip-custom')
+})
+
 </script>
 
 </body>
