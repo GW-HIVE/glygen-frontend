@@ -366,6 +366,16 @@ function ajaxSuccess(data) {
                     }
                 }
             }
+            if (data.orthologs) {
+                for (var i = 0; i < data.orthologs.length; i++) {
+                    // assign the newly result of running formatSequence() to replace the old value
+                    data.orthologs[i].sequence.sequence = formatSequence(data.orthologs[i].sequence.sequence);
+                    if (data.orthologs[i] && data.orthologs[i].evidence) {
+                        data.orthologs[i].evidence = data.orthologs[i].evidence;
+                        formatEvidences([data.orthologs[i]]);
+                    }
+                }
+            }
 
 
         }

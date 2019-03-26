@@ -35,6 +35,9 @@ function databasecolor(name) {
         case 'BioMuta': return '#7975af';
         case 'Bgee': return '#798bae';
         case 'BioXpress': return '#7f989a';
+        case 'mgi': return '#ff8080';
+        case 'hgnc': return '#518a8a';
+        case 'homologene': return '#bd90bd';
 
     }
 }
