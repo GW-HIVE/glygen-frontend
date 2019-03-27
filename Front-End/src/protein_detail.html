@@ -187,8 +187,10 @@
                                 <li class="list-group"><strong>Gene Name:</strong>
                                     <a href="{{{url}}}" target="_blank">{{name}}</a>
                                 </li>
-                                <li class="list-group"><strong>Gene Location:</strong>({{locus.start_pos}} - {{locus.end_pos}})
+                                <li class="list-group"><strong>Gene Location:</strong> Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
                                 </li>
+
+                                
                                 {{/gene}}
                                 {{^gene}} {{/gene}}
 
