@@ -3,4 +3,4 @@
  * @author Gaurav Agarwal
  */
 
-var ws_base = "http://api.tst.glygen.org/";
+var ws_base = "https://api.tst.glygen.org/";
