@@ -75,6 +75,24 @@ $("#gene_name").autocomplete({
     }
 });
 
+/** go_term on change detect and suggest auto complete options from retrieved Json
+ * @gotermjson - forms the JSON to post
+ * @data-returns the go_term
+ */
+$("#go_term").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("go_term", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
 /** pathway field on change detect and suggest auto complete options from retrieved Json
  * @pathwayjson - forms the JSON to post
  * @data-returns the pathway.

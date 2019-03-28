@@ -234,6 +234,20 @@ function validateGeneName(input) {
 /** 
 * validation for each field
 */
+function validateGOTerm(input) {
+    var validLength = (input.value.length <=50);
+    if (validLength) {
+        document.getElementById("goTermMsg").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("goTermMsg").innerHTML = "Entry is too long - max length is 50.";
+        return false;
+    }
+}
+
+/** 
+* validation for each field
+*/
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
     var validLength = (textareatxt.value.length <= 3356);
