@@ -207,7 +207,11 @@ $(document).ready(function () {
         $(".alert").hide();
     })
     
-    //popover and tooltip
+    /** 
+    * @param {string} popover and tooltip
+    * @return {string} popover and tooltip on search pages
+    * @author Tatiana Williamson
+    */
     $('.link-with-tooltip').each(function() {
         //$(this).on('click', function(e) {e.preventDefault(); return true;});
         $(this).popover({    

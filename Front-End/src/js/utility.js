@@ -184,7 +184,7 @@ function displayError(message, title) {
     var pagePath = window.location.pathname;
     if (title=="No Results Found") {
         $(".alert").show();
-        //$('html, body').animate({scrollTop:0}, 'slow');
+        $('html, body').animate({scrollTop:0}, 'slow');
     }
     else {
         if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
