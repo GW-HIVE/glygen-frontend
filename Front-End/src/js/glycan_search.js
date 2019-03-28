@@ -130,6 +130,18 @@ $(document).ready(function () {
     $(document).on('click', function(e) {
         $(".alert").hide();
     })
+    
+    $('a').each(function() {
+        $(this).popover({    
+            content : $(this).attr("popover-content"),
+            title : $(this).attr("popover-title")         
+        });    
+        $(this).tooltip({    
+            placement : 'bottom',  
+            content : $(this).attr("tooltip-title")
+        });
+        $(this).tooltip('option', 'tooltipClass', 'tooltip-custom')
+    })
 });
 
 ///New slider

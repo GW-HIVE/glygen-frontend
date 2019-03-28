@@ -206,6 +206,19 @@ $(document).ready(function () {
     $(document).on('click', function(e) {
         $(".alert").hide();
     })
+    
+    //popover and tooltip
+    $('a').each(function() {
+        $(this).popover({    
+            content : $(this).attr("popover-content"),
+            title : $(this).attr("popover-title")         
+        });    
+        $(this).tooltip({    
+            placement : 'bottom',  
+            content : $(this).attr("tooltip-title")
+        });
+        $(this).tooltip('option', 'tooltipClass', 'tooltip-custom')
+    })
 });
 
 function createOption(ddl, text, value) {
