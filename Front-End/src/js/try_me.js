@@ -86,13 +86,13 @@ function tryGlycanSite() {
  */
 function tryMouseGlycans() {
     loadingImg();
-    question = "Try me - Q3 - glycans in mouse using MGAT1";
+    question = "Try me - Q3 - glycans in mouse using Mgat1";
     var jsonData = {
         "operation": "AND",
         "query_type": "search_glycan",
         "mass": {},
         "number_monosaccharides": {},
-        "enzyme": { "type": "gene", "id": "MGAT1" },
+        "enzyme": { "type": "gene", "id": "Mgat1" },
         "organism": { "id": 10090, "name": "Mus musculus" }
     };
     var json = "query=" + JSON.stringify(jsonData);

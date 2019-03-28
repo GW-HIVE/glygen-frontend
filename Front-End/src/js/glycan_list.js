@@ -160,6 +160,7 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
+    updateBreadcrumbLinks();
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -224,7 +225,6 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-
 /**
  * Gets the values selected in the download dropdown 
  * and sends to the downloadFromServer() function in utility.js
@@ -236,4 +236,12 @@ function downloadPrompt() {
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(id, format, IsCompressed, page_type);
+}
+
+/**
+ * this function gets the URL query values
+ * and updates the respective links on the breadcrumb fields.
+ */
+function updateBreadcrumbLinks() {
+    $('#breadcrumb-search').attr("href", "glycan_search.html?id="+id);
 }

@@ -39,7 +39,7 @@ function buildSummary(queryInfo) {
     }
     var question = getParameterByName('question');
     if (question) {
-        queryInfo = {question: MESSAGES[question]};
+        queryInfo = { question: MESSAGES[question] };
     }
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -69,10 +69,10 @@ function editSearch() {
         else if (question && (question === 'QUESTION_TRY2')) {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
         }
-          else{
+        else {
             newUrl = "protein_search.html?id=" + id;
         }
-
+        
         window.location.replace(newUrl);
         activityTracker("user", id, "edit search");
     }
@@ -84,7 +84,7 @@ function editSearch() {
  * @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID="+id+"'>" + value + "</a>";
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID=" + id + "'>" + value + "</a>";
 }
 
 /**
@@ -153,6 +153,7 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
+    updateBreadcrumbLinks();
 }
 
 /// ajaxFailure is the callback function when ajax to GWU service fails
@@ -163,7 +164,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
-    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     showJsError = false;
 }
 
@@ -207,8 +208,17 @@ function downloadPrompt() {
     downloadFromServer(id, format, IsCompressed, page_type);
 }
 
+/**
+ * this function gets the URL query values
+ * and updates the respective links on the breadcrumb fields.
+ */
+function updateBreadcrumbLinks() {
+    $('#breadcrumb-search').attr("href", "protein_search.html?id="+id);
+}
+
 
 $(document).ready(function () {
     // limit = $(element).val();
     LoadDataList();
+    updateBreadcrumbLinks();
 });
