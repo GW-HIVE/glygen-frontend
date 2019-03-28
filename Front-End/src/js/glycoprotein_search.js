@@ -208,7 +208,8 @@ $(document).ready(function () {
     })
     
     //popover and tooltip
-    $('a').each(function() {
+    $('.link-with-tooltip').each(function() {
+        //$(this).on('click', function(e) {e.preventDefault(); return true;});
         $(this).popover({    
             content : $(this).attr("popover-content"),
             title : $(this).attr("popover-title")         

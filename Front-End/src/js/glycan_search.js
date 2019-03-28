@@ -131,7 +131,7 @@ $(document).ready(function () {
         $(".alert").hide();
     })
     
-    $('a').each(function() {
+    $('.link-with-tooltip').each(function() {
         $(this).popover({    
             content : $(this).attr("popover-content"),
             title : $(this).attr("popover-title")         
