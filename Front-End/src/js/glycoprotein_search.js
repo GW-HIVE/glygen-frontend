@@ -196,6 +196,16 @@ $(document).ready(function () {
             searchProteinSimple();
         }
     });
+    
+    /** 
+    * @param {string} No results found 
+    * @return {string} Alert message in all searches
+    * @author Tatiana Williamson
+    */
+    $(".alert").hide();
+    $(document).on('click', function(e) {
+        $(".alert").hide();
+    })
 });
 
 function createOption(ddl, text, value) {

@@ -438,22 +438,6 @@ header h1 {
     /* #bbbbc7 */
 }
 
-.add-question {
-    display: block;
-    background: #fff;
-    margin-top: 60px;
-    padding: 30px 20px 5px;
-}
-
-.add-question h2 {
-    text-transform: uppercase;
-    font-size: 24px;
-    font-weight: 700;
-/*    color: #2F78B7;*/
-    color: #659BC9;
-    padding-bottom: 7px;
-}
-
 .no-js .cd-faq-group {
     display: block;
 }

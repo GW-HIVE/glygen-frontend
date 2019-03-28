@@ -123,6 +123,7 @@ function ajaxListSuccess(data) {
         lastSearch = data;
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
+    updateBreadcrumbLinks();
 }
 
 /**
@@ -197,4 +198,12 @@ function downloadPrompt() {
     var format = $('#download_format').val();
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(id, format, IsCompressed, page_type);
+}
+
+/**
+ * this function gets the URL query values
+ * and updates the respective links on the breadcrumb fields.
+ */
+function updateBreadcrumbLinks() {
+    $('#breadcrumb-search').attr("href", "glycoprotein_search.html?id="+id);
 }
