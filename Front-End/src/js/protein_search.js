@@ -308,10 +308,11 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         }
     }
     
-    var organisms = {};
+    var organism;
     if (input_organism.id != "0") {
-        organisms.id = input_organism.id;
-        organisms.name = input_organism.name;
+        organism = {};
+        organism.id = input_organism.id;
+        organism.name = input_organism.name;
     }
     var formjson = $.extend({}, {
         "operation": "AND",
@@ -321,7 +322,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "max": parseFloat(mass_max)
         },
         sequence: sequences ?sequences:undefined,
-        organism: organisms ?organisms:undefined,
+        organism: organism ?organism:undefined,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,
         protein_name: input_protein_name? input_protein_name: undefined,
         gene_name: input_gene_name?input_gene_name: undefined,
