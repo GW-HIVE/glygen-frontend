@@ -10,7 +10,7 @@ body{
     -webkit-transform: rotate(90deg);
   
     /* Firefox */
-    -moz-transform: rotate(90deg);
+    -moz-transform: rotate(-90deg);
   
     /* IE */
     -ms-transform: rotate(90deg);
@@ -71,19 +71,19 @@ body{
     text-align:center;
     cursor:pointer;
     background:#337ab7;
-    left:-69px;
+    left:-68px;
     line-height:48px;
   }
  
   
   .toggle:before{
-  /*   content:'\f003'; */
     font-family:fontAwesome;
-    font-size:18px;
+    font-size:16px;
     color:#fff;
   }
   .toggle.active:before{
     content:'\f00d';
+    left:70px;
   }
   .toggle.active span {
       display: none;
@@ -93,18 +93,19 @@ body{
     .sidebar-contact{
       width:100%;
       height:100%;
-      left:-100%;
+      right:-100%;
     }
     .sidebar-contact .toggle{
-      top:50%;
-      transform:translateY(-50%);
+      top:60%;
+      /* transform:translateY(-50%); */
       transition:0.5s;
     }
     .sidebar-contact.active .toggle
     {
-      top:0;
-      right:0;
-      transform:translateY(0);
+      top:10;
+      right: 10;
+      left:0;
+      transform:translatex(0);
     }
     .scroll{
       width:100%;
@@ -115,7 +116,7 @@ body{
       padding:50px 50px;
     }
   }
-  .feedback {
+  .feedback_ {
     background: #fff;
     
     -moz-border-radius: 3px;
@@ -127,30 +128,30 @@ body{
     box-shadow: 0 0 3px #555;
     padding: 15px;
   }
-  .feedback h1 {
+  .feedback_ h1 {
     font-size: 1.2em;
     color: #336699;
     font-weight: 500;
     line-height: 1;
     margin-bottom: 10px;
   }
-  .feedback p {
+  .feedback_ p {
     font-size: 0.75em;
     margin-bottom: 5px;
   }
-  .feedback ul.type li {
+  .feedback_ ul.type li {
     display: inline-block;
     margin-right: 5px;
   }
-  .feedback ul.type li:last-child {
+  .feedback_ ul.type li:last-child {
     margin-right: 0;
   }
-  .feedback ul.type li.active a {
+  .feedback_ ul.type li.active a {
     background: #336699;
     color: white;
     position: relative;
   }
-  .feedback ul.type li.active a:after {
+  .feedback_ ul.type li.active a:after {
     top: 100%;
     left: 50%;
     border: solid transparent;
@@ -164,7 +165,7 @@ body{
     border-width: 5px;
     margin-left: -5px;
   }
-  .feedback ul.type a {
+  .feedback_ ul.type a {
     background: #f1f1f1;
     padding: 5px;
     -moz-border-radius: 3px;
@@ -173,33 +174,33 @@ body{
     font-size: 0.8em;
     color: #555;
   }
-  .feedback ul.type a:hover {
+  .feedback_ ul.type a:hover {
     background: #336699;
     color: white;
   }
-  .feedback ul.type a i {
+  .feedback_ ul.type a i {
     margin-right: 2px;
   }
-  .feedback ul.type.speed li:first-child a:hover {
+  .feedback_ ul.type.speed li:first-child a:hover {
     background: #57a854;
     color: white;
   }
-  .feedback ul.type.speed li:nth-child(2) a:hover {
+  .feedback_ ul.type.speed li:nth-child(2) a:hover {
     background: #208cb6;
     color: white;
   }
-  .feedback ul.type.speed li:last-child a:hover {
+  .feedback_ ul.type.speed li:last-child a:hover {
     background: #f65b4f;
     color: white;
   }
-  .feedback .form {
+  .feedback_ .form {
     margin-top: 10px;
   }
-  .feedback .form textarea {
+  .feedback_ .form textarea {
     min-height: 150px;
     resize: none;
   }
-  .feedback .form input, .feedback .form textarea {
+  .feedback_ .form input, .feedback .form textarea {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -208,7 +209,7 @@ body{
     box-shadow: none;
     border: 1px solid #e6e6e6;
   }
-  .feedback button.success {
+  .feedback_ button.success {
     padding: 10px 15px;
     background: #337ab7;
     margin-top: 10px;
