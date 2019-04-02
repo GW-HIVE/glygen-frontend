@@ -184,6 +184,7 @@ function displayError(message, title) {
     var pagePath = window.location.pathname;
     if (title=="No Results Found") {
         $(".alert").show();
+        $('html, body').animate({scrollTop:0}, 'slow');
     }
     else {
         if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
@@ -230,9 +231,9 @@ function getTimeout(ajaxWebService) {
         searchSimpleProtein = 60000;
 
     // list
-    var listGlycan = 5000,
-        listProtein = 5000,
-        listLocus = 5000;
+    var listGlycan = 10000,
+        listProtein = 10000,
+        listLocus = 10000;
 
     // detail
     var detailGlycan = 5000,

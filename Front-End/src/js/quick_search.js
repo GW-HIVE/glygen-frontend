@@ -1,6 +1,17 @@
 // @author:Rupali Mahadik.
 // @description: UO1 Version-1.1.
 
+    /** 
+    * @param {string} Alert message
+    * @return {string} Alert message in quick search for every question
+    * @author Tatiana Williamson
+    */
+function showNoResultsFound(li_element_id){
+    var element = $('#' + li_element_id);
+    var newFirstElement = '<div class="alert alert-danger"><strong>No Results Found</strong><br>Sorry, we couldn\'t find any data matching your input. Please change your search term and try again.</div>';
+    element.prepend(newFirstElement);
+}
+
 /**
  * Q.1- What are the enzymes involved in the biosynthesis of glycan X in human?
  */
@@ -29,7 +40,8 @@ function bioEnzyme() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q1");
             }
         }
     })
@@ -63,7 +75,8 @@ function glycanSite() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_2";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q2");
             }
         }
     })
@@ -97,7 +110,8 @@ function glycanGene() {
                 window.location = './locus_list.html?id=' + results.list_id + "&question=QUESTION_3";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q3");
             }
         }
     })
@@ -131,7 +145,8 @@ function proteinOrthologues() {
                 window.location = './protein_orthologus.html?id=' + results.list_id + "&question=QUESTION_4";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q4");
             }
         }
     })
@@ -166,6 +181,7 @@ function proteinFunction() {
             }
             else {
                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#function';
+                showNoResultsFound("li_q5");
             }
         }
     })
@@ -200,7 +216,8 @@ function glycanEnzyme() {
                 window.location = './quick_glycan_list.html?id=' + results.list_id + "&question=QUESTION_6";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q6");
             }
         }
     })
@@ -248,7 +265,8 @@ function glycosylTransferases() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_7";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q7");
             }
         }
     })
@@ -287,7 +305,8 @@ function glycoHydrolases() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_8";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q8");
             }
         }
     })
@@ -331,7 +350,8 @@ function glycoProteins() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_9";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q9");
             }
         }
     })
@@ -373,7 +393,8 @@ function glycosyTtransferasesDisease() {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_10";
             }
             else {
-                displayErrorByCode('no-results-found');
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q10");
             }
         }
     })
