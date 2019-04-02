@@ -277,27 +277,27 @@ h4 {
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
 /*    background: rgba(0, 0, 256, .5); */ /* blue */
-     background-color: rgba(222, 126, 221, 0.6);
+     background-image: linear-gradient(transparent,white, rgba(222, 126, 221, 1));
 }
 
 .highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
-background-color: rgba(100, 236, 100, 0.5);  /* green */
+    background-image: linear-gradient(rgba(100, 236, 100, 1),white, transparent);  /* green */
 /*     */
 }
 
 .highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
 /*    background: rgba(256, 0, 0, .5); */ /* red */
-    background: rgba(248, 231, 28, 0.5); 
+    background-image: linear-gradient(rgba(248, 231, 28, 1),white, transparent); 
 /*     color: #fff !important;*/
 }
 
 #sequnce_highlight {
     display: block;
-    padding: 9.5px;
+    padding: 9.0px;
     margin: 0;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #000;
+    font-size: 15px;
+    line-height: 1.49;
+    color:rgba(0, 0, 0);
     background-color: #e6e6e6;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -390,4 +390,11 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
    display: inline-block; 
    
     
+}
+
+.highlight-text {
+    font-family: monospace;
+    font-size: 15px;
+    position: relative;
+    z-index: 10;
 }
