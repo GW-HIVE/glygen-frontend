@@ -522,9 +522,6 @@ function ajaxSuccess(data) {
                 return !(hasGlycanId(item));
             });
         }
-
-        var html = Mustache.to_html(template, data);
-        var $container = $('#content');
         var itemsMutate = [];
 
 
@@ -551,8 +548,22 @@ function ajaxSuccess(data) {
             }
         }
 
+        data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
+            return total + current.length;
+        }, 0);
+
+        data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
+            return total + current.length;
+        }, 0);
+
+        data.mutation_count = highlight.mutation.reduce(function (total, current) {
+            return total + current.length;
+        }, 0);
+
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
+        var html = Mustache.to_html(template, data);
+        var $container = $('#content');
         $container.html(html);
         // setupEvidenceList();
 
@@ -561,6 +572,15 @@ function ajaxSuccess(data) {
         } else {
             createHighlightUi(sequenceData, 60);
         }
+        // if (!highlight.o_link_glycosylation.length) {
+        //     $('.highlight-panel-categories [data-type="o_link_glycosylation"] input').attr('disabled', true);
+        // }
+        // if (!highlight.n_link_glycosylation.length) {
+        //     $('.highlight-panel-categories [data-type="n_link_glycosylation"] input').attr('disabled', true);
+        // }
+        // if (!highlight.mutation.length) {
+        //     $('.highlight-panel-categories [data-type="mutation"] input').attr('disabled', true);
+        // }
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -882,7 +902,7 @@ function getParameterByName(name, url) {
  * @param {string} type
  */
 function checkUncheck(type, element) {
-    var $elements = $('[data-type="' + type + '"]');
+    var $elements = $('.highlight-highlight[data-type="' + type + '"]');
 
     if (element.checked) {
         $elements.show();
