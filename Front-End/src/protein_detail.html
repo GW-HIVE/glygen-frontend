@@ -388,20 +388,22 @@
                             <div class="col-lg-3 col-md-12 col-sm-12 active">
                                 <ul class="highlight-panel-categories" style="width:100%;">
                                     <li data-type="n_link_glycosylation">
-                                        <label><input type="checkbox" name="checkbox" id="seq_n_link" {{^n_link_glycosylation_count}}disabled{{/n_link_glycosylation_count}}
+                                        <p><input type="checkbox" name="checkbox" id="seq_n_link" {{^n_link_glycosylation_count}}disabled{{/n_link_glycosylation_count}}
                                                onchange="checkUncheck('n_link_glycosylation', this)"/>&nbsp;<span
-                                            class="sequnce1">N-linked Glycosylation ({{n_link_glycosylation_count}})</span></label>
+                                            class="sequnce1">N-linked Glycosylation ({{n_link_glycosylation_count}})</span></p>
                                     </li>
                                     <li data-type="o_link_glycosylation">
-                                        <label><input type="checkbox" name="checkbox" {{^o_link_glycosylation_count}}disabled{{/o_link_glycosylation_count}}
+                                        <p><input type="checkbox" name="checkbox" {{^o_link_glycosylation_count}}disabled{{/o_link_glycosylation_count}}
                                                onchange="checkUncheck('o_link_glycosylation', this)"/>&nbsp;<span
-                                            class="sequnce2">O-linked Glycosylation ({{o_link_glycosylation_count}})</span></label>
+                                            class="sequnce2">O-linked Glycosylation ({{o_link_glycosylation_count}})</span></p>
                                     </li>
                                     <li data-type="mutation">
-                                        <label><input type="checkbox" name="checkbox" {{^mutation_count}}disabled{{/mutation_count}}
+                                        <p><input type="checkbox" name="checkbox" {{^mutation_count}}disabled{{/mutation_count}}
                                                onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation ({{mutation_count}})</span>
-                                        </label>
+                                        </p>
                                     </li>
+                                    <p><char class="Om">O-linked Glycosylation and mutation</char> </p>
+                                    <p><char class="Nm">N-linked Glycosylation and mutation</char> </p>
                                 </ul>
                             </div>
                         </div>

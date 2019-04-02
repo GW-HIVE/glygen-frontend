@@ -277,7 +277,7 @@ h4 {
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
 /*    background: rgba(0, 0, 256, .5); */ /* blue */
-     background-image: linear-gradient(transparent,white, rgba(222, 126, 221, 1));
+     background-image: linear-gradient(transparent,white, rgba(170,85,255));
 }
 
 .highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
@@ -305,16 +305,22 @@ h4 {
 }
 /*n_link_glycosylation"*/
 .sequnce1 {
-    background-color: rgba(248, 231, 28, 0.5);
+    background-color: rgba(248, 231, 28, 1);
+    font-family: monospace;
+    font-size:14px;
 }
 
 /*o_link_glycosylation"*/
 .sequnce2 {
-    background-color: rgba(142, 241, 142, 0.9);
+    background-color:rgba(0,255,0);
+    font-family: monospace;
+    font-size:14px;
 }
 /*mutation*/
 .sequnce3 {
-   background-color: rgba(222, 126, 221, 0.6);
+   background-color: rgba(170,85,255);
+   font-family: monospace;
+   font-size:14px;
 }
 
 .highlight-panel-categories {
@@ -388,9 +394,7 @@ h4 {
 }
 .evidence_id {
     position: relative; 
-   display: inline-block; 
-   
-    
+   display: inline-block;     
 }
 
 .highlight-text {
@@ -407,4 +411,15 @@ h4 {
 
 .function-table-td {
     vertical-align: middle  !important;
+}
+
+.Om {
+    background-image: linear-gradient(rgb(0,255,0),white,rgba(170,85,255));
+    font-family: monospace;
+    font-size:14px;
+}
+.Nm {
+    background-image: linear-gradient(rgba(248, 231, 28, 1),white,rgba(170,85,255));
+    font-family: monospace;
+    font-size:14px;
 }
