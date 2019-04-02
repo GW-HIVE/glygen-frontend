@@ -368,24 +368,25 @@ h4 {
 /*---------------------------
     Evidences css for details
 -----------------------------*/
-.evidence_badge{
+.evidence_badge {
     position: relative; 
-    display: block;  
     padding-left: 5px; 
     padding-bottom: 30px;
+    vertical-align: middle;
+    display: inline-block;
 }
-.hidden evidence_links{
+.hidden evidence_links {
     position: absolute; 
     left:  0; 
     width: 200px;
 }
-.linkHtml{
+.linkHtml {
    position: relative; 
    display: inline-block; 
 /*   padding-left: 5px; */
 /*   padding-top: 5px;*/
 }
-.evidence_id{
+.evidence_id {
     position: relative; 
    display: inline-block; 
    
@@ -397,4 +398,13 @@ h4 {
     font-size: 15px;
     position: relative;
     z-index: 10;
+    display: inline-block;   
+}
+
+.annotation {
+    white-space: pre-wrap;
+}
+
+.function-table-td {
+    vertical-align: middle  !important;
 }

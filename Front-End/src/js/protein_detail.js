@@ -318,6 +318,39 @@ function formatEvidences(item) {
         }
     }
 }
+
+
+function groupEvidences(item) {
+    //group by evidence ids
+    if (item && item.length) {
+        var evidencesMap = new Map();
+        for(var i=0; i<item.length; i++) {
+            var currentItem = item[i];
+            for(var e=0; e<currentItem.evidence.length; e++) {
+                if(!(evidencesMap.has(currentItem.evidence[e].id))) {
+                    evidencesMap.set(currentItem.evidence[e].id, [currentItem]);
+                }
+                else {
+                    evidencesMap.get(currentItem.evidence[e].id).push(currentItem);
+                }
+            }
+        }
+    }
+
+    //combine annotations for each evidence id
+    groupedEvidences = [];
+    evidencesMap.forEach(function(v, key) {
+        //combine annotations into the first, delete the rest
+        for(var i=1; i<v.length; i++) {
+            v[0].annotation += "\n\n" + v[i].annotation;
+        }
+        groupedEvidences.push(v[0]);
+    });
+
+    return groupedEvidences;
+}
+
+
 function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
     $.each(value, function (i, v) {
@@ -388,7 +421,7 @@ function ajaxSuccess(data) {
         formatEvidences(data.expression_tissue);
         formatEvidences(data.disease);
 
-
+        data.function = groupEvidences(data.function);
 
 
         var itemscrossRef = [];
