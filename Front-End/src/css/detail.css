@@ -395,6 +395,10 @@ background-color: rgba(100, 236, 100, 0.5);  /* green */
     white-space: pre-wrap;
 }
 
+.function-table tr:first-child td{
+    border: none;
+}
+
 .function-table-td {
     vertical-align: middle  !important;
 }

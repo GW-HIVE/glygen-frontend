@@ -335,19 +335,21 @@ function groupEvidences(item) {
                 }
             }
         }
+    
+
+        //combine annotations for each evidence id
+        groupedEvidences = [];
+        evidencesMap.forEach(function(v, key) {
+            //combine annotations into the first, delete the rest
+            for(var i=1; i<v.length; i++) {
+                v[0].annotation += "\n\n" + v[i].annotation;
+            }
+            groupedEvidences.push(v[0]);
+        });
+
+        return groupedEvidences;
     }
-
-    //combine annotations for each evidence id
-    groupedEvidences = [];
-    evidencesMap.forEach(function(v, key) {
-        //combine annotations into the first, delete the rest
-        for(var i=1; i<v.length; i++) {
-            v[0].annotation += "\n\n" + v[i].annotation;
-        }
-        groupedEvidences.push(v[0]);
-    });
-
-    return groupedEvidences;
+    return item;
 }
 
 
