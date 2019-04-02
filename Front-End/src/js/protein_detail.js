@@ -351,41 +351,6 @@ function groupEvidences(item) {
 }
 
 
-function equalEvidences(e1, e2) {
-    if(e1.length != e2.length) {
-        return false;
-    }
-    for(var i=0; i<e1.length; i++) {
-        if(!isEquivalent(e1[0], e2[0])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-
-/**
- * Compares two objects for equality
- * @param {Object} a 
- * @param {Object} b 
- */
-function isEquivalent(a, b) {
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
-    if (aProps.length != bProps.length) {
-        return false;
-    }
-
-    for (var i = 0; i < aProps.length; i++) {
-        var propName = aProps[i];
-        if (a[propName] !== b[propName]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-
 function EvidencebadgeFormator(value, row, index, field) {
     var buttonsHtml = "";
     $.each(value, function (i, v) {
