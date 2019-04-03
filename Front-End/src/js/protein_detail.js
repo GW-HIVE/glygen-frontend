@@ -243,7 +243,13 @@ function formatSequence(sequenceString) {
     output += seqTopIndexLines;
 
     for (var x = 0; x < sequenceString.length; x += perLine) {
-        var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(' '.repeat(SEQUENCE_SPACES_BETWEEN_RUNS));
+        //fix for IE 11 and lower where String.prototype.repeat() is not available
+        var nSpacesBetweenRuns = '';
+        for(var i=0; i<SEQUENCE_SPACES_BETWEEN_RUNS; i++) {
+            nSpacesBetweenRuns += ' ';
+        }
+        var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(nSpacesBetweenRuns);
+        // var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(' '.repeat(SEQUENCE_SPACES_BETWEEN_RUNS));
         output += '<span class="non-selection">' + ("     " + (x + 1)).slice(-5) + ' </span>' + y + '\n'
     }
     return output;
