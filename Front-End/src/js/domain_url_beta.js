@@ -6,7 +6,7 @@
  * @date: September 5, 2018 
  */
 
-var ws_base = "http://beta.api.glygen.org/";
+var ws_base = "http://api.beta.glygen.org/";
 
 /**
  * for the pageproofer feedback.
