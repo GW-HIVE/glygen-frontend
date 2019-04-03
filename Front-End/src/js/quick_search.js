@@ -326,7 +326,9 @@ $(document).ready(function () {
         createOption(orgElement, result.organism[1].name, result.organism[1].id);
         var question = getParameterByName('question');
         var id = getParameterByName('id');
-        populateLastSearch(question, id);
+        if(id) {
+            populateLastSearch(question, id);
+        }
     });
 });
 

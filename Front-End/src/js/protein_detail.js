@@ -547,18 +547,20 @@ function ajaxSuccess(data) {
                 });
             }
         }
-
+        if(data.o_link_glycosylation_count){
         data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
             return total + current.length;
-        }, 0);
-
+        }, 0);}
+if(data.n_link_glycosylation_count){
         data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
             return total + current.length;
         }, 0);
-
+    }
+if(data.mutation_count){
         data.mutation_count = highlight.mutation.reduce(function (total, current) {
             return total + current.length;
         }, 0);
+    }
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
 
