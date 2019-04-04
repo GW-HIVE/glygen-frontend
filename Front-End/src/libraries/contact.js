@@ -95,8 +95,10 @@ function sendFeedback() {
         fname: (name[0] ? name[0] : 'None Given'),
         lname: (name[1] ? name[1] : 'None Given'),
         email: form.find('[name="email"]').val(),
+        page:  page,
         subject: 'Feedback Form' + $('#feedback .type li.active').text(),
-        message: form.find('[name="feedback_text"]').val() + '\n\n' + 'Page: ' + page
+        message: form.find('[name="feedback_text"]').val() 
+        // + '\n\n' + 'Page: ' + page
     }
 
     //console.log(formData);
@@ -122,8 +124,6 @@ function setupFeedbackForm() {
 
             feedbackForm.find('.alert-success').hide();
         });
-
-
         feedbackForm.on('submit', function (event) {
             event.preventDefault();
             sendFeedback();

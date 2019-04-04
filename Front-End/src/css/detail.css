@@ -277,17 +277,17 @@ h4 {
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
 /*    background: rgba(0, 0, 256, .5); */ /* blue */
-     background-image: linear-gradient(transparent,white, rgba(170,85,255));
+     background-image: linear-gradient(transparent, rgba(170,85,255));
 }
 
 .highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
-    background-image: linear-gradient(rgba(100, 236, 100, 1),white, transparent);  /* green */
+    background-image: linear-gradient(rgba(100, 236, 100, 1), transparent);  /* green */
 /*     */
 }
 
 .highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
 /*    background: rgba(256, 0, 0, .5); */ /* red */
-    background-image: linear-gradient(rgba(248, 231, 28, 1),white, transparent); 
+    background-image: linear-gradient(rgba(248, 231, 28, 1),transparent); 
 /*     color: #fff !important;*/
 }
 
@@ -418,12 +418,12 @@ h4 {
 }
 
 .Om {
-    background-image: linear-gradient(rgb(0,255,0),white,rgba(170,85,255));
+    background-image: linear-gradient(rgb(0,255,0),rgba(170,85,255));
     font-family: monospace;
     font-size:14px;
 }
 .Nm {
-    background-image: linear-gradient(rgba(248, 231, 28, 1),white,rgba(170,85,255));
+    background-image: linear-gradient(rgba(248, 231, 28, 1),rgba(170,85,255));
     font-family: monospace;
     font-size:14px;
 }
