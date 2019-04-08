@@ -37,16 +37,16 @@ function pageFormat1(value, row, index, field) {
  * @param {object} row - The data object binded to the row
  * @return- detail view with IUPAC AND GLYCOCT
  */
-function detailFormat(index, row) {
-    var html = [];
-    // var glyco = row.start_pos.replace(/ /g, '\n');
-    html.push('<li class="list-group-indent">Chromosome:' + row.chromosome + '</li>');
-    html.push('<li class="list-group-indent">Start Position:' + row.start_pos + '</li>');
-    html.push('<li class="list-group-indent">End Position:' + row.end_pos + '</li>');
+// function detailFormat(index, row) {
+//     var html = [];
+//     // var glyco = row.start_pos.replace(/ /g, '\n');
+//     html.push('<li class="list-group-indent">Chromosome:' + row.chromosome + '</li>');
+//     html.push('<li class="list-group-indent">Start Position:' + row.start_pos + '</li>');
+//     html.push('<li class="list-group-indent">End Position:' + row.end_pos + '</li>');
 
-    activityTracker("user", id, "Detail view of " + row.uniprot_canonical_ac);
-    return html.join('');
-}
+//     activityTracker("user", id, "Detail view of " + row.uniprot_canonical_ac);
+//     return html.join('');
+// }
 /**
  * Summary top table
  * @param {number} queryInfo [[Execution time]]

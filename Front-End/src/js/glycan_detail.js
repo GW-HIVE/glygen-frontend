@@ -205,7 +205,7 @@ function ajaxSuccess(data) {
                 {
                     field: 'position',
                     title: 'Position',
-                    sortable: false
+                    sortable: true
                 }
             ],
             pagination: 10,

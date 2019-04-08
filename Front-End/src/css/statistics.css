@@ -16,7 +16,9 @@ text {
   font-size: 12px;
 }
 */
-
+/*-----------------------
+    Zoomable Sunburst
+------------------------*/
 body5 {
         font-family: Sans-serif;
         font-size: 11px;
@@ -39,12 +41,75 @@ body5 {
     pointer-events: none;
     dominant-baseline: middle;
     text-anchor: middle;
-    font-size: 9px;
+    font-size: 18px;
 }
-/*--------------------------------------------*/
 
+.zoomableSunburst {
+    margin: 2% 2% 2% 2%; 
+}
+/*--------------------------
+    End Zoomable sunburst
+---------------------------*/
 
+/*------------------------------
+    Venn Diagram
+---------------------------*/
+#venn {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 2% 2% 2% 2%;
+/*    position: relative;*/
+}
 
+.venntooltip {
+    font-size: 16px;
+    position: absolute;
+    text-align: center;
+    width: 128px;
+    height: 18px;
+    background: #333;
+    color: #fff;
+    padding: 2px;  
+    border: 0px;
+    border-radius: 8px;
+    opacity: 0;
+}
+
+.stat-text-align {
+    margin-top: 15%;
+    
+}
+
+@media screen and (max-width: 1200px) {
+    .box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    }
+    .active {
+        order: -1;
+        flex: 1 0 100%;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+   
+     .box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    }
+    .active {
+        order: -1;
+        flex: 1 0 100%;
+    }
+    .stat-text-align {
+        margin: 0;
+        
+    }
+}
 
 /*Bar-Chart*/
 .bar-chart, .bar-chart-scale {
