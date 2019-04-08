@@ -50,7 +50,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/server.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
@@ -133,7 +133,7 @@
         </ul>
         <!-- cd-faq-categories -->
         <!-- main content for page -->
-        <div class="cd-faq-items container" id="content" style="margin-bottom: 400px; margin-right: 0;">
+        <div class="cd-faq-items container-fluid" id="content" style="margin-bottom: 400px; margin-right: 0;">
             <script id="item_template" type="text/template">
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
@@ -388,8 +388,8 @@
 
                         {{#sequence}}
                         <div class="box">
-                            <div class="col-lg-9 col-md-12 col-xs-12 sequence-panel" id="sequnce_highlight"></div>
-                            <div class="col-lg-3 col-md-12 col-sm-12 active">
+                            <div class="col-lg-8 col-md-12 col-xs-12 sequence-panel" id="sequnce_highlight"></div>
+                            <div class="col-lg-4 col-md-12 col-sm-12 active">
                                 <ul class="highlight-panel-categories" style="width:100%;">
                                     <li data-type="n_link_glycosylation">
                                         <p><input type="checkbox" name="checkbox" id="seq_n_link" {{^n_link_glycosylation_count}}disabled{{/n_link_glycosylation_count}}
@@ -400,18 +400,18 @@
                                     <li data-type="o_link_glycosylation">
                                         <p><input type="checkbox" name="checkbox" {{^o_link_glycosylation_count}}disabled{{/o_link_glycosylation_count}}
                                                onchange="checkUncheck('o_link_glycosylation', this)"/>&nbsp;<span
-                                            class="sequnce2">O-linked Glycosylation </span>{{#o_link_glycosylation_count}}<span class="badge badge-light" >{{o_link_glycosylation_count}}</span>{{/o_link_glycosylation_count}}</p>
+                                            class="sequnce2">O-linked Glycosylation </span>{{#o_link_glycosylation_count}}<span class="badge badge-light">{{o_link_glycosylation_count}}</span>{{/o_link_glycosylation_count}}</p>
                                     </li>
                                     <li data-type="mutation">
                                         <p><input type="checkbox" name="checkbox" {{^mutation_count}}disabled{{/mutation_count}}
                                                onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>    
-                                               -<span class="badge badge-light" >{{mutation_count}}</span>
-                                        </p>
+                                               {{#mutation_count}}<span class="badge badge-light" >{{mutation_count}}</span>{{/mutation_count}}</p>
+                    
                                     </li>
                                     <li data-type="sequon">
                                         <p><input type="checkbox" name="checkbox" {{^sequon_count}}disabled{{/sequon_count}}
                                                onchange="checkUncheck('sequon', this)"/>&nbsp;<span class="sequnce4">Sequon</span>    
-                                               -<span class="badge badge-light" >{{sequon_count}}</span>
+                                               {{#sequon_count}} <span class="badge badge-light" >{{sequon_count}}</span>{{/sequon_count}}
                                         </p>
                                     </li>
                                 </ul>

@@ -276,19 +276,25 @@ h4 {
 }
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
-/*    background: rgba(0, 0, 256, .5); */ /* blue */
-     background-image: linear-gradient(transparent, rgba(170,85,255));
+  
+     /* background-image: linear-gradient(transparent, rgb(211, 113, 211)); */
+     
+      background: rgb(131, 235, 131);
 }
 
 .highlight-highlight[data-type="o_link_glycosylation"] .highlight-highlight-area {
-    background-image: linear-gradient(rgba(100, 236, 100, 1), transparent);  /* green */
-/*     */
+    /* background-image: linear-gradient(rgba(100, 236, 100, 1), transparent);   */
+    border-bottom: 3px solid blue;
+
+    
 }
+/*     */
+
 
 .highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
-/*    background: rgba(256, 0, 0, .5); */ /* red */
-    background-image: linear-gradient(rgba(248, 231, 28, 1),transparent); 
-/*     color: #fff !important;*/
+     border-bottom: 3px solid red;
+
+ 
 }
 
 #sequnce_highlight {
@@ -305,24 +311,29 @@ h4 {
 }
 /*n_link_glycosylation"*/
 .sequnce1 {
-    background-color: rgba(248, 231, 28, 1);
+    border-bottom: 3px solid red;
     font-family: monospace;
     font-size:14px;
 }
 
 /*o_link_glycosylation"*/
 .sequnce2 {
-    background-color:rgba(0,255,0);
+    border-bottom: 3px solid blue;
     font-family: monospace;
     font-size:14px;
 }
 /*mutation*/
 .sequnce3 {
-   background-color: rgba(170,85,255);
+    background: rgb(131, 235, 131);
    font-family: monospace;
    font-size:14px;
 }
-
+/*Sequon*/
+.sequnce4{
+    border-top: 3px solid #f48942;
+   font-family: monospace;
+   font-size:14px;
+}
 .highlight-panel-categories {
     margin: 0;
     padding: 5px;
@@ -366,6 +377,7 @@ h4 {
 .highlight-text{
     font-family:monospace;
     font-size:14px;
+    line-height: 26px;
 }
 
 .upper-case {
@@ -389,8 +401,6 @@ h4 {
 .linkHtml {
    position: relative; 
    display: inline-block; 
-/*   padding-left: 5px; */
-/*   padding-top: 5px;*/
 }
 .evidence_id {
     position: relative; 
@@ -417,13 +427,3 @@ h4 {
     vertical-align: middle  !important;
 }
 
-.Om {
-    background-image: linear-gradient(rgb(0,255,0),rgba(170,85,255));
-    font-family: monospace;
-    font-size:14px;
-}
-.Nm {
-    background-image: linear-gradient(rgba(248, 231, 28, 1),rgba(170,85,255));
-    font-family: monospace;
-    font-size:14px;
-}

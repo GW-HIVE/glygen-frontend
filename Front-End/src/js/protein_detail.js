@@ -553,23 +553,40 @@ function ajaxSuccess(data) {
                 });
             }
         }
-        if(data.o_link_glycosylation_count){
-        data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
-            return total + current.length;
-        }, 0);}
-if(data.n_link_glycosylation_count){
-        data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
-            return total + current.length;
-        }, 0);
-    }
-if(data.mutation_count){
-        data.mutation_count = highlight.mutation.reduce(function (total, current) {
-            return total + current.length;
-        }, 0);
-    }
+
+        
+        if(data.glycosylation){
+            data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
+                return total + current.length;
+            }, 0);
+        }
+        if(data.glycosylation){
+            data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
+                return total + current.length;
+            }, 0);
+        }
+        
+         if(data.mutation){
+            data.mutation_count = highlight.mutation.reduce(function (total, current) {
+                return total + current.length;
+            }, 0);
+            } 
+          
+                
+                
+      
+        // data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
+        //     return total + current.length;
+        // }, 0);
+        // data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
+        //     return total + current.length;
+        // }, 0);
+        // data.mutation_count = highlight.mutation.reduce(function (total, current) {
+        //     return total + current.length;
+        // }, 0);
+   
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
-
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
         $container.html(html);
@@ -589,6 +606,9 @@ if(data.mutation_count){
         // if (!highlight.mutation.length) {
         //     $('.highlight-panel-categories [data-type="mutation"] input').attr('disabled', true);
         // }
+
+
+     
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
