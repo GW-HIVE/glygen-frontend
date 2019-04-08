@@ -152,27 +152,27 @@ function ajaxSuccess(data) {
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
-                    field: 'uniprot_canonical_ac',
-                    title: 'UniProtKB Accession',
-                    sortable: true,
-                    formatter: function (value, row, index, field) {
-                        return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
-                    }
+                field: 'uniprot_canonical_ac',
+                title: 'UniProtKB Accession',
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "'>" + value + "</a>"
+                }
             },
 
-                {
-                    field: 'gene',
-                    title: 'Gene Name',
-                    sortable: true,
-                    formatter: function (value, row, index, field) {
-                        return "<a href='" + row.gene_link + " ' target='_blank'>" + value + "</a>"
-                    }
+            {
+                field: 'gene',
+                title: 'Gene Name',
+                sortable: true,
+                formatter: function (value, row, index, field) {
+                    return "<a href='" + row.gene_link + " ' target='_blank'>" + value + "</a>"
+                }
             },
 
-                {
-                    field: 'protein_name',
-                    title: 'Protein Name',
-                    sortable: true
+            {
+                field: 'protein_name',
+                title: 'Protein Name',
+                sortable: true
             }],
             pagination: 10,
             data: items,
@@ -256,7 +256,7 @@ function LoadData(glytoucan_ac) {
     // calls the service
     $.ajax(ajaxConfig);
 }
- // show and hide evidences 
+// show and hide evidences 
 function setupEvidenceList() {
     var $evidenceBadges = $('.evidence_badge');
     $evidenceBadges.each(function () {
@@ -306,10 +306,17 @@ $(document).ready(function () {
  * this function gets the URL query values from the getParameterByName() function in utility.js
  * and updates the respective links on the breadcrumb fields.
  */
-function updateBreadcrumbLinks(){
-    var listID = getParameterByName("listID");
-    $('#breadcrumb-search').attr("href", "glycan_search.html?id="+listID);
-    $('#breadcrumb-list').attr("href", "glycan_list.html?id="+listID);
+function updateBreadcrumbLinks() {
+    const listID = getParameterByName("listID") || "";
+    const globalSearchTerm = getParameterByName("gs") || "";
+    if (globalSearchTerm) {
+        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+        $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
+    } else {
+        $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + listID);
+        $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID);
+    }
 }
 
 /**

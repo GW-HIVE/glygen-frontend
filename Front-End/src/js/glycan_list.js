@@ -25,6 +25,7 @@ var sort = 'glytoucan_ac';
 var dir = 'asc';
 var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 20;
+const globalSearchTerm = getParameterByName("gs") || "";
 
 /**
  * it creates user interface for summary
@@ -37,10 +38,10 @@ function buildSummary(queryInfo) {
     var summaryTemplate;
     var summaryHtml;
     summaryTemplate = $('#summary-template').html();
- 
+
     var question = getParameterByName('question');
     if (question) {
-        queryInfo = {question: MESSAGES[question]};
+        queryInfo = { question: MESSAGES[question] };
     }
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -61,7 +62,7 @@ function totalNoSearch(total_length) {
  * @return - Details particular Glycan Id
  */
 function pageFormat(value, row, index, field) {
-    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "&listID="+id + "'>" + value + "</a>";
+    return "<a href='glycan_detail.html?glytoucan_ac=" + value + "&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
 }
 
 /**
@@ -104,11 +105,15 @@ var lastSearch;
 function editSearch() {
     var question = getParameterByName('question');
     var newUrl;
+    const globalSearchTerm = getParameterByName("gs");
+
     if (question && (question === 'QUESTION_TRY3')) {
-       
+
         newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_6';
+    } else if (globalSearchTerm) {
+        newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
     }
-    else{
+    else {
         newUrl = "glycan_search.html?id=" + id;
     }
 
@@ -170,7 +175,7 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
     displayErrorByCode(errorMessage);
-    activityTracker("error", id, err + ": " + errorMessage + " (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+    activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     // $('#loading_image').fadeOut();
     showJsError = false;
 }
@@ -180,8 +185,8 @@ function ajaxListFailure(jqXHR, textStatus, errorThrown) {
  * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
-    if(!id){
-        id= getParameterByName('id');
+    if (!id) {
+        id = getParameterByName('id');
     }
     var ajaxConfig = {
         dataType: "json",
@@ -243,5 +248,10 @@ function downloadPrompt() {
  * and updates the respective links on the breadcrumb fields.
  */
 function updateBreadcrumbLinks() {
-    $('#breadcrumb-search').attr("href", "glycan_search.html?id="+id);
+    if (globalSearchTerm) {
+        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+    } else {
+        $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + id);
+    }
 }

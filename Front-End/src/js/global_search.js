@@ -31,6 +31,13 @@ function ajaxSuccess(result) {
     var content = Mustache.to_html(template, result);
     $('#result').html(content);
     $(".gg-search-term").text("\""+term+"\"");
+
+    // this appends a url query parameter containing the global search term 
+    // to every link pointing to the list page.
+    $("a.directToListPage").attr("href", function(i, href) {
+        return href + '&gs='+term;
+    });
+
     $('#loading_image').fadeOut();
     activityTracker("user", term, "successful search");
 }

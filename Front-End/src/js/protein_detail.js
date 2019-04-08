@@ -245,7 +245,7 @@ function formatSequence(sequenceString) {
     for (var x = 0; x < sequenceString.length; x += perLine) {
         //fix for IE 11 and lower where String.prototype.repeat() is not available
         var nSpacesBetweenRuns = '';
-        for(var i=0; i<SEQUENCE_SPACES_BETWEEN_RUNS; i++) {
+        for (var i = 0; i < SEQUENCE_SPACES_BETWEEN_RUNS; i++) {
             nSpacesBetweenRuns += ' ';
         }
         var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(nSpacesBetweenRuns);
@@ -330,10 +330,10 @@ function groupEvidences(item) {
     //group by evidence ids
     if (item && item.length) {
         var evidencesMap = new Map();
-        for(var i=0; i<item.length; i++) {
+        for (var i = 0; i < item.length; i++) {
             var currentItem = item[i];
-            for(var e=0; e<currentItem.evidence.length; e++) {
-                if(!(evidencesMap.has(currentItem.evidence[e].id))) {
+            for (var e = 0; e < currentItem.evidence.length; e++) {
+                if (!(evidencesMap.has(currentItem.evidence[e].id))) {
                     evidencesMap.set(currentItem.evidence[e].id, [currentItem]);
                 }
                 else {
@@ -341,13 +341,13 @@ function groupEvidences(item) {
                 }
             }
         }
-    
+
 
         //combine annotations for each evidence id
         groupedEvidences = [];
-        evidencesMap.forEach(function(v, key) {
+        evidencesMap.forEach(function (v, key) {
             //combine annotations into the first, delete the rest
-            for(var i=1; i<v.length; i++) {
+            for (var i = 1; i < v.length; i++) {
                 v[0].annotation += "\n\n" + v[i].annotation;
             }
             groupedEvidences.push(v[0]);
@@ -554,27 +554,27 @@ function ajaxSuccess(data) {
             }
         }
 
-        
-        if(data.glycosylation){
+
+        if (data.glycosylation) {
             data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
                 return total + current.length;
             }, 0);
         }
-        if(data.glycosylation){
+        if (data.glycosylation) {
             data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
                 return total + current.length;
             }, 0);
         }
-        
-         if(data.mutation){
+
+        if (data.mutation) {
             data.mutation_count = highlight.mutation.reduce(function (total, current) {
                 return total + current.length;
             }, 0);
-            } 
-          
-                
-                
-      
+        }
+
+
+
+
         // data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
         //     return total + current.length;
         // }, 0);
@@ -584,7 +584,7 @@ function ajaxSuccess(data) {
         // data.mutation_count = highlight.mutation.reduce(function (total, current) {
         //     return total + current.length;
         // }, 0);
-   
+
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
@@ -608,7 +608,7 @@ function ajaxSuccess(data) {
         // }
 
 
-     
+
         $container.find('.open-close-button').each(function (i, element) {
             $(element).on('click', function () {
                 var $this = $(this);
@@ -952,10 +952,18 @@ $(document).ready(function () {
  * and updates the respective links on the breadcrumb fields.
  */
 function updateBreadcrumbLinks() {
-    var listID = getParameterByName("listID");
+    const listID = getParameterByName("listID") || "";
+    const globalSearchTerm = getParameterByName("gs") || "";
     var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
-    $('#breadcrumb-search').attr("href", glycanPageType + "_search.html?id=" + listID);
-    $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID);
+
+    if (globalSearchTerm) {
+        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+        $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID + "&gs=" + globalSearchTerm);
+    } else {
+        $('#breadcrumb-search').attr("href", glycanPageType + "_search.html?id=" + listID);
+        $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID);
+    }
 }
 
 /**

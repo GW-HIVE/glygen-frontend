@@ -20,7 +20,8 @@ var dir = 'desc'
 var url = getWsUrl('protein_list');
 var limit = 20;
 
-var id = getParameterByName('id');;
+var id = getParameterByName('id');
+const globalSearchTerm = getParameterByName("gs") || "";
 
 /**
  * it creates user interface for summary
@@ -68,11 +69,13 @@ function editSearch() {
         }
         else if (question && (question === 'QUESTION_TRY2')) {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
+        } else if (globalSearchTerm) {
+            newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
         }
         else {
             newUrl = "protein_search.html?id=" + id;
         }
-        
+
         window.location.replace(newUrl);
         activityTracker("user", id, "edit search");
     }
@@ -84,7 +87,7 @@ function editSearch() {
  * @return -Details particular Protein Id
  */
 function PageFormat(value, row, index, field) {
-    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID=" + id + "'>" + value + "</a>";
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
 }
 
 /**
@@ -214,7 +217,12 @@ function downloadPrompt() {
  * and updates the respective links on the breadcrumb fields.
  */
 function updateBreadcrumbLinks() {
-    $('#breadcrumb-search').attr("href", "protein_search.html?id="+id);
+    if (globalSearchTerm) {
+        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+    } else {
+        $('#breadcrumb-search').attr("href", "protein_search.html?id=" + id);
+    }
 }
 
 
