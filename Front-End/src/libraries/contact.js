@@ -115,7 +115,7 @@ function sendFeedback() {
 
 function setupFeedbackForm() {
     $.get('_feedbackform.html', function(text) {
-        $('.container').after(text);
+        $('.container-fluid').first().after(text);
         var feedbackForm = $('#feedback');
 
         $('.toggle').click(function(){
