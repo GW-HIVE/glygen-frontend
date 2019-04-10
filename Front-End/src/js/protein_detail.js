@@ -12,6 +12,7 @@
 // @added: Oct 22, 2018 - Gaurav Agarwal - added downloadPrompt() which gives selection box for downloading data.
 // @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
 // @update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumbs
+// @update: April 7th, 2019 - Rupali Mahadik - Seqeunce display improved
 
 /**
  * Object to hold highlight data in state
@@ -609,19 +610,19 @@ function ajaxSuccess(data) {
 
 
 
-        $container.find('.open-close-button').each(function (i, element) {
-            $(element).on('click', function () {
-                var $this = $(this);
-                var buttonText = $this.text();
-                if (buttonText === '+') {
-                    $this.text('-');
-                    $this.parent().next().show();
-                } else {
-                    $this.text('+');
-                    $this.parent().next().hide();
-                }
-            });
-        });
+        // $container.find('.open-close-button').each(function (i, element) {
+        //     $(element).on('click', function () {
+        //         var $this = $(this);
+        //         var buttonText = $this.text();
+        //         if (buttonText === '+') {
+        //             $this.text('-');
+        //             $this.parent().next().show();
+        //         } else {
+        //             $this.text('+');
+        //             $this.parent().next().hide();
+        //         }
+        //     });
+        // });
 
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({

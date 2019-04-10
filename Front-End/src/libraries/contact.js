@@ -38,8 +38,8 @@ function setupContactForm() {
                     }
                     contactReply(messageAlert, messageText);
 
-                    if(messageAlert == 'alert-danger')
-                        activityTracker("error", null, "contact form: "+messageText);
+                    if (messageAlert == 'alert-danger')
+                        activityTracker("error", null, "contact form: " + messageText);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     var messageAlert = 'alert-danger';
@@ -68,15 +68,15 @@ function setupContactForm() {
     }
 }
 
-function sendFeedbackSuccess () {
+function sendFeedbackSuccess() {
     var feedbackForm = $('#feedback');
     feedbackForm.find('.alert-success').show();
     feedbackForm.find('[name="name"]').val('');
     feedbackForm.find('[name="email"]').val('');
-    feedbackForm.find('[name="feedback_text"]').val('');    
+    feedbackForm.find('[name="feedback_text"]').val('');
 }
 
-function sendFeedbackError (jqXHR, textStatus, errorThrown) {
+function sendFeedbackError(jqXHR, textStatus, errorThrown) {
     var messageAlert = 'alert-danger';
     var messageText = "Oops, something went wrong! We did not receive your message. Please try again later. \nError: " + errorThrown;
     // contactReply(messageAlert, messageText);
@@ -95,9 +95,9 @@ function sendFeedback() {
         fname: (name[0] ? name[0] : 'None Given'),
         lname: (name[1] ? name[1] : 'None Given'),
         email: form.find('[name="email"]').val(),
-        page:  page,
+        page: page,
         subject: 'Feedback Form' + $('#feedback .type li.active').text(),
-        message: form.find('[name="feedback_text"]').val() 
+        message: form.find('[name="feedback_text"]').val()
         // + '\n\n' + 'Page: ' + page
     }
 
@@ -114,11 +114,11 @@ function sendFeedback() {
 }
 
 function setupFeedbackForm() {
-    $.get('_feedbackform.html', function(text) {
+    $.get('_feedbackform.html', function (text) {
         $('.container-fluid').first().after(text);
         var feedbackForm = $('#feedback');
 
-        $('.toggle').click(function(){
+        $('.toggle').click(function () {
             $('.sidebar-contact').toggleClass('active')
             $('.toggle').toggleClass('active');
 
