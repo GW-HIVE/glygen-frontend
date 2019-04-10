@@ -63,14 +63,14 @@ body5 {
 }
 
 .venntooltip {
-    font-size: 16px;
+    font-size: 14px;
     position: absolute;
     text-align: center;
-    width: 128px;
-    height: 18px;
+    width: auto;
+    height: auto;
     background: #333;
     color: #fff;
-    padding: 2px;  
+    padding: 6px;  
     border: 0px;
     border-radius: 8px;
     opacity: 0;

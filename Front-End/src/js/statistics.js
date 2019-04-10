@@ -178,7 +178,102 @@ div.selectAll("g")
 
             // Display a tooltip with the current size
             tooltip.transition().duration(400).style("opacity", .9);
-            tooltip.text(d.size, d.labe);
+            tooltip.text(d.size + '\n' +  d.tooltipLabel);
+
+            // highlight the current path
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                  .style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+                  .style("stroke-opacity", 1);
+      })
+
+      .on("mousemove", function () {
+            tooltip.style("left", (d3.event.pageX) + "px")
+                  .style("top", (d3.event.pageY - 28) + "px");
+      })
+
+      .on("mouseout", function (d, i) {
+            tooltip.transition().duration(400).style("opacity", 0);
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                  .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+                  .style("stroke-opacity", 0);
+      });
+//-----------------------------
+//    Human Venn Diagram
+//-----------------------------
+
+var chart_homo = venn.VennDiagram()
+      .width(400)
+      .height(400);
+
+var div_homo = d3.select("#venn_homo")
+div_homo.datum(sets_homo).call(chart_homo);
+
+var tooltip = d3.select("body").append("div_homo")
+      .attr("class", "venntooltip");
+
+div_homo.selectAll("path")
+      .style("stroke-opacity", 0)
+      .style("stroke", "#fff")
+      .style("stroke-width", 3)
+
+div_homo.selectAll("g")
+      .on("mouseover", function (d, i) {
+            // sort all the areas relative to the current item
+            venn.sortAreas(div, d);
+
+            // Display a tooltip with the current size
+            tooltip.transition().duration(400).style("opacity", .9);
+            tooltip.text(d.size, d.label);
+
+            // highlight the current path
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                  .style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+                  .style("stroke-opacity", 1);
+      })
+
+      .on("mousemove", function () {
+            tooltip.style("left", (d3.event.pageX) + "px")
+                  .style("top", (d3.event.pageY - 28) + "px");
+      })
+
+      .on("mouseout", function (d, i) {
+            tooltip.transition().duration(400).style("opacity", 0);
+            var selection = d3.select(this).transition("tooltip").duration(400);
+            selection.select("path")
+                  .style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+                  .style("stroke-opacity", 0);
+      });
+
+//-----------------------------
+//    Mouse Venn Diagram
+//-----------------------------
+
+var chart_mus = venn.VennDiagram()
+      .width(400)
+      .height(400);
+
+var div_mus = d3.select("#venn_mus")
+div_mus.datum(sets_mus).call(chart_mus);
+
+var tooltip = d3.select("body").append("div_mus")
+      .attr("class", "venntooltip");
+
+div_mus.selectAll("path")
+      .style("stroke-opacity", 0)
+      .style("stroke", "#fff")
+      .style("stroke-width", 3)
+
+div_mus.selectAll("g")
+      .on("mouseover", function (d, i) {
+            // sort all the areas relative to the current item
+            venn.sortAreas(div, d);
+
+            // Display a tooltip with the current size
+            tooltip.transition().duration(400).style("opacity", .9);
+            tooltip.text(d.size, d.label);
 
             // highlight the current path
             var selection = d3.select(this).transition("tooltip").duration(400);
