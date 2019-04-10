@@ -30,7 +30,7 @@ function setFormValues(data) {
             $("#ddl2").val(data.query.glycan_subtype);
         });
         $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
-        $("#protein").val(data.query.uniprot_canonical_ac || "");
+        $("#protein").val(data.query.protein_identifier || "");
         $("#motif").val(data.query.glycan_motif || "");
     }
 }

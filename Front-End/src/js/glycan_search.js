@@ -354,7 +354,7 @@ function resetAdvanced() {
             },
             glycan_type: "",
             glycan_subtype: "",
-            uniprot_canonical_ac: "",
+            protein_identifier: "",
             glycan_motif: ""
         }
     });
@@ -407,7 +407,7 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         organism: organisms,
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
-        uniprot_canonical_ac: input_proteinid,
+        protein_identifier: input_proteinid,
         glycan_motif: input_motif,
     };
     return formjson;
