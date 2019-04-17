@@ -939,10 +939,11 @@ ____________________________________  */
 /*  margin-bottom: 1em;*/
 /*  margin-bottom: -30px;*/
 }
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
     .gg-download5 {
     padding-right: 10%;
   } 
+    
 }
 @media only screen and (min-width: 1301px) and (max-width: 1900px) {
   .gg-download5 {
@@ -1004,7 +1005,7 @@ ____________________________________  */
     } 
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     body  {
         margin-bottom: 15%;
     }
@@ -1036,7 +1037,7 @@ ____________________________________  */
     } 
 }
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
     .gg-settings {
         width: auto;
         margin: 0 auto;
@@ -1045,6 +1046,12 @@ ____________________________________  */
     }
     .btn-link-detail {
         margin-bottom: 3%;
+    }
+    .about-block {
+        padding: 10px 15px;
+    }
+    #top-heading {
+        padding: 0 15px;
     }
 }
 
