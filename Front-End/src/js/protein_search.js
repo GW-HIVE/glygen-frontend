@@ -32,8 +32,8 @@ function resetAdvanced() {
         query: {
             query_type: "search_protein",
             mass: {
-                "min": 435,
-                "max": 3906488
+                "min": mass_min,
+                "max": mass_max
             },
             sequence: "",
             organism: {
@@ -116,8 +116,8 @@ $(document).ready(function () {
             for (var x = 0; x < result.simple_search_category.length; x++) {
                 createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].id);
             }
-            var mass_max = result.protein_mass.max;
-            var mass_min = result.protein_mass.min;
+            mass_max = Math.ceil(result.protein_mass.max);
+            mass_min = Math.floor(result.protein_mass.min);
             // mass(mass_min, mass_max);
             // check for ID to see if we need to load search values
             // please do not remove this code as it is required prepopulate search values
@@ -128,7 +128,7 @@ $(document).ready(function () {
 
             new Sliderbox({
                 target: '.sliderbox',
-                start: [400, 4000000.00], // Handle start position
+                start: [mass_min, mass_max], // Handle start position
                 connect: true, // Display a colored bar between the handles
                 behaviour: 'tap-drag', // Move handle on tap, bar is draggable
                 range: { // Slider can select '0' to '100'
@@ -176,9 +176,9 @@ $(document).ready(function () {
         noUiSlider.create(slider, this.options);
         slider.noUiSlider.on('update', function (values, handle) {
             if (handle) {
-                inpMax.value = addCommas(parseFloat(values[handle]));
+                inpMax.value = addCommas(parseInt(values[handle]));
             } else {
-                inpMin.value = addCommas(parseFloat(values[handle]));
+                inpMin.value = addCommas(parseInt(values[handle]));
             }
         });
         target.addEventListener('change', function (e) {
@@ -322,8 +322,8 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         "operation": "AND",
         query_type: input_query_type,
         mass: {
-            "min": parseFloat(mass_min),
-            "max": parseFloat(mass_max)
+            "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
         },
         sequence: sequences ?sequences:undefined,
         organism: organism ?organism:undefined,

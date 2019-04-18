@@ -72,8 +72,8 @@ $(document).ready(function () {
                 createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
             }
 
-            var mass_max = result.glycan_mass.max;
-            var mass_min = result.glycan_mass.min;
+            mass_max = Math.ceil(result.glycan_mass.max);
+            mass_min = Math.floor(result.glycan_mass.min);
             var sugar_mass_min = result.number_monosaccharides.min;
             var sugar_mass_max = result.number_monosaccharides.max;
 
@@ -171,9 +171,9 @@ Sliderbox.prototype.handler = function (target) {
     noUiSlider.create(slider, this.options);
     slider.noUiSlider.on('update', function (values, handle) {
         if (handle) {
-            inpMax.value = addCommas(parseFloat(values[handle]));
+            inpMax.value = addCommas(parseInt(values[handle]));
         } else {
-            inpMin.value = addCommas(parseFloat(values[handle]));
+            inpMin.value = addCommas(parseInt(values[handle]));
         }
     });
 
@@ -340,8 +340,8 @@ function resetAdvanced() {
         query: {
             query_type: "search_glycan",
             mass: {
-                "min": 164,
-                "max": 6750
+                "min": mass_min,
+                "max": mass_max
             },
             number_monosaccharides: {
                 "min": 1,
@@ -394,8 +394,8 @@ function searchjson(input_query_type, input_glycan_id, mass_min, mass_max, sugar
         "operation": "AND",
         query_type: input_query_type,
         mass: {
-            "min": parseFloat(mass_min),
-            "max": parseFloat(mass_max)
+            "min": parseInt(mass_min),
+            "max": parseInt(mass_max)
         },
         // mass:masses,
         number_monosaccharides: {
