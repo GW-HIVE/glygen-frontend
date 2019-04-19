@@ -211,9 +211,11 @@ p {
     z-index: 9;
 }
 
+/*
 .copyrights {
     padding-bottom: 10px;
 }
+*/
 
 .grant {
     padding-bottom: 10px;
@@ -221,7 +223,11 @@ p {
 
 .policy ul li {
     display: inline;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
+}
+
+.policy-li {
+    padding: 0;
 }
 
 .logos {
@@ -229,14 +235,14 @@ p {
     padding-bottom: 10px;
 }
 
-.copyrights a,
+/*.copyrights a,*/
 .grant a,
 .policy ul li a {
     color: #AFD9FD;
     padding-bottom: 5px;
 }
 
-.copyrights a:hover,
+/*.copyrights a:hover,*/
 .grant a:hover,
 .policy ul li a:hover {
     color: #57AFFA;
@@ -939,10 +945,11 @@ ____________________________________  */
 /*  margin-bottom: 1em;*/
 /*  margin-bottom: -30px;*/
 }
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
     .gg-download5 {
     padding-right: 10%;
   } 
+    
 }
 @media only screen and (min-width: 1301px) and (max-width: 1900px) {
   .gg-download5 {
@@ -1004,7 +1011,7 @@ ____________________________________  */
     } 
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     body  {
         margin-bottom: 15%;
     }
@@ -1036,7 +1043,7 @@ ____________________________________  */
     } 
 }
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
     .gg-settings {
         width: auto;
         margin: 0 auto;
@@ -1045,6 +1052,12 @@ ____________________________________  */
     }
     .btn-link-detail {
         margin-bottom: 3%;
+    }
+    .about-block {
+        padding: 10px 15px;
+    }
+    #top-heading {
+        padding: 0 15px;
     }
 }
 

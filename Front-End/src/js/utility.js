@@ -482,3 +482,8 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
 }
+
+$(function() {
+    $("#a_data").attr('href', ws_base_data);
+
+});
