@@ -4,3 +4,4 @@
  */
 
 var ws_base = "https://api.tst.glygen.org/";
+var ws_base_data = "https://data.tst.glygen.org/";

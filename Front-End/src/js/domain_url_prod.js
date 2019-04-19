@@ -5,3 +5,4 @@
  * @date: September 5, 2018 
  */
 var ws_base = "http://api.glygen.org/";
+var ws_base_data = "https://data.glygen.org/";
