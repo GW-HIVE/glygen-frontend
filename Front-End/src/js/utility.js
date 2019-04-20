@@ -475,8 +475,10 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
 }
-
+// for Data and SPARQL link in header page
 $(function() {
     $("#a_data").attr('href', ws_base_data);
-
+    $("#a_sparql").attr('href', ws_base_sparql);
 });
+
+

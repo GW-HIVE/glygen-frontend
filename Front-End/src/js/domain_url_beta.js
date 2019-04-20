@@ -8,6 +8,7 @@
 
 var ws_base = "http://api.beta.glygen.org/";
 var ws_base_data = "https://data.beta.glygen.org/";
+var ws_base_sparql ="https://sparql.beta.glygen.org/";
 
 /**
  * for the pageproofer feedback.
