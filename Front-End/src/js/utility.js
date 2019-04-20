@@ -317,7 +317,8 @@ function getTimeout(ajaxWebService) {
  */
 function searchInitFailure(jqXHR, textStatus, errorThrown) {
     var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || errorThrown;
+    var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+    var errorMessage = errorCode || errorThrown;
     activityTracker("error", "", err + ": " + errorMessage + ": search_init WS error");
     $('#loading_image').fadeOut();
 }
@@ -332,10 +333,13 @@ function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
     showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+    var errorMessage = errorCode || err;
     displayErrorByCode(errorMessage);
     activityTracker("error", null, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
+    
+    // if the window.onerror is not triggered then explicitly flip the boolean variable.
     showJsError = false;
 }
 
@@ -346,15 +350,17 @@ function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
  * @return error message.
  */
 function decideAjaxError(jqStatus, textStatus) {
-    var err = '';
-    if (textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror') {
-        err = textStatus;
-    }
-    else if (jqStatus === 0 || jqStatus === 404 || jqStatus === 500) {
+    var err = textStatus;
+    // if (textStatus === 'timeout' || textStatus === 'abort' || textStatus === 'parsererror') {
+    //     err = textStatus;
+    // }
+    // else 
+    if (jqStatus === 0 || jqStatus === 404 || jqStatus === 500) {
         err = jqStatus;
-    } else {
-        err = textStatus;
-    }
+    } 
+    // else {
+    //     err = textStatus;
+    // }
     return err;
 }
 
@@ -404,7 +410,8 @@ function downloadFromServer(id, format, compressed, type) {
             showJsError = true;
             // getting the appropriate error message from this function in utility.js file
             var err = decideAjaxError(jqXHR.status, textStatus);
-            var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+            var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+            var errorMessage = errorCode || err;
             displayErrorByCode(errorMessage);
             activityTracker("error", id, "Download error: " + errorMessage);
             $('#loading_image').fadeOut();
