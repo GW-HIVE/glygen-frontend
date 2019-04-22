@@ -1320,8 +1320,8 @@
 
             var enterPath = enter.append("path"),
                 enterText = enter.append("text")
-                .attr("class", "label")
-                .text(function (d) { return label(d); } )
+                .attr("class", "name")
+                .text(function (d) { return name(d); } )
                 .attr("text-anchor", "middle")
                 .attr("dy", ".35em")
                 .attr("x", width/2)
@@ -1332,11 +1332,11 @@
             if (styled) {
                 enterPath.style("fill-opacity", "0")
                     .filter(function (d) { return d.sets.length == 1; } )
-                    .style("fill", function(d) { return colours(label(d)); })
+                    .style("fill", function(d) { return colours(name(d)); })
                     .style("fill-opacity", ".25");
 
                 enterText
-                    .style("fill", function(d) { return d.sets.length == 1 ? colours(label(d)) : "#444"; });
+                    .style("fill", function(d) { return d.sets.length == 1 ? colours(name(d)) : "#444"; });
             }
 
             // update existing, using pathTween if necessary
@@ -1354,7 +1354,7 @@
 
             var updateText = update.selectAll("text")
                 .filter(function (d) { return d.sets in textCentres; })
-                .text(function (d) { return label(d); } )
+                .text(function (d) { return name(d); } )
                 .attr("x", function(d) { return Math.floor(textCentres[d.sets].x);})
                 .attr("y", function(d) { return Math.floor(textCentres[d.sets].y);});
 
@@ -1363,12 +1363,12 @@
                     // d3 4.0 uses 'on' for events on transitions,
                     // but d3 3.0 used 'each' instead. switch appropiately
                     if ('on' in updateText) {
-                        updateText.on("end", wrapText(circles, label));
+                        updateText.on("end", wrapText(circles, name));
                     } else {
-                        updateText.each("end", wrapText(circles, label));
+                        updateText.each("end", wrapText(circles, name));
                     }
                 } else {
-                    updateText.each(wrapText(circles, label));
+                    updateText.each(wrapText(circles, name));
                 }
             }
 
@@ -1398,9 +1398,9 @@
                     'exit': exit};
         }
 
-        function label(d) {
-            if (d.label) {
-                return d.label;
+        function name(d) {
+            if (d.name) {
+                return d.name;
             }
             if (d.sets.length == 1) {
                 return '' + d.sets[0];
@@ -1486,18 +1486,18 @@
     // todo: looks like this might be merged into d3 (
     // https://github.com/mbostock/d3/issues/1642),
     // also worth checking out is
-    // http://engineering.findthebest.com/wrapping-axis-labels-in-d3-js/
+    // http://engineering.findthebest.com/wrapping-axis-names-in-d3-js/
     // this seems to be one of those things that should be easy but isn't
-    function wrapText(circles, labeller) {
+    function wrapText(circles, nameler) {
         return function() {
             var text = d3Selection.select(this),
                 data = text.datum(),
                 width = circles[data.sets[0]].radius || 50,
-                label = labeller(data) || '';
+                name = nameler(data) || '';
 
-                var words = label.split(/\s+/).reverse(),
+                var words = name.split(/\s+/).reverse(),
                 maxLines = 3,
-                minChars = (label.length + words.length) / maxLines,
+                minChars = (name.length + words.length) / maxLines,
                 word = words.pop(),
                 line = [word],
                 joined,
