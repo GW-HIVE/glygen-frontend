@@ -70,7 +70,7 @@
         <h2 class="page-heading" style="padding-bottom: 20px; padding-top: 40px;"> Statistics &amp; Facts </h2>
         
         
-        <div class="row" style="margin-top: 40px;">
+        <div class="row">
                 <div class="col-md-8 col-sm-12 box">
                     <svg class="zoomableSunburst"></svg>
                 </div>
@@ -83,49 +83,45 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-8 col-sm-12 box">
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Human proteins.  
+                </p>
                 <div id="venn"></div>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <h3>Venn Diagram</h3>
-                <p class="lead">
-                    Venn diagram represents GlyGen statistics.  
-                </p>
-            </div>
-        </div>
-        
-        <hr>
-        
-        <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h3>Human Venn Diagram</h3>
+                <h3>Glycans</h3>
                 <p class="lead">
-                    Venn diagram represents human molecules statistics.  
+                    Human and mouse glycans.  
                 </p>
-                <div id="venn_homo"></div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <h3>Mouse Venn Diagram</h3>
-                <p class="lead">
-                    Venn diagram represents mouse molecules statistics.  
-                </p>
-                <div id="venn_mus"></div>
+                <div id="venn_glycans_homo_mus"></div>
             </div>
         </div>
 
         <hr>
-        
+       
         <div class="row">
-            <div class="col-md-8 col-sm-12">
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycans</h3>
+                <p class="lead">
+                    Human and mouse glycans. 
+                </p>
                 <div id="donut_chart"></div>
             </div>
-            <div class="col-md-4 col-sm-12">
-                <h3>Donut Chart</h3>
+            <div class="col-md-6 col-sm-12">
+                <h3>Motifs</h3>
                 <p class="lead">
-                    Donut chart represents GlyGen statistics.  
+                    Motifs and their frequencies 
                 </p>
+                <div id="pie_chart"></div>
             </div>
         </div>
+        
+        
+        
+        
+        
     </div>
     
     
@@ -148,7 +144,6 @@
     <script type="text/javascript" src="libraries/alertify.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="libraries/venn/venn.js"></script>
-    <script src="data/statistics_venn.jsonp"></script>
     <script type="text/javascript" src="libraries/donut.js"></script>
     <script type="text/javascript" src="js/statistics.js"></script>
     

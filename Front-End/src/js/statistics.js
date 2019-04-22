@@ -1,8 +1,8 @@
 // @author Tatiana Williamson
 // @createDate March 11, 2019
 
-const width = 500,
-	height = 500,
+const width = 400,
+	height = 400,
 	maxRadius = (Math.min(width, height) / 2) - 20;
 
 const formatNumber = d3.format(',d');
@@ -17,7 +17,7 @@ const y = d3.scaleSqrt()
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
 const partition = d3.partition();
-
+		
 const arc = d3.arc()
 	.startAngle(d => x(d.x0))
 	.endAngle(d => x(d.x1))
@@ -51,16 +51,18 @@ const textFits = d => {
 };
 
 const svg = d3.select('.zoomableSunburst')
-	.style('width', '500')
-	.style('height', '500')
+	.style('width', '400')
+	.style('height', '400')
 	.attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
 	.on('click', () => focusOn()); // Reset zoom on canvas click
 
-d3.json("data/statistics.json", (error, root) => {
-	if (error) throw error;
-	//console.log(root);
+//var jsonData = d3.json("data/statistics_full.json");
 
-	root = d3.hierarchy(root);
+ d3.json("data/statistics.json", (error, jsonData) => {
+	if (error) throw error;
+//	console.log(root);
+
+	var root = d3.hierarchy(jsonData.sunburst);
 	root.sum(d => d.size);
 
 	const slice = svg.selectAll('g.slice')
@@ -105,7 +107,7 @@ d3.json("data/statistics.json", (error, root) => {
 		.attr('startOffset', '50%')
 		.attr('xlink:href', (_, i) => `#hiddenArc${i}`)
 		.text(d => d.data.name);
-});
+//});
 
 function focusOn(d = {
 	x0: 0,
@@ -156,11 +158,11 @@ function focusOn(d = {
 //----------------------
 
 var chart = venn.VennDiagram()
-	.width(500)
-	.height(500);
+	.width(400)
+	.height(400);
 
 var div = d3.select("#venn")
-div.datum(sets).call(chart);
+div.datum(jsonData.protein_venn).call(chart);
 
 var tooltip = d3.select("body").append("div")
 	.attr("class", "venntooltip");
@@ -177,7 +179,7 @@ div.selectAll("g")
 
 		// Display a tooltip with the current size
 		tooltip.transition().duration(400).style("opacity", .9);
-		tooltip.text(d.size + '\n' + d.tooltipLabel);
+		tooltip.text(d.size + '\n' + d.tooltipname);
 
 		// highlight the current path
 		var selection = d3.select(this).transition("tooltip").duration(400);
@@ -198,81 +200,34 @@ div.selectAll("g")
 			.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
 			.style("stroke-opacity", 0);
 	});
+	 
 //-----------------------------
-//    Human Venn Diagram
+//    Human & Mouse Glycans Venn Diagram
 //-----------------------------
 
-var chart_homo = venn.VennDiagram()
+var glycan_homo_mus = venn.VennDiagram()
 	.width(400)
 	.height(400);
 
-var div_homo = d3.select("#venn_homo")
-div_homo.datum(sets_homo).call(chart_homo);
-
-var tooltip = d3.select("body").append("div_homo")
-	.attr("class", "venntooltip");
-
-div_homo.selectAll("path")
-	.style("stroke-opacity", 0)
-	.style("stroke", "#fff")
-	.style("stroke-width", 3)
-
-div_homo.selectAll("g")
-	.on("mouseover", function (d, i) {
-		// sort all the areas relative to the current item
-		venn.sortAreas(div, d);
-
-		// Display a tooltip with the current size
-		tooltip.transition().duration(400).style("opacity", .9);
-		tooltip.text(d.size, d.label);
-
-		// highlight the current path
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-			.style("stroke-opacity", 1);
-	})
-
-	.on("mousemove", function () {
-		tooltip.style("left", (d3.event.pageX) + "px")
-			.style("top", (d3.event.pageY - 28) + "px");
-	})
-
-	.on("mouseout", function (d, i) {
-		tooltip.transition().duration(400).style("opacity", 0);
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-			.style("stroke-opacity", 0);
-	});
-
-//-----------------------------
-//    Mouse Venn Diagram
-//-----------------------------
-
-var chart_mus = venn.VennDiagram()
-	.width(400)
-	.height(400);
-
-var div_mus = d3.select("#venn_mus")
-div_mus.datum(sets_mus).call(chart_mus);
+var div_homo_mus = d3.select("#venn_glycans_homo_mus")
+div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);
 
 var tooltip = d3.select("body").append("div_mus")
 	.attr("class", "venntooltip");
 
-div_mus.selectAll("path")
+div_homo_mus.selectAll("path")
 	.style("stroke-opacity", 0)
 	.style("stroke", "#fff")
 	.style("stroke-width", 3)
 
-div_mus.selectAll("g")
+div_homo_mus.selectAll("g")
 	.on("mouseover", function (d, i) {
 		// sort all the areas relative to the current item
 		venn.sortAreas(div, d);
 
 		// Display a tooltip with the current size
 		tooltip.transition().duration(400).style("opacity", .9);
-		tooltip.text(d.size, d.label);
+		tooltip.text(d.size, d.name);
 
 		// highlight the current path
 		var selection = d3.select(this).transition("tooltip").duration(400);
@@ -293,72 +248,21 @@ div_mus.selectAll("g")
 			.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
 			.style("stroke-opacity", 0);
 	});
+	 
+	
 
 //-------------------------------
 //    Donut Chart
 //-------------------------------
-//var chart_mus = venn.VennDiagram()
-//	.width(400)
-//	.height(400);
-//
-//var div_mus = d3.select("#venn_mus")
-//div_mus.datum(sets_mus).call(chart_mus);
-//--------------------------------------------
 
-var donut = donutChart()
-	
-function donutChart ()
-{
-    d3.json("data/donut.json", function (error, data)
-    {	
-		if (error) throw error;
-		
-        var radius = 150;
-        var color = d3.scaleOrdinal()
-			.range(["#ff7f0e", "#1f77b4", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#677002", "#17becf"]);
+	var donut = donutChart(jsonData);
+	d3.select('#donut_chart')
+            .call(donut); // draw chart in div
 
-        var canvas = d3.select("#donut_chart")
-            .append("svg")
-            .attr("width", 400)
-            .attr("height", 320);
-
-        var group = canvas.append("g")
-            .attr("transform", "translate(180,150)");
-
-        var arc = d3.arc()
-            .innerRadius(50)
-            .outerRadius(radius);
-
-        var pie = d3.pie()
-            .value(function (d)
-            {
-                return d.rank;
-            });
-
-        var theArc = group.selectAll(".arc")
-            .data(pie(data))
-            .enter()
-            .append("g")
-            .attr("class", "arc");
-
-        theArc.append("path")
-            .attr("d", arc)
-            .attr("fill", function (d)
-            {
-                return color(d.data.rank);
-            });
-
-        theArc.append("text")
-            .attr("transform", function (d)
-            {
-                return "translate(" + arc.centroid(d) + ")";
-            })
-            .attr("dy", "0.15em")
-            .text(function (d)
-            {
-                return d.data.rank;
-            });
-    });
-}
-
-
+//-------------------------------
+//    Pie Chart
+//-------------------------------	
+	var pie = pieChart(jsonData);
+	d3.select('#pie_chart')
+            .call(pie); // draw chart in div 
+});

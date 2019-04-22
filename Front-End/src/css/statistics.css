@@ -143,7 +143,7 @@ polyline {
     font-size: 0.9em;
     font-style: italic;
 }
-
+/*----------------------*/
 .arc text {
     font: 16px Arial, Georgia, sans-serif;
     text-anchor: middle;
@@ -152,12 +152,26 @@ polyline {
 .arc path {
     stroke: #ffffff;
 }
-/*----End of Donut chart*------/
+/*-------------------*/
 
+.pie {
+  margin: 20px;
+}
 
+.pie text {
+  font-family: "Verdana";
+  fill: #888;
+}
 
+.pie .name-text{
+  font-size: 1.1em;
+}
 
+.pie .value-text{
+  font-size: 3em;
+}
 
+/*------------------*/
 
 
 
