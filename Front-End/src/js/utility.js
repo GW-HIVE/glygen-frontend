@@ -36,7 +36,7 @@ function getLanguage() {
  * @returns {string} String containing separator value.
  */
 function getSeparatorValue(type) {
-    dummy = 9999.9;
+    var dummy = 9999.9;
     var spVal = ".".toLocaleString(getLanguage());
     var value = Intl.NumberFormat(getLanguage()).formatToParts(dummy).find(entry => entry.type === type).value;
 
@@ -52,8 +52,8 @@ function getSeparatorValue(type) {
  * @returns {string} String containing converted Number value.
  */
 function convertNumberValue(value) {
-    value = value.replace(new RegExp(getSeparatorValue('group'), 'g'), '');
-    return value.replace(new RegExp(getSeparatorValue('decimal'), 'g'), '.');
+    var numValue = value.replace(new RegExp(getSeparatorValue('group'), 'g'), '');
+    return numValue.replace(new RegExp(getSeparatorValue('decimal'), 'g'), '.');
 }
 
 function databasecolor(name) {
