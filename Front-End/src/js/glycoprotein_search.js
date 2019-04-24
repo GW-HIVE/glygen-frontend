@@ -172,17 +172,17 @@ $(document).ready(function () {
         noUiSlider.create(slider, this.options);
         slider.noUiSlider.on('update', function (values, handle) {
             if (handle) {
-                inpMax.value = addCommas(parseInt(values[handle]));
+                inpMax.value = parseInt(values[handle]).toLocaleString(getLanguage());
             } else {
-                inpMin.value = addCommas(parseInt(values[handle]));
+                inpMin.value = parseInt(values[handle]).toLocaleString(getLanguage());
             }
         });
 
         target.addEventListener('change', function (e) {
             if (e.target === inpMin) {
-                slider.noUiSlider.set([e.target.value]);
+                slider.noUiSlider.set([parseInt(convertNumberValue(e.target.value))]);
             } else {
-                slider.noUiSlider.set([null, e.target.value]);
+                slider.noUiSlider.set([null, parseInt(convertNumberValue(e.target.value))]);
             }
         });
     };
