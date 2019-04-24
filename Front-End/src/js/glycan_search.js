@@ -46,7 +46,6 @@ $(document).ready(function () {
     //Section for populating label names from key-value.json
     populateFromKeyValueStore("lbl_glytoucan_acc", "GLYTOUCAN_ACCESSION", "", ":", 2);
     populateFromKeyValueStore("lbl_monoiso_mass", "MONOISOTOPIC_MASS", "", ":", 2);
-
     //End section for populating label names from key-value.json
     $.ajax({
         dataType: "json",
@@ -74,8 +73,8 @@ $(document).ready(function () {
 
             mass_max = Math.ceil(result.glycan_mass.max);
             mass_min = Math.floor(result.glycan_mass.min);
-            var sugar_mass_min = result.number_monosaccharides.min;
-            var sugar_mass_max = result.number_monosaccharides.max;
+            var sugar_mass_min = Math.floor(result.number_monosaccharides.min);
+            var sugar_mass_max = Math.ceil(result.number_monosaccharides.max);
 
             var id = getParameterByName('id') || id;
             if (id) {
@@ -171,17 +170,17 @@ Sliderbox.prototype.handler = function (target) {
     noUiSlider.create(slider, this.options);
     slider.noUiSlider.on('update', function (values, handle) {
         if (handle) {
-            inpMax.value = addCommas(parseInt(values[handle]));
+            inpMax.value = parseInt(values[handle]).toLocaleString(getLanguage());
         } else {
-            inpMin.value = addCommas(parseInt(values[handle]));
+            inpMin.value = parseInt(values[handle]).toLocaleString(getLanguage());
         }
     });
 
     target.addEventListener('change', function (e) {
         if (e.target === inpMin) {
-            slider.noUiSlider.set([e.target.value]);
+            slider.noUiSlider.set([parseInt(convertNumberValue(e.target.value))]);
         } else {
-            slider.noUiSlider.set([null, e.target.value]);
+            slider.noUiSlider.set([null, parseInt(convertNumberValue(e.target.value))]);
         }
     });
 };
@@ -208,17 +207,17 @@ Sliderbox1.prototype.handler = function (target) {
     noUiSlider.create(slider1, this.options);
     slider1.noUiSlider.on('update', function (values, handle) {
         if (handle) {
-            inpMax1.value = addCommas(parseInt(values[handle]));
+            inpMax1.value = parseInt(values[handle]).toLocaleString(getLanguage());
         } else {
-            inpMin1.value = addCommas(parseInt(values[handle]));
+            inpMin1.value = parseInt(values[handle]).toLocaleString(getLanguage());
         }
     });
 
     target.addEventListener('change', function (e) {
         if (e.target === inpMin1) {
-            slider1.noUiSlider.set([e.target.value]);
+            slider1.noUiSlider.set([parseInt(convertNumberValue(e.target.value, ''))]);
         } else {
-            slider1.noUiSlider.set([null, e.target.value]);
+            slider1.noUiSlider.set([null, parseInt(convertNumberValue(e.target.value))]);
         }
     });
 };
