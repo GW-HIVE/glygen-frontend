@@ -304,7 +304,7 @@ function ajaxProteinSearchSuccess() {
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence) {
-    var sequences = {};
+    var sequences;
     if (input_sequence) {
         sequences = {
             "type": "exact",
@@ -314,7 +314,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
     
     var organism;
     if (input_organism.id != "0") {
-        organism = {};
+        organism = {"id":0,"name":"All"};
         organism.id = input_organism.id;
         organism.name = input_organism.name;
     }

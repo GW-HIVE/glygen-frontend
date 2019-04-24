@@ -308,29 +308,28 @@ function ajaxProteinSearchSuccess() {
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
-    var sequences = null;
+    var sequences;
     if (input_sequence) {
         sequences = {
             "type": "exact",
             "aa_sequence": input_sequence
         }
     }
-    // if (input_sequence != "") {
-    //     sequences.type = input_sequence.type;
-    //     sequences.aa_sequence = input_sequence.aa_sequence;
-    // }
-    var glycans = {};
+  
+    var glycans;
     if (input_glycan) {
         glycans = {
             relation: input_relation,
             glytoucan_ac: input_glycan
         }
     }
-    var organisms ={};
+    var organism;
     if (input_organism.id != "0") {
-        organisms.id = input_organism.id;
-        organisms.name = input_organism.name;
+        organism = {"id":0,"name":"All"};
+        organism.id = input_organism.id;
+        organism.name = input_organism.name;
     }
+   
     var formjson = $.extend({}, {
         "operation": "AND",
         query_type: input_query_type,
@@ -338,16 +337,16 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "min": parseInt(mass_min),
             "max": parseInt(mass_max)
         },
-
         sequence: sequences ?sequences:undefined,
-        organism: organisms ?organisms:undefined,
+        organism: {"id":input_organism.id,"name":input_organism.name},
+        // organism: organism ?organism:undefined,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,
         protein_name: input_protein_name? input_protein_name: undefined,
         gene_name: input_gene_name?input_gene_name: undefined,
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
         uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined,
         glycan: glycans?glycans: undefined,
-        glycosylated_aa: input_glycosylated_aa,
+        glycosylated_aa: input_glycosylated_aa?input_glycosylated_aa:undefined,
         glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
     });
     return formjson;
