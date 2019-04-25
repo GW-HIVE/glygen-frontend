@@ -1,10 +1,7 @@
 //Tatiana Williamson
 // date: April 2019
 
-function donutChart(data) {
-//	d3.json("data/donut.json", function (error, data) {
-//		if (error) throw error;
-
+function donutChart(dummy, data, id) {
 		var text = "",
 			widthD = 350,
 			heightD = 350,
@@ -49,8 +46,6 @@ function donutChart(data) {
 			.attr("class", "arc")
 			.on("mouseover", function(d) {
 				let group = d3.select(this)
-//				.style("cursor", "pointer")
-//				.style("fill", "black")
 				.append("g")
 				.attr("class", "text-group")
 
@@ -80,7 +75,6 @@ function donutChart(data) {
             	.duration('50')
             	.attr('opacity', '.65')     
 				.style("cursor", "pointer");
-//				.style("fill", "#888");
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).transition()
@@ -98,8 +92,6 @@ function donutChart(data) {
 			.attr("class", "arc")
 			.on("mouseover", function(d) {
 				let group2 = d3.select(this)
-//				.style("cursor", "pointer")
-//				.style("fill", "black")
 				.append("g")
 				.attr("class", "text-group")
 
@@ -141,3 +133,63 @@ function donutChart(data) {
 			.each(function(d, i) { this._current = i; });
 
 	}
+
+
+function pieChart(dummy, data, id) {
+	var text = "";
+	var width = 350;
+	var height = 350;
+	var thickness = 40;
+	var duration = 750;
+	
+	var radius = Math.min(width, height) / 2;
+	
+	var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+	var svgP = d3.select("#pie_chart")
+		.append('svg')
+		.attr('class', 'piePie')
+		.attr('width', width)
+		.attr('height', height);
+
+	var g = svgP.append('g')
+		.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+
+	var arc = d3.arc()
+		.innerRadius(0)
+		.outerRadius(radius);
+
+	var pie = d3.pie()
+		.value(function (d) {
+			return d.size;
+		})
+		.sort(null);
+
+	var arcLabel = d3.arc().innerRadius(radius).outerRadius(radius);
+	
+	var path = g.selectAll('.piePie')
+		.data(pie(data.pie_motif))
+		.enter()
+		.append('g')
+		.attr('class', 'piePie')
+		.style('stroke', 'white')
+		.on("mouseover", function(d) {
+//      		d3.selectAll('.piePie')
+
+      		d3.select(this) 
+        	.attr('opacity', '.65') 
+			.style("cursor", "pointer"); 
+			
+    	})
+		.on("mouseout", function(d) {           
+			d3.selectAll('.piePie')
+			.attr('opacity', '1') 
+			.style("cursor", "none");
+			
+    	})
+		.append('path')
+		.attr('d', arc)
+		.attr('fill', (d, i) => color(i))
+			.append("title")
+			.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
+}

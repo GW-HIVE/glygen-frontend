@@ -153,116 +153,119 @@ function focusOn(d = {
 	}
 }
 
-//--------------------
-//      Venn Diagram
-//----------------------
+	//--------------------
+	//      Venn Diagram
+	//----------------------
 
-var chart = venn.VennDiagram()
-	.width(400)
-	.height(400);
+	var chart = venn.VennDiagram()
+		.width(400)
+		.height(400);
 
-var div = d3.select("#venn")
-div.datum(jsonData.protein_venn).call(chart);
+	var div = d3.select("#venn")
+	div.datum(jsonData.protein_venn).call(chart);
 
-var tooltip = d3.select("body").append("div")
-	.attr("class", "venntooltip");
+	var tooltip = d3.select("body").append("div")
+		.attr("class", "venntooltip");
 
-div.selectAll("path")
-	.style("stroke-opacity", 0)
-	.style("stroke", "#fff")
-	.style("stroke-width", 3)
+	div.selectAll("path")
+		.style("stroke-opacity", 0)
+		.style("stroke", "#fff")
+		.style("stroke-width", 3)
 
-div.selectAll("g")
-	.on("mouseover", function (d, i) {
-		// sort all the areas relative to the current item
-		venn.sortAreas(div, d);
+	div.selectAll("g")
+		.on("mouseover", function (d, i) {
+			// sort all the areas relative to the current item
+			venn.sortAreas(div, d);
 
-		// Display a tooltip with the current size
-		tooltip.transition().duration(400).style("opacity", .9);
-		tooltip.text(d.size + '\n' + d.tooltipname);
+			// Display a tooltip with the current size
+			tooltip.transition().duration(400).style("opacity", .9);
+			tooltip.text(d.size + '\n' + d.tooltipname);
 
-		// highlight the current path
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-			.style("stroke-opacity", 1);
-	})
+			// highlight the current path
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+				.style("stroke-opacity", 1);
+		})
 
-	.on("mousemove", function () {
-		tooltip.style("left", (d3.event.pageX) + "px")
-			.style("top", (d3.event.pageY - 28) + "px");
-	})
+		.on("mousemove", function () {
+			tooltip.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
 
-	.on("mouseout", function (d, i) {
-		tooltip.transition().duration(400).style("opacity", 0);
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-			.style("stroke-opacity", 0);
-	});
-	 
-//-----------------------------
-//    Human & Mouse Glycans Venn Diagram
-//-----------------------------
+		.on("mouseout", function (d, i) {
+			tooltip.transition().duration(400).style("opacity", 0);
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+				.style("stroke-opacity", 0);
+		});
 
-var glycan_homo_mus = venn.VennDiagram()
-	.width(400)
-	.height(400);
+	//-----------------------------
+	//    Human & Mouse Glycans Venn Diagram
+	//-----------------------------
 
-var div_homo_mus = d3.select("#venn_glycans_homo_mus")
-div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);
+	var glycan_homo_mus = venn.VennDiagram()
+		.width(400)
+		.height(400);
 
-var tooltip = d3.select("body").append("div_mus")
-	.attr("class", "venntooltip");
+	var div_homo_mus = d3.select("#venn_glycans_homo_mus")
+	div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);
 
-div_homo_mus.selectAll("path")
-	.style("stroke-opacity", 0)
-	.style("stroke", "#fff")
-	.style("stroke-width", 3)
+	var tooltip = d3.select("body").append("div_mus")
+		.attr("class", "venntooltip");
 
-div_homo_mus.selectAll("g")
-	.on("mouseover", function (d, i) {
-		// sort all the areas relative to the current item
-		venn.sortAreas(div, d);
+	div_homo_mus.selectAll("path")
+		.style("stroke-opacity", 0)
+		.style("stroke", "#fff")
+		.style("stroke-width", 3)
 
-		// Display a tooltip with the current size
-		tooltip.transition().duration(400).style("opacity", .9);
-		tooltip.text(d.size, d.name);
+	div_homo_mus.selectAll("g")
+		.on("mouseover", function (d, i) {
+			// sort all the areas relative to the current item
+			venn.sortAreas(div, d);
 
-		// highlight the current path
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-			.style("stroke-opacity", 1);
-	})
+			// Display a tooltip with the current size
+			tooltip.transition().duration(400).style("opacity", .9);
+			tooltip.text(d.size, d.name);
 
-	.on("mousemove", function () {
-		tooltip.style("left", (d3.event.pageX) + "px")
-			.style("top", (d3.event.pageY - 28) + "px");
-	})
+			// highlight the current path
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+				.style("stroke-opacity", 1);
+		})
 
-	.on("mouseout", function (d, i) {
-		tooltip.transition().duration(400).style("opacity", 0);
-		var selection = d3.select(this).transition("tooltip").duration(400);
-		selection.select("path")
-			.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-			.style("stroke-opacity", 0);
-	});
-	 
-	
+		.on("mousemove", function () {
+			tooltip.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
 
-//-------------------------------
-//    Donut Chart
-//-------------------------------
+		.on("mouseout", function (d, i) {
+			tooltip.transition().duration(400).style("opacity", 0);
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+				.style("stroke-opacity", 0);
+		});
 
-	var donut = donutChart(jsonData);
+
+
+	//-------------------------------
+	//    Donut Chart
+	//-------------------------------
+
+	var donut = donutChart;
 	d3.select('#donut_chart')
-            .call(donut); // draw chart in div
+		.call(donut, jsonData, "#donut_chart"); // draw chart in div
+	//-------------------------------
+	//    Pie Chart
+	//-------------------------------	
 
-//-------------------------------
-//    Pie Chart
-//-------------------------------	
-	var pie = pieChart(jsonData);
+	var pie = pieChart;
 	d3.select('#pie_chart')
-            .call(pie); // draw chart in div 
+		.call(pie, jsonData, "#pie_chart"); // draw chart in div
+
+
+
 });

@@ -200,5 +200,254 @@
         {"name": "Mouse O-glycans", "size": 195},
         {"name": "Mouse N-glycans", "size": 715},
         {"name": "Mouse Unclassified", "size": 110}
+    ],
+    "pie_motif": [
+		{
+			"name": "Lactosamine motif",
+			"size": 14389
+		},
+		{
+			"name": "N-Glycan core basic",
+			"size": 12326
+		},
+		{
+			"name": "N-Glycan complex",
+			"size": 8365
+		},
+		{
+			"name": "VIM",
+			"size": 3760
+		},
+		{
+			"name": "Lewis X",
+			"size": 3760
+		},
+        {
+			"name": "Blood group H",
+			"size": 2965
+		},
+		{
+			"name": "Neo Lactosamine",
+			"size": 2275
+		},
+		{
+			"name": "Polylactosamine",
+			"size": 2251
+		},
+		{
+			"name": "Galalpha1-3Gal epitope",
+			"size": 2088
+		},
+		{
+			"name": "O-Glycan core 1 fuzzy",
+			"size": 2028
+		},
+        {
+			"name": "LacDiNAc",
+			"size": 1323
+		},
+		{
+			"name": "O-Glycan core 6 Fuzzy",
+			"size": 1202
+		},
+		{
+			"name": "Sialyl Lewis X",
+			"size": 1103
+		},
+		{
+			"name": "N-Glycan high mannose",
+			"size": 1100
+		},
+		{
+			"name": "O-Glycan core 2 fuzzy",
+			"size": 928
+		},
+        {
+			"name": "O-Glycan core 1",
+			"size": 804
+		},
+		{
+			"name": "N-Glycan hybrid",
+			"size": 677
+		},
+		{
+			"name": "Blood group A",
+			"size": 578
+		},
+		{
+			"name": "Glycosphingolipid Neo-lacto series",
+			"size": 533
+		},
+		{
+			"name": "Lewis Y",
+			"size": 526
+		},
+        {
+			"name": "Lewis A",
+			"size": 502
+		},
+		{
+			"name": "O-Glycan core 3 fuzzy",
+			"size": 495
+		},
+		{
+			"name": "O-Glycan core 6",
+			"size": 470
+		},
+		{
+			"name": "O-Glycan core 2",
+			"size": 367
+		},
+		{
+			"name": "Glycosphingolipid Lacto series",
+			"size": 298
+		},
+        {
+			"name": "Blood group B",
+			"size": 212
+		},
+		{
+			"name": "O-Glycan core 3",
+			"size": 205
+		},
+		{
+			"name": "Glycosphingolipid Ganglio series",
+			"size": 194
+		},
+		{
+			"name": "N-Glycan truncated motif. First GlcpNAC cut off",
+			"size": 169
+		},
+		{
+			"name": "O-Glycan core 4 fuzzy",
+			"size": 168
+		},
+        {
+			"name": "Lewis B",
+			"size": 164
+		},
+		{
+			"name": "Pk-Antigen",
+			"size": 160
+		},
+		{
+			"name": "Lewis C",
+			"size": 103
+		},
+		{
+			"name": "Beta-glucan",
+			"size": 99
+		},
+		{
+			"name": "Sialyl Lewis A",
+			"size": 96
+		},
+        {
+			"name": "O-Glycan core 5 fuzzy",
+			"size": 84
+		},
+		{
+			"name": "Keratansulfate",
+			"size": 75
+		},
+		{
+			"name": "Hyluronan",
+			"size": 68
+		},
+		{
+			"name": "Glycosphingolipid Mollu series",
+			"size": 67
+		},
+		{
+			"name": "O-Glycan core 4",
+			"size": 65
+		},
+        {
+			"name": "P-Antigen",
+			"size": 50
+		},
+		{
+			"name": "Glycosphingolipid Gala series",
+			"size": 33
+		},
+		{
+			"name": "Cellulose like Glc(1-4)n",
+			"size": 33
+		},
+		{
+			"name": "Glycosphingolipid Arthro series",
+			"size": 24
+		},
+        {
+			"name": "O-Glycan core 5",
+			"size": 24
+		},
+		{
+			"name": "Chondroitin 4S",
+			"size": 24
+		},
+		{
+			"name": "GPI anchor core",
+			"size": 19
+		},
+		{
+			"name": "Glycosphingolipid Isoglobo series",
+			"size": 16
+		},
+		{
+			"name": "Lewis D",
+			"size": 16
+		},
+        {
+			"name": "Glycosphingolipid Globo series",
+			"size": 7
+		},
+		{
+			"name": "SDA",
+			"size": 7
+		},
+		{
+			"name": "Glycosphingolipid Muco series",
+			"size": 6
+		},
+		{
+			"name": "O-Glycan core 7 fuzzy",
+			"size": 6
+		},
+		{
+			"name": "O-Glycan core 7",
+			"size": 2
+		},
+        {
+			"name": "Heparin",
+			"size": 2
+		},
+		{
+			"name": "Peptidoglycan",
+			"size": 1
+		},
+		{
+			"name": "LPS core",
+			"size": 1
+		},
+		{
+			"name": "P1-Antigen",
+			"size": 1
+		},
+		{
+			"name": "Forssmann",
+			"size": 1
+		},
+        {
+			"name": "CAD",
+			"size": 1
+		},
+		{
+			"name": "Dermatansulfate",
+			"size": 1
+		}
+        
     ]
+    
+    
 }

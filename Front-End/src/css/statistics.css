@@ -154,9 +154,12 @@ polyline {
 }
 /*-------------------*/
 
+
+/*
 .pie {
   margin: 20px;
 }
+*/
 
 .pie text {
   font-family: "Verdana";
@@ -171,6 +174,20 @@ polyline {
   font-size: 3em;
 }
 
+.piePie text {
+    font-family: "Verdana";
+    font: 16px;
+}
+
+.piePie path {
+    stroke: #ffffff;
+}
+
+.legend {
+  float: left;
+  font-family: "Verdana";
+  font-size: .7em;
+}
 /*------------------*/
 
 
