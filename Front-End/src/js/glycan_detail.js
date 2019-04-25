@@ -221,22 +221,6 @@ function ajaxSuccess(data) {
 }
 
 /**
- * @param {data} the callback function to GWU service if fails
- * Returns the GWU services fails.
- */
-
-function ajaxFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
-    displayErrorByCode(errorMessage);
-    activityTracker("error", glytoucan_ac, err + ": " + errorMessage);
-    $('#loading_image').fadeOut();
-    showJsError = false;
-}
-
-/**
  * @param {id} the LoadData function to configure and start the request to GWU service
  * Returns the GWU services.
  */
@@ -297,6 +281,7 @@ function getParameterByName(name, url) {
 
 $(document).ready(function () {
     glytoucan_ac = getParameterByName('glytoucan_ac');
+    id = glytoucan_ac;
     document.title = glytoucan_ac + " Detail - glygen"; //updates title with the glycan ID
     LoadData(glytoucan_ac);
     updateBreadcrumbLinks();

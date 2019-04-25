@@ -16,6 +16,7 @@ var term = '';
  */
 $(document).ready(function () {
     term = getParameterByName('search_query');
+    id = term;
     $('#display_search_term').text(term);
     loadResult();
 });
@@ -40,24 +41,6 @@ function ajaxSuccess(result) {
 
     $('#loading_image').fadeOut();
     activityTracker("user", term, "successful search");
-}
-
-/**
- * This is the failure handling function for the ajax call.
- * @param {*} jqXHR 
- * @param {*} textStatus 
- * @param {*} errorThrown 
- */
-function ajaxFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
-    displayErrorByCode(errorMessage);
-    activityTracker("error", term, "error: " + errorMessage);
-
-    $('#loading_image').fadeOut();
-    showJsError = false;
 }
 
 /**

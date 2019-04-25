@@ -12,7 +12,6 @@ String.prototype.trunc = String.prototype.trunc ||
     function (n) {
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
-var id = '';
 var page = 1;
 var sort = 'protein_name_long';
 var dir = 'desc'
@@ -129,22 +128,6 @@ function ajaxListSuccess(data) {
         activityTracker("user", id, "successful response (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
     updateBreadcrumbLinks();
-}
-
-/**
- * ajaxFailure is the callback function when ajax to GWU service fails
- * @param {string} jqXHR getting the appropriate error message 
- * @param {string} textStatus getting the appropriate error message 
- * @param {string} errorThrown Displays error message
- */
-function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
-    displayErrorByCode(errorMessage);
-    activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-    showJsError = false;
 }
 
 /**

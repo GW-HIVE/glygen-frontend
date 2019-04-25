@@ -1,10 +1,10 @@
 /**
  * @author: Gaurav Agarwal
  * @description: assigns ID and tracks user activity.
- * @modified: Pradeep Kumar on 10 May 2018
- * @update: July 5, 2018 - Gaurav Agarwal - Anonymous user logging for those users who opt out.
- * @update: July 16, 2018 - Gaurav Agarwal - javascript errors and exception logging
  */
+// @modified: Pradeep Kumar on 10 May 2018
+// @update: July 5, 2018 - Gaurav Agarwal - Anonymous user logging for those users who opt out.
+// @update: July 16, 2018 - Gaurav Agarwal - javascript errors and exception logging
 
 /**
  * This variable is used to make sure that 

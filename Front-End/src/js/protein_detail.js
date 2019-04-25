@@ -845,20 +845,6 @@ function ajaxSuccess(data) {
     updateBreadcrumbLinks();
 }
 
-/**
- * @param {data} the callback function to logging service on failure
- * Returns the GWU services fails.
- */
-function ajaxFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
-    displayErrorByCode(errorMessage);
-    activityTracker("error", uniprot_canonical_ac, err + ": " + errorMessage);
-    $('#loading_image').fadeOut();
-    showJsError = false;
-}
 
 /**
  * @param {id} the LoadData function to configure and start the request to GWU service
@@ -937,6 +923,7 @@ function checkUncheck(type, element) {
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
+    id = uniprot_canonical_ac;
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
 

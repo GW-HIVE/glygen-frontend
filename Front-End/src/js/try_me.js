@@ -10,7 +10,8 @@ function tryMeAjaxFailure(jqXHR, textStatus, errorThrown) {
     showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorMessage = JSON.parse(jqXHR.responseText).error_list[0].error_code || err;
+    var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+    var errorMessage = errorCode || err;
     displayErrorByCode(errorMessage);
     activityTracker("error", id, question+": "+err + ": " + errorMessage);
     $('#loading_image').fadeOut();

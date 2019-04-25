@@ -560,7 +560,7 @@ function searchGlycanSimple() {
         url: getWsUrl("glycan_search_simple"),
         data: json,
         //timeout: getTimeout("search_simple_glycan"),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -614,7 +614,7 @@ function LoadDataList(id) {
         method: 'POST',
         timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
 
     // make the server call
@@ -648,17 +648,6 @@ function ajaxListSuccess(data) {
         }
         activityTracker("user", id, "Search modification initiated");
     }
-}
-
-/// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-    // $('#loading_image').fadeOut();
-    showJsError = false;
 }
 /* ----------------------
  End-Prepopulating search results after clicking modify button on glycan list summary section

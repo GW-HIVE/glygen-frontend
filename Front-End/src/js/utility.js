@@ -3,6 +3,9 @@
 // @update: Aug 27, 2018 - Gaurav Agarwal - function to return ajax timeout values and ajax error-failure handling functions.
 // @added: Oct 19, 2018 - Gaurav Agarwal - data download function.
 
+/** page ID, mainly used to be passed to the ajaxFailure function */
+var id = null;
+
 /**
  * function addCommas is a regular expression is used on nStr to add the commas
  * @param {integer} nstr gets divide
@@ -26,7 +29,7 @@ function addCommas(nStr) {
  * function returns current browser language
  * @returns {string} String containing browser language
  */
-function getLanguage() {   
+function getLanguage() {
     return navigator.language || 'en-US';
 }
 
@@ -216,18 +219,18 @@ function getErrorMessage(errorCode) {
  */
 function displayError(message, title) {
     var pagePath = window.location.pathname;
-    if (title=="No Results Found") {
+    if (title == "No Results Found") {
         $(".alert").show();
-        $('html, body').animate({scrollTop:0}, 'slow');
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
     else {
         if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
-        // for all list pages, if any error occurs, it will go back to the previous page.
-        alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);
-    } else {
-        alertify.alert(title, message).set('modal', false);
+            // for all list pages, if any error occurs, it will go back to the previous page.
+            alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);
+        } else {
+            alertify.alert(title, message).set('modal', false);
         }
-    }    
+    }
 }
 
 function displayErrorByCode(errorCode) {
@@ -358,22 +361,41 @@ function searchInitFailure(jqXHR, textStatus, errorThrown) {
 }
 
 /**
- * displays and logs appropriate search WS error message.
+ * Displays and logs appropriate WS error message.
+ * Common error handling method.
  * @param {*} jqXHR
  * @param {*} textStatus
  * @param {*} errorThrown
  */
-function ajaxSearchFailure(jqXHR, textStatus, errorThrown) {
+function ajaxFailure(jqXHR, textStatus, errorThrown) {
     showJsError = true;
     // getting the appropriate error message from this function in utility.js file
     var err = decideAjaxError(jqXHR.status, textStatus);
     var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
     var errorMessage = errorCode || err;
     displayErrorByCode(errorMessage);
-    activityTracker("error", null, err + ": " + errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage);
     $('#loading_image').fadeOut();
-    
+
     // if the window.onerror is not triggered then explicitly flip the boolean variable.
+    showJsError = false;
+}
+
+/**
+ * Displays and logs appropriate WS error message.
+ * Common error handling method for LIST pages.
+ * @param {*} jqXHR
+ * @param {*} textStatus
+ * @param {*} errorThrown
+ */
+function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+    showJsError = true;
+    // getting the appropriate error message from this function in utility.js file
+    var err = decideAjaxError(jqXHR.status, textStatus);
+    var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+    var errorMessage = errorCode || err;
+    displayErrorByCode(errorMessage);
+    activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     showJsError = false;
 }
 
@@ -391,7 +413,7 @@ function decideAjaxError(jqStatus, textStatus) {
     // else 
     if (jqStatus === 0 || jqStatus === 404 || jqStatus === 500) {
         err = jqStatus;
-    } 
+    }
     // else {
     //     err = textStatus;
     // }
@@ -471,11 +493,11 @@ function getDateMMDDYYYY(date) {
         "Aug", "Sep", "Oct",
         "Nov", "Dec"
     ];
-    
+
     var day = date.slice(8, 10);
     var monthIndex = parseInt(date.slice(5, 7)) - 1;
     var year = date.slice(0, 4);
-    
+
     return day + '/' + monthNames[monthIndex] + '/' + year;
 }
 
@@ -517,7 +539,7 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
     });
 }
 // for Data and SPARQL link in header page
-$(function() {
+$(function () {
     $("#a_data").attr('href', ws_base_data);
     $("#a_sparql").attr('href', ws_base_sparql);
 });

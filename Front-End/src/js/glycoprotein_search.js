@@ -272,7 +272,7 @@ function ajaxProteinSearchSuccess() {
         url: getWsUrl("search_protein"),
         data: json,
         timeout: getTimeout("search_protein"),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
 
         success: function (results) {
             if (results.error_code) {
@@ -495,7 +495,7 @@ function searchProteinSimple() {
         url: getWsUrl("protein_search_simple"),
         data: json,
         //timeout: getTimeout("search_simple_protein"),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code);
@@ -543,7 +543,7 @@ function LoadDataList(id) {
         method: 'POST',
         timeout: getTimeout("list_protein"),
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
     // make the server call
     $.ajax(ajaxConfig);
@@ -575,17 +575,6 @@ function ajaxListSuccess(data) {
         }
         activityTracker("user", id, "Search modification initiated");
     }
-}
-
-/// ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    displayErrorByCode(err);
-    activityTracker("error", id, err + ": " + errorThrown + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-    // $('#loading_image').fadeOut();
-    showJsError = false;
 }
 
 /* ----------------------

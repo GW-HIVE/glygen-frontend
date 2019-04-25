@@ -34,7 +34,7 @@ function bioEnzyme() {
     $.ajax({
         type: 'POST',
         url: getWsUrl("search_bioenzyme", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
@@ -69,7 +69,7 @@ function glycanSite() {
     $.ajax({
         type: 'POST',
         url: getWsUrl("search_glycansite", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_2";
@@ -104,7 +104,7 @@ function glycanGene() {
     $.ajax({
         type: 'POST',
         url: getWsUrl("search_glycangene", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.list_id) {
                 window.location = './locus_list.html?id=' + results.list_id + "&question=QUESTION_3";
@@ -139,7 +139,7 @@ function proteinOrthologues() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_proteinorthologues", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.list_id) {
                 window.location = './protein_orthologus.html?id=' + results.list_id + "&question=QUESTION_4";
@@ -174,7 +174,7 @@ function proteinFunction() {
     $.ajax({
         type: 'post',
         url: getWsUrl("protein_detail", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode("Invalid ID");
@@ -209,7 +209,7 @@ function glycanEnzyme() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycanenzyme", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -258,7 +258,7 @@ function glycosylTransferases() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycosyltransferases", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -298,7 +298,7 @@ function glycoHydrolases() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycohydrolases", id),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -345,7 +345,7 @@ function glycoProteins() {
     $.ajax({
         type: 'post',
         url: getWsUrl("search_glycoproteins", id, id1),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
@@ -389,7 +389,7 @@ function glycosyTtransferasesDisease() {
         type: 'POST',
         url: getWsUrl("search_disease"),
         data: json,
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.list_id) {
                 window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_10";
