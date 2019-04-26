@@ -494,10 +494,26 @@ select {
     margin-left: 0px;
 }
 
+.ui-autocomplete {
+    padding-left: 6px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: #555;
+}
+
+.chosen-drop {
+    padding-left: 6px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: #555;
+}
+
 .chosen-container-multi .chosen-choices {
     display: block;
     height: 34px;
-    padding: 6px 12px;
+    padding: 6px 12px 0px 8px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
