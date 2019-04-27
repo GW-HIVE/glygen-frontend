@@ -295,7 +295,7 @@ function updateBreadcrumbLinks() {
     const listID = getParameterByName("listID") || "";
     const globalSearchTerm = getParameterByName("gs") || "";
     if (globalSearchTerm) {
-        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').text("General Search");
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
         $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
     } else {

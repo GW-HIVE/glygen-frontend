@@ -249,7 +249,7 @@ function downloadPrompt() {
  */
 function updateBreadcrumbLinks() {
     if (globalSearchTerm) {
-        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').text("General Search");
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
     } else {
         $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + id);

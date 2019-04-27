@@ -940,7 +940,7 @@ function updateBreadcrumbLinks() {
     var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
 
     if (globalSearchTerm) {
-        $('#breadcrumb-search').text("Global Search");
+        $('#breadcrumb-search').text("General Search");
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
         $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID + "&gs=" + globalSearchTerm);
     } else {
