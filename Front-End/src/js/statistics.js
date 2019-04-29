@@ -266,6 +266,12 @@ function focusOn(d = {
 	d3.select('#pie_chart')
 		.call(pie, jsonData, "#pie_chart"); // draw chart in div
 
-
+	//-----------------------------------
+	//	Bar Chart
+	//--------------------------------
+	
+	var bar = barChart;
+	d3.select('#bar_chart')
+		.call(bar, jsonData, "#bar_chart"); // draw chart in div
 
 });

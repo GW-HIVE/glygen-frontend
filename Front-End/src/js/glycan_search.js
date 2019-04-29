@@ -310,7 +310,7 @@ function submitvalues() {
         url: getWsUrl("glycan_search"),
         data: json,
         timeout: getTimeout("search_glycan"),
-        error: ajaxSearchFailure,
+        error: ajaxFailure,
         success: function (results) {
             if (results.error_code) {
                 displayErrorByCode(results.error_code, results.field);

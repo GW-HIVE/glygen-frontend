@@ -115,7 +115,7 @@ body5 {
 /*----End of Venn Diagram-----*/
 
 /*----------------------------
-    Donut chart
+    Donut and pie charts
 ------------------------------*/
 
 /* Add shadow effect to chart. If you don't like it, get rid of it. */
@@ -124,26 +124,6 @@ svg {
     filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.25) );
 }
 
-/*Styling for the lines connecting the labels to the slices*/
-polyline {
-    opacity: .3;
-    stroke: black;
-    stroke-width: 2px;
-    fill: none;
-}
-
-/* Make the percentage on the text labels bold*/
-.labelName tspan {
-    font-style: normal;
-    font-weight: 700;
-}
-
-/* In biology we generally italicise species names. */
-.labelName {
-    font-size: 0.9em;
-    font-style: italic;
-}
-/*----------------------*/
 .arc text {
     font: 16px Arial, Georgia, sans-serif;
     text-anchor: middle;
@@ -152,7 +132,6 @@ polyline {
 .arc path {
     stroke: #ffffff;
 }
-/*-------------------*/
 
 
 /*
@@ -183,15 +162,17 @@ polyline {
     stroke: #ffffff;
 }
 
-.legend {
-  float: left;
-  font-family: "Verdana";
-  font-size: .7em;
+/*----------------------
+    Bar graph
+------------------------*/
+
+.bar {
+    fill: #115D8C;
 }
-/*------------------*/
-
-
-
+.bar:hover {
+    fill: steelblue;
+  }
+/*---------End-----------------*/
 
 /*Bar-Chart*/
 .bar-chart, .bar-chart-scale {

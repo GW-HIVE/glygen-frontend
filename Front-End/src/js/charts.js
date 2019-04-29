@@ -146,7 +146,7 @@ function pieChart(dummy, data, id) {
 	
 	var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-	var svgP = d3.select("#pie_chart")
+	var svgP = d3.select(id)
 		.append('svg')
 		.attr('class', 'piePie')
 		.attr('width', width)
@@ -192,4 +192,78 @@ function pieChart(dummy, data, id) {
 		.attr('fill', (d, i) => color(i))
 			.append("title")
 			.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
+}
+
+function barChart(dummy, data, id){
+	// set the dimensions and margins of the graph
+	var margin = {top: 20, right: 20, bottom: 80, left: 20},
+		width = 960 - margin.left - margin.right,
+		height = 500 - margin.top - margin.bottom;
+
+	// set the ranges
+	var x = d3.scaleBand()
+			  .range([0, width])
+			  .padding(0.1);
+	var y = d3.scaleLinear()
+			  .range([height, 0]);
+
+	// append the svg object to the body of the page
+	// append a 'group' element to 'svg'
+	// moves the 'group' element to the top left margin
+	var svg = d3.select(id)
+			.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+	  		.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// get the data
+//	d3.csv("sales.csv", function(error, data) {
+//	  if (error) throw error;
+
+	
+		//convert bar_mass_ranges to chart compatible format
+	var bmr = data.bar_mass_ranges;
+	var barData = [];
+	var currentRangeStart = 0;
+	var skipTickLabels = 3;
+	for(var i=0; i<bmr.data.length; i++) {
+		var label = currentRangeStart + "-" + (currentRangeStart + bmr.stepsize);
+		barData.push({"name": label, "size": bmr.data[i]});
+		currentRangeStart += bmr.stepsize;
+	}
+	// format the data
+	bmr.data.forEach(function(d) {
+	d.size = +d.size;
+	});
+
+	// Scale the range of the data in the domains
+	x.domain(barData.map(function(d) { return d.name; }));
+	
+	y.domain([0, d3.max(barData, function(d) { return d.size; })]);
+	  // append the rectangles for the bar chart
+	  svg.selectAll(".bar")
+		  .data(barData)
+		.enter().append("rect")
+		  .attr("class", "bar")
+		  .attr("x", function(d) { return x(d.name); })
+		  .attr("width", x.bandwidth())
+		  .attr("y", function(d) { return y(d.size); })
+		  .attr("height", function(d) { return height - y(d.size); });
+
+	  // add the x Axis	
+		svg.append("g")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(x).tickFormat(function(t, i) {return i%(skipTickLabels+1)==0 || i==barData.length-1? t: ""}))
+			.selectAll("text")
+				.style("text-anchor", "end")
+				.attr("dx", "-.8em")
+				.attr("dy", "-6px")
+				.attr("transform", "rotate(-90)" );
+		
+	  // add the y Axis
+	  svg.append("g")
+		  .call(d3.axisLeft(y));
+
+//	})
 }
