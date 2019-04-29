@@ -196,10 +196,14 @@ function pieChart(dummy, data, id) {
 
 function barChart(dummy, data, id){
 	// set the dimensions and margins of the graph
-	var margin = {top: 20, right: 20, bottom: 80, left: 20},
+	var margin = {top: 20, right: 20, bottom: 80, left: 30},
 		width = 960 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
+	var tooltip = d3.select("body")
+			.append("div")
+			.attr("class", "toolTip");
+	
 	// set the ranges
 	var x = d3.scaleBand()
 			  .range([0, width])
@@ -217,53 +221,70 @@ function barChart(dummy, data, id){
 	  		.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	// get the data
-//	d3.csv("sales.csv", function(error, data) {
-//	  if (error) throw error;
-
-	
-		//convert bar_mass_ranges to chart compatible format
+	//convert bar_mass_ranges to chart compatible format
 	var bmr = data.bar_mass_ranges;
 	var barData = [];
 	var currentRangeStart = 0;
-	var skipTickLabels = 3;
+	var skipTickLabels = 4;
 	for(var i=0; i<bmr.data.length; i++) {
-		var label = currentRangeStart + "-" + (currentRangeStart + bmr.stepsize);
+		var label = currentRangeStart + bmr.stepsize;
 		barData.push({"name": label, "size": bmr.data[i]});
 		currentRangeStart += bmr.stepsize;
 	}
 	// format the data
 	bmr.data.forEach(function(d) {
-	d.size = +d.size;
+		d.size = +d.size;
 	});
 
 	// Scale the range of the data in the domains
 	x.domain(barData.map(function(d) { return d.name; }));
 	
 	y.domain([0, d3.max(barData, function(d) { return d.size; })]);
-	  // append the rectangles for the bar chart
-	  svg.selectAll(".bar")
-		  .data(barData)
-		.enter().append("rect")
-		  .attr("class", "bar")
-		  .attr("x", function(d) { return x(d.name); })
-		  .attr("width", x.bandwidth())
-		  .attr("y", function(d) { return y(d.size); })
-		  .attr("height", function(d) { return height - y(d.size); });
+	 	// append the rectangles for the bar chart
+	 	svg.selectAll(".bar")
+			.data(barData)
+			.enter().append("rect")
+				.attr("class", "bar")
+				.attr("x", function(d) { return x(d.name); })
+				.attr("width", x.bandwidth())
+				.attr("y", function(d) { return y(d.size); })
+				.attr("height", function(d) { return height - y(d.size); })
+				.on("mousemove", function(d){
+					tooltip
+					  .style("left", d3.event.pageX - 50 + "px")
+					  .style("top", d3.event.pageY - 70 + "px")
+					  .style("display", "inline-block")
+					  .html("Mass Range:" + " " + (d.name-bmr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + (d.size) + " " +"Glycans");
+        })
+    		.on("mouseout", function(d){ tooltip.style("display", "none");});
 
-	  // add the x Axis	
+		// add the x Axis	
 		svg.append("g")
 			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(x).tickFormat(function(t, i) {return i%(skipTickLabels+1)==0 || i==barData.length-1? t: ""}))
+			.call(d3.axisBottom(x).tickFormat(function(t, i) {return (i+1)%(skipTickLabels+1)==0 || i==barData.length-1? t: ""}))
 			.selectAll("text")
 				.style("text-anchor", "end")
-				.attr("dx", "-.8em")
-				.attr("dy", "-6px")
-				.attr("transform", "rotate(-90)" );
+				.attr("dx", "-8px")
+				.attr("dy", "-1px")
+				.attr("transform", "rotate(-65)" );
 		
-	  // add the y Axis
-	  svg.append("g")
-		  .call(d3.axisLeft(y));
+		// add the y Axis
+		svg.append("g")
+			.call(d3.axisLeft(y));
 
-//	})
+		// add text to y Axis
+		svg.append("text")
+			.attr("transform", "rotate(-90)")
+			.attr("y", 6)
+			.attr("dy", "0.71em")
+			.attr("text-anchor", "end")
+			.text("Frequency");
+	
+		// add text to y Axis
+		svg.append("text")
+			.attr("x", 75)
+			.attr("dx", "0.71em")
+			.attr("dy", "32em")
+			.attr("text-anchor", "end")
+			.text("Mass ranges");
 }
