@@ -267,11 +267,19 @@ function focusOn(d = {
 		.call(pie, jsonData, "#pie_chart"); // draw chart in div
 
 	//-----------------------------------
-	//	Bar Chart
+	//	Bar Chart Mass range
 	//--------------------------------
 	
 	var bar = barChart;
 	d3.select('#bar_chart')
 		.call(bar, jsonData, "#bar_chart"); // draw chart in div
+
+	//-----------------------------------
+	//	Bar Chart Sugar range
+	//--------------------------------
+	
+	var barSugar = barChartSugar;
+	d3.select('#bar_chart_sugar')
+		.call(barSugar, jsonData, "#bar_chart_sugar"); // draw chart in div
 
 });

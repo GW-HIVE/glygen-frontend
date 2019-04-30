@@ -164,7 +164,11 @@ svg {
 }
 .bar:hover {
     fill: steelblue;
-  }
+}
+
+.axis--x path {
+    display: none;
+}
 .toolTip {
   position: absolute;
   display: none;
