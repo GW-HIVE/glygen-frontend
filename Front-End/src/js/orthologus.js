@@ -75,8 +75,6 @@ function ajaxListSuccess(data) {
         buildSummary(data.query, question);
 
         document.title = 'Orthologus-list';
-      
-
         activityTracker("user", id, "successful response " + question + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
@@ -102,7 +100,7 @@ function LoadDataList() {
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
 
 
