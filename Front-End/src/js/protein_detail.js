@@ -571,15 +571,7 @@ function ajaxSuccess(data) {
 
 
 
-        // data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
-        //     return total + current.length;
-        // }, 0);
-        // data.n_link_glycosylation_count = highlight.n_link_glycosylation.reduce(function (total, current) {
-        //     return total + current.length;
-        // }, 0);
-        // data.mutation_count = highlight.mutation.reduce(function (total, current) {
-        //     return total + current.length;
-        // }, 0);
+   
 
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
@@ -593,31 +585,7 @@ function ajaxSuccess(data) {
         } else {
             createHighlightUi(sequenceData, 60);
         }
-        // if (!highlight.o_link_glycosylation.length) {
-        //     $('.highlight-panel-categories [data-type="o_link_glycosylation"] input').attr('disabled', true);
-        // }
-        // if (!highlight.n_link_glycosylation.length) {
-        //     $('.highlight-panel-categories [data-type="n_link_glycosylation"] input').attr('disabled', true);
-        // }
-        // if (!highlight.mutation.length) {
-        //     $('.highlight-panel-categories [data-type="mutation"] input').attr('disabled', true);
-        // }
-
-
-
-        // $container.find('.open-close-button').each(function (i, element) {
-        //     $(element).on('click', function () {
-        //         var $this = $(this);
-        //         var buttonText = $this.text();
-        //         if (buttonText === '+') {
-        //             $this.text('-');
-        //             $this.parent().next().show();
-        //         } else {
-        //             $this.text('+');
-        //             $this.parent().next().hide();
-        //         }
-        //     });
-        // });
+   
 
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
