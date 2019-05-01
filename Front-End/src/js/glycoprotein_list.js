@@ -144,7 +144,7 @@ function LoadDataList(id) {
         data: getListPostData(id, page, sort, dir, limit),
         method: 'POST',
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
 
     // make the server call

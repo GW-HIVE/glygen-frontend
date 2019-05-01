@@ -168,17 +168,17 @@ function ajaxListSuccess(data) {
 }
 
 // ajaxFailure is the callback function when ajax to GWU service fails
-function ajaxListFailure(jqXHR, textStatus, errorThrown) {
-    showJsError = true;
-    // getting the appropriate error message from this function in utility.js file
-    var err = decideAjaxError(jqXHR.status, textStatus);
-    var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
-    var errorMessage = errorCode || err;
-    displayErrorByCode(errorMessage);
-    activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-    // $('#loading_image').fadeOut();
-    showJsError = false;
-}
+// function ajaxListFailure(jqXHR, textStatus, errorThrown) {
+//     showJsError = true;
+//     // getting the appropriate error message from this function in utility.js file
+//     var err = decideAjaxError(jqXHR.status, textStatus);
+//     var errorCode = jqXHR.responseText ? JSON.parse(jqXHR.responseText).error_list[0].error_code : null;
+//     var errorMessage = errorCode || err;
+//     displayErrorByCode(errorMessage);
+//     activityTracker("error", id, err + ": " + errorMessage + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+//     // $('#loading_image').fadeOut();
+//     showJsError = false;
+// }
 
 /**
  * LoadDataList function to configure and start the request to GWU  service
@@ -195,7 +195,7 @@ function LoadDataList() {
         method: 'POST',
         timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
     // make the server call
     $.ajax(ajaxConfig);

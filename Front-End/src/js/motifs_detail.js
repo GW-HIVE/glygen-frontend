@@ -147,7 +147,7 @@ function LoadDataList() {
         method: 'GET',
         timeout: getTimeout("list_glycan"),
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
     // make the server call
     $.ajax(ajaxConfig);

@@ -136,7 +136,7 @@ function LoadDataList() {
         method: 'POST',
         timeout: getTimeout("list_protein"),
         success: ajaxListSuccess,
-        error: ajaxListFailure
+        error: ajaxFailure
     };
 
     // make the server call
