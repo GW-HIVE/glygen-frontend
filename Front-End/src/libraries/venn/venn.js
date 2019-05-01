@@ -1223,7 +1223,7 @@
     function VennDiagram() {
         var width = 600,
             height = 350,
-            padding = 40,
+            padding = 10,
             duration = 1000,
             orientation = Math.PI / 2,
             normalize = true,
@@ -1267,11 +1267,19 @@
 
             // create svg if not already existing
             selection.selectAll("svg").data([circles]).enter().append("svg");
-
+            
+            var margin = {top: 0, right: 0, bottom: 0, left: 0};
             var svg = selection.select("svg")
-                .attr("width", width)
-                .attr("height", height);
-
+                .style('width', '80%')
+//		.attr('width', width)
+//		.attr('height', height);
+			.attr('preserveAspectRatio', 'xMinYMin meet')
+  				.attr('viewBox',
+					'0 0 ' +
+					(width + margin.left + margin.right) +
+					  ' ' +
+					(height + margin.top + margin.bottom)
+					);
             // to properly transition intersection areas, we need the
             // previous circles locations. load from elements
             var previous = {}, hasPrevious = false;

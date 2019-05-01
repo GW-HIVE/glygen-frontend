@@ -30,7 +30,7 @@ body5 {
 
 .slice .main-arc {
     stroke: #fff;
-    stroke-width: 1px;
+/*    stroke-width: 1px;*/
 }
 
 .slice .hidden-arc {
@@ -41,12 +41,9 @@ body5 {
     pointer-events: none;
     dominant-baseline: middle;
     text-anchor: middle;
-    font-size: 18px;
+    font-size: 6px;
 }
 
-.zoomableSunburst {
-    margin: 2% 2% 2% 2%; 
-}
 /*--------------------------
     End Zoomable sunburst
 ---------------------------*/
@@ -57,9 +54,9 @@ body5 {
 #venn {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
-    font-size: 22px;
+/*    font-size: 14px;*/
     margin: 2% 2% 2% 2%;
-/*    position: relative;*/
+    position: relative;
 }
 
 .venntooltip {
@@ -139,11 +136,11 @@ svg {
 }
 
 .pie .name-text{
-  font-size: 1.1em;
+  font-size: .5em;
 }
 
 .pie .value-text{
-  font-size: 3em;
+  font-size: 1.5em;
 }
 
 .piePie text {

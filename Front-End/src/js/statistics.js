@@ -1,9 +1,10 @@
 // @author Tatiana Williamson
 // @createDate March 11, 2019
 
-const width = 400,
-	height = 400,
-	maxRadius = (Math.min(width, height) / 2) - 20;
+const width = 200,
+	height = 200,
+	maxRadius = (Math.min(width, height) / 2) - 20,
+	margin = {top: 10, right: 10, bottom: 10, left: 10};
 
 const formatNumber = d3.format(',d');
 
@@ -41,7 +42,7 @@ const middleArcLine = d => {
 };
 
 const textFits = d => {
-	const CHAR_SPACE = 6;
+	const CHAR_SPACE = 1;
 
 	const deltaAngle = x(d.x1) - x(d.x0);
 	const r = Math.max(0, (y(d.y0) + y(d.y1)) / 2);
@@ -51,8 +52,15 @@ const textFits = d => {
 };
 
 const svg = d3.select('.zoomableSunburst')
-	.style('width', '400')
-	.style('height', '400')
+//	.style('width', '400')
+//	.style('height', '400')
+	.attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			  ' ' +
+			(height + margin.top + margin.bottom)
+			)
 	.attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
 	.on('click', () => focusOn()); // Reset zoom on canvas click
 
@@ -100,7 +108,7 @@ const svg = d3.select('.zoomableSunburst')
 		.text(d => d.data.name)
 		.style('fill', 'none')
 		.style('stroke', '#fff')
-		.style('stroke-width', 5)
+		.style('stroke-width', 2)
 		.style('stroke-linejoin', 'round');
 
 	text.append('textPath')
@@ -158,8 +166,8 @@ function focusOn(d = {
 	//----------------------
 
 	var chart = venn.VennDiagram()
-		.width(400)
-		.height(400);
+		.width(350)
+		.height(350);
 
 	var div = d3.select("#venn")
 	div.datum(jsonData.protein_venn).call(chart);
@@ -206,8 +214,8 @@ function focusOn(d = {
 	//-----------------------------
 
 	var glycan_homo_mus = venn.VennDiagram()
-		.width(400)
-		.height(400);
+		.width(350)
+		.height(350);
 
 	var div_homo_mus = d3.select("#venn_glycans_homo_mus")
 	div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);

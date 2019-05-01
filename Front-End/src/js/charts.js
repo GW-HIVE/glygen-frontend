@@ -3,24 +3,30 @@
 
 function donutChart(dummy, data, id) {
 		var text = "",
-			widthD = 350,
-			heightD = 350,
-			donutWidth = 45,
+			widthD = 150,
+			heightD = 150,
+			donutWidth = 20,
 			duration = 750,
-			margin = {top: 10, right: 10, bottom: 10, left: 10},
+			margin = {top: 0, right: 0, bottom: 0, left: 0},
 			radiusD = Math.min(widthD, heightD) / 2,
 			radiusD2 = radiusD - donutWidth,
 			colorD = d3.scaleOrdinal(d3.schemeCategory10),
-			colorD2 = d3.scaleOrdinal(d3.schemeCategory10),
-			padAngle, // effectively dictates the gap between slices
-        	cornerRadius; // sets how rounded the corners are on each slice
+			colorD2 = d3.scaleOrdinal(d3.schemeCategory10);
 
-		var canvas = d3.select("#donut_chart")
+		var canvas = d3.select(id)
 			.append("svg")
 			.attr('class', 'pie')
-			.attr("width", widthD)
-			.attr("height", heightD);
-
+			.style('width', '80%')
+			.style('margin-bottom', '20px')
+//		.attr('width', width)
+//		.attr('height', height);
+			.attr('preserveAspectRatio', 'xMinYMin meet')
+  				.attr('viewBox',
+					'0 0 ' +
+					(widthD + margin.left + margin.right) +
+					  ' ' +
+					(heightD + margin.top + margin.bottom)
+					);
 		var group = canvas.append("g")
 			.attr('transform', 'translate(' + (widthD / 2) + ',' + (heightD / 2) + ')');
 	
@@ -136,11 +142,11 @@ function donutChart(dummy, data, id) {
 
 
 function pieChart(dummy, data, id) {
-	var text = "";
-	var width = 350;
-	var height = 350;
-	var thickness = 40;
-	var duration = 750;
+	var text = "",
+		width = 150,
+		height = 150,
+		duration = 750,
+		margin = {top: 0, right: 0, bottom: 0, left: 0};
 	
 	var radius = Math.min(width, height) / 2;
 	
@@ -149,8 +155,16 @@ function pieChart(dummy, data, id) {
 	var svgP = d3.select(id)
 		.append('svg')
 		.attr('class', 'piePie')
-		.attr('width', width)
-		.attr('height', height);
+		.style('width', '80%')
+//		.attr('width', width)
+//		.attr('height', height);
+		.attr('preserveAspectRatio', 'xMinYMin meet')
+  				.attr('viewBox',
+					'0 0 ' +
+					(width + margin.left + margin.right) +
+					  ' ' +
+					(height + margin.top + margin.bottom)
+					);
 
 	var g = svgP.append('g')
 		.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
@@ -216,8 +230,15 @@ function barChart(dummy, data, id){
 	// moves the 'group' element to the top left margin
 	var svg = d3.select(id)
 			.append("svg")
-				.attr("width", width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
+//				.attr("width", width + margin.left + margin.right)
+//				.attr("height", height + margin.top + margin.bottom)
+				.attr('preserveAspectRatio', 'xMinYMin meet')
+  				.attr('viewBox',
+					'0 0 ' +
+					(width + margin.left + margin.right) +
+					  ' ' +
+					(height + margin.top + margin.bottom)
+					)
 	  		.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -254,7 +275,7 @@ function barChart(dummy, data, id){
 					  .style("left", d3.event.pageX - 50 + "px")
 					  .style("top", d3.event.pageY - 70 + "px")
 					  .style("display", "inline-block")
-					  .html("Mass Range:" + " " + (d.name-bmr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + (d.size) + " " +"Glycans");
+					  .html("Mass Range:" + " " + (d.name-bmr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + "<br>" + (d.size) + " " +"Glycans");
         })
     		.on("mouseout", function(d){ tooltip.style("display", "none");});
 
@@ -291,7 +312,7 @@ function barChart(dummy, data, id){
 
 function barChartSugar(dummy, data, id){
 	// set the dimensions and margins of the graph
-	var margin = {top: 20, right: 20, bottom: 80, left: 30},
+	var margin = {top: 20, right: 20, bottom: 70, left: 30},
 		width = 960 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 
@@ -311,8 +332,16 @@ function barChartSugar(dummy, data, id){
 	// moves the 'group' element to the top left margin
 	var svg = d3.select(id)
 			.append("svg")
-				.attr("width", width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
+//				.attr("width", width + margin.left + margin.right)
+//				.attr("height", height + margin.top + margin.bottom)
+				
+				.attr('preserveAspectRatio', 'xMinYMin meet')
+  				.attr('viewBox',
+					'0 0 ' +
+					(width + margin.left + margin.right) +
+					  ' ' +
+					(height + margin.top + margin.bottom)
+					)
 	  		.append("g")
 				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
@@ -350,7 +379,7 @@ function barChartSugar(dummy, data, id){
 					  .style("left", d3.event.pageX - 50 + "px")
 					  .style("top", d3.event.pageY - 70 + "px")
 					  .style("display", "inline-block")
-					  .html("Sugar Range:" + " " + (d.name-bsr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + (d.size) + " " +"Glycans");
+					  .html("Sugar Range:" + " " + (d.name-bsr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + "<br>" + (d.size) + " " +"Glycans");
         })
     		.on("mouseout", function(d){ tooltip.style("display", "none");});
 
@@ -360,9 +389,9 @@ function barChartSugar(dummy, data, id){
 			.call(d3.axisBottom(x).tickFormat(function(t, i) {return (i+1)%(skipTickLabels+1)==0 || i==barData.length-1? t: ""}))
 			.selectAll("text")
 				.style("text-anchor", "end")
-				.attr("dx", "-8px")
-				.attr("dy", "-1px")
-				.attr("transform", "rotate(-65)" );
+				.attr("dx", "3px")
+				.attr("dy", "6px");
+				//.attr("transform", "rotate(-65)" );
 		
 		// add the y Axis
 		svg.append("g")
