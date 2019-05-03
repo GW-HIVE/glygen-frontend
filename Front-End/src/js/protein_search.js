@@ -398,7 +398,7 @@ function populateExample() {
             examples = ["P14210-1"];
             break;
         default:
-            examples = ["Deafness", "G17689DH", "Homo sapiens", "hsa:3082", "P14210-1"];
+            examples = ["P14210-1", "G17689DH", "hsa:3082", "Homo sapiens", "Deafness"];
             exampleText += "s";
             break;
     }

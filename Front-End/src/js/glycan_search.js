@@ -480,7 +480,7 @@ function populateExample() {
             examples = ["P14210-1"];
             break;
         default:
-            examples = ["B4GALT1", "G17689DH", "Homo sapiens", "P14210-1"];
+            examples = ["G17689DH", "P14210-1", "B4GALT1", "Homo sapiens"];
             exampleText += "s";
             break;
     }
