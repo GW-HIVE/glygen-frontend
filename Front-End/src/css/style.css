@@ -937,11 +937,15 @@ ____________________________________  */
 }
 
 .dropdown-menu {
-  min-width: 160px;
-  margin-right: 2.2%;
+    min-width: 160px;
+    margin-right: 2.2%;
+    padding: 15px;
+    font-size: 10px;
+    width: auto;
 }
 .gg-download {
-  box-shadow: none !important;
+    box-shadow: none !important;
+    font-size: 12px;
 /*  margin-bottom: 1em;*/
 /*  margin-bottom: -30px;*/
 }
