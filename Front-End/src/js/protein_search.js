@@ -427,7 +427,7 @@ function populateExample() {
 function getPlaceHolder(type) {
     switch (type.toLowerCase()) {
         case "glycan":
-            return "GlyTouCan Accession";
+            return "Glycan Accession";
         case "protein":
             return "UniProtKB Accession";
         case "any":
