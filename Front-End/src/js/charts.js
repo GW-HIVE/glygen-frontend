@@ -50,6 +50,10 @@ function donutChart(dummy, data, id) {
 			.enter()
 			.append("g")
 			.attr("class", "arc")
+			// On click goes to list page
+            .on("click", function(d) {
+                    console.log(d.data.size); //considering dot has a title attribute
+                })
 			.on("mouseover", function(d) {
 				let group = d3.select(this)
 				.append("g")
@@ -96,6 +100,10 @@ function donutChart(dummy, data, id) {
 			.enter()
 			.append("g")
 			.attr("class", "arc")
+            // On click goes to list page
+            .on("click", function(d) {
+                console.log(d.data.size); //considering dot has a title attribute
+            })
 			.on("mouseover", function(d) {
 				let group2 = d3.select(this)
 				.append("g")
@@ -187,6 +195,10 @@ function pieChart(dummy, data, id) {
 		.append('g')
 		.attr('class', 'piePie')
 		.style('stroke', 'white')
+        // On click goes to list page
+        .on("click", function(d) {
+            console.log(d.data.size); //considering dot has a title attribute
+        })
 		.on("mouseover", function(d) {
 //      		d3.selectAll('.piePie')
 
@@ -270,6 +282,10 @@ function barChart(dummy, data, id){
 				.attr("width", x.bandwidth())
 				.attr("y", function(d) { return y(d.size); })
 				.attr("height", function(d) { return height - y(d.size); })
+                // On click goes to list page
+				.on("click", function(d) {
+				    console.log(d.size); //considering dot has a title attribute
+				})
 				.on("mousemove", function(d){
 					tooltip
 					  .style("left", d3.event.pageX - 50 + "px")
@@ -374,15 +390,19 @@ function barChartSugar(dummy, data, id){
 				.attr("width", x.bandwidth())
 				.attr("y", function(d) { return y(d.size); })
 				.attr("height", function(d) { return height - y(d.size); })
+				// On click goes to list page
+				.on("click", function(d) {
+				    console.log(d.size); //considering dot has a title attribute
+				})
 				.on("mousemove", function(d){
 					tooltip
 					  .style("left", d3.event.pageX - 50 + "px")
 					  .style("top", d3.event.pageY - 70 + "px")
 					  .style("display", "inline-block")
 					  .html("Sugar Range:" + " " + (d.name-bsr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + "<br>" + (d.size) + " " +"Glycans");
-        })
-    		.on("mouseout", function(d){ tooltip.style("display", "none");});
-
+        		})
+    			.on("mouseout", function(d){ tooltip.style("display", "none");});
+				
 		// add the x Axis	
 		svg.append("g")
 			.attr("transform", "translate(0," + height + ")")
@@ -392,7 +412,7 @@ function barChartSugar(dummy, data, id){
 				.attr("dx", "3px")
 				.attr("dy", "6px");
 				//.attr("transform", "rotate(-65)" );
-		
+
 		// add the y Axis
 		svg.append("g")
 			.call(d3.axisLeft(y));
@@ -404,7 +424,7 @@ function barChartSugar(dummy, data, id){
 			.attr("dy", "0.71em")
 			.attr("text-anchor", "end")
 			.text("Frequency");
-	
+
 		// add text to y Axis
 		svg.append("text")
 			.attr("x", 75)
