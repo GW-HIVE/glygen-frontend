@@ -297,10 +297,16 @@ function updateBreadcrumbLinks() {
     if (globalSearchTerm) {
         $('#breadcrumb-search').text("General Search");
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
-        $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
+        if (listID)
+            $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
+        else 
+            $('#li-breadcrumb-list').css('display', 'none');
     } else {
         $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + listID);
-        $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID);
+        if (listID)
+            $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID);
+        else
+            $('#li-breadcrumb-list').css('display', 'none');
     }
 }
 
