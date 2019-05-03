@@ -220,7 +220,7 @@ function focusOn(d = {
 	var div_homo_mus = d3.select("#venn_glycans_homo_mus")
 	div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);
 
-	var tooltip = d3.select("body").append("div_mus")
+	var tooltip = d3.select("body").append("div")
 		.attr("class", "venntooltip");
 
 	div_homo_mus.selectAll("path")
@@ -235,7 +235,7 @@ function focusOn(d = {
 
 			// Display a tooltip with the current size
 			tooltip.transition().duration(400).style("opacity", .9);
-			tooltip.text(d.size, d.name);
+			tooltip.text(d.size + '\n' + d.tooltipname);
 
 			// highlight the current path
 			var selection = d3.select(this).transition("tooltip").duration(400);
@@ -256,8 +256,6 @@ function focusOn(d = {
 				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
 				.style("stroke-opacity", 0);
 		});
-
-
 
 	//-------------------------------
 	//    Donut Chart
@@ -289,5 +287,4 @@ function focusOn(d = {
 	var barSugar = barChartSugar;
 	d3.select('#bar_chart_sugar')
 		.call(barSugar, jsonData, "#bar_chart_sugar"); // draw chart in div
-
 });

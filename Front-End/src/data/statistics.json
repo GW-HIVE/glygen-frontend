@@ -110,6 +110,7 @@
         {
             "sets": [0], 
             "name": "Proteins", 
+            "tooltipname": "Proteins", 
             "size": 25000
         },
         {
@@ -130,67 +131,9 @@
         {"sets": [0], "name": "Human glycans", "tooltipname": "Human glycans","size": 3302},
         {"sets": [1], "name": "Mouse glycans", "tooltipname": "Mouse glycans", "size": 517},
         
-        {"sets": [0, 1], "name": "", "tooltipname": "Human & Mouse", "size": 304}
+        {"sets": [0, 1], "name": "", "tooltipname": "Human & Mouse glycans", "size": 304}
         ],
     
-    "protein_venn_homo": [
-        {"sets": [0], "name": "Human Molecules", "size": 112299},
-        {"sets": [1], "name": "Human Proteins", "size": 35200},
-        {"sets": [2], "name": "Human Genes", "size": 18000},
-        {"sets": [3], "name": "Human Glycans", "size": 3600},
-        {"sets": [4], "name": "Human Lectins", "size": 200},
-        {"sets": [5], "name": "Human Enzimes", "size": 5000},
-        {"sets": [6], "name": "Other Human Proteins", "size": 6200},
-        {"sets": [7], "name": "Human Glycoproteins", "size": 8800},
-        {"sets": [8], "name": "Human O-glycans", "size": 200},
-        {"sets": [9], "name": "Human N-glycans", "size": 700},
-        
-        {"sets": [0, 1], "size": 35200},
-        {"sets": [0, 2], "size": 18000},
-        {"sets": [0, 3], "size": 3600},
-        {"sets": [0, 4], "size": 200},
-        {"sets": [0, 5], "size": 5000},
-        {"sets": [0, 6], "size": 6200},
-        {"sets": [0, 7], "size": 8800},
-        {"sets": [0, 8], "size": 200},
-        {"sets": [0, 9], "size": 700},
-        
-        {"sets": [1, 4], "size": 200},
-        {"sets": [1, 5], "size": 5000},
-        {"sets": [1, 6], "size": 6200},
-        {"sets": [1, 7], "size": 8800},
-        {"sets": [3, 8], "size": 200},
-        {"sets": [3, 9], "size": 700}
-        ],
-    "protein_venn_mus": [
-        {"sets": [0], "name": "Mouse Molecules", "size": 111299},
-        {"sets": [1], "name": "Mouse Proteins", "size": 33000},
-        {"sets": [2], "name": "Mouse Genes", "size": 17500},
-        {"sets": [3], "name": "Mouse Glycans", "size": 3630},
-        {"sets": [4], "name": "Mouse Lectins", "size": 250},
-        {"sets": [5], "name": "Mouse Enzimes", "size": 4500},
-        {"sets": [6], "name": "Other Mouse Proteins", "size": 4250},
-        {"sets": [7], "name": "Mouse Glycoproteins", "size": 9000},
-        {"sets": [8], "name": "Mouse O-glycans", "size": 195},
-        {"sets": [9], "name": "Mouse N-glycans", "size": 715},
-        
-        {"sets": [0, 1], "size": 33000},
-        {"sets": [0, 2], "size": 17500},
-        {"sets": [0, 3], "size": 3630},
-        {"sets": [0, 4], "size": 250},
-        {"sets": [0, 5], "size": 4500},
-        {"sets": [0, 6], "size": 4250},
-        {"sets": [0, 7], "size": 9000},
-        {"sets": [0, 8], "size": 195},
-        {"sets": [0, 9], "size": 715},
-        
-        {"sets": [1, 4], "size": 250},
-        {"sets": [1, 5], "size": 4500},
-        {"sets": [1, 6], "size": 4250},
-        {"sets": [1, 7], "size": 9000},
-        {"sets": [3, 8], "size": 195},
-        {"sets": [3, 9], "size": 715}
-        ],
     "donut": [
         {"name": "Human O-glycans", "size": 200},
         {"name": "Human N-glycans", "size": 700},
