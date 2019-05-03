@@ -440,10 +440,13 @@ function downloadFromServer(id, format, compressed, type) {
     $('#loading_image').fadeIn();
 
     var mimeType = "text";
+    var ext = "";
     if (format === "csv") {
         mimeType = "text/csv";
     } else if (format === "fasta") {
         mimeType = "text/plain";
+        type = "protein_sequence";
+        ext = ".fasta";
     } else if (format === "json") {
         mimeType = "application/json";
     } else if (format === "image") {
@@ -458,7 +461,7 @@ function downloadFromServer(id, format, compressed, type) {
         url: getWsUrl('data_download') + "?query=" + JSON.stringify(download_query),
         success: function (result) {
             //uses the download.js library.
-            download(result, type + "_" + id, mimeType);        // + "." + format
+            download(result, type + "_" + id + ext, mimeType);        // + "." + format
             activityTracker("user", id, "successful download");
             $('#loading_image').fadeOut();
         },
