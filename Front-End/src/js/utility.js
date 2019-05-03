@@ -97,7 +97,7 @@ function getErrorMessage(errorCode) {
             };
         case 'unexpected-field-in-query':
             return {
-                message: "This is unexpected field input. Please try again",
+                message: "This is an unexpected field input. Please try again",
                 title: "Unexpected Field Input Error"
             };
         case 'invalid-parameter-value-length':
