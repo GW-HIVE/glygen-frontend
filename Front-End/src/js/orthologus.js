@@ -28,13 +28,9 @@ function buildSummary(queryInfo, question) {
     $('#summary-table').html(summaryHtml);
 }
 
-function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
-}
 
+
+// to show results on list page 
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " Proteins were found\"");
 }
@@ -58,6 +54,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
+                    evidence: glycan.evidence,
                     uniprot_canonical_ac: glycan.uniprot_canonical_ac,
                     gene_link: glycan.gene_link,
                     gene_name: glycan.gene_name,
@@ -65,12 +62,18 @@ function ajaxListSuccess(data) {
                     organism: glycan.organism,
                     tax_id: glycan.tax_id
                 });
+                // this is in evidence_badge js
+                formatEvidences(items);
             }
         }
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 
+        // this is in evidence_badge js
+        setupEvidenceList();
+
+        // this is in pagination js
         buildPages(data.pagination);
         buildSummary(data.query, question);
 
@@ -81,6 +84,7 @@ function ajaxListSuccess(data) {
 
 
 
+// redirect modify button
 function editSearch() {
     var question = getParameterByName('question');
 
@@ -102,7 +106,6 @@ function LoadDataList() {
         success: ajaxListSuccess,
         error: ajaxFailure
     };
-
 
     $.ajax(ajaxConfig);
 }
