@@ -81,18 +81,6 @@ function ajaxListSuccess(data) {
         activityTracker("user", id, "successful response " + question + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
-
-
-
-// redirect modify button
-function editSearch() {
-    var question = getParameterByName('question');
-
-    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-    activityTracker("user", id, "edit search");
-}
-
-
 /**
  * LoadDataList function to configure and start the request to GWU  service
  * @param {string} id - The glycan id to load

@@ -34,7 +34,7 @@ var limit = 10;
  */
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a')
+    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
@@ -45,17 +45,9 @@ function buildSummary(queryInfo) {
  * @param {string} total_length the dataset of pagination info is retun from server
  */
 function totalNoSearch(total_length) {
-    $('.searchresult').html( "\""  + total_length + " glycans were found\"");
+    $('.searchresult').html("\"" + total_length + " glycans were found\"");
 }
 
-/**
- * Redirect to searchPage with id after clicking editSearch
- */
-function editSearch() {
-    var question =  getParameterByName('question');
-        window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-        activityTracker("user", id, "edit search");
-}
 
 /**
  * Format function to create link to the details page
@@ -108,7 +100,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     } else {
         var $table = $('#gen-table');
         var items = [];
@@ -132,9 +124,9 @@ function ajaxListSuccess(data) {
         buildPages(data.pagination);
         // buildSummary(data.query);
         buildSummary(data.query, question);
-        document.title='glycan-list';
+        document.title = 'glycan-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
+        activityTracker("user", id, "successful response " + question + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
 
@@ -143,8 +135,8 @@ function ajaxListSuccess(data) {
  * @param {string} id - The glycan id to load
  * */
 function LoadDataList() {
-    if(!id){
-        id= getParameterByName('id');
+    if (!id) {
+        id = getParameterByName('id');
     }
     var ajaxConfig = {
         dataType: "json",

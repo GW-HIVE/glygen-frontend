@@ -145,6 +145,14 @@ function LoadSearchvalues(id) {
     $.ajax(ajaxConfig);
 }
 
+
+function editSearch() {
+    var question =  getParameterByName('question');
+        //window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+        window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
+   
+        activityTracker("user", id, "edit search");
+}
 //Do not remove this code
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
