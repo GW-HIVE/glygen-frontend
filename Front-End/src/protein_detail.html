@@ -239,11 +239,7 @@
                                 {{/refseq.ac}}
                                 {{/refseq}}
                                 {{#mass}}
-                                {{#mass.monoisotopic_mass}}
-                                <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.monoisotopic_mass}} Da
-                                </li>
-                                {{/mass.monoisotopic_mass}}
-                                {{^mass.monoisotopic_mass}} {{/mass.monoisotopic_mass}}
+                                
 
                                 <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
                                 {{/mass}}
@@ -730,6 +726,8 @@
     <script type="text/javascript" src="libraries/contact.js"></script>
     <!-- downloading files js -->
     <script src="libraries/download.js"></script>
+    <!-- for evidence badge js -->
+    <script src="js/evidence_badge.js"></script>
 
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">

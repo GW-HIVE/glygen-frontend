@@ -30,69 +30,7 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-function formatEvidences(item) {
-    if (item && item.length) {
-        for (var i = 0; i < item.length; i++) {
-            var currentItem = item[i];
-            var databases = [];
-            if (currentItem && currentItem.evidence.length) {
-                for (var j = 0; j < currentItem.evidence.length; j++) {
-                    var evidenceitem = currentItem.evidence[j];
-                    var found = '';
 
-                    for (var x = 0; x < databases.length; x++) {
-                        var databaseitem = databases[x];
-                        if (databaseitem.database === evidenceitem.database) {
-                            found = true;
-                            databaseitem.links.push({
-                                url: evidenceitem.url,
-                                id: evidenceitem.id
-                            });
-                        }
-                    }
-
-                    if (!found) {
-                        databases.push({
-                            database: evidenceitem.database,
-                            color: databasecolor(evidenceitem.database),
-                            links: [{
-                                url: evidenceitem.url,
-                                id: evidenceitem.id
-                            }]
-                        })
-                    }
-                }
-            }
-            currentItem.databases = databases;
-        }
-    }
-}
-
-/**
- * Creating Evidence badges for bootstrap table
- *  @param {value} string for the name of the variable variable to extract from query string
- * @param {url} string with the complete url with query string values
- * Returns the GWU services. */
-function EvidencebadgeFormator(value, row, index, field) {
-    var buttonsHtml = "";
-    $.each(value, function (i, v) {
-        var linksHtml = "";
-        $.each(v.links, function (i, w) {
-            linksHtml += '<li style="linksHtml">' +
-                '<a href="' + w.url + '" target="_blank">' + w.id + '</a></li>'
-        });
-
-        buttonsHtml += '<span class="evidence_badge">' +
-            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
-            '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
-            '</button>' +
-            '<div class="hidden evidence_links">' +
-            '<ul>' + linksHtml + '</ul>' +
-            '</div>' +
-            '</span>';
-    });
-    return buttonsHtml;
-}
 
 var glytoucan_ac;
 /**
@@ -240,27 +178,7 @@ function LoadData(glytoucan_ac) {
     // calls the service
     $.ajax(ajaxConfig);
 }
-// show and hide evidences 
-function setupEvidenceList() {
-    var $evidenceBadges = $('.evidence_badge');
-    $evidenceBadges.each(function () {
-        $(this).find('button').on('click', show_evidence);
-    });
-}
 
-
-function show_evidence() {
-    var $evidenceList = $(this).next();
-    var isHidden = $evidenceList.hasClass('hidden');
-    // $(".evidence_links").addClass("hidden");
-
-    if (isHidden) {
-        $evidenceList.removeClass("hidden");
-    } else {
-        $evidenceList.addClass("hidden");
-    }
-
-}
 
 /**
  * getParameterByName function to extract query parametes from url
@@ -299,7 +217,7 @@ function updateBreadcrumbLinks() {
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
         if (listID)
             $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
-        else 
+        else
             $('#li-breadcrumb-list').css('display', 'none');
     } else {
         $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + listID);
