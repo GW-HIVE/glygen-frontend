@@ -12,7 +12,6 @@ function formatEvidences(item) {
                 for (var j = 0; j < currentItem.evidence.length; j++) {
                     var evidenceitem = currentItem.evidence[j];
                     var found = '';
-
                     for (var x = 0; x < databases.length; x++) {
                         var databaseitem = databases[x];
                         if (databaseitem.database === evidenceitem.database) {
@@ -83,4 +82,34 @@ function show_evidence() {
         $evidenceList.addClass("hidden");
     }
 
+}
+
+function groupEvidences(item) {
+    //group by evidence ids
+    if (item && item.length) {
+        var evidencesMap = new Map();
+        for (var i = 0; i < item.length; i++) {
+            var currentItem = item[i];
+            for (var e = 0; e < currentItem.evidence.length; e++) {
+                if (!(evidencesMap.has(currentItem.evidence[e].id))) {
+                    evidencesMap.set(currentItem.evidence[e].id, [currentItem]);
+                }
+                else {
+                    evidencesMap.get(currentItem.evidence[e].id).push(currentItem);
+                }
+            }
+        }
+        //combine annotations for each evidence id
+        groupedEvidences = [];
+        evidencesMap.forEach(function (v, key) {
+            //combine annotations into the first, delete the rest
+            for (var i = 1; i < v.length; i++) {
+                v[0].annotation += "\n\n" + v[i].annotation;
+            }
+            groupedEvidences.push(v[0]);
+        });
+
+        return groupedEvidences;
+    }
+    return item;
 }
