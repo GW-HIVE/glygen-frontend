@@ -192,9 +192,7 @@
                                     <a class="panelcontent" href="{{{url}}}" target="_blank">{{name}}</a>
                                 </li>
                                 <li class="list-group"><strong>Gene Location:</strong> Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
-                                </li>
-
-                                
+                                </li> 
                                 {{/gene}}
                                 {{^gene}} {{/gene}}
 
@@ -239,8 +237,6 @@
                                 {{/refseq.ac}}
                                 {{/refseq}}
                                 {{#mass}}
-                                
-
                                 <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
                                 {{/mass}}
                             </div>
@@ -402,12 +398,6 @@
                                                onchange="checkUncheck('mutation', this)"/>&nbsp;<span class="sequnce3">Mutation</span>    
                                                {{#mutation_count}}<span class="badge badge-light" >{{mutation_count}}</span>{{/mutation_count}}</p>
                     
-                                    </li>
-                                    <li data-type="sequon">
-                                        <p><input type="checkbox" name="checkbox" {{^sequon_count}}disabled{{/sequon_count}}
-                                               onchange="checkUncheck('sequon', this)"/>&nbsp;<span class="sequnce4">Sequon</span>    
-                                               {{#sequon_count}} <span class="badge badge-light" >{{sequon_count}}</span>{{/sequon_count}}
-                                        </p>
                                     </li>
                                 </ul>
 
@@ -728,6 +718,9 @@
     <script src="libraries/download.js"></script>
     <!-- for evidence badge js -->
     <script src="js/evidence_badge.js"></script>
+    <!-- for sequenceview js -->
+    <script src="js/format_sequence.js"></script>
+
 
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
