@@ -88,6 +88,7 @@ function sendFeedbackError(jqXHR, textStatus, errorThrown) {
 function sendFeedback() {
     var form = $('#feedback');
     var page = window.location.href;
+    page = stripQueryString(page);
     var name = form.find('[name="name"]').val().split(' ');
 
     // get data
@@ -98,11 +99,7 @@ function sendFeedback() {
         page: page,
         subject: 'Feedback Form' + $('#feedback .type li.active').text(),
         message: form.find('[name="feedback_text"]').val()
-        // + '\n\n' + 'Page: ' + page
     }
-
-    //console.log(formData);
-
     $.ajax({
         type: "POST",
         url: getWsUrl("contact"),
@@ -112,16 +109,13 @@ function sendFeedback() {
         error: sendFeedbackError
     });
 }
-
 function setupFeedbackForm() {
     $.get('_feedbackform.html', function (text) {
         $('.container-fluid').first().after(text);
         var feedbackForm = $('#feedback');
-
         $('.toggle').click(function () {
             $('.sidebar-contact').toggleClass('active')
             $('.toggle').toggleClass('active');
-
             feedbackForm.find('.alert-success').hide();
         });
         feedbackForm.on('submit', function (event) {
@@ -129,14 +123,20 @@ function setupFeedbackForm() {
             sendFeedback();
             return false;
         });
-
         feedbackForm.find('.type li').on('click', function () {
             $('#feedback .type li').removeClass('active');
             $(this).addClass('active');
         });
-
         feedbackForm.find('.alert-success').hide();
     });
+}
+
+/**
+ * Strips query params from a url stering
+ * @param {String} url Url string
+ */
+function stripQueryString(url) {
+    return url.substring(0, url.indexOf("?"));
 }
 
 $(function () {
