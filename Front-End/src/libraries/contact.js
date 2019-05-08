@@ -132,7 +132,7 @@ function setupFeedbackForm() {
 }
 
 /**
- * Strips query params from a url stering
+ * Strips query params from a url string
  * @param {String} url Url string
  */
 function stripQueryString(url) {

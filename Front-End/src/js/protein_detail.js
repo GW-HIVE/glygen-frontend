@@ -32,6 +32,10 @@ function ajaxSuccess(data) {
         if (data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
+            if (data.mass){
+                data.mass.chemical_mass = addCommas(data.mass.chemical_mass);
+
+            }
             if (data.gene) {
                 for (var i = 0; i < data.gene.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
@@ -215,13 +219,6 @@ function ajaxSuccess(data) {
                 return total + current.length;
             }, 0);
         }
-
-
-
-
-
-
-
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
