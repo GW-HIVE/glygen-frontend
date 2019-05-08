@@ -917,12 +917,19 @@ ____________________________________  */
     min-width: 250px !important;
     margin-right: 3%;
     padding: 6%;
-   font-size: 10px !important;
+    font-size: 10px !important;
 /*    padding-right: 2%;*/
 }
 
 .dropdown-menu-detail {
     padding: 2%;
+}
+
+.dropdown-menu-box {
+    min-width: 220px !important;
+    padding: 15px;
+    font-size: 10px;
+    width: auto;
 }
 
 .dropdown-menu-motif {
@@ -939,9 +946,6 @@ ____________________________________  */
 .dropdown-menu {
     min-width: 160px;
     margin-right: 2.2%;
-    padding: 15px;
-    font-size: 10px;
-    width: auto;
 }
 .gg-download {
     box-shadow: none !important;
