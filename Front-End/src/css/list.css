@@ -187,3 +187,28 @@ pre {
 .table tbody {
     width: 50%;
     }
+
+    .evidence_badge {
+        position: relative; 
+        padding-left: 5px; 
+        padding-bottom: 30px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    .hidden evidence_links {
+        position: absolute; 
+        left:  0; 
+        width: 200px;
+    }
+    .linkHtml {
+       position: relative; 
+       display: inline-block; 
+    }
+    .evidence_id {
+        position: relative; 
+       display: inline-block;     
+    }
+    
+   
+    
+    

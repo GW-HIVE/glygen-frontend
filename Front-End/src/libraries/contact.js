@@ -139,6 +139,9 @@ function stripQueryString(url) {
     return url.substring(0, url.indexOf("?"));
 }
 
+
+
+
 $(function () {
     var contactForm = $('#contact-form');
     if (contactForm.length) {
