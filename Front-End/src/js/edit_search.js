@@ -146,7 +146,7 @@ function LoadSearchvalues(id) {
 }
 
 
-function editSearch() {
+function editSearch_quick() {
     var question =  getParameterByName('question');
         //window.location.replace("quick_search.html?id=" + id + '&question=' + question);
         window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );

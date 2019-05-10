@@ -68,7 +68,10 @@ function editSearch() {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
         }
         else if (question && (question === 'QUESTION_TRY2')) {
-            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
+            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2'+ '#' +question;
+
+           // window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
+   
         } else if (globalSearchTerm) {
             newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
         }
