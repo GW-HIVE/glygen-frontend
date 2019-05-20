@@ -5,7 +5,6 @@
 @date-created: January 2018
 @update: October 12 2018 - Tatiana Williamson - Added headline and styled download button.
 -------------------------------------------------------------------------*/
-
 .img-cartoon1 {
     display: block;
     max-width: 500px;
@@ -122,7 +121,9 @@ pre {
 
 .panelcontent {
     font-size: 15px;
-    color: #659BC9;
+/*    color: #659BC9; 
+    Removed by Tatiana - it overrides links color on detail pages May 20, 2019
+*/
 }
 
 .list-group {
