@@ -391,7 +391,7 @@ h4 {
 .evidence_badge {
     position: relative; 
     padding-left: 5px; 
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     vertical-align: middle;
     display: inline-block;
 }
