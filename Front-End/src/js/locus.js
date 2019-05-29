@@ -16,7 +16,7 @@ var page = 1;
 var sort = 'uniprot_canonical_ac';
 var dir = 'desc';
 var url = getWsUrl('loci_list') + "?action=get_user";
-var limit = 10;
+var limit = 20;
 
 /**
  * Format function to create link to the details page

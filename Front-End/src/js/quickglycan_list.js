@@ -24,7 +24,7 @@ var page = 1;
 var sort = 'mass';
 var dir = $('.dir-select').val();
 var url = getWsUrl('glycan_list') + "?action=get_user";
-var limit = 10;
+var limit = 20;
 
 /**
  * it creates user interface for summary

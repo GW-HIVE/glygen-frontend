@@ -23,7 +23,7 @@ var page = 1;
 var sort = 'protein_name_long';
 var dir = 'desc'
 var url = getWsUrl('protein_list');
-var limit = 25;
+var limit = 20;
 
 /**
  * it creates user interface for summary

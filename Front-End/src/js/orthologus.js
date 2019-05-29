@@ -16,7 +16,7 @@ var page = 1;
 var sort = 'uniprot_canonical_ac';
 var dir = $('.dir-select').val();
 var url = getWsUrl('list_glycangene') + "?action=get_user";
-var limit = 10;
+var limit = 20;
 
 function buildSummary(queryInfo, question) {
 
