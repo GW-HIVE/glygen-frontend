@@ -25,39 +25,6 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-/**
- * function returns current browser language
- * @returns {string} String containing browser language
- */
-function getLanguage() {
-    return navigator.language || 'en-US';
-}
-
-/**
- * function returns separator value based on current browser language and separator type.
- * @param {string} type contains separator type, e.g 'group', 'decimal' etc.
- * @returns {string} String containing separator value.
- */
-function getSeparatorValue(type) {
-    var dummy = 9999.9;
-    var spVal = ".".toLocaleString(getLanguage());
-    var value = Intl.NumberFormat(getLanguage()).formatToParts(dummy).find(entry => entry.type === type).value;
-
-    if (value === spVal) {
-        return '\\.'.toLocaleString(getLanguage());
-    }
-    return value;
-}
-
-/**
- * function converts browser selected language formatted Number value into Number value and returns the Number value.
- * @param {string} value Number value in browser selected language format.
- * @returns {string} String containing converted Number value.
- */
-function convertNumberValue(value) {
-    var numValue = value.replace(new RegExp(getSeparatorValue('group'), 'g'), '');
-    return numValue.replace(new RegExp(getSeparatorValue('decimal'), 'g'), '.');
-}
 
 function databasecolor(name) {
     switch (name) {
