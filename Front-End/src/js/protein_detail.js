@@ -276,7 +276,11 @@ function ajaxSuccess(data) {
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
                 setupEvidenceList();
+            },
+            onSort: function () {
+                setTimeout(setupEvidenceList, 500);
             }
+
         });
 
         // glycosylation table
@@ -305,6 +309,10 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl2,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
+                setupEvidenceList();
+            },
+            onSort: function () {
+
                 setupEvidenceList();
             }
         });
@@ -447,6 +455,10 @@ function ajaxSuccess(data) {
             pagination: 10,
             data: data.expression_tissue,
             onPageChange: function () {
+
+                setupEvidenceList();
+            },
+            onSort: function () {
 
                 setupEvidenceList();
             }

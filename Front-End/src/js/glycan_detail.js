@@ -73,20 +73,20 @@ function ajaxSuccess(data) {
 
         $container.html(html);
         //setupEvidenceList();
-        $container.find('.open-close-button').each(function (i, element) {
-            $(element).on('click', function () {
-                var $this = $(this);
-                var buttonText = $this.text();
+        // $container.find('.open-close-button').each(function (i, element) {
+        //     $(element).on('click', function () {
+        //         var $this = $(this);
+        //         var buttonText = $this.text();
 
-                if (buttonText === '+') {
-                    $this.text('-');
-                    $this.parent().next().show();
-                } else {
-                    $this.text('+');
-                    $this.parent().next().hide();
-                }
-            });
-        });
+        //         if (buttonText === '+') {
+        //             $this.text('-');
+        //             $this.parent().next().show();
+        //         } else {
+        //             $this.text('+');
+        //             $this.parent().next().hide();
+        //         }
+        //     });
+        // });
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -114,6 +114,9 @@ function ajaxSuccess(data) {
             }],
             pagination: 10,
             data: items,
+            onSort: function () {
+                setTimeout(setupEvidenceList, 500);
+            }
 
         });
 
@@ -150,6 +153,9 @@ function ajaxSuccess(data) {
             data: data.glycoprotein,
             onPageChange: function () {
                 setupEvidenceList();
+            },
+            onSort: function () {
+                setTimeout(setupEvidenceList, 500);
             }
         });
     }
