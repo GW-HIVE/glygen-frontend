@@ -278,7 +278,7 @@ function ajaxSuccess(data) {
                 setupEvidenceList();
             },
             onSort: function () {
-                setTimeout(setupEvidenceList, 500);
+                setTimeout(setupEvidenceList, 600);
             }
 
         });
@@ -312,8 +312,6 @@ function ajaxSuccess(data) {
                 setupEvidenceList();
             },
             onSort: function () {
-
-                setupEvidenceList();
             }
         });
 
@@ -377,6 +375,9 @@ function ajaxSuccess(data) {
             data: itemsMutate,
             onPageChange: function () {
                 setupEvidenceList();
+            },
+            onSort: function () {
+                setTimeout(setupEvidenceList, 600);
             }
         });
 
@@ -404,7 +405,6 @@ function ajaxSuccess(data) {
                         return diss1;
                     }
                 },
-
                 {
                     field: 'significant',
                     title: 'Significant',
@@ -421,6 +421,9 @@ function ajaxSuccess(data) {
             onPageChange: function () {
 
                 setupEvidenceList();
+            },
+            onSort: function () {
+                setTimeout(setupEvidenceList, 500);
             }
         });
 
@@ -464,7 +467,6 @@ function ajaxSuccess(data) {
             }
         });
     }
-
     setupEvidenceList();
     $('#loading_image').fadeOut();
     updateBreadcrumbLinks();
@@ -516,7 +518,6 @@ $(document).ready(function () {
     id = uniprot_canonical_ac;
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
-
     updateBreadcrumbLinks();
 });
 
