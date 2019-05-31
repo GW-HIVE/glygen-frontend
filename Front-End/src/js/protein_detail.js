@@ -312,6 +312,7 @@ function ajaxSuccess(data) {
                 setupEvidenceList();
             },
             onSort: function () {
+                setTimeout(setupEvidenceList, 600);
             }
         });
 
