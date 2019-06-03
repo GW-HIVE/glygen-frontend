@@ -31,20 +31,25 @@ $("#bioenzyme").autocomplete({
 
 function bioEnzyme() {
     var id = $("#bioenzyme").val();
-    $.ajax({
-        type: 'POST',
-        url: getWsUrl("search_bioenzyme", id),
-        error: ajaxFailure,
-        success: function (results) {
-            if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
+    if(id.trim() === ""){
+        showNoResultsFound("li_q1");
+    }
+    else{
+        $.ajax({
+            type: 'POST',
+            url: getWsUrl("search_bioenzyme", id),
+            error: ajaxFailure,
+            success: function (results) {
+                if (results.list_id) {
+                    window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_1";
+                }
+                else {
+                    //displayErrorByCode('no-results-found');
+                    showNoResultsFound("li_q1");
+                }
             }
-            else {
-                //displayErrorByCode('no-results-found');
-                showNoResultsFound("li_q1");
-            }
-        }
-    })
+        });
+    }
 }
 
 /**
