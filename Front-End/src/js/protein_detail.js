@@ -463,8 +463,7 @@ function ajaxSuccess(data) {
                 setupEvidenceList();
             },
             onSort: function () {
-
-                setupEvidenceList();
+                setTimeout(setupEvidenceList, 600);
             }
         });
     }

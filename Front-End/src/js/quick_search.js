@@ -182,11 +182,11 @@ function proteinFunction() {
         error: ajaxFailure,
         success: function (results) {
             if (results.error_code) {
-                displayErrorByCode("Invalid ID");
+                 displayErrorByCode("Invalid ID");
+                //showNoResultsFound("li_q5");
             }
             else {
                 window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#function';
-                showNoResultsFound("li_q5");
             }
         }
     })
