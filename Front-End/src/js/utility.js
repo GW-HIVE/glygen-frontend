@@ -421,9 +421,10 @@ function downloadFromServer(id, format, compressed, type) {
         ext = ".json";
     } else if (format === "image") {
         mimeType = "image/png";
+        ext = ".png";
     } else if (format === "tsv") {
         mimeType = "text/tsv";
-        ext = ".png";
+        ext = ".tsv";
     }
 
     $.ajax({
