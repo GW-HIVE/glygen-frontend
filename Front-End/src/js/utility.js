@@ -411,16 +411,20 @@ function downloadFromServer(id, format, compressed, type) {
     var ext = "";
     if (format === "csv") {
         mimeType = "text/csv";
+        ext = ".csv";
     } else if (format === "fasta") {
         mimeType = "text/plain";
         type = "protein_sequence";
         ext = ".fasta";
     } else if (format === "json") {
         mimeType = "application/json";
+        ext = ".json";
     } else if (format === "image") {
         mimeType = "image/png";
+        ext = ".png";
     } else if (format === "tsv") {
         mimeType = "text/tsv";
+        ext = ".tsv";
     }
 
     $.ajax({
