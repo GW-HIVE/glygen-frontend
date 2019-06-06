@@ -1,5 +1,5 @@
 
-     var uniprot_canonical_ac = 'P07498-1';
+     var uniprot_canonical_ac = '';
 
 
      function setupProtvista(data) {
@@ -23,14 +23,24 @@
                  shapePtr += 1;
                  typeToShape[glycosylationData.type] = shapes[shapePtr];
              }
+
+
              var key = glycosylationData.position;
+             var tooltip = '';
+
+             if(glycosylationData.glytoucan_ac){
+                tooltip = "<img src='" + "https://api.glygen.org/glycan/image/" + glycosylationData.glytoucan_ac + "' />";
+             }
+             else{
+                tooltip = "<span>Glycosylation site without reported glycan at "+ key  + " </span>";
+             }
              var dataPoint = {
                  accession: data.uniprot.uniprot_canonical_ac,
                  start: glycosylationData.position,
                  end: glycosylationData.position,
                  color: typeToColor[glycosylationData.type],
                  shape: typeToShape[glycosylationData.type],
-                 tooltipContent: glycosylationData.glytoucan_ac? "<img src='" + "https://api.glygen.org/glycan/image/" + glycosylationData.glytoucan_ac + "' />" : "<span>Glycosylation site without reported glycan</span>",
+                 tooltipContent: tooltip,
                  type: "Position",
                  tooltipCount : 1
  
@@ -38,11 +48,11 @@
             
              if(key in allTrackData[glycosylationData.type]) {
                  var existingPoint = allTrackData[glycosylationData.type][key];
-                 if(existingPoint.tooltipCount < 2) {
+                 if(existingPoint.tooltipCount < 1) {
                      existingPoint.tooltipContent += dataPoint.tooltipContent ? "<br><br>" + dataPoint.tooltipContent : "";
                  }
-                 else if(existingPoint.tooltipCount == 2) {
-                     existingPoint.tooltipContent += "<br><br>Click marker show more";
+                 else if(existingPoint.tooltipCount == 1) {
+                     existingPoint.tooltipContent += "<br><br><span class=marker>Click marker show more</span>";
                  }
                  if(dataPoint.tooltipContent) {
                      existingPoint.tooltipCount += 1;
@@ -84,8 +94,8 @@
                  end: mutationData.end_pos,
                  color: typeToColorM[fixedType],
                  shape: typeToShapeM[fixedType],
-                 type: "annotation",
-                 tooltipContent: "<span>annotation</span>",
+                 type: "Mutation",
+                 tooltipContent: "<span>annotation " + mutationData.annotation +  "</span>",
                 
              }
              allTrackDataM[fixedType].push(dataPoint);
@@ -172,37 +182,55 @@
  
      }
  
-     /**
- * @param {id} the LoadData function to configure and start the request to GWU service
-         * Returns the GWU services.
-         */
+
  
-     // $(document).ready(function () {
- 
-     //     var uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac", document.location.href);
-     //     if(uniprot_canonical_ac){
-     //     LoadData(uniprot_canonical_ac);
-     //     }
-     //     else{
-     //         alert("ouch no uniprot....");
-     //     }
- 
-     // });
- 
-        $(document).ready(function () {
+    $(document).ready(function () {
+         uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
+         $("#title_protein").html(uniprot_canonical_ac);
          // var uniprot_canonical_ac = 'P14210-1';
          LoadData(uniprot_canonical_ac);
+
+
+        updateBreadcrumbLinks();
  
      });
+
+     function updateBreadcrumbLinks() {
+        const proteinacc = getParameterByName("uniprot_canonical_ac") || "";
+        const listID = getParameterByName("listID") || "";
+        const globalSearchTerm = getParameterByName("gs") || "";
+        var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
+    
+        if (globalSearchTerm) {
+            $('#breadcrumb-search').text("General Search");
+            $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+            if (listID)
+                $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID + "&gs=" + globalSearchTerm);
+            else
+                $('#li-breadcrumb-list').css('display', 'none');
+        } else {
+            $('#breadcrumb-search').attr("href", glycanPageType + "_search.html?id=" + listID);
+            if (listID)
+                $('#breadcrumb-list').attr("href", glycanPageType + "_list.html?id=" + listID);
+            else
+                $('#li-breadcrumb-list').css('display', 'none');
+        }
+        if (proteinacc){
+            $('#breadcrumb-detail').attr("href", glycanPageType + "_detail.html?uniprot_canonical_ac=" + proteinacc + "&listID=" + listID + "#sequence");
+        }
+        else{
+            $('#li-breadcrumb-detail').css('display', 'none');
+        }
+    }
  
      function LoadData(uniprot_canonical_ac) {
          var ajaxConfig = {
              dataType: "json",
-             //url: getWsUrl("protein_detail", uniprot_canonical_ac),
+             url: getWsUrl("protein_detail", uniprot_canonical_ac),
              //url: "http://api.glygen.org/protein/detail/" + uniprot_canonical_ac,
-            // url: "https://api.tst.glygen.org/protein/detail/P16150-1",
-             url: "https://api.tst.glygen.org/protein/detail/P14210-1",
-             //url: "https://api.tst.glygen.org/protein/detail/P07498-1",
+            // /P16150-1",
+            // P14210-1",
+             //P07498-1",
              method: 'GET',
              timeout: 1000,
              success: ajaxSuccess
