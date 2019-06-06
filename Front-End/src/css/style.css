@@ -144,7 +144,7 @@ p {
     color: #AFD9FD !important;
 }
 
-.nav li.current a {
+.nav li.current > a {
     margin-right: -15px;
     margin-left: -15px;
 }
