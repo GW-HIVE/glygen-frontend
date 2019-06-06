@@ -528,7 +528,12 @@ $(document).ready(function () {
 function updateBreadcrumbLinks() {
     const listID = getParameterByName("listID") || "";
     const globalSearchTerm = getParameterByName("gs") || "";
-    var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
+    var glycanPageType = "";
+    
+    if (window.location.pathname.indexOf("glycoprotein") >= 0)
+        glycanPageType = "glycoprotein";
+    else
+        glycanPageType = "protein";
 
     if (globalSearchTerm) {
         $('#breadcrumb-search').text("General Search");
