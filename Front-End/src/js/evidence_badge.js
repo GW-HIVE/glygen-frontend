@@ -51,7 +51,7 @@ function EvidencebadgeFormator(value, row, index, field) {
         });
 
         buttonsHtml += '<span class="evidence_badge">' +
-            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
+            '<button class="btn btn-primary color-' + v.database + ' evidence-badge-btn" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
             '&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
             '</button>' +
             '<div class="hidden evidence_links">' +
@@ -64,10 +64,10 @@ function EvidencebadgeFormator(value, row, index, field) {
 
 // setting evidnec list for each badge
 function setupEvidenceList() {
-    var $evidenceBadges = $('.evidence_badge');
-    $evidenceBadges.each(function () {
-        $(this).find('button').on('click', show_evidence);
-    });
+    // var $evidenceBadges = $('.evidence_badge');
+    // $evidenceBadges.each(function () {
+        $('#content').on('click', '.evidence-badge-btn', show_evidence);
+    // });
 }
 
 // show and hide evidences 
