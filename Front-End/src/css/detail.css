@@ -406,7 +406,8 @@ h4 {
 }
 .evidence_id {
     position: relative; 
-   display: inline-block;     
+    display: block; 
+        
 }
 
 .highlight-text {
