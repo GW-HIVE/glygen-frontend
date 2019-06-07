@@ -275,11 +275,9 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                setupEvidenceList();
+                // setupEvidenceList();
             },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 600);
-            }
+           
 
         });
 
@@ -309,11 +307,10 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl2,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                setupEvidenceList();
+                // setupEvidenceList();
             },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 600);
-            }
+          
+       
         });
 
         $(".EmptyFind").each(function () {
@@ -374,12 +371,7 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
-            onPageChange: function () {
-                setupEvidenceList();
-            },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 600);
-            }
+          
         });
 
         $('#loading_image').fadeOut();
@@ -422,10 +414,8 @@ function ajaxSuccess(data) {
             onPageChange: function () {
 
                 setupEvidenceList();
-            },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 500);
             }
+           
         });
 
         $('#loading_image').fadeOut();
@@ -461,10 +451,8 @@ function ajaxSuccess(data) {
             onPageChange: function () {
 
                 setupEvidenceList();
-            },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 600);
             }
+           
         });
     }
     setupEvidenceList();
