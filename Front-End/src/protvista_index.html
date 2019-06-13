@@ -1,0 +1,368 @@
+<!--------------------------------
+@author: 
+@description: UO1 Version-1.0.
+@date-created: March 1, 2018
+------------------------------------>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Template</title>
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/server.css">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/icons/favicomatic/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/icons/favicomatic/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/icons/favicomatic/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icons/favicomatic/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/icons/favicomatic/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="GlyGen" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="images/icons/favicomatic/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="images/icons/favicomatic/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="images/icons/favicomatic/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
+
+    <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
+
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="libraries/protvista/d3.v4.min.js"></script>
+    <!-- Required for IE11 -->
+    <script src="libraries/protvista/polyfill.min.js"></script>
+    <!-- Web component polyfill (only loads what it needs) -->
+    <script src="libraries/protvista/webcomponents-lite.js"></script>
+    <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+    <script src="libraries/protvista/custom-elements-es5-adapter.js"></script>
+    <script src="libraries/protvista/protvista-navigation.js"></script>
+    <script src="libraries/protvista/protvista-zoomable.js"></script>
+    <script src="libraries/protvista/protvista-tooltip.js"></script>
+    <script src="libraries/protvista/protvista-track.js"></script>
+    <script src="libraries/protvista/protvista-sequence.js"></script>
+    <script src="libraries/protvista/protvista-manager.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Glygen Protvista</title>
+    <style type="text/css">
+        .main {
+            display: grid;
+            grid-template-columns: 12% auto;
+        }
+
+        .main-nav {
+            padding-top: 1rem;
+            height: 90vh;
+            /* padding-top: 1.5rem; */
+        }
+
+        .active {
+            font-weight: bold;
+        }
+
+        .main-nav__list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-nav__list li a {
+            display: block;
+            padding-left: 1rem;
+            width: 100%;
+            line-height: 2.5rem;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .main-nav__list li a:hover {
+            color: #fffff8;
+            color: #000000;
+        }
+
+        .main-content {
+            color: #fffff8;
+            padding: 1rem;
+        }
+
+        /********************/
+
+        /** InterPro Track **/
+
+        /********************/
+
+        .child-location-group path {
+            stroke-width: 1px;
+        }
+
+        .child-location-group.clg-0 path {
+            stroke: #aed0e4;
+        }
+
+        .child-location-group.clg-1 path {
+            stroke: #1ba3b6;
+        }
+
+        .child-location-group.clg-2 path {
+            stroke: #d0aee4;
+        }
+
+        .child-location-group.clg-3 path {
+            stroke: #a31bb6;
+        }
+
+        .child-location-group.clg-4 path {
+            stroke: #e4d0ae;
+        }
+
+        .child-location-group.clg-5 path {
+            stroke: #b6a31b;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        #nglyco {
+            padding-left: 20%
+        }
+
+        #oglyco {
+            padding-left: 20%
+        }
+
+        /* Style the tab */
+
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 30%;
+            height: 300px;
+        }
+
+        /* Style the buttons inside the tab */
+
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 70%;
+            border-left: none;
+            height: 300px;
+        }
+
+        .nav-item {
+            border-bottom: 1px solid hsl(188, 88%, 51%);
+            height: 40px;
+            background-color: #b2f5ff
+        }
+
+        .nav-item1 {
+            border-bottom: 1px solid hsl(188, 88%, 51%);
+            height: 40px;
+            background-color: #b2f5ff;
+        }
+
+        .nav-track {
+            border-bottom: 1px solid hsl(188, 88%, 51%);
+            height: 40px;
+            /* background-color: #b2f5ff; */
+            /* background-color: #e4d0ae */
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fa {
+            font: normal normal normal 22px/1 FontAwesome;
+            padding: 0;
+            position: initial
+        }
+
+        .img-wrapper {
+            z-index: -1;
+            padding-left: 10px;
+            padding: 0.5em;
+            width: 500px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+            "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+            color: #333333;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+            monospace;
+        }
+
+        small {
+            font-size: 1rem;
+        }
+
+        .img-cartoon {
+            display: block;
+            max-width: 400px;
+            max-height: 160px;
+            width: auto;
+            height: auto;
+            -webkit-transform: scale(1.0);
+            transform: scale(0.8);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+
+            /* //z-index: 99999; */
+            overflow: scroll;
+        }
+
+        .marker {
+            font-size: 20px;
+            /* color: #0886f4; */
+            color: white;
+        }
+    </style>
+
+
+</head>
+
+
+</head>
+
+<body onload="tracking()">
+    <!-- <div id='header'></div> -->
+    <script src="libraries/w3.js"></script>
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    <body data-gr-c-s-loaded="true">
+        <div id="root">
+            <div class="App">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <!-- breadcrumb filled by javascript -->
+                        <ul class="gg-breadcrumb">
+                            <li id="li-breadcrumb-search">
+                                <a href="#" id="breadcrumb-search">Protein Search</a>
+                            </li>
+                            <li id="li-breadcrumb-list">
+                                <a href="#" id="breadcrumb-list">Protein List</a>
+                            </li>
+                            <!-- <li><a href="#">Protein Detail</a></li> -->
+                            <li id="li-breadcrumb-detail">
+                                <a href="#" id="breadcrumb-detail">Protein Detail</a>
+                            </li>
+                            <li id="li-breadcrumb-visualizer">Protein visualizer</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <center>
+                        <h2 class="page-heading" style="margin-top: -5px;">Visualizer for protein
+                            <span id='title_protein'> </span>
+                        </h2>
+                    </center>
+                </div>
+                <div class="main">
+                    <div>
+                        <nav class="main-nav">
+                            <ul class="main-nav__list">
+                                <li class="nav-item1 nav-nav">
+                                    <a class="nav-link" href="#">Navigation</a>
+                                </li>
+                                <li class="nav-item nav-seq">
+                                    <a class="nav-link" href="#">Sequence</a>
+                                </li>
+                                <li class="nav-item nav-track" onclick="navglycoclick()">
+                                    <a class="nav-link" href="#">Glycosylation &nbsp&nbsp
+                                        <i class="fa fa-caret-right"></i>
+                                    </a>
+                                </li>
+                                <li id='nglyco' class="nav-item nav-track hidden">
+                                    <a class="nav-link" href="#">N-Glycosylation</a>
+                                </li>
+                                <li id='oglyco' class="nav-item nav-track hidden">
+                                    <a class="nav-link" href="#">O-Glycosylation</a>
+                                </li>
+                                <li class="nav-item nav-track">
+                                    <a class="nav-link" href="#">Mutation</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="main-content">
+                        <protvista-manager attributes="length displaystart displayend highlightstart highlightend variantfilters" id="manager">
+                        </protvista-manager>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dialog-confirm" title="Empty the recycle bin?">
+        </div>
+    </body>
+    <div w3-include-html="footer.html"></div>
+    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
+    <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/navbar.js"></script>
+    <script type="text/javascript" src="js/domain_url.js"></script>
+    <script src="js/ws_url.js"></script>
+    <!-- script for getting Web Service URLs -->
+    <script src="js/activity_tracker.js"></script>
+    <!-- script for logging activity -->
+    <script src="js/utility.js"></script>
+    <script type="text/javascript" src="js/protvista.js"></script>
+    <!-- <div id='footer'></div> -->
+</body>
+</html>

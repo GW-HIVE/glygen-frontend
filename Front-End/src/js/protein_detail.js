@@ -499,7 +499,13 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-
+function proteinView(){
+    var url = 'protvista_index.html';
+    url += '?uniprot_canonical_ac=' + uniprot_canonical_ac;
+    url += "&listID=" + getParameterByName("listID") || "";
+    // window.open(url); 
+    window.location.href=url;
+}
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');

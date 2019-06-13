@@ -371,8 +371,14 @@
                 <li class="cd-faq-title"/>
                 <div class="panel panel-default">
                     <div class="gg-panel-heading">
-                        <h4>Sequence</h4>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <h4>Sequence</h4> 
                     </div>
+                        <div class="col-md-6">
+                            <button onclick="proteinView()"class="button" id="viewprotein"><h4>Protein visualizer</h4></button></div>
+                    </div>
+                </div>
                     <div class="panel-body">
 
                         {{#sequence}}
