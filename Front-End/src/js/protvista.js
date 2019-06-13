@@ -143,7 +143,9 @@
          features.css( 'cursor', 'pointer' );
          features.on('click', function(){
              var start = $("#glycotrack").attr("highlightstart")
-             window.location.href = 'https://www.google.com/?q=position ' + start;
+             window.location = './site_view.html/?q=position ' + start;
+             //window.location = './site_view.html/?q=position ' + start;
+             //window.location = "https://www.tutorialspoint.com";
          });
  
      }
