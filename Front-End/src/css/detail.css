@@ -18,7 +18,11 @@
     box-shadow: 10px 10px 5px #ddd;
     z-index: 99999;
 }
-
+#viewprotein{
+    margin-top:6px;
+    border-color: #2f78b7;
+    
+}
 .img-wrapper1 {
     overflow: hidden;
     z-index: -9999;

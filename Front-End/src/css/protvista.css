@@ -5,7 +5,7 @@
 }
 
 .main-nav {
-    padding-top: 1rem;
+    padding-top: 1.5rem;
     height: 90vh;
     /* padding-top: 1.5rem; */
 }
@@ -26,7 +26,7 @@
     display: block;
     padding-left: 1rem;
     width: 100%;
-    line-height: 2.5rem;
+    line-height: 4.0rem;
     color: #333333;
     text-decoration: none;
 }
