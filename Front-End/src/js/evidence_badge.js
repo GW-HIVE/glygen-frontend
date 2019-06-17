@@ -64,10 +64,8 @@ function EvidencebadgeFormator(value, row, index, field) {
 
 // setting evidnec list for each badge
 function setupEvidenceList() {
-    // var $evidenceBadges = $('.evidence_badge');
-    // $evidenceBadges.each(function () {
         $('#content').on('click', '.evidence-badge-btn', show_evidence);
-    // });
+    
 }
 
 // show and hide evidences 
