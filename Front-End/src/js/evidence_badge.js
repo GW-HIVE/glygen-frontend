@@ -81,7 +81,7 @@ function show_evidence() {
     }
 
 }
-
+// Grouping evidences according to database
 function groupEvidences(item) {
     //group by evidence ids
     if (item && item.length) {

@@ -1,7 +1,9 @@
 <!--------------------------------
-@author: 
-@description: UO1 Version-1.0.
-@date-created: March 1, 2018
+ 
+/* @author:Rupali Mahadik.
+ @description: UO1 Version-1.1. 
+ @date:17 June 2019 (1st version for testing purpose)
+ */
 ------------------------------------>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +15,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Template</title>
+    <title>Glygen Protvista</title>
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
@@ -39,7 +41,7 @@
     <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
 
     <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
-
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;">
     <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="libraries/protvista/d3.v4.min.js"></script>
@@ -56,8 +58,10 @@
     <script src="libraries/protvista/protvista-sequence.js"></script>
     <script src="libraries/protvista/protvista-manager.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Glygen Protvista</title>
-
+   
+    <style>
+     
+    </style>
 </head>
 
 <body onload="tracking()">
@@ -83,55 +87,71 @@
                             <li id="li-breadcrumb-detail">
                                 <a href="#" id="breadcrumb-detail">Protein Detail</a>
                             </li>
-                            <li id="li-breadcrumb-visualizer">Protein visualizer</li>
+                            <li id="li-breadcrumb-visualizer">Protvista</li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <center>
-                        <h2 class="page-heading" style="margin-top: -5px;">Visualizer for protein
+                        <h3 class="page-heading" style="margin-top: -5px;">*Protvista view for protein
                             <span id='title_protein'> </span>
-                        </h2>
+                        </h3>
                     </center>
                 </div>
                 <div class="main">
-                    <div>
-                        <nav class="main-nav">
-                            <ul class="main-nav__list">
-                                <li class="nav-item1 nav-nav">
-                                    <a class="nav-link" href="#">Navigation</a>
-                                </li>
-                                <li class="nav-item nav-seq">
-                                    <a class="nav-link" href="#">Sequence</a>
-                                </li>
-                                <li class="nav-item nav-track" onclick="navglycoclick()">
-                                    <a class="nav-link" href="#">Glycosylation &nbsp&nbsp
-                                        <i class="fa fa-caret-right"></i>
-                                    </a>
-                                </li>
-                                <li id='nglyco' class="nav-item nav-track hidden">
-                                    <a class="nav-link" href="#">N-Glycosylation</a>
-                                </li>
-                                <li id='oglyco' class="nav-item nav-track hidden">
-                                    <a class="nav-link" href="#">O-Glycosylation</a>
-                                </li>
-                                <li class="nav-item nav-track">
-                                    <a class="nav-link" href="#">Mutation</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    <nav class="main-nav">
+                        <ul class="main-nav__list">
+                            <li class="nav-item1 nav-nav">
+                                <a class="nav-link" href="#">Navigation</a>
+                            </li>
+                            <li class="nav-item nav-seq">
+                                <a class="nav-link" href="#">Sequence</a>
+                            </li>
+                            <li class="nav-item nav-track" onclick="navglycoclick()">
+                                <a class="nav-link" href="#">Glycosylation &nbsp&nbsp
+                                    <i class="fa fa-caret-right"></i>
+                                </a>
+                            </li>
+                            <li id='nglyco' class="nav-item nav-track hidden">
+                                <a class="nav-link" href="#">N-Glycosylation</a>
+                            </li>
+                            <li id='oglyco' class="nav-item nav-track hidden">
+                                <a class="nav-link" href="#">O-Glycosylation</a>
+                            </li>
+                            <li class="nav-item nav-track">
+                                <a class="nav-link" href="#">Mutation</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+
                     <div class="main-content">
+
                         <protvista-manager attributes="length displaystart displayend highlightstart highlightend variantfilters" id="manager">
                         </protvista-manager>
+                        <button onclick="goBack()" class="btn btn-primary previous" id="viewprotein" >
+                            <font color="white";><span style='font-size:16px;'>&#8678;  Go Back</span></font>
+                        </button>
+                        <div class="footer1">
+                            Protvista orginally has been developed by 
+                            <a href=" https://www.ebi.ac.uk/" target="_blank">EMBL-EBI</a>
+                            <br>
+                            <span>Source Repository:
+                                <a href="https://github.com/ebi-webcomponents" target="_blank">EBI Web Components</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="dialog-confirm" title="Empty the recycle bin?">
-        </div>
     </body>
+
     <div w3-include-html="footer.html"></div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/navbar.js"></script>
@@ -143,6 +163,6 @@
     <script src="js/utility.js"></script>
     <script type="text/javascript" src="js/protvista.js"></script>
     <!-- <div id='footer'></div> -->
-</body>
+
 
 </html>

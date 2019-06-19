@@ -1,4 +1,8 @@
-
+ /* @author:Rupali Mahadik.
+ @description: UO1 Version-1.1. 
+ @date:17 June 2019
+ */
+ 
 .main {
     display: grid;
     grid-template-columns: 12% auto;
@@ -216,4 +220,27 @@ small {
     font-size: 20px;
     /* color: #0886f4; */
     color: white;
+}
+
+
+#viewprotein {
+    margin-top: 50px;
+    margin-left: 1500px;
+    position: absolute;
+}
+
+
+.footer1 {
+    position: absolute;
+    left: 0;
+    top: 81%;
+    width: 100%;
+    background-color: #b5b1b1;
+    color: white;
+    text-align: center;
+    font-size: 0.9em;
+    font-family: "Verdana", "Geneva", sans-serif;
+    z-index: 900000;
+    margin-top: 100px;
+    text-align-last: center;
 }

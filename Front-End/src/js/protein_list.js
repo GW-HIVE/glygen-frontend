@@ -217,7 +217,6 @@ function updateBreadcrumbLinks() {
 
 
 $(document).ready(function () {
-    // limit = $(element).val();
     LoadDataList();
     updateBreadcrumbLinks();
 });

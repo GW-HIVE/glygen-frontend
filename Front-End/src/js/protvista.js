@@ -1,5 +1,11 @@
+/* @author:Rupali Mahadik.
+ @description: UO1 Version-1.1. 
+ @date:17 June 2019
+ */
+
 var uniprot_canonical_ac = "";
 
+// to set data in datapoint variable
 function setupProtvista(data) {
   var allTrackData = {};
   var colors = ["red", "blue", "green", "black"];
@@ -9,7 +15,7 @@ function setupProtvista(data) {
   var typeToShape = {};
   var shapePtr = -1;
   var displayStart = 1;
-  var displayEnd = 120;
+  var displayEnd = 730;
   var highlightStart = 10;
 
   $.each(data.glycosylation, function(i, glycosylationData) {
@@ -137,10 +143,7 @@ function setupProtvista(data) {
 
   var mergedData = [];
   $.merge(mergedData, allTrackData["O-linked"] ? allTrackData["O-linked"] : []),
-    $.merge(
-      mergedData,
-      allTrackData["N-linked"] ? allTrackData["N-linked"] : []
-    ),
+    $.merge(  mergedData,allTrackData["N-linked"] ? allTrackData["N-linked"] : [] ),
     (document.querySelector("#glycotrack").data = mergedData);
   var glycoHTML1 =
     "<protvista-track id='glycotrack1'   class='nav-track hidden ' length='" +
@@ -221,6 +224,8 @@ function ajaxSuccess(data) {
   });
 }
 
+
+// hide and show n-glycan and o-glycan separate track or combined track
 function navglycoclick() {
   if ($("#nglyco").hasClass("hidden")) {
     $("#nglyco").removeClass("hidden");
@@ -247,6 +252,8 @@ $(document).ready(function() {
 
   updateBreadcrumbLinks();
 });
+
+//set up breadcrumb for navigation
 
 function updateBreadcrumbLinks() {
   const proteinacc = getParameterByName("uniprot_canonical_ac") || "";
@@ -293,16 +300,26 @@ function updateBreadcrumbLinks() {
   } else {
     $("#li-breadcrumb-detail").css("display", "none");
   }
+  if (proteinacc) {
+    $("#breadcrumb-details").attr(
+      "href",
+      glycanPageType +
+        "_detail.html?uniprot_canonical_ac=" +
+        proteinacc +
+        "&listID=" +
+        listID +
+        "#sequence"
+    );
+  } else {
+    $("#li-breadcrumb-details").css("display", "none");
+  }
 }
+
 
 function LoadData(uniprot_canonical_ac) {
   var ajaxConfig = {
     dataType: "json",
     url: getWsUrl("protein_detail", uniprot_canonical_ac),
-    //url: "http://api.glygen.org/protein/detail/" + uniprot_canonical_ac,
-    // /P16150-1",
-    // P14210-1",
-    //P07498-1",
     method: "GET",
     timeout: 1000,
     success: ajaxSuccess
