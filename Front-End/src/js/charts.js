@@ -189,8 +189,25 @@ function pieChart(dummy, data, id) {
 
 	var arcLabel = d3.arc().innerRadius(radius).outerRadius(radius);
 	
+    //to accumulate all pie elements with size < 1000
+    var accWhenLessThan = 1000;
+    $.extend(data, {"pie_motif_modified": []});
+    var motifOthers = {
+        "name": "Others",
+        "size": 0
+    }
+    $.each(data.pie_motif, function(i, v) {
+        if(v.size>=accWhenLessThan) {
+            data.pie_motif_modified.push(v);
+        }
+        else {
+            motifOthers.size += v.size;
+        }
+    });
+    data.pie_motif_modified.push(motifOthers);
+    
 	var path = g.selectAll('.piePie')
-		.data(pie(data.pie_motif))
+		.data(pie(data.pie_motif_modified))
 		.enter()
 		.append('g')
 		.attr('class', 'piePie')
@@ -261,7 +278,10 @@ function barChart(dummy, data, id){
 	var skipTickLabels = 4;
 	for(var i=0; i<bmr.data.length; i++) {
 		var label = currentRangeStart + bmr.stepsize;
-		barData.push({"name": label, "size": bmr.data[i]});
+		barData.push({
+            "name": label, 
+            "size": bmr.data[i], 
+            "range": currentRangeStart + "-" + (currentRangeStart + bmr.stepsize)});
 		currentRangeStart += bmr.stepsize;
 	}
 	// format the data
@@ -284,7 +304,14 @@ function barChart(dummy, data, id){
 				.attr("height", function(d) { return height - y(d.size); })
                 // On click goes to list page
 				.on("click", function(d) {
-				    console.log(d.size); //considering dot has a title attribute
+//				    console.log(d.size);
+                    var range = d.range.split("-");
+                    searchGlycansBy({
+                        "mass": {
+                            "mass_min": range[0], 
+                            "mass_max": range[1]}
+                        }
+                    );
 				})
 				.on("mousemove", function(d){
 					tooltip
@@ -368,7 +395,11 @@ function barChartSugar(dummy, data, id){
 	var skipTickLabels = 0;
 	for(var i=0; i<bsr.data.length; i++) {
 		var label = currentRangeStart + bsr.stepsize;
-		barData.push({"name": label, "size": bsr.data[i]});
+		barData.push({
+            "name": label, 
+            "size": bsr.data[i],
+            "range": currentRangeStart + "-" + (currentRangeStart + bsr.stepsize)
+        });
 		currentRangeStart += bsr.stepsize;
 	}
 	
@@ -392,14 +423,20 @@ function barChartSugar(dummy, data, id){
 				.attr("height", function(d) { return height - y(d.size); })
 				// On click goes to list page
 				.on("click", function(d) {
-				    console.log(d.size); //considering dot has a title attribute
+				    var range = d.range.split("-");
+                    searchGlycansBy({
+                        "sugar": {
+                            "sugar_min": range[0], 
+                            "sugar_max": range[1]}
+                        }
+                    );
 				})
 				.on("mousemove", function(d){
 					tooltip
 					  .style("left", d3.event.pageX - 50 + "px")
 					  .style("top", d3.event.pageY - 70 + "px")
 					  .style("display", "inline-block")
-					  .html("Sugar Range:" + " " + (d.name-bsr.stepsize + " " + "Da" + " " + "-" + " " +(d.name)) + " " + "Da" + "<br>" + "<br>" + (d.size) + " " +"Glycans");
+					  .html("Sugar Range:" + " " + (d.name-bsr.stepsize + " " + "-" + " " +(d.name)) + "<br>" + "<br>" + (d.size) + " " +"Glycans");
         		})
     			.on("mouseout", function(d){ tooltip.style("display", "none");});
 				
@@ -432,4 +469,53 @@ function barChartSugar(dummy, data, id){
 			.attr("dy", "32em")
 			.attr("text-anchor", "end")
 			.text("Sugar ranges");
+}
+
+
+
+function searchGlycansBy(param) {
+//    activityTracker("user", "", "Mass Range Search");
+    
+    var query_type = "mass_range_glycan_search";
+    var formObject = {
+        "operation": "AND",
+        query_type: query_type,
+    };
+    var chartId = "";
+    if(param.mass) {
+        $.extend(formObject, {mass: {
+            "min": parseInt(param.mass.mass_min),
+            "max": parseInt(param.mass.mass_max)
+        }})
+        chartId = "bar_chart";
+    }
+    else if(param.sugar) {
+        $.extend(formObject, {number_monosaccharides: {
+            "min": parseInt(param.sugar.sugar_min),
+            "max": parseInt(param.sugar.sugar_max)
+        }})
+        chartId = "bar_chart_sugar";
+    }
+    var json = "query=" + JSON.stringify(formObject);
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("glycan_search"),
+        data: json,
+        timeout: getTimeout("search_glycan"),
+        error: ajaxFailure,
+        success: function (results) {
+            if (results.error_code) {
+//                displayErrorByCode(results.error_code, results.field);
+                // activityTracker("error", "", results.error_code);
+//                activityTracker("error", "", "Advanced Search: " + results.error_code + " for " + json);
+            } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+//                displayErrorByCode('no-results-found');
+//                activityTracker("user", "", "Advanced Search: no result found for " + json);
+            } else {
+//                activityTracker("user", prevListId + ">" + results.list_id, "Advanced Search: Searched with modified parameters");
+                
+                window.location = './glycan_list.html?id=' + results.list_id + '&stat=' + chartId;
+            }
+        }
+    });
 }

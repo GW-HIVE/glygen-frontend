@@ -105,13 +105,17 @@ function editSearch() {
     var question = getParameterByName('question');
     var newUrl;
     const globalSearchTerm = getParameterByName("gs");
+    const stat = getParameterByName("stat");
 
     if (question && (question === 'QUESTION_TRY3')) {
 
         newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_6';
     } else if (globalSearchTerm) {
         newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
+    } else if(stat) {
+        newUrl = 'statistics.html#' + stat;
     }
+    
     else {
         newUrl = "glycan_search.html?id=" + id;
     }
