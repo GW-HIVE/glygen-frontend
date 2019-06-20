@@ -214,7 +214,9 @@ function pieChartMotif(dummy, data, id) {
 		.style('stroke', 'white')
         // On click goes to list page
         .on("click", function(d) {
-            console.log(d.data.size); //considering dot has a title attribute
+            //console.log(d.data.size); 
+            var motif = d.data.name;        
+            searchGlycansBy({"motif":motif});
         })
 		.on("mouseover", function(d) {
 //      		d3.selectAll('.piePie')
@@ -495,6 +497,12 @@ function searchGlycansBy(param) {
             "max": parseInt(param.sugar.sugar_max)
         }})
         chartId = "bar_chart_sugar";
+    }
+    else if(param.motif) {
+        $.extend(formObject, {
+            "glycan_motif": param.motif
+        })
+        chartId = "pie_chart_motif";
     }
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
