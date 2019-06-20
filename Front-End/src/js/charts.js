@@ -149,7 +149,7 @@ function donutChart(dummy, data, id) {
 	}
 
 
-function pieChart(dummy, data, id) {
+function pieChartMotif(dummy, data, id) {
 	var text = "",
 		width = 150,
 		height = 150,
@@ -237,7 +237,7 @@ function pieChart(dummy, data, id) {
 			.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
 }
 
-function barChart(dummy, data, id){
+function barChartMass(dummy, data, id){
 	// set the dimensions and margins of the graph
 	var margin = {top: 20, right: 20, bottom: 80, left: 30},
 		width = 960 - margin.left - margin.right,
@@ -487,7 +487,7 @@ function searchGlycansBy(param) {
             "min": parseInt(param.mass.mass_min),
             "max": parseInt(param.mass.mass_max)
         }})
-        chartId = "bar_chart";
+        chartId = "bar_chart_mass";
     }
     else if(param.sugar) {
         $.extend(formObject, {number_monosaccharides: {
