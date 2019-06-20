@@ -25,7 +25,7 @@ var dir = 'asc';
 var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 20;
 const globalSearchTerm = getParameterByName("gs") || "";
-
+const stat = getParameterByName("stat") || "";
 /**
  * it creates user interface for summary
  * @param {Object} queryInfo - the dataset of pagination info is retun from server
@@ -255,6 +255,9 @@ function updateBreadcrumbLinks() {
     if (globalSearchTerm) {
         $('#breadcrumb-search').text("General Search");
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
+    } else if (stat) {
+        $('#breadcrumb-search').text("Statistics");
+        $('#breadcrumb-search').attr("href", "statistics.html?search_query=" + stat);
     } else {
         $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + id);
     }
