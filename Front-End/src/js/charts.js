@@ -1,7 +1,7 @@
 //Tatiana Williamson
 // date: April 2019
 
-function donutChart(dummy, data, id) {
+function donutChartGlycan(dummy, data, id) {
 		var text = "",
 			widthD = 150,
 			heightD = 150,
@@ -46,14 +46,19 @@ function donutChart(dummy, data, id) {
 			.sort(null);
 
 		var theArc = group.selectAll(".arc")
-			.data(pie(data.donut))
+			.data(pie(data.glycan_homo))
 			.enter()
 			.append("g")
 			.attr("class", "arc")
 			// On click goes to list page
             .on("click", function(d) {
-                    console.log(d.data.size); //considering dot has a title attribute
-                })
+                searchGlycansBy({
+                    "organism": {
+                        "id": d.data.organism.id, 
+                        "name": d.data.organism.name},
+                    "glycan_type": d.data.glycan_type
+                });
+            })
 			.on("mouseover", function(d) {
 				let group = d3.select(this)
 				.append("g")
@@ -90,19 +95,24 @@ function donutChart(dummy, data, id) {
 				d3.select(this).transition()
             	.duration('50')
             	.attr('opacity', '1')
-				.style("cursor", "none");  
-//				.style("fill", colorD(this._current));
+				.style("cursor", "none");
 			})
 			.each(function(d, i) { this._current = i; });
 	
 		var theArc2 = group2.selectAll(".arc")
-			.data(pie(data.donut2))
+			.data(pie(data.glycan_mus))
 			.enter()
 			.append("g")
 			.attr("class", "arc")
             // On click goes to list page
             .on("click", function(d) {
-                console.log(d.data.size); //considering dot has a title attribute
+                //console.log(d.data.name); 
+                searchGlycansBy({
+                        "organism": {
+                            "id": d.data.organism.id, 
+                            "name": d.data.organism.name},
+                        "glycan_type": d.data.glycan_type
+                });
             })
 			.on("mouseover", function(d) {
 				let group2 = d3.select(this)
@@ -474,7 +484,6 @@ function barChartSugar(dummy, data, id){
 }
 
 
-
 function searchGlycansBy(param) {
 //    activityTracker("user", "", "Mass Range Search");
     
@@ -503,6 +512,15 @@ function searchGlycansBy(param) {
             "glycan_motif": param.motif
         })
         chartId = "pie_chart_motif";
+    }
+    else if(param.organism) {
+        $.extend(formObject, {organism: {
+            "id": param.organism.id,
+            "name": param.organism.name
+        },
+            "glycan_type": param.glycan_type
+        } )
+        chartId = "pie_chart_glycan";
     }
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({

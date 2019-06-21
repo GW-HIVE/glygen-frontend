@@ -134,15 +134,15 @@
         {"sets": [0, 1], "name": "", "tooltipname": "Human & Mouse glycans", "size": 304}
         ],
     
-    "donut": [
-        {"name": "Human O-glycans", "size": 200},
-        {"name": "Human N-glycans", "size": 700},
-        {"name": "Human Unclassified", "size": 100}
+    "glycan_homo": [
+        {"organism": {"id":9606,"name":"Homo sapiens"}, "glycan_type":"N-Glycan", "name": "Human N-Glycans", "size": 989},
+        {"organism": {"id":9606,"name":"Homo sapiens"}, "glycan_type":"O-Glycan", "name": "Human O-Glycans", "size": 312},
+        {"organism": {"id":9606,"name":"Homo sapiens"}, "glycan_type":"Other", "name": "Human Other", "size": 100}
     ],
-    "donut2": [
-        {"name": "Mouse O-glycans", "size": 195},
-        {"name": "Mouse N-glycans", "size": 715},
-        {"name": "Mouse Unclassified", "size": 110}
+    "glycan_mus": [
+        {"organism": {"id":10090,"name":"Mus musculus"}, "glycan_type":"N-Glycan", "name": "Mouse N-Glycans", "size": 261},
+        {"organism": {"id":10090,"name":"Mus musculus"}, "glycan_type":"O-Glycan", "name": "Mouse O-Glycans", "size": 12},
+        {"organism": {"id":10090,"name":"Mus musculus"}, "glycan_type":"Other", "name": "Mouse Other", "size": 10}
     ],
     "pie_motif": [
 		{

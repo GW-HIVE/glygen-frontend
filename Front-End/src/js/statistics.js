@@ -261,9 +261,9 @@ function focusOn(d = {
 	//    Donut Chart
 	//-------------------------------
 
-	var donut = donutChart;
-	d3.select('#donut_chart')
-		.call(donut, jsonData, "#donut_chart"); // draw chart in div
+	var donut = donutChartGlycan;
+	d3.select('#donut_chart_glycan')
+		.call(donut, jsonData, "#donut_chart_glycan"); // draw chart in div
 	//-------------------------------
 	//    Pie Chart
 	//-------------------------------	
