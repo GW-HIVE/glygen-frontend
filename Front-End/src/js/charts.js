@@ -86,10 +86,15 @@ function donutChartGlycan(dummy, data, id) {
 			.attr('d', arc)
 			.attr('fill', (d,i) => colorD(i))
 			.on("mouseover", function(d) {
+                if (d.data.glycan_type != "Other") {
 				d3.select(this).transition()
             	.duration('50')
             	.attr('opacity', '.65')     
 				.style("cursor", "pointer");
+                } else {
+                    d3.select(this)
+				    .style("cursor", "default");  
+                }
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).transition()
@@ -141,11 +146,15 @@ function donutChartGlycan(dummy, data, id) {
 			.attr('d', arc2)
 			.attr('fill', (d,i) => colorD2(i))
 			.on("mouseover", function(d) {
+                if (d.data.glycan_type != "Other") {
 				d3.select(this).transition()
             	.duration('50')
             	.attr('opacity', '.65')     
 				.style("cursor", "pointer");
-//				.style("fill", "#888");
+                } else {
+                    d3.select(this)
+				    .style("cursor", "default");  
+                }
 			})
 			.on("mouseout", function(d) {
 				d3.select(this).transition()
@@ -203,7 +212,7 @@ function pieChartMotif(dummy, data, id) {
     var accWhenLessThan = 1000;
     $.extend(data, {"pie_motif_modified": []});
     var motifOthers = {
-        "name": "Others",
+        "name": "Other",
         "size": 0
     }
     $.each(data.pie_motif, function(i, v) {
@@ -230,11 +239,14 @@ function pieChartMotif(dummy, data, id) {
         })
 		.on("mouseover", function(d) {
 //      		d3.selectAll('.piePie')
-
+            if (d.data.name != "Other") {
       		d3.select(this) 
         	.attr('opacity', '.65') 
 			.style("cursor", "pointer"); 
-			
+            } else {
+                d3.select(this)
+                .style("cursor", "default");  
+            }
     	})
 		.on("mouseout", function(d) {           
 			d3.selectAll('.piePie')
