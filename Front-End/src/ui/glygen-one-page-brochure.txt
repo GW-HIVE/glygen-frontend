@@ -1,0 +1,43 @@
+                                  Computational and Informatics
+G l y G en
+                                    Resources for Glycoscience
+
+
+
+                        GlyGen is a data integration and dissemination
+                        project for carbohydrate and glycoconjugate
+                        related data. GlyGen retrieves information from
+                        multiple international data sources and integrates
+                        and harmonizes this data. This web portal allows
+                        exploring this data and performing unique
+                        searches that cannot be executed in any of the
+                        integrated databases alone.
+
+
+
+
+        DATA INTEGRATION                       QUICK SEARCH                 DATA COLLECTION
+      Data from the different              Complex multi-domain            Data integration with
+       resources are accessed               search queries can be          intensive data quality
+         and downloaded in                performed using the quick         control. Metadata is
+     resource-specific formats            searches which are based           captured using the
+      (e.g. RDF, FASTA, CSV).                 on user requests.             BioCompute Object
+                                                                                  schema.
+
+
+
+
+       EXPLORE SEARCHES                           RESOURCES                SPARQL ENDPOINT
+     GlyGen provides user with            Online library of resources      All datasets are also
+         Glycan, Protein,                 for science in glycobiology    RDFized using standard
+     Glycoprotein searches via              includes data resources,     ontologies (e.g. UniProt
+     simple or advanced search             tools, learning materials,    RDF schema, GlycoCoO,
+              options.                       tutorials, social media,    FALDO) and provided by
+                                           contact us, and feedback.       our public endpoint.
+
+
+    Web portal: https://glygen.org                      CONTACT                        https://twitter.com/gly_gen
+    Data store: https://data.glygen.org      Will York     will@ccrc.uga.edu
+    WS API:     https://api.glygen.org       Raja Mazumder mazumder@gwu.edu
+                                                                                   GlyGen.org
+
