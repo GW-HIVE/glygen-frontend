@@ -9,10 +9,8 @@ usage()
         echo "            -s [sparql url]      Root of sparql"
         echo "            -d [data url]        Root of datasetviewer"
         echo ""
-        echo "            -p [html root]    html root, if not supplied defaults to /var/www"
-        echo ""
         echo "examples:    ./set_urls.sh -d https://glygen.ccrc.uga.edu/glygen/data -a https://glygen.ccrc.uga.edu/glgyen/api/ -s https://glygen.ccrc.uga.edu/glygen/sparql/"
-        echo "examples:    ./set_urls.sh -p /opt/apache/ -d /data -a /api/ -s /sparql/"
+        echo "examples:    ./set_urls.sh -d /data -a /api/ -s /sparql/"
         exit 3
 }
 
@@ -25,7 +23,6 @@ while getopts :a:s:d:p: OPTNAME; do
         a)      api_url="$OPTARG";;
         s)      sparql_url="$OPTARG";;
         d)      data_url="$OPTARG";;
-        p)      html_root=("$OPTARG");;
         *)      usage;;
         esac
 done
@@ -47,10 +44,10 @@ fi
 
 # in /var/www/html/glygen/js/domain_url.js
 # set ws_base to api_url
-sed -ri "s/^(var\s*ws_base\s*=\s*).*/\1'${api_url//\//\\/}';/" $html_root/html/glygen/js/domain_url.js
+sed -ri "s/^(var\s*ws_base\s*=\s*).*/\1'${api_url//\//\\/}';/" src/js/domain_url.js
 
 # set ws_base_data to data_url
-sed -ri "s/^(var\s*ws_base_data\s*=\s*).*/\1'${data_url//\//\\/}';/" $html_root/html/glygen/js/domain_url.js
+sed -ri "s/^(var\s*ws_base_data\s*=\s*).*/\1'${data_url//\//\\/}';/" src/js/domain_url.js
 
 # set ws_base_sparql to sparql_url
-sed -ri "s/^(var\s*ws_base_sparql\s*=\s*).*/\1'${sparql_url//\//\\/}';/" $html_root/html/glygen/js/domain_url.js
+sed -ri "s/^(var\s*ws_base_sparql\s*=\s*).*/\1'${sparql_url//\//\\/}';/" src/js/domain_url.js
