@@ -243,6 +243,7 @@ small {
     width: 100%;
     bottom: 14%;
   }
+  
 }
 
 body {
@@ -259,27 +260,43 @@ ul {
   color: black;
 }
 
-.super1 {
-  color: blue;
-  font-size: 16px;
-  cursor: pointer;
-}
 
-.super {
+/* circle */
+.super1 {
   color: red;
-  font-size: 16px;
+  font-size: 22px;
   padding-top: 10px;
   cursor: pointer;
 }
-
+/* triangle */
 .super2 {
+  color: red;
+  font-size: 14px;
+  padding-top: 10px;
+  cursor: pointer;
+}
+/* circle */
+.super3 {
+  color: blue;
+  font-size: 22px;
+  cursor: pointer;
+}
+/* triangle */
+.super4 {
+  color: blue;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* dimond  */
+.super5 {
+  font-size: 22px;
+  color: green;
+  cursor: pointer;
+}
+.superx {
   font-size: 14px;
   color: black;
   cursor: pointer;
 }
 
-.super3 {
-  font-size: 22px;
-  color: green;
-  cursor: pointer;
-}
