@@ -44,10 +44,10 @@ fi
 
 # in /var/www/html/glygen/js/domain_url.js
 # set ws_base to api_url
-sed -ri "s/^(var\s*ws_base\s*=\s*).*/\1'${api_url//\//\\/}';/" src/js/domain_url.js
+sed -ri "s/^(var\s*ws_base\s*=\s*).*/\1'${api_url//\//\\/}';/" src/js/domain_url*.js
 
 # set ws_base_data to data_url
-sed -ri "s/^(var\s*ws_base_data\s*=\s*).*/\1'${data_url//\//\\/}';/" src/js/domain_url.js
+sed -ri "s/^(var\s*ws_base_data\s*=\s*).*/\1'${data_url//\//\\/}';/" src/js/domain_url*.js
 
 # set ws_base_sparql to sparql_url
-sed -ri "s/^(var\s*ws_base_sparql\s*=\s*).*/\1'${sparql_url//\//\\/}';/" src/js/domain_url.js
+sed -ri "s/^(var\s*ws_base_sparql\s*=\s*).*/\1'${sparql_url//\//\\/}';/" src/js/domain_url*.js
