@@ -2,7 +2,7 @@
    /* @author:Rupali Mahadik.
     @description: UO1 Version-1.1. 
     @date:17 June 2019 (1st version for testing purpose)
-    @date:1 july Improvements release 
+    @date:27 June Improvements release 
     */
    ------------------------------------>
    <!DOCTYPE html>
@@ -54,7 +54,8 @@
          <script src="libraries/protvista/protvista-navigation.js"></script>
          <script src="libraries/protvista/protvista-zoomable.js"></script>
          <script src="libraries/protvista/protvista-tooltip.js"></script>
-         <script src="libraries/protvista/protvista-track.js"></script>
+         <!-- <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
+         --><script src="libraries/protvista/protvista-track.js"></script> 
          <script src="libraries/protvista/protvista-sequence.js"></script>
          <script src="libraries/protvista/protvista-manager.js"></script>
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -194,26 +195,7 @@
       <div w3-include-html="footer.html"></div>
       <div w3-include-html="footernote.html"></div>
       <script>
-         function goBack() {
-             window.history.back();
-         }
-         $(window).on('resize', function() {
-             location.reload();
-         });
-         
-         $( document ).ready(function() {
-         
-         
-         
-         $(".hover").hover(function hoverIn(){
-         //  $('.nav-track').css("background-color", "inherit");
-         var id = $(this).attr('data-highlight');
-         $('#' + id).css("background-color", "rgba(255,255,0,0.3)");
-         
-         }, function hoverOut(){
-         $('.hover-style').css("background-color", "inherit");
-         });
-         });
+
          
       </script>
       <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>

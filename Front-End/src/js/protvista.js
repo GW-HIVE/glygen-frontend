@@ -1,7 +1,8 @@
 /* @author:Rupali Mahadik.
  @description: UO1 Version-1.1. 
- @date:17 June 2019
- */
+ @date:17 June 2019.
+ @updated:27 June 2019.
+ */ 
 
 var uniprot_canonical_ac = "";
 
@@ -17,94 +18,108 @@ function setupProtvista(data) {
   var displayStart = 1;
   var displayEnd = 730;
   var highlightStart = 10;
-
-  $.each(data.glycosylation, function(i, glycosylationData) {
-    if (!(glycosylationData.type in allTrackData)) {
-      allTrackData[glycosylationData.type] = {};
-      colorPtr += 1;
-      typeToColor[glycosylationData.type] = colors[colorPtr];
-      shapePtr += 1;
-      typeToShape[glycosylationData.type] = shapes[shapePtr];
+ 
+  var glycos = [
+    {
+      type: "N-Linked-With-Image",
+      residues: [],
+      color: "red",
+      shape: "circle"
+    },
+    {
+      type: "N-Linked-No-Image",
+      residues: [],
+      color: "red",
+      shape: "triangle"
+    },
+    {
+      type: "O-Linked-With-Image",
+      residues: [],
+      color: "blue",
+      shape: "circle"
+    },
+    {
+      type: "O-Linked-No-Image",
+      residues: [],
+      color: "blue",
+      shape: "triangle"
     }
+  ];
 
-    var key = glycosylationData.position;
-    var tooltip = "";
-
-    if (glycosylationData.glytoucan_ac) {
-      tooltip =
-        "<img src='" +
-        "https://api.glygen.org/glycan/image/" +
-        glycosylationData.glytoucan_ac +
-        "' />";
-    } else {
-      tooltip =
-        "<span>Glycosylation site without reported glycan at " +
-        key +
-        " </span>";
+  var mutations = [
+    {
+      type: "Mutations",
+      residues: [],
+      color: "green",
+      shape: "diamond"
     }
-    var dataPoint = {
-      accession: data.uniprot.uniprot_canonical_ac,
-      start: glycosylationData.position,
-      end: glycosylationData.position,
-      color: typeToColor[glycosylationData.type],
-      shape: typeToShape[glycosylationData.type],
-      tooltipContent: tooltip,
-      type: "Position",
-      tooltipCount: 1
-    };
+  ];
 
-    if (key in allTrackData[glycosylationData.type]) {
-      var existingPoint = allTrackData[glycosylationData.type][key];
-      if (existingPoint.tooltipCount < 1) {
-        existingPoint.tooltipContent += dataPoint.tooltipContent
-          ? "<br><br>" + dataPoint.tooltipContent
-          : "";
-      } else if (existingPoint.tooltipCount == 1) {
-        existingPoint.tooltipContent +=
-          "<br><br><span class=marker>Click marker show more</span>";
+  $.each(data.glycosylation, function(i, glyco){
+    if(glyco.type === "N-linked"){
+      if(glyco.glytoucan_ac){
+        glycos[0].residues.push({
+           start: glyco.position,
+           end: glyco.position,
+           color: glycos[0].color,
+           shape: glycos[0].shape,
+           accession: data.uniprot.uniprot_canonical_ac,
+           type: glyco.residue,
+           tooltipContent: "<img src='https://api.glygen.org/glycan/image/" + glyco.glytoucan_ac +"' /><br/></br><span class=marker>Click marker show more</span>",
+          
+        });
       }
-      if (dataPoint.tooltipContent) {
-        existingPoint.tooltipCount += 1;
+      else{
+        glycos[1].residues.push({
+           start: glyco.position,
+           end: glyco.position,
+           color: glycos[1].color,
+           shape: glycos[1].shape,
+           accession: data.uniprot.uniprot_canonical_ac,
+           type: glyco.residue,
+           tooltipContent: "<span>Glycosylation site without reported glycan at " + glyco.position + " </span>",
+        });
       }
-    } else {
-      allTrackData[glycosylationData.type][key] = dataPoint;
+    }
+    else if(glyco.type === "O-linked"){
+      if(glyco.glytoucan_ac){
+        glycos[2].residues.push({
+           start: glyco.position,
+           end: glyco.position,
+           color: glycos[2].color,
+           shape: glycos[2].shape,
+           accession: data.uniprot.uniprot_canonical_ac,
+           type: glyco.residue,
+           tooltipContent: "<img src='https://api.glygen.org/glycan/image/" + glyco.glytoucan_ac +"' /><br/><br/><span class=marker>Click marker show more</span>",
+         
+        });
+      }
+      else{
+        glycos[3].residues.push({
+           start: glyco.position,
+           end: glyco.position,
+           color: glycos[3].color,
+           shape: glycos[3].shape,
+           accession: data.uniprot.uniprot_canonical_ac,
+           type: glyco.residue,
+           tooltipContent: "<span>Glycosylation site without reported glycan at " + glyco.position + " </span>",
+  
+        });
+      }
     }
   });
-  $.each(allTrackData, function(key, value) {
-    allTrackData[key] = Object.values(allTrackData[key]);
-  });
 
-  var allTrackDataM = {};
-  var colorsM = ["green", "red", "green", "black"];
-  var typeToColorM = {};
-  var colorPtrM = 1;
-  var shapesM = ["catFace", "diamond", "triangle"];
-  var typeToShapeM = {};
-  var shapePtrM = 1;
-  var displayStartM = 1;
-  var displayEndM = 150;
-  var highlightStartM = 100;
-  $.each(data.mutation, function(i, mutationData) {
-    var fixedType = mutationData.type.replace(/ /g, "-");
-
-    if (!(fixedType in allTrackDataM)) {
-      allTrackDataM[fixedType] = [];
-      colorPtrM += 1;
-      typeToColorM[fixedType] = colorsM[colorPtrM];
-      shapePtrM += 1;
-      typeToShapeM[fixedType] = shapesM[shapePtrM];
-    }
-
-    var dataPoint = {
+  $.each(data.mutation, function(i, mutation){
+    mutations[0].residues.push({
+      start: mutation.start_pos,
+      end:  mutation.end_pos,
+      color:  mutations[0].color,
+      shape:  mutations[0].shape,
       accession: data.uniprot.uniprot_canonical_ac,
-      start: mutationData.start_pos,
-      end: mutationData.end_pos,
-      color: typeToColorM[fixedType],
-      shape: typeToShapeM[fixedType],
-      type: "Mutation",
-      tooltipContent: "<span>annotation " + mutationData.annotation + "</span>"
-    };
-    allTrackDataM[fixedType].push(dataPoint);
+      type: "(" + mutation.sequence_org + " &#8594 " + mutation.sequence_mut + ")",
+      tooltipContent: "<span> annotation " + mutation.annotation + "</span>"
+    
+    });
   });
 
   var navHTML =
@@ -140,11 +155,13 @@ function setupProtvista(data) {
     highlightStart +
     "'></protvista-track>";
   $(glycoHTML).appendTo("#manager");
+  var alltrack = [];
+  $.merge(alltrack, glycos[0].residues);
+  $.merge(alltrack, glycos[1].residues);
+  $.merge(alltrack, glycos[2].residues);
+  $.merge(alltrack, glycos[3].residues);
+  document.querySelector("#glycotrack").data = alltrack;
 
-  var mergedData = [];
-  $.merge(mergedData, allTrackData["O-linked"] ? allTrackData["O-linked"] : []),
-    $.merge(  mergedData,allTrackData["N-linked"] ? allTrackData["N-linked"] : [] ),
-    (document.querySelector("#glycotrack").data = mergedData);
   var glycoHTML1 =
     "<protvista-track id='glycotrack1'   class='nav-track hidden ' length='" +
     data.uniprot.length +
@@ -157,8 +174,8 @@ function setupProtvista(data) {
     "'></protvista-track>";
   $(glycoHTML1).appendTo("#manager");
 
-  var ntrachtml =
-    "<protvista-track class='nav-track hidden' id='track_narray' length='" +
+  var nitrachtml =
+    "<protvista-track class='nav-track hidden hover-style' id='Ntrack_withImage' length='" +
     data.uniprot.length +
     "' displaystart='" +
     displayStart +
@@ -167,13 +184,10 @@ function setupProtvista(data) {
     "' highlightStart='" +
     highlightStart +
     "' ></protvista-track>";
-  $(ntrachtml).appendTo("#manager");
-
-  document.querySelector("#track_narray").data = allTrackData["N-linked"]
-    ? allTrackData["N-linked"]
-    : [];
-  var otrachtml =
-    "<protvista-track class='nav-track hidden' id='track_oarray' length='" +
+  $(nitrachtml).appendTo("#manager");
+  document.querySelector("#Ntrack_withImage").data = glycos[0].residues;
+   var nwitrachtml =
+    "<protvista-track class='nav-track hidden hover-style' id='Ntrack_withnoImage' length='" +
     data.uniprot.length +
     "' displaystart='" +
     displayStart +
@@ -182,27 +196,53 @@ function setupProtvista(data) {
     "' highlightStart='" +
     highlightStart +
     "' ></protvista-track>";
-  $(otrachtml).appendTo("#manager");
+  $(nwitrachtml).appendTo("#manager");
+  document.querySelector("#Ntrack_withnoImage").data = glycos[1].residues;
 
-  document.querySelector("#track_oarray").data = allTrackData["O-linked"]
-    ? allTrackData["O-linked"]
-    : [];
-  $.each(allTrackDataM, function(trackTypeM, trackDataM) {
-    var trackHTMLM =
-      "<protvista-track  class='nav-track'id='track_" +
-      trackTypeM +
-      "' length='" +
-      data.uniprot.length +
-      "' displaystart='" +
-      displayStartM +
-      "' displayend='" +
-      displayEndM +
-      "' highlightStart='" +
-      highlightStartM +
-      "' ></protvista-track>";
-    $(trackHTMLM).appendTo("#manager");
-    document.querySelector("#track_" + trackTypeM).data = trackDataM;
-  });
+ 
+  var oitrachtml =
+    "<protvista-track class='nav-track hidden hover-style' id='Otrack_withImage' length='" +
+    data.uniprot.length +
+    "' displaystart='" +
+    displayStart +
+    "' displayend='" +
+    displayEnd +
+    "' highlightStart='" +
+    highlightStart +
+    "' ></protvista-track>";
+  $(oitrachtml).appendTo("#manager");
+  document.querySelector("#Otrack_withImage").data = glycos[2].residues;
+
+
+  var owitrachtml =
+  "<protvista-track class='nav-track hidden hover-style' id='Otrack_withnoImage' length='" +
+  data.uniprot.length +
+  "' displaystart='" +
+  displayStart +
+  "' displayend='" +
+  displayEnd +
+  "' highlightStart='" +
+  highlightStart +
+  "' ></protvista-track>";
+$(owitrachtml).appendTo("#manager");
+
+  document.querySelector("#Otrack_withnoImage").data = glycos[3].residues;
+ 
+
+  var mutrachtml =
+  "<protvista-track class='nav-track hover-style' id='track_muarray' length='" +
+  data.uniprot.length +
+  "' displaystart='" +
+  displayStart +
+  "' displayend='" +
+  displayEnd +
+  "' highlightStart='" +
+  highlightStart +
+  "' ></protvista-track>";
+  $(mutrachtml).appendTo("#manager");
+  document.querySelector("#track_muarray").data = mutations[0].residues;
+
+ 
 
   var features = $("g .feature-group");
   features.css("cursor", "pointer");
@@ -217,28 +257,43 @@ function setupProtvista(data) {
  * @param {Object} data - the data set returned from the server on success
  */
 function ajaxSuccess(data) {
+  if (data.error_code) {
+    activityTracker("error", uniprot_canonical_ac, data.error_code);
+    // activity tracker.
+    alertify.alert('Error occured', data.error_code);
+} else {
+    activityTracker("user", uniprot_canonical_ac, "successful response");
   setupProtvista(data);
   // to change the svg position
   document.querySelectorAll("g.sequence-features").forEach(x => {
     x.setAttribute("transform", "translate(0, -15)");
   });
 }
+}
 
 
 // hide and show n-glycan and o-glycan separate track or combined track
 function navglycoclick() {
-  if ($("#nglyco").hasClass("hidden")) {
-    $("#nglyco").removeClass("hidden");
-    $("#oglyco").removeClass("hidden");
-    $("#track_narray").removeClass("hidden");
-    $("#track_oarray").removeClass("hidden");
+  if ($("#reported_Nglycan").hasClass("hidden")) {
+    $("#reported_Nglycan").removeClass("hidden");
+    $("#nonreported_Nglycan").removeClass("hidden");    
+    $("#reported_Oglycan").removeClass("hidden");
+    $("#nonreported_Oglycan").removeClass("hidden");
+    $("#Ntrack_withImage").removeClass("hidden");
+    $("#Ntrack_withnoImage").removeClass("hidden");
+    $("#Otrack_withImage").removeClass("hidden");
+    $("#Otrack_withnoImage").removeClass("hidden");
     $("#glycotrack1").removeClass("hidden");
     $("#glycotrack").addClass("hidden");
   } else {
-    $("#nglyco").addClass("hidden");
-    $("#oglyco").addClass("hidden");
-    $("#track_narray").addClass("hidden");
-    $("#track_oarray").addClass("hidden");
+    $("#reported_Nglycan").addClass("hidden");
+    $("#nonreported_Nglycan").addClass("hidden");
+    $("#reported_Oglycan").addClass("hidden");
+    $("#nonreported_Oglycan").addClass("hidden");
+    $("#Ntrack_withImage").addClass("hidden");
+    $("#Ntrack_withnoImage").addClass("hidden");
+    $("#Otrack_withImage").addClass("hidden");
+    $("#Otrack_withnoImage").addClass("hidden");
     $("#glycotrack1").addClass("hidden");
     $("#glycotrack").removeClass("hidden");
   }
@@ -247,9 +302,7 @@ function navglycoclick() {
 $(document).ready(function() {
   uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
   $("#title_protein").html(uniprot_canonical_ac);
-
   LoadData(uniprot_canonical_ac);
-
   updateBreadcrumbLinks();
 });
 
@@ -328,6 +381,21 @@ function LoadData(uniprot_canonical_ac) {
   // calls the service
   $.ajax(ajaxConfig);
 }
+
+function goBack() {
+  window.history.back();
+}
+$(window).on('resize', function() {
+  location.reload();
+});
+$(".hover").hover(function hoverIn(){
+
+var id = $(this).attr('data-highlight');
+$('#' + id).css("background-color", "rgba(255,255,0,0.3)");
+
+}, function hoverOut(){
+$('.hover-style').css("background-color", "inherit");
+});
 
 /**
  * getParameterByName function to Extract query parameters from url
