@@ -87,6 +87,8 @@
                     <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
                     <nonFilteredFileExtension>woff</nonFilteredFileExtension>
                     <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+                    <nonFilteredFileExtension>pptx</nonFilteredFileExtension>
                   </nonFilteredFileExtensions>
                   <outputDirectory>${to}</outputDirectory> 
                   <resources>          
