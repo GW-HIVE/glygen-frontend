@@ -6,23 +6,23 @@ function vennGlycanHomoMus(dummy, data, id) {
 		.width(350)
 		.height(350);
 
-	var div_homo_mus = d3.select(id)
-	var data = div_homo_mus.datum(data.venn_glycans_homo_mus)
+	var div_glycan_homo_mus = d3.select(id)
+	div_glycan_homo_mus.datum(data.venn_glycans_homo_mus)
 		.call(glycan_homo_mus);
 
 	var tooltip = d3.select("body").append("div")
 		.attr("class", "venntooltip")
 		.style("cursor", "pointer");
 
-	div_homo_mus.selectAll("path")
+	div_glycan_homo_mus.selectAll("path")
 		.style("stroke-opacity", 0)
 		.style("stroke", "#fff")
-		.style("stroke-width", 3)
+		.style("stroke-width", 3);
 
-	div_homo_mus.selectAll("g")
+	div_glycan_homo_mus.selectAll("g")
 		.on("mouseover", function (d, i) {
 			// sort all the areas relative to the current item
-			venn.sortAreas(div_homo_mus, d);
+			venn.sortAreas(div_glycan_homo_mus, d);
 
 			// Display a tooltip with the current size
 			tooltip.transition().duration(400)
@@ -160,7 +160,9 @@ function donutChartGlycan(dummy, data, id) {
 					.attr('opacity', '.65')
 					.style("cursor", "pointer");
 			} else {
-				d3.select(this)
+				d3.select(this).transition()
+					.duration('50')
+					.attr('opacity', '.65')
 					.style("cursor", "default");
 			}
 		})
@@ -223,7 +225,9 @@ function donutChartGlycan(dummy, data, id) {
 					.attr('opacity', '.65')
 					.style("cursor", "pointer");
 			} else {
-				d3.select(this)
+				d3.select(this).transition()
+					.duration('50')
+					.attr('opacity', '.65')
 					.style("cursor", "default");
 			}
 		})

@@ -92,7 +92,7 @@
 			}
 		]
 	},
-	"protein_venn": [{
+	"venn_protein_homo": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
 			"name": "Proteins",
@@ -181,7 +181,7 @@
 			},
 			"glycan_type": "Other",
 			"name": "Human Other",
-			"size": 100
+			"size": 2001
 		}
 	],
 	"glycan_mus": [{
@@ -209,7 +209,7 @@
 			},
 			"glycan_type": "Other",
 			"name": "Mouse Other",
-			"size": 10
+			"size": 244
 		}
 	],
 	"pie_motif": [{

@@ -162,28 +162,29 @@ function focusOn(d = {
 }
 
 	//--------------------
-	//      Proteins Venn Diagram
+	//      Proteins Venn Diagram. Human proteins.
 	//----------------------
 
-	var chart = venn.VennDiagram()
+	var protein_homo = venn.VennDiagram()
 		.width(350)
 		.height(350);
 
-	var div = d3.select("#venn")
-	div.datum(jsonData.protein_venn).call(chart);
+	var div_protein_homo = d3.select("#venn_protein_homo")
+	div_protein_homo.datum(jsonData.venn_protein_homo).call(protein_homo);
 
 	var tooltip = d3.select("body").append("div")
-		.attr("class", "venntooltip");
+		.attr("class", "venntooltip")
+		.style("cursor", "pointer");
 
-	div.selectAll("path")
+	div_protein_homo.selectAll("path")
 		.style("stroke-opacity", 0)
 		.style("stroke", "#fff")
-		.style("stroke-width", 3)
+		.style("stroke-width", 3);
 
-	div.selectAll("g")
+	div_protein_homo.selectAll("g")
 		.on("mouseover", function (d, i) {
 			// sort all the areas relative to the current item
-			venn.sortAreas(div, d);
+			venn.sortAreas(div_protein_homo, d);
 
 			// Display a tooltip with the current size
 			tooltip.transition().duration(400).style("opacity", .9);
@@ -193,7 +194,8 @@ function focusOn(d = {
 			var selection = d3.select(this).transition("tooltip").duration(400);
 			selection.select("path")
 				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-				.style("stroke-opacity", 1);
+				.style("stroke-opacity", 1)
+				.style("cursor", "pointer");
 		})
 
 		.on("mousemove", function () {
@@ -217,25 +219,25 @@ function focusOn(d = {
 		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus"); // draw chart in div
 	
 	//-------------------------------
-	//    Donut Chart
+	//    Donut Glycan Chart. Human and mouse glycans.
 	//-------------------------------
-	var donut = donutChartGlycan;
+	var donutGlycan = donutChartGlycan;
 	d3.select('#donut_chart_glycan')
-		.call(donut, jsonData, "#donut_chart_glycan"); // draw chart in div
+		.call(donutGlycan, jsonData, "#donut_chart_glycan"); // draw chart in div
 	 
 	//-------------------------------
-	//    Pie Chart
+	//    Pie Motif Chart. Motifs and their frequencies
 	//-------------------------------	
-	var pie = pieChartMotif;
+	var pieMotif = pieChartMotif;
 	d3.select('#pie_chart_motif')
-		.call(pie, jsonData, "#pie_chart_motif"); // draw chart in div
+		.call(pieMotif, jsonData, "#pie_chart_motif"); // draw chart in div
 
 	//-----------------------------------
 	//	Bar Chart Mass range
 	//--------------------------------
-	var bar = barChartMass;
+	var barMass = barChartMass;
 	d3.select('#bar_chart_mass')
-		.call(bar, jsonData, "#bar_chart_mass"); // draw chart in div
+		.call(barMass, jsonData, "#bar_chart_mass"); // draw chart in div
 
 	//-----------------------------------
 	//	Bar Chart Sugar range
