@@ -165,51 +165,9 @@ function focusOn(d = {
 	//      Proteins Venn Diagram. Human proteins.
 	//----------------------
 
-	var protein_homo = venn.VennDiagram()
-		.width(350)
-		.height(350);
-
-	var div_protein_homo = d3.select("#venn_protein_homo")
-	div_protein_homo.datum(jsonData.venn_protein_homo).call(protein_homo);
-
-	var tooltip = d3.select("body").append("div")
-		.attr("class", "venntooltip")
-		.style("cursor", "pointer");
-
-	div_protein_homo.selectAll("path")
-		.style("stroke-opacity", 0)
-		.style("stroke", "#fff")
-		.style("stroke-width", 3);
-
-	div_protein_homo.selectAll("g")
-		.on("mouseover", function (d, i) {
-			// sort all the areas relative to the current item
-			venn.sortAreas(div_protein_homo, d);
-
-			// Display a tooltip with the current size
-			tooltip.transition().duration(400).style("opacity", .9);
-			tooltip.text(d.size + '\n' + d.tooltipname);
-
-			// highlight the current path
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-				.style("stroke-opacity", 1)
-				.style("cursor", "pointer");
-		})
-
-		.on("mousemove", function () {
-			tooltip.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
-		})
-
-		.on("mouseout", function (d, i) {
-			tooltip.transition().duration(400).style("opacity", 0);
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-				.style("stroke-opacity", 0);
-		});
+	var protein_homo = vennProteinHomo;
+	d3.select('#venn_protein_homo')
+		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
 
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
