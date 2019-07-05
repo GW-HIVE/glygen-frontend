@@ -31,7 +31,7 @@
   padding-left: 1rem;
   width: 100%;
   line-height: 4rem;
-  color: #333333;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -145,24 +145,25 @@ body {
 }
 
 .nav-item {
-  border-bottom: 1px solid hsl(188, 88%, 51%);
-  height: 40px;
-  background-color: #b2f5ff;
+  border-bottom: 1px solid #ACABAB;
+  height: 45px;
+  background-color: #E6E6E6
 }
 
 .nav-item1 {
-  border-bottom: 1px solid hsl(188, 88%, 51%);
-  height: 40px;
-  background-color: #b2f5ff;
+  border-bottom: 1px solid #ACABAB;
+  height: 45px;
+  background-color: #E6E6E6
 }
 
 .nav-track {
-  border-bottom: 1px solid hsl(188, 88%, 51%);
-  height: 40px;
+  border-bottom: 1px solid rgb(166, 166, 169);
+  height: 45px;
   /* background-color: #b2f5ff; */
   /* background-color: #e4d0ae */
 }
 
+ 
 .hidden {
   display: none !important;
 }
@@ -300,3 +301,11 @@ ul {
   cursor: pointer;
 }
 
+#glycotrack{
+  height: 45px;
+
+}
+
+.nav-glycosylation{
+  height: 60px;
+}

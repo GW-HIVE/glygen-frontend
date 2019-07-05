@@ -2,23 +2,17 @@
  @description: UO1 Version-1.1. 
  @date:17 June 2019.
  @updated:27 June 2019.
- */ 
+ */
 
 var uniprot_canonical_ac = "";
 
 // to set data in datapoint variable
 function setupProtvista(data) {
   var allTrackData = {};
-  var colors = ["red", "blue", "green", "black"];
-  var typeToColor = {};
-  var colorPtr = -1;
-  var shapes = ["catFace", "triangle", "circle"];
-  var typeToShape = {};
-  var shapePtr = -1;
   var displayStart = 1;
-  var displayEnd = 730;
+  var displayEnd = data.sequence.length;
   var highlightStart = 10;
- 
+
   var glycos = [
     {
       type: "N-Linked-With-Image",
@@ -65,7 +59,7 @@ function setupProtvista(data) {
            shape: glycos[0].shape,
            accession: data.uniprot.uniprot_canonical_ac,
            type: glyco.residue,
-           tooltipContent: "<img src='https://api.glygen.org/glycan/image/" + glyco.glytoucan_ac +"' /><br/></br><span class=marker>Click marker show more</span>",
+           tooltipContent: "<img src='https://api.glygen.org/glycan/image/" + glyco.glytoucan_ac +"' /><br/></br>",
           
         });
       }
@@ -145,7 +139,7 @@ function setupProtvista(data) {
   $(seqHTML).appendTo("#manager");
 
   var glycoHTML =
-    "<protvista-track id='glycotrack'  class='nav-track ' length='" +
+    "<protvista-track id='glycotrack' class='nav-track glycotrack  ' length='" +
     data.uniprot.length +
     "' displaystart='" +
     displayStart +
@@ -153,17 +147,39 @@ function setupProtvista(data) {
     displayEnd +
     "' highlightStart='" +
     highlightStart +
-    "'></protvista-track>";
-  $(glycoHTML).appendTo("#manager");
+    "' layout='non-overlapping'></protvista-track>";
+
+    // tO CHECK MULTILE GLYCOSYLATION AT SAME POINT
+  glycosCombined = [];
+  $.each(glycos, function(i, v) {
+    var combinedResiduesMap = {};
+    $.each(glycos[i].residues, function(i, v) {
+      if (!combinedResiduesMap[v.start + ":" + v.end]) {
+        v['count'] = 1;
+        combinedResiduesMap[v.start + ":" + v.end] = v;
+      }
+      else {
+        combinedResiduesMap[v.start + ":" + v.end].count += 1;
+      }
+    });
+    glycosCombined.push(
+      $.map(combinedResiduesMap, function(v, i) {
+        v['tooltipContent'] += v['count'] > 1 ? "<span class=marker>Click marker to show " + (v['count'] - 1) + " more at this site</span>": "";
+        return v;
+      })
+    );
+  });
+
   var alltrack = [];
-  $.merge(alltrack, glycos[0].residues);
-  $.merge(alltrack, glycos[1].residues);
-  $.merge(alltrack, glycos[2].residues);
-  $.merge(alltrack, glycos[3].residues);
+  $.merge(alltrack, glycosCombined[0]);
+  $.merge(alltrack, glycosCombined[1]);
+  $.merge(alltrack, glycosCombined[2]);
+  $.merge(alltrack, glycosCombined[3]);
+  $(glycoHTML).appendTo("#manager");
   document.querySelector("#glycotrack").data = alltrack;
 
   var glycoHTML1 =
-    "<protvista-track id='glycotrack1'   class='nav-track hidden ' length='" +
+    "<protvista-track id='glycotrack1' class='nav-track glycotrack1 hidden ' length='" +
     data.uniprot.length +
     "' displaystart='" +
     displayStart +
@@ -171,7 +187,7 @@ function setupProtvista(data) {
     displayEnd +
     "' highlightStart='" +
     highlightStart +
-    "'></protvista-track>";
+    "' layout='non-overlapping'></protvista-track>";
   $(glycoHTML1).appendTo("#manager");
 
   var nitrachtml =
@@ -183,10 +199,11 @@ function setupProtvista(data) {
     displayEnd +
     "' highlightStart='" +
     highlightStart +
-    "' ></protvista-track>";
+    "'></protvista-track>";
   $(nitrachtml).appendTo("#manager");
-  document.querySelector("#Ntrack_withImage").data = glycos[0].residues;
-   var nwitrachtml =
+
+  document.querySelector("#Ntrack_withImage").data = glycosCombined[0];
+  var nwitrachtml =
     "<protvista-track class='nav-track hidden hover-style' id='Ntrack_withnoImage' length='" +
     data.uniprot.length +
     "' displaystart='" +
@@ -195,11 +212,10 @@ function setupProtvista(data) {
     displayEnd +
     "' highlightStart='" +
     highlightStart +
-    "' ></protvista-track>";
+    "' layout='non-overlapping' ></protvista-track>";
   $(nwitrachtml).appendTo("#manager");
-  document.querySelector("#Ntrack_withnoImage").data = glycos[1].residues;
+  document.querySelector("#Ntrack_withnoImage").data = glycosCombined[1];
 
- 
   var oitrachtml =
     "<protvista-track class='nav-track hidden hover-style' id='Otrack_withImage' length='" +
     data.uniprot.length +
@@ -209,40 +225,35 @@ function setupProtvista(data) {
     displayEnd +
     "' highlightStart='" +
     highlightStart +
-    "' ></protvista-track>";
+    "' layout='non-overlapping' ></protvista-track>";
   $(oitrachtml).appendTo("#manager");
-  document.querySelector("#Otrack_withImage").data = glycos[2].residues;
-
+  document.querySelector("#Otrack_withImage").data = glycosCombined[2];
 
   var owitrachtml =
-  "<protvista-track class='nav-track hidden hover-style' id='Otrack_withnoImage' length='" +
-  data.uniprot.length +
-  "' displaystart='" +
-  displayStart +
-  "' displayend='" +
-  displayEnd +
-  "' highlightStart='" +
-  highlightStart +
-  "' ></protvista-track>";
-$(owitrachtml).appendTo("#manager");
-
-  document.querySelector("#Otrack_withnoImage").data = glycos[3].residues;
- 
+    "<protvista-track class='nav-track hidden hover-style' id='Otrack_withnoImage' length='" +
+    data.uniprot.length +
+    "' displaystart='" +
+    displayStart +
+    "' displayend='" +
+    displayEnd +
+    "' highlightStart='" +
+    highlightStart +
+    "' layout='non-overlapping' ></protvista-track>";
+  $(owitrachtml).appendTo("#manager");
+  document.querySelector("#Otrack_withnoImage").data = glycosCombined[3];
 
   var mutrachtml =
-  "<protvista-track class='nav-track hover-style' id='track_muarray' length='" +
-  data.uniprot.length +
-  "' displaystart='" +
-  displayStart +
-  "' displayend='" +
-  displayEnd +
-  "' highlightStart='" +
-  highlightStart +
-  "' ></protvista-track>";
+    "<protvista-track class='nav-track hover-style' id='track_muarray' length='" +
+    data.uniprot.length +
+    "' displaystart='" +
+    displayStart +
+    "' displayend='" +
+    displayEnd +
+    "' highlightStart='" +
+    highlightStart +
+    "' layout='non-overlapping' ></protvista-track>";
   $(mutrachtml).appendTo("#manager");
   document.querySelector("#track_muarray").data = mutations[0].residues;
-
- 
 
   var features = $("g .feature-group");
   features.css("cursor", "pointer");
@@ -250,6 +261,10 @@ $(owitrachtml).appendTo("#manager");
     var start = $("#glycotrack").attr("highlightstart");
     window.location.href = "./site_view.html?q=position " + start;
   });
+
+
+  
+ 
 }
 
 /**
@@ -260,23 +275,22 @@ function ajaxSuccess(data) {
   if (data.error_code) {
     activityTracker("error", uniprot_canonical_ac, data.error_code);
     // activity tracker.
-    alertify.alert('Error occured', data.error_code);
-} else {
+    alertify.alert("Error occured", data.error_code);
+  } else {
     activityTracker("user", uniprot_canonical_ac, "successful response");
-  setupProtvista(data);
-  // to change the svg position
+    setupProtvista(data);
+    // to change the svg position
   document.querySelectorAll("g.sequence-features").forEach(x => {
     x.setAttribute("transform", "translate(0, -15)");
   });
+  }
 }
-}
-
 
 // hide and show n-glycan and o-glycan separate track or combined track
 function navglycoclick() {
   if ($("#reported_Nglycan").hasClass("hidden")) {
     $("#reported_Nglycan").removeClass("hidden");
-    $("#nonreported_Nglycan").removeClass("hidden");    
+    $("#nonreported_Nglycan").removeClass("hidden");
     $("#reported_Oglycan").removeClass("hidden");
     $("#nonreported_Oglycan").removeClass("hidden");
     $("#Ntrack_withImage").removeClass("hidden");
@@ -368,7 +382,6 @@ function updateBreadcrumbLinks() {
   }
 }
 
-
 function LoadData(uniprot_canonical_ac) {
   var ajaxConfig = {
     dataType: "json",
@@ -385,17 +398,18 @@ function LoadData(uniprot_canonical_ac) {
 function goBack() {
   window.history.back();
 }
-$(window).on('resize', function() {
+$(window).on("resize", function() {
   location.reload();
 });
-$(".hover").hover(function hoverIn(){
-
-var id = $(this).attr('data-highlight');
-$('#' + id).css("background-color", "rgba(255,255,0,0.3)");
-
-}, function hoverOut(){
-$('.hover-style').css("background-color", "inherit");
-});
+$(".hover").hover(
+  function hoverIn() {
+    var id = $(this).attr("data-highlight");
+    $("#" + id).css("background-color", "rgba(255,255,0,0.3)");
+  },
+  function hoverOut() {
+    $(".hover-style").css("background-color", "inherit");
+  }
+);
 
 /**
  * getParameterByName function to Extract query parameters from url

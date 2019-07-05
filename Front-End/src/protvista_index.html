@@ -14,6 +14,8 @@
          <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
          <meta http-equiv="Pragma" content="no-cache" />
          <meta http-equiv="Expires" content="0" />
+         <meta http-equiv="x-ua-compatible" content="ie=edge" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
          <title>Glygen Protvista</title>
          <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
          <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -44,7 +46,9 @@
          <meta name="viewport" content="width=device-width; initial-scale=1.0;">
          <meta charset="utf-8" />
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-         <script src="libraries/protvista/d3.v4.min.js"></script>
+
+
+         <script src="libraries/protvista/d3.v4.min.js"></script> 
          <!-- Required for IE11 -->
          <script src="libraries/protvista/polyfill.min.js"></script>
          <!-- Web component polyfill (only loads what it needs) -->
@@ -53,13 +57,34 @@
          <script src="libraries/protvista/custom-elements-es5-adapter.js"></script>
          <script src="libraries/protvista/protvista-navigation.js"></script>
          <script src="libraries/protvista/protvista-zoomable.js"></script>
-         <script src="libraries/protvista/protvista-tooltip.js"></script>
-         <!-- <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
-         --><script src="libraries/protvista/protvista-track.js"></script> 
+          <script src="libraries/protvista/protvista-tooltip.js"></script> 
+          <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script> 
+          <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
+          <script src="libraries/protvista/protvista-track.js"></script>  
+         <script src="https://cdn.jsdelivr.net/npm/protvista-track@latest/dist/protvista-track.js" charset="utf-8" defer></script> 
          <script src="libraries/protvista/protvista-sequence.js"></script>
          <script src="libraries/protvista/protvista-manager.js"></script>
+
+     
+
+  <!-- Required for IE11 -->
+  <!-- <script src="https://d3js.org/d3.v4.min.js" charset="utf-8" defer></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script> -->
+  <!-- Web component polyfill (only loads what it needs) -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script> -->
+  <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-navigation@latest/dist/protvista-navigation.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-zoomable@latest/dist/protvista-zoomable.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-track@latest/dist/protvista-track.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-interpro-track@latest/dist/protvista-interpro-track.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-sequence@latest/dist/protvista-sequence.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-variation@latest/dist/protvista-variation.js" charset="utf-8" defer></script>
+         <script src="https://cdn.jsdelivr.net/npm/protvista-manager@latest/dist/protvista-manager.js" charset="utf-8" defer></script>
+         <script src="https://d3js.org/d3.v4.min.js" charset="utf-8" defer></script>
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      </head>
+      </head> -->
       <body onload="tracking()">
          <!-- <div id='header'></div> -->
          <script src="libraries/w3.js"></script>
@@ -90,7 +115,7 @@
                   </div>
                   <div class="row header">
                      <center>
-                        <h3 class="page-heading" style="margin-top: -5px;">*Protvista view for protein
+                        <h3 class="page-heading" style="margin-top: -5px;">Protvista* view for protein
                            <span id='title_protein'> </span>
                         </h3>
                      </center>
@@ -140,6 +165,7 @@
                      <!-- </div> -->
                      <div class="main-content">
                         <protvista-manager attributes="length displaystart displayend highlightstart highlightend variantfilters" id="manager">
+                              <!-- <protvista-tooltip id="my_tooltip" /> -->
                         </protvista-manager>
                         <br>
                         <div class="row">
