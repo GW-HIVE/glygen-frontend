@@ -162,7 +162,7 @@ function focusOn(d = {
 }
 
 	//--------------------
-	//      Venn Diagram
+	//      Proteins Venn Diagram
 	//----------------------
 
 	var chart = venn.VennDiagram()
@@ -212,62 +212,20 @@ function focusOn(d = {
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------
-
-	var glycan_homo_mus = venn.VennDiagram()
-		.width(350)
-		.height(350);
-
-	var div_homo_mus = d3.select("#venn_glycans_homo_mus")
-	div_homo_mus.datum(jsonData.venn_glycans_homo_mus).call(glycan_homo_mus);
-
-	var tooltip = d3.select("body").append("div")
-		.attr("class", "venntooltip");
-
-	div_homo_mus.selectAll("path")
-		.style("stroke-opacity", 0)
-		.style("stroke", "#fff")
-		.style("stroke-width", 3)
-
-	div_homo_mus.selectAll("g")
-		.on("mouseover", function (d, i) {
-			// sort all the areas relative to the current item
-			venn.sortAreas(div, d);
-
-			// Display a tooltip with the current size
-			tooltip.transition().duration(400).style("opacity", .9);
-			tooltip.text(d.size + '\n' + d.tooltipname);
-
-			// highlight the current path
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-				.style("stroke-opacity", 1);
-		})
-
-		.on("mousemove", function () {
-			tooltip.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
-		})
-
-		.on("mouseout", function (d, i) {
-			tooltip.transition().duration(400).style("opacity", 0);
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-				.style("stroke-opacity", 0);
-		});
-
+	var glycan_homo_mus = vennGlycanHomoMus;
+	d3.select('#venn_glycans_homo_mus')
+		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus"); // draw chart in div
+	
 	//-------------------------------
 	//    Donut Chart
 	//-------------------------------
-
 	var donut = donutChartGlycan;
 	d3.select('#donut_chart_glycan')
 		.call(donut, jsonData, "#donut_chart_glycan"); // draw chart in div
+	 
 	//-------------------------------
 	//    Pie Chart
 	//-------------------------------	
-
 	var pie = pieChartMotif;
 	d3.select('#pie_chart_motif')
 		.call(pie, jsonData, "#pie_chart_motif"); // draw chart in div
@@ -275,7 +233,6 @@ function focusOn(d = {
 	//-----------------------------------
 	//	Bar Chart Mass range
 	//--------------------------------
-	
 	var bar = barChartMass;
 	d3.select('#bar_chart_mass')
 		.call(bar, jsonData, "#bar_chart_mass"); // draw chart in div
@@ -283,7 +240,6 @@ function focusOn(d = {
 	//-----------------------------------
 	//	Bar Chart Sugar range
 	//--------------------------------
-	
 	var barSugar = barChartSugar;
 	d3.select('#bar_chart_sugar')
 		.call(barSugar, jsonData, "#bar_chart_sugar"); // draw chart in div

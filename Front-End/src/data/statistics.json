@@ -132,12 +132,20 @@
 	"venn_glycans_homo_mus": [{
 			"sets": [0],
 			"tooltipname": "Human glycans",
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			},
 			"name": "Human glycans",
 			"size": 3302
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Mouse glycans",
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			},
 			"name": "Mouse glycans",
 			"size": 517
 		},
