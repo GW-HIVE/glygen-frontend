@@ -4,7 +4,12 @@
 const width = 200,
 	height = 200,
 	maxRadius = (Math.min(width, height) / 2) - 20,
-	margin = {top: 10, right: 10, bottom: 10, left: 10};
+	margin = {
+		top: 10,
+		right: 10,
+		bottom: 10,
+		left: 10
+	};
 
 const formatNumber = d3.format(',d');
 
@@ -18,7 +23,7 @@ const y = d3.scaleSqrt()
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
 const partition = d3.partition();
-		
+
 const arc = d3.arc()
 	.startAngle(d => x(d.x0))
 	.endAngle(d => x(d.x1))
@@ -52,23 +57,23 @@ const textFits = d => {
 };
 
 const svg = d3.select('.zoomableSunburst')
-//	.style('width', '400')
-//	.style('height', '400')
+	//	.style('width', '400')
+	//	.style('height', '400')
 	.attr('preserveAspectRatio', 'xMinYMin meet')
-		.attr('viewBox',
-			'0 0 ' +
-			(width + margin.left + margin.right) +
-			  ' ' +
-			(height + margin.top + margin.bottom)
-			)
+	.attr('viewBox',
+		'0 0 ' +
+		(width + margin.left + margin.right) +
+		' ' +
+		(height + margin.top + margin.bottom)
+	)
 	.attr('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`)
 	.on('click', () => focusOn()); // Reset zoom on canvas click
 
 //var jsonData = d3.json("data/statistics_full.json");
 
- d3.json("data/statistics.json", (error, jsonData) => {
+d3.json("data/statistics.json", (error, jsonData) => {
 	if (error) throw error;
-//	console.log(root);
+	//	console.log(root);
 
 	var root = d3.hierarchy(jsonData.sunburst);
 	root.sum(d => d.size);
@@ -115,56 +120,55 @@ const svg = d3.select('.zoomableSunburst')
 		.attr('startOffset', '50%')
 		.attr('xlink:href', (_, i) => `#hiddenArc${i}`)
 		.text(d => d.data.name);
-//});
+	//});
 
-function focusOn(d = {
-	x0: 0,
-	x1: 1,
-	y0: 0,
-	y1: 1
-})
+	function focusOn(d = {
+		x0: 0,
+		x1: 1,
+		y0: 0,
+		y1: 1
+	})
 
-{
-	// Reset to top-level if no data point specified
-	const transition = svg.transition()
-		.duration(550)
-		.tween('scale', () => {
-			const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-				yd = d3.interpolate(y.domain(), [d.y0, 1]);
-			return t => {
-				x.domain(xd(t));
-				y.domain(yd(t));
-			};
-		});
+	{
+		// Reset to top-level if no data point specified
+		const transition = svg.transition()
+			.duration(550)
+			.tween('scale', () => {
+				const xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+					yd = d3.interpolate(y.domain(), [d.y0, 1]);
+				return t => {
+					x.domain(xd(t));
+					y.domain(yd(t));
+				};
+			});
 
-	transition.selectAll('path.main-arc')
-		.attrTween('d', d => () => arc(d));
+		transition.selectAll('path.main-arc')
+			.attrTween('d', d => () => arc(d));
 
-	transition.selectAll('path.hidden-arc')
-		.attrTween('d', d => () => middleArcLine(d));
+		transition.selectAll('path.hidden-arc')
+			.attrTween('d', d => () => middleArcLine(d));
 
-	transition.selectAll('text')
-		.attrTween('display', d => () => textFits(d) ? null : 'none');
+		transition.selectAll('text')
+			.attrTween('display', d => () => textFits(d) ? null : 'none');
 
-	moveStackToFront(d);
+		moveStackToFront(d);
 
-	//
+		//
 
-	function moveStackToFront(elD) {
-		svg.selectAll('.slice').filter(d => d === elD)
-			.each(function (d) {
-				this.parentNode.appendChild(this);
-				if (d.parent) {
-					moveStackToFront(d.parent);
-				}
-			})
+		function moveStackToFront(elD) {
+			svg.selectAll('.slice').filter(d => d === elD)
+				.each(function (d) {
+					this.parentNode.appendChild(this);
+					if (d.parent) {
+						moveStackToFront(d.parent);
+					}
+				})
+		}
 	}
-}
 
 	//--------------------
-	//      Proteins Venn Diagram. Human proteins.
+	//    Proteins Venn Diagram. Human proteins.
 	//----------------------
-
 	var protein_homo = vennProteinHomo;
 	d3.select('#venn_protein_homo')
 		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
@@ -175,14 +179,14 @@ function focusOn(d = {
 	var glycan_homo_mus = vennGlycanHomoMus;
 	d3.select('#venn_glycans_homo_mus')
 		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus"); // draw chart in div
-	
+
 	//-------------------------------
 	//    Donut Glycan Chart. Human and mouse glycans.
 	//-------------------------------
 	var donutGlycan = donutChartGlycan;
 	d3.select('#donut_chart_glycan')
 		.call(donutGlycan, jsonData, "#donut_chart_glycan"); // draw chart in div
-	 
+
 	//-------------------------------
 	//    Pie Motif Chart. Motifs and their frequencies
 	//-------------------------------	
