@@ -123,9 +123,9 @@
                         <div class="col-md-9 col-sm-9">
                         </div>
                         <div class="col-md-3 col-sm-3">
-                           <button onclick="goBack()" class="btn btn-primary previous" id="viewprotein">
+                           <button class="btn btn-primary previous" id="li-breadcrumb-detailback">
                            <font color="white" ;>
-                           <span style='font-size:16px;'>&#8678; Back</span>
+                           <a href="#" id="breadcrumb-detailback"><span style='font-size:16px;color:white'>Details of Protein </span></a>
                            </font>
                            </button>
                         </div>
@@ -141,8 +141,8 @@
                               <a class="nav-link" href="#">Sequence</a>
                            </li>
                            <li class="nav-item nav-track" onclick="navglycoclick()">
-                              <a class="nav-link" href="#">Glycosylation &nbsp&nbsp
-                              <i class="fa fa-caret-right"></i>
+                              <i class="fa fa-caret-right"></i><a class="nav-link" href="#">Glycosylation
+                              
                               </a>
                            </li>
                            <li id='reported_Nglycan' class="nav-item nav-track hidden">

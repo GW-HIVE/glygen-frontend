@@ -368,7 +368,7 @@ function updateBreadcrumbLinks() {
     $("#li-breadcrumb-detail").css("display", "none");
   }
   if (proteinacc) {
-    $("#breadcrumb-details").attr(
+    $("#breadcrumb-detailback").attr(
       "href",
       glycanPageType +
         "_detail.html?uniprot_canonical_ac=" +
@@ -377,9 +377,10 @@ function updateBreadcrumbLinks() {
         listID +
         "#sequence"
     );
-  } else {
-    $("#li-breadcrumb-details").css("display", "none");
   }
+   //else {
+  //   $("#li-breadcrumb-detailbback").css("display", "none");
+  // }
 }
 
 function LoadData(uniprot_canonical_ac) {
@@ -398,6 +399,7 @@ function LoadData(uniprot_canonical_ac) {
 function goBack() {
   window.history.back();
 }
+
 $(window).on("resize", function() {
   location.reload();
 });

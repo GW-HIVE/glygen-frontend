@@ -173,10 +173,13 @@ body {
 }
 .fa {
   font: normal normal normal 22px/1 FontAwesome;
-  padding: 0;
-  position: initial;
+ 
+ 
+  
 }
-
+.fa fa-caret-right{
+  color: lawngreen
+}
 .img-wrapper {
   z-index: -1;
   padding-left: 10px;
@@ -242,7 +245,7 @@ small {
 @media only screen and (max-width: 500px) {
   .footernote {
     width: 100%;
-    bottom: 14%;
+    bottom: 20%;
   }
   
 }
