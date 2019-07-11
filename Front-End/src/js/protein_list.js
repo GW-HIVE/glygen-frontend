@@ -40,7 +40,9 @@ function buildSummary(queryInfo) {
     }
     var question = getParameterByName('question');
     if (question) {
-        queryInfo = { question: MESSAGES[question] };
+        queryInfo = {
+            question: MESSAGES[question]
+        };
     }
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -63,16 +65,16 @@ function editSearch() {
     {
         var question = getParameterByName('question');
         var newUrl;
-
+        const stat = getParameterByName("stat");
         if (question && (question === 'QUESTION_TRY1')) {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
-        }
-        else if (question && (question === 'QUESTION_TRY2')) {
+        } else if (question && (question === 'QUESTION_TRY2')) {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
         } else if (globalSearchTerm) {
             newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
-        }
-        else {
+        } else if (stat) {
+            newUrl = 'statistics.html#' + stat;
+        } else {
             newUrl = "protein_search.html?id=" + id;
         }
 

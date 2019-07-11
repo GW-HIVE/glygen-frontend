@@ -54,8 +54,11 @@ function totalNoSearch(total_length) {
  */
 function editSearch() {
     var newUrl = "";
+    const stat = getParameterByName("stat");
     if (globalSearchTerm) {
         newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
+        else if (stat) {
+            newUrl = 'statistics.html#' + stat;
     } else {
         newUrl = "glycoprotein_search.html?id=" + getParameterByName("id")
     }

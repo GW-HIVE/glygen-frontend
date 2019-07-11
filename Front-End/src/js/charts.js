@@ -41,6 +41,34 @@ function vennProteinHomo(dummy, data, id) {
 				.style("top", (d3.event.pageY - 28) + "px");
 		})
 
+		// On click goes to list page
+		.on("click", function (d) {
+			//console.log(d.data.size); 
+			if (d.name == "Proteins") {
+				searchProteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			} else if (d.name == "Glycoproteins") {
+				searchGlycoproteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			} else if (d.name == "Enzymes") {
+				searchGlycansBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			}
+
+		})
+
 		.on("mouseout", function (d, i) {
 			tooltip.transition().duration(400).style("opacity", 0);
 			var selection = d3.select(this).transition("tooltip").duration(400);
@@ -667,11 +695,24 @@ function barChartSugar(dummy, data, id) {
 		.attr("text-anchor", "end")
 		.text("Sugar ranges");
 }
+/**
+ * hides the loading gif and displays the page after the search_init results are loaded.
+ * @author Gaurav Agarwal
+ * @date July 25, 2018
+ */
+$(document).ajaxStop(function () {
+    $('#loading_image').fadeOut();
+});
 
-
+/** 
+ * On submit, function forms the JSON and submits to the search web services
+ */
 function searchGlycansBy(param) {
-	//    activityTracker("user", "", "Mass Range Search");
-
+	// displays the loading gif when the ajax call starts
+	$('#loading_image').fadeIn();
+	
+	var prevListId = getParameterByName("id") || "";
+	activityTracker("user", prevListId, "Performing glycan search in Statistics");
 	var query_type = "mass_range_glycan_search";
 	var formObject = {
 		"operation": "AND",
@@ -717,7 +758,7 @@ function searchGlycansBy(param) {
 		})
 		chartId = "venn_glycans_homo_mus";
 	}
-	
+
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({
 		type: 'post',
@@ -727,17 +768,122 @@ function searchGlycansBy(param) {
 		error: ajaxFailure,
 		success: function (results) {
 			if (results.error_code) {
-				//                displayErrorByCode(results.error_code, results.field);
-				// activityTracker("error", "", results.error_code);
-				//                activityTracker("error", "", "Advanced Search: " + results.error_code + " for " + json);
+				displayErrorByCode(results.error_code, results.field);
+				activityTracker("error", "", results.error_code);
+				activityTracker("error", "", "Statistics: " + results.error_code + " for " + json);
+				$('#loading_image').fadeOut();
 			} else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
-				//                displayErrorByCode('no-results-found');
-				//                activityTracker("user", "", "Advanced Search: no result found for " + json);
+				displayErrorByCode('no-results-found');
+				activityTracker("user", "", "Statistics: no result found for " + json);
+				$('#loading_image').fadeOut();
 			} else {
-				//                activityTracker("user", prevListId + ">" + results.list_id, "Advanced Search: Searched with modified parameters");
+				activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
 
 				window.location = './glycan_list.html?id=' + results.list_id + '&stat=' + chartId;
+				$('#loading_image').fadeOut();
 			}
 		}
 	});
+}
+
+/** 
+ * On submit, function forms the JSON and submits to the search web services
+ */
+function searchProteinsBy(param) {
+	// displays the loading gif when the ajax call starts
+	$('#loading_image').fadeIn();
+
+	var prevListId = getParameterByName("id") || "";
+	activityTracker("user", prevListId, "Performing protein search in Statistics");
+
+	var query_type = "search_protein";
+	var formObject = {
+		"operation": "AND",
+		query_type: query_type,
+	};
+	var chartId = "";
+	if (param.organism) {
+		$.extend(formObject, {
+			organism: {
+				"id": param.organism.id,
+				"name": param.organism.name
+			}
+		})
+		chartId = "venn_protein_homo";
+		var json = "query=" + JSON.stringify(formObject);
+		$.ajax({
+			type: 'post',
+			url: getWsUrl("search_protein"),
+			data: json,
+			timeout: getTimeout("search_protein"),
+			error: ajaxFailure,
+			success: function (results) {
+				if (results.error_code) {
+					displayErrorByCode(results.error_code);
+					// activityTracker("error", "", results.error_code);
+					activityTracker("error", "", "Statistics: " + results.error_code + " for " + json);
+					$('#loading_image').fadeOut();
+				} else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+					displayErrorByCode('no-results-found');
+					activityTracker("user", "", "Statistics: no result found for " + json);
+					$('#loading_image').fadeOut();
+				} else {
+					activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
+					window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId;
+					$('#loading_image').fadeOut();
+				}
+			}
+		});
+	}
+}
+
+/** 
+ * On submit, function forms the JSON and submits to the search web services
+ */
+function searchGlycoproteinsBy(param) {
+	// displays the loading gif when the ajax call starts
+	$('#loading_image').fadeIn();
+
+	var prevListId = getParameterByName("id") || "";
+	activityTracker("user", prevListId, "Performing glycoprotein search in Statistics");
+
+	var query_type = "search_protein";
+	var formObject = {
+		"operation": "AND",
+		query_type: query_type,
+	};
+	var chartId = "";
+	if (param.organism) {
+		$.extend(formObject, {
+			organism: {
+				"id": param.organism.id,
+				"name": param.organism.name
+			}
+		})
+		chartId = "venn_protein_homo";
+		var json = "query=" + JSON.stringify(formObject);
+		$.ajax({
+			type: 'post',
+			url: getWsUrl("search_protein"),
+			data: json,
+			timeout: getTimeout("search_protein"),
+			error: ajaxFailure,
+			success: function (results) {
+				if (results.error_code) {
+					displayErrorByCode(results.error_code);
+					activityTracker("error", "", results.error_code);
+					activityTracker("error", "", "Statistics: " + results.error_code + " for " + json);
+					$('#loading_image').fadeOut();
+				} else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+					displayErrorByCode('no-results-found');
+					activityTracker("user", "", "Statistics: no result found for " + json);
+					$('#loading_image').fadeOut();
+				} else {
+					activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
+					window.location = './glycoprotein_list.html?id=' + results.list_id + '&stat=' + chartId;
+					$('#loading_image').fadeOut();
+				}
+			}
+		});
+	}
 }

@@ -96,7 +96,7 @@
 			"sets": [0],
 			"tooltipname": "Proteins",
 			"name": "Proteins",
-			"size": 25000
+			"size": 21080
 		},
 		{
 			"sets": [1],
@@ -108,19 +108,19 @@
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
 			"name": "Glycoproteins",
-			"size": 10000
+			"size": 4530
 		},
 		{
 			"sets": [0, 1],
 			"tooltipname": "Enzymes",
-			"name": "",
+			"name": "Enzymes",
 			"size": 6000
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Glycoproteins",
-			"name": "",
-			"size": 10000
+			"name": "Glycoproteins",
+			"size": 4530
 		},
 		{
 			"sets": [0, 1, 2],
