@@ -86,6 +86,16 @@ $('#textExampleGeneName').click(function() {
 
 /**
  * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGOTerm
+ */
+var $tagsInputGOTerm = $('#go_term');
+$('#textExampleGOTerm').click(function() {
+     $tagsInputGOTerm.val($(this).text());
+    return false;
+});
+
+/**
+ * Makes the example clickable and inserts it into the search input field.
  * @param {string} tagsInputSequences
  */
 var $tagsInputSequences = $('#sequences');

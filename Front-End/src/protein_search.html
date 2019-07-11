@@ -324,7 +324,7 @@
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> Gene Name:
                                             </label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-8 gg-form-group">
                                                 <input type="text" 
                                                     name="GeneName" 
                                                     class="form-control gene_name"
@@ -342,6 +342,40 @@
                                                 </div>
                                                 <br>
                                                 <h6 id='geneNameMsg' class="validation-message"></h6>
+                                            </div>
+                                        </div>
+                                         <!-- GO Term -->
+                                         <div class="row">
+                                            <label class="control-label col-sm-4" for="go_term">
+                                                <span><a href="javascript://" \
+                                                    title="GO Name"
+                                                    data-toggle="popover"
+                                                    data-placement="top"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Enter the GO Name of your protein. Explore <a href='http://geneontology.org/docs/ontology/' target='_blank'> GO Name"
+                                                    data-tippy="Help">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span>GO Name:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text"
+                                                    name="GOTerm"
+                                                    class="form-control go_term"
+                                                    id="go_term"
+                                                    placeholder="Enter the GO Term of your protein" onkeyup="validateGOTerm(this)">   
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a
+                                                    href="#mitochondrion" id="textExampleGOTerm"
+                                                    data-toggle="tooltip"
+                                                    data-tippy="Click to Insert">mitochondrion</a></div>
+
+                                                    <div class="gg-text-right">Explore <a href="http://geneontology.org/docs/ontology/" 
+                                                    target="_blank"
+                                                    data-tippy="Explore GO Term Database">GO Term</a></div>
+                                                </div>
+                                                <br>
+                                                <h6 id='goTermMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
                                         <!-- Protein or Peptide Sequence -->
