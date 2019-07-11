@@ -512,7 +512,8 @@ function barChartMass(dummy, data, id) {
 				"mass": {
 					"mass_min": range[0],
 					"mass_max": range[1]
-				}
+				},
+				"mass_type": "Native"
 			});
 		})
 		.on("mousemove", function (d) {
@@ -724,7 +725,9 @@ function searchGlycansBy(param) {
 			mass: {
 				"min": parseInt(param.mass.mass_min),
 				"max": parseInt(param.mass.mass_max)
-			}
+			},
+			"mass_type": param.mass_type
+//			"mass_type":"native"
 		})
 		chartId = "bar_chart_mass";
 	} else if (param.sugar) {
