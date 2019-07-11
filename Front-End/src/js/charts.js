@@ -231,17 +231,10 @@ function donutChartGlycan(dummy, data, id) {
 		.attr('d', arc)
 		.attr('fill', (d, i) => colorD(i))
 		.on("mouseover", function (d) {
-			if (d.data.glycan_type != "Other") {
-				d3.select(this).transition()
-					.duration('50')
-					.attr('opacity', '.65')
-					.style("cursor", "pointer");
-			} else {
-				d3.select(this).transition()
-					.duration('50')
-					.attr('opacity', '.65')
-					.style("cursor", "default");
-			}
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
 		})
 		.on("mouseout", function (d) {
 			d3.select(this).transition()
@@ -296,31 +289,21 @@ function donutChartGlycan(dummy, data, id) {
 		.attr('d', arc2)
 		.attr('fill', (d, i) => colorD2(i))
 		.on("mouseover", function (d) {
-			if (d.data.glycan_type != "Other") {
-				d3.select(this).transition()
-					.duration('50')
-					.attr('opacity', '.65')
-					.style("cursor", "pointer");
-			} else {
-				d3.select(this).transition()
-					.duration('50')
-					.attr('opacity', '.65')
-					.style("cursor", "default");
-			}
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
 		})
 		.on("mouseout", function (d) {
 			d3.select(this).transition()
 				.duration('50')
 				.attr('opacity', '1')
 				.style("cursor", "none");
-			//				.style("fill", colorD2(this._current));
 		})
 		.each(function (d, i) {
 			this._current = i;
 		});
-
 }
-
 
 function pieChartMotif(dummy, data, id) {
 	var text = "",
@@ -407,6 +390,7 @@ function pieChartMotif(dummy, data, id) {
 					.style("cursor", "pointer");
 			} else {
 				d3.select(this)
+					.attr('opacity', '.65')
 					.style("cursor", "default");
 			}
 		})
@@ -702,7 +686,7 @@ function barChartSugar(dummy, data, id) {
  * @date July 25, 2018
  */
 $(document).ajaxStop(function () {
-    $('#loading_image').fadeOut();
+	$('#loading_image').fadeOut();
 });
 
 /** 
@@ -711,7 +695,7 @@ $(document).ajaxStop(function () {
 function searchGlycansBy(param) {
 	// displays the loading gif when the ajax call starts
 	$('#loading_image').fadeIn();
-	
+
 	var prevListId = getParameterByName("id") || "";
 	activityTracker("user", prevListId, "Performing glycan search in Statistics");
 	var query_type = "mass_range_glycan_search";
@@ -727,7 +711,7 @@ function searchGlycansBy(param) {
 				"max": parseInt(param.mass.mass_max)
 			},
 			"mass_type": param.mass_type
-//			"mass_type":"native"
+			//			"mass_type":"native"
 		})
 		chartId = "bar_chart_mass";
 	} else if (param.sugar) {
