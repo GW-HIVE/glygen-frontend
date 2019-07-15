@@ -46,8 +46,6 @@
          <meta name="viewport" content="width=device-width; initial-scale=1.0;">
          <meta charset="utf-8" />
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
          <script src="libraries/protvista/d3.v4.min.js"></script> 
          <!-- Required for IE11 -->
          <script src="libraries/protvista/polyfill.min.js"></script>
@@ -57,34 +55,14 @@
          <script src="libraries/protvista/custom-elements-es5-adapter.js"></script>
          <script src="libraries/protvista/protvista-navigation.js"></script>
          <script src="libraries/protvista/protvista-zoomable.js"></script>
-          <script src="libraries/protvista/protvista-tooltip.js"></script> 
-          <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script> 
-          <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
-          <script src="libraries/protvista/protvista-track.js"></script>  
+         <script src="libraries/protvista/protvista-tooltip.js"></script> 
+         <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script> 
+         <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
+         <script src="libraries/protvista/protvista-track.js"></script>  
          <script src="https://cdn.jsdelivr.net/npm/protvista-track@latest/dist/protvista-track.js" charset="utf-8" defer></script> 
          <script src="libraries/protvista/protvista-sequence.js"></script>
          <script src="libraries/protvista/protvista-manager.js"></script>
-
-     
-
-  <!-- Required for IE11 -->
-  <!-- <script src="https://d3js.org/d3.v4.min.js" charset="utf-8" defer></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script> -->
-  <!-- Web component polyfill (only loads what it needs) -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script> -->
-  <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-navigation@latest/dist/protvista-navigation.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-zoomable@latest/dist/protvista-zoomable.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-tooltip@latest/dist/protvista-tooltip.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-track@latest/dist/protvista-track.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-interpro-track@latest/dist/protvista-interpro-track.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-sequence@latest/dist/protvista-sequence.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-variation@latest/dist/protvista-variation.js" charset="utf-8" defer></script>
-         <script src="https://cdn.jsdelivr.net/npm/protvista-manager@latest/dist/protvista-manager.js" charset="utf-8" defer></script>
-         <script src="https://d3js.org/d3.v4.min.js" charset="utf-8" defer></script>
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      </head> -->
+      </head>
       <body onload="tracking()">
          <!-- <div id='header'></div> -->
          <script src="libraries/w3.js"></script>
@@ -92,138 +70,133 @@
          <script>
             w3.includeHTML();
          </script>
-          <div class=" container-fluid" id="content">
-  
-         <body data-gr-c-s-loaded="true">
+         <div class=" container-fluid" id="content">
+            <body data-gr-c-s-loaded="true">
+               <div class="row">
+                  <div class="col-md-12 col-xs-12">
+                     <!-- breadcrumb filled by javascript -->
+                     <ul class="gg-breadcrumb">
+                        <li id="li-breadcrumb-search">
+                           <a href="#" id="breadcrumb-search">Protein Search</a>
+                        </li>
+                        <li id="li-breadcrumb-list">
+                           <a href="#" id="breadcrumb-list">Protein List</a>
+                        </li>
+                        <!-- <li><a href="#">Protein Detail</a></li> -->
+                        <li id="li-breadcrumb-detail">
+                           <a href="#" id="breadcrumb-detail">Protein Detail</a>
+                        </li>
+                        <li id="li-breadcrumb-visualizer">Protvista</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="row header">
+                  <center>
+                     <h3 class="page-heading" style="margin-top: -5px;">Protvista/Nightingale* view for protein
+                        <span class='title_protein'> </span>
+                     </h3>
+                  </center>
                   <div class="row">
-                     <div class="col-md-12 col-xs-12">
-                        <!-- breadcrumb filled by javascript -->
-                        <ul class="gg-breadcrumb">
-                           <li id="li-breadcrumb-search">
-                              <a href="#" id="breadcrumb-search">Protein Search</a>
-                           </li>
-                           <li id="li-breadcrumb-list">
-                              <a href="#" id="breadcrumb-list">Protein List</a>
-                           </li>
-                           <!-- <li><a href="#">Protein Detail</a></li> -->
-                           <li id="li-breadcrumb-detail">
-                              <a href="#" id="breadcrumb-detail">Protein Detail</a>
-                           </li>
-                           <li id="li-breadcrumb-visualizer">Protvista</li>
-                        </ul>
+                     <div class="col-md-9 col-sm-9">
+                     </div>
+                     <div class="col-md-3 col-sm-3">
+                        <button class="btn btn-primary previous" id="li-breadcrumb-detailback">
+                        <font color="white" ;>
+                        <a href="#" id="breadcrumb-detailback"><span style='font-size:16px;color:white'>Details of <span class='title_protein'> </span></span></a>
+                        </font>
+                        </button>
                      </div>
                   </div>
-                  <div class="row header">
-                     <center>
-                        <h3 class="page-heading" style="margin-top: -5px;">Protvista/Nightingale* view for protein
-                           <span class='title_protein'> </span>
-                        </h3>
-                     </center>
+               </div>
+               <div class="main menu">
+                  <nav class="main-nav">
+                     <ul class="main-nav__list">
+                        <li class="nav-item1 nav-nav">
+                           <a class="nav-link" href="#">Navigation</a>
+                        </li>
+                        <li class="nav-item nav-seq">
+                           <a class="nav-link" href="#">Sequence</a>
+                        </li>
+                        <li class="nav-item nav-track" onclick="navglycoclick()">
+                           <!-- <i class="fa fa-caret-right" style="font-size:48px;color:red;margin-left:0"></i>
+                              <a class="nav-link" href="#">Glycosylation </a> <i class="fa fa-caret-top"></i> -->
+                           <a class="nav-link" href="#">Glycosylation &nbsp;<i class="fa fa-caret-right" aria-hidden="true" style="font-size:30px;color:black; position:relative"></i></a>
+                        </li>
+                        <li id='reported_Nglycan' class="nav-item nav-track hidden">
+                           <a class="nav-link" href="#">N glycosite w/ glycan</a>
+                        </li>
+                        <li id='nonreported_Nglycan' class="nav-item nav-track hidden">
+                           <a class="nav-link" href="#">N glycosite </a>
+                        </li>
+                        <li id='reported_Oglycan' class="nav-item nav-track hidden">
+                           <a class="nav-link" href="#">O glycosite w/ glycan</a>
+                        </li>
+                        <li id='nonreported_Oglycan' class="nav-item nav-track hidden">
+                           <a class="nav-link" href="#">O glycosite </a>
+                        </li>
+                        <li class="nav-item nav-track">
+                           <a class="nav-link" href="#">Mutation</a>
+                        </li>
+                     </ul>
+                  </nav>
+                  <!-- </div> -->
+                  <div class="main-content">
+                     <protvista-manager attributes="length displaystart displayend highlightstart highlightend variantfilters" id="manager">
+                        <!-- <protvista-tooltip id="my_tooltip" /> -->
+                     </protvista-manager>
+                     <br>
                      <div class="row">
-                        <div class="col-md-9 col-sm-9">
+                        <div class="col-md-6 col-sm-6"> </div>
+                        <div class="col-md-3 col-sm-3">
                         </div>
                         <div class="col-md-3 col-sm-3">
-                           <button class="btn btn-primary previous" id="li-breadcrumb-detailback">
-                           <font color="white" ;>
-                           <a href="#" id="breadcrumb-detailback"><span style='font-size:16px;color:white'>Details of <span class='title_protein'> </span></span></a>
-                           </font>
-                           </button>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="main menu">
-                     <nav class="main-nav">
-                        <ul class="main-nav__list">
-                           <li class="nav-item1 nav-nav">
-                              <a class="nav-link" href="#">Navigation</a>
-                           </li>
-                           <li class="nav-item nav-seq">
-                              <a class="nav-link" href="#">Sequence</a>
-                           </li>
-                           <li class="nav-item nav-track" onclick="navglycoclick()">
-                                    <!-- <i class="fa fa-caret-right" style="font-size:48px;color:red;margin-left:0"></i>
-                              <a class="nav-link" href="#">Glycosylation </a> <i class="fa fa-caret-top"></i> -->
-                              <a class="nav-link" href="#">Glycosylation &nbsp;<i class="fa fa-caret-right" aria-hidden="true" style="font-size:30px;color:black; position:relative"></i></a>
-                           </li>
-                           <li id='reported_Nglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">N glycosite w/ glycan</a>
-                           </li>
-                           <li id='nonreported_Nglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">N glycosite </a>
-                           </li>
-                           <li id='reported_Oglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">O glycosite w/ glycan</a>
-                           </li>
-                           <li id='nonreported_Oglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">O glycosite </a>
-                           </li>
-                           <li class="nav-item nav-track">
-                              <a class="nav-link" href="#">Mutation</a>
-                           </li>
-                        </ul>
-                     </nav>
-                     <!-- </div> -->
-                     <div class="main-content">
-                        <protvista-manager attributes="length displaystart displayend highlightstart highlightend variantfilters" id="manager">
-                              <!-- <protvista-tooltip id="my_tooltip" /> -->
-                        </protvista-manager>
-                        <br>
-                        <div class="row">
-                           <div class="col-md-6 col-sm-6"> </div>
-                           <div class="col-md-3 col-sm-3">
-                           </div>
-                           <div class="col-md-3 col-sm-3">
-                              <ol>
-                                 <li>
-                                    <span class="super1 hover" data-highlight="Ntrack_withImage">&#9679;
-                                    <span class="superx">
-                                    <B>N-Glycosite W/Glycan</B>
-                                    </span>
-                                    </span>
-                                 </li>
-                                 <li>
-                                    <span class="super2 hover" data-highlight="Ntrack_withnoImage">&#9650;
-                                    <span class="superx">
-                                    <B>N-Glycosite</B>
-                                    </span>
-                                    </span>
-                                 </li>
-                                 <li>
-                                    <span class="super3 hover" data-highlight="Otrack_withImage">&#9679;
-                                    <span class="superx">
-                                    <B>O-Glycosite W/Glycan</B>
-                                    </span>
-                                    </span>
-                                 </li>
-                                 <li>
-                                    <span class="super4 hover" data-highlight="Otrack_withnoImage">&#9650;
-                                    <span class="superx">
-                                    <B>O-Glycosite</B>
-                                    </span>
-                                    </span>
-                                 </li>
-                                 <li>
-                                    <span class="super5 hover" data-highlight="track_muarray">&#9670;
-                                    <span class="superx">
-                                    <B>Mutation</B>
-                                    </span>
-                                    </span>
-                                 </li>
-                              </ol>
-                           </div>
+                           <ol>
+                              <li>
+                                 <span class="super1 hover" data-highlight="Ntrack_withImage">&#9679;
+                                 <span class="superx">
+                                 <B>N-Glycosite W/Glycan</B>
+                                 </span>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="super2 hover" data-highlight="Ntrack_withnoImage">&#9650;
+                                 <span class="superx">
+                                 <B>N-Glycosite</B>
+                                 </span>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="super3 hover" data-highlight="Otrack_withImage">&#9679;
+                                 <span class="superx">
+                                 <B>O-Glycosite W/Glycan</B>
+                                 </span>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="super4 hover" data-highlight="Otrack_withnoImage">&#9650;
+                                 <span class="superx">
+                                 <B>O-Glycosite</B>
+                                 </span>
+                                 </span>
+                              </li>
+                              <li>
+                                 <span class="super5 hover" data-highlight="track_muarray">&#9670;
+                                 <span class="superx">
+                                 <B>Mutation</B>
+                                 </span>
+                                 </span>
+                              </li>
+                           </ol>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
-           
+         </div>
+         </div>
       </body>
       <div w3-include-html="footer.html"></div>
       <div w3-include-html="footernote.html"></div>
-      <script>
-
-         
-      </script>
+      <script></script>
       <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
       <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
       <script src="js/navbar.js"></script>
