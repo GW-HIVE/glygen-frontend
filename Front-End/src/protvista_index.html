@@ -22,7 +22,6 @@
          <link rel="stylesheet" type="text/css" href="css/server.css">
          <link rel="stylesheet" type="text/css" href="css/protvista.css">
          <link rel="stylesheet" type="text/css" href="css/feedback.css">
-        
          <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
          <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
          <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
@@ -36,6 +35,7 @@
          <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-32x32.png" sizes="32x32" />
          <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-16x16.png" sizes="16x16" />
          <link rel="icon" type="image/png" href="images/icons/favicomatic/favicon-128.png" sizes="128x128" />
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
          <meta name="application-name" content="GlyGen" />
          <meta name="msapplication-TileColor" content="#FFFFFF" />
          <meta name="msapplication-TileImage" content="images/icons/favicomatic/mstile-144x144.png" />
@@ -115,8 +115,8 @@
                   </div>
                   <div class="row header">
                      <center>
-                        <h3 class="page-heading" style="margin-top: -5px;">Protvista* view for protein
-                           <span id='title_protein'> </span>
+                        <h3 class="page-heading" style="margin-top: -5px;">Protvista/Nightingale* view for protein
+                           <span class='title_protein'> </span>
                         </h3>
                      </center>
                      <div class="row">
@@ -125,7 +125,7 @@
                         <div class="col-md-3 col-sm-3">
                            <button class="btn btn-primary previous" id="li-breadcrumb-detailback">
                            <font color="white" ;>
-                           <a href="#" id="breadcrumb-detailback"><span style='font-size:16px;color:white'>Details of Protein </span></a>
+                           <a href="#" id="breadcrumb-detailback"><span style='font-size:16px;color:white'>Details of <span class='title_protein'> </span></span></a>
                            </font>
                            </button>
                         </div>
@@ -141,21 +141,21 @@
                               <a class="nav-link" href="#">Sequence</a>
                            </li>
                            <li class="nav-item nav-track" onclick="navglycoclick()">
-                              <i class="fa fa-caret-right"></i><a class="nav-link" href="#">Glycosylation
-                              
-                              </a>
+                                    <!-- <i class="fa fa-caret-right" style="font-size:48px;color:red;margin-left:0"></i>
+                              <a class="nav-link" href="#">Glycosylation </a> <i class="fa fa-caret-top"></i> -->
+                              <a class="nav-link" href="#">Glycosylation &nbsp;<i class="fa fa-caret-right" aria-hidden="true" style="font-size:30px;color:black; position:relative"></i></a>
                            </li>
                            <li id='reported_Nglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">Reported_N_site</a>
+                              <a class="nav-link" href="#">N glycosite w/ glycan</a>
                            </li>
                            <li id='nonreported_Nglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">Not_Reported_N_site</a>
+                              <a class="nav-link" href="#">N glycosite </a>
                            </li>
                            <li id='reported_Oglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">Reported_O_site</a>
+                              <a class="nav-link" href="#">O glycosite w/ glycan</a>
                            </li>
                            <li id='nonreported_Oglycan' class="nav-item nav-track hidden">
-                              <a class="nav-link" href="#">Not_Reported_O_site</a>
+                              <a class="nav-link" href="#">O glycosite </a>
                            </li>
                            <li class="nav-item nav-track">
                               <a class="nav-link" href="#">Mutation</a>
@@ -177,28 +177,28 @@
                                  <li>
                                     <span class="super1 hover" data-highlight="Ntrack_withImage">&#9679;
                                     <span class="superx">
-                                    <B>Reported N-Glycosylation</B>
+                                    <B>N-Glycosite W/Glycan</B>
                                     </span>
                                     </span>
                                  </li>
                                  <li>
                                     <span class="super2 hover" data-highlight="Ntrack_withnoImage">&#9650;
                                     <span class="superx">
-                                    <B>Non Reported N-Glycosylation</B>
+                                    <B>N-Glycosite</B>
                                     </span>
                                     </span>
                                  </li>
                                  <li>
                                     <span class="super3 hover" data-highlight="Otrack_withImage">&#9679;
                                     <span class="superx">
-                                    <B>Reported O-Glycosylation</B>
+                                    <B>O-Glycosite W/Glycan</B>
                                     </span>
                                     </span>
                                  </li>
                                  <li>
                                     <span class="super4 hover" data-highlight="Otrack_withnoImage">&#9650;
                                     <span class="superx">
-                                    <B>Non Reported O-Glycosylation</B>
+                                    <B>O-Glycosite</B>
                                     </span>
                                     </span>
                                  </li>

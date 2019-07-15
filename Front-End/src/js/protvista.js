@@ -259,12 +259,9 @@ function setupProtvista(data) {
   features.css("cursor", "pointer");
   features.on("click", function() {
     var start = $("#glycotrack").attr("highlightstart");
-    window.location.href = "./site_view.html?q=position " + start;
+    window.location.href = "./site_view.html?uniprot_canonical_ac=" + uniprot_canonical_ac +"&position=" + start;
+    
   });
-
-
-  
- 
 }
 
 /**
@@ -315,7 +312,7 @@ function navglycoclick() {
 
 $(document).ready(function() {
   uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
-  $("#title_protein").html(uniprot_canonical_ac);
+  $(".title_protein").html(uniprot_canonical_ac);
   LoadData(uniprot_canonical_ac);
   updateBreadcrumbLinks();
 });
