@@ -502,6 +502,10 @@ select {
     color: #555;
 }
 
+.ui-autocomplete-category {
+    font-weight: bold;
+}
+
 .chosen-drop {
     padding-left: 6px;
     font-family: inherit;
