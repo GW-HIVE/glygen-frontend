@@ -12,8 +12,22 @@
 function setFormValues(data) {
     if (data.query) {
         $("#glycan_id").val(data.query.glytoucan_ac);
+        $("#mass-drop").val(data.query.mass_type);
         if (data.query.mass) {
             var massSlider = document.getElementById('sliderbox-slider');
+            if (data.query.mass_type == mass_type_native) {
+                min = native_mass_min;
+                max = native_mass_max;
+            } else {
+                min = perMet_mass_min;
+                max = perMet_mass_max;
+            }
+            massSlider.noUiSlider.updateOptions({
+                range: {
+                    'min': min,
+                    'max': max
+                }
+            });
             massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
         }
         if (data.query.number_monosaccharides) {

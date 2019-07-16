@@ -140,6 +140,10 @@ select {
     margin-bottom: 20px;
 }
 
+.gg-form-mass-margin {
+    margin-top: -49px;
+}
+
 .col-25 {
     float: left;
     width: 25%;
@@ -350,6 +354,10 @@ select {
     .pathway-label,
     .sequence-label {
         margin-bottom: -3%;
+    }
+
+    .gg-form-mass-margin {
+        margin-bottom: 20px !important;
     }
 }
 .pathway-label {
