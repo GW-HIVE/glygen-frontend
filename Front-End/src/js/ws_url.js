@@ -13,6 +13,7 @@ function getWsUrl(request, id, id1, glytoucan_ac) {
     var ws_base_glycan = ws_base + "glycan";
     var ws_base_protein = ws_base + "protein";
     var ws_base_typeahead = ws_base + "typeahead";
+    var ws_base_categorized_typeahead = ws_base + "categorized_typeahead";
     var ws_logging = ws_base + "log/logging";
     var ws_userID = ws_base + "auth/userid";
     var ws_contact = ws_base + "auth/contact";
@@ -82,6 +83,9 @@ function getWsUrl(request, id, id1, glytoucan_ac) {
             return ws_base_typeahead;
         default:
             return "WWW.GOOGLE.COM";
+
+        case "categorized_typeahead":
+            return ws_base_categorized_typeahead;    
 
         //Usecases search webservices
         //Usecases search webservices Q1-Q2-Q3
@@ -154,6 +158,15 @@ function getSearchtypeheadData(field, value) {
     query.field = field;
     query.value = value;
     query.limit = 100;
+    return "query=" + JSON.stringify(query);
+}
+
+function getSearchCategorizedTypeheadData(field, value, total_limit, categorywise_limit) {
+    var query = {};
+    query.field = field;
+    query.value = value;
+    query.total_limit = total_limit;
+    query.categorywise_limit = categorywise_limit;
     return "query=" + JSON.stringify(query);
 }
 
