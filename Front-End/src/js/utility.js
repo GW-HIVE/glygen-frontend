@@ -42,7 +42,8 @@ function databasecolor(name) {
         case 'mgi': return '#ff8080';
         case 'hgnc': return '#518a8a';
         case 'homologene': return '#9a039a';
-        case 'oma': return '#bbea5e';
+        case 'oma': return '#89a15c';
+        case 'mgi_homologset': return '#e8a2e8';
 
     }
 }
