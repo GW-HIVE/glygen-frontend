@@ -164,7 +164,7 @@
                         <tr>
                             <td>Mass:</td>
                             {{#mass.min}}
-                            <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da</td>
+                            <td>{{mass.min}}{{/mass.min}}-{{#mass.max}}{{mass.max}} Da ({{mass_type}})</td>
                             {{/mass.max}}
                         </tr>
                         {{/mass.min}}
@@ -275,6 +275,9 @@
                     <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Image of <br>Glycan
                         Structure</th>
                     <th data-field="mass" data-formatter="massFormatter" data-sortable="true">Monoisotopic Mass
+                        <br>(Da)
+                    </th>
+                    <th data-field="mass_pme" data-formatter="massFormatter" data-sortable="false">Monoisotopic Mass-pMe
                         <br>(Da)
                     </th>
                     <th data-field="number_monosaccharides" data-sortable="true">No of
