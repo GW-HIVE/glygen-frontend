@@ -227,7 +227,20 @@ function glycanEnzyme() {
         }
     })
 }
-
+/**
+ * Sorts dropdown list in asc order in advanced search
+ * @param {string} a dropdown name
+ * @param {string} b dropdown name
+ * @return {string} asc order name
+ */
+function sortDropdown(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else if (b.name < a.name) {
+        return 1;
+    }
+    return 0;
+}
 /**
  * Q.7- What are the glycosyltransferases in species X?
  */
@@ -237,8 +250,10 @@ $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_glycan"), function (result) {
         searchInitValues = result;
         var orgElement = $("#organism1").get(0);
-        createOption(orgElement, result.organism[0].name, result.organism[0].id);
-        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
     });
      /** 
     * @param {string} No results found 
@@ -286,8 +301,10 @@ $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_glycan"), function (result) {
         searchInitValues = result;
         var orgElement = $("#organism2").get(0);
-        createOption(orgElement, result.organism[0].name, result.organism[0].id);
-        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
     });
 });
 
@@ -327,8 +344,10 @@ $(document).ready(function () {
     $.getJSON(getWsUrl("search_init_glycan"), function (result) {
         searchInitValues = result;
         var orgElement = $("#organism3").get(0);
-        createOption(orgElement, result.organism[0].name, result.organism[0].id);
-        createOption(orgElement, result.organism[1].name, result.organism[1].id);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
         var question = getParameterByName('question');
         var id = getParameterByName('id');
         if(id) {
