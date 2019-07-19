@@ -352,11 +352,11 @@
                                     <div class='panelmaincontent'>
                                         <li class="list-group2"><Strong>{{name}}:</Strong> </li>
                                         {{#go_terms}}
-                                        <div class='col-md-12 col-xs-12'>
-                                            <li class="list-group-indent">
+                                        <div class='col-md-12 col-xs-12 no-before'>
+                                            <li style = "padding-bottom: 10px;" class="list-group-indent">
                                                 <a href="{{url}}" target="_blank">{{name}}</a>
                                                 {{#databases}}
-                                                <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
+                                                <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-top: 10px">
                                                     <button class="btn btn-primary evidence-badge-btn" type="button" style="background-color:{{color}}; border-color:{{color}}">
                                                         {{database}}&nbsp;&nbsp;<span class="badge">{{links.length}}</span>
                                                     </button>
@@ -374,9 +374,11 @@
                                         {{/go_terms}}
                                     </div>
                                 </div>
+                                <div style = "margin-top: 10px;">
+                                <a href="#" onclick="openGOTermListPage();return false;" target="_blank">Total {{total}} in {{name}} category.</a>
+                                </div>
                             </div>
                         </div>
-                        <a href="#" onclick="openGOTermListPage();return false;" target="_blank">Total {{total}} in {{name}} category.</a>
                         {{/go_annotation.categories}}
                         {{^go_annotation.categories}} No data available. {{/go_annotation.categories}}
                     </div>
