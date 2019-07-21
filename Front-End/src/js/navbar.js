@@ -44,8 +44,14 @@ $(document).ready(function(){
         navItemText = 'HELP';
     } else if(navItemText == 'CONTACT') {
         navItemText = 'HELP';
-    } else if(navItemText == 'ABOUT') {
+    } else if(navItemText == 'HOWTO CITE') {
         navItemText = 'HELP';
+    } else if(navItemText == 'ABOUT') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'MEDIA') {
+        navItemText = 'MORE';
+    } else if(navItemText == 'PROGRAMMING') {
+        navItemText = 'MORE';
     } else if(navItemText == 'GLYGEN SETTINGS') {
         navItemText = 'MY GLYGEN';
     }
