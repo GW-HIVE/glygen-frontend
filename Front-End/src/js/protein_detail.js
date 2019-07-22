@@ -71,7 +71,7 @@ function ajaxSuccess(data) {
             
             // Sorting Go term categories in specific order - 1. "MOLECULAR FUNCTION", 2. "BIOLOGICAL PROCESS", 3. "CELLULAR COMPONENT".
             // This will help mustache template to show categories in specific order. 
-            if (data.go_annotation.categories) {
+            if (data.go_annotation && data.go_annotation.categories) {
                 data.go_annotation.categories = data.go_annotation.categories.sort(function(a, b){ 
                     if (a.name.toUpperCase() === b.name.toUpperCase()) return 0;
                     else if(a.name.toUpperCase() == "MOLECULAR FUNCTION") return -1;

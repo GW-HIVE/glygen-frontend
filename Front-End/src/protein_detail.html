@@ -345,6 +345,7 @@
                         <h4>GO Annotation</h4>
                     </div>
                     <div class="panel-body">
+                        {{#go_annotation}}
                         {{#go_annotation.categories}}
                         <div class="row">
                             <div class="panel-body">
@@ -380,7 +381,8 @@
                             </div>
                         </div>
                         {{/go_annotation.categories}}
-                        {{^go_annotation.categories}} No data available. {{/go_annotation.categories}}
+                        {{/go_annotation}}
+                        {{^go_annotation}} No data available. {{/go_annotation}}
                     </div>
                 </div>
             </ul>
