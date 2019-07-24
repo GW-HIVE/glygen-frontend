@@ -197,7 +197,7 @@ function ajaxSuccess(data) {
 
         if (data.glycosylation) {
             data.glycosylation = data.glycosylation.map(function (item) {
-                item.residue = item.residue + item.position;
+                item.respos = item.residue + item.position;
                 return item;
             });
 
@@ -287,9 +287,13 @@ function ajaxSuccess(data) {
                 },
 
                 {
-                    field: 'residue',
+                    field: 'respos',
                     title: 'Residue',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position + "'>" + value + "</a>"
+                    }
                 },
                 {
                     field: 'imageFormat',
