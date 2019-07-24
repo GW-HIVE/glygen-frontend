@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123338976-1"></script>
+    <script async src="js/ga.js" type="text/javascript"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,33 +16,40 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
-    <title>Programming - glygen</title>
+    <title>Frameworks - glygen</title>
     
     <!-- Basic SEO -->
     <meta name="description" content="Programming libraries and frameworks used to develop GlyGen.org">
     <meta name="keywords" content="HTML5, CSS3, JQuery, Bootstrap, Paython, Protvista, d3.js, Web Design, Web Development, Responsive website, Programming Libraries and frameworks">
 
-
-    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css"> 
-
+    
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="css/server.css">
-    <!-- Fontawesome -->
-<!--    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">-->
-    <!-- Font awesome5 -->
-    <link rel="stylesheet" href="css/fontawesome-5.9.0/css/all.css">
+    
+    <link href="libraries/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!--put minified file here-->
+    <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css"> 
+    <!-- CSS for alertify -->
+    <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <!-- Feedback -->
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
+    <!-- Server CSS -->
+    <link rel="stylesheet" type="text/css" href="css/server.css">
+    <!-- Font awesome5 -->
+    <link rel="stylesheet" href="css/fontawesome-5.9.0/css/all.css">
     <!-- Animate -->
     <link rel="stylesheet" type="text/css" href="css/media/animate.css"/>
     <!-- Custom css -->
     <link rel="stylesheet" type="text/css" href="css/media/media.css">
+    <!-- Custom responsive css -->
+    <link rel="stylesheet" type="text/css" href="css/media/responsive.css">
     <!-- Main style css -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- script for jquery -->
+    <script src="libraries/jquery/jquery.min.js"></script>
+    <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
 
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
@@ -68,16 +78,16 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <div class="container container-contact"> 
-        <!-- GlyGen programming libraries and frameworks-->
-        <div class="col-md-12 wow slideInDown" data-wow-duration="1s">
-            <div class="vertical-heading">
-                <h5>Development</h5>
-                <h2>Our <br>Programming <strong>Libraries and Frameworks</strong></h2>
-            </div>
-        </div>
+    <div class="container container-contact">
+        
         <!-- Programming libraries -->
         <div class="content-box-md">
+            <div class="col-md-12 wow slideInDown" data-wow-duration="1s">
+                <div class="vertical-heading">
+                    <h5>Web Development</h5>
+                    <h2>Our <br>Programming <strong>Libraries and Frameworks</strong></h2>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 wow slideInLeft" data-wow-duration="1s">
                     <!-- Library 01 HTML5-->
@@ -133,7 +143,7 @@
                     <div class="service">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <div class="icon-svg text-right">
+                                <div class="icon icon-svg text-right">
                                     <img src="images/icons/frameworks-icons/jquery.svg" alt="jQuery-icon">
                                 </div>
                             </div>
@@ -168,7 +178,7 @@
                     <div class="service">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <div class="icon-svg text-right">
+                                <div class="icon icon-svg text-right">
                                     <img src="images/icons/frameworks-icons/d3-js.svg" alt="d3.js-icon"> 
                                 </div>
                             </div>
@@ -219,7 +229,7 @@
                     <div class="service">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <div class="icon-svg text-right">
+                                <div class="icon icon-svg text-right">
                                     <img src="images/icons/frameworks-icons/ajax.svg" alt="ajax-icon">
                                 </div>
                             </div>
@@ -230,11 +240,11 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Library 10 -->
+                    <!-- Library 10 Mustache -->
                     <div class="service">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <div class="icon-svg text-right">
+                                <div class="icon icon-svg text-right">
                                     <img src="images/icons/frameworks-icons/mustache.svg" alt="mustache-icon"> 
                                 </div>
                             </div>
@@ -264,7 +274,7 @@
                     <div class="service">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <div class="icon-svg text-right">
+                                <div class="icon icon-svg text-right">
                                     <img src="images/icons/frameworks-icons/json.svg" alt="JSON-icon"> 
                                 </div>
                             </div>
@@ -314,9 +324,12 @@
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/navbar.js"></script>
+    <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/domain_url.js"></script>
-    <script src="js/ws_url.js"></script>    <!-- script for getting Web Service URLs -->
-    <script src="js/activity_tracker.js"></script>  <!-- script for logging activity -->
+    <!-- script for getting Web Service URLs -->
+    <script src="js/ws_url.js"></script>    
+    <!-- script for logging activity -->
+    <script src="js/activity_tracker.js"></script>  
     <script src="js/utility.js"></script>
     <script type="text/javascript" src="libraries/contact.js"></script>
     <script type="text/javascript" src="libraries/media/wow.min.js"></script>
