@@ -91,7 +91,7 @@ function setGlycoProteinFormValues(data) {
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");
-        $("#glycosylated_aa").val(data.query.glycosylated_aa || "").trigger("chosen:updated");
+        $("#glycosylated_aa").val(data.query.glycosylated_aa.aa_list || "").trigger("chosen:updated");
         // $("#glycosylated_aa").val('').trigger("chosen:updated");
         $("#glycosylation_evidence").val(data.query.glycosylation_evidence || "");
         $("#refseq").val(data.query.refseq_ac || "");
