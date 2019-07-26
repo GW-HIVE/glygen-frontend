@@ -409,6 +409,8 @@ function downloadFromServer(id, format, compressed, type) {
     $('#loading_image').fadeIn();
 
     var mimeType = "text";
+    var fields = undefined;
+    var data = "text";
     var ext = "";
     if (format === "csv") {
         mimeType = "text/csv";
@@ -420,17 +422,20 @@ function downloadFromServer(id, format, compressed, type) {
     } else if (format === "json") {
         mimeType = "application/json";
         ext = ".json";
-    } else if (format === "image") {
+    } else if (format === "png") {
+        data = undefined;
+        fields = {responseType:"blob"};
         mimeType = "image/png";
         ext = ".png";
     } else if (format === "tsv") {
         mimeType = "text/tsv";
         ext = ".tsv";
     }
-
+  
     $.ajax({
         method: 'POST',
-        dataType: "text",
+        dataType: data,
+        xhrFields: fields,
         url: getWsUrl('data_download') + "?query=" + JSON.stringify(download_query),
         success: function (result) {
             //uses the download.js library.

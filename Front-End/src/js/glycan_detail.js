@@ -243,6 +243,8 @@ function updateBreadcrumbLinks() {
 function downloadPrompt() {
     var page_type = "glycan_detail";
     var format = $('#download_format').val();
+    if (format == "png")
+        page_type = "glycan_image";
     var IsCompressed = false; //$('#download_compression').is(':checked');
     downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }
