@@ -61,9 +61,9 @@ function ajaxSuccess(data) {
 
         //Adding breaklines
         if (data.glycoct) {
-            data.glycoct = data.glycoct.replace(/ /g, '<br>');
+            data.glycoct = data.glycoct.replace(/\\n/g, '<br />');
         }
-        data.wurcs = data.wurcs.replace(/ /g, '<br>');
+        data.wurcs = data.wurcs.replace(/[/]/g, '<br />');
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }
