@@ -84,7 +84,7 @@ section {
 .vertical-heading h5 {
     color: #60BA4B;
     font-size: 16px;
-    font-weight: 700 !important;
+    font-weight: 500;
     text-transform: uppercase;
     word-spacing: 9px;
     display: inline-block;
@@ -113,6 +113,7 @@ section {
 .horizontal-heading h5 {
     font-size: 16px;
     color: #60BA4B;
+    font-weight: 540 !important;
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 10px;
