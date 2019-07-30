@@ -292,8 +292,10 @@ function ajaxSuccess(data) {
                     sortable: true,
                     formatter: function (value, row, index, field) {
                         var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
-                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position + "'>" + value + "</a>"
-                    }
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position + "'>" + value + "</a>";
+               }
+                    //return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + + "&position=" + row.position +"&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
+
                 },
                 {
                     field: 'imageFormat',
@@ -540,6 +542,8 @@ function proteinView(){
     // window.open(url); 
     window.location.href=url;
 }
+
+
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');

@@ -3,8 +3,6 @@
 // @description: UO1 Version-1.1.
 
 var annotations;
-
-
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -12,7 +10,6 @@ var annotations;
 function ajaxSuccess(data) {
   if (data.error_code) {
     activityTracker("error", uniprot_canonical_ac, data.error_code);
-    // added by Gaurav on July 27, 2018. Web service error display.
     alertify.alert("Error occured", data.error_code);
   } else {
     activityTracker("user", uniprot_canonical_ac, "successful response");
@@ -31,6 +28,10 @@ function ajaxSuccess(data) {
       }
     }
 
+    /**
+ *  The map() method calls the provided function once for each element in a glycosylation array, in order.
+ *  and sorting with respect to position 
+ */
     if (data.glycosylation) {
       var glycosylationPositions = data.glycosylation.map(function(
         glycosylation
@@ -57,6 +58,11 @@ function ajaxSuccess(data) {
 
       data.glycosylationPositions = glycosylationPositions;
     }
+
+       /**
+ *  The map() method calls the provided function once for each element in a data.site_annotation array, in order.
+ *  and sorting with respect to start_pos
+ */
     if (data.site_annotation) {
       var site_annotationstart_poss = data.site_annotation.map(function(
         site_annotation
@@ -79,6 +85,11 @@ function ajaxSuccess(data) {
 
       data.site_annotationstart_poss = site_annotationstart_poss;
     }
+
+           /**
+ *  The map() method calls the provided function once for each element in a data.mutation array, in order.
+ *  and sorting with respect to start_pos
+ */
     if (data.mutation) {
       var mutationstart_poss = data.mutation.map(function(mutation) {
         return {
@@ -101,12 +112,24 @@ function ajaxSuccess(data) {
       data.mutationstart_poss = mutationstart_poss;
     }
 
+                  /**
+ *  The concat() method is used to join two or more arrays.
+ * annotation has complete array of three combine array
+ */ 
      annotations = glycosylationPositions.concat(
       mutationstart_poss,
       site_annotationstart_poss
     );
+
+   /**
+ *  The Array.prototype.push.apply() method used for the Merging two arrays.
+ * Merge the second array into the first one.
+ */
     Array.prototype.push.apply(glycosylationPositions, mutationstart_poss);
 
+   /** newannotations is iterating through annotation and removes duplicate positions 
+    * 
+ */
     var newannotations = [];
 
     $.each(annotations, function(key, value) {
@@ -119,7 +142,6 @@ function ajaxSuccess(data) {
       if (exists == false && value.position != "") {
         newannotations.push(value);
       }
-
       newannotations.sort(function(a, b) {
         if (a.position < b.position) {
           return -1;
@@ -130,8 +152,6 @@ function ajaxSuccess(data) {
       });
       data.annotations = newannotations;
     });
-    
-
     var html = Mustache.to_html(template, data);
     var $container = $("#content");
     $container.html(html);
@@ -159,11 +179,9 @@ function LoadData(uniprot_canonical_ac) {
     success: ajaxSuccess,
     error: ajaxFailure
   };
-
   // calls the service
   $.ajax(ajaxConfig);
 }
-
 /**
  * getParameterByName function to extract query parametes from url
  * @param {name} string for the name of the variable variable to extract from query string
@@ -180,7 +198,6 @@ function getParameterByName(name, url) {
   if (!results[2]) return "";
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 var uniprot_canonical_ac;
 var id;
 var position;
@@ -192,14 +209,12 @@ $(document).ready(function() {
   LoadData(uniprot_canonical_ac);
   updateBreadcrumbLinks();
 });
-
 function selectPostion(position) {
   var positionOption = getPositionList().find(function(option) {
     return parseInt(option.value.split("-")[0]) === position;
   });
   positionOption.selected = true;
 }
-
 /**
  * this function is useful for scrooling through sequence
  * and zooming selected character
@@ -235,14 +250,11 @@ function changeGlycosylationPosition() {
   }
   $(currentElement).css("font-size", centerSize + "px");
   $(currentElement).css("transform", "translateY(" + translateCenter + "px)");
-
   zoom.scrollLeft = currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2;
   document.getElementById("label").innerHTML = offset + "-" + label;
-
   var taperlength = 3;
   var taperDelta = 9;
   var translateDelta = 7;
-
   for (var i = 1; i <= taperlength; i++) {
     var $element = $(sequence.children[offset - 1 - i]);
     $element.css("font-size", centerSize - i * taperDelta + "px");
@@ -261,22 +273,19 @@ function changeGlycosylationPosition() {
   }
 }
 
-
-
 // To update position
 function updateGlycosylationPosition() {
   changeGlycosylationPosition();
   changeTableGlycosylationPosition();
   updateLable();
-  
+  updateUrlPos()
+}
 
-  // To change Url position onchange
-  var pos = currentPosition();
-  history.pushState(
-    {},
-    "Position " + pos,
-    "site_view.html?uniprot_canonical_ac=P14210-1&position=" + pos
-  );
+ // To change Url position onchange
+ function updateUrlPos(){
+ var pos = currentPosition();
+ history.pushState( {}, "Position " + pos,"site_view.html?uniprot_canonical_ac=P14210-1&position=" + pos
+ );
 }
 
 // To update position in Page lable
@@ -298,9 +307,6 @@ function getPositionList() {
 function nextPosition() {
   var current = currentPosition();
   var nextPosition = $("#positionlist :selected").next();
-  // getPositionList().find(function(option) {
-  //   return parseInt(option.value.split("-")[0]) > current;
-  // });
   if (nextPosition) {
     nextPosition.prop('selected', true);
     updateGlycosylationPosition();
@@ -311,14 +317,7 @@ function nextPosition() {
 // To get current position for dropdown
 function previousPosition() {
   var current = currentPosition();
-
   var prevPosition = $("#positionlist :selected").prev();
-  //getPositionList()
-    // .reverse()
-    // .find(function(option) {
-    //   return parseInt(option.value.split("-")[0]) < current;
-    // });
-
   if (prevPosition) {
     prevPosition.prop('selected', true);
     updateGlycosylationPosition();
@@ -333,7 +332,6 @@ function changeTableGlycosylationPosition() {
     return item.position === parseInt(positionValue);
   });
   formatEvidences(newTableData); 
- 
   $("#table").bootstrapTable("destroy");
   $("#table").bootstrapTable({ data: newTableData });
   setupEvidenceList();
@@ -346,11 +344,14 @@ function imageFormat(value, row, index, field) {
   return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
 }
 
+
+
 /**
  * this function gets the URL query values
  * and updates the respective links on the breadcrumb fields.
  */
 function updateBreadcrumbLinks() {
+  const proteinacc = getParameterByName("uniprot_canonical_ac") || "";
   const listID = getParameterByName("listID") || "";
   const globalSearchTerm = getParameterByName("gs") || "";
   var glycanPageType = "";
@@ -381,5 +382,51 @@ function updateBreadcrumbLinks() {
       );
     else $("#li-breadcrumb-list").css("display", "none");
   }
+  if (proteinacc) {
+		$("#breadcrumb-detail").attr(
+			"href",
+			glycanPageType +
+			"_detail.html?uniprot_canonical_ac=" +
+			proteinacc +
+			"&listID=" +
+			listID +"#sequence"
+			
+		);
+	} else {
+		$("#li-breadcrumb-detail").css("display", "none");
+	}
+	if (proteinacc) {
+		$("#breadcrumb-detailback").attr(
+			"href",
+			glycanPageType +
+			"_detail.html?uniprot_canonical_ac=" +
+			proteinacc +
+			"&listID=" +
+			listID + "#sequence"
+		);
+  }
+  if (proteinacc) {
+		$("#li-breadcrumb-visualizer").attr(
+			"href",
+			"protvista_index.html?uniprot_canonical_ac=" +
+			proteinacc +
+			"&listID=" +
+			listID 	
+		);
+	} else {
+		$("#li-breadcrumb-detail").css("display", "none");
+	}
+	if (proteinacc) {
+		$("#breadcrumb-detailback").attr(
+			"href",
+			glycanPageType +
+			"_detail.html?uniprot_canonical_ac=" +
+			proteinacc +
+			"&listID=" +
+			listID 
+			// "#sequence"
+		);
+	}
+
 }
 

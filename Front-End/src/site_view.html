@@ -21,7 +21,7 @@
     />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>Details - glygen</title>
+    <title>SiteView - glygen</title>
     <!-- Please do not change Sequence-->
     <!-- CSS reset -->
     <link rel="stylesheet" href="css/reset.css" />
@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="css/faq_style.css" />
     <!--detail style -->
     <link rel="stylesheet" type="text/css" href="css/detail.css" />
+    <link rel="stylesheet" type="text/css" href="css/siteview.css" />
     <!-- Modernizr -->
     <script src="js/modernizr.js"></script>
     <!-- CSS for alertify -->
@@ -155,14 +156,6 @@
       name="msapplication-square310x310logo"
       content="images/icons/favicomatic/mstile-310x310.png"
     />
-    <style>
-      .zoom {
-        font-size: 30px;
-      }
-      .next{
-        margin-top: -20px
-      }
-    </style>
   </head>
 
   <body onload="tracking()">
@@ -180,16 +173,10 @@
           <a class="selected" href="#general">General</a>
         </li>
         <li>
-          <a href="#species">Sequence view</a>
+          <a href="#sequence">Sequence view</a>
         </li>
         <li>
-          <a href="#species">Site Annotation</a>
-        </li>
-        <li>
-          <a href="#function">Multiple Annotation</a>
-        </li>
-        <li>
-          <a href="#glycosylation">Sequence Alignment</a>
+          <a href="#annotation">Site Annotation</a>
         </li>
       </ul>
       <!-- cd-faq-categories -->
@@ -202,17 +189,29 @@
         <script id="item_template" type="text/template">
               <div class="row">
                   <div class="col-md-12 col-xs-12">
+                    
                       <!-- breadcrumb filled by javascript -->
                       <ul class="gg-breadcrumb">
-                          <li id="li-breadcrumb-search"><a href="#" id="breadcrumb-search">Protein Search</a></li>
-                          <li id="li-breadcrumb-list"><a href="#" id="breadcrumb-list">Protein List</a></li>
-                          <li id="li-breadcrumb-detail">Protein Detail</li>
-                          <li id="li-breadcrumb-detail">ProtVista View</li>
+                         <li id="li-breadcrumb-search">
+                            <a href="#" id="breadcrumb-search">Protein Search</a>
+                         </li>
+                         <li id="li-breadcrumb-list">
+                            <a href="#" id="breadcrumb-list">Protein List</a>
+                         </li>
+                         <!-- <li><a href="#">Protein Detail</a></li> -->
+                         <li id="li-breadcrumb-detail">
+                            <a href="#" id="breadcrumb-detail">Protein Detail</a>
+                         </li>
+                         <li id="li-breadcrumb-protvista">
+                          <a href="#" id="li-breadcrumb-visualizer">ProtVista View</a>
+                       </li>
+                         <li id="li-breadcrumb-siteview">Site View</li>
                       </ul>
+                   
                   </div>
               </div>
               <!--Accession  starts here for page -->
-              <center><h2 class="page-heading" style="margin-top: -5px;">Site view for Protein <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span>at Position-<label id="cookie1"></label>
+              <center><h2 class="page-heading" style="margin-top: -5px;">Site view <span> {{#uniprot}} {{uniprot_canonical_ac}} {{/uniprot}} </span><label id="cookie1"></label>
               </h2></center>
 
               <div class="row">
@@ -290,7 +289,6 @@
                               </li>
                               {{/length}}
                               {{^length}} {{/length}}
-
                               {{#mass}}
                               <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass.chemical_mass}} Da</li>
                               {{/mass}}
@@ -300,7 +298,6 @@
                   </div>
               </div>
               </ul>
-
               <!-- Sequence -->
               <ul id="sequence" class="cd-faq-group selected">
               <li class="cd-faq-title"/>
@@ -308,7 +305,7 @@
                   <div class="gg-panel-heading">
                       <div class="row">
                       <div class="col-md-9">
-                      <h4>Sequence</h4>
+                      <h4>Sequence View</h4>
                   </div>
               </div>
            </div>
@@ -323,17 +320,14 @@
                           {{/annotations}}
                       </select>
                   </div>
-
-
                   <div class="col-md-12">
                        <span id="label"></span>
-
               {{#sequence}}
               <div row>
                 <div class="col-md-1 next"><font size="12px"><a href="#" class="w3-xlarge" style="fond-size:13px;" onClick="previousPosition();">&laquo;</a></font></div>
                        <div class="zoom col-md-10">
                           <div class="zoom-sequence">
-                           
+
                               {{#sequence}}
                                   <span id= "eachChar">{{.}}</span>
                               {{/sequence}}
@@ -347,18 +341,18 @@
               </div>
               </ul>
                      <!--Glycosylation-->
-          <ul id="glycosylation" class="cd-faq-group selected">
+          <ul id="annotation" class="cd-faq-group selected">
                <div class="panel panel-default">
                    <div class="gg-panel-heading">
-                       <h4>Glycosylation</h4>
+                       <h4>Site Annotation</h4>
                    </div>
                    <table id="table" data-pagination="true">
                        <thead>
                          <tr>
-                            <th data-field="typeAnnotate" data-sortable="true">Annotation</th>
-                  
+                           <th data-field="typeAnnotate" data-sortable="true">Annotation</th>
+
                            <th data-field="position" data-sortable="true">Position</th>
-                     
+
                            <th data-field="glycan_image" data-formatter="imageFormat" style="width:10%">Image of <br>Glycan
                                Structure</th>
                                <th  data-field="databases" data-sortable="true" data-formatter="EvidencebadgeFormator">Source</th>
@@ -414,48 +408,7 @@
     <!-- for evidence badge js -->
     <script src="js/evidence_badge.js"></script>
     <!-- for sequenceview js -->
-    <style>
-      .zoom {
-        font-size: 25px;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        height: 2em;
-      }
 
-      .zoom-sequence {
-        display: flex;
-        font-family: monospace;
-      }
-
-      .zoom-sequence span {
-        padding: 0 0.25em;
-        transition: font-size 0.5s;
-      }
-
-      .zoom-sequence span.highlightN {
-        color: rgb(235, 107, 107);
-        /* transform: translateY(-10px); */
-      }
-
-      .zoom-sequence span.highlightO {
-        color: blue;
-        /* transform: translateY(-10px); */
-      }
-
-      .zoom-sequence span.highlightMutate {
-        color: green;
-        /* transform: translateY(-10px); */
-      }
-
-      #label {
-        font-size: 24px;
-        color: black;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 60px;
-        margin-left: 390px;
-      }
-    </style>
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
       $(document).ajaxStop(function() {
