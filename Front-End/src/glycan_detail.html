@@ -345,15 +345,35 @@
                     </div>
                     <div class="panel-body">
 
-                        {{#iupac}}
-                        <strong>IUPAC</strong>
-                        <pre class="text-overflow">{{{iupac}}}</pre>
-                        {{/iupac}}
+                        {{#inchi_key}}
+                        <strong>InChi Key</strong>
+                        <pre class="text-overflow">{{{inchi_key}}}</pre>
+                        {{/inchi_key}}
+
+                        {{#glycam}}
+                        <strong>GLYCAM</strong>
+                        <pre class="text-overflow">{{{glycam}}}</pre>
+                        {{/glycam}}
 
                         {{#wurcs}}
                         <strong>WURCS</strong>
                         <pre class="text-overflow">{{{wurcs}}}</pre>
                         {{/wurcs}}
+
+                        {{#iupac}}
+                        <strong>IUPAC</strong>
+                        <pre class="text-overflow">{{{iupac}}}</pre>
+                        {{/iupac}}
+
+                        {{#smiles_isomeric}}
+                        <strong>Isomeric SMILES</strong>
+                        <pre class="text-overflow">{{{smiles_isomeric}}}</pre>
+                        {{/smiles_isomeric}}
+
+                        {{#inchi}}
+                        <strong>InChi</strong>
+                        <pre class="text-overflow">{{{inchi}}}</pre>
+                        {{/inchi}}
 
                         {{#glycoct}}
                         <strong>GlycoCT</strong>
