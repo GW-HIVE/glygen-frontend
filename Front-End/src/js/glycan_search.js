@@ -407,7 +407,12 @@ function resetAdvanced() {
             enzyme: {},
             glytoucan_ac: "",
             organism: {
-                id: "0"
+                organism_list: [
+                    {
+                        "id": 0,
+                    }
+                ],
+                "operation":"or"
             },
             glycan_type: "",
             glycan_subtype: "",
@@ -444,7 +449,7 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min
         "id": 0,
         "name": "All"
     }
-    if (input_organism.id !== "0") {
+    if (input_organism.id !== 0) {
         organisms.id = input_organism.id;
         organisms.name = input_organism.name;
     }
@@ -463,7 +468,15 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min
         },
         enzyme: enzymes,
         glytoucan_ac: input_glycan_id,
-        organism: organisms,
+        organism: {
+            organism_list: [
+                {
+                    "id": organisms.id,
+                    "name": organisms.name
+                }
+            ],
+            "operation":"or"
+        },
         glycan_type: input_glycantype,
         glycan_subtype: input_glycansubtype,
         protein_identifier: input_proteinid,

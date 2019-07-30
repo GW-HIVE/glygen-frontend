@@ -439,3 +439,8 @@ h4 {
 .no-before ::before {
     content: none;
 }
+
+.text-overflow {
+    white-space: initial;
+}
+

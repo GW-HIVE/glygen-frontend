@@ -24,18 +24,9 @@ p {
     line-height: 24px;
 }
 
-/*
 section {
     background: #fff;
     overflow: hidden;
-}
-*/
-.section-bg {
-    background: #fff;
-    padding: 10px 20px 0;
-}
-#portfolio .section-bg {
-    padding: 10px 20px 40px;
 }
 
 /* =========================================
@@ -43,7 +34,7 @@ section {
 ============================================ */
 
 .btn-general {
-/*    font-family: 'Raleway', sans-serif;*/
+    font-family: "Verdana", "Geneva", sans-serif;
     border-radius: 28px;
     font-size: 13px;
     text-transform: uppercase;
@@ -80,18 +71,15 @@ section {
                 Content Boxes
 ============================================ */
 
-.content-box-lg {
-    padding: 100px 0;
-}
-
 .content-box-md {
-    padding: 60px 0;
+    padding: 40px 0;
 }
 
-.content-box-sm {
-    padding: 90px 0;
+.media-container {
+    background: #fff; 
+    margin-bottom: 35px;
+    padding: 0 5% 0;
 }
-
 
 /* =========================================
         Vertical/Horizontal Headings
@@ -99,7 +87,7 @@ section {
 
 .vertical-heading h5 {
     color: #60BA4B;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     text-transform: uppercase;
     word-spacing: 9px;
@@ -123,12 +111,13 @@ section {
 }
 
 .horizontal-heading {
-    margin-bottom: 80px;
+    margin-bottom: 30px;
 }
 
 .horizontal-heading h5 {
     font-size: 16px;
-    color: #f4c613;
+    color: #60BA4B;
+    font-weight: 540 !important;
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 10px;
@@ -136,6 +125,19 @@ section {
 
 .horizontal-heading h2 {
     margin: 0;
+}
+
+/* =========================================
+               Citations
+============================================ */
+
+.logo-citations {
+    margin-top: 50px;
+}
+
+.text-indent p {
+    text-indent: -50px;
+    padding-left: 50px;
 }
 
 /* =========================================
@@ -178,6 +180,7 @@ section {
     transform: translateX(-20px);
     filter: invert(61%) sepia(23%) saturate(1009%) hue-rotate(63deg) brightness(98%) contrast(98%);
 }
+
 .service h5 {
     font-size: 12px;
     text-transform: uppercase;
@@ -216,7 +219,7 @@ section {
 }
 
 #services-tabs ul li a {
-    font-family: "Raleway", sans-serif;
+    font-family: "Verdana", "Geneva", sans-serif;
     font-size: 13px;
     color: #212226;
     text-transform: uppercase;
@@ -246,20 +249,24 @@ section {
 
 .service-tab iframe {
     width: 100%;
-/*    float: right;*/
+    margin: 0 auto;
+}
+
+.service-tab img {
+    width: 100%;
     margin: 0 auto;
 }
 
 .service-tab .tab-bg {
-    background: #f5f5f5;
+    background: #fff;
     padding: 30px;
-    height: 380px;
+    height: 480px;
     width: 100%;
     margin: 0 auto;
 }
 
 .service-tab h2 {
-    font-family: "Raleway", sans-serif !important;
+    font-family: "Verdana", "Geneva", sans-serif;
     font-size: 48px !important;
     color: #bbb !important;
     margin-bottom: 20px;
@@ -282,18 +289,9 @@ section {
 ============================================ */
 
 
-#slides,
-#portfolio,
-#publications{
-    padding-bottom: 60px;
-}
-
-/*
 #portfolio .vertical-heading {
     margin-bottom: 50px;
 }
-*/
-
 
 .row.no-gutters [class*=col-] {
     padding: 0;
@@ -307,15 +305,13 @@ section {
 
 /* Filters CSS */
 
-/*
 #isotope-filters {
     margin-bottom: 10px;
     padding: 20px 25px 20px 0;
 }
-*/
 
 #isotope-filters button {
-    font-family: "Raleway", sans-serif;
+    font-family: "Verdana", "Geneva", sans-serif;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -325,7 +321,8 @@ section {
     padding-right: 35px;
     outline: 0;
 }
-#isotope-filters button:hover{
+
+#isotope-filters button:hover {
     color: #60BA4B;
 }
 
@@ -436,63 +433,3 @@ section {
 .portfolio-item:hover .portfolio-item-overlay {
     opacity: 1;
 }
-
-/* =========================================
-                Stats
-============================================ */
-
-#stats {
-    background: url("../img/stats/stats-bg.jpg") no-repeat fixed center;
-    background-size: cover;
-}
-
-#stats .content-box-md {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-#stats .vertical-heading {
-    margin-bottom: 50px;
-}
-
-#stats .vertical-heading h2 {
-    color: #fff;
-}
-
-.stats-item {
-    background: rgba(61, 68, 68, 0.6);
-    border-radius: 4px;
-    min-height: 170px;
-    padding: 25px 50px;
-    -webkit-transition: all 400ms linear;
-    transition: all 400ms linear;
-}
-
-.stats-item i {
-    font-size: 42px;
-    color: #f4c613;
-    margin: 0 0 6px 0;
-    -webkit-transition: all 400ms linear;
-    transition: all 400ms linear;
-}
-
-.stats-item h3 {
-    font-size: 32px;
-    color: #fff;
-    margin: 5px 0 5px 0;
-}
-
-.stats-item p {
-    color: #fff;
-    margin: 0;
-}
-
-.stats-item:hover {
-    background: #f4c613;
-}
-
-.stats-item:hover i {
-    color: #212226;
-    -webkit-transform: translateY(-20px);
-    transform: translateY(-20px);
-}
-

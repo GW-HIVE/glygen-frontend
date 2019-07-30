@@ -158,6 +158,7 @@
                             <div class="col-md-7"><label>Download&nbsp;format: </label></div>
                             <div class="col-md-5 text-right"><select id='download_format'>
                                 <option value='json'>JSON</option>
+                                <option value='png'>PNG</option>
                             </select></div>
                         </div>
                         <!-- <div class="row">
@@ -337,20 +338,21 @@
                         <h4>Digital Sequence</h4>
                     </div>
                     <div class="panel-body">
-                        {{ #glycoct}}
-                        <strong>GlycoCT</strong>
-                        <pre id="break">{{{ glycoct}}}</pre>
-                        {{ /glycoct}}
+ 
+                        {{#iupac_extended }}
+                        <strong>IUPAC</strong>
+                        <pre class="text-overflow">{{{iupac_extended}}}</pre>
+                        {{/iupac_extended }}
 
-                        {{ #wurcs}}
+                        {{#wurcs}}
                         <strong>WURCS</strong>
                         <pre>{{{ wurcs}}}</pre>
                         {{/wurcs}}
 
-                        {{ #iupac }}
-                        <strong>IUPAC</strong>
-                        <pre>{{{iupac}}}</pre>
-                        {{/iupac }}
+                        {{#glycoct}}
+                        <strong>GlycoCT</strong>
+                        <pre id="break">{{{glycoct}}}</pre>
+                        {{/glycoct}}
 
                     </div>
                 </div>

@@ -61,9 +61,9 @@ function ajaxSuccess(data) {
 
         //Adding breaklines
         if (data.glycoct) {
-            data.glycoct = data.glycoct.replace(/ /g, '<br>');
+            data.glycoct = data.glycoct.replace(/\\n/g, '<br />');
         }
-        data.wurcs = data.wurcs.replace(/ /g, '<br>');
+        data.wurcs = data.wurcs.replace(/[/]/g, '<br />');
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }
@@ -243,6 +243,8 @@ function updateBreadcrumbLinks() {
 function downloadPrompt() {
     var page_type = "glycan_detail";
     var format = $('#download_format').val();
+    if (format == "png")
+        page_type = "glycan_image";
     var IsCompressed = false; //$('#download_compression').is(':checked');
     downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }

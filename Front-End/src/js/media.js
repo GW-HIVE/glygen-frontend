@@ -59,14 +59,14 @@
                Responsive Tabs
 ============================================ */
 $(window).on('load', function () { // makes sure that whole site is loaded
-    $("#services-tabs").responsiveTabs;
-    
+    $(".services-tabs").responsiveTabs;
 });
 
 $(function () {
 
-    $("#services-tabs").responsiveTabs({
-        animation: 'slide'
+    $(".services-tabs").responsiveTabs({
+        animation: 'slide',
+        rotate: true // The tabs will auto rotate from the start
     });
 
 });

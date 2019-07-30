@@ -50,9 +50,9 @@ function resetAdvanced() {
                 relation: "",
                 glytoucan_ac: ""
             },
-            sequence: {
-                glycosylated_aa: "",
-                type: ""
+            glycosylated_aa: {
+                aa_list: "",
+                operation: "or"
             },
             glycosylation_evidence: ""
         }
@@ -346,7 +346,10 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
         uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined,
         glycan: glycans?glycans: undefined,
-        glycosylated_aa: input_glycosylated_aa?input_glycosylated_aa:undefined,
+        glycosylated_aa: {
+            "aa_list": input_glycosylated_aa?input_glycosylated_aa:undefined,
+            "operation":"or"
+        }, 
         glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
     });
     return formjson;
