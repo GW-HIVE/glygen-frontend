@@ -206,6 +206,7 @@
                                     {{subtype.name}}
                                 </li>
                                 {{/classification}} {{^classification}} {{/classification}}
+
                             </div>
                         </div>
                     </div>
@@ -338,15 +339,15 @@
                         <h4>Digital Sequence</h4>
                     </div>
                     <div class="panel-body">
- 
-                        {{#iupac_extended }}
+
+                        {{#iupac}}
                         <strong>IUPAC</strong>
-                        <pre class="text-overflow">{{{iupac_extended}}}</pre>
-                        {{/iupac_extended }}
+                        <pre class="text-overflow">{{{iupac}}}</pre>
+                        {{/iupac}}
 
                         {{#wurcs}}
                         <strong>WURCS</strong>
-                        <pre>{{{ wurcs}}}</pre>
+                        <pre class="text-overflow">{{{wurcs}}}</pre>
                         {{/wurcs}}
 
                         {{#glycoct}}

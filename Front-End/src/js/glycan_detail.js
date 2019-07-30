@@ -63,7 +63,7 @@ function ajaxSuccess(data) {
         if (data.glycoct) {
             data.glycoct = data.glycoct.replace(/\\n/g, '<br />');
         }
-        data.wurcs = data.wurcs.replace(/[/]/g, '<br />');
+        
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }
