@@ -71,11 +71,15 @@ section {
                 Content Boxes
 ============================================ */
 
-
 .content-box-md {
     padding: 40px 0;
 }
 
+.media-container {
+    background: #fff; 
+    margin-bottom: 35px;
+    padding: 0 5% 0;
+}
 
 /* =========================================
         Vertical/Horizontal Headings
@@ -121,6 +125,25 @@ section {
 
 .horizontal-heading h2 {
     margin: 0;
+}
+
+/* =========================================
+               Citations
+============================================ */
+
+.logo-citations {
+    margin-top: 50px;
+}
+
+/*
+.text-indent span {
+    padding-left: 50px;
+}
+*/
+
+.text-indent p {
+    text-indent: -50px;
+    padding-left: 50px;
 }
 
 /* =========================================
