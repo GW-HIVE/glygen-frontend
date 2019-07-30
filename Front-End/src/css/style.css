@@ -632,6 +632,13 @@ label.labelContactUs {
 /* ------------------------------------------
     Resources
 --------------------------------------------*/
+.resources-container {
+    background: #fff; 
+    margin-bottom: 35px;
+    padding: 0 35px;
+   
+}
+
 .resources-top-img {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(46, 120, 160, 0.8)), color-stop(rgba(46, 120, 180, 0.9)), to(rgba(46, 120, 183, 0.8))), url('../images/resources/resources-top-img.png') top center no-repeat;
     background: linear-gradient(rgba(46, 120, 160, 0.8), rgba(46, 120, 180, 0.9), rgba(46, 120, 183, 0.8)), url('../images/resources/resources-top-img.png') top center no-repeat;
@@ -711,10 +718,12 @@ label.labelContactUs {
     background: #E5EEF6;
 }
 
+/*
 .research-data-table {
     width: 99.98%;
     float: left;
 }
+*/
 
 .research-data-table thead {
     background: #659BC9;
