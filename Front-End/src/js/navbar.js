@@ -33,10 +33,6 @@ $(document).ready(function(){
         navItemText = 'EXPLORE';
     } else if(navItemText == 'QUICK SEARCH') {
         navItemText = 'QUICK SEARCH'; 
-    } else if (url.includes('//data.')){
-        navItemText = 'DATA';
-    } else if(url.includes('//sparql.')){
-        navItemText = 'SPARQL';
     } else if(navItemText == 'FEEDBACK') {
         navItemText = 'HELP';
     } else if(navItemText == 'CONTACT') {
@@ -53,6 +49,12 @@ $(document).ready(function(){
         navItemText = 'MORE';
     } else if(navItemText == 'GLYGEN SETTINGS') {
         navItemText = 'MY GLYGEN';
+    }
+    
+    if (url.includes('//data.')){
+        navItemText = 'DATA';
+    } else if(url.includes('//sparql.')){
+        navItemText = 'SPARQL';
     }
   
     $('.nav > li').removeClass('current');
