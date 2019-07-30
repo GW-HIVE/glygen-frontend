@@ -139,6 +139,10 @@
     .service-tab iframe {
         height: 590px;
     }
+    
+     .logo-citations {
+    margin-top: -10px;
+    }
 }
 
 
@@ -450,6 +454,19 @@
     .service-tab iframe {
         height: 280px;
     }
+    
+    .logo-citations {
+    margin-top: 10px;
+    }
+    
+    .logo-citations a,
+    .logo-citations img {
+    max-width: 50%;
+    }
+    
+    #citations h3 {
+        font-size: 20px;
+    }
 }
 
 
@@ -471,4 +488,6 @@
     .service-tab iframe {
         height: 240px;
     }
+    
+    
 }

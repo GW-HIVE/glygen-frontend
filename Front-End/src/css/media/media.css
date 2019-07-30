@@ -135,12 +135,6 @@ section {
     margin-top: 50px;
 }
 
-/*
-.text-indent span {
-    padding-left: 50px;
-}
-*/
-
 .text-indent p {
     text-indent: -50px;
     padding-left: 50px;
