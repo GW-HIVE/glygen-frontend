@@ -233,6 +233,9 @@ function ajaxSuccess(data) {
             }
         }
 
+        if (data.site_annotation){
+        highlight.site_annotation = getSequonHighlightData(data.site_annotation);
+    }
 
         if (data.glycosylation) {
             data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
@@ -250,6 +253,16 @@ function ajaxSuccess(data) {
                 return total + current.length;
             }, 0);
         }
+
+        // if (data.site_annotation) {
+        //     data.site_annotation_count = highlight.site_annotation.reduce(function (total, current) {
+        //         return total + current.length;
+        //     }, 0);
+        // }
+        if (data.site_annotation) {
+            data.site_annotation_count = data.site_annotation.length;
+        }
+
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
@@ -292,7 +305,9 @@ function ajaxSuccess(data) {
                     sortable: true,
                     formatter: function (value, row, index, field) {
                         var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
-                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position + "'>" + value + "</a>";
+                        //return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + + "&position=" + row.position +"&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
+
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
                }
                     //return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + + "&position=" + row.position +"&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
 

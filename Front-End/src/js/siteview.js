@@ -250,7 +250,10 @@ function changeGlycosylationPosition() {
   }
   $(currentElement).css("font-size", centerSize + "px");
   $(currentElement).css("transform", "translateY(" + translateCenter + "px)");
-  zoom.scrollLeft = currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2;
+  zoom.scrollLeft = (currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2) - 50;
+  
+  //zoom.scrollLeft = currentElement.offsetLeft;
+  
   document.getElementById("label").innerHTML = offset + "-" + label;
   var taperlength = 3;
   var taperDelta = 9;
@@ -278,13 +281,13 @@ function updateGlycosylationPosition() {
   changeGlycosylationPosition();
   changeTableGlycosylationPosition();
   updateLable();
-  updateUrlPos()
+   updateUrlPos();
 }
 
- // To change Url position onchange
+//  // To change Url position onchange
  function updateUrlPos(){
  var pos = currentPosition();
- history.pushState( {}, "Position " + pos,"site_view.html?uniprot_canonical_ac=P14210-1&position=" + pos
+ history.pushState( {}, "Position " + pos,"site_view.html?uniprot_canonical_ac="+ getParameterByName("uniprot_canonical_ac") + "&listID="+ getParameterByName("listID") +"&position=" + pos
  );
 }
 
