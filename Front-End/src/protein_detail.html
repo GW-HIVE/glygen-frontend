@@ -231,18 +231,19 @@
                                 </li>
                                 {{/full}}
                                 {{/recommendedname}}
-
+                                {{#mass}}
+                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                {{/mass}}
                                 {{#refseq}}
                                 {{#refseq.ac}}
                                 <li class="list-group"><strong>RefSeq Accession:</strong>
                                     <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
                                 </li>
                                 <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
+                                <li class="list-group"><strong>RefSeq Summary:</strong> {{summary}}</li>
                                 {{/refseq.ac}}
                                 {{/refseq}}
-                                {{#mass}}
-                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
-                                {{/mass}}
+                               
                             </div>
                         </div>
                     </div>
