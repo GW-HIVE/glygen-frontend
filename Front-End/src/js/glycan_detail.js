@@ -63,7 +63,15 @@ function ajaxSuccess(data) {
         if (data.glycoct) {
             data.glycoct = data.glycoct.replace(/\\n/g, '<br />');
         }
-        data.wurcs = data.wurcs.replace(/[/]/g, '<br />');
+
+        if (data.classification) {
+            for (var i = 0; i < data.classification.length; i++) {
+                if (data.classification[i].subtype.name == "Other"){
+                    data.classification[i].subtype.name = "";
+                }
+            }
+        }
+
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }

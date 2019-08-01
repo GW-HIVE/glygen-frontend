@@ -579,6 +579,14 @@ function openGOTermListPage(){
 }
 
 /**
+ * This function opens the Protein Detail page.
+ */
+function openProteinDetailPage(uniprot_orthologs_ac){
+    var url = window.location.origin + "/protein_detail.html?uniprot_canonical_ac=" + uniprot_orthologs_ac;
+    window.open(url);
+}
+
+/**
  * this function gets the URL query values
  * and updates the respective links on the breadcrumb fields.
  */
