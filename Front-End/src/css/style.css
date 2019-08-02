@@ -261,6 +261,11 @@ p {
 /*  -------------------------
     Homepage 
 -----------------------------  */
+/* Style top info card */
+.top-info-card img {
+    margin: 0 20px 5px 0;
+}
+
 #glygen-h1 {
     font-family: Georgia, sans-serif;
     color: #2E78B7;
@@ -978,26 +983,6 @@ ____________________________________  */
 /*  margin-bottom: 1em;*/
 /*  margin-bottom: -30px;*/
 }
-@media only screen and (max-width: 700px) {
-    .gg-download5 {
-    padding-right: 10%;
-  } 
-    
-}
-@media only screen and (min-width: 1301px) and (max-width: 1900px) {
-  .gg-download5 {
-    margin-left: 18%;
-  }
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1300px) {
-  .gg-download5 {
-    margin-right: 29%;
-  }
-}
-
-/* end of download class */
-
 
 /*------   End   --------*/
 .container-contact {
@@ -1033,9 +1018,6 @@ ____________________________________  */
 }
 
 @media only screen and (max-width: 1024px) {
-    .glygenIconIndex {
-        width: 50% !important;
-    }
      body  {
         margin-bottom: 15%;
     }
@@ -1045,8 +1027,14 @@ ____________________________________  */
 }
 
 @media only screen and (max-width: 768px) {
+    
     body  {
         margin-bottom: 15%;
+    }
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        
     }
     .homepageContainer {
         padding-bottom: 5%;
@@ -1076,7 +1064,23 @@ ____________________________________  */
     } 
 }
 
+@media only screen and (max-width: 767px) {
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        float: none !important;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+}
+
 @media only screen and (max-width: 700px) {
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        float: none !important;
+        margin: 0 auto;
+    }
     .gg-settings {
         width: auto;
         margin: 0 auto;
@@ -1125,7 +1129,17 @@ ____________________________________  */
 }
 
 @media (max-width: 320px) {
-    
+    /* Style Homepage */
+    .top-info-card h1 {
+        font-size: 28px;
+    }
+    .top-info-card h3 {
+        font-size: 20px;
+    }
+    .top-info-card img {
+        float: none !important;
+        margin: 0 auto;
+    }
 }
 
 /* --- css for breadcrumb starts --- */
