@@ -79,6 +79,43 @@ function ajaxSuccess(data) {
             }
         }
 
+        // Sorting composition residues in specific order - hex hexnac dhex neuac neugc … other.
+        // This will help mustache template to show residues in specific order. 
+        if (data.composition) {
+            var mapComp = { "hex":1, "hexnac":2, "dhex":3, "neuac":4, "neugc":5, "other":7 }     
+
+            data.composition = data.composition.sort(function(a, b){ 
+
+                var resVal1 = mapComp[a.residue.toLowerCase()];
+                var resVal2 = mapComp[b.residue.toLowerCase()]
+                
+                if (!resVal1)
+                    resVal1 = 6;
+
+                if (!resVal2)
+                    resVal2 = 6;
+
+                return resVal1 - resVal2;
+            });
+
+            // Replacing residue names with the ones to be displayed.
+            for (var i = 0; i < data.composition.length; i++) {
+                if (data.composition[i].residue == "hex"){
+                    data.composition[i].residue = "Hex";
+                } else  if (data.composition[i].residue == "hexnac"){
+                    data.composition[i].residue = "HexNAc";
+                } else if (data.composition[i].residue == "dhex"){
+                    data.composition[i].residue = "dHex";
+                } else if (data.composition[i].residue == "neuac"){
+                    data.composition[i].residue = "NeuAc";
+                } else if (data.composition[i].residue == "neugc"){
+                    data.composition[i].residue = "NeuGc";
+                } else if (data.composition[i].residue == "other"){
+                    data.composition[i].residue = "(+x other residues)";
+                }
+            }
+        }
+
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }
