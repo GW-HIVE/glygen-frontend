@@ -65,8 +65,15 @@ function ajaxSuccess(data) {
         }
 
         if (data.classification) {
-            for (var i = 0; i < data.classification.length; i++) {
-                if (data.classification[i].subtype.name == "Other"){
+
+            //Filter the Glycan type if it is "OTHER".
+            data.classification = data.classification.filter(function(current, index, classArray){
+                return current.type.name.toUpperCase() != "OTHER";
+            });
+
+             //Set the Glycan sub type to "" if it is "OTHER".
+            for (var i = 0; data.classification && i < data.classification.length ; i++) {
+                if (data.classification[i].subtype.name.toUpperCase() == "OTHER"){
                     data.classification[i].subtype.name = "";
                 }
             }
