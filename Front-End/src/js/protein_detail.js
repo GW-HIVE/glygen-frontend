@@ -68,38 +68,39 @@ function ajaxSuccess(data) {
                     }
                 }
             }
-            
+        }
+
+        if (data.go_annotation && data.go_annotation.categories) {
+
             // Sorting Go term categories in specific order - 1. "MOLECULAR FUNCTION", 2. "BIOLOGICAL PROCESS", 3. "CELLULAR COMPONENT".
             // This will help mustache template to show categories in specific order. 
-            if (data.go_annotation && data.go_annotation.categories) {
-                data.go_annotation.categories = data.go_annotation.categories.sort(function(a, b){ 
-                    if (a.name.toUpperCase() === b.name.toUpperCase()) return 0;
-                    else if(a.name.toUpperCase() == "MOLECULAR FUNCTION") return -1;
-                    else if(b.name.toUpperCase() == "MOLECULAR FUNCTION") return 1;
-                    else if(a.name.toUpperCase() == "BIOLOGICAL PROCESS") return -1;
-                    else if(b.name.toUpperCase() == "BIOLOGICAL PROCESS") return 1;
-                    else if(a.name.toUpperCase() == "CELLULAR COMPONENT") return -1;
-                    else if(b.name.toUpperCase() == "CELLULAR COMPONENT") return -1;
+            var mapGOTerm = { "MOLECULAR FUNCTION":1, "BIOLOGICAL PROCESS":2, "CELLULAR COMPONENT":3 };     
+
+            data.go_annotation.categories = data.go_annotation.categories.sort(function(a, b){ 
+                var resVal1 = mapGOTerm[a.name.toUpperCase()];
+                var resVal2 = mapGOTerm[b.name.toUpperCase()]
+
+                return resVal1 - resVal2;
+            });
+
+            // Sorting go_terms in alphabetical order.
+            for (var i = 0; i < data.go_annotation.categories.length; i++) {
+                data.go_annotation.categories[i].go_terms =  data.go_annotation.categories[i].go_terms.sort(function(a, b){ 
+                    if (a.name.toUpperCase() === b.name.toUpperCase()) return 0; 
+                    else if(a.name.toUpperCase() > b.name.toUpperCase()) return 1;
+                    else if(a.name.toUpperCase() < b.name.toUpperCase()) return -1;
                 });
-
-                // Sorting go_terms in alphabetical order.
-                for (var i = 0; i < data.go_annotation.categories.length; i++) {
-                    data.go_annotation.categories[i].go_terms =  data.go_annotation.categories[i].go_terms.sort(function(a, b){ 
-                        if (a.name.toUpperCase() === b.name.toUpperCase()) return 0; 
-                        else if(a.name.toUpperCase() > b.name.toUpperCase()) return 1;
-                        else if(a.name.toUpperCase() < b.name.toUpperCase()) return -1;
-                    });
-                    
-                    // truncate go term the array length
-                    if (data.go_annotation.categories[i].go_terms.length > 5){
-                        data.go_annotation.categories[i].go_terms.length = 5;
-                    }
-
-                    // assign the newly result of running formatSequence() to replace the old value
-                    formatEvidences(data.go_annotation.categories[i].go_terms);
+                
+                // truncate go term the array length
+                if (data.go_annotation.categories[i].go_terms.length > 5){
+                    data.go_annotation.categories[i].go_terms.length = 5;
                 }
+
+                // assign the newly result of running formatSequence() to replace the old value
+                formatEvidences(data.go_annotation.categories[i].go_terms);
             }
         }
+
         formatEvidences(data.species);
         formatEvidences(data.function);
         formatEvidences(data.mutation);

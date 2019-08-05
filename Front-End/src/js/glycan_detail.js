@@ -82,7 +82,7 @@ function ajaxSuccess(data) {
         // Sorting composition residues in specific order - hex hexnac dhex neuac neugc … other.
         // This will help mustache template to show residues in specific order. 
         if (data.composition) {
-            var mapComp = { "hex":1, "hexnac":2, "dhex":3, "neuac":4, "neugc":5, "other":7 }     
+            var mapComp = { "hex":1, "hexnac":2, "dhex":3, "neuac":4, "neugc":5, "other":7 };     
 
             data.composition = data.composition.sort(function(a, b){ 
 
