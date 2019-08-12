@@ -427,6 +427,43 @@ function glycosyTtransferasesDisease() {
 }
 //Q.10.
 
+/**
+ * Q-11.What are the SEQUON of protein X in different species?
+ */
+$("#proteinSequon").autocomplete({
+    source: function (request, response) {
+        var queryUrl = getWsUrl("type-ahead") + "?" + getSearchtypeheadData("uniprot_canonical_ac", request.term);
+        $.getJSON(queryUrl, function (suggestions) {
+            suggestions.length = Math.min(suggestions.length, 5);
+            response(suggestions);
+        });
+    },
+    minLength: 1,
+    select: function (event, ui) {
+        console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
+    }
+});
+
+function proteinSequon() {
+    var id = $("#proteinSequon").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_proteinSequon", id),
+        error: ajaxFailure,
+        success: function (results) {
+            if (results.list_id) {
+                // window.location = './protein_detail.html?id='+ "&question=QUESTION_11";
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#sequence';
+            }
+            else {
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q11");
+            }
+        }
+    })
+}
+
+
 function populateLastGlycanSearch(question, id) {
     $.ajax({
         dataType: "json",
@@ -523,6 +560,7 @@ function populateLastSearch(question, id) {
         case 'QUESTION_4':
             populateLastOrthougusSearch(question, id);
             break;
+            
         default:
             // call API for all others
             populateLastProteinSearch(question, id);

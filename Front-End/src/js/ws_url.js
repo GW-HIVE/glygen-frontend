@@ -81,8 +81,6 @@ function getWsUrl(request, id, id1, glytoucan_ac) {
 
         case "type-ahead":
             return ws_base_typeahead;
-        default:
-            return "WWW.GOOGLE.COM";
 
         case "categorized_typeahead":
             return ws_base_categorized_typeahead;    
@@ -126,12 +124,19 @@ function getWsUrl(request, id, id1, glytoucan_ac) {
         //Usecases DISEASE webservices Q.10
         case "search_disease":
             return ws_useCaseSearch + "/disease_to_glycosyltransferases";
+        //Usecases Seqoun webservices Q.11
+         case "search_proteinsequon":
+            return ws_useCaseSearch + "/protein_to_glycosequons/" + id + "/";
+           
 
         case "data_download":
             return ws_dataDownload;
 
         case "global_search":
             return ws_globalSearch;
+        
+        default:
+            return "WWW.GOOGLE.COM";
     }
 }
 

@@ -186,3 +186,13 @@ $('#textExGlycosyltransferasesdisease').click(function() {
     $tagsInputGlycosyltransferasesd.val($(this).text());
     return false;
 });
+
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} $tagsInputSequon
+ */
+var $tagsInputSequon = $('#proteinSequon');
+$('#textExampleSequon').click(function() {
+    $tagsInputSequon.val($(this).text());
+    return false;
+});
