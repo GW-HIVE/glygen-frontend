@@ -705,7 +705,9 @@
                     </div>
                 </ul>
 
-                <!--Publications-->
+              
+
+
                 <ul id="publications" class="cd-faq-group selected">
                     <li class="cd-faq-title" />
                     <div class="panel panel-default">
@@ -715,13 +717,30 @@
                         <div class="panel-body">
                             {{#publication}}
                                 <p class="panelmaincontent">
-                                    <li class="list-group" id="panelmaincontent1"><strong>Journal:</strong> {{journal}}<br>
-                                        <strong>Title:</strong> {{title}}<br>
-                                        <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+                                        <li class="list-group" id="panelmaincontent1"> <strong>Title:</strong> {{title}}<br>
+                                           <strong>Journal:</strong> {{journal}}<br>
+                                            <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+
+                                    {{#databases}}
+                                    <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
+                                        <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                            {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                        </button>
+                                        <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                            <ul>
+                                                {{#links}}
+                                                    <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
+                                                    </li>
+                                                {{/links}}
+                                            </ul>
+                                        </div>
+                                    </span>
+                                {{/databases}}
                             {{/publication}} {{^publication}} No data available. {{/publication}}
                         </div>
                     </div>
                 </ul>
+              
 
                 <a href="#0" class="cd-close-panel">Close</a>
             </script>

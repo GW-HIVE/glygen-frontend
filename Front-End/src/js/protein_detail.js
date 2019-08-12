@@ -102,6 +102,7 @@ function ajaxSuccess(data) {
         }
 
         formatEvidences(data.species);
+        formatEvidences(data.publication);
         formatEvidences(data.function);
         formatEvidences(data.mutation);
         formatEvidences(data.glycosylation);
@@ -172,6 +173,37 @@ function ajaxSuccess(data) {
 
             data.itemsPathway = itemsPathway;
         }
+        var itemspublication = [];
+        if (data.publication) {
+            for (var i = 0; i < data.publication.length; i++) {
+                var publicationitem = data.publication[i];
+                var found = '';
+                for (var j = 0; j < itemspublication.length; j++) {
+                    var databaseitem1 = itemspublication[j];
+                    if (databaseitem1.resource === publicationitem.resource) {
+                        found = true;
+                        databaseitem1.links.push({
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        });
+                    }
+                }
+                if (!found) {
+                    itemspublication.push({
+                        resource: publicationitem.resource,
+                        links: [{
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        }]
+                    });
+                }
+            }
+
+            data.itemspublication = itemspublication;
+        }
+       
 
         if (data.glycosylation) {
             highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
@@ -255,11 +287,6 @@ function ajaxSuccess(data) {
             }, 0);
         }
 
-        // if (data.site_annotation) {
-        //     data.site_annotation_count = highlight.site_annotation.reduce(function (total, current) {
-        //         return total + current.length;
-        //     }, 0);
-        // }
         if (data.site_annotation) {
             data.site_annotation_count = data.site_annotation.length;
         }
