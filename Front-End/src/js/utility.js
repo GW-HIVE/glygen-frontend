@@ -431,6 +431,13 @@ function downloadFromServer(id, format, compressed, type) {
         mimeType = "text/tsv";
         ext = ".tsv";
     }
+
+    if (compressed){
+        data = undefined;
+        fields = {responseType:"blob"};
+        mimeType += ", application/gzip";
+        ext += ".gzip";
+    }
   
     $.ajax({
         method: 'POST',

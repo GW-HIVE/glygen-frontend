@@ -240,7 +240,7 @@ $(document).ajaxStop(function () {
 function downloadPrompt() {
     var page_type = "glycan_list";
     var format = $('#download_format').val();
-    var IsCompressed = false; //$('#download_compression').is(':checked');
+    var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(id, format, IsCompressed, page_type);
 }
 

@@ -192,6 +192,6 @@ $(document).ajaxStop(function () {
 function downloadPrompt() {
     var page_type = "motif_detail";
     var format = $('#download_format').val();
-    var IsCompressed = false; //$('#download_compression').is(':checked');
+    var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }
