@@ -601,8 +601,8 @@ label.labelContactUs {
 }
 
 .mission-img {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about-mission.gif') top center no-repeat;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about-mission.gif') top center no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about/about-mission.svg') top center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about/about-mission.svg') top center no-repeat;
 }
 
 .cover {
