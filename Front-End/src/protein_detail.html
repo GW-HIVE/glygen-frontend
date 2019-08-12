@@ -717,8 +717,9 @@
                         <div class="panel-body">
                             {{#publication}}
                                 <p class="panelmaincontent">
-                                        <li class="list-group" id="panelmaincontent1"> <strong>Title:</strong> {{title}}<br>
-                                           <strong>Journal:</strong> {{journal}}<br>
+                                    <li class="list-group" id="panelmaincontent1"> <strong> {{title}}</strong><br>
+                                        {{authors}}.<br>
+                                       <li class="journal">{{journal}}.  {{date}}<br>
                                             <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
 
                                     {{#databases}}

@@ -58,6 +58,7 @@ function ajaxSuccess(data) {
         }
         formatEvidences(data.species);
         formatEvidences(data.glycoprotein);
+        formatEvidences(data.publication);
 
         //Adding breaklines
         if (data.glycoct) {
@@ -78,7 +79,36 @@ function ajaxSuccess(data) {
                 }
             }
         }
+        var itemspublication = [];
+        if (data.publication) {
+            for (var i = 0; i < data.publication.length; i++) {
+                var publicationitem = data.publication[i];
+                var found = '';
+                for (var j = 0; j < itemspublication.length; j++) {
+                    var databaseitem1 = itemspublication[j];
+                    if (databaseitem1.resource === publicationitem.resource) {
+                        found = true;
+                        databaseitem1.links.push({
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        });
+                    }
+                }
+                if (!found) {
+                    itemspublication.push({
+                        resource: publicationitem.resource,
+                        links: [{
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        }]
+                    });
+                }
+            }
 
+            data.itemspublication = itemspublication;
+        }
         // Sorting composition residues in specific order - hex hexnac dhex neuac neugc … other.
         // This will help mustache template to show residues in specific order. 
         if (data.composition) {

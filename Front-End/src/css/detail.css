@@ -137,6 +137,10 @@ pre {
     list-style-type: square;
     margin: 0 0 0 20px !important;
 }
+.journal{
+    font-size: 12px;
+    margin: 0 0 0 20px !important;
+}
 
 .list-group2 {
     font-size: 16px;

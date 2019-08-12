@@ -48,11 +48,12 @@
     <!-- CSS for alertify -->
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
@@ -84,6 +85,7 @@
             font-size: 13px;
             box-sizing: border-box;
         }
+       
     </style>
 </head>
 
@@ -121,6 +123,10 @@
             <li>
                 <a href="#digitalSequence">Digital Sequence</a>
             </li>
+            <li>
+                <a href="#publications">Publications</a>
+            </li>
+           
         </ul>
         <!-- cd-faq-categories -->
         <!-- main content for page -->
@@ -364,12 +370,43 @@
                                 <strong>InChi</strong>
                                 <pre class="text-overflow">{{{inchi}}}</pre>
                             {{/inchi}}
-
                             {{#glycoct}}
                                 <strong>GlycoCT</strong>
                                 <pre id="break">{{{glycoct}}}</pre>
                             {{/glycoct}}
+                        </div>
+                    </div>
+                </ul>
 
+                <ul id="publications" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Publications</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#publication}}
+                                <p class="panelmaincontent">
+                                        <li class="list-group" id="panelmaincontent1"> <strong> {{title}}</strong><br>
+                                            {{authors}}.<br>
+                                           <li class="journal">{{journal}}.  {{date}}<br>
+                                            <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+                                    {{#databases}}
+                                    <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
+                                        <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                            {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                        </button>
+                                        <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                            <ul>
+                                                {{#links}}
+                                                    <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
+                                                    </li>
+                                                {{/links}}
+                                            </ul>
+                                        </div>
+                                    </span>
+                                {{/databases}}
+                            {{/publication}} {{^publication}} No data available. {{/publication}}
                         </div>
                     </div>
                 </ul>
