@@ -97,6 +97,7 @@ function ajaxSuccess(data) {
           type: mutation.type.split(" ")[1][0].toUpperCase(),
           label: "Mutation",
           evidence: mutation.evidence,
+          labelForlist:mutation.evidence.sequence_org,
           typeAnnotate: "Mutation"
         };
       });
@@ -281,7 +282,7 @@ function updateGlycosylationPosition() {
   changeGlycosylationPosition();
   changeTableGlycosylationPosition();
   updateLable();
-   updateUrlPos();
+  updateUrlPos();
 }
 
 //  // To change Url position onchange
@@ -405,7 +406,7 @@ function updateBreadcrumbLinks() {
 			"_detail.html?uniprot_canonical_ac=" +
 			proteinacc +
 			"&listID=" +
-			listID + "#sequence"
+			listID + "#glycosylation"
 		);
   }
   if (proteinacc) {
