@@ -298,6 +298,11 @@ ul {
   color: green;
   cursor: pointer;
 }
+.super6 {
+  font-size: 22px;
+  color: orange;
+  cursor: pointer;
+}
 .superx {
   font-size: 14px;
   color: black;

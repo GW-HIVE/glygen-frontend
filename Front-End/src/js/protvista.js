@@ -44,6 +44,14 @@ function setupProtvista(data) {
 		residues: [],
 		color: "green",
 		shape: "diamond"
+	}
+];
+
+var annotations = [{
+		type: "Annotations",
+		residues: [],
+		color: "orange",
+		shape: "square"
 	}];
 
 	$.each(data.glycosylation, function (i, glyco) {
@@ -106,6 +114,19 @@ function setupProtvista(data) {
 			accession: data.uniprot.uniprot_canonical_ac,
 			type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
 			tooltipContent: "<span> annotation " + mutation.annotation + "</span>"
+
+		});
+	});
+
+	$.each(data.site_annotation, function (i, site_annotation) {
+		annotations[0].residues.push({
+			start: site_annotation.start_pos,
+			end: site_annotation.end_pos,
+			color: annotations[0].color,
+			shape: annotations[0].shape,
+			accession: data.uniprot.uniprot_canonical_ac,
+			// type: "(" + site_annotation.sequence_org + " → " + site_annotation.sequence_mut + ")",
+			tooltipContent: "<span> sequon " + site_annotation.annotation + "</span>"
 
 		});
 	});
@@ -248,6 +269,19 @@ function setupProtvista(data) {
 	$(mutrachtml).appendTo("#manager");
 	document.querySelector("#track_muarray").data = mutations[0].residues;
 
+	var annotationhtml =
+		"<protvista-track class='nav-track hover-style' id='track_sequon' length='" +
+		data.uniprot.length +
+		"' displaystart='" +
+		displayStart +
+		"' displayend='" +
+		displayEnd +
+		"' highlightStart='" +
+		highlightStart +
+		"' layout='non-overlapping' ></protvista-track>";
+	$(annotationhtml).appendTo("#manager");
+	document.querySelector("#track_sequon").data = annotations[0].residues;
+
 	var features = $("g .feature-group");
 	features.css("cursor", "pointer");
 	features.on("click", function () {
@@ -337,7 +371,7 @@ function updateBreadcrumbLinks() {
 			"href",
 			glycanPageType + "_search.html?id=" + listID
 		);
-		if (listID)
+		if (listID && (listID !== 'null'))
 			$("#breadcrumb-list").attr(
 				"href",
 				glycanPageType + "_list.html?id=" + listID
