@@ -53,7 +53,6 @@ $(document).ready(function () {
 
     if (url.includes('//data.')) {
         navItemText = 'DATA';
-        navigateToGlygenPage("media.html");
     } else if (url.includes('//sparql.')) {
         navItemText = 'SPARQL';
     }
