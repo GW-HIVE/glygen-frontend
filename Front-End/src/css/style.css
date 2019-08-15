@@ -601,8 +601,8 @@ label.labelContactUs {
 }
 
 .mission-img {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about/about-mission.svg') top center no-repeat;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about/about-mission.svg') top center no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about/about-mission.png') top center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about/about-mission.png') top center no-repeat;
 }
 
 .cover {
@@ -643,24 +643,53 @@ label.labelContactUs {
 }
 
 #team-members .content-box-lg {
-    background: rgba(150, 150, 150, 0.5);
+    background: rgba(150, 150, 150, 0.4);
 }
 
-#tech-team-members h2 {
-    color: #2f78b7; 
+#team-members-heading h1 {
+    color: #fff; 
+    font-size: 45px;
+    font-weight: 50;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-block;
 }
 
-#team-members h3 {
-    color: #fff;
-    font-size: 22px;
-    line-height: 45px;
+#team-members-heading h1 span {
+    color: #2F78B7;
+    font-weight: 900;
 }
 
 #team-members p {
-    font-size: 16px;
-    color: #2e78b7;
-    margin-top: 8px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 100;
+    margin: 8px 0 30px 0;
 }
+
+/* University and institution logos */
+
+#university-logos .horizontal-heading {
+    margin-bottom: 30px;
+}
+
+/*
+#univ-logo-list {
+    padding: 45px 0 0 0;
+}
+*/
+
+.univ-logo {
+    padding: 10px;
+    max-width: 150px;
+    margin: 0 auto;
+    line-height: 100px;
+}
+
+.univ-logo img {
+    display: inline-block !important;
+}
+
 /* ------------------------------------------
     Resources
 --------------------------------------------*/
