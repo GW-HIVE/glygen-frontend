@@ -36,6 +36,12 @@ function setupProtvista(data) {
 			residues: [],
 			color: "blue",
 			shape: "triangle"
+		},
+		{
+			type: "Annotations",
+			residues: [],
+			color: "orange",
+			shape: "square"
 		}
 	];
 
@@ -46,13 +52,6 @@ function setupProtvista(data) {
 		shape: "diamond"
 	}
 ];
-
-var annotations = [{
-		type: "Annotations",
-		residues: [],
-		color: "orange",
-		shape: "square"
-	}];
 
 	$.each(data.glycosylation, function (i, glyco) {
 		if (glyco.type === "N-linked") {
@@ -119,14 +118,14 @@ var annotations = [{
 	});
 
 	$.each(data.site_annotation, function (i, site_annotation) {
-		annotations[0].residues.push({
+		glycos[4].residues.push({
 			start: site_annotation.start_pos,
 			end: site_annotation.end_pos,
-			color: annotations[0].color,
-			shape: annotations[0].shape,
+			color: glycos[4].color,
+			shape: glycos[4].shape,
 			accession: data.uniprot.uniprot_canonical_ac,
-			// type: "(" + site_annotation.sequence_org + " → " + site_annotation.sequence_mut + ")",
-			tooltipContent: "<span> sequon " + site_annotation.annotation + "</span>"
+		    type: "N-Glycan-Sequon",
+			tooltipContent: "<span>" + site_annotation.annotation + "</span>"
 
 		});
 	});
@@ -189,6 +188,7 @@ var annotations = [{
 	$.merge(alltrack, glycosCombined[1]);
 	$.merge(alltrack, glycosCombined[2]);
 	$.merge(alltrack, glycosCombined[3]);
+	$.merge(alltrack, glycosCombined[4]);
 	$(glycoHTML).appendTo("#manager");
 	document.querySelector("#glycotrack").data = alltrack;
 
@@ -255,6 +255,19 @@ var annotations = [{
 		"' layout='non-overlapping' ></protvista-track>";
 	$(owitrachtml).appendTo("#manager");
 	document.querySelector("#Otrack_withnoImage").data = glycosCombined[3];
+	
+	var annotationhtml =
+		"<protvista-track class='nav-track hover-style hidden' id='track_sequon' length='" +
+		data.uniprot.length +
+		"' displaystart='" +
+		displayStart +
+		"' displayend='" +
+		displayEnd +
+		"' highlightStart='" +
+		highlightStart +
+		"' layout='non-overlapping' ></protvista-track>";
+	$(annotationhtml).appendTo("#manager");
+	document.querySelector("#track_sequon").data = glycosCombined[4];
 
 	var mutrachtml =
 		"<protvista-track class='nav-track hover-style' id='track_muarray' length='" +
@@ -269,18 +282,7 @@ var annotations = [{
 	$(mutrachtml).appendTo("#manager");
 	document.querySelector("#track_muarray").data = mutations[0].residues;
 
-	var annotationhtml =
-		"<protvista-track class='nav-track hover-style' id='track_sequon' length='" +
-		data.uniprot.length +
-		"' displaystart='" +
-		displayStart +
-		"' displayend='" +
-		displayEnd +
-		"' highlightStart='" +
-		highlightStart +
-		"' layout='non-overlapping' ></protvista-track>";
-	$(annotationhtml).appendTo("#manager");
-	document.querySelector("#track_sequon").data = annotations[0].residues;
+
 
 	var features = $("g .feature-group");
 	features.css("cursor", "pointer");
@@ -305,7 +307,7 @@ function ajaxSuccess(data) {
 		setupProtvista(data);
 		// to change the svg position
 		document.querySelectorAll("g.sequence-features").forEach(x => {
-			x.setAttribute("transform", "translate(0, -15)");
+			x.setAttribute("transform", "translate(0, -7)");
 		});
 	}
 }
@@ -322,6 +324,8 @@ function navglycoclick() {
 		$("#Otrack_withImage").removeClass("hidden");
 		$("#Otrack_withnoImage").removeClass("hidden");
 		$("#glycotrack1").removeClass("hidden");
+		$("#track_sequon").removeClass("hidden");
+		$("#reported_sequon").removeClass("hidden");
 		$("#glycotrack").addClass("hidden");
 	} else {
 		$("#reported_Nglycan").addClass("hidden");
@@ -333,7 +337,10 @@ function navglycoclick() {
 		$("#Otrack_withImage").addClass("hidden");
 		$("#Otrack_withnoImage").addClass("hidden");
 		$("#glycotrack1").addClass("hidden");
+		$("#track_sequon").addClass("hidden");
+		$("#reported_sequon").addClass("hidden");
 		$("#glycotrack").removeClass("hidden");
+		
 	}
 }
 

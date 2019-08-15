@@ -117,29 +117,30 @@
                         <li class="nav-item nav-seq">
                            <a class="nav-link" href="#">Sequence</a>
                         </li>
-                        <li class="nav-item nav-track" onclick="navglycoclick()">
+                        <li class="nav-item nav-track nav-combinetrack" onclick="navglycoclick()">
                            <!-- <i class="fa fa-caret-right" style="font-size:48px;color:red;margin-left:0"></i>
                               <a class="nav-link" href="#">Glycosylation </a> <i class="fa fa-caret-top"></i> -->
-                           <a class="nav-link" href="#">Glycosylation &nbsp;<i class="fa fa-caret-right" aria-hidden="true" style="font-size:30px;color:black; position:relative"></i></a>
+                           <a class="nav-link" href="#">Glycosylation &nbsp;&nbsp;<i class="fa fa-caret-right" aria-hidden="true" style="font-size:30px;color:black; position:relative; margin-top:6px;"></i></a>
                         </li>
-                        <li id='reported_Nglycan' class="nav-item nav-track hidden">
-                           <a class="nav-link" href="#">N glycosite w/ glycan</a>
+                        <li id='reported_Nglycan' class="nav-item nav-track hidden indentsubnav">
+                           <a class="nav-link" href="#">N-Glycan</a>
                         </li>
-                        <li id='nonreported_Nglycan' class="nav-item nav-track hidden">
-                           <a class="nav-link" href="#">N glycosite </a>
+                        <li id='nonreported_Nglycan' class="nav-item nav-track hidden indentsubnav">
+                           <a class="nav-link" href="#">N-Glycan-Site </a>
                         </li>
-                        <li id='reported_Oglycan' class="nav-item nav-track hidden">
-                           <a class="nav-link" href="#">O glycosite w/ glycan</a>
+                        <li id='reported_Oglycan' class="nav-item nav-track hidden indentsubnav">
+                           <a class="nav-link" href="#">O-Glycan</a>
                         </li>
-                        <li id='nonreported_Oglycan' class="nav-item nav-track hidden">
-                           <a class="nav-link" href="#">O glycosite </a>
+                        <li id='nonreported_Oglycan' class="nav-item nav-track hidden indentsubnav">
+                           <a class="nav-link" href="#">O-Glycan-Site </a>
                         </li>
+                        <li id='reported_sequon' class="nav-item nav-track hidden indentsubnav">
+                              <a class="nav-link" href="#">N-Glycan-Sequon</a>
+                           </li>
                         <li class="nav-item nav-track">
                            <a class="nav-link" href="#">Mutation</a>
                         </li>
-                        <li class="nav-item nav-track">
-                              <a class="nav-link" href="#">Sequon</a>
-                           </li>
+                       
                      </ul>
                   </nav>
                   <!-- </div> -->
@@ -183,20 +184,22 @@
                                  </span>
                               </li>
                               <li>
-                                 <span class="super5 hover" data-highlight="track_muarray">&#9670;
-                                 <span class="superx">
-                                 <B>Mutation</B>
-                                 </span>
-                                 </span>
-                              </li>
-                              <li>
-                                    <span class="super6 hover" data-highlight="track_sequon">&#9670;
+                                    <span class="super6 hover" data-highlight="track_sequon">&#9646;
                                     <span class="superx">
                                     <B>Sequon</B>
                                     </span>
                                     </span>
                                  </li>
+                                 <li>
+                                    <span class="super5 hover" data-highlight="track_muarray">&#9670;
+                                    <span class="superx">
+                                    <B>Mutation</B>
+                                    </span>
+                                    </span>
+                                 </li>
+                             
                            </ol>
+                         
                         </div>
                      </div>
                   </div>
