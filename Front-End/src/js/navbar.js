@@ -8,57 +8,76 @@
  */
 
 function setNavItemAsCurrent(itemText) {
-    $('.nav > li > a').each(function() {
-        if($(this).text().indexOf(itemText) >= 0) {
+    $('.nav > li > a').each(function () {
+        if ($(this).text().indexOf(itemText) >= 0) {
             $(this).parent().addClass('current');
         }
     });
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     var url = window.location.href;
-    var fullFilename = url.substring(url.lastIndexOf('/')+1);
+    var fullFilename = url.substring(url.lastIndexOf('/') + 1);
     var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
-    var navItemText = filename.replace(/_/g, ' ').toUpperCase(); 
-    
-    if(navItemText == '') {
+    var navItemText = filename.replace(/_/g, ' ').toUpperCase();
+
+    if (navItemText == '') {
         navItemText = 'HOME';
-    } else if(navItemText == 'INDEX') {
+    } else if (navItemText == 'INDEX') {
         navItemText = 'HOME';
-    } else if(navItemText == 'GLYCAN SEARCH') {
+    } else if (navItemText == 'GLYCAN SEARCH') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'PROTEIN SEARCH') {
+    } else if (navItemText == 'PROTEIN SEARCH') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'GLYCOPROTEIN SEARCH') {
+    } else if (navItemText == 'GLYCOPROTEIN SEARCH') {
         navItemText = 'EXPLORE';
-    } else if(navItemText == 'QUICK SEARCH') {
-        navItemText = 'QUICK SEARCH'; 
-    } else if(navItemText == 'FEEDBACK') {
+    } else if (navItemText == 'QUICK SEARCH') {
+        navItemText = 'QUICK SEARCH';
+    } else if (navItemText == 'FEEDBACK') {
         navItemText = 'HELP';
-    } else if(navItemText == 'CONTACT') {
+    } else if (navItemText == 'CONTACT') {
         navItemText = 'HELP';
-    } else if(navItemText == 'HOW TO CITE') {
+    } else if (navItemText == 'HOW TO CITE') {
         navItemText = 'HELP';
-    } else if(navItemText == 'ABOUT') {
+    } else if (navItemText == 'ABOUT') {
         navItemText = 'HELP';
-    } else if(navItemText == 'RESOURCES') {
+    } else if (navItemText == 'RESOURCES') {
         navItemText = 'MORE';
-    } else if(navItemText == 'MEDIA') {
+    } else if (navItemText == 'MEDIA') {
         navItemText = 'MORE';
-    } else if(navItemText == 'FRAMEWORKS') {
+    } else if (navItemText == 'FRAMEWORKS') {
         navItemText = 'MORE';
-    } else if(navItemText == 'GLYGEN SETTINGS') {
+    } else if (navItemText == 'GLYGEN SETTINGS') {
         navItemText = 'MY GLYGEN';
     }
-    
-    if (url.includes('//data.')){
+
+    if (url.includes('//data.')) {
         navItemText = 'DATA';
-    } else if(url.includes('//sparql.')){
+    } else if (url.includes('//sparql.')) {
         navItemText = 'SPARQL';
     }
-  
+
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
+    
+    $.each($("a"), function(i, v) {
+        var nav_url = $(v).attr('href');
+        $(v).attr('href', ws_base_domain + nav_url);
+    });
 });
 
+/**
+ * This function is used to navigate to GlyGen page from external pages. 
+ */
+function navigateToGlygenPage(page_name) {
+    var glygen_url = window.location.origin;
+    if (glygen_url.includes('//data.')) {
+        glygen_url = glygen_url.replace("data.", "");
+    } else if (glygen_url.includes('//sparql.')) {
+        glygen_url = glygen_url.replace("sparql.", "");
+    }
+    
+    var url = glygen_url + "/" + page_name;
+    window.open(url);
+}
 // End @author: Tatiana Williamson

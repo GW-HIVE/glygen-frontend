@@ -630,10 +630,37 @@ label.labelContactUs {
 
 .about-map-img {
     background-size: cover;
-    margin-top: -60px;
-   
+    margin-top: -60px; 
+}
+/*Background img for team members*/
+#team-members {
+    background: url("../images/about/bg-testimonial.jpg") no-repeat fixed center;
+    background-size: cover;
 }
 
+.content-box-lg {
+    padding: 60px 0;
+}
+
+#team-members .content-box-lg {
+    background: rgba(150, 150, 150, 0.5);
+}
+
+#tech-team-members h2 {
+    color: #2f78b7; 
+}
+
+#team-members h3 {
+    color: #fff;
+    font-size: 22px;
+    line-height: 45px;
+}
+
+#team-members p {
+    font-size: 16px;
+    color: #2e78b7;
+    margin-top: 8px;
+}
 /* ------------------------------------------
     Resources
 --------------------------------------------*/
@@ -693,7 +720,7 @@ label.labelContactUs {
         0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
-#img-hr {
+.img-hr {
     width: 200px;
     border-top: 2px solid #f8f8f8;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
