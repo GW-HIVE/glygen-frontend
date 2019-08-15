@@ -453,7 +453,7 @@ function proteinSequon() {
         success: function (results) {
             if (results.list_id) {
                 // window.location = './protein_detail.html?id='+ "&question=QUESTION_11";
-                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'#sequence';
+                window.location = "protein_detail.html?uniprot_canonical_ac=" + id +'&select=site_annotation'+'#sequence';
             }
             else {
                 //displayErrorByCode('no-results-found');

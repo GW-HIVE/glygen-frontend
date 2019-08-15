@@ -333,18 +333,14 @@ function ajaxSuccess(data) {
                     sortable: true,
                     formatter: function (value, row, index, field) {
                         var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
-                        //return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + + "&position=" + row.position +"&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
-
                         return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
                }
-                    //return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + + "&position=" + row.position +"&listID=" + id + "&gs=" + globalSearchTerm + "'>" + value + "</a>";
-
+                    
                 },
                 {
                     field: 'imageFormat',
                     title: 'Image of Glycan Structure',
                     sortable: true,
-
                     formatter: function imageFormat(value, row, index, field) {
                         var url = getWsUrl('glycan_image', row.glytoucan_ac);
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
@@ -538,6 +534,11 @@ function ajaxSuccess(data) {
     setupEvidenceList();
     $('#loading_image').fadeOut();
     updateBreadcrumbLinks();
+
+    if (select ==='site_annotation'){
+        $("#sequon_link").prop( "checked", true );
+        $('#sequon_link').trigger('change');
+    }
 }
 
 
@@ -590,11 +591,16 @@ function proteinView(){
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
+    select = getParameterByName('select');
     id = uniprot_canonical_ac;
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
     updateBreadcrumbLinks();
+  
 });
+
+
+
 
 /**
  * This function opens the page listing GO terms.
