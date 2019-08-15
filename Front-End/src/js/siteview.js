@@ -379,7 +379,7 @@ function updateBreadcrumbLinks() {
       "href",
       glycanPageType + "_search.html?id=" + listID
     );
-    if (listID)
+    if (listID && (listID !== 'null'))
       $("#breadcrumb-list").attr(
         "href",
         glycanPageType + "_list.html?id=" + listID
