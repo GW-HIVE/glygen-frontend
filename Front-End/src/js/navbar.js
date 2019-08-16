@@ -20,7 +20,9 @@ $(document).ready(function () {
     var fullFilename = url.substring(url.lastIndexOf('/') + 1);
     var filename = fullFilename.substring(0, fullFilename.lastIndexOf('.'));
     var navItemText = filename.replace(/_/g, ' ').toUpperCase();
-
+    var domain = url.replace("data.", "").replace("-", "")
+    
+    
     if (navItemText == '') {
         navItemText = 'HOME';
     } else if (navItemText == 'INDEX') {
@@ -60,24 +62,24 @@ $(document).ready(function () {
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
     
-    $.each($("a"), function(i, v) {
+    $.each($(".a_header"), function(i, v) {
         var nav_url = $(v).attr('href');
-        $(v).attr('href', ws_base_domain + nav_url);
+        $(v).attr('href', domain + nav_url);
     });
 });
 
 /**
  * This function is used to navigate to GlyGen page from external pages. 
  */
-function navigateToGlygenPage(page_name) {
-    var glygen_url = window.location.origin;
-    if (glygen_url.includes('//data.')) {
-        glygen_url = glygen_url.replace("data.", "");
-    } else if (glygen_url.includes('//sparql.')) {
-        glygen_url = glygen_url.replace("sparql.", "");
-    }
-    
-    var url = glygen_url + "/" + page_name;
-    window.open(url);
-}
+//function navigateToGlygenPage(page_name) {
+//    var glygen_url = window.location.origin;
+//    if (glygen_url.includes('//data.')) {
+//        glygen_url = glygen_url.replace("data.", "");
+//    } else if (glygen_url.includes('//sparql.')) {
+//        glygen_url = glygen_url.replace("sparql.", "");
+//    }
+//    
+//    var url = glygen_url + "/" + page_name;
+//    window.open(url);
+//}
 // End @author: Tatiana Williamson
