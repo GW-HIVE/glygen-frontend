@@ -51,9 +51,9 @@ $(document).ready(function () {
         navItemText = 'MY GLYGEN';
     }
 
-    if (url.includes('//data.')) {
+    if (url.indexOf('//data.') >= 0) {
         navItemText = 'DATA';
-    } else if (url.includes('//sparql.')) {
+    } else if (url.indexOf('//sparql.') >= 0) {
         navItemText = 'SPARQL';
     }
 
