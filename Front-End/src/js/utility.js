@@ -527,10 +527,10 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
     });
 }
 // for Data and SPARQL link in header page
-$(function () {
-    $("#a_data").attr('href', ws_base_data);
+//$(function () {
+    //$("#a_data").attr('href', ws_base_data);
     //$("#a_sparql").attr('href', ws_base_sparql);
-});
+//});
 
 
 // Details pages scrolling to top :

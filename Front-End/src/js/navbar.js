@@ -69,6 +69,11 @@ $(document).ready(function () {
     $('.nav > li').removeClass('current');
     setNavItemAsCurrent(navItemText);
     
+    // for Data and SPARQL link in header page
+    $("#a_data").attr('href', ws_base_data);
+    //$("#a_sparql").attr('href', ws_base_sparql);
+
+    
     $.each($(".a_header"), function(i, v) {
         var nav_url = $(v).attr('href');
         $(v).attr('href', domain + nav_url);
