@@ -349,6 +349,11 @@ $(document).ready(function () {
 	$(".title_protein").html(uniprot_canonical_ac);
 	LoadData(uniprot_canonical_ac);
 	updateBreadcrumbLinks();
+	var is_chrome = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
+  
+	if(is_chrome){  
+	  $("p").text(" Supported browsers are Chrome 75 and 76, Firefox 67 and 68, Edge 44 (Windows only),Safari 11 and 12 (Macintosh only) ");
+	}
 });
 
 //set up breadcrumb for navigation
@@ -453,3 +458,15 @@ function getParameterByName(name, url) {
 	if (!results[2]) return "";
 	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+// $(document).ready(function(){
+  
+// 	var is_chrome = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
+  
+//   if(is_chrome){  
+// 	$("p").text(" Supported browsers are Chrome 75 and 76, Firefox 67 and 68, Edge 44 (Windows only),Safari 11 and 12 (Macintosh only) ");
+//   }
+//   });
+
+
+
