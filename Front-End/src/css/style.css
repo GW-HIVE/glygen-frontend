@@ -642,7 +642,8 @@ label.labelContactUs {
 }
 
 #team-members .content-box-lg {
-    background: rgba(150, 150, 150, 0.6);
+/*    background: rgba(83, 138, 185, 0.6);*/
+    background: rgba(94, 144, 186, 0.5);
 }
 
 #team-members-heading h1 {
@@ -655,15 +656,19 @@ label.labelContactUs {
 }
 
 #team-members-heading h1 span {
+/*
     color: #2F78B7;
+    color: #60BA4B;
+*/
+    color: #fff;
     font-weight: 900;
 }
 
 #team-members p {
     color: #fff;
-    font-size: 17px;
-    font-weight: 100;
-    margin: 8px 0 30px 0;
+    font-size: 18px;
+    font-weight: 50;
+    margin: 18px 0 0 0;
 }
 
 .univ-logo {

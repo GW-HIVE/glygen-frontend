@@ -526,6 +526,8 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
 }
+
+//Moved this function to navbar.js line 72
 // for Data and SPARQL link in header page
 //$(function () {
     //$("#a_data").attr('href', ws_base_data);
