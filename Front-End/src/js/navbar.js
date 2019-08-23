@@ -22,9 +22,9 @@ $(document).ready(function () {
     var navItemText = filename.replace(/_/g, ' ').toUpperCase();
     //var domain = url.replace("data.", "").replace("-", "")
     var glygen_url = window.location.origin;
-    if (glygen_url.indexOf('//data.') >= 0) {
+    if (glygen_url.indexOf('data.') >= 0) {
        glygen_url = glygen_url.replace("data.", "");
-    } else if (glygen_url.indexOf('//sparql.') >= 0) {
+    } else if (glygen_url.indexOf('sparql.') >= 0) {
        glygen_url = glygen_url.replace("sparql.", "");
     }
    
@@ -60,9 +60,9 @@ $(document).ready(function () {
         navItemText = 'MY GLYGEN';
     }
 
-    if (url.indexOf('//data.') >= 0) {
+    if (url.indexOf('data.') >= 0) {
         navItemText = 'DATA';
-    } else if (url.indexOf('//sparql.') >= 0) {
+    } else if (url.indexOf('sparql.') >= 0) {
         navItemText = 'SPARQL';
     }
 
