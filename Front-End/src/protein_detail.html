@@ -217,13 +217,15 @@
                                 {{/uniprot_canonical_ac}}
                                 {{^uniprot_canonical_ac}} {{/uniprot_canonical_ac}}
                                 {{/uniprot}}
-
+                                
+                                {{#sequence}}
                                 {{#length}}
                                 <li class="list-group"><strong>UniProtKB Accession Length:</strong>
                                     <a class="panelcontent" href="{{url}}" target="_blank">{{length}}</a>
                                 </li>
                                 {{/length}}
                                 {{^length}} {{/length}}
+                                {{/sequence}}
                             
 
                                 {{#recommendedname}} {{#full}}
