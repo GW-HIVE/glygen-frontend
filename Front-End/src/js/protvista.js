@@ -349,11 +349,31 @@ $(document).ready(function () {
 	$(".title_protein").html(uniprot_canonical_ac);
 	LoadData(uniprot_canonical_ac);
 	updateBreadcrumbLinks();
-	var is_chrome = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
-  
-	if(is_chrome){  
-	  $("p").text(" Supported browsers are Chrome 75 and 76, Firefox 67 and 68, Edge 44 (Windows only),Safari 11 and 12 (Macintosh only) ");
+	var supported = false;
+	// var is_chrome = navigator.userAgent.toLowerCase().indexOf('MSIE') > -1;
+	var ua = navigator.userAgent;
+
+	if(ua.indexOf('Chrome') > -1) {
+		var chromeVersion = parseInt(ua.substr(ua.indexOf('Chrome') + 7, 2));
+		if(chromeVersion >= 75)	{
+			supported = true;
+		}
+	} 
+	// else if(ua.indexOf('Firefox') > -1) {
+	// 	var ffVersion = parseInt(ua.substr(ua.indexOf('Chrome') + 7, 2));
+	// 	if(ffVersion >= 65)	{
+	// 		supported = true;
+	// 	}
+	// } 
+	else if(ua.indexOf('Safari') > -1) {
+		var safariVersion = parseInt(ua.substr(ua.indexOf('Safari') - 7, 2));
+		if(safariVersion >= 11)	{
+			supported = true;
+		}
 	}
+	if(!supported){  
+		$("p").text(" Supported browsers are Chrome 75 and above, Firefox 67 and above, Edge 44 (Windows only),Safari 11 and above ");
+	  }
 });
 
 //set up breadcrumb for navigation
