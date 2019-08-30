@@ -83,19 +83,7 @@ function ajaxSuccess(data) {
                 return resVal1 - resVal2;
             });
 
-            // Sorting go_terms in alphabetical order.
             for (var i = 0; i < data.go_annotation.categories.length; i++) {
-                data.go_annotation.categories[i].go_terms =  data.go_annotation.categories[i].go_terms.sort(function(a, b){ 
-                    if (a.name.toUpperCase() === b.name.toUpperCase()) return 0; 
-                    else if(a.name.toUpperCase() > b.name.toUpperCase()) return 1;
-                    else if(a.name.toUpperCase() < b.name.toUpperCase()) return -1;
-                });
-                
-                // truncate go term the array length
-                if (data.go_annotation.categories[i].go_terms.length > 5){
-                    data.go_annotation.categories[i].go_terms.length = 5;
-                }
-
                 // assign the newly result of running formatSequence() to replace the old value
                 formatEvidences(data.go_annotation.categories[i].go_terms);
             }
