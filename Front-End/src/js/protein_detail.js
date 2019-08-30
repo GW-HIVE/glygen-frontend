@@ -39,11 +39,11 @@ function ajaxSuccess(data) {
             if (data.gene) {
                 for (var i = 0; i < data.gene.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
-                     data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
-                    data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);  
-                   
+                    if (data.gene[i].locus){
+                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
+                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                    }
                 }
-             
             }
 
             if (data.isoforms) {
