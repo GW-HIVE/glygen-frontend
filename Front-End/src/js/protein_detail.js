@@ -361,11 +361,14 @@ function ajaxSuccess(data) {
                 },
 
                 {
-                    field: 'residue',
+                    field: 'respos',
                     title: 'Residue',
-                    sortable: true
-
-                }
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
+               }
+            },
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
