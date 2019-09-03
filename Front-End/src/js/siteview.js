@@ -117,16 +117,26 @@ function ajaxSuccess(data) {
  *  The concat() method is used to join two or more arrays.
  * annotation has complete array of three combine array
  */ 
-     annotations = glycosylationPositions.concat(
-      mutationstart_poss,
-      site_annotationstart_poss
-    );
+
+    annotations = [];
+
+    if (glycosylationPositions) {
+      annotations = annotations.concat(glycosylationPositions);
+    }
+
+    if (mutationstart_poss) {
+      annotations = annotations.concat(mutationstart_poss);
+    }
+    
+    if (site_annotationstart_poss) {
+      annotations = annotations.concat(site_annotationstart_poss);
+    }
 
    /**
  *  The Array.prototype.push.apply() method used for the Merging two arrays.
  * Merge the second array into the first one.
  */
-    Array.prototype.push.apply(glycosylationPositions, mutationstart_poss);
+    // Array.prototype.push.apply(glycosylationPositions, mutationstart_poss);
 
    /** newannotations is iterating through annotation and removes duplicate positions 
     * 
@@ -208,6 +218,7 @@ $(document).ready(function() {
   id = uniprot_canonical_ac;
   document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
   LoadData(uniprot_canonical_ac);
+  setupEvidenceList();
   updateBreadcrumbLinks();
 });
 function selectPostion(position) {
