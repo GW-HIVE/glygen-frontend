@@ -374,7 +374,7 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl2,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                // setupEvidenceList();
+                 setupEvidenceList();
             },
           
        
@@ -438,6 +438,10 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
+            onPageChange: function () {
+
+                setupEvidenceList();
+            }
           
         });
 

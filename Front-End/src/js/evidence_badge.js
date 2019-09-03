@@ -63,6 +63,7 @@ function EvidencebadgeFormator(value, row, index, field) {
 
 // setting evidnec list for each badge
 function setupEvidenceList() {
+        $('#content').off('click', '.evidence-badge-btn');
         $('#content').on('click', '.evidence-badge-btn', show_evidence);
     
 }
