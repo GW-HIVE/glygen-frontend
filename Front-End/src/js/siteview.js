@@ -132,11 +132,7 @@ function ajaxSuccess(data) {
       annotations = annotations.concat(site_annotationstart_poss);
     }
 
-   /**
- *  The Array.prototype.push.apply() method used for the Merging two arrays.
- * Merge the second array into the first one.
- */
-    // Array.prototype.push.apply(glycosylationPositions, mutationstart_poss);
+
 
    /** newannotations is iterating through annotation and removes duplicate positions 
     * 

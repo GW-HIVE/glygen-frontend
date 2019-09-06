@@ -323,3 +323,11 @@ ul {
   padding-left:17px;
   background-color: rgb(252, 252, 252)
 }
+
+.arrowanimation {
+  transition: transform 100ms;
+}
+
+#arrowanimation.arrowanimation-down {
+  transform: rotate(90deg);
+}
