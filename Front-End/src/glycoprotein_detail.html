@@ -178,41 +178,42 @@
                     </div>
                 </div>
 
-                <!-- General-->
-                <ul id="general" class="cd-faq-group selected">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>General</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <!--always try to use double quotes for HTML attributes.-->
-                                <div class="col-md-12 col-xs-6">
-                                    {{#gene}}
-                                        <li class="list-group"><strong>Gene Name:</strong>
-                                            <a class="panelcontent" href="{{{url}}}" target="_blank">{{name}}</a>
-                                        </li>
-                                    {{/gene}}
-                                    {{^gene}} {{/gene}}
+                
+            <!-- General-->
+            <ul id="general" class="cd-faq-group selected">
+                <li class="cd-faq-title"/>
+                <div class="panel panel-default">
+                    <div class="gg-panel-heading"><h4>General</h4></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <!--always try to use double quotes for HTML attributes.-->
+                            <div class="col-md-12 col-xs-6">
+                                {{#gene}}
+                                <li class="list-group"><strong>Gene Name:</strong>
+                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{name}}</a>
+                                </li>
+                                <li class="list-group"><strong>Gene Location:</strong> Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
+                                </li> 
+                                {{/gene}}
+                                {{^gene}} {{/gene}}
 
-                                    {{#uniprot}}
-                                        {{#uniprot_id}}
-                                            <li class="list-group"><strong>UniProtKB ID:</strong>
-                                                <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
-                                            </li>
-                                        {{/uniprot_id}}
-                                        {{^uniprot_id}} {{/uniprot_id}}
-
-                                        {{#uniprot_canonical_ac}}
-                                            <li class="list-group"><strong>UniProtKB Accession:</strong>
-                                                <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac}}</a>
-                                            </li>
-                                        {{/uniprot_canonical_ac}}
-                                        {{^uniprot_canonical_ac}} {{/uniprot_canonical_ac}}
-                                    {{/uniprot}}
-
-                                    {{#sequence}}
+                                {{#uniprot}}
+                                {{#uniprot_id}}
+                                <li class="list-group"><strong>UniProtKB ID:</strong>
+                                    <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_id}}</a>
+                                </li>
+                                {{/uniprot_id}}
+                                {{^uniprot_id}} {{/uniprot_id}}
+                                
+                                {{#uniprot_canonical_ac}}
+                                <li class="list-group"><strong>UniProtKB Accession:</strong>
+                                    <a class="panelcontent" href="{{url}}" target="_blank">{{uniprot_canonical_ac}}</a>
+                                </li>
+                                {{/uniprot_canonical_ac}}
+                                {{^uniprot_canonical_ac}} {{/uniprot_canonical_ac}}
+                                {{/uniprot}}
+                                
+                                {{#sequence}}
                                 {{#length}}
                                 <li class="list-group"><strong>UniProtKB Accession Length:</strong>
                                     <a class="panelcontent" href="{{url}}" target="_blank">{{length}}</a>
@@ -220,27 +221,28 @@
                                 {{/length}}
                                 {{^length}} {{/length}}
                                 {{/sequence}}
-                                    {{#recommendedname}} 
-                                        {{#full}}
-                                            <li class="list-group"><strong>UniProtKB Entry
-                                                    Name:</strong> {{recommendedname.full}}
-                                                {{#short}} ({{recommendedname.short}}) {{/short}}
-                                            </li>
-                                        {{/full}}
-                                    {{/recommendedname}}
+                            
 
-                                    {{#refseq}}
-                                        {{#refseq.ac}}
-                                            <li class="list-group"><strong>RefSeq Accession:</strong>
-                                                <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
-                                            </li>
-                                            <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
-                                        {{/refseq.ac}}
-                                    {{/refseq}}
-                                    {{#mass}}
-                                        <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
-                                    {{/mass}}
-                                </div>
+                                {{#recommendedname}} {{#full}}
+                                <li class="list-group"><strong>UniProtKB Entry
+                                    Name:</strong> {{recommendedname.full}}
+                                    {{#short}} ({{recommendedname.short}}) {{/short}}
+                                </li>
+                                {{/full}}
+                                {{/recommendedname}}
+                                {{#mass}}
+                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                {{/mass}}
+                                {{#refseq}}
+                                {{#refseq.ac}}
+                                <li class="list-group"><strong>RefSeq Accession:</strong>
+                                    <a class="panelcontent" href="{{{refseq.url}}}" target="_blank">{{refseq.ac}}</a>
+                                </li>
+                                <li class="list-group"><strong>RefSeq Name:</strong> {{refseq.name}}</li>
+                                <li class="list-group"><strong>RefSeq Summary:</strong> {{summary}}</li>
+                                {{/refseq.ac}}
+                                {{/refseq}}
+                               
                             </div>
                         </div>
                     </div>
@@ -652,21 +654,39 @@
 
                 <!--Publications-->
                 <ul id="publications" class="cd-faq-group selected">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Publications</h4>
+                    <ul id="publications" class="cd-faq-group selected">
+                        <li class="cd-faq-title" />
+                        <div class="panel panel-default">
+                            <div class="gg-panel-heading">
+                                <h4>Publications</h4>
+                            </div>
+                            <div class="panel-body">
+                                {{#publication}}
+                                    <p class="panelmaincontent">
+                                        <li class="list-group" id="panelmaincontent1"> <strong> {{title}}</strong><br>
+                                            {{authors}}.<br>
+                                           <li class="journal">{{journal}}.  {{date}}<br>
+                                                <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
+    
+                                        {{#databases}}
+                                        <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
+                                            <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                                {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                            </button>
+                                            <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                                <ul>
+                                                    {{#links}}
+                                                        <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
+                                                        </li>
+                                                    {{/links}}
+                                                </ul>
+                                            </div>
+                                        </span>
+                                    {{/databases}}
+                                {{/publication}} {{^publication}} No data available. {{/publication}}
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            {{#publication}}
-                                <p class="panelmaincontent">
-                                    <li class="list-group" id="panelmaincontent1"><strong>Journal:</strong> {{journal}}<br>
-                                        <strong>Title:</strong> {{title}}<br>
-                                        <i class="fas fa-book"></i> PMID:<a href="{{url}}" target="_blank">{{pmid}}</a></li>
-                            {{/publication}} {{^publication}} No data available. {{/publication}}
-                        </div>
-                    </div>
-                </ul>
+                    </ul>
 
                 <a href="#0" class="cd-close-panel">Close</a>
             </script>
