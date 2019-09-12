@@ -88,6 +88,7 @@ function setGlycoProteinFormValues(data) {
         $("#glycan_id").val(data.query.glycan? data.query.glycan.glytoucan_ac : "");
         $("#relation").val(data.query.glycan? data.query.glycan.relation : "");
         $("#protein_name").val(data.query.protein_name || "");
+        $("#go_term").val(data.query.go_term || "");
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");

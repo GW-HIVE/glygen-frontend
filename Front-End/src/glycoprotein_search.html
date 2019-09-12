@@ -343,6 +343,46 @@
                                                 <h6 id='geneNameMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
+                                         <!-- GO Name -->
+                                         <div class="gg-form-group row">
+                                            <label class="control-label col-sm-4" for="go_term">
+                                                <span><a class="link-with-tooltip" href="javascript://" \
+                                                    title="GO Name"
+                                                    data-toggle="popover"
+                                                    data-placement="top"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Gene ontology is a precisely defined, common controlled vocabulary for describing the roles of genes and gene products in any organism and includes three categories: Molecular function, Biological process, and Cellular component.
+                                                    <br><br>
+                                                    GO Name - term name, which may be a word or string of words.
+                                                    GO ID - a unique alphanumeric identifier. Explore <a href='http://geneontology.org/docs/ontology/' target='_blank'> GO Name"
+                                                    tooltip-title="Gene ontology is a precisely defined, common controlled vocabulary for describing the roles of genes and gene products in any organism and includes three categories: Molecular function, Biological process, and Cellular component.
+                                                    <br><br>
+                                                    GO Name - term name, which may be a word or string of words.
+                                                    GO ID - a unique alphanumeric identifier.">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span>GO Name:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text"
+                                                    name="GOTerm"
+                                                    class="form-control go_term"
+                                                    id="go_term"
+                                                    placeholder="Enter the GO Name of your protein" onkeyup="validateGOTerm(this)">   
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a
+                                                    href="#mitochondrion" id="textExampleGOTerm"
+                                                    data-toggle="tooltip"
+                                                    data-tippy="Click to Insert">mitochondrion</a></div>
+
+                                                    <div class="gg-text-right">Explore <a href="http://geneontology.org/docs/ontology/" 
+                                                    target="_blank"
+                                                    data-tippy="Explore GO Name Database">GO Name</a></div>
+                                                </div>
+                                                <br>
+                                                <h6 id='goTermMsg' class="validation-message"></h6>
+                                            </div>
+                                        </div>                                       
                                         <!--Interacting Glycan-->
                                         <div class="gg-form-group row" id="Glycanid">
                                             <label class="control-label col-sm-4" for="glycan_id">
