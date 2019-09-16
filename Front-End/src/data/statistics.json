@@ -92,6 +92,75 @@
 			}
 		]
 	},
+	"sunburst_glycan_type_subtype": {
+      "name":"",
+      "children":[
+         {
+            "name": "N-glycan",
+            "children": [
+               {
+                  "name": "hybrid",
+                  "size": 85
+               },
+               {
+                  "name":"complex",
+                  "size": 1796
+               },
+				{
+					"name": "high mannose",
+					"size": 78
+				},
+				{
+					"name": "other",
+					"size": 606
+				}
+            ]
+         },
+         {
+            "name":"O-glycans",
+            "children":[
+               {
+                  "name": "core 1",
+                  "size": 100
+               },
+               {
+                  "name": "core 2",
+					"size": 189
+               },
+               {
+                  "name": "core 3",
+					"size": 53
+               },
+				{
+					"name": "core 4",
+					"size": 38
+				},
+				{
+					"name": "core 5",
+					"size": 5
+				},
+				{
+					"name": "core 6",
+					"size": 8
+				},
+				{
+					"name": "core 7",
+					"size": 1
+				}
+            ]
+         },
+         {
+            "name":"Other",
+            "children":[
+               {
+                  "name":"Other",
+                  "size": 2439
+               }
+            ]
+         }
+      ]
+   },
+	
 	"venn_protein_homo": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
@@ -464,5 +533,96 @@
 	"bar_sugar_ranges": {
 		"stepsize": 1,
 		"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
-	}
+	},
+	"pie_protein_genes": [{
+			"name": "Human",
+			"size": 19343
+		},
+		{
+			"name": "Mouse",
+			"size": 15526
+		},
+		{
+			"name": "Rat",
+			"size": 12784
+		}
+	],
+	"pie_canonical_proteins": [{
+			"name": "Human",
+			"size": 19943
+		},
+		{
+			"name": "Mouse",
+			"size": 17526
+		},
+		{
+			"name": "Rat",
+			"size": 12784
+		}
+	],
+	"pie_canonical_isoforms_proteins": [{
+			"name": "Human",
+			"size": 9943
+		},
+		{
+			"name": "Mouse",
+			"size": 7526
+		},
+		{
+			"name": "Rat",
+			"size": 2784
+		}
+	],
+	"pie_glycohydrolases_proteins": [{
+			"name": "Human",
+			"size": 2835
+		},
+		{
+			"name": "Mouse",
+			"size": 1254
+		},
+		{
+			"name": "Rat",
+			"size": 985
+		}
+	],
+	"pie_glycosyltransferases_proteins": [{
+			"name": "Human",
+			"size": 15749
+		},
+		{
+			"name": "Mouse",
+			"size": 12527
+		},
+		{
+			"name": "Rat",
+			"size": 1365
+		}
+	],
+	"pie_glycosylated_proteins": [{
+			"name": "Human",
+			"size": 4715
+		},
+		{
+			"name": "Mouse",
+			"size": 3788
+		},
+		{
+			"name": "Rat",
+			"size": 2086
+		}
+	],
+	"pie_glycosyl_prot_report_glyc": [{
+			"name": "Human",
+			"size": 1771
+		},
+		{
+			"name": "Mouse",
+			"size": 526
+		},
+		{
+			"name": "Rat",
+			"size": 249
+		}
+	]
 }

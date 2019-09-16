@@ -80,21 +80,16 @@
                 <svg class="zoomableSunburst"></svg>
             </div>
             <div class="col-md-6 col-sm-12">
+<!--
                 <h3>Zoomable Sunburst</h3>
                 <p class="lead">
                     Zoomable Sunburst represents GlyGen statistics. <br>Click on any arc to zoom in, and click on the center circle to zoom out.
                 </p>
+-->
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
-                <p class="lead">
-                    Human proteins.
-                </p>
-                <div id="venn_protein_homo"></div>
-            </div>
             <div class="col-md-6 col-sm-12">
                 <h3>Glycans</h3>
                 <p class="lead">
@@ -147,10 +142,95 @@
                 </p>
                 <div id="bar_chart_sugar"></div>
             </div>
-
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Human proteins.
+                </p>
+                <div id="venn_protein_homo"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Number of Genes.
+                </p>
+                <div id="pie_protein_genes"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Number of Canonical Proteins.
+                </p>
+                <div id="pie_canonical_proteins"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Total number of Proteins (Isoforms + Canonical).
+                </p>
+                <div id="pie_canonical_isoforms_proteins"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Total number of Glycohydrolases.
+                </p>
+                <div id="pie_glycohydrolases_proteins"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Proteins</h3>
+                <p class="lead">
+                    Total number of Glycosyltransferases.
+                </p>
+                <div id="pie_glycosyltransferases_proteins"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycoproteins</h3>
+                <p class="lead">
+                    Number of glycosylated proteins.
+                </p>
+                <div id="pie_glycosylated_proteins"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycoproteins</h3>
+                <p class="lead">
+                    Glycosylated proteins with reported glycans.
+                </p>
+                <div id="pie_glycosyl_prot_report_glyc"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycoproteins</h3>
+                <p class="lead">
+                    Sunburst. Total number of glycosylation sites.
+                </p>
+                <div id="sunburst_glycosylation_sites"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycoproteins</h3>
+                <p class="lead">
+                    Double donut (per species).
+                    Total number of N Glycosylated sequons and 
+                    Number of N sites
+                </p>
+                <div id="donu_glycosyl_sequons_n_sites"></div>
+            </div>
         </div>
     </div>
-
 
     <div w3-include-html="footer.html"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

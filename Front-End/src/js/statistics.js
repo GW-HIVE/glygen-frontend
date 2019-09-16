@@ -207,4 +207,60 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	var barSugar = barChartSugar;
 	d3.select('#bar_chart_sugar')
 		.call(barSugar, jsonData, "#bar_chart_sugar"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Protein. Number of Genes. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieGenes = pieProteinGenes;
+	d3.select('#pie_protein_genes')
+		.call(pieGenes, jsonData, "#pie_protein_genes"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of Canonical Proteins. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieCanonicalProtein = pieProteinCanonical;
+	d3.select('#pie_canonical_proteins')
+		.call(pieCanonicalProtein, jsonData, "#pie_canonical_proteins"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of Canonical and Isoforms Proteins. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieCanonIsofProtein = pieProteinCanonicalIsoforms;
+	d3.select('#pie_canonical_isoforms_proteins')
+		.call(pieCanonIsofProtein, jsonData, "#pie_canonical_isoforms_proteins"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of Canonical and Isoforms Proteins. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieGlycohydrolasesProtein = pieProteinGlycohydrolases;
+	d3.select('#pie_glycohydrolases_proteins')
+		.call(pieGlycohydrolasesProtein, jsonData, "#pie_glycohydrolases_proteins"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of Glycosyltransferases Proteins. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieGlycosyltransferasesProtein = pieProteinGlycosyltransferases;
+	d3.select('#pie_glycosyltransferases_proteins')
+		.call(pieGlycosyltransferasesProtein, jsonData, "#pie_glycosyltransferases_proteins"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of Glycosylated Proteins. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieProteinGlycosylated = pieGlycosylatedProtein;
+	d3.select('#pie_glycosylated_proteins')
+		.call(pieProteinGlycosylated, jsonData, "#pie_glycosylated_proteins"); // draw chart in div
+
+	//-------------------------------
+	//  Pie Chart Number of glycosylated proteins with reported glycans. 
+	//  Proteins (Human, Mouse and Rat)
+	//-------------------------------	
+	var pieProtGlycosylReportGlyc = pieGlycosylProtReportGlyc;
+	d3.select('#pie_glycosyl_prot_report_glyc')
+		.call(pieProtGlycosylReportGlyc, jsonData, "#pie_glycosyl_prot_report_glyc"); // draw chart in div
 });
