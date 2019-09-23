@@ -1,83 +1,15 @@
 //Tatiana Williamson
 // date: April 2019
 
-function vennProteinHomo(dummy, data, id) {
-	var protein_homo = venn.VennDiagram()
-		.width(350)
-		.height(350);
 
-	var div_protein_homo = d3.select(id)
-	div_protein_homo.datum(data.venn_protein_homo)
-		.call(protein_homo);
 
-	var tooltip = d3.select("body").append("div")
-		.attr("class", "venntooltip")
-		.style("cursor", "pointer");
+//------------------------------------------
+//	Glycans
+//------------------------------------------
 
-	div_protein_homo.selectAll("path")
-		.style("stroke-opacity", 0)
-		.style("stroke", "#fff")
-		.style("stroke-width", 3);
-
-	div_protein_homo.selectAll("g")
-		.on("mouseover", function (d, i) {
-			// sort all the areas relative to the current item
-			venn.sortAreas(div_protein_homo, d);
-
-			// Display a tooltip with the current size
-			tooltip.transition().duration(400).style("opacity", .9);
-			tooltip.text(d.size + '\n' + d.tooltipname);
-
-			// highlight the current path
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-				.style("stroke-opacity", 1)
-				.style("cursor", "pointer");
-		})
-
-		.on("mousemove", function () {
-			tooltip.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
-		})
-
-		// On click goes to list page
-		.on("click", function (d) {
-			//console.log(d.data.size); 
-			if (d.name == "Proteins") {
-				searchProteinsBy({
-					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
-					}
-				});
-			} else if (d.name == "Glycoproteins") {
-				searchGlycoproteinsBy({
-					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
-					}
-				});
-			} else if (d.name == "Enzymes") {
-				searchGlycansBy({
-					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
-					}
-				});
-			}
-
-		})
-
-		.on("mouseout", function (d, i) {
-			tooltip.transition().duration(400).style("opacity", 0);
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-				.style("stroke-opacity", 0);
-		});
-}
-
+/**
+ * Venn diagram displayes human and mouse glycans.
+ */
 function vennGlycanHomoMus(dummy, data, id) {
 	var glycan_homo_mus = venn.VennDiagram()
 		.width(350)
@@ -138,6 +70,96 @@ function vennGlycanHomoMus(dummy, data, id) {
 		});
 }
 
+/**
+ * Sunburst glycan chart displayes glycan types and subtypes.
+ */
+function sunburstGlycanTypeSubtype(dummy, data, id) {
+	var width = 350;
+    var height = 350;
+	var margin = {
+			top: 0,
+			right: 0,
+			bottom: 0,
+			left: 0
+		};
+    var radius = Math.min(width, height) / 2;
+    var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+    // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
+    var g = d3.select(id)
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+//		.attr('preserveAspectRatio', 'xMinYMin meet')
+//		.attr('viewBox',
+//			'0 0 ' +
+//			(width + margin.left + margin.right) +
+//			' ' +
+//			(height + margin.top + margin.bottom)
+//		)
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+    // Create our sunburst data structure and size it.
+    var partition = d3.partition()
+        .size([2 * Math.PI, radius]);
+
+    // Get the data from our JSON file
+    d3.json("data/statistics.json", function(error, jsonData) {
+        if (error) throw error;
+
+        // Find the root node of our data, and begin sizing process.
+        var root = d3.hierarchy(jsonData.sunburst_glycan_type_subtype)
+            .sum(function (d) { return d.size});
+
+        // Calculate the sizes of each arc that we'll draw later.
+        partition(root);
+        var arc = d3.arc()
+            .startAngle(function (d) { return d.x0 })
+            .endAngle(function (d) { return d.x1 })
+            .innerRadius(function (d) { return d.y0 })
+            .outerRadius(function (d) { return d.y1 });
+
+
+        // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
+        // variable calculations. Last, color the lines and the slices.
+        g.selectAll('g')
+            .data(root.descendants())
+            .enter().append('g').attr("class", "node").append('path')
+            .attr("display", function (d) { return d.depth ? null : "none"; })
+            .attr("d", arc)
+            .style('stroke', '#fff')
+            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
+
+
+        // Populate the <text> elements with our data-driven titles.
+        g.selectAll(".node")
+            .append("text")
+            .attr("transform", function(d) {
+                return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
+            .attr("dx", "-20") // radius margin
+            .attr("dy", ".5em") // rotation align
+            .text(function(d) { return d.parent ? d.data.name : "" });
+
+    });
+
+
+    /**
+     * Calculate the correct distance to rotate each label based on its location in the sunburst.
+     * @param {Node} d
+     * @return {Number}
+     */
+    function computeTextRotation(d) {
+        var angle = (d.x0 + d.x1) / Math.PI * 90;
+
+        // Avoid upside-down labels
+        return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
+        //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
+    }
+}
+
+/**
+ * Donut glycan chart displayes number of human and mouse glycans.
+ */
 function donutChartGlycan(dummy, data, id) {
 	var text = "",
 		widthD = 150,
@@ -305,6 +327,9 @@ function donutChartGlycan(dummy, data, id) {
 		});
 }
 
+/**
+ * Pie glycan chart displayes motifs and their frequencies.
+ */
 function pieChartMotif(dummy, data, id) {
 	var text = "",
 		width = 150,
@@ -409,6 +434,9 @@ function pieChartMotif(dummy, data, id) {
 		.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
 }
 
+/**
+ * Bar glycan chart displayes glycan mass range.
+ */
 function barChartMass(dummy, data, id) {
 	// set the dimensions and margins of the graph
 	var margin = {
@@ -546,6 +574,9 @@ function barChartMass(dummy, data, id) {
 		.text("Mass ranges");
 }
 
+/**
+ * Bar glycan chart displayes glycan sugar range.
+ */
 function barChartSugar(dummy, data, id) {
 	// set the dimensions and margins of the graph
 	var margin = {
@@ -683,8 +714,92 @@ function barChartSugar(dummy, data, id) {
 		.text("Sugar ranges");
 }
 
+//------------------------------------------
+//	Proteins
+//------------------------------------------
+
 /**
- * Pie chart displayes number of genes for humans, mouse, and rat data.
+ * Venn diagram displayes number of human proteins, glycoproteins, enzymes.
+ */
+function vennProteinHomo(dummy, data, id) {
+	var protein_homo = venn.VennDiagram()
+		.width(350)
+		.height(350);
+
+	var div_protein_homo = d3.select(id)
+	div_protein_homo.datum(data.venn_protein_homo)
+		.call(protein_homo);
+
+	var tooltip = d3.select("body").append("div")
+		.attr("class", "venntooltip")
+		.style("cursor", "pointer");
+
+	div_protein_homo.selectAll("path")
+		.style("stroke-opacity", 0)
+		.style("stroke", "#fff")
+		.style("stroke-width", 3);
+
+	div_protein_homo.selectAll("g")
+		.on("mouseover", function (d, i) {
+			// sort all the areas relative to the current item
+			venn.sortAreas(div_protein_homo, d);
+
+			// Display a tooltip with the current size
+			tooltip.transition().duration(400).style("opacity", .9);
+			tooltip.text(d.size + '\n' + d.tooltipname);
+
+			// highlight the current path
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+				.style("stroke-opacity", 1)
+				.style("cursor", "pointer");
+		})
+
+		.on("mousemove", function () {
+			tooltip.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
+
+		// On click goes to list page
+		.on("click", function (d) {
+			//console.log(d.data.size); 
+			if (d.name == "Proteins") {
+				searchProteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			} else if (d.name == "Glycoproteins") {
+				searchGlycoproteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			} else if (d.name == "Enzymes") {
+				searchGlycansBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				});
+			}
+
+		})
+
+		.on("mouseout", function (d, i) {
+			tooltip.transition().duration(400).style("opacity", 0);
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+				.style("stroke-opacity", 0);
+		});
+}
+
+/**
+ * Pie chart displayes number of protein genes for humans, mouse, and rat data.
  */
 function pieProteinGenes(dummy, data, id) {
 	// set the dimensions and margins of the graph
@@ -1042,6 +1157,10 @@ var pie = d3.pie()
     	.attr("dy", "1.35em")
      	.text(function(d) { return d.data.size; });
 }
+
+//------------------------------------------
+//	Glycoproteins
+//------------------------------------------
 
 /**
  * Pie chart displayes number of Glycosylated proteins for humans, mouse, and rat data.

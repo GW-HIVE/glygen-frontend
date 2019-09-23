@@ -166,13 +166,6 @@ d3.json("data/statistics.json", (error, jsonData) => {
 		}
 	}
 
-	//--------------------
-	//    Proteins Venn Diagram. Human proteins.
-	//----------------------
-	var protein_homo = vennProteinHomo;
-	d3.select('#venn_protein_homo')
-		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
-
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------
@@ -180,6 +173,13 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	d3.select('#venn_glycans_homo_mus')
 		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus"); // draw chart in div
 
+	//--------------------
+	//    Sunburst glycan chart. Glycan types and subtypes.
+	//----------------------
+	var glycan_type_subtype = sunburstGlycanTypeSubtype;
+	d3.select('#sunburst_glycan_type_subtype')
+		.call(glycan_type_subtype, jsonData, "#sunburst_glycan_type_subtype"); // draw chart in div
+	
 	//-------------------------------
 	//    Donut Glycan Chart. Human and mouse glycans.
 	//-------------------------------
@@ -215,7 +215,14 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	var pieGenes = pieProteinGenes;
 	d3.select('#pie_protein_genes')
 		.call(pieGenes, jsonData, "#pie_protein_genes"); // draw chart in div
-
+	
+	//--------------------
+	//    Proteins Venn Diagram. Human proteins.
+	//----------------------
+	var protein_homo = vennProteinHomo;
+	d3.select('#venn_protein_homo')
+		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
+	
 	//-------------------------------
 	//  Pie Chart Number of Canonical Proteins. 
 	//  Proteins (Human, Mouse and Rat)
