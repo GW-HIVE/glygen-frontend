@@ -233,7 +233,7 @@ small {
   position: absolute;
   left: 0;
   bottom: 6%;
-  z-index: 999999;
+
   width: 100%;
   background-color: #b5b1b1;
   text-align-last: center;
@@ -322,4 +322,12 @@ ul {
 .indentsubnav{
   padding-left:17px;
   background-color: rgb(252, 252, 252)
+}
+
+.arrowanimation {
+  transition: transform 100ms;
+}
+
+#arrowanimation.arrowanimation-down {
+  transform: rotate(90deg);
 }

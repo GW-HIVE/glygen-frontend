@@ -39,11 +39,11 @@ function ajaxSuccess(data) {
             if (data.gene) {
                 for (var i = 0; i < data.gene.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
-                     data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
-                    data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);  
-                   
+                    if (data.gene[i].locus){
+                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
+                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                    }
                 }
-             
             }
 
             if (data.isoforms) {
@@ -83,19 +83,7 @@ function ajaxSuccess(data) {
                 return resVal1 - resVal2;
             });
 
-            // Sorting go_terms in alphabetical order.
             for (var i = 0; i < data.go_annotation.categories.length; i++) {
-                data.go_annotation.categories[i].go_terms =  data.go_annotation.categories[i].go_terms.sort(function(a, b){ 
-                    if (a.name.toUpperCase() === b.name.toUpperCase()) return 0; 
-                    else if(a.name.toUpperCase() > b.name.toUpperCase()) return 1;
-                    else if(a.name.toUpperCase() < b.name.toUpperCase()) return -1;
-                });
-                
-                // truncate go term the array length
-                if (data.go_annotation.categories[i].go_terms.length > 5){
-                    data.go_annotation.categories[i].go_terms.length = 5;
-                }
-
                 // assign the newly result of running formatSequence() to replace the old value
                 formatEvidences(data.go_annotation.categories[i].go_terms);
             }
@@ -375,17 +363,20 @@ function ajaxSuccess(data) {
                 },
 
                 {
-                    field: 'residue',
+                    field: 'respos',
                     title: 'Residue',
-                    sortable: true
-
-                }
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
+               }
+            },
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                // setupEvidenceList();
+                 setupEvidenceList();
             },
           
        
@@ -449,6 +440,10 @@ function ajaxSuccess(data) {
                 }],
             pagination: 10,
             data: itemsMutate,
+            onPageChange: function () {
+
+                setupEvidenceList();
+            }
           
         });
 

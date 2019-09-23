@@ -486,8 +486,14 @@ input:checked + .slider:before {
 ------------------------------*/
 #license-tabble {
     border: 1px solid #ddd;
-    width: 99.999%;
+    width: 50%;
     text-indent: 10px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.license-logos img {
+    padding-top: 15px;
 }
 
 .panel-heading {
@@ -1119,6 +1125,9 @@ ____________________________________  */
         float: none !important;
         margin: 0 auto;
         margin-bottom: 10px;
+    }
+    .license-logos img {
+    width: 70%;
     }
 }
 

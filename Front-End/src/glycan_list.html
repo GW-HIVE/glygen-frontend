@@ -184,14 +184,16 @@
                         {{/number_monosaccharides.min}}
 
                         <!--organism-->
-                        {{#organism.name}}
+                        {{#organism}}
                         <tr>
                             <td>Organism:</td>
                             <td>
-                                {{organism.name}}
+                                {{#organism.organism_list}}
+                                    {{name}}
+                                {{/organism.organism_list}}
                             </td>
                         </tr>
-                        {{/organism.name}}
+                        {{/organism}}
 
                         <!--glycan type-->
                         {{#glycan_type}}
