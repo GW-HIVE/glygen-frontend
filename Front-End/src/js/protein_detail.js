@@ -291,6 +291,8 @@ function ajaxSuccess(data) {
             data.site_annotation_count = data.site_annotation.length;
         }
 
+        data.uniprot_canonical_ac = id;
+
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
         var $container = $('#content');
@@ -539,6 +541,8 @@ function ajaxSuccess(data) {
         $("#sequon_link").prop( "checked", true );
         $('#sequon_link').trigger('change');
     }
+
+    setupIsoformAlignmentOptions();
 }
 
 
@@ -588,6 +592,22 @@ function proteinView(){
 }
 
 
+function setupIsoformAlignmentOptions() {
+    $('#isoform-alignment select').change(function() {
+        /* alert("hi"); */
+        var op =$(this).val();
+        if(op !='') {                 
+            $('#isoform-alignment input').prop('disabled',false);
+        } else {
+            $('#isoform-alignment input').prop('disabled', true);
+        }   
+    });
+    // $('#isoform-alignment input').on('click', function () {
+    //     // load in the alignment
+    //     LoadDataAlignment(id, $('#isoform-alignment select').val());
+    // });
+}
+
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
@@ -596,7 +616,6 @@ $(document).ready(function () {
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
     updateBreadcrumbLinks();
-  
 });
 
 
@@ -649,6 +668,7 @@ function updateBreadcrumbLinks() {
             $('#li-breadcrumb-list').css('display', 'none');
     }
 }
+
 
 /**
  * Gets the values selected in the download dropdown 

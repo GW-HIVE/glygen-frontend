@@ -510,6 +510,21 @@
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
                             <h4>Isoforms</h4>
+                            <div id="isoform-alignment">
+                                <form method="get" action="seqn.html">
+                                    <input type="hidden" name="id" value="{{uniprot_canonical_ac}}" />
+
+                                    <strong>Alignment:</strong>
+                                    <select name="alignment">
+                                    <option value="" selected="">select</option>
+                                        <option value="isoformset.uniprotkb" >isoformset.uniprotkb</option>
+                                        <option value="homologset.oma">homologset.oma</option>
+                                        <option value="homologset.mgi">homologset.mgi</option>        
+                                    </select>
+
+                                    <input type="submit" class="btn btn-primary" value="Details" aria-disabled="true" disabled="true" />
+                                </form>
+                            </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -560,6 +575,16 @@
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
                             <h4>Orthologs</h4>
+                            <div>
+                                <strong>Alignment:</strong>
+                                 <select class="custom-pc" name="processor" id="processor">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="3">3</option>                
+                                    </select>
+                                 <input name="alignment_details" type="button" value="Details" disabled="true" />
+                                </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -573,7 +598,6 @@
                                                 Organism: {{organism}}
                                             </div>
                                         </div>
-
                                         {{#databases}}
                                             <!-- <div class='col-md-6 col-xs-6'> -->
                                             <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
@@ -781,6 +805,8 @@
     <script src="js/evidence_badge.js"></script>
     <!-- for sequenceview js -->
     <script src="js/format_sequence.js"></script>
+
+    <!-- <script src="js/alignment.js"></script> -->
 
 
     <!-- Please do not change this it breaks hash scroll code-->
