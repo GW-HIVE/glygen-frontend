@@ -79,6 +79,37 @@ function ajaxSuccess(data) {
                 }
             }
         }
+        
+        var itemscrossRef = [];
+        //check data.
+        if (data.crossref) {
+            for (var i = 0; i < data.crossref.length; i++) {
+                var crossrefitem = data.crossref[i];
+                var found = '';
+                for (var j = 0; j < itemscrossRef.length; j++) {
+                    var databaseitem = itemscrossRef[j];
+                    if (databaseitem.database === crossrefitem.database) {
+                        found = true;
+                        databaseitem.links.push({
+                            url: crossrefitem.url,
+                            id: crossrefitem.id
+                        });
+                    }
+                }
+                if (!found) {
+                    itemscrossRef.push({
+                        database: crossrefitem.database,
+                        links: [{
+                            url: crossrefitem.url,
+                            id: crossrefitem.id
+                        }]
+                    });
+                }
+            }
+
+            data.itemscrossRef = itemscrossRef;
+        }
+        
         var itemspublication = [];
         if (data.publication) {
             for (var i = 0; i < data.publication.length; i++) {

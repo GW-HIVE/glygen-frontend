@@ -295,22 +295,27 @@
                     </div>
                 </ul>
 
-                <!-- Cross References -->
-                <ul id="crossReferences" class="cd-faq-group">
-                    <li class="cd-faq-title" />
-                    <!-- Glycan Cross Referance panel starts here for page -->
+                <!--Cross References-->
+                <ul id="crossReferences" class="cd-faq-group selected">
+                <li class="cd-faq-title" />
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
                             <h4>Cross References</h4>
                         </div>
                         <div class="panel-body">
-                            {{#crossref}}
-
-                                <li class="list-group" id="panelmaincontent1"><Strong>{{database}}:</Strong>
-                                    <a class="panelcontent" href="{{url}}" target="_blank">{{id}}</a>
-                                </li>
-
-                            {{/crossref}} {{^crossref}} No data available. {{/crossref}}
+                            {{#itemscrossRef}}
+                                <div class="panelmaincontent">
+                                    <div class="row">
+                                        <li class="list-group2"><strong>{{database}}:</strong></li>
+                                        {{#links}}
+                                            <div class=" col-xs-6 col-sm-3">
+                                                <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
+                                            </div>
+                                        {{/links}}
+                                        {{^link}} {{/link}}
+                                    </div>
+                                </div>
+                            {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
                         </div>
                     </div>
                 </ul>
