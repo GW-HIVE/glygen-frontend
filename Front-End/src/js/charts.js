@@ -63,9 +63,14 @@ function vennGlycanHomoMus(dummy, data, id) {
 			//console.log(d.size); 
 			searchGlycansBy({
 				"organism": {
-					"id": d.organism.id,
-					"name": d.organism.name
-				}
+					"organism_list": [
+						{
+							"id": d.organism.id,
+							"name": d.organism.name
+						}
+					],
+				"operation":"or"
+        		}
 			});
 		});
 }
@@ -87,16 +92,16 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
-        .attr('width', width)
-        .attr('height', height)
+//        .attr('width', width)
+//        .attr('height', height)
         .append('g')
-//		.attr('preserveAspectRatio', 'xMinYMin meet')
-//		.attr('viewBox',
-//			'0 0 ' +
-//			(width + margin.left + margin.right) +
-//			' ' +
-//			(height + margin.top + margin.bottom)
-//		)
+		.attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
     // Create our sunburst data structure and size it.
@@ -104,11 +109,11 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
         .size([2 * Math.PI, radius]);
 
     // Get the data from our JSON file
-    d3.json("data/statistics.json", function(error, jsonData) {
+    d3.json("data/statistics.json", function(error, data) {
         if (error) throw error;
 
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(jsonData.sunburst_glycan_type_subtype)
+        var root = d3.hierarchy(data.sunburst_glycan_type_subtype)
             .sum(function (d) { return d.size});
 
         // Calculate the sizes of each arc that we'll draw later.
@@ -220,9 +225,15 @@ function donutChartGlycan(dummy, data, id) {
 		.on("click", function (d) {
 			searchGlycansBy({
 				"organism": {
-					"id": d.data.organism.id,
-					"name": d.data.organism.name
+					organism_list: [
+						{
+							"id": d.data.organism.id,
+							"name": d.data.organism.name
+						}
+					],
+					"operation":"or"
 				},
+				
 				"glycan_type": d.data.glycan_type
 			});
 		})
@@ -278,8 +289,13 @@ function donutChartGlycan(dummy, data, id) {
 			//console.log(d.data.name); 
 			searchGlycansBy({
 				"organism": {
-					"id": d.data.organism.id,
-					"name": d.data.organism.name
+					organism_list: [
+						{
+							"id": d.data.organism.id,
+							"name": d.data.organism.name
+						}
+					],
+					"operation":"or"
 				},
 				"glycan_type": d.data.glycan_type
 			});
@@ -1356,18 +1372,28 @@ function searchGlycansBy(param) {
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			},
+				organism_list: [
+					{
+						"id": param.organism.id,
+						"name": param.organism.name
+					}
+				],
+				"operation":"or"
+        	},
 			"glycan_type": param.glycan_type
 		})
 		chartId = "pie_chart_glycan";
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
+				organism_list: [
+					{
+						"id": param.organism.id,
+						"name": param.organism.name
+					}
+				],
+				"operation":"or"
+        	}
 		})
 		chartId = "venn_glycans_homo_mus";
 	}
