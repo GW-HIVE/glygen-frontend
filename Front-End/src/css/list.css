@@ -43,6 +43,19 @@
     margin-top: 25px;
 } 
 
+
+/*tr {*/
+  /*border: 1px solid #dddddd;*/
+  /*text-align: left;*/
+  /*padding: 8px;*/
+/*}*/
+
+/*
+.panel-default {
+  border-color: #0c0a0a;
+}
+*/
+
 thead{
     /*background-color: #659bc9;*/
     /*color: #555;*/
@@ -61,20 +74,33 @@ thead{
 
 .table {
     background-color: #fff;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    border-left: 1px solid #ddd;
+/*
+    width: 99.9998%;
+    float: right;
+*/
 }
+
+/*th {*/
+  /*text-align: center;*/
+/*}*/
+
 
 /* for applying #777 border to table */
 .fixed-table-container {
     position: relative;
     clear: both;
+    /*  border: 1px solid #777777;*/
     border: 1px solid #ccc;
 }
 
 .bootstrap-table .table tr>th{
     border-color: #ccc;
+}
+
+.fixed-table-container tbody td{
+/*  border-color: #777777;*/
+/*    border-color: #ddd; */
 }
 
 #sortbottom{
@@ -93,6 +119,7 @@ pre {
 #demosearch{
     overflow: hidden;
 }
+
 
 .prevbutton[disabled],
 .nextbutton[disabled]{
@@ -139,23 +166,24 @@ pre {
     text-overflow: ellipsis;
 }
 
-.evidence_badge {
-    position: relative; 
-    padding-left: 5px; 
-    padding-bottom: 30px;
-    vertical-align: middle;
-    display: inline-block;
+@media (max-width: 1300px) {
+    .table tbody {
+        left: 25%;
+    }
 }
-.hidden evidence_links {
-    position: absolute; 
-    left:  0; 
-    width: 200px;
+
+@media (min-width: 1301px) {
+    .table tbody {
+        left: 30%;
+    }
 }
-.linkHtml {
-   position: relative; 
-   display: inline-block; 
+
+@media (min-width: 1900px) {
+    .table tbody {
+        left: 34%;
+    }
 }
-.evidence_id {
-    position: relative; 
-   display: inline-block;     
-}
+
+.table tbody {
+    width: 50%;
+    }

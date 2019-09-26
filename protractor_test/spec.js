@@ -2,7 +2,6 @@
 /**
  * This contains the test cases for protractor js testing.
  * Documentation: https://www.dropbox.com/s/hank324yibhp4td/Set-up%20Protractor%20JS.docx?dl=0
- * Also check: https://github.com/GW-HIVE/glygen-frontend/wiki/Protractor-JS-testing
  * @author Gaurav Agarwal
  */
 
@@ -43,15 +42,13 @@ describe('Protein Search testing', function () {
       expect(browser.getTitle()).toEqual('Protein-list');
     });
 
-    /** expected count of List page elements  */
-    var totalListCount = 3;
+    var totalListCount = 31;
     //------------------------------------------------
     it('number of results found', function () {
       browser.sleep(2000);  //wait for the ajax response and page transitions
       var result_count = element.all(by.css('.searchresult')).first().getText();
-      browser.executeScript('window.scrollTo(0,400);').then(()=> {
-        expect(result_count).toContain(totalListCount.toString());
-      });
+
+      expect(result_count).toContain(totalListCount.toString());
     });
     //------------------------------------------------
     var glycan_list_table = element(by.id('gen-table')).all(by.tagName('tr'));

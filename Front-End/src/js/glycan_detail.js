@@ -30,7 +30,69 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+function formatEvidences(item) {
+    if (item && item.length) {
+        for (var i = 0; i < item.length; i++) {
+            var currentItem = item[i];
+            var databases = [];
+            if (currentItem && currentItem.evidence.length) {
+                for (var j = 0; j < currentItem.evidence.length; j++) {
+                    var evidenceitem = currentItem.evidence[j];
+                    var found = '';
 
+                    for (var x = 0; x < databases.length; x++) {
+                        var databaseitem = databases[x];
+                        if (databaseitem.database === evidenceitem.database) {
+                            found = true;
+                            databaseitem.links.push({
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            });
+                        }
+                    }
+
+                    if (!found) {
+                        databases.push({
+                            database: evidenceitem.database,
+                            color: databasecolor(evidenceitem.database),
+                            links: [{
+                                url: evidenceitem.url,
+                                id: evidenceitem.id
+                            }]
+                        })
+                    }
+                }
+            }
+            currentItem.databases = databases;
+        }
+    }
+}
+
+/**
+ * Creating Evidence badges for bootstrap table
+ *  @param {value} string for the name of the variable variable to extract from query string
+ * @param {url} string with the complete url with query string values
+ * Returns the GWU services. */
+function EvidencebadgeFormator(value, row, index, field) {
+    var buttonsHtml = "";
+    $.each(value, function (i, v) {
+        var linksHtml = "";
+        $.each(v.links, function (i, w) {
+            linksHtml += '<li style="linksHtml">' +
+                '<a href="' + w.url + '" target="_blank">' + w.id + '</a></li>'
+        });
+
+        buttonsHtml += '<span class="evidence_badge">' +
+            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
+            '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
+            '</button>' +
+            '<div class="hidden evidence_links">' +
+            '<ul>' + linksHtml + '</ul>' +
+            '</div>' +
+            '</span>';
+    });
+    return buttonsHtml;
+}
 
 var glytoucan_ac;
 /**
@@ -58,125 +120,12 @@ function ajaxSuccess(data) {
         }
         formatEvidences(data.species);
         formatEvidences(data.glycoprotein);
-        formatEvidences(data.publication);
 
         //Adding breaklines
         if (data.glycoct) {
-            data.glycoct = data.glycoct.replace(/\\n/g, '<br />');
+            data.glycoct = data.glycoct.replace(/ /g, '<br>');
         }
-
-        if (data.classification) {
-
-            //Filter the Glycan type if it is "OTHER".
-            data.classification = data.classification.filter(function(current, index, classArray){
-                return current.type.name.toUpperCase() != "OTHER";
-            });
-
-             //Set the Glycan sub type to "" if it is "OTHER".
-            for (var i = 0; data.classification && i < data.classification.length ; i++) {
-                if (data.classification[i].subtype.name.toUpperCase() == "OTHER"){
-                    data.classification[i].subtype.name = "";
-                }
-            }
-        }
-        
-        var itemscrossRef = [];
-        //check data.
-        if (data.crossref) {
-            for (var i = 0; i < data.crossref.length; i++) {
-                var crossrefitem = data.crossref[i];
-                var found = '';
-                for (var j = 0; j < itemscrossRef.length; j++) {
-                    var databaseitem = itemscrossRef[j];
-                    if (databaseitem.database === crossrefitem.database) {
-                        found = true;
-                        databaseitem.links.push({
-                            url: crossrefitem.url,
-                            id: crossrefitem.id
-                        });
-                    }
-                }
-                if (!found) {
-                    itemscrossRef.push({
-                        database: crossrefitem.database,
-                        links: [{
-                            url: crossrefitem.url,
-                            id: crossrefitem.id
-                        }]
-                    });
-                }
-            }
-
-            data.itemscrossRef = itemscrossRef;
-        }
-        
-        var itemspublication = [];
-        if (data.publication) {
-            for (var i = 0; i < data.publication.length; i++) {
-                var publicationitem = data.publication[i];
-                var found = '';
-                for (var j = 0; j < itemspublication.length; j++) {
-                    var databaseitem1 = itemspublication[j];
-                    if (databaseitem1.resource === publicationitem.resource) {
-                        found = true;
-                        databaseitem1.links.push({
-                            url: publicationitem.url,
-                            id: publicationitem.id,
-                            name: publicationitem.name
-                        });
-                    }
-                }
-                if (!found) {
-                    itemspublication.push({
-                        resource: publicationitem.resource,
-                        links: [{
-                            url: publicationitem.url,
-                            id: publicationitem.id,
-                            name: publicationitem.name
-                        }]
-                    });
-                }
-            }
-
-            data.itemspublication = itemspublication;
-        }
-        // Sorting composition residues in specific order - hex hexnac dhex neuac neugc … other.
-        // This will help mustache template to show residues in specific order. 
-        if (data.composition) {
-            var mapComp = { "hex":1, "hexnac":2, "dhex":3, "neuac":4, "neugc":5, "other":7 };     
-
-            data.composition = data.composition.sort(function(a, b){ 
-
-                var resVal1 = mapComp[a.residue.toLowerCase()];
-                var resVal2 = mapComp[b.residue.toLowerCase()]
-                
-                if (!resVal1)
-                    resVal1 = 6;
-
-                if (!resVal2)
-                    resVal2 = 6;
-
-                return resVal1 - resVal2;
-            });
-
-            // Replacing residue names with the ones to be displayed.
-            for (var i = 0; i < data.composition.length; i++) {
-                if (data.composition[i].residue == "hex"){
-                    data.composition[i].residue = "Hex";
-                } else  if (data.composition[i].residue == "hexnac"){
-                    data.composition[i].residue = "HexNAc";
-                } else if (data.composition[i].residue == "dhex"){
-                    data.composition[i].residue = "dHex";
-                } else if (data.composition[i].residue == "neuac"){
-                    data.composition[i].residue = "NeuAc";
-                } else if (data.composition[i].residue == "neugc"){
-                    data.composition[i].residue = "NeuGc";
-                } else if (data.composition[i].residue == "other"){
-                    data.composition[i].residue = "(+x other residues)";
-                }
-            }
-        }
-
+        data.wurcs = data.wurcs.replace(/ /g, '<br>');
         if (data.mass) {
             data.mass = addCommas(data.mass);
         }
@@ -186,20 +135,20 @@ function ajaxSuccess(data) {
 
         $container.html(html);
         //setupEvidenceList();
-        // $container.find('.open-close-button').each(function (i, element) {
-        //     $(element).on('click', function () {
-        //         var $this = $(this);
-        //         var buttonText = $this.text();
+        $container.find('.open-close-button').each(function (i, element) {
+            $(element).on('click', function () {
+                var $this = $(this);
+                var buttonText = $this.text();
 
-        //         if (buttonText === '+') {
-        //             $this.text('-');
-        //             $this.parent().next().show();
-        //         } else {
-        //             $this.text('+');
-        //             $this.parent().next().hide();
-        //         }
-        //     });
-        // });
+                if (buttonText === '+') {
+                    $this.text('-');
+                    $this.parent().next().show();
+                } else {
+                    $this.text('+');
+                    $this.parent().next().hide();
+                }
+            });
+        });
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -227,9 +176,6 @@ function ajaxSuccess(data) {
             }],
             pagination: 10,
             data: items,
-            onSort: function () {
-                setTimeout(setupEvidenceList, 500);
-            }
 
         });
 
@@ -266,9 +212,6 @@ function ajaxSuccess(data) {
             data: data.glycoprotein,
             onPageChange: function () {
                 setupEvidenceList();
-            },
-            onSort: function () {
-                setTimeout(setupEvidenceList, 500);
             }
         });
     }
@@ -297,7 +240,27 @@ function LoadData(glytoucan_ac) {
     // calls the service
     $.ajax(ajaxConfig);
 }
+// show and hide evidences 
+function setupEvidenceList() {
+    var $evidenceBadges = $('.evidence_badge');
+    $evidenceBadges.each(function () {
+        $(this).find('button').on('click', show_evidence);
+    });
+}
 
+
+function show_evidence() {
+    var $evidenceList = $(this).next();
+    var isHidden = $evidenceList.hasClass('hidden');
+    // $(".evidence_links").addClass("hidden");
+
+    if (isHidden) {
+        $evidenceList.removeClass("hidden");
+    } else {
+        $evidenceList.addClass("hidden");
+    }
+
+}
 
 /**
  * getParameterByName function to extract query parametes from url
@@ -336,7 +299,7 @@ function updateBreadcrumbLinks() {
         $('#breadcrumb-search').attr("href", "global_search_result.html?search_query=" + globalSearchTerm);
         if (listID)
             $('#breadcrumb-list').attr("href", "glycan_list.html?id=" + listID + "&gs=" + globalSearchTerm);
-        else
+        else 
             $('#li-breadcrumb-list').css('display', 'none');
     } else {
         $('#breadcrumb-search').attr("href", "glycan_search.html?id=" + listID);
@@ -356,8 +319,6 @@ function updateBreadcrumbLinks() {
 function downloadPrompt() {
     var page_type = "glycan_detail";
     var format = $('#download_format').val();
-    if (format == "png")
-        page_type = "glycan_image";
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(glytoucan_ac, format, IsCompressed, page_type);
 }

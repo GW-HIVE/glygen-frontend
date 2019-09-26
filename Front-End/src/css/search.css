@@ -140,10 +140,6 @@ select {
     margin-bottom: 20px;
 }
 
-.gg-form-mass-margin {
-    margin-top: -49px;
-}
-
 .col-25 {
     float: left;
     width: 25%;
@@ -355,10 +351,6 @@ select {
     .sequence-label {
         margin-bottom: -3%;
     }
-
-    .gg-form-mass-margin {
-        margin-bottom: 20px !important;
-    }
 }
 .pathway-label {
     margin-top: 2%;
@@ -508,10 +500,6 @@ select {
     font-size: inherit;
     line-height: inherit;
     color: #555;
-}
-
-.ui-autocomplete-category {
-    font-weight: bold;
 }
 
 .chosen-drop {

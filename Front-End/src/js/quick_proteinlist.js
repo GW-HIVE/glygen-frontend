@@ -23,7 +23,7 @@ var page = 1;
 var sort = 'protein_name_long';
 var dir = 'desc'
 var url = getWsUrl('protein_list');
-var limit = 20;
+var limit = 25;
 
 /**
  * it creates user interface for summary
@@ -33,7 +33,7 @@ var limit = 20;
  */
 function buildSummary(queryInfo, question) {
     var summaryTemplate = $('#summary-template').html();
-    queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    queryInfo.execution_time= moment().format('MMMM Do YYYY, h:mm:ss a');
     queryInfo[question] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
@@ -44,7 +44,17 @@ function buildSummary(queryInfo, question) {
  * @param {string} total_length the dataset of pagination info is retun from server
  */
 function totalNoSearch(total_length) {
-    $('.searchresult').html("\"" + total_length + " Proteins were found\"");
+    $('.searchresult').html( "\""  + total_length + " Proteins were found\"");
+}
+
+/**
+ * Redirect to searchPage with id after clicking editSearch
+ *
+ */
+function editSearch() {
+    var question =  getParameterByName('question');
+    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    activityTracker("user", id, "edit search");
 }
 
 /**
@@ -85,7 +95,7 @@ function ajaxListSuccess(data) {
     if (data.code) {
         console.log(data.code);
         displayErrorByCode(data.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("error", id, "error code: " + data.code +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     } else {
         var $table = $('#gen-table');
         var items = [];
@@ -98,8 +108,8 @@ function ajaxListSuccess(data) {
                     gene_name: protein.gene_name,
                     protein_name_long: protein.protein_name_long,
                     organism: protein.organism,
-                    refseq_name: protein.refseq_name,
-                    refseq_ac: protein.refseq_ac
+                    refseq_name:protein.refseq_name,
+                    refseq_ac:protein.refseq_ac
                 });
             }
         }
@@ -110,7 +120,7 @@ function ajaxListSuccess(data) {
         buildSummary(data.query, question);
         document.title = 'Quick_Protein-list';
         lastSearch = data;
-        activityTracker("user", id, "successful response " + question + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+        activityTracker("user", id, "successful response "+ question +" (page: "+ page+", sort: "+ sort+", dir: "+ dir+", limit: "+ limit +")");
     }
 }
 
@@ -162,8 +172,8 @@ $(document).ajaxStop(function () {
     $('#loading_image').fadeOut();
 });
 
-$(document).ready(function () {
-    $('#gen-table').on("sort.bs.table", function (event, field, order) {
+$(document).ready(function(){
+    $('#gen-table').on("sort.bs.table", function(event,field,order){
         // event.preventDefault();
         event.stopPropagation();
         sort = field;

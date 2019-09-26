@@ -25,6 +25,39 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
+/**
+ * function returns current browser language
+ * @returns {string} String containing browser language
+ */
+function getLanguage() {
+    return navigator.language || 'en-US';
+}
+
+/**
+ * function returns separator value based on current browser language and separator type.
+ * @param {string} type contains separator type, e.g 'group', 'decimal' etc.
+ * @returns {string} String containing separator value.
+ */
+function getSeparatorValue(type) {
+    var dummy = 9999.9;
+    var spVal = ".".toLocaleString(getLanguage());
+    var value = Intl.NumberFormat(getLanguage()).formatToParts(dummy).find(entry => entry.type === type).value;
+
+    if (value === spVal) {
+        return '\\.'.toLocaleString(getLanguage());
+    }
+    return value;
+}
+
+/**
+ * function converts browser selected language formatted Number value into Number value and returns the Number value.
+ * @param {string} value Number value in browser selected language format.
+ * @returns {string} String containing converted Number value.
+ */
+function convertNumberValue(value) {
+    var numValue = value.replace(new RegExp(getSeparatorValue('group'), 'g'), '');
+    return numValue.replace(new RegExp(getSeparatorValue('decimal'), 'g'), '.');
+}
 
 function databasecolor(name) {
     switch (name) {
@@ -42,8 +75,6 @@ function databasecolor(name) {
         case 'mgi': return '#ff8080';
         case 'hgnc': return '#518a8a';
         case 'homologene': return '#9a039a';
-        case 'oma': return '#89a15c';
-        case 'mgi_homologset': return '#e8a2e8';
 
     }
 }
@@ -66,7 +97,7 @@ function getErrorMessage(errorCode) {
             };
         case 'unexpected-field-in-query':
             return {
-                message: "This is an unexpected field input. Please try again",
+                message: "This is unexpected field input. Please try again",
                 title: "Unexpected Field Input Error"
             };
         case 'invalid-parameter-value-length':
@@ -409,44 +440,25 @@ function downloadFromServer(id, format, compressed, type) {
     $('#loading_image').fadeIn();
 
     var mimeType = "text";
-    var fields = undefined;
-    var data = "text";
-    var ext = "";
     if (format === "csv") {
         mimeType = "text/csv";
-        ext = ".csv";
     } else if (format === "fasta") {
         mimeType = "text/plain";
-        type = "protein_sequence";
-        ext = ".fasta";
     } else if (format === "json") {
         mimeType = "application/json";
-        ext = ".json";
-    } else if (format === "png") {
-        data = undefined;
-        fields = {responseType:"blob"};
+    } else if (format === "image") {
         mimeType = "image/png";
-        ext = ".png";
     } else if (format === "tsv") {
         mimeType = "text/tsv";
-        ext = ".tsv";
     }
 
-    if (compressed){
-        data = undefined;
-        fields = {responseType:"blob"};
-        mimeType += ", application/gzip";
-        ext += ".gzip";
-    }
-  
     $.ajax({
         method: 'POST',
-        dataType: data,
-        xhrFields: fields,
+        dataType: "text",
         url: getWsUrl('data_download') + "?query=" + JSON.stringify(download_query),
         success: function (result) {
             //uses the download.js library.
-            download(result, type + "_" + id + ext, mimeType);        // + "." + format
+            download(result, type + "_" + id, mimeType);        // + "." + format
             activityTracker("user", id, "successful download");
             $('#loading_image').fadeOut();
         },
@@ -526,31 +538,10 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
         $("#" + controlId).contents()[contentsIndex].data = prefix + jsonData[key].display_name + suffix;
     });
 }
-
-//Moved this function to navbar.js line 72
 // for Data and SPARQL link in header page
-//$(function () {
-    //$("#a_data").attr('href', ws_base_data);
-    //$("#a_sparql").attr('href', ws_base_sparql);
-//});
+$(function () {
+    $("#a_data").attr('href', ws_base_data);
+    $("#a_sparql").attr('href', ws_base_sparql);
+});
 
-
-// Details pages scrolling to top :
-// function scrollToPanel(hash) {
-//     //to scroll to the particular sub section.
-//     $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
-//     if ($(window).width() < 768) { //mobile view
-//         $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
-//         $('.cd-close-panel').addClass('move-left');
-//         $('body').addClass('cd-overlay');
-//     } else {
-//         $('body,html').animate({
-//             'scrollTop': $(hash).offset().top - 19
-//         }, 200);
-//     }
-// }
-
-// if (window.location.hash) {
-//     scrollToPanel(window.location.hash);
-// }
 
