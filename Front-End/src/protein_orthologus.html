@@ -54,6 +54,7 @@
         <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
 </head>
 
+
 <body onload="tracking()">
     <div id="loading_image">
         <img src="images/page_loading.gif" />
@@ -72,7 +73,7 @@
             </div>
         </div>
         <div class="row" id="paginationctrl1">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-10 col-xs-10">
                 <form class="form-inline" onsubmit="return false;">
                     <label>Page</label>
                     <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
@@ -103,7 +104,7 @@
 
                     &nbsp; &nbsp;
 
-                    <button type="button" class="btn btn-primary"  onclick="editSearch();">Modify Search</button>
+                    <button type="button" class="btn btn-primary"  onclick="editSearch_quick();">Modify Search</button>
 
                     <p class="small">** To perform the same search again using the current version of the database, click <strong>“Update Results”</strong>.</p>
                 </div>
@@ -112,11 +113,14 @@
 
         <div class="row">
             <div class="col-md-12 col-xs-12">
+                    <!-- <table id="gen-table"></table> -->
                 <table id="gen-table" data-show-export="true" data-toggle="table" data-sort-name="uniprot_canonical_ac"  data-detail-formatter="detailFormat"
                        data-page-size="10">
                     <thead>
                     <tr>
-  
+                        <th  data-field="databases" data-sortable="true" data-formatter="EvidencebadgeFormator">Source</th>
+                        <th data-field="uniprot_canonical_ac" data-formatter="PageFormat" data-sortable="true">
+                            UniProtKB Accession</th>
                         <th data-field="protein_name" data-sortable="true">Protein Name  </th> 
                         <th data-field="organism" data-sortable="true">Organism
                         </th>
@@ -166,10 +170,10 @@
      <script src="js/utility.js"></script>
     <!-- script for glycan list page -->
     <script type="text/javascript" src="js/orthologus.js"></script>
-    <!-- <script type="text/javascript" src="js/quicksearch.js"></script> -->
-    <!-- <script type="text/javascript" src="js/quickproteinlist.js"></script> -->
     <!-- script for pagination page -->
     <script type="text/javascript" src="js/pagination.js"></script>
+     <!-- script for Badge -->
+     <script type="text/javascript" src="js/evidence_badge.js"></script>
     <!-- script for third party-->
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <!-- script for getting Web Service URLs -->
@@ -179,6 +183,9 @@
     <script src="js/activity_tracker.js"></script>
     <!-- script for navaigation -->
     <script src="js/navbar.js"></script>
+    <script src="js/edit_search.js"></script>
+    <!-- for evidence badge js -->
+<script src="js/evidence_badge.js"></script>
     <!--  w3 including footer-->
    
 

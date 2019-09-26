@@ -1,26 +1,61 @@
 Step 1:
-VPN to GW server; go.vpn.gwu.edu
+VPN to GW server: go.vpn.gwu.edu
  
 Step 2:
 Log into GW server;
-ssh pradeepkumar@glygen-vm-prd.biochemistry.gwu.edu
+ssh <user_name>@glygen-vm-prd.biochemistry.gwu.edu
 username: ***
 Password: ***
  
 Step 3:
-/* New users install/clone GITHUB 
-git clone https://github.com/GW-HIVE/glygen-frontend.git */
-move to folder glygen-frontend
- 
+New users clone GITHUB 
+git clone https://github.com/GW-HIVE/glygen-frontend.git
 
-update the glygen-frontend folder to updated GitHub repository
-run git pull
-GitHub user name and password
- 
 Step 4:
- 
-move to folder glygen-frontend/Front-End
-run maven, mvn compile
+Move to folder "\glygen-frontend"
+cd glygen-frontend
+
+Step 5:
+Change to the GitHub branch you wish to update on the server. git checkout <branch_name>
+git checkout ver_1.0
+
+Step 6:
+Check whether it's switched to the desired branch
+git branch
+
+The current working branch will be displayed with a "*" before it.
+  master
+* ver_1.0
+
+Step 7:
+Update this repository, pull the latest GitHub changes
+git pull
+
+You'll be prompted for your GitHub username and password, enter them.
+
+Step 8:
+Now move to folder "\Front-End"
+cd Front-End
+
+Step 9:
+Deploying code by running maven script
+
+For Test server:
+mvn -Ptest compile
+
+For Beta server:
+mvn -Pbeta compile
+
+For Production server:
+mvn -Pprod compile
+
+You'll receive a long message, with last part stating "BUILD SUCCESS".
+
+Step 10:
+Exit the server
+exit
+
+That's it, you are done.
  
 
  

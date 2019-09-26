@@ -16,7 +16,7 @@ var page = 1;
 var sort = 'uniprot_canonical_ac';
 var dir = $('.dir-select').val();
 var url = getWsUrl('list_glycangene') + "?action=get_user";
-var limit = 10;
+var limit = 20;
 
 function buildSummary(queryInfo, question) {
 
@@ -28,13 +28,16 @@ function buildSummary(queryInfo, question) {
     $('#summary-table').html(summaryHtml);
 }
 
-function editSearch() {
-    {
-        window.location.replace("glycan_search.html?id=" + id);
-        activityTracker("user", id, "edit search");
-    }
+/**
+ * Format function to create link to the details page
+ * @param {object} value - The data binded to that particular cell.
+ * @return -Details particular Protein Id
+ */
+function PageFormat(value, row, index, field) {
+    return "<a href='protein_detail.html?uniprot_canonical_ac=" + value + "&listID=" + id + "'>" + value + "</a>";
 }
 
+// to show results on list page 
 function totalNoSearch(total_length) {
     $('.searchresult').html("\"" + total_length + " Proteins were found\"");
 }
@@ -58,6 +61,7 @@ function ajaxListSuccess(data) {
             for (var i = 0; i < data.results.length; i++) {
                 var glycan = data.results[i];
                 items.push({
+                    evidence: glycan.evidence,
                     uniprot_canonical_ac: glycan.uniprot_canonical_ac,
                     gene_link: glycan.gene_link,
                     gene_name: glycan.gene_name,
@@ -65,12 +69,18 @@ function ajaxListSuccess(data) {
                     organism: glycan.organism,
                     tax_id: glycan.tax_id
                 });
+                // this is in evidence_badge js
+                formatEvidences(items);
             }
         }
 
         $table.bootstrapTable('removeAll');
         $table.bootstrapTable('append', items);
 
+        // this is in evidence_badge js
+        setupEvidenceList();
+
+        // this is in pagination js
         buildPages(data.pagination);
         buildSummary(data.query, question);
 
@@ -78,17 +88,6 @@ function ajaxListSuccess(data) {
         activityTracker("user", id, "successful response " + question + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
     }
 }
-
-
-
-function editSearch() {
-    var question = getParameterByName('question');
-
-    window.location.replace("quick_search.html?id=" + id + '&question=' + question);
-    activityTracker("user", id, "edit search");
-}
-
-
 /**
  * LoadDataList function to configure and start the request to GWU  service
  * @param {string} id - The glycan id to load
@@ -102,7 +101,6 @@ function LoadDataList() {
         success: ajaxListSuccess,
         error: ajaxFailure
     };
-
 
     $.ajax(ajaxConfig);
 }

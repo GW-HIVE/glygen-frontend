@@ -64,10 +64,20 @@ function editSearch() {
     var newUrl;
     const stat = getParameterByName("stat");
 
-    if (question && (question === 'QUESTION_TRY1')) {
-        newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
-    } else if (question && (question === 'QUESTION_TRY2')) {
-        newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2'+ '#' +question;
+        if (question && (question === 'QUESTION_TRY1')) {
+            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
+        }
+        else if (question && (question === 'QUESTION_TRY2')) {
+            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2'+ '#' +question;
+
+           // window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
+
+        } else if (globalSearchTerm) {
+            newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
+        }
+        else {
+            newUrl = "protein_search.html?id=" + id;
+        }
 
        // window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
 
@@ -80,7 +90,7 @@ function editSearch() {
     }
 
     window.location.replace(newUrl);
-    activityTracker("user", id, "edit search");   
+    activityTracker("user", id, "edit search");
 }
 
 /**
@@ -189,7 +199,7 @@ $(document).ajaxStop(function () {
 });
 
 /**
- * Gets the values selected in the download dropdown 
+ * Gets the values selected in the download dropdown
  * and sends to the downloadFromServer() function in utility.js
  * @author Gaurav Agarwal
  * @since Oct 22, 2018.
