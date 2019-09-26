@@ -40,9 +40,7 @@ function buildSummary(queryInfo) {
     }
     var question = getParameterByName('question');
     if (question) {
-        queryInfo = {
-            question: MESSAGES[question]
-        };
+        queryInfo = { question: MESSAGES[question] };
     }
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
@@ -62,25 +60,27 @@ function totalNoSearch(total_length) {
  * @function [[editSearch]] returns to search page with prefield fields
  */
 function editSearch() {
-    {
-        var question = getParameterByName('question');
-        var newUrl;
-        const stat = getParameterByName("stat");
-        if (question && (question === 'QUESTION_TRY1')) {
-            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
-        } else if (question && (question === 'QUESTION_TRY2')) {
-            newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2';
-        } else if (globalSearchTerm) {
-            newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
-        } else if (stat) {
-            newUrl = 'statistics.html#' + stat;
-        } else {
-            newUrl = "protein_search.html?id=" + id;
-        }
+    var question = getParameterByName('question');
+    var newUrl;
+    const stat = getParameterByName("stat");
 
-        window.location.replace(newUrl);
-        activityTracker("user", id, "edit search");
+    if (question && (question === 'QUESTION_TRY1')) {
+        newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
+    } else if (question && (question === 'QUESTION_TRY2')) {
+        newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_2'+ '#' +question;
+
+       // window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
+
+    } else if (globalSearchTerm) {
+        newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
+    } else if (stat) {
+        newUrl = 'statistics.html#' + stat;
+    } else {
+        newUrl = "protein_search.html?id=" + id;
     }
+
+    window.location.replace(newUrl);
+    activityTracker("user", id, "edit search");   
 }
 
 /**
@@ -216,7 +216,6 @@ function updateBreadcrumbLinks() {
 
 
 $(document).ready(function () {
-    // limit = $(element).val();
     LoadDataList();
     updateBreadcrumbLinks();
 });

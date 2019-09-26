@@ -76,6 +76,9 @@ p {
     font-size: 1.3em;
     font-family: "Verdana", "Geneva", sans-serif;
 }
+.bold {
+	font-weight: bold;
+}
 
 .statistics-table td {
     width: 83%;
@@ -144,7 +147,7 @@ p {
     color: #AFD9FD !important;
 }
 
-.nav li.current a {
+.nav li.current > a {
     margin-right: -15px;
     margin-left: -15px;
 }
@@ -258,6 +261,11 @@ p {
 /*  -------------------------
     Homepage 
 -----------------------------  */
+/* Style top info card */
+.top-info-card img {
+    margin: 0 20px 5px 0;
+}
+
 #glygen-h1 {
     font-family: Georgia, sans-serif;
     color: #2E78B7;
@@ -478,8 +486,14 @@ input:checked + .slider:before {
 ------------------------------*/
 #license-tabble {
     border: 1px solid #ddd;
-    width: 99.999%;
+    width: 50%;
     text-indent: 10px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.license-logos img {
+    padding-top: 15px;
 }
 
 .panel-heading {
@@ -565,7 +579,6 @@ label.labelContactUs {
 
 .about-block {
     padding-top: 10px;
-
     padding-right: 80px;
     padding-left: 80px;
     padding-bottom: 10px;
@@ -593,8 +606,8 @@ label.labelContactUs {
 }
 
 .mission-img {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about-mission.gif') top center no-repeat;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about-mission.gif') top center no-repeat;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.4))), url('../images/about/about-mission.png') top center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url('../images/about/about-mission.png') top center no-repeat;
 }
 
 .cover {
@@ -622,13 +635,69 @@ label.labelContactUs {
 
 .about-map-img {
     background-size: cover;
-    margin-top: -60px;
-   
+    margin-top: -60px; 
+}
+/*Background img for team members*/
+#team-members {
+    background: url("../images/about/bg-team.jpg") no-repeat fixed center;
+    background-size: cover;
+}
+
+.content-box-lg {
+    padding: 60px 0;
+}
+
+#team-members .content-box-lg {
+/*    background: rgba(83, 138, 185, 0.6);*/
+    background: rgba(94, 144, 186, 0.5);
+}
+
+#team-members-heading h1 {
+    color: #fff; 
+    font-size: 45px;
+    font-weight: 50;
+    text-transform: uppercase;
+    margin: 0;
+    display: inline-block;
+}
+
+#team-members-heading h1 span {
+/*
+    color: #2F78B7;
+    color: #60BA4B;
+*/
+    color: #fff;
+    font-weight: 900;
+}
+
+#team-members p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 50;
+    margin: 18px 0 0 0;
+}
+
+.univ-logo {
+    padding: 10px 20px;
+    max-width: 150px;
+    margin: 0 auto;
+    line-height: 100px;
+}
+
+.univ-logo img {
+    display: inline-block !important;
 }
 
 /* ------------------------------------------
     Resources
 --------------------------------------------*/
+.resources-container {
+    background: #fff; 
+    margin-bottom: 35px;
+    padding: 0 35px;
+   
+}
+
 .resources-top-img {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(46, 120, 160, 0.8)), color-stop(rgba(46, 120, 180, 0.9)), to(rgba(46, 120, 183, 0.8))), url('../images/resources/resources-top-img.png') top center no-repeat;
     background: linear-gradient(rgba(46, 120, 160, 0.8), rgba(46, 120, 180, 0.9), rgba(46, 120, 183, 0.8)), url('../images/resources/resources-top-img.png') top center no-repeat;
@@ -678,7 +747,7 @@ label.labelContactUs {
         0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
-#img-hr {
+.img-hr {
     width: 200px;
     border-top: 2px solid #f8f8f8;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
@@ -708,10 +777,12 @@ label.labelContactUs {
     background: #E5EEF6;
 }
 
+/*
 .research-data-table {
     width: 99.98%;
     float: left;
 }
+*/
 
 .research-data-table thead {
     background: #659BC9;
@@ -929,12 +1000,19 @@ ____________________________________  */
     min-width: 250px !important;
     margin-right: 3%;
     padding: 6%;
-   font-size: 10px !important;
+    font-size: 10px !important;
 /*    padding-right: 2%;*/
 }
 
 .dropdown-menu-detail {
     padding: 2%;
+}
+
+.dropdown-menu-box {
+    min-width: 220px !important;
+    padding: 15px;
+    font-size: 10px;
+    width: auto;
 }
 
 .dropdown-menu-motif {
@@ -951,9 +1029,6 @@ ____________________________________  */
 .dropdown-menu {
     min-width: 160px;
     margin-right: 2.2%;
-    padding: 15px;
-    font-size: 10px;
-    width: auto;
 }
 .gg-download {
     -webkit-box-shadow: none !important;
@@ -962,26 +1037,6 @@ ____________________________________  */
 /*  margin-bottom: 1em;*/
 /*  margin-bottom: -30px;*/
 }
-@media only screen and (max-width: 700px) {
-    .gg-download5 {
-    padding-right: 10%;
-  } 
-    
-}
-@media only screen and (min-width: 1301px) and (max-width: 1900px) {
-  .gg-download5 {
-    margin-left: 18%;
-  }
-}
-
-@media only screen and (min-width: 1024px) and (max-width: 1300px) {
-  .gg-download5 {
-    margin-right: 29%;
-  }
-}
-
-/* end of download class */
-
 
 /*------   End   --------*/
 .container-contact {
@@ -1017,9 +1072,6 @@ ____________________________________  */
 }
 
 @media only screen and (max-width: 1024px) {
-    .glygenIconIndex {
-        width: 50% !important;
-    }
      body  {
         margin-bottom: 15%;
     }
@@ -1029,8 +1081,14 @@ ____________________________________  */
 }
 
 @media only screen and (max-width: 768px) {
+    
     body  {
         margin-bottom: 15%;
+    }
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        
     }
     .homepageContainer {
         padding-bottom: 5%;
@@ -1060,7 +1118,26 @@ ____________________________________  */
     } 
 }
 
+@media only screen and (max-width: 767px) {
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        float: none !important;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+    .license-logos img {
+    width: 70%;
+    }
+}
+
 @media only screen and (max-width: 700px) {
+    /* Style Homepage */
+    .top-info-card img {
+        max-width: 70%;
+        float: none !important;
+        margin: 0 auto;
+    }
     .gg-settings {
         width: auto;
         margin: 0 auto;
@@ -1109,7 +1186,17 @@ ____________________________________  */
 }
 
 @media (max-width: 320px) {
-    
+    /* Style Homepage */
+    .top-info-card h1 {
+        font-size: 28px;
+    }
+    .top-info-card h3 {
+        font-size: 20px;
+    }
+    .top-info-card img {
+        float: none !important;
+        margin: 0 auto;
+    }
 }
 
 /* --- css for breadcrumb starts --- */
