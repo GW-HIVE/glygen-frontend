@@ -165,11 +165,11 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 /**
  * Donut glycan chart displayes number of human and mouse glycans.
  */
-function donutChartGlycan(dummy, data, id) {
+function donutGlycanHomoMusRat(dummy, data, id) {
 	var text = "",
 		widthD = 150,
 		heightD = 150,
-		donutWidth = 20,
+		donutWidth = 13,
 		duration = 750,
 		margin = {
 			top: 0,
@@ -177,10 +177,12 @@ function donutChartGlycan(dummy, data, id) {
 			bottom: 0,
 			left: 0
 		},
-		radiusD = Math.min(widthD, heightD) / 2,
-		radiusD2 = radiusD - donutWidth,
-		colorD = d3.scaleOrdinal(d3.schemeCategory10),
-		colorD2 = d3.scaleOrdinal(d3.schemeCategory10);
+		radiusHomo = Math.min(widthD, heightD) / 2,
+		radiusMus = radiusHomo - donutWidth,
+		radiusRat = radiusMus - donutWidth,
+		colorHomo = d3.scaleOrdinal(d3.schemeCategory10),
+		colorMus = d3.scaleOrdinal(d3.schemeCategory10),
+		colorRat = d3.scaleOrdinal(d3.schemeCategory10);
 
 	var canvas = d3.select(id)
 		.append("svg")
@@ -196,19 +198,26 @@ function donutChartGlycan(dummy, data, id) {
 			' ' +
 			(heightD + margin.top + margin.bottom)
 		);
-	var group = canvas.append("g")
+	var groupHomo = canvas.append("g")
 		.attr('transform', 'translate(' + (widthD / 2) + ',' + (heightD / 2) + ')');
 
-	var group2 = canvas.append("g")
+	var groupMus = canvas.append("g")
+		.attr('transform', 'translate(' + (widthD / 2) + ',' + (heightD / 2) + ')');
+	
+	var groupRat = canvas.append("g")
 		.attr('transform', 'translate(' + (widthD / 2) + ',' + (heightD / 2) + ')');
 
-	var arc = d3.arc()
-		.innerRadius(radiusD - donutWidth)
-		.outerRadius(radiusD);
+	var arcHomo = d3.arc()
+		.innerRadius(radiusHomo - donutWidth)
+		.outerRadius(radiusHomo);
 
-	var arc2 = d3.arc()
-		.innerRadius(radiusD2 - donutWidth)
-		.outerRadius(radiusD2);
+	var arcMus = d3.arc()
+		.innerRadius(radiusMus - donutWidth)
+		.outerRadius(radiusMus);
+	
+	var arcRat = d3.arc()
+		.innerRadius(radiusRat - donutWidth)
+		.outerRadius(radiusRat);
 
 	var pie = d3.pie()
 		.value(function (d) {
@@ -216,8 +225,8 @@ function donutChartGlycan(dummy, data, id) {
 		})
 		.sort(null);
 
-	var theArc = group.selectAll(".arc")
-		.data(pie(data.glycan_homo))
+	var theArcHomo = groupHomo.selectAll(".arc")
+		.data(pie(data.glycan_homo_donut))
 		.enter()
 		.append("g")
 		.attr("class", "arc")
@@ -233,22 +242,21 @@ function donutChartGlycan(dummy, data, id) {
 					],
 					"operation":"or"
 				},
-				
 				"glycan_type": d.data.glycan_type
 			});
 		})
 		.on("mouseover", function (d) {
-			let group = d3.select(this)
+			let groupH = d3.select(this)
 				.append("g")
 				.attr("class", "text-group")
 
-			group.append("text")
+			groupH.append("text")
 				.attr("class", "name-text")
 				.text(`${d.data.name}`)
 				.attr('text-anchor', 'middle')
 				.attr('dy', '-1.2em');
 
-			group.append("text")
+			groupH.append("text")
 				.attr("class", "value-text")
 				.text(`${d.data.size}`)
 				.attr('text-anchor', 'middle')
@@ -257,12 +265,12 @@ function donutChartGlycan(dummy, data, id) {
 		.on("mouseout", function (d) {
 			d3.select(this)
 				.style("cursor", "none")
-				.style("fill", colorD(this._current))
+				.style("fill", colorHomo(this._current))
 				.select(".text-group").remove();
 		})
 		.append('path')
-		.attr('d', arc)
-		.attr('fill', (d, i) => colorD(i))
+		.attr('d', arcHomo)
+		.attr('fill', (d, i) => colorHomo(i))
 		.on("mouseover", function (d) {
 			d3.select(this).transition()
 				.duration('50')
@@ -279,8 +287,8 @@ function donutChartGlycan(dummy, data, id) {
 			this._current = i;
 		});
 
-	var theArc2 = group2.selectAll(".arc")
-		.data(pie(data.glycan_mus))
+	var theArcMus = groupMus.selectAll(".arc")
+		.data(pie(data.glycan_mus_donut))
 		.enter()
 		.append("g")
 		.attr("class", "arc")
@@ -301,17 +309,17 @@ function donutChartGlycan(dummy, data, id) {
 			});
 		})
 		.on("mouseover", function (d) {
-			let group2 = d3.select(this)
+			let groupM = d3.select(this)
 				.append("g")
 				.attr("class", "text-group")
 
-			group2.append("text")
+			groupM.append("text")
 				.attr("class", "name-text")
 				.text(`${d.data.name}`)
 				.attr('text-anchor', 'middle')
 				.attr('dy', '-1.2em');
 
-			group2.append("text")
+			groupM.append("text")
 				.attr("class", "value-text")
 				.text(`${d.data.size}`)
 				.attr('text-anchor', 'middle')
@@ -320,12 +328,75 @@ function donutChartGlycan(dummy, data, id) {
 		.on("mouseout", function (d) {
 			d3.select(this)
 				.style("cursor", "none")
-				.style("fill", colorD2(this._current))
+				.style("fill", colorMus(this._current))
 				.select(".text-group").remove();
 		})
 		.append('path')
-		.attr('d', arc2)
-		.attr('fill', (d, i) => colorD2(i))
+		.attr('d', arcMus)
+		.attr('fill', (d, i) => colorMus(i))
+		.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
+		})
+		.on("mouseout", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '1')
+				.style("cursor", "none");
+		})
+		.each(function (d, i) {
+			this._current = i;
+		});
+	
+	var theArcRat = groupRat.selectAll(".arc")
+		.data(pie(data.glycan_rat_donut))
+		.enter()
+		.append("g")
+		.attr("class", "arc")
+		// On click goes to list page
+		.on("click", function (d) {
+			//console.log(d.data.name); 
+			searchGlycansBy({
+				"organism": {
+					organism_list: [
+						{
+							"id": d.data.organism.id,
+							"name": d.data.organism.name
+						}
+					],
+					"operation":"or"
+				},
+				"glycan_type": d.data.glycan_type
+			});
+		})
+		.on("mouseover", function (d) {
+			let groupR = d3.select(this)
+				.append("g")
+				.attr("class", "text-group")
+
+			groupR.append("text")
+				.attr("class", "name-text")
+				.text(`${d.data.name}`)
+				.attr('text-anchor', 'middle')
+				.attr('dy', '-1.2em');
+
+			groupR.append("text")
+				.attr("class", "value-text")
+				.text(`${d.data.size}`)
+				.attr('text-anchor', 'middle')
+				.attr('dy', '.6em');
+		})
+		.on("mouseout", function (d) {
+			d3.select(this)
+				.style("cursor", "none")
+				.style("fill", colorRat(this._current))
+				.select(".text-group").remove();
+		})
+		.append('path')
+		.attr('d', arcRat)
+		.attr('fill', (d, i) => colorRat(i))
 		.on("mouseover", function (d) {
 			d3.select(this).transition()
 				.duration('50')
@@ -351,6 +422,7 @@ function pieChartMotif(dummy, data, id) {
 		width = 150,
 		height = 150,
 		duration = 750,
+		donutWidth = 40,
 		margin = {
 			top: 0,
 			right: 0,
@@ -380,7 +452,7 @@ function pieChartMotif(dummy, data, id) {
 		.attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
 
 	var arc = d3.arc()
-		.innerRadius(0)
+		.innerRadius(radius - donutWidth)
 		.outerRadius(radius - 5);
 
 	var pie = d3.pie()
@@ -1382,7 +1454,7 @@ function searchGlycansBy(param) {
         	},
 			"glycan_type": param.glycan_type
 		})
-		chartId = "pie_chart_glycan";
+		chartId = "donut_glycan_homo_mus_rat";
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
@@ -1395,7 +1467,7 @@ function searchGlycansBy(param) {
 				"operation":"or"
         	}
 		})
-		chartId = "venn_glycans_homo_mus";
+		chartId = "venn_glycans_homo_mus_rat";
 	}
 
 	var json = "query=" + JSON.stringify(formObject);

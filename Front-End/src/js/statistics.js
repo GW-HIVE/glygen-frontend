@@ -170,8 +170,8 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------
 	var glycan_homo_mus = vennGlycanHomoMus;
-	d3.select('#venn_glycans_homo_mus')
-		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus"); // draw chart in div
+	d3.select('#venn_glycans_homo_mus_rat')
+		.call(glycan_homo_mus, jsonData, "#venn_glycans_homo_mus_rat"); // draw chart in div
 
 	//--------------------
 	//    Sunburst glycan chart. Glycan types and subtypes.
@@ -183,9 +183,9 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//-------------------------------
 	//    Donut Glycan Chart. Human and mouse glycans.
 	//-------------------------------
-	var donutGlycan = donutChartGlycan;
-	d3.select('#donut_chart_glycan')
-		.call(donutGlycan, jsonData, "#donut_chart_glycan"); // draw chart in div
+	var donutGlycan = donutGlycanHomoMusRat;
+	d3.select('#donut_glycan_homo_mus_rat')
+		.call(donutGlycan, jsonData, "#donut_glycan_homo_mus_rat"); // draw chart in div
 
 	//-------------------------------
 	//    Pie Motif Chart. Motifs and their frequencies

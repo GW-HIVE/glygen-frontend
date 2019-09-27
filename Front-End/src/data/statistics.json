@@ -202,8 +202,13 @@
 			"sets": [0],
 			"tooltipname": "Human glycans",
 			"organism": {
-				"id": 9606,
-				"name": "Homo sapiens"
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				],
+				"operation":"or"
 			},
 			"name": "Human glycans",
 			"size": 3302
@@ -212,20 +217,46 @@
 			"sets": [1],
 			"tooltipname": "Mouse glycans",
 			"organism": {
-				"id": 10090,
-				"name": "Mus musculus"
+				"organism_list": [
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					}
+				],
+				"operation":"or"		
 			},
 			"name": "Mouse glycans",
 			"size": 517
 		},
 		{
+			"sets": [2],
+			"tooltipname": "Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"or"		
+			},
+			"name": "Rat glycans",
+			"size": 715
+		},
+		{
 			"sets": [0, 1],
 			"tooltipname": "Human & Mouse glycans",
 			"name": "",
-			"size": 304
+			"size": 204
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Human & Rat glycans",
+			"name": "",
+			"size": 204
 		}
 	],
-	"glycan_homo": [{
+	"glycan_homo_donut": [{
 			"organism": {
 				"id": 9606,
 				"name": "Homo sapiens"
@@ -253,7 +284,7 @@
 			"size": 2001
 		}
 	],
-	"glycan_mus": [{
+	"glycan_mus_donut": [{
 			"organism": {
 				"id": 10090,
 				"name": "Mus musculus"
@@ -279,6 +310,34 @@
 			"glycan_type": "Other",
 			"name": "Mouse Other",
 			"size": 244
+		}
+	],
+	"glycan_rat_donut": [{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
+			"glycan_type": "N-Glycan",
+			"name": "Rat N-Glycans",
+			"size": 312
+		},
+		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
+			"glycan_type": "O-Glycan",
+			"name": "Rat O-Glycans",
+			"size": 23
+		},
+		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
+			"glycan_type": "Other",
+			"name": "Rat Other",
+			"size": 325
 		}
 	],
 	"pie_motif": [{
