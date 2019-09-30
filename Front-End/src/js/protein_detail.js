@@ -1,5 +1,5 @@
 //@author: Rupali Mahadik
-// (Rupali Mahadik-Mustache template, Glycosylation table, Highlighting sequence)
+// (Rupali Mahadik-Mustache template, Glycosylation table, Highlighting sequence,evidence display )
 // @description: UO1 Version-1.1.
 //@Date:19th Feb 2018. Rupali Mahadik-with dummy web service
 //@update: 3-April 2018. Rupali Mahadik-with real web service
@@ -14,370 +14,9 @@
 // @update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumbs
 // @update: April 7th, 2019 - Rupali Mahadik - Seqeunce display improved
 
-/**
- * Object to hold highlight data in state
- */
-var highlight = {};
-var SEQUENCE_ROW_RUN_LENGTH = 10;
-var SEQUENCE_SPACES_BETWEEN_RUNS = 1;
-
-/**
- * get glycosylation data
- * @param {array} glycosylationData
- * @param {string} type
- * @return an array of highlight info.
- */
-function getGlycosylationHighlightData(glycosylationData, type) {
-    var result = [];
-    var positions = {};
-    for (var x = 0; x < glycosylationData.length; x++) {
-        if (!positions[glycosylationData[x].position] && (glycosylationData[x].type === type)) {
-            positions[glycosylationData[x].position] = true;
-            result.push({
-                start: glycosylationData[x].position,
-                length: 1
-            });
-        }
-    }
-    return result;
-}
-
-/**
- * Getting mutation data
- * @param {array} mutationData
- * @return an array of highlight info.
- */
-function getMutationHighlightData(mutationData) {
-    var result = [];
-    var positions = {};
-    for (var x = 0; x < mutationData.length; x++) {
-        if (!positions[mutationData[x].start_pos]) {
-            positions[mutationData[x].start_pos] = true;
-            result.push({
-                start: mutationData[x].start_pos,
-                length: (mutationData[x].end_pos - mutationData[x].start_pos) + 1
-            });
-        }
-    }
-    return result;
-}
-
-/**
- * checking is highlighted or not
- * @param {number} position
- * @param {array} selection
- * @return:boolean if position in the ranges
- */
-function isHighlighted(position, selection) {
-    var result = false;
-    if (selection) {
-        for (var x = 0; x < selection.length; x++) {
-            var start = selection[x].start;
-            var end = selection[x].start + selection[x].length - 1;
-
-            if ((start <= position) && (position <= end)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-    return false;
-}
-
-/**
- * building highlight
- * @param {string} sequence
- * @param {object} highlightData:
- * @returns an array of each charcter of the sequence and is highlighted by its each type
- */
-function buildHighlightData(sequence, highlightData) {
-    var result = [];
-    if (sequence) {
-        for (var x = 0; x < sequence.length; x++) {
-            var position = x + 1;
-            result.push({
-                character: sequence[x],
-                n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
-                o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
-                mutation: isHighlighted(position, highlightData.mutation)
-            });
-        }
-        return result;
-    }
-    return [];
-}
-
-/**
- * building row
- * @param {array} rowData
- * @returns string of sequence
- */
-function buildRowText(rowData) {
-    var text = [];
-
-    for (var x = 0; x < rowData.length; x++) {
-        text.push(rowData[x].character);
-    }
-    return text.join('');
-}
-
-/**
- * building rowhighlight
- * @param {array} rowData
- * @param {string}type
- * @returns string of sequence
- */
-function buildRowHighlight(rowData, type) {
-    var highlight = [];
-    for (var x = 0; x < rowData.length; x++) {
-        if (rowData[x][type]) {
-            highlight.push('<span class="highlight-highlight-area">&nbsp;</span>');
-        } else {
-            highlight.push('&nbsp;');
-        }
-    }
-    return highlight.join('');
-}
-
-/**
- * creating row
- * @param {number} start
- * @param {array} rowData
- * @returns jquery object of the row
- */
-function createHighlightRow(start, rowData) {
-    var $row = $('<div class="highlight-row"></div>');
-    $('<span class="highlight-line-number"></span>')
-        .text(("     " + (start + 1)).slice(-5) + ' ')
-        .appendTo($row);
-
-    var $section = $('<span class="highlight-section"></span>');
-    $('<span class="highlight-text"></span>')
-        .html(buildRowText(rowData))
-        .appendTo($section);
-
-    $('<span class="highlight-highlight"></span>')
-        .attr('data-type', 'mutation')
-        .html(buildRowHighlight(rowData, 'mutation'))
-        .hide()
-        .appendTo($section);
-
-    $('<span class="highlight-highlight"></span>')
-        .attr('data-type', 'n_link_glycosylation')
-        .html(buildRowHighlight(rowData, 'n_link_glycosylation'))
-        .hide()
-        .appendTo($section);
-
-    $('<span class="highlight-highlight"></span>')
-        .attr('data-type', 'o_link_glycosylation')
-        .html(buildRowHighlight(rowData, 'o_link_glycosylation'))
-        .hide()
-        .appendTo($section);
-    $section.appendTo($row);
-    return $row;
-}
-
-/**
- * creating UI perline
- * @param {object} highlightData
- * @param {number} perLine
- */
-function createHighlightUi(highlightData, perLine) {
-    var $ui = $('<div class="highlight-display"></div>');
-    var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px; font-family:monospace; font-size: 14px;'>                +10        +20        +30        +40        +50</pre>";
-    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px; font-family:monospace; font-size: 14px;'>                 |          |          |          |          |</pre>";
-    $ui.append(seqTopIndex);
-    $ui.append(seqTopIndexLines);
-    for (var x = 0; x < highlightData.length; x += perLine) {
-        var rowDataTemp = adjustSequenceRuns(highlightData.slice(x, x + perLine));
-        var rowData = [];
-        for (var i = 0; i < rowDataTemp.length; i++) {
-            for (var s = 0; s < SEQUENCE_SPACES_BETWEEN_RUNS; s++) {
-                rowDataTemp[i].push({
-                    character: '&nbsp;',
-                    n_link_glycosylation: false,
-                    o_link_glycosylation: false,
-                    mutation: false
-                });
-            }
-            $.merge(rowData, rowDataTemp[i]);
-        }
-
-        var $row = createHighlightRow(x, rowData);
-        $ui.append($row);
-    }
-    $('#sequnce_highlight').append($ui);
-}
-
-var uniprot_canonical_ac;
-
-/**
- * Handling a succesful call to the server for details page
- * @param {Object} data - the data set returned from the server on success
- */
-function scrollToPanel(hash) {
-    //to scroll to the particular sub section.
-    if ($(window).width() < 768) { //mobile view
-        $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
-        $('.cd-close-panel').addClass('move-left');
-        $('body').addClass('cd-overlay');
-    } else {
-        $('body,html').animate({
-            'scrollTop': $(hash).offset().top - 19
-        }, 200);
-    }
-}
-
-/**
- * Sequence formatting Function
- * @param {string} sequenceString 
- * @return {string} 
- */
-function formatSequence(sequenceString) {
-    var perLine = 60;
-    var output = '';
-    var seqTopIndex = "<pre style='border:0px; padding:0px; margin-bottom:0px; font-family:monospace; font-size: 14px;'>                +10        +20        +30        +40        +50</pre>";
-    var seqTopIndexLines = "<pre style='border:0px; padding:0px; margin-bottom:0px; font-family:monospace;font-size: 14px;'>                 |          |          |          |          |</pre>";
-    output += seqTopIndex;
-    output += seqTopIndexLines;
-
-    for (var x = 0; x < sequenceString.length; x += perLine) {
-        //fix for IE 11 and lower where String.prototype.repeat() is not available
-        var nSpacesBetweenRuns = '';
-        for (var i = 0; i < SEQUENCE_SPACES_BETWEEN_RUNS; i++) {
-            nSpacesBetweenRuns += ' ';
-        }
-        var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(nSpacesBetweenRuns);
-        // var y = adjustSequenceRuns(sequenceString.substr(x, perLine)).join(' '.repeat(SEQUENCE_SPACES_BETWEEN_RUNS));
-        output += '<span class="non-selection">' + ("     " + (x + 1)).slice(-5) + ' </span>' + y + '\n'
-    }
-    return output;
-}
-
-/**
- * Adjusts a sequence array by splitting it into multiple arrays of max length defined by the constant SEQUENCE_ROW_RUN_LENGTH
- * @author Sanath Bhat
- * @since Nov 15, 2018.
- */
-function adjustSequenceRuns(sequence) {
-    var y_arr = [];
-    for (var i = 0; i < sequence.length; i += SEQUENCE_ROW_RUN_LENGTH) {
-        y_arr.push(sequence.slice(i, i + SEQUENCE_ROW_RUN_LENGTH));
-    }
-    return y_arr;
-}
-
-/**
- * Prints a number with commas as thousands separator
- * @param {object} nStr 
- * @return {integer} - returns number with comma ex. 1,000
- */
-function addCommas(nStr) {
-    nStr += '';
-    var x = nStr.split('.');
-    var x1 = x[0];
-    var x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
-}
 
 
-function formatEvidences(item) {
-    if (item && item.length) {
-        for (var i = 0; i < item.length; i++) {
-            var currentItem = item[i];
-            var databases = [];
-            if (currentItem && currentItem.evidence && currentItem.evidence.length) {
-                for (var j = 0; j < currentItem.evidence.length; j++) {
-                    var evidenceitem = currentItem.evidence[j];
-                    var found = '';
 
-                    for (var x = 0; x < databases.length; x++) {
-                        var databaseitem = databases[x];
-                        if (databaseitem.database === evidenceitem.database) {
-                            found = true;
-                            databaseitem.links.push({
-                                url: evidenceitem.url,
-                                id: evidenceitem.id
-                            });
-                        }
-                    }
-
-                    if (!found) {
-                        databases.push({
-                            database: evidenceitem.database,
-                            color: databasecolor(evidenceitem.database),
-                            links: [{
-                                url: evidenceitem.url,
-                                id: evidenceitem.id
-                            }]
-                        })
-                    }
-                }
-            }
-            currentItem.databases = databases;
-        }
-    }
-}
-
-function groupEvidences(item) {
-    //group by evidence ids
-    if (item && item.length) {
-        var evidencesMap = new Map();
-        for (var i = 0; i < item.length; i++) {
-            var currentItem = item[i];
-            for (var e = 0; e < currentItem.evidence.length; e++) {
-                if (!(evidencesMap.has(currentItem.evidence[e].id))) {
-                    evidencesMap.set(currentItem.evidence[e].id, [currentItem]);
-                }
-                else {
-                    evidencesMap.get(currentItem.evidence[e].id).push(currentItem);
-                }
-            }
-        }
-
-
-        //combine annotations for each evidence id
-        groupedEvidences = [];
-        evidencesMap.forEach(function (v, key) {
-            //combine annotations into the first, delete the rest
-            for (var i = 1; i < v.length; i++) {
-                v[0].annotation += "\n\n" + v[i].annotation;
-            }
-            groupedEvidences.push(v[0]);
-        });
-
-        return groupedEvidences;
-    }
-    return item;
-}
-
-
-function EvidencebadgeFormator(value, row, index, field) {
-    var buttonsHtml = "";
-    $.each(value, function (i, v) {
-        var linksHtml = "";
-        $.each(v.links, function (i, w) {
-            linksHtml += '<li class="linkHtml5">' +
-                '<a href="' + w.url + '" target="_blank">' + w.id + '</a></li>'
-        });
-
-        buttonsHtml += '<span class="evidence_badge">' +
-            '<button class="btn btn-primary color-' + v.database + '" type="button" style="background-color: ' + v.color + '; border-color: ' + v.color + '">' + v.database +
-            '&nbsp;&nbsp;&nbsp;<span class="badge">' + v.links.length + '</span>' +
-            '</button>' +
-            '<div class="hidden evidence_links">' +
-            '<ul>' + linksHtml + '</ul>' +
-            '</div>' +
-            '</span>';
-    });
-    return buttonsHtml;
-}
 /**
  * Handling a succesful call to the server for details page
  * @param {Object} data - the data set returned from the server on success
@@ -393,6 +32,19 @@ function ajaxSuccess(data) {
         if (data.sequence) {
             var originalSequence = data.sequence.sequence;
             data.sequence.sequence = formatSequence(originalSequence);
+            if (data.mass){
+                data.mass.chemical_mass = addCommas(data.mass.chemical_mass);
+
+            }
+            if (data.gene) {
+                for (var i = 0; i < data.gene.length; i++) {
+                    // assign the newly result of running formatSequence() to replace the old value
+                    if (data.gene[i].locus){
+                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
+                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                    }
+                }
+            }
 
             if (data.isoforms) {
                 for (var i = 0; i < data.isoforms.length; i++) {
@@ -417,7 +69,28 @@ function ajaxSuccess(data) {
                 }
             }
         }
+
+        if (data.go_annotation && data.go_annotation.categories) {
+
+            // Sorting Go term categories in specific order - 1. "MOLECULAR FUNCTION", 2. "BIOLOGICAL PROCESS", 3. "CELLULAR COMPONENT".
+            // This will help mustache template to show categories in specific order. 
+            var mapGOTerm = { "MOLECULAR FUNCTION":1, "BIOLOGICAL PROCESS":2, "CELLULAR COMPONENT":3 };     
+
+            data.go_annotation.categories = data.go_annotation.categories.sort(function(a, b){ 
+                var resVal1 = mapGOTerm[a.name.toUpperCase()];
+                var resVal2 = mapGOTerm[b.name.toUpperCase()]
+
+                return resVal1 - resVal2;
+            });
+
+            for (var i = 0; i < data.go_annotation.categories.length; i++) {
+                // assign the newly result of running formatSequence() to replace the old value
+                formatEvidences(data.go_annotation.categories[i].go_terms);
+            }
+        }
+
         formatEvidences(data.species);
+        formatEvidences(data.publication);
         formatEvidences(data.function);
         formatEvidences(data.mutation);
         formatEvidences(data.glycosylation);
@@ -488,6 +161,37 @@ function ajaxSuccess(data) {
 
             data.itemsPathway = itemsPathway;
         }
+        var itemspublication = [];
+        if (data.publication) {
+            for (var i = 0; i < data.publication.length; i++) {
+                var publicationitem = data.publication[i];
+                var found = '';
+                for (var j = 0; j < itemspublication.length; j++) {
+                    var databaseitem1 = itemspublication[j];
+                    if (databaseitem1.resource === publicationitem.resource) {
+                        found = true;
+                        databaseitem1.links.push({
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        });
+                    }
+                }
+                if (!found) {
+                    itemspublication.push({
+                        resource: publicationitem.resource,
+                        links: [{
+                            url: publicationitem.url,
+                            id: publicationitem.id,
+                            name: publicationitem.name
+                        }]
+                    });
+                }
+            }
+
+            data.itemspublication = itemspublication;
+        }
+       
 
         if (data.glycosylation) {
             highlight.o_link_glycosylation = getGlycosylationHighlightData(data.glycosylation, 'O-linked');
@@ -514,7 +218,7 @@ function ajaxSuccess(data) {
 
         if (data.glycosylation) {
             data.glycosylation = data.glycosylation.map(function (item) {
-                item.residue = item.residue + item.position;
+                item.respos = item.residue + item.position;
                 return item;
             });
 
@@ -550,6 +254,9 @@ function ajaxSuccess(data) {
             }
         }
 
+        if (data.site_annotation){
+        highlight.site_annotation = getSequonHighlightData(data.site_annotation);
+    }
 
         if (data.glycosylation) {
             data.o_link_glycosylation_count = highlight.o_link_glycosylation.reduce(function (total, current) {
@@ -568,11 +275,11 @@ function ajaxSuccess(data) {
             }, 0);
         }
 
+        if (data.site_annotation) {
+            data.site_annotation_count = data.site_annotation.length;
+        }
 
-
-
-   
-
+        data.uniprot_canonical_ac = id;
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
@@ -585,7 +292,7 @@ function ajaxSuccess(data) {
         } else {
             createHighlightUi(sequenceData, 60);
         }
-   
+
 
         // glycosylation table
         $('#glycosylation-table').bootstrapTable({
@@ -611,15 +318,19 @@ function ajaxSuccess(data) {
                 },
 
                 {
-                    field: 'residue',
+                    field: 'respos',
                     title: 'Residue',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
+               }
+                    
                 },
                 {
                     field: 'imageFormat',
                     title: 'Image of Glycan Structure',
                     sortable: true,
-
                     formatter: function imageFormat(value, row, index, field) {
                         var url = getWsUrl('glycan_image', row.glytoucan_ac);
                         return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
@@ -630,8 +341,10 @@ function ajaxSuccess(data) {
             data: data.itemsGlycosyl,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                setupEvidenceList();
-            }
+                // setupEvidenceList();
+            },
+           
+
         });
 
         // glycosylation table
@@ -650,18 +363,23 @@ function ajaxSuccess(data) {
                 },
 
                 {
-                    field: 'residue',
+                    field: 'respos',
                     title: 'Residue',
-                    sortable: true
-
-                }
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        var uniprotAcc = getParameterByName("uniprot_canonical_ac"); 
+                        return "<a href='site_view.html?uniprot_canonical_ac=" + uniprotAcc + "&position=" + row.position +"&listID=" + getParameterByName("listID") + "&gs=" + getParameterByName("gs")+ "'>" + value + "</a>";
+               }
+            },
             ],
             pagination: 10,
             data: data.itemsGlycosyl2,
             onPageChange: function () {
                 scrollToPanel("#glycosylation");
-                setupEvidenceList();
-            }
+                 setupEvidenceList();
+            },
+          
+       
         });
 
         $(".EmptyFind").each(function () {
@@ -723,8 +441,10 @@ function ajaxSuccess(data) {
             pagination: 10,
             data: itemsMutate,
             onPageChange: function () {
+
                 setupEvidenceList();
             }
+          
         });
 
         $('#loading_image').fadeOut();
@@ -751,7 +471,6 @@ function ajaxSuccess(data) {
                         return diss1;
                     }
                 },
-
                 {
                     field: 'significant',
                     title: 'Significant',
@@ -769,6 +488,7 @@ function ajaxSuccess(data) {
 
                 setupEvidenceList();
             }
+           
         });
 
         $('#loading_image').fadeOut();
@@ -805,12 +525,19 @@ function ajaxSuccess(data) {
 
                 setupEvidenceList();
             }
+           
         });
     }
-
     setupEvidenceList();
     $('#loading_image').fadeOut();
     updateBreadcrumbLinks();
+
+    if (select ==='site_annotation'){
+        $("#sequon_link").prop( "checked", true );
+        $('#sequon_link').trigger('change');
+    }
+
+    setupIsoformAlignmentOptions();
 }
 
 
@@ -833,30 +560,6 @@ function LoadData(uniprot_canonical_ac) {
     $.ajax(ajaxConfig);
 }
 
-function setupEvidenceList() {
-    var $evidenceBadges = $('.evidence_badge');
-    $evidenceBadges.each(function () {
-        var $badge = $(this);
-
-        if (!$badge.attr('data-badge')) {
-            $badge.find('button').on('click', show_evidence);
-            $badge.attr('data-badge', true);
-        }
-    });
-}
-
-function show_evidence() {
-    var $evidenceList = $(this).next();
-    var isHidden = $evidenceList.hasClass('hidden');
-    //$(".evidence_links").addClass("hidden");
-
-    if (isHidden) {
-        $evidenceList.removeClass("hidden");
-    } else {
-        $evidenceList.addClass("hidden");
-    }
-
-}
 
 /**
  * getParameterByName function to extract query parametes from url
@@ -875,28 +578,61 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-/**
- * to check checkbox selected not selected
- * @param {string} type
- */
-function checkUncheck(type, element) {
-    var $elements = $('.highlight-highlight[data-type="' + type + '"]');
-
-    if (element.checked) {
-        $elements.show();
-    } else {
-        $elements.hide();
-    }
+function proteinView(){
+    var url = 'protvista_index.html';
+    url += '?uniprot_canonical_ac=' + uniprot_canonical_ac;
+    url += "&listID=" + getParameterByName("listID") || "";
+    // window.open(url); 
+    window.location.href=url;
 }
+
+
+function setupIsoformAlignmentOptions() {
+    $('#isoform-alignment select').change(function() {
+        /* alert("hi"); */
+        var op =$(this).val();
+        if(op !='') {                 
+            $('#isoform-alignment input').prop('disabled',false);
+        } else {
+            $('#isoform-alignment input').prop('disabled', true);
+        }   
+    });
+    // $('#isoform-alignment input').on('click', function () {
+    //     // load in the alignment
+    //     LoadDataAlignment(id, $('#isoform-alignment select').val());
+    // });
+}
+
 
 $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
+    select = getParameterByName('select');
     id = uniprot_canonical_ac;
     document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
-
     updateBreadcrumbLinks();
 });
+
+
+
+
+/**
+ * This function opens the page listing GO terms.
+ */
+function openGOTermListPage(){
+    // Static url for listing GO terms.
+    var url = 'https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=';
+    url += uniprot_canonical_ac.split("-")[0];
+    window.open(url);
+}
+
+/**
+ * This function opens the Protein Detail page.
+ */
+function openProteinDetailPage(uniprot_orthologs_ac){
+    var url = window.location.origin + "/protein_detail.html?uniprot_canonical_ac=" + uniprot_orthologs_ac;
+    window.open(url);
+}
 
 /**
  * this function gets the URL query values
@@ -905,7 +641,12 @@ $(document).ready(function () {
 function updateBreadcrumbLinks() {
     const listID = getParameterByName("listID") || "";
     const globalSearchTerm = getParameterByName("gs") || "";
-    var glycanPageType = window.location.pathname.includes("glycoprotein") ? "glycoprotein" : "protein";
+    var glycanPageType = "";
+    
+    if (window.location.pathname.indexOf("glycoprotein") >= 0)
+        glycanPageType = "glycoprotein";
+    else
+        glycanPageType = "protein";
 
     if (globalSearchTerm) {
         $('#breadcrumb-search').text("General Search");
@@ -922,6 +663,7 @@ function updateBreadcrumbLinks() {
             $('#li-breadcrumb-list').css('display', 'none');
     }
 }
+
 
 /**
  * Gets the values selected in the download dropdown 

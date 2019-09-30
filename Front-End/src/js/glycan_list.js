@@ -148,6 +148,7 @@ function ajaxListSuccess(data) {
                 items.push({
                     glytoucan_ac: glycan.glytoucan_ac,
                     mass: glycan.mass,
+                    mass_pme: glycan.mass_pme,
                     number_proteins: glycan.number_proteins,
                     number_enzymes: glycan.number_enzymes,
                     number_monosaccharides: glycan.number_monosaccharides,

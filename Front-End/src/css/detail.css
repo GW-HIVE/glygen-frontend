@@ -5,7 +5,6 @@
 @date-created: January 2018
 @update: October 12 2018 - Tatiana Williamson - Added headline and styled download button.
 -------------------------------------------------------------------------*/
-
 .img-cartoon1 {
     display: block;
     max-width: 500px;
@@ -19,7 +18,13 @@
     box-shadow: 10px 10px 5px #ddd;
     z-index: 99999;
 }
-
+#viewprotein{
+    margin-top:4px;
+    /* border-color:white; */
+    background-color: #337ab7;
+    cursor:pointer;
+    
+}
 .img-wrapper1 {
     overflow: hidden;
     z-index: -9999;
@@ -122,12 +127,18 @@ pre {
 
 .panelcontent {
     font-size: 15px;
-    color: #659BC9;
+/*    color: #659BC9; 
+    Removed by Tatiana - it overrides links color on detail pages May 20, 2019
+*/
 }
 
 .list-group {
     font-size: 16px;
     list-style-type: square;
+    margin: 0 0 0 20px !important;
+}
+.journal{
+    font-size: 12px;
     margin: 0 0 0 20px !important;
 }
 
@@ -293,11 +304,16 @@ h4 {
 
 
 .highlight-highlight[data-type="n_link_glycosylation"] .highlight-highlight-area {
-     border-bottom: 3px solid red;
-
- 
+     border-bottom: 3px solid red; 
 }
 
+.highlight-highlight[data-type="site_annotation"] .highlight-highlight-area {
+  
+    /* background-image: linear-gradient(transparent, rgb(211, 113, 211)); */
+    background:3px orange;
+    /* border-top: 3px orange; */
+    padding-top: 1px;
+}
 #sequnce_highlight {
     display: block;
     padding: 9.0px;
@@ -326,14 +342,14 @@ h4 {
 /*mutation*/
 .sequnce3 {
     background: rgb(131, 235, 131);
-   font-family: monospace;
+    font-family: monospace;
    font-size:14px;
 }
 /*Sequon*/
 .sequnce4{
-    border-top: 3px solid #f48942;
-   font-family: monospace;
-   font-size:14px;
+    background: rgb(244, 151, 37);
+    font-family: monospace;
+    font-size:14px;
 }
 .highlight-panel-categories {
     margin: 0;
@@ -390,7 +406,7 @@ h4 {
 .evidence_badge {
     position: relative; 
     padding-left: 5px; 
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     vertical-align: middle;
     display: inline-block;
 }
@@ -405,7 +421,8 @@ h4 {
 }
 .evidence_id {
     position: relative; 
-   display: inline-block;     
+    display: block; 
+        
 }
 
 .highlight-text {
@@ -426,5 +443,13 @@ h4 {
 
 .function-table-td {
     vertical-align: middle  !important;
+}
+
+.no-before ::before {
+    content: none;
+}
+
+.text-overflow {
+    white-space: initial;
 }
 

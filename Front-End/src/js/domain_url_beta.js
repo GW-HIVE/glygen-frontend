@@ -6,8 +6,10 @@
  * @date: September 5, 2018 
  */
 
-var ws_base = "http://api.beta.glygen.org/";
-var ws_base_data = "https://data.beta.glygen.org/";
+// 
+var ws_base = "https://beta-api.glygen.org/";
+var ws_base_domain = "https://beta.glygen.org/";
+var ws_base_data = "https://beta-data.glygen.org/";
 var ws_base_sparql ="https://sparql.beta.glygen.org/";
 
 /**
