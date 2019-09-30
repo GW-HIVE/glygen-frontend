@@ -10,28 +10,28 @@
 /**
  * Venn diagram displayes human and mouse glycans.
  */
-function vennGlycanHomoMus(dummy, data, id) {
-	var glycan_homo_mus = venn.VennDiagram()
+function vennGlycanHomoMusRat(dummy, data, id) {
+	var glycan_homo_mus_rat = venn.VennDiagram()
 		.width(350)
 		.height(350);
 
-	var div_glycan_homo_mus = d3.select(id)
-	div_glycan_homo_mus.datum(data.venn_glycans_homo_mus)
-		.call(glycan_homo_mus);
+	var div_glycan_homo_mus_rat = d3.select(id)
+	div_glycan_homo_mus_rat.datum(data.venn_glycans_homo_mus)
+		.call(glycan_homo_mus_rat);
 
 	var tooltip = d3.select("body").append("div")
 		.attr("class", "venntooltip")
 		.style("cursor", "pointer");
 
-	div_glycan_homo_mus.selectAll("path")
+	div_glycan_homo_mus_rat.selectAll("path")
 		.style("stroke-opacity", 0)
 		.style("stroke", "#fff")
 		.style("stroke-width", 3);
 
-	div_glycan_homo_mus.selectAll("g")
+	div_glycan_homo_mus_rat.selectAll("g")
 		.on("mouseover", function (d, i) {
 			// sort all the areas relative to the current item
-			venn.sortAreas(div_glycan_homo_mus, d);
+			venn.sortAreas(div_glycan_homo_mus_rat, d);
 
 			// Display a tooltip with the current size
 			tooltip.transition().duration(400)
@@ -869,8 +869,13 @@ function vennProteinHomo(dummy, data, id) {
 			} else if (d.name == "Enzymes") {
 				searchGlycansBy({
 					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
+						organism_list: [
+							{
+								"id": 9606,
+								"name": "Homo sapiens"
+							}
+						],
+						"operation":"or"
 					}
 				});
 			}
