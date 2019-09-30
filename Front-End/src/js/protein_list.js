@@ -74,20 +74,13 @@ function editSearch() {
 
         } else if (globalSearchTerm) {
             newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
-        }
-        else {
+        } else if (stat) {
+            newUrl = 'statistics.html#' + stat;
+        } else  {
             newUrl = "protein_search.html?id=" + id;
         }
 
        // window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
-
-    } else if (globalSearchTerm) {
-        newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
-    } else if (stat) {
-        newUrl = 'statistics.html#' + stat;
-    } else {
-        newUrl = "protein_search.html?id=" + id;
-    }
 
     window.location.replace(newUrl);
     activityTracker("user", id, "edit search");
