@@ -1412,10 +1412,11 @@ function searchGlycansBy(param) {
 
 	var prevListId = getParameterByName("id") || "";
 	activityTracker("user", prevListId, "Performing glycan search in Statistics");
-	var query_type = "mass_range_glycan_search";
+	var query_type = "search_glycan";
 	var formObject = {
 		"operation": "AND",
-		query_type: query_type,
+		"query_type": query_type,
+		"mass_type": "native"
 	};
 	var chartId = "";
 	if (param.mass) {
@@ -1446,8 +1447,8 @@ function searchGlycansBy(param) {
 			organism: {
 				organism_list: [
 					{
-						"id": param.organism.id,
-						"name": param.organism.name
+						"id": param.organism.organism_list[0].id,
+					    "name": param.organism.organism_list[0].name
 					}
 				],
 				"operation":"or"
