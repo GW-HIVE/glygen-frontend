@@ -897,7 +897,11 @@ function vennProteinHomo(dummy, data, id) {
 					"organism": {
 						"id": 9606,
 						"name": "Homo sapiens"
-					}
+					},
+					glycosylated_aa: {
+            			"aa_list": ["N","S","T"],
+            			"operation":"or"
+        			}
 				});
 			} else if (d.name == "Enzymes") {
 				searchGlycansBy({
@@ -1645,6 +1649,10 @@ function searchGlycoproteinsBy(param) {
 			organism: {
 				"id": param.organism.id,
 				"name": param.organism.name
+			},
+			glycosylated_aa: {
+				"aa_list": param.glycosylated_aa.aa_list,
+				"operation":"or"
 			}
 		})
 		chartId = "venn_protein_homo";
