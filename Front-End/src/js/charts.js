@@ -644,10 +644,20 @@ function barChartMass(dummy, data, id) {
 				.style("display", "inline-block")
 				.html("Mass Range:" + " " + (d.name - bmr.stepsize + " " + "Da" + " " + "-" + " " + (d.name)) + " " + "Da" + "<br>" + "<br>" + (d.size) + " " + "Glycans");
 		})
+	
+		.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.style("cursor", "pointer");
+		})
+		
 		.on("mouseout", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.style("cursor", "none")
 			tooltip.style("display", "none");
 		});
-
+	
 	// add the x Axis	
 	svg.append("g")
 		.attr("transform", "translate(0," + height + ")")
@@ -784,7 +794,16 @@ function barChartSugar(dummy, data, id) {
 				.style("display", "inline-block")
 				.html("Sugar Range:" + " " + (d.name - bsr.stepsize + " " + "-" + " " + (d.name)) + "<br>" + "<br>" + (d.size) + " " + "Glycans");
 		})
+		.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.style("cursor", "pointer");
+		})
+		
 		.on("mouseout", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.style("cursor", "none")
 			tooltip.style("display", "none");
 		});
 
