@@ -198,7 +198,7 @@
 			"size": 3000
 		}
 	],
-	"venn_glycans_homo_mus": [{
+	"venn_glycans_homo_mus_rat": [{
 			"sets": [0],
 			"tooltipname": "Human glycans",
 			"organism": {

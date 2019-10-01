@@ -16,7 +16,7 @@ function vennGlycanHomoMusRat(dummy, data, id) {
 		.height(350);
 
 	var div_glycan_homo_mus_rat = d3.select(id)
-	div_glycan_homo_mus_rat.datum(data.venn_glycans_homo_mus)
+	div_glycan_homo_mus_rat.datum(data.venn_glycans_homo_mus_rat)
 		.call(glycan_homo_mus_rat);
 
 	var tooltip = d3.select("body").append("div")
@@ -63,14 +63,9 @@ function vennGlycanHomoMusRat(dummy, data, id) {
 			//console.log(d.size); 
 			searchGlycansBy({
 				"organism": {
-					"organism_list": [
-						{
-							"id": d.organism.id,
-							"name": d.organism.name
-						}
-					],
-				"operation":"or"
-        		}
+					"organism_list": d.organism.organism_list,
+					"operation":"or"
+				}
 			});
 		});
 }
@@ -454,7 +449,7 @@ function pieChartMotif(dummy, data, id) {
 
 	var arc = d3.arc()
 		.innerRadius(radius - donutWidth)
-		.outerRadius(radius - 5);
+		.outerRadius(radius);
 
 	var pie = d3.pie()
 		.value(function (d) {
