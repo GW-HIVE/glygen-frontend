@@ -162,15 +162,22 @@ svg {
     font-size: 1.5em;
 }
 
-.piePie text {
+.pieMotif text {
     font-family: "Verdana", sans-serif;
-    font: 16px;
+/*    fill: #888;*/
+    fill: #000;
+    opacity: .75;
 }
 
-.piePie path {
-    stroke: #ffffff;
+.pieMotif .name-text {
+    font-size: .5em;
+    stroke: none;
 }
 
+.pieMotif .value-text {
+    font-size: 1.5em;
+    stroke: none;
+}
 /*----------------------
     Bar graph
 ------------------------*/

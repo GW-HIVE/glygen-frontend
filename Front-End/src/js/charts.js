@@ -183,7 +183,8 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 		colorHomo = d3.scaleOrdinal(d3.schemeCategory10),
 		colorMus = d3.scaleOrdinal(d3.schemeCategory10),
 		colorRat = d3.scaleOrdinal(d3.schemeCategory10);
-
+	
+	var chartId = "";
 	var canvas = d3.select(id)
 		.append("svg")
 		.attr('class', 'pie')
@@ -436,7 +437,7 @@ function pieChartMotif(dummy, data, id) {
 
 	var svgP = d3.select(id)
 		.append('svg')
-		.attr('class', 'piePie')
+		.attr('class', 'pieMotif')
 		.style('width', '80%')
 		//		.attr('width', width)
 		//		.attr('height', height);
@@ -483,11 +484,11 @@ function pieChartMotif(dummy, data, id) {
 	});
 	data.pie_motif_modified.push(motifOthers);
 
-	var path = g.selectAll('.piePie')
+	var path = g.selectAll('.pieMotif')
 		.data(pie(data.pie_motif_modified))
 		.enter()
 		.append('g')
-		.attr('class', 'piePie')
+		.attr('class', 'pieMotif')
 		.style('stroke', 'white')
 		// On click goes to list page
 		.on("click", function (d) {
@@ -499,6 +500,22 @@ function pieChartMotif(dummy, data, id) {
 		})
 		.on("mouseover", function (d) {
 			//      		d3.selectAll('.piePie')
+			let tooltip = d3.select(this)
+				.append("g")
+				.attr("class", "text-group")
+			
+			tooltip.append("text")
+				.attr("class", "name-text")
+				.text(`${d.data.name}`)
+				.attr('text-anchor', 'middle')
+				.attr('dy', '-1.2em');
+
+			tooltip.append("text")
+				.attr("class", "value-text")
+				.text(`${d.data.size}`)
+				.attr('text-anchor', 'middle')
+				.attr('dy', '.6em');
+			
 			if (d.data.name != "Other") {
 				d3.select(this)
 					.attr('opacity', '.65')
@@ -510,16 +527,18 @@ function pieChartMotif(dummy, data, id) {
 			}
 		})
 		.on("mouseout", function (d) {
-			d3.selectAll('.piePie')
+			d3.select(this)
+			//d3.selectAll('.piePie')
 				.attr('opacity', '1')
-				.style("cursor", "none");
-
+				.style("cursor", "none")
+				.style("fill", color(this._current))
+				.select(".text-group").remove();
 		})
 		.append('path')
 		.attr('d', arc)
 		.attr('fill', (d, i) => color(i))
-		.append("title")
-		.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
+		//.append("title");
+//		.text(d => `${d.data.name}:` + '\n' + `${d.data.size.toLocaleString()}`);
 }
 
 /**
@@ -1450,31 +1469,27 @@ function searchGlycansBy(param) {
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
-				organism_list: [
-					{
-						"id": param.organism.organism_list[0].id,
-					    "name": param.organism.organism_list[0].name
-					}
-				],
+				"organism_list" : param.organism.organism_list,
 				"operation":"or"
         	},
 			"glycan_type": param.glycan_type
 		})
 		chartId = "donut_glycan_homo_mus_rat";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				organism_list: [
-					{
-						"id": param.organism.id,
-						"name": param.organism.name
-					}
-				],
-				"operation":"or"
-        	}
-		})
-		chartId = "venn_glycans_homo_mus_rat";
-	}
+	} 	
+//	 else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				organism_list: [
+//					{
+//						"id": param.organism.id,
+//						"name": param.organism.name
+//					}
+//				],
+//				"operation":"or"
+//        	}
+//		})
+//		chartId = "venn_glycans_homo_mus_rat";
+//}
 
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({
