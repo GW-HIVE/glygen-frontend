@@ -25,6 +25,15 @@
     cursor:pointer;
     
 }
+
+.actionbutton{
+    margin-top:4px;
+    /* border-color:white; */
+    background-color: #337ab7;
+    cursor:pointer;
+    font-size: 17px;
+    
+}
 .img-wrapper1 {
     overflow: hidden;
     z-index: -9999;

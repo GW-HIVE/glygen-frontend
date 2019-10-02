@@ -45,7 +45,8 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
@@ -109,10 +110,10 @@
                 <a href="#pathway">Pathway</a>
             </li>
             <li>
-                <a href="#isoform">Isoform</a>
+                <a href="#isoforms">Isoform</a>
             </li>
             <li>
-                <a href="#orthologs">Orthologs</a>
+                <a href="#homologs">Homologs</a>
             </li>
             <li>
                 <a href="#disease">Disease</a>
@@ -504,27 +505,26 @@
                 </ul>
 
                 <!--Isoforms-->
-                <ul id="isoform" class="cd-faq-group selected">
+                <ul id="isoforms" class="cd-faq-group selected">
                     <li class="cd-faq-title" />
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
+                            <div class="row">
+                                <div class="col-md-9">
                             <h4>Isoforms</h4>
-                            <div id="isoform-alignment">
-                                <form method="get" action="seqn.html">
-                                    <input type="hidden" name="id" value="{{uniprot_canonical_ac}}" />
-
-                                    <strong>Alignment:</strong>
-                                    <select name="alignment">
-                                    <option value="" selected="">select</option>
-                                        <option value="isoformset.uniprotkb" >isoformset.uniprotkb</option>
-                                        <option value="homologset.oma">homologset.oma</option>
-                                        <option value="homologset.mgi">homologset.mgi</option>        
-                                    </select>
-
-                                    <input type="submit" class="btn btn-primary" value="Details" aria-disabled="true" disabled="true" />
-                                </form>
-                            </div>
+                                </div>
+                            <div class="col-md-3">
+                                    <form method="get" action="isoform_alignment.html">
+                                            <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
+                                            <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
+                                            <input id="hidden_alng" type="hidden" name="alignment" value="isoformset.uniprotkb" />
+                                            <input type="submit" class="btn btn-primary actionbutton" value="Alignment"  />
+                                        </form>
+                                   
                         </div>
+                    </div>
+                
+                </div>
                         <div class="panel-body">
                             <div class="row">
                                 {{#isoforms}}
@@ -571,22 +571,32 @@
                     </div>
                 </ul>
 
-                <!--Orthologs-->
-                <ul id="orthologs" class="cd-faq-group selected">
+                <!--homologs-->
+                <ul id="homologs" class="cd-faq-group selected">
                     <li class="cd-faq-title" />
                     <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Orthologs</h4>
-                            <div>
-                                <strong>Alignment:</strong>
-                                 <select class="custom-pc" name="processor" id="processor">
-                                        <option value=""></option>
-                                        <option value="1">1</option>
-                                        <option value="1">2</option>
-                                        <option value="3">3</option>                
+                        <div class="gg-panel-heading">  
+                                <div class="row">
+                             <div class="col-md-4">  
+                            <h4>Homologs</h4>
+                             </div>
+                             <div class="col-md-3">
+                             </div>
+                             <div class="col-md-5">  
+                            <div id="isoform-alignment">
+                                <form method="get" action="homolog_alignment.html">
+                                        <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
+                                        <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
+                                    <select name="alignment"class="form-group">
+                                    <option value="" selected="">select</option>
+                                        <option value="homologset.oma">homologset.oma</option>
+                                        <option value="homologset.mgi">homologset.mgi</option>        
                                     </select>
-                                 <input name="alignment_details" type="button" value="Details" disabled="true" />
-                                </div>
+                                    <input type="submit" class="btn btn-primary actionbutton" value="Alignment" aria-disabled="true" disabled="true" />
+                                </form>
+                            </div>
+                        </div>
+                        </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -608,7 +618,6 @@
                                                 </button>
                                                 <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
                                                     <ul>
-
                                                         {{#links}}
                                                             <li class="evidence_id"> <a href="{{url}}" target="_blank">{{id}} </a></li>
                                                         {{/links}}
@@ -811,7 +820,7 @@
 
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
-        $(document).ajaxStop(function() {
+        $(document).ajaxStop(function () {
             // calls the sidebar function only when all ajax calls are completed
             faqMain();
 
@@ -834,4 +843,5 @@
         });
     </script>
 </body>
+
 </html>

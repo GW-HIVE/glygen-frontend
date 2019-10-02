@@ -13,8 +13,7 @@
 // @update: Jan 17th, 2019 - Rupali Mahadik - added new evidence display 
 // @update: Mar 12, 2019 - Gaurav Agarwal - added breadcrumbs
 // @update: April 7th, 2019 - Rupali Mahadik - Seqeunce display improved
-
-
+// @update: Sep, 2019 - Rupali Mahadik - Seqeunce alignment
 
 
 /**
@@ -280,6 +279,7 @@ function ajaxSuccess(data) {
         }
 
         data.uniprot_canonical_ac = id;
+        data.listID = getParameterByName('listID');
 
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
@@ -587,6 +587,8 @@ function proteinView(){
 }
 
 
+
+
 function setupIsoformAlignmentOptions() {
     $('#isoform-alignment select').change(function() {
         /* alert("hi"); */
@@ -597,10 +599,7 @@ function setupIsoformAlignmentOptions() {
             $('#isoform-alignment input').prop('disabled', true);
         }   
     });
-    // $('#isoform-alignment input').on('click', function () {
-    //     // load in the alignment
-    //     LoadDataAlignment(id, $('#isoform-alignment select').val());
-    // });
+   
 }
 
 
