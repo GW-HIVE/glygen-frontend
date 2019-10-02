@@ -891,7 +891,7 @@ function vennProteinHomo(dummy, data, id) {
 						"id": 9606,
 						"name": "Homo sapiens"
 					}
-				});
+				}, "venn_protein_homo");
 			} else if (d.name == "Glycoproteins") {
 				searchGlycoproteinsBy({
 					"organism": {
@@ -902,7 +902,7 @@ function vennProteinHomo(dummy, data, id) {
             			"aa_list": ["N","S","T"],
             			"operation":"or"
         			}
-				});
+				}, "venn_protein_homo");
 			} else if (d.name == "Enzymes") {
 				searchGlycansBy({
 					"organism": {
@@ -914,9 +914,8 @@ function vennProteinHomo(dummy, data, id) {
 						],
 						"operation":"or"
 					}
-				});
+				}, "venn_protein_homo");
 			}
-
 		})
 
 		.on("mouseout", function (d, i) {
@@ -1448,7 +1447,7 @@ $(document).ajaxStop(function () {
 /** 
  * On submit, function forms the JSON and submits to the search web services
  */
-function searchGlycansBy(param) {
+function searchGlycansBy(param, chartId) {
 	// displays the loading gif when the ajax call starts
 	$('#loading_image').fadeIn();
 
@@ -1460,7 +1459,7 @@ function searchGlycansBy(param) {
 		"query_type": query_type,
 		"mass_type": "native"
 	};
-	var chartId = "";
+//	var chartId = "";
 	if (param.mass) {
 		$.extend(formObject, {
 			mass: {
@@ -1470,7 +1469,7 @@ function searchGlycansBy(param) {
 			"mass_type": param.mass_type
 			//			"mass_type":"native"
 		})
-		chartId = "bar_chart_mass";
+//		chartId = "bar_chart_mass";
 	} else if (param.sugar) {
 		$.extend(formObject, {
 			number_monosaccharides: {
@@ -1478,21 +1477,32 @@ function searchGlycansBy(param) {
 				"max": parseInt(param.sugar.sugar_max)
 			}
 		})
-		chartId = "bar_chart_sugar";
+//		chartId = "bar_chart_sugar";
 	} else if (param.motif) {
 		$.extend(formObject, {
 			"glycan_motif": param.motif
 		})
-		chartId = "pie_chart_motif";
+//		chartId = "pie_chart_motif";
 	} else if (param.organism) {
-		$.extend(formObject, {
+		if (param.glycan_type) {
+			$.extend(formObject, {
 			organism: {
 				"organism_list" : param.organism.organism_list,
 				"operation":"or"
         	},
 			"glycan_type": param.glycan_type
-		})
-		chartId = "donut_glycan_homo_mus_rat";
+			})
+//			chartId = "donut_glycan_homo_mus_rat";
+		} else {
+			$.extend(formObject, {
+				organism: {
+					"organism_list" : param.organism.organism_list,
+					"operation":"or"
+        		}
+			})
+//			chartId = "venn_protein_homo"
+		}
+//		chartId = "venn_glycans_homo_mus_rat"
 	} 	
 //	 else if (param.organism) {
 //		$.extend(formObject, {
@@ -1539,7 +1549,7 @@ function searchGlycansBy(param) {
 /** 
  * On submit, function forms the JSON and submits to the search web services
  */
-function searchProteinsBy(param) {
+function searchProteinsBy(param, chartId) {
 	// displays the loading gif when the ajax call starts
 	$('#loading_image').fadeIn();
 
@@ -1631,7 +1641,7 @@ function searchProteinsBy(param) {
 /** 
  * On submit, function forms the JSON and submits to the search web services
  */
-function searchGlycoproteinsBy(param) {
+function searchGlycoproteinsBy(param, chartId) {
 	// displays the loading gif when the ajax call starts
 	$('#loading_image').fadeIn();
 
