@@ -886,11 +886,16 @@ function vennProteinHomo(dummy, data, id) {
 		.on("click", function (d) {
 			//console.log(d.data.size); 
 			if (d.name == "Proteins") {
+				//var massRange = d.range.split("-");
 				searchProteinsBy({
 					"organism": {
 						"id": 9606,
 						"name": "Homo sapiens"
 					}
+//					"mass": {
+//						"mass_min": massRange[0],
+//						"mass_max": massRange[1]
+//					}
 				}, "venn_protein_homo");
 			} else if (d.name == "Glycoproteins") {
 				searchGlycoproteinsBy({
@@ -982,7 +987,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_protein_genes");
 	});
 
  	path.append("path")
@@ -1054,7 +1059,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_canonical_proteins");
 	});
 
  	path.append("path")
@@ -1126,7 +1131,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_canonical_isoforms_proteins");
 	});
 
  	path.append("path")
@@ -1198,7 +1203,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_glycohydrolases_proteins");
 	});
 
  	path.append("path")
@@ -1270,7 +1275,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_glycosyltransferases_proteins");
 	});
 
  	path.append("path")
@@ -1346,7 +1351,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_glycosylated_proteins");
 	});
 
  	path.append("path")
@@ -1418,7 +1423,7 @@ var pie = d3.pie()
 				"name": d.data.organism.name
 			},
 			"protein_type": d.data.protein_type
-		});
+		}, "pie_glycosyl_prot_report_glyc");
 	});
 
  	path.append("path")
@@ -1543,58 +1548,63 @@ function searchProteinsBy(param, chartId) {
 	var query_type = "search_protein";
 	var formObject = {
 		"operation": "AND",
-		query_type: query_type,
+		"query_type": query_type,
 	};
 	var chartId = "";
 	if (param.organism) {
 		$.extend(formObject, {
-			organism: {
+			"organism": {
 				"id": param.organism.id,
 				"name": param.organism.name
 			}
+//			"mass": {
+//				"min": parseInt(param.organism.mass_min),
+//				"max": parseInt(param.organism.mass_max)
+//			}
 		})
 		chartId = "venn_protein_homo";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-		chartId = "pie_protein_genes";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-		chartId = "pie_canonical_proteins";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-		chartId = "pie_canonical_isoforms_proteins";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-		chartId = "pie_glycohydrolases_proteins";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-		chartId = "pie_glycosyltransferases_proteins";
 	}
+//	} else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				"id": param.organism.id,
+//				"name": param.organism.name
+//			}
+//		})
+//		chartId = "pie_protein_genes";
+//	} else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				"id": param.organism.id,
+//				"name": param.organism.name
+//			}
+//		})
+//		chartId = "pie_canonical_proteins";
+//	} else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				"id": param.organism.id,
+//				"name": param.organism.name
+//			}
+//		})
+//		chartId = "pie_canonical_isoforms_proteins";
+//	} else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				"id": param.organism.id,
+//				"name": param.organism.name
+//			}
+//		})
+//		chartId = "pie_glycohydrolases_proteins";
+//	} else if (param.organism) {
+//		$.extend(formObject, {
+//			organism: {
+//				"id": param.organism.id,
+//				"name": param.organism.name
+//			}
+//		})
+//		chartId = "pie_glycosyltransferases_proteins";
+//	}
 
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({
