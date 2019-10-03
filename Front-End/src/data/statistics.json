@@ -254,6 +254,18 @@
 			"tooltipname": "Human & Rat glycans",
 			"name": "",
 			"size": 204
+		},
+		{
+			"sets": [1, 2],
+			"tooltipname": "Mouse & Rat glycans",
+			"name": "",
+			"size": 100
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Human & Mouse & Rat glycans",
+			"name": "",
+			"size": 204
 		}
 	],
 	"glycan_homo_donut": [{

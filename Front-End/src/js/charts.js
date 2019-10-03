@@ -66,7 +66,7 @@ function vennGlycanHomoMusRat(dummy, data, id) {
 					"organism_list": d.organism.organism_list,
 					"operation":"or"
 				}
-			});
+			}, "venn_glycans_homo_mus_rat");
 		});
 }
 
@@ -239,7 +239,7 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 					"operation":"or"
 				},
 				"glycan_type": d.data.glycan_type
-			});
+			}, "donut_glycan_homo_mus_rat");
 		})
 		.on("mouseover", function (d) {
 			let groupH = d3.select(this)
@@ -491,7 +491,7 @@ function pieChartMotif(dummy, data, id) {
 			var motif = d.data.name;
 			searchGlycansBy({
 				"motif": motif
-			});
+			}, "pie_chart_motif");
 		})
 		.on("mouseover", function (d) {
 			//      		d3.selectAll('.piePie')
@@ -630,7 +630,7 @@ function barChartMass(dummy, data, id) {
 					"mass_max": range[1]
 				},
 				"mass_type": "Native"
-			});
+			}, "bar_chart_mass");
 		})
 		.on("mousemove", function (d) {
 			tooltip
@@ -780,7 +780,7 @@ function barChartSugar(dummy, data, id) {
 					"sugar_min": range[0],
 					"sugar_max": range[1]
 				}
-			});
+			}, "bar_chart_sugar");
 		})
 		.on("mousemove", function (d) {
 			tooltip
@@ -1467,7 +1467,6 @@ function searchGlycansBy(param, chartId) {
 				"max": parseInt(param.mass.mass_max)
 			},
 			"mass_type": param.mass_type
-			//			"mass_type":"native"
 		})
 //		chartId = "bar_chart_mass";
 	} else if (param.sugar) {
@@ -1502,22 +1501,7 @@ function searchGlycansBy(param, chartId) {
 			})
 //			chartId = "venn_protein_homo"
 		}
-//		chartId = "venn_glycans_homo_mus_rat"
-	} 	
-//	 else if (param.organism) {
-//		$.extend(formObject, {
-//			organism: {
-//				organism_list: [
-//					{
-//						"id": param.organism.id,
-//						"name": param.organism.name
-//					}
-//				],
-//				"operation":"or"
-//        	}
-//		})
-//		chartId = "venn_glycans_homo_mus_rat";
-//}
+	}
 
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({
