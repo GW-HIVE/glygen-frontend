@@ -93,7 +93,7 @@
 		]
 	},
 	"sunburst_glycan_type_subtype": {
-      "name":"",
+      "name":"Glycans",
       "children":[
          {
             "name": "N-glycan",
@@ -151,10 +151,11 @@
          },
          {
             "name":"Other",
+			"size": 2439,
             "children":[
                {
-                  "name":"Other",
-                  "size": 2439
+                  "name":"",
+                  "size": 1
                }
             ]
          }
