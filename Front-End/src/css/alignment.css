@@ -1,0 +1,31 @@
+
+     .aln-block{
+       
+      padding-top:15px
+    }
+    .aln-line-link{
+        display: inline-block;
+        width: 13rem
+    }
+    /* .aln-line-title{
+        
+        display: inline-block;
+        width: 15rem
+    } */
+    .aln-line-alignment{
+        font-family:monospace;
+        display: inline-block;
+        margin-left: 30%
+    
+    }
+   .aln-line-value{
+       font-family: monospace;
+       display: inline-block;
+
+   }
+
+   .aln-line-consensus{
+    margin-left: 130px;
+    font-family: monospace;
+    display: inline-block;
+   }

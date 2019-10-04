@@ -233,6 +233,7 @@ function LoadDataAlignment() {
     };
     // make the server call
     $.ajax(aln);
+    $(".title_protein").html(uniprot_canonical_ac);
 }
 $(document).ready(function () {
     LoadDataAlignment();

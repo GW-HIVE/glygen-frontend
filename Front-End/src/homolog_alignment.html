@@ -21,9 +21,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <link rel="stylesheet" type="text/css" href="css/alignment.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
+
 
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
@@ -46,38 +47,6 @@
         <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
         <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
 </head>
-<style>
-     .aln-block{
-       
-      padding-top:15px
-    }
-    .aln-line-link{
-        display: inline-block;
-        width: 13rem
-    }
-    /* .aln-line-title{
-        
-        display: inline-block;
-        width: 15rem
-    } */
-    .aln-line-alignment{
-        font-family:monospace;
-        display: inline-block;
-        margin-left: 30%
-    
-    }
-   .aln-line-value{
-       font-family: monospace;
-       display: inline-block;
-
-   }
-
-   .aln-line-consensus{
-    margin-left: 130px;
-    font-family: monospace;
-    display: inline-block;
-   }
-</style>
 <body onload="tracking()">
     <!-- <div id='header'></div> -->
     <script src="libraries/w3.js"></script>
@@ -98,6 +67,11 @@
             </li>
             <li id="li-breadcrumb-homoalignment">Homolog Alignment</li>
          </ul>
+         <center>
+            <h3 class="page-heading" style="margin-top: -5px;">Homolog Alignment for
+               <span class='title_protein'> </span>
+            </h3>
+         </center>
        <div id="sequncealign">
 
        </div>
