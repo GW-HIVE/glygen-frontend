@@ -89,6 +89,50 @@
 					}
 				]
 
+			},
+			{
+				"name": "Rattus molecules",
+				"children": [
+					{
+						"name": "proteins",
+						"children": [{
+								"name": "enzymes",
+								"size": 5000
+							},
+							{
+								"name": "lectins",
+								"size": 200
+							},
+							{
+								"name": "glycoproteins",
+								"size": 4434
+							},
+							{
+								"name": "other",
+								"size": 11363
+							}
+						]
+					},
+					{
+						"name": "glycans",
+						"children": [{
+								"name": "N-glycan",
+								"size": 2502
+							},
+							{
+								"name": "O-glycans",
+								"size": 800
+							}
+						]
+					},
+					{
+						"name": "genes",
+						"children": [{
+							"name": "human genes",
+							"size": 18000
+						}]
+					}
+				]
 			}
 		]
 	},

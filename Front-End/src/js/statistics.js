@@ -59,6 +59,7 @@ const textFits = d => {
 const svg = d3.select('.zoomableSunburst')
 	//	.style('width', '400')
 	//	.style('height', '400')
+	.style('opacity', .8)
 	.attr('preserveAspectRatio', 'xMinYMin meet')
 	.attr('viewBox',
 		'0 0 ' +
@@ -97,7 +98,7 @@ d3.json("data/statistics.json", (error, jsonData) => {
 		.attr('class', 'main-arc')
 		.style('fill', d => color((d.children ? d : d.parent).data.name))
 		.attr('d', arc);
-
+    
 	newSlice.append('path')
 		.attr('class', 'hidden-arc')
 		.attr('id', (_, i) => `hiddenArc${i}`)
