@@ -143,19 +143,19 @@
             "name": "N-glycan",
             "children": [
                {
-                  "name": "hybrid",
+                  "name": "Hybrid",
                   "size": 85
                },
                {
-                  "name":"complex",
+                  "name":"Complex",
                   "size": 1796
                },
 				{
-					"name": "high mannose",
+					"name": "High mannose",
 					"size": 78
 				},
 				{
-					"name": "other",
+					"name": "Other",
 					"size": 606
 				}
             ]
@@ -164,31 +164,31 @@
             "name":"O-glycans",
             "children":[
                {
-                  "name": "core 1",
+                  "name": "Core 1",
                   "size": 100
                },
                {
-                  "name": "core 2",
+                  "name": "Core 2",
 					"size": 189
                },
                {
-                  "name": "core 3",
+                  "name": "Core 3",
 					"size": 53
                },
 				{
-					"name": "core 4",
+					"name": "Core 4",
 					"size": 38
 				},
 				{
-					"name": "core 5",
+					"name": "Core 5",
 					"size": 5
 				},
 				{
-					"name": "core 6",
+					"name": "Core 6",
 					"size": 8
 				},
 				{
-					"name": "core 7",
+					"name": "Core 7",
 					"size": 1
 				}
             ]

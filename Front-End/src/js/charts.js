@@ -92,10 +92,14 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
     var partition = d3.partition()
         .size([2 * Math.PI, radius]);
 
+	
+	
     // Get the data from our JSON file
     d3.json("data/statistics.json", function(error, data) {
         if (error) throw error;
 
+		const formatNumber = d3.format(',d');
+		
         // Find the root node of our data, and begin sizing process.
         var root = d3.hierarchy(data.sunburst_glycan_type_subtype)
             .sum(function (d) { return d.size});
@@ -111,15 +115,56 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 
         // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
         // variable calculations. Last, color the lines and the slices.
+		
+		
         g.selectAll('g')
             .data(root.descendants())
-            .enter().append('g').attr("class", "node").append('path')
+            .enter().append('g').attr("class", "node")
+			.on("mouseover", function (d) {
+			let group = d3.select(this)
+				.append("g")
+				.attr("class", "text-group")
+
+				group.append("text")
+					.attr("class", "name-text")
+					.text(`${d.data.name}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '-1.2em');
+
+				group.append("text")
+					.attr("class", "value-text")
+//					.text(`${d.data.size}`)
+					.text(`${formatNumber(d.value)}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '.6em');
+			})
+			.on("mouseout", function (d) {
+				d3.select(this)
+					.style("cursor", "none")
+					.style("fill", color(this._current))
+					.select(".text-group").remove();
+			})
+			.append('path')
             .attr("display", function (d) { return d.depth ? null : "none"; })
             .attr("d", arc)
             .style('stroke', '#fff')
-			.style('opacity', .65)
-            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
+			//.style('opacity', .65)
+            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+			
+			.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
+			})
+			.on("mouseout", function (d) {
+				d3.select(this).transition()
+					.duration('50')
+					.attr('opacity', '1')
+					.style("cursor", "none");
+			});
 
+			
 
         // Populate the <text> elements with our data-driven titles.
         g.selectAll(".node")

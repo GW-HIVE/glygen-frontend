@@ -178,6 +178,32 @@ svg {
     font-size: 1.5em;
     stroke: none;
 }
+
+.node text {
+    font-family: "Verdana", sans-serif;
+/*    fill: #888;*/
+    fill: #000;
+/*    opacity: .75;*/
+}
+.node text:hover {
+    font-family: "Verdana", sans-serif;
+/*    fill: #888;*/
+    fill: #000;
+/*    opacity: .75;*/
+    cursor: auto;
+}
+
+.node .name-text {
+    font-size: 1.5em;
+    stroke: none;
+    opacity: .5;
+}
+
+.node .value-text {
+    font-size: 3.5em;
+    stroke: none;
+    opacity: .5;
+}
 /*----------------------
     Bar graph
 ------------------------*/
