@@ -5,7 +5,7 @@
 /**
  * Format function to create link to the details page
  * @param {object} aln- The entire data  set 
- * @return -Details particular Protein Id
+ * @return -Leading rending line of block
  */
 
     function renderSequenceValue(aln) {
@@ -14,6 +14,11 @@
         return line;
     }
 
+    /**
+ * Format function to create link to the details page
+ * @param {object} aln- The entire data  set 
+ * @return -Href link for proteinIDs which redirect to protein deatil page of specific protein 
+ */
     function renderSequenceLink(aln){
         var collink = $('<div class="aln-line-header col-xs-12 col-md-1" />');
         var link = $('<a class="aln-line-link" />');
@@ -24,12 +29,22 @@
 
     }
 
+       /**
+ * Format function to create link to the details page
+ * @param {object} aln- The entire data  set 
+ * @return -Protein name
+ */
     function renderSequenceName(aln) {
         var namelink = $('<div class="aln-line-header col-xs-12 col-md-3 nameclass" />');
         namelink.text(aln.name);
         return namelink;
     }
 
+       /**
+ * Format function to create link to the details page
+ * @param {object} aln- The entire data  set 
+ * @return -line which will have link name and seq
+ */
     function renderSequenceLine(aln) {
         var line = $('<div class="aln-line row" />');
 
@@ -44,6 +59,12 @@
         return line;
     }
 
+           /**
+ * Format function to create link to the details page
+ * @param {object} sequenceAlignment- The entire consesus string
+ * @return -line of align consesus string
+ */
+
     function renderAlignmentLine(sequenceAlignment) {
         var line = $('<div class="aln-line row" />');
         // make a container for the name
@@ -55,6 +76,12 @@
         name.appendTo(line);
         return line;
     }
+
+              /**
+ * Format function to create link to the details page
+ * @param {object} sequenceAlignment- The entire consesus string
+ * @return -line of align consesus string
+ */
 
     function renderSequence(sequenceObject) {
         // Makes a block to hold all the sequences and consensus
@@ -104,16 +131,6 @@
             function formatSequenceBlocks(sequenceObject, perLine) {
                 var sequenceBlocks = [];
                 var maxSequenceLength = findMaxSequenceLength(sequenceObject);
-    
-                // divides length by per line, and rounds up
-                // var maxBlocks = Math.ceil(maxSequenceLength / perLine);
-    
-                // for (var x = 0; x < maxBlocks; x++) {
-                //     sequenceBlocks.push({
-                //         start: (x * perLine)
-                //     });
-                // }
-    
                 for (var x = 0; x < maxSequenceLength; x += perLine) {
                     var sequenceBlock = {
                         // holds each aln peice for the block
@@ -139,10 +156,6 @@
             }
 
             function buildSummary(aln) {
-                // var summaryTemplate;
-                // var summaryHtml;
-    
-                // summaryTemplate = $('#summary-template').html();
                 var Datadate = new Date(aln.date);
                 document.getElementById("date").innerHTML = Datadate;
                 var DataCluId= aln.cls_id;
@@ -162,7 +175,6 @@
                 var algname = aln.algorithm.name;
              
                 // url += "?parameter=" + aln.algorithm.parameter
-    
                 $("#algo").attr("href", url);
                
             }
@@ -178,7 +190,6 @@ function ajaxAlignSuccess(aln) {
         var sequenceBlockData = formatSequenceBlocks(aln, perLine);
         renderSequences(sequenceBlockData);
         buildSummary(aln);
-       // renderSequenceLeadingContent(aln);
     }
 
     updateBreadcrumbLinks();
@@ -245,9 +256,6 @@ function updateBreadcrumbLinks() {
             "#isoforms"
         );
     }
-    //else {
-    //   $("#li-breadcrumb-detailbback").css("display", "none");
-    // }
 }
 /**
  * LoadDataList function to configure and start the request to GWU  service
@@ -270,8 +278,6 @@ function LoadDataisoAlignment() {
 }
 $(document).ready(function () {
     LoadDataisoAlignment();
-    updateBreadcrumbLinks();
-
 });
 /**
  * getParameterByName function to Extract query parameters from url
