@@ -1,66 +1,57 @@
+//@author: Rupali Mahadik
+// @description: UO1 Version-1.5.
+// @Date:Oct 1/2019.
+
 /**
- * Adding function to String prototype to shortcut string to a desire length.
- * @param {int} n - The length of the string
- * @returns {int} -Short String
+ * Format function to create link to the details page
+ * @param {object} aln- The entire data  set 
+ * @return -Details particular Protein Id
  */
-String.prototype.trunc = String.prototype.trunc ||
-    function (n) {
-        return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
-    };
-
-
-function ajaxAlignSuccess(aln) {
-    if (aln.code) {
-        console.log(aln.code);
-        displayErrorByCode(aln.code);
-        activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-    } else{
-    function renderSequenceLeadingContent(aln) {
-        // container for the leading content
-        var line = $('<span class="aln-line-header" />');
-        // make a link
-        var link = $('<a class="aln-line-link" />');
-        // // make a container for the name
-        // var name = $('<span class="aln-line-title" />');
-
-        // add content to the link, and a reference
-        link.text(aln.id);
-        link.attr('href', "#");
-
-        // // adding content to the name
-        // name.text(aln.name);
-
-        // add both to the container
-        link.appendTo(line);
-        // name.appendTo(line);
-
-        return line;
-    }
 
     function renderSequenceValue(aln) {
-        var line = $('<span class="aln-line-value" />');
+        var line = $('<div class="aln-line-value col-xs-12 col-md-8" />');
         line.text(aln.string);
         return line;
     }
 
+    function renderSequenceLink(aln){
+        var collink = $('<div class="aln-line-header col-xs-12 col-md-1" />');
+        var link = $('<a class="aln-line-link" />');
+        link.text(aln.id);
+        link.attr("href", "protein_detail.html?uniprot_canonical_ac=" + aln.id);
+        link.appendTo(collink);
+        return collink;
+
+    }
+
+    function renderSequenceName(aln) {
+        var namelink = $('<div class="aln-line-header col-xs-12 col-md-3 nameclass" />');
+        namelink.text(aln.name);
+        return namelink;
+    }
 
     function renderSequenceLine(aln) {
-        var line = $('<div class="aln-line" />');
+        var line = $('<div class="aln-line row" />');
 
         // generate leading content
-        renderSequenceLeadingContent(aln).appendTo(line);
-
-        // add aln value
-        renderSequenceValue(aln).appendTo(line);
+        var link = renderSequenceLink(aln);
+        var name = renderSequenceName(aln);
+        var seq = renderSequenceValue(aln);
+        link.appendTo(line);
+        name.appendTo(line);
+        seq.appendTo(line);
 
         return line;
     }
 
     function renderAlignmentLine(sequenceAlignment) {
-        var line = $('<div class="aln-line" />');
+        var line = $('<div class="aln-line row" />');
         // make a container for the name
-        var name = $('<div class="aln-line-consensus" />');
+        var col1 = $('<div class="col-xs-12  col-md-4" />');
+        col1.text("  ");
+        var name = $('<div class="aln-line-consensus col-xs-12 col-md-8" />');
         name.text(sequenceAlignment.string);
+        col1.appendTo(line);
         name.appendTo(line);
         return line;
     }
@@ -81,14 +72,14 @@ function ajaxAlignSuccess(aln) {
         return block;
     }
 
-    function renderSequences (sequenceArray) {
+    function renderSequences(sequenceArray) {
         // for each aln, make a display block
         $(sequenceArray).each(function (i, obj) {
             // generate the display, add block to ui
             renderSequence(obj).appendTo('#sequncealign');
         });
     }
-    
+
 
     // finds the max length of all sequences or consensus
     function findMaxSequenceLength(sequenceObject) {
@@ -101,7 +92,7 @@ function ajaxAlignSuccess(aln) {
         // sort aln length, from smallest to largest
         sequenceLengths.sort();
         // get the largest aln length
-        var maxSequenceLength = sequenceLengths[sequenceLengths.length-1];
+        var maxSequenceLength = sequenceLengths[sequenceLengths.length - 1];
         var uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
         //log if consensus not equal to the longest sequence
         activityTracker("error", uniprot_canonical_ac, "Longest seq length=" + maxSequenceLength + ", Consensus length=" + alignmentLength);
@@ -109,111 +100,154 @@ function ajaxAlignSuccess(aln) {
         return Math.max(alignmentLength, maxSequenceLength);
     }
 
-    // this function breaks aln data into blocks with data per line
-    function formatSequenceBlocks(sequenceObject, perLine) {
-        var sequenceBlocks = [];
-        var maxSequenceLength = findMaxSequenceLength(sequenceObject);
-        
-        // divides length by per line, and rounds up
-        // var maxBlocks = Math.ceil(maxSequenceLength / perLine);
-
-        // for (var x = 0; x < maxBlocks; x++) {
-        //     sequenceBlocks.push({
-        //         start: (x * perLine)
-        //     });
-        // }
-
-        for (var x = 0; x < maxSequenceLength; x += perLine) {
-            var sequenceBlock = {
-                // holds each aln peice for the block
-                sequences: sequenceObject.sequences.map(function (aln) {
-                    return {
-                        start: x,
-                        id: aln.id,
-                        name: aln.name,
-                        string: aln.aln.substr(x, perLine)
+            // this function breaks aln data into blocks with data per line
+            function formatSequenceBlocks(sequenceObject, perLine) {
+                var sequenceBlocks = [];
+                var maxSequenceLength = findMaxSequenceLength(sequenceObject);
+    
+                // divides length by per line, and rounds up
+                // var maxBlocks = Math.ceil(maxSequenceLength / perLine);
+    
+                // for (var x = 0; x < maxBlocks; x++) {
+                //     sequenceBlocks.push({
+                //         start: (x * perLine)
+                //     });
+                // }
+    
+                for (var x = 0; x < maxSequenceLength; x += perLine) {
+                    var sequenceBlock = {
+                        // holds each aln peice for the block
+                        sequences: sequenceObject.sequences.map(function (aln) {
+                            return {
+                                start: x,
+                                id: aln.id,
+                                name: aln.name,
+                                string: aln.aln.substr(x, perLine)
+                            };
+                        }),
+                        // consensus data for block
+                        consensus: {
+                            start: x,
+                            string: sequenceObject.consensus.substr(x, perLine)
+                        }
                     };
-                }),
-                // consensus data for block
-                consensus: {
-                    start: x,
-                    string: sequenceObject.consensus.substr(x, perLine)
+    
+                    sequenceBlocks.push(sequenceBlock);
                 }
-            };
+    
+                return sequenceBlocks;
+            }
 
-            sequenceBlocks.push(sequenceBlock);
-        }
+            function buildSummary(aln) {
+                // var summaryTemplate;
+                // var summaryHtml;
+    
+                // summaryTemplate = $('#summary-template').html();
+                var Datadate = new Date(aln.date);
+                document.getElementById("date").innerHTML = Datadate;
+                var DataCluId= aln.cls_id;
+                document.getElementById("cluid").innerHTML = DataCluId;
+                var DatauniId = aln._id
+                document.getElementById("unid").innerHTML = DatauniId;
+                var Dataident = aln.identity
+                document.getElementById("ident").innerHTML = Dataident;
+                var Dataidentpos = aln.identical_positions;
+                document.getElementById("identpos").innerHTML = Dataidentpos;
+                var Datasimilarpos = aln.similar_positions;
+                document.getElementById("pos").innerHTML = Datasimilarpos;
+                var Dataalgo = aln.algorithm.name;
+                document.getElementById("algo").innerHTML = Dataalgo;
+                var url = aln.algorithm.url;
+                var parameter = aln.algorithm.parameter;
+                var algname = aln.algorithm.name;
+             
+                // url += "?parameter=" + aln.algorithm.parameter
+    
+                $("#algo").attr("href", url);
+               
+            }
 
-        return sequenceBlocks;
+function ajaxAlignSuccess(aln) {
+    if (aln.code) {
+        console.log(aln.code);
+        displayErrorByCode(aln.code);
+        //activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
+    } else {
+       
+        var perLine = 60;
+        var sequenceBlockData = formatSequenceBlocks(aln, perLine);
+        renderSequences(sequenceBlockData);
+        buildSummary(aln);
+       // renderSequenceLeadingContent(aln);
     }
 
-    var perLine = 60;
-    var sequenceBlockData = formatSequenceBlocks(aln, perLine);
-    renderSequences(sequenceBlockData);
-    }
-      updateBreadcrumbLinks();
+    updateBreadcrumbLinks();
+ 
 }
 
+
+
+
 function updateBreadcrumbLinks() {
-	const proteinacc = getParameterByName("uniprot_canonical_ac") || "";
+    const proteinacc = getParameterByName("uniprot_canonical_ac") || "";
     const listID = getParameterByName("listID") || "";
     //const listID = "2f5f963be06fd39152da2a54508a9935";
-	const globalSearchTerm = getParameterByName("gs") || "";
-	var glycanPageType = window.location.pathname.includes("glycoprotein") ?
-		"glycoprotein" :
-		"protein";
+    const globalSearchTerm = getParameterByName("gs") || "";
+    var glycanPageType = window.location.pathname.includes("glycoprotein") ?
+        "glycoprotein" :
+        "protein";
 
-	if (globalSearchTerm) {
-		$("#breadcrumb-search").text("General Search");
-		$("#breadcrumb-search").attr(
-			"href",
-			"global_search_result.html?search_query=" + globalSearchTerm
-		);
-		if (listID)
-			$("#breadcrumb-list").attr(
-				"href",
-				glycanPageType + "_list.html?id=" + listID + "&gs=" + globalSearchTerm
-			);
-		else $("#li-breadcrumb-list").css("display", "none");
-	} else {
-		$("#breadcrumb-search").attr(
-			"href",
-			glycanPageType + "_search.html?id=" + listID
-		);
-		if (listID && (listID !== 'null'))
-			$("#breadcrumb-list").attr(
-				"href",
-				glycanPageType + "_list.html?id=" + listID
-			);
-		else $("#li-breadcrumb-list").css("display", "none");
-	}
-	if (proteinacc) {
-		$("#breadcrumb-detail").attr(
-			"href",
-			glycanPageType +
-			"_detail.html?uniprot_canonical_ac=" +
-			proteinacc +
-			"&listID=" +
-			listID +
-			"#isoforms"
-		);
-	} else {
-		$("#li-breadcrumb-detail").css("display", "none");
-	}
-	if (proteinacc) {
-		$("#breadcrumb-detailback").attr(
-			"href",
-			glycanPageType +
-			"_detail.html?uniprot_canonical_ac=" +
-			proteinacc +
-			"&listID=" +
-			listID +
-			"#isoforms"
-		);
-	}
-	//else {
-	//   $("#li-breadcrumb-detailbback").css("display", "none");
-	// }
+    if (globalSearchTerm) {
+        $("#breadcrumb-search").text("General Search");
+        $("#breadcrumb-search").attr(
+            "href",
+            "global_search_result.html?search_query=" + globalSearchTerm
+        );
+        if (listID)
+            $("#breadcrumb-list").attr(
+                "href",
+                glycanPageType + "_list.html?id=" + listID + "&gs=" + globalSearchTerm
+            );
+        else $("#li-breadcrumb-list").css("display", "none");
+    } else {
+        $("#breadcrumb-search").attr(
+            "href",
+            glycanPageType + "_search.html?id=" + listID
+        );
+        if (listID && (listID !== 'null'))
+            $("#breadcrumb-list").attr(
+                "href",
+                glycanPageType + "_list.html?id=" + listID
+            );
+        else $("#li-breadcrumb-list").css("display", "none");
+    }
+    if (proteinacc) {
+        $("#breadcrumb-detail").attr(
+            "href",
+            glycanPageType +
+            "_detail.html?uniprot_canonical_ac=" +
+            proteinacc +
+            "&listID=" +
+            listID +
+            "#isoforms"
+        );
+    } else {
+        $("#li-breadcrumb-detail").css("display", "none");
+    }
+    if (proteinacc) {
+        $("#breadcrumb-detailback").attr(
+            "href",
+            glycanPageType +
+            "_detail.html?uniprot_canonical_ac=" +
+            proteinacc +
+            "&listID=" +
+            listID +
+            "#isoforms"
+        );
+    }
+    //else {
+    //   $("#li-breadcrumb-detailbback").css("display", "none");
+    // }
 }
 /**
  * LoadDataList function to configure and start the request to GWU  service
@@ -227,8 +261,8 @@ function LoadDataisoAlignment() {
         dataType: "json",
         url: getWsUrl("protein_alignment"),
         data: getAlignmentPostData(uniprot_canonical_ac, cluster_type),
-        method: 'GET',  
-        success: ajaxAlignSuccess, 
+        method: 'GET',
+        success: ajaxAlignSuccess,
     };
     // make the server call
     $.ajax(aln);
@@ -237,8 +271,8 @@ function LoadDataisoAlignment() {
 $(document).ready(function () {
     LoadDataisoAlignment();
     updateBreadcrumbLinks();
-   
-});  
+
+});
 /**
  * getParameterByName function to Extract query parameters from url
  * @param {string} name - The name of the variable to extract from query string

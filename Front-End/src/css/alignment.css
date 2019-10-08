@@ -5,13 +5,14 @@
     }
     .aln-line-link{
         display: inline-block;
-        width: 13rem
+        width: 13rem;
+        padding-left: 9px;
     }
-    /* .aln-line-title{
+    .aln-line-title{
         
         display: inline-block;
-        width: 15rem
-    } */
+        width: 20rem
+    }
     .aln-line-alignment{
         font-family:monospace;
         display: inline-block;
@@ -21,11 +22,21 @@
    .aln-line-value{
        font-family: monospace;
        display: inline-block;
+       word-break: break-all;
 
    }
 
    .aln-line-consensus{
-    margin-left: 130px;
+    overflow: hidden;
     font-family: monospace;
     display: inline-block;
+    word-break: break-all;
+  
    }
+.boldd{
+    font-weight: bold;
+}
+.summarystly{
+    padding-right: 0px;
+    padding-left: 0px;
+}

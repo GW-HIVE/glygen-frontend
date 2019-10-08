@@ -72,12 +72,40 @@
                <span class='title_protein'> </span>
             </h3>
          </center>
-         
-       <div id="sequncealign">
+         <div class="row">
+                <div class="col-sm-7 panel panel-default summarystly">
+                        <div class="panel-heading"><b><center>Alignment</center></b> </div>
+                    <div class="panel-body" id="sequncealign">
+                        </div>
+                        </div>
+               
+                <div class="col-sm-4 panel panel-default summarystly">
+                        <div class="panel-heading"><center><b>Alignment Summary</b></center> </div>
+                        <div class="panel-body">
+                               <ul>
+                               <li><span class="boldd">Date: </span><span id="date"> </span></li> 
+                               <hr>
+                               <li><span class="boldd">Alogorithm : </span><a id="algo"></a></li> 
+                               <hr>
+                                <li><span class="boldd">Similar Position: </span><span id="pos"> </span></li>
+                                <hr>
+                                <li><span class="boldd">ID: </span><span id="unid"> </span></li>
+                                <hr>
+                               <li><span class="boldd">Cluster ID: </span><span id="cluid"> </span></li>
+                               <hr>
+                                <li><span class="boldd">Identity: </span><span id="ident"> </span></li>
+                                <hr>
+                               <li><span class="boldd">Identity_position: </span><span id="identpos"></span></li> 
+                            </ul>
+                        </div>
+                </div>
+               
 
+              
        </div>
+       
 
-</div>
+
     <div w3-include-html="footer.html"></div>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
