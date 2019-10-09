@@ -35,7 +35,13 @@ function setFormValues(data) {
             massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
         }
 
-        $("#species").val(data.query.organism? data.query.organism.organism_list[0].id : 0);
+        var organism_id = undefined;
+        if (data.query.organism && data.query.organism.organism_list) {
+            organism_id = data.query.organism.organism_list.map(organism => organism.id)
+        }
+
+        $("#species").val(organism_id || "").trigger("chosen:updated");
+        $("#species_operation").val(data.query.organism ? data.query.organism.operation: "or");
         $("#ddl").val(data.query.glycan_type || "");
         var types = document.getElementById('ddl');
         var subtypes = document.getElementById('ddl2');
@@ -92,8 +98,8 @@ function setGlycoProteinFormValues(data) {
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");
-        $("#glycosylated_aa").val(data.query.glycosylated_aa.aa_list || "").trigger("chosen:updated");
-        // $("#glycosylated_aa").val('').trigger("chosen:updated");
+        $("#glycosylated_aa").val(data.query.glycosylated_aa ? data.query.glycosylated_aa.aa_list : "").trigger("chosen:updated");
+        $("#glycosylated_aa_operation").val(data.query.glycosylated_aa ? data.query.glycosylated_aa.operation : "or");
         $("#glycosylation_evidence").val(data.query.glycosylation_evidence || "");
         $("#refseq").val(data.query.refseq_ac || "");
     }

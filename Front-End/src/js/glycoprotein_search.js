@@ -84,9 +84,8 @@ var mass_max;
 var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
-            // max_selected_options: 10,
             placeholder_text_multiple: "Click to select multiple Amino Acids",
-            width: "565px"
+            width: "416px"
         })
         .bind(function () {
             window.alert("You reached your limited number of selections which is 2 selections!");
@@ -265,9 +264,10 @@ function ajaxProteinSearchSuccess() {
     var glycan_id = $("#glycan_id").val();
     var glycan_relation = $("#glycan_relation").val();
     var glycosylated_aa = $(".glycosylated_aa").val();
+    var glycosylated_aa_operation =  $("#glycosylated_aa_operation").val();
     var glycosylation_evidence = $("#glycosylation_evidence").val();
     var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name,
-        protein_name, go_term, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylation_evidence)
+        protein_name, go_term, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylated_aa_operation, glycosylation_evidence)
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -306,11 +306,12 @@ function ajaxProteinSearchSuccess() {
  * @param {string} input_go_term user input
  * @param {string} input_pathway_id user input
  * @param {string} input_sequence user input
+ * @param {string} input_glycosylated_aa_operation user input
  * @return {string} returns text or id
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_pathway_id, input_sequence,
-    input_glycan, input_relation, input_glycosylated_aa, input_glycosylation_evidence) {
+    input_glycan, input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
     var sequences;
     if (input_sequence) {
         sequences = {
@@ -332,6 +333,14 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         organism.id = input_organism.id;
         organism.name = input_organism.name;
     }
+
+    var glyco_aa = undefined;
+    if (input_glycosylated_aa.length > 0) {
+        glyco_aa = {
+            "aa_list": input_glycosylated_aa ? input_glycosylated_aa : undefined,
+            "operation": input_glycosylated_aa_operation
+        }
+    }
    
     var formjson = $.extend({}, {
         "operation": "AND",
@@ -350,10 +359,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
         uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined,
         glycan: glycans?glycans: undefined,
-        glycosylated_aa: {
-            "aa_list": input_glycosylated_aa?input_glycosylated_aa:undefined,
-            "operation":"or"
-        }, 
+        glycosylated_aa: glyco_aa, 
         glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
     });
     return formjson;

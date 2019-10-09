@@ -42,6 +42,12 @@ function buildSummary(queryInfo) {
     if (question) {
         queryInfo = { question: MESSAGES[question] };
     }
+
+    if (queryInfo.organism && queryInfo.organism.organism_list) {
+        var organism_name = queryInfo.organism.organism_list.map(organism => organism.name)
+        queryInfo.organism.organism_list = organism_name.join(' ' + queryInfo.organism.operation + ' ');
+    }
+
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);

@@ -55,7 +55,7 @@
     <link rel="stylesheet" type="text/css" href="css/server.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
      <!-- CSS for serach page -->
-<!--    <link rel="stylesheet" type="text/css" href="css/search.css">-->
+   <!-- <link rel="stylesheet" type="text/css" href="css/search.css"> -->
     <!--Script for jquery-->
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <!--Script for bootstrap-->
@@ -415,7 +415,7 @@
 
                                             <!-- Select Interaction Type-->
                                             <div class="col-lg-4 col-sm-8" id="glycanrelationrow">
-                                                <select class="form-control glycan_relation" id="relation">
+                                                <select class="glycan_relation" id="relation">
                                                     <option value="">Select Interaction Type</option>
                                                     <option value="attached">Covalent</option>
                                                     <option value="binding">Non-covalent</option>
@@ -442,7 +442,7 @@
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> Glycosylated Amino Acid: 
                                             </label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-6">
                                                 <select id="glycosylated_aa" class="glycosylated_aa" multiple="true">
                                                     <option value="R">Arginine - Arg - R</option>
                                                     <option value="K">Lysine - Lys - K</option>
@@ -459,7 +459,7 @@
                                                     <option value="A">Alanine - Ala - A</option>
                                                     <option value="I">Isoleucine - Ile - I</option>
                                                     <option value="L">Leucine - Leu - L</option>
-                                                    <option value="M">Methionine - Met - M</option>
+                                                    <option value="M">Methionine - Met - M</option> 
                                                     <option value="F">Phenylalanine - Phe - F</option>
                                                     <option value="V">Valine - Val - V</option>
                                                     <option value="P">Proline - Pro - P</option>
@@ -472,6 +472,12 @@
                                                 data-tippy="Click to Highlight Multiple Selections">Asparagine - Asn - N</span>
 -->
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="glycosylated_aa_operation" id="glycosylated_aa_operation">
+                                                    <option value="or">OR</option>
+                                                    <option value="and">AND</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -568,7 +574,7 @@
                                                     </span> Glycosylation Evidence Type</label>
 
                                             <div class="col-sm-8">
-                                                <select id="glycosylation_evidence" class="form-control">
+                                                <select id="glycosylation_evidence" class="glycosylation_evidence">
                                                     <option value="">Select Glycosylation Evidence Type</option>
                                                     <option value="both">Both</option>
                                                     <option value="reported">Reported</option>

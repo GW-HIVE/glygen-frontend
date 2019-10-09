@@ -48,7 +48,7 @@ h6 {
 }
 
 select {
-    height: 35px;
+    height: 34px;
     text-indent: 5px;
 }
 
@@ -500,6 +500,7 @@ select {
 .form-control motif {
     padding-left: -10px;
     margin-left: 0px;
+    background-color: #f9f9f9;
 }
 
 .ui-autocomplete {
@@ -525,11 +526,11 @@ select {
 .chosen-container-multi .chosen-choices {
     display: block;
     height: 34px;
-    padding: 6px 12px 0px 8px;
+    padding: 0px 6px 0px 6px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
+    background-color: #f9f9f9;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -563,12 +564,14 @@ select {
     display: inline-block;
     width: 30%;
     margin-bottom: 0;
+    background-color: #f9f9f9;
 }
 
 .sliderbox-input-min1 {
     margin-top: 20px;
     display: inline-block;
     width: 30%;
+    background-color: #f9f9f9;
 }
 
 .sliderbox-input-max {
@@ -576,12 +579,14 @@ select {
     display: inline-block;
     width: 30%;
     margin-bottom: 0;
+    background-color: #f9f9f9;
 }
 
 .sliderbox-input-max1 {
     margin-top: 10px;
     display: inline-block;
     width: 30%;
+    background-color: #f9f9f9;
 }
 
 .max-label {

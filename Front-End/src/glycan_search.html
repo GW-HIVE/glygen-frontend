@@ -32,6 +32,8 @@
     <!--This does not work as downloaded version so UI using this as CDN for font.css-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
         crossorigin="anonymous">
+    <!-- CSS for chosen -->
+    <link rel="stylesheet" type="text/css" href="css/chosen.css">
     <!-- CSS for boots -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
     <!-- CSS for tippy tooltip -->
@@ -265,11 +267,16 @@
                                                         tooltip-title="An individual animal, plant, or single-celled life form. <br><br>Click to select an Organism that makes your glycan(s).">
                                                         <i class="far fa-question-circle help-sign"></i>
                                                     </a>
-                                                </span> Organism:</label>
-
-                                            <div class="col-sm-8">
-                                                <select class="organism" id="species">
-                                                    <option value="0">Select Organism</option>
+                                                </span> Organism:
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <select id="species" class="form-control organism" multiple="true">
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <select class="organism_operation" id="species_operation">
+                                                    <option value="or">OR</option>
+                                                    <option value="and">AND</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -555,6 +562,8 @@
 <script type="text/javascript" src="libraries/jquery/jquery-ui.js"></script>
 <!-- script for tippy library tooltip-->
 <!--<script type="text/javascript" src="libraries/tippy.all.min.js"></script>-->
+<!-- script for choosing from listfield -->
+<script type="text/javascript" src="libraries/chosen.js"></script>
 <!-- script for range bar to work-->
 <script src="libraries/nouislider.js"></script>
 <!-- script for navigation -->

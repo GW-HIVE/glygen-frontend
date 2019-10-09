@@ -227,7 +227,11 @@
                     <!--Amino Acid-->
                     {{#glycosylated_aa}}
                     <td>Amino acid:</td>
-                    <td> {{.}}</td>
+                    <td> 
+                        {{#glycosylated_aa.aa_list}}
+                            {{.}}
+                        {{/glycosylated_aa.aa_list}}
+                    </td>
                     {{/glycosylated_aa}}
 
                     <!--pathway Typeahead-->

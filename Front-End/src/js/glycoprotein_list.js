@@ -29,7 +29,7 @@ var globalSearchTerm = "";
 function buildSummary(queryInfo) {
     var summaryTemplate = $('#summary-template').html();
     if (queryInfo.glycosylated_aa) {
-        queryInfo.glycosylated_aa = queryInfo.glycosylated_aa.aa_list.join(', ');
+        queryInfo.glycosylated_aa.aa_list = queryInfo.glycosylated_aa.aa_list.join(' ' + queryInfo.glycosylated_aa.operation + ' ');
     }
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     if (queryInfo.mass) {
