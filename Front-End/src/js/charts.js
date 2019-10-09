@@ -75,8 +75,8 @@ function vennGlycanHomoMusRat(dummy, data, id) {
  */
 function sunburstGlycanTypeSubtype(dummy, data, id) {
 	// Variables
-    var width = 500;
-    var height = 500;
+    var width = 450;
+    var height = 450;
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
@@ -92,8 +92,6 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
     var partition = d3.partition()
         .size([2 * Math.PI, radius]);
 
-	
-	
     // Get the data from our JSON file
     d3.json("data/statistics.json", function(error, data) {
         if (error) throw error;
@@ -120,6 +118,25 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
         g.selectAll('g')
             .data(root.descendants())
             .enter().append('g').attr("class", "node")
+			.on("click", function (d) {
+				//console.log(d.data.name)
+				//console.log(formatNumber(d.value))
+				searchGlycansBy({
+					"organism": {
+						organism_list: [
+							{
+								"id": d.data.organism.id,
+								"name": d.data.organism.name
+//								"id": 9606,
+//								"name": "Homo sapiens"
+							}
+						],
+						"operation":"or"
+					},
+					"glycan_type": d.data.glycan_type,
+					"glycan_subtype": d.data.glycan_subtype
+				}, "sunburst_glycan_type_subtype");
+			})
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
 				.append("g")
@@ -163,9 +180,7 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 					.attr('opacity', '1')
 					.style("cursor", "none");
 			});
-
-			
-
+		
         // Populate the <text> elements with our data-driven titles.
         g.selectAll(".node")
             .append("text")
@@ -1679,13 +1694,22 @@ function searchGlycansBy(param, chartId) {
 	} else if (param.organism) {
 		if (param.glycan_type) {
 			$.extend(formObject, {
-			organism: {
+			"organism": {
 				"organism_list" : param.organism.organism_list,
 				"operation":"or"
         	},
 			"glycan_type": param.glycan_type
 			})
 //			chartId = "donut_glycan_homo_mus_rat";
+		} else if (param.glycan_subtype) {
+			$.extend(formObject, {
+				organism: {
+					"organism_list": param.organism.organism_list,
+					"operation":"or"
+        		},
+				"glycan_type": param.glycan_type,
+				"glycan_subtype": param.glycan_subtype
+			})
 		} else {
 			$.extend(formObject, {
 				organism: {

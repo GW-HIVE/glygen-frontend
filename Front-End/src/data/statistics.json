@@ -137,74 +137,64 @@
 		]
 	},
 	"sunburst_glycan_type_subtype": {
-      "name":"Glycans",
-      "children":[
-         {
-            "name": "N-glycan",
-            "children": [
-               {
-                  "name": "Hybrid",
-                  "size": 85
-               },
-               {
-                  "name":"Complex",
-                  "size": 1796
-               },
-				{
-					"name": "High mannose",
-					"size": 78
-				},
-				{
-					"name": "Other",
-					"size": 606
-				}
-            ]
-         },
-         {
-            "name":"O-glycans",
-            "children":[
-               {
-                  "name": "Core 1",
-                  "size": 100
-               },
-               {
-                  "name": "Core 2",
-					"size": 189
-               },
-               {
-                  "name": "Core 3",
-					"size": 53
-               },
-				{
-					"name": "Core 4",
-					"size": 38
-				},
-				{
-					"name": "Core 5",
-					"size": 5
-				},
-				{
-					"name": "Core 6",
-					"size": 8
-				},
-				{
-					"name": "Core 7",
-					"size": 1
-				}
-            ]
-         },
-         {
-            "name":"Other",
-			"size": 2439,
-            "children":[
-               {
-                  "name":"",
-                  "size": 1
-               }
-            ]
-         }
-      ]
-   },
+     	"name":"Glycans",
+     	"children":[
+        	{
+            	"name": "N-glycan",
+            	"children": [
+				   {
+					  "name": "Hybrid",
+					  "size": 85
+				   },
+				   {
+					  "name":"Complex",
+					  "size": 1796
+				   },
+					{
+						"name": "High mannose",
+						"size": 78
+					},
+					{
+						"name": "Other",
+						"size": 606
+					}
+				]
+        	},
+        	{
+				"name":"O-glycans",
+				"children":[
+					{
+                		"name": "Core 1",
+                		"size": 100
+               		},
+               		{
+                  		"name": "Core 2",
+						"size": 189
+               		},
+               		{
+                  		"name": "Core 3",
+						"size": 53
+               		},
+					{
+						"name": "Core 4",
+						"size": 38
+					},
+					{
+						"name": "Core 5",
+						"size": 5
+					},
+					{
+						"name": "Core 6",
+						"size": 8
+					},
+					{
+						"name": "Core 7",
+						"size": 1
+					}
+				]
+        	}
+    	]
+	},
 	
 	"venn_protein_homo": [{
 			"sets": [0],
