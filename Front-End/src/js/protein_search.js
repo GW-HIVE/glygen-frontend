@@ -315,13 +315,14 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "aa_sequence": input_sequence
         }
     }
-    
-    var organism;
+    var selected_organism = undefined;
     if (input_organism.id != "0") {
-        organism = {"id":0,"name":"All"};
-        organism.id = input_organism.id;
-        organism.name = input_organism.name;
+        selected_organism = {
+            "id": input_organism.id,
+            "name": input_organism.name
+        }
     }
+
     var formjson = $.extend({}, {
         "operation": "AND",
         query_type: input_query_type,
@@ -330,7 +331,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "max": parseInt(mass_max)
         },
         sequence: sequences ?sequences:undefined,
-        organism: organism ?organism:undefined,
+        organism: selected_organism,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,
         protein_name: input_protein_name? input_protein_name: undefined,
         gene_name: input_gene_name?input_gene_name: undefined,

@@ -328,17 +328,17 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             glytoucan_ac: input_glycan
         }
     }
-    var organism;
+    var selected_organism = undefined;
     if (input_organism.id != "0") {
-        organism = {"id":0,"name":"All"};
-        organism.id = input_organism.id;
-        organism.name = input_organism.name;
+        selected_organism = {
+            "id": input_organism.id,
+            "name": input_organism.name
+        }
     }
-
     var glyco_aa = undefined;
     if (input_glycosylated_aa.length > 0) {
         glyco_aa = {
-            "aa_list": input_glycosylated_aa ? input_glycosylated_aa : undefined,
+            "aa_list": input_glycosylated_aa,
             "operation": input_glycosylated_aa_operation
         }
     }
@@ -351,8 +351,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "max": parseInt(mass_max)
         },
         sequence: sequences ?sequences:undefined,
-        organism: {"id":input_organism.id,"name":input_organism.name},
-        // organism: organism ?organism:undefined,
+        organism: selected_organism,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,
         protein_name: input_protein_name? input_protein_name: undefined,
         gene_name: input_gene_name?input_gene_name: undefined,
