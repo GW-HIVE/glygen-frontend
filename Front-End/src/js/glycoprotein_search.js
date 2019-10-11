@@ -58,7 +58,6 @@ function resetAdvanced() {
             glycosylation_evidence: ""
         }
     })
-    $("#glycosylated_aa").val('').trigger("chosen:updated");
 }
 
 /**
@@ -85,11 +84,13 @@ var mass_min;
 $(document).ready(function () {
     $(".glycosylated_aa").chosen({
             placeholder_text_multiple: "Click to select multiple Amino Acids",
-            width: "416px"
+            width: "100%"
         })
         .bind(function () {
-            window.alert("You reached your limited number of selections which is 2 selections!");
+            window.alert("You reached your limited number of selections!");
         });
+        // setting width of chosen multiselect dropdown to show placeholder text.
+        $(".search-field").css({"width": "100%"});
 
     $.ajax({
         dataType: "json",

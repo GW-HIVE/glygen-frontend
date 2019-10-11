@@ -48,12 +48,14 @@ var sugar_mass_max;
 $(document).ready(function () {
     
     $(".organism").chosen({
-        placeholder_text_multiple: "Click to select multiple Organism",
-        width: "416px"
+        placeholder_text_multiple: "Click to select multiple Organisms",
+        width: "100%"
     })
     .bind(function () {
         window.alert("You reached your limited number of selections!");
     });
+    // setting width of chosen multiselect dropdown to show placeholder text.
+    $(".search-field").css({"width": "100%"});
 
     //Section for populating label names from key-value.json
     populateFromKeyValueStore("lbl_glytoucan_acc", "GLYTOUCAN_ACCESSION", "", ":", 2);
