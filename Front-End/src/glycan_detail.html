@@ -49,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-  
+
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
@@ -75,7 +75,6 @@
     <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
 
-
     <style>
         #evidence_div {
             width: 50%;
@@ -85,7 +84,6 @@
             font-size: 13px;
             box-sizing: border-box;
         }
-       
     </style>
 </head>
 
@@ -115,18 +113,18 @@
                 <a href="#foundGlycoproteins">Found Glycoproteins</a>
             </li>
             <li>
-                <a href="#crossReferences">Cross References</a>
-            </li>
-            <li>
                 <a href="#biosyntheticEnzymes">Biosynthetic Enzymes</a>
             </li>
             <li>
                 <a href="#digitalSequence">Digital Sequence</a>
             </li>
             <li>
+                <a href="#crossReferences">Cross References</a>
+            </li>
+            <li>
                 <a href="#publications">Publications</a>
             </li>
-           
+
         </ul>
         <!-- cd-faq-categories -->
         <!-- main content for page -->
@@ -295,31 +293,6 @@
                     </div>
                 </ul>
 
-                <!--Cross References-->
-                <ul id="crossReferences" class="cd-faq-group selected">
-                <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Cross References</h4>
-                        </div>
-                        <div class="panel-body">
-                            {{#itemscrossRef}}
-                                <div class="panelmaincontent">
-                                    <div class="row">
-                                        <li class="list-group2"><strong>{{database}}:</strong></li>
-                                        {{#links}}
-                                            <div class=" col-xs-6 col-sm-3">
-                                                <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
-                                            </div>
-                                        {{/links}}
-                                        {{^link}} {{/link}}
-                                    </div>
-                                </div>
-                            {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
-                        </div>
-                    </div>
-                </ul>
-
                 <!--Biosynthetic Enzymes -->
                 <ul id="biosyntheticEnzymes" class="cd-faq-group">
                     <li class="cd-faq-title" />
@@ -379,6 +352,31 @@
                                 <strong>GlycoCT</strong>
                                 <pre id="break">{{{glycoct}}}</pre>
                             {{/glycoct}}
+                        </div>
+                    </div>
+                </ul>
+
+                <!--Cross References-->
+                <ul id="crossReferences" class="cd-faq-group selected">
+                    <li class="cd-faq-title" />
+                    <div class="panel panel-default">
+                        <div class="gg-panel-heading">
+                            <h4>Cross References</h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#itemscrossRef}}
+                                <div class="panelmaincontent">
+                                    <div class="row">
+                                        <li class="list-group2"><strong>{{database}}:</strong></li>
+                                        {{#links}}
+                                            <div class=" col-xs-6 col-sm-3">
+                                                <li class="list-group-indent"><a class="panelcontent" href="{{url}}" target="_blank">{{id}}&nbsp</a></li>
+                                            </div>
+                                        {{/links}}
+                                        {{^link}} {{/link}}
+                                    </div>
+                                </div>
+                            {{/itemscrossRef}} {{^itemscrossRef}} No data available. {{/itemscrossRef}}
                         </div>
                     </div>
                 </ul>
