@@ -1028,13 +1028,13 @@ function barChartSugar(dummy, data, id) {
 		.attr("text-anchor", "end")
 		.text("Frequency");
 
-	// add text to y Axis
+	// add text to x Axis
 	svg.append("text")
 		.attr("x", 75)
-		.attr("dx", "0.71em")
+		.attr("dx", "4.5em")
 		.attr("dy", "32em")
 		.attr("text-anchor", "end")
-		.text("Sugar ranges");
+		.text("Number of residues");
 }
 
 //------------------------------------------

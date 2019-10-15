@@ -5,6 +5,11 @@
 /*----------------------------------
     statistics.js
 -------------------------------------*/
+
+.subheading {
+    padding-bottom: 50px;
+    padding-top: 40px;
+}
 /*
 path {
   stroke: #fff;

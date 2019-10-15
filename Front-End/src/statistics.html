@@ -69,8 +69,6 @@
 
     <div class="container text-center" style="margin-bottom: 200px; background: #fff;">
         <h2 class="page-heading" style="padding-bottom: 20px; padding-top: 40px;"> GlyGen Data Statistics </h2>
-
-
         <div class="row">
             <h3>BioMolecules</h3>
             <p class="lead">
@@ -89,20 +87,20 @@
 -->
             </div>
         </div>
-        <h2 class="page-heading">Glycans</h2>
-        <hr>
+        <h2 class="page-heading subheading">Glycans</h2>
+        
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h3>Glycans</h3>
+                <h3>By Species</h3>
                 <p class="lead">
-                    Human, mouse, and rat glycans.
+                    Number of shared and unique glycans by species.
                 </p>
                 <div id="venn_glycans_homo_mus_rat"></div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <h3>Glycans</h3>
+                <h3>By Type</h3>
                 <p class="lead">
-                    Glycan types and subtypes.
+                    Number of glycans by type.
                 </p>
                 <svg id="sunburst_glycan_type_subtype"></svg>
             </div>
@@ -110,7 +108,7 @@
         <hr>
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h3>Glycans</h3>
+                <h3>Species by Type</h3>
                 <p class="lead">
                     Human, mouse, and rat glycans.
                 </p>
@@ -118,7 +116,7 @@
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <h3>Motifs</h3>
+                <h3>By Motifs</h3>
                 <p class="lead">
                     Motifs and their frequencies.
                 </p>
@@ -128,9 +126,9 @@
         <hr>
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h3>Mass ranges</h3>
+                <h3>By Mass</h3>
                 <p class="lead">
-                    X: Mass ranges (e.g. 50 Da), Y: frequency of Glycans in this mass range.
+                    Each bar represents the number of glycans of a 50Da mass range.
                 </p>
                 <div id="bar_chart_mass"></div>
             </div>
@@ -138,77 +136,71 @@
         <hr>
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <h3>Sugar ranges</h3>
+                <h3>By Number of Residues</h3>
                 <p class="lead">
-                    X: Sugar ranges (e.g. 1 Da), Y: frequency of Glycans in this sugar range.
+                    Each bar represents the number of glycans with a certain amount of residues.
                 </p>
                 <div id="bar_chart_sugar"></div>
+            </div>
+        </div>
+        <h2 class="page-heading subheading">Proteins</h2>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>By Species</h3>
+                <p class="lead">
+                    Number of all proteins (canonical proteins and isoforms) by species.
+                </p>
+                <div id="pie_canonical_isoforms_proteins"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Canonical Proteins</h3>
+                <p class="lead">
+                    Number of Canonical Proteins by species.
+                </p>
+                <div id="pie_canonical_proteins"></div>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
+                <h3>Glycosylhydrolases</h3>
+                <p class="lead">
+                    Number of Glycosylhydrolases by Species.
+                </p>
+                <div id="pie_glycohydrolases_proteins"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Glycosyltransferases</h3>
+                <p class="lead">
+                    Number of Glycosyltransferases by Species.
+                </p>
+                <div id="pie_glycosyltransferases_proteins"></div>
+            </div>
+        </div>
+       <hr>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Human Proteins</h3>
                 <p class="lead">
                     Human proteins.
                 </p>
                 <div id="venn_protein_homo"></div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
-                <p class="lead">
-                    Number of Genes.
-                </p>
-                <div id="pie_protein_genes"></div>
-            </div>
+            
         </div>
-        <hr>
+        <h2 class="page-heading subheading">Glycoproteins</h2>
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
+                <h3>By Species</h3>
                 <p class="lead">
-                    Number of Canonical Proteins.
-                </p>
-                <div id="pie_canonical_proteins"></div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
-                <p class="lead">
-                    Total number of Proteins (Isoforms + Canonical).
-                </p>
-                <div id="pie_canonical_isoforms_proteins"></div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
-                <p class="lead">
-                    Total number of Glycohydrolases.
-                </p>
-                <div id="pie_glycohydrolases_proteins"></div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-                <h3>Proteins</h3>
-                <p class="lead">
-                    Total number of Glycosyltransferases.
-                </p>
-                <div id="pie_glycosyltransferases_proteins"></div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-6 col-sm-12">
-                <h3>Glycoproteins</h3>
-                <p class="lead">
-                    Number of glycosylated proteins.
+                    Number of glycosylated proteins (reported with and without glycan structures, predicted) by species.
                 </p>
                 <div id="pie_glycosylated_proteins"></div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <h3>Glycoproteins</h3>
+                <h3>With glycan structures</h3>
                 <p class="lead">
-                    Glycosylated proteins with reported glycans.
+                    Number of glycosylated proteins with reported glycan structures by species.
                 </p>
                 <div id="pie_glycosyl_prot_report_glyc"></div>
             </div>
@@ -234,6 +226,16 @@
             </div>
         </div>
 -->
+    <h2 class="page-heading subheading">Genes</h2>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+        <h3>By species</h3>
+        <p class="lead">
+            Number of Genes by Species.
+        </p>
+        <div id="pie_protein_genes"></div>
+    </div>
+    </div>
     </div>
 
     <div w3-include-html="footer.html"></div>
