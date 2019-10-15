@@ -1166,29 +1166,29 @@ var pie = d3.pie()
     .enter().append("g")
     .attr("class", "arc")
  	// On click goes to list page
-	.on("click", function (d) {
-		searchProteinsBy({
-			"organism": {
-				"id": d.data.organism.id,
-				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
-		}, "pie_protein_genes");
-	})
-	.on("mouseover", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '.65')
-			.style("cursor", "pointer");
-	})
-	.on("mouseout", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '1')
-			.style("cursor", "none");
-	});
+//	.on("click", function (d) {
+//		searchProteinsBy({
+//			"organism": {
+//				"id": d.data.organism.id,
+//				"name": d.data.organism.name
+//			},
+//			"protein_type": d.data.protein_type
+//		}, "pie_protein_genes");
+//	})
+//	.on("mouseover", function (d) {
+//		var selector = d3.select(this).transition()
+//			.duration('50');
+//		selector.select("path")
+//			.attr('opacity', '.65')
+//			.style("cursor", "pointer");
+//	})
+//	.on("mouseout", function (d) {
+//		var selector = d3.select(this).transition()
+//			.duration('50');
+//		selector.select("path")
+//			.attr('opacity', '1')
+//			.style("cursor", "none");
+//	});
 
  	path.append("path")
       .attr("d", arc)
@@ -1338,13 +1338,13 @@ var pie = d3.pie()
     .attr("class", "arc")
  	// On click goes to list page
 	.on("click", function (d) {
-		searchProteinsBy({
-			"organism": {
-				"id": d.data.organism.id,
-				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
-		}, "pie_canonical_isoforms_proteins");
+//		searchProteinsBy({
+//			"organism": {
+//				"id": d.data.organism.id,
+//				"name": d.data.organism.name
+//			},
+//			"protein_type": d.data.protein_type
+//		}, "pie_canonical_isoforms_proteins");
 	});
 
  	path.append("path")

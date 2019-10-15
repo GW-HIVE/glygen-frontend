@@ -249,7 +249,7 @@
 				"operation":"or"
 			},
 			"name": "Human glycans",
-			"size": 3302
+			"size": 4046
 		},
 		{
 			"sets": [1],
@@ -264,7 +264,7 @@
 				"operation":"or"		
 			},
 			"name": "Mouse glycans",
-			"size": 517
+			"size": 641
 		},
 		{
 			"sets": [2],
@@ -279,7 +279,7 @@
 				"operation":"or"		
 			},
 			"name": "Rat glycans",
-			"size": 715
+			"size": 250
 		},
 		{
 			"sets": [0, 1],
@@ -291,19 +291,19 @@
 			"sets": [0, 2],
 			"tooltipname": "Human & Rat glycans",
 			"name": "",
-			"size": 204
+			"size": 80
 		},
 		{
 			"sets": [1, 2],
 			"tooltipname": "Mouse & Rat glycans",
 			"name": "",
-			"size": 100
+			"size": 20
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Human & Mouse & Rat glycans",
 			"name": "",
-			"size": 204
+			"size": 104
 		}
 	],
 	"glycan_homo_donut": [{
