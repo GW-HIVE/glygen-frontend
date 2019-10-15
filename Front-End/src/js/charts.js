@@ -1082,10 +1082,6 @@ function vennProteinHomo(dummy, data, id) {
 						"id": 9606,
 						"name": "Homo sapiens"
 					}
-//					"mass": {
-//						"mass_min": massRange[0],
-//						"mass_max": massRange[1]
-//					}
 				}, "venn_protein_homo");
 			} else if (d.name == "Glycoproteins") {
 				searchGlycoproteinsBy({
@@ -1178,6 +1174,20 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_protein_genes");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
 
  	path.append("path")
@@ -1241,7 +1251,7 @@ var pie = d3.pie()
     .data(pie(data.pie_canonical_proteins))
     .enter().append("g")
     .attr("class", "arc")
- 	// On click goes to list page
+	// On click goes to list page
 	.on("click", function (d) {
 		searchProteinsBy({
 			"organism": {
@@ -1250,8 +1260,21 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_canonical_proteins");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
-
  	path.append("path")
       .attr("d", arc)
       .style("fill", function(d) { return color(d.data.name); });
@@ -1394,11 +1417,25 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_glycohydrolases_proteins");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
 
  	path.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.name); });
+     	.attr("d", arc)
+     	.style("fill", function(d) { return color(d.data.name); });
 
  	path.append("text")
     	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
@@ -1466,6 +1503,20 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_glycosyltransferases_proteins");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
 
  	path.append("path")
@@ -1542,6 +1593,20 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_glycosylated_proteins");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
 
  	path.append("path")
@@ -1614,6 +1679,20 @@ var pie = d3.pie()
 			},
 			"protein_type": d.data.protein_type
 		}, "pie_glycosyl_prot_report_glyc");
+	})
+	.on("mouseover", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '.65')
+			.style("cursor", "pointer");
+	})
+	.on("mouseout", function (d) {
+		var selector = d3.select(this).transition()
+			.duration('50');
+		selector.select("path")
+			.attr('opacity', '1')
+			.style("cursor", "none");
 	});
 
  	path.append("path")

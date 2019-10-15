@@ -668,82 +668,159 @@
 			"size": 12784
 		}
 	],
-	"pie_canonical_proteins": [{
+	"pie_canonical_proteins": [
+		{
+			"organism": {
+			"id": 9606,
+			"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 19943
+			"size": 20950
 		},
 		{
+			"organism": {
+			"id": 10090,
+			"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 17526
+			"size": 22282
 		},
 		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
-			"size": 12784
+			"size": 21673
 		}
 	],
-	"pie_canonical_isoforms_proteins": [{
+	"pie_canonical_isoforms_proteins": [
+		{	"organism": {
+			"id": 9606,
+			"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 9943
+			"size": 21800
 		},
 		{
+			"organism": {
+			"id": 10090,
+			"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 7526
+			"size": 23300
 		},
 		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
-			"size": 2784
+			"size": 22400
 		}
 	],
-	"pie_glycohydrolases_proteins": [{
+	"pie_glycohydrolases_proteins": [
+		{
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 2835
+			"size": 84
 		},
 		{
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 1254
+			"size": 77
 		},
 		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
-			"size": 985
+			"size": 35
 		}
 	],
-	"pie_glycosyltransferases_proteins": [{
+	"pie_glycosyltransferases_proteins": [
+		{
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 15749
+			"size": 222
 		},
 		{
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 12527
+			"size": 194
 		},
 		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},		
 			"name": "Rat",
-			"size": 1365
+			"size": 94
 		}
 	],
-	"pie_glycosylated_proteins": [{
+	"pie_glycosylated_proteins": [
+		{
+			"organism": {
+			"id": 9606,
+			"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 4715
+			"size": 4730
 		},
 		{
+			"organism": {
+			"id": 10090,
+			"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 3788
+			"size": 3795
 		},
 		{
+			"organism": {
+			"id": 10116,
+			"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
-			"size": 2086
+			"size": 2091
 		}
 	],
-	"pie_glycosyl_prot_report_glyc": [{
+	"pie_glycosyl_prot_report_glyc": [
+		{
+			"organism": {
+			"id": 9606,
+			"name": "Homo sapiens"
+			},
 			"name": "Human",
-			"size": 1771
+			"size": 1784
 		},
 		{
+			"organism": {
+			"id": 10090,
+			"name": "Mus musculus"
+			},
 			"name": "Mouse",
-			"size": 526
+			"size": 528
 		},
 		{
+			"organism": {
+			"id": 10116,
+			"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
-			"size": 249
+			"size": 251
 		}
 	]
 }
