@@ -140,7 +140,7 @@
 		]
 	},
 	"sunburst_glycan_type_subtype": {
-     	"name":"Glycans",
+     	"name":"",
      	"children":[
         	{
             	"name": "N-glycan",
@@ -164,7 +164,7 @@
 				]
         	},
         	{
-				"name":"O-glycans",
+				"name":"O-glycan",
 				"children":[
 					{
                 		"name": "Core 1",
@@ -644,14 +644,26 @@
 		"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
 	},
 	"pie_protein_genes": [{
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			},
 			"name": "Human",
 			"size": 19343
 		},
 		{
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			},
 			"name": "Mouse",
 			"size": 15526
 		},
 		{
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			},
 			"name": "Rat",
 			"size": 12784
 		}
