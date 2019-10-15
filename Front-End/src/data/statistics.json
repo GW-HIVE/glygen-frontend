@@ -1,31 +1,31 @@
 {
 	"sunburst": {
-		"name": "",
+		"name": "BioMolecules",
 		"children": [{
-				"name": "Human molecules",
+				"name": "Human",
 				"children": [
 					{
-						"name": "proteins",
+						"name": "Proteins",
 						"children": [{
-								"name": "enzymes",
+								"name": "Enzymes",
 								"size": 5000
 							},
 							{
-								"name": "lectins",
+								"name": "Lectins",
 								"size": 200
 							},
 							{
-								"name": "glycoproteins",
+								"name": "Glycoproteins",
 								"size": 4434
 							},
 							{
-								"name": "other",
+								"name": "Other",
 								"size": 11363
 							}
 						]
 					},
 					{
-						"name": "glycans",
+						"name": "Glycans",
 						"children": [{
 								"name": "N-glycan",
 								"size": 2502
@@ -37,39 +37,40 @@
 						]
 					},
 					{
-						"name": "genes",
+						"name": "Genes",
+						"size": 18000,
 						"children": [{
-							"name": "human genes",
-							"size": 18000
+							"name": "",
+							"size": 0
 						}]
 					}
 				]
 			},
 			{
-				"name": "Mouse molecules",
+				"name": "Mouse",
 				"children": [
 					{
-						"name": "proteins",
+						"name": "Proteins",
 						"children": [{
-								"name": "enzymes",
+								"name": "Enzymes",
 								"size": 4500
 							},
 							{
-								"name": "lectins",
+								"name": "Lectins",
 								"size": 250
 							},
 							{
-								"name": "glycoproteins",
+								"name": "Glycoproteins",
 								"size": 3767
 							},
 							{
-								"name": "other",
+								"name": "Other",
 								"size": 13756
 							}
 						]
 					},
 					{
-						"name": "glycans",
+						"name": "Glycans",
 						"children": [{
 								"name": "N-glycan",
 								"size": 392
@@ -81,40 +82,41 @@
 						]
 					},
 					{
-						"name": "genes",
+						"name": "Genes",
+						"size": 17500,
 						"children": [{
-							"name": "mouse genes",
-							"size": 17500
+							"name": "",
+							"size": 0
 						}]
 					}
 				]
 
 			},
 			{
-				"name": "Rattus molecules",
+				"name": "Rattus",
 				"children": [
 					{
-						"name": "proteins",
+						"name": "Proteins",
 						"children": [{
-								"name": "enzymes",
+								"name": "Enzymes",
 								"size": 5000
 							},
 							{
-								"name": "lectins",
+								"name": "Lectins",
 								"size": 200
 							},
 							{
-								"name": "glycoproteins",
+								"name": "Glycoproteins",
 								"size": 4434
 							},
 							{
-								"name": "other",
+								"name": "Other",
 								"size": 11363
 							}
 						]
 					},
 					{
-						"name": "glycans",
+						"name": "Glycans",
 						"children": [{
 								"name": "N-glycan",
 								"size": 2502
@@ -126,10 +128,11 @@
 						]
 					},
 					{
-						"name": "genes",
+						"name": "Genes",
+						"size": 18000,
 						"children": [{
-							"name": "human genes",
-							"size": 18000
+							"name": "",
+							"size": 0
 						}]
 					}
 				]
