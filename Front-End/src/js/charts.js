@@ -54,10 +54,32 @@ function sunburstBioMolecules(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-				searchGlycansBy({
-					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
-					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
-				}, "sunburst_glycan_type_subtype");
+//				searchGlycansBy({
+//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
+//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
+//				}, "sunburst_glycan_type_subtype");
+                
+            if (d.name == "Glycans") {
+                searchGlycansBy({
+                    "organism": {
+                        organism_list: [
+                            {
+                                "id": d.data.organism.id,
+                                "name": d.data.organism.name
+                            }
+                        ],
+                        "operation":"or"
+                    },
+                    "glycan_type": d.data.glycan_type
+                }, "sunburstBioMolecules");
+            } else if (d.name == "") {
+                searchProteinsBy({
+                    "organism": {
+                        "id": d.data.organism.id,
+                        "name": d.data.organism.name
+                    }
+                }, "sunburstBioMolecules");
+            }
 			})
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
@@ -615,7 +637,7 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 					"operation":"or"
 				},
 				"glycan_type": d.data.glycan_type
-			});
+			}, "donut_glycan_homo_mus_rat");
 		})
 		.on("mouseover", function (d) {
 			let groupM = d3.select(this)
@@ -678,7 +700,7 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 					"operation":"or"
 				},
 				"glycan_type": d.data.glycan_type
-			});
+			}, "donut_glycan_homo_mus_rat");
 		})
 		.on("mouseover", function (d) {
 			let groupR = d3.select(this)

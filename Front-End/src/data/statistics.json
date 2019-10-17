@@ -5,20 +5,39 @@
 				"name": "Human",
 				"children": [
 					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
 						"name": "Proteins",
 						"size": 20950
 					},
 					{
 						"name": "Glycans",
 						"children": [{
-								"name": "N-glycan",
+								"organism": {
+									"id": 9606,
+									"name": "Homo sapiens"
+								},
+								"glycan_type": "N-Glycan",
+								"name": "N-Glycan",
 								"size": 1605
 							},
 							{
-								"name": "O-glycan",
+								"organism": {
+									"id": 9606,
+									"name": "Homo sapiens"
+								},
+								"glycan_type": "O-Glycan",
+								"name": "O-Glycan",
 								"size": 353
 							},
 							{
+								"organism": {
+									"id": 9606,
+									"name": "Homo sapiens"
+								},
+								"glycan_type": "Other",
 								"name": "Other",
 								"size": 2088
 							}
@@ -30,20 +49,39 @@
 				"name": "Mouse",
 				"children": [
 					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
 						"name": "Proteins",
 						"size": 22282
 					},
 					{
 						"name": "Glycans",
 						"children": [{
-								"name": "N-glycan",
+								"organism": {
+									"id": 10090,
+									"name": "Mus musculus"
+								},
+								"glycan_type": "N-Glycan",
+								"name": "N-Glycan",
 								"size": 357
 							},
 							{
-								"name": "O-glycan",
+								"organism": {
+									"id": 10090,
+									"name": "Mus musculus"
+								},
+								"glycan_type": "O-Glycan",
+								"name": "O-Glycan",
 								"size": 25
 							},
 							{
+								"organism": {
+									"id": 10090,
+									"name": "Mus musculus"
+								},
+								"glycan_type": "Other",
 								"name": "Other",
 								"size": 259
 							}
@@ -56,20 +94,39 @@
 				"name": "Rattus",
 				"children": [
 					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
 						"name": "Proteins",
 						"size": 21673
 					},
 					{
 						"name": "Glycans",
 						"children": [{
-								"name": "N-glycan",
+								"organism": {
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								},
+								"glycan_type": "N-Glycan",
+								"name": "N-Glycan",
 								"size": 2502
 							},
 							{
-								"name": "O-glycan",
+								"organism": {
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								},
+								"glycan_type": "O-Glycan",
+								"name": "O-Glycan",
 								"size": 800
 							},
 							{
+								"organism": {
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								},
+								"glycan_type": "Other",
 								"name": "Other",
 								"size": 49
 							}
