@@ -129,7 +129,6 @@ function sunburstBioMolecules(dummy, data, id) {
     } */	
 }
 
-
 /**
  * Venn diagram displayes human and mouse glycans.
  */
@@ -233,7 +232,6 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
             .innerRadius(function (d) { return d.y0 })
             .outerRadius(function (d) { return d.y1 });
 
-
         // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
         // variable calculations. Last, color the lines and the slices.
 
@@ -309,13 +307,13 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
      * @param {Node} d
      * @return {Number}
      */
-    function computeTextRotation(d) {
-        var angle = (d.x0 + d.x1) / Math.PI * 90;
+    //function computeTextRotation(d) {
+       // var angle = (d.x0 + d.x1) / Math.PI * 90;
 
         // Avoid upside-down labels
         //return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
-        return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
-    }
+       // return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
+    //}
 	/**
 	const width = 200,
 	height = 200,
