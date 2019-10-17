@@ -1,6 +1,7 @@
 // @author Tatiana Williamson
 // @createDate March 11, 2019
 
+/**
 const width = 200,
 	height = 200,
 	maxRadius = (Math.min(width, height) / 2) - 20,
@@ -71,6 +72,7 @@ const svg = d3.select('.zoomableSunburst')
 	.on('click', () => focusOn()); // Reset zoom on canvas click
 
 //var jsonData = d3.json("data/statistics_full.json");
+*/
 
 d3.json("data/statistics.json", (error, jsonData) => {
 	if (error) throw error;
@@ -78,7 +80,7 @@ d3.json("data/statistics.json", (error, jsonData) => {
 
 	var root = d3.hierarchy(jsonData.sunburst);
 	root.sum(d => d.size);
-
+/**
 	const slice = svg.selectAll('g.slice')
 		.data(partition(root).descendants());
 
@@ -166,7 +168,14 @@ d3.json("data/statistics.json", (error, jsonData) => {
 				})
 		}
 	}
-
+*/
+	//--------------------
+	//    Sunburst Bio Molecules. 
+	//----------------------
+	var bio_molecules = sunburstBioMolecules;
+	d3.select('#sunburst_glycan_type_subtype')
+		.call(bio_molecules, jsonData, "#sunburstBioMolecules"); // draw chart in div
+	
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------

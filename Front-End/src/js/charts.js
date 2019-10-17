@@ -6,6 +6,131 @@
 //------------------------------------------
 
 /**
+ * Sunburst glycan chart displayes glycan types and subtypes.
+ */
+function sunburstBioMolecules(dummy, data, id) {
+	// Variables
+    var width = 550;
+    var height = 550;
+    var radius = Math.min(width, height) / 2 - 20;
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+    // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
+    var g = d3.select(id)
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+    // Get the data from our JSON file
+    d3.json("data/statistics.json", function(error, data) {
+        if (error) throw error;
+
+		const formatNumber = d3.format(',d');
+		
+        // Find the root node of our data, and begin sizing process.
+        var root = d3.hierarchy(data.sunburst)
+            .sum(function (d) { return d.size});
+        
+         // Create our sunburst data structure and size it.
+    var partition = d3.partition()
+        .size([2 * Math.PI, radius]);
+          
+        // Calculate the sizes of each arc that we'll draw later.
+        partition(root);
+        var arc = d3.arc()
+            .startAngle(function (d) { return d.x0 })
+            .endAngle(function (d) { return d.x1 })
+            .innerRadius(function (d) { return d.y0 })
+            .outerRadius(function (d) { return d.y1 });
+
+        // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
+        // variable calculations. Last, color the lines and the slices.
+
+        g.selectAll('g')
+            .data(root.descendants())
+            .enter().append('g').attr("class", "node")
+			.on("click", function (d) {
+				//console.log(d.data.name)
+				//console.log(formatNumber(d.value))
+				searchGlycansBy({
+					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
+					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
+				}, "sunburst_glycan_type_subtype");
+			})
+			.on("mouseover", function (d) {
+			let group = d3.select(this)
+				.append("g")
+				.attr("class", "text-group")
+
+				group.append("text")
+					.attr("class", "name-text")
+					.text(`${d.data.name}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '-1.2em');
+
+				group.append("text")
+					.attr("class", "value-text")
+//					.text(`${d.data.size}`)
+					.text(`${formatNumber(d.value)}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '.6em');
+			})
+			.on("mouseout", function (d) {
+				d3.select(this)
+					.style("cursor", "none")
+					.style("fill", color(this._current))
+					.select(".text-group").remove();
+			})
+			.append('path')
+            .attr("display", function (d) { return d.depth ? null : "none"; })
+            .attr("d", arc)
+            .style('stroke', '#fff')
+			//.style('opacity', .65)
+            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+			
+			.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
+			})
+			.on("mouseout", function (d) {
+				d3.select(this).transition()
+					.duration('50')
+					.attr('opacity', '1')
+					.style("cursor", "none");
+			});
+		
+        // Populate the <text> elements with our data-driven titles.
+    /**    g.selectAll(".node")
+            .append("text")
+            .attr("transform", function(d) {
+                return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
+            .attr("dx", "-24") // radius margin
+            .attr("dy", ".5em") // rotation align
+            .text(function(d) { return d.parent ? d.data.name : "" });
+    */
+    });
+
+    /**
+     * Calculate the correct distance to rotate each label based on its location in the sunburst.
+     * @param {Node} d
+     * @return {Number}
+     */
+    /**
+    function computeTextRotation(d) {
+        var angle = (d.x0 + d.x1) / Math.PI * 90;
+
+        // Avoid upside-down labels
+        return (angle < 120 || angle > 270) ? angle : angle + 180;  // labels as rims
+        //return (angle < 180) ? angle - 90 : angle + 90;  // labels as spokes
+    } */	
+}
+
+
+/**
  * Venn diagram displayes human and mouse glycans.
  */
 function vennGlycanHomoMusRat(dummy, data, id) {

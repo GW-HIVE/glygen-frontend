@@ -6,43 +6,23 @@
 				"children": [
 					{
 						"name": "Proteins",
-						"children": [{
-								"name": "Enzymes",
-								"size": 5000
-							},
-							{
-								"name": "Lectins",
-								"size": 200
-							},
-							{
-								"name": "Glycoproteins",
-								"size": 4434
-							},
-							{
-								"name": "Other",
-								"size": 11363
-							}
-						]
+						"size": 20950
 					},
 					{
 						"name": "Glycans",
 						"children": [{
 								"name": "N-glycan",
-								"size": 2502
+								"size": 1605
 							},
 							{
-								"name": "O-glycans",
-								"size": 800
+								"name": "O-glycan",
+								"size": 353
+							},
+							{
+								"name": "Other",
+								"size": 2088
 							}
 						]
-					},
-					{
-						"name": "Genes",
-						"size": 18000,
-						"children": [{
-							"name": "",
-							"size": 0
-						}]
 					}
 				]
 			},
@@ -51,43 +31,23 @@
 				"children": [
 					{
 						"name": "Proteins",
-						"children": [{
-								"name": "Enzymes",
-								"size": 4500
-							},
-							{
-								"name": "Lectins",
-								"size": 250
-							},
-							{
-								"name": "Glycoproteins",
-								"size": 3767
-							},
-							{
-								"name": "Other",
-								"size": 13756
-							}
-						]
+						"size": 22282
 					},
 					{
 						"name": "Glycans",
 						"children": [{
 								"name": "N-glycan",
-								"size": 392
+								"size": 357
 							},
 							{
-								"name": "O-glycans",
-								"size": 125
+								"name": "O-glycan",
+								"size": 25
+							},
+							{
+								"name": "Other",
+								"size": 259
 							}
 						]
-					},
-					{
-						"name": "Genes",
-						"size": 17500,
-						"children": [{
-							"name": "",
-							"size": 0
-						}]
 					}
 				]
 
@@ -97,23 +57,7 @@
 				"children": [
 					{
 						"name": "Proteins",
-						"children": [{
-								"name": "Enzymes",
-								"size": 5000
-							},
-							{
-								"name": "Lectins",
-								"size": 200
-							},
-							{
-								"name": "Glycoproteins",
-								"size": 4434
-							},
-							{
-								"name": "Other",
-								"size": 11363
-							}
-						]
+						"size": 21673
 					},
 					{
 						"name": "Glycans",
@@ -122,23 +66,20 @@
 								"size": 2502
 							},
 							{
-								"name": "O-glycans",
+								"name": "O-glycan",
 								"size": 800
+							},
+							{
+								"name": "Other",
+								"size": 49
 							}
 						]
-					},
-					{
-						"name": "Genes",
-						"size": 18000,
-						"children": [{
-							"name": "",
-							"size": 0
-						}]
 					}
 				]
 			}
 		]
 	},
+
 	"sunburst_glycan_type_subtype": {
      	"name":"",
      	"children":[
