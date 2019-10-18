@@ -45,7 +45,8 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
     <!--<link rel="stylesheet" type="text/css" href="css/protein-search.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
@@ -249,40 +250,43 @@
                     </div>
                 </ul>
 
-                <!-- species -->
-                <ul id="species" class="cd-faq-group">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Species</h4>
+    <!-- species -->
+    <ul id="species" class="cd-faq-group">
+            <li class="cd-faq-title" />
+            <div class="panel panel-default">
+                <div class="gg-panel-heading">
+                    <h4>Species</h4>
+                </div>
+                <div class="panel-body">
+                    {{#species}}
+                        <div class="row">
+                            <div class='col-md-12 col-xs-12'>
+                                    <li class="list-group"> <b>{{name}}:</b>
+                                {{#databases}}
+                                    <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
+                                        <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                            {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                        </button>
+                                        <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                            <ul>
+                                                {{#links}}
+                                                    <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
+                                                    </li>
+                                                {{/links}}
+                                            </ul>
+                                        </div>
+                                    </span>
+                                {{/databases}}
+                                </li>
+
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            {{#species}}
-                                <div class="row">
-                                    <div class='col-md-12 col-xs-12'>
-                                        <b>{{name}}:</b>
-                                        {{#databases}}
-                                            <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px">
-                                                <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="background-color:{{color}}; border-color:{{color}}">
-                                                    {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
-                                                </button>
-                                                <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
-                                                    <ul>
-                                                        {{#links}}
-                                                            <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
-                                                            </li>
-                                                        {{/links}}
-                                                    </ul>
-                                                </div>
-                                            </span>
-                                        {{/databases}}
-                                    </div>
-                                </div>
-                            {{/species}}
-                            {{^species}} No data available. {{/species}}
-                        </div>
-                    </div>
-                </ul>
+                        <li class="list-group"> <b> Taxonomy ID: </b>{{taxid}}</li>
+                    {{/species}}
+                    {{^species}} No data available. {{/species}}
+                </div>
+            </div>
+        </ul>
 
                 <!-- Function -->
                 <ul id="function" class="cd-faq-group selected">
@@ -784,7 +788,7 @@
 
     <!-- Please do not change this it breaks hash scroll code-->
     <script type="text/javascript">
-        $(document).ajaxStop(function() {
+        $(document).ajaxStop(function () {
             // calls the sidebar function only when all ajax calls are completed
             faqMain();
 
@@ -807,4 +811,5 @@
         });
     </script>
 </body>
+
 </html>
