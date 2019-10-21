@@ -200,38 +200,112 @@
 	"venn_protein_homo": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
-			"name": "Proteins",
-			"size": 21080
+			"name": "Human Proteins",
+			"size": 20950
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
-			"name": "Enzymes",
+			"name": "Human Enzymes",
 			"size": 6000
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
-			"name": "Glycoproteins",
-			"size": 4530
+			"name": "Human Glycoproteins",
+			"size": 4715
 		},
 		{
 			"sets": [0, 1],
 			"tooltipname": "Enzymes",
-			"name": "Enzymes",
+			"name": "",
 			"size": 6000
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Glycoproteins",
-			"name": "Glycoproteins",
-			"size": 4530
+			"name": "",
+			"size": 4715
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
 			"name": "",
-			"size": 3000
+			"size": 2000
+		}
+	],
+	"venn_protein_mus": [{
+			"sets": [0],
+			"tooltipname": "Proteins",
+			"name": "Mouse Proteins",
+			"size": 22282
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Enzymes",
+			"name": "Mouse Enzymes",
+			"size": 8000
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Glycoproteins",
+			"name": "Mouse Glycoproteins",
+			"size": 3788
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Enzymes",
+			"name": "",
+			"size": 8000
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Glycoproteins",
+			"name": "",
+			"size": 3788
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Glycoproteins & Enzymes",
+			"name": "",
+			"size": 2000
+		}
+	],
+	"venn_protein_rat": [{
+			"sets": [0],
+			"tooltipname": "Proteins",
+			"name": "Rat Proteins",
+			"size": 21673
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Enzymes",
+			"name": "Rat Enzymes",
+			"size": 10000
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Glycoproteins",
+			"name": "Rat Glycoproteins",
+			"size": 2086
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Enzymes",
+			"name": "",
+			"size": 10000
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Glycoproteins",
+			"name": "",
+			"size": 2086
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Glycoproteins & Enzymes",
+			"name": "",
+			"size": 2000
 		}
 	],
 	"venn_glycans_homo_mus_rat": [{
