@@ -304,6 +304,103 @@
 			"size": 104
 		}
 	],
+	"donut_glycan_homo_mus_rat": {	
+		"name": "",
+		"children": [{
+				"name": "Human Glycans",
+				"children": [{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"glycan_type": "N-Glycan",
+						"name": "Human N-Glycans",
+						"size": 989
+					},
+					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"glycan_type": "O-Glycan",
+						"name": "Human O-Glycans",
+						"size": 312
+					},
+					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"glycan_type": "Other",
+						"name": "Human Other",
+						"size": 2001
+					}
+				]
+			},
+			{
+				"name": "Mouse Glycans",
+				"children": [{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"glycan_type": "N-Glycan",
+						"name": "Mouse N-Glycans",
+						"size": 261
+					},
+					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"glycan_type": "O-Glycan",
+						"name": "Mouse O-Glycans",
+						"size": 12
+					},
+					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"glycan_type": "Other",
+						"name": "Mouse Other",
+						"size": 244
+					}
+				]
+			},
+			{
+				"name": "Rat Glycans",
+				"children": [{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"glycan_type": "N-Glycan",
+						"name": "Rat N-Glycans",
+						"size": 312
+					},
+					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"glycan_type": "O-Glycan",
+						"name": "Rat O-Glycans",
+						"size": 23
+					},
+					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"glycan_type": "Other",
+						"name": "Rat Other",
+						"size": 325
+					}
+				]
+			}
+		]
+	},
 	"glycan_homo_donut": [{
 			"organism": {
 				"id": 9606,
