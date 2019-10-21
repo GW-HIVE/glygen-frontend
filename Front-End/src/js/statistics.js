@@ -218,14 +218,6 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	d3.select('#bar_chart_sugar')
 		.call(barSugar, jsonData, "#bar_chart_sugar"); // draw chart in div
 
-	//-------------------------------
-	//  Pie Chart Protein. Number of Genes. 
-	//  Proteins (Human, Mouse and Rat)
-	//-------------------------------	
-	var pieGenes = pieProteinGenes;
-	d3.select('#pie_protein_genes')
-		.call(pieGenes, jsonData, "#pie_protein_genes"); // draw chart in div
-	
 	//--------------------
 	//    Proteins Venn Diagram. Human proteins.
 	//----------------------

@@ -499,7 +499,7 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 function donutGlycanHomoMusRat(dummy, data, id) {
 	var width = 450;
     var height = 450;
-    var radius = Math.min(width, height) / 2 - 20;
+    var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
@@ -1395,53 +1395,55 @@ function vennProteinHomo(dummy, data, id) {
 }
 
 /**
- * Pie chart displayes number of protein genes for humans, mouse, and rat data.
+ * Pie chart displayes number of canonical proteins for humans, mouse, and rat data.
  */
-function pieProteinGenes(dummy, data, id) {
-	// set the dimensions and margins of the graph
-var width = 150,
-	height = 150,
-	margin = {
-		top: 0,
-		right: 0,
-		bottom: 0,
-		left: 0
-	};
-var radius = Math.min(width, height) / 2;
+function pieProteinCanonical(dummy, data, id) {
+    
 
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-var svg = d3.select(id)
-	.append("svg")
-	.attr("class", "arc")
-	.style('width', '80%')
-	.attr('preserveAspectRatio', 'xMinYMin meet')
-	.attr('viewBox',
-		'0 0 ' +
-		(width + margin.left + margin.right) +
-		' ' +
-		(height + margin.top + margin.bottom)
-	);
-var arc = d3.arc()
-    .innerRadius(0)
-	.outerRadius(radius - 5);
-
-var labelArc = d3.arc()
-    .outerRadius(radius - 30)
-    .innerRadius(radius - 30);
-
-var pie = d3.pie()
-    .sort(null)
-    .value(function(d) { return d.size; });
-	
-  var g = svg.append("g")
-	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-	var path = g.selectAll(".arc")
-    .data(pie(data.pie_protein_genes))
-    .enter().append("g")
-    .attr("class", "arc")
- 	// On click goes to list page
+    // set the dimensions and margins of the graph
+//var width = 150,
+//	height = 150,
+//	margin = {
+//		top: 0,
+//		right: 0,
+//		bottom: 0,
+//		left: 0
+//	};
+//var radius = Math.min(width, height) / 2;
+//
+//var color = d3.scaleOrdinal(d3.schemeCategory20);
+//
+//var svg = d3.select(id)
+//	.append("svg")
+//	.attr("class", "arc")
+//	.style('width', '80%')
+//	.attr('preserveAspectRatio', 'xMinYMin meet')
+//	.attr('viewBox',
+//		'0 0 ' +
+//		(width + margin.left + margin.right) +
+//		' ' +
+//		(height + margin.top + margin.bottom)
+//	);
+//var arc = d3.arc()
+//    .innerRadius(0)
+//	.outerRadius(radius - 5);
+//
+//var labelArc = d3.arc()
+//    .outerRadius(radius - 30)
+//    .innerRadius(radius - 30);
+//
+//var pie = d3.pie()
+//    .sort(null)
+//    .value(function(d) { return d.size; });
+//	
+//  var g = svg.append("g")
+//	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+//
+//	var path = g.selectAll(".arc")
+//    .data(pie(data.pie_canonical_proteins))
+//    .enter().append("g")
+//    .attr("class", "arc")
+//	// On click goes to list page
 //	.on("click", function (d) {
 //		searchProteinsBy({
 //			"organism": {
@@ -1449,7 +1451,7 @@ var pie = d3.pie()
 //				"name": d.data.organism.name
 //			},
 //			"protein_type": d.data.protein_type
-//		}, "pie_protein_genes");
+//		}, "pie_canonical_proteins");
 //	})
 //	.on("mouseover", function (d) {
 //		var selector = d3.select(this).transition()
@@ -1465,104 +1467,18 @@ var pie = d3.pie()
 //			.attr('opacity', '1')
 //			.style("cursor", "none");
 //	});
-
- 	path.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.name); });
-
- 	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "0em")
-     	.text(function(d) { return d.data.name; });
-	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "1em")
-     	.text(function(d) { return d.data.size; });
-}
-
-/**
- * Pie chart displayes number of canonical proteins for humans, mouse, and rat data.
- */
-function pieProteinCanonical(dummy, data, id) {
-	// set the dimensions and margins of the graph
-var width = 150,
-	height = 150,
-	margin = {
-		top: 0,
-		right: 0,
-		bottom: 0,
-		left: 0
-	};
-var radius = Math.min(width, height) / 2;
-
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-var svg = d3.select(id)
-	.append("svg")
-	.attr("class", "arc")
-	.style('width', '80%')
-	.attr('preserveAspectRatio', 'xMinYMin meet')
-	.attr('viewBox',
-		'0 0 ' +
-		(width + margin.left + margin.right) +
-		' ' +
-		(height + margin.top + margin.bottom)
-	);
-var arc = d3.arc()
-    .innerRadius(0)
-	.outerRadius(radius - 5);
-
-var labelArc = d3.arc()
-    .outerRadius(radius - 30)
-    .innerRadius(radius - 30);
-
-var pie = d3.pie()
-    .sort(null)
-    .value(function(d) { return d.size; });
-	
-  var g = svg.append("g")
-	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-	var path = g.selectAll(".arc")
-    .data(pie(data.pie_canonical_proteins))
-    .enter().append("g")
-    .attr("class", "arc")
-	// On click goes to list page
-	.on("click", function (d) {
-		searchProteinsBy({
-			"organism": {
-				"id": d.data.organism.id,
-				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
-		}, "pie_canonical_proteins");
-	})
-	.on("mouseover", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '.65')
-			.style("cursor", "pointer");
-	})
-	.on("mouseout", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '1')
-			.style("cursor", "none");
-	});
- 	path.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.name); });
-
- 	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "0em")
-     	.text(function(d) { return d.data.name; });
-	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "1em")
-     	.text(function(d) { return d.data.size; });
+// 	path.append("path")
+//      .attr("d", arc)
+//      .style("fill", function(d) { return color(d.data.name); });
+//
+// 	path.append("text")
+//    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+//    	.attr("dy", "0em")
+//     	.text(function(d) { return d.data.name; });
+//	path.append("text")
+//    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+//    	.attr("dy", "1em")
+//     	.text(function(d) { return d.data.size; });
 }
 
 /**
