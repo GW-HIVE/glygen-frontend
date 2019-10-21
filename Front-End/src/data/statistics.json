@@ -304,7 +304,7 @@
 			"size": 104
 		}
 	],
-	"donut_glycan_homo_mus_rat": {	
+	"sunburst_glycan_homo_mus_rat": {	
 		"name": "",
 		"children": [{
 				"name": "Human Glycans",
@@ -739,6 +739,70 @@
 		"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
 	},
 	
+	"sunburst_canonical_isoforms_proteins": {	
+		"name": "",
+		"children": [{
+				"name": "Human Proteins",
+				"children": [{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"name": "Human Canonical",
+						"size": 20950
+					},
+					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"name": "Human Isoforms",
+						"size": 73583
+					}
+				]
+			},
+			{
+				"name": "Mouse Proteins",
+				"children": [{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"name": "Mouse Canonical",
+						"size": 22282
+					},
+					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"name": "Mouse Isoforms",
+						"size": 40870
+					}
+				]
+			},
+			{
+				"name": "Rat Proteins",
+				"children": [{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"name": "Rat Canonical",
+						"size": 21673
+					},
+					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"name": "Rat Isoforms",
+						"size": 9867
+					}
+				]
+			}
+		]
+	},
 	"pie_canonical_proteins": [
 		{
 			"organism": {
