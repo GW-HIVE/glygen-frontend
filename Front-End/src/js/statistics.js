@@ -253,9 +253,9 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//  Pie Chart Number of Glycosylated Proteins. 
 	//  Proteins (Human, Mouse and Rat)
 	//-------------------------------	
-	var pieProteinGlycosylated = pieGlycosylatedProtein;
-	d3.select('#pie_glycosylated_proteins')
-		.call(pieProteinGlycosylated, jsonData, "#pie_glycosylated_proteins"); // draw chart in div
+	var pieProteinGlycosylated = sunburstGlycosylatedProtein;
+	d3.select('#sunburst_glycosylated_proteins')
+		.call(pieProteinGlycosylated, jsonData, "#sunburst_glycosylated_proteins"); // draw chart in div
 
 	//-------------------------------
 	//  Pie Chart Number of glycosylated proteins with reported glycans. 

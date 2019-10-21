@@ -856,56 +856,92 @@
 			"size": 94
 		}
 	],
-	"pie_glycosylated_proteins": [
-		{
-			"organism": {
-			"id": 9606,
-			"name": "Homo sapiens"
+	"sunburst_glycosylated_proteins": {	
+		"name": "",
+		"children": [{
+				"name": "Human Proteins",
+				"children": [{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"name": "Human RWGS",
+						"size": 1084
+					},
+					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"name": "Human RWOGS",
+						"size": 700
+					},
+					{
+						"organism": {
+							"id": 9606,
+							"name": "Homo sapiens"
+						},
+						"name": "Human Predicted",
+						"size": 2946
+					}		 
+				]
 			},
-			"name": "Human",
-			"size": 4730
-		},
-		{
-			"organism": {
-			"id": 10090,
-			"name": "Mus musculus"
+			{
+				"name": "Mouse Proteins",
+				"children": [{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"name": "Mouse RWGS",
+						"size": 328
+					},
+					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"name": "Mouse RWOGS",
+						"size": 200
+					},
+					{
+						"organism": {
+							"id": 10090,
+							"name": "Mus musculus"
+						},
+						"name": "Mouse Predicted",
+						"size": 3267
+					}
+				]
 			},
-			"name": "Mouse",
-			"size": 3795
-		},
-		{
-			"organism": {
-			"id": 10116,
-			"name": "Rattus norvegicus"
-			},
-			"name": "Rat",
-			"size": 2091
-		}
-	],
-	"pie_glycosyl_prot_report_glyc": [
-		{
-			"organism": {
-			"id": 9606,
-			"name": "Homo sapiens"
-			},
-			"name": "Human",
-			"size": 1784
-		},
-		{
-			"organism": {
-			"id": 10090,
-			"name": "Mus musculus"
-			},
-			"name": "Mouse",
-			"size": 528
-		},
-		{
-			"organism": {
-			"id": 10116,
-			"name": "Rattus norvegicus"
-			},
-			"name": "Rat",
-			"size": 251
-		}
-	]
+			{
+				"name": "Rat Proteins",
+				"children": [{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"name": "Rat RWGS",
+						"size": 151
+					},
+					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"name": "Rat RWOGS",
+						"size": 100
+					},
+					{
+						"organism": {
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						},
+						"name": "Rat Predicted",
+						"size": 1840
+					}
+				]
+			}
+		]
+	}
 }

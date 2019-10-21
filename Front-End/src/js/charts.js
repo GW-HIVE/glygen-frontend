@@ -493,7 +493,7 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 }
 
 /**
- * Donut glycan chart displayes number of human and mouse glycans.
+ * Sunburst glycan chart displayes number of human and mouse glycans.
  */
 
 function donutGlycanHomoMusRat(dummy, data, id) {
@@ -1756,87 +1756,181 @@ var pie = d3.pie()
 /**
  * Pie chart displayes number of Glycosylated proteins for humans, mouse, and rat data.
  */
-function pieGlycosylatedProtein(dummy, data, id) {
+function sunburstGlycosylatedProtein(dummy, data, id) {
+    var width = 450;
+    var height = 450;
+    var radius = Math.min(width, height) / 2 - 20;
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+    // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
+    var g = d3.select(id)
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+    // Create our sunburst data structure and size it.
+    var partition = d3.partition()
+        .size([2 * Math.PI, radius]);
+
+    // Get the data from our JSON file
+    d3.json("data/statistics.json", function(error, data) {
+        if (error) throw error;
+
+		const formatNumber = d3.format(',d');
+		
+        // Find the root node of our data, and begin sizing process.
+        var root = d3.hierarchy(data.sunburst_glycosylated_proteins)
+            .sum(function (d) { return d.size});
+
+        // Calculate the sizes of each arc that we'll draw later.
+        partition(root);
+        var arc = d3.arc()
+            .startAngle(function (d) { return d.x0 })
+            .endAngle(function (d) { return d.x1 })
+            .innerRadius(function (d) { return d.y0 })
+            .outerRadius(function (d) { return d.y1 });
+
+        // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
+        // variable calculations. Last, color the lines and the slices.
+
+        g.selectAll('g')
+            .data(root.descendants())
+            .enter().append('g').attr("class", "node")
+			.on("click", function (d) {
+				//console.log(d.data.name)
+				//console.log(formatNumber(d.value))
+				searchProteinsBy({
+//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
+//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
+				}, "sunburst_glycosylated_proteins");
+			})
+			.on("mouseover", function (d) {
+			let group = d3.select(this)
+				.append("g")
+				.attr("class", "text-group")
+
+				group.append("text")
+					.attr("class", "name-text")
+					.text(`${d.data.name}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '-1.2em');
+
+				group.append("text")
+					.attr("class", "value-text")
+//					.text(`${d.data.size}`)
+					.text(`${formatNumber(d.value)}`)
+					.attr('text-anchor', 'middle')
+					.attr('dy', '.6em');
+			})
+			.on("mouseout", function (d) {
+				d3.select(this)
+					.style("cursor", "none")
+					.style("fill", color(this._current))
+					.select(".text-group").remove();
+			})
+			.append('path')
+            .attr("display", function (d) { return d.depth ? null : "none"; })
+            .attr("d", arc)
+            .style('stroke', '#fff')
+			//.style('opacity', .65)
+            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+			
+			.on("mouseover", function (d) {
+			d3.select(this).transition()
+				.duration('50')
+				.attr('opacity', '.65')
+				.style("cursor", "pointer");
+			})
+			.on("mouseout", function (d) {
+				d3.select(this).transition()
+					.duration('50')
+					.attr('opacity', '1')
+					.style("cursor", "none");
+			});
+   });
+    
 	// set the dimensions and margins of the graph
-var width = 150,
-	height = 150,
-	margin = {
-		top: 0,
-		right: 0,
-		bottom: 0,
-		left: 0
-	};
-var radius = Math.min(width, height) / 2;
-
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-var svg = d3.select(id)
-	.append("svg")
-	.attr("class", "arc")
-	.style('width', '80%')
-	.attr('preserveAspectRatio', 'xMinYMin meet')
-	.attr('viewBox',
-		'0 0 ' +
-		(width + margin.left + margin.right) +
-		' ' +
-		(height + margin.top + margin.bottom)
-	);
-var arc = d3.arc()
-    .innerRadius(0)
-	.outerRadius(radius - 5);
-
-var labelArc = d3.arc()
-    .outerRadius(radius - 30)
-    .innerRadius(radius - 30);
-
-var pie = d3.pie()
-    .sort(null)
-    .value(function(d) { return d.size; });
-	
-  var g = svg.append("g")
-	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-	var path = g.selectAll(".arc")
-    .data(pie(data.pie_glycosylated_proteins))
-    .enter().append("g")
-    .attr("class", "arc")
- 	// On click goes to list page
-	.on("click", function (d) {
-		searchGlycoproteinsBy({
-			"organism": {
-				"id": d.data.organism.id,
-				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
-		}, "pie_glycosylated_proteins");
-	})
-	.on("mouseover", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '.65')
-			.style("cursor", "pointer");
-	})
-	.on("mouseout", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '1')
-			.style("cursor", "none");
-	});
-
- 	path.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.name); });
-
- 	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "0.15em")
-     	.text(function(d) { return d.data.name; });
-	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "1.35em")
-     	.text(function(d) { return d.data.size; });
+//var width = 150,
+//	height = 150,
+//	margin = {
+//		top: 0,
+//		right: 0,
+//		bottom: 0,
+//		left: 0
+//	};
+//var radius = Math.min(width, height) / 2;
+//
+//var color = d3.scaleOrdinal(d3.schemeCategory20);
+//
+//var svg = d3.select(id)
+//	.append("svg")
+//	.attr("class", "arc")
+//	.style('width', '80%')
+//	.attr('preserveAspectRatio', 'xMinYMin meet')
+//	.attr('viewBox',
+//		'0 0 ' +
+//		(width + margin.left + margin.right) +
+//		' ' +
+//		(height + margin.top + margin.bottom)
+//	);
+//var arc = d3.arc()
+//    .innerRadius(0)
+//	.outerRadius(radius - 5);
+//
+//var labelArc = d3.arc()
+//    .outerRadius(radius - 30)
+//    .innerRadius(radius - 30);
+//
+//var pie = d3.pie()
+//    .sort(null)
+//    .value(function(d) { return d.size; });
+//	
+//  var g = svg.append("g")
+//	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+//
+//	var path = g.selectAll(".arc")
+//    .data(pie(data.pie_glycosylated_proteins))
+//    .enter().append("g")
+//    .attr("class", "arc")
+// 	// On click goes to list page
+//	.on("click", function (d) {
+//		searchGlycoproteinsBy({
+//			"organism": {
+//				"id": d.data.organism.id,
+//				"name": d.data.organism.name
+//			},
+//			"protein_type": d.data.protein_type
+//		}, "pie_glycosylated_proteins");
+//	})
+//	.on("mouseover", function (d) {
+//		var selector = d3.select(this).transition()
+//			.duration('50');
+//		selector.select("path")
+//			.attr('opacity', '.65')
+//			.style("cursor", "pointer");
+//	})
+//	.on("mouseout", function (d) {
+//		var selector = d3.select(this).transition()
+//			.duration('50');
+//		selector.select("path")
+//			.attr('opacity', '1')
+//			.style("cursor", "none");
+//	});
+//
+// 	path.append("path")
+//      .attr("d", arc)
+//      .style("fill", function(d) { return color(d.data.name); });
+//
+// 	path.append("text")
+//    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+//    	.attr("dy", "0.15em")
+//     	.text(function(d) { return d.data.name; });
+//	path.append("text")
+//    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+//    	.attr("dy", "1.35em")
+//     	.text(function(d) { return d.data.size; });
 }
 
 /**
