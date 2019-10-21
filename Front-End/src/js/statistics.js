@@ -226,14 +226,6 @@ d3.json("data/statistics.json", (error, jsonData) => {
 		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
 	
 	//-------------------------------
-	//  Pie Chart Number of Canonical Proteins. 
-	//  Proteins (Human, Mouse and Rat)
-	//-------------------------------	
-	var pieCanonicalProtein = pieProteinCanonical;
-	d3.select('#pie_canonical_proteins')
-		.call(pieCanonicalProtein, jsonData, "#pie_canonical_proteins"); // draw chart in div
-
-	//-------------------------------
 	//  Pie Chart Number of Canonical and Isoforms Proteins. 
 	//  Proteins (Human, Mouse and Rat)
 	//-------------------------------	

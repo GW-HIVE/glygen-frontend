@@ -803,57 +803,7 @@
 			}
 		]
 	},
-	"pie_canonical_proteins": [
-		{
-			"organism": {
-			"id": 9606,
-			"name": "Homo sapiens"
-			},
-			"name": "Human",
-			"size": 20950
-		},
-		{
-			"organism": {
-			"id": 10090,
-			"name": "Mus musculus"
-			},
-			"name": "Mouse",
-			"size": 22282
-		},
-		{
-			"organism": {
-				"id": 10116,
-				"name": "Rattus norvegicus"
-			},
-			"name": "Rat",
-			"size": 21673
-		}
-	],
-	"pie_canonical_isoforms_proteins": [
-		{	"organism": {
-			"id": 9606,
-			"name": "Homo sapiens"
-			},
-			"name": "Human",
-			"size": 21800
-		},
-		{
-			"organism": {
-			"id": 10090,
-			"name": "Mus musculus"
-			},
-			"name": "Mouse",
-			"size": 23300
-		},
-		{
-			"organism": {
-				"id": 10116,
-				"name": "Rattus norvegicus"
-			},
-			"name": "Rat",
-			"size": 22400
-		}
-	],
+	
 	"pie_glycohydrolases_proteins": [
 		{
 			"organism": {
