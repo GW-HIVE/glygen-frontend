@@ -1313,6 +1313,7 @@ function vennProteinHomo(dummy, data, id) {
 		.width(350)
 		.height(350);
 
+    
 	var div_protein_homo = d3.select(id)
 	div_protein_homo.datum(data.venn_protein_homo)
 		.call(protein_homo);
@@ -1358,7 +1359,7 @@ function vennProteinHomo(dummy, data, id) {
 						"id": 9606,
 						"name": "Homo sapiens"
 					}
-				}, "venn_protein_homo");
+				}, "venn_protein_species");
 			} else if (d.name == "Glycoproteins") {
 				searchGlycoproteinsBy({
 					"organism": {
@@ -1369,7 +1370,7 @@ function vennProteinHomo(dummy, data, id) {
             			"aa_list": ["N","S","T"],
             			"operation":"or"
         			}
-				}, "venn_protein_homo");
+				}, "venn_protein_species");
 			} else if (d.name == "Enzymes") {
 				searchGlycansBy({
 					"organism": {
@@ -1381,7 +1382,7 @@ function vennProteinHomo(dummy, data, id) {
 						],
 						"operation":"or"
 					}
-				}, "venn_protein_homo");
+				}, "venn_protein_species");
 			}
 		})
 
@@ -1392,6 +1393,51 @@ function vennProteinHomo(dummy, data, id) {
 				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
 				.style("stroke-opacity", 0);
 		});
+    
+    /**
+     * Updates the JSON name on the venn Proteins on select option.
+     */
+    $('#vennProteinSpecies').on('change', populateJSON);
+    
+    function populateJSON() {
+        $('#vennProteinSpecies').show();
+        var name = $("#vennProteinSpecies option:selected").val();
+        var jsonName = [];
+        
+        switch (name.toLowerCase()) {
+        case "Human":
+            jsonName = ["data.venn_protein_homo"];
+            break;
+        case "Mouse":
+            jsonName = ["data.venn_protein_mus"];
+            break;
+        case "Rat":
+            jsonName = ["data.venn_protein_rat"];
+            break;
+        default:
+            jsonName = ["data.venn_protein_homo"];
+            break;
+        }
+        
+        $('#label_text').attr('label', updateLabel(name)); 
+    }
+    
+    /**
+    * Assigns a different label text in proteins by species
+    * @param {string} type [Changes a different label text]
+    */ 
+    function updateLabel (label) {
+        switch (label.toLowerCase()) {
+        case "Human":
+            return "Human proteins";
+        case "Mouse":
+            return "Mouse proteins";
+        case "Rat":
+            return "Rat proteins";
+        default:
+            return label;
+        }
+    }
 }
 
 /**

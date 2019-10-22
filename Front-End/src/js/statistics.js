@@ -222,8 +222,8 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//    Proteins Venn Diagram. Human proteins.
 	//----------------------
 	var protein_homo = vennProteinHomo;
-	d3.select('#venn_protein_homo')
-		.call(protein_homo, jsonData, "#venn_protein_homo"); // draw chart in div
+	d3.select('#venn_protein_species')
+		.call(protein_homo, jsonData, "#venn_protein_species"); // draw chart in div
 	
 	//-------------------------------
 	//  Pie Chart Number of Canonical and Isoforms Proteins. 

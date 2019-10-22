@@ -485,19 +485,19 @@
 	"venn_protein_homo": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
-			"name": "Human Proteins",
+			"name": "Proteins",
 			"size": 20950
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
-			"name": "Human Enzymes",
+			"name": "Enzymes",
 			"size": 6000
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
-			"name": "Human Glycoproteins",
+			"name": "Glycoproteins",
 			"size": 4715
 		},
 		{
@@ -522,19 +522,19 @@
 	"venn_protein_mus": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
-			"name": "Mouse Proteins",
+			"name": "Proteins",
 			"size": 22282
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
-			"name": "Mouse Enzymes",
+			"name": "Enzymes",
 			"size": 8000
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
-			"name": "Mouse Glycoproteins",
+			"name": "Glycoproteins",
 			"size": 3788
 		},
 		{
@@ -559,19 +559,19 @@
 	"venn_protein_rat": [{
 			"sets": [0],
 			"tooltipname": "Proteins",
-			"name": "Rat Proteins",
+			"name": "Proteins",
 			"size": 21673
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
-			"name": "Rat Enzymes",
+			"name": "Enzymes",
 			"size": 10000
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
-			"name": "Rat Glycoproteins",
+			"name": "Glycoproteins",
 			"size": 2086
 		},
 		{
