@@ -30,7 +30,7 @@ function sunburstBioMolecules(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst)
+        var root = d3.hierarchy(data.sunburst2)
             .sum(function (d) { return d.size});
         
          // Create our sunburst data structure and size it.
