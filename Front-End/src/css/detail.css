@@ -45,6 +45,17 @@
     width: 500px;
 }
 
+.txt-wrapper1 {
+    height: auto;
+    max-width: 550px;
+}
+
+.icon-wrapper1 {
+    height: 45px;
+    width: 45px;
+    float: right;
+}
+
 .img-cartoon1:hover {
     -webkit-transform: scale(1.2);
     transform: scale(1.0);
