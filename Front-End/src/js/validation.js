@@ -248,6 +248,20 @@ function validateGOTerm(input) {
 /** 
 * validation for each field
 */
+function validateGOID(input) {
+    var validLength = (input.value.length <=25);
+    if (validLength) {
+        document.getElementById("goIDMsg").innerHTML = " ";
+        return true;
+    } else {
+        document.getElementById("goIDMsg").innerHTML = "Entry is too long - max length is 25.";
+        return false;
+    }
+}
+
+/** 
+* validation for each field
+*/
 function aminoLetter(textareatxt) {
     var letters = /^[RKDEQNHSTYCWAILMFVPGX\n]+$/gi;
     var validLength = (textareatxt.value.length <= 3356);
