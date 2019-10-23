@@ -39,6 +39,15 @@ $('#textExampleMotif').click(function() {
     $tagsInputMotif.val($(this).text());
     return false;
 });
+/**
+ * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputpmid
+ */
+var $tagsInputpmid = $('#pmid');
+$('#textExamplepmid').click(function() {
+    $tagsInputpmid.val($(this).text());
+    return false;
+});
 
 /**
  * Makes the example clickable and inserts it into the search input field.
