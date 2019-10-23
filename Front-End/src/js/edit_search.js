@@ -71,6 +71,7 @@ function setProteinFormValues(data) {
         $("#gene_name").val(data.query.gene_name || "");
         $("#protein_name").val(data.query.protein_name || "");
         $("#go_term").val(data.query.go_term || "");
+        $("#go_id").val(data.query.go_id || "");
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");
@@ -95,6 +96,7 @@ function setGlycoProteinFormValues(data) {
         $("#relation").val(data.query.glycan? data.query.glycan.relation : "");
         $("#protein_name").val(data.query.protein_name || "");
         $("#go_term").val(data.query.go_term || "");
+        $("#go_id").val(data.query.go_id || "");
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");

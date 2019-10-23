@@ -363,7 +363,7 @@
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span>GO Name:
                                             </label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-8 gg-form-group">
                                                 <input type="text"
                                                     name="GOTerm"
                                                     class="form-control go_term"
@@ -381,6 +381,46 @@
                                                 </div>
                                                 <br>
                                                 <h6 id='goTermMsg' class="validation-message"></h6>
+                                            </div>
+                                        </div>
+                                        <!-- GO ID -->
+                                         <div class="row">
+                                            <label class="control-label col-sm-4" for="go_id">
+                                                <span><a class="link-with-tooltip" href="javascript://" \
+                                                    title="GO ID"
+                                                    data-toggle="popover"
+                                                    data-placement="top"
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="Gene ontology is a precisely defined, common controlled vocabulary for describing the roles of genes and gene products in any organism and includes three categories: Molecular function, Biological process, and Cellular component.
+                                                    <br><br>
+                                                    GO Name - term name, which may be a word or string of words.
+                                                    GO ID - a unique alphanumeric identifier. Explore <a href='http://geneontology.org/docs/ontology/' target='_blank'> GO ID"
+                                                    tooltip-title="Gene ontology is a precisely defined, common controlled vocabulary for describing the roles of genes and gene products in any organism and includes three categories: Molecular function, Biological process, and Cellular component.
+                                                    <br><br>
+                                                    GO Name - term name, which may be a word or string of words.
+                                                    GO ID - a unique alphanumeric identifier.">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span>GO ID:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text"
+                                                    name="GOID"
+                                                    class="form-control go_id"
+                                                    id="go_id"
+                                                    placeholder="Enter the GO ID of your protein" onkeyup="validateGOTerm(this)">   
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a
+                                                    href="#GO:0005739" id="textExampleGOID"
+                                                    data-toggle="tooltip"
+                                                    data-tippy="Click to Insert">GO:0005739</a></div>
+
+                                                    <div class="gg-text-right">Explore <a href="http://geneontology.org/docs/ontology/" 
+                                                    target="_blank"
+                                                    data-tippy="Explore GO ID Database">GO ID</a></div>
+                                                </div>
+                                                <br>
+                                                <h6 id='goIDMsg' class="validation-message"></h6>
                                             </div>
                                         </div>
                                         <!-- Protein or Peptide Sequence -->

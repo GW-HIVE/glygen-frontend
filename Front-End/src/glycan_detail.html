@@ -180,42 +180,57 @@
                     <li class="cd-faq-title" />
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
-                            <h4>General</h4>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h4>General</h4>
+                                </div>
+                            <div class="col-md-2">
+                                {{#glytoucan}}
+                                <a href="#" onclick="openSubsumptionbrowser('{{glytoucan_ac}}');return false; "target="_blank">
+                                    <img class='icon-wrapper1' src="/images/icons/favicomatic/gnome.png" alt='Cartoon'/>
+                                </a>
+                                {{/glytoucan}}
+                            </div>
+                            </div>
                         </div>
+
                         <div class="panel-body">
                             <div class="row">
                                 <!--always try to use double quotes for HTML attributes. -->
-                                <div class="col-md-6 col-xs-12">
-                                    <div class='img-wrapper1'>
-                                        <img class='img-cartoon1' src="{{imagePath}}" alt='Cartoon' width='90%' />
-                                        <Br />
-                                    </div>
+                                <div class="col-lg-7">
+                                    <img class='img-cartoon1' src="{{imagePath}}" alt='Cartoon' width='90%'/>
+                                    <Br />
                                 </div>
-                                <div class="col-md-12 col-xs-6">
-                                    {{#glytoucan}}
-                                        <li class="list-group"><strong>GlyTouCan Accession:</strong> <a class="panelcontent" href="{{glytoucan_url}}" target="_blank">
-                                                {{glytoucan_ac}} </a></li>
-                                    {{/glytoucan}}
+                                {{#glytoucan}}
+                                <div class="col-lg-5 txt-wrapper1" style="text-align:center;">
+                                    <a href="#" onclick="openSubsumptionbrowser('{{glytoucan_ac}}');return false;" target="_blank">Find closely related glycans using GNOME Subsumption browser.</a>
+                                </div>
+                                {{/glytoucan}}
+                            </div>
+                            <div class="col-md-12 col-xs-6">
+                                {{#glytoucan}}
+                                    <li class="list-group"><strong>GlyTouCan Accession:</strong> <a class="panelcontent" href="{{glytoucan_url}}" target="_blank">
+                                            {{glytoucan_ac}} </a></li>
+                                {{/glytoucan}}
 
-                                    {{#mass}}
-                                        <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass}} Da <strong>(Permethylated:</strong> {{mass_pme}} Da<strong>)</strong></li>
-                                    {{/mass}}
+                                {{#mass}}
+                                    <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass}} Da <strong>(Permethylated:</strong> {{mass_pme}} Da<strong>)</strong></li>
+                                {{/mass}}
 
-                                    <li class="list-group"><strong>Composition:</strong>
-                                        {{#composition}}
-                                        {{residue}}{{count}}
-                                        {{/composition}}
-                                        {{^composition}} No data available. {{/composition}}
+                                <li class="list-group"><strong>Composition:</strong>
+                                    {{#composition}}
+                                    {{residue}}{{count}}
+                                    {{/composition}}
+                                    {{^composition}} No data available. {{/composition}}
+                                </li>
+
+                                {{#classification}}
+                                    <li class="list-group"><strong>Glycan Type/Subtype:</strong>
+                                        {{type.name}}
+                                        {{subtype.name}}
                                     </li>
+                                {{/classification}} {{^classification}} {{/classification}}
 
-                                    {{#classification}}
-                                        <li class="list-group"><strong>Glycan Type/Subtype:</strong>
-                                            {{type.name}}
-                                            {{subtype.name}}
-                                        </li>
-                                    {{/classification}} {{^classification}} {{/classification}}
-
-                                </div>
                             </div>
                         </div>
                     </div>

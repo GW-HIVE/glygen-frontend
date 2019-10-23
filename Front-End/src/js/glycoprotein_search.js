@@ -45,6 +45,7 @@ function resetAdvanced() {
             protein_name: "",
             gene_name: "",
             go_term: "",            
+            go_id: "",
             pathway_id: "",
             uniprot_canonical_ac: "",
             glycan: {
@@ -256,6 +257,7 @@ function ajaxProteinSearchSuccess() {
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
     var go_term = $("#go_term").val();
+    var go_id = $("#go_id").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val().replace(/\n/g, "");
     // var sequence = {
@@ -268,7 +270,7 @@ function ajaxProteinSearchSuccess() {
     var glycosylated_aa_operation =  $("#glycosylated_aa_operation").val();
     var glycosylation_evidence = $("#glycosylation_evidence").val();
     var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name,
-        protein_name, go_term, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylated_aa_operation, glycosylation_evidence)
+        protein_name, go_term, go_id, pathway_id, sequence, glycan_id, glycan_relation, glycosylated_aa, glycosylated_aa_operation, glycosylation_evidence)
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -305,13 +307,14 @@ function ajaxProteinSearchSuccess() {
  * @param {string} input_gene_name user input
  * @param {string} input_protein_name user input
  * @param {string} input_go_term user input
+ * @param {string} input_go_id user input
  * @param {string} input_pathway_id user input
  * @param {string} input_sequence user input
  * @param {string} input_glycosylated_aa_operation user input
  * @return {string} returns text or id
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
-    input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_pathway_id, input_sequence,
+    input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
     input_glycan, input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
     var sequences;
     if (input_sequence) {
@@ -356,6 +359,7 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         protein_name: input_protein_name? input_protein_name: undefined,
         gene_name: input_gene_name?input_gene_name: undefined,
         go_term: input_go_term? input_go_term: undefined,
+        go_id: input_go_id? input_go_id: undefined,
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
         uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined,
         glycan: glycans?glycans: undefined,

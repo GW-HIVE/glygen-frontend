@@ -105,6 +105,16 @@ $('#textExampleGOTerm').click(function() {
 
 /**
  * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGOID
+ */
+var $tagsInputGOTerm = $('#go_id');
+$('#textExampleGOID').click(function() {
+     $tagsInputGOTerm.val($(this).text());
+    return false;
+});
+
+/**
+ * Makes the example clickable and inserts it into the search input field.
  * @param {string} tagsInputSequences
  */
 var $tagsInputSequences = $('#sequences');
