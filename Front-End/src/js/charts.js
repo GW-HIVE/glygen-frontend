@@ -30,7 +30,8 @@ function sunburstBioMolecules(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst2)
+//        sunburst_bio_molecules
+        var root = d3.hierarchy(data.sunburst3)
             .sum(function (d) { return d.size});
         
          // Create our sunburst data structure and size it.
@@ -45,9 +46,22 @@ function sunburstBioMolecules(dummy, data, id) {
             .innerRadius(function (d) { return d.y0 })
             .outerRadius(function (d) { return d.y1 });
 
+        //  On click proteins by species
+        function proteinsBySpecies() {
+            var str1 = "";
+            var str2 = " Proteins";
+            var res = str1.concat(str2);
+        }
+        
+        //  On click glycans by species
+        function glycansBySpecies() {
+            var str1 = "";
+            var str2 = " Glycans";
+            var res = str1.concat(str2);
+        }
+        
         // Add a <g> element for each node in thd data, then append <path> elements and draw lines based on the arc
         // variable calculations. Last, color the lines and the slices.
-
         g.selectAll('g')
             .data(root.descendants())
             .enter().append('g').attr("class", "node")
@@ -59,20 +73,13 @@ function sunburstBioMolecules(dummy, data, id) {
 //					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
 //				}, "sunburst_glycan_type_subtype");
                 
-            if (d.name == "Glycans") {
+            if (d.data.name.indexOf("Glycans") != -1 ||
+               d.parent.data.name.indexOf("Glycans") != -1) {
                 searchGlycansBy({
-                    "organism": {
-                        organism_list: [
-                            {
-                                "id": d.data.organism.id,
-                                "name": d.data.organism.name
-                            }
-                        ],
-                        "operation":"or"
-                    },
+                    "organism": d.data.organism,
                     "glycan_type": d.data.glycan_type
                 }, "sunburstBioMolecules");
-            } else if (d.name == "") {
+            } else if (d.data.name.indexOf("Proteins") != -1) {
                 searchProteinsBy({
                     "organism": {
                         "id": d.data.organism.id,
@@ -110,7 +117,7 @@ function sunburstBioMolecules(dummy, data, id) {
             .attr("d", arc)
             .style('stroke', '#fff')
 			//.style('opacity', .65)
-            .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+            .style("fill", function (d) { return color((d.children ? d : d.parent ).data.name); })
 			
 			.on("mouseover", function (d) {
 			d3.select(this).transition()
@@ -313,13 +320,13 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 			});
 		
         // Populate the <text> elements with our data-driven titles.
-        g.selectAll(".node")
-            .append("text")
-            .attr("transform", function(d) {
-                return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
-            .attr("dx", "-24") // radius margin
-            .attr("dy", ".5em") // rotation align
-            .text(function(d) { return d.parent ? d.data.name : "" });
+//        g.selectAll(".node")
+//            .append("text")
+//            .attr("transform", function(d) {
+//                return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
+//            .attr("dx", "-24") // radius margin
+//            .attr("dy", ".5em") // rotation align
+//            .text(function(d) { return d.parent ? d.data.name : "" });
 
     });
 
@@ -1406,13 +1413,13 @@ function vennProteinHomo(dummy, data, id) {
         
         switch (name.toLowerCase()) {
         case "Human":
-            jsonName = ["data.venn_protein_homo"];
+            jsonName = ["venn_protein_homo"];
             break;
         case "Mouse":
-            jsonName = ["data.venn_protein_mus"];
+            jsonName = ["venn_protein_mus"];
             break;
         case "Rat":
-            jsonName = ["data.venn_protein_rat"];
+            jsonName = ["venn_protein_rat"];
             break;
         default:
             jsonName = ["data.venn_protein_homo"];
@@ -2112,11 +2119,7 @@ function searchGlycansBy(param, chartId) {
 			"glycan_motif": param.motif
 		})
 //		chartId = "pie_chart_motif";
-	} else if (param.glycan_type) {
-			$.extend(formObject, {
-				"glycan_type": param.glycan_type,
-				"glycan_subtype": param.glycan_subtype
-			})
+	
 	} else if (param.organism) {
 		if (param.glycan_type) {
 			$.extend(formObject, {
@@ -2136,8 +2139,12 @@ function searchGlycansBy(param, chartId) {
 			})
 //			chartId = "venn_protein_homo"
 		}
-	}
-
+	} else if (param.glycan_type) {
+			$.extend(formObject, {
+				"glycan_type": param.glycan_type,
+				"glycan_subtype": param.glycan_subtype
+			})
+    }
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({
 		type: 'post',
