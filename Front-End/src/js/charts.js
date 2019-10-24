@@ -1476,22 +1476,21 @@ function pieProteinCanonicalIsoforms(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-// To make canonical and isoforms clickable add these two lines
-//          if (d.data.name.indexOf("Proteins") != -1 ||
-//          d.parent.data.name.indexOf("Proteins") != -1){}
-                if  (d.data.name.indexOf("Proteins") != -1) { 
-                    searchProteinsBy({
-                        "organism": {
-                            "id": d.data.organism.id,
-                            "name": d.data.organism.name
-                        }
-                    }, "sunburst_canon_isof_prot");
-                }
+
+//            if  (d.data.name.indexOf("Proteins") != -1 ||
+//            d.parent.data.name.indexOf("Proteins") != -1) { 
+//                    searchProteinsBy({
+//                        "organism": {
+//                            "id": d.data.organism.id,
+//                            "name": d.data.organism.name
+//                        }
+//                    }, "sunburst_canon_isof_prot");
+//                }
             })
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
 				.append("g")
-				.attr("class", "text-group")
+				.attr("class", "text-group");
                 
 				group.append("text")
 					.attr("class", "name-text")
@@ -1523,7 +1522,8 @@ function pieProteinCanonicalIsoforms(dummy, data, id) {
 			d3.select(this).transition()
 				.duration('50')
 				.attr('opacity', '.65')
-				.style("cursor", "pointer");
+//				.style("cursor", "pointer");
+                .style("cursor", "default");
 			})
 			.on("mouseout", function (d) {
 				d3.select(this).transition()
