@@ -812,14 +812,6 @@
 					{
 						"id": 9606,
 						"name": "Homo sapiens"
-					},
-										{
-						"id": 10090,
-						"name": "Mus musculus"
-					},
-										{
-						"id": 10116,
-						"name": "Rattus norvegicus"
 					}
 				],
 				"operation":"or"
@@ -860,24 +852,80 @@
 		{
 			"sets": [0, 1],
 			"tooltipname": "Human & Mouse glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					}
+				],
+				"operation":"and"
+			},
 			"name": "",
 			"size": 204
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Human & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"or"
+			},
 			"name": "",
 			"size": 80
 		},
 		{
 			"sets": [1, 2],
 			"tooltipname": "Mouse & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"or"
+			},
 			"name": "",
 			"size": 20
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Human & Mouse & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"or"
+			},
 			"name": "",
 			"size": 104
 		}

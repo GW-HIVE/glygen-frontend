@@ -215,7 +215,7 @@ function vennGlycanHomoMusRat(dummy, data, id) {
 			searchGlycansBy({
 				"organism": {
 					"organism_list": d.organism.organism_list,
-					"operation":"or"
+					"operation":"and"
 				}
 			}, "venn_glycans_homo_mus_rat");
 		});
