@@ -377,7 +377,8 @@ function submitvalues() {
     var proteinid = document.getElementById("protein").value;
     var enzyme = document.getElementById("enzyme").value;
     var glycan_motif = document.getElementById("motif").value;
-    var formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif);
+    var pmid = document.getElementById("pmid").value;
+    var formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif,pmid);
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -430,7 +431,8 @@ function resetAdvanced() {
             glycan_type: "",
             glycan_subtype: "",
             protein_identifier: "",
-            glycan_motif: ""
+            glycan_motif: "",
+            pmid:"",
         }
     });
 }
@@ -451,7 +453,7 @@ function resetAdvanced() {
  * @param {string} input_motif user motif input
  * @return {string} returns text or id
  */
-function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_organism_operation, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif) {
+function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_organism_operation, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif,input_pmid) {
     var enzymes = {}
     if (input_enzyme) {
         enzymes = {
@@ -486,6 +488,7 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min
         glycan_subtype: input_glycansubtype,
         protein_identifier: input_proteinid,
         glycan_motif: input_motif,
+        pmid:input_pmid
     };
     return formjson;
 }
