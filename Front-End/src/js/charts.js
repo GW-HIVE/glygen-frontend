@@ -548,31 +548,12 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-//				searchGlycansBy({
-//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
-//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
-//				}, "sunburst_glycan_type_subtype");
-                
-            if (d.name == "Glycans") {
+            if (d.data.name.indexOf("Glycans") != -1 ||
+               d.parent.data.name.indexOf("Glycans") != -1) {
                 searchGlycansBy({
-                    "organism": {
-                        organism_list: [
-                            {
-                                "id": d.data.organism.id,
-                                "name": d.data.organism.name
-                            }
-                        ],
-                        "operation":"or"
-                    },
+                    "organism": d.data.organism,
                     "glycan_type": d.data.glycan_type
-                }, "sunburstBioMolecules");
-            } else if (d.name == "") {
-                searchProteinsBy({
-                    "organism": {
-                        "id": d.data.organism.id,
-                        "name": d.data.organism.name
-                    }
-                }, "sunburstBioMolecules");
+                }, "donut_glycan_homo_mus_rat");
             }
 			})
 			.on("mouseover", function (d) {
@@ -1495,23 +1476,23 @@ function pieProteinCanonicalIsoforms(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-//				searchGlycansBy({
-//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
-//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
-//				}, "sunburst_glycan_type_subtype");
-                
-            searchProteinsBy({
-                    "organism": {
-                        "id": d.data.organism.id,
-                        "name": d.data.organism.name
-                    }
-                }, "sunburst_canon_isof_prot");
-			})
+// To make canonical and isoforms clickable add these two lines
+//          if (d.data.name.indexOf("Proteins") != -1 ||
+//          d.parent.data.name.indexOf("Proteins") != -1){}
+                if  (d.data.name.indexOf("Proteins") != -1) { 
+                    searchProteinsBy({
+                        "organism": {
+                            "id": d.data.organism.id,
+                            "name": d.data.organism.name
+                        }
+                    }, "sunburst_canon_isof_prot");
+                }
+            })
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
 				.append("g")
 				.attr("class", "text-group")
-
+                
 				group.append("text")
 					.attr("class", "name-text")
 					.text(`${d.data.name}`)

@@ -1320,6 +1320,10 @@
 	"sunburst_canonical_isoforms_proteins": {	
 		"name": "",
 		"children": [{
+				"organism": {
+					"id": 9606,
+					"name": "Homo sapiens"
+				},
 				"name": "Human Proteins",
 				"children": [{
 						"organism": {
@@ -1340,6 +1344,10 @@
 				]
 			},
 			{
+				"organism": {
+					"id": 10090,
+					"name": "Mus musculus"
+				},
 				"name": "Mouse Proteins",
 				"children": [{
 						"organism": {
@@ -1360,6 +1368,10 @@
 				]
 			},
 			{
+				"organism": {
+					"id": 10116,
+					"name": "Rattus norvegicus"
+				},
 				"name": "Rat Proteins",
 				"children": [{
 						"organism": {
