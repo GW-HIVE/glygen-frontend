@@ -1,3 +1,17 @@
+.aln-block {
+    display: table;
+}
+
+.aln-line {
+    display: table-row;
+}
+
+.aln-line > * {
+    display: table-cell;
+    white-space: nowrap;
+    padding: 0 .25em;
+}
+
 
      .aln-block{
        

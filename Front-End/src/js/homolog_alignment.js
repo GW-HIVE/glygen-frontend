@@ -9,7 +9,7 @@
  */
 
 function renderSequenceValue(aln) {
-    var line = $('<div class="aln-line-value col-xs-12 col-md-8" />');
+    var line = $('<div class="aln-line-value" />'); // col-xs-12 col-md-8
     line.text(aln.string);
     return line;
 }
@@ -20,7 +20,7 @@ function renderSequenceValue(aln) {
 * @return -Href link for proteinIDs which redirect to protein deatil page of specific protein 
 */
 function renderSequenceLink(aln){
-    var collink = $('<div class="aln-line-header col-xs-12 col-md-1" />');
+    var collink = $('<div class="aln-line-header" />'); //  col-xs-12 col-md-1
     var link = $('<a class="aln-line-link" />');
     link.text(aln.id);
     link.attr("href", "protein_detail.html?uniprot_canonical_ac=" + aln.id);
@@ -35,8 +35,26 @@ function renderSequenceLink(aln){
 * @return -Protein name
 */
 function renderSequenceName(aln) {
-    var namelink = $('<div class="aln-line-header col-xs-12 col-md-3 nameclass" />');
+    var namelink = $('<div class="aln-line-header nameclass" />'); //  col-xs-12 col-md-3
     namelink.text(aln.name);
+    return namelink;
+}
+
+function renderSequenceTaxId(aln) {
+    var namelink = $('<div class="aln-line-header nameclass" />'); //  col-xs-12 col-md-3
+    namelink.text(aln.tax_id);
+    return namelink;
+}
+
+function renderSequenceTaxName(aln) {
+    var namelink = $('<div class="aln-line-header nameclass" />'); //  col-xs-12 col-md-3
+    namelink.text(aln.tax_name);
+    return namelink;
+}
+
+function renderSequenceUnitprotAc(aln) {
+    var namelink = $('<div class="aln-line-header nameclass" />'); //  col-xs-12 col-md-3
+    namelink.text(aln.uniprot_ac);
     return namelink;
 }
 
@@ -47,6 +65,10 @@ function renderSequenceName(aln) {
 */
 function renderSequenceLine(aln) {
     var line = $('<div class="aln-line row" />');
+
+    renderSequenceTaxId(aln).appendTo(line);
+    renderSequenceTaxName(aln).appendTo(line);
+    renderSequenceUnitprotAc(aln).appendTo(line);
 
     // generate leading content
     var link = renderSequenceLink(aln);
@@ -68,9 +90,13 @@ function renderSequenceLine(aln) {
 function renderAlignmentLine(sequenceAlignment) {
     var line = $('<div class="aln-line row" />');
     // make a container for the name
-    var col1 = $('<div class="col-xs-12  col-md-4" />');
+    var col1 = $('<div class="" />'); // col-xs-12  col-md-4
     col1.text("  ");
-    var name = $('<div class="aln-line-consensus col-xs-12 col-md-8" />');
+    $('<div class="" />').appendTo(line);
+    $('<div class="" />').appendTo(line);
+    $('<div class="" />').appendTo(line);
+    $('<div class="" />').appendTo(line);
+    var name = $('<div class="aln-line-consensus" />'); // col-xs-12 col-md-8
     name.text(sequenceAlignment.string);
     col1.appendTo(line);
     name.appendTo(line);
@@ -137,9 +163,12 @@ function findMaxSequenceLength(sequenceObject) {
                     sequences: sequenceObject.sequences.map(function (aln) {
                         return {
                             start: x,
-                            id: aln.id,
+                            id: aln.uniprot_id,
                             name: aln.name,
-                            string: aln.aln.substr(x, perLine)
+                            string: aln.aln.substr(x, perLine),
+                            tax_name: aln.tax_name,
+                            tax_id: aln.tax_id,
+                            uniprot_ac: aln.uniprot_ac
                         };
                     }),
                     // consensus data for block
