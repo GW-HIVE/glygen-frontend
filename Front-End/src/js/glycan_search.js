@@ -432,7 +432,7 @@ function resetAdvanced() {
             glycan_subtype: "",
             protein_identifier: "",
             glycan_motif: "",
-            pmid:"",
+            pmid: "",
         }
     });
 }

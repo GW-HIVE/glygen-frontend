@@ -84,23 +84,23 @@
             </div>
         </div>
         <div class="row" id="paginationctrl1">
-                <div class="col-md-9 col-xs-9">
-                    <form class="form-inline col-sm-10" onsubmit="return false;">
-                        <label>Page</label>
-                        <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
-                        <select class="page-select form-control" onchange="xpage(this);"></select>
-                        <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
-                        <label>Records per page</label>
-                        <select class="limit-select form-control" onchange="xlimit(this);">
-                            <option selected>20</option>
-                            <option>40</option>
-                            <option>60</option>
-                            <option>80</option>
-                        </select>
-                        <label class="searchresult"></label>
-                    </form>
-                </div>
-                <div class="col-md-3 col-xs-3">
+            <div class="col-md-9 col-xs-9">
+                <form class="form-inline col-sm-10" onsubmit="return false;">
+                    <label>Page</label>
+                    <button type="button" class="btn btn-primary prevbutton" onclick="prev();">Prev</button>
+                    <select class="page-select form-control" onchange="xpage(this);"></select>
+                    <button type="button" class="btn btn-primary nextbutton" onclick="next();">Next</button>
+                    <label>Records per page</label>
+                    <select class="limit-select form-control" onchange="xlimit(this);">
+                        <option selected>20</option>
+                        <option>40</option>
+                        <option>60</option>
+                        <option>80</option>
+                    </select>
+                    <label class="searchresult"></label>
+                </form>
+            </div>
+            <div class="col-md-3 col-xs-3">
                 <div class="dropdown gg-download text-right">
                     <button class="btn btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
@@ -215,7 +215,13 @@
                             <td>{{go_id}}</td>
                         </tr>
                         {{/go_id}}
-
+                     <!--PMID-->
+ {{#pmid}}
+ <tr>
+     <td>PMID:</td>
+     <td>{{pmid}}</td>
+ </tr>
+ {{/pmid}}
                         <!--peptide seq-->
                         {{#sequence.aa_sequence}}
                         <tr>
@@ -354,4 +360,5 @@
     <script src="libraries/download.js"></script>
 
 </body>
+
 </html>

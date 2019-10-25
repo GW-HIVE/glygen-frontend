@@ -600,6 +600,41 @@
                                                 <label id='pathwayIDMsg' class="validation-message"></label>
                                             </div>
                                         </div>
+                                        <!-- PMID -->
+                                        <div class="gg-form-group row">
+                                            <label class="control-label col-sm-4" for="pmid">
+                                                <span><a class="link-with-tooltip" href="javascript://" 
+                                                    title="Glycan pmid" 
+                                                    data-toggle="popover"
+                                                    data-placement="top" 
+                                                    data-trigger="click"
+                                                    data-html="true"
+                                                    data-content="A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore <a href='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/' target='_blank'>PubMed ID</a>"
+                                                    tooltip-title="A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system.  <br><br>Enter a PMID of article.">
+                                                    <i class="far fa-question-circle help-sign"></i></a>
+                                                </span> Pubmed ID:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="text" 
+                                                    name="Glycanpmid" 
+                                                    class="form-control pmid" 
+                                                    id="pmid"
+                                                    placeholder="Enter the Pubmed ID" onkeyup="validatepmidName(this)">
+                                                <div>
+                                                    <div class="gg-text-left">Example: <a 
+                                                    href="#30964610" 
+                                                    id="textExamplepmid"
+                                                    data-tippy="Click to Insert">30964610
+                                                    </a></div>
+                                                    
+                                                    <div class="gg-text-right">Explore <a
+                                                    href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/" target="_blank" 
+                                                    data-tippy="Explore Glycan pmid Database">Pubmed ID</a></div>
+                                                </div>
+                                                <br>
+                                                <h6 id='pmidNameMsg' class="validation-message"></h6>
+                                            </div>
+                                        </div>
                                         <!-- Glycosylation Evidences-->
                                         <div class="row" id="glycosylation_evidence_xx">
                                             <label class="control-label col-sm-4" for="glycosylation_evidence_xx">

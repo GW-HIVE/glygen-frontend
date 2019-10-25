@@ -46,6 +46,7 @@ function resetAdvanced() {
             go_id: "",
             pathway_id: "",
             uniprot_canonical_ac: "",
+            pmid:"",
             sequence: {
                 glycosylated_aa: "",
                 type: ""
@@ -266,7 +267,8 @@ function ajaxProteinSearchSuccess() {
     var go_id = $("#go_id").val();
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val().replace(/\n/g, "");
-    var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name, protein_name, go_term, go_id, pathway_id, sequence)
+    var pmid = document.getElementById("pmid").value;
+    var formObject = searchJson(query_type, mass_slider[0], mass_slider[1], organism, uniprot_id, refseq_id, gene_name, protein_name, go_term, go_id, pathway_id, sequence,pmid)
     var json = "query=" + JSON.stringify(formObject);
     $.ajax({
         type: 'post',
@@ -310,7 +312,7 @@ function ajaxProteinSearchSuccess() {
  * @return {string} returns text or id
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
-    input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence) {
+    input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence,input_pmid) {
     var sequences;
     if (input_sequence) {
         sequences = {
@@ -340,8 +342,11 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         gene_name: input_gene_name?input_gene_name: undefined,
         go_term: input_go_term? input_go_term: undefined,
         go_id: input_go_id? input_go_id: undefined,
+        pmid: input_pmid? input_pmid: undefined,
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
         uniprot_canonical_ac: input_protein_id ?input_protein_id: undefined
+  
+        
     });
     return formjson;
 }
