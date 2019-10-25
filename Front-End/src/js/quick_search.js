@@ -258,7 +258,6 @@ $(document).ready(function () {
      /** 
     * @param {string} No results found 
     * @return {string} Alert message in all searches
-    * @author Tatiana Williamson
     */
     $(".alert").hide();
     $(document).on('click', function(e) {

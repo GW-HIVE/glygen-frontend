@@ -1301,7 +1301,6 @@ function vennProteinHomo(dummy, data, id) {
 		.width(350)
 		.height(350);
 
-    
 	var div_protein_homo = d3.select(id)
 	div_protein_homo.datum(data.venn_protein_homo)
 		.call(protein_homo);
@@ -1394,13 +1393,13 @@ function vennProteinHomo(dummy, data, id) {
         
         switch (name.toLowerCase()) {
         case "Human":
-            jsonName = ["venn_protein_homo"];
+            jsonName =["div_protein_homo.datum(data.venn_protein_homo)"]; 
             break;
         case "Mouse":
-            jsonName = ["venn_protein_mus"];
+            jsonName = ["div_protein_homo.datum(data.venn_protein_mus)"];
             break;
         case "Rat":
-            jsonName = ["venn_protein_rat"];
+            jsonName = ["div_protein_homo.datum(data.venn_protein_rat)"];
             break;
         default:
             jsonName = ["data.venn_protein_homo"];
@@ -2175,10 +2174,6 @@ function searchProteinsBy(param, chartId) {
 				"id": param.organism.id,
 				"name": param.organism.name
 			}
-//			"mass": {
-//				"min": parseInt(param.organism.mass_min),
-//				"max": parseInt(param.organism.mass_max)
-//			}
 		})
 //		chartId = "venn_protein_homo";
 	}
@@ -2236,7 +2231,7 @@ function searchGlycoproteinsBy(param, chartId) {
 				"operation":"or"
 			}
 		})
-		chartId = "venn_protein_homo";
+//		chartId = "venn_protein_homo";
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
@@ -2244,7 +2239,7 @@ function searchGlycoproteinsBy(param, chartId) {
 				"name": param.organism.name
 			}
 		})
-		chartId = "pie_glycosylated_proteins";
+//		chartId = "pie_glycosylated_proteins";
 	} else if (param.organism) {
 		$.extend(formObject, {
 			organism: {
@@ -2252,7 +2247,7 @@ function searchGlycoproteinsBy(param, chartId) {
 				"name": param.organism.name
 			}
 		})
-		chartId = "pie_glycosyl_prot_report_glyc";
+//		chartId = "pie_glycosyl_prot_report_glyc";
 	}
 	
 	var json = "query=" + JSON.stringify(formObject);
@@ -2281,3 +2276,143 @@ function searchGlycoproteinsBy(param, chartId) {
 	});
 }
 
+/**
+ * Q.7- What are the glycosyltransferases in species X?
+ */
+var searchInitValues;
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+        var orgElement = $("#organism1").get(0);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
+    });
+     /** 
+    * @param {string} No results found 
+    * @return {string} Alert message in all searches
+    */
+    $(".alert").hide();
+    $(document).on('click', function(e) {
+        $(".alert").hide();
+    })
+});
+
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycosylTransferases() {
+    var id = $("#organism1").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycosyltransferases", id),
+        error: ajaxFailure,
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_7";
+            }
+            else {
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q7");
+            }
+        }
+    })
+}
+
+/**
+ * Q.8- What are the glycohydrolases in species X?
+ */
+var searchInitValues;
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+        var orgElement = $("#organism2").get(0);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
+    });
+});
+
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycoHydrolases() {
+    var id = $("#organism2").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycohydrolases", id),
+        error: ajaxFailure,
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_8";
+            }
+            else {
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q8");
+            }
+        }
+    })
+}
+
+/**
+ * Q.9- What are the reported or predicted glycosylated proteins in species X?
+ */
+
+var searchInitValues;
+
+$(document).ready(function () {
+    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
+        searchInitValues = result;
+        var orgElement = $("#organism3").get(0);
+        result.organism.sort(sortDropdown);
+        for (var x = 0; x < result.organism.length; x++) {
+                createOption(orgElement, result.organism[x].name, result.organism[x].id);
+            }
+        var question = getParameterByName('question');
+        var id = getParameterByName('id');
+        if(id) {
+            populateLastSearch(question, id);
+        }
+    });
+});
+
+function createOption(ddl, text, value) {
+    var opt = document.createElement('option');
+    opt.value = value;
+    opt.text = text;
+    ddl.options.add(opt);
+}
+
+function glycoProteins() {
+    var id = $("#organism3").val();
+    var id1 = $("#species").val();
+    $.ajax({
+        type: 'post',
+        url: getWsUrl("search_glycoproteins", id, id1),
+        error: ajaxFailure,
+        // data: json,
+        success: function (results) {
+            if (results.list_id) {
+                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_9";
+            }
+            else {
+                //displayErrorByCode('no-results-found');
+                showNoResultsFound("li_q9");
+            }
+        }
+    })
+}
