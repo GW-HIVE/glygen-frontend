@@ -1365,7 +1365,7 @@ function vennProteinHomo(dummy, data, id) {
 		.height(350);
 
 	var div_protein_homo = d3.select(id)
-	div_protein_homo.datum(data.venn_protein_homo)
+    div_protein_homo.datum(data.venn_protein_homo)
 		.call(protein_homo);
 
 	var tooltip = d3.select("body").append("div")
@@ -1453,23 +1453,26 @@ function vennProteinHomo(dummy, data, id) {
         $('#vennProteinSpecies').show();
         var name = $("#vennProteinSpecies option:selected").val();
         var jsonName = [];
-        
+
         switch (name.toLowerCase()) {
-        case "Human":
-            jsonName =["div_protein_homo.datum(data.venn_protein_homo)"]; 
+        case "human":
+            div_protein_homo.datum(data.venn_protein_homo)
+		.call(protein_homo);
             break;
-        case "Mouse":
-            jsonName = ["div_protein_homo.datum(data.venn_protein_mus)"];
+        case "mouse":
+            div_protein_homo.datum(data.venn_protein_mus)
+		.call(protein_homo);
             break;
-        case "Rat":
-            jsonName = ["div_protein_homo.datum(data.venn_protein_rat)"];
+        case "rat":
+            div_protein_homo.datum(data.venn_protein_rat)
+		.call(protein_homo);
             break;
         default:
             jsonName = ["data.venn_protein_homo"];
             break;
         }
-        
-        $('#label_text').attr('label', updateLabel(name)); 
+
+       $('#label_text').text(updateLabel(name)); 
     }
     
     /**
@@ -1478,11 +1481,11 @@ function vennProteinHomo(dummy, data, id) {
     */ 
     function updateLabel (label) {
         switch (label.toLowerCase()) {
-        case "Human":
+        case "human":
             return "Human proteins";
-        case "Mouse":
+        case "mouse":
             return "Mouse proteins";
-        case "Rat":
+        case "rat":
             return "Rat proteins";
         default:
             return label;
@@ -1722,12 +1725,11 @@ var pie = d3.pie()
     .attr("class", "arc")
  	// On click goes to list page
 	.on("click", function (d) {
-		searchProteinsBy({
+		glycoHydrolases({
 			"organism": {
 				"id": d.data.organism.id,
 				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
+			}
 		}, "pie_glycohydrolases_proteins");
 	})
 	.on("mouseover", function (d) {
@@ -2392,36 +2394,17 @@ function glycosylTransferases() {
 /**
  * Q.8- What are the glycohydrolases in species X?
  */
-var searchInitValues;
 
-$(document).ready(function () {
-    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        searchInitValues = result;
-        var orgElement = $("#organism2").get(0);
-        result.organism.sort(sortDropdown);
-        for (var x = 0; x < result.organism.length; x++) {
-                createOption(orgElement, result.organism[x].name, result.organism[x].id);
-            }
-    });
-});
-
-function createOption(ddl, text, value) {
-    var opt = document.createElement('option');
-    opt.value = value;
-    opt.text = text;
-    ddl.options.add(opt);
-}
-
-function glycoHydrolases() {
-    var id = $("#organism2").val();
+function glycoHydrolases(param, chartId) {
+//    var id = $("#organism2").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycohydrolases", id),
+        url: getWsUrl("search_glycohydrolases", param.organism.id),
         error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_8";
+                window.location = './quick_protein_list.html?id=' + results.list_id + '&stat=' + chartId;
             }
             else {
                 //displayErrorByCode('no-results-found');

@@ -35,6 +35,7 @@ function buildSummary(queryInfo, question) {
     var summaryTemplate = $('#summary-template').html();
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a');
     queryInfo[question] = true;
+    queryInfo[stat] = true;
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }
@@ -151,6 +152,7 @@ function getParameterByName(name, url) {
 
 id = getParameterByName('id');
 var question = getParameterByName('question');
+var stat = getParameterByName('stat');
 LoadDataList(id);
 
 /**

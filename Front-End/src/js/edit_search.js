@@ -164,10 +164,15 @@ function LoadSearchvalues(id) {
 
 function editSearch_quick() {
     var question =  getParameterByName('question');
+    const stat = getParameterByName("stat");
+
         //window.location.replace("quick_search.html?id=" + id + '&question=' + question);
+    if (stat) {
+        window.location.replace('statistics.html#' + stat);
+    } else {
         window.location.replace("quick_search.html?id=" + id + '&question=' + question + '#' +question );
-   
-        activityTracker("user", id, "edit search");
+    }
+    activityTracker("user", id, "edit search");
 }
 //Do not remove this code
 function getParameterByName(name, url) {
