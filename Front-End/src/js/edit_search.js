@@ -52,6 +52,7 @@ function setFormValues(data) {
         $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
         $("#protein").val(data.query.protein_identifier || "");
         $("#motif").val(data.query.glycan_motif || "");
+        $("#pmid").val(data.query.pmid || "");
     }
 }
 
@@ -72,6 +73,7 @@ function setProteinFormValues(data) {
         $("#protein_name").val(data.query.protein_name || "");
         $("#go_term").val(data.query.go_term || "");
         $("#go_id").val(data.query.go_id || "");
+        $("#pmid").val(data.query.pmid || "");
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");
@@ -97,6 +99,7 @@ function setGlycoProteinFormValues(data) {
         $("#protein_name").val(data.query.protein_name || "");
         $("#go_term").val(data.query.go_term || "");
         $("#go_id").val(data.query.go_id || "");
+        $("#pmid").val(data.query.pmid || "");
         $("#pathway").val(data.query.pathway_id || "");
         $("#sequences").val(data.query.sequence? data.query.sequence.aa_sequence : "");
         $("#type").val(data.query.sequence? data.query.sequence.type : "");
