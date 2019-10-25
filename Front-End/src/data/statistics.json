@@ -804,6 +804,132 @@
 			"size": 2000
 		}
 	],
+	"venn_glycans_homo_mus_rat_ver2": [{
+			"sets": [0],
+			"tooltipname": "Human glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				],
+				"operation":"or"
+			},
+			"name": "Human glycans",
+			"size": 4046
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Mouse glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					}
+				],
+				"operation":"or"		
+			},
+			"name": "Mouse glycans",
+			"size": 641
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"or"		
+			},
+			"name": "Rat glycans",
+			"size": 250
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Human & Mouse glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					}
+				],
+				"operation":"and"
+			},
+			"name": "",
+			"size": 4378
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Human & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"and"
+			},
+			"name": "",
+			"size": 4183
+		},
+		{
+			"sets": [1, 2],
+			"tooltipname": "Mouse & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"and"
+			},
+			"name": "",
+			"size": 841
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Human & Mouse & Rat glycans",
+			"organism": {
+				"organism_list": [
+					{
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					{
+						"id": 10090,
+						"name": "Mus musculus"
+					},
+					{
+						"id": 10116,
+						"name": "Rattus norvegicus"
+					}
+				],
+				"operation":"and"
+			},
+			"name": "",
+			"size": 4507
+		}
+	],
 	"venn_glycans_homo_mus_rat": [{
 			"sets": [0],
 			"tooltipname": "Human glycans",

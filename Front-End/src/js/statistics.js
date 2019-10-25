@@ -176,6 +176,14 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	d3.select('#sunburst_glycan_type_subtype')
 		.call(bio_molecules, jsonData, "#sunburstBioMolecules"); // draw chart in div
 	
+	
+	//-----------------------------
+	//  VERSION2  Human & Mouse Glycans Venn Diagram
+	//-----------------------------
+	var glycan_homo_mus_rat_ver2 = vennGlycanHomoMusRatVERSION2;
+	d3.select('#venn_glycans_homo_mus_rat_ver2')
+		.call(glycan_homo_mus_rat_ver2, jsonData, "#venn_glycans_homo_mus_rat_ver2"); // draw chart in div
+	
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------
