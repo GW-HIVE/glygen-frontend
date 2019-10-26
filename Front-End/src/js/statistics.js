@@ -187,9 +187,9 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//-----------------------------
 	//    Human & Mouse Glycans Venn Diagram
 	//-----------------------------
-	var glycan_homo_mus_rat = vennGlycanHomoMusRat;
-	d3.select('#venn_glycans_homo_mus_rat')
-		.call(glycan_homo_mus_rat, jsonData, "#venn_glycans_homo_mus_rat"); // draw chart in div
+	var glycanSpecies = vennGlycanSpecies;
+	d3.select('#venn_glycan_species')
+		.call(glycanSpecies, jsonData, "#venn_glycan_species"); // draw chart in div
 
 	//--------------------
 	//    Sunburst glycan chart. Glycan types and subtypes.
@@ -201,16 +201,16 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//-------------------------------
 	//    Donut Glycan Chart. Human and mouse glycans.
 	//-------------------------------
-	var donutGlycan = donutGlycanHomoMusRat;
-	d3.select('#donut_glycan_homo_mus_rat')
-		.call(donutGlycan, jsonData, "#donut_glycan_homo_mus_rat"); // draw chart in div
+	var sunburstGlycan = sunburstGlycanOrganismType;
+	d3.select('#sunburst_glycan_organism_type')
+		.call(sunburstGlycan, jsonData, "#sunburst_glycan_organism_type"); // draw chart in div
 
 	//-------------------------------
 	//    Pie Motif Chart. Motifs and their frequencies
 	//-------------------------------	
-	var pieMotif = pieChartMotif;
-	d3.select('#pie_chart_motif')
-		.call(pieMotif, jsonData, "#pie_chart_motif"); // draw chart in div
+	var donutMotif = donutChartMotif;
+	d3.select('#donut_chart_motif')
+		.call(donutMotif, jsonData, "#donut_chart_motif"); // draw chart in div
 
 	//-----------------------------------
 	//	Bar Chart Mass range
@@ -229,17 +229,17 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//--------------------
 	//    Proteins Venn Diagram. Human proteins.
 	//----------------------
-	var protein_homo = vennProteinHomo;
+	var protein_species = vennProteinSpecies;
 	d3.select('#venn_protein_species')
-		.call(protein_homo, jsonData, "#venn_protein_species"); // draw chart in div
+		.call(protein_species, jsonData, "#venn_protein_species"); // draw chart in div
 	
 	//-------------------------------
 	//  Pie Chart Number of Canonical and Isoforms Proteins. 
 	//  Proteins (Human, Mouse and Rat)
 	//-------------------------------	
-	var pieCanonIsofProtein = pieProteinCanonicalIsoforms;
+	var sunburstCanonIsofProtein = sunburstProteinCanonicalIsoforms;
 	d3.select('#sunburst_canon_isof_prot')
-		.call(pieCanonIsofProtein, jsonData, "#sunburst_canon_isof_prot"); // draw chart in div
+		.call(sunburstCanonIsofProtein, jsonData, "#sunburst_canon_isof_prot"); // draw chart in div
 
 	//-------------------------------
 	//  Pie Chart Number of Canonical and Isoforms Proteins. 
@@ -261,15 +261,8 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//  Pie Chart Number of Glycosylated Proteins. 
 	//  Proteins (Human, Mouse and Rat)
 	//-------------------------------	
-	var pieProteinGlycosylated = sunburstGlycosylatedProtein;
-	d3.select('#sunburst_glycosylated_proteins')
-		.call(pieProteinGlycosylated, jsonData, "#sunburst_glycosylated_proteins"); // draw chart in div
+	var sunbGlycoprotRepPredGlyc = sunburstGlycoprotRepPredGlyc;
+	d3.select('#sunb_glycoprot_rep_pred_glyc')
+		.call(sunbGlycoprotRepPredGlyc, jsonData, "#sunb_glycoprot_rep_pred_glyc"); // draw chart in div
 
-	//-------------------------------
-	//  Pie Chart Number of glycosylated proteins with reported glycans. 
-	//  Proteins (Human, Mouse and Rat)
-	//-------------------------------	
-	var pieProtGlycosylReportGlyc = pieGlycosylProtReportGlyc;
-	d3.select('#pie_glycosyl_prot_report_glyc')
-		.call(pieProtGlycosylReportGlyc, jsonData, "#pie_glycosyl_prot_report_glyc"); // draw chart in div
 });

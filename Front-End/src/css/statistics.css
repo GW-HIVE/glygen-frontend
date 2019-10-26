@@ -167,20 +167,20 @@ svg {
     font-size: 1.5em;
 }
 
-.pieMotif text {
+.donutMotif text {
     font-family: "Verdana", sans-serif;
 /*    fill: #888;*/
     fill: #000;
-    opacity: .75;
+    opacity: .65;
 }
 
-.pieMotif .name-text {
-    font-size: .5em;
+.donutMotif .name-text {
+    font-size: .38em;
     stroke: none;
 }
 
-.pieMotif .value-text {
-    font-size: 1.5em;
+.donutMotif .value-text {
+    font-size: .8em;
     stroke: none;
 }
 
@@ -199,7 +199,7 @@ svg {
 }
 
 .node .name-text {
-    font-size: 1.2em;
+    font-size: 1.1em;
     stroke: none;
     opacity: .5;
 }

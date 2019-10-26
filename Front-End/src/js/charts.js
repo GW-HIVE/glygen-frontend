@@ -1,12 +1,12 @@
-//Tatiana Williamson
-// date: April 2019
+//@author: Tatiana Williamson
+// @date: April - November 2019 
 
 //------------------------------------------
 //	Glycans
 //------------------------------------------
 
 /**
- * Sunburst glycan chart displayes glycan types and subtypes.
+ * Sunburst glycan chart displayes proteins, glycan types and subtypes by species.
  */
 function sunburstBioMolecules(dummy, data, id) {
 	// Variables
@@ -31,7 +31,7 @@ function sunburstBioMolecules(dummy, data, id) {
 		
         // Find the root node of our data, and begin sizing process.
 //        sunburst_bio_molecules
-        var root = d3.hierarchy(data.sunburst3)
+        var root = d3.hierarchy(data.sunb_bio_molecules)
             .sum(function (d) { return d.size});
         
          // Create our sunburst data structure and size it.
@@ -68,25 +68,21 @@ function sunburstBioMolecules(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-//				searchGlycansBy({
-//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
-//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
-//				}, "sunburst_glycan_type_subtype");
                 
-            if (d.data.name.indexOf("Glycans") != -1 ||
-               d.parent.data.name.indexOf("Glycans") != -1) {
-                searchGlycansBy({
-                    "organism": d.data.organism,
-                    "glycan_type": d.data.glycan_type
-                }, "sunburstBioMolecules");
-            } else if (d.data.name.indexOf("Proteins") != -1) {
-                searchProteinsBy({
-                    "organism": {
-                        "id": d.data.organism.id,
-                        "name": d.data.organism.name
-                    }
-                }, "sunburstBioMolecules");
-            }
+                if (d.data.name.indexOf("Glycans") != -1 ||
+                   d.parent.data.name.indexOf("Glycans") != -1) {
+                    searchGlycansBy({
+                        "organism": d.data.organism,
+                        "glycan_type": d.data.glycan_type
+                    }, "sunburstBioMolecules");
+                } else if (d.data.name.indexOf("Proteins") != -1) {
+                    searchProteinsBy({
+                        "organism": {
+                            "id": d.data.organism.id,
+                            "name": d.data.organism.name
+                        }
+                    }, "sunburstBioMolecules");
+                }
 			})
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
@@ -167,7 +163,7 @@ function vennGlycanHomoMusRatVERSION2(dummy, data, id) {
 		.height(350);
 
 	var div_glycan_homo_mus_rat = d3.select(id)
-	div_glycan_homo_mus_rat.datum(data.venn_glycans_homo_mus_rat_ver2)
+	div_glycan_homo_mus_rat.datum(data.venn_glycan_species_ver2)
 		.call(glycan_homo_mus_rat);
 
 	var tooltip = d3.select("body").append("div")
@@ -222,15 +218,15 @@ function vennGlycanHomoMusRatVERSION2(dummy, data, id) {
 }
 
 /**
- * Venn diagram displayes human and mouse glycans.
+ * Venn diagram displayes glycans by species.
  */
-function vennGlycanHomoMusRat(dummy, data, id) {
+function vennGlycanSpecies(dummy, data, id) {
 	var glycan_homo_mus_rat = venn.VennDiagram()
 		.width(350)
 		.height(350);
 
 	var div_glycan_homo_mus_rat = d3.select(id)
-	div_glycan_homo_mus_rat.datum(data.venn_glycans_homo_mus_rat)
+	div_glycan_homo_mus_rat.datum(data.venn_glycan_species)
 		.call(glycan_homo_mus_rat);
 
 	var tooltip = d3.select("body").append("div")
@@ -280,7 +276,7 @@ function vennGlycanHomoMusRat(dummy, data, id) {
 					"organism_list": d.organism.organism_list,
 					"operation":"and"
 				}
-			}, "venn_glycans_homo_mus_rat");
+			}, "venn_glycan_species");
 		});
 }
 
@@ -313,7 +309,7 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst_glycan_type_subtype)
+        var root = d3.hierarchy(data.sunb_glycan_type_subtype)
             .sum(function (d) { return d.size});
 
         // Calculate the sizes of each arc that we'll draw later.
@@ -563,10 +559,9 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
 }
 
 /**
- * Sunburst glycan chart displayes number of human and mouse glycans.
+ * Sunburst glycan chart displayes number of glycans by species and their type.
  */
-
-function donutGlycanHomoMusRat(dummy, data, id) {
+function sunburstGlycanOrganismType(dummy, data, id) {
 	var width = 450;
     var height = 450;
     var radius = Math.min(width, height) / 2;
@@ -587,7 +582,7 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst_glycan_homo_mus_rat)
+        var root = d3.hierarchy(data.sunb_glycan_organism_type)
             .sum(function (d) { return d.size});
         
          // Create our sunburst data structure and size it.
@@ -616,7 +611,7 @@ function donutGlycanHomoMusRat(dummy, data, id) {
                 searchGlycansBy({
                     "organism": d.data.organism,
                     "glycan_type": d.data.glycan_type
-                }, "donut_glycan_homo_mus_rat");
+                }, "sunburst_glycan_organism_type");
             }
 			})
 			.on("mouseover", function (d) {
@@ -925,12 +920,11 @@ function donutGlycanHomoMusRat(dummy, data, id) {
 		});
 */
 }
-
-    
+   
 /**
- * Pie glycan chart displayes motifs and their frequencies.
+ * Donut motif chart displayes motifs and their frequencies.
  */
-function pieChartMotif(dummy, data, id) {
+function donutChartMotif(dummy, data, id) {
 	var text = "",
 		width = 150,
 		height = 150,
@@ -949,7 +943,7 @@ function pieChartMotif(dummy, data, id) {
 
 	var svgP = d3.select(id)
 		.append('svg')
-		.attr('class', 'pieMotif')
+		.attr('class', 'donutMotif')
 		.style('width', '80%')
 		//		.attr('width', width)
 		//		.attr('height', height);
@@ -981,26 +975,26 @@ function pieChartMotif(dummy, data, id) {
 	//to accumulate all pie elements with size < 1000
 	var accWhenLessThan = 1000;
 	$.extend(data, {
-		"pie_motif_modified": []
+		"donut_motif_modified": []
 	});
 	var motifOthers = {
 		"name": "Other",
 		"size": 0
 	}
-	$.each(data.pie_motif, function (i, v) {
+	$.each(data.donut_motif, function (i, v) {
 		if (v.size >= accWhenLessThan) {
-			data.pie_motif_modified.push(v);
+			data.donut_motif_modified.push(v);
 		} else {
 			motifOthers.size += v.size;
 		}
 	});
-	data.pie_motif_modified.push(motifOthers);
+	data.donut_motif_modified.push(motifOthers);
 
-	var path = g.selectAll('.pieMotif')
-		.data(pie(data.pie_motif_modified))
+	var path = g.selectAll('.donutMotif')
+		.data(pie(data.donut_motif_modified))
 		.enter()
 		.append('g')
-		.attr('class', 'pieMotif')
+		.attr('class', 'donutMotif')
 		.style('stroke', 'white')
 		// On click goes to list page
 		.on("click", function (d) {
@@ -1008,7 +1002,7 @@ function pieChartMotif(dummy, data, id) {
 			var motif = d.data.name;
 			searchGlycansBy({
 				"motif": motif
-			}, "pie_chart_motif");
+			}, "donut_chart_motif");
 		})
 		.on("mouseover", function (d) {
 			//      		d3.selectAll('.piePie')
@@ -1357,146 +1351,9 @@ function barChartSugar(dummy, data, id) {
 //------------------------------------------
 
 /**
- * Venn diagram displayes number of human proteins, glycoproteins, enzymes.
+ * Sunburst displayes number of Canonical proteins and Isoforms by species.
  */
-function vennProteinHomo(dummy, data, id) {
-	var protein_homo = venn.VennDiagram()
-		.width(350)
-		.height(350);
-
-	var div_protein_homo = d3.select(id)
-    div_protein_homo.datum(data.venn_protein_homo)
-		.call(protein_homo);
-
-	var tooltip = d3.select("body").append("div")
-		.attr("class", "venntooltip")
-		.style("cursor", "pointer");
-
-	div_protein_homo.selectAll("path")
-		.style("stroke-opacity", 0)
-		.style("stroke", "#fff")
-		.style("stroke-width", 3);
-
-	div_protein_homo.selectAll("g")
-		.on("mouseover", function (d, i) {
-			// sort all the areas relative to the current item
-			venn.sortAreas(div_protein_homo, d);
-
-			// Display a tooltip with the current size
-			tooltip.transition().duration(400).style("opacity", .9);
-			tooltip.text(d.size + '\n' + d.tooltipname);
-
-			// highlight the current path
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
-				.style("stroke-opacity", 1)
-				.style("cursor", "pointer");
-		})
-
-		.on("mousemove", function () {
-			tooltip.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
-		})
-
-		// On click goes to list page
-		.on("click", function (d) {
-			//console.log(d.data.size); 
-			if (d.name == "Proteins") {
-				//var massRange = d.range.split("-");
-				searchProteinsBy({
-					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
-					}
-				}, "venn_protein_species");
-			} else if (d.name == "Glycoproteins") {
-				searchGlycoproteinsBy({
-					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
-					},
-					glycosylated_aa: {
-            			"aa_list": ["N","S","T"],
-            			"operation":"or"
-        			}
-				}, "venn_protein_species");
-			} else if (d.name == "Enzymes") {
-				searchGlycansBy({
-					"organism": {
-						organism_list: [
-							{
-								"id": 9606,
-								"name": "Homo sapiens"
-							}
-						],
-						"operation":"or"
-					}
-				}, "venn_protein_species");
-			}
-		})
-
-		.on("mouseout", function (d, i) {
-			tooltip.transition().duration(400).style("opacity", 0);
-			var selection = d3.select(this).transition("tooltip").duration(400);
-			selection.select("path")
-				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
-				.style("stroke-opacity", 0);
-		});
-    
-    /**
-     * Updates the JSON name on the venn Proteins on select option.
-     */
-    $('#vennProteinSpecies').on('change', populateJSON);
-    
-    function populateJSON() {
-        $('#vennProteinSpecies').show();
-        var name = $("#vennProteinSpecies option:selected").val();
-        var jsonName = [];
-
-        switch (name.toLowerCase()) {
-        case "human":
-            div_protein_homo.datum(data.venn_protein_homo)
-		.call(protein_homo);
-            break;
-        case "mouse":
-            div_protein_homo.datum(data.venn_protein_mus)
-		.call(protein_homo);
-            break;
-        case "rat":
-            div_protein_homo.datum(data.venn_protein_rat)
-		.call(protein_homo);
-            break;
-        default:
-            jsonName = ["data.venn_protein_homo"];
-            break;
-        }
-
-       $('#label_text').text(updateLabel(name)); 
-    }
-    
-    /**
-    * Assigns a different label text in proteins by species
-    * @param {string} type [Changes a different label text]
-    */ 
-    function updateLabel (label) {
-        switch (label.toLowerCase()) {
-        case "human":
-            return "Human proteins";
-        case "mouse":
-            return "Mouse proteins";
-        case "rat":
-            return "Rat proteins";
-        default:
-            return label;
-        }
-    }
-}
-
-/**
- * Pie chart displayes number of Canonical and Isoforms Proteins for humans, mouse, and rat data.
- */
-function pieProteinCanonicalIsoforms(dummy, data, id) {
+function sunburstProteinCanonicalIsoforms(dummy, data, id) {
     var width = 450;
     var height = 450;
     var radius = Math.min(width, height) / 2;
@@ -1517,7 +1374,7 @@ function pieProteinCanonicalIsoforms(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst_canonical_isoforms_proteins)
+        var root = d3.hierarchy(data.sunb_canon_isof_prot)
             .sum(function (d) { return d.size});
         
          // Create our sunburst data structure and size it.
@@ -1677,7 +1534,144 @@ function pieProteinCanonicalIsoforms(dummy, data, id) {
 }
 
 /**
- * Pie chart displayes number of Glycohydrolases proteins for humans, mouse, and rat data.
+ * Venn diagram displayes number of proteins, glycoproteins, enzymes by species.
+ */
+function vennProteinSpecies(dummy, data, id) {
+	var protein_homo = venn.VennDiagram()
+		.width(350)
+		.height(350);
+
+	var div_protein_homo = d3.select(id)
+    div_protein_homo.datum(data.venn_protein_homo)
+		.call(protein_homo);
+
+	var tooltip = d3.select("body").append("div")
+		.attr("class", "venntooltip")
+		.style("cursor", "pointer");
+
+	div_protein_homo.selectAll("path")
+		.style("stroke-opacity", 0)
+		.style("stroke", "#fff")
+		.style("stroke-width", 3);
+
+	div_protein_homo.selectAll("g")
+		.on("mouseover", function (d, i) {
+			// sort all the areas relative to the current item
+			venn.sortAreas(div_protein_homo, d);
+
+			// Display a tooltip with the current size
+			tooltip.transition().duration(400).style("opacity", .9);
+			tooltip.text(d.size + '\n' + d.tooltipname);
+
+			// highlight the current path
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
+				.style("stroke-opacity", 1)
+				.style("cursor", "pointer");
+		})
+
+		.on("mousemove", function () {
+			tooltip.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+		})
+
+		// On click goes to list page
+		.on("click", function (d) {
+			//console.log(d.data.size); 
+			if (d.name == "Proteins") {
+				//var massRange = d.range.split("-");
+				searchProteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					}
+				}, "venn_protein_species");
+			} else if (d.name == "Glycoproteins") {
+				searchGlycoproteinsBy({
+					"organism": {
+						"id": 9606,
+						"name": "Homo sapiens"
+					},
+					glycosylated_aa: {
+            			"aa_list": ["N","S","T"],
+            			"operation":"or"
+        			}
+				}, "venn_protein_species");
+			} else if (d.name == "Enzymes") {
+				searchGlycansBy({
+					"organism": {
+						organism_list: [
+							{
+								"id": 9606,
+								"name": "Homo sapiens"
+							}
+						],
+						"operation":"or"
+					}
+				}, "venn_protein_species");
+			}
+		})
+
+		.on("mouseout", function (d, i) {
+			tooltip.transition().duration(400).style("opacity", 0);
+			var selection = d3.select(this).transition("tooltip").duration(400);
+			selection.select("path")
+				.style("fill-opacity", d.sets.length == 1 ? .25 : .0)
+				.style("stroke-opacity", 0);
+		});
+    
+    /**
+     * Updates the JSON name on the venn Proteins on select option.
+     */
+    $('#vennProteinSpecies').on('change', populateJSON);
+    
+    function populateJSON() {
+        $('#vennProteinSpecies').show();
+        var name = $("#vennProteinSpecies option:selected").val();
+        var jsonName = [];
+
+        switch (name.toLowerCase()) {
+        case "human":
+            div_protein_homo.datum(data.venn_protein_homo)
+		.call(protein_homo);
+            break;
+        case "mouse":
+            div_protein_homo.datum(data.venn_protein_mus)
+		.call(protein_homo);
+            break;
+        case "rat":
+            div_protein_homo.datum(data.venn_protein_rat)
+		.call(protein_homo);
+            break;
+        default:
+            jsonName = ["data.venn_protein_homo"];
+            break;
+        }
+
+       $('#label_text').text(updateLabel(name)); 
+    }
+    
+    /**
+    * Assigns a different label text in proteins by species
+    * @param {string} type [Changes a different label text]
+    */ 
+    function updateLabel (label) {
+        switch (label.toLowerCase()) {
+        case "human":
+            return "Human proteins";
+        case "mouse":
+            return "Mouse proteins";
+        case "rat":
+            return "Rat proteins";
+        default:
+            return label;
+        }
+    }
+}
+
+/**
+ * Pie chart displayes number of Glycohydrolases proteins by species.
  */
 function pieProteinGlycohydrolases(dummy, data, id) {
 	// set the dimensions and margins of the graph
@@ -1720,7 +1714,7 @@ var pie = d3.pie()
 	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 	var path = g.selectAll(".arc")
-    .data(pie(data.pie_glycohydrolases_proteins))
+    .data(pie(data.pie_glycohydrolases_prot))
     .enter().append("g")
     .attr("class", "arc")
  	// On click goes to list page
@@ -1762,7 +1756,7 @@ var pie = d3.pie()
 }
 
 /**
- * Pie chart displayes number of Glycosyltransferases proteins for humans, mouse, and rat data.
+ * Pie chart displayes number of Glycosyltransferases proteins by species.
  */
 function pieProteinGlycosyltransferases(dummy, data, id) {
 	// set the dimensions and margins of the graph
@@ -1805,7 +1799,7 @@ var pie = d3.pie()
 	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 	var path = g.selectAll(".arc")
-    .data(pie(data.pie_glycosyltransferases_proteins))
+    .data(pie(data.pie_glycosyltransferases_prot))
     .enter().append("g")
     .attr("class", "arc")
  	// On click goes to list page
@@ -1852,9 +1846,9 @@ var pie = d3.pie()
 //------------------------------------------
 
 /**
- * Pie chart displayes number of Glycosylated proteins for humans, mouse, and rat data.
+ * Sunburst displayes number of Glycosylated proteins with reported with and without glycans and predicted by species.
  */
-function sunburstGlycosylatedProtein(dummy, data, id) {
+function sunburstGlycoprotRepPredGlyc(dummy, data, id) {
     var width = 450;
     var height = 450;
     var radius = Math.min(width, height) / 2 - 20;
@@ -1879,7 +1873,7 @@ function sunburstGlycosylatedProtein(dummy, data, id) {
 		const formatNumber = d3.format(',d');
 		
         // Find the root node of our data, and begin sizing process.
-        var root = d3.hierarchy(data.sunburst_glycosylated_proteins)
+        var root = d3.hierarchy(data.sunb_glycoprot_rep_pred_glyc)
             .sum(function (d) { return d.size});
 
         // Calculate the sizes of each arc that we'll draw later.
@@ -1900,9 +1894,8 @@ function sunburstGlycosylatedProtein(dummy, data, id) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
 				searchProteinsBy({
-//					"glycan_type": d.parent.data.name == "" ?d.data.name: d.parent.data.name,
-//					"glycan_subtype": d.parent.data.name == "" ?undefined: d.data.name
-				}, "sunburst_glycosylated_proteins");
+
+				}, "sunb_glycoprot_rep_pred_glyc");
 			})
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
@@ -2031,91 +2024,6 @@ function sunburstGlycosylatedProtein(dummy, data, id) {
 //     	.text(function(d) { return d.data.size; });
 }
 
-/**
- * Pie chart displayes number of Glycosylated proteins with reported glycans for humans, mouse, and rat data.
- */
-function pieGlycosylProtReportGlyc(dummy, data, id) {
-	// set the dimensions and margins of the graph
-var width = 150,
-	height = 150,
-	margin = {
-		top: 0,
-		right: 0,
-		bottom: 0,
-		left: 0
-	};
-var radius = Math.min(width, height) / 2;
-
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-var svg = d3.select(id)
-	.append("svg")
-	.attr("class", "arc")
-	.style('width', '80%')
-	.attr('preserveAspectRatio', 'xMinYMin meet')
-	.attr('viewBox',
-		'0 0 ' +
-		(width + margin.left + margin.right) +
-		' ' +
-		(height + margin.top + margin.bottom)
-	);
-var arc = d3.arc()
-    .innerRadius(0)
-	.outerRadius(radius-5);
-
-var labelArc = d3.arc()
-    .outerRadius(radius - 30)
-    .innerRadius(radius - 30);
-
-var pie = d3.pie()
-    .sort(null)
-    .value(function(d) { return d.size; });
-	
-  var g = svg.append("g")
-	  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-	var path = g.selectAll(".arc")
-    .data(pie(data.pie_glycosyl_prot_report_glyc))
-    .enter().append("g")
-    .attr("class", "arc")
- 	// On click goes to list page
-	.on("click", function (d) {
-		searchGlycoproteinsBy({
-			"organism": {
-				"id": d.data.organism.id,
-				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
-		}, "pie_glycosyl_prot_report_glyc");
-	})
-	.on("mouseover", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '.65')
-			.style("cursor", "pointer");
-	})
-	.on("mouseout", function (d) {
-		var selector = d3.select(this).transition()
-			.duration('50');
-		selector.select("path")
-			.attr('opacity', '1')
-			.style("cursor", "none");
-	});
-
- 	path.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color(d.data.name); });
-
- 	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", ".15em")
-     	.text(function(d) { return d.data.name; });
-	path.append("text")
-    	.attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-    	.attr("dy", "1.35em")
-     	.text(function(d) { return d.data.size; });
-}
 
 /**
  * hides the loading gif and displays the page after the search_init results are loaded.
@@ -2232,7 +2140,7 @@ function searchProteinsBy(param, chartId) {
 		"operation": "AND",
 		"query_type": query_type,
 	};
-	//var chartId = "";
+
 	if (param.organism) {
 		$.extend(formObject, {
 			"organism": {
@@ -2240,7 +2148,6 @@ function searchProteinsBy(param, chartId) {
 				"name": param.organism.name
 			}
 		})
-//		chartId = "venn_protein_homo";
 	}
 
 	var json = "query=" + JSON.stringify(formObject);
@@ -2278,13 +2185,12 @@ function searchGlycoproteinsBy(param, chartId) {
 
 	var prevListId = getParameterByName("id") || "";
 	activityTracker("user", prevListId, "Performing glycoprotein search in Statistics");
-
 	var query_type = "search_protein";
 	var formObject = {
 		"operation": "AND",
 		query_type: query_type,
 	};
-	//var chartId = "";
+    
 	if (param.organism) {
 		$.extend(formObject, {
 			organism: {
@@ -2296,24 +2202,7 @@ function searchGlycoproteinsBy(param, chartId) {
 				"operation":"or"
 			}
 		})
-//		chartId = "venn_protein_homo";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-//		chartId = "pie_glycosylated_proteins";
-	} else if (param.organism) {
-		$.extend(formObject, {
-			organism: {
-				"id": param.organism.id,
-				"name": param.organism.name
-			}
-		})
-//		chartId = "pie_glycosyl_prot_report_glyc";
-	}
+	} 
 	
 	var json = "query=" + JSON.stringify(formObject);
 	$.ajax({

@@ -1,293 +1,4 @@
 {
-	"sunburst": {
-		"name": "BioMolecules",
-		"children": [{
-				"name": "Human",
-				"children": [
-					{
-						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
-						},
-						"name": "Proteins",
-						"size": 20950
-					},
-					{
-						"name": "Glycans",
-						"children": [{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 1605
-							},
-							{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 353
-							},
-							{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 2088
-							}
-						]
-					}
-				]
-			},
-			{
-				"name": "Mouse",
-				"children": [
-					{
-						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
-						},
-						"name": "Proteins",
-						"size": 22282
-					},
-					{
-						"name": "Glycans",
-						"children": [{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 357
-							},
-							{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 25
-							},
-							{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 259
-							}
-						]
-					}
-				]
-
-			},
-			{
-				"name": "Rattus",
-				"children": [
-					{
-						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
-						},
-						"name": "Proteins",
-						"size": 21673
-					},
-					{
-						"name": "Glycans",
-						"children": [{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 2502
-							},
-							{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 800
-							},
-							{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 49
-							}
-						]
-					}
-				]
-			}
-		]
-	},
-	"sunburst2": {
-		"name": "BioMolecules",
-		"children": [{
-				"name": "Human",
-				"children": [
-					{
-						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
-						},
-						"name": "Human Proteins",
-						"size": 20950,
-						"children": [{
-							"name": "",
-							"size": 0
-							}	
-						]
-					},
-					{
-						"name": "Human Glycans",
-						"children": [{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 1605
-							},
-							{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 353
-							},
-							{
-								"organism": {
-									"id": 9606,
-									"name": "Homo sapiens"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 2088
-							}
-						]
-					}
-				]
-			},
-			{
-				"name": "Mouse",
-				"children": [
-					{
-						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
-						},
-						"name": "Mouse Proteins",
-						"size": 22282,
-						"children": [{
-							"name": "",
-							"size": 0
-							}	
-						]
-					},
-					{
-						"name": "Mouse Glycans",
-						"children": [{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 357
-							},
-							{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 25
-							},
-							{
-								"organism": {
-									"id": 10090,
-									"name": "Mus musculus"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 259
-							}
-						]
-					}
-				]
-
-			},
-			{
-				"name": "Rat",
-				"children": [
-					{
-						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
-						},
-						"name": "Rat Proteins",
-						"size": 21673,
-						"children": [{
-							"name": "",
-							"size": 0
-							}	
-						]
-					},
-					{
-						"name": "Rat Glycans",
-						"children": [{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "N-Glycan",
-								"name": "N-Glycan",
-								"size": 2502
-							},
-							{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "O-Glycan",
-								"name": "O-Glycan",
-								"size": 800
-							},
-							{
-								"organism": {
-									"id": 10116,
-									"name": "Rattus norvegicus"
-								},
-								"glycan_type": "Other",
-								"name": "Other",
-								"size": 49
-							}
-						]
-					}
-				]
-			}
-		]
-	},
 	"sunb_bio_molecules": {
 		"name": "BioMolecules",
 		"children": [{
@@ -496,315 +207,6 @@
 			}
 		]
 	},
-	"sunburst3": {
-		"name": "BioMolecules",
-		"children": [{
-				"organism": {
-					"id": 9606,
-					"name": "Homo sapiens"
-				},
-				"name": "Human Proteins",
-				"size": 20950,
-				"children": [{
-					"name": "",
-					"size": 0
-					}
-				]
-			},
-			{
-				"name": "Human Glycans",
-				"children": [{
-						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
-						},
-						"glycan_type": "N-Glycan",
-						"name": "N-Glycan",
-						"size": 1605
-					},
-					{
-						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
-						},
-						"glycan_type": "O-Glycan",
-						"name": "O-Glycan",
-						"size": 353
-					},
-					{
-						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
-						},
-						"glycan_type": "Other",
-						"name": "Other",
-						"size": 2088
-					}
-				]
-			},
-			{
-				"organism": {
-					"id": 10090,
-					"name": "Mus musculus"
-				},
-				"name": "Mouse Proteins",
-				"size": 22282,
-				"children": [{
-					"name": "",
-					"size": 0
-					}
-				]
-			},
-			{
-				"name": "Mouse Glycans",
-				"children": [{
-						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
-						},
-						"glycan_type": "N-Glycan",
-						"name": "N-Glycan",
-						"size": 357
-					},
-					{
-						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
-						},
-						"glycan_type": "O-Glycan",
-						"name": "O-Glycan",
-						"size": 25
-					},
-					{
-						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
-						},
-						"glycan_type": "Other",
-						"name": "Other",
-						"size": 259
-					}
-				]
-			},
-			{
-				"organism": {
-					"id": 10116,
-					"name": "Rattus norvegicus"
-				},
-				"name": "Rat Proteins",
-				"size": 21673,
-				"children": [{
-					"name": "",
-					"size": 0
-					}
-				]
-			},
-			{
-				"name": "Rat Glycans",
-				"children": [{
-						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
-						},
-						"glycan_type": "N-Glycan",
-						"name": "N-Glycan",
-						"size": 2502
-					},
-					{
-						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
-						},
-						"glycan_type": "O-Glycan",
-						"name": "O-Glycan",
-						"size": 800
-					},
-					{
-						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
-						},
-						"glycan_type": "Other",
-						"name": "Other",
-						"size": 49
-					}
-				]
-			}
-		]
-	},
-	"sunb_glycan_type_subtype": {
-     	"name":"",
-     	"children":[
-        	{
-            	"name": "N-glycan",
-            	"children": [
-				   {
-					  "name": "Hybrid",
-					  "size": 85
-				   },
-				   {
-					  "name":"Complex",
-					  "size": 1796
-				   },
-					{
-						"name": "High mannose",
-						"size": 78
-					},
-					{
-						"name": "Other",
-						"size": 606
-					}
-				]
-        	},
-        	{
-				"name":"O-glycan",
-				"children":[
-					{
-                		"name": "Core 1",
-                		"size": 100
-               		},
-               		{
-                  		"name": "Core 2",
-						"size": 189
-               		},
-               		{
-                  		"name": "Core 3",
-						"size": 53
-               		},
-					{
-						"name": "Core 4",
-						"size": 38
-					},
-					{
-						"name": "Core 5",
-						"size": 5
-					},
-					{
-						"name": "Core 6",
-						"size": 8
-					},
-					{
-						"name": "Core 7",
-						"size": 1
-					}
-				]
-        	}
-    	]
-	},
-	"venn_protein_homo": [
-		{
-			"sets": [0],
-			"tooltipname": "Proteins",
-			"name": "Proteins",
-			"size": 20950
-		},
-		{
-			"sets": [1],
-			"tooltipname": "Enzymes",
-			"name": "Enzymes",
-			"size": 6000
-		},
-		{
-			"sets": [2],
-			"tooltipname": "Glycoproteins",
-			"name": "Glycoproteins",
-			"size": 4715
-		},
-		{
-			"sets": [0, 1],
-			"tooltipname": "Enzymes",
-			"name": "",
-			"size": 6000
-		},
-		{
-			"sets": [0, 2],
-			"tooltipname": "Glycoproteins",
-			"name": "",
-			"size": 4715
-		},
-		{
-			"sets": [0, 1, 2],
-			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "",
-			"size": 2000
-		}
-	],
-	"venn_protein_mus": [
-		{
-			"sets": [0],
-			"tooltipname": "Proteins",
-			"name": "Proteins",
-			"size": 22282
-		},
-		{
-			"sets": [1],
-			"tooltipname": "Enzymes",
-			"name": "Enzymes",
-			"size": 8000
-		},
-		{
-			"sets": [2],
-			"tooltipname": "Glycoproteins",
-			"name": "Glycoproteins",
-			"size": 3788
-		},
-		{
-			"sets": [0, 1],
-			"tooltipname": "Enzymes",
-			"name": "",
-			"size": 8000
-		},
-		{
-			"sets": [0, 2],
-			"tooltipname": "Glycoproteins",
-			"name": "",
-			"size": 3788
-		},
-		{
-			"sets": [0, 1, 2],
-			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "",
-			"size": 2000
-		}
-	],
-	"venn_protein_rat": [
-		{
-			"sets": [0],
-			"tooltipname": "Proteins",
-			"name": "Proteins",
-			"size": 21673
-		},
-		{
-			"sets": [1],
-			"tooltipname": "Enzymes",
-			"name": "Enzymes",
-			"size": 10000
-		},
-		{
-			"sets": [2],
-			"tooltipname": "Glycoproteins",
-			"name": "Glycoproteins",
-			"size": 2086
-		},
-		{
-			"sets": [0, 1],
-			"tooltipname": "Enzymes",
-			"name": "",
-			"size": 10000
-		},
-		{
-			"sets": [0, 2],
-			"tooltipname": "Glycoproteins",
-			"name": "",
-			"size": 2086
-		},
-		{
-			"sets": [0, 1, 2],
-			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "",
-			"size": 2000
-		}
-	],
 	"venn_glycan_species": [
 		{
 			"sets": [0],
@@ -932,133 +334,65 @@
 			"size": 4507
 		}
 	],
-	"venn_glycan_species_ver2": [
-		{
-			"sets": [0],
-			"tooltipname": "Human glycans",
-			"organism": {
-				"organism_list": [
+	"sunb_glycan_type_subtype": {
+     	"name":"",
+     	"children":[
+        	{
+            	"name": "N-glycan",
+            	"children": [
+				   {
+					  "name": "Hybrid",
+					  "size": 85
+				   },
+				   {
+					  "name":"Complex",
+					  "size": 1796
+				   },
 					{
-						"id": 9606,
-						"name": "Homo sapiens"
-					}
-				],
-				"operation":"or"
-			},
-			"name": "Human glycans",
-			"size": 4046
-		},
-		{
-			"sets": [1],
-			"tooltipname": "Mouse glycans",
-			"organism": {
-				"organism_list": [
-					{
-						"id": 10090,
-						"name": "Mus musculus"
-					}
-				],
-				"operation":"or"		
-			},
-			"name": "Mouse glycans",
-			"size": 641
-		},
-		{
-			"sets": [2],
-			"tooltipname": "Rat glycans",
-			"organism": {
-				"organism_list": [
-					{
-						"id": 10116,
-						"name": "Rattus norvegicus"
-					}
-				],
-				"operation":"or"		
-			},
-			"name": "Rat glycans",
-			"size": 250
-		},
-		{
-			"sets": [0, 1],
-			"tooltipname": "Human & Mouse glycans",
-			"organism": {
-				"organism_list": [
-					{
-						"id": 9606,
-						"name": "Homo sapiens"
+						"name": "High mannose",
+						"size": 78
 					},
 					{
-						"id": 10090,
-						"name": "Mus musculus"
+						"name": "Other",
+						"size": 606
 					}
-				],
-				"operation":"and"
-			},
-			"name": "",
-			"size": 204
-		},
-		{
-			"sets": [0, 2],
-			"tooltipname": "Human & Rat glycans",
-			"organism": {
-				"organism_list": [
+				]
+        	},
+        	{
+				"name":"O-glycan",
+				"children":[
 					{
-						"id": 9606,
-						"name": "Homo sapiens"
+                		"name": "Core 1",
+                		"size": 100
+               		},
+               		{
+                  		"name": "Core 2",
+						"size": 189
+               		},
+               		{
+                  		"name": "Core 3",
+						"size": 53
+               		},
+					{
+						"name": "Core 4",
+						"size": 38
 					},
 					{
-						"id": 10116,
-						"name": "Rattus norvegicus"
-					}
-				],
-				"operation":"or"
-			},
-			"name": "",
-			"size": 80
-		},
-		{
-			"sets": [1, 2],
-			"tooltipname": "Mouse & Rat glycans",
-			"organism": {
-				"organism_list": [
-					{
-						"id": 10090,
-						"name": "Mus musculus"
+						"name": "Core 5",
+						"size": 5
 					},
 					{
-						"id": 10116,
-						"name": "Rattus norvegicus"
-					}
-				],
-				"operation":"or"
-			},
-			"name": "",
-			"size": 20
-		},
-		{
-			"sets": [0, 1, 2],
-			"tooltipname": "Human & Mouse & Rat glycans",
-			"organism": {
-				"organism_list": [
-					{
-						"id": 9606,
-						"name": "Homo sapiens"
+						"name": "Core 6",
+						"size": 8
 					},
 					{
-						"id": 10090,
-						"name": "Mus musculus"
-					},
-					{
-						"id": 10116,
-						"name": "Rattus norvegicus"
+						"name": "Core 7",
+						"size": 1
 					}
-				],
-				"operation":"or"
-			},
-			"name": "",
-			"size": 104
-		}
-	],
+				]
+        	}
+    	]
+	},
 	"sunb_glycan_organism_type": {	
 		"name": "",
 		"children": [{
@@ -1228,93 +562,6 @@
 			}
 		]
 	},
-	"glycan_homo_donut": [
-		{
-			"organism": {
-				"id": 9606,
-				"name": "Homo sapiens"
-			},
-			"glycan_type": "N-Glycan",
-			"name": "Human N-Glycans",
-			"size": 989
-		},
-		{
-			"organism": {
-				"id": 9606,
-				"name": "Homo sapiens"
-			},
-			"glycan_type": "O-Glycan",
-			"name": "Human O-Glycans",
-			"size": 312
-		},
-		{
-			"organism": {
-				"id": 9606,
-				"name": "Homo sapiens"
-			},
-			"glycan_type": "Other",
-			"name": "Human Other",
-			"size": 2001
-		}
-	],
-	"glycan_mus_donut": [
-		{
-			"organism": {
-				"id": 10090,
-				"name": "Mus musculus"
-			},
-			"glycan_type": "N-Glycan",
-			"name": "Mouse N-Glycans",
-			"size": 261
-		},
-		{
-			"organism": {
-				"id": 10090,
-				"name": "Mus musculus"
-			},
-			"glycan_type": "O-Glycan",
-			"name": "Mouse O-Glycans",
-			"size": 12
-		},
-		{
-			"organism": {
-				"id": 10090,
-				"name": "Mus musculus"
-			},
-			"glycan_type": "Other",
-			"name": "Mouse Other",
-			"size": 244
-		}
-	],
-	"glycan_rat_donut": [
-		{
-			"organism": {
-				"id": 10116,
-				"name": "Rattus norvegicus"
-			},
-			"glycan_type": "N-Glycan",
-			"name": "Rat N-Glycans",
-			"size": 312
-		},
-		{
-			"organism": {
-				"id": 10116,
-				"name": "Rattus norvegicus"
-			},
-			"glycan_type": "O-Glycan",
-			"name": "Rat O-Glycans",
-			"size": 23
-		},
-		{
-			"organism": {
-				"id": 10116,
-				"name": "Rattus norvegicus"
-			},
-			"glycan_type": "Other",
-			"name": "Rat Other",
-			"size": 325
-		}
-	],
 	"donut_motif": [
 		{
 			"name": "Lactosamine motif",
@@ -1645,6 +892,120 @@
 			}
 		]
 	},
+	"venn_protein_homo": [
+		{
+			"sets": [0],
+			"tooltipname": "Proteins",
+			"name": "Proteins",
+			"size": 20950
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Enzymes",
+			"name": "Enzymes",
+			"size": 6000
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Glycoproteins",
+			"name": "Glycoproteins",
+			"size": 4715
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Enzymes",
+			"name": "",
+			"size": 6000
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Glycoproteins",
+			"name": "",
+			"size": 4715
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Glycoproteins & Enzymes",
+			"name": "",
+			"size": 2000
+		}
+	],
+	"venn_protein_mus": [
+		{
+			"sets": [0],
+			"tooltipname": "Proteins",
+			"name": "Proteins",
+			"size": 22282
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Enzymes",
+			"name": "Enzymes",
+			"size": 8000
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Glycoproteins",
+			"name": "Glycoproteins",
+			"size": 3788
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Enzymes",
+			"name": "",
+			"size": 8000
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Glycoproteins",
+			"name": "",
+			"size": 3788
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Glycoproteins & Enzymes",
+			"name": "",
+			"size": 2000
+		}
+	],
+	"venn_protein_rat": [
+		{
+			"sets": [0],
+			"tooltipname": "Proteins",
+			"name": "Proteins",
+			"size": 21673
+		},
+		{
+			"sets": [1],
+			"tooltipname": "Enzymes",
+			"name": "Enzymes",
+			"size": 10000
+		},
+		{
+			"sets": [2],
+			"tooltipname": "Glycoproteins",
+			"name": "Glycoproteins",
+			"size": 2086
+		},
+		{
+			"sets": [0, 1],
+			"tooltipname": "Enzymes",
+			"name": "",
+			"size": 10000
+		},
+		{
+			"sets": [0, 2],
+			"tooltipname": "Glycoproteins",
+			"name": "",
+			"size": 2086
+		},
+		{
+			"sets": [0, 1, 2],
+			"tooltipname": "Glycoproteins & Enzymes",
+			"name": "",
+			"size": 2000
+		}
+	],	
 	"pie_glycohydrolases_prot": [
 		{
 			"organism": {

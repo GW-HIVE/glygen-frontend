@@ -74,12 +74,9 @@
             <p class="lead">
                 Overview of biomolecules in GlyGen by type and species.
             </p>
-<!--            <p>Click on any arc to zoom in, and click on the center circle to zoom out.</p>-->
-<!--                <svg class="zoomableSunburst"></svg>-->
             <svg id="sunburstBioMolecules"></svg>
         </div>
         <h2 class="page-heading subheading">Glycans</h2>
-        
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <h3>By Species Version 2</h3>
@@ -95,7 +92,7 @@
                 <p class="lead">
                     Number of shared and unique glycans by species.
                 </p>
-                <div id="venn_glycans_homo_mus_rat"></div>
+                <div id="venn_glycan_species"></div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <h3>By Type</h3>
@@ -113,7 +110,7 @@
                     Human, mouse, and rat glycans.
                 </p>
 <!--                <div id="donut_glycan_homo_mus_rat"></div>-->
-                   <svg id="donut_glycan_homo_mus_rat"></svg>
+                   <svg id="sunburst_glycan_organism_type"></svg>
             </div>
 
             <div class="col-md-6 col-sm-12">
@@ -121,7 +118,7 @@
                 <p class="lead">
                     Motifs and their frequencies.
                 </p>
-                <div id="pie_chart_motif"></div>
+                <div id="donut_chart_motif"></div>
             </div>
         </div>
         <hr>
@@ -197,7 +194,7 @@
                     <br>
                     <strong>RWOGS</strong> - Reported WithOut Glycan Structures
                 </p>
-                <svg id="sunburst_glycosylated_proteins"></svg>
+                <svg id="sunb_glycoprot_rep_pred_glyc"></svg>
             </div>
             <div class="col-md-6 col-sm-12">
                 
