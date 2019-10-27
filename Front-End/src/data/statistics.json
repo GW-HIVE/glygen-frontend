@@ -290,19 +290,7 @@
 	},
 	"sunb_bio_molecules": {
 		"name": "BioMolecules",
-		"children": [{
-				"organism": {
-					"id": 9606,
-					"name": "Homo sapiens"
-				},
-				"name": "Human Proteins",
-				"size": 20950,
-				"children": [{
-					"name": "",
-					"size": 0
-					}	
-				]
-			},
+		"children": [
 			{
 				"organism": {
 					"organism_list": [
@@ -314,7 +302,8 @@
 					"operation":"or"
 				},
 				"name": "Human Glycans",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"organism_list": [
 								{
@@ -360,11 +349,11 @@
 			},
 			{
 				"organism": {
-					"id": 10090,
-					"name": "Mus musculus"
+					"id": 9606,
+					"name": "Homo sapiens"
 				},
-				"name": "Mouse Proteins",
-				"size": 22282,
+				"name": "Human Proteins",
+				"size": 20950,
 				"children": [{
 					"name": "",
 					"size": 0
@@ -428,11 +417,11 @@
 			},
 			{
 				"organism": {
-					"id": 10116,
-					"name": "Rattus norvegicus"
+					"id": 10090,
+					"name": "Mus musculus"
 				},
-				"name": "Rat Proteins",
-				"size": 21673,
+				"name": "Mouse Proteins",
+				"size": 22282,
 				"children": [{
 					"name": "",
 					"size": 0
@@ -493,7 +482,20 @@
 						"size": 49
 					}
 				]
-			}
+			},
+			{
+				"organism": {
+					"id": 10116,
+					"name": "Rattus norvegicus"
+				},
+				"name": "Rat Proteins",
+				"size": 21673,
+				"children": [{
+					"name": "",
+					"size": 0
+					}	
+				]
+			}	
 		]
 	},
 	"sunburst3": {
