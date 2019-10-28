@@ -109,23 +109,31 @@
              {{#QUESTION_7}}
              <center><p>What are the glycosyltransferases in {{organism.name}}?</p></center>
              {{/QUESTION_7}}
+             
+             {{#pie_glycosyltransferases_proteins}}
+             <center><p>What are the glycosyltransferases in {{organism.name}}?</p></center>
+             {{/pie_glycosyltransferases_proteins}}
 
              {{#QUESTION_8}}
 
-             <center> <p>What are the glycohydrolases in {{organism.name}}?</p></center>
+             <center> <p>What are the glycosylhydrolases in {{organism.name}}?</p></center>
 
              {{/QUESTION_8}}
              
-             {{#pie_glycohydrolases_proteins}}
+             {{#pie_glycosylhydrolases_proteins}}
 
-             <center> <p>What are the glycohydrolases in {{organism.name}}?</p></center>
+             <center> <p>What are the glycosylhydrolases in {{organism.name}}?</p></center>
 
-             {{/pie_glycohydrolases_proteins}}
+             {{/pie_glycosylhydrolases_proteins}}
 
              {{#QUESTION_9}}
-
              <center>  <p> What are the reported or predicted glycosylated proteins in species ?<br><b>{{organism.name}} in {{evidence_type}}</b></p></center>
              {{/QUESTION_9}}
+             
+            {{#sunb_glycoprot_rep_pred_glyc}}
+             <center>  <p> What are the reported with glycan structures or reported without glycan structures or predicted glycosylated proteins in species ?<br><b>{{organism.name}} in {{evidence_type}}</b></p></center>
+             {{/sunb_glycoprot_rep_pred_glyc}} 
+             
                 {{#QUESTION_10}}
 
                 <center>  <p>Which glycosyltransferases are known to be involved in <br><b>{{#do_name}}{{do_name}}{{/do_name}}</b></p></center>

@@ -246,8 +246,8 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	//  Proteins (Human, Mouse and Rat)
 	//-------------------------------	
 	var pieGlycohydrolasesProtein = pieProteinGlycohydrolases;
-	d3.select('#pie_glycohydrolases_proteins')
-		.call(pieGlycohydrolasesProtein, jsonData, "#pie_glycohydrolases_proteins"); // draw chart in div
+	d3.select('#pie_glycosylhydrolases_proteins')
+		.call(pieGlycohydrolasesProtein, jsonData, "#pie_glycosylhydrolases_proteins"); // draw chart in div
 
 	//-------------------------------
 	//  Pie Chart Number of Glycosyltransferases Proteins. 

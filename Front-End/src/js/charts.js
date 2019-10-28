@@ -1709,12 +1709,12 @@ var pie = d3.pie()
     .attr("class", "arc")
  	// On click goes to list page
 	.on("click", function (d) {
-		glycoHydrolases({
+		glycosylHydrolases({
 			"organism": {
 				"id": d.data.organism.id,
 				"name": d.data.organism.name
 			}
-		}, "pie_glycohydrolases_proteins");
+		}, "pie_glycosylhydrolases_proteins");
 	})
 	.on("mouseover", function (d) {
 		var selector = d3.select(this).transition()
@@ -1794,12 +1794,11 @@ var pie = d3.pie()
     .attr("class", "arc")
  	// On click goes to list page
 	.on("click", function (d) {
-		searchProteinsBy({
+		glycosylTransferases({
 			"organism": {
 				"id": d.data.organism.id,
 				"name": d.data.organism.name
-			},
-			"protein_type": d.data.protein_type
+			}
 		}, "pie_glycosyltransferases_proteins");
 	})
 	.on("mouseover", function (d) {
@@ -1883,9 +1882,12 @@ function sunburstGlycoprotRepPredGlyc(dummy, data, id) {
 			.on("click", function (d) {
 				//console.log(d.data.name)
 				//console.log(formatNumber(d.value))
-				searchProteinsBy({
-
-				}, "sunb_glycoprot_rep_pred_glyc");
+//				glycoProteins({
+//                    "organism": {
+//                        "id": d.data.organism.id,
+//                        "name": d.data.organism.name
+//                    }
+//				}, "sunb_glycoprot_rep_pred_glyc");
 			})
 			.on("mouseover", function (d) {
 			let group = d3.select(this)
@@ -1922,7 +1924,8 @@ function sunburstGlycoprotRepPredGlyc(dummy, data, id) {
 			d3.select(this).transition()
 				.duration('50')
 				.attr('opacity', '.65')
-				.style("cursor", "pointer");
+//				.style("cursor", "pointer");
+                .style("cursor", "default");
 			})
 			.on("mouseout", function (d) {
 				d3.select(this).transition()
@@ -2223,44 +2226,16 @@ function searchGlycoproteinsBy(param, chartId) {
 /**
  * Q.7- What are the glycosyltransferases in species X?
  */
-var searchInitValues;
-
-$(document).ready(function () {
-    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        searchInitValues = result;
-        var orgElement = $("#organism1").get(0);
-        result.organism.sort(sortDropdown);
-        for (var x = 0; x < result.organism.length; x++) {
-                createOption(orgElement, result.organism[x].name, result.organism[x].id);
-            }
-    });
-     /** 
-    * @param {string} No results found 
-    * @return {string} Alert message in all searches
-    */
-    $(".alert").hide();
-    $(document).on('click', function(e) {
-        $(".alert").hide();
-    })
-});
-
-function createOption(ddl, text, value) {
-    var opt = document.createElement('option');
-    opt.value = value;
-    opt.text = text;
-    ddl.options.add(opt);
-}
-
-function glycosylTransferases() {
-    var id = $("#organism1").val();
+function glycosylTransferases(param, chartId) {
+//    var id = $("#organism1").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycosyltransferases", id),
+        url: getWsUrl("search_glycosyltransferases", param.organism.id),
         error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_7";
+                window.location = './quick_protein_list.html?id=' + results.list_id + '&stat=' + chartId;
             }
             else {
                 //displayErrorByCode('no-results-found');
@@ -2271,10 +2246,9 @@ function glycosylTransferases() {
 }
 
 /**
- * Q.8- What are the glycohydrolases in species X?
+ * Q.8- What are the glycosylhydrolases in species X?
  */
-
-function glycoHydrolases(param, chartId) {
+function glycosylHydrolases(param, chartId) {
 //    var id = $("#organism2").val();
     $.ajax({
         type: 'post',
@@ -2296,43 +2270,17 @@ function glycoHydrolases(param, chartId) {
 /**
  * Q.9- What are the reported or predicted glycosylated proteins in species X?
  */
-
-var searchInitValues;
-
-$(document).ready(function () {
-    $.getJSON(getWsUrl("search_init_glycan"), function (result) {
-        searchInitValues = result;
-        var orgElement = $("#organism3").get(0);
-        result.organism.sort(sortDropdown);
-        for (var x = 0; x < result.organism.length; x++) {
-                createOption(orgElement, result.organism[x].name, result.organism[x].id);
-            }
-        var question = getParameterByName('question');
-        var id = getParameterByName('id');
-        if(id) {
-            populateLastSearch(question, id);
-        }
-    });
-});
-
-function createOption(ddl, text, value) {
-    var opt = document.createElement('option');
-    opt.value = value;
-    opt.text = text;
-    ddl.options.add(opt);
-}
-
-function glycoProteins() {
-    var id = $("#organism3").val();
-    var id1 = $("#species").val();
+function glycoProteins(param, chartId) {
+//    var id = $("#organism3").val();
+//    var id1 = $("#species").val();
     $.ajax({
         type: 'post',
-        url: getWsUrl("search_glycoproteins", id, id1),
+        url: getWsUrl("search_glycoproteins", param.organism.id),
         error: ajaxFailure,
         // data: json,
         success: function (results) {
             if (results.list_id) {
-                window.location = './quick_protein_list.html?id=' + results.list_id + "&question=QUESTION_9";
+                window.location = './quick_protein_list.html?id=' + results.list_id + '&stat=' + chartId;
             }
             else {
                 //displayErrorByCode('no-results-found');
