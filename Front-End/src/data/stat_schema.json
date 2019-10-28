@@ -900,37 +900,62 @@
 			"sets": [0],
 			"tooltipname": "Proteins",
 			"name": "Proteins",
-			"size": 20950
+			"size": 20950,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
+			
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
 			"name": "Enzymes",
-			"size": 6000
+			"size": 6000,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
 			"name": "Glycoproteins",
-			"size": 4715
+			"size": 4715,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
 		},
 		{
 			"sets": [0, 1],
 			"tooltipname": "Enzymes",
 			"name": "",
-			"size": 6000
+			"size": 6000,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Glycoproteins",
 			"name": "",
-			"size": 4715
+			"size": 4715,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
 			"name": "",
-			"size": 2000
+			"size": 2000,
+			"organism": {
+				"id": 9606,
+				"name": "Homo sapiens"
+			}
 		}
 	],
 	"venn_protein_mus": [
@@ -938,37 +963,61 @@
 			"sets": [0],
 			"tooltipname": "Proteins",
 			"name": "Proteins",
-			"size": 22282
+			"size": 22282,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
 			"name": "Enzymes",
-			"size": 8000
+			"size": 8000,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
 			"name": "Glycoproteins",
-			"size": 3788
+			"size": 3788,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		},
 		{
 			"sets": [0, 1],
 			"tooltipname": "Enzymes",
 			"name": "",
-			"size": 8000
+			"size": 8000,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Glycoproteins",
 			"name": "",
-			"size": 3788
+			"size": 3788,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
 			"name": "",
-			"size": 2000
+			"size": 2000,
+			"organism": {
+				"id": 10090,
+				"name": "Mus musculus"
+			}
 		}
 	],
 	"venn_protein_rat": [
@@ -976,37 +1025,61 @@
 			"sets": [0],
 			"tooltipname": "Proteins",
 			"name": "Proteins",
-			"size": 21673
+			"size": 21673,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		},
 		{
 			"sets": [1],
 			"tooltipname": "Enzymes",
 			"name": "Enzymes",
-			"size": 10000
+			"size": 10000,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		},
 		{
 			"sets": [2],
 			"tooltipname": "Glycoproteins",
 			"name": "Glycoproteins",
-			"size": 2086
+			"size": 2086,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		},
 		{
 			"sets": [0, 1],
 			"tooltipname": "Enzymes",
 			"name": "",
-			"size": 10000
+			"size": 10000,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		},
 		{
 			"sets": [0, 2],
 			"tooltipname": "Glycoproteins",
 			"name": "",
-			"size": 2086
+			"size": 2086,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		},
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "",
-			"size": 2000
+			"name": "Glycoproteins & Enzymes",
+			"size": 2000,
+			"organism": {
+				"id": 10116,
+				"name": "Rattus norvegicus"
+			}
 		}
 	],	
 	"pie_glycohydrolases_prot": [

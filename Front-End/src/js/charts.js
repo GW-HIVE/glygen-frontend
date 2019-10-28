@@ -1579,37 +1579,27 @@ function vennProteinSpecies(dummy, data, id) {
 		// On click goes to list page
 		.on("click", function (d) {
 			//console.log(d.data.size); 
-			if (d.name == "Proteins") {
+			if (d.tooltipname == "Proteins") {
 				//var massRange = d.range.split("-");
 				searchProteinsBy({
 					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
+						"id": d.organism.id,
+						"name": d.organism.name
 					}
 				}, "venn_protein_species");
-			} else if (d.name == "Glycoproteins") {
+			} else if (d.tooltipname == "Glycoproteins") {
 				searchGlycoproteinsBy({
 					"organism": {
-						"id": 9606,
-						"name": "Homo sapiens"
+						"id": d.organism.id,
+						"name": d.organism.name
 					},
 					glycosylated_aa: {
             			"aa_list": ["N","S","T"],
             			"operation":"or"
         			}
 				}, "venn_protein_species");
-			} else if (d.name == "Enzymes") {
-				searchGlycansBy({
-					"organism": {
-						organism_list: [
-							{
-								"id": 9606,
-								"name": "Homo sapiens"
-							}
-						],
-						"operation":"or"
-					}
-				}, "venn_protein_species");
+			} else if (d.tooltipname == "Enzymes") {
+				
 			}
 		})
 
