@@ -12,28 +12,41 @@
 function setFormValues(data) {
     if (data.query) {
         $("#glycan_id").val(data.query.glytoucan_ac);
-        $("#mass-drop").val(data.query.mass_type);
+        $("#mass-drop").val(data.query.mass_type ? data.query.mass_type : mass_type_native);
+       
+        var min_range = native_mass_min;
+        var max_range = native_mass_max;
+        var min = native_mass_min;
+        var max = native_mass_max;
+        if (data.query.mass_type != mass_type_native) {
+            min_range = perMet_mass_min;
+            max_range = perMet_mass_max;
+            min = perMet_mass_min;
+            max = perMet_mass_max;
+        }
         if (data.query.mass) {
-            var massSlider = document.getElementById('sliderbox-slider');
-            if (data.query.mass_type == mass_type_native) {
-                min = native_mass_min;
-                max = native_mass_max;
-            } else {
-                min = perMet_mass_min;
-                max = perMet_mass_max;
-            }
-            massSlider.noUiSlider.updateOptions({
+            min = data.query.mass.min;
+            max = data.query.mass.max;
+        }
+
+        var massSlider = document.getElementById('sliderbox-slider');
+        massSlider.noUiSlider.updateOptions({
                 range: {
-                    'min': min,
-                    'max': max
+                    'min': min_range,
+                    'max': max_range
                 }
             });
-            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
-        }
+        massSlider.noUiSlider.set([min, max]);
+
+        var monosaccharides_min = sugar_mass_min;
+        var monosaccharides_max = sugar_mass_max;
         if (data.query.number_monosaccharides) {
-            var massSlider1 = document.getElementById('sliderbox-slider1');
-            massSlider1.noUiSlider.set([data.query.number_monosaccharides.min, data.query.number_monosaccharides.max]);
+            monosaccharides_min = data.query.number_monosaccharides.min;
+            monosaccharides_max = data.query.number_monosaccharides.max;
         }
+
+        var massSlider1 = document.getElementById('sliderbox-slider1');
+        massSlider1.noUiSlider.set([monosaccharides_min, monosaccharides_max]);
 
         var organism_id = undefined;
         if (data.query.organism && data.query.organism.organism_list) {
@@ -64,10 +77,14 @@ function setFormValues(data) {
 function setProteinFormValues(data) {
     if (data.query) {
         $("#protein").val(data.query.uniprot_canonical_ac);
+        var min = mass_min;
+        var max = mass_max;
         if (data.query.mass) {
-            var massSlider = document.getElementById('sliderbox-slider');
-            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+            min = data.query.mass.min;
+            max = data.query.mass.max;
         }
+        var massSlider = document.getElementById('sliderbox-slider');
+        massSlider.noUiSlider.set([min, max]);
         $("#species").val(data.query.organism ? data.query.organism.id : "0");
         $("#gene_name").val(data.query.gene_name || "");
         $("#protein_name").val(data.query.protein_name || "");
@@ -88,10 +105,14 @@ function setProteinFormValues(data) {
 function setGlycoProteinFormValues(data) {
     if (data.query) {
         $("#protein").val(data.query.uniprot_canonical_ac);
+        var min = mass_min;
+        var max = mass_max;
         if (data.query.mass) {
-            var massSlider = document.getElementById('sliderbox-slider');
-            massSlider.noUiSlider.set([data.query.mass.min, data.query.mass.max]);
+            min = data.query.mass.min;
+            max = data.query.mass.max;
         }
+        var massSlider = document.getElementById('sliderbox-slider');
+        massSlider.noUiSlider.set([min, max]);
         $("#species").val(data.query.organism ? data.query.organism.id : 0);
         $("#gene_name").val(data.query.gene_name || "");
         $("#glycan_id").val(data.query.glycan? data.query.glycan.glytoucan_ac : "");

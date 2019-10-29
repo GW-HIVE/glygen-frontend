@@ -233,7 +233,8 @@
                                 {{/full}}
                                 {{/recommendedname}}
                                 {{#mass}}
-                                <li class="list-group"><strong>Chemical Mass:</strong> {{mass.chemical_mass}} Da</li>
+                                    <li class="list-group"><strong>Chemical Mass:</strong> {{#mass.chemical_mass}}{{mass.chemical_mass}} Da {{/mass.chemical_mass}}{{^mass.chemical_mass}} No data available. {{/mass.chemical_mass}}
+                                    </li>
                                 {{/mass}}
                                 {{#refseq}}
                                 {{#refseq.ac}}

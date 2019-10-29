@@ -88,10 +88,10 @@ $(document).ready(function () {
             }
 
             mass_type_native = result.glycan_mass.native.name;
-            native_mass_max = Math.ceil(result.glycan_mass.native.max);
-            native_mass_min = Math.floor(result.glycan_mass.native.min);
-            perMet_mass_max = Math.ceil(result.glycan_mass.permethylated.max);      
-            perMet_mass_min = Math.floor(result.glycan_mass.permethylated.min);           
+            native_mass_max = Math.ceil(result.glycan_mass.native.max + 1);
+            native_mass_min = Math.floor(result.glycan_mass.native.min - 1);
+            perMet_mass_max = Math.ceil(result.glycan_mass.permethylated.max + 1);      
+            perMet_mass_min = Math.floor(result.glycan_mass.permethylated.min - 1);           
 
             var massType = $("#mass-drop").get(0);
             result.organism.sort(sortDropdown);
@@ -101,8 +101,8 @@ $(document).ready(function () {
             }
             massType.value = result.glycan_mass.native.name;
 
-            var sugar_mass_min = Math.floor(result.number_monosaccharides.min);
-            var sugar_mass_max = Math.ceil(result.number_monosaccharides.max);
+            sugar_mass_min = Math.floor(result.number_monosaccharides.min - 1);
+            sugar_mass_max = Math.ceil(result.number_monosaccharides.max + 1);
 
             var id = getParameterByName('id') || id;
             if (id) {
@@ -419,8 +419,8 @@ function resetAdvanced() {
                 "max": native_mass_max
             },
             number_monosaccharides: {
-                "min": 1,
-                "max": 37
+                "min": sugar_mass_min,
+                "max": sugar_mass_max
             },
             enzyme: {},
             glytoucan_ac: "",
@@ -453,7 +453,7 @@ function resetAdvanced() {
  * @param {string} input_motif user motif input
  * @return {string} returns text or id
  */
-function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min, mass_max, sugar_min, sugar_max, input_organism, input_organism_operation, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif,input_pmid) {
+function searchjson(input_query_type, input_glycan_id, input_mass_type, input_mass_min, input_mass_max, input_sugar_min, input_sugar_max, input_organism, input_organism_operation, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif,input_pmid) {
     var enzymes = {}
     if (input_enzyme) {
         enzymes = {
@@ -461,6 +461,31 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min
             "type": "gene"
         }
     }
+    var monosaccharides = undefined;
+    if (input_sugar_min != sugar_mass_min || input_sugar_max !=  sugar_mass_max) {
+        monosaccharides = {
+            "min" : parseInt(input_sugar_min),
+            "max" : parseInt(input_sugar_max)
+        };
+    }
+
+    var input_mass = undefined;
+    if (input_mass_type == mass_type_native){
+        if (input_mass_min != native_mass_min || input_mass_max != native_mass_max){
+            input_mass = {
+                "min" : parseInt(input_mass_min),
+                "max" : parseInt(input_mass_max)
+            };
+        }
+    } else {
+        if (input_mass_min != perMet_mass_min || input_mass_max != perMet_mass_max){
+            input_mass = {
+                "min" : parseInt(input_mass_min),
+                "max" : parseInt(input_mass_max)
+            };
+        }
+    }
+
     var organisms  = undefined;
      if (input_organism.length > 0) {
         organisms = {
@@ -472,15 +497,9 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, mass_min
         "operation": "AND",
         query_type: input_query_type,
         mass_type: input_mass_type,
-        mass: {
-            "min": parseInt(mass_min),
-            "max": parseInt(mass_max)
-        },
+        mass: input_mass,
         // mass:masses,
-        number_monosaccharides: {
-            "min": parseInt(sugar_min),
-            "max": parseInt(sugar_max)
-        },
+        number_monosaccharides: monosaccharides,
         enzyme: enzymes,
         glytoucan_ac: input_glycan_id,
         organism : organisms,
