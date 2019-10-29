@@ -238,4 +238,75 @@ svg {
     border-radius: 5px;
 }
 
+/* =========================================
+                Content Boxes
+============================================ */
+
+.chart-box-sm {
+    padding: 40px 0;
+}
+
+/* =========================================
+        Horizontal Headings
+============================================ */
+.stat-heading h2 {
+    font-size: 38px;
+    font-weight: 100;
+    line-height: 45px;
+}
+
+.stat-heading {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.stat-heading h5 {
+    font-size: 16px;
+/*    color: #2F78B7;*/
+    color: #60BA4B;
+    font-weight: 540;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.stat-heading h2 {
+    margin: 0;
+}
+
+.horizontal-heading h2{
+    font-size: 42px;
+    font-weight: 100;
+    line-height: 45px;
+    color: #60BA4B;
+}
+
+.horizontal-heading {
+/*    margin: 50px 0;*/
+    padding: 50px 0;
+    background: #f9f9f9;
+}
+
+.horizontal-heading h5 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 45px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.horizontal-heading h2 {
+    margin: 0;
+}
+
+/* =========================================
+    Colors:
+        Green:               #60BA4B
+        Blue:                #2F78B7
+        Grey:                #212226
+        White Smoke:         #f4f4f4
+        White:               #fff
+        Black:               #000   
+============================================ */
 /*---------End-----------------*/

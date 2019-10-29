@@ -12,7 +12,7 @@ function sunburstBioMolecules(dummy, data, id) {
 	// Variables
     var width = 550;
     var height = 550;
-    var radius = Math.min(width, height) / 2 - 20;
+    var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
