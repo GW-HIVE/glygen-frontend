@@ -213,9 +213,10 @@
                                             {{glytoucan_ac}} </a></li>
                                 {{/glytoucan}}
 
-                                {{#mass}}
-                                    <li class="list-group"><strong>Monoisotopic Mass:</strong> {{mass}} Da <strong>(Permethylated:</strong> {{mass_pme}} Da<strong>)</strong></li>
-                                {{/mass}}
+                                <li class="list-group"><strong>Monoisotopic Mass:</strong> {{#mass}}{{mass}} Da {{/mass}}{{^mass}} No data available. {{/mass}}
+                                    <strong>(Permethylated:</strong> {{#mass_pme}}{{mass_pme}} Da{{/mass_pme}}{{^mass_pme}} No data available.{{/mass_pme}}<strong>)</strong>
+                                </li>
+                                
 
                                 <li class="list-group"><strong>Composition:</strong>
                                     {{#composition}}

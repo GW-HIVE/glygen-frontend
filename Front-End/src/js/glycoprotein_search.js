@@ -113,8 +113,8 @@ $(document).ready(function () {
             for (var x = 0; x < result.simple_search_category.length; x++) {
                 createOption(categoryType, result.simple_search_category[x].display, result.simple_search_category[x].id);
             }
-            mass_max = Math.ceil(result.protein_mass.max);
-            mass_min = Math.floor(result.protein_mass.min);
+            mass_max = Math.ceil(result.protein_mass.max + 1);
+            mass_min = Math.floor(result.protein_mass.min - 1);
             // mass(mass_min, mass_max);
             // check for ID to see if we need to load search values
             // please do not remove this code as it is required prepopulate search values
@@ -301,8 +301,8 @@ function ajaxProteinSearchSuccess() {
 /**
  * Forms searchjson from the form values submitted
  * @param {string} input_query_type query search
- * @param {string} mass_min user mass min input
- * @param {string} mass_max user mass max input
+ * @param {string} input_mass_min user mass min input
+ * @param {string} input_mass_max user mass max input
  * @param {string} user organism input
  * @param {string} input_protein_id user protein input
  * @param {string} input_refseq_id user input
@@ -315,7 +315,7 @@ function ajaxProteinSearchSuccess() {
  * @param {string} input_glycosylated_aa_operation user input
  * @return {string} returns text or id
  */
-function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
+function searchJson(input_query_type, input_mass_min, input_mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
     input_glycan, input_pmid,input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
     var sequences;
@@ -347,14 +347,19 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
             "operation": input_glycosylated_aa_operation
         }
     }
+
+    var input_mass = undefined;
+    if (mass_min != input_mass_min || mass_max !=  input_mass_max) {
+        input_mass = {
+            "min" : parseInt(input_mass_min),
+            "max" : parseInt(input_mass_max)
+        };
+    }
    
     var formjson = $.extend({}, {
         "operation": "AND",
         query_type: input_query_type,
-        mass: {
-            "min": parseInt(mass_min),
-            "max": parseInt(mass_max)
-        },
+        mass: input_mass,
         sequence: sequences ?sequences:undefined,
         organism: selected_organism,
         refseq_ac: input_refseq_id? input_refseq_id: undefined,

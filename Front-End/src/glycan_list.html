@@ -171,17 +171,14 @@
 
                         <!--glycan sugar-->
 
-                        {{#number_monosaccharides.min}}
+                        {{#number_monosaccharides.max}}
                         <tr>
                             <td>No. of Sugars:</td>
-                            {{#number_monosaccharides.min}}
-
                             <td>
-                                {{number_monosaccharides.min}}{{/number_monosaccharides.min}}-{{#number_monosaccharides.max}}{{number_monosaccharides.max}}
+                                {{number_monosaccharides.min}}-{{number_monosaccharides.max}}
                             </td>
-                            {{/number_monosaccharides.max}}
                         </tr>
-                        {{/number_monosaccharides.min}}
+                        {{/number_monosaccharides.max}}
 
                         <!--organism-->
                         {{#organism}}
