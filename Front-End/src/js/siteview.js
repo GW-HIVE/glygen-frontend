@@ -352,7 +352,13 @@ function changeTableGlycosylationPosition() {
 // For Image Column
 function imageFormat(value, row, index, field) {
   var url = getWsUrl('glycan_image', row.glycan_image);
+  if(row.glycan_image)
+  {
   return "<div class='img-wrapper'><img class='img-cartoon' src='" + url + "' alt='Cartoon' /></div>";
+  }
+  else{
+    return "NA";
+  }
 }
 
 
