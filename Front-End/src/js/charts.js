@@ -10,16 +10,25 @@
  */
 function sunburstBioMolecules(dummy, data, id) {
 	// Variables
-    var width = 550;
-    var height = 550;
+    var width = 450;
+    var height = 450;
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
-        .attr('width', width)
-        .attr('height', height)
+//        .attr('width', width)
+//        .attr('height', height)
+        .style('width', '60%')
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
@@ -290,11 +299,20 @@ function sunburstGlycanTypeSubtype(dummy, data, id) {
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+    
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
-        .attr('width', width)
-        .attr('height', height)
+//        .attr('width', width)
+//        .attr('height', height)
+        .style('width', '80%')
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
@@ -567,11 +585,19 @@ function sunburstGlycanOrganismType(dummy, data, id) {
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
-        .attr('width', width)
-        .attr('height', height)
+//        .attr('width', width)
+//        .attr('height', height)
+        .style('width', '80%')
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
@@ -1359,11 +1385,20 @@ function sunburstProteinCanonicalIsoforms(dummy, data, id) {
     var radius = Math.min(width, height) / 2;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+    
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
-        .attr('width', width)
-        .attr('height', height)
+//        .attr('width', width)
+//        .attr('height', height)
+        .style('width', '80%')
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
@@ -1843,11 +1878,20 @@ function sunburstGlycoprotRepPredGlyc(dummy, data, id) {
     var radius = Math.min(width, height) / 2 - 20;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 	//var color = d3.scaleOrdinal(d3.schemeCategory20b);
-
+    var margin = { top: 0, right: 0, bottom: 0, left: 0 };
+    
     // Size our <svg> element, add a <g> element, and move translate 0,0 to the center of the element.
     var g = d3.select(id)
         .attr('width', width)
         .attr('height', height)
+        .style('width', '80%')
+        .attr('preserveAspectRatio', 'xMinYMin meet')
+		.attr('viewBox',
+			'0 0 ' +
+			(width + margin.left + margin.right) +
+			' ' +
+			(height + margin.top + margin.bottom)
+		)
         .append('g')
         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
