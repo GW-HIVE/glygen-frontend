@@ -67,7 +67,11 @@
     <meta name="msapplication-square150x150logo" content="images/icons/favicomatic/mstile-150x150.png" />
     <meta name="msapplication-wide310x150logo" content="images/icons/favicomatic/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="images/icons/favicomatic/mstile-310x310.png" />
-
+<style>   
+.cd-faq-group > li {
+    box-shadow: none !important;
+}
+</style>
 </head>
 
 <body onload="tracking()">
@@ -81,6 +85,11 @@
     </script>
 
     <div class="container-fluid text-center" style="margin-bottom: 150px; background: #fff;">
+        <!-- Main statistics heading -->
+        <div class="stat-heading">
+            <h5>Data Visualization</h5>
+            <h2>GlyGen Data <strong>Statistics</strong></h2>
+        </div>
         <section class="cd-faq">
             <ul class="cd-faq-categories text-left">
                 <li>
@@ -96,31 +105,26 @@
                     <a href="#glycoproteins">Glycoproteins</a>
                 </li>
             </ul>
+            
             <!-- cd-faq-categories -->
-            <ul class="cd-faq-items">
-                <li id="bioMolecules" class="cd-faq-group">
+            <div class="cd-faq-items">
+                    
+                <ul id="bioMolecules" class="cd-faq-group">
                     <li>
-                        <!-- Main statistics heading -->
-                        <div class="stat-heading">
-                <h5>Data Visualization</h5>
-                <h2>GlyGen Data <strong>Statistics</strong></h2>
-                </div>
-                    </li>
-                    <li>
-                        <!-- Chart box Biomolecules -->
-                        <div class="row"> 
-                            <div class="col-md-12 col-sm-12 chart-box-sm">
-                                <h3>BioMolecules</h3>
-                                <p class="lead">
+                    <!-- Chart box Biomolecules -->
+                    <div class="row"> 
+                        <div class="col-md-12 col-sm-12 chart-box-sm">
+                            <h3>BioMolecules</h3>
+                            <p class="lead">
                                 Overview of biomolecules in GlyGen by type and species.
-                                </p>
-                                <svg id="sunburstBioMolecules"></svg>
-                            </div>
+                            </p>
+                            <svg id="sunburstBioMolecules"></svg>
                         </div>
+                    </div>
                     </li>
-                </li>
+                </ul>
                 <!-- Glycans -->
-                <li id="glycans" class="cd-faq-group">
+                <ul id="glycans" class="cd-faq-group">
                     <li>
                         <!-- Glycans heading -->
                         <div class="horizontal-heading">
@@ -206,9 +210,9 @@
                             </div>
                         </div>
                     </li>
-                </li>
+                </ul>
                 <!-- Proteins -->
-                <li id="proteins" class="cd-faq-group">
+                <ul id="proteins" class="cd-faq-group">
                     <li>
                         <!-- Protein heading -->
                         <div class="horizontal-heading">
@@ -261,9 +265,9 @@
                             </div>
                         </div>
                     </li>
-                </li>
+                </ul>
                 <!-- Glycoproteins -->
-                <li id="glycoproteins" class="cd-faq-group">
+                <ul id="glycoproteins" class="cd-faq-group">
                     <li> 
                         <!-- Glycoproteins Heading -->
                         <div class="horizontal-heading">
@@ -294,9 +298,9 @@
         -->
  </div>
                     </li>
-                </li>
+                </ul>
                 <!-- cd-faq-group -->
-            </ul> 
+            </div> 
             <!-- cd-faq-items -->
                 <a href="#0" class="cd-close-panel">Close</a>   
         </section>
