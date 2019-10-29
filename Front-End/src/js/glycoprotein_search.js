@@ -317,7 +317,7 @@ function ajaxProteinSearchSuccess() {
  */
 function searchJson(input_query_type, mass_min, mass_max, input_organism, input_protein_id,
     input_refseq_id, input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
-    input_glycan, input_pmid,input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
+    input_pmid,input_glycan,input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
     var sequences;
     if (input_sequence) {
         sequences = {
@@ -326,11 +326,11 @@ function searchJson(input_query_type, mass_min, mass_max, input_organism, input_
         }
     }
   
-    var glycans;
+    var glycans = undefined;
     if (input_glycan) {
         glycans = {
-            relation: input_relation,
-            glytoucan_ac: input_glycan
+            "relation": input_relation,
+            "glytoucan_ac": input_glycan
         }
     }
     var selected_organism = undefined;
