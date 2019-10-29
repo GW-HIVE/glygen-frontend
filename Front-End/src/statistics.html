@@ -19,19 +19,33 @@
     <meta http-equiv="Expires" content="0" />
 
     <title>Statistics - glygen</title>
+    
+    <!-- Please do not change Sequence-->
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- boots style -->
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+   
+    <!-- CSS side-navigation -->
+    <link rel="stylesheet" href="css/faq_style.css">
+    <!--detail style -->
+    <link rel="stylesheet" type="text/css" href="css/detail.css">
+    <!-- Modernizr -->
+    <script src="js/modernizr.js"></script>
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="css/feedback.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+       <!-- CSS common-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
-    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/statistics.css">
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
@@ -64,171 +78,228 @@
     <div w3-include-html="header.html"></div>
     <script>
         w3.includeHTML();
-
     </script>
 
     <div class="container text-center" style="margin-bottom: 150px; background: #fff;">
-        <!-- Main statistics heading -->
-        <div class="stat-heading">
-            <h5>Statistics</h5>
-            <h2>GlyGen Data <strong>Statistics</strong></h2>
-        </div>
-        <!-- Chart box Biomolecules -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12 chart-box-sm">
-                <h3>BioMolecules</h3>
-                <p class="lead">
-                Overview of biomolecules in GlyGen by type and species.
-                </p>
-                <svg id="sunburstBioMolecules"></svg>
-            </div>
-        </div>
-        <!-- Glycans heading -->
-        <div class="horizontal-heading">
-                <h2>Glycans</h2>
-                <h5>
-                Overview of glycan structures in GlyGen.
-                </h5>
-        </div>
-        <!-- chart-box-sm -->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>By Species Version 2</h3>
-                <p class="lead">
-                    Number of shared and unique glycans by species.
-                </p>
-                <div id="venn_glycans_homo_mus_rat_ver2"></div>
-            </div>
-        </div>
-        <!-- chart box -->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>By Species</h3>
-                <p class="lead">
-                    Number of shared and unique glycans by species.
-                </p>
-                <div id="venn_glycan_species"></div>
-            </div>
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>By Type</h3>
-                <p class="lead">
-                    Number of glycans by type.
-                </p>
-                <svg id="sunburst_glycan_type_subtype"></svg>
-            </div>
-        </div>
-        <!--  chart-box-sm-->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>Species by Type</h3>
-                <p class="lead">
-                    Human, mouse, and rat glycans.
-                </p>
-<!--                <div id="donut_glycan_homo_mus_rat"></div>-->
-                   <svg id="sunburst_glycan_organism_type"></svg>
-            </div>
+        <section class="cd-faq">
+            <ul class="cd-faq-categories text-left">
+                <li>
+                    <a class="selected" href="#bioMolecules">BioMolecules</a>
+                </li>
+                <li>
+                    <a href="#glycans">Glycans</a>
+                </li>
+                <li>
+                    <a href="#proteins">Proteins</a>
+                </li>
+                <li>
+                    <a href="#glycoproteins">Glycoproteins</a>
+                </li>
+            </ul>
+            <!-- cd-faq-categories -->
+            <ul class="cd-faq-items">
+                <li id="bioMolecules" class="cd-faq-group">
+                    <li>
+                        <!-- Main statistics heading -->
+                        <div class="stat-heading">
+                <h5>Data Visualization</h5>
+                <h2>GlyGen Data <strong>Statistics</strong></h2>
+                </div>
+                    </li>
+                    <li>
+                        <!-- Chart box Biomolecules -->
+                        <div class="row"> 
+                            <div class="col-md-12 col-sm-12 chart-box-sm">
+                                <h3>BioMolecules</h3>
+                                <p class="lead">
+                                Overview of biomolecules in GlyGen by type and species.
+                                </p>
+                                <svg id="sunburstBioMolecules"></svg>
+                            </div>
+                        </div>
+                    </li>
+                </li>
+                <!-- Glycans -->
+                <li id="glycans" class="cd-faq-group">
+                    <li>
+                        <!-- Glycans heading -->
+                        <div class="horizontal-heading">
+                            <h2>Glycans</h2>
+                            <h5>
+                            Overview of glycan structures in GlyGen.
+                            </h5>
+                    </div>
+                    </li>
+                    <li>
+                        <!-- chart-box-sm -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>By Species Version 2</h3>
+                                <p class="lead">
+                                    Number of shared and unique glycans by species.
+                                </p>
+                                <div id="venn_glycans_homo_mus_rat_ver2"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- chart box -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>By Species</h3>
+                                <p class="lead">
+                                    Number of shared and unique glycans by species.
+                                </p>
+                                <div id="venn_glycan_species"></div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>By Type</h3>
+                                <p class="lead">
+                                    Number of glycans by type.
+                                </p>
+                                <svg id="sunburst_glycan_type_subtype"></svg>
+                            </div>
+</div>
+                    </li>
+                    <li>
+                        <!--  chart-box-sm-->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>Species by Type</h3>
+                                <p class="lead">
+                                    Human, mouse, and rat glycans.
+                                </p>
+                <!--                <div id="donut_glycan_homo_mus_rat"></div>-->
+                                   <svg id="sunburst_glycan_organism_type"></svg>
+                            </div>
 
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>By Motifs</h3>
-                <p class="lead">
-                    Motifs and their frequencies.
-                </p>
-                <div id="donut_chart_motif"></div>
-            </div>
-        </div>
-        <!-- chart-box-sm -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12 chart-box-sm">
-                <h3>By Mass</h3>
-                <p class="lead">
-                    Each bar represents the number of glycans of a 50Da mass range.
-                </p>
-                <div id="bar_chart_mass"></div>
-            </div>
-        </div>
-        <!-- chart-box-sm -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12 chart-box-sm">
-                <h3>By Number of Residues</h3>
-                <p class="lead">
-                    Each bar represents the number of glycans with a certain amount of residues.
-                </p>
-                <div id="bar_chart_sugar"></div>
-            </div>
-        </div>
-        <!-- Protein heading -->
-        <div class="horizontal-heading">
-            <h2>Proteins</h2>
-            <h5>
-            Overview of protein structures in GlyGen.
-            </h5>
-        </div>
-        <!-- chart-box-sm -->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>Number of All Proteins </h3>
-                <p class="lead">
-                    Canonical proteins and isoforms by species.
-                </p>
-                <svg id="sunburst_canon_isof_prot"></svg>
-            </div>
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>Proteins by Species</h3>
-                <br>
-                    <label id="label_text">Human proteins</label>
-                    <select id="vennProteinSpecies">
-                        <option value="human">Human </option>
-                        <option value="mouse">Mouse </option>
-                        <option value="rat">Rat </option>
-                    </select>
-                
-                <div id="venn_protein_species"></div>
-            </div>
-        </div>
-        <!--chart-box-sm -->
-        <div class="row">
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>Glycosylhydrolases</h3>
-                <p class="lead">
-                    Number of glycosylhydrolases by species.
-                </p>
-                <div id="pie_glycosylhydrolases_proteins"></div>
-            </div>
-            <div class="col-md-6 col-sm-12 chart-box-sm">
-                <h3>Glycosyltransferases</h3>
-                <p class="lead">
-                    Number of glycosyltransferases by species.
-                </p>
-                <div id="pie_glycosyltransferases_proteins"></div>
-            </div>
-        </div>
-        <!--  Heading -->
-        <div class="horizontal-heading">
-            <h2>Glycoproteins</h2>
-            <h5>
-            Overview of glycoprotein structures in GlyGen.
-            </h5>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 chart-box-sm">
-                <h3>Glycosylated Proteins</h3>
-                <p class="lead">
-                    Number of glycosylated proteins (report with and without glycan structures, predicted) by species.
-                </p>
-                <p class="text-left">
-                    <strong>RWGS</strong> - Reported With Glycan Structures
-                    <br>
-                    <strong>RWOGS</strong> - Reported WithOut Glycan Structures
-                </p>
-                <svg id="sunb_glycoprot_rep_pred_glyc"></svg>
-            </div>
-<!--
-            <div class="col-md-6 col-sm-12">
-                
-            </div>
--->
-        </div>
-    </div>
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>By Motifs</h3>
+                                <p class="lead">
+                                    Motifs and their frequencies.
+                                </p>
+                                <div id="donut_chart_motif"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>    
+                        <!-- chart-box-sm -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 chart-box-sm">
+                                <h3>By Mass</h3>
+                                <p class="lead">
+                                    Each bar represents the number of glycans of a 50Da mass range.
+                                </p>
+                                <div id="bar_chart_mass"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- chart-box-sm -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 chart-box-sm">
+                                <h3>By Number of Residues</h3>
+                                <p class="lead">
+                                    Each bar represents the number of glycans with a certain amount of residues.
+                                </p>
+                                <div id="bar_chart_sugar"></div>
+                            </div>
+                        </div>
+                    </li>
+                </li>
+                <!-- Proteins -->
+                <li id="proteins" class="cd-faq-group">
+                    <li>
+                        <!-- Protein heading -->
+                        <div class="horizontal-heading">
+                            <h2>Proteins</h2>
+                            <h5>
+                            Overview of protein structures in GlyGen.
+                            </h5>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- chart-box-sm -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>Number of All Proteins </h3>
+                                <p class="lead">
+                                    Canonical proteins and isoforms by species.
+                                </p>
+                                <svg id="sunburst_canon_isof_prot"></svg>
+                            </div>
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>Proteins by Species</h3>
+                                <br>
+                                    <label id="label_text">Human proteins</label>
+                                    <select id="vennProteinSpecies">
+                                        <option value="human">Human </option>
+                                        <option value="mouse">Mouse </option>
+                                        <option value="rat">Rat </option>
+                                    </select>
+
+                                <div id="venn_protein_species"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!--chart-box-sm -->
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>Glycosylhydrolases</h3>
+                                <p class="lead">
+                                    Number of glycosylhydrolases by species.
+                                </p>
+                                <div id="pie_glycosylhydrolases_proteins"></div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 chart-box-sm">
+                                <h3>Glycosyltransferases</h3>
+                                <p class="lead">
+                                    Number of glycosyltransferases by species.
+                                </p>
+                                <div id="pie_glycosyltransferases_proteins"></div>
+                            </div>
+                        </div>
+                    </li>
+                </li>
+                <!-- Glycoproteins -->
+                <li id="glycoproteins" class="cd-faq-group">
+                    <li> 
+                        <!-- Glycoproteins Heading -->
+                        <div class="horizontal-heading">
+                    <h2>Glycoproteins</h2>
+                    <h5>
+                    Overview of glycoprotein structures in GlyGen.
+                    </h5>
+                </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                    <div class="col-md-12 col-sm-12 chart-box-sm">
+                        <h3>Glycosylated Proteins</h3>
+                        <p class="lead">
+                            Number of glycosylated proteins (report with and without glycan structures, predicted) by species.
+                        </p>
+                        <p class="text-left5">
+                            <strong>RWGS</strong> - Reported With Glycan Structures
+                            <br>
+                            <strong>RWOGS</strong> - Reported WithOut Glycan Structures
+                        </p>
+                        <svg id="sunb_glycoprot_rep_pred_glyc"></svg>
+                    </div>
+        <!--
+                    <div class="col-md-6 col-sm-12">
+
+                    </div>
+        -->
+ </div>
+                    </li>
+                </li>
+                <!-- cd-faq-group -->
+            </ul> 
+            <!-- cd-faq-items -->
+                <a href="#0" class="cd-close-panel">Close</a>   
+        </section>
     </div>
 
     <div w3-include-html="footer.html"></div>
@@ -247,6 +318,7 @@
     <script src="js/utility.js"></script>
     <script type="text/javascript" src="libraries/moment.js"></script>
     <script type="text/javascript" src="libraries/alertify.js"></script>
+    <script type="text/javascript" src="libraries/contact.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="libraries/venn/venn.js"></script>
     <script type="text/javascript" src="js/charts.js"></script>
@@ -254,9 +326,33 @@
     <script type="text/javascript" src="js/ws_url.js"></script>
     <script type="text/javascript" src="js/utility.js"></script>
     <script type="text/javascript" src="js/activity_tracker.js"></script>
+    <!-- SIDE NAVIAGTION -->
+    <script src="js/faq_main.js"></script>
+    
+    <!-- Please do not change this it breaks hash scroll code-->
+    <script type="text/javascript">
+        $(document).ajaxStop(function() {
+            // calls the sidebar function only when all ajax calls are completed
+            faqMain();
 
-
-
+            function scrollToPanel(hash) {
+                //to scroll to the particular sub section.
+                $(hash).next('.cd-faq-content').slideToggle(200).end().parent('li').toggleClass('content-visible');
+                if ($(window).width() < 768) { //mobile view
+                    $('.cd-faq-items').scrollTop(0).addClass('slide-in').children('ul').removeClass('selected').end().children(hash).addClass('selected');
+                    $('.cd-close-panel').addClass('move-left');
+                    $('body').addClass('cd-overlay');
+                } else {
+                    $('body,html').animate({
+                        'scrollTop': $(hash).offset().top - 19
+                    }, 200);
+                }
+            }
+            if (window.location.hash) {
+                scrollToPanel(window.location.hash);
+            }
+        });
+    </script>
 </body>
 
 </html>
