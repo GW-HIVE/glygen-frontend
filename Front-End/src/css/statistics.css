@@ -312,4 +312,36 @@ svg {
 .cd-faq-group > li {
     box-shadow: none !important;
 }
+
+
+* {
+    box-sizing: border-box;
+}
+
+input[type=text],
+select,
+textarea {
+    width: 50%;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    resize: vertical;
+    background-color: #f9f9f9;
+}
+
+input[type=text]:hover,
+input[type=text]:focus {
+    background-color: #F5F5F5;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    font-size: 18px;
+}
+
+select {
+    height: 35px;
+    text-indent: 5px;
+}
+
 /*---------End-----------------*/
