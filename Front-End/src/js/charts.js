@@ -1603,7 +1603,15 @@ function vennProteinSpecies(dummy, data, id) {
 			selection.select("path")
 				.style("fill-opacity", d.sets.length == 1 ? .4 : .1)
 				.style("stroke-opacity", 1)
-				.style("cursor", "pointer");
+				//.style("cursor", "pointer");
+            
+            if (d.tooltipname == "Enzymes") {
+				d3.select(this)
+					.style("cursor", "default");
+			} else {
+                d3.select(this)
+					.style("cursor", "pointer");
+            }
 		})
 
 		.on("mousemove", function () {
