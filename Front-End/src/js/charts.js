@@ -1577,9 +1577,10 @@ function vennProteinSpecies(dummy, data, id) {
 		.height(350);
 
 	var div_protein_homo = d3.select(id)
-    div_protein_homo.datum(data.venn_protein_homo)
-		.call(protein_homo);
-
+//    div_protein_homo.datum(data.venn_protein_homo)
+//		.call(protein_homo);
+div_protein_homo.datum(populateJSON())
+    
 	var tooltip = d3.select("body").append("div")
 		.attr("class", "venntooltip")
 		.style("cursor", "pointer");
@@ -1677,9 +1678,9 @@ function vennProteinSpecies(dummy, data, id) {
             div_protein_homo.datum(data.venn_protein_rat)
 		.call(protein_homo);
             break;
-        default:
-            jsonName = ["data.venn_protein_homo"];
-            break;
+//        default:
+//            jsonName = ["data.venn_protein_homo"];
+//            break;
         }
 
        $('#label_text').text(updateLabel(name)); 

@@ -19,6 +19,7 @@
     <meta http-equiv="Expires" content="0" />
 
     <title>Statistics - glygen</title>
+    
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap.min.css">
 
     <!--[if lt IE 9]>
@@ -26,13 +27,16 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
+    <!-- CSS reset -->
     <link rel="stylesheet" href="css/reset.css">
+    <!-- CSS side-navigation -->
+    <link rel="stylesheet" href="css/faq_style.css">
     <link rel="stylesheet" href="css/statistics.css">
-
+    <link rel="stylesheet" type="text/css" href="css/feedback.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/favicomatic/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/favicomatic/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/favicomatic/apple-touch-icon-72x72.png" />
@@ -64,7 +68,6 @@
     <div w3-include-html="header.html"></div>
     <script>
         w3.includeHTML();
-
     </script>
 
     <div class="container text-center" style="margin-bottom: 150px; background: #fff;">
@@ -174,7 +177,6 @@
             </div>
             <div class="col-md-6 col-sm-12 chart-box-sm">
                 <h3>Proteins by Species</h3>
-                <br>
                     <label id="label_text">Human proteins</label>
                     <select id="vennProteinSpecies">
                         <option value="human">Human </option>
@@ -224,12 +226,14 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     <div w3-include-html="footer.html"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
     <script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Resource jQuery -->
+    <script src="libraries/jquery/jquery-ui.js"></script>
     <script src="js/navbar.js"></script>
     <!-- script for getting Web Service URLs -->
     <script type="text/javascript" src="js/domain_url.js"></script>
@@ -242,6 +246,8 @@
     <script src="js/utility.js"></script>
     <script type="text/javascript" src="libraries/moment.js"></script>
     <script type="text/javascript" src="libraries/alertify.js"></script>
+    <!-- SIDE NAVIAGTION -->
+    <script src="js/faq_main.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="libraries/venn/venn.js"></script>
     <script type="text/javascript" src="js/charts.js"></script>
@@ -249,9 +255,12 @@
     <script type="text/javascript" src="js/ws_url.js"></script>
     <script type="text/javascript" src="js/utility.js"></script>
     <script type="text/javascript" src="js/activity_tracker.js"></script>
+    <script type="text/javascript" src="libraries/contact.js"></script>
 
-
-
+<script>
+    //  required to open each QUESTIONs
+    faqMain();
+</script>
 </body>
 
 </html>
