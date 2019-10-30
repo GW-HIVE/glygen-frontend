@@ -63,7 +63,8 @@ function editSearch() {
     var question = getParameterByName('question');
     var newUrl;
     const stat = getParameterByName("stat");
-
+    const protTypeStat = getParameterByName("vennProtType");
+    
         if (question && (question === 'QUESTION_TRY1')) {
             newUrl = 'quick_search.html?id=' + id + '&question=QUESTION_1';
         }
@@ -74,8 +75,11 @@ function editSearch() {
 
         } else if (globalSearchTerm) {
             newUrl = "global_search_result.html?search_query=" + globalSearchTerm;
-        } else if (stat) {
+        } else if (stat) { 
             newUrl = 'statistics.html#' + stat;
+            if (protTypeStat) {
+               newUrl += '?protType' + protTypeStat;
+            } 
         } else  {
             newUrl = "protein_search.html?id=" + id;
         }
