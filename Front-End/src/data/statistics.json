@@ -872,7 +872,7 @@
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "Glycoproteins & Enzymes",
+			"name": "",
 			"size": 2000,
 			"organism": {
 				"id": 10116,

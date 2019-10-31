@@ -78,7 +78,7 @@ function editSearch() {
         } else if (stat) { 
             newUrl = 'statistics.html#' + stat;
             if (protTypeStat) {
-               newUrl += '?protType' + protTypeStat;
+               newUrl += '?vennProtType=' + protTypeStat;
             } 
         } else  {
             newUrl = "protein_search.html?id=" + id;
