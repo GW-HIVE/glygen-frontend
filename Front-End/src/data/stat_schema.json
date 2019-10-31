@@ -905,7 +905,6 @@
 				"id": 9606,
 				"name": "Homo sapiens"
 			}
-			
 		},
 		{
 			"sets": [1],
@@ -1074,7 +1073,7 @@
 		{
 			"sets": [0, 1, 2],
 			"tooltipname": "Glycoproteins & Enzymes",
-			"name": "Glycoproteins & Enzymes",
+			"name": "",
 			"size": 2000,
 			"organism": {
 				"id": 10116,
