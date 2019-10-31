@@ -1736,7 +1736,7 @@ function vennProteinSpecies(dummy, data, id) {
             "aa_list": ["N", "S", "T"],
             "operation": "or"
           }
-        }, "venn_protein_species");
+        }, "venn_protein_species", d.organism.name);
       } else if (d.tooltipname == "Enzymes") {
 
       }
@@ -2473,7 +2473,7 @@ function searchVennGlycoproteinsBy(param, chartId, protType) {
   $('#loading_image').fadeIn();
 
   var prevListId = getParameterByName("id") || "";
-  activityTracker("user", prevListId, "Performing protein search in Statistics");
+  activityTracker("user", prevListId, "Performing glycoprotein search in Statistics");
 
   var query_type = "search_protein";
   var formObject = {
@@ -2486,6 +2486,10 @@ function searchVennGlycoproteinsBy(param, chartId, protType) {
       "organism": {
         "id": param.organism.id,
         "name": param.organism.name
+      },
+      glycosylated_aa: {
+        "aa_list": param.glycosylated_aa.aa_list,
+        "operation": "or"
       }
     })
   }
@@ -2509,7 +2513,7 @@ function searchVennGlycoproteinsBy(param, chartId, protType) {
         $('#loading_image').fadeOut();
       } else {
         activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
-        window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId + '&vennProtType=' + protType;
+        window.location = './glycoprotein_list.html?id=' + results.list_id + '&stat=' + chartId + '&vennProtType=' + protType;
         $('#loading_image').fadeOut();
       }
     }
