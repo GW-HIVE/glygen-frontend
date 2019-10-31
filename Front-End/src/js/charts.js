@@ -1720,14 +1720,14 @@ function vennProteinSpecies(dummy, data, id) {
       //console.log(d.data.size); 
       if (d.tooltipname == "Proteins") {
         //var massRange = d.range.split("-");
-        searchProteinsBy({
+        searchVennProteinsBy({
           "organism": {
             "id": d.organism.id,
             "name": d.organism.name
           }
         }, "venn_protein_species", d.organism.name);
       } else if (d.tooltipname == "Glycoproteins") {
-        searchGlycoproteinsBy({
+        searchVennGlycoproteinsBy({
           "organism": {
             "id": d.organism.id,
             "name": d.organism.name
@@ -2312,7 +2312,7 @@ function searchGlycansBy(param, chartId) {
 /** 
  * On submit, function forms the JSON and submits to the search web services
  */
-function searchProteinsBy(param, chartId, protType) {
+function searchProteinsBy(param, chartId) {
   // displays the loading gif when the ajax call starts
   $('#loading_image').fadeIn();
 
@@ -2353,7 +2353,7 @@ function searchProteinsBy(param, chartId, protType) {
         $('#loading_image').fadeOut();
       } else {
         activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
-        window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId + '&vennProtType=' + protType;
+        window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId;
         $('#loading_image').fadeOut();
       }
     }
@@ -2408,6 +2408,108 @@ function searchGlycoproteinsBy(param, chartId) {
       } else {
         activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
         window.location = './glycoprotein_list.html?id=' + results.list_id + '&stat=' + chartId;
+        $('#loading_image').fadeOut();
+      }
+    }
+  });
+}
+
+/** 
+ * On submit, function forms the JSON and submits to the search web services for function vennProteinSpecies
+ */
+function searchVennProteinsBy(param, chartId, protType) {
+  // displays the loading gif when the ajax call starts
+  $('#loading_image').fadeIn();
+
+  var prevListId = getParameterByName("id") || "";
+  activityTracker("user", prevListId, "Performing protein search in Statistics");
+
+  var query_type = "search_protein";
+  var formObject = {
+    "operation": "AND",
+    "query_type": query_type,
+  };
+
+  if (param.organism) {
+    $.extend(formObject, {
+      "organism": {
+        "id": param.organism.id,
+        "name": param.organism.name
+      }
+    })
+  }
+
+  var json = "query=" + JSON.stringify(formObject);
+  $.ajax({
+    type: 'post',
+    url: getWsUrl("search_protein"),
+    data: json,
+    timeout: getTimeout("search_protein"),
+    error: ajaxFailure,
+    success: function (results) {
+      if (results.error_code) {
+        displayErrorByCode(results.error_code);
+        // activityTracker("error", "", results.error_code);
+        activityTracker("error", "", "Statistics: " + results.error_code + " for " + json);
+        $('#loading_image').fadeOut();
+      } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+        displayErrorByCode('no-results-found');
+        activityTracker("user", "", "Statistics: no result found for " + json);
+        $('#loading_image').fadeOut();
+      } else {
+        activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
+        window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId + '&vennProtType=' + protType;
+        $('#loading_image').fadeOut();
+      }
+    }
+  });
+}
+
+/** 
+ * On submit, function forms the JSON and submits to the search web services for function vennProteinSpecies
+ */
+function searchVennGlycoproteinsBy(param, chartId, protType) {
+  // displays the loading gif when the ajax call starts
+  $('#loading_image').fadeIn();
+
+  var prevListId = getParameterByName("id") || "";
+  activityTracker("user", prevListId, "Performing protein search in Statistics");
+
+  var query_type = "search_protein";
+  var formObject = {
+    "operation": "AND",
+    "query_type": query_type,
+  };
+
+  if (param.organism) {
+    $.extend(formObject, {
+      "organism": {
+        "id": param.organism.id,
+        "name": param.organism.name
+      }
+    })
+  }
+
+  var json = "query=" + JSON.stringify(formObject);
+  $.ajax({
+    type: 'post',
+    url: getWsUrl("search_protein"),
+    data: json,
+    timeout: getTimeout("search_protein"),
+    error: ajaxFailure,
+    success: function (results) {
+      if (results.error_code) {
+        displayErrorByCode(results.error_code);
+        // activityTracker("error", "", results.error_code);
+        activityTracker("error", "", "Statistics: " + results.error_code + " for " + json);
+        $('#loading_image').fadeOut();
+      } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
+        displayErrorByCode('no-results-found');
+        activityTracker("user", "", "Statistics: no result found for " + json);
+        $('#loading_image').fadeOut();
+      } else {
+        activityTracker("user", prevListId + ">" + results.list_id, "Statistics: Searched with modified parameters");
+        window.location = './protein_list.html?id=' + results.list_id + '&stat=' + chartId + '&vennProtType=' + protType;
         $('#loading_image').fadeOut();
       }
     }
