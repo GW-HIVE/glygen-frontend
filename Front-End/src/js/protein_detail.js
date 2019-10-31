@@ -281,6 +281,30 @@ function ajaxSuccess(data) {
         data.uniprot_canonical_ac = id;
         data.listID = getParameterByName('listID');
 
+        var hasfoundoma = false;
+        var hasfoundmgi = false;
+
+        //var x = groupEvidences(data.isoforms);
+        for(var i=0; i < data.orthologs.length; i++)
+        {
+            var databases = data.orthologs[i].databases;
+            for(var j =0; j < databases.length; j++)
+            {
+                if(databases[j].database === "MGI")
+                {
+                    hasfoundmgi = true;
+                }
+                if(databases[j].database === "OMA")
+                {
+                    hasfoundoma = true;
+                }
+            }
+        }
+
+
+        data.hasoma = hasfoundoma;
+        data.hasmgi = hasfoundmgi;
+
         var sequenceData = buildHighlightData(originalSequence, highlight);
         var html = Mustache.to_html(template, data);
         var $container = $('#content');

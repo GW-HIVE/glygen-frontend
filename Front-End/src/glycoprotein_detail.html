@@ -483,110 +483,142 @@
                     </div>
                 </ul>
 
-                <!--Isoforms-->
-                <ul id="isoform" class="cd-faq-group selected">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Isoforms</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                {{#isoforms}}
-                                    <div class="col-lg-9 col-md-12 col-sm-12">
-                                        <div class="panelmaincontent">
-                                            <li class="list-group"><strong>UniProtKB Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a>
-                                            </li>
-                                        </div>
-                                        <div class="panelmaincontent list-group">
-                                            Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
-                                        </div>
-                                        <div class="panelmaincontent list-group">UniProtKB Accession Length:
-                                            <a class="panelcontent" href="{{url}}" target="_blank">{{sequence.length}}</a>
-                                        </div>
-                                        {{#databases}}
-                                            <!-- <div class='col-md-6 col-xs-6'> -->
-                                            <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
-                                                <button class="btn btn-primary evidence-badge-btn" type="button" style="background-color:{{color}}; border-color:{{color}}">
-                                                    {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
-                                                </button>
-
-                                                <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
-                                                    <ul>
-
-                                                        {{#links}}
-                                                            <li class="evidence_id"> <a href="{{url}}" target="_blank">{{id}} </a></li>
-                                                        {{/links}}
-                                                    </ul>
-                                                </div>
-                                            </span>
-                                            <!-- </div>  -->
-                                        {{/databases}}
-                                        {{^databases}} {{/databases}}
-                                        <div class="plus-button-margin-bottom"></div>
-                                        <div id="fasta">
-                                            <pre class="highlight-text">{{{sequence.sequence}}}</pre>
-                                        </div>
-                                        <br>
-                                    </div>
-                                {{/isoforms}}
+               <!--Isoforms-->
+               <ul id="isoforms" class="cd-faq-group selected">
+                <li class="cd-faq-title" />
+                <div class="panel panel-default">
+                    <div class="gg-panel-heading">
+                        <div class="row">
+                            <div class="col-md-9">
+                        <h4>Isoforms</h4>
                             </div>
-                            {{^isoforms}} No data available. {{/isoforms}}
-                        </div>
+                        <div class="col-md-3">
+                                <form method="get" action="isoform_alignment.html">
+                                        <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
+                                        <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
+                                        <input id="hidden_alng" type="hidden" name="alignment" value="isoformset.uniprotkb" />
+                                        <input type="submit" class="btn btn-primary actionbutton" value="Alignment"  />
+                                    </form>
+                               
                     </div>
-                </ul>
+                </div>
+            
+            </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {{#isoforms}}
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="panelmaincontent">
+                                        <li class="list-group"><strong>UniProtKB Isoform Accession:</strong> <a class="panelcontent" href="{{{url}}}" target="_blank">{{isoform_ac}}</a>
+                                        </li>
+                                    </div>
+                                    <div class="panelmaincontent list-group">
+                                        Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
+                                    </div>
+                                    <div class="panelmaincontent list-group">UniProtKB Accession Length:
+                                        <a class="panelcontent" href="{{url}}" target="_blank">{{sequence.length}}</a>
+                                    </div>
+                                    {{#databases}}
+                                        <!-- <div class='col-md-6 col-xs-6'> -->
+                                        <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
+                                            <button class="btn btn-primary evidence-badge-btn" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                                {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                            </button>
 
-                <!--Orthologs-->
-                <ul id="orthologs" class="cd-faq-group selected">
-                    <li class="cd-faq-title" />
-                    <div class="panel panel-default">
-                        <div class="gg-panel-heading">
-                            <h4>Orthologs</h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                {{#orthologs}}
-                                    <div class="col-lg-9 col-md-12 col-sm-12">
-                                        <div class="panelmaincontent">
-                                            <li class="list-group"><strong>UniProtKB Ortholog Accession:</strong>
-                                                <a class="panelcontent" href="#" onclick="openProteinDetailPage('{{uniprot_canonical_ac}}');return false;" target="_blank">{{uniprot_canonical_ac}}</a>
-                                            </li>
-                                            <div class="panelmaincontent list-group">
-                                                Organism: {{organism}}
+                                            <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
+                                                <ul>
+
+                                                    {{#links}}
+                                                        <li class="evidence_id"> <a href="{{url}}" target="_blank">{{id}} </a></li>
+                                                    {{/links}}
+                                                </ul>
                                             </div>
-                                        </div>
-
-                                        {{#databases}}
-                                            <!-- <div class='col-md-6 col-xs-6'> -->
-                                            <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
-                                                <button class="btn btn-primary upper-case evidence-badge-btn" type="button" style="background-color:{{color}}; border-color:{{color}}">
-                                                    {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
-                                                </button>
-                                                <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
-                                                    <ul>
-
-                                                        {{#links}}
-                                                            <li class="evidence_id"> <a href="{{url}}" target="_blank">{{id}} </a></li>
-                                                        {{/links}}
-                                                    </ul>
-                                                </div>
-                                            </span>
-                                            <!-- </div>  -->
-                                        {{/databases}}
-                                        {{^databases}} {{/databases}}
-                                        <div class="plus-button-margin-bottom"></div>
-                                        <div id="fasta">
-                                            <pre class="highlight-text">{{{sequence.sequence}}}</pre>
-                                        </div>
-                                        <br>
+                                        </span>
+                                        <!-- </div>  -->
+                                    {{/databases}}
+                                    {{^databases}} {{/databases}}
+                                    <div class="plus-button-margin-bottom"></div>
+                                    <div id="fasta">
+                                        <pre class="highlight-text">{{{sequence.sequence}}}</pre>
                                     </div>
-                                {{/orthologs}}
-                            </div>
-                            {{^orthologs}} No data available. {{/orthologs}}
+                                    <br>
+                                </div>
+                            {{/isoforms}}
+                        </div>
+                        {{^isoforms}} No data available. {{/isoforms}}
+                    </div>
+                </div>
+            </ul>
+
+            <!--homologs-->
+            <ul id="homologs" class="cd-faq-group selected">
+                <li class="cd-faq-title" />
+                <div class="panel panel-default">
+                    <div class="gg-panel-heading">  
+                            <div class="row">
+                         <div class="col-md-4">  
+                        <h4>Homologs</h4>
+                         </div>
+                         <div class="col-md-3">
+                         </div>
+                         <div class="col-md-5">  
+                        <div id="isoform-alignment">
+                            <form method="get" action="homolog_alignment.html">
+                                    <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
+                                    <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
+                                <select name="alignment"class="form-group">
+                                <option value="" selected="">select</option>
+                                    <option value="homologset.oma">homologset.oma</option>
+                                    <option value="homologset.mgi">homologset.mgi</option>        
+                                </select>
+                                <input type="submit" class="btn btn-primary actionbutton" value="Alignment" aria-disabled="true" disabled="true" />
+                            </form>
                         </div>
                     </div>
                     </div>
-                </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {{#orthologs}}
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="panelmaincontent">
+                                        <li class="list-group"><strong>UniProtKB Ortholog Accession:</strong>
+                                            <a class="panelcontent" href="#" onclick="openProteinDetailPage('{{uniprot_canonical_ac}}');return false;" target="_blank">{{uniprot_canonical_ac}}</a>
+                                        </li>
+                                        <div class="panelmaincontent list-group">
+                                            Organism: {{organism}}
+                                        </div>
+                                    </div>
+                                    {{#databases}}
+                                        <!-- <div class='col-md-6 col-xs-6'> -->
+                                        <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 15px; padding-bottom: 15px; padding-top: 5px;">
+                                            <button class="btn btn-primary upper-case evidence-badge-btn" type="button" style="background-color:{{color}}; border-color:{{color}}">
+                                                {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                            </button>
+                                            <div class='hidden evidence_links' style="position: absolute; left: 15px; width: 200px;">
+                                                <ul>
+                                                    {{#links}}
+                                                        <li class="evidence_id"> <a href="{{url}}" target="_blank">{{id}} </a></li>
+                                                    {{/links}}
+                                                </ul>
+                                            </div>
+                                        </span>
+                                        <!-- </div>  -->
+                                    {{/databases}}
+                                    {{^databases}} {{/databases}}
+                                    <div class="plus-button-margin-bottom"></div>
+                                    <div id="fasta">
+                                        <pre class="highlight-text">{{{sequence.sequence}}}</pre>
+                                    </div>
+                                    <br>
+                                </div>
+                            {{/orthologs}}
+                        </div>
+                        {{^orthologs}} No data available. {{/orthologs}}
+                    </div>
+                </div>
+                </div>
+            </ul>
 
                 <!-- Disease -->
                 <ul id="disease" class="cd-faq-group selected">

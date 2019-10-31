@@ -189,8 +189,7 @@ function findMaxSequenceLength(sequenceObject) {
             document.getElementById("date").innerHTML = Datadate;
             var DataCluId= aln.cls_id;
             document.getElementById("cluid").innerHTML = DataCluId;
-            var DatauniId = aln._id
-            document.getElementById("unid").innerHTML = DatauniId;
+          
             var Dataident = aln.identity
             document.getElementById("ident").innerHTML = Dataident;
             var Dataidentpos = aln.identical_positions;
