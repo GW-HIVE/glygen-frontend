@@ -186,20 +186,7 @@ function ajaxSuccess(data) {
 
         $container.html(html);
         //setupEvidenceList();
-        // $container.find('.open-close-button').each(function (i, element) {
-        //     $(element).on('click', function () {
-        //         var $this = $(this);
-        //         var buttonText = $this.text();
-
-        //         if (buttonText === '+') {
-        //             $this.text('-');
-        //             $this.parent().next().show();
-        //         } else {
-        //             $this.text('+');
-        //             $this.parent().next().hide();
-        //         }
-        //     });
-        // });
+       
 
         $('#glycosylation-table').bootstrapTable({
             columns: [{
@@ -257,10 +244,15 @@ function ajaxSuccess(data) {
                     }
                 },
                 {
-                    field: 'position',
+                    field: 'position '+ 'residue',
                     title: 'Position',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index, field) {
+                        return  row.residue+row.position ;
+                        
+                    }
                 }
+
             ],
             pagination: 10,
             data: data.glycoprotein,
