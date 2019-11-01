@@ -211,7 +211,13 @@ function ajaxSuccess(data) {
                 field: 'protein_name',
                 title: 'Protein Name',
                 sortable: true
-            }],
+            },
+            {
+                field: 'tax_name',
+                title: 'Species',
+                sortable: true
+            }
+        ],
             pagination: 10,
             data: items,
             onSort: function () {
