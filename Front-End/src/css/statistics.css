@@ -243,7 +243,7 @@ svg {
 ============================================ */
 
 .chart-box-sm {
-    padding: 40px 0;
+    padding: 40px;
 }
 
 /* =========================================
@@ -256,8 +256,14 @@ svg {
 }
 
 .stat-heading {
+/*
     margin-bottom: 50px;
     margin-top: 50px;
+*/
+/*    margin: 50px 0;*/
+    padding: 50px 0;
+    background: #f9f9f9;
+    background: #fff;
 }
 
 .stat-heading h5 {
