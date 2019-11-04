@@ -151,7 +151,6 @@ $(document).ready(function () {
     /** 
     * @param {string} No results found 
     * @return {string} Alert message in all searches
-    * @author Tatiana Williamson
     */
     $(".alert").hide();
     $(document).on('click', function(e) {
@@ -161,7 +160,6 @@ $(document).ready(function () {
     /** 
     * @param {string} popover and tooltip
     * @return {string} popover and tooltip on search pages
-    * @author Tatiana Williamson
     */
     $('.link-with-tooltip').each(function() {
         $(this).popover({    

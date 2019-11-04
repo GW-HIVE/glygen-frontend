@@ -38,6 +38,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+   
+    <!-- CSS for tippy tooltip -->
+    <link rel="stylesheet" type="text/css" href="css/tippy.css">
     <link rel="stylesheet" type="text/css" href="libraries/bootstrap/css/bootstrap-table.min.css">
     <!-- CSS for sidenavgation-->
     <link rel="stylesheet" href="css/faq_style.css">
@@ -49,7 +52,7 @@
     <link rel="stylesheet" type="text/css" href="css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/feedback.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
+    
     <!-- CSS common-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/server.css">
@@ -186,8 +189,8 @@
                                 </div>
                             <div class="col-md-2">
                                 {{#glytoucan}}
-                                <a href="#" onclick="openSubsumptionbrowser('{{glytoucan_ac}}');return false; "target="_blank">
-                                    <img class='icon-wrapper1' src="/images/icons/favicomatic/gnome.png" alt='Cartoon'/>
+                                <a href="javascript://" data-tippy="GNOME Subsumption browser" data-tippy-pos='up' onclick="openSubsumptionbrowser('{{glytoucan_ac}}'); return false; "target="_blank">
+                                    <img class='icon-wrapper1' src="/images/icons/gnome.png" alt='Cartoon'/>
                                 </a>
                                 {{/glytoucan}}
                             </div>
