@@ -107,9 +107,9 @@ $('#textExampleGOTerm').click(function() {
  * Makes the example clickable and inserts it into the search input field.
  * @param {string} tagsInputGOID
  */
-var $tagsInputGOTerm = $('#go_id');
+var $tagsInputGOID = $('#go_id');
 $('#textExampleGOID').click(function() {
-     $tagsInputGOTerm.val($(this).text());
+     $tagsInputGOID.val($(this).text());
     return false;
 });
 
