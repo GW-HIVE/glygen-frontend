@@ -107,6 +107,12 @@ $(document).ready(function () {
             for (var x = 0; x < result.organism.length; x++) {
                 createOption(orgElement, result.organism[x].name, result.organism[x].id);
             }
+            var glycAAElement = $("#glycosylated_aa").get(0);
+            result.aa_list.sort(sortDropdown);
+            for (var x = 0; x < result.aa_list.length; x++) {
+                createOption(glycAAElement, result.aa_list[x].name, result.aa_list[x].key);
+            }
+            $("#glycosylated_aa").val('').trigger("chosen:updated");
             // Sorting Simple search 
             var categoryType = $("#simplifiedCategory").get(0);
             result.simple_search_category.sort(sortDropdownSimple);
