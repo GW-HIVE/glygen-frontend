@@ -38,7 +38,7 @@ function validatePathwayID(input) {
 * validation for each field
 */
 function validateProteinAcc(input) {
-    var validLength = (input.value.length <=12);
+    var validLength = (input.value.length <=108);
     if (validLength) {
         document.getElementById("proteinAccMsg").innerHTML = " ";
         return true;
@@ -179,7 +179,7 @@ function validateMotifName(input) {
 * validation for each field
 */
 function validateGlycanAcc(input) {
-    var validLength = (input.value.length <= 8);
+    var validLength = (input.value.length <= 108);
     if (validLength) {
         document.getElementById("glycanAccMsg").innerHTML = " ";
         return true;
