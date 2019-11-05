@@ -1045,6 +1045,11 @@ ____________________________________  */
     padding: 2% 5% 0;
 }
 
+sub {
+  vertical-align: sub;
+  font-size: x-small;
+}
+
 /* ----------------------------
     @media Mobile screen adjustment 
 --------------------------------*/
