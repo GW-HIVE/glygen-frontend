@@ -700,3 +700,20 @@ function downloadPrompt() {
     var IsCompressed = $('#download_compression').is(':checked');
     downloadFromServer(uniprot_canonical_ac, format, IsCompressed, page_type);
 }
+
+/**
+ * This function shows and hide sequences.
+ */
+function showHideSequences(button_id, seq_class){
+
+     if ($('.' + seq_class).css('display') === "none") {
+        $('#' + button_id).attr("value", "Hide Sequences");
+     }  else {
+        $('#' + button_id).attr("value", "Show Sequences");
+     }
+
+    $.each($('.' + seq_class), function(i, v) {
+        $(v).toggle()
+    });
+
+}

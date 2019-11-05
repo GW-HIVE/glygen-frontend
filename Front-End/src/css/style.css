@@ -1045,6 +1045,10 @@ ____________________________________  */
     padding: 2% 5% 0;
 }
 
+.iso-sequence, .hom-sequence {
+    display: none;
+}
+
 sub {
   vertical-align: sub;
   font-size: x-small;

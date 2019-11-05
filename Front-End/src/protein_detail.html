@@ -490,18 +490,20 @@
                     <div class="panel panel-default">
                         <div class="gg-panel-heading">
                             <div class="row">
-                                <div class="col-md-9">
-                            <h4>Isoforms</h4>
+                                <div class="col-md-6">
+                                    <h4>Isoforms</h4>
                                 </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 text-right">
                                     <form method="get" action="isoform_alignment.html">
-                                            <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
-                                            <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
-                                            <input id="hidden_alng" type="hidden" name="alignment" value="isoformset.uniprotkb" />
-                                            <input type="submit" class="btn btn-primary actionbutton" value="Alignment"  />
-                                        </form>
-                                   
-                        </div>
+                                        <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
+                                        <input id="hidden_lid" type="hidden" name="listID" value="{{listID}}" />
+                                        <input id="hidden_alng" type="hidden" name="alignment" value="isoformset.uniprotkb" />
+                                        <input type="submit" class="btn btn-primary actionbutton" value="Alignment"  />
+                                    </form>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="isoform_seq_tog" type="submit" onclick="showHideSequences('isoform_seq_tog', 'iso-sequence')" class="btn btn-primary actionbutton" value="Show Sequences"  />       
+                            </div>
                     </div>
                 
                 </div>
@@ -539,7 +541,7 @@
                                         {{/databases}}
                                         {{^databases}} {{/databases}}
                                         <div class="plus-button-margin-bottom"></div>
-                                        <div id="fasta">
+                                        <div class="iso-sequence" id="fasta">
                                             <pre class="highlight-text">{{{sequence.sequence}}}</pre>
                                         </div>
                                         <br>
@@ -560,9 +562,7 @@
                              <div class="col-md-4">  
                             <h4>Homologs</h4>
                              </div>
-                             <div class="col-md-3">
-                             </div>
-                             <div class="col-md-5">  
+                             <div class="col-md-5 text-right">  
                             <div id="isoform-alignment">
                                 <form method="get" action="homolog_alignment.html">
                                         <input id="hidden_uca" type="hidden" name="uniprot_canonical_ac" value="{{uniprot_canonical_ac}}" />
@@ -575,6 +575,9 @@
                                     <input type="submit" class="btn btn-primary actionbutton" value="Alignment" aria-disabled="true" disabled="true" />
                                 </form>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="homologs_seq_tog" type="submit" onclick="showHideSequences('homologs_seq_tog', 'hom-sequence')" class="btn btn-primary actionbutton" value="Show Sequences"  />       
                         </div>
                         </div>
                         </div>
@@ -608,7 +611,7 @@
                                         {{/databases}}
                                         {{^databases}} {{/databases}}
                                         <div class="plus-button-margin-bottom"></div>
-                                        <div id="fasta">
+                                        <div class="hom-sequence" id="fasta">
                                             <pre class="highlight-text">{{{sequence.sequence}}}</pre>
                                         </div>
                                         <br>
