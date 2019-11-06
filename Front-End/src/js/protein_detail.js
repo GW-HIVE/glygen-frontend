@@ -38,9 +38,13 @@ function ajaxSuccess(data) {
             if (data.gene) {
                 for (var i = 0; i < data.gene.length; i++) {
                     // assign the newly result of running formatSequence() to replace the old value
-                    if (data.gene[i].locus){
-                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
-                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                    data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
+                    data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                    if (data.gene[i].locus && data.gene[i].locus.evidence){
+//                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
+//                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
+                         data.gene[i].evidence = data.gene[i].locus.evidence;
+                        formatEvidences([data.gene[i]]);
                     }
                 }
             }
@@ -87,7 +91,8 @@ function ajaxSuccess(data) {
                 formatEvidences(data.go_annotation.categories[i].go_terms);
             }
         }
-
+        
+        formatEvidences(data.gene);
         formatEvidences(data.species);
         formatEvidences(data.publication);
         formatEvidences(data.function);

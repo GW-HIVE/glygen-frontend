@@ -107,7 +107,7 @@
                 <a href="#pathway">Pathway</a>
             </li>
             <li>
-                <a href="#isoforms">Isoform</a>
+                <a href="#isoforms">Isoforms</a>
             </li>
             <li>
                 <a href="#homologs">Homologs</a>
@@ -190,16 +190,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <!--always try to use double quotes for HTML attributes.-->
-                            <div class="col-md-12 col-xs-6">
-                                {{#gene}}
-                                <li class="list-group"><strong>Gene Name:</strong>
-                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{name}}</a>
-                                </li>
-                                <li class="list-group"><strong>Gene Location:</strong> Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
-                                </li> 
-                                {{/gene}}
-                                {{^gene}} {{/gene}}
-
+                            <div class="col-md-12 col-xs-12">
+                                
                                 {{#uniprot}}
                                 {{#uniprot_id}}
                                 <li class="list-group"><strong>UniProtKB ID:</strong>
@@ -246,7 +238,32 @@
                                 <li class="list-group"><strong>RefSeq Summary:</strong> {{summary}}</li>
                                 {{/refseq.ac}}
                                 {{/refseq}}
-                               
+                                
+                                {{#gene}}
+                                <li class="list-group"><strong>Gene Name:</strong>
+                                    <a class="panelcontent" href="{{{url}}}" target="_blank">{{name}}</a>
+                                </li>
+                                <li class="list-group"><strong>Gene Location:</strong> Chromosome: {{locus.chromosome}} ({{locus.start_pos}} - {{locus.end_pos}})
+                                <br>
+                                    {{#databases}}
+                                        <span class="evidence_badge" style="position: relative; display: inline-block; padding-left: 5px; padding-bottom: 20px; padding-top: 5px;">
+                                            <button class="btn btn-primary evidence-badge-btn color-{{database}}" type="button" style="paddingbackground-color:{{color}}; border-color:{{color}}">
+                                                {{database}} &nbsp;&nbsp;<span class="badge">{{links.length}}</span>
+                                            </button>
+                                            <div class='hidden evidence_links' style="position: absolute; left: 0; width: 200px;">
+                                                <ul>
+                                                    {{#links}}
+                                                        <li style="position: relative; display: inline-block; padding-left: 5px;"><a href="{{url}}" target="_blank">{{id}}</a>
+                                                        </li>
+                                                    {{/links}}
+                                                </ul>
+                                            </div>
+                                        </span>
+                                    {{/databases}}
+                                </li> 
+                                {{/gene}}
+                                {{^gene}} {{/gene}}
+
                             </div>
                         </div>
                     </div>
