@@ -35,6 +35,7 @@ function databasecolor(name) {
         case 'RefSeq': return '#3ea2ad';
         case 'Ensembl Peptide': return '#936caf';
         case 'Ensembl Transcript': return '#b971a6';
+        case 'Ensembl Gene': return '#468FE0';
         case 'OMIM': return '#8d85fa';
         case 'BioMuta': return '#7975af';
         case 'Bgee': return '#798bae';

@@ -41,8 +41,6 @@ function ajaxSuccess(data) {
                     data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
                     data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
                     if (data.gene[i].locus && data.gene[i].locus.evidence){
-//                        data.gene[i].locus.start_pos = addCommas(data.gene[i].locus.start_pos);
-//                        data.gene[i].locus.end_pos = addCommas(data.gene[i].locus.end_pos);
                          data.gene[i].evidence = data.gene[i].locus.evidence;
                         formatEvidences([data.gene[i]]);
                     }
