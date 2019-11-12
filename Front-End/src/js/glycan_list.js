@@ -48,6 +48,16 @@ function buildSummary(queryInfo) {
         queryInfo.organism.organism_list = organism_name.join(' ' + queryInfo.organism.operation + ' ');
     }
 
+    if (queryInfo.glytoucan_ac) {
+        queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.trim();
+        var index = queryInfo.glytoucan_ac.lastIndexOf(",");
+        if (index > -1 && (index + 1) == queryInfo.glytoucan_ac.length) {
+            queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.substr(0, index) + "\u200B";
+        }
+        queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.replace(/,/g, ",\u200B");
+        queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.replace(/-/g, "\u2011");
+    }
+
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')
     summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
