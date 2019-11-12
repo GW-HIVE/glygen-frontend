@@ -212,7 +212,7 @@ $(document).ready(function() {
   uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
   position = parseInt(getParameterByName("position"));
   id = uniprot_canonical_ac;
-  document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
+  document.title = uniprot_canonical_ac + " Detail | glygen.org"; //updates title with the protein ID
   LoadData(uniprot_canonical_ac);
   setupEvidenceList();
   updateBreadcrumbLinks();

@@ -317,7 +317,7 @@ function getParameterByName(name, url) {
 $(document).ready(function () {
     glytoucan_ac = getParameterByName('glytoucan_ac');
     id = glytoucan_ac;
-    document.title = glytoucan_ac + " Detail - glygen"; //updates title with the glycan ID
+    document.title = glytoucan_ac + " Glycan Details | Details for Selected Glycan | glygen.org"; //updates title with the glycan ID
     LoadData(glytoucan_ac);
     updateBreadcrumbLinks();
 });

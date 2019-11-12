@@ -634,7 +634,7 @@ $(document).ready(function () {
     uniprot_canonical_ac = getParameterByName('uniprot_canonical_ac');
     select = getParameterByName('select');
     id = uniprot_canonical_ac;
-    document.title = uniprot_canonical_ac + " Detail - glygen"; //updates title with the protein ID
+    document.title = uniprot_canonical_ac + " Protein Details | Details for Selected Protein | glygen.org"; //updates title with the protein ID
     LoadData(uniprot_canonical_ac);
     updateBreadcrumbLinks();
 });
