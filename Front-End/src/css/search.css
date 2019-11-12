@@ -170,6 +170,25 @@ select {
     white-space:pre-wrap;
 }
 
+/*------------------------
+    Composition Search
+-------------------------*/
+
+.compositionSearch-container {
+    width: 90%;
+    border-radius: 5px;
+    border: 2px solid #dfe5ed;
+    padding: 40px 80px 20px;
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.heading {
+    color: #2F78B7;
+}
+
 /*------------------------------------
     Tutorial Section
 -------------------------------------*/

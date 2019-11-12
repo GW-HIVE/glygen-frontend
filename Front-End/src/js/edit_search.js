@@ -11,62 +11,97 @@
  */
 function setFormValues(data) {
     if (data.query) {
-        $("#glycan_id").val(data.query.glytoucan_ac);
-        $("#mass-drop").val(data.query.mass_type ? data.query.mass_type : mass_type_native);
-       
-        var min_range = native_mass_min;
-        var max_range = native_mass_max;
-        var min = native_mass_min;
-        var max = native_mass_max;
-        if (data.query.mass_type != mass_type_native) {
-            min_range = perMet_mass_min;
-            max_range = perMet_mass_max;
-            min = perMet_mass_min;
-            max = perMet_mass_max;
-        }
-        if (data.query.mass) {
-            min = data.query.mass.min;
-            max = data.query.mass.max;
-        }
+        if (data.query.query_type){
+            $("#glycan_id").val(data.query.glytoucan_ac);
+            $("#mass-drop").val(data.query.mass_type ? data.query.mass_type : mass_type_native);
+        
+            var min_range = native_mass_min;
+            var max_range = native_mass_max;
+            var min = native_mass_min;
+            var max = native_mass_max;
+            if (data.query.mass_type != mass_type_native) {
+                min_range = perMet_mass_min;
+                max_range = perMet_mass_max;
+                min = perMet_mass_min;
+                max = perMet_mass_max;
+            }
+            if (data.query.mass) {
+                min = data.query.mass.min;
+                max = data.query.mass.max;
+            }
 
-        var massSlider = document.getElementById('sliderbox-slider');
-        massSlider.noUiSlider.updateOptions({
-                range: {
-                    'min': min_range,
-                    'max': max_range
-                }
+            var massSlider = document.getElementById('sliderbox-slider');
+            massSlider.noUiSlider.updateOptions({
+                    range: {
+                        'min': min_range,
+                        'max': max_range
+                    }
+                });
+            massSlider.noUiSlider.set([min, max]);
+
+            var monosaccharides_min = sugar_mass_min;
+            var monosaccharides_max = sugar_mass_max;
+            if (data.query.number_monosaccharides) {
+                monosaccharides_min = data.query.number_monosaccharides.min;
+                monosaccharides_max = data.query.number_monosaccharides.max;
+            }
+
+            var massSlider1 = document.getElementById('sliderbox-slider1');
+            massSlider1.noUiSlider.set([monosaccharides_min, monosaccharides_max]);
+
+            var organism_id = undefined;
+            if (data.query.organism && data.query.organism.organism_list) {
+                organism_id = data.query.organism.organism_list.map(organism => organism.id)
+            }
+
+            $("#species").val(organism_id || "").trigger("chosen:updated");
+            $("#species_operation").val(data.query.organism ? data.query.organism.operation: "or");
+            $("#ddl").val(data.query.glycan_type || "");
+            var types = document.getElementById('ddl');
+            var subtypes = document.getElementById('ddl2');
+            // create subtypes
+            configureDropDownLists(types, subtypes, function () {
+                $("#ddl2").val(data.query.glycan_subtype);
             });
-        massSlider.noUiSlider.set([min, max]);
-
-        var monosaccharides_min = sugar_mass_min;
-        var monosaccharides_max = sugar_mass_max;
-        if (data.query.number_monosaccharides) {
-            monosaccharides_min = data.query.number_monosaccharides.min;
-            monosaccharides_max = data.query.number_monosaccharides.max;
+            $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
+            $("#protein").val(data.query.protein_identifier || "");
+            $("#motif").val(data.query.glycan_motif || "");
+            $("#pmid").val(data.query.pmid || "");
         }
-
-        var massSlider1 = document.getElementById('sliderbox-slider1');
-        massSlider1.noUiSlider.set([monosaccharides_min, monosaccharides_max]);
-
-        var organism_id = undefined;
-        if (data.query.organism && data.query.organism.organism_list) {
-            organism_id = data.query.organism.organism_list.map(organism => organism.id)
+        if (data.query.composition){
+            for (i = 0; i < data.query.composition.length; i++ ){
+                var res_curr = residue_list.filter(function(res) {return data.query.composition[i].residue == res.residue})[0];
+                if (res_curr){
+                    min = res_curr.min;
+                    max = res_curr.max;
+                }
+                $("#comp_" + data.query.composition[i].residue + "_sel").val(getSelectionValue(data.query.composition[i].min, data.query.composition[i].max, res_curr));
+                $("#comp_" + data.query.composition[i].residue + "_min").val(data.query.composition[i].min || min);
+                $("#comp_" + data.query.composition[i].residue + "_max").val(data.query.composition[i].max || max);
+                 enableDisableMinMax(document.getElementById("comp_" + data.query.composition[i].residue + "_sel").value, document.getElementById("comp_" + data.query.composition[i].residue + "_min"),
+                                      document.getElementById("comp_" + data.query.composition[i].residue + "_max"));
+            }
         }
-
-        $("#species").val(organism_id || "").trigger("chosen:updated");
-        $("#species_operation").val(data.query.organism ? data.query.organism.operation: "or");
-        $("#ddl").val(data.query.glycan_type || "");
-        var types = document.getElementById('ddl');
-        var subtypes = document.getElementById('ddl2');
-        // create subtypes
-        configureDropDownLists(types, subtypes, function () {
-            $("#ddl2").val(data.query.glycan_subtype);
-        });
-        $("#enzyme").val(data.query.enzyme? data.query.enzyme.id : "");
-        $("#protein").val(data.query.protein_identifier || "");
-        $("#motif").val(data.query.glycan_motif || "");
-        $("#pmid").val(data.query.pmid || "");
     }
+}
+
+/**
+ * getSelectionValue returns selection control value based on min, max.
+ * @param {object} min - min value.
+ * @param {object} max - max value.
+ * @param {object} init_residue - residue.
+ */
+function getSelectionValue(min, max, residue) {
+    var selection = "maybe";
+
+    if (min == residue.min && max <= residue.max){
+        selection = "maybe";
+    } else if (min > residue.min && max <= residue.max){
+        selection = "yes";
+    } else if (min == residue.min && max == residue.min){
+        selection = "no";
+    }
+    return selection;
 }
 
 /**
