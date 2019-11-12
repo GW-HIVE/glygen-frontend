@@ -1050,8 +1050,8 @@ ____________________________________  */
 }
 
 sub {
-  vertical-align: sub;
-  font-size: x-small;
+  vertical-align: middle;
+  font-size: smaller;
 }
 
 /* ----------------------------

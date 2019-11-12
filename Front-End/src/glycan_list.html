@@ -150,7 +150,7 @@
                  <center><b>{{question}}</b></center>
                 <h6><center>Performed on: {{execution_time}} (EST)</center></h6>
 
-                <div>
+                <div align="center">
                     <table class="table table-hover">
                         <tbody>
 
@@ -242,6 +242,16 @@
                               <td>{{pmid}}</td>
                           </tr>
                           {{/pmid}}
+
+
+                        {{#composition}}
+                        <tr>
+                            <td>{{residue}}:</td>
+                            <td>
+                                {{min}} - {{max}}
+                            </td>
+                        </tr>
+                        {{/composition}}
 
                         {{#term}}
                         <tr>

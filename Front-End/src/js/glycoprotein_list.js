@@ -36,6 +36,15 @@ function buildSummary(queryInfo) {
         queryInfo.mass.min = addCommas(queryInfo.mass.min);
         queryInfo.mass.max = addCommas(queryInfo.mass.max);
     }
+    if (queryInfo.uniprot_canonical_ac) {
+        queryInfo.uniprot_canonical_ac = queryInfo.uniprot_canonical_ac.trim();
+        var index = queryInfo.uniprot_canonical_ac.lastIndexOf(",");
+        if (index > -1 && (index + 1) == queryInfo.uniprot_canonical_ac.length) {
+            queryInfo.uniprot_canonical_ac = queryInfo.uniprot_canonical_ac.substr(0, index) + "\u200B";
+        }
+        queryInfo.uniprot_canonical_ac = queryInfo.uniprot_canonical_ac.replace(/,/g, ",\u200B");
+        queryInfo.uniprot_canonical_ac = queryInfo.uniprot_canonical_ac.replace(/-/g, "\u2011");
+    }
     var summaryHtml = Mustache.render(summaryTemplate, queryInfo);
     $('#summary-table').html(summaryHtml);
 }

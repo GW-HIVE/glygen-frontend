@@ -111,6 +111,10 @@
                                 Advanced Search </a>
                         </li>
                         <li>
+                            <a href="#composition_search" data-toggle="tab" id="tab-composition">
+                                Composition Search </a>
+                        </li>
+                        <li>
                             <a href="#tutorial" data-toggle="tab">
                                 Tutorial </a>
                         </li>
@@ -172,17 +176,17 @@
                                                     data-placement="top"
                                                     data-trigger="click"
                                                     data-html="true" 
-                                                    data-toggle="popover" 
-                                                    >
+                                                    data-toggle="popover">
                                                     <i class="far fa-question-circle help-sign"></i></a>
                                                 </span> 
                                             </label>
                                             <div class="col-sm-8 gg-form-group">
-                                                <input type="text" 
+                                                <textarea type="text" 
                                                     name="glycan_id" 
-                                                    class="form-control glycan" 
+                                                    class="multiinput-textarea form-control glycan" 
                                                     id="glycan_id"
-                                                    placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)">
+                                                    rows="3"
+                                                    placeholder="Enter complete or partial GlyTouCan Accession" onkeyup="validateGlycanAcc(this)"></textarea>
                                                 <div>
                                                     <div class="gg-text-left">Example: <a
                                                     href="#G17689DH" id="textExampleGlycan"
@@ -477,6 +481,38 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="tab-pane fade in" id="composition_search">
+                            <div class="container">
+                                <div class="row compositionSearch-container">
+                                    <div class="col-sm-12">
+                                        <label class="control-label col-sm-5 text-left heading" for="comp_search">
+                                            <Strong>Residue</Strong>
+                                        </label>
+                                        <label class="control-label col-sm-3 text-center heading" for="comp_search">
+                                            <Strong></Strong>Contains</Strong>
+                                        </label>
+                                        <label class="control-label col-sm-2 text-center heading" for="comp_search">
+                                            <Strong></Strong>Min</Strong>
+                                        </label>
+                                        <label class="control-label col-sm-2 text-center heading" for="comp_search">
+                                            <Strong></Strong>Max</Strong>
+                                        </label>
+                                    </div>
+                                    <div id="comp_tab" class="col-sm-12" style="padding: 0px 0px"></div>
+                                    <div class="col-sm-12" style="text-align: center; padding: 10px 0px 0px 0px">
+                                        <input 
+                                            type="button" 
+                                            class="btn-lg btn-primary-clear-fields adv-top-button"
+                                            value="Clear Fields" 
+                                            onclick="resetAdvanced()">
+                                        <input type="button" 
+                                            class="btn-lg btn-primary adv-top-button" 
+                                            value="Search Glycan"
+                                            onclick="submitvalues()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--  Composition Search Tab End -->
                         <!-- Start Tab Tutorial -->
                         <div class="tab-pane fade in" id="tutorial">
                             <div class="container">
