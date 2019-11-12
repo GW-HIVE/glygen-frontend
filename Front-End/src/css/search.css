@@ -21,8 +21,12 @@ textarea {
 
 input[type=text]:hover,
 input[type=text]:focus,
+input[type=number]:hover,
+input[type=number]:focus,
 textarea[type=text]:hover,
-textarea[type=text]:focus{
+textarea[type=text]:focus,
+select:hover,
+select:focus {
     background-color: #F5F5F5;
 }
 
