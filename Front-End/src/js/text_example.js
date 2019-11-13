@@ -14,7 +14,7 @@
 // select already you input element for re-use
 var $tagsInputGlycan = $('#glycan_id');
 // bind a click event to links within ".textExample" element
-$('#textExampleGlycan').click(function() {
+$('.textExampleGlycan').click(function() {
     // append link text to the input field value
     $tagsInputGlycan.val($(this).text());
     return false;
