@@ -166,13 +166,13 @@
                                                 value="Search Glycan"
                                                 onclick="submitvalues()">
                                         </div>
-                                        <!-- GlyTouCan Id -->
+                                        <!-- Glycan Id -->
                                         <div class="row">
                                             <label id="lbl_glytoucan_acc" class="control-label col-sm-4" for="glycan_id">
                                                 <span><a class="link-with-tooltip" href="javascript://"
-                                                    tooltip-title="You can search <strong>GlyTouCan Id</strong> by single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, GlycoCT. <br><br> Unique accessions assigned to the registered glycan structures in GlyTouCan database. <br><br> Enter complete or partial GlyTouCan Id of your glycan." 
-                                                    title="GlyTouCan Id" 
-                                                    data-content="You can search <strong>GlyTouCan Id</strong> by single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, GlycoCT.<br><br> Unique accessions assigned to the registered glycan structures in GlyTouCan database. <br><br> Enter complete or partial GlyTouCan Id of your glycan. Explore <a href='https://glytoucan.org/Structures/graphical' target='_blank'>GlyTouCan</a>"
+                                                    tooltip-title="You can search <strong>Glycan Id</strong> by single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, or GlycoCT. <br><br> Unique accessions assigned to the registered glycan structures in GlyTouCan database. <br><br> Enter complete or partial Glycan Id of your glycan." 
+                                                    title="Glycan Id" 
+                                                    data-content="You can search <strong>Glycan Id</strong> by single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, or GlycoCT.<br><br> Unique Id assigned to the registered glycan structures in Glycan database. <br><br> Enter complete or partial Glycan Id of your glycan."
                                                     data-placement="top"
                                                     data-trigger="click"
                                                     data-html="true" 
@@ -186,7 +186,7 @@
                                                     class="multiinput-textarea form-control glycan" 
                                                     id="glycan_id"
                                                     rows="3"
-                                                    placeholder="Enter complete or partial GlyTouCan Id (single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, or GlycoCT)." onkeyup="validateGlycanAcc(this)"></textarea>
+                                                    placeholder="Enter complete or partial Glycan Id (single or multiple GlyTouCan Accession(s), Cross References Id, IUPAC, WURCS, or GlycoCT)." onkeyup="validateGlycanAcc(this)"></textarea>
                                                 <div>
                                                     <div class="gg-text-left">GlyTouCan Accession Example: <a
                                                     href="#G17689DH" class="textExampleGlycan"
@@ -197,20 +197,20 @@
                                                     data-tippy="Explore GlyTouCan Database">GlyTouCan Accession</a></div>
                                                     <br>
                                                     <div class="gg-text-left">Cross References Id Example: <a
-                                                    href="#1974" class="textExampleGlycan"
-                                                    data-tippy="Click to Insert">1974</a></div>
-                                                    <br>
-                                                    <div class="gg-text-left">IUPAC Example: <a
-                                                    href="#alpha-D-NeupAc-(2->3)-beta" class="textExampleGlycan"
-                                                    data-tippy="Click to Insert">alpha-D-NeupAc-(2->3)-beta</a></div>
-                                                    <br>
+                                                    href="#G10716" class="textExampleGlycan"
+                                                    data-tippy="Click to Insert">G10716</a></div>
+                                                    
+                                                    <div class="gg-text-right">IUPAC Example: <a
+                                                    href="#alpha-D-NeupAc" class="textExampleGlycan"
+                                                    data-tippy="Click to Insert">alpha-D-NeupAc</a></div>
+                                                    
                                                     <div class="gg-text-left">WURCS Example: <a
-                                                    href="#WURCS=2.0/6,12,11/[a2122h" class="textExampleGlycan"
-                                                    data-tippy="Click to Insert">WURCS=2.0/6,12,11/[a2122h</a></div>
-                                                    <br>
-                                                    <div class="gg-text-left">GlycoCT Example: <a
-                                                    href="#1b:b-dglc-HEX-1:5" class="textExampleGlycan"
-                                                    data-tippy="Click to Insert">1b:b-dglc-HEX-1:5</a></div>
+                                                    href="#WURCS=2.0/6,12,11" class="textExampleGlycan"
+                                                    data-tippy="Click to Insert">WURCS=2.0/6,12,11</a></div>
+                                                    
+                                                    <div class="gg-text-right">GlycoCT Example: <a
+                                                    href="#2s:n-acetyl" class="textExampleGlycan"
+                                                    data-tippy="Click to Insert">2s:n-acetyl</a></div>
                                                 </div>
                                                 <br>
                                                 <h6 id='glycanAccMsg' class="validation-message"></h6>
