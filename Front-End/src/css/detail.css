@@ -474,6 +474,6 @@ h4 {
 }
 .form-group{
     margin-bottom:15px;
-    margin-top: 15px;
-    font-size: medium;
+    /* margin-top: 15px; */
+    font-size: large;
 }
