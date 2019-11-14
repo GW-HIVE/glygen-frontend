@@ -59,7 +59,7 @@ $(document).ready(function () {
     $(".search-field").css({ "width": "100%" });
 
     //Section for populating label names from key-value.json
-    populateFromKeyValueStore("lbl_glytoucan_acc", "GLYTOUCAN_ACCESSION", "", ":", 2);
+    populateFromKeyValueStore("lbl_glytoucan_acc", "GLYTOUCAN_ID", "", ":", 2);
     populateFromKeyValueStore("lbl_monoiso_mass", "MONOISOTOPIC_MASS", "", ":", 2);
     //End section for populating label names from key-value.json
 
