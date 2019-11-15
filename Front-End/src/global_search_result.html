@@ -80,8 +80,18 @@
         <div id="result">
             <!-- using mustache.js templating -->
             <script id="result_template" type="text/template">
+                {{#exact_match}}
+                <div class="row text-center">
+                    <li style="margin: 0px 0px 10px 0px">
+                        <a href="#" onclick="openDetailPage('{{type}}', '{{id}}');return false;" target="_blank">
+                            Your input matches one {{type}}.</a>
+                    </li>           
+                </div>    
+                {{/exact_match}}
+                <div style="margin: 0px 0px 10px 0px"></div>
             <div class="row">
                 <!-- glycan results -->
+                {{#other_matches}}
                 <div class="col-sm-4">
                     <div class="thumbnail card">
                         <div class="caption text-left">
@@ -331,7 +341,7 @@
                 <div class="col-sm-4">
                     <div class="thumbnail card">
                         <div class="caption text-left">
-                            {{#protein}}
+                            {{#glycoprotein}}
                             {{#all}}
                             {{#list_id}}
                             <a class="directToListPage" href="protein_list.html?id={{list_id}}">
@@ -343,7 +353,7 @@
                             {{/list_id}}
                             <h6 class="card-subtitle mb-2 text-muted">match <span class="gg-search-term"></span></h6>
                             {{/all}}
-                            {{/protein}}
+                            {{/glycoprotein}}
                         </div>
                         <ul class="list-group list-group-flush">
                             {{#glycoprotein}}
@@ -435,6 +445,7 @@
                         </ul>
                     </div>
                 </div>
+                {{/other_matches}}
             </div>
             
         </script>
