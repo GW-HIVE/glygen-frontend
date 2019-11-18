@@ -154,7 +154,9 @@ function getListPostData(id, page, sort, dir, limit) {
     var query = {};
     query.id = id;
     //query.offset = parseInt(page);
-    query.sort = sort;
+    if (sort){
+        query.sort = sort;
+    }
     query.offset = ((page - 1) * limit) + 1;
     query.limit = parseInt(limit);
     query.order = dir;

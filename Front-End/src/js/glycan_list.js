@@ -20,7 +20,7 @@ String.prototype.trunc = String.prototype.trunc ||
         return (this.length > n) ? this.substr(0, n - 1) + '&hellip;' : this;
     };
 var page = 1;
-var sort = 'glytoucan_ac';
+var sort = undefined;
 var dir = 'asc';
 var url = getWsUrl('glycan_list') + "?action=get_user";
 var limit = 20;

@@ -15,8 +15,8 @@ String.prototype.trunc = String.prototype.trunc ||
     };
 
 var page = 1;
-var sort = 'protein_name_long';
-var dir = 'desc'
+var sort = undefined;
+var dir = 'asc';
 var url = getWsUrl('protein_list');
 var limit = 20;
 
