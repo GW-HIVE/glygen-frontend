@@ -388,6 +388,8 @@ function submitvalues() {
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
     var sugar_slider = document.getElementById("sliderbox-slider1").noUiSlider.get();
     var glycan_id = document.getElementById("glycan_id").value;
+    glycan_id = glycan_id.replace(/\u200B/g, "");
+    glycan_id = glycan_id.replace(/\u2011/g, "-");
     var selected_species = document.getElementById("species");
     var organism_operation = $("#species_operation").val();
     var organism = [];

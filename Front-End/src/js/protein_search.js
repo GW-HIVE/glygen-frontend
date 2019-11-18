@@ -260,6 +260,8 @@ function ajaxProteinSearchSuccess() {
         "name": selected_species.options[selected_species.selectedIndex].text
     };
     var uniprot_id = $("#protein").val();
+    uniprot_id = uniprot_id.replace(/\u200B/g, "");
+    uniprot_id = uniprot_id.replace(/\u2011/g, "-");
     var refseq_id = $("#refseq").val();
     var gene_name = $("#gene_name").val();
     var protein_name = $("#protein_name").val();
