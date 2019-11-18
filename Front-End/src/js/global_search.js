@@ -70,5 +70,5 @@ function openDetailPage(type, id){
     } else if (type == "glycan"){
         url = window.location.origin + "/glycan_detail.html?glytoucan_ac=" + id + "&gs=" + id;
     }
-    window.open(url);
+    location.href = url;
 }
