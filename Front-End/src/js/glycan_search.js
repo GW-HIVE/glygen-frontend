@@ -623,10 +623,10 @@ function populateExample() {
             examples = ["Homo sapiens"];
             break;
         case "protein":
-            examples = ["P14210-1"];
+            examples = ["P14210"];
             break;
         default:
-            examples = ["G17689DH", "P14210-1", "B4GALT1", "Homo sapiens"];
+            examples = ["G17689DH", "P14210", "B4GALT1", "Homo sapiens"];
             exampleText += "s";
             break;
     }

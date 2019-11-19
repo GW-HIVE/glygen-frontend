@@ -416,10 +416,10 @@ function populateExample() {
             examples = ["hsa:3082"];
             break;
         case "protein":
-            examples = ["P14210-1"];
+            examples = ["P14210"];
             break;
         default:
-            examples = ["P14210-1", "G17689DH", "hsa:3082", "Homo sapiens", "Deafness"];
+            examples = ["P14210", "G17689DH", "hsa:3082", "Homo sapiens", "Deafness"];
             exampleText += "s";
             break;
     }
