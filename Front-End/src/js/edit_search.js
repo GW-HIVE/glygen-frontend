@@ -78,7 +78,7 @@ function setFormValues(data) {
                 $("#comp_" + data.query.composition[i].residue + "_sel").val(getSelectionValue(data.query.composition[i].min, data.query.composition[i].max, res_curr));
                 $("#comp_" + data.query.composition[i].residue + "_min").val(data.query.composition[i].min);
                 $("#comp_" + data.query.composition[i].residue + "_max").val(data.query.composition[i].max);
-                 enableDisableMinMax(document.getElementById("comp_" + data.query.composition[i].residue + "_sel").value, document.getElementById("comp_" + data.query.composition[i].residue + "_min"),
+                setResidueMinMaxValue(document.getElementById("comp_" + data.query.composition[i].residue + "_sel"), document.getElementById("comp_" + data.query.composition[i].residue + "_min"),
                                       document.getElementById("comp_" + data.query.composition[i].residue + "_max"));
             }
         }

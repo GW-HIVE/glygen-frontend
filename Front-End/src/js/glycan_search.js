@@ -895,7 +895,7 @@ function getResidueDiv(name, residue, min, max) {
         <div class="col-sm-2"> \
             <input type="number"  \
              min=' + min +
-        ' max=' + parseInt(max - 1) +
+        ' max=' + parseInt(max) +
         ' class="form-control"' +
         ' id=' + 'comp_' + residue + '_min' +
         ' value=' + min +
