@@ -88,13 +88,7 @@ $(document).ready(function () {
                 createOption(glycanElement, result.glycan_type[x].name, result.glycan_type[x].name);
             }
 
-            residue_list = result.composition.map(function (res) {
-                // Special case for residue max value less than or equal to 1.
-                if (res.max <= 1) {
-                    res.max = 2;
-                }
-                return res;
-            });
+            residue_list = result.composition;
             var html = "";
             var other_residue = undefined;
             for (var x = 0; x < residue_list.length; x++) {
@@ -834,7 +828,7 @@ function setResidueMinMaxValue(select_control, min_val, max_val) {
         if (parseInt(max_val.value) == max || parseInt(max_val.value) == min)
             max_val.value = parseInt(max);
         min_val.min = parseInt(min);
-        min_val.max = parseInt(max - 1);
+        min_val.max = parseInt(min);
         max_val.min = parseInt(min + 1);
         max_val.max = parseInt(max);
         enableDisableMinMax(sel_control_value, min_val, max_val);
@@ -842,11 +836,9 @@ function setResidueMinMaxValue(select_control, min_val, max_val) {
         min_val.value = parseInt(min + 1);
         if (parseInt(max_val.value) == max || parseInt(max_val.value) == min)
             max_val.value = parseInt(max);
-        if (parseInt(max_val.value) == parseInt(min_val.value))
-            max_val.value = parseInt(min_val.value) + 1;
         min_val.min = parseInt(min + 1);
-        min_val.max = parseInt(max - 1);
-        max_val.min = parseInt(min + 2);
+        min_val.max = parseInt(max);
+        max_val.min = parseInt(min + 1);
         max_val.max = parseInt(max);
         enableDisableMinMax(sel_control_value, min_val, max_val);
     } else if (sel_control_value == "no") {
@@ -933,8 +925,8 @@ function onResidueMinMoveOut(inputMin, inputMax, selOption) {
         if (parseInt(inputMin.value) < parseInt(inputMin.min)) {
             inputMin.value = inputMin.min;
         }
-        if ((parseInt(inputMin.value) >= parseInt(inputMax.value)) && (selOption.value != "no")) {
-            inputMin.value = parseInt(inputMax.value) - 1;
+        if (parseInt(inputMin.value) > parseInt(inputMax.value)) {
+            inputMin.value = parseInt(inputMax.value);
         }
     } else if (inputMin.value == "") {
         if (selOption.value == "maybe") {
@@ -958,7 +950,10 @@ function onResidueMaxMoveOut(inputMax, inputMin, selOption) {
         if (parseInt(inputMax.value) > parseInt(inputMax.max)) {
             inputMax.value = inputMax.max;
         }
-        if ((parseInt(inputMax.value) <= parseInt(inputMin.value)) && (selOption.value != "no")) {
+        if ((parseInt(inputMax.value) < parseInt(inputMin.value)) && selOption.value == "yes") {
+            inputMax.value = parseInt(inputMin.value);
+        }
+        if ((parseInt(inputMax.value) <= parseInt(inputMin.value)) && selOption.value == "maybe") {
             inputMax.value = parseInt(inputMin.value) + 1;
         }
     } else if (inputMax.value == "") {
