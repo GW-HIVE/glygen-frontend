@@ -136,27 +136,30 @@
                         <a class="nav-link" href="#">Sequence</a>
                      </li>
                      <li class="nav-item nav-track nav-combinetrack" onclick="navglycoclick()">
-                        <!-- <i class="fa fa-caret-right" style="font-size:48px;color:red;margin-left:0"></i>
-                              <a class="nav-link" href="#">Glycosylation </a> <i class="fa fa-caret-top"></i> -->
                         <a class="nav-link" href="#">Glycosylation &nbsp;&nbsp;<i class="fa fa-caret-right" id="arrowanimation" aria-hidden="true" style="font-size:30px;color:black; position:relative; margin-top:6px;"></i></a>
                      </li>
                      <li id='reported_Nglycan' class="nav-item nav-track hidden indentsubnav">
-                        <a class="nav-link" href="#">N-Glycan</a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="N-Glycans reported at indicated site!">N-Glycan</a>
+                        
                      </li>
                      <li id='nonreported_Nglycan' class="nav-item nav-track hidden indentsubnav">
-                        <a class="nav-link" href="#">N-Glycan-Site </a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="Sites informatically predicted to be glycosylated">N-Glycan-Site</a>
+                       
                      </li>
                      <li id='reported_Oglycan' class="nav-item nav-track hidden indentsubnav">
-                        <a class="nav-link" href="#">O-Glycan</a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="O-Glycans reported at indicated site">O-Glycan</a>
+                
                      </li>
                      <li id='nonreported_Oglycan' class="nav-item nav-track hidden indentsubnav">
-                        <a class="nav-link" href="#">O-Glycan-Site </a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="Sites informatically predicted to be glycosylated">O-Glycan-Site</a>
+                      
                      </li>
                      <li id='reported_sequon' class="nav-item nav-track hidden indentsubnav">
-                        <a class="nav-link" href="#">N-Glycan-Sequon</a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="Consensus sequence for N-glycosylation">N-Glycan-Sequon</a>
+                       
                      </li>
                      <li class="nav-item nav-track">
-                        <a class="nav-link" href="#">Mutation</a>
+                              <a href="#"  class="nav-link" data-toggle="tooltip" title="The action or process of mutating.">Mutation</a>
                      </li>
 
                   </ul>
@@ -228,7 +231,9 @@
    <div w3-include-html="footer.html"></div>
    <div w3-include-html="footernote.html"></div>
    <script>
-
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
 
    </script>
    <script type="text/javascript" src="libraries/jquery/jquery-3.1.js"></script>
