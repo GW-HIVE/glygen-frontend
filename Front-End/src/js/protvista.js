@@ -23,7 +23,7 @@ function setupProtvista(data) {
 			type: "N-Linked-No-Image",
 			residues: [],
 			color: "red",
-			shape: "triangle"
+			shape: "triangle",
 		},
 		{
 			type: "O-Linked-With-Image",
@@ -74,7 +74,7 @@ function setupProtvista(data) {
 					shape: glycos[1].shape,
 					accession: data.uniprot.uniprot_canonical_ac,
 					type: glyco.residue,
-					tooltipContent: "<span>Glycosylation site without reported glycan at " + glyco.position + " </span>",
+					tooltipContent: "<span class=marker>Glycosylation site without reported glycan at " + glyco.position + ","+" Click to see site details. </span>",
 				});
 			}
 		} else if (glyco.type === "O-linked") {
@@ -97,7 +97,7 @@ function setupProtvista(data) {
 					shape: glycos[3].shape,
 					accession: data.uniprot.uniprot_canonical_ac,
 					type: glyco.residue,
-					tooltipContent: "<span>Glycosylation site without reported glycan at " + glyco.position + " </span>",
+					tooltipContent: "<span class=marker>Glycosylation site without reported glycan at " + glyco.position + ","+" Click to see site details. </span>",
 
 				});
 			}
@@ -112,7 +112,7 @@ function setupProtvista(data) {
 			shape: mutations[0].shape,
 			accession: data.uniprot.uniprot_canonical_ac,
 			type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
-			tooltipContent: "<span> annotation " + mutation.annotation + "</span>"
+			tooltipContent: "<span class=marker> annotation " + mutation.annotation + "</span>"
 
 		});
 	});
@@ -125,7 +125,7 @@ function setupProtvista(data) {
 			shape: glycos[4].shape,
 			accession: data.uniprot.uniprot_canonical_ac,
 		    type: "N-Glycan-Sequon",
-			tooltipContent: "<span>" + site_annotation.annotation + "</span>"
+			tooltipContent: "<span class=marker>" + site_annotation.annotation + "</span>"
 
 		});
 	});
