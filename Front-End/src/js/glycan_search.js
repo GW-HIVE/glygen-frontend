@@ -379,6 +379,7 @@ function submitvalues() {
     var glycan_id = document.getElementById("glycan_id").value;
     glycan_id = glycan_id.replace(/\u200B/g, "");
     glycan_id = glycan_id.replace(/\u2011/g, "-");
+    glycan_id = glycan_id.replace(/\n/g, "");
     var index = glycan_id.lastIndexOf(",");
     if (index > -1 && (index + 1) == glycan_id.length) {
         glycan_id = glycan_id.substr(0, index);
