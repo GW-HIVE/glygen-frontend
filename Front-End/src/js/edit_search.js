@@ -12,7 +12,11 @@
 function setFormValues(data) {
     if (data.query) {
         if (data.query.query_type){
-            $("#glycan_id").val(data.query.glytoucan_ac);
+            var glytoucan_id = data.query.glytoucan_ac;
+            if (glytoucan_id && glytoucan_id.length > 0) {
+                glytoucan_id = glytoucan_id + ',';
+            }
+            $("#glycan_id").val(glytoucan_id);
             $("#mass-drop").val(data.query.mass_type ? data.query.mass_type : mass_type_native);
         
             var min_range = native_mass_min;
@@ -88,7 +92,11 @@ function setFormValues(data) {
  */
 function setProteinFormValues(data) {
     if (data.query) {
-        $("#protein").val(data.query.uniprot_canonical_ac);
+        var uniprot_canonical_ac = data.query.uniprot_canonical_ac;
+        if (uniprot_canonical_ac && uniprot_canonical_ac.length > 0) {
+            uniprot_canonical_ac = uniprot_canonical_ac + ',';
+        }
+        $("#protein").val(uniprot_canonical_ac);
         var min = mass_min;
         var max = mass_max;
         if (data.query.mass) {
@@ -116,7 +124,11 @@ function setProteinFormValues(data) {
  */
 function setGlycoProteinFormValues(data) {
     if (data.query) {
-        $("#protein").val(data.query.uniprot_canonical_ac);
+        var uniprot_canonical_ac = data.query.uniprot_canonical_ac;
+        if (uniprot_canonical_ac && uniprot_canonical_ac.length > 0) {
+            uniprot_canonical_ac = uniprot_canonical_ac + ',';
+        }
+        $("#protein").val(uniprot_canonical_ac);
         var min = mass_min;
         var max = mass_max;
         if (data.query.mass) {
