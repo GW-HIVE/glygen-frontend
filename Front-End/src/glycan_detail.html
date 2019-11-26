@@ -228,7 +228,12 @@
 
                                 <li class="list-group"><strong>Composition:</strong>
                                     {{#composition}}
-                                    <a href="{{url}}" target="_blank">{{residue}}</a><sub>{{count}}</sub>
+                                        {{#url}}
+                                            <a href="{{url}}" target="_blank">{{residue}}</a><sub>{{count}}</sub>
+                                        {{/url}}
+                                        {{^url}}
+                                            {{residue}}<sub>{{count}}</sub>
+                                        {{/url}}
                                     {{/composition}}
                                     {{^composition}} No data available. {{/composition}}
                                 </li>
