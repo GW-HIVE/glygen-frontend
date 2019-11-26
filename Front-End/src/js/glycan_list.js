@@ -48,6 +48,15 @@ function buildSummary(queryInfo) {
         queryInfo.organism.organism_list = organism_name.join(' ' + queryInfo.organism.operation + ' ');
     }
 
+    if (queryInfo.composition) {
+        var residue_comp = undefined;
+        residue_comp = [];
+        for (var x = 0; x < queryInfo.composition.length; x++) {
+            var jsnObj = getJSON("../content/composition-search.json");
+            queryInfo.composition[x].short_name = jsnObj[queryInfo.composition[x].residue].short_name;
+        }
+    }
+
     if (queryInfo.glytoucan_ac) {
         queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.trim();
         var index = queryInfo.glytoucan_ac.lastIndexOf(",");

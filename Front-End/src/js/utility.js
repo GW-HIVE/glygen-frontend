@@ -528,6 +528,46 @@ function populateFromKeyValueStore(controlId, key, prefix, suffix, contentsIndex
     });
 }
 
+/**
+ * getJSON gets JSON object from the file.
+ * @param {string} file - json file path.
+ **/
+function getJSON(file){
+    var jsonObject = undefined;
+    $.ajax({
+               dataType: "json",
+               url: file,
+               async:false,
+               success: processData
+           });
+
+    function processData(data) {
+       jsonObject = data;
+  }
+
+    return jsonObject;
+}
+
+/**
+ * getSelectionValue returns selection control value based on min, max.
+ * @param {object} min - min value.
+ * @param {object} max - max value.
+ * @param {object} residue_min - residue min value.
+ * @param {object} residue_max - residue max value.
+ **/
+function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
+    var selection = "maybe";
+    
+    if (cur_min == residue_min && cur_max == residue_min){
+        selection = "no";
+    } else if (cur_min == residue_min && cur_max <= residue_max){
+        selection = "maybe";
+    } else if (cur_min > residue_min && cur_max <= residue_max){
+        selection = "yes";
+    }
+    return selection;
+}
+
 //Moved this function to navbar.js line 72
 // for Data and SPARQL link in header page
 //$(function () {

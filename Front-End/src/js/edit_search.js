@@ -71,11 +71,7 @@ function setFormValues(data) {
         if (data.query.composition){
             for (i = 0; i < data.query.composition.length; i++ ){
                 var res_curr = residue_list.filter(function(res) {return data.query.composition[i].residue == res.residue})[0];
-                if (res_curr){
-                    min = res_curr.min;
-                    max = res_curr.max;
-                }
-                $("#comp_" + data.query.composition[i].residue + "_sel").val(getSelectionValue(data.query.composition[i].min, data.query.composition[i].max, res_curr));
+                $("#comp_" + data.query.composition[i].residue + "_sel").val(getSelectionValue(data.query.composition[i].min, data.query.composition[i].max, res_curr.min, res_curr.max));
                 setResidueMinMaxValue(document.getElementById("comp_" + data.query.composition[i].residue + "_sel"), document.getElementById("comp_" + data.query.composition[i].residue + "_min"),
                                       document.getElementById("comp_" + data.query.composition[i].residue + "_max"));
                 $("#comp_" + data.query.composition[i].residue + "_min").val(data.query.composition[i].min);
@@ -83,25 +79,6 @@ function setFormValues(data) {
             }
         }
     }
-}
-
-/**
- * getSelectionValue returns selection control value based on min, max.
- * @param {object} min - min value.
- * @param {object} max - max value.
- * @param {object} init_residue - residue.
- */
-function getSelectionValue(min, max, residue) {
-    var selection = "maybe";
-    
-    if (min == residue.min && max == residue.min){
-        selection = "no";
-    } else if (min == residue.min && max <= residue.max){
-        selection = "maybe";
-    } else if (min > residue.min && max <= residue.max){
-        selection = "yes";
-    }
-    return selection;
 }
 
 /**
