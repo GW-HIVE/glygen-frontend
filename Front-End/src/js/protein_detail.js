@@ -287,7 +287,7 @@ function ajaxSuccess(data) {
         var hasfoundoma = false;
         var hasfoundmgi = false;
 
-        //var x = groupEvidences(data.isoforms);
+       if (data.orthologs){
         for(var i=0; i < data.orthologs.length; i++)
         {
             var databases = data.orthologs[i].databases;
@@ -303,6 +303,7 @@ function ajaxSuccess(data) {
                 }
             }
         }
+    }
 
 
         data.hasoma = hasfoundoma;
