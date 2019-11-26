@@ -82,13 +82,14 @@
             <script id="result_template" type="text/template">
                 {{#exact_match}}
                 <div class="row text-center">
-                    <li style="margin: 0px 0px 10px 0px">
+                    <li class="exact-match exact-match-margin">
                         <a href="#" onclick="openDetailPage('{{type}}', '{{id}}');return false;" target="_blank">
-                            Your input matches one {{type}}.</a>
-                    </li>           
-                </div>    
+                            Your input is an exact match to one {{type}}.
+                        </a>
+                    </li>       
+                </div>       
                 {{/exact_match}}
-                <div style="margin: 0px 0px 10px 0px"></div>
+                <div class="exact-match-margin"></div>
             <div class="row">
                 <!-- glycan results -->
                 {{#other_matches}}
