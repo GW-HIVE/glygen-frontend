@@ -48,14 +48,20 @@ function buildSummary(queryInfo) {
         queryInfo.organism.organism_list = organism_name.join(' ' + queryInfo.organism.operation + ' ');
     }
 
+    if (queryInfo.composition) {
+        var residue_comp = undefined;
+        residue_comp = [];
+        for (var x = 0; x < queryInfo.composition.length; x++) {
+            var jsnObj = getJSON("../content/composition-search.json");
+            queryInfo.composition[x].short_name = jsnObj[queryInfo.composition[x].residue].short_name;
+        }
+    }
+
     if (queryInfo.glytoucan_ac) {
         queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.trim();
-        var index = queryInfo.glytoucan_ac.lastIndexOf(",");
-        if (index > -1 && (index + 1) == queryInfo.glytoucan_ac.length) {
-            queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.substr(0, index) + "\u200B";
-        }
         queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.replace(/,/g, ",\u200B");
         queryInfo.glytoucan_ac = queryInfo.glytoucan_ac.replace(/-/g, "\u2011");
+        queryInfo.glytoucan_ac = queryInfo.glytoucan_ac + "\u200B";
     }
 
     queryInfo.execution_time = moment().format('MMMM Do YYYY, h:mm:ss a')

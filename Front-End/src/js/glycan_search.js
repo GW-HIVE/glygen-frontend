@@ -89,17 +89,18 @@ $(document).ready(function () {
             }
 
             residue_list = result.composition;
+            var composition = getJSON("../content/composition-search.json");
+            for (var x = 0; x < residue_list.length; x++) {
+                residue_list[x].order_id = composition[residue_list[x].residue].order_id;
+                residue_list[x].subtext = composition[residue_list[x].residue].subtext;
+                residue_list[x].name = composition[residue_list[x].residue].name;
+                residue_list[x].short_name = composition[residue_list[x].residue].short_name;
+            }
+            residue_list = residue_list.sort((res1, res2) => parseInt(res1.order_id) - parseInt(res2.order_id));
             var html = "";
             var other_residue = undefined;
             for (var x = 0; x < residue_list.length; x++) {
-                if (residue_list[x].residue != "other") {
-                    html += getResidueDiv(residue_list[x].name, residue_list[x].residue, parseInt(residue_list[x].min), parseInt(residue_list[x].max));
-                } else {
-                    other_residue = residue_list[x];
-                }
-            }
-            if (other_residue != undefined) {
-                html += getResidueDiv(other_residue.name, other_residue.residue, parseInt(other_residue.min), parseInt(other_residue.max));
+                html += getResidueDiv(residue_list[x].name, residue_list[x].subtext, residue_list[x].residue, parseInt(residue_list[x].min), parseInt(residue_list[x].max));
             }
             $("#comp_tab").html(html);
 
@@ -150,12 +151,6 @@ $(document).ready(function () {
                 LoadDataList(id);
             }
             populateExample();
-
-            for (var x = 0; x < residue_list.length; x++) {
-                enableDisableMinMax(document.getElementById("comp_" + residue_list[x].residue + "_sel").value,
-                    document.getElementById("comp_" + residue_list[x].residue + "_min"),
-                    document.getElementById("comp_" + residue_list[x].residue + "_max"));
-            }
         }
 
     });
@@ -384,6 +379,10 @@ function submitvalues() {
     var glycan_id = document.getElementById("glycan_id").value;
     glycan_id = glycan_id.replace(/\u200B/g, "");
     glycan_id = glycan_id.replace(/\u2011/g, "-");
+    var index = glycan_id.lastIndexOf(",");
+    if (index > -1 && (index + 1) == glycan_id.length) {
+        glycan_id = glycan_id.substr(0, index);
+    }
     var selected_species = document.getElementById("species");
     var organism_operation = $("#species_operation").val();
     var organism = [];
@@ -827,48 +826,19 @@ function setResidueMinMaxValue(select_control, min_val, max_val) {
         min_val.value = parseInt(min);
         if (parseInt(max_val.value) == max || parseInt(max_val.value) == min)
             max_val.value = parseInt(max);
-        min_val.min = parseInt(min);
-        min_val.max = parseInt(min);
-        max_val.min = parseInt(min + 1);
-        max_val.max = parseInt(max);
-        enableDisableMinMax(sel_control_value, min_val, max_val);
     } else if (sel_control_value == "yes") {
         min_val.value = parseInt(min + 1);
         if (parseInt(max_val.value) == max || parseInt(max_val.value) == min)
             max_val.value = parseInt(max);
-        min_val.min = parseInt(min + 1);
-        min_val.max = parseInt(max);
-        max_val.min = parseInt(min + 1);
-        max_val.max = parseInt(max);
-        enableDisableMinMax(sel_control_value, min_val, max_val);
     } else if (sel_control_value == "no") {
         min_val.value = parseInt(min);
         max_val.value = parseInt(min);
-        min_val.min = parseInt(min);
-        min_val.max = parseInt(min);
-        max_val.min = parseInt(min);
-        max_val.max = parseInt(min);
-        enableDisableMinMax(sel_control_value, min_val, max_val);
     }
-}
 
-/**
- * enableDisableMinMax enables disables min, max value controls.
- * @param {string} sel_control_value - select control value.
- * @param {object} min_val - min value control.
- * @param {object} max_val - max value control.
- * */
-function enableDisableMinMax(sel_control_value, min_val, max_val) {
-    if (sel_control_value == "maybe") {
-        min_val.readOnly = true;
-        max_val.readOnly = false;
-    } else if (sel_control_value == "yes") {
-        min_val.readOnly = false;
-        max_val.readOnly = false;
-    } else if (sel_control_value == "no") {
-        min_val.readOnly = true;
-        max_val.readOnly = true;
-    }
+    min_val.min = parseInt(min);
+    min_val.max = parseInt(max);
+    max_val.min = parseInt(min);
+    max_val.max = parseInt(max);
 }
 
 /**
@@ -878,11 +848,12 @@ function enableDisableMinMax(sel_control_value, min_val, max_val) {
  * @param {int} min - max value.
  * @param {int} max - max value.
  * */
-function getResidueDiv(name, residue, min, max) {
+function getResidueDiv(name, subtext, residue, min, max) {
     var residueDiv =
         '<div class="col-sm-12"> \
         <label class="control-label col-sm-5 text-left" for="comp_search">' +
         name + ': ' +
+        '<br> <span style="font-size:10px; font-style: italic;">' + subtext + '</span>' + 
         '</label> \
         <div class="col-sm-3">' +
         '<select id=' + 'comp_' + residue + '_sel' +
@@ -923,20 +894,35 @@ function getResidueDiv(name, residue, min, max) {
 function onResidueMinMoveOut(inputMin, inputMax, selOption) {
     if (inputMin.value != "") {
         if (parseInt(inputMin.value) < parseInt(inputMin.min)) {
-            inputMin.value = inputMin.min;
+            inputMin.value = parseInt(inputMin.min);
         }
-        if (parseInt(inputMin.value) > parseInt(inputMax.value)) {
-            inputMin.value = parseInt(inputMax.value);
+
+        if (parseInt(inputMin.value) > parseInt(inputMax.value) && selOption.value != "no") {
+            if (parseInt(inputMin.value) < parseInt(inputMax.max)) {
+                inputMin.value = parseInt(inputMin.value);
+                inputMax.value = parseInt(inputMin.value);
+            } else {
+                inputMin.value = parseInt(inputMin.max);
+                inputMax.value = parseInt(inputMin.max);
+            }
+        } else if (parseInt(inputMin.value) > parseInt(inputMin.min) && selOption.value == "no") {
+            if (parseInt(inputMin.value) > parseInt(inputMax.max)) {
+                inputMin.value = parseInt(inputMax.max);
+                inputMax.value = parseInt(inputMax.max);
+            } else {
+                inputMax.value = parseInt(inputMin.value);
+            }
         }
     } else if (inputMin.value == "") {
         if (selOption.value == "maybe") {
-            inputMin.value = inputMin.min;
+            inputMin.value = parseInt(inputMin.min);
         } else if (selOption.value == "yes") {
-            inputMin.value = inputMin.min;
+            inputMin.value = parseInt(inputMin.min) + 1;
         } else if (selOption.value == "no") {
-            inputMin.value = inputMin.min;
+            inputMin.value = parseInt(inputMin.min);
         }
     }
+    selOption.value = getSelectionValue(parseInt(inputMin.value), parseInt(inputMax.value), parseInt(inputMin.min), parseInt(inputMax.max));
 }
 
 /**
@@ -948,21 +934,32 @@ function onResidueMinMoveOut(inputMin, inputMax, selOption) {
 function onResidueMaxMoveOut(inputMax, inputMin, selOption) {
     if (inputMax.value != "") {
         if (parseInt(inputMax.value) > parseInt(inputMax.max)) {
-            inputMax.value = inputMax.max;
+            inputMax.value = parseInt(inputMax.max);
         }
-        if ((parseInt(inputMax.value) < parseInt(inputMin.value)) && selOption.value == "yes") {
-            inputMax.value = parseInt(inputMin.value);
-        }
-        if ((parseInt(inputMax.value) <= parseInt(inputMin.value)) && selOption.value == "maybe") {
-            inputMax.value = parseInt(inputMin.value) + 1;
+        if (parseInt(inputMax.value) < parseInt(inputMin.value)  && selOption.value != "yes") {
+            if (parseInt(inputMax.value) > parseInt(inputMin.min)) {
+                inputMax.value = parseInt(inputMax.value);
+                inputMin.value = parseInt(inputMax.value);
+            } else {
+                inputMax.value = parseInt(inputMin.min);
+                inputMin.value = parseInt(inputMin.min);
+            }
+        } else if (parseInt(inputMax.value) < parseInt(inputMin.value)  &&  selOption.value == "yes") {
+            if (parseInt(inputMax.value) < parseInt(inputMin.min)) {
+                inputMin.value = parseInt(inputMin.min);
+                inputMax.value = parseInt(inputMin.min);
+            } else {
+                inputMin.value = parseInt(inputMax.value);
+            }
         }
     } else if (inputMax.value == "") {
         if (selOption.value == "maybe") {
-            inputMax.value = inputMax.max;
+            inputMax.value = parseInt(inputMax.max);
         } else if (selOption.value == "yes") {
-            inputMax.value = inputMax.max;
+            inputMax.value = parseInt(inputMax.max);
         } else if (selOption.value == "no") {
-            inputMax.value = inputMax.min;
+            inputMax.value = parseInt(inputMax.min);
         }
     }
+    selOption.value = getSelectionValue(parseInt(inputMin.value), parseInt(inputMax.value), parseInt(inputMin.min), parseInt(inputMax.max));
 }

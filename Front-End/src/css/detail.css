@@ -50,10 +50,22 @@
     max-width: 550px;
 }
 
-.icon-wrapper1 {
-    height: 45px;
-    width: 45px;
+.subsum-brow-icon-wrapper {
+    height: 30px;
+    width: 30px;
     float: right;
+}
+
+.subsum-brow {
+    background-color: #fff;
+    border-color: #2e6da4;
+    float: right;
+}
+
+.subsum-brow:hover,
+.subsum-brow:focus {
+  border-color: #555;
+  background-color: #D8D8D8;
 }
 
 .img-cartoon1:hover {
