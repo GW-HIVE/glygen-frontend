@@ -47,6 +47,7 @@ a.result-count{
     font-size: 1.125em;
     font-family: "Verdana", "Geneva", sans-serif;
     line-height: 1.4;
+    font-weight: bold;
 }
 
 .exact-match-margin {

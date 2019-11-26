@@ -53,7 +53,9 @@ function buildSummary(queryInfo) {
         residue_comp = [];
         for (var x = 0; x < queryInfo.composition.length; x++) {
             var jsnObj = getJSON("../content/composition-search.json");
-            queryInfo.composition[x].short_name = jsnObj[queryInfo.composition[x].residue].short_name;
+            if (parseInt(queryInfo.composition[x].max) > 0) {
+                queryInfo.composition[x].short_name = jsnObj[queryInfo.composition[x].residue].short_name;
+            }
         }
     }
 

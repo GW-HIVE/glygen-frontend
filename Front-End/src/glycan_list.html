@@ -245,12 +245,14 @@
 
 
                         {{#composition}}
-                        <tr>
-                            <td>{{{short_name}}}:</td>
-                            <td>
-                                {{min}} - {{max}}
-                            </td>
-                        </tr>
+                            {{#short_name}}
+                            <tr>
+                                <td>{{{short_name}}}:</td>
+                                <td>
+                                    {{min}} - {{max}}
+                                </td>
+                            </tr>
+                            {{/short_name}}
                         {{/composition}}
 
                         {{#term}}
