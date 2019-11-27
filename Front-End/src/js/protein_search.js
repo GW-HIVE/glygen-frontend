@@ -259,10 +259,11 @@ function ajaxProteinSearchSuccess() {
         "id": parseInt(selected_species.value),
         "name": selected_species.options[selected_species.selectedIndex].text
     };
-    var uniprot_id = $("#protein").val();
+    var uniprot_id = $("#protein").val().trim();
     uniprot_id = uniprot_id.replace(/\u200B/g, "");
     uniprot_id = uniprot_id.replace(/\u2011/g, "-");
-    uniprot_id = uniprot_id.replace(/\n/g, "");
+    uniprot_id = uniprot_id.replace(/\s+/g, ",");
+    uniprot_id = uniprot_id.replace(/,+/g, ",");
     var index = uniprot_id.lastIndexOf(",");
     if (index > -1 && (index + 1) == uniprot_id.length) {
         uniprot_id = uniprot_id.substr(0, index);
