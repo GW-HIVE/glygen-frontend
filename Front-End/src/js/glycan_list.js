@@ -51,8 +51,8 @@ function buildSummary(queryInfo) {
     if (queryInfo.composition) {
         var residue_comp = undefined;
         residue_comp = [];
+        var jsnObj = getJSON(getCompoSearchJSONFile());
         for (var x = 0; x < queryInfo.composition.length; x++) {
-            var jsnObj = getJSON("../content/composition-search.json");
             if (parseInt(queryInfo.composition[x].max) > 0) {
                 queryInfo.composition[x].short_name = jsnObj[queryInfo.composition[x].residue].short_name;
             }

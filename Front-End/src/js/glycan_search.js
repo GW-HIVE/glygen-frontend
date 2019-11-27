@@ -92,7 +92,7 @@ $(document).ready(function () {
             }
 
             residue_list = result.composition;
-            var composition = getJSON("../content/composition-search.json");
+            var composition = getJSON(getCompoSearchJSONFile());
             for (var x = 0; x < residue_list.length; x++) {
                 residue_list[x].order_id = composition[residue_list[x].residue].order_id;
                 residue_list[x].subtext = composition[residue_list[x].residue].subtext;
@@ -455,7 +455,7 @@ function resetAdvanced() {
     if ($('.nav-tabs .active').text().trim() == "Composition Search") {
         compSearchRedoReset();
         if (compSearchStateChanged(residue_list)) {
-            saveCurrentResidueStatesToUndoList();
+            saveCurrentResidueStatesToUndoList(residue_list);
         }
         setFormValues({
             query: {
@@ -984,7 +984,7 @@ function setCompSearchValues(option) {
     });
     compSearchRedoReset();
     if (compSearchStateChanged(residue_list_copy)) {
-        saveCurrentResidueStatesToUndoList();
+        saveCurrentResidueStatesToUndoList(residue_list_copy);
     }
     setFormValues({
         query: {
@@ -1091,12 +1091,17 @@ function saveResidueStateToUndoList(residue, min, max) {
 
 /**
  * saveCurrentResidueStatesToUndoList saves current residue states to undo list.
+ *  * @param {array} updated_res_list - residue list.
  */
-function saveCurrentResidueStatesToUndoList() {
+function saveCurrentResidueStatesToUndoList(updated_res_list) {
     var residue_comp = [];
-    for (var x = 0; x < residue_list.length; x++) {
-        var residue = { "residue": residue_list[x].residue, "min": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_min").value), "max": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_max").value) }
-        residue_comp.push(residue);
+    for (var x = 0; x < updated_res_list.length; x++) {
+        var res_min = parseInt(document.getElementById("comp_" + updated_res_list[x].residue + "_min").value);
+        var res_max = parseInt(document.getElementById("comp_" + updated_res_list[x].residue + "_max").value);
+        if (res_min != parseInt(updated_res_list[x].min) || res_max != parseInt(updated_res_list[x].max)) {
+            var residue = { "residue": updated_res_list[x].residue, "min": res_min, "max": res_max }
+            residue_comp.push(residue);
+        }
     }
     undo_residue_stack.push(residue_comp);
     if (undo_residue_stack.length > 0) {

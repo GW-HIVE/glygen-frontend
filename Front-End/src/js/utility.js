@@ -568,6 +568,14 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     return selection;
 }
 
+/**
+ * getCompoSearchJSONFile returns composition search JSON File.
+ **/
+function getCompoSearchJSONFile() {
+    var getCompoSearchJSONFile = "../content/composition-search.json";
+    return getCompoSearchJSONFile;
+}
+
 //Moved this function to navbar.js line 72
 // for Data and SPARQL link in header page
 //$(function () {
