@@ -76,8 +76,8 @@ function setFormValues(data) {
             for (i = 0; i < data.query.composition.length; i++ ){
                 var res_curr = residue_list.filter(function(res) {return data.query.composition[i].residue == res.residue})[0];
                 $("#comp_" + data.query.composition[i].residue + "_sel").val(getSelectionValue(data.query.composition[i].min, data.query.composition[i].max, res_curr.min, res_curr.max));
-                setResidueMinMaxValue(document.getElementById("comp_" + data.query.composition[i].residue + "_sel"), document.getElementById("comp_" + data.query.composition[i].residue + "_min"),
-                                      document.getElementById("comp_" + data.query.composition[i].residue + "_max"));
+                setResidueMinMaxValue(document.getElementById("comp_" + data.query.composition[i].residue + "_min"), document.getElementById("comp_" + data.query.composition[i].residue + "_max"), 
+                                        res_curr.min, res_curr.max);
                 $("#comp_" + data.query.composition[i].residue + "_min").val(data.query.composition[i].min);
                 $("#comp_" + data.query.composition[i].residue + "_max").val(data.query.composition[i].max);
             }

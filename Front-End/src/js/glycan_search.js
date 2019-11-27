@@ -46,6 +46,9 @@ var perMet_mass_max;
 var sugar_mass_min;
 var sugar_mass_max;
 var residue_list;
+var undo_residue_stack = [];
+var redo_residue_stack = [];
+var undo_residue_val;
 $(document).ready(function () {
 
     $(".organism").chosen({
@@ -371,7 +374,11 @@ function submitvalues() {
     $('#loading_image').fadeIn();
 
     var prevListId = getParameterByName("id") || "";
-    activityTracker("user", prevListId, "Performing Advanced Search");
+    if ($('.nav-tabs .active').text().trim() == "Composition Search") {
+        activityTracker("user", prevListId, "Performing Composition Search");
+    } else if ($('.nav-tabs .active').text().trim() == "Advanced Search") {
+        activityTracker("user", prevListId, "Performing Advanced Search");
+    }
     var query_type = "search_glycan";
     var mass_type = document.getElementById("mass-drop").value;
     var mass_slider = document.getElementById("sliderbox-slider").noUiSlider.get();
@@ -400,9 +407,10 @@ function submitvalues() {
     var glycan_motif = document.getElementById("motif").value;
     var pmid = document.getElementById("pmid").value;
     var formObject = undefined;
+    var searchType = "Advanced Search: ";
     if ($('.nav-tabs .active').text().trim() == "Composition Search") {
-        var residue_comp = undefined;
-        residue_comp = [];
+        searchType = "Composition Search: ";
+        var residue_comp = [];
         for (var x = 0; x < residue_list.length; x++) {
             var residue = { "residue": residue_list[x].residue, "min": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_min").value), "max": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_max").value) }
             residue_comp.push(residue);
@@ -423,14 +431,14 @@ function submitvalues() {
             if (results.error_code) {
                 displayErrorByCode(results.error_code, results.field);
                 // activityTracker("error", "", results.error_code);
-                activityTracker("error", "", "Advanced Search: " + results.error_code + " for " + json);
+                activityTracker("error", "", searchType + results.error_code + " for " + json);
                 $('#loading_image').fadeOut();
             } else if ((results.list_id !== undefined) && (results.list_id.length === 0)) {
                 displayErrorByCode('no-results-found');
-                activityTracker("user", "", "Advanced Search: no result found for " + json);
+                activityTracker("user", "", searchType + "no result found for " + json);
                 $('#loading_image').fadeOut();
             } else {
-                activityTracker("user", prevListId + ">" + results.list_id, "Advanced Search: Searched with modified parameters");
+                activityTracker("user", prevListId + ">" + results.list_id, searchType + "Searched with modified parameters");
                 window.location = './glycan_list.html?id=' + results.list_id;
                 $('#loading_image').fadeOut();
             }
@@ -444,6 +452,10 @@ function submitvalues() {
  */
 function resetAdvanced() {
     if ($('.nav-tabs .active').text().trim() == "Composition Search") {
+        compSearchRedoReset();
+        if (compSearchStateChanged(residue_list)) {
+            saveCurrentResidueStatesToUndoList();
+        }
         setFormValues({
             query: {
                 composition: residue_list
@@ -806,23 +818,24 @@ function ajaxListSuccess(data) {
 ------------------------- */
 
 /**
- * setResidueMinMaxValue sets min max values based on user selection.
+ * onSelControlChange sets min, max values based on user selection.
  * @param {object} select_control - Select control.
  * @param {object} min_val - min value control.
  * @param {object} max_val - max value control.
+ * @param {string} residue - residue id.
  * */
-function setResidueMinMaxValue(select_control, min_val, max_val) {
+function onSelControlChange(select_control, min_val, max_val, residue) {
+    compSearchRedoReset();
+    saveResidueStateToUndoList(residue, parseInt(min_val.value), parseInt(max_val.value));
     var sel_control_value = select_control.value;
     var sel_id = select_control.id;
     var min = undefined;
     var max = undefined;
-
-    var sel_residue = residue_list.filter(function (res) { return sel_id == 'comp_' + res.residue + '_sel' })[0];
+    var sel_residue = residue_list.filter(function (res) { return residue ==  res.residue })[0];
     if (sel_residue) {
         min = parseInt(sel_residue.min);
         max = parseInt(sel_residue.max);
     }
-
     if (sel_control_value == "maybe") {
         min_val.value = parseInt(min);
         if (parseInt(max_val.value) == max || parseInt(max_val.value) == min)
@@ -835,55 +848,21 @@ function setResidueMinMaxValue(select_control, min_val, max_val) {
         min_val.value = parseInt(min);
         max_val.value = parseInt(min);
     }
-
-    min_val.min = parseInt(min);
-    min_val.max = parseInt(max);
-    max_val.min = parseInt(min);
-    max_val.max = parseInt(max);
+    setResidueMinMaxValue(min_val, max_val, min, max);
 }
 
 /**
- * getResidueDiv gets html for residue div.
- * @param {string} name - residue name.
+ * onMinMaxFocus sets residue values to undo_residue_val.
+ * @param {object} min_val_cont - min value control.
+ * @param {object} max_val_cont - max value control.
  * @param {string} residue - residue id.
- * @param {int} min - max value.
- * @param {int} max - max value.
  * */
-function getResidueDiv(name, subtext, residue, min, max) {
-    var residueDiv =
-        '<div class="col-sm-12"> \
-        <label class="control-label col-sm-5 text-left" for="comp_search">' +
-        name + ': ' +
-        '<br> <span style="font-size:10px; font-style: italic;">' + subtext + '</span>' + 
-        '</label> \
-        <div class="col-sm-3">' +
-        '<select id=' + 'comp_' + residue + '_sel' +
-        ' onchange="setResidueMinMaxValue(this, comp_' + residue + '_min, comp_' + residue + '_max)"> \
-                <option value="maybe">Maybe</option> \
-                <option value="yes">Yes</option> \
-                <option value="no">No</option> \
-            </select> \
-        </div> \
-        <div class="col-sm-2"> \
-            <input type="number"  \
-             min=' + min +
-        ' max=' + parseInt(max) +
-        ' class="form-control"' +
-        ' id=' + 'comp_' + residue + '_min' +
-        ' value=' + min +
-        ' onblur="onResidueMinMoveOut(this, comp_' + residue + '_max, comp_' + residue + '_sel)"> \
-        </div> \
-        <div class="col-sm-2"> \
-            <input type="number" \
-            min=' + parseInt(min + 1) +
-        ' max=' + max +
-        ' class="form-control"' +
-        ' id=' + 'comp_' + residue + '_max' +
-        ' value=' + max +
-        ' onblur="onResidueMaxMoveOut(this, comp_' + residue + '_min, comp_' + residue + '_sel)"> \
-        </div> \
-    </div >';
-    return residueDiv;
+function onMinMaxFocus(min_val_cont, max_val_cont, residue) {
+    undo_residue_val = {
+        "residue": residue,
+        "min": parseInt(min_val_cont.value),
+        "max": parseInt(max_val_cont.value)
+    };
 }
 
 /**
@@ -891,13 +870,17 @@ function getResidueDiv(name, subtext, residue, min, max) {
  * @param {object} inputMin - min value control.
  * @param {object} inputMax - max value control.
  * @param {object} selOption - select control.
+ * @param {string} residue - residue id.
  * */
-function onResidueMinMoveOut(inputMin, inputMax, selOption) {
+function onResidueMinMoveOut(inputMin, inputMax, selOption, residue) {
+    compSearchRedoReset();
+    if (undo_residue_val.residue == residue && parseInt(undo_residue_val.min) != parseInt(inputMin.value)) {
+        saveResidueStateToUndoList(undo_residue_val.residue, parseInt(undo_residue_val.min), parseInt(undo_residue_val.max));
+    }
     if (inputMin.value != "") {
         if (parseInt(inputMin.value) < parseInt(inputMin.min)) {
             inputMin.value = parseInt(inputMin.min);
         }
-
         if (parseInt(inputMin.value) > parseInt(inputMax.value) && selOption.value != "no") {
             if (parseInt(inputMin.value) < parseInt(inputMax.max)) {
                 inputMin.value = parseInt(inputMin.value);
@@ -931,8 +914,13 @@ function onResidueMinMoveOut(inputMin, inputMax, selOption) {
  * @param {string} inputMax - max value control.
  * @param {string} inputMin - min value control.
  * @param {string} selOption - select control.
+ * @param {string} residue - residue id.
  * */
-function onResidueMaxMoveOut(inputMax, inputMin, selOption) {
+function onResidueMaxMoveOut(inputMax, inputMin, selOption, residue) {
+    compSearchRedoReset();
+    if (undo_residue_val.residue == residue && parseInt(undo_residue_val.max) != parseInt(inputMax.value)) {
+        saveResidueStateToUndoList(undo_residue_val.residue, parseInt(undo_residue_val.min), parseInt(undo_residue_val.max));
+    }
     if (inputMax.value != "") {
         if (parseInt(inputMax.value) > parseInt(inputMax.max)) {
             inputMax.value = parseInt(inputMax.max);
@@ -963,4 +951,201 @@ function onResidueMaxMoveOut(inputMax, inputMin, selOption) {
         }
     }
     selOption.value = getSelectionValue(parseInt(inputMin.value), parseInt(inputMax.value), parseInt(inputMin.min), parseInt(inputMax.max));
+}
+
+/**
+ * setResidueMinMaxValue sets min max values for min, max controls.
+ * @param {object} min_val_cont - min value control.
+ * @param {object} max_val_cont - max value control.
+ * @param {object} min - min value.
+ * @param {object} max - max value.
+ * */
+function setResidueMinMaxValue(min_val_cont, max_val_cont, min, max) {
+    min_val_cont.min = parseInt(min);
+    min_val_cont.max = parseInt(max);
+    max_val_cont.min = parseInt(min);
+    max_val_cont.max = parseInt(max);
+}
+
+/**
+ * setCompSearchValues All Yes or All No button handler.
+ * @param {string} option specifies "yes" or "no" option.
+ */
+function setCompSearchValues(option) {
+    var residue_list_copy = residue_list.slice();
+    residue_list_copy = residue_list_copy.map(function(res) {
+        residue = {
+            "residue" : res.residue,
+            "min" : option == "yes" ? parseInt(res.min) + 1 : parseInt(res.min),
+            "max" : option == "yes" ? parseInt(res.max) : parseInt(res.min)
+        };
+        return residue;
+    });
+    compSearchRedoReset();
+    if (compSearchStateChanged(residue_list_copy)) {
+        saveCurrentResidueStatesToUndoList();
+    }
+    setFormValues({
+        query: {
+            composition: residue_list_copy
+        }
+    });
+}
+
+/**
+ * compSearchUndoRedo undo or redo button handler.
+ * @param {string} option specifies "undo" or "redo" option.
+ */
+function compSearchUndoRedo(option) {
+    var pre_state = undefined;
+    var cur_state = undefined;
+    if (option == "undo") {
+        pre_state = undo_residue_stack.pop();
+        cur_state = getCurrentResidueState(pre_state);
+        redo_residue_stack.push(cur_state);
+    }
+    if (option == "redo") {
+        pre_state = redo_residue_stack.pop();
+        cur_state = getCurrentResidueState(pre_state);
+        undo_residue_stack.push(cur_state);
+    }
+    setFormValues({
+        query: {
+            composition: pre_state
+        }
+    });
+    if (undo_residue_stack.length > 0) {
+        $('#comp_undo_btn').prop('disabled', false);
+    } else {
+        $('#comp_undo_btn').prop('disabled', true);
+    }
+    if (redo_residue_stack.length > 0) {
+        $('#comp_redo_btn').prop('disabled', false);
+    } else {
+        $('#comp_redo_btn').prop('disabled', true);
+    }
+}
+
+/**
+ * compSearchRedoReset resets redo list.
+ */
+function compSearchRedoReset() {
+    redo_residue_stack = [];
+    if (redo_residue_stack.length < 1) {
+        $('#comp_redo_btn').prop('disabled', true);
+    }
+}
+
+/**
+ * compSearchStateChanged checks if current residue states are changed compared to values in residue list.
+ * @param {array} residue_state_list - residue list.
+ * */
+function compSearchStateChanged(residue_state_list) {
+    var stateChanged = false;
+    for (var x = 0; x < residue_state_list.length; x++) {
+        if (parseInt(document.getElementById("comp_" + residue_state_list[x].residue + "_min").value) != parseInt(residue_state_list[x].min)) {
+            stateChanged = true;
+            break;
+        }
+        if (parseInt(document.getElementById("comp_" + residue_state_list[x].residue + "_max").value) != parseInt(residue_state_list[x].max)) {
+            stateChanged = true;
+            break;
+        }
+    }
+    return stateChanged;
+}
+
+/**
+ * getCurrentResidueState gets current residue states based on residue list.
+ * @param {array} residue_state_list - residue list.
+ * */
+function getCurrentResidueState(residue_state_list) {
+    var cur_residue_list = [];
+    for (var x = 0; x < residue_state_list.length; x++) {
+        var residue = { "residue": residue_state_list[x].residue, "min": parseInt(document.getElementById("comp_" + residue_state_list[x].residue + "_min").value), "max": parseInt(document.getElementById("comp_" + residue_state_list[x].residue + "_max").value) }
+        cur_residue_list.push(residue);
+    }
+    return cur_residue_list;
+}
+
+/**
+ * saveResidueStateToUndoList saves residue state to undo list.
+ * @param {string} residue - residue id.
+ * @param {int} min - min value.
+ * @param {int} max - max value.
+ * */
+function saveResidueStateToUndoList(residue, min, max) {
+    var res_list = [];
+    var res = {
+        "residue": residue,
+        "min": parseInt(min),
+        "max": parseInt(max)
+    };
+    res_list.push(res);
+    undo_residue_stack.push(res_list);
+    if (undo_residue_stack.length > 0) {
+        $('#comp_undo_btn').prop('disabled', false);
+    }
+}
+
+/**
+ * saveCurrentResidueStatesToUndoList saves current residue states to undo list.
+ */
+function saveCurrentResidueStatesToUndoList() {
+    var residue_comp = [];
+    for (var x = 0; x < residue_list.length; x++) {
+        var residue = { "residue": residue_list[x].residue, "min": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_min").value), "max": parseInt(document.getElementById("comp_" + residue_list[x].residue + "_max").value) }
+        residue_comp.push(residue);
+    }
+    undo_residue_stack.push(residue_comp);
+    if (undo_residue_stack.length > 0) {
+        $('#comp_undo_btn').prop('disabled', false);
+    }
+}
+
+/**
+ * getResidueDiv gets html for residue div.
+ * @param {string} name - residue name.
+ * @param {string} subtext - residue subtext.
+ * @param {string} residue - residue id.
+ * @param {int} min - max value.
+ * @param {int} max - max value.
+ * */
+function getResidueDiv(name, subtext, residue, min, max) {
+    var residueDiv =
+        '<div class="col-sm-12"> \
+        <label class="control-label col-sm-5 text-left" for="comp_search">' +
+        name + ': ' +
+        '<br> <span style="font-size:10px; font-style: italic;">' + subtext + '</span>' + 
+        '</label> \
+        <div class="col-sm-3">' +
+        '<select id=' + 'comp_' + residue + '_sel' +
+        ' onchange="onSelControlChange(this, comp_' + residue + '_min, comp_' + residue + '_max, \'' + residue + '\')"> \
+                <option value="maybe">Maybe</option> \
+                <option value="yes">Yes</option> \
+                <option value="no">No</option> \
+            </select> \
+        </div> \
+        <div class="col-sm-2"> \
+            <input type="number"  \
+             min=' + min +
+        ' max=' + parseInt(max) +
+        ' class="form-control"' +
+        ' id=' + 'comp_' + residue + '_min' +
+        ' value=' + min +
+        ' onblur="onResidueMinMoveOut(this, comp_' + residue + '_max, comp_' + residue + '_sel, \'' + residue + '\')"' +
+        ' onfocus="onMinMaxFocus(this, comp_' + residue + '_max, \'' + residue + '\')"> \
+        </div> \
+        <div class="col-sm-2"> \
+            <input type="number" \
+            min=' + parseInt(min + 1) +
+        ' max=' + max +
+        ' class="form-control"' +
+        ' id=' + 'comp_' + residue + '_max' +
+        ' value=' + max +
+        ' onblur="onResidueMaxMoveOut(this, comp_' + residue + '_min, comp_' + residue + '_sel, \'' + residue + '\')"' +
+        ' onfocus="onMinMaxFocus(comp_' + residue + '_min, this, \'' + residue + '\')"> \
+        </div> \
+    </div >';
+    return residueDiv;
 }

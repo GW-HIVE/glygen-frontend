@@ -507,10 +507,32 @@
                                         <input 
                                             type="button" 
                                             class="btn-lg btn-primary-clear-fields adv-top-button"
+                                            value="All No" 
+                                            onclick="setCompSearchValues('no')">
+                                        <input 
+                                            type="button" 
+                                            class="btn-lg btn-primary-clear-fields adv-top-button"
+                                            value="All Yes" 
+                                            onclick="setCompSearchValues('yes')">
+                                        <input 
+                                            type="button" 
+                                            class="btn-lg btn-primary-clear-fields adv-top-button"
                                             value="Clear Fields" 
                                             onclick="resetAdvanced()">
+                                        <input id="comp_undo_btn"
+                                            type="button" 
+                                            class="btn-lg btn-primary-clear-fields adv-top-button"
+                                            value="Undo" 
+                                            disabled=true
+                                            onclick="compSearchUndoRedo('undo')">
+                                        <input id="comp_redo_btn"
+                                            type="button" 
+                                            class="btn-lg btn-primary-clear-fields adv-top-button"
+                                            value="Redo" 
+                                            disabled=true
+                                            onclick="compSearchUndoRedo('redo')">
                                         <input type="button" 
-                                            class="btn-lg btn-primary adv-top-button" 
+                                            class="btn-lg btn-primary adv-right-button" 
                                             value="Search Glycan"
                                             onclick="submitvalues()">
                                     </div>
