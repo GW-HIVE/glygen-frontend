@@ -364,7 +364,7 @@ function downloadPrompt() {
  * This function opens the Subsumption browser page.
  */
 function openSubsumptionbrowser(glytoucan_ac){
-    var url = "https://raw.githack.com/glygen-glycan-data/GNOme/master/restrictions/GNOme_GlyGen.browser.html?focus=" + glytoucan_ac;
+    var url = "https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" + glytoucan_ac;
     window.open(url);
 }
 
