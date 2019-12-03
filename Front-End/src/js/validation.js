@@ -38,12 +38,12 @@ function validatePathwayID(input) {
 * validation for each field
 */
 function validateProteinAcc(input) {
-    var validLength = (input.value.length <=5000);
+    var validLength = (input.value.length <=2500);
     if (validLength) {
         document.getElementById("proteinAccMsg").innerHTML = " ";
         return true;
     } else {
-        document.getElementById("proteinAccMsg").innerHTML = "Entry is too long - max length is 12.";
+        document.getElementById("proteinAccMsg").innerHTML = "Entry is too long - max length is 2500.";
         return false;
     }
 }
@@ -179,12 +179,12 @@ function validateMotifName(input) {
 * validation for each field
 */
 function validateGlycanAcc(input) {
-    var validLength = (input.value.length <= 5000);
+    var validLength = (input.value.length <= 2500);
     if (validLength) {
         document.getElementById("glycanAccMsg").innerHTML = " ";
         return true;
     } else {
-        document.getElementById("glycanAccMsg").innerHTML = "Entry is too long - max length is 8.";
+        document.getElementById("glycanAccMsg").innerHTML = "Entry is too long - max length is 2500.";
         return false;
     }
 }
