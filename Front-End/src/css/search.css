@@ -197,6 +197,10 @@ select {
     color: #2F78B7;
 }
 
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
 /*------------------------------------
     Tutorial Section
 -------------------------------------*/
