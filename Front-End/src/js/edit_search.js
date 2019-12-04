@@ -55,7 +55,7 @@ function setFormValues(data) {
 
             var organism_id = undefined;
             if (data.query.organism && data.query.organism.organism_list) {
-                organism_id = data.query.organism.organism_list.map(organism => organism.id)
+                organism_id = data.query.organism.organism_list.map(function(organism){return organism.id})
             }
 
             $("#species").val(organism_id || "").trigger("chosen:updated");

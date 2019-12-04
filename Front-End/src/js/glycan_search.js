@@ -45,6 +45,7 @@ var perMet_mass_min;
 var perMet_mass_max;
 var sugar_mass_min;
 var sugar_mass_max;
+var organism_list;
 var residue_list;
 var undo_residue_stack = [];
 var redo_residue_stack = [];
@@ -74,6 +75,7 @@ $(document).ready(function () {
         success: function (result) {
             searchInitValues = result;
             var orgElement = $("#species").get(0);
+            organism_list = result.organism;
             result.organism.sort(sortDropdown);
             for (var x = 0; x < result.organism.length; x++) {
                 createOption(orgElement, result.organism[x].name, result.organism[x].id);
@@ -99,7 +101,7 @@ $(document).ready(function () {
                 residue_list[x].name = composition[residue_list[x].residue].name;
                 residue_list[x].short_name = composition[residue_list[x].residue].short_name;
             }
-            residue_list = residue_list.sort((res1, res2) => parseInt(res1.order_id) - parseInt(res2.order_id));
+            residue_list = residue_list.sort(function(res1, res2){return parseInt(res1.order_id) - parseInt(res2.order_id)});
             var html = "";
             var other_residue = undefined;
             for (var x = 0; x < residue_list.length; x++) {
@@ -114,7 +116,6 @@ $(document).ready(function () {
             perMet_mass_min = Math.floor(result.glycan_mass.permethylated.min - 1);
 
             var massType = $("#mass-drop").get(0);
-            result.organism.sort(sortDropdown);
 
             for (mstype in result.glycan_mass) {
                 createOption(massType, result.glycan_mass[mstype].name, result.glycan_mass[mstype].name);
@@ -392,14 +393,13 @@ function submitvalues() {
     if (index > -1 && (index + 1) == glycan_id.length) {
         glycan_id = glycan_id.substr(0, index);
     }
-    var selected_species = document.getElementById("species");
+    var selected_species = $("#species").val();
     var organism_operation = $("#species_operation").val();
     var organism = [];
-    for (i = 0; i < selected_species.selectedOptions.length; i++) {
-        organism[i] = {
-            "id": parseInt(selected_species.selectedOptions[i].value),
-            "name": selected_species.selectedOptions[i].text
-        };
+    if (selected_species) {
+        for (i = 0; i < selected_species.length; i++) {
+            organism[i] = organism_list.filter(function(org){if(parseInt(org.id) == parseInt(selected_species[i])){ return org}})[0];
+        }
     }
     var glycan_type = document.getElementById("ddl").value;
     var glycan_subtype = document.getElementById("ddl2").value;
