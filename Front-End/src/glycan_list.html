@@ -212,13 +212,13 @@
                         </tr>
                         {{/glycan_subtype}}
 
-                        <!--protein typeahead-->
-                        {{#uniprot_canonical_ac}}
+                        <!--protein accession-->
+                        {{#protein_identifier}}
                         <tr>
                             <td>UniProtKB Accession:</td>
-                            <td>{{uniprot_canonical_ac}}</td>
+                            <td>{{protein_identifier}}</td>
                         </tr>
-                        {{/uniprot_canonical_ac}}
+                        {{/protein_identifier}}
                         <!--enzyme typeahead-->
                         {{#enzyme.id}}
                         <tr>
