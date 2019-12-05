@@ -721,3 +721,11 @@ function showHideSequences(button_id, seq_class){
     });
 
 }
+
+/**
+ * This function opens the Sequence page.
+ */
+function openSequencePage(uniprot_ac){
+    var url = "https://www.uniprot.org/uniprot/" + uniprot_ac + "#sequences";
+    window.open(url);
+}
