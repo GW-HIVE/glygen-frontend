@@ -309,7 +309,7 @@ function ajaxSuccess(data) {
 		activityTracker("user", uniprot_canonical_ac, "successful response");
 		setupProtvista(data);
 		// to change the svg position
-		document.querySelectorAll("g.sequence-features").forEach(x => {
+		document.querySelectorAll("g.sequence-features").forEach(function(x) {
 			x.setAttribute("transform", "translate(0, -7)");
 		});
 	}
