@@ -44,7 +44,7 @@ function buildSummary(queryInfo) {
     }
 
     if (queryInfo.organism && queryInfo.organism.organism_list) {
-        var organism_name = queryInfo.organism.organism_list.map(organism => organism.name)
+        var organism_name = queryInfo.organism.organism_list.map(function(organism){ return organism.name})
         queryInfo.organism.organism_list = organism_name.join(' ' + queryInfo.organism.operation + ' ');
     }
 

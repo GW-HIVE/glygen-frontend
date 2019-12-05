@@ -194,7 +194,7 @@ function displayError(message, title) {
         $('html, body').animate({ scrollTop: 0 }, 'slow');
     }
     else {
-        if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().includes("list")) {
+        if (pagePath.substring(pagePath.lastIndexOf('/') + 1).toLocaleLowerCase().indexOf("list") >= 0) {
             // for all list pages, if any error occurs, it will go back to the previous page.
             alertify.alert(title, message, function () { window.history.back(); }).set('modal', false);
         } else {
