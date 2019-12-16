@@ -337,7 +337,6 @@
 		}
 	],
 	"sunb_glycan_type_subtype": {
-     	"name":"",
      	"children":[
         	{
             	"name": "N-glycan",
@@ -395,8 +394,7 @@
         	}
     	]
 	},
-	"sunb_glycan_organism_type": {	
-		"name": "",
+	"sunb_glycan_organism_type": {
 		"children": [{
 				"organism": {
 					"organism_list": [
@@ -818,8 +816,7 @@
 		"stepsize": 1,
 		"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
 	},
-	"sunb_canon_isof_prot": {	
-		"name": "",
+	"sunb_canon_isof_prot": {
 		"children": [{
 				"organism": {
 					"id": 9606,
@@ -1132,8 +1129,7 @@
 			"size": 94
 		}
 	],
-	"sunb_glycoprot_rep_pred_glyc": {	
-		"name": "",
+	"sunb_glycoprot_rep_pred_glyc": {
 		"children": [{
 				"name": "Human Proteins",
 				"children": [{
