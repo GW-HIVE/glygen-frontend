@@ -78,7 +78,7 @@ d3.json("data/statistics.json", (error, jsonData) => {
 	if (error) throw error;
 	//	console.log(root);
 
-	var root = d3.hierarchy(jsonData.sunburst);
+	var root = d3.hierarchy(jsonData.sunb_bio_molecules);
 	root.sum(d => d.size);
 /**
 	const slice = svg.selectAll('g.slice')
