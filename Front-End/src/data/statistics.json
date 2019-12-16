@@ -4,15 +4,25 @@
 		"children": [
 			{
 				"organism": {
-					"id": 9606,
-					"name": "Homo sapiens"
+					"organism_list": [
+						{
+							"id": 9606,
+							"name": "Homo sapiens"
+						}
+					],
+					"operation":"or"
 				},
 				"name": "Human Glycans",
 				"children": [
 					{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "N-Glycan",
 						"name": "N-Glycan",
@@ -20,8 +30,13 @@
 					},
 					{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "O-Glycan",
 						"name": "O-Glycan",
@@ -29,8 +44,13 @@
 					},
 					{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "Other",
 						"name": "Other",
@@ -53,14 +73,24 @@
 			},
 			{
 				"organism": {
-					"id": 10090,
-					"name": "Mus musculus"
+					"organism_list": [
+						{
+							"id": 10090,
+							"name": "Mus musculus"
+						}
+					],
+					"operation":"or"		
 				},
 				"name": "Mouse Glycans",
 				"children": [{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "N-Glycan",
 						"name": "N-Glycan",
@@ -68,8 +98,13 @@
 					},
 					{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "O-Glycan",
 						"name": "O-Glycan",
@@ -77,8 +112,13 @@
 					},
 					{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "Other",
 						"name": "Other",
@@ -101,14 +141,24 @@
 			},
 			{
 				"organism": {
-					"id": 10116,
-					"name": "Rattus norvegicus"
+					"organism_list": [
+						{
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						}
+					],
+					"operation":"or"		
 				},
 				"name": "Rat Glycans",
 				"children": [{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "N-Glycan",
 						"name": "N-Glycan",
@@ -116,8 +166,13 @@
 					},
 					{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "O-Glycan",
 						"name": "O-Glycan",
@@ -125,8 +180,13 @@
 					},
 					{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"		
 						},
 						"glycan_type": "Other",
 						"name": "Other",
@@ -337,14 +397,24 @@
 	"sunb_glycan_organism_type": {
 		"children": [{
 				"organism": {
-					"id": 9606,
-					"name": "Homo sapiens"
+					"organism_list": [
+						{
+							"id": 9606,
+							"name": "Homo sapiens"
+						}
+					],
+					"operation":"or"
 				},
 				"name": "Human Glycans",
 				"children": [{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "N-Glycan",
 						"name": "Human N-Glycans",
@@ -352,8 +422,13 @@
 					},
 					{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "O-Glycan",
 						"name": "Human O-Glycans",
@@ -361,8 +436,13 @@
 					},
 					{
 						"organism": {
-							"id": 9606,
-							"name": "Homo sapiens"
+							"organism_list": [
+								{
+									"id": 9606,
+									"name": "Homo sapiens"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "Other",
 						"name": "Human Other",
@@ -372,14 +452,24 @@
 			},
 			{
 				"organism": {
-					"id": 10090,
-					"name": "Mus musculus"
+					"organism_list": [
+						{
+							"id": 10090,
+							"name": "Mus musculus"
+						}
+					],
+					"operation":"or"
 				},
 				"name": "Mouse Glycans",
 				"children": [{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "N-Glycan",
 						"name": "Mouse N-Glycans",
@@ -387,8 +477,13 @@
 					},
 					{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "O-Glycan",
 						"name": "Mouse O-Glycans",
@@ -396,8 +491,13 @@
 					},
 					{
 						"organism": {
-							"id": 10090,
-							"name": "Mus musculus"
+							"organism_list": [
+								{
+									"id": 10090,
+									"name": "Mus musculus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "Other",
 						"name": "Mouse Other",
@@ -407,14 +507,24 @@
 			},
 			{
 				"organism": {
-					"id": 10116,
-					"name": "Rattus norvegicus"
+					"organism_list": [
+						{
+							"id": 10116,
+							"name": "Rattus norvegicus"
+						}
+					],
+					"operation":"or"
 				},
 				"name": "Rat Glycans",
 				"children": [{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "N-Glycan",
 						"name": "Rat N-Glycans",
@@ -422,8 +532,13 @@
 					},
 					{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "O-Glycan",
 						"name": "Rat O-Glycans",
@@ -431,8 +546,13 @@
 					},
 					{
 						"organism": {
-							"id": 10116,
-							"name": "Rattus norvegicus"
+							"organism_list": [
+								{
+									"id": 10116,
+									"name": "Rattus norvegicus"
+								}
+							],
+							"operation":"or"
 						},
 						"glycan_type": "Other",
 						"name": "Rat Other",
