@@ -1,0 +1,309 @@
+{
+	"glycans": [
+		{
+			"glycans_size": 11111,
+			"human_mouse_size": 1111,
+			"human_rat_size": 1111,
+			"human_mouse_rat_size": 1111,
+			"mouse_rat_size": 1111,
+			"organism": [
+				{
+					"glyc_human_size": 2222,
+					"tax_id": 9606,
+					"tax_name": "Homo sapiens",
+					"subcategory": [
+						{
+							"glycan_type": "N-Glycan",
+							"glyc_type_size": 4567,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Hybrid",
+									"subtype_size": 85
+							   },
+								{
+									"subtype_name": "Complex",
+									"subtype_size": 1796
+							   },
+								{
+									"subtype_name": "High mannose",
+									"subtype_size": 78
+								},
+								{
+									"subtype_name": "Other",
+									"subtype_size": 606
+								}
+							]
+						},
+						{
+							"glycan_type": "O-Glycan",
+							"glyc_type_size": 312,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Core 1",
+									"subtype_size": 100
+								},
+								{
+									"subtype_name": "Core 2",
+									"subtype_size": 189
+								},
+								{
+									"subtype_name": "Core 3",
+									"subtype_size": 53
+								},
+								{
+									"subtype_name": "Core 4",
+									"subtype_size": 38
+								},
+								{
+									"subtype_name": "Core 5",
+									"subtype_size": 5
+								},
+								{
+									"subtype_name": "Core 6",
+									"subtype_size": 8
+								},
+								{
+									"subtype_name": "Core 7",
+									"subtype_size": 1
+								}
+							]
+						},
+						{
+							"glycan_type": "Other",
+							"glyc_type_size": 2001
+						}
+					]
+				},
+				{
+					"glyc_mouse_size": 3333,
+					"tax_id": 10090,
+					"tax_name": "Mus musculus",
+					"subcategory": [
+						{
+							"glycan_type": "N-Glycan",
+							"glyc_type_size": 4567,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Hybrid",
+									"subtype_size": 85
+							   },
+								{
+									"subtype_name": "Complex",
+									"subtype_size": 1796
+							   },
+								{
+									"subtype_name": "High mannose",
+									"subtype_size": 78
+								},
+								{
+									"subtype_name": "Other",
+									"subtype_size": 606
+								}
+							]
+						},
+						{
+							"glycan_type": "O-Glycan",
+							"glyc_type_size": 312,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Core 1",
+									"subtype_size": 100
+								},
+								{
+									"subtype_name": "Core 2",
+									"subtype_size": 189
+								},
+								{
+									"subtype_name": "Core 3",
+									"subtype_size": 53
+								},
+								{
+									"subtype_name": "Core 4",
+									"subtype_size": 38
+								},
+								{
+									"subtype_name": "Core 5",
+									"subtype_size": 5
+								},
+								{
+									"subtype_name": "Core 6",
+									"subtype_size": 8
+								},
+								{
+									"subtype_name": "Core 7",
+									"subtype_size": 1
+								}
+							]
+						},
+						{
+							"glycan_type": "Other",
+							"glyc_type_size": 2001
+						}
+					]
+				},
+				{
+					"glyc_rat_size": 4444,
+					"tax_id": 10116,
+					"tax_name": "Rattus norvegicus",
+					"subcategory": [
+						{
+							"glycan_type": "N-Glycan",
+							"glyc_type_size": 4567,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Hybrid",
+									"subtype_size": 85
+							   },
+								{
+									"subtype_name": "Complex",
+									"subtype_size": 1796
+							   },
+								{
+									"subtype_name": "High mannose",
+									"subtype_size": 78
+								},
+								{
+									"subtype_name": "Other",
+									"subtype_size": 606
+								}
+							]
+						},
+						{
+							"glycan_type": "O-Glycan",
+							"glyc_type_size": 312,
+							"glycan_subtype": [
+								{
+									"subtype_name": "Core 1",
+									"subtype_size": 100
+								},
+								{
+									"subtype_name": "Core 2",
+									"subtype_size": 189
+								},
+								{
+									"subtype_name": "Core 3",
+									"subtype_size": 53
+								},
+								{
+									"subtype_name": "Core 4",
+									"subtype_size": 38
+								},
+								{
+									"subtype_name": "Core 5",
+									"subtype_size": 5
+								},
+								{
+									"subtype_name": "Core 6",
+									"subtype_size": 8
+								},
+								{
+									"subtype_name": "Core 7",
+									"subtype_size": 1
+								}
+							]
+						},
+						{
+							"glycan_type": "Other",
+							"glyc_type_size": 2001
+						}
+					]
+				},
+			]
+		},
+		{
+			"glycan_motif": [
+				{
+					"motif_name": "Lactosamine motif",
+					"motif_size": 14389
+				},
+				{
+					"motif_name": "N-Glycan core basic",
+					"motif_size": 12326
+				},
+				{
+					"motif_name": "N-Glycan complex",
+					"motif_size": 8365
+				},
+				{
+					"motif_name": "VIM",
+					"motif_size": 3760
+				},
+				{
+					"motif_name": "Lewis X",
+					"motif_size": 3760
+				},
+				{
+					"motif_name": "Blood group H",
+					"motif_size": 2965
+				}
+			]
+	    },
+		{
+			"glycan_mass_range": {
+				"stepsize": 50,
+				"data": [0, 0, 0, 6, 7, 7, 29, 44, 35, 42, 98, 51, 34, 80, 109, 44, 53, 110, 66, 92, 120, 144, 104, 91, 153, 135, 99, 179, 134, 116, 93, 166, 103, 95, 162, 127, 114, 135, 160, 117, 185, 156, 90, 179, 145, 143, 48, 136, 85, 43, 95, 110, 29, 52, 96, 20, 22, 181, 14, 35, 146, 29, 24, 25, 48, 4, 20, 26, 8, 11, 89, 1, 4, 105, 14, 13, 8, 2, 0, 1, 7, 5, 7, 2, 0, 3, 1, 0, 5, 3, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2]
+			}
+	    },
+		{
+			"glycan_sugar_range": {
+				"stepsize": 1,
+				"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
+			}
+	    }
+	],
+	"proteins": [
+		{
+			"proteins_size": 11111,
+			"organism": [
+				{
+					"prot_numan_size": 2222,
+					"tax_id": 9606,
+					"tax_name": "Homo sapiens",
+					"canonical_size": 1111,
+					"isoform_size": 1111,
+					"glycoprotein_size":1111,
+					"enzyme_size": 1111,
+					"glycoprotein_enzyme_size": 1111,
+					"glycosyltransferases_size":111,
+					"glycohydrolases_size":111,
+					"glycosylated_size":111,
+					"glycosylated_pred_size":111,
+					"glycosylated_rep_with_gly_size":111,
+					"glycosylated_rep_wo_gly_size":111
+				},
+				{
+					"prot_mouse_size": 3333,
+					"tax_id": 10090,
+					"tax_name": "Mus musculus",
+					"canonical_size": 1111,
+					"isoform_size": 1111,
+					"glycoprotein_size":1111,
+					"enzyme_size": 1111,
+					"glycoprotein_enzyme_size": 1111,
+					"glycosyltransferases_size":111,
+					"glycohydrolases_size":111,
+					"glycosylated_size":111,
+					"glycosylated_pred_size":111,
+					"glycosylated_rep_with_gly_size":111,
+					"glycosylated_rep_wo_gly_size":111
+				},
+				{
+					"prot_rat_size": 4444,
+					"tax_id": 10116,
+					"tax_name": "Rattus norvegicus",
+					"canonical_size": 1111,
+					"isoform_size": 1111,
+					"glycoprotein_size":1111,
+					"enzyme_size": 1111,
+					"glycoprotein_enzyme_size": 1111,
+					"glycosyltransferases_size":111,
+					"glycohydrolases_size":111,
+					"glycosylated_size":111,
+					"glycosylated_pred_size":111,
+					"glycosylated_rep_with_gly_size":111,
+					"glycosylated_rep_wo_gly_size":111
+				},
+			]
+		}
+	]
+}

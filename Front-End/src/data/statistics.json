@@ -82,7 +82,8 @@
 					"operation":"or"		
 				},
 				"name": "Mouse Glycans",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"organism_list": [
 								{
@@ -150,7 +151,8 @@
 					"operation":"or"		
 				},
 				"name": "Rat Glycans",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"organism_list": [
 								{
@@ -406,7 +408,8 @@
 					"operation":"or"
 				},
 				"name": "Human Glycans",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"organism_list": [
 								{
@@ -461,7 +464,8 @@
 					"operation":"or"
 				},
 				"name": "Mouse Glycans",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"organism_list": [
 								{
@@ -817,13 +821,15 @@
 		"data": [17, 173, 401, 526, 589, 740, 852, 905, 943, 969, 1059, 1130, 920, 690, 660, 415, 256, 317, 201, 52, 34, 24, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6]
 	},
 	"sunb_canon_isof_prot": {
-		"children": [{
+		"children": [
+			{
 				"organism": {
 					"id": 9606,
 					"name": "Homo sapiens"
 				},
 				"name": "Human Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 9606,
 							"name": "Homo sapiens"
@@ -847,7 +853,8 @@
 					"name": "Mus musculus"
 				},
 				"name": "Mouse Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 10090,
 							"name": "Mus musculus"
@@ -871,7 +878,8 @@
 					"name": "Rattus norvegicus"
 				},
 				"name": "Rat Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 10116,
 							"name": "Rattus norvegicus"
@@ -1130,9 +1138,11 @@
 		}
 	],
 	"sunb_glycoprot_rep_pred_glyc": {
-		"children": [{
+		"children": [
+			{
 				"name": "Human Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 9606,
 							"name": "Homo sapiens"
@@ -1160,7 +1170,8 @@
 			},
 			{
 				"name": "Mouse Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 10090,
 							"name": "Mus musculus"
@@ -1188,7 +1199,8 @@
 			},
 			{
 				"name": "Rat Proteins",
-				"children": [{
+				"children": [
+					{
 						"organism": {
 							"id": 10116,
 							"name": "Rattus norvegicus"
