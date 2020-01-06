@@ -115,6 +115,19 @@ $('#textExampleGOID').click(function() {
 
 /**
  * Makes the example clickable and inserts it into the search input field.
+ * @param {string} tagsInputGlycan
+ */
+// select already you input element for re-use
+var $tagsInputGlycan = $('#glycan_id');
+// bind a click event to links within ".textExample" element
+$('#textExampleInterGlycan').click(function() {
+    // append link text to the input field value
+    $tagsInputGlycan.val($(this).text());
+    return false;
+});
+
+/**
+ * Makes the example clickable and inserts it into the search input field.
  * @param {string} tagsInputSequences
  */
 var $tagsInputSequences = $('#sequences');
