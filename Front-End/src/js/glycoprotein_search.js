@@ -277,7 +277,7 @@ function ajaxProteinSearchSuccess() {
     var pathway_id = $("#pathway").val();
     var sequence = $("#sequences").val().replace(/\n/g, "");
     var glycan_id = $("#glycan_id").val();
-    var glycan_relation = $("#glycan_relation").val();
+    var glycan_relation = "attached";
     var glycosylated_aa = $(".glycosylated_aa").val();
     var glycosylated_aa_operation =  $("#glycosylated_aa_operation").val();
     var glycosylation_evidence = $("#glycosylation_evidence").val();
