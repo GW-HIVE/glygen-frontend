@@ -33,7 +33,7 @@ function pageFormat1(value, row, index, field) {
 
 
 function chromosomeFormat(value, row, index, field) {
-    return  ' CHR  ' + row.chromosome + ' (' + row.start_pos + ' - ' + row.end_pos + ')';
+    return  ' Chr  ' + row.chromosome + ' (' + row.start_pos + ' - ' + row.end_pos + ')';
 }
 
 
