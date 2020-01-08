@@ -27,19 +27,20 @@ function addCommas(nStr) {
 
 
 function databasecolor(name) {
-    switch (name) {
-        case 'GlycomeDB': return '#a06868';
-        case 'UniCarbKB': return '#6b7f71';
-        case 'UniProtKB': return '#4b8aa0';
-        case 'PubMed': return '#7c985d';
-        case 'RefSeq': return '#3ea2ad';
-        case 'Ensembl Peptide': return '#936caf';
-        case 'Ensembl Transcript': return '#b971a6';
-        case 'Ensembl Gene': return '#468FE0';
-        case 'OMIM': return '#8d85fa';
-        case 'BioMuta': return '#7975af';
-        case 'Bgee': return '#798bae';
-        case 'BioXpress': return '#7f989a';
+    switch (name.toLowerCase()) {
+       
+        case 'glycomeDB': return '#a06868';
+        case 'uniCarbKB': return '#6b7f71';
+        case 'uniProtKB': return '#4b8aa0';
+        case 'pubMed': return '#7c985d';
+        case 'refSeq': return '#3ea2ad';
+        case 'ensembl peptide': return '#936caf';
+        case 'ensembl transcript': return '#b971a6';
+        case 'ensembl gene': return '#468FE0';
+        case 'omim': return '#8d85fa';
+        case 'bioMuta': return '#7975af';
+        case 'bgee': return '#798bae';
+        case 'bioXpress': return '#7f989a';
         case 'mgi': return '#ff8080';
         case 'hgnc': return '#518a8a';
         case 'homologene': return '#9a039a';
