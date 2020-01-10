@@ -108,11 +108,11 @@ function imageFormat(value, row, index, field) {
  */
 
 function massFormatter(value) {
-    if (value) {
-        var mass = value;
+    if (value > -1) {
+        var mass = value  ;
         return value;
     } else {
-        return "NA";
+        return "N/A";
     }
 }
 
