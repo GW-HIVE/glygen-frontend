@@ -1,0 +1,26 @@
+.footer {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	margin-top: auto;
+}
+
+.footer-link {
+	color: var(--light) !important;
+}
+.footer-link:hover {
+	color: var(--light-blue) !important;
+	text-decoration: none;
+}
+.navbar-text {
+	color: var(--light-blue) !important;
+	/* color: #57affa; */
+}
+.univ-logo {
+	padding: 5px 10px 0 10px;
+}
+.box-footer {
+	margin: 0 !important;
+	padding: 0 !important;
+}

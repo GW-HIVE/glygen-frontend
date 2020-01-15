@@ -1,4 +1,23 @@
+:root {
+	--gg-bg-blue: #2f78b7 !important;
+	--dark-blue-1: #215b9e;
+	--dark-blue-2: #175385;
+	--light-blue: #afd9fd !important;
+}
 .App {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+a {
+	text-decoration: none !important;
+}
+
+/* .footer {
+	margin-top: auto;
+} */
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +54,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
