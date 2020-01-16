@@ -10,8 +10,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 
-
 const useStyles = makeStyles(theme => ({
+	cardAction: {
+		display: 'inline-flex'
+	},
 	card: {
 		// display: 'flex'
 		maxWidth: 345
@@ -24,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	cardMedia: {
 		// width: 160
-		height: 140
+		height: 160
 	},
 	divider: {
 		margin: theme.spacing(1, 1)
@@ -37,8 +39,7 @@ export default function InfoCard(props) {
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
-			{/* <Card className={classes.card}> */}
-			<CardActionArea component='a' href='#'>
+			<CardActionArea className={classes.cardAction} component='a' href='#'>
 				<Card className={classes.card}>
 					<div className={classes.cardDetails}>
 						<CardContent>
