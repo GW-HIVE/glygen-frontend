@@ -97,18 +97,21 @@ export default function Home() {
 			<Container maxWidth='lg'>
 				<main>
 					<Row className='show-grid'>
-						<Grid item xs={12} md={9}>
-							<Grid container spacing={3}>
-								{featuredCards.map(post => (
-									<FeaturedCard key={post.title} post={post} />
-								))}
+						<Grid container spacing={3}>
+							<Grid item xs={12} md={9}>
+								<Grid container spacing={3}>
+									{featuredCards.map(post => (
+										<FeaturedCard key={post.title} post={post} />
+									))}
+								</Grid>
 							</Grid>
-						</Grid>
-						<Grid item xs={12} md={3}>
-							<Grid container spacing={2}>
-								{infoCards.map(post => (
-									<InfoCard key={post.title} post={post} />
-								))}
+
+							<Grid item xs={12} md={3}>
+								<Grid container spacing={2}>
+									{infoCards.map(post => (
+										<InfoCard key={post.title} post={post} />
+									))}
+								</Grid>
 							</Grid>
 						</Grid>
 					</Row>
