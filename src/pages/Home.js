@@ -1,19 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
-import Paper from '@material-ui/core/Paper';
-// import ImgMediaCard from './ImgMediaCard';
+import { Row } from 'react-bootstrap';
 
-const useStyles = makeStyles(theme => ({
-	mainGrid: {
-		marginLeft: theme.spacing(3)
-	}
-}));
+// const useStyles = makeStyles(theme => ({
+// 	mainGrid: {
+// 		marginLeft: theme.spacing(3)
+// 	}
+// }));
 
 const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
@@ -88,33 +87,31 @@ const infoCards = [
 ];
 
 export default function Home() {
-	const classes = useStyles();
+	// const classes = useStyles();
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
 
-			<Container maxWidth='xl'>
+			<Container maxWidth='lg'>
 				<main>
-					<Grid item xs={12} md={9}>
-						<Grid container spacing={3}>
-							{featuredCards.map(post => (
-								<FeaturedCard key={post.title} post={post} />
-							))}
+					<Row className='show-grid'>
+						<Grid item xs={12} md={9}>
+							<Grid container spacing={3}>
+								{featuredCards.map(post => (
+									<FeaturedCard key={post.title} post={post} />
+								))}
+							</Grid>
 						</Grid>
-					</Grid>
-
-					<Grid item xs={12} md={3}>
-						<Grid container spacing={4}>
-							{infoCards.map(post => (
-								<InfoCard key={post.title} post={post} />
-							))}
+						<Grid item xs={12} md={3}>
+							<Grid container spacing={2}>
+								{infoCards.map(post => (
+									<InfoCard key={post.title} post={post} />
+								))}
+							</Grid>
 						</Grid>
-					</Grid>
-					<Grid item xs={12}>
-						<Paper className={classes.paper}> </Paper>
-					</Grid>
+					</Row>
 				</main>
 			</Container>
 		</React.Fragment>
