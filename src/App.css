@@ -13,10 +13,14 @@
 a {
 	text-decoration: none !important;
 }
+hr {
+	border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+.devider {
+	height: 1px !important;
+	background-color: rgba(0, 0, 0, 0.12) !important;
+}
 
-/* .footer {
-	margin-top: auto;
-} */
 /* .App {
   text-align: center;
 }

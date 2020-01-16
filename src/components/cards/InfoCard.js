@@ -36,7 +36,7 @@ export default function InfoCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={12} md={12}>
+		<Grid item xs={12} sm={6} md={12}>
 			{/* <Card className={classes.card}> */}
 			<CardActionArea component='a' href='#'>
 				<Card className={classes.card}>

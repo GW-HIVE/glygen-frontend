@@ -54,7 +54,7 @@ const featuredCards = [
 	},
 	{
 		title: 'Composition Search',
-		description: 'Composition search based on their ...',
+		description: 'Composition search based on their residue.',
 		image: 'https://source.unsplash.com/random',
 		imageText: 'Composition Search'
 	},

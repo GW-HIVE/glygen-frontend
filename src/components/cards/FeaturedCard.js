@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
 		height: 140
 	},
 	divider: {
-		margin: theme.spacing(1, 1)
+		margin: theme.spacing(1, 1),
+		overflow: 'visible'
 	}
 }));
 
@@ -32,7 +33,7 @@ export default function FeaturedCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={12} md={4}>
+		<Grid item xs={12} sm={6} md={4}>
 			{/* <Card className={classes.card}> */}
 			<CardActionArea component='a' href='#'>
 				<Card className={classes.card}>
