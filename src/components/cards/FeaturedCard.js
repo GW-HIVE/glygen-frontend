@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 		height: 140
 	},
 	divider: {
-		margin: theme.spacing(3, 0)
+		margin: theme.spacing(1, 1)
 	}
 }));
 

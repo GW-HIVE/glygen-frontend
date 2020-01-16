@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 
+
 const useStyles = makeStyles(theme => ({
 	card: {
 		// display: 'flex'
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 		height: 140
 	},
 	divider: {
-		margin: theme.spacing(3, 0)
+		margin: theme.spacing(1, 1)
 	}
 }));
 
