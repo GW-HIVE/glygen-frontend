@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import '../../App.css';
 
 const Footer = () => (
-	<React.Fragment className='fixed-bottom'>
+	<React.Fragment>
 		<Navbar sticky='bottom' className='gg-bg-blue text-center footer'>
 			<Container
 				maxWidth='xl'

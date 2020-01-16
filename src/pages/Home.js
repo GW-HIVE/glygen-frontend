@@ -7,6 +7,9 @@ import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
 import { Row } from 'react-bootstrap';
+import card from '../images/featured_imgs/featuredImg-7.jpg';
+import card2 from '../images/featured_imgs/featuredImg-8.jpg';
+import card3 from '../images/featured_imgs/featuredImg-10.jpg';
 
 // const useStyles = makeStyles(theme => ({
 // 	mainGrid: {
@@ -18,7 +21,7 @@ const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
 	description:
 		'GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This web portal allows exploring this data and performing unique searches that cannot be executed in any of the integrated databases alone.',
-	image: 'https://source.unsplash.com/random',
+	image: card3,
 	imgText: 'main image description',
 	linkText: 'Learn More…'
 };
@@ -28,14 +31,14 @@ const featuredCards = [
 		title: 'Glycan',
 		description:
 			'Search for glycan structures based on their chemical and structural properties.',
-		image: 'https://source.unsplash.com/random',
+		image: card,
 		imageText: 'Glycan'
 	},
 	{
 		title: 'Protein',
 		description:
 			'Search for proteins based on their sequences, accessions, and annotations.',
-		image: 'https://source.unsplash.com/random',
+		image: card2,
 		imageText: 'Protein'
 	},
 	{

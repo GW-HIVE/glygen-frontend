@@ -40,9 +40,10 @@ export default function FeaturedCard(props) {
 				<Card className={classes.card}>
 					<Hidden xsDown>
 						<CardMedia
+							component="img"
 							className={classes.cardMedia}
 							image={post.image}
-							title={post.imageTitle}
+							title={post.imageText}
 						/>
 					</Hidden>
 					<div className={classes.cardDetails}>
