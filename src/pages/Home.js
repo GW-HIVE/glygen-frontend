@@ -7,8 +7,10 @@ import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
 import VersionCard from '../components/cards/VersionCard';
+import StatDBCard from '../components/cards/VersionCard';
+import TwitterCard from '../components/cards/VersionCard';
 import { Row } from 'react-bootstrap';
-import card from '../images/home/featuredImg-7.jpg';
+// import card from '../images/home/featuredImg-7.jpg';
 // import card2 from '../images/home/featuredImg-8.jpg';
 import card3 from '../images/home/featuredImg-10.jpg';
 import feedback from '../images/home/feedback.svg';
@@ -30,7 +32,6 @@ const mainFeaturedCard = {
 	imgText: 'main image description',
 	linkText: 'Learn More…'
 };
-
 const featuredCards = [
 	{
 		title: 'Glycan',
@@ -56,7 +57,7 @@ const featuredCards = [
 	{
 		title: 'Quick Search',
 		description:
-			'Search for glycans, proteins, species or disease using queries prepared to provide answers to complex biological questions with minimal user input.',
+			'Search data using queries prepared to provide answers to complex biological questions.',
 		image: glycanImg,
 		imageText: 'Quick Search'
 	},
@@ -66,15 +67,34 @@ const featuredCards = [
 		image: glycanImg,
 		imageText: 'Composition Search'
 	},
+	// {
+	// 	title: 'Statistics',
+	// 	description:
+	// 		'GlyGen data visualization via charts, diagrams, and chart bars.',
+	// 	image: glycanImg,
+	// 	imageText: 'Image Text'
+	// },
 	{
-		title: 'Statistics',
+		title: 'Data',
+		description:
+			'Search data using queries prepared to provide answers to complex biological questions.',
+		image: glycanImg,
+		imageText: 'Quick Search'
+	},
+	{
+		title: 'API',
+		description: 'Composition search based on their residue.',
+		image: glycanImg,
+		imageText: 'Composition Search'
+	},
+	{
+		title: 'SPARQL',
 		description:
 			'GlyGen data visualization via charts, diagrams, and chart bars.',
 		image: glycanImg,
 		imageText: 'Image Text'
 	}
 ];
-
 const infoCards = [
 	{
 		title: 'Your Opinion Matters',
@@ -102,6 +122,12 @@ const versionCard = {
 	text3: 'Data:',
 	textData3: 'Data3'
 };
+const statDBCard = {
+	title: 'Database Statistics'
+};
+const twitterCard = {
+	title: 'News'
+};
 
 export default function Home() {
 	// const classes = useStyles();
@@ -111,7 +137,7 @@ export default function Home() {
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
 
-			<Container maxWidth='lg'>
+			<Container maxWidth='xl'>
 				<main>
 					<Row className='show-grid'>
 						<Grid container spacing={3}>
@@ -125,9 +151,11 @@ export default function Home() {
 							<Grid item xs={12} md={3}>
 								<Grid container spacing={2}>
 									<VersionCard post={versionCard} />
+									<StatDBCard post={statDBCard} />
 									{infoCards.map(post => (
 										<InfoCard key={post.title} post={post} />
 									))}
+									<TwitterCard post={twitterCard} />
 								</Grid>
 							</Grid>
 						</Grid>

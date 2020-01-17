@@ -37,7 +37,7 @@ export default function FeaturedCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={12} sm={6} md={4}>
+		<Grid item xs={12} sm={6} md={3}>
 			<CardActionArea className={classes.cardAction} component='a' href='#'>
 				<Card className={classes.card}>
 					<Hidden xsDown>
