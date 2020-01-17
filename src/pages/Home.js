@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
+import VersionCard from '../components/cards/VersionCard';
 import { Row } from 'react-bootstrap';
 import card from '../images/featured_imgs/featuredImg-7.jpg';
 import card2 from '../images/featured_imgs/featuredImg-8.jpg';
@@ -88,6 +89,15 @@ const infoCards = [
 		button: 'EXPLORE'
 	}
 ];
+const versionCard = {
+	title: 'Version',
+	text1: 'Portal:',
+	textData1: 'Data1',
+	text2: 'Webservice:',
+	textData2: 'Data2',
+	text3: 'Data:',
+	textData3: 'Data3'
+};
 
 export default function Home() {
 	// const classes = useStyles();
@@ -110,6 +120,7 @@ export default function Home() {
 							</Grid>
 							<Grid item xs={12} md={3}>
 								<Grid container spacing={2}>
+									<VersionCard post={versionCard} />
 									{infoCards.map(post => (
 										<InfoCard key={post.title} post={post} />
 									))}
