@@ -25,8 +25,10 @@ const useStyles = makeStyles(theme => ({
 		flex: 1
 	},
 	cardMedia: {
-		// width: 160
-		height: 160
+		height: 160,
+		marginBottom: 15,
+		width: '80%',
+    margin: '0 auto' 
 	},
 	divider: {
 		margin: theme.spacing(1, 1)
@@ -52,6 +54,7 @@ export default function InfoCard(props) {
 							</Typography>
 							<Hidden xsDown>
 								<CardMedia
+									component='img'
 									className={classes.cardMedia}
 									image={post.image}
 									title={post.imageTitle}

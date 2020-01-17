@@ -8,9 +8,13 @@ import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
 import VersionCard from '../components/cards/VersionCard';
 import { Row } from 'react-bootstrap';
-import card from '../images/featured_imgs/featuredImg-7.jpg';
-import card2 from '../images/featured_imgs/featuredImg-8.jpg';
-import card3 from '../images/featured_imgs/featuredImg-10.jpg';
+import card from '../images/home/featuredImg-7.jpg';
+// import card2 from '../images/home/featuredImg-8.jpg';
+import card3 from '../images/home/featuredImg-10.jpg';
+import feedback from '../images/home/feedback.svg';
+import resources from '../images/home/resources.svg';
+import glycanImg from '../images/home/glycan-img.svg';
+import proteinImg from '../images/home/protein-img.svg';
 
 // const useStyles = makeStyles(theme => ({
 // 	mainGrid: {
@@ -32,41 +36,41 @@ const featuredCards = [
 		title: 'Glycan',
 		description:
 			'Search for glycan structures based on their chemical and structural properties.',
-		image: card,
+		image: glycanImg,
 		imageText: 'Glycan'
 	},
 	{
 		title: 'Protein',
 		description:
 			'Search for proteins based on their sequences, accessions, and annotations.',
-		image: card2,
+		image: proteinImg,
 		imageText: 'Protein'
 	},
 	{
 		title: 'Enzyme',
 		description:
 			'Search for enzymes based on protein accession, gene name, and glycan.',
-		image: 'https://source.unsplash.com/random',
+		image: glycanImg,
 		imageText: 'Image Text'
 	},
 	{
 		title: 'Quick Search',
 		description:
 			'Search for glycans, proteins, species or disease using queries prepared to provide answers to complex biological questions with minimal user input.',
-		image: 'https://source.unsplash.com/random',
+		image: glycanImg,
 		imageText: 'Quick Search'
 	},
 	{
 		title: 'Composition Search',
 		description: 'Composition search based on their residue.',
-		image: 'https://source.unsplash.com/random',
+		image: glycanImg,
 		imageText: 'Composition Search'
 	},
 	{
 		title: 'Statistics',
 		description:
 			'GlyGen data visualization via charts, diagrams, and chart bars.',
-		image: 'https://source.unsplash.com/random',
+		image: glycanImg,
 		imageText: 'Image Text'
 	}
 ];
@@ -76,7 +80,7 @@ const infoCards = [
 		title: 'Your Opinion Matters',
 		description:
 			'Please provide feedback and suggestions to help us improve the GlyGen portal and make it more useful for the community.',
-		image: 'https://source.unsplash.com/random',
+		image: feedback,
 		imageText: 'Feedback',
 		button: 'LEAVE FEEDBACK'
 	},
@@ -84,7 +88,7 @@ const infoCards = [
 		title: 'Explore Other Resources',
 		description:
 			'GlyGen is pleased to provide users with a variety of resources in glycobiology.',
-		image: 'https://source.unsplash.com/random',
+		image: resources,
 		imageText: 'Resources',
 		button: 'EXPLORE'
 	}
