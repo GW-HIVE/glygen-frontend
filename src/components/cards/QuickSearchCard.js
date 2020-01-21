@@ -81,7 +81,11 @@ export default function QuickSearchCard(props) {
 								variant='subtitle1'
 								color='primary'
 								className='text-center'
-								style={{ marginTop: '20px' }}>
+								style={{
+									marginTop: '20px',
+									fontWeight: 'bold',
+									color: '#2f78b7'
+								}}>
 								SEE ALL
 							</Typography>
 						</CardActionArea>

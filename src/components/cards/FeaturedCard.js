@@ -66,7 +66,8 @@ export default function FeaturedCard(props) {
 							<Typography
 								variant='subtitle1'
 								color='primary'
-								className='text-center'>
+								className='text-center'
+								style={{ fontWeight: 'bold', color: '#2f78b7' }}>
 								EXPLORE
 							</Typography>
 						</CardContent>
