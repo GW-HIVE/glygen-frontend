@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		// display: 'flex'
-		maxWidth: 345
+		// maxWidth: 345
 	},
 	cardDetails: {
 		flex: 1
@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
 	cardMedia: {
 		// width: 160
 		height: 160,
-		width: '80%',
-    margin: '0 auto' 
+		width: '50%',
+		margin: '0 auto'
 	},
 	divider: {
 		margin: theme.spacing(1, 1)
@@ -37,12 +37,18 @@ export default function FeaturedCard(props) {
 	const { post } = props;
 
 	return (
-		<Grid item xs={12} sm={6} md={3}>
-			<CardActionArea className={classes.cardAction} component='a' href='#'>
-				<Card className={classes.card}>
+		<Grid item xs={12} sm={6} md={6} lg={4}>
+			{/* <Card className={classes.card}> */}
+			<CardActionArea
+				className={classes.cardAction}
+				component='a'
+				href={post.href}
+				target={post.target}
+				rel='noopener noreferrer'>
+				<Card className='card'>
 					<Hidden xsDown>
 						<CardMedia
-							component="img"
+							component='img'
 							className={classes.cardMedia}
 							image={post.image}
 							title={post.imageText}
@@ -67,6 +73,7 @@ export default function FeaturedCard(props) {
 					</div>
 				</Card>
 			</CardActionArea>
+			{/* </Card> */}
 		</Grid>
 	);
 }

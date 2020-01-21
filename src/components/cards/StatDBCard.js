@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		// display: 'flex'
-		maxWidth: 345
+		// maxWidth: 345
 	},
 	cardTitle: {
 		textAlign: 'center'
@@ -29,9 +29,9 @@ export default function StatDBCard(props) {
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
-			<Card className={classes.card}>
-				<CardActionArea className={classes.cardAction} component='a' href='#'>
-					{/* <Card className={classes.card}> */}
+			{/* <Card className={classes.card}> */}
+			<CardActionArea className={classes.cardAction} component='a' href='#'>
+				<Card className='card'>
 					<div className={classes.cardDetails}>
 						<CardContent>
 							<Typography
@@ -43,9 +43,9 @@ export default function StatDBCard(props) {
 							</Typography>
 						</CardContent>
 					</div>
-					{/* </Card> */}
-				</CardActionArea>
-			</Card>
+				</Card>
+			</CardActionArea>
+			{/* </Card> */}
 		</Grid>
 	);
 }
