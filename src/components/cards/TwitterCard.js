@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
@@ -28,7 +28,7 @@ export default function TwitterCard(props) {
 	return (
 		<Grid item xs={12} sm={6} md={12}>
 			{/* <Card className={classes.card}> */}
-			<CardActionArea className={classes.cardAction} component='a' href='#'>
+			{/* <CardActionArea className={classes.cardAction} component='a' href='#'> */}
 				<Card className='card'>
 					<div className={classes.cardDetails}>
 						<CardContent>
@@ -59,7 +59,7 @@ export default function TwitterCard(props) {
 						</CardContent>
 					</div>
 				</Card>
-			</CardActionArea>
+			{/* </CardActionArea> */}
 			{/* </Card> */}
 		</Grid>
 	);
