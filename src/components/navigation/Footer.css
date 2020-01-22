@@ -10,11 +10,11 @@
 	color: var(--light) !important;
 }
 .footer-link:hover {
-	color: var(--light-blue) !important;
+	color: var(--gg-light-blue) !important;
 	text-decoration: none;
 }
 .navbar-text {
-	color: var(--light-blue) !important;
+	color: var(--gg-light-blue) !important;
 	/* color: #57affa; */
 }
 .univ-logo {

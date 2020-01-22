@@ -1,5 +1,4 @@
 import React from 'react';
-import './Header.css';
 import logo from '../../images/glygen_logos/glygen-logoW.svg';
 import {
 	Form,
@@ -14,12 +13,12 @@ import PersonIcon from '@material-ui/icons/Person';
 
 const Header = () => (
 	<React.Fragment>
-		<Navbar className='gg-bg-blue' expand='xl'>
+		<Navbar className='gg-blue' expand='xl'>
 			<Navbar.Brand href='#home'>
 				<img src={logo} alt='Glygen' className='d-inline-block align-top' />
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
-			<Navbar.Collapse className='gg-bg-blue' id='basic-navbar-nav'>
+			<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
 				<Nav className='mr-auto'>
 					<Nav.Link href='#home'>HOME</Nav.Link>
 					<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>

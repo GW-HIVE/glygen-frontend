@@ -11,7 +11,7 @@ import '../../App.css';
 
 const Footer = () => (
 	<React.Fragment>
-		<Navbar sticky='bottom' className='gg-bg-blue text-center footer'>
+		<Navbar sticky='bottom' className='gg-blue text-center footer'>
 			<Container
 				maxWidth='xl'
 				className='themed-container container-fluid justify-content-center'>
