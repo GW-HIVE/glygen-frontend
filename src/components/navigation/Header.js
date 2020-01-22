@@ -9,10 +9,12 @@ import {
 	FormControl,
 	Button
 } from 'react-bootstrap';
+import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
 
 const Header = () => (
 	<React.Fragment>
-		<Navbar className='gg-bg-blue' expand='lg'>
+		<Navbar className='gg-bg-blue' expand='xl'>
 			<Navbar.Brand href='#home'>
 				<img src={logo} alt='Glygen' className='d-inline-block align-top' />
 			</Navbar.Brand>
@@ -30,7 +32,27 @@ const Header = () => (
 					</NavDropdown>
 					<Nav.Link href='/quick_search'>QUICK&nbsp;SEARCH</Nav.Link>
 					<Nav.Link href='/try_me'>TRY&nbsp;ME</Nav.Link>
-					<Nav.Link href='/data'>DATA</Nav.Link>
+
+					<NavDropdown title='DATA' id='basic-nav-dropdown'>
+						<NavDropdown.Item
+							href='https://data.glygen.org/'
+							target='_blank'
+							rel='noopener noreferrer'>
+							Data
+						</NavDropdown.Item>
+						<NavDropdown.Item
+							href='https://api.glygen.org/'
+							target='_blank'
+							rel='noopener noreferrer'>
+							API
+						</NavDropdown.Item>
+						<NavDropdown.Item
+							href='https://sparql.glygen.org/'
+							target='_blank'
+							rel='noopener noreferrer'>
+							SPARQL
+						</NavDropdown.Item>
+					</NavDropdown>
 					<NavDropdown title='HELP' id='basic-nav-dropdown'>
 						<NavDropdown.Item href='/about'>About</NavDropdown.Item>
 						<NavDropdown.Item href='/contact_us'>Contact Us</NavDropdown.Item>
@@ -42,19 +64,27 @@ const Header = () => (
 						<NavDropdown.Item href='/resources'>Resources</NavDropdown.Item>
 						<NavDropdown.Item href='/frameworks'>Frameworks</NavDropdown.Item>
 					</NavDropdown>
+					<Form inline>
+						<FormControl
+							type='text'
+							placeholder='Search...'
+							className='mr-sm-0 ml-sm-1'
+						/>
+						<Button variant='light'>
+							<SearchIcon />
+						</Button>
+					</Form>
 				</Nav>
-				<Form inline>
-					<FormControl
-						type='text'
-						placeholder='Search...'
-						className='mr-sm-2'
-					/>
-					&nbsp;
-					<Button variant='outline-light'>Search</Button>
-				</Form>
+
 				<Nav className='justify-content-end'>
-					<Nav.Link href='/glygen'>Beta Testing</Nav.Link>
-					<Nav.Link href='/glygen'>MY GLYGEN</Nav.Link>
+					{/* <Nav.Link href='/glygen'>Beta Testing</Nav.Link> */}
+
+					<Nav.Link href='/glygen'>
+						<span>
+							<PersonIcon />
+						</span>{' '}
+						MY GLYGEN
+					</Nav.Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

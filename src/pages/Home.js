@@ -79,7 +79,7 @@ const featuredCards = [
 		description:
 			'Search data using queries prepared to provide answers to complex biological questions.',
 		image: glycanImg,
-		imageText: 'Quick Search',
+		imageText: 'Data',
 		href: 'https://data.glygen.org/',
 		target: '_blank'
 	},
@@ -88,7 +88,7 @@ const featuredCards = [
 		description:
 			'Composition search based on their residue. Add some text here.',
 		image: glycanImg,
-		imageText: 'Composition Search',
+		imageText: 'API',
 		href: 'https://api.glygen.org/',
 		target: '_blank'
 	},
@@ -97,7 +97,7 @@ const featuredCards = [
 		description:
 			'GlyGen data visualization via charts, diagrams, and chart bars.',
 		image: glycanImg,
-		imageText: 'Image Text',
+		imageText: 'SPARQL',
 		href: 'https://sparql.glygen.org/',
 		target: '_blank'
 	}
