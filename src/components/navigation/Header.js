@@ -1,4 +1,5 @@
 import React from 'react';
+// import './Header.css';
 import logo from '../../images/glygen_logos/glygen-logoW.svg';
 import { NavDropdown, Navbar, Nav, Row, Col } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
