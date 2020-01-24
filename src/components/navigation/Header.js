@@ -1,5 +1,5 @@
 import React from 'react';
-// import './Header.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import logo from '../../images/glygen_logos/glygen-logoW.svg';
 import { NavDropdown, Navbar, Nav, Row, Col } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,7 +12,6 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Container from '@material-ui/core/Container';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 const useStyles = makeStyles(theme => ({
 	search: {

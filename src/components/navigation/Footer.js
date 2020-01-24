@@ -1,12 +1,12 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import logoFooter from '../../images/glygen_logos/glygen-logoW-top.svg';
 import ugaLogo from '../../images/univ_logos/logo-uga.svg';
 import gwuLogo from '../../images/univ_logos/logo-gwu.svg';
-import { Navbar, Col, Nav, Image, Row } from 'react-bootstrap';
+import { Navbar, Col, Image, Row } from 'react-bootstrap';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import '../../App.css';
 
 const useStyles = makeStyles(theme => ({
@@ -27,15 +27,12 @@ const useStyles = makeStyles(theme => ({
 export default function Header() {
 	const classes = useStyles();
 	return (
-		//const Footer = () => (
 		<React.Fragment>
 			<CssBaseline />
 			<Navbar sticky='bottom' className='gg-blue text-center gg-footer'>
-				<Container
-					maxWidth='xl'
-					className='themed-container container-fluid justify-content-center'>
-					<Row className='text-center'>
-						<Col>
+				<Container maxWidth='xl' className='justify-content-center'>
+					<Row className='text-center justify-content-center'>
+						<Col md={'auto'}>
 							<Navbar.Brand href='#home'>
 								<img
 									href='#home'
@@ -46,7 +43,7 @@ export default function Header() {
 							</Navbar.Brand>
 						</Col>
 						<Box display='flex' alignItems='center' className='box-footer'>
-							<Col>
+							<Col md={'auto'}>
 								<Navbar.Text>
 									<a
 										href='/license'
@@ -76,7 +73,7 @@ export default function Header() {
 							</Col>
 						</Box>
 						<Box display='flex' alignItems='center' className='box-footer'>
-							<Col>
+							<Col md={'auto'}>
 								<Navbar.Text className={classes.navbarText}>
 									Funded by{' '}
 									<a
@@ -90,7 +87,7 @@ export default function Header() {
 							</Col>
 						</Box>
 						<Box display='flex' alignItems='center' className='box-footer'>
-							<Col>
+							<Col md={'auto'}>
 								<Navbar.Text className={classes.navbarText}>
 									Grant #{' '}
 									<a
@@ -103,7 +100,7 @@ export default function Header() {
 								</Navbar.Text>
 							</Col>
 						</Box>
-						<Col>
+						<Col md={'auto'}>
 							<a
 								href='https://www.ccrc.uga.edu/'
 								target='_blank'
@@ -123,4 +120,3 @@ export default function Header() {
 		</React.Fragment>
 	);
 }
-// export default Footer;
