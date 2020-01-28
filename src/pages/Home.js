@@ -16,6 +16,7 @@ import feedback from '../images/home/feedback.svg';
 import resources from '../images/home/resources.svg';
 import glycanImg from '../images/home/glycan-img.svg';
 import proteinImg from '../images/home/protein-img.svg';
+import enzymeImg from '../images/home/enzyme.png';
 
 const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
@@ -47,8 +48,8 @@ const featuredCards = [
 		title: 'Enzyme',
 		description:
 			'Search for enzymes based on protein accession, gene name, and glycan.',
-		image: glycanImg,
-		imageText: 'Image Text',
+		image: enzymeImg,
+		imageText: 'Enzyme',
 		href: '#'
 	},
 	{
