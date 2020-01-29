@@ -16,20 +16,14 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		// display: 'flex'
-		maxWidth: 345
+		// maxWidth: 345
+		// width: '100%'
 	},
 	cardTitle: {
 		textAlign: 'center'
 	},
 	cardDetails: {
 		flex: 1
-	},
-	cardMedia: {
-		// width: 160
-		height: 160
-	},
-	divider: {
-		margin: theme.spacing(1, 1)
 	}
 }));
 
@@ -77,9 +71,9 @@ export default function VersionCard(props) {
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
-			<Card className={classes.card}>
-				<CardActionArea className={classes.cardAction} component='a' href='#'>
-					{/* <Card className={classes.card}> */}
+			{/* <Card className={classes.card}> */}
+			<CardActionArea className={classes.cardAction} component='a' href='#'>
+				<Card className='card'>
 					<div className={classes.cardDetails}>
 						<CardContent>
 							<Typography
@@ -104,9 +98,9 @@ export default function VersionCard(props) {
 							</Typography>
 						</CardContent>
 					</div>
-					{/* </Card> */}
-				</CardActionArea>
-			</Card>
+				</Card>
+			</CardActionArea>
+			{/* </Card> */}
 		</Grid>
 	);
 }

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	card: {
 		// display: 'flex'
-		maxWidth: 345
+		// maxWidth: 345
 	},
 	cardTitle: {
 		textAlign: 'center'
@@ -25,10 +25,8 @@ const useStyles = makeStyles(theme => ({
 		flex: 1
 	},
 	cardMedia: {
-		height: 160,
-		marginBottom: 15,
-		width: '70%',
-    margin: '0 auto' 
+		height: 180,
+		margin: '0 auto'
 	},
 	divider: {
 		margin: theme.spacing(1, 1)
@@ -41,9 +39,14 @@ export default function InfoCard(props) {
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
-			<Card className={classes.card}>
-			<CardActionArea className={classes.cardAction} component='a' href='#'>
-				{/* <Card className={classes.card}> */}
+			{/* <Card className={classes.card}> */}
+			<CardActionArea
+				className={classes.cardAction}
+				component='a'
+				href={post.href}
+				target={post.target}
+				rel='noopener noreferrer'>
+				<Card className='card'>
 					<div className={classes.cardDetails}>
 						<CardContent>
 							<Typography
@@ -68,14 +71,15 @@ export default function InfoCard(props) {
 							<Typography
 								variant='subtitle1'
 								color='primary'
-								className='text-center'>
+								className='text-center'
+								style={{ fontWeight: 'bold', color: '#2f78b7' }}>
 								{post.button}
 							</Typography>
 						</CardContent>
 					</div>
-				{/* </Card> */}
+				</Card>
 			</CardActionArea>
-			</Card>
+			{/* </Card> */}
 		</Grid>
 	);
 }

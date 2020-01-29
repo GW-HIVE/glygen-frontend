@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+// import { Nav } from 'react-bootstrap';
 
 const useStyles = makeStyles(theme => ({
 	mainFeaturedCard: {
@@ -32,6 +33,13 @@ const useStyles = makeStyles(theme => ({
 			padding: theme.spacing(6),
 			paddingRight: 0
 		}
+	},
+	linkText: {
+		color: '#fff',
+		fontWeight: '600',
+		'&:hover': {
+			color: '#57affa'
+		}
 	}
 }));
 
@@ -53,7 +61,7 @@ export default function MainFeaturedCard(props) {
 			}
 			<div className={classes.overlay} />
 			<Grid container>
-				<Grid item md={6}>
+				<Grid item sm={12} md={11} lg={6}>
 					<div className={classes.mainFeaturedCardContent}>
 						<Typography
 							component='h1'
@@ -65,7 +73,10 @@ export default function MainFeaturedCard(props) {
 						<Typography variant='h5' color='inherit' paragraph>
 							{post.description}
 						</Typography>
-						<Link variant='subtitle1' href='#'>
+						<Link
+							variant='subtitle1'
+							href={post.href}
+							className={classes.linkText}>
 							{post.linkText}
 						</Link>
 					</div>
