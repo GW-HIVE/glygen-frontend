@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+// import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
+
+import { getSystemData } from '../../data'
 
 const useStyles = makeStyles(theme => ({
 	cardAction: {
@@ -33,7 +35,45 @@ const useStyles = makeStyles(theme => ({
 
 export default function VersionCard(props) {
 	const classes = useStyles();
-	const { post } = props;
+	
+	const [versionCard, setVersionCard] = useState({
+		title: 'Version',
+		text1: 'Portal:',
+		textData1: 'Data1',
+		text2: 'Webservice:',
+		textData2: 'Data2',
+		text3: 'Data:',
+		textData3: 'Data3'
+	})
+
+	useEffect(() => {
+
+		getSystemData().then(({ data }) => {
+			const { version } = data
+
+			const versionByComponent = version.reduce((byComponent, version) => ({
+				...byComponent,
+				[version.component]: {
+					version: version.version,
+					release_date: version.release_date,
+					component: version.component
+				}
+			}), 
+			{});
+
+			
+
+			setVersionCard({
+				...versionCard,
+			
+				 textData1: JSON.stringify(versionByComponent.api.version ),
+				//textData1: JSON.stringify(versionByComponent.api.version.release_date),
+				textData2: JSON.stringify(versionByComponent.data),
+				textData3: JSON.stringify(versionByComponent.software)
+			})
+		})		
+	}, [])
+
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
@@ -47,18 +87,19 @@ export default function VersionCard(props) {
 								variant='h5'
 								component='h2'
 								className={classes.cardTitle}>
-								{post.title}
+								{versionCard.title}
 							</Typography>
 							<Typography variant='subtitle1' color='textPrimary'>
 								<Box>
-                <span><strong>{post.text1}</strong></span>{' '}
-									{post.textData1}
+                <span><strong>{versionCard.text1}</strong></span>{' '}
+									{versionCard.textData1}
+									
 									<br />
-                  <span><strong>{post.text2}</strong></span>{' '}
-                  {post.textData2}
+                  <span><strong>{versionCard.text2}</strong></span>{' '}
+                  {versionCard.textData2}
 									<br />
-                  <span><strong>{post.text3}</strong></span>{' '}
-                  {post.textData3}
+                  <span><strong>{versionCard.text3}</strong></span>{' '}
+                  {versionCard.textData3}
 								</Box>
 							</Typography>
 						</CardContent>
@@ -70,6 +111,4 @@ export default function VersionCard(props) {
 	);
 }
 
-VersionCard.propTypes = {
-	post: PropTypes.object
-};
+
