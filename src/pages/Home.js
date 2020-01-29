@@ -7,8 +7,8 @@ import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
 import InfoCard from '../components/cards/InfoCard';
 import VersionCard from '../components/cards/VersionCard';
-import StatDBCard from '../components/cards/VersionCard';
-import TwitterCard from '../components/cards/VersionCard';
+import StatDBCard from '../components/cards/StatDBCard';
+import TwitterCard from '../components/cards/TwitterCard';
 import { Row } from 'react-bootstrap';
 // import card from '../images/home/featuredImg-7.jpg';
 // import card2 from '../images/home/featuredImg-8.jpg';
@@ -113,15 +113,7 @@ const infoCards = [
 		button: 'EXPLORE'
 	}
 ];
-const versionCard = {
-	title: 'Version',
-	text1: 'Portal:',
-	textData1: 'Data1',
-	text2: 'Webservice:',
-	textData2: 'Data2',
-	text3: 'Data:',
-	textData3: 'Data3'
-};
+
 const statDBCard = {
 	title: 'Database Statistics'
 };
@@ -150,11 +142,13 @@ export default function Home() {
 							</Grid>
 							<Grid item xs={12} md={3}>
 								<Grid container spacing={2}>
-									<VersionCard post={versionCard} />
+									<VersionCard />
 									<StatDBCard post={statDBCard} />
+									
 									{infoCards.map(post => (
 										<InfoCard key={post.title} post={post} />
 									))}
+									
 									<TwitterCard post={twitterCard} />
 								</Grid>
 							</Grid>
