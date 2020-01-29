@@ -103,6 +103,25 @@ const featuredCards = [
 		target: '_blank'
 	}
 ];
+const feedbackCard = {
+	title: 'Your Opinion Matters',
+	description:
+		'Please provide feedback and suggestions to help us improve the GlyGen portal and make it more useful for the community.',
+	image: feedback,
+	imageText: 'Feedback',
+	button: 'LEAVE FEEDBACK',
+	href: '/Feedback'
+};
+
+const resourcesCard = {
+	title: 'Explore Other Resources',
+	description:
+		'GlyGen is pleased to provide users with a variety of resources in glycobiology.',
+	image: resources,
+	imageText: 'Resources',
+	button: 'EXPLORE',
+	href: '/Resources'
+};
 const statDBCard = {
 	title: 'Database Statistics'
 };
@@ -138,17 +157,6 @@ export default function Home() {
 								<QuickSearchCard />
 								<TryMeCard />
 							</Grid>
-							<Grid item xs={12} md={3}>
-								<Grid container spacing={2}>
-									<VersionCard />
-									<StatDBCard post={statDBCard} />
-									
-									{infoCards.map(post => (
-										<InfoCard key={post.title} post={post} />
-									))}
-									
-									<TwitterCard post={twitterCard} />
-								</Grid>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3}>
 							<Grid
@@ -157,7 +165,7 @@ export default function Home() {
 								style={{
 									justifyContent: 'center'
 								}}>
-								<VersionCard post={versionCard} />
+								<VersionCard />
 								<InfoCard post={feedbackCard} />
 								<StatDBCard post={statDBCard} />
 								<InfoCard post={resourcesCard} />
@@ -168,8 +176,9 @@ export default function Home() {
 							</Grid>
 						</Grid>
 					</Grid>
+					{/* </Grid> */}
 				</Row>
-				</Grid>
+
 				{/* </main> */}
 			</Container>
 		</React.Fragment>
