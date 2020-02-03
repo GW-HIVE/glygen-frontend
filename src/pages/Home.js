@@ -53,14 +53,6 @@ const featuredCards = [
 		href: '#'
 	},
 	{
-		title: 'Quick Search',
-		description:
-			'Search data using queries prepared to provide answers to complex biological questions.',
-		image: glycanImg,
-		imageText: 'Quick Search',
-		href: '#'
-	},
-	{
 		title: 'Composition Search',
 		description:
 			'Composition search based on their residue. Add some text here.',
@@ -68,13 +60,6 @@ const featuredCards = [
 		imageText: 'Composition Search',
 		href: '#'
 	},
-	// {
-	// 	title: 'Statistics',
-	// 	description:
-	// 		'GlyGen data visualization via charts, diagrams, and chart bars.',
-	// 	image: glycanImg,
-	// 	imageText: 'Image Text'
-	// },
 	{
 		title: 'Data',
 		description:
@@ -125,23 +110,13 @@ const resourcesCard = {
 const statDBCard = {
 	title: 'Database Statistics'
 };
-// const twitterCard = {
-// 	title: 'News'
-// };
-// const selectTabCard = {
-// 	title: 'Quick Search'
-// };
 
 export default function Home() {
-	// const classes = useStyles();
-
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
-
 			<Container maxWidth='xl'>
-				{/* <main> */}
 				<Row className='show-grid'>
 					<Grid container spacing={4}>
 						<Grid item xs={12} md={8} lg={9}>
@@ -170,16 +145,10 @@ export default function Home() {
 								<StatDBCard post={statDBCard} />
 								<InfoCard post={resourcesCard} />
 								<TwitterCard />
-								{/* {infoCards.map(post => (
-										<InfoCard key={post.title} post={post} />
-									))} */}
 							</Grid>
 						</Grid>
 					</Grid>
-					{/* </Grid> */}
 				</Row>
-
-				{/* </main> */}
 			</Container>
 		</React.Fragment>
 	);

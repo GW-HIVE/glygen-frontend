@@ -16,6 +16,9 @@ import { getGlycanList } from '../data';
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from '../data/glycan'
 import QuerySummary from "../components/QuerySummary";
 
+// const SelectableTable = props => {
+// 	const [columns, setColumns] = useState([]);
+// 	const [selectedColumns, setSelectedColumns] = useState([]);
 
 
 const GlycanList = (props) => {
