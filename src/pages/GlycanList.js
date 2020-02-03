@@ -1,97 +1,65 @@
 import React, { useState, useEffect } from "react";
+
+import {
+  Link,
+  useParams
+} from "react-router-dom";
+
 import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
 import { getGlycanList } from '../data';
+import { GLYCAN_COLUMNS, getUserSelectedColumns } from '../data/glycan'
+import QuerySummary from "../components/QuerySummary";
 
 
-const SelectableTable = (props) => {
+
+const GlycanList = (props) => {
+
+  let { id } = useParams();
+
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState([]);
+  const [pagination, setPagination] = useState([]);
+  const [selectedColumns, setSelectedColumns] = useState([]);
 
 
-    const [columns, setColumns] = useState([]);
-    const [selectedColumns, setSelectedColumns] = useState([]);
-
-    useEffect(() => {
-        setColumns(props.columns);
-        setSelectedColumns(props.columns.filter(column => column.selected));
-    }, []);
-
-    const onColumnSelection = (event) => {
-        // console.log(event)
-        // console.log(event.target)
-
-        const checkbox = event.target;
-        const changedColumn = checkbox.getAttribute('data-column');
-
-        const newColumns = columns.map(column => ({
-            ...column,
-            selected: (column.dataField === changedColumn) ? event.target.checked : column.selected
-        }));
-
-        setColumns(newColumns)
-        setSelectedColumns(newColumns.filter(column => column.selected));
-    }
-
-    return (
-        <div>
-            {JSON.stringify(columns)}
-            <section>
-                <h1>Column Options</h1>
-                <ul>
-                    {columns.map(column => (
-                        <li key={column.text}>
-                            <label>
-                                <input data-column={column.dataField} type="checkbox" checked={column.selected} onChange={onColumnSelection    } />
-                                <span>{column.text}</span>
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-            </section>
-            {/* <PaginationControl data={props.pagination} /> */}
-            <section>
-                <h1>Table</h1>
-                {selectedColumns && selectedColumns.length &&
-                    <BootstrapTable bootstrap4 keyField='glytoucan_ac' data={ props.data } columns={ selectedColumns } />
-                }
-            </section>
-            {/* <PaginationControl data={props.pagination} /> */}
-        </div>
-    )
-}
+  useEffect(() => {
+    const selected = getUserSelectedColumns();
+    const userSelectedColumn = GLYCAN_COLUMNS.filter(column => selected.includes(column.dataField));
+    setSelectedColumns(userSelectedColumn);
 
 
-export default function GlycanList (props) {
-    // const classes = useStyles();
+    getGlycanList('9cc698050e82aed8c33696685da1ee1d').then(({ data }) => {
+      // place to change values before rendering
 
-    const [data, setData] = useState([]);
+      setData(data.results);
+      setQuery(data.query);
+      setPagination(data.pagination);
+    });
 
-    useEffect(() => {
-        getGlycanList('9cc698050e82aed8c33696685da1ee1d').then(({ data }) => {
-          // place to change values before rendering
-    
-    
-          setData(data.results);
-         // setQuery(data.query);
-        // setPagination(data.pagination);
-        });
-      }, 
-      []);
-
-    
-    const columnDefinition = [
-        { dataField: 'glytoucan_ac', text: 'Glycan ID',sort: true, selected:true},
-        { dataField: 'mass', text: 'Mass', sort: true, selected:true},
-        { dataField: 'iupac', text: 'iupac',sort: true, selected:true},
-        { dataField: 'glycoct', text: 'glycoct',sort: true},
-        { dataField: 'mass_pme', text: 'mass_pme',sort: true}
-      ];
+  
+  }, []);
 
 	return (
 		<>
-            <SelectableTable columns={columnDefinition} data={data} ></SelectableTable>
-        </>
+      <section>
+      <QuerySummary data={query}/>
+      </section>
+
+      <Link to={`/glycan-list/${id}/edit`}>Edit Columns</Link>
+      {/* <a href={`/glycan-list/${props.id}/edit`}>Edit Columns</a> */}
+
+      {selectedColumns && selectedColumns.length &&
+          <BootstrapTable bootstrap4 keyField="dataField" data={data} columns={ selectedColumns } pagination={ paginationFactory()}/>
+      }
+    </>
 	);
 }
+
+export default GlycanList;
+
