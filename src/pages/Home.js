@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import FeaturedCard from '../components/cards/FeaturedCard';
-import QuickSearchCard from '../components/cards/QuickSearchCard';
+// import QuickSearchCard from '../components/cards/QuickSearchCard';
 import TryMeCard from '../components/cards/TryMeCard';
 import InfoCard from '../components/cards/InfoCard';
 import VersionCard from '../components/cards/VersionCard';
@@ -14,9 +14,11 @@ import { Row } from 'react-bootstrap';
 import card3 from '../images/home/featuredImg-10.jpg';
 import feedback from '../images/home/feedback.svg';
 import resources from '../images/home/resources.svg';
-import glycanImg from '../images/home/glycan-img.svg';
+// import glycanImg from '../images/home/glycan-img.svg';
 import proteinImg from '../images/home/protein-img.svg';
 import enzymeImg from '../images/home/enzyme.png';
+// import featuredImg from '../images/home/featuredImg-7.jpg';
+import glycanImg from '../images/home/glycan.png';
 
 const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
@@ -41,6 +43,7 @@ const featuredCards = [
 		description:
 			'Search for proteins based on their sequences, accessions, and annotations.',
 		image: proteinImg,
+		// image: enzymeImg,
 		imageText: 'Protein',
 		href: '#'
 	},
@@ -49,7 +52,15 @@ const featuredCards = [
 		description:
 			'Search for enzymes based on protein accession, gene name, and glycan.',
 		image: enzymeImg,
-		imageText: 'Enzyme',
+		imageText: 'Enzyme Function',
+		href: '#'
+	},
+	{
+		title: 'Quick Search',
+		description:
+			'Search data using queries prepared to provide answers to complex biological questions.',
+		image: glycanImg,
+		imageText: 'Quick Search',
 		href: '#'
 	},
 	{
@@ -97,7 +108,6 @@ const feedbackCard = {
 	button: 'LEAVE FEEDBACK',
 	href: '/Feedback'
 };
-
 const resourcesCard = {
 	title: 'Explore Other Resources',
 	description:
@@ -129,7 +139,6 @@ export default function Home() {
 								{featuredCards.map(post => (
 									<FeaturedCard key={post.title} post={post} />
 								))}
-								<QuickSearchCard />
 								<TryMeCard />
 							</Grid>
 						</Grid>
