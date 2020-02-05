@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -19,6 +19,7 @@ import proteinImg from '../images/home/protein-img.svg';
 import enzymeImg from '../images/home/enzyme.png';
 // import featuredImg from '../images/home/featuredImg-7.jpg';
 import glycanImg from '../images/home/glycan.png';
+import { getSystemData } from '../data';
 
 const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
@@ -122,6 +123,12 @@ const statDBCard = {
 };
 
 export default function Home() {
+	const [homeData, setHomeData] = useState({ statistics: [], version: [] });
+
+	useEffect(() => {
+		getSystemData().then(response => setHomeData(response.data));
+	}, []);
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -149,7 +156,7 @@ export default function Home() {
 								style={{
 									justifyContent: 'center'
 								}}>
-								<VersionCard />
+								<VersionCard data={homeData.version} />
 								<InfoCard post={feedbackCard} />
 								<StatDBCard post={statDBCard} />
 								<InfoCard post={resourcesCard} />
