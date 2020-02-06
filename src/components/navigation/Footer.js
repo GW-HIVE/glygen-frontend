@@ -29,7 +29,7 @@ export default function Header() {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Navbar sticky='bottom' className='gg-blue text-center gg-footer'>
+			<Navbar className='gg-blue text-center gg-footer'>
 				<Container maxWidth='xl' className='justify-content-center'>
 					<Row className='text-center justify-content-center'>
 						<Col md={'auto'}>
