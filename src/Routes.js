@@ -9,18 +9,11 @@ import GlycanListEditColumns from './pages/GlycanListEditColumns';
 
 const Routes = props => (
 	<Switch>
+		<Route path='/' component={Home} />
+		<Route path='/home' component={Home} />
 		<Route path='/glycan-list/:id/edit' component={GlycanListEditColumns} />
 		<Route path='/glycan-list/:id' component={GlycanList} />
 		<Route path='/protein-list' component={ProteinList} />
-		<Route path='/home' component={Home} />
-
-
-
-	{/* <Switch>
-		<Route path='/glycan-list' component={GlycanList} />
-
-		<Route path='/home' component={Home} />
-		<Route path='/' component={Home} /> */}
 	</Switch>
 );
 
