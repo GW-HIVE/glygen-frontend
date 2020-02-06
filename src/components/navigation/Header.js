@@ -121,7 +121,7 @@ export default function Header() {
 			</Navbar>
 			<Navbar className='gg-blue' expand='xl'>
 				<Col sm={'auto'}>
-					<Navbar.Brand href='#home'>
+					<Navbar.Brand href='/home'>
 						<img src={logo} alt='Glygen' />
 					</Navbar.Brand>
 				</Col>
@@ -132,7 +132,7 @@ export default function Header() {
 				<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
 					<Col>
 						<Nav>
-							<Nav.Link href='#home'>HOME</Nav.Link>
+							<Nav.Link href='/home'>HOME</Nav.Link>
 							<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>
 								<NavDropdown.Item href='/glycan_search'>
 									Glycan Search

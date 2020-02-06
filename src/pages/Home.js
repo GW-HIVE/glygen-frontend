@@ -19,6 +19,8 @@ import proteinImg from '../images/home/protein-img.svg';
 import enzymeImg from '../images/home/enzyme.png';
 // import featuredImg from '../images/home/featuredImg-7.jpg';
 import glycanImg from '../images/home/glycan.png';
+import Helmet from 'react-helmet';
+import { head, getMeta } from '../utils/head';
 import { getSystemData } from '../data';
 
 const mainFeaturedCard = {
@@ -131,9 +133,14 @@ export default function Home() {
 
 	return (
 		<React.Fragment>
+			<Helmet>
+				<title>{head.home.title}</title>
+				{getMeta(head.home)}
+			</Helmet>
+
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
-			<Container maxWidth='xl'>
+			<Container maxWidth='xl' className='ggContainer'>
 				<Row className='show-grid'>
 					<Grid container spacing={4}>
 						<Grid item xs={12} md={8} lg={9}>
