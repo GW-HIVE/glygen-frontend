@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	cardMedia: {
 		// width: 160
-		height: 230,
-		width: '70%',
+		height: 275,
+		// width: '70%',
 		margin: '0 auto'
 	},
 	divider: {
