@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
+import { head, getMeta } from '../utils/head';
 
-import {
-  Link,
-  useParams
-} from "react-router-dom";
+import { Link, useParams } from 'react-router-dom';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
@@ -13,56 +12,63 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
 import { getGlycanList } from '../data';
-import { GLYCAN_COLUMNS, getUserSelectedColumns } from '../data/glycan'
-import QuerySummary from "../components/QuerySummary";
+import { GLYCAN_COLUMNS, getUserSelectedColumns } from '../data/glycan';
+import QuerySummary from '../components/QuerySummary';
 
 // const SelectableTable = props => {
 // 	const [columns, setColumns] = useState([]);
 // 	const [selectedColumns, setSelectedColumns] = useState([]);
 
+const GlycanList = props => {
+	let { id } = useParams();
 
-const GlycanList = (props) => {
+	const [data, setData] = useState([]);
+	const [query, setQuery] = useState([]);
+	const [pagination, setPagination] = useState([]);
+	const [selectedColumns, setSelectedColumns] = useState([]);
 
-  let { id } = useParams();
+	useEffect(() => {
+		const selected = getUserSelectedColumns();
+		const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
+			selected.includes(column.dataField)
+		);
+		setSelectedColumns(userSelectedColumn);
 
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState([]);
-  const [pagination, setPagination] = useState([]);
-  const [selectedColumns, setSelectedColumns] = useState([]);
+		getGlycanList('9cc698050e82aed8c33696685da1ee1d').then(({ data }) => {
+			// place to change values before rendering
 
+			setData(data.results);
+			setQuery(data.query);
+			setPagination(data.pagination);
+		});
 
-  useEffect(() => {
-    const selected = getUserSelectedColumns();
-    const userSelectedColumn = GLYCAN_COLUMNS.filter(column => selected.includes(column.dataField));
-    setSelectedColumns(userSelectedColumn);
-
-
-    getGlycanList('9cc698050e82aed8c33696685da1ee1d').then(({ data }) => {
-      // place to change values before rendering
-
-      setData(data.results);
-      setQuery(data.query);
-      setPagination(data.pagination);
-    });
-
-  
-  }, []);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<>
-      <section>
-      <QuerySummary data={query}/>
-      </section>
+			<Helmet>
+				<title>{head.glycanList.title}</title>
+				{getMeta(head.glycanList)}
+			</Helmet>
+			<section>
+				<QuerySummary data={query} />
+			</section>
 
-      <Link to={`/glycan-list/${id}/edit`}>Edit Columns</Link>
-      {/* <a href={`/glycan-list/${props.id}/edit`}>Edit Columns</a> */}
+			<Link to={`/glycan-list/${id}/edit`}>Edit Columns</Link>
+			{/* <a href={`/glycan-list/${props.id}/edit`}>Edit Columns</a> */}
 
-      {selectedColumns && selectedColumns.length &&
-          <BootstrapTable bootstrap4 keyField="dataField" data={data} columns={ selectedColumns } pagination={ paginationFactory()}/>
-      }
-    </>
+			{selectedColumns && selectedColumns.length && (
+				<BootstrapTable
+					bootstrap4
+					keyField='dataField'
+					data={data}
+					columns={selectedColumns}
+					pagination={paginationFactory()}
+				/>
+			)}
+		</>
 	);
-}
+};
 
 export default GlycanList;
-

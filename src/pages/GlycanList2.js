@@ -15,6 +15,7 @@ const SelectableTable = (props) => {
     useEffect(() => {
         setColumns(props.columns);
         setSelectedColumns(props.columns.filter(column => column.selected));
+    // eslint-disable-next-line
     }, []);
 
     const onColumnSelection = (event) => {
