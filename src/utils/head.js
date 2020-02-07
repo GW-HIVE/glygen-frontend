@@ -27,10 +27,24 @@ const head = {
       }
     ]
   },
+  glycanList: {
+    title: 'Glycan List | Summary of Your Glycan Search | glygen.org',
+    meta: [
+      {
+        name: 'description',
+        content: 'Results of a glycan structure search - a list of glycans conforming to the query parameters. Select the GlyTouCan Accession from the list.'
+      },
+      {
+        name: "keywords",
+        content: 'glycan, structure, collection, GlyTouCan Accession, Image of Glycan Structure, Monoisotopic Mass (Da), Monoisotopic Mass-pMe (Da), Number of Sugars, How Many Glycoproteins, How Many Enzymes.'
+      }
+    ]
+  },
+ 
   // Keep a newPage metadata empty and use it as a template. Cpy & Past & Add yuur data into it
   // You can find existing metadata at the link below or at the old glygen code
   // https://docs.google.com/spreadsheets/d/1plY03kEvr2iAQ86sNUr2hobnwnynLf5t9p7G3GSLKI4/edit#gid=0
-  newPge: {
+  newPage: {
     title: '',
     meta: [
       {
