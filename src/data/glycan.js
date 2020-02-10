@@ -9,9 +9,9 @@ export const getGlycanList = (glycanListId, offset = 1) => {
 };
 
 export const GLYCAN_COLUMNS = [
-  { dataField: "glytoucan_ac", text: "Glycan ID", sort: true },
-  { dataField: "mass", text: "Mass", sort: true },
-  { dataField: "iupac", text: "IUPAC", sort: true },
+  { dataField: "glytoucan_ac", text: "Glycan ID", sort: true, selected: true },
+  { dataField: "mass", text: "Mass", sort: true, selected: true },
+  { dataField: "iupac", text: "IUPAC", sort: true, selected: true },
   { dataField: "glycoct", text: "Glycoct", sort: true },
   { dataField: "mass_pme", text: "Mass_Pme", sort: true },
   { dataField: "number_enzymes", text: "No.of Enzyme", sort: true },
