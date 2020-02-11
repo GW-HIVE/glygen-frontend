@@ -33,24 +33,23 @@ const mainFeaturedCard = {
 	image: featuredImg,
 	imgText: 'main image description'
 };
-const horizontalHeadingData = {
-	h5VerticalText: 'DATABASES',
-	h2textTop: 'Our',
+const verticalHeadingData = {
+	h5VerticalText: 'LOOK AT',
 	h2textTopStrongAfter: 'Data',
 	h2textBottom: 'Resources',
 	pText:
 		'A list of publicly available databases, repositories and knowledgebases providing glycan-related information.'
 };
 const verticalHeadingTools = {
-	h5VerticalText: 'SEE OUR',
+	h5VerticalText: 'CHECK',
 	h2textTopStrongBefore: 'Tools',
 	h2textBottom: 'Resources',
 	pText:
 		'A list of tools, tool collections or link pages to glycomics related tools.'
 };
-const horizontalHeadingOrganiz = {
-	h5VerticalText: 'CONNECTIONS',
-	h2textTop: 'Our Resources',
+const verticallHeadingOrganiz = {
+	h5VerticalText: 'CONNECT',
+	h2textTop: 'Resources',
 	h2textBottom: 'of',
 	h2textBottomStrongAfter: 'Organizations',
 	pText: 'List of glycomics related organizations.'
@@ -224,7 +223,7 @@ const Resources = () => {
 				maxWidth='xl'
 				className='ggContainer'
 				style={{ backgroundColor: '#fff' }}>
-				<HorizontalHeading post={horizontalHeadingData} />
+				<VerticalHeading post={verticalHeadingData} />
 				<BootstrapTable
 					bootstrap4
 					striped
@@ -274,7 +273,7 @@ const Resources = () => {
 					</a>
 				</div>
 
-				<HorizontalHeading post={horizontalHeadingOrganiz} />
+				<VerticalHeading post={verticallHeadingOrganiz} />
 				<BootstrapTable
 					bootstrap4
 					striped
