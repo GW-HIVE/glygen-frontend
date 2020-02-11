@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainFeaturedCardContent: {
 		position: 'relative',
+		height: '400px !important',
 		padding: theme.spacing(3),
 		[theme.breakpoints.up('md')]: {
 			padding: theme.spacing(6),
@@ -63,9 +64,16 @@ export default function MainFeaturedCard(props) {
 			<Grid container>
 				<Grid item sm={12} md={11} lg={6}>
 					<div className={classes.mainFeaturedCardContent}>
+					<Typography
+							component='h1'
+							variant='h2'
+							color='inherit'
+							gutterBottom>
+							{post.pageName}
+						</Typography>
 						<Typography
 							component='h1'
-							variant='h3'
+							variant='h4'
 							color='inherit'
 							gutterBottom>
 							{post.title}

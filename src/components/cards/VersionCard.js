@@ -54,7 +54,7 @@ export default function VersionCard(props) {
 								className={classes.cardTitle}>
 								Version
 							</Typography>
-							<Typography variant='subtitle1' color='textPrimary'>
+							<Typography variant='p' color='textPrimary'>
 								<Box>
 									<span>
 										<strong>Portal:</strong>

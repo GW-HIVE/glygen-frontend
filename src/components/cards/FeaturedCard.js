@@ -59,7 +59,7 @@ export default function FeaturedCard(props) {
 							<Typography gutterBottom variant='h5' component='h2'>
 								{post.title}
 							</Typography>
-							<Typography variant='subtitle1' color='textSecondary' paragraph>
+							<Typography variant='p' color='textSecondary' paragraph>
 								{post.description}
 							</Typography>
 							<Divider className={classes.divider} />

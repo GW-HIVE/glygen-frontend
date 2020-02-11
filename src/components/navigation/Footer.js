@@ -64,7 +64,7 @@ export default function Header() {
 										Disclaimer
 									</a>{' '}
 									<a
-										href='/privacy_policy'
+										href='/contact_us'
 										className={classes.link}
 										style={{ marginRight: '15px' }}>
 										Contact Us

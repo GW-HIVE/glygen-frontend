@@ -64,7 +64,7 @@ export default function InfoCard(props) {
 									title={post.imageTitle}
 								/>
 							</Hidden>
-							<Typography variant='subtitle1' color='textSecondary' paragraph>
+							<Typography variant='p' color='textSecondary' paragraph>
 								{post.description}
 							</Typography>
 							<Divider className={classes.divider} />
