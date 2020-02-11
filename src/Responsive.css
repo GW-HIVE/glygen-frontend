@@ -1,0 +1,67 @@
+/*==================================================
+			 Media Queries        
+==================================================*/
+
+/* Large Devices (Desktops & Laptops) */
+
+@media (min-width: 1200px) and (max-width: 1299px) {
+}
+
+/* Medium Devices (Landscape Tablets & Medium Desktops) */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* Generic */
+	.vertical-heading h2 {
+		font-size: 29px;
+	}
+}
+
+/* Small Devices (Portrait Tablets & Small Desktops) */
+
+@media (min-width: 768px) and (max-width: 991px) {
+	/* Generic */
+	.vertical-heading h2 {
+		font-size: 29px;
+	}
+}
+
+/* Extra Small Devices (Landscape Phones & Portrait Tablets) */
+
+@media (max-width: 767px) {
+	/* Vertical heading */
+	.vertical-heading {
+		text-align: center;
+	}
+
+	.vertical-heading h5 {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+		display: block;
+		position: static;
+		margin-bottom: 15px;
+	}
+
+	.vertical-heading h2 {
+		font-size: 29px;
+		line-height: normal;
+		margin: 0;
+	}
+
+	.horizontal-heading h2 {
+		font-size: 30px;
+	}
+}
+
+/* Extra Small Devices (Portrait Phones & Smaller Devices) */
+
+@media (max-width: 480px) {
+	/* Generic */
+	.vertical-heading h2 {
+		font-size: 22px;
+	}
+}
+
+/* Extra Small Devices (Portrait Phones & Smaller Devices) */
+
+@media (max-width: 320px) {
+}

@@ -6,6 +6,7 @@
 	--gg-dark-blue: #1c4e78 !important;
 	--gg-light-blue: #afd9fd !important;
 	--gg-dark-hover: #57affa !important;
+	/* --gg-green: #60ba4b; */
 	/* --dark-blue-1: #215b9e; */
 	/* --dark-blue-2: #175385; */
 }
@@ -117,6 +118,77 @@ hr {
 	height: 1px !important;
 	background-color: rgba(0, 0, 0, 0.12) !important;
 }
+
+/* =========================================
+                Content Boxes
+============================================ */
+.content-box-md {
+	padding: 40px 0;
+}
+
+.media-container {
+	background: #fff;
+	margin-bottom: 35px;
+	padding: 0 5% 0;
+}
+
+/* =========================================
+        Vertical/Horizontal Headings
+============================================ */
+
+.vertical-heading h5 {
+	color: #1d9901;
+	font-size: 16px;
+	font-weight: 500;
+	text-transform: uppercase;
+	word-spacing: 9px;
+	display: inline-block;
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	position: relative;
+	top: 60px;
+	left: -40px;
+}
+
+.vertical-heading h2 {
+	margin: 0 0 0 35px;
+}
+
+.horizontal-heading h2,
+.vertical-heading h2 {
+	font-size: 38px;
+	font-weight: 100;
+	line-height: 45px;
+}
+
+/* .horizontal-heading {
+	margin-bottom: 30px;
+} */
+
+.horizontal-heading h5 {
+	font-size: 16px;
+	color: #1d9901;
+	font-weight: 540 !important;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.horizontal-heading h2 {
+	margin: 0;
+}
+
+/* =========================================
+        Buttons
+============================================ */
+.goToTop {
+	float: right;
+	padding: 5px 15px 0 0;
+	color: #2E78B7;
+}
+
+
+
 
 /* .App {
   text-align: center;
