@@ -15,7 +15,7 @@ import resourcesData from '../data/json/resourcesData';
 import { Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import '../Responsive.css';
+import '../css/Responsive.css';
 
 const useStyles = makeStyles(theme => ({
 	tableHeader: {
