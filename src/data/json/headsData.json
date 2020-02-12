@@ -1,0 +1,54 @@
+{
+	"home": {
+		"title": "Home | Informatics Resources for Glycoscience | GlyGen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data."
+			},
+			{
+				"name": "keywords",
+				"content": "glycan search, protein search, glycoprotein search, quick search, try me, data, data integration, SPARQL, help, contact us, resources, tutorials, explore, how to cite, data integration, data standarization, NIH project."
+			}
+		]
+	},
+	"resources": {
+		"title": "Resources | Data Resources | Tools | Organizations | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "List of glyomics and glycoproteomics resources useful for researchers. Resources include data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, tool collection, video, e-book."
+			},
+			{
+				"name": "keywords",
+				"content": "data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, tool collection, video, e-book, glycomics, glycoproteomics."
+			}
+		]
+	},
+	"glycanList": {
+		"title": "Glycan List | Summary of Your Glycan Search | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "Results of a glycan structure search - a list of glycans conforming to the query parameters. Select the GlyTouCan Accession from the list."
+			},
+			{
+				"name": "keywords",
+				"content": "glycan, structure, collection, GlyTouCan Accession, Image of Glycan Structure, Monoisotopic Mass (Da), Monoisotopic Mass-pMe (Da), Number of Sugars, How Many Glycoproteins, How Many Enzymes."
+			}
+		]
+	},
+	"newPage": {
+		"title": "",
+		"meta": [
+			{
+				"name": "description",
+				"content": ""
+			},
+			{
+				"name": "keywords",
+				"content": ""
+			}
+		]
+	}
+}
