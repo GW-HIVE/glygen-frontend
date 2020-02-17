@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import GlycanList from "./pages/GlycanList";
 import Resources from "./pages/Resources";
 import GlycanDetail from "./pages/GlycanDetail";
-// import ProteinList from "./pages/ProteinList";
 import GlycanListEditColumns from "./pages/GlycanListEditColumns";
 import HowToCite from "./pages/HowToCite";
 
@@ -12,7 +11,6 @@ const Routes = props => (
   <Switch>
     <Route path="/glycan-list/:id/edit" component={GlycanListEditColumns} />
     <Route path="/glycan-list/:id" component={GlycanList} />
-    {/* <Route path="/protein-list" component={ProteinList} /> */}
     <Route path="/glycan-detail" component={GlycanDetail} />
     <Route path="/resources" component={Resources} />
     <Route path="/how-to-cite" component={HowToCite} />

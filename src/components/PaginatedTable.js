@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
@@ -20,8 +18,7 @@ const PaginatedTable = ({
   sizePerPage,
   onTableChange,
   totalSize,
-  onDownload,
-  editColumnLink
+  onDownload
 }) => {
   const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
@@ -61,7 +58,10 @@ const PaginatedTable = ({
       }
     ] // A numeric array is also available. the purpose of above example is custom the text
   };
-
+  const selectRow = {
+    mode: "checkbox", // multi select
+    columnWidth: "60px"
+  };
   return (
     <div>
       <PaginationProvider
@@ -80,17 +80,13 @@ const PaginatedTable = ({
 
               <PaginationTotalStandalone {...paginationProps} />
 
-              {onDownload && <button>Download</button>}
-
-              {editColumnLink && (
-                <Button component={Link} to={editColumnLink}>
-                  Edit Columns
-                </Button>
-              )}
-
               <PaginationListStandalone {...paginationProps} />
             </div>
             <BootstrapTable
+              scrollTop={"Bottom"}
+              tableStyle={{ background: "#00ff00" }}
+              selectRow={selectRow}
+              striped
               remote
               keyField="id"
               data={data}

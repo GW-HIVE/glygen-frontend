@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
+import Button from "@material-ui/core/Button";
 import { head, getMeta } from "../utils/head";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
@@ -22,13 +23,11 @@ const GlycanList = props => {
   useEffect(() => {
     const selected = getUserSelectedColumns();
     const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
-      selected.includes(column.dataField)
+      selected.includes(column.text)
     );
     setSelectedColumns(userSelectedColumn);
 
     getGlycanList(id).then(({ data }) => {
-      // place to change values before rendering
-
       setData(data.results);
       setQuery(data.query);
       setPagination(data.pagination);
@@ -38,7 +37,6 @@ const GlycanList = props => {
       //   setSizePerPage()
       setTotalSize(data.pagination.total_length);
     });
-
     // eslint-disable-next-line
   }, []);
 
@@ -67,19 +65,23 @@ const GlycanList = props => {
       <section>
         <GlycanQuerySummary data={query} />
       </section>
+      <section>
+        <Button component={Link} to={`/glycan-list/${id}/edit`}>
+          Edit Columns
+        </Button>
 
-      {selectedColumns && selectedColumns.length && (
-        <PaginatedTable
-          data={data}
-          columns={selectedColumns}
-          page={page}
-          sizePerPage={sizePerPage}
-          totalSize={totalSize}
-          onTableChange={handleTableChange}
-          onDownload={() => {}}
-          editColumnLink={`/glycan-list/${id}/edit`}
-        />
-      )}
+        {selectedColumns && selectedColumns.length !== 0 && (
+          <PaginatedTable
+            data={data}
+            columns={selectedColumns}
+            page={page}
+            sizePerPage={sizePerPage}
+            totalSize={totalSize}
+            onTableChange={handleTableChange}
+            onDownload={() => {}}
+          />
+        )}
+      </section>
     </>
   );
 };
