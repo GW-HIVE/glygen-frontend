@@ -7,7 +7,7 @@ import VerticalHeading from '../components/headings/VerticalHeading';
 import PanelText from '../components/PanelText';
 import PanelButst from '../components/PanelBoots';
 import PanelTemplate from '../components/PanelTemplate';
-import SummaryTemplate from '../components/SummaryTemplate';
+import SummaryTemplate from '../components/SummaryTableTemplate';
 
 // import BootstrapTable from 'react-bootstrap-table-next';
 import 'bootstrap/dist/css/bootstrap.min.css';
