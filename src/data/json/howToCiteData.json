@@ -1,0 +1,74 @@
+{
+	"howToCite": [
+		{
+			"title": "How To Cite",
+			"text": "",
+			"heading": "GlyGen: Computational and Informatics Resources for Glycoscience.",
+			"authors": "William S York, Raja Mazumder, Rene Ranzinger, Nathan Edwards, Robel Kahsay, Kiyoko F AokiKinoshita, Matthew P Campbell, Richard D Cummings, Ten Feizi, Maria Martin, Darren A Natale, Nicolle H Packer, Robert J Woods, Gaurav Agarwal, Sena Arpinar, Sanath Bhat, Judith Blake, Leyla Jael Garcia Castro, Brian Fochtman, Jeffrey Gildersleeve, Radoslav Goldman, Xavier Holmes, Vinamra Jain, Sujeet Kulkarni, Rupali Mahadik, Akul Mehta, Reza Mousavi, Sandeep Nakarakommula, Rahi Navelkar, Nagarajan Pattabiraman, Michael J Pierce, Karen Ross, Preethi Vasudev, Jeet Vora, Tatiana Williamson, and Wenjin Zhang.",
+			"publisher": "Glycobiology. 2019.",
+			"pmid": "PMID:",
+			"website": {
+				"name": "31616925",
+				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
+			},
+			"period": "."
+		}
+	],
+	"ourPapers": [
+		{
+			"title": "Our Papers",
+			"text": "",
+			"heading": "GlyGen: Computational and Informatics Resources for Glycoscience.",
+			"authors": "William S York, Raja Mazumder, Rene Ranzinger, Nathan Edwards, Robel Kahsay, Kiyoko F AokiKinoshita, Matthew P Campbell, Richard D Cummings, Ten Feizi, Maria Martin, Darren A Natale, Nicolle H Packer, Robert J Woods, Gaurav Agarwal, Sena Arpinar, Sanath Bhat, Judith Blake, Leyla Jael Garcia Castro, Brian Fochtman, Jeffrey Gildersleeve, Radoslav Goldman, Xavier Holmes, Vinamra Jain, Sujeet Kulkarni, Rupali Mahadik, Akul Mehta, Reza Mousavi, Sandeep Nakarakommula, Rahi Navelkar, Nagarajan Pattabiraman, Michael J Pierce, Karen Ross, Preethi Vasudev, Jeet Vora, Tatiana Williamson, and Wenjin Zhang.",
+			"publisher": "Glycobiology. 2019.",
+			"pmid": "PMID",
+			"website": {
+				"name": "31616925",
+				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
+			},
+			"period": "."
+		},
+		{
+			"text": "",
+			"heading": "GlyGen data model and data processing workflow.",
+			"authors": "Robel Kahsay, Jeet Vora, Rahi Navelkar, Brian Fochtman, Reza Mousavi, Leyla Jael Garcia Castro, Preethi Vasudev, Gaurav Agarwal, Sujeet Kulkarni, Rupali Mahadik, Tatiana Williamson, Wenjin Zhang, Maria Martin, Karen Ross, Darren A Natale, Kiyoko F AokiKinoshita, Matthew P Campbell, Nathan Edwards, Rene Ranzinger, William S York, Raja Mazumder.",
+			"publisher": "Glycobiology. 2020.",
+			"pmid": "PMID",
+			"website": {
+				"name": "31616925",
+				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
+			},
+			"period": "."
+		}
+	],
+	"relatedPapers": [
+		{
+			"title": "Related Papers",
+			"comingSoon": "Coming soon.",
+			"heading": "",
+			"authors": "",
+			"publisher": "",
+			"pmid": "",
+			"website": {
+				"name": "",
+				"url": ""
+			},
+			"period": ""
+		}
+	],
+	"websiteCitation": [
+		{
+			"title": "Website Citation",
+			"text": "Example of the GlyGen homepage citation.",
+			"heading": "MLA GlyGen Website Citation",
+			"citations": "York, William, Mazumder, Raja, et al. “GlyGen: Computational and Informatics Resources for Glycoscience.” Glygen, NIH Glycoscience Common Fund, November 2019, www.glygen.org/index.html.",
+			"publisher": "",
+			"pmid": "",
+			"website": {
+				"name": "",
+				"url": ""
+			},
+			"period": ""
+		}
+	]
+}

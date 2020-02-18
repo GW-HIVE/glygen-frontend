@@ -99,6 +99,46 @@ a {
 	color: var(--gg-light-blue) !important;
 }
 
+.panelHeadBgr {
+	background: #f0f0f0;
+}
+.panelHeadBgr h3 {
+	margin: 0 auto;
+}
+.panelHeadText {
+	color: #1d9901 !important;
+}
+.panelTable {
+	min-width: 650px;
+}
+.panel-width {
+	width: 70% !important;
+	margin: 0 auto;
+	overflow: auto;
+}
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color: #e2e8ef;
+}
+.table {
+	background-color: white;
+}
+.table-body > .table-row {
+	background-color: #fff;
+}
+.table-body > .table-row:nth-child(2n) {
+	background: #f3f3f3;
+}
+.results-table-top {
+	width: 50% !important;
+	margin: 0 auto;
+	overflow: auto;
+	margin-bottom: 20px;
+}
+.text-indent div {
+	text-indent: -50px;
+	padding-left: 50px;
+}
 /* ========================================
              Cards
 ==========================================*/
@@ -184,11 +224,8 @@ hr {
 .goToTop {
 	float: right;
 	padding: 5px 15px 0 0;
-	color: #2E78B7;
+	color: #2e78b7;
 }
-
-
-
 
 /* .App {
   text-align: center;

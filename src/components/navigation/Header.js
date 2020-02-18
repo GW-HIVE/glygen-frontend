@@ -134,18 +134,18 @@ export default function Header() {
 						<Nav>
 							<Nav.Link href='/home'>HOME</Nav.Link>
 							<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='/glycan_search'>
+								<NavDropdown.Item href='/glycan-search'>
 									Glycan Search
 								</NavDropdown.Item>
-								<NavDropdown.Item href='/protein_search'>
+								<NavDropdown.Item href='/protein-search'>
 									Protein Search
 								</NavDropdown.Item>
-								<NavDropdown.Item href='/enzyme_search'>
+								<NavDropdown.Item href='/enzyme-search'>
 									Enzyme Search
 								</NavDropdown.Item>
 							</NavDropdown>
-							<Nav.Link href='/quick_search'>QUICK&nbsp;SEARCH</Nav.Link>
-							<Nav.Link href='/try_me'>TRY&nbsp;ME</Nav.Link>
+							<Nav.Link href='/quick-search'>QUICK&nbsp;SEARCH</Nav.Link>
+							<Nav.Link href='/try-me'>TRY&nbsp;ME</Nav.Link>
 							<NavDropdown title='DATA' id='basic-nav-dropdown'>
 								<NavDropdown.Item
 									href='https://data.glygen.org/'
@@ -168,11 +168,11 @@ export default function Header() {
 							</NavDropdown>
 							<NavDropdown title='HELP' id='basic-nav-dropdown'>
 								<NavDropdown.Item href='/about'>About</NavDropdown.Item>
-								<NavDropdown.Item href='/contact_us'>
+								<NavDropdown.Item href='/contact-us'>
 									Contact Us
 								</NavDropdown.Item>
 								<NavDropdown.Item href='/feedback'>Feedback</NavDropdown.Item>
-								<NavDropdown.Item href='/how_to_cite'>
+								<NavDropdown.Item href='/how-to-cite'>
 									How to Cite
 								</NavDropdown.Item>
 							</NavDropdown>
