@@ -10,7 +10,7 @@ const PanelTemplate = () => {
 		<React.Fragment>
 			<CssBaseline />
 			<Container maxWidth='xl' className='ggContainer'>
-				<Table bordered hover5 size='lg'>
+				<Table bordered hover5 size='lg' >
 					<thead className='panelHeadBgr panelHeadText'>
 						<tr>
 							<th>

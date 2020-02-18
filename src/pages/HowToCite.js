@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
 import PanelText from '../components/PanelText';
-import PanelButst from '../components/PanelBoots';
+import PanelHowToCite from '../components/PanelHowToCite';
 import PanelTemplate from '../components/PanelTemplate';
 import SummaryTemplate from '../components/SummaryTableTemplate';
 
@@ -51,26 +51,18 @@ const HowToCite = () => {
 				// style={{ backgroundColor: '#fff' }}
 			>
 				<VerticalHeading post={vertHeadHowToCite} />
-				{/* <BootstrapTable
-					bootstrap4
-					striped
-					hover
-					headerClasses='panelHeadBgr panelHeadText'
-					keyField='id'
-					data={howToCiteData.dataResourcesData}
-					columns={dhowToCiteCols}
-				/> */}
+        <PanelHowToCite data={howToCiteData.howToCite} />
+        <PanelHowToCite data={howToCiteData.ourPapers} />
+        <PanelHowToCite data={howToCiteData.relatedPapers} />
+        <PanelHowToCite data={howToCiteData.websiteCitation}/>
+				<br />
+				<br />
+				<PanelTemplate />
+				<br />
+				<SummaryTemplate />
 				<br />
 				<br />
 				<PanelText post={howToCite} />
-				<br />
-				<br />
-        <PanelButst data={howToCiteData.howToCite} />
-        <br />
-        <br />
-        <PanelTemplate />
-        <br />
-        <SummaryTemplate />
 			</Container>
 		</React.Fragment>
 	);

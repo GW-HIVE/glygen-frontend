@@ -111,18 +111,33 @@ a {
 .panelTable {
 	min-width: 650px;
 }
+.panel-width {
+	width: 70% !important;
+	margin: 0 auto;
+	overflow: auto;
+}
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	background-color: #e2e8ef;
+}
+.table {
+	background-color: white;
+}
 .table-body > .table-row {
 	background-color: #fff;
 }
-
 .table-body > .table-row:nth-child(2n) {
-	background: rgb(147, 183, 241);
+	background: #f3f3f3;
 }
 .results-table-top {
 	width: 50% !important;
 	margin: 0 auto;
 	overflow: auto;
 	margin-bottom: 20px;
+}
+.text-indent div {
+	text-indent: -50px;
+	padding-left: 50px;
 }
 /* ========================================
              Cards
