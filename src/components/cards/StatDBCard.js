@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -26,19 +26,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function StatDBCard(props) {
 	const classes = useStyles();
-	// const [statisticsData, setStatisticsData] = useState({});
-
-	// useEffect(() => {
-	// 	var statData = {};
-	// 	// props.data.forEach(statObj => {
-	// 	// 	statData[statObj.species] = {
-	// 	// 		glycans: statObj.glycans,
-	// 	// 		proteins: statObj.proteins,
-	// 	// 		glycoproteins: statObj.glycoproteins
-	// 	// 	};
-	// 	// });
-	// 	setStatisticsData(props.data);
-	// }, [props.data]);
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>

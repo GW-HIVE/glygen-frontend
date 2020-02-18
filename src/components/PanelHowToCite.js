@@ -23,11 +23,10 @@ const PanelHowToCite = props => {
 									<ul>
 										<p>{json.text}</p>
 										<li>
-											<p>{json.comingSoon}</p>
-											<h5>
+											<p>{json.comingSoon}
+												<div>
 												<strong>{json.heading}</strong>
-											</h5>
-											<p>
+												</div>
 												{json.authors}
 												<div
 													style={{ textIndent: '-50px', paddingLeft: '50px' }}>
