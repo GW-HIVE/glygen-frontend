@@ -70,8 +70,10 @@ const GlycanListEditColumns = () => {
           </li>
         ))}
       </ul>
+      {selectedCount === 0 && <p>Please select atleast one checkbox</p>}
       <Button
-        className="btn btn-primary"
+        variant="contained"
+        color="primary"
         component={Link}
         to={`/glycan-list/${id}`}
         variant="contained"

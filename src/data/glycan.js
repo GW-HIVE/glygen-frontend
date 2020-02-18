@@ -1,6 +1,9 @@
 import { getJson } from "./api";
-import { ROOT_API_URL } from "./api";
-import React from "react";
+// import { ROOT_API_URL } from "./api";
+import React, { useState } from "react";
+import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import CustomPopover from "../components/CustomPopover";
+// import BootstrapTable from "react-bootstrap-table-next";
 
 export const getGlycanList = (glycanListId, offset = 1) => {
   const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":20,"order":"asc"}`;
@@ -8,7 +11,7 @@ export const getGlycanList = (glycanListId, offset = 1) => {
 };
 
 export const getGlycanDetail = accessionId => {
-  const url = `${ROOT_API_URL}/glycan/detail/${accessionId}`;
+  const url = `/glycan/detail/${accessionId}`;
   return getJson(url);
 };
 
@@ -27,22 +30,44 @@ export const GLYCAN_COLUMNS = [
     )
   },
   {
-    dataField: "glytoucan_ac",
     text: "Glycan Image",
     sort: false,
     selected: true,
     formatter: (value, row) => (
       <div className="img-wrapper">
-        <img class="img-cartoon" src={glycanImageUrl + value} alt="Cartoon" />
+        <img
+          className="img-cartoon"
+          src={glycanImageUrl + row.glytoucan_ac}
+          alt="Cartoon"
+        />
       </div>
-    )
+    ),
+    headerStyle: (colum, colIndex) => {
+      return { width: "30%", textAlign: "left" };
+    }
   },
+
   { dataField: "mass", text: "Mass", sort: true, selected: true },
-  { dataField: <pre>"iupac"</pre>, text: "IUPAC", sort: true },
   {
-    dataField: <pre>"glycoct"</pre>,
-    text: "Glycoct",
+    dataField: "iupac",
+    text: "IUPAC",
     sort: true
+  },
+  {
+    dataField: "glycoct",
+    text: "Glycoct",
+    sort: true,
+    formatter: (value, row, rowIdx) => {
+      const txt = value.replace(/\\n/g, "\n");
+      return (
+        <CustomPopover
+          id={rowIdx}
+          key={rowIdx}
+          displayText={txt.substring(0, 10) + " ..."}
+          popOverText={txt}
+        ></CustomPopover>
+      );
+    }
   },
   { dataField: "mass_pme", text: "Mass_Pme", sort: true },
   { dataField: "number_enzymes", text: "No.of Enzyme", sort: true },

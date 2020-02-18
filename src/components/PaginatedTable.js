@@ -62,6 +62,20 @@ const PaginatedTable = ({
     mode: "checkbox", // multi select
     columnWidth: "60px"
   };
+  const expandRow = {
+    renderer: row => (
+      <div>
+        <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
+        <p>
+          You can render anything here, also you can add additional data on
+          every row object
+        </p>
+        <p>
+          expandRow.renderer callback will pass the origin row object to you
+        </p>
+      </div>
+    )
+  };
   return (
     <div>
       <PaginationProvider
@@ -83,6 +97,7 @@ const PaginatedTable = ({
               <PaginationListStandalone {...paginationProps} />
             </div>
             <BootstrapTable
+              expandRow={expandRow}
               scrollTop={"Bottom"}
               tableStyle={{ background: "#00ff00" }}
               selectRow={selectRow}

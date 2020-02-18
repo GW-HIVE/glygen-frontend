@@ -1,55 +1,56 @@
 import React, { useState, useEffect } from "react";
+
 import { getGlycanDetail } from "../data/glycan";
-
+import { useParams } from "react-router-dom";
+// import { Col, Row } from "react-bootstrap";
+// import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 const GlycanDetail = props => {
-  const [protienListId, setProtienListId] = useState("");
-  const [accessionId, setAccessionId] = useState("");
+  let { id } = useParams();
 
-  // const [data, setData] = useState([]);
-
-  // const [query, setQuery] = useState({});
-  // const [pagination, setPagination] = useState({});
+  const [detailData, setDetailData] = useState({});
 
   useEffect(() => {
-    setProtienListId(props.protienListId);
-    setAccessionId(props.accessionId);
+    const getGlycanDetailData = getGlycanDetail(id);
 
-    const getProtienDetailData = getGlycanDetail(props.accessionId);
-
-    getProtienDetailData.then(({ data }) => {
+    getGlycanDetailData.then(({ data }) => {
       if (data.code) {
         console.log(data.code);
         // displayErrorByCode(data.code);
         // activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
       } else {
-        // place to change values before rendering
-        // setData(data.results);
-        // setQuery(data.query);
-        // setPagination(data.pagination);
+        setDetailData(data);
       }
     });
 
-    getProtienDetailData.catch(({ response }) => {
+    getGlycanDetailData.catch(({ response }) => {
       alert(JSON.stringify(response));
     });
   }, []);
 
-  // const columnDefinition = [
-  //   { dataField: 'uniprot_canonical_ac', text: 'Protein ID',sort: true},
-  //   { dataField: 'mass', text: 'Mass'},
-  //   { dataField: 'protein_name_short', text: 'Protein Name'},
-  //   { dataField: 'refseq_ac', text: 'Refseq Acc'},
-  //   { dataField: 'refseq_name', text: 'Refseq Name'},
-  //   { dataField: 'organism', text: 'Organism'},
-  //   { dataField: 'gene_name', text: 'Gene Name'},
-  //   { dataField: 'protein_name_long', text: 'Protein Name'}
-  // ];
+  const { mass, glytoucan } = detailData;
 
   return (
     <>
+      {/* <MDBContainer>
+        <MDBRow>
+          <MDBCol md="3">Mass: {mass}</MDBCol>
+          <MDBCol md="6">.col-md-4</MDBCol>
+          <MDBCol md="3">.col-md-4</MDBCol>
+        </MDBRow>
+      </MDBContainer> */}
+
       <h1>Glycan Detail</h1>
 
-      <a href={`/protien-list/${protienListId}`}>Protein List</a>
+      {/* <a href={`/glycan-list/${id}`}>Glycan List</a> */}
+      {/* <p>Mass: {mass}</p> */}
+
+      {glytoucan && glytoucan.glytoucan_ac && (
+        <p>GlyToucan Accession: {glytoucan.glytoucan_ac + ""}</p>
+      )}
+
+      {/* glytoucan<p>GlyToucan Accession: glytoucan_ac}</p> */}
+
+      <p>{JSON.stringify(detailData)}</p>
 
       {/* <QuerySummary data={query} />
       <DataTable pagination={pagination} data={data} columnDefinition={columnDefinition} /> */}

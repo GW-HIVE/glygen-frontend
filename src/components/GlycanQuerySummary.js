@@ -22,15 +22,15 @@ const useStyles = makeStyles(theme => ({
     width: "50%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "10px;",
-    paddingTop: "10px;"
+    marginTop: "10px",
+    paddingTop: "10px"
   }
 }));
 
 const GlycanQuerySummary = props => {
   const title = "Glycan Search Summary";
 
-  const { data } = props;
+  const { data, onModifySearch } = props;
 
   // const classes = useStyles();
 
@@ -42,10 +42,7 @@ const GlycanQuerySummary = props => {
     mass,
     mass_type,
     number_monosaccharides,
-    // organism,
-    // organism_list,
-    // organism_list.id,
-    // organism_list.name,
+    organism,
     glycan_type,
     glycan_subtype,
     protein_identifier,
@@ -53,6 +50,12 @@ const GlycanQuerySummary = props => {
     enzyme,
     pmid
   } = data;
+
+  const formatOrganisms = organism => {
+    const organismNames = organism.organism_list.map(item => item.name);
+
+    return organismNames.join(` ${organism.operation} `);
+  };
 
   return (
     // <Col md={4}>&nbsp;</Col>
@@ -65,8 +68,8 @@ const GlycanQuerySummary = props => {
           width: "50%",
           marginLeft: "auto",
           marginRight: "auto",
-          marginTop: "10px;",
-          paddingTop: "10px;"
+          marginTop: "10px",
+          paddingTop: "10px"
         }}
       >
         {/* <div className="resultsTableTop"> */}
@@ -83,95 +86,102 @@ const GlycanQuerySummary = props => {
         {/* </div> */}
 
         <div align="center border border-dark">
-          <table>
-            <tbody>
-              {/* glycan typeahead */}
-              {glytoucan_ac && (
-                <Row>
-                  <Col md={6}>Glycan Id:</Col>
-                  <Col md={6}>{glytoucan_ac}</Col>
-                </Row>
-              )}
-              {/* glycan mass */}
-              {mass && mass.min && (
-                <Row>
-                  <Col md={6}>Mass:</Col>
-                  <Col md={6}>
-                    {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
-                  </Col>
-                </Row>
-              )}
-              {/* glycan sugar */}
-              {number_monosaccharides && number_monosaccharides.min && (
-                <Row>
-                  <Col md={6}>Sugar:</Col>
-                  <Col md={6}>
-                    {number_monosaccharides.min}&#8209;
-                    {number_monosaccharides.max}&nbsp;Da&nbsp;
-                  </Col>
-                </Row>
-              )}
-              {/* Oraganism */}
-              {/* {organism && (
-              <Row>
-                <Col md={6}>Organism:</Col>
-                <Col md={6}>
-                  {organism_list.id}&nbsp{organism_list.name}
-                </Col>
-              </Row>
-            )} */}
-              {glycan_type && (
-                <Row>
-                  <Col md={6}>Glycan Type:</Col>
-                  <Col md={6}>{glycan_type}</Col>
-                </Row>
-              )}
-              {glycan_subtype && (
-                <Row>
-                  <Col md={6}>Glycan SubType:</Col>
-                  <Col md={6}>{glycan_subtype}</Col>
-                </Row>
-              )}
+          {/* glycan typeahead */}
+          {glytoucan_ac && (
+            <Row>
+              <Col md={6}>Glycan Id:</Col>
+              <Col md={6}>{glytoucan_ac}</Col>
+            </Row>
+          )}
+          {/* glycan mass */}
+          {mass && mass.min && (
+            <Row>
+              <Col md={6}>Mass:</Col>
+              <Col md={6}>
+                {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
+              </Col>
+            </Row>
+          )}
+          {/* glycan sugar */}
+          {number_monosaccharides && number_monosaccharides.min && (
+            <Row>
+              <Col md={6}>Sugar:</Col>
+              <Col md={6}>
+                {number_monosaccharides.min}&#8209;
+                {number_monosaccharides.max}&nbsp;Da&nbsp;
+              </Col>
+            </Row>
+          )}
 
-              {protein_identifier && (
-                <Row>
-                  <Col md={6}>Protein Identifier:</Col>
-                  <Col md={6}>{protein_identifier}</Col>
-                </Row>
-              )}
-              {/* {enzyme.id && (
-              <Row>
-                <Col md={6}>Synthesizing Enzyme:</Col>
-                <Col md={6}>{enzyme.id}</Col>
-              </Row>
-            )} */}
-              {glycan_motif && (
-                <Row>
-                  <Col md={6}>Motif:</Col>
-                  <Col md={6}>{glycan_motif}</Col>
-                </Row>
-              )}
-              {pmid && (
-                <Row>
-                  <Col md={6}>PMID:</Col>
-                  <Col md={6}>{pmid}</Col>
-                </Row>
-              )}
-              <div align="center">
-                <button type="button" className="btn btn-primary">
-                  Update Results
-                </button>
-                &nbsp; &nbsp;
-                <button type="button" className="btn btn-primary">
-                  Modify Search
-                </button>
-                <p className="small">
-                  ** To perform the same search again using the current version
-                  of the database, click <strong>“Update Results”</strong>.
-                </p>
-              </div>
-            </tbody>
-          </table>
+          {/* Oraganism */}
+          {organism && (
+            <Row>
+              <Col md={6}>Organism:</Col>
+              <Col md={6}>{formatOrganisms(organism)}</Col>
+            </Row>
+          )}
+          {glycan_type && (
+            <Row>
+              <Col md={6}>Glycan Type:</Col>
+              <Col md={6}>{glycan_type}</Col>
+            </Row>
+          )}
+          {glycan_subtype && (
+            <Row>
+              <Col md={6}>Glycan SubType:</Col>
+              <Col md={6}>{glycan_subtype}</Col>
+            </Row>
+          )}
+
+          {protein_identifier && (
+            <Row>
+              <Col md={6}>Protein Identifier:</Col>
+              <Col md={6}>{protein_identifier}</Col>
+            </Row>
+          )}
+          {enzyme && enzyme.id && (
+            <Row>
+              <Col md={6}>Synthesizing Enzyme:</Col>
+              <Col md={6}>{enzyme.id}</Col>
+            </Row>
+          )}
+          {glycan_motif && (
+            <Row>
+              <Col md={6}>Motif:</Col>
+              <Col md={6}>{glycan_motif}</Col>
+            </Row>
+          )}
+          {pmid && (
+            <Row>
+              <Col md={6}>PMID:</Col>
+              <Col md={6}>{pmid}</Col>
+            </Row>
+          )}
+          <Row>
+            <div align="center">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                Update Results
+              </button>
+              &nbsp; &nbsp;
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={onModifySearch}
+              >
+                Modify Search
+              </button>
+              <p className="small">
+                ** To perform the same search again using the current version of
+                the database, click <strong>“Update Results”</strong>.
+              </p>
+            </div>
+          </Row>
         </div>
       </Col>
       {/* </div> */}

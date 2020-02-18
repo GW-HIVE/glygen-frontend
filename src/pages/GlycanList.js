@@ -56,6 +56,10 @@ const GlycanList = props => {
     });
   };
 
+  const handleModifySearch = () => {
+    props.history.push(`/glycan-search/${id}`);
+  };
+
   return (
     <>
       <Helmet>
@@ -63,12 +67,24 @@ const GlycanList = props => {
         {getMeta(head.glycanList)}
       </Helmet>
       <section>
-        <GlycanQuerySummary data={query} />
+        <GlycanQuerySummary data={query} onModifySearch={handleModifySearch} />
       </section>
       <section>
-        <Button component={Link} to={`/glycan-list/${id}/edit`}>
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to={`/glycan-list/${id}/edit`}
+        >
           Edit Columns
         </Button>
+        {/* <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {/glycan-list/${id}/edit;}}
+              >
+                Update Results
+              </button> */}
 
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
