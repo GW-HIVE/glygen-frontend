@@ -50,6 +50,10 @@
 	.horizontal-heading h2 {
 		font-size: 30px;
 	}
+	.align-logo-bottom {
+		padding-top: 0 !important;
+		padding-right: 10px;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
