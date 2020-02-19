@@ -1,6 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import logo from '../../images/glygen_logos/glygen-logoW.svg';
+import { Link, NavLink } from 'react-router-dom'
 import { NavDropdown, Navbar, Nav, Row, Col } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
@@ -65,13 +66,11 @@ export default function Header() {
 					<Row className='show-grid'>
 						<Col xs={4} sm={3} md={7} lg={9}>
 							<div className='text-right'>
-								<Navbar.Text className={classes.navbarText}>
-									<a href='/glygen' className={classes.navbarText}>
+								<Navbar.Text as={NavLink} to='/glygen' className={classes.navbarText}>
 										<span>
 											<PersonIcon />
 										</span>{' '}
 										MY GLYGEN
-									</a>
 								</Navbar.Text>
 							</div>
 						</Col>
@@ -121,7 +120,7 @@ export default function Header() {
 			</Navbar>
 			<Navbar className='gg-blue' expand='xl'>
 				<Col sm={'auto'}>
-					<Navbar.Brand href='/home'>
+					<Navbar.Brand as={Link} to='/home'>
 						<img src={logo} alt='Glygen' />
 					</Navbar.Brand>
 				</Col>
@@ -132,20 +131,20 @@ export default function Header() {
 				<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
 					<Col>
 						<Nav>
-							<Nav.Link href='/home'>HOME</Nav.Link>
+							<Nav.Link as={NavLink} to='/home'>HOME</Nav.Link>
 							<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='/glycan-search'>
+								<NavDropdown.Item as={NavLink} to='/glycan-search'>
 									Glycan Search
 								</NavDropdown.Item>
-								<NavDropdown.Item href='/protein-search'>
+								<NavDropdown.Item as={NavLink} to='/protein-search'>
 									Protein Search
 								</NavDropdown.Item>
-								<NavDropdown.Item href='/enzyme-search'>
+								<NavDropdown.Item as={NavLink} to='/enzyme-search'>
 									Enzyme Search
 								</NavDropdown.Item>
 							</NavDropdown>
-							<Nav.Link href='/quick-search'>QUICK&nbsp;SEARCH</Nav.Link>
-							<Nav.Link href='/try-me'>TRY&nbsp;ME</Nav.Link>
+							<Nav.Link as={NavLink} to='/quick-search'>QUICK&nbsp;SEARCH</Nav.Link>
+							<Nav.Link as={NavLink} to='/try-me'>TRY&nbsp;ME</Nav.Link>
 							<NavDropdown title='DATA' id='basic-nav-dropdown'>
 								<NavDropdown.Item
 									href='https://data.glygen.org/'
@@ -167,19 +166,19 @@ export default function Header() {
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown title='HELP' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='/about'>About</NavDropdown.Item>
-								<NavDropdown.Item href='/contact-us'>
+								<NavDropdown.Item as={NavLink} to='/about'>About</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/contact-us'>
 									Contact Us
 								</NavDropdown.Item>
-								<NavDropdown.Item href='/feedback'>Feedback</NavDropdown.Item>
-								<NavDropdown.Item href='/how-to-cite'>
+								<NavDropdown.Item as={NavLink} to='/feedback'>Feedback</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/how-to-cite'>
 									How to Cite
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown title='MORE' id='basic-nav-dropdown'>
-								<NavDropdown.Item href='/media'>Media</NavDropdown.Item>
-								<NavDropdown.Item href='/resources'>Resources</NavDropdown.Item>
-								<NavDropdown.Item href='/frameworks'>
+								<NavDropdown.Item as={NavLink} to='/media'>Media</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/resources'>Resources</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/frameworks'>
 									Frameworks
 								</NavDropdown.Item>
 							</NavDropdown>
