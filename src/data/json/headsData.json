@@ -1,6 +1,6 @@
 {
 	"home": {
-		"title": "Home | Informatics Resources for Glycoscience | GlyGen.org",
+		"title": "Home | Informatics Resources for Glycoscience | glygen.org",
 		"meta": [
 			{
 				"name": "description",
@@ -35,6 +35,19 @@
 			{
 				"name": "keywords",
 				"content": "glycan, structure, collection, GlyTouCan Accession, Image of Glycan Structure, Monoisotopic Mass (Da), Monoisotopic Mass-pMe (Da), Number of Sugars, How Many Glycoproteins, How Many Enzymes."
+			}
+		]
+	},
+	"nowToCite": {
+		"title": "How To Cite | Publications and Citations | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "How to cite GlyGen paper. MLA GlyGen Website Citation. GlyGen papers. Glycobiology journal."
+			},
+			{
+				"name": "keywords",
+				"content": "publications, citations, how to cite, GlyGen citation, GlyGen paper citation, MLA GlyGen citation, author, glycobiology, journal."
 			}
 		]
 	},

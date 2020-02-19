@@ -19,33 +19,29 @@ const PanelHowToCite = props => {
 					<tbody className='table-body'>
 						{props.data.map(json => (
 							<tr className='table-row'>
-								<td>
-									<ul>
-										<p>{json.text}</p>
-										<li>
-											<p>{json.comingSoon}
-												<div>
-												<strong>{json.heading}</strong>
-												</div>
-												{json.authors}
-												<div
-													style={{ textIndent: '-50px', paddingLeft: '50px' }}>
-													{json.citations}
-												</div>
-												{json.publisher}
-												<div>
-													{json.pmid}{' '}
-													<a
-														href={json.website.url}
-														target='_blank'
-														rel='noopener noreferrer'>
-														{json.website.name}
-													</a>
-													{json.period}
-												</div>
-											</p>
-										</li>
-									</ul>
+								<td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
+									<p>{json.text}</p>
+									<p>
+										{json.comingSoon}
+										<div>
+											<strong>{json.heading}</strong>
+										</div>
+										{json.authors}
+										<div style={{ textIndent: '-50px', paddingLeft: '50px' }}>
+											{json.citations}
+										</div>
+										{json.publisher}
+										<div>
+											{json.pmid}{' '}
+											<a
+												href={json.website.url}
+												target='_blank'
+												rel='noopener noreferrer'>
+												{json.website.name}
+											</a>
+											{json.period}
+										</div>
+									</p>
 								</td>
 							</tr>
 						))}
