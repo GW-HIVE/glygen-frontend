@@ -31,7 +31,6 @@ const GlycanList = props => {
       setData(data.results);
       setQuery(data.query);
       setPagination(data.pagination);
-
       const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
       setPage(currentPage);
       //   setSizePerPage()
@@ -78,14 +77,6 @@ const GlycanList = props => {
         >
           Edit Columns
         </Button>
-        {/* <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {/glycan-list/${id}/edit;}}
-              >
-                Update Results
-              </button> */}
-
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
             data={data}

@@ -1,8 +1,10 @@
 import { getJson } from "./api";
+import { Link, NavLink } from "react-router-dom";
 // import { ROOT_API_URL } from "./api";
 import React, { useState } from "react";
 import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import CustomPopover from "../components/CustomPopover";
+import { Navbar } from "react-bootstrap";
 // import BootstrapTable from "react-bootstrap-table-next";
 
 export const getGlycanList = (glycanListId, offset = 1) => {
@@ -15,6 +17,10 @@ export const getGlycanDetail = accessionId => {
   return getJson(url);
 };
 
+// <span>
+//   <a href={`/glycan-detail/${row.glytoucan_ac}`}>{row.glytoucan_ac}</a>
+// </span>
+
 const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 const glycanListId = " ";
 export const GLYCAN_COLUMNS = [
@@ -24,9 +30,9 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     selected: true,
     formatter: (value, row) => (
-      <span>
-        <a href={`/glycan-detail/${row.glytoucan_ac}`}>{row.glytoucan_ac}</a>
-      </span>
+      <Navbar.Text as={NavLink} to={`/glycan-detail/${row.glytoucan_ac}`}>
+        {row.glytoucan_ac}
+      </Navbar.Text>
     )
   },
   {
