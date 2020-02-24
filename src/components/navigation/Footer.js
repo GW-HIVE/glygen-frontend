@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import logoFooter from '../../images/glygen_logos/glygen-logoW-top.svg';
 import ugaLogo from '../../images/univ_logos/logo-uga.svg';
@@ -44,32 +45,34 @@ export default function Header() {
 						</Col>
 						<Box display='flex' alignItems='center' className='box-footer'>
 							<Col md={'auto'}>
-								<Navbar.Text>
-									<a
-										href='/license'
-										className={classes.link}
-										style={{ marginRight: '15px' }}>
-										License
-									</a>{' '}
-									<a
-										href='/privacy_policy'
-										className={classes.link}
-										style={{ marginRight: '15px' }}>
-										Privacy&nbsp;Policy
-									</a>{' '}
-									<a
-										href='/license'
-										className={classes.link}
-										style={{ marginRight: '15px' }}>
-										Disclaimer
-									</a>{' '}
-									<a
-										href='/contact_us'
-										className={classes.link}
-										style={{ marginRight: '15px' }}>
-										Contact Us
-									</a>{' '}
-								</Navbar.Text>
+								<Navbar.Text
+									as={Link}
+									to='/license'
+									className={classes.link}
+									style={{ marginRight: '15px' }}>
+									License
+								</Navbar.Text>{' '}
+								<Navbar.Text
+									as={Link}
+									to='/privacy_policy'
+									className={classes.link}
+									style={{ marginRight: '15px' }}>
+									Privacy&nbsp;Policy
+								</Navbar.Text>{' '}
+								<Navbar.Text
+									as={Link}
+									to='/disclaimer'
+									className={classes.link}
+									style={{ marginRight: '15px' }}>
+									Disclaimer
+								</Navbar.Text>{' '}
+								<Navbar.Text
+									as={Link}
+									to='/contact_us'
+									className={classes.link}
+									style={{ marginRight: '15px' }}>
+									Contact Us
+								</Navbar.Text>{' '}
 							</Col>
 						</Box>
 						<Box display='flex' alignItems='center' className='box-footer'>
