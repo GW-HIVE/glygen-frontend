@@ -235,7 +235,7 @@ hr {
 ============================================ */
 .goToTop {
 	float: right;
-	padding: 5px 15px 0 0;
+	padding-right: 5%;
 	color: #2e78b7;
 }
 

@@ -10,7 +10,6 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import howToCiteData from '../data/json/howToCiteData';
 import { Row, Col } from 'react-bootstrap';
 import Sidebar from '../components/navigation/Sidebar';
-// import ToTopArrow from '../components/ToTopArrow';
 
 const HowToCite = props => {
 	const vertHeadHowToCite = {
@@ -42,11 +41,7 @@ const HowToCite = props => {
 					</Col>
 					<Col sm={12} md={10} lg={10}>
 						<VerticalHeadingLogo post={vertHeadHowToCite} />
-						<PanelHowToCite
-							id='howToCite'
-							data={howToCiteData.howToCite}
-						/>{' '}
-						{/* <ToTopArrow /> */}
+						<PanelHowToCite id='howToCite' data={howToCiteData.howToCite} />
 						<PanelHowToCite id='ourPapers' data={howToCiteData.ourPapers} />
 						<PanelHowToCite
 							id='relatedPapers'
