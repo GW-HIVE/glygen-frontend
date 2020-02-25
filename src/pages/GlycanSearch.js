@@ -288,7 +288,7 @@ const GlycanSearch = props => {
         setAge1(data.query.mass_type === undefined? "Native" : data.query.glytoucan_ac);
         setAge3(data.query.glycan_type === undefined? "" : data.query.glycan_type);
 
-      if (data.query.glycan_type === "")
+      if (data.query.glycan_type === undefined)
         setHidden(true);
       else 
         setHidden(false);
