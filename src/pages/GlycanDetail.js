@@ -78,7 +78,7 @@ const GlycanDetail = props => {
       }
     }
   }
-  const { mass, glytoucan, species, composition, classification } = detailData;
+  const { mass, glytoucan, species, composition } = detailData;
   const evidences = groupEvidencesInSpecies(species);
   const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 
@@ -118,7 +118,12 @@ const GlycanDetail = props => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="xl" className="ggContainer">
+
+      <Container
+        maxWidth="xl"
+        className="ggContainer"
+        style={{ paddingTop: "50px" }}
+      >
         <Table bordered hover5 size="lg" className="panel-width">
           <thead className="panelHeadBgr panelHeadText">
             <tr>
@@ -131,40 +136,39 @@ const GlycanDetail = props => {
             <tr className="table-row">
               <td>
                 <ul>
-                  <li>
-                    {glytoucan && glytoucan.glytoucan_ac && (
-                      <>
-                        <p>
-                          <b> GlyToucan image:</b>
-                          <img
-                            className="img-cartoon"
-                            src={glycanImageUrl + glytoucan.glytoucan_ac}
-                            alt="Cartoon"
-                          />
-                        </p>
-                        <p>
-                          <b>GlyToucan Accession:</b>
-                          <Link
-                            href={glytoucan.glytoucan_url}
-                            target="noopener noreferrer _blank"
-                          >
-                            {glytoucan.glytoucan_ac}
-                          </Link>
-                        </p>
-                        <p>
-                          <b>Monoisotopic Mass:</b>
-                          {mass}
-                          (Permethylated Mass:{mass})
-                        </p>
-                      </>
-                    )}
-                    {composition && (
+                  {glytoucan && glytoucan.glytoucan_ac && (
+                    <>
                       <p>
-                        <b>Composition</b>:{formatComposition(composition)}
-                        <sub>{composition.count}</sub>
+                        <b> GlyToucan image:</b>
+                        <img
+                          className="img-cartoon"
+                          src={glycanImageUrl + glytoucan.glytoucan_ac}
+                          alt="Cartoon"
+                        />
                       </p>
-                    )}
-                    {/* {classification &&
+                      <p>
+                        <b>GlyToucan Accession:</b>
+                        <Link
+                          href={glytoucan.glytoucan_url}
+                          target="noopener noreferrer _blank"
+                        >
+                          {glytoucan.glytoucan_ac}
+                        </Link>
+                      </p>
+                      <p>
+                        <b>Monoisotopic Mass:</b>
+                        {mass}
+                        (Permethylated Mass:{mass})
+                      </p>
+                    </>
+                  )}
+                  {composition && (
+                    <p>
+                      <b>Composition</b>:{formatComposition(composition)}
+                      <sub>{composition.count}</sub>
+                    </p>
+                  )}
+                  {/* {classification &&
                       classification.type &&
                       classification.subtype(
                         <p>
@@ -183,7 +187,6 @@ const GlycanDetail = props => {
                           </Link>
                         </p>
                       )} */}
-                  </li>
                 </ul>
               </td>
             </tr>
