@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import Button from "@material-ui/core/Button";
+
 import { head, getMeta } from "../utils/head";
 import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +8,7 @@ import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
 import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
+import paginationFactory from "react-bootstrap-table2-paginator";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -65,18 +66,25 @@ const GlycanList = props => {
         <title>{head.glycanList.title}</title>
         {getMeta(head.glycanList)}
       </Helmet>
-      <section>
+      <section style={{ paddingTop: "20px" }}>
         <GlycanQuerySummary data={query} onModifySearch={handleModifySearch} />
       </section>
       <section>
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           component={Link}
-          to={`/glycan-list/${id}/edit`}
+          to=
         >
           Edit Columns
-        </Button>
+        </Button> */}
+
+        <Link to={`/glycan-list/${id}/edit`}>
+          <button type="button" className="btn btn-primary">
+            Edit Columns
+          </button>
+        </Link>
+
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
             data={data}

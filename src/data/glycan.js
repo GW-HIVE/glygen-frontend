@@ -1,11 +1,11 @@
 import { getJson } from "./api";
-import { Link, NavLink } from "react-router-dom";
-// import { ROOT_API_URL } from "./api";
-import React, { useState } from "react";
-import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
+import { NavLink } from "react-router-dom";
+import React from "react";
 import CustomPopover from "../components/CustomPopover";
 import { Navbar } from "react-bootstrap";
-// import BootstrapTable from "react-bootstrap-table-next";
+//import BootstrapTable from "react-bootstrap-table-next";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 export const getGlycanList = (glycanListId, offset = 1) => {
   const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":20,"order":"asc"}`;
@@ -16,19 +16,23 @@ export const getGlycanDetail = accessionId => {
   const url = `/glycan/detail/${accessionId}`;
   return getJson(url);
 };
-
-// <span>
-//   <a href={`/glycan-detail/${row.glytoucan_ac}`}>{row.glytoucan_ac}</a>
-// </span>
-
+const defaultSorted = [
+  {
+    dataField: "glytoucan_ac",
+    order: "desc"
+  }
+];
 const glycanImageUrl = "https://api.glygen.org/glycan/image/";
-const glycanListId = " ";
+//const glycanListId = " ";
 export const GLYCAN_COLUMNS = [
   {
     dataField: "glytoucan_ac",
     text: "Glycan ID",
     sort: true,
     selected: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    },
     formatter: (value, row) => (
       <Navbar.Text as={NavLink} to={`/glycan-detail/${row.glytoucan_ac}`}>
         {row.glytoucan_ac}
@@ -49,20 +53,39 @@ export const GLYCAN_COLUMNS = [
       </div>
     ),
     headerStyle: (colum, colIndex) => {
-      return { width: "30%", textAlign: "left" };
+      return {
+        width: "30%",
+        textAlign: "left",
+        backgroundColor: "#4B85B6",
+        color: "white"
+      };
     }
   },
 
-  { dataField: "mass", text: "Mass", sort: true, selected: true },
+  {
+    dataField: "mass",
+    text: "Mass",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    },
+    selected: true
+  },
   {
     dataField: "iupac",
     text: "IUPAC",
-    sort: true
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
   },
   {
     dataField: "glycoct",
     text: "Glycoct",
     sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    },
     formatter: (value, row, rowIdx) => {
       const txt = value.replace(/\\n/g, "\n");
       return (
@@ -75,10 +98,38 @@ export const GLYCAN_COLUMNS = [
       );
     }
   },
-  { dataField: "mass_pme", text: "Mass_Pme", sort: true },
-  { dataField: "number_enzymes", text: "No.of Enzyme", sort: true },
-  { dataField: "number_proteins", text: "No.of Protein", sort: true },
-  { dataField: "number_monosaccharides", text: "No. of Sugar", sort: true }
+  {
+    dataField: "mass_pme",
+    text: "Mass_Pme",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
+  {
+    dataField: "number_enzymes",
+    text: "No.of Enzyme",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
+  {
+    dataField: "number_proteins",
+    text: "No.of Protein",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
+  {
+    dataField: "number_monosaccharides",
+    text: "No. of Sugar",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  }
 ];
 
 const glycanColumnsStorageKey = "glycan-columns";

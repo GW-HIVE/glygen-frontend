@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
+
 import { Link, useParams } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -42,14 +42,9 @@ const GlycanListEditColumns = () => {
 
     setColumns(newColumns);
 
-    // setSelectedColumns(newSelectedColumns);
-
     const selectedFields = newSelectedColumns.map(column => column.text);
     setUserSelectedColumns(selectedFields);
     setSelectedCount(newSelectedColumns.length);
-
-    // localStorage.setItem('glycan-columns', JSON.stringify(['key1', 'key2']))
-    // JSON.parse(localStorage.getItem('glycan-columns'))
   };
 
   return (
@@ -70,8 +65,10 @@ const GlycanListEditColumns = () => {
           </li>
         ))}
       </ul>
-      {selectedCount === 0 && <p>Please select atleast one checkbox</p>}
-      <Button
+      {selectedCount === 0 && (
+        <p style={{ color: "red" }}>Please select atleast one checkbox</p>
+      )}
+      {/* <Button
         variant="contained"
         color="primary"
         component={Link}
@@ -80,7 +77,17 @@ const GlycanListEditColumns = () => {
         disabled={selectedCount === 0}
       >
         Back to Glycan List
-      </Button>
+      </Button> */}
+
+      <Link to={`/glycan-list/${id}`}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={selectedCount === 0}
+        >
+          Back to Glycan List
+        </button>
+      </Link>
     </>
   );
 };

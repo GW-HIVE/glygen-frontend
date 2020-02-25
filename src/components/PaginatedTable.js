@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
   PaginationProvider,
@@ -8,15 +7,13 @@ import paginationFactory, {
   SizePerPageDropdownStandalone
 } from "react-bootstrap-table2-paginator";
 
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
-
 const PaginatedTable = ({
   data,
   page,
   columns,
   sizePerPage,
   onTableChange,
+
   totalSize,
   onDownload
 }) => {
@@ -27,20 +24,8 @@ const PaginatedTable = ({
   );
 
   const options = {
-    // paginationSize: 4,
-    // pageStartIndex: 0,
-    // alwaysShowAllBtns: true, // Always show next and previous button
-    // withFirstAndLast: false, // Hide the going to First and Last page button
-    // hideSizePerPage: true, // Hide the sizePerPage dropdown always
-    // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
-    // firstPageText: "First",
-    // prePageText: "Back",
-    // nextPageText: "Next",
-    // lastPageText: "Last",
-    // nextPageTitle: "First page",
-    // prePageTitle: "Pre page",
-    // firstPageTitle: "Next page",
-    // lastPageTitle: "Last page",
+    firstPageTitle: "Next page",
+    lastPageTitle: "Last page",
     showTotal: true,
     paginationTotalRenderer: customTotal,
     sizePerPageList: [
@@ -58,10 +43,12 @@ const PaginatedTable = ({
       }
     ] // A numeric array is also available. the purpose of above example is custom the text
   };
+
   const selectRow = {
     mode: "checkbox", // multi select
     columnWidth: "60px"
   };
+
   const expandRow = {
     renderer: row => (
       <div>
@@ -99,7 +86,6 @@ const PaginatedTable = ({
             <BootstrapTable
               expandRow={expandRow}
               scrollTop={"Bottom"}
-              tableStyle={{ background: "#00ff00" }}
               selectRow={selectRow}
               striped
               remote
