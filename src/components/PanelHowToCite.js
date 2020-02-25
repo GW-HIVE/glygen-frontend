@@ -4,10 +4,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import ToTopArrow from '../components/ToTopArrow';
 
 const PanelHowToCite = props => {
 	return (
-		<React.Fragment>
+		<div id={props.id}>
 			<CssBaseline />
 			<Container maxWidth='xl' className='ggContainer'>
 				<Table bordered striped5 hover size='lg' className='panel-width'>
@@ -48,7 +49,7 @@ const PanelHowToCite = props => {
 					</tbody>
 				</Table>
 			</Container>
-		</React.Fragment>
+		</div>
 	);
 };
 export default PanelHowToCite;

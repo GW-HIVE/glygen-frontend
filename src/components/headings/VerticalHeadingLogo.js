@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Link } from '@material-ui/core';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Container from '@material-ui/core/Container';
 import glygenLogoDownload from '../../images/glygen_logos/logo-glygen-blue-36.svg';
 import CardMedia from '@material-ui/core/CardMedia';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 export default function VerticalHeadingLogo(props) {
 	const { post } = props;
@@ -14,7 +15,7 @@ export default function VerticalHeadingLogo(props) {
 		<div className='content-box-md'>
 			<Container maxWidth='lg'>
 				<Row>
-					<Grid item xs={9} sm={9} md={9} lg={9}>
+					<Grid item xs={8} sm={8} md={9} lg={9}>
 						<div className='vertical-heading'>
 							<Typography variant='h5'>{post.h5VerticalText}</Typography>
 							<Typography variant='h2'>
@@ -41,14 +42,16 @@ export default function VerticalHeadingLogo(props) {
 							</Typography>
 						</div>
 					</Grid>
-					<Grid item xs={3} sm={3} md={3} lg={3} align='right'>
+					<Grid item xs={4} sm={4} md={3} lg={3}>
 						<Row>
 							<Link
-								className='align-logo-bottom'
+								className='align-logo'
 								align='bottom'
 								href='https://github.com/glygener/glygen-frontend/tree/master/src/GlyGen-logos'
 								target='_blank'>
-								DOWNLOAD
+								<div style={{ color: '#2E78B7' }}>
+									<GetAppIcon /> Download Logo
+								</div>
 								<CardMedia
 									component='img'
 									image={glygenLogoDownload}

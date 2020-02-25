@@ -112,7 +112,7 @@ a {
 	min-width: 650px;
 }
 .panel-width {
-	width: 70% !important;
+	width: 90% !important;
 	margin: 0 auto;
 	overflow: auto;
 }
@@ -220,7 +220,7 @@ hr {
 .horizontal-heading h2 {
 	margin: 0;
 }
-.align-logo-bottom {
+.align-logo {
 	padding-top: 40px !important;
 }
 /* =========================================
