@@ -49,7 +49,8 @@ a {
 	font-weight: 600;
 	letter-spacing: 0.4px;
 }
-.gg-nav-link:hover {
+.gg-nav-link:hover,
+.dropdown-toggle.nav-link:hover {
 	color: var(--gg-light-blue) !important;
 }
 .gg-nav-link.active {
