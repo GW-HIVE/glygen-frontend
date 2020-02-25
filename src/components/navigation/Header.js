@@ -1,7 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import logo from '../../images/glygen_logos/glygen-logoW.svg';
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom';
 import { NavDropdown, Navbar, Nav, Row, Col } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
@@ -66,11 +66,14 @@ export default function Header() {
 					<Row className='show-grid'>
 						<Col xs={4} sm={3} md={7} lg={9}>
 							<div className='text-right'>
-								<Navbar.Text as={NavLink} to='/glygen' className={classes.navbarText}>
-										<span>
-											<PersonIcon />
-										</span>{' '}
-										MY GLYGEN
+								<Navbar.Text
+									as={NavLink}
+									to='/glygen'
+									className={classes.navbarText}>
+									<span>
+										<PersonIcon />
+									</span>{' '}
+									MY GLYGEN
 								</Navbar.Text>
 							</div>
 						</Col>
@@ -93,18 +96,18 @@ export default function Header() {
 						<Col xs={3} sm={6} md={3} lg={2}>
 							<div className='text-right mt-sm-2 ml-lg-5 pl-sm-2'>
 								<a
-									href='https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/'
-									target='_blank'
-									rel='noopener noreferrer'
-									className={classes.navbarText}>
-									<YouTubeIcon className='mr-sm-3' />
-								</a>
-								<a
 									href='https://twitter.com/gly_gen'
 									target='_blank'
 									rel='noopener noreferrer'
 									className={classes.navbarText}>
 									<TwitterIcon className='mr-sm-3' />
+								</a>
+								<a
+									href='https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/'
+									target='_blank'
+									rel='noopener noreferrer'
+									className={classes.navbarText}>
+									<YouTubeIcon className='mr-sm-3' />
 								</a>
 								<a
 									href='https://github.com/glygener'
@@ -131,7 +134,9 @@ export default function Header() {
 				<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
 					<Col>
 						<Nav>
-							<Nav.Link as={NavLink} to='/home'>HOME</Nav.Link>
+							<Nav.Link className='gg-nav-link' as={NavLink} to='/home'>
+								HOME
+							</Nav.Link>
 							<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>
 								<NavDropdown.Item as={NavLink} to='/glycan-search'>
 									Glycan Search
@@ -143,8 +148,12 @@ export default function Header() {
 									Enzyme Search
 								</NavDropdown.Item>
 							</NavDropdown>
-							<Nav.Link as={NavLink} to='/quick-search'>QUICK&nbsp;SEARCH</Nav.Link>
-							<Nav.Link as={NavLink} to='/try-me'>TRY&nbsp;ME</Nav.Link>
+							<Nav.Link className='gg-nav-link' as={NavLink} to='/quick-search'>
+								QUICK&nbsp;SEARCH
+							</Nav.Link>
+							<Nav.Link className='gg-nav-link' as={NavLink} to='/try-me'>
+								TRY&nbsp;ME
+							</Nav.Link>
 							<NavDropdown title='DATA' id='basic-nav-dropdown'>
 								<NavDropdown.Item
 									href='https://data.glygen.org/'
@@ -166,18 +175,26 @@ export default function Header() {
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown title='HELP' id='basic-nav-dropdown'>
-								<NavDropdown.Item as={NavLink} to='/about'>About</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/about'>
+									About
+								</NavDropdown.Item>
 								<NavDropdown.Item as={NavLink} to='/contact-us'>
 									Contact Us
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/feedback'>Feedback</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/feedback'>
+									Feedback
+								</NavDropdown.Item>
 								<NavDropdown.Item as={NavLink} to='/how-to-cite'>
 									How to Cite
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown title='MORE' id='basic-nav-dropdown'>
-								<NavDropdown.Item as={NavLink} to='/media'>Media</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/resources'>Resources</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/media'>
+									Media
+								</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to='/resources'>
+									Resources
+								</NavDropdown.Item>
 								<NavDropdown.Item as={NavLink} to='/frameworks'>
 									Frameworks
 								</NavDropdown.Item>
