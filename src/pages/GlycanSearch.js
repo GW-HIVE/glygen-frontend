@@ -456,6 +456,19 @@ const glycanIdTypeahead = () => {
     setGlycanId(event.target.value);
   };
 
+  const GlycoProtChange = event => {
+    setglycoProt(event.target.value);
+  };
+  const MotifChange = event => {
+    setglycMotif(event.target.value);
+  };
+  const BioEnzChange = event => {
+    setglyBioEnz(event.target.value);
+  };
+  const PubmedIdChange = event => {
+    setglycPubId(event.target.value);
+  };
+
   const searchGlycanClick = () =>{
       glycanSearch().then(response =>  {
          if (response.data["list_id"] !== "") {
@@ -849,6 +862,7 @@ const glycanIdTypeahead = () => {
                     // startAdornment={<Help />}
                     // labelWidth={210}
                     value={glycoProt}
+                    onChange={GlycoProtChange}
                     variant="outlined"
                   />
                   <Row>
@@ -887,6 +901,7 @@ const glycanIdTypeahead = () => {
                     className={classes.input}
                     placeholder="Enter the name of a Glycan Motif contained in your glycan"
                     value={glycMotif}
+                    onChange={MotifChange}
                     // startAdornment={<Help />}
                     // labelWidth={210}
                   />
@@ -926,6 +941,7 @@ const glycanIdTypeahead = () => {
                     className={classes.input}
                     placeholder="Enter the Gene Name of an enzyme"
                     value={glyBioEnz}
+                    onChange={BioEnzChange}
                     // startAdornment={<Help />}
                     // labelWidth={210}
                   />
@@ -965,6 +981,7 @@ const glycanIdTypeahead = () => {
                     className={classes.input}
                     placeholder="Enter the Pubmed ID"
                     value={glycPubId}
+                    onChange={PubmedIdChange}
                     // startAdornment={<Help />}
                     // labelWidth={210}
                   />
