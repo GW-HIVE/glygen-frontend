@@ -51,7 +51,7 @@
 			}
 		]
 	},
-	"contact": {
+	"contactUs": {
 		"title": "Contact Us | Get In Touch | Send Message | Share Data | glygen.org",
 		"meta": [
 			{
@@ -322,19 +322,6 @@
 			{
 				"name": "keywords",
 				"content": "Gene, locus, locations, enzymes, involved, biosynthesis, glytoucan accession, human, gene mapping, UniProtKB Accession, human, gene mapping, UniProtKB Accession, Gene Name, Gene location, Protein Name, Organism, Tax Id."
-			}
-		]
-	},
-	"siteWiew": {
-		"title": "Site View | Sequence View | Site Annotation | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "A site view of your protein includes general information, sequence view, and site annotation."
-			},
-			{
-				"name": "keywords",
-				"content": "Site view, sequence view, site annotation, general information."
 			}
 		]
 	},
