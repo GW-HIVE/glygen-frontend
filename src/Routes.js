@@ -7,6 +7,7 @@ import GlycanDetail from "./pages/GlycanDetail";
 import GlycanListEditColumns from "./pages/GlycanListEditColumns";
 import GlycanSearch from "./pages/GlycanSearch";
 import HowToCite from "./pages/HowToCite";
+import ContactUs from "./pages/ContactUs";
 
 const Routes = props => (
   <Switch>
@@ -20,6 +21,7 @@ const Routes = props => (
     <Route path="/glycan-detail" component={GlycanDetail} />
     <Route path="/resources" component={Resources} />
     <Route path="/how-to-cite" component={HowToCite} />
+    <Route path="/contact-us" component={ContactUs} />
 
     {/* Keep path='/' at the bottom */}
     <Route path="/" component={Home} />

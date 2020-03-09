@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import { Row } from 'react-bootstrap';
 import Container from '@material-ui/core/Container';
 
-
 export default function VerticalHeading(props) {
 	const { post } = props;
 
@@ -33,7 +32,11 @@ export default function VerticalHeading(props) {
 									<strong>{post.h2textBottomStrongAfter}</strong>
 								</span>
 							</Typography>
-							<Typography variant='p' style={{ fontSize: '18px', margin: '0 0 0 35px' }}>
+							<Typography
+								variant='p'
+								style={{
+									fontSize: '18px'
+								}}>
 								{post.pText}
 							</Typography>
 						</div>

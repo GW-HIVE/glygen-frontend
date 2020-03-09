@@ -176,12 +176,6 @@ hr {
 	padding: 40px 0;
 }
 
-.media-container {
-	background: #fff;
-	margin-bottom: 35px;
-	padding: 0 5% 0;
-}
-
 /* =========================================
         Vertical/Horizontal Headings
 ============================================ */
@@ -197,7 +191,7 @@ hr {
 	transform: rotate(-90deg);
 	position: relative;
 	top: 60px;
-	left: -40px;
+	left: -53px;
 }
 
 .vertical-heading h2 {
@@ -237,6 +231,24 @@ hr {
 	float: right;
 	padding-right: 5%;
 	color: #2e78b7;
+}
+
+/* =========================================
+                Contact Us
+============================================ */
+
+/* Contact Left */
+ul.office-details {
+	list-style: none;
+	padding: 0;
+}
+
+/* Contact Right */
+#contact-right {
+	padding: 25px 30px;
+	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
 }
 
 /* .App {
