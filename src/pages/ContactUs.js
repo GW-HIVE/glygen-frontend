@@ -16,6 +16,7 @@ import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
 // import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import GoogleMap from '../components/GoogleMap';
+import { useState, useRef } from 'react';
 
 const useStyles = makeStyles(theme =>
 	createStyles({
@@ -54,14 +55,21 @@ const ContactUs = props => {
 	};
 
 	const classes = useStyles();
-	const [subject, setSubject] = React.useState('general');
 
-	const inputLabel = React.useRef(null);
-	const [labelWidth, setLabelWidth] = React.useState(0);
-	React.useEffect(() => {
-		setLabelWidth(inputLabel.current.offsetWidth);
-	}, []);
+	const [fname, setFName] = useState('');
+	const [lname, setLName] = useState('');
+	const [subject, setSubject] = useState('general');
+	const [email, setEmail] = useState('');
+	const [message, setMessage] = useState('');
 
+	const [fNameValidated, setFNameValidated] = useState(false);
+	const [lNameValidated, setLNameValidated] = useState(false);
+	const [emailValidated, setEmailValidated] = useState(false);
+	const [messageValidated, setMessageValidated] = useState(false);
+
+	const [formValidated, setFormValidated] = useState(false);
+
+	const inputLabel = useRef(null);
 	const handleChange = event => {
 		setSubject(event.target.value);
 	};
@@ -89,7 +97,7 @@ const ContactUs = props => {
 							every effort to respond to you within a reasonable amount of time.
 						</Typography>
 
-						<div className='content-box-md5' style={{ marginTop: '40px' }}>
+						<div style={{ marginTop: '40px' }}>
 							<Row>
 								<Col sm={12} md={6} lg={6}>
 									{/* <div className='office'> */}
@@ -133,17 +141,28 @@ const ContactUs = props => {
 					{/* Contact Right */}
 					<Col sm={12} md={6} lg={6} className='content-box-md'>
 						<div id='contact-right'>
-							<form>
+							<form autoComplete='off' method='POST'>
 								<h4>Send Message</h4>
 								<p>We'd love to hear from you.</p>
 								<Row>
 									<Col sm={12} md={6} lg={6}>
 										<TextField
 											id='outlined-full-width'
-											label='Firstname *'
+											required
+											label='First name'
 											type='text'
+											name='fname'
+											placeholder='Please enter your first name.'
+											// defaultValue={fname}
+											error={(formValidated || fNameValidated) && fname === ''}
+											onChange={e => setFName(e.target.value)}
+											onBlur={() => setFNameValidated(true)}
+											helperText={
+												(formValidated || fNameValidated) &&
+												fname === '' &&
+												'First name is required.'
+											}
 											style={{ margin: 8 }}
-											placeholder='Please enter your firstname.'
 											fullWidth
 											margin='dense'
 											className={classes.labell}
@@ -160,10 +179,21 @@ const ContactUs = props => {
 									<Col sm={12} md={6} lg={6}>
 										<TextField
 											id='outlined-full-width'
-											label='Lastname *'
+											required
+											label='Last name'
 											type='text'
+											name='lname'
+											placeholder='Please enter your last name.'
+											defaultValue={lname}
+											error={(formValidated || lNameValidated) && lname === ''}
+											onChange={e => setLName(e.target.value)}
+											onBlur={() => setLNameValidated(true)}
+											helperText={
+												(formValidated || lNameValidated) &&
+												lname === '' &&
+												'Last name is required.'
+											}
 											style={{ margin: 8 }}
-											placeholder='Please enter your lastname.'
 											fullWidth
 											margin='dense'
 											InputLabelProps={{
@@ -191,7 +221,6 @@ const ContactUs = props => {
 												labelId='demo-simple-select-outlined-label'
 												id='demo-simple-select-outlined'
 												value={subject}
-												// value={age1 === "" ? "Native" : age1}
 												fullWidth
 												margin='dense'
 												onChange={handleChange}
@@ -212,11 +241,24 @@ const ContactUs = props => {
 									</Col>
 									<Col sm={12} md={6} lg={6}>
 										<TextField
-											id='outlined-full-width'
-											label='Email *'
+											id='email'
+											required
+											label='Email'
 											type='email'
+											name='email'
+											defaultValue={email}
 											style={{ margin: 8 }}
-											placeholder='Please enter your email.'
+											// placeholder='Please enter your email.'
+											placeholder='example@domain.com'
+											error={(formValidated || emailValidated) && email === ''}
+											onChange={e => setEmail(e.target.value)}
+											onBlur={() => setEmailValidated(true)}
+											// value= {/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
+											helperText={
+												(formValidated || emailValidated) &&
+												email === '' &&
+												'Please enter a valid email.'
+											}
 											fullWidth
 											margin='dense'
 											InputLabelProps={{
@@ -229,10 +271,21 @@ const ContactUs = props => {
 									<Col>
 										<TextField
 											id='outlined-full-width'
-											label='Message *'
+											required
+											label='Message'
 											type='text'
 											style={{ margin: 8 }}
-											placeholder='Please leave us a message.'
+											placeholder='Please tell us how we can help you.'
+											error={
+												(formValidated || messageValidated) && message === ''
+											}
+											onChange={e => setMessage(e.target.value)}
+											onBlur={() => setMessageValidated(true)}
+											helperText={
+												(formValidated || messageValidated) &&
+												message === '' &&
+												'Please leave us a message.'
+											}
 											fullWidth
 											multiline
 											rows='3'
@@ -246,9 +299,22 @@ const ContactUs = props => {
 									</Col>
 								</Row>
 							</form>
-							<Button variant='success' className={classes.btnGreen} size='lg'>
+							<Button
+								variant='success'
+								type='submit'
+								className={classes.btnGreen}
+								size='lg'
+								onClick={() => setFormValidated(true)}>
 								SEND MESSAGE
 							</Button>
+							<Row>
+								<Col>
+									<p className='text-muted'>
+										<strong>*</strong> These fields are required.
+									</p>
+								</Col>
+							</Row>
+							<div className='messages'></div>
 						</div>
 					</Col>
 				</Row>
