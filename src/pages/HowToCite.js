@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import VerticalHeadingLogo from '../components/headings/VerticalHeadingLogo';
 import PanelHowToCite from '../components/PanelHowToCite';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,7 +26,7 @@ const HowToCite = props => {
 	];
 
 	return (
-		<React.Fragment>
+		<>
 			<Helmet>
 				<title>{head.nowToCite.title}</title>
 				{getMeta(head.nowToCite)}
@@ -34,27 +34,28 @@ const HowToCite = props => {
 
 			<CssBaseline />
 			<div id='top-heading'></div>
-			<Container maxWidth='xl' className='ggContainer'>
-				<Row>
-					<Col>
-						<Sidebar items={items} />
-					</Col>
-					<Col sm={12} md={10} lg={10}>
-						<VerticalHeadingLogo post={vertHeadHowToCite} />
-						<PanelHowToCite id='howToCite' data={howToCiteData.howToCite} />
-						<PanelHowToCite id='ourPapers' data={howToCiteData.ourPapers} />
-						<PanelHowToCite
-							id='relatedPapers'
-							data={howToCiteData.relatedPapers}
-						/>
-						<PanelHowToCite
-							id='websiteCitation'
-							data={howToCiteData.websiteCitation}
-						/>
-					</Col>
-				</Row>
-			</Container>
-		</React.Fragment>
+			{/* <Container maxWidth='xl' className='ggContainer'> */}
+			<Row>
+				{/* <Col> */}
+				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
+					<Sidebar items={items} />
+				</Col>
+				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
+					<VerticalHeadingLogo post={vertHeadHowToCite} />
+					<PanelHowToCite id='howToCite' data={howToCiteData.howToCite} />
+					<PanelHowToCite id='ourPapers' data={howToCiteData.ourPapers} />
+					<PanelHowToCite
+						id='relatedPapers'
+						data={howToCiteData.relatedPapers}
+					/>
+					<PanelHowToCite
+						id='websiteCitation'
+						data={howToCiteData.websiteCitation}
+					/>
+				</Col>
+			</Row>
+			{/* </Container> */}
+		</>
 	);
 };
 export default HowToCite;
