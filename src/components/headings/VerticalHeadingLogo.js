@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Link } from '@material-ui/core';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import Container from '@material-ui/core/Container';
 import glygenLogoDownload from '../../images/glygen_logos/logo-glygen-blue-36.svg';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -13,7 +13,7 @@ export default function VerticalHeadingLogo(props) {
 
 	return (
 		<div className='content-box-md'>
-			<Container maxWidth='lg'>
+			<Container maxWidth='lg' className='vert-head-logo-container'>
 				<Row>
 					<Grid item xs={8} sm={8} md={9} lg={9}>
 						<div className='vertical-heading'>

@@ -122,7 +122,7 @@ export default function Header() {
 				</Container>
 			</Navbar>
 			<Navbar className='gg-blue' expand='xl'>
-				<Col sm={'auto'}>
+				<Col xs={'auto'}>
 					<Navbar.Brand as={Link} to='/home'>
 						<img src={logo} alt='Glygen' />
 					</Navbar.Brand>

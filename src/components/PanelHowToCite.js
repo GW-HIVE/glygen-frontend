@@ -11,7 +11,7 @@ const PanelHowToCite = props => {
 		<div id={props.id}>
 			<CssBaseline />
 			<Container maxWidth='xl' className='ggContainer'>
-				<Table bordered striped5 hover size='lg' className='panel-width'>
+				<Table bordered hover size='lg' className='panel-width'>
 					<thead className='panelHeadBgr panelHeadText'>
 						{props.data.map(json => (
 							<h3 style={{ margin: '15px' }}>{json.title}</h3>

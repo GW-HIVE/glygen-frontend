@@ -54,6 +54,12 @@
 		padding-top: 0 !important;
 		margin-right: 40px !important;
 	}
+	.vert-head-logo-container {
+		padding: 0 20px !important;
+	}
+	.panel-width {
+		width: 100% !important;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
