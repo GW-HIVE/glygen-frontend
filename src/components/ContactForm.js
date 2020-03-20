@@ -8,6 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
 import { useState, useRef } from 'react';
+import { getJson } from '../data/api';
+import { validateEmail } from '../utils/common';
 
 const useStyles = makeStyles(theme =>
 	createStyles({
@@ -43,8 +45,9 @@ const ContactForm = props => {
 	const [fNameValidated, setFNameValidated] = useState(false);
 	const [lNameValidated, setLNameValidated] = useState(false);
 	const [emailValidated, setEmailValidated] = useState(false);
+	const [validEmail, setValidEmail] = useState(false);
 	const [messageValidated, setMessageValidated] = useState(false);
-
+	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
 	const [formValidated, setFormValidated] = useState(false);
 
 	const inputLabel = useRef(null);
@@ -52,10 +55,31 @@ const ContactForm = props => {
 		setSubject(event.target.value);
 	};
 
+	const handleSubmit = e => {
+		e.preventDefault();
+
+		const formData = {
+			fname: fname,
+			lname: lname,
+			email: email,
+			subject: subject,
+			message: message
+		};
+		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
+
+		getJson(url).then(response => {
+			setContactUsResponseMessage(response.data.message);
+		});
+	};
+
+	// React.useEffect(() => {
+	// 	handleSubmit();
+	// }, []);
+
 	return (
 		<>
 			{/* Contact Us Right */}
-			<form autoComplete='off' method='POST'>
+			<form autoComplete='off' onSubmit={handleSubmit}>
 				<h4>Send Message</h4>
 				<p>We'd love to hear from you.</p>
 				<Row>
@@ -162,13 +186,17 @@ const ContactForm = props => {
 							style={{ margin: 8 }}
 							// placeholder='Please enter your email.'
 							placeholder='example@domain.com'
-							error={(formValidated || emailValidated) && email === ''}
-							onChange={e => setEmail(e.target.value)}
+							error={(formValidated || emailValidated) && !validEmail}
+							onChange={e => {
+								var emailVal = e.target.value;
+								setValidEmail(validateEmail(emailVal));
+								setEmail(emailVal);
+							}}
 							onBlur={() => setEmailValidated(true)}
 							// value= {/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
 							helperText={
 								(formValidated || emailValidated) &&
-								email === '' &&
+								!validEmail &&
 								'Please enter a valid email.'
 							}
 							fullWidth
@@ -208,15 +236,17 @@ const ContactForm = props => {
 						/>
 					</Col>
 				</Row>
+				<Button
+					variant='success'
+					type='submit'
+					className={classes.btnGreen}
+					size='lg'
+					onClick={() => setFormValidated(true)}>
+					SEND MESSAGE
+				</Button>
+				<div className='messages'>{contactUsResponseMessage}</div>
 			</form>
-			<Button
-				variant='success'
-				type='submit'
-				className={classes.btnGreen}
-				size='lg'
-				onClick={() => setFormValidated(true)}>
-				SEND MESSAGE
-			</Button>
+
 			<Row>
 				<Col>
 					<p className='text-muted'>
@@ -224,7 +254,6 @@ const ContactForm = props => {
 					</p>
 				</Col>
 			</Row>
-			<div className='messages'></div>
 		</>
 	);
 };

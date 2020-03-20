@@ -54,7 +54,7 @@ export default function Header() {
 								</Navbar.Text>{' '}
 								<Navbar.Text
 									as={Link}
-									to='/privacy_policy'
+									to='/privacy-policy'
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									Privacy&nbsp;Policy
@@ -68,7 +68,7 @@ export default function Header() {
 								</Navbar.Text>{' '}
 								<Navbar.Text
 									as={Link}
-									to='/contact_us'
+									to='/contact-us'
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									Contact Us
