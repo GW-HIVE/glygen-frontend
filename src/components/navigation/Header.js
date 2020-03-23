@@ -67,8 +67,8 @@ export default function Header() {
 						<Col xs={4} sm={3} md={7} lg={9}>
 							<div className='text-right'>
 								<Navbar.Text
-									as={NavLink}
-									to='/glygen'
+									as={Link}
+									to='/privacy-settings'
 									className={classes.navbarText}>
 									<span>
 										<PersonIcon />

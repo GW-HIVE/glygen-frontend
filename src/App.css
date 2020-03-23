@@ -6,6 +6,7 @@
 	--gg-dark-blue: #1c4e78 !important;
 	--gg-light-blue: #afd9fd !important;
 	--gg-dark-hover: #57affa !important;
+	--gg-green-head: #1d9901 !important;
 	/* --gg-green: #60ba4b; */
 	/* --dark-blue-1: #215b9e; */
 	/* --dark-blue-2: #175385; */
@@ -27,11 +28,17 @@
 ==========================================*/
 a {
 	text-decoration: none !important;
+	color: var(--gg-blue) !important;
+}
+a:hover {
+	color: var(--gg-dark-hover) !important;
 }
 /* a:hover {
 	color: white !important;
 } */
-
+p {
+	color: #444444;
+}
 /* ========================================
               Header 
 ==========================================*/
@@ -154,11 +161,19 @@ a {
 ==========================================*/
 .card {
 	width: 100%;
+	-webkit-transition: -webkit-box-shadow 0.25s;
+	transition: -webkit-box-shadow 0.25s;
+	transition: box-shadow 0.25s;
+	transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
 }
 .card:hover {
 	-webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2),
 		0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+	-webkit-transition: -webkit-box-shadow 0.25s;
+	transition: -webkit-box-shadow 0.25s;
+	transition: box-shadow 0.25s;
+	transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
 }
 /* Cards */
 hr {
