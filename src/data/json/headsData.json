@@ -4,24 +4,24 @@
 		"meta": [
 			{
 				"name": "description",
-				"content": "GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data."
+				"content": "GlyGen is a database and dissemination project for carbohydrate and glycoconjugate related data."
 			},
 			{
 				"name": "keywords",
-				"content": "glycan search, protein search, glycoprotein search, quick search, try me, data, data integration, SPARQL, help, contact us, resources, tutorials, explore, how to cite, data integration, data standarization, NIH project."
+				"content": "glycan search, glycoprotein, glycosyltransferase, glycan, glycosylation, data integration, carbohydrate, database, glycoinformatics, glycobiology, glycan draw, glycan mass, glycan structure, glycoconjugate, data standardization, database integration."
 			}
 		]
 	},
 	"resources": {
-		"title": "Resources | Data Resources | Tools | Organizations | glygen.org",
+		"title": "Resources | Glycoinformatics | Glycomics | Glycoproteomics | glygen.org",
 		"meta": [
 			{
 				"name": "description",
-				"content": "List of glyomics and glycoproteomics resources useful for researchers. Resources include data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, tool collection, video, e-book."
+				"content": "List of glycoinformatics, glycomics, and glycoproteomics resources useful for researchers. Resources include data resources, carbohydrate tools, organizations."
 			},
 			{
 				"name": "keywords",
-				"content": "data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, tool collection, video, e-book, glycomics, glycoproteomics."
+				"content": "data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, glycobiology 101, glycobiology 501, tool collection, video, e-book, glycomics, glycoproteomics."
 			}
 		]
 	},
@@ -47,7 +47,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Mission, story, goal, effort, resource, funding, team, principal investigators, advocates, key collaborators, co-investigators, development, data integration, array database partners, data management team, web developers."
+				"content": "Mission, people, story, goal, effort, resource, funding, team, principal investigators, advocates, key collaborators, co-investigators, development, data integration, array database partners, data management team, web developers."
 			}
 		]
 	},
@@ -95,7 +95,7 @@
 		"meta": [
 			{
 				"name": "description",
-				"content": "Programming libraries and frameworks used to develop GlyGen. HTML5, CSS3, JQuery, Bootstrap, Python, Protvista, d3.js, JavaScript, AJAX, React.js, Mustache."
+				"content": "Programming libraries and frameworks used to develop GlyGen. React.js, HTML5, CSS3, Axios, Bootstrap, Python, Protvista, d3.js, JavaScript, React.js, Mustache."
 			},
 			{
 				"name": "keywords",
@@ -108,7 +108,7 @@
 		"meta": [
 			{
 				"name": "description",
-				"content": "Search the entire database for the specified term."
+				"content": "Search the entire GlyGen database for the specified term."
 			},
 			{
 				"name": "keywords",
@@ -182,7 +182,7 @@
 			}
 		]
 	},
-	"GlycanSearch": {
+	"glycanSearch": {
 		"title": "Glycan Search | Search for Glycan Structures | glygen.org",
 		"meta": [
 			{
@@ -282,7 +282,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Search by glycan,  by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, human, Homo sapiens, Mus musculus, Rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, predicted N-glycosylation site, synthesized, enzyme, orthologues."
 			}
 		]
 	},
@@ -325,7 +325,7 @@
 			}
 		]
 	},
-	"siteWiew": {
+	"siteView": {
 		"title": "Site View | Sequence View | Site Annotation | glygen.org",
 		"meta": [
 			{
@@ -339,7 +339,7 @@
 		]
 	},
 	"protvista": {
-		"title": "Glygen Protvista | Nightingale | Data Visualisation | glygen.org",
+		"title": "GlyGen Protvista | Nightingale | Data Visualization | glygen.org",
 		"meta": [
 			{
 				"name": "description",
