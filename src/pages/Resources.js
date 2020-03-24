@@ -73,7 +73,11 @@ const Resources = () => {
 			text: 'Website',
 			sort: true,
 			formatter: cell => (
-				<Link variant='subtitle1' href={cell.url} target='_blank'>
+				<Link
+					variant='subtitle1'
+					href={cell.url}
+					target='_blank'
+					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			)
@@ -113,7 +117,11 @@ const Resources = () => {
 			text: 'Website',
 			sort: true,
 			formatter: cell => (
-				<Link variant='subtitle1' href={cell.url} target='_blank'>
+				<Link
+					variant='subtitle1'
+					href={cell.url}
+					target='_blank'
+					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			)
@@ -148,7 +156,11 @@ const Resources = () => {
 			text: 'Website',
 			sort: true,
 			formatter: cell => (
-				<Link variant='subtitle1' href={cell.url} target='_blank'>
+				<Link
+					variant='subtitle1'
+					href={cell.url}
+					target='_blank'
+					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			)
@@ -178,7 +190,11 @@ const Resources = () => {
 			text: 'Type',
 			sort: true,
 			formatter: cell => (
-				<Link variant='subtitle1' href={cell.url} target='_blank'>
+				<Link
+					variant='subtitle1'
+					href={cell.url}
+					target='_blank'
+					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			)
@@ -203,7 +219,7 @@ const Resources = () => {
 		},
 		{
 			dataField: 'glycoprotein',
-			text: 'Glyc',
+			text: 'Glycoprotein',
 			sort: true
 		}
 	];
