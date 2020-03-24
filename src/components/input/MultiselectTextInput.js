@@ -60,10 +60,6 @@ const useStyles = makeStyles(theme => ({
 export default function MultiselectTextInput(props) {
   const classes = useStyles();
 
-//   const handleChange = event => {
-//       props.setInputValue(event.target.value);
-//     };
-
   const handleChange = (event, value, reason) => {
     props.setInputValue(value);
   };
@@ -82,19 +78,15 @@ export default function MultiselectTextInput(props) {
         }}
         filterSelectedOptions
         value={props.inputValue}
-        //onInputChange={handleChange}
          onChange={handleChange}
-        //   freeSolo
         renderInput={params => (
           <TextField
             {...params}
             variant="outlined"
-            //   value={props.inputValue}
             classes={{
               root: classes.inputBase
             }}
             placeholder={props.placeholder}
-            //   onChange={handleChange}
           />
         )}
       />
