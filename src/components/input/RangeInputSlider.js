@@ -29,86 +29,49 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function RangeSlider(props) {
+export default function RangeInputSlider(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState([props.intValue[0], props.intValue[1]]);
-  const [minVal, setMin] = React.useState(props.intValue[0]);
-  const [maxVal, setMax] = React.useState(props.intValue[1]);
 
-
-
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    setMin(newValue[0]);
-    setMax(newValue[1]);
-
-    props.handleSetNumSugars(newValue);
+  const sliderChange = (event, newValue) => {
+    props.setInputValue(newValue);
   };
 
-
-
-  const handleInputChange1 = event => {
-    var val = [Number(event.target.value), value[1]];
+  const minInputChange = event => {
+    var val = [Number(event.target.value), props.inputValue[1]];
     if (event.target.value < props.min)
         val[0] = props.min;
-    else if (event.target.value > value[1])
-        val[0] = value[1];
+    else if (event.target.value > props.inputValue[1])
+        val[0] = props.inputValue[1];
 
-    setValue(val);  
-    setMin(val[0]);
-    props.handleSetNumSugars(val);
-
-    //setValue(event.target.value < 0 ? [0, value[1]] : [Number(event.target.value), value[1]]);
+    props.setInputValue(val);
   };
 
-  const handleInputChange2 = event => {
+  const maxInputChange = event => {
 
-    var val = [value[0], Number(event.target.value)];
+    var val = [props.inputValue[0], Number(event.target.value)];
     if (event.target.value > props.max)
         val[1] = props.max;
-    else if (event.target.value < value[0])
-        val[1] = value[0];
+    else if (event.target.value < props.inputValue[0])
+        val[1] = props.inputValue[0];
 
-    setMax(val[1]);
-    setValue(val);
-    props.handleSetNumSugars(val);
+    props.setInputValue(val);
 
-    //setValue(event.target.value > 100 ? [value[0], 100] : [value[0], Number(event.target.value)]);
   };
-
-  // const handleBlur1 = () => {
-  //   if (value < 0) {
-  //     setValue([0, 100]);
-  //   } else if (value > 100) {
-  //     setValue([0, 100]);
-  //   }
-  // };
-
-  // const handleBlur2 = () => {
-  //   if (value < 0) {
-  //     setValue([0, 100]);
-  //   } else if (value > 100) {
-  //     setValue([0, 100]);
-  //   }
-  // };
 
   return (
     <div className={classes.root}>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
           <FormControl fullWidth className={classes.margin} variant="outlined">
-            <InputLabel className={classes.label3} htmlFor="demo-label1">
+            <InputLabel className={classes.label3}>
               <strong>Min</strong>
             </InputLabel>
             <OutlinedInput
               className={classes.input}
-              value={minVal}
-              //value={props.inputProps[0]}
+              value={props.inputValue[0]}
               margin="dense"
               id="demo-label1"
-              onChange={handleInputChange1}
-              // onBlur={handleBlur1}
+              onChange={minInputChange}
               labelWidth={40}
               inputProps={{
                 step: props.step,
@@ -122,13 +85,12 @@ export default function RangeSlider(props) {
         </Grid>
         <Grid item xs>
             <Slider
-              value={value}
-              //value={props.intValue}
+              value={props.inputValue}
               step={props.step}
               min={props.min}
               max={props.max}
               scale={x => x}
-              onChange={handleChange}
+              onChange={sliderChange}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               getAriaValueText={valuetext}
@@ -137,16 +99,14 @@ export default function RangeSlider(props) {
         </Grid>
         <Grid item>
           <FormControl fullWidth className={classes.margin} variant="outlined">
-            <InputLabel className={classes.label3} id="demo-label3">
+            <InputLabel className={classes.label3}>
               <strong>Max</strong>
             </InputLabel>
             <OutlinedInput
               className={classes.input}
-              value={maxVal}
-              //value={props.inputProps[1]}
+              value={props.inputValue[1]}
               margin="dense"
-              onChange={handleInputChange2}
-              // onBlur={handleBlur2}
+              onChange={maxInputChange}
               labelWidth={40}
               inputProps={{
                 step: props.step,
@@ -164,10 +124,10 @@ export default function RangeSlider(props) {
 }
 
 
-RangeSlider.propTypes = {
+RangeInputSlider.propTypes = {
   step: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
-  intValue: PropTypes.array,
+  inputValue: PropTypes.array,
 
 };

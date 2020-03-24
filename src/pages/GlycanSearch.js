@@ -1,35 +1,46 @@
 import React from "react";
-import CustomizedHook from "../components/CustomizedHook";
-import RangeSlider from "../components//RangeSlider";
+import MultilineAutoTextInput from "../components/input/MultilineAutoTextInput";
+import RangeInputSlider from "../components/input/RangeInputSlider";
+import AutoTextInput from "../components/input/AutoTextInput";
+import MultiselectTextInput from "../components/input/MultiselectTextInput";
+
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { getJson } from "../data/api";
 
-
-import { Component, Tab, Tabs, Form, Container, Col, Row, NavLink } from "react-bootstrap";
+import {
+  Component,
+  Tab,
+  Tabs,
+  Form,
+  Container,
+  Col,
+  Row,
+  NavLink
+} from "react-bootstrap";
 import { useParams } from "react-router-dom";
-
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import TextInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import HelpOutline from '@material-ui/icons/HelpOutline';
-import Tooltip from '@material-ui/core/Tooltip';
+import HelpOutline from "@material-ui/icons/HelpOutline";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #dadde9',
-  },
+    border: "1px solid #dadde9"
+  }
 }))(Tooltip);
 
 const BootstrapInput = withStyles(theme => ({
@@ -80,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: 16,
     marginBottom: 16,
     // marginRight: 16,
-    marginLeft: 16,
+    marginLeft: 16
   },
   marginButToolbar: {
     justifyContent: "flex-end",
@@ -88,7 +99,7 @@ const useStyles = makeStyles(theme => ({
     width: 700
   },
   marginLeft: {
-    justifyContent: "flex-end",
+    justifyContent: "flex-end"
   },
   root: {
     display: "flex",
@@ -111,26 +122,25 @@ const useStyles = makeStyles(theme => ({
   },
   label1: {
     fontSize: "14px",
-    color: '#4A4A4A',
+    color: "#4A4A4A",
     fontWeight: "bold",
     marginLeft: -27
     // height: "25px"
-
   },
   label4: {
     fontSize: "15px",
-    color: '#4A4A4A',
-    fontWeight: "bold",
+    color: "#4A4A4A",
+    fontWeight: "bold"
     // height: "25px"
   },
   label2: {
     fontSize: "20px",
     fontWeight: "bold",
-    color: '#4A4A4A',
+    color: "#4A4A4A"
   },
   label3: {
     fontSize: "16px",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   input: {
     borderRadius: 4,
@@ -163,30 +173,27 @@ const useStyles = makeStyles(theme => ({
     width: "1000px",
     height: "1150px",
     alignItems: "center",
-    fontColor: '#2F78B7',
-    // color: "#2F78B7 !important",
-
+    fontColor: "#2F78B7"
   },
   headerTitle: {
     color: "#2F78B7",
     alignItems: "center",
-    alignSelf: 'center', //if style using flexbox
+    alignSelf: "center", //if style using flexbox
     textAlign: "center",
     marginTop: "20px",
     marginBottom: "10px",
-    fontWeight: "bold",
-},
+    fontWeight: "bold"
+  },
   con: {
     width: "730px",
     height: "1100px",
-    alignItems: "center",
+    alignItems: "center"
   },
   con1: {
     width: "1000px",
     height: "1150px",
     alignItems: "left",
     marginBottom: "80px"
-
   },
   formControl: {
     // margin: theme.spacing(1),
@@ -200,205 +207,361 @@ const useStyles = makeStyles(theme => ({
     width: "700px",
     height: "34px"
   },
-    col1: {
-        margin: 0,
-        width: "25px",
-
-    },
-    row1: {
-      margin: 0,
-      marginRight: 15,
-      width: "25px",
-
+  col1: {
+    margin: 0,
+    width: "25px"
+  },
+  row1: {
+    margin: 0,
+    marginRight: 15,
+    width: "25px"
   },
   help1: {
     lineWidth: 1
   },
   tooltip: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 220,
     // fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #dadde9',
+    border: "1px solid #dadde9"
   },
-  helpicon:{
+  helpicon: {
     fontSize: "18px",
-    marginRight: 8,
+    marginRight: 8
   },
   large: {
     width: theme.spacing(20),
-    height: theme.spacing(20),
-  },  root1: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
+    height: theme.spacing(20)
+  },
+  root1: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1)
+    }
   }
 }));
 
-const Opoptions = [
-  {text:'Or', value:10},
-  {text:'And', value:20},
-];
-
-
-
-
 const GlycanSearch = props => {
+  let { id } = useParams();
+  const [initData, setInitData] = React.useState({});
+  const classes = useStyles();
+
+  const [glycanId, setGlycanId] = React.useState("");
+  const [glyMassType, setGlyMassType] = React.useState("Native");
+  const [glyMass, setGlyMass] = React.useState(
+    //[Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)
+    [
+      glyMassType !== "Native" ? 205 : 149,
+      glyMassType !== "Native" ? 8308 : 6752
+    ]
+  );
+  const [glyMassRange, setGlyMassRange] = React.useState(
+    //[Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)
+    [
+      glyMassType !== "Native" ? 205 : 149,
+      glyMassType !== "Native" ? 8308 : 6752
+    ]
+  );
+  const [glyNumSugars, setGlyNumSugars] = React.useState([1, 37]);
+  const [glyNumSugarsRange, setGlyNumSugarsRange] = React.useState([1, 37]);
+  const [glyOrganisms, setGlyOrganisms] = React.useState([]);
+  const [glyOrgOperation, setGlyOrgOperation] = React.useState("or");
+  const [glyType, setGlyType] = React.useState("");
+  const [glySubType, setGlySubType] = React.useState("");
+  const [glyProt, setGlyProt] = React.useState("");
+  const [glyMotif, setGlyMotif] = React.useState("");
+  const [glyBioEnz, setGlyBioEnz] = React.useState("");
+  const [glyPubId, setGlyPubId] = React.useState("");
+  const [glySubTypeIsHidden, setGlySubTypeIsHidden] = React.useState(true);
+
+  function glyOrgChange(org) {
+    setGlyOrganisms(org);
+  }
+
+  function glyNumSugarsChange(sugars) {
+    setGlyNumSugars(sugars);
+  }
+  function glyMassChange(glyMass) {
+    setGlyMass(glyMass);
+  }
+
+  const handleChange2 = event => {
+    setGlyOrgOperation(event.target.value);
+  };
+  const handleChange1 = event => {
+    setGlyMassType(event.target.value);
+    setMassValues(event.target.value, glyMass);
+  };
+
+  const setMassValues = (massType, massValues) => {
+    var perMet_mass_min = Math.floor(initData.glycan_mass.permethylated.min);
+    var perMet_mass_max = Math.ceil(initData.glycan_mass.permethylated.max);
+    var native_mass_min,
+      minRange,
+      minval = Math.floor(initData.glycan_mass.native.min);
+    var native_mass_max,
+      maxRange,
+      maxval = Math.ceil(initData.glycan_mass.native.max);
+    var mass_type_native = initData.glycan_mass.native.name;
+    native_mass_min = minRange = minval;
+    native_mass_max = maxRange = maxval;
+
+    if (massType === undefined) massType = mass_type_native;
+
+    if (massValues !== undefined) {
+      minval = massValues[0];
+      maxval = massValues[1];
+    }
+
+    if (massType === mass_type_native) {
+      if (minval === perMet_mass_min) minval = native_mass_min;
+
+      if (maxval === perMet_mass_max || maxval > native_mass_max)
+        maxval = native_mass_max;
+    } else {
+      if (minval === native_mass_min || minval < perMet_mass_min)
+        minval = perMet_mass_min;
+
+      if (maxval === native_mass_max) maxval = perMet_mass_max;
+
+      minRange = perMet_mass_min;
+      maxRange = perMet_mass_max;
+    }
+
+    setGlyMassRange([minRange, maxRange]);
+    setGlyMass([minval, maxval]);
+  };
+
+  const handleChange3 = event => {
+    if (event.target.value === "") setGlySubTypeIsHidden(true);
+    else setGlySubTypeIsHidden(false);
+    setGlySubType("");
+    setGlyType(event.target.value);
+  };
+  const handleChange4 = event => {
+    setGlySubType(event.target.value);
+  };
+  function glycanIdChange(inputGlycanId) {
+    setGlycanId(inputGlycanId);
+  }
+  function glyProtChange(inputglycoProt) {
+    setGlyProt(inputglycoProt);
+  }
+
+  function glyMotifChange(inputglycMotif) {
+    setGlyMotif(inputglycMotif);
+  }
+
+  function glyBioEnzChange(inputglyBioEnz) {
+    setGlyBioEnz(inputglyBioEnz);
+  }
+
+  function glyPubIdChange(inputglycPubId) {
+    setGlyPubId(inputglycPubId);
+  }
+  const PubmedIdChange = event => {
+    setGlyPubId(event.target.value);
+  };
 
   const getGlycanInit = () => {
     const url = `/glycan/search_init`;
-    getJson(url).then(response =>  
-      { 
-        setInitData(response.data);
-        // setOrganisms(
-        // [
-        //   {
-        //     "name": "Rattus norvegicus", 
-        //     "id": 10116
-        //   }, 
-        //   {
-        //     "name": "Mus musculus", 
-        //     "id": 10090
-        //   }
-        // ]);
-      });
+    return getJson(url);
+    // return getJson(url).then(response => {
+    //   setInitData(response.data);
+    // });
   };
-  let { id } = useParams();
-  const [initData, setInitData] = React.useState([]);
-  const [query, setQuery] = React.useState([]);
-  //getGlycanInit();
-
 
   React.useEffect(() => {
 
-    // getGlycanInit().then(({ response }) => {
-    //   alert(response);
-    //   setInitData(response);
-    // });
-    getGlycanInit();
-  //if (id !== undefined) {
-      getGlycanList(id, 1).then(({ data }) => {
-        //setQuery(data.query);
-        setGlycanId(data.query.glytoucan_ac === undefined? "" : data.query.glytoucan_ac);
-        setglycoProt(data.query.protein_identifier === undefined? "" : data.query.protein_identifier);
-        setglycMotif(data.query.glycan_motif === undefined? "" : data.query.glycan_motif);
-        setglyBioEnz(data.query.enzyme === undefined? "" : data.query.enzyme.id);
-        setglycPubId(data.query.pmid === undefined? "" : data.query.glytoucan_ac);
-        setAge1(data.query.mass_type === undefined? "Native" : data.query.glytoucan_ac);
-        setAge3(data.query.glycan_type === undefined? "" : data.query.glycan_type);
-
-      if (data.query.glycan_type === undefined)
-        setHidden(true);
-      else 
-        setHidden(false);
-
-        setAge4(data.query.glycan_subtype === undefined? "" : data.query.glycan_subtype);
-
-      });
-    //}
-    // eslint-disable-next-line
-  }, []);
+    getGlycanInit().then((response) => {
+      let initData = response.data;
+      setInitData(response.data);
+      setGlyMassType(
+          initData.glycan_mass.native.name
+      );
+      setGlyMassRange(
+            [
+              Math.floor(initData.glycan_mass.native.min),
+              Math.ceil(initData.glycan_mass.native.max)
+            ]
+      );
+      setGlyMass(
+            [
+              Math.floor(initData.glycan_mass.native.min),
+              Math.ceil(initData.glycan_mass.native.max)
+            ]
+      );
+      setGlyNumSugarsRange(
+          [initData.number_monosaccharides.min, initData.number_monosaccharides.max]
+      );
+      setGlySubTypeIsHidden(true);
 
 
-  const classes = useStyles();
-  const [age1, setAge1] = React.useState("Native");
-  const [age2, setAge2] = React.useState("");
-  const [age3, setAge3] = React.useState("");
-  const [age4, setAge4] = React.useState("");
-  const [glycanId, setGlycanId] = React.useState("");
-  const [glycoProt, setglycoProt] = React.useState("");
-  const [glycMotif, setglycMotif] = React.useState("");
-  const [glyBioEnz, setglyBioEnz] = React.useState("");
-  const [glycPubId, setglycPubId] = React.useState("");
+    const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
+      const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
+      return getJson(url);
+    };
 
+    id && getGlycanList(id, 1).then(({ data }) => {
 
-  const [isHidden, setHidden] = React.useState(true);
-  const [initDone, setInitDone] = React.useState(false);
+      setGlycanId(
+        data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
+      );
+      setGlyProt(
+        data.query.protein_identifier === undefined
+          ? ""
+          : data.query.protein_identifier
+      );
+      setGlyMotif(
+        data.query.glycan_motif === undefined ? "" : data.query.glycan_motif
+      );
+      setGlyBioEnz(data.query.enzyme === undefined ? "" : data.query.enzyme.id);
+      setGlyPubId(data.query.pmid === undefined ? "" : data.query.pmid);
+      setGlyMassType(
+        data.query.mass_type === undefined
+          ? initData.glycan_mass.native.name
+          : data.query.mass_type
+      );
 
+      setGlyMassRange(
+        data.query.mass_type === undefined
+          ? [
+              Math.floor(initData.glycan_mass.native.min),
+              Math.ceil(initData.glycan_mass.native.max)
+            ]
+          : data.query.mass_type === initData.glycan_mass.native.name
+          ? [
+              Math.floor(initData.glycan_mass.native.min),
+              Math.ceil(initData.glycan_mass.native.max)
+            ]
+          : [
+              Math.floor(initData.glycan_mass.permethylated.min),
+              Math.ceil(initData.glycan_mass.permethylated.max)
+            ]
+      );
 
+      setGlyMass(
+        data.query.mass === undefined
+          ? [
+              Math.floor(initData.glycan_mass.native.min),
+              Math.ceil(initData.glycan_mass.native.max)
+            ]
+          : [data.query.mass.min, data.query.mass.max]
+      );
 
+      setGlyType(
+        data.query.glycan_type === undefined ? "" : data.query.glycan_type
+      );
+      setGlyOrgOperation(
+        data.query.organism === undefined ? "or" : data.query.organism.operation
+      );
+      setGlyOrganisms(
+        data.query.organism === undefined
+          ? []
+          : data.query.organism.organism_list
+      );
+      setGlyNumSugars(
+        data.query.number_monosaccharides === undefined
+          ? [initData.number_monosaccharides.min, initData.number_monosaccharides.max]
+          : [
+              data.query.number_monosaccharides.min,
+              data.query.number_monosaccharides.max
+            ]
+      );
 
-  const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
+      if (data.query.glycan_type === undefined) setGlySubTypeIsHidden(true);
+      else setGlySubTypeIsHidden(false);
 
+      setGlySubType(
+        data.query.glycan_subtype === undefined ? "" : data.query.glycan_subtype
+      );
+    });
+  });
 
-//  const getGlycanInit = () => {
-//   const url = `/glycan/search_init`;
-//   getJson(url).then(response =>  
-//     { 
-//       setInitData(response.data);
-//       // setOrganisms(
-//       // [
-//       //   {
-//       //     "name": "Rattus norvegicus", 
-//       //     "id": 10116
-//       //   }, 
-//       //   {
-//       //     "name": "Mus musculus", 
-//       //     "id": 10090
-//       //   }
-//       // ]);
-//     });
-// };
+  }, [id]);
 
-const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
-    const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
-    return getJson(url);
-};
-
-function searchjson(input_query_type, input_glycan_id, input_mass_type, input_mass_min, input_mass_max, input_sugar_min, input_sugar_max, input_organism, input_organism_operation, input_glycantype, input_glycansubtype, input_enzyme, input_proteinid, input_motif, input_pmid, input_residue_comp) {
-  var enzymes = {}
-  if (input_enzyme) {
+  function searchjson(
+    input_query_type,
+    input_glycan_id,
+    input_mass_type,
+    input_mass_min,
+    input_mass_max,
+    input_sugar_min,
+    input_sugar_max,
+    input_organism,
+    input_organism_operation,
+    input_glycantype,
+    input_glycansubtype,
+    input_enzyme,
+    input_proteinid,
+    input_motif,
+    input_pmid,
+    input_residue_comp
+  ) {
+    var enzymes = {};
+    if (input_enzyme) {
       enzymes = {
-          "id": input_enzyme,
-          "type": "gene"
-      }
-  }
-  var monosaccharides = undefined;
-  if (input_sugar_min && input_sugar_max) {
-      if (input_sugar_min !== 1 || input_sugar_max !== 38) {
-          monosaccharides = {
-              "min": parseInt(input_sugar_min),
-              "max": parseInt(input_sugar_max)
-          };
-      }
-  }
+        id: input_enzyme,
+        type: "gene"
+      };
+    }
 
-  var input_mass = undefined;
-  if (input_mass_min && input_mass_max) {
+    var monosaccharides = undefined;
+    if (input_sugar_min && input_sugar_max) {
+      if (input_sugar_min !== initData.number_monosaccharides.min || input_sugar_max !== initData.number_monosaccharides.max) {
+        monosaccharides = {
+          min: parseInt(input_sugar_min),
+          max: parseInt(input_sugar_max)
+        };
+      }
+    }
+
+    var input_mass = undefined;
+    if (input_mass_min && input_mass_max) {
       if (input_mass_type === "Native") {
-          if (input_mass_min !== 149 || input_mass_max !== 6752) {
-              input_mass = {
-                  "min": parseInt(input_mass_min),
-                  "max": parseInt(input_mass_max)
-              };
-          }
+        if (input_mass_min !== initData.glycan_mass.native.min || input_mass_max !== initData.glycan_mass.native.max) {
+          input_mass = {
+            min: parseInt(input_mass_min),
+            max: parseInt(input_mass_max)
+          };
+        }
       } else {
-          if (input_mass_min !== 205 || input_mass_max !== 8308) {
-              input_mass = {
-                  "min": parseInt(input_mass_min),
-                  "max": parseInt(input_mass_max)
-              };
-          }
+        if (input_mass_min !== initData.glycan_mass.permethylated.min || input_mass_max !== initData.glycan_mass.permethylated.min) {
+          input_mass = {
+            min: parseInt(input_mass_min),
+            max: parseInt(input_mass_max)
+          };
+        }
       }
-  }
+    }
 
-  var organisms = undefined;
-  if (input_organism && input_organism.length > 0) {
+    var organisms = undefined;
+    if (input_organism && input_organism.length > 0) {
       organisms = {
-          "organism_list": input_organism,
-          "operation": input_organism_operation
-      }
-  }
-  var formjson = {
-      "operation": "AND",
+        organism_list: input_organism,
+        operation: input_organism_operation
+      };
+    }
+
+    var glycan_id = input_glycan_id.trim();
+    glycan_id = glycan_id.replace(/\u200B/g, "");
+    glycan_id = glycan_id.replace(/\u2011/g, "-");
+    glycan_id = glycan_id.replace(/\s+/g, ",");
+    glycan_id = glycan_id.replace(/,+/g, ",");
+    var index = glycan_id.lastIndexOf(",");
+    if (index > -1 && index + 1 === glycan_id.length) {
+      glycan_id = glycan_id.substr(0, index);
+    }
+
+    var formjson = {
+      operation: "AND",
       query_type: input_query_type,
       mass_type: input_mass_type,
       mass: input_mass,
       number_monosaccharides: monosaccharides,
       enzyme: enzymes,
-      glytoucan_ac: input_glycan_id,
+      glytoucan_ac: glycan_id,
       organism: organisms,
       glycan_type: input_glycantype,
       glycan_subtype: input_glycansubtype,
@@ -406,134 +569,62 @@ function searchjson(input_query_type, input_glycan_id, input_mass_type, input_ma
       glycan_motif: input_motif,
       pmid: input_pmid,
       composition: input_residue_comp
-  };
-  return formjson;
-}
+    };
+    return formjson;
+  }
 
-const glycanSearch = () => {
-  // query = {
-  //   "query_type":"search_glycan",
-  //   "operation":"AND",
-  //   "glytoucan_ac":"${glycanId}"}`
+  const glycanSearch = () => {
+    let formObject = searchjson(
+      "search_glycan",
+      glycanId,
+      glyMassType,
+      glyMass[0],
+      glyMass[1],
+      glyNumSugars[0],
+      glyNumSugars[1],
+      glyOrganisms,
+      glyOrgOperation,
+      glyType,
+      glySubType,
+      glyBioEnz,
+      glyProt,
+      glyMotif,
+      glyPubId,
+      undefined
+    );
 
-  let formObject = searchjson("search_glycan", glycanId, undefined, undefined, undefined, undefined, undefined, undefined, undefined, age3, age4, glyBioEnz, glycoProt, glycMotif, glycPubId, undefined);
-
-  //formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
-  var json = "query=" + JSON.stringify(formObject);
-  //const url = `/glycan/search?query={"query_type":"search_glycan","operation":"AND","glytoucan_ac":"${glycanId}"}`;
-  const url = "/glycan/search?" + json;
-  return getJson(url); 
-};
-
-const glycanIdTypeahead = () => {
-  const url = `/typeahead?query={"field":"glytoucan_ac","value":"${glycanId}","limit":100}`;
-  return getJson(url).then(response =>  {  alert(response.data) });
-};
-
-  const handleChange2 = event => {
-    setAge2(event.target.value);
-  };
-  const handleChange1 = event => {
-    setAge1(event.target.value);
-    //alert(event.target.value);
-    setMass([event.target.value !== "Native" ? 205 : 149, event.target.value !== "Native" ? 8308 : 6752]);
+    //formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
+    var json = "query=" + JSON.stringify(formObject);
+    const url = "/glycan/search?" + json;
+    return getJson(url);
   };
 
-  
-  const handleChange3 = event => {
-    if (event.target.value === "")
-      setHidden(true);
-    else 
-      setHidden(false);
-    setAge4("");
-    setAge3(event.target.value);
-
-  };
-  const handleChange4 = event => {
-    setAge4(event.target.value);
-  };
-  const GlycanIdChange = event => {
-    setGlycanId(event.target.value);
+  const searchGlycanClick = () => {
+    glycanSearch().then(response => {
+      if (response.data["list_id"] !== "") {
+        props.history.push("/glycan-list/" + response.data["list_id"]);
+      } else {
+        alert("No Result Found.");
+      }
+    });
   };
 
-  const GlycoProtChange = event => {
-    setglycoProt(event.target.value);
-  };
-  const MotifChange = event => {
-    setglycMotif(event.target.value);
-  };
-  const BioEnzChange = event => {
-    setglyBioEnz(event.target.value);
-  };
-  const PubmedIdChange = event => {
-    setglycPubId(event.target.value);
-  };
-
-  const searchGlycanClick = () =>{
-      glycanSearch().then(response =>  {
-         if (response.data["list_id"] !== "") {
-          //window.location = '/glycan-list/' + response.data["list_id"];
-          props.history.push("/glycan-list/" + response.data["list_id"]);
-        } else {
-          alert("No Result Found.")
-        }
-      })
-  };
-
-  const clearGlycan = () =>{
+  const clearGlycan = () => {
     setGlycanId("");
-    setglycoProt("");
-    setglycMotif("");
-    setglyBioEnz("");
-    setglycPubId("");
-    setAge1("Native");
-    setAge3("");
-    setAge4("");
-    setHidden(true);
-  }
-
-  const GlycanIdClick = () =>{
-    setGlycanId('G17689DH');
+    setGlyProt("");
+    setGlyMotif("");
+    setGlyBioEnz("");
+    setGlyPubId("");
+    setGlyMassType("Native");
+    setGlyType("");
+    setGlySubType("");
+    setGlyOrgOperation("or");
+    setMassValues(undefined, undefined);
+    setGlyNumSugars([initData.number_monosaccharides.min, initData.number_monosaccharides.max]);
+    setGlyOrganisms([]);
+    setGlySubTypeIsHidden(true);
   };
 
-  const CrossReferencesIdClick = () =>{
-    setGlycanId('G10716');
-  };
-
-  const GlyProteinClick = () =>{
-    setglycoProt('P14210');
-  };
-  const GlyMotifClick = () =>{
-    setglycMotif('N-Glycan complex');
-  };
-  const GlyBioEnClick = () =>{
-    setglyBioEnz('B4GALT1');
-  };
-  const GlyPubIdClick = () =>{
-    setglycPubId('9449027');
-  };
-
-  const [value, setOrganisms] = React.useState([]);
-  function handleOrgSelect(org) {
-    setOrganisms(org);
-  }
-
-  const [numSugars, setNumSugars] = React.useState([1, 38]);
-  function handleSetNumSugars(sugars) {
-    setNumSugars(sugars);
-  }
-
-  const [mass, setMass] = React.useState([age1 !== "Native" ? 205 : 149, age1 !== "Native" ? 8308 : 6752]);
-  function handleSetMass(mass) {
-    setMass(mass);
-  }
-
-//   const handleSetOrganisms = (org1) =>{
-//     setOrganisms(org1);
-//     alert(org1)
-// };
-
-  
   return (
     <>
       {/* <Helmet>
@@ -549,9 +640,11 @@ const glycanIdTypeahead = () => {
             transition={false}
             id="noanim-tab-example"
           >
-            <Tab eventKey="simple_search" 
-            className={classes.tab}
-            title="Simple Search"></Tab>
+            <Tab
+              eventKey="simple_search"
+              className={classes.tab}
+              title="Simple Search"
+            ></Tab>
             <Tab
               eventKey="advanced_search"
               className={classes.tab}
@@ -559,12 +652,20 @@ const glycanIdTypeahead = () => {
             >
               <Container className={classes.con}>
                 <ButtonToolbar className={classes.marginButToolbar}>
-                  <Button className={classes.marginButton} variant="secondary" size="lg" onClick={clearGlycan}>
+                  <Button
+                    className={classes.marginButton}
+                    variant="secondary"
+                    size="lg"
+                    onClick={clearGlycan}
+                  >
                     Clear Fields
                   </Button>
-                  <Button className={classes.marginButton} variant="primary" size="lg"
-                        onClick={searchGlycanClick}
-                        >
+                  <Button
+                    className={classes.marginButton}
+                    variant="primary"
+                    size="lg"
+                    onClick={searchGlycanClick}
+                  >
                     Search Glycan
                   </Button>
                 </ButtonToolbar>
@@ -573,38 +674,50 @@ const glycanIdTypeahead = () => {
                   className={classes.margin}
                   variant="outlined"
                 >
-                  <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip disableTouchListener interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Glycan Id:</Typography>
-                        <div className={classes.root1}>
-                  {/* <Avatar variant="square" src="https://www.researchgate.net/profile/Jonathan_Lyons2/publication/279284153/figure/fig1/AS:294331559759874@1447185520497/Glycan-structures-A-Representative-examples-of-N-glycans.png" className={classes.large} /> */}
-                  </div>
-                        {"Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore"} <a href='https://glytoucan.org/Structures/graphical' target='_blank'>{"GlyTouCan"}</a>
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Glycan Id
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      disableTouchListener
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">Glycan Id:</Typography>
+                          <div className={classes.root1}></div>
+                          {
+                            "Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore"
+                          }{" "}
+                          <a
+                            href="https://glytoucan.org/Structures/graphical"
+                            target="_blank"
+                          >
+                            {"GlyTouCan"}
+                          </a>
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Glycan Id
                   </Typography>
-                 
-                  <OutlinedInput
-                    id="outlined-adornment-amount"
-                    className={classes.input1}
+                  <MultilineAutoTextInput
+                    inputValue={glycanId}
+                    setInputValue={glycanIdChange}
                     placeholder="Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id"
-                    multiline
-                    rows="3"
-                    variant="outlined"
-                    value={glycanId}
-                    onChange={GlycanIdChange}
-                    // startAdornment={<Help />}
-                    // labelWidth={100}
+                    typeahedID="glytoucan_ac"
                   />
                   <Row>
                     <Col lg="6">
                       <div>
-                      GlyTouCan Accession Example:{" "}
-                        <a  href="javascript:void(0)" onClick={GlycanIdClick} id="textExampleGlycan">
+                        GlyTouCan Accession Example:{" "}
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlycanId("G17689DH");
+                          }}
+                        >
                           G17689DH
                         </a>
                       </div>
@@ -612,345 +725,458 @@ const glycanIdTypeahead = () => {
                     <Col lg="6">
                       <div class="text-right">
                         Explore{" "}
-                        <a href="https://glytoucan.org/Structures/graphical" target="_blank">
+                        <a
+                          href="https://glytoucan.org/Structures/graphical"
+                          target="_blank"
+                        >
                           GlyTouCan Accession
                         </a>
                       </div>
                     </Col>
                   </Row>
                   <Row>
-                  <Col lg="6">
+                    <Col lg="6">
                       <div>
-                      Cross References Id Example:{" "}
-                        <a  href="javascript:void(0)" onClick={CrossReferencesIdClick} id="textExampleGlycan">
-                        G10716
+                        Cross References Id Example:{" "}
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlycanId("G10716");
+                          }}
+                        >
+                          G10716
                         </a>
                       </div>
                     </Col>
                   </Row>
                 </FormControl>
 
-                {/* <CustomizedHook/> */}
-                {/* <Asynchronous/> */}
-                {/* <GoogleMaps/> */}
-
-
                 <div className={classes.margin}>
-                <Grid container spacing={2} alignItems="center">
-                <Grid item>
-                <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Monoisotopic Mass:</Typography>
-                        {"The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your protein(s)"}
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Monoisotopic Mass
-                  </Typography>
-                    <RangeSlider 
-                       step= {10}
-                       //min = {mass[0]}
-                       min = {age1 !== "Native" ? 205 : 149 }
-                       //max= {mass[1]} 
-                       max= {age1 !== "Native" ? 8308 : 6752}
-                       //{initData.number_monosaccharides.max}
-                       intValue= {mass}
-                       handleSetNumSugars={handleSetMass}
-                    />
-                  </Grid>
-                  <Grid item>
-                  <Typography className={classes.label4} id="range-slider" gutterBottom>
-                    {/* Mass Type */}&nbsp;
-                  </Typography>
-                    <FormControl variant="outlined">                                 
-                      <InputLabel  className={classes.label3} id="demo-simple-select-filled-label1">
-                        Mass Type
-                      </InputLabel>
-                      <Select                       
-                        labelId="demo-simple-select-filled-label1"
-                        id="demo-simple-select-filled1"
-                        value={age1 === "" ? "Native" : age1} 
-                        onChange={handleChange1}
-                        // startAdornment={<Help />}
-                        className={classes.select}
-                        labelWidth={100}
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Typography
+                        className={classes.label1}
+                        id="range-slider"
+                        gutterBottom
                       >
-                        <MenuItem value={"Native"}>Native</MenuItem>
-                        <MenuItem value={"Permethylated"}>Permethylated</MenuItem>
-                      </Select>
-                    </FormControl>
+                        <HtmlTooltip
+                          interactive
+                          title={
+                            <React.Fragment>
+                              <Typography color="inherit">
+                                Monoisotopic Mass:
+                              </Typography>
+                              {
+                                "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your protein(s)"
+                              }
+                            </React.Fragment>
+                          }
+                        >
+                          <HelpOutline className={classes.helpicon} />
+                        </HtmlTooltip>
+                        Monoisotopic Mass
+                      </Typography>
+                      <RangeInputSlider
+                        step={10}
+                        min={glyMassRange[0]}
+                        max={glyMassRange[1]}
+                        inputValue={glyMass}
+                        setInputValue={glyMassChange}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        className={classes.label4}
+                        id="range-slider"
+                        gutterBottom
+                      >
+                        {/* Mass Type */}&nbsp;
+                      </Typography>
+                      <FormControl variant="outlined">
+                        <InputLabel
+                          className={classes.label3}
+                          id="demo-simple-select-filled-label1"
+                        >
+                          Mass Type
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-filled-label1"
+                          id="demo-simple-select-filled1"
+                          value={glyMassType}
+                          onChange={handleChange1}
+                          className={classes.select}
+                          labelWidth={100}
+                        >
+                          <MenuItem value={"Native"}>Native</MenuItem>
+                          <MenuItem value={"Permethylated"}>
+                            Permethylated
+                          </MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
                   </Grid>
-                </Grid>
                 </div>
                 <div className={classes.margin}>
-                 {/* <Row className={classes.row1}> */}
-                {/* <Help /> */}
-                  <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Number of Sugars:</Typography>
-                        {"Use the sliders to select a Number of Sugars range for your protein(s)"}
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  No of Sugars
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">
+                            Number of Sugars:
+                          </Typography>
+                          {
+                            "Use the sliders to select a Number of Sugars range for your protein(s)"
+                          }
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    No of Sugars
                   </Typography>
                   {/* </Row>  */}
-                  <RangeSlider 
-                    step= {1}
-                    min= {1}
-                    //{initData.number_monosaccharides.min}
-                    max= {38}
-                    //{initData.number_monosaccharides.max}
-                    intValue= {numSugars}
-                    handleSetNumSugars={handleSetNumSugars}
-                    />
+                  <RangeInputSlider
+                    step={1}
+                    min={glyNumSugarsRange[0]}
+                    max={glyNumSugarsRange[1]}
+                    inputValue={glyNumSugars}
+                    setInputValue={glyNumSugarsChange}
+                  />
                 </div>
                 <div className={classes.margin}>
-                <Grid container spacing={2} alignItems="center">
-                <Grid item>
-                <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Organism:</Typography>
-                        {"An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)"}
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                    Organisms
-                  </Typography>
-                  <CustomizedHook orgList={initData.organism} value={value} handleOrgSelect={handleOrgSelect} /> 
-                  </Grid>
-                  <Grid item>
-                  <Typography className={classes.label4} id="range-slider" gutterBottom>
-                    {/* Mass Type */}&nbsp;
-                  </Typography>
-                    <FormControl variant="outlined">                                 
-                      <Select                       
-                        labelId="demo-simple-select-cond-label2"
-                        id="demo-simple-select-cond2"
-                        value={age2 === "" ? "or" : age2} 
-                        onChange={handleChange2}
-                        // startAdornment={<Help />}
-                        className={classes.select}
-                        // labelWidth={100}
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item>
+                      <Typography
+                        className={classes.label1}
+                        id="range-slider"
+                        gutterBottom
                       >
-                        <MenuItem value={"or"}>Or</MenuItem>
-                        <MenuItem value={"and"}>And</MenuItem>
-
-                        {/* {Opoptions.map(option => (
-                          <MenuItem value={option.value} selected={option === 'Or'}>
-                            {option.text}
-                          </MenuItem>
-                        ))} */}
-
-                      </Select>
-                    </FormControl>
+                        <HtmlTooltip
+                          interactive
+                          title={
+                            <React.Fragment>
+                              <Typography color="inherit">Organism:</Typography>
+                              {
+                                "An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)"
+                              }
+                            </React.Fragment>
+                          }
+                        >
+                          <HelpOutline className={classes.helpicon} />
+                        </HtmlTooltip>
+                        Organisms
+                      </Typography>
+                      <MultiselectTextInput
+                        options={initData.organism}
+                        inputValue={glyOrganisms}
+                        setInputValue={glyOrgChange}
+                        placeholder="Click to select multiple Organisms"
+                      />
                     </Grid>
-                </Grid>
-                </div>
-                <FormControl fullWidth variant="outlined" className={classes.margin}> 
-                  <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Glycan Type:</Typography>
-                        {"The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."}
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Glycan Type
-                  </Typography>                                
-                      <Select
-                        labelId="demo-simple-select-filled-label3"
-                        id="demo-simple-select-filled3"
-                        value={age3}
-                        displayEmpty
-                        onChange={handleChange3}
-                        // startAdornment={<Help />}
-                        className={classes.select1}
-                        // labelWidth={130}
+                    <Grid item>
+                      <Typography
+                        className={classes.label4}
+                        id="range-slider"
+                        gutterBottom
                       >
-                        <MenuItem value="">
-                         Select Glycan Type
-                        </MenuItem>
-                        {/* {initData.glycan_type.map(option => (
+                        {/* Mass Type */}&nbsp;
+                      </Typography>
+                      <FormControl variant="outlined">
+                        <Select
+                          labelId="demo-simple-select-cond-label2"
+                          id="demo-simple-select-cond2"
+                          value={
+                            glyOrgOperation === "" ? "or" : glyOrgOperation
+                          }
+                          onChange={handleChange2}
+                          className={classes.select}
+                        >
+                          <MenuItem value={"or"}>Or</MenuItem>
+                          <MenuItem value={"and"}>And</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </div>
+                <FormControl
+                  fullWidth
+                  variant="outlined"
+                  className={classes.margin}
+                >
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">Glycan Type:</Typography>
+                          {
+                            "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
+                          }
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Glycan Type
+                  </Typography>
+                  <Select
+                    labelId="demo-simple-select-filled-label3"
+                    id="demo-simple-select-filled3"
+                    value={glyType}
+                    displayEmpty
+                    onChange={handleChange3}
+                    className={classes.select1}
+                  >
+                    <MenuItem value="">Select Glycan Type</MenuItem>
+                    {/* {initData.glycan_type.map(option => (
                             <MenuItem value={option.name}>
                               {option.name}
                             </MenuItem>
                         ))} */}
-                        <MenuItem value={"N-glycan"}>N-Glycan</MenuItem>
-                        <MenuItem value={"O-glycan"}>O-Glycan</MenuItem>
-                        <MenuItem value={"Other"}>Other</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <MenuItem value={"N-glycan"}>N-Glycan</MenuItem>
+                    <MenuItem value={"O-glycan"}>O-Glycan</MenuItem>
+                    <MenuItem value={"Other"}>Other</MenuItem>
+                  </Select>
+                </FormControl>
 
-                    {/* <div className={classes.margin}> */}
-                    {!isHidden && <FormControl fullWidth variant="outlined" className={classes.margin}>                                 
-                    <Typography className={classes.label1} id="demo-simple-select-sel" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Glycan Subtype:</Typography>
-                        {"Subclassifcation of Glycan types. Click to select a Glycan Subtype"}
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                    Select Glycan Subtype
-                  </Typography>
-                      <Select
-                        labelId="demo-simple-select-sel"
-                        id="demo-simple-select-sel"
-                        value={age4}
-                        displayEmpty
-                        onChange={handleChange4}
-                        // startAdornment={<Help />}
-                        className={classes.select1}
-                        // labelWidth={130}
-                        displayPrint="none"
-                      >
-                        <MenuItem value="" selected>
-                         Select Glycan Subtype
-                        </MenuItem>
-                        {initData.glycan_type.map(option => (
-                            option.subtype.sort().map(subtype => (
-                            (option.name === age3) && <MenuItem value={subtype}>
-                              {subtype}
-                            </MenuItem>
-                            ))
-                        ))}
-                        {/* <ListSubheader>N-Glycan</ListSubheader>
-                        <MenuItem value={1}>hybrid</MenuItem>
-                        <MenuItem value={2}>complex</MenuItem>
-                        <MenuItem value={3}>Other</MenuItem>
-                        <MenuItem value={4}>high mannonse</MenuItem>
-                        <MenuItem value={5}>pauci mannonse</MenuItem>
-                        <ListSubheader>O-Glycan</ListSubheader>
-                        <MenuItem value={7}>Core 1</MenuItem>
-                        <MenuItem value={8}>Core 2</MenuItem>
-                        <MenuItem value={9}>Core 3</MenuItem>
-                        <MenuItem value={10}>Core 4</MenuItem>
-                        <MenuItem value={11}>Core 5</MenuItem>
-                        <MenuItem value={12}>Core 6</MenuItem>
-                        <MenuItem value={13}>Core 7</MenuItem>
-                        <ListSubheader>Other</ListSubheader>
-                        <MenuItem value={14}>Other</MenuItem> */}
-                      </Select>
-                      
-                    </FormControl>}
-
-                    <FormControl fullWidth variant="outlined" className={classes.margin}>                                 
-                   <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Glycosylated Protein:</Typography>
-                        {"A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore"} <a href='https://www.uniprot.org/' target='_blank'>UniProtKB</a>
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Glycosylated Protein
-                  </Typography>
-                  <OutlinedInput
-                    id="outlined-adornment-amount"
-                    className={classes.input}
-                    placeholder="Enter the UniProtKB Accession of your protein"
-                    // startAdornment={<Help />}
-                    // labelWidth={210}
-                    value={glycoProt}
-                    onChange={GlycoProtChange}
+                {/* <div className={classes.margin}> */}
+                {!glySubTypeIsHidden && (
+                  <FormControl
+                    fullWidth
                     variant="outlined"
+                    className={classes.margin}
+                  >
+                    <Typography
+                      className={classes.label1}
+                      id="demo-simple-select-sel"
+                      gutterBottom
+                    >
+                      <HtmlTooltip
+                        interactive
+                        title={
+                          <React.Fragment>
+                            <Typography color="inherit">
+                              Glycan Subtype:
+                            </Typography>
+                            {
+                              "Subclassifcation of Glycan types. Click to select a Glycan Subtype"
+                            }
+                          </React.Fragment>
+                        }
+                      >
+                        <HelpOutline className={classes.helpicon} />
+                      </HtmlTooltip>
+                      Select Glycan Subtype
+                    </Typography>
+                    <Select
+                      labelId="demo-simple-select-sel"
+                      id="demo-simple-select-sel"
+                      value={glySubType}
+                      displayEmpty
+                      onChange={handleChange4}
+                      className={classes.select1}
+                      displayPrint="none"
+                    >
+                      <MenuItem value="" selected>
+                        Select Glycan Subtype
+                      </MenuItem>
+                      {initData.glycan_type.map(option =>
+                        option.subtype
+                          .sort()
+                          .map(
+                            subtype =>
+                              option.name === glyType && (
+                                <MenuItem value={subtype}>{subtype}</MenuItem>
+                              )
+                          )
+                      )}
+                    </Select>
+                  </FormControl>
+                )}
+
+                <FormControl
+                  fullWidth
+                  variant="outlined"
+                  className={classes.margin}
+                >
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">
+                            Glycosylated Protein:
+                          </Typography>
+                          {
+                            "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore"
+                          }{" "}
+                          <a href="https://www.uniprot.org/" target="_blank">
+                            UniProtKB
+                          </a>
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Glycosylated Protein
+                  </Typography>
+                  <AutoTextInput
+                    inputValue={glyProt}
+                    setInputValue={glyProtChange}
+                    placeholder="Enter the UniProtKB Accession of your protein"
+                    typeahedID="uniprot_canonical_ac"
                   />
                   <Row>
                     <Col lg="4">
                       <div>
                         Example:{" "}
-                        <a href="javascript:void(0)" onClick={GlyProteinClick} id="textExampleGlycan">
-                        P14210
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlyProt("P14210");
+                          }}
+                        >
+                          P14210
                         </a>
                       </div>
                     </Col>
                     <Col lg="8">
                       <div class="text-right">
                         Explore{" "}
-                        <a href="https://www.uniprot.org/help/accession_numbers" target="_blank">
-                        UniProtKB Accession
+                        <a
+                          href="https://www.uniprot.org/help/accession_numbers"
+                          target="_blank"
+                        >
+                          UniProtKB Accession
                         </a>
                       </div>
                     </Col>
                   </Row>
-                  </FormControl>
-                  <FormControl fullWidth variant="outlined" className={classes.margin}>                                 
-                   <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Glycan Motif:</Typography>
-                        {"A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore"} <a href='https://www.uniprot.org/help/carbohyd' target='_blank'>Glycan Motif</a>
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Glycan Motif
+                </FormControl>
+                <FormControl
+                  fullWidth
+                  variant="outlined"
+                  className={classes.margin}
+                >
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">Glycan Motif:</Typography>
+                          {
+                            "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore"
+                          }{" "}
+                          <a
+                            href="https://www.uniprot.org/help/carbohyd"
+                            target="_blank"
+                          >
+                            Glycan Motif
+                          </a>
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Glycan Motif
                   </Typography>
-                  <OutlinedInput
-                    id="outlined-adornment-amount"
-                    className={classes.input}
+                  <AutoTextInput
+                    inputValue={glyMotif}
+                    setInputValue={glyMotifChange}
                     placeholder="Enter the name of a Glycan Motif contained in your glycan"
-                    value={glycMotif}
-                    onChange={MotifChange}
-                    // startAdornment={<Help />}
-                    // labelWidth={210}
+                    typeahedID="motif_name"
                   />
                   <Row>
                     <Col lg="4">
                       <div>
                         Example:{" "}
-                        <a href="javascript:void(0)" onClick={GlyMotifClick} id="textExampleGlycan">
-                        N-Glycan complex
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlyMotif("N-Glycan complex");
+                          }}
+                        >
+                          N-Glycan complex
                         </a>
                       </div>
                     </Col>
                     <Col lg="8">
                       <div class="text-right">
                         Explore{" "}
-                        <a href="https://www.uniprot.org/help/carbohyd" target="_blank">
-                        Glycan Motif
+                        <a
+                          href="https://www.uniprot.org/help/carbohyd"
+                          target="_blank"
+                        >
+                          Glycan Motif
                         </a>
                       </div>
                     </Col>
                   </Row>
-                  </FormControl>
-                  <FormControl fullWidth variant="outlined" className={classes.margin}>                                 
-                   <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Biosynthetic Enzyme:</Typography>
-                        {"Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore"} <a href='https://enzyme.expasy.org/' target='_blank'>Biosynthetic Enzyme</a>
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Biosynthetic Enzyme
+                </FormControl>
+                <FormControl
+                  fullWidth
+                  variant="outlined"
+                  className={classes.margin}
+                >
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">
+                            Biosynthetic Enzyme:
+                          </Typography>
+                          {
+                            "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore"
+                          }{" "}
+                          <a href="https://enzyme.expasy.org/" target="_blank">
+                            Biosynthetic Enzyme
+                          </a>
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Biosynthetic Enzyme
                   </Typography>
-                  <OutlinedInput
-                    id="outlined-adornment-amount"
-                    className={classes.input}
+                  <AutoTextInput
+                    inputValue={glyBioEnz}
+                    setInputValue={glyBioEnzChange}
                     placeholder="Enter the Gene Name of an enzyme"
-                    value={glyBioEnz}
-                    onChange={BioEnzChange}
-                    // startAdornment={<Help />}
-                    // labelWidth={210}
+                    typeahedID="gene_name"
                   />
                   <Row>
                     <Col lg="4">
                       <div>
                         Example:{" "}
-                        <a href="javascript:void(0)" onClick={GlyBioEnClick} id="textExampleGlycan">
-                        B4GALT1
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlyBioEnz("B4GALT1");
+                          }}
+                        >
+                          B4GALT1
                         </a>
                       </div>
                     </Col>
@@ -958,61 +1184,102 @@ const glycanIdTypeahead = () => {
                       <div class="text-right">
                         Explore{" "}
                         <a href="https://enzyme.expasy.org/" target="_blank">
-                        Biosynthetic Enzyme
+                          Biosynthetic Enzyme
                         </a>
                       </div>
                     </Col>
                   </Row>
-                  </FormControl>
-                  <FormControl fullWidth variant="outlined" className={classes.margin}>                                 
-                   <Typography className={classes.label1} id="range-slider" gutterBottom>
-                  <HtmlTooltip interactive title={
-                      <React.Fragment>
-                        <Typography color="inherit">Biosynthetic Enzyme:</Typography>
-                        {"A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore"} <a href='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/' target='_blank'>PubMed ID</a>
-                      </React.Fragment>
-                    }>
-                    <HelpOutline className={classes.helpicon}/>
-                  </HtmlTooltip>
-                  Pubmed ID
+                </FormControl>
+                <FormControl
+                  fullWidth
+                  variant="outlined"
+                  className={classes.margin}
+                >
+                  <Typography
+                    className={classes.label1}
+                    id="range-slider"
+                    gutterBottom
+                  >
+                    <HtmlTooltip
+                      interactive
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">
+                            Biosynthetic Enzyme:
+                          </Typography>
+                          {
+                            "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore"
+                          }{" "}
+                          <a
+                            href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
+                            target="_blank"
+                          >
+                            PubMed ID
+                          </a>
+                        </React.Fragment>
+                      }
+                    >
+                      <HelpOutline className={classes.helpicon} />
+                    </HtmlTooltip>
+                    Pubmed ID
                   </Typography>
                   <OutlinedInput
                     id="outlined-adornment-amount"
                     className={classes.input}
                     placeholder="Enter the Pubmed ID"
-                    value={glycPubId}
+                    value={glyPubId}
                     onChange={PubmedIdChange}
-                    // startAdornment={<Help />}
-                    // labelWidth={210}
                   />
+                  {/* <AutoTextInput
+                   inputValue={glyPubId} setInputValue={glycPubIdChange}
+                   placeholder="Enter the Pubmed ID"
+                   typeahedID = "glycan_pmid"
+                  /> */}
                   <Row>
                     <Col lg="4">
                       <div>
                         Example:{" "}
-                        <a href="javascript:void(0)" onClick={GlyPubIdClick} id="textExampleGlycan">
-                        9449027
+                        <a
+                          href="javascript:void(0)"
+                          onClick={() => {
+                            setGlyPubId("9449027");
+                          }}
+                        >
+                          9449027
                         </a>
                       </div>
                     </Col>
                     <Col lg="8">
                       <div class="text-right">
                         Explore{" "}
-                        <a href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/" target="_blank">
-                        Pubmed ID
+                        <a
+                          href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
+                          target="_blank"
+                        >
+                          Pubmed ID
                         </a>
                       </div>
                     </Col>
                   </Row>
-                  </FormControl>
-                  <ButtonToolbar className={classes.marginButToolbar}>
-                  <Button className={classes.marginButton} variant="secondary" size="lg" onClick={clearGlycan}>
+                </FormControl>
+                <ButtonToolbar className={classes.marginButToolbar}>
+                  <Button
+                    className={classes.marginButton}
+                    variant="secondary"
+                    size="lg"
+                    onClick={clearGlycan}
+                  >
                     Clear Fields
                   </Button>
-                  <Button className={classes.marginButton} variant="primary" size="lg" onClick={searchGlycanClick}>
+                  <Button
+                    className={classes.marginButton}
+                    variant="primary"
+                    size="lg"
+                    onClick={searchGlycanClick}
+                  >
                     Search Glycan
                   </Button>
                 </ButtonToolbar>
-
               </Container>
             </Tab>
             <Tab eventKey="composition_search" title="Composition Search"></Tab>
@@ -1022,7 +1289,6 @@ const glycanIdTypeahead = () => {
       </div>
     </>
   );
-}
+};
 
 export default GlycanSearch;
-
