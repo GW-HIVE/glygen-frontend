@@ -12,7 +12,7 @@ import ContactForm from '../components/ContactForm';
 
 const mapStyles = {
 	position: 'relative',
-	width: '100%',
+	width: '99%',
 	height: '350px'
 };
 
@@ -33,7 +33,7 @@ const ContactUs = props => {
 			</Helmet>
 
 			<CssBaseline />
-			<Container maxWidth='xl' className='ggContainer'>
+			<Container maxWidth='lg' className='ggContainer'>
 				<Row>
 					{/* Contact Left*/}
 					<Col sm={12} md={6} lg={6}>
@@ -87,17 +87,17 @@ const ContactUs = props => {
 					</Col>
 					{/* Contact Right */}
 					<Col sm={12} md={6} lg={6} className='content-box-md'>
-						<div id='contact-right'>
+						<div className='contact-right'>
 							<ContactForm />
 						</div>
 					</Col>
 				</Row>
-				<Row>
-					<div style={mapStyles}>
-						<GoogleMap />
-					</div>
-				</Row>
 			</Container>
+			<Row>
+				<div style={mapStyles}>
+					<GoogleMap />
+				</div>
+			</Row>
 		</React.Fragment>
 	);
 };
