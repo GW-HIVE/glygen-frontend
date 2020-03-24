@@ -8,13 +8,6 @@ import '../../css/Sidebar.css';
 // import { withRouter } from "react-router-dom";
 
 function Sidebar({ items }) {
-	// https://reacttraining.com/react-router/web/guides/scroll-restoration
-	// function ScrollToTop() {
-	// 	useEffect(() => {
-	// 		window.scrollTo(0, 0);
-	// 	}, []);
-	// 	return null;
-	// }
 
 	const [activeLink, setActiveLink] = useState('');
 
