@@ -12,6 +12,7 @@ import Disclaimer from './pages/Disclaimer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import License from './pages/License';
 import PrivacySettings from './pages/PrivacySettings';
+import Feedback from './pages/Feedback';
 
 const Routes = props => (
 	<Switch>
@@ -27,8 +28,9 @@ const Routes = props => (
 		<Route path='/contact-us' component={ContactUs} />
 		<Route path='/disclaimer' component={Disclaimer} />
 		<Route path='/privacy-policy' component={PrivacyPolicy} />
-    <Route path='/license' component={License} />
-    <Route path='/privacy-settings' component={PrivacySettings} />
+		<Route path='/license' component={License} />
+		<Route path='/privacy-settings' component={PrivacySettings} />
+		<Route path='/feedback' component={Feedback} />
 
 		{/* Keep path='/' at the bottom */}
 		<Route path='/' component={Home} />
