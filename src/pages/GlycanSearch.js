@@ -25,13 +25,13 @@ import Select from "@material-ui/core/Select";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import TextInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import Tooltip from "@material-ui/core/Tooltip";
+import '../css/Search.css';
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
@@ -87,11 +87,21 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 16,
     width: 700
   },
-  marginButton: {
+  submitButton: {
     marginTop: 16,
     marginBottom: 16,
     // marginRight: 16,
-    marginLeft: 16
+    marginLeft: 16,
+    backgroundColor: "#2f78b7"
+  },
+  clearButton: {
+    marginTop: 16,
+    marginBottom: 16,
+    // marginRight: 16,
+    marginLeft: 16,
+    backgroundColor: "#fff",
+    borderColor: "#337ab7",
+    color: "#337ab7",
   },
   marginButToolbar: {
     justifyContent: "flex-end",
@@ -178,7 +188,7 @@ const useStyles = makeStyles(theme => ({
   headerTitle: {
     color: "#2F78B7",
     alignItems: "center",
-    alignSelf: "center", //if style using flexbox
+    alignSelf: "center",
     textAlign: "center",
     marginTop: "20px",
     marginBottom: "10px",
@@ -249,20 +259,8 @@ const GlycanSearch = props => {
 
   const [glycanId, setGlycanId] = React.useState("");
   const [glyMassType, setGlyMassType] = React.useState("Native");
-  const [glyMass, setGlyMass] = React.useState(
-    //[Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)
-    [
-      glyMassType !== "Native" ? 205 : 149,
-      glyMassType !== "Native" ? 8308 : 6752
-    ]
-  );
-  const [glyMassRange, setGlyMassRange] = React.useState(
-    //[Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)
-    [
-      glyMassType !== "Native" ? 205 : 149,
-      glyMassType !== "Native" ? 8308 : 6752
-    ]
-  );
+  const [glyMass, setGlyMass] = React.useState([149, 6751]);
+  const [glyMassRange, setGlyMassRange] = React.useState([149, 6751]);
   const [glyNumSugars, setGlyNumSugars] = React.useState([1, 37]);
   const [glyNumSugarsRange, setGlyNumSugarsRange] = React.useState([1, 37]);
   const [glyOrganisms, setGlyOrganisms] = React.useState([]);
@@ -286,10 +284,10 @@ const GlycanSearch = props => {
     setGlyMass(glyMass);
   }
 
-  const handleChange2 = event => {
+  const glyOrgOperationOnChange = event => {
     setGlyOrgOperation(event.target.value);
   };
-  const handleChange1 = event => {
+  const glyMassTypeOnChange = event => {
     setGlyMassType(event.target.value);
     setMassValues(event.target.value, glyMass);
   };
@@ -333,18 +331,30 @@ const GlycanSearch = props => {
     setGlyMass([minval, maxval]);
   };
 
-  const handleChange3 = event => {
+  function sortDropdown(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    } else if (b.name < a.name) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const glyTypeOnChange = event => {
     if (event.target.value === "") setGlySubTypeIsHidden(true);
     else setGlySubTypeIsHidden(false);
     setGlySubType("");
     setGlyType(event.target.value);
   };
-  const handleChange4 = event => {
+
+  const glySubTypeOnChange = event => {
     setGlySubType(event.target.value);
   };
+
   function glycanIdChange(inputGlycanId) {
     setGlycanId(inputGlycanId);
   }
+
   function glyProtChange(inputglycoProt) {
     setGlyProt(inputglycoProt);
   }
@@ -360,6 +370,7 @@ const GlycanSearch = props => {
   function glyPubIdChange(inputglycPubId) {
     setGlyPubId(inputglycPubId);
   }
+
   const PubmedIdChange = event => {
     setGlyPubId(event.target.value);
   };
@@ -367,118 +378,116 @@ const GlycanSearch = props => {
   const getGlycanInit = () => {
     const url = `/glycan/search_init`;
     return getJson(url);
-    // return getJson(url).then(response => {
-    //   setInitData(response.data);
-    // });
   };
 
   React.useEffect(() => {
-
-    getGlycanInit().then((response) => {
+    getGlycanInit().then(response => {
       let initData = response.data;
       setInitData(response.data);
-      setGlyMassType(
-          initData.glycan_mass.native.name
-      );
-      setGlyMassRange(
-            [
-              Math.floor(initData.glycan_mass.native.min),
-              Math.ceil(initData.glycan_mass.native.max)
-            ]
-      );
-      setGlyMass(
-            [
-              Math.floor(initData.glycan_mass.native.min),
-              Math.ceil(initData.glycan_mass.native.max)
-            ]
-      );
-      setGlyNumSugarsRange(
-          [initData.number_monosaccharides.min, initData.number_monosaccharides.max]
-      );
+      setGlyMassType(initData.glycan_mass.native.name);
+      setGlyMassRange([
+        Math.floor(initData.glycan_mass.native.min),
+        Math.ceil(initData.glycan_mass.native.max)
+      ]);
+      setGlyMass([
+        Math.floor(initData.glycan_mass.native.min),
+        Math.ceil(initData.glycan_mass.native.max)
+      ]);
+      setGlyNumSugarsRange([
+        initData.number_monosaccharides.min,
+        initData.number_monosaccharides.max
+      ]);
       setGlySubTypeIsHidden(true);
 
+      const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
+        const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
+        return getJson(url);
+      };
 
-    const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
-      const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
-      return getJson(url);
-    };
+      id &&
+        getGlycanList(id, 1).then(({ data }) => {
+          setGlycanId(
+            data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
+          );
+          setGlyProt(
+            data.query.protein_identifier === undefined
+              ? ""
+              : data.query.protein_identifier
+          );
+          setGlyMotif(
+            data.query.glycan_motif === undefined ? "" : data.query.glycan_motif
+          );
+          setGlyBioEnz(
+            data.query.enzyme === undefined ? "" : data.query.enzyme.id
+          );
+          setGlyPubId(data.query.pmid === undefined ? "" : data.query.pmid);
+          setGlyMassType(
+            data.query.mass_type === undefined
+              ? initData.glycan_mass.native.name
+              : data.query.mass_type
+          );
 
-    id && getGlycanList(id, 1).then(({ data }) => {
+          setGlyMassRange(
+            data.query.mass_type === undefined
+              ? [
+                  Math.floor(initData.glycan_mass.native.min),
+                  Math.ceil(initData.glycan_mass.native.max)
+                ]
+              : data.query.mass_type === initData.glycan_mass.native.name
+              ? [
+                  Math.floor(initData.glycan_mass.native.min),
+                  Math.ceil(initData.glycan_mass.native.max)
+                ]
+              : [
+                  Math.floor(initData.glycan_mass.permethylated.min),
+                  Math.ceil(initData.glycan_mass.permethylated.max)
+                ]
+          );
 
-      setGlycanId(
-        data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
-      );
-      setGlyProt(
-        data.query.protein_identifier === undefined
-          ? ""
-          : data.query.protein_identifier
-      );
-      setGlyMotif(
-        data.query.glycan_motif === undefined ? "" : data.query.glycan_motif
-      );
-      setGlyBioEnz(data.query.enzyme === undefined ? "" : data.query.enzyme.id);
-      setGlyPubId(data.query.pmid === undefined ? "" : data.query.pmid);
-      setGlyMassType(
-        data.query.mass_type === undefined
-          ? initData.glycan_mass.native.name
-          : data.query.mass_type
-      );
+          setGlyMass(
+            data.query.mass === undefined
+              ? [
+                  Math.floor(initData.glycan_mass.native.min),
+                  Math.ceil(initData.glycan_mass.native.max)
+                ]
+              : [data.query.mass.min, data.query.mass.max]
+          );
 
-      setGlyMassRange(
-        data.query.mass_type === undefined
-          ? [
-              Math.floor(initData.glycan_mass.native.min),
-              Math.ceil(initData.glycan_mass.native.max)
-            ]
-          : data.query.mass_type === initData.glycan_mass.native.name
-          ? [
-              Math.floor(initData.glycan_mass.native.min),
-              Math.ceil(initData.glycan_mass.native.max)
-            ]
-          : [
-              Math.floor(initData.glycan_mass.permethylated.min),
-              Math.ceil(initData.glycan_mass.permethylated.max)
-            ]
-      );
+          setGlyType(
+            data.query.glycan_type === undefined ? "" : data.query.glycan_type
+          );
+          setGlyOrgOperation(
+            data.query.organism === undefined
+              ? "or"
+              : data.query.organism.operation
+          );
+          setGlyOrganisms(
+            data.query.organism === undefined
+              ? []
+              : data.query.organism.organism_list
+          );
+          setGlyNumSugars(
+            data.query.number_monosaccharides === undefined
+              ? [
+                  initData.number_monosaccharides.min,
+                  initData.number_monosaccharides.max
+                ]
+              : [
+                  data.query.number_monosaccharides.min,
+                  data.query.number_monosaccharides.max
+                ]
+          );
 
-      setGlyMass(
-        data.query.mass === undefined
-          ? [
-              Math.floor(initData.glycan_mass.native.min),
-              Math.ceil(initData.glycan_mass.native.max)
-            ]
-          : [data.query.mass.min, data.query.mass.max]
-      );
+          if (data.query.glycan_type === undefined) setGlySubTypeIsHidden(true);
+          else setGlySubTypeIsHidden(false);
 
-      setGlyType(
-        data.query.glycan_type === undefined ? "" : data.query.glycan_type
-      );
-      setGlyOrgOperation(
-        data.query.organism === undefined ? "or" : data.query.organism.operation
-      );
-      setGlyOrganisms(
-        data.query.organism === undefined
-          ? []
-          : data.query.organism.organism_list
-      );
-      setGlyNumSugars(
-        data.query.number_monosaccharides === undefined
-          ? [initData.number_monosaccharides.min, initData.number_monosaccharides.max]
-          : [
-              data.query.number_monosaccharides.min,
-              data.query.number_monosaccharides.max
-            ]
-      );
-
-      if (data.query.glycan_type === undefined) setGlySubTypeIsHidden(true);
-      else setGlySubTypeIsHidden(false);
-
-      setGlySubType(
-        data.query.glycan_subtype === undefined ? "" : data.query.glycan_subtype
-      );
+          setGlySubType(
+            data.query.glycan_subtype === undefined
+              ? ""
+              : data.query.glycan_subtype
+          );
+        });
     });
-  });
-
   }, [id]);
 
   function searchjson(
@@ -509,7 +518,10 @@ const GlycanSearch = props => {
 
     var monosaccharides = undefined;
     if (input_sugar_min && input_sugar_max) {
-      if (input_sugar_min !== initData.number_monosaccharides.min || input_sugar_max !== initData.number_monosaccharides.max) {
+      if (
+        input_sugar_min !== initData.number_monosaccharides.min ||
+        input_sugar_max !== initData.number_monosaccharides.max
+      ) {
         monosaccharides = {
           min: parseInt(input_sugar_min),
           max: parseInt(input_sugar_max)
@@ -520,14 +532,20 @@ const GlycanSearch = props => {
     var input_mass = undefined;
     if (input_mass_min && input_mass_max) {
       if (input_mass_type === "Native") {
-        if (input_mass_min !== initData.glycan_mass.native.min || input_mass_max !== initData.glycan_mass.native.max) {
+        if (
+          input_mass_min !== initData.glycan_mass.native.min ||
+          input_mass_max !== initData.glycan_mass.native.max
+        ) {
           input_mass = {
             min: parseInt(input_mass_min),
             max: parseInt(input_mass_max)
           };
         }
       } else {
-        if (input_mass_min !== initData.glycan_mass.permethylated.min || input_mass_max !== initData.glycan_mass.permethylated.min) {
+        if (
+          input_mass_min !== initData.glycan_mass.permethylated.min ||
+          input_mass_max !== initData.glycan_mass.permethylated.min
+        ) {
           input_mass = {
             min: parseInt(input_mass_min),
             max: parseInt(input_mass_max)
@@ -615,12 +633,15 @@ const GlycanSearch = props => {
     setGlyMotif("");
     setGlyBioEnz("");
     setGlyPubId("");
-    setGlyMassType("Native");
+    setGlyMassType(initData.glycan_mass.native.name);
     setGlyType("");
     setGlySubType("");
     setGlyOrgOperation("or");
     setMassValues(undefined, undefined);
-    setGlyNumSugars([initData.number_monosaccharides.min, initData.number_monosaccharides.max]);
+    setGlyNumSugars([
+      initData.number_monosaccharides.min,
+      initData.number_monosaccharides.max
+    ]);
     setGlyOrganisms([]);
     setGlySubTypeIsHidden(true);
   };
@@ -635,11 +656,7 @@ const GlycanSearch = props => {
 
       <div className="lander">
         <Container className={classes.con1}>
-          <Tabs
-            defaultActiveKey="advanced_search"
-            transition={false}
-            id="noanim-tab-example"
-          >
+          <Tabs defaultActiveKey="advanced_search" transition={false}>
             <Tab
               eventKey="simple_search"
               className={classes.tab}
@@ -653,7 +670,7 @@ const GlycanSearch = props => {
               <Container className={classes.con}>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.marginButton}
+                    className={classes.clearButton}
                     variant="secondary"
                     size="lg"
                     onClick={clearGlycan}
@@ -661,7 +678,7 @@ const GlycanSearch = props => {
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.marginButton}
+                    className={classes.submitButton}
                     variant="primary"
                     size="lg"
                     onClick={searchGlycanClick}
@@ -674,11 +691,7 @@ const GlycanSearch = props => {
                   className={classes.margin}
                   variant="outlined"
                 >
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       disableTouchListener
                       interactive
@@ -754,11 +767,7 @@ const GlycanSearch = props => {
                 <div className={classes.margin}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
-                      <Typography
-                        className={classes.label1}
-                        id="range-slider"
-                        gutterBottom
-                      >
+                      <Typography className={classes.label1} gutterBottom>
                         <HtmlTooltip
                           interactive
                           title={
@@ -785,43 +794,36 @@ const GlycanSearch = props => {
                       />
                     </Grid>
                     <Grid item>
-                      <Typography
-                        className={classes.label4}
-                        id="range-slider"
-                        gutterBottom
-                      >
-                        {/* Mass Type */}&nbsp;
+                      <Typography className={classes.label4} gutterBottom>
+                        &nbsp;
                       </Typography>
                       <FormControl variant="outlined">
-                        <InputLabel
-                          className={classes.label3}
-                          id="demo-simple-select-filled-label1"
-                        >
+                        <InputLabel className={classes.label3}>
                           Mass Type
                         </InputLabel>
                         <Select
-                          labelId="demo-simple-select-filled-label1"
-                          id="demo-simple-select-filled1"
                           value={glyMassType}
-                          onChange={handleChange1}
+                          onChange={glyMassTypeOnChange}
                           className={classes.select}
                           labelWidth={100}
                         >
-                          <MenuItem value={"Native"}>Native</MenuItem>
-                          <MenuItem value={"Permethylated"}>
-                            Permethylated
-                          </MenuItem>
+                          {initData.glycan_mass &&
+                            Object.keys(initData.glycan_mass)
+                              .sort()
+                              .map(key => (
+                                <MenuItem
+                                  value={initData.glycan_mass[key].name}
+                                >
+                                  {initData.glycan_mass[key].name}
+                                </MenuItem>
+                              ))}
                         </Select>
                       </FormControl>
                     </Grid>
                   </Grid>
                 </div>
                 <div className={classes.margin}>
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -839,7 +841,6 @@ const GlycanSearch = props => {
                     </HtmlTooltip>
                     No of Sugars
                   </Typography>
-                  {/* </Row>  */}
                   <RangeInputSlider
                     step={1}
                     min={glyNumSugarsRange[0]}
@@ -851,11 +852,7 @@ const GlycanSearch = props => {
                 <div className={classes.margin}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
-                      <Typography
-                        className={classes.label1}
-                        id="range-slider"
-                        gutterBottom
-                      >
+                      <Typography className={classes.label1} gutterBottom>
                         <HtmlTooltip
                           interactive
                           title={
@@ -872,7 +869,11 @@ const GlycanSearch = props => {
                         Organisms
                       </Typography>
                       <MultiselectTextInput
-                        options={initData.organism}
+                        options={
+                          initData.organism
+                            ? initData.organism.sort(sortDropdown)
+                            : initData.organism
+                        }
                         inputValue={glyOrganisms}
                         setInputValue={glyOrgChange}
                         placeholder="Click to select multiple Organisms"
@@ -881,19 +882,16 @@ const GlycanSearch = props => {
                     <Grid item>
                       <Typography
                         className={classes.label4}
-                        id="range-slider"
                         gutterBottom
                       >
                         {/* Mass Type */}&nbsp;
                       </Typography>
                       <FormControl variant="outlined">
                         <Select
-                          labelId="demo-simple-select-cond-label2"
-                          id="demo-simple-select-cond2"
                           value={
                             glyOrgOperation === "" ? "or" : glyOrgOperation
                           }
-                          onChange={handleChange2}
+                          onChange={glyOrgOperationOnChange}
                           className={classes.select}
                         >
                           <MenuItem value={"or"}>Or</MenuItem>
@@ -908,11 +906,7 @@ const GlycanSearch = props => {
                   variant="outlined"
                   className={classes.margin}
                 >
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -929,37 +923,28 @@ const GlycanSearch = props => {
                     Glycan Type
                   </Typography>
                   <Select
-                    labelId="demo-simple-select-filled-label3"
-                    id="demo-simple-select-filled3"
                     value={glyType}
                     displayEmpty
-                    onChange={handleChange3}
+                    onChange={glyTypeOnChange}
                     className={classes.select1}
                   >
                     <MenuItem value="">Select Glycan Type</MenuItem>
-                    {/* {initData.glycan_type.map(option => (
-                            <MenuItem value={option.name}>
-                              {option.name}
-                            </MenuItem>
-                        ))} */}
-                    <MenuItem value={"N-glycan"}>N-Glycan</MenuItem>
-                    <MenuItem value={"O-glycan"}>O-Glycan</MenuItem>
-                    <MenuItem value={"Other"}>Other</MenuItem>
+                    {initData.glycan_type &&
+                      initData.glycan_type
+                        .sort(sortDropdown)
+                        .map(option => (
+                          <MenuItem value={option.name}>{option.name}</MenuItem>
+                        ))}
                   </Select>
                 </FormControl>
 
-                {/* <div className={classes.margin}> */}
                 {!glySubTypeIsHidden && (
                   <FormControl
                     fullWidth
                     variant="outlined"
                     className={classes.margin}
                   >
-                    <Typography
-                      className={classes.label1}
-                      id="demo-simple-select-sel"
-                      gutterBottom
-                    >
+                    <Typography className={classes.label1} gutterBottom>
                       <HtmlTooltip
                         interactive
                         title={
@@ -978,27 +963,26 @@ const GlycanSearch = props => {
                       Select Glycan Subtype
                     </Typography>
                     <Select
-                      labelId="demo-simple-select-sel"
-                      id="demo-simple-select-sel"
                       value={glySubType}
                       displayEmpty
-                      onChange={handleChange4}
+                      onChange={glySubTypeOnChange}
                       className={classes.select1}
                       displayPrint="none"
                     >
                       <MenuItem value="" selected>
                         Select Glycan Subtype
                       </MenuItem>
-                      {initData.glycan_type.map(option =>
-                        option.subtype
-                          .sort()
-                          .map(
-                            subtype =>
-                              option.name === glyType && (
-                                <MenuItem value={subtype}>{subtype}</MenuItem>
-                              )
-                          )
-                      )}
+                      {initData.glycan_type &&
+                        initData.glycan_type.map(option =>
+                          option.subtype
+                            .sort()
+                            .map(
+                              subtype =>
+                                option.name === glyType && (
+                                  <MenuItem value={subtype}>{subtype}</MenuItem>
+                                )
+                            )
+                        )}
                     </Select>
                   </FormControl>
                 )}
@@ -1010,7 +994,6 @@ const GlycanSearch = props => {
                 >
                   <Typography
                     className={classes.label1}
-                    id="range-slider"
                     gutterBottom
                   >
                     <HtmlTooltip
@@ -1071,11 +1054,7 @@ const GlycanSearch = props => {
                   variant="outlined"
                   className={classes.margin}
                 >
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -1135,11 +1114,7 @@ const GlycanSearch = props => {
                   variant="outlined"
                   className={classes.margin}
                 >
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -1195,11 +1170,7 @@ const GlycanSearch = props => {
                   variant="outlined"
                   className={classes.margin}
                 >
-                  <Typography
-                    className={classes.label1}
-                    id="range-slider"
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -1224,7 +1195,6 @@ const GlycanSearch = props => {
                     Pubmed ID
                   </Typography>
                   <OutlinedInput
-                    id="outlined-adornment-amount"
                     className={classes.input}
                     placeholder="Enter the Pubmed ID"
                     value={glyPubId}
@@ -1264,7 +1234,7 @@ const GlycanSearch = props => {
                 </FormControl>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.marginButton}
+                    className={classes.clearButton}
                     variant="secondary"
                     size="lg"
                     onClick={clearGlycan}
@@ -1272,7 +1242,7 @@ const GlycanSearch = props => {
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.marginButton}
+                    className={classes.submitButton}
                     variant="primary"
                     size="lg"
                     onClick={searchGlycanClick}

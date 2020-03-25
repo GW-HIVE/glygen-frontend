@@ -5,7 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
 import { Row, Col } from 'react-bootstrap';
-import { decomposeColor } from '@material-ui/core';
+import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+import { useState } from 'react';
 
 const PrivacySettings = props => {
 	const vertHeadDisclaimer = {
@@ -13,6 +14,13 @@ const PrivacySettings = props => {
 		h2textTop: 'Manage',
 		h2textBottom: 'Your',
 		h2textBottomStrongAfter: 'Privacy Settings'
+	};
+
+	const [enabled, setEnabled] = useState(false);
+	const [disabled, setDisabled] = useState(true);
+
+	const handleChange = event => {
+		setEnabled({ [event.target.name]: event.target.checked });
 	};
 
 	return (
@@ -57,26 +65,44 @@ const PrivacySettings = props => {
 							<hr />
 
 							<Row>
-								<Col sm={10} className='text-left'>
+								<Col sm={9} className='text-left'>
 									User Selection
 									<br />
 									<span
-										id='manageSettingsDisabled'
+										name={disabled}
+										// id='manageSettingsDisabled'
 										style={{ color: '#999999' }}>
 										Disabled
 									</span>
 									<span
-										id='manageSettingsEnabled'
+										name={enabled}
+										// id='manageSettingsEnabled'
 										style={{ color: '#3277b7', display: 'none' }}>
 										Enabled
 									</span>
 								</Col>
 
-								<Col sm={2} className='text-right'>
+								<Col sm={3} className='text-right'>
 									{/* <label class="switch">
                         <input name="manageSettingsEnabled" type="checkbox">
                         <span class="slider round" id="slider-round" onclick="return switchHandler(this);"></span>
                     </label> */}
+									<BootstrapSwitchButton
+										width={60}
+										onlabel='On'
+										offlabel='Off'
+										onstyle='outline-primary'
+										offstyle='outline-secondary'
+										// onChange={event => {
+										// 	handleChange({ checked: event.target.value });
+										// }}
+										// checked={setDisabled(false)}
+
+										// style={{background: '#2f78b7 '}}
+										// onChange={(checked: (false)) => {
+										// 	this.setState({ isOn: checked });
+										// }}
+									/>
 								</Col>
 							</Row>
 						</Col>
