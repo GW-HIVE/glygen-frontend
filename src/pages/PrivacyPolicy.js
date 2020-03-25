@@ -6,8 +6,8 @@ import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
 import { Row, Col } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-// import { Link } from 'react-router-dom';
-// import { Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 
 const useStyles = makeStyles(theme => ({
 	heading: {
@@ -83,12 +83,12 @@ const PrivacyPolicy = props => {
 							</a>
 						</p>
 						<p>
-							You can manage your privacy settings at any time on our website
-							<a href='/privacy-settings'> here</a>.
-							{/* <Navbar.Text as={Link} to='/privacy-settings'>
+							You can manage your privacy settings at any time on our website{' '}
+							{/* <a href='/privacy-settings'> here</a>. */}
+							<Navbar.Text as={Link} to='/privacy-settings'>
 								here
 							</Navbar.Text>
-							. */}
+							.
 						</p>
 						<h4 className={classes.heading}> Links</h4>
 						<p>
