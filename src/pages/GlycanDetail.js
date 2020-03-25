@@ -6,8 +6,41 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-// import GlygenBadge from "../components/GlygenBadge";
+import GlygenBadge from "../components/GlygenBadge";
+import { NavLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
+import { Navbar } from "react-bootstrap";
+import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
+import EvidenceList from "../components/EvidenceList";
+import PaginatedTable from "../components/PaginatedTable";
+import ClientPaginatedTable from "../components/ClientPaginatedTable";
+
+function autoResize(frame) {
+  frame.height = frame.contentWindow.document.body.scrollHeight + "px";
+  frame.width = frame.contentWindow.document.body.scrollWidth + "px";
+}
+
+const CompositionDisplay = props => {
+  return (
+    <>
+      {props.composition.map(item => (
+        <>
+          {item.url ? (
+            <>
+              <a href={item.url} target="_blank">
+                {item.residue}
+              </a>
+              <sub>{item.count}</sub>
+            </>
+          ) : (
+            <sub>{item.count}</sub>
+          )}
+        </>
+      ))}
+    </>
+  );
+};
+
 function addCommas(nStr) {
   nStr += "";
   var x = nStr.split(".");
@@ -20,10 +53,48 @@ function addCommas(nStr) {
   }
   return x1 + x2;
 }
+
+const getItemsCrossRef = data => {
+  let itemscrossRef = [];
+
+  //check data.
+  if (data.crossref) {
+    // for (let i = 0; i < data.crossref.length; i++) {
+    // let crossrefitem = data.crossref[i];
+    for (let crossrefitem of data.crossref) {
+      let found = "";
+      // for (let j = 0; j < itemscrossRef.length; j++) {
+      //   let databaseitem = itemscrossRef[j];
+      for (let databaseitem of itemscrossRef) {
+        if (databaseitem.database === crossrefitem.database) {
+          found = true;
+          databaseitem.links.push({
+            url: crossrefitem.url,
+            id: crossrefitem.id
+          });
+        }
+      }
+      if (!found) {
+        itemscrossRef.push({
+          database: crossrefitem.database,
+          links: [
+            {
+              url: crossrefitem.url,
+              id: crossrefitem.id
+            }
+          ]
+        });
+      }
+    }
+  }
+  return itemscrossRef;
+};
+
 const GlycanDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
+  const [itemsCrossRef, setItemsCrossRef] = useState([]);
 
   useEffect(() => {
     const getGlycanDetailData = getGlycanDetail(id);
@@ -34,6 +105,7 @@ const GlycanDetail = props => {
         // displayErrorByCode(data.code);
         // activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
       } else {
+        setItemsCrossRef(getItemsCrossRef(data));
         setDetailData(data);
       }
     });
@@ -46,84 +118,83 @@ const GlycanDetail = props => {
   if (detailData.mass) {
     detailData.mass = addCommas(detailData.mass);
   }
-
-  if (detailData.composition) {
-    var mapComp = { hex: 1, hexnac: 2, dhex: 3, neuac: 4, neugc: 5, other: 7 };
-
-    detailData.composition = detailData.composition.sort(function(a, b) {
-      var resVal1 = mapComp[a.residue.toLowerCase()];
-      var resVal2 = mapComp[b.residue.toLowerCase()];
-
-      if (!resVal1) resVal1 = 6;
-
-      if (!resVal2) resVal2 = 6;
-
-      return resVal1 - resVal2;
-    });
-
-    // Replacing residue names with the ones to be displayed.
-    for (var i = 0; i < detailData.composition.length; i++) {
-      if (detailData.composition[i].residue == "hex") {
-        detailData.composition[i].residue = "Hex";
-      } else if (detailData.composition[i].residue == "hexnac") {
-        detailData.composition[i].residue = "HexNAc";
-      } else if (detailData.composition[i].residue == "dhex") {
-        detailData.composition[i].residue = "dHex";
-      } else if (detailData.composition[i].residue == "neuac") {
-        detailData.composition[i].residue = "NeuAc";
-      } else if (detailData.composition[i].residue == "neugc") {
-        detailData.composition[i].residue = "NeuGc";
-      } else if (detailData.composition[i].residue == "other") {
-        detailData.composition[i].residue = "(+x other residues)";
-      }
-    }
+  if (detailData.glycoct) {
+    detailData.glycoct = detailData.glycoct.replace(/\\n/g, "\n");
   }
-  const { mass, glytoucan, species, composition } = detailData;
-  const evidences = groupEvidencesInSpecies(species);
+  const {
+    mass,
+    glytoucan,
+    inchi_key,
+    species,
+    composition,
+    motifs,
+    iupac,
+    classification,
+    glycoprotein,
+    glycoct
+  } = detailData;
+
+  const speciesEvidence = groupSpeciesEvidences(species);
+
   const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 
-  const formatComposition = composition => {
-    const compositionNames = composition.map(item => item.name);
-    return compositionNames;
-  };
+  const glycoProtienColumns = [
+    {
+      dataField: "uniprot_canonical_ac",
+      text: "protein ID",
+      sort: true,
 
-  function groupEvidencesInSpecies(species) {
-    var groupedEvidences = {};
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+      // formatter: (value, row) => (
+      //   <Navbar.Text
+      //     as={NavLink}
+      //     to={`/glycan-list/${row.uniprot_canonical_ac}`}
+      //   >
+      //     {row.glytoucan_ac}
+      //   </Navbar.Text>
+      // )
+    },
 
-    if (!species) {
-      return groupedEvidences;
-    }
-
-    for (const s of species) {
-      groupedEvidences[s.name] = {};
-      for (const e of s.evidence) {
-        if (e.database in groupedEvidences[s.name]) {
-          groupedEvidences[s.name][e.database].push({
-            id: e.id,
-            url: e.url
-          });
-        } else {
-          groupedEvidences[s.name][e.database] = [
-            {
-              id: e.id,
-              url: e.url
-            }
-          ];
-        }
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: value => {
+        return <EvidenceList evidences={groupEvidences(value)} />;
+      }
+    },
+    {
+      dataField: "position",
+      text: "Position",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "protein_name",
+      text: "Protein Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
       }
     }
-    return groupedEvidences;
-  }
+  ];
 
   return (
     <React.Fragment>
-      <CssBaseline />
-
       <Container
         maxWidth="xl"
         className="ggContainer"
         style={{ paddingTop: "50px" }}
       >
+        <pre>{JSON.stringify(itemsCrossRef)}</pre>
+
         <Table bordered hover5 size="lg" className="panel-width">
           <thead className="panelHeadBgr panelHeadText">
             <tr>
@@ -139,7 +210,6 @@ const GlycanDetail = props => {
                   {glytoucan && glytoucan.glytoucan_ac && (
                     <>
                       <p>
-                        <b> GlyToucan image:</b>
                         <img
                           className="img-cartoon"
                           src={glycanImageUrl + glytoucan.glytoucan_ac}
@@ -158,36 +228,229 @@ const GlycanDetail = props => {
                       <p>
                         <b>Monoisotopic Mass:</b>
                         {mass}
-                        (Permethylated Mass:{mass})
+                        (Permethylated Mass: {mass})
                       </p>
                     </>
                   )}
                   {composition && (
                     <p>
-                      <b>Composition</b>:{formatComposition(composition)}
-                      <sub>{composition.count}</sub>
+                      <b>Composition</b>:{" "}
+                      <CompositionDisplay composition={composition} />
                     </p>
                   )}
-                  {/* {classification &&
-                      classification.type &&
-                      classification.subtype(
-                        <p>
-                          <b>Glycan Type/Subtype:</b>
+
+                  {classification && classification.length && (
+                    <p>
+                      <b>Glycan Type/Subtype:</b>
+
+                      {classification.map(Formatclassification => (
+                        <>
                           <Link
-                            href={classification.type.url}
+                            href={Formatclassification.type.url}
                             target="noopener noreferrer _blank"
                           >
-                            {classification.type.name}
+                            {Formatclassification.type.name}
                           </Link>
+                          &nbsp;
                           <Link
-                            href={classification.subtype.url}
+                            href={Formatclassification.subtype.url}
                             target="noopener noreferrer _blank"
                           >
-                            {classification.subtype.name}
+                            {Formatclassification.subtype.name}
                           </Link>
-                        </p>
-                      )} */}
+                        </>
+                      ))}
+                    </p>
+                  )}
+
+                  {inchi_key && inchi_key.key && (
+                    <>
+                      <p>
+                        <b>Inchy key:</b>
+                        <Link
+                          href={inchi_key.url}
+                          target="noopener noreferrer _blank"
+                        >
+                          {inchi_key.key}
+                        </Link>
+                      </p>
+                    </>
+                  )}
                 </ul>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+
+      <Container maxWidth="xl" className="ggContainer">
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>Found Glycoprotien</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                {glycoprotein && glycoprotein.length !== 0 && (
+                  <ClientPaginatedTable
+                    data={glycoprotein}
+                    columns={glycoProtienColumns}
+                  />
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+
+      <Container maxWidth="xl" className="ggContainer">
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>Species</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                <span>
+                  {speciesEvidence &&
+                    // For every species object
+                    Object.keys(speciesEvidence).map(species => (
+                      // For every database for current species object
+                      <>
+                        {/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
+                        {species}:
+                        <EvidenceList evidences={speciesEvidence[species]} />
+                      </>
+                    ))}
+                </span>
+                {/* <EvidenceList evidences={speciesEvidence} /> */}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+
+      <Container
+        maxWidth="xl"
+        className="ggContainer"
+        style={{ paddingTop: "50px" }}
+      >
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>MOTIF</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                <ul>
+                  {motifs && (
+                    <>
+                      <b> Motif image:</b>
+                      {motifs.map(motif => (
+                        <div key={motif.id}>
+                          <img
+                            className="img-cartoon"
+                            src={glycanImageUrl + motif.id}
+                            alt="Cartoon"
+                          />
+                          <a href={""}>{motif.name}</a>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+      <Container
+        maxWidth="xl"
+        className="ggContainer"
+        style={{ paddingTop: "50px" }}
+      >
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>Digital Seq</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                <pre>
+                  {" "}
+                  <strong>IUPAC</strong>
+                  <pre className="text-overflow">{iupac}</pre>
+                </pre>
+
+                <strong>GlycoCT</strong>
+                <pre className="text-overflow">{glycoct}</pre>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+
+      <Container
+        maxWidth="xl"
+        className="ggContainer"
+        style={{ paddingTop: "50px" }}
+      >
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>crossref</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                {itemsCrossRef ? (
+                  <ul>
+                    {itemsCrossRef.map(crossRef => (
+                      <li class="list-group2">
+                        <strong>{crossRef.database}:</strong>
+                        <ul>
+                          {crossRef.links.map(link => (
+                            <li class="list-group-indent">
+                              <a
+                                class="panelcontent"
+                                href={link.url}
+                                target="_blank"
+                              >
+                                {link.id}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No data available.</p>
+                )}
               </td>
             </tr>
           </tbody>

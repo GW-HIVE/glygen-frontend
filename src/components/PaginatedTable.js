@@ -63,6 +63,14 @@ const PaginatedTable = ({
       </div>
     )
   };
+
+  // const columnsWithSort = columns.map(column => ({
+  //   ...column,
+  //   onSort: (field, order) => {
+  //     onTableChange(/*...*/, field, order)
+  //   }
+  // }))
+
   return (
     <div>
       <PaginationProvider
@@ -81,6 +89,8 @@ const PaginatedTable = ({
 
               <PaginationTotalStandalone {...paginationProps} />
 
+              {onDownload && <button onClick={onDownload}>Download</button>}
+
               <PaginationListStandalone {...paginationProps} />
             </div>
             <BootstrapTable
@@ -92,6 +102,7 @@ const PaginatedTable = ({
               keyField="id"
               data={data}
               columns={columns}
+              // {columnsWithSort}
               onTableChange={onTableChange}
               {...paginationTableProps}
             />
