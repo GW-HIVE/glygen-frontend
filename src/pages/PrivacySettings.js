@@ -17,11 +17,6 @@ const PrivacySettings = props => {
 	};
 
 	const [enabled, setEnabled] = useState(false);
-	const [disabled, setDisabled] = useState(true);
-
-	const handleChange = event => {
-		setEnabled({ [event.target.name]: event.target.checked });
-	};
 
 	return (
 		<>
@@ -39,69 +34,56 @@ const PrivacySettings = props => {
 				<Row>
 					<Col style={{ paddingBottom: '40px' }}>
 						<Col md={10} className='contact-right' style={{ margin: '0 auto' }}>
-							<p id='textManageSettingsEnabled'>
-								GlyGen is monitoring your searches to improve/streamline your
-								interaction with our system.{' '}
-								<a
-									href='https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity'
-									target='_blank'
-									rel='noopener noreferrer'>
-									Learn more.
-								</a>
-							</p>
+							{enabled && (
+								<p>
+									GlyGen is monitoring your searches to improve/streamline your
+									interaction with our system.{' '}
+									<a
+										href='https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity'
+										target='_blank'
+										rel='noopener noreferrer'>
+										Learn more.
+									</a>
+								</p>
+							)}
 
-							<p id='textManageSettingsDisabled'>
-								GlyGen is NOT currently monitoring your searches; you can
-								improve/streamline your searches by allowing GlyGen to monitor
-								your interaction with our system. For example, your searches can
-								be recorded so you can review them at a later date.{' '}
-								<a
-									href='https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity'
-									target='_blank'
-									rel='noopener noreferrer'>
-									Learn more.
-								</a>
-							</p>
+							{!enabled && (
+								<p>
+									GlyGen is NOT currently monitoring your searches; you can
+									improve/streamline your searches by allowing GlyGen to monitor
+									your interaction with our system. For example, your searches
+									can be recorded so you can review them at a later date.{' '}
+									<a
+										href='https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity'
+										target='_blank'
+										rel='noopener noreferrer'>
+										Learn more.
+									</a>
+								</p>
+							)}
 							<hr />
 
 							<Row>
 								<Col sm={9} className='text-left'>
 									User Selection
 									<br />
-									<span
-										name={disabled}
-										// id='manageSettingsDisabled'
-										style={{ color: '#999999' }}>
-										Disabled
-									</span>
-									<span
-										name={enabled}
-										// id='manageSettingsEnabled'
-										style={{ color: '#3277b7', display: 'none' }}>
-										Enabled
-									</span>
+									{!enabled && (
+										<span style={{ color: '#999999' }}>Disabled</span>
+									)}
+									{enabled && <span style={{ color: '#3277b7' }}>Enabled</span>}
 								</Col>
 
 								<Col sm={3} className='text-right'>
-									{/* <label class="switch">
-                        <input name="manageSettingsEnabled" type="checkbox">
-                        <span class="slider round" id="slider-round" onclick="return switchHandler(this);"></span>
-                    </label> */}
 									<BootstrapSwitchButton
 										width={60}
 										onlabel='On'
 										offlabel='Off'
 										onstyle='outline-primary'
 										offstyle='outline-secondary'
-										// onChange={event => {
-										// 	handleChange({ checked: event.target.value });
-										// }}
-										// checked={setDisabled(false)}
-
-										// style={{background: '#2f78b7 '}}
-										// onChange={(checked: (false)) => {
-										// 	this.setState({ isOn: checked });
-										// }}
+										checked={enabled}
+										onChange={(checked: boolean) => {
+											setEnabled(checked);
+										}}
 									/>
 								</Col>
 							</Row>
