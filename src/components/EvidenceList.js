@@ -8,7 +8,7 @@ const EvidenceList = props => {
   return (
     <span>
       {Object.keys(evidences).map((db, index) => (
-        <GlygenBadge key={index} text={db} expandList={evidences[db]} />
+        <GlygenBadge text={db} expandList={evidences[db]} />
       ))}
     </span>
   );

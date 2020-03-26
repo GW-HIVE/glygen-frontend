@@ -14,6 +14,7 @@ import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import PaginatedTable from "../components/PaginatedTable";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
+import "../css/detail.css";
 
 function autoResize(frame) {
   frame.height = frame.contentWindow.document.body.scrollHeight + "px";
@@ -131,7 +132,8 @@ const GlycanDetail = props => {
     iupac,
     classification,
     glycoprotein,
-    glycoct
+    glycoct,
+    wurcs
   } = detailData;
 
   const speciesEvidence = groupSpeciesEvidences(species);
@@ -164,8 +166,8 @@ const GlycanDetail = props => {
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
       },
-      formatter: value => {
-        return <EvidenceList evidences={groupEvidences(value)} />;
+      formatter: ({ cell, rowIndex }) => {
+        return <EvidenceList key={rowIndex} evidences={groupEvidences(cell)} />;
       }
     },
     {
@@ -396,14 +398,16 @@ const GlycanDetail = props => {
           <tbody className="table-body">
             <tr className="table-row">
               <td>
-                <pre>
-                  {" "}
+                <span className="PanelContainHeading">
                   <strong>IUPAC</strong>
-                  <pre className="text-overflow">{iupac}</pre>
-                </pre>
+                </span>
 
+                <pre className="text-overflow">{iupac}</pre>
+
+                <strong>WURCS</strong>
+                <pre className="text-overflow">{wurcs}</pre>
                 <strong>GlycoCT</strong>
-                <pre className="text-overflow">{glycoct}</pre>
+                <pre className="">{glycoct}</pre>
               </td>
             </tr>
           </tbody>
