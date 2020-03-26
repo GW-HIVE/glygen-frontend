@@ -146,7 +146,7 @@ const GlycanDetail = props => {
       text: "protein ID",
       sort: true,
 
-      headerStyle: (colum, colIndex) => {
+      headerStyle: (column, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
       }
       // formatter: (value, row) => (
@@ -166,8 +166,13 @@ const GlycanDetail = props => {
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
       },
-      formatter: ({ cell, rowIndex }) => {
-        return <EvidenceList key={rowIndex} evidences={groupEvidences(cell)} />;
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
       }
     },
     {

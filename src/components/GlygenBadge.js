@@ -68,8 +68,8 @@ const GlygenBadge = props => {
       </Button>
       {showExpandList && (
         <ul className="">
-          {props.expandList.map(value => (
-            <li>
+          {props.expandList.map((value, index) => (
+            <li key={index}>
               <Link href={value.url} target="noopener noreferrer _blank">
                 {value.id}
               </Link>
