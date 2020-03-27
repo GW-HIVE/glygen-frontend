@@ -137,7 +137,10 @@ export default function Header() {
 							<Nav.Link className='gg-nav-link' as={NavLink} to='/home'>
 								HOME
 							</Nav.Link>
-							<NavDropdown title='EXPLORE' id='basic-nav-dropdown'>
+							<NavDropdown
+								className='gg-dropdown-navbar'
+								title='EXPLORE'
+								id='basic-nav-dropdown'>
 								<NavDropdown.Item as={NavLink} to='/glycan-search'>
 									Glycan Search
 								</NavDropdown.Item>
@@ -154,7 +157,10 @@ export default function Header() {
 							<Nav.Link className='gg-nav-link' as={NavLink} to='/try-me'>
 								TRY&nbsp;ME
 							</Nav.Link>
-							<NavDropdown title='DATA' id='basic-nav-dropdown'>
+							<NavDropdown
+								className='gg-dropdown-navbar'
+								title='DATA'
+								id='basic-nav-dropdown'>
 								<NavDropdown.Item
 									href='https://data.glygen.org/'
 									target='_blank'
@@ -174,7 +180,10 @@ export default function Header() {
 									SPARQL
 								</NavDropdown.Item>
 							</NavDropdown>
-							<NavDropdown title='HELP' id='basic-nav-dropdown'>
+							<NavDropdown
+								className='gg-dropdown-navbar'
+								title='HELP'
+								id='basic-nav-dropdown'>
 								<NavDropdown.Item as={NavLink} to='/about'>
 									About
 								</NavDropdown.Item>
@@ -188,7 +197,10 @@ export default function Header() {
 									How to Cite
 								</NavDropdown.Item>
 							</NavDropdown>
-							<NavDropdown title='MORE' id='basic-nav-dropdown'>
+							<NavDropdown
+								className='gg-dropdown-navbar'
+								title='MORE'
+								id='basic-nav-dropdown'>
 								<NavDropdown.Item as={NavLink} to='/media'>
 									Media
 								</NavDropdown.Item>

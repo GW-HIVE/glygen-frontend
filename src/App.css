@@ -81,7 +81,7 @@ p {
 .gg-top-header {
 	background-color: #f5f5f5 !important;
 }
-.dropdown-menu {
+.gg-dropdown-navbar .dropdown-menu {
 	background-color: var(--gg-blue) !important;
 }
 .dropdown-item {
