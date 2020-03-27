@@ -11,7 +11,12 @@
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": "."
+			"period": ".",
+			"quote": "Quote",
+			"bibtex": {
+				"name": "BibTeX",
+				"url": "https://scholar.googleusercontent.com/scholar.bib?q=info:UjFK4Ts2cAAJ:scholar.google.com/&output=citation&scisdr=CgWueoirENP5gam_o2A:AAGBfm0AAAAAXnu6u2Cc2K7pUeq__llLfWQTyTCp2Qvz&scisig=AAGBfm0AAAAAXnu6u3lpFAvWUOwG68vreIAODz7vowR0&scisf=4&ct=citation&cd=-1&hl=en"
+			}
 		}
 	],
 	"ourPapers": [
@@ -26,7 +31,12 @@
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": "."
+			"period": ".",
+			"quote": "",
+			"bibtex": {
+				"name": "",
+				"url": ""
+			}
 		},
 		{
 			"text": "",
@@ -38,7 +48,12 @@
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": "."
+			"period": ".",
+			"quote": "",
+			"bibtex": {
+				"name": "",
+				"url": ""
+			}
 		}
 	],
 	"relatedPapers": [
@@ -53,7 +68,12 @@
 				"name": "",
 				"url": ""
 			},
-			"period": ""
+			"period": "",
+			"quote": "",
+			"bibtex": {
+				"name": "",
+				"url": ""
+			}
 		}
 	],
 	"websiteCitation": [
@@ -68,7 +88,12 @@
 				"name": "",
 				"url": ""
 			},
-			"period": ""
+			"period": "",
+			"quote": "",
+			"bibtex": {
+				"name": "",
+				"url": ""
+			}
 		}
 	]
 }

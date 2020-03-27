@@ -5,6 +5,13 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import ToTopArrow from '../components/ToTopArrow';
+import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
+// import FormatQuoteOutlinedIcon from '@material-ui/icons/FormatQuoteOutlined';
+import PDF from '../downloads/citation/31616925.pdf';
+
+// import EndNote from '../downloads/endNote/Computational.enw';
+import { Document } from 'react-pdf';
 
 const PanelHowToCite = props => {
 	return (
@@ -41,6 +48,40 @@ const PanelHowToCite = props => {
 												{json.website.name}
 											</a>
 											{json.period}
+										</div>
+										{/* Quotes */}
+										<div style={{ color: '#777777' }}>
+											{json.quote}
+											{/* <FormatQuoteOutlinedIcon /> */}{' '}
+											<a
+												href={json.bibtex.url}
+												target='_blank'
+												rel='noopener noreferrer'>
+												{json.bibtex.name}
+											</a>
+											{/* </div>
+										<div> */}
+											<Navbar.Text
+												as={Link}
+												to={PDF}
+												// to={
+												// 	process.env.PUBLIC_URL +
+												// 	'downloads/endNote/Computational.pdf'
+												// }
+												target='_blank'
+												download='31616925.pdf'
+												style={{ paddingRight: '20px', paddingLeft: '20px' }}>
+												PDF
+											</Navbar.Text>{' '}
+											<Navbar.Text
+												as={Link}
+												// to={EndNote}
+												target='_blank'
+												download
+												style={{ paddingRight: '20px' }}>
+												EndNote
+											</Navbar.Text>
+											<Document file={PDF} target='_blank' download />
 										</div>
 									</p>
 								</td>
