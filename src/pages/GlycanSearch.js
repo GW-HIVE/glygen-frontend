@@ -432,6 +432,11 @@ const GlycanSearch = props => {
         compositionData[x].name = compositionSearchData[compositionData[x].residue].name;
         compositionData[x].shortName = compositionSearchData[compositionData[x].residue].short_name;
       }
+      initData.glycan_mass.native.min = Math.floor(initData.glycan_mass.native.min);
+      initData.glycan_mass.native.max = Math.ceil(initData.glycan_mass.native.max);
+      initData.glycan_mass.permethylated.min = Math.floor(initData.glycan_mass.permethylated.min);
+      initData.glycan_mass.permethylated.max = Math.ceil(initData.glycan_mass.permethylated.max);
+
       initData.composition = compositionData.sort(function(res1, res2){return parseInt(res1.orderId) - parseInt(res2.orderId)});
       setInitData(initData);
 
@@ -459,12 +464,7 @@ const GlycanSearch = props => {
           );
 
           setGlyMassRange(
-            data.query.mass_type === undefined
-              ? [
-                  Math.floor(initData.glycan_mass.native.min),
-                  Math.ceil(initData.glycan_mass.native.max)
-                ]
-              : data.query.mass_type === initData.glycan_mass.native.name
+            data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
               ? [
                   Math.floor(initData.glycan_mass.native.min),
                   Math.ceil(initData.glycan_mass.native.max)
@@ -477,10 +477,15 @@ const GlycanSearch = props => {
 
           setGlyMass(
             data.query.mass === undefined
+              ? data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
               ? [
-                  Math.floor(initData.glycan_mass.native.min),
-                  Math.ceil(initData.glycan_mass.native.max)
-                ]
+                Math.floor(initData.glycan_mass.native.min),
+                Math.ceil(initData.glycan_mass.native.max)
+              ]
+              : [
+                Math.floor(initData.glycan_mass.permethylated.min),
+                Math.ceil(initData.glycan_mass.permethylated.max)
+              ]
               : [data.query.mass.min, data.query.mass.max]
           );
 
@@ -575,7 +580,7 @@ const GlycanSearch = props => {
       } else {
         if (
           input_mass_min !== initData.glycan_mass.permethylated.min ||
-          input_mass_max !== initData.glycan_mass.permethylated.min
+          input_mass_max !== initData.glycan_mass.permethylated.max
         ) {
           input_mass = {
             min: parseInt(input_mass_min),
