@@ -3,10 +3,12 @@ import MultilineAutoTextInput from "../components/input/MultilineAutoTextInput";
 import RangeInputSlider from "../components/input/RangeInputSlider";
 import AutoTextInput from "../components/input/AutoTextInput";
 import MultiselectTextInput from "../components/input/MultiselectTextInput";
-
+import CompositionSearchControl from "../components/input/CompositionSearchControl";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { getJson } from "../data/api";
+import compositionSearchData from '../data/json/compositionSearch';
+
 
 import {
   Component,
@@ -31,7 +33,7 @@ import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import Tooltip from "@material-ui/core/Tooltip";
-import '../css/Search.css';
+import "../css/Search.css";
 
 const HtmlTooltip = withStyles(theme => ({
   tooltip: {
@@ -101,12 +103,17 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 16,
     backgroundColor: "#fff",
     borderColor: "#337ab7",
-    color: "#337ab7",
+    color: "#337ab7"
   },
   marginButToolbar: {
     justifyContent: "flex-end",
     // marginRight: 0,
     width: 700
+  },
+  marginButToolbarCompoSearch: {
+    justifyContent: "center",
+    // marginRight: 0,
+    // width: 920
   },
   marginLeft: {
     justifyContent: "flex-end"
@@ -123,6 +130,11 @@ const useStyles = makeStyles(theme => ({
   },
   form1: {
     width: 770
+  },
+  label5: {
+    fontSize: 16,
+    width: "100px",
+    height: "18px"
   },
   label: {
     fontSize: 16,
@@ -182,6 +194,15 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     width: "1000px",
     height: "1150px",
+    alignItems: "center",
+    fontColor: "#2F78B7"
+  },
+  tabCompostionSearch: {
+    borderRadius: 4,
+    borderColor: "#80bdff",
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+    width: "1000px",
+    height: "900px",
     alignItems: "center",
     fontColor: "#2F78B7"
   },
@@ -383,7 +404,6 @@ const GlycanSearch = props => {
   React.useEffect(() => {
     getGlycanInit().then(response => {
       let initData = response.data;
-      setInitData(response.data);
       setGlyMassType(initData.glycan_mass.native.name);
       setGlyMassRange([
         Math.floor(initData.glycan_mass.native.min),
@@ -403,6 +423,17 @@ const GlycanSearch = props => {
         const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
         return getJson(url);
       };
+
+      let compositionData = initData.composition;
+
+      for (var x = 0; x < compositionData.length; x++) {
+        compositionData[x].orderId = compositionSearchData[compositionData[x].residue].order_id;
+        compositionData[x].subtext = compositionSearchData[compositionData[x].residue].subtext;
+        compositionData[x].name = compositionSearchData[compositionData[x].residue].name;
+        compositionData[x].shortName = compositionSearchData[compositionData[x].residue].short_name;
+      }
+      initData.composition = compositionData.sort(function(res1, res2){return parseInt(res1.orderId) - parseInt(res2.orderId)});
+      setInitData(initData);
 
       id &&
         getGlycanList(id, 1).then(({ data }) => {
@@ -880,10 +911,7 @@ const GlycanSearch = props => {
                       />
                     </Grid>
                     <Grid item>
-                      <Typography
-                        className={classes.label4}
-                        gutterBottom
-                      >
+                      <Typography className={classes.label4} gutterBottom>
                         {/* Mass Type */}&nbsp;
                       </Typography>
                       <FormControl variant="outlined">
@@ -992,10 +1020,7 @@ const GlycanSearch = props => {
                   variant="outlined"
                   className={classes.margin}
                 >
-                  <Typography
-                    className={classes.label1}
-                    gutterBottom
-                  >
+                  <Typography className={classes.label1} gutterBottom>
                     <HtmlTooltip
                       interactive
                       title={
@@ -1252,7 +1277,18 @@ const GlycanSearch = props => {
                 </ButtonToolbar>
               </Container>
             </Tab>
-            <Tab eventKey="composition_search" title="Composition Search"></Tab>
+            <Tab
+              eventKey="composition_search"
+              title="Composition Search"
+              className={classes.tabCompostionSearch}
+            >
+              <Container className="p-5">              
+                  {initData.composition && <CompositionSearchControl
+                    compositionInitMap={initData.composition}
+                    step={1}
+                  />}
+              </Container>
+            </Tab>
             <Tab eventKey="tutorial" title="Tutorial"></Tab>
           </Tabs>
         </Container>
