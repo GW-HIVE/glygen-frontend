@@ -13,7 +13,6 @@ const PaginatedTable = ({
   columns,
   sizePerPage,
   onTableChange,
-
   totalSize,
   onDownload
 }) => {
@@ -49,28 +48,6 @@ const PaginatedTable = ({
     columnWidth: "60px"
   };
 
-  const expandRow = {
-    renderer: row => (
-      <div>
-        <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
-        <p>
-          You can render anything here, also you can add additional data on
-          every row object
-        </p>
-        <p>
-          expandRow.renderer callback will pass the origin row object to you
-        </p>
-      </div>
-    )
-  };
-
-  // const columnsWithSort = columns.map(column => ({
-  //   ...column,
-  //   onSort: (field, order) => {
-  //     onTableChange(/*...*/, field, order)
-  //   }
-  // }))
-
   return (
     <div>
       <PaginationProvider
@@ -94,9 +71,8 @@ const PaginatedTable = ({
               <PaginationListStandalone {...paginationProps} />
             </div>
             <BootstrapTable
-              expandRow={expandRow}
               scrollTop={"Bottom"}
-              selectRow={selectRow}
+              // selectRow={selectRow}
               striped
               remote
               keyField="id"
