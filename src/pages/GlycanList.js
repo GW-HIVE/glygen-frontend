@@ -40,11 +40,20 @@ const GlycanList = props => {
     // eslint-disable-next-line
   }, []);
 
-  const handleTableChange = (type, { page, sizePerPage }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getGlycanList(id, (page - 1) * sizePerPage + 1).then(({ data }) => {
+    getGlycanList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
       // place to change values before rendering
 
       setData(data.results);
@@ -79,11 +88,11 @@ const GlycanList = props => {
           Edit Columns
         </Button> */}
 
-        <Link to={`/glycan-list/${id}/edit`}>
+        {/* <Link to={`/glycan-list/${id}/edit`}>
           <button type="button" className="btn btn-primary">
             Edit Columns
           </button>
-        </Link>
+        </Link> */}
 
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
@@ -93,7 +102,7 @@ const GlycanList = props => {
             sizePerPage={sizePerPage}
             totalSize={totalSize}
             onTableChange={handleTableChange}
-            onDownload={() => {}}
+            // onDownload={handleDownload}
           />
         )}
       </section>
