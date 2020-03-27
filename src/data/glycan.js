@@ -1,4 +1,4 @@
-import { getJson } from "./api";
+import { getJson, postTo } from "./api";
 import { NavLink } from "react-router-dom";
 import React from "react";
 import CustomPopover from "../components/CustomPopover";
@@ -7,21 +7,35 @@ import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-export const getGlycanList = (glycanListId, offset = 1) => {
-  const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":20,"order":"asc"}`;
+export const getGlycanList = (
+  glycanListId,
+  offset = 1,
+  limit = 20,
+  sort = "glytoucan_ac",
+  order = "asc"
+) => {
+  const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"sort":"${sort}","limit":${limit},"order":"${order}"}`;
   return getJson(url);
+};
+
+export const getGlycanDownload = (id, format, compressed, type, fields) => {
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postTo(url, {
+    headers: fields
+  });
 };
 
 export const getGlycanDetail = accessionId => {
   const url = `/glycan/detail/${accessionId}`;
   return getJson(url);
 };
-const defaultSorted = [
-  {
-    dataField: "glytoucan_ac",
-    order: "desc"
-  }
-];
+// const defaultSorted = [
+//   {
+//     dataField: "glytoucan_ac",
+//     order: "desc"
+//   }
+// ];
 const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 //const glycanListId = " ";
 export const GLYCAN_COLUMNS = [

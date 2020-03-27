@@ -46,3 +46,24 @@ export function groupEvidences(values) {
 
   return groupedEvidences;
 }
+
+export function groupPublicationEvidences(values) {
+  var groupedPublicationEvidences = {};
+
+  if (!values) {
+    return groupedPublicationEvidences;
+  }
+
+  for (const value of values) {
+    if (!groupedPublicationEvidences[value.database]) {
+      groupedPublicationEvidences[value.database] = [];
+    }
+
+    groupedPublicationEvidences[value.database].push({
+      id: value.id,
+      url: value.url
+    });
+  }
+
+  return groupedPublicationEvidences;
+}
