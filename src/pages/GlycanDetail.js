@@ -9,8 +9,12 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import GlygenBadge from "../components/GlygenBadge";
 import { NavLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
-import { Navbar } from "react-bootstrap";
-import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
+import { Navbar, col } from "react-bootstrap";
+import {
+  groupEvidences,
+  groupSpeciesEvidences,
+  groupPublicationEvidences
+} from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import PaginatedTable from "../components/PaginatedTable";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
@@ -55,6 +59,40 @@ function addCommas(nStr) {
   return x1 + x2;
 }
 
+const getItemsPublication = data => {
+  let itemspublication = [];
+  //check data.
+  if (data.publication) {
+    for (var i = 0; i < data.publication.length; i++) {
+      var publicationitem = data.publication[i];
+      var found = "";
+      for (var j = 0; j < itemspublication.length; j++) {
+        var databaseitem1 = itemspublication[j];
+        if (databaseitem1.resource === publicationitem.resource) {
+          found = true;
+          databaseitem1.links.push({
+            url: publicationitem.url,
+            id: publicationitem.id,
+            name: publicationitem.name
+          });
+        }
+      }
+      if (!found) {
+        itemspublication.push({
+          resource: publicationitem.resource,
+          links: [
+            {
+              url: publicationitem.url,
+              id: publicationitem.id,
+              name: publicationitem.name
+            }
+          ]
+        });
+      }
+    }
+  }
+  return itemspublication;
+};
 const getItemsCrossRef = data => {
   let itemscrossRef = [];
 
@@ -96,7 +134,7 @@ const GlycanDetail = props => {
 
   const [detailData, setDetailData] = useState({});
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
-
+  const [itemsPublication, setItemsPublication] = useState([]);
   useEffect(() => {
     const getGlycanDetailData = getGlycanDetail(id);
 
@@ -107,6 +145,7 @@ const GlycanDetail = props => {
         // activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
       } else {
         setItemsCrossRef(getItemsCrossRef(data));
+        setItemsPublication(getItemsPublication(data));
         setDetailData(data);
       }
     });
@@ -130,13 +169,18 @@ const GlycanDetail = props => {
     composition,
     motifs,
     iupac,
+    glycam,
+    smiles_isomeric,
+    inchi,
     classification,
     glycoprotein,
     glycoct,
-    wurcs
+    wurcs,
+    enzyme
   } = detailData;
 
   const speciesEvidence = groupSpeciesEvidences(species);
+  //const publicationEvidence = groupPublicationEvidences(publication);
 
   const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 
@@ -192,6 +236,42 @@ const GlycanDetail = props => {
       }
     }
   ];
+  const bioEnzymeColumns = [
+    {
+      dataField: "uniprot_canonical_ac",
+      text: "protein ID",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+
+    {
+      dataField: "protein_name",
+      text: "Protein_Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "gene",
+      text: "Gene",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "tax_name",
+      text: "Species Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    }
+  ];
 
   return (
     <React.Fragment>
@@ -201,6 +281,7 @@ const GlycanDetail = props => {
         style={{ paddingTop: "50px" }}
       >
         <pre>{JSON.stringify(itemsCrossRef)}</pre>
+        <pre>{JSON.stringify(itemsPublication)}</pre>
 
         <Table bordered hover5 size="lg" className="panel-width">
           <thead className="panelHeadBgr panelHeadText">
@@ -321,6 +402,31 @@ const GlycanDetail = props => {
           <thead className="panelHeadBgr panelHeadText">
             <tr>
               <th>
+                <h3>Biosynthetic enzyme</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                {enzyme && enzyme.length !== 0 && (
+                  <ClientPaginatedTable
+                    data={enzyme}
+                    columns={bioEnzymeColumns}
+                  />
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
+
+      <Container maxWidth="xl" className="ggContainer">
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
                 <h3>Species</h3>
               </th>
             </tr>
@@ -364,7 +470,7 @@ const GlycanDetail = props => {
           <tbody className="table-body">
             <tr className="table-row">
               <td>
-                <ul>
+                <div className="col-md-6 col-xs-6">
                   {motifs && (
                     <>
                       <b> Motif image:</b>
@@ -380,7 +486,7 @@ const GlycanDetail = props => {
                       ))}
                     </>
                   )}
-                </ul>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -406,20 +512,69 @@ const GlycanDetail = props => {
                 <span className="PanelContainHeading">
                   <strong>IUPAC</strong>
                 </span>
-
                 <pre className="text-overflow">{iupac}</pre>
-
                 <strong>WURCS</strong>
                 <pre className="text-overflow">{wurcs}</pre>
                 <strong>GlycoCT</strong>
-                <pre className="">{glycoct}</pre>
+                <pre className="text-overflow">{glycoct}</pre>
+                <strong>InChI</strong>
+                <pre className="text-overflow">{inchi}</pre>
+                <strong>GLYCAM IUPAC</strong>
+                <pre className="text-overflow">{glycam}</pre>
+                <strong>Isomeric SMILES</strong>
+                <pre className="text-overflow">{smiles_isomeric}</pre>
               </td>
             </tr>
           </tbody>
         </Table>
       </Container>
       <CssBaseline />
-
+      <Container
+        maxWidth="xl"
+        className="ggContainer"
+        style={{ paddingTop: "50px" }}
+      >
+        <Table bordered hover5 size="lg" className="panel-width">
+          <thead className="panelHeadBgr panelHeadText">
+            <tr>
+              <th>
+                <h3>publication</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody className="table-body">
+            <tr className="table-row">
+              <td>
+                {itemsPublication ? (
+                  <ul>
+                    {itemsPublication.map(publication => (
+                      <li class="list-group2">
+                        <strong>{publication.title}:</strong>
+                        <ul>
+                          {publication.links.map(link => (
+                            <li class="list-group-indent">
+                              <a
+                                class="panelcontent"
+                                href={link.url}
+                                target="_blank"
+                              >
+                                {link.id}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No data available.</p>
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </Container>
+      <CssBaseline />
       <Container
         maxWidth="xl"
         className="ggContainer"
