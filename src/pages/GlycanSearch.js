@@ -8,6 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { getJson } from "../data/api";
 import compositionSearchData from '../data/json/compositionSearch';
+import Helmet from 'react-helmet';
+import { head, getMeta } from '../utils/head';
 
 
 import {
@@ -195,7 +197,8 @@ const useStyles = makeStyles(theme => ({
     width: "1000px",
     height: "1150px",
     alignItems: "center",
-    fontColor: "#2F78B7"
+    fontColor: "#2F78B7",
+    backgroundColor: "#FFFFFF"
   },
   tabCompostionSearch: {
     borderRadius: 4,
@@ -204,7 +207,8 @@ const useStyles = makeStyles(theme => ({
     width: "1000px",
     height: "900px",
     alignItems: "center",
-    fontColor: "#2F78B7"
+    fontColor: "#2F78B7",
+    backgroundColor: "#FFFFFF"
   },
   headerTitle: {
     color: "#2F78B7",
@@ -237,6 +241,11 @@ const useStyles = makeStyles(theme => ({
   select1: {
     width: "700px",
     height: "34px"
+  },
+  selectOutlined: {
+    paddingTop: "4px !important",
+    paddingBottom: "4px !important",
+    backgroundColor: "white"
   },
   col1: {
     margin: 0,
@@ -684,11 +693,11 @@ const GlycanSearch = props => {
 
   return (
     <>
-      {/* <Helmet>
-        <title>"Glycan Search"</title>
-        {getMeta(head.glycanSearch)}
-      </Helmet> */}
       <h2 className={classes.headerTitle}>Glycan Search</h2>
+      {/* <Helmet >
+       <title>{head.glycanSearch.title}</title>}
+       getMeta(head.glycanSearch)
+      </Helmet>  */}
 
       <div className="lander">
         <Container className={classes.con1}>
@@ -812,7 +821,7 @@ const GlycanSearch = props => {
                                 Monoisotopic Mass:
                               </Typography>
                               {
-                                "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your protein(s)"
+                                "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)"
                               }
                             </React.Fragment>
                           }
@@ -840,6 +849,11 @@ const GlycanSearch = props => {
                         <Select
                           value={glyMassType}
                           onChange={glyMassTypeOnChange}
+                          highlight={false}
+                          classes={{
+                            outlined: classes.selectOutlined,
+                            root: 'select-menu', 
+                          }}
                           className={classes.select}
                           labelWidth={100}
                         >
@@ -868,7 +882,7 @@ const GlycanSearch = props => {
                             Number of Sugars:
                           </Typography>
                           {
-                            "Use the sliders to select a Number of Sugars range for your protein(s)"
+                            "Use the sliders to select a Number of Sugars range for your glycan(s)"
                           }
                         </React.Fragment>
                       }
@@ -912,7 +926,7 @@ const GlycanSearch = props => {
                         }
                         inputValue={glyOrganisms}
                         setInputValue={glyOrgChange}
-                        placeholder="Click to select multiple Organisms"
+                        placeholder="Click to select one or multiple Organisms"
                       />
                     </Grid>
                     <Grid item>
@@ -921,6 +935,11 @@ const GlycanSearch = props => {
                       </Typography>
                       <FormControl variant="outlined">
                         <Select
+                        variant="outlined"
+                        classes={{
+                          outlined: classes.selectOutlined,
+                          root: 'select-menu', 
+                        }}
                           value={
                             glyOrgOperation === "" ? "or" : glyOrgOperation
                           }
@@ -960,6 +979,10 @@ const GlycanSearch = props => {
                     displayEmpty
                     onChange={glyTypeOnChange}
                     className={classes.select1}
+                    classes={{
+                      outlined: classes.selectOutlined,
+                      root: 'select-menu', 
+                    }}
                   >
                     <MenuItem value="">Select Glycan Type</MenuItem>
                     {initData.glycan_type &&
@@ -1000,6 +1023,10 @@ const GlycanSearch = props => {
                       displayEmpty
                       onChange={glySubTypeOnChange}
                       className={classes.select1}
+                      classes={{
+                        outlined: classes.selectOutlined,
+                        root: 'select-menu', 
+                      }}
                       displayPrint="none"
                     >
                       <MenuItem value="" selected>

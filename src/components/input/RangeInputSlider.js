@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     borderRadius: 4,
     position: "relative",
     fontSize: 16,
+    backgroundColor: "#FFFFFF",
   },
   label3: {
     fontSize: "16px",

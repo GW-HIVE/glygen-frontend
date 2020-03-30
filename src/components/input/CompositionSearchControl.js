@@ -74,6 +74,11 @@ const useStyles = makeStyles({
     paddingLeft: "15px",
     paddingRight: "15px"
   },
+  selectOutlined: {
+    paddingTop: "4px !important",
+    paddingBottom: "4px !important",
+    backgroundColor: "white"
+  },
   submitButton: {
     marginTop: 16,
     marginBottom: 16,
@@ -128,7 +133,7 @@ export default function CompositionSearchControl(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center" alignItems="center">
+      <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center">
         <Grid item className={"col-sm-5"}>
           <Typography className={classes.labelHeader} gutterBottom>
             Residue
@@ -152,35 +157,37 @@ export default function CompositionSearchControl(props) {
       </Grid>
       {props.compositionInitMap &&
         props.compositionInitMap.map((key, index) => (
-          <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center" alignItems="center">
-            <Grid item className={"col-sm-5"} alignItems="center">
+          <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center">
+            <Grid item className={"col-sm-5"}>
               <Typography className={classes.label} gutterBottom>
-                {/* <span className={classes.span1}>{key.residue}</span> */}
                 {key.name}
-                {<br className={classes.br}></br>}<span className={classes.span2}>{key.subtext}</span>
+                {<br className={classes.br}></br>}<span className={classes.span2}>{key.subtext} </span>
               </Typography>
             </Grid>
-            <Grid item className={"col-sm-2"} justify="center">
+            <Grid item className={"col-sm-2"} >
               <FormControl fullWidth className={classes.margin}>
                 <Select
                   variant="outlined"
                   defaultValue={"maybe"}
                   className={classes.select}
-                  alignContent={"center"}
+                  classes={{
+                    outlined: classes.selectOutlined,
+                    root: 'select-menu', 
+                  }}
                 >
-                  <MenuItem alignContent="center" value={"maybe"}>
+                  <MenuItem value={"maybe"}>
                     Maybe
                   </MenuItem>
-                  <MenuItem alignContent="center" value={"yes"}>
+                  <MenuItem value={"yes"}>
                     Yes
                   </MenuItem>
-                  <MenuItem alignContent="center" value={"no"}>
+                  <MenuItem value={"no"}>
                     No
                   </MenuItem>
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item className={"col-sm-2"} alignItems="center">
+            <Grid item className={"col-sm-2"}>
               <FormControl fullWidth className={classes.margin}>
                 <OutlinedInput
                   variant="outlined"
@@ -197,7 +204,7 @@ export default function CompositionSearchControl(props) {
                 />
               </FormControl>
             </Grid>
-            <Grid item className={"col-sm-2"} alignItems="center">
+            <Grid item className={"col-sm-2"}> 
               <FormControl fullWidth className={classes.margin}>
                 <OutlinedInput
                   variant="outlined"
