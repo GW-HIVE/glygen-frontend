@@ -56,7 +56,7 @@ export function groupPublicationEvidences(values) {
 
   for (const s of values) {
     groupedEvidences[s.pmid] = {
-      // title: s.title
+      // title: s.title,
       // journal: s.journal,
       // authors: s.authors,
       // date: s.date,

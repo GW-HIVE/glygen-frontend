@@ -9,8 +9,8 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 //import GlygenBadge from "../components/GlygenBadge";
 import { NavLink } from "react-router-dom";
 import Sidebar from "../components/navigation/Sidebar";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-
+import Helmet from "react-helmet";
+import { head, getMeta } from "../utils/head";
 import { Link } from "@material-ui/core";
 import { Navbar, Col, Row } from "react-bootstrap";
 import {
@@ -164,50 +164,6 @@ const GlycanDetail = props => {
 
   const glycanImageUrl = "https://api.glygen.org/glycan/image/";
 
-  const PublicationColumns = [
-    {
-      dataField: "title",
-      text: "Title",
-      sort: true,
-
-      headerStyle: (column, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      }
-    },
-
-    {
-      dataField: "evidence",
-      text: "Sources",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      },
-      formatter: (cell, row) => {
-        return <EvidenceList key={row.pmid} evidences={groupEvidences(cell)} />;
-      }
-    },
-    {
-      dataField: "pmid",
-      text: "PMID",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      },
-      formatter: (value, row) => (
-        <Navbar.Text as={NavLink} to={`/glycan-detail/${row.pmid}`}>
-          {row.pmid}
-        </Navbar.Text>
-      )
-    },
-    {
-      dataField: "journal",
-      text: "Journal",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      }
-    }
-  ];
   const glycoProtienColumns = [
     {
       dataField: "uniprot_canonical_ac",
@@ -263,10 +219,10 @@ const GlycanDetail = props => {
   const bioEnzymeColumns = [
     {
       dataField: "uniprot_canonical_ac",
-      text: "protein ID",
+      text: "Protein ID",
       sort: true,
 
-      headerStyle: (column, colIndex) => {
+      headerStyle: () => {
         return { backgroundColor: "#4B85B6", color: "white" };
       },
       formatter: (value, row) => (
@@ -331,6 +287,10 @@ const GlycanDetail = props => {
             </center>
           </h2>
           <React.Fragment>
+            <Helmet>
+              <title>{head.glycanDetail.title}</title>
+              {getMeta(head.glycanDetail)}
+            </Helmet>
             {/* general */}
             <Container
               id="general"
@@ -440,20 +400,28 @@ const GlycanDetail = props => {
                     </th>
                   </tr>
                 </thead>
-                <div className="row">
-                  <div className="col-md-12 col-xs-12">
-                    {speciesEvidence &&
-                      // For every species object
-                      Object.keys(speciesEvidence).map(species => (
-                        // For every database for current species object
-                        <>
-                          {/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
-                          {species}:
-                          <EvidenceList evidences={speciesEvidence[species]} />
-                        </>
-                      ))}
-                  </div>
-                </div>
+                <tbody className="table-body">
+                  <tr className="table-row">
+                    <td>
+                      <Row>
+                        <Col md={12} xs={12} className="Species">
+                          {speciesEvidence &&
+                            // For every species object
+                            Object.keys(speciesEvidence).map(species => (
+                              // For every database for current species object
+                              <>
+                                {/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
+                                {species}:
+                                <EvidenceList
+                                  evidences={speciesEvidence[species]}
+                                />
+                              </>
+                            ))}
+                        </Col>
+                      </Row>
+                    </td>
+                  </tr>
+                </tbody>
               </Table>
             </Container>
             <CssBaseline />
@@ -586,7 +554,7 @@ const GlycanDetail = props => {
                       <strong>WURCS</strong>
                       <pre className="text-overflow">{wurcs}</pre>
                       <strong>GlycoCT</strong>
-                      <pre>{glycoct}</pre>
+                      <pre className="text-overflow">{glycoct}</pre>
                       <strong>InChI</strong>
                       <pre className="text-overflow">{inchi}</pre>
                       <strong>GLYCAM IUPAC</strong>
@@ -651,7 +619,7 @@ const GlycanDetail = props => {
             <CssBaseline />
 
             {/* publication */}
-            <Container maxWidth="xl" className="ggContainer">
+            <Container maxWidth="xl" className="ggContainer" id="publication">
               <Table bordered hover5 size="lg" className="panel-width">
                 <thead className="panelHeadBgr panelHeadText">
                   <tr>
@@ -663,22 +631,24 @@ const GlycanDetail = props => {
 
                 <div className="row">
                   <div className="col-md-12 col-xs-12">
-                    {publicationEvidence &&
-                      // For every species object
-                      Object.keys(publicationEvidence).map(pmid => (
-                        // For every database for current species object
-                        <>
-                          {/* {publicationEvidence[pmid].title} */}
-                          {/* {publicationEvidence[pmid].journal}
-                          {publicationEvidence[pmid].date}
-                          {publicationEvidence[pmid].authors} */}
-                          {/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
-                          <i className="fas fa-book"></i>
-                          {pmid}
+                    {publication && (
+                      <ul>
+                        {publication.map((pub, pubIndex) => (
+                          <li key={pubIndex}>
+                            {pub.title}
+                            {pub.journal}
+                            {pub.date}
+                            {pub.authors}
+                            <i className="fas fa-book"></i>
+                            {pub.pmid}
 
-                          <EvidenceList evidences={publicationEvidence[pmid]} />
-                        </>
-                      ))}
+                            <EvidenceList
+                              evidences={groupEvidences(pub.evidence)}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </Table>

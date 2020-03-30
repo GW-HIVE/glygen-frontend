@@ -33,21 +33,14 @@
   text-align: center;
   font-size: 1em;
 }
-.caret {
-  color: white;
+.badge-div + .badge-div {
+  margin: 0.3em 0 0;
+  margin-left: 2px;
 }
-.dropdown {
-  color: white;
+legend {
+  all: unset;
 }
-.dropup {
-  color: white;
-}
-.react-bootstrap-table-sort-order dropdown {
-  color: white;
-}
-.th.sortable {
-  color: white;
-}
-.react-bootstrap-table-sort-order dropup {
-  color: white;
+
+.Species {
+  column-count: 1;
 }

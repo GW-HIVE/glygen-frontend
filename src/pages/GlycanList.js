@@ -64,7 +64,9 @@ const GlycanList = props => {
       setTotalSize(data.pagination.total_length);
     });
   };
-
+  function rowStyleFormat(row, rowIdx) {
+    return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
+  }
   const handleModifySearch = () => {
     props.history.push(`/glycan-search/${id}`);
   };
@@ -96,6 +98,7 @@ const GlycanList = props => {
 
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
+            trStyle={rowStyleFormat}
             data={data}
             columns={selectedColumns}
             page={page}
