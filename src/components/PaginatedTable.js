@@ -72,13 +72,11 @@ const PaginatedTable = ({
             </div>
             <BootstrapTable
               scrollTop={"Bottom"}
-              // selectRow={selectRow}
               striped
               remote
               keyField="id"
               data={data}
               columns={columns}
-              // {columnsWithSort}
               onTableChange={onTableChange}
               {...paginationTableProps}
             />

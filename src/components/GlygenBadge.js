@@ -63,8 +63,11 @@ const GlygenBadge = props => {
         onClick={() => setShowExpandList(!showExpandList)}
       >
         {text}
-        {/* &nbsp;<span className="badge-count">{props.expandList.length}</span> */}
-        <Badge color="primary" badgeContent={props.expandList.length}></Badge>
+        &nbsp;<span className="badge-count">
+          {props.expandList.length}
+        </span>{" "}
+        {/* <Badge variant="light">{props.expandList.length}</Badge> */}
+        {/* <Badge color="primary" badgeContent={props.expandList.length}></Badge> */}
       </Button>
       {showExpandList && (
         <ul className="">

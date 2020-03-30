@@ -7,6 +7,8 @@ const ClientPaginatedTable = props => {
 
   const [page, setPage] = useState(1);
   const [pageContents, setPageContents] = useState([]);
+  const [currentSort, setCurrentSort] = useState("");
+  const [currentSortOrder, setCurrentSortOrder] = useState("");
 
   useEffect(() => {
     const start = (page - 1) * sizePerPage;
@@ -14,10 +16,23 @@ const ClientPaginatedTable = props => {
     const pageData = data.slice(start, end);
 
     setPageContents(pageData);
-  }, [page]);
+  }, [page, currentSort, currentSortOrder]);
 
-  const handleTableChange = (type, { page }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
+    data.sort((a, b) => {
+      if (a[sortField] > b[sortField]) {
+        return sortOrder === "asc" ? 1 : -1;
+      } else if (a[sortField] < b[sortField]) {
+        return sortOrder === "asc" ? -1 : 1;
+      }
+      return 0;
+    });
     setPage(page);
+    setCurrentSort(sortField);
+    setCurrentSortOrder(sortOrder);
   };
 
   return (

@@ -48,22 +48,36 @@ export function groupEvidences(values) {
 }
 
 export function groupPublicationEvidences(values) {
-  var groupedPublicationEvidences = {};
+  var groupedEvidences = {};
 
   if (!values) {
-    return groupedPublicationEvidences;
+    return groupedEvidences;
   }
 
-  for (const value of values) {
-    if (!groupedPublicationEvidences[value.database]) {
-      groupedPublicationEvidences[value.database] = [];
+  for (const s of values) {
+    groupedEvidences[s.pmid] = {
+      // title: s.title
+      // journal: s.journal,
+      // authors: s.authors,
+      // date: s.date,
+      // url: s.url
+    };
+
+    for (const e of s.evidence) {
+      if (e.database in groupedEvidences[s.pmid]) {
+        groupedEvidences[s.pmid][e.database].push({
+          id: e.id,
+          url: e.url
+        });
+      } else {
+        groupedEvidences[s.pmid][e.database] = [
+          {
+            id: e.id,
+            url: e.url
+          }
+        ];
+      }
     }
-
-    groupedPublicationEvidences[value.database].push({
-      id: value.id,
-      url: value.url
-    });
   }
-
-  return groupedPublicationEvidences;
+  return groupedEvidences;
 }

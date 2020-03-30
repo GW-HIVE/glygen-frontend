@@ -1,15 +1,53 @@
 .text-overflow {
-  white-space: initial;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  background: #e6e6e6;
+  overflow: auto;
+  word-break: break-all;
+  word-wrap: break-word;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow-x: "scroll";
+  white-space: pre-line;
 }
-/* .page-item.active .page-link {
+.page-item.active .page-link {
   background-color: white;
 }
-.btn-secondary {
+.page-heading {
+  color: #2f78b7;
+  font-size: 2.25em;
+}
+
+.badge-count {
   background-color: white;
+  color: black;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 1em;
 }
-.dropdown-menu {
-  background-color: white !important;
+.caret {
+  color: white;
 }
-.btn-secondary {
-  background-color: gray;
-} */
+.dropdown {
+  color: white;
+}
+.dropup {
+  color: white;
+}
+.react-bootstrap-table-sort-order dropdown {
+  color: white;
+}
+.th.sortable {
+  color: white;
+}
+.react-bootstrap-table-sort-order dropup {
+  color: white;
+}
