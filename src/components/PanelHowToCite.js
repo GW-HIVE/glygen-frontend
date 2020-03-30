@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import ToTopArrow from '../components/ToTopArrow';
 import { Link } from 'react-router-dom';
+// import PDF from '../downloads/citation/31616925.pdf';
+
 // import FormatQuoteOutlinedIcon from '@material-ui/icons/FormatQuoteOutlined';
 
 
@@ -57,6 +59,22 @@ const PanelHowToCite = props => {
 												rel='noopener noreferrer'>
 												{json.bibtex.name}
 											</a>
+											{/* <a
+												href={PDF}
+												target='_blank'
+												rel='noopener noreferrer'
+												download="31616925.pdf"
+												style={{ paddingRight: '20px', paddingLeft: '20px' }}>
+												PDF
+											</a> */}
+											{/* <a
+												href={process.env.PUBLIC_URL + json.pdf}
+												target='_blank'
+												rel="noopener noreferrer"
+												download
+												style={{ paddingRight: '20px', paddingLeft: '20px' }}>
+												PDF
+											</a> */}
 											<Link
 												to={json.pdf}
 												target='_blank'
