@@ -41,13 +41,13 @@ const ContactForm = props => {
 	const [subject, setSubject] = useState('general');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
+	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
 
 	const [fNameValidated, setFNameValidated] = useState(false);
 	const [lNameValidated, setLNameValidated] = useState(false);
 	const [emailValidated, setEmailValidated] = useState(false);
 	const [validEmail, setValidEmail] = useState(false);
 	const [messageValidated, setMessageValidated] = useState(false);
-	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
 	const [formValidated, setFormValidated] = useState(false);
 
 	const inputLabel = useRef(null);
@@ -69,10 +69,24 @@ const ContactForm = props => {
 
 		getJson(url).then(response => {
 			setContactUsResponseMessage(response.data.message);
+			// if (response.data.type) {
+			// 	setContactUsResponseMessage(response.data.message);
+			// } else (setContactUsResponseMessage(response.data.message);)
 		});
+		setFName('');
+		setLName('');
+		setEmail('');
+		setSubject('');
+		setMessage('');
+		setFormValidated(false);
+		setFNameValidated(false);
+		setLNameValidated(false);
+		setEmailValidated(false);
+		setMessageValidated(false);
+		setSubject('general');
 	};
 
-	// React.useEffect(() => {
+	// useEffect(() => {
 	// 	handleSubmit();
 	// }, []);
 
@@ -90,6 +104,7 @@ const ContactForm = props => {
 							label='First name'
 							type='text'
 							name='fname'
+							value={fname}
 							placeholder='Please enter your first name.'
 							// defaultValue={fname}
 							error={(formValidated || fNameValidated) && fname === ''}
@@ -121,8 +136,9 @@ const ContactForm = props => {
 							label='Last name'
 							type='text'
 							name='lname'
+							value={lname}
 							placeholder='Please enter your last name.'
-							defaultValue={lname}
+							// defaultValue={lname}
 							error={(formValidated || lNameValidated) && lname === ''}
 							onChange={e => setLName(e.target.value)}
 							onBlur={() => setLNameValidated(true)}
@@ -182,7 +198,8 @@ const ContactForm = props => {
 							label='Email'
 							type='email'
 							name='email'
-							defaultValue={email}
+							value={email}
+							// defaultValue={email}
 							style={{ margin: 8 }}
 							// placeholder='Please enter your email.'
 							placeholder='example@domain.com'
@@ -193,7 +210,6 @@ const ContactForm = props => {
 								setEmail(emailVal);
 							}}
 							onBlur={() => setEmailValidated(true)}
-							// value= {/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i}
 							helperText={
 								(formValidated || emailValidated) &&
 								!validEmail &&
@@ -213,6 +229,8 @@ const ContactForm = props => {
 							id='outlined-full-width'
 							required
 							label='Message'
+							name='message'
+							value={message}
 							type='text'
 							style={{ margin: 8 }}
 							placeholder='Please tell us how we can help you.'
@@ -236,15 +254,19 @@ const ContactForm = props => {
 						/>
 					</Col>
 				</Row>
+				<div className='alert-success'>{contactUsResponseMessage}</div>
+
 				<Button
 					variant='success'
 					type='submit'
 					className={classes.btnGreen}
 					size='lg'
-					onClick={() => setFormValidated(true)}>
+					onClick={() => setFormValidated(true)}
+
+					// disabled={isSubmitting}
+				>
 					SEND MESSAGE
 				</Button>
-				<div className='messages'>{contactUsResponseMessage}</div>
 			</form>
 
 			<Row>

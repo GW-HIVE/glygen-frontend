@@ -114,9 +114,10 @@ p {
 }
 
 .panelHeadBgr {
-	background: #f0f0f0;
+	background: #f0f0f0 !important;
 }
-.panelHeadBgr h3 {
+.panelHeadBgr h3,
+.panelHeadBgr h4 {
 	margin: 0 auto;
 }
 .panelHeadText {
