@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useEffect, useReducer, useState } from "react";
 import MultilineAutoTextInput from "../components/input/MultilineAutoTextInput";
 import RangeInputSlider from "../components/input/RangeInputSlider";
 import AutoTextInput from "../components/input/AutoTextInput";
@@ -10,7 +10,7 @@ import { getJson } from "../data/api";
 import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {
   Component,
@@ -46,44 +46,6 @@ const HtmlTooltip = withStyles(theme => ({
     border: "1px solid #dadde9"
   }
 }))(Tooltip);
-
-const BootstrapInput = withStyles(theme => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3)
-    }
-  },
-  label: {
-    fontSize: 16
-  },
-  input: {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid #ced4da",
-    fontSize: 16,
-    padding: "10px 26px 10px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(","),
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: "#80bdff",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)"
-    }
-  }
-}))(InputBase);
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -226,8 +188,8 @@ const useStyles = makeStyles(theme => ({
   },
   con1: {
     width: "1000px",
-    height: "1150px",
-    alignItems: "left",
+    height: "1250px",
+    alignItems: "center",
     marginBottom: "80px"
   },
   formControl: {
@@ -279,7 +241,15 @@ const useStyles = makeStyles(theme => ({
     "& > *": {
       margin: theme.spacing(1)
     }
-  }
+  },
+  rootProgress: {
+    width: "1000px",
+    paddingBottom: "20px",
+    paddingTop: "20px",
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 const GlycanSearch = props => {
@@ -302,9 +272,18 @@ const GlycanSearch = props => {
   const [glyBioEnz, setGlyBioEnz] = React.useState("");
   const [glyPubId, setGlyPubId] = React.useState("");
   const [glySubTypeIsHidden, setGlySubTypeIsHidden] = React.useState(true);
+  const [glyCompData, setGlyCompData] = React.useReducer((state, newState) => ({ ...state, ...newState }), {});
+  const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
+  const [pageLoading, setPageLoading] = React.useState(false);
+
+
 
   function glyOrgChange(org) {
     setGlyOrganisms(org);
+  }
+
+  function glyCompChange(glyComp) {
+    setGlyCompData(glyComp);
   }
 
   function glyNumSugarsChange(sugars) {
@@ -411,6 +390,7 @@ const GlycanSearch = props => {
   };
 
   React.useEffect(() => {
+    setPageLoading(true);
     getGlycanInit().then(response => {
       let initData = response.data;
       setGlyMassType(initData.glycan_mass.native.name);
@@ -434,12 +414,17 @@ const GlycanSearch = props => {
       };
 
       let compositionData = initData.composition;
+      let compStateData = {};
 
       for (var x = 0; x < compositionData.length; x++) {
         compositionData[x].orderId = compositionSearchData[compositionData[x].residue].order_id;
         compositionData[x].subtext = compositionSearchData[compositionData[x].residue].subtext;
         compositionData[x].name = compositionSearchData[compositionData[x].residue].name;
         compositionData[x].shortName = compositionSearchData[compositionData[x].residue].short_name;
+        compStateData[compositionData[x].residue] = {
+          "min" : compositionData[x].min,
+          "max" : compositionData[x].max
+        }
       }
       initData.glycan_mass.native.min = Math.floor(initData.glycan_mass.native.min);
       initData.glycan_mass.native.max = Math.ceil(initData.glycan_mass.native.max);
@@ -447,92 +432,108 @@ const GlycanSearch = props => {
       initData.glycan_mass.permethylated.max = Math.ceil(initData.glycan_mass.permethylated.max);
 
       initData.composition = compositionData.sort(function(res1, res2){return parseInt(res1.orderId) - parseInt(res2.orderId)});
+      setGlyCompData(compStateData);
       setInitData(initData);
 
       id &&
         getGlycanList(id, 1).then(({ data }) => {
-          setGlycanId(
-            data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
-          );
-          setGlyProt(
-            data.query.protein_identifier === undefined
-              ? ""
-              : data.query.protein_identifier
-          );
-          setGlyMotif(
-            data.query.glycan_motif === undefined ? "" : data.query.glycan_motif
-          );
-          setGlyBioEnz(
-            data.query.enzyme === undefined ? "" : data.query.enzyme.id
-          );
-          setGlyPubId(data.query.pmid === undefined ? "" : data.query.pmid);
-          setGlyMassType(
-            data.query.mass_type === undefined
-              ? initData.glycan_mass.native.name
-              : data.query.mass_type
-          );
+          if (data.query.composition !== undefined) {
+            let queryCompData = {};
+            for (var x = 0; x < data.query.composition.length; x++) {
+              queryCompData[data.query.composition[x].residue] = {
+                "min" : data.query.composition[x].min,
+                "max" : data.query.composition[x].max
+              }
+            }
+              setGlyCompData(queryCompData);
+              setGlyActTabKey("composition_search")
 
-          setGlyMassRange(
-            data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
-              ? [
+          } else {
+            setGlycanId(
+              data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
+            );
+            setGlyProt(
+              data.query.protein_identifier === undefined
+                ? ""
+                : data.query.protein_identifier
+            );
+            setGlyMotif(
+              data.query.glycan_motif === undefined ? "" : data.query.glycan_motif
+            );
+            setGlyBioEnz(
+              data.query.enzyme === undefined ? "" : data.query.enzyme.id
+            );
+            setGlyPubId(data.query.pmid === undefined ? "" : data.query.pmid);
+            setGlyMassType(
+              data.query.mass_type === undefined
+                ? initData.glycan_mass.native.name
+                : data.query.mass_type
+            );
+
+            setGlyMassRange(
+              data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
+                ? [
+                    Math.floor(initData.glycan_mass.native.min),
+                    Math.ceil(initData.glycan_mass.native.max)
+                  ]
+                : [
+                    Math.floor(initData.glycan_mass.permethylated.min),
+                    Math.ceil(initData.glycan_mass.permethylated.max)
+                  ]
+            );
+
+            setGlyMass(
+              data.query.mass === undefined
+                ? data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
+                ? [
                   Math.floor(initData.glycan_mass.native.min),
                   Math.ceil(initData.glycan_mass.native.max)
                 ]
-              : [
+                : [
                   Math.floor(initData.glycan_mass.permethylated.min),
                   Math.ceil(initData.glycan_mass.permethylated.max)
                 ]
-          );
+                : [data.query.mass.min, data.query.mass.max]
+            );
 
-          setGlyMass(
-            data.query.mass === undefined
-              ? data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
-              ? [
-                Math.floor(initData.glycan_mass.native.min),
-                Math.ceil(initData.glycan_mass.native.max)
-              ]
-              : [
-                Math.floor(initData.glycan_mass.permethylated.min),
-                Math.ceil(initData.glycan_mass.permethylated.max)
-              ]
-              : [data.query.mass.min, data.query.mass.max]
-          );
+            setGlyType(
+              data.query.glycan_type === undefined ? "" : data.query.glycan_type
+            );
+            setGlyOrgOperation(
+              data.query.organism === undefined
+                ? "or"
+                : data.query.organism.operation
+            );
+            setGlyOrganisms(
+              data.query.organism === undefined
+                ? []
+                : data.query.organism.organism_list
+            );
+            setGlyNumSugars(
+              data.query.number_monosaccharides === undefined
+                ? [
+                    initData.number_monosaccharides.min,
+                    initData.number_monosaccharides.max
+                  ]
+                : [
+                    data.query.number_monosaccharides.min,
+                    data.query.number_monosaccharides.max
+                  ]
+            );
 
-          setGlyType(
-            data.query.glycan_type === undefined ? "" : data.query.glycan_type
-          );
-          setGlyOrgOperation(
-            data.query.organism === undefined
-              ? "or"
-              : data.query.organism.operation
-          );
-          setGlyOrganisms(
-            data.query.organism === undefined
-              ? []
-              : data.query.organism.organism_list
-          );
-          setGlyNumSugars(
-            data.query.number_monosaccharides === undefined
-              ? [
-                  initData.number_monosaccharides.min,
-                  initData.number_monosaccharides.max
-                ]
-              : [
-                  data.query.number_monosaccharides.min,
-                  data.query.number_monosaccharides.max
-                ]
-          );
+            if (data.query.glycan_type === undefined) setGlySubTypeIsHidden(true);
+            else setGlySubTypeIsHidden(false);
 
-          if (data.query.glycan_type === undefined) setGlySubTypeIsHidden(true);
-          else setGlySubTypeIsHidden(false);
-
-          setGlySubType(
-            data.query.glycan_subtype === undefined
-              ? ""
-              : data.query.glycan_subtype
-          );
+            setGlySubType(
+              data.query.glycan_subtype === undefined
+                ? ""
+                : data.query.glycan_subtype
+            );
+            setGlyActTabKey("advanced_search")
+          }
         });
     });
+    setPageLoading(false);
   }, [id]);
 
   function searchjson(
@@ -607,14 +608,17 @@ const GlycanSearch = props => {
       };
     }
 
-    var glycan_id = input_glycan_id.trim();
-    glycan_id = glycan_id.replace(/\u200B/g, "");
-    glycan_id = glycan_id.replace(/\u2011/g, "-");
-    glycan_id = glycan_id.replace(/\s+/g, ",");
-    glycan_id = glycan_id.replace(/,+/g, ",");
-    var index = glycan_id.lastIndexOf(",");
-    if (index > -1 && index + 1 === glycan_id.length) {
-      glycan_id = glycan_id.substr(0, index);
+    var glycan_id = input_glycan_id;
+    if (glycan_id) {
+      glycan_id = glycan_id.trim();
+      glycan_id = glycan_id.replace(/\u200B/g, "");
+      glycan_id = glycan_id.replace(/\u2011/g, "-");
+      glycan_id = glycan_id.replace(/\s+/g, ",");
+      glycan_id = glycan_id.replace(/,+/g, ",");
+      var index = glycan_id.lastIndexOf(",");
+      if (index > -1 && index + 1 === glycan_id.length) {
+        glycan_id = glycan_id.substr(0, index);
+      }
     }
 
     var formjson = {
@@ -662,13 +666,72 @@ const GlycanSearch = props => {
     return getJson(url);
   };
 
+  const glycanCompSearch = () => {
+    let compSearchData = [];
+
+    var count = 0;
+    for (let residue in glyCompData){
+      compSearchData[count] = {
+        "residue" : residue,
+        "min" : glyCompData[residue].min,
+        "max" : glyCompData[residue].max,
+      }
+      count++;
+    }
+
+    let formObject = searchjson(
+      "search_glycan",
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      compSearchData
+    );
+
+    //formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
+    var json = "query=" + JSON.stringify(formObject);
+    const url = "/glycan/search?" + json;
+    return getJson(url);
+  };
+
   const searchGlycanClick = () => {
+    setPageLoading(true);
+
     glycanSearch().then(response => {
       if (response.data["list_id"] !== "") {
         props.history.push("/glycan-list/" + response.data["list_id"]);
+        setPageLoading(false);
       } else {
+        setPageLoading(false);
         alert("No Result Found.");
       }
+    }).catch(function(error){
+        console.log(error);
+    });
+  };
+
+  const searchGlycanCompClick = () => {
+    setPageLoading(true);
+    glycanCompSearch().then(response => {
+      if (response.data["list_id"] !== "") {
+        props.history.push("/glycan-list/" + response.data["list_id"]);
+        setPageLoading(false);
+      } else {
+        alert("No Result Found.");
+        setPageLoading(false);
+      }
+    }).catch(function(error){
+        console.log(error);
     });
   };
 
@@ -694,14 +757,23 @@ const GlycanSearch = props => {
   return (
     <>
       <h2 className={classes.headerTitle}>Glycan Search</h2>
-      {/* <Helmet >
-       <title>{head.glycanSearch.title}</title>}
-       getMeta(head.glycanSearch)
-      </Helmet>  */}
+      <Helmet >
+       <title>{head.glycanSearch.title}</title>
+       {getMeta(head.glycanSearch)}
+      </Helmet> 
 
       <div className="lander">
         <Container className={classes.con1}>
-          <Tabs defaultActiveKey="advanced_search" transition={false}>
+        {pageLoading &&  
+          <div className={classes.rootProgress}>
+           <LinearProgress />
+           <LinearProgress color="secondary" />
+         </div>
+        }
+          <Tabs defaultActiveKey="advanced_search" transition={false}
+            activeKey={glyActTabKey}
+            onSelect={(key) => setGlyActTabKey(key)}
+          >
             <Tab
               eventKey="simple_search"
               className={classes.tab}
@@ -1317,12 +1389,21 @@ const GlycanSearch = props => {
               <Container className="p-5">              
                   {initData.composition && <CompositionSearchControl
                     compositionInitMap={initData.composition}
+                    inputValue = {glyCompData}
+                    setInputValue = {glyCompChange}
+                    searchGlycanCompClick = {searchGlycanCompClick}
                     step={1}
                   />}
               </Container>
             </Tab>
             <Tab eventKey="tutorial" title="Tutorial"></Tab>
           </Tabs>
+          {pageLoading &&  
+          <div className={classes.rootProgress}>
+           <LinearProgress />
+           <LinearProgress color="secondary" />
+         </div>
+        }
         </Container>
       </div>
     </>
