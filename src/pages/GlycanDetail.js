@@ -6,17 +6,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-//import GlygenBadge from "../components/GlygenBadge";
 import { NavLink } from 'react-router-dom';
 import Sidebar from '../components/navigation/Sidebar';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
 import { Link } from '@material-ui/core';
 import { Navbar, Col, Row } from 'react-bootstrap';
+import { FaReadme } from 'react-icons/fa';
 import {
 	groupEvidences,
 	groupSpeciesEvidences,
-	groupPublicationEvidences
+	
 } from '../data/data-format';
 import EvidenceList from '../components/EvidenceList';
 
@@ -163,7 +163,6 @@ const GlycanDetail = props => {
 	} = detailData;
 
 	const speciesEvidence = groupSpeciesEvidences(species);
-	const publicationEvidence = groupPublicationEvidences(publication);
 
 	const glycanImageUrl = 'https://api.glygen.org/glycan/image/';
 
@@ -287,33 +286,27 @@ const GlycanDetail = props => {
 							</strong>
 						</center>
 					</h2>
+					
 					<React.Fragment>
 						<Helmet>
 							<title>{head.glycanDetail.title}</title>
 							{getMeta(head.glycanDetail)}
 						</Helmet>
-						{/* general */}
-						<Container
-							id='general'
-							maxWidth='xl'
-							className='ggContainer'
-							style={{
-								paddingTop: '50px',
-								fontFamily: 'sans-serif',
-								fontSize: '16px'
-							}}>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>General</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row'>
-										<td>
-											<ul>
+		{/* general */}				
+		<Accordion
+								defaultActiveKey='0'
+								id='general'
+								className='panel-width'
+								style={{ padding: '20px 0' }}>
+								<Card>
+									<Accordion.Toggle
+										as={Card.Header}
+										eventKey='0'
+										className='panelHeadBgr panelHeadText btn-up'>
+										<h3>General</h3>
+									</Accordion.Toggle>
+									<Accordion.Collapse eventKey='0'>
+										<Card.Body>
 												{glytoucan && glytoucan.glytoucan_ac && (
 													<>
 														<p>
@@ -379,95 +372,55 @@ const GlycanDetail = props => {
 														</p>
 													</>
 												)}
-											</ul>
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-						</Container>
-						<CssBaseline />
-						{/*  species*/}
-						<Container id='species' maxWidth='xl' className='ggContainer'>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>Species</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row'>
-										<td>
-											<Row>
-												<Col md={12} xs={12} className='Species'>
-													{speciesEvidence &&
-														// For every species object
-														Object.keys(speciesEvidence).map(species => (
-															// For every database for current species object
-															<>
-																{/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
-																{species}:
-																<EvidenceList
-																	evidences={speciesEvidence[species]}
-																/>
-															</>
-														))}
-												</Col>
-											</Row>
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-						</Container>
-						<CssBaseline />
-						{/* motif */}
-						<Container
-							id='motif'
-							maxWidth='xl'
-							className='ggContainer'
-							style={{ paddingTop: '50px' }}>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>MOTIF</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row'>
-										<td>
-											<Row>
-												<Col md={6} xs={6}>
-													{motifs && (
-														<>
-															<b> Motif image:</b>
-															{motifs.map(motif => (
-																<div key={motif.id}>
-																	<img
-																		className='img-cartoon'
-																		src={glycanImageUrl + motif.id}
-																		alt='Cartoon'
-																	/>
-																	<a href={motif.url}>{motif.name}</a>
-																</div>
-															))}
-														</>
-													)}
-												</Col>
-											</Row>
-										</td>
-									</tr>
-								</tbody>
-							</Table>
+											</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+			
+         {/*  species*/}
+		<Accordion
+defaultActiveKey='0'
+className='panel-width'
+id='species'
+style={{ padding: '20px 0' }}>
+<Card>
+	<Accordion.Toggle
+		as={Card.Header}
+		eventKey='0'
+		className='panelHeadBgr panelHeadText btn-up'>
+		<h3>Species</h3>
+	</Accordion.Toggle>
+	<Accordion.Collapse eventKey='0'>
+		<Card.Body>
+<Row>
+				<Col md={12} xs={12} className='Species'>
+					{speciesEvidence &&
+						// For every species object
+						Object.keys(speciesEvidence).map(species => (
+							// For every database for current species object
+							<>
+								{/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
+								{species}:
+								<EvidenceList
+									evidences={speciesEvidence[species]}
+								/>
+							</>
+						))}
+				</Col>
+			</Row>
+	</Card.Body>
+</Accordion.Collapse>
+</Card>
+</Accordion>
 
-							<Accordion
+		{/* motif */}
+		<Accordion
 								defaultActiveKey='0'
 								className='panel-width'
 								style={{ padding: '20px 0' }}>
 								<Card>
 									<Accordion.Toggle
+									id='motif'
 										as={Card.Header}
 										eventKey='0'
 										className='panelHeadBgr panelHeadText btn-up'>
@@ -501,126 +454,56 @@ const GlycanDetail = props => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-						</Container>
-						<CssBaseline />
-						{/* found glycoprotein */}
-						<Container id='glycoprotein' maxWidth='xl' className='ggContainer'>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>Found Glycoprotien</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row makeStyles-tableHeader-232'>
-										<td>
-											{glycoprotein && glycoprotein.length !== 0 && (
-												<ClientPaginatedTable
-													data={glycoprotein}
-													columns={glycoProtienColumns}
-												/>
-											)}
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-						</Container>
-						<CssBaseline />
-						{/* biosynthetic enzyme */}
-						<Container
-							id='biosyntheticenzymes'
-							maxWidth='xl'
-							className='ggContainer'>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>Biosynthetic enzyme</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row'>
-										<td>
-											{enzyme && enzyme.length !== 0 && (
-												<ClientPaginatedTable
-													data={enzyme}
-													columns={bioEnzymeColumns}
-												/>
-											)}
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-							<Accordion
-								defaultActiveKey='0'
-								className='panel-width'
-								style={{ padding: '20px 0' }}>
-								<Card>
-									<Accordion.Toggle
-										as={Card.Header}
-										eventKey='0'
-										className='panelHeadBgr panelHeadText btn-up'>
-										<h3>Biosynthetic enzyme</h3>
-									</Accordion.Toggle>
-									<Accordion.Collapse eventKey='0'>
-										<Card.Body>
-											{enzyme && enzyme.length !== 0 && (
-												<ClientPaginatedTable
-													data={enzyme}
-													columns={bioEnzymeColumns}
-												/>
-											)}
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
-							;
-						</Container>
-						<CssBaseline />
-
-						{/* digital seq */}
-						<Container
-							id='Dseqence'
-							maxWidth='xl'
-							className='ggContainer'
-							style={{ paddingTop: '50px' }}>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>Digital Seq</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr
-										className='table-row'
-										style={{ whiteSpace: 'pre-line!important' }}>
-										<td>
-											<strong>IUPAC</strong>
-											<pre
-												className='text-overflow'
-												style={{ whiteSpace: 'pre-line!important' }}>
-												{iupac}>
-											</pre>
-											<strong>WURCS</strong>
-											<pre className='text-overflow'>{wurcs}</pre>
-											<strong>GlycoCT</strong>
-											<pre className='text-overflow'>{glycoct}</pre>
-											<strong>InChI</strong>
-											<pre className='text-overflow'>{inchi}</pre>
-											<strong>GLYCAM IUPAC</strong>
-											<pre className='text-overflow'>{glycam}</pre>
-											<strong>Isomeric SMILES</strong>
-											<pre className='text-overflow'>{smiles_isomeric}</pre>
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-							<Accordion
+		{/* GlycoProtien */}			
+		<Accordion id='biosyntheticenzymes'
+			defaultActiveKey='0'
+			className='panel-width'
+			style={{ padding: '20px 0' }}>
+			<Card>
+				<Accordion.Toggle
+					as={Card.Header}
+					eventKey='0'
+					className='panelHeadBgr panelHeadText btn-up'>
+					<h3>Found Glycoproteins</h3>
+				</Accordion.Toggle>
+				<Accordion.Collapse eventKey='0'>
+					<Card.Body>
+					{glycoprotein && glycoprotein.length !== 0 && (
+							<ClientPaginatedTable
+								data={glycoprotein}
+								columns={glycoProtienColumns}
+							/>
+						)}
+				</Card.Body>
+				</Accordion.Collapse>
+			</Card>				
+		</Accordion>;
+		<Accordion
+	defaultActiveKey='0'
+	className='panel-width'
+	style={{ padding: '20px 0' }}>
+	<Card>
+		<Accordion.Toggle
+		id='biosyntheticenzymes'
+			as={Card.Header}
+			eventKey='0'
+			className='panelHeadBgr panelHeadText btn-up'>
+			<h3>Biosynthetic Enzyme</h3>
+		</Accordion.Toggle>
+		<Accordion.Collapse eventKey='0'>
+			<Card.Body>
+				{enzyme && enzyme.length !== 0 && (
+					<ClientPaginatedTable
+						data={enzyme}
+						columns={bioEnzymeColumns}
+					/>
+				)}
+			</Card.Body>
+		</Accordion.Collapse>
+	</Card>							
+	</Accordion>			
+	{/* digital seq */}
+	<Accordion 	id='Dseqence'
 								defaultActiveKey='0'
 								className='panel-width'
 								style={{ padding: '20px 0' }}>
@@ -632,116 +515,115 @@ const GlycanDetail = props => {
 										<h3>Digital Sequence</h3>
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey='0'>
-										<Card.Body className='text-responsive'>
+										<Card.Body className='text-responsive '>
 											<strong>IUPAC</strong>
-											<p>{iupac}</p>
+											<pre className= 'text-overflow'>{iupac}</pre>
 											<strong>WURCS</strong>
-											<p>{wurcs}</p>
+											<pre className= 'text-overflow'>{wurcs}</pre>
 											<strong>GlycoCT</strong>
-											<p>{glycoct}</p>
+											<pre className= 'text-overflow'>{glycoct}</pre>
 											<strong>InChI</strong>
-											<p>{inchi}</p>
+											<pre className= 'text-overflow'>{inchi}</pre>
 											<strong>GLYCAM IUPAC</strong>
-											<p>{glycam}</p>
+											<pre className= 'text-overflow'>{glycam}</pre>
 											<strong>Isomeric SMILES</strong>
-											<p>{smiles_isomeric}</p>
+											<pre className= 'text-overflow'>{smiles_isomeric}</pre>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							;
-						</Container>
-						<CssBaseline />
+		;
+	{/* crossref */}
+	<Accordion
+defaultActiveKey='0'
+className='panel-width'
+id='crossref'
+style={{ padding: '20px 0' }}>
+<Card>
+	<Accordion.Toggle
+		as={Card.Header}
+		eventKey='0'
+		className='panelHeadBgr panelHeadText btn-up'>
+		<h3>Cross Reference</h3>
+	</Accordion.Toggle>
+	<Accordion.Collapse eventKey='0'>
+		<Card.Body>
+			{itemsCrossRef ? (
+				<ul>
+					{itemsCrossRef.map(crossRef => (
+						<li class='list-group2'>
+							<strong>{crossRef.database}:</strong>
+							<ul>
+								{crossRef.links.map(link => (
+									<li class='list-group-indent'>
+										<a
+											class='panelcontent'
+											href={link.url}
+											target='_blank'
+											rel='noopener noreferrer'>
+											{link.id}
+										</a>
+									</li>
+								))}
+							</ul>
+						</li>
+					))}
+				</ul>
+			) : (
+				<p>No data available.</p>
+			)}								
+      </Card.Body>
+	</Accordion.Collapse>
+	</Card>
+</Accordion>                          	
+	{/* publication */}
+	<Accordion
+	defaultActiveKey='0'
+	className='panel-width'
+	id='publication'
+	style={{ padding: '20px 0' }}>
+	<Card>
+		<Accordion.Toggle
+			as={Card.Header}
+			eventKey='0'
+			className='panelHeadBgr panelHeadText btn-up'>
+			<h3>Publication</h3>
+		</Accordion.Toggle>
+		<Accordion.Collapse eventKey='0'>
+			<Card.Body>
+				{publication && (
+				<ul>
+					{publication.map((pub, pubIndex) => (
+						<li key={pubIndex}>
+							<p><strong>{pub.title}</strong></p>
+							<h3 style={{ fontSize: '15px',marginTop:'-10px' }}>{pub.authors}</h3>
+							<h2  style={{ fontSize: '15px',marginTop:'-10px' }}>{pub.journal} <span>&nbsp;</span>({pub.date})</h2>
+							<h2 style={{ fontSize: '14px',marginTop:'-10px' }}><FaReadme />
+						
+						                 <a
+										class='panelcontent'
+										href={pub.url}
+										target='_blank'
+										rel='noopener noreferrer'>
+										{pub.pmid}
+									</a></h2>
 
-						{/* crossref */}
-						<Container
-							id='crossref'
-							maxWidth='xl'
-							className='ggContainer'
-							style={{ paddingTop: '50px' }}>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>crossref</h3>
-										</th>
-									</tr>
-								</thead>
-								<tbody className='table-body'>
-									<tr className='table-row'>
-										<td>
-											{itemsCrossRef ? (
-												<ul>
-													{itemsCrossRef.map(crossRef => (
-														<li class='list-group2'>
-															<strong>{crossRef.database}:</strong>
-															<ul>
-																{crossRef.links.map(link => (
-																	<li class='list-group-indent'>
-																		<a
-																			class='panelcontent'
-																			href={link.url}
-																			target='_blank'
-																			rel='noopener noreferrer'>
-																			{link.id}
-																		</a>
-																	</li>
-																))}
-															</ul>
-														</li>
-													))}
-												</ul>
-											) : (
-												<p>No data available.</p>
-											)}
-										</td>
-									</tr>
-								</tbody>
-							</Table>
-						</Container>
-						<CssBaseline />
-
-						{/* publication */}
-						<Container maxWidth='xl' className='ggContainer' id='publication'>
-							<Table bordered hover5 size='lg' className='panel-width'>
-								<thead className='panelHeadBgr panelHeadText'>
-									<tr>
-										<th>
-											<h3>Publication</h3>
-										</th>
-									</tr>
-								</thead>
-
-								<div className='row'>
-									<div className='col-md-12 col-xs-12'>
-										{publication && (
-											<ul>
-												{publication.map((pub, pubIndex) => (
-													<li key={pubIndex}>
-														{pub.title}
-														{pub.journal}
-														{pub.date}
-														{pub.authors}
-														<i className='fas fa-book'></i>
-														{pub.pmid}
-
-														<EvidenceList
-															evidences={groupEvidences(pub.evidence)}
-														/>
-													</li>
-												))}
-											</ul>
-										)}
-									</div>
-								</div>
-							</Table>
-						</Container>
-						<CssBaseline />
-					</React.Fragment>
-				</Col>
-			</Row>
-		</>
-	);
-};
+							<EvidenceList style={{ fontSize: '1px',marginTop:'-10px' }}
+								evidences={groupEvidences(pub.evidence)}
+							/>
+						</li>
+					))}
+				</ul>
+			)}
+		</Card.Body>
+		</Accordion.Collapse>
+	</Card>
+</Accordion>
+</React.Fragment>
+</Col>
+</Row>
+</>
+);							
+};					
 
 export default GlycanDetail;
