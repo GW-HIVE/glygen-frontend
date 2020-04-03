@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getGlycanDetail } from '../data/glycan';
 import { useParams } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import { NavLink } from 'react-router-dom';
 import Sidebar from '../components/navigation/Sidebar';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
-import { Link } from '@material-ui/core';
+import { Link} from '@material-ui/core';
 import { Navbar, Col, Row } from 'react-bootstrap';
 import { FaReadme } from 'react-icons/fa';
 import {
@@ -19,10 +16,8 @@ import {
 	
 } from '../data/data-format';
 import EvidenceList from '../components/EvidenceList';
-
 import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
-
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 
@@ -30,16 +25,13 @@ const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
 	{ label: 'Motif', id: 'motif' },
-	{ label: 'Found Glycoprotein', id: 'glycoprotein' },
+	{ label: 'Found Glycoproteins', id: 'glycoprotein' },
 	{ label: 'Biosynthetic Enzymes', id: 'biosyntheticenzymes' },
 	{ label: 'Digital Seqeunce', id: 'Dseqence' },
 	{ label: 'Cross References', id: 'crossref' },
 	{ label: 'Publication', id: 'publication' }
 ];
-function autoResize(frame) {
-	frame.height = frame.contentWindow.document.body.scrollHeight + 'px';
-	frame.width = frame.contentWindow.document.body.scrollWidth + 'px';
-}
+
 
 const CompositionDisplay = props => {
 	return (
@@ -123,9 +115,7 @@ const GlycanDetail = props => {
 		getGlycanDetailData.then(({ data }) => {
 			if (data.code) {
 				console.log(data.code);
-				// displayErrorByCode(data.code);
-				// activityTracker("error", id, "error code: " + data.code + " (page: " + page + ", sort: " + sort + ", dir: " + dir + ", limit: " + limit + ")");
-			} else {
+						} else {
 				setItemsCrossRef(getItemsCrossRef(data));
 
 				setDetailData(data);
@@ -253,9 +243,7 @@ const GlycanDetail = props => {
 
 			formatter: (value, row) => (
 				<a href={row.gene_link}>{value}</a>
-				//<Navbar.Text as={NavLink} to={row.gene_link}>
-				//  {value}
-				//</Navbar.Text>
+				
 			)
 		},
 		{
@@ -286,14 +274,22 @@ const GlycanDetail = props => {
 							</strong>
 						</center>
 					</h2>
-					
+					 <div class="row">
+                    <div class="dropdown gg-download text-right">
+                        <button class="btn btn-link btn-link-detail dropdown-toggle" type="button" id="download" alt="Download results" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="glyphicon glyphicon-save"></i> DOWNLOAD
+                            <span class="caret"></span>
+                        </button>
+			
+                    </div>
+					</div>
 					<React.Fragment>
 						<Helmet>
 							<title>{head.glycanDetail.title}</title>
 							{getMeta(head.glycanDetail)}
 						</Helmet>
-		{/* general */}				
-		<Accordion
+		                  {/* general */}				
+		                      <Accordion
 								defaultActiveKey='0'
 								id='general'
 								className='panel-width'
@@ -415,47 +411,46 @@ style={{ padding: '20px 0' }}>
 
 		{/* motif */}
 		<Accordion
-								defaultActiveKey='0'
-								className='panel-width'
-								style={{ padding: '20px 0' }}>
-								<Card>
-									<Accordion.Toggle
-									id='motif'
-										as={Card.Header}
-										eventKey='0'
-										className='panelHeadBgr panelHeadText btn-up'>
-										<h3>Motif</h3>
-									</Accordion.Toggle>
-									<Accordion.Collapse eventKey='0'>
-										<Card.Body>
-											{motifs && (
-												<>
-													<Row>
-														{motifs.map(motif => (
-															<Col>
-																<div
-																	key={motif.id}
-																	className='img-motif-wrapper'>
-																	<img
-																		className='img-motif'
-																		src={glycanImageUrl + motif.id}
-																		alt='Cartoon'
-																	/>
-																</div>
-																<span>
-																	<a href={''}>{motif.name}</a>
-																</span>
-															</Col>
-														))}
-													</Row>
-												</>
-											)}
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
+	defaultActiveKey='0'
+	className='panel-width'
+	style={{ padding: '20px 0' }}>
+	<Card>
+		<Accordion.Toggle
+		id='motif'
+			as={Card.Header}
+			eventKey='0'
+			className='panelHeadBgr panelHeadText btn-up'>
+			<h3>Motif</h3>
+		</Accordion.Toggle>
+		<Accordion.Collapse eventKey='0'>
+			<Card.Body>
+				{motifs && (
+					<>
+							{motifs.map(motif => (
+								<Col>
+									<div
+										key={motif.id}
+										className='img-motif-wrapper'>
+										<img
+											className='img-motif'
+											src={glycanImageUrl + motif.id}
+											alt='Cartoon'
+										/>
+									</div>
+									<span>
+										<a href={''}>{motif.name}</a>
+									</span>
+								</Col>
+							))}
+						
+					</>
+				)}
+			</Card.Body>
+		</Accordion.Collapse>
+	</Card>								
+	</Accordion>
 		{/* GlycoProtien */}			
-		<Accordion id='biosyntheticenzymes'
+		<Accordion id='glycoprotein'
 			defaultActiveKey='0'
 			className='panel-width'
 			style={{ padding: '20px 0' }}>
@@ -504,35 +499,35 @@ style={{ padding: '20px 0' }}>
 	</Accordion>			
 	{/* digital seq */}
 	<Accordion 	id='Dseqence'
-								defaultActiveKey='0'
-								className='panel-width'
-								style={{ padding: '20px 0' }}>
-								<Card>
-									<Accordion.Toggle
-										as={Card.Header}
-										eventKey='0'
-										className='panelHeadBgr panelHeadText btn-up'>
-										<h3>Digital Sequence</h3>
-									</Accordion.Toggle>
-									<Accordion.Collapse eventKey='0'>
-										<Card.Body className='text-responsive '>
-											<strong>IUPAC</strong>
-											<pre className= 'text-overflow'>{iupac}</pre>
-											<strong>WURCS</strong>
-											<pre className= 'text-overflow'>{wurcs}</pre>
-											<strong>GlycoCT</strong>
-											<pre className= 'text-overflow'>{glycoct}</pre>
-											<strong>InChI</strong>
-											<pre className= 'text-overflow'>{inchi}</pre>
-											<strong>GLYCAM IUPAC</strong>
-											<pre className= 'text-overflow'>{glycam}</pre>
-											<strong>Isomeric SMILES</strong>
-											<pre className= 'text-overflow'>{smiles_isomeric}</pre>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
-		;
+defaultActiveKey='0'
+className='panel-width'
+style={{ padding: '20px 0' }}>
+<Card>
+	<Accordion.Toggle
+		as={Card.Header}
+		eventKey='0'
+		className='panelHeadBgr panelHeadText btn-up'>
+		<h3>Digital Sequence</h3>
+	</Accordion.Toggle>
+	<Accordion.Collapse eventKey='0'>
+		<Card.Body className='text-responsive '>
+			<strong>IUPAC</strong>
+			<pre className= 'text-overflow'>{iupac}</pre>
+			<strong>WURCS</strong>
+			<pre className= 'text-overflow'>{wurcs}</pre>
+			<strong>GlycoCT</strong>
+			<pre className= 'text-overflow'>{glycoct}</pre>
+			<strong>InChI</strong>
+			<pre className= 'text-overflow'>{inchi}</pre>
+			<strong>GLYCAM IUPAC</strong>
+			<pre className= 'text-overflow'>{glycam}</pre>
+			<strong>Isomeric SMILES</strong>
+			<pre className= 'text-overflow'>{smiles_isomeric}</pre>
+		</Card.Body>
+	</Accordion.Collapse>
+</Card>
+</Accordion>
+;								
 	{/* crossref */}
 	<Accordion
 defaultActiveKey='0'
@@ -551,13 +546,13 @@ style={{ padding: '20px 0' }}>
 			{itemsCrossRef ? (
 				<ul>
 					{itemsCrossRef.map(crossRef => (
-						<li class='list-group2'>
+						<li className='list-group2'>
 							<strong>{crossRef.database}:</strong>
 							<ul>
 								{crossRef.links.map(link => (
-									<li class='list-group-indent'>
+									<li className='list-group-indent'>
 										<a
-											class='panelcontent'
+											// className='panelcontent'
 											href={link.url}
 											target='_blank'
 											rel='noopener noreferrer'>
@@ -587,7 +582,7 @@ style={{ padding: '20px 0' }}>
 			as={Card.Header}
 			eventKey='0'
 			className='panelHeadBgr panelHeadText btn-up'>
-			<h3>Publication</h3>
+			<h3>Publications</h3>
 		</Accordion.Toggle>
 		<Accordion.Collapse eventKey='0'>
 			<Card.Body>
@@ -601,7 +596,7 @@ style={{ padding: '20px 0' }}>
 							<h2 style={{ fontSize: '14px',marginTop:'-10px' }}><FaReadme />
 						
 						                 <a
-										class='panelcontent'
+										className='panelcontent'
 										href={pub.url}
 										target='_blank'
 										rel='noopener noreferrer'>
