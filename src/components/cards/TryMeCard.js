@@ -33,40 +33,42 @@ export default function TryMeCard(props) {
 	}
 
 	return (
-		<Grid item xs={12} sm={12} md={12}>
-			<Card className='card'>
-				<div className={classes.cardDetails}>
-					<CardContent>
-						<Typography
-							gutterBottom
-							variant='h5'
-							component='h2'
-							className={classes.cardTitle}>
-							Try Me
-						</Typography>
-						<ListGroup as='h6'>
-							<ListGroup.Item action onClick={alertClicked} href='#'>
-								What are the enzymes involved in the biosynthesis of{' '}
-								<span className={classes.selected}> Man5-(G55220VL) </span> in
-								human?
-							</ListGroup.Item>
-							<ListGroup.Item action onClick={alertClicked}>
-								Which proteins have been shown to bear{' '}
-								<span className={classes.selected}>
-									{' '}
-									a bi-antennary fully sialylated N-Glycan-(G77252PU){' '}
-								</span>{' '}
-								and which site is this glycan attached to?
-							</ListGroup.Item>
-							<ListGroup.Item action onClick={alertClicked}>
-								Which glycans might have been synthesized in mouse using{' '}
-								<span className={classes.selected}> Mgat1 </span>?
-							</ListGroup.Item>
-						</ListGroup>
-					</CardContent>
-				</div>
-			</Card>
-		</Grid>
+		<div id={props.id}>
+			<Grid item xs={12} sm={12} md={12}>
+				<Card className='card'>
+					<div className={classes.cardDetails}>
+						<CardContent>
+							<Typography
+								gutterBottom
+								variant='h5'
+								component='h2'
+								className={classes.cardTitle}>
+								Try Me
+							</Typography>
+							<ListGroup as='h6'>
+								<ListGroup.Item action onClick={alertClicked} href='#'>
+									What are the enzymes involved in the biosynthesis of{' '}
+									<span className={classes.selected}> Man5-(G55220VL) </span> in
+									human?
+								</ListGroup.Item>
+								<ListGroup.Item action onClick={alertClicked}>
+									Which proteins have been shown to bear{' '}
+									<span className={classes.selected}>
+										{' '}
+										a bi-antennary fully sialylated N-Glycan-(G77252PU){' '}
+									</span>{' '}
+									and which site is this glycan attached to?
+								</ListGroup.Item>
+								<ListGroup.Item action onClick={alertClicked}>
+									Which glycans might have been synthesized in mouse using{' '}
+									<span className={classes.selected}> Mgat1 </span>?
+								</ListGroup.Item>
+							</ListGroup>
+						</CardContent>
+					</div>
+				</Card>
+			</Grid>
+		</div>
 	);
 }
 

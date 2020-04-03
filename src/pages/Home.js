@@ -150,7 +150,7 @@ export default function Home() {
 								{featuredCards.map(post => (
 									<FeaturedCard key={post.title} post={post} />
 								))}
-								<TryMeCard />
+								<TryMeCard id='try-me' />
 							</Grid>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3}>

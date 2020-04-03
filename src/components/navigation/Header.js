@@ -154,7 +154,7 @@ export default function Header() {
 							<Nav.Link className='gg-nav-link' as={NavLink} to='/quick-search'>
 								QUICK&nbsp;SEARCH
 							</Nav.Link>
-							<Nav.Link className='gg-nav-link' as={NavLink} to='/try-me'>
+							<Nav.Link className='gg-nav-link' href='#try-me'>
 								TRY&nbsp;ME
 							</Nav.Link>
 							<NavDropdown
