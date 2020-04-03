@@ -389,6 +389,27 @@ const GlycanSearch = props => {
     return getJson(url);
   };
 
+   /**
+ * getSelectionValue returns selection control value based on min, max.
+ * @param {object} min - min value.
+ * @param {object} max - max value.
+ * @param {object} residue_min - residue min value.
+ * @param {object} residue_max - residue max value.
+ **/
+function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
+  var selection = "maybe";
+  
+  if (cur_min === residue_min && cur_max === residue_min){
+      selection = "no";
+  } else if (cur_min === residue_min && cur_max <= residue_max){
+      selection = "maybe";
+  } else if (cur_min > residue_min && cur_max <= residue_max){
+      selection = "yes";
+  }
+
+  return selection;
+}
+
   React.useEffect(() => {
     setPageLoading(true);
     getGlycanInit().then(response => {
@@ -423,6 +444,7 @@ const GlycanSearch = props => {
         compositionData[x].shortName = compositionSearchData[compositionData[x].residue].short_name;
         compStateData[compositionData[x].residue] = {
           "min" : compositionData[x].min,
+          "selectValue" : getSelectionValue(compositionData[x].min, compositionData[x].max, compositionData[x].min, compositionData[x].max),
           "max" : compositionData[x].max
         }
       }
@@ -771,7 +793,7 @@ const GlycanSearch = props => {
          </div>
         }
           <Tabs defaultActiveKey="advanced_search" transition={false}
-            activeKey={glyActTabKey}
+            activeKey={glyActTabKey} mountOnEnter = {true} unmountOnExit = {true} 
             onSelect={(key) => setGlyActTabKey(key)}
           >
             <Tab
@@ -1392,6 +1414,7 @@ const GlycanSearch = props => {
                     inputValue = {glyCompData}
                     setInputValue = {glyCompChange}
                     searchGlycanCompClick = {searchGlycanCompClick}
+                    getSelectionValue = {getSelectionValue}
                     step={1}
                   />}
               </Container>

@@ -17,3 +17,7 @@
 .select-menu {
 	background-color: white !important;
   }
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}

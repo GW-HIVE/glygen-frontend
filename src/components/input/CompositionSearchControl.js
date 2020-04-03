@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "@material-ui/core/Select";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
@@ -28,19 +28,19 @@ const useStyles = makeStyles({
     fontSize: 16,
     fontWeight: "bold",
     height: 16,
-    margin:0
+    margin: 0
   },
   span2: {
     fontSize: 12,
     //height: 16,
     fontStyle: "italic",
     fontWeight: "bold",
-    margin:0
+    margin: 0
   },
   br: {
     height: 1,
     padding: 0,
-    margin:0
+    margin: 0
   },
   label: {
     // width: "100%",
@@ -48,7 +48,7 @@ const useStyles = makeStyles({
     // padding: "15px",
     fontSize: 16,
     fontWeight: "bold",
-    margin:0,
+    margin: 0
     // marginTop: 10,
 
     // paddingLeft: "15px",
@@ -60,8 +60,8 @@ const useStyles = makeStyles({
     // padding: "15px",
     fontSize: 16,
     fontWeight: "bold",
-    margin:0,
-    color: "#2F78B7",
+    margin: 0,
+    color: "#2F78B7"
     // marginTop: 10,
 
     // paddingLeft: "15px",
@@ -108,282 +108,555 @@ const useStyles = makeStyles({
 
 export default function CompositionSearchControl(props) {
   const classes = useStyles();
-  //const [compSel, setCompSel] = React.useState([]);
-  let compSel = {};
-
+  const [undoStack, setUndoStack] = React.useState([]);
+  const [redoStack, setRedoStack] = React.useState([]);
+  const [undoVal, setUndoVal] = React.useState({});
+  const [redoDisabled, setRedoDisabled] = React.useState(true);
+  const [undoDisabled, setUndoDisabled] = React.useState(true);
+  const [searchDisabled, setSearchDisabled] = React.useState(false);
 
   const minInputChange = event => {
-    let compositionData = props.inputValue;
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
     let comp = {
-      "min" : event.target.value,
-      "max" : compositionData[event.target.name].max
-    }
-    props.setInputValue({[event.target.name] : comp});
+      min: event.target.value,
+      selectValue: compositionData[event.target.name].selectValue,
+      max: compositionData[event.target.name].max
+    };
+    props.setInputValue({ [event.target.name]: comp });  
   };
 
   const maxInputChange = event => {
-    let compositionData = props.inputValue;
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
     let comp = {
-      "min" : compositionData[event.target.name].min,
-      "max" : event.target.value
-    }
-    props.setInputValue({[event.target.name] : comp});
+      min: compositionData[event.target.name].min,
+      selectValue: compositionData[event.target.name].selectValue,
+      max: event.target.value
+    };
+    props.setInputValue({ [event.target.name]: comp });
   };
 
   /**
- * getSelectionValue returns selection control value based on min, max.
- * @param {object} min - min value.
- * @param {object} max - max value.
- * @param {object} residue_min - residue min value.
- * @param {object} residue_max - residue max value.
- **/
-function getSelectionValue(residue, cur_min, cur_max, residue_min, residue_max) {
-  var selection = "maybe";
-  
-  if (cur_min === residue_min && cur_max === residue_min){
-      selection = "no";
-  } else if (cur_min === residue_min && cur_max <= residue_max){
-      selection = "maybe";
-  } else if (cur_min > residue_min && cur_max <= residue_max){
-      selection = "yes";
-  }
-
-  //setCompSel({[residue]: selection})
-  compSel[residue] = selection;
-  return selection;
-}
-
-/**
- * onSelControlChange sets min, max values based on user selection.
- * @param {object} select_control - Select control.
- * @param {object} min_val - min value control.
- * @param {object} max_val - max value control.
- * @param {string} residue - residue id.
- * */
-function onSelControlChange(sel_control_value, min_val, max_val, residue) {
-    //compSearchRedoReset();
-    //saveResidueStateToUndoList(residue, parseInt(min_val.value), parseInt(max_val.value));
-    //var sel_control_value = select_control.value;
-    //var sel_id = select_control.id;
+   * onSelControlChange sets min, max values based on user selection.
+   * @param {object} select_control - Select control.
+   * @param {object} min_val - min value control.
+   * @param {object} max_val - max value control.
+   * @param {string} residue - residue id.
+   * */
+  function onSelControlChange(sel_control_value, min_val, max_val, residue) {
+    compSearchRedoReset();
+    saveResidueStateToUndoList(
+      residue,
+      sel_control_value,
+      parseInt(min_val),
+      parseInt(max_val)
+    );
 
     let comp = {
-      "min" : 0,
-      "max" : 1
-    }
+      min: parseInt(min_val),
+      selectValue: sel_control_value,
+      max: parseInt(max_val)
+    };
 
     var min = undefined;
     var max = undefined;
-    var sel_residue = props.compositionInitMap.filter(function (res) { return residue ===  res.residue })[0];
+    var sel_residue = props.compositionInitMap.filter(function(res) {
+      return residue === res.residue;
+    })[0];
     if (sel_residue) {
-        min = parseInt(sel_residue.min);
-        max = parseInt(sel_residue.max);
+      min = parseInt(sel_residue.min);
+      max = parseInt(sel_residue.max);
     }
     if (sel_control_value === "maybe") {
+      comp.selectValue = "maybe";
       comp.min = parseInt(min);
-        if (parseInt(max_val) === max || parseInt(max_val) === min)
+      if (parseInt(max_val) === max || parseInt(max_val) === min)
         comp.max = parseInt(max);
     } else if (sel_control_value === "yes") {
+      comp.selectValue = "yes";
       comp.min = parseInt(min + 1);
-        if (parseInt(max_val) === max || parseInt(max_val) === min)
+      if (parseInt(max_val) === max || parseInt(max_val) === min)
         comp.max = parseInt(max);
     } else if (sel_control_value === "no") {
+      comp.selectValue = "no";
       comp.min = parseInt(min);
       comp.max = parseInt(min);
     }
-    props.setInputValue({[residue] : comp});
+    props.setInputValue({ [residue]: comp });
 
-    //setResidueMinMaxValue(min_val, max_val, min, max);
-}
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+    compositionData[residue] = comp;
+    if (allNoTrue(compositionData)) {
+      setSearchDisabled(true);
+    } else {
+      setSearchDisabled(false);
+    }  
+  }
 
-
-/**
- * onResidueMinMoveOut sets min control value based on select option value.
- * @param {object} inputMin - min value.
- * @param {object} inputMax - max value.
- * @param {object} selOption - select option.
- * @param {string} residue - residue.
- * */
-function onResidueMinMoveOut(inputMin, inputMax, min, max, selOption, residue) {
-  //compSearchRedoReset();
-  // if (undo_residue_val.residue == residue && parseInt(undo_residue_val.min) != parseInt(inputMin.value)) {
-  //     saveResidueStateToUndoList(undo_residue_val.residue, parseInt(undo_residue_val.min), parseInt(undo_residue_val.max));
-  // }
-  if (inputMin !== "") {
+  /**
+   * onResidueMinMoveOut sets min control value based on select option value.
+   * @param {object} inputMin - min value.
+   * @param {object} inputMax - max value.
+   * @param {object} selOption - select option.
+   * @param {string} residue - residue.
+   * */
+  function onResidueMinMoveOut(
+    inputMin,
+    inputMax,
+    min,
+    max,
+    selOption,
+    residue
+  ) {
+    if (
+      undoVal.residue === residue &&
+      parseInt(undoVal.min) !== parseInt(inputMin) && inputMin !== ""
+    ) {
+      compSearchRedoReset();
+      saveResidueStateToUndoList(
+        undoVal.residue,
+        selOption,
+        parseInt(undoVal.min),
+        parseInt(undoVal.max)
+      );
+    }
+    if (inputMin !== "") {
       if (parseInt(inputMin) < parseInt(min)) {
-          inputMin = parseInt(min);
+        inputMin = parseInt(min);
       }
       if (parseInt(inputMin) > parseInt(inputMax) && selOption !== "no") {
-          if (parseInt(inputMin) < parseInt(max)) {
-              inputMin = parseInt(inputMin);
-              inputMax = parseInt(inputMin);
-          } else {
-              inputMin = parseInt(max);
-              inputMax = parseInt(max);
-          }
+        if (parseInt(inputMin) < parseInt(max)) {
+          inputMin = parseInt(inputMin);
+          inputMax = parseInt(inputMin);
+        } else {
+          inputMin = parseInt(max);
+          inputMax = parseInt(max);
+        }
       } else if (parseInt(inputMin) > parseInt(min) && selOption === "no") {
-          if (parseInt(inputMin) > parseInt(max)) {
-              inputMin = parseInt(max);
-              inputMax = parseInt(max);
-          } else {
-              inputMax = parseInt(inputMin);
-          }
+        if (parseInt(inputMin) > parseInt(max)) {
+          inputMin = parseInt(max);
+          inputMax = parseInt(max);
+        } else {
+          inputMax = parseInt(inputMin);
+        }
       }
-  } else if (inputMin === "") {
+    } else if (inputMin === "") {
       if (selOption === "maybe") {
-          inputMin = parseInt(min);
+        inputMin = parseInt(min);
       } else if (selOption === "yes") {
-          inputMin = parseInt(min) + 1;
+        inputMin = parseInt(min) + 1;
       } else if (selOption === "no") {
-          inputMin = parseInt(min);
+        inputMin = parseInt(min);
       }
-  }
-  let comp = {
-    "min" : parseInt(inputMin),
-    "max" : parseInt(inputMax)
-  }
-  props.setInputValue({[residue] : comp});
+    }
+    let comp = {
+      min: parseInt(inputMin),
+      selectValue: props.getSelectionValue(
+        parseInt(inputMin),
+        parseInt(inputMax),
+        parseInt(min),
+        parseInt(max)
+      ),
+      max: parseInt(inputMax)
+    };
+    props.setInputValue({ [residue]: comp });
 
-  //selOption.value = getSelectionValue(parseInt(inputMin.value), parseInt(inputMax.value), parseInt(inputMin.min), parseInt(inputMax.max));
-}
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+    compositionData[residue] = comp;
+    if (allNoTrue(compositionData)) {
+      setSearchDisabled(true);
+    } else {
+      setSearchDisabled(false);
+    }  
+  }
 
-/**
- * onResidueMaxMoveOut sets max control value based on select option value.
- * @param {string} inputMax - max value.
- * @param {string} inputMin - min value.
- * @param {string} selOption - select value.
- * @param {string} residue - residue.
- * */
-function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
-  // compSearchRedoReset();
-  // if (undo_residue_val.residue == residue && parseInt(undo_residue_val.max) != parseInt(inputMax.value)) {
-  //     saveResidueStateToUndoList(undo_residue_val.residue, parseInt(undo_residue_val.min), parseInt(undo_residue_val.max));
-  // }
-  if (inputMax !== "") {
+  /**
+   * onResidueMaxMoveOut sets max control value based on select option value.
+   * @param {string} inputMax - max value.
+   * @param {string} inputMin - min value.
+   * @param {string} selOption - select value.
+   * @param {string} residue - residue.
+   * */
+  function onResidueMaxMoveOut(
+    inputMax,
+    inputMin,
+    max,
+    min,
+    selOption,
+    residue
+  ) {
+    if (
+      undoVal.residue === residue &&
+      parseInt(undoVal.max) !== parseInt(inputMax) && inputMax !== ""
+    ) {
+      compSearchRedoReset();
+      saveResidueStateToUndoList(
+        undoVal.residue,
+        selOption,
+        parseInt(undoVal.min),
+        parseInt(undoVal.max)
+      );
+    }
+    if (inputMax !== "") {
       if (parseInt(inputMax) > parseInt(max)) {
-          inputMax = parseInt(max);
+        inputMax = parseInt(max);
       }
-      if (parseInt(inputMax) < parseInt(inputMin)  && selOption !== "yes") {
-          if (parseInt(inputMax) > parseInt(min)) {
-              inputMax = parseInt(inputMax);
-              inputMin = parseInt(inputMax);
-          } else {
-              inputMax = parseInt(min);
-              inputMin = parseInt(min);
-          }
-      } else if (parseInt(inputMax) < parseInt(inputMin)  &&  selOption === "yes") {
-          if (parseInt(inputMax) < parseInt(min)) {
-              inputMin = parseInt(min);
-              inputMax = parseInt(min);
-          } else {
-              inputMin.value = parseInt(inputMax.value);
-          }
-      }
-  } else if (inputMax === "") {
-      if (selOption === "maybe") {
-          inputMax = parseInt(max);
-      } else if (selOption === "yes") {
-          inputMax = parseInt(max);
-      } else if (selOption === "no") {
+      if (parseInt(inputMax) < parseInt(inputMin) && selOption !== "yes") {
+        if (parseInt(inputMax) > parseInt(min)) {
+          inputMax = parseInt(inputMax);
+          inputMin = parseInt(inputMax);
+        } else {
           inputMax = parseInt(min);
+          inputMin = parseInt(min);
+        }
+      } else if (
+        parseInt(inputMax) < parseInt(inputMin) &&
+        selOption === "yes"
+      ) {
+        if (parseInt(inputMax) < parseInt(min)) {
+          inputMin = parseInt(min);
+          inputMax = parseInt(min);
+        } else {
+          inputMin = parseInt(inputMax);
+        }
       }
+    } else if (inputMax === "") {
+      if (selOption === "maybe") {
+        inputMax = parseInt(max);
+      } else if (selOption === "yes") {
+        inputMax = parseInt(max);
+      } else if (selOption === "no") {
+        inputMax = parseInt(min);
+      }
+    }
+
+    let comp = {
+      min: parseInt(inputMin),
+      selectValue: props.getSelectionValue(
+        parseInt(inputMin),
+        parseInt(inputMax),
+        parseInt(min),
+        parseInt(max)
+      ),
+      max: parseInt(inputMax)
+    };
+    props.setInputValue({ [residue]: comp });
+
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+    compositionData[residue] = comp;
+    if (allNoTrue(compositionData)) {
+      setSearchDisabled(true);
+    } else {
+      setSearchDisabled(false);
+    }  
+  }
+  /**
+   * saveResidueStateToUndoList saves residue state to undo list.
+   * @param {string} residue - residue id.
+   * @param {int} min - min value.
+   * @param {int} max - max value.
+   * */
+  function saveResidueStateToUndoList(residue, selOption, min, max) {
+    var sel_residue = props.compositionInitMap.filter(function(res) {
+      return residue === res.residue;
+    })[0];
+    let compData = {};
+    compData[residue] = {
+      min: parseInt(min),
+      selectValue: props.getSelectionValue(
+        parseInt(min),
+        parseInt(max),
+        parseInt(sel_residue.min),
+        parseInt(sel_residue.max)
+      ),
+      max: parseInt(max)
+    };
+
+    let undoResStack = undoStack;
+    undoResStack.push(compData);
+
+    setUndoStack(undoResStack);
+    if (undoStack.length > 0) {
+      setUndoDisabled(false);
+    }
   }
 
-  let comp = {
-    "min" : parseInt(inputMin),
-    "max" : parseInt(inputMax)
+  /**
+   * saveCurrentResidueStatesToUndoList saves current residue states to undo list.
+   *  * @param {array} updated_res_list - residue list.
+   */
+  function saveCurrentResidueStatesToUndoList(updated_res_list) {
+    let compositionStateData = JSON.parse(JSON.stringify(props.inputValue));
+    let undoResStack = undoStack;
+    undoResStack.push(compositionStateData);
+    setUndoStack(undoResStack);
+    if (undoResStack.length > 0) {
+      setUndoDisabled(false);
+    }
   }
-  props.setInputValue({[residue] : comp});
 
-  //selOption.value = getSelectionValue(parseInt(inputMin.value), parseInt(inputMax.value), parseInt(inputMin.min), parseInt(inputMax.max));
-}
+  /**
+   * onMinMaxFocus sets residue values to undo_residue_val.
+   * @param {object} minVal - min value.
+   * @param {object} maxVal - max value.
+   * @param {string} residue - residue id.
+   * */
+  function onMinMaxFocus(selOption, minVal, maxVal, residue) {
+    let undoResidue = {
+      residue: residue,
+      selectValue: selOption,
+      min: parseInt(minVal),
+      max: parseInt(maxVal)
+    };
+    setUndoVal(undoResidue);
+  }
+
+  /**
+   * compSearchUndoRedo undo or redo button handler.
+   * @param {string} option specifies "undo" or "redo" option.
+   */
+  function compSearchUndoRedo(option) {
+    var pre_state = undefined;
+    var cur_state = undefined;
+    if (option === "undo") {
+      pre_state = undoStack.pop();
+      cur_state = JSON.parse(JSON.stringify(props.inputValue)); 
+      let redoResStack = redoStack;
+      redoResStack.push(cur_state);
+      setRedoStack(redoResStack);
+    }
+    if (option === "redo") {
+      pre_state = redoStack.pop();
+      cur_state = JSON.parse(JSON.stringify(props.inputValue));
+      let undoResStack = undoStack;
+      undoResStack.push(cur_state);
+      setUndoStack(undoResStack);
+    }
+
+    props.setInputValue(pre_state);
+
+    if (undoStack.length > 0) {
+      setUndoDisabled(false);
+    } else {
+      setUndoDisabled(true);
+    }
+    if (redoStack.length > 0) {
+      setRedoDisabled(false);
+    } else {
+      setRedoDisabled(true);
+    }
+
+    let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+    for (let residue in pre_state) {
+      compositionData[residue].min = pre_state[residue].min;
+      compositionData[residue].selectValue = pre_state[residue].selectValue;
+      compositionData[residue].max = pre_state[residue].max;
+    }
+
+    if (allNoTrue(compositionData)) {
+      setSearchDisabled(true);
+    } else {
+      setSearchDisabled(false);
+    }
+  }
+
+  /**
+   * compSearchRedoReset resets redo list.
+   */
+  function compSearchRedoReset() {
+    while (redoStack.length > 0) {
+      redoStack.pop();
+    }
+
+    if (redoStack.length < 1) {
+      setRedoDisabled(true);
+    }
+  }
+
+  /**
+   * compSearchStateChanged checks if current residue states are changed compared to values in residue list.
+   * @param {array} residue_state_list - residue list.
+   * */
+  function compSearchStateChanged(compositionData, inputCompStateData) {
+    var stateChanged = false;
+
+    let compositionStateData = undefined;
+    if (inputCompStateData !== undefined) {
+       compositionStateData = inputCompStateData
+    } else {
+      compositionStateData = props.inputValue;
+    }
+
+    for (let residue in compositionData) {
+      if (
+        parseInt(compositionStateData[residue].min) !==
+        parseInt(compositionData[residue].min)
+      ) {
+        stateChanged = true;
+        break;
+      }
+      if (
+        parseInt(compositionStateData[residue].max) !==
+        parseInt(compositionData[residue].max)
+      ) {
+        stateChanged = true;
+        break;
+      }
+    }
+
+    return stateChanged;
+  }
 
   const allYes = () => {
-    let compositionData = props.inputValue;
-    for (var x = 0; x < props.compositionInitMap.length; x++){
-      compositionData[props.compositionInitMap[x].residue].min  = 1;
-      compositionData[props.compositionInitMap[x].residue].max  = props.compositionInitMap[x].max;
+    var compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+    for (var x = 0; x < props.compositionInitMap.length; x++) {
+      compositionData[props.compositionInitMap[x].residue].min = 1;
+      compositionData[props.compositionInitMap[x].residue].selectValue = "yes";
+      compositionData[props.compositionInitMap[x].residue].max =
+        props.compositionInitMap[x].max;
+    }
+    if (compSearchStateChanged(compositionData)) {
+      compSearchRedoReset();
+      saveCurrentResidueStatesToUndoList(compositionData);
     }
     props.setInputValue(compositionData);
+    setSearchDisabled(false);
   };
 
-
   const allNo = () => {
-    let compositionData = props.inputValue;
-    for (let residue in compositionData){
-      compositionData[residue].min  = 0;
-      compositionData[residue].max  = 0;
+    var compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+    for (let residue in compositionData) {
+      compositionData[residue].min = 0;
+      compositionData[residue].selectValue = "no";
+      compositionData[residue].max = 0;
+    }
+
+    if (compSearchStateChanged(compositionData)) {
+      compSearchRedoReset();
+      saveCurrentResidueStatesToUndoList(compositionData);
     }
     props.setInputValue(compositionData);
+    setSearchDisabled(true);
+  };
+
+  const allNoTrue = (inputCompStateData) => {
+    var compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+    for (let residue in compositionData) {
+      compositionData[residue].min = 0;
+      compositionData[residue].selectValue = "no";
+      compositionData[residue].max = 0;
+    }
+
+    if (compSearchStateChanged(compositionData, inputCompStateData)) {
+      return false;
+    }
+    return true;
   };
 
   const clearCompSearch = () => {
-    let compositionData = props.inputValue;
-    for (var x = 0; x < props.compositionInitMap.length; x++){
-      compositionData[props.compositionInitMap[x].residue].min  = props.compositionInitMap[x].min;
-      compositionData[props.compositionInitMap[x].residue].max  = props.compositionInitMap[x].max;
+    var compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+    for (var x = 0; x < props.compositionInitMap.length; x++) {
+      compositionData[props.compositionInitMap[x].residue].min =
+        props.compositionInitMap[x].min;
+      compositionData[props.compositionInitMap[x].residue].selectValue =
+        "maybe";
+      compositionData[props.compositionInitMap[x].residue].max =
+        props.compositionInitMap[x].max;
+    }
+
+    if (compSearchStateChanged(compositionData)) {
+      compSearchRedoReset();
+      saveCurrentResidueStatesToUndoList(compositionData);
     }
     props.setInputValue(compositionData);
+    setSearchDisabled(false);
   };
 
   return (
     <div className={classes.root}>
-      <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center">
+      <Grid
+        container
+        className={"col-sm-12"}
+        style={{ margin: 0 }}
+        spacing={2}
+        justify="center"
+      >
         <Grid item className={"col-sm-5"}>
           <Typography className={classes.labelHeader} gutterBottom>
             Residue
           </Typography>
         </Grid>
         <Grid item className={"col-sm-2"}>
-          <Typography className={classes.labelHeader} gutterBottom align="center">
+          <Typography
+            className={classes.labelHeader}
+            gutterBottom
+            align="center"
+          >
             Contains
           </Typography>
         </Grid>
         <Grid item className={"col-sm-2"}>
-          <Typography className={classes.labelHeader} gutterBottom align="center">
+          <Typography
+            className={classes.labelHeader}
+            gutterBottom
+            align="center"
+          >
             Min
           </Typography>
         </Grid>
         <Grid item className={"col-sm-2"}>
-          <Typography className={classes.labelHeader} gutterBottom align="center">
+          <Typography
+            className={classes.labelHeader}
+            gutterBottom
+            align="center"
+          >
             Max
           </Typography>
         </Grid>
       </Grid>
       {props.compositionInitMap &&
         props.compositionInitMap.map((key, index) => (
-          <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center">
+          <Grid
+            container
+            className={"col-sm-12"}
+            style={{ margin: 0 }}
+            spacing={2}
+            justify="center"
+          >
             <Grid item className={"col-sm-5"}>
               <Typography className={classes.label} gutterBottom>
                 {key.name}
-                {<br className={classes.br}></br>}<span className={classes.span2}>{key.subtext} </span>
+                {<br className={classes.br}></br>}
+                <span className={classes.span2}>{key.subtext} </span>
               </Typography>
             </Grid>
-            <Grid item className={"col-sm-2"} >
+            <Grid item className={"col-sm-2"}>
               <FormControl fullWidth className={classes.margin}>
                 <Select
                   variant="outlined"
                   defaultValue={"maybe"}
                   name={key.residue}
-                  value={ 
-                    getSelectionValue(key.residue, Number(props.inputValue[key.residue].min), Number(props.inputValue[key.residue].max), 
-                      Number(key.min), Number(key.max))
+                  value={props.inputValue[key.residue].selectValue}
+                  onChange={event =>
+                    onSelControlChange(
+                      event.target.value,
+                      props.inputValue[key.residue].min,
+                      props.inputValue[key.residue].max,
+                      event.target.name
+                    )
                   }
-                  onChange={event => onSelControlChange(event.target.value, props.inputValue[key.residue].min, props.inputValue[key.residue].max, event.target.name)}
                   className={classes.select}
                   classes={{
                     outlined: classes.selectOutlined,
-                    root: 'select-menu', 
+                    root: "select-menu"
                   }}
                 >
-                  <MenuItem value={"maybe"}>
-                    Maybe
-                  </MenuItem>
-                  <MenuItem value={"yes"}>
-                    Yes
-                  </MenuItem>
-                  <MenuItem value={"no"}>
-                    No
-                  </MenuItem>
+                  <MenuItem value={"maybe"}>Maybe</MenuItem>
+                  <MenuItem value={"yes"}>Yes</MenuItem>
+                  <MenuItem value={"no"}>No</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -396,7 +669,24 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
                   margin="dense"
                   value={props.inputValue[key.residue].min}
                   onChange={minInputChange}
-                  onBlur={() => onResidueMinMoveOut(props.inputValue[key.residue].min, props.inputValue[key.residue].max, key.min, key.max, compSel[key.residue], key.residue)}                
+                  onBlur={() =>
+                    onResidueMinMoveOut(
+                      props.inputValue[key.residue].min,
+                      props.inputValue[key.residue].max,
+                      key.min,
+                      key.max,
+                      props.inputValue[key.residue].selectValue,
+                      key.residue
+                    )
+                  }
+                  onFocus={() =>
+                    onMinMaxFocus(
+                      props.inputValue[key.residue].selectValue,
+                      props.inputValue[key.residue].min,
+                      props.inputValue[key.residue].max,
+                      key.residue
+                    )
+                  }
                   defaultValue={Number(key.min)}
                   inputProps={{
                     step: props.step,
@@ -408,7 +698,7 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
                 />
               </FormControl>
             </Grid>
-            <Grid item className={"col-sm-2"}> 
+            <Grid item className={"col-sm-2"}>
               <FormControl fullWidth className={classes.margin}>
                 <OutlinedInput
                   variant="outlined"
@@ -417,7 +707,24 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
                   name={key.residue}
                   value={props.inputValue[key.residue].max}
                   onChange={maxInputChange}
-                  onBlur={() => onResidueMaxMoveOut(props.inputValue[key.residue].max, props.inputValue[key.residue].min, key.max, key.min, compSel[key.residue], key.residue)}                
+                  onBlur={() =>
+                    onResidueMaxMoveOut(
+                      props.inputValue[key.residue].max,
+                      props.inputValue[key.residue].min,
+                      key.max,
+                      key.min,
+                      props.inputValue[key.residue].selectValue,
+                      key.residue
+                    )
+                  }
+                  onFocus={() =>
+                    onMinMaxFocus(
+                      props.inputValue[key.residue].selectValue,
+                      props.inputValue[key.residue].min,
+                      props.inputValue[key.residue].max,
+                      key.residue
+                    )
+                  }
                   defaultValue={Number(key.max)}
                   inputProps={{
                     step: props.step,
@@ -431,7 +738,14 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
             </Grid>
           </Grid>
         ))}
-      <Grid container className={"col-sm-12"} style={{margin:0}} spacing={2} justify="center" alignItems="center">
+      <Grid
+        container
+        className={"col-sm-12"}
+        style={{ margin: 0 }}
+        spacing={2}
+        justify="center"
+        alignItems="center"
+      >
         {/* <ButtonToolbar justifyContent="center" className={classes.marginButToolbarCompoSearch}> */}
         <Grid item>
           <Button
@@ -466,9 +780,10 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
         <Grid item>
           <Button
             className={classes.clearButton}
+            disabled={undoDisabled}
             variant="secondary"
             size="lg"
-            // onClick={unDo}
+            onClick={() => compSearchUndoRedo("undo")}
           >
             Undo
           </Button>
@@ -476,9 +791,10 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
         <Grid item>
           <Button
             className={classes.clearButton}
+            disabled={redoDisabled}
             variant="secondary"
             size="lg"
-            // onClick={reDo}
+            onClick={() => compSearchUndoRedo("redo")}
           >
             Redo
           </Button>
@@ -486,6 +802,7 @@ function onResidueMaxMoveOut(inputMax, inputMin, max, min, selOption, residue) {
         <Grid item>
           <Button
             className={classes.submitButton}
+            disabled={searchDisabled}
             variant="primary"
             size="lg"
             onClick={props.searchGlycanCompClick}
@@ -503,6 +820,6 @@ CompositionSearchControl.propTypes = {
   step: PropTypes.number,
   inputValue: PropTypes.array,
   compositionInitMap: PropTypes.array,
-  setCompositionData: PropTypes.func
-
+  setCompositionData: PropTypes.func,
+  getSelectionValue: PropTypes.func
 };
