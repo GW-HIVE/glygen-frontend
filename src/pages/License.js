@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
 import { Row, Col, Image } from 'react-bootstrap';
 import { makeStyles, Link } from '@material-ui/core';
@@ -12,6 +12,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import licenseData from '../data/json/licenseData';
 import gplLicenseIcon from '../images/license/GPLv3_Logo.png';
 import creativecommonsLicenseIcon from '../images/license/CreativeCommons_logo_trademark.svg';
+import SidebarPages from '../components/sidebar/SidebarPages';
 
 const License = () => {
 	const vertHeadDisclaimer = {
@@ -27,9 +28,9 @@ const License = () => {
 			height: '50px'
 		},
 		licenseIcons: {
-      width: '70%',
-      verticalAlign: 'middle',
-      paddingTop: '15%'
+			width: '70%',
+			verticalAlign: 'middle',
+			paddingTop: '15%'
 		}
 	}));
 	const classes = useStyles();
@@ -81,17 +82,23 @@ const License = () => {
 			</Helmet>
 
 			<CssBaseline />
-			<Container
+			{/* <Container
 				maxWidth='md'
 				className='card'
-				style={{ marginTop: '20px', marginBottom: '20px' }}>
-				<Row>
-					<Col style={{ paddingBottom: '40px' }}>
+				style={{ marginTop: '20px', marginBottom: '20px' }}> */}
+			<Row>
+				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
+					<SidebarPages />
+				</Col>
+				<Col sm={12} md={12} lg={12} xl={9} className='sidebarpages-page card'>
+					<div style={{ margin: '0 20px 40px' }}>
 						<Row>
 							<Col>
 								<VerticalHeading post={vertHeadDisclaimer} />
 							</Col>
-							<Col className='content-box-md' style={{display: 'flex', verticalAlign: 'middle'}}>
+							<Col
+								className='content-box-md'
+								style={{ display: 'flex', verticalAlign: 'middle' }}>
 								<a
 									href='https://www.ccrc.uga.edu/'
 									target='_blank'
@@ -112,7 +119,6 @@ const License = () => {
 								</a>
 							</Col>
 						</Row>
-
 						<p>
 							We have chosen to apply the{' '}
 							<a
@@ -168,9 +174,10 @@ const License = () => {
 								// ]}
 							/>
 						</Col>
-					</Col>
-				</Row>
-			</Container>
+					</div>
+				</Col>
+			</Row>
+			{/* </Container> */}
 		</>
 	);
 };

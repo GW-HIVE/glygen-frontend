@@ -2,10 +2,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { head, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
 import { Row, Col } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
+import SidebarPages from '../components/sidebar/SidebarPages';
 
 const useStyles = makeStyles(theme => ({
 	heading: {
@@ -30,12 +31,16 @@ const Disclaimer = props => {
 			</Helmet>
 
 			<CssBaseline />
-			<Container
+			{/* <Container
 				maxWidth='md'
 				className='card'
-				style={{ marginTop: '20px', marginBottom: '20px' }}>
-				<Row>
-					<Col style={{ paddingBottom: '40px' }}>
+				style={{ marginTop: '20px', marginBottom: '20px' }}> */}
+			<Row>
+				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
+					<SidebarPages />
+				</Col>
+				<Col sm={12} md={12} lg={12} xl={9} className='sidebarpages-page card'>
+					<div style={{ margin: '0 20px 40px' }}>
 						<VerticalHeading post={vertHeadDisclaimer} />
 						<h4 className={classes.heading}>No warranties </h4>
 						<p>
@@ -87,9 +92,10 @@ const Disclaimer = props => {
 						<p>
 							<strong>Effective Date: September 1, 2018.</strong>
 						</p>
-					</Col>
-				</Row>
-			</Container>
+					</div>
+				</Col>
+			</Row>
+			{/* </Container> */}
 		</>
 	);
 };
