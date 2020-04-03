@@ -8,8 +8,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
 import { useState, useRef } from 'react';
-import { getJson } from '../data/api';
+// import { getJson } from '../data/api';
+import { getTstJson } from '../data/api';
 import { validateEmail } from '../utils/common';
+// import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme =>
 	createStyles({
@@ -41,7 +43,6 @@ const ContactForm = props => {
 	const [subject, setSubject] = useState('general');
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
-	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
 
 	const [fNameValidated, setFNameValidated] = useState(false);
 	const [lNameValidated, setLNameValidated] = useState(false);
@@ -49,11 +50,25 @@ const ContactForm = props => {
 	const [validEmail, setValidEmail] = useState(false);
 	const [messageValidated, setMessageValidated] = useState(false);
 	const [formValidated, setFormValidated] = useState(false);
+	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
+	// const [contactUsAlertMessage, setContactUsAlertMessage] = useState('');
+	// const [counterValue, setCounterValue] = useState({
+	// 	chars_left: null,
+	// 	max_chars: 2400
+	// });
 
 	const inputLabel = useRef(null);
 	const handleChange = event => {
+		setContactUsResponseMessage();
 		setSubject(event.target.value);
 	};
+
+	// const handleWordCount = e => {
+	// 	const charCount = e.target.value.length;
+	// 	const maxChar = counterValue.max_chars;
+	// 	const charLength = maxChar - charCount;
+	// 	setCounterValue({ chars_left: charLength });
+	// };
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -67,12 +82,12 @@ const ContactForm = props => {
 		};
 		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
 
-		getJson(url).then(response => {
+		// getJson(url).then(response => {
+		getTstJson(url).then(response => {
 			setContactUsResponseMessage(response.data.message);
-			// if (response.data.type) {
-			// 	setContactUsResponseMessage(response.data.message);
-			// } else (setContactUsResponseMessage(response.data.message);)
+			// setContactUsAlertMessage(response.data.error_code);
 		});
+
 		setFName('');
 		setLName('');
 		setEmail('');
@@ -108,7 +123,10 @@ const ContactForm = props => {
 							placeholder='Please enter your first name.'
 							// defaultValue={fname}
 							error={(formValidated || fNameValidated) && fname === ''}
-							onChange={e => setFName(e.target.value)}
+							onChange={e => {
+								setContactUsResponseMessage();
+								setFName(e.target.value);
+							}}
 							onBlur={() => setFNameValidated(true)}
 							helperText={
 								(formValidated || fNameValidated) &&
@@ -127,6 +145,12 @@ const ContactForm = props => {
 								}
 							}}
 							variant='outlined'
+							InputProps={{
+								disableUnderline: true
+							}}
+							inputProps={{
+								maxLength: 64
+							}}
 						/>
 					</Col>
 					<Col sm={12} md={6} lg={6}>
@@ -140,7 +164,10 @@ const ContactForm = props => {
 							placeholder='Please enter your last name.'
 							// defaultValue={lname}
 							error={(formValidated || lNameValidated) && lname === ''}
-							onChange={e => setLName(e.target.value)}
+							onChange={e => {
+								setContactUsResponseMessage();
+								setLName(e.target.value);
+							}}
 							onBlur={() => setLNameValidated(true)}
 							helperText={
 								(formValidated || lNameValidated) &&
@@ -158,6 +185,9 @@ const ContactForm = props => {
 								}
 							}}
 							variant='outlined'
+							inputProps={{
+								maxLength: 64
+							}}
 						/>
 					</Col>
 					<Col sm={12} md={6} lg={6}>
@@ -188,6 +218,7 @@ const ContactForm = props => {
 								<MenuItem value={'shareData'}>Share my data</MenuItem>
 								<MenuItem value={'dataIssue'}>Report data issue</MenuItem>
 								<MenuItem value={'other'}>Other</MenuItem>
+								<MenuItem value={'testing'}>Testing</MenuItem>
 							</Select>
 						</FormControl>
 					</Col>
@@ -208,6 +239,7 @@ const ContactForm = props => {
 								var emailVal = e.target.value;
 								setValidEmail(validateEmail(emailVal));
 								setEmail(emailVal);
+								setContactUsResponseMessage();
 							}}
 							onBlur={() => setEmailValidated(true)}
 							helperText={
@@ -222,6 +254,9 @@ const ContactForm = props => {
 								style: { fontWeight: '900', fontSize: '20px' }
 							}}
 							variant='outlined'
+							inputProps={{
+								maxLength: 128
+							}}
 						/>
 					</Col>
 					<Col>
@@ -235,7 +270,11 @@ const ContactForm = props => {
 							style={{ margin: 8 }}
 							placeholder='Please tell us how we can help you.'
 							error={(formValidated || messageValidated) && message === ''}
-							onChange={e => setMessage(e.target.value)}
+							onChange={e => {
+								setMessage(e.target.value);
+								setContactUsResponseMessage();
+								// handleWordCount(e);
+							}}
 							onBlur={() => setMessageValidated(true)}
 							helperText={
 								(formValidated || messageValidated) &&
@@ -251,10 +290,25 @@ const ContactForm = props => {
 								style: { fontWeight: '900', fontSize: '20px' }
 							}}
 							variant='outlined'
+							inputProps={{
+								maxLength: 2400
+							}}
 						/>
+
+						{/* <div>
+							Characters Left:{''}{' '}
+							{counterValue.chars_left || counterValue.max_chars}
+							{''}/{''}2400
+						</div> */}
 					</Col>
 				</Row>
-				<div className='alert-success'>{contactUsResponseMessage}</div>
+				{/* <div className='alert-success'>{contactUsResponseMessage}</div> */}
+				<div
+					className={`alert-success ${
+						contactUsResponseMessage ? 'alert' : ''
+					}`}>
+					<strong>{contactUsResponseMessage}</strong>
+				</div>
 
 				<Button
 					variant='success'
@@ -262,8 +316,7 @@ const ContactForm = props => {
 					className={classes.btnGreen}
 					size='lg'
 					onClick={() => setFormValidated(true)}
-
-					// disabled={isSubmitting}
+					// disabled={() => setFormValidated(false)}
 				>
 					SEND MESSAGE
 				</Button>
@@ -280,3 +333,14 @@ const ContactForm = props => {
 	);
 };
 export default ContactForm;
+
+// var self = this;
+// axios.get('/url')
+//  .then(function (response) {
+//    console.log(response);
+//    self.setState({events: response.data})
+//  })
+// .catch(function (error) {
+//    console.log(error);
+// });
+// https://stackoverflow.com/questions/41194866/how-to-set-state-of-response-from-axios-in-react
