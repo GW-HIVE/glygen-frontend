@@ -13,6 +13,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import License from './pages/License';
 import PrivacySettings from './pages/PrivacySettings';
 import Feedback from './pages/Feedback';
+import TryMeCard from './components/cards/TryMeCard';
 
 const Routes = props => (
 	<Switch>
@@ -31,7 +32,7 @@ const Routes = props => (
 		<Route path='/license' component={License} />
 		<Route path='/privacy-settings' component={PrivacySettings} />
 		<Route path='/feedback' component={Feedback} />
-
+		<Route path='/try-me' component={TryMeCard} />
 		{/* Keep path='/' at the bottom */}
 		<Route path='/' component={Home} />
 	</Switch>

@@ -53,6 +53,19 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 16,
     width: 700
   },
+  marginSimple: {
+    // margin: theme.spacing(2)
+    marginTop: 16,
+    marginBottom: 16,
+    //width: 1100
+  },
+  simpleSearchButton: {
+    // marginTop: 16,
+    // marginBottom: 16,
+    // marginRight: 16,
+    marginLeft: 16,
+    backgroundColor: "#2f78b7"
+  },
   submitButton: {
     marginTop: 16,
     marginBottom: 16,
@@ -136,6 +149,14 @@ const useStyles = makeStyles(theme => ({
     width: "700px",
     height: "34px"
   },
+  inputSimple: {
+    borderRadius: 4,
+    position: "relative",
+    backgroundColor: theme.palette.background.paper,
+    fontSize: 16,
+    width: "400px",
+    height: "34px"
+  },
   inputt: {
     borderRadius: 4,
     position: "relative",
@@ -172,6 +193,16 @@ const useStyles = makeStyles(theme => ({
     fontColor: "#2F78B7",
     backgroundColor: "#FFFFFF"
   },
+  tabSimpleSearch: {
+    borderRadius: 4,
+    borderColor: "#80bdff",
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+    width: "1000px",
+    height: "900px",
+    alignItems: "center",
+    fontColor: "#2F78B7",
+    backgroundColor: "#FFFFFF"
+  },
   headerTitle: {
     color: "#2F78B7",
     alignItems: "center",
@@ -191,6 +222,12 @@ const useStyles = makeStyles(theme => ({
     height: "1250px",
     alignItems: "center",
     marginBottom: "80px"
+  },
+  conSimple: {
+    // width: "1000px",
+    height: "1250px",
+    alignItems: "center",
+    marginBottom: "80px",
   },
   formControl: {
     // margin: theme.spacing(1),
@@ -798,9 +835,65 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
           >
             <Tab
               eventKey="simple_search"
-              className={classes.tab}
+              className={classes.tabSimpleSearch}
               title="Simple Search"
-            ></Tab>
+            >
+              <Container className={classes.conSimple}>
+              <div className={classes.marginSimple}>
+                  <Grid container spacing={5} justify="center">
+                    <Grid item>
+                      <FormControl variant="outlined">
+                        <InputLabel className={classes.label3}>
+                          Category
+                        </InputLabel>
+                        <Select
+                          // value={glyMassType}
+                          onChange={glyMassTypeOnChange}
+                          highlight={false}
+                          defaultValue="any"
+                          classes={{
+                            outlined: classes.selectOutlined,
+                            root: 'select-menu', 
+                          }}
+                          className={classes.select}
+                          labelWidth={100}
+                        >
+                          {initData.simple_search_category &&
+                           initData.simple_search_category
+                              .sort()
+                              .map(key => (
+                                <MenuItem
+                                  value={key.id}
+                                >
+                                  {key.display}
+                                </MenuItem>
+                              ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item>
+                    <OutlinedInput
+                    className={classes.inputSimple}
+                    placeholder="Enter the search term"
+                    // value={glyPubId}
+                    // onChange={PubmedIdChange}
+                  />
+                    </Grid>
+                    <Grid item>
+
+                    <Button
+                    className={classes.simpleSearchButton}
+                    variant="primary"
+                    size="lg"
+                    // onClick={searchGlycanClick}
+                  >
+                    Search
+                  </Button>
+                  </Grid>
+                  </Grid>
+                </div>
+                </Container>
+              </Tab>
             <Tab
               eventKey="advanced_search"
               className={classes.tab}
