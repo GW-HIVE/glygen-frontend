@@ -70,22 +70,25 @@
 		max-width: 270px;
 	}
 }
-/* @media (min-width: 1024px) {
-	.sidebar {
-		position: fixed;
-		top: 120px;
-		left: 0;
-		width: 270px !important;
-	}
-	.sidebar-col {
-		max-width: 270px;
-	}
-} */
-/* @media (min-width: 969px) {
-	.sidebar {
-		position: fixed;
-		top: 120px;
-		left: 0;
-		width: 270px;
-	}
-} */
+
+.side-menu {
+	padding: 10px !important;
+	font-size: 1.1em !important;
+	text-align: left;
+	font-weight: bold;
+	border-bottom: 1px solid #acabab !important;
+	margin-bottom: 0px;
+	color: #4a4a4a !important;
+}
+
+.side-menu:hover {
+	background-color: #ffffff;
+	color: #4a4a4a !important;
+}
+
+.active .side-menu,
+.active .side-menu:hover,
+.active .side-menu:focus {
+	background-color: var(--gg-blue) !important;
+	color: #ffffff !important;
+}
