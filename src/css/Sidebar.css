@@ -51,10 +51,6 @@ ul.sidebar-item {
 	animation-duration: 200ms;
 }
 
-.sidebar-item:hover {
-	background-color: #fff !important;
-}
-
 .sidebar-item-text {
 	font-weight: 700 !important;
 	text-decoration: none !important;

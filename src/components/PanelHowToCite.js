@@ -6,26 +6,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import ToTopArrow from '../components/ToTopArrow';
 import { Link } from 'react-router-dom';
+import Image from 'react-bootstrap/Image';
 // import PDF from '../downloads/citation/31616925.pdf';
 
 // import FormatQuoteOutlinedIcon from '@material-ui/icons/FormatQuoteOutlined';
 
-
-const PanelHowToCite = props => {
-
-
+const PanelHowToCite = (props) => {
 	return (
 		<div id={props.id}>
 			<CssBaseline />
 			<Container maxWidth='xl' className='ggContainer'>
 				<Table bordered hover size='lg' className='panel-width'>
 					<thead className='panelHeadBgr panelHeadText'>
-						{props.data.map(json => (
+						{props.data.map((json) => (
 							<h3 style={{ margin: '15px' }}>{json.title}</h3>
 						))}
 					</thead>
 					<tbody className='table-body'>
-						{props.data.map(json => (
+						{props.data.map((json) => (
 							<tr className='table-row'>
 								<td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
 									<p>{json.text}</p>
@@ -50,15 +48,12 @@ const PanelHowToCite = props => {
 											{json.period}
 										</div>
 										{/* Quotes */}
-										<div style={{ color: '#777777' }}>
-											{json.quote}
+										<div>
+											<Image
+												src={json.quote}
+												style={{ paddingRight: '20px' }}
+											/>
 											{/* <FormatQuoteOutlinedIcon /> */}{' '}
-											<a
-												href={json.bibtex.url}
-												target='_blank'
-												rel='noopener noreferrer'>
-												{json.bibtex.name}
-											</a>
 											{/* <a
 												href={PDF}
 												target='_blank'
@@ -76,18 +71,18 @@ const PanelHowToCite = props => {
 												PDF
 											</a> */}
 											<Link
-												to={json.pdf}
+												to={json.bibtex}
+												style={{ paddingRight: '20px' }}
 												target='_blank'
-												download
-												style={{ paddingRight: '20px', paddingLeft: '20px' }}>
-												PDF
+												download>
+												{json.bibtexlabel}
 											</Link>
 											<Link
-												to={json.enw}
+												to={json.endnote}
 												target='_blank'
 												download
 												style={{ paddingRight: '20px' }}>
-												EndNote
+												{json.endnotelabel}
 											</Link>
 										</div>
 									</p>
