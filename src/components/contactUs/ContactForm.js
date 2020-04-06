@@ -9,8 +9,8 @@ import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
 import { useState, useRef } from 'react';
 // import { getJson } from '../data/api';
-import { getTstJson } from '../data/api';
-import { validateEmail } from '../utils/common';
+import { getTstJson } from '../../data/api';
+import { validateEmail } from '../../utils/common';
 // import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles(theme =>

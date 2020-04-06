@@ -7,22 +7,22 @@ import VerticalHeading from '../components/headings/VerticalHeading';
 import { Row, Col } from 'react-bootstrap';
 import { Typography } from '@material-ui/core';
 import RoomIcon from '@material-ui/icons/Room';
-import GoogleMap from '../components/GoogleMap';
-import ContactForm from '../components/ContactForm';
+import GoogleMap from '../components/contactUs/GoogleMap';
+import ContactForm from '../components/contactUs/ContactForm';
 
 const mapStyles = {
 	position: 'relative',
 	width: '99%',
-	height: '350px'
+	height: '350px',
 };
 
-const ContactUs = props => {
+const ContactUs = (props) => {
 	const vertHeadContactUs = {
 		h5VerticalText: 'MESSAGES',
 		// h5VerticalText: 'WHO WE ARE',
 		h2textTop: 'Get',
 		h2textBottom: 'In',
-		h2textBottomStrongAfter: 'Touch'
+		h2textBottomStrongAfter: 'Touch',
 	};
 
 	return (
@@ -41,7 +41,7 @@ const ContactUs = props => {
 						<Typography
 							variant='p'
 							style={{
-								fontSize: '18px'
+								fontSize: '18px',
 							}}>
 							We always welcome questions, comments, and suggestions regarding
 							our website and information we provide in general. We will make
