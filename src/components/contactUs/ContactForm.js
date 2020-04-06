@@ -11,16 +11,18 @@ import { useState, useRef } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
+// import NotInterestedIcon from '@material-ui/icons/NotInterested';
+
 // import Alert from '@material-ui/lab/Alert';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
 	createStyles({
 		formControl: {
 			margin: theme.spacing(1),
-			minWidth: 120
+			minWidth: 120,
 		},
 		selectEmpty: {
-			marginTop: theme.spacing(2)
+			marginTop: theme.spacing(2),
 		},
 		btnGreen: {
 			background: '#60ba4b',
@@ -29,13 +31,13 @@ const useStyles = makeStyles(theme =>
 			margin: '20px 0',
 			'&:hover': {
 				background: '#1d9901',
-				border: 'solid 1px #1d9901'
-			}
-		}
+				border: 'solid 1px #1d9901',
+			},
+		},
 	})
 );
 
-const ContactForm = props => {
+const ContactForm = (props) => {
 	const classes = useStyles();
 
 	const [fname, setFName] = useState('');
@@ -51,14 +53,15 @@ const ContactForm = props => {
 	const [messageValidated, setMessageValidated] = useState(false);
 	const [formValidated, setFormValidated] = useState(false);
 	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
-	// const [contactUsAlertMessage, setContactUsAlertMessage] = useState('');
+
+	const [contactUsErrorMessage, setContactUsErrorMessage] = useState('');
 	// const [counterValue, setCounterValue] = useState({
 	// 	chars_left: null,
 	// 	max_chars: 2400
 	// });
 
 	const inputLabel = useRef(null);
-	const handleChange = event => {
+	const handleChange = (event) => {
 		setContactUsResponseMessage();
 		setSubject(event.target.value);
 	};
@@ -70,7 +73,7 @@ const ContactForm = props => {
 	// 	setCounterValue({ chars_left: charLength });
 	// };
 
-	const handleSubmit = e => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const formData = {
@@ -78,15 +81,19 @@ const ContactForm = props => {
 			lname: lname,
 			email: email,
 			subject: subject,
-			message: message
+			message: message,
 		};
 		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
 
-		// getJson(url).then(response => {
-		getTstJson(url).then(response => {
-			setContactUsResponseMessage(response.data.message);
-			// setContactUsAlertMessage(response.data.error_code);
-		});
+		getTstJson(url)
+			.then((response) => {
+				setContactUsResponseMessage(response.data.message);
+			})
+			.catch((error) => {
+				setContactUsErrorMessage(
+					'Oops, something went wrong! We did not receive your message. Please try again later.'
+				);
+			});
 
 		setFName('');
 		setLName('');
@@ -100,10 +107,9 @@ const ContactForm = props => {
 		setMessageValidated(false);
 		setSubject('general');
 	};
-
-	// useEffect(() => {
-	// 	handleSubmit();
-	// }, []);
+	const onlyText = (e) => {
+		e.target.value = e.target.value.replace(/[^a-zA-Z-]/g, '');
+	};
 
 	return (
 		<>
@@ -121,11 +127,11 @@ const ContactForm = props => {
 							name='fname'
 							value={fname}
 							placeholder='Please enter your first name.'
-							// defaultValue={fname}
 							error={(formValidated || fNameValidated) && fname === ''}
-							onChange={e => {
-								setContactUsResponseMessage();
+							onChange={(e) => {
 								setFName(e.target.value);
+								setContactUsResponseMessage();
+								setContactUsErrorMessage();
 							}}
 							onBlur={() => setFNameValidated(true)}
 							helperText={
@@ -133,6 +139,7 @@ const ContactForm = props => {
 								fname === '' &&
 								'First name is required.'
 							}
+							onInput={(e) => onlyText(e)}
 							style={{ margin: 8 }}
 							fullWidth
 							margin='dense'
@@ -141,15 +148,16 @@ const ContactForm = props => {
 								shrink: true,
 								style: {
 									fontWeight: '900',
-									fontSize: '20px'
-								}
+									fontSize: '20px',
+								},
 							}}
 							variant='outlined'
-							InputProps={{
-								disableUnderline: true
-							}}
+							// InputProps={{
+							// 	disableUnderline: true
+							// }}
 							inputProps={{
-								maxLength: 64
+								minLength: 2,
+								maxLength: 64,
 							}}
 						/>
 					</Col>
@@ -164,9 +172,10 @@ const ContactForm = props => {
 							placeholder='Please enter your last name.'
 							// defaultValue={lname}
 							error={(formValidated || lNameValidated) && lname === ''}
-							onChange={e => {
-								setContactUsResponseMessage();
+							onChange={(e) => {
 								setLName(e.target.value);
+								setContactUsResponseMessage();
+								setContactUsErrorMessage();
 							}}
 							onBlur={() => setLNameValidated(true)}
 							helperText={
@@ -174,6 +183,7 @@ const ContactForm = props => {
 								lname === '' &&
 								'Last name is required.'
 							}
+							onInput={(e) => onlyText(e)}
 							style={{ margin: 8 }}
 							fullWidth
 							margin='dense'
@@ -181,12 +191,12 @@ const ContactForm = props => {
 								shrink: true,
 								style: {
 									fontWeight: '900',
-									fontSize: '20px'
-								}
+									fontSize: '20px',
+								},
 							}}
 							variant='outlined'
 							inputProps={{
-								maxLength: 64
+								maxLength: 64,
 							}}
 						/>
 					</Col>
@@ -235,11 +245,12 @@ const ContactForm = props => {
 							// placeholder='Please enter your email.'
 							placeholder='example@domain.com'
 							error={(formValidated || emailValidated) && !validEmail}
-							onChange={e => {
+							onChange={(e) => {
 								var emailVal = e.target.value;
 								setValidEmail(validateEmail(emailVal));
 								setEmail(emailVal);
 								setContactUsResponseMessage();
+								setContactUsErrorMessage();
 							}}
 							onBlur={() => setEmailValidated(true)}
 							helperText={
@@ -251,11 +262,11 @@ const ContactForm = props => {
 							margin='dense'
 							InputLabelProps={{
 								shrink: true,
-								style: { fontWeight: '900', fontSize: '20px' }
+								style: { fontWeight: '900', fontSize: '20px' },
 							}}
 							variant='outlined'
 							inputProps={{
-								maxLength: 128
+								maxLength: 128,
 							}}
 						/>
 					</Col>
@@ -270,9 +281,10 @@ const ContactForm = props => {
 							style={{ margin: 8 }}
 							placeholder='Please tell us how we can help you.'
 							error={(formValidated || messageValidated) && message === ''}
-							onChange={e => {
+							onChange={(e) => {
 								setMessage(e.target.value);
 								setContactUsResponseMessage();
+								setContactUsErrorMessage();
 								// handleWordCount(e);
 							}}
 							onBlur={() => setMessageValidated(true)}
@@ -287,11 +299,11 @@ const ContactForm = props => {
 							margin='normal'
 							InputLabelProps={{
 								shrink: true,
-								style: { fontWeight: '900', fontSize: '20px' }
+								style: { fontWeight: '900', fontSize: '20px' },
 							}}
 							variant='outlined'
 							inputProps={{
-								maxLength: 2400
+								maxLength: 2400,
 							}}
 						/>
 
@@ -302,21 +314,23 @@ const ContactForm = props => {
 						</div> */}
 					</Col>
 				</Row>
-				{/* <div className='alert-success'>{contactUsResponseMessage}</div> */}
+
 				<div
 					className={`alert-success ${
 						contactUsResponseMessage ? 'alert' : ''
 					}`}>
 					<strong>{contactUsResponseMessage}</strong>
 				</div>
-
+				<div className={`alert-danger ${contactUsErrorMessage ? 'alert' : ''}`}>
+					<strong>{contactUsErrorMessage}</strong>
+				</div>
 				<Button
 					variant='success'
 					type='submit'
 					className={classes.btnGreen}
 					size='lg'
 					onClick={() => setFormValidated(true)}
-					// disabled={() => setFormValidated(false)}
+					// disabled={() => setFormValidated(true)}
 				>
 					SEND MESSAGE
 				</Button>
