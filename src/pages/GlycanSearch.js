@@ -60,14 +60,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: 16,
     //width: 1100
   },
-  simpleSearchButton: {
-    // marginTop: 16,
-    // marginBottom: 16,
-    // marginRight: 16,
-    height: "48px",
-    marginLeft: 16,
-    backgroundColor: "#2f78b7"
-  },
   submitButton: {
     marginTop: 16,
     marginBottom: 16,
@@ -150,18 +142,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: 16,
     width: "700px",
     height: "34px"
-  },
-  inputSimple: {
-    borderRadius: 4,
-    position: "left",
-    backgroundColor: theme.palette.background.paper,
-    fontSize: 16,
-    width: "100%",
-    height: "48px",
-    padding: "0px !important",
-  },
-  anchorSimple: {
-    paddingLeft: "15px !important",
   },
   inputt: {
     borderRadius: 4,
@@ -247,11 +227,6 @@ const useStyles = makeStyles(theme => ({
   select: {
     width: "200px",
     height: "34px"
-  },
-  selectSimple: {
-    //width: "200px",
-    //width: "100%",
-    height: "48px",
   },
   select1: {
     width: "700px",
