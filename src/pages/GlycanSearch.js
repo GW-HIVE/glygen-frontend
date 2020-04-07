@@ -290,9 +290,11 @@ const GlycanSearch = props => {
   const [glycanId, setGlycanId] = React.useState("");
   const [glyMassType, setGlyMassType] = React.useState("Native");
   const [glyMass, setGlyMass] = React.useState([149, 6751]);
+  const [glyMassInput, setGlyMassInput] = React.useState([149, 6751]);
   const [glyMassRange, setGlyMassRange] = React.useState([149, 6751]);
   const [glyNumSugars, setGlyNumSugars] = React.useState([1, 37]);
   const [glyNumSugarsRange, setGlyNumSugarsRange] = React.useState([1, 37]);
+  const [glyNumSugarsInput, setGlyNumSugarsInput] = React.useState([1, 37]);
   const [glyOrganisms, setGlyOrganisms] = React.useState([]);
   const [glyOrgOperation, setGlyOrgOperation] = React.useState("or");
   const [glyType, setGlyType] = React.useState("");
@@ -312,13 +314,6 @@ const GlycanSearch = props => {
 
   function glyCompChange(glyComp) {
     setGlyCompData(glyComp);
-  }
-
-  function glyNumSugarsChange(sugars) {
-    setGlyNumSugars(sugars);
-  }
-  function glyMassChange(glyMass) {
-    setGlyMass(glyMass);
   }
 
   const glyOrgOperationOnChange = event => {
@@ -365,6 +360,7 @@ const GlycanSearch = props => {
     }
 
     setGlyMassRange([minRange, maxRange]);
+    setGlyMassInput([minval, maxval]);
     setGlyMass([minval, maxval]);
   };
 
@@ -483,7 +479,19 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
         Math.floor(initData.glycan_mass.native.min),
         Math.ceil(initData.glycan_mass.native.max)
       ]);
+      setGlyMassInput([
+        Math.floor(initData.glycan_mass.native.min),
+        Math.ceil(initData.glycan_mass.native.max)
+      ]);
       setGlyNumSugarsRange([
+        initData.number_monosaccharides.min,
+        initData.number_monosaccharides.max
+      ]);
+      setGlyNumSugars([
+        initData.number_monosaccharides.min,
+        initData.number_monosaccharides.max
+      ]);
+      setGlyNumSugarsInput([
         initData.number_monosaccharides.min,
         initData.number_monosaccharides.max
       ]);
@@ -581,7 +589,19 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 ]
                 : [data.query.mass.min, data.query.mass.max]
             );
-
+            setGlyMassInput(
+              data.query.mass === undefined
+                ? data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
+                ? [
+                  Math.floor(initData.glycan_mass.native.min),
+                  Math.ceil(initData.glycan_mass.native.max)
+                ]
+                : [
+                  Math.floor(initData.glycan_mass.permethylated.min),
+                  Math.ceil(initData.glycan_mass.permethylated.max)
+                ]
+                : [data.query.mass.min, data.query.mass.max]
+            );
             setGlyType(
               data.query.glycan_type === undefined ? "" : data.query.glycan_type
             );
@@ -596,6 +616,17 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 : data.query.organism.organism_list
             );
             setGlyNumSugars(
+              data.query.number_monosaccharides === undefined
+                ? [
+                    initData.number_monosaccharides.min,
+                    initData.number_monosaccharides.max
+                  ]
+                : [
+                    data.query.number_monosaccharides.min,
+                    data.query.number_monosaccharides.max
+                  ]
+            );
+            setGlyNumSugarsInput(
               data.query.number_monosaccharides === undefined
                 ? [
                     initData.number_monosaccharides.min,
@@ -865,6 +896,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
       initData.number_monosaccharides.min,
       initData.number_monosaccharides.max
     ]);
+    setGlyNumSugarsInput([
+      initData.number_monosaccharides.min,
+      initData.number_monosaccharides.max
+    ]);
     setGlyOrganisms([]);
     setGlySubTypeIsHidden(true);
   };
@@ -1034,8 +1069,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                         step={10}
                         min={glyMassRange[0]}
                         max={glyMassRange[1]}
-                        inputValue={glyMass}
-                        setInputValue={glyMassChange}
+                        inputValue={glyMassInput}
+                        setInputValue={setGlyMassInput}
+                        inputValueSlider={glyMass}
+                        setSliderInputValue={setGlyMass}
                       />
                     </Grid>
                     <Grid item>
@@ -1095,8 +1132,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                     step={1}
                     min={glyNumSugarsRange[0]}
                     max={glyNumSugarsRange[1]}
-                    inputValue={glyNumSugars}
-                    setInputValue={glyNumSugarsChange}
+                    inputValue={glyNumSugarsInput}
+                    setInputValue={setGlyNumSugarsInput}
+                    inputValueSlider={glyNumSugars}
+                    setSliderInputValue={setGlyNumSugars}
                   />
                 </div>
                 <div className={classes.margin}>
