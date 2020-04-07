@@ -21,19 +21,6 @@ const useStyles = makeStyles((theme) =>
 			margin: theme.spacing(1),
 			minWidth: 120,
 		},
-		selectEmpty: {
-			marginTop: theme.spacing(2),
-		},
-		btnGreen: {
-			background: '#60ba4b',
-			border: 'solid 1px #60ba4b',
-			color: '#fff',
-			margin: '20px 0',
-			'&:hover': {
-				background: '#1d9901',
-				border: 'solid 1px #1d9901',
-			},
-		},
 	})
 );
 
@@ -107,6 +94,8 @@ const ContactForm = (props) => {
 		setMessageValidated(false);
 		setSubject('general');
 	};
+
+	// Allows to type in only text and "-".
 	const onlyText = (e) => {
 		e.target.value = e.target.value.replace(/[^a-zA-Z-]/g, '');
 	};
@@ -327,10 +316,26 @@ const ContactForm = (props) => {
 				<Button
 					variant='success'
 					type='submit'
-					className={classes.btnGreen}
+					className={` ${
+						!fNameValidated ||
+						!lNameValidated ||
+						!emailValidated ||
+						!validEmail ||
+						!messageValidated
+							? 'disabled'
+							: ''
+					}`}
 					size='lg'
 					onClick={() => setFormValidated(true)}
-					// disabled={() => setFormValidated(true)}
+					// disabled={formValidated}
+					disabled={
+						!fNameValidated ||
+						!lNameValidated ||
+						!emailValidated ||
+						!validEmail ||
+						!messageValidated
+					}
+					// .no-drop {cursor: no-drop;}
 				>
 					SEND MESSAGE
 				</Button>
@@ -347,14 +352,3 @@ const ContactForm = (props) => {
 	);
 };
 export default ContactForm;
-
-// var self = this;
-// axios.get('/url')
-//  .then(function (response) {
-//    console.log(response);
-//    self.setState({events: response.data})
-//  })
-// .catch(function (error) {
-//    console.log(error);
-// });
-// https://stackoverflow.com/questions/41194866/how-to-set-state-of-response-from-axios-in-react
