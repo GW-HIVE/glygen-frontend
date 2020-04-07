@@ -306,18 +306,6 @@ const GlycanSearch = props => {
   const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
   const [pageLoading, setPageLoading] = React.useState(false);
 
-  const glySimpleSearchCategoryOnChange = event => {
-    setGlySimpleSearchCategory(event.target.value);
-  };
-
-  const glySimpleSearchTermOnChange = event => {
-    setGlySimpleSearchTerm(event.target.value);
-  };
-
-  function glySimpleSearchTermChange(term) {
-    setGlySimpleSearchTerm(term);
-  }
-
   function glyOrgChange(org) {
     setGlyOrganisms(org);
   }
@@ -913,10 +901,9 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                     simpleSearchTerm = {glySimpleSearchTerm}
                     simple_search_category = {initData.simple_search_category}
                     simple_search = {initData.simple_search}
-                    simpleSearchCategoryOnChange = {glySimpleSearchCategoryOnChange}
-                    simpleSearchTermOnChange = {glySimpleSearchTermOnChange}
-                    simpleSearchTermChange = {glySimpleSearchTermChange}
                     searchSimpleclick = {searchGlycanSimpleclick}
+                    setSimpleSearchCategory = {setGlySimpleSearchCategory}
+                    setSimpleSearchTerm = {setGlySimpleSearchTerm}
                   />}
                 </Container>
               </Tab>

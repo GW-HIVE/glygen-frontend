@@ -45,6 +45,14 @@ export default function SimpleSearchControl(props) {
 
  const classes = useStyles();
 
+ const simpleSearchCategoryOnChange = event => {
+    props.setSimpleSearchCategory(event.target.value);
+  };
+
+  const simpleSearchTermOnChange = event => {
+    props.setSimpleSearchTerm(event.target.value);
+  };
+
   return (
     <div>
       <Grid container spacing={5} justify="center">
@@ -53,7 +61,7 @@ export default function SimpleSearchControl(props) {
             <InputLabel className={classes.label3}>Category</InputLabel>
             <Select
               value={props.simpleSearchCategory}
-              onChange={props.simpleSearchCategoryOnChange}
+              onChange={simpleSearchCategoryOnChange}
               highlight={false}
               defaultValue="any"
               classes={{
@@ -81,7 +89,7 @@ export default function SimpleSearchControl(props) {
                 : ""
             }
             value={props.simpleSearchTerm}
-            onChange={props.simpleSearchTermOnChange}
+            onChange={simpleSearchTermOnChange}
           />
           <Row>
             {/* <Col lg="6"> */}
@@ -93,7 +101,7 @@ export default function SimpleSearchControl(props) {
                     <a
                       href="javascript:void(0)"
                       onClick={() => {
-                        props.simpleSearchTermChange(key.trim().replace(",", ""));
+                        props.setSimpleSearchTerm(key.trim().replace(",", ""));
                       }}
                     >
                       {key}
@@ -137,7 +145,6 @@ SimpleSearchControl.propTypes = {
   simple_search_category: PropTypes.array,
   simple_search: PropTypes.object,
   searchSimpleclick: PropTypes.func,
-  simpleSearchTermOnChange: PropTypes.func,
-  simpleSearchTermChange: PropTypes.func,
-  simpleSearchCategoryOnChange: PropTypes.func
+  setGlySimpleSearchCategory: PropTypes.func,
+  setGlySimpleSearchTerm: PropTypes.func,
 };
