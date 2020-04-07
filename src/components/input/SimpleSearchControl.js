@@ -115,6 +115,7 @@ export default function SimpleSearchControl(props) {
         <Grid item className="col-sm-2">
           <Button
             className={classes.simpleSearchButton}
+            disabled={props.simpleSearchTerm.trim() === ""}
             variant="primary"
             size="lg"
             onClick={props.searchSimpleclick}
