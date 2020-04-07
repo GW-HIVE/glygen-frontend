@@ -7,13 +7,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
-import { useState, useRef } from 'react';
+import { useState, useRef, useReducer } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
-// import NotInterestedIcon from '@material-ui/icons/NotInterested';
-
-// import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) =>
 	createStyles({
@@ -21,11 +18,47 @@ const useStyles = makeStyles((theme) =>
 			margin: theme.spacing(1),
 			minWidth: 120,
 		},
+		btnGreen: {
+			background: '#60ba4b',
+			border: 'solid 1px #60ba4b',
+			color: '#fff',
+			margin: '20px 0',
+			'&:hover': {
+				background: '#1d9901',
+				border: 'solid 1px #1d9901',
+			},
+		},
+		// contactErrorMsg: {
+		// 	'& p': {
+		// 		maxWidth: '70% !important',
+		// 	},
+		// },
 	})
 );
 
 const ContactForm = (props) => {
 	const classes = useStyles();
+
+	// const [contactUsData, setContactUsData] = useReducer(
+	// 	(state, newState) => ({ ...state, ...newState }),
+	// 	{
+	// 		fname: '',
+	// 		lname: '',
+	// 		email: '',
+	// 		message: '',
+	// 	}
+	// );
+
+	// const [contactUsValidated, setContactUsValidated] = useReducer(
+	// 	(state, newState) => ({ ...state, ...newState }),
+	// 	{
+	// 		fname: false,
+	// 		lname: false,
+	// 		email: false,
+	// 		message: false,
+	// 		form: false,
+	// 	}
+	// );
 
 	const [fname, setFName] = useState('');
 	const [lname, setLName] = useState('');
@@ -42,10 +75,9 @@ const ContactForm = (props) => {
 	const [contactUsResponseMessage, setContactUsResponseMessage] = useState('');
 
 	const [contactUsErrorMessage, setContactUsErrorMessage] = useState('');
-	// const [counterValue, setCounterValue] = useState({
-	// 	chars_left: null,
-	// 	max_chars: 2400
-	// });
+
+	const messageMaxLen = 2400;
+	const [messageCharsLeft, setMessageCharsLeft] = useState(messageMaxLen);
 
 	const inputLabel = useRef(null);
 	const handleChange = (event) => {
@@ -53,12 +85,11 @@ const ContactForm = (props) => {
 		setSubject(event.target.value);
 	};
 
-	// const handleWordCount = e => {
-	// 	const charCount = e.target.value.length;
-	// 	const maxChar = counterValue.max_chars;
-	// 	const charLength = maxChar - charCount;
-	// 	setCounterValue({ chars_left: charLength });
-	// };
+	const handleWordCount = (e) => {
+		const charCount = e.target.value.length;
+		const charLength = messageMaxLen - charCount;
+		setMessageCharsLeft(charLength);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -71,6 +102,7 @@ const ContactForm = (props) => {
 			message: message,
 		};
 		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
+		// const url = `/auth/contact?query=${JSON.stringify(contactUsData)}`;
 
 		getTstJson(url)
 			.then((response) => {
@@ -82,6 +114,7 @@ const ContactForm = (props) => {
 				);
 			});
 
+		//setContactUsData({fname: '', lname: ''})
 		setFName('');
 		setLName('');
 		setEmail('');
@@ -217,7 +250,6 @@ const ContactForm = (props) => {
 								<MenuItem value={'shareData'}>Share my data</MenuItem>
 								<MenuItem value={'dataIssue'}>Report data issue</MenuItem>
 								<MenuItem value={'other'}>Other</MenuItem>
-								<MenuItem value={'testing'}>Testing</MenuItem>
 							</Select>
 						</FormControl>
 					</Col>
@@ -237,7 +269,7 @@ const ContactForm = (props) => {
 							onChange={(e) => {
 								var emailVal = e.target.value;
 								setValidEmail(validateEmail(emailVal));
-								setEmail(emailVal);
+								setEmail(emailVal); //setContactUsData({email: emailVal})
 								setContactUsResponseMessage();
 								setContactUsErrorMessage();
 							}}
@@ -269,18 +301,22 @@ const ContactForm = (props) => {
 							type='text'
 							style={{ margin: 8 }}
 							placeholder='Please tell us how we can help you.'
-							error={(formValidated || messageValidated) && message === ''}
+							error={
+								(formValidated || messageValidated) &&
+								(message === '' || message.length < 5 || message.length > 10)
+							}
 							onChange={(e) => {
 								setMessage(e.target.value);
 								setContactUsResponseMessage();
 								setContactUsErrorMessage();
-								// handleWordCount(e);
+								handleWordCount(e);
 							}}
 							onBlur={() => setMessageValidated(true)}
 							helperText={
 								(formValidated || messageValidated) &&
-								message === '' &&
-								'Please leave us a message.'
+								((message === '' && 'Please leave us a message.') ||
+									((message.length < 5 || message.length > messageMaxLen) &&
+										`Message should be between 5 to ${messageMaxLen} characters`))
 							}
 							fullWidth
 							multiline
@@ -292,15 +328,17 @@ const ContactForm = (props) => {
 							}}
 							variant='outlined'
 							inputProps={{
-								maxLength: 2400,
+								minlength: 5,
+								maxlength: messageMaxLen,
 							}}
+							// className={classes.contactErrorMsg}
 						/>
 
-						{/* <div>
-							Characters Left:{''}{' '}
-							{counterValue.chars_left || counterValue.max_chars}
-							{''}/{''}2400
-						</div> */}
+						<div
+							className={'text-right text-muted'}
+							style={{ marginTop: '-5px' }}>
+							{messageCharsLeft}/{messageMaxLen}
+						</div>
 					</Col>
 				</Row>
 
@@ -315,26 +353,27 @@ const ContactForm = (props) => {
 				</div>
 				<Button
 					variant='success'
+					style={{ margin: '10px 0' }}
 					type='submit'
-					className={` ${
-						!fNameValidated ||
-						!lNameValidated ||
-						!emailValidated ||
-						!validEmail ||
-						!messageValidated
-							? 'disabled'
-							: ''
-					}`}
-					size='lg'
+					// className={`${
+					// 	!fNameValidated ||
+					// 	!lNameValidated ||
+					// 	!emailValidated ||
+					// 	!validEmail ||
+					// 	!messageValidated
+					// 		? 'disabled'
+					// 		: ''
+					// }`}
+					// size='lg'
 					onClick={() => setFormValidated(true)}
 					// disabled={formValidated}
-					disabled={
-						!fNameValidated ||
-						!lNameValidated ||
-						!emailValidated ||
-						!validEmail ||
-						!messageValidated
-					}
+					// disabled={
+					// 	!fNameValidated ||
+					// 	!lNameValidated ||
+					// 	!emailValidated ||
+					// 	!validEmail ||
+					// 	!messageValidated
+					// }
 					// .no-drop {cursor: no-drop;}
 				>
 					SEND MESSAGE
