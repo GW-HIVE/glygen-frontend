@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
-import { useState, useRef} from 'react';
+import { useState, useRef, useReducer } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
@@ -18,21 +18,37 @@ const useStyles = makeStyles((theme) =>
 			margin: theme.spacing(1),
 			minWidth: 120,
 		},
+		// btnGreen: {
+		// 	background: '#60ba4b',
+		// 	border: 'solid 1px #60ba4b',
+		// 	color: '#fff',
+		// 	margin: '20px 0',
+		// 	'&:hover': {
+		// 		background: '#1d9901',
+		// 		border: 'solid 1px #1d9901',
+		// 	},
+		// },
+		// contactErrorMsg: {
+		// 	'& p': {
+		// 		maxWidth: '70% !important',
+		// 	},
+		// },
 	})
 );
 
 const ContactForm = (props) => {
 	const classes = useStyles();
 
-	// const [contactUsData, setContactUsData] = useReducer(
-	// 	(state, newState) => ({ ...state, ...newState }),
-	// 	{
-	// 		fname: '',
-	// 		lname: '',
-	// 		email: '',
-	// 		message: '',
-	// 	}
-	// );
+	const [contactUsData, setContactUsData] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{
+			fname: '',
+			lname: '',
+			email: '',
+			subject: '',
+			message: '',
+		}
+	);
 
 	// const [contactUsValidated, setContactUsValidated] = useReducer(
 	// 	(state, newState) => ({ ...state, ...newState }),
@@ -45,10 +61,10 @@ const ContactForm = (props) => {
 	// 	}
 	// );
 
-	const [fname, setFName] = useState('');
-	const [lname, setLName] = useState('');
-	const [subject, setSubject] = useState('general');
-	const [email, setEmail] = useState('');
+	// const [fname, setFName] = useState('');
+	// const [lname, setLName] = useState('');
+	// const [subject, setSubject] = useState('general');
+	// const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
 
 	const [fNameValidated, setFNameValidated] = useState(false);
@@ -67,7 +83,9 @@ const ContactForm = (props) => {
 	const inputLabel = useRef(null);
 	const handleChange = (event) => {
 		setContactUsResponseMessage();
-		setSubject(event.target.value);
+		var subjectVal = event.target.value;
+		setContactUsData({ fname: subjectVal });
+		// setSubject(event.target.value);
 	};
 
 	const handleWordCount = (e) => {
@@ -79,15 +97,15 @@ const ContactForm = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		const formData = {
-			fname: fname,
-			lname: lname,
-			email: email,
-			subject: subject,
-			message: message,
-		};
-		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
-		// const url = `/auth/contact?query=${JSON.stringify(contactUsData)}`;
+		// const formData = {
+		// 	fname: fname,
+		// 	lname: lname,
+		// 	email: email,
+		// 	subject: subject,
+		// 	message: message,
+		// };
+		// const url = `/auth/contact?query=${JSON.stringify(formData)}`;
+		const url = `/auth/contact?query=${JSON.stringify(contactUsData)}`;
 
 		getTstJson(url)
 			.then((response) => {
@@ -100,18 +118,19 @@ const ContactForm = (props) => {
 			});
 
 		//setContactUsData({fname: '', lname: ''})
-		setFName('');
-		setLName('');
-		setEmail('');
-		setSubject('');
+		setContactUsData({ fname: '' });
+		setContactUsData({ lname: '' });
+		setContactUsData({ email: '' });
+		setContactUsData({ subject: '' });
+		// setSubject('');
 		setMessage('');
-		setMessageCharsLeft(`${messageMaxLen }`);
 		setFormValidated(false);
 		setFNameValidated(false);
 		setLNameValidated(false);
 		setEmailValidated(false);
 		setMessageValidated(false);
-		setSubject('general');
+		setContactUsData({ subject: 'general' });
+		// setSubject('general');
 	};
 
 	// Allows to type in only text and "-".
@@ -133,18 +152,23 @@ const ContactForm = (props) => {
 							label='First name'
 							type='text'
 							name='fname'
-							value={fname}
+							value={setContactUsData.fname}
 							placeholder='Please enter your first name.'
-							error={(formValidated || fNameValidated) && fname === ''}
+							error={
+								(formValidated || fNameValidated) &&
+								setContactUsData.fname === ''
+							}
 							onChange={(e) => {
-								setFName(e.target.value);
+								var fnameVal = e.target.value;
+								setContactUsData({ fname: fnameVal });
+								// setFName(fnameVal);
 								setContactUsResponseMessage();
 								setContactUsErrorMessage();
 							}}
 							onBlur={() => setFNameValidated(true)}
 							helperText={
 								(formValidated || fNameValidated) &&
-								fname === '' &&
+								setContactUsData.fname === '' &&
 								'First name is required.'
 							}
 							onInput={(e) => onlyText(e)}
@@ -171,18 +195,24 @@ const ContactForm = (props) => {
 							label='Last name'
 							type='text'
 							name='lname'
-							value={lname}
+							value={setContactUsData.lname}
 							placeholder='Please enter your last name.'
-							error={(formValidated || lNameValidated) && lname === ''}
+							// defaultValue={lname}
+							error={
+								(formValidated || lNameValidated) &&
+								setContactUsData.lname === ''
+							}
 							onChange={(e) => {
-								setLName(e.target.value);
+								var lnameVal = e.target.value;
+								setContactUsData({ lname: lnameVal });
+								// setLName(e.target.value);
 								setContactUsResponseMessage();
 								setContactUsErrorMessage();
 							}}
 							onBlur={() => setLNameValidated(true)}
 							helperText={
 								(formValidated || lNameValidated) &&
-								lname === '' &&
+								setContactUsData.lname === '' &&
 								'Last name is required.'
 							}
 							onInput={(e) => onlyText(e)}
@@ -215,7 +245,7 @@ const ContactForm = (props) => {
 							<Select
 								labelId='demo-simple-select-outlined-label'
 								id='demo-simple-select-outlined'
-								value={subject}
+								value={setContactUsData.subject}
 								fullWidth
 								margin='dense'
 								onChange={handleChange}
@@ -239,14 +269,15 @@ const ContactForm = (props) => {
 							label='Email'
 							type='email'
 							name='email'
-							value={email}
+							value={setContactUsData.email}
 							style={{ margin: 8 }}
 							placeholder='example@domain.com'
 							error={(formValidated || emailValidated) && !validEmail}
 							onChange={(e) => {
 								var emailVal = e.target.value;
 								setValidEmail(validateEmail(emailVal));
-								setEmail(emailVal); //setContactUsData({email: emailVal})
+								// setEmail(emailVal);
+								setContactUsData({ email: emailVal });
 								setContactUsResponseMessage();
 								setContactUsErrorMessage();
 							}}
@@ -308,7 +339,9 @@ const ContactForm = (props) => {
 								minlength: 5,
 								maxlength: messageMaxLen,
 							}}
+							// className={classes.contactErrorMsg}
 						/>
+
 						<div
 							className={'text-right text-muted'}
 							style={{ marginTop: '-5px' }}>
