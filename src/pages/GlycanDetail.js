@@ -17,6 +17,8 @@ import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 
+import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
+
 const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
@@ -291,6 +293,7 @@ const GlycanDetail = (props) => {
 							})}
 							{getMeta('glycanDetail')}
 						</Helmet>
+						<ToggleCardlTemplate />
 						{/* general */}
 						<Accordion
 							defaultActiveKey='0'

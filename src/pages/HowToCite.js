@@ -11,9 +11,6 @@ import howToCiteData from '../data/json/howToCiteData';
 import { Row, Col } from 'react-bootstrap';
 import Sidebar from '../components/navigation/Sidebar';
 
-import '../css/detail.css';
-import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
-
 const HowToCite = (props) => {
 	const vertHeadHowToCite = {
 		h5VerticalText: 'CITATIONS',
@@ -47,8 +44,6 @@ const HowToCite = (props) => {
 				</Col>
 				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
 					<VerticalHeadingLogo post={vertHeadHowToCite} />
-
-					<ToggleCardlTemplate />
 					<PanelHowToCite id='howToCite' data={howToCiteData.howToCite} />
 					<PanelHowToCite id='ourPapers' data={howToCiteData.ourPapers} />
 					<PanelHowToCite

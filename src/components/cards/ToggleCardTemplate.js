@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Container from '@material-ui/core/Container';
+import React from 'react';
+// import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -23,13 +23,13 @@ export default function ToggleCardlTemplate() {
 	const expandIcon = !collapsed ? (
 		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
 	) : (
-		<ExpandMoreIcon className='sidebar-item-expand-arrow' />
+		<ExpandMoreIcon className='expand-arrow' />
 	);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Container maxWidth='xl' className='ggContainer'>
+			{/* <Container maxWidth='xl' className='ggContainer'> */}
 				<Accordion
 					defaultActiveKey='0'
 					className='panel-width'
@@ -39,7 +39,7 @@ export default function ToggleCardlTemplate() {
 							as={Card.Header}
 							eventKey='0'
 							onClick={() => toggleCollapse()}
-							className='panelHeadBgr panelHeadText btn-up5'>
+							className='panelHeadBgr panelHeadText arrow'>
 							<h3>ToggleCardlTemplate</h3>
 							<span className={'text-right'}>{expandIcon}</span>
 						</Accordion.Toggle>
@@ -50,7 +50,7 @@ export default function ToggleCardlTemplate() {
 						</Accordion.Collapse>
 					</Card>
 				</Accordion>
-			</Container>
+			{/* </Container> */}
 		</React.Fragment>
 	);
 }
