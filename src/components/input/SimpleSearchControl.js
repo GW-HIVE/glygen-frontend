@@ -17,8 +17,9 @@ const useStyles = makeStyles(theme => ({
     // marginTop: 16,
     // marginBottom: 16,
     // marginRight: 16,
-    height: "48px",
+    //height: "48px",
     marginLeft: 16,
+    // marginRight: 16,
     backgroundColor: "#2f78b7"
   },
   inputSimple: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     fontSize: 16,
     width: "100%",
-    height: "48px",
+    height: "45px",
     padding: "0px !important",
   },
   anchorSimple: {
@@ -36,8 +37,13 @@ const useStyles = makeStyles(theme => ({
   selectSimple: {
     //width: "200px",
     //width: "100%",
-    height: "48px",
+    height: "45px",
+  },
+  simpleContainer: {
+    paddingLeft: "40px !important",
+    paddingBottom: "30px !important",
   }
+
 }));
 
 
@@ -55,7 +61,7 @@ export default function SimpleSearchControl(props) {
 
   return (
     <div>
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={3} className={classes.simpleContainer} justify="center">
         <Grid item className="col-sm-3">
           <FormControl variant="outlined" fullWidth>
             <InputLabel className={classes.label3}>Category</InputLabel>
@@ -114,17 +120,17 @@ export default function SimpleSearchControl(props) {
         </Grid>
         <Grid item className="col-sm-2">
           <Button
-            className={classes.simpleSearchButton}
+            className={classes.simpleSearchButton  + " gg-btn"}
             disabled={props.simpleSearchTerm.trim() === ""}
-            variant="primary"
-            size="lg"
+            // variant="primary"
+            // size="lg"
             onClick={props.searchSimpleclick}
           >
             Search
           </Button>
         </Grid>
       </Grid>
-      <Grid container spacing={5} justify="center">
+      <Grid container spacing={3} justify="center">
         <Grid item>
           <div class="col-md-12 col-sm-12 col-xs-12" justifyContent="center">
             *{" "}

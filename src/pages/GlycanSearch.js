@@ -952,17 +952,13 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
               <Container className={classes.con}>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.clearButton}
-                    variant="secondary"
-                    size="lg"
+                    className={classes.clearButton  + " gg-btn"}
                     onClick={clearGlycan}
                   >
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.submitButton}
-                    variant="primary"
-                    size="lg"
+                    className={classes.submitButton  + " gg-btn"}
                     onClick={searchGlycanClick}
                   >
                     Search Glycan
@@ -1532,17 +1528,13 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 </FormControl>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.clearButton}
-                    variant="secondary"
-                    size="lg"
+                    className={classes.clearButton  + " gg-btn"}
                     onClick={clearGlycan}
                   >
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.submitButton}
-                    variant="primary"
-                    size="lg"
+                    className={classes.submitButton  + " gg-btn"}
                     onClick={searchGlycanClick}
                   >
                     Search Glycan

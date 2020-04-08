@@ -11,6 +11,7 @@
 	/* --dark-blue-1: #215b9e; */
 	/* --dark-blue-2: #175385; */
 }
+
 .App {
 	height: 100vh;
 	display: flex;
@@ -254,6 +255,21 @@ hr {
 
 .disabled {
 	cursor: no-drop !important;
+}
+
+.gg-btn {
+	height: 45px;
+}
+
+.gg-btn.disabled, .gg-btn:disabled,
+.gg-btn.disabled.hover, .gg-btn:disabled:hover {
+	cursor: no-drop !important;
+	background-color: #2e78b7 !important;
+}
+
+.gg-btn.hover, .gg-btn:hover,
+.gg-btn.focus, .gg-btn:focus  {
+	background-color: #204d74 !important;
 }
 
 /* =========================================
