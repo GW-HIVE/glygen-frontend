@@ -158,8 +158,10 @@ const GlycanList = props => {
   return (
     <>
       <Helmet>
-        <title>{getTitle.glycanList.title}</title>
-        {getMeta(getTitle.glycanList)}
+        {/* <title>{getTitle.glycanList.title}</title>
+        {getMeta(getTitle.glycanList)} */}
+        {getTitle("glycanList")}
+        {getTitle("glycanList")}
       </Helmet>
       <section style={{ paddingTop: "20px" }}>
         <GlycanQuerySummary data={query} onModifySearch={handleModifySearch} />
