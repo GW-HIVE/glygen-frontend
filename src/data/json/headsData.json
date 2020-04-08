@@ -25,7 +25,7 @@
 			}
 		]
 	},
-	"nowToCite": {
+	"howToCite": {
 		"title": "How To Cite | Publications and Citations | glygen.org",
 		"meta": [
 			{
@@ -196,7 +196,7 @@
 		]
 	},
 	"glycanDetail": {
-		"title": "Glycan Details | Details for Selected Glycan | glygen.org",
+		"title": "Glycan Details | Details for #glytoucan_ac | glygen.org",
 		"meta": [
 			{
 				"name": "description",

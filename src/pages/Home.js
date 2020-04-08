@@ -20,7 +20,7 @@ import enzymeImg from '../images/home/enzyme.png';
 // import featuredImg from '../images/home/featuredImg-7.jpg';
 import glycanImg from '../images/home/glycan.png';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import { getSystemData } from '../data';
 
 const mainFeaturedCard = {
@@ -131,8 +131,8 @@ export default function Home() {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{head.home.title}</title>
-				{getMeta(head.home)}
+				{getTitle("home")}
+				{getMeta("home")}
 			</Helmet>
 
 			<CssBaseline />

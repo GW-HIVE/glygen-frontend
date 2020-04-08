@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import HorizontalHeading from '../components/headings/HorizontalHeading';
@@ -18,8 +18,10 @@ export default function Feedback() {
 	return (
 		<>
 			<Helmet>
-				<title>{head.feedback.title}</title>
-				{getMeta(head.feedback)}
+				{/* <title>{head.feedback.title}</title>
+				{getMeta(head.feedback)} */}
+				{getTitle('feedback')}
+				{getMeta('feedback')}
 			</Helmet>
 
 			<CssBaseline />

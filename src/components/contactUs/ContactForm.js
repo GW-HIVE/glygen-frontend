@@ -280,7 +280,7 @@ const ContactForm = (props) => {
 							placeholder='Please tell us how we can help you.'
 							error={
 								(formValidated || messageValidated) &&
-								(message === '' || message.length < 5 || message.length > 10)
+								(message === '' || message.length < 5 || message.length > messageMaxLen)
 							}
 							onChange={(e) => {
 								setMessage(e.target.value);

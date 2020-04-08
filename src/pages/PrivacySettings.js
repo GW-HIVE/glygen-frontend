@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
@@ -8,12 +8,12 @@ import { Row, Col } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import { useState } from 'react';
 
-const PrivacySettings = props => {
+const PrivacySettings = (props) => {
 	const vertHeadDisclaimer = {
 		h5VerticalText: 'Settings',
 		h2textTop: 'Manage',
 		h2textBottom: 'Your',
-		h2textBottomStrongAfter: 'Privacy Settings'
+		h2textBottomStrongAfter: 'Privacy Settings',
 	};
 
 	const [enabled, setEnabled] = useState(false);
@@ -21,8 +21,10 @@ const PrivacySettings = props => {
 	return (
 		<>
 			<Helmet>
-				<title>{head.privacySettings.title}</title>
-				{getMeta(head.privacySettings)}
+				{/* <title>{head.privacySettings.title}</title>
+				{getMeta(head.privacySettings)} */}
+				{getTitle('privacySettings')}
+				{getMeta('privacySettings')}
 			</Helmet>
 
 			<CssBaseline />

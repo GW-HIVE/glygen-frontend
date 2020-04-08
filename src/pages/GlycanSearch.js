@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { getJson } from "../data/api";
 import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {
@@ -908,8 +908,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     <>
       <h2 className={classes.headerTitle}>Glycan Search</h2>
       <Helmet >
-       <title>{head.glycanSearch.title}</title>
-       {getMeta(head.glycanSearch)}
+       {/* <title>{head.glycanSearch.title}</title>
+       {getMeta(head.glycanSearch)} */}
+        {getTitle('glycanSearch')}
+				{getMeta('glycanSearch')}
       </Helmet> 
 
       <div className="lander">
