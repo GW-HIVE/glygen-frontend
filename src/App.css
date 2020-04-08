@@ -114,30 +114,6 @@ p {
 	color: var(--gg-light-blue) !important;
 }
 
-.panelHeadBgr {
-	background: #f0f0f0 !important;
-}
-.panelHeadBgr h3,
-.panelHeadBgr h4 {
-	margin: 0 auto;
-	margin-left: 0;
-	/* padding: 10px 0; */
-}
-
-.panelHeadText {
-	color: #1d9901 !important;
-	position: relative;
-	display: flex;
-	justify-content: space-between;
-}
-.panelTable {
-	min-width: 650px;
-}
-.panel-width {
-	width: 90% !important;
-	margin: 0 auto;
-	overflow: auto;
-}
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
 	background-color: #e2e8ef;
@@ -157,13 +133,56 @@ p {
 	overflow: auto;
 	margin-bottom: 20px;
 }
+.summary-table-col {
+	white-space: nowrap;
+}
+/* ========================================
+            Panels
+==========================================*/
+
+.panelHeadBgr {
+	background: #f0f0f0 !important;
+}
+.panelHeadBgr h3,
+.panelHeadBgr h4 {
+	margin: 0 auto;
+}
+.panelHeadText {
+	color: #1d9901 !important;
+	position: relative;
+}
+.arrow {
+	display: flex;
+	justify-content: space-between;
+}
+.arrow h3,
+.arrow h4 {
+	margin-left: 0;
+	/* padding: 10px 0; */
+}
+.expand-arrow {
+	font-size: 2.2rem !important;
+	/* margin: 10px 0; */
+}
+
+.expand-arrow-expanded {
+	font-weight: 900;
+	/* margin: 10px 0; */
+}
+
+.panelTable {
+	min-width: 650px;
+}
+.panel-width {
+	width: 90% !important;
+	margin: 0 auto;
+	overflow: auto;
+}
 .text-indent div {
 	text-indent: -50px;
 	padding-left: 50px;
 }
-.summary-table-col {
-	white-space: nowrap;
-}
+
 /* ========================================
              Cards
 ==========================================*/
@@ -198,7 +217,9 @@ hr {
 .content-box-md {
 	padding: 40px 0;
 }
-
+.content-box-sm {
+	padding: 20px 0;
+}
 /* =========================================
         Vertical/Horizontal Headings
 ============================================ */
@@ -250,6 +271,7 @@ hr {
 .vert-head-logo-container {
 	padding: 0 60px !important;
 }
+
 /* =========================================
         Buttons
 ============================================ */

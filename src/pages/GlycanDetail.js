@@ -258,7 +258,7 @@ const GlycanDetail = (props) => {
 				</Col>
 
 				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
-					<h2 className='page-heading'>
+					<h1 className='page-heading'>
 						<center>
 							<strong>
 								Details for glycan
@@ -267,7 +267,7 @@ const GlycanDetail = (props) => {
 								)}
 							</strong>
 						</center>
-					</h2>
+					</h1>
 					<div class='row'>
 						<div class='dropdown gg-download text-right'>
 							<button

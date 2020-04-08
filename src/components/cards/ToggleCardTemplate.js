@@ -40,7 +40,7 @@ export default function ToggleCardlTemplate() {
 							eventKey='0'
 							onClick={() => toggleCollapse()}
 							className='panelHeadBgr panelHeadText arrow'>
-							<h3>ToggleCardlTemplate</h3>
+							<h4>ToggleCardlTemplate</h4>
 							<span className={'text-right'}>{expandIcon}</span>
 						</Accordion.Toggle>
 						<Accordion.Collapse eventKey='0' in={!collapsed}>

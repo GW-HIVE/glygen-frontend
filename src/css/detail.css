@@ -95,13 +95,3 @@ legend {
   transition: 0.3s ease-in-out;
   z-index: 99999;
 }
-
-.expand-arrow {
-  font-size: 2.2rem !important;
-  /* margin: 10px 0; */
-}
-
-.expand-arrow-expanded {
-  font-weight: 900;
-  /* margin: 10px 0; */
-}
