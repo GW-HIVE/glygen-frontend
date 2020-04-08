@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     borderColor: "#FFFFFF",
-    width: "518px",
+    width: "558px",
   },
   tab: {
     borderRadius: 4,
