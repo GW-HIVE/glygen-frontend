@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import { getTitle, getMeta } from "../utils/head";
-import { useParams, Link } from "react-router-dom";
+import { getTitle } from "../utils/head";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
@@ -158,8 +158,6 @@ const GlycanList = props => {
   return (
     <>
       <Helmet>
-        {/* <title>{getTitle.glycanList.title}</title>
-        {getMeta(getTitle.glycanList)} */}
         {getTitle("glycanList")}
         {getTitle("glycanList")}
       </Helmet>
@@ -167,21 +165,6 @@ const GlycanList = props => {
         <GlycanQuerySummary data={query} onModifySearch={handleModifySearch} />
       </section>
       <section>
-        {/* <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to=
-        >
-          Edit Columns
-        </Button> */}
-
-        {/* <Link to={`/glycan-list/${id}/edit`}>
-          <button type="button" className="btn btn-primary">
-            Edit Columns
-          </button>
-        </Link> */}
-
         {selectedColumns && selectedColumns.length !== 0 && (
           <PaginatedTable
             trStyle={rowStyleFormat}
@@ -191,7 +174,6 @@ const GlycanList = props => {
             sizePerPage={sizePerPage}
             totalSize={totalSize}
             onTableChange={handleTableChange}
-            // ["csv", "json"]
             downloadButton={
               <DownloadButton
                 types={["csv", "json"]}
