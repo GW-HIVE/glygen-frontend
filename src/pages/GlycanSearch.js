@@ -4,12 +4,13 @@ import RangeInputSlider from "../components/input/RangeInputSlider";
 import AutoTextInput from "../components/input/AutoTextInput";
 import MultiselectTextInput from "../components/input/MultiselectTextInput";
 import CompositionSearchControl from "../components/input/CompositionSearchControl";
+import SimpleSearchControl from "../components/input/SimpleSearchControl";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { getJson } from "../data/api";
 import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import {
@@ -58,13 +59,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: 16,
     marginBottom: 16,
     //width: 1100
-  },
-  simpleSearchButton: {
-    // marginTop: 16,
-    // marginBottom: 16,
-    // marginRight: 16,
-    marginLeft: 16,
-    backgroundColor: "#2f78b7"
   },
   submitButton: {
     marginTop: 16,
@@ -149,14 +143,6 @@ const useStyles = makeStyles(theme => ({
     width: "700px",
     height: "34px"
   },
-  inputSimple: {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    fontSize: 16,
-    width: "400px",
-    height: "34px"
-  },
   inputt: {
     borderRadius: 4,
     position: "relative",
@@ -172,6 +158,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: 16,
     width: "700px",
     height: "74px"
+  },
+  tabs: {
+    borderColor: "#FFFFFF",
+    width: "558px",
   },
   tab: {
     borderRadius: 4,
@@ -198,10 +188,10 @@ const useStyles = makeStyles(theme => ({
     borderColor: "#80bdff",
     boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     width: "1000px",
-    height: "900px",
+    height: "300px",
     alignItems: "center",
     fontColor: "#2F78B7",
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
   },
   headerTitle: {
     color: "#2F78B7",
@@ -221,13 +211,14 @@ const useStyles = makeStyles(theme => ({
     width: "1000px",
     height: "1250px",
     alignItems: "center",
-    marginBottom: "80px"
+    marginBottom: "80px",
   },
   conSimple: {
-    // width: "1000px",
-    height: "1250px",
     alignItems: "center",
-    marginBottom: "80px",
+    // marginTop: "150px",
+    // marginBottom: "100px",
+    paddingTop: "100px",
+    //paddingBottom: "100px",
   },
   formControl: {
     // margin: theme.spacing(1),
@@ -294,12 +285,16 @@ const GlycanSearch = props => {
   const [initData, setInitData] = React.useState({});
   const classes = useStyles();
 
+  const [glySimpleSearchCategory, setGlySimpleSearchCategory] = React.useState("any");
+  const [glySimpleSearchTerm, setGlySimpleSearchTerm] = React.useState("");
   const [glycanId, setGlycanId] = React.useState("");
   const [glyMassType, setGlyMassType] = React.useState("Native");
   const [glyMass, setGlyMass] = React.useState([149, 6751]);
+  const [glyMassInput, setGlyMassInput] = React.useState([149, 6751]);
   const [glyMassRange, setGlyMassRange] = React.useState([149, 6751]);
   const [glyNumSugars, setGlyNumSugars] = React.useState([1, 37]);
   const [glyNumSugarsRange, setGlyNumSugarsRange] = React.useState([1, 37]);
+  const [glyNumSugarsInput, setGlyNumSugarsInput] = React.useState([1, 37]);
   const [glyOrganisms, setGlyOrganisms] = React.useState([]);
   const [glyOrgOperation, setGlyOrgOperation] = React.useState("or");
   const [glyType, setGlyType] = React.useState("");
@@ -313,21 +308,12 @@ const GlycanSearch = props => {
   const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
   const [pageLoading, setPageLoading] = React.useState(false);
 
-
-
   function glyOrgChange(org) {
     setGlyOrganisms(org);
   }
 
   function glyCompChange(glyComp) {
     setGlyCompData(glyComp);
-  }
-
-  function glyNumSugarsChange(sugars) {
-    setGlyNumSugars(sugars);
-  }
-  function glyMassChange(glyMass) {
-    setGlyMass(glyMass);
   }
 
   const glyOrgOperationOnChange = event => {
@@ -374,6 +360,7 @@ const GlycanSearch = props => {
     }
 
     setGlyMassRange([minRange, maxRange]);
+    setGlyMassInput([minval, maxval]);
     setGlyMass([minval, maxval]);
   };
 
@@ -451,6 +438,38 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     setPageLoading(true);
     getGlycanInit().then(response => {
       let initData = response.data;
+
+      let simpleSearchExamples = {};
+      for (var x = 0; x < initData.simple_search_category.length; x++) {
+        if (initData.simple_search_category[x].id === "enzyme") {
+          simpleSearchExamples[initData.simple_search_category[x].id] = {
+            "examples" : ["B4GALT1"],
+            "placeholder" : "Enter the enzyme"
+          }
+        } else if (initData.simple_search_category[x].id === "glycan"){
+          simpleSearchExamples[initData.simple_search_category[x].id] = {
+            "examples" : ["G17689DH"],
+            "placeholder" : "Enter the GlyTouCan Accession"
+          }
+        } else if (initData.simple_search_category[x].id === "organism"){
+          simpleSearchExamples[initData.simple_search_category[x].id] = {
+            "examples" : ["Homo sapiens"],
+            "placeholder" : "Enter the organism"
+          }
+        } else if (initData.simple_search_category[x].id === "protein"){
+          simpleSearchExamples[initData.simple_search_category[x].id] = {
+            "examples" : ["P14210"],
+            "placeholder" : "Enter the UniProtKB Accession"
+          } 
+        } else if (initData.simple_search_category[x].id === "any"){
+          simpleSearchExamples[initData.simple_search_category[x].id] = {
+              "examples" : ["G17689DH, ", "P14210, ", "B4GALT1, ", "Homo sapiens"],
+              "placeholder" : "Enter the search term"
+            }          
+        }
+      }
+      initData.simple_search = simpleSearchExamples;
+
       setGlyMassType(initData.glycan_mass.native.name);
       setGlyMassRange([
         Math.floor(initData.glycan_mass.native.min),
@@ -460,7 +479,19 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
         Math.floor(initData.glycan_mass.native.min),
         Math.ceil(initData.glycan_mass.native.max)
       ]);
+      setGlyMassInput([
+        Math.floor(initData.glycan_mass.native.min),
+        Math.ceil(initData.glycan_mass.native.max)
+      ]);
       setGlyNumSugarsRange([
+        initData.number_monosaccharides.min,
+        initData.number_monosaccharides.max
+      ]);
+      setGlyNumSugars([
+        initData.number_monosaccharides.min,
+        initData.number_monosaccharides.max
+      ]);
+      setGlyNumSugarsInput([
         initData.number_monosaccharides.min,
         initData.number_monosaccharides.max
       ]);
@@ -507,6 +538,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
               setGlyCompData(queryCompData);
               setGlyActTabKey("composition_search")
 
+          } else if(data.query.query_type === "glycan_search_simple") {
+              setGlySimpleSearchCategory(data.query.term_category ? data.query.term_category : "any");
+              setGlySimpleSearchTerm(data.query.term ? data.query.term : "");
+              setGlyActTabKey("simple_search")
           } else {
             setGlycanId(
               data.query.glytoucan_ac === undefined ? "" : data.query.glytoucan_ac
@@ -554,7 +589,19 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 ]
                 : [data.query.mass.min, data.query.mass.max]
             );
-
+            setGlyMassInput(
+              data.query.mass === undefined
+                ? data.query.mass_type === undefined || data.query.mass_type === initData.glycan_mass.native.name
+                ? [
+                  Math.floor(initData.glycan_mass.native.min),
+                  Math.ceil(initData.glycan_mass.native.max)
+                ]
+                : [
+                  Math.floor(initData.glycan_mass.permethylated.min),
+                  Math.ceil(initData.glycan_mass.permethylated.max)
+                ]
+                : [data.query.mass.min, data.query.mass.max]
+            );
             setGlyType(
               data.query.glycan_type === undefined ? "" : data.query.glycan_type
             );
@@ -569,6 +616,17 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 : data.query.organism.organism_list
             );
             setGlyNumSugars(
+              data.query.number_monosaccharides === undefined
+                ? [
+                    initData.number_monosaccharides.min,
+                    initData.number_monosaccharides.max
+                  ]
+                : [
+                    data.query.number_monosaccharides.min,
+                    data.query.number_monosaccharides.max
+                  ]
+            );
+            setGlyNumSugarsInput(
               data.query.number_monosaccharides === undefined
                 ? [
                     initData.number_monosaccharides.min,
@@ -699,6 +757,20 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     return formjson;
   }
 
+  const glycanSimpleSearch = () => {
+    var formjsonSimple = {
+      "operation": "AND",
+      query_type: "glycan_search_simple",
+      term: glySimpleSearchTerm,
+      term_category: glySimpleSearchCategory
+  };
+
+    //formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
+    var json = "query=" + JSON.stringify(formjsonSimple);
+    const url = "/glycan/search_simple?" + json;
+    return getJson(url);
+  };
+
   const glycanSearch = () => {
     let formObject = searchjson(
       "search_glycan",
@@ -794,6 +866,21 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     });
   };
 
+  const searchGlycanSimpleclick = () => {
+    setPageLoading(true);
+    glycanSimpleSearch().then(response => {
+      if (response.data["list_id"] !== "") {
+        props.history.push("/glycan-list/" + response.data["list_id"]);
+        setPageLoading(false);
+      } else {
+        alert("No Result Found.");
+        setPageLoading(false);
+      }
+    }).catch(function(error){
+        console.log(error);
+    });
+  };
+
   const clearGlycan = () => {
     setGlycanId("");
     setGlyProt("");
@@ -809,6 +896,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
       initData.number_monosaccharides.min,
       initData.number_monosaccharides.max
     ]);
+    setGlyNumSugarsInput([
+      initData.number_monosaccharides.min,
+      initData.number_monosaccharides.max
+    ]);
     setGlyOrganisms([]);
     setGlySubTypeIsHidden(true);
   };
@@ -817,8 +908,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
     <>
       <h2 className={classes.headerTitle}>Glycan Search</h2>
       <Helmet >
-       <title>{head.glycanSearch.title}</title>
-       {getMeta(head.glycanSearch)}
+       {/* <title>{head.glycanSearch.title}</title>
+       {getMeta(head.glycanSearch)} */}
+        {getTitle('glycanSearch')}
+				{getMeta('glycanSearch')}
       </Helmet> 
 
       <div className="lander">
@@ -830,6 +923,7 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
          </div>
         }
           <Tabs defaultActiveKey="advanced_search" transition={false}
+            className={classes.tabs}
             activeKey={glyActTabKey} mountOnEnter = {true} unmountOnExit = {true} 
             onSelect={(key) => setGlyActTabKey(key)}
           >
@@ -839,59 +933,15 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
               title="Simple Search"
             >
               <Container className={classes.conSimple}>
-              <div className={classes.marginSimple}>
-                  <Grid container spacing={5} justify="center">
-                    <Grid item>
-                      <FormControl variant="outlined">
-                        <InputLabel className={classes.label3}>
-                          Category
-                        </InputLabel>
-                        <Select
-                          // value={glyMassType}
-                          onChange={glyMassTypeOnChange}
-                          highlight={false}
-                          defaultValue="any"
-                          classes={{
-                            outlined: classes.selectOutlined,
-                            root: 'select-menu', 
-                          }}
-                          className={classes.select}
-                          labelWidth={100}
-                        >
-                          {initData.simple_search_category &&
-                           initData.simple_search_category
-                              .sort()
-                              .map(key => (
-                                <MenuItem
-                                  value={key.id}
-                                >
-                                  {key.display}
-                                </MenuItem>
-                              ))}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item>
-                    <OutlinedInput
-                    className={classes.inputSimple}
-                    placeholder="Enter the search term"
-                    // value={glyPubId}
-                    // onChange={PubmedIdChange}
-                  />
-                    </Grid>
-                    <Grid item>
-
-                    <Button
-                    className={classes.simpleSearchButton}
-                    variant="primary"
-                    size="lg"
-                    // onClick={searchGlycanClick}
-                  >
-                    Search
-                  </Button>
-                  </Grid>
-                  </Grid>
-                </div>
+              {initData.simple_search_category && <SimpleSearchControl
+                    simpleSearchCategory = {glySimpleSearchCategory}
+                    simpleSearchTerm = {glySimpleSearchTerm}
+                    simple_search_category = {initData.simple_search_category}
+                    simple_search = {initData.simple_search}
+                    searchSimpleclick = {searchGlycanSimpleclick}
+                    setSimpleSearchCategory = {setGlySimpleSearchCategory}
+                    setSimpleSearchTerm = {setGlySimpleSearchTerm}
+                  />}
                 </Container>
               </Tab>
             <Tab
@@ -902,17 +952,13 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
               <Container className={classes.con}>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.clearButton}
-                    variant="secondary"
-                    size="lg"
+                    className={classes.clearButton  + " gg-btn"}
                     onClick={clearGlycan}
                   >
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.submitButton}
-                    variant="primary"
-                    size="lg"
+                    className={classes.submitButton  + " gg-btn"}
                     onClick={searchGlycanClick}
                   >
                     Search Glycan
@@ -1021,8 +1067,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                         step={10}
                         min={glyMassRange[0]}
                         max={glyMassRange[1]}
-                        inputValue={glyMass}
-                        setInputValue={glyMassChange}
+                        inputValue={glyMassInput}
+                        setInputValue={setGlyMassInput}
+                        inputValueSlider={glyMass}
+                        setSliderInputValue={setGlyMass}
                       />
                     </Grid>
                     <Grid item>
@@ -1082,8 +1130,10 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                     step={1}
                     min={glyNumSugarsRange[0]}
                     max={glyNumSugarsRange[1]}
-                    inputValue={glyNumSugars}
-                    setInputValue={glyNumSugarsChange}
+                    inputValue={glyNumSugarsInput}
+                    setInputValue={setGlyNumSugarsInput}
+                    inputValueSlider={glyNumSugars}
+                    setSliderInputValue={setGlyNumSugars}
                   />
                 </div>
                 <div className={classes.margin}>
@@ -1478,17 +1528,13 @@ function getSelectionValue(cur_min, cur_max, residue_min, residue_max) {
                 </FormControl>
                 <ButtonToolbar className={classes.marginButToolbar}>
                   <Button
-                    className={classes.clearButton}
-                    variant="secondary"
-                    size="lg"
+                    className={classes.clearButton  + " gg-btn"}
                     onClick={clearGlycan}
                   >
                     Clear Fields
                   </Button>
                   <Button
-                    className={classes.submitButton}
-                    variant="primary"
-                    size="lg"
+                    className={classes.submitButton  + " gg-btn"}
                     onClick={searchGlycanClick}
                   >
                     Search Glycan

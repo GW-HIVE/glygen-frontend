@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MainFeaturedCard from '../components/cards/MainFeaturedCard';
@@ -16,12 +16,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import '../css/Responsive.css';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	tableHeader: {
 		backgroundColor: '#4B85B6',
 		color: theme.palette.common.white,
-		height: '60px'
-	}
+		height: '60px',
+	},
 }));
 
 const mainFeaturedCard = {
@@ -30,35 +30,35 @@ const mainFeaturedCard = {
 	description:
 		' A library of Glycobiology resources, including databases, informatics tools, learning material and tutorials are provided.',
 	image: featuredImg,
-	imgText: 'main image description'
+	imgText: 'main image description',
 };
 const verticalHeadingData = {
 	h5VerticalText: 'LOOK AT',
 	h2textTopStrongAfter: 'Data',
 	h2textBottom: 'Resources',
 	pText:
-		'A list of publicly available databases, repositories and knowledgebases providing glycan-related information.'
+		'A list of publicly available databases, repositories and knowledgebases providing glycan-related information.',
 };
 const verticalHeadingTools = {
 	h5VerticalText: 'CHECK',
 	h2textTopStrongBefore: 'Tools',
 	h2textBottom: 'Resources',
 	pText:
-		'A list of tools, tool collections or link pages to glycomics related tools.'
+		'A list of tools, tool collections or link pages to glycomics related tools.',
 };
 const verticallHeadingOrganiz = {
 	h5VerticalText: 'CONNECT',
 	h2textTop: 'Resources',
 	h2textBottom: 'of',
 	h2textBottomStrongAfter: 'Organizations',
-	pText: 'List of glycomics related organizations.'
+	pText: 'List of glycomics related organizations.',
 };
 const verticalHeadingLearn = {
 	h5VerticalText: 'EDUCATION',
 	h2textTopStrongBefore: 'Learn',
 	h2textBottom: 'Glycobiology',
 	pText:
-		'There is still a great deal to learn about essentials of Glycobiology.'
+		'There is still a great deal to learn about essentials of Glycobiology.',
 };
 
 const Resources = () => {
@@ -66,13 +66,13 @@ const Resources = () => {
 		{
 			dataField: 'category',
 			text: 'Category',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'website',
 			text: 'Website',
 			sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -80,7 +80,7 @@ const Resources = () => {
 					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
-			)
+			),
 		},
 		{
 			dataField: 'description',
@@ -88,35 +88,35 @@ const Resources = () => {
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { width: '40%' };
-			}
+			},
 		},
 		{
 			dataField: 'contains_publ',
 			text: 'Contains Publications',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'experimental_data',
 			text: 'Experimental Data',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'curated',
 			text: 'Curated',
-			sort: true
-		}
+			sort: true,
+		},
 	];
 	const toolsResourcesCols = [
 		{
 			dataField: 'category',
 			text: 'Category',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'website',
 			text: 'Website',
 			sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -124,7 +124,7 @@ const Resources = () => {
 					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
-			)
+			),
 		},
 		{
 			dataField: 'description',
@@ -132,30 +132,30 @@ const Resources = () => {
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { width: '40%' };
-			}
+			},
 		},
 		{
 			dataField: 'experimental_data',
 			text: 'Experimental Data',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'availability',
 			text: 'Availability',
-			sort: true
-		}
+			sort: true,
+		},
 	];
 	const organizResourcesCols = [
 		{
 			dataField: 'category',
 			text: 'Category',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'website',
 			text: 'Website',
 			sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -163,7 +163,7 @@ const Resources = () => {
 					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
-			)
+			),
 		},
 		{
 			dataField: 'description',
@@ -171,25 +171,25 @@ const Resources = () => {
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { width: '40%' };
-			}
+			},
 		},
 		{
 			dataField: 'domain',
 			text: 'Domain',
-			sort: true
-		}
+			sort: true,
+		},
 	];
 	const learnResourcesCols = [
 		{
 			dataField: 'name',
 			text: 'Name',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'type',
 			text: 'Type',
 			sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -197,7 +197,7 @@ const Resources = () => {
 					rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
-			)
+			),
 		},
 		{
 			dataField: 'description',
@@ -205,30 +205,32 @@ const Resources = () => {
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { width: '40%' };
-			}
+			},
 		},
 		{
 			dataField: 'glycan',
 			text: 'Glycan',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'protein',
 			text: 'Protein',
-			sort: true
+			sort: true,
 		},
 		{
 			dataField: 'glycoprotein',
 			text: 'Glycoprotein',
-			sort: true
-		}
+			sort: true,
+		},
 	];
 	const classes = useStyles();
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{head.resources.title}</title>
-				{getMeta(head.resources)}
+				{/* <title>{head.resources.title}</title>
+				{getMeta(head.resources)} */}
+				{getTitle('resources')}
+				{getMeta('resources')}
 			</Helmet>
 
 			<CssBaseline />
@@ -250,8 +252,8 @@ const Resources = () => {
 					defaultSorted={[
 						{
 							dataField: 'category',
-							order: 'asc'
-						}
+							order: 'asc',
+						},
 					]}
 				/>
 				<div className='goToTop'>
@@ -275,8 +277,8 @@ const Resources = () => {
 					defaultSorted={[
 						{
 							dataField: 'category',
-							order: 'asc'
-						}
+							order: 'asc',
+						},
 					]}
 				/>
 				<div className='goToTop'>
@@ -300,8 +302,8 @@ const Resources = () => {
 					defaultSorted={[
 						{
 							dataField: 'category',
-							order: 'asc'
-						}
+							order: 'asc',
+						},
 					]}
 				/>
 				<div className='goToTop'>
@@ -329,8 +331,8 @@ const Resources = () => {
 					defaultSorted={[
 						{
 							dataField: 'name',
-							order: 'asc'
-						}
+							order: 'asc',
+						},
 					]}
 				/>
 				<div className='goToTop'>

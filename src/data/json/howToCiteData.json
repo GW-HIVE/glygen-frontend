@@ -11,12 +11,12 @@
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": ".",
-			"quote": "Quote",
-			"bibtex": {
-				"name": "BibTeX",
-				"url": "https://scholar.googleusercontent.com/scholar.bib?q=info:UjFK4Ts2cAAJ:scholar.google.com/&output=citation&scisdr=CgWueoirENP5gam_o2A:AAGBfm0AAAAAXnu6u2Cc2K7pUeq__llLfWQTyTCp2Qvz&scisig=AAGBfm0AAAAAXnu6u3lpFAvWUOwG68vreIAODz7vowR0&scisf=4&ct=citation&cd=-1&hl=en"
-			}
+			"quote": "quote-open-outline.svg",
+			"bibtex": "/downloads/citation/31616925.pdf",
+			"bibtexlabel": "BibTeX",
+			"endnote": "/downloads/citation/31616925.enw",
+			"endnotelabel": "EndNote",
+			"period": "."
 		}
 	],
 	"ourPapers": [
@@ -27,18 +27,16 @@
 			"authors": "William S York, Raja Mazumder, Rene Ranzinger, Nathan Edwards, Robel Kahsay, Kiyoko F AokiKinoshita, Matthew P Campbell, Richard D Cummings, Ten Feizi, Maria Martin, Darren A Natale, Nicolle H Packer, Robert J Woods, Gaurav Agarwal, Sena Arpinar, Sanath Bhat, Judith Blake, Leyla Jael Garcia Castro, Brian Fochtman, Jeffrey Gildersleeve, Radoslav Goldman, Xavier Holmes, Vinamra Jain, Sujeet Kulkarni, Rupali Mahadik, Akul Mehta, Reza Mousavi, Sandeep Nakarakommula, Rahi Navelkar, Nagarajan Pattabiraman, Michael J Pierce, Karen Ross, Preethi Vasudev, Jeet Vora, Tatiana Williamson, and Wenjin Zhang.",
 			"publisher": "Glycobiology. 2019.",
 			"pmid": "PMID",
-			"pdf" : "/downloads/citation/31616925.pdf",
-			"enw" : "/downloads/citation/31616925.enw",
 			"website": {
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": ".",
-			"quote": "",
-			"bibtex": {
-				"name": "",
-				"url": ""
-			}
+			"quote": "quote-open-outline.svg",
+			"bibtex": "/downloads/citation/31616925.pdf",
+			"bibtexlabel": "BibTeX",
+			"endnote": "/downloads/citation/31616925.enw",
+			"endnotelabel": "EndNote",
+			"period": "."
 		},
 		{
 			"text": "",
@@ -46,18 +44,16 @@
 			"authors": "Robel Kahsay, Jeet Vora, Rahi Navelkar, Brian Fochtman, Reza Mousavi, Leyla Jael Garcia Castro, Preethi Vasudev, Gaurav Agarwal, Sujeet Kulkarni, Rupali Mahadik, Tatiana Williamson, Wenjin Zhang, Maria Martin, Karen Ross, Darren A Natale, Kiyoko F AokiKinoshita, Matthew P Campbell, Nathan Edwards, Rene Ranzinger, William S York, Raja Mazumder.",
 			"publisher": "Glycobiology. 2020.",
 			"pmid": "PMID",
-			"pdf" : "/downloads/citation/31616925.pdf",
-			"enw" : "/downloads/citation/31616925.enw",
 			"website": {
 				"name": "31616925",
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/31616925"
 			},
-			"period": ".",
-			"quote": "",
-			"bibtex": {
-				"name": "",
-				"url": ""
-			}
+			"quote": "quote-open-outline.svg",
+			"bibtex": "/downloads/citation/31616925.pdf",
+			"bibtexlabel": "BibTeX",
+			"endnote": "/downloads/citation/31616925.enw",
+			"endnotelabel": "EndNote",
+			"period": "."
 		}
 	],
 	"relatedPapers": [
@@ -72,12 +68,7 @@
 				"name": "",
 				"url": ""
 			},
-			"period": "",
-			"quote": "",
-			"bibtex": {
-				"name": "",
-				"url": ""
-			}
+			"period": ""
 		}
 	],
 	"websiteCitation": [
@@ -92,12 +83,7 @@
 				"name": "",
 				"url": ""
 			},
-			"period": "",
-			"quote": "",
-			"bibtex": {
-				"name": "",
-				"url": ""
-			}
+			"period": ""
 		}
 	]
 }

@@ -11,6 +11,7 @@
 	/* --dark-blue-1: #215b9e; */
 	/* --dark-blue-2: #175385; */
 }
+
 .App {
 	height: 100vh;
 	display: flex;
@@ -119,9 +120,15 @@ p {
 .panelHeadBgr h3,
 .panelHeadBgr h4 {
 	margin: 0 auto;
+	margin-left: 0;
+	/* padding: 10px 0; */
 }
+
 .panelHeadText {
 	color: #1d9901 !important;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
 }
 .panelTable {
 	min-width: 650px;
@@ -250,6 +257,29 @@ hr {
 	float: right;
 	padding-right: 5%;
 	color: #2e78b7;
+}
+
+.disabled {
+	cursor: no-drop !important;
+}
+
+.gg-btn {
+	height: 45px;
+}
+
+.gg-btn.disabled,
+.gg-btn:disabled,
+.gg-btn.disabled.hover,
+.gg-btn:disabled:hover {
+	cursor: no-drop !important;
+	background-color: #2e78b7 !important;
+}
+
+.gg-btn.hover,
+.gg-btn:hover,
+.gg-btn.focus,
+.gg-btn:focus {
+	background-color: #204d74 !important;
 }
 
 /* =========================================

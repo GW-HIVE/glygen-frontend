@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-
-import { head, getMeta } from "../utils/head";
-import { useParams } from "react-router-dom";
+import { getTitle, getMeta } from "../utils/head";
+import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
@@ -159,8 +158,8 @@ const GlycanList = props => {
   return (
     <>
       <Helmet>
-        <title>{head.glycanList.title}</title>
-        {getMeta(head.glycanList)}
+        <title>{getTitle.glycanList.title}</title>
+        {getMeta(getTitle.glycanList)}
       </Helmet>
       <section style={{ paddingTop: "20px" }}>
         <GlycanQuerySummary data={query} onModifySearch={handleModifySearch} />

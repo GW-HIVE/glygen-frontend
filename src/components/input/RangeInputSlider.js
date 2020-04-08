@@ -34,30 +34,45 @@ export default function RangeInputSlider(props) {
   const classes = useStyles();
 
   const sliderChange = (event, newValue) => {
+    props.setSliderInputValue(newValue);
     props.setInputValue(newValue);
   };
 
   const minInputChange = event => {
-    var val = [Number(event.target.value), props.inputValue[1]];
-    if (event.target.value < props.min)
-        val[0] = props.min;
-    else if (event.target.value > props.inputValue[1])
-        val[0] = props.inputValue[1];
-
+    var val = [event.target.value, props.inputValue[1]];
     props.setInputValue(val);
   };
 
   const maxInputChange = event => {
+    var val = [props.inputValue[0], event.target.value];
+    props.setInputValue(val);
+  };
 
-    var val = [props.inputValue[0], Number(event.target.value)];
-    if (event.target.value > props.max)
+  const onMinMoveOut = () => {
+    let val = [props.inputValue[0], props.inputValue[1]];
+    if (Number(props.inputValue[0]) < Number(props.min))
+        val[0] = props.min;
+    else if (props.inputValue[0] === "")
+        val[0] = props.min;
+    else if (Number(props.inputValue[0]) > Number(props.inputValue[1]))
+        val[0] = props.inputValue[1];
+    
+    props.setInputValue(val);
+    props.setSliderInputValue(val);
+  }
+
+  const onMaxMoveOut = () => {
+    let val = [props.inputValue[0], props.inputValue[1]];
+    if (Number(props.inputValue[1]) > Number(props.max))
         val[1] = props.max;
-    else if (event.target.value < props.inputValue[0])
+    else if (props.inputValue[1] === "")
+        val[1] = props.max;
+    else if (Number(props.inputValue[1]) < Number(props.inputValue[0]))
         val[1] = props.inputValue[0];
 
     props.setInputValue(val);
-
-  };
+    props.setSliderInputValue(val);
+  }
 
   return (
     <div className={classes.root}>
@@ -73,6 +88,7 @@ export default function RangeInputSlider(props) {
               margin="dense"
               id="demo-label1"
               onChange={minInputChange}
+              onBlur={onMinMoveOut}
               labelWidth={40}
               inputProps={{
                 step: props.step,
@@ -86,7 +102,7 @@ export default function RangeInputSlider(props) {
         </Grid>
         <Grid item xs>
             <Slider
-              value={props.inputValue}
+              value={props.inputValueSlider}
               step={props.step}
               min={props.min}
               max={props.max}
@@ -108,6 +124,7 @@ export default function RangeInputSlider(props) {
               value={props.inputValue[1]}
               margin="dense"
               onChange={maxInputChange}
+              onBlur={onMaxMoveOut}
               labelWidth={40}
               inputProps={{
                 step: props.step,
@@ -129,6 +146,8 @@ RangeInputSlider.propTypes = {
   step: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
+  inputValueSlider: PropTypes.array,
+  setSliderInputValue: PropTypes.func,
   inputValue: PropTypes.array,
-
+  setInputValue: PropTypes.func
 };

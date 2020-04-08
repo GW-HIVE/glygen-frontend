@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Container from '@material-ui/core/Container';
+import React from 'react';
+// import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -8,17 +8,29 @@ import '../../css/detail.css';
 // import { Col, Row } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-// https://smellycode.com/accordion-in-reactjs/
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
+// https://smellycode.com/accordion-in-reactjs/
+// const ToggleCardlTemplate = () => {
 export default function ToggleCardlTemplate() {
-	const [activeEventKey, setActiveEventKey] = useState(0);
-	// const ToggleCardlTemplate = () => {
+	const [collapsed, setCollapsed] = React.useState(true);
+
+	function toggleCollapse() {
+		setCollapsed((prevValue) => !prevValue);
+	}
+
+	const expandIcon = !collapsed ? (
+		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+	) : (
+		<ExpandMoreIcon className='expand-arrow' />
+	);
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Container maxWidth='xl' className='ggContainer'>
-        <Accordion
-          activeEventKey={activeEventKey} onToggle={setActiveEventKey}
+			{/* <Container maxWidth='xl' className='ggContainer'> */}
+				<Accordion
 					defaultActiveKey='0'
 					className='panel-width'
 					style={{ padding: '20px 0' }}>
@@ -26,47 +38,25 @@ export default function ToggleCardlTemplate() {
 						<Accordion.Toggle
 							as={Card.Header}
 							eventKey='0'
-							className='panelHeadBgr panelHeadText btn-up'>
-              <h3>Motif</h3>
-              {/* <span>{activeEventKey !== 0 && <span>👇🏻</span>}
-              {activeEventKey === 0 && <span>👆🏻</span>}</span> */}
-							{/* <CustomToggle eventKey='0'>Motif</CustomToggle> */}
+							onClick={() => toggleCollapse()}
+							className='panelHeadBgr panelHeadText arrow'>
+							<h3>ToggleCardlTemplate</h3>
+							<span className={'text-right'}>{expandIcon}</span>
 						</Accordion.Toggle>
-						<Accordion.Collapse eventKey='0'>
+						<Accordion.Collapse eventKey='0' in={!collapsed}>
 							<Card.Body>
-								Your body text is here
-								{/* {motifs && (
-									<>
-										<b> Motif image:</b>
-										<Row>
-											{motifs.map(motif => (
-												<Col>
-													<div key={motif.id} className='img-motif-wrapper'>
-														<img
-															className='img-motif'
-															src={glycanImageUrl + motif.id}
-															alt='Cartoon'
-														/>
-													</div>
-													<span>
-														<a href={''}>{motif.name}</a>
-													</span>
-												</Col>
-											))}
-										</Row>
-									</>
-								)} */}
+								Your body text is here for ToggleCardlTemplate
 							</Card.Body>
 						</Accordion.Collapse>
 					</Card>
 				</Accordion>
-			</Container>
+			{/* </Container> */}
 		</React.Fragment>
 	);
 }
 // export default ToggleCardlTemplate;
 
-// 
+//
 // 	 <Accordion
 // 	defaultActiveKey='0'
 // 	className='panel-width'
@@ -87,10 +77,10 @@ export default function ToggleCardlTemplate() {
 // 		</Accordion.Collapse>
 // 	</Card>
 // </Accordion>; */
-// 
+//
 
 // Motif
-// 
+//
 // {/* <Accordion
 // defaultActiveKey='0'
 // className='panel-width'
@@ -129,9 +119,9 @@ export default function ToggleCardlTemplate() {
 //   </Accordion.Collapse>
 // </Card>
 // </Accordion> */}
-// 
+//
 
-// 
+//
 // 	<Accordion
 // 	defaultActiveKey='0'
 // 	className='panel-width'
@@ -161,8 +151,7 @@ export default function ToggleCardlTemplate() {
 // 		</Accordion.Collapse>
 // 	</Card>
 // </Accordion>; */
-// 
-
+//
 
 // .text-overflow {
 // 	white-space: pre-wrap !important;
@@ -197,7 +186,6 @@ export default function ToggleCardlTemplate() {
 // 	transition: 0.3s ease-in-out;
 // 	z-index: 99999;
 // }
-
 
 // .panelHeadText h3 {
 // 	position: relative;

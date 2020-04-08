@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
@@ -19,19 +19,19 @@ const License = () => {
 		h5VerticalText: 'to know',
 		h2textTop: 'Get Familiar',
 		h2textBottom: 'With',
-		h2textBottomStrongAfter: 'License'
+		h2textBottomStrongAfter: 'License',
 	};
-	const useStyles = makeStyles(theme => ({
+	const useStyles = makeStyles((theme) => ({
 		tableHeader: {
 			backgroundColor: '#4B85B6',
 			color: theme.palette.common.white,
-			height: '50px'
+			height: '50px',
 		},
 		licenseIcons: {
 			width: '70%',
 			verticalAlign: 'middle',
-			paddingTop: '15%'
-		}
+			paddingTop: '15%',
+		},
 	}));
 	const classes = useStyles();
 	const databasesLicenseCols = [
@@ -39,7 +39,7 @@ const License = () => {
 			dataField: 'databases',
 			text: 'Databases',
 			// sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -51,14 +51,14 @@ const License = () => {
 			style: { paddingLeft: '20px' },
 			headerStyle: {
 				paddingLeft: '20px',
-				verticalAlign: 'middle'
-			}
+				verticalAlign: 'middle',
+			},
 		},
 		{
 			dataField: 'licenseType',
 			text: 'License Type',
 			// sort: true,
-			formatter: cell => (
+			formatter: (cell) => (
 				<Link
 					variant='subtitle1'
 					href={cell.url}
@@ -70,15 +70,21 @@ const License = () => {
 			style: { paddingLeft: '20px' },
 			headerStyle: {
 				paddingLeft: '20px',
-				verticalAlign: 'middle'
-			}
-		}
+				verticalAlign: 'middle',
+			},
+		},
 	];
 	return (
 		<>
 			<Helmet>
-				<title>{head.license.title}</title>
-				{getMeta(head.license)}
+				{/* <title>{head.license.title}</title>
+				{getMeta(head.license)} */}
+				{/* {getTitle('license', { type: "abc", number: "55" })} */}
+				{/* // "title": "License #type #number | Creative Commons | GNU General
+				Public License | glygen.org", */}
+				
+				{getTitle('license')}
+				{getMeta('license')}
 			</Helmet>
 
 			<CssBaseline />

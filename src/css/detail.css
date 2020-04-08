@@ -49,6 +49,17 @@
   grid-gap: 10px;
   grid-row-start: 2;
 }
+.badge-div + .badge-div {
+  margin: 1em 0 0;
+  margin-left: 2px;
+}
+legend {
+  all: unset;
+}
+
+.Species {
+  row-count: 3;
+}
 
 /* Tatiana */
 .text-responsive {
@@ -85,44 +96,12 @@
   z-index: 99999;
 }
 
-.panelHeadText h3 {
-  position: relative;
+.expand-arrow {
+  font-size: 2.2rem !important;
+  /* margin: 10px 0; */
 }
 
-.btn-up h3::before {
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  content: "";
-  position: absolute;
-  display: block;
-  width: 15px;
-  height: 15px;
-  border-top: 2px solid green;
-  border-left: 2px solid green;
-  /* float: right !important; */
-  /* transition: all 0.5s; */
-  right: 24px;
-  top: 50%;
-  transition: 0.3s transform ease-in-out;
-  display: inline-block;
-}
-.btn-down ::before {
-  transform: rotate(0deg);
-}
-
-.btn-down .btn-up h3::before {
-  -webkit-transform: rotate(-225deg);
-  -moz-transform: rotate(-2245deg);
-  -ms-transform: rotate(-225deg);
-  -o-transform: rotate(-225deg);
-  transform: rotate(-225deg);
-  -webkit-transition-property: -webkit-transform;
-  -moz-transition-property: -moz-transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  transition-duration: 0.2s;
+.expand-arrow-expanded {
+  font-weight: 900;
+  /* margin: 10px 0; */
 }

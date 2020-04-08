@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import Container from '@material-ui/core/Container';
 import VerticalHeadingLogo from '../components/headings/VerticalHeadingLogo';
@@ -11,25 +11,27 @@ import howToCiteData from '../data/json/howToCiteData';
 import { Row, Col } from 'react-bootstrap';
 import Sidebar from '../components/navigation/Sidebar';
 
-const HowToCite = props => {
+const HowToCite = (props) => {
 	const vertHeadHowToCite = {
 		h5VerticalText: 'CITATIONS',
 		h2textTop: 'Our',
-		h2textBottomStrongBefore: 'Publications & Citations'
+		h2textBottomStrongBefore: 'Publications & Citations',
 	};
 
 	const items = [
 		{ label: 'How To Cite', id: 'howToCite' },
 		{ label: 'Our Papers', id: 'ourPapers' },
 		{ label: 'Related Papers', id: 'relatedPapers' },
-		{ label: 'Website Citation', id: 'websiteCitation' }
+		{ label: 'Website Citation', id: 'websiteCitation' },
 	];
 
 	return (
 		<>
 			<Helmet>
-				<title>{head.nowToCite.title}</title>
-				{getMeta(head.nowToCite)}
+				{/* <title>{head.nowToCite.title}</title>
+				{getMeta(head.nowToCite)} */}
+				{getTitle('howToCite')}
+				{getMeta('howToCite')}
 			</Helmet>
 
 			<CssBaseline />

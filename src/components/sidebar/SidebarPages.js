@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../css/Sidebar.css';
 import { NavLink } from 'react-router-dom';
+//import ListItem from '@material-ui/core/ListItem';
+//import ListItemText from '@material-ui/core/ListItemText';
+//import List from '@material-ui/core/List';
 
 const SidebarPages = () => {
 	const pages = ['/license', '/privacy-policy', '/disclaimer'];
@@ -9,12 +12,12 @@ const SidebarPages = () => {
 	var items = pages.map((value, index) => {
 		return (
 			<NavLink
-				activeClassName='active'
+				// activeClassName='active'
 				to={value}
 				style={{ textDecoration: 'none' }}
 				key={index}>
-				<ul className='side-menu'>
-					<li className='side-menu-list'>{pageLabels[index]}</li>
+				<ul className='sidebar-item'>
+					<li className='sidebar-item-text'>{pageLabels[index]}</li>
 				</ul>
 			</NavLink>
 		);

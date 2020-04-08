@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { head, getMeta } from '../utils/head';
+import { getTitle, getMeta } from '../utils/head';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import Container from '@material-ui/core/Container';
 import VerticalHeading from '../components/headings/VerticalHeading';
@@ -28,8 +28,10 @@ const PrivacyPolicy = props => {
 	return (
 		<React.Fragment>
 			<Helmet>
-				<title>{head.privacyPolicy.title}</title>
-				{getMeta(head.privacyPolicy)}
+				{/* <title>{head.privacyPolicy.title}</title>
+				{getMeta(head.privacyPolicy)} */}
+				{getTitle('privacyPolicy')}
+				{getMeta('privacyPolicy')}
 			</Helmet>
 
 			<CssBaseline />

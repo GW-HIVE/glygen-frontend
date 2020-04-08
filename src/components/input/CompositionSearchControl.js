@@ -749,9 +749,9 @@ export default function CompositionSearchControl(props) {
         {/* <ButtonToolbar justifyContent="center" className={classes.marginButToolbarCompoSearch}> */}
         <Grid item>
           <Button
-            className={classes.allYes}
-            variant="secondary"
-            size="lg"
+            className={classes.allYes  + " gg-btn"}
+            // variant="secondary"
+            // size="lg"
             onClick={allYes}
           >
             All Yes
@@ -759,9 +759,9 @@ export default function CompositionSearchControl(props) {
         </Grid>
         <Grid item>
           <Button
-            className={classes.clearButton}
-            variant="secondary"
-            size="lg"
+            className={classes.clearButton  + " gg-btn"}
+            // variant="secondary"
+            // size="lg"
             onClick={allNo}
           >
             All No
@@ -769,9 +769,9 @@ export default function CompositionSearchControl(props) {
         </Grid>
         <Grid item>
           <Button
-            className={classes.clearButton}
-            variant="secondary"
-            size="lg"
+            className={classes.clearButton  + " gg-btn"}
+            // variant="secondary"
+            // size="lg"
             onClick={clearCompSearch}
           >
             Clear Fields
@@ -779,10 +779,10 @@ export default function CompositionSearchControl(props) {
         </Grid>
         <Grid item>
           <Button
-            className={classes.clearButton}
+            className={classes.clearButton  + " gg-btn"}
             disabled={undoDisabled}
-            variant="secondary"
-            size="lg"
+            // variant="secondary"
+            // size="lg"
             onClick={() => compSearchUndoRedo("undo")}
           >
             Undo
@@ -790,10 +790,10 @@ export default function CompositionSearchControl(props) {
         </Grid>
         <Grid item>
           <Button
-            className={classes.clearButton}
+            className={classes.clearButton  + " gg-btn"}
             disabled={redoDisabled}
-            variant="secondary"
-            size="lg"
+            // variant="secondary"
+            // size="lg"
             onClick={() => compSearchUndoRedo("redo")}
           >
             Redo
@@ -801,10 +801,10 @@ export default function CompositionSearchControl(props) {
         </Grid>
         <Grid item>
           <Button
-            className={classes.submitButton}
+            className={classes.submitButton  + " gg-btn"}
             disabled={searchDisabled}
-            variant="primary"
-            size="lg"
+            // variant="primary"
+            // size="lg"
             onClick={props.searchGlycanCompClick}
           >
             Search Glycan
