@@ -133,8 +133,8 @@ p {
 	overflow: auto;
 	margin-bottom: 20px;
 }
-.summary-table-col {
-	white-space: nowrap;
+.img-cartoon {
+	width: 100% !important;
 }
 /* ========================================
             Panels
@@ -142,6 +142,9 @@ p {
 .summary-panel {
 	width: 50% !important;
 	margin: 0 auto !important;
+}
+.summary-table-col {
+	white-space: nowrap;
 }
 .panelHeadBgr {
 	background: #f0f0f0 !important;
