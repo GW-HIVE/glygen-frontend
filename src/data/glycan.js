@@ -56,7 +56,7 @@ export const GLYCAN_COLUMNS = [
 		formatter: (value, row) => (
 			<div className='img-wrapper'>
 				<img
-					className='img-cartoon'
+					className='img-cartoon-list-page img-cartoon'
 					src={glycanImageUrl + row.glytoucan_ac}
 					alt='Cartoon'
 				/>

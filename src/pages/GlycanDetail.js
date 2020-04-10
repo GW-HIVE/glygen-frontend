@@ -430,9 +430,9 @@ const GlycanDetail = (props) => {
 											<>
 												{motifs.map((motif) => (
 													<Col>
-														<div key={motif.id} className='img-motif-wrapper'>
+														<div key={motif.id} className='img-wrapper'>
 															<img
-																className='img-motif'
+																className='img-cartoon'
 																src={glycanImageUrl + motif.id}
 																alt='Cartoon'
 															/>

@@ -133,7 +133,7 @@ p {
 	overflow: auto;
 	margin-bottom: 20px;
 }
-.img-cartoon {
+.img-cartoon-list-page {
 	width: 100% !important;
 }
 /* ========================================
@@ -306,7 +306,7 @@ hr {
 	background-color: var(--gg-blue) !important;
 	border-color: var(--gg-blue) !important;
 	-webkit-transition: all 0.5s !important;
-	transition: all 0.5s !important;
+	transition: ease-in-out 0.5s !important;
 }
 
 .gg-btn-blue:hover {
@@ -319,7 +319,7 @@ hr {
 	background-color: #fff !important;
 	border-color: var(--gg-blue) !important;
 	-webkit-transition: all 0.5s !important;
-	transition: all 0.5s !important;
+	transition: ease-in-out 0.5s !important;
 }
 .gg-btn-outline:hover {
 	color: #fff !important;
