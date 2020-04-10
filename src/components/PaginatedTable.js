@@ -75,6 +75,7 @@ const PaginatedTable = ({
 							bootstrap4
 							scrollTop={'Bottom'}
 							striped
+							hover
 							remote
 							keyField='id'
 							data={data}
