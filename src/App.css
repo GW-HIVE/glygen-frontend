@@ -139,7 +139,10 @@ p {
 /* ========================================
             Panels
 ==========================================*/
-
+.summary-panel {
+	width: 50% !important;
+	margin: 0 auto !important;
+}
 .panelHeadBgr {
 	background: #f0f0f0 !important;
 }
