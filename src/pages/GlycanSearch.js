@@ -33,7 +33,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+// import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../css/Search.css';
@@ -60,27 +60,27 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: 16,
 		//width: 1100
 	},
-	submitButton: {
-		marginTop: 16,
-		marginBottom: 16,
-		// marginRight: 16,
-		marginLeft: 16,
-		backgroundColor: '#2f78b7',
-	},
-	clearButton: {
-		marginTop: 16,
-		marginBottom: 16,
-		// marginRight: 16,
-		marginLeft: 16,
-		backgroundColor: '#fff',
-		borderColor: '#337ab7',
-		color: '#337ab7',
-	},
-	marginButToolbar: {
-		justifyContent: 'flex-end',
-		// marginRight: 0,
-		width: 700,
-	},
+	// submitButton: {
+	// 	marginTop: 16,
+	// 	marginBottom: 16,
+	// 	// marginRight: 16,
+	// 	marginLeft: 16,
+	// 	backgroundColor: '#2f78b7',
+	// },
+	// clearButton: {
+	// 	marginTop: 16,
+	// 	marginBottom: 16,
+	// 	// marginRight: 16,
+	// 	marginLeft: 16,
+	// 	backgroundColor: '#fff',
+	// 	borderColor: '#337ab7',
+	// 	color: '#337ab7',
+	// },
+	// marginButToolbar: {
+	// 	justifyContent: 'flex-end',
+	// 	// marginRight: 0,
+	// 	// width: 700,
+	// },
 	marginButToolbarCompoSearch: {
 		justifyContent: 'center',
 		// marginRight: 0,
@@ -984,18 +984,22 @@ const GlycanSearch = (props) => {
 							className={classes.tab}
 							title='Advanced Search'>
 							<Container className={classes.con}>
-								<ButtonToolbar className={classes.marginButToolbar}>
+								{/* <ButtonToolbar className={classes.marginButToolbar}> */}
+								<Row className='gg-align-right pt-5 pb-2'>
 									<Button
-										className={classes.clearButton + ' gg-btn'}
+										className='gg-btn-outline mr-4'
+										// className={classes.clearButton + ' gg-btn'}
 										onClick={clearGlycan}>
 										Clear Fields
 									</Button>
 									<Button
-										className={classes.submitButton + ' gg-btn'}
+										className='gg-btn-blue'
+										// className={classes.submitButton + ' gg-btn'}
 										onClick={searchGlycanClick}>
 										Search Glycan
 									</Button>
-								</ButtonToolbar>
+								</Row>
+								{/* </ButtonToolbar> */}
 								<FormControl
 									fullWidth
 									className={classes.margin}
@@ -1523,18 +1527,22 @@ const GlycanSearch = (props) => {
 										</Col>
 									</Row>
 								</FormControl>
-								<ButtonToolbar className={classes.marginButToolbar}>
+								{/* <ButtonToolbar className={classes.marginButToolbar}> */}
+								<Row className='gg-align-right pt-3 mb-2'>
 									<Button
-										className={classes.clearButton + ' gg-btn'}
+										// className={classes.clearButton + ' gg-btn'}
+										className='gg-btn-outline mr-4'
 										onClick={clearGlycan}>
 										Clear Fields
 									</Button>
 									<Button
-										className={classes.submitButton + ' gg-btn'}
+										// className={classes.submitButton + ' gg-btn'}
+										className='gg-btn-blue'
 										onClick={searchGlycanClick}>
 										Search Glycan
 									</Button>
-								</ButtonToolbar>
+								</Row>
+								{/* </ButtonToolbar> */}
 							</Container>
 						</Tab>
 						<Tab
