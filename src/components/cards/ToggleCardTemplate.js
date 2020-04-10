@@ -21,35 +21,37 @@ export default function ToggleCardlTemplate() {
 	}
 
 	const expandIcon = !collapsed ? (
-		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
-	) : (
 		<ExpandMoreIcon className='expand-arrow' />
+	) : (
+		// <ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		// <ExpandMoreIcon className='expand-arrow' />
 	);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			{/* <Container maxWidth='xl' className='ggContainer'> */}
-				<Accordion
-					defaultActiveKey='0'
-					className='panel-width'
-					style={{ padding: '20px 0' }}>
-					<Card key='0'>
-						<Accordion.Toggle
-							as={Card.Header}
-							eventKey='0'
-							onClick={() => toggleCollapse()}
-							className='panelHeadBgr panelHeadText arrow'>
-							<h4>ToggleCardlTemplate</h4>
-							<span className={'text-right'}>{expandIcon}</span>
-						</Accordion.Toggle>
-						<Accordion.Collapse eventKey='0' in={!collapsed}>
-							<Card.Body>
-								Your body text is here for ToggleCardlTemplate
-							</Card.Body>
-						</Accordion.Collapse>
-					</Card>
-				</Accordion>
+			<Accordion
+				defaultActiveKey='0'
+				className='panel-width'
+				style={{ padding: '20px 0' }}>
+				<Card key='0'>
+					<Accordion.Toggle
+						as={Card.Header}
+						eventKey='0'
+						onClick={() => toggleCollapse()}
+						className='panelHeadBgr panelHeadText arrow'>
+						<h3>ToggleCardlTemplate</h3>
+						<span className={'text-right'}>{expandIcon}</span>
+					</Accordion.Toggle>
+					<Accordion.Collapse eventKey='0' out={!collapsed}>
+						<Card.Body>
+							Your body text is here for ToggleCardlTemplate
+						</Card.Body>
+					</Accordion.Collapse>
+				</Card>
+			</Accordion>
 			{/* </Container> */}
 		</React.Fragment>
 	);
