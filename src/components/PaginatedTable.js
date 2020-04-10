@@ -16,7 +16,9 @@ const PaginatedTable = ({
   sizePerPage,
   onTableChange,
   totalSize,
-  onDownload
+  // onDownload,
+  // test
+  downloadButton
 }) => {
   const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
@@ -68,7 +70,8 @@ const PaginatedTable = ({
 
               <PaginationTotalStandalone {...paginationProps} />
 
-              {onDownload && <button onClick={onDownload}>Download</button>}
+              {/* {onDownload && <button onClick={onDownload}>Download</button>} */}
+              {downloadButton}
 
               <PaginationListStandalone {...paginationProps} />
             </div>

@@ -8,6 +8,7 @@ import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
 import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import { downloadFromServer } from "../utils/download";
+// import { DownloadButton } from "../components/DownloadButton";
 
 const DownloadButton = props => {
   const { types, dataType, dataId } = props;
@@ -92,7 +93,6 @@ const DownloadButton = props => {
     </div>
   );
 };
-
 const GlycanList = props => {
   let { id } = useParams();
 

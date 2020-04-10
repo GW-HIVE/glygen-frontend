@@ -16,9 +16,92 @@ import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-
+import { downloadFromServer } from "../utils/download";
+//import DownloadButton from'../components/DownloadButton';
 import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
-
+const DownloadButton = props => {
+	const { types, dataType, dataId } = props;
+  
+	const [show, setShow] = useState(false);
+	const [format, setFormat] = useState(props.format || props.types[0]);
+	const [compressed, setCompressed] = useState(props.compressed || false);
+  
+	const handleDownload = async () => {
+	  await downloadFromServer(dataId, format, compressed, dataType);
+  
+	  setShow(false);
+	};
+  
+	return (
+	  <div className="dropdown gg-download text-right">
+		<button
+		  className="btn btn-link btn-link-detail dropdown-toggle"
+		  type="button"
+		  id="download"
+		  alt="Download results"
+		  data-toggle="dropdown"
+		  aria-haspopup="true"
+		  aria-expanded="true"
+		  onClick={() => {
+			setShow(!show);
+		  }}
+		>
+		  <i className="glyphicon glyphicon-save"></i> DOWNLOAD
+		  <span className="caret"></span>
+		</button>
+		<div
+		  className={
+			"dropdown-menu dropdown-menu-box dropdown-menu-right" +
+			(show ? " open show" : "")
+		  }
+		  aria-labelledby="download"
+		>
+		  <div className="row">
+			<div className="col-md-7">
+			  <label>Download&nbsp;format: </label>
+			</div>
+			<div className="col-md-5 text-left">
+			  <select
+				id="download_format"
+				onChange={e => {
+				  setFormat(e.target.value);
+				}}
+			  >
+				{types.map(type => (
+				  <option selected={type === format} value={type}>
+					{type.toUpperCase()}
+				  </option>
+				))}
+			  </select>
+			</div>
+		  </div>
+		  <div className="row">
+			<div className="col-md-7">
+			  <label>Compressed: </label>
+			</div>
+			<div className="col-md-5">
+			  <input
+				type="checkbox"
+				id="download_compression"
+				checked={compressed}
+				onClick={e => {
+				  setCompressed(e.target.checked);
+				}}
+			  />
+			</div>
+		  </div>
+		  <div className="row">
+			<div className="col-md-7"></div>
+			<div className="col-md-5 text-right">
+			  <button className="btn-default" onClick={handleDownload}>
+				OK
+			  </button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	);
+  };
 const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
@@ -256,7 +339,8 @@ const GlycanDetail = (props) => {
 				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
 					<Sidebar items={items} />
 				</Col>
-
+				
+				
 				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
 					<h1 className='page-heading'>
 						<center>
@@ -268,21 +352,12 @@ const GlycanDetail = (props) => {
 							</strong>
 						</center>
 					</h1>
-					<div class='row'>
-						<div class='dropdown gg-download text-right'>
-							<button
-								class='btn btn-link btn-link-detail dropdown-toggle'
-								type='button'
-								id='download'
-								alt='Download results'
-								data-toggle='dropdown'
-								aria-haspopup='true'
-								aria-expanded='true'>
-								<i class='glyphicon glyphicon-save'></i> DOWNLOAD
-								<span class='caret'></span>
-							</button>
-						</div>
-					</div>
+					<DownloadButton
+                types={["png", "json"]}
+                dataType="glycan_detail"
+                dataId={id}
+              />
+				
 					<React.Fragment>
 						<Helmet>
 							{getTitle('glycanDetail', {
