@@ -16,6 +16,8 @@ import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
 
@@ -249,6 +251,20 @@ const GlycanDetail = (props) => {
 			},
 		},
 	];
+	// ====================================
+	// Add toggle collapse arrow icon
+	const [collapsed, setCollapsed] = React.useState(true);
+	function toggleCollapse() {
+		setCollapsed((prevValue) => !prevValue);
+	}
+	const expandIcon = !collapsed ? (
+		<ExpandMoreIcon className='expand-arrow' />
+	) : (
+		// <ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		// <ExpandMoreIcon className='expand-arrow' />
+	);
+	//=====================================
 
 	return (
 		<>
@@ -291,21 +307,23 @@ const GlycanDetail = (props) => {
 							})}
 							{getMeta('glycanDetail')}
 						</Helmet>
-						<ToggleCardlTemplate />
+						{/* <ToggleCardlTemplate /> */}
 						{/* general */}
 						<Accordion
-							defaultActiveKey='0'
 							id='general'
+							defaultActiveKey='0'
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>General</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{glytoucan && glytoucan.glytoucan_ac && (
 											<>
@@ -378,18 +396,20 @@ const GlycanDetail = (props) => {
 						</Accordion>
 						{/*  species*/}
 						<Accordion
+							id='species'
 							defaultActiveKey='0'
 							className='panel-width'
-							id='species'
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Species</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										<Row>
 											<Col md={12} xs={12} className='Species'>
@@ -421,10 +441,12 @@ const GlycanDetail = (props) => {
 									id='motif'
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Motif</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{motifs && (
 											<>
@@ -458,10 +480,12 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Found Glycoproteins</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{glycoprotein && glycoprotein.length !== 0 && (
 											<ClientPaginatedTable
@@ -473,20 +497,23 @@ const GlycanDetail = (props) => {
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
-						;
+						{/* Biosynthetic Enzyme */}
 						<Accordion
+							id='biosyntheticenzymes'
 							defaultActiveKey='0'
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Accordion.Toggle
-									id='biosyntheticenzymes'
+									// id='biosyntheticenzymes'
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Biosynthetic Enzyme</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{enzyme && enzyme.length !== 0 && (
 											<ClientPaginatedTable
@@ -498,7 +525,7 @@ const GlycanDetail = (props) => {
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
-						{/* digital seq */}
+						{/* Digital Sequence */}
 						<Accordion
 							id='Dseqence'
 							defaultActiveKey='0'
@@ -508,10 +535,12 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Digital Sequence</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body className='text-responsive '>
 										<strong>IUPAC</strong>
 										<pre className='text-overflow'>{iupac}</pre>
@@ -529,20 +558,22 @@ const GlycanDetail = (props) => {
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
-						;{/* crossref */}
+						{/* crossref */}
 						<Accordion
+							id='crossref'
 							defaultActiveKey='0'
 							className='panel-width'
-							id='crossref'
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Cross Reference</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{itemsCrossRef ? (
 											<ul>
@@ -574,18 +605,20 @@ const GlycanDetail = (props) => {
 						</Accordion>
 						{/* publication */}
 						<Accordion
+							id='publication'
 							defaultActiveKey='0'
 							className='panel-width'
-							id='publication'
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									className='panelHeadBgr panelHeadText btn-up'>
+									onClick={() => toggleCollapse()}
+									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Publications</h3>
+									<span className={'text-right'}>{expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0'>
+								<Accordion.Collapse eventKey='0' out={!collapsed}>
 									<Card.Body>
 										{publication && (
 											<ul>
