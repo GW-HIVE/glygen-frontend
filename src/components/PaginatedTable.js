@@ -70,7 +70,7 @@ const PaginatedTable = ({
                 {...paginationProps}
                 className="mr-2"
               />
-              className='mr-2'
+
               <PaginationTotalStandalone {...paginationProps} />
               {/* {onDownload && <button onClick={onDownload}>Download</button>} */}
               {downloadButton}
