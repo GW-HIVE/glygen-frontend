@@ -359,16 +359,14 @@ const GlycanDetail = (props) => {
 				
 				
 				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
-					<h1 className='page-heading'>
-						<center>
-							<strong>
-								Details for glycan
-								{glytoucan && glytoucan.glytoucan_ac && (
-									<> {glytoucan.glytoucan_ac}</>
-								)}
-							</strong>
-						</center>
-					</h1>
+				<div className='content-box-md'>
+						<h1 className='page-heading'>
+							Details for glycan
+							{glytoucan && glytoucan.glytoucan_ac && (
+								<> {glytoucan.glytoucan_ac}</>
+							)}
+						</h1>
+					</div>
 					<DownloadButton
                 types={["png", "json"]}
                 dataType="glycan_detail"

@@ -66,19 +66,21 @@ const PaginatedTable = ({
         {({ paginationProps, paginationTableProps }) => (
           <div>
             <div>
-              <SizePerPageDropdownStandalone {...paginationProps} />
-
+              <SizePerPageDropdownStandalone
+                {...paginationProps}
+                className="mr-2"
+              />
+              className='mr-2'
               <PaginationTotalStandalone {...paginationProps} />
-
               {/* {onDownload && <button onClick={onDownload}>Download</button>} */}
               {downloadButton}
-
               <PaginationListStandalone {...paginationProps} />
             </div>
             <BootstrapTable
               bootstrap4
               scrollTop={"Bottom"}
               striped
+              hover
               remote
               keyField="id"
               data={data}
