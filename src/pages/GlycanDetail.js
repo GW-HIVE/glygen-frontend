@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { getGlycanDetail } from '../data/glycan';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,95 +16,92 @@ import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import { downloadFromServer } from "../utils/download";
+import { downloadFromServer } from '../utils/download';
 //import DownloadButton from'../components/DownloadButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
-const DownloadButton = props => {
+const DownloadButton = (props) => {
 	const { types, dataType, dataId } = props;
-  
+
 	const [show, setShow] = useState(false);
 	const [format, setFormat] = useState(props.format || props.types[0]);
 	const [compressed, setCompressed] = useState(props.compressed || false);
-  
+
 	const handleDownload = async () => {
-	  await downloadFromServer(dataId, format, compressed, dataType);
-  
-	  setShow(false);
+		await downloadFromServer(dataId, format, compressed, dataType);
+
+		setShow(false);
 	};
-  
+
 	return (
-	  <div className="dropdown gg-download text-right">
-		<button
-		  className="btn btn-link btn-link-detail dropdown-toggle"
-		  type="button"
-		  id="download"
-		  alt="Download results"
-		  data-toggle="dropdown"
-		  aria-haspopup="true"
-		  aria-expanded="true"
-		  onClick={() => {
-			setShow(!show);
-		  }}
-		>
-		  <i className="glyphicon glyphicon-save"></i> DOWNLOAD
-		  <span className="caret"></span>
-		</button>
-		<div
-		  className={
-			"dropdown-menu dropdown-menu-box dropdown-menu-right" +
-			(show ? " open show" : "")
-		  }
-		  aria-labelledby="download"
-		>
-		  <div className="row">
-			<div className="col-md-7">
-			  <label>Download&nbsp;format: </label>
+		<div className='dropdown gg-download text-right'>
+			<button
+				className='btn btn-link btn-link-detail dropdown-toggle'
+				type='button'
+				id='download'
+				alt='Download results'
+				data-toggle='dropdown'
+				aria-haspopup='true'
+				aria-expanded='true'
+				onClick={() => {
+					setShow(!show);
+				}}>
+				<i className='glyphicon glyphicon-save'></i> DOWNLOAD
+				<span className='caret'></span>
+			</button>
+			<div
+				className={
+					'dropdown-menu dropdown-menu-box dropdown-menu-right' +
+					(show ? ' open show' : '')
+				}
+				aria-labelledby='download'>
+				<div className='row'>
+					<div className='col-md-7'>
+						<label>Download&nbsp;format: </label>
+					</div>
+					<div className='col-md-5 text-left'>
+						<select
+							id='download_format'
+							onChange={(e) => {
+								setFormat(e.target.value);
+							}}>
+							{types.map((type) => (
+								<option selected={type === format} value={type}>
+									{type.toUpperCase()}
+								</option>
+							))}
+						</select>
+					</div>
+				</div>
+				<div className='row'>
+					<div className='col-md-7'>
+						<label>Compressed: </label>
+					</div>
+					<div className='col-md-5'>
+						<input
+							type='checkbox'
+							id='download_compression'
+							checked={compressed}
+							onClick={(e) => {
+								setCompressed(e.target.checked);
+							}}
+						/>
+					</div>
+				</div>
+				<div className='row'>
+					<div className='col-md-7'></div>
+					<div className='col-md-5 text-right'>
+						<button className='btn-default' onClick={handleDownload}>
+							OK
+						</button>
+					</div>
+				</div>
 			</div>
-			<div className="col-md-5 text-left">
-			  <select
-				id="download_format"
-				onChange={e => {
-				  setFormat(e.target.value);
-				}}
-			  >
-				{types.map(type => (
-				  <option selected={type === format} value={type}>
-					{type.toUpperCase()}
-				  </option>
-				))}
-			  </select>
-			</div>
-		  </div>
-		  <div className="row">
-			<div className="col-md-7">
-			  <label>Compressed: </label>
-			</div>
-			<div className="col-md-5">
-			  <input
-				type="checkbox"
-				id="download_compression"
-				checked={compressed}
-				onClick={e => {
-				  setCompressed(e.target.checked);
-				}}
-			  />
-			</div>
-		  </div>
-		  <div className="row">
-			<div className="col-md-7"></div>
-			<div className="col-md-5 text-right">
-			  <button className="btn-default" onClick={handleDownload}>
-				OK
-			  </button>
-			</div>
-		  </div>
 		</div>
-	  </div>
 	);
-  };
+};
 const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
@@ -337,17 +334,46 @@ const GlycanDetail = (props) => {
 	];
 	// ====================================
 	// Add toggle collapse arrow icon
-	const [collapsed, setCollapsed] = React.useState(true);
-	function toggleCollapse() {
-		setCollapsed((prevValue) => !prevValue);
+
+	// 	const [collapsed, setCollapsed]= useReducer(
+	// 	(state, newState) => ({ ...state, ...newState }),
+	// 	{
+	// 		general: '',
+	// 		species: '',
+	// 		motif: '',
+	// 		glycoprotein: '',
+	//    biosyntheticEnzyme '',
+	// 		digitalSequence '',
+	// 		crossreference: '',
+	//    publication: ''
+
+	// 	}
+	// );
+
+	const [collapsed, setCollapsed] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{
+			general: true,
+			species: true,
+			motif: true,
+			glycoprotein: true,
+			bioEnzyme: true,
+			digitalSeq: true,
+			crossref: true,
+			publication: true,
+		}
+	);
+	//	const [collapsed, setCollapsed] = React.useState(true);
+	function toggleCollapse(name, value) {
+		setCollapsed({ [name]: !value });
 	}
-	const expandIcon = !collapsed ? (
-		<ExpandMoreIcon className='expand-arrow' />
-	) : (
+	const expandIcon = <ExpandMoreIcon className='expand-arrow' />;
+	const closeIcon = (
 		// <ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
 		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
-		// <ExpandMoreIcon className='expand-arrow' />
 	);
+	// <ExpandMoreIcon className='expand-arrow' />
+
 	//=====================================
 
 	return (
@@ -356,10 +382,9 @@ const GlycanDetail = (props) => {
 				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
 					<Sidebar items={items} />
 				</Col>
-				
-				
+
 				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
-				<div className='content-box-md'>
+					<div className='content-box-md'>
 						<h1 className='page-heading'>
 							Details for glycan
 							{glytoucan && glytoucan.glytoucan_ac && (
@@ -368,11 +393,10 @@ const GlycanDetail = (props) => {
 						</h1>
 					</div>
 					<DownloadButton
-                types={["png", "json"]}
-                dataType="glycan_detail"
-                dataId={id}
-              />
-				
+						types={['png', 'json']}
+						dataType='glycan_detail'
+						dataId={id}
+					/>
 					<React.Fragment>
 						<Helmet>
 							{getTitle('glycanDetail', {
@@ -394,12 +418,12 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() => toggleCollapse('general', collapsed.general)}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>General</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.general ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.general}>
 									<Card.Body>
 										{glytoucan && glytoucan.glytoucan_ac && (
 											<>
@@ -470,7 +494,7 @@ const GlycanDetail = (props) => {
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
-						{/*  species*/}
+						{/*  species */}
 						<Accordion
 							id='species'
 							defaultActiveKey='0'
@@ -480,12 +504,12 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() => toggleCollapse('species', collapsed.species)}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Species</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.species ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.species}>
 									<Card.Body>
 										<Row>
 											<Col md={12} xs={12} className='Species'>
@@ -517,12 +541,14 @@ const GlycanDetail = (props) => {
 									id='motif'
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() => toggleCollapse('motif', collapsed.motif)}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Motif</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span className={'text-right'}>
+										{collapsed.motif ? closeIcon : expandIcon}
+									</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.motif}>
 									<Card.Body>
 										{motifs && (
 											<>
@@ -556,12 +582,14 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() =>
+										toggleCollapse('glycoprotein', collapsed.glycoprotein)
+									}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Found Glycoproteins</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.glycoprotein ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.glycoprotein}>
 									<Card.Body>
 										{glycoprotein && glycoprotein.length !== 0 && (
 											<ClientPaginatedTable
@@ -584,12 +612,14 @@ const GlycanDetail = (props) => {
 									// id='biosyntheticenzymes'
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() =>
+										toggleCollapse('bioEnzyme', collapsed.bioEnzyme)
+									}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Biosynthetic Enzyme</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.bioEnzyme ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.bioEnzyme}>
 									<Card.Body>
 										{enzyme && enzyme.length !== 0 && (
 											<ClientPaginatedTable
@@ -611,12 +641,14 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() =>
+										toggleCollapse('digitalSeq', collapsed.digitalSeq)
+									}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Digital Sequence</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.digitalSeq ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.digitalSeq}>
 									<Card.Body className='text-responsive '>
 										<strong>IUPAC</strong>
 										<pre className='text-overflow'>{iupac}</pre>
@@ -644,12 +676,12 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() => toggleCollapse('crossref', collapsed.crossref)}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Cross Reference</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.crossref ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.crossref}>
 									<Card.Body>
 										{itemsCrossRef ? (
 											<ul>
@@ -689,12 +721,14 @@ const GlycanDetail = (props) => {
 								<Accordion.Toggle
 									as={Card.Header}
 									eventKey='0'
-									onClick={() => toggleCollapse()}
+									onClick={() =>
+										toggleCollapse('publication', collapsed.publication)
+									}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Publications</h3>
-									<span className={'text-right'}>{expandIcon}</span>
+									<span>{collapsed.publication ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed}>
+								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
 									<Card.Body>
 										{publication && (
 											<ul>
