@@ -7,92 +7,93 @@ import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
 import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
-import { downloadFromServer } from "../utils/download";
+// import { downloadFromServer } from "../utils/download";
 import Container from "@material-ui/core/Container";
+import DownloadButton from "../components/DownloadButton";
 
-const DownloadButton = props => {
-  const { types, dataType, dataId } = props;
+// const DownloadButton = props => {
+//   const { types, dataType, dataId } = props;
 
-  const [show, setShow] = useState(false);
-  const [format, setFormat] = useState(props.format || props.types[0]);
-  const [compressed, setCompressed] = useState(props.compressed || false);
+//   const [show, setShow] = useState(false);
+//   const [format, setFormat] = useState(props.format || props.types[0]);
+//   const [compressed, setCompressed] = useState(props.compressed || false);
 
-  const handleDownload = async () => {
-    await downloadFromServer(dataId, format, compressed, dataType);
+//   const handleDownload = async () => {
+//     await downloadFromServer(dataId, format, compressed, dataType);
 
-    setShow(false);
-  };
+//     setShow(false);
+//   };
 
-  return (
-    <div className="dropdown gg-download text-right">
-      <button
-        className="btn btn-link btn-link-detail dropdown-toggle"
-        type="button"
-        id="download"
-        alt="Download results"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="true"
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        <i className="glyphicon glyphicon-save"></i> DOWNLOAD
-        <span className="caret"></span>
-      </button>
-      <div
-        className={
-          "dropdown-menu dropdown-menu-box dropdown-menu-right" +
-          (show ? " open show" : "")
-        }
-        aria-labelledby="download"
-      >
-        <div className="row">
-          <div className="col-md-7">
-            <label>Download&nbsp;format: </label>
-          </div>
-          <div className="col-md-5 text-left">
-            <select
-              id="download_format"
-              onChange={e => {
-                setFormat(e.target.value);
-              }}
-            >
-              {types.map(type => (
-                <option selected={type === format} value={type}>
-                  {type.toUpperCase()}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-7">
-            <label>Compressed: </label>
-          </div>
-          <div className="col-md-5">
-            <input
-              type="checkbox"
-              id="download_compression"
-              checked={compressed}
-              onClick={e => {
-                setCompressed(e.target.checked);
-              }}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-7"></div>
-          <div className="col-md-5 text-right">
-            <button className="btn-default" onClick={handleDownload}>
-              OK
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="dropdown gg-download text-right">
+//       <button
+//         className="btn btn-link btn-link-detail dropdown-toggle"
+//         type="button"
+//         id="download"
+//         alt="Download results"
+//         data-toggle="dropdown"
+//         aria-haspopup="true"
+//         aria-expanded="true"
+//         onClick={() => {
+//           setShow(!show);
+//         }}
+//       >
+//         <i className="glyphicon glyphicon-save"></i> DOWNLOAD
+//         <span className="caret"></span>
+//       </button>
+//       <div
+//         className={
+//           "dropdown-menu dropdown-menu-box dropdown-menu-right" +
+//           (show ? " open show" : "")
+//         }
+//         aria-labelledby="download"
+//       >
+//         <div className="row">
+//           <div className="col-md-7">
+//             <label>Download&nbsp;format: </label>
+//           </div>
+//           <div className="col-md-5 text-left">
+//             <select
+//               id="download_format"
+//               onChange={e => {
+//                 setFormat(e.target.value);
+//               }}
+//             >
+//               {types.map(type => (
+//                 <option selected={type === format} value={type}>
+//                   {type.toUpperCase()}
+//                 </option>
+//               ))}
+//             </select>
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col-md-7">
+//             <label>Compressed: </label>
+//           </div>
+//           <div className="col-md-5">
+//             <input
+//               type="checkbox"
+//               id="download_compression"
+//               checked={compressed}
+//               onClick={e => {
+//                 setCompressed(e.target.checked);
+//               }}
+//             />
+//           </div>
+//         </div>
+//         <div className="row">
+//           <div className="col-md-7"></div>
+//           <div className="col-md-5 text-right">
+//             <button className="btn-default" onClick={handleDownload}>
+//               OK
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 const GlycanList = props => {
   let { id } = useParams();
 
@@ -181,8 +182,10 @@ const GlycanList = props => {
               onTableChange={handleTableChange}
               downloadButton={
                 <DownloadButton
-                  types={["csv", "json"]}
-                  dataType="glycan_list"
+                  types={[
+                    { type: "csv", data: "glycan_list" },
+                    { type: "json", data: "glycan_list" }
+                  ]}
                   dataId={id}
                 />
               }
