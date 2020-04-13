@@ -45,9 +45,7 @@ const getFormatDetails = (format, type, compressed = false) => {
 
 /**
  * This will download the data of the respective page in the user selected format.
- * @author Rupali
-
- *
+ * @author Rupali Mahadik.
  * @param {string} id the ID of the glycan or protein page. (ex.: uniprot_canonical_ac)
  * @param {string} format the file format or mimeType of the data to be received.
  * @param {boolean} compressed "true" to receive compressed data otherwise it is "false".
@@ -57,17 +55,13 @@ export const downloadFromServer = async (id, format, compressed, type) => {
   try {
     const formatDetails = getFormatDetails(format, type, compressed);
     const { fields, data } = formatDetails;
-
     const serverData = await getGlycanDownload(id, format, compressed, type, {
-      ...fields,
       "Content-Type": data
     });
-
     const { mimeType, ext, type: newType } = formatDetails;
-
     const filename = `${newType}_${id}${ext}`;
 
-    //  If try
+    download(serverData.data, filename, mimeType);
   } catch (err) {
     // nothing for now
   }
