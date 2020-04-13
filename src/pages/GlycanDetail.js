@@ -410,71 +410,73 @@ const GlycanDetail = (props) => {
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.general}>
 									<Card.Body>
-										{glytoucan && glytoucan.glytoucan_ac && (
-											<>
-												<p>
-													<img
-														className='img-cartoon'
-														src={glycanImageUrl + glytoucan.glytoucan_ac}
-														alt='Cartoon'
-													/>
-												</p>
-												<p>
-													<b>GlyToucan Accession: </b>
-													<Link
-														href={glytoucan.glytoucan_url}
-														target='noopener noreferrer _blank'>
-														{glytoucan.glytoucan_ac}
-													</Link>
-												</p>
-												<p>
-													<b>Monoisotopic Mass: </b>
-													{mass} Da <strong>(Permethylated Mass:</strong> {mass}{' '}
-													Da)
-												</p>
-											</>
-										)}
-										{composition && (
-											<p>
-												<b>Composition</b>:{' '}
-												<CompositionDisplay composition={composition} />
-											</p>
-										)}
-
-										{classification && classification.length && (
-											<p>
-												<b>Glycan Type/Subtype: </b>
-
-												{classification.map((Formatclassification) => (
-													<>
+										<p>
+											{glytoucan && glytoucan.glytoucan_ac && (
+												<>
+													<p>
+														<img
+															className='img-cartoon'
+															src={glycanImageUrl + glytoucan.glytoucan_ac}
+															alt='Cartoon'
+														/>
+													</p>
+													<div>
+														<strong>GlyToucan Accession: </strong>
 														<Link
-															href={Formatclassification.type.url}
+															href={glytoucan.glytoucan_url}
 															target='noopener noreferrer _blank'>
-															{Formatclassification.type.name}
+															{glytoucan.glytoucan_ac}
 														</Link>
-														&nbsp;
-														<Link
-															href={Formatclassification.subtype.url}
-															target='noopener noreferrer _blank'>
-															{Formatclassification.subtype.name}
-														</Link>
-													</>
-												))}
-											</p>
-										)}
+													</div>
+													<div>
+														<strong>Monoisotopic Mass: </strong>
+														{mass} Da <strong>(Permethylated Mass:</strong>{' '}
+														{mass} Da)
+													</div>
+												</>
+											)}
+											{composition && (
+												<div>
+													<strong>Composition</strong>:{' '}
+													<CompositionDisplay composition={composition} />
+												</div>
+											)}
 
-										{inchi_key && inchi_key.key && (
-											<>
-												<p>
-													<b>Inchy key: </b>
-													<Link
-														href={inchi_key.url}
-														target='noopener noreferrer _blank'>
-														{inchi_key.key}
-													</Link>
-												</p>
-											</>
-										)}
+											{classification && classification.length && (
+												<div>
+													<strong>Glycan Type/Subtype: </strong>
+
+													{classification.map((Formatclassification) => (
+														<>
+															<Link
+																href={Formatclassification.type.url}
+																target='noopener noreferrer _blank'>
+																{Formatclassification.type.name}
+															</Link>
+															&nbsp;
+															<Link
+																href={Formatclassification.subtype.url}
+																target='noopener noreferrer _blank'>
+																{Formatclassification.subtype.name}
+															</Link>
+														</>
+													))}
+												</div>
+											)}
+
+											{inchi_key && inchi_key.key && (
+												<>
+													<div>
+														<strong>Inchy key: </strong>
+														<Link
+															href={inchi_key.url}
+															target='noopener noreferrer _blank'>
+															{inchi_key.key}
+														</Link>
+													</div>
+												</>
+											)}
+										</p>
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
