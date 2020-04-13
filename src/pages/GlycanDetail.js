@@ -635,18 +635,20 @@ const GlycanDetail = (props) => {
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.digitalSeq}>
 									<Card.Body className='text-responsive '>
-										<strong>IUPAC</strong>
-										<pre className='text-overflow'>{iupac}</pre>
-										<strong>WURCS</strong>
-										<pre className='text-overflow'>{wurcs}</pre>
-										<strong>GlycoCT</strong>
-										<pre className='text-overflow'>{glycoct}</pre>
-										<strong>InChI</strong>
-										<pre className='text-overflow'>{inchi}</pre>
-										<strong>GLYCAM IUPAC</strong>
-										<pre className='text-overflow'>{glycam}</pre>
-										<strong>Isomeric SMILES</strong>
-										<pre className='text-overflow'>{smiles_isomeric}</pre>
+										<p>
+											<strong>IUPAC</strong>
+											<pre className='text-overflow'>{iupac}</pre>
+											<strong>WURCS</strong>
+											<pre className='text-overflow'>{wurcs}</pre>
+											<strong>GlycoCT</strong>
+											<pre className='text-overflow'>{glycoct}</pre>
+											<strong>InChI</strong>
+											<pre className='text-overflow'>{inchi}</pre>
+											<strong>GLYCAM IUPAC</strong>
+											<pre className='text-overflow'>{glycam}</pre>
+											<strong>Isomeric SMILES</strong>
+											<pre className='text-overflow'>{smiles_isomeric}</pre>
+										</p>
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -672,25 +674,25 @@ const GlycanDetail = (props) => {
 											<p>
 												<ul className='list-style-none'>
 													{/* <Row> */}
-														{itemsCrossRef.map((crossRef) => (
-															<li>
-																{/* <Col> */}
-																	<strong>{crossRef.database}:</strong>
-																	<ul>
-																		{crossRef.links.map((link) => (
-																			<li>
-																				<a
-																					href={link.url}
-																					target='_blank'
-																					rel='noopener noreferrer'>
-																					{link.id}
-																				</a>
-																			</li>
-																		))}
-																	</ul>
-																{/* </Col> */}
-															</li>
-														))}
+													{itemsCrossRef.map((crossRef) => (
+														<li>
+															{/* <Col> */}
+															<strong>{crossRef.database}:</strong>
+															<ul>
+																{crossRef.links.map((link) => (
+																	<li>
+																		<a
+																			href={link.url}
+																			target='_blank'
+																			rel='noopener noreferrer'>
+																			{link.id}
+																		</a>
+																	</li>
+																))}
+															</ul>
+															{/* </Col> */}
+														</li>
+													))}
 													{/* </Row> */}
 												</ul>
 											</p>
