@@ -17,13 +17,12 @@ import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import DownloadButton from'../components/DownloadButton';
+import DownloadButton from '../components/DownloadButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -299,8 +298,8 @@ const GlycanDetail = (props) => {
 					</div>
 					<DownloadButton
 						types={[
-							{type:'png', data:'glycan_image'},
-							{type:'json', data:'glycan_detail'}
+							{ type: 'png', data: 'glycan_image' },
+							{ type: 'json', data: 'glycan_detail' },
 						]}
 						dataType='glycan_detail'
 						dataId={id}
@@ -422,20 +421,27 @@ const GlycanDetail = (props) => {
 								<Accordion.Collapse eventKey='0' out={!collapsed.species}>
 									<Card.Body>
 										<Row>
-											<Col md={12} xs={12} className='Species'>
-												{speciesEvidence &&
-													// For every species object
-													Object.keys(speciesEvidence).map((species) => (
-														// For every database for current species object
-														<>
-															{/* s represents keys of evidences i.e. Species name, evidences[s] represents object of databases for that species */}
-															{species}:
-															<EvidenceList
-																evidences={speciesEvidence[species]}
-															/>
-														</>
-													))}
-											</Col>
+											{speciesEvidence &&
+												// For every species object
+												Object.keys(speciesEvidence).map((species) => (
+													// For every database for current species object
+													<Col md={6} xs={6}>
+														<p>
+															<>
+																<Row className='gg-align-middle'>
+																	<Col align='right'>
+																		<strong>{species}:</strong>
+																	</Col>
+																	<Col align='left'>
+																		<EvidenceList
+																			evidences={speciesEvidence[species]}
+																		/>
+																	</Col>
+																</Row>
+															</>
+														</p>
+													</Col>
+												))}
 										</Row>
 									</Card.Body>
 								</Accordion.Collapse>
@@ -465,16 +471,18 @@ const GlycanDetail = (props) => {
 												<Row>
 													{motifs.map((motif) => (
 														<Col>
-															<div key={motif.id} className='img-wrapper'>
-																<img
-																	className='img-cartoon'
-																	src={glycanImageUrl + motif.id}
-																	alt='Cartoon'
-																/>
-															</div>
-															<span>
-																<a href={''}>{motif.name}</a>
-															</span>
+															<p >
+																<div key={motif.id} className='img-wrapper'>
+																	<img
+																		className='img-cartoon'
+																		src={glycanImageUrl + motif.id}
+																		alt='Cartoon'
+																	/>
+																</div>
+																<span>
+																	<a href={''}>{motif.name}</a>
+																</span>
+															</p>
 														</Col>
 													))}
 												</Row>

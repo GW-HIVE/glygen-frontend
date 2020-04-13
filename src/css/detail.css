@@ -40,14 +40,14 @@
 	margin-top: 5px;
 }
 
-.Species {
+/* .Species {
 	display: grid;
 	grid-template-columns: auto auto auto auto;
 	grid-gap: 10px;
 	grid-row-start: 2;
-}
+} */
 .badge-div + .badge-div {
-	margin: 1em 0 0;
+	margin: 20px 0 0;
 	margin-left: 2px;
 }
 legend {

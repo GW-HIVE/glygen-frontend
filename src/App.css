@@ -295,7 +295,11 @@ hr {
 .gg-align-center {
 	justify-content: center !important;
 }
-
+.gg-align-middle {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
 /* =========================================
         Buttons
 ============================================ */
