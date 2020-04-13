@@ -40,6 +40,10 @@ a:hover {
 p {
 	color: #444444;
 }
+.list-style-none {
+	list-style: none !important;
+	padding: 0;
+}
 /* ========================================
               Header 
 ==========================================*/

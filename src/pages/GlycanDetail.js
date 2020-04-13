@@ -663,32 +663,37 @@ const GlycanDetail = (props) => {
 									eventKey='0'
 									onClick={() => toggleCollapse('crossref', collapsed.crossref)}
 									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Cross Reference</h3>
+									<h3>Cross References</h3>
 									<span>{collapsed.crossref ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.crossref}>
 									<Card.Body>
 										{itemsCrossRef ? (
-											<ul>
-												{itemsCrossRef.map((crossRef) => (
-													<li className='list-group2'>
-														<strong>{crossRef.database}:</strong>
-														<ul>
-															{crossRef.links.map((link) => (
-																<li className='list-group-indent'>
-																	<a
-																		// className='panelcontent'
-																		href={link.url}
-																		target='_blank'
-																		rel='noopener noreferrer'>
-																		{link.id}
-																	</a>
-																</li>
-															))}
-														</ul>
-													</li>
-												))}
-											</ul>
+											<p>
+												<ul className='list-style-none'>
+													{/* <Row> */}
+														{itemsCrossRef.map((crossRef) => (
+															<li>
+																{/* <Col> */}
+																	<strong>{crossRef.database}:</strong>
+																	<ul>
+																		{crossRef.links.map((link) => (
+																			<li>
+																				<a
+																					href={link.url}
+																					target='_blank'
+																					rel='noopener noreferrer'>
+																					{link.id}
+																				</a>
+																			</li>
+																		))}
+																	</ul>
+																{/* </Col> */}
+															</li>
+														))}
+													{/* </Row> */}
+												</ul>
+											</p>
 										) : (
 											<p>No data available.</p>
 										)}
@@ -717,9 +722,9 @@ const GlycanDetail = (props) => {
 									<Card.Body>
 										<Table bordered striped hover fluid>
 											{publication && (
-												<tbody className='table-body5'>
+												<tbody>
 													{publication.map((pub, pubIndex) => (
-														<tr className='table-row5'>
+														<tr>
 															<td key={pubIndex}>
 																<p>
 																	<div>
