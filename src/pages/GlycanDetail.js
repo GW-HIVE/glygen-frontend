@@ -638,20 +638,20 @@ const GlycanDetail = (props) => {
 									<span>{collapsed.digitalSeq ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.digitalSeq}>
-									<Card.Body className='text-responsive '>
+									<Card.Body className='text-responsive'>
 										<p>
 											<strong>IUPAC</strong>
-											<pre className='text-overflow'>{iupac}</pre>
+											<p className='text-overflow'>{iupac}</p>
 											<strong>WURCS</strong>
-											<pre className='text-overflow'>{wurcs}</pre>
+											<p className='text-overflow'>{wurcs}</p>
 											<strong>GlycoCT</strong>
-											<pre className='text-overflow'>{glycoct}</pre>
+											<p className='text-overflow'>{glycoct}</p>
 											<strong>InChI</strong>
-											<pre className='text-overflow'>{inchi}</pre>
+											<p className='text-overflow'>{inchi}</p>
 											<strong>GLYCAM IUPAC</strong>
-											<pre className='text-overflow'>{glycam}</pre>
+											<p className='text-overflow'>{glycam}</p>
 											<strong>Isomeric SMILES</strong>
-											<pre className='text-overflow'>{smiles_isomeric}</pre>
+											<p className='text-overflow'>{smiles_isomeric}</p>
 										</p>
 									</Card.Body>
 								</Accordion.Collapse>
