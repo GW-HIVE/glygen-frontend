@@ -539,20 +539,22 @@ const GlycanDetail = (props) => {
 									<Card.Body>
 										{motifs && (
 											<>
-												{motifs.map((motif) => (
-													<Col>
-														<div key={motif.id} className='img-wrapper'>
-															<img
-																className='img-cartoon'
-																src={glycanImageUrl + motif.id}
-																alt='Cartoon'
-															/>
-														</div>
-														<span>
-															<a href={''}>{motif.name}</a>
-														</span>
-													</Col>
-												))}
+												<Row>
+													{motifs.map((motif) => (
+														<Col>
+															<div key={motif.id} className='img-wrapper'>
+																<img
+																	className='img-cartoon'
+																	src={glycanImageUrl + motif.id}
+																	alt='Cartoon'
+																/>
+															</div>
+															<span>
+																<a href={''}>{motif.name}</a>
+															</span>
+														</Col>
+													))}
+												</Row>
 											</>
 										)}
 									</Card.Body>
