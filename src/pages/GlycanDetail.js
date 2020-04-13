@@ -9,7 +9,8 @@ import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import { Link } from '@material-ui/core';
 import { Navbar, Col, Row } from 'react-bootstrap';
-import { FaReadme } from 'react-icons/fa';
+// import { FaReadme } from 'react-icons/fa';
+import { FiBookOpen } from 'react-icons/fi';
 import { groupEvidences, groupSpeciesEvidences } from '../data/data-format';
 import EvidenceList from '../components/EvidenceList';
 import ClientPaginatedTable from '../components/ClientPaginatedTable';
@@ -20,8 +21,10 @@ import { downloadFromServer } from '../utils/download';
 //import DownloadButton from'../components/DownloadButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-import ToggleCardlTemplate from '../components/cards/ToggleCardTemplate';
 const DownloadButton = (props) => {
 	const { types, dataType, dataId } = props;
 
@@ -332,24 +335,9 @@ const GlycanDetail = (props) => {
 			},
 		},
 	];
-	// ====================================
+
+	// ==================================== //
 	// Add toggle collapse arrow icon
-
-	// 	const [collapsed, setCollapsed]= useReducer(
-	// 	(state, newState) => ({ ...state, ...newState }),
-	// 	{
-	// 		general: '',
-	// 		species: '',
-	// 		motif: '',
-	// 		glycoprotein: '',
-	//    biosyntheticEnzyme '',
-	// 		digitalSequence '',
-	// 		crossreference: '',
-	//    publication: ''
-
-	// 	}
-	// );
-
 	const [collapsed, setCollapsed] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{
@@ -363,18 +351,15 @@ const GlycanDetail = (props) => {
 			publication: true,
 		}
 	);
-	//	const [collapsed, setCollapsed] = React.useState(true);
+
 	function toggleCollapse(name, value) {
 		setCollapsed({ [name]: !value });
 	}
 	const expandIcon = <ExpandMoreIcon className='expand-arrow' />;
 	const closeIcon = (
-		// <ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
 		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
 	);
-	// <ExpandMoreIcon className='expand-arrow' />
-
-	//=====================================
+	// ===================================== //
 
 	return (
 		<>
@@ -730,42 +715,42 @@ const GlycanDetail = (props) => {
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
 									<Card.Body>
-										{publication && (
-											<ul>
-												{publication.map((pub, pubIndex) => (
-													<li key={pubIndex}>
-														<p>
-															<strong>{pub.title}</strong>
-														</p>
-														<h3
-															style={{ fontSize: '15px', marginTop: '-10px' }}>
-															{pub.authors}
-														</h3>
-														<h2
-															style={{ fontSize: '15px', marginTop: '-10px' }}>
-															{pub.journal} <span>&nbsp;</span>({pub.date})
-														</h2>
-														<h2
-															style={{ fontSize: '14px', marginTop: '-10px' }}>
-															<FaReadme />
+										<Table bordered striped hover fluid>
+											{publication && (
+												<tbody className='table-body5'>
+													{publication.map((pub, pubIndex) => (
+														<tr className='table-row5'>
+															<td key={pubIndex}>
+																<p>
+																	<div>
+																		<strong>{pub.title}</strong>
+																	</div>
+																	<div>{pub.authors}</div>
+																	<div>
+																		{pub.journal} <span>&nbsp;</span>({pub.date}
+																		)
+																	</div>
+																	<div>
+																		<FiBookOpen />
+																		<a
+																			className='panelcontent'
+																			href={pub.url}
+																			target='_blank'
+																			rel='noopener noreferrer'>
+																			{pub.pmid}
+																		</a>
+																	</div>
 
-															<a
-																className='panelcontent'
-																href={pub.url}
-																target='_blank'
-																rel='noopener noreferrer'>
-																{pub.pmid}
-															</a>
-														</h2>
-
-														<EvidenceList
-															style={{ fontSize: '1px', marginTop: '-10px' }}
-															evidences={groupEvidences(pub.evidence)}
-														/>
-													</li>
-												))}
-											</ul>
-										)}
+																	<EvidenceList
+																		evidences={groupEvidences(pub.evidence)}
+																	/>
+																</p>
+															</td>
+														</tr>
+													))}
+												</tbody>
+											)}
+										</Table>
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>

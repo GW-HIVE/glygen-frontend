@@ -32,10 +32,11 @@
 	border-radius: 30px;
 	text-align: center;
 	font-size: 1em;
+	margin-left: 5px;
 }
 .badge-div {
-	margin: 0.5em 0 0;
-	margin-left: -20px;
+	/* margin: 0.5em 0 0; */
+	/* margin-left: -20px; */
 	margin-top: 5px;
 }
 
