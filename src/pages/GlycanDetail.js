@@ -17,94 +17,14 @@ import ClientPaginatedTable from '../components/ClientPaginatedTable';
 import '../css/detail.css';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
-import { downloadFromServer } from '../utils/download';
-//import DownloadButton from'../components/DownloadButton';
+import DownloadButton from'../components/DownloadButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
-const DownloadButton = (props) => {
-	const { types, dataType, dataId } = props;
 
-	const [show, setShow] = useState(false);
-	const [format, setFormat] = useState(props.format || props.types[0]);
-	const [compressed, setCompressed] = useState(props.compressed || false);
-
-	const handleDownload = async () => {
-		await downloadFromServer(dataId, format, compressed, dataType);
-
-		setShow(false);
-	};
-
-	return (
-		<div className='dropdown gg-download text-right'>
-			<button
-				className='btn btn-link btn-link-detail dropdown-toggle'
-				type='button'
-				id='download'
-				alt='Download results'
-				data-toggle='dropdown'
-				aria-haspopup='true'
-				aria-expanded='true'
-				onClick={() => {
-					setShow(!show);
-				}}>
-				<i className='glyphicon glyphicon-save'></i> DOWNLOAD
-				<span className='caret'></span>
-			</button>
-			<div
-				className={
-					'dropdown-menu dropdown-menu-box dropdown-menu-right' +
-					(show ? ' open show' : '')
-				}
-				aria-labelledby='download'>
-				<div className='row'>
-					<div className='col-md-7'>
-						<label>Download&nbsp;format: </label>
-					</div>
-					<div className='col-md-5 text-left'>
-						<select
-							id='download_format'
-							onChange={(e) => {
-								setFormat(e.target.value);
-							}}>
-							{types.map((type) => (
-								<option selected={type === format} value={type}>
-									{type.toUpperCase()}
-								</option>
-							))}
-						</select>
-					</div>
-				</div>
-				<div className='row'>
-					<div className='col-md-7'>
-						<label>Compressed: </label>
-					</div>
-					<div className='col-md-5'>
-						<input
-							type='checkbox'
-							id='download_compression'
-							checked={compressed}
-							onClick={(e) => {
-								setCompressed(e.target.checked);
-							}}
-						/>
-					</div>
-				</div>
-				<div className='row'>
-					<div className='col-md-7'></div>
-					<div className='col-md-5 text-right'>
-						<button className='btn-default' onClick={handleDownload}>
-							OK
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-};
 const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
@@ -242,7 +162,7 @@ const GlycanDetail = (props) => {
 	const glycoProtienColumns = [
 		{
 			dataField: 'uniprot_canonical_ac',
-			text: 'protein ID',
+			text: 'Protein ID',
 			sort: true,
 
 			headerStyle: (column, colIndex) => {
@@ -378,7 +298,10 @@ const GlycanDetail = (props) => {
 						</h1>
 					</div>
 					<DownloadButton
-						types={['png', 'json']}
+						types={[
+							{type:'png', data:'glycan_image'},
+							{type:'json', data:'glycan_detail'}
+						]}
 						dataType='glycan_detail'
 						dataId={id}
 					/>
