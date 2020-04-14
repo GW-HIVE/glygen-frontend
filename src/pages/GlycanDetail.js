@@ -404,9 +404,6 @@ const GlycanDetail = (props) => {
 							</Card>
 						</Accordion>
 						{/*  species */}
-						{/* species */}
-						{/*  human */}
-						{/*  mouse */}
 						<Accordion
 							id='species'
 							defaultActiveKey='0'
@@ -659,12 +656,12 @@ const GlycanDetail = (props) => {
 									<span>{collapsed.publication ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
-									<Card.Body>
-										<Table bordered striped hover fluid>
+									<Card.Body className='publication-card-padding'>
+										<Table bordered hover fluid>
 											{publication && (
-												<tbody>
+												<tbody className='table-body'>
 													{publication.map((pub, pubIndex) => (
-														<tr>
+														<tr className='table-row'>
 															<td key={pubIndex}>
 																<p>
 																	<div>
