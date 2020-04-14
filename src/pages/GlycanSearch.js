@@ -12,6 +12,7 @@ import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import PageLoading from '../components/PageLoading';
 
 import {
 	Component,
@@ -260,15 +261,7 @@ const useStyles = makeStyles((theme) => ({
 		'& > *': {
 			margin: theme.spacing(1),
 		},
-	},
-	rootProgress: {
-		width: '1000px',
-		paddingBottom: '20px',
-		paddingTop: '20px',
-		'& > * + *': {
-			marginTop: theme.spacing(2),
-		},
-	},
+	}
 }));
 
 const GlycanSearch = (props) => {
@@ -302,7 +295,7 @@ const GlycanSearch = (props) => {
 		{}
 	);
 	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
-	const [pageLoading, setPageLoading] = React.useState(false);
+	const [pageLoading, setPageLoading] = React.useState(true);
 
 	function glyOrgChange(org) {
 		setGlyOrganisms(org);
@@ -431,12 +424,11 @@ const GlycanSearch = (props) => {
 	}
 
 	React.useEffect(() => {
-		setPageLoading(true);
+    setPageLoading(true);
 		getGlycanInit().then((response) => {
 			let initData = response.data;
-
 			let simpleSearchExamples = {};
-			for (var x = 0; x < initData.simple_search_category.length; x++) {
+			for (let x = 0; x < initData.simple_search_category.length; x++) {
 				if (initData.simple_search_category[x].id === 'enzyme') {
 					simpleSearchExamples[initData.simple_search_category[x].id] = {
 						examples: ['B4GALT1'],
@@ -501,7 +493,7 @@ const GlycanSearch = (props) => {
 			let compositionData = initData.composition;
 			let compStateData = {};
 
-			for (var x = 0; x < compositionData.length; x++) {
+			for (let x = 0; x < compositionData.length; x++) {
 				compositionData[x].orderId =
 					compositionSearchData[compositionData[x].residue].order_id;
 				compositionData[x].subtext =
@@ -538,26 +530,39 @@ const GlycanSearch = (props) => {
 				return parseInt(res1.orderId) - parseInt(res2.orderId);
 			});
 			setGlyCompData(compStateData);
-			setInitData(initData);
+      setInitData(initData);
+      if (id === undefined)
+        setPageLoading(false);
 
 			id &&
 				getGlycanList(id, 1).then(({ data }) => {
 					if (data.query.composition !== undefined) {
 						let queryCompData = {};
-						for (var x = 0; x < data.query.composition.length; x++) {
-							queryCompData[data.query.composition[x].residue] = {
-								min: data.query.composition[x].min,
+						for (let x = 0; x < data.query.composition.length; x++) {
+              let resVal = initData.composition.filter(function (res) {
+                return data.query.composition[x].residue === res.residue;
+              })[0];							
+              queryCompData[data.query.composition[x].residue] = {
+                min: data.query.composition[x].min,
+                selectValue: getSelectionValue(
+                  parseInt(data.query.composition[x].min),
+                  parseInt(data.query.composition[x].max),
+                  parseInt(resVal.min),
+                  parseInt(resVal.max)
+                ),
 								max: data.query.composition[x].max,
 							};
 						}
 						setGlyCompData(queryCompData);
-						setGlyActTabKey('composition_search');
+            setGlyActTabKey('composition_search');
+            setPageLoading(false);
 					} else if (data.query.query_type === 'glycan_search_simple') {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
 						setGlySimpleSearchTerm(data.query.term ? data.query.term : '');
-						setGlyActTabKey('simple_search');
+            setGlyActTabKey('simple_search');
+            setPageLoading(false);
 					} else {
 						setGlycanId(
 							data.query.glytoucan_ac === undefined
@@ -670,11 +675,11 @@ const GlycanSearch = (props) => {
 								? ''
 								: data.query.glycan_subtype
 						);
-						setGlyActTabKey('advanced_search');
+            setGlyActTabKey('advanced_search');
+            setPageLoading(false);
 					}
 				});
 		});
-		setPageLoading(false);
 	}, [id]);
 
 	function searchjson(
@@ -944,12 +949,7 @@ const GlycanSearch = (props) => {
 			</Helmet>
 			<div className='lander'>
 				<Container className={classes.con1}>
-					{pageLoading && (
-						<div className={classes.rootProgress}>
-							<LinearProgress />
-							<LinearProgress color='secondary' />
-						</div>
-					)}
+          <PageLoading pageLoading={pageLoading}/>
 					<div className='content-box-md'>
 						<h1 className='page-heading'>Glycan Search</h1>
 					</div>
@@ -1564,12 +1564,6 @@ const GlycanSearch = (props) => {
 						</Tab>
 						<Tab eventKey='tutorial' title='Tutorial'></Tab>
 					</Tabs>
-					{pageLoading && (
-						<div className={classes.rootProgress}>
-							<LinearProgress />
-							<LinearProgress color='secondary' />
-						</div>
-					)}
 				</Container>
 			</div>
 		</>
