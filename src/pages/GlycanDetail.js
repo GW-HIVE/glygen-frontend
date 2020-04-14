@@ -405,8 +405,8 @@ const GlycanDetail = (props) => {
 						</Accordion>
 						{/*  species */}
 						{/* species */}
-            {/*  human */}
-            {/*  mouse */}
+						{/*  human */}
+						{/*  mouse */}
 						<Accordion
 							id='species'
 							defaultActiveKey='0'
@@ -474,7 +474,7 @@ const GlycanDetail = (props) => {
 												<Row>
 													{motifs.map((motif) => (
 														<Col>
-															<p >
+															<p>
 																<div key={motif.id} className='img-wrapper'>
 																	<img
 																		className='img-cartoon'
