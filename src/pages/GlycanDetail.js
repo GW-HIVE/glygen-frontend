@@ -404,6 +404,8 @@ const GlycanDetail = (props) => {
 							</Card>
 						</Accordion>
 						{/*  species */}
+            {/*  human */}
+            {/*  mouse */}
 						<Accordion
 							id='species'
 							defaultActiveKey='0'
