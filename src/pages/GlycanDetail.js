@@ -614,16 +614,20 @@ const GlycanDetail = (props) => {
 															{/* <Col> */}
 															<strong>{crossRef.database}:</strong>
 															<ul>
-																{crossRef.links.map((link) => (
-																	<li>
-																		<a
-																			href={link.url}
-																			target='_blank'
-																			rel='noopener noreferrer'>
-																			{link.id}
-																		</a>
-																	</li>
-																))}
+																<Row>
+																	{crossRef.links.map((link) => (
+																		<Col md={3}>
+																			<li>
+																				<a
+																					href={link.url}
+																					target='_blank'
+																					rel='noopener noreferrer'>
+																					{link.id}
+																				</a>
+																			</li>
+																		</Col>
+																	))}
+																</Row>
 															</ul>
 															{/* </Col> */}
 														</li>
@@ -657,7 +661,7 @@ const GlycanDetail = (props) => {
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
 									<Card.Body className='publication-card-padding'>
-										<Table bordered hover fluid>
+										<Table hover fluid>
 											{publication && (
 												<tbody className='table-body'>
 													{publication.map((pub, pubIndex) => (
