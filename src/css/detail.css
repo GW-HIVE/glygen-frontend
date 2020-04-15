@@ -14,10 +14,7 @@
 	overflow-x: 'scroll';
 	white-space: pre-line;
 }
-.panelcontent {
-	margin-left: 12px;
-	margin-top: 10px;
-}
+
 .page-item.active .page-link {
 	background-color: white;
 }

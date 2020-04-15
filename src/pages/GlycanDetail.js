@@ -23,6 +23,7 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+// import PublicationsMenu from '../components/SeeMoreVertBtn';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -657,6 +658,7 @@ const GlycanDetail = (props) => {
 									}
 									className='panelHeadBgr panelHeadText arrow'>
 									<h3>Publications</h3>
+									{/* <PublicationsMenu /> */}
 									<span>{collapsed.publication ? closeIcon : expandIcon}</span>
 								</Accordion.Toggle>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
@@ -676,10 +678,13 @@ const GlycanDetail = (props) => {
 																		{pub.journal} <span>&nbsp;</span>({pub.date}
 																		)
 																	</div>
+
 																	<div>
 																		<FiBookOpen />
+																		<span style={{ paddingLeft: '15px' }}>
+																			PMID:
+																		</span>{' '}
 																		<a
-																			className='panelcontent'
 																			href={pub.url}
 																			target='_blank'
 																			rel='noopener noreferrer'>
