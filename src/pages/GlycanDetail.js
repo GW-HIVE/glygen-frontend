@@ -7,8 +7,8 @@ import { NavLink } from 'react-router-dom';
 import Sidebar from '../components/navigation/Sidebar';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
-import { Link } from '@material-ui/core';
-import { Navbar, Col, Row } from 'react-bootstrap';
+import { Link, rgbToHex } from '@material-ui/core';
+import { Navbar, Col, Row, Image } from 'react-bootstrap';
 // import { FaReadme } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
 import { groupEvidences, groupSpeciesEvidences } from '../data/data-format';
@@ -23,7 +23,11 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-// import PublicationsMenu from '../components/SeeMoreVertBtn';
+import PublicationsMenu from '../components/SeeMoreVertBtn';
+import helpCircleIcon from '../images/icons/help-circle-icon.svg';
+import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -275,9 +279,14 @@ const GlycanDetail = (props) => {
 	function toggleCollapse(name, value) {
 		setCollapsed({ [name]: !value });
 	}
-	const expandIcon = <ExpandMoreIcon className='expand-arrow' />;
+	const expandIcon = (
+		<ExpandMoreIcon fontSize='large' className='expand-arrow' />
+	);
 	const closeIcon = (
-		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		<ExpandLessIcon
+			fontSize='large'
+			className={'expand-arrow' + ' expand-arrow-expanded'}
+		/>
 	);
 	// ===================================== //
 
@@ -323,14 +332,44 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() => toggleCollapse('general', collapsed.general)}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>General</h3>
-									<span>{collapsed.general ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>General</h3>
+									<span className='gg-align-middle card-icon-space'>
+										<Tooltip title='Help' placement='top'>
+											<a
+												href='https://wiki.glygen.org/index.php/Main_Page'
+												target='_blank'
+												rel='noopener noreferrer'>
+												<Image
+													className='iconHover'
+													src={helpCircleIcon}
+													alt='Related glycans'
+												/>
+											</a>
+										</Tooltip>
+									</span>
+									<span className='gg-align-middle card-icon-space'>
+										<Tooltip title='Related glycans' placement='top'>
+											<a
+												href='https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?saccharide=G17689DH'
+												onClick=''
+												target='_blank'
+												rel='noopener noreferrer'>
+												<Image src={relatedGlycansIcon} alt='Related glycans' />
+											</a>
+										</Tooltip>
+									</span>
+									<Accordion.Toggle
+										// as={Card.Header}
+										eventKey='0'
+										onClick={() => toggleCollapse('general', collapsed.general)}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										{/* <h3>General</h3> */}
+										{/* <div> */}
+										<span>{collapsed.general ? closeIcon : expandIcon}</span>
+										{/* </div> */}
+									</Accordion.Toggle>
+								</Card.Header>
 								<Accordion.Collapse eventKey='0' out={!collapsed.general}>
 									<Card.Body>
 										<p>
@@ -650,17 +689,25 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() =>
-										toggleCollapse('publication', collapsed.publication)
-									}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Publications</h3>
-									{/* <PublicationsMenu /> */}
-									<span>{collapsed.publication ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Publications</h3>
+
+									<span className='gg-align-middle card-icon-space'>
+										<PublicationsMenu />
+									</span>
+									<Accordion.Toggle
+										// as={Card.Header}
+										eventKey='0'
+										onClick={() =>
+											toggleCollapse('publication', collapsed.publication)
+										}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										{/* <h3>Publications</h3> */}
+										<span>
+											{collapsed.publication ? closeIcon : expandIcon}
+										</span>
+									</Accordion.Toggle>
+								</Card.Header>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
 									<Card.Body className='publication-card-padding'>
 										<Table hover fluid>

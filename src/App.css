@@ -161,25 +161,6 @@ p {
 	color: #1d9901 !important;
 	position: relative;
 }
-.arrow {
-	display: flex;
-	justify-content: space-between;
-}
-.arrow h3,
-.arrow h4 {
-	margin-left: 0;
-	/* padding: 10px 0; */
-}
-.expand-arrow {
-	font-size: 2.2rem !important;
-	/* margin: 10px 0; */
-}
-
-.expand-arrow-expanded {
-	font-weight: 900;
-	/* margin: 10px 0; */
-}
-
 .panelTable {
 	min-width: 650px;
 }
@@ -191,6 +172,42 @@ p {
 .text-indent div {
 	text-indent: -50px;
 	padding-left: 50px;
+}
+
+/* ========================================
+							Icons/ arrow
+=========================================== */
+.arrow {
+	display: flex;
+	justify-content: space-between;
+}
+.arrow h3,
+.arrow h4 {
+	margin-left: 0;
+	/* padding: 10px 0; */
+}
+.expand-arrow {
+	/* font-size: 36px !important; */
+	/* margin: 10px 0; */
+}
+
+.expand-arrow-expanded {
+	/* font-weight: 900; */
+	/* margin: 10px 0; */
+}
+.arrow-btn,
+.arrow-btn:focus,
+.arrow-btn :active {
+	padding: 0 !important;
+	margin: 0 !important;
+	border: none !important;
+}
+.card-icon-space {
+	padding-right: 20px;
+}
+.more-vert-icon {
+	color: #2f78b7;
+	cursor: pointer;
 }
 
 /* ========================================
