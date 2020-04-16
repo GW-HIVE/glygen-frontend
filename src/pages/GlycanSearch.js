@@ -11,8 +11,7 @@ import { getJson } from '../data/api';
 import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import PageLoading from '../components/PageLoading';
+import PageLoader from '../components/load/PageLoader';
 
 import {
 	Component,
@@ -949,7 +948,7 @@ const GlycanSearch = (props) => {
 			</Helmet>
 			<div className='lander'>
 				<Container className={classes.con1}>
-          <PageLoading pageLoading={pageLoading}/>
+          <PageLoader pageLoading={pageLoading}/>
 					<div className='content-box-md'>
 						<h1 className='page-heading'>Glycan Search</h1>
 					</div>

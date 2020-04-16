@@ -123,9 +123,15 @@ const resourcesCard = {
 
 export default function Home() {
 	const [homeData, setHomeData] = useState({ statistics: [], version: [] });
+	const [pageLoading, setPageLoading] = React.useState(true);
 
 	useEffect(() => {
+		setPageLoading(true);
 		getSystemData().then(response => setHomeData(response.data));
+		setTimeout(()=> {
+			setPageLoading(false);
+		}, 500)
+
 	}, []);
 
 	return (
@@ -160,9 +166,9 @@ export default function Home() {
 								style={{
 									justifyContent: 'center'
 								}}>
-								<VersionCard data={homeData.version} />
+								<VersionCard data={homeData.version} pageLoading={pageLoading}/>
 								<InfoCard post={feedbackCard} />
-								<StatDBCard data={homeData.statistics} />
+								<StatDBCard data={homeData.statistics} pageLoading={pageLoading}/>
 								<InfoCard post={resourcesCard} />
 								<TwitterCard />
 							</Grid>

@@ -9,6 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { getDateMMDDYYYY } from '../../utils/common';
 import { Link } from '@material-ui/core';
+import CardLoader from '../load/CardLoader';
 
 const useStyles = makeStyles(theme => ({
 	cardAction: {
@@ -46,6 +47,7 @@ export default function VersionCard(props) {
 		<Grid item xs={12} sm={6} md={12}>
 			{/* <CardActionArea className={classes.cardAction} component='a' href='#'> */}
 			<Card className='card'>
+				<CardLoader pageLoading={props.pageLoading}/>
 				<div className={classes.cardDetails}>
 					<CardContent>
 						<Typography

@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import { Row } from 'react-bootstrap';
+import CardLoader from '../load/CardLoader';
 
 const useStyles = makeStyles(theme => ({
 	cardAction: {
@@ -32,6 +33,7 @@ export default function StatDBCard(props) {
 			{/* <Card className={classes.card}> */}
 			{/* <CardActionArea className={classes.cardAction} component='a' href='#'> */}
 				<Card className='card'>
+					<CardLoader pageLoading={props.pageLoading}/>
 					<div className={classes.cardDetails}>
 						<CardContent style={{ padding: '30px' }}>
 							<Typography
