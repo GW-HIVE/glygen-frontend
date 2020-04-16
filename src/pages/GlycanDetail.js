@@ -132,6 +132,7 @@ const GlycanDetail = (props) => {
 		getGlycanDetailData.catch(({ response }) => {
 			alert(JSON.stringify(response));
 		});
+		// eslint-disable-next-line
 	}, []);
 
 	if (detailData.mass) {
@@ -261,7 +262,10 @@ const GlycanDetail = (props) => {
 	];
 
 	// ==================================== //
-	// Add toggle collapse arrow icon
+	/**
+	 * Adding toggle collapse arrow icon to card header individualy.
+	 * @param {object} glytoucan_ac- glytoucan accession ID.
+	 **/
 	const [collapsed, setCollapsed] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{
@@ -289,6 +293,17 @@ const GlycanDetail = (props) => {
 		/>
 	);
 	// ===================================== //
+
+	/**
+	 * Redirect and opens glytoucan_ac in a subsumption browser
+	 * @param {object} glytoucan_ac- glytoucan accession ID.
+	 **/
+	function handleOpenSubsumptionBrowse(glytoucan_ac) {
+		var url =
+			'https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=' +
+			glytoucan_ac;
+		window.open(url);
+	}
 
 	return (
 		<>
@@ -351,10 +366,12 @@ const GlycanDetail = (props) => {
 									<span className='gg-align-middle card-icon-space'>
 										<Tooltip title='Related glycans' placement='top'>
 											<a
-												href='https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?saccharide=G17689DH'
-												onClick=''
-												target='_blank'
-												rel='noopener noreferrer'>
+												href='javascript:void(0)'
+												onClick={() => {
+													handleOpenSubsumptionBrowse(
+														glytoucan && glytoucan.glytoucan_ac
+													);
+												}}>
 												<Image src={relatedGlycansIcon} alt='Related glycans' />
 											</a>
 										</Tooltip>
