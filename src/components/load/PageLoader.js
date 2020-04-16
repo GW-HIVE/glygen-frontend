@@ -2,12 +2,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
 import Backdrop from "@material-ui/core/Backdrop";
-import LoadingImage from "../images/page_loading.gif";
+import LoadingImage from "../../images/page_loading.gif";
 
 const useStyles = makeStyles(theme => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff"
+    backgroundColor: "rgba(0, 0, 0, 0.3)"
   },
   image: {
     width: 75,
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PageLoading(props) {
+export default function PageLoader(props) {
   const classes = useStyles();
 
   return (
@@ -27,6 +27,6 @@ export default function PageLoading(props) {
   );
 }
 
-PageLoading.propTypes = {
+PageLoader.propTypes = {
 	pageLoading: PropTypes.bool,
 };
