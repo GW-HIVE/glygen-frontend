@@ -9,20 +9,20 @@ import CardContent from '@material-ui/core/CardContent';
 import { Row } from 'react-bootstrap';
 import CardLoader from '../load/CardLoader';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	cardAction: {
-		display: 'inline-flex'
+		display: 'inline-flex',
 	},
 	card: {
 		// display: 'flex'
 		// maxWidth: 345
 	},
 	cardTitle: {
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	cardDetails: {
-		flex: 1
-	}
+		flex: 1,
+	},
 }));
 
 export default function StatDBCard(props) {
@@ -46,59 +46,59 @@ export default function StatDBCard(props) {
 							{props.data.map(obj => (
 								<>
 									<Row>
-										<Typography variant='h6'>
+										<Typography>
 											<strong>{obj.species}</strong>
 										</Typography>
 									</Row>
-									<Typography>
-										<Row>
-											<Grid
-												container
-												item
-												xs={9}
-												md={9}
-												lg={9}
-												style={{ paddingLeft: '15px' }}>
-												Glycans
-											</Grid>
-											<Grid item xs={3} md={3} lg={3}>
-												{obj.glycans}
-											</Grid>
-										</Row>
-										<Row>
-											<Grid
-												container
-												item
-												xs={9}
-												md={9}
-												lg={9}
-												style={{ paddingLeft: '15px' }}>
-												Proteins
-											</Grid>
-											<Grid item xs={3} md={3} lg={3}>
-												{obj.proteins}
-											</Grid>
-										</Row>
-										<Row>
-											<Grid
-												container
-												item
-												xs={9}
-												md={9}
-												lg={9}
-												style={{ paddingLeft: '15px' }}>
-												Glycoproteins
-											</Grid>
-											<Grid item xs={3} md={3} lg={3}>
-												{obj.glycoproteins}
-											</Grid>
-										</Row>
-									</Typography>
-								</>
-							))}
-						</CardContent>
-					</div>
-				</Card>
+								<Typography>
+									<Row>
+										<Grid
+											container
+											item
+											xs={9}
+											md={9}
+											lg={9}
+											style={{ paddingLeft: '15px' }}>
+											Glycans
+										</Grid>
+										<Grid item xs={3} md={3} lg={3}>
+											{obj.glycans}
+										</Grid>
+									</Row>
+									<Row>
+										<Grid
+											container
+											item
+											xs={9}
+											md={9}
+											lg={9}
+											style={{ paddingLeft: '15px' }}>
+											Proteins
+										</Grid>
+										<Grid item xs={3} md={3} lg={3}>
+											{obj.proteins}
+										</Grid>
+									</Row>
+									<Row>
+										<Grid
+											container
+											item
+											xs={9}
+											md={9}
+											lg={9}
+											style={{ paddingLeft: '15px' }}>
+											Glycoproteins
+										</Grid>
+										<Grid item xs={3} md={3} lg={3}>
+											{obj.glycoproteins}
+										</Grid>
+									</Row>
+								</Typography>
+							</>
+						))}
+					</CardContent>
+				</div>
+			</Card>
 			{/* </CardActionArea> */}
 			{/* </Card> */}
 		</Grid>
@@ -106,5 +106,5 @@ export default function StatDBCard(props) {
 }
 
 StatDBCard.propTypes = {
-	data: PropTypes.object
+	data: PropTypes.object,
 };

@@ -1,6 +1,6 @@
 .sidebar-page {
 	width: 90%;
-	margin: 0  auto;
+	margin: 0 auto;
 	overflow: auto;
 	margin-bottom: 400px;
 	position: relative;
@@ -23,7 +23,7 @@
 .sidebar-item {
 	position: relative;
 	padding: 13px !important;
-	font-size: 1.1em !important;
+	/* font-size: 1.1em !important; */
 	color: #4a4a4a !important;
 	text-align: left;
 	border-bottom: 1px solid #acabab !important;
@@ -52,7 +52,7 @@ ul.sidebar-item {
 }
 
 .sidebar-item-text {
-	font-weight: 700 !important;
+	font-weight: 600 !important;
 	text-decoration: none !important;
 }
 
@@ -86,7 +86,7 @@ ul.sidebar-item {
 /* SidebarPages */
 .sidebar-item:hover {
 	background-color: #ffffff;
-	color: #4a4a4a !important;
+	/* color: #4a4a4a !important; */
 }
 
 .active .sidebar-item,

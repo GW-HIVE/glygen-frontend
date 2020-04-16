@@ -30,7 +30,7 @@ const mainFeaturedCard = {
 	image: card3,
 	imgText: 'main image description',
 	linkText: 'Learn More…',
-	href: '/About'
+	href: '/About',
 };
 const featuredCards = [
 	{
@@ -39,7 +39,7 @@ const featuredCards = [
 			'Search for glycan structures based on their chemical and structural properties.',
 		image: glycanImg,
 		imageText: 'Glycan',
-		href: '#'
+		href: '#',
 	},
 	{
 		title: 'Protein',
@@ -48,7 +48,7 @@ const featuredCards = [
 		image: proteinImg,
 		// image: enzymeImg,
 		imageText: 'Protein',
-		href: '#'
+		href: '#',
 	},
 	{
 		title: 'Enzyme',
@@ -56,7 +56,7 @@ const featuredCards = [
 			'Search for enzymes based on protein accession, gene name, and glycan.',
 		image: enzymeImg,
 		imageText: 'Enzyme Function',
-		href: '#'
+		href: '#',
 	},
 	{
 		title: 'Quick Search',
@@ -64,7 +64,7 @@ const featuredCards = [
 			'Search data using queries prepared to provide answers to complex biological questions.',
 		image: glycanImg,
 		imageText: 'Quick Search',
-		href: '#'
+		href: '#',
 	},
 	{
 		title: 'Composition Search',
@@ -72,7 +72,7 @@ const featuredCards = [
 			'Composition search based on their residue. Add some text here.',
 		image: glycanImg,
 		imageText: 'Composition Search',
-		href: '#'
+		href: '#',
 	},
 	{
 		title: 'Data',
@@ -81,7 +81,7 @@ const featuredCards = [
 		image: glycanImg,
 		imageText: 'Data',
 		href: 'https://data.glygen.org/',
-		target: '_blank'
+		target: '_blank',
 	},
 	{
 		title: 'API',
@@ -90,7 +90,7 @@ const featuredCards = [
 		image: glycanImg,
 		imageText: 'API',
 		href: 'https://api.glygen.org/',
-		target: '_blank'
+		target: '_blank',
 	},
 	{
 		title: 'SPARQL',
@@ -99,8 +99,8 @@ const featuredCards = [
 		image: glycanImg,
 		imageText: 'SPARQL',
 		href: 'https://sparql.glygen.org/',
-		target: '_blank'
-	}
+		target: '_blank',
+	},
 ];
 const feedbackCard = {
 	title: 'Your Opinion Matters',
@@ -109,7 +109,7 @@ const feedbackCard = {
 	image: feedback,
 	imageText: 'Feedback',
 	button: 'LEAVE FEEDBACK',
-	href: '/Feedback'
+	href: '/Feedback',
 };
 const resourcesCard = {
 	title: 'Explore Other Resources',
@@ -118,7 +118,7 @@ const resourcesCard = {
 	image: resources,
 	imageText: 'Resources',
 	button: 'EXPLORE',
-	href: '/Resources'
+	href: '/Resources',
 };
 
 export default function Home() {
@@ -137,8 +137,8 @@ export default function Home() {
 	return (
 		<React.Fragment>
 			<Helmet>
-				{getTitle("home")}
-				{getMeta("home")}
+				{getTitle('home')}
+				{getMeta('home')}
 			</Helmet>
 
 			<CssBaseline />
@@ -151,20 +151,21 @@ export default function Home() {
 								container
 								spacing={4}
 								style={{
-									justifyContent: 'center'
+									justifyContent: 'center',
 								}}>
-								{featuredCards.map(post => (
+								{featuredCards.map((post) => (
 									<FeaturedCard key={post.title} post={post} />
 								))}
-								<TryMeCard id='try-me' />
+								{/* <TryMeCard id='try-me' /> */}
 							</Grid>
+							<TryMeCard id='try-me' />
 						</Grid>
 						<Grid item xs={12} md={4} lg={3}>
 							<Grid
 								container
 								spacing={4}
 								style={{
-									justifyContent: 'center'
+									justifyContent: 'center',
 								}}>
 								<VersionCard data={homeData.version} pageLoading={pageLoading}/>
 								<InfoCard post={feedbackCard} />

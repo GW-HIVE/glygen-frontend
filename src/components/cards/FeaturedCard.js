@@ -46,14 +46,14 @@ export default function FeaturedCard(props) {
 				target={post.target}
 				rel='noopener noreferrer'>
 				<Card className='card'>
-					<Hidden xsDown>
+					{/* <Hidden xsDown> */}
 						<CardMedia
 							component='img'
 							className={classes.cardMedia}
 							image={post.image}
 							title={post.imageText}
 						/>
-					</Hidden>
+					{/* </Hidden> */}
 					<div className={classes.cardDetails}>
 						<CardContent>
 							<Typography gutterBottom variant='h5' component='h2'>
@@ -65,7 +65,7 @@ export default function FeaturedCard(props) {
 							<Divider className={classes.divider} />
 							<Typography
 								variant='subtitle1'
-								color='primary'
+								// color='primary'
 								className='text-center'
 								style={{ fontWeight: 'bold', color: '#2f78b7' }}>
 								EXPLORE

@@ -63,6 +63,9 @@
 	.gg-btn-outline {
 		margin-right: 20px !important;
 	}
+	.panel-width {
+		width: 99% !important;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */

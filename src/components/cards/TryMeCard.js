@@ -6,25 +6,26 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Container } from 'react-bootstrap';
+// import { Container } from 'react-bootstrap';
+import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	cardAction: {
-		display: 'inline-flex'
+		display: 'inline-flex',
 	},
 	card: {
 		// display: 'flex'
 		// maxWidth: 345
 	},
 	cardTitle: {
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	cardDetails: {
-		flex: 1
+		flex: 1,
 	},
 	selected: {
-		color: '#2F78B7'
-	}
+		color: '#2F78B7',
+	},
 }));
 
 export default function TryMeCard(props) {
@@ -36,7 +37,7 @@ export default function TryMeCard(props) {
 	return (
 		<div id={props.id}>
 			{/* <Container fluid='md'> */}
-			<Container style={{ paddingTop: '20px' }}>
+			<Container maxWidth='lg' style={{ paddingTop: '35px' }}>
 				<Grid item xs={12} sm={12} md={12} lg={12}>
 					<Card className='card'>
 						<div className={classes.cardDetails}>
@@ -48,7 +49,7 @@ export default function TryMeCard(props) {
 									className={classes.cardTitle}>
 									Try Me
 								</Typography>
-								<ListGroup as='h6'>
+								<ListGroup as='hp'>
 									<ListGroup.Item action onClick={alertClicked} href='#'>
 										What are the enzymes involved in the biosynthesis of{' '}
 										<span className={classes.selected}> Man5-(G55220VL) </span>{' '}
@@ -77,5 +78,5 @@ export default function TryMeCard(props) {
 }
 
 TryMeCard.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };

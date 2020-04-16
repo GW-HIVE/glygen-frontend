@@ -5,14 +5,47 @@ body {
 		sans-serif !important;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* font-size: 16px !important; */
+	font-size: 18px !important;
+	color: #444444 !important;
+	/* color: red !important; */
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
+	font-size: 18px !important;
 }
 
 p {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px !important;
+	color: #444444;
+	/* color: green !important; */
+}
+.table {
+	color: #444444 !important;
+	/* color: yellowgreen !important; */
+}
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+	color: #444444 !important;
+	/* color: pink; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #444444;
 }

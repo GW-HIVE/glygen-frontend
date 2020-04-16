@@ -11,9 +11,9 @@ import { getDateMMDDYYYY } from '../../utils/common';
 import { Link } from '@material-ui/core';
 import CardLoader from '../load/CardLoader';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	cardAction: {
-		display: 'inline-flex'
+		display: 'inline-flex',
 	},
 	card: {
 		// display: 'flex'
@@ -21,11 +21,11 @@ const useStyles = makeStyles(theme => ({
 		// width: '100%'
 	},
 	cardTitle: {
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	cardDetails: {
-		flex: 1
-	}
+		flex: 1,
+	},
 }));
 
 export default function VersionCard(props) {
@@ -34,10 +34,10 @@ export default function VersionCard(props) {
 
 	useEffect(() => {
 		var verData = {};
-		props.data.forEach(verObj => {
+		props.data.forEach((verObj) => {
 			verData[verObj.component] = {
 				releaseDate: verObj.release_date,
-				version: verObj.version
+				version: verObj.version,
 			};
 		});
 		setVersionData(verData);
@@ -57,7 +57,7 @@ export default function VersionCard(props) {
 							className={classes.cardTitle}>
 							Version
 						</Typography>
-						<Typography variant='p' color='textPrimary'>
+						<Typography>
 							<Box>
 								<span>
 									<strong>Portal:</strong>
@@ -65,12 +65,12 @@ export default function VersionCard(props) {
 								<Link
 									href='https://github.com/glygener/glygen-frontend/wiki/Release-notes'
 									target='_blank'>
-									{versionData.software &&
-										versionData.software.version} 
-								</Link> {' '} {versionData.software && 
-											' (' +
-											getDateMMDDYYYY(versionData.software.releaseDate) +
-											')'}
+									{versionData.software && versionData.software.version}
+								</Link>{' '}
+								{versionData.software &&
+									' (' +
+										getDateMMDDYYYY(versionData.software.releaseDate) +
+										')'}
 								<br />
 								<span>
 									<strong>Webservice:</strong>
@@ -100,5 +100,5 @@ export default function VersionCard(props) {
 }
 
 VersionCard.propTypes = {
-	data: PropTypes.object
+	data: PropTypes.object,
 };

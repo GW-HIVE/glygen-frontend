@@ -442,7 +442,6 @@ const GlycanDetail = (props) => {
 													))}
 												</div>
 											)}
-
 											{inchi_key && inchi_key.key && (
 												<>
 													<div>
@@ -482,7 +481,7 @@ const GlycanDetail = (props) => {
 												// For every species object
 												Object.keys(speciesEvidence).map((species) => (
 													// For every database for current species object
-													<Col md={6} xs={6}>
+													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
 														<p>
 															<>
 																<Row className='gg-align-middle'>
@@ -742,7 +741,6 @@ const GlycanDetail = (props) => {
 																		{pub.journal} <span>&nbsp;</span>({pub.date}
 																		)
 																	</div>
-
 																	<div>
 																		<FiBookOpen />
 																		<span style={{ paddingLeft: '15px' }}>
@@ -755,7 +753,6 @@ const GlycanDetail = (props) => {
 																			{pub.pmid}
 																		</a>
 																	</div>
-
 																	<EvidenceList
 																		evidences={groupEvidences(pub.evidence)}
 																	/>

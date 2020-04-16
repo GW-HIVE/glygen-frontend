@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 // import Grid from '@material-ui/core/Grid';
 import { Row, Col } from 'react-bootstrap';
 import Container from '@material-ui/core/Container';
@@ -14,8 +14,8 @@ export default function VerticalHeading(props) {
 				<Row>
 					<Col>
 						<div className='vertical-heading'>
-							<Typography variant='h5'>{post.h5VerticalText}</Typography>
-							<Typography variant='h2'>
+							<h5>{post.h5VerticalText}</h5>
+							<h2>
 								<span>
 									<strong>{post.h2textTopStrongBefore}</strong>
 								</span>{' '}
@@ -31,15 +31,9 @@ export default function VerticalHeading(props) {
 								<span>
 									<strong>{post.h2textBottomStrongAfter}</strong>
 								</span>
-							</Typography>
+							</h2>
 							<br />
-							<Typography
-								variant='p'
-								style={{
-									fontSize: '18px'
-								}}>
-								{post.pText}
-							</Typography>
+							<p>{post.pText}</p>
 						</div>
 					</Col>
 				</Row>
@@ -49,5 +43,5 @@ export default function VerticalHeading(props) {
 }
 
 VerticalHeading.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };
