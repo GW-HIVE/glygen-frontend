@@ -74,7 +74,6 @@ const Resources = () => {
 			sort: true,
 			formatter: (cell) => (
 				<Link
-					variant='subtitle1'
 					href={cell.url}
 					target='_blank'
 					rel='noopener noreferrer'>
@@ -118,7 +117,6 @@ const Resources = () => {
 			sort: true,
 			formatter: (cell) => (
 				<Link
-					variant='subtitle1'
 					href={cell.url}
 					target='_blank'
 					rel='noopener noreferrer'>
@@ -157,7 +155,6 @@ const Resources = () => {
 			sort: true,
 			formatter: (cell) => (
 				<Link
-					variant='subtitle1'
 					href={cell.url}
 					target='_blank'
 					rel='noopener noreferrer'>
@@ -191,7 +188,6 @@ const Resources = () => {
 			sort: true,
 			formatter: (cell) => (
 				<Link
-					variant='subtitle1'
 					href={cell.url}
 					target='_blank'
 					rel='noopener noreferrer'>
