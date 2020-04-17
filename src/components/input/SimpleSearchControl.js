@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles((theme) => ({
 	// simpleSearchButton: {
@@ -30,17 +31,25 @@ const useStyles = makeStyles((theme) => ({
 		padding: '0px !important',
 	},
 	anchorSimple: {
-		paddingLeft: '15px !important',
+        paddingLeft: '15px !important',
+        fontSize: '14px',
 	},
 	selectSimple: {
 		//width: "200px",
 		//width: "100%",
 		height: '45px',
-	},
+    },
+    label3: {
+		fontSize: '16px',
+		fontWeight: 'bold',
+  },
 	simpleContainer: {
 		paddingLeft: '40px !important',
 		paddingBottom: '30px !important',
-	},
+    },
+    examples: {
+		fontSize: '14px !important',
+    },
 }));
 
 export default function SimpleSearchControl(props) {
@@ -93,8 +102,15 @@ export default function SimpleSearchControl(props) {
 								: ''
 						}
 						value={props.simpleSearchTerm}
-						onChange={simpleSearchTermOnChange}
+                        onChange={simpleSearchTermOnChange}
+                        error={
+                            props.simpleSearchTerm.length > props.length
+                          }
 					/>
+                    {props.simpleSearchTerm.length > props.length && <FormHelperText 
+                    className={classes.examples} error>
+                      {props.errorText}
+                    </FormHelperText>}
 					<Row>
 						{/* <Col lg="6"> */}
 						<div className={classes.anchorSimple}>
@@ -118,7 +134,7 @@ export default function SimpleSearchControl(props) {
 				<Grid item className='col-sm-2'>
 					<Button
 						className='gg-btn-blue gg-btn-simple-search'
-						disabled={props.simpleSearchTerm.trim() === ''}
+						disabled={props.simpleSearchTerm.trim() === '' || props.simpleSearchTerm.length > props.length}
 						onClick={props.searchSimpleclick}>
 						Search
 					</Button>
@@ -133,7 +149,7 @@ export default function SimpleSearchControl(props) {
 				</Grid> */}
 			</Grid>
 			<Grid container spacing={3} justify='center'>
-				<Grid item>
+				<Grid className={classes.examples} item>
 					<div class='col-md-12 col-sm-12 col-xs-12' justifyContent='center'>
 						*{' '}
 						<em>
@@ -152,7 +168,9 @@ SimpleSearchControl.propTypes = {
 	simpleSearchCategory: PropTypes.string,
 	simpleSearchTerm: PropTypes.string,
 	simple_search_category: PropTypes.array,
-	simple_search: PropTypes.object,
+    simple_search: PropTypes.object,
+    errorText: PropTypes.string,
+    length: PropTypes.number,
 	searchSimpleclick: PropTypes.func,
 	setGlySimpleSearchCategory: PropTypes.func,
 	setGlySimpleSearchTerm: PropTypes.func,

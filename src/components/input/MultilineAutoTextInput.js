@@ -5,6 +5,7 @@ import matchSorter from "match-sorter";
 import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from 'prop-types';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const filterOptions = (options, { inputValue }) =>
   matchSorter(options, inputValue.substring(inputValue.lastIndexOf(",") + 1));
@@ -58,6 +59,11 @@ const filterOptions = (options, { inputValue }) =>
       "& input": {
         fontSize: 14
       }
+    },
+    errorText: {
+      fontSize:"14px  !important",
+      marginRight:0,
+      marginLeft:0,
     }
   }));
 
@@ -92,6 +98,7 @@ export default function MultilineAutoTextInput(props) {
   }, [props.inputValue, props.typeahedID]);
 
   return (
+    <>
     <Autocomplete
       id="filter-demo"
       freeSolo
@@ -117,9 +124,17 @@ export default function MultilineAutoTextInput(props) {
           rows="3"
           variant="outlined"
           placeholder={props.placeholder}
+          error={
+            props.inputValue.length > props.length
+          }
         />
       )}
     />
+    {props.inputValue.length > props.length && <FormHelperText 
+      className={classes.errorText} error>
+      {props.errorText}
+      </FormHelperText>}
+    </>
   );
 }
 
@@ -127,5 +142,7 @@ MultilineAutoTextInput.propTypes = {
     inputValue: PropTypes.string,
     placeholder: PropTypes.string,
     typeahedID: PropTypes.string,
+    errorText: PropTypes.string,
+    length: PropTypes.number,
     setInputValue: PropTypes.func,
   };

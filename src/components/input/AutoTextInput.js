@@ -4,6 +4,7 @@ import { getJson } from "../../data/api";
 import { makeStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from "prop-types";
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -53,6 +54,11 @@ const useStyles = makeStyles(theme => ({
     // "& input": {
     //     fontSize: 14
     // }
+  },
+  errorText: {
+    fontSize:"14px  !important",
+    marginRight:0,
+    marginLeft:0,
   }
 }));
 
@@ -83,6 +89,7 @@ export default function AutoTextInput(props) {
   }, [props.inputValue, props.typeahedID]);
 
   return (
+    <>
     <Autocomplete
       id="filter-demo"
       freeSolo
@@ -106,9 +113,17 @@ export default function AutoTextInput(props) {
           }}
           variant="outlined"
           placeholder={props.placeholder}
+          error={
+            props.inputValue.length > props.length
+          }
         />
       )}
     />
+    {props.inputValue.length > props.length && <FormHelperText 
+      className={classes.errorText} error>
+      {props.errorText}
+      </FormHelperText>}
+    </>
   );
 }
 
@@ -116,5 +131,7 @@ AutoTextInput.propTypes = {
   inputValue: PropTypes.string,
   placeholder: PropTypes.string,
   typeahedID: PropTypes.string,
+  errorText: PropTypes.string,
+  length: PropTypes.number,
   setInputValue: PropTypes.func
 };

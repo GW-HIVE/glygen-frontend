@@ -12,6 +12,8 @@ import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
+import SearchAlert from '../components/alert/SearchAlert';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import {
 	Component,
@@ -134,7 +136,15 @@ const useStyles = makeStyles((theme) => ({
 	label3: {
 		fontSize: '16px',
 		fontWeight: 'bold',
-	},
+  },
+  examples: {
+    fontSize:"14px  !important"
+  },
+  errorText: {
+      fontSize:"14px  !important",
+      marginRight:0,
+      marginLeft:0,
+  },
 	input: {
 		borderRadius: 4,
 		position: 'relative',
@@ -161,14 +171,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	tabs: {
 		borderColor: '#FFFFFF',
-		width: '558px',
+		width: '650px',
 	},
 	tab: {
 		borderRadius: 4,
 		borderColor: '#80bdff',
 		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
 		width: '1000px',
-		height: '1150px',
+		height: '1250px',
 		alignItems: 'center',
 		fontColor: '#2F78B7',
 		backgroundColor: '#FFFFFF',
@@ -178,7 +188,7 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: '#80bdff',
 		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
 		width: '1000px',
-		height: '900px',
+		height: '1000px',
 		alignItems: 'center',
 		fontColor: '#2F78B7',
 		backgroundColor: '#FFFFFF',
@@ -188,22 +198,22 @@ const useStyles = makeStyles((theme) => ({
 		borderColor: '#80bdff',
 		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
 		width: '1000px',
-		height: '300px',
+		height: '400px',
 		alignItems: 'center',
 		fontColor: '#2F78B7',
 		backgroundColor: '#FFFFFF',
 	},
 	con: {
 		width: '730px',
-		height: '1100px',
+		height: '1300px',
 		alignItems: 'center',
 	},
 	con1: {
 		width: '1000px',
-		height: '1250px',
+		height: '1400px',
 		alignItems: 'center',
 		marginBottom: '80px',
-	},
+  },
 	conSimple: {
 		alignItems: 'center',
 		// marginTop: "150px",
@@ -294,7 +304,10 @@ const GlycanSearch = (props) => {
 		{}
 	);
 	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
-	const [pageLoading, setPageLoading] = React.useState(true);
+  const [pageLoading, setPageLoading] = React.useState(true);
+  const [glySearchError, setGlySearchError] = React.useState(false);
+  const [glyAdvSearchValError, setGlyAdvSearchValError] = React.useState([false, false, false, false, false]);
+
 
 	function glyOrgChange(org) {
 		setGlyOrganisms(org);
@@ -373,27 +386,45 @@ const GlycanSearch = (props) => {
 	};
 
 	function glycanIdChange(inputGlycanId) {
-		setGlycanId(inputGlycanId);
+    setGlycanId(inputGlycanId);
+    let valArr = glyAdvSearchValError;
+    valArr[0] = (inputGlycanId.length > 2500);
+    setGlyAdvSearchValError(valArr);
 	}
 
 	function glyProtChange(inputglycoProt) {
-		setGlyProt(inputglycoProt);
+    setGlyProt(inputglycoProt);
+    let valArr = glyAdvSearchValError;
+    valArr[1] = (inputglycoProt.length > 12);
+    setGlyAdvSearchValError(valArr);
 	}
 
 	function glyMotifChange(inputglycMotif) {
-		setGlyMotif(inputglycMotif);
+    setGlyMotif(inputglycMotif);
+    let valArr = glyAdvSearchValError;
+    valArr[2] = (inputglycMotif.length > 47);
+    setGlyAdvSearchValError(valArr);
 	}
 
 	function glyBioEnzChange(inputglyBioEnz) {
-		setGlyBioEnz(inputglyBioEnz);
+    setGlyBioEnz(inputglyBioEnz);
+    let valArr = glyAdvSearchValError;
+    valArr[3] = (inputglyBioEnz.length > 12);
+    setGlyAdvSearchValError(valArr);
 	}
 
 	function glyPubIdChange(inputglycPubId) {
-		setGlyPubId(inputglycPubId);
+    setGlyPubId(inputglycPubId);
+    let valArr = glyAdvSearchValError;
+    valArr[4] = (inputglycPubId.length > 20);
+    setGlyAdvSearchValError(valArr);
 	}
 
 	const PubmedIdChange = (event) => {
-		setGlyPubId(event.target.value);
+    setGlyPubId(event.target.value);
+    let valArr = glyAdvSearchValError;
+    valArr[4] = (event.target.value.length > 20);
+    setGlyAdvSearchValError(valArr);
 	};
 
 	const getGlycanInit = () => {
@@ -424,6 +455,9 @@ const GlycanSearch = (props) => {
 
 	React.useEffect(() => {
     setPageLoading(true);
+    document.addEventListener("click", ()=>{
+      setGlySearchError(false);
+    });
 		getGlycanInit().then((response) => {
 			let initData = response.data;
 			let simpleSearchExamples = {};
@@ -482,7 +516,8 @@ const GlycanSearch = (props) => {
 				initData.number_monosaccharides.min,
 				initData.number_monosaccharides.max,
 			]);
-			setGlySubTypeIsHidden(true);
+      setGlySubTypeIsHidden(true);
+      setGlyAdvSearchValError([false, false, false, false, false]);
 
 			const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
 				const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
@@ -872,8 +907,8 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-					setPageLoading(false);
-					alert('No Result Found.');
+          setPageLoading(false);
+          setGlySearchError(true);
 				}
 			})
 			.catch(function (error) {
@@ -889,8 +924,8 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-					alert('No Result Found.');
-					setPageLoading(false);
+          setPageLoading(false);
+          setGlySearchError(true);
 				}
 			})
 			.catch(function (error) {
@@ -906,8 +941,8 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-					alert('No Result Found.');
-					setPageLoading(false);
+          setPageLoading(false);
+          setGlySearchError(true);
 				}
 			})
 			.catch(function (error) {
@@ -935,7 +970,8 @@ const GlycanSearch = (props) => {
 			initData.number_monosaccharides.max,
 		]);
 		setGlyOrganisms([]);
-		setGlySubTypeIsHidden(true);
+    setGlySubTypeIsHidden(true);
+    setGlyAdvSearchValError([false, false, false, false, false]);
 	};
 
 	return (
@@ -964,6 +1000,11 @@ const GlycanSearch = (props) => {
 							eventKey='simple_search'
 							className={classes.tabSimpleSearch}
 							title='Simple Search'>
+                <SearchAlert
+                  searchError={glySearchError}
+                  alertTitle="Simple Search Error - No Results Found"
+                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+                />
 							<Container className={classes.conSimple}>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
@@ -973,7 +1014,9 @@ const GlycanSearch = (props) => {
 										simple_search={initData.simple_search}
 										searchSimpleclick={searchGlycanSimpleclick}
 										setSimpleSearchCategory={setGlySimpleSearchCategory}
-										setSimpleSearchTerm={setGlySimpleSearchTerm}
+                    setSimpleSearchTerm={setGlySimpleSearchTerm}
+                    length={20}
+                    errorText='Entry is too long - max length is 20.'
 									/>
 								)}
 							</Container>
@@ -982,6 +1025,11 @@ const GlycanSearch = (props) => {
 							eventKey='advanced_search'
 							className={classes.tab}
 							title='Advanced Search'>
+                <SearchAlert 
+                  searchError={glySearchError}
+                  alertTitle="Advanced Search Error - No Results Found"
+                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+                />
 							<Container className={classes.con}>
 								{/* <ButtonToolbar className={classes.marginButToolbar}> */}
 								<Row className='gg-align-right pt-5 pb-2'>
@@ -994,7 +1042,8 @@ const GlycanSearch = (props) => {
 									<Button
 										className='gg-btn-blue'
 										// className={classes.submitButton + ' gg-btn'}
-										onClick={searchGlycanClick}>
+										onClick={searchGlycanClick}
+                    disabled={!glyAdvSearchValError.every(err => err === false)}>
 										Search Glycan
 									</Button>
 								</Row>
@@ -1029,16 +1078,18 @@ const GlycanSearch = (props) => {
 										inputValue={glycanId}
 										setInputValue={glycanIdChange}
 										placeholder='Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id'
-										typeahedID='glytoucan_ac'
+                    typeahedID='glytoucan_ac'
+                    length={2500}
+                    errorText='Entry is too long - max length is 2500.'
 									/>
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='6'>
 											<div>
 												GlyTouCan Accession Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlycanId('G17689DH');
+														glycanIdChange('G17689DH');
 													}}>
 													G17689DH
 												</a>
@@ -1055,14 +1106,14 @@ const GlycanSearch = (props) => {
 											</div>
 										</Col>
 									</Row>
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='6'>
 											<div>
 												Cross References Id Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlycanId('G10716');
+														glycanIdChange('G10716');
 													}}>
 													G10716
 												</a>
@@ -1329,16 +1380,18 @@ const GlycanSearch = (props) => {
 										inputValue={glyProt}
 										setInputValue={glyProtChange}
 										placeholder='Enter the UniProtKB Accession of your protein'
-										typeahedID='uniprot_canonical_ac'
+                    typeahedID='uniprot_canonical_ac'
+                    length={12}
+                    errorText='Entry is too long - max length is 12.'
 									/>
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='4'>
 											<div>
 												Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlyProt('P14210');
+														glyProtChange('P14210');
 													}}>
 													P14210
 												</a>
@@ -1384,16 +1437,18 @@ const GlycanSearch = (props) => {
 										inputValue={glyMotif}
 										setInputValue={glyMotifChange}
 										placeholder='Enter the name of a Glycan Motif contained in your glycan'
-										typeahedID='motif_name'
+                    typeahedID='motif_name'
+                    length={47}
+                    errorText='Entry is too long - max length is 47.'
 									/>
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='4'>
 											<div>
 												Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlyMotif('N-Glycan complex');
+														glyMotifChange('N-Glycan complex');
 													}}>
 													N-Glycan complex
 												</a>
@@ -1439,16 +1494,18 @@ const GlycanSearch = (props) => {
 										inputValue={glyBioEnz}
 										setInputValue={glyBioEnzChange}
 										placeholder='Enter the Gene Name of an enzyme'
-										typeahedID='gene_name'
+                    typeahedID='gene_name'
+                    length={12}
+                    errorText='Entry is too long - max length is 12.'
 									/>
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='4'>
 											<div>
 												Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlyBioEnz('B4GALT1');
+														glyBioEnzChange('B4GALT1');
 													}}>
 													B4GALT1
 												</a>
@@ -1494,21 +1551,28 @@ const GlycanSearch = (props) => {
 										className={classes.input}
 										placeholder='Enter the Pubmed ID'
 										value={glyPubId}
-										onChange={PubmedIdChange}
+                    onChange={PubmedIdChange}
+                    error={
+                      glyPubId.length > 20
+                    }
 									/>
+                    {glyPubId.length > 20 && <FormHelperText 
+                    className={classes.errorText} error>
+                      Entry is too long - max length is 20.
+                    </FormHelperText>}
 									{/* <AutoTextInput
                    inputValue={glyPubId} setInputValue={glycPubIdChange}
                    placeholder="Enter the Pubmed ID"
                    typeahedID = "glycan_pmid"
                   /> */}
-									<Row>
+									<Row className={classes.examples}>
 										<Col lg='4'>
 											<div>
 												Example:{' '}
 												<a
 													href='javascript:void(0)'
 													onClick={() => {
-														setGlyPubId('9449027');
+														glyPubIdChange('9449027');
 													}}>
 													9449027
 												</a>
@@ -1537,7 +1601,8 @@ const GlycanSearch = (props) => {
 									<Button
 										// className={classes.submitButton + ' gg-btn'}
 										className='gg-btn-blue'
-										onClick={searchGlycanClick}>
+										onClick={searchGlycanClick}
+                    disabled={!glyAdvSearchValError.every(err => err === false)}>
 										Search Glycan
 									</Button>
 								</Row>
@@ -1548,6 +1613,11 @@ const GlycanSearch = (props) => {
 							eventKey='composition_search'
 							title='Composition Search'
 							className={classes.tabCompostionSearch}>
+                <SearchAlert
+                  searchError={glySearchError}
+                  alertTitle="Composition Search Error - No Results Found"
+                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+                />
 							<Container className='p-5'>
 								{initData.composition && (
 									<CompositionSearchControl
@@ -1562,6 +1632,7 @@ const GlycanSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab eventKey='tutorial' title='Tutorial'></Tab>
+            {/* </Container> */}
 					</Tabs>
 				</Container>
 			</div>
