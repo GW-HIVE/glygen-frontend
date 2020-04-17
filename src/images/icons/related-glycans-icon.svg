@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
     <title>related-glycans-icon</title>
     <desc>Created with Sketch.</desc>
     <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="related-glycans-icon" transform="translate(-2.000000, -2.000000)">
-            <g id="shape" transform="translate(3.000000, 3.000000)" stroke="#2F78B7" stroke-width="2">
-                <line x1="15" y1="16" x2="15" y2="20" id="Line-3"></line>
-                <circle id="Oval" cx="14.5" cy="12.5" r="3.5"></circle>
-                <line x1="21" y1="5" x2="16" y2="10" id="Line"></line>
-                <line x1="11" y1="15" x2="6" y2="19" id="Line"></line>
-                <line x1="7.5" y1="5.5" x2="11.5" y2="9.5" id="Line-2"></line>
-                <line x1="18" y1="14" x2="22" y2="17" id="Line"></line>
-                <circle id="Oval" cx="23" cy="3" r="3"></circle>
-                <circle id="Oval" cx="3" cy="21" r="3"></circle>
-                <circle id="Oval" cx="15" cy="23" r="3"></circle>
-                <circle id="Oval" cx="23" cy="18" r="2"></circle>
-                <circle id="Oval-Copy-34" cx="6" cy="4" r="2"></circle>
+        <g id="related-glycans-icon" transform="translate(-1.000000, -1.000000)">
+            <g id="shape" transform="translate(2.250000, 2.250000)" stroke="#2F78B7" stroke-width="2">
+                <line x1="11.25" y1="12" x2="11.25" y2="15" id="Line-3"></line>
+                <circle id="Oval" cx="10.875" cy="9.375" r="2.625"></circle>
+                <line x1="15.75" y1="3.75" x2="12" y2="7.5" id="Line"></line>
+                <line x1="8.25" y1="11.25" x2="4.5" y2="14.25" id="Line"></line>
+                <line x1="5.625" y1="4.125" x2="8.625" y2="7.125" id="Line-2"></line>
+                <line x1="13.5" y1="10.5" x2="16.5" y2="12.75" id="Line"></line>
+                <circle id="Oval" cx="17.25" cy="2.25" r="2.25"></circle>
+                <circle id="Oval" cx="2.25" cy="15.75" r="2.25"></circle>
+                <circle id="Oval" cx="11.25" cy="17.25" r="2.25"></circle>
+                <circle id="Oval" cx="17.25" cy="13.5" r="1.5"></circle>
+                <circle id="Oval-Copy-34" cx="4.5" cy="3" r="1.5"></circle>
             </g>
-            <rect id="ViewBox" fill-rule="nonzero" x="0" y="0" width="32" height="32"></rect>
+            <rect id="ViewBox" fill-rule="nonzero" x="0" y="0" width="24" height="24"></rect>
         </g>
     </g>
 </svg>

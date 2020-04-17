@@ -129,7 +129,7 @@ const ContactForm = (props) => {
 				<Row>
 					<Col sm={12} md={6} lg={6}>
 						<Typography>
-							<strong>First name</strong>
+							<strong>First name * </strong>
 						</Typography>
 						<TextField
 							id='outlined-full-width'
@@ -163,7 +163,7 @@ const ContactForm = (props) => {
 					</Col>
 					<Col sm={12} md={6} lg={6}>
 						<Typography>
-							<strong>Last name</strong>
+							<strong>Last name *</strong>
 						</Typography>
 						<TextField
 							id='outlined-full-width'
@@ -221,7 +221,7 @@ const ContactForm = (props) => {
 					</Col>
 					<Col sm={12} md={6} lg={6}>
 						<Typography>
-							<strong>Email</strong>
+							<strong>Email *</strong>
 						</Typography>
 						<TextField
 							id='email'
@@ -260,7 +260,7 @@ const ContactForm = (props) => {
 					</Col>
 					<Col>
 						<Typography>
-							<strong>Message</strong>
+							<strong>Message *</strong>
 						</Typography>
 						<TextField
 							id='outlined-full-width'

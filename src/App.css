@@ -199,6 +199,11 @@ p {
 .card-icon-space {
 	padding-right: 20px;
 }
+/* .card-icon-space button:focus {
+	outline: 0 !important;
+	outline: 0 -webkit-focus-ring-color;
+	vertical-align: middle !important;
+} */
 .more-vert-icon {
 	color: #2f78b7;
 	cursor: pointer;
