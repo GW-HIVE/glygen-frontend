@@ -142,38 +142,34 @@ const GlycanDetail = (props) => {
 		detailData.glycoct = detailData.glycoct.replace(/\\n/g, '\n');
 	}
 
-
 	if (detailData.composition) {
-		var mapComp = { "hex":1, "hexnac":2, "dhex":3, "neuac":4, "neugc":5, "other":7 };     
+		var mapComp = { hex: 1, hexnac: 2, dhex: 3, neuac: 4, neugc: 5, other: 7 };
 
-		detailData.composition = detailData.composition.sort(function(a, b){ 
-
+		detailData.composition = detailData.composition.sort(function (a, b) {
 			var resVal1 = mapComp[a.residue.toLowerCase()];
-			var resVal2 = mapComp[b.residue.toLowerCase()]
-			
-			if (!resVal1)
-				resVal1 = 6;
+			var resVal2 = mapComp[b.residue.toLowerCase()];
 
-			if (!resVal2)
-				resVal2 = 6;
+			if (!resVal1) resVal1 = 6;
+
+			if (!resVal2) resVal2 = 6;
 
 			return resVal1 - resVal2;
 		});
 
 		// Replacing residue names with the ones to be displayed.
 		for (var i = 0; i < detailData.composition.length; i++) {
-			if (detailData.composition[i].residue == "hex"){
-				detailData.composition[i].residue = "Hex";
-			} else  if (detailData.composition[i].residue == "hexnac"){
-				detailData.composition[i].residue = "HexNAc";
-			} else if (detailData.composition[i].residue == "dhex"){
-				detailData.composition[i].residue = "dHex";
-			} else if (detailData.composition[i].residue == "neuac"){
-				detailData.composition[i].residue = "NeuAc";
-			} else if (detailData.composition[i].residue == "neugc"){
-				detailData.composition[i].residue = "NeuGc";
-			} else if (detailData.composition[i].residue == "other"){
-				detailData.composition[i].residue = "(+x other residues)";
+			if (detailData.composition[i].residue == 'hex') {
+				detailData.composition[i].residue = 'Hex';
+			} else if (detailData.composition[i].residue == 'hexnac') {
+				detailData.composition[i].residue = 'HexNAc';
+			} else if (detailData.composition[i].residue == 'dhex') {
+				detailData.composition[i].residue = 'dHex';
+			} else if (detailData.composition[i].residue == 'neuac') {
+				detailData.composition[i].residue = 'NeuAc';
+			} else if (detailData.composition[i].residue == 'neugc') {
+				detailData.composition[i].residue = 'NeuGc';
+			} else if (detailData.composition[i].residue == 'other') {
+				detailData.composition[i].residue = '(+x other residues)';
 			}
 		}
 	}
@@ -510,7 +506,7 @@ const GlycanDetail = (props) => {
 													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
 														<p>
 															<>
-																<Row className='gg-align-middle'>
+																<Row>
 																	<Col align='right'>
 																		<strong>{species}:</strong>
 																	</Col>
