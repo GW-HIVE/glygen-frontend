@@ -4,6 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Tooltip from '@material-ui/core/Tooltip';
+import SelectAllIcon from '@material-ui/icons/SelectAll';
 // import Popover from '@material-ui/core/Popover';
 // import Button from '@material-ui/core/Button';
 const options = ['Title', 'Authors', 'Journal', 'Date', 'PMID'];
@@ -45,10 +46,8 @@ export default function PublicationsMenu() {
 				// aria-haspopup='true'
 				onClick={handleClick}>
 				<Tooltip title='Sort by' placement='top'>
-					<MoreVertIcon
-						className='more-vert-icon'
-						// style={{ color: '#2F78B7' }}
-					/>
+					<SelectAllIcon className='more-vert-icon' fontSize='large' />
+					{/* <MoreVertIcon className='more-vert-icon' /> */}
 				</Tooltip>
 			</div>
 			<Menu
