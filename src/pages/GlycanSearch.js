@@ -909,6 +909,7 @@ const GlycanSearch = (props) => {
 				} else {
           setPageLoading(false);
           setGlySearchError(true);
+          window.scrollTo(0, 0)
 				}
 			})
 			.catch(function (error) {
@@ -926,6 +927,7 @@ const GlycanSearch = (props) => {
 				} else {
           setPageLoading(false);
           setGlySearchError(true);
+          window.scrollTo(0, 0)
 				}
 			})
 			.catch(function (error) {
@@ -943,6 +945,7 @@ const GlycanSearch = (props) => {
 				} else {
           setPageLoading(false);
           setGlySearchError(true);
+          window.scrollTo(0, 0)
 				}
 			})
 			.catch(function (error) {
