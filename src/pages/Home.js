@@ -127,11 +127,10 @@ export default function Home() {
 
 	useEffect(() => {
 		setPageLoading(true);
-		getSystemData().then(response => setHomeData(response.data));
-		setTimeout(()=> {
+		getSystemData().then((response) => {
+			setHomeData(response.data);
 			setPageLoading(false);
-		}, 500)
-
+		});
 	}, []);
 
 	return (
