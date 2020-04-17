@@ -49,7 +49,7 @@ export default function VerticalHeadingLogo(props) {
 								align='bottom'
 								href='https://github.com/glygener/glygen-frontend/tree/master/src/GlyGen-logos'
 								target='_blank'>
-								<div style={{ color: '#2E78B7' }}>
+								<div>
 									<GetAppIcon /> Download Logo
 								</div>
 								<CardMedia
@@ -67,5 +67,5 @@ export default function VerticalHeadingLogo(props) {
 }
 
 VerticalHeadingLogo.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };
