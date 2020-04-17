@@ -27,6 +27,7 @@ import PublicationsMenu from '../components/SeeMoreVertBtn';
 import helpCircleIcon from '../images/icons/help-circle-icon.svg';
 import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
+import HelpOutline from '@material-ui/icons/HelpOutline';
 //import IconButton from '@material-ui/core/IconButton';
 
 const items = [
@@ -374,6 +375,9 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr arrow'>
+									{/* <Tooltip title='Help' placement='top'>
+										<HelpOutline />
+									</Tooltip> */}
 									<h3 className='panelHeadText'>General</h3>
 									<span className='gg-align-middle card-icon-space'>
 										<Tooltip title='Help' placement='top'>
@@ -701,7 +705,7 @@ const GlycanDetail = (props) => {
 															<ul>
 																<Row>
 																	{crossRef.links.map((link) => (
-																		<Col md={3}>
+																		<Col>
 																			<li>
 																				<a
 																					href={link.url}
