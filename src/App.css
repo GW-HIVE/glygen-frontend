@@ -180,20 +180,13 @@ p {
 .arrow {
 	display: flex;
 	justify-content: space-between;
+	justify-content: center;
 }
 .arrow h3,
 .arrow h4 {
 	margin-left: 0;
+	/* justify-content: center; */
 	/* padding: 10px 0; */
-}
-.expand-arrow {
-	/* font-size: 36px !important; */
-	/* margin: 10px 0; */
-}
-
-.expand-arrow-expanded {
-	/* font-weight: 900; */
-	/* margin: 10px 0; */
 }
 .arrow-btn,
 .arrow-btn:focus,
@@ -201,6 +194,7 @@ p {
 	padding: 0 !important;
 	margin: 0 !important;
 	border: none !important;
+	outline: 0 !important;
 }
 .card-icon-space {
 	padding-right: 20px;

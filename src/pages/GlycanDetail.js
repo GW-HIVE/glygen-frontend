@@ -283,15 +283,8 @@ const GlycanDetail = (props) => {
 	function toggleCollapse(name, value) {
 		setCollapsed({ [name]: !value });
 	}
-	const expandIcon = (
-		<ExpandMoreIcon fontSize='large' className='expand-arrow' />
-	);
-	const closeIcon = (
-		<ExpandLessIcon
-			fontSize='large'
-			className={'expand-arrow' + ' expand-arrow-expanded'}
-		/>
-	);
+	const expandIcon = <ExpandMoreIcon fontSize='large' />;
+	const closeIcon = <ExpandLessIcon fontSize='large' />;
 	// ===================================== //
 
 	/**
@@ -377,17 +370,13 @@ const GlycanDetail = (props) => {
 										</Tooltip>
 									</span>
 									<Accordion.Toggle
-										// as={Card.Header}
 										eventKey='0'
 										onClick={() => toggleCollapse('general', collapsed.general)}
 										className='panelHeadBgr panelHeadText arrow-btn'>
-										{/* <h3>General</h3> */}
-										{/* <div> */}
 										<span>{collapsed.general ? closeIcon : expandIcon}</span>
-										{/* </div> */}
 									</Accordion.Toggle>
 								</Card.Header>
-								<Accordion.Collapse eventKey='0' out={!collapsed.general}>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										<p>
 											{glytoucan && glytoucan.glytoucan_ac && (
@@ -466,15 +455,16 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() => toggleCollapse('species', collapsed.species)}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Species</h3>
-									<span>{collapsed.species ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.species}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Species</h3>
+									<Accordion.Toggle
+										eventKey='0'
+										onClick={() => toggleCollapse('species', collapsed.species)}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>{collapsed.species ? closeIcon : expandIcon}</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										<Row>
 											{speciesEvidence &&
@@ -509,18 +499,17 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									id='motif'
-									as={Card.Header}
-									eventKey='0'
-									onClick={() => toggleCollapse('motif', collapsed.motif)}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Motif</h3>
-									<span className={'text-right'}>
-										{collapsed.motif ? closeIcon : expandIcon}
-									</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.motif}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Motif</h3>
+									<Accordion.Toggle
+										id='motif'
+										eventKey='0'
+										onClick={() => toggleCollapse('motif', collapsed.motif)}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>{collapsed.motif ? closeIcon : expandIcon}</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										{motifs && (
 											<>
@@ -555,17 +544,20 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() =>
-										toggleCollapse('glycoprotein', collapsed.glycoprotein)
-									}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Found Glycoproteins</h3>
-									<span>{collapsed.glycoprotein ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.glycoprotein}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Found Glycoproteins</h3>
+									<Accordion.Toggle
+										eventKey='0'
+										onClick={() =>
+											toggleCollapse('glycoprotein', collapsed.glycoprotein)
+										}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>
+											{collapsed.glycoprotein ? closeIcon : expandIcon}
+										</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										{glycoprotein && glycoprotein.length !== 0 && (
 											<ClientPaginatedTable
@@ -584,18 +576,18 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									// id='biosyntheticenzymes'
-									as={Card.Header}
-									eventKey='0'
-									onClick={() =>
-										toggleCollapse('bioEnzyme', collapsed.bioEnzyme)
-									}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Biosynthetic Enzyme</h3>
-									<span>{collapsed.bioEnzyme ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.bioEnzyme}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Biosynthetic Enzyme</h3>
+									<Accordion.Toggle
+										eventKey='0'
+										onClick={() =>
+											toggleCollapse('bioEnzyme', collapsed.bioEnzyme)
+										}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>{collapsed.bioEnzyme ? closeIcon : expandIcon}</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										{enzyme && enzyme.length !== 0 && (
 											<ClientPaginatedTable
@@ -614,17 +606,18 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() =>
-										toggleCollapse('digitalSeq', collapsed.digitalSeq)
-									}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Digital Sequence</h3>
-									<span>{collapsed.digitalSeq ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.digitalSeq}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Digital Sequence</h3>
+									<Accordion.Toggle
+										eventKey='0'
+										onClick={() =>
+											toggleCollapse('digitalSeq', collapsed.digitalSeq)
+										}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>{collapsed.digitalSeq ? closeIcon : expandIcon}</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body className='text-responsive'>
 										<p>
 											<strong>IUPAC</strong>
@@ -651,15 +644,18 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Accordion.Toggle
-									as={Card.Header}
-									eventKey='0'
-									onClick={() => toggleCollapse('crossref', collapsed.crossref)}
-									className='panelHeadBgr panelHeadText arrow'>
-									<h3>Cross References</h3>
-									<span>{collapsed.crossref ? closeIcon : expandIcon}</span>
-								</Accordion.Toggle>
-								<Accordion.Collapse eventKey='0' out={!collapsed.crossref}>
+								<Card.Header className='panelHeadBgr arrow'>
+									<h3 className='panelHeadText'>Cross References</h3>
+									<Accordion.Toggle
+										eventKey='0'
+										onClick={() =>
+											toggleCollapse('crossref', collapsed.crossref)
+										}
+										className='panelHeadBgr panelHeadText arrow-btn'>
+										<span>{collapsed.crossref ? closeIcon : expandIcon}</span>
+									</Accordion.Toggle>
+								</Card.Header>
+								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
 										{itemsCrossRef ? (
 											<p>
