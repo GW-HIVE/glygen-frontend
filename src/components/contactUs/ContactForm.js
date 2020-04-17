@@ -1,28 +1,29 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import TextField from '@material-ui/core/TextField';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+// import { createStyles, makeStyles } from '@material-ui/core/styles';
+// import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
-import { useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
+import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		formControl: {
-			margin: theme.spacing(1),
-			minWidth: 120,
-		},
-	})
-);
+// const useStyles = makeStyles((theme) =>
+// 	createStyles({
+// 		formControl: {
+// 			margin: theme.spacing(1),
+// 			minWidth: 120,
+// 		},
+// 	})
+// );
 
 const ContactForm = (props) => {
-	const classes = useStyles();
+	// const classes = useStyles();
 
 	// const [contactUsData, setContactUsData] = useReducer(
 	// 	(state, newState) => ({ ...state, ...newState }),
@@ -64,7 +65,7 @@ const ContactForm = (props) => {
 	const messageMaxLen = 2400;
 	const [messageCharsLeft, setMessageCharsLeft] = useState(messageMaxLen);
 
-	const inputLabel = useRef(null);
+	// const inputLabel = useRef(null);
 	const handleChange = (event) => {
 		setContactUsResponseMessage();
 		setSubject(event.target.value);
@@ -105,7 +106,7 @@ const ContactForm = (props) => {
 		setEmail('');
 		setSubject('');
 		setMessage('');
-		setMessageCharsLeft(`${messageMaxLen }`);
+		setMessageCharsLeft(`${messageMaxLen}`);
 		setFormValidated(false);
 		setFNameValidated(false);
 		setLNameValidated(false);
@@ -127,10 +128,13 @@ const ContactForm = (props) => {
 				<p>We'd love to hear from you.</p>
 				<Row>
 					<Col sm={12} md={6} lg={6}>
+						<Typography>
+							<strong>First name</strong>
+						</Typography>
 						<TextField
 							id='outlined-full-width'
 							required
-							label='First name'
+							// label='First name'
 							type='text'
 							name='fname'
 							value={fname}
@@ -148,16 +152,9 @@ const ContactForm = (props) => {
 								'First name is required.'
 							}
 							onInput={(e) => onlyText(e)}
-							style={{ margin: 8 }}
+							style={{ margin: '5px 0 15px 0' }}
 							fullWidth
 							margin='dense'
-							className={classes.labell}
-							InputLabelProps={{
-								shrink: true,
-								style: {
-									fontWeight: '900',
-								},
-							}}
 							variant='outlined'
 							inputProps={{
 								maxLength: 64,
@@ -165,10 +162,12 @@ const ContactForm = (props) => {
 						/>
 					</Col>
 					<Col sm={12} md={6} lg={6}>
+						<Typography>
+							<strong>Last name</strong>
+						</Typography>
 						<TextField
 							id='outlined-full-width'
 							required
-							label='Last name'
 							type='text'
 							name='lname'
 							value={lname}
@@ -186,15 +185,9 @@ const ContactForm = (props) => {
 								'Last name is required.'
 							}
 							onInput={(e) => onlyText(e)}
-							style={{ margin: 8 }}
+							style={{ margin: '5px 0 15px 0' }}
 							fullWidth
 							margin='dense'
-							InputLabelProps={{
-								shrink: true,
-								style: {
-									fontWeight: '900',
-								},
-							}}
 							variant='outlined'
 							inputProps={{
 								maxLength: 64,
@@ -202,24 +195,18 @@ const ContactForm = (props) => {
 						/>
 					</Col>
 					<Col sm={12} md={6} lg={6}>
-						<FormControl
-							variant='outlined'
-							fullWidth
-							className={classes.formControl}>
-							<InputLabel
-								ref={inputLabel}
-								id='demo-simple-select-outlined-label'
-								style={{ fontWeight: '900' }}>
-								Subject
-							</InputLabel>
+						<Typography>
+							<strong>Subject</strong>
+						</Typography>
+						<FormControl variant='outlined' fullWidth>
 							<Select
 								labelId='demo-simple-select-outlined-label'
 								id='demo-simple-select-outlined'
 								value={subject}
 								fullWidth
 								margin='dense'
-								onChange={handleChange}
-								labelWidth={60}>
+								style={{ margin: '5px 0 15px 0' }}
+								onChange={handleChange}>
 								<MenuItem value={'general'}>General comment</MenuItem>
 								<MenuItem value={'technical'}>Technical issue</MenuItem>
 								<MenuItem value={'help'}>Need help</MenuItem>
@@ -233,14 +220,17 @@ const ContactForm = (props) => {
 						</FormControl>
 					</Col>
 					<Col sm={12} md={6} lg={6}>
+						<Typography>
+							<strong>Email</strong>
+						</Typography>
 						<TextField
 							id='email'
 							required
-							label='Email'
+							// label='Email'
 							type='email'
 							name='email'
 							value={email}
-							style={{ margin: 8 }}
+							style={{ margin: '5px 0 15px 0' }}
 							placeholder='example@domain.com'
 							error={(formValidated || emailValidated) && !validEmail}
 							onChange={(e) => {
@@ -258,10 +248,10 @@ const ContactForm = (props) => {
 							}
 							fullWidth
 							margin='dense'
-							InputLabelProps={{
-								shrink: true,
-								style: { fontWeight: '900' },
-							}}
+							// InputLabelProps={{
+							// 	shrink: true,
+							// 	style: { fontWeight: '900' },
+							// }}
 							variant='outlined'
 							inputProps={{
 								maxLength: 128,
@@ -269,18 +259,23 @@ const ContactForm = (props) => {
 						/>
 					</Col>
 					<Col>
+						<Typography>
+							<strong>Message</strong>
+						</Typography>
 						<TextField
 							id='outlined-full-width'
 							required
-							label='Message'
+							// label='Message'
 							name='message'
 							value={message}
 							type='text'
-							style={{ margin: 8 }}
+							style={{ margin: '5px 0 15px 0' }}
 							placeholder='Please tell us how we can help you.'
 							error={
 								(formValidated || messageValidated) &&
-								(message === '' || message.length < 5 || message.length > messageMaxLen)
+								(message === '' ||
+									message.length < 5 ||
+									message.length > messageMaxLen)
 							}
 							onChange={(e) => {
 								setMessage(e.target.value);

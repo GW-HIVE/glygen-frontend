@@ -56,7 +56,7 @@ const ContactUs = (props) => {
 									</span>{' '}
 									UGA Location
 								</h3>
-								<h4>University of Georgia</h4>
+								<h5>University of Georgia</h5>
 								<ul className='office-details'>
 									<li>
 										<strong>Complex Carbohydrate Research Center</strong>
@@ -72,7 +72,7 @@ const ContactUs = (props) => {
 									</span>{' '}
 									GW Location
 								</h3>
-								<h4>The George Washington University</h4>
+								<h5>The George Washington University</h5>
 								<ul className='office-details'>
 									<li>
 										<strong>School of Medicine and Health Sciences</strong>
