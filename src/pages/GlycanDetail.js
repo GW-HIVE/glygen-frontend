@@ -27,7 +27,7 @@ import PublicationsMenu from '../components/SeeMoreVertBtn';
 import helpCircleIcon from '../images/icons/help-circle-icon.svg';
 import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+//import IconButton from '@material-ui/core/IconButton';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -47,13 +47,14 @@ const CompositionDisplay = (props) => {
 				<>
 					{item.url ? (
 						<>
-							<a href={item.url} target='_blank'>
+							<a href={item.url} target='_blank' rel='noopener noreferrer'>
 								{item.residue}
 							</a>
-							<sub>{item.count}</sub>
+							<sub>{item.count} </sub>
+							{'  '}
 						</>
 					) : (
-						<sub>{item.count}</sub>
+						<sub>{item.count} </sub>
 					)}
 				</>
 			))}
