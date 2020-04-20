@@ -6,9 +6,27 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, withStyles } from "@material-ui/core/styles";
 import { height } from "@material-ui/system";
 import Button from "react-bootstrap/Button";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import { Link } from "@material-ui/core";
+import InputBase from "@material-ui/core/InputBase";
+
+const BootstrapInput = withStyles(theme => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing(3)
+    }
+  },
+  input: {
+    borderRadius: 4,
+    minWidth: "40px",
+    border: "1px solid #ced4da",
+    padding: "7px 26px 7px 12px"
+  }
+}))(InputBase);
+
 const useStyles = makeStyles(theme =>
   createStyles({
     formControl: {
@@ -36,39 +54,45 @@ const DownloadButton = props => {
   const classes = useStyles();
   return (
     <div className="dropdown gg-download text-right">
-      <button
-        className="btn btn-link btn-link-detail dropdown-toggle"
-        type="button"
-        id="download"
-        alt="Download results"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="true"
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        <i className="glyphicon glyphicon-save"></i> DOWNLOAD
-        <span className="caret"></span>
-      </button>
+      <Link>
+        <button
+          className="btn btn-link gg-download-btn dropdown-toggle"
+          type="button"
+          id="download"
+          alt="Download results"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="true"
+          onClick={() => {
+            setShow(!show);
+          }}
+        >
+          <GetAppIcon /> DOWNLOAD
+          <span className="caret"></span>
+        </button>
+      </Link>
       <div
         className={
           "dropdown-menu dropdown-menu-box dropdown-menu-right" +
           (show ? " open show" : "")
         }
         aria-labelledby="download"
-        style={{ Width: "1px" }}
       >
         <Row>
           <Col sm={12} md={6} lg={6}>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl
+              margin="dense"
+              variant="outlined"
+              className={classes.formControl}
+            >
               <Row>
-                <div className="col-md-5" style={{ paddingTop: "10px" }}>
-                  <strong>Type: </strong>
+                <div className="col-md-7" style={{ paddingTop: "16px" }}>
+                  <strong>Type:</strong>
                 </div>
 
-                <div className="col-md-7">
+                <div className="col-md-5 " style={{ paddingTop: "10px" }}>
                   <Select
+                    input={<BootstrapInput />}
                     value={format}
                     onChange={e => {
                       setFormat(e.target.value);
@@ -87,11 +111,12 @@ const DownloadButton = props => {
         </Row>
 
         <Row>
-          <div className="col-md-7">
+          <div className="col-md-5" style={{ paddingLeft: "22px" }}>
             <strong>Compressed:</strong>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-7" style={{ paddingLeft: "50px" }}>
             <input
+              style={{ fontSize: "x-large" }}
               type="checkbox"
               id="download_compression"
               checked={compressed}
@@ -106,7 +131,7 @@ const DownloadButton = props => {
           <div className="col-md-5 text-right">
             <Button
               type="button"
-              style={{ marginRight: "10px" }}
+              style={{ marginRight: "7px", marginTop: "7px" }}
               className="gg-btn-blue"
               onClick={handleDownload}
             >
