@@ -578,8 +578,14 @@ const GlycanDetail = (props) => {
 														</p>
 													</Col>
 												))}
+												{ !species && (
+											<p>No data available.</p>
+										)}
 										</Row>
 									</Card.Body>
+									
+
+									
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
@@ -623,6 +629,10 @@ const GlycanDetail = (props) => {
 												</Row>
 											</>
 										)}
+										{ !motifs && (
+											<p>No data available.</p>
+										)}
+
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -655,6 +665,10 @@ const GlycanDetail = (props) => {
 												columns={glycoProtienColumns}
 											/>
 										)}
+										{!glycoprotein && (
+											<p>No data available.</p>
+			
+											)}
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -685,6 +699,10 @@ const GlycanDetail = (props) => {
 												columns={bioEnzymeColumns}
 											/>
 										)}
+										{!enzyme && (
+											<p>No data available.</p>
+			
+											)}
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -709,20 +727,49 @@ const GlycanDetail = (props) => {
 								</Card.Header>
 								<Accordion.Collapse eventKey='0'>
 									<Card.Body className='text-responsive'>
-										<p>
-											<strong>IUPAC</strong>
-											<p className='text-overflow'>{iupac}</p>
-											<strong>WURCS</strong>
-											<p className='text-overflow'>{wurcs}</p>
-											<strong>GlycoCT</strong>
-											<p className='text-overflow'>{glycoct}</p>
-											<strong>InChI</strong>
-											<p className='text-overflow'>{inchi}</p>
-											<strong>GLYCAM IUPAC</strong>
-											<p className='text-overflow'>{glycam}</p>
-											<strong>Isomeric SMILES</strong>
-											<p className='text-overflow'>{smiles_isomeric}</p>
-										</p>
+									<p>
+                                            <strong>IUPAC</strong>
+                                            {iupac ? (
+                                                <p className='text-overflow'>{iupac} </p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+                                            <strong>WURCS</strong>
+                                            {wurcs ? (
+                                                <p className='text-overflow'>{wurcs} </p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+                                            <strong>GlycoCT</strong>
+                                            {glycoct ? (
+                                                <p className='text-overflow'>{glycoct} </p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+                                            <strong>InChI</strong>
+                                            {inchi ? (
+                                                <p className='text-overflow'>{inchi}</p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+
+                                            <strong>GLYCAM IUPAC</strong>
+                                            {glycam ? (
+                                                <p className='text-overflow'>{glycam}</p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+                                    
+                                            <strong>Isomeric SMILES</strong>
+                                        
+                                            {smiles_isomeric ? (
+                                                <p className='text-overflow'>{smiles_isomeric}</p>
+                                            ) : (
+                                                <p>No data available.</p>
+                                            )}
+                                        </p>
+
+
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -771,10 +818,10 @@ const GlycanDetail = (props) => {
 																	))}
 																</Row>
 															</ul>
-															{/* </Col> */}
+															
 														</li>
 													))}
-													{/* </Row> */}
+											
 												</ul>
 											</p>
 										) : (
@@ -847,6 +894,10 @@ const GlycanDetail = (props) => {
 													))}
 												</tbody>
 											)}
+											{ !publication && (
+											<p>No data available.</p>
+										)}
+
 										</Table>
 									</Card.Body>
 								</Accordion.Collapse>
