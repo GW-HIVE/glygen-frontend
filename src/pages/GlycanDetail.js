@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from 'react';
 import { getGlycanDetail } from '../data/glycan';
 import { useParams } from 'react-router-dom';
@@ -7,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 import Sidebar from '../components/navigation/Sidebar';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
-import { Link, rgbToHex } from '@material-ui/core';
+import { Link, rgbToHex, Typography } from '@material-ui/core';
 import { Navbar, Col, Row, Image } from 'react-bootstrap';
 // import { FaReadme } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
@@ -28,6 +29,7 @@ import helpCircleIcon from '../images/icons/help-circle-icon.svg';
 import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
 import HelpOutline from '@material-ui/icons/HelpOutline';
+import { withStyles } from '@material-ui/core/styles';
 //import IconButton from '@material-ui/core/IconButton';
 
 const items = [
@@ -331,6 +333,15 @@ const GlycanDetail = (props) => {
 			glytoucan_ac;
 		window.open(url);
 	}
+	const HtmlTooltip = withStyles((theme) => ({
+		tooltip: {
+			backgroundColor: '#f5f5f9',
+			color: 'rgba(0, 0, 0, 0.87)',
+			maxWidth: 220,
+			// fontSize: theme.typography.pxToRem(16),
+			border: '1px solid #dadde9',
+		},
+	}))(Tooltip);
 
 	return (
 		<>
@@ -374,44 +385,86 @@ const GlycanDetail = (props) => {
 							className='panel-width'
 							style={{ padding: '20px 0' }}>
 							<Card>
-								<Card.Header className='panelHeadBgr arrow'>
-									{/* <Tooltip title='Help' placement='top'>
-										<HelpOutline />
-									</Tooltip> */}
-									<h3 className='panelHeadText'>General</h3>
-									<span className='gg-align-middle card-icon-space'>
-										<Tooltip title='Help' placement='top'>
-											<a
-												href='https://wiki.glygen.org/index.php/Main_Page'
-												target='_blank'
-												rel='noopener noreferrer'>
-												<Image
-													className='iconHover'
-													src={helpCircleIcon}
-													alt='Related glycans'
-												/>
-											</a>
-										</Tooltip>
-									</span>
-									<span className='gg-align-middle card-icon-space'>
-										<Tooltip title='Related glycans' placement='top'>
-											<a
-												href='javascript:void(0)'
-												onClick={() => {
-													handleOpenSubsumptionBrowse(
-														glytoucan && glytoucan.glytoucan_ac
-													);
-												}}>
-												<Image src={relatedGlycansIcon} alt='Related glycans' />
-											</a>
-										</Tooltip>
-									</span>
-									<Accordion.Toggle
-										eventKey='0'
-										onClick={() => toggleCollapse('general', collapsed.general)}
-										className='panelHeadBgr panelHeadText arrow-btn'>
-										<span>{collapsed.general ? closeIcon : expandIcon}</span>
-									</Accordion.Toggle>
+								<Card.Header className='panelHeadBgr'>
+									<Typography variant='h4' component='h3' className='d-inline'>
+										<HtmlTooltip
+											// placement='top'
+											disableTouchListener
+											interactive
+											title={
+												<React.Fragment>
+													<Typography
+														variant='h6'
+														component='h5'
+														color='inherit'>
+														General:
+													</Typography>
+													<Typography color='inherit'>
+														{'General information about your selected glycan.'}
+														<br /> {'Explore'}{' '}
+														<a
+															href='https://wiki.glygen.org/index.php/Main_Page'
+															target='_blank'
+															rel='noopener noreferrer'>
+															{'General'}
+														</a>
+													</Typography>
+												</React.Fragment>
+											}>
+											<HelpOutline />
+										</HtmlTooltip>
+										<h3 className='gg-green d-inline pl-3'>General</h3>
+										<div className='float-right'>
+											{/* <span className='gg-align-middle5 card-icon-space5 pr-3'>
+												<Tooltip title='Help' placement='top'>
+													<a
+														href='https://wiki.glygen.org/index.php/Main_Page'
+														target='_blank'
+														rel='noopener noreferrer'>
+														<Image
+															className='iconHover'
+															src={helpCircleIcon}
+															alt='Help icon'
+														/>
+													</a>
+												</Tooltip>
+											</span> */}
+											<span className='pr-3'>
+												<Tooltip
+													placement='top'
+													title={
+														<>
+															<Typography color='inherit'>
+																Related glycans
+															</Typography>
+														</>
+													}>
+													<a
+														href='javascript:void(0)'
+														onClick={() => {
+															handleOpenSubsumptionBrowse(
+																glytoucan && glytoucan.glytoucan_ac
+															);
+														}}>
+														<Image
+															src={relatedGlycansIcon}
+															alt='Related glycans'
+														/>
+													</a>
+												</Tooltip>
+											</span>
+											<Accordion.Toggle
+												eventKey='0'
+												onClick={() =>
+													toggleCollapse('general', collapsed.general)
+												}
+												className='panelHeadBgr5 panelHeadText5 gg-green arrow-btn'>
+												<span>
+													{collapsed.general ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Typography>
 								</Card.Header>
 								<Accordion.Collapse eventKey='0'>
 									<Card.Body>
@@ -740,7 +793,6 @@ const GlycanDetail = (props) => {
 							<Card>
 								<Card.Header className='panelHeadBgr arrow'>
 									<h3 className='panelHeadText'>Publications</h3>
-
 									<span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
 									</span>

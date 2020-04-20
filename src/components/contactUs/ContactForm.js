@@ -294,10 +294,10 @@ const ContactForm = (props) => {
 							multiline
 							rows='3'
 							margin='normal'
-							InputLabelProps={{
-								shrink: true,
-								style: { fontWeight: '900' },
-							}}
+							// InputLabelProps={{
+							// 	shrink: true,
+							// 	style: { fontWeight: '900' },
+							// }}
 							variant='outlined'
 							inputProps={{
 								minlength: 5,
