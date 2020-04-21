@@ -83,7 +83,6 @@ export default function AutoTextInput(props) {
   return (
     <>
     <Autocomplete
-      id="filter-demo"
       freeSolo
       getOptionLabel={option => option}
       classes={{

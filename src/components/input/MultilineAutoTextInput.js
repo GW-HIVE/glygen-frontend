@@ -89,9 +89,7 @@ export default function MultilineAutoTextInput(props) {
   return (
     <>
     <Autocomplete
-      id="filter-demo"
       freeSolo
-      autoComplete={false}
       getOptionLabel={option => props.inputValue.substring(0, props.inputValue.lastIndexOf(",") + 1) + option}
       filterOptions={filterOptions}
       options={options}
