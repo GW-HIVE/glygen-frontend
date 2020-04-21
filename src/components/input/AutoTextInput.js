@@ -12,11 +12,8 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     backgroundColor: theme.palette.background.paper,
     height: 28,
-
-    // fontSize: 14,
     "& > span": {
       marginRight: 10,
-      //fontSize: 14,
       padding: 2
     },
     width: "700px"
@@ -41,19 +38,14 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: "4px !important"
   },
   option: {
-    // fontSize: 14,
     "& > span": {
       marginRight: 10
-      //fontSize: 14
     }
   },
   inputBase: {
     width: "100%",
     height: 34,
     padding: "0px !important"
-    // "& input": {
-    //     fontSize: 14
-    // }
   },
   errorText: {
     fontSize:"14px  !important",

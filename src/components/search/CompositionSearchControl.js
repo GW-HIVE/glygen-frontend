@@ -3,21 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import { TextField } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 
 const useStyles = makeStyles({
-	root: {
-		// width: 480
-	},
 	input: {
-		// width: "120px",
 		height: 34,
 		borderRadius: 4,
 		position: 'relative',
@@ -25,15 +19,8 @@ const useStyles = makeStyles({
 		paddingLeft: '15px',
 		paddingRight: '15px',
 	},
-	// span1: {
-	// 	fontSize: 16,
-	// 	fontWeight: 'bold',
-	// 	height: 16,
-	// 	margin: 0,
-	// },
 	span2: {
 		fontSize: 12,
-		//height: 16,
 		fontStyle: 'italic',
 		fontWeight: 'bold',
 		margin: 0,
@@ -44,77 +31,31 @@ const useStyles = makeStyles({
 		margin: 0,
 	},
 	label: {
-		// width: "100%",
-		//height: "50px",
-		// padding: "15px",
 		fontSize: 16,
 		fontWeight: 'bold',
 		margin: 0,
-		// marginTop: 10,
-
-		// paddingLeft: "15px",
-		// paddingRight: "15px"
 	},
 	labelHeader: {
-		// width: "100%",
-		//height: "50px",
-		// padding: "15px",
 		fontSize: 16,
 		fontWeight: 'bold',
 		margin: 0,
 		color: '#2F78B7',
-		// marginTop: 10,
-
-		// paddingLeft: "15px",
-		// paddingRight: "15px"
 	},
 	select: {
-		// width: "180px",
-		// width: "100%",
 		height: '34px',
 		paddingLeft: '15px',
 		paddingRight: '15px',
 	},
-	// selectOutlined: {
-	// 	paddingTop: '4px !important',
-	// 	paddingBottom: '4px !important',
-	// 	backgroundColor: 'white',
-	// },
-	// submitButton: {
-	// 	marginTop: 16,
-	// 	marginBottom: 16,
-	// 	// marginRight: 16,
-	// 	//marginLeft: 16,
-	// 	backgroundColor: '#2f78b7',
-	// },
-	// clearButton: {
-	// 	marginTop: 16,
-	// 	marginBottom: 16,
-	// 	// marginRight: 16,
-	// 	//marginLeft: 16,
-	// 	backgroundColor: '#fff',
-	// 	borderColor: '#337ab7',
-	// 	color: '#337ab7',
-	// },
-	// allYes: {
-	// 	marginTop: 16,
-	// 	marginBottom: 16,
-	// 	// marginRight: 16,
-	// 	// marginLeft: 16,
-	// 	backgroundColor: '#fff',
-	// 	borderColor: '#337ab7',
-	// 	color: '#337ab7',
-	// },
 });
 
 export default function CompositionSearchControl(props) {
 	const classes = useStyles();
-	const [undoStack, setUndoStack] = React.useState([]);
-	const [redoStack, setRedoStack] = React.useState([]);
-	const [undoVal, setUndoVal] = React.useState({});
-	const [redoDisabled, setRedoDisabled] = React.useState(true);
-	const [undoDisabled, setUndoDisabled] = React.useState(true);
-	const [searchDisabled, setSearchDisabled] = React.useState(false);
+	const [undoStack, setUndoStack] = useState([]);
+	const [redoStack, setRedoStack] = useState([]);
+	const [undoVal, setUndoVal] = useState({});
+	const [redoDisabled, setRedoDisabled] = useState(true);
+	const [undoDisabled, setUndoDisabled] = useState(true);
+	const [searchDisabled, setSearchDisabled] = useState(false);
 
 	const minInputChange = (event) => {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
@@ -352,6 +293,7 @@ export default function CompositionSearchControl(props) {
 			setSearchDisabled(false);
 		}
 	}
+
 	/**
 	 * saveResidueStateToUndoList saves residue state to undo list.
 	 * @param {string} residue - residue id.
@@ -579,7 +521,7 @@ export default function CompositionSearchControl(props) {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div>
 			<Grid
 				container
 				className={'col-sm-12'}
@@ -765,67 +707,6 @@ export default function CompositionSearchControl(props) {
 					Search Glycan
 				</Button>
 			</Row>
-			{/* <Grid
-				container
-				className={'col-sm-12'}
-				style={{ margin: 0 }}
-				spacing={2}
-				justify='center'
-				alignItems='center'>
-				
-				<Grid item>
-					<Button
-						className={classes.allYes + ' gg-btn'}
-					
-						onClick={allYes}>
-						All Yes
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.clearButton + ' gg-btn'}
-				
-						onClick={allNo}>
-						All No
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.clearButton + ' gg-btn'}
-					
-						onClick={clearCompSearch}>
-						Clear Fields
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.clearButton + ' gg-btn'}
-						disabled={undoDisabled}
-				
-						onClick={() => compSearchUndoRedo('undo')}>
-						Undo
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.clearButton + ' gg-btn'}
-						disabled={redoDisabled}
-					
-						onClick={() => compSearchUndoRedo('redo')}>
-						Redo
-					</Button>
-				</Grid>
-				<Grid item>
-					<Button
-						className={classes.submitButton + ' gg-btn'}
-						disabled={searchDisabled}
-					
-						onClick={props.searchGlycanCompClick}>
-						Search Glycan
-					</Button>
-				</Grid>
-			
-			</Grid> */}
 		</div>
 	);
 }

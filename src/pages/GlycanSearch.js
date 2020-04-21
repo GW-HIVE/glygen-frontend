@@ -1,174 +1,23 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import MultilineAutoTextInput from '../components/input/MultilineAutoTextInput';
-import RangeInputSlider from '../components/input/RangeInputSlider';
-import AutoTextInput from '../components/input/AutoTextInput';
-import MultiselectTextInput from '../components/input/MultiselectTextInput';
-import CompositionSearchControl from '../components/input/CompositionSearchControl';
-import SimpleSearchControl from '../components/input/SimpleSearchControl';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { getJson } from '../data/api';
 import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import SearchAlert from '../components/alert/SearchAlert';
-import FormHelperText from '@material-ui/core/FormHelperText';
-
+import GlycanAdvancedSearch from '../components/search/GlycanAdvancedSearch';
+import CompositionSearchControl from '../components/search/CompositionSearchControl';
+import SimpleSearchControl from '../components/search/SimpleSearchControl';
 import {
-	Component,
 	Tab,
 	Tabs,
-	Form,
 	Container,
-	Col,
-	Row,
-	NavLink,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Button from 'react-bootstrap/Button';
-// import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import HelpOutline from '@material-ui/icons/HelpOutline';
-import Tooltip from '@material-ui/core/Tooltip';
+import { makeStyles } from '@material-ui/core/styles';
 import '../css/Search.css';
 
-const HtmlTooltip = withStyles((theme) => ({
-	tooltip: {
-		backgroundColor: '#f5f5f9',
-		color: 'rgba(0, 0, 0, 0.87)',
-		maxWidth: 220,
-		fontSize: theme.typography.pxToRem(12),
-		border: '1px solid #dadde9',
-	},
-}))(Tooltip);
-
 const useStyles = makeStyles((theme) => ({
-	margin: {
-		// margin: theme.spacing(2)
-		marginBottom: 16,
-		width: 700,
-	},
-	marginSimple: {
-		// margin: theme.spacing(2)
-		marginTop: 16,
-		marginBottom: 16,
-		//width: 1100
-	},
-	// submitButton: {
-	// 	marginTop: 16,
-	// 	marginBottom: 16,
-	// 	// marginRight: 16,
-	// 	marginLeft: 16,
-	// 	backgroundColor: '#2f78b7',
-	// },
-	// clearButton: {
-	// 	marginTop: 16,
-	// 	marginBottom: 16,
-	// 	// marginRight: 16,
-	// 	marginLeft: 16,
-	// 	backgroundColor: '#fff',
-	// 	borderColor: '#337ab7',
-	// 	color: '#337ab7',
-	// },
-	// marginButToolbar: {
-	// 	justifyContent: 'flex-end',
-	// 	// marginRight: 0,
-	// 	// width: 700,
-	// },
-	marginButToolbarCompoSearch: {
-		justifyContent: 'center',
-		// marginRight: 0,
-		// width: 920
-	},
-	marginLeft: {
-		justifyContent: 'flex-end',
-	},
-	root: {
-		display: 'flex',
-		flexWrap: 'wrap',
-	},
-	withoutLabel: {
-		marginTop: theme.spacing(3),
-	},
-	textField: {
-		width: 200,
-	},
-	form1: {
-		width: 770,
-	},
-	label5: {
-		fontSize: 16,
-		width: '100px',
-		height: '18px',
-	},
-	label: {
-		fontSize: 16,
-		width: '100px',
-		height: '18px',
-		shrink: false,
-	},
-	label1: {
-		fontSize: '14px',
-		color: '#4A4A4A',
-		fontWeight: 'bold',
-		marginLeft: -27,
-		// height: "25px"
-	},
-	label4: {
-		fontSize: '15px',
-		color: '#4A4A4A',
-		fontWeight: 'bold',
-		// height: "25px"
-	},
-	label2: {
-		fontSize: '20px',
-		fontWeight: 'bold',
-		color: '#4A4A4A',
-	},
-	label3: {
-		fontSize: '16px',
-		fontWeight: 'bold',
-  },
-  examples: {
-    fontSize:"14px  !important"
-  },
-  errorText: {
-      fontSize:"14px  !important",
-      marginRight:0,
-      marginLeft:0,
-  },
-	input: {
-		borderRadius: 4,
-		position: 'relative',
-		backgroundColor: theme.palette.background.paper,
-		fontSize: 16,
-		width: '700px',
-		height: '34px',
-	},
-	inputt: {
-		borderRadius: 4,
-		position: 'relative',
-		backgroundColor: theme.palette.background.paper,
-		fontSize: 16,
-		width: '700px',
-		height: '10px',
-	},
-	input1: {
-		borderRadius: 4,
-		position: 'relative',
-		backgroundColor: theme.palette.background.paper,
-		fontSize: 16,
-		width: '700px',
-		height: '74px',
-	},
 	tabs: {
 		borderColor: '#FFFFFF',
 		width: '650px',
@@ -216,217 +65,51 @@ const useStyles = makeStyles((theme) => ({
   },
 	conSimple: {
 		alignItems: 'center',
-		// marginTop: "150px",
-		// marginBottom: "100px",
 		paddingTop: '100px',
-		//paddingBottom: "100px",
-	},
-	formControl: {
-		// margin: theme.spacing(1),
-		minWidth: 120,
-	},
-	select: {
-		width: '200px',
-		height: '34px',
-	},
-	select1: {
-		width: '700px',
-		height: '34px',
-	},
-	selectOutlined: {
-		paddingTop: '4px !important',
-		paddingBottom: '4px !important',
-		backgroundColor: 'white',
-	},
-	col1: {
-		margin: 0,
-		width: '25px',
-	},
-	row1: {
-		margin: 0,
-		marginRight: 15,
-		width: '25px',
-	},
-	help1: {
-		lineWidth: 1,
-	},
-	tooltip: {
-		backgroundColor: '#f5f5f9',
-		color: 'rgba(0, 0, 0, 0.87)',
-		maxWidth: 220,
-		// fontSize: theme.typography.pxToRem(12),
-		border: '1px solid #dadde9',
-	},
-	helpicon: {
-		fontSize: '18px',
-		marginRight: 8,
-	},
-	large: {
-		width: theme.spacing(20),
-		height: theme.spacing(20),
-	},
-	root1: {
-		display: 'flex',
-		'& > *': {
-			margin: theme.spacing(1),
-		},
 	}
 }));
 
 const GlycanSearch = (props) => {
 	let { id } = useParams();
-	const [initData, setInitData] = React.useState({});
+	const [initData, setInitData] = useState({});
 	const classes = useStyles();
-
-	const [glySimpleSearchCategory, setGlySimpleSearchCategory] = React.useState(
-		'any'
+	const [glySimpleSearchCategory, setGlySimpleSearchCategory] = useState('any');
+	const [glySimpleSearchTerm, setGlySimpleSearchTerm] = useState('');
+	const [glyAdvSearchData, setGlyAdvSearchData] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{
+			"glycanId" : '',
+			"glyMassType": 'Native',
+			'glyMass': [149, 6751],
+			'glyMassInput' : [149, 6751],
+			'glyMassRange' : [149, 6751],
+			'glyNumSugars' : [1, 37],
+			'glyNumSugarsRange' : [1, 37],
+			'glyNumSugarsInput' : [1, 37],
+			'glyOrganisms' : [],
+			'glyOrgOperation': 'or',
+			'glyType' : '',
+			'glySubType' : '',
+			'glySubTypeIsHidden' : true,
+			'glyProt' : '',
+			'glyMotif' : '',
+			'glyBioEnz' : '',
+			'glyPubId' : '',
+			'glyAdvSearchValError' : [false, false, false, false, false]
+		}
 	);
-	const [glySimpleSearchTerm, setGlySimpleSearchTerm] = React.useState('');
-	const [glycanId, setGlycanId] = React.useState('');
-	const [glyMassType, setGlyMassType] = React.useState('Native');
-	const [glyMass, setGlyMass] = React.useState([149, 6751]);
-	const [glyMassInput, setGlyMassInput] = React.useState([149, 6751]);
-	const [glyMassRange, setGlyMassRange] = React.useState([149, 6751]);
-	const [glyNumSugars, setGlyNumSugars] = React.useState([1, 37]);
-	const [glyNumSugarsRange, setGlyNumSugarsRange] = React.useState([1, 37]);
-	const [glyNumSugarsInput, setGlyNumSugarsInput] = React.useState([1, 37]);
-	const [glyOrganisms, setGlyOrganisms] = React.useState([]);
-	const [glyOrgOperation, setGlyOrgOperation] = React.useState('or');
-	const [glyType, setGlyType] = React.useState('');
-	const [glySubType, setGlySubType] = React.useState('');
-	const [glyProt, setGlyProt] = React.useState('');
-	const [glyMotif, setGlyMotif] = React.useState('');
-	const [glyBioEnz, setGlyBioEnz] = React.useState('');
-	const [glyPubId, setGlyPubId] = React.useState('');
-	const [glySubTypeIsHidden, setGlySubTypeIsHidden] = React.useState(true);
-	const [glyCompData, setGlyCompData] = React.useReducer(
+	const [glyCompData, setGlyCompData] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{}
 	);
 	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
-  const [pageLoading, setPageLoading] = React.useState(true);
-  const [glySearchError, setGlySearchError] = React.useState(false);
-  const [glyAdvSearchValError, setGlyAdvSearchValError] = React.useState([false, false, false, false, false]);
-
-
-	function glyOrgChange(org) {
-		setGlyOrganisms(org);
-	}
+	const [pageLoading, setPageLoading] = useState(true);
+	const [glySearchError, setGlySearchError] = useState(false);		
 
 	function glyCompChange(glyComp) {
 		setGlyCompData(glyComp);
 	}
-
-	const glyOrgOperationOnChange = (event) => {
-		setGlyOrgOperation(event.target.value);
-	};
-	const glyMassTypeOnChange = (event) => {
-		setGlyMassType(event.target.value);
-		setMassValues(event.target.value, glyMass);
-	};
-
-	const setMassValues = (massType, massValues) => {
-		var perMet_mass_min = Math.floor(initData.glycan_mass.permethylated.min);
-		var perMet_mass_max = Math.ceil(initData.glycan_mass.permethylated.max);
-		var native_mass_min,
-			minRange,
-			minval = Math.floor(initData.glycan_mass.native.min);
-		var native_mass_max,
-			maxRange,
-			maxval = Math.ceil(initData.glycan_mass.native.max);
-		var mass_type_native = initData.glycan_mass.native.name;
-		native_mass_min = minRange = minval;
-		native_mass_max = maxRange = maxval;
-
-		if (massType === undefined) massType = mass_type_native;
-
-		if (massValues !== undefined) {
-			minval = massValues[0];
-			maxval = massValues[1];
-		}
-
-		if (massType === mass_type_native) {
-			if (minval === perMet_mass_min) minval = native_mass_min;
-
-			if (maxval === perMet_mass_max || maxval > native_mass_max)
-				maxval = native_mass_max;
-		} else {
-			if (minval === native_mass_min || minval < perMet_mass_min)
-				minval = perMet_mass_min;
-
-			if (maxval === native_mass_max) maxval = perMet_mass_max;
-
-			minRange = perMet_mass_min;
-			maxRange = perMet_mass_max;
-		}
-
-		setGlyMassRange([minRange, maxRange]);
-		setGlyMassInput([minval, maxval]);
-		setGlyMass([minval, maxval]);
-	};
-
-	function sortDropdown(a, b) {
-		if (a.name < b.name) {
-			return -1;
-		} else if (b.name < a.name) {
-			return 1;
-		}
-		return 0;
-	}
-
-	const glyTypeOnChange = (event) => {
-		if (event.target.value === '') setGlySubTypeIsHidden(true);
-		else setGlySubTypeIsHidden(false);
-		setGlySubType('');
-		setGlyType(event.target.value);
-	};
-
-	const glySubTypeOnChange = (event) => {
-		setGlySubType(event.target.value);
-	};
-
-	function glycanIdChange(inputGlycanId) {
-    setGlycanId(inputGlycanId);
-    let valArr = glyAdvSearchValError;
-    valArr[0] = (inputGlycanId.length > 2500);
-    setGlyAdvSearchValError(valArr);
-	}
-
-	function glyProtChange(inputglycoProt) {
-    setGlyProt(inputglycoProt);
-    let valArr = glyAdvSearchValError;
-    valArr[1] = (inputglycoProt.length > 12);
-    setGlyAdvSearchValError(valArr);
-	}
-
-	function glyMotifChange(inputglycMotif) {
-    setGlyMotif(inputglycMotif);
-    let valArr = glyAdvSearchValError;
-    valArr[2] = (inputglycMotif.length > 47);
-    setGlyAdvSearchValError(valArr);
-	}
-
-	function glyBioEnzChange(inputglyBioEnz) {
-    setGlyBioEnz(inputglyBioEnz);
-    let valArr = glyAdvSearchValError;
-    valArr[3] = (inputglyBioEnz.length > 12);
-    setGlyAdvSearchValError(valArr);
-	}
-
-	function glyPubIdChange(inputglycPubId) {
-    setGlyPubId(inputglycPubId);
-    let valArr = glyAdvSearchValError;
-    valArr[4] = (inputglycPubId.length > 20);
-    setGlyAdvSearchValError(valArr);
-	}
-
-	const PubmedIdChange = (event) => {
-    setGlyPubId(event.target.value);
-    let valArr = glyAdvSearchValError;
-    valArr[4] = (event.target.value.length > 20);
-    setGlyAdvSearchValError(valArr);
-	};
-
+	
 	const getGlycanInit = () => {
 		const url = `/glycan/search_init`;
 		return getJson(url);
@@ -453,7 +136,7 @@ const GlycanSearch = (props) => {
 		return selection;
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
     setPageLoading(true);
     document.addEventListener("click", ()=>{
       setGlySearchError(false);
@@ -491,33 +174,18 @@ const GlycanSearch = (props) => {
 			}
 			initData.simple_search = simpleSearchExamples;
 
-			setGlyMassType(initData.glycan_mass.native.name);
-			setGlyMassRange([
-				Math.floor(initData.glycan_mass.native.min),
-				Math.ceil(initData.glycan_mass.native.max),
-			]);
-			setGlyMass([
-				Math.floor(initData.glycan_mass.native.min),
-				Math.ceil(initData.glycan_mass.native.max),
-			]);
-			setGlyMassInput([
-				Math.floor(initData.glycan_mass.native.min),
-				Math.ceil(initData.glycan_mass.native.max),
-			]);
-			setGlyNumSugarsRange([
-				initData.number_monosaccharides.min,
-				initData.number_monosaccharides.max,
-			]);
-			setGlyNumSugars([
-				initData.number_monosaccharides.min,
-				initData.number_monosaccharides.max,
-			]);
-			setGlyNumSugarsInput([
-				initData.number_monosaccharides.min,
-				initData.number_monosaccharides.max,
-			]);
-      setGlySubTypeIsHidden(true);
-      setGlyAdvSearchValError([false, false, false, false, false]);
+			setGlyAdvSearchData({
+				"glyMassType": initData.glycan_mass.native.name,
+				'glyMass': [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
+				'glyMassInput' : [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
+				'glyMassRange' : [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
+				'glyNumSugars' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
+				'glyNumSugarsRange' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
+				'glyNumSugarsInput' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
+				'glyOrgOperation': 'or',
+				'glySubTypeIsHidden' : true,
+				'glyAdvSearchValError' : [false, false, false, false, false]
+			});
 
 			const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
 				const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
@@ -584,9 +252,9 @@ const GlycanSearch = (props) => {
                   parseInt(resVal.min),
                   parseInt(resVal.max)
                 ),
-								max: data.query.composition[x].max,
-							};
-						}
+				max: data.query.composition[x].max,
+				 };
+				}
 						setGlyCompData(queryCompData);
             setGlyActTabKey('composition_search');
             setPageLoading(false);
@@ -598,119 +266,79 @@ const GlycanSearch = (props) => {
             setGlyActTabKey('simple_search');
             setPageLoading(false);
 					} else {
-						setGlycanId(
-							data.query.glytoucan_ac === undefined
-								? ''
-								: data.query.glytoucan_ac
-						);
-						setGlyProt(
-							data.query.protein_identifier === undefined
-								? ''
-								: data.query.protein_identifier
-						);
-						setGlyMotif(
-							data.query.glycan_motif === undefined
-								? ''
-								: data.query.glycan_motif
-						);
-						setGlyBioEnz(
-							data.query.enzyme === undefined ? '' : data.query.enzyme.id
-						);
-						setGlyPubId(data.query.pmid === undefined ? '' : data.query.pmid);
-						setGlyMassType(
-							data.query.mass_type === undefined
-								? initData.glycan_mass.native.name
-								: data.query.mass_type
-						);
-
-						setGlyMassRange(
-							data.query.mass_type === undefined ||
+						setGlyAdvSearchData({
+							'glycanId': data.query.glytoucan_ac === undefined ? '' : data.query.glytoucan_ac,
+							'glyMassType': data.query.mass_type === undefined ? initData.glycan_mass.native.name : data.query.mass_type,
+							'glyMass': data.query.mass === undefined
+								? data.query.mass_type === undefined ||
+								data.query.mass_type === initData.glycan_mass.native.name
+									? [
+											Math.floor(initData.glycan_mass.native.min),
+											Math.ceil(initData.glycan_mass.native.max),
+									]
+									: [
+											Math.floor(initData.glycan_mass.permethylated.min),
+											Math.ceil(initData.glycan_mass.permethylated.max),
+									]
+								: [data.query.mass.min, data.query.mass.max],
+							'glyMassInput' : data.query.mass === undefined
+								? data.query.mass_type === undefined ||
+								data.query.mass_type === initData.glycan_mass.native.name
+									? [
+											Math.floor(initData.glycan_mass.native.min),
+											Math.ceil(initData.glycan_mass.native.max),
+									]
+									: [
+											Math.floor(initData.glycan_mass.permethylated.min),
+											Math.ceil(initData.glycan_mass.permethylated.max),
+									]
+								: [data.query.mass.min, data.query.mass.max],
+							'glyMassRange' : data.query.mass_type === undefined ||
 								data.query.mass_type === initData.glycan_mass.native.name
 								? [
 										Math.floor(initData.glycan_mass.native.min),
 										Math.ceil(initData.glycan_mass.native.max),
-								  ]
+								]
 								: [
 										Math.floor(initData.glycan_mass.permethylated.min),
 										Math.ceil(initData.glycan_mass.permethylated.max),
-								  ]
-						);
-
-						setGlyMass(
-							data.query.mass === undefined
-								? data.query.mass_type === undefined ||
-								  data.query.mass_type === initData.glycan_mass.native.name
-									? [
-											Math.floor(initData.glycan_mass.native.min),
-											Math.ceil(initData.glycan_mass.native.max),
-									  ]
-									: [
-											Math.floor(initData.glycan_mass.permethylated.min),
-											Math.ceil(initData.glycan_mass.permethylated.max),
-									  ]
-								: [data.query.mass.min, data.query.mass.max]
-						);
-						setGlyMassInput(
-							data.query.mass === undefined
-								? data.query.mass_type === undefined ||
-								  data.query.mass_type === initData.glycan_mass.native.name
-									? [
-											Math.floor(initData.glycan_mass.native.min),
-											Math.ceil(initData.glycan_mass.native.max),
-									  ]
-									: [
-											Math.floor(initData.glycan_mass.permethylated.min),
-											Math.ceil(initData.glycan_mass.permethylated.max),
-									  ]
-								: [data.query.mass.min, data.query.mass.max]
-						);
-						setGlyType(
-							data.query.glycan_type === undefined ? '' : data.query.glycan_type
-						);
-						setGlyOrgOperation(
-							data.query.organism === undefined
+								],
+							'glyNumSugars' : data.query.number_monosaccharides === undefined
+								? [
+										initData.number_monosaccharides.min,
+										initData.number_monosaccharides.max,
+								]
+								: [
+										data.query.number_monosaccharides.min,
+										data.query.number_monosaccharides.max,
+								],
+							'glyNumSugarsInput' : data.query.number_monosaccharides === undefined
+								? [
+										initData.number_monosaccharides.min,
+										initData.number_monosaccharides.max,
+								]
+								: [
+										data.query.number_monosaccharides.min,
+										data.query.number_monosaccharides.max,
+								],
+							'glyOrgOperation':	data.query.organism === undefined
 								? 'or'
-								: data.query.organism.operation
-						);
-						setGlyOrganisms(
-							data.query.organism === undefined
+								: data.query.organism.operation,
+							'glyOrganisms' : data.query.organism === undefined
 								? []
-								: data.query.organism.organism_list
-						);
-						setGlyNumSugars(
-							data.query.number_monosaccharides === undefined
-								? [
-										initData.number_monosaccharides.min,
-										initData.number_monosaccharides.max,
-								  ]
-								: [
-										data.query.number_monosaccharides.min,
-										data.query.number_monosaccharides.max,
-								  ]
-						);
-						setGlyNumSugarsInput(
-							data.query.number_monosaccharides === undefined
-								? [
-										initData.number_monosaccharides.min,
-										initData.number_monosaccharides.max,
-								  ]
-								: [
-										data.query.number_monosaccharides.min,
-										data.query.number_monosaccharides.max,
-								  ]
-						);
+								: data.query.organism.organism_list,
+							'glyType' : data.query.glycan_type === undefined ? '' : data.query.glycan_type,
+							'glySubType' : data.query.glycan_subtype === undefined ? '': data.query.glycan_subtype,
+							'glySubTypeIsHidden' : data.query.glycan_type === undefined ? true : false,
+							'glyProt' : data.query.protein_identifier === undefined ? '' : data.query.protein_identifier,
+							'glyMotif' : data.query.glycan_motif === undefined ? '' : data.query.glycan_motif,
+							'glyBioEnz' : data.query.enzyme === undefined ? '' : data.query.enzyme.id,
+							'glyPubId' : data.query.pmid === undefined ? '' : data.query.pmid,
+							'glyAdvSearchValError' : [false, false, false, false, false]
+						});
 
-						if (data.query.glycan_type === undefined)
-							setGlySubTypeIsHidden(true);
-						else setGlySubTypeIsHidden(false);
-
-						setGlySubType(
-							data.query.glycan_subtype === undefined
-								? ''
-								: data.query.glycan_subtype
-						);
-            setGlyActTabKey('advanced_search');
-            setPageLoading(false);
+						setGlyActTabKey('advanced_search');
+						setPageLoading(false);
 					}
 				});
 		});
@@ -828,7 +456,6 @@ const GlycanSearch = (props) => {
 			term_category: glySimpleSearchCategory,
 		};
 
-		//formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
 		var json = 'query=' + JSON.stringify(formjsonSimple);
 		const url = '/glycan/search_simple?' + json;
 		return getJson(url);
@@ -837,24 +464,23 @@ const GlycanSearch = (props) => {
 	const glycanSearch = () => {
 		let formObject = searchjson(
 			'search_glycan',
-			glycanId,
-			glyMassType,
-			glyMass[0],
-			glyMass[1],
-			glyNumSugars[0],
-			glyNumSugars[1],
-			glyOrganisms,
-			glyOrgOperation,
-			glyType,
-			glySubType,
-			glyBioEnz,
-			glyProt,
-			glyMotif,
-			glyPubId,
+			glyAdvSearchData.glycanId,
+			glyAdvSearchData.glyMassType,
+			glyAdvSearchData.glyMass[0],
+			glyAdvSearchData.glyMass[1],
+			glyAdvSearchData.glyNumSugars[0],
+			glyAdvSearchData.glyNumSugars[1],
+			glyAdvSearchData.glyOrganisms,
+			glyAdvSearchData.glyOrgOperation,
+			glyAdvSearchData.glyType,
+			glyAdvSearchData.glySubType,
+			glyAdvSearchData.glyBioEnz,
+			glyAdvSearchData.glyProt,
+			glyAdvSearchData.glyMotif,
+			glyAdvSearchData.glyPubId,
 			undefined
 		);
 
-		//formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
 		var json = 'query=' + JSON.stringify(formObject);
 		const url = '/glycan/search?' + json;
 		return getJson(url);
@@ -892,13 +518,12 @@ const GlycanSearch = (props) => {
 			compSearchData
 		);
 
-		//formObject = searchjson(query_type, glycan_id, mass_type, mass_slider[0], mass_slider[1], sugar_slider[0], sugar_slider[1], organism, organism_operation, glycan_type, glycan_subtype, enzyme, proteinid, glycan_motif, pmid, residue_comp);
 		var json = 'query=' + JSON.stringify(formObject);
 		const url = '/glycan/search?' + json;
 		return getJson(url);
 	};
 
-	const searchGlycanClick = () => {
+	const searchGlycanAdvClick = () => {
 		setPageLoading(true);
 
 		glycanSearch()
@@ -914,6 +539,9 @@ const GlycanSearch = (props) => {
 			})
 			.catch(function (error) {
 				console.log(error);
+				setPageLoading(false);
+				setGlySearchError(true);
+				window.scrollTo(0, 0)
 			});
 	};
 
@@ -932,10 +560,13 @@ const GlycanSearch = (props) => {
 			})
 			.catch(function (error) {
 				console.log(error);
+				setPageLoading(false);
+				setGlySearchError(true);
+				window.scrollTo(0, 0)
 			});
 	};
 
-	const searchGlycanSimpleclick = () => {
+	const searchGlycanSimpleClick = () => {
 		setPageLoading(true);
 		glycanSimpleSearch()
 			.then((response) => {
@@ -950,44 +581,21 @@ const GlycanSearch = (props) => {
 			})
 			.catch(function (error) {
 				console.log(error);
+				setPageLoading(false);
+				setGlySearchError(true);
+				window.scrollTo(0, 0)
 			});
-	};
-
-	const clearGlycan = () => {
-		setGlycanId('');
-		setGlyProt('');
-		setGlyMotif('');
-		setGlyBioEnz('');
-		setGlyPubId('');
-		setGlyMassType(initData.glycan_mass.native.name);
-		setGlyType('');
-		setGlySubType('');
-		setGlyOrgOperation('or');
-		setMassValues(undefined, undefined);
-		setGlyNumSugars([
-			initData.number_monosaccharides.min,
-			initData.number_monosaccharides.max,
-		]);
-		setGlyNumSugarsInput([
-			initData.number_monosaccharides.min,
-			initData.number_monosaccharides.max,
-		]);
-		setGlyOrganisms([]);
-    setGlySubTypeIsHidden(true);
-    setGlyAdvSearchValError([false, false, false, false, false]);
 	};
 
 	return (
 		<>
 			<Helmet>
-				{/* <title>{head.glycanSearch.title}</title>
-       {getMeta(head.glycanSearch)} */}
 				{getTitle('glycanSearch')}
 				{getMeta('glycanSearch')}
 			</Helmet>
 			<div className='lander'>
 				<Container className={classes.con1}>
-          <PageLoader pageLoading={pageLoading}/>
+          			<PageLoader pageLoading={pageLoading}/>
 					<div className='content-box-md'>
 						<h1 className='page-heading'>Glycan Search</h1>
 					</div>
@@ -1003,11 +611,11 @@ const GlycanSearch = (props) => {
 							eventKey='simple_search'
 							className={classes.tabSimpleSearch}
 							title='Simple Search'>
-                <SearchAlert
-                  searchError={glySearchError}
-                  alertTitle="Simple Search Error - No Results Found"
-                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-                />
+							<SearchAlert
+								searchError={glySearchError}
+								alertTitle="Simple Search Error - No Results Found"
+								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+							/>
 							<Container className={classes.conSimple}>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
@@ -1015,11 +623,11 @@ const GlycanSearch = (props) => {
 										simpleSearchTerm={glySimpleSearchTerm}
 										simple_search_category={initData.simple_search_category}
 										simple_search={initData.simple_search}
-										searchSimpleclick={searchGlycanSimpleclick}
+										searchSimpleClick={searchGlycanSimpleClick}
 										setSimpleSearchCategory={setGlySimpleSearchCategory}
-                    setSimpleSearchTerm={setGlySimpleSearchTerm}
-                    length={20}
-                    errorText='Entry is too long - max length is 20.'
+										setSimpleSearchTerm={setGlySimpleSearchTerm}
+										length={20}
+										errorText='Entry is too long - max length is 20.'
 									/>
 								)}
 							</Container>
@@ -1028,599 +636,31 @@ const GlycanSearch = (props) => {
 							eventKey='advanced_search'
 							className={classes.tab}
 							title='Advanced Search'>
-                <SearchAlert 
-                  searchError={glySearchError}
-                  alertTitle="Advanced Search Error - No Results Found"
-                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-                />
+								<SearchAlert 
+									searchError={glySearchError}
+									alertTitle="Advanced Search Error - No Results Found"
+									alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+								/>
 							<Container className={classes.con}>
-								{/* <ButtonToolbar className={classes.marginButToolbar}> */}
-								<Row className='gg-align-right pt-5 pb-2'>
-									<Button
-										className='gg-btn-outline mr-4'
-										// className={classes.clearButton + ' gg-btn'}
-										onClick={clearGlycan}>
-										Clear Fields
-									</Button>
-									<Button
-										className='gg-btn-blue'
-										// className={classes.submitButton + ' gg-btn'}
-										onClick={searchGlycanClick}
-                    disabled={!glyAdvSearchValError.every(err => err === false)}>
-										Search Glycan
-									</Button>
-								</Row>
-								{/* </ButtonToolbar> */}
-								<FormControl
-									fullWidth
-									className={classes.margin}
-									variant='outlined'>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											disableTouchListener
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>Glycan Id:</Typography>
-													<div className={classes.root1}></div>
-													{
-														'Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore'
-													}{' '}
-													<a
-														href='https://glytoucan.org/Structures/graphical'
-														target='_blank'>
-														{'GlyTouCan'}
-													</a>
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Glycan Id
-									</Typography>
-									<MultilineAutoTextInput
-										inputValue={glycanId}
-										setInputValue={glycanIdChange}
-										placeholder='Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id'
-                    typeahedID='glytoucan_ac'
-                    length={2500}
-                    errorText='Entry is too long - max length is 2500.'
+							{initData && (
+									<GlycanAdvancedSearch
+										searchGlycanAdvClick={searchGlycanAdvClick}
+										inputValue={glyAdvSearchData}
+										initData={initData}
+										setGlyAdvSearchData={setGlyAdvSearchData}
 									/>
-									<Row className={classes.examples}>
-										<Col lg='6'>
-											<div>
-												GlyTouCan Accession Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glycanIdChange('G17689DH');
-													}}>
-													G17689DH
-												</a>
-											</div>
-										</Col>
-										<Col lg='6'>
-											<div class='text-right'>
-												Explore{' '}
-												<a
-													href='https://glytoucan.org/Structures/graphical'
-													target='_blank'>
-													GlyTouCan Accession
-												</a>
-											</div>
-										</Col>
-									</Row>
-									<Row className={classes.examples}>
-										<Col lg='6'>
-											<div>
-												Cross References Id Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glycanIdChange('G10716');
-													}}>
-													G10716
-												</a>
-											</div>
-										</Col>
-									</Row>
-								</FormControl>
-
-								<div className={classes.margin}>
-									<Grid container spacing={2} alignItems='center'>
-										<Grid item>
-											<Typography className={classes.label1} gutterBottom>
-												<HtmlTooltip
-													interactive
-													title={
-														<React.Fragment>
-															<Typography color='inherit'>
-																Monoisotopic Mass:
-															</Typography>
-															{
-																'The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)'
-															}
-														</React.Fragment>
-													}>
-													<HelpOutline className={classes.helpicon} />
-												</HtmlTooltip>
-												Monoisotopic Mass
-											</Typography>
-											<RangeInputSlider
-												step={10}
-												min={glyMassRange[0]}
-												max={glyMassRange[1]}
-												inputValue={glyMassInput}
-												setInputValue={setGlyMassInput}
-												inputValueSlider={glyMass}
-												setSliderInputValue={setGlyMass}
-											/>
-										</Grid>
-										<Grid item>
-											<Typography className={classes.label4} gutterBottom>
-												&nbsp;
-											</Typography>
-											<FormControl variant='outlined'>
-												<InputLabel className={classes.label3}>
-													Mass Type
-												</InputLabel>
-												<Select
-													value={glyMassType}
-													onChange={glyMassTypeOnChange}
-													highlight={false}
-													classes={{
-														outlined: classes.selectOutlined,
-														root: 'select-menu',
-													}}
-													className={classes.select}
-													labelWidth={100}>
-													{initData.glycan_mass &&
-														Object.keys(initData.glycan_mass)
-															.sort()
-															.map((key) => (
-																<MenuItem
-																	value={initData.glycan_mass[key].name}>
-																	{initData.glycan_mass[key].name}
-																</MenuItem>
-															))}
-												</Select>
-											</FormControl>
-										</Grid>
-									</Grid>
-								</div>
-								<div className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>
-														Number of Sugars:
-													</Typography>
-													{
-														'Use the sliders to select a Number of Sugars range for your glycan(s)'
-													}
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										No of Sugars
-									</Typography>
-									<RangeInputSlider
-										step={1}
-										min={glyNumSugarsRange[0]}
-										max={glyNumSugarsRange[1]}
-										inputValue={glyNumSugarsInput}
-										setInputValue={setGlyNumSugarsInput}
-										inputValueSlider={glyNumSugars}
-										setSliderInputValue={setGlyNumSugars}
-									/>
-								</div>
-								<div className={classes.margin}>
-									<Grid container spacing={2} alignItems='center'>
-										<Grid item>
-											<Typography className={classes.label1} gutterBottom>
-												<HtmlTooltip
-													interactive
-													title={
-														<React.Fragment>
-															<Typography color='inherit'>Organism:</Typography>
-															{
-																'An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)'
-															}
-														</React.Fragment>
-													}>
-													<HelpOutline className={classes.helpicon} />
-												</HtmlTooltip>
-												Organisms
-											</Typography>
-											<MultiselectTextInput
-												options={
-													initData.organism
-														? initData.organism.sort(sortDropdown)
-														: initData.organism
-												}
-												inputValue={glyOrganisms}
-												setInputValue={glyOrgChange}
-												placeholder='Click to select one or multiple Organisms'
-											/>
-										</Grid>
-										<Grid item>
-											<Typography className={classes.label4} gutterBottom>
-												{/* Mass Type */}&nbsp;
-											</Typography>
-											<FormControl variant='outlined'>
-												<Select
-													variant='outlined'
-													classes={{
-														outlined: classes.selectOutlined,
-														root: 'select-menu',
-													}}
-													value={
-														glyOrgOperation === '' ? 'or' : glyOrgOperation
-													}
-													onChange={glyOrgOperationOnChange}
-													className={classes.select}>
-													<MenuItem value={'or'}>Or</MenuItem>
-													<MenuItem value={'and'}>And</MenuItem>
-												</Select>
-											</FormControl>
-										</Grid>
-									</Grid>
-								</div>
-								<FormControl
-									fullWidth
-									variant='outlined'
-									className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>Glycan Type:</Typography>
-													{
-														'The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type.'
-													}
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Glycan Type
-									</Typography>
-									<Select
-										value={glyType}
-										displayEmpty
-										onChange={glyTypeOnChange}
-										className={classes.select1}
-										classes={{
-											outlined: classes.selectOutlined,
-											root: 'select-menu',
-										}}>
-										<MenuItem value=''>Select Glycan Type</MenuItem>
-										{initData.glycan_type &&
-											initData.glycan_type
-												.sort(sortDropdown)
-												.map((option) => (
-													<MenuItem value={option.name}>{option.name}</MenuItem>
-												))}
-									</Select>
-								</FormControl>
-
-								{!glySubTypeIsHidden && (
-									<FormControl
-										fullWidth
-										variant='outlined'
-										className={classes.margin}>
-										<Typography className={classes.label1} gutterBottom>
-											<HtmlTooltip
-												interactive
-												title={
-													<React.Fragment>
-														<Typography color='inherit'>
-															Glycan Subtype:
-														</Typography>
-														{
-															'Subclassifcation of Glycan types. Click to select a Glycan Subtype'
-														}
-													</React.Fragment>
-												}>
-												<HelpOutline className={classes.helpicon} />
-											</HtmlTooltip>
-											Select Glycan Subtype
-										</Typography>
-										<Select
-											value={glySubType}
-											displayEmpty
-											onChange={glySubTypeOnChange}
-											className={classes.select1}
-											classes={{
-												outlined: classes.selectOutlined,
-												root: 'select-menu',
-											}}
-											displayPrint='none'>
-											<MenuItem value='' selected>
-												Select Glycan Subtype
-											</MenuItem>
-											{initData.glycan_type &&
-												initData.glycan_type.map((option) =>
-													option.subtype
-														.sort()
-														.map(
-															(subtype) =>
-																option.name === glyType && (
-																	<MenuItem value={subtype}>{subtype}</MenuItem>
-																)
-														)
-												)}
-										</Select>
-									</FormControl>
 								)}
-
-								<FormControl
-									fullWidth
-									variant='outlined'
-									className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>
-														Glycosylated Protein:
-													</Typography>
-													{
-														'A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore'
-													}{' '}
-													<a href='https://www.uniprot.org/' target='_blank'>
-														UniProtKB
-													</a>
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Glycosylated Protein
-									</Typography>
-									<AutoTextInput
-										inputValue={glyProt}
-										setInputValue={glyProtChange}
-										placeholder='Enter the UniProtKB Accession of your protein'
-                    typeahedID='uniprot_canonical_ac'
-                    length={12}
-                    errorText='Entry is too long - max length is 12.'
-									/>
-									<Row className={classes.examples}>
-										<Col lg='4'>
-											<div>
-												Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glyProtChange('P14210');
-													}}>
-													P14210
-												</a>
-											</div>
-										</Col>
-										<Col lg='8'>
-											<div class='text-right'>
-												Explore{' '}
-												<a
-													href='https://www.uniprot.org/help/accession_numbers'
-													target='_blank'>
-													UniProtKB Accession
-												</a>
-											</div>
-										</Col>
-									</Row>
-								</FormControl>
-								<FormControl
-									fullWidth
-									variant='outlined'
-									className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>Glycan Motif:</Typography>
-													{
-														'A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore'
-													}{' '}
-													<a
-														href='https://www.uniprot.org/help/carbohyd'
-														target='_blank'>
-														Glycan Motif
-													</a>
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Glycan Motif
-									</Typography>
-									<AutoTextInput
-										inputValue={glyMotif}
-										setInputValue={glyMotifChange}
-										placeholder='Enter the name of a Glycan Motif contained in your glycan'
-                    typeahedID='motif_name'
-                    length={47}
-                    errorText='Entry is too long - max length is 47.'
-									/>
-									<Row className={classes.examples}>
-										<Col lg='4'>
-											<div>
-												Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glyMotifChange('N-Glycan complex');
-													}}>
-													N-Glycan complex
-												</a>
-											</div>
-										</Col>
-										<Col lg='8'>
-											<div class='text-right'>
-												Explore{' '}
-												<a
-													href='https://www.uniprot.org/help/carbohyd'
-													target='_blank'>
-													Glycan Motif
-												</a>
-											</div>
-										</Col>
-									</Row>
-								</FormControl>
-								<FormControl
-									fullWidth
-									variant='outlined'
-									className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>
-														Biosynthetic Enzyme:
-													</Typography>
-													{
-														'Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore'
-													}{' '}
-													<a href='https://enzyme.expasy.org/' target='_blank'>
-														Biosynthetic Enzyme
-													</a>
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Biosynthetic Enzyme
-									</Typography>
-									<AutoTextInput
-										inputValue={glyBioEnz}
-										setInputValue={glyBioEnzChange}
-										placeholder='Enter the Gene Name of an enzyme'
-                    typeahedID='gene_name'
-                    length={12}
-                    errorText='Entry is too long - max length is 12.'
-									/>
-									<Row className={classes.examples}>
-										<Col lg='4'>
-											<div>
-												Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glyBioEnzChange('B4GALT1');
-													}}>
-													B4GALT1
-												</a>
-											</div>
-										</Col>
-										<Col lg='8'>
-											<div class='text-right'>
-												Explore{' '}
-												<a href='https://enzyme.expasy.org/' target='_blank'>
-													Biosynthetic Enzyme
-												</a>
-											</div>
-										</Col>
-									</Row>
-								</FormControl>
-								<FormControl
-									fullWidth
-									variant='outlined'
-									className={classes.margin}>
-									<Typography className={classes.label1} gutterBottom>
-										<HtmlTooltip
-											interactive
-											title={
-												<React.Fragment>
-													<Typography color='inherit'>
-														Biosynthetic Enzyme:
-													</Typography>
-													{
-														'A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore'
-													}{' '}
-													<a
-														href='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'
-														target='_blank'>
-														PubMed ID
-													</a>
-												</React.Fragment>
-											}>
-											<HelpOutline className={classes.helpicon} />
-										</HtmlTooltip>
-										Pubmed ID
-									</Typography>
-									<OutlinedInput
-										className={classes.input}
-										placeholder='Enter the Pubmed ID'
-										value={glyPubId}
-                    onChange={PubmedIdChange}
-                    error={
-                      glyPubId.length > 20
-                    }
-									/>
-                    {glyPubId.length > 20 && <FormHelperText 
-                    className={classes.errorText} error>
-                      Entry is too long - max length is 20.
-                    </FormHelperText>}
-									{/* <AutoTextInput
-                   inputValue={glyPubId} setInputValue={glycPubIdChange}
-                   placeholder="Enter the Pubmed ID"
-                   typeahedID = "glycan_pmid"
-                  /> */}
-									<Row className={classes.examples}>
-										<Col lg='4'>
-											<div>
-												Example:{' '}
-												<a
-													href='javascript:void(0)'
-													onClick={() => {
-														glyPubIdChange('9449027');
-													}}>
-													9449027
-												</a>
-											</div>
-										</Col>
-										<Col lg='8'>
-											<div class='text-right'>
-												Explore{' '}
-												<a
-													href='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'
-													target='_blank'>
-													Pubmed ID
-												</a>
-											</div>
-										</Col>
-									</Row>
-								</FormControl>
-								{/* <ButtonToolbar className={classes.marginButToolbar}> */}
-								<Row className='gg-align-right pt-3 mb-2'>
-									<Button
-										// className={classes.clearButton + ' gg-btn'}
-										className='gg-btn-outline mr-4'
-										onClick={clearGlycan}>
-										Clear Fields
-									</Button>
-									<Button
-										// className={classes.submitButton + ' gg-btn'}
-										className='gg-btn-blue'
-										onClick={searchGlycanClick}
-                    disabled={!glyAdvSearchValError.every(err => err === false)}>
-										Search Glycan
-									</Button>
-								</Row>
-								{/* </ButtonToolbar> */}
 							</Container>
 						</Tab>
 						<Tab
 							eventKey='composition_search'
 							title='Composition Search'
 							className={classes.tabCompostionSearch}>
-                <SearchAlert
-                  searchError={glySearchError}
-                  alertTitle="Composition Search Error - No Results Found"
-                  alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-                />
+								<SearchAlert
+									searchError={glySearchError}
+									alertTitle="Composition Search Error - No Results Found"
+									alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+								/>
 							<Container className='p-5'>
 								{initData.composition && (
 									<CompositionSearchControl
@@ -1635,7 +675,6 @@ const GlycanSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab eventKey='tutorial' title='Tutorial'></Tab>
-            {/* </Container> */}
 					</Tabs>
 				</Container>
 			</div>

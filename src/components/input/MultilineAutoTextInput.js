@@ -50,16 +50,6 @@ const filterOptions = (options, { inputValue }) =>
         fontSize: 14
       }
     },
-    inputBase: {
-      width: "100%",
-      height: 56,
-      padding: "4px !important",
-      paddingLeft: "0px !important",
-      paddingRight: "0px !important",
-      "& input": {
-        fontSize: 14
-      }
-    },
     errorText: {
       fontSize:"14px  !important",
       marginRight:0,
@@ -83,7 +73,6 @@ export default function MultilineAutoTextInput(props) {
       setOptions([]);
       return undefined;
     }
-
 
     if (props.inputValue && active) {
         const url = `/typeahead?query={"field":"${props.typeahedID}","value":"${props.inputValue.substring(

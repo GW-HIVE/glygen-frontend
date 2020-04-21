@@ -12,15 +12,6 @@ import { Row } from 'react-bootstrap';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles((theme) => ({
-	// simpleSearchButton: {
-	//   // marginTop: 16,
-	//   // marginBottom: 16,
-	//   // marginRight: 16,
-	//   //height: "48px",
-	//   marginLeft: 16,
-	//   // marginRight: 16,
-	//   backgroundColor: "#2f78b7"
-	// },
 	inputSimple: {
 		borderRadius: 4,
 		position: 'left',
@@ -35,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '14px',
 	},
 	selectSimple: {
-		//width: "200px",
-		//width: "100%",
 		height: '45px',
     },
     label3: {
@@ -135,18 +124,10 @@ export default function SimpleSearchControl(props) {
 					<Button
 						className='gg-btn-blue gg-btn-simple-search'
 						disabled={props.simpleSearchTerm.trim() === '' || props.simpleSearchTerm.length > props.length}
-						onClick={props.searchSimpleclick}>
+						onClick={props.searchSimpleClick}>
 						Search
 					</Button>
 				</Grid>
-				{/* <Grid item className='col-sm-2'>
-					<Button
-						className={classes.simpleSearchButton + ' gg-btn'}
-						disabled={props.simpleSearchTerm.trim() === ''}
-						onClick={props.searchSimpleclick}>
-						Search
-					</Button>
-				</Grid> */}
 			</Grid>
 			<Grid container spacing={3} justify='center'>
 				<Grid className={classes.examples} item>
@@ -171,7 +152,7 @@ SimpleSearchControl.propTypes = {
     simple_search: PropTypes.object,
     errorText: PropTypes.string,
     length: PropTypes.number,
-	searchSimpleclick: PropTypes.func,
+	searchSimpleClick: PropTypes.func,
 	setGlySimpleSearchCategory: PropTypes.func,
 	setGlySimpleSearchTerm: PropTypes.func,
 };
