@@ -8,65 +8,61 @@ import SearchAlert from '../components/alert/SearchAlert';
 import GlycanAdvancedSearch from '../components/search/GlycanAdvancedSearch';
 import CompositionSearchControl from '../components/search/CompositionSearchControl';
 import SimpleSearchControl from '../components/search/SimpleSearchControl';
-import {
-	Tab,
-	Tabs,
-	Container,
-} from 'react-bootstrap';
+import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import '../css/Search.css';
 
 const useStyles = makeStyles((theme) => ({
-	tabs: {
-		borderColor: '#FFFFFF',
-		width: '650px',
-	},
-	tab: {
-		borderRadius: 4,
-		borderColor: '#80bdff',
-		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-		width: '1000px',
-		height: '1250px',
-		alignItems: 'center',
-		fontColor: '#2F78B7',
-		backgroundColor: '#FFFFFF',
-	},
-	tabCompostionSearch: {
-		borderRadius: 4,
-		borderColor: '#80bdff',
-		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-		width: '1000px',
-		height: '1000px',
-		alignItems: 'center',
-		fontColor: '#2F78B7',
-		backgroundColor: '#FFFFFF',
-	},
-	tabSimpleSearch: {
-		borderRadius: 4,
-		borderColor: '#80bdff',
-		boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-		width: '1000px',
-		height: '400px',
-		alignItems: 'center',
-		fontColor: '#2F78B7',
-		backgroundColor: '#FFFFFF',
-	},
-	con: {
-		width: '730px',
-		height: '1300px',
-		alignItems: 'center',
-	},
-	con1: {
-		width: '1000px',
-		height: '1400px',
-		alignItems: 'center',
-		marginBottom: '80px',
-  },
-	conSimple: {
-		alignItems: 'center',
-		paddingTop: '100px',
-	}
+	// tabs: {
+	// 	borderColor: '#FFFFFF',
+	// 	width: '650px',
+	// },
+	// tab: {
+	// 	borderRadius: 4,
+	// 	borderColor: '#80bdff',
+	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+	// 	width: '1000px',
+	// 	height: '1250px',
+	// 	alignItems: 'center',
+	// 	fontColor: '#2F78B7',
+	// 	backgroundColor: '#FFFFFF',
+	// },
+	// tabCompostionSearch: {
+	// 	borderRadius: 4,
+	// 	borderColor: '#80bdff',
+	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+	// 	width: '1000px',
+	// 	height: '1000px',
+	// 	alignItems: 'center',
+	// 	fontColor: '#2F78B7',
+	// 	backgroundColor: '#FFFFFF',
+	// },
+	// tabSimpleSearch: {
+	// 	borderRadius: 4,
+	// 	borderColor: '#80bdff',
+	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+	// 	width: '1000px',
+	// 	height: '400px',
+	// 	alignItems: 'center',
+	// 	fontColor: '#2F78B7',
+	// 	backgroundColor: '#FFFFFF',
+	// },
+	// con: {
+	// 	width: '730px',
+	// 	height: '1300px',
+	// 	alignItems: 'center',
+	// },
+	// con1: {
+	// 	width: '1000px',
+	// 	height: '1400px',
+	// 	alignItems: 'center',
+	// 	marginBottom: '80px',
+	// },
+	// conSimple: {
+	// 	alignItems: 'center',
+	// 	paddingTop: '100px',
+	// },
 }));
 
 const GlycanSearch = (props) => {
@@ -78,24 +74,24 @@ const GlycanSearch = (props) => {
 	const [glyAdvSearchData, setGlyAdvSearchData] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{
-			"glycanId" : '',
-			"glyMassType": 'Native',
-			'glyMass': [149, 6751],
-			'glyMassInput' : [149, 6751],
-			'glyMassRange' : [149, 6751],
-			'glyNumSugars' : [1, 37],
-			'glyNumSugarsRange' : [1, 37],
-			'glyNumSugarsInput' : [1, 37],
-			'glyOrganisms' : [],
-			'glyOrgOperation': 'or',
-			'glyType' : '',
-			'glySubType' : '',
-			'glySubTypeIsHidden' : true,
-			'glyProt' : '',
-			'glyMotif' : '',
-			'glyBioEnz' : '',
-			'glyPubId' : '',
-			'glyAdvSearchValError' : [false, false, false, false, false]
+			glycanId: '',
+			glyMassType: 'Native',
+			glyMass: [149, 6751],
+			glyMassInput: [149, 6751],
+			glyMassRange: [149, 6751],
+			glyNumSugars: [1, 37],
+			glyNumSugarsRange: [1, 37],
+			glyNumSugarsInput: [1, 37],
+			glyOrganisms: [],
+			glyOrgOperation: 'or',
+			glyType: '',
+			glySubType: '',
+			glySubTypeIsHidden: true,
+			glyProt: '',
+			glyMotif: '',
+			glyBioEnz: '',
+			glyPubId: '',
+			glyAdvSearchValError: [false, false, false, false, false],
 		}
 	);
 	const [glyCompData, setGlyCompData] = useReducer(
@@ -104,12 +100,12 @@ const GlycanSearch = (props) => {
 	);
 	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
 	const [pageLoading, setPageLoading] = useState(true);
-	const [glySearchError, setGlySearchError] = useState(false);		
+	const [glySearchError, setGlySearchError] = useState(false);
 
 	function glyCompChange(glyComp) {
 		setGlyCompData(glyComp);
 	}
-	
+
 	const getGlycanInit = () => {
 		const url = `/glycan/search_init`;
 		return getJson(url);
@@ -137,10 +133,10 @@ const GlycanSearch = (props) => {
 	}
 
 	useEffect(() => {
-    setPageLoading(true);
-    document.addEventListener("click", ()=>{
-      setGlySearchError(false);
-    });
+		setPageLoading(true);
+		document.addEventListener('click', () => {
+			setGlySearchError(false);
+		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
 			let simpleSearchExamples = {};
@@ -175,16 +171,34 @@ const GlycanSearch = (props) => {
 			initData.simple_search = simpleSearchExamples;
 
 			setGlyAdvSearchData({
-				"glyMassType": initData.glycan_mass.native.name,
-				'glyMass': [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
-				'glyMassInput' : [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
-				'glyMassRange' : [Math.floor(initData.glycan_mass.native.min), Math.ceil(initData.glycan_mass.native.max)],
-				'glyNumSugars' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
-				'glyNumSugarsRange' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
-				'glyNumSugarsInput' : [initData.number_monosaccharides.min, initData.number_monosaccharides.max],
-				'glyOrgOperation': 'or',
-				'glySubTypeIsHidden' : true,
-				'glyAdvSearchValError' : [false, false, false, false, false]
+				glyMassType: initData.glycan_mass.native.name,
+				glyMass: [
+					Math.floor(initData.glycan_mass.native.min),
+					Math.ceil(initData.glycan_mass.native.max),
+				],
+				glyMassInput: [
+					Math.floor(initData.glycan_mass.native.min),
+					Math.ceil(initData.glycan_mass.native.max),
+				],
+				glyMassRange: [
+					Math.floor(initData.glycan_mass.native.min),
+					Math.ceil(initData.glycan_mass.native.max),
+				],
+				glyNumSugars: [
+					initData.number_monosaccharides.min,
+					initData.number_monosaccharides.max,
+				],
+				glyNumSugarsRange: [
+					initData.number_monosaccharides.min,
+					initData.number_monosaccharides.max,
+				],
+				glyNumSugarsInput: [
+					initData.number_monosaccharides.min,
+					initData.number_monosaccharides.max,
+				],
+				glyOrgOperation: 'or',
+				glySubTypeIsHidden: true,
+				glyAdvSearchValError: [false, false, false, false, false],
 			});
 
 			const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
@@ -232,109 +246,135 @@ const GlycanSearch = (props) => {
 				return parseInt(res1.orderId) - parseInt(res2.orderId);
 			});
 			setGlyCompData(compStateData);
-      setInitData(initData);
-      if (id === undefined)
-        setPageLoading(false);
+			setInitData(initData);
+			if (id === undefined) setPageLoading(false);
 
 			id &&
 				getGlycanList(id, 1).then(({ data }) => {
 					if (data.query.composition !== undefined) {
 						let queryCompData = {};
 						for (let x = 0; x < data.query.composition.length; x++) {
-              let resVal = initData.composition.filter(function (res) {
-                return data.query.composition[x].residue === res.residue;
-              })[0];							
-              queryCompData[data.query.composition[x].residue] = {
-                min: data.query.composition[x].min,
-                selectValue: getSelectionValue(
-                  parseInt(data.query.composition[x].min),
-                  parseInt(data.query.composition[x].max),
-                  parseInt(resVal.min),
-                  parseInt(resVal.max)
-                ),
-				max: data.query.composition[x].max,
-				 };
-				}
+							let resVal = initData.composition.filter(function (res) {
+								return data.query.composition[x].residue === res.residue;
+							})[0];
+							queryCompData[data.query.composition[x].residue] = {
+								min: data.query.composition[x].min,
+								selectValue: getSelectionValue(
+									parseInt(data.query.composition[x].min),
+									parseInt(data.query.composition[x].max),
+									parseInt(resVal.min),
+									parseInt(resVal.max)
+								),
+								max: data.query.composition[x].max,
+							};
+						}
 						setGlyCompData(queryCompData);
-            setGlyActTabKey('composition_search');
-            setPageLoading(false);
+						setGlyActTabKey('composition_search');
+						setPageLoading(false);
 					} else if (data.query.query_type === 'glycan_search_simple') {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
 						setGlySimpleSearchTerm(data.query.term ? data.query.term : '');
-            setGlyActTabKey('simple_search');
-            setPageLoading(false);
+						setGlyActTabKey('simple_search');
+						setPageLoading(false);
 					} else {
 						setGlyAdvSearchData({
-							'glycanId': data.query.glytoucan_ac === undefined ? '' : data.query.glytoucan_ac,
-							'glyMassType': data.query.mass_type === undefined ? initData.glycan_mass.native.name : data.query.mass_type,
-							'glyMass': data.query.mass === undefined
-								? data.query.mass_type === undefined ||
+							glycanId:
+								data.query.glytoucan_ac === undefined
+									? ''
+									: data.query.glytoucan_ac,
+							glyMassType:
+								data.query.mass_type === undefined
+									? initData.glycan_mass.native.name
+									: data.query.mass_type,
+							glyMass:
+								data.query.mass === undefined
+									? data.query.mass_type === undefined ||
+									  data.query.mass_type === initData.glycan_mass.native.name
+										? [
+												Math.floor(initData.glycan_mass.native.min),
+												Math.ceil(initData.glycan_mass.native.max),
+										  ]
+										: [
+												Math.floor(initData.glycan_mass.permethylated.min),
+												Math.ceil(initData.glycan_mass.permethylated.max),
+										  ]
+									: [data.query.mass.min, data.query.mass.max],
+							glyMassInput:
+								data.query.mass === undefined
+									? data.query.mass_type === undefined ||
+									  data.query.mass_type === initData.glycan_mass.native.name
+										? [
+												Math.floor(initData.glycan_mass.native.min),
+												Math.ceil(initData.glycan_mass.native.max),
+										  ]
+										: [
+												Math.floor(initData.glycan_mass.permethylated.min),
+												Math.ceil(initData.glycan_mass.permethylated.max),
+										  ]
+									: [data.query.mass.min, data.query.mass.max],
+							glyMassRange:
+								data.query.mass_type === undefined ||
 								data.query.mass_type === initData.glycan_mass.native.name
 									? [
 											Math.floor(initData.glycan_mass.native.min),
 											Math.ceil(initData.glycan_mass.native.max),
-									]
+									  ]
 									: [
 											Math.floor(initData.glycan_mass.permethylated.min),
 											Math.ceil(initData.glycan_mass.permethylated.max),
-									]
-								: [data.query.mass.min, data.query.mass.max],
-							'glyMassInput' : data.query.mass === undefined
-								? data.query.mass_type === undefined ||
-								data.query.mass_type === initData.glycan_mass.native.name
+									  ],
+							glyNumSugars:
+								data.query.number_monosaccharides === undefined
 									? [
-											Math.floor(initData.glycan_mass.native.min),
-											Math.ceil(initData.glycan_mass.native.max),
-									]
+											initData.number_monosaccharides.min,
+											initData.number_monosaccharides.max,
+									  ]
 									: [
-											Math.floor(initData.glycan_mass.permethylated.min),
-											Math.ceil(initData.glycan_mass.permethylated.max),
-									]
-								: [data.query.mass.min, data.query.mass.max],
-							'glyMassRange' : data.query.mass_type === undefined ||
-								data.query.mass_type === initData.glycan_mass.native.name
-								? [
-										Math.floor(initData.glycan_mass.native.min),
-										Math.ceil(initData.glycan_mass.native.max),
-								]
-								: [
-										Math.floor(initData.glycan_mass.permethylated.min),
-										Math.ceil(initData.glycan_mass.permethylated.max),
-								],
-							'glyNumSugars' : data.query.number_monosaccharides === undefined
-								? [
-										initData.number_monosaccharides.min,
-										initData.number_monosaccharides.max,
-								]
-								: [
-										data.query.number_monosaccharides.min,
-										data.query.number_monosaccharides.max,
-								],
-							'glyNumSugarsInput' : data.query.number_monosaccharides === undefined
-								? [
-										initData.number_monosaccharides.min,
-										initData.number_monosaccharides.max,
-								]
-								: [
-										data.query.number_monosaccharides.min,
-										data.query.number_monosaccharides.max,
-								],
-							'glyOrgOperation':	data.query.organism === undefined
-								? 'or'
-								: data.query.organism.operation,
-							'glyOrganisms' : data.query.organism === undefined
-								? []
-								: data.query.organism.organism_list,
-							'glyType' : data.query.glycan_type === undefined ? '' : data.query.glycan_type,
-							'glySubType' : data.query.glycan_subtype === undefined ? '': data.query.glycan_subtype,
-							'glySubTypeIsHidden' : data.query.glycan_type === undefined ? true : false,
-							'glyProt' : data.query.protein_identifier === undefined ? '' : data.query.protein_identifier,
-							'glyMotif' : data.query.glycan_motif === undefined ? '' : data.query.glycan_motif,
-							'glyBioEnz' : data.query.enzyme === undefined ? '' : data.query.enzyme.id,
-							'glyPubId' : data.query.pmid === undefined ? '' : data.query.pmid,
-							'glyAdvSearchValError' : [false, false, false, false, false]
+											data.query.number_monosaccharides.min,
+											data.query.number_monosaccharides.max,
+									  ],
+							glyNumSugarsInput:
+								data.query.number_monosaccharides === undefined
+									? [
+											initData.number_monosaccharides.min,
+											initData.number_monosaccharides.max,
+									  ]
+									: [
+											data.query.number_monosaccharides.min,
+											data.query.number_monosaccharides.max,
+									  ],
+							glyOrgOperation:
+								data.query.organism === undefined
+									? 'or'
+									: data.query.organism.operation,
+							glyOrganisms:
+								data.query.organism === undefined
+									? []
+									: data.query.organism.organism_list,
+							glyType:
+								data.query.glycan_type === undefined
+									? ''
+									: data.query.glycan_type,
+							glySubType:
+								data.query.glycan_subtype === undefined
+									? ''
+									: data.query.glycan_subtype,
+							glySubTypeIsHidden:
+								data.query.glycan_type === undefined ? true : false,
+							glyProt:
+								data.query.protein_identifier === undefined
+									? ''
+									: data.query.protein_identifier,
+							glyMotif:
+								data.query.glycan_motif === undefined
+									? ''
+									: data.query.glycan_motif,
+							glyBioEnz:
+								data.query.enzyme === undefined ? '' : data.query.enzyme.id,
+							glyPubId: data.query.pmid === undefined ? '' : data.query.pmid,
+							glyAdvSearchValError: [false, false, false, false, false],
 						});
 
 						setGlyActTabKey('advanced_search');
@@ -532,16 +572,16 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-          setPageLoading(false);
-          setGlySearchError(true);
-          window.scrollTo(0, 0)
+					setPageLoading(false);
+					setGlySearchError(true);
+					window.scrollTo(0, 0);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
 				setPageLoading(false);
 				setGlySearchError(true);
-				window.scrollTo(0, 0)
+				window.scrollTo(0, 0);
 			});
 	};
 
@@ -553,16 +593,16 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-          setPageLoading(false);
-          setGlySearchError(true);
-          window.scrollTo(0, 0)
+					setPageLoading(false);
+					setGlySearchError(true);
+					window.scrollTo(0, 0);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
 				setPageLoading(false);
 				setGlySearchError(true);
-				window.scrollTo(0, 0)
+				window.scrollTo(0, 0);
 			});
 	};
 
@@ -574,16 +614,16 @@ const GlycanSearch = (props) => {
 					props.history.push('/glycan-list/' + response.data['list_id']);
 					setPageLoading(false);
 				} else {
-          setPageLoading(false);
-          setGlySearchError(true);
-          window.scrollTo(0, 0)
+					setPageLoading(false);
+					setGlySearchError(true);
+					window.scrollTo(0, 0);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
 				setPageLoading(false);
 				setGlySearchError(true);
-				window.scrollTo(0, 0)
+				window.scrollTo(0, 0);
 			});
 	};
 
@@ -595,7 +635,7 @@ const GlycanSearch = (props) => {
 			</Helmet>
 			<div className='lander'>
 				<Container className={classes.con1}>
-          			<PageLoader pageLoading={pageLoading}/>
+					<PageLoader pageLoading={pageLoading} />
 					<div className='content-box-md'>
 						<h1 className='page-heading'>Glycan Search</h1>
 					</div>
@@ -613,7 +653,7 @@ const GlycanSearch = (props) => {
 							title='Simple Search'>
 							<SearchAlert
 								searchError={glySearchError}
-								alertTitle="Simple Search Error - No Results Found"
+								alertTitle='Simple Search Error - No Results Found'
 								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							<Container className={classes.conSimple}>
@@ -636,13 +676,13 @@ const GlycanSearch = (props) => {
 							eventKey='advanced_search'
 							className={classes.tab}
 							title='Advanced Search'>
-								<SearchAlert 
-									searchError={glySearchError}
-									alertTitle="Advanced Search Error - No Results Found"
-									alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-								/>
+							<SearchAlert
+								searchError={glySearchError}
+								alertTitle='Advanced Search Error - No Results Found'
+								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+							/>
 							<Container className={classes.con}>
-							{initData && (
+								{initData && (
 									<GlycanAdvancedSearch
 										searchGlycanAdvClick={searchGlycanAdvClick}
 										inputValue={glyAdvSearchData}
@@ -656,12 +696,13 @@ const GlycanSearch = (props) => {
 							eventKey='composition_search'
 							title='Composition Search'
 							className={classes.tabCompostionSearch}>
-								<SearchAlert
-									searchError={glySearchError}
-									alertTitle="Composition Search Error - No Results Found"
-									alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-								/>
-							<Container className='p-5'>
+							<SearchAlert
+								searchError={glySearchError}
+								alertTitle='Composition Search Error - No Results Found'
+								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+							/>
+							{/* <Container className='p-5'> */}
+							<Container>
 								{initData.composition && (
 									<CompositionSearchControl
 										compositionInitMap={initData.composition}

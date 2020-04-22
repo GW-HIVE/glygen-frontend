@@ -11,41 +11,41 @@ import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 
 const useStyles = makeStyles({
-	input: {
-		height: 34,
-		borderRadius: 4,
-		position: 'relative',
-		fontSize: 16,
-		paddingLeft: '15px',
-		paddingRight: '15px',
-	},
-	span2: {
-		fontSize: 12,
-		fontStyle: 'italic',
-		fontWeight: 'bold',
-		margin: 0,
-	},
-	br: {
-		height: 1,
-		padding: 0,
-		margin: 0,
-	},
-	label: {
-		fontSize: 16,
-		fontWeight: 'bold',
-		margin: 0,
-	},
+	// input: {
+	// 	height: 34,
+	// 	borderRadius: 4,
+	// 	position: 'relative',
+	// 	fontSize: 16,
+	// 	paddingLeft: '15px',
+	// 	paddingRight: '15px',
+	// },
+	// span2: {
+	// 	fontSize: 12,
+	// 	fontStyle: 'italic',
+	// 	fontWeight: 'bold',
+	// 	margin: 0,
+	// },
+	// br: {
+	// 	height: 1,
+	// 	padding: 0,
+	// 	margin: 0,
+	// },
+	// label: {
+	// 	fontSize: 16,
+	// 	fontWeight: 'bold',
+	// 	margin: 0,
+	// },
 	labelHeader: {
-		fontSize: 16,
+		// fontSize: 16,
 		fontWeight: 'bold',
 		margin: 0,
 		color: '#2F78B7',
 	},
-	select: {
-		height: '34px',
-		paddingLeft: '15px',
-		paddingRight: '15px',
-	},
+	// select: {
+	// 	height: '34px',
+	// 	paddingLeft: '15px',
+	// 	paddingRight: '15px',
+	// },
 });
 
 export default function CompositionSearchControl(props) {
@@ -524,16 +524,19 @@ export default function CompositionSearchControl(props) {
 		<div>
 			<Grid
 				container
-				className={'col-sm-12'}
+				xs={12}
+				// className={'col-sm-12'}
 				style={{ margin: 0 }}
 				spacing={2}
 				justify='center'>
-				<Grid item className={'col-sm-5'}>
+				{/* <Grid item className={'col-sm-5'}> */}
+				<Grid item xs={3} sm={6}>
 					<Typography className={classes.labelHeader} gutterBottom>
 						Residue
 					</Typography>
 				</Grid>
-				<Grid item className={'col-sm-2'}>
+				{/* <Grid item className={'col-sm-2'}> */}
+				<Grid item xs={3} sm={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -541,7 +544,8 @@ export default function CompositionSearchControl(props) {
 						Contains
 					</Typography>
 				</Grid>
-				<Grid item className={'col-sm-2'}>
+				{/* <Grid item className={'col-sm-2'}> */}
+				<Grid item xs={2} sm={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -549,7 +553,8 @@ export default function CompositionSearchControl(props) {
 						Min
 					</Typography>
 				</Grid>
-				<Grid item className={'col-sm-2'}>
+				{/* <Grid item className={'col-sm-2'}> */}
+				<Grid item xs={3} sm={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -562,19 +567,28 @@ export default function CompositionSearchControl(props) {
 				props.compositionInitMap.map((key, index) => (
 					<Grid
 						container
-						className={'col-sm-12'}
+						xs={12}
+						// className={'col-sm-12'}
 						style={{ margin: 0 }}
 						spacing={2}
 						justify='center'>
-						<Grid item className={'col-sm-5'}>
-							<Typography className={classes.label} gutterBottom>
+						<Grid item xs={12} sm={6} md={6}>
+							{/* <Grid item className={'col-sm-5'}> */}
+							{/* <Typography className={classes.label} gutterBottom>
 								{key.name}
-								{<br className={classes.br}></br>}
+								<br className={classes.br}></br>
 								<span className={classes.span2}>{key.subtext} </span>
+							</Typography> */}
+							<Typography>
+								<strong>{key.name}</strong>
+								<br />
+								<span>{key.subtext} </span>
 							</Typography>
 						</Grid>
-						<Grid item className={'col-sm-2'}>
-							<FormControl fullWidth className={classes.margin}>
+						<Grid item xs={4} sm={2}>
+							{/* <Grid item className={'col-sm-2'}> */}
+							{/* <FormControl fullWidth className={classes.margin}> */}
+							<FormControl fullWidth>
 								<Select
 									variant='outlined'
 									defaultValue={'maybe'}
@@ -588,10 +602,11 @@ export default function CompositionSearchControl(props) {
 											event.target.name
 										)
 									}
+									margin='dense'
 									className={classes.select}
 									classes={{
 										outlined: classes.selectOutlined,
-										root: 'select-menu',
+										// root: 'select-menu',
 									}}>
 									<MenuItem value={'maybe'}>Maybe</MenuItem>
 									<MenuItem value={'yes'}>Yes</MenuItem>
@@ -599,7 +614,8 @@ export default function CompositionSearchControl(props) {
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item className={'col-sm-2'}>
+						<Grid item xs={4} sm={2}>
+							{/* <Grid item className={'col-sm-2'}> */}
 							<FormControl fullWidth className={classes.margin}>
 								<OutlinedInput
 									variant='outlined'
@@ -637,7 +653,8 @@ export default function CompositionSearchControl(props) {
 								/>
 							</FormControl>
 						</Grid>
-						<Grid item className={'col-sm-2'}>
+						<Grid item xs={4} sm={2}>
+							{/* <Grid item className={'col-sm-2'}> */}
 							<FormControl fullWidth className={classes.margin}>
 								<OutlinedInput
 									variant='outlined'
@@ -678,30 +695,30 @@ export default function CompositionSearchControl(props) {
 					</Grid>
 				))}
 
-			<Row className='gg-align-center  pt-5 pb-2'>
-				<Button className='gg-btn-outline mr-4' onClick={allYes}>
+			<Row className='gg-align-center  pt-5 pb-4'>
+				<Button className='gg-btn-outline mr-4 mb-3' onClick={allYes}>
 					All Yes
 				</Button>
-				<Button className='gg-btn-outline mr-4' onClick={allNo}>
+				<Button className='gg-btn-outline mr-4 mb-3' onClick={allNo}>
 					All No
 				</Button>
-				<Button className='gg-btn-outline mr-4' onClick={clearCompSearch}>
+				<Button className='gg-btn-outline mr-4 mb-3' onClick={clearCompSearch}>
 					Clear Fields
 				</Button>
 				<Button
-					className='gg-btn-outline mr-4'
+					className='gg-btn-outline mr-4 mb-3'
 					disabled={undoDisabled}
 					onClick={() => compSearchUndoRedo('undo')}>
 					Undo
 				</Button>
 				<Button
-					className='gg-btn-outline mr-4'
+					className='gg-btn-outline mr-4 mb-3'
 					disabled={redoDisabled}
 					onClick={() => compSearchUndoRedo('redo')}>
 					Redo
 				</Button>
 				<Button
-					className='gg-btn-blue'
+					className='gg-btn-blue mb-3'
 					disabled={searchDisabled}
 					onClick={props.searchGlycanCompClick}>
 					Search Glycan
