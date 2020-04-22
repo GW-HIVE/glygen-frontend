@@ -642,21 +642,23 @@ const GlycanSearch = (props) => {
 					<Tabs
 						defaultActiveKey='advanced_search'
 						transition={false}
-						className={classes.tabs}
+						// className={classes.tabs}
 						activeKey={glyActTabKey}
 						mountOnEnter={true}
 						unmountOnExit={true}
 						onSelect={(key) => setGlyActTabKey(key)}>
 						<Tab
 							eventKey='simple_search'
-							className={classes.tabSimpleSearch}
+							className='tab-content-padding'
+							// className={classes.tabSimpleSearch}
 							title='Simple Search'>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle='Simple Search Error - No Results Found'
 								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
-							<Container className={classes.conSimple}>
+							{/* <Container className={classes.conSimple}> */}
+							<Container className='tab-content-border'>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
 										simpleSearchCategory={glySimpleSearchCategory}
@@ -674,14 +676,16 @@ const GlycanSearch = (props) => {
 						</Tab>
 						<Tab
 							eventKey='advanced_search'
-							className={classes.tab}
+							// className={classes.tab}
+							className='tab-content-padding'
 							title='Advanced Search'>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle='Advanced Search Error - No Results Found'
 								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
-							<Container className={classes.con}>
+							{/* <Container className={classes.con}> */}
+							<Container className='tab-content-border'>
 								{initData && (
 									<GlycanAdvancedSearch
 										searchGlycanAdvClick={searchGlycanAdvClick}
@@ -695,14 +699,17 @@ const GlycanSearch = (props) => {
 						<Tab
 							eventKey='composition_search'
 							title='Composition Search'
-							className={classes.tabCompostionSearch}>
+							// className={classes.tabCompostionSearch}
+							className='tab-content-padding'
+						>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle='Composition Search Error - No Results Found'
 								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className='p-5'> */}
-							<Container>
+							{/* <Container> */}
+							<Container className='tab-content-border'>
 								{initData.composition && (
 									<CompositionSearchControl
 										compositionInitMap={initData.composition}

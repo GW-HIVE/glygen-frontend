@@ -66,6 +66,9 @@
 	.panel-width {
 		width: 99% !important;
 	}
+	.tab-content-padding {
+		padding: 20px 10px !important;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
