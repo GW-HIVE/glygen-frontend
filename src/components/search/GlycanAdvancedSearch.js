@@ -3,6 +3,7 @@ import MultilineAutoTextInput from "../input/MultilineAutoTextInput";
 import RangeInputSlider from "../input/RangeInputSlider";
 import AutoTextInput from "../input/AutoTextInput";
 import MultiselectTextInput from "../input/MultiselectTextInput";
+import HelpTooltip from "../tooltip/HelpTooltip";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -10,24 +11,12 @@ import PropTypes from "prop-types";
 import {Col,Row} from "react-bootstrap";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "react-bootstrap/Button";
-import HelpOutline from "@material-ui/icons/HelpOutline";
-import Tooltip from "@material-ui/core/Tooltip";
 import "../../css/Search.css";
-
-const HtmlTooltip = withStyles((theme) => ({
-    tooltip: {
-        backgroundColor: "#f5f5f9",
-        color: "rgba(0, 0, 0, 0.87)",
-        maxWidth: 220,
-        fontSize: theme.typography.pxToRem(12),
-        border: "1px solid #dadde9",
-    },
-}))(Tooltip);
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -84,16 +73,6 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: "4px !important",
         paddingBottom: "4px !important",
         backgroundColor: "white",
-    },
-    tooltip: {
-        backgroundColor: "#f5f5f9",
-        color: "rgba(0, 0, 0, 0.87)",
-        maxWidth: 220,
-        border: "1px solid #dadde9",
-    },
-    helpicon: {
-        fontSize: "18px",
-        marginRight: 8,
     }
 }));
 
@@ -116,6 +95,7 @@ const GlycanAdvancedSearch = (props) => {
     const glyOrgOperationOnChange = (event) => {
         props.setGlyAdvSearchData({ glyOrgOperation: event.target.value });
     };
+
     const glyMassTypeOnChange = (event) => {
         props.setGlyAdvSearchData({ glyMassType: event.target.value });
         setMassValues(event.target.value, props.inputValue.glyMass);
@@ -282,28 +262,15 @@ const GlycanAdvancedSearch = (props) => {
             </Row>
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        disableTouchListener
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Glycan Id:</Typography>
-                                {
-                                    "Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore"
-                                }{" "}
-                                <a
-                                    href="https://glytoucan.org/Structures/graphical"
-                                    target="_blank"
-                                >
-                                    {"GlyTouCan"}
-                                </a>
-                            </React.Fragment>
-                        }
+                    <HelpTooltip
+                        title = "Glycan Id:"
+                        text = "Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore"
+                        urlText = "GlyTouCan"
+                        url = "https://glytoucan.org/Structures/graphical"
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
-          Glycan Id
-        </Typography>
+                    </HelpTooltip>
+                    Glycan Id
+                </Typography>
                 <MultilineAutoTextInput
                     inputValue={props.inputValue.glycanId}
                     setInputValue={glycanIdChange}
@@ -359,21 +326,13 @@ const GlycanAdvancedSearch = (props) => {
                 <Grid container spacing={2} alignItems="center">
                     <Grid item>
                         <Typography className={classes.label1} gutterBottom>
-                            <HtmlTooltip
-                                interactive
-                                title={
-                                    <React.Fragment>
-                                        <Typography color="inherit">Monoisotopic Mass:</Typography>
-                                        {
-                                            "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)"
-                                        }
-                                    </React.Fragment>
-                                }
+                            <HelpTooltip
+                                title = "Monoisotopic Mass:"
+                                text = "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
                             >
-                                <HelpOutline className={classes.helpicon} />
-                            </HtmlTooltip>
-              Monoisotopic Mass
-            </Typography>
+                            </HelpTooltip>
+                            Monoisotopic Mass
+                        </Typography>
                         <RangeInputSlider
                             step={10}
                             min={props.inputValue.glyMassRange[0]}
@@ -420,19 +379,11 @@ const GlycanAdvancedSearch = (props) => {
             </div>
             <div className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Number of Sugars:</Typography>
-                                {
-                                    "Use the sliders to select a Number of Sugars range for your glycan(s)"
-                                }
-                            </React.Fragment>
-                        }
+                     <HelpTooltip
+                        title = "Number of Sugars:"
+                        text = "Use the sliders to select a Number of Sugars range for your glycan(s)."
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
+                    </HelpTooltip>
                     No of Sugars
                 </Typography>
                 <RangeInputSlider
@@ -453,19 +404,11 @@ const GlycanAdvancedSearch = (props) => {
                 <Grid container spacing={2} alignItems="center">
                     <Grid item>
                         <Typography className={classes.label1} gutterBottom>
-                            <HtmlTooltip
-                                interactive
-                                title={
-                                    <React.Fragment>
-                                        <Typography color="inherit">Organism:</Typography>
-                                        {
-                                            "An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)"
-                                        }
-                                    </React.Fragment>
-                                }
+                            <HelpTooltip
+                                title = "Organism:"
+                                text = "An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)."
                             >
-                                <HelpOutline className={classes.helpicon} />
-                            </HtmlTooltip>
+                            </HelpTooltip>
                             Organisms
                         </Typography>
                         <MultiselectTextInput
@@ -481,7 +424,7 @@ const GlycanAdvancedSearch = (props) => {
                     </Grid>
                     <Grid item>
                         <Typography className={classes.label4} gutterBottom>
-                            {/* Mass Type */}&nbsp;
+                            &nbsp;
                         </Typography>
                         <FormControl variant="outlined">
                             <Select
@@ -505,19 +448,11 @@ const GlycanAdvancedSearch = (props) => {
             </div>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Glycan Type:</Typography>
-                                {
-                                    "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
-                                }
-                            </React.Fragment>
-                        }
+                     <HelpTooltip
+                        title = "Glycan Type:"
+                        text = "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
+                    </HelpTooltip>
                     Glycan Type
                 </Typography>
                 <Select
@@ -542,19 +477,11 @@ const GlycanAdvancedSearch = (props) => {
             {!props.inputValue.glySubTypeIsHidden && (
                 <FormControl fullWidth variant="outlined" className={classes.margin}>
                     <Typography className={classes.label1} gutterBottom>
-                        <HtmlTooltip
-                            interactive
-                            title={
-                                <React.Fragment>
-                                    <Typography color="inherit">Glycan Subtype:</Typography>
-                                    {
-                                        "Subclassifcation of Glycan types. Click to select a Glycan Subtype"
-                                    }
-                                </React.Fragment>
-                            }
+                        <HelpTooltip
+                            title = "Glycan Subtype:"
+                            text = "Subclassifcation of Glycan types. Click to select a Glycan Subtype."
                         >
-                            <HelpOutline className={classes.helpicon} />
-                        </HtmlTooltip>
+                        </HelpTooltip>
                         Select Glycan Subtype
                     </Typography>
                     <Select
@@ -588,22 +515,13 @@ const GlycanAdvancedSearch = (props) => {
 
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Glycosylated Protein:</Typography>
-                                {
-                                    "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore"
-                                }{" "}
-                                <a href="https://www.uniprot.org/" target="_blank">
-                                    UniProtKB
-                                </a>
-                            </React.Fragment>
-                        }
+                    <HelpTooltip
+                        title = "Glycosylated Protein:"
+                        text = "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore"
+                        urlText = "UniProtKB"
+                        url = "https://www.uniprot.org/"
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
+                    </HelpTooltip>
                  Glycosylated Protein
                 </Typography>
                 <AutoTextInput
@@ -643,24 +561,15 @@ const GlycanAdvancedSearch = (props) => {
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Glycan Motif:</Typography>
-                                {
-                                    "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore"
-                                }{" "}
-                                <a href="https://www.uniprot.org/help/carbohyd" target="_blank">
-                                    Glycan Motif
-                                </a>
-                            </React.Fragment>
-                        }
+                    <HelpTooltip
+                        title = "Glycan Motif:"
+                        text = "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore"
+                        urlText = "Glycan Motif"
+                        url = "https://www.uniprot.org/help/carbohyd"
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
-          Glycan Motif
-        </Typography>
+                    </HelpTooltip>
+                    Glycan Motif
+                </Typography>
                 <AutoTextInput
                     inputValue={props.inputValue.glyMotif}
                     setInputValue={glyMotifChange}
@@ -695,22 +604,13 @@ const GlycanAdvancedSearch = (props) => {
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Biosynthetic Enzyme:</Typography>
-                                {
-                                    "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore"
-                                }{" "}
-                                <a href="https://enzyme.expasy.org/" target="_blank">
-                                    Biosynthetic Enzyme
-                                </a>
-                            </React.Fragment>
-                        }
+                     <HelpTooltip
+                        title = "Biosynthetic Enzyme:"
+                        text = "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore"
+                        urlText = "Biosynthetic Enzyme"
+                        url = "https://enzyme.expasy.org/"
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
+                    </HelpTooltip>
                     Biosynthetic Enzyme
                 </Typography>
                 <AutoTextInput
@@ -747,25 +647,13 @@ const GlycanAdvancedSearch = (props) => {
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
-                    <HtmlTooltip
-                        interactive
-                        title={
-                            <React.Fragment>
-                                <Typography color="inherit">Biosynthetic Enzyme:</Typography>
-                                {
-                                    "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore"
-                                }{" "}
-                                <a
-                                    href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
-                                    target="_blank"
-                                >
-                                    PubMed ID
-                                </a>
-                            </React.Fragment>
-                        }
+                    <HelpTooltip
+                        title = "Pubmed ID:"
+                        text = "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore"
+                        urlText = "Pubmed ID"
+                        url = "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
                     >
-                        <HelpOutline className={classes.helpicon} />
-                    </HtmlTooltip>
+                    </HelpTooltip>
                     Pubmed ID
                 </Typography>
                 <OutlinedInput
