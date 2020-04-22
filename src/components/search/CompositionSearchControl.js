@@ -524,19 +524,20 @@ export default function CompositionSearchControl(props) {
 		<div>
 			<Grid
 				container
-				xs={12}
+				// fullWidth
+				// xs={12}
 				// className={'col-sm-12'}
 				style={{ margin: 0 }}
 				spacing={2}
 				justify='center'>
 				{/* <Grid item className={'col-sm-5'}> */}
-				<Grid item xs={3} sm={6}>
+				<Grid item xs={4} sm={5} md={5}>
 					<Typography className={classes.labelHeader} gutterBottom>
 						Residue
 					</Typography>
 				</Grid>
 				{/* <Grid item className={'col-sm-2'}> */}
-				<Grid item xs={3} sm={2}>
+				<Grid item xs={4} sm={3} md={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -545,7 +546,7 @@ export default function CompositionSearchControl(props) {
 					</Typography>
 				</Grid>
 				{/* <Grid item className={'col-sm-2'}> */}
-				<Grid item xs={2} sm={2}>
+				<Grid item xs={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -554,7 +555,7 @@ export default function CompositionSearchControl(props) {
 					</Typography>
 				</Grid>
 				{/* <Grid item className={'col-sm-2'}> */}
-				<Grid item xs={3} sm={2}>
+				<Grid item xs={2}>
 					<Typography
 						className={classes.labelHeader}
 						gutterBottom
@@ -567,12 +568,13 @@ export default function CompositionSearchControl(props) {
 				props.compositionInitMap.map((key, index) => (
 					<Grid
 						container
-						xs={12}
+						// xs={12}
+						// md={10}
 						// className={'col-sm-12'}
-						style={{ margin: 0 }}
+						style={{ margin: '0  auto' }}
 						spacing={2}
 						justify='center'>
-						<Grid item xs={12} sm={6} md={6}>
+						<Grid item xs={12} sm={5}>
 							{/* <Grid item className={'col-sm-5'}> */}
 							{/* <Typography className={classes.label} gutterBottom>
 								{key.name}
@@ -585,7 +587,7 @@ export default function CompositionSearchControl(props) {
 								<span>{key.subtext} </span>
 							</Typography>
 						</Grid>
-						<Grid item xs={4} sm={2}>
+						<Grid item xs={6} sm={3} md={2}>
 							{/* <Grid item className={'col-sm-2'}> */}
 							{/* <FormControl fullWidth className={classes.margin}> */}
 							<FormControl fullWidth>
@@ -603,24 +605,26 @@ export default function CompositionSearchControl(props) {
 										)
 									}
 									margin='dense'
-									className={classes.select}
-									classes={{
-										outlined: classes.selectOutlined,
-										// root: 'select-menu',
-									}}>
+									// className={classes.select}
+									// classes={{
+									// 	outlined: classes.selectOutlined,
+									// 	// root: 'select-menu',
+									// }}
+								>
 									<MenuItem value={'maybe'}>Maybe</MenuItem>
 									<MenuItem value={'yes'}>Yes</MenuItem>
 									<MenuItem value={'no'}>No</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item xs={4} sm={2}>
+						<Grid item xs={3} sm={2}>
 							{/* <Grid item className={'col-sm-2'}> */}
-							<FormControl fullWidth className={classes.margin}>
+							{/* <FormControl fullWidth className={classes.margin}> */}
+							<FormControl fullWidth>
 								<OutlinedInput
 									variant='outlined'
 									name={key.residue}
-									className={classes.input}
+									// className={classes.input}
 									margin='dense'
 									value={props.inputValue[key.residue].min}
 									onChange={minInputChange}
@@ -653,12 +657,13 @@ export default function CompositionSearchControl(props) {
 								/>
 							</FormControl>
 						</Grid>
-						<Grid item xs={4} sm={2}>
+						<Grid item xs={3} sm={2}>
 							{/* <Grid item className={'col-sm-2'}> */}
-							<FormControl fullWidth className={classes.margin}>
+							{/* <FormControl fullWidth className={classes.margin}> */}
+							<FormControl fullWidth>
 								<OutlinedInput
 									variant='outlined'
-									className={classes.input}
+									// className={classes.input}
 									margin='dense'
 									name={key.residue}
 									value={props.inputValue[key.residue].max}
@@ -695,7 +700,7 @@ export default function CompositionSearchControl(props) {
 					</Grid>
 				))}
 
-			<Row className='gg-align-center  pt-5 pb-4'>
+			<Row className='gg-align-center pt-5'>
 				<Button className='gg-btn-outline mr-4 mb-3' onClick={allYes}>
 					All Yes
 				</Button>
