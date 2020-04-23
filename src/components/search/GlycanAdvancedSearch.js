@@ -325,7 +325,10 @@ const GlycanAdvancedSearch = (props) => {
 							</Grid>
 							{/* Mass Type */}
 							<Grid item xs={12} sm={3}>
-								<Typography className={classes.label4} gutterBottom>
+								<Typography
+									className={classes.label4}
+									gutterBottom5
+									style={{ marginBottom: '2px' }}>
 									&nbsp;
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>
@@ -360,26 +363,28 @@ const GlycanAdvancedSearch = (props) => {
 				{/* No of Sugars */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth className={classes.margin}>
-						<Grid item xs={12} sm={9}>
-							<Typography className={classes.label} gutterBottom>
-								<HelpTooltip
-									title='Number of Sugars'
-									text='Use the sliders to select a Number of Sugars range for your glycan(s).'></HelpTooltip>
-								No of Sugars
-							</Typography>
-							<RangeInputSlider
-								step={1}
-								min={props.inputValue.glyNumSugarsRange[0]}
-								max={props.inputValue.glyNumSugarsRange[1]}
-								inputValue={props.inputValue.glyNumSugarsInput}
-								setInputValue={(input) =>
-									props.setGlyAdvSearchData({ glyNumSugarsInput: input })
-								}
-								inputValueSlider={props.inputValue.glyNumSugars}
-								setSliderInputValue={(input) =>
-									props.setGlyAdvSearchData({ glyNumSugars: input })
-								}
-							/>
+						<Grid container spacing={2} alignItems='center'>
+							<Grid item xs={12} sm={9}>
+								<Typography className={classes.label} gutterBottom>
+									<HelpTooltip
+										title='Number of Sugars'
+										text='Use the sliders to select a Number of Sugars range for your glycan(s).'></HelpTooltip>
+									No of Sugars
+								</Typography>
+								<RangeInputSlider
+									step={1}
+									min={props.inputValue.glyNumSugarsRange[0]}
+									max={props.inputValue.glyNumSugarsRange[1]}
+									inputValue={props.inputValue.glyNumSugarsInput}
+									setInputValue={(input) =>
+										props.setGlyAdvSearchData({ glyNumSugarsInput: input })
+									}
+									inputValueSlider={props.inputValue.glyNumSugars}
+									setSliderInputValue={(input) =>
+										props.setGlyAdvSearchData({ glyNumSugars: input })
+									}
+								/>
+							</Grid>
 						</Grid>
 					</FormControl>
 				</Grid>
@@ -409,7 +414,7 @@ const GlycanAdvancedSearch = (props) => {
 								/>
 							</Grid>
 							<Grid item xs={3} sm={3}>
-								<Typography className={classes.label4} gutterBottom>
+								<Typography className={classes.label4} gutterBottom5>
 									&nbsp;
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>

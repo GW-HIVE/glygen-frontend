@@ -15,15 +15,15 @@ export default function HorizontalHeading(props) {
 					<Grid item xs={12} sm={12} md={12} lg={12} className='text-center'>
 						<div className='horizontal-heading'>
 							<Typography variant='h5'>{post.h5VerticalText}</Typography>
-							<Typography variant='h2'>
+							<Typography variant='h4'>
 								<span>
 									<strong>{post.h2textTopStrongBefore}</strong>
 								</span>{' '}
 								{post.h2textTop}{' '}
 								<span>
 									<strong>{post.h2textTopStrongAfter}</strong>
-								</span>
-								<br />
+								</span>{' '}
+								{post.h2textTop2} <br />
 								<span>
 									<strong>{post.h2textBottomStrongBefore}</strong>
 								</span>{' '}
@@ -44,5 +44,5 @@ export default function HorizontalHeading(props) {
 }
 
 HorizontalHeading.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };
