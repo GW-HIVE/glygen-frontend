@@ -1,23 +1,23 @@
-import React from "react";
-import MultilineAutoTextInput from "../input/MultilineAutoTextInput";
-import RangeInputSlider from "../input/RangeInputSlider";
-import AutoTextInput from "../input/AutoTextInput";
-import MultiselectTextInput from "../input/MultiselectTextInput";
-import HelpTooltip from "../tooltip/HelpTooltip";
-import ExampleExploreControl from "../example/ExampleExploreControl";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import PropTypes from "prop-types";
-import {Col,Row} from "react-bootstrap";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "react-bootstrap/Button";
-import "../../css/Search.css";
+import React from 'react';
+import MultilineAutoTextInput from '../input/MultilineAutoTextInput';
+import RangeInputSlider from '../input/RangeInputSlider';
+import AutoTextInput from '../input/AutoTextInput';
+import MultiselectTextInput from '../input/MultiselectTextInput';
+import HelpTooltip from '../tooltip/HelpTooltip';
+import ExampleExploreControl from '../example/ExampleExploreControl';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import PropTypes from 'prop-types';
+import { Row } from 'react-bootstrap';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Button from 'react-bootstrap/Button';
+import '../../css/Search.css';
 
 const useStyles = makeStyles((theme) => ({
 	// margin: {
@@ -35,17 +35,17 @@ const useStyles = makeStyles((theme) => ({
 		// fontSize: "14px",
 		// color: "#4A4A4A",
 		fontWeight: 'bold',
-		// marginLeft: -27,
+		marginLeft: -27,
 	},
 	// label4: {
 	//     fontSize: "15px",
 	//     color: "#4A4A4A",
 	//     fontWeight: "bold",
 	// },
-	// label3: {
-	//     fontSize: "16px",
-	//     fontWeight: "bold",
-	// },
+	labelSelect: {
+		// fontSize: "16px",
+		fontWeight: 'bold',
+	},
 	errorText: {
 		fontSize: '14px  !important',
 		marginRight: 0,
@@ -241,25 +241,31 @@ const GlycanAdvancedSearch = (props) => {
 
 	return (
 		<>
-			<Row className='gg-align-right pt-2 pb-2'>
-				<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
-					Clear Fields
-				</Button>
-				<Button
-					className='gg-btn-blue'
-					onClick={props.searchGlycanAdvClick}
-					disabled={
-						!props.inputValue.glyAdvSearchValError.every((err) => err === false)
-					}>
-					Search Glycan
-				</Button>
-			</Row>
 			<Grid
 				container
 				style={{ margin: '0  auto' }}
 				spacing={3}
-				justify='center5'>
-				<Grid item xs={12} sm={12}>
+				justify='center'>
+				{/* Buttons Top */}
+				<Grid item xs={12} sm={10}>
+					<Row className='gg-align-right pt-2 pb-2 mr-1'>
+						<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
+							Clear Fields
+						</Button>
+						<Button
+							className='gg-btn-blue'
+							onClick={props.searchGlycanAdvClick}
+							disabled={
+								!props.inputValue.glyAdvSearchValError.every(
+									(err) => err === false
+								)
+							}>
+							Search Glycan
+						</Button>
+					</Row>
+				</Grid>
+				{/* Glycan Id */}
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth className={classes.margin} variant='outlined'>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
@@ -278,320 +284,382 @@ const GlycanAdvancedSearch = (props) => {
 							length={2500}
 							errorText='Entry is too long - max length is 2500.'
 						/>
-                        <ExampleExploreControl
-                            exampleText={"GlyTouCan Accession Example:"}
-                            setInputValue={glycanIdChange}
-                            inputValue={"G17689DH"}
-                            exploreText={"GlyTouCan Accession"}
-                            exploreUrl={"https://glytoucan.org/Structures/graphical"}
-                        />
-                        <ExampleExploreControl
-                            exampleText={"Cross References Id Example:"}
-                            setInputValue={glycanIdChange}
-                            inputValue={"G10716"}
-                        />
+						<ExampleExploreControl
+							exampleText={'GlyTouCan Accession Example:'}
+							setInputValue={glycanIdChange}
+							inputValue={'G17689DH'}
+							exploreText={'GlyTouCan Accession'}
+							exploreUrl={'https://glytoucan.org/Structures/graphical'}
+						/>
+						<ExampleExploreControl
+							exampleText={'Cross References Id Example:'}
+							setInputValue={glycanIdChange}
+							inputValue={'G10716'}
+						/>
 					</FormControl>
 				</Grid>
-
-                <FormControl fullWidth className={classes.margin}>
-					<Grid container spacing={2} alignItems='center'>
-						<Grid item>
+				{/* Monoisotopic Mass */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth className={classes.margin}>
+						<Grid container spacing={2} alignItems='center'>
+							<Grid item xs={12} sm={9}>
+								<Typography className={classes.label} gutterBottom>
+									<HelpTooltip
+										title='Monoisotopic Mass'
+										text='The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s).'></HelpTooltip>
+									Monoisotopic Mass
+								</Typography>
+								<RangeInputSlider
+									step={10}
+									min={props.inputValue.glyMassRange[0]}
+									max={props.inputValue.glyMassRange[1]}
+									inputValue={props.inputValue.glyMassInput}
+									setInputValue={(input) =>
+										props.setGlyAdvSearchData({ glyMassInput: input })
+									}
+									inputValueSlider={props.inputValue.glyMass}
+									setSliderInputValue={(input) =>
+										props.setGlyAdvSearchData({ glyMass: input })
+									}
+								/>
+							</Grid>
+							{/* Mass Type */}
+							<Grid item xs={12} sm={3}>
+								<Typography className={classes.label4} gutterBottom>
+									&nbsp;
+								</Typography>
+								<FormControl variant='outlined' margin='dense' fullWidth>
+									<InputLabel className={classes.labelSelect}>
+										Mass Type
+									</InputLabel>
+									<Select
+										value={props.inputValue.glyMassType}
+										onChange={glyMassTypeOnChange}
+										highlight={false}
+										// classes={{
+										// 	outlined: classes.selectOutlined,
+										// 	root: 'select-menu',
+										// }}
+										className={classes.select}
+										labelWidth={85}>
+										{props.initData.glycan_mass &&
+											Object.keys(props.initData.glycan_mass)
+												.sort()
+												.map((key) => (
+													<MenuItem
+														value={props.initData.glycan_mass[key].name}>
+														{props.initData.glycan_mass[key].name}
+													</MenuItem>
+												))}
+									</Select>
+								</FormControl>
+							</Grid>
+						</Grid>
+					</FormControl>
+				</Grid>
+				{/* No of Sugars */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth className={classes.margin}>
+						<Grid item xs={12} sm={9}>
 							<Typography className={classes.label} gutterBottom>
 								<HelpTooltip
-									title='Monoisotopic Mass'
-									text='The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s).'></HelpTooltip>
-								Monoisotopic Mass
+									title='Number of Sugars'
+									text='Use the sliders to select a Number of Sugars range for your glycan(s).'></HelpTooltip>
+								No of Sugars
 							</Typography>
 							<RangeInputSlider
-								step={10}
-								min={props.inputValue.glyMassRange[0]}
-								max={props.inputValue.glyMassRange[1]}
-								inputValue={props.inputValue.glyMassInput}
+								step={1}
+								min={props.inputValue.glyNumSugarsRange[0]}
+								max={props.inputValue.glyNumSugarsRange[1]}
+								inputValue={props.inputValue.glyNumSugarsInput}
 								setInputValue={(input) =>
-									props.setGlyAdvSearchData({ glyMassInput: input })
+									props.setGlyAdvSearchData({ glyNumSugarsInput: input })
 								}
-								inputValueSlider={props.inputValue.glyMass}
+								inputValueSlider={props.inputValue.glyNumSugars}
 								setSliderInputValue={(input) =>
-									props.setGlyAdvSearchData({ glyMass: input })
+									props.setGlyAdvSearchData({ glyNumSugars: input })
 								}
 							/>
 						</Grid>
-						<Grid item>
-							<Typography className={classes.label4} gutterBottom>
-								&nbsp;
-							</Typography>
-							<FormControl variant='outlined'>
-								<InputLabel className={classes.label3}>Mass Type</InputLabel>
-								<Select
-									value={props.inputValue.glyMassType}
-									onChange={glyMassTypeOnChange}
-									highlight={false}
-									classes={{
-										outlined: classes.selectOutlined,
-										root: 'select-menu',
-									}}
-									className={classes.select}
-									labelWidth={100}>
-									{props.initData.glycan_mass &&
-										Object.keys(props.initData.glycan_mass)
-											.sort()
-											.map((key) => (
-												<MenuItem value={props.initData.glycan_mass[key].name}>
-													{props.initData.glycan_mass[key].name}
-												</MenuItem>
-											))}
-								</Select>
-							</FormControl>
+					</FormControl>
+				</Grid>
+				{/* Organisms */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth className={classes.margin}>
+						<Grid container spacing={2} alignItems='center'>
+							<Grid item xs={9} sm={9}>
+								<Typography
+									className={classes.label}
+									gutterBottom
+									style={{ marginBottom: '0' }}>
+									<HelpTooltip
+										title='Organism'
+										text='An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s).'></HelpTooltip>
+									Organisms
+								</Typography>
+								<MultiselectTextInput
+									options={
+										props.initData.organism
+											? props.initData.organism.sort(sortDropdown)
+											: props.initData.organism
+									}
+									inputValue={props.inputValue.glyOrganisms}
+									setInputValue={glyOrgChange}
+									placeholder='Click to select one or multiple Organisms'
+								/>
+							</Grid>
+							<Grid item xs={3} sm={3}>
+								<Typography className={classes.label4} gutterBottom>
+									&nbsp;
+								</Typography>
+								<FormControl variant='outlined' margin='dense' fullWidth>
+									<Select
+										margin='dense'
+										variant='outlined'
+										classes={{
+											outlined: classes.selectOutlined,
+											root: 'select-menu',
+										}}
+										value={props.inputValue.glyOrgOperation}
+										onChange={glyOrgOperationOnChange}
+										className={classes.select}>
+										<MenuItem value={'or'}>Or</MenuItem>
+										<MenuItem value={'and'}>And</MenuItem>
+									</Select>
+								</FormControl>
+							</Grid>
 						</Grid>
-					</Grid>
-                </FormControl>
-                <FormControl fullWidth className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Number of Sugars'
-							text='Use the sliders to select a Number of Sugars range for your glycan(s).'></HelpTooltip>
-						No of Sugars
-					</Typography>
-					<RangeInputSlider
-						step={1}
-						min={props.inputValue.glyNumSugarsRange[0]}
-						max={props.inputValue.glyNumSugarsRange[1]}
-						inputValue={props.inputValue.glyNumSugarsInput}
-						setInputValue={(input) =>
-							props.setGlyAdvSearchData({ glyNumSugarsInput: input })
-						}
-						inputValueSlider={props.inputValue.glyNumSugars}
-						setSliderInputValue={(input) =>
-							props.setGlyAdvSearchData({ glyNumSugars: input })
-						}
-					/>
-				</FormControl>
-                <FormControl fullWidth className={classes.margin}>
-					<Grid container spacing={2} alignItems='center'>
-						<Grid item>
-							<Typography className={classes.label} gutterBottom>
-								<HelpTooltip
-									title='Organism'
-									text='An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s).'></HelpTooltip>
-								Organisms
-							</Typography>
-							<MultiselectTextInput
-								options={
-									props.initData.organism
-										? props.initData.organism.sort(sortDropdown)
-										: props.initData.organism
-								}
-								inputValue={props.inputValue.glyOrganisms}
-								setInputValue={glyOrgChange}
-								placeholder='Click to select one or multiple Organisms'
-							/>
-						</Grid>
-						<Grid item>
-							<Typography className={classes.label4} gutterBottom>
-								&nbsp;
-							</Typography>
-							<FormControl variant='outlined'>
-								<Select
-									variant='outlined'
-									classes={{
-										outlined: classes.selectOutlined,
-										root: 'select-menu',
-									}}
-									value={props.inputValue.glyOrgOperation}
-									onChange={glyOrgOperationOnChange}
-									className={classes.select}>
-									<MenuItem value={'or'}>Or</MenuItem>
-									<MenuItem value={'and'}>And</MenuItem>
-								</Select>
-							</FormControl>
-						</Grid>
-					</Grid>
-                </FormControl>
-				<FormControl fullWidth variant='outlined' className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Glycan Type'
-							text='The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type.'></HelpTooltip>
-						Glycan Type
-					</Typography>
-					<Select
-						value={props.inputValue.glyType}
-						displayEmpty
-						onChange={glyTypeOnChange}
-						className={classes.select1}
-						classes={{
-							outlined: classes.selectOutlined,
-							root: 'select-menu',
-						}}>
-						<MenuItem value=''>Select Glycan Type</MenuItem>
-						{props.initData.glycan_type &&
-							props.initData.glycan_type
-								.sort(sortDropdown)
-								.map((option) => (
-									<MenuItem value={option.name}>{option.name}</MenuItem>
-								))}
-					</Select>
-				</FormControl>
-				{!props.inputValue.glySubTypeIsHidden && (
-					<FormControl fullWidth variant='outlined' className={classes.margin}>
+					</FormControl>
+				</Grid>
+				{/* Glycan Type */}
+				<Grid item xs={12} sm={10}>
+					<FormControl
+						fullWidth
+						variant='outlined'
+						margin='dense'
+						className={classes.margin}>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-								title='Glycan Subtype'
-								text='Subclassifcation of Glycan types. Click to select a Glycan Subtype.'></HelpTooltip>
-							Select Glycan Subtype
+								title='Glycan Type'
+								text='The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type.'></HelpTooltip>
+							Glycan Type
 						</Typography>
 						<Select
-							value={props.inputValue.glySubType}
+							value={props.inputValue.glyType}
 							displayEmpty
-							onChange={glySubTypeOnChange}
+							onChange={glyTypeOnChange}
 							className={classes.select1}
 							classes={{
 								outlined: classes.selectOutlined,
 								root: 'select-menu',
-							}}
-							displayPrint='none'>
-							<MenuItem value='' selected>
-								Select Glycan Subtype
-							</MenuItem>
+							}}>
+							<MenuItem value=''>Select Glycan Type</MenuItem>
 							{props.initData.glycan_type &&
-								props.initData.glycan_type.map((option) =>
-									option.subtype
-										.sort()
-										.map(
-											(subtype) =>
-												option.name === props.inputValue.glyType && (
-													<MenuItem value={subtype}>{subtype}</MenuItem>
-												)
-										)
-								)}
+								props.initData.glycan_type
+									.sort(sortDropdown)
+									.map((option) => (
+										<MenuItem value={option.name}>{option.name}</MenuItem>
+									))}
 						</Select>
 					</FormControl>
+				</Grid>
+				{/* Glycan Subtype */}
+
+				{!props.inputValue.glySubTypeIsHidden && (
+					<Grid item xs={12} sm={10}>
+						<FormControl
+							fullWidth
+							variant='outlined'
+							margin='dense'
+							className={classes.margin}>
+							<Typography className={classes.label} gutterBottom>
+								<HelpTooltip
+									title='Glycan Subtype'
+									text='Subclassifcation of Glycan types. Click to select a Glycan Subtype.'></HelpTooltip>
+								Select Glycan Subtype
+							</Typography>
+							<Select
+								value={props.inputValue.glySubType}
+								displayEmpty
+								onChange={glySubTypeOnChange}
+								className={classes.select1}
+								classes={{
+									outlined: classes.selectOutlined,
+									root: 'select-menu',
+								}}
+								displayPrint='none'>
+								<MenuItem value='' selected>
+									Select Glycan Subtype
+								</MenuItem>
+								{props.initData.glycan_type &&
+									props.initData.glycan_type.map((option) =>
+										option.subtype
+											.sort()
+											.map(
+												(subtype) =>
+													option.name === props.inputValue.glyType && (
+														<MenuItem value={subtype}>{subtype}</MenuItem>
+													)
+											)
+									)}
+							</Select>
+						</FormControl>
+					</Grid>
 				)}
 
-				<FormControl fullWidth variant='outlined' className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Glycosylated Protein'
-							text='A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore'
-							urlText='UniProtKB'
-							url='https://www.uniprot.org/'></HelpTooltip>
-						Glycosylated Protein
-					</Typography>
-					<AutoTextInput
-						inputValue={props.inputValue.glyProt}
-						setInputValue={glyProtChange}
-						placeholder='Enter the UniProtKB Accession of your protein'
-						typeahedID='uniprot_canonical_ac'
-						length={100}
-						errorText='Entry is too long - max length is 100.'
-					/>
-                    <ExampleExploreControl
-                        exampleText={"Example:"}
-                        setInputValue={glyProtChange}
-                        inputValue={"P14210"}
-                        exploreText={"UniProtKB Accession"}
-                        exploreUrl={"https://www.uniprot.org/help/accession_numbers"}
-                    />
-				</FormControl>
-				<FormControl fullWidth variant='outlined' className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Glycan Motif'
-							text='A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore'
-							urlText='Glycan Motif'
-							url='https://www.uniprot.org/help/carbohyd'></HelpTooltip>
-						Glycan Motif
-					</Typography>
-					<AutoTextInput
-						inputValue={props.inputValue.glyMotif}
-						setInputValue={glyMotifChange}
-						placeholder='Enter the name of a Glycan Motif contained in your glycan'
-						typeahedID='motif_name'
-						length={1000}
-						errorText='Entry is too long - max length is 1000.'
-					/>
-                    <ExampleExploreControl
-                        exampleText={"Example:"}
-                        setInputValue={glyMotifChange}
-                        inputValue={"N-Glycan complex"}
-                        exploreText={"Glycan Motif"}
-                        exploreUrl={"https://www.uniprot.org/help/carbohyd"}
-                    />
-				</FormControl>
-				<FormControl fullWidth variant='outlined' className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Biosynthetic Enzyme'
-							text='Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore'
-							urlText='Biosynthetic Enzyme'
-							url='https://enzyme.expasy.org/'></HelpTooltip>
-						Biosynthetic Enzyme
-					</Typography>
-					<AutoTextInput
-						inputValue={props.inputValue.glyBioEnz}
-						setInputValue={glyBioEnzChange}
-						placeholder='Enter the Gene Name of an enzyme'
-						typeahedID='gene_name'
-						length={100}
-						errorText='Entry is too long - max length is 100.'
-					/>
-                    <ExampleExploreControl
-                        exampleText={"Example:"}
-                        setInputValue={glyBioEnzChange}
-                        inputValue={"B4GALT1"}
-                        exploreText={"Biosynthetic Enzyme"}
-                        exploreUrl={"https://enzyme.expasy.org/"}
-                    />
-				</FormControl>
-				<FormControl fullWidth variant='outlined' className={classes.margin}>
-					<Typography className={classes.label} gutterBottom>
-						<HelpTooltip
-							title='Pubmed ID'
-							text='A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore'
-							urlText='Pubmed ID'
-							url='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'></HelpTooltip>
-						Pubmed ID
-					</Typography>
-					<OutlinedInput
-						className={classes.input}
-						placeholder='Enter the Pubmed ID'
-						value={props.inputValue.glyPubId}
-						onChange={PubmedIdChange}
-						error={props.inputValue.glyPubId.length > 100}
-					/>
-					{props.inputValue.glyPubId.length > 100 && (
-						<FormHelperText className={classes.errorText} error>
-							Entry is too long - max length is 100.
-						</FormHelperText>
-					)}
-					{/* <AutoTextInput
+				{/* Glycosylated Protein */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined' className={classes.margin}>
+						<Typography
+							className={classes.label}
+							gutterBottom
+							style={{ marginBottom: '0' }}>
+							<HelpTooltip
+								title='Glycosylated Protein'
+								text='A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore'
+								urlText='UniProtKB'
+								url='https://www.uniprot.org/'></HelpTooltip>
+							Glycosylated Protein
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.glyProt}
+							setInputValue={glyProtChange}
+							placeholder='Enter the UniProtKB Accession of your protein'
+							typeahedID='uniprot_canonical_ac'
+							length={100}
+							errorText='Entry is too long - max length is 100.'
+						/>
+						<ExampleExploreControl
+							exampleText={'Example:'}
+							setInputValue={glyProtChange}
+							inputValue={'P14210'}
+							exploreText={'UniProtKB Accession'}
+							exploreUrl={'https://www.uniprot.org/help/accession_numbers'}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Glycan Motif */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined' className={classes.margin}>
+						<Typography
+							className={classes.label}
+							gutterBottom
+							style={{ marginBottom: '0' }}>
+							<HelpTooltip
+								title='Glycan Motif'
+								text='A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore'
+								urlText='Glycan Motif'
+								url='https://www.uniprot.org/help/carbohyd'></HelpTooltip>
+							Glycan Motif
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.glyMotif}
+							setInputValue={glyMotifChange}
+							placeholder='Enter the name of a Glycan Motif contained in your glycan'
+							typeahedID='motif_name'
+							length={1000}
+							errorText='Entry is too long - max length is 1000.'
+						/>
+						<ExampleExploreControl
+							exampleText={'Example:'}
+							setInputValue={glyMotifChange}
+							inputValue={'N-Glycan complex'}
+							exploreText={'Glycan Motif'}
+							exploreUrl={'https://www.uniprot.org/help/carbohyd'}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Biosynthetic Enzyme */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined' className={classes.margin}>
+						<Typography
+							className={classes.label}
+							gutterBottom
+							style={{ marginBottom: '0' }}>
+							<HelpTooltip
+								title='Biosynthetic Enzyme'
+								text='Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore'
+								urlText='Biosynthetic Enzyme'
+								url='https://enzyme.expasy.org/'></HelpTooltip>
+							Biosynthetic Enzyme
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.glyBioEnz}
+							setInputValue={glyBioEnzChange}
+							placeholder='Enter the Gene Name of an enzyme'
+							typeahedID='gene_name'
+							length={100}
+							errorText='Entry is too long - max length is 100.'
+						/>
+						<ExampleExploreControl
+							exampleText={'Example:'}
+							setInputValue={glyBioEnzChange}
+							inputValue={'B4GALT1'}
+							exploreText={'Biosynthetic Enzyme'}
+							exploreUrl={'https://enzyme.expasy.org/'}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Pubmed ID */}
+				<Grid item xs={12} sm={10}>
+					<FormControl
+						fullWidth
+						variant='outlined'
+						margin='dense'
+						className={classes.margin}>
+						<Typography className={classes.label} gutterBottom>
+							<HelpTooltip
+								title='Pubmed ID'
+								text='A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore'
+								urlText='Pubmed ID'
+								url='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'></HelpTooltip>
+							Pubmed ID
+						</Typography>
+						<OutlinedInput
+							className={classes.input}
+							placeholder='Enter the Pubmed ID'
+							value={props.inputValue.glyPubId}
+							onChange={PubmedIdChange}
+							error={props.inputValue.glyPubId.length > 100}
+						/>
+						{props.inputValue.glyPubId.length > 100 && (
+							<FormHelperText className={classes.errorText} error>
+								Entry is too long - max length is 100.
+							</FormHelperText>
+						)}
+						{/* <AutoTextInput
                    inputValue={glyPubId} setInputValue={glycPubIdChange}
                    placeholder="Enter the Pubmed ID"
                    typeahedID = "glycan_pmid"
                   /> */}
-                <ExampleExploreControl
-                    exampleText={"Example:"}
-                    setInputValue={glyPubIdChange}
-                    inputValue={"9449027"}
-                    exploreText={"Pubmed ID"}
-                    exploreUrl={"https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"}
-                />
-				</FormControl>
+						<ExampleExploreControl
+							exampleText={'Example:'}
+							setInputValue={glyPubIdChange}
+							inputValue={'9449027'}
+							exploreText={'Pubmed ID'}
+							exploreUrl={'https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Buttons Buttom */}
+				<Grid item xs={12} sm={10}>
+					<Row className='gg-align-right pt-3 mb-2 mr-1'>
+						<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
+							Clear Fields
+						</Button>
+						<Button
+							className='gg-btn-blue'
+							onClick={props.searchGlycanAdvClick}
+							disabled={
+								!props.inputValue.glyAdvSearchValError.every(
+									(err) => err === false
+								)
+							}>
+							Search Glycan
+						</Button>
+					</Row>
+				</Grid>
 			</Grid>
-
-			<Row className='gg-align-right pt-3 mb-2'>
-				<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
-					Clear Fields
-				</Button>
-				<Button
-					className='gg-btn-blue'
-					onClick={props.searchGlycanAdvClick}
-					disabled={
-						!props.inputValue.glyAdvSearchValError.every((err) => err === false)
-					}>
-					Search Glycan
-				</Button>
-			</Row>
 		</>
 	);
 };

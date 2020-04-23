@@ -8,6 +8,7 @@ import SearchAlert from '../components/alert/SearchAlert';
 import GlycanAdvancedSearch from '../components/search/GlycanAdvancedSearch';
 import CompositionSearchControl from '../components/search/CompositionSearchControl';
 import SimpleSearchControl from '../components/search/SimpleSearchControl';
+import GlycanTutorial from '../components/tutorial/GlycanTutorial';
 import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -700,8 +701,7 @@ const GlycanSearch = (props) => {
 							eventKey='composition_search'
 							title='Composition Search'
 							// className={classes.tabCompostionSearch}
-							className='tab-content-padding'
-						>
+							className='tab-content-padding'>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle='Composition Search Error - No Results Found'
@@ -722,7 +722,11 @@ const GlycanSearch = (props) => {
 								)}
 							</Container>
 						</Tab>
-						<Tab eventKey='tutorial' title='Tutorial'></Tab>
+						<Tab eventKey='tutorial' title='Tutorial'>
+							<Container>
+								<GlycanTutorial />
+							</Container>
+						</Tab>
 					</Tabs>
 				</Container>
 			</div>

@@ -9,21 +9,21 @@ import PropTypes from 'prop-types';
 
 
 const useStyles = makeStyles({
-  root: {
-    width: 480
-  },
-  input: {
-    width: 100,
-    height: 34,
-    borderRadius: 4,
-    position: "relative",
-    fontSize: 16,
-    backgroundColor: "#FFFFFF",
-  },
-  label3: {
-    fontSize: "16px",
-    fontWeight: "bold",
-  }
+  // root: {
+  //   width: 480
+  // },
+  // input: {
+  //   width: 100,
+  //   height: 34,
+  //   borderRadius: 4,
+  //   position: "relative",
+  //   fontSize: 16,
+  //   backgroundColor: "#FFFFFF",
+  // },
+  // label3: {
+  //   fontSize: "16px",
+  //   fontWeight: "bold",
+  // }
 });
 
 function valuetext(value) {

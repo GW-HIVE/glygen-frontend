@@ -426,6 +426,19 @@ ul.office-details {
 	border-radius: 4px;
 }
 
+/* =========================================
+                Tutorials
+============================================ */
+.tutorial-text-middle {
+	vertical-align: middle !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.tutorial-text-middle p {
+	width: 60%;
+}
 /* .App {
   text-align: center;
 }
