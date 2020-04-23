@@ -3,20 +3,20 @@ import React, { useState, useEffect } from "react";
 import PaginatedTable from "./PaginatedTable";
 
 const ClientPaginatedTable = props => {
-  const { data, columns, sizePerPage = 10 } = props;
+  const { data, columns, defaultSizePerPage = 20 } = props;
 
   const [page, setPage] = useState(1);
   const [pageContents, setPageContents] = useState([]);
   const [currentSort, setCurrentSort] = useState("");
   const [currentSortOrder, setCurrentSortOrder] = useState("");
+  const [sizePerPage, setSizePerPage] = useState(defaultSizePerPage);
 
   useEffect(() => {
     const start = (page - 1) * sizePerPage;
     const end = page * sizePerPage;
     const pageData = data.slice(start, end);
-
     setPageContents(pageData);
-  }, [page, currentSort, currentSortOrder]);
+  }, [page, currentSort, currentSortOrder, sizePerPage]);
 
   const handleTableChange = (
     type,
@@ -33,6 +33,7 @@ const ClientPaginatedTable = props => {
     setPage(page);
     setCurrentSort(sortField);
     setCurrentSortOrder(sortOrder);
+    setSizePerPage(sizePerPage);
   };
 
   return (

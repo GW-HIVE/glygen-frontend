@@ -1,7 +1,6 @@
 import { getJson, postToAndGetBlob } from "./api";
 import { NavLink } from "react-router-dom";
 import React from "react";
-import CustomPopover from "../components/CustomPopover";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -13,7 +12,15 @@ export const getGlycanList = (
   sort = "glytoucan_ac",
   order = "asc"
 ) => {
-  const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"sort":"${sort}","limit":${limit},"order":"${order}"}`;
+  const queryParams = {
+    id: glycanListId,
+    offset: offset,
+    sort: sort || "glytoucan_ac",
+    limit: limit,
+    order: order
+  };
+  const queryParamString = JSON.stringify(queryParams);
+  const url = `/glycan/list?query=${queryParamString}`;
   return getJson(url);
 };
 

@@ -47,11 +47,6 @@ const PaginatedTable = ({
     ] // A numeric array is also available. the purpose of above example is custom the text
   };
 
-  const selectRow = {
-    mode: "checkbox", // multi select
-    columnWidth: "60px"
-  };
-
   return (
     <div>
       <PaginationProvider
