@@ -471,7 +471,7 @@ const GlycanAdvancedSearch = (props) => {
 				<FormControl fullWidth variant='outlined' className={classes.margin}>
 					<Typography className={classes.label} gutterBottom>
 						<HelpTooltip
-							title='Glycosylated Protein:'
+							title='Glycosylated Protein'
 							text='A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore'
 							urlText='UniProtKB'
 							url='https://www.uniprot.org/'></HelpTooltip>
@@ -482,8 +482,8 @@ const GlycanAdvancedSearch = (props) => {
 						setInputValue={glyProtChange}
 						placeholder='Enter the UniProtKB Accession of your protein'
 						typeahedID='uniprot_canonical_ac'
-						length={12}
-						errorText='Entry is too long - max length is 12.'
+						length={100}
+						errorText='Entry is too long - max length is 100.'
 					/>
                     <ExampleExploreControl
                         exampleText={"Example:"}
@@ -507,8 +507,8 @@ const GlycanAdvancedSearch = (props) => {
 						setInputValue={glyMotifChange}
 						placeholder='Enter the name of a Glycan Motif contained in your glycan'
 						typeahedID='motif_name'
-						length={47}
-						errorText='Entry is too long - max length is 47.'
+						length={1000}
+						errorText='Entry is too long - max length is 1000.'
 					/>
                     <ExampleExploreControl
                         exampleText={"Example:"}
@@ -521,7 +521,7 @@ const GlycanAdvancedSearch = (props) => {
 				<FormControl fullWidth variant='outlined' className={classes.margin}>
 					<Typography className={classes.label} gutterBottom>
 						<HelpTooltip
-							title='Biosynthetic Enzyme:'
+							title='Biosynthetic Enzyme'
 							text='Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore'
 							urlText='Biosynthetic Enzyme'
 							url='https://enzyme.expasy.org/'></HelpTooltip>
@@ -532,8 +532,8 @@ const GlycanAdvancedSearch = (props) => {
 						setInputValue={glyBioEnzChange}
 						placeholder='Enter the Gene Name of an enzyme'
 						typeahedID='gene_name'
-						length={12}
-						errorText='Entry is too long - max length is 12.'
+						length={100}
+						errorText='Entry is too long - max length is 100.'
 					/>
                     <ExampleExploreControl
                         exampleText={"Example:"}
@@ -557,11 +557,11 @@ const GlycanAdvancedSearch = (props) => {
 						placeholder='Enter the Pubmed ID'
 						value={props.inputValue.glyPubId}
 						onChange={PubmedIdChange}
-						error={props.inputValue.glyPubId.length > 20}
+						error={props.inputValue.glyPubId.length > 100}
 					/>
-					{props.inputValue.glyPubId.length > 20 && (
+					{props.inputValue.glyPubId.length > 100 && (
 						<FormHelperText className={classes.errorText} error>
-							Entry is too long - max length is 20.
+							Entry is too long - max length is 100.
 						</FormHelperText>
 					)}
 					{/* <AutoTextInput
