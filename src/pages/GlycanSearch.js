@@ -163,7 +163,7 @@ const GlycanSearch = (props) => {
 					};
 				} else if (initData.simple_search_category[x].id === 'any') {
 					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['G17689DH, ', 'P14210, ', 'B4GALT1, ', 'Homo sapiens'],
+						examples: ['G17689DH', 'P14210', 'B4GALT1', 'Homo sapiens'],
 						placeholder: 'Enter the search term',
 					};
 				}

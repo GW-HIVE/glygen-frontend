@@ -9,6 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
+import HelpTooltip from "../tooltip/HelpTooltip";
+
 
 const useStyles = makeStyles({
 	// input: {
@@ -46,6 +48,17 @@ const useStyles = makeStyles({
 	// 	paddingLeft: '15px',
 	// 	paddingRight: '15px',
 	// },
+	label1: {
+        //fontSize: "14px",
+        //color: "#4A4A4A",
+        //fontWeight: "bold",
+        marginLeft: -27,
+	},
+	label2: {
+        fontSize: "12px !important",
+        fontWeight: "bold",
+		fontStyle: "italic",
+    },
 });
 
 export default function CompositionSearchControl(props) {
@@ -581,10 +594,17 @@ export default function CompositionSearchControl(props) {
 								<br className={classes.br}></br>
 								<span className={classes.span2}>{key.subtext} </span>
 							</Typography> */}
-							<Typography>
+							<Typography className={classes.label1}>
+								<HelpTooltip
+									title = {key.name}
+									text = "Explore"
+									urlText = {key.name}
+									// url = ""
+								/>
 								<strong>{key.name}</strong>
-								<br />
-								<span>{key.subtext} </span>
+							</Typography>
+							<Typography className={classes.label2}>
+							{key.subtext}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>

@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     tooltip: {
         backgroundColor: "#f5f5f9",
         color: "rgba(0, 0, 0, 0.87)",
-        maxWidth: 220,
         fontSize: 12,
         border: "1px solid #dadde9",
     },
@@ -32,7 +31,7 @@ const HelpTooltip = (props) => {
         }}
         title={
             <React.Fragment>
-                <Typography color="inherit">{props.title}</Typography>
+                <Typography color="inherit">{props.title + ":"}</Typography>
                     {props.text}{" "}
                     <a
                         href= {props.url}
@@ -54,5 +53,5 @@ HelpTooltip.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
     urlText: PropTypes.string,
-    utl: PropTypes.string,
+    url: PropTypes.string,
 };

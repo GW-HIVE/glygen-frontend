@@ -4,6 +4,7 @@ import RangeInputSlider from "../input/RangeInputSlider";
 import AutoTextInput from "../input/AutoTextInput";
 import MultiselectTextInput from "../input/MultiselectTextInput";
 import HelpTooltip from "../tooltip/HelpTooltip";
+import ExampleExploreControl from "../example/ExampleExploreControl";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -44,9 +45,6 @@ const useStyles = makeStyles((theme) => ({
     label3: {
         fontSize: "16px",
         fontWeight: "bold",
-    },
-    examples: {
-        fontSize: "14px  !important",
     },
     errorText: {
         fontSize: "14px  !important",
@@ -263,12 +261,11 @@ const GlycanAdvancedSearch = (props) => {
             <FormControl fullWidth className={classes.margin} variant="outlined">
                 <Typography className={classes.label1} gutterBottom>
                     <HelpTooltip
-                        title = "Glycan Id:"
+                        title = "Glycan Id"
                         text = "Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore"
                         urlText = "GlyTouCan"
                         url = "https://glytoucan.org/Structures/graphical"
-                    >
-                    </HelpTooltip>
+                    />
                     Glycan Id
                 </Typography>
                 <MultilineAutoTextInput
@@ -279,58 +276,27 @@ const GlycanAdvancedSearch = (props) => {
                     length={2500}
                     errorText="Entry is too long - max length is 2500."
                 />
-                <Row className={classes.examples}>
-                    <Col lg="6">
-                        <div>
-                            GlyTouCan Accession Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glycanIdChange("G17689DH");
-                                }}
-                            >
-                                G17689DH
-                            </a>
-                        </div>
-                    </Col>
-                    <Col lg="6">
-                        <div class="text-right">
-                            Explore{" "}
-                            <a
-                                href="https://glytoucan.org/Structures/graphical"
-                                target="_blank"
-                            >
-                                GlyTouCan Accession
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
-                <Row className={classes.examples}>
-                    <Col lg="6">
-                        <div>
-                            Cross References Id Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glycanIdChange("G10716");
-                                }}
-                            >
-                                G10716
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
+                <ExampleExploreControl
+                    exampleText={"GlyTouCan Accession Example:"}
+                    setInputValue={glycanIdChange}
+                    inputValue={"G17689DH"}
+                    exploreText={"GlyTouCan Accession"}
+                    exploreUrl={"https://glytoucan.org/Structures/graphical"}
+                />
+                <ExampleExploreControl
+                    exampleText={"Cross References Id Example:"}
+                    setInputValue={glycanIdChange}
+                    inputValue={"G10716"}
+                />
             </FormControl>
-
-            <div className={classes.margin}>
+            <FormControl fullWidth className={classes.margin}>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item>
                         <Typography className={classes.label1} gutterBottom>
                             <HelpTooltip
-                                title = "Monoisotopic Mass:"
+                                title = "Monoisotopic Mass"
                                 text = "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
-                            >
-                            </HelpTooltip>
+                            />
                             Monoisotopic Mass
                         </Typography>
                         <RangeInputSlider
@@ -376,11 +342,11 @@ const GlycanAdvancedSearch = (props) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-            </div>
-            <div className={classes.margin}>
+            </FormControl>
+            <FormControl fullWidth className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                      <HelpTooltip
-                        title = "Number of Sugars:"
+                        title = "Number of Sugars"
                         text = "Use the sliders to select a Number of Sugars range for your glycan(s)."
                     >
                     </HelpTooltip>
@@ -399,13 +365,13 @@ const GlycanAdvancedSearch = (props) => {
                         props.setGlyAdvSearchData({ glyNumSugars: input })
                     }
                 />
-            </div>
-            <div className={classes.margin}>
+            </FormControl>
+            <FormControl fullWidth className={classes.margin}>
                 <Grid container spacing={2} alignItems="center">
                     <Grid item>
                         <Typography className={classes.label1} gutterBottom>
                             <HelpTooltip
-                                title = "Organism:"
+                                title = "Organism"
                                 text = "An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s)."
                             >
                             </HelpTooltip>
@@ -445,11 +411,11 @@ const GlycanAdvancedSearch = (props) => {
                         </FormControl>
                     </Grid>
                 </Grid>
-            </div>
+            </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                      <HelpTooltip
-                        title = "Glycan Type:"
+                        title = "Glycan Type"
                         text = "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
                     >
                     </HelpTooltip>
@@ -478,10 +444,9 @@ const GlycanAdvancedSearch = (props) => {
                 <FormControl fullWidth variant="outlined" className={classes.margin}>
                     <Typography className={classes.label1} gutterBottom>
                         <HelpTooltip
-                            title = "Glycan Subtype:"
+                            title = "Glycan Subtype"
                             text = "Subclassifcation of Glycan types. Click to select a Glycan Subtype."
-                        >
-                        </HelpTooltip>
+                        />
                         Select Glycan Subtype
                     </Typography>
                     <Select
@@ -516,12 +481,11 @@ const GlycanAdvancedSearch = (props) => {
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                     <HelpTooltip
-                        title = "Glycosylated Protein:"
+                        title = "Glycosylated Protein"
                         text = "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore"
                         urlText = "UniProtKB"
                         url = "https://www.uniprot.org/"
-                    >
-                    </HelpTooltip>
+                    />
                  Glycosylated Protein
                 </Typography>
                 <AutoTextInput
@@ -532,42 +496,22 @@ const GlycanAdvancedSearch = (props) => {
                     length={12}
                     errorText="Entry is too long - max length is 12."
                 />
-                <Row className={classes.examples}>
-                    <Col lg="4">
-                        <div>
-                            Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glyProtChange("P14210");
-                                }}
-                            >
-                                P14210
-                            </a>
-                        </div>
-                    </Col>
-                    <Col lg="8">
-                        <div class="text-right">
-                            Explore{" "}
-                            <a
-                                href="https://www.uniprot.org/help/accession_numbers"
-                                target="_blank"
-                            >
-                                UniProtKB Accession
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
+                <ExampleExploreControl
+                    exampleText={"Example:"}
+                    setInputValue={glyProtChange}
+                    inputValue={"P14210"}
+                    exploreText={"UniProtKB Accession"}
+                    exploreUrl={"https://www.uniprot.org/help/accession_numbers"}
+                />
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                     <HelpTooltip
-                        title = "Glycan Motif:"
+                        title = "Glycan Motif"
                         text = "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore"
                         urlText = "Glycan Motif"
                         url = "https://www.uniprot.org/help/carbohyd"
-                    >
-                    </HelpTooltip>
+                    />
                     Glycan Motif
                 </Typography>
                 <AutoTextInput
@@ -578,39 +522,22 @@ const GlycanAdvancedSearch = (props) => {
                     length={47}
                     errorText="Entry is too long - max length is 47."
                 />
-                <Row className={classes.examples}>
-                    <Col lg="4">
-                        <div>
-                            Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glyMotifChange("N-Glycan complex");
-                                }}
-                            >
-                                N-Glycan complex
-                            </a>
-                        </div>
-                    </Col>
-                    <Col lg="8">
-                        <div class="text-right">
-                            Explore{" "}
-                            <a href="https://www.uniprot.org/help/carbohyd" target="_blank">
-                                Glycan Motif
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
+                <ExampleExploreControl
+                    exampleText={"Example:"}
+                    setInputValue={glyMotifChange}
+                    inputValue={"N-Glycan complex"}
+                    exploreText={"Glycan Motif"}
+                    exploreUrl={"https://www.uniprot.org/help/carbohyd"}
+                />
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                      <HelpTooltip
-                        title = "Biosynthetic Enzyme:"
+                        title = "Biosynthetic Enzyme"
                         text = "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore"
                         urlText = "Biosynthetic Enzyme"
                         url = "https://enzyme.expasy.org/"
-                    >
-                    </HelpTooltip>
+                    />
                     Biosynthetic Enzyme
                 </Typography>
                 <AutoTextInput
@@ -621,39 +548,22 @@ const GlycanAdvancedSearch = (props) => {
                     length={12}
                     errorText="Entry is too long - max length is 12."
                 />
-                <Row className={classes.examples}>
-                    <Col lg="4">
-                        <div>
-                            Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glyBioEnzChange("B4GALT1");
-                                }}
-                            >
-                                B4GALT1
-                            </a>
-                        </div>
-                    </Col>
-                    <Col lg="8">
-                        <div class="text-right">
-                            Explore{" "}
-                            <a href="https://enzyme.expasy.org/" target="_blank">
-                                Biosynthetic Enzyme
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
+                <ExampleExploreControl
+                    exampleText={"Example:"}
+                    setInputValue={glyBioEnzChange}
+                    inputValue={"B4GALT1"}
+                    exploreText={"Biosynthetic Enzyme"}
+                    exploreUrl={"https://enzyme.expasy.org/"}
+                />
             </FormControl>
             <FormControl fullWidth variant="outlined" className={classes.margin}>
                 <Typography className={classes.label1} gutterBottom>
                     <HelpTooltip
-                        title = "Pubmed ID:"
+                        title = "Pubmed ID"
                         text = "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore"
                         urlText = "Pubmed ID"
                         url = "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
-                    >
-                    </HelpTooltip>
+                    />
                     Pubmed ID
                 </Typography>
                 <OutlinedInput
@@ -673,32 +583,13 @@ const GlycanAdvancedSearch = (props) => {
                    placeholder="Enter the Pubmed ID"
                    typeahedID = "glycan_pmid"
                   /> */}
-                <Row className={classes.examples}>
-                    <Col lg="4">
-                        <div>
-                            Example:{" "}
-                            <a
-                                href="javascript:void(0)"
-                                onClick={() => {
-                                    glyPubIdChange("9449027");
-                                }}
-                            >
-                                9449027
-                            </a>
-                        </div>
-                    </Col>
-                    <Col lg="8">
-                        <div class="text-right">
-                            Explore{" "}
-                            <a
-                                href="https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
-                                target="_blank"
-                            >
-                                Pubmed ID
-                            </a>
-                        </div>
-                    </Col>
-                </Row>
+                <ExampleExploreControl
+                    exampleText={"Example:"}
+                    setInputValue={glyPubIdChange}
+                    inputValue={"9449027"}
+                    exploreText={"Pubmed ID"}
+                    exploreUrl={"https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"}
+                />
             </FormControl>
             <Row className="gg-align-right pt-3 mb-2">
                 <Button

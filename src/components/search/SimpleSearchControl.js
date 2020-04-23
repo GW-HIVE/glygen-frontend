@@ -8,8 +8,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import { Row } from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import ExampleControl from "../example/ExampleControl";
+
 
 const useStyles = makeStyles((theme) => ({
 	inputSimple: {
@@ -20,10 +22,6 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 		height: '45px',
 		padding: '0px !important',
-	},
-	anchorSimple: {
-        paddingLeft: '15px !important',
-        fontSize: '14px',
 	},
 	selectSimple: {
 		height: '45px',
@@ -36,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: '40px !important',
 		paddingBottom: '30px !important',
     },
-    examples: {
+    example: {
 		fontSize: '14px !important',
     },
 }));
@@ -97,28 +95,14 @@ export default function SimpleSearchControl(props) {
                           }
 					/>
                     {props.simpleSearchTerm.length > props.length && <FormHelperText 
-                    className={classes.examples} error>
+                    className={classes.example} error>
                       {props.errorText}
                     </FormHelperText>}
-					<Row>
-						{/* <Col lg="6"> */}
-						<div className={classes.anchorSimple}>
-							Example(s):{' '}
-							{props.simple_search &&
-								props.simple_search[props.simpleSearchCategory].examples.map(
-									(key) => (
-										<a
-											href='javascript:void(0)'
-											onClick={() => {
-												props.setSimpleSearchTerm(key.trim().replace(',', ''));
-											}}>
-											{key}
-										</a>
-									)
-								)}
-						</div>
-						{/* </Col> */}
-					</Row>
+					<ExampleControl
+						exampleMap={props.simple_search}
+						type={props.simpleSearchCategory}
+						setInputValue={(input) => {props.setSimpleSearchTerm(input)}}
+					/>
 				</Grid>
 				<Grid item className='col-sm-2'>
 					<Button
@@ -130,7 +114,7 @@ export default function SimpleSearchControl(props) {
 				</Grid>
 			</Grid>
 			<Grid container spacing={3} justify='center'>
-				<Grid className={classes.examples} item>
+				<Grid className={classes.example} item>
 					<div class='col-md-12 col-sm-12 col-xs-12' justifyContent='center'>
 						*{' '}
 						<em>
