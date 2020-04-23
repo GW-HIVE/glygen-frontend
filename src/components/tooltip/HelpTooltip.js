@@ -1,9 +1,9 @@
-import React from "react";
-import Tooltip from "@material-ui/core/Tooltip";
-import HelpOutline from "@material-ui/icons/HelpOutline";
-import { makeStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
+import HelpOutline from '@material-ui/icons/HelpOutline';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     tooltip: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HelpTooltip = (props) => {
-    const classes = useStyles();
+	const classes = useStyles();
 
     return(
     <Tooltip
@@ -36,6 +36,7 @@ const HelpTooltip = (props) => {
                     <a
                         href= {props.url}
                         target="_blank"
+                        rel="noopener noreferrer"
                     >
                         {props.urlText}
                 </a>

@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
-import { useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
@@ -105,7 +105,7 @@ const ContactForm = (props) => {
 		setEmail('');
 		setSubject('');
 		setMessage('');
-		setMessageCharsLeft(`${messageMaxLen }`);
+		setMessageCharsLeft(`${messageMaxLen}`);
 		setFormValidated(false);
 		setFNameValidated(false);
 		setLNameValidated(false);
@@ -280,7 +280,9 @@ const ContactForm = (props) => {
 							placeholder='Please tell us how we can help you.'
 							error={
 								(formValidated || messageValidated) &&
-								(message === '' || message.length < 5 || message.length > messageMaxLen)
+								(message === '' ||
+									message.length < 5 ||
+									message.length > messageMaxLen)
 							}
 							onChange={(e) => {
 								setMessage(e.target.value);
@@ -367,4 +369,174 @@ const ContactForm = (props) => {
 };
 export default ContactForm;
 
+// Simple search
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
+const useStyles = makeStyles((theme) => ({
+	// inputSimple: {
+	// 	borderRadius: 4,
+	// 	position: 'left',
+	// 	backgroundColor: theme.palette.background.paper,
+	// 	fontSize: 16,
+	// 	width: '100%',
+	// 	height: '45px',
+	// 	padding: '0px !important',
+	// },
+	// anchorSimple: {
+	// 	paddingLeft: '15px !important',
+	// 	fontSize: '14px',
+	// },
+	// selectSimple: {
+	// 	height: '45px',
+	//   },
+	//   label3: {
+	// 	fontSize: '16px',
+	// 	fontWeight: 'bold',
+	// },
+	// simpleContainer: {
+	// 	paddingLeft: '40px !important',
+	// 	paddingBottom: '30px !important',
+	//   },
+	examples: {
+		fontSize: '14px !important',
+	},
+}));
+
+export default function SimpleSearchControl(props) {
+	const classes = useStyles();
+
+	const simpleSearchCategoryOnChange = (event) => {
+		props.setSimpleSearchCategory(event.target.value);
+	};
+
+	const simpleSearchTermOnChange = (event) => {
+		props.setSimpleSearchTerm(event.target.value);
+	};
+
+	return (
+		<div>
+			<Grid
+				// container
+				// spacing={3}
+				// className={classes.simpleContainer}
+				justify='center'>
+				{/* <Grid item className='col-sm-3'> */}
+				<Row>
+					<Col sm={3}>
+						<FormControl variant='outlined' fullWidth>
+							<InputLabel className={classes.label3}>Category</InputLabel>
+							<Select
+								value={props.simpleSearchCategory}
+								onChange={simpleSearchCategoryOnChange}
+								highlight={false}
+								defaultValue='any'
+								// classes={{
+								// 	outlined: classes.selectOutlined,
+								// 	root: 'select-menu',
+								// }}
+								// className={classes.selectSimple}
+								labelWidth={80}>
+								{props.simple_search_category &&
+									props.simple_search_category
+										.sort()
+										.map((key) => (
+											<MenuItem value={key.id}>{key.display}</MenuItem>
+										))}
+							</Select>
+						</FormControl>
+						{/* </Grid> */}
+					</Col>
+					{/* <Grid item className='col-sm-6'> */}
+					<Col sm={7} space={5} className='simple-search-input-mobile'>
+						<OutlinedInput
+							fullWidth
+							// className={classes.inputSimple}
+							placeholder={
+								props.simple_search !== undefined
+									? props.simple_search[props.simpleSearchCategory].placeholder
+									: ''
+							}
+							value={props.simpleSearchTerm}
+							onChange={simpleSearchTermOnChange}
+							error={props.simpleSearchTerm.length > props.length}
+						/>
+						{props.simpleSearchTerm.length > props.length && (
+							<FormHelperText className={classes.examples} error>
+								{props.errorText}
+							</FormHelperText>
+						)}
+						{/* <Row> */}
+						{/* <Col lg="6"> */}
+						<div className={classes.anchorSimple}>
+							Example(s):{' '}
+							{props.simple_search &&
+								props.simple_search[props.simpleSearchCategory].examples.map(
+									(key) => (
+										// eslint-disable-next-line
+										<a
+											// eslint-disable-next-line
+											href='javascript:void(0)'
+											onClick={() => {
+												props.setSimpleSearchTerm(key.trim().replace(',', ''));
+											}}>
+											{key}
+										</a>
+									)
+								)}
+						</div>
+						{/* </Col> */}
+						{/* </Row> */}
+						{/* </Grid> */}
+					</Col>
+					{/* <Grid item className='col-sm-2'> */}
+					<Col sm={2}>
+						<Button
+							className='gg-btn-blue gg-btn-simple-search'
+							disabled={
+								props.simpleSearchTerm.trim() === '' ||
+								props.simpleSearchTerm.length > props.length
+							}
+							onClick={props.searchSimpleClick}>
+							Search
+						</Button>
+						{/* </Grid> */}
+					</Col>
+				</Row>
+			</Grid>
+			<br />
+			<Grid container justify='center'>
+				<Grid className={classes.examples} item>
+					*{' '}
+					<em>
+						"<strong>Any category</strong>"
+					</em>{' '}
+					allows you to search an entire GlyGen database, including the context
+					match. *
+				</Grid>
+			</Grid>
+		</div>
+	);
+}
+
+SimpleSearchControl.propTypes = {
+	simpleSearchCategory: PropTypes.string,
+	simpleSearchTerm: PropTypes.string,
+	simple_search_category: PropTypes.array,
+	simple_search: PropTypes.object,
+	errorText: PropTypes.string,
+	length: PropTypes.number,
+	searchSimpleClick: PropTypes.func,
+	setGlySimpleSearchCategory: PropTypes.func,
+	setGlySimpleSearchTerm: PropTypes.func,
+};
