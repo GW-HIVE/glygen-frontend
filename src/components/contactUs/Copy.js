@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
-import { useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 // import { getJson } from '../data/api';
 import { getTstJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
@@ -105,7 +105,7 @@ const ContactForm = (props) => {
 		setEmail('');
 		setSubject('');
 		setMessage('');
-		setMessageCharsLeft(`${messageMaxLen }`);
+		setMessageCharsLeft(`${messageMaxLen}`);
 		setFormValidated(false);
 		setFNameValidated(false);
 		setLNameValidated(false);
@@ -280,7 +280,9 @@ const ContactForm = (props) => {
 							placeholder='Please tell us how we can help you.'
 							error={
 								(formValidated || messageValidated) &&
-								(message === '' || message.length < 5 || message.length > messageMaxLen)
+								(message === '' ||
+									message.length < 5 ||
+									message.length > messageMaxLen)
 							}
 							onChange={(e) => {
 								setMessage(e.target.value);
