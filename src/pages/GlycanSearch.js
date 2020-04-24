@@ -13,6 +13,7 @@ import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import '../css/Search.css';
+import glycanSearchData from '../data/json/glycanSearch';
 
 const useStyles = makeStyles((theme) => ({
 	// tabs: {
@@ -140,36 +141,6 @@ const GlycanSearch = (props) => {
 		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
-			let simpleSearchExamples = {};
-			for (let x = 0; x < initData.simple_search_category.length; x++) {
-				if (initData.simple_search_category[x].id === 'enzyme') {
-					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['B4GALT1'],
-						placeholder: 'Enter the enzyme',
-					};
-				} else if (initData.simple_search_category[x].id === 'glycan') {
-					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['G17689DH'],
-						placeholder: 'Enter the GlyTouCan Accession',
-					};
-				} else if (initData.simple_search_category[x].id === 'organism') {
-					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['Homo sapiens'],
-						placeholder: 'Enter the organism',
-					};
-				} else if (initData.simple_search_category[x].id === 'protein') {
-					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['P14210'],
-						placeholder: 'Enter the UniProtKB Accession',
-					};
-				} else if (initData.simple_search_category[x].id === 'any') {
-					simpleSearchExamples[initData.simple_search_category[x].id] = {
-						examples: ['G17689DH', 'P14210', 'B4GALT1', 'Homo sapiens'],
-						placeholder: 'Enter the search term',
-					};
-				}
-			}
-			initData.simple_search = simpleSearchExamples;
 
 			setGlyAdvSearchData({
 				glyMassType: initData.glycan_mass.native.name,
@@ -665,12 +636,12 @@ const GlycanSearch = (props) => {
 										simpleSearchCategory={glySimpleSearchCategory}
 										simpleSearchTerm={glySimpleSearchTerm}
 										simple_search_category={initData.simple_search_category}
-										simple_search={initData.simple_search}
+										simple_search={glycanSearchData.simple_search.categories}
 										searchSimpleClick={searchGlycanSimpleClick}
 										setSimpleSearchCategory={setGlySimpleSearchCategory}
 										setSimpleSearchTerm={setGlySimpleSearchTerm}
-										length={20}
-										errorText='Entry is too long - max length is 20.'
+										length={glycanSearchData.simple_search.length}
+										errorText={glycanSearchData.simple_search.errorText}
 									/>
 								)}
 							</Container>

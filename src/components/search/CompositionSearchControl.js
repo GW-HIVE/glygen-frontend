@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 import HelpTooltip from "../tooltip/HelpTooltip";
+import stringConstants from '../../data/json/stringConstants';
 
 
 const useStyles = makeStyles({
@@ -69,6 +70,8 @@ export default function CompositionSearchControl(props) {
 	const [redoDisabled, setRedoDisabled] = useState(true);
 	const [undoDisabled, setUndoDisabled] = useState(true);
 	const [searchDisabled, setSearchDisabled] = useState(false);
+
+	let composition = stringConstants.glycan.composition_search;
 
 	const minInputChange = (event) => {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
@@ -588,23 +591,17 @@ export default function CompositionSearchControl(props) {
 						spacing={2}
 						justify='center'>
 						<Grid item xs={12} sm={5}>
-							{/* <Grid item className={'col-sm-5'}> */}
-							{/* <Typography className={classes.label} gutterBottom>
-								{key.name}
-								<br className={classes.br}></br>
-								<span className={classes.span2}>{key.subtext} </span>
-							</Typography> */}
 							<Typography className={classes.label1}>
 								<HelpTooltip
-									title = {key.name}
-									text = "Explore"
-									urlText = {key.name}
-									// url = ""
+									title = {composition[key.residue].tooltip.title}
+									text = {composition[key.residue].tooltip.text}
+									urlText = {composition[key.residue].tooltip.urlText}
+									url = {composition[key.residue].tooltip.url}
 								/>
-								<strong>{key.name}</strong>
+								<strong>{composition[key.residue].name}</strong>
 							</Typography>
 							<Typography className={classes.label2}>
-							{key.subtext}
+							{composition[key.residue].subtext}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>
@@ -626,10 +623,10 @@ export default function CompositionSearchControl(props) {
 									}
 									margin='dense'
 									// className={classes.select}
-									// classes={{
-									// 	outlined: classes.selectOutlined,
-									// 	// root: 'select-menu',
-									// }}
+									classes={{
+										//outlined: classes.selectOutlined,
+									 root: 'select-menu',
+									}}
 								>
 									<MenuItem value={'maybe'}>Maybe</MenuItem>
 									<MenuItem value={'yes'}>Yes</MenuItem>

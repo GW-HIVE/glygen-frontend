@@ -18,6 +18,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
 import '../../css/Search.css';
+import glycanSearch from '../../data/json/glycanSearch';
+import stringConstants from '../../data/json/stringConstants';
 
 const useStyles = makeStyles((theme) => ({
 	// margin: {
@@ -75,7 +77,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GlycanAdvancedSearch = (props) => {
-	const classes = useStyles();
+    const classes = useStyles();
+    let glycan = stringConstants.glycan;
+    let glycanAdvSearch = glycanSearch.advanced_search;
 
 	function sortDropdown(a, b) {
 		if (a.name < b.name) {
@@ -269,32 +273,25 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl fullWidth className={classes.margin} variant='outlined'>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-								title='Glycan Id'
-								text='Unique accessions assigned to the registered glycan structures in GlyTouCan database. Enter complete or partial GlyTouCan Accession of your glycan. Explore'
-								urlText='GlyTouCan'
-								url='https://glytoucan.org/Structures/graphical'></HelpTooltip>
-							Glycan Id
+                                title={glycan.glycan_id.tooltip.title}
+                                text={glycan.glycan_id.tooltip.text}
+                                urlText={glycan.glycan_id.tooltip.urlText}
+                                url={glycan.glycan_id.tooltip.url}
+                            />
+                            {glycan.glycan_id.name}
 						</Typography>
 						<MultilineAutoTextInput
 							fullWidth
 							inputValue={props.inputValue.glycanId}
-							setInputValue={glycanIdChange}
-							placeholder='Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id'
-							typeahedID='glytoucan_ac'
-							length={2500}
-							errorText='Entry is too long - max length is 2500.'
+                            setInputValue={glycanIdChange}
+                            placeholder={glycanAdvSearch.glycan_id.placeholder}
+							typeahedID={glycanAdvSearch.glycan_id.typeahedID}
+							length={glycanAdvSearch.glycan_id.length}
+							errorText={glycanAdvSearch.glycan_id.errorText}
 						/>
-						<ExampleExploreControl
-							exampleText={'GlyTouCan Accession Example:'}
+                        <ExampleExploreControl
 							setInputValue={glycanIdChange}
-							inputValue={'G17689DH'}
-							exploreText={'GlyTouCan Accession'}
-							exploreUrl={'https://glytoucan.org/Structures/graphical'}
-						/>
-						<ExampleExploreControl
-							exampleText={'Cross References Id Example:'}
-							setInputValue={glycanIdChange}
-							inputValue={'G10716'}
+							inputValue={glycanAdvSearch.glycan_id.examples}
 						/>
 					</FormControl>
 				</Grid>
@@ -305,9 +302,10 @@ const GlycanAdvancedSearch = (props) => {
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
 									<HelpTooltip
-										title='Monoisotopic Mass'
-										text='The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s).'></HelpTooltip>
-									Monoisotopic Mass
+                                        title={glycan.mass.tooltip.title}
+                                        text={glycan.mass.tooltip.text}
+                                    />
+                                    {glycan.mass.name}
 								</Typography>
 								<RangeInputSlider
 									step={10}
@@ -333,16 +331,16 @@ const GlycanAdvancedSearch = (props) => {
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>
 									<InputLabel className={classes.labelSelect}>
-										Mass Type
+                                        {glycan.mass.type_name}
 									</InputLabel>
 									<Select
 										value={props.inputValue.glyMassType}
 										onChange={glyMassTypeOnChange}
 										highlight={false}
-										// classes={{
-										// 	outlined: classes.selectOutlined,
-										// 	root: 'select-menu',
-										// }}
+										classes={{
+											//outlined: classes.selectOutlined,
+											root: 'select-menu',
+										}}
 										className={classes.select}
 										labelWidth={85}>
 										{props.initData.glycan_mass &&
@@ -367,9 +365,10 @@ const GlycanAdvancedSearch = (props) => {
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
 									<HelpTooltip
-										title='Number of Sugars'
-										text='Use the sliders to select a Number of Sugars range for your glycan(s).'></HelpTooltip>
-									No of Sugars
+                                        title={glycan.number_monosaccharides.tooltip.title}
+                                        text={glycan.number_monosaccharides.tooltip.text}
+                                    />
+                                    {glycan.number_monosaccharides.name}
 								</Typography>
 								<RangeInputSlider
 									step={1}
@@ -398,9 +397,10 @@ const GlycanAdvancedSearch = (props) => {
 									gutterBottom
 									style={{ marginBottom: '0' }}>
 									<HelpTooltip
-										title='Organism'
-										text='An individual animal, plant, or single-celled life form. Click to select an Organism that makes your glycan(s).'></HelpTooltip>
-									Organisms
+                                        title={glycan.organism.tooltip.title}
+                                        text={glycan.organism.tooltip.text}
+                                    />
+                                    {glycan.organism.name}
 								</Typography>
 								<MultiselectTextInput
 									options={
@@ -410,7 +410,7 @@ const GlycanAdvancedSearch = (props) => {
 									}
 									inputValue={props.inputValue.glyOrganisms}
 									setInputValue={glyOrgChange}
-									placeholder='Click to select one or multiple Organisms'
+									placeholder={glycanAdvSearch.organism.placeholder}
 								/>
 							</Grid>
 							<Grid item xs={3} sm={3}>
@@ -422,7 +422,7 @@ const GlycanAdvancedSearch = (props) => {
 										margin='dense'
 										variant='outlined'
 										classes={{
-											outlined: classes.selectOutlined,
+											//outlined: classes.selectOutlined,
 											root: 'select-menu',
 										}}
 										value={props.inputValue.glyOrgOperation}
@@ -445,9 +445,10 @@ const GlycanAdvancedSearch = (props) => {
 						className={classes.margin}>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-								title='Glycan Type'
-								text='The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type.'></HelpTooltip>
-							Glycan Type
+                                title={glycan.glycan_type.tooltip.title}
+                                text={glycan.glycan_type.tooltip.text}
+                            />
+                            {glycan.glycan_type.name}
 						</Typography>
 						<Select
 							value={props.inputValue.glyType}
@@ -455,7 +456,7 @@ const GlycanAdvancedSearch = (props) => {
 							onChange={glyTypeOnChange}
 							className={classes.select1}
 							classes={{
-								outlined: classes.selectOutlined,
+								//outlined: classes.selectOutlined,
 								root: 'select-menu',
 							}}>
 							<MenuItem value=''>Select Glycan Type</MenuItem>
@@ -479,9 +480,10 @@ const GlycanAdvancedSearch = (props) => {
 							className={classes.margin}>
 							<Typography className={classes.label} gutterBottom>
 								<HelpTooltip
-									title='Glycan Subtype'
-									text='Subclassifcation of Glycan types. Click to select a Glycan Subtype.'></HelpTooltip>
-								Select Glycan Subtype
+                                    title={glycan.glycan_subtype.tooltip.title}
+                                    text={glycan.glycan_subtype.tooltip.text}
+                                />
+                            {glycan.glycan_subtype.name}
 							</Typography>
 							<Select
 								value={props.inputValue.glySubType}
@@ -489,7 +491,7 @@ const GlycanAdvancedSearch = (props) => {
 								onChange={glySubTypeOnChange}
 								className={classes.select1}
 								classes={{
-									outlined: classes.selectOutlined,
+									//outlined: classes.selectOutlined,
 									root: 'select-menu',
 								}}
 								displayPrint='none'>
@@ -520,26 +522,24 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-								title='Glycosylated Protein'
-								text='A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore'
-								urlText='UniProtKB'
-								url='https://www.uniprot.org/'></HelpTooltip>
-							Glycosylated Protein
+                                title={glycan.protein_identifier.tooltip.title}
+                                text={glycan.protein_identifier.tooltip.text}
+                                urlText={glycan.protein_identifier.tooltip.urlText}
+                                url={glycan.protein_identifier.tooltip.url}
+                            />
+                            {glycan.protein_identifier.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyProt}
-							setInputValue={glyProtChange}
-							placeholder='Enter the UniProtKB Accession of your protein'
-							typeahedID='uniprot_canonical_ac'
-							length={100}
-							errorText='Entry is too long - max length is 100.'
+                            setInputValue={glyProtChange}
+                            placeholder={glycanAdvSearch.protein_identifier.placeholder}
+							typeahedID={glycanAdvSearch.protein_identifier.typeahedID}
+							length={glycanAdvSearch.protein_identifier.length}
+							errorText={glycanAdvSearch.protein_identifier.errorText}
 						/>
-						<ExampleExploreControl
-							exampleText={'Example:'}
+                        <ExampleExploreControl
 							setInputValue={glyProtChange}
-							inputValue={'P14210'}
-							exploreText={'UniProtKB Accession'}
-							exploreUrl={'https://www.uniprot.org/help/accession_numbers'}
+							inputValue={glycanAdvSearch.protein_identifier.examples}
 						/>
 					</FormControl>
 				</Grid>
@@ -551,26 +551,24 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-								title='Glycan Motif'
-								text='A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore'
-								urlText='Glycan Motif'
-								url='https://www.uniprot.org/help/carbohyd'></HelpTooltip>
-							Glycan Motif
+                                title={glycan.glycan_motif.tooltip.title}
+                                text={glycan.glycan_motif.tooltip.text}
+                                urlText={glycan.glycan_motif.tooltip.urlText}
+                                url={glycan.glycan_motif.tooltip.url}
+                            />
+                            {glycan.glycan_motif.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyMotif}
-							setInputValue={glyMotifChange}
-							placeholder='Enter the name of a Glycan Motif contained in your glycan'
-							typeahedID='motif_name'
-							length={1000}
-							errorText='Entry is too long - max length is 1000.'
+                            setInputValue={glyMotifChange}
+                            placeholder={glycanAdvSearch.glycan_motif.placeholder}
+							typeahedID={glycanAdvSearch.glycan_motif.typeahedID}
+							length={glycanAdvSearch.glycan_motif.length}
+							errorText={glycanAdvSearch.glycan_motif.errorText}
 						/>
-						<ExampleExploreControl
-							exampleText={'Example:'}
+                        <ExampleExploreControl
 							setInputValue={glyMotifChange}
-							inputValue={'N-Glycan complex'}
-							exploreText={'Glycan Motif'}
-							exploreUrl={'https://www.uniprot.org/help/carbohyd'}
+							inputValue={glycanAdvSearch.glycan_motif.examples}
 						/>
 					</FormControl>
 				</Grid>
@@ -582,26 +580,24 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-								title='Biosynthetic Enzyme'
-								text='Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore'
-								urlText='Biosynthetic Enzyme'
-								url='https://enzyme.expasy.org/'></HelpTooltip>
-							Biosynthetic Enzyme
+                                title={glycan.enzyme.tooltip.title}
+                                text={glycan.enzyme.tooltip.text}
+                                urlText={glycan.enzyme.tooltip.urlText}
+                                url={glycan.enzyme.tooltip.url}
+                            />
+                            {glycan.enzyme.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyBioEnz}
-							setInputValue={glyBioEnzChange}
-							placeholder='Enter the Gene Name of an enzyme'
-							typeahedID='gene_name'
-							length={100}
-							errorText='Entry is too long - max length is 100.'
+                            setInputValue={glyBioEnzChange}
+                            placeholder={glycanAdvSearch.enzyme.placeholder}
+							typeahedID={glycanAdvSearch.enzyme.typeahedID}
+							length={glycanAdvSearch.enzyme.length}
+							errorText={glycanAdvSearch.enzyme.errorText}
 						/>
-						<ExampleExploreControl
-							exampleText={'Example:'}
+                        <ExampleExploreControl
 							setInputValue={glyBioEnzChange}
-							inputValue={'B4GALT1'}
-							exploreText={'Biosynthetic Enzyme'}
-							exploreUrl={'https://enzyme.expasy.org/'}
+							inputValue={glycanAdvSearch.enzyme.examples}
 						/>
 					</FormControl>
 				</Grid>
@@ -614,35 +610,33 @@ const GlycanAdvancedSearch = (props) => {
 						className={classes.margin}>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-								title='Pubmed ID'
-								text='A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore'
-								urlText='Pubmed ID'
-								url='https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'></HelpTooltip>
-							Pubmed ID
+                                title={glycan.pmid.tooltip.title}
+                                text={glycan.pmid.tooltip.text}
+                                urlText={glycan.pmid.tooltip.urlText}
+                                url={glycan.pmid.tooltip.url}
+                            />
+                            {glycan.pmid.name}
 						</Typography>
 						<OutlinedInput
-							className={classes.input}
-							placeholder='Enter the Pubmed ID'
-							value={props.inputValue.glyPubId}
-							onChange={PubmedIdChange}
-							error={props.inputValue.glyPubId.length > 100}
+                            className={classes.input}
+                            placeholder={glycanAdvSearch.pmid.placeholder}
+                            value={props.inputValue.glyPubId}
+                            onChange={PubmedIdChange}
+                            error={props.inputValue.glyPubId.length > glycanAdvSearch.pmid.length}
 						/>
-						{props.inputValue.glyPubId.length > 100 && (
+						{props.inputValue.glyPubId.length > glycanAdvSearch.pmid.length && (
 							<FormHelperText className={classes.errorText} error>
-								Entry is too long - max length is 100.
+								{glycanAdvSearch.pmid.errorText}
 							</FormHelperText>
 						)}
 						{/* <AutoTextInput
-                   inputValue={glyPubId} setInputValue={glycPubIdChange}
-                   placeholder="Enter the Pubmed ID"
-                   typeahedID = "glycan_pmid"
-                  /> */}
-						<ExampleExploreControl
-							exampleText={'Example:'}
+                        inputValue={glyPubId} setInputValue={glycPubIdChange}
+                        placeholder="Enter the Pubmed ID"
+                        typeahedID = "glycan_pmid"
+                        /> */}
+                        <ExampleExploreControl
 							setInputValue={glyPubIdChange}
-							inputValue={'9449027'}
-							exploreText={'Pubmed ID'}
-							exploreUrl={'https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/'}
+							inputValue={glycanAdvSearch.pmid.examples}
 						/>
 					</FormControl>
 				</Grid>

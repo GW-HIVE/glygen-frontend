@@ -11,34 +11,44 @@ const useStyles = makeStyles((theme) => ({
 
 const ExampleExploreControl = (props) => {
     const classes = useStyles();
+    function sortExamples(a, b) {
+		if (a.order_id < b.order_id) {
+			return -1;
+		} else if (b.order_id < a.order_id) {
+			return 1;
+		}
+		return 0;
+	}
 
     return(
-        <Row className={classes.example}>
-        <Col lg="6">
+        <>
+        {props.inputValue.sort(sortExamples).map((obj) => (<Row className={classes.example}>
+        <Col>
             <div>
-                {props.exampleText}{" "}
+                {obj.example.name}{" "}
                 <a
                     href="javascript:void(0)"
                     onClick={() => {
-                        props.setInputValue(props.inputValue);
+                        props.setInputValue(obj.example.id);
                     }}
                 >
-                    {props.inputValue}
+                    {obj.example.id}
                 </a>
             </div>
         </Col>
-        {props.exploreText && <Col lg="6">
+        {obj.explore && <Col>
             <div class="text-right">
                 Explore{" "}
                 <a
-                    href={props.exploreUrl}
+                    href={obj.explore.url}
                     target="_blank"
                 >
-                    {props.exploreText}
+                    {obj.explore.id}
                 </a>
             </div>
         </Col>}
-    </Row>
+    </Row>))}
+    </>
     );
 }
 
