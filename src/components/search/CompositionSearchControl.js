@@ -544,7 +544,7 @@ export default function CompositionSearchControl(props) {
 				spacing={2}
 				justify='center'>
 				{/* <Grid item className={'col-sm-5'}> */}
-				<Grid item xs={4} sm={5} md={5}>
+				<Grid item xs={4} sm={4} md={4}>
 					<Typography className={classes.labelHeader} gutterBottom>
 						Residue
 					</Typography>
@@ -587,7 +587,7 @@ export default function CompositionSearchControl(props) {
 						style={{ margin: '0  auto' }}
 						spacing={2}
 						justify='center'>
-						<Grid item xs={12} sm={5}>
+						<Grid item xs={12} sm={4}>
 							{/* <Grid item className={'col-sm-5'}> */}
 							{/* <Typography className={classes.label} gutterBottom>
 								{key.name}

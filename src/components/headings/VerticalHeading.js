@@ -22,15 +22,16 @@ export default function VerticalHeading(props) {
 								{post.h2textTop}{' '}
 								<span>
 									<strong>{post.h2textTopStrongAfter}</strong>
-								</span>
-								<br />
+								</span>{' '}
+								{post.h2textTop2} <br />
 								<span>
 									<strong>{post.h2textBottomStrongBefore}</strong>
 								</span>{' '}
 								{post.h2textBottom}{' '}
 								<span>
 									<strong>{post.h2textBottomStrongAfter}</strong>
-								</span>
+								</span>{' '}
+								{post.h2textBottom2}
 							</h2>
 							<br />
 							<p>{post.pText}</p>

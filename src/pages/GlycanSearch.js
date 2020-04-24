@@ -722,8 +722,11 @@ const GlycanSearch = (props) => {
 								)}
 							</Container>
 						</Tab>
-						<Tab eventKey='tutorial' title='Tutorial'>
-							<Container>
+						<Tab
+							eventKey='tutorial'
+							title='Tutorial'
+							className='tab-content-padding'>
+							<Container className='tab-content-border'>
 								<GlycanTutorial />
 							</Container>
 						</Tab>
