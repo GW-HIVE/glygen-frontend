@@ -19,8 +19,8 @@ export default function GlycanTutorial(props) {
 		h2textTop: 'Use',
 		h2textTopStrongAfter: 'Advanced',
 		h2textTop2: 'Glycan Search',
-  };
-  const vertHeadAdvancedeOne = {
+	};
+	const vertHeadAdvancedeOne = {
 		h5VerticalText: 'Advanced',
 		h2textTop: 'Finding a',
 		h2textTopStrongAfter: 'glycan',
@@ -40,7 +40,7 @@ export default function GlycanTutorial(props) {
 
 	return (
 		<>
-			<div className='content-box-sm'>
+			<div style={{ paddingBottom: '20px' }}>
 				<HorizontalHeading post={horHeadSimpleOne} />
 			</div>
 			<Grid container spacing={3} justify='center'>
@@ -159,52 +159,52 @@ export default function GlycanTutorial(props) {
 				</Grid>
 			</Grid>
 			{/* Advanced Search Finding a glycan using its GlyTouCan Accession */}
-				{/* <div className='content-box-sm'> */}
-        <VerticalHeading post={vertHeadAdvancedeOne} />
-				{/* </div> */}
-				<Grid container spacing={3} justify='center'>
-					<Grid item xs={12} sm={6}>
-						<Iframe
-							width='100%'
-							height='305'
-							src='https://www.youtube.com/embed/BlhCYJM3G30?rel=0'
-							frameborder='0'
-							marginwidth='0'
-							marginheight='0'
-							scrolling='no'
-							allow='autoplay; encrypted-media'
-							allowfullscreen></Iframe>
-						<div style={{ marginBottom: '5px' }}>
+			{/* <div className='content-box-sm'> */}
+			<VerticalHeading post={vertHeadAdvancedeOne} />
+			{/* </div> */}
+			<Grid container spacing={3} justify='center'>
+				<Grid item xs={12} sm={6}>
+					<Iframe
+						width='100%'
+						height='305'
+						src='https://www.youtube.com/embed/BlhCYJM3G30?rel=0'
+						frameborder='0'
+						marginwidth='0'
+						marginheight='0'
+						scrolling='no'
+						allow='autoplay; encrypted-media'
+						allowfullscreen></Iframe>
+					<div style={{ marginBottom: '5px' }}>
+						{' '}
+						<strong>
 							{' '}
-							<strong>
-								{' '}
-								<a
-									href='https://www.youtube.com/embed/BlhCYJM3G30?rel=0'
-									title='How To Use Advanced Glycan Search Tutorial'
-									target='_blank'
-									rel='noopener noreferrer'>
-									How To Use Advanced Glycan Search Tutorial
-								</a>{' '}
-							</strong>{' '}
-							from <strong>GlyGen</strong>{' '}
-						</div>
-					</Grid>
-					<Grid item xs={12} sm={6} className='tutorial-text-middle'>
-						<Typography>
-							This tutorial describes how to initiate the exploration of GlyGen
-							data by searching for a specific glycan when its GlyTouCan
-							accession is known.
-						</Typography>
-						<br />
-						<Typography>
-							This tutorial was created using a portal version: 1.0.1
-							(09/19/2018).
-						</Typography>
-					</Grid>
+							<a
+								href='https://www.youtube.com/embed/BlhCYJM3G30?rel=0'
+								title='How To Use Advanced Glycan Search Tutorial'
+								target='_blank'
+								rel='noopener noreferrer'>
+								How To Use Advanced Glycan Search Tutorial
+							</a>{' '}
+						</strong>{' '}
+						from <strong>GlyGen</strong>{' '}
+					</div>
 				</Grid>
+				<Grid item xs={12} sm={6} className='tutorial-text-middle'>
+					<Typography>
+						This tutorial describes how to initiate the exploration of GlyGen
+						data by searching for a specific glycan when its GlyTouCan accession
+						is known.
+					</Typography>
+					<br />
+					<Typography>
+						This tutorial was created using a portal version: 1.0.1
+						(09/19/2018).
+					</Typography>
+				</Grid>
+			</Grid>
 			{/* ADVANCED SEARCH: How to Use Advanced Glycan Search */}
 			{/* <div className='content-box-sm'> */}
-				<VerticalHeading post={vertHeadAdvancedeTwo} />
+			<VerticalHeading post={vertHeadAdvancedeTwo} />
 			{/* </div> */}
 			<Grid container spacing={3} justify='center'>
 				<Grid item xs={12} sm={6} className='tutorial-text-middle'>
