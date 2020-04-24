@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react';
+import React from 'react';
+// import React, { useReducer } from 'react';
 // import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Tooltip from '@material-ui/core/Tooltip';
 import SelectAllIcon from '@material-ui/icons/SelectAll';
-import { Link, rgbToHex, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 // import Popover from '@material-ui/core/Popover';
 // import Button from '@material-ui/core/Button';
 const options = ['Title', 'Authors', 'Journal', 'Date', 'PMID'];

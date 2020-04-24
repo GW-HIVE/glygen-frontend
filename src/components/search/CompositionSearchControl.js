@@ -50,16 +50,16 @@ const useStyles = makeStyles({
 	// 	paddingRight: '15px',
 	// },
 	label1: {
-        //fontSize: "14px",
-        //color: "#4A4A4A",
-        //fontWeight: "bold",
-        marginLeft: -27,
+		//fontSize: "14px",
+		//color: "#4A4A4A",
+		//fontWeight: "bold",
+		marginLeft: -27,
 	},
 	label2: {
-        fontSize: "12px !important",
-        fontWeight: "bold",
-		fontStyle: "italic",
-    },
+		fontSize: '12px !important',
+		fontWeight: 'bold',
+		fontStyle: 'italic',
+	},
 });
 
 export default function CompositionSearchControl(props) {
@@ -547,7 +547,7 @@ export default function CompositionSearchControl(props) {
 				spacing={2}
 				justify='center'>
 				{/* <Grid item className={'col-sm-5'}> */}
-				<Grid item xs={4} sm={5} md={5}>
+				<Grid item xs={4} sm={4} md={4}>
 					<Typography className={classes.labelHeader} gutterBottom>
 						Residue
 					</Typography>
@@ -590,7 +590,7 @@ export default function CompositionSearchControl(props) {
 						style={{ margin: '0  auto' }}
 						spacing={2}
 						justify='center'>
-						<Grid item xs={12} sm={5}>
+						<Grid item xs={12} sm={4}>
 							<Typography className={classes.label1}>
 								<HelpTooltip
 									title = {composition[key.residue].tooltip.title}
@@ -601,7 +601,7 @@ export default function CompositionSearchControl(props) {
 								<strong>{composition[key.residue].name}</strong>
 							</Typography>
 							<Typography className={classes.label2}>
-							{composition[key.residue].subtext}
+								{composition[key.residue].subtext}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>

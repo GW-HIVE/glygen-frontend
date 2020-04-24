@@ -14,8 +14,8 @@ export default function HorizontalHeading(props) {
 				<Row>
 					<Grid item xs={12} sm={12} md={12} lg={12} className='text-center'>
 						<div className='horizontal-heading'>
-							<Typography variant='h5'>{post.h5VerticalText}</Typography>
-							<Typography variant='h4'>
+							<h5>{post.h5VerticalText}</h5>
+							<h2>
 								<span>
 									<strong>{post.h2textTopStrongBefore}</strong>
 								</span>{' '}
@@ -31,7 +31,7 @@ export default function HorizontalHeading(props) {
 								<span>
 									<strong>{post.h2textBottomStrongAfter}</strong>
 								</span>
-							</Typography>
+							</h2>
 							<Typography variant='p' style={{ fontSize: '18px' }}>
 								{post.pText}
 							</Typography>
