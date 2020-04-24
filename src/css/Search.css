@@ -27,21 +27,21 @@
 .tab-pane {
 	margin-top: -1px !important;
 	background-color: #fff !important;
-	border: 0 !important;
-	border-top: 1px solid #eee !important;
-	padding: 15px 0;
+	border: 1px solid #ddd !important;
+	/* border-top: 1px solid #eee !important; */
+	/* padding: 15px 0; */
 	min-width: inherit;
+	margin-bottom: 40px;
 }
 .tab-content-padding {
 	padding: 30px 40px;
 }
-.tab-content-border {
+/* .tab-content-border {
 	padding: 30px;
-	/* border: 1px solid #ddd; */
 	-webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
-}
+} */
 
 /* .tab-pane {
 	border: 1px solid red ;
