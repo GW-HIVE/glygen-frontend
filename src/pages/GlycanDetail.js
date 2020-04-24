@@ -8,9 +8,8 @@ import { NavLink } from 'react-router-dom';
 import Sidebar from '../components/navigation/Sidebar';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
-import { Link, rgbToHex, Typography } from '@material-ui/core';
+import { Link,Typography } from '@material-ui/core';
 import { Navbar, Col, Row, Image } from 'react-bootstrap';
-// import { FaReadme } from 'react-icons/fa';
 import { FiBookOpen } from 'react-icons/fi';
 import { groupEvidences, groupSpeciesEvidences } from '../data/data-format';
 import EvidenceList from '../components/EvidenceList';
@@ -25,20 +24,19 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import PublicationsMenu from '../components/SeeMoreVertBtn';
-import helpCircleIcon from '../images/icons/help-circle-icon.svg';
 import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
 import Tooltip from '@material-ui/core/Tooltip';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import { withStyles } from '@material-ui/core/styles';
-//import IconButton from '@material-ui/core/IconButton';
+
 
 const items = [
 	{ label: 'General', id: 'general' },
 	{ label: 'Species', id: 'species' },
 	{ label: 'Motif', id: 'motif' },
-	{ label: 'Found Glycoproteins', id: 'glycoprotein' },
+	{ label: 'Associated Glycoproteins', id: 'glycoprotein' },
 	{ label: 'Biosynthetic Enzymes', id: 'biosyntheticenzymes' },
-	{ label: 'Digital Seqeunce', id: 'Dseqence' },
+	{ label: 'Digital Sequence', id: 'Dseqence' },
 	{ label: 'Cross References', id: 'crossref' },
 	{ label: 'Publication', id: 'publication' },
 ];
@@ -162,17 +160,17 @@ const GlycanDetail = (props) => {
 
 		// Replacing residue names with the ones to be displayed.
 		for (var i = 0; i < detailData.composition.length; i++) {
-			if (detailData.composition[i].residue == 'hex') {
+			if (detailData.composition[i].residue === 'hex') {
 				detailData.composition[i].residue = 'Hex';
-			} else if (detailData.composition[i].residue == 'hexnac') {
+			} else if (detailData.composition[i].residue ==='hexnac') {
 				detailData.composition[i].residue = 'HexNAc';
-			} else if (detailData.composition[i].residue == 'dhex') {
+			} else if (detailData.composition[i].residue === 'dhex') {
 				detailData.composition[i].residue = 'dHex';
-			} else if (detailData.composition[i].residue == 'neuac') {
+			} else if (detailData.composition[i].residue ==='neuac') {
 				detailData.composition[i].residue = 'NeuAc';
-			} else if (detailData.composition[i].residue == 'neugc') {
+			} else if (detailData.composition[i].residue === 'neugc') {
 				detailData.composition[i].residue = 'NeuGc';
-			} else if (detailData.composition[i].residue == 'other') {
+			} else if (detailData.composition[i].residue === 'other') {
 				detailData.composition[i].residue = '(+x other residues)';
 			}
 		}
@@ -354,15 +352,16 @@ const GlycanDetail = (props) => {
 					<div className='content-box-md'>
 						<h1 className='page-heading'>
 							Details for glycan
-							{glytoucan && glytoucan.glytoucan_ac && (
+							<span style={{ color:'#1d9901' }}>{glytoucan && glytoucan.glytoucan_ac && (
 								<> {glytoucan.glytoucan_ac}</>
 							)}
+							</span>
 						</h1>
 					</div>
 					<DownloadButton
 						types={[
-							{ type: 'png', data: 'glycan_image' },
-							{ type: 'json', data: 'glycan_detail' },
+							{ type: 'Glycan image (*.png)', data: 'glycan_image' },
+							{ type: 'Glycan data (*.json)', data: 'glycan_detail' },
 						]}
 						dataType='glycan_detail'
 						dataId={id}
@@ -482,7 +481,7 @@ const GlycanDetail = (props) => {
 														<strong>GlyToucan Accession: </strong>
 														<Link
 															href={glytoucan.glytoucan_url}
-															target='noopener noreferrer _blank'>
+															target="_blank"  rel="noopener noreferrer">
 															{glytoucan.glytoucan_ac}
 														</Link>
 													</div>
@@ -502,19 +501,19 @@ const GlycanDetail = (props) => {
 
 											{classification && classification.length && (
 												<div>
-													<strong>Glycan Type/Subtype: </strong>
+													<strong>Glycan Type / Subtype :  </strong>
 
 													{classification.map((Formatclassification) => (
 														<>
 															<Link
 																href={Formatclassification.type.url}
-																target='noopener noreferrer _blank'>
+																target="_blank" rel="noopener noreferrer">
 																{Formatclassification.type.name}
 															</Link>
-															&nbsp;
+															&nbsp; <b>/</b> &nbsp;
 															<Link
 																href={Formatclassification.subtype.url}
-																target='noopener noreferrer _blank'>
+																target="_blank"  rel="noopener noreferrer">
 																{Formatclassification.subtype.name}
 															</Link>
 														</>
@@ -527,7 +526,7 @@ const GlycanDetail = (props) => {
 														<strong>Inchy key: </strong>
 														<Link
 															href={inchi_key.url}
-															target='noopener noreferrer _blank'>
+															target="_blank" rel="noopener noreferrer">
 															{inchi_key.key}
 														</Link>
 													</div>
