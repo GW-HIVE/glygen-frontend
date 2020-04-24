@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { getJson } from '../data/api';
-import compositionSearchData from '../data/json/compositionSearch';
+// import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
@@ -14,6 +14,8 @@ import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
+import stringConstants from '../data/json/stringConstants';
+
 
 const useStyles = makeStyles((theme) => ({
 	// tabs: {
@@ -104,6 +106,14 @@ const GlycanSearch = (props) => {
 	const [pageLoading, setPageLoading] = useState(true);
 	const [glySearchError, setGlySearchError] = useState(false);
 
+	let simpleSearch = glycanSearchData.simple_search;
+	let advancedSearch = glycanSearchData.advanced_search;
+	let compositionSearch = glycanSearchData.composition_search;
+	let glycanData = stringConstants.glycan;
+	let compositionSearchData = glycanData.composition_search;
+	let advancedSearchData = glycanData.advanced_search;
+
+
 	function glyCompChange(glyComp) {
 		setGlyCompData(glyComp);
 	}
@@ -182,14 +192,10 @@ const GlycanSearch = (props) => {
 			let compStateData = {};
 
 			for (let x = 0; x < compositionData.length; x++) {
-				compositionData[x].orderId =
-					compositionSearchData[compositionData[x].residue].order_id;
-				compositionData[x].subtext =
-					compositionSearchData[compositionData[x].residue].subtext;
-				compositionData[x].name =
-					compositionSearchData[compositionData[x].residue].name;
-				compositionData[x].shortName =
-					compositionSearchData[compositionData[x].residue].short_name;
+				compositionData[x].orderID = compositionSearchData[compositionData[x].residue].orderID;
+				compositionData[x].subtext = compositionSearchData[compositionData[x].residue].subtext;
+				compositionData[x].name = compositionSearchData[compositionData[x].residue].name;
+				compositionData[x].shortName = compositionSearchData[compositionData[x].residue].shortName;
 				compStateData[compositionData[x].residue] = {
 					min: compositionData[x].min,
 					selectValue: getSelectionValue(
@@ -215,7 +221,7 @@ const GlycanSearch = (props) => {
 			);
 
 			initData.composition = compositionData.sort(function (res1, res2) {
-				return parseInt(res1.orderId) - parseInt(res2.orderId);
+				return parseInt(res1.orderID) - parseInt(res2.orderID);
 			});
 			setGlyCompData(compStateData);
 			setInitData(initData);
@@ -623,11 +629,13 @@ const GlycanSearch = (props) => {
 							eventKey='simple_search'
 							className='tab-content-padding'
 							// className={classes.tabSimpleSearch}
-							title='Simple Search'>
+							title={simpleSearch.tabTitle}>
 							<SearchAlert
 								searchError={glySearchError}
-								alertTitle='Simple Search Error - No Results Found'
-								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+								alertTitle={simpleSearch.alert.alertTitle}
+								alertText={simpleSearch.alert.alertText}
+								//alertTitle='Simple Search Error - No Results Found'
+								//alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className={classes.conSimple}> */}
 							<Container className='tab-content-border'>
@@ -636,12 +644,12 @@ const GlycanSearch = (props) => {
 										simpleSearchCategory={glySimpleSearchCategory}
 										simpleSearchTerm={glySimpleSearchTerm}
 										simple_search_category={initData.simple_search_category}
-										simple_search={glycanSearchData.simple_search.categories}
+										simple_search={simpleSearch.categories}
 										searchSimpleClick={searchGlycanSimpleClick}
 										setSimpleSearchCategory={setGlySimpleSearchCategory}
 										setSimpleSearchTerm={setGlySimpleSearchTerm}
-										length={glycanSearchData.simple_search.length}
-										errorText={glycanSearchData.simple_search.errorText}
+										length={simpleSearch.length}
+										errorText={simpleSearch.errorText}
 									/>
 								)}
 							</Container>
@@ -650,11 +658,13 @@ const GlycanSearch = (props) => {
 							eventKey='advanced_search'
 							// className={classes.tab}
 							className='tab-content-padding'
-							title='Advanced Search'>
+							title={advancedSearch.tabTitle}>
 							<SearchAlert
 								searchError={glySearchError}
-								alertTitle='Advanced Search Error - No Results Found'
-								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+								alertTitle={advancedSearch.alert.alertTitle}
+								alertText={advancedSearch.alert.alertText}
+								//alertTitle='Advanced Search Error - No Results Found'
+								//alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className={classes.con}> */}
 							<Container className='tab-content-border'>
@@ -670,13 +680,15 @@ const GlycanSearch = (props) => {
 						</Tab>
 						<Tab
 							eventKey='composition_search'
-							title='Composition Search'
+							title={compositionSearch.tabTitle}
 							// className={classes.tabCompostionSearch}
 							className='tab-content-padding'>
 							<SearchAlert
 								searchError={glySearchError}
-								alertTitle='Composition Search Error - No Results Found'
-								alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+								alertTitle={compositionSearch.alert.alertTitle}
+								alertText={compositionSearch.alert.alertTitle}
+								// alertTitle='Composition Search Error - No Results Found'
+								// alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className='p-5'> */}
 							{/* <Container> */}

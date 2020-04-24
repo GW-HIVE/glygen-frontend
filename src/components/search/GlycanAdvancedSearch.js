@@ -18,7 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
 import '../../css/Search.css';
-import glycanSearch from '../../data/json/glycanSearch';
+import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const useStyles = makeStyles((theme) => ({
@@ -78,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
 
 const GlycanAdvancedSearch = (props) => {
     const classes = useStyles();
-    let glycan = stringConstants.glycan;
-    let glycanAdvSearch = glycanSearch.advanced_search;
+    let advancedSearchData = stringConstants.glycan.advanced_search;
+    let glycanAdvSearch = glycanSearchData.advanced_search;
 
 	function sortDropdown(a, b) {
 		if (a.name < b.name) {
@@ -273,12 +273,12 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl fullWidth className={classes.margin} variant='outlined'>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-                                title={glycan.glycan_id.tooltip.title}
-                                text={glycan.glycan_id.tooltip.text}
-                                urlText={glycan.glycan_id.tooltip.urlText}
-                                url={glycan.glycan_id.tooltip.url}
+                                title={advancedSearchData.glycan_id.tooltip.title}
+                                text={advancedSearchData.glycan_id.tooltip.text}
+                                urlText={advancedSearchData.glycan_id.tooltip.urlText}
+                                url={advancedSearchData.glycan_id.tooltip.url}
                             />
-                            {glycan.glycan_id.name}
+                            {advancedSearchData.glycan_id.name}
 						</Typography>
 						<MultilineAutoTextInput
 							fullWidth
@@ -302,10 +302,10 @@ const GlycanAdvancedSearch = (props) => {
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
 									<HelpTooltip
-                                        title={glycan.mass.tooltip.title}
-                                        text={glycan.mass.tooltip.text}
+                                        title={advancedSearchData.mass.tooltip.title}
+                                        text={advancedSearchData.mass.tooltip.text}
                                     />
-                                    {glycan.mass.name}
+                                    {advancedSearchData.mass.name}
 								</Typography>
 								<RangeInputSlider
 									step={10}
@@ -331,7 +331,7 @@ const GlycanAdvancedSearch = (props) => {
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>
 									<InputLabel className={classes.labelSelect}>
-                                        {glycan.mass.type_name}
+                                        {advancedSearchData.mass.type_name}
 									</InputLabel>
 									<Select
 										value={props.inputValue.glyMassType}
@@ -365,10 +365,10 @@ const GlycanAdvancedSearch = (props) => {
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
 									<HelpTooltip
-                                        title={glycan.number_monosaccharides.tooltip.title}
-                                        text={glycan.number_monosaccharides.tooltip.text}
+                                        title={advancedSearchData.number_monosaccharides.tooltip.title}
+                                        text={advancedSearchData.number_monosaccharides.tooltip.text}
                                     />
-                                    {glycan.number_monosaccharides.name}
+                                    {advancedSearchData.number_monosaccharides.name}
 								</Typography>
 								<RangeInputSlider
 									step={1}
@@ -397,10 +397,10 @@ const GlycanAdvancedSearch = (props) => {
 									gutterBottom
 									style={{ marginBottom: '0' }}>
 									<HelpTooltip
-                                        title={glycan.organism.tooltip.title}
-                                        text={glycan.organism.tooltip.text}
+                                        title={advancedSearchData.organism.tooltip.title}
+                                        text={advancedSearchData.organism.tooltip.text}
                                     />
-                                    {glycan.organism.name}
+                                    {advancedSearchData.organism.name}
 								</Typography>
 								<MultiselectTextInput
 									options={
@@ -445,10 +445,10 @@ const GlycanAdvancedSearch = (props) => {
 						className={classes.margin}>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-                                title={glycan.glycan_type.tooltip.title}
-                                text={glycan.glycan_type.tooltip.text}
+                                title={advancedSearchData.glycan_type.tooltip.title}
+                                text={advancedSearchData.glycan_type.tooltip.text}
                             />
-                            {glycan.glycan_type.name}
+                            {advancedSearchData.glycan_type.name}
 						</Typography>
 						<Select
 							value={props.inputValue.glyType}
@@ -480,10 +480,10 @@ const GlycanAdvancedSearch = (props) => {
 							className={classes.margin}>
 							<Typography className={classes.label} gutterBottom>
 								<HelpTooltip
-                                    title={glycan.glycan_subtype.tooltip.title}
-                                    text={glycan.glycan_subtype.tooltip.text}
+                                    title={advancedSearchData.glycan_subtype.tooltip.title}
+                                    text={advancedSearchData.glycan_subtype.tooltip.text}
                                 />
-                            {glycan.glycan_subtype.name}
+                            {advancedSearchData.glycan_subtype.name}
 							</Typography>
 							<Select
 								value={props.inputValue.glySubType}
@@ -522,12 +522,12 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-                                title={glycan.protein_identifier.tooltip.title}
-                                text={glycan.protein_identifier.tooltip.text}
-                                urlText={glycan.protein_identifier.tooltip.urlText}
-                                url={glycan.protein_identifier.tooltip.url}
+                                title={advancedSearchData.protein_identifier.tooltip.title}
+                                text={advancedSearchData.protein_identifier.tooltip.text}
+                                urlText={advancedSearchData.protein_identifier.tooltip.urlText}
+                                url={advancedSearchData.protein_identifier.tooltip.url}
                             />
-                            {glycan.protein_identifier.name}
+                            {advancedSearchData.protein_identifier.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyProt}
@@ -551,12 +551,12 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-                                title={glycan.glycan_motif.tooltip.title}
-                                text={glycan.glycan_motif.tooltip.text}
-                                urlText={glycan.glycan_motif.tooltip.urlText}
-                                url={glycan.glycan_motif.tooltip.url}
+                                title={advancedSearchData.glycan_motif.tooltip.title}
+                                text={advancedSearchData.glycan_motif.tooltip.text}
+                                urlText={advancedSearchData.glycan_motif.tooltip.urlText}
+                                url={advancedSearchData.glycan_motif.tooltip.url}
                             />
-                            {glycan.glycan_motif.name}
+                            {advancedSearchData.glycan_motif.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyMotif}
@@ -580,12 +580,12 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 							style={{ marginBottom: '0' }}>
 							<HelpTooltip
-                                title={glycan.enzyme.tooltip.title}
-                                text={glycan.enzyme.tooltip.text}
-                                urlText={glycan.enzyme.tooltip.urlText}
-                                url={glycan.enzyme.tooltip.url}
+                                title={advancedSearchData.enzyme.tooltip.title}
+                                text={advancedSearchData.enzyme.tooltip.text}
+                                urlText={advancedSearchData.enzyme.tooltip.urlText}
+                                url={advancedSearchData.enzyme.tooltip.url}
                             />
-                            {glycan.enzyme.name}
+                            {advancedSearchData.enzyme.name}
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyBioEnz}
@@ -610,12 +610,12 @@ const GlycanAdvancedSearch = (props) => {
 						className={classes.margin}>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
-                                title={glycan.pmid.tooltip.title}
-                                text={glycan.pmid.tooltip.text}
-                                urlText={glycan.pmid.tooltip.urlText}
-                                url={glycan.pmid.tooltip.url}
+                                title={advancedSearchData.pmid.tooltip.title}
+                                text={advancedSearchData.pmid.tooltip.text}
+                                urlText={advancedSearchData.pmid.tooltip.urlText}
+                                url={advancedSearchData.pmid.tooltip.url}
                             />
-                            {glycan.pmid.name}
+                            {advancedSearchData.pmid.name}
 						</Typography>
 						<OutlinedInput
                             className={classes.input}

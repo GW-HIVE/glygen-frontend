@@ -11,13 +11,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ExampleExploreControl = (props) => {
     const classes = useStyles();
-    function sortExamples(a, b) {
-		if (a.order_id < b.order_id) {
-			return -1;
-		} else if (b.order_id < a.order_id) {
-			return 1;
-		}
-		return 0;
+    function sortExamples(ex1, ex2) {
+        return parseInt(ex1.orderID) - parseInt(ex2.orderID);
 	}
 
     return(

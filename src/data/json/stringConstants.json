@@ -1,115 +1,131 @@
 {
   "glycan": {
-    "glycan_id": {
-      "name": "Glycan ID",
-      "short_name": "Glycan ID",
-      "tooltip": {
-        "title": "Glycan ID",
-        "text": "Unique accessions assigned to the registered glycan structures in GlyTouCan database. You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. Explore",
-        "urlText": "GlyTouCan",
-        "url": "https://glytoucan.org/Structures"
+    "advanced_search": {
+      "queryType": "search_glycan",
+      "operation": {
+        "id": "operation"
       },
-      "id": "glytoucan_ac"
+      "glycan_id": {
+        "name": "Glycan ID",
+        "shortName": "Glycan ID",
+        "tooltip": {
+          "title": "Glycan ID",
+          "text": "Unique accessions assigned to the registered glycan structures in GlyTouCan database. You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. Explore",
+          "urlText": "GlyTouCan",
+          "url": "https://glytoucan.org/Structures"
+        },
+        "id": "glytoucan_ac"
+      },
+      "mass": {
+        "name": "Monoisotopic Mass",
+        "shortName": "Monoisotopic Mass",
+        "mass_id": "mass",
+        "tooltip": {
+          "title": "Monoisotopic Mass",
+          "text": "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
+        },
+        "min": "Min",
+        "max": "Max",
+        "mass_type_id": "mass_type",
+        "type_name": "Mass Type"
+      },
+      "number_monosaccharides": {
+        "name": "No of Sugars",
+        "shortName": "No of Sugars",
+        "tooltip": {
+          "title": "No of Sugars",
+          "text": "Use the sliders to select Number of Sugars range for your glycan(s)."
+        },
+        "id": "number_monosaccharides"
+      },
+      "organism": {
+        "name": "Organisms",
+        "shortName": "Organisms",
+        "tooltip": {
+          "title": "Organism",
+          "text": "An individual animal, plant, or single-celled life form. Click to select one or multiple Organisms that makes your glycan(s)."
+        },
+        "id": "organism"
+      },
+      "glycan_type": {
+        "name": "Glycan Type",
+        "shortName": "Glycan Type",
+        "tooltip": {
+          "title": "Glycan Type",
+          "text": "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
+        },
+        "id": "glycan_type"
+      },
+      "glycan_subtype": {
+        "name": "Glycan Subtype",
+        "shortName": "Glycan Subtype",
+        "tooltip": {
+          "title": "Glycan Subtype",
+          "text": "Subclassifcation of Glycan types. Click to select a Glycan Subtype."
+        },
+        "id": "glycan_subtype"
+      },
+      "protein_identifier": {
+        "name": "Glycosylated Protein",
+        "shortName": "Glycosylated Protein",
+        "tooltip": {
+          "title": "Glycosylated Protein",
+          "text": "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore",
+          "urlText": "UniProtKB",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "protein_identifier"
+      },
+      "glycan_motif": {
+        "name": "Glycan Motif",
+        "shortName": "Glycan Motif",
+        "tooltip": {
+          "title": "Glycan Motif",
+          "text": "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore",
+          "urlText": "Glycan Motif",
+          "url": "https://www.uniprot.org/help/carbohyd"
+        },
+        "id": "glycan_motif"
+      },
+      "enzyme": {
+        "name": "Biosynthetic Enzyme",
+        "shortName": "Biosynthetic Enzyme",
+        "tooltip": {
+          "title": "Biosynthetic Enzyme",
+          "text": "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore",
+          "urlText": "Biosynthetic Enzyme",
+          "url": "https://enzyme.expasy.org/"
+        },
+        "id": "enzyme"
+      },
+      "pmid": {
+        "name": "Pubmed ID",
+        "shortName": "Pubmed ID",
+        "tooltip": {
+          "title": "Pubmed ID",
+          "text": "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore",
+          "urlText": "Pubmed ID",
+          "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
+        },
+        "id": "pmid"
+      },
+      "composition": {
+        "id": "composition"
+      }
     },
-    "mass": {
-      "name": "Monoisotopic Mass",
-      "short_name": "Monoisotopic Mass",
-      "mass_id": "mass",
-      "tooltip": {
-        "title": "Monoisotopic Mass",
-        "text": "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
-      },
-      "min": "Min",
-      "max": "Max",
-      "mass_type_id": "mass_type",
-      "type_name": "Mass Type"
-    },
-    "number_monosaccharides": {
-      "name": "No of Sugars",
-      "short_name": "No of Sugars",
-      "tooltip": {
-        "title": "No of Sugars",
-        "text": "Use the sliders to select Number of Sugars range for your glycan(s)."
-      },
-      "id": "number_monosaccharides"
-    },
-    "organism": {
-      "name": "Organisms",
-      "short_name": "Organisms",
-      "tooltip": {
-        "title": "Organism",
-        "text": "An individual animal, plant, or single-celled life form. Click to select one or multiple Organisms that makes your glycan(s)."
-      },
-      "id": "organism"
-    },
-    "glycan_type": {
-      "name": "Glycan Type",
-      "short_name": "Glycan Type",
-      "tooltip": {
-        "title": "Glycan Type",
-        "text": "The classification of glycan based on the nature of the sugar–peptide bond and the oligosaccharide attached. Click to select a Glycan Type."
-      },
-      "id": "glycan_type"
-    },
-    "glycan_subtype": {
-      "name": "Glycan Subtype",
-      "short_name": "Glycan Subtype",
-      "tooltip": {
-        "title": "Glycan Subtype",
-        "text": "Subclassifcation of Glycan types. Click to select a Glycan Subtype."
-      },
-      "id": "glycan_subtype"
-    },
-    "protein_identifier": {
-      "name": "Glycosylated Protein",
-      "short_name": "Glycosylated Protein",
-      "tooltip": {
-        "title": "Glycosylated Protein",
-        "text": "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore",
-        "urlText": "UniProtKB",
-        "url": "https://www.uniprot.org/"
-      },
-      "id": "protein_identifier"
-    },
-    "glycan_motif": {
-      "name": "Glycan Motif",
-      "short_name": "Glycan Motif",
-      "tooltip": {
-        "title": "Glycan Motif",
-        "text": "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore",
-        "urlText": "Glycan Motif",
-        "url": "https://www.uniprot.org/help/carbohyd"
-      },
-      "id": "glycan_motif"
-    },
-    "enzyme": {
-      "name": "Biosynthetic Enzyme",
-      "short_name": "Biosynthetic Enzyme",
-      "tooltip": {
-        "title": "Biosynthetic Enzyme",
-        "text": "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore",
-        "urlText": "Biosynthetic Enzyme",
-        "url": "https://enzyme.expasy.org/"
-      },
-      "id": "enzyme"
-    },
-    "pmid": {
-      "name": "Pubmed ID",
-      "short_name": "Pubmed ID",
-      "tooltip": {
-        "title": "Pubmed ID",
-        "text": "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore",
-        "urlText": "Pubmed ID",
-        "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
-      },
-      "id": "pmid"
+    "simple_search": {
+      "queryType": "glycan_search_simple",
+      "operation": {
+        "id": "operation"
+      }
     },
     "composition_search": {
+      "queryType": "search_glycan",
       "hex": {
-        "order_id": 100,
+        "orderID": 100,
         "name": "Hexose",
         "subtext": "Hex, e.g., Glc, Gal, Man",
-        "short_name": "Hex",
+        "shortName": "Hex",
         "tooltip": {
           "title": "Hexose",
           "text": "Explore",
@@ -118,10 +134,10 @@
         }
       },
       "hexnac": {
-        "order_id": 200,
+        "orderID": 200,
         "name": "N-Acetyl-Hexosamine",
         "subtext": "HexNAc, e.g., GlcNAc, GalNAc",
-        "short_name": "HexNAc",
+        "shortName": "HexNAc",
         "tooltip": {
           "title": "N-Acetyl-Hexosamine",
           "text": "Explore",
@@ -130,10 +146,10 @@
         }
       },
       "hexn": {
-        "order_id": 300,
+        "orderID": 300,
         "name": "Hexosamine",
         "subtext": "HexN, e.g., GlcN",
-        "short_name": "HexN",
+        "shortName": "HexN",
         "tooltip": {
           "title": "Hexosamine",
           "text": "Explore",
@@ -142,10 +158,10 @@
         }
       },
       "dhex": {
-        "order_id": 400,
+        "orderID": 400,
         "name": "Deoxy-Hexose",
         "subtext": "dHex, e.g., Fuc",
-        "short_name": "dHex",
+        "shortName": "dHex",
         "tooltip": {
           "title": "Deoxy-Hexose",
           "text": "Explore",
@@ -154,10 +170,10 @@
         }
       },
       "neuac": {
-        "order_id": 500,
+        "orderID": 500,
         "name": "N-Acetyl-Neuraminic acid",
         "subtext": "Sialic acid as NeuAc",
-        "short_name": "NeuAc",
+        "shortName": "NeuAc",
         "tooltip": {
           "title": "N-Acetyl-Neuraminic acid",
           "text": "Explore",
@@ -166,10 +182,10 @@
         }
       },
       "neugc": {
-        "order_id": 600,
+        "orderID": 600,
         "name": "N-Glycolyl-Neuraminic acid",
         "subtext": "Sialic acid as NeuGc",
-        "short_name": "NeuGc",
+        "shortName": "NeuGc",
         "tooltip": {
           "title": "N-Glycolyl-Neuraminic acid",
           "text": "Explore",
@@ -178,10 +194,10 @@
         }
       },
       "hexa": {
-        "order_id": 700,
+        "orderID": 700,
         "name": "Uronic acid",
         "subtext": "UA, e.g., GlcA, GalA",
-        "short_name": "UA",
+        "shortName": "UA",
         "tooltip": {
           "title": "Uronic acid",
           "text": "Explore",
@@ -190,23 +206,23 @@
         }
       },
       "p": {
-        "order_id": 800,
+        "orderID": 800,
         "name": "Phosphate",
         "max": 2,
         "subtext": "PO\u2083",
-        "short_name": "PO\u2083",
+        "shortName": "PO\u2083",
         "tooltip": {
           "title": "Phosphate",
           "text": "Explore",
           "urlText": "Phosphate",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"        
+          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"
         }
       },
       "s": {
-        "order_id": 900,
+        "orderID": 900,
         "name": "Sulfate",
         "subtext": "SO\u2083",
-        "short_name": "SO\u2083",
+        "shortName": "SO\u2083",
         "tooltip": {
           "title": "Sulfate",
           "text": "Explore",
@@ -215,10 +231,10 @@
         }
       },
       "other": {
-        "order_id": 1000,
+        "orderID": 1000,
         "name": "Other",
         "subtext": "",
-        "short_name": "Other",
+        "shortName": "Other",
         "tooltip": {
           "title": "Other",
           "text": "Other"
