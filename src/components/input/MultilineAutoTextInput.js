@@ -63,7 +63,9 @@ export default function MultilineAutoTextInput(props) {
   const [options, setOptions] = React.useState([]);
 
   const handleChange = (event, value, reason) => {
-        props.setInputValue(value);
+    if (!(event === null && value === "" && reason === "reset")){
+      props.setInputValue(value);
+    }
   };
 
   React.useEffect(() => {
