@@ -509,3 +509,11 @@ ul.office-details {
 .lnk-btn:hover {
 	color: var(--gg-dark-hover) !important;
 }
+
+/* =========================================
+                Subscript
+============================================ */
+sub {
+	vertical-align: middle;
+	font-size: smaller !important;
+}

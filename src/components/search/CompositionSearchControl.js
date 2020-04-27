@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
+import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
 import stringConstants from '../../data/json/stringConstants';
 
@@ -602,7 +603,7 @@ export default function CompositionSearchControl(props) {
 								<strong>{composition[key.residue].name}</strong>
 							</Typography>
 							<Typography className={classes.label2}>
-								{composition[key.residue].subtext}
+								{ReactHtmlParser(composition[key.residue].subtext)}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>
