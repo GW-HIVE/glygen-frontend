@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme =>
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
-      minHeight: 25
+      minHeight: 25,
+      marginRight: 65
     }
   })
 );
@@ -51,6 +52,10 @@ const DownloadButton = props => {
 
     setShow(false);
   };
+  const clearForm = () => {
+    setFormat(props.format || props.types[0].type);
+    setCompressed(props.compressed || false);
+  };
   const classes = useStyles();
   return (
     <div className="dropdown gg-download text-right">
@@ -68,7 +73,7 @@ const DownloadButton = props => {
           }}
         >
           <GetAppIcon /> DOWNLOAD
-          <span className="caret"></span>
+          <span style={{ marginRight: "0px" }} className="caret"></span>
         </button>
       </Link>
       <div
@@ -80,6 +85,21 @@ const DownloadButton = props => {
       >
         <Row>
           <Col sm={12} md={6} lg={6}>
+            {/* <Button
+              type="button"
+              style={{
+                marginRight: "7px",
+                marginTop: "-9px",
+                paddingTop: "10px;"
+              }}
+              className="gg-btn-blue"
+              onClick={() => {
+                clearForm();
+                setShow(!show);
+              }}
+            >
+              <b>x</b>
+            </Button> */}
             <FormControl
               margin="dense"
               variant="outlined"
@@ -87,7 +107,7 @@ const DownloadButton = props => {
             >
               <Row>
                 <div className="col-md-7" style={{ paddingTop: "16px" }}>
-                  <strong>Type:</strong>
+                  <strong>Format:</strong>
                 </div>
 
                 <div className="col-md-5 " style={{ paddingTop: "10px" }}>
@@ -112,11 +132,11 @@ const DownloadButton = props => {
 
         <Row>
           <div className="col-md-5" style={{ paddingLeft: "22px" }}>
-            <strong>Compressed:</strong>
+            <strong>Compress file:</strong>
           </div>
           <div className="col-md-7" style={{ paddingLeft: "50px" }}>
             <input
-              style={{ fontSize: "x-large" }}
+              style={{ fontSize: "xx-large" }}
               type="checkbox"
               id="download_compression"
               checked={compressed}
@@ -131,7 +151,7 @@ const DownloadButton = props => {
           <div className="col-md-5 text-right">
             <Button
               type="button"
-              style={{ marginRight: "7px", marginTop: "7px" }}
+              style={{ marginRight: "10px", marginTop: "7px" }}
               className="gg-btn-blue"
               onClick={handleDownload}
             >
