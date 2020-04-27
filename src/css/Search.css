@@ -67,6 +67,18 @@
 	border: 1px solid #d0d8e3;
 } */
 
+.select-menu-adv {
+	background-color: white !important;
+	padding-top: 10.5px	!important;
+	padding-bottom: 10.5px	!important;
+}
+
+.clear-icon-adv {
+	margin-top: -8px !important;
+  	margin-bottom: -4px !important;
+}
+
+
 .select-menu {
 	background-color: white !important;
 }
