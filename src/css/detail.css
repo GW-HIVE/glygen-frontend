@@ -79,7 +79,6 @@ legend {
 	-webkit-transition: 0.3s ease-in-out;
 	transition: 0.3s ease-in-out;
 	box-shadow: 10px 10px 5px #ddd;
-	z-index: 99999;
 }
 .img-cartoon:hover,
 .img-cartoon:focus {
