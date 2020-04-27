@@ -11,8 +11,6 @@ import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
-import stringConstants from '../../data/json/stringConstants';
-
 
 const useStyles = makeStyles({
 	// input: {
@@ -71,8 +69,6 @@ export default function CompositionSearchControl(props) {
 	const [redoDisabled, setRedoDisabled] = useState(true);
 	const [undoDisabled, setUndoDisabled] = useState(true);
 	const [searchDisabled, setSearchDisabled] = useState(false);
-
-	let composition = stringConstants.glycan.composition_search;
 
 	const minInputChange = (event) => {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
@@ -595,15 +591,15 @@ export default function CompositionSearchControl(props) {
 						<Grid item xs={12} sm={4}>
 							<Typography className={classes.label1}>
 								<HelpTooltip
-									title = {composition[key.residue].tooltip.title}
-									text = {composition[key.residue].tooltip.text}
-									urlText = {composition[key.residue].tooltip.urlText}
-									url = {composition[key.residue].tooltip.url}
+									title = {key.tooltip.title}
+									text = {key.tooltip.text}
+									urlText = {key.tooltip.urlText}
+									url = {key.tooltip.url}
 								/>
-								<strong>{composition[key.residue].name}</strong>
+								<strong>{key.name}</strong>
 							</Typography>
 							<Typography className={classes.label2}>
-								{ReactHtmlParser(composition[key.residue].subtext)}
+								{ReactHtmlParser(key.subtext)}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>

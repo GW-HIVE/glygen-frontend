@@ -124,9 +124,7 @@ const GlycanSearch = (props) => {
 	let advancedSearch = glycanSearchData.advanced_search;
 	let compositionSearch = glycanSearchData.composition_search;
 	let glycanData = stringConstants.glycan;
-	let compositionSearchData = glycanData.composition_search;
-	let advancedSearchData = glycanData.advanced_search;
-
+	let commonGlycanData = glycanData.common;
 
 	function glyCompChange(glyComp) {
 		setGlyCompData(glyComp);
@@ -203,12 +201,14 @@ const GlycanSearch = (props) => {
 
 			let compositionData = initData.composition;
 			let compStateData = {};
+			let compositionSearchData = glycanData.common.composition;
 
 			for (let x = 0; x < compositionData.length; x++) {
 				compositionData[x].orderID = compositionSearchData[compositionData[x].residue].orderID;
 				compositionData[x].subtext = compositionSearchData[compositionData[x].residue].subtext;
 				compositionData[x].name = compositionSearchData[compositionData[x].residue].name;
 				compositionData[x].shortName = compositionSearchData[compositionData[x].residue].shortName;
+				compositionData[x].tooltip = compositionSearchData[compositionData[x].residue].tooltip;
 				compStateData[compositionData[x].residue] = {
 					min: compositionData[x].min,
 					selectValue: getSelectionValue(
@@ -262,7 +262,7 @@ const GlycanSearch = (props) => {
 						setGlyCompData(queryCompData);
 						setGlyActTabKey('composition_search');
 						setPageLoading(false);
-					} else if (data.query.query_type === 'glycan_search_simple') {
+					} else if (data.query.query_type === glycanData.simple_search.query_type.name) {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
@@ -373,7 +373,7 @@ const GlycanSearch = (props) => {
 					}
 				});
 		});
-	}, [id, compositionSearchData]);
+	}, [id, glycanData]);
 
 	function searchjson(
 		input_query_type,
@@ -461,30 +461,30 @@ const GlycanSearch = (props) => {
 		}
 
 		var formjson = {
-			operation: 'AND',
-			query_type: input_query_type,
-			mass_type: input_mass_type,
-			mass: input_mass,
-			number_monosaccharides: monosaccharides,
-			enzyme: enzymes,
-			glytoucan_ac: glycan_id,
-			organism: organisms,
-			glycan_type: input_glycantype,
-			glycan_subtype: input_glycansubtype,
-			protein_identifier: input_proteinid,
-			glycan_motif: input_motif,
-			pmid: input_pmid,
-			composition: input_residue_comp,
+			[commonGlycanData.operation.id]: 'AND',
+			[glycanData.advanced_search.query_type.id]: input_query_type,
+			[commonGlycanData.mass_type.id]: input_mass_type,
+			[commonGlycanData.mass.id]: input_mass,
+			[commonGlycanData.number_monosaccharides.id]: monosaccharides,
+			[commonGlycanData.enzyme.id]: enzymes,
+			[commonGlycanData.glycan_id.id]: glycan_id,
+			[commonGlycanData.organism.id]: organisms,
+			[commonGlycanData.glycan_type.id]: input_glycantype,
+			[commonGlycanData.glycan_subtype.id]: input_glycansubtype,
+			[commonGlycanData.protein_identifier.id]: input_proteinid,
+			[commonGlycanData.glycan_motif.id]: input_motif,
+			[commonGlycanData.pmid.id]: input_pmid,
+			[commonGlycanData.composition.id]: input_residue_comp,
 		};
 		return formjson;
 	}
 
 	const glycanSimpleSearch = () => {
 		var formjsonSimple = {
-			operation: 'AND',
-			query_type: 'glycan_search_simple',
-			term: glySimpleSearchTerm,
-			term_category: glySimpleSearchCategory,
+			[commonGlycanData.operation.id]: 'AND',
+			[glycanData.simple_search.query_type.id]: glycanData.simple_search.query_type.name,
+			[commonGlycanData.term.id]: glySimpleSearchTerm,
+			[commonGlycanData.term_category.id]: glySimpleSearchCategory,
 		};
 
 		var json = 'query=' + JSON.stringify(formjsonSimple);
@@ -494,7 +494,7 @@ const GlycanSearch = (props) => {
 
 	const glycanSearch = () => {
 		let formObject = searchjson(
-			'search_glycan',
+			glycanData.advanced_search.query_type.name,
 			glyAdvSearchData.glycanId,
 			glyAdvSearchData.glyMassType,
 			glyAdvSearchData.glyMass[0],
@@ -531,7 +531,7 @@ const GlycanSearch = (props) => {
 		}
 
 		let formObject = searchjson(
-			'search_glycan',
+			glycanData.composition_search.query_type.name,
 			undefined,
 			undefined,
 			undefined,
@@ -628,7 +628,7 @@ const GlycanSearch = (props) => {
 				<Container className={classes.con1}>
 					<PageLoader pageLoading={pageLoading} />
 					<div className='content-box-md'>
-						<h1 className='page-heading'>Glycan Search</h1>
+						<h1 className='page-heading'>{glycanSearchData.pageTitle}</h1>
 					</div>
 					<Tabs
 						defaultActiveKey='advanced_search'
@@ -647,14 +647,13 @@ const GlycanSearch = (props) => {
 								searchError={glySearchError}
 								alertTitle={simpleSearch.alert.alertTitle}
 								alertText={simpleSearch.alert.alertText}
-								//alertTitle='Simple Search Error - No Results Found'
-								//alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className={classes.conSimple}> */}
 							<Container className='tab-content-border'>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
 										simpleSearchCategory={glySimpleSearchCategory}
+										simpleSearchCategoryLabel={commonGlycanData.term_category.name}
 										simpleSearchTerm={glySimpleSearchTerm}
 										simple_search_category={initData.simple_search_category}
 										simple_search={simpleSearch.categories}
@@ -676,8 +675,6 @@ const GlycanSearch = (props) => {
 								searchError={glySearchError}
 								alertTitle={advancedSearch.alert.alertTitle}
 								alertText={advancedSearch.alert.alertText}
-								//alertTitle='Advanced Search Error - No Results Found'
-								//alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className={classes.con}> */}
 							<Container className='tab-content-border'>
@@ -700,8 +697,6 @@ const GlycanSearch = (props) => {
 								searchError={glySearchError}
 								alertTitle={compositionSearch.alert.alertTitle}
 								alertText={compositionSearch.alert.alertTitle}
-								// alertTitle='Composition Search Error - No Results Found'
-								// alertText="Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 							/>
 							{/* <Container className='p-5'> */}
 							{/* <Container> */}
@@ -720,7 +715,7 @@ const GlycanSearch = (props) => {
 						</Tab>
 						<Tab
 							eventKey='tutorial'
-							title='Tutorial'
+							title={glycanSearchData.tutorial.tabTitle}
 							className='tab-content-padding'>
 							<Container className='tab-content-border'>
 								<GlycanTutorial />

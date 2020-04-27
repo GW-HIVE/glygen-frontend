@@ -1,7 +1,6 @@
 {
     "pageTitle": "Glycan Search",
     "simple_search": {
-        "queryType": "glycan_search_simple",
         "tabTitle": "Simple Search",
         "alert":{
             "alertTitle": "Simple Search Error - No Results Found",
@@ -46,7 +45,6 @@
         }
     },
     "advanced_search": {
-        "queryType": "search_glycan",
         "tabTitle": "Advanced Search",
         "alert":{
             "alertTitle": "Advanced Search Error - No Results Found",
@@ -158,12 +156,13 @@
         }
     },
     "composition_search": {
-        "queryType": "search_glycan",
         "tabTitle": "Composition Search",
         "alert":{
             "alertTitle":"Composition Search Error - No Results Found",
             "alertText":"Sorry, we couldn't find any data matching your input. Please change your search term and try again."
         }
+    },
+    "tutorial": {
+        "tabTitle": "Tutorial"
     }
-
 }

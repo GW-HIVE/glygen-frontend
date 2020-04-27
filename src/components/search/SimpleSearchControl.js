@@ -64,7 +64,7 @@ export default function SimpleSearchControl(props) {
 				{/* <Grid item className='col-sm-3'> */}
 				<Grid item xs={12} sm={3}>
 					<FormControl variant='outlined' fullWidth>
-						<InputLabel className={classes.labelSelect}>Category</InputLabel>
+						<InputLabel className={classes.labelSelect}>{props.simpleSearchCategoryLabel}</InputLabel>
 						<Select
 							value={props.simpleSearchCategory}
 							onChange={simpleSearchCategoryOnChange}
@@ -140,6 +140,7 @@ export default function SimpleSearchControl(props) {
 
 SimpleSearchControl.propTypes = {
 	simpleSearchCategory: PropTypes.string,
+	simpleSearchCategoryLabel: PropTypes.string,
 	simpleSearchTerm: PropTypes.string,
 	simple_search_category: PropTypes.array,
 	simple_search: PropTypes.object,

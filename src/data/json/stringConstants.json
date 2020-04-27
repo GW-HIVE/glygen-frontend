@@ -1,7 +1,6 @@
 {
   "glycan": {
-    "advanced_search": {
-      "queryType": "search_glycan",
+    "common": {
       "operation": {
         "id": "operation"
       },
@@ -19,11 +18,11 @@
       "mass": {
         "name": "Monoisotopic Mass",
         "shortName": "Monoisotopic Mass",
-        "id": "mass",
         "tooltip": {
           "title": "Monoisotopic Mass",
           "text": "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
-        }
+        },
+        "id": "mass"
       },
       "mass_type": {
         "name": "Mass Type",
@@ -111,135 +110,151 @@
         "id": "pmid"
       },
       "composition": {
-        "id": "composition"
-      }
-    },
-    "simple_search": {
-      "queryType": "glycan_search_simple",
-      "operation": {
-        "id": "operation"
+        "id": "composition",
+        "hex": {
+          "orderID": 100,
+          "name": "Hexose",
+          "subtext": "Hex, e.g., Glc, Gal, Man",
+          "shortName": "Hex",
+          "tooltip": {
+            "title": "Hexose",
+            "text": "Explore",
+            "urlText": "Hexose",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/206"
+          }
+        },
+        "hexnac": {
+          "orderID": 200,
+          "name": "N-Acetyl-Hexosamine",
+          "subtext": "HexNAc, e.g., GlcNAc, GalNAc",
+          "shortName": "HexNAc",
+          "tooltip": {
+            "title": "N-Acetyl-Hexosamine",
+            "text": "Explore",
+            "urlText": "N-Acetyl-Hexosamine",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/899"
+          }
+        },
+        "hexn": {
+          "orderID": 300,
+          "name": "Hexosamine",
+          "subtext": "HexN, e.g., GlcN",
+          "shortName": "HexN",
+          "tooltip": {
+            "title": "Hexosamine",
+            "text": "Explore",
+            "urlText": "Hexosamine",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/739"
+          }
+        },
+        "dhex": {
+          "orderID": 400,
+          "name": "Deoxy-Hexose",
+          "subtext": "dHex, e.g., Fuc",
+          "shortName": "dHex",
+          "tooltip": {
+            "title": "Deoxy-Hexose",
+            "text": "Explore",
+            "urlText": "Deoxy-Hexose",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/840"
+          }
+        },
+        "neuac": {
+          "orderID": 500,
+          "name": "N-Acetyl-Neuraminic acid",
+          "subtext": "Sialic acid as NeuAc",
+          "shortName": "NeuAc",
+          "tooltip": {
+            "title": "N-Acetyl-Neuraminic acid",
+            "text": "Explore",
+            "urlText": "N-Acetyl-Neuraminic acid",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/439197"
+          }
+        },
+        "neugc": {
+          "orderID": 600,
+          "name": "N-Glycolyl-Neuraminic acid",
+          "subtext": "Sialic acid as NeuGc",
+          "shortName": "NeuGc",
+          "tooltip": {
+            "title": "N-Glycolyl-Neuraminic acid",
+            "text": "Explore",
+            "urlText": "N-Glycolyl-Neuraminic acid",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/440001"
+          }
+        },
+        "hexa": {
+          "orderID": 700,
+          "name": "Uronic acid",
+          "subtext": "UA, e.g., GlcA, GalA",
+          "shortName": "UA",
+          "tooltip": {
+            "title": "Uronic acid",
+            "text": "Explore",
+            "urlText": "Uronic acid",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/610"
+          }
+        },
+        "p": {
+          "orderID": 800,
+          "name": "Phosphate",
+          "max": 2,
+          "subtext": "PO<sub>3</sub>",
+          "shortName": "PO<sub>3</sub>",
+          "tooltip": {
+            "title": "Phosphate",
+            "text": "Explore",
+            "urlText": "Phosphate",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"
+          }
+        },
+        "s": {
+          "orderID": 900,
+          "name": "Sulfate",
+          "subtext": "SO<sub>3</sub>",
+          "shortName": "SO<sub>3</sub>",
+          "tooltip": {
+            "title": "Sulfate",
+            "text": "Explore",
+            "urlText": "Sulfate",
+            "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1117"
+          }
+        },
+        "other": {
+          "orderID": 1000,
+          "name": "Other",
+          "subtext": "",
+          "shortName": "Other",
+          "tooltip": {
+            "title": "Other",
+            "text": "Other"
+          }
+        }
+      },
+      "term": {
+        "id": "term"
+      },
+      "term_category": {
+        "id": "term_category",
+        "name": "Category"
       }
     },
     "composition_search": {
-      "queryType": "search_glycan",
-      "hex": {
-        "orderID": 100,
-        "name": "Hexose",
-        "subtext": "Hex, e.g., Glc, Gal, Man",
-        "shortName": "Hex",
-        "tooltip": {
-          "title": "Hexose",
-          "text": "Explore",
-          "urlText": "Hexose",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/206"
-        }
-      },
-      "hexnac": {
-        "orderID": 200,
-        "name": "N-Acetyl-Hexosamine",
-        "subtext": "HexNAc, e.g., GlcNAc, GalNAc",
-        "shortName": "HexNAc",
-        "tooltip": {
-          "title": "N-Acetyl-Hexosamine",
-          "text": "Explore",
-          "urlText": "N-Acetyl-Hexosamine",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/899"
-        }
-      },
-      "hexn": {
-        "orderID": 300,
-        "name": "Hexosamine",
-        "subtext": "HexN, e.g., GlcN",
-        "shortName": "HexN",
-        "tooltip": {
-          "title": "Hexosamine",
-          "text": "Explore",
-          "urlText": "Hexosamine",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/739"
-        }
-      },
-      "dhex": {
-        "orderID": 400,
-        "name": "Deoxy-Hexose",
-        "subtext": "dHex, e.g., Fuc",
-        "shortName": "dHex",
-        "tooltip": {
-          "title": "Deoxy-Hexose",
-          "text": "Explore",
-          "urlText": "Deoxy-Hexose",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/840"
-        }
-      },
-      "neuac": {
-        "orderID": 500,
-        "name": "N-Acetyl-Neuraminic acid",
-        "subtext": "Sialic acid as NeuAc",
-        "shortName": "NeuAc",
-        "tooltip": {
-          "title": "N-Acetyl-Neuraminic acid",
-          "text": "Explore",
-          "urlText": "N-Acetyl-Neuraminic acid",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/439197"
-        }
-      },
-      "neugc": {
-        "orderID": 600,
-        "name": "N-Glycolyl-Neuraminic acid",
-        "subtext": "Sialic acid as NeuGc",
-        "shortName": "NeuGc",
-        "tooltip": {
-          "title": "N-Glycolyl-Neuraminic acid",
-          "text": "Explore",
-          "urlText": "N-Glycolyl-Neuraminic acid",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/440001"
-        }
-      },
-      "hexa": {
-        "orderID": 700,
-        "name": "Uronic acid",
-        "subtext": "UA, e.g., GlcA, GalA",
-        "shortName": "UA",
-        "tooltip": {
-          "title": "Uronic acid",
-          "text": "Explore",
-          "urlText": "Uronic acid",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/610"
-        }
-      },
-      "p": {
-        "orderID": 800,
-        "name": "Phosphate",
-        "max": 2,
-        "subtext": "PO<sub>3</sub>",
-        "shortName": "PO<sub>3</sub>",
-        "tooltip": {
-          "title": "Phosphate",
-          "text": "Explore",
-          "urlText": "Phosphate",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"
-        }
-      },
-      "s": {
-        "orderID": 900,
-        "name": "Sulfate",
-        "subtext": "SO<sub>3</sub>",
-        "shortName": "SO<sub>3</sub>",
-        "tooltip": {
-          "title": "Sulfate",
-          "text": "Explore",
-          "urlText": "Sulfate",
-          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1117"
-        }
-      },
-      "other": {
-        "orderID": 1000,
-        "name": "Other",
-        "subtext": "",
-        "shortName": "Other",
-        "tooltip": {
-          "title": "Other",
-          "text": "Other"
-        }
+      "query_type": {
+        "id":"query_type",
+        "name":"search_glycan"
+      }
+    },
+    "advanced_search": {
+      "query_type": {
+        "id":"query_type",
+        "name":"search_glycan"
+      }
+    },
+    "simple_search": {
+      "query_type": {
+        "id":"query_type",
+        "name":"glycan_search_simple"
       }
     }
   }
