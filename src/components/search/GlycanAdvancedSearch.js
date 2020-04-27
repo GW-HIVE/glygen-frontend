@@ -610,7 +610,7 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl
 						fullWidth
 						variant='outlined'
-						margin='dense'
+						// margin='dense'
 					>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
@@ -624,6 +624,7 @@ const GlycanAdvancedSearch = (props) => {
 						<OutlinedInput
                             className={classes.input}
                             placeholder={advancedSearch.pmid.placeholder}
+                            margin='dense'
                             value={props.inputValue.glyPubId}
                             onChange={PubmedIdChange}
                             error={props.inputValue.glyPubId.length > advancedSearch.pmid.length}
