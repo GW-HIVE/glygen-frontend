@@ -331,11 +331,14 @@ const GlycanAdvancedSearch = (props) => {
 							</Grid>
 							{/* Mass Type */}
 							<Grid item xs={12} sm={3}>
-								<Typography
-									style={{ marginBottom: '2px' }}>
+								<Typography className={classes.label} gutterBottom>
 									&nbsp;
 								</Typography>
-								<FormControl variant='outlined' margin='dense' fullWidth>
+                                <FormControl 
+                                    variant='outlined' 
+                                    //margin='dense' 
+                                    fullWidth
+                                >
 									<InputLabel className={classes.labelSelect}>
                                         {commonGlycanData.mass_type.name}
 									</InputLabel>
@@ -344,7 +347,7 @@ const GlycanAdvancedSearch = (props) => {
 										onChange={glyMassTypeOnChange}
 										classes={{
 											//outlined: classes.selectOutlined,
-											root: 'select-menu',
+											root: 'select-menu-adv',
 										}}
 										className={classes.select}
 										labelWidth={85}>
@@ -396,7 +399,7 @@ const GlycanAdvancedSearch = (props) => {
 								<Typography
 									className={classes.label}
 									gutterBottom
-									style={{ marginBottom: '0' }}>
+								>
 									<HelpTooltip
                                         title={commonGlycanData.organism.tooltip.title}
                                         text={commonGlycanData.organism.tooltip.text}
@@ -411,16 +414,20 @@ const GlycanAdvancedSearch = (props) => {
 								/>}
 							</Grid>
 							<Grid item xs={3} sm={3}>
-								<Typography>
+                                <Typography className={classes.label} gutterBottom>
 									&nbsp;
 								</Typography>
-								<FormControl variant='outlined' margin='dense' fullWidth>
+                                <FormControl 
+                                    variant='outlined' 
+                                    //margin='dense' 
+                                    fullWidth
+                                >
 									<Select
-										margin='dense'
+										// margin='dense'
 										variant='outlined'
 										classes={{
 											//outlined: classes.selectOutlined,
-											root: 'select-menu',
+											root: 'select-menu-adv',
 										}}
 										value={props.inputValue.glyOrgOperation}
 										onChange={glyOrgOperationOnChange}
@@ -438,7 +445,7 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl
 						fullWidth
 						variant='outlined'
-						margin='dense'
+						// margin='dense'
 					>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
@@ -454,7 +461,7 @@ const GlycanAdvancedSearch = (props) => {
 							className={classes.select1}
 							classes={{
 								//outlined: classes.selectOutlined,
-								root: 'select-menu',
+                                root: 'select-menu-adv',
 							}}>
 							<MenuItem value=''>Select Glycan Type</MenuItem>
 							{props.initData.glycan_type &&
@@ -473,7 +480,7 @@ const GlycanAdvancedSearch = (props) => {
 						<FormControl
 							fullWidth
 							variant='outlined'
-							margin='dense'
+							//margin='dense'
 						>
 							<Typography className={classes.label} gutterBottom>
 								<HelpTooltip
@@ -489,7 +496,7 @@ const GlycanAdvancedSearch = (props) => {
 								className={classes.select1}
 								classes={{
 									//outlined: classes.selectOutlined,
-									root: 'select-menu',
+									root: 'select-menu-adv',
 								}}
 							>
 								<MenuItem value='' selected>
@@ -517,7 +524,7 @@ const GlycanAdvancedSearch = (props) => {
 						<Typography
 							className={classes.label}
 							gutterBottom
-							style={{ marginBottom: '0' }}>
+						>
 							<HelpTooltip
                                 title={commonGlycanData.protein_identifier.tooltip.title}
                                 text={commonGlycanData.protein_identifier.tooltip.text}
@@ -546,7 +553,7 @@ const GlycanAdvancedSearch = (props) => {
 						<Typography
 							className={classes.label}
 							gutterBottom
-							style={{ marginBottom: '0' }}>
+						>
 							<HelpTooltip
                                 title={commonGlycanData.glycan_motif.tooltip.title}
                                 text={commonGlycanData.glycan_motif.tooltip.text}
@@ -575,7 +582,7 @@ const GlycanAdvancedSearch = (props) => {
 						<Typography
 							className={classes.label}
 							gutterBottom
-							style={{ marginBottom: '0' }}>
+						>
 							<HelpTooltip
                                 title={commonGlycanData.enzyme.tooltip.title}
                                 text={commonGlycanData.enzyme.tooltip.text}

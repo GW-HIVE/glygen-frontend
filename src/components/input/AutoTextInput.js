@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import '../../css/Search.css';
 
 const useStyles = makeStyles((theme) => ({
 	// input: {
@@ -87,11 +88,12 @@ export default function AutoTextInput(props) {
 			<Autocomplete
 				freeSolo
 				getOptionLabel={(option) => option}
-				// classes={{
+				classes={{
 				// 	option: classes.option,
 				// 	inputRoot: classes.inputRoot,
 				// 	input: classes.inputAuto,
-				// }}
+					hasClearIcon: 'clear-icon-adv',
+				}}
 				options={options}
 				autoHighlight={true}
 				inputValue={props.inputValue}

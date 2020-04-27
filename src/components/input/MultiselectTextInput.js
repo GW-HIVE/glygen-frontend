@@ -3,6 +3,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import '../../css/Search.css';
 
 const useStyles = makeStyles((theme) => ({
 	// root: {
@@ -67,15 +68,16 @@ export default function MultiselectTextInput(props) {
 		<div className={classes.root}>
 			<Autocomplete
 				multiple
-				id='tags-outlined'
 				options={props.options}
 				getOptionLabel={(option) => option.name}
-				// classes={{
+				classes={{
 				//   option: classes.option,
 				//   inputRoot: classes.inputRoot,
-				//   input: classes.inputAuto
-				// }}
+        //   input: classes.inputAuto
+           hasClearIcon: 'clear-icon-adv',
+				}}
 				filterSelectedOptions
+        autoHighlight={true}
 				value={props.inputValue}
 				onChange={handleChange}
 				renderInput={(params) => (

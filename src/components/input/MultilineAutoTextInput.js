@@ -101,6 +101,7 @@ export default function MultilineAutoTextInput(props) {
       //   inputRoot: classes.inputRoot,
       //   input: classes.inputAuto,
       // }}
+      autoHighlight={true}
       inputValue={props.inputValue}
       onClose={(event, reason) => setOptions([])}
       renderOption={option => option}
