@@ -3,12 +3,18 @@ import React, { useState, useEffect } from "react";
 import PaginatedTable from "./PaginatedTable";
 
 const ClientPaginatedTable = props => {
-  const { data, columns, defaultSizePerPage = 20 } = props;
+  const {
+    data,
+    columns,
+    defaultSizePerPage = 20,
+    defaultSortField = "",
+    defaultSortOrder = ""
+  } = props;
 
   const [page, setPage] = useState(1);
   const [pageContents, setPageContents] = useState([]);
-  const [currentSort, setCurrentSort] = useState("");
-  const [currentSortOrder, setCurrentSortOrder] = useState("");
+  const [currentSort, setCurrentSort] = useState(defaultSortField);
+  const [currentSortOrder, setCurrentSortOrder] = useState(defaultSortOrder);
   const [sizePerPage, setSizePerPage] = useState(defaultSizePerPage);
 
   useEffect(() => {

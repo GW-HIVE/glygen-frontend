@@ -683,7 +683,7 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr arrow'>
-									<h3 className='panelHeadText'>Found Glycoproteins</h3>
+									<h3 className='panelHeadText'>Associated Glycoproteins</h3>
 									<Accordion.Toggle
 										eventKey='0'
 										onClick={() =>
@@ -942,7 +942,7 @@ const GlycanDetail = (props) => {
 											)}
 											{!publication && (
 												<p
-													style={{ marginTop: '20px', marginBottom: '37px' }}
+													style={{ padding: '13px',Marginleft: '13px'}}
 													className='no-data-msg'>
 													No data available.
 												</p>
