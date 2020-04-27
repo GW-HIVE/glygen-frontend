@@ -19,15 +19,16 @@
       "mass": {
         "name": "Monoisotopic Mass",
         "shortName": "Monoisotopic Mass",
-        "mass_id": "mass",
+        "id": "mass",
         "tooltip": {
           "title": "Monoisotopic Mass",
           "text": "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
-        },
-        "min": "Min",
-        "max": "Max",
-        "mass_type_id": "mass_type",
-        "type_name": "Mass Type"
+        }
+      },
+      "mass_type": {
+        "name": "Mass Type",
+        "shortName": "Mass Type",
+        "id": "mass_type"
       },
       "number_monosaccharides": {
         "name": "No of Sugars",
@@ -209,8 +210,8 @@
         "orderID": 800,
         "name": "Phosphate",
         "max": 2,
-        "subtext": "PO\u2083",
-        "shortName": "PO\u2083",
+        "subtext": "PO<sub>3</sub>",
+        "shortName": "PO<sub>3</sub>",
         "tooltip": {
           "title": "Phosphate",
           "text": "Explore",
@@ -221,8 +222,8 @@
       "s": {
         "orderID": 900,
         "name": "Sulfate",
-        "subtext": "SO\u2083",
-        "shortName": "SO\u2083",
+        "subtext": "SO<sub>3</sub>",
+        "shortName": "SO<sub>3</sub>",
         "tooltip": {
           "title": "Sulfate",
           "text": "Explore",

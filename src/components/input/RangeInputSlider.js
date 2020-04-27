@@ -34,7 +34,7 @@ export default function RangeInputSlider(props) {
 
 	const sliderChange = (event, newValue) => {
 		props.setSliderInputValue(newValue);
-		props.setInputValue(newValue);
+	  props.setInputValue(newValue);
 	};
 
 	const minInputChange = (event) => {
@@ -104,9 +104,7 @@ export default function RangeInputSlider(props) {
 						scale={(x) => x}
 						onChange={sliderChange}
 						valueLabelDisplay='auto'
-						aria-labelledby='range-slider'
 						getAriaValueText={valuetext}
-						helperText='Mass Range'
 					/>
 				</Grid>
 				<Grid item>

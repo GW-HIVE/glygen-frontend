@@ -9,6 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
+import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
 import stringConstants from '../../data/json/stringConstants';
 
@@ -583,6 +584,7 @@ export default function CompositionSearchControl(props) {
 			{props.compositionInitMap &&
 				props.compositionInitMap.map((key, index) => (
 					<Grid
+						key={key.residue}
 						container
 						// xs={12}
 						// md={10}
@@ -601,7 +603,7 @@ export default function CompositionSearchControl(props) {
 								<strong>{composition[key.residue].name}</strong>
 							</Typography>
 							<Typography className={classes.label2}>
-								{composition[key.residue].subtext}
+								{ReactHtmlParser(composition[key.residue].subtext)}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>
@@ -663,7 +665,6 @@ export default function CompositionSearchControl(props) {
 											key.residue
 										)
 									}
-									defaultValue={Number(key.min)}
 									inputProps={{
 										step: props.step,
 										min: key.min,
@@ -703,7 +704,6 @@ export default function CompositionSearchControl(props) {
 											key.residue
 										)
 									}
-									defaultValue={Number(key.max)}
 									inputProps={{
 										step: props.step,
 										min: key.min,
@@ -752,7 +752,7 @@ export default function CompositionSearchControl(props) {
 
 CompositionSearchControl.propTypes = {
 	step: PropTypes.number,
-	inputValue: PropTypes.array,
+	inputValue: PropTypes.object,
 	compositionInitMap: PropTypes.array,
 	setCompositionData: PropTypes.func,
 	getSelectionValue: PropTypes.func,

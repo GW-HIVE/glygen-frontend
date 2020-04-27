@@ -71,7 +71,21 @@ const useStyles = makeStyles((theme) => ({
 
 const GlycanSearch = (props) => {
 	let { id } = useParams();
-	const [initData, setInitData] = useState({});
+	const [initData, setInitData] = useState({
+		"organism": [
+			{
+			  "name": "Homo sapiens", 
+			  "id": 9606
+			}
+		  ],
+		  "glycan_mass": {
+			"native": {
+			  "max": 6750.45, 
+			  "name": "Native", 
+			  "min": 150.05
+			}
+		  },
+	});
 	const classes = useStyles();
 	const [glySimpleSearchCategory, setGlySimpleSearchCategory] = useState('any');
 	const [glySimpleSearchTerm, setGlySimpleSearchTerm] = useState('');
@@ -80,9 +94,9 @@ const GlycanSearch = (props) => {
 		{
 			glycanId: '',
 			glyMassType: 'Native',
-			glyMass: [149, 6751],
-			glyMassInput: [149, 6751],
-			glyMassRange: [149, 6751],
+			glyMass: [150, 6751],
+			glyMassInput: [150, 6751],
+			glyMassRange: [150, 6751],
 			glyNumSugars: [1, 37],
 			glyNumSugarsRange: [1, 37],
 			glyNumSugarsInput: [1, 37],
@@ -151,7 +165,6 @@ const GlycanSearch = (props) => {
 		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
-
 			setGlyAdvSearchData({
 				glyMassType: initData.glycan_mass.native.name,
 				glyMass: [
@@ -360,7 +373,7 @@ const GlycanSearch = (props) => {
 					}
 				});
 		});
-	}, [id]);
+	}, [id, compositionSearchData]);
 
 	function searchjson(
 		input_query_type,

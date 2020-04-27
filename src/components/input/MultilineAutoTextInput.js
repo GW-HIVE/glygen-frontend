@@ -63,7 +63,9 @@ export default function MultilineAutoTextInput(props) {
   const [options, setOptions] = React.useState([]);
 
   const handleChange = (event, value, reason) => {
-        props.setInputValue(value);
+    if (!(event === null && value === "" && reason === "reset")){
+      props.setInputValue(value);
+    }
   };
 
   React.useEffect(() => {
@@ -101,7 +103,6 @@ export default function MultilineAutoTextInput(props) {
       // }}
       inputValue={props.inputValue}
       onClose={(event, reason) => setOptions([])}
-      disableOpenOnFocus
       renderOption={option => option}
       onInputChange={handleChange}
       renderInput={params => (

@@ -59,7 +59,9 @@ export default function AutoTextInput(props) {
 	const [options, setOptions] = React.useState([]);
 
 	const handleChange = (event, value, reason) => {
-		props.setInputValue(value);
+		if (!(event === null && value === "" && reason === "reset")){
+      props.setInputValue(value);
+		}
 	};
 
 	React.useEffect(() => {
@@ -95,7 +97,6 @@ export default function AutoTextInput(props) {
 				inputValue={props.inputValue}
 				onInputChange={handleChange}
 				onClose={(event, reason) => setOptions([])}
-				disableOpenOnFocus
 				renderInput={(params) => (
 					<TextField
 						{...params}

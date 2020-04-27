@@ -45,14 +45,14 @@
         "order_id": 800,
         "name": "Phosphate",
         "max": 2,
-        "subtext": "PO\u2083",
-        "short_name": "PO\u2083"
+        "subtext": "PO<sub>3</sub>",
+        "short_name": "PO<sub>3</sub>"
     },
     "s": {
         "order_id": 900,
         "name": "Sulfate",
-        "subtext": "SO\u2083",
-        "short_name": "SO\u2083"
+        "subtext": "SO<sub>3</sub>",
+        "short_name": "SO<sub>3</sub>"
     },
     "other": {
         "order_id": 1000,
