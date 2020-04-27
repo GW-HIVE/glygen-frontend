@@ -3,9 +3,8 @@ import React from 'react';
 // import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Tooltip from '@material-ui/core/Tooltip';
-import SelectAllIcon from '@material-ui/icons/SelectAll';
+import SortIcon from '@material-ui/icons/Sort';
 import { Typography } from '@material-ui/core';
 // import Popover from '@material-ui/core/Popover';
 // import Button from '@material-ui/core/Button';
@@ -55,8 +54,7 @@ export default function PublicationsMenu() {
 							<Typography color='inherit'>Sort by</Typography>
 						</>
 					}>
-					<SelectAllIcon className='more-vert-icon' fontSize='large' />
-					{/* <MoreVertIcon className='more-vert-icon' /> */}
+					<SortIcon className='icon-blue' fontSize='large' />
 				</Tooltip>
 			</div>
 			<Menu
