@@ -101,7 +101,6 @@ export default function MultilineAutoTextInput(props) {
       // }}
       inputValue={props.inputValue}
       onClose={(event, reason) => setOptions([])}
-      disableOpenOnFocus
       renderOption={option => option}
       onInputChange={handleChange}
       renderInput={params => (

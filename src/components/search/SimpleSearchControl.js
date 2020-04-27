@@ -68,7 +68,6 @@ export default function SimpleSearchControl(props) {
 						<Select
 							value={props.simpleSearchCategory}
 							onChange={simpleSearchCategoryOnChange}
-							highlight={false}
 							defaultValue='any'
 							classes={{
 								outlined: classes.selectOutlined,
@@ -80,7 +79,7 @@ export default function SimpleSearchControl(props) {
 								props.simple_search_category
 									.sort()
 									.map((key) => (
-										<MenuItem value={key.id}>{key.display}</MenuItem>
+										<MenuItem key={key.id} value={key.id}>{key.display}</MenuItem>
 									))}
 						</Select>
 					</FormControl>

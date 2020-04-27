@@ -95,7 +95,6 @@ export default function AutoTextInput(props) {
 				inputValue={props.inputValue}
 				onInputChange={handleChange}
 				onClose={(event, reason) => setOptions([])}
-				disableOpenOnFocus
 				renderInput={(params) => (
 					<TextField
 						{...params}

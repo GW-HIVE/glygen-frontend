@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {Col,Row} from "react-bootstrap";
+import LineTooltip from '../tooltip/LineTooltip';
+import Button from 'react-bootstrap/Button'
 
 const useStyles = makeStyles((theme) => ({
     example: {
@@ -17,26 +19,28 @@ const ExampleExploreControl = (props) => {
 
     return(
         <>
-        {props.inputValue.sort(sortExamples).map((obj) => (<Row className={classes.example}>
+        {props.inputValue.sort(sortExamples).map((obj) => (<Row key={obj.example.id} className={classes.example}>
         <Col>
             <div>
                 {obj.example.name}{" "}
-                <a
-                    href="javascript:void(0)"
-                    onClick={() => {
-                        props.setInputValue(obj.example.id);
-                    }}
-                >
-                    {obj.example.id}
-                </a>
+                <LineTooltip text="Click to insert example.">
+                    <Button className={"lnk-btn"} variant="link"
+                        onClick={() => {
+                            props.setInputValue(obj.example.id);
+                        }}
+                    >
+                        {obj.example.id}
+                    </Button>
+                </LineTooltip>
             </div>
         </Col>
         {obj.explore && <Col>
-            <div class="text-right">
+            <div className="text-right">
                 Explore{" "}
                 <a
                     href={obj.explore.url}
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     {obj.explore.id}
                 </a>
@@ -50,9 +54,6 @@ const ExampleExploreControl = (props) => {
 export default ExampleExploreControl;
 
 ExampleExploreControl.propTypes = {
-    inputValue: PropTypes.string,
-    exampleText: PropTypes.string,
-    exploreText: PropTypes.string,
-    exploreUrl: PropTypes.string,
+    inputValue: PropTypes.array,
     setInputValue: PropTypes.func
 };

@@ -66,7 +66,6 @@ export default function MultiselectTextInput(props) {
 	return (
 		<div className={classes.root}>
 			<Autocomplete
-				gutterBottom
 				multiple
 				id='tags-outlined'
 				options={props.options}
@@ -82,7 +81,6 @@ export default function MultiselectTextInput(props) {
 				renderInput={(params) => (
 					<TextField
 						{...params}
-						gutterBottom
 						margin='dense'
 						variant='outlined'
 						// classes={{

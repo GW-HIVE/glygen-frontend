@@ -583,6 +583,7 @@ export default function CompositionSearchControl(props) {
 			{props.compositionInitMap &&
 				props.compositionInitMap.map((key, index) => (
 					<Grid
+						key={key.residue}
 						container
 						// xs={12}
 						// md={10}
@@ -663,7 +664,6 @@ export default function CompositionSearchControl(props) {
 											key.residue
 										)
 									}
-									defaultValue={Number(key.min)}
 									inputProps={{
 										step: props.step,
 										min: key.min,
@@ -703,7 +703,6 @@ export default function CompositionSearchControl(props) {
 											key.residue
 										)
 									}
-									defaultValue={Number(key.max)}
 									inputProps={{
 										step: props.step,
 										min: key.min,
@@ -752,7 +751,7 @@ export default function CompositionSearchControl(props) {
 
 CompositionSearchControl.propTypes = {
 	step: PropTypes.number,
-	inputValue: PropTypes.array,
+	inputValue: PropTypes.object,
 	compositionInitMap: PropTypes.array,
 	setCompositionData: PropTypes.func,
 	getSelectionValue: PropTypes.func,

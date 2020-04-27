@@ -22,10 +22,6 @@ import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const useStyles = makeStyles((theme) => ({
-	// margin: {
-	//     marginBottom: 16,
-	//     width: 700,
-	// },
 	// marginLeft: {
 	//     justifyContent: "flex-end",
 	// },
@@ -37,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 		// fontSize: "14px",
 		// color: "#4A4A4A",
 		fontWeight: 'bold',
-		marginLeft: -27,
+        marginLeft: -27,
 	},
 	// label4: {
 	//     fontSize: "15px",
@@ -145,7 +141,23 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyMassRange: [minRange, maxRange] });
 		props.setGlyAdvSearchData({ glyMassInput: [minval, maxval] });
 		props.setGlyAdvSearchData({ glyMass: [minval, maxval] });
-	};
+    };
+
+    function glyMassInputChange(mass) {
+        props.setGlyAdvSearchData({ glyMassInput: mass })
+    }
+    
+    function glyMassSliderChange(mass) {
+        props.setGlyAdvSearchData({ glyMass: mass })
+    }
+    
+    function glyNumSugarsInputChange(numSugars) {
+        props.setGlyAdvSearchData({ glyNumSugarsInput: numSugars })
+    }
+    
+    function glyNumSugarsSliderChange(numSugars) {
+        props.setGlyAdvSearchData({ glyNumSugars: numSugars })
+    }
 
 	const glyTypeOnChange = (event) => {
 		if (event.target.value === '')
@@ -269,8 +281,8 @@ const GlycanAdvancedSearch = (props) => {
 					</Row>
 				</Grid>
 				{/* Glycan Id */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth className={classes.margin} variant='outlined'>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth variant='outlined'>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
                                 title={advancedSearchData.glycan_id.tooltip.title}
@@ -296,8 +308,8 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Monoisotopic Mass */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
@@ -312,42 +324,35 @@ const GlycanAdvancedSearch = (props) => {
 									min={props.inputValue.glyMassRange[0]}
 									max={props.inputValue.glyMassRange[1]}
 									inputValue={props.inputValue.glyMassInput}
-									setInputValue={(input) =>
-										props.setGlyAdvSearchData({ glyMassInput: input })
-									}
+                                    setInputValue={glyMassInputChange}
 									inputValueSlider={props.inputValue.glyMass}
-									setSliderInputValue={(input) =>
-										props.setGlyAdvSearchData({ glyMass: input })
-									}
+                                    setSliderInputValue={glyMassSliderChange}
 								/>
 							</Grid>
 							{/* Mass Type */}
 							<Grid item xs={12} sm={3}>
 								<Typography
-									className={classes.label4}
-									gutterBottom5
 									style={{ marginBottom: '2px' }}>
 									&nbsp;
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>
 									<InputLabel className={classes.labelSelect}>
-                                        {advancedSearchData.mass.type_name}
+                                        {advancedSearchData.mass_type.name}
 									</InputLabel>
 									<Select
 										value={props.inputValue.glyMassType}
 										onChange={glyMassTypeOnChange}
-										highlight={false}
 										classes={{
 											//outlined: classes.selectOutlined,
 											root: 'select-menu',
 										}}
 										className={classes.select}
 										labelWidth={85}>
-										{props.initData.glycan_mass &&
-											Object.keys(props.initData.glycan_mass)
+											{Object.keys(props.initData.glycan_mass)
 												.sort()
 												.map((key) => (
 													<MenuItem
+                                                        key={props.initData.glycan_mass[key].name}
 														value={props.initData.glycan_mass[key].name}>
 														{props.initData.glycan_mass[key].name}
 													</MenuItem>
@@ -359,8 +364,8 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* No of Sugars */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
 								<Typography className={classes.label} gutterBottom>
@@ -375,21 +380,17 @@ const GlycanAdvancedSearch = (props) => {
 									min={props.inputValue.glyNumSugarsRange[0]}
 									max={props.inputValue.glyNumSugarsRange[1]}
 									inputValue={props.inputValue.glyNumSugarsInput}
-									setInputValue={(input) =>
-										props.setGlyAdvSearchData({ glyNumSugarsInput: input })
-									}
+                                    setInputValue={glyNumSugarsInputChange}
 									inputValueSlider={props.inputValue.glyNumSugars}
-									setSliderInputValue={(input) =>
-										props.setGlyAdvSearchData({ glyNumSugars: input })
-									}
+									setSliderInputValue={glyNumSugarsSliderChange}
 								/>
 							</Grid>
 						</Grid>
 					</FormControl>
 				</Grid>
 				{/* Organisms */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={9} sm={9}>
 								<Typography
@@ -402,19 +403,15 @@ const GlycanAdvancedSearch = (props) => {
                                     />
                                     {advancedSearchData.organism.name}
 								</Typography>
-								<MultiselectTextInput
-									options={
-										props.initData.organism
-											? props.initData.organism.sort(sortDropdown)
-											: props.initData.organism
-									}
+								{<MultiselectTextInput
+									options={props.initData.organism.sort(sortDropdown)}
 									inputValue={props.inputValue.glyOrganisms}
 									setInputValue={glyOrgChange}
 									placeholder={glycanAdvSearch.organism.placeholder}
-								/>
+								/>}
 							</Grid>
 							<Grid item xs={3} sm={3}>
-								<Typography className={classes.label4} gutterBottom5>
+								<Typography>
 									&nbsp;
 								</Typography>
 								<FormControl variant='outlined' margin='dense' fullWidth>
@@ -437,12 +434,12 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Glycan Type */}
-				<Grid item xs={12} sm={10}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
 					<FormControl
 						fullWidth
 						variant='outlined'
 						margin='dense'
-						className={classes.margin}>
+					>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
                                 title={advancedSearchData.glycan_type.tooltip.title}
@@ -464,7 +461,7 @@ const GlycanAdvancedSearch = (props) => {
 								props.initData.glycan_type
 									.sort(sortDropdown)
 									.map((option) => (
-										<MenuItem value={option.name}>{option.name}</MenuItem>
+										<MenuItem key={option.name} value={option.name}>{option.name}</MenuItem>
 									))}
 						</Select>
 					</FormControl>
@@ -472,12 +469,12 @@ const GlycanAdvancedSearch = (props) => {
 				{/* Glycan Subtype */}
 
 				{!props.inputValue.glySubTypeIsHidden && (
-					<Grid item xs={12} sm={10}>
+					<Grid item xs={12} sm={10} className={'zero-top-padding'}>
 						<FormControl
 							fullWidth
 							variant='outlined'
 							margin='dense'
-							className={classes.margin}>
+						>
 							<Typography className={classes.label} gutterBottom>
 								<HelpTooltip
                                     title={advancedSearchData.glycan_subtype.tooltip.title}
@@ -494,7 +491,7 @@ const GlycanAdvancedSearch = (props) => {
 									//outlined: classes.selectOutlined,
 									root: 'select-menu',
 								}}
-								displayPrint='none'>
+							>
 								<MenuItem value='' selected>
 									Select Glycan Subtype
 								</MenuItem>
@@ -505,7 +502,7 @@ const GlycanAdvancedSearch = (props) => {
 											.map(
 												(subtype) =>
 													option.name === props.inputValue.glyType && (
-														<MenuItem value={subtype}>{subtype}</MenuItem>
+														<MenuItem key={subtype} value={subtype}>{subtype}</MenuItem>
 													)
 											)
 									)}
@@ -515,8 +512,8 @@ const GlycanAdvancedSearch = (props) => {
 				)}
 
 				{/* Glycosylated Protein */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth variant='outlined' className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
 							gutterBottom
@@ -544,8 +541,8 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Glycan Motif */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth variant='outlined' className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
 							gutterBottom
@@ -573,8 +570,8 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Biosynthetic Enzyme */}
-				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth variant='outlined' className={classes.margin}>
+				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
 							gutterBottom
@@ -602,12 +599,12 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Pubmed ID */}
-				<Grid item xs={12} sm={10}>
+				<Grid item xs={12} sm={10} className={'zero-top-bottom-padding'}>
 					<FormControl
 						fullWidth
 						variant='outlined'
 						margin='dense'
-						className={classes.margin}>
+					>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
                                 title={advancedSearchData.pmid.tooltip.title}
@@ -667,8 +664,7 @@ export default GlycanAdvancedSearch;
 
 GlycanAdvancedSearch.propTypes = {
 	initData: PropTypes.object,
-	inputValue: PropTypes.array,
-	compositionInitMap: PropTypes.array,
+	inputValue: PropTypes.object,
 	setCompositionData: PropTypes.func,
 	getSelectionValue: PropTypes.func,
 };

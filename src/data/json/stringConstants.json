@@ -19,15 +19,16 @@
       "mass": {
         "name": "Monoisotopic Mass",
         "shortName": "Monoisotopic Mass",
-        "mass_id": "mass",
+        "id": "mass",
         "tooltip": {
           "title": "Monoisotopic Mass",
           "text": "The monoisotopic mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
-        },
-        "min": "Min",
-        "max": "Max",
-        "mass_type_id": "mass_type",
-        "type_name": "Mass Type"
+        }
+      },
+      "mass_type": {
+        "name": "Mass Type",
+        "shortName": "Mass Type",
+        "id": "mass_type"
       },
       "number_monosaccharides": {
         "name": "No of Sugars",
