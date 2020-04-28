@@ -25,11 +25,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 // import PublicationsMenu from '../components/PublicationsMenu';
 import relatedGlycansIcon from '../images/icons/related-glycans-icon.svg';
-import Tooltip from '@material-ui/core/Tooltip';
 // import { withStyles } from '@material-ui/core/styles';
 import DetailTooltips from '../data/json/detailTooltips.json';
 // import HelpTooltip from '../components/tooltip/HelpTooltip';
-import HelpTooltipDetail from '../components/tooltip/HelpTooltipDetail';
+import HelpTooltip from '../components/tooltip/HelpTooltip';
+import LineTooltip from '../components/tooltip/LineTooltip';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -408,40 +408,33 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.general.title}
 											text={DetailTooltips.glycan.general.text}
 											urlText={DetailTooltips.glycan.general.urlText}
 											url={DetailTooltips.glycan.general.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>General</h3>
 									<div className='float-right'>
 										<span className='pr-3'>
-											<Tooltip
-												placement='top'
-												title={
-													<>
-														<Typography color='inherit'>
-															Related glycans
-														</Typography>
-													</>
-												}>
-												<a
-													// eslint-disable-next-line
-													href='javascript:void(0)'
-													onClick={() => {
-														handleOpenSubsumptionBrowse(
-															glytoucan && glytoucan.glytoucan_ac
-														);
-													}}>
+											<a
+												// eslint-disable-next-line
+												href='javascript:void(0)'
+												onClick={() => {
+													handleOpenSubsumptionBrowse(
+														glytoucan && glytoucan.glytoucan_ac
+													);
+												}}>
+												<LineTooltip text='Related glycans'>
 													<Image
 														src={relatedGlycansIcon}
 														alt='Related glycans'
 													/>
-												</a>
-											</Tooltip>
+												</LineTooltip>
+											</a>
 										</span>
 										<Accordion.Toggle
 											eventKey='0'
@@ -537,14 +530,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.species.title}
 											text={DetailTooltips.glycan.species.text}
 											urlText={DetailTooltips.glycan.species.urlText}
 											url={DetailTooltips.glycan.species.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Species</h3>
 									<div className='float-right'>
 										<Accordion.Toggle
@@ -606,14 +600,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.motif.title}
 											text={DetailTooltips.glycan.motif.text}
 											urlText={DetailTooltips.glycan.motif.urlText}
 											url={DetailTooltips.glycan.motif.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Motif</h3>
 									<div className='float-right'>
 										<Accordion.Toggle
@@ -661,14 +656,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.glycoproteins.title}
 											text={DetailTooltips.glycan.glycoproteins.text}
 											urlText={DetailTooltips.glycan.glycoproteins.urlText}
 											url={DetailTooltips.glycan.glycoproteins.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>
 										Associated Glycoproteins
 									</h3>
@@ -707,14 +703,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.biosyntheticEnzyme.title}
 											text={DetailTooltips.glycan.biosyntheticEnzyme.text}
 											urlText={DetailTooltips.glycan.biosyntheticEnzyme.urlText}
 											url={DetailTooltips.glycan.biosyntheticEnzyme.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Biosynthetic Enzyme</h3>
 									<div className='float-right'>
 										<Accordion.Toggle
@@ -751,14 +748,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.digitalSequence.title}
 											text={DetailTooltips.glycan.digitalSequence.text}
 											urlText={DetailTooltips.glycan.digitalSequence.urlText}
 											url={DetailTooltips.glycan.digitalSequence.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Digital Sequence</h3>
 									<div className='float-right'>
 										<Accordion.Toggle
@@ -844,14 +842,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.crossReferences.title}
 											text={DetailTooltips.glycan.crossReferences.text}
 											urlText={DetailTooltips.glycan.crossReferences.urlText}
 											url={DetailTooltips.glycan.crossReferences.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Cross References</h3>
 									<div className='float-right'>
 										<Accordion.Toggle
@@ -909,14 +908,15 @@ const GlycanDetail = (props) => {
 							style={{ padding: '20px 0' }}>
 							<Card>
 								<Card.Header className='panelHeadBgr'>
-									<h5 className='gg-green d-inline'>
-										<HelpTooltipDetail
+									<span className='gg-green d-inline'>
+										<HelpTooltip
 											title={DetailTooltips.glycan.publications.title}
 											text={DetailTooltips.glycan.publications.text}
 											urlText={DetailTooltips.glycan.publications.urlText}
 											url={DetailTooltips.glycan.publications.url}
+											helpIcon='gg-helpicon-detail'
 										/>
-									</h5>
+									</span>
 									<h3 className='gg-green d-inline'>Publications</h3>
 									<div className='float-right'>
 										{/* <span className='gg-align-middle card-icon-space'>

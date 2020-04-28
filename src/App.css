@@ -500,11 +500,13 @@ ul.office-details {
                 Tooltip
 ============================================ */
 .gg-tooltip {
-	background-color: #f5f5f5 !important;
+	background-color: #fff !important;
 	color: rgba(0, 0, 0, 0.87) !important;
 	font-size: 12px !important;
-	border: 1px solid #dadde9 !important;
-	z-index: 999;
+	border: 1px solid #eee !important;
+	-webkit-box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
 }
 
 .gg-helpicon {
@@ -513,7 +515,9 @@ ul.office-details {
 	margin-bottom: 1px !important;
 }
 .gg-helpicon-detail {
-	margin-bottom: 6px !important;
+	margin-bottom: 8px !important;
+	margin-right: 10px !important;
+	font-size: 24px !important;
 }
 
 /* =========================================
