@@ -356,14 +356,11 @@ const GlycanDetail = (props) => {
 						<Row>
 							<Grid item xs={12} sm={12} className='text-center'>
 								<div className='horizontal-heading'>
-									<h5>Glycan</h5>
+									<h5>Look At</h5>
 									<h2>
 										{' '}
 										<span>
-											<strong>Details</strong>
-										</span>{' '}
-										for Glycan
-										<span>
+											Details for Glycan
 											<strong>
 												{glytoucan && glytoucan.glytoucan_ac && (
 													<> {glytoucan.glytoucan_ac}</>
@@ -573,10 +570,8 @@ const GlycanDetail = (props) => {
 																<Row>
 																	<Col
 																		align='right'
-																		className='gg-align-middle5 tutorial-text-middle'
 																		style={{
-																			paddingRight: '0',
-																			marginRight: '0',
+																			paddingTop: '12px',
 																		}}>
 																		<strong>{species}:</strong>
 																	</Col>
