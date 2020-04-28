@@ -73,11 +73,21 @@
 	padding-bottom: 10.5px	!important;
 }
 
-.clear-icon-adv {
-	margin-top: -8px !important;
-  	margin-bottom: -4px !important;
+.auto-input-root {
+	padding-left: 0px !important;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
 }
 
+.input-auto {
+	padding-left: 14px !important;
+	padding-top: 10.5px !important;
+	padding-bottom: 10.5px !important;
+}
+
+.auto-option {
+	padding-left: 14px !important;
+}
 
 .select-menu {
 	background-color: white !important;

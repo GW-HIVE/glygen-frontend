@@ -89,10 +89,9 @@ export default function AutoTextInput(props) {
 				freeSolo
 				getOptionLabel={(option) => option}
 				classes={{
-				// 	option: classes.option,
-				// 	inputRoot: classes.inputRoot,
-				// 	input: classes.inputAuto,
-					hasClearIcon: 'clear-icon-adv',
+				 	option: 'auto-option',
+				 	inputRoot: 'auto-input-root',
+				 	input: 'input-auto'
 				}}
 				options={options}
 				autoHighlight={true}
@@ -102,7 +101,7 @@ export default function AutoTextInput(props) {
 				renderInput={(params) => (
 					<TextField
 						{...params}
-						margin='dense'
+						//margin='dense'
 						// classes={{
 						// 	root: classes.inputBase,
 						// }}

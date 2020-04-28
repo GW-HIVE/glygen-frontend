@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import '../../css/Search.css';
 
 const filterOptions = (options, { inputValue }) =>
   matchSorter(options, inputValue.substring(inputValue.lastIndexOf(",") + 1));
@@ -95,12 +96,11 @@ export default function MultilineAutoTextInput(props) {
       getOptionLabel={option => props.inputValue.substring(0, props.inputValue.lastIndexOf(",") + 1) + option}
       filterOptions={filterOptions}
       options={options}
-      // style={{ width: 700 }}
-      // classes={{
-      //   option: classes.option,
-      //   inputRoot: classes.inputRoot,
-      //   input: classes.inputAuto,
-      // }}
+      classes={{
+        option: 'auto-option',
+        inputRoot: 'auto-input-root',
+        input: 'input-auto'
+      }}
       autoHighlight={true}
       inputValue={props.inputValue}
       onClose={(event, reason) => setOptions([])}

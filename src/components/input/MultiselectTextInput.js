@@ -71,11 +71,10 @@ export default function MultiselectTextInput(props) {
 				options={props.options}
 				getOptionLabel={(option) => option.name}
 				classes={{
-				//   option: classes.option,
-				//   inputRoot: classes.inputRoot,
-        //   input: classes.inputAuto
-           hasClearIcon: 'clear-icon-adv',
-				}}
+          option: 'auto-option',
+          inputRoot: 'auto-input-root',
+          input: 'input-auto'
+        }}
 				filterSelectedOptions
         autoHighlight={true}
 				value={props.inputValue}
@@ -83,7 +82,7 @@ export default function MultiselectTextInput(props) {
 				renderInput={(params) => (
 					<TextField
 						{...params}
-						margin='dense'
+						//margin='dense'
 						variant='outlined'
 						// classes={{
 						//   root: classes.inputBase
