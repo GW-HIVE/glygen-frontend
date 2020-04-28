@@ -1,0 +1,52 @@
+{
+	"glycan": {
+		"general": {
+			"title": "General",
+			"text": "General information about your selected glycan. Explore",
+			"urlText": "General",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"species": {
+			"title": "Species",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Species",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"motif": {
+			"title": "Motif",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Motif",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"glycoproteins": {
+			"title": "Associated Glycoproteins",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Associated Glycoproteins",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"biosyntheticEnzyme": {
+			"title": "Biosynthetic Enzyme",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Biosynthetic Enzyme",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"digitalSequence": {
+			"title": "Digital Sequence",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Digital Sequence",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"crossReferences": {
+			"title": "Cross References",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Cross References",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"publications": {
+			"title": "Publications",
+			"text": "Add some unique text here. Explore",
+			"urlText": "Publications",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		}
+	}
+}
