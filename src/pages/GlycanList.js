@@ -9,6 +9,8 @@ import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import DownloadButton from "../components/DownloadButton";
+import FeedbackWidget from "../components/FeedbackWidget";
+import residueMap from "../data/json/stringConstants.json";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -21,6 +23,30 @@ const GlycanList = props => {
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
 
+  const fixResidueToShortNames = query => {
+    const result = { ...query };
+
+    if (result.composition) {
+      result.composition = result.composition
+        .sort((a, b) => {
+          if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
+            return -1;
+          } else if (
+            residueMap[a.residue].orderID < residueMap[b.residue].orderID
+          ) {
+            return 1;
+          }
+          return 0;
+        })
+        .map(item => ({
+          ...item,
+          residue: residueMap[item.residue].short_name
+        }));
+    }
+
+    return result;
+  };
+
   useEffect(() => {
     const selected = getUserSelectedColumns();
     const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
@@ -30,7 +56,7 @@ const GlycanList = props => {
 
     getGlycanList(id).then(({ data }) => {
       setData(data.results);
-      setQuery(data.query);
+      setQuery(fixResidueToShortNames(data.query));
       setPagination(data.pagination);
       const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
       setPage(currentPage);
@@ -57,7 +83,7 @@ const GlycanList = props => {
       // place to change values before rendering
 
       setData(data.results);
-      setQuery(data.query);
+      setQuery(fixResidueToShortNames(data.query));
       setPagination(data.pagination);
 
       //   setSizePerPage()
@@ -78,6 +104,8 @@ const GlycanList = props => {
         {getTitle("glycanList")}
         {getTitle("glycanList")}
       </Helmet>
+
+      <FeedbackWidget />
       <Container maxWidth="xl" className="ggContainer">
         <section className="content-box-md">
           {/* <section style={{ paddingTop: "20px" }}> */}
@@ -87,6 +115,13 @@ const GlycanList = props => {
           />
         </section>
         <section>
+          <DownloadButton
+            types={[
+              { type: "Glycan data (*.csv)", data: "glycan" },
+              { type: "Glycan data (*.json)", data: "glycan" }
+            ]}
+            dataId={id}
+          />
           {selectedColumns && selectedColumns.length !== 0 && (
             <PaginatedTable
               trStyle={rowStyleFormat}
@@ -96,15 +131,6 @@ const GlycanList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              downloadButton={
-                <DownloadButton
-                  types={[
-                    { type: "csv", data: "glycan_list" },
-                    { type: "json", data: "glycan_list" }
-                  ]}
-                  dataId={id}
-                />
-              }
             />
           )}
         </section>

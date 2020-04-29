@@ -16,8 +16,6 @@ const PaginatedTable = ({
   sizePerPage,
   onTableChange,
   totalSize,
-  // onDownload,
-  // test
   downloadButton
 }) => {
   const customTotal = (from, to, size) => (
