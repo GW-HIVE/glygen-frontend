@@ -2,17 +2,43 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
-import { getDateMMDDYYYY } from "../utils/common";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+function getDateTime() {
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth() + 1;
+  var day = now.getDate();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+  if (month.toString().length == 1) {
+    month = "0" + month;
+  }
+  if (day.toString().length == 1) {
+    day = "0" + day;
+  }
+  if (hour.toString().length == 1) {
+    hour = "0" + hour;
+  }
+  if (minute.toString().length == 1) {
+    minute = "0" + minute;
+  }
+  if (second.toString().length == 1) {
+    second = "0" + second;
+  }
+  var dateTime =
+    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  return dateTime;
+}
 const GlycanQuerySummary = props => {
   const title = "Glycan Search Summary";
 
   const { data, onModifySearch } = props;
 
   const executionTime = data.execution_time
-    ? getDateMMDDYYYY(data.execution_time)
+    ? getDateTime(data.execution_time)
     : "";
   const {
     glytoucan_ac,
@@ -28,10 +54,7 @@ const GlycanQuerySummary = props => {
     pmid,
     term,
     term_category,
-    composition,
-    min,
-    max,
-    short_name
+    composition
   } = data;
 
   const formatOrganisms = organism => {
@@ -39,6 +62,13 @@ const GlycanQuerySummary = props => {
 
     return organismNames.join(` ${organism.operation} `);
   };
+
+  if (data.glytoucan_ac) {
+    data.glytoucan_ac = data.glytoucan_ac.trim();
+    data.glytoucan_ac = data.glytoucan_ac.replace(/,/g, ",\u200B");
+    data.glytoucan_ac = data.glytoucan_ac.replace(/-/g, "\u2011");
+    data.glytoucan_ac = data.glytoucan_ac + "\u200B";
+  }
   return (
     <>
       <Card className="text-center summary-panel">
@@ -46,7 +76,11 @@ const GlycanQuerySummary = props => {
           {title}
         </Card.Header>
         <Card.Body>
-          <Card.Title>Performed on: {executionTime} (EST)</Card.Title>
+          <Card.Title>
+            <p>
+              <strong>Performed on: {executionTime} (EST)</strong>
+            </p>
+          </Card.Title>
           <Card.Text>
             {composition &&
               composition.map((compItem, index) => (
@@ -75,7 +109,7 @@ const GlycanQuerySummary = props => {
             {term && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Term:
+                  Search Term:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {term}

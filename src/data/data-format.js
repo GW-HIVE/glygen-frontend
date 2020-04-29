@@ -55,13 +55,7 @@ export function groupPublicationEvidences(values) {
   }
 
   for (const s of values) {
-    groupedEvidences[s.pmid] = {
-      // title: s.title,
-      // journal: s.journal,
-      // authors: s.authors,
-      // date: s.date,
-      // url: s.url
-    };
+    groupedEvidences[s.pmid] = {};
 
     for (const e of s.evidence) {
       if (e.database in groupedEvidences[s.pmid]) {
