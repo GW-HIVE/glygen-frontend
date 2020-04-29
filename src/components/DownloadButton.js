@@ -84,22 +84,36 @@ const DownloadButton = props => {
         aria-labelledby="download"
       >
         <Row>
-          <Col sm={12} md={6} lg={6}>
-            {/* <Button
+          <Col sm={3} md={6} lg={6}>
+            {" "}
+          </Col>
+          <Col
+            sm={12}
+            md={6}
+            lg={6}
+            style={{
+              marginTop: "-9px"
+            }}
+          >
+            <button
               type="button"
+              className="closeicondownload"
               style={{
-                marginRight: "7px",
-                marginTop: "-9px",
-                paddingTop: "10px;"
+                backgroundColor: "#2E78B7",
+                color: "white",
+                marginLeft: "151px"
               }}
-              className="gg-btn-blue"
               onClick={() => {
                 clearForm();
                 setShow(!show);
               }}
             >
               <b>x</b>
-            </Button> */}
+            </button>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12} md={6} lg={6}>
             <FormControl
               margin="dense"
               variant="outlined"
