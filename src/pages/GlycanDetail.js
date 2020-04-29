@@ -141,6 +141,9 @@ const GlycanDetail = (props) => {
 	if (detailData.mass) {
 		detailData.mass = addCommas(detailData.mass);
 	}
+	if (detailData.mass_pme) {
+		detailData.mass_pme = addCommas(detailData.mass_pme);
+	}
 	if (detailData.glycoct) {
 		detailData.glycoct = detailData.glycoct.replace(/\\n/g, '\n');
 	}
@@ -468,8 +471,8 @@ const GlycanDetail = (props) => {
 														</Link>
 													</div>
 													<div>
-														<strong>Monoisotopic Mass: </strong>
-														{mass} Da <strong>(Permethylated Mass:</strong>
+<strong>Monoisotopic Mass: {" "}</strong>
+														{mass} Da <strong>(Permethylated Mass:{" "} </strong>
 														{mass_pme} Da)
 													</div>
 												</>

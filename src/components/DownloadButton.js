@@ -123,9 +123,7 @@ const DownloadButton = props => {
                     }}
                   >
                     {types.map(typeItem => (
-                      <MenuItem value={typeItem.type}>
-                        {typeItem.type.toUpperCase()}
-                      </MenuItem>
+                      <MenuItem value={typeItem.type}>{typeItem.type}</MenuItem>
                     ))}
                   </Select>
                 </div>
@@ -136,7 +134,7 @@ const DownloadButton = props => {
 
         <Row>
           <div className="col-md-5" style={{ paddingLeft: "22px" }}>
-            <strong>Compress file:</strong>
+            <strong>Compress file (*.gzip):</strong>
           </div>
           <div className="col-md-7" style={{ paddingLeft: "50px" }}>
             <input
