@@ -84,7 +84,7 @@ const DownloadButton = props => {
         aria-labelledby="download"
       >
         <Row>
-          <Col sm={3} md={6} lg={6}>
+          <Col sm={6} md={3} lg={6}>
             {" "}
           </Col>
           <Col
@@ -97,7 +97,6 @@ const DownloadButton = props => {
           >
             <button
               type="button"
-              className="closeicondownload"
               style={{
                 backgroundColor: "#2E78B7",
                 color: "white",
