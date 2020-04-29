@@ -41,7 +41,7 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) =>
 export const GLYCAN_COLUMNS = [
   {
     dataField: "glytoucan_ac",
-    text: "Glycan ID",
+    text: "GlyTouCan Accession",
     sort: true,
     selected: true,
     headerStyle: (colum, colIndex) => {
@@ -79,7 +79,7 @@ export const GLYCAN_COLUMNS = [
 
   {
     dataField: "mass",
-    text: "Mass",
+    text: "Monoisotopic Mass (Da)",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
@@ -115,7 +115,23 @@ export const GLYCAN_COLUMNS = [
   // },
   {
     dataField: "mass_pme",
-    text: "Mass_Pme",
+    text: "Monoisotopic Mass-pMe (Da)",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
+  // {
+  //   dataField: "number_monosaccharides",
+  //   text: "No of Sugars",
+  //   sort: true,
+  //   headerStyle: (colum, colIndex) => {
+  //     return { backgroundColor: "#4B85B6", color: "white" };
+  //   }
+  // },
+  {
+    dataField: "number_proteins",
+    text: "On How Many GlycoProteins",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
@@ -123,20 +139,13 @@ export const GLYCAN_COLUMNS = [
   },
   {
     dataField: "number_enzymes",
-    text: "No.of Enzyme",
+    text: "How Many Enzymes",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     }
   },
-  {
-    dataField: "number_proteins",
-    text: "No.of Protein",
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  },
+
   {
     dataField: "number_monosaccharides",
     text: "No. of Sugar",

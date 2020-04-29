@@ -12,7 +12,7 @@ import Button from "react-bootstrap/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import { Link } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
-
+import CloseIcon from "@material-ui/icons/Close";
 const BootstrapInput = withStyles(theme => ({
   root: {
     "label + &": {
@@ -84,30 +84,21 @@ const DownloadButton = props => {
         aria-labelledby="download"
       >
         <Row>
-          <Col sm={6} md={3} lg={6}>
-            {" "}
-          </Col>
-          <Col
-            sm={12}
-            md={6}
-            lg={6}
-            style={{
-              marginTop: "-9px"
-            }}
-          >
+          <Col>
             <button
               type="button"
               style={{
-                backgroundColor: "#2E78B7",
-                color: "white",
-                marginLeft: "151px"
+                float: "right",
+                border: "none",
+                backgroundColor: "inherit"
               }}
               onClick={() => {
                 clearForm();
                 setShow(!show);
               }}
             >
-              <b>x</b>
+              {" "}
+              <CloseIcon />
             </button>
           </Col>
         </Row>
