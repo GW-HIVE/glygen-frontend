@@ -143,9 +143,9 @@ p {
 	overflow: auto;
 	margin-bottom: 20px;
 }
-/* .img-cartoon-list-page {
-  width: 100% !important;
-} */
+.img-cartoon-list-page {
+	width: 100% !important;
+}
 /* ========================================
             Panels
 ==========================================*/
