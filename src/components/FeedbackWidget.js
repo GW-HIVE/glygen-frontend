@@ -12,6 +12,7 @@ import { getTstJson } from "../data/api";
 import { validateEmail } from "../utils/common";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const FeedbackWidget = props => {
   const { defaultSubject = "Suggestion" } = props;
@@ -209,6 +210,11 @@ const FeedbackWidget = props => {
                       maxlength: messageMaxLen
                     }}
                   />
+                  {/* {(message.length < 5 || message.length > messageMaxLen) && (
+                    <FormHelperText className={"error_text"} error>
+                      {`Message should be between 5 to ${messageMaxLen} characters`}
+                    </FormHelperText>
+                  )} */}
                   <div
                     className={"text-right text-muted"}
                     style={{ marginTop: "-5px" }}

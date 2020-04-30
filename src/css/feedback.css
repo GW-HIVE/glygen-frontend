@@ -151,7 +151,7 @@ body {
   top: 100%;
   left: 50%;
   border: solid transparent;
-  content: " ";
+  content: "  ";
   height: 0;
   width: 0;
   position: absolute;
@@ -232,4 +232,8 @@ ol {
   background: #336699;
   color: white;
   position: relative;
+}
+.MuiFormHelperText-root.Mui-error {
+  color: #f44336;
+  margin-left: 2px;
 }
