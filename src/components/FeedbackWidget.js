@@ -106,7 +106,7 @@ const FeedbackWidget = props => {
               onClick={() => closeForm()}
             >
               {isOpen ? (
-                <CloseIcon />
+                <CloseIcon style={{ fill: "white" }} />
               ) : (
                 <span className="name">
                   <b>Feedback</b>
@@ -258,7 +258,6 @@ const FeedbackWidget = props => {
                   <TextField
                     id="email"
                     required
-                    // label='Email'
                     type="email"
                     name="email"
                     value={email}
