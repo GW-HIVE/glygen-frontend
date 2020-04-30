@@ -13,7 +13,7 @@ export default function VerticalHeadingLogo(props) {
 
 	return (
 		<div className='content-box-md'>
-			<Container maxWidth='lg' className='vert-head-logo-container'>
+			<Container maxWidth='lg' className='panel-width'>
 				<Row>
 					<Grid item xs={8} sm={8} md={9} lg={9}>
 						<div className='vertical-heading'>

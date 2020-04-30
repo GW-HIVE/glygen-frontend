@@ -41,7 +41,7 @@
 		{
 			"text": "",
 			"heading": "GlyGen data model and processing workflow.",
-			"authors": "Robel Kahsay, Jeet Vora, Rahi Navelkar, Brian Fochtman, Reza Mousavi, Leyla Jael Garcia Castro, Preethi Vasudev, Gaurav Agarwal, Sujeet Kulkarni, Rupali Mahadik, Tatiana Williamson, Wenjin Zhang, Maria Martin, Karen Ross, Darren A Natale, Kiyoko F AokiKinoshita, Matthew P Campbell, Nathan Edwards, Rene Ranzinger, William S York, Raja Mazumder.",
+			"authors": "Robel Kahsay, Jeet Vora, Rahi Navelkar, Reza Mousavi, Brian Fochtman, Xavier Holmes, Nagarajan Pattabiraman, Rene Ranzinger, Rupali Mahadik, Tatiana Williamson, Sujeet Kulkarni, Gaurav Agarwal, Maria Martin, Preethi Vasudev, Leyla Jael Garcia Castro, Nathan Edwards, Wenjin Zhang, Darren A Natale, Karen Ross, Kiyoko F Aoki-Kinoshita, Matthew P Campbell, William S York, Raja Mazumder.",
 			"publisher": "Bioinformatics. 2020.",
 			"pmid": "PMID",
 			"website": {
@@ -49,9 +49,9 @@
 				"url": "https://www.ncbi.nlm.nih.gov/pubmed/32324859"
 			},
 			"quote": "quote-open-outline.svg",
-			"bibtex": "/downloads/citation/31616925.pdf",
+			"bibtex": "/downloads/citation/32324859.pdf",
 			"bibtexlabel": "BibTeX",
-			"endnote": "/downloads/citation/31616925.enw",
+			"endnote": "/downloads/citation/32324859.enw",
 			"endnotelabel": "EndNote",
 			"period": "."
 		}

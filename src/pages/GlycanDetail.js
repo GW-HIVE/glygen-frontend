@@ -30,7 +30,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 // import HelpTooltip from '../components/tooltip/HelpTooltip';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
-import FeedbackWidget from "../components/FeedbackWidget";
+import FeedbackWidget from '../components/FeedbackWidget';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -385,8 +385,16 @@ const GlycanDetail = (props) => {
 					<div className='gg-download-btn-width'>
 						<DownloadButton
 							types={[
-								{ display:"Glycan data (*.png)" ,type: 'png', data: 'glycan_image' },
-								{  display:" Glycan data (*.csv)" ,type: 'json', data: 'glycan_detail' },
+								{
+									display: 'Glycan data (*.png)',
+									type: 'png',
+									data: 'glycan_image',
+								},
+								{
+									display: ' Glycan data (*.csv)',
+									type: 'json',
+									data: 'glycan_detail',
+								},
 							]}
 							dataType='glycan_detail'
 							dataId={id}
@@ -473,8 +481,8 @@ const GlycanDetail = (props) => {
 														</Link>
 													</div>
 													<div>
-<strong>Monoisotopic Mass: {" "}</strong>
-														{mass} Da <strong>(Permethylated Mass:{" "} </strong>
+														<strong>Monoisotopic Mass: </strong>
+														{mass} Da <strong>(Permethylated Mass: </strong>
 														{mass_pme} Da)
 													</div>
 												</>
@@ -941,7 +949,7 @@ const GlycanDetail = (props) => {
 									</div>
 								</Card.Header>
 								<Accordion.Collapse eventKey='0' out={!collapsed.publication}>
-									<Card.Body className='publication-card-padding'>
+									<Card.Body className='card-padding-zero'>
 										<Table hover fluid>
 											{publication && (
 												<tbody className='table-body'>
