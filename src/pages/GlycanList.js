@@ -119,8 +119,8 @@ const GlycanList = props => {
         <section>
           <DownloadButton
             types={[
-              { type: "Glycan data (*.csv)", data: "glycan" },
-              { type: "Glycan data (*.json)", data: "glycan" }
+              { display: "Glycan data (*.csv)", type: "csv", data: "glycan" },
+              { display: "Glycan data (*.json)", type: "json", data: "glycan" }
             ]}
             dataId={id}
           />

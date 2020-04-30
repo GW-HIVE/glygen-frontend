@@ -385,8 +385,8 @@ const GlycanDetail = (props) => {
 					<div className='gg-download-btn-width'>
 						<DownloadButton
 							types={[
-								{ type: 'Glycan image (*.png)', data: 'glycan_image' },
-								{ type: 'Glycan data (*.json)', data: 'glycan_detail' },
+								{ display:"Glycan data (*.png)" ,type: 'png', data: 'glycan_image' },
+								{  display:" Glycan data (*.csv)" ,type: 'json', data: 'glycan_detail' },
 							]}
 							dataType='glycan_detail'
 							dataId={id}
