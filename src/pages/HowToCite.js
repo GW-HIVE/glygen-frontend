@@ -13,7 +13,7 @@ import Sidebar from '../components/navigation/Sidebar';
 
 const HowToCite = (props) => {
 	const vertHeadHowToCite = {
-		h5VerticalText: 'Check papers',
+		h5VerticalText: ' Citations  ',
 		h2textTop: 'Our',
 		h2textBottomStrongBefore: 'Publications & Citations',
 	};
