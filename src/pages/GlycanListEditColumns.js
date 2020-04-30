@@ -21,7 +21,7 @@ const GlycanListEditColumns = () => {
     const selected = getUserSelectedColumns();
     const selectedColumns = GLYCAN_COLUMNS.map(column => ({
       ...column,
-      selected: selected.includes(column.text)
+      selected: selected.includes(column.dataField)
     }));
 
     setColumns(selectedColumns);
@@ -52,10 +52,10 @@ const GlycanListEditColumns = () => {
       <h1>Columns</h1>
       <ul>
         {columns.map(column => (
-          <li key={column.text}>
+          <li key={column.dataField}>
             <label>
               <input
-                data-column={column.text}
+                data-column={column.dataField}
                 type="checkbox"
                 checked={column.selected}
                 onChange={onColumnSelection}
