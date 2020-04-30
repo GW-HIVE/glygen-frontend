@@ -244,12 +244,13 @@ hr {
   height: 1px !important;
   background-color: rgba(0, 0, 0, 0.12) !important;
 }
-.publication-card-padding.card-body {
+
+.card-padding-zero.card-body {
   flex: 1 1 auto;
   min-height: 0 !important;
   padding: 0 !important;
 }
-.publication-card-padding table {
+.card-padding-zero table {
   margin-bottom: 0 !important;
 }
 /* =========================================
