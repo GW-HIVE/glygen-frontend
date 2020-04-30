@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
 import stringConstants from '../data/json/stringConstants';
+import FeedbackWidget from "../components/FeedbackWidget";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -624,6 +625,7 @@ const GlycanSearch = (props) => {
 				{getTitle('glycanSearch')}
 				{getMeta('glycanSearch')}
 			</Helmet>
+			<FeedbackWidget />
 			<div className='lander'>
 				<Container className={classes.con1}>
 					<PageLoader pageLoading={pageLoading} />

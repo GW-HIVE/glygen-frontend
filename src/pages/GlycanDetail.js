@@ -30,6 +30,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 // import HelpTooltip from '../components/tooltip/HelpTooltip';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
+import FeedbackWidget from "../components/FeedbackWidget";
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -402,6 +403,7 @@ const GlycanDetail = (props) => {
 							})}
 							{getMeta('glycanDetail')}
 						</Helmet>
+						<FeedbackWidget />
 						{/* <ToggleCardlTemplate /> */}
 						{/* general */}
 						<Accordion

@@ -11,9 +11,10 @@ import { AiFillBug } from "react-icons/ai";
 import { getTstJson } from "../data/api";
 import { validateEmail } from "../utils/common";
 import { Typography } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 
 const FeedbackWidget = props => {
-  const { defaultSubject = "Problem" } = props;
+  const { defaultSubject = "Suggestion" } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -65,10 +66,14 @@ const FeedbackWidget = props => {
         );
       });
 
+    resetForm();
+  };
+
+  const resetForm = () => {
     setFName("");
     setLName("");
     setEmail("");
-    setSubject("");
+    setSubject("Suggestion");
     setMessage("");
     setMessageCharsLeft(`${messageMaxLen}`);
     setFormValidated(false);
@@ -76,7 +81,11 @@ const FeedbackWidget = props => {
     setLNameValidated(false);
     setEmailValidated(false);
     setMessageValidated(false);
-    setSubject("general");
+  };
+
+  const closeForm = () => {
+    resetForm();
+    setIsOpen(!isOpen);
   };
 
   const onlyText = e => {
@@ -94,11 +103,15 @@ const FeedbackWidget = props => {
           <Col sm={12} md={12} lg={12}>
             <div
               className={"toggle rotate" + (isOpen ? " active" : "")}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => closeForm()}
             >
-              <span className="name">
-                <b>Feedback</b>
-              </span>
+              {isOpen ? (
+                <CloseIcon />
+              ) : (
+                <span className="name">
+                  <b>Feedback</b>
+                </span>
+              )}
             </div>
             <div className="scroll">
               <h1>
@@ -145,7 +158,7 @@ const FeedbackWidget = props => {
                   style={{ margin: "5px 0 15px 0" }}
                 >
                   <span
-                    className={subject === "Suggestion" ? "active" : ""}
+                    className={subject === "Suggestion" ? "active" : " "}
                     onClick={() => setSubject("Suggestion")}
                   >
                     <FaRegLightbulb /> Suggestion
