@@ -59,16 +59,17 @@ const GlycanQuerySummary = props => {
 
   const formatOrganisms = organism => {
     const organismNames = organism.organism_list.map(item => item.name);
-
-    return organismNames.join(` ${organism.operation} `);
+    const OrganiOperation = organism.operation.toUpperCase();
+    return organismNames.join(` ${OrganiOperation} `);
   };
 
-  if (data.glytoucan_ac) {
-    data.glytoucan_ac = data.glytoucan_ac.trim();
-    data.glytoucan_ac = data.glytoucan_ac.replace(/,/g, ",\u200B");
-    data.glytoucan_ac = data.glytoucan_ac.replace(/-/g, "\u2011");
-    data.glytoucan_ac = data.glytoucan_ac + "\u200B";
+  function formatGlycans() {
+    const glycansAc = data.glytoucan_ac;
+    return glycansAc.split(",").join(", ");
   }
+
+  // data.glytoucan_ac = data.glytoucan_ac.split(",").join(", ");
+
   return (
     <>
       <Card className="text-center summary-panel">
@@ -100,7 +101,7 @@ const GlycanQuerySummary = props => {
                   Glycan Id:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {glytoucan_ac}
+                  {formatGlycans(glytoucan_ac)}
                 </Col>
               </Row>
             )}
@@ -108,12 +109,8 @@ const GlycanQuerySummary = props => {
             {/* glycan typeahead */}
             {term && (
               <Row className="summary-table-col" sm={12}>
-                <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Search Term:
-                </Col>
-                <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {term}
-                </Col>
+                <Col align="right">Search Term:</Col>
+                <Col align="left">{term}</Col>
               </Row>
             )}
             {/* glycan typeahead */}
