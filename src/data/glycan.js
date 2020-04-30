@@ -121,14 +121,14 @@ export const GLYCAN_COLUMNS = [
       return { backgroundColor: "#4B85B6", color: "white" };
     }
   },
-  // {
-  //   dataField: "number_monosaccharides",
-  //   text: "No of Sugars",
-  //   sort: true,
-  //   headerStyle: (colum, colIndex) => {
-  //     return { backgroundColor: "#4B85B6", color: "white" };
-  //   }
-  // },
+  {
+    dataField: "number_monosaccharides",
+    text: "No of Sugars      ",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
   {
     dataField: "number_proteins",
     text: "On How Many GlycoProteins",
@@ -140,15 +140,6 @@ export const GLYCAN_COLUMNS = [
   {
     dataField: "number_enzymes",
     text: "How Many Enzymes",
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  },
-
-  {
-    dataField: "number_monosaccharides",
-    text: "No. of Sugar",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
