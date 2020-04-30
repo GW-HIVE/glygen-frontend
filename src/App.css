@@ -21,6 +21,9 @@
 .gg-blue {
 	background-color: var(--gg-blue) !important;
 }
+.gg-blue-color {
+	color: var(--gg-blue) !important;
+}
 .ggContainer {
 	margin-bottom: 30px;
 }
@@ -393,13 +396,12 @@ hr {
 /* =========================================
        Download
 ============================================ */
-
-.dropdown-menu.show {
+/* .dropdown-menu.show {
 	margin-right: 56px !important;
-}
-.caret {
+} */
+/* .caret {
 	margin-right: 35px;
-}
+} */
 
 .summary-table-col {
 	word-break: break-all;

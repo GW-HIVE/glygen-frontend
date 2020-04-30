@@ -5,9 +5,8 @@ import { downloadFromServer } from '../utils/download';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import { createStyles, makeStyles, withStyles } from '@material-ui/core/styles';
-import { height } from '@material-ui/system';
+// import InputLabel from '@material-ui/core/InputLabel';
+import { withStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Link } from '@material-ui/core';
@@ -27,17 +26,6 @@ const BootstrapInput = withStyles((theme) => ({
 	},
 }))(InputBase);
 
-const useStyles = makeStyles((theme) =>
-	createStyles({
-		formControl: {
-			margin: theme.spacing(1),
-			minWidth: 120,
-			minHeight: 25,
-			marginRight: 65,
-		},
-	})
-);
-
 const DownloadButton = (props) => {
 	const { types, dataId } = props;
 
@@ -56,7 +44,7 @@ const DownloadButton = (props) => {
 		setFormat(props.format || props.types[0].type);
 		setCompressed(props.compressed || false);
 	};
-	const classes = useStyles();
+
 	return (
 		<div className='dropdown text-right'>
 			<Link>
@@ -85,10 +73,12 @@ const DownloadButton = (props) => {
 					<Col>
 						<button
 							type='button'
+							className='gg-blue-color'
 							style={{
 								float: 'right',
 								border: 'none',
 								backgroundColor: 'inherit',
+								padding: '0',
 							}}
 							onClick={() => {
 								clearForm();
@@ -99,21 +89,18 @@ const DownloadButton = (props) => {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={10} sm={10}>
-						<FormControl
-							margin='dense'
-							variant='outlined'
-							className={classes.formControl}>
+					<Col>
+						<FormControl margin='dense' variant='outlined'>
 							<Row>
-								<Col xs={7} sm={7} style={{ paddingTop: '16px' }}>
+								<Col
+									// xs={ 7 } sm={ 7 }
+									style={{ paddingTop: '6px' }}>
 									<strong>Format:</strong>
 								</Col>
 
 								<Col
-									xs={5}
-									sm={5}
-									align='right !important'
-									style={{ paddingTop: '10px' }}>
+									// xs={5}	// sm={5}
+									align='right !important'>
 									<Select
 										input={<BootstrapInput />}
 										value={format}
@@ -129,11 +116,17 @@ const DownloadButton = (props) => {
 						</FormControl>
 					</Col>
 				</Row>
-				<Row style={{ padding: '8px' }}>
-					<Col xs={7} sm={7}>
-						<strong>Compress file (*.gzip):</strong>
+				<Row style={{ paddingTop: '10px' }}>
+					<Col
+					// xs={ 7 } sm={ 7 }
+					>
+						<strong style={{ whiteSpace: 'nowrap' }}>
+							Compress file (*.gzip):
+						</strong>
 					</Col>
-					<Col xs={5} sm={5} align='right'>
+					<Col
+						// xs={ 5 } sm={ 5 }
+						align='right'>
 						<input
 							// style={{ fontSize: 'xx-large' }}
 							type='checkbox'
@@ -149,9 +142,8 @@ const DownloadButton = (props) => {
 					<Col>
 						<Button
 							type='button'
-							style={{ marginTop: '15px', float: 'right', marginRight: '8px' }}
-							// style={{ marginRight: '10px', marginTop: '7px' }}
-							className='gg-btn-blue'
+							style={{ marginTop: '15px', float: 'right' }}
+							className='gg-btn-outline'
 							onClick={handleDownload}>
 							OK
 						</Button>
