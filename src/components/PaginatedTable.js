@@ -19,8 +19,10 @@ const PaginatedTable = ({
   downloadButton
 }) => {
   const customTotal = (from, to, size) => (
-    <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+    <span className="react-bootstrap-table-pagination-total Paginationtext">
+      <strong>
+        Showing {from} to {to} of {size} Results
+      </strong>
     </span>
   );
 
@@ -59,11 +61,11 @@ const PaginatedTable = ({
         {({ paginationProps, paginationTableProps }) => (
           <div>
             <div>
+              <strong className="Paginationtext">Records per page {""}</strong>
               <SizePerPageDropdownStandalone
                 {...paginationProps}
                 className="mr-2"
               />
-
               <PaginationTotalStandalone {...paginationProps} />
               {/* {onDownload && <button onClick={onDownload}>Download</button>} */}
               {downloadButton}
