@@ -10,7 +10,8 @@ import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
-import residueMap from "../data/json/stringConstants.json";
+import stringConstants from "../data/json/stringConstants.json";
+import ReactHtmlParser from "react-html-parser";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -18,12 +19,13 @@ const GlycanList = props => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [pagination, setPagination] = useState([]);
-  const [selectedColumns, setSelectedColumns] = useState([]);
+  const [selectedColumns, setSelectedColumns] = useState(GLYCAN_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
 
   const fixResidueToShortNames = query => {
+    const residueMap = stringConstants.glycan.common.composition;
     const result = { ...query };
 
     if (result.composition) {
@@ -40,7 +42,7 @@ const GlycanList = props => {
         })
         .map(item => ({
           ...item,
-          residue: residueMap[item.residue].short_name
+          residue: ReactHtmlParser(residueMap[item.residue].name.bold())
         }));
     }
 
@@ -48,11 +50,11 @@ const GlycanList = props => {
   };
 
   useEffect(() => {
-    const selected = getUserSelectedColumns();
-    const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
-      selected.includes(column.text)
-    );
-    setSelectedColumns(userSelectedColumn);
+    // const selected = getUserSelectedColumns();
+    // const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
+    //   selected.includes(column.dataField)
+    // );
+    // setSelectedColumns(userSelectedColumn);
 
     getGlycanList(id).then(({ data }) => {
       setData(data.results);
