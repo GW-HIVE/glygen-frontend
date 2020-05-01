@@ -12,9 +12,12 @@ import GlycanTutorial from '../components/tutorial/GlycanTutorial';
 import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
 import stringConstants from '../data/json/stringConstants';
+import routeConstants from '../data/json/routeConstants';
+import { glycanSearch, glycanSimpleSearch } from '../data/glycan';
 import FeedbackWidget from "../components/FeedbackWidget";
 
 
@@ -239,6 +242,7 @@ const GlycanSearch = (props) => {
 			});
 			setGlyCompData(compStateData);
 			setInitData(initData);
+			setGlyActTabKey(props.activeTab ? props.activeTab : routeConstants.glycanAdvSearchTabKey);
 			if (id === undefined) setPageLoading(false);
 
 			id &&
@@ -261,14 +265,14 @@ const GlycanSearch = (props) => {
 							};
 						}
 						setGlyCompData(queryCompData);
-						setGlyActTabKey('composition_search');
+						setGlyActTabKey(routeConstants.glycanCompoSearchTabKey);
 						setPageLoading(false);
 					} else if (data.query.query_type === glycanData.simple_search.query_type.name) {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
 						setGlySimpleSearchTerm(data.query.term ? data.query.term : '');
-						setGlyActTabKey('simple_search');
+						setGlyActTabKey(routeConstants.glycanSimpleSearchTabKey);
 						setPageLoading(false);
 					} else {
 						setGlyAdvSearchData({
@@ -369,12 +373,12 @@ const GlycanSearch = (props) => {
 							glyAdvSearchValError: [false, false, false, false, false],
 						});
 
-						setGlyActTabKey('advanced_search');
+						setGlyActTabKey(routeConstants.glycanAdvSearchTabKey);
 						setPageLoading(false);
 					}
 				});
 		});
-	}, [id, glycanData]);
+	}, [id, glycanData, props.activeTab]);
 
 	function searchjson(
 		input_query_type,
@@ -480,7 +484,7 @@ const GlycanSearch = (props) => {
 		return formjson;
 	}
 
-	const glycanSimpleSearch = () => {
+	const glycanSimSearch = () => {
 		var formjsonSimple = {
 			[commonGlycanData.operation.id]: 'AND',
 			[glycanData.simple_search.query_type.id]: glycanData.simple_search.query_type.name,
@@ -488,12 +492,13 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.term_category.id]: glySimpleSearchCategory,
 		};
 
-		var json = 'query=' + JSON.stringify(formjsonSimple);
-		const url = '/glycan/search_simple?' + json;
-		return getJson(url);
+		return glycanSimpleSearch(formjsonSimple);
+		// var json = 'query=' + JSON.stringify(formjsonSimple);
+		// const url = '/glycan/search_simple?' + json;
+		// return getJson(url);
 	};
 
-	const glycanSearch = () => {
+	const glycanAdvSearch = () => {
 		let formObject = searchjson(
 			glycanData.advanced_search.query_type.name,
 			glyAdvSearchData.glycanId,
@@ -513,9 +518,10 @@ const GlycanSearch = (props) => {
 			undefined
 		);
 
-		var json = 'query=' + JSON.stringify(formObject);
-		const url = '/glycan/search?' + json;
-		return getJson(url);
+		return glycanSearch(formObject);
+		// var json = 'query=' + JSON.stringify(formObject);
+		// const url = '/glycan/search?' + json;
+		// return getJson(url);
 	};
 
 	const glycanCompSearch = () => {
@@ -550,18 +556,19 @@ const GlycanSearch = (props) => {
 			compSearchData
 		);
 
-		var json = 'query=' + JSON.stringify(formObject);
-		const url = '/glycan/search?' + json;
-		return getJson(url);
+		return glycanSearch(formObject);
+		// var json = 'query=' + JSON.stringify(formObject);
+		// const url = '/glycan/search?' + json;
+		// return getJson(url);
 	};
 
 	const searchGlycanAdvClick = () => {
 		setPageLoading(true);
 
-		glycanSearch()
+		glycanAdvSearch()
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
-					props.history.push('/glycan-list/' + response.data['list_id']);
+					props.history.push(routeConstants.glycanList + response.data['list_id']);
 					setPageLoading(false);
 				} else {
 					setPageLoading(false);
@@ -582,7 +589,7 @@ const GlycanSearch = (props) => {
 		glycanCompSearch()
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
-					props.history.push('/glycan-list/' + response.data['list_id']);
+					props.history.push(routeConstants.glycanList + response.data['list_id']);
 					setPageLoading(false);
 				} else {
 					setPageLoading(false);
@@ -600,10 +607,10 @@ const GlycanSearch = (props) => {
 
 	const searchGlycanSimpleClick = () => {
 		setPageLoading(true);
-		glycanSimpleSearch()
+		glycanSimSearch()
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
-					props.history.push('/glycan-list/' + response.data['list_id']);
+					props.history.push(routeConstants.glycanList + response.data['list_id']);
 					setPageLoading(false);
 				} else {
 					setPageLoading(false);
@@ -731,3 +738,7 @@ const GlycanSearch = (props) => {
 };
 
 export default GlycanSearch;
+
+GlycanSearch.propTypes = {
+	activeTab: PropTypes.string,
+};

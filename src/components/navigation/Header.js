@@ -14,6 +14,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import Container from '@material-ui/core/Container';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
 import {GLYGEN_API, GLYGEN_BETA, GLYGEN_DATA, GLYGEN_SPARQL} from "../../envVariables";
+import routeConstants from '../../data/json/routeConstants.json';
 
 const useStyles = makeStyles(theme => ({
 	search: {
@@ -69,7 +70,7 @@ export default function Header() {
 							<div className='text-right'>
 								<Navbar.Text
 									as={Link}
-									to='/privacy-settings'
+									to={routeConstants.privacySettings}
 									className={classes.navbarText}>
 									<span>
 										<PersonIcon />
@@ -124,7 +125,7 @@ export default function Header() {
 			</Navbar>
 			<Navbar className='gg-blue' expand='xl'>
 				<Col xs={'auto'}>
-					<Navbar.Brand as={Link} to='/home'>
+					<Navbar.Brand as={Link} to={routeConstants.home}>
 						<img src={logo} alt='Glygen' />
 					</Navbar.Brand>
 				</Col>
@@ -135,30 +136,30 @@ export default function Header() {
 				<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
 					<Col>
 						<Nav>
-							<Nav.Link className='gg-nav-link' as={NavLink} to='/home'>
+							<Nav.Link className='gg-nav-link' as={NavLink} to={routeConstants.home}>
 								HOME
 							</Nav.Link>
 							<NavDropdown
 								className='gg-dropdown-navbar'
 								title='EXPLORE'
 								id='basic-nav-dropdown'>
-								<NavDropdown.Item as={NavLink} to='/glycan-search'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.glycanSearch}>
 									Glycan Search
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/protein-search'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.proteinSearch}>
 									Protein Search
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/enzyme-search'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.enzymeSearch}>
 									Enzyme Search
 								</NavDropdown.Item>
 							</NavDropdown>
-							<Nav.Link className='gg-nav-link' as={NavLink} to='/quick-search'>
+							<Nav.Link className='gg-nav-link' as={NavLink} to={routeConstants.quickSearch}>
 								QUICK&nbsp;SEARCH
 							</Nav.Link>
 							<Nav.Link
 								className='gg-nav-link'
 								as={NavLink}
-								to='/try-me'
+								to={routeConstants.tryMe}
 								// href='#try-me'
 							>
 								TRY&nbsp;ME
@@ -190,16 +191,16 @@ export default function Header() {
 								className='gg-dropdown-navbar'
 								title='HELP'
 								id='basic-nav-dropdown'>
-								<NavDropdown.Item as={NavLink} to='/about'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.about}>
 									About
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/contact-us'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.contactUs}>
 									Contact Us
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/feedback'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.feedback}>
 									Feedback
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/how-to-cite'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.howToCite}>
 									How to Cite
 								</NavDropdown.Item>
 							</NavDropdown>
@@ -207,13 +208,13 @@ export default function Header() {
 								className='gg-dropdown-navbar'
 								title='MORE'
 								id='basic-nav-dropdown'>
-								<NavDropdown.Item as={NavLink} to='/media'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.media}>
 									Media
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/resources'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.resources}>
 									Resources
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to='/frameworks'>
+								<NavDropdown.Item as={NavLink} to={routeConstants.frameworks}>
 									Frameworks
 								</NavDropdown.Item>
 							</NavDropdown>

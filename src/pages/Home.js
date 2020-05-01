@@ -22,6 +22,8 @@ import glycanImg from '../images/home/glycan.png';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import { getSystemData } from '../data';
+import {GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL} from "../envVariables";
+import routeConstants from '../data/json/routeConstants.json';
 
 const mainFeaturedCard = {
 	title: 'Computational and Informatics Resources for Glycoscience',
@@ -39,7 +41,7 @@ const featuredCards = [
 			'Search for glycan structures based on their chemical and structural properties.',
 		image: glycanImg,
 		imageText: 'Glycan',
-		href: '#',
+		href: routeConstants.glycanSearch,
 	},
 	{
 		title: 'Protein',
@@ -48,7 +50,7 @@ const featuredCards = [
 		image: proteinImg,
 		// image: enzymeImg,
 		imageText: 'Protein',
-		href: '#',
+		href: routeConstants.proteinSearch,
 	},
 	{
 		title: 'Enzyme',
@@ -56,7 +58,7 @@ const featuredCards = [
 			'Search for enzymes based on protein accession, gene name, and glycan.',
 		image: enzymeImg,
 		imageText: 'Enzyme Function',
-		href: '#',
+		href: routeConstants.enzymeSearch,
 	},
 	{
 		title: 'Quick Search',
@@ -64,7 +66,7 @@ const featuredCards = [
 			'Search data using queries prepared to provide answers to complex biological questions.',
 		image: glycanImg,
 		imageText: 'Quick Search',
-		href: '#',
+		href: routeConstants.quickSearch,
 	},
 	{
 		title: 'Composition Search',
@@ -72,7 +74,7 @@ const featuredCards = [
 			'Composition search based on their residue. Add some text here.',
 		image: glycanImg,
 		imageText: 'Composition Search',
-		href: '#',
+		href: routeConstants.glycanCompoSearch,
 	},
 	{
 		title: 'Data',
@@ -80,7 +82,7 @@ const featuredCards = [
 			'Search data using queries prepared to provide answers to complex biological questions.',
 		image: glycanImg,
 		imageText: 'Data',
-		href: 'https://data.glygen.org/',
+		href: GLYGEN_DATA,
 		target: '_blank',
 	},
 	{
@@ -89,7 +91,7 @@ const featuredCards = [
 			'Composition search based on their residue. Add some text here.',
 		image: glycanImg,
 		imageText: 'API',
-		href: 'https://api.glygen.org/',
+		href: GLYGEN_API,
 		target: '_blank',
 	},
 	{
@@ -98,7 +100,7 @@ const featuredCards = [
 			'GlyGen data visualization via charts, diagrams, and chart bars.',
 		image: glycanImg,
 		imageText: 'SPARQL',
-		href: 'https://sparql.glygen.org/',
+		href: GLYGEN_SPARQL,
 		target: '_blank',
 	},
 ];
@@ -109,7 +111,7 @@ const feedbackCard = {
 	image: feedback,
 	imageText: 'Feedback',
 	button: 'LEAVE FEEDBACK',
-	href: '/Feedback',
+	href: routeConstants.feedback,
 };
 const resourcesCard = {
 	title: 'Explore Other Resources',
@@ -118,7 +120,7 @@ const resourcesCard = {
 	image: resources,
 	imageText: 'Resources',
 	button: 'EXPLORE',
-	href: '/Resources',
+	href: routeConstants.resources,
 };
 
 export default function Home() {

@@ -8,7 +8,7 @@ import "../css/feedback.css";
 import { FaRegLightbulb } from "react-icons/fa";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { AiFillBug } from "react-icons/ai";
-import { getTstJson } from "../data/api";
+import { getJson } from "../data/api";
 import { validateEmail } from "../utils/common";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -57,7 +57,7 @@ const FeedbackWidget = props => {
     };
     const url = `/auth/contact?query=${JSON.stringify(formData)}`;
 
-    getTstJson(url)
+    getJson(url)
       .then(response => {
         setContactUsResponseMessage(response.data.message);
       })

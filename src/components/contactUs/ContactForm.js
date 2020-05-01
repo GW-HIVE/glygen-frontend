@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 // import { getJson } from '../data/api';
-import { getTstJson } from '../../data/api';
+import { getJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
 import { Typography } from '@material-ui/core';
 
@@ -90,7 +90,7 @@ const ContactForm = (props) => {
 		const url = `/auth/contact?query=${JSON.stringify(formData)}`;
 		// const url = `/auth/contact?query=${JSON.stringify(contactUsData)}`;
 
-		getTstJson(url)
+		getJson(url)
 			.then((response) => {
 				setContactUsResponseMessage(response.data.message);
 			})

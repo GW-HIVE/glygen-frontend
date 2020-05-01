@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import routeConstants from '../data/json/routeConstants.json';
 
 import {
   GLYCAN_COLUMNS,
@@ -72,14 +73,14 @@ const GlycanListEditColumns = () => {
         variant="contained"
         color="primary"
         component={Link}
-        to={`/glycan-list/${id}`}
+        to={`${routeConstants.glycanList + id}`}
         variant="contained"
         disabled={selectedCount === 0}
       >
         Back to Glycan List
       </Button> */}
 
-      <Link to={`/glycan-list/${id}`}>
+      <Link to={`${routeConstants.glycanList + id}`}>
         <button
           type="button"
           className="btn btn-primary"

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from 'react';
-import { getGlycanDetail } from '../data/glycan';
+import { getGlycanDetail,  glycanImageUrl} from '../data/glycan';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -201,8 +201,6 @@ const GlycanDetail = (props) => {
 	} = detailData;
 
 	const speciesEvidence = groupSpeciesEvidences(species);
-
-	const glycanImageUrl = 'https://api.glygen.org/glycan/image/';
 
 	const glycoProtienColumns = [
 		{

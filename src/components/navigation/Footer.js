@@ -9,6 +9,8 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import '../../App.css';
+import routeConstants from '../../data/json/routeConstants.json';
+
 
 const useStyles = makeStyles(theme => ({
 	navbarText: {
@@ -34,9 +36,9 @@ export default function Header() {
 				<Container maxWidth='xl' className='justify-content-center'>
 					<Row className='text-center justify-content-center'>
 						<Col md={'auto'}>
-							<Navbar.Brand href='#home'>
+							<Navbar.Brand href={routeConstants.home}>
 								<img
-									href='#home'
+									href={routeConstants.home}
 									src={logoFooter}
 									alt='Glygen'
 									className='justify-content-center'
@@ -47,28 +49,28 @@ export default function Header() {
 							<Col md={'auto'}>
 								<Navbar.Text
 									as={Link}
-									to='/license'
+									to={routeConstants.license}
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									License
 								</Navbar.Text>{' '}
 								<Navbar.Text
 									as={Link}
-									to='/privacy-policy'
+									to={routeConstants.privacyPolicy}
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									Privacy&nbsp;Policy
 								</Navbar.Text>{' '}
 								<Navbar.Text
 									as={Link}
-									to='/disclaimer'
+									to={routeConstants.disclaimer}
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									Disclaimer
 								</Navbar.Text>{' '}
 								<Navbar.Text
 									as={Link}
-									to='/contact-us'
+									to={routeConstants.contactUs}
 									className={classes.link}
 									style={{ marginRight: '15px' }}>
 									Contact Us

@@ -4,6 +4,7 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import { GLYGEN_API } from "../envVariables";
 
 export const getGlycanList = (
   glycanListId,
@@ -35,7 +36,8 @@ export const getGlycanDetail = accessionId => {
   return getJson(url);
 };
 
-const glycanImageUrl = "https://api.glygen.org/glycan/image/";
+export const glycanImageUrl = GLYGEN_API + "/glycan/image/";
+
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) =>
   sortOrder === "asc" ? "demo-sorting-asc" : "demo-sorting-desc";
 export const GLYCAN_COLUMNS = [
@@ -176,3 +178,15 @@ export const getUserSelectedColumns = () => {
 export const setUserSelectedColumns = arr => {
   localStorage.setItem(glycanColumnsStorageKey, arr);
 };
+
+export const glycanSearch = (formObject) => {
+  var json = 'query=' + JSON.stringify(formObject);
+  const url = '/glycan/search?' + json;
+  return getJson(url);
+}
+
+export const glycanSimpleSearch = (formObject) => {
+  var json = 'query=' + JSON.stringify(formObject);
+  const url = '/glycan/search_simple?' + json;
+  return getJson(url);
+}
