@@ -281,7 +281,7 @@ const GlycanAdvancedSearch = (props) => {
 					</Row>
 				</Grid>
 				{/* Glycan Id */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
@@ -308,7 +308,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Monoisotopic Mass */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
@@ -367,7 +367,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* No of Sugars */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
@@ -392,7 +392,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Organisms */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={9} sm={9}>
@@ -441,7 +441,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Glycan Type */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl
 						fullWidth
 						variant='outlined'
@@ -476,7 +476,7 @@ const GlycanAdvancedSearch = (props) => {
 				{/* Glycan Subtype */}
 
 				{!props.inputValue.glySubTypeIsHidden && (
-					<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+					<Grid item xs={12} sm={10}>
 						<FormControl
 							fullWidth
 							variant='outlined'
@@ -519,7 +519,7 @@ const GlycanAdvancedSearch = (props) => {
 				)}
 
 				{/* Glycosylated Protein */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
@@ -548,7 +548,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Glycan Motif */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
@@ -577,7 +577,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Biosynthetic Enzyme */}
-				<Grid item xs={12} sm={10} className={'zero-top-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={classes.label}
@@ -606,7 +606,7 @@ const GlycanAdvancedSearch = (props) => {
 					</FormControl>
 				</Grid>
 				{/* Pubmed ID */}
-				<Grid item xs={12} sm={10} className={'zero-top-bottom-padding'}>
+				<Grid item xs={12} sm={10}>
 					<FormControl
 						fullWidth
 						variant='outlined'

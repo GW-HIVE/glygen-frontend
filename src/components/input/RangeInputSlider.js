@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 	// 	width: 480,
 	// },
 	input: {
-		width: '80px',
+		width: '90px',
 		// height: 34,
 		// borderRadius: 4,
 		// position: 'relative',
