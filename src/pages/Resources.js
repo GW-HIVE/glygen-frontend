@@ -1,12 +1,12 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import MainFeaturedCard from '../components/cards/MainFeaturedCard';
+// import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import VerticalHeading from '../components/headings/VerticalHeading';
 // import HorizontalHeading from '../components/headings/HorizontalHeading';
-import featuredImg from '../images/home/featuredImg-7.jpg';
+// import featuredImg from '../images/home/featuredImg-7.jpg';
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -15,6 +15,8 @@ import { Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import '../css/Responsive.css';
+import Sidebar from '../components/navigation/Sidebar';
+import { Row, Col } from 'react-bootstrap';
 
 const useStyles = makeStyles((theme) => ({
 	tableHeader: {
@@ -24,14 +26,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const mainFeaturedCard = {
-	pageName: 'Resources',
-	title: "GlyGen's online resources for glycobiology research.",
-	description:
-		' A library of Glycobiology resources, including databases, informatics tools, learning material and tutorials are provided.',
-	image: featuredImg,
-	imgText: 'main image description',
-};
+// const mainFeaturedCard = {
+// 	pageName: 'Resources',
+// 	title: "GlyGen's online resources for glycobiology research.",
+// 	description:
+// 		' A library of Glycobiology resources, including databases, informatics tools, learning material and tutorials are provided.',
+// 	image: featuredImg,
+// 	imgText: 'main image description',
+// };
 const verticalHeadingData = {
 	h5VerticalText: 'LOOK AT',
 	h2textTopStrongAfter: 'Data',
@@ -40,7 +42,7 @@ const verticalHeadingData = {
 		'A list of publicly available databases, repositories and knowledgebases providing glycan-related information.',
 };
 const verticalHeadingTools = {
-	h5VerticalText: 'CHECK',
+	h5VerticalText: 'collection',
 	h2textTopStrongBefore: 'Tools',
 	h2textBottom: 'Resources',
 	pText:
@@ -62,6 +64,15 @@ const verticalHeadingLearn = {
 };
 
 const Resources = () => {
+	const items = [
+		{ label: 'Data', id: 'data' },
+		{ label: 'Tools', id: 'tools' },
+		{ label: 'Organizations', id: 'organizations' },
+		{ label: 'Learn', id: 'learn' },
+	];
+	// data.sort((a, b) =>
+	// 	a.col1 > b.col1 ? 1 : a.col1 === b.col1 ? (a.col2 > b.col2 ? 1 : -1) : -1
+	// );
 	const dataResourcesCols = [
 		{
 			dataField: 'category',
@@ -71,15 +82,15 @@ const Resources = () => {
 		{
 			dataField: 'website',
 			text: 'Website',
-			sort: true,
+			// sort: true,
 			formatter: (cell) => (
-				<Link
-					href={cell.url}
-					target='_blank'
-					rel='noopener noreferrer'>
+				<Link href={cell.url} target='_blank' rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			),
+			// onSort: (field, order) => {
+			// 	// a.col1 > b.col1 ? 1 : a.col1 === b.col1 ? (a.col2 > b.col2 ? 1 : -1) : -1
+			// },
 		},
 		{
 			dataField: 'description',
@@ -114,12 +125,9 @@ const Resources = () => {
 		{
 			dataField: 'website',
 			text: 'Website',
-			sort: true,
+			// sort: true,
 			formatter: (cell) => (
-				<Link
-					href={cell.url}
-					target='_blank'
-					rel='noopener noreferrer'>
+				<Link href={cell.url} target='_blank' rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			),
@@ -152,12 +160,9 @@ const Resources = () => {
 		{
 			dataField: 'website',
 			text: 'Website',
-			sort: true,
+			// sort: true,
 			formatter: (cell) => (
-				<Link
-					href={cell.url}
-					target='_blank'
-					rel='noopener noreferrer'>
+				<Link href={cell.url} target='_blank' rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			),
@@ -185,12 +190,9 @@ const Resources = () => {
 		{
 			dataField: 'type',
 			text: 'Type',
-			sort: true,
+			// sort: true,
 			formatter: (cell) => (
-				<Link
-					href={cell.url}
-					target='_blank'
-					rel='noopener noreferrer'>
+				<Link href={cell.url} target='_blank' rel='noopener noreferrer'>
 					{cell.name}
 				</Link>
 			),
@@ -220,6 +222,7 @@ const Resources = () => {
 		},
 	];
 	const classes = useStyles();
+
 	return (
 		<React.Fragment>
 			<Helmet>
@@ -231,119 +234,126 @@ const Resources = () => {
 
 			<CssBaseline />
 			<div id='top-heading'></div>
-			<MainFeaturedCard post={mainFeaturedCard} />
-			<Container
-				maxWidth='xl'
+			{/* <MainFeaturedCard post={mainFeaturedCard} /> */}
+			{/* <Container
+				maxWidth='lg'
 				className='ggContainer'
-				style={{ backgroundColor: '#fff' }}>
-				<VerticalHeading post={verticalHeadingData} />
-				<BootstrapTable
-					bootstrap4
-					striped
-					hover
-					headerClasses={classes.tableHeader}
-					keyField='id'
-					data={resourcesData.dataResourcesData}
-					columns={dataResourcesCols}
-					defaultSorted={[
-						{
-							dataField: 'category',
-							order: 'asc',
-						},
-					]}
-				/>
-				<div className='goToTop'>
-					<a href='#top-heading'>
-						to Top
-						<span>
-							<ArrowUpwardIcon />
-						</span>
-					</a>
-				</div>
+				style={{ backgroundColor: '#fff' }}> */}
+			<Row>
+				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
+					<Sidebar items={items} />
+				</Col>
+				<Col sm={12} md={12} lg={12} xl={9} className='sidebar-page'>
+					<VerticalHeading post={verticalHeadingData} id='data' />
+					<BootstrapTable
+						bootstrap4
+						striped
+						hover
+						headerClasses={classes.tableHeader}
+						keyField='id'
+						data={resourcesData.dataResourcesData}
+						columns={dataResourcesCols}
+						defaultSorted={[
+							{
+								dataField: 'category',
+								order: 'asc',
+							},
+						]}
+					/>
+					<div className='goToTop'>
+						<a href='#top-heading'>
+							to Top
+							<span>
+								<ArrowUpwardIcon />
+							</span>
+						</a>
+					</div>
 
-				<VerticalHeading post={verticalHeadingTools} />
-				<BootstrapTable
-					bootstrap4
-					striped
-					hover
-					headerClasses={classes.tableHeader}
-					keyField='id'
-					data={resourcesData.toolsResourcesData}
-					columns={toolsResourcesCols}
-					defaultSorted={[
-						{
-							dataField: 'category',
-							order: 'asc',
-						},
-					]}
-				/>
-				<div className='goToTop'>
-					<a href='#top-heading'>
-						to Top
-						<span>
-							<ArrowUpwardIcon />
-						</span>
-					</a>
-				</div>
+					<VerticalHeading post={verticalHeadingTools} id='tools' />
+					<BootstrapTable
+						bootstrap4
+						striped
+						hover
+						headerClasses={classes.tableHeader}
+						keyField='id'
+						data={resourcesData.toolsResourcesData}
+						columns={toolsResourcesCols}
+						defaultSorted={[
+							{
+								dataField: 'category',
+								order: 'asc',
+							},
+						]}
+					/>
+					<div className='goToTop'>
+						<a href='#top-heading'>
+							to Top
+							<span>
+								<ArrowUpwardIcon />
+							</span>
+						</a>
+					</div>
 
-				<VerticalHeading post={verticallHeadingOrganiz} />
-				<BootstrapTable
-					bootstrap4
-					striped
-					hover
-					headerClasses={classes.tableHeader}
-					keyField='id'
-					data={resourcesData.organizResourcesData}
-					columns={organizResourcesCols}
-					defaultSorted={[
-						{
-							dataField: 'category',
-							order: 'asc',
-						},
-					]}
-				/>
-				<div className='goToTop'>
-					<a href='#top-heading'>
-						to Top
-						<span>
-							<ArrowUpwardIcon />
-						</span>
-					</a>
-				</div>
-				<p>
-					*** If you want to see your tools and/or data resources on our
-					website, please contact us <a href='/contact_us'> here</a>.***
-				</p>
+					<VerticalHeading post={verticallHeadingOrganiz} id='organizations' />
+					<BootstrapTable
+						bootstrap4
+						striped
+						hover
+						headerClasses={classes.tableHeader}
+						keyField='id'
+						data={resourcesData.organizResourcesData}
+						columns={organizResourcesCols}
+						defaultSorted={[
+							{
+								dataField: 'category',
+								order: 'asc',
+							},
+						]}
+					/>
+					<div className='goToTop'>
+						<a href='#top-heading'>
+							to Top
+							<span>
+								<ArrowUpwardIcon />
+							</span>
+						</a>
+					</div>
+					<p>
+						*** If you want to see your tools and/or data resources on our
+						website, please contact us <a href='/contact_us'> here</a>.***
+					</p>
 
-				<VerticalHeading post={verticalHeadingLearn} />
-				<BootstrapTable
-					bootstrap4
-					striped
-					hover
-					headerClasses={classes.tableHeader}
-					keyField='id'
-					data={resourcesData.learnResourcesData}
-					columns={learnResourcesCols}
-					defaultSorted={[
-						{
-							dataField: 'name',
-							order: 'asc',
-						},
-					]}
-				/>
-				<div className='goToTop'>
-					<a href='#top-heading'>
-						to Top
-						<span>
-							<ArrowUpwardIcon />
-						</span>
-					</a>
-				</div>
-				<p>
-					*** If you want to see your tools and/or data resources on our
-					website, please contact us <a href='/contact_us'> here</a>.***
-				</p>
-			</Container>
+					<VerticalHeading post={verticalHeadingLearn} id='learn' />
+					<BootstrapTable
+						bootstrap4
+						striped
+						hover
+						headerClasses={classes.tableHeader}
+						keyField='id'
+						data={resourcesData.learnResourcesData}
+						columns={learnResourcesCols}
+						defaultSorted={[
+							{
+								dataField: 'name',
+								order: 'asc',
+							},
+						]}
+					/>
+					<div className='goToTop'>
+						<a href='#top-heading'>
+							to Top
+							<span>
+								<ArrowUpwardIcon />
+							</span>
+						</a>
+					</div>
+					<p>
+						*** If you want to see your tools and/or data resources on our
+						website, please contact us <a href='/contact_us'> here</a>.***
+					</p>
+				</Col>
+			</Row>
+			{/* </Container> */}
 		</React.Fragment>
 	);
 };
