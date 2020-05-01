@@ -12,8 +12,8 @@ export default function VerticalHeadingLogo(props) {
 	const { post } = props;
 
 	return (
-		<div className='content-box-md'>
-			<Container maxWidth='lg' className='vert-head-logo-container'>
+		<div className='content-box-md' id={props.id}>
+			<Container maxWidth='lg' className='vert-head-logo-container5'>
 				<Row>
 					<Grid item xs={8} sm={8} md={9} lg={9}>
 						<div className='vertical-heading'>

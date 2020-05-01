@@ -9,7 +9,7 @@ export default function HorizontalHeading(props) {
 	const { post } = props;
 
 	return (
-		<div className='content-box-md'>
+		<div className='content-box-md' id={props.id}>
 			<Container maxWidth='xl'>
 				<Row>
 					<Grid item xs={12} sm={12} md={12} lg={12} className='text-center'>

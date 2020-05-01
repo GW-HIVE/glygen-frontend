@@ -9,7 +9,7 @@ export default function VerticalHeading(props) {
 	const { post } = props;
 
 	return (
-		<div className='content-box-md'>
+		<div className='content-box-md' id={props.id}>
 			<Container maxWidth='xl'>
 				<Row>
 					<Col>
