@@ -7,8 +7,10 @@ const LineTooltip = (props) => {
     return(
     <Tooltip
         disableTouchListener
+        arrow
+        placement={props.placement ? props.placement : 'bottom-start'}
         classes={{
-            tooltip : 'gg-tooltip',
+            tooltip : 'gg-tooltip'
         }}
         title={props.text}
     >

@@ -1,0 +1,12 @@
+version: '3.4'
+services:
+  frontend:
+    build:
+      args:
+        - REACT_APP_ENV=test
+        - REACT_APP_API=https://api.tst.glygen.org
+        - REACT_APP_DOMAIN=https://tst.glygen.org
+        - REACT_APP_BETA_DOMAIN=https://beta.glygen.org
+        - REACT_APP_DATA=https://data.tst.glygen.org
+        - REACT_APP_SPARQL=https://sparql.tst.glygen.org
+        - REACT_APP_BASELINE=/
