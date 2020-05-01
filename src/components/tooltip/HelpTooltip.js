@@ -9,19 +9,21 @@ const HelpTooltip = (props) => {
     <Tooltip
         disableTouchListener
         interactive
+        arrow
+        placement={props.placement ? props.placement : 'bottom-start'}
         classes={{
-            tooltip : "gg-tooltip",
+            tooltip : "gg-tooltip"
         }}
         title={
             <React.Fragment>
-                <Typography color="inherit">{props.title + ":"}</Typography>
-                    {props.text}{" "}
-                    <a
-                        href= {props.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {props.urlText}
+                <Typography color="inherit"><strong>{props.title + ":"}</strong></Typography>
+                {props.text}{" "}
+                <a
+                    href= {props.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {props.urlText}
                 </a>
             </React.Fragment>
         }

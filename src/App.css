@@ -512,22 +512,27 @@ ul.office-details {
 .gg-tooltip {
 	background-color: #fff !important;
 	color: rgba(0, 0, 0, 0.87) !important;
-	font-size: 12px !important;
+	font-size: 14px !important;
 	border: 1px solid #eee !important;
 	-webkit-box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
 	box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
+	margin: 4px !important;
 }
 
 .gg-helpicon {
 	margin-right: 8px !important;
-	font-size: larger !important;
-	margin-bottom: 1px !important;
+	font-size: large !important;
+	margin-bottom: 2px !important;
 }
 .gg-helpicon-detail {
 	margin-bottom: 8px !important;
 	margin-right: 10px !important;
 	font-size: 24px !important;
+}
+
+::-ms-clear {
+    display: none;
 }
 
 /* =========================================
