@@ -13,6 +13,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Container from '@material-ui/core/Container';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
+import {GLYGEN_API, GLYGEN_BETA, GLYGEN_DATA, GLYGEN_SPARQL} from "../../envVariables";
 
 const useStyles = makeStyles(theme => ({
 	search: {
@@ -81,7 +82,7 @@ export default function Header() {
 							<div className=' text-right mr-sm-4'>
 								<Navbar.Text>
 									<a
-										href='https://beta.glygen.org/'
+										href={GLYGEN_BETA}
 										target='_blank'
 										rel='noopener noreferrer'
 										className={classes.navbarText}>
@@ -167,19 +168,19 @@ export default function Header() {
 								title='DATA'
 								id='basic-nav-dropdown'>
 								<NavDropdown.Item
-									href='https://data.glygen.org/'
+									href={GLYGEN_DATA}
 									target='_blank'
 									rel='noopener noreferrer'>
 									Data
 								</NavDropdown.Item>
 								<NavDropdown.Item
-									href='https://api.glygen.org/'
+									href={GLYGEN_API}
 									target='_blank'
 									rel='noopener noreferrer'>
 									API
 								</NavDropdown.Item>
 								<NavDropdown.Item
-									href='https://sparql.glygen.org/'
+									href={GLYGEN_SPARQL}
 									target='_blank'
 									rel='noopener noreferrer'>
 									SPARQL
