@@ -64,7 +64,7 @@ const PaginatedTable = ({
               <strong className="Paginationtext">Records per page {""}</strong>
               <SizePerPageDropdownStandalone
                 {...paginationProps}
-                className="mr-2"
+                className="mr-2 narrow-dropdown"
               />
               <PaginationTotalStandalone {...paginationProps} />
               {/* {onDownload && <button onClick={onDownload}>Download</button>} */}
