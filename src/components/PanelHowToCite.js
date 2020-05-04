@@ -8,6 +8,7 @@ import ToTopArrow from '../components/ToTopArrow';
 import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
+import CiteImage from '../images/icons/quote-open-outline.svg'
 // import PDF from '../downloads/citation/31616925.pdf';
 
 // import FormatQuoteOutlinedIcon from '@material-ui/icons/FormatQuoteOutlined';
@@ -61,10 +62,10 @@ const PanelHowToCite = (props) => {
 												</div>
 												{/* Quotes */}
 												<div>
-													<Image
-														src={process.env.PUBLIC_URL + json.quote}
+													{json.citeimage && <Image
+														src={CiteImage}
 														style={{ paddingRight: '20px' }}
-													/>
+													/>}
 													{/* <FormatQuoteOutlinedIcon /> */}{' '}
 													{/* <a
 												href={PDF}
@@ -82,20 +83,20 @@ const PanelHowToCite = (props) => {
 												style={{ paddingRight: '20px', paddingLeft: '20px' }}>
 												PDF
 											</a> */}
-													<Link
+													{json.bibtex && <Link
 														to={json.bibtex}
 														style={{ paddingRight: '20px' }}
 														target='_blank'
 														download>
 														{json.bibtexlabel}
-													</Link>
-													<Link
+													</Link>}
+													{json.endnote && <Link
 														to={json.endnote}
 														target='_blank'
 														download
 														style={{ paddingRight: '20px' }}>
 														{json.endnotelabel}
-													</Link>
+													</Link>}
 												</div>
 											</p>
 										</td>
