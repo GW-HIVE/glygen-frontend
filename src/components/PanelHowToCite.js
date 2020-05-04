@@ -62,7 +62,7 @@ const PanelHowToCite = (props) => {
 												{/* Quotes */}
 												<div>
 													<Image
-														src={json.quote}
+														src={process.env.PUBLIC_URL + json.quote}
 														style={{ paddingRight: '20px' }}
 													/>
 													{/* <FormatQuoteOutlinedIcon /> */}{' '}
