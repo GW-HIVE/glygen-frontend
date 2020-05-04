@@ -177,13 +177,13 @@ export const setUserSelectedColumns = arr => {
   localStorage.setItem(glycanColumnsStorageKey, arr);
 };
 
-export const glycanSearch = (formObject) => {
+export const getGlycanSearch = (formObject) => {
   var json = 'query=' + JSON.stringify(formObject);
   const url = '/glycan/search?' + json;
   return getJson(url);
 }
 
-export const glycanSimpleSearch = (formObject) => {
+export const getGlycanSimpleSearch = (formObject) => {
   var json = 'query=' + JSON.stringify(formObject);
   const url = '/glycan/search_simple?' + json;
   return getJson(url);
