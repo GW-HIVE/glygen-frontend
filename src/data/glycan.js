@@ -4,6 +4,7 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import routeConstants from './json/routeConstants';
 
 export const getGlycanList = (
   glycanListId,
@@ -48,7 +49,7 @@ export const GLYCAN_COLUMNS = [
     },
 
     formatter: (value, row) => (
-      <Navbar.Text as={NavLink} to={`/glycan-detail/${row.glytoucan_ac}`}>
+      <Navbar.Text as={NavLink} to={routeConstants.glycanDetail + row.glytoucan_ac}>
         {row.glytoucan_ac}
       </Navbar.Text>
     )

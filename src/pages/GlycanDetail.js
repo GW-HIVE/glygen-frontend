@@ -31,6 +31,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
 import FeedbackWidget from '../components/FeedbackWidget';
+import routeConstants from '../data/json/routeConstants';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -214,7 +215,7 @@ const GlycanDetail = (props) => {
 			formatter: (value, row) => (
 				<Navbar.Text
 					as={NavLink}
-					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
+					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 					{row.uniprot_canonical_ac}
 				</Navbar.Text>
 			),
@@ -270,7 +271,7 @@ const GlycanDetail = (props) => {
 			formatter: (value, row) => (
 				<Navbar.Text
 					as={NavLink}
-					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
+					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 					{row.uniprot_canonical_ac}
 				</Navbar.Text>
 			),
