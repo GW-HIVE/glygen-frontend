@@ -8,46 +8,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/Search.css';
 
 const useStyles = makeStyles((theme) => ({
-	// input: {
-	//   borderRadius: 4,
-	//   position: "relative",
-	//   backgroundColor: theme.palette.background.paper,
-	//   height: 28,
-	//   "& > span": {
-	//     marginRight: 10,
-	//     padding: 2
-	//   },
-	//   width: "700px"
-	// },
-	// inputRoot: {
-	//   borderRadius: 4,
-	//   position: "relative",
-	//   backgroundColor: theme.palette.background.paper,
-	//   width: "700px",
-	//   height: "34px",
-	//   paddingLeft: "10px !important",
-	//   padding: "0px !important",
-	//   paddingRight: "39px !important"
-	// },
-	// inputAuto: {
-	//   borderRadius: 4,
-	//   position: "relative",
-	//   backgroundColor: theme.palette.background.paper,
-	//   width: "700px",
-	//   height: "26px",
-	//   padding: "4px !important",
-	//   paddingBottom: "4px !important"
-	// },
-	// option: {
-	//   "& > span": {
-	//     marginRight: 10
-	//   }
-	// },
-	// inputBase: {
-	//   width: "100%",
-	//   height: 34,
-	//   padding: "0px !important"
-	// },
 	errorText: {
 		fontSize: '14px  !important',
 		marginRight: 0,
@@ -101,10 +61,6 @@ export default function AutoTextInput(props) {
 				renderInput={(params) => (
 					<TextField
 						{...params}
-						//margin='dense'
-						// classes={{
-						// 	root: classes.inputBase,
-						// }}
 						variant='outlined'
 						placeholder={props.placeholder}
 						error={props.inputValue.length > props.length}

@@ -8,21 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
-	// root: {
-	// 	width: 480,
-	// },
 	input: {
-		width: '90px',
-		// height: 34,
-		// borderRadius: 4,
-		// position: 'relative',
-		// fontSize: 16,
-		// backgroundColor: '#FFFFFF',
-	},
-	// label3: {
-	// 	fontSize: '16px',
-	// 	fontWeight: 'bold',
-	// },
+		width: '90px'
+	}
 });
 
 function valuetext(value) {
@@ -70,18 +58,17 @@ export default function RangeInputSlider(props) {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div>
 			<Grid container spacing={2} alignItems='center'>
 				<Grid item>
-					<FormControl fullWidth className={classes.margin} variant='outlined'>
-						<InputLabel className={classes.label3}>
+					<FormControl fullWidth variant='outlined'>
+						<InputLabel>
 							<strong>Min</strong>
 						</InputLabel>
 						<OutlinedInput
 							className={classes.input}
 							value={props.inputValue[0]}
 							margin='dense'
-							id='demo-label1'
 							onChange={minInputChange}
 							onBlur={onMinMoveOut}
 							labelWidth={40}
@@ -108,8 +95,8 @@ export default function RangeInputSlider(props) {
 					/>
 				</Grid>
 				<Grid item>
-					<FormControl fullWidth className={classes.margin} variant='outlined'>
-						<InputLabel className={classes.label3}>
+					<FormControl fullWidth variant='outlined'>
+						<InputLabel>
 							<strong>Max</strong>
 						</InputLabel>
 						<OutlinedInput

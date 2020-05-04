@@ -22,54 +22,18 @@ import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const useStyles = makeStyles((theme) => ({
-	// marginLeft: {
-	//     justifyContent: "flex-end",
-	// },
-	// root: {
-	//     display: "flex",
-	//     flexWrap: "wrap",
-	// },
 	label: {
-		// fontSize: "14px",
-		// color: "#4A4A4A",
 		fontWeight: 'bold',
         marginLeft: -27,
 	},
-	// label4: {
-	//     fontSize: "15px",
-	//     color: "#4A4A4A",
-	//     fontWeight: "bold",
-	// },
 	labelSelect: {
-		// fontSize: "16px",
 		fontWeight: 'bold',
 	},
 	errorText: {
 		fontSize: '14px  !important',
 		marginRight: 0,
 		marginLeft: 0,
-	},
-	// input: {
-	//     borderRadius: 4,
-	//     position: "relative",
-	//     backgroundColor: theme.palette.background.paper,
-	//     fontSize: 16,
-	//     width: "700px",
-	//     height: "34px",
-	// },
-	// select: {
-	//     width: "200px",
-	//     height: "34px",
-	// },
-	// select1: {
-	//     width: "700px",
-	//     height: "34px",
-	// },
-	// selectOutlined: {
-	//     paddingTop: "4px !important",
-	//     paddingBottom: "4px !important",
-	//     backgroundColor: "white",
-	// }
+	}
 }));
 
 const GlycanAdvancedSearch = (props) => {
@@ -346,10 +310,8 @@ const GlycanAdvancedSearch = (props) => {
 										value={props.inputValue.glyMassType}
 										onChange={glyMassTypeOnChange}
 										classes={{
-											//outlined: classes.selectOutlined,
 											root: 'select-menu-adv',
 										}}
-										className={classes.select}
 										labelWidth={85}>
 											{Object.keys(props.initData.glycan_mass)
 												.sort()
@@ -419,19 +381,16 @@ const GlycanAdvancedSearch = (props) => {
 								</Typography>
                                 <FormControl 
                                     variant='outlined' 
-                                    //margin='dense' 
                                     fullWidth
                                 >
 									<Select
-										// margin='dense'
 										variant='outlined'
 										classes={{
-											//outlined: classes.selectOutlined,
 											root: 'select-menu-adv',
 										}}
 										value={props.inputValue.glyOrgOperation}
 										onChange={glyOrgOperationOnChange}
-										className={classes.select}>
+									>
 										<MenuItem value={'or'}>Or</MenuItem>
 										<MenuItem value={'and'}>And</MenuItem>
 									</Select>
@@ -445,7 +404,6 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl
 						fullWidth
 						variant='outlined'
-						// margin='dense'
 					>
 						<Typography className={classes.label} gutterBottom>
 							<HelpTooltip
@@ -458,9 +416,7 @@ const GlycanAdvancedSearch = (props) => {
 							value={props.inputValue.glyType}
 							displayEmpty
 							onChange={glyTypeOnChange}
-							className={classes.select1}
 							classes={{
-								//outlined: classes.selectOutlined,
                                 root: 'select-menu-adv',
 							}}>
 							<MenuItem value=''>Select Glycan Type</MenuItem>
@@ -493,9 +449,7 @@ const GlycanAdvancedSearch = (props) => {
 								value={props.inputValue.glySubType}
 								displayEmpty
 								onChange={glySubTypeOnChange}
-								className={classes.select1}
 								classes={{
-									//outlined: classes.selectOutlined,
 									root: 'select-menu-adv',
 								}}
 							>
@@ -622,7 +576,6 @@ const GlycanAdvancedSearch = (props) => {
                             {commonGlycanData.pmid.name}
 						</Typography>
 						<OutlinedInput
-                            className={classes.input}
                             placeholder={advancedSearch.pmid.placeholder}
                             margin='dense'
                             value={props.inputValue.glyPubId}

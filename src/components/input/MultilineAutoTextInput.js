@@ -12,45 +12,6 @@ const filterOptions = (options, { inputValue }) =>
   matchSorter(options, inputValue.substring(inputValue.lastIndexOf(",") + 1));
   
   const useStyles = makeStyles(theme => ({
-    // input: {
-    //   borderRadius: 4,
-    //   position: "relative",
-    //   backgroundColor: theme.palette.background.paper,
-    //   height: 74,
-  
-    //   fontSize: 14,
-    //   "& > span": {
-    //     marginRight: 10,
-    //     fontSize: 14,
-    //     padding: 2
-    //   },
-    //   width: "700px"
-    // },
-    // inputRoot: {
-    //   borderRadius: 4,
-    //   position: "relative",
-    //   backgroundColor: theme.palette.background.paper,
-    //   width: "700px",
-    //   height: "74px",
-    //   padding: "4px !important",
-    //   paddingLeft: "10px !important",
-    //   paddingRight: "39px !important"
-    // },
-    // inputAuto: {
-    //   // borderRadius: 4,
-    //   // position: "relative",
-    //   // backgroundColor: theme.palette.background.paper,
-    //   // width: "700px",
-    //   // height: "60px",
-    //   // paddingTop: "0 !important"
-    // },
-    // option: {
-    //   fontSize: 14,
-    //   "& > span": {
-    //     marginRight: 10,
-    //     fontSize: 14
-    //   }
-    // },
     errorText: {
       fontSize:"14px  !important",
       marginRight:0,
