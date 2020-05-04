@@ -32,7 +32,7 @@ const mainFeaturedCard = {
 	image: card3,
 	imgText: 'main image description',
 	linkText: 'Learn More…',
-	href: '/About',
+	href: routeConstants.about,
 };
 const featuredCards = [
 	{
