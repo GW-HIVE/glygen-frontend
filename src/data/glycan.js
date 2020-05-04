@@ -1,22 +1,21 @@
-import { getJson, postToAndGetBlob } from "./api";
+import { getJson, postToAndGetBlob, glycanImageUrl} from "./api";
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import { GLYGEN_API } from "../envVariables";
 
 export const getGlycanList = (
   glycanListId,
   offset = 1,
   limit = 20,
-  sort = "glytoucan_ac",
+  sort = undefined,
   order = "asc"
 ) => {
   const queryParams = {
     id: glycanListId,
     offset: offset,
-    sort: sort || "glytoucan_ac",
+    sort: sort,
     limit: limit,
     order: order
   };
@@ -35,8 +34,6 @@ export const getGlycanDetail = accessionId => {
   const url = `/glycan/detail/${accessionId}`;
   return getJson(url);
 };
-
-export const glycanImageUrl = GLYGEN_API + "/glycan/image/";
 
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) =>
   sortOrder === "asc" ? "demo-sorting-asc" : "demo-sorting-desc";
@@ -64,7 +61,7 @@ export const GLYCAN_COLUMNS = [
       <div className="img-wrapper">
         <img
           className="img-cartoon-list-page img-cartoon"
-          src={glycanImageUrl + row.glytoucan_ac}
+          src={getGlycanImageUrl(row.glytoucan_ac)}
           alt="Cartoon"
         />
       </div>
@@ -190,3 +187,12 @@ export const glycanSimpleSearch = (formObject) => {
   const url = '/glycan/search_simple?' + json;
   return getJson(url);
 }
+
+export const getGlycanInit = () => {
+  const url = `/glycan/search_init`;
+  return getJson(url);
+};
+
+export const getGlycanImageUrl = (glytoucan_id) => {
+  return glycanImageUrl + glytoucan_id;
+};

@@ -22,7 +22,6 @@ const Routes = props => (
 		<Route path={`${routeConstants.glycanList}:id`} component={GlycanList} />
 		<Route path={`${routeConstants.glycanSearch}:id`} component={GlycanSearch} />
 		<Route path={routeConstants.glycanSearch} component={GlycanSearch} />
-		<Route path={routeConstants.glycanCompoSearch} component={(props) => <GlycanSearch {...props} activeTab={routeConstants.glycanCompoSearchTabKey} />} />
 		{/* // <Route path={`${RouteConstant.proteinList}:id`} component={ProteinList} /> */}
 		<Route path={`${routeConstants.glycanDetail}:id`} component={GlycanDetail} />
 		<Route path={routeConstants.glycanDetail} component={GlycanDetail} />

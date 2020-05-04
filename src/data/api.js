@@ -27,3 +27,5 @@ export const postToAndGetBlob = (url, headers = {}) => {
 
   return axios(options);
 };
+
+export const glycanImageUrl = GLYGEN_API + "/glycan/image/";

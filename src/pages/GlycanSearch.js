@@ -1,6 +1,4 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import { getJson } from '../data/api';
-// import compositionSearchData from '../data/json/compositionSearch';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
@@ -11,67 +9,13 @@ import SimpleSearchControl from '../components/search/SimpleSearchControl';
 import GlycanTutorial from '../components/tutorial/GlycanTutorial';
 import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
 import stringConstants from '../data/json/stringConstants';
 import routeConstants from '../data/json/routeConstants';
-import { glycanSearch, glycanSimpleSearch } from '../data/glycan';
+import { glycanSearch, glycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
 import FeedbackWidget from "../components/FeedbackWidget";
 
-
-const useStyles = makeStyles((theme) => ({
-	// tabs: {
-	// 	borderColor: '#FFFFFF',
-	// 	width: '650px',
-	// },
-	// tab: {
-	// 	borderRadius: 4,
-	// 	borderColor: '#80bdff',
-	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-	// 	width: '1000px',
-	// 	height: '1250px',
-	// 	alignItems: 'center',
-	// 	fontColor: '#2F78B7',
-	// 	backgroundColor: '#FFFFFF',
-	// },
-	// tabCompostionSearch: {
-	// 	borderRadius: 4,
-	// 	borderColor: '#80bdff',
-	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-	// 	width: '1000px',
-	// 	height: '1000px',
-	// 	alignItems: 'center',
-	// 	fontColor: '#2F78B7',
-	// 	backgroundColor: '#FFFFFF',
-	// },
-	// tabSimpleSearch: {
-	// 	borderRadius: 4,
-	// 	borderColor: '#80bdff',
-	// 	boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-	// 	width: '1000px',
-	// 	height: '400px',
-	// 	alignItems: 'center',
-	// 	fontColor: '#2F78B7',
-	// 	backgroundColor: '#FFFFFF',
-	// },
-	// con: {
-	// 	width: '730px',
-	// 	height: '1300px',
-	// 	alignItems: 'center',
-	// },
-	// con1: {
-	// 	width: '1000px',
-	// 	height: '1400px',
-	// 	alignItems: 'center',
-	// 	marginBottom: '80px',
-	// },
-	// conSimple: {
-	// 	alignItems: 'center',
-	// 	paddingTop: '100px',
-	// },
-}));
 
 const GlycanSearch = (props) => {
 	let { id } = useParams();
@@ -90,7 +34,7 @@ const GlycanSearch = (props) => {
 			}
 		  },
 	});
-	const classes = useStyles();
+
 	const [glySimpleSearchCategory, setGlySimpleSearchCategory] = useState('any');
 	const [glySimpleSearchTerm, setGlySimpleSearchTerm] = useState('');
 	const [glyAdvSearchData, setGlyAdvSearchData] = useReducer(
@@ -134,15 +78,10 @@ const GlycanSearch = (props) => {
 		setGlyCompData(glyComp);
 	}
 
-	const getGlycanInit = () => {
-		const url = `/glycan/search_init`;
-		return getJson(url);
-	};
-
 	/**
 	 * getSelectionValue returns selection control value based on min, max.
-	 * @param {object} min - min value.
-	 * @param {object} max - max value.
+	 * @param {object} cur_min - min value.
+	 * @param {object} cur_max - max value.
 	 * @param {object} residue_min - residue min value.
 	 * @param {object} residue_max - residue max value.
 	 **/
@@ -198,11 +137,6 @@ const GlycanSearch = (props) => {
 				glyAdvSearchValError: [false, false, false, false, false],
 			});
 
-			const getGlycanList = (glycanListId, limit = 20, offset = 1) => {
-				const url = `/glycan/list?query={"id":"${glycanListId}","offset":${offset},"limit":${limit},"order":"asc"}`;
-				return getJson(url);
-			};
-
 			let compositionData = initData.composition;
 			let compStateData = {};
 			let compositionSearchData = glycanData.common.composition;
@@ -242,7 +176,7 @@ const GlycanSearch = (props) => {
 			});
 			setGlyCompData(compStateData);
 			setInitData(initData);
-			setGlyActTabKey(props.activeTab ? props.activeTab : routeConstants.glycanAdvSearchTabKey);
+			setGlyActTabKey("advanced_search");
 			if (id === undefined) setPageLoading(false);
 
 			id &&
@@ -265,14 +199,14 @@ const GlycanSearch = (props) => {
 							};
 						}
 						setGlyCompData(queryCompData);
-						setGlyActTabKey(routeConstants.glycanCompoSearchTabKey);
+						setGlyActTabKey("composition_search");
 						setPageLoading(false);
 					} else if (data.query.query_type === glycanData.simple_search.query_type.name) {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
 						setGlySimpleSearchTerm(data.query.term ? data.query.term : '');
-						setGlyActTabKey(routeConstants.glycanSimpleSearchTabKey);
+						setGlyActTabKey("simple_search");
 						setPageLoading(false);
 					} else {
 						setGlyAdvSearchData({
@@ -373,12 +307,12 @@ const GlycanSearch = (props) => {
 							glyAdvSearchValError: [false, false, false, false, false],
 						});
 
-						setGlyActTabKey(routeConstants.glycanAdvSearchTabKey);
+						setGlyActTabKey("advanced_search");
 						setPageLoading(false);
 					}
 				});
 		});
-	}, [id, glycanData, props.activeTab]);
+	}, [id, glycanData]);
 
 	function searchjson(
 		input_query_type,
@@ -493,9 +427,6 @@ const GlycanSearch = (props) => {
 		};
 
 		return glycanSimpleSearch(formjsonSimple);
-		// var json = 'query=' + JSON.stringify(formjsonSimple);
-		// const url = '/glycan/search_simple?' + json;
-		// return getJson(url);
 	};
 
 	const glycanAdvSearch = () => {
@@ -519,9 +450,6 @@ const GlycanSearch = (props) => {
 		);
 
 		return glycanSearch(formObject);
-		// var json = 'query=' + JSON.stringify(formObject);
-		// const url = '/glycan/search?' + json;
-		// return getJson(url);
 	};
 
 	const glycanCompSearch = () => {
@@ -557,9 +485,6 @@ const GlycanSearch = (props) => {
 		);
 
 		return glycanSearch(formObject);
-		// var json = 'query=' + JSON.stringify(formObject);
-		// const url = '/glycan/search?' + json;
-		// return getJson(url);
 	};
 
 	const searchGlycanAdvClick = () => {
@@ -634,7 +559,7 @@ const GlycanSearch = (props) => {
 			</Helmet>
 			<FeedbackWidget />
 			<div className='lander'>
-				<Container className={classes.con1}>
+				<Container>
 					<PageLoader pageLoading={pageLoading} />
 					<div className='content-box-md'>
 						<h1 className='page-heading'>{glycanSearchData.pageTitle}</h1>
@@ -642,7 +567,6 @@ const GlycanSearch = (props) => {
 					<Tabs
 						defaultActiveKey='advanced_search'
 						transition={false}
-						// className={classes.tabs}
 						activeKey={glyActTabKey}
 						mountOnEnter={true}
 						unmountOnExit={true}
@@ -650,14 +574,12 @@ const GlycanSearch = (props) => {
 						<Tab
 							eventKey='simple_search'
 							className='tab-content-padding'
-							// className={classes.tabSimpleSearch}
 							title={simpleSearch.tabTitle}>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle={simpleSearch.alert.alertTitle}
 								alertText={simpleSearch.alert.alertText}
 							/>
-							{/* <Container className={classes.conSimple}> */}
 							<Container className='tab-content-border'>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
@@ -677,7 +599,6 @@ const GlycanSearch = (props) => {
 						</Tab>
 						<Tab
 							eventKey='advanced_search'
-							// className={classes.tab}
 							className='tab-content-padding'
 							title={advancedSearch.tabTitle}>
 							<SearchAlert
@@ -685,7 +606,6 @@ const GlycanSearch = (props) => {
 								alertTitle={advancedSearch.alert.alertTitle}
 								alertText={advancedSearch.alert.alertText}
 							/>
-							{/* <Container className={classes.con}> */}
 							<Container className='tab-content-border'>
 								{initData && (
 									<GlycanAdvancedSearch
@@ -700,15 +620,12 @@ const GlycanSearch = (props) => {
 						<Tab
 							eventKey='composition_search'
 							title={compositionSearch.tabTitle}
-							// className={classes.tabCompostionSearch}
 							className='tab-content-padding'>
 							<SearchAlert
 								searchError={glySearchError}
 								alertTitle={compositionSearch.alert.alertTitle}
 								alertText={compositionSearch.alert.alertTitle}
 							/>
-							{/* <Container className='p-5'> */}
-							{/* <Container> */}
 							<Container className='tab-content-border'>
 								{initData.composition && (
 									<CompositionSearchControl
@@ -738,7 +655,3 @@ const GlycanSearch = (props) => {
 };
 
 export default GlycanSearch;
-
-GlycanSearch.propTypes = {
-	activeTab: PropTypes.string,
-};
