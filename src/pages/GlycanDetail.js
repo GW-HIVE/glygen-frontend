@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from 'react';
-import { getGlycanDetail,  glycanImageUrl} from '../data/glycan';
+import { getGlycanDetail,  getGlycanImageUrl} from '../data/glycan';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -465,7 +465,7 @@ const GlycanDetail = (props) => {
 													<p>
 														<img
 															className='img-cartoon'
-															src={glycanImageUrl + glytoucan.glytoucan_ac}
+															src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
 															alt='Cartoon'
 														/>
 													</p>
@@ -641,7 +641,7 @@ const GlycanDetail = (props) => {
 																<div key={motif.id} className='img-wrapper'>
 																	<img
 																		className='img-cartoon'
-																		src={glycanImageUrl + motif.id}
+																		src={getGlycanImageUrl(motif.id)}
 																		alt='Cartoon'
 																	/>
 																</div>
