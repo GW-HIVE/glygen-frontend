@@ -566,3 +566,55 @@ sub {
 .narrow-dropdown ul {
   min-width: auto;
 }
+
+/* =========================================
+    Examples, small text - simple search
+============================================ */
+.small-text {
+	font-size: 14px  !important;
+}
+
+/* =========================================
+            Error text - search
+============================================ */
+.error-text {
+	font-size: 14px  !important;
+	margin-right: 0  !important;
+	margin-left: 0  !important;
+}
+
+/* =========================================
+              Card Loader
+============================================ */
+.card-loader-image {
+    height: 75px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.card-loader-row {
+    justify-content: center;
+}
+
+.card-loader-overlay {
+    z-index: 2000	!important;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+              Page Loader
+============================================ */
+.page-loader-backdrop {
+    z-index: 2000	!important;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.page-loader-image {
+    width: 75px;
+    height: 75px;
+}

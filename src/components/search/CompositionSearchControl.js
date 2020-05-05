@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Grid from '@material-ui/core/Grid';
@@ -11,58 +10,9 @@ import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
-
-const useStyles = makeStyles({
-	// input: {
-	// 	height: 34,
-	// 	borderRadius: 4,
-	// 	position: 'relative',
-	// 	fontSize: 16,
-	// 	paddingLeft: '15px',
-	// 	paddingRight: '15px',
-	// },
-	// span2: {
-	// 	fontSize: 12,
-	// 	fontStyle: 'italic',
-	// 	fontWeight: 'bold',
-	// 	margin: 0,
-	// },
-	// br: {
-	// 	height: 1,
-	// 	padding: 0,
-	// 	margin: 0,
-	// },
-	// label: {
-	// 	fontSize: 16,
-	// 	fontWeight: 'bold',
-	// 	margin: 0,
-	// },
-	labelHeader: {
-		// fontSize: 16,
-		fontWeight: 'bold',
-		margin: 0,
-		color: '#2F78B7',
-	},
-	// select: {
-	// 	height: '34px',
-	// 	paddingLeft: '15px',
-	// 	paddingRight: '15px',
-	// },
-	label1: {
-		//fontSize: "14px",
-		//color: "#4A4A4A",
-		//fontWeight: "bold",
-		marginLeft: -27,
-	},
-	label2: {
-		fontSize: '12px !important',
-		fontWeight: 'bold',
-		fontStyle: 'italic',
-	},
-});
+import '../../css/Search.css';
 
 export default function CompositionSearchControl(props) {
-	const classes = useStyles();
 	const [undoStack, setUndoStack] = useState([]);
 	const [redoStack, setRedoStack] = useState([]);
 	const [undoVal, setUndoVal] = useState({});
@@ -354,6 +304,7 @@ export default function CompositionSearchControl(props) {
 
 	/**
 	 * onMinMaxFocus sets residue values to undo_residue_val.
+	 * @param {object} selOption - select option.
 	 * @param {object} minVal - min value.
 	 * @param {object} maxVal - max value.
 	 * @param {string} residue - residue id.
@@ -537,40 +488,33 @@ export default function CompositionSearchControl(props) {
 		<div>
 			<Grid
 				container
-				// fullWidth
-				// xs={12}
-				// className={'col-sm-12'}
 				style={{ margin: 0 }}
 				spacing={2}
 				justify='center'>
-				{/* <Grid item className={'col-sm-5'}> */}
 				<Grid item xs={4} sm={4} md={4}>
-					<Typography className={classes.labelHeader} gutterBottom>
+					<Typography className={'comp-search-label-header'} gutterBottom>
 						Residue
 					</Typography>
 				</Grid>
-				{/* <Grid item className={'col-sm-2'}> */}
 				<Grid item xs={4} sm={3} md={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Contains
 					</Typography>
 				</Grid>
-				{/* <Grid item className={'col-sm-2'}> */}
 				<Grid item xs={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Min
 					</Typography>
 				</Grid>
-				{/* <Grid item className={'col-sm-2'}> */}
 				<Grid item xs={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Max
@@ -582,14 +526,11 @@ export default function CompositionSearchControl(props) {
 					<Grid
 						key={key.residue}
 						container
-						// xs={12}
-						// md={10}
-						// className={'col-sm-12'}
 						style={{ margin: '0  auto' }}
 						spacing={2}
 						justify='center'>
 						<Grid item xs={12} sm={4}>
-							<Typography className={classes.label1}>
+							<Typography className={'search-lbl'}>
 								<HelpTooltip
 									title = {key.tooltip.title}
 									text = {key.tooltip.text}
@@ -598,13 +539,11 @@ export default function CompositionSearchControl(props) {
 								/>
 								<strong>{key.name}</strong>
 							</Typography>
-							<Typography className={classes.label2}>
+							<Typography className={'comp-search-label-subtext'}>
 								{ReactHtmlParser(key.subtext)}
 							</Typography>
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>
-							{/* <Grid item className={'col-sm-2'}> */}
-							{/* <FormControl fullWidth className={classes.margin}> */}
 							<FormControl fullWidth>
 								<Select
 									variant='outlined'
@@ -620,9 +559,7 @@ export default function CompositionSearchControl(props) {
 										)
 									}
 									margin='dense'
-									// className={classes.select}
 									classes={{
-										//outlined: classes.selectOutlined,
 									 root: 'select-menu',
 									}}
 								>
@@ -633,13 +570,10 @@ export default function CompositionSearchControl(props) {
 							</FormControl>
 						</Grid>
 						<Grid item xs={3} sm={2}>
-							{/* <Grid item className={'col-sm-2'}> */}
-							{/* <FormControl fullWidth className={classes.margin}> */}
 							<FormControl fullWidth>
 								<OutlinedInput
 									variant='outlined'
 									name={key.residue}
-									// className={classes.input}
 									margin='dense'
 									value={props.inputValue[key.residue].min}
 									onChange={minInputChange}
@@ -672,12 +606,9 @@ export default function CompositionSearchControl(props) {
 							</FormControl>
 						</Grid>
 						<Grid item xs={3} sm={2}>
-							{/* <Grid item className={'col-sm-2'}> */}
-							{/* <FormControl fullWidth className={classes.margin}> */}
 							<FormControl fullWidth>
 								<OutlinedInput
 									variant='outlined'
-									// className={classes.input}
 									margin='dense'
 									name={key.residue}
 									value={props.inputValue[key.residue].max}

@@ -6,6 +6,7 @@
     "proteinSearch": "/protein-search/",
     "enzymeSearch": "/enzyme-search/",
     "glycanDetail": "/glycan-detail/",
+    "proteinDetail": "/protein-detail/",
     "resources": "/resources/",
     "howToCite": "/how-to-cite/",
     "contactUs": "/contact-us/",

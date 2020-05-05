@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -21,59 +20,8 @@ import '../../css/Search.css';
 import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
-const useStyles = makeStyles((theme) => ({
-	// marginLeft: {
-	//     justifyContent: "flex-end",
-	// },
-	// root: {
-	//     display: "flex",
-	//     flexWrap: "wrap",
-	// },
-	label: {
-		// fontSize: "14px",
-		// color: "#4A4A4A",
-		fontWeight: 'bold',
-        marginLeft: -27,
-	},
-	// label4: {
-	//     fontSize: "15px",
-	//     color: "#4A4A4A",
-	//     fontWeight: "bold",
-	// },
-	labelSelect: {
-		// fontSize: "16px",
-		fontWeight: 'bold',
-	},
-	errorText: {
-		fontSize: '14px  !important',
-		marginRight: 0,
-		marginLeft: 0,
-	},
-	// input: {
-	//     borderRadius: 4,
-	//     position: "relative",
-	//     backgroundColor: theme.palette.background.paper,
-	//     fontSize: 16,
-	//     width: "700px",
-	//     height: "34px",
-	// },
-	// select: {
-	//     width: "200px",
-	//     height: "34px",
-	// },
-	// select1: {
-	//     width: "700px",
-	//     height: "34px",
-	// },
-	// selectOutlined: {
-	//     paddingTop: "4px !important",
-	//     paddingBottom: "4px !important",
-	//     backgroundColor: "white",
-	// }
-}));
 
 const GlycanAdvancedSearch = (props) => {
-    const classes = useStyles();
     let commonGlycanData = stringConstants.glycan.common;
     let advancedSearch = glycanSearchData.advanced_search;
 
@@ -283,7 +231,7 @@ const GlycanAdvancedSearch = (props) => {
 				{/* Glycan Id */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
-						<Typography className={classes.label} gutterBottom>
+						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
                                 title={commonGlycanData.glycan_id.tooltip.title}
                                 text={commonGlycanData.glycan_id.tooltip.text}
@@ -312,7 +260,7 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
-								<Typography className={classes.label} gutterBottom>
+								<Typography className={'search-lbl'} gutterBottom>
 									<HelpTooltip
                                         title={commonGlycanData.mass.tooltip.title}
                                         text={commonGlycanData.mass.tooltip.text}
@@ -323,6 +271,7 @@ const GlycanAdvancedSearch = (props) => {
 									step={10}
 									min={props.inputValue.glyMassRange[0]}
 									max={props.inputValue.glyMassRange[1]}
+									inputClass='gly-rng-input'
 									inputValue={props.inputValue.glyMassInput}
                                     setInputValue={glyMassInputChange}
 									inputValueSlider={props.inputValue.glyMass}
@@ -331,25 +280,22 @@ const GlycanAdvancedSearch = (props) => {
 							</Grid>
 							{/* Mass Type */}
 							<Grid item xs={12} sm={3}>
-								<Typography className={classes.label} gutterBottom>
+								<Typography className={'search-lbl'} gutterBottom>
 									&nbsp;
 								</Typography>
                                 <FormControl 
                                     variant='outlined' 
-                                    //margin='dense' 
                                     fullWidth
                                 >
-									<InputLabel className={classes.labelSelect}>
+									<InputLabel className={'select-lbl-inline'}>
                                         {commonGlycanData.mass_type.name}
 									</InputLabel>
 									<Select
 										value={props.inputValue.glyMassType}
 										onChange={glyMassTypeOnChange}
 										classes={{
-											//outlined: classes.selectOutlined,
 											root: 'select-menu-adv',
 										}}
-										className={classes.select}
 										labelWidth={85}>
 											{Object.keys(props.initData.glycan_mass)
 												.sort()
@@ -371,7 +317,7 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={12} sm={9}>
-								<Typography className={classes.label} gutterBottom>
+								<Typography className={'search-lbl'} gutterBottom>
 									<HelpTooltip
                                         title={commonGlycanData.number_monosaccharides.tooltip.title}
                                         text={commonGlycanData.number_monosaccharides.tooltip.text}
@@ -382,6 +328,7 @@ const GlycanAdvancedSearch = (props) => {
 									step={1}
 									min={props.inputValue.glyNumSugarsRange[0]}
 									max={props.inputValue.glyNumSugarsRange[1]}
+									inputClass='gly-rng-input'
 									inputValue={props.inputValue.glyNumSugarsInput}
                                     setInputValue={glyNumSugarsInputChange}
 									inputValueSlider={props.inputValue.glyNumSugars}
@@ -397,7 +344,7 @@ const GlycanAdvancedSearch = (props) => {
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={9} sm={9}>
 								<Typography
-									className={classes.label}
+									className={'search-lbl'}
 									gutterBottom
 								>
 									<HelpTooltip
@@ -414,24 +361,21 @@ const GlycanAdvancedSearch = (props) => {
 								/>}
 							</Grid>
 							<Grid item xs={3} sm={3}>
-                                <Typography className={classes.label} gutterBottom>
+                                <Typography className={'search-lbl'} gutterBottom>
 									&nbsp;
 								</Typography>
                                 <FormControl 
                                     variant='outlined' 
-                                    //margin='dense' 
                                     fullWidth
                                 >
 									<Select
-										// margin='dense'
 										variant='outlined'
 										classes={{
-											//outlined: classes.selectOutlined,
 											root: 'select-menu-adv',
 										}}
 										value={props.inputValue.glyOrgOperation}
 										onChange={glyOrgOperationOnChange}
-										className={classes.select}>
+									>
 										<MenuItem value={'or'}>Or</MenuItem>
 										<MenuItem value={'and'}>And</MenuItem>
 									</Select>
@@ -445,9 +389,8 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl
 						fullWidth
 						variant='outlined'
-						// margin='dense'
 					>
-						<Typography className={classes.label} gutterBottom>
+						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
                                 title={commonGlycanData.glycan_type.tooltip.title}
                                 text={commonGlycanData.glycan_type.tooltip.text}
@@ -458,9 +401,7 @@ const GlycanAdvancedSearch = (props) => {
 							value={props.inputValue.glyType}
 							displayEmpty
 							onChange={glyTypeOnChange}
-							className={classes.select1}
 							classes={{
-								//outlined: classes.selectOutlined,
                                 root: 'select-menu-adv',
 							}}>
 							<MenuItem value=''>Select Glycan Type</MenuItem>
@@ -482,7 +423,7 @@ const GlycanAdvancedSearch = (props) => {
 							variant='outlined'
 							//margin='dense'
 						>
-							<Typography className={classes.label} gutterBottom>
+							<Typography className={'search-lbl'} gutterBottom>
 								<HelpTooltip
                                     title={commonGlycanData.glycan_subtype.tooltip.title}
                                     text={commonGlycanData.glycan_subtype.tooltip.text}
@@ -493,9 +434,7 @@ const GlycanAdvancedSearch = (props) => {
 								value={props.inputValue.glySubType}
 								displayEmpty
 								onChange={glySubTypeOnChange}
-								className={classes.select1}
 								classes={{
-									//outlined: classes.selectOutlined,
 									root: 'select-menu-adv',
 								}}
 							>
@@ -522,7 +461,7 @@ const GlycanAdvancedSearch = (props) => {
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
-							className={classes.label}
+							className={'search-lbl'}
 							gutterBottom
 						>
 							<HelpTooltip
@@ -551,7 +490,7 @@ const GlycanAdvancedSearch = (props) => {
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
-							className={classes.label}
+							className={'search-lbl'}
 							gutterBottom
 						>
 							<HelpTooltip
@@ -580,7 +519,7 @@ const GlycanAdvancedSearch = (props) => {
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
-							className={classes.label}
+							className={'search-lbl'}
 							gutterBottom
 						>
 							<HelpTooltip
@@ -610,9 +549,8 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl
 						fullWidth
 						variant='outlined'
-						// margin='dense'
 					>
-						<Typography className={classes.label} gutterBottom>
+						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
                                 title={commonGlycanData.pmid.tooltip.title}
                                 text={commonGlycanData.pmid.tooltip.text}
@@ -622,7 +560,6 @@ const GlycanAdvancedSearch = (props) => {
                             {commonGlycanData.pmid.name}
 						</Typography>
 						<OutlinedInput
-                            className={classes.input}
                             placeholder={advancedSearch.pmid.placeholder}
                             margin='dense'
                             value={props.inputValue.glyPubId}
@@ -630,7 +567,7 @@ const GlycanAdvancedSearch = (props) => {
                             error={props.inputValue.glyPubId.length > advancedSearch.pmid.length}
 						/>
 						{props.inputValue.glyPubId.length > advancedSearch.pmid.length && (
-							<FormHelperText className={classes.errorText} error>
+							<FormHelperText className={"error-text"} error>
 								{advancedSearch.pmid.errorText}
 							</FormHelperText>
 						)}

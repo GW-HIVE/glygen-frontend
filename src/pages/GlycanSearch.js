@@ -13,7 +13,7 @@ import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
 import stringConstants from '../data/json/stringConstants';
 import routeConstants from '../data/json/routeConstants';
-import { glycanSearch, glycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
+import { getGlycanSearch, getGlycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
 import FeedbackWidget from "../components/FeedbackWidget";
 
 
@@ -418,7 +418,7 @@ const GlycanSearch = (props) => {
 		return formjson;
 	}
 
-	const glycanSimSearch = () => {
+	const glycanSimpleSearch = () => {
 		var formjsonSimple = {
 			[commonGlycanData.operation.id]: 'AND',
 			[glycanData.simple_search.query_type.id]: glycanData.simple_search.query_type.name,
@@ -426,7 +426,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.term_category.id]: glySimpleSearchCategory,
 		};
 
-		return glycanSimpleSearch(formjsonSimple);
+		return getGlycanSimpleSearch(formjsonSimple);
 	};
 
 	const glycanAdvSearch = () => {
@@ -449,7 +449,7 @@ const GlycanSearch = (props) => {
 			undefined
 		);
 
-		return glycanSearch(formObject);
+		return getGlycanSearch(formObject);
 	};
 
 	const glycanCompSearch = () => {
@@ -484,7 +484,7 @@ const GlycanSearch = (props) => {
 			compSearchData
 		);
 
-		return glycanSearch(formObject);
+		return getGlycanSearch(formObject);
 	};
 
 	const searchGlycanAdvClick = () => {
@@ -532,7 +532,7 @@ const GlycanSearch = (props) => {
 
 	const searchGlycanSimpleClick = () => {
 		setPageLoading(true);
-		glycanSimSearch()
+		glycanSimpleSearch()
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
 					props.history.push(routeConstants.glycanList + response.data['list_id']);

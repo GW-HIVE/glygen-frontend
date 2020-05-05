@@ -96,3 +96,28 @@
 input[type='number'] {
 	-moz-appearance: textfield;
 }
+
+.select-lbl-inline {
+	font-weight: bold !important;
+}
+
+.gly-rng-input {
+	width: 90px	!important;
+}
+
+.search-lbl {
+	margin-left: -27px	!important;
+	font-weight: bold	!important;
+}
+
+.comp-search-label-header {
+	font-weight: bold	!important;
+	margin: 0px 	!important;
+	color: #2F78B7;
+}
+
+.comp-search-label-subtext {
+	font-size: 12px !important;
+	font-weight: bold	!important;
+	font-style: italic;
+}

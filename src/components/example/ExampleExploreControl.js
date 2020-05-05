@@ -1,25 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {Col,Row} from "react-bootstrap";
 import LineTooltip from '../tooltip/LineTooltip';
 import Button from 'react-bootstrap/Button'
 
-const useStyles = makeStyles((theme) => ({
-    example: {
-        fontSize: "14px  !important",
-    }
-}));
 
 const ExampleExploreControl = (props) => {
-    const classes = useStyles();
     function sortExamples(ex1, ex2) {
         return parseInt(ex1.orderID) - parseInt(ex2.orderID);
 	}
 
     return(
         <>
-        {props.inputValue.sort(sortExamples).map((obj) => (<Row key={obj.example.id} className={classes.example}>
+        {props.inputValue.sort(sortExamples).map((obj) => (<Row key={obj.example.id} className={"small-text"}>
         <Col>
             <div>
                 {obj.example.name}{" "}

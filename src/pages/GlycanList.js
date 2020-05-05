@@ -12,6 +12,7 @@ import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
 import ReactHtmlParser from "react-html-parser";
+import routeConstants from '../data/json/routeConstants';
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -97,7 +98,7 @@ const GlycanList = props => {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
   }
   const handleModifySearch = () => {
-    props.history.push(`/glycan-search/${id}`);
+    props.history.push(routeConstants.glycanSearch + id);
   };
 
   return (

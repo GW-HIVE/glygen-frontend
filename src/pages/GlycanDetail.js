@@ -32,6 +32,7 @@ import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
 import FeedbackWidget from '../components/FeedbackWidget';
 import ReactCopyClipboard from'../components/ReactCopyClipboard';
+import routeConstants from '../data/json/routeConstants';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -296,7 +297,7 @@ const GlycanDetail = (props) => {
 			formatter: (value, row) => (
 				<Navbar.Text
 					as={NavLink}
-					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
+					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 					{row.uniprot_canonical_ac}
 				</Navbar.Text>
 			),
