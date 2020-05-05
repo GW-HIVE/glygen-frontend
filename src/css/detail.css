@@ -62,7 +62,7 @@ legend {
 
 .img-wrapper {
   overflow: hidden;
-  z-index: -9999;
+  z-index: -1000;
   padding: 0.5em;
   margin-top: 20px;
   margin-bottom: 0px;
@@ -86,7 +86,7 @@ legend {
   transform: scale(1);
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
-  z-index: 99999;
+  z-index: 1000;
 }
 .no-data-msg {
   margin-left: 15px;

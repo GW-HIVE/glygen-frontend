@@ -599,7 +599,7 @@ sub {
 }
 
 .card-loader-overlay {
-    z-index: 1500	!important;
+    z-index: 2000	!important;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -610,7 +610,7 @@ sub {
               Page Loader
 ============================================ */
 .page-loader-backdrop {
-    z-index: 1500	!important;
+    z-index: 2000	!important;
     background-color: rgba(0, 0, 0, 0.3);
 }
 
