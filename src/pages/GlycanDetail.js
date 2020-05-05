@@ -31,6 +31,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
 import FeedbackWidget from '../components/FeedbackWidget';
+import ReactCopyClipboard from'../components/ReactCopyClipboard';
 
 const items = [
 	{ label: 'General', id: 'general' },
@@ -78,6 +79,28 @@ function addCommas(nStr) {
 	return x1 + x2;
 }
 
+
+function copyToClipboard(elementId) {
+
+	// Create an auxiliary hidden input
+	var aux = document.createElement("input");
+  
+	// Get the text from the element passed into the input
+	aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+  
+	// Append the aux input to the body
+	document.body.appendChild(aux);
+  
+	// Highlight the content
+	aux.select();
+  
+	// Execute the copy command
+	document.execCommand("copy");
+  
+	// Remove the input from the body
+	document.body.removeChild(aux);
+  
+  }
 const getItemsCrossRef = (data) => {
 	let itemscrossRef = [];
 
@@ -204,23 +227,6 @@ const GlycanDetail = (props) => {
 
 	const glycoProtienColumns = [
 		{
-			dataField: 'uniprot_canonical_ac',
-			text: 'Protein ID',
-			sort: true,
-
-			headerStyle: (column, colIndex) => {
-				return { backgroundColor: '#4B85B6', color: 'white' };
-			},
-			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
-					{row.uniprot_canonical_ac}
-				</Navbar.Text>
-			),
-		},
-
-		{
 			dataField: 'evidence',
 			text: 'Sources',
 			sort: true,
@@ -237,6 +243,33 @@ const GlycanDetail = (props) => {
 			},
 		},
 		{
+			dataField: 'protein_name',
+			text: 'Protein Name',
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: '#4B85B6', color: 'white' };
+			},
+		},
+		{
+			dataField: 'uniprot_canonical_ac',
+			text: 'UniprotKB Accession',
+			defaultSortField:"uniprot_canonical_ac",
+			sort: true,
+
+			headerStyle: (column, colIndex) => {
+				return { backgroundColor: '#4B85B6', color: 'white' };
+			},
+			formatter: (value, row) => (
+				<Navbar.Text
+					as={NavLink}
+					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
+					{row.uniprot_canonical_ac}
+				</Navbar.Text>
+			),
+		},
+
+		
+		{
 			dataField: 'position',
 			text: 'Position',
 			sort: true,
@@ -249,14 +282,7 @@ const GlycanDetail = (props) => {
 				</Navbar.Text>
 			),
 		},
-		{
-			dataField: 'protein_name',
-			text: 'Protein Name',
-			sort: true,
-			headerStyle: (colum, colIndex) => {
-				return { backgroundColor: '#4B85B6', color: 'white' };
-			},
-		},
+		
 	];
 	const bioEnzymeColumns = [
 		{
@@ -278,6 +304,7 @@ const GlycanDetail = (props) => {
 		{
 			dataField: 'gene',
 			text: 'Gene Name',
+			defaultSortField:"gene",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: '#4B85B6', color: 'white' };
@@ -785,8 +812,10 @@ const GlycanDetail = (props) => {
 								<Accordion.Collapse eventKey='0'>
 									<Card.Body className='text-responsive'>
 										<p>
+
 											{iupac ? (
 												<>
+												<ReactCopyClipboard value={iupac}/>
 													<strong>IUPAC</strong>{' '}
 													<p className='text-overflow'>{iupac} </p>
 												</>
@@ -805,8 +834,10 @@ const GlycanDetail = (props) => {
 
 											{glycoct ? (
 												<>
-													<strong>GlycoCT</strong>
-													<p className='text-overflow'>{glycoct} </p>{' '}
+													<strong>GlycoCT</strong> <button onclick="copyToClipboard({glycoct})">
+    Copy to clipboard
+</button>
+													<p id="text_element"className='text-overflow'>{glycoct} </p>{' '}
 												</>
 											) : (
 												<p></p>
