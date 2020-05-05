@@ -1,22 +1,12 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { getJson } from '../../data/api';
-import { makeStyles } from '@material-ui/core/styles';
+import { getTypeahed } from '../../data/commonApi';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/Search.css';
 
-const useStyles = makeStyles((theme) => ({
-	errorText: {
-		fontSize: '14px  !important',
-		marginRight: 0,
-		marginLeft: 0,
-	},
-}));
-
 export default function AutoTextInput(props) {
-	const classes = useStyles();
 	const [options, setOptions] = React.useState([]);
 
 	const handleChange = (event, value, reason) => {
@@ -26,21 +16,17 @@ export default function AutoTextInput(props) {
 	};
 
 	React.useEffect(() => {
-		let active = true;
 		setOptions([]);
 		if (props.inputValue && props.inputValue === '') {
 			setOptions([]);
 			return undefined;
 		}
 
-		if (props.inputValue && active) {
-			const url = `/typeahead?query={"field":"${props.typeahedID}","value":"${props.inputValue}","limit":100}`;
-			getJson(url).then((response) => setOptions(response.data));
+		if (props.inputValue) {
+			getTypeahed(props.typeahedID, props.inputValue).then((response) => setOptions(response.data));
 		}
 
-		return () => {
-			active = false;
-		};
+		return;
 	}, [props.inputValue, props.typeahedID]);
 
 	return (
@@ -68,7 +54,7 @@ export default function AutoTextInput(props) {
 				)}
 			/>
 			{props.inputValue.length > props.length && (
-				<FormHelperText className={classes.errorText} error>
+				<FormHelperText className={"error-text"} error>
 					{props.errorText}
 				</FormHelperText>
 			)}

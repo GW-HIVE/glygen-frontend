@@ -1,24 +1,17 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import PropTypes from 'prop-types';
-
-const useStyles = makeStyles({
-	input: {
-		width: '90px'
-	}
-});
-
-function valuetext(value) {
-	return `${value}`;
-}
+import '../../css/Search.css';
 
 export default function RangeInputSlider(props) {
-	const classes = useStyles();
+
+	function valuetext(value) {
+		return `${value}`;
+	}
 
 	const sliderChange = (event, newValue) => {
 		props.setSliderInputValue(newValue);
@@ -62,11 +55,11 @@ export default function RangeInputSlider(props) {
 			<Grid container spacing={2} alignItems='center'>
 				<Grid item>
 					<FormControl fullWidth variant='outlined'>
-						<InputLabel>
-							<strong>Min</strong>
+						<InputLabel className={'select-lbl-inline'}>
+							Min
 						</InputLabel>
 						<OutlinedInput
-							className={classes.input}
+							className={props.inputClass}
 							value={props.inputValue[0]}
 							margin='dense'
 							onChange={minInputChange}
@@ -77,7 +70,6 @@ export default function RangeInputSlider(props) {
 								min: props.min,
 								max: props.max,
 								type: 'number',
-								'aria-labelledby': 'input-slider',
 							}}
 						/>
 					</FormControl>
@@ -96,11 +88,11 @@ export default function RangeInputSlider(props) {
 				</Grid>
 				<Grid item>
 					<FormControl fullWidth variant='outlined'>
-						<InputLabel>
-							<strong>Max</strong>
+						<InputLabel className={'select-lbl-inline'}>
+							Max
 						</InputLabel>
 						<OutlinedInput
-							className={classes.input}
+							className={props.inputClass}
 							value={props.inputValue[1]}
 							margin='dense'
 							onChange={maxInputChange}
@@ -111,7 +103,6 @@ export default function RangeInputSlider(props) {
 								min: props.min,
 								max: props.max,
 								type: 'number',
-								'aria-labelledby': 'input-slider',
 							}}
 						/>
 					</FormControl>
@@ -126,6 +117,7 @@ RangeInputSlider.propTypes = {
 	min: PropTypes.number,
 	max: PropTypes.number,
 	inputValueSlider: PropTypes.array,
+	inputClass: PropTypes.string,
 	setSliderInputValue: PropTypes.func,
 	inputValue: PropTypes.array,
 	setInputValue: PropTypes.func,

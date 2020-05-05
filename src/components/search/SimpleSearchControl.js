@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,20 +9,9 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ExampleControl from "../example/ExampleControl";
-
-
-const useStyles = makeStyles((theme) => ({
-	labelSelect: {
-		fontSize: '16px',
-		fontWeight: 'bold',
-	},
-	smallText: {
-		fontSize: '14px !important',
-	},
-}));
+import '../../css/Search.css';
 
 export default function SimpleSearchControl(props) {
-	const classes = useStyles();
 
 	const simpleSearchCategoryOnChange = (event) => {
 		props.setSimpleSearchCategory(event.target.value);
@@ -41,16 +29,14 @@ export default function SimpleSearchControl(props) {
 				justify='center'>
 				<Grid item xs={12} sm={3}>
 					<FormControl variant='outlined' fullWidth>
-						<InputLabel className={classes.labelSelect}>{props.simpleSearchCategoryLabel}</InputLabel>
+						<InputLabel className={'select-lbl-inline'}>{props.simpleSearchCategoryLabel}</InputLabel>
 						<Select
 							value={props.simpleSearchCategory}
 							onChange={simpleSearchCategoryOnChange}
 							defaultValue='any'
 							classes={{
-								outlined: classes.selectOutlined,
 								root: 'select-menu',
 							}}
-							className={classes.selectSimple}
 							labelWidth={80}>
 							{props.simple_search_category &&
 								props.simple_search_category
@@ -74,7 +60,7 @@ export default function SimpleSearchControl(props) {
 						error={props.simpleSearchTerm.length > props.length}
 					/>
 					{props.simpleSearchTerm.length > props.length && (
-						<FormHelperText className={classes.smallText} error>
+						<FormHelperText className={"error-text"} error>
 							{props.errorText}
 						</FormHelperText>
 					)}
@@ -98,7 +84,7 @@ export default function SimpleSearchControl(props) {
 			</Grid>
 			<br />
 			<Grid container spacing={3} justify='center'>
-				<Grid className={classes.smallText} item>
+				<Grid className={"small-text"} item>
 					*{' '}
 					<em>
 						"<strong>Any category</strong>"

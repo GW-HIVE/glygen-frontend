@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Grid from '@material-ui/core/Grid';
@@ -11,25 +10,9 @@ import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
-
-const useStyles = makeStyles({
-	labelHeader: {
-		fontWeight: 'bold',
-		margin: 0,
-		color: '#2F78B7',
-	},
-	label1: {
-		marginLeft: -27,
-	},
-	label2: {
-		fontSize: '12px !important',
-		fontWeight: 'bold',
-		fontStyle: 'italic',
-	},
-});
+import '../../css/Search.css';
 
 export default function CompositionSearchControl(props) {
-	const classes = useStyles();
 	const [undoStack, setUndoStack] = useState([]);
 	const [redoStack, setRedoStack] = useState([]);
 	const [undoVal, setUndoVal] = useState({});
@@ -509,13 +492,13 @@ export default function CompositionSearchControl(props) {
 				spacing={2}
 				justify='center'>
 				<Grid item xs={4} sm={4} md={4}>
-					<Typography className={classes.labelHeader} gutterBottom>
+					<Typography className={'comp-search-label-header'} gutterBottom>
 						Residue
 					</Typography>
 				</Grid>
 				<Grid item xs={4} sm={3} md={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Contains
@@ -523,7 +506,7 @@ export default function CompositionSearchControl(props) {
 				</Grid>
 				<Grid item xs={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Min
@@ -531,7 +514,7 @@ export default function CompositionSearchControl(props) {
 				</Grid>
 				<Grid item xs={2}>
 					<Typography
-						className={classes.labelHeader}
+						className={'comp-search-label-header'}
 						gutterBottom
 						align='center'>
 						Max
@@ -547,7 +530,7 @@ export default function CompositionSearchControl(props) {
 						spacing={2}
 						justify='center'>
 						<Grid item xs={12} sm={4}>
-							<Typography className={classes.label1}>
+							<Typography className={'search-lbl'}>
 								<HelpTooltip
 									title = {key.tooltip.title}
 									text = {key.tooltip.text}
@@ -556,7 +539,7 @@ export default function CompositionSearchControl(props) {
 								/>
 								<strong>{key.name}</strong>
 							</Typography>
-							<Typography className={classes.label2}>
+							<Typography className={'comp-search-label-subtext'}>
 								{ReactHtmlParser(key.subtext)}
 							</Typography>
 						</Grid>
