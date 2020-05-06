@@ -27,12 +27,6 @@ const PanelHowToCite = (props) => {
 					</Card.Header>
 					<Card.Body className="card-padding-zero">
 						<Table hover fluid>
-							{/* <Table bordered hover size='lg' className='panel-width'> */}
-							{/* <thead className='panelHeadBgr panelHeadText'>
-						{props.data.map((json) => (
-							<h3 style={{ margin: '15px' }}>{json.title}</h3>
-						))}
-					</thead> */}
 							<tbody className="table-body">
 								{props.data.map((json) => (
 									<tr className="table-row">
@@ -61,7 +55,7 @@ const PanelHowToCite = (props) => {
 													</a>
 													{json.period}
 												</div>
-												{/* Quotes */}
+
 												<div>
 													{json.citeimage && (
 														<Image
