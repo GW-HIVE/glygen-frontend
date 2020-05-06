@@ -50,3 +50,8 @@ h6 {
 	color: #444444;
 	margin-bottom: 3px !important;
 }
+
+.MuiFormHelperText-root.Mui-error {
+	/* color: #f44336; */
+	margin-left: 0;
+}
