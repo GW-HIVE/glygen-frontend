@@ -31,7 +31,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
 import FeedbackWidget from '../components/FeedbackWidget';
-import ReactCopyClipboard from'../components/ReactCopyClipboard';
+// import ReactCopyClipboard from'../components/ReactCopyClipboard';
 import routeConstants from '../data/json/routeConstants';
 
 const items = [
@@ -816,7 +816,7 @@ const GlycanDetail = (props) => {
 
 											{iupac ? (
 												<>
-												<ReactCopyClipboard value={iupac}/>
+												{/* <ReactCopyClipboard value={iupac}/> */}
 													<strong>IUPAC</strong>{' '}
 													<p className='text-overflow'>{iupac} </p>
 												</>
@@ -835,9 +835,7 @@ const GlycanDetail = (props) => {
 
 											{glycoct ? (
 												<>
-													<strong>GlycoCT</strong> <button onclick="copyToClipboard({glycoct})">
-    Copy to clipboard
-</button>
+													<strong>GlycoCT</strong> 
 													<p id="text_element"className='text-overflow'>{glycoct} </p>{' '}
 												</>
 											) : (
