@@ -263,7 +263,7 @@ const GlycanDetail = (props) => {
 			formatter: (value, row) => (
 				<Navbar.Text
 					as={NavLink}
-					to={`/protein-detail/${row.uniprot_canonical_ac}`}>
+					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 					{row.uniprot_canonical_ac}
 				</Navbar.Text>
 			),
