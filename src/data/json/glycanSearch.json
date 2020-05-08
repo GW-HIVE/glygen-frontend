@@ -2,10 +2,6 @@
     "pageTitle": "Glycan Search",
     "simple_search": {
         "tabTitle": "Simple Search",
-        "alert":{
-            "alertTitle": "Simple Search Error - No Results Found",
-            "alertText": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-        },
         "length": 100,
         "errorText":"Entry is too long - max length is 100.",
         "categories": {
@@ -46,10 +42,6 @@
     },
     "advanced_search": {
         "tabTitle": "Advanced Search",
-        "alert":{
-            "alertTitle": "Advanced Search Error - No Results Found",
-            "alertText": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-        },
         "glycan_id": {
             "length": 2500,
             "errorText": "Entry is too long - max length is 2500.",
@@ -156,11 +148,7 @@
         }
     },
     "composition_search": {
-        "tabTitle": "Composition Search",
-        "alert":{
-            "alertTitle":"Composition Search Error - No Results Found",
-            "alertText":"Sorry, we couldn't find any data matching your input. Please change your search term and try again."
-        }
+        "tabTitle": "Composition Search"
     },
     "tutorial": {
         "tabTitle": "Tutorial"

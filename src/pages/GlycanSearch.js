@@ -2,7 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
-import SearchAlert from '../components/alert/SearchAlert';
+import TextAlert from '../components/alert/TextAlert';
+import DialogAlert from '../components/alert/DialogAlert';
 import GlycanAdvancedSearch from '../components/search/GlycanAdvancedSearch';
 import CompositionSearchControl from '../components/search/CompositionSearchControl';
 import SimpleSearchControl from '../components/search/SimpleSearchControl';
@@ -13,6 +14,7 @@ import '../css/Search.css';
 import glycanSearchData from '../data/json/glycanSearch';
 import stringConstants from '../data/json/stringConstants';
 import routeConstants from '../data/json/routeConstants';
+import {logActivity} from '../data/logging';
 import { getGlycanSearch, getGlycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
 import FeedbackWidget from "../components/FeedbackWidget";
 
@@ -66,7 +68,14 @@ const GlycanSearch = (props) => {
 	);
 	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
 	const [pageLoading, setPageLoading] = useState(true);
-	const [glySearchError, setGlySearchError] = useState(false);
+	const [alertTextInput, setAlertTextInput] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{show: false, id: ""}
+	);
+	const [alertDialogInput, setAlertDialogInput] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{show: false, id: ""}
+	);
 
 	let simpleSearch = glycanSearchData.simple_search;
 	let advancedSearch = glycanSearchData.advanced_search;
@@ -102,7 +111,7 @@ const GlycanSearch = (props) => {
 	useEffect(() => {
 		setPageLoading(true);
 		document.addEventListener('click', () => {
-			setGlySearchError(false);
+			setAlertTextInput({"show": false})
 		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
@@ -181,6 +190,7 @@ const GlycanSearch = (props) => {
 
 			id &&
 				getGlycanList(id, 1).then(({ data }) => {
+					logActivity(routeConstants.glycanSearch, "user", id, "Search modification initiated");
 					if (data.query.composition !== undefined) {
 						let queryCompData = {};
 						for (let x = 0; x < data.query.composition.length; x++) {
@@ -310,7 +320,41 @@ const GlycanSearch = (props) => {
 						setGlyActTabKey("advanced_search");
 						setPageLoading(false);
 					}
+				})
+				.catch(function (error) {
+					console.log(error);
+					let message = "list api call";
+					if (!error.response) {
+						logActivity(routeConstants.glycanSearch, "error", id, "Network error. " + message);
+						setPageLoading(false);
+						setAlertDialogInput({"show": true, "id": stringConstants.errors.networkError.id})
+					} else if (error.response && !error.response.data) {
+						logActivity(routeConstants.glycanSearch, "error", id, error.response.status + " error status. " + message);
+						setPageLoading(false);
+						setAlertDialogInput({"show": true, "id": error.response.status})
+					} else if (error.response.data && error.response.data["error_list"]) {
+						logActivity(routeConstants.glycanSearch, "error", id, error.response.data["error_list"][0].error_code + " error code. " + message);
+						setPageLoading(false);
+						setAlertDialogInput({"show": true, "id": error.response.data["error_list"][0].error_code})
+					}
 				});
+		})
+		.catch(function (error) {
+			console.log(error);
+			let message = "search_init api call";
+			if (!error.response) {
+				logActivity(routeConstants.glycanSearch, "error", "", "Network error. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": stringConstants.errors.networkError.id})
+			} else if (error.response && !error.response.data) {
+				logActivity(routeConstants.glycanSearch, "error", "", error.response.status + " error status. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": error.response.status})
+			} else if (error.response.data && error.response.data["error_list"]) {
+				logActivity(routeConstants.glycanSearch, "error", "", error.response.data["error_list"][0].error_code + " error code. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": error.response.data["error_list"][0].error_code})
+			}
 		});
 	}, [id, glycanData]);
 
@@ -425,8 +469,37 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.term.id]: glySimpleSearchTerm,
 			[commonGlycanData.term_category.id]: glySimpleSearchCategory,
 		};
-
-		return getGlycanSimpleSearch(formjsonSimple);
+		logActivity(routeConstants.glycanSearch, "user", id, "Performing Simple Search");
+		let message = "Simple Search query=" + JSON.stringify(formjsonSimple);
+		getGlycanSimpleSearch(formjsonSimple)
+		.then((response) => {
+			if (response.data['list_id'] !== '') {
+				logActivity(routeConstants.glycanSearch, "user", id + ">" + response.data['list_id'], message);
+				props.history.push(routeConstants.glycanList + response.data['list_id']);
+				setPageLoading(false);
+			} else {
+				logActivity(routeConstants.glycanSearch, "user", "", "No results. " + message);
+				setPageLoading(false);
+				setAlertTextInput({"show": true, "id": stringConstants.errors.simpleSerarchError.id})
+				window.scrollTo(0, 0);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+			if (!error.response) {
+				logActivity(routeConstants.glycanSearch, "error", "", "Network error. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": stringConstants.errors.networkError.id})
+			} else if (error.response && !error.response.data) {
+				logActivity(routeConstants.glycanSearch, "error", "", error.response.status + " error status. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": error.response.status})
+			} else if (error.response.data && error.response.data["error_list"]) {
+				logActivity(routeConstants.glycanSearch, "error", "", error.response.data["error_list"][0].error_code + " error code. " + message);
+				setPageLoading(false);
+				setAlertDialogInput({"show": true, "id": error.response.data["error_list"][0].error_code})
+			}
+		});
 	};
 
 	const glycanAdvSearch = () => {
@@ -448,8 +521,37 @@ const GlycanSearch = (props) => {
 			glyAdvSearchData.glyPubId,
 			undefined
 		);
-
-		return getGlycanSearch(formObject);
+		logActivity(routeConstants.glycanSearch, "user", id, "Performing Advanced Search");
+		let message = "Advanced Search query=" + JSON.stringify(formObject);
+		getGlycanSearch(formObject)
+			.then((response) => {
+				if (response.data['list_id'] !== '') {
+					logActivity(routeConstants.glycanSearch, "user", id + ">" + response.data['list_id'], message);
+					props.history.push(routeConstants.glycanList + response.data['list_id']);
+					setPageLoading(false);
+				} else {
+					logActivity(routeConstants.glycanSearch, "user", "", "No results. " + message);
+					setPageLoading(false);
+					setAlertTextInput({"show": true, "id": stringConstants.errors.advSerarchError.id})
+					window.scrollTo(0, 0);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+				if (!error.response) {
+					logActivity(routeConstants.glycanSearch, "error", "", "Network error. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": stringConstants.errors.networkError.id})
+				} else if (error.response && !error.response.data) {
+					logActivity(routeConstants.glycanSearch, "error", "", error.response.status + " error status. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": error.response.status})
+				} else if (error.response.data && error.response.data["error_list"]) {
+					logActivity(routeConstants.glycanSearch, "error", "", error.response.data["error_list"][0].error_code + " error code. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": error.response.data["error_list"][0].error_code})
+				}
+			});
 	};
 
 	const glycanCompSearch = () => {
@@ -484,71 +586,52 @@ const GlycanSearch = (props) => {
 			compSearchData
 		);
 
-		return getGlycanSearch(formObject);
-	};
-
-	const searchGlycanAdvClick = () => {
-		setPageLoading(true);
-
-		glycanAdvSearch()
+		logActivity(routeConstants.glycanSearch, "user", id, "Performing Composition Search");
+		let message = "Composition Search query=" + JSON.stringify(formObject);
+		getGlycanSearch(formObject)
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
+					logActivity(routeConstants.glycanSearch, "user", id + ">" + response.data['list_id'], message);
 					props.history.push(routeConstants.glycanList + response.data['list_id']);
 					setPageLoading(false);
 				} else {
+					logActivity(routeConstants.glycanSearch, "user", "", "No results. " + message);
 					setPageLoading(false);
-					setGlySearchError(true);
+					setAlertTextInput({"show": true, "id": stringConstants.errors.compSerarchError.id})
 					window.scrollTo(0, 0);
 				}
 			})
 			.catch(function (error) {
 				console.log(error);
-				setPageLoading(false);
-				setGlySearchError(true);
-				window.scrollTo(0, 0);
+				if (!error.response) {
+					logActivity(routeConstants.glycanSearch, "error", "", "Network error. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": stringConstants.errors.networkError.id})
+				} else if (error.response && !error.response.data) {
+					logActivity(routeConstants.glycanSearch, "error", "", error.response.status + " error status. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": error.response.status})
+				} else if (error.response.data && error.response.data["error_list"]) {
+					logActivity(routeConstants.glycanSearch, "error", "", error.response.data["error_list"][0].error_code + " error code. " + message);
+					setPageLoading(false);
+					setAlertDialogInput({"show": true, "id": error.response.data["error_list"][0].error_code})
+				}
 			});
+		};
+
+	const searchGlycanAdvClick = () => {
+		setPageLoading(true);
+		glycanAdvSearch();
 	};
 
 	const searchGlycanCompClick = () => {
 		setPageLoading(true);
-		glycanCompSearch()
-			.then((response) => {
-				if (response.data['list_id'] !== '') {
-					props.history.push(routeConstants.glycanList + response.data['list_id']);
-					setPageLoading(false);
-				} else {
-					setPageLoading(false);
-					setGlySearchError(true);
-					window.scrollTo(0, 0);
-				}
-			})
-			.catch(function (error) {
-				console.log(error);
-				setPageLoading(false);
-				setGlySearchError(true);
-				window.scrollTo(0, 0);
-			});
+		glycanCompSearch();
 	};
 
 	const searchGlycanSimpleClick = () => {
 		setPageLoading(true);
-		glycanSimpleSearch()
-			.then((response) => {
-				if (response.data['list_id'] !== '') {
-					props.history.push(routeConstants.glycanList + response.data['list_id']);
-					setPageLoading(false);
-				} else {
-					setPageLoading(false);
-					setGlySearchError(true);
-					window.scrollTo(0, 0);
-				}
-			})
-			.catch(function (error) {
-				console.log(error);
-				setPageLoading(false);
-				setGlySearchError(true);
-				window.scrollTo(0, 0);
-			});
+		glycanSimpleSearch();
 	};
 
 	return (
@@ -561,6 +644,12 @@ const GlycanSearch = (props) => {
 			<div className='lander'>
 				<Container>
 					<PageLoader pageLoading={pageLoading} />
+					<DialogAlert
+						alertInput={alertDialogInput}
+						setOpen={(input) => {
+							setAlertDialogInput({"show": input})
+						}}
+					/>
 					<div className='content-box-md'>
 						<h1 className='page-heading'>{glycanSearchData.pageTitle}</h1>
 					</div>
@@ -575,11 +664,10 @@ const GlycanSearch = (props) => {
 							eventKey='simple_search'
 							className='tab-content-padding'
 							title={simpleSearch.tabTitle}>
-							<SearchAlert
-								searchError={glySearchError}
-								alertTitle={simpleSearch.alert.alertTitle}
-								alertText={simpleSearch.alert.alertText}
+							<TextAlert
+								alertInput={alertTextInput}
 							/>
+							<div style={{paddingBottom: "12px"}}></div>
 							<Container className='tab-content-border'>
 								{initData.simple_search_category && (
 									<SimpleSearchControl
@@ -601,10 +689,8 @@ const GlycanSearch = (props) => {
 							eventKey='advanced_search'
 							className='tab-content-padding'
 							title={advancedSearch.tabTitle}>
-							<SearchAlert
-								searchError={glySearchError}
-								alertTitle={advancedSearch.alert.alertTitle}
-								alertText={advancedSearch.alert.alertText}
+							<TextAlert
+								alertInput={alertTextInput}
 							/>
 							<Container className='tab-content-border'>
 								{initData && (
@@ -621,10 +707,8 @@ const GlycanSearch = (props) => {
 							eventKey='composition_search'
 							title={compositionSearch.tabTitle}
 							className='tab-content-padding'>
-							<SearchAlert
-								searchError={glySearchError}
-								alertTitle={compositionSearch.alert.alertTitle}
-								alertText={compositionSearch.alert.alertTitle}
+							<TextAlert
+								alertInput={alertTextInput}
 							/>
 							<Container className='tab-content-border'>
 								{initData.composition && (
