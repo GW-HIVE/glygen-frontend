@@ -32,6 +32,10 @@ ENV REACT_APP_SPARQL=$REACT_APP_SPARQL
 ARG REACT_APP_BASENAME
 ENV REACT_APP_BASENAME=$REACT_APP_BASENAME
 
+ENV PUBLIC_URL=$REACT_APP_DOMAIN
+
+ARG PORT
+
 COPY . /app
 RUN npm run build
 
@@ -39,5 +43,5 @@ RUN npm run build
 FROM nginx:1.16.1-alpine
 COPY --from=build /app/build /var/www
 COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
+EXPOSE $PORT
 CMD ["nginx", "-g", "daemon off;"]

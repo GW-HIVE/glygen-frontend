@@ -1,36 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+// import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+// import Hidden from "@material-ui/core/Hidden";
+import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	cardAction: {
-		display: 'inline-flex'
+		display: "inline-flex",
 	},
 	card: {
 		// display: 'flex'
 		// maxWidth: 345
 	},
 	cardTitle: {
-		textAlign: 'center'
+		textAlign: "center",
 	},
 	cardDetails: {
-		flex: 1
+		flex: 1,
 	},
 	cardMedia: {
 		height: 180,
-		margin: '0 auto'
+		margin: "0 auto",
 	},
 	divider: {
-		margin: theme.spacing(1, 1)
-	}
+		margin: theme.spacing(1, 1),
+	},
 }));
 
 export default function InfoCard(props) {
@@ -42,39 +42,39 @@ export default function InfoCard(props) {
 			{/* <Card className={classes.card}> */}
 			<CardActionArea
 				className={classes.cardAction}
-				component='a'
+				component="a"
 				href={post.href}
 				target={post.target}
-				rel='noopener noreferrer'>
-				<Card className='card'>
+				rel="noopener noreferrer">
+				<Card className="card">
 					<div className={classes.cardDetails}>
 						<CardContent>
-							<Typography
-								gutterBottom
-								variant='h5'
-								component='h2'
+							<h4
+								// gutterBottom
+								// variant='h5'
+								// component='h2'
 								className={classes.cardTitle}>
 								{post.title}
-							</Typography>
-							<Hidden xsDown>
-								<CardMedia
-									component='img'
-									className={classes.cardMedia}
-									image={post.image}
-									title={post.imageTitle}
-								/>
-							</Hidden>
-							<Typography variant='p' color='textSecondary' paragraph>
-								{post.description}
-							</Typography>
+							</h4>
+							{/* <Hidden xsDown> */}
+							<CardMedia
+								component="img"
+								className={classes.cardMedia}
+								image={post.image}
+								title={post.imageTitle}
+							/>
+							{/* </Hidden> */}
+							{/* <Typography variant="p" color="textSecondary" paragraph> */}
+							<p>{post.description}</p>
+							{/* </Typography> */}
 							<Divider className={classes.divider} />
-							<Typography
-								variant='subtitle1'
-								color='primary'
-								className='text-center'
-								style={{ fontWeight: 'bold', color: '#2f78b7' }}>
+							<p
+								// variant="subtitle1"
+								// color="primary"
+								className="text-center"
+								style={{ fontWeight: "bold", color: "#2f78b7" }}>
 								{post.button}
-							</Typography>
+							</p>
 						</CardContent>
 					</div>
 				</Card>
@@ -85,5 +85,5 @@ export default function InfoCard(props) {
 }
 
 InfoCard.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };

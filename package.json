@@ -2,7 +2,7 @@
   "name": "glygen-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://glygen.ccrc.uga.edu/frontend",
+  "homepage": ".",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
