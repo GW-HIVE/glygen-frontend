@@ -298,7 +298,7 @@ const GlycanDetail = (props) => {
 
 		{
 			dataField: "protein_name",
-			text: "Protein_Name",
+			text: "Protein Name",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -705,6 +705,7 @@ const GlycanDetail = (props) => {
 												data={glycoprotein}
 												columns={glycoProtienColumns}
 												defaultSortField={"protein_id"}
+												onClickTarget={'#glycoprotein'}
 											/>
 										)}
 										{!glycoprotein && <p>No data available.</p>}
@@ -750,6 +751,8 @@ const GlycanDetail = (props) => {
 												data={enzyme}
 												columns={bioEnzymeColumns}
 												defaultSortField={"gene"}
+												onClickTarget={'#biosyntheticenzymes'}
+									
 											/>
 										)}
 										{!enzyme && <p>No data available.</p>}
@@ -815,7 +818,7 @@ const GlycanDetail = (props) => {
 											{glycoct ? (
 												<>
 							<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycoct}/> </Col>{' '}</Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>GlycoCT</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycoct}/> </Col>{' '}</Row>
 										
 													<p id="text_element"className='text-overflow'>{glycoct} </p>{' '}
 												</>
