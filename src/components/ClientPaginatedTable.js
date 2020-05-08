@@ -8,7 +8,8 @@ const ClientPaginatedTable = props => {
     columns,
     defaultSizePerPage = 20,
     defaultSortField = "",
-    defaultSortOrder = ""
+    defaultSortOrder = "",
+    onClickTarget
   } = props;
 
   const [page, setPage] = useState(1);
@@ -50,6 +51,7 @@ const ClientPaginatedTable = props => {
       sizePerPage={sizePerPage}
       totalSize={data.length}
       onTableChange={handleTableChange}
+      onClickTarget={onClickTarget}
     />
   );
 };

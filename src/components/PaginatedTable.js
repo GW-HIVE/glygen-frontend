@@ -16,7 +16,8 @@ const PaginatedTable = ({
   sizePerPage,
   onTableChange,
   totalSize,
-  downloadButton
+  downloadButton,
+  onClickTarget
 }) => {
   const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total Paginationtext">
@@ -45,6 +46,18 @@ const PaginatedTable = ({
         value: 60
       }
     ] // A numeric array is also available. the purpose of above example is custom the text
+  };
+
+  const scrollToElement = elementSelector => {
+    const elmnt = document.querySelector(elementSelector);
+    elmnt.scrollIntoView();
+  };
+
+  const handleTableChange = (type, values) => {
+    if (onClickTarget) {
+      scrollToElement(onClickTarget);
+    }
+    onTableChange(type, values);
   };
 
   return (
@@ -80,7 +93,7 @@ const PaginatedTable = ({
               keyField="id"
               data={data}
               columns={columns}
-              onTableChange={onTableChange}
+              onTableChange={handleTableChange}
               {...paginationTableProps}
             />
             <div>
