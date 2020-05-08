@@ -66,7 +66,7 @@ const featuredCards = [
 	{
 		title: "Quick Search",
 		description:
-			"Search data using queries prepared to provide answers to complex biological questions.",
+			"Quick Search option provides complex, multi-domain queries that are based on user requests.",
 		image: quickSearchImg,
 		imageText: "Quick Search",
 		href: routeConstants.quickSearch,
@@ -82,7 +82,7 @@ const featuredCards = [
 	{
 		title: "Data",
 		description:
-			"Search data using queries prepared to provide answers to complex biological questions.",
+			"Data from the different resources can be accessed and downloaded in resource-specific formats (e.g. RDF).",
 		image: dataImg,
 		imageText: "Data",
 		href: GLYGEN_DATA,
@@ -91,7 +91,7 @@ const featuredCards = [
 	{
 		title: "API",
 		description:
-			"Composition search based on their residue. Add some text here.",
+			"A public web service API allows access to the datasets by retrieving requested data in JSON format.",
 		image: apiImg,
 		imageText: "API",
 		href: GLYGEN_API,
@@ -100,7 +100,7 @@ const featuredCards = [
 	{
 		title: "SPARQL",
 		description:
-			"GlyGen data visualization via charts, diagrams, and chart bars.",
+			"All datasets are RDFized using standard ontologies and made accessible via a SPARQL Endpoint.",
 		image: sparqlImg,
 		imageText: "SPARQL",
 		href: GLYGEN_SPARQL,
@@ -160,9 +160,10 @@ export default function Home() {
 								{featuredCards.map((post) => (
 									<FeaturedCard key={post.title} post={post} />
 								))}
-								{/* <TryMeCard id='try-me' /> */}
 							</Grid>
-							<TryMeCard id="try-me" />
+							<Grid container spacing={6}>
+								<TryMeCard id="try-me" />
+							</Grid>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3}>
 							<Grid
