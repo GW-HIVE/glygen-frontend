@@ -1,47 +1,47 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
 // import { Nav } from 'react-bootstrap';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	mainFeaturedCard: {
-		position: 'relative',
+		position: "relative",
 		backgroundColor: theme.palette.grey[800],
 		color: theme.palette.common.white,
 		marginBottom: theme.spacing(4),
 		// backgroundImage: 'url(https://source.unsplash.com/random)',
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundPosition: 'center'
+		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
 	},
 	overlay: {
-		position: 'absolute',
+		position: "absolute",
 		top: 0,
 		bottom: 0,
 		right: 0,
 		left: 0,
-		backgroundColor: 'rgba(0,0,0,.3)'
+		backgroundColor: "rgba(0,0,0,.3)",
 	},
 	mainFeaturedCardContent: {
-		position: 'relative',
-		height: '400px !important',
+		position: "relative",
+		height: "400px !important",
 		padding: theme.spacing(3),
-		[theme.breakpoints.up('md')]: {
+		[theme.breakpoints.up("md")]: {
 			padding: theme.spacing(6),
-			paddingRight: 0
-		}
+			paddingRight: 0,
+		},
 	},
 	linkText: {
-		color: '#fff',
-		fontWeight: '600',
-		'&:hover': {
-			color: '#57affa'
-		}
-	}
+		color: "#ffffff !important",
+		fontWeight: "600",
+		"&:hover": {
+			color: "#57affa",
+		},
+	},
 }));
 
 export default function MainFeaturedCard(props) {
@@ -52,39 +52,28 @@ export default function MainFeaturedCard(props) {
 		<Paper
 			className={classes.mainFeaturedCard}
 			style={{ backgroundImage: `url(${post.image})` }}>
-			{/* Increase the priority of the hero background image */}
 			{
 				<img
-					style={{ display: 'none' }}
+					style={{ display: "none" }}
 					src={post.image}
 					alt={post.imageText}
 				/>
 			}
 			<div className={classes.overlay} />
 			<Grid container>
-				<Grid item sm={12} md={11} lg={6}>
+				<Grid item sm={12} md={6}>
 					<div className={classes.mainFeaturedCardContent}>
-					<Typography
-							component='h1'
-							variant='h2'
-							color='inherit'
-							gutterBottom>
-							{post.pageName}
-						</Typography>
 						<Typography
-							component='h1'
-							variant='h4'
-							color='inherit'
+							component="h1"
+							variant="h4"
+							color="inherit"
 							gutterBottom>
 							{post.title}
 						</Typography>
-						<Typography variant='h5' color='inherit' paragraph>
+						<Typography variant="p" color="inherit" paragraph>
 							{post.description}
 						</Typography>
-						<Link
-							variant='subtitle1'
-							href={post.href}
-							className={classes.linkText}>
+						<Link href={post.href} className={classes.linkText}>
 							{post.linkText}
 						</Link>
 					</div>
@@ -95,5 +84,5 @@ export default function MainFeaturedCard(props) {
 }
 
 MainFeaturedCard.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };

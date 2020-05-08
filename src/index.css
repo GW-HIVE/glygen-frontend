@@ -47,7 +47,7 @@ h6 {
 		sans-serif !important;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #444444;
+	/* color: #444444; */
 	margin-bottom: 3px !important;
 }
 
