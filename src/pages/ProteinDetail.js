@@ -246,13 +246,13 @@ const ProteinDetail = props => {
               <Card>
                 <Card.Header className="panelHeadBgr">
                   <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.glycan.general.title}
-                      text={DetailTooltips.glycan.general.text}
-                      urlText={DetailTooltips.glycan.general.urlText}
-                      url={DetailTooltips.glycan.general.url}
+                    {/* <HelpTooltip
+                      title={DetailTooltips.protein.general.title}
+                      text={DetailTooltips.protein.general.text}
+                      urlText={DetailTooltips.protein.general.urlText}
+                      url={DetailTooltips.gprotein.general.url}
                       helpIcon="gg-helpicon-detail"
-                    />
+                    /> */}
                   </span>
                   <h3 className="gg-green d-inline">General</h3>
                   <div className="float-right">
