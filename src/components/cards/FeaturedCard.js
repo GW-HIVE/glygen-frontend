@@ -1,35 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+// import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 // import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	cardAction: {
-		display: 'inline-flex'
+		display: "inline-flex",
+		cursor: "pointer !important",
 	},
 	card: {
 		// display: 'flex'
 		// maxWidth: 345
 	},
 	cardDetails: {
-		flex: 1
+		flex: 1,
 	},
 	cardMedia: {
 		// width: 160
-		height: 275,
+		// height: 275,
+		height: 255,
 		// width: '70%',
-		margin: '0 auto'
+		margin: "0 auto",
 	},
 	divider: {
-		margin: theme.spacing(1, 1)
-	}
+		margin: theme.spacing(1, 1),
+	},
 }));
 
 export default function FeaturedCard(props) {
@@ -41,35 +43,37 @@ export default function FeaturedCard(props) {
 			{/* <Card className={classes.card}> */}
 			<CardActionArea
 				className={classes.cardAction}
-				component='a'
+				component="a"
 				href={post.href}
 				target={post.target}
-				rel='noopener noreferrer'>
-				<Card className='card'>
+				rel="noopener noreferrer">
+				<Card className="card">
 					{/* <Hidden xsDown> */}
-						<CardMedia
-							component='img'
-							className={classes.cardMedia}
-							image={post.image}
-							title={post.imageText}
-						/>
+					<CardMedia
+						component="img"
+						className={classes.cardMedia}
+						image={post.image}
+						title={post.imageText}
+					/>
 					{/* </Hidden> */}
 					<div className={classes.cardDetails}>
 						<CardContent>
-							<Typography gutterBottom variant='h5' component='h2'>
+							<h4>{post.title}</h4>
+							<p>{post.description}</p>
+							{/* <Typography gutterBottom variant="h5" component="h2">
 								{post.title}
 							</Typography>
-							<Typography variant='p' color='textSecondary' paragraph>
+							<Typography variant="p" color="textSecondary" paragraph>
 								{post.description}
-							</Typography>
+							</Typography> */}
 							<Divider className={classes.divider} />
-							<Typography
-								variant='subtitle1'
+							<p
+								// variant="subtitle1"
 								// color='primary'
-								className='text-center'
-								style={{ fontWeight: 'bold', color: '#2f78b7' }}>
+								className="text-center"
+								style={{ fontWeight: "bold", color: "#2f78b7" }}>
 								EXPLORE
-							</Typography>
+							</p>
 						</CardContent>
 					</div>
 				</Card>
@@ -80,5 +84,5 @@ export default function FeaturedCard(props) {
 }
 
 FeaturedCard.propTypes = {
-	post: PropTypes.object
+	post: PropTypes.object,
 };

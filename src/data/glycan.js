@@ -1,10 +1,14 @@
-import { getJson, postToAndGetBlob, glycanImageUrl} from "./api";
+import { getJson, postToAndGetBlob, glycanImageUrl } from "./api";
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import routeConstants from './json/routeConstants';
+import routeConstants from "./json/routeConstants";
+import LineTooltip from "../components/tooltip/LineTooltip";
+import stringConstants from "./json/stringConstants";
+
+const glycanStrings = stringConstants.glycan.common;
 
 export const getGlycanList = (
   glycanListId,
@@ -40,8 +44,8 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) =>
   sortOrder === "asc" ? "demo-sorting-asc" : "demo-sorting-desc";
 export const GLYCAN_COLUMNS = [
   {
-    dataField: "glytoucan_ac",
-    text: "GlyTouCan Accession",
+    dataField: glycanStrings.glycan_id.id,
+    text: glycanStrings.glycan_id.shortName,
     sort: true,
     selected: true,
     headerStyle: (colum, colIndex) => {
@@ -49,9 +53,14 @@ export const GLYCAN_COLUMNS = [
     },
 
     formatter: (value, row) => (
-      <Navbar.Text as={NavLink} to={routeConstants.glycanDetail + row.glytoucan_ac}>
-        {row.glytoucan_ac}
-      </Navbar.Text>
+      <LineTooltip text="View details">
+        <Navbar.Text
+          as={NavLink}
+          to={routeConstants.glycanDetail + row.glytoucan_ac}
+        >
+          {row.glytoucan_ac}
+        </Navbar.Text>
+      </LineTooltip>
     )
   },
   {
@@ -177,23 +186,23 @@ export const setUserSelectedColumns = arr => {
   localStorage.setItem(glycanColumnsStorageKey, arr);
 };
 
-export const getGlycanSearch = (formObject) => {
-  var json = 'query=' + JSON.stringify(formObject);
-  const url = '/glycan/search?' + json;
+export const getGlycanSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  const url = "/glycan/search?" + json;
   return getJson(url);
-}
+};
 
-export const getGlycanSimpleSearch = (formObject) => {
-  var json = 'query=' + JSON.stringify(formObject);
-  const url = '/glycan/search_simple?' + json;
+export const getGlycanSimpleSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  const url = "/glycan/search_simple?" + json;
   return getJson(url);
-}
+};
 
 export const getGlycanInit = () => {
   const url = `/glycan/search_init`;
   return getJson(url);
 };
 
-export const getGlycanImageUrl = (glytoucan_id) => {
+export const getGlycanImageUrl = glytoucan_id => {
   return glycanImageUrl + glytoucan_id;
 };

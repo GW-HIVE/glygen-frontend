@@ -9,8 +9,8 @@
         "shortName": "Glycan ID",
         "tooltip": {
           "title": "Glycan ID",
-          "text": "Unique accessions assigned to the registered glycan structures in GlyTouCan database. You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. Explore",
-          "urlText": "GlyTouCan",
+          "text": "Unique accessions assigned to the registered glycan structures in GlyTouCan database. You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID.",
+          "urlText": "Read more...",
           "url": "https://glytoucan.org/Structures"
         },
         "id": "glytoucan_ac"
@@ -47,6 +47,14 @@
         },
         "id": "organism"
       },
+      "glycan_image": {
+        "name": "Glycan Image",
+        "shortName": "Glycan Image",
+        "tooltip": {
+          "title": "Glycan Image",
+          "text": "its an image"
+        }
+      },
       "glycan_type": {
         "name": "Glycan Type",
         "shortName": "Glycan Type",
@@ -70,8 +78,8 @@
         "shortName": "Glycosylated Protein",
         "tooltip": {
           "title": "Glycosylated Protein",
-          "text": "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan. Explore",
-          "urlText": "UniProtKB",
+          "text": "A unique identifier assigned to a isoform chosen to be the canonical sequence in UniProt database. Enter the UniProtKB Accession for a  protein that bears your glycan.",
+          "urlText": "Read more...",
           "url": "https://www.uniprot.org/"
         },
         "id": "protein_identifier"
@@ -81,8 +89,8 @@
         "shortName": "Glycan Motif",
         "tooltip": {
           "title": "Glycan Motif",
-          "text": "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s). Explore",
-          "urlText": "Glycan Motif",
+          "text": "A “motif” refers to a substructure that appears in multiple glycans including O and N glycans. Enter a Glycan Motif comprising part of your glycan(s).",
+          "urlText": "Read more...",
           "url": "https://www.uniprot.org/help/carbohyd"
         },
         "id": "glycan_motif"
@@ -92,8 +100,8 @@
         "shortName": "Biosynthetic Enzyme",
         "tooltip": {
           "title": "Biosynthetic Enzyme",
-          "text": "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s). Explore",
-          "urlText": "Biosynthetic Enzyme",
+          "text": "Biosynthetic enzymes are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s).",
+          "urlText": "Read more...",
           "url": "https://enzyme.expasy.org/"
         },
         "id": "enzyme"
@@ -103,8 +111,8 @@
         "shortName": "Pubmed ID",
         "tooltip": {
           "title": "Pubmed ID",
-          "text": "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system. Explore",
-          "urlText": "Pubmed ID",
+          "text": "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system.",
+          "urlText": "Read more...",
           "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
         },
         "id": "pmid"
@@ -118,8 +126,8 @@
           "shortName": "Hex",
           "tooltip": {
             "title": "Hexose",
-            "text": "Explore",
-            "urlText": "Hexose",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/206"
           }
         },
@@ -130,8 +138,8 @@
           "shortName": "HexNAc",
           "tooltip": {
             "title": "N-Acetyl-Hexosamine",
-            "text": "Explore",
-            "urlText": "N-Acetyl-Hexosamine",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/899"
           }
         },
@@ -142,8 +150,8 @@
           "shortName": "HexN",
           "tooltip": {
             "title": "Hexosamine",
-            "text": "Explore",
-            "urlText": "Hexosamine",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/739"
           }
         },
@@ -154,8 +162,8 @@
           "shortName": "dHex",
           "tooltip": {
             "title": "Deoxy-Hexose",
-            "text": "Explore",
-            "urlText": "Deoxy-Hexose",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/840"
           }
         },
@@ -166,8 +174,8 @@
           "shortName": "NeuAc",
           "tooltip": {
             "title": "N-Acetyl-Neuraminic acid",
-            "text": "Explore",
-            "urlText": "N-Acetyl-Neuraminic acid",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/439197"
           }
         },
@@ -178,8 +186,8 @@
           "shortName": "NeuGc",
           "tooltip": {
             "title": "N-Glycolyl-Neuraminic acid",
-            "text": "Explore",
-            "urlText": "N-Glycolyl-Neuraminic acid",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/440001"
           }
         },
@@ -190,8 +198,8 @@
           "shortName": "UA",
           "tooltip": {
             "title": "Uronic acid",
-            "text": "Explore",
-            "urlText": "Uronic acid",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/610"
           }
         },
@@ -203,8 +211,8 @@
           "shortName": "PO<sub>3</sub>",
           "tooltip": {
             "title": "Phosphate",
-            "text": "Explore",
-            "urlText": "Phosphate",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"
           }
         },
@@ -215,8 +223,8 @@
           "shortName": "SO<sub>3</sub>",
           "tooltip": {
             "title": "Sulfate",
-            "text": "Explore",
-            "urlText": "Sulfate",
+            "text": "Add some unique text here.",
+            "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1117"
           }
         },
@@ -241,20 +249,103 @@
     },
     "composition_search": {
       "query_type": {
-        "id":"query_type",
-        "name":"search_glycan"
+        "id": "query_type",
+        "name": "search_glycan"
       }
     },
     "advanced_search": {
       "query_type": {
-        "id":"query_type",
-        "name":"search_glycan"
+        "id": "query_type",
+        "name": "search_glycan"
       }
     },
     "simple_search": {
       "query_type": {
-        "id":"query_type",
-        "name":"glycan_search_simple"
+        "id": "query_type",
+        "name": "glycan_search_simple"
+      }
+    }
+  },
+
+  "protein": {
+    "common": {
+      "uniprot_accession": {
+        "name": "UniProtKB Accession",
+        "shortName": "uniprot_canonical_ac",
+        "tooltip": {},
+        "id": "uniprot_canonical_ac"
+      },
+      "chemical_mass": {
+        "name": "Chemical Mass",
+        "shortName": "mass",
+        "tooltip": {},
+        "id": "mass"
+      },
+      "gene_name": {
+        "name": "Gene Name",
+        "shortName": "gene_name",
+        "tooltip": {},
+        "id": "gene_name"
+      },
+      "Protein_ShortName": {
+        "name": "Protein_Name",
+        "shortName": "protein_name_short",
+        "tooltip": {},
+        "id": "protein_name_short"
+      },
+      "protein_name_long": {
+        "name": "Uniprot Name",
+        "shortName": "protein_name_long",
+        "tooltip": {},
+        "id": "protein_name_long"
+      },
+      "gene_location": {
+        "name": "Gene Location",
+        "shortName": "gene_location",
+        "tooltip": {},
+        "id": "gene_location"
+      },
+      "organism": {
+        "name": "Organism",
+        "shortName": "organism",
+        "tooltip": {},
+        "id": "organism"
+      },
+      "uniProtKB _id": {
+        "name": "UniProtKB ID",
+        "shortName": "uniprot_id",
+        "tooltip": {},
+        "id": "uniprot_id"
+      },
+      "sequence_length": {
+        "name": "UniProtKB Accession Length",
+        "shortName": "sequence_length",
+        "tooltip": {},
+        "id": "sequence_length"
+      },
+      "recommendedname": {
+        "name": "UniProtKB Entry Name",
+        "shortName": "recommendedname.full",
+        "tooltip": {},
+        "id": "recommendedname"
+      },
+      "mass": {
+        "name": "Chemical Mass",
+        "shortName": "mass",
+        "tooltip": {},
+        "id": "mass"
+      },
+      "refSeq_ac": {
+        "name": "RefSeq Accession",
+        "shortName": "refseq_ac",
+        "tooltip": {},
+        "id": "refseq_ac"
+      },
+      "refSeq_name": {
+        "name": "RefSeq Name",
+        "shortName": "refseq_name",
+        "tooltip": {},
+        "id": "refseq_name"
       }
     }
   },
