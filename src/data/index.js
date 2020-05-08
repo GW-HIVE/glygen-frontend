@@ -1,12 +1,5 @@
-export {
-    getProtienList,
-    getProtienDetail
-} from './protein';
+export { getProteinList, getProteinDetail } from "./protein";
 
-export {
-    getGlycanList
-} from './glycan'
+export { getGlycanList } from "./glycan";
 
-export {
-    getSystemData
-} from './system';
+export { getSystemData } from "./system";

@@ -31,7 +31,7 @@ import DetailTooltips from '../data/json/detailTooltips.json';
 import HelpTooltip from '../components/tooltip/HelpTooltip';
 import LineTooltip from '../components/tooltip/LineTooltip';
 import FeedbackWidget from '../components/FeedbackWidget';
-// import ReactCopyClipboard from'../components/ReactCopyClipboard';
+import ReactCopyClipboard from'../components/ReactCopyClipboard';
 import routeConstants from '../data/json/routeConstants';
 
 const items = [
@@ -81,27 +81,7 @@ function addCommas(nStr) {
 }
 
 
-function copyToClipboard(elementId) {
 
-	// Create an auxiliary hidden input
-	var aux = document.createElement("input");
-  
-	// Get the text from the element passed into the input
-	aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-  
-	// Append the aux input to the body
-	document.body.appendChild(aux);
-  
-	// Highlight the content
-	aux.select();
-  
-	// Execute the copy command
-	document.execCommand("copy");
-  
-	// Remove the input from the body
-	document.body.removeChild(aux);
-  
-  }
 const getItemsCrossRef = (data) => {
 	let itemscrossRef = [];
 
@@ -727,6 +707,7 @@ const GlycanDetail = (props) => {
 												data={glycoprotein}
 												columns={glycoProtienColumns}
 												defaultSortField={'protein_id'}
+												onClickTarget={'#glycoprotein'}
 											/>
 										)}
 										{!glycoprotein && <p>No data available.</p>}
@@ -816,8 +797,8 @@ const GlycanDetail = (props) => {
 
 											{iupac ? (
 												<>
-												{/* <ReactCopyClipboard value={iupac}/> */}
-													<strong>IUPAC</strong>{' '}
+												<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={iupac}/> </Col>{' '}</Row>
 													<p className='text-overflow'>{iupac} </p>
 												</>
 											) : (
@@ -826,7 +807,9 @@ const GlycanDetail = (props) => {
 
 											{wurcs ? (
 												<>
-													<strong>WURCS</strong>
+												<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>WURCS</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={wurcs}/> </Col>{' '}</Row>
+										
 													<p className='text-overflow'>{wurcs} </p>{' '}
 												</>
 											) : (
@@ -835,7 +818,9 @@ const GlycanDetail = (props) => {
 
 											{glycoct ? (
 												<>
-													<strong>GlycoCT</strong> 
+							<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycoct}/> </Col>{' '}</Row>
+										
 													<p id="text_element"className='text-overflow'>{glycoct} </p>{' '}
 												</>
 											) : (
@@ -845,7 +830,9 @@ const GlycanDetail = (props) => {
 											{inchi ? (
 												<>
 													{' '}
-													<strong>InChI</strong>{' '}
+													<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>Inchi</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={inchi}/> </Col>{' '}</Row>
+										
 													<p className='text-overflow'>{inchi}</p>{' '}
 												</>
 											) : (
@@ -855,7 +842,9 @@ const GlycanDetail = (props) => {
 											{glycam ? (
 												<>
 													{' '}
-													<strong>GLYCAM IUPAC</strong>{' '}
+													<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>GLYCAM IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycam}/> </Col>{' '}</Row>
+										
 													<p className='text-overflow'>{glycam}</p>{' '}
 												</>
 											) : (
@@ -864,7 +853,10 @@ const GlycanDetail = (props) => {
 
 											{smiles_isomeric ? (
 												<>
-													<strong>Isomeric SMILES</strong>{' '}
+												<Row>
+													<Col sm={12} md={12} lg={12} xl={6}> <strong>Isomeric SMILES</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={smiles_isomeric}/> </Col>{' '}</Row>
+										
+													{' '}
 													<p className='text-overflow'>{smiles_isomeric}</p>{' '}
 												</>
 											) : (
