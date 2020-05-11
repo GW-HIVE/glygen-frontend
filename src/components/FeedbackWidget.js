@@ -49,9 +49,10 @@ const FeedbackWidget = props => {
 
     const formData = {
       fname: fname,
-      lname: lname,
+      lname: "not given",
       email: email,
-      page: window.location.href.split("?")[0],
+      page: window.location.href,
+      // page: window.location.href.split("?")[0],
       subject: "Feedback Form " + subject,
       message: message
     };
