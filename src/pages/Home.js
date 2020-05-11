@@ -16,7 +16,7 @@ import mainImg from "../images/home/main.png";
 import feedback from "../images/home/feedback.svg";
 import resources from "../images/home/resources.svg";
 // import glycanImg from '../images/home/glycan-img.svg';
-import proteinImg from "../images/home/protein-img.svg";
+import proteinImg from "../images/home/glycoprotein-img.svg";
 // import enzymeImg from "../images/home/enzyme.png";
 // import featuredImg from '../images/home/featuredImg-7.jpg';
 import glycanImg from "../images/home/glycan-img.svg";
@@ -38,7 +38,7 @@ const mainFeaturedCard = {
 		"GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This web portal allows exploring this data and performing unique searches that cannot be executed in any of the integrated databases alone.",
 	image: mainImg,
 	linkText: "Learn More…",
-	href: routeConstants.about,
+	to: routeConstants.about,
 };
 const featuredCards = [
 	{
@@ -47,7 +47,7 @@ const featuredCards = [
 			"Search for glycan structures based on their chemical and structural properties.",
 		image: glycanImg,
 		imageText: "Glycan",
-		href: routeConstants.glycanSearch,
+		to: routeConstants.glycanSearch,
 	},
 	{
 		title: "Protein",
@@ -71,7 +71,7 @@ const featuredCards = [
 			"Quick Search option provides complex, multi-domain queries that are based on user requests.",
 		image: quickSearchImg,
 		imageText: "Quick Search",
-		href: routeConstants.quickSearch,
+		to: routeConstants.quickSearch,
 	},
 	// {
 	// 	title: "Composition Search",
@@ -116,7 +116,7 @@ const feedbackCard = {
 	image: feedback,
 	imageText: "Feedback",
 	button: "LEAVE FEEDBACK",
-	href: routeConstants.feedback,
+	to: routeConstants.feedback,
 };
 const resourcesCard = {
 	title: "Explore Other Resources",
@@ -125,7 +125,7 @@ const resourcesCard = {
 	image: resources,
 	imageText: "Resources",
 	button: "EXPLORE",
-	href: routeConstants.resources,
+	to: routeConstants.resources,
 };
 
 export default function Home() {
@@ -135,14 +135,15 @@ export default function Home() {
 	useEffect(() => {
 		setPageLoading(true);
 		logActivity();
-		getSystemData().then((response) => {
-			setHomeData(response.data);
-			setPageLoading(false);
-		})
-		.catch(function (error) {
-			let message = "home_init api call";
-			axiosError(error, message, setPageLoading);
-		});
+		getSystemData()
+			.then((response) => {
+				setHomeData(response.data);
+				setPageLoading(false);
+			})
+			.catch(function (error) {
+				let message = "home_init api call";
+				axiosError(error, message, setPageLoading);
+			});
 	}, []);
 
 	return (

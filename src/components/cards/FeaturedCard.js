@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 // import Hidden from '@material-ui/core/Hidden';
 import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	cardAction: {
@@ -38,46 +39,61 @@ export default function FeaturedCard(props) {
 	const classes = useStyles();
 	const { post } = props;
 
-	return (
-		<Grid item xs={12} sm={6} md={6} lg={4}>
-			{/* <Card className={classes.card}> */}
-			<CardActionArea
-				className={classes.cardAction}
-				component="a"
-				href={post.href}
-				target={post.target}
-				rel="noopener noreferrer">
-				<Card className="card">
-					{/* <Hidden xsDown> */}
-					<CardMedia
-						component="img"
-						className={classes.cardMedia}
-						image={post.image}
-						title={post.imageText}
-					/>
-					{/* </Hidden> */}
-					<div className={classes.cardDetails}>
-						<CardContent>
-							<h4>{post.title}</h4>
-							<p>{post.description}</p>
-							{/* <Typography gutterBottom variant="h5" component="h2">
+	function CardFeatured(props) {
+		return (
+			<Card className="card">
+				{/* <Hidden xsDown> */}
+				<CardMedia
+					component="img"
+					className={classes.cardMedia}
+					image={post.image}
+					title={post.imageText}
+				/>
+				{/* </Hidden> */}
+				<div className={classes.cardDetails}>
+					<CardContent>
+						<h4>{post.title}</h4>
+						<p>{post.description}</p>
+						{/* <Typography gutterBottom variant="h5" component="h2">
 								{post.title}
 							</Typography>
 							<Typography variant="p" color="textSecondary" paragraph>
 								{post.description}
 							</Typography> */}
-							<Divider className={classes.divider} />
-							<p
-								// variant="subtitle1"
-								// color='primary'
-								className="text-center"
-								style={{ fontWeight: "bold", color: "#2f78b7" }}>
-								EXPLORE
-							</p>
-						</CardContent>
-					</div>
-				</Card>
-			</CardActionArea>
+						<Divider className={classes.divider} />
+						<p
+							// variant="subtitle1"
+							// color='primary'
+							className="text-center"
+							style={{ fontWeight: "bold", color: "#2f78b7" }}>
+							EXPLORE
+						</p>
+					</CardContent>
+				</div>
+			</Card>
+		);
+	}
+
+	return (
+		<Grid item xs={12} sm={6} md={6} lg={4}>
+			{/* <Card className={classes.card}> */}
+			{post.to && (
+				<Link to={post.to} className={classes.cardAction}>
+					{/* <CardActionArea> */}
+					<CardFeatured />
+					{/* </CardActionArea> */}
+				</Link>
+			)}
+			{post.href && (
+				<CardActionArea
+					className={classes.cardAction}
+					component="a"
+					href={post.href}
+					target={post.target}
+					rel="noopener noreferrer">
+					<CardFeatured />
+				</CardActionArea>
+			)}
 			{/* </Card> */}
 		</Grid>
 	);

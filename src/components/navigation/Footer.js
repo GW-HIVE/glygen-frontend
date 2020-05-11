@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
+// import CssBaseline from "@material-ui/core/CssBaseline";
 import logoFooter from "../../images/glygen_logos/glygen-logoW-top.svg";
 import ugaLogo from "../../images/univ_logos/logo-uga.svg";
 import gwuLogo from "../../images/univ_logos/logo-gwu.svg";
