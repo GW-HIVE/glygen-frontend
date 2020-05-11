@@ -4,15 +4,17 @@ import { makeStyles } from "@material-ui/core/styles";
 // import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 // import Hidden from "@material-ui/core/Hidden";
 import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	cardAction: {
 		display: "inline-flex",
+		cursor: "pointer !important",
 	},
 	card: {
 		// display: 'flex'
@@ -40,12 +42,8 @@ export default function InfoCard(props) {
 	return (
 		<Grid item xs={12} sm={6} md={12}>
 			{/* <Card className={classes.card}> */}
-			<CardActionArea
-				className={classes.cardAction}
-				component="a"
-				href={post.href}
-				target={post.target}
-				rel="noopener noreferrer">
+			<Link to={post.to} className={classes.cardAction}>
+				{/* <CardActionArea> */}
 				<Card className="card">
 					<div className={classes.cardDetails}>
 						<CardContent>
@@ -78,8 +76,9 @@ export default function InfoCard(props) {
 						</CardContent>
 					</div>
 				</Card>
-			</CardActionArea>
-			{/* </Card> */}
+				{/* </CardActionArea> */}
+				{/* </Card> */}
+			</Link>
 		</Grid>
 	);
 }

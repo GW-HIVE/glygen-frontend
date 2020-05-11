@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import ListGroup from "react-bootstrap/ListGroup";
 // import { Container } from 'react-bootstrap';
 import Container from "@material-ui/core/Container";
+// import questions from "../../data/json/questions.json";
 
 const useStyles = makeStyles((theme) => ({
 	cardAction: {
@@ -40,45 +41,42 @@ export default function TryMeCard(props) {
 			<Container
 				maxWidth="lg"
 				style={{ paddingTop: "35px", paddingBottom: "30px" }}>
-				<Grid container spacing={4}>
-					<Grid item xs={12} sm={12} md={12} lg={12}>
-						<Card className="card">
-							<div className={classes.cardDetails}>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h5"
-										component="h2"
-										className={classes.cardTitle}>
-										Try Me
-									</Typography>
-									<ListGroup as="hp">
-										<ListGroup.Item action onClick={alertClicked} href="#">
-											What are the enzymes involved in the biosynthesis of{" "}
-											<span className={classes.selected}>
-												{" "}
-												Man5-(G55220VL){" "}
-											</span>{" "}
-											in human?
-										</ListGroup.Item>
-										<ListGroup.Item action onClick={alertClicked}>
-											Which proteins have been shown to bear{" "}
-											<span className={classes.selected}>
-												{" "}
-												a bi-antennary fully sialylated N-Glycan-(G77252PU){" "}
-											</span>{" "}
-											and which site is this glycan attached to?
-										</ListGroup.Item>
-										<ListGroup.Item action onClick={alertClicked}>
-											Which glycans might have been synthesized in mouse using{" "}
-											<span className={classes.selected}> Mgat1 </span>?
-										</ListGroup.Item>
-									</ListGroup>
-								</CardContent>
-							</div>
-						</Card>
-					</Grid>
+				{/* <Grid container spacing={6}> */}
+				<Grid item xs={12} sm={12} md={12} lg={12}>
+					<Card className="card">
+						<div className={classes.cardDetails}>
+							<CardContent>
+								<Typography
+									gutterBottom
+									variant="h5"
+									component="h2"
+									className={classes.cardTitle}>
+									Try Me
+								</Typography>
+								<ListGroup as="hp">
+									<ListGroup.Item action onClick={alertClicked}>
+										What are the enzymes involved in the biosynthesis of{" "}
+										<span className={classes.selected}> Man5-(G55220VL) </span>{" "}
+										in human?
+									</ListGroup.Item>
+									<ListGroup.Item action onClick={alertClicked}>
+										Which proteins have been shown to bear{" "}
+										<span className={classes.selected}>
+											{" "}
+											a bi-antennary fully sialylated N-Glycan-(G77252PU){" "}
+										</span>{" "}
+										and which site is this glycan attached to?
+									</ListGroup.Item>
+									<ListGroup.Item action onClick={alertClicked}>
+										Which glycans might have been synthesized in mouse using{" "}
+										<span className={classes.selected}> Mgat1 </span>?
+									</ListGroup.Item>
+								</ListGroup>
+							</CardContent>
+						</div>
+					</Card>
 				</Grid>
+				{/* </Grid> */}
 			</Container>
 		</div>
 	);
