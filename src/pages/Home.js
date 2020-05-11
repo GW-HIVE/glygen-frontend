@@ -29,6 +29,8 @@ import { getTitle, getMeta } from "../utils/head";
 import { getSystemData } from "../data";
 import { GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL } from "../envVariables";
 import routeConstants from "../data/json/routeConstants.json";
+import { logActivity } from "../data/logging";
+import { axiosError } from "../data/axiosError";
 
 const mainFeaturedCard = {
 	title: "Computational and Informatics Resources for Glycoscience",
@@ -132,9 +134,14 @@ export default function Home() {
 
 	useEffect(() => {
 		setPageLoading(true);
+		logActivity();
 		getSystemData().then((response) => {
 			setHomeData(response.data);
 			setPageLoading(false);
+		})
+		.catch(function (error) {
+			let message = "home_init api call";
+			axiosError(error, message, setPageLoading);
 		});
 	}, []);
 

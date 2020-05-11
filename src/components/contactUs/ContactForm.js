@@ -12,6 +12,8 @@ import { useState } from 'react';
 import { getJson } from '../../data/api';
 import { validateEmail } from '../../utils/common';
 import { Typography } from '@material-ui/core';
+import { axiosError } from '../../data/axiosError';
+import { logActivity } from '../../data/logging';
 
 // const useStyles = makeStyles((theme) =>
 // 	createStyles({
@@ -92,12 +94,14 @@ const ContactForm = (props) => {
 
 		getJson(url)
 			.then((response) => {
+				logActivity("user", "", "Message sent from contact us page.");
 				setContactUsResponseMessage(response.data.message);
 			})
 			.catch((error) => {
 				setContactUsErrorMessage(
 					'Oops, something went wrong! We did not receive your message. Please try again later.'
 				);
+				axiosError(error, "Contact us api call.");
 			});
 
 		//setContactUsData({fname: '', lname: ''})
