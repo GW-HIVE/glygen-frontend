@@ -88,7 +88,7 @@ function sendFeedbackError(jqXHR, textStatus, errorThrown) {
 function sendFeedback() {
     var form = $('#feedback');
     var page = window.location.href;
-    page = stripQueryString(page);
+//     page = stripQueryString(page);
     var name = form.find('[name="name"]').val().split(' ');
 
     // get data
