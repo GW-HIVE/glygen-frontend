@@ -8,6 +8,7 @@ import GlycanDetail from "./pages/GlycanDetail";
 import ProteinDetail from "./pages/ProteinDetail";
 import GlycanListEditColumns from "./pages/GlycanListEditColumns";
 import GlycanSearch from "./pages/GlycanSearch";
+import ProteinSearch from "./pages/ProteinSearch";
 import HowToCite from "./pages/HowToCite";
 import ContactUs from "./pages/ContactUs";
 import Disclaimer from "./pages/Disclaimer";
@@ -30,7 +31,12 @@ const Routes = props => (
       path={`${routeConstants.glycanSearch}:id`}
       component={GlycanSearch}
     />
-    <Route path={routeConstants.glycanSearch} component={GlycanSearch} />{" "}
+    <Route path={routeConstants.glycanSearch} component={GlycanSearch} />
+    <Route
+      path={`${routeConstants.proteinSearch}:id`}
+      component={ProteinSearch}
+    />
+    <Route path={routeConstants.proteinSearch} component={ProteinSearch} />
     <Route
       path={`${routeConstants.glycanDetail}:id`}
       component={GlycanDetail}

@@ -1,0 +1,74 @@
+{
+    "pageTitle": "Protein Search",
+    "simple_search": {
+        "tabTitle": "Simple Search",
+        "length": 100,
+        "errorText":"Entry is too long - max length is 100.",
+        "categories": {
+            "disease": {
+                "examples": [
+                    "Deafness"
+                ],
+                "placeholder": "Enter the disease"
+            },
+            "pathway": {
+                "examples": [
+                    "hsa:3082"
+                ],
+                "placeholder": "Enter the pathway"
+            },
+            "glycan": {
+                "examples": [
+                    "G17689DH"
+                ],
+                "placeholder": "Enter the GlyTouCan Accession"
+            },
+            "organism": {
+                "examples": [
+                    "Homo sapiens"
+                ],
+                "placeholder": "Enter the organism"
+            },
+            "protein": {
+                "examples": [
+                    "P14210"
+                ],
+                "placeholder": "Enter the UniProtKB Accession"
+            },
+            "any": {
+                "examples": [
+                    "P14210",
+                    "G17689DH",
+                    "hsa:3082",
+                    "Homo sapiens",
+                    "Deafness"
+                ],
+                "placeholder": "Enter the search term"
+            }
+        }
+    },
+    "advanced_search": {
+        "tabTitle": "Advanced Search",
+        "pmid": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "placeholder": "Enter the Pubmed ID",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "9449027"
+                    },
+                    "explore": {
+                        "id": "Pubmed ID",
+                        "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
+                    }
+                }
+            ]
+        }
+    },
+    "tutorial": {
+        "tabTitle": "Tutorial"
+    }
+}

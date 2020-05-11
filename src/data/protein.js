@@ -10,9 +10,22 @@ import stringConstants from "./json/stringConstants";
 
 const proteinStrings = stringConstants.protein.common;
 
-export const getProteinList = protienListId => {
-  const url = `/protein/list?query={"id":"${protienListId}","offset":1,"limit":100,"sort":"uniprot_canonical_ac","order":"asc"}`;
-
+export const getProteinList = (
+  protienListId,
+  offset = 1,
+  limit = 20,
+  sort = undefined,
+  order = "asc"
+) => {
+  const queryParams = {
+    id: protienListId,
+    offset: offset,
+    sort: sort,
+    limit: limit,
+    order: order
+  };
+  const queryParamString = JSON.stringify(queryParams);
+  const url = `/protein/list?query=${queryParamString}`;
   return getJson(url);
 };
 
@@ -96,3 +109,20 @@ export const PROTEIN_COLUMNS = [
     }
   }
 ];
+
+export const getProteinSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  const url = "/protein/search?" + json;
+  return getJson(url);
+};
+
+export const getProteinSimpleSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  const url = "/protein/search_simple?" + json;
+  return getJson(url);
+};
+
+export const getProteinInit = () => {
+  const url = `/protein/search_init`;
+  return getJson(url);
+};

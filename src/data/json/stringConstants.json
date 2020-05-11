@@ -269,6 +269,9 @@
 
   "protein": {
     "common": {
+      "operation": {
+        "id": "operation"
+      },
       "uniprot_accession": {
         "name": "UniProtKB Accession",
         "shortName": "uniprot_canonical_ac",
@@ -346,6 +349,25 @@
         "shortName": "refseq_name",
         "tooltip": {},
         "id": "refseq_name"
+      },
+      "term": {
+        "id": "term"
+      },
+      "term_category": {
+        "id": "term_category",
+        "name": "Category"
+      }
+    },
+    "advanced_search": {
+      "query_type": {
+        "id": "query_type",
+        "name": "search_protein"
+      }
+    },
+    "simple_search": {
+      "query_type": {
+        "id": "query_type",
+        "name": "protein_search_simple"
       }
     }
   },
