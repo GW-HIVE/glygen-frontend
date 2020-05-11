@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import copyIcon from "../images/icons/copy.svg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Image } from "react-bootstrap";
+import LineTooltip from "../components/tooltip/LineTooltip";
 const ReactCopyClipboard = props => {
   const { value } = props;
   const [copied, setCopied] = useState(false);
@@ -16,13 +17,17 @@ const ReactCopyClipboard = props => {
 
   return (
     <div>
-      <CopyToClipboard text={value} onCopy={handleCopy}>
-        {/* <button>Copy to clipboard</button> */}
+      <LineTooltip text="Copy to clipboard">
+        <CopyToClipboard text={value} onCopy={handleCopy}>
+          {/* <button>Copy to clipboard</button> */}
 
-        <Image src={copyIcon} alt="Related glycans" />
-      </CopyToClipboard>
+          <Image src={copyIcon} alt="Related glycans" />
+        </CopyToClipboard>
+      </LineTooltip>
 
-      {copied ? <span style={{ color: "red" }}>Copied.</span> : null}
+      {copied ? (
+        <span style={{ color: "red" }}>Copied to clipboard.</span>
+      ) : null}
     </div>
   );
 };
