@@ -13,7 +13,8 @@
 }
 
 .App {
-	height: 100vh;
+	height: auto;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -626,12 +627,11 @@ sub {
 	-webkit-box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2) !important;
 	box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2) !important;
 	border-radius: 4px;
-	z-index: 2000  !important;
 	display: flex;
 }
 
 .alert-dialog-root {
-	z-index: 2000  !important;
+	z-index: 2100  !important;
 }
 
 .alert-dialog-title {
