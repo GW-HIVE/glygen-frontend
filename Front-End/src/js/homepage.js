@@ -56,6 +56,7 @@ function displayHomeInitData(jsonResponse) {
         statisticsDisplay.appendChild(header);
 
         var table = document.createElement('table');
+         table.className = 'stat-table';
         var tbody = document.createElement('tbody');
         tbody.className = 'statistics-table';
 
