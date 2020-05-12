@@ -21,6 +21,15 @@ export default function SimpleSearchControl(props) {
 		props.setSimpleSearchTerm(event.target.value);
 	};
 
+	function sortSimpleSearchCategory(a, b) {
+		if (a.display < b.display) {
+			return -1;
+		} else if (b.display < a.display) {
+			return 1;
+		}
+		return 0;
+	}
+
 	return (
 		<div>
 			<Grid
@@ -40,7 +49,7 @@ export default function SimpleSearchControl(props) {
 							labelWidth={80}>
 							{props.simple_search_category &&
 								props.simple_search_category
-									.sort()
+									.sort(sortSimpleSearchCategory)
 									.map((key) => (
 										<MenuItem key={key.id} value={key.id}>{key.display}</MenuItem>
 									))}
