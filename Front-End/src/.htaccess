@@ -3,3 +3,9 @@
   Header set Pragma "no-cache"
   Header set Expires 0
 </IfModule>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(protein)/(.*)/?$ /protein_detail.html?uniprot_canonical_ac=$2 [R]
+RewriteRule ^(glycan)/(.*)/?$ /glycan_detail.html?glytoucan_ac=$2 [R]
