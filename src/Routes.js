@@ -18,48 +18,49 @@ import PrivacySettings from "./pages/PrivacySettings";
 import Feedback from "./pages/Feedback";
 import TryMeCard from "./components/cards/TryMeCard";
 import routeConstants from "./data/json/routeConstants.json";
+import TryMe from "./pages/TryMe";
 
-const Routes = props => (
-  <Switch>
-    <Route
-      path={`${routeConstants.glycanListEdit}:id`}
-      component={GlycanListEditColumns}
-    />
-    <Route path={`${routeConstants.glycanList}:id`} component={GlycanList} />
-    <Route path={`${routeConstants.proteinList}:id`} component={ProteinList} />
-    <Route
-      path={`${routeConstants.glycanSearch}:id`}
-      component={GlycanSearch}
-    />
-    <Route path={routeConstants.glycanSearch} component={GlycanSearch} />
-    <Route
-      path={`${routeConstants.proteinSearch}:id`}
-      component={ProteinSearch}
-    />
-    <Route path={routeConstants.proteinSearch} component={ProteinSearch} />
-    <Route
-      path={`${routeConstants.glycanDetail}:id`}
-      component={GlycanDetail}
-    />
-    <Route path={routeConstants.glycanDetail} component={GlycanDetail} />
-    <Route
-      path={`${routeConstants.proteinDetail}:id`}
-      component={ProteinDetail}
-    />
-    <Route path={routeConstants.proteinDetail} component={ProteinDetail} />
-    <Route path={routeConstants.resources} component={Resources} />
-    <Route path={routeConstants.howToCite} component={HowToCite} />
-    <Route path={routeConstants.contactUs} component={ContactUs} />
-    <Route path={routeConstants.disclaimer} component={Disclaimer} />
-    <Route path={routeConstants.privacyPolicy} component={PrivacyPolicy} />
-    <Route path={routeConstants.license} component={License} />
-    <Route path={routeConstants.privacySettings} component={PrivacySettings} />
-    <Route path={routeConstants.feedback} component={Feedback} />
-    <Route path={routeConstants.tryMe} component={TryMeCard} />
-    {/* Keep path='/' at the bottom */}
-    <Route path={routeConstants.home} component={Home} />
-    <Route path={routeConstants.default} component={Home} />
-  </Switch>
+const Routes = (props) => (
+	<Switch>
+		<Route
+			path={`${routeConstants.glycanListEdit}:id`}
+			component={GlycanListEditColumns}
+		/>
+		<Route path={`${routeConstants.glycanList}:id`} component={GlycanList} />
+		<Route path={`${routeConstants.proteinList}:id`} component={ProteinList} />
+		<Route
+			path={`${routeConstants.glycanSearch}:id`}
+			component={GlycanSearch}
+		/>
+		<Route path={routeConstants.glycanSearch} component={GlycanSearch} />
+		<Route
+			path={`${routeConstants.proteinSearch}:id`}
+			component={ProteinSearch}
+		/>
+		<Route path={routeConstants.proteinSearch} component={ProteinSearch} />
+		<Route
+			path={`${routeConstants.glycanDetail}:id`}
+			component={GlycanDetail}
+		/>
+		<Route path={routeConstants.glycanDetail} component={GlycanDetail} />
+		<Route
+			path={`${routeConstants.proteinDetail}:id`}
+			component={ProteinDetail}
+		/>
+		<Route path={routeConstants.proteinDetail} component={ProteinDetail} />
+		<Route path={routeConstants.resources} component={Resources} />
+		<Route path={routeConstants.howToCite} component={HowToCite} />
+		<Route path={routeConstants.contactUs} component={ContactUs} />
+		<Route path={routeConstants.disclaimer} component={Disclaimer} />
+		<Route path={routeConstants.privacyPolicy} component={PrivacyPolicy} />
+		<Route path={routeConstants.license} component={License} />
+		<Route path={routeConstants.privacySettings} component={PrivacySettings} />
+		<Route path={routeConstants.feedback} component={Feedback} />
+		<Route path={routeConstants.tryMe} component={TryMe} />
+		{/* Keep path='/' at the bottom */}
+		<Route path={routeConstants.home} component={Home} />
+		<Route path={routeConstants.default} component={Home} />
+	</Switch>
 );
 
 export default Routes;

@@ -168,9 +168,9 @@ export default function Home() {
 								{featuredCards.map((post) => (
 									<FeaturedCard key={post.title} post={post} />
 								))}
-							</Grid>
-							<Grid container spacing={6}>
-								<TryMeCard id="try-me" />
+								<Grid item xs={12} sm={12}>
+									<TryMeCard id="try-me" />
+								</Grid>
 							</Grid>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3}>
