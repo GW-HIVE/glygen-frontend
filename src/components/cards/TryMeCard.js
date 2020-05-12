@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	cardTitle: {
 		textAlign: "center",
+		paddingBottom: "8px",
 	},
 	cardDetails: {
 		flex: 1,
@@ -41,14 +42,8 @@ export default function TryMeCard(props) {
 				<Card className="card">
 					<div className={classes.cardDetails}>
 						<CardContent>
-							<Typography
-								gutterBottom
-								variant="h5"
-								component="h2"
-								className={classes.cardTitle}>
-								Try Me
-							</Typography>
-							<ListGroup as="hp">
+							<h4 className={classes.cardTitle}>Try Me</h4>
+							<ListGroup as="p">
 								<ListGroup.Item action onClick={alertClicked}>
 									What are the enzymes involved in the biosynthesis of{" "}
 									<span className={classes.selected}> Man5-(G55220VL) </span> in

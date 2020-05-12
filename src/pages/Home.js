@@ -155,7 +155,7 @@ export default function Home() {
 
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
-			<Container maxWidth="xl" className="ggContainer">
+			<Container maxWidth="xl" className="ggContainer" style={{ width: "98%" }}>
 				<Row className="show-grid">
 					<Grid container spacing={4}>
 						<Grid item xs={12} md={8} lg={9}>

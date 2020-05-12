@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-// import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-// import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from "@material-ui/core/CardContent";
 import { getDateMMDDYYYY } from "../../utils/common";
 import { Link } from "@material-ui/core";
@@ -45,20 +43,12 @@ export default function VersionCard(props) {
 
 	return (
 		<Grid item xs={12} sm={6} md={12}>
-			{/* <CardActionArea className={classes.cardAction} component='a' href='#'> */}
 			<Card className="card">
 				<CardLoader pageLoading={props.pageLoading} />
 				<div className={classes.cardDetails}>
 					<CardContent>
-						<h4
-							// gutterBottom
-							// variant='h5'
-							// component='h2'
-							className={classes.cardTitle}>
-							Version
-						</h4>
+						<h4 className={classes.cardTitle}>Version</h4>
 						<Typography>
-							{/* <Box> */}
 							<span>
 								<strong>Portal:</strong>
 							</span>{" "}
@@ -87,12 +77,10 @@ export default function VersionCard(props) {
 									" (" +
 									getDateMMDDYYYY(versionData.data.releaseDate) +
 									")"}
-							{/* </Box> */}
 						</Typography>
 					</CardContent>
 				</div>
 			</Card>
-			{/* </CardActionArea> */}
 		</Grid>
 	);
 }

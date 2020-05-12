@@ -269,7 +269,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Search by glycan,  by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
 			}
 		]
 	},
@@ -374,6 +374,19 @@
 			{
 				"name": "keywords",
 				"content": "Isoform, isoform alignment, summary, date, algorithm, similar position, cluster ID, identity, identity position."
+			}
+		]
+	},
+	"tryMe": {
+		"title": "Try Me | Perform searches using prepared queries | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "Perform searches using prepared queries to provide answers to complex biological questions with minimal user input."
+			},
+			{
+				"name": "keywords",
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
 			}
 		]
 	},
