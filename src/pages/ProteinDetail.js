@@ -106,7 +106,7 @@ const ProteinDetail = props => {
 
   const [detailData, setDetailData] = useState({});
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
-
+  // const [glycosylationWithImage, setGlycosylationWithImage] = useState([]); // const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState( // [] // );
   useEffect(() => {
     const getProteinDetailData = getProteinDetail(id);
 
@@ -125,6 +125,8 @@ const ProteinDetail = props => {
     });
     // eslint-disable-next-line
   }, []);
+  // useEffect(() => { // const withImage = detailData.glycosylation.filter( // item => item.glytoucan_ac // ); // const withoutImage = detailData.glycosylation.filter( // item => !item.glytoucan_ac // );
+  // setGlycosylationWithImage(withImage); // setGlycosylationWithoutImage(withoutImage); // }, [detailData]);
 
   if (detailData.mass) {
     detailData.mass = addCommas(detailData.mass);
@@ -133,9 +135,76 @@ const ProteinDetail = props => {
     detailData.mass_pme = addCommas(detailData.mass_pme);
   }
 
-  const { mass, uniprot, species, publication } = detailData;
-
+  const {
+    mass,
+    recommendedname,
+    uniprot,
+    gene,
+    species,
+    publication,
+    glycosylation,
+    mutation,
+    refseq
+  } = detailData;
   const speciesEvidence = groupSpeciesEvidences(species);
+  const glycoSylationColumns = [
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.glytoucan_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+    {
+      dataField: "type",
+      text: "Type",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "glytoucan_ac",
+      text: "GlyToucan Accession",
+      defaultSortField: "glytoucan_ac",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <Navbar.Text
+          as={NavLink}
+          to={routeConstants.glycanDetail + row.glytoucan_ac}
+        >
+          {" "}
+          {row.glytoucan_ac}{" "}
+        </Navbar.Text>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Position",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
+          {" "}
+          {row.position}{" "}
+        </Navbar.Text>
+      )
+    }
+  ];
 
   // ==================================== //
   /**
@@ -183,7 +252,7 @@ const ProteinDetail = props => {
 
   return (
     <>
-      <Row>
+      <Row className="gg-baseline">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
           <Sidebar items={items} />
         </Col>
@@ -197,7 +266,7 @@ const ProteinDetail = props => {
                   <h2>
                     {" "}
                     <span>
-                      Details for Glycan
+                      Details for Protein
                       <strong>
                         {uniprot && uniprot.uniprot_canonical_ac && (
                           <> {uniprot.uniprot_canonical_ac}</>
@@ -270,8 +339,59 @@ const ProteinDetail = props => {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     <p>
+                      {gene && (
+                        <tbody className="table-body">
+                          {gene.map((genes, genesname) => (
+                            <td key={genesname}>
+                              <div>
+                                <strong>
+                                  {proteinStrings.gene_name.name}:
+                                </strong>
+                                <Link
+                                  href={genes.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {genes.name}
+                                </Link>
+                              </div>
+
+                              <div>
+                                <strong>
+                                  {proteinStrings.gene_location.name}:
+                                </strong>
+                                Chromosome: {""}
+                                {genes.locus.chromosome} {""}(
+                                {genes.locus.start_pos}-{genes.locus.end_pos})
+                              </div>
+
+                              <EvidenceList
+                                evidences={groupEvidences(genes.locus.evidence)}
+                              />
+                            </td>
+                          ))}
+                        </tbody>
+                      )}
+                      {!gene && (
+                        <p className="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
+                    </p>
+
+                    <p>
                       {uniprot && uniprot.uniprot_canonical_ac && (
                         <>
+                          <div>
+                            <strong>{proteinStrings.uniprot_id.name}: </strong>
+                            <Link
+                              href={uniprot.uniprot_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {uniprot.uniprot_id}{" "}
+                            </Link>
+                          </div>
                           <div>
                             <strong>
                               {proteinStrings.uniprot_accession.name}:{" "}
@@ -284,6 +404,54 @@ const ProteinDetail = props => {
                               {uniprot.uniprot_canonical_ac}
                             </Link>
                           </div>
+                          <div>
+                            <strong>
+                              {proteinStrings.sequence_length.name}:{" "}
+                            </strong>
+                            {uniprot.length}{" "}
+                          </div>
+                          <div>
+                            <strong>
+                              {proteinStrings.recommendedname.name}:{" "}
+                            </strong>{" "}
+                            {recommendedname.full}{" "}
+                          </div>
+                          <div>
+                            <strong>
+                              {proteinStrings.chemical_mass.name}:{" "}
+                            </strong>
+                            {mass.chemical_mass}
+                          </div>
+                          <div>
+                            <strong>{proteinStrings.refSeq_ac.name}: </strong>{" "}
+                            <Link
+                              href={refseq.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {" "}
+                              {refseq.ac}{" "}
+                            </Link>{" "}
+                          </div>
+                          <div>
+                            {" "}
+                            <strong>
+                              {proteinStrings.refSeq_name.name}:{" "}
+                            </strong>{" "}
+                            {refseq.name}{" "}
+                          </div>{" "}
+                          <div>
+                            <strong>
+                              {proteinStrings.refSeq_summary.name}:{" "}
+                            </strong>
+                            {refseq.summary}{" "}
+                          </div>
+                          {/* <div>
+                            <strong>
+                              {proteinStrings.chemical_mass.name}:{" "}
+                            </strong>
+                            {mass.chemical_mass}
+                          </div> */}
                         </>
                       )}
                     </p>
