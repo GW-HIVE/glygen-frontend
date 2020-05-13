@@ -1,5 +1,6 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import paginationFactory, {
@@ -11,12 +12,15 @@ import paginationFactory, {
 
 const PaginatedTable = ({
   data,
+  idField = "id",
   page,
   columns,
   sizePerPage,
   onTableChange,
   totalSize,
   downloadButton,
+  defaultSortField = "",
+  defaultSortOrder = "asc",
   onClickTarget
 }) => {
   const customTotal = (from, to, size) => (
@@ -68,7 +72,8 @@ const PaginatedTable = ({
           custom: true,
           page,
           sizePerPage,
-          totalSize
+          totalSize //,
+          // defaultSorted
         })}
       >
         {({ paginationProps, paginationTableProps }) => (
@@ -90,7 +95,13 @@ const PaginatedTable = ({
               striped
               hover
               remote
-              keyField="id"
+              keyField={idField}
+              defaultSorted={[
+                {
+                  dataField: defaultSortField,
+                  order: defaultSortOrder
+                }
+              ]}
               data={data}
               columns={columns}
               onTableChange={handleTableChange}
