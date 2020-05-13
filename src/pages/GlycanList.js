@@ -12,7 +12,7 @@ import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
 import ReactHtmlParser from "react-html-parser";
-import routeConstants from '../data/json/routeConstants';
+import routeConstants from "../data/json/routeConstants";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -134,6 +134,8 @@ const GlycanList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
+              defaultSortField="glytoucan_ac"
+              idField="glytoucan_ac"
             />
           )}
         </section>

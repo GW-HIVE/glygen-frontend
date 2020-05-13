@@ -99,6 +99,8 @@ const ProteinList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
+              defaultSortField="uniprot_canonical_ac"
+              idField="uniprot_canonical_ac"
             />
           )}
         </section>
