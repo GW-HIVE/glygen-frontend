@@ -390,7 +390,7 @@ const GlycanDetail = (props) => {
 						<DownloadButton
 							types={[
 								{
-									display: "Glycan data (*.png)",
+									display: "Glycan Image (*.png)",
 									type: "png",
 									data: "glycan_image",
 								},
@@ -704,7 +704,7 @@ const GlycanDetail = (props) => {
 											<ClientPaginatedTable
 												data={glycoprotein}
 												columns={glycoProtienColumns}
-												defaultSortField={"protein_id"}
+												defaultSortField={"uniprot_canonical_ac"}
 												onClickTarget={'#glycoprotein'}
 											/>
 										)}
