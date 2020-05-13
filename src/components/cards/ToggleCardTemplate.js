@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 // import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-import '../../css/detail.css';
+import "../../css/detail.css";
 // import { Col, Row } from 'react-bootstrap';
-import Accordion from 'react-bootstrap/Accordion';
-import Card from 'react-bootstrap/Card';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 // https://smellycode.com/accordion-in-reactjs/
 // const ToggleCardlTemplate = () => {
@@ -21,31 +21,31 @@ export default function ToggleCardlTemplate() {
 	}
 
 	const expandIcon = !collapsed ? (
-		<ExpandMoreIcon className='expand-arrow' />
+		<ExpandMoreIcon className="expand-arrow" />
 	) : (
 		// <ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
-		<ExpandLessIcon className={'expand-arrow' + ' expand-arrow-expanded'} />
+		<ExpandLessIcon className={"expand-arrow" + " expand-arrow-expanded"} />
 		// <ExpandMoreIcon className='expand-arrow' />
 	);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			{/* <Container maxWidth='xl' className='ggContainer'> */}
+			{/* <Container maxWidth='xl' className='gg-container'> */}
 			<Accordion
-				defaultActiveKey='0'
-				className='panel-width'
-				style={{ padding: '20px 0' }}>
-				<Card key='0'>
+				defaultActiveKey="0"
+				className="panel-width"
+				style={{ padding: "20px 0" }}>
+				<Card key="0">
 					<Accordion.Toggle
 						as={Card.Header}
-						eventKey='0'
+						eventKey="0"
 						onClick={() => toggleCollapse()}
-						className='panelHeadBgr panelHeadText arrow'>
+						className="panelHeadBgr panelHeadText arrow">
 						<h3>ToggleCardlTemplate</h3>
-						<span className={'text-right'}>{expandIcon}</span>
+						<span className={"text-right"}>{expandIcon}</span>
 					</Accordion.Toggle>
-					<Accordion.Collapse eventKey='0' out={!collapsed}>
+					<Accordion.Collapse eventKey="0" out={!collapsed}>
 						<Card.Body>
 							Your body text is here for ToggleCardlTemplate
 						</Card.Body>

@@ -1,42 +1,47 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import { getTitle, getMeta } from '../utils/head';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import VerticalHeading from '../components/headings/VerticalHeading';
-import { Row, Col } from 'react-bootstrap';
-// import { Typography } from '@material-ui/core';
-import RoomIcon from '@material-ui/icons/Room';
-import GoogleMap from '../components/contactUs/GoogleMap';
-import ContactForm from '../components/contactUs/ContactForm';
+import React, { useEffect } from "react";
+import Helmet from "react-helmet";
+import { getTitle, getMeta } from "../utils/head";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import VerticalHeading from "../components/headings/VerticalHeading";
+import { Row, Col } from "react-bootstrap";
+import RoomIcon from "@material-ui/icons/Room";
+import GoogleMap from "../components/contactUs/GoogleMap";
+import ContactForm from "../components/contactUs/ContactForm";
+import { logActivity } from "../data/logging";
 
 const mapStyles = {
-	position: 'relative',
-	width: '99%',
-	height: '350px',
+	position: "relative",
+	width: "100%",
+	height: "350px",
+	paddingLeft: "15px",
 };
 
 const ContactUs = (props) => {
 	const vertHeadContactUs = {
-		h5VerticalText: 'MESSAGES',
+		h5VerticalText: "MESSAGES",
 		// h5VerticalText: 'WHO WE ARE',
-		h2textTop: 'Get',
-		h2textBottom: 'In',
-		h2textBottomStrongAfter: 'Touch',
+		h2textTop: "Get",
+		h2textBottom: "In",
+		h2textBottomStrongAfter: "Touch",
 		pText:
-			'We always welcome questions, comments, and suggestions regarging our website and information we provide in general. We will make every effort to respond to you within a reasonable amount of time.',
+			"We always welcome questions, comments, and suggestions regarging our website and information we provide in general. We will make every effort to respond to you within a reasonable amount of time.",
 	};
+	useEffect(() => {
+		logActivity();
+	}, []);
+
 	return (
 		<React.Fragment>
 			<Helmet>
 				{/* <title>{head.contactUs.title}</title>
 				{getMeta(head.contactUs)} */}
-				{getTitle('contactUs')}
-				{getMeta('contactUs')}
+				{getTitle("contactUs")}
+				{getMeta("contactUs")}
 			</Helmet>
 
 			<CssBaseline />
-			<Container maxWidth='lg' className='ggContainer'>
+			<Container maxWidth="lg" className="gg-container">
 				<Row>
 					{/* Contact Left*/}
 					<Col sm={12} md={6} lg={6}>
@@ -52,12 +57,12 @@ const ContactUs = (props) => {
 							<Col sm={12} md={6} lg={6}>
 								<h3>
 									<span>
-										<RoomIcon style={{ fontSize: 30, color: '#444' }} />
-									</span>{' '}
+										<RoomIcon style={{ fontSize: 30, color: "#444" }} />
+									</span>{" "}
 									UGA Location
 								</h3>
 								<h5>University of Georgia</h5>
-								<ul className='office-details'>
+								<ul className="office-details">
 									<li>
 										<strong>Complex Carbohydrate Research Center</strong>
 									</li>
@@ -68,12 +73,12 @@ const ContactUs = (props) => {
 							<Col sm={12} md={6} lg={6}>
 								<h3>
 									<span>
-										<RoomIcon style={{ fontSize: 30, color: '#444' }} />
-									</span>{' '}
+										<RoomIcon style={{ fontSize: 30, color: "#444" }} />
+									</span>{" "}
 									GW Location
 								</h3>
 								<h5>The George Washington University</h5>
-								<ul className='office-details'>
+								<ul className="office-details">
 									<li>
 										<strong>School of Medicine and Health Sciences</strong>
 									</li>
@@ -85,17 +90,15 @@ const ContactUs = (props) => {
 						{/* </div> */}
 					</Col>
 					{/* Contact Right */}
-					<Col sm={12} md={6} lg={6} className='content-box-md'>
-						<div className='contact-right'>
+					<Col sm={12} md={6} lg={6} className="content-box-md">
+						<div className="contact-right">
 							<ContactForm />
 						</div>
 					</Col>
 				</Row>
 			</Container>
-			<Row>
-				<div style={mapStyles}>
-					<GoogleMap />
-				</div>
+			<Row style={mapStyles}>
+				<GoogleMap />
 			</Row>
 		</React.Fragment>
 	);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +10,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import howToCiteData from "../data/json/howToCiteData";
 import { Row, Col } from "react-bootstrap";
 import Sidebar from "../components/navigation/Sidebar";
+import { logActivity } from "../data/logging";
 
 const HowToCite = (props) => {
 	const vertHeadHowToCite = {
@@ -24,6 +25,9 @@ const HowToCite = (props) => {
 		{ label: "Related Papers", id: "relatedPapers" },
 		{ label: "Website Citation", id: "websiteCitation" },
 	];
+	useEffect(() => {
+		logActivity();
+	}, []);
 
 	return (
 		<>
@@ -36,9 +40,7 @@ const HowToCite = (props) => {
 
 			<CssBaseline />
 			<div id="top-heading"></div>
-			{/* <Container maxWidth='xl' className='ggContainer'> */}
-			<Row>
-				{/* <Col> */}
+			<Row className="gg-baseline">
 				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
 					<Sidebar items={items} />
 				</Col>

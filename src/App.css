@@ -25,8 +25,11 @@
 .gg-blue-color {
 	color: var(--gg-blue) !important;
 }
-.ggContainer {
-	margin-bottom: 30px;
+.gg-container {
+	margin-bottom: 40px;
+}
+.gg-baseline {
+	width: 98%;
 }
 /* ========================================
         Main Attributes & Typography
@@ -631,12 +634,12 @@ sub {
 }
 
 .alert-dialog-root {
-	z-index: 2100  !important;
+	z-index: 2100 !important;
 }
 
 .alert-dialog-title {
 	color: #fff !important;
-	background-color: var(--gg-blue)  !important;
+	background-color: var(--gg-blue) !important;
 	padding: 15px !important;
 	text-align: left;
 	margin: 0px !important;

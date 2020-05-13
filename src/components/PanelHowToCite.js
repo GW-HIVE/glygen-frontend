@@ -16,7 +16,7 @@ const PanelHowToCite = (props) => {
 	return (
 		<div id={props.id}>
 			<CssBaseline />
-			<Container maxWidth="xl" className="ggContainer">
+			<Container maxWidth="xl" className="gg-container">
 				<Card className="panel-width">
 					<Card.Header
 						className="panelHeadBgr"
