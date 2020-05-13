@@ -28,11 +28,11 @@ import relatedGlycansIcon from "../images/icons/related-glycans-icon.svg";
 // import { withStyles } from '@material-ui/core/styles';
 import DetailTooltips from "../data/json/detailTooltips.json";
 // import HelpTooltip from '../components/tooltip/HelpTooltip';
-import HelpTooltip from '../components/tooltip/HelpTooltip';
-import LineTooltip from '../components/tooltip/LineTooltip';
-import FeedbackWidget from '../components/FeedbackWidget';
-import ReactCopyClipboard from'../components/ReactCopyClipboard';
-import routeConstants from '../data/json/routeConstants';
+import HelpTooltip from "../components/tooltip/HelpTooltip";
+import LineTooltip from "../components/tooltip/LineTooltip";
+import FeedbackWidget from "../components/FeedbackWidget";
+import ReactCopyClipboard from "../components/ReactCopyClipboard";
+import routeConstants from "../data/json/routeConstants";
 
 const items = [
 	{ label: "General", id: "general" },
@@ -79,8 +79,6 @@ function addCommas(nStr) {
 	}
 	return x1 + x2;
 }
-
-
 
 const getItemsCrossRef = (data) => {
 	let itemscrossRef = [];
@@ -354,7 +352,7 @@ const GlycanDetail = (props) => {
 
 	return (
 		<>
-			<Row>
+			<Row className="gg-baseline">
 				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
 					<Sidebar items={items} />
 				</Col>
@@ -705,7 +703,7 @@ const GlycanDetail = (props) => {
 												data={glycoprotein}
 												columns={glycoProtienColumns}
 												defaultSortField={"protein_id"}
-												onClickTarget={'#glycoprotein'}
+												onClickTarget={"#glycoprotein"}
 											/>
 										)}
 										{!glycoprotein && <p>No data available.</p>}
@@ -751,8 +749,7 @@ const GlycanDetail = (props) => {
 												data={enzyme}
 												columns={bioEnzymeColumns}
 												defaultSortField={"gene"}
-												onClickTarget={'#biosyntheticenzymes'}
-									
+												onClickTarget={"#biosyntheticenzymes"}
 											/>
 										)}
 										{!enzyme && <p>No data available.</p>}
@@ -796,9 +793,21 @@ const GlycanDetail = (props) => {
 										<p>
 											{iupac ? (
 												<>
-												<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={iupac}/> </Col>{' '}</Row>
-													<p className='text-overflow'>{iupac} </p>
+													<Row>
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>IUPAC</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={iupac} />{" "}
+														</Col>{" "}
+													</Row>
+													<p className="text-overflow">{iupac} </p>
 												</>
 											) : (
 												<p> </p>
@@ -806,10 +815,21 @@ const GlycanDetail = (props) => {
 
 											{wurcs ? (
 												<>
-												<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>WURCS</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={wurcs}/> </Col>{' '}</Row>
-										
-													<p className='text-overflow'>{wurcs} </p>{' '}
+													<Row>
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>WURCS</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={wurcs} />{" "}
+														</Col>{" "}
+													</Row>
+													<p className="text-overflow">{wurcs} </p>{" "}
 												</>
 											) : (
 												<p> </p>
@@ -817,10 +837,23 @@ const GlycanDetail = (props) => {
 
 											{glycoct ? (
 												<>
-							<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>GlycoCT</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycoct}/> </Col>{' '}</Row>
-										
-													<p id="text_element"className='text-overflow'>{glycoct} </p>{' '}
+													<Row>
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>GlycoCT</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={glycoct} />{" "}
+														</Col>{" "}
+													</Row>
+													<p id="text_element" className="text-overflow">
+														{glycoct}{" "}
+													</p>{" "}
 												</>
 											) : (
 												<p></p>
@@ -828,11 +861,22 @@ const GlycanDetail = (props) => {
 
 											{inchi ? (
 												<>
-													{' '}
+													{" "}
 													<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>Inchi</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={inchi}/> </Col>{' '}</Row>
-										
-													<p className='text-overflow'>{inchi}</p>{' '}
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>Inchi</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={inchi} />{" "}
+														</Col>{" "}
+													</Row>
+													<p className="text-overflow">{inchi}</p>{" "}
 												</>
 											) : (
 												<p></p>
@@ -840,11 +884,22 @@ const GlycanDetail = (props) => {
 
 											{glycam ? (
 												<>
-													{' '}
+													{" "}
 													<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>GLYCAM IUPAC</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={glycam}/> </Col>{' '}</Row>
-										
-													<p className='text-overflow'>{glycam}</p>{' '}
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>GLYCAM IUPAC</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={glycam} />{" "}
+														</Col>{" "}
+													</Row>
+													<p className="text-overflow">{glycam}</p>{" "}
 												</>
 											) : (
 												<p></p>
@@ -852,11 +907,21 @@ const GlycanDetail = (props) => {
 
 											{smiles_isomeric ? (
 												<>
-												<Row>
-													<Col sm={12} md={12} lg={12} xl={6}> <strong>Isomeric SMILES</strong></Col> <Col sm={12} md={12} lg={12} xl={6} style={{ textAlign:'right' }}><ReactCopyClipboard value={smiles_isomeric}/> </Col>{' '}</Row>
-										
-													{' '}
-													<p className='text-overflow'>{smiles_isomeric}</p>{' '}
+													<Row>
+														<Col sm={12} md={12} lg={12} xl={6}>
+															{" "}
+															<strong>Isomeric SMILES</strong>
+														</Col>{" "}
+														<Col
+															sm={12}
+															md={12}
+															lg={12}
+															xl={6}
+															style={{ textAlign: "right" }}>
+															<ReactCopyClipboard value={smiles_isomeric} />{" "}
+														</Col>{" "}
+													</Row>{" "}
+													<p className="text-overflow">{smiles_isomeric}</p>{" "}
 												</>
 											) : (
 												<p></p>

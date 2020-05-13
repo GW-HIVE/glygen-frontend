@@ -2,7 +2,6 @@ import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import PropTypes from "prop-types";
-import Typography from "@material-ui/core/Typography";
 
 const HelpTooltip = (props) => {
 	return (

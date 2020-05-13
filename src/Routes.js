@@ -16,7 +16,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import License from "./pages/License";
 import PrivacySettings from "./pages/PrivacySettings";
 import Feedback from "./pages/Feedback";
-import TryMeCard from "./components/cards/TryMeCard";
 import routeConstants from "./data/json/routeConstants.json";
 import TryMe from "./pages/TryMe";
 

@@ -1,37 +1,41 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import { getTitle, getMeta } from '../utils/head';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React, { useEffect } from "react";
+import Helmet from "react-helmet";
+import { getTitle, getMeta } from "../utils/head";
+import CssBaseline from "@material-ui/core/CssBaseline";
 // import Container from '@material-ui/core/Container';
-import VerticalHeading from '../components/headings/VerticalHeading';
-import { Row, Col } from 'react-bootstrap';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import { Navbar } from 'react-bootstrap';
-import SidebarPages from '../components/sidebar/SidebarPages';
+import VerticalHeading from "../components/headings/VerticalHeading";
+import { Row, Col } from "react-bootstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
+import SidebarPages from "../components/sidebar/SidebarPages";
+import { logActivity } from "../data/logging";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	heading: {
-		color: '#2f78b7'
-	}
+		color: "#2f78b7",
+	},
 }));
-const PrivacyPolicy = props => {
+const PrivacyPolicy = (props) => {
 	const vertHeadDisclaimer = {
-		h5VerticalText: 'to know',
-		h2textTop: 'Get Familiar',
-		h2textBottom: 'With Our',
-		h2textBottomStrongAfter: 'Privacy Policy'
+		h5VerticalText: "to know",
+		h2textTop: "Get Familiar",
+		h2textBottom: "With Our",
+		h2textBottomStrongAfter: "Privacy Policy",
 	};
 
 	const classes = useStyles();
+	useEffect(() => {
+		logActivity();
+	}, []);
 
 	return (
 		<React.Fragment>
 			<Helmet>
 				{/* <title>{head.privacyPolicy.title}</title>
 				{getMeta(head.privacyPolicy)} */}
-				{getTitle('privacyPolicy')}
-				{getMeta('privacyPolicy')}
+				{getTitle("privacyPolicy")}
+				{getMeta("privacyPolicy")}
 			</Helmet>
 
 			<CssBaseline />
@@ -39,19 +43,19 @@ const PrivacyPolicy = props => {
 				maxWidth='md'
 				className='card'
 				style={{ marginTop: '20px', marginBottom: '20px' }}> */}
-			<Row>
-				<Col sm={12} md={12} lg={12} xl={3} className='sidebar-col'>
+			<Row className="gg-baseline">
+				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
 					<SidebarPages />
 				</Col>
-				<Col sm={12} md={12} lg={12} xl={9} className='sidebarpages-page card'>
-					<div style={{ margin: '0 20px 40px' }}>
+				<Col sm={12} md={12} lg={12} xl={9} className="sidebarpages-page card">
+					<div style={{ margin: "0 20px 40px" }}>
 						<VerticalHeading post={vertHeadDisclaimer} />
 						<p>
-							This privacy notice discloses the privacy practices for{' '}
+							This privacy notice discloses the privacy practices for{" "}
 							<strong>GlyGen </strong> data and website.
 						</p>
 						<h4 className={classes.heading}>
-							Information collection, use, and sharing{' '}
+							Information collection, use, and sharing{" "}
 						</h4>
 						<p>
 							We are the sole owners of the information collected on this site.
@@ -81,18 +85,18 @@ const PrivacyPolicy = props => {
 							Logging can also enable us to track and target the interests of
 							our users to enhance their experience on our site. Usage of a
 							logging is optional and in no way linked to any personally
-							identifiable information on our site.{' '}
+							identifiable information on our site.{" "}
 							<a
-								href='https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity'
-								target='_blank'
-								rel='noopener noreferrer'>
+								href="https://github.com/glygener/glygen-frontend/wiki/Logging-user-activity"
+								target="_blank"
+								rel="noopener noreferrer">
 								Learn more.
 							</a>
 						</p>
 						<p>
-							You can manage your privacy settings at any time on our website{' '}
+							You can manage your privacy settings at any time on our website{" "}
 							{/* <a href='/privacy-settings'> here</a>. */}
-							<Navbar.Text as={Link} to='/privacy-settings'>
+							<Navbar.Text as={Link} to="/privacy-settings">
 								here
 							</Navbar.Text>
 							.
