@@ -653,3 +653,27 @@ sub {
 	color: rgba(0, 0, 0, 0.87) !important;
 	padding-bottom: 15px !important;
 }
+.alert-banner-message {
+	font-size: 20px;
+}
+.alert-banner-message a {
+	font-weight: 700 !important;
+	color: #fff !important;
+}
+.alert-banner-message a:hover {
+	/* font-weight: 900 !important; */
+	color: #333 !important;
+	font-weight: 700 !important;
+	/* text-decoration: underline !important; */
+}
+.alert-banner-darkgrey {
+	background-color: #555 !important;
+}
+.alert-banner-darkgrey a {
+	color: red !important;
+	/* font-weight: 200 !important; */
+}
+.alert-banner-darkgrey a:hover {
+	color: #bf0101 !important;
+	/* font-weight: 200 !important; */
+}

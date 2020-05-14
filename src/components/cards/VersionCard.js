@@ -54,7 +54,8 @@ export default function VersionCard(props) {
 							</span>{" "}
 							<Link
 								href="https://github.com/glygener/glygen-frontend/wiki/Release-notes"
-								target="_blank">
+								target="_blank"
+								rel="noopener noreferrer">
 								{versionData.software && versionData.software.version}
 							</Link>{" "}
 							{versionData.software &&

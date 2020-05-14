@@ -31,6 +31,7 @@ import { GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL } from "../envVariables";
 import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
+import BannerHotTopic from "../components/alert/BannerHotTopic";
 
 const mainFeaturedCard = {
 	title: "Computational and Informatics Resources for Glycoscience",
@@ -155,10 +156,14 @@ export default function Home() {
 
 			<CssBaseline />
 			<MainFeaturedCard post={mainFeaturedCard} />
+			<Container maxWidth="xl">
+				<BannerHotTopic />
+			</Container>
 			<Container
 				maxWidth="xl"
 				className="gg-container"
 				style={{ width: "98%" }}>
+				{/* <BannerHotTopic /> */}
 				<Row className="show-grid">
 					<Grid container spacing={4}>
 						<Grid item xs={12} md={8} lg={9}>
