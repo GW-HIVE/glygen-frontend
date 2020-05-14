@@ -27,7 +27,6 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import relatedGlycansIcon from "../images/icons/related-glycans-icon.svg";
 // import { withStyles } from '@material-ui/core/styles';
 import DetailTooltips from "../data/json/detailTooltips.json";
-// import HelpTooltip from '../components/tooltip/HelpTooltip';
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
@@ -315,13 +314,13 @@ const ProteinDetail = props => {
               <Card>
                 <Card.Header className="panelHeadBgr">
                   <span className="gg-green d-inline">
-                    {/* <HelpTooltip
+                    <HelpTooltip
                       title={DetailTooltips.protein.general.title}
                       text={DetailTooltips.protein.general.text}
                       urlText={DetailTooltips.protein.general.urlText}
-                      url={DetailTooltips.gprotein.general.url}
+                      url={DetailTooltips.protein.general.url}
                       helpIcon="gg-helpicon-detail"
-                    /> */}
+                    />
                   </span>
                   <h3 className="gg-green d-inline">General</h3>
                   <div className="float-right">
@@ -460,7 +459,237 @@ const ProteinDetail = props => {
               </Card>
             </Accordion>
 
+            {/*  species */}
+            <Accordion
+              id="species"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.species.title}
+                      text={DetailTooltips.protein.species.text}
+                      urlText={DetailTooltips.protein.species.urlText}
+                      url={DetailTooltips.protein.species.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Species</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("species", collapsed.species)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.species ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <Row>
+                      {speciesEvidence &&
+                        // For every species object
+                        Object.keys(speciesEvidence).map(species => (
+                          // For every database for current species object
+                          <Col xs={12} sm={12} md={6} lg={6} xl={6}>
+                            <p>
+                              <>
+                                <Row>
+                                  <Col
+                                    align="right"
+                                    style={{
+                                      paddingTop: "12px"
+                                    }}
+                                  >
+                                    <strong>{species}:</strong>
+                                  </Col>
+                                  <Col
+                                    align="left"
+                                    style={{
+                                      paddingLeft: "0",
+                                      marginLeft: "0"
+                                    }}
+                                  >
+                                    <EvidenceList
+                                      evidences={speciesEvidence[species]}
+                                    />
+                                  </Col>
+                                </Row>
+                              </>
+                            </p>
+                          </Col>
+                        ))}
+                      {!species && (
+                        <p className="no-data-msg">No data available.</p>
+                      )}
+                    </Row>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/* crossref */}
+            <Accordion
+              id="crossref"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.crossReferences.title}
+                      text={DetailTooltips.protein.crossReferences.text}
+                      urlText={DetailTooltips.protein.crossReferences.urlText}
+                      url={DetailTooltips.protein.crossReferences.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Cross References</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("crossref", collapsed.crossref)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.crossref ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {itemsCrossRef && itemsCrossRef.length ? (
+                      <p>
+                        <ul className="list-style-none">
+                          {/* <Row> */}
+                          {itemsCrossRef.map(crossRef => (
+                            <li>
+                              {/* <Col> */}
+                              <strong>{crossRef.database}:</strong>
+                              <ul>
+                                <Row>
+                                  {crossRef.links.map(link => (
+                                    <Col>
+                                      <li>
+                                        <a
+                                          href={link.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                        >
+                                          {link.id}
+                                        </a>
+                                      </li>
+                                    </Col>
+                                  ))}
+                                </Row>
+                              </ul>
+                            </li>
+                          ))}
+                        </ul>
+                      </p>
+                    ) : (
+                      <p>No data available.</p>
+                    )}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
             {/* publication */}
+            <Accordion
+              id="publication"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.publications.title}
+                      text={DetailTooltips.protein.publications.text}
+                      urlText={DetailTooltips.protein.publications.urlText}
+                      url={DetailTooltips.protein.publications.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Publications</h3>
+                  <div className="float-right">
+                    {/* <span className='gg-align-middle card-icon-space'>
+										<PublicationsMenu />
+									</span> */}
+                    <Accordion.Toggle
+                      // as={Card.Header}
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("publication", collapsed.publication)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.publication ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+                  <Card.Body className="card-padding-zero">
+                    <Table hover fluid>
+                      {publication && (
+                        <tbody className="table-body">
+                          {publication.map((pub, pubIndex) => (
+                            <tr className="table-row">
+                              <td key={pubIndex}>
+                                <p>
+                                  <div>
+                                    <h5 style={{ marginBottom: "3px" }}>
+                                      <strong>{pub.title}</strong>
+                                    </h5>
+                                  </div>
+                                  <div>{pub.authors}</div>
+                                  <div>
+                                    {pub.journal} <span>&nbsp;</span>({pub.date}
+                                    )
+                                  </div>
+                                  <div>
+                                    <FiBookOpen />
+                                    <span style={{ paddingLeft: "15px" }}>
+                                      PMID:
+                                    </span>{" "}
+                                    <a
+                                      href={pub.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {pub.pmid}
+                                    </a>
+                                  </div>
+                                  <EvidenceList
+                                    evidences={groupEvidences(pub.evidence)}
+                                  />
+                                </p>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      )}
+                      {!publication && (
+                        <p className="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
+                    </Table>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
           </React.Fragment>
         </Col>
       </Row>

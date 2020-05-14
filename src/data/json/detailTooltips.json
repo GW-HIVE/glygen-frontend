@@ -1,52 +1,102 @@
 {
-	"glycan": {
-		"general": {
-			"title": "General",
-			"text": "General information about your selected glycan.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"species": {
-			"title": "Species",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"motif": {
-			"title": "Motif",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"glycoproteins": {
-			"title": "Associated Glycoproteins",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"biosyntheticEnzyme": {
-			"title": "Biosynthetic Enzyme",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"digitalSequence": {
-			"title": "Digital Sequence",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"crossReferences": {
-			"title": "Cross References",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		},
-		"publications": {
-			"title": "Publications",
-			"text": "Add some unique text here.",
-			"urlText": "Read more...",
-			"url": "https://wiki.glygen.org/index.php/Main_Page"
-		}
-	}
+  "glycan": {
+    "general": {
+      "title": "General",
+      "text": "General information about your selected glycan.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "species": {
+      "title": "Species",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "motif": {
+      "title": "Motif",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "glycoproteins": {
+      "title": "Associated Glycoproteins",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "biosyntheticEnzyme": {
+      "title": "Biosynthetic Enzyme",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "digitalSequence": {
+      "title": "Digital Sequence",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "crossReferences": {
+      "title": "Cross References",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "publications": {
+      "title": "Publications",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    }
+  },
+  "protein": {
+    "general": {
+      "title": "General",
+      "text": "General information about your selected glycan.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "species": {
+      "title": "Species",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "motif": {
+      "title": "Motif",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "glycoproteins": {
+      "title": "Associated Glycoproteins",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "biosyntheticEnzyme": {
+      "title": "Biosynthetic Enzyme",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "digitalSequence": {
+      "title": "Digital Sequence",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "crossReferences": {
+      "title": "Cross References",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "publications": {
+      "title": "Publications",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    }
+  }
 }
