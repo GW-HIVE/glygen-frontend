@@ -1313,3 +1313,12 @@ ul.gg-breadcrumb {
     padding: 40px 20px;
     background-color: #fff;
 }
+
+.univ-logo {
+    padding: 0 10px;
+    max-width: 150px;
+    margin: 0 auto;
+    line-height: 150px;
+    display: inline-block !important;
+}
+
