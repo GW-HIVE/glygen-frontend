@@ -67,7 +67,7 @@ const GlycanSearch = (props) => {
 		(state, newState) => ({ ...state, ...newState }),
 		{}
 	);
-	const [glyActTabKey, setGlyActTabKey] = useState('advanced_search');
+	const [glyActTabKey, setGlyActTabKey] = useState('simple_search');
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertTextInput, setAlertTextInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -113,7 +113,8 @@ const GlycanSearch = (props) => {
 		setPageLoading(true);
 		logActivity();
 		document.addEventListener('click', () => {
-			setAlertTextInput({"show": false})
+			if (alertTextInput.show)
+				setAlertTextInput({"show": false})
 		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
@@ -187,7 +188,7 @@ const GlycanSearch = (props) => {
 			});
 			setGlyCompData(compStateData);
 			setInitData(initData);
-			setGlyActTabKey("advanced_search");
+			setGlyActTabKey("simple_search");
 			if (id === undefined) setPageLoading(false);
 
 			id &&
@@ -332,7 +333,7 @@ const GlycanSearch = (props) => {
 			let message = "search_init api call";
 			axiosError(error, message, setPageLoading, setAlertDialogInput);
 		});
-	}, [id, glycanData]);
+	}, [id, glycanData, alertTextInput]);
 
 	function searchjson(
 		input_query_type,

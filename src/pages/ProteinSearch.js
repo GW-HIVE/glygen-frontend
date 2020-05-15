@@ -29,7 +29,7 @@ const ProteinSearch = (props) => {
 		{
 		}
 	);
-	const [proActTabKey, setProActTabKey] = useState('advanced_search');
+	const [proActTabKey, setProActTabKey] = useState('simple_search');
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertTextInput, setAlertTextInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -49,7 +49,8 @@ const ProteinSearch = (props) => {
 		setPageLoading(true);
 		logActivity();
 		document.addEventListener('click', () => {
-			setAlertTextInput({"show": false})
+			if (alertTextInput.show)
+				setAlertTextInput({"show": false})
 		});
 		getProteinInit().then((response) => {
 			let initData = response.data;
@@ -58,7 +59,7 @@ const ProteinSearch = (props) => {
 			});
 
 			setInitData(initData);
-			setProActTabKey("advanced_search");
+			setProActTabKey("simple_search");
 			if (id === undefined) setPageLoading(false);
 
 			id &&
@@ -89,7 +90,7 @@ const ProteinSearch = (props) => {
 			let message = "search_init api call";
 			axiosError(error, message, setPageLoading, setAlertDialogInput);
 		});
-	}, [id, proteinData]);
+	}, [id, proteinData, alertTextInput]);
 
 	const proteinSimpleSearch = () => {
 		var formjsonSimple = {
