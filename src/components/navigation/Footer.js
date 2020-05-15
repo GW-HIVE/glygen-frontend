@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	univLogo: {
-		padding: "5px 10px 0 10px",
+		padding: "0 10px",
 	},
 }));
 
@@ -31,7 +31,7 @@ export default function Header() {
 	return (
 		<React.Fragment>
 			{/* <CssBaseline /> */}
-			<div className="gg-blue text-center gg-footer">
+			<div className="gg-blue gg-align-center gg-footer">
 				<Container maxWidth="xl" className="justify-content-center">
 					<Row className="text-center justify-content-center">
 						<Col md={"auto"}>
@@ -104,7 +104,11 @@ export default function Header() {
 								</Navbar.Text>
 							</Col>
 						</Box>
-						<Col md={"auto"}>
+						<Col
+							// xs={"auto"}
+							// sm={"auto"}
+							md={"auto"}
+							className="gg-align-middle gg-align-center">
 							<a
 								href="https://www.ccrc.uga.edu/"
 								target="_blank"
