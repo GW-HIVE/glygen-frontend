@@ -22,12 +22,52 @@
 		},
 		{
 			"databases": {
+				"name": "ChEBI",
+				"url": "https://www.ebi.ac.uk/chebi/aboutChebiForward.do"
+			},
+			"licenseType": {
+				"name": "CC BY 4.0",
+				"url": "https://creativecommons.org/licenses/by/4.0/"
+			}
+		},
+		{
+			"databases": {
 				"name": "Disease Ontology",
 				"url": "https://disease-ontology.org/resources/"
 			},
 			"licenseType": {
 				"name": "CC0 1.0",
 				"url": "https://creativecommons.org/publicdomain/zero/1.0/"
+			}
+		},
+		{
+			"databases": {
+				"name": "Genomics England PanelApp",
+				"url": "https://panelapp.genomicsengland.co.uk/#!Content"
+			},
+			"licenseType": {
+				"name": "Terms of Use",
+				"url": "https://panelapp.genomicsengland.co.uk/media/files/GEL_-_PanelApp_Terms_of_Use_December_2019.pdf"
+			}
+		},
+		{
+			"databases": {
+				"name": "GlyConnect",
+				"url": "https://glyconnect.expasy.org/browser/"
+			},
+			"licenseType": {
+				"name": "CC BY-NC-ND 3.0",
+				"url": "https://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US"
+			}
+		},
+		{
+			"databases": {
+				"name": "GlyCosmos",
+				"url": "https://glycosmos.org/"
+			},
+			"licenseType": {
+				"name": "CC BY 4.0",
+				"url": "https://creativecommons.org/licenses/by/4.0/"
 			}
 		},
 		{
@@ -42,22 +82,32 @@
 		},
 		{
 			"databases": {
+				"name": "GPT Wiki",
+				"url": "https://edwardslab.bmcb.georgetown.edu/gptwiki/Main_Page"
+			},
+			"licenseType": {
+				"name": "CC BY 4.0",
+				"url": "https://creativecommons.org/licenses/by/4.0/"
+			}
+		},
+		{
+			"databases": {
+				"name": "MatrixDB",
+				"url": "http://matrixdb.univ-lyon1.fr/"
+			},
+			"licenseType": {
+				"name": "CC BY 4.0",
+				"url": "https://creativecommons.org/licenses/by/4.0/"
+			}
+		},
+		{
+			"databases": {
 				"name": "MGI",
 				"url": "http://www.informatics.jax.org/mgihome/projects/aboutmgi.shtml"
 			},
 			"licenseType": {
 				"name": "Warranty Disclaimer And Copyright Notice",
 				"url": "http://www.informatics.jax.org/mgihome/other/copyright.shtml"
-			}
-		},
-		{
-			"databases": {
-				"name": "NCBI HomoGene",
-				"url": "https://www.ncbi.nlm.nih.gov/homologene/"
-			},
-			"licenseType": {
-				"name": "NCBI License",
-				"url": "https://www.ncbi.nlm.nih.gov/home/about/policies/"
 			}
 		},
 		{
