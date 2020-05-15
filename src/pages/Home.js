@@ -56,7 +56,7 @@ const featuredCards = [
 			"Search for proteins based on their sequences, accessions, and annotations.",
 		image: proteinImg,
 		imageText: "Protein",
-		href: routeConstants.proteinSearch,
+		to: routeConstants.proteinSearch,
 	},
 	// {
 	// 	title: "Enzyme",
