@@ -52,7 +52,7 @@
   "protein": {
     "general": {
       "title": "General",
-      "text": "General information about your selected glycan.",
+      "text": "General information about your selected protein.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
@@ -62,26 +62,68 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "motif": {
-      "title": "Motif",
+    "function": {
+      "title": "Function",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "glycoproteins": {
-      "title": "Associated Glycoproteins",
+    "goannotation": {
+      "title": "Go Annotations",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "biosyntheticEnzyme": {
-      "title": "Biosynthetic Enzyme",
+    "glycosylation": {
+      "title": "Glycosylation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "digitalSequence": {
-      "title": "Digital Sequence",
+    "sequence": {
+      "title": " Sequence",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "pathway": {
+      "title": " Pathway",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "isoforms": {
+      "title": " Isoforms",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "homologs": {
+      "title": " Homologs",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "disease": {
+      "title": " Disease",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "mutation": {
+      "title": " Mutation",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "expression tissue": {
+      "title": " Expression Tissue",
+      "text": "Add some unique text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+    "expression disease": {
+      "title": " Expression Disease",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
