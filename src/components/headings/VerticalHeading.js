@@ -1,36 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 // import Typography from '@material-ui/core/Typography';
 // import Grid from '@material-ui/core/Grid';
-import { Row, Col } from 'react-bootstrap';
-import Container from '@material-ui/core/Container';
+import { Row, Col } from "react-bootstrap";
+import Container from "@material-ui/core/Container";
 
 export default function VerticalHeading(props) {
 	const { post } = props;
 
 	return (
-		<div className='content-box-md' id={props.id}>
-			<Container maxWidth='xl'>
+		<div
+			style={{ paddingBottom: "0" }}
+			className="content-box-md"
+			id={props.id}>
+			<Container maxWidth="xl">
 				<Row>
 					<Col>
-						<div className='vertical-heading'>
+						<div className="vertical-heading">
 							<h5>{post.h5VerticalText}</h5>
 							<h2>
 								<span>
 									<strong>{post.h2textTopStrongBefore}</strong>
-								</span>{' '}
-								{post.h2textTop}{' '}
+								</span>{" "}
+								{post.h2textTop}{" "}
 								<span>
 									<strong>{post.h2textTopStrongAfter}</strong>
-								</span>{' '}
+								</span>{" "}
 								{post.h2textTop2} <br />
 								<span>
 									<strong>{post.h2textBottomStrongBefore}</strong>
-								</span>{' '}
-								{post.h2textBottom}{' '}
+								</span>{" "}
+								{post.h2textBottom}{" "}
 								<span>
 									<strong>{post.h2textBottomStrongAfter}</strong>
-								</span>{' '}
+								</span>{" "}
 								{post.h2textBottom2}
 							</h2>
 							<br />
