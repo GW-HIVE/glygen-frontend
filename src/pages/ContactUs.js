@@ -53,7 +53,7 @@ const ContactUs = (props) => {
 						</p> */}
 
 						{/* <div> */}
-						<Row>
+						<Row style={{ paddingTop: "20px" }}>
 							<Col sm={12} md={6} lg={6}>
 								<h3>
 									<span>

@@ -1,61 +1,66 @@
-import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import logo from '../../images/glygen_logos/glygen-logoW.svg';
-import { Link, NavLink } from 'react-router-dom';
-import { NavDropdown, Navbar, Nav, Row, Col } from 'react-bootstrap';
-import SearchIcon from '@material-ui/icons/Search';
-import PersonIcon from '@material-ui/icons/Person';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import Container from '@material-ui/core/Container';
-import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import {GLYGEN_API, GLYGEN_BETA, GLYGEN_DATA, GLYGEN_SPARQL} from "../../envVariables";
-import routeConstants from '../../data/json/routeConstants.json';
+import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import logo from "../../images/glygen_logos/glygen-logoW.svg";
+import { Link, NavLink } from "react-router-dom";
+import { NavDropdown, Navbar, Nav, Row, Col } from "react-bootstrap";
+import SearchIcon from "@material-ui/icons/Search";
+import PersonIcon from "@material-ui/icons/Person";
+import { fade, makeStyles } from "@material-ui/core/styles";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import Container from "@material-ui/core/Container";
+import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
+import {
+	GLYGEN_API,
+	GLYGEN_BETA,
+	GLYGEN_DATA,
+	GLYGEN_SPARQL,
+} from "../../envVariables";
+import routeConstants from "../../data/json/routeConstants.json";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	search: {
-		position: 'relative',
+		position: "relative",
 		borderRadius: theme.shape.borderRadius,
 		backgroundColor: fade(theme.palette.common.white, 0.25),
-		'&:hover': {
-			backgroundColor: fade(theme.palette.common.white, 0.35)
+		"&:hover": {
+			backgroundColor: fade(theme.palette.common.white, 0.35),
 		},
 		marginLeft: 0,
 		marginRight: 15,
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
+		width: "100%",
+		[theme.breakpoints.up("sm")]: {
 			marginLeft: theme.spacing(1),
-			width: 'auto'
-		}
+			width: "auto",
+		},
 	},
 	inputRoot: {
-		color: 'inherit'
+		color: "inherit",
 	},
 	inputInput: {
 		padding: theme.spacing(1, 1, 1, 2),
-		transition: theme.transitions.create('width'),
-		width: '100%',
-		color: '#fff',
-		fontWeight: 'bold',
-		fontSize: '20px',
-		[theme.breakpoints.up('sm')]: {
-			maxWidth: 180
+		transition: theme.transitions.create("width"),
+		width: "100%",
+		color: "#fff",
+		fontWeight: "bold",
+		fontSize: "20px",
+		[theme.breakpoints.up("sm")]: {
+			maxWidth: 180,
 			// '&:focus': {
 			// 	width: 200
 			// }
-		}
+		},
 	},
 	navbarText: {
-		color: '#2f78b7 !important',
-		fontWeight: '600',
-		'&:hover': {
-			color: '#57affa !important'
-		}
-	}
+		color: "#2f78b7 !important",
+		fontWeight: "600",
+		"&:hover": {
+			color: "#57affa !important",
+		},
+	},
 }));
 
 export default function Header() {
@@ -63,101 +68,106 @@ export default function Header() {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Navbar className='gg-top-header' expand='xl'>
-				<Container maxWidth='xl'>
-					<Row className='show-grid'>
+			<Navbar className="gg-top-header" expand="xl">
+				<Container maxWidth="xl">
+					<Row className="show-grid">
 						<Col xs={4} sm={3} md={7} lg={9}>
-							<div className='text-right'>
+							<div className="text-right">
 								<Navbar.Text
 									as={Link}
 									to={routeConstants.privacySettings}
 									className={classes.navbarText}>
 									<span>
 										<PersonIcon />
-									</span>{' '}
+									</span>{" "}
 									MY GLYGEN
 								</Navbar.Text>
 							</div>
 						</Col>
 						<Col xs={5} sm={3} md={2} lg={1}>
-							<div className=' text-right mr-sm-4'>
+							<div className=" text-right mr-sm-4">
 								<Navbar.Text>
 									<a
 										href={GLYGEN_BETA}
-										target='_blank'
-										rel='noopener noreferrer'
+										target="_blank"
+										rel="noopener noreferrer"
 										className={classes.navbarText}>
 										<span>
 											<DeveloperBoardIcon />
-										</span>{' '}
+										</span>{" "}
 										BETA TESTING
 									</a>
-								</Navbar.Text>{' '}
+								</Navbar.Text>{" "}
 							</div>
 						</Col>
 						<Col xs={3} sm={6} md={3} lg={2}>
-							<div className='text-right mt-sm-2 ml-lg-5 pl-sm-2'>
+							<div className="text-right mt-sm-2 ml-lg-5 pl-sm-2">
 								<a
-									href='https://twitter.com/gly_gen'
-									target='_blank'
-									rel='noopener noreferrer'
+									href="https://twitter.com/gly_gen"
+									target="_blank"
+									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<TwitterIcon className='mr-sm-3' />
+									<TwitterIcon className="mr-sm-3" />
 								</a>
 								<a
-									href='https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/'
-									target='_blank'
-									rel='noopener noreferrer'
+									href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
+									target="_blank"
+									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<YouTubeIcon className='mr-sm-3' />
+									<YouTubeIcon className="mr-sm-3" />
 								</a>
 								<a
-									href='https://github.com/glygener'
-									target='_blank'
-									rel='noopener noreferrer'
+									href="https://github.com/glygener"
+									target="_blank"
+									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<GitHubIcon className='mr-sm-3' />
+									<GitHubIcon className="mr-sm-3" />
 								</a>
 							</div>
 						</Col>
 					</Row>
 				</Container>
 			</Navbar>
-			<Navbar className='gg-blue' expand='xl'>
-				<Col xs={'auto'}>
+			<Navbar className="gg-blue" expand="xl">
+				<Col xs={"auto"}>
 					<Navbar.Brand as={Link} to={routeConstants.home}>
-						<img src={logo} alt='Glygen' />
+						<img src={logo} alt="Glygen" />
 					</Navbar.Brand>
 				</Col>
 				<Navbar.Toggle
-					aria-controls='basic-navbar-nav'
-					className='navbar-dark'
+					aria-controls="basic-navbar-nav"
+					className="navbar-dark"
 				/>
-				<Navbar.Collapse className='gg-blue' id='basic-navbar-nav'>
+				<Navbar.Collapse className="gg-blue" id="basic-navbar-nav">
 					<Col>
 						<Nav>
-							<Nav.Link className='gg-nav-link' as={NavLink} to={routeConstants.home}>
+							<Nav.Link
+								className="gg-nav-link"
+								as={NavLink}
+								to={routeConstants.home}>
 								HOME
 							</Nav.Link>
 							<NavDropdown
-								className='gg-dropdown-navbar'
-								title='EXPLORE'
-								id='basic-nav-dropdown'>
+								className="gg-dropdown-navbar"
+								title="EXPLORE"
+								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.glycanSearch}>
 									Glycan Search
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to={routeConstants.proteinSearch}>
+								<NavDropdown.Item
+									as={NavLink}
+									to={routeConstants.proteinSearch}>
 									Protein Search
 								</NavDropdown.Item>
-								<NavDropdown.Item as={NavLink} to={routeConstants.enzymeSearch}>
-									Enzyme Search
-								</NavDropdown.Item>
 							</NavDropdown>
-							<Nav.Link className='gg-nav-link' as={NavLink} to={routeConstants.quickSearch}>
+							<Nav.Link
+								className="gg-nav-link"
+								as={NavLink}
+								to={routeConstants.quickSearch}>
 								QUICK&nbsp;SEARCH
 							</Nav.Link>
 							<Nav.Link
-								className='gg-nav-link'
+								className="gg-nav-link"
 								as={NavLink}
 								to={routeConstants.tryMe}
 								// href='#try-me'
@@ -165,32 +175,32 @@ export default function Header() {
 								TRY&nbsp;ME
 							</Nav.Link>
 							<NavDropdown
-								className='gg-dropdown-navbar'
-								title='DATA'
-								id='basic-nav-dropdown'>
+								className="gg-dropdown-navbar"
+								title="DATA"
+								id="basic-nav-dropdown">
 								<NavDropdown.Item
 									href={GLYGEN_DATA}
-									target='_blank'
-									rel='noopener noreferrer'>
+									target="_blank"
+									rel="noopener noreferrer">
 									Data
 								</NavDropdown.Item>
 								<NavDropdown.Item
 									href={GLYGEN_API}
-									target='_blank'
-									rel='noopener noreferrer'>
+									target="_blank"
+									rel="noopener noreferrer">
 									API
 								</NavDropdown.Item>
 								<NavDropdown.Item
 									href={GLYGEN_SPARQL}
-									target='_blank'
-									rel='noopener noreferrer'>
+									target="_blank"
+									rel="noopener noreferrer">
 									SPARQL
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown
-								className='gg-dropdown-navbar'
-								title='HELP'
-								id='basic-nav-dropdown'>
+								className="gg-dropdown-navbar"
+								title="HELP"
+								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.about}>
 									About
 								</NavDropdown.Item>
@@ -205,9 +215,9 @@ export default function Header() {
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown
-								className='gg-dropdown-navbar'
-								title='MORE'
-								id='basic-nav-dropdown'>
+								className="gg-dropdown-navbar"
+								title="MORE"
+								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.media}>
 									Media
 								</NavDropdown.Item>
@@ -220,18 +230,18 @@ export default function Header() {
 							</NavDropdown>
 						</Nav>
 					</Col>
-					<Col md={'auto'}>
+					<Col md={"auto"}>
 						<div className={classes.search}>
-							<IconButton aria-label='search'>
-								<SearchIcon style={{ color: '#fff' }} />
+							<IconButton aria-label="search">
+								<SearchIcon style={{ color: "#fff" }} />
 							</IconButton>
 							<InputBase
-								placeholder='Search…'
+								placeholder="Search…"
 								classes={{
 									root: classes.inputRoot,
-									input: classes.inputInput
+									input: classes.inputInput,
 								}}
-								inputProps={{ 'aria-label': 'search' }}
+								inputProps={{ "aria-label": "search" }}
 							/>
 						</div>
 					</Col>

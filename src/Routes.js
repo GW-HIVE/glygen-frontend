@@ -18,6 +18,7 @@ import PrivacySettings from "./pages/PrivacySettings";
 import Feedback from "./pages/Feedback";
 import routeConstants from "./data/json/routeConstants.json";
 import TryMe from "./pages/TryMe";
+import About from "./pages/About";
 
 const Routes = (props) => (
 	<Switch>
@@ -56,6 +57,7 @@ const Routes = (props) => (
 		<Route path={routeConstants.privacySettings} component={PrivacySettings} />
 		<Route path={routeConstants.feedback} component={Feedback} />
 		<Route path={routeConstants.tryMe} component={TryMe} />
+		<Route path={routeConstants.about} component={About} />
 		{/* Keep path='/' at the bottom */}
 		<Route path={routeConstants.home} component={Home} />
 		<Route path={routeConstants.default} component={Home} />
