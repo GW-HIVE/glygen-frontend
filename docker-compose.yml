@@ -16,8 +16,8 @@ services:
         - REACT_APP_SPARQL=https://sparql.glygen.org
         - REACT_APP_BASENAME=/frontend
         - PORT=80
-    # ports:
-    #   - '80:80'
+    ports:
+      - '80:80'
 networks:
   default:
     external:
