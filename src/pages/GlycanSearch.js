@@ -113,8 +113,7 @@ const GlycanSearch = (props) => {
 		setPageLoading(true);
 		logActivity();
 		document.addEventListener('click', () => {
-			if (alertTextInput.show)
-				setAlertTextInput({"show": false})
+			setAlertTextInput({"show": false})
 		});
 		getGlycanInit().then((response) => {
 			let initData = response.data;
@@ -333,7 +332,7 @@ const GlycanSearch = (props) => {
 			let message = "search_init api call";
 			axiosError(error, message, setPageLoading, setAlertDialogInput);
 		});
-	}, [id, glycanData, alertTextInput]);
+	}, [id, glycanData]);
 
 	function searchjson(
 		input_query_type,

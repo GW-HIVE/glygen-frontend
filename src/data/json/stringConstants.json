@@ -278,6 +278,17 @@
         "tooltip": {},
         "id": "uniprot_canonical_ac"
       },
+      "uniprot_canonical_ac": {
+        "name": "UniProtKB Accession",
+        "shortName": "UniProtKB Accession",
+        "tooltip": {
+          "title": "UniProtKB Accession",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "uniprot_canonical_ac"
+      },
       "chemical_mass": {
         "name": "Chemical Mass",
         "shortName": "chemical_mass",
@@ -340,14 +351,20 @@
       },
       "mass": {
         "name": "Chemical Mass",
-        "shortName": "mass",
-        "tooltip": {},
+        "shortName": "Chemical Mass",
+        "tooltip": {
+          "title": "Chemical Mass",
+          "text": "Molecular weight [mass] in Daltons. Use the sliders to select a Chemical Mass range for your protein(s)."
+        },
         "id": "mass"
       },
-      "refSeq_ac": {
+      "refseq_ac": {
         "name": "RefSeq Accession",
-        "shortName": "refseq_ac",
-        "tooltip": {},
+        "shortName": "RefSeq Accession",
+        "tooltip": {
+          "title": "RefSeq Accession",
+          "text": "A distinct accession number format assigned to RefSeq record that begins with two characters followed by an underscore in the NCBI RefSeq database. Enter the RefSeq Accession of your protein."
+        },
         "id": "refseq_ac"
       },
       "refSeq_summary": {

@@ -49,6 +49,44 @@
     },
     "advanced_search": {
         "tabTitle": "Advanced Search",
+        "uniprot_canonical_ac": {
+            "length": 2500,
+            "errorText": "Entry is too long - max length is 2500.",
+            "typeahedID": "uniprot_canonical_ac",
+            "placeholder": "Enter single or multiple comma-separated UniProtKB Accession(s)",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "P14210"
+                    },
+                    "explore": {
+                        "id": "UniProtKB",
+                        "url": "https://www.uniprot.org/help/accession_numbers"
+                    }
+                }
+            ]
+        },
+        "refseq_ac": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "refseq_ac",
+            "placeholder": "Enter the RefSeq Accession of your protein",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "NP_000592.3"
+                    },
+                    "explore": {
+                        "id": "RefSeq",
+                        "url": "https://www.ncbi.nlm.nih.gov/refseq/"
+                    }
+                }
+            ]
+        },
         "pmid": {
             "length": 100,
             "errorText": "Entry is too long - max length is 100.",

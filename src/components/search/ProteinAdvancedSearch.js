@@ -17,13 +17,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
 import '../../css/Search.css';
-import glycanSearchData from '../../data/json/glycanSearch';
+import proteinSearchData from '../../data/json/proteinSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 
-const GlycanAdvancedSearch = (props) => {
-    let commonGlycanData = stringConstants.glycan.common;
-    let advancedSearch = glycanSearchData.advanced_search;
+const ProteinAdvancedSearch = (props) => {
+    let commonProteinData = stringConstants.protein.common;
+    let advancedSearch = proteinSearchData.advanced_search;
 
 	function sortDropdown(a, b) {
 		if (a.name < b.name) {
@@ -91,20 +91,12 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyMass: [minval, maxval] });
     };
 
-    function glyMassInputChange(mass) {
-        props.setGlyAdvSearchData({ glyMassInput: mass })
+    function proMassInputChange(mass) {
+        props.setProAdvSearchData({ proMassInput: mass })
     }
     
-    function glyMassSliderChange(mass) {
-        props.setGlyAdvSearchData({ glyMass: mass })
-    }
-    
-    function glyNumSugarsInputChange(numSugars) {
-        props.setGlyAdvSearchData({ glyNumSugarsInput: numSugars })
-    }
-    
-    function glyNumSugarsSliderChange(numSugars) {
-        props.setGlyAdvSearchData({ glyNumSugars: numSugars })
+    function proMassSliderChange(mass) {
+        props.setProAdvSearchData({ proMass: mass })
     }
 
 	const glyTypeOnChange = (event) => {
@@ -120,18 +112,17 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glySubType: event.target.value });
 	};
 
-	function glycanIdChange(inputGlycanId) {
-		props.setGlyAdvSearchData({ glycanId: inputGlycanId });
-		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[0] = inputGlycanId.length > 2500;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+	function proteinIdChange(inputProteinId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[0] = inputProteinId.length > 2500;
+		props.setProAdvSearchData({ proteinId: inputProteinId, proAdvSearchValError: valArr });
 	}
 
-	function glyProtChange(inputglycoProt) {
-		props.setGlyAdvSearchData({ glyProt: inputglycoProt });
-		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[1] = inputglycoProt.length > 12;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+	function proRefSeqIdChange(inputProRefSeqId) {
+		// props.setGlyAdvSearchData({ proRefSeqId: inputProRefSeqId });
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[1] = inputProRefSeqId.length > 12;
+		props.setProAdvSearchData({ proRefSeqId: inputProRefSeqId, proAdvSearchValError: valArr });
 	}
 
 	function glyMotifChange(inputglycMotif) {
@@ -162,44 +153,23 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
 	};
 
-	const clearGlycan = () => {
-		props.setGlyAdvSearchData({
-			glycanId: '',
-			glyMassType: props.initData.glycan_mass.native.name,
-			glyMass: [
-				Math.floor(props.initData.glycan_mass.native.min),
-				Math.ceil(props.initData.glycan_mass.native.max),
+	const clearProtein = () => {
+		props.setProAdvSearchData({
+			proteinId: '',
+			proRefSeqId: '',
+			proMass: [
+				Math.floor(props.initData.protein_mass.min),
+				Math.ceil(props.initData.protein_mass.max),
 			],
-			glyMassInput: [
-				Math.floor(props.initData.glycan_mass.native.min),
-				Math.ceil(props.initData.glycan_mass.native.max),
+			proMassInput: [
+				Math.floor(props.initData.protein_mass.min),
+				Math.ceil(props.initData.protein_mass.max),
 			],
-			glyMassRange: [
-				Math.floor(props.initData.glycan_mass.native.min),
-				Math.ceil(props.initData.glycan_mass.native.max),
+			proMassRange: [
+				Math.floor(props.initData.protein_mass.min),
+				Math.ceil(props.initData.protein_mass.max),
 			],
-			glyNumSugars: [
-				props.initData.number_monosaccharides.min,
-				props.initData.number_monosaccharides.max,
-			],
-			glyNumSugarsRange: [
-				props.initData.number_monosaccharides.min,
-				props.initData.number_monosaccharides.max,
-			],
-			glyNumSugarsInput: [
-				props.initData.number_monosaccharides.min,
-				props.initData.number_monosaccharides.max,
-			],
-			glyOrganisms: [],
-			glyOrgOperation: 'or',
-			glyType: '',
-			glySubType: '',
-			glySubTypeIsHidden: true,
-			glyProt: '',
-			glyMotif: '',
-			glyBioEnz: '',
-			glyPubId: '',
-			glyAdvSearchValError: [false, false, false, false, false],
+			proAdvSearchValError: [false, false, false, false, false],
 		});
 	};
 
@@ -213,18 +183,18 @@ const GlycanAdvancedSearch = (props) => {
 				{/* Buttons Top */}
 				<Grid item xs={12} sm={10}>
 					<Row className='gg-align-right pt-2 pb-2 mr-1'>
-						<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
+						<Button className='gg-btn-outline mr-4' onClick={clearProtein}>
 							Clear Fields
 						</Button>
 						<Button
 							className='gg-btn-blue'
-							onClick={props.searchGlycanAdvClick}
+							onClick={props.searchProteinAdvClick}
 							disabled={
-								!props.inputValue.glyAdvSearchValError.every(
+								!props.inputValue.proAdvSearchValError.every(
 									(err) => err === false
 								)
 							}>
-							Search Glycan
+							Search Protein
 						</Button>
 					</Row>
 				</Grid>
@@ -233,113 +203,81 @@ const GlycanAdvancedSearch = (props) => {
 					<FormControl fullWidth variant='outlined'>
 						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
-                                title={commonGlycanData.glycan_id.tooltip.title}
-                                text={commonGlycanData.glycan_id.tooltip.text}
-                                urlText={commonGlycanData.glycan_id.tooltip.urlText}
-                                url={commonGlycanData.glycan_id.tooltip.url}
+                                title={commonProteinData.uniprot_canonical_ac.tooltip.title}
+                                text={commonProteinData.uniprot_canonical_ac.tooltip.text}
+                                urlText={commonProteinData.uniprot_canonical_ac.tooltip.urlText}
+                                url={commonProteinData.uniprot_canonical_ac.tooltip.url}
                             />
-                            {commonGlycanData.glycan_id.name}
+                            {commonProteinData.uniprot_canonical_ac.name}
 						</Typography>
 						<MultilineAutoTextInput
 							fullWidth
-							inputValue={props.inputValue.glycanId}
-                            setInputValue={glycanIdChange}
-                            placeholder={advancedSearch.glycan_id.placeholder}
-							typeahedID={advancedSearch.glycan_id.typeahedID}
-							length={advancedSearch.glycan_id.length}
-							errorText={advancedSearch.glycan_id.errorText}
+							inputValue={props.inputValue.proteinId}
+                            setInputValue={proteinIdChange}
+                            placeholder={advancedSearch.uniprot_canonical_ac.placeholder}
+							typeahedID={advancedSearch.uniprot_canonical_ac.typeahedID}
+							length={advancedSearch.uniprot_canonical_ac.length}
+							errorText={advancedSearch.uniprot_canonical_ac.errorText}
 						/>
                         <ExampleExploreControl
-							setInputValue={glycanIdChange}
-							inputValue={advancedSearch.glycan_id.examples}
+							setInputValue={proteinIdChange}
+							inputValue={advancedSearch.uniprot_canonical_ac.examples}
 						/>
 					</FormControl>
 				</Grid>
-				{/* Monoisotopic Mass */}
+				{/* RefSeq Accession */}
 				<Grid item xs={12} sm={10}>
-					<FormControl fullWidth>
-						<Grid container spacing={2} alignItems='center'>
-							<Grid item xs={12} sm={9}>
-								<Typography className={'search-lbl'} gutterBottom>
-									<HelpTooltip
-                                        title={commonGlycanData.mass.tooltip.title}
-                                        text={commonGlycanData.mass.tooltip.text}
-                                    />
-                                    {commonGlycanData.mass.name}
-								</Typography>
-								<RangeInputSlider
-									step={10}
-									min={props.inputValue.glyMassRange[0]}
-									max={props.inputValue.glyMassRange[1]}
-									inputClass='gly-rng-input'
-									inputValue={props.inputValue.glyMassInput}
-                                    setInputValue={glyMassInputChange}
-									inputValueSlider={props.inputValue.glyMass}
-                                    setSliderInputValue={glyMassSliderChange}
-								/>
-							</Grid>
-							{/* Mass Type */}
-							<Grid item xs={12} sm={3}>
-								<Typography className={'search-lbl'} gutterBottom>
-									&nbsp;
-								</Typography>
-                                <FormControl 
-                                    variant='outlined' 
-                                    fullWidth
-                                >
-									<InputLabel className={'select-lbl-inline'}>
-                                        {commonGlycanData.mass_type.name}
-									</InputLabel>
-									<Select
-										value={props.inputValue.glyMassType}
-										onChange={glyMassTypeOnChange}
-										classes={{
-											root: 'select-menu-adv',
-										}}
-										labelWidth={85}>
-											{Object.keys(props.initData.glycan_mass)
-												.sort()
-												.map((key) => (
-													<MenuItem
-                                                        key={props.initData.glycan_mass[key].name}
-														value={props.initData.glycan_mass[key].name}>
-														{props.initData.glycan_mass[key].name}
-													</MenuItem>
-												))}
-									</Select>
-								</FormControl>
-							</Grid>
-						</Grid>
+					<FormControl fullWidth variant='outlined'>
+						<Typography
+							className={'search-lbl'}
+							gutterBottom
+						>
+							<HelpTooltip
+                                title={commonProteinData.refseq_ac.tooltip.title}
+                                text={commonProteinData.refseq_ac.tooltip.text}
+                                urlText={commonProteinData.refseq_ac.tooltip.urlText}
+                                url={commonProteinData.refseq_ac.tooltip.url}
+                            />
+                            {commonProteinData.refseq_ac.name}
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.proRefSeqId}
+                            setInputValue={proRefSeqIdChange}
+                            placeholder={advancedSearch.refseq_ac.placeholder}
+							typeahedID={advancedSearch.refseq_ac.typeahedID}
+							length={advancedSearch.refseq_ac.length}
+							errorText={advancedSearch.refseq_ac.errorText}
+						/>
+                        <ExampleExploreControl
+							setInputValue={proRefSeqIdChange}
+							inputValue={advancedSearch.refseq_ac.examples}
+						/>
 					</FormControl>
 				</Grid>
-				{/* No of Sugars */}
+				{/* Chemical Mass */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
-						<Grid container spacing={2} alignItems='center'>
-							<Grid item xs={12} sm={9}>
-								<Typography className={'search-lbl'} gutterBottom>
-									<HelpTooltip
-                                        title={commonGlycanData.number_monosaccharides.tooltip.title}
-                                        text={commonGlycanData.number_monosaccharides.tooltip.text}
-                                    />
-                                    {commonGlycanData.number_monosaccharides.name}
-								</Typography>
-								<RangeInputSlider
-									step={1}
-									min={props.inputValue.glyNumSugarsRange[0]}
-									max={props.inputValue.glyNumSugarsRange[1]}
-									inputClass='gly-rng-input'
-									inputValue={props.inputValue.glyNumSugarsInput}
-                                    setInputValue={glyNumSugarsInputChange}
-									inputValueSlider={props.inputValue.glyNumSugars}
-									setSliderInputValue={glyNumSugarsSliderChange}
-								/>
-							</Grid>
-						</Grid>
+						<Typography className={'search-lbl'} gutterBottom>
+							<HelpTooltip
+								title={commonProteinData.mass.tooltip.title}
+								text={commonProteinData.mass.tooltip.text}
+							/>
+							{commonProteinData.mass.name}
+						</Typography>
+						<RangeInputSlider
+							step={1}
+							min={props.inputValue.proMassRange[0]}
+							max={props.inputValue.proMassRange[1]}
+							inputClass='pro-rng-input'
+							inputValue={props.inputValue.proMassInput}
+							setInputValue={proMassInputChange}
+							inputValueSlider={props.inputValue.proMass}
+							setSliderInputValue={proMassSliderChange}
+						/>
 					</FormControl>
 				</Grid>
 				{/* Organisms */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
 							<Grid item xs={9} sm={9}>
@@ -383,9 +321,9 @@ const GlycanAdvancedSearch = (props) => {
 							</Grid>
 						</Grid>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Glycan Type */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl
 						fullWidth
 						variant='outlined'
@@ -413,10 +351,10 @@ const GlycanAdvancedSearch = (props) => {
 									))}
 						</Select>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Glycan Subtype */}
 
-				{!props.inputValue.glySubTypeIsHidden && (
+				{/* {!props.inputValue.glySubTypeIsHidden && (
 					<Grid item xs={12} sm={10}>
 						<FormControl
 							fullWidth
@@ -455,10 +393,10 @@ const GlycanAdvancedSearch = (props) => {
 							</Select>
 						</FormControl>
 					</Grid>
-				)}
+				)} */}
 
 				{/* Glycosylated Protein */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={'search-lbl'}
@@ -485,9 +423,9 @@ const GlycanAdvancedSearch = (props) => {
 							inputValue={advancedSearch.protein_identifier.examples}
 						/>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Glycan Motif */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={'search-lbl'}
@@ -514,9 +452,9 @@ const GlycanAdvancedSearch = (props) => {
 							inputValue={advancedSearch.glycan_motif.examples}
 						/>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Biosynthetic Enzyme */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
 							className={'search-lbl'}
@@ -543,9 +481,9 @@ const GlycanAdvancedSearch = (props) => {
 							inputValue={advancedSearch.enzyme.examples}
 						/>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Pubmed ID */}
-				<Grid item xs={12} sm={10}>
+				{/* <Grid item xs={12} sm={10}>
 					<FormControl
 						fullWidth
 						variant='outlined'
@@ -570,33 +508,33 @@ const GlycanAdvancedSearch = (props) => {
 							<FormHelperText className={"error-text"} error>
 								{advancedSearch.pmid.errorText}
 							</FormHelperText>
-						)}
+						)} */}
 						{/* <AutoTextInput
                         inputValue={glyPubId} setInputValue={glycPubIdChange}
                         placeholder="Enter the Pubmed ID"
                         typeahedID = "glycan_pmid"
                         /> */}
-                        <ExampleExploreControl
+                        {/* <ExampleExploreControl
 							setInputValue={glyPubIdChange}
 							inputValue={advancedSearch.pmid.examples}
 						/>
 					</FormControl>
-				</Grid>
+				</Grid> */}
 				{/* Buttons Buttom */}
 				<Grid item xs={12} sm={10}>
 					<Row className='gg-align-right pt-3 mb-2 mr-1'>
-						<Button className='gg-btn-outline mr-4' onClick={clearGlycan}>
+						<Button className='gg-btn-outline mr-4' onClick={clearProtein}>
 							Clear Fields
 						</Button>
 						<Button
 							className='gg-btn-blue'
-							onClick={props.searchGlycanAdvClick}
+							onClick={props.searchProteinAdvClick}
 							disabled={
-								!props.inputValue.glyAdvSearchValError.every(
+								!props.inputValue.proAdvSearchValError.every(
 									(err) => err === false
 								)
 							}>
-							Search Glycan
+							Search Protein
 						</Button>
 					</Row>
 				</Grid>
@@ -605,11 +543,9 @@ const GlycanAdvancedSearch = (props) => {
 	);
 };
 
-export default GlycanAdvancedSearch;
+export default ProteinAdvancedSearch;
 
-GlycanAdvancedSearch.propTypes = {
+ProteinAdvancedSearch.propTypes = {
 	initData: PropTypes.object,
 	inputValue: PropTypes.object,
-	setCompositionData: PropTypes.func,
-	getSelectionValue: PropTypes.func,
 };

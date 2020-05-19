@@ -422,7 +422,7 @@ const ProteinDetail = props => {
                             {mass.chemical_mass}
                           </div>
                           <div>
-                            <strong>{proteinStrings.refSeq_ac.name}: </strong>{" "}
+                            <strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
                             <Link
                               href={refseq.url}
                               target="_blank"
