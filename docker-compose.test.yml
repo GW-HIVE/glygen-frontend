@@ -13,9 +13,9 @@ services:
         - REACT_APP_DATA=https://data.tst.glygen.org
         - REACT_APP_SPARQL=https://sparql.tst.glygen.org
         - REACT_APP_BASENAME=/
-        - PORT=80
-    # ports:
-    #   - '4040:80'
+        - PORT=4040
+    ports:
+      - '4040:80'
 networks:
   default:
     external:
