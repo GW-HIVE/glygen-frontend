@@ -718,3 +718,13 @@ sub {
 .text-blue:hover p {
 	color: #fff !important;
 }
+
+.univ-logo {
+	padding: 10px 20px;
+	max-width: 150px;
+	margin: 0 auto;
+	line-height: 100px;
+}
+.univ-logo Image {
+	display: inline-block !important;
+}
