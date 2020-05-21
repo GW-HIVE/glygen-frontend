@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import StoryAboutUs from "../components/about/StoryAboutUs";
-// import OurTeam from "../components/about/OurTeam";
+import OurTeam from "../components/about/OurTeam";
 import UnivLogos from "../components/about/UnivLogos";
 import { logActivity } from "../data/logging";
 // import "../css/About-map.css";
@@ -23,7 +23,7 @@ const About = (props) => {
 			<CssBaseline />
 			<div style={{ backgroundColor: "#fff" }}>
 				<StoryAboutUs />
-				{/* <OurTeam /> */}
+				<OurTeam />
 				<UnivLogos />
 			</div>
 		</React.Fragment>

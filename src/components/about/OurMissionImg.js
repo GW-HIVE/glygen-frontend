@@ -4,14 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import missionBgImg from "../../images/about/about-mission.png";
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedCard: {
 		position: "relative",
 		backgroundColor: theme.palette.grey[800],
 		color: theme.palette.common.white,
-		// marginBottom: theme.spacing(4),
-		// backgroundImage: 'url(https://source.unsplash.com/random)',
 		backgroundSize: "cover",
 		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center",
@@ -26,17 +25,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	mainFeaturedCardContent: {
 		position: "relative",
-		height: "400px !important",
+		// height: "400px !important",
 		textAlign: "center",
-		// padding: theme.spacing(3),
+		padding: theme.spacing(6),
 		[theme.breakpoints.up("md")]: {
 			padding: theme.spacing(12),
-			// paddingRight: 0,
 		},
-		// display: "flex",
-		// alignItems: "center",
-		// flexWrap: "wrap",
-		// 	justifyContent: center !important;
 	},
 }));
 
@@ -47,12 +41,12 @@ export default function OurMissionImg(props) {
 	return (
 		<Paper
 			className={classes.mainFeaturedCard}
-			style={{ backgroundImage: `url(${post.image})` }}>
+			style={{ backgroundImage: `url(${missionBgImg})` }}>
 			{
 				<img
 					style={{ display: "none" }}
-					src={post.image}
-					alt={post.imageText}
+					src={missionBgImg}
+					alt="our mission background img"
 				/>
 			}
 			<div className={classes.overlay} />
@@ -60,11 +54,12 @@ export default function OurMissionImg(props) {
 				<Grid item sm={12} md={12}>
 					<div className={classes.mainFeaturedCardContent}>
 						<Typography
+							style={{ fontWeight: "200" }}
 							component="h1"
 							variant="h4"
 							color="inherit"
 							gutterBottom>
-							{post.title}
+							Our <span style={{ fontWeight: "900" }}>Mission</span>
 						</Typography>
 						<br />
 						<Typography component="h1" variant="h5" color="inherit" paragraph>

@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Image } from "react-bootstrap";
 import ugaImg from "../../images/about/univ-logo/uga.png";
 import gwImg from "../../images/about/univ-logo/gw.png";
 import georgetownImg from "../../images/about/univ-logo/georgetown.png";
