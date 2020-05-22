@@ -100,7 +100,7 @@ const OurTeam = (props) => {
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">
-						Key Collaborators /Co-Investigators
+						Key Collaborators / Co-Investigators
 					</h2>
 					<h3>Integration with EBI and NCBI</h3>
 					<TeamMembersCard

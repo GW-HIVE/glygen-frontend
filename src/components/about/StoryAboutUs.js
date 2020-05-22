@@ -10,6 +10,7 @@ import OurMissionImg from "../../components/about/OurMissionImg";
 import nihImg from "../../images/about/logo-NIH.svg";
 import glycosciImg from "../../images/about/logo-Glycoscience.svg";
 import WorldMapImg from "../about/WorldMapImg";
+import Hidden from "@material-ui/core/Hidden";
 
 const ourMissionImd = {
 	title: "Our Mission",
@@ -188,7 +189,9 @@ const StoryAboutUs = (props) => {
 							md={12}
 							lg={6}
 							className="gg-align-middle gg-align-center">
-							<WorldMapImg />
+							<Hidden xsDown>
+								<WorldMapImg />
+							</Hidden>
 						</Col>
 					</Row>
 				</Container>
