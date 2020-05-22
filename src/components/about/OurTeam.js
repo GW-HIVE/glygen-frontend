@@ -3,12 +3,11 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { Row, Col, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import teamBgImg from "../../images/about/team-bg.jpg";
 import teamMembersData from "../../data/json/teamMembers";
 import TeamMembersCard from "../about/TeamMembersCard";
-// import willYorkImg from "../../images/about/team/Will-York.png";
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedCard: {
@@ -64,7 +63,6 @@ const OurTeam = (props) => {
 									gutterBottom>
 									MEET OUR
 								</Typography>
-								{/* <br /> */}
 								<Typography
 									style={{ fontWeight: "200" }}
 									component="h1"

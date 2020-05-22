@@ -12,7 +12,6 @@ const TeamMembersCard = (props) => {
 						<h3>{json.subheading}</h3>
 					</>
 				))} */}
-
 				<Row>
 					{props.data.map((json) => (
 						<Col className="team">

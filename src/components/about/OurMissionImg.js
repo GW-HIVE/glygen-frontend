@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	mainFeaturedCardContent: {
 		position: "relative",
-		// height: "400px !important",
 		textAlign: "center",
 		padding: theme.spacing(6),
 		[theme.breakpoints.up("md")]: {

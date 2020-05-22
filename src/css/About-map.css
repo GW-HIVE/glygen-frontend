@@ -1,8 +1,8 @@
 /* World Map hot-spot on hover */
 ul#continents {
 	list-style: none;
-	background-image: url(../images/about/about_world_map-circle.svg) no-repeat 0
-		0;
+	/* background-image: url(../images/about/about_world_map-circle.svg) no-repeat 0
+		0; */
 	position: relative;
 	width: 580px;
 	height: 268px;
@@ -70,8 +70,8 @@ ul#continents li a:hover span {
 }
 @media only screen and (max-width: 767px) {
 	ul#continents {
-		background-image: url(../images/about/about-world-map-mobile-circle.svg)
-			no-repeat 0 0;
+		/* background-image: url(../images/about/about-world-map-mobile-circle.svg)
+			no-repeat 0 0; */
 		width: auto;
 		height: 150px;
 	}

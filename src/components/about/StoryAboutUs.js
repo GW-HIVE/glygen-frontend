@@ -7,10 +7,9 @@ import ugaLogo from "../../images/about/logo_uga_about.svg";
 import gwuLogo from "../../images/about/logo_gwu_about.svg";
 import missionImg from "../../images/about/about-mission.png";
 import OurMissionImg from "../../components/about/OurMissionImg";
-import worldMap from "../../images/about/about-world-map-circle.svg";
 import nihImg from "../../images/about/logo-NIH.svg";
 import glycosciImg from "../../images/about/logo-Glycoscience.svg";
-// import "../css/About.css";
+import WorldMapImg from "../about/WorldMapImg";
 
 const ourMissionImd = {
 	title: "Our Mission",
@@ -189,11 +188,7 @@ const StoryAboutUs = (props) => {
 							md={12}
 							lg={6}
 							className="gg-align-middle gg-align-center">
-							<Image
-								src={worldMap}
-								alt="global map image"
-								className="img-responsive"
-							/>
+							<WorldMapImg />
 						</Col>
 					</Row>
 				</Container>
