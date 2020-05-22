@@ -12,9 +12,9 @@ const TeamMembersCard = (props) => {
 						<h3>{json.subheading}</h3>
 					</>
 				))} */}
-				<Row>
+				<Row className="gg-align-center">
 					{props.data.map((json) => (
-						<Col className="team">
+						<Col md={3} className="team">
 							<>
 								{json.url ? (
 									<>
