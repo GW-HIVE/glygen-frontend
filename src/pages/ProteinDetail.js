@@ -32,6 +32,9 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
 // import ReactCopyClipboard from'../components/ReactCopyClipboard';
 import routeConstants from "../data/json/routeConstants";
+import FunctionList from "../components/FunctionList";
+import GoannotationList from "../components/Goannotationlist";
+import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
 
 import stringConstants from "../data/json/stringConstants";
 
@@ -41,12 +44,12 @@ const items = [
   { label: "General", id: "general" },
   { label: "Species", id: "species" },
   { label: "Function", id: "function" },
-  { label: "Go Annotation", id: "go annotation" },
+  { label: "Go Annotation", id: "go_annotation" },
   { label: "Glycosylation", id: "glycosylation" },
-  { label: "Sequence", id: "seqence" },
+  { label: "Sequence", id: "sequence" },
   { label: "Pathway", id: "pathway" },
   { label: "Isoforms", id: "isoforms" },
-  { label: "Homologs", id: "homomlogs" },
+  { label: "Homologs", id: "homologs" },
   { label: "Disease", id: "disease" },
   { label: "Mutation", id: "mutation" },
   { label: "Expression Tissue", id: "expressionT" },
@@ -67,6 +70,38 @@ function addCommas(nStr) {
   }
   return x1 + x2;
 }
+
+const getItemsPathway = data => {
+  let itemspathway = [];
+
+  //check data.
+  if (data.pathway) {
+    for (let pathwayitem of data.pathway) {
+      let found = "";
+      for (let resourceitem of itemspathway) {
+        if (resourceitem.resource === pathwayitem.resource) {
+          found = true;
+          resourceitem.links.push({
+            url: pathwayitem.url,
+            id: pathwayitem.id
+          });
+        }
+      }
+      if (!found) {
+        itemspathway.push({
+          resource: pathwayitem.resource,
+          links: [
+            {
+              url: pathwayitem.url,
+              id: pathwayitem.id
+            }
+          ]
+        });
+      }
+    }
+  }
+  return itemspathway;
+};
 
 const getItemsCrossRef = data => {
   let itemscrossRef = [];
@@ -100,12 +135,28 @@ const getItemsCrossRef = data => {
   return itemscrossRef;
 };
 
+// useEffect(() => {
+//   const withImage = detailData.glycosylation.filter(
+//     item => item.glytoucan_ac
+//   );
+//   const withoutImage = detailData.glycosylation.filter(
+//     item => !item.glytoucan_ac
+//   );
+//   setGlycosylationWithImage(withImage);
+//   setGlycosylationWithoutImage(withoutImage);
+// }, [detailData]);
+
 const ProteinDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
-  // const [glycosylationWithImage, setGlycosylationWithImage] = useState([]); // const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState( // [] // );
+  const [itemsPathway, setItemsPathway] = useState([]);
+  // const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
+  // const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
+  //   []
+  // );
+
   useEffect(() => {
     const getProteinDetailData = getProteinDetail(id);
 
@@ -114,7 +165,7 @@ const ProteinDetail = props => {
         console.log(data.code);
       } else {
         setItemsCrossRef(getItemsCrossRef(data));
-
+        setItemsPathway(getItemsPathway(data));
         setDetailData(data);
       }
     });
@@ -124,14 +175,69 @@ const ProteinDetail = props => {
     });
     // eslint-disable-next-line
   }, []);
-  // useEffect(() => { // const withImage = detailData.glycosylation.filter( // item => item.glytoucan_ac // ); // const withoutImage = detailData.glycosylation.filter( // item => !item.glytoucan_ac // );
-  // setGlycosylationWithImage(withImage); // setGlycosylationWithoutImage(withoutImage); // }, [detailData]);
+  // useEffect(() => {
+  //   const withImage = detailData.glycosylation.filter(
+  //     item => item.glytoucan_ac
+  //   );
+  //   const withoutImage = detailData.glycosylation.filter(
+  //     item => !item.glytoucan_ac
+  //   );
+  //   setGlycosylationWithImage(withImage);
+  //   setGlycosylationWithoutImage(withoutImage);
+  // }, [detailData]);
 
-  if (detailData.mass) {
-    detailData.mass = addCommas(detailData.mass);
+  if (detailData.isoforms) {
+    for (var i = 0; i < detailData.isoforms.length; i++) {
+      // assign the newly result of running formatSequence() to replace the old value
+      // detailData.isoforms[i].sequence.sequence = formatSequence(detailData.isoforms[i].sequence.sequence);
+      detailData.isoforms[i].locus.start_pos = addCommas(
+        detailData.isoforms[i].locus.start_pos
+      );
+      detailData.isoforms[i].locus.end_pos = addCommas(
+        detailData.isoforms[i].locus.end_pos
+      );
+      if (
+        detailData.isoforms[i].locus &&
+        detailData.isoforms[i].locus.evidence
+      ) {
+        detailData.isoforms[i].evidence = detailData.isoforms[i].locus.evidence;
+        groupEvidences([detailData.isoforms[i]]);
+      }
+    }
   }
-  if (detailData.mass_pme) {
-    detailData.mass_pme = addCommas(detailData.mass_pme);
+  if (detailData.orthologs) {
+    for (var i = 0; i < detailData.orthologs.length; i++) {
+      // assign the newly result of running formatSequence() to replace the old value
+      //detailData.orthologs[i].sequence.sequence = formatSequence(detailData.orthologs[i].sequence.sequence);
+      if (detailData.orthologs[i] && detailData.orthologs[i].evidence) {
+        detailData.orthologs[i].evidence = detailData.orthologs[i].evidence;
+        groupEvidences([detailData.orthologs[i]]);
+      }
+    }
+  }
+
+  if (detailData.go_annotation && detailData.go_annotation.categories) {
+    // Sorting Go term categories in specific order - 1. "MOLECULAR FUNCTION", 2. "BIOLOGICAL PROCESS", 3. "CELLULAR COMPONENT".
+    // This will help mustache template to show categories in specific order.
+    var mapGOTerm = {
+      "MOLECULAR FUNCTION": 1,
+      "BIOLOGICAL PROCESS": 2,
+      "CELLULAR COMPONENT": 3
+    };
+
+    detailData.go_annotation.categories = detailData.go_annotation.categories.sort(
+      function(a, b) {
+        var resVal1 = mapGOTerm[a.name.toUpperCase()];
+        var resVal2 = mapGOTerm[b.name.toUpperCase()];
+
+        return resVal1 - resVal2;
+      }
+    );
+
+    for (var i = 0; i < detailData.go_annotation.categories.length; i++) {
+      // assign the newly result of running formatSequence() to replace the old value
+      groupEvidences(detailData.go_annotation.categories[i].go_terms);
+    }
   }
 
   const {
@@ -141,9 +247,17 @@ const ProteinDetail = props => {
     gene,
     species,
     publication,
+    isoforms,
+    orthologs,
     glycosylation,
+    expression_tissue,
+    expression_disease,
     mutation,
-    refseq
+    refseq,
+    sequence,
+    go_annotation,
+    site_annotation,
+    function: functions
   } = detailData;
   const speciesEvidence = groupSpeciesEvidences(species);
   const glycoSylationColumns = [
@@ -200,6 +314,87 @@ const ProteinDetail = props => {
         <Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
           {" "}
           {row.position}{" "}
+        </Navbar.Text>
+      )
+    }
+  ];
+  const mutationColumns = [
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.disease.doid}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+    {
+      dataField: "annotation",
+      text: "Annotation",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "end_pos",
+      text: "End pos",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+
+    {
+      dataField: "start_pos",
+      text: "Start pos",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+
+    {
+      dataField: "sequence",
+      text: "Sequence",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+
+    {
+      dataField: "type",
+      text: "Type",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+
+    {
+      dataField: "disease",
+      text: "Disease",
+      defaultSortField: "disease",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <Navbar.Text
+          as={NavLink}
+          to={routeConstants.glycanDetail + row.glytoucan_ac}
+        >
+          {" "}
+          {row.disease.doid}
+          {row.disease.name}
         </Navbar.Text>
       )
     }
@@ -419,7 +614,7 @@ const ProteinDetail = props => {
                             <strong>
                               {proteinStrings.chemical_mass.name}:{" "}
                             </strong>
-                            {mass.chemical_mass}
+                            {addCommas(mass.chemical_mass)}
                           </div>
                           <div>
                             <strong>{proteinStrings.refSeq_ac.name}: </strong>{" "}
@@ -533,6 +728,49 @@ const ProteinDetail = props => {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
+
+            <Accordion
+              id="sequence"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.sequence.title}
+                      text={DetailTooltips.protein.sequence.text}
+                      urlText={DetailTooltips.protein.sequence.urlText}
+                      url={DetailTooltips.protein.sequence.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Sequence</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("species", collapsed.sequence)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.sequence ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <ProteinSequenceDisplay
+                      sequenceObject={sequence}
+                      glycosylation={glycosylation}
+                      mutation={mutation}
+                      siteAnnotation={site_annotation}
+                    />
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
             {/* crossref */}
             <Accordion
               id="crossref"
@@ -602,6 +840,7 @@ const ProteinDetail = props => {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
+
             {/* publication */}
             <Accordion
               id="publication"
