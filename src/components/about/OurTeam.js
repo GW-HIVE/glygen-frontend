@@ -88,13 +88,17 @@ const OurTeam = (props) => {
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">Principal Investigators</h2>
-					<TeamMembersCard data={teamMembersData.pi} />
+					<TeamMembersCard
+						data={teamMembersData.pi && teamMembersData.pi.people}
+					/>
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">Advocates</h2>
-					<TeamMembersCard data={teamMembersData.advocates} />
+					<TeamMembersCard
+						data={teamMembersData.advocates && teamMembersData.advocates.people}
+					/>
 				</Container>
 			</section>
 			<section className="content-box-md about-section-bg">
@@ -104,32 +108,58 @@ const OurTeam = (props) => {
 					</h2>
 					<h3>Integration with EBI and NCBI</h3>
 					<TeamMembersCard
-						data={teamMembersData.collaborators.ebiIntegration}
+						data={
+							teamMembersData.collaborators.ebiIntegration &&
+							teamMembersData.collaborators.ebiIntegration.people
+						}
 					/>
 					<h3>Tool Development and Data Integration</h3>
 					<TeamMembersCard
-						data={teamMembersData.collaborators.dataIntegration}
+						data={
+							teamMembersData.collaborators.dataIntegration &&
+							teamMembersData.collaborators.dataIntegration.people
+						}
 					/>
 					<h3>Glycan Array Database Partners</h3>
-					<TeamMembersCard data={teamMembersData.collaborators.arrayDatabase} />
+					<TeamMembersCard
+						data={
+							teamMembersData.collaborators.arrayDatabase &&
+							teamMembersData.collaborators.arrayDatabase.people
+						}
+					/>
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">Data Management Team</h2>
-					<TeamMembersCard data={teamMembersData.dataManagement} />
+					<TeamMembersCard
+						data={
+							teamMembersData.dataManagement &&
+							teamMembersData.dataManagement.people
+						}
+					/>
 				</Container>
 			</section>
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">Web Developers</h2>
-					<TeamMembersCard data={teamMembersData.webDevelopers} />
+					<TeamMembersCard
+						data={
+							teamMembersData.webDevelopers &&
+							teamMembersData.webDevelopers.people
+						}
+					/>
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">Former Members</h2>
-					<TeamMembersCard data={teamMembersData.formerMembers} />
+					<TeamMembersCard
+						data={
+							teamMembersData.formerMembers &&
+							teamMembersData.formerMembers.people
+						}
+					/>
 				</Container>
 			</section>
 		</React.Fragment>

@@ -102,7 +102,7 @@ const StoryAboutUs = (props) => {
 						<Col sm={12} md={12} lg={12}>
 							<VerticalHeading post={vertHeadOurStory} />
 							<Row>
-								<Col>
+								<Col xs={12}>
 									<p>
 										GlyGen is an international project funded by The National
 										Institutes of Health to facilitate glycoscience research by
@@ -111,7 +111,7 @@ const StoryAboutUs = (props) => {
 										biology, developmental biology and biochemistry.
 									</p>
 								</Col>
-								<Col>
+								<Col xs={12}>
 									<p>
 										GlyGen retrieves information from multiple international
 										data sources and integrates and harmonizes this data. GlyGen
