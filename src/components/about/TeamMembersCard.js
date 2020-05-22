@@ -25,7 +25,7 @@ const TeamMembersCard = (props) => {
 											rel="noopener noreferrer">
 											<Image
 												className="img-circle"
-												src={json.image}
+												src={process.env.PUBLIC_URL + json.image}
 												alt={json.imageText}
 											/>
 										</a>
@@ -40,7 +40,7 @@ const TeamMembersCard = (props) => {
 									<>
 										<Image
 											className="img-circle"
-											src={json.image}
+											src={process.env.PUBLIC_URL + json.image}
 											alt={json.imageText}
 										/>
 										<h5>{json.name}</h5>
