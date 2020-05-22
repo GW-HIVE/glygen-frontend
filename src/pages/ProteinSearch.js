@@ -33,7 +33,20 @@ const ProteinSearch = (props) => {
 			proMass: [259, 3906489],
 			proMassInput: [259, 3906489],
 			proMassRange: [259, 3906489],
-			proAdvSearchValError: [false, false, false, false, false]
+			proOrganism: {id:"0", name:"All"},
+			proteinName: '',
+			proGeneName: '',
+			proGOName: '',
+			proGOId: '',
+			proGlytoucanAc: '',
+			proAminoAcid: [],
+			proAminoAcidOperation: 'or',
+			proSequence: '',
+			proPathwayId: '',
+			proPubId: '',
+			proRelation: '',
+			proAdvSearchValError: [false, false, false, false, false,
+				false, false, false, false]
 		}
 	);
 	const [proActTabKey, setProActTabKey] = useState('simple_search');
@@ -70,7 +83,8 @@ const ProteinSearch = (props) => {
 					[
 						Math.floor(initData.protein_mass.min),
 						Math.ceil(initData.protein_mass.max)
-					]
+					],
+				proOrganism: {id:"0", name:"All"},
 
 			});
 
@@ -117,7 +131,39 @@ const ProteinSearch = (props) => {
 								: [
 									Math.floor(data.query.mass.min),
 									Math.ceil(data.query.mass.max),
-								  ]
+								  ],
+							proOrganism:
+							data.query.organism === undefined
+								? {id:"0", name:"All"}
+								: {id:data.query.organism.id, name:data.query.organism.name},
+							proGOName:
+							data.query.go_term === undefined
+							? ''
+							: data.query.go_term,
+							proGOId:
+							data.query.go_id === undefined
+							? ''
+							: data.query.go_id,
+							proGlytoucanAc:
+							data.query.glytoucan_ac === undefined
+							? ''
+							: data.query.glytoucan_ac,
+							proSequence:
+							data.query.sequence === undefined
+							? ''
+							: data.query.sequence,	
+							proPathwayId:
+							data.query.pathway_id === undefined
+							? ''
+							: data.query.pathway_id,
+							proPubId:
+							data.query.pmid === undefined
+							? ''
+							: data.query.pmid,				
+							proRelation:
+							data.query.relation === undefined
+							? ''
+							: data.query.relation
 						});
 
 						setProActTabKey("advanced_search");
@@ -179,8 +225,8 @@ const ProteinSearch = (props) => {
  * @param {string} input_glycosylated_aa_operation user input
  * @return {string} returns text or id
  */
-function searchJson(input_query_type, input_protein_id, input_refseq_id, input_mass_min, input_mass_max, input_organism,
-    input_gene_name, input_protein_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
+function searchJson(input_query_type, input_protein_id, input_refseq_id, input_mass_min, input_mass_max, input_organism, input_protein_name,
+    input_gene_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
     input_pmid,input_glycan,input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
 	
 	var uniprot_id = input_protein_id;
@@ -211,8 +257,8 @@ function searchJson(input_query_type, input_protein_id, input_refseq_id, input_m
             "glytoucan_ac": input_glycan
         }
     }
-    var selected_organism = undefined;
-    if (input_organism && input_organism.id != "0") {
+	var selected_organism = undefined;
+    if (input_organism && input_organism.id !== "0") {
         selected_organism = {
             "id": input_organism.id,
             "name": input_organism.name
@@ -237,17 +283,17 @@ function searchJson(input_query_type, input_protein_id, input_refseq_id, input_m
     var formjson = {
         [commonProteinData.operation.id]: "AND",
 		[proteinData.advanced_search.query_type.id]: input_query_type,
-		[commonProteinData.mass.id]: input_mass,
-        sequence: sequences ?sequences:undefined,
-		organism: selected_organism,
+		[commonProteinData.uniprot_canonical_ac.id]: uniprot_id ?uniprot_id: undefined,
 		[commonProteinData.refseq_ac.id]: input_refseq_id ?input_refseq_id: undefined,
-        protein_name: input_protein_name? input_protein_name: undefined,
-        gene_name: input_gene_name?input_gene_name: undefined,
-        go_term: input_go_term? input_go_term: undefined,
-        go_id: input_go_id? input_go_id: undefined,
+		[commonProteinData.mass.id]: input_mass,
+		[commonProteinData.organism.id]: selected_organism,
+		[commonProteinData.protein_name.id]: input_protein_name? input_protein_name: undefined,
+		[commonProteinData.gene_name.id]: input_gene_name? input_gene_name: undefined,
+		[commonProteinData.go_term.id]: input_go_term? input_go_term: undefined,
+		[commonProteinData.go_id.id]: input_go_id? input_go_id: undefined,
+		sequence: sequences ?sequences:undefined,
         pmid: input_pmid? input_pmid: undefined,
         pathway_id: input_pathway_id ?input_pathway_id: undefined,
-		[commonProteinData.uniprot_canonical_ac.id]: uniprot_id ?uniprot_id: undefined,
         glycan: glycans?glycans: undefined,
         glycosylated_aa: glyco_aa, 
         glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
@@ -262,7 +308,11 @@ function searchJson(input_query_type, input_protein_id, input_refseq_id, input_m
 			proAdvSearchData.proRefSeqId,
 			proAdvSearchData.proMass[0],
 			proAdvSearchData.proMass[1],
-			undefined
+			proAdvSearchData.proOrganism,
+			proAdvSearchData.proteinName,
+			proAdvSearchData.geneName,
+			proAdvSearchData.goTerm,
+			proAdvSearchData.goId
 		);		
 		logActivity("user", id, "Performing Advanced Search");
 		let message = "Advanced Search query=" + JSON.stringify(formObject);
