@@ -87,48 +87,48 @@ const OurTeam = (props) => {
 			</section>
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
-					<h2 className="section-heading">Principal Investigators</h2>
+					{/* <h2 className="section-heading">{teamMembersData.pi.heading}</h2> */}
 					<TeamMembersCard data={teamMembersData.pi} />
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
-					<h2 className="section-heading">Advocates</h2>
+					{/* <h2 className="section-heading">Advocates</h2> */}
 					<TeamMembersCard data={teamMembersData.advocates} />
 				</Container>
 			</section>
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
 					<h2 className="section-heading">
-						Key Collaborators / Co-Investigators
+						{teamMembersData.collaborators.heading}
 					</h2>
-					<h3>Integration with EBI and NCBI</h3>
+					{/* <h3>Integration with EBI and NCBI</h3> */}
 					<TeamMembersCard
 						data={teamMembersData.collaborators.ebiIntegration}
 					/>
-					<h3>Tool Development and Data Integration</h3>
+					{/* <h3>Tool Development and Data Integration</h3> */}
 					<TeamMembersCard
 						data={teamMembersData.collaborators.dataIntegration}
 					/>
-					<h3>Glycan Array Database Partners</h3>
+					{/* <h3>Glycan Array Database Partners</h3> */}
 					<TeamMembersCard data={teamMembersData.collaborators.arrayDatabase} />
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
-					<h2 className="section-heading">Data Management Team</h2>
+					{/* <h2 className="section-heading">Data Management Team</h2> */}
 					<TeamMembersCard data={teamMembersData.dataManagement} />
 				</Container>
 			</section>
 			<section className="content-box-md about-section-bg">
 				<Container maxWidth="lg">
-					<h2 className="section-heading">Web Developers</h2>
+					{/* <h2 className="section-heading">Web Developers</h2> */}
 					<TeamMembersCard data={teamMembersData.webDevelopers} />
 				</Container>
 			</section>
 			<section className="content-box-md">
 				<Container maxWidth="lg">
-					<h2 className="section-heading">Former Members</h2>
+					{/* <h2 className="section-heading">Former Members</h2> */}
 					<TeamMembersCard data={teamMembersData.formerMembers} />
 				</Container>
 			</section>

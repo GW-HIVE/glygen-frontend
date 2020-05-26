@@ -6,15 +6,12 @@ const TeamMembersCard = (props) => {
 	return (
 		<React.Fragment>
 			<Container maxWidth="lg">
-				{/* {props.data.map((json) => (
-					<>
-						<h2 className="section-heading">{json.heading}</h2>
-						<h3>{json.subheading}</h3>
-					</>
-				))} */}
-				<Row>
-					{props.data.map((json) => (
-						<Col className="team">
+				<h2 className="section-heading">{props.data.heading}</h2>
+				<h3>{props.data.subheading}</h3>
+
+				<Row className="gg-align-center">
+					{props.data.people.map((json) => (
+						<Col md={3} className="team">
 							<>
 								{json.url ? (
 									<>
