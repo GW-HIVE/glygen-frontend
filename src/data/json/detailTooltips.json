@@ -74,7 +74,7 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "glycosylation": {
+    "glycosylations": {
       "title": "Glycosylation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
@@ -116,13 +116,13 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "expression tissue": {
+    "expression_tissue": {
       "title": " Expression Tissue",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "expression disease": {
+    "expression_disease": {
       "title": " Expression Disease",
       "text": "Add some unique text here.",
       "urlText": "Read more...",

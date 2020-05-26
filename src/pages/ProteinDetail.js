@@ -472,20 +472,19 @@ const ProteinDetail = props => {
               </Grid>
             </Row>
           </div>
-          {/* <div className='gg-download-btn-width'>
-						<DownloadButton
-							types={[
-							
-								{
-									display: ' Protein data (*.csv)',
-									type: 'json',
-									data: 'protein_detail',
-								},
-							]}
-							dataType='protein_detail'
-							dataId={id}
-						/>
-					</div> */}
+          <div className="gg-download-btn-width">
+            <DownloadButton
+              types={[
+                {
+                  display: " Protein data (*.csv)",
+                  type: "json",
+                  data: "protein_detail"
+                }
+              ]}
+              dataType="protein_detail"
+              dataId={id}
+            />
+          </div>
 
           <React.Fragment>
             <Helmet>
@@ -614,7 +613,7 @@ const ProteinDetail = props => {
                             <strong>
                               {proteinStrings.chemical_mass.name}:{" "}
                             </strong>
-                            {addCommas(mass.chemical_mass)}
+                            {addCommas(mass.chemical_mass)} -Da
                           </div>
                           <div>
                             <strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
@@ -724,6 +723,47 @@ const ProteinDetail = props => {
                         <p className="no-data-msg">No data available.</p>
                       )}
                     </Row>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+
+            {/*  function */}
+            <Accordion
+              id="function"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.function.title}
+                      text={DetailTooltips.protein.function.text}
+                      urlText={DetailTooltips.protein.function.urlText}
+                      url={DetailTooltips.protein.function.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Function</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("species", collapsed.function)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.function ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <Table hover fluid>
+                      <FunctionList functions={functions} />
+                    </Table>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>

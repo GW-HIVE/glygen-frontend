@@ -1,0 +1,133 @@
+/* --------------------------
+    Sequence Highlighting
+ ----------------------------*/
+.highlight-row {
+  font-family: monospace;
+}
+
+.highlight-line-number {
+  white-space: pre;
+}
+
+.highlight-section {
+  position: relative;
+}
+
+.highlight-highlight {
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.highlight-highlight[data-type="mutation"] .highlight-highlight-area {
+  /* background-image: linear-gradient(transparent, rgb(211, 113, 211)); */
+
+  background: rgb(131, 235, 131);
+}
+
+.highlight-highlight[data-type="o_link_glycosylation"]
+  .highlight-highlight-area {
+  /* background-image: linear-gradient(rgba(100, 236, 100, 1), transparent);   */
+  border-bottom: 3px solid blue;
+}
+/*     */
+
+.highlight-highlight[data-type="n_link_glycosylation"]
+  .highlight-highlight-area {
+  border-bottom: 3px solid red;
+}
+
+.highlight-highlight[data-type="site_annotation"] .highlight-highlight-area {
+  /* background-image: linear-gradient(transparent, rgb(211, 113, 211)); */
+  background: 3px orange;
+  /* border-top: 3px orange; */
+  padding-top: 1px;
+}
+#sequnce_highlight {
+  display: block;
+  padding: 9px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: rgba(0, 0, 0);
+  background-color: #e6e6e6;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow-y: scroll;
+}
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  margin-left: 2px;
+  font-size: 75%;
+  color: white;
+  font-weight: 700;
+  line-height: 1;
+  background-color: #777;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.45rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+/*n_link_glycosylation"*/
+.sequnce1 {
+  border-bottom: 3px solid red;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+/*o_link_glycosylation"*/
+.sequnce2 {
+  border-bottom: 3px solid blue;
+  font-family: monospace;
+  font-size: 14px;
+}
+/*mutation*/
+.sequnce3 {
+  background: rgb(131, 235, 131);
+  font-family: monospace;
+  font-size: 14px;
+}
+/*Sequon*/
+.sequnce4 {
+  background: rgb(244, 151, 37);
+  font-family: monospace;
+  font-size: 14px;
+}
+.highlight-panel-categories {
+  margin: 0;
+  padding: 5px;
+  width: 180px;
+  overflow: auto;
+}
+.sequence-panel {
+  margin-left: 5%;
+}
+@media (max-width: 1280px) {
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .active {
+    order: -1;
+    flex: 1 0 100%;
+  }
+}
+
+.sequencePreClass {
+  border: 0px;
+  padding: 0px;
+  margin-bottom: 0px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.highlight-text {
+  font-family: monospace !important;
+  font-size: 14px;
+  position: relative;
+  z-index: 10;
+}
