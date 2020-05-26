@@ -43,7 +43,7 @@ const mainFeaturedCard = {
 };
 const featuredCards = [
 	{
-		title: "Glycan",
+		title: "Glycan Search",
 		description:
 			"Search for glycan structures based on their chemical and structural properties.",
 		image: glycanImg,
@@ -51,7 +51,7 @@ const featuredCards = [
 		to: routeConstants.glycanSearch,
 	},
 	{
-		title: "Protein",
+		title: "Protein Search",
 		description:
 			"Search for proteins based on their sequences, accessions, and annotations.",
 		image: proteinImg,

@@ -82,7 +82,7 @@ export default function RangeInputSlider(props) {
 						max={props.max}
 						scale={(x) => x}
 						onChange={sliderChange}
-						valueLabelDisplay='auto'
+						valueLabelDisplay= {props.labelDisplay ? props.labelDisplay : 'auto'}
 						getAriaValueText={valuetext}
 					/>
 				</Grid>

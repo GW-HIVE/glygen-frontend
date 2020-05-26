@@ -271,11 +271,18 @@ hr {
 /* =========================================
                 Content Boxes
 ============================================ */
+
+.content-box-sm {
+  padding: 20px 0;
+}
 .content-box-md {
   padding: 40px 0;
 }
-.content-box-sm {
-  padding: 20px 0;
+.content-box-lg {
+  padding: 60px 0;
+}
+.content-box-xl {
+  padding: 80px 0;
 }
 /* =========================================
         Vertical/Horizontal Headings
@@ -692,4 +699,70 @@ sub {
 .alert-banner-darkgrey a:hover {
   color: #bf0101 !important;
   /* font-weight: 200 !important; */
+}
+
+/* =========================================
+              About Us
+============================================ */
+.about-section-bg {
+  background: #f4f4f4;
+}
+.about-item {
+  background-color: #fff;
+  padding: 50px 50px 30px 50px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.about-item:hover {
+  background-color: #2f78b7;
+}
+.about-item:hover p {
+  color: #fff;
+}
+.border-blue {
+  -webkit-box-shadow: 0 0 10px rgba(47, 120, 183, 0.5);
+  box-shadow: 0 0 10px rgba(47, 120, 183, 0.5);
+}
+.text-blue p {
+  color: #2f78b7 !important;
+}
+.text-blue:hover p {
+  color: #fff !important;
+}
+
+.univ-logo {
+  padding: 10px 20px;
+  max-width: 150px;
+  margin: 0 auto;
+  line-height: 100px;
+}
+.univ-logo image {
+  display: inline-block !important;
+}
+.section-heading {
+  color: var(--gg-blue) !important;
+  font-weight: 700;
+}
+
+.team {
+  text-align: center;
+  vertical-align: middle;
+  /* padding-bottom: 10px; */
+  padding-top: 20px;
+}
+.team h5 {
+  color: var(--gg-blue) !important;
+  font-weight: bold;
+}
+.img-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  /* by changing margin 35px (to < 38px) below you control how many team members cards will fitt in one row */
+  margin: 0 35px 10px;
+}
+.team-member-item {
+  overflow: hidden;
+  position: relative;
 }

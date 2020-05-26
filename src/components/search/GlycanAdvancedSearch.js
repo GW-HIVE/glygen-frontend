@@ -167,16 +167,16 @@ const GlycanAdvancedSearch = (props) => {
 			glycanId: '',
 			glyMassType: props.initData.glycan_mass.native.name,
 			glyMass: [
-				props.initData.glycan_mass.native.min,
-				props.initData.glycan_mass.native.max,
+				Math.floor(props.initData.glycan_mass.native.min),
+				Math.ceil(props.initData.glycan_mass.native.max),
 			],
 			glyMassInput: [
-				props.initData.glycan_mass.native.min,
-				props.initData.glycan_mass.native.max,
+				Math.floor(props.initData.glycan_mass.native.min),
+				Math.ceil(props.initData.glycan_mass.native.max),
 			],
 			glyMassRange: [
-				props.initData.glycan_mass.native.min,
-				props.initData.glycan_mass.native.max,
+				Math.floor(props.initData.glycan_mass.native.min),
+				Math.ceil(props.initData.glycan_mass.native.max),
 			],
 			glyNumSugars: [
 				props.initData.number_monosaccharides.min,

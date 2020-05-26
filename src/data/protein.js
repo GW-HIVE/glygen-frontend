@@ -101,8 +101,8 @@ export const PROTEIN_COLUMNS = [
     }
   },
   {
-    dataField: proteinStrings.refSeq_ac.shortName,
-    text: proteinStrings.refSeq_ac.name,
+    dataField: proteinStrings.refseq_ac.shortName,
+    text: proteinStrings.refseq_ac.name,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };

@@ -13,24 +13,26 @@ const ExampleExploreControl = (props) => {
 		<>
 			{props.inputValue.sort(sortExamples).map((obj) => (
 				<Row
-					key={obj.example.id}
+					key={obj.orderID}
 					// className={ "small-text" }
 				>
-					<Col>
-						<div>
-							{obj.example.name}{" "}
-							<LineTooltip text="Click to insert example.">
-								<Button
-									className={"lnk-btn"}
-									variant="link"
-									onClick={() => {
-										props.setInputValue(obj.example.id);
-									}}>
-									{obj.example.id}
-								</Button>
-							</LineTooltip>
-						</div>
-					</Col>
+					{obj.example && (
+						<Col>
+							<div>
+								{obj.example.name}{" "}
+								<LineTooltip text="Click to insert example.">
+									<Button
+										className={"lnk-btn"}
+										variant="link"
+										onClick={() => {
+											props.setInputValue(obj.example.id);
+										}}>
+										{obj.example.id}
+									</Button>
+								</LineTooltip>
+							</div>
+						</Col>
+					)}
 					{obj.explore && (
 						<Col>
 							<div className="text-right">

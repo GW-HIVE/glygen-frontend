@@ -4,6 +4,7 @@ import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import TextAlert from '../components/alert/TextAlert';
 import DialogAlert from '../components/alert/DialogAlert';
+import ProteinAdvancedSearch from '../components/search/ProteinAdvancedSearch';
 import SimpleSearchControl from '../components/search/SimpleSearchControl';
 import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -27,6 +28,25 @@ const ProteinSearch = (props) => {
 	const [proAdvSearchData, setProAdvSearchData] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{
+			proteinId: '',
+			proRefSeqId: '',
+			proMass: [259, 3906489],
+			proMassInput: [259, 3906489],
+			proMassRange: [259, 3906489],
+			proOrganism: {id:"0", name:"All"},
+			proteinName: '',
+			proGeneName: '',
+			proGOName: '',
+			proGOId: '',
+			proGlytoucanAc: '',
+			proAminoAcid: [],
+			proAminoAcidOperation: 'or',
+			proSequence: '',
+			proPathwayId: '',
+			proPubId: '',
+			proRelation: '',
+			proAdvSearchValError: [false, false, false, false, false,
+				false, false, false, false]
 		}
 	);
 	const [proActTabKey, setProActTabKey] = useState('simple_search');
@@ -49,12 +69,22 @@ const ProteinSearch = (props) => {
 		setPageLoading(true);
 		logActivity();
 		document.addEventListener('click', () => {
-			if (alertTextInput.show)
-				setAlertTextInput({"show": false})
+			setAlertTextInput({"show": false})
 		});
 		getProteinInit().then((response) => {
 			let initData = response.data;
 			setProAdvSearchData({
+				proMass:
+					[
+						Math.floor(initData.protein_mass.min),
+						Math.ceil(initData.protein_mass.max)
+					],
+				proMassInput:
+					[
+						Math.floor(initData.protein_mass.min),
+						Math.ceil(initData.protein_mass.max)
+					],
+				proOrganism: {id:"0", name:"All"},
 
 			});
 
@@ -74,7 +104,66 @@ const ProteinSearch = (props) => {
 						setPageLoading(false);
 					} else {
 						setProAdvSearchData({
-							
+							proteinId:
+							data.query.uniprot_canonical_ac === undefined
+								? ''
+								: data.query.uniprot_canonical_ac,
+							proRefSeqId:
+							data.query.refseq_ac === undefined
+								? ''
+								: data.query.refseq_ac,
+							proMass:
+							data.query.mass === undefined
+								? [
+									Math.floor(initData.protein_mass.min),
+									Math.ceil(initData.protein_mass.max),
+								  ]
+								: [
+									Math.floor(data.query.mass.min),
+									Math.ceil(data.query.mass.max),
+								  ],
+							proMassInput:
+							data.query.mass === undefined
+								? [
+									Math.floor(initData.protein_mass.min),
+									Math.ceil(initData.protein_mass.max),
+								  ]
+								: [
+									Math.floor(data.query.mass.min),
+									Math.ceil(data.query.mass.max),
+								  ],
+							proOrganism:
+							data.query.organism === undefined
+								? {id:"0", name:"All"}
+								: {id:data.query.organism.id, name:data.query.organism.name},
+							proGOName:
+							data.query.go_term === undefined
+							? ''
+							: data.query.go_term,
+							proGOId:
+							data.query.go_id === undefined
+							? ''
+							: data.query.go_id,
+							proGlytoucanAc:
+							data.query.glytoucan_ac === undefined
+							? ''
+							: data.query.glytoucan_ac,
+							proSequence:
+							data.query.sequence === undefined
+							? ''
+							: data.query.sequence,	
+							proPathwayId:
+							data.query.pathway_id === undefined
+							? ''
+							: data.query.pathway_id,
+							proPubId:
+							data.query.pmid === undefined
+							? ''
+							: data.query.pmid,				
+							proRelation:
+							data.query.relation === undefined
+							? ''
+							: data.query.relation
 						});
 
 						setProActTabKey("advanced_search");
@@ -90,7 +179,7 @@ const ProteinSearch = (props) => {
 			let message = "search_init api call";
 			axiosError(error, message, setPageLoading, setAlertDialogInput);
 		});
-	}, [id, proteinData, alertTextInput]);
+	}, [id, proteinData]);
 
 	const proteinSimpleSearch = () => {
 		var formjsonSimple = {
@@ -117,10 +206,114 @@ const ProteinSearch = (props) => {
 		.catch(function (error) {
 			axiosError(error, message, setPageLoading, setAlertDialogInput);
 		});
-	};
+	}
+
+/**
+ * Forms searchjson from the form values submitted
+ * @param {string} input_query_type query search
+ * @param {string} input_mass_min user mass min input
+ * @param {string} input_mass_max user mass max input
+ * @param {string} user organism input
+ * @param {string} input_protein_id user protein input
+ * @param {string} input_refseq_id user input
+ * @param {string} input_gene_name user input
+ * @param {string} input_protein_name user input
+ * @param {string} input_go_term user input
+ * @param {string} input_go_id user input
+ * @param {string} input_pathway_id user input
+ * @param {string} input_sequence user input
+ * @param {string} input_glycosylated_aa_operation user input
+ * @return {string} returns text or id
+ */
+function searchJson(input_query_type, input_protein_id, input_refseq_id, input_mass_min, input_mass_max, input_organism, input_protein_name,
+    input_gene_name, input_go_term, input_go_id, input_pathway_id, input_sequence,
+    input_pmid,input_glycan,input_relation, input_glycosylated_aa, input_glycosylated_aa_operation, input_glycosylation_evidence) {
+	
+	var uniprot_id = input_protein_id;
+	if (uniprot_id) {
+		uniprot_id = input_protein_id.trim();
+		uniprot_id = uniprot_id.replace(/\u200B/g, "");
+		uniprot_id = uniprot_id.replace(/\u2011/g, "-");
+		uniprot_id = uniprot_id.replace(/\s+/g, ",");
+		uniprot_id = uniprot_id.replace(/,+/g, ",");
+		var index = uniprot_id.lastIndexOf(",");
+		if (index > -1 && (index + 1) == uniprot_id.length) {
+			uniprot_id = uniprot_id.substr(0, index);
+		}
+	}
+	
+	var sequences;
+    if (input_sequence) {
+        sequences = {
+            "type": "exact",
+            "aa_sequence": input_sequence
+        }
+    }
+  
+    var glycans = undefined;
+    if (input_glycan) {
+        glycans = {
+            "relation": input_relation,
+            "glytoucan_ac": input_glycan
+        }
+    }
+	var selected_organism = undefined;
+    if (input_organism && input_organism.id !== "0") {
+        selected_organism = {
+            "id": input_organism.id,
+            "name": input_organism.name
+        }
+    }
+    var glyco_aa = undefined;
+    if (input_glycosylated_aa && input_glycosylated_aa.length > 0) {
+        glyco_aa = {
+            "aa_list": input_glycosylated_aa,
+            "operation": input_glycosylated_aa_operation
+        }
+    }
+
+    var input_mass = undefined;
+    // if (mass_min != input_mass_min || mass_max !=  input_mass_max) {
+        input_mass = {
+            "min" : parseInt(input_mass_min),
+            "max" : parseInt(input_mass_max)
+        };
+    //}
+   
+    var formjson = {
+        [commonProteinData.operation.id]: "AND",
+		[proteinData.advanced_search.query_type.id]: input_query_type,
+		[commonProteinData.uniprot_canonical_ac.id]: uniprot_id ?uniprot_id: undefined,
+		[commonProteinData.refseq_ac.id]: input_refseq_id ?input_refseq_id: undefined,
+		[commonProteinData.mass.id]: input_mass,
+		[commonProteinData.organism.id]: selected_organism,
+		[commonProteinData.protein_name.id]: input_protein_name? input_protein_name: undefined,
+		[commonProteinData.gene_name.id]: input_gene_name? input_gene_name: undefined,
+		[commonProteinData.go_term.id]: input_go_term? input_go_term: undefined,
+		[commonProteinData.go_id.id]: input_go_id? input_go_id: undefined,
+		sequence: sequences ?sequences:undefined,
+        pmid: input_pmid? input_pmid: undefined,
+        pathway_id: input_pathway_id ?input_pathway_id: undefined,
+        glycan: glycans?glycans: undefined,
+        glycosylated_aa: glyco_aa, 
+        glycosylation_evidence: input_glycosylation_evidence ?input_glycosylation_evidence: undefined
+    };
+    return formjson;
+}
 
 	const proteinAdvSearch = () => {
-		let formObject;
+		let formObject = searchJson(
+			proteinData.advanced_search.query_type.name,
+			proAdvSearchData.proteinId,
+			proAdvSearchData.proRefSeqId,
+			proAdvSearchData.proMass[0],
+			proAdvSearchData.proMass[1],
+			proAdvSearchData.proOrganism,
+			proAdvSearchData.proteinName,
+			proAdvSearchData.geneName,
+			proAdvSearchData.goTerm,
+			proAdvSearchData.goId
+		);		
 		logActivity("user", id, "Performing Advanced Search");
 		let message = "Advanced Search query=" + JSON.stringify(formObject);
 		getProteinSearch(formObject)
@@ -210,14 +403,14 @@ const ProteinSearch = (props) => {
 								alertInput={alertTextInput}
 							/>
 							<Container className='tab-content-border'>
-								{/* {initData && (
-									<GlycanAdvancedSearch
-										searchGlycanAdvClick={searchGlycanAdvClick}
-										inputValue={glyAdvSearchData}
+								{initData && (
+									<ProteinAdvancedSearch
+										searchProteinAdvClick={searchProteinAdvClick}
+										inputValue={proAdvSearchData}
 										initData={initData}
-										setGlyAdvSearchData={setGlyAdvSearchData}
+										setProAdvSearchData={setProAdvSearchData}
 									/>
-								)} */}
+								)}
 							</Container>
 						</Tab>
 						<Tab

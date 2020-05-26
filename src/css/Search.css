@@ -107,6 +107,10 @@ input[type="number"] {
 	width: 90px !important;
 }
 
+.pro-rng-input {
+	width: 120px !important;
+}
+
 .search-lbl {
 	margin-left: -27px !important;
 	font-weight: bold !important;

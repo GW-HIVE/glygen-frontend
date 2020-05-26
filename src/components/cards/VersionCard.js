@@ -34,8 +34,10 @@ export default function VersionCard(props) {
 		var verData = {};
 		props.data.forEach((verObj) => {
 			verData[verObj.component] = {
-				releaseDate: verObj.release_date,
+				// componentName: verObj.component_name,
+				// url: verObj.url,
 				version: verObj.version,
+				releaseDate: verObj.release_date,
 			};
 		});
 		setVersionData(verData);
