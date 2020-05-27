@@ -94,6 +94,20 @@
 	.img-responsive {
 		width: 100% !important;
 	}
+	.framework,
+	.framework .icon,
+	.framework .icon-svg {
+		text-align: center !important;
+	}
+	.framework:hover .icon,
+	.framework:hover .icon-svg {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+
+	.framework h4 {
+		font-size: 18px;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
