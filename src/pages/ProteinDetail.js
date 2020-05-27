@@ -33,7 +33,7 @@ import FeedbackWidget from "../components/FeedbackWidget";
 // import ReactCopyClipboard from'../components/ReactCopyClipboard';
 import routeConstants from "../data/json/routeConstants";
 import FunctionList from "../components/FunctionList";
-import GoannotationList from "../components/Goannotationlist";
+// import GoannotationList from "../components/Goannotationlist";
 import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
 
 import stringConstants from "../data/json/stringConstants";
