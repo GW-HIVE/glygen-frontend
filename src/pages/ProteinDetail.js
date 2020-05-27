@@ -34,7 +34,7 @@ import FeedbackWidget from "../components/FeedbackWidget";
 import routeConstants from "../data/json/routeConstants";
 import FunctionList from "../components/FunctionList";
 // import GoannotationList from "../components/Goannotationlist";
-import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
+// import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
 
 import stringConstants from "../data/json/stringConstants";
 
