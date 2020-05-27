@@ -7,17 +7,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - REACT_APP_ENV=dev
+        - REACT_APP_ENV=prod
         - REACT_APP_API=https://api.glygen.org
-        - REACT_APP_DOMAIN=https://glygen.ccrc.uga.edu/frontend
-        # - REACT_APP_DOMAIN=http://localhost
+        - REACT_APP_DOMAIN=https://glygen.org
         - REACT_APP_BETA_DOMAIN=https://beta.glygen.org
         - REACT_APP_DATA=https://data.glygen.org
         - REACT_APP_SPARQL=https://sparql.glygen.org
-        - REACT_APP_BASENAME=/frontend
+        - REACT_APP_BASENAME=/
         - PORT=80
-    ports:
-      - '80:80'
 networks:
   default:
     external:
