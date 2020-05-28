@@ -35,7 +35,7 @@ import routeConstants from "../data/json/routeConstants";
 import FunctionList from "../components/FunctionList";
 // import GoannotationList from "../components/Goannotationlist";
 import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
-
+import SequenceDisplay from "../components/SequenceDisplay";
 import stringConstants from "../data/json/stringConstants";
 
 const proteinStrings = stringConstants.protein.common;
@@ -135,16 +135,23 @@ const getItemsCrossRef = data => {
   return itemscrossRef;
 };
 
+const ShowSeqeunce = () => {
+  const [showResults, setShowResults] = React.useState(false);
+  const onClick = () => setShowResults(true);
+  return (
+    <div>
+      <input type="submit" value="ShowSequnce" onClick={onClick} />
+      {showResults ? <SequenceDisplay /> : null}
+    </div>
+  );
+};
+
 // useEffect(() => {
-//   const withImage = detailData.glycosylation.filter(
-//     item => item.glytoucan_ac
-//   );
-//   const withoutImage = detailData.glycosylation.filter(
-//     item => !item.glytoucan_ac
-//   );
+//   const withImage = data.glycosylation.filter(item => item.glytoucan_ac);
+//   const withoutImage = data.glycosylation.filter(item => !item.glytoucan_ac);
 //   setGlycosylationWithImage(withImage);
 //   setGlycosylationWithoutImage(withoutImage);
-// }, [detailData]);
+// }, [data]);
 
 const ProteinDetail = props => {
   let { id } = useParams();
@@ -152,10 +159,11 @@ const ProteinDetail = props => {
   const [detailData, setDetailData] = useState({});
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
   const [itemsPathway, setItemsPathway] = useState([]);
-  // const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
-  // const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
-  //   []
-  // );
+  const [showResults, setShowResults] = useState(false);
+  const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
+  const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
+    []
+  );
 
   useEffect(() => {
     const getProteinDetailData = getProteinDetail(id);
@@ -186,58 +194,21 @@ const ProteinDetail = props => {
   //   setGlycosylationWithoutImage(withoutImage);
   // }, [detailData]);
 
-  if (detailData.isoforms) {
-    for (var i = 0; i < detailData.isoforms.length; i++) {
-      // assign the newly result of running formatSequence() to replace the old value
-      // detailData.isoforms[i].sequence.sequence = formatSequence(detailData.isoforms[i].sequence.sequence);
-      detailData.isoforms[i].locus.start_pos = addCommas(
-        detailData.isoforms[i].locus.start_pos
-      );
-      detailData.isoforms[i].locus.end_pos = addCommas(
-        detailData.isoforms[i].locus.end_pos
-      );
-      if (
-        detailData.isoforms[i].locus &&
-        detailData.isoforms[i].locus.evidence
-      ) {
-        detailData.isoforms[i].evidence = detailData.isoforms[i].locus.evidence;
-        groupEvidences([detailData.isoforms[i]]);
-      }
-    }
-  }
-  if (detailData.orthologs) {
-    for (var i = 0; i < detailData.orthologs.length; i++) {
-      // assign the newly result of running formatSequence() to replace the old value
-      //detailData.orthologs[i].sequence.sequence = formatSequence(detailData.orthologs[i].sequence.sequence);
-      if (detailData.orthologs[i] && detailData.orthologs[i].evidence) {
-        detailData.orthologs[i].evidence = detailData.orthologs[i].evidence;
-        groupEvidences([detailData.orthologs[i]]);
-      }
-    }
+  function hasGlycanId(item) {
+    return item.glytoucan_ac !== undefined;
   }
 
-  if (detailData.go_annotation && detailData.go_annotation.categories) {
-    // Sorting Go term categories in specific order - 1. "MOLECULAR FUNCTION", 2. "BIOLOGICAL PROCESS", 3. "CELLULAR COMPONENT".
-    // This will help mustache template to show categories in specific order.
-    var mapGOTerm = {
-      "MOLECULAR FUNCTION": 1,
-      "BIOLOGICAL PROCESS": 2,
-      "CELLULAR COMPONENT": 3
-    };
+  if (detailData.glycosylation) {
+    detailData.glycosylation = detailData.glycosylation.map(function(item) {
+      item.respos = item.residue + item.position;
+      return item;
+    });
 
-    detailData.go_annotation.categories = detailData.go_annotation.categories.sort(
-      function(a, b) {
-        var resVal1 = mapGOTerm[a.name.toUpperCase()];
-        var resVal2 = mapGOTerm[b.name.toUpperCase()];
+    detailData.itemsGlycosyl = detailData.glycosylation.filter(hasGlycanId);
 
-        return resVal1 - resVal2;
-      }
-    );
-
-    for (var i = 0; i < detailData.go_annotation.categories.length; i++) {
-      // assign the newly result of running formatSequence() to replace the old value
-      groupEvidences(detailData.go_annotation.categories[i].go_terms);
-    }
+    detailData.itemsGlycosyl2 = detailData.glycosylation.filter(function(item) {
+      return !hasGlycanId(item);
+    });
   }
 
   const {
@@ -254,6 +225,7 @@ const ProteinDetail = props => {
     expression_disease,
     mutation,
     refseq,
+    disease,
     sequence,
     go_annotation,
     site_annotation,
@@ -337,7 +309,33 @@ const ProteinDetail = props => {
     },
     {
       dataField: "annotation",
-      text: "Annotation",
+      text: "Annotation Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "disease",
+      text: "Disease",
+      defaultSortField: "disease",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <Navbar.Text
+          as={NavLink}
+          to={routeConstants.glycanDetail + row.glytoucan_ac}
+        >
+          {row.disease.doid}
+          {row.disease.name}
+        </Navbar.Text>
+      )
+    },
+    {
+      dataField: "start_pos",
+      text: "Start pos",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
@@ -346,15 +344,6 @@ const ProteinDetail = props => {
     {
       dataField: "end_pos",
       text: "End pos",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      }
-    },
-
-    {
-      dataField: "start_pos",
-      text: "Start pos",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
@@ -377,29 +366,69 @@ const ProteinDetail = props => {
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
       }
+    }
+  ];
+  const expressionTissueColumns = [
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.tissue.uberon}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
     },
 
     {
-      dataField: "disease",
-      text: "Disease",
-      defaultSortField: "disease",
+      dataField: "present",
+      text: "Present",
       sort: true,
-      headerStyle: (column, colIndex) => {
+      headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
-      },
-      formatter: (value, row) => (
-        <Navbar.Text
-          as={NavLink}
-          to={routeConstants.glycanDetail + row.glytoucan_ac}
-        >
-          {" "}
-          {row.disease.doid}
-          {row.disease.name}
-        </Navbar.Text>
-      )
+      }
     }
   ];
-
+  const expressionDiseaseColumns = [
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.disease.doid}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+    {
+      dataField: "trend",
+      text: "Expression Trend",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "significant",
+      text: "Significant",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    }
+  ];
   // ==================================== //
   /**
    * Adding toggle collapse arrow icon to card header individualy.
@@ -498,6 +527,7 @@ const ProteinDetail = props => {
             </Helmet>
             <FeedbackWidget />
             {/* <ToggleCardlTemplate /> */}
+
             {/* general */}
             <Accordion
               id="general"
@@ -578,7 +608,7 @@ const ProteinDetail = props => {
                           <div>
                             <strong>{proteinStrings.uniprot_id.name}: </strong>
                             <Link
-                              href={uniprot.uniprot_url}
+                              href={uniprot.url}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -590,7 +620,7 @@ const ProteinDetail = props => {
                               {proteinStrings.uniprot_accession.name}:{" "}
                             </strong>
                             <Link
-                              href={uniprot.uniprot_url}
+                              href={uniprot.url}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -601,7 +631,14 @@ const ProteinDetail = props => {
                             <strong>
                               {proteinStrings.sequence_length.name}:{" "}
                             </strong>
-                            {uniprot.length}{" "}
+
+                            <Link
+                              href={uniprot.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {uniprot.length}
+                            </Link>
                           </div>
                           <div>
                             <strong>
@@ -769,6 +806,126 @@ const ProteinDetail = props => {
               </Card>
             </Accordion>
 
+            {/*  goannotation */}
+            <Accordion
+              id="go_annotation"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.goannotation.title}
+                      text={DetailTooltips.protein.goannotation.text}
+                      urlText={DetailTooltips.protein.goannotation.urlText}
+                      url={DetailTooltips.protein.goannotation.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Go Annotation</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("goannotation", collapsed.goannotation)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.goannotation ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <dl>
+                      {go_annotation &&
+                        go_annotation.categories &&
+                        go_annotation.categories.map(category => (
+                          <>
+                            <dt>{category.name}</dt>
+                            {category.go_terms &&
+                              category.go_terms.map(term => (
+                                <Row className="goannotationstylerow">
+                                  <Col sm={5} md={5}>
+                                    <Link
+                                      href={term.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {term.name}({term.id})
+                                    </Link>
+                                  </Col>
+                                  <Col sm={5} md={5}>
+                                    <EvidenceList
+                                      evidences={groupEvidences(term.evidence)}
+                                    />
+                                  </Col>
+                                </Row>
+                              ))}
+                            <p className="goannotationstyle">
+                              Total {category.total} {category.name}
+                            </p>
+                          </>
+                        ))}
+                    </dl>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+
+            {/*  Glycosylation */}
+            <Accordion
+              id="glycosylation"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.glycosylations.title}
+                      text={DetailTooltips.protein.glycosylations.text}
+                      urlText={DetailTooltips.protein.glycosylations.urlText}
+                      url={DetailTooltips.protein.glycosylations.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Glycosylation</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("glycosylation", collapsed.glycosylation)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.glycosylation ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {glycosylationWithImage &&
+                      glycosylationWithImage.length !== 0 && (
+                        <ClientPaginatedTable
+                          //data={itemsGlycosyl}
+                          columns={glycoSylationColumns}
+                          onClickTarget={"#glycosylation"}
+                        />
+                      )}
+                    {!glycosylation && <p>No data available.</p>}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Sequence */}
             <Accordion
               id="sequence"
               defaultActiveKey="0"
@@ -801,19 +958,511 @@ const ProteinDetail = props => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    <ProteinSequenceDisplay
-                      sequenceObject={sequence}
-                      glycosylation={glycosylation}
-                      mutation={mutation}
-                      siteAnnotation={site_annotation}
+                    <div classnmae="box">
+                      <ProteinSequenceDisplay
+                        sequenceObject={sequence}
+                        glycosylation={glycosylation}
+                        mutation={mutation}
+                        siteAnnotation={site_annotation}
+                      />
+                    </div>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Pathway */}
+            <Accordion
+              id="pathway"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.pathway.title}
+                      text={DetailTooltips.protein.pathway.text}
+                      urlText={DetailTooltips.protein.pathway.urlText}
+                      url={DetailTooltips.protein.pathway.url}
+                      helpIcon="gg-helpicon-detail"
                     />
+                  </span>
+                  <h3 className="gg-green d-inline">Pathway</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("pathway", collapsed.pathway)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.pathway ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {itemsPathway && itemsPathway.length ? (
+                      <p>
+                        <ul className="list-style-none">
+                          {itemsPathway.map(pathway => (
+                            <li>
+                              <strong>
+                                {pathway.id}
+                                {pathway.resource}
+                              </strong>
+
+                              <ul>
+                                <Row>
+                                  {pathway.links.map(link => (
+                                    <Col>
+                                      <li>
+                                        {link.name}
+                                        <a
+                                          href={link.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                        >
+                                          {link.id}
+                                        </a>
+                                      </li>
+                                    </Col>
+                                  ))}
+                                </Row>
+                              </ul>
+                            </li>
+                          ))}
+                        </ul>
+                      </p>
+                    ) : (
+                      <p>No data available.</p>
+                    )}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  isoforms */}
+            <Accordion
+              id="isoforms"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.isoforms.title}
+                      text={DetailTooltips.protein.isoforms.text}
+                      urlText={DetailTooltips.protein.isoforms.urlText}
+                      url={DetailTooltips.protein.isoforms.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Isoforms</h3>
+                  <div className="float-right">
+                    {/* <div>
+                      <input
+                        type="submit"
+                        value="ShowSequnce"
+                        onClick={ShowSeqeunce}
+                      />
+                      {showResults ? <SequenceDisplay /> : null}
+                    </div> */}
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("species", collapsed.isoforms)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.isoforms ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <p>
+                      {isoforms && (
+                        <Grid container className="table-body">
+                          {isoforms.map((isoformsS, isoformIndex) => (
+                            <Grid item xs={12} key={isoformIndex}>
+                              <div>
+                                <strong>UniProtKB Isoform Accession:</strong>
+                                <Link
+                                  href={isoformsS.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {isoformsS.isoform_ac}
+                                </Link>
+                              </div>
+
+                              <div>
+                                {/* <strong>
+                                  {proteinStrings.isoforms_location.isoform_ac}:
+                                </strong> */}
+                                Chromosome: {""}
+                                {isoformsS.locus.chromosome} {""}(
+                                {isoformsS.locus.start_pos}-
+                                {isoformsS.locus.end_pos})
+                              </div>
+                              <Grid xs={12}>
+                                <EvidenceList
+                                  evidences={groupEvidences(
+                                    isoformsS.locus.evidence
+                                  )}
+                                />
+                              </Grid>
+                              <Grid>
+                                {/* <IsoformSequenceDisplay
+                                  sequenceData={isoformsS.sequence}
+                                /> */}
+                                <div classnmae="highlight-display">
+                                  {" "}
+                                  <SequenceDisplay
+                                    sequenceData={isoformsS.sequence.sequence
+                                      .split("")
+                                      .map(a => ({ character: a }))}
+                                  />
+                                </div>
+                              </Grid>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      )}
+
+                      {!isoforms && (
+                        <p classisoforms_ac="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
+                    </p>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  orthologs */}
+            <Accordion
+              id="orthologs"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.homologs.title}
+                      text={DetailTooltips.protein.homologs.text}
+                      urlText={DetailTooltips.protein.homologs.urlText}
+                      url={DetailTooltips.protein.homologs.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Homologs</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("species", collapsed.orthologs)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.orthologs ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <p>
+                      {orthologs && (
+                        <Grid container classorthologs_ac="table-body">
+                          {orthologs.map(
+                            (orthologsS, orthologsSuniprot_canonical_ac) => (
+                              <Grid
+                                item
+                                xs={12}
+                                key={orthologsSuniprot_canonical_ac}
+                              >
+                                <div>
+                                  <strong>UniProtKB Isoform Accession:</strong>
+                                  <Link
+                                    href={orthologsS.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {orthologsS.uniprot_canonical_ac}
+                                  </Link>
+                                </div>
+                                <div>
+                                  <strong>Organism:</strong>
+                                  {orthologsS.organism}
+                                </div>
+
+                                <Grid xs={9}>
+                                  <EvidenceList
+                                    evidences={groupEvidences(
+                                      orthologsS.evidence
+                                    )}
+                                  />
+                                </Grid>
+                                <Grid>
+                                  {/* <IsoformSequenceDisplay
+                                  sequenceData={isoformsS.sequence}
+                                /> */}
+                                  <div classnmae="highlight-display">
+                                    {" "}
+                                    <SequenceDisplay
+                                      sequenceData={orthologsS.sequence.sequence
+                                        .split("")
+                                        .map(a => ({ character: a }))}
+                                    />
+                                  </div>
+                                </Grid>
+                              </Grid>
+                            )
+                          )}
+                        </Grid>
+                      )}
+
+                      {!orthologs && (
+                        <p classorthologs_ac="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
+                    </p>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  disease */}
+            <Accordion
+              id="disease"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.disease.title}
+                      text={DetailTooltips.protein.disease.text}
+                      urlText={DetailTooltips.protein.disease.urlText}
+                      url={DetailTooltips.protein.disease.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Disease</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("disease", collapsed.disease)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.disease ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    <p>
+                      {disease && (
+                        <Grid container classorthologs_ac="table-body">
+                          {disease.map((diseaseS, diseaseSdoid) => (
+                            <Grid item xs={12} key={diseaseSdoid}>
+                              <div>
+                                <strong> {diseaseS.name}</strong>
+
+                                <p>
+                                  {" "}
+                                  (ICD10: {diseaseS.icd10} DOID:
+                                  <Link
+                                    href={diseaseS.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {diseaseS.doid})
+                                  </Link>
+                                </p>
+                              </div>
+
+                              <Grid xs={9}>
+                                <EvidenceList
+                                  evidences={groupEvidences(diseaseS.evidence)}
+                                />
+                              </Grid>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      )}
+
+                      {!disease && (
+                        <p classorthologs_ac="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
+                    </p>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Mutation */}
+            <Accordion
+              id="mutation"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.mutation.title}
+                      text={DetailTooltips.protein.mutation.text}
+                      urlText={DetailTooltips.protein.mutation.urlText}
+                      url={DetailTooltips.protein.mutation.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Mutation</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("mutation", collapsed.mutation)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.mutation ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {mutation && mutation.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={mutation}
+                        columns={mutationColumns}
+                        onClickTarget={"#mutation"}
+                      />
+                    )}
+                    {!mutation && <p>No data available.</p>}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Expression Tissue */}
+            <Accordion
+              id="expressionT"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.expression_tissue.title}
+                      text={DetailTooltips.protein.expression_tissue.text}
+                      urlText={DetailTooltips.protein.expression_tissue.urlText}
+                      url={DetailTooltips.protein.expression_tissue.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline"> Expression Tissue</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse(
+                          "expression_tissue",
+                          collapsed.expression_tissue
+                        )
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.expression_tissue ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {expression_tissue && expression_tissue.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={expression_tissue}
+                        columns={expressionTissueColumns}
+                        onClickTarget={"#expression_tissue"}
+                      />
+                    )}
+                    {!expression_tissue && <p>No data available.</p>}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Expression Disease */}
+            <Accordion
+              id="expressionD"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.expression_disease.title}
+                      text={DetailTooltips.protein.expression_disease.text}
+                      urlText={
+                        DetailTooltips.protein.expression_disease.urlText
+                      }
+                      url={DetailTooltips.protein.expression_disease.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline"> Expression Disease</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse(
+                          "expression_disease",
+                          collapsed.expression_disease
+                        )
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.expression_disease ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {expression_disease && expression_disease.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={expression_disease}
+                        columns={expressionDiseaseColumns}
+                        onClickTarget={"#expression_disease"}
+                      />
+                    )}
+                    {!expression_disease && <p>No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
             {/* crossref */}
             <Accordion
-              id="crossref"
+              id="crossRef"
               defaultActiveKey="0"
               className="panel-width"
               style={{ padding: "20px 0" }}
@@ -880,7 +1529,6 @@ const ProteinDetail = props => {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-
             {/* publication */}
             <Accordion
               id="publication"

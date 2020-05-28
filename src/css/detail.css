@@ -94,3 +94,9 @@ legend {
 .no-data-msg-publication {
   margin: 20px 0 36px 20px;
 }
+.goannotationstyle {
+  margin-left: 10px;
+}
+.goannotationstylerow {
+  padding: 20px;
+}

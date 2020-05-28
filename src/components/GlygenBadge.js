@@ -47,6 +47,8 @@ function databasecolor(name) {
       return "#8ac6d1";
     case "glyconnect":
       return "#fcba03";
+    case "mim":
+      return "#eb4034";
   }
 }
 
@@ -56,7 +58,7 @@ const GlygenBadge = props => {
   const { text } = props;
 
   return (
-    <div className="badge-div">
+    <span className="badge-div">
       <Button
         style={{
           backgroundColor: databasecolor(text),
@@ -82,7 +84,7 @@ const GlygenBadge = props => {
           ))}
         </ul>
       )}
-    </div>
+    </span>
   );
 };
 
