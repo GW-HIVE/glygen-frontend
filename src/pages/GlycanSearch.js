@@ -46,11 +46,11 @@ const GlycanSearch = (props) => {
 			glycanId: '',
 			glyMassType: 'Native',
 			glyMass: [150, 6751],
-			glyMassInput: [150, 6751],
+			glyMassInput: [Number(150).toLocaleString('en-US'), Number(6751).toLocaleString('en-US')],
 			glyMassRange: [150, 6751],
 			glyNumSugars: [1, 37],
 			glyNumSugarsRange: [1, 37],
-			glyNumSugarsInput: [1, 37],
+			glyNumSugarsInput: [Number(1).toLocaleString('en-US'), Number(37).toLocaleString('en-US')],
 			glyOrganisms: [],
 			glyOrgOperation: 'or',
 			glyType: '',
@@ -124,8 +124,8 @@ const GlycanSearch = (props) => {
 					Math.ceil(initData.glycan_mass.native.max),
 				],
 				glyMassInput: [
-					Math.floor(initData.glycan_mass.native.min),
-					Math.ceil(initData.glycan_mass.native.max),
+					Math.floor(initData.glycan_mass.native.min).toLocaleString('en-US'),
+					Math.ceil(initData.glycan_mass.native.max).toLocaleString('en-US'),
 				],
 				glyMassRange: [
 					Math.floor(initData.glycan_mass.native.min),
@@ -140,10 +140,9 @@ const GlycanSearch = (props) => {
 					initData.number_monosaccharides.max,
 				],
 				glyNumSugarsInput: [
-					initData.number_monosaccharides.min,
-					initData.number_monosaccharides.max,
+					Number(initData.number_monosaccharides.min).toLocaleString('en-US'),
+					Number(initData.number_monosaccharides.max).toLocaleString('en-US'),
 				],
-				glyOrgOperation: 'or',
 				glySubTypeIsHidden: true,
 				glyAdvSearchValError: [false, false, false, false, false],
 			});
@@ -248,14 +247,14 @@ const GlycanSearch = (props) => {
 									? data.query.mass_type === undefined ||
 									  data.query.mass_type === initData.glycan_mass.native.name
 										? [
-												Math.floor(initData.glycan_mass.native.min),
-												Math.ceil(initData.glycan_mass.native.max),
+												Math.floor(initData.glycan_mass.native.min).toLocaleString('en-US'),
+												Math.ceil(initData.glycan_mass.native.max).toLocaleString('en-US'),
 										  ]
 										: [
-												Math.floor(initData.glycan_mass.permethylated.min),
-												Math.ceil(initData.glycan_mass.permethylated.max),
+												Math.floor(initData.glycan_mass.permethylated.min).toLocaleString('en-US'),
+												Math.ceil(initData.glycan_mass.permethylated.max).toLocaleString('en-US'),
 										  ]
-									: [data.query.mass.min, data.query.mass.max],
+									: [data.query.mass.min.toLocaleString('en-US'), data.query.mass.max.toLocaleString('en-US')],
 							glyMassRange:
 								data.query.mass_type === undefined ||
 								data.query.mass_type === initData.glycan_mass.native.name
@@ -280,12 +279,12 @@ const GlycanSearch = (props) => {
 							glyNumSugarsInput:
 								data.query.number_monosaccharides === undefined
 									? [
-											initData.number_monosaccharides.min,
-											initData.number_monosaccharides.max,
+											Number(initData.number_monosaccharides.min).toLocaleString('en-US'),
+											Number(initData.number_monosaccharides.max).toLocaleString('en-US'),
 									  ]
 									: [
-											data.query.number_monosaccharides.min,
-											data.query.number_monosaccharides.max,
+											Number(data.query.number_monosaccharides.min).toLocaleString('en-US'),
+											Number(data.query.number_monosaccharides.max).toLocaleString('en-US'),
 									  ],
 							glyOrgOperation:
 								data.query.organism === undefined
@@ -297,11 +296,11 @@ const GlycanSearch = (props) => {
 									: data.query.organism.organism_list,
 							glyType:
 								data.query.glycan_type === undefined
-									? ''
+									? advancedSearch.glycan_type.placeholderId
 									: data.query.glycan_type,
 							glySubType:
 								data.query.glycan_subtype === undefined
-									? ''
+									? advancedSearch.glycan_subtype.placeholderId
 									: data.query.glycan_subtype,
 							glySubTypeIsHidden:
 								data.query.glycan_type === undefined ? true : false,

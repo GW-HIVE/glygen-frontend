@@ -8,14 +8,14 @@ import PropTypes from 'prop-types';
 import '../../css/Search.css';
 
 export default function RangeInputSlider(props) {
-
-	function valuetext(value) {
+	
+	function valueText(value) {
 		return `${value}`;
 	}
 
 	const sliderChange = (event, newValue) => {
 		props.setSliderInputValue(newValue);
-	  props.setInputValue(newValue);
+	    props.setInputValue([newValue[0].toLocaleString('en-US'), newValue[1].toLocaleString('en-US')]);
 	};
 
 	const minInputChange = (event) => {
@@ -29,24 +29,26 @@ export default function RangeInputSlider(props) {
 	};
 
 	const onMinMoveOut = () => {
-		let val = [props.inputValue[0], props.inputValue[1]];
-		if (Number(props.inputValue[0]) < Number(props.min)) val[0] = props.min;
-		else if (props.inputValue[0] === '') val[0] = props.min;
-		else if (Number(props.inputValue[0]) > Number(props.inputValue[1]))
-			val[0] = props.inputValue[1];
-
-		props.setInputValue(val);
+		let val = [Math.floor(props.inputValue[0].replace(/[^0-9.]/g, "")), Math.ceil(props.inputValue[1].replace(/[^0-9.]/g, ""))];
+		if (Number(val[0]) < Number(props.min)) val[0] = props.min;
+		else if (val[0] === '') val[0] = props.min;
+		else if (Number(val[0]) > Number(val[1]))
+			val[0] = val[1];
+		
+		let valStr = [Number(val[0]).toLocaleString('en-US'), Number(val[1]).toLocaleString('en-US')]
+		props.setInputValue(valStr);
 		props.setSliderInputValue(val);
 	};
 
 	const onMaxMoveOut = () => {
-		let val = [props.inputValue[0], props.inputValue[1]];
-		if (Number(props.inputValue[1]) > Number(props.max)) val[1] = props.max;
-		else if (props.inputValue[1] === '') val[1] = props.max;
-		else if (Number(props.inputValue[1]) < Number(props.inputValue[0]))
-			val[1] = props.inputValue[0];
+		let val = [Math.floor(props.inputValue[0].replace(/[^0-9.]/g, "")), Math.ceil(props.inputValue[1].replace(/[^0-9.]/g, ""))];
+		if (Number(val[1]) > Number(props.max)) val[1] = props.max;
+		else if (val[1] === '') val[1] = props.max;
+		else if (Number(val[1]) < Number(val[0]))
+			val[1] = val[0];
 
-		props.setInputValue(val);
+		let valStr = [Number(val[0]).toLocaleString('en-US'), Number(val[1]).toLocaleString('en-US')]
+		props.setInputValue(valStr);
 		props.setSliderInputValue(val);
 	};
 
@@ -66,10 +68,8 @@ export default function RangeInputSlider(props) {
 							onBlur={onMinMoveOut}
 							labelWidth={40}
 							inputProps={{
-								step: props.step,
 								min: props.min,
 								max: props.max,
-								type: 'number',
 							}}
 						/>
 					</FormControl>
@@ -83,7 +83,7 @@ export default function RangeInputSlider(props) {
 						scale={(x) => x}
 						onChange={sliderChange}
 						valueLabelDisplay= {props.labelDisplay ? props.labelDisplay : 'auto'}
-						getAriaValueText={valuetext}
+						getAriaValueText={valueText}
 					/>
 				</Grid>
 				<Grid item>
@@ -99,10 +99,8 @@ export default function RangeInputSlider(props) {
 							onBlur={onMaxMoveOut}
 							labelWidth={40}
 							inputProps={{
-								step: props.step,
 								min: props.min,
 								max: props.max,
-								type: 'number',
 							}}
 						/>
 					</FormControl>

@@ -1,18 +1,16 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { getTypeahed } from '../../data/commonApi';
-import matchSorter from "match-sorter";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/Search.css';
 
-
-const filterOptions = (options, { inputValue }) =>
-  matchSorter(options, inputValue.substring(inputValue.lastIndexOf(",") + 1));
 export default function MultilineAutoTextInput(props) {
 
   const [options, setOptions] = React.useState([]);
+  const inputValueRef = React.useRef(props.inputValue);
+  inputValueRef.current = props.inputValue;
 
   const handleChange = (event, value, reason) => {
     if (!(event === null && value === "" && reason === "reset")){
@@ -21,14 +19,13 @@ export default function MultilineAutoTextInput(props) {
   };
 
   React.useEffect(() => {
-    setOptions([]);
-    if (props.inputValue && props.inputValue.substring(props.inputValue.lastIndexOf(",") + 1) === "") {
+    if (props.inputValue.trim().substring(props.inputValue.trim().lastIndexOf(",") + 1) === "") {
       setOptions([]);
       return undefined;
     }
 
     if (props.inputValue) {
-        getTypeahed(props.typeahedID, props.inputValue.substring(props.inputValue.lastIndexOf(",") + 1)).then(response => setOptions(response.data));
+        getTypeahed(props.typeahedID, props.inputValue.substring(props.inputValue.lastIndexOf(",") + 1)).then(response => inputValueRef.current.trim() !== '' ? setOptions(response.data) : setOptions([]));
     }
 
     return;
@@ -39,8 +36,8 @@ export default function MultilineAutoTextInput(props) {
     <Autocomplete
       freeSolo
       getOptionLabel={option => props.inputValue.substring(0, props.inputValue.lastIndexOf(",") + 1) + option}
-      filterOptions={filterOptions}
       options={options}
+      filterOptions={(options) => options}
       classes={{
         option: 'auto-option',
         inputRoot: 'auto-input-root',

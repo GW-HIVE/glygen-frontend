@@ -349,7 +349,7 @@
         "name": "Interacting Glycan",
         "shortName": "Interacting Glycan",
         "tooltip": {
-          "title": "Pubmed ID",
+          "title": "Interacting Glycan",
           "text": "Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s). Select Interaction Type.",
           "urlText": "Read more...",
           "url": "https://glytoucan.org/"
@@ -357,11 +357,11 @@
         "id": "glytoucan_ac"
       },
       "relation": {
-        "name": "Glycosylation Evidence Type",
-        "shortName": "Glycosylation Evidence Type",
+        "name": "Relation",
+        "shortName": "Relation",
         "tooltip": {
-          "title": "Pubmed ID",
-          "text": "Click to select Glycosylation Evidence Type."
+          "title": "Relation",
+          "text": "Click to select Relation."
         },
         "id": "relation"
       },
@@ -406,6 +406,15 @@
           "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
         },
         "id": "pmid"
+      },
+      "glycosylation_evidence": {
+        "name": "Glycosylation Evidence Type",
+        "shortName": "Glycosylation Evidence Type",
+        "tooltip": {
+          "title": "Glycosylation Evidence Type",
+          "text": "Click to select Glycosylation Evidence Type."
+        },
+        "id": "glycosylation_evidence"
       },
       "Protein_ShortName": {
         "name": "Protein_Name",

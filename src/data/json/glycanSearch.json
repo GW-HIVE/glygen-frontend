@@ -69,7 +69,27 @@
             ]
         },
         "organism": {
-            "placeholder": "Click to select one or multiple Organisms"
+            "placeholder": "Click to select one or multiple Organisms",
+            "operations": [
+                {
+                    "id": "or",
+                    "name": "Or"
+                },
+                {
+                    "id": "and",
+                    "name": "And"
+                }
+            ]
+        },
+        "glycan_type": {
+            "placeholder": "Select Glycan Type",
+            "placeholderName": "",
+            "placeholderId": ""
+        },
+        "glycan_subtype": {
+            "placeholder": "Select Glycan Subtype",
+            "placeholderName": "",
+            "placeholderId": ""
         },
         "protein_identifier": {
             "length": 100,
@@ -148,7 +168,21 @@
         }
     },
     "composition_search": {
-        "tabTitle": "Composition Search"
+        "tabTitle": "Composition Search",
+        "contains": [
+            {
+                "id": "maybe",
+                "name": "Maybe"
+            },
+            {
+                "id": "yes",
+                "name": "Yes"
+            },
+            {
+                "id": "no",
+                "name": "No"
+            }
+        ]
     },
     "tutorial": {
         "tabTitle": "Tutorial"

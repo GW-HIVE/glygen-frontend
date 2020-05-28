@@ -2,6 +2,8 @@ import React from 'react';
 import MultilineAutoTextInput from '../input/MultilineAutoTextInput';
 import RangeInputSlider from '../input/RangeInputSlider';
 import AutoTextInput from '../input/AutoTextInput';
+import SelectControl from '../select/SelectControl';
+import CategorizedAutoTextInput from '../input/CategorizedAutoTextInput';
 import MultiselectTextInput from '../input/MultiselectTextInput';
 import HelpTooltip from '../tooltip/HelpTooltip';
 import ExampleExploreControl from '../example/ExampleExploreControl';
@@ -10,174 +12,114 @@ import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
+import {sortDropdown} from '../../utils/common';
 import '../../css/Search.css';
 import proteinSearchData from '../../data/json/proteinSearch';
 import stringConstants from '../../data/json/stringConstants';
-
 
 const ProteinAdvancedSearch = (props) => {
     let commonProteinData = stringConstants.protein.common;
     let advancedSearch = proteinSearchData.advanced_search;
 
-	function sortDropdown(a, b) {
-		if (a.name < b.name) {
-			return -1;
-		} else if (b.name < a.name) {
-			return 1;
-		}
-		return 0;
+	function proteinIdChange(inputProteinId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[0] = inputProteinId.length > advancedSearch.uniprot_canonical_ac.length;
+		props.setProAdvSearchData({ proteinId: inputProteinId, proAdvSearchValError: valArr });
+	}
+
+	function proRefSeqIdChange(inputProRefSeqId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[1] = inputProRefSeqId.length > advancedSearch.refseq_ac.length;
+		props.setProAdvSearchData({ proRefSeqId: inputProRefSeqId, proAdvSearchValError: valArr });
+	}
+
+	function proMassInputChange(inputMass) {
+        props.setProAdvSearchData({ proMassInput: inputMass })
+    }
+    
+    function proMassSliderChange(inputMass) {
+        props.setProAdvSearchData({ proMass: inputMass })
+	}
+
+	const proOrganismOnChange = (value, name) => {
+		props.setProAdvSearchData({ proOrganism: {id: value, name: name} });
+	}
+
+	function proteinNameChange(inputProteinName) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[2] = inputProteinName.length > advancedSearch.protein_name.length;
+		props.setProAdvSearchData({ proteinName: inputProteinName, proAdvSearchValError: valArr });	
+	}
+
+	function proGeneNameChange(inputGeneName) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[3] = inputGeneName.length > advancedSearch.gene_name.length;
+		props.setProAdvSearchData({ proGeneName: inputGeneName, proAdvSearchValError: valArr });	
+	}
+
+	function proGONameChange(inputProGOName) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[4] = inputProGOName.length > advancedSearch.go_term.length;
+		props.setProAdvSearchData({ proGOName: inputProGOName, proAdvSearchValError: valArr });
+	}
+
+	function proGOIdChange(inputProGOId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[5] = inputProGOId.length > advancedSearch.go_id.length;
+		props.setProAdvSearchData({ proGOId: inputProGOId, proAdvSearchValError: valArr });
+	}
+
+	function proGlytoucanAcChange(inputGlytoucanAc) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[6] = inputGlytoucanAc.length > advancedSearch.glytoucan_ac.length;
+		props.setProAdvSearchData({ proGlytoucanAc: inputGlytoucanAc, proAdvSearchValError: valArr });
 	}
 
 	function proAminoAcidChange(inputProAminoAcid) {
 		props.setProAdvSearchData({ proAminoAcid: inputProAminoAcid });
 	}
 
-	const proAminoAcidOperationOnChange = (event) => {
-		props.setProAdvSearchData({ proAminoAcidOperation: event.target.value });
-	}
-
-	const glyMassTypeOnChange = (event) => {
-		props.setGlyAdvSearchData({ glyMassType: event.target.value });
-		setMassValues(event.target.value, props.inputValue.glyMass);
-	};
-
-	const setMassValues = (massType, massValues) => {
-		var perMet_mass_min = Math.floor(
-			props.initData.glycan_mass.permethylated.min
-		);
-		var perMet_mass_max = Math.ceil(
-			props.initData.glycan_mass.permethylated.max
-		);
-		var native_mass_min,
-			minRange,
-			minval = Math.floor(props.initData.glycan_mass.native.min);
-		var native_mass_max,
-			maxRange,
-			maxval = Math.ceil(props.initData.glycan_mass.native.max);
-		var mass_type_native = props.initData.glycan_mass.native.name;
-		native_mass_min = minRange = minval;
-		native_mass_max = maxRange = maxval;
-
-		if (massType === undefined) massType = mass_type_native;
-
-		if (massValues !== undefined) {
-			minval = massValues[0];
-			maxval = massValues[1];
-		}
-
-		if (massType === mass_type_native) {
-			if (minval === perMet_mass_min) minval = native_mass_min;
-
-			if (maxval === perMet_mass_max || maxval > native_mass_max)
-				maxval = native_mass_max;
-		} else {
-			if (minval === native_mass_min || minval < perMet_mass_min)
-				minval = perMet_mass_min;
-
-			if (maxval === native_mass_max) maxval = perMet_mass_max;
-
-			minRange = perMet_mass_min;
-			maxRange = perMet_mass_max;
-		}
-
-		props.setGlyAdvSearchData({ glyMassRange: [minRange, maxRange] });
-		props.setGlyAdvSearchData({ glyMassInput: [minval, maxval] });
-		props.setGlyAdvSearchData({ glyMass: [minval, maxval] });
-    };
-
-    function proMassInputChange(mass) {
-        props.setProAdvSearchData({ proMassInput: mass })
-    }
-    
-    function proMassSliderChange(mass) {
-        props.setProAdvSearchData({ proMass: mass })
-    }
-
-	const proOrganismOnChange = (event, child) => {
-		props.setProAdvSearchData({ proOrganism: {id : child.props.value, name : child.props.name} });
-	};
-
-	function proteinNameChange(inputProteinName) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[0] = inputProteinName.length > 1000;
-		props.setProAdvSearchData({ proteinName: inputProteinName, proAdvSearchValError: valArr });	
-	}
-
-	function proGeneNameChange(inputGeneName) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[0] = inputGeneName.length > 1000;
-		props.setProAdvSearchData({ proGeneName: inputGeneName, proAdvSearchValError: valArr });	
-	}
-
-	function proteinIdChange(inputProteinId) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[0] = inputProteinId.length > 2500;
-		props.setProAdvSearchData({ proteinId: inputProteinId, proAdvSearchValError: valArr });
-	}
-
-	function proRefSeqIdChange(inputProRefSeqId) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[1] = inputProRefSeqId.length > 12;
-		props.setProAdvSearchData({ proRefSeqId: inputProRefSeqId, proAdvSearchValError: valArr });
-	}
-
-	function proGONameChange(inputProGOName) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[2] = inputProGOName.length > 47;
-		props.setProAdvSearchData({ proGOName: inputProGOName, proAdvSearchValError: valArr });
-	}
-
-	function proGOIdChange(inputProGOId) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[3] = inputProGOId.length > 12;
-		props.setProAdvSearchData({ proGOId: inputProGOId, proAdvSearchValError: valArr });
-	}
-
-	function proGlytoucanAcChange(inputGlytoucanAc) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[3] = inputGlytoucanAc.length > 12;
-		props.setProAdvSearchData({ proGlytoucanAc: inputGlytoucanAc, proAdvSearchValError: valArr });
-	}
-
-	function proPubIdChange(inputProPubId) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[4] = inputProPubId.length > 20;
-		props.setProAdvSearchData({ proPubId: inputProPubId, proAdvSearchValError: valArr });
-	}
-
-	const PubmedIdChange = (event) => {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[4] = event.target.value.length > 20;
-		props.setProAdvSearchData({ proPubId: event.target.value, proAdvSearchValError: valArr });
+	const proAminoAcidOperationOnChange = (value) => {
+		props.setProAdvSearchData({ proAminoAcidOperation: value });
 	}
 
 	function proSequenceChange(inputProSequence) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[4] = inputProSequence.length > 20;
+		valArr[7] = inputProSequence.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: inputProSequence, proAdvSearchValError: valArr });
 	}
 
 	const SequenceChange = (event) => {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[4] = event.target.value.length > 20;
+		valArr[7] = event.target.value.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: event.target.value, proAdvSearchValError: valArr });
 	}
 	
 	function proPathwayIdChange(inputProPathwayId) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[4] = inputProPathwayId.length > 20;
+		valArr[8] = inputProPathwayId.length > advancedSearch.pathway_id.length;
 		props.setProAdvSearchData({ proPathwayId: inputProPathwayId, proAdvSearchValError: valArr });
 	}
-	 
-	const proRelationOnChange = (event) => {
-		props.setProAdvSearchData({ proRelation: event.target.value });
+
+	function proPubIdChange(inputProPubId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[9] = inputProPubId.length > advancedSearch.pmid.length;
+		props.setProAdvSearchData({ proPubId: inputProPubId, proAdvSearchValError: valArr });
 	}
+
+	const PubmedIdChange = (event) => {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[9] = event.target.value.length > advancedSearch.pmid.length;
+		props.setProAdvSearchData({ proPubId: event.target.value, proAdvSearchValError: valArr });
+	}
+
+	const proGlyEvidenceOnChange = (value) => {
+		props.setProAdvSearchData({ proGlyEvidence: value });
+	}
+	 
 	const clearProtein = () => {
 		props.setProAdvSearchData({
 			proteinId: '',
@@ -187,14 +129,28 @@ const ProteinAdvancedSearch = (props) => {
 				Math.ceil(props.initData.protein_mass.max),
 			],
 			proMassInput: [
-				Math.floor(props.initData.protein_mass.min),
-				Math.ceil(props.initData.protein_mass.max),
+				Math.floor(props.initData.protein_mass.min).toLocaleString('en-US'),
+				Math.ceil(props.initData.protein_mass.max).toLocaleString('en-US'),
 			],
 			proMassRange: [
 				Math.floor(props.initData.protein_mass.min),
 				Math.ceil(props.initData.protein_mass.max),
 			],
-			proAdvSearchValError: [false, false, false, false, false],
+			proOrganism: {id: advancedSearch.organism.placeholderId, name: advancedSearch.organism.placeholderName},
+			proteinName: '',
+			proGeneName: '',
+			proGOName: '',
+			proGOId: '',
+			proGlytoucanAc: '',
+			proRelation: 'attached',
+			proAminoAcid: [],
+			proAminoAcidOperation: 'or',
+			proSequence: '',
+			proPathwayId: '',
+			proPubId: '',
+			proGlyEvidence: advancedSearch.glycosylation_evidence.placeholderId,
+			proAdvSearchValError: [false, false, false, false, false,
+				false, false, false, false, false]
 		});
 	};
 
@@ -223,7 +179,7 @@ const ProteinAdvancedSearch = (props) => {
 						</Button>
 					</Row>
 				</Grid>
-				{/* Glycan Id */}
+				{/* Protein Id */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography className={'search-lbl'} gutterBottom>
@@ -290,7 +246,7 @@ const ProteinAdvancedSearch = (props) => {
 							{commonProteinData.mass.name}
 						</Typography>
 						<RangeInputSlider
-							step={1}
+							step={10}
 							min={props.inputValue.proMassRange[0]}
 							max={props.inputValue.proMassRange[1]}
 							inputClass='pro-rng-input'
@@ -315,24 +271,17 @@ const ProteinAdvancedSearch = (props) => {
                             />
                             {commonProteinData.organism.name}
 						</Typography>
-						<Select
-							value={props.inputValue.proOrganism.id}
-							displayEmpty
-							onChange={proOrganismOnChange}
-							classes={{
-                                root: 'select-menu-adv',
-							}}>
-							<MenuItem key="0" value="0" name="All">Select Organism</MenuItem>
-							{props.initData.organism &&
-								props.initData.organism
-									.sort(sortDropdown)
-									.map((option) => (
-										<MenuItem key={option.id} value={option.id} name={option.name}>{option.name}</MenuItem>
-									))}
-						</Select>
+						<SelectControl
+							inputValue={props.inputValue.proOrganism.id}
+							placeholder={advancedSearch.organism.placeholder}
+							placeholderId={advancedSearch.organism.placeholderId}
+							placeholderName={advancedSearch.organism.placeholderName}
+							menu={props.initData.organism}
+							setInputValue={proOrganismOnChange}
+						/>
 					</FormControl>
 				</Grid>
-				{/* RefSeq Accession */}
+				{/* Protein Name */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
@@ -405,7 +354,7 @@ const ProteinAdvancedSearch = (props) => {
                             />
                             {commonProteinData.go_term.name}
 						</Typography>
-						<AutoTextInput
+						<CategorizedAutoTextInput
 							inputValue={props.inputValue.proGOName}
                             setInputValue={proGONameChange}
                             placeholder={advancedSearch.go_term.placeholder}
@@ -477,7 +426,7 @@ const ProteinAdvancedSearch = (props) => {
 						/>
 					</FormControl>
 				</Grid>
-				{/* Organisms */}
+				{/* Glycosylated Amino Acid */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
@@ -492,12 +441,12 @@ const ProteinAdvancedSearch = (props) => {
                                     />
                                     {commonProteinData.glycosylated_aa.name}
 								</Typography>
-								{<MultiselectTextInput
-									options={props.initData.aa_list.sort()}
+								<MultiselectTextInput
+									options={props.initData.aa_list.sort(sortDropdown)}
 									inputValue={props.inputValue.proAminoAcid}
 									setInputValue={proAminoAcidChange}
 									placeholder={advancedSearch.aa_list.placeholder}
-								/>}
+								/>
 							</Grid>
 							<Grid item xs={3} sm={3}>
                                 <Typography className={'search-lbl'} gutterBottom>
@@ -507,17 +456,11 @@ const ProteinAdvancedSearch = (props) => {
                                     variant='outlined' 
                                     fullWidth
                                 >
-									<Select
-										variant='outlined'
-										classes={{
-											root: 'select-menu-adv',
-										}}
-										value={props.inputValue.proAminoAcidOperation}
-										onChange={proAminoAcidOperationOnChange}
-									>
-										<MenuItem value={'or'}>Or</MenuItem>
-										<MenuItem value={'and'}>And</MenuItem>
-									</Select>
+									<SelectControl
+										inputValue={props.inputValue.proAminoAcidOperation}
+										menu={advancedSearch.aa_list.operations}
+										setInputValue={proAminoAcidOperationOnChange}
+									/>
 								</FormControl>
 							</Grid>
 						</Grid>
@@ -552,11 +495,6 @@ const ProteinAdvancedSearch = (props) => {
 								{advancedSearch.sequence.errorText}
 							</FormHelperText>
 						)}
-						{/* <AutoTextInput
-                        inputValue={glyPubId} setInputValue={glycPubIdChange}
-                        placeholder="Enter the Pubmed ID"
-                        typeahedID = "glycan_pmid"
-                        /> */}
                         <ExampleExploreControl
 							setInputValue={proSequenceChange}
 							inputValue={advancedSearch.sequence.examples}
@@ -630,7 +568,7 @@ const ProteinAdvancedSearch = (props) => {
 						/>
 					</FormControl>
 				</Grid>
-				{/* Glycosylation Evidences */}
+				{/* Glycosylation Evidence Type */}
 				<Grid item xs={12} sm={10}>
 					<FormControl
 						fullWidth
@@ -638,23 +576,19 @@ const ProteinAdvancedSearch = (props) => {
 					>
 						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
-                                title={commonProteinData.relation.tooltip.title}
-                                text={commonProteinData.relation.tooltip.text}
+                                title={commonProteinData.glycosylation_evidence.tooltip.title}
+                                text={commonProteinData.glycosylation_evidence.tooltip.text}
                             />
-                            {commonProteinData.relation.name}
+                            {commonProteinData.glycosylation_evidence.name}
 						</Typography>
-						<Select
-							value={props.inputValue.proRelation}
-							displayEmpty
-							onChange={proRelationOnChange}
-							classes={{
-                                root: 'select-menu-adv',
-							}}>
-							<MenuItem value=''>Select Glycosylation Evidence Type</MenuItem>
-							<MenuItem value='both'>Both</MenuItem>
-							<MenuItem value='reported'>Reported</MenuItem>
-							<MenuItem value='predicted'>Predicted</MenuItem>
-						</Select>
+						<SelectControl
+							inputValue={props.inputValue.proGlyEvidence}
+							placeholder={advancedSearch.glycosylation_evidence.placeholder}
+							placeholderId={advancedSearch.glycosylation_evidence.placeholderId}
+							placeholderName={advancedSearch.glycosylation_evidence.placeholderName}
+							menu={advancedSearch.glycosylation_evidence.menu}
+							setInputValue={proGlyEvidenceOnChange}
+						/>
 					</FormControl>
 				</Grid>
 				{/* Buttons Buttom */}
@@ -685,4 +619,6 @@ export default ProteinAdvancedSearch;
 ProteinAdvancedSearch.propTypes = {
 	initData: PropTypes.object,
 	inputValue: PropTypes.object,
+	searchProteinAdvClick: PropTypes.func,
+	setProAdvSearchData: PropTypes.func,
 };

@@ -13,18 +13,18 @@ const ExampleControl = (props) => {
 			Example(s):{" "}
 			{props.exampleMap &&
 				props.exampleMap[props.type].examples.map((key, index, arr) => (
-					<>
-					<LineTooltip key={key} text="Click to insert example.">
-						<Button
-							className={"lnk-btn"}
-							variant="link"
-							onClick={() => {
-								props.setInputValue(key);
-							}}>
-							{key}
-						</Button>
-					</LineTooltip>{arr.length === index + 1 ? "" : ", "}
-					</>
+					<span key={key}>
+						<LineTooltip text="Click to insert example.">
+							<Button
+								className={"lnk-btn"}
+								variant="link"
+								onClick={() => {
+									props.setInputValue(key);
+								}}>
+								{key}
+							</Button>
+						</LineTooltip>{arr.length === index + 1 ? "" : ", "}
+					</span>
 				))}
 		</div>
 	);

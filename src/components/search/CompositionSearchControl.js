@@ -10,9 +10,13 @@ import Button from 'react-bootstrap/Button';
 import { Row } from 'react-bootstrap';
 import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
+import SelectControl from '../select/SelectControl';
+import glycanSearchData from '../../data/json/glycanSearch';
 import '../../css/Search.css';
 
 export default function CompositionSearchControl(props) {
+	let compositionSearch = glycanSearchData.composition_search;
+
 	const [undoStack, setUndoStack] = useState([]);
 	const [redoStack, setRedoStack] = useState([]);
 	const [undoVal, setUndoVal] = useState({});
@@ -545,28 +549,18 @@ export default function CompositionSearchControl(props) {
 						</Grid>
 						<Grid item xs={6} sm={3} md={2}>
 							<FormControl fullWidth>
-								<Select
-									variant='outlined'
+								<SelectControl
+									inputValue={props.inputValue[key.residue].selectValue}
 									defaultValue={'maybe'}
-									name={key.residue}
-									value={props.inputValue[key.residue].selectValue}
-									onChange={(event) =>
-										onSelControlChange(
-											event.target.value,
-											props.inputValue[key.residue].min,
-											props.inputValue[key.residue].max,
-											event.target.name
-										)
-									}
+									variant='outlined'
 									margin='dense'
-									classes={{
-									 root: 'select-menu',
+									rootClass='select-menu'
+									name={key.residue}
+									menu={compositionSearch.contains}
+									setInputValue={(value, name, resName) => {
+										onSelControlChange(value, props.inputValue[key.residue].min, props.inputValue[key.residue].max, resName)
 									}}
-								>
-									<MenuItem value={'maybe'}>Maybe</MenuItem>
-									<MenuItem value={'yes'}>Yes</MenuItem>
-									<MenuItem value={'no'}>No</MenuItem>
-								</Select>
+								/>
 							</FormControl>
 						</Grid>
 						<Grid item xs={3} sm={2}>

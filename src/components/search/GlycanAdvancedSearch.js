@@ -3,6 +3,7 @@ import MultilineAutoTextInput from '../input/MultilineAutoTextInput';
 import RangeInputSlider from '../input/RangeInputSlider';
 import AutoTextInput from '../input/AutoTextInput';
 import MultiselectTextInput from '../input/MultiselectTextInput';
+import SelectControl from '../select/SelectControl';
 import HelpTooltip from '../tooltip/HelpTooltip';
 import ExampleExploreControl from '../example/ExampleExploreControl';
 import Grid from '@material-ui/core/Grid';
@@ -10,12 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
+import {sortDropdown} from '../../utils/common';
 import '../../css/Search.css';
 import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
@@ -25,27 +25,18 @@ const GlycanAdvancedSearch = (props) => {
     let commonGlycanData = stringConstants.glycan.common;
     let advancedSearch = glycanSearchData.advanced_search;
 
-	function sortDropdown(a, b) {
-		if (a.name < b.name) {
-			return -1;
-		} else if (b.name < a.name) {
-			return 1;
-		}
-		return 0;
-	}
-
 	function glyOrgChange(org) {
 		props.setGlyAdvSearchData({ glyOrganisms: org });
 	}
 
-	const glyOrgOperationOnChange = (event) => {
-		props.setGlyAdvSearchData({ glyOrgOperation: event.target.value });
-	};
+	const glyOrgOperationOnChange = (value) => {
+		props.setGlyAdvSearchData({ glyOrgOperation: value });
+	}
 
-	const glyMassTypeOnChange = (event) => {
-		props.setGlyAdvSearchData({ glyMassType: event.target.value });
-		setMassValues(event.target.value, props.inputValue.glyMass);
-	};
+	const glyMassTypeOnChange = (value) => {
+		props.setGlyAdvSearchData({ glyMassType: value });
+		setMassValues(value, props.inputValue.glyMass);
+	}
 
 	const setMassValues = (massType, massValues) => {
 		var perMet_mass_min = Math.floor(
@@ -87,79 +78,73 @@ const GlycanAdvancedSearch = (props) => {
 		}
 
 		props.setGlyAdvSearchData({ glyMassRange: [minRange, maxRange] });
-		props.setGlyAdvSearchData({ glyMassInput: [minval, maxval] });
+		props.setGlyAdvSearchData({ glyMassInput: [Number(minval).toLocaleString('en-US'), Number(maxval).toLocaleString('en-US')] });
 		props.setGlyAdvSearchData({ glyMass: [minval, maxval] });
     };
 
-    function glyMassInputChange(mass) {
-        props.setGlyAdvSearchData({ glyMassInput: mass })
+    function glyMassInputChange(inputMass) {
+        props.setGlyAdvSearchData({ glyMassInput: inputMass })
     }
     
-    function glyMassSliderChange(mass) {
-        props.setGlyAdvSearchData({ glyMass: mass })
+    function glyMassSliderChange(inputMass) {
+        props.setGlyAdvSearchData({ glyMass: inputMass })
     }
     
-    function glyNumSugarsInputChange(numSugars) {
-        props.setGlyAdvSearchData({ glyNumSugarsInput: numSugars })
+    function glyNumSugarsInputChange(inputNumSugars) {
+        props.setGlyAdvSearchData({ glyNumSugarsInput: inputNumSugars })
     }
     
-    function glyNumSugarsSliderChange(numSugars) {
-        props.setGlyAdvSearchData({ glyNumSugars: numSugars })
+    function glyNumSugarsSliderChange(inputNumSugars) {
+        props.setGlyAdvSearchData({ glyNumSugars: inputNumSugars })
     }
 
-	const glyTypeOnChange = (event) => {
-		if (event.target.value === '')
+	const glyTypeOnChange = (value) => {
+		if (value === '')
 			props.setGlyAdvSearchData({ glySubTypeIsHidden: true });
 		else props.setGlyAdvSearchData({ glySubTypeIsHidden: false });
 
 		props.setGlyAdvSearchData({ glySubType: '' });
-		props.setGlyAdvSearchData({ glyType: event.target.value });
-	};
+		props.setGlyAdvSearchData({ glyType: value });
+	}
 
-	const glySubTypeOnChange = (event) => {
-		props.setGlyAdvSearchData({ glySubType: event.target.value });
-	};
+	const glySubTypeOnChange = (value) => {
+		props.setGlyAdvSearchData({ glySubType: value });
+	}
 
 	function glycanIdChange(inputGlycanId) {
-		props.setGlyAdvSearchData({ glycanId: inputGlycanId });
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[0] = inputGlycanId.length > 2500;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[0] = inputGlycanId.length > advancedSearch.glycan_id.length;
+		props.setGlyAdvSearchData({ glycanId: inputGlycanId, glyAdvSearchValError: valArr });
 	}
 
-	function glyProtChange(inputglycoProt) {
-		props.setGlyAdvSearchData({ glyProt: inputglycoProt });
+	function glyProtChange(inputGlyProt) {
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[1] = inputglycoProt.length > 12;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[1] = inputGlyProt.length > advancedSearch.protein_identifier.length;
+		props.setGlyAdvSearchData({ glyProt: inputGlyProt, glyAdvSearchValError: valArr });
 	}
 
-	function glyMotifChange(inputglycMotif) {
-		props.setGlyAdvSearchData({ glyMotif: inputglycMotif });
+	function glyMotifChange(inputGlyMotif) {
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[2] = inputglycMotif.length > 47;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[2] = inputGlyMotif.length > advancedSearch.glycan_motif.length;
+		props.setGlyAdvSearchData({ glyMotif: inputGlyMotif, glyAdvSearchValError: valArr });
 	}
 
-	function glyBioEnzChange(inputglyBioEnz) {
-		props.setGlyAdvSearchData({ glyBioEnz: inputglyBioEnz });
+	function glyBioEnzChange(inputGlyBioEnz) {
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[3] = inputglyBioEnz.length > 12;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[3] = inputGlyBioEnz.length > advancedSearch.enzyme.length;
+		props.setGlyAdvSearchData({ glyBioEnz: inputGlyBioEnz, glyAdvSearchValError: valArr });
 	}
 
-	function glyPubIdChange(inputglycPubId) {
-		props.setGlyAdvSearchData({ glyPubId: inputglycPubId });
+	function glyPubIdChange(inputGlyPubId) {
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[4] = inputglycPubId.length > 20;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[4] = inputGlyPubId.length > advancedSearch.pmid.length;
+		props.setGlyAdvSearchData({ glyPubId: inputGlyPubId, glyAdvSearchValError: valArr });
 	}
 
 	const PubmedIdChange = (event) => {
-		props.setGlyAdvSearchData({ glyPubId: event.target.value });
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[4] = event.target.value.length > 20;
-		props.setGlyAdvSearchData({ glyAdvSearchValError: valArr });
+		valArr[4] = event.target.value.length > advancedSearch.pmid.length;
+		props.setGlyAdvSearchData({ glyPubId: event.target.value, glyAdvSearchValError: valArr });
 	};
 
 	const clearGlycan = () => {
@@ -171,8 +156,8 @@ const GlycanAdvancedSearch = (props) => {
 				Math.ceil(props.initData.glycan_mass.native.max),
 			],
 			glyMassInput: [
-				Math.floor(props.initData.glycan_mass.native.min),
-				Math.ceil(props.initData.glycan_mass.native.max),
+				Math.floor(props.initData.glycan_mass.native.min).toLocaleString('en-US'),
+				Math.ceil(props.initData.glycan_mass.native.max).toLocaleString('en-US'),
 			],
 			glyMassRange: [
 				Math.floor(props.initData.glycan_mass.native.min),
@@ -187,13 +172,13 @@ const GlycanAdvancedSearch = (props) => {
 				props.initData.number_monosaccharides.max,
 			],
 			glyNumSugarsInput: [
-				props.initData.number_monosaccharides.min,
-				props.initData.number_monosaccharides.max,
+				Number(props.initData.number_monosaccharides.min).toLocaleString('en-US'),
+				Number(props.initData.number_monosaccharides.max).toLocaleString('en-US'),
 			],
 			glyOrganisms: [],
 			glyOrgOperation: 'or',
-			glyType: '',
-			glySubType: '',
+			glyType: advancedSearch.glycan_type.placeholderId,
+			glySubType: advancedSearch.glycan_subtype.placeholderId,
 			glySubTypeIsHidden: true,
 			glyProt: '',
 			glyMotif: '',
@@ -290,23 +275,13 @@ const GlycanAdvancedSearch = (props) => {
 									<InputLabel className={'select-lbl-inline'}>
                                         {commonGlycanData.mass_type.name}
 									</InputLabel>
-									<Select
-										value={props.inputValue.glyMassType}
-										onChange={glyMassTypeOnChange}
-										classes={{
-											root: 'select-menu-adv',
-										}}
-										labelWidth={85}>
-											{Object.keys(props.initData.glycan_mass)
-												.sort()
-												.map((key) => (
-													<MenuItem
-                                                        key={props.initData.glycan_mass[key].name}
-														value={props.initData.glycan_mass[key].name}>
-														{props.initData.glycan_mass[key].name}
-													</MenuItem>
-												))}
-									</Select>
+									<SelectControl
+										inputValue={props.inputValue.glyMassType}
+										labelWidth={85}
+										menu={Object.keys(props.initData.glycan_mass)
+												.map((massType)  => {return {id: props.initData.glycan_mass[massType].name, name: props.initData.glycan_mass[massType].name}})}
+										setInputValue={glyMassTypeOnChange}
+									/>
 								</FormControl>
 							</Grid>
 						</Grid>
@@ -368,17 +343,11 @@ const GlycanAdvancedSearch = (props) => {
                                     variant='outlined' 
                                     fullWidth
                                 >
-									<Select
-										variant='outlined'
-										classes={{
-											root: 'select-menu-adv',
-										}}
-										value={props.inputValue.glyOrgOperation}
-										onChange={glyOrgOperationOnChange}
-									>
-										<MenuItem value={'or'}>Or</MenuItem>
-										<MenuItem value={'and'}>And</MenuItem>
-									</Select>
+									<SelectControl
+										inputValue={props.inputValue.glyOrgOperation}
+										menu={advancedSearch.organism.operations}
+										setInputValue={glyOrgOperationOnChange}
+									/>
 								</FormControl>
 							</Grid>
 						</Grid>
@@ -397,21 +366,14 @@ const GlycanAdvancedSearch = (props) => {
                             />
                             {commonGlycanData.glycan_type.name}
 						</Typography>
-						<Select
-							value={props.inputValue.glyType}
-							displayEmpty
-							onChange={glyTypeOnChange}
-							classes={{
-                                root: 'select-menu-adv',
-							}}>
-							<MenuItem value=''>Select Glycan Type</MenuItem>
-							{props.initData.glycan_type &&
-								props.initData.glycan_type
-									.sort(sortDropdown)
-									.map((option) => (
-										<MenuItem key={option.name} value={option.name}>{option.name}</MenuItem>
-									))}
-						</Select>
+						<SelectControl
+							inputValue={props.inputValue.glyType}
+							placeholder={advancedSearch.glycan_type.placeholder}
+							placeholderId={advancedSearch.glycan_type.placeholderId}
+							placeholderName={advancedSearch.glycan_type.placeholderName}
+							menu={props.initData.glycan_type.map((type) => {return {id: type.name, name: type.name}})}
+							setInputValue={glyTypeOnChange}
+						/>
 					</FormControl>
 				</Grid>
 				{/* Glycan Subtype */}
@@ -421,7 +383,6 @@ const GlycanAdvancedSearch = (props) => {
 						<FormControl
 							fullWidth
 							variant='outlined'
-							//margin='dense'
 						>
 							<Typography className={'search-lbl'} gutterBottom>
 								<HelpTooltip
@@ -430,29 +391,15 @@ const GlycanAdvancedSearch = (props) => {
                                 />
                             {commonGlycanData.glycan_subtype.name}
 							</Typography>
-							<Select
-								value={props.inputValue.glySubType}
-								displayEmpty
-								onChange={glySubTypeOnChange}
-								classes={{
-									root: 'select-menu-adv',
-								}}
-							>
-								<MenuItem value='' selected>
-									Select Glycan Subtype
-								</MenuItem>
-								{props.initData.glycan_type &&
-									props.initData.glycan_type.map((option) =>
-										option.subtype
-											.sort()
-											.map(
-												(subtype) =>
-													option.name === props.inputValue.glyType && (
-														<MenuItem key={subtype} value={subtype}>{subtype}</MenuItem>
-													)
-											)
-									)}
-							</Select>
+							<SelectControl
+								inputValue={props.inputValue.glySubType}
+								placeholder={advancedSearch.glycan_subtype.placeholder}
+								placeholderId={advancedSearch.glycan_subtype.placeholderId}
+								placeholderName={advancedSearch.glycan_subtype.placeholderName}
+								menu={props.initData.glycan_type.find((type) => {return type.name === props.inputValue.glyType})
+										.subtype.map((subtype) => {return {id: subtype, name: subtype}})}
+								setInputValue={glySubTypeOnChange}
+							/>
 						</FormControl>
 					</Grid>
 				)}
@@ -610,6 +557,6 @@ export default GlycanAdvancedSearch;
 GlycanAdvancedSearch.propTypes = {
 	initData: PropTypes.object,
 	inputValue: PropTypes.object,
-	setCompositionData: PropTypes.func,
-	getSelectionValue: PropTypes.func,
+	searchGlycanAdvClick: PropTypes.func,
+	setGlyAdvSearchData: PropTypes.func,
 };

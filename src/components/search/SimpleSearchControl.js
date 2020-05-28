@@ -1,7 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,25 +7,17 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ExampleControl from "../example/ExampleControl";
+import SelectControl from '../select/SelectControl';
 import '../../css/Search.css';
 
 export default function SimpleSearchControl(props) {
 
-	const simpleSearchCategoryOnChange = (event) => {
-		props.setSimpleSearchCategory(event.target.value);
-	};
+	const simpleSearchCategoryOnChange = (value) => {
+		props.setSimpleSearchCategory(value);
+	}
 
 	const simpleSearchTermOnChange = (event) => {
 		props.setSimpleSearchTerm(event.target.value);
-	};
-
-	function sortSimpleSearchCategory(a, b) {
-		if (a.display < b.display) {
-			return -1;
-		} else if (b.display < a.display) {
-			return 1;
-		}
-		return 0;
 	}
 
 	return (
@@ -39,21 +29,13 @@ export default function SimpleSearchControl(props) {
 				<Grid item xs={12} sm={3}>
 					<FormControl variant='outlined' fullWidth>
 						<InputLabel className={'select-lbl-inline'}>{props.simpleSearchCategoryLabel}</InputLabel>
-						<Select
-							value={props.simpleSearchCategory}
-							onChange={simpleSearchCategoryOnChange}
-							defaultValue='any'
-							classes={{
-								root: 'select-menu',
-							}}
-							labelWidth={80}>
-							{props.simple_search_category &&
-								props.simple_search_category
-									.sort(sortSimpleSearchCategory)
-									.map((key) => (
-										<MenuItem key={key.id} value={key.id}>{key.display}</MenuItem>
-									))}
-						</Select>
+						<SelectControl
+							inputValue={props.simpleSearchCategory}
+							rootClass='select-menu'
+							labelWidth={80}
+							menu={props.simple_search_category.map((category) => {return {id: category.id, name: category.display}})}
+							setInputValue={simpleSearchCategoryOnChange}
+						/>
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} sm={6}>

@@ -91,6 +91,15 @@
 	padding-left: 14px !important;
 }
 
+.categorized-auto-option {
+	padding-left: 28px !important;
+}
+
+.categorized-auto-label {
+	padding-left: 14px !important;
+	font-weight: bold !important;
+}
+
 .select-menu {
 	background-color: white !important;
 }

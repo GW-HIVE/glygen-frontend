@@ -1,30 +1,30 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { getTypeahed } from '../../data/commonApi';
+import { getCategorizedTypeahed } from '../../data/commonApi';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/Search.css';
 
 export default function AutoTextInput(props) {
-	const [options, setOptions] = React.useState([]);
-	const inputValueRef = React.useRef(props.inputValue);
+    const [options, setOptions] = React.useState([]);
+    const inputValueRef = React.useRef(props.inputValue);
     inputValueRef.current = props.inputValue;
 
 	const handleChange = (event, value, reason) => {
 		if (!(event === null && value === "" && reason === "reset")){
-			props.setInputValue(value);
+			  props.setInputValue(value);
 		}
 	};
 
 	React.useEffect(() => {
-		if (props.inputValue.trim() === '') {
+		if (props.inputValue.trim().length < 5) {
 			setOptions([]);
 			return undefined;
 		}
 
 		if (props.inputValue) {
-			getTypeahed(props.typeahedID, props.inputValue).then((response) => inputValueRef.current.trim() !== '' ? setOptions(response.data) : setOptions([]));
+			getCategorizedTypeahed(props.typeahedID, props.inputValue).then((response) => inputValueRef.current.trim().length > 4 ? setOptions(response.data) : setOptions([]));
 		}
 
 		return;
@@ -34,14 +34,16 @@ export default function AutoTextInput(props) {
 		<>
 			<Autocomplete
 				freeSolo
-				getOptionLabel={(option) => option}
+				getOptionLabel={(option) => option.label}
+				groupBy={(option) => option.category}
 				classes={{
-				 	option: 'auto-option',
+				 	option: 'categorized-auto-option',
 				 	inputRoot: 'auto-input-root',
-				 	input: 'input-auto'
-				}}
-				options={options}
-				filterOptions={(options) => options}
+					input: 'input-auto',
+					groupLabel: 'categorized-auto-label'
+                }}
+                options={options}
+                filterOptions={(options) => options}
 				autoHighlight={true}
 				inputValue={props.inputValue}
 				onInputChange={handleChange}

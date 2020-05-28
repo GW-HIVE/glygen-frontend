@@ -87,6 +87,11 @@
                 }
             ]
         },
+        "organism": {
+            "placeholder": "Select Organism",
+            "placeholderName": "All",
+            "placeholderId": "0"
+        },
         "protein_name": {
             "length": 1000,
             "errorText": "Entry is too long - max length is 1000.",
@@ -145,8 +150,8 @@
             ]
         },
         "go_id": {
-            "length": 1000,
-            "errorText": "Entry is too long - max length is 1000.",
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
             "typeahedID": "go_id",
             "placeholder": "Enter the GO ID of your protein",
             "examples": [
@@ -164,8 +169,8 @@
             ]
         },
         "glytoucan_ac": {
-            "length": 1000,
-            "errorText": "Entry is too long - max length is 1000.",
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
             "typeahedID": "glytoucan_ac",
             "placeholder": "Enter the GlyTouCan Accession",
             "examples": [
@@ -179,11 +184,21 @@
             ]
         },
         "aa_list": {
-            "placeholder": "Click to select one or multiple Amino Acids"
+            "placeholder": "Click to select one or multiple Amino Acids",
+            "operations": [
+                {
+                    "id": "or",
+                    "name": "Or"
+                },
+                {
+                    "id": "and",
+                    "name": "And"
+                }
+            ]
         },
         "sequence": {
-            "length": 1000,
-            "errorText": "Entry is too long - max length is 1000.",
+            "length": 2500,
+            "errorText": "Entry is too long - max length is 2500.",
             "placeholder": "Enter a Protein or Peptide Sequence",
             "examples": [
                 {
@@ -193,13 +208,6 @@
                         "id": "MWVTKLLPA"
                     },
                     "explore": {
-                        "id": "Protein",
-                        "url": "https://www.ncbi.nlm.nih.gov/protein"
-                    }
-                },
-                {
-                    "orderID": 200,
-                    "explore": {
                         "id": "Peptide Sequence",
                         "url": "https://www.uniprot.org/help/sequences"
                     }
@@ -207,8 +215,8 @@
             ]
         },
         "pathway_id": {
-            "length": 1000,
-            "errorText": "Entry is too long - max length is 1000.",
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
             "typeahedID": "pathway_id",
             "placeholder": "Enter a KEGG Pathway or Reactome ID",
             "examples": [
@@ -251,6 +259,25 @@
                         "id": "Pubmed ID",
                         "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
                     }
+                }
+            ]
+        },
+        "glycosylation_evidence": {
+            "placeholder": "Select Glycosylation Evidence Type",
+            "placeholderId": "",
+            "placeholderName": "",
+            "menu": [
+                {
+                    "id": "both",
+                    "name": "Both"
+                },
+                {
+                    "id": "reported",
+                    "name": "Reported"
+                },
+                {
+                    "id": "predicted",
+                    "name": "Predicted"
                 }
             ]
         }
