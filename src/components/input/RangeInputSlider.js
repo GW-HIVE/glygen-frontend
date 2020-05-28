@@ -31,7 +31,7 @@ export default function RangeInputSlider(props) {
 	const onMinMoveOut = () => {
 		let val = [Math.floor(props.inputValue[0].replace(/[^0-9.]/g, "")), Math.ceil(props.inputValue[1].replace(/[^0-9.]/g, ""))];
 		if (Number(val[0]) < Number(props.min)) val[0] = props.min;
-		else if (val[0] === '') val[0] = props.min;
+		else if (val[0] === 0) val[0] = props.min;
 		else if (Number(val[0]) > Number(val[1]))
 			val[0] = val[1];
 		
@@ -43,7 +43,7 @@ export default function RangeInputSlider(props) {
 	const onMaxMoveOut = () => {
 		let val = [Math.floor(props.inputValue[0].replace(/[^0-9.]/g, "")), Math.ceil(props.inputValue[1].replace(/[^0-9.]/g, ""))];
 		if (Number(val[1]) > Number(props.max)) val[1] = props.max;
-		else if (val[1] === '') val[1] = props.max;
+		else if (val[1] === 0) val[1] = props.max;
 		else if (Number(val[1]) < Number(val[0]))
 			val[1] = val[0];
 
