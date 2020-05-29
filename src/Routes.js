@@ -9,6 +9,7 @@ import ProteinDetail from "./pages/ProteinDetail";
 import GlycanListEditColumns from "./pages/GlycanListEditColumns";
 import GlycanSearch from "./pages/GlycanSearch";
 import ProteinSearch from "./pages/ProteinSearch";
+import GlobalSearchResult from "./pages/GlobalSearchResult";
 import HowToCite from "./pages/HowToCite";
 import ContactUs from "./pages/ContactUs";
 import Disclaimer from "./pages/Disclaimer";
@@ -47,6 +48,10 @@ const Routes = (props) => (
 		<Route
 			path={`${routeConstants.proteinDetail}:id`}
 			component={ProteinDetail}
+		/>
+		<Route
+			path={`${routeConstants.globalSearchResult}:id`}
+			component={GlobalSearchResult}
 		/>
 		<Route path={routeConstants.proteinDetail} component={ProteinDetail} />
 		<Route path={routeConstants.resources} component={Resources} />

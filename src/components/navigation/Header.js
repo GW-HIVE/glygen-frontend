@@ -3,16 +3,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from "../../images/glygen_logos/glygen-logoW.svg";
 import { Link, NavLink } from "react-router-dom";
 import { NavDropdown, Navbar, Nav, Row, Col } from "react-bootstrap";
-import SearchIcon from "@material-ui/icons/Search";
 import PersonIcon from "@material-ui/icons/Person";
-import { fade, makeStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
+import GlobalSearchControl from '../search/GlobalSearchControl';
+
 import {
 	GLYGEN_API,
 	GLYGEN_BETA,
@@ -22,38 +21,6 @@ import {
 import routeConstants from "../../data/json/routeConstants.json";
 
 const useStyles = makeStyles((theme) => ({
-	search: {
-		position: "relative",
-		borderRadius: theme.shape.borderRadius,
-		backgroundColor: fade(theme.palette.common.white, 0.25),
-		"&:hover": {
-			backgroundColor: fade(theme.palette.common.white, 0.35),
-		},
-		marginLeft: 0,
-		marginRight: 15,
-		width: "100%",
-		[theme.breakpoints.up("sm")]: {
-			marginLeft: theme.spacing(1),
-			width: "auto",
-		},
-	},
-	inputRoot: {
-		color: "inherit",
-	},
-	inputInput: {
-		padding: theme.spacing(1, 1, 1, 2),
-		transition: theme.transitions.create("width"),
-		width: "100%",
-		color: "#fff",
-		fontWeight: "bold",
-		fontSize: "20px",
-		[theme.breakpoints.up("sm")]: {
-			maxWidth: 180,
-			// '&:focus': {
-			// 	width: 200
-			// }
-		},
-	},
 	navbarText: {
 		color: "#2f78b7 !important",
 		fontWeight: "600",
@@ -230,20 +197,8 @@ export default function Header() {
 							</NavDropdown>
 						</Nav>
 					</Col>
-					<Col md={"auto"}>
-						<div className={classes.search}>
-							<IconButton aria-label="search">
-								<SearchIcon style={{ color: "#fff" }} />
-							</IconButton>
-							<InputBase
-								placeholder="Search…"
-								classes={{
-									root: classes.inputRoot,
-									input: classes.inputInput,
-								}}
-								inputProps={{ "aria-label": "search" }}
-							/>
-						</div>
+					<Col md={3}>
+						<GlobalSearchControl />
 					</Col>
 				</Navbar.Collapse>
 			</Navbar>
