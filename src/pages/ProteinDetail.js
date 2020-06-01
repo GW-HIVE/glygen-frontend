@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from "react";
-import { getProteinDetail, getGlycanImageUrl } from "../data/protein";
+import { getProteinDetail } from "../data/protein";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -30,6 +30,7 @@ import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
+import { Tab, Tabs, Container } from "react-bootstrap";
 // import ReactCopyClipboard from'../components/ReactCopyClipboard';
 import routeConstants from "../data/json/routeConstants";
 import FunctionList from "../components/FunctionList";
@@ -37,6 +38,8 @@ import FunctionList from "../components/FunctionList";
 import ProteinSequenceDisplay from "../components/ProteinSequenceDisplay";
 import SequenceDisplay from "../components/SequenceDisplay";
 import stringConstants from "../data/json/stringConstants";
+import { getGlycanImageUrl } from "../data/glycan";
+import Button from "react-bootstrap/Button";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -70,7 +73,13 @@ function addCommas(nStr) {
   }
   return x1 + x2;
 }
-
+/**
+ * This function opens the Sequence page.
+ */
+function openSequencePage(uniprot_ac) {
+  var url = "https://www.uniprot.org/uniprot/" + uniprot_ac + "#sequences";
+  window.open(url);
+}
 const getItemsPathway = data => {
   let itemspathway = [];
 
@@ -83,7 +92,8 @@ const getItemsPathway = data => {
           found = true;
           resourceitem.links.push({
             url: pathwayitem.url,
-            id: pathwayitem.id
+            id: pathwayitem.id,
+            name: pathwayitem.name
           });
         }
       }
@@ -93,7 +103,8 @@ const getItemsPathway = data => {
           links: [
             {
               url: pathwayitem.url,
-              id: pathwayitem.id
+              id: pathwayitem.id,
+              name: pathwayitem.name
             }
           ]
         });
@@ -135,31 +146,17 @@ const getItemsCrossRef = data => {
   return itemscrossRef;
 };
 
-const ShowSeqeunce = () => {
-  const [showResults, setShowResults] = React.useState(false);
-  const onClick = () => setShowResults(true);
-  return (
-    <div>
-      <input type="submit" value="ShowSequnce" onClick={onClick} />
-      {showResults ? <SequenceDisplay /> : null}
-    </div>
-  );
-};
-
-// useEffect(() => {
-//   const withImage = data.glycosylation.filter(item => item.glytoucan_ac);
-//   const withoutImage = data.glycosylation.filter(item => !item.glytoucan_ac);
-//   setGlycosylationWithImage(withImage);
-//   setGlycosylationWithoutImage(withoutImage);
-// }, [data]);
-
 const ProteinDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
   const [itemsPathway, setItemsPathway] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const [showIsoformSequences, setShowIsoformSequences] = useState(false);
+  const [showhomologSequences, setShowhomologSequences] = useState(false);
+  const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
+    "with_glycanId"
+  );
   const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
   const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
     []
@@ -183,33 +180,18 @@ const ProteinDetail = props => {
     });
     // eslint-disable-next-line
   }, []);
-  // useEffect(() => {
-  //   const withImage = detailData.glycosylation.filter(
-  //     item => item.glytoucan_ac
-  //   );
-  //   const withoutImage = detailData.glycosylation.filter(
-  //     item => !item.glytoucan_ac
-  //   );
-  //   setGlycosylationWithImage(withImage);
-  //   setGlycosylationWithoutImage(withoutImage);
-  // }, [detailData]);
-
-  function hasGlycanId(item) {
-    return item.glytoucan_ac !== undefined;
-  }
-
-  if (detailData.glycosylation) {
-    detailData.glycosylation = detailData.glycosylation.map(function(item) {
-      item.respos = item.residue + item.position;
-      return item;
-    });
-
-    detailData.itemsGlycosyl = detailData.glycosylation.filter(hasGlycanId);
-
-    detailData.itemsGlycosyl2 = detailData.glycosylation.filter(function(item) {
-      return !hasGlycanId(item);
-    });
-  }
+  useEffect(() => {
+    if (detailData.glycosylation) {
+      const withImage = detailData.glycosylation.filter(
+        item => item.glytoucan_ac
+      );
+      const withoutImage = detailData.glycosylation.filter(
+        item => !item.glytoucan_ac
+      );
+      setGlycosylationWithImage(withImage);
+      setGlycosylationWithoutImage(withoutImage);
+    }
+  }, [detailData]);
 
   const {
     mass,
@@ -276,6 +258,29 @@ const ProteinDetail = props => {
       )
     },
     {
+      dataField: "glytoucan_ac",
+      text: "Glycan Image",
+      sort: false,
+      selected: true,
+      formatter: (value, row) => (
+        <div className="img-wrapper">
+          <img
+            className="img-cartoon-list-page img-cartoon"
+            src={getGlycanImageUrl(row.glytoucan_ac)}
+            alt="Cartoon"
+          />
+        </div>
+      ),
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "30%",
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    },
+    {
       dataField: "position",
       text: "Position",
       sort: true,
@@ -324,13 +329,13 @@ const ProteinDetail = props => {
         return { backgroundColor: "#4B85B6", color: "white" };
       },
       formatter: (value, row) => (
-        <Navbar.Text
-          as={NavLink}
-          to={routeConstants.glycanDetail + row.glytoucan_ac}
-        >
-          {row.disease.doid}
-          {row.disease.name}
-        </Navbar.Text>
+        <>
+          {value.name} (DOID:
+          <Navbar.Text as={NavLink} to={value.url}>
+            {value.doid}
+          </Navbar.Text>
+          )
+        </>
       )
     },
     {
@@ -356,7 +361,12 @@ const ProteinDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
-      }
+      },
+      formatter: (value, row) => (
+        <>
+          {row.sequence_org} → {row.sequence_mut}
+        </>
+      )
     },
 
     {
@@ -387,6 +397,25 @@ const ProteinDetail = props => {
     },
 
     {
+      dataField: "tissue",
+      text: "Tissue",
+      defaultSortField: "tissue",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <>
+          {value.name} (UBERON:
+          <Navbar.Text as={NavLink} to={value.url}>
+            {value.uberon}
+          </Navbar.Text>
+          )
+        </>
+      )
+    },
+
+    {
       dataField: "present",
       text: "Present",
       sort: true,
@@ -411,6 +440,24 @@ const ProteinDetail = props => {
           />
         );
       }
+    },
+    {
+      dataField: "disease",
+      text: "Disease",
+      defaultSortField: "disease",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <>
+          {value.name} (DOID:
+          <Navbar.Text as={NavLink} to={value.url}>
+            {value.doid}
+          </Navbar.Text>
+          )
+        </>
+      )
     },
     {
       dataField: "trend",
@@ -631,9 +678,8 @@ const ProteinDetail = props => {
                             <strong>
                               {proteinStrings.sequence_length.name}:{" "}
                             </strong>
-
                             <Link
-                              href={uniprot.url}
+                              href="https://www.uniprot.org/uniprot/#sequnce"
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -788,7 +834,7 @@ const ProteinDetail = props => {
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
-                        toggleCollapse("species", collapsed.function)
+                        toggleCollapse("function", collapsed.function)
                       }
                       className="gg-green arrow-btn"
                     >
@@ -829,7 +875,7 @@ const ProteinDetail = props => {
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
-                        toggleCollapse("goannotation", collapsed.goannotation)
+                        toggleCollapse("go_annotation", collapsed.goannotation)
                       }
                       className="gg-green arrow-btn"
                     >
@@ -912,14 +958,59 @@ const ProteinDetail = props => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    {glycosylationWithImage &&
-                      glycosylationWithImage.length !== 0 && (
-                        <ClientPaginatedTable
-                          //data={itemsGlycosyl}
-                          columns={glycoSylationColumns}
-                          onClickTarget={"#glycosylation"}
-                        />
-                      )}
+                    {glycosylation && glycosylation.length && (
+                      <Tabs
+                        defaultActiveKey="with_glycanId"
+                        transition={false}
+                        activeKey={glycosylationTabSelected}
+                        mountOnEnter={true}
+                        unmountOnExit={true}
+                        onSelect={key => setGlycosylationTabSelected(key)}
+                      >
+                        <Tab
+                          eventKey="with_glycanId"
+                          // className='tab-content-padding'
+                          title="With Image"
+                        >
+                          <Container>
+                            {glycosylationWithImage &&
+                              glycosylationWithImage.length && (
+                                <ClientPaginatedTable
+                                  data={glycosylationWithImage}
+                                  columns={glycoSylationColumns}
+                                  onClickTarget={"#glycosylation"}
+                                />
+                              )}
+                            {!glycosylationWithImage.length && (
+                              <p>No data available.</p>
+                            )}
+                          </Container>
+                        </Tab>
+                        <Tab
+                          eventKey="without_glycanId"
+                          className="tab-content-padding"
+                          title="Without Image"
+                        >
+                          <Container>
+                            {glycosylationWithoutImage &&
+                              glycosylationWithoutImage.length && (
+                                <ClientPaginatedTable
+                                  data={glycosylationWithoutImage}
+                                  columns={glycoSylationColumns.filter(
+                                    column =>
+                                      column.dataField !== "glytoucan_ac"
+                                  )}
+                                  onClickTarget={"#glycosylation"}
+                                />
+                              )}
+                            {!glycosylationWithoutImage.length && (
+                              <p>No data available.</p>
+                            )}
+                          </Container>
+                        </Tab>
+                      </Tabs>
+                    )}
+
                     {!glycosylation && <p>No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
@@ -948,7 +1039,7 @@ const ProteinDetail = props => {
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
-                        toggleCollapse("species", collapsed.sequence)
+                        toggleCollapse("sequence", collapsed.sequence)
                       }
                       className="gg-green arrow-btn"
                     >
@@ -1062,18 +1153,21 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Isoforms</h3>
                   <div className="float-right">
-                    {/* <div>
-                      <input
-                        type="submit"
-                        value="ShowSequnce"
-                        onClick={ShowSeqeunce}
-                      />
-                      {showResults ? <SequenceDisplay /> : null}
-                    </div> */}
+                    <Button
+                      type="button"
+                      className="gg-btn-blue"
+                      onClick={() =>
+                        setShowIsoformSequences(!showIsoformSequences)
+                      }
+                    >
+                      {showIsoformSequences
+                        ? "Hide Sequences"
+                        : "Show  Sequences"}
+                    </Button>
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
-                        toggleCollapse("species", collapsed.isoforms)
+                        toggleCollapse("isoforms", collapsed.isoforms)
                       }
                       className="gg-green arrow-btn"
                     >
@@ -1115,19 +1209,21 @@ const ProteinDetail = props => {
                                   )}
                                 />
                               </Grid>
-                              <Grid>
-                                {/* <IsoformSequenceDisplay
-                                  sequenceData={isoformsS.sequence}
-                                /> */}
-                                <div classnmae="highlight-display">
-                                  {" "}
-                                  <SequenceDisplay
-                                    sequenceData={isoformsS.sequence.sequence
-                                      .split("")
-                                      .map(a => ({ character: a }))}
-                                  />
-                                </div>
-                              </Grid>
+                              {showIsoformSequences && (
+                                <Grid>
+                                  {/* <IsoformSequenceDisplay
+                                    sequenceData={isoformsS.sequence}
+                                  /> */}
+                                  <div classname="highlight-display">
+                                    {" "}
+                                    <SequenceDisplay
+                                      sequenceData={isoformsS.sequence.sequence
+                                        .split("")
+                                        .map(a => ({ character: a }))}
+                                    />
+                                  </div>
+                                </Grid>
+                              )}
                             </Grid>
                           ))}
                         </Grid>
@@ -1163,10 +1259,21 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Homologs</h3>
                   <div className="float-right">
+                    <Button
+                      type="button"
+                      className="gg-btn-blue"
+                      onClick={() =>
+                        setShowhomologSequences(!showhomologSequences)
+                      }
+                    >
+                      {showhomologSequences
+                        ? "Hide Sequences"
+                        : "Show  Sequences"}
+                    </Button>
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
-                        toggleCollapse("species", collapsed.orthologs)
+                        toggleCollapse("orthologs", collapsed.orthologs)
                       }
                       className="gg-green arrow-btn"
                     >
@@ -1210,19 +1317,18 @@ const ProteinDetail = props => {
                                     )}
                                   />
                                 </Grid>
-                                <Grid>
-                                  {/* <IsoformSequenceDisplay
-                                  sequenceData={isoformsS.sequence}
-                                /> */}
-                                  <div classnmae="highlight-display">
-                                    {" "}
-                                    <SequenceDisplay
-                                      sequenceData={orthologsS.sequence.sequence
-                                        .split("")
-                                        .map(a => ({ character: a }))}
-                                    />
-                                  </div>
-                                </Grid>
+                                {showIsoformSequences && (
+                                  <Grid>
+                                    <div classname="highlight-display">
+                                      {" "}
+                                      <SequenceDisplay
+                                        sequenceData={orthologsS.sequence.sequence
+                                          .split("")
+                                          .map(a => ({ character: a }))}
+                                      />
+                                    </div>
+                                  </Grid>
+                                )}
                               </Grid>
                             )
                           )}
@@ -1349,6 +1455,7 @@ const ProteinDetail = props => {
                     {mutation && mutation.length !== 0 && (
                       <ClientPaginatedTable
                         data={mutation}
+                        defaultSortField={"annotation"}
                         columns={mutationColumns}
                         onClickTarget={"#mutation"}
                       />
@@ -1401,6 +1508,7 @@ const ProteinDetail = props => {
                         data={expression_tissue}
                         columns={expressionTissueColumns}
                         onClickTarget={"#expression_tissue"}
+                        defaultSortField={"tissue"}
                       />
                     )}
                     {!expression_tissue && <p>No data available.</p>}
@@ -1453,6 +1561,7 @@ const ProteinDetail = props => {
                         data={expression_disease}
                         columns={expressionDiseaseColumns}
                         onClickTarget={"#expression_disease"}
+                        defaultSortField={"disease"}
                       />
                     )}
                     {!expression_disease && <p>No data available.</p>}

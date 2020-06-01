@@ -113,20 +113,19 @@ const HiglightSelecter = ({
   type,
   label,
   onSelect,
-  props
+  className
 }) => {
   return (
     <label>
       <input
         type="checkbox"
         name="checkbox"
-        id="seq_n_link"
         disabled={count < 1}
         checked={selectedHighlights[type]}
         onClick={() => onSelect(type)}
       />
       &nbsp;
-      <span className="">{label}</span>
+      <span className={className}>{label}</span>
       {count > 0 && <span className="badge badge-light">{count}</span>}
     </label>
   );
@@ -243,7 +242,7 @@ const ProteinSequenceDisplay = ({
               selectedHighlights={selectedHighlights}
               type="n_link_glycosylation"
               label="N-linked Sites"
-              className={"styleVersion"}
+              className="sequnce1"
               onSelect={handleSelectHighlight}
             />
             {/* <label>
@@ -279,7 +278,7 @@ const ProteinSequenceDisplay = ({
               selectedHighlights={selectedHighlights}
               type="mutation"
               label="Mutations"
-              styleVersion={"sequnce3"}
+              className={"sequnce3"}
               onSelect={handleSelectHighlight}
             />
           </li>
