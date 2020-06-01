@@ -21,6 +21,7 @@ import routeConstants from "./data/json/routeConstants.json";
 import TryMe from "./pages/TryMe";
 import About from "./pages/About";
 import Frameworks from "./pages/Frameworks";
+import Media from "./pages/Media";
 
 const Routes = (props) => (
 	<Switch>
@@ -65,6 +66,7 @@ const Routes = (props) => (
 		<Route path={routeConstants.tryMe} component={TryMe} />
 		<Route path={routeConstants.about} component={About} />
 		<Route path={routeConstants.frameworks} component={Frameworks} />
+		<Route path={routeConstants.media} component={Media} />
 		{/* Keep path='/' at the bottom */}
 		<Route path={routeConstants.home} component={Home} />
 		<Route path={routeConstants.default} component={Home} />
