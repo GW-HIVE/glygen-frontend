@@ -21,7 +21,7 @@ import { ReactComponent as JsonIcon } from "../images/icons/jsonIcon.svg";
 
 const Frameworks = (props) => {
 	const vertHeadFrameworks = {
-		h5VerticalText: "Development",
+		h5VerticalText: "what we use",
 		h2textTop: "Programming",
 		h2textBottomStrongAfter: "Libraries & Frameworks",
 	};
@@ -58,7 +58,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 01</h5>
+									{/* <h5>Development 01</h5> */}
 									<h4>React.js</h4>
 									<p>
 										<em>
@@ -87,7 +87,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 02</h5>
+									{/* <h5>Development 02</h5> */}
 									<h4>HTML5</h4>
 									<p>
 										<em>
@@ -116,7 +116,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 03</h5>
+									{/* <h5>Development 03</h5> */}
 									<h4>CSS3</h4>
 									<p>
 										<em>
@@ -145,7 +145,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 04</h5>
+									{/* <h5>Development 04</h5> */}
 									<h4>JavaScript</h4>
 									<p>
 										<em>
@@ -174,7 +174,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 05</h5>
+									{/* <h5>Development 05</h5> */}
 									<h4>React Bootstrap</h4>
 									<p>
 										<em>
@@ -209,7 +209,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 06</h5>
+									{/* <h5>Development 06</h5> */}
 									<h4>MATERIAL-UI</h4>
 									<p>
 										<em>
@@ -238,7 +238,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 07</h5>
+									{/* <h5>Development 07</h5> */}
 									<h4>ProtVista</h4>
 									<p>
 										<em>
@@ -267,7 +267,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 08</h5>
+									{/* <h5>Development 08</h5> */}
 									<h4>Python</h4>
 									<p>
 										<em>
@@ -296,7 +296,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 09</h5>
+									{/* <h5>Development 09</h5> */}
 									<h4>Axios</h4>
 									<p>
 										<em>
@@ -325,7 +325,7 @@ const Frameworks = (props) => {
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									<h5>Development 10</h5>
+									{/* <h5>Development 10</h5> */}
 									<h4>JSON</h4>
 									<p>
 										<em>

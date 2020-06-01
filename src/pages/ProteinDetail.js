@@ -44,34 +44,34 @@ import Button from "react-bootstrap/Button";
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-  { label: "General", id: "general" },
-  { label: "Species", id: "species" },
-  { label: "Function", id: "function" },
-  { label: "Go Annotation", id: "go_annotation" },
-  { label: "Glycosylation", id: "glycosylation" },
-  { label: "Sequence", id: "sequence" },
-  { label: "Pathway", id: "pathway" },
-  { label: "Isoforms", id: "isoforms" },
-  { label: "Homologs", id: "homologs" },
-  { label: "Disease", id: "disease" },
-  { label: "Mutation", id: "mutation" },
-  { label: "Expression Tissue", id: "expressionT" },
-  { label: "Expression Disease", id: "expressionD" },
-  { label: "Cross References", id: "crossRef" },
-  { label: "Publications", id: "publication" }
+	{ label: "General", id: "general" },
+	{ label: "Species", id: "species" },
+	{ label: "Function", id: "function" },
+	{ label: "Go Annotation", id: "go_annotation" },
+	{ label: "Glycosylation", id: "glycosylation" },
+	{ label: "Sequence", id: "sequence" },
+	{ label: "Pathway", id: "pathway" },
+	{ label: "Isoforms", id: "isoforms" },
+	{ label: "Homologs", id: "homologs" },
+	{ label: "Disease", id: "disease" },
+	{ label: "Mutation", id: "mutation" },
+	{ label: "Expression Tissue", id: "expressionT" },
+	{ label: "Expression Disease", id: "expressionD" },
+	{ label: "Cross References", id: "crossRef" },
+	{ label: "Publications", id: "publication" },
 ];
 
 function addCommas(nStr) {
-  nStr += "";
-  var x = nStr.split(".");
-  var x1 = x[0];
-  var x2 = x.length > 1 ? "." + x[1] : "";
-  var rgx = /(\d+)(\d{3})/;
+	nStr += "";
+	var x = nStr.split(".");
+	var x1 = x[0];
+	var x2 = x.length > 1 ? "." + x[1] : "";
+	var rgx = /(\d+)(\d{3})/;
 
-  while (rgx.test(x1)) {
-    x1 = x1.replace(rgx, "$1" + "," + "$2");
-  }
-  return x1 + x2;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, "$1" + "," + "$2");
+	}
+	return x1 + x2;
 }
 /**
  * This function opens the Sequence page.
@@ -114,36 +114,36 @@ const getItemsPathway = data => {
   return itemspathway;
 };
 
-const getItemsCrossRef = data => {
-  let itemscrossRef = [];
+const getItemsCrossRef = (data) => {
+	let itemscrossRef = [];
 
-  //check data.
-  if (data.crossref) {
-    for (let crossrefitem of data.crossref) {
-      let found = "";
-      for (let databaseitem of itemscrossRef) {
-        if (databaseitem.database === crossrefitem.database) {
-          found = true;
-          databaseitem.links.push({
-            url: crossrefitem.url,
-            id: crossrefitem.id
-          });
-        }
-      }
-      if (!found) {
-        itemscrossRef.push({
-          database: crossrefitem.database,
-          links: [
-            {
-              url: crossrefitem.url,
-              id: crossrefitem.id
-            }
-          ]
-        });
-      }
-    }
-  }
-  return itemscrossRef;
+	//check data.
+	if (data.crossref) {
+		for (let crossrefitem of data.crossref) {
+			let found = "";
+			for (let databaseitem of itemscrossRef) {
+				if (databaseitem.database === crossrefitem.database) {
+					found = true;
+					databaseitem.links.push({
+						url: crossrefitem.url,
+						id: crossrefitem.id,
+					});
+				}
+			}
+			if (!found) {
+				itemscrossRef.push({
+					database: crossrefitem.database,
+					links: [
+						{
+							url: crossrefitem.url,
+							id: crossrefitem.id,
+						},
+					],
+				});
+			}
+		}
+	}
+	return itemscrossRef;
 };
 
 const ProteinDetail = props => {
@@ -162,18 +162,18 @@ const ProteinDetail = props => {
     []
   );
 
-  useEffect(() => {
-    const getProteinDetailData = getProteinDetail(id);
+	useEffect(() => {
+		const getProteinDetailData = getProteinDetail(id);
 
-    getProteinDetailData.then(({ data }) => {
-      if (data.code) {
-        console.log(data.code);
-      } else {
-        setItemsCrossRef(getItemsCrossRef(data));
-        setItemsPathway(getItemsPathway(data));
-        setDetailData(data);
-      }
-    });
+		getProteinDetailData.then(({ data }) => {
+			if (data.code) {
+				console.log(data.code);
+			} else {
+				setItemsCrossRef(getItemsCrossRef(data));
+				setItemsPathway(getItemsPathway(data));
+				setDetailData(data);
+			}
+		});
 
     getProteinDetailData.catch(({ response }) => {
       alert(JSON.stringify(response));
@@ -369,32 +369,32 @@ const ProteinDetail = props => {
       )
     },
 
-    {
-      dataField: "type",
-      text: "Type",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      }
-    }
-  ];
-  const expressionTissueColumns = [
-    {
-      dataField: "evidence",
-      text: "Sources",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      },
-      formatter: (cell, row) => {
-        return (
-          <EvidenceList
-            key={row.tissue.uberon}
-            evidences={groupEvidences(cell)}
-          />
-        );
-      }
-    },
+		{
+			dataField: "type",
+			text: "Type",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white" };
+			},
+		},
+	];
+	const expressionTissueColumns = [
+		{
+			dataField: "evidence",
+			text: "Sources",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white" };
+			},
+			formatter: (cell, row) => {
+				return (
+					<EvidenceList
+						key={row.tissue.uberon}
+						evidences={groupEvidences(cell)}
+					/>
+				);
+			},
+		},
 
     {
       dataField: "tissue",
@@ -502,152 +502,149 @@ const ProteinDetail = props => {
     }
   );
 
-  function toggleCollapse(name, value) {
-    setCollapsed({ [name]: !value });
-  }
-  const expandIcon = <ExpandMoreIcon fontSize="large" />;
-  const closeIcon = <ExpandLessIcon fontSize="large" />;
-  // ===================================== //
+	function toggleCollapse(name, value) {
+		setCollapsed({ [name]: !value });
+	}
+	const expandIcon = <ExpandMoreIcon fontSize="large" />;
+	const closeIcon = <ExpandLessIcon fontSize="large" />;
+	// ===================================== //
 
-  /**
-   * Redirect and opens uniprot_canonical_ac in a subsumption browser
-   * @param {object} uniprot_canonical_ac- uniprot accession ID.
-   **/
-  function handleOpenSubsumptionBrowse(uniprot_canonical_ac) {
-    var url =
-      "https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" +
-      uniprot_canonical_ac;
-    window.open(url);
-  }
+	/**
+	 * Redirect and opens uniprot_canonical_ac in a subsumption browser
+	 * @param {object} uniprot_canonical_ac- uniprot accession ID.
+	 **/
+	function handleOpenSubsumptionBrowse(uniprot_canonical_ac) {
+		var url =
+			"https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" +
+			uniprot_canonical_ac;
+		window.open(url);
+	}
 
-  return (
-    <>
-      <Row className="gg-baseline">
-        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-          <Sidebar items={items} />
-        </Col>
+	return (
+		<>
+			<Row className="gg-baseline">
+				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
+					<Sidebar items={items} />
+				</Col>
 
-        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
-          <div className="content-box-md">
-            <Row>
-              <Grid item xs={12} sm={12} className="text-center">
-                <div className="horizontal-heading">
-                  <h5>Look At</h5>
-                  <h2>
-                    {" "}
-                    <span>
-                      Details for Protein
-                      <strong>
-                        {uniprot && uniprot.uniprot_canonical_ac && (
-                          <> {uniprot.uniprot_canonical_ac}</>
-                        )}
-                      </strong>
-                    </span>
-                  </h2>
-                </div>
-              </Grid>
-            </Row>
-          </div>
-          <div className="gg-download-btn-width">
-            <DownloadButton
-              types={[
-                {
-                  display: " Protein data (*.csv)",
-                  type: "json",
-                  data: "protein_detail"
-                }
-              ]}
-              dataType="protein_detail"
-              dataId={id}
-            />
-          </div>
+				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+					<div className="content-box-md">
+						<Row>
+							<Grid item xs={12} sm={12} className="text-center">
+								<div className="horizontal-heading">
+									<h5>Look At</h5>
+									<h2>
+										{" "}
+										<span>
+											Details for Protein
+											<strong>
+												{uniprot && uniprot.uniprot_canonical_ac && (
+													<> {uniprot.uniprot_canonical_ac}</>
+												)}
+											</strong>
+										</span>
+									</h2>
+								</div>
+							</Grid>
+						</Row>
+					</div>
+					<div className="gg-download-btn-width">
+						<DownloadButton
+							types={[
+								{
+									display: " Protein data (*.csv)",
+									type: "json",
+									data: "protein_detail",
+								},
+							]}
+							dataType="protein_detail"
+							dataId={id}
+						/>
+					</div>
 
-          <React.Fragment>
-            <Helmet>
-              {getTitle("proteinDetail", {
-                uniprot_canonical_ac:
-                  uniprot && uniprot.uniprot_canonical_ac
-                    ? uniprot.uniprot_canonical_ac
-                    : ""
-              })}
-              {getMeta("proteinDetail")}
-            </Helmet>
-            <FeedbackWidget />
-            {/* <ToggleCardlTemplate /> */}
+					<React.Fragment>
+						<Helmet>
+							{getTitle("proteinDetail", {
+								uniprot_canonical_ac:
+									uniprot && uniprot.uniprot_canonical_ac
+										? uniprot.uniprot_canonical_ac
+										: "",
+							})}
+							{getMeta("proteinDetail")}
+						</Helmet>
+						<FeedbackWidget />
+						{/* <ToggleCardlTemplate /> */}
 
-            {/* general */}
-            <Accordion
-              id="general"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.general.title}
-                      text={DetailTooltips.protein.general.text}
-                      urlText={DetailTooltips.protein.general.urlText}
-                      url={DetailTooltips.protein.general.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">General</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("general", collapsed.general)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>{collapsed.general ? closeIcon : expandIcon}</span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <p>
-                      {gene && (
-                        <tbody className="table-body">
-                          {gene.map((genes, genesname) => (
-                            <td key={genesname}>
-                              <div>
-                                <strong>
-                                  {proteinStrings.gene_name.name}:
-                                </strong>
-                                <Link
-                                  href={genes.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {genes.name}
-                                </Link>
-                              </div>
+						{/* general */}
+						<Accordion
+							id="general"
+							defaultActiveKey="0"
+							className="panel-width"
+							style={{ padding: "20px 0" }}>
+							<Card>
+								<Card.Header className="panelHeadBgr">
+									<span className="gg-green d-inline">
+										<HelpTooltip
+											title={DetailTooltips.protein.general.title}
+											text={DetailTooltips.protein.general.text}
+											urlText={DetailTooltips.protein.general.urlText}
+											url={DetailTooltips.protein.general.url}
+											helpIcon="gg-helpicon-detail"
+										/>
+									</span>
+									<h3 className="gg-green d-inline">General</h3>
+									<div className="float-right">
+										<Accordion.Toggle
+											eventKey="0"
+											onClick={() =>
+												toggleCollapse("general", collapsed.general)
+											}
+											className="gg-green arrow-btn">
+											<span>{collapsed.general ? closeIcon : expandIcon}</span>
+										</Accordion.Toggle>
+									</div>
+								</Card.Header>
+								<Accordion.Collapse eventKey="0">
+									<Card.Body>
+										<p>
+											{gene && (
+												<tbody className="table-body">
+													{gene.map((genes, genesname) => (
+														<td key={genesname}>
+															<div>
+																<strong>
+																	{proteinStrings.gene_name.name}:
+																</strong>
+																<Link
+																	href={genes.url}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{genes.name}
+																</Link>
+															</div>
 
-                              <div>
-                                <strong>
-                                  {proteinStrings.gene_location.name}:
-                                </strong>
-                                Chromosome: {""}
-                                {genes.locus.chromosome} {""}(
-                                {genes.locus.start_pos}-{genes.locus.end_pos})
-                              </div>
+															<div>
+																<strong>
+																	{proteinStrings.gene_location.name}:
+																</strong>
+																Chromosome: {""}
+																{genes.locus.chromosome} {""}(
+																{genes.locus.start_pos}-{genes.locus.end_pos})
+															</div>
 
-                              <EvidenceList
-                                evidences={groupEvidences(genes.locus.evidence)}
-                              />
-                            </td>
-                          ))}
-                        </tbody>
-                      )}
-                      {!gene && (
-                        <p className="no-data-msg-publication">
-                          No data available.
-                        </p>
-                      )}
-                    </p>
+															<EvidenceList
+																evidences={groupEvidences(genes.locus.evidence)}
+															/>
+														</td>
+													))}
+												</tbody>
+											)}
+											{!gene && (
+												<p className="no-data-msg-publication">
+													No data available.
+												</p>
+											)}
+										</p>
 
                     <p>
                       {uniprot && uniprot.uniprot_canonical_ac && (
@@ -728,88 +725,84 @@ const ProteinDetail = props => {
                             </strong>
                             {mass.chemical_mass}
                           </div> */}
-                        </>
-                      )}
-                    </p>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
+												</>
+											)}
+										</p>
+									</Card.Body>
+								</Accordion.Collapse>
+							</Card>
+						</Accordion>
 
-            {/*  species */}
-            <Accordion
-              id="species"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.species.title}
-                      text={DetailTooltips.protein.species.text}
-                      urlText={DetailTooltips.protein.species.urlText}
-                      url={DetailTooltips.protein.species.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">Species</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("species", collapsed.species)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>{collapsed.species ? closeIcon : expandIcon}</span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <Row>
-                      {speciesEvidence &&
-                        // For every species object
-                        Object.keys(speciesEvidence).map(species => (
-                          // For every database for current species object
-                          <Col xs={12} sm={12} md={6} lg={6} xl={6}>
-                            <p>
-                              <>
-                                <Row>
-                                  <Col
-                                    align="right"
-                                    style={{
-                                      paddingTop: "12px"
-                                    }}
-                                  >
-                                    <strong>{species}:</strong>
-                                  </Col>
-                                  <Col
-                                    align="left"
-                                    style={{
-                                      paddingLeft: "0",
-                                      marginLeft: "0"
-                                    }}
-                                  >
-                                    <EvidenceList
-                                      evidences={speciesEvidence[species]}
-                                    />
-                                  </Col>
-                                </Row>
-                              </>
-                            </p>
-                          </Col>
-                        ))}
-                      {!species && (
-                        <p className="no-data-msg">No data available.</p>
-                      )}
-                    </Row>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
+						{/*  species */}
+						<Accordion
+							id="species"
+							defaultActiveKey="0"
+							className="panel-width"
+							style={{ padding: "20px 0" }}>
+							<Card>
+								<Card.Header className="panelHeadBgr">
+									<span className="gg-green d-inline">
+										<HelpTooltip
+											title={DetailTooltips.protein.species.title}
+											text={DetailTooltips.protein.species.text}
+											urlText={DetailTooltips.protein.species.urlText}
+											url={DetailTooltips.protein.species.url}
+											helpIcon="gg-helpicon-detail"
+										/>
+									</span>
+									<h3 className="gg-green d-inline">Species</h3>
+									<div className="float-right">
+										<Accordion.Toggle
+											eventKey="0"
+											onClick={() =>
+												toggleCollapse("species", collapsed.species)
+											}
+											className="gg-green arrow-btn">
+											<span>{collapsed.species ? closeIcon : expandIcon}</span>
+										</Accordion.Toggle>
+									</div>
+								</Card.Header>
+								<Accordion.Collapse eventKey="0">
+									<Card.Body>
+										<Row>
+											{speciesEvidence &&
+												// For every species object
+												Object.keys(speciesEvidence).map((species) => (
+													// For every database for current species object
+													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
+														<p>
+															<>
+																<Row>
+																	<Col
+																		align="right"
+																		style={{
+																			paddingTop: "12px",
+																		}}>
+																		<strong>{species}:</strong>
+																	</Col>
+																	<Col
+																		align="left"
+																		style={{
+																			paddingLeft: "0",
+																			marginLeft: "0",
+																		}}>
+																		<EvidenceList
+																			evidences={speciesEvidence[species]}
+																		/>
+																	</Col>
+																</Row>
+															</>
+														</p>
+													</Col>
+												))}
+											{!species && (
+												<p className="no-data-msg">No data available.</p>
+											)}
+										</Row>
+									</Card.Body>
+								</Accordion.Collapse>
+							</Card>
+						</Accordion>
 
             {/*  function */}
             <Accordion
@@ -1193,8 +1186,8 @@ const ProteinDetail = props => {
                                 </Link>
                               </div>
 
-                              <div>
-                                {/* <strong>
+															<div>
+																{/* <strong>
                                   {proteinStrings.isoforms_location.isoform_ac}:
                                 </strong> */}
                                 Chromosome: {""}
@@ -1335,79 +1328,76 @@ const ProteinDetail = props => {
                         </Grid>
                       )}
 
-                      {!orthologs && (
-                        <p classorthologs_ac="no-data-msg-publication">
-                          No data available.
-                        </p>
-                      )}
-                    </p>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-            {/*  disease */}
-            <Accordion
-              id="disease"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.disease.title}
-                      text={DetailTooltips.protein.disease.text}
-                      urlText={DetailTooltips.protein.disease.urlText}
-                      url={DetailTooltips.protein.disease.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">Disease</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("disease", collapsed.disease)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>{collapsed.disease ? closeIcon : expandIcon}</span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <p>
-                      {disease && (
-                        <Grid container classorthologs_ac="table-body">
-                          {disease.map((diseaseS, diseaseSdoid) => (
-                            <Grid item xs={12} key={diseaseSdoid}>
-                              <div>
-                                <strong> {diseaseS.name}</strong>
+											{!orthologs && (
+												<p classorthologs_ac="no-data-msg-publication">
+													No data available.
+												</p>
+											)}
+										</p>
+									</Card.Body>
+								</Accordion.Collapse>
+							</Card>
+						</Accordion>
+						{/*  disease */}
+						<Accordion
+							id="disease"
+							defaultActiveKey="0"
+							className="panel-width"
+							style={{ padding: "20px 0" }}>
+							<Card>
+								<Card.Header className="panelHeadBgr">
+									<span className="gg-green d-inline">
+										<HelpTooltip
+											title={DetailTooltips.protein.disease.title}
+											text={DetailTooltips.protein.disease.text}
+											urlText={DetailTooltips.protein.disease.urlText}
+											url={DetailTooltips.protein.disease.url}
+											helpIcon="gg-helpicon-detail"
+										/>
+									</span>
+									<h3 className="gg-green d-inline">Disease</h3>
+									<div className="float-right">
+										<Accordion.Toggle
+											eventKey="0"
+											onClick={() =>
+												toggleCollapse("disease", collapsed.disease)
+											}
+											className="gg-green arrow-btn">
+											<span>{collapsed.disease ? closeIcon : expandIcon}</span>
+										</Accordion.Toggle>
+									</div>
+								</Card.Header>
+								<Accordion.Collapse eventKey="0">
+									<Card.Body>
+										<p>
+											{disease && (
+												<Grid container classorthologs_ac="table-body">
+													{disease.map((diseaseS, diseaseSdoid) => (
+														<Grid item xs={12} key={diseaseSdoid}>
+															<div>
+																<strong> {diseaseS.name}</strong>
 
-                                <p>
-                                  {" "}
-                                  (ICD10: {diseaseS.icd10} DOID:
-                                  <Link
-                                    href={diseaseS.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {diseaseS.doid})
-                                  </Link>
-                                </p>
-                              </div>
+																<p>
+																	{" "}
+																	(ICD10: {diseaseS.icd10} DOID:
+																	<Link
+																		href={diseaseS.url}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{diseaseS.doid})
+																	</Link>
+																</p>
+															</div>
 
-                              <Grid xs={9}>
-                                <EvidenceList
-                                  evidences={groupEvidences(diseaseS.evidence)}
-                                />
-                              </Grid>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      )}
+															<Grid xs={9}>
+																<EvidenceList
+																	evidences={groupEvidences(diseaseS.evidence)}
+																/>
+															</Grid>
+														</Grid>
+													))}
+												</Grid>
+											)}
 
                       {!disease && (
                         <p classorthologs_ac="no-data-msg-publication">
@@ -1661,76 +1651,74 @@ const ProteinDetail = props => {
                     {/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
 									</span> */}
-                    <Accordion.Toggle
-                      // as={Card.Header}
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("publication", collapsed.publication)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>
-                        {collapsed.publication ? closeIcon : expandIcon}
-                      </span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
-                  <Card.Body className="card-padding-zero">
-                    <Table hover fluid>
-                      {publication && (
-                        <tbody className="table-body">
-                          {publication.map((pub, pubIndex) => (
-                            <tr className="table-row">
-                              <td key={pubIndex}>
-                                <p>
-                                  <div>
-                                    <h5 style={{ marginBottom: "3px" }}>
-                                      <strong>{pub.title}</strong>
-                                    </h5>
-                                  </div>
-                                  <div>{pub.authors}</div>
-                                  <div>
-                                    {pub.journal} <span>&nbsp;</span>({pub.date}
-                                    )
-                                  </div>
-                                  <div>
-                                    <FiBookOpen />
-                                    <span style={{ paddingLeft: "15px" }}>
-                                      PMID:
-                                    </span>{" "}
-                                    <a
-                                      href={pub.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      {pub.pmid}
-                                    </a>
-                                  </div>
-                                  <EvidenceList
-                                    evidences={groupEvidences(pub.evidence)}
-                                  />
-                                </p>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      )}
-                      {!publication && (
-                        <p className="no-data-msg-publication">
-                          No data available.
-                        </p>
-                      )}
-                    </Table>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          </React.Fragment>
-        </Col>
-      </Row>
-    </>
-  );
+										<Accordion.Toggle
+											// as={Card.Header}
+											eventKey="0"
+											onClick={() =>
+												toggleCollapse("publication", collapsed.publication)
+											}
+											className="gg-green arrow-btn">
+											<span>
+												{collapsed.publication ? closeIcon : expandIcon}
+											</span>
+										</Accordion.Toggle>
+									</div>
+								</Card.Header>
+								<Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+									<Card.Body className="card-padding-zero">
+										<Table hover fluid>
+											{publication && (
+												<tbody className="table-body">
+													{publication.map((pub, pubIndex) => (
+														<tr className="table-row">
+															<td key={pubIndex}>
+																<p>
+																	<div>
+																		<h5 style={{ marginBottom: "3px" }}>
+																			<strong>{pub.title}</strong>
+																		</h5>
+																	</div>
+																	<div>{pub.authors}</div>
+																	<div>
+																		{pub.journal} <span>&nbsp;</span>({pub.date}
+																		)
+																	</div>
+																	<div>
+																		<FiBookOpen />
+																		<span style={{ paddingLeft: "15px" }}>
+																			PMID:
+																		</span>{" "}
+																		<a
+																			href={pub.url}
+																			target="_blank"
+																			rel="noopener noreferrer">
+																			{pub.pmid}
+																		</a>
+																	</div>
+																	<EvidenceList
+																		evidences={groupEvidences(pub.evidence)}
+																	/>
+																</p>
+															</td>
+														</tr>
+													))}
+												</tbody>
+											)}
+											{!publication && (
+												<p className="no-data-msg-publication">
+													No data available.
+												</p>
+											)}
+										</Table>
+									</Card.Body>
+								</Accordion.Collapse>
+							</Card>
+						</Accordion>
+					</React.Fragment>
+				</Col>
+			</Row>
+		</>
+	);
 };
 
 export default ProteinDetail;

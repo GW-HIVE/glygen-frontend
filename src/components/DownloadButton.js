@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col } from "react-bootstrap";
 import { downloadFromServer } from "../utils/download";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 // import InputLabel from '@material-ui/core/InputLabel';
 import { withStyles } from "@material-ui/core/styles";
@@ -12,6 +10,8 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import { Link } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import CloseIcon from "@material-ui/icons/Close";
+import SelectControl from './select/SelectControl';
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     "label + &": {
@@ -107,19 +107,11 @@ const DownloadButton = props => {
                   // xs={5}	// sm={5}
                   align="right !important"
                 >
-                  <Select
-                    input={<BootstrapInput />}
-                    value={format}
-                    onChange={e => {
-                      setFormat(e.target.value);
-                    }}
-                  >
-                    {types.map(typeItem => (
-                      <MenuItem value={typeItem.type}>
-                        {typeItem.display}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <SelectControl
+                    inputValue={format}
+                    menu={types.map((typeItem) => {return {id: typeItem.type, name: typeItem.display}})}
+                    setInputValue={value => {setFormat(value)}}
+                  />
                 </Col>
               </Row>
             </FormControl>
