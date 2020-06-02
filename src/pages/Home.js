@@ -155,10 +155,11 @@ export default function Home() {
 			</Helmet>
 
 			<CssBaseline />
+			<BannerHotTopic />
 			<MainFeaturedCard post={mainFeaturedCard} />
-			<Container maxWidth="xl">
+			{/* <Container maxWidth="xl">
 				<BannerHotTopic />
-			</Container>
+			</Container> */}
 			<Container
 				maxWidth="xl"
 				className="gg-container"

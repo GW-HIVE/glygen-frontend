@@ -694,6 +694,7 @@ sub {
 }
 .alert-banner-darkgrey {
 	background-color: #555 !important;
+	border-radius: 0 !important;
 }
 .alert-banner-darkgrey a {
 	color: red !important;
@@ -702,6 +703,32 @@ sub {
 .alert-banner-darkgrey a:hover {
 	color: #bf0101 !important;
 	/* font-weight: 200 !important; */
+}
+.banner-bg {
+	background-color: #444 !important;
+	/* margin-bottom: 0 !important;
+	padding-bottom: 0 !important; */
+}
+
+.banner-info {
+	border-left: solid 2px #555 !important;
+	padding: 5px;
+	/* margin-bottom: 0 !important;
+	padding-bottom: 0 !important; */
+}
+.banner-info h5,
+.banner-info p {
+	color: #fff !important;
+	margin-bottom: 0;
+	/* vertical-align: middle !important; */
+}
+.banner-info a {
+	color: #ff6464 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.banner-info a:hover {
+	color: #bf0101 !important;
 }
 
 /* =========================================
