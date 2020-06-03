@@ -40,6 +40,8 @@ import SequenceDisplay from "../components/SequenceDisplay";
 import stringConstants from "../data/json/stringConstants";
 import { getGlycanImageUrl } from "../data/glycan";
 import Button from "react-bootstrap/Button";
+import AlignmentDropdown from "../components/AlignmentDropdown";
+
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -161,6 +163,7 @@ const ProteinDetail = props => {
   const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
     []
   );
+  
 
 	useEffect(() => {
 		const getProteinDetailData = getProteinDetail(id);
@@ -290,10 +293,16 @@ const ProteinDetail = props => {
       formatter: (value, row) => (
         <Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
           {" "}
-          {row.position}{" "}
+         {row.residue} {row.position}
         </Navbar.Text>
       )
     }
+   
+
+    
+
+
+
   ];
   const mutationColumns = [
     {
@@ -555,12 +564,19 @@ const ProteinDetail = props => {
 									display: " Protein data (*.csv)",
 									type: "json",
 									data: "protein_detail",
+                },
+                {
+									display: " Protein data (*.FASTA)",
+									type: "fasta",
+									data: "protein_detail",
 								},
 							]}
 							dataType="protein_detail"
 							dataId={id}
 						/>
 					</div>
+          
+         
 
 					<React.Fragment>
 						<Helmet>
@@ -963,9 +979,12 @@ const ProteinDetail = props => {
                         <Tab
                           eventKey="with_glycanId"
                           // className='tab-content-padding'
-                          title="With Image"
+                          title="With Reported Glycan"
                         >
-                          <Container>
+                          <Container style={{
+                                      paddingTop: "20px",
+                                      paddingBottom: "30px",
+																		}}>
                             {glycosylationWithImage &&
                               glycosylationWithImage.length && (
                                 <ClientPaginatedTable
@@ -982,7 +1001,7 @@ const ProteinDetail = props => {
                         <Tab
                           eventKey="without_glycanId"
                           className="tab-content-padding"
-                          title="Without Image"
+                          title="Without Reported Glycan"
                         >
                           <Container>
                             {glycosylationWithoutImage &&
@@ -1029,6 +1048,14 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Sequence</h3>
                   <div className="float-right">
+                  <Button
+                      type="button"
+                      style={{ marginLeft: "5px" }}
+                      className="gg-btn-blue"
+                    
+                    >
+                      ProtVista fas fa-search-plus
+                      </Button>
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
@@ -1146,6 +1173,13 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Isoforms</h3>
                   <div className="float-right">
+                  <Button 
+                      type="button"
+                      className="gg-btn-blue"
+                      style={{ margin:"10px" }}
+                      >Alignment
+                    </Button>
+
                     <Button
                       type="button"
                       className="gg-btn-blue"
@@ -1195,7 +1229,7 @@ const ProteinDetail = props => {
                                 {isoformsS.locus.start_pos}-
                                 {isoformsS.locus.end_pos})
                               </div>
-                              <Grid xs={12}>
+                              <Grid  className= "badgegrid" xs={12}>
                                 <EvidenceList
                                   evidences={groupEvidences(
                                     isoformsS.locus.evidence
@@ -1234,7 +1268,7 @@ const ProteinDetail = props => {
             </Accordion>
             {/*  orthologs */}
             <Accordion
-              id="orthologs"
+              id="homologs"
               defaultActiveKey="0"
               className="panel-width"
               style={{ padding: "20px 0" }}
@@ -1252,8 +1286,26 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Homologs</h3>
                   <div className="float-right">
-                    <Button
+                  <AlignmentDropdown 
+							types={[
+								{
+									display: " Homolog-oma",
+									cluster_type: "Homolog-oma",
+									data: "protein_detail",
+                },
+                {
+                  display: " Homolog-mgi",
+									cluster_type: "homolog-mgi",
+									data: "protein_detail",
+								},
+							]}
+							dataType="protein_detail"
+							dataId={id}
+						/>
+                      
+                      <Button
                       type="button"
+                      style={{ marginLeft: "5px" }}
                       className="gg-btn-blue"
                       onClick={() =>
                         setShowhomologSequences(!showhomologSequences)
@@ -1263,6 +1315,7 @@ const ProteinDetail = props => {
                         ? "Hide Sequences"
                         : "Show  Sequences"}
                     </Button>
+                    
                     <Accordion.Toggle
                       eventKey="0"
                       onClick={() =>
@@ -1274,7 +1327,10 @@ const ProteinDetail = props => {
                         {collapsed.orthologs ? closeIcon : expandIcon}
                       </span>
                     </Accordion.Toggle>
-                  </div>
+                    </div>
+                    
+                  
+            
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
@@ -1302,15 +1358,16 @@ const ProteinDetail = props => {
                                   <strong>Organism:</strong>
                                   {orthologsS.organism}
                                 </div>
+                               
 
-                                <Grid xs={9}>
+                                <Grid className= "badgegrid"xs={12}>
                                   <EvidenceList
                                     evidences={groupEvidences(
                                       orthologsS.evidence
                                     )}
                                   />
                                 </Grid>
-                                {showIsoformSequences && (
+                                {showhomologSequences && (
                                   <Grid>
                                     <div classname="highlight-display">
                                       {" "}

@@ -100,3 +100,11 @@ legend {
 .goannotationstylerow {
   padding: 20px;
 }
+.badgegrid {
+  padding-bottom: 20px;
+}
+
+@media (max-width: 1280px) .active {
+  /* order: -1; */
+  flex: none;
+}
