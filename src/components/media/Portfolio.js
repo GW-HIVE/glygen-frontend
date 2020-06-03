@@ -1,4 +1,5 @@
-import React from "react";
+// import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { Row, Image, Col } from "react-bootstrap";
 import HorizontalHeading from "../../components/headings/HorizontalHeading";
@@ -18,7 +19,8 @@ import onePageBrochure2Pdf from "../../images/media/portfolio/brochures/glygen-o
 import onePageBrochureImg from "../../images/media/portfolio/brochures/one-page-brochure-2.png";
 import stickersLogoPdf from "../../images/media/portfolio/stickers/stikers-oval-logo-blue-white.pdf";
 import stickersLogoImg from "../../images/media/portfolio/stickers/stickers-logo.png";
-// import Isotope from "isotope-layout";
+import Isotope from "isotope-layout";
+
 // https://stackoverflow.com/questions/25135261/react-js-and-isotope-js
 // import { LightBoxGallery, GalleryItem } from "react-magnific-popup";
 // https://bodunadebiyi.github.io/react-magnific-popup/
@@ -49,6 +51,35 @@ const Portfolio = (props) => {
 		h2textTopStrongAfter: "Work",
 	};
 
+	// store the isotope object in one state
+	const [isotope, setIsotope] = useState(null);
+	// store the filter keyword in another state
+	const [filterKey, setFilterKey] = useState("*");
+	// const [active, setActive] = useState("");
+
+	// initialize an Isotope object with configs
+	useEffect(() => {
+		window.onload = function () {
+			setIsotope(
+				new Isotope("#isotope-container", {
+					itemSelector: ".filter-item",
+					layoutMode: "fitRows",
+				})
+			);
+		};
+	}, []);
+
+	// handling filter key change
+	useEffect(() => {
+		if (isotope) {
+			filterKey === "*"
+				? isotope.arrange({ filter: `*` })
+				: isotope.arrange({
+						filter: `.${filterKey}`,
+				  });
+		}
+	}, [isotope, filterKey]);
+
 	return (
 		<React.Fragment>
 			<section className="content-box-md">
@@ -61,34 +92,42 @@ const Portfolio = (props) => {
 						<Col sm={12} className="text-center">
 							{/* Portfolio Items Filters  */}
 							<div id="isotope-filters">
-								<button className="btn active" data-filter="*">
+								<button
+									className="btn active"
+									// className={` "btn" ${active ? "active" : ""}`}
+									// data-filter="*"
+									onClick={() => setFilterKey("*")}
+									// onClick={ (() => setFilterKey("*"), setActive()) }
+								>
 									<span>All</span>
 								</button>
-								<button className="btn" data-filter=".poster">
+								<button
+									className="btn"
+									// data-filter=".poster"
+									onClick={() => setFilterKey("poster")}>
 									<span>Poster</span>
 								</button>
-								<button className="btn" data-filter=".brochure">
+								<button
+									className="btn"
+									// data-filter=".brochure"
+									onClick={() => setFilterKey("brochure")}>
 									<span>Brochure</span>
 								</button>
-								<button className="btn" data-filter=".logo">
+								<button
+									className="btn"
+									// data-filter=".logo"
+									onClick={() => setFilterKey("logo")}>
 									<span>Logo</span>
 								</button>
 							</div>
 						</Col>
-						<div>
-							{/* <Image
-								src={ugaImg}
-								className="univ-logo img-responsive"
-								alt="uga university logo"
-							/> */}
-						</div>
 					</Row>
 				</Container>
 				{/* Portfolio Items Wrapper  */}
 				<section id="portfolio-wrapper">
 					<Row className="no-gutters" id="isotope-container">
 						{/* <LightBoxGallery className="popup-gallery" config={config}> */}
-						<Col xs={12} sm={6} md={3} className="brochure">
+						<Col xs={12} sm={6} md={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -120,7 +159,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 02 Poster Biocuration */}
-						<Col xs={12} sm={6} md={3} className="poster">
+						<Col xs={12} sm={6} md={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -151,7 +190,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 03 One Page Brochure  */}
-						<Col xs={12} sm={6} md={3} className="brochure">
+						<Col xs={12} sm={6} md={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -184,7 +223,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 04 Poster SFG Data  */}
-						<Col xs={12} sm={6} md={3} className="poster">
+						<Col xs={12} sm={6} md={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -215,7 +254,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 05 Logo  */}
-						<Col xs={12} sm={6} md={3} className="logo">
+						<Col xs={12} sm={6} md={3} className="filter-item logo">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -244,7 +283,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 06 Poster SFG Website  */}
-						<Col xs={12} sm={6} md={3} className="poster">
+						<Col xs={12} sm={6} md={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -275,7 +314,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 07 One Page Brochure */}
-						<Col xs={12} sm={6} md={3} className="brochure">
+						<Col xs={12} sm={6} md={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -308,7 +347,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 08 GlyGen Logo Stickers  */}
-						<Col xs={12} sm={6} md={3} className="logo">
+						<Col xs={12} sm={6} md={3} className="filter-item logo">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
