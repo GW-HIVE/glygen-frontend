@@ -810,7 +810,7 @@ sub {
 }
 
 .framework .icon {
-	font-size: 42px;
+	font-size: 42px !important;
 	margin: 0;
 	color: #2e78b7;
 	-webkit-transition: all 400ms linear;
@@ -823,7 +823,7 @@ sub {
 	transform: translateX(-15px);
 }
 .framework .icon-svg {
-	font-size: 42px;
+	font-size: 42px !important;
 	margin: 0;
 	-webkit-transition: all 400ms linear;
 	transition: all 400ms linear;

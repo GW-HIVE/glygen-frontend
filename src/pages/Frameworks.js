@@ -15,9 +15,12 @@ import {
 	FaRegPaperPlane,
 } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
-import { AiOutlineApi } from "react-icons/ai";
+import { AiOutlineApi, AiFillDatabase } from "react-icons/ai";
+import { DiMongodb } from "react-icons/di";
 import { ReactComponent as MaterialUi } from "../images/icons/icon-:material-ui.svg";
 import { ReactComponent as JsonIcon } from "../images/icons/jsonIcon.svg";
+import { ReactComponent as Swagger } from "../images/icons/swagger.svg";
+import { ReactComponent as Flask } from "../images/icons/flask.svg";
 
 const Frameworks = (props) => {
 	const vertHeadFrameworks = {
@@ -194,12 +197,6 @@ const Frameworks = (props) => {
 								</Col>
 							</Row>
 						</div>
-					</Col>
-					<Col
-						xs={12}
-						sm={6}
-						className="wow slideInRight"
-						data-wow-duration="1s">
 						{/* Development 06 MATERIAL-UI */}
 						<div className="framework">
 							<Row>
@@ -210,7 +207,7 @@ const Frameworks = (props) => {
 								</Col>
 								<Col xs={12} sm={10}>
 									{/* <h5>Development 06</h5> */}
-									<h4>MATERIAL-UI</h4>
+									<h4>Material-Ui</h4>
 									<p>
 										<em>
 											<strong>
@@ -218,7 +215,7 @@ const Frameworks = (props) => {
 													href="https://material-ui.com/"
 													target="_blank"
 													rel="noopener noreferrer">
-													MATERIAL-UI
+													Material-Ui
 												</a>
 											</strong>
 										</em>{" "}
@@ -258,31 +255,33 @@ const Frameworks = (props) => {
 								</Col>
 							</Row>
 						</div>
-						{/* Development 08 Python  */}
+					</Col>
+					<Col xs={12} sm={6}>
+						{/* Development 08 JSON  */}
 						<div className="framework">
 							<Row>
 								<Col xs={12} sm={2}>
-									<div className="icon text-right">
-										<FaPython />
+									<div className="icon-svg text-right">
+										<JsonIcon />
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
-									{/* <h5>Development 08</h5> */}
-									<h4>Python</h4>
+									{/* <h5>Development 10</h5> */}
+									<h4>JSON</h4>
 									<p>
 										<em>
 											<strong>
 												<a
-													href="https://www.python.org/"
+													href="https://www.json.org/"
 													target="_blank"
 													rel="noopener noreferrer">
-													Python
+													JSON
 												</a>
 											</strong>
 										</em>{" "}
-										is an object-oriented, high-level programming language with
-										integrated dynamic semantics primarily for web and app
-										development.
+										stands for JavaScript Object Notation is a lightweight
+										data-interchange format. It is easy for humans to read and
+										write. It is easy for machines to parse and generate.
 									</p>
 								</Col>
 							</Row>
@@ -316,31 +315,143 @@ const Frameworks = (props) => {
 								</Col>
 							</Row>
 						</div>
-						{/* Development 10 JSON  */}
+						{/* Development 10 Python  */}
 						<div className="framework">
 							<Row>
 								<Col xs={12} sm={2}>
-									<div className="icon-svg text-right">
-										<JsonIcon />
+									<div className="icon text-right">
+										<FaPython />
 									</div>
 								</Col>
 								<Col xs={12} sm={10}>
 									{/* <h5>Development 10</h5> */}
-									<h4>JSON</h4>
+									<h4>Python</h4>
 									<p>
 										<em>
 											<strong>
 												<a
-													href="https://www.json.org/"
+													href="https://www.python.org/"
 													target="_blank"
 													rel="noopener noreferrer">
-													JSON
+													Python
 												</a>
 											</strong>
 										</em>{" "}
-										stands for JavaScript Object Notation is a lightweight
-										data-interchange format. It is easy for humans to read and
-										write. It is easy for machines to parse and generate.
+										is an object-oriented, high-level programming language with
+										integrated dynamic semantics primarily for web and app
+										development.
+									</p>
+								</Col>
+							</Row>
+						</div>
+						{/* Development 11 MongoDB */}
+						<div className="framework">
+							<Row>
+								<Col xs={12} sm={2}>
+									<div className="icon icon-svg5 text-right">
+										<DiMongodb />
+									</div>
+								</Col>
+								<Col xs={12} sm={10}>
+									<h4>MongoDB</h4>
+									<p>
+										<em>
+											<strong>
+												<a
+													href="https://www.mongodb.com/"
+													target="_blank"
+													rel="noopener noreferrer">
+													MongoDB
+												</a>
+											</strong>
+										</em>{" "}
+										is a cross-platform, JSON-like document-based, distributed
+										database built for modern application developers and for the
+										cloud era.
+									</p>
+								</Col>
+							</Row>
+						</div>
+						{/* Service 12 Virtuoso */}
+						<div className="framework">
+							<Row>
+								<Col xs={12} sm={2}>
+									<div className="icon text-right">
+										<AiFillDatabase />
+									</div>
+								</Col>
+								<Col xs={12} sm={10}>
+									<h4>Virtuoso</h4>
+									<p>
+										<em>
+											<strong>
+												<a
+													href="https://virtuoso.openlinksw.com/"
+													target="_blank"
+													rel="noopener noreferrer">
+													Virtuoso
+												</a>
+											</strong>
+										</em>{" "}
+										is a Data Virtualization platform that enables fast and
+										flexible harmonization of disparate data that increases
+										agility for users.
+									</p>
+								</Col>
+							</Row>
+						</div>
+						{/* Service 13 Swagger */}
+						<div className="framework">
+							<Row>
+								<Col xs={12} sm={2}>
+									<div className="icon icon-svg text-right">
+										<Swagger />
+									</div>
+								</Col>
+								<Col xs={12} sm={10}>
+									<h4>Swagger</h4>
+									<p>
+										<em>
+											<strong>
+												<a
+													href="https://swagger.io/"
+													target="_blank"
+													rel="noopener noreferrer">
+													Swagger
+												</a>
+											</strong>
+										</em>{" "}
+										is an open-source framework backed by a large ecosystem of
+										tools that helps developers design, build, document, and
+										consume RESTful web services.
+									</p>
+								</Col>
+							</Row>
+						</div>
+						{/* Service 14 Flask */}
+						<div className="framework">
+							<Row>
+								<Col xs={12} sm={2}>
+									<div className="icon icon-svg text-right">
+										<Flask />
+									</div>
+								</Col>
+								<Col xs={12} sm={10}>
+									<h4>Flask</h4>
+									<p>
+										<em>
+											<strong>
+												<a
+													href="https://palletsprojects.com/p/flask/"
+													target="_blank"
+													rel="noopener noreferrer">
+													Flask
+												</a>
+											</strong>
+										</em>{" "}
+										is a popular, lightweight, extensible micro web framework
+										for building web applications with Python. Flask is built
+										with a small core and easy-to-extend.
 									</p>
 								</Col>
 							</Row>
