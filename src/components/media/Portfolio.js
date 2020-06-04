@@ -1,4 +1,3 @@
-// import React from "react";
 import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import { Row, Image, Col } from "react-bootstrap";
@@ -21,7 +20,6 @@ import stickersLogoPdf from "../../images/media/portfolio/stickers/stikers-oval-
 import stickersLogoImg from "../../images/media/portfolio/stickers/stickers-logo.png";
 import Isotope from "isotope-layout";
 
-// https://stackoverflow.com/questions/25135261/react-js-and-isotope-js
 // import { LightBoxGallery, GalleryItem } from "react-magnific-popup";
 // https://bodunadebiyi.github.io/react-magnific-popup/
 // https://www.npmjs.com/package/react-magnific-popup
@@ -55,7 +53,17 @@ const Portfolio = (props) => {
 	const [isotope, setIsotope] = useState(null);
 	// store the filter keyword in another state
 	const [filterKey, setFilterKey] = useState("*");
-	// const [active, setActive] = useState("");
+	// Set the active class to clicked button
+	const [activeBtnArr, setActiveBtnArr] = useState([true, false, false, false]);
+
+	function onButtonClick(filterKey, index) {
+		// Filter keyword
+		setFilterKey(filterKey);
+		// Set active class
+		let btnArr = [false, false, false, false];
+		btnArr[index] = true;
+		setActiveBtnArr(btnArr);
+	}
 
 	// initialize an Isotope object with configs
 	useEffect(() => {
@@ -93,30 +101,23 @@ const Portfolio = (props) => {
 							{/* Portfolio Items Filters  */}
 							<div id="isotope-filters">
 								<button
-									className="btn active"
-									// className={` "btn" ${active ? "active" : ""}`}
-									// data-filter="*"
-									onClick={() => setFilterKey("*")}
-									// onClick={ (() => setFilterKey("*"), setActive()) }
-								>
+									className={activeBtnArr[0] ? "btn btn-active" : "btn"}
+									onClick={() => onButtonClick("*", 0)}>
 									<span>All</span>
 								</button>
 								<button
-									className="btn"
-									// data-filter=".poster"
-									onClick={() => setFilterKey("poster")}>
+									className={activeBtnArr[1] ? "btn btn-active" : "btn"}
+									onClick={() => onButtonClick("poster", 1)}>
 									<span>Poster</span>
 								</button>
 								<button
-									className="btn"
-									// data-filter=".brochure"
-									onClick={() => setFilterKey("brochure")}>
+									className={activeBtnArr[2] ? "btn btn-active" : "btn"}
+									onClick={() => onButtonClick("brochure", 2)}>
 									<span>Brochure</span>
 								</button>
 								<button
-									className="btn"
-									// data-filter=".logo"
-									onClick={() => setFilterKey("logo")}>
+									className={activeBtnArr[3] ? "btn btn-active" : "btn"}
+									onClick={() => onButtonClick("logo", 3)}>
 									<span>Logo</span>
 								</button>
 							</div>
@@ -137,7 +138,6 @@ const Portfolio = (props) => {
 									DOWNLOAD
 								</a>
 							</div>
-
 							<div className="portfolio-item">
 								<a href={triFold1Img} title="Tri-Fold Brochure June 2019">
 									<Image
