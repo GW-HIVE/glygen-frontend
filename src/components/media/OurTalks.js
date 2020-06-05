@@ -93,7 +93,7 @@ const OurTalks = (props) => {
 										indicatorColor="primary"
 										textColor="primary"
 										centered
-										aria-label="full5 width tabs example">
+										aria-label="full width tabs example">
 										<Tab label="Beilstein Symposium" {...a11yProps(0)} />
 										<Tab label="SFG" {...a11yProps(1)} />
 										<Tab label="Warren Workshop" {...a11yProps(2)} />

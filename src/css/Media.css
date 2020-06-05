@@ -14,7 +14,7 @@
 	color: #212226 !important;
 	text-transform: uppercase;
 	font-weight: 700;
-	margin: 5px 20px !important;
+	margin: 0 20px !important;
 }
 
 /* Tab active state */
@@ -27,7 +27,8 @@
 }
 .materials-tabs .PrivateTabIndicator-colorPrimary-111 {
 	background-color: #60ba4b;
-	margin-bottom: 5px;
+	margin-bottom: 7px;
+	padding: 1.5px;
 }
 
 /* Presentations */
