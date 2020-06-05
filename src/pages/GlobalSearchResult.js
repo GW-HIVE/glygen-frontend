@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
+import GlobalSearchCard from '../components/cards/GlobalSearchCard';
 import TextAlert from '../components/alert/TextAlert';
 import DialogAlert from '../components/alert/DialogAlert';
 import { Container } from 'react-bootstrap';
@@ -13,29 +14,59 @@ import {logActivity} from '../data/logging';
 import {axiosError} from '../data/axiosError';
 import FeedbackWidget from "../components/FeedbackWidget";
 import { Paper } from '@material-ui/core';
+import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
+import { Navbar} from "react-bootstrap";
+import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
+import { getGlobalSearch} from '../data/commonApi';
 
+
+const useStyles = makeStyles((theme) => ({
+	paper: {
+		 marginTop: theme.spacing(5),
+		 marginBottom: theme.spacing(5),
+		paddingBottom:"16px",
+	},
+	exactMatch: {
+		margin: "0px !important",
+		paddingTop: "16px",
+	},
+	exactMatchLink: {
+		padding: "0px !important",
+		align: "center"
+	}
+}));
 
 const GlobalSearchResult = (props) => {
-    let { id } = useParams("");
+	let { id } = useParams("");
+	const classes = useStyles();
     
 	const [pageLoading, setPageLoading] = useState(true);
-	const [alertTextInput, setAlertTextInput] = useReducer(
-		(state, newState) => ({ ...state, ...newState }),
-		{show: false, id: ""}
-	);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{show: false, id: ""}
-    );
+	);
+	const [globalSearchData, setGlobalSearchData] = useState({});
+
+	function onGlobalSearchClick(route, listId){
+		let message = "Global Search=" + id;
+		logActivity("user", (id || "") + ">" + listId, message);
+		props.history.push(route + listId);
+	}
 
     useEffect(() => {
 		setPageLoading(true);
 		logActivity();
-		document.addEventListener('click', () => {
-			setAlertTextInput({"show": false})
-        });
-        setPageLoading(false);
-    });
+		getGlobalSearch(id).then(({ data }) => {
+		setGlobalSearchData(data);
+		setPageLoading(false);
+	})
+	.catch(function (error) {
+		let message = "list api call";
+		axiosError(error, message, setPageLoading, setAlertDialogInput);
+	});
+}, [id]);
     
 	return (
 		<>
@@ -53,14 +84,63 @@ const GlobalSearchResult = (props) => {
 							setAlertDialogInput({"show": input})
 						}}
 					/>
-                    <TextAlert
-						alertInput={alertTextInput}
-					/>
 
-                    <Paper>
+                    <Paper className={classes.paper}>
                         <div className="panel-heading gg-panel">
-                            <h2>Search result for <span style={{ color: "#2F78B7" }}>{id}</span></h2>
+                            <h2><strong>Search result for <span style={{ color: "#2F78B7" }}>{id}</span></strong></h2>
                         </div>
+
+						<Typography className={classes.exactMatch} variant="h6"> 	
+							{globalSearchData.exact_match && globalSearchData.exact_match.map((searchMatch) => 
+									<li align="center">
+										<Navbar.Text
+											as={Link}
+											className={classes.exactMatchLink}
+											to={searchMatch.type === "glycan" ? routeConstants.glycanDetail + searchMatch.id : routeConstants.proteinDetail + searchMatch.id}
+											>
+											Your input is an exact match to one {searchMatch.type}.
+										</Navbar.Text>
+									</li>
+								)}
+						</Typography>
+				<Grid
+					container
+					style={{ margin: '0  auto' }}
+					justify='center'>
+					<Grid item md={4}>
+						{globalSearchData.other_matches && <GlobalSearchCard
+							cardTitle="Glycan(s)"
+							setInputValue={(listId) => onGlobalSearchClick(routeConstants.glycanList, listId)}
+							term={id}
+							allCount={globalSearchData.other_matches.glycan.all.count}
+							allListId={globalSearchData.other_matches.glycan.all.list_id}
+							searchItems={Object.keys(globalSearchData.other_matches.glycan)
+								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.glycan[searchItem].count, list_id : globalSearchData.other_matches.glycan[searchItem].list_id}})}
+						/>}
+					</Grid>
+					<Grid item md={4}>
+						{globalSearchData.other_matches && <GlobalSearchCard
+							cardTitle="Protein(s)"
+							setInputValue={(listId) => onGlobalSearchClick(routeConstants.proteinList, listId)}
+							term={id}
+							allCount={globalSearchData.other_matches.protein.all.count}
+							allListId={globalSearchData.other_matches.protein.all.list_id}
+							searchItems={Object.keys(globalSearchData.other_matches.protein)
+								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.protein[searchItem].count, list_id : globalSearchData.other_matches.protein[searchItem].list_id}})}
+						/>}
+					</Grid>
+
+					{/* <Grid item md={4}>
+
+					{globalSearchData.other_matches && <GlobalSearchCard
+							cardTitle="GProtein(s)"
+							totalResults={globalSearchData.other_matches.protein.all.count}
+							searchItems={Object.keys(globalSearchData.other_matches.protein)
+								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.protein[searchItem].count}})}
+						/>}
+
+					</Grid> */}
+						</Grid>
                     </Paper>
                 </Container>
             </div>

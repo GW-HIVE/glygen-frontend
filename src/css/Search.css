@@ -136,3 +136,20 @@ input[type="number"] {
 	font-weight: bold !important;
 	font-style: italic;
 }
+
+.card-row {
+	background-color: #fff	!important;
+}
+
+.card-row:nth-of-type(odd) {
+	background-color: rgba(0,0,0,.05)	!important;
+}
+.card-row:hover, .card-head:hover {
+	background-color: #dbe4ec	!important;
+}
+
+.global-search-card {
+	margin: 16px;
+	padding: 0px;
+	/* margin-right: 20px	!important; */
+}

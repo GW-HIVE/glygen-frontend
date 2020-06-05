@@ -16,6 +16,11 @@
 .panel-heading {
     background-color: #E8E8E8 !important;
     color: #444 !important;
+
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    /* background-color: rgba(0,0,0,.03); */
+    border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
 .result-count{
@@ -64,3 +69,13 @@ a.result-count{
     right: 10px;
     font-size: 2rem;
 } */
+
+.gs-icon-button {
+    padding: 10,
+}
+
+.gs-icon-button:disabled:hover,
+.gs-icon-button:disabled {
+	pointer-events: auto	!important;
+	cursor: no-drop !important;
+}

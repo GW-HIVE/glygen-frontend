@@ -576,6 +576,13 @@ ul.office-details {
 	color: var(--gg-dark-hover) !important;
 }
 
+.lnk-btn:disabled:hover,
+.lnk-btn:disabled {
+	pointer-events: auto	!important;
+	cursor: no-drop !important;
+	color: var(--gg-blue) !important;
+}
+
 /* =========================================
                 Subscript
 ============================================ */

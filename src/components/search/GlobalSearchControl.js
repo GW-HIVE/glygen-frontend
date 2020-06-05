@@ -1,20 +1,12 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router"
-import Grid from '@material-ui/core/Grid';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Button from 'react-bootstrap/Button';
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import ExampleControl from "../example/ExampleControl";
-import SelectControl from '../select/SelectControl';
 import {logActivity} from '../../data/logging';
 import routeConstants from '../../data/json/routeConstants';
 import '../../css/globalSearch.css';
@@ -68,7 +60,7 @@ export default function GlobalSearchControl(props) {
             inputProps={{ 'aria-label': 'search' }}
         />
         <Divider className={classes.divider} orientation="vertical" />
-        <IconButton onClick={globalSearchClick} className={classes.iconButton} aria-label="search">
+        <IconButton disabled={globalSearchTerm.length < 1} onClick={globalSearchClick} className="gs-icon-button" aria-label="search">
             <SearchIcon />
         </IconButton>
     </Paper>

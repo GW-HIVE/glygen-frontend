@@ -9,3 +9,8 @@ export const getCategorizedTypeahed = (typeahedID, inputValue, totalLimit=15, ca
     const url = `/categorized_typeahead?query={"field":"${typeahedID}","value":"${inputValue}","total_limit":${totalLimit},"categorywise_limit":${categorywiseLimit}}`;
     return getJson(url);
 }
+
+export const getGlobalSearch = (searchTerm) => {
+    const url = `/globalsearch/search?query={"term":"${searchTerm}"}`;
+    return getJson(url);
+}
