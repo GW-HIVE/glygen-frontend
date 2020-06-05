@@ -127,6 +127,11 @@
 		width: 100% !important;
 	}
 }
+@media (min-width: 600px) {
+	.materials-tabs .MuiTab-root {
+		min-width: 0;
+	}
+}
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
 

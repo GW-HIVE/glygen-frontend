@@ -1,6 +1,97 @@
 /* =========================================
-                Our Talks
+                Our Talks (Responsive Tabs)
 ============================================ */
+.materials-tabs .MuiTab-root {
+	min-width: 0;
+}
+.materials-tabs button {
+	outline: 0 !important;
+	padding: 0 !important;
+}
+.materials-tabs .MuiTab-textColorPrimary {
+	font-family: "Verdana", "Geneva", sans-serif;
+	font-size: 12px;
+	color: #212226 !important;
+	text-transform: uppercase;
+	font-weight: 700;
+	margin: 5px 20px !important;
+}
+
+/* Tab active state */
+.materials-tabs .MuiTab-textColorPrimary.Mui-selected {
+	color: #60ba4b !important;
+	font-weight: 700 !important;
+}
+.materials-tabs .MuiTab-textColorPrimary:hover {
+	color: #60ba4b !important;
+}
+.materials-tabs .PrivateTabIndicator-colorPrimary-111 {
+	background-color: #60ba4b;
+	margin-bottom: 5px;
+}
+
+/* Presentations */
+.materials .col-md-6 {
+	padding: 0;
+}
+.materials iframe {
+	width: 100%;
+	margin: 0 auto;
+}
+.materials img {
+	width: 100%;
+	margin: 0 auto;
+}
+.materials .tab-bg {
+	background: #fff;
+	padding: 30px;
+	height: 380px;
+	width: 100%;
+	margin: 0 auto;
+}
+.materials h2 {
+	font-family: "Verdana", "Geneva", sans-serif;
+	font-size: 48px !important;
+	color: #bbb !important;
+	margin-bottom: 20px;
+	font-weight: 100 !important;
+}
+.materials h3 {
+	font-size: 32px;
+	margin-bottom: 30px;
+}
+.materials p {
+	line-height: 24px;
+	margin-bottom: 30px;
+}
+
+/* =========================================
+                Buttons materials
+============================================ */
+
+.btn-general {
+	font-family: "Verdana", "Geneva", sans-serif;
+	border-radius: 28px;
+	font-size: 13px;
+	text-transform: uppercase;
+	margin: 0 6px;
+	padding: 12px 46px 12px 46px;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.btn-blue {
+	color: #2e78b7;
+	border: 1px solid #2e78b7;
+	background-color: #fff;
+}
+
+.btn-blue:hover,
+.btn-blue:focus {
+	color: #fff !important;
+	background-color: #2e78b7;
+	border: 1px solid #2e78b7;
+}
 
 /* =========================================
                 Portfolio
