@@ -4,71 +4,42 @@
 @date-created: 18th January 2019
 -------------------------------------------------------------------------*/
 
-.gg-result-container{
-    padding-bottom: 14%;
-}
-
-.gg-panel{
+/* =========================================
+              Global Search Result
+============================================ */
+.gs-panel{
     padding: 1px;
     text-align: center;
 }
 
-.panel-heading {
+.gs-panel-heading {
     background-color: #E8E8E8 !important;
     color: #444 !important;
-
     padding: .75rem 1.25rem;
     margin-bottom: 0;
-    /* background-color: rgba(0,0,0,.03); */
     border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
-.result-count{
-    position: absolute;
-    background-color: #2E78B7;
-    color: white !important;
-    border-radius: 3px;
-    padding: 3px;
-    margin-right: 10px;
-    right: 0;
+.gs-result-paper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
 }
 
-.head-result-count{
-    background-color: #2E78B7;
-    font-size: 2rem;
-    color: white !important;
-    border-radius: 3px;
-    padding: 3px;
+.gs-exact-match {
+   margin: 0px !important;
+   padding-top: 16px;
 }
 
-a.result-count{
-    text-decoration: none;
+.gs-exact-match-link {
+   padding: 0px !important;
+   align-items: center;
 }
 
-.result-count-inactive{
-    background-color: #6B6B6B;
-}
 
-#display_search_term{
-    color: #2E78B7;
-}
-
-.exact-match {
-    font-size: 1.125em;
-    font-family: "Verdana", "Geneva", sans-serif;
-    line-height: 1.4;
-    font-weight: bold;
-}
-
-.exact-match-margin {
-    margin: 0px 0px 10px 0px;
-}
-
-/* the count displayed beside the heading */
-/* .title>.result-count{
-    right: 10px;
-    font-size: 2rem;
-} */
+/* =========================================
+              Global Search Component
+============================================ */
 
 .gs-icon-button {
     padding: 10,
@@ -78,4 +49,38 @@ a.result-count{
 .gs-icon-button:disabled {
 	pointer-events: auto	!important;
 	cursor: no-drop !important;
+}
+
+.gs-comp-paper {
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+  }
+
+.gs-input {
+    margin-left: 10px;
+    flex: 1;
+}
+
+.gs-divider {
+    height: 34px;
+    margin: 4px;
+}
+
+/* =========================================
+              Global Search Card
+============================================ */
+
+.gs-cell-body {
+    font-size: inherit   !important;
+}
+
+.gs-cell-left {
+    min-width: 150px  !important;
+    text-align: left   !important;
+}
+
+.gs-cell-right {
+    min-width: 120px   !important;
+    text-align: right   !important;
 }

@@ -3,18 +3,15 @@ import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import GlobalSearchCard from '../components/cards/GlobalSearchCard';
-import TextAlert from '../components/alert/TextAlert';
 import DialogAlert from '../components/alert/DialogAlert';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import '../css/Search.css';
-import stringConstants from '../data/json/stringConstants';
 import routeConstants from '../data/json/routeConstants';
 import {logActivity} from '../data/logging';
 import {axiosError} from '../data/axiosError';
 import FeedbackWidget from "../components/FeedbackWidget";
 import { Paper } from '@material-ui/core';
-import { fade, makeStyles, withStyles } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 import { Navbar} from "react-bootstrap";
 import Grid from '@material-ui/core/Grid';
@@ -22,26 +19,9 @@ import { Link } from "react-router-dom";
 import { getGlobalSearch} from '../data/commonApi';
 
 
-const useStyles = makeStyles((theme) => ({
-	paper: {
-		 marginTop: theme.spacing(5),
-		 marginBottom: theme.spacing(5),
-		paddingBottom:"16px",
-	},
-	exactMatch: {
-		margin: "0px !important",
-		paddingTop: "16px",
-	},
-	exactMatchLink: {
-		padding: "0px !important",
-		align: "center"
-	}
-}));
-
 const GlobalSearchResult = (props) => {
 	let { id } = useParams("");
-	const classes = useStyles();
-    
+
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -85,17 +65,17 @@ const GlobalSearchResult = (props) => {
 						}}
 					/>
 
-                    <Paper className={classes.paper}>
-                        <div className="panel-heading gg-panel">
+                    <Paper className={"gs-result-paper"}>
+                        <div className="gs-panel-heading gs-panel">
                             <h2><strong>Search result for <span style={{ color: "#2F78B7" }}>{id}</span></strong></h2>
                         </div>
 
-						<Typography className={classes.exactMatch} variant="h6"> 	
+						<Typography className={"gs-exact-match"} variant="h6"> 	
 							{globalSearchData.exact_match && globalSearchData.exact_match.map((searchMatch) => 
-									<li align="center">
+									<li key={searchMatch.id} align="center">
 										<Navbar.Text
 											as={Link}
-											className={classes.exactMatchLink}
+											className={"gs-exact-match-link"}
 											to={searchMatch.type === "glycan" ? routeConstants.glycanDetail + searchMatch.id : routeConstants.proteinDetail + searchMatch.id}
 											>
 											Your input is an exact match to one {searchMatch.type}.
