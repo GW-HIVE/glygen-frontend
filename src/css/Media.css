@@ -26,9 +26,9 @@
 	color: #60ba4b !important;
 }
 .materials-tabs .PrivateTabIndicator-colorPrimary-111 {
-	background-color: #60ba4b;
-	margin-bottom: 7px;
-	padding: 1.5px;
+	background-color: #60ba4b !important;
+	margin-bottom: 7px !important;
+	padding: 1.5px !important;
 }
 /* .materials-tabs .MuiTabs-flexContainer {
 	display: flex;

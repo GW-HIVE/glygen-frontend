@@ -128,7 +128,7 @@ const Portfolio = (props) => {
 				<section id="portfolio-wrapper">
 					<Row className="no-gutters" id="isotope-container">
 						{/* <LightBoxGallery className="popup-gallery" config={config}> */}
-						<Col xs={12} sm={6} md={3} className="filter-item brochure">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -159,7 +159,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 02 Poster Biocuration */}
-						<Col xs={12} sm={6} md={3} className="filter-item poster">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -190,7 +190,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 03 One Page Brochure  */}
-						<Col xs={12} sm={6} md={3} className="filter-item brochure">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -223,7 +223,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 04 Poster SFG Data  */}
-						<Col xs={12} sm={6} md={3} className="filter-item poster">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -254,7 +254,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 05 Logo  */}
-						<Col xs={12} sm={6} md={3} className="filter-item logo">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item logo">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -283,7 +283,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 06 Poster SFG Website  */}
-						<Col xs={12} sm={6} md={3} className="filter-item poster">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item poster">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -314,7 +314,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 07 One Page Brochure */}
-						<Col xs={12} sm={6} md={3} className="filter-item brochure">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item brochure">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
@@ -347,7 +347,7 @@ const Portfolio = (props) => {
 							</div>
 						</Col>
 						{/* Portfolio Item 08 GlyGen Logo Stickers  */}
-						<Col xs={12} sm={6} md={3} className="filter-item logo">
+						<Col xs={12} sm={6} md={3} lg={3} className="filter-item logo">
 							<div className="text-right">
 								<a
 									className="btn btn-link"
