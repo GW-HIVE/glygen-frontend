@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { downloadFromServer } from "../utils/download";
@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
 import InputBase from "@material-ui/core/InputBase";
 import SelectControl from "./select/SelectControl";
+import { Link } from "@material-ui/core";
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -26,21 +27,13 @@ const AlignmentDropdown = props => {
   const { types, dataId } = props;
 
   const [show, setShow] = useState(false);
-  const [dropdown, setDropdown] = useState(
-    props.dropdown || props.types[0].type
-  );
+  const [dropdown, setDropdown] = useState("unselected");
+  const [linkPath, setLinkPath] = useState("#");
 
-  const handleDownload = async () => {
+  useEffect(() => {
     debugger;
-    const dataType = types.find(typeItem => typeItem.type === dropdown).data;
-
-    await downloadFromServer(dataId, dropdown, dataType);
-
-    setShow(false);
-  };
-  const clearForm = () => {
-    setDropdown(props.types[0].type);
-  };
+    setLinkPath(`/whatever-align/${dataId}/${dropdown}`);
+  }, [dropdown]);
 
   return (
     <>
@@ -48,22 +41,27 @@ const AlignmentDropdown = props => {
         <SelectControl
           style={{ marginTop: "-15px" }}
           inputValue={dropdown}
-          menu={types.map(typeItem => {
-            return { id: typeItem.type, name: typeItem.display };
-          })}
+          menu={[
+            { id: "unselected", name: "Select" },
+            ...types.map(typeItem => {
+              return { id: typeItem.type, name: typeItem.display };
+            })
+          ]}
           setInputValue={value => {
             setDropdown(value);
           }}
         />
       </FormControl>
-      <Button
-        type="button"
-        style={{ marginLeft: "5px", marginTop: "5px" }}
-        className="gg-btn-blue"
-        onClick={handleDownload}
-      >
-        Alignment
-      </Button>
+      <Link href={linkPath}>
+        <Button
+          type="button"
+          style={{ marginLeft: "5px", marginTop: "5px" }}
+          className="gg-btn-blue"
+          disabled={dropdown === "unselected"}
+        >
+          Alignment
+        </Button>
+      </Link>
     </>
   );
 };

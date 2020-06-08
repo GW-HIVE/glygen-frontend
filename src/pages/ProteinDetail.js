@@ -561,7 +561,7 @@ const ProteinDetail = props => {
 						<DownloadButton
 							types={[
 								{
-									display: " Protein data (*.csv)",
+									display: " Protein data (*.json)",
 									type: "json",
 									data: "protein_detail",
                 },
@@ -569,10 +569,12 @@ const ProteinDetail = props => {
 									display: " Protein data (*.FASTA)",
 									type: "fasta",
 									data: "protein_detail",
-								},
+                }
+               
 							]}
-							dataType="protein_detail"
-							dataId={id}
+							
+              dataId={id}
+              itemType = "protein"
 						/>
 					</div>
           
@@ -1286,22 +1288,24 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Homologs</h3>
                   <div className="float-right">
-                  <AlignmentDropdown 
-							types={[
-								{
-									display: " Homolog-oma",
-									cluster_type: "Homolog-oma",
-									data: "protein_detail",
-                },
-                {
-                  display: " Homolog-mgi",
-									cluster_type: "homolog-mgi",
-									data: "protein_detail",
-								},
-							]}
-							dataType="protein_detail"
-							dataId={id}
-						/>
+                    {orthologs && orthologs.length && (
+                      <>
+                      <AlignmentDropdown 
+                      types={[
+                        {
+                          display: " Homolog-oma",
+                          type: "Homolog-oma",
+                          data: "protein_detail",
+                        },
+                        {
+                          display: " Homolog-mgi",
+                          type: "homolog-mgi",
+                          data: "protein_detail",
+                        },
+                      ]}
+                      dataType="protein_detail"
+                      dataId={id}
+                    />
                       
                       <Button
                       type="button"
@@ -1315,6 +1319,9 @@ const ProteinDetail = props => {
                         ? "Hide Sequences"
                         : "Show  Sequences"}
                     </Button>
+                      </>
+                    )}
+                  
                     
                     <Accordion.Toggle
                       eventKey="0"

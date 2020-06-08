@@ -14,134 +14,142 @@ import stringConstants from "../data/json/stringConstants.json";
 import ReactHtmlParser from "react-html-parser";
 import routeConstants from "../data/json/routeConstants";
 
-const GlycanList = (props) => {
-	let { id } = useParams();
+const GlycanList = props => {
+  let { id } = useParams();
 
-	const [data, setData] = useState([]);
-	const [query, setQuery] = useState([]);
-	const [pagination, setPagination] = useState([]);
-	const [selectedColumns, setSelectedColumns] = useState(GLYCAN_COLUMNS);
-	const [page, setPage] = useState(1);
-	const [sizePerPage, setSizePerPage] = useState(20);
-	const [totalSize, setTotalSize] = useState();
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState([]);
+  const [pagination, setPagination] = useState([]);
+  const [selectedColumns, setSelectedColumns] = useState(GLYCAN_COLUMNS);
+  const [page, setPage] = useState(1);
+  const [sizePerPage, setSizePerPage] = useState(20);
+  const [totalSize, setTotalSize] = useState();
 
-	const fixResidueToShortNames = (query) => {
-		const residueMap = stringConstants.glycan.common.composition;
-		const result = { ...query };
+  const fixResidueToShortNames = query => {
+    const residueMap = stringConstants.glycan.common.composition;
+    const result = { ...query };
 
-		if (result.composition) {
-			result.composition = result.composition
-				.sort((a, b) => {
-					if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
-						return -1;
-					} else if (
-						residueMap[a.residue].orderID < residueMap[b.residue].orderID
-					) {
-						return 1;
-					}
-					return 0;
-				})
-				.map((item) => ({
-					...item,
-					residue: ReactHtmlParser(residueMap[item.residue].name.bold()),
-				}));
-		}
+    if (result.composition) {
+      result.composition = result.composition
+        .sort((a, b) => {
+          if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
+            return -1;
+          } else if (
+            residueMap[a.residue].orderID < residueMap[b.residue].orderID
+          ) {
+            return 1;
+          }
+          return 0;
+        })
+        .map(item => ({
+          ...item,
+          residue: ReactHtmlParser(residueMap[item.residue].name.bold())
+        }));
+    }
 
-		return result;
-	};
+    return result;
+  };
 
-	useEffect(() => {
-		// const selected = getUserSelectedColumns();
-		// const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
-		//   selected.includes(column.dataField)
-		// );
-		// setSelectedColumns(userSelectedColumn);
+  useEffect(() => {
+    // const selected = getUserSelectedColumns();
+    // const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
+    //   selected.includes(column.dataField)
+    // );
+    // setSelectedColumns(userSelectedColumn);
 
-		getGlycanList(id).then(({ data }) => {
-			setData(data.results);
-			setQuery(fixResidueToShortNames(data.query));
-			setPagination(data.pagination);
-			const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-			setPage(currentPage);
-			//   setSizePerPage()
-			setTotalSize(data.pagination.total_length);
-		});
-		// eslint-disable-next-line
-	}, []);
+    getGlycanList(id).then(({ data }) => {
+      setData(data.results);
+      setQuery(fixResidueToShortNames(data.query));
+      setPagination(data.pagination);
+      const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+      setPage(currentPage);
+      //   setSizePerPage()
+      setTotalSize(data.pagination.total_length);
+    });
+    // eslint-disable-next-line
+  }, []);
 
-	const handleTableChange = (
-		type,
-		{ page, sizePerPage, sortField, sortOrder }
-	) => {
-		setPage(page);
-		setSizePerPage(sizePerPage);
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
+    setPage(page);
+    setSizePerPage(sizePerPage);
 
-		getGlycanList(
-			id,
-			(page - 1) * sizePerPage + 1,
-			sizePerPage,
-			sortField,
-			sortOrder
-		).then(({ data }) => {
-			// place to change values before rendering
+    getGlycanList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
 
-			setData(data.results);
-			setQuery(fixResidueToShortNames(data.query));
-			setPagination(data.pagination);
+      setData(data.results);
+      setQuery(fixResidueToShortNames(data.query));
+      setPagination(data.pagination);
 
-			//   setSizePerPage()
-			setTotalSize(data.pagination.total_length);
-		});
-	};
+      //   setSizePerPage()
+      setTotalSize(data.pagination.total_length);
+    });
+  };
 
-	function rowStyleFormat(row, rowIdx) {
-		return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
-	}
-	const handleModifySearch = () => {
-		props.history.push(routeConstants.glycanSearch + id);
-	};
+  function rowStyleFormat(row, rowIdx) {
+    return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
+  }
+  const handleModifySearch = () => {
+    props.history.push(routeConstants.glycanSearch + id);
+  };
 
-	return (
-		<>
-			<Helmet>
-				{getTitle("glycanList")}
-				{getTitle("glycanList")}
-			</Helmet>
+  return (
+    <>
+      <Helmet>
+        {getTitle("glycanList")}
+        {getTitle("glycanList")}
+      </Helmet>
 
-			<FeedbackWidget />
-			<Container maxWidth="xl" className="gg-container">
-				<section className="content-box-md">
-					{/* <section style={{ paddingTop: "20px" }}> */}
-					<GlycanQuerySummary
-						data={query}
-						onModifySearch={handleModifySearch}
-					/>
-				</section>
-				<section>
-					<DownloadButton
-						types={[
-							{ display: "Glycan data (*.csv)", type: "csv", data: "glycan" },
-							{ display: "Glycan data (*.json)", type: "json", data: "glycan" },
-						]}
-						dataId={id}
-					/>
-					{selectedColumns && selectedColumns.length !== 0 && (
-						<PaginatedTable
-							trStyle={rowStyleFormat}
-							data={data}
-							columns={selectedColumns}
-							page={page}
-							sizePerPage={sizePerPage}
-							totalSize={totalSize}
-							onTableChange={handleTableChange}
-							defaultSortField="glytoucan_ac"
-							idField="glytoucan_ac"
-						/>
-					)}
-				</section>
-			</Container>
-		</>
-	);
+      <FeedbackWidget />
+      <Container maxWidth="xl" className="gg-container">
+        <section className="content-box-md">
+          {/* <section style={{ paddingTop: "20px" }}> */}
+          <GlycanQuerySummary
+            data={query}
+            onModifySearch={handleModifySearch}
+          />
+        </section>
+        <section>
+          <DownloadButton
+            types={[
+              {
+                display: "Glycan data (*.csv)",
+                type: "csv",
+                data: "glycan_list"
+              },
+              {
+                display: "Glycan data (*.json)",
+                type: "json",
+                data: "glycan_list"
+              }
+            ]}
+            dataId={id}
+          />
+          {selectedColumns && selectedColumns.length !== 0 && (
+            <PaginatedTable
+              trStyle={rowStyleFormat}
+              data={data}
+              columns={selectedColumns}
+              page={page}
+              sizePerPage={sizePerPage}
+              totalSize={totalSize}
+              onTableChange={handleTableChange}
+              defaultSortField="glytoucan_ac"
+              idField="glytoucan_ac"
+            />
+          )}
+        </section>
+      </Container>
+    </>
+  );
 };
 
 export default GlycanList;

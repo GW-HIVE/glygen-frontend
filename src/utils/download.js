@@ -1,4 +1,3 @@
-import { getGlycanDownload } from "../data/glycan";
 import download from "downloadjs";
 
 const getFormatDetails = (format, type, compressed = false) => {
@@ -51,18 +50,20 @@ const getFormatDetails = (format, type, compressed = false) => {
  * @param {boolean} compressed "true" to receive compressed data otherwise it is "false".
  * @param {string} type the page whose data needs to be downloaded.
  */
-export const downloadFromServer = async (id, format, compressed, type) => {
-  try {
-    const formatDetails = getFormatDetails(format, type, compressed);
-    const { fields, data } = formatDetails;
-    const serverData = await getGlycanDownload(id, format, compressed, type, {
-      "Content-Type": data
-    });
-    const { mimeType, ext, type: newType } = formatDetails;
-    const filename = `${newType}_${id}${ext}`;
+export const downloadFromServer = async (
+  id,
+  format,
+  compressed,
+  type,
+  itemTypeResolver
+) => {
+  const formatDetails = getFormatDetails(format, type, compressed);
+  const { fields, data } = formatDetails;
+  const serverData = await itemTypeResolver(id, format, compressed, type, {
+    "Content-Type": data
+  });
+  const { mimeType, ext, type: newType } = formatDetails;
+  const filename = `${newType}_${id}${ext}`;
 
-    download(serverData.data, filename, mimeType);
-  } catch (err) {
-    // nothing for now
-  }
+  download(serverData.data, filename, mimeType);
 };
