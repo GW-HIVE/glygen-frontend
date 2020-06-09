@@ -22,10 +22,10 @@ const QuickSearch = (props) => {
 	};
 
 	const items = [
-		{ label: "Glycan", id: "glycan" },
-		{ label: "Protein", id: "protein" },
-		{ label: "Species", id: "species" },
-		{ label: "Disease", id: "disease" },
+		{ label: "Search By Glycan", id: "glycan" },
+		{ label: "Search By Protein", id: "protein" },
+		{ label: "Search By Species", id: "species" },
+		{ label: "Search By Disease", id: "disease" },
 	];
 	useEffect(() => {
 		logActivity();
