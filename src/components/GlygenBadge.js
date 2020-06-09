@@ -49,6 +49,8 @@ function databasecolor(name) {
       return "#fcba03";
     case "mim":
       return "#eb4034";
+    case "dbsnp":
+      return "#ebbd34";
   }
 }
 
