@@ -143,7 +143,7 @@ export default function Home() {
 			})
 			.catch(function (error) {
 				let message = "home_init api call";
-				axiosError(error, message, setPageLoading);
+				axiosError(error, "", message, setPageLoading);
 			});
 	}, []);
 

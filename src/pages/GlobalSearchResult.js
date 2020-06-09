@@ -30,7 +30,7 @@ const GlobalSearchResult = (props) => {
 	const [globalSearchData, setGlobalSearchData] = useState({});
 
 	function onGlobalSearchClick(route, listId){
-		let message = "Global Search=" + id;
+		let message = "Global Search term=" + id;
 		logActivity("user", (id || "") + ">" + listId, message);
 		props.history.push(route + listId);
 	}
@@ -39,12 +39,13 @@ const GlobalSearchResult = (props) => {
 		setPageLoading(true);
 		logActivity();
 		getGlobalSearch(id).then(({ data }) => {
+		logActivity("user", (id || ""), "Global search term=" + id);
 		setGlobalSearchData(data);
 		setPageLoading(false);
 	})
 	.catch(function (error) {
-		let message = "list api call";
-		axiosError(error, message, setPageLoading, setAlertDialogInput);
+		let message = "global search api call term=" + id;
+		axiosError(error, id, message, setPageLoading, setAlertDialogInput);
 	});
 }, [id]);
     
