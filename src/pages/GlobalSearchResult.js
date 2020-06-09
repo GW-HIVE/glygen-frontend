@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import GlobalSearchCard from '../components/cards/GlobalSearchCard';
+import GlobalSearchDualCard from '../components/cards/GlobalSearchDualCard';
 import DialogAlert from '../components/alert/DialogAlert';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -74,53 +75,53 @@ const GlobalSearchResult = (props) => {
 						<Typography className={"gs-exact-match"} variant="h6"> 	
 							{globalSearchData.exact_match && globalSearchData.exact_match.map((searchMatch) => 
 									<li key={searchMatch.id} align="center">
+										<span>A {searchMatch.type} exactly matching </span>
 										<Navbar.Text
 											as={Link}
 											className={"gs-exact-match-link"}
 											to={searchMatch.type === "glycan" ? routeConstants.glycanDetail + searchMatch.id : routeConstants.proteinDetail + searchMatch.id}
 											>
-											Your input is an exact match to one {searchMatch.type}.
+										{id}
 										</Navbar.Text>
+										<span> was found.</span>
 									</li>
 								)}
 						</Typography>
-				<Grid
-					container
-					style={{ margin: '0  auto' }}
-					justify='center'>
-					<Grid item md={4}>
-						{globalSearchData.other_matches && <GlobalSearchCard
-							cardTitle="Glycan(s)"
-							setInputValue={(listId) => onGlobalSearchClick(routeConstants.glycanList, listId)}
-							term={id}
-							allCount={globalSearchData.other_matches.glycan.all.count}
-							allListId={globalSearchData.other_matches.glycan.all.list_id}
-							searchItems={Object.keys(globalSearchData.other_matches.glycan)
-								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.glycan[searchItem].count, list_id : globalSearchData.other_matches.glycan[searchItem].list_id}})}
-						/>}
-					</Grid>
-					<Grid item md={4}>
-						{globalSearchData.other_matches && <GlobalSearchCard
-							cardTitle="Protein(s)"
-							setInputValue={(listId) => onGlobalSearchClick(routeConstants.proteinList, listId)}
-							term={id}
-							allCount={globalSearchData.other_matches.protein.all.count}
-							allListId={globalSearchData.other_matches.protein.all.list_id}
-							searchItems={Object.keys(globalSearchData.other_matches.protein)
-								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.protein[searchItem].count, list_id : globalSearchData.other_matches.protein[searchItem].list_id}})}
-						/>}
-					</Grid>
-
-					{/* <Grid item md={4}>
-
-					{globalSearchData.other_matches && <GlobalSearchCard
-							cardTitle="GProtein(s)"
-							totalResults={globalSearchData.other_matches.protein.all.count}
-							searchItems={Object.keys(globalSearchData.other_matches.protein)
-								.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.protein[searchItem].count}})}
-						/>}
-
-					</Grid> */}
+					<Grid
+						container
+						style={{ margin: '0  auto' }}
+						justify='center'>
+							<Grid item md={4}>
+								{globalSearchData.other_matches && <GlobalSearchCard
+									cardTitle="Glycan(s)"
+									setInputValue={(listId) => onGlobalSearchClick(routeConstants.glycanList, listId)}
+									term={id}
+									allCount={globalSearchData.other_matches.glycan.all.count}
+									allListId={globalSearchData.other_matches.glycan.all.list_id}
+									colHeading1={"Database"}
+									colHeading2={"Glycan"}
+									searchItems={Object.keys(globalSearchData.other_matches.glycan)
+										.map((searchItem)  => {return {name: searchItem, count: globalSearchData.other_matches.glycan[searchItem].count, list_id : globalSearchData.other_matches.glycan[searchItem].list_id}})}
+								/>}
+							</Grid>
+							<Grid item md={6}>
+								{globalSearchData.other_matches && <GlobalSearchDualCard
+									cardTitle1="Protein(s)"
+									cardTitle2="Glycoprotein(s)"
+									setInputValue={(listId) => onGlobalSearchClick(routeConstants.proteinList, listId)}
+									term={id}
+									allCount1={globalSearchData.other_matches.protein.all.count}
+									allListId1={globalSearchData.other_matches.protein.all.list_id}
+									allCount2={globalSearchData.other_matches.glycoprotein.all.count}
+									allListId2={globalSearchData.other_matches.glycoprotein.all.list_id}
+									colHeading1={"Database"}
+									colHeading2={"Protein"}
+									colHeading3={"Glycoprotein"}
+									searchItems={Object.keys(globalSearchData.other_matches.protein)
+										.map((searchItem)  => {return {name: searchItem, count1: globalSearchData.other_matches.protein[searchItem].count, list_id1 : globalSearchData.other_matches.protein[searchItem].list_id,
+																count2: globalSearchData.other_matches.glycoprotein[searchItem].count, list_id2 : globalSearchData.other_matches.glycoprotein[searchItem].list_id}})}
+								/>}
+							</Grid>
 						</Grid>
                     </Paper>
                 </Container>

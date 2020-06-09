@@ -144,7 +144,7 @@ input[type="number"] {
 .card-row:nth-of-type(odd) {
 	background-color: rgba(0,0,0,.05)	!important;
 }
-.card-row:hover, .card-head:hover {
+.card-row:hover {
 	background-color: #dbe4ec	!important;
 }
 

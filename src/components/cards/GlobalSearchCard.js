@@ -17,7 +17,7 @@ export default function GlobalSearchCard(props) {
 			<Card className={"card"}>
                 <Table style={{margin:"0px", padding:"0px"}}>
                     <TableHead>
-                        <TableRow hover className="card-head">
+                        <TableRow hover className="card-row">
                             <TableCell align="center" colSpan={2}>
                                 <h4>
                                     <Button
@@ -33,22 +33,22 @@ export default function GlobalSearchCard(props) {
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
                             </TableCell>
                         </TableRow>
+                        <TableRow hover className="card-row">
+                            <TableCell classes={{head: "gs-cell"}}>
+                                <span><strong>{props.colHeading1}</strong></span>
+                            </TableCell>
+                            <TableCell className={"gs-cell-center"} classes={{head: "gs-cell"}}>
+                                <span><strong>{props.colHeading2}</strong></span>
+                            </TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {props.searchItems.sort(sortDropdown).map( items => 
                         (items.name !== "all" && <TableRow key={items.name} hover className="card-row">
-                                <TableCell className={"gs-cell-left"} classes={{body: "gs-cell-body"}}>
-                                <Button
-                                    className={"lnk-btn"}
-                                    variant="link"
-                                    disabled={Number(items.count) === 0}
-                                    onClick={() => {
-                                        props.setInputValue(items.list_id);
-                                    }}>
-                                    {"in " + items.name[0].toUpperCase() + items.name.slice(1)} 
-                                </Button>
+                            <TableCell className={"gs-cell-left"} classes={{body: "gs-cell"}}>
+                                <span>{items.name[0].toUpperCase() + items.name.slice(1)}</span>
                             </TableCell>
-                            <TableCell className={"gs-cell-right"} classes={{body: "gs-cell-body"}}>
+                            <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <Button
                                     className={"lnk-btn"}
                                     variant="link"
@@ -68,5 +68,12 @@ export default function GlobalSearchCard(props) {
 }
 
 GlobalSearchCard.propTypes = {
-	data: PropTypes.object,
+    cardTitle: PropTypes.string,
+    setInputValue: PropTypes.string,
+    term: PropTypes.string,
+    allCount: PropTypes.number,
+    allListId: PropTypes.string,
+    colHeading1: PropTypes.string,
+    colHeading2: PropTypes.string,
+    searchItems: PropTypes.array
 };

@@ -28,7 +28,7 @@
 
 .gs-exact-match {
    margin: 0px !important;
-   padding-top: 16px;
+   padding: 16px 16px 0px;
 }
 
 .gs-exact-match-link {
@@ -71,16 +71,16 @@
               Global Search Card
 ============================================ */
 
-.gs-cell-body {
+.gs-cell {
     font-size: inherit   !important;
 }
 
 .gs-cell-left {
-    min-width: 150px  !important;
+    min-width: 100px  !important;
     text-align: left   !important;
 }
 
-.gs-cell-right {
-    min-width: 120px   !important;
-    text-align: right   !important;
+.gs-cell-center {
+    min-width: 60px   !important;
+    text-align: center   !important;
 }
