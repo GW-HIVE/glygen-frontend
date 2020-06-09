@@ -8,7 +8,7 @@
 
 .sidebarpages-page {
 	width: 90%;
-	margin: 2em auto;
+	margin: 2em auto !important;
 	/* overflow: auto; */
 	margin-bottom: 40px;
 	margin-top: 40px;
@@ -17,7 +17,7 @@
 .sidebar {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	background-color: #e6e6e6 !important;
-	position: sticky;
+	position: sticky !important;
 }
 
 .sidebar-item {
