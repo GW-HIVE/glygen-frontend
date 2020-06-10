@@ -227,12 +227,12 @@ const ProteinSearch = (props) => {
 						})
 						.catch(function (error) {
 							let message = "list api call";
-							axiosError(error, message, setPageLoading, setAlertDialogInput);
+							axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 						});
 			})
 			.catch(function (error) {
 				let message = "search_init api call";
-				axiosError(error, message, setPageLoading, setAlertDialogInput);
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 			});
 	}, [id, proteinData]);
 
@@ -269,7 +269,7 @@ const ProteinSearch = (props) => {
 				}
 			})
 			.catch(function (error) {
-				axiosError(error, message, setPageLoading, setAlertDialogInput);
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 			});
 	};
 
@@ -453,7 +453,7 @@ const ProteinSearch = (props) => {
 				}
 			})
 			.catch(function (error) {
-				axiosError(error, message, setPageLoading, setAlertDialogInput);
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 			});
 	};
 

@@ -21,7 +21,7 @@ export default function SimpleSearchControl(props) {
 	}
 
 	return (
-		<div>
+		<form onSubmit={(event) => {event.preventDefault(); if (props.simpleSearchTerm.length <= props.length) props.searchSimpleClick()}}>
 			<Grid
 				container
 				spacing={3}
@@ -41,6 +41,7 @@ export default function SimpleSearchControl(props) {
 				<Grid item xs={12} sm={6}>
 					<OutlinedInput
 						fullWidth
+						required
 						placeholder={
 							props.simple_search !== undefined
 								? props.simple_search[props.simpleSearchCategory].placeholder
@@ -84,7 +85,7 @@ export default function SimpleSearchControl(props) {
 					match. *
 				</Grid>
 			</Grid>
-		</div>
+		</form>
 	);
 }
 

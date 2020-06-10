@@ -1,14 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { getDateMMDDYYYY } from "../../utils/common";
-import { Link } from "@material-ui/core";
-import CardLoader from "../load/CardLoader";
-import { Row, Col } from 'react-bootstrap';
 import TableRow from '@material-ui/core/TableRow';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,27 +10,16 @@ import Button from "react-bootstrap/Button";
 import {sortDropdown} from '../../utils/common';
 import "../../css/Search.css";
 
-const useStyles = makeStyles((theme) => ({
-	cardTitle: {
-		textAlign: "center",
-    },
-    body: {
-        fontSize: "inherit",
-      }
-}));
-
-
 export default function GlobalSearchCard(props) {
-	const classes = useStyles();
 
 	return (
         <div className={"global-search-card"}>
 			<Card className={"card"}>
                 <Table style={{margin:"0px", padding:"0px"}}>
                     <TableHead>
-                        <TableRow hover className="card-head" align="center" spacing={2}>
+                        <TableRow hover className="card-row">
                             <TableCell align="center" colSpan={2}>
-                                <h4 className={classes.cardTitle}>
+                                <h4>
                                     <Button
                                         className={"lnk-btn"}
                                         variant="link"
@@ -52,22 +33,22 @@ export default function GlobalSearchCard(props) {
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
                             </TableCell>
                         </TableRow>
+                        <TableRow hover className="card-row">
+                            <TableCell classes={{head: "gs-cell"}}>
+                                <span><strong>{props.colHeading1}</strong></span>
+                            </TableCell>
+                            <TableCell className={"gs-cell-center"} classes={{head: "gs-cell"}}>
+                                <span><strong>{props.colHeading2}</strong></span>
+                            </TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {props.searchItems.sort(sortDropdown).map( items => 
-                        (items.name !== "all" && <TableRow hover className="card-row">
-                                <TableCell align='left' classes={{body: classes.body}}>
-                                <Button
-                                    className={"lnk-btn"}
-                                    variant="link"
-                                    disabled={Number(items.count) === 0}
-                                    onClick={() => {
-                                        props.setInputValue(items.list_id);
-                                    }}>
-                                    {"in " + items.name[0].toUpperCase() + items.name.slice(1)} 
-                                </Button>
+                        (items.name !== "all" && <TableRow key={items.name} hover className="card-row">
+                            <TableCell className={"gs-cell-left"} classes={{body: "gs-cell"}}>
+                                <span>{items.name[0].toUpperCase() + items.name.slice(1)}</span>
                             </TableCell>
-                            <TableCell align='right' classes={{body: classes.body}}>
+                            <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <Button
                                     className={"lnk-btn"}
                                     variant="link"
@@ -87,5 +68,12 @@ export default function GlobalSearchCard(props) {
 }
 
 GlobalSearchCard.propTypes = {
-	data: PropTypes.object,
+    cardTitle: PropTypes.string,
+    setInputValue: PropTypes.string,
+    term: PropTypes.string,
+    allCount: PropTypes.number,
+    allListId: PropTypes.string,
+    colHeading1: PropTypes.string,
+    colHeading2: PropTypes.string,
+    searchItems: PropTypes.array
 };

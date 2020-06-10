@@ -101,7 +101,7 @@ const ContactForm = (props) => {
 				setContactUsErrorMessage(
 					'Oops, something went wrong! We did not receive your message. Please try again later.'
 				);
-				axiosError(error, "Contact us api call.");
+				axiosError(error, "", "Contact us api call.");
 			});
 
 		//setContactUsData({fname: '', lname: ''})
