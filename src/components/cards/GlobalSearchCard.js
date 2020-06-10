@@ -6,7 +6,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import Button from "react-bootstrap/Button";
+import RouteLink from '../Link/RouteLink.js'
 import {sortDropdown} from '../../utils/common';
 import "../../css/Search.css";
 
@@ -19,17 +19,13 @@ export default function GlobalSearchCard(props) {
                     <TableHead>
                         <TableRow hover className="card-row">
                             <TableCell align="center" colSpan={2}>
-                                <h4>
-                                    <Button
-                                        className={"lnk-btn"}
-                                        variant="link"
+                                <h4><strong>
+                                    <RouteLink
+                                        text={props.allCount + "\u00a0" + props.cardTitle}
                                         disabled={Number(props.allCount) === 0}
-                                        onClick={() => {
-                                            props.setInputValue(props.allListId);
-                                        }}>
-                                        <strong>{props.allCount}{' '}{props.cardTitle}</strong>
-                                    </Button>
-                                </h4>
+                                        link={props.route + props.allListId}
+                                    />
+                                </strong></h4>
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
                             </TableCell>
                         </TableRow>
@@ -49,15 +45,11 @@ export default function GlobalSearchCard(props) {
                                 <span>{items.name[0].toUpperCase() + items.name.slice(1)}</span>
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
-                                <Button
-                                    className={"lnk-btn"}
-                                    variant="link"
+                                <RouteLink
+                                    text={String(items.count)}
                                     disabled={Number(items.count) === 0}
-                                    onClick={() => {
-                                        props.setInputValue(items.list_id);
-                                    }}>
-                                    {items.count} 
-                                </Button>
+                                    link={props.route + items.list_id}
+                                />
                             </TableCell>
                         </TableRow>))}
                     </TableBody>
@@ -69,7 +61,6 @@ export default function GlobalSearchCard(props) {
 
 GlobalSearchCard.propTypes = {
     cardTitle: PropTypes.string,
-    setInputValue: PropTypes.string,
     term: PropTypes.string,
     allCount: PropTypes.number,
     allListId: PropTypes.string,

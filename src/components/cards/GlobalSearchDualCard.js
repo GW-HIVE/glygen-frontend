@@ -6,7 +6,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
-import Button from "react-bootstrap/Button";
+import RouteLink from '../Link/RouteLink.js'
 import {sortDropdown} from '../../utils/common';
 import "../../css/Search.css";
 
@@ -19,27 +19,19 @@ export default function GlobalSearchDualCard(props) {
                     <TableHead>
                         <TableRow hover className="card-row">
                             <TableCell align="center" colSpan={3}>
-                                <h4>
-                                    <Button
-                                        className={"lnk-btn"}
-                                        variant="link"
+                                <h4><strong>
+                                    <RouteLink
+                                        text={props.allCount1 + "\u00a0" + props.cardTitle1}
                                         disabled={Number(props.allCount1) === 0}
-                                        onClick={() => {
-                                            props.setInputValue(props.allListId1);
-                                        }}>
-                                        <strong>{props.allCount1}{' '}{props.cardTitle1}</strong>
-                                    </Button>
-                                    <span><strong> / </strong></span>
-                                    <Button
-                                        className={"lnk-btn"}
-                                        variant="link"
+                                        link={props.route + props.allListId1}
+                                    />
+                                    <span> / </span>
+                                    <RouteLink
+                                        text={props.allCount2 + "\u00a0" + props.cardTitle2}
                                         disabled={Number(props.allCount2) === 0}
-                                        onClick={() => {
-                                            props.setInputValue(props.allListId2);
-                                        }}>
-                                        <strong>{props.allCount2}{' '}{props.cardTitle2}</strong>
-                                    </Button>
-                                </h4>
+                                        link={props.route + props.allListId2}
+                                    />
+                                    </strong></h4>
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
                             </TableCell>
                         </TableRow>
@@ -62,26 +54,18 @@ export default function GlobalSearchDualCard(props) {
                                     <span>{items.name[0].toUpperCase() + items.name.slice(1)}</span> 
                                 </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
-                                <Button
-                                    className={"lnk-btn"}
-                                    variant="link"
+                                <RouteLink
+                                    text={String(items.count1)}
                                     disabled={Number(items.count1) === 0}
-                                    onClick={() => {
-                                        props.setInputValue(items.list_id1);
-                                    }}>
-                                    {items.count1} 
-                                </Button>
+                                    link={props.route + items.list_id1}
+                                />
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
-                                <Button
-                                    className={"lnk-btn"}
-                                    variant="link"
+                                <RouteLink
+                                    text={String(items.count2)}
                                     disabled={Number(items.count2) === 0}
-                                    onClick={() => {
-                                        props.setInputValue(items.list_id2);
-                                    }}>
-                                    {items.count2} 
-                                </Button>
+                                    link={props.route + items.list_id2}
+                                />
                             </TableCell>
                         </TableRow>))}
                     </TableBody>
@@ -94,7 +78,6 @@ export default function GlobalSearchDualCard(props) {
 GlobalSearchDualCard.propTypes = {
     cardTitle1: PropTypes.string,
     cardTitle2: PropTypes.string,
-    setInputValue: PropTypes.string,
     term: PropTypes.string,
     allCount1: PropTypes.number,
     allListId1: PropTypes.string,

@@ -14,9 +14,9 @@ import {axiosError} from '../data/axiosError';
 import FeedbackWidget from "../components/FeedbackWidget";
 import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { Navbar} from "react-bootstrap";
 import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
+import LineTooltip from "../components/tooltip/LineTooltip";
 import { getGlobalSearch} from '../data/commonApi';
 
 
@@ -29,12 +29,6 @@ const GlobalSearchResult = (props) => {
 		{show: false, id: ""}
 	);
 	const [globalSearchData, setGlobalSearchData] = useState({});
-
-	function onGlobalSearchClick(route, listId){
-		let message = "Global Search term=" + id;
-		logActivity("user", (id || "") + ">" + listId, message);
-		props.history.push(route + listId);
-	}
 
     useEffect(() => {
 		setPageLoading(true);
@@ -76,13 +70,14 @@ const GlobalSearchResult = (props) => {
 							{globalSearchData.exact_match && globalSearchData.exact_match.map((searchMatch) => 
 									<li key={searchMatch.id} align="center">
 										<span>A {searchMatch.type} exactly matching </span>
-										<Navbar.Text
-											as={Link}
-											className={"gs-exact-match-link"}
-											to={searchMatch.type === "glycan" ? routeConstants.glycanDetail + searchMatch.id : routeConstants.proteinDetail + searchMatch.id}
-											>
-										{id}
-										</Navbar.Text>
+										<LineTooltip text="Click to see details page."> 
+											<Link
+												className={"gs-exact-match-link"}
+												to={searchMatch.type === "glycan" ? routeConstants.glycanDetail + searchMatch.id : routeConstants.proteinDetail + searchMatch.id}
+												>
+											{id}
+											</Link>
+										</LineTooltip>
 										<span> was found.</span>
 									</li>
 								)}
@@ -94,7 +89,7 @@ const GlobalSearchResult = (props) => {
 							<Grid item md={4}>
 								{globalSearchData.other_matches && <GlobalSearchCard
 									cardTitle="Glycan(s)"
-									setInputValue={(listId) => onGlobalSearchClick(routeConstants.glycanList, listId)}
+									route={routeConstants.glycanList}
 									term={id}
 									allCount={globalSearchData.other_matches.glycan.all.count}
 									allListId={globalSearchData.other_matches.glycan.all.list_id}
@@ -108,7 +103,7 @@ const GlobalSearchResult = (props) => {
 								{globalSearchData.other_matches && <GlobalSearchDualCard
 									cardTitle1="Protein(s)"
 									cardTitle2="Glycoprotein(s)"
-									setInputValue={(listId) => onGlobalSearchClick(routeConstants.proteinList, listId)}
+									route={routeConstants.proteinList}
 									term={id}
 									allCount1={globalSearchData.other_matches.protein.all.count}
 									allListId1={globalSearchData.other_matches.protein.all.list_id}
