@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import routeConstants from "./json/routeConstants";
 import stringConstants from "./json/stringConstants";
+import LineTooltip from "../components/tooltip/LineTooltip";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -31,7 +32,6 @@ export const getProteinList = (
 
 export const getProteinDetail = accessionId => {
   const url = `/protein/detail/${accessionId}`;
-
   return getJson(url);
 };
 export const getProteinDownload = (id, format, compressed, type, headers) => {
@@ -51,12 +51,14 @@ export const PROTEIN_COLUMNS = [
     },
 
     formatter: (value, row) => (
-      <Navbar.Text
-        as={NavLink}
-        to={routeConstants.proteinDetail + row.uniprot_canonical_ac}
-      >
-        {row.uniprot_canonical_ac}
-      </Navbar.Text>
+      <LineTooltip text="View details">
+        <Navbar.Text
+          as={NavLink}
+          to={routeConstants.proteinDetail + row.uniprot_canonical_ac}
+        >
+          {row.uniprot_canonical_ac}
+        </Navbar.Text>
+      </LineTooltip>
     )
   },
   {
@@ -124,5 +126,23 @@ export const getProteinSimpleSearch = formObject => {
 
 export const getProteinInit = () => {
   const url = `/protein/search_init`;
+  return getJson(url);
+};
+
+export const getIsoAlignment = (protienId, alignment) => {
+  const queryParamString = JSON.stringify({
+    uniprot_canonical_ac: protienId,
+    cluster_type: alignment
+  });
+  const url = `/protein/alignment?query=${queryParamString}`;
+  return getJson(url);
+};
+
+export const getHomoAlignment = (protienId, alignment) => {
+  const queryParamString = JSON.stringify({
+    uniprot_canonical_ac: protienId,
+    cluster_type: alignment
+  });
+  const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);
 };
