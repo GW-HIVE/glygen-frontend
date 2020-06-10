@@ -62,22 +62,14 @@ const ProteinQuerySummary = props => {
     ? getDateTime(data.execution_time)
     : "";
 
-  // const formatOrganisms = organism => {
-  //   const organismNames = organism.organism_list.map(item => item.name);
-  //   const OrganiOperation = organism.operation.toUpperCase();
-  //   return organismNames.join(` ${OrganiOperation} `);
-  // };
-
   function formatProtein() {
     const ProteinAc = data.uniprot_canonical_ac;
     return ProteinAc.split(",").join(", ");
   }
 
-  // data.glytoucan_ac = data.glytoucan_ac.split(",").join(", ");
-
   return (
     <>
-      <pre>Test: {JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>Test: {JSON.stringify(data, null, 2)}</pre> */}
       <Card className="text-center summary-panel">
         <Card.Header as="h3" className="panelHeadBgr panelHeadText">
           {title}
@@ -100,17 +92,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {/* Oraganism */}
-            {/* {organism && (
-              <Row className="summary-table-col">
-                <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Organism:
-                </Col>
-                <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {formatOrganisms(organism)}
-                </Col>
-              </Row>
-            )} */}
+
             {mass && mass.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
