@@ -152,3 +152,7 @@ input[type="number"] {
 	margin: 16px;
 	padding: 0px;
 }
+
+.qs-search-lbl {
+	font-weight: bold !important;
+}

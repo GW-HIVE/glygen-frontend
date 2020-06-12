@@ -909,4 +909,9 @@ sub {
 	box-shadow: 0 1px 10px rgba(108, 125, 142, 0.3);
 }
 
+.quick-search-control {
+	padding: 0px 16px 16px 16px;
+}
+
+
 /* MuiPaper-root MuiExpansionPanel-root MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded */

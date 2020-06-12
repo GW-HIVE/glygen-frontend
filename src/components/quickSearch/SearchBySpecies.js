@@ -4,7 +4,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import quickSearchData from "../../data/json/questions.json";
+import quickSearchData from "../../data/json/quickSearch.json";
 
 const SearchBySpecies = (props) => {
 	return (
@@ -21,7 +21,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearchData.quickSearch.searchBySpecies.question_1.text}
+									{quickSearchData.searchBySpecies.question_1.text}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -37,7 +37,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel2bh-content"
 								id="panel2bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearchData.quickSearch.searchBySpecies.question_2.text}
+									{quickSearchData.searchBySpecies.question_2.text}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -54,7 +54,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel3bh-content"
 								id="panel3bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearchData.quickSearch.searchBySpecies.question_3.text}
+									{quickSearchData.searchBySpecies.question_3.text}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>

@@ -526,6 +526,20 @@
       }
     }
   },
+  "quick_search": {
+    "question_1": {
+      "text": "What are the enzymes involved in the biosynthesis of glycan X in human?",
+      "id": "question_1"
+		},
+		"question_2": {
+      "text": "Which proteins have been shown to bear glycan X and which site is this glycan attached to?",
+      "id": "question_2"
+		},
+		"question_3": {
+      "text": "What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?",
+      "id": "question_3"
+		}
+  },
   "errors": {
     "contactUsMsg": "If the problem persists then you may",
     "networkError": {
@@ -636,6 +650,11 @@
     "advSerarchError": {
       "id": "advSerarchError",
       "title": "Advanced Search Error - No Results Found",
+      "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+    },
+    "quickSerarchError": {
+      "id": "quickSerarchError",
+      "title": "Quick Search Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     },
     "defaultTextAlert": {
