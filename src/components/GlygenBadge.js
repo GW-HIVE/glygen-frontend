@@ -60,7 +60,7 @@ const GlygenBadge = props => {
   const { text } = props;
 
   return (
-    <span className="badge-div">
+    <div className="badge-div">
       <Button
         style={{
           backgroundColor: databasecolor(text),
@@ -86,7 +86,7 @@ const GlygenBadge = props => {
           ))}
         </ul>
       )}
-    </span>
+    </div>
   );
 };
 

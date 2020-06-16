@@ -9,6 +9,8 @@ import InputBase from "@material-ui/core/InputBase";
 import SelectControl from "./select/SelectControl";
 import { Link } from "@material-ui/core";
 
+import routeConstants from "../data/json/routeConstants";
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     "label + &": {
@@ -32,7 +34,7 @@ const AlignmentDropdown = props => {
 
   useEffect(() => {
     debugger;
-    setLinkPath(`/whatever-align/${dataId}/${dropdown}`);
+    setLinkPath(`${routeConstants.isoAlignment}${dataId}/${dropdown}`);
   }, [dropdown]);
 
   return (
