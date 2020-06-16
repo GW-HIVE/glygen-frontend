@@ -58,10 +58,7 @@ const Routes = props => (
       component={IsoAlignment}
     />
     <Route path={`${routeConstants.protVista}:id`} component={ProtVista} />
-    {/* <Route
-      path={`${routeConstants.homologsAlignment}:id/:alignment`}
-      component={HomologsAlignment}
-    /> */}
+
     <Route
       path={`${routeConstants.globalSearchResult}:id`}
       component={GlobalSearchResult}

@@ -41,6 +41,7 @@ import stringConstants from "../data/json/stringConstants";
 import { getGlycanImageUrl } from "../data/glycan";
 import Button from "react-bootstrap/Button";
 import AlignmentDropdown from "../components/AlignmentDropdown";
+import ProtvistaNav from "../components/navigation/ProtvistaNav";
 
 
 const proteinStrings = stringConstants.protein.common;
@@ -577,6 +578,8 @@ const ProteinDetail = props => {
               itemType = "protein"
 						/>
 					</div>
+
+         
           
          
 
@@ -1175,13 +1178,14 @@ const ProteinDetail = props => {
                   </span>
                   <h3 className="gg-green d-inline">Isoforms</h3>
                   <div className="float-right">
+                  <Link href={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
                   <Button 
                       type="button"
                       className="gg-btn-blue"
                       style={{ margin:"10px" }}
                       >Alignment
                     </Button>
-
+                    </Link>
                     <Button
                       type="button"
                       className="gg-btn-blue"
