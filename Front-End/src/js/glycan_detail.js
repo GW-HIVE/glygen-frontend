@@ -203,7 +203,7 @@ function ajaxSuccess(data) {
                 title: 'Gene Name',
                 sortable: true,
                 formatter: function (value, row, index, field) {
-                    return "<a href='" + row.gene_link + " ' target='_blank'>" + value + "</a>"
+                    return "<a href='" + row.gene_url + " ' target='_blank'>" + value + "</a>"
                 }
             },
 
