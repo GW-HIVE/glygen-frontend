@@ -43,18 +43,21 @@
 	/* border-top: 3px orange; */
 	padding-top: 1px;
 }
-#sequnce_highlight {
+.sequnce_highlight {
 	display: block;
+	display: inline-table;
 	padding: 9px;
 	margin: 0;
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: rgba(0, 0, 0);
-	background-color: #e6e6e6;
-	border: 1px solid #ccc;
+	/* background-color: #e6e6e6; */
+	background-color: rgba(0, 0, 0, 0.05);
+	border: 1px solid #ddd;
 	border-radius: 4px;
 	overflow-y: scroll;
 }
+
 .badge {
 	display: inline-block;
 	padding: 0.25em 0.6em;
@@ -74,42 +77,62 @@
 /*n_link_glycosylation"*/
 .sequnce1 {
 	border-bottom: 3px solid red;
-	font-family: monospace;
-	font-size: 14px;
+	/* font-family: monospace; */
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0 5px;
 }
 
 /*o_link_glycosylation"*/
 .sequnce2 {
 	border-bottom: 3px solid blue;
-	font-family: monospace;
-	font-size: 14px;
+	/* font-family: monospace; */
+	/* font-size: 14px; */
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0 5px;
 }
 /*mutation*/
 .sequnce3 {
 	background: rgb(131, 235, 131);
-	font-family: monospace;
-	font-size: 14px;
+	/* font-family: monospace; */
+	/* font-size: 14px; */
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0 5px;
 }
 /*Sequon*/
 .sequnce4 {
 	background: rgb(244, 151, 37);
-	font-family: monospace;
-	font-size: 14px;
+	/* font-family: monospace; */
+	/* font-size: 14px; */
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin: 0 5px;
 }
 .highlight-panel-categories {
-	margin: 0;
+	margin: 0 0 0 20px;
 	padding: 5px;
-	width: 180px;
+	width: 100%;
 	overflow: auto;
 }
+
 .sequence-panel {
 	margin-left: 5%;
 }
-@media (max-width: 1280px) {
-	.box {
+@media (max-width: 957px) {
+	.content-box {
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
+	}
+	.content-active {
+		order: -1;
+		flex: 1 0 100%;
 	}
 }
 

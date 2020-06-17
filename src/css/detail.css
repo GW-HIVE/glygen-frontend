@@ -34,17 +34,11 @@
 .badge-div {
 	/* margin: 0.5em 0 0; */
 	/* margin-left: -20px; */
-	margin-top: 5px;
+	margin-top: 5px !important;
 }
 
-/* .Species {
-	display: grid;
-	grid-template-columns: auto auto auto auto;
-	grid-gap: 10px;
-	grid-row-start: 2;
-} */
 .badge-div + .badge-div {
-	margin: 20px 0 0;
+	margin: 10px 0 0 !important;
 	margin-left: 2px;
 }
 legend {
@@ -94,12 +88,10 @@ legend {
 .no-data-msg-publication {
 	margin: 20px 0 36px 20px;
 }
-.goannotationstyle {
-	margin-left: 10px;
+.go-annotation-total {
+	margin-left: 20px;
 }
-.goannotationstylerow {
-	padding: 20px;
-}
-.badgegrid {
+
+.badge-grid {
 	padding-bottom: 20px;
 }
