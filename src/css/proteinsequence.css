@@ -58,22 +58,6 @@
 	overflow-y: scroll;
 }
 
-.badge {
-	display: inline-block;
-	padding: 0.25em 0.6em;
-	margin-left: 2px;
-	font-size: 75%;
-	color: white;
-	font-weight: 700;
-	line-height: 1;
-	background-color: #777;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: baseline;
-	border-radius: 0.45rem;
-	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
 /*n_link_glycosylation"*/
 .sequnce1 {
 	border-bottom: 3px solid red;
@@ -115,7 +99,7 @@
 	margin: 0 5px;
 }
 .highlight-panel-categories {
-	margin: 0 0 0 20px;
+	margin: 0 0 0 30px;
 	padding: 5px;
 	width: 100%;
 	overflow: auto;
@@ -124,7 +108,8 @@
 .sequence-panel {
 	margin-left: 5%;
 }
-@media (max-width: 957px) {
+@media (max-width: 1345px) {
+	/* @media (max-width: 757px) { */
 	.content-box {
 		display: flex;
 		flex-wrap: wrap;

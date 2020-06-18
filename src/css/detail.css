@@ -18,6 +18,22 @@
 .page-item.active .page-link {
 	background-color: white;
 }
+.badge {
+	display: inline-block;
+	padding: 0.25em 0.6em;
+	margin-left: 2px;
+	font-size: 75%;
+	color: white;
+	font-weight: 700;
+	line-height: 1;
+	background-color: #777;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 0.45rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
 .badge-count {
 	background-color: white;

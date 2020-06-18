@@ -223,8 +223,8 @@ const ProteinSequenceDisplay = ({
 	}
 
 	return (
-		<Grid container>
-			<Grid item xs={9} className="sequnce_highlight">
+		<Grid container className="content-box">
+			<Grid item className="sequnce_highlight">
 				<div>
 					{sequenceObject && (
 						<SequenceDisplay
@@ -234,7 +234,7 @@ const ProteinSequenceDisplay = ({
 					)}
 				</div>
 			</Grid>
-			<Grid item xs={3}>
+			<Grid item className="content-active">
 				<ul className="highlight-panel-categories">
 					<li>
 						<HiglightSelecter

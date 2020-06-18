@@ -711,7 +711,6 @@ const ProteinDetail = (props) => {
 												</p>
 											)}
 										</div>
-
 										<p>
 											{uniprot && uniprot.uniprot_canonical_ac && (
 												<>
@@ -1703,7 +1702,7 @@ const ProteinDetail = (props) => {
 															<ul style={{ marginBottom: "10px" }}>
 																<Row>
 																	{crossRef.links.map((link) => (
-																		<Col sm={3}>
+																		<Col xs={12} sm={4}>
 																			<li>
 																				<a
 																					href={link.url}
