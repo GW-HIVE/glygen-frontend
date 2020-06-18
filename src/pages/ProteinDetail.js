@@ -202,6 +202,7 @@ const ProteinDetail = (props) => {
 		uniprot,
 		gene,
 		species,
+		taxid,
 		publication,
 		isoforms,
 		orthologs,
@@ -674,7 +675,7 @@ const ProteinDetail = (props) => {
 												marginBottom: "5px",
 											}}>
 											{gene && (
-												<tbody className="table-body5">
+												<tbody className="table-body">
 													{gene.map((genes, genesname) => (
 														<td key={genesname}>
 															<div>
@@ -711,6 +712,7 @@ const ProteinDetail = (props) => {
 												</p>
 											)}
 										</div>
+
 										<p>
 											{uniprot && uniprot.uniprot_canonical_ac && (
 												<>
@@ -851,10 +853,17 @@ const ProteinDetail = (props) => {
 																		/>
 																	</Col>
 																</Row>
+																<Row>
+																	<Col align="right">
+																		<strong> Taxonomy ID: </strong>
+																	</Col>
+																	<Col align="left">{taxid}</Col>
+																</Row>
 															</>
 														</p>
 													</Col>
 												))}
+
 											{!species && (
 												<p className="no-data-msg">No data available.</p>
 											)}
@@ -896,6 +905,11 @@ const ProteinDetail = (props) => {
 									<Card.Body className="card-padding-zero">
 										<Table hover fluid>
 											<FunctionList functions={functions} />
+											{!functions && (
+												<p className="no-data-msg-publication">
+													No data available.
+												</p>
+											)}
 										</Table>
 									</Card.Body>
 								</Accordion.Collapse>
@@ -985,6 +999,9 @@ const ProteinDetail = (props) => {
 														</strong>
 													</>
 												))}
+											{!go_annotation && (
+												<p className="no-data-msg">No data available.</p>
+											)}
 										</div>
 									</Card.Body>
 								</Accordion.Collapse>

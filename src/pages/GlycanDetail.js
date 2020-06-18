@@ -703,7 +703,7 @@ const GlycanDetail = (props) => {
 												data={glycoprotein}
 												columns={glycoProtienColumns}
 												defaultSortField={"uniprot_canonical_ac"}
-												onClickTarget={'#glycoprotein'}
+												onClickTarget={"#glycoprotein"}
 											/>
 										)}
 										{!glycoprotein && <p>No data available.</p>}
@@ -973,7 +973,7 @@ const GlycanDetail = (props) => {
 															<ul>
 																<Row>
 																	{crossRef.links.map((link) => (
-																		<Col>
+																		<Col xs={12} sm={4}>
 																			<li>
 																				<a
 																					href={link.url}

@@ -34,7 +34,10 @@
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
 		border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
+.badge-div .MuiButton-root:focus,
+.badge-div .MuiButton-root:active {
+	outline: 0 !important;
+}
 .badge-count {
 	background-color: white;
 	color: black;
