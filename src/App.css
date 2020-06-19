@@ -41,7 +41,8 @@
 	margin-bottom: 40px;
 }
 .gg-baseline {
-	width: 98%;
+	/* width: 98%; */
+	width: 100%;
 }
 /* ========================================
         Main Attributes & Typography
@@ -727,16 +728,12 @@ sub {
 	/* font-weight: 200 !important; */
 }
 .banner-bg {
-	background-color: #444 !important;
-	/* margin-bottom: 0 !important;
-	padding-bottom: 0 !important; */
+	background-color: #555 !important;
+	padding: 0 !important;
 }
 
 .banner-info {
-	border-left: solid 2px #555 !important;
-	padding: 5px;
-	/* margin-bottom: 0 !important;
-	padding-bottom: 0 !important; */
+	border-left: solid 2px #666 !important;
 }
 .banner-info h5,
 .banner-info p {

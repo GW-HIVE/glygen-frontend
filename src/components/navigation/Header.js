@@ -10,7 +10,7 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
-import GlobalSearchControl from '../search/GlobalSearchControl';
+import GlobalSearchControl from "../search/GlobalSearchControl";
 
 import {
 	GLYGEN_API,
@@ -37,64 +37,61 @@ export default function Header() {
 			<CssBaseline />
 			<Navbar className="gg-top-header" expand="xl">
 				<Container maxWidth="xl">
-					<Row className="show-grid">
-						<Col xs={4} sm={3} md={7} lg={9}>
-							<div className="text-right">
-								<Navbar.Text
-									as={Link}
-									to={routeConstants.privacySettings}
+					<Row className="justify-content-end">
+						<div className="mr-4">
+							<Navbar.Text
+								as={Link}
+								to={routeConstants.privacySettings}
+								className={classes.navbarText}>
+								<span>
+									<PersonIcon />
+								</span>{" "}
+								MY GLYGEN
+							</Navbar.Text>
+						</div>
+						<div className="mr-4">
+							<Navbar.Text>
+								<a
+									href={GLYGEN_BETA}
+									target="_blank"
+									rel="noopener noreferrer"
 									className={classes.navbarText}>
 									<span>
-										<PersonIcon />
+										<DeveloperBoardIcon />
 									</span>{" "}
-									MY GLYGEN
-								</Navbar.Text>
-							</div>
-						</Col>
-						<Col xs={5} sm={3} md={2} lg={1}>
-							<div className=" text-right mr-sm-4">
-								<Navbar.Text>
-									<a
-										href={GLYGEN_BETA}
-										target="_blank"
-										rel="noopener noreferrer"
-										className={classes.navbarText}>
-										<span>
-											<DeveloperBoardIcon />
-										</span>{" "}
-										BETA TESTING
-									</a>
-								</Navbar.Text>{" "}
-							</div>
-						</Col>
-						<Col xs={3} sm={6} md={3} lg={2}>
-							<div className="text-right mt-sm-2 ml-lg-5 pl-sm-2">
+									BETA TESTING
+								</a>
+							</Navbar.Text>{" "}
+						</div>
+						<div>
+							<Navbar.Text>
 								<a
 									href="https://twitter.com/gly_gen"
 									target="_blank"
 									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<TwitterIcon className="mr-sm-3" />
+									<TwitterIcon className="mr-3" />
 								</a>
 								<a
 									href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
 									target="_blank"
 									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<YouTubeIcon className="mr-sm-3" />
+									<YouTubeIcon className="mr-3" />
 								</a>
 								<a
 									href="https://github.com/glygener"
 									target="_blank"
 									rel="noopener noreferrer"
 									className={classes.navbarText}>
-									<GitHubIcon className="mr-sm-3" />
+									<GitHubIcon className="mr-3" />
 								</a>
-							</div>
-						</Col>
+							</Navbar.Text>
+						</div>
 					</Row>
 				</Container>
 			</Navbar>
+
 			<Navbar className="gg-blue" expand="xl">
 				<Col xs={"auto"}>
 					<Navbar.Brand as={Link} to={routeConstants.home}>

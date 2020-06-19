@@ -137,3 +137,8 @@
 
 @media (max-width: 320px) {
 }
+@media (min-width: 320px) and (max-width: 1199px) {
+	.gg-baseline {
+		margin: 0 auto !important;
+	}
+}

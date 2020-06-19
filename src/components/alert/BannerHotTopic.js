@@ -2,7 +2,7 @@ import React from "react";
 // import MuiAlert from "@material-ui/lab/Alert";
 // import { makeStyles } from "@material-ui/core/styles";
 // import { Link } from "@material-ui/core";
-import { Col, Row } from "react-bootstrap";
+import { Col, Navbar } from "react-bootstrap";
 import { ReactComponent as AlertIcon } from "../../images/icons/clarity-alert-line.svg";
 
 // const useStyles = makeStyles((theme) => ({
@@ -83,7 +83,8 @@ export default function BunnerHotTopic() {
 				This is a message of type darkgrey!
 				{link}
 			</Alert> */}
-			<Row className="banner-bg">
+			<Navbar className="banner-bg" expand="xl">
+				{/* <Row className="banner-bg" style={{ width: "100%" }}> */}
 				<Col sm={1} className="gg-align-middle gg-align-center">
 					<AlertIcon />
 				</Col>
@@ -102,7 +103,8 @@ export default function BunnerHotTopic() {
 					<p>This is a bunner message of type info 3.</p>
 					{link}
 				</Col>
-			</Row>
+				{/* </Row> */}
+			</Navbar>
 		</div>
 	);
 }
