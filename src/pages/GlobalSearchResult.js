@@ -91,6 +91,7 @@ const GlobalSearchResult = (props) => {
 									cardTitle="Glycan(s)"
 									route={routeConstants.glycanList}
 									term={id}
+									routeTerm="gs"
 									allCount={globalSearchData.other_matches.glycan.all.count}
 									allListId={globalSearchData.other_matches.glycan.all.list_id}
 									colHeading1={"Database"}
@@ -105,6 +106,7 @@ const GlobalSearchResult = (props) => {
 									cardTitle2="Glycoprotein(s)"
 									route={routeConstants.proteinList}
 									term={id}
+									routeTerm="gs"
 									allCount1={globalSearchData.other_matches.protein.all.count}
 									allListId1={globalSearchData.other_matches.protein.all.list_id}
 									allCount2={globalSearchData.other_matches.glycoprotein.all.count}

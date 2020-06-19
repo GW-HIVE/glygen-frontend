@@ -23,13 +23,13 @@ export default function GlobalSearchDualCard(props) {
                                     <RouteLink
                                         text={props.allCount1 + "\u00a0" + props.cardTitle1}
                                         disabled={Number(props.allCount1) === 0}
-                                        link={props.route + props.allListId1 + "/" + props.term}
+                                        link={props.route + props.allListId1 + "/" + props.routeTerm}
                                     />
                                     <span> / </span>
                                     <RouteLink
                                         text={props.allCount2 + "\u00a0" + props.cardTitle2}
                                         disabled={Number(props.allCount2) === 0}
-                                        link={props.route + props.allListId2 + "/" + props.term}
+                                        link={props.route + props.allListId2 + "/" + props.routeTerm}
                                     />
                                     </strong></h4>
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
@@ -57,14 +57,14 @@ export default function GlobalSearchDualCard(props) {
                                 <RouteLink
                                     text={String(items.count1)}
                                     disabled={Number(items.count1) === 0}
-                                    link={props.route + items.list_id1 + "/" + props.term}
+                                    link={props.route + items.list_id1 + "/" + props.routeTerm}
                                 />
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <RouteLink
                                     text={String(items.count2)}
                                     disabled={Number(items.count2) === 0}
-                                    link={props.route + items.list_id2 + "/" + props.term}
+                                    link={props.route + items.list_id2 + "/" + props.routeTerm}
                                 />
                             </TableCell>
                         </TableRow>))}
@@ -79,6 +79,7 @@ GlobalSearchDualCard.propTypes = {
     cardTitle1: PropTypes.string,
     cardTitle2: PropTypes.string,
     term: PropTypes.string,
+    routeTerm: PropTypes.string,
     allCount1: PropTypes.number,
     allListId1: PropTypes.string,
     allCount2: PropTypes.number,
