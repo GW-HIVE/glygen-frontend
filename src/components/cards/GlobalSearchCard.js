@@ -23,7 +23,7 @@ export default function GlobalSearchCard(props) {
                                     <RouteLink
                                         text={props.allCount + "\u00a0" + props.cardTitle}
                                         disabled={Number(props.allCount) === 0}
-                                        link={props.route + props.allListId}
+                                        link={props.route + props.allListId + "/" + props.term}
                                     />
                                 </strong></h4>
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
@@ -48,7 +48,7 @@ export default function GlobalSearchCard(props) {
                                 <RouteLink
                                     text={String(items.count)}
                                     disabled={Number(items.count) === 0}
-                                    link={props.route + items.list_id}
+                                    link={props.route + items.list_id + "/" + props.term}
                                 />
                             </TableCell>
                         </TableRow>))}

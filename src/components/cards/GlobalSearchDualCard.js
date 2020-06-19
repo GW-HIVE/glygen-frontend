@@ -23,13 +23,13 @@ export default function GlobalSearchDualCard(props) {
                                     <RouteLink
                                         text={props.allCount1 + "\u00a0" + props.cardTitle1}
                                         disabled={Number(props.allCount1) === 0}
-                                        link={props.route + props.allListId1}
+                                        link={props.route + props.allListId1 + "/" + props.term}
                                     />
                                     <span> / </span>
                                     <RouteLink
                                         text={props.allCount2 + "\u00a0" + props.cardTitle2}
                                         disabled={Number(props.allCount2) === 0}
-                                        link={props.route + props.allListId2}
+                                        link={props.route + props.allListId2 + "/" + props.term}
                                     />
                                     </strong></h4>
                                 <h5><strong>{'match for'}{' '}{props.term}</strong></h5>
@@ -57,14 +57,14 @@ export default function GlobalSearchDualCard(props) {
                                 <RouteLink
                                     text={String(items.count1)}
                                     disabled={Number(items.count1) === 0}
-                                    link={props.route + items.list_id1}
+                                    link={props.route + items.list_id1 + "/" + props.term}
                                 />
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <RouteLink
                                     text={String(items.count2)}
                                     disabled={Number(items.count2) === 0}
-                                    link={props.route + items.list_id2}
+                                    link={props.route + items.list_id2 + "/" + props.term}
                                 />
                             </TableCell>
                         </TableRow>))}

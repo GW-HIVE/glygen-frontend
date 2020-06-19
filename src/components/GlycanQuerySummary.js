@@ -58,9 +58,11 @@ const GlycanQuerySummary = props => {
   } = data;
 
   const formatOrganisms = organism => {
-    const organismNames = organism.organism_list.map(item => item.name);
-    const OrganiOperation = organism.operation.toUpperCase();
-    return organismNames.join(` ${OrganiOperation} `);
+    if (organism.organism_list) {
+      const organismNames = organism.organism_list.map(item => item.name);
+      const OrganiOperation = organism.operation.toUpperCase();
+      return organismNames.join(` ${OrganiOperation} `);
+    }
   };
 
   function formatGlycans() {

@@ -32,7 +32,9 @@ const Routes = props => (
       path={`${routeConstants.glycanListEdit}:id`}
       component={GlycanListEditColumns}
     />
+	<Route path={`${routeConstants.glycanList}:id/:searchId`} component={GlycanList} />
     <Route path={`${routeConstants.glycanList}:id`} component={GlycanList} />
+	<Route path={`${routeConstants.proteinList}:id/:searchId`} component={ProteinList} />
     <Route path={`${routeConstants.proteinList}:id`} component={ProteinList} />
     <Route
       path={`${routeConstants.glycanSearch}:id`}
@@ -76,6 +78,7 @@ const Routes = props => (
     <Route path={routeConstants.about} component={About} />
     <Route path={routeConstants.frameworks} component={Frameworks} />
     <Route path={routeConstants.media} component={Media} />
+	<Route path={`${routeConstants.quickSearch}:id/:questionId`} component={QuickSearch} />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />

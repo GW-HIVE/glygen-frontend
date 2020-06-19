@@ -28,47 +28,47 @@ const SearchByGlycan = (props) => {
 						<h4>Search by Glycan</h4>
 					</div>
 					<div className="quick-search">
-						<ExpansionPanel>
+						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_1.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_1.text}
+									{quickSearch.question_1.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_1.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
-							<Grid container>
-								<Grid item md={12}>
+							<Grid container xs={12} sm={12}>
+								<Grid item xs={12} sm={12}>
 									<TextAlert alertInput={props.alertText.question === quickSearch.question_1.id ? props.alertText.input : props.alertText.default} />
 								</Grid>
-								<Grid item md={8} className="quick-search-control">
+								<Grid item xs={12} sm={6} className="quick-search-control">
 								<FormControl fullWidth variant='outlined'>
 									<Typography className="qs-search-lbl" gutterBottom>
 										{searchByGlycan.common.label}
 									</Typography>
 									<AutoTextInput
-										inputValue={props.searchByGlycanInput.question_1}
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_1: input})}
+										inputValue={props.inputValue.question_1}
+										setInputValue={(input)=> props.setInputValue({question_1: input})}
 										placeholder={searchByGlycan.common.placeholder}
 										typeahedID={searchByGlycan.common.typeahedID}
 										length={searchByGlycan.common.length}
 										errorText={searchByGlycan.common.errorText}
 									/>
 									<ExampleExploreControl
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_1: input})}
+										setInputValue={(input)=> props.setInputValue({question_1: input})}
 										inputValue={searchByGlycan.common.examples}
 									/>
 								</FormControl>
 								</Grid>
-								<Grid item>
+								<Grid item xs={12} sm={2} className="quick-search-control">
 									<Typography gutterBottom>
 										&nbsp;
 									</Typography>
 									<Button
 										className='gg-btn-blue'
 										onClick={props.searchQuestion1}
-										disabled={props.searchByGlycanInput.question_1.trim().length === 0}
+										disabled={props.inputValue.question_1.trim().length === 0}
 									>
 										Search
 									</Button>
@@ -76,47 +76,47 @@ const SearchByGlycan = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel>
+						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_2.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel2bh-content"
 								id="panel2bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_2.text}
+									{quickSearch.question_2.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_2.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
-							<Grid container>
-								<Grid item md={12}>
+							<Grid container xs={12} sm={12}>
+								<Grid item xs={12} sm={12}>
 									<TextAlert alertInput={props.alertText.question === quickSearch.question_2.id ? props.alertText.input : props.alertText.default} />
 								</Grid>
-								<Grid item md={8} className="quick-search-control">
+								<Grid item xs={12} sm={6} className="quick-search-control">
 								<FormControl fullWidth variant='outlined'>
 									<Typography className="qs-search-lbl" gutterBottom>
 										{searchByGlycan.common.label}
 									</Typography>
 									<AutoTextInput
-										inputValue={props.searchByGlycanInput.question_2}
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_2: input})}
+										inputValue={props.inputValue.question_2}
+										setInputValue={(input)=> props.setInputValue({question_2: input})}
 										placeholder={searchByGlycan.common.placeholder}
 										typeahedID={searchByGlycan.common.typeahedID}
 										length={searchByGlycan.common.length}
 										errorText={searchByGlycan.common.errorText}
 									/>
 									<ExampleExploreControl
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_2: input})}
+										setInputValue={(input)=> props.setInputValue({question_2: input})}
 										inputValue={searchByGlycan.question_2.examples}
 									/>
 								</FormControl>
 								</Grid>
-								<Grid item>
+								<Grid item xs={12} sm={2} className="quick-search-control">
 									<Typography gutterBottom>
 										&nbsp;
 									</Typography>
 									<Button
 										className='gg-btn-blue'
 										onClick={props.searchQuestion2}
-										disabled={props.searchByGlycanInput.question_2.trim().length === 0}
+										disabled={props.inputValue.question_2.trim().length === 0}
 									>
 										Search
 									</Button>
@@ -124,47 +124,47 @@ const SearchByGlycan = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel>
+						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_3.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel3bh-content"
 								id="panel3bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_3.text}
+									{quickSearch.question_3.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_3.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
-							<Grid container>
-								<Grid item md={12}>
+							<Grid container xs={12} sm={12}>
+								<Grid item xs={12} sm={12}>
 									<TextAlert alertInput={props.alertText.question === quickSearch.question_3.id ? props.alertText.input : props.alertText.default} />
 								</Grid>
-								<Grid item md={8} className="quick-search-control">
+								<Grid item xs={12} sm={6} className="quick-search-control">
 								<FormControl fullWidth variant='outlined'>
 									<Typography className="qs-search-lbl" gutterBottom>
 										{searchByGlycan.common.label}
 									</Typography>
 									<AutoTextInput
-										inputValue={props.searchByGlycanInput.question_3}
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_3: input})}
+										inputValue={props.inputValue.question_3}
+										setInputValue={(input)=> props.setInputValue({question_3: input})}
 										placeholder={searchByGlycan.common.placeholder}
 										typeahedID={searchByGlycan.common.typeahedID}
 										length={searchByGlycan.common.length}
 										errorText={searchByGlycan.common.errorText}
 									/>
 									<ExampleExploreControl
-										setInputValue={(input)=> props.setSearchByGlycanInput({question_3: input})}
+										setInputValue={(input)=> props.setInputValue({question_3: input})}
 										inputValue={searchByGlycan.common.examples}
 									/>
 								</FormControl>
 								</Grid>
-								<Grid item>
+								<Grid item xs={12} sm={2} className="quick-search-control">
 									<Typography gutterBottom>
 										&nbsp;
 									</Typography>
 									<Button
 										className='gg-btn-blue'
 										onClick={props.searchQuestion3}
-										disabled={props.searchByGlycanInput.question_3.trim().length === 0}
+										disabled={props.inputValue.question_3.trim().length === 0}
 									>
 										Search
 									</Button>

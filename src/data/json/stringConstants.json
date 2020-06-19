@@ -266,7 +266,6 @@
       }
     }
   },
-
   "protein": {
     "common": {
       "operation": {
@@ -528,16 +527,63 @@
   },
   "quick_search": {
     "question_1": {
-      "text": "What are the enzymes involved in the biosynthesis of glycan X in human?",
+      "text": "What are the enzymes involved in the biosynthesis of {0} in human?",
       "id": "question_1"
 		},
 		"question_2": {
-      "text": "Which proteins have been shown to bear glycan X and which site is this glycan attached to?",
+      "text": "Which proteins have been shown to bear {0} and which site is this glycan attached to?",
       "id": "question_2"
 		},
 		"question_3": {
-      "text": "What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?",
+      "text": "What are the gene locations of the enzymes involved in the biosynthesis of {0} in human?",
       "id": "question_3"
+    },
+    "question_4": {
+      "text": "What are the orthologues of {0} in different species?",
+      "id": "question_4"
+    },
+    "question_5": {
+      "text": "What are the functions of {0}?",
+      "id": "question_5"
+    },
+    "question_6": {
+      "text": "Which glycans might have been synthesized in mouse using {0}?",
+      "id": "question_6"
+    },
+    "question_7": {
+      "text": "Where are the N-Glycosylation Sequons of the {0}?",
+      "id": "question_7"
+    },
+    "question_8": {
+      "text": "What are the glycosyltransferases in {0}?",
+      "id": "question_8"
+    },
+    "question_9": {
+      "text": "What are the glycosylhydrolases in {0}?",
+      "id": "question_9"
+    },
+    "question_10": {
+      "text": "What are the reported or predicted glycosylated proteins in {0}?",
+      "id": "question_10"
+    },
+    "question_11": {
+      "text": "Which glycosyltransferases are known to be involved in {0}?",
+      "id": "question_11"
+    },
+    "question_tryMe1": {
+      "text": "What are the enzymes involved in the biosynthesis of {0} in human?",
+      "tryMeId": "question_tryMe1",
+      "id": "question_1"
+    },
+    "question_tryMe2": {
+      "text": "Which proteins have been shown to bear a bi-antennary fully sialylated N-Glycan-{0} and which site is this glycan attached to?",
+      "tryMeId": "question_tryMe2",
+      "id": "question_2"
+    },
+    "question_tryMe3": {
+      "text": "Which glycans might have been synthesized in mouse using Mgat1?",
+      "tryMeId": "question_tryMe3",
+      "id": "question_6"
 		}
   },
   "errors": {
@@ -656,6 +702,11 @@
       "id": "quickSerarchError",
       "title": "Quick Search Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+    },
+    "tryMeSerarchError": {
+      "id": "tryMeSerarchError",
+      "title": "Try Me Search Error - No Results Found",
+      "message": "Sorry, we couldn't find any data matching your input. Please try again after some time."
     },
     "defaultTextAlert": {
       "id": "defaultTextAlert",
