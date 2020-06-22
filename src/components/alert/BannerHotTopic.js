@@ -85,20 +85,20 @@ export default function BunnerHotTopic() {
 			</Alert> */}
 			<Navbar className="banner-bg" expand="xl">
 				{/* <Row className="banner-bg" style={{ width: "100%" }}> */}
-				<Col sm={1} className="gg-align-middle gg-align-center">
+				<Col xs={1} sm={1} className="gg-align-middle gg-align-center">
 					<AlertIcon />
 				</Col>
-				<Col className="banner-info">
+				<Col xs={12} sm={"auto"} className="banner-info">
 					<h5>Banner Title</h5>
 					<p>This is a bunner message of type info 1.</p>
 					{link}
 				</Col>
-				<Col className="banner-info">
+				<Col xs={12} sm={"auto"} className="banner-info">
 					<h5>Banner Title</h5>
 					<p>This is a bunner message of type info 2.</p>
 					{link}
 				</Col>
-				<Col className="banner-info">
+				<Col xs={12} sm={"auto"} className="banner-info">
 					<h5>Banner Title</h5>
 					<p>This is a bunner message of type info 3.</p>
 					{link}
