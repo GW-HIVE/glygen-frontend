@@ -826,6 +826,7 @@ const ProteinDetail = (props) => {
 								</Card.Header>
 								<Accordion.Collapse eventKey="0">
 									<Card.Body>
+
 										<Row>
 											{speciesEvidence &&
 												// For every species object
@@ -853,21 +854,32 @@ const ProteinDetail = (props) => {
 																		/>
 																	</Col>
 																</Row>
-																<Row>
-																	<Col align="right">
-																		<strong> Taxonomy ID: </strong>
-																	</Col>
-																	<Col align="left">{taxid}</Col>
-																</Row>
+															
 															</>
 														</p>
 													</Col>
 												))}
-
 											{!species && (
 												<p className="no-data-msg">No data available.</p>
 											)}
 										</Row>
+
+									{species && (
+									<Row>
+													{species.map((species) => (
+														
+														<Col align="left">
+													
+									                   <strong> Taxonomy ID: </strong>  {species.taxid}
+														</Col>
+													))}
+												</Row>
+											)}
+											{!species && (
+												<p className="no-data-msg-publication">
+													No data available.
+												</p>
+											)}
 									</Card.Body>
 								</Accordion.Collapse>
 							</Card>
@@ -1118,6 +1130,9 @@ const ProteinDetail = (props) => {
 									</span>
 									<h3 className="gg-green d-inline">Sequence</h3>
 									<div className="float-right">
+									<Link
+											to={`${routeConstants.protVista}${id}`}>
+										
 										<Button
 											type="button"
 											style={{
@@ -1132,6 +1147,7 @@ const ProteinDetail = (props) => {
 											</span>{" "}
 											<FaSearchPlus />
 										</Button>
+										</Link>
 										<Accordion.Toggle
 											eventKey="0"
 											onClick={() =>
@@ -1243,7 +1259,8 @@ const ProteinDetail = (props) => {
 									<h3 className="gg-green d-inline">Isoforms</h3>
 									<div className="float-right">
 										<Link
-											href={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
+
+								to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
 											<Button type="button" className="gg-btn-blue">
 												Alignment
 											</Button>
