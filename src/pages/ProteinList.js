@@ -14,10 +14,13 @@ import stringConstants from "../data/json/stringConstants.json";
 import ReactHtmlParser from "react-html-parser";
 import routeConstants from "../data/json/routeConstants";
 
+
 const proteinStrings = stringConstants.protein.common;
 
 const ProteinList = props => {
   let { id } = useParams();
+  let { searchId } = useParams();
+  let quickSearch = stringConstants.quick_search;
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
@@ -63,7 +66,12 @@ const ProteinList = props => {
     });
   };
   const handleModifySearch = () => {
-    props.history.push(routeConstants.proteinSearch + id);
+    if (searchId === "gs")
+      props.history.push(routeConstants.globalSearchResult + query.term);
+    else if (quickSearch[searchId] !== undefined)
+      props.history.push(routeConstants.quickSearch + id + "/" + quickSearch[searchId].id);
+    else 
+      props.history.push(routeConstants.proteinSearch + id);
   };
 
   function rowStyleFormat(row, rowIdx) {
@@ -83,6 +91,7 @@ const ProteinList = props => {
           {query && (
             <ProteinQuerySummary
               data={query}
+              question={quickSearch[searchId]}
               onModifySearch={handleModifySearch}
             />
           )}

@@ -1,5 +1,11 @@
 {
-	"questionTryMe1": "What are the enzymes involved in the biosynthesis of Man5-(G55220VL) in human?",
-	"questionTTryMe2": "Which proteins have been shown to bear a bi-antennary fully sialylated N-Glycan-(G77252PU) and which site is this glycan attached to?",
-	"questionTryMe3": "Which glycans might have been synthesized in mouse using Mgat1?"
+	"question_tryMe1":{
+	 	"text": "What are the enzymes involved in the biosynthesis of {0} in human?"
+	},
+	"question_tryMe2":{
+		"text": "Which proteins have been shown to bear {0} and which site is this glycan attached to?"
+	},
+	"question_tryMe3":{
+		"text": "Which glycans might have been synthesized in mouse using {0}?"
+	}
 }

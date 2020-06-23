@@ -170,7 +170,7 @@ const QuickSearch = (props) => {
 	const searchQuestion6 = () => {		
 		setPageLoading(true);
 		logActivity("user", id, "Performing Quick Search");
-		let message = "Quick Search Question_6 = /10090/"+ inputValue.question_3;
+		let message = "Quick Search Question_6 = /10090/"+ inputValue.question_6;
 		getBiosynthesisEnzymeToGlycans(10090, inputValue.question_6)
 		.then((response) => {
 			if (response.data['list_id'] !== '') {

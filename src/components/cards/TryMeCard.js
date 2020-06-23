@@ -6,16 +6,15 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import ListGroup from "react-bootstrap/ListGroup";
-import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
+import tryMe from '../../data/json/tryMe';
 import PageLoader from '../load/PageLoader';
 import DialogAlert from '../alert/DialogAlert';
 import TextAlert from "../alert/TextAlert";
 import routeConstants from "../../data/json/routeConstants";
 import {axiosError} from '../../data/axiosError';
 import { logActivity } from "../../data/logging";
-import { getGlycanSearch } from '../../data/glycan';
-import { getGlycanToBiosynthesisEnzymes,  getGlycanToGlycoproteins } from '../../data/usecases';
+import { getGlycanToBiosynthesisEnzymes,  getGlycanToGlycoproteins, getBiosynthesisEnzymeToGlycans } from '../../data/usecases';
 import { useHistory } from "react-router-dom";
 // import { Container } from 'react-bootstrap';
 // import Container from "@material-ui/core/Container";
@@ -42,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TryMeCard(props) {
-	let glycanData = stringConstants.glycan;
-	let commonGlycanData = glycanData.common;
 	let quickSearch = stringConstants.quick_search;
 
 	const classes = useStyles();
@@ -106,15 +103,9 @@ export default function TryMeCard(props) {
 
 	const searchQuestion3 = () => {
 		setPageLoading(true);
-		var formObject = {
-			[commonGlycanData.operation.id]: 'AND',
-			[glycanData.advanced_search.query_type.id]: glycanData.advanced_search.query_type.name,
-			[commonGlycanData.enzyme.id]: { "type": "gene", "id": "Mgat1" },
-			[commonGlycanData.organism.id]: {"organism_list":[{"id": 10090,"name": "Mus musculus"}],"operation":"and"}  ,
-		};
 		logActivity("user", "", "Performing Try Me Search");
-		let message = "Try Me Search Question_3 = " + JSON.stringify(formObject);
-		getGlycanSearch(formObject).then((response) => {
+		let message = "Try Me Search Question_3 = /10090/P27808-1";
+		getBiosynthesisEnzymeToGlycans(10090, "P27808-1").then((response) => {
 			if (response.data['list_id'] !== '') {
 				logActivity("user", response.data['list_id'], message);
 				history.push(routeConstants.glycanList + response.data['list_id'] + "/" + quickSearch.question_tryMe3.tryMeId);
@@ -152,25 +143,17 @@ export default function TryMeCard(props) {
 							<h4 className={classes.cardTitle}>Try Me</h4>
 							<ListGroup as="p">
 								<ListGroup.Item action onClick={searchQuestion1}>
-									What are the enzymes involved in the biosynthesis of{" "}
-									<span className={classes.selected}> Man5-(G55220VL) </span> in
-									human?
+									{tryMe.question_tryMe1.text.split("{0}")[0]}<span className={classes.selected}>Man5-(G55220VL)</span>{tryMe.question_tryMe1.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe1.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>
 								<ListGroup.Item action onClick={searchQuestion2}>
-									Which proteins have been shown to bear{" "}
-									<span className={classes.selected}>
-										{" "}
-										a bi-antennary fully sialylated N-Glycan-(G77252PU){" "}
-									</span>{" "}
-									and which site is this glycan attached to?
+									{tryMe.question_tryMe2.text.split("{0}")[0]}<span className={classes.selected}>a bi-antennary fully sialylated N-Glycan-(G77252PU)</span>{tryMe.question_tryMe2.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe2.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>
 								<ListGroup.Item action onClick={searchQuestion3}>
-									Which glycans might have been synthesized in mouse using{" "}
-									<span className={classes.selected}> Mgat1 </span>?
+									{tryMe.question_tryMe3.text.split("{0}")[0]}<span className={classes.selected}>Mgat1-(P27808-1)</span>{tryMe.question_tryMe3.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe3.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>

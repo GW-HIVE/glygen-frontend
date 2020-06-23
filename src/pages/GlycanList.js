@@ -16,6 +16,8 @@ import routeConstants from "../data/json/routeConstants";
 
 const GlycanList = props => {
   let { id } = useParams();
+  let { searchId } = useParams();
+  let quickSearch = stringConstants.quick_search;
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
@@ -98,7 +100,12 @@ const GlycanList = props => {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
   }
   const handleModifySearch = () => {
-    props.history.push(routeConstants.glycanSearch + id);
+    if (searchId === "gs")
+      props.history.push(routeConstants.globalSearchResult + query.term);
+    else if (quickSearch[searchId] !== undefined)
+      props.history.push(routeConstants.quickSearch + id + "/" +  quickSearch[searchId].id);
+    else 
+      props.history.push(routeConstants.glycanSearch + id);
   };
 
   return (
@@ -114,6 +121,7 @@ const GlycanList = props => {
           {/* <section style={{ paddingTop: "20px" }}> */}
           <GlycanQuerySummary
             data={query}
+            question={quickSearch[searchId]}
             onModifySearch={handleModifySearch}
           />
         </section>

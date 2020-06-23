@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import stringConstants from '../data/json/stringConstants';
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -13,6 +14,7 @@ function getDateTime() {
   var hour = now.getHours();
   var minute = now.getMinutes();
   var second = now.getSeconds();
+
   if (month.toString().length == 1) {
     month = "0" + month;
   }
@@ -35,6 +37,7 @@ function getDateTime() {
 
 const ProteinQuerySummary = props => {
   const title = "Protein Search Summary";
+  let quickSearch = stringConstants.quick_search;
 
   const { data, onModifySearch } = props;
 
@@ -81,8 +84,32 @@ const ProteinQuerySummary = props => {
             </p>
           </Card.Title>
           <Card.Text>
+            {props.question && data.glytoucan_ac && (
+                <Row sm={12}>
+								  {props.question.text.split("{0}")[0]}<strong>{data.glytoucan_ac}</strong>{props.question.text.split("{0}")[1]}
+                </Row>
+            )}
+
+            {props.question && uniprot_canonical_ac && (
+                <Row sm={12}>
+                  {props.question.text.split("{0}")[0]}<strong>{uniprot_canonical_ac}</strong>{props.question.text.split("{0}")[1]}
+                </Row>
+            )}
+
+            {props.question && data.do_name && (
+                <Row sm={12}>
+								  {props.question.text.split("{0}")[0]}<strong>{data.do_name}</strong>{props.question.text.split("{0}")[1]}
+                </Row>
+            )}
+
+            {props.question && organism && props.question.organism && (
+                <Row sm={12}>
+                  {props.question.text.split("{0}")[0]}<strong>{organism.name}</strong>{props.question.text.split("{0}")[1]}
+                </Row>
+            )}
+
             {/*  Protein typeahead */}
-            {uniprot_canonical_ac && (
+            {!props.question && uniprot_canonical_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Protein Id:
@@ -125,7 +152,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {glycosylation_evidence && (
+            {!props.question && glycosylation_evidence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Glycosylation Evidence:
@@ -171,7 +198,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {glycan && glycan.glytoucan_ac && (
+            {!props.question && glycan && glycan.glytoucan_ac && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Interacting Glycan:
@@ -201,7 +228,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {organism && organism.name && (
+            {!props.question && organism && organism.name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Organism :
