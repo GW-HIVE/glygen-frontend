@@ -1130,7 +1130,7 @@ const ProteinDetail = (props) => {
 									</span>
 									<h3 className="gg-green d-inline">Sequence</h3>
 									<div className="float-right">
-									<Link
+									<NavLink
 											to={`${routeConstants.protVista}${id}`}>
 										
 										<Button
@@ -1147,7 +1147,7 @@ const ProteinDetail = (props) => {
 											</span>{" "}
 											<FaSearchPlus />
 										</Button>
-										</Link>
+										</NavLink>
 										<Accordion.Toggle
 											eventKey="0"
 											onClick={() =>
@@ -1258,13 +1258,13 @@ const ProteinDetail = (props) => {
 									</span>
 									<h3 className="gg-green d-inline">Isoforms</h3>
 									<div className="float-right">
-										<Link
+										<NavLink
 
 								to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
 											<Button type="button" className="gg-btn-blue">
 												Alignment
 											</Button>
-										</Link>
+										</NavLink>
 										<Button
 											type="button"
 											style={{
