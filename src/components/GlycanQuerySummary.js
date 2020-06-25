@@ -85,22 +85,16 @@ const GlycanQuerySummary = props => {
             </p>
           </Card.Title>
           <Card.Text>
-          {props.question && glytoucan_ac && (
-                <Row sm={12}>
-								  {props.question.text.split("{0}")[0]}<strong>{glytoucan_ac}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
-            )}
-
             {props.question && data.uniprot_canonical_ac && (
-                <Row sm={12}>
+                <>
                   {props.question.text.split("{0}")[0]}<strong>{data.uniprot_canonical_ac}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
 
-            {props.question && props.question.organism && (
-                <Row sm={12}>
+            {props.question && organism && props.question.organism && (
+                <>
                   {props.question.text.split("{0}")[0]}<strong>{organism.name}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
             {composition &&
               composition.map((compItem, index) => (
@@ -168,7 +162,7 @@ const GlycanQuerySummary = props => {
             )}
 
             {/* Oraganism */}
-            {organism && !props.question && (
+            {!props.question && organism && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Organism:

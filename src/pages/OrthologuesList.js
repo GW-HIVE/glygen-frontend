@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getProteinList } from "../data";
-import { PROTEIN_COLUMNS, getUserSelectedColumns } from "../data/protein";
+import { ORTHOLOG_COLUMNS, getOrthologList } from '../data/usecases';
 import ProteinQuerySummary from "../components/ProteinQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
-import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
-import ReactHtmlParser from "react-html-parser";
 import routeConstants from "../data/json/routeConstants";
-
+import { logActivity } from "../data/logging";
+import PageLoader from '../components/load/PageLoader';
+import DialogAlert from '../components/alert/DialogAlert';
+import {axiosError} from '../data/axiosError';
 
 const proteinStrings = stringConstants.protein.common;
 
-const ProteinList = props => {
+const OrthologusList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -25,13 +25,25 @@ const ProteinList = props => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [pagination, setPagination] = useState([]);
-  const [selectedColumns, setSelectedColumns] = useState(PROTEIN_COLUMNS);
+  const [selectedColumns, setSelectedColumns] = useState(ORTHOLOG_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
-
+	const [pageLoading, setPageLoading] = useState(true);
+	const [alertDialogInput, setAlertDialogInput] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{show: false, id: ""}
+  );
+  
   useEffect(() => {
-    getProteinList(id).then(({ data }) => {
+    setPageLoading(true);
+		logActivity("user", id);
+    getOrthologList(id).then(({ data }) => {
+      if (data.error_code) {
+        let message = "list api call";
+        logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
+      } else {
       setData(data.results);
       setQuery(data.query);
 
@@ -39,7 +51,14 @@ const ProteinList = props => {
       const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
       setPage(currentPage);
       setTotalSize(data.pagination.total_length);
+      setPageLoading(false);
+      }
+    })
+    .catch(function (error) {
+			let message = "list api call";
+			axiosError(error, id, message, setPageLoading, setAlertDialogInput);
     });
+    
   }, []);
 
   const handleTableChange = (
@@ -49,7 +68,7 @@ const ProteinList = props => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getProteinList(
+    getOrthologList(
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
@@ -57,18 +76,15 @@ const ProteinList = props => {
       sortOrder
     ).then(({ data }) => {
       // place to change values before rendering
-
-      setData(data.results);
-
-      setPagination(data.pagination);
-
-      setTotalSize(data.pagination.total_length);
+      if (!data.error_code) {
+        setData(data.results);
+        setPagination(data.pagination);
+        setTotalSize(data.pagination.total_length);
+      }
     });
   };
   const handleModifySearch = () => {
-    if (searchId === "gs")
-      props.history.push(routeConstants.globalSearchResult + query.term);
-    else if (quickSearch[searchId] !== undefined)
+    if (quickSearch[searchId] !== undefined)
       props.history.push(routeConstants.quickSearch + id + "/" + quickSearch[searchId].id + "#" + quickSearch[searchId].id);
     else 
       props.history.push(routeConstants.proteinSearch + id);
@@ -81,12 +97,19 @@ const ProteinList = props => {
   return (
     <>
       <Helmet>
-        {getTitle("proteinList")}
-        {getMeta("proteinList")}
+        {getTitle("orthologuesList")}
+        {getMeta("orthologuesList")}
       </Helmet>
 
       <FeedbackWidget />
       <Container maxWidth="xl" className="gg-container">
+          <PageLoader pageLoading={pageLoading} />
+					<DialogAlert
+						alertInput={alertDialogInput}
+						setOpen={(input) => {
+							setAlertDialogInput({"show": input})
+						}}
+					/>
         <section className="content-box-md">
           {query && (
             <ProteinQuerySummary
@@ -97,27 +120,6 @@ const ProteinList = props => {
           )}
         </section>
         <section>
-          <DownloadButton
-            types={[
-              {
-                display: "Protein data (*.csv)",
-                type: "csv",
-                data: "protein_list"
-              },
-              {
-                display: "Protein  data (*.json)",
-                type: "json",
-                data: "protein_list"
-              },
-              {
-                display: " Protein data (*.FASTA)",
-                type: "fasta",
-                data: "protein_list"
-              }
-            ]}
-            dataId={id}
-            itemType="protein"
-          />
           {selectedColumns && selectedColumns.length !== 0 && (
             <PaginatedTable
               trStyle={rowStyleFormat}
@@ -137,4 +139,4 @@ const ProteinList = props => {
   );
 };
 
-export default ProteinList;
+export default OrthologusList;

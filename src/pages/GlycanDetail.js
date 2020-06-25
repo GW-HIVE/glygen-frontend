@@ -133,6 +133,12 @@ const GlycanDetail = (props) => {
 
 				setDetailData(data);
 			}
+
+			setTimeout(() => {
+				const anchorElement = props.history.location.hash;
+				if (anchorElement && document.getElementById(anchorElement.substr(1))) {
+					document.getElementById(anchorElement.substr(1)).scrollIntoView({behavior: "auto"});
+			}}, 500);
 		});
 
 		getGlycanDetailData.catch(({ response }) => {

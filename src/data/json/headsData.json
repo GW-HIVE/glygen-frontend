@@ -312,8 +312,8 @@
       }
     ]
   },
-  "quickOrthologList": {
-    "title": "Quick Orthologues List | Results of an Orthologues Search | glygen.org",
+  "orthologuesList": {
+    "title": "Orthologues List | Results of an Orthologues Search | glygen.org",
     "meta": [
       {
         "name": "description",
@@ -325,8 +325,8 @@
       }
     ]
   },
-  "quickLocusList": {
-    "title": "Quick Locus List | Results of a Gene Search | glygen.org",
+  "locusList": {
+    "title": "Locus List | Results of a Gene Search | glygen.org",
     "meta": [
       {
         "name": "description",

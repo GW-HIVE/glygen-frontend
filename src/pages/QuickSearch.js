@@ -13,7 +13,8 @@ import DialogAlert from '../components/alert/DialogAlert';
 import { logActivity } from "../data/logging";
 import { getGlycanInit } from '../data/glycan';
 import { getGlycanToBiosynthesisEnzymes,  getGlycanToGlycoproteins, getGlycanToEnzymeGeneLoci, getDiseaseToGlycosyltransferases,
-	getProteinToOrthologs, getOrthologList, getBiosynthesisEnzymeToGlycans, getSpeciesToGlycosyltransferases, getSpeciesToGlycohydrolases, getSpeciesToGlycoproteins } from '../data/usecases';
+	getProteinToOrthologs, getOrthologList, getBiosynthesisEnzymeToGlycans, getSpeciesToGlycosyltransferases, getSpeciesToGlycohydrolases, getSpeciesToGlycoproteins,
+	getGeneLocusList} from '../data/usecases';
 import {axiosError} from '../data/axiosError';
 import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
@@ -128,7 +129,7 @@ const QuickSearch = (props) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
 				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_3.id);
+				props.history.push(routeConstants.locusList + response.data['list_id'] + "/" + quickSearch.question_3.id);
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -149,7 +150,7 @@ const QuickSearch = (props) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
 				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_4.id);
+				props.history.push(routeConstants.orthologuesList + response.data['list_id'] + "/" + quickSearch.question_4.id);
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -285,6 +286,8 @@ const QuickSearch = (props) => {
 			return getGlycanList(listId, 1, 1);
 		else if ("getProteinList" === listApi)
 			return getProteinList(listId, 1, 1);
+		else if ("getGeneLocusList" === listApi)
+			return getGeneLocusList(listId, 1, 1);
 		else if ("getOrthologList" === listApi)
 			return getOrthologList(listId, 1, 1);	
 		return undefined;
@@ -322,7 +325,7 @@ const QuickSearch = (props) => {
 		} else if (questionId === quickSearch.question_2.id) {
 			return "getProteinList";
 		} else if (questionId === quickSearch.question_3.id) {
-			return "getProteinList";
+			return "getGeneLocusList";
 		} else if (questionId === quickSearch.question_4.id) {
 			return "getOrthologList";
 		} else if (questionId === quickSearch.question_5.id) {
@@ -353,12 +356,15 @@ const QuickSearch = (props) => {
 		let question = quickSearch[questionId]; 
 		getGlycanInit().then((response) => {
 			setGlycanInitData(response.data);
+			const anchorElement = props.history.location.hash;
+			if (anchorElement && document.getElementById(anchorElement.substr(1))) {
+				document.getElementById(anchorElement.substr(1)).scrollIntoView({behavior: "auto"});
+			}
 			if (!id || !question)
 				setPageLoading(false);
 		})
 		.catch(function (error) {
 			let message = "search_init api call";
-			setPageLoading(false);
 			axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 		});
 
@@ -368,11 +374,10 @@ const QuickSearch = (props) => {
 		})
 		.catch(function (error) {
 			let message = "list api call";
-			setPageLoading(false);
 			axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 		});
 
-	}, []);
+	}, [id, questionId, quickSearch]);
 
 	return (
 		<>
