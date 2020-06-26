@@ -17,6 +17,7 @@ import {
 	GLYGEN_BETA,
 	GLYGEN_DATA,
 	GLYGEN_SPARQL,
+	GLYGEN_ENV
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
 
@@ -49,7 +50,7 @@ export default function Header() {
 								MY GLYGEN
 							</Navbar.Text>
 						</div>
-						<div className="mr-4">
+						{GLYGEN_ENV !== "beta" && <div className="mr-4">
 							<Navbar.Text>
 								<a
 									href={GLYGEN_BETA}
@@ -62,7 +63,7 @@ export default function Header() {
 									BETA TESTING
 								</a>
 							</Navbar.Text>{" "}
-						</div>
+						</div>}
 						<div>
 							<Navbar.Text>
 								<a
