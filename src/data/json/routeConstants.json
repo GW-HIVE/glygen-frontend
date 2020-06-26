@@ -23,6 +23,7 @@
   "frameworks": "/frameworks/",
   "isoAlignment": "/alignment/",
   "protVista": "/protVista/",
+  "siteview": "/Siteview/",
   "home": "/home/",
   "default": "/"
 }

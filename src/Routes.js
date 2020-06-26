@@ -25,6 +25,7 @@ import Media from "./pages/Media";
 import QuickSearch from "./pages/QuickSearch";
 import IsoAlignment from "./pages/ProteinAlignment";
 import ProtVista from "./pages/ProtVista";
+import Siteview from "./pages/Siteview";
 
 const Routes = props => (
   <Switch>
@@ -32,9 +33,15 @@ const Routes = props => (
       path={`${routeConstants.glycanListEdit}:id`}
       component={GlycanListEditColumns}
     />
-	<Route path={`${routeConstants.glycanList}:id/:searchId`} component={GlycanList} />
+    <Route
+      path={`${routeConstants.glycanList}:id/:searchId`}
+      component={GlycanList}
+    />
     <Route path={`${routeConstants.glycanList}:id`} component={GlycanList} />
-	<Route path={`${routeConstants.proteinList}:id/:searchId`} component={ProteinList} />
+    <Route
+      path={`${routeConstants.proteinList}:id/:searchId`}
+      component={ProteinList}
+    />
     <Route path={`${routeConstants.proteinList}:id`} component={ProteinList} />
     <Route
       path={`${routeConstants.glycanSearch}:id`}
@@ -55,6 +62,7 @@ const Routes = props => (
       path={`${routeConstants.proteinDetail}:id`}
       component={ProteinDetail}
     />
+    <Route path={`${routeConstants.siteview}:id`} component={Siteview} />
     <Route
       path={`${routeConstants.isoAlignment}:id/:alignment`}
       component={IsoAlignment}
@@ -78,7 +86,10 @@ const Routes = props => (
     <Route path={routeConstants.about} component={About} />
     <Route path={routeConstants.frameworks} component={Frameworks} />
     <Route path={routeConstants.media} component={Media} />
-	<Route path={`${routeConstants.quickSearch}:id/:questionId`} component={QuickSearch} />
+    <Route
+      path={`${routeConstants.quickSearch}:id/:questionId`}
+      component={QuickSearch}
+    />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
