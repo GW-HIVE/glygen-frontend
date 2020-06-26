@@ -137,8 +137,11 @@ const GlycanDetail = (props) => {
 			setTimeout(() => {
 				const anchorElement = props.history.location.hash;
 				if (anchorElement && document.getElementById(anchorElement.substr(1))) {
-					document.getElementById(anchorElement.substr(1)).scrollIntoView({behavior: "auto"});
-			}}, 500);
+					document
+						.getElementById(anchorElement.substr(1))
+						.scrollIntoView({ behavior: "auto" });
+				}
+			}, 500);
 		});
 
 		getGlycanDetailData.catch(({ response }) => {
@@ -656,7 +659,12 @@ const GlycanDetail = (props) => {
 																	/>
 																</div>
 																<span>
-																	<a href={""}>{motif.name}</a>
+																	{/* <a href={""}>{motif.name}</a> */}
+																	<Navbar.Text
+																		as={NavLink}
+																		to={routeConstants.motifDetail + motif.id}>
+																		{motif.id} {motif.name}
+																	</Navbar.Text>
 																</span>
 															</p>
 														</Col>
