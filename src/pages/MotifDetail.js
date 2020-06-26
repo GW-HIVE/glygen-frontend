@@ -95,6 +95,7 @@ const MotifDetail = (props) => {
 
 	const [detailData, setDetailData] = useState({});
 	const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
+	const [hideText, setHideText] = useState(true);
 
 	useEffect(() => {
 		const getGlycanDetailData = getGlycanDetail(id);
@@ -303,23 +304,6 @@ const MotifDetail = (props) => {
 									</span>
 									<h3 className="gg-green d-inline">General</h3>
 									<div className="float-right">
-										{/* <span className="pr-3">
-											<a
-												// eslint-disable-next-line
-												href="javascript:void(0)"
-												onClick={() => {
-													handleOpenSubsumptionBrowse(
-														glytoucan && glytoucan.glytoucan_ac
-													);
-												}}>
-												<LineTooltip text="Related glycans">
-													<Image
-														src={relatedGlycansIcon}
-														alt="Related glycans"
-													/>
-												</LineTooltip>
-											</a>
-										</span> */}
 										<Accordion.Toggle
 											eventKey="0"
 											onClick={() =>
@@ -358,13 +342,6 @@ const MotifDetail = (props) => {
 													</div>
 												</>
 											)}
-											{/* {composition && (
-												<div>
-													<strong>Composition</strong>:{" "}
-													<CompositionDisplay composition={composition} />
-												</div>
-											)} */}
-
 											{classification && classification.length && (
 												<div>
 													<strong>Glycan Type / Subtype : </strong>

@@ -531,7 +531,7 @@ const GlycanDetail = (props) => {
 											{inchi_key && inchi_key.key && (
 												<>
 													<div>
-														<strong>Inchy key: </strong>
+														<strong>Inchi key: </strong>
 														<Link
 															href={inchi_key.url}
 															target="_blank"

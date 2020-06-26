@@ -58,14 +58,14 @@
 				"url": "https://gufaculty360.georgetown.edu/s/contact/00336000014RxSNAA0/radoslav-goldman?netid=rg26"
 			},
 			{
-				"name": "Judith Blake",
+				"name": "Lynn Schriml",
 				"position": "",
-				"department": "",
-				"institution": "The Jackson Laboratory",
-				"location": "Bar Harbor, ME",
-				"image": "/team/Judith-Blake.png",
-				"imageText": "Judith Blake image",
-				"url": "https://www.jax.org/research-and-faculty/faculty/judith-blake"
+				"department": "Epidemiology & Public Health",
+				"institution": "Institute for Genome Sciences",
+				"location": "Baltimore, MD",
+				"image": "/team/Lynn-Schriml.jpeg",
+				"imageText": "Lynn Schriml image",
+				"url": "https://www.medschool.umaryland.edu/profiles/Schriml-Lynn/"
 			},
 			{
 				"name": "Nicolle Packer",
@@ -477,6 +477,17 @@
 				"imageText": "Sanath Bhat image",
 				"url": "https://www.linkedin.com/in/sanathb/",
 				"dateLeft": "Left project April 2020"
+			},
+			{
+				"name": "Judith Blake",
+				"position": "Advocate",
+				"department": "",
+				"institution": "The Jackson Laboratory",
+				"location": "Bar Harbor, ME",
+				"image": "/team/Judith-Blake.png",
+				"imageText": "Judith Blake image",
+				"url": "https://www.jax.org/research-and-faculty/faculty/judith-blake",
+				"dateLeft": "Left project June 2020"
 			}
 		]
 	},
