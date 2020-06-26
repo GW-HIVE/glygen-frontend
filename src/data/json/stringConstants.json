@@ -592,17 +592,17 @@
       "id": "question_11"
     },
     "question_tryMe1": {
-      "text": "What are the enzymes involved in the biosynthesis of Man5-({0}) in human?",
+      "text": "What are the enzymes involved in the biosynthesis of Man5({0}) in human?",
       "tryMeId": "question_tryMe1",
       "id": "question_1"
     },
     "question_tryMe2": {
-      "text": "Which proteins have been shown to bear a bi-antennary fully sialylated N-Glycan-({0}) and which site is this glycan attached to?",
+      "text": "Which proteins have been shown to bear a bi-antennary fully sialylated N-Glycan({0}) and which site is this glycan attached to?",
       "tryMeId": "question_tryMe2",
       "id": "question_2"
     },
     "question_tryMe3": {
-      "text": "Which glycans might have been synthesized in mouse using Mgat1-({0})?",
+      "text": "Which glycans might have been synthesized in mouse using Mgat1({0})?",
       "tryMeId": "question_tryMe3",
       "id": "question_6"
 		}

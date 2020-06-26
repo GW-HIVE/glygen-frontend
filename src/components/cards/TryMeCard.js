@@ -143,17 +143,17 @@ export default function TryMeCard(props) {
 							<h4 className={classes.cardTitle}>Try Me</h4>
 							<ListGroup as="p">
 								<ListGroup.Item action onClick={searchQuestion1}>
-									{tryMe.question_tryMe1.text.split("{0}")[0]}<span className={classes.selected}>Man5-(G46836GH)</span>{tryMe.question_tryMe1.text.split("{0}")[1]}
+									{tryMe.question_tryMe1.text.split("{0}")[0]}<span className={classes.selected}>Man5(G46836GH)</span>{tryMe.question_tryMe1.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe1.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>
 								<ListGroup.Item action onClick={searchQuestion2}>
-									{tryMe.question_tryMe2.text.split("{0}")[0]}<span className={classes.selected}>a bi-antennary fully sialylated N-Glycan-(G77252PU)</span>{tryMe.question_tryMe2.text.split("{0}")[1]}
+									{tryMe.question_tryMe2.text.split("{0}")[0]}<span className={classes.selected}>a bi-antennary fully sialylated N-Glycan(G77252PU)</span>{tryMe.question_tryMe2.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe2.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>
 								<ListGroup.Item action onClick={searchQuestion3}>
-									{tryMe.question_tryMe3.text.split("{0}")[0]}<span className={classes.selected}>Mgat1-(P27808-1)</span>{tryMe.question_tryMe3.text.split("{0}")[1]}
+									{tryMe.question_tryMe3.text.split("{0}")[0]}<span className={classes.selected}>Mgat1(P27808-1)</span>{tryMe.question_tryMe3.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe3.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>
