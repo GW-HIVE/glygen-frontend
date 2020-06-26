@@ -22,9 +22,12 @@ import TryMe from "./pages/TryMe";
 import About from "./pages/About";
 import Frameworks from "./pages/Frameworks";
 import Media from "./pages/Media";
+import LocusList from "./pages/LocusList";
+import OrthologuesList from "./pages/OrthologuesList";
 import QuickSearch from "./pages/QuickSearch";
 import IsoAlignment from "./pages/ProteinAlignment";
 import ProtVista from "./pages/ProtVista";
+import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
 
 const Routes = props => (
@@ -58,16 +61,18 @@ const Routes = props => (
       component={GlycanDetail}
     />
     <Route path={routeConstants.glycanDetail} component={GlycanDetail} />
+    <Route path={`${routeConstants.motifDetail}:id`} component={MotifDetail} />
+    <Route path={routeConstants.motifDetail} component={MotifDetail} />
     <Route
       path={`${routeConstants.proteinDetail}:id`}
       component={ProteinDetail}
     />
-    <Route path={`${routeConstants.siteview}:id`} component={Siteview} />
     <Route
       path={`${routeConstants.isoAlignment}:id/:alignment`}
       component={IsoAlignment}
     />
     <Route path={`${routeConstants.protVista}:id`} component={ProtVista} />
+    <Route path={`${routeConstants.siteview}:id`} component={Siteview} />
 
     <Route
       path={`${routeConstants.globalSearchResult}:id`}
@@ -86,6 +91,14 @@ const Routes = props => (
     <Route path={routeConstants.about} component={About} />
     <Route path={routeConstants.frameworks} component={Frameworks} />
     <Route path={routeConstants.media} component={Media} />
+    <Route
+      path={`${routeConstants.orthologuesList}:id/:searchId`}
+      component={OrthologuesList}
+    />
+    <Route
+      path={`${routeConstants.locusList}:id/:searchId`}
+      component={LocusList}
+    />
     <Route
       path={`${routeConstants.quickSearch}:id/:questionId`}
       component={QuickSearch}

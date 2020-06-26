@@ -176,6 +176,11 @@ const ProteinDetail = (props) => {
 				setItemsPathway(getItemsPathway(data));
 				setDetailData(data);
 			}
+
+			const anchorElement = props.history.location.hash;
+			if (anchorElement && document.getElementById(anchorElement.substr(1))) {
+				document.getElementById(anchorElement.substr(1)).scrollIntoView({behavior: "auto"});
+			}
 		});
 
 		getProteinDetailData.catch(({ response }) => {
@@ -183,6 +188,7 @@ const ProteinDetail = (props) => {
 		});
 		// eslint-disable-next-line
 	}, []);
+
 	useEffect(() => {
 		if (detailData.glycosylation) {
 			const withImage = detailData.glycosylation.filter(
@@ -195,6 +201,16 @@ const ProteinDetail = (props) => {
 			setGlycosylationWithoutImage(withoutImage);
 		}
 	}, [detailData]);
+
+	useEffect(() => {
+		// Need to call it second time due to glycosylationWithImage and glycosylationWithoutImage table loading time.
+		setTimeout(() => {
+			const anchorElement = props.history.location.hash;
+			if (anchorElement && document.getElementById(anchorElement.substr(1))) {
+				document.getElementById(anchorElement.substr(1)).scrollIntoView({behavior: "auto"});
+			}
+		}, 1000);
+	}, [detailData, glycosylationWithImage, glycosylationWithoutImage, props.history.location.hash]);
 
 	const {
 		mass,

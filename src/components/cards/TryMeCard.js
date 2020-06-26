@@ -64,8 +64,8 @@ export default function TryMeCard(props) {
 	const searchQuestion1 = () => {
 		setPageLoading(true);
 		logActivity("user", "", "Performing Try Me Search");
-		let message = "Try Me Search Question_1 = /9606/G55220VL";
-		getGlycanToBiosynthesisEnzymes(9606, "G55220VL").then((response) => {
+		let message = "Try Me Search Question_1 = /9606/G46836GH";
+		getGlycanToBiosynthesisEnzymes(9606, "G46836GH").then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
 				logActivity("user", response.data['list_id'], message);
@@ -143,7 +143,7 @@ export default function TryMeCard(props) {
 							<h4 className={classes.cardTitle}>Try Me</h4>
 							<ListGroup as="p">
 								<ListGroup.Item action onClick={searchQuestion1}>
-									{tryMe.question_tryMe1.text.split("{0}")[0]}<span className={classes.selected}>Man5-(G55220VL)</span>{tryMe.question_tryMe1.text.split("{0}")[1]}
+									{tryMe.question_tryMe1.text.split("{0}")[0]}<span className={classes.selected}>Man5-(G46836GH)</span>{tryMe.question_tryMe1.text.split("{0}")[1]}
 									<div style={{paddingBottom: "10px"}}></div>
 									<TextAlert alertInput={alertText.question === quickSearch.question_tryMe1.tryMeId ? alertText.input : alertText.default} />
 								</ListGroup.Item>

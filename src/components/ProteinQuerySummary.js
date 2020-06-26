@@ -85,27 +85,27 @@ const ProteinQuerySummary = props => {
           </Card.Title>
           <Card.Text>
             {props.question && data.glytoucan_ac && (
-                <Row sm={12}>
+                <>
 								  {props.question.text.split("{0}")[0]}<strong>{data.glytoucan_ac}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
 
             {props.question && uniprot_canonical_ac && (
-                <Row sm={12}>
+                <>
                   {props.question.text.split("{0}")[0]}<strong>{uniprot_canonical_ac}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
 
             {props.question && data.do_name && (
-                <Row sm={12}>
+                <>
 								  {props.question.text.split("{0}")[0]}<strong>{data.do_name}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
 
             {props.question && organism && props.question.organism && (
-                <Row sm={12}>
+                <>
                   {props.question.text.split("{0}")[0]}<strong>{organism.name}</strong>{props.question.text.split("{0}")[1]}
-                </Row>
+                </>
             )}
 
             {/*  Protein typeahead */}
@@ -152,7 +152,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {!props.question && glycosylation_evidence && (
+            {glycosylation_evidence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Glycosylation Evidence:
@@ -198,7 +198,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            {!props.question && glycan && glycan.glytoucan_ac && (
+            {glycan && glycan.glytoucan_ac && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   Interacting Glycan:

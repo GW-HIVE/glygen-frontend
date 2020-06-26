@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from "react";
+import React from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -8,23 +8,14 @@ import quickSearchData from "../../data/json/quickSearch.json";
 import AutoTextInput from '../input/AutoTextInput';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import TextAlert from "../alert/TextAlert";
-import DialogAlert from "../alert/DialogAlert";
 import ExampleExploreControl from '../example/ExampleExploreControl';
-import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const SearchByGlycan = (props) => {
 	let quickSearch = stringConstants.quick_search;
 	let searchByDisease = quickSearchData.searchByDisease;
-
-	const [proDisease, setDisease] = useState('');
-	const [alertTextInput, setAlertTextInput] = useReducer(
-		(state, newState) => ({ ...state, ...newState }),
-		{show: false, id: ""}
-	);
 
 	return (
 		<>
@@ -34,7 +25,7 @@ const SearchByGlycan = (props) => {
 						<h4>Search by Disease</h4>
 					</div>
 					<div className="quick-search">
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_11.id}>
+						<ExpansionPanel id={quickSearch.question_11.id} defaultExpanded={props.questionId === quickSearch.question_11.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"

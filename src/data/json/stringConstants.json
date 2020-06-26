@@ -433,6 +433,24 @@
         "tooltip": {},
         "id": "gene_location"
       },
+      "tax_id": {
+        "name": "Tax ID",
+        "shortName": "Tax ID",
+        "tooltip": {},
+        "id": "tax_id"
+      },
+      "evidence": {
+        "name": "Source",
+        "shortName": "Source",
+        "tooltip": {},
+        "id": "evidence"
+      },
+      "chromosome": {
+        "name": "Chromosome",
+        "shortName": "Chromosome",
+        "tooltip": {},
+        "id": "chromosome"
+      },
       "organism": {
         "name": "Organism",
         "shortName": "organism",

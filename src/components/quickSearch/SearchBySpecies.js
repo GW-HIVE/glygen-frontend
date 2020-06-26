@@ -26,7 +26,7 @@ const SearchBySpecies = (props) => {
 						<h4>Search by Species</h4>
 					</div>
 					<div className="quick-search">
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_8.id}>
+						<ExpansionPanel id={quickSearch.question_8.id} defaultExpanded={props.questionId === quickSearch.question_8.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"
@@ -72,7 +72,7 @@ const SearchBySpecies = (props) => {
 								</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_9.id}>
+						<ExpansionPanel id={quickSearch.question_9.id} defaultExpanded={props.questionId === quickSearch.question_9.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel2bh-content"
@@ -118,7 +118,7 @@ const SearchBySpecies = (props) => {
 								</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_10.id}>
+						<ExpansionPanel id={quickSearch.question_10.id} defaultExpanded={props.questionId === quickSearch.question_10.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel3bh-content"

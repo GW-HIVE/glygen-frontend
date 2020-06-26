@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Helmet from "react-helmet";
-import { getTitle } from "../utils/head";
+import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
@@ -103,7 +103,7 @@ const GlycanList = props => {
     if (searchId === "gs")
       props.history.push(routeConstants.globalSearchResult + query.term);
     else if (quickSearch[searchId] !== undefined)
-      props.history.push(routeConstants.quickSearch + id + "/" +  quickSearch[searchId].id);
+      props.history.push(routeConstants.quickSearch + id + "/" +  quickSearch[searchId].id + "#" + quickSearch[searchId].id);
     else 
       props.history.push(routeConstants.glycanSearch + id);
   };
@@ -112,7 +112,7 @@ const GlycanList = props => {
     <>
       <Helmet>
         {getTitle("glycanList")}
-        {getTitle("glycanList")}
+        {getMeta("glycanList")}
       </Helmet>
 
       <FeedbackWidget />

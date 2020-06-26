@@ -17,6 +17,8 @@
   "feedback": "/feedback/",
   "tryMe": "/try-me/",
   "about": "/about/",
+  "locusList": "/locus-list/",
+  "orthologuesList": "/orthologues-list/",
   "quickSearch": "/quick-search/",
   "globalSearchResult": "/global-search-result/",
   "media": "/media/",
@@ -24,6 +26,7 @@
   "isoAlignment": "/alignment/",
   "protVista": "/protVista/",
   "siteview": "/Siteview/",
+  "motifDetail": "/motif",
   "home": "/home/",
   "default": "/"
 }

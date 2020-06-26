@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import TextAlert from "../alert/TextAlert";
 import Button from 'react-bootstrap/Button';
 import ExampleExploreControl from '../example/ExampleExploreControl';
-import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const SearchByProtein = (props) => {
@@ -26,7 +25,7 @@ const SearchByProtein = (props) => {
 						<h4>Search by Protein</h4>
 					</div>
 					<div className="quick-search">
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_4.id}>
+						<ExpansionPanel id={quickSearch.question_4.id} defaultExpanded={props.questionId === quickSearch.question_4.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"
@@ -74,7 +73,7 @@ const SearchByProtein = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_5.id}>
+						<ExpansionPanel id={quickSearch.question_5.id} defaultExpanded={props.questionId === quickSearch.question_5.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel2bh-content"
@@ -122,7 +121,7 @@ const SearchByProtein = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_6.id}>
+						<ExpansionPanel id={quickSearch.question_6.id} defaultExpanded={props.questionId === quickSearch.question_6.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel3bh-content"
@@ -170,7 +169,7 @@ const SearchByProtein = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_7.id}>
+						<ExpansionPanel id={quickSearch.question_7.id} defaultExpanded={props.questionId === quickSearch.question_7.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"

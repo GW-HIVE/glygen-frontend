@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -8,12 +8,9 @@ import quickSearchData from "../../data/json/quickSearch.json";
 import AutoTextInput from '../input/AutoTextInput';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import TextAlert from "../alert/TextAlert";
-import DialogAlert from "../alert/DialogAlert";
 import ExampleExploreControl from '../example/ExampleExploreControl';
-import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
 const SearchByGlycan = (props) => {
@@ -28,7 +25,7 @@ const SearchByGlycan = (props) => {
 						<h4>Search by Glycan</h4>
 					</div>
 					<div className="quick-search">
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_1.id}>
+						<ExpansionPanel id={quickSearch.question_1.id} defaultExpanded={props.questionId === quickSearch.question_1.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel1bh-content"
@@ -76,7 +73,7 @@ const SearchByGlycan = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_2.id}>
+						<ExpansionPanel id={quickSearch.question_2.id} defaultExpanded={props.questionId === quickSearch.question_2.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel2bh-content"
@@ -124,7 +121,7 @@ const SearchByGlycan = (props) => {
 							</Grid>
 							</ExpansionPanelDetails>
 						</ExpansionPanel>
-						<ExpansionPanel defaultExpanded={props.questionId === quickSearch.question_3.id}>
+						<ExpansionPanel id={quickSearch.question_3.id} defaultExpanded={props.questionId === quickSearch.question_3.id}>
 							<ExpansionPanelSummary
 								expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
 								aria-controls="panel3bh-content"
