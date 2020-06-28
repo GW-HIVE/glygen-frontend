@@ -73,6 +73,7 @@ const Routes = props => (
     />
     <Route path={`${routeConstants.protVista}:id`} component={ProtVista} />
     <Route path={`${routeConstants.siteview}:id`} component={Siteview} />
+    {/* <Route path={`${routeConstants.siteview}:id/:position`} render={(props) => <Siteview {...props} position={props.match.param.position} />} /> */}
 
     <Route
       path={`${routeConstants.globalSearchResult}:id`}

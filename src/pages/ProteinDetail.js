@@ -319,7 +319,8 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Navbar.Text as={NavLink} to={`/siteview/{id}/${row.position}`}>
+			
+				<Navbar.Text as={NavLink} to={`${routeConstants.siteview}${id}/${row.position}`}>
 					{" "}
 					{row.residue} {row.position}
 				</Navbar.Text>

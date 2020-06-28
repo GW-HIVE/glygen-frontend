@@ -4,17 +4,20 @@ import { getProteinDetail } from "../data/protein";
 import ProtvistaSidebar from "../components/navigation/ProtvistaSidebar";
 import "d3";
 import ProtvistaManager from "protvista-manager";
+import ProtvistaTooltip from "protvista-tooltip";
 import ProtvistaNavigation from "protvista-navigation";
 import ProtvistaSequence from "protvista-sequence";
 import ProtvistaTrack from "protvista-track";
 import routeConstants from "../data/json/routeConstants";
 import Button from "react-bootstrap/Button";
+import { Navbar, Col, Row, Image } from "react-bootstrap";
 import { Link, Typography, Grid } from "@material-ui/core";
-
+import "../css/protvista.css";
 window.customElements.define("protvista-manager", ProtvistaManager);
 window.customElements.define("protvista-navigation", ProtvistaNavigation);
 window.customElements.define("protvista-sequence", ProtvistaSequence);
 window.customElements.define("protvista-track", ProtvistaTrack);
+window.customElements.define("protvista-tooltip", ProtvistaTooltip);
 
 const ProtVista = () => {
   let { id, Protvistadisplay } = useParams();
@@ -33,25 +36,25 @@ const ProtVista = () => {
         type: "N-Linked-No-Image",
         residues: [],
         color: "red",
-        shape: "circle"
+        shape: "triangle"
       },
       {
         type: "O-Linked-With-Image",
         residues: [],
-        color: "red",
+        color: "blue",
         shape: "circle"
       },
       {
         type: "O-Linked-No-Image",
         residues: [],
-        color: "red",
-        shape: "circle"
+        color: "blue",
+        shape: "triangle"
       },
       {
         type: "Annotations",
         residues: [],
-        color: "red",
-        shape: "circle"
+        color: "orange",
+        shape: "square"
       }
     ];
 
@@ -74,11 +77,11 @@ const ProtVista = () => {
             color: glycos[0].color,
             shape: glycos[0].shape,
             accession: data.uniprot.uniprot_canonical_ac,
-            type: glyco.residue
-            // tooltipContent:
-            //   "<img src='https://api.glygen.org/glycan/image/" +
-            //   glyco.glytoucan_ac +
-            //   "' /><br/></br>"
+            type: glyco.residue,
+            tooltipContent:
+              "<img src='https://api.glygen.org/glycan/image/" +
+              glyco.glytoucan_ac +
+              "' /><br/></br>"
           });
         } else {
           glycos[1].residues.push({
@@ -87,12 +90,12 @@ const ProtVista = () => {
             color: glycos[1].color,
             shape: glycos[1].shape,
             accession: data.uniprot.uniprot_canonical_ac,
-            type: glyco.residue
-            // tooltipContent:
-            //   "<span class=marker>Glycosylation site without reported glycan at " +
-            //   glyco.position +
-            //   "," +
-            //   " Click to see site details. </span>"
+            type: glyco.residue,
+            tooltipContent:
+              "<span className=marker>Glycosylation site without reported glycan at " +
+              glyco.position +
+              "," +
+              " Click to see site details. </span>"
           });
         }
       } else if (glyco.type === "O-linked") {
@@ -107,7 +110,7 @@ const ProtVista = () => {
             // tooltipContent:
             //   "<img src='https://api.glygen.org/glycan/image/" +
             //   glyco.glytoucan_ac +
-            //   "' /><br/><br/><span class=marker>Click marker show more</span>"
+            //   "' /><br/><br/><span className=marker>Click marker show more</span>"
           });
         } else {
           glycos[3].residues.push({
@@ -118,7 +121,7 @@ const ProtVista = () => {
             accession: data.uniprot.uniprot_canonical_ac,
             type: glyco.residue
             // tooltipContent:
-            //   "<span class=marker>Glycosylation site without reported glycan at " +
+            //   "<span className=marker>Glycosylation site without reported glycan at " +
             //   glyco.position +
             //   "," +
             //   " Click to see site details. </span>"
@@ -137,7 +140,9 @@ const ProtVista = () => {
         accession: data.uniprot.uniprot_canonical_ac,
         type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
         tooltipContent:
-          "<span class=marker> annotation " + mutation.annotation + "</span>"
+          "<span className=marker> annotation " +
+          mutation.annotation +
+          "</span>"
       });
     } //);
 
@@ -151,7 +156,7 @@ const ProtVista = () => {
         accession: data.uniprot.uniprot_canonical_ac,
         type: "N-Glycan-Sequon"
         // tooltipContent:
-        //   "<span class=marker>" + site_annotation.annotation + "</span>"
+        //   "<span className=marker>" + site_annotation.annotation + "</span>"
       });
     } //);
 
@@ -174,7 +179,7 @@ const ProtVista = () => {
         Object.values(combinedResiduesMap).map(function(v) {
           v["tooltipContent"] +=
             v["count"] > 1
-              ? "<span class=marker>Click marker to show " +
+              ? "<span className=marker>Click marker to show " +
                 (v["count"] - 1) +
                 " more at this site</span>"
               : "";
@@ -182,14 +187,6 @@ const ProtVista = () => {
         })
       );
     }
-    //Merging data
-    var alltrack = [
-      ...glycosCombined[0],
-      ...glycosCombined[1],
-      ...glycosCombined[2],
-      ...glycosCombined[3],
-      ...glycosCombined[4]
-    ];
 
     // var features = $("g .feature-group");
     // features.css("cursor", "pointer");
@@ -206,7 +203,8 @@ const ProtVista = () => {
     };
   }
 
-  const [expanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [highlighted, setHighlighted] = useState(null);
 
   const nGlycanWithImage = useRef(null);
   const nGlycanWithoutImage = useRef(null);
@@ -256,10 +254,8 @@ const ProtVista = () => {
   }, []);
 
   return (
-    <div>
+    <div className="ProtContainer">
       {/* Back to details button */}
-      <></>
-
       <Link href={`${routeConstants.proteinDetail}${id}`}>
         <Button
           type="button"
@@ -269,87 +265,53 @@ const ProtVista = () => {
           Back To details
         </Button>
       </Link>
-      <div className="App">
+      <Row>
+        <>
+          <Col xs="3">
+            <ProtvistaSidebar
+              expanded={expanded}
+              handleExpand={() => setExpanded(!expanded)}
+            />
+          </Col>
+        </>
+
         {/* <ProtvistaNav /> */}
 
-        {data && data.sequence && data.sequence.length && (
-          <protvista-manager
-            attributes="length displaystart displayend highlightstart highlightend variantfilters"
-            id="manager"
-          >
-            <protvista-navigation
-              length={data.sequence.length}
-              displaystart={1}
-              displayend={data.sequence.length}
-            />
+        <Col xs="9" className="maincontent">
+          {data && data.sequence && data.sequence.length && (
+            <protvista-manager
+              attributes="length displaystart displayend highlightstart highlightend variantfilters"
+              id="manager"
+            >
+              <protvista-navigation
+                className={`nav-track glycotrack` + (expanded ? "" : " hidden")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+              />
 
-            <protvista-sequence
-              id="seq1"
-              class="nav-track"
-              length={data.sequence.length}
-              displaystart={1}
-              displayend={data.sequence.length}
-              sequence={data.sequence.sequence}
-            />
+              <protvista-sequence
+                id="seq1"
+                className="nav-track"
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                sequence={data.sequence.sequence}
+              />
 
-            {expanded ? (
-              <>
-                <protvista-track
-                  class="nav-track glycotrack"
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                />
-
-                <protvista-track
-                  class="nav-track hover-style"
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                  ref={nGlycanWithImage}
-                />
-                <protvista-track
-                  class="nav-track hover-style"
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                  ref={nGlycanWithoutImage}
-                />
-                <protvista-track
-                  class="nav-track hover-style"
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                  ref={oGlycanWithImage}
-                />
-                <protvista-track
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                  ref={nGlycanWithoutImage}
-                />
-                <protvista-track
-                  length={data.sequence.length}
-                  displaystart={1}
-                  displayend={data.sequence.length}
-                  highlightStart={10}
-                  layout="non-overlapping"
-                  ref={oGlycanWithoutImage}
-                />
-              </>
-            ) : (
               <protvista-track
-                class="nav-track hover-style"
+                className={`nav-track glycotrack` + (expanded ? "" : "hidden")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                highlightStart={10}
+                layout="non-overlapping"
+              />
+              <protvista-track
+                class={
+                  `nav-track nav-combinetrack hover-style` +
+                  (expanded ? " hidden" : "")
+                }
                 length={data.sequence.length}
                 displaystart={1}
                 displayend={data.sequence.length}
@@ -357,18 +319,112 @@ const ProtVista = () => {
                 layout="non-overlapping"
                 ref={allTrack}
               />
-            )}
-          </protvista-manager>
-        )}
 
-        {/* <protvista-sequence
+              <protvista-track
+                className={`nav-track glycotrack` + (expanded ? "" : "hidden")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                highlightStart={10}
+                layout="non-overlapping"
+                ref={nGlycanWithImage}
+              />
+              <protvista-track
+                className={`nav-track glycotrack` + (expanded ? "" : "show")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                highlightStart={10}
+                layout="non-overlapping"
+                ref={nGlycanWithoutImage}
+              />
+              <protvista-track
+                className={`nav-track glycotrack` + (expanded ? "" : "show")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                highlightStart={10}
+                layout="non-overlapping"
+                ref={oGlycanWithImage}
+              />
+
+              <protvista-track
+                className={`nav-track glycotrack` + (expanded ? "" : "show")}
+                length={data.sequence.length}
+                displaystart={1}
+                displayend={data.sequence.length}
+                highlightStart={10}
+                layout="non-overlapping"
+                ref={oGlycanWithoutImage}
+              />
+            </protvista-manager>
+          )}
+
+          {/* <protvista-sequence
           id="seq1"
-          class="nav-track "
+          className="nav-track "
           length="728"
           displaystart="1"
           displayend="728"
           sequence="MWVTKLLPALLLQHVLLHLLLLPIAIPYAEGQRKRRNTIHEFKKSAKTTLIKIDPALKIKTKKVNTADQCANRCTRNKGLPFTCKAFVFDKARKQCLWFPFNSMSSGVKKEFGHEFDLYENKDYIRNCIIGKGRSYKGTVSITKSGIKCQPWSSMIPHEHSFLPSSYRGKDLQENYCRNPRGEEGGPWCFTSNPEVRYEVCDIPQCSEVECMTCNGESYRGLMDHTESGKICQRWDHQTPHRHKFLPERYPDKGFDDNYCRNPDGQPRPWCYTLDPHTRWEYCAIKTCADNTMNDTDVPLETTECIQGQGEGYRGTVNTIWNGIPCQRWDSQYPHEHDMTPENFKCKDLRENYCRNPDGSESPWCFTTDPNIRVGYCSQIPNCDMSHGQDCYRGNGKNYMGNLSQTRSGLTCSMWDKNMEDLHRHIFWEPDASKLNENYCRNPDDDAHGPWCYTGNPLIPWDYCPISRCEGDTTPTIVNLDHPVISCAKTKQLRVVNGIPTRTNIGWMVSLRYRNKHICGGSLIKESWVLTARQCFPSRDLKDYEAWLGIHDVHGRGDEKCKQVLNVSQLVYGPEGSDLVLMKLARPAVLDDFVSTIDLPNYGCTIPEKTSCSVYGWGYTGLINYDGLLRVAHLYIMGNEKCSQHHRGKVTLNESEICAGAEKIGSGPCEGDYGGPLVCEQHKMRMVLGVIVPGRGCAIPNRPGIFVRVAYYAKWIHKIILTYKVPQS"
         ></protvista-sequence> */}
+        </Col>
+      </Row>
+      <div class="main-content">
+        <div class="row">
+          <div class="col-md-3 col-sm-3">
+            <ol>
+              <li>
+                <span class="super1 hover" data-highlight="Ntrack_withImage">
+                  &#9679;
+                  <span class="superx">
+                    <>N-Glycan</>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="super2 hover" data-highlight="Ntrack_withnoImage">
+                  &#9650;
+                  <span class="superx">
+                    <>N-Glycan-Site</>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="super3 hover" data-highlight="Otrack_withImage">
+                  &#9679;
+                  <span class="superx">
+                    <>O-Glycan</>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="super4 hover" data-highlight="Otrack_withnoImage">
+                  &#9650;
+                  <span class="superx">
+                    <>O-Glycan-Site</>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="super6 hover" data-highlight="track_sequon">
+                  &#9646;
+                  <span class="superx">
+                    <>N-Glycan-Sequon</>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="super5 hover" data-highlight="track_muarray">
+                  &#9670;
+                  <span class="superx">
+                    <>Mutation</>
+                  </span>
+                </span>
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
   );

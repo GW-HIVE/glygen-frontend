@@ -1,35 +1,38 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from "react";
 import { getProteinDetail } from "../data/protein";
-import SequenceDisplay from "../components/SequenceDisplay";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import Sidebar from "../components/navigation/Sidebar";
+import {} from "react-router-dom";
+import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
 import { Link, Typography, Grid } from "@material-ui/core";
-import { Navbar, Col, Row, Image } from "react-bootstrap";
-import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
+import { Col, Row, Image } from "react-bootstrap";
+import { groupEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import "../css/detail.css";
+import "../css/siteview.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import DownloadButton from "../components/DownloadButton";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
-import relatedGlycansIcon from "../images/icons/related-glycans-icon.svg";
 import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
 import routeConstants from "../data/json/routeConstants";
 import stringConstants from "../data/json/stringConstants";
 import { getGlycanImageUrl } from "../data/glycan";
+// import { size } from "lodash-es";
+// import { flexbox } from "@material-ui/system";
 
 function addCommas(nStr) {
   nStr += "";
@@ -49,25 +52,179 @@ const proteinStrings = stringConstants.protein.common;
 const items = [
   { label: "General", id: "general" },
 
-  { label: "Sequence", id: "sequence" }
+  { label: "Sequence", id: "sequence" },
+
+  { label: "Site-Annotation", id: "annotation" }
 ];
 
-const ProteinDetail = props => {
+const sortByPosition = function(a, b) {
+  if (a.position < b.position) {
+    return -1;
+  } else if (b.position < a.position) {
+    return 1;
+  }
+  return 0;
+};
+
+const sortByStartPos = function(a, b) {
+  if (a.start_pos < b.start_pos) {
+    return -1;
+  } else if (b.start_pos < a.start_pos) {
+    return 1;
+  }
+  return 0;
+};
+
+const SequenceLocationViewer = ({
+  sequence,
+  annotations,
+  position,
+  onSelectPosition
+}) => {
+  var taperlength = 3;
+  var taperDelta = 9;
+  var translateDelta = 7;
+  var centerSize = 54;
+  var translateCenter = -22;
+
+  const [styledSequence, setStyledSequence] = useState([]);
+  const currentAnnotation = annotations.find(x => x.position === position);
+  const currentAnnotationIndex = annotations.indexOf(currentAnnotation);
+
+  const getHighlightClassname = position => {
+    const match = annotations.find(
+      annotation => annotation.position === position
+    );
+
+    if (match) {
+      if (match.type == "N") {
+        return "highlightN";
+      } else if (match.type == "O") {
+        return "highlightO";
+      } else if (match.type == "M") {
+        return "highlightMutate";
+      }
+    }
+    return "";
+  };
+
+  useEffect(() => {
+    const baseValues = sequence.map((character, index) => {
+      const currentPosition = index + 1;
+      return {
+        index,
+        character,
+        highlight: getHighlightClassname(currentPosition),
+        size: null,
+        offset: null
+      };
+    });
+
+    if (baseValues && baseValues.length) {
+      for (var i = 1; i <= taperlength; i++) {
+        const element = baseValues[position - 1 - i];
+        if (element) {
+          element.size = centerSize - i * taperDelta;
+          element.offset = translateCenter + i * translateDelta;
+        }
+      }
+      for (var i = 1; i <= taperlength; i++) {
+        const element = baseValues[position - 1 + i];
+        if (element) {
+          element.size = centerSize - i * taperDelta;
+          element.offset = translateCenter + i * translateDelta;
+        }
+      }
+
+      const x = baseValues[position - 1];
+      x.size = centerSize;
+      x.offset = translateCenter;
+      x.current = true;
+
+      setTimeout(() => {
+        const zoom = document.querySelector(".zoom-sequence");
+        const currentElement = document.querySelector(".char-current");
+        const offset =
+          currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2 - 50;
+        zoom.scrollLeft = offset;
+      }, 100);
+    }
+
+    setStyledSequence(baseValues);
+  }, [sequence, annotations, position]);
+
+  const selectPrevious = () => {
+    if (currentAnnotationIndex > 0) {
+      onSelectPosition(annotations[currentAnnotationIndex - 1].position);
+    }
+  };
+
+  const selectNext = () => {
+    if (currentAnnotationIndex < annotations.length) {
+      onSelectPosition(annotations[currentAnnotationIndex + 1].position);
+    }
+  };
+
+  return (
+    <>
+      <Row>
+        <Grid item xs={8} sm={4}></Grid>
+        <Grid item xs={6} sm={4}>
+          <select
+            value={position}
+            onChange={event => onSelectPosition(event.target.value)}
+          >
+            {annotations.map(annotation => (
+              <option value={annotation.position}>{annotation.key}</option>
+            ))}
+          </select>
+        </Grid>
+      </Row>
+      <Row className="sequenceDisplay">
+        <Grid item xs={1} sm={1}>
+          <button onClick={selectPrevious}>{"<<"}</button>
+        </Grid>
+        <Grid item xs={10} sm={10}>
+          <>
+            {/* <pre>{JSON.stringify(annotations, null, 2)}</pre> */}
+
+            <Grid className="zoom">
+              <div className="zoom-sequence">
+                {styledSequence.map(item => (
+                  <span
+                    key={item.index}
+                    className={`${item.highlight}${
+                      item.current ? " char-current" : ""
+                    }`}
+                  >
+                    {item.character}
+                  </span>
+                ))}
+              </div>
+            </Grid>
+
+            {/* <pre>{JSON.stringify(styledSequence, null, 2)}</pre> */}
+          </>
+        </Grid>
+        <Grid item xs={1} sm={1}>
+          <button onClick={selectNext}>>></button>
+        </Grid>
+      </Row>
+    </>
+  );
+};
+
+const Siteview = props => {
   let { id } = useParams();
-
   const [detailData, setDetailData] = useState({});
-
-  const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
-    "with_glycanId"
-  );
-  const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
-  const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
-    []
-  );
+  const [annotations, setAnnotations] = useState([]);
+  const [allAnnotations, setAllAnnotations] = useState([]);
+  const [sequence, setSequence] = useState([]);
+  const [selectedPosition, setSelectedPosition] = useState();
+  const [positionData, setPositionData] = useState([]);
 
   useEffect(() => {
     const getProteinDetailData = getProteinDetail(id);
-
     getProteinDetailData.then(({ data }) => {
       if (data.code) {
         console.log(data.code);
@@ -79,37 +236,175 @@ const ProteinDetail = props => {
     getProteinDetailData.catch(({ response }) => {
       alert(JSON.stringify(response));
     });
-    // eslint-disable-next-line
   }, []);
+
   useEffect(() => {
+    let dataAnnotations = [];
+    /**
+     *  The map() method calls the provided function once for each element in a glycosylation array, in order.
+     *  and sorting with respect to position
+     */
     if (detailData.glycosylation) {
-      const withImage = detailData.glycosylation.filter(
-        item => item.glytoucan_ac
-      );
-      const withoutImage = detailData.glycosylation.filter(
-        item => !item.glytoucan_ac
-      );
-      setGlycosylationWithImage(withImage);
-      setGlycosylationWithoutImage(withoutImage);
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
+          position: glycosylation.position,
+          type: glycosylation.type.split("-")[0],
+          label: glycosylation.residue,
+          glytoucan_ac: glycosylation.glytoucan_ac,
+          position: glycosylation.position,
+          evidence: glycosylation.evidence,
+          typeAnnotate: glycosylation.type.split("-")[0] + "-" + "Glycosylation"
+        }))
+      ];
+    }
+
+    /**
+     *  The map() method calls the provided function once for each element in a detailData.site_annotation array, in order.
+     *  and sorting with respect to start_pos
+     */
+    if (detailData.site_annotation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.site_annotation
+          .sort(sortByStartPos)
+          .map(site_annotation => ({
+            position: site_annotation.start_pos,
+            type: site_annotation.annotation.split("-")[0].toUpperCase(),
+            typeAnnotate: "Sequon"
+          }))
+      ];
+    }
+
+    /**
+     *  The map() method calls the provided function once for each element in a detailData.mutation array, in order.
+     *  and sorting with respect to start_pos
+     */
+    if (detailData.mutation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.mutation.sort(sortByStartPos).map(mutation => ({
+          position: mutation.start_pos,
+          type: mutation.type.split(" ")[1][0].toUpperCase(),
+          label: "Mutation",
+          evidence: mutation.evidence,
+          labelForlist: mutation.evidence.sequence_org,
+          typeAnnotate: "Mutation"
+        }))
+      ];
+    }
+
+    const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
+      ...annotation,
+      key: `${annotation.type}-${annotation.position}`,
+      id: `${annotation.type}-${annotation.position}-${index}`
+    }));
+
+    const uniquePositions = allDataAnnotations.filter((value, index, self) => {
+      const findPosition = self.find(item => item.key === value.key);
+      return self.indexOf(findPosition) === index;
+    });
+
+    setAllAnnotations(allDataAnnotations);
+    setAnnotations(uniquePositions);
+    if (uniquePositions.length) {
+      setSelectedPosition(uniquePositions[0].position);
     }
 
     if (detailData.sequence) {
       var originalSequence = detailData.sequence.sequence;
-      detailData.sequence.sequence = originalSequence.split("");
+      // detailData.sequence.sequence = originalSequence.split("");
+      setSequence(originalSequence.split(""));
     }
   }, [detailData]);
 
-  const {
-    uniprot,
-    mass,
-    recommendedname,
-    gene,
-    refseq,
-    species,
-    glycosylation,
-    sequence,
-    site_annotation
-  } = detailData;
+  const updateTableData = (annotations, position) => {
+    setPositionData(
+      annotations.filter(
+        annotation => annotation.position === parseInt(position, 10)
+      )
+    );
+  };
+
+  const selectPosition = position => {
+    setSelectedPosition(position);
+    updateTableData(allAnnotations, position);
+  };
+
+  useEffect(() => {
+    updateTableData(allAnnotations, selectedPosition);
+  }, [allAnnotations, selectedPosition]);
+
+  const annotationColumns = [
+    {
+      dataField: "typeAnnotate",
+      text: "Annotation",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    },
+    {
+      dataField: "position",
+      text: "Position",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    },
+    {
+      dataField: "evidence",
+      text: "Sources",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.glytoucan_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+    {
+      dataField: "glytoucan_ac",
+      text: "Additional Information",
+      sort: false,
+      selected: true,
+      formatter: (value, row) => (
+        <div className="img-wrapper">
+          {row.glytoucan_ac && (
+            <img
+              className="img-cartoon-list-page img-cartoon"
+              src={getGlycanImageUrl(row.glytoucan_ac)}
+              alt="Cartoon"
+            />
+          )}
+        </div>
+      ),
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "30%",
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    }
+  ];
+
+  const { uniprot, mass, recommendedname, gene, refseq } = detailData;
 
   // ==================================== //
   /**
@@ -123,8 +418,8 @@ const ProteinDetail = props => {
     }),
     {
       general: true,
-      glycosylation: true,
-      seqence: true
+      annotation: true,
+      sequence: true
     }
   );
 
@@ -162,7 +457,7 @@ const ProteinDetail = props => {
                   <h2>
                     {" "}
                     <span>
-                      Details for Protein
+                      Siteview for Protein
                       <strong>
                         {uniprot && uniprot.uniprot_canonical_ac && (
                           <> {uniprot.uniprot_canonical_ac}</>
@@ -348,7 +643,7 @@ const ProteinDetail = props => {
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-            {/*  Sequence */}
+
             <Accordion
               id="sequence"
               defaultActiveKey="0"
@@ -383,14 +678,66 @@ const ProteinDetail = props => {
                   <Card.Body>
                     <Row>
                       <Col align="left">
-                        <pre>hi</pre>
+                        <SequenceLocationViewer
+                          sequence={sequence}
+                          annotations={annotations}
+                          position={selectedPosition}
+                          onSelectPosition={selectPosition}
+                        />
+
+                        {/* <pre>{JSON.stringify(positionData, null, 2)}</pre> */}
                       </Col>
                     </Row>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-            {/*  Pathway */}
+            <Accordion
+              id="annotation"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.annotation.title}
+                      text={DetailTooltips.protein.annotation.text}
+                      urlText={DetailTooltips.protein.annotation.urlText}
+                      url={DetailTooltips.protein.annotation.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h3 className="gg-green d-inline">Annotations</h3>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() =>
+                        toggleCollapse("annotation", collapsed.annotation)
+                      }
+                      className="gg-green arrow-btn"
+                    >
+                      <span>
+                        {collapsed.annotation ? closeIcon : expandIcon}
+                      </span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {positionData && positionData.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={positionData}
+                        columns={annotationColumns}
+                      />
+                    )}
+                    {!positionData && <p>No data available.</p>}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Sequence */}
           </React.Fragment>
         </Col>
       </Row>
@@ -398,4 +745,4 @@ const ProteinDetail = props => {
   );
 };
 
-export default ProteinDetail;
+export default Siteview;
