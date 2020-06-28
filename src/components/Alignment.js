@@ -33,9 +33,9 @@ function formatSequenceBlocks(sequenceObject, perLine) {
         return {
           start: x,
           id: aln.id,
-          tax_id: aln.tax_id,
+          // tax_id: aln.tax_id,
           uniprot_id: aln.uniprot_id,
-          tax_name: aln.tax_name,
+          // tax_name: aln.tax_name,
           name: aln.name,
           string: aln.aln.substr(x, perLine)
         };
@@ -66,18 +66,16 @@ const Alignment = ({ alignmentData, perLine }) => {
                 {/* <Grid item xs={12} md={1}> */}
                 <div className="aln-line-header">{aln.tax_id}</div>
                 <div className="aln-line-header">{aln.tax_name}</div>
-                <div className="aln-line-header">
+                <div className="aln-line-header" style={{ paddingLeft: "5px" }}>
                   <a href={routeConstants.proteinDetail}>{aln.id}</a>
                 </div>
-                {/* <div className="aln-line-header">
-                  {" "}
-                  <a href={routeConstants.proteinDetail}>{aln.uniprot_id}</a>
-                </div> */}
+                <div className="aln-line-header">{aln.uniprot_id}</div>
+
                 <div className="aln-line-value">{aln.string}</div>
               </div>
             ))}
             <div className="aln-line row">
-              {/* <div> </div> */}
+              <div> </div>
               <div> </div>
               <div> </div>
               <div> </div>
