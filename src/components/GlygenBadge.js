@@ -51,7 +51,10 @@ function databasecolor(name) {
 			return "#eb4034";
 		case "dbsnp":
 			return "#ebbd34";
+		case "subsumption":
+				return "#33b8ff";
 	}
+	return "#9033ff";
 }
 
 const GlygenBadge = (props) => {
