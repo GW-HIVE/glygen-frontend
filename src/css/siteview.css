@@ -11,6 +11,11 @@
   height: 2em;
 }
 
+.sequence-scroll {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .zoom-sequence {
   overflow: scroll;
   overflow-x: scroll;
@@ -20,6 +25,7 @@
 
 .sequenceDisplay {
   padding-top: 20px;
+  justify-content: center !important;
 }
 
 .zoom-sequence span {

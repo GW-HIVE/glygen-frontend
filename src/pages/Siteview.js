@@ -182,10 +182,10 @@ const SequenceLocationViewer = ({
         </Grid>
       </Row>
       <Row className="sequenceDisplay">
-        <Grid item xs={1} sm={1}>
+        <Grid item>
           <button onClick={selectPrevious}>{"<<"}</button>
         </Grid>
-        <Grid item xs={10} sm={10}>
+        <Grid item xs={10} sm={10} className="sequence-scroll">
           <>
             {/* <pre>{JSON.stringify(annotations, null, 2)}</pre> */}
 
@@ -207,7 +207,7 @@ const SequenceLocationViewer = ({
             {/* <pre>{JSON.stringify(styledSequence, null, 2)}</pre> */}
           </>
         </Grid>
-        <Grid item xs={1} sm={1}>
+        <Grid item>
           <button onClick={selectNext}>>></button>
         </Grid>
       </Row>
