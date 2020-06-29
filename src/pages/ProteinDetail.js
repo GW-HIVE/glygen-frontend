@@ -1296,7 +1296,7 @@ const ProteinDetail = (props) => {
 									<h3 className="gg-green d-inline">Isoforms</h3>
 									<div className="float-right">
 										<NavLink
-								   to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
+								   to={`${routeConstants.isoAlignment}${id}/isoformset-uniprotkb`}>
 											<Button type="button" className="gg-btn-blue">
 												Alignment
 											</Button>
