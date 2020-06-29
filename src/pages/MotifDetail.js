@@ -267,7 +267,7 @@ const MotifDetail = props => {
                           </div>
                         </>
                       )}
-                      {classification && classification.length && (
+                      {classification && classification.length > 0 && classification[0].type.name !== "Other" && (
                         <div>
                           <strong>Glycan Type / Subtype : </strong>
 
