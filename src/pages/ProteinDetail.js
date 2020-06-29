@@ -82,7 +82,7 @@ function addCommas(nStr) {
 function openProtvistaPage(uniprot_canonical_ac) {
 	var str = uniprot_canonical_ac;
 //    str = str.substring(0, str.length - 2);
-   str= str.substring(0, str.indexOf('-'));
+    str= str.substring(0, str.indexOf('-'));
 	var url = "https://www.uniprot.org/uniprot/" + str + "/protvista";
 	window.open(url);
 }
@@ -783,35 +783,39 @@ const ProteinDetail = (props) => {
 														</strong>
 														{addCommas(mass.chemical_mass)} - Da
 													</div>
+
+													{
+													refseq && refseq.length &&(
+														<>
 													<div>
-														<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
+							
+														<strong>{proteinStrings.refseq_ac.name}: </strong>
 														<Link
 															href={refseq.url}
 															target="_blank"
 															rel="noopener noreferrer">
 															{" "}
-															{refseq.ac}{" "}
+															{refseq.ac}
 														</Link>{" "}
+	
 													</div>
+													
 													<div>
-														{" "}
+													
 														<strong>
-															{proteinStrings.refSeq_name.name}:{" "}
-														</strong>{" "}
-														{refseq.name}{" "}
-													</div>{" "}
-													<div>
-														<strong>
-															{proteinStrings.refSeq_summary.name}:{" "}
+															{proteinStrings.refSeq_name.name}:
 														</strong>
-														{refseq.summary}{" "}
+														{refseq.name}
 													</div>
-													{/* <div>
-                            <strong>
-                              {proteinStrings.chemical_mass.name}:{" "}
-                            </strong>
-                            {mass.chemical_mass}
-                          </div> */}
+													<div>
+														<strong>
+															{proteinStrings.refSeq_summary.name}:
+														</strong>
+														{refseq.summary}
+													
+													</div>
+													</>
+														)}
 												</>
 											)}
 										</p>
@@ -892,7 +896,12 @@ const ProteinDetail = (props) => {
 									<Row>
 													{species.map((species) => (
 														
-														<Col align="left">
+														<Col
+																		align="left"
+																		style={{
+																			paddingTop: "12px",
+																			paddingLeft: "40px",
+																		}}>
 													
 									                   <strong> Taxonomy ID: </strong>  {species.taxid}
 														</Col>
