@@ -35,7 +35,7 @@ const ProteinAlignment = () => {
 
   const [data, setData] = useState({});
 
-  const isIsoform = alignment === "isoformset.uniprotkb";
+  const isIsoform = alignment === "isoformset-uniprotkb";
 
   useEffect(() => {
     const getData = getIsoAlignment(id, alignment);
