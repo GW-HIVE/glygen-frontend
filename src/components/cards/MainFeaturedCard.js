@@ -4,8 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-// import { Nav } from 'react-bootstrap';
+import { Link, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	mainFeaturedCard: {
@@ -43,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 }));
-
 export default function MainFeaturedCard(props) {
 	const classes = useStyles();
 	const { post } = props;
@@ -61,7 +59,7 @@ export default function MainFeaturedCard(props) {
 			}
 			<div className={classes.overlay} />
 			<Grid container>
-				<Grid item sm={12} md={6}>
+				<Grid item sm={12} lg={6}>
 					<div className={classes.mainFeaturedCardContent}>
 						<Typography
 							component="h1"
@@ -73,9 +71,32 @@ export default function MainFeaturedCard(props) {
 						<Typography variant="p" color="inherit" paragraph>
 							{post.description}
 						</Typography>
-						<Link href={post.href} className={classes.linkText}>
-							{post.linkText}
-						</Link>
+						<Typography paragraph style={{ marginBottom: "40px" }}>
+							<Link as={NavLink} to={post.toAbout} className={classes.linkText}>
+								{post.linkText}
+							</Link>
+						</Typography>
+						{/* <Typography paragraph style={{ marginTop: "40px" }}>
+							<Link
+								as={NavLink}
+								to={post.toCite}
+								className="gg-btn-outline-white">
+								{post.linkCiteText}
+							</Link>
+							<Link
+								as={NavLink}
+								to={post.toTryMe}
+								className="gg-btn-outline-white">
+								{post.linkTryMeText}
+							</Link>
+							<Link
+								as={NavLink}
+								to={post.toAbout}
+								className="gg-btn-outline-white">
+								{post.linkText}
+							</Link>
+						</Typography> */}
+						<Grid item></Grid>
 					</div>
 				</Grid>
 			</Grid>

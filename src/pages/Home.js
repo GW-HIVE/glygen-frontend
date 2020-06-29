@@ -31,15 +31,20 @@ import { GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL } from "../envVariables";
 import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
-import BannerHotTopic from "../components/alert/BannerHotTopic";
-
+// import BannerHotTopic from "../components/alert/BannerHotTopic";
+import Collaborators from "../components/about/UnivLogos";
 const mainFeaturedCard = {
 	title: "Computational and Informatics Resources for Glycoscience",
 	description:
 		"GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This web portal allows exploring this data and performing unique searches that cannot be executed in any of the integrated databases alone.",
 	image: mainImg,
 	linkText: "Learn More…",
-	to: routeConstants.about,
+	// linkText: "Our Mission",
+	toAbout: routeConstants.about,
+	// toCite: routeConstants.howToCite,
+	// linkCiteText: "How to cite",
+	// toTryMe: routeConstants.tryMe,
+	// linkTryMeText: "Quick Start",
 };
 const featuredCards = [
 	{
@@ -155,7 +160,7 @@ export default function Home() {
 			</Helmet>
 
 			<CssBaseline />
-			<BannerHotTopic />
+			{/* <BannerHotTopic /> */}
 			<MainFeaturedCard post={mainFeaturedCard} />
 			{/* <Container maxWidth="xl">
 				<BannerHotTopic />
