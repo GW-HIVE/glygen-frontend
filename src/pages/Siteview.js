@@ -194,6 +194,12 @@ const SequenceLocationViewer = ({
                 {styledSequence.map(item => (
                   <span
                     key={item.index}
+                    style={{
+                      fontSize: item.size ? `${item.size}px` : "inherit",
+                      transform: item.offset
+                        ? `translateY(${item.offset}px)`
+                        : "none"
+                    }}
                     className={`${item.highlight}${
                       item.current ? " char-current" : ""
                     }`}
