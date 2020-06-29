@@ -93,7 +93,7 @@ const ProteinAlignment = () => {
                       {isIsoform ? "Isoform" : "Homolog"} Alignment of{" "}
                       <strong>{id}</strong>
                     </span>
-                    <Link href={`${routeConstants.proteinDetail}${id}`}>
+                    <NavLink to={`${routeConstants.proteinDetail}${id}`}>
                       <Button
                         type="button"
                         style={{ marginLeft: "5px" }}
@@ -101,7 +101,7 @@ const ProteinAlignment = () => {
                       >
                         Back To details
                       </Button>
-                    </Link>
+                    </NavLink>
                   </h2>
                 </div>
               </Grid>
