@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from "react";
-import { getGlycanDetail, getGlycanImageUrl } from "../data/glycan";
+import {
+	MOTIF_COLUMNS,
+	getMotifList,
+	getGlycanImageUrl,
+	getMotifDetail,
+} from "../data/motif";
 import { getProteinDetail } from "../data/protein";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -93,113 +98,75 @@ function addCommas(nStr) {
 const MotifDetail = (props) => {
 	let { id } = useParams();
 
-	const [detailData, setDetailData] = useState({});
-	const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
-	const [hideText, setHideText] = useState(true);
+	const [data, setData] = useState([]);
+	const [query, setQuery] = useState([]);
+	const [pagination, setPagination] = useState([]);
+	const [selectedColumns, setSelectedColumns] = useState(MOTIF_COLUMNS);
+	const [page, setPage] = useState(1);
+	const [sizePerPage, setSizePerPage] = useState(20);
+	const [totalSize, setTotalSize] = useState();
 
 	useEffect(() => {
-		const getGlycanDetailData = getGlycanDetail(id);
-
-		getGlycanDetailData.then(({ data }) => {
-			if (data.code) {
-				console.log(data.code);
-			} else {
-				setDetailData(data);
-			}
-		});
-
-		getGlycanDetailData.catch(({ response }) => {
-			alert(JSON.stringify(response));
+		getMotifList(id).then(({ data }) => {
+			setData(data.results);
+			setPagination(data.pagination);
+			const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+			setPage(currentPage);
+			//   setSizePerPage()
+			setTotalSize(data.pagination.total_length);
 		});
 		// eslint-disable-next-line
 	}, []);
 
-	useEffect(() => {
-		if (detailData.glycosylation) {
-			const withImage = detailData.glycosylation.filter(
-				(item) => item.glytoucan_ac
-			);
-			setGlycosylationWithImage(withImage);
-		}
-	}, [detailData]);
+	const handleTableChange = (
+		type,
+		{ page, sizePerPage, sortField, sortOrder }
+	) => {
+		setPage(page);
+		setSizePerPage(sizePerPage);
 
-	if (detailData.mass) {
-		detailData.mass = addCommas(detailData.mass);
+		getMotifList(
+			id,
+			(page - 1) * sizePerPage + 1,
+			sizePerPage,
+			sortField,
+			sortOrder
+		).then(({ data }) => {
+			// place to change values before rendering
+
+			setData(data.results);
+			setPagination(data.pagination);
+
+			//   setSizePerPage()
+			setTotalSize(data.pagination.total_length);
+		});
+	};
+
+	function rowStyleFormat(row, rowIdx) {
+		return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
 	}
-	if (detailData.mass_pme) {
-		detailData.mass_pme = addCommas(detailData.mass_pme);
+
+	if (data.mass) {
+		data.mass = addCommas(data.mass);
 	}
-	if (detailData.glycoct) {
-		detailData.glycoct = detailData.glycoct.replace(/\\n/g, "\n");
+	if (data.mass_pme) {
+		data.mass_pme = addCommas(data.mass_pme);
+	}
+	if (data.glycoct) {
+		data.glycoct = data.glycoct.replace(/\\n/g, "\n");
 	}
 
 	const {
 		mass,
 		glytoucan,
 		glycosylation,
-		// inchi_key,
-		// species,
-		// composition,
-		// motifs,
-		// iupac,
-		// glycam,
-		// smiles_isomeric,
-		// inchi,
 		classification,
-		// glycoprotein,
+		glytoucan_ac,
 		glycans,
-		// glycoct,
 		publication,
-		// wurcs,
-		// enzyme,
 		mass_pme,
-	} = detailData;
+	} = data;
 
-	const glycoSylationColumns = [
-		{
-			dataField: "glytoucan_ac",
-			text: "GlyToucan Accession",
-			defaultSortField: "glytoucan_ac",
-			sort: true,
-			headerStyle: (column, colIndex) => {
-				return {
-					backgroundColor: "#4B85B6",
-					color: "white",
-				};
-			},
-			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={routeConstants.glycanDetail + row.glytoucan_ac}>
-					{" "}
-					{row.glytoucan_ac}{" "}
-				</Navbar.Text>
-			),
-		},
-		{
-			dataField: "glytoucan_ac",
-			text: "Glycan Image",
-			sort: false,
-			selected: true,
-			formatter: (value, row) => (
-				<div className="img-wrapper">
-					<img
-						className="img-cartoon-list-page img-cartoon"
-						src={getGlycanImageUrl(row.glytoucan_ac)}
-						alt="Cartoon"
-					/>
-				</div>
-			),
-			headerStyle: (colum, colIndex) => {
-				return {
-					width: "30%",
-					textAlign: "left",
-					backgroundColor: "#4B85B6",
-					color: "white",
-				};
-			},
-		},
-	];
 	// ==================================== //
 	/**
 	 * Adding toggle collapse arrow icon to card header individualy.
@@ -415,30 +382,7 @@ const MotifDetail = (props) => {
 									</div>
 								</Card.Header>
 								<Accordion.Collapse eventKey="0">
-									<Card.Body>
-										{glycosylation && glycosylation.length && (
-											<div>
-												<Container
-													style={{
-														paddingTop: "20px",
-														paddingBottom: "30px",
-													}}>
-													{glycosylationWithImage &&
-														glycosylationWithImage.length && (
-															<ClientPaginatedTable
-																data={glycosylationWithImage}
-																columns={glycoSylationColumns}
-																onClickTarget={"#glycosylation"}
-															/>
-														)}
-													{!glycosylationWithImage.length && (
-														<p>No data available.</p>
-													)}
-												</Container>
-											</div>
-										)}
-										{!glycosylation && <p>No data available.</p>}
-									</Card.Body>
+									<Card.Body></Card.Body>
 								</Accordion.Collapse>
 							</Card>
 						</Accordion>
