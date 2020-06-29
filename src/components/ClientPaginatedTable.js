@@ -24,7 +24,7 @@ const ClientPaginatedTable = props => {
     const end = page * sizePerPage;
     const pageData = data.slice(start, end);
     setPageContents(pageData);
-  }, [page, currentSort, currentSortOrder, sizePerPage]);
+  }, [data, page, currentSort, currentSortOrder, sizePerPage]);
 
   const handleTableChange = (
     type,
