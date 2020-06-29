@@ -11,6 +11,7 @@ import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
 import { Link, Typography, Grid } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 import { Col, Row, Image } from "react-bootstrap";
 import { groupEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -465,7 +466,7 @@ const Siteview = props => {
                       </strong>
                     </span>
                   </h2>
-                  <Link href={`${routeConstants.proteinDetail}${id}`}>
+                  <NavLink to={`${routeConstants.proteinDetail}${id}`}>
                     <Button
                       type="button"
                       style={{ marginLeft: "5px" }}
@@ -473,7 +474,7 @@ const Siteview = props => {
                     >
                       Back To details
                     </Button>
-                  </Link>
+                  </NavLink>
                 </div>
               </Grid>
             </Row>
