@@ -13,6 +13,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import SelectControl from "./select/SelectControl";
 import { getProteinDownload } from "../data/protein";
 import { getGlycanDownload } from "../data/glycan";
+import { getMotifDownload } from "../data/motif";
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -35,6 +36,8 @@ const DownloadButton = props => {
     switch (itemType) {
       case "glycan":
         return getGlycanDownload;
+      case "motif":
+        return getMotifDownload;
       case "protein":
         return getProteinDownload;
       default:

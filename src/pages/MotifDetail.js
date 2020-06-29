@@ -176,23 +176,23 @@ const MotifDetail = props => {
             <DownloadButton
               types={[
                 {
-                  display: "Glycan Image (*.png)",
+                  display: "Motif Image (*.png)",
                   type: "png",
                   data: "glycan_image"
                 },
                 {
-                  display: " Glycan data (*.csv)",
+                  display: " Motif data (*.csv)",
                   type: "json",
-                  data: "glycan_detail"
+                  data: "motif_detail"
+                },
+                {
+                  display: "Motif data (*.json)",
+                  type: "json",
+                  data: "motif_detail"
                 }
-                // {
-                // 	display: "Glycan data (*.json)",
-                // 	type: "json",
-                // 	data: "glycan_list",
-                // },
               ]}
-              dataType="glycan_detail"
               dataId={id}
+              dataType="motif_detail"
             />
           </div>
 
