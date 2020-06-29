@@ -79,10 +79,16 @@ function addCommas(nStr) {
 /**
  * This function opens the Sequence page.
  */
-function openSequencePage(uniprot_ac) {
-	var url = "https://www.uniprot.org/uniprot/" + uniprot_ac + "#sequences";
+function openProtvistaPage(uniprot_canonical_ac) {
+	var str = uniprot_canonical_ac;
+   str = str.substring(0, str.length - 2);
+	var url = "https://www.uniprot.org/uniprot/" + str + "/protvista";
 	window.open(url);
 }
+
+
+
+
 const getItemsPathway = (data) => {
 	let itemspathway = [];
 
@@ -1147,10 +1153,17 @@ const ProteinDetail = (props) => {
 									</span>
 									<h3 className="gg-green d-inline">Sequence</h3>
 									<div className="float-right">
-									<NavLink
-											to={`${routeConstants.protVista}${id}`}>
-										
-										<Button
+										<span className="pr-3">
+											<a
+												// eslint-disable-next-line
+												href="javascript:void(0)"
+												onClick={() => {
+													openProtvistaPage(
+														uniprot && uniprot.uniprot_canonical_ac
+														
+													);
+												}}>
+												<Button
 											type="button"
 											style={{
 												marginLeft: "5px",
@@ -1164,7 +1177,13 @@ const ProteinDetail = (props) => {
 											</span>{" "}
 											<FaSearchPlus />
 										</Button>
-										</NavLink>
+											</a>
+										</span>
+
+
+
+
+
 										<Accordion.Toggle
 											eventKey="0"
 											onClick={() =>

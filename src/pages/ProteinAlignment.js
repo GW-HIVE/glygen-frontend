@@ -21,6 +21,7 @@ import FeedbackWidget from "../components/FeedbackWidget";
 import routeConstants from "../data/json/routeConstants";
 import stringConstants from "../data/json/stringConstants";
 import Alignment from "../components/Alignment";
+import Button from "react-bootstrap/Button";
 
 // const proteinStrings = stringConstants.protein.common;
 
@@ -92,6 +93,15 @@ const ProteinAlignment = () => {
                       {isIsoform ? "Isoform" : "Homolog"} Alignment of{" "}
                       <strong>{id}</strong>
                     </span>
+                    <Link href={`${routeConstants.proteinDetail}${id}`}>
+                      <Button
+                        type="button"
+                        style={{ marginLeft: "5px" }}
+                        className="gg-btn-blue"
+                      >
+                        Back To details
+                      </Button>
+                    </Link>
                   </h2>
                 </div>
               </Grid>
