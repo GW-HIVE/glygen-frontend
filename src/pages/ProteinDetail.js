@@ -81,7 +81,8 @@ function addCommas(nStr) {
  */
 function openProtvistaPage(uniprot_canonical_ac) {
 	var str = uniprot_canonical_ac;
-   str = str.substring(0, str.length - 2);
+//    str = str.substring(0, str.length - 2);
+   str= str.substring(0, str.indexOf('-'));
 	var url = "https://www.uniprot.org/uniprot/" + str + "/protvista";
 	window.open(url);
 }
@@ -1295,8 +1296,7 @@ const ProteinDetail = (props) => {
 									<h3 className="gg-green d-inline">Isoforms</h3>
 									<div className="float-right">
 										<NavLink
-
-								to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
+								   to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
 											<Button type="button" className="gg-btn-blue">
 												Alignment
 											</Button>
