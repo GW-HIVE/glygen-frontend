@@ -24,7 +24,7 @@ import SearchBySpecies from "../components/quickSearch/SearchBySpecies";
 import SearchByDisease from "../components/quickSearch/SearchByDisease";
 import { getProteinList } from "../data/protein";
 import { getGlycanList } from '../data/glycan';
-
+import { GLYGEN_BASENAME } from "../envVariables";
 
 const QuickSearch = (props) => {
 	let { id } = useParams("");
@@ -166,7 +166,8 @@ const QuickSearch = (props) => {
 		let message = "Quick Search Question_5 = /"+ inputValue.question_5 + "#function";
 		logActivity("user", (id || "") + ">" + inputValue.question_5, message);
 		//props.history.push(routeConstants.proteinDetail + inputValue.question_5 + "#function");
-		window.location = routeConstants.proteinDetail + inputValue.question_5 + "#function";
+		const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
+		window.location = basename + routeConstants.proteinDetail + inputValue.question_5 + "#function";
 	};
 
 	const searchQuestion6 = () => {		
@@ -194,7 +195,8 @@ const QuickSearch = (props) => {
 		let message = "Quick Search Question_7 = /"+ inputValue.question_7 + "#sequence";
 		logActivity("user", (id || "") + ">" + inputValue.question_7, message);
 		//props.history.push(routeConstants.proteinDetail + inputValue.question_7 + "#sequence");
-		window.location = routeConstants.proteinDetail + inputValue.question_7 + "#sequence";
+		const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
+		window.location = basename + routeConstants.proteinDetail + inputValue.question_7 + "#sequence";
 	};
 
 	const searchQuestion8 = () => {		
