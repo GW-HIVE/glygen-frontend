@@ -165,7 +165,8 @@ const QuickSearch = (props) => {
 	const searchQuestion5 = () => {		
 		let message = "Quick Search Question_5 = /"+ inputValue.question_5 + "#function";
 		logActivity("user", (id || "") + ">" + inputValue.question_5, message);
-		props.history.push(routeConstants.proteinDetail + inputValue.question_5 + "#function");
+		//props.history.push(routeConstants.proteinDetail + inputValue.question_5 + "#function");
+		window.location = routeConstants.proteinDetail + inputValue.question_5 + "#function";
 	};
 
 	const searchQuestion6 = () => {		
@@ -192,7 +193,8 @@ const QuickSearch = (props) => {
 	const searchQuestion7 = () => {		
 		let message = "Quick Search Question_7 = /"+ inputValue.question_7 + "#sequence";
 		logActivity("user", (id || "") + ">" + inputValue.question_7, message);
-		props.history.push(routeConstants.proteinDetail + inputValue.question_7 + "#sequence");
+		//props.history.push(routeConstants.proteinDetail + inputValue.question_7 + "#sequence");
+		window.location = routeConstants.proteinDetail + inputValue.question_7 + "#sequence";
 	};
 
 	const searchQuestion8 = () => {		
