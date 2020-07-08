@@ -98,6 +98,15 @@ const PanelHowToCite = (props) => {
 															{json.endnotelabel}
 														</Link>
 													)}
+													{json.ris && (
+														<Link
+															to={json.ris}
+															target="_blank"
+															download
+															style={{ paddingRight: "20px" }}>
+															{json.rislabel}
+														</Link>
+													)}
 												</div>
 											</p>
 										</td>
