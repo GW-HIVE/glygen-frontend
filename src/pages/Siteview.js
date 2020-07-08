@@ -25,6 +25,10 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import { logActivity } from "../data/logging";
+import PageLoader from "../components/load/PageLoader";
+import DialogAlert from "../components/alert/DialogAlert";
+import { axiosError } from "../data/axiosError";
 
 import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
@@ -229,19 +233,29 @@ const Siteview = props => {
   const [sequence, setSequence] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState();
   const [positionData, setPositionData] = useState([]);
-
+  const [pageLoading, setPageLoading] = useState(true);
+  const [alertDialogInput, setAlertDialogInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
   useEffect(() => {
+    setPageLoading(true);
+    logActivity("user", id);
     const getProteinDetailData = getProteinDetail(id);
     getProteinDetailData.then(({ data }) => {
       if (data.code) {
-        console.log(data.code);
+        let message = "Detail api call";
+        logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
       } else {
         setDetailData(data);
+        setPageLoading(false);
       }
     });
 
     getProteinDetailData.catch(({ response }) => {
-      alert(JSON.stringify(response));
+      let message = "siteview api call";
+      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
   }, []);
 
@@ -497,7 +511,13 @@ const Siteview = props => {
               {getMeta("proteinDetail")}
             </Helmet>
             <FeedbackWidget />
-
+            <PageLoader pageLoading={pageLoading} />
+            <DialogAlert
+              alertInput={alertDialogInput}
+              setOpen={input => {
+                setAlertDialogInput({ show: input });
+              }}
+            />
             {/* general */}
             <Accordion
               id="general"
