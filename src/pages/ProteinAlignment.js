@@ -22,6 +22,10 @@ import routeConstants from "../data/json/routeConstants";
 import stringConstants from "../data/json/stringConstants";
 import Alignment from "../components/Alignment";
 import Button from "react-bootstrap/Button";
+import { logActivity } from "../data/logging";
+import PageLoader from "../components/load/PageLoader";
+import DialogAlert from "../components/alert/DialogAlert";
+import { axiosError } from "../data/axiosError";
 
 // const proteinStrings = stringConstants.protein.common;
 
@@ -36,19 +40,29 @@ const ProteinAlignment = () => {
   const [data, setData] = useState({});
 
   const isIsoform = alignment === "isoformset-uniprotkb";
-
+  const [pageLoading, setPageLoading] = useState(true);
+  const [alertDialogInput, setAlertDialogInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
   useEffect(() => {
+    setPageLoading(true);
+    logActivity("user", id);
     const getData = getIsoAlignment(id, alignment);
     getData.then(({ data }) => {
       if (data.code) {
-        console.log(data.code);
+        let message = "Alignment api call";
+        logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
       } else {
         setData(data);
+        setPageLoading(false);
       }
     });
 
     getData.catch(({ response }) => {
-      alert(JSON.stringify(response));
+      let message = "alignment api call";
+      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
     // eslint-disable-next-line
   }, []);
@@ -118,6 +132,13 @@ const ProteinAlignment = () => {
               {getMeta("proteinAlignment")}
             </Helmet>
             <FeedbackWidget />
+            <PageLoader pageLoading={pageLoading} />
+            <DialogAlert
+              alertInput={alertDialogInput}
+              setOpen={input => {
+                setAlertDialogInput({ show: input });
+              }}
+            />
 
             <Accordion
               id="alignment"
