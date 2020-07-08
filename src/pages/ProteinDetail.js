@@ -43,6 +43,10 @@ import Button from "react-bootstrap/Button";
 import AlignmentDropdown from "../components/AlignmentDropdown";
 import ProtvistaNav from "../components/navigation/ProtvistaNav";
 import { FaSearchPlus } from "react-icons/fa";
+import { logActivity } from "../data/logging";
+import PageLoader from "../components/load/PageLoader";
+import DialogAlert from "../components/alert/DialogAlert";
+import { axiosError } from "../data/axiosError";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -120,6 +124,7 @@ const getItemsPathway = (data) => {
 				});
 			}
 		}
+
 	}
 	return itemspathway;
 };
@@ -171,17 +176,27 @@ const ProteinDetail = (props) => {
 	const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
 		[]
 	);
+	const [pageLoading, setPageLoading] = useState(true);
+    const [alertDialogInput, setAlertDialogInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
 
 	useEffect(() => {
+		setPageLoading(true);
+		logActivity("user", id);
 		const getProteinDetailData = getProteinDetail(id);
 
 		getProteinDetailData.then(({ data }) => {
 			if (data.code) {
-				console.log(data.code);
-			} else {
+				let message = "Detail api call";
+				logActivity("user", id, "No results. " + message);
+				setPageLoading(false);
+			  } else {
 				setItemsCrossRef(getItemsCrossRef(data));
 				setItemsPathway(getItemsPathway(data));
 				setDetailData(data);
+				setPageLoading(false);
 			}
 
 			const anchorElement = props.history.location.hash;
@@ -191,12 +206,14 @@ const ProteinDetail = (props) => {
 		});
 
 		getProteinDetailData.catch(({ response }) => {
-			alert(JSON.stringify(response));
-		});
-		// eslint-disable-next-line
-	}, []);
+			let message = "list api call";
+			axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+		  });
+	  }, []);
+
 
 	useEffect(() => {
+	
 		if (detailData.glycosylation) {
 			const withImage = detailData.glycosylation.filter(
 				(item) => item.glytoucan_ac
@@ -662,7 +679,13 @@ const ProteinDetail = (props) => {
 							{getMeta("proteinDetail")}
 						</Helmet>
 						<FeedbackWidget />
-
+<PageLoader pageLoading={pageLoading} />
+        <DialogAlert
+          alertInput={alertDialogInput}
+          setOpen={input => {
+            setAlertDialogInput({ show: input });
+          }}
+        />
 						{/* general */}
 						<Accordion
 							id="general"

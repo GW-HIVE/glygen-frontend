@@ -32,6 +32,10 @@ import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 // import LineTooltip from "../components/tooltip/LineTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
+import { logActivity } from "../data/logging";
+import PageLoader from "../components/load/PageLoader";
+import DialogAlert from "../components/alert/DialogAlert";
+import { axiosError } from "../data/axiosError";
 
 import routeConstants from "../data/json/routeConstants";
 
@@ -68,20 +72,34 @@ const MotifDetail = props => {
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
-
+  const [pageLoading, setPageLoading] = useState(true);
+  const [alertDialogInput, setAlertDialogInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
   useEffect(() => {
+    setPageLoading(true);
+    logActivity("user", id);
     const getMotifListdata = getMotifList(id);
     getMotifList(id).then(({ data }) => {
-      debugger;
-      setData(data.results);
-
-      setPagination(data.pagination);
-      const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-      setPage(currentPage);
-      //   setSizePerPage()
-      setTotalSize(data.pagination.total_length);
+      if (data.code) {
+        let message = "Motif Detail api call";
+        logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
+      } else {
+        setData(data.results);
+        setPagination(data.pagination);
+        const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+        setPage(currentPage);
+        //   setSizePerPage()
+        setTotalSize(data.pagination.total_length);
+        setPageLoading(false);
+      }
     });
-    // eslint-disable-next-line
+    getMotifListdata.catch(({ response }) => {
+      let message = "list api call";
+      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+    });
   }, []);
 
   const handleTableChange = (
@@ -207,8 +225,13 @@ const MotifDetail = props => {
               {getMeta("glycanDetail")}
             </Helmet> */}
             <FeedbackWidget />
-            {/* <ToggleCardlTemplate /> */}
-            {/* general */}
+            <PageLoader pageLoading={pageLoading} />
+            <DialogAlert
+              alertInput={alertDialogInput}
+              setOpen={input => {
+                setAlertDialogInput({ show: input });
+              }}
+            />
             <Accordion
               id="general"
               defaultActiveKey="0"
@@ -267,31 +290,33 @@ const MotifDetail = props => {
                           </div>
                         </>
                       )}
-                      {classification && classification.length > 0 && classification[0].type.name !== "Other" && (
-                        <div>
-                          <strong>Glycan Type / Subtype : </strong>
+                      {classification &&
+                        classification.length > 0 &&
+                        classification[0].type.name !== "Other" && (
+                          <div>
+                            <strong>Glycan Type / Subtype : </strong>
 
-                          {classification.map(Formatclassification => (
-                            <>
-                              <Link
-                                href={Formatclassification.type.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {Formatclassification.type.name}
-                              </Link>
-                              &nbsp; <b>/</b> &nbsp;
-                              <Link
-                                href={Formatclassification.subtype.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {Formatclassification.subtype.name}
-                              </Link>
-                            </>
-                          ))}
-                        </div>
-                      )}
+                            {classification.map(Formatclassification => (
+                              <>
+                                <Link
+                                  href={Formatclassification.type.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {Formatclassification.type.name}
+                                </Link>
+                                &nbsp; <b>/</b> &nbsp;
+                                <Link
+                                  href={Formatclassification.subtype.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {Formatclassification.subtype.name}
+                                </Link>
+                              </>
+                            ))}
+                          </div>
+                        )}
                     </p>
                   </Card.Body>
                 </Accordion.Collapse>

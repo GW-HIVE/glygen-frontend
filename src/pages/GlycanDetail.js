@@ -33,6 +33,10 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
 import ReactCopyClipboard from "../components/ReactCopyClipboard";
 import routeConstants from "../data/json/routeConstants";
+import { logActivity } from "../data/logging";
+import PageLoader from "../components/load/PageLoader";
+import DialogAlert from "../components/alert/DialogAlert";
+import { axiosError } from "../data/axiosError";
 
 const items = [
 	{ label: "General", id: "general" },
@@ -121,17 +125,26 @@ const GlycanDetail = (props) => {
 
 	const [detailData, setDetailData] = useState({});
 	const [itemsCrossRef, setItemsCrossRef] = useState([]);
-
+	const [pageLoading, setPageLoading] = useState(true);
+	const [alertDialogInput, setAlertDialogInput] = useReducer(
+	  (state, newState) => ({ ...state, ...newState }),
+	  { show: false, id: "" }
+	);
 	useEffect(() => {
+		setPageLoading(true);
+		logActivity("user", id);
 		const getGlycanDetailData = getGlycanDetail(id);
 
 		getGlycanDetailData.then(({ data }) => {
 			if (data.code) {
-				console.log(data.code);
-			} else {
+				let message = "Glycan Detail api call";
+				logActivity("user", id, "No results. " + message);
+				setPageLoading(false);
+			  } else {
 				setItemsCrossRef(getItemsCrossRef(data));
 
 				setDetailData(data);
+				setPageLoading(false);
 			}
 
 			setTimeout(() => {
@@ -143,10 +156,10 @@ const GlycanDetail = (props) => {
 				}
 			}, 500);
 		});
-
 		getGlycanDetailData.catch(({ response }) => {
-			alert(JSON.stringify(response));
-		});
+			let message = "Glycan Detail api call";
+      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+    });
 		// eslint-disable-next-line
 	}, []);
 
@@ -423,7 +436,13 @@ const GlycanDetail = (props) => {
 							{getMeta("glycanDetail")}
 						</Helmet>
 						<FeedbackWidget />
-						{/* <ToggleCardlTemplate /> */}
+						<PageLoader pageLoading={pageLoading} />
+            <DialogAlert
+              alertInput={alertDialogInput}
+              setOpen={input => {
+                setAlertDialogInput({ show: input });
+              }}
+            />
 						{/* general */}
 						<Accordion
 							id="general"
