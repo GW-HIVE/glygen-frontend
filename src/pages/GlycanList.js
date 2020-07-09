@@ -17,6 +17,8 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import { GLYGEN_BASENAME } from "../envVariables";
+
 const GlycanList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
@@ -121,18 +123,14 @@ const GlycanList = props => {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
   }
   const handleModifySearch = () => {
-    if (searchId === "gs")
+    if (searchId === "gs") {
       props.history.push(routeConstants.globalSearchResult + query.term);
-    else if (quickSearch[searchId] !== undefined)
-      props.history.push(
-        routeConstants.quickSearch +
-          id +
-          "/" +
-          quickSearch[searchId].id +
-          "#" +
-          quickSearch[searchId].id
-      );
-    else props.history.push(routeConstants.glycanSearch + id);
+    } else if (quickSearch[searchId] !== undefined) {
+      const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
+      window.location = basename + routeConstants.quickSearch + id + "/" + quickSearch[searchId].id +  "#" + quickSearch[searchId].id;
+    } else {
+      props.history.push(routeConstants.glycanSearch + id);
+    }
   };
 
   return (

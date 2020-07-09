@@ -449,8 +449,10 @@ const GlycanSearch = (props) => {
 		getGlycanSimpleSearch(formjsonSimple)
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.glycanList + response.data['list_id']);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.glycanList + response.data['list_id']);
+				});;
 				setPageLoading(false);
 			} else {
 				logActivity("user", "", "No results. " + message);
@@ -488,8 +490,10 @@ const GlycanSearch = (props) => {
 		getGlycanSearch(formObject)
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
-					logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-					props.history.push(routeConstants.glycanList + response.data['list_id']);
+					logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+					.finally(() => {	
+						props.history.push(routeConstants.glycanList + response.data['list_id']);
+					});;
 					setPageLoading(false);
 				} else {
 					logActivity("user", "", "No results. " + message);
@@ -540,8 +544,10 @@ const GlycanSearch = (props) => {
 		getGlycanSearch(formObject)
 			.then((response) => {
 				if (response.data['list_id'] !== '') {
-					logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-					props.history.push(routeConstants.glycanList + response.data['list_id']);
+					logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+					.finally(() => {	
+						props.history.push(routeConstants.glycanList + response.data['list_id']);
+					});;
 					setPageLoading(false);
 				} else {
 					logActivity("user", "", "No results. " + message);

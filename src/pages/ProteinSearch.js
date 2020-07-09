@@ -253,10 +253,12 @@ const ProteinSearch = (props) => {
 						"user",
 						(id || "") + ">" + response.data["list_id"],
 						message
-					);
-					props.history.push(
-						routeConstants.proteinList + response.data["list_id"]
-					);
+					)
+					.finally(() => {	
+						props.history.push(
+							routeConstants.proteinList + response.data["list_id"]
+						);
+					});;
 					setPageLoading(false);
 				} else {
 					logActivity("user", "", "No results. " + message);
@@ -437,10 +439,12 @@ const ProteinSearch = (props) => {
 						"user",
 						(id || "") + ">" + response.data["list_id"],
 						message
-					);
-					props.history.push(
-						routeConstants.proteinList + response.data["list_id"]
-					);
+					)
+					.finally(() => {	
+						props.history.push(
+							routeConstants.proteinList + response.data["list_id"]
+						);
+					});;
 					setPageLoading(false);
 				} else {
 					logActivity("user", "", "No results. " + message);

@@ -86,8 +86,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_1.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_1.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -107,8 +109,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_2.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_2.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -128,8 +132,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.locusList + response.data['list_id'] + "/" + quickSearch.question_3.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.locusList + response.data['list_id'] + "/" + quickSearch.question_3.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -149,8 +155,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.orthologuesList + response.data['list_id'] + "/" + quickSearch.question_4.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.orthologuesList + response.data['list_id'] + "/" + quickSearch.question_4.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -163,11 +171,12 @@ const QuickSearch = (props) => {
 	};
 
 	const searchQuestion5 = () => {		
-		let message = "Quick Search Question_5 = /"+ inputValue.question_5 + "#function";
-		logActivity("user", (id || "") + ">" + inputValue.question_5, message);
-		//props.history.push(routeConstants.proteinDetail + inputValue.question_5 + "#function");
-		const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
-		window.location = basename + routeConstants.proteinDetail + inputValue.question_5 + "#function";
+		let message = `Quick Search Question_5 =/${inputValue.question_5} function`;
+		logActivity("user", (id || "") + ">" + inputValue.question_5, message)
+		.finally(() => {
+			const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
+			window.location = basename + routeConstants.proteinDetail + inputValue.question_5 + "#function";
+		});;
 	};
 
 	const searchQuestion6 = () => {		
@@ -178,8 +187,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.glycanList + response.data['list_id'] + "/" + quickSearch.question_6.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.glycanList + response.data['list_id'] + "/" + quickSearch.question_6.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -192,11 +203,12 @@ const QuickSearch = (props) => {
 	};
 
 	const searchQuestion7 = () => {		
-		let message = "Quick Search Question_7 = /"+ inputValue.question_7 + "#sequence";
-		logActivity("user", (id || "") + ">" + inputValue.question_7, message);
-		//props.history.push(routeConstants.proteinDetail + inputValue.question_7 + "#sequence");
-		const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
-		window.location = basename + routeConstants.proteinDetail + inputValue.question_7 + "#sequence";
+		let message = `Quick Search Question_7 =/${inputValue.question_7} sequence`;
+		logActivity("user", (id || "") + ">" + inputValue.question_7, message)
+		.finally(() => {
+			const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
+			window.location = basename + routeConstants.proteinDetail + inputValue.question_7 + "#sequence";
+		});;
 	};
 
 	const searchQuestion8 = () => {		
@@ -207,8 +219,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_8.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_8.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -228,8 +242,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_9.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_9.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -249,8 +265,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_10.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_10.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);
@@ -271,8 +289,10 @@ const QuickSearch = (props) => {
 		.then((response) => {
 			if (response.data['list_id'] !== '') {
 				setPageLoading(false);
-				logActivity("user", (id || "") + ">" + response.data['list_id'], message);
-				props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_11.id);
+				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+				.finally(() => {	
+					props.history.push(routeConstants.proteinList + response.data['list_id'] + "/" + quickSearch.question_11.id);
+				});;
 			} else {
 				setPageLoading(false);
 				logActivity("user", "", "No results. " + message);

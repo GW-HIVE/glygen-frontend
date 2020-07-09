@@ -1,4 +1,4 @@
-import { getJson} from "./api";
+import { getJson } from "./api";
 import routeConstants from './json/routeConstants';
 
 
@@ -30,22 +30,8 @@ export const logActivity = (type, id, message) => {
         "page": curPage,
         "message": message
     };
-    console.log(data);
     const url = "/log/logging?query=" + JSON.stringify(data);
+    console.log(url);
 
-    getJson(url)
-    .then((response) => {
-        if (!response.data) {
-            console.log(response);
-        }
-    })
-    .catch(function (error) {
-        if (!error.response) {
-            console.log(error);
-        } else if (error.response && !error.response.data) {
-            console.log(error.response);
-        } else if (error.response.data && error.response.data["error_list"]) {
-            console.log(error.response.data["error_list"]);
-        }
-    });
+   return getJson(url);
 }
