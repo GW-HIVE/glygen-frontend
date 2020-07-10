@@ -68,7 +68,7 @@ const GlobalSearchResult = (props) => {
 
 						<Typography className={"gs-exact-match"} variant="h6"> 	
 							{globalSearchData.exact_match && globalSearchData.exact_match.map((searchMatch) => 
-									<li key={searchMatch.id} align="center">
+									<li key={searchMatch.id}>
 										<span>A {searchMatch.type} exactly matching </span>
 										<LineTooltip text="Click to see details page."> 
 											<Link
