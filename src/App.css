@@ -44,6 +44,10 @@
 	width: 98%;
 	/* width: 100%; */
 }
+.gg-baseline-page {
+	width: 100%;
+	margin: 0 auto !important;
+}
 /* ========================================
         Main Attributes & Typography
 ==========================================*/

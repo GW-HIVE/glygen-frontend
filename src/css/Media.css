@@ -15,6 +15,10 @@
 	text-transform: uppercase;
 	font-weight: 700;
 	margin: 0 20px !important;
+	display: flex;
+	align-items: center;
+	height: 50px;
+	max-width: 400px;
 }
 
 /* Tab active state */
@@ -60,7 +64,7 @@
 	font-size: 48px !important;
 	color: #bbb !important;
 	margin-bottom: 20px;
-	font-weight: 100 !important;
+	font-weight: 200 !important;
 }
 .materials h3 {
 	font-size: 32px;

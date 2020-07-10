@@ -26,8 +26,8 @@ function TabPanel(props) {
 		<div
 			role="tabpanel"
 			hidden={value !== index}
-			id={`full-width-tabpanel-${index}`}
-			aria-labelledby={`full-width-tab-${index}`}
+			id={`scrollable-auto-tabpanel-${index}`}
+			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}>
 			{value === index && (
 				<Box p={3}>
@@ -46,14 +46,15 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
 	return {
-		id: `full-width-tab-${index}`,
-		"aria-controls": `full-width-tabpanel-${index}`,
+		id: `scrollable-auto-tab-${index}`,
+		"aria-controls": `scrollable-auto-tabpanel-${index}`,
 	};
 }
 
 const useStyles = makeStyles({
 	root: {
 		flexGrow: 1,
+		width: "100%",
 	},
 });
 
@@ -65,10 +66,6 @@ const OurTalks = (props) => {
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
-
-	// const handleChangeIndex = (index) => {
-	// 	setValue(index);
-	// };
 
 	const vertHeadTalks = {
 		h5VerticalText: "What we do",
@@ -85,7 +82,7 @@ const OurTalks = (props) => {
 					<Row className="gg-align-middle gg-align-center">
 						<div className={classes.root}>
 							<Row>
-								<Col xs={12}>
+								<Col xs={12} className="gg-align-middle gg-align-center">
 									<Tabs
 										className="materials-tabs"
 										value={value}
@@ -93,7 +90,9 @@ const OurTalks = (props) => {
 										indicatorColor="primary"
 										textColor="primary"
 										centered
-										aria-label="full width tabs example">
+										variant="scrollable"
+										scrollButtons="auto"
+										aria-label="scrollable auto tabs example">
 										<Tab label="Beilstein Symposium" {...a11yProps(0)} />
 										<Tab label="SFG" {...a11yProps(1)} />
 										<Tab label="Warren Workshop" {...a11yProps(2)} />

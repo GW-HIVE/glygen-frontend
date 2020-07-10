@@ -29,8 +29,8 @@ function TabPanel(props) {
 		<div
 			role="tabpanel"
 			hidden={value !== index}
-			id={`full-width-tabpanel-${index}`}
-			aria-labelledby={`full-width-tab-${index}`}
+			id={`scrollable-auto-tabpanel-${index}`}
+			aria-labelledby={`scrollable-auto-tab-${index}`}
 			{...other}>
 			{value === index && (
 				<Box p={3}>
@@ -49,14 +49,15 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
 	return {
-		id: `full-width-tab-${index}`,
-		"aria-controls": `full-width-tabpanel-${index}`,
+		id: `scrollable-auto-tab-${index}`,
+		"aria-controls": `scrollable-auto-tabpanel-${index}`,
 	};
 }
 
 const useStyles = makeStyles({
 	root: {
 		flexGrow: 1,
+		width: "100%",
 	},
 });
 
@@ -88,15 +89,17 @@ const ForMembers = (props) => {
 					<Row className="gg-align-middle gg-align-center">
 						<div className={classes.root}>
 							<Row>
-								<Col xs={12}>
+								<Col xs={12} className="gg-align-middle gg-align-center">
 									<Tabs
 										className="materials-tabs"
 										value={value}
 										onChange={handleChange}
 										indicatorColor="primary"
 										textColor="primary"
+										variant="scrollable"
+										scrollButtons="auto"
 										centered
-										aria-label="full width tabs example">
+										aria-label="scrollable auto tabs example">
 										<Tab label="General" {...a11yProps(0)} />
 										<Tab label="One Slide" {...a11yProps(1)} />
 										<Tab label="Template" {...a11yProps(2)} />
