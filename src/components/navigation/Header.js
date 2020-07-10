@@ -17,7 +17,7 @@ import {
 	GLYGEN_BETA,
 	GLYGEN_DATA,
 	GLYGEN_SPARQL,
-	GLYGEN_ENV
+	GLYGEN_ENV,
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
 
@@ -50,20 +50,22 @@ export default function Header() {
 								MY GLYGEN
 							</Navbar.Text>
 						</div>
-						{GLYGEN_ENV !== "beta" && <div className="mr-4">
-							<Navbar.Text>
-								<a
-									href={GLYGEN_BETA}
-									target="_blank"
-									rel="noopener noreferrer"
-									className={classes.navbarText}>
-									<span>
-										<DeveloperBoardIcon />
-									</span>{" "}
-									BETA TESTING
-								</a>
-							</Navbar.Text>{" "}
-						</div>}
+						{GLYGEN_ENV !== "beta" && (
+							<div className="mr-4">
+								<Navbar.Text>
+									<a
+										href={GLYGEN_BETA}
+										target="_blank"
+										rel="noopener noreferrer"
+										className={classes.navbarText}>
+										<span>
+											<DeveloperBoardIcon />
+										</span>{" "}
+										BETA TESTING
+									</a>
+								</Navbar.Text>{" "}
+							</div>
+						)}
 						<div>
 							<Navbar.Text>
 								<a
@@ -96,7 +98,7 @@ export default function Header() {
 			<Navbar className="gg-blue" expand="xl">
 				<Col xs={"auto"}>
 					<Navbar.Brand as={Link} to={routeConstants.home}>
-						<img src={logo} alt="Glygen" />
+						<img src={logo} alt="Glygen" className="logo-nav" />
 					</Navbar.Brand>
 				</Col>
 				<Navbar.Toggle
