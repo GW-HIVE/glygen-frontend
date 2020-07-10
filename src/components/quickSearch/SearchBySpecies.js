@@ -156,7 +156,7 @@ const SearchBySpecies = (props) => {
 											className={'qs-search-lbl'}
 											gutterBottom
 										>
-											{searchBySpecies.common.label}
+											{searchBySpecies.question_10.labelType}
 										</Typography>
 										<SelectControl
 											inputValue={props.inputValue.question_10.glycosylation_evidence}

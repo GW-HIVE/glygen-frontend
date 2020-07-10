@@ -85,22 +85,14 @@
 			}
 		},
 		"question_8": {
-			"text": "What are the glycosyltransferases in species X?",
-			"label": "Species:",
-			"length": 100,
-			"errorText": "Entry is too long - max length is 100."
+			"text": "What are the glycosyltransferases in species X?"
 		},
 		"question_9": {
-			"text": "What are the glycosylhydrolases in species X?",
-			"label": "Species:",
-			"length": 100,
-			"errorText": "Entry is too long - max length is 100."
+			"text": "What are the glycosylhydrolases in species X?"
 		},
 		"question_10": {
 			"text": "What are the reported or predicted glycosylated proteins in species X?",
-			"label": "Species:",
-			"length": 100,
-			"errorText": "Entry is too long - max length is 100."
+			"labelType": "Type"
 		}
 	},
 	"searchByDisease": {
