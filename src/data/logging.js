@@ -1,5 +1,6 @@
 import { getJson } from "./api";
 import routeConstants from './json/routeConstants';
+import { GLYGEN_BASENAME } from "../envVariables";
 
 
 /**
@@ -12,7 +13,7 @@ import routeConstants from './json/routeConstants';
 export const logActivity = (type, id, message) => {
     var user = localStorage.getItem("ID");
     var pagePath = window.location.pathname;
-    var curPage = pagePath.split("/")[1] || routeConstants.home.replace(/\//g, "");;
+    var curPage = GLYGEN_BASENAME === "/" ? pagePath.split("/")[1] || routeConstants.home.replace(/\//g, "") : pagePath.split("/")[2] || routeConstants.home.replace(/\//g, "");
 
     type = type || "user";
     id = id || "";
