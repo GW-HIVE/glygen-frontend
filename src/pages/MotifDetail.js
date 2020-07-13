@@ -97,7 +97,7 @@ const MotifDetail = props => {
       }
     });
     getMotifListdata.catch(({ response }) => {
-      let message = "list api call";
+      let message = "motif  api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
   }, []);
