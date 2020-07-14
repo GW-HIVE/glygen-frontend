@@ -131,59 +131,59 @@ p {
     Alert 
 ---------------------------- */
 .gg-alert {
-    padding-top: 8px;
-    padding-bottom: 2px;
-    background-color: #5f5f5f;
-    color: #eee;
-    font-size: 17px;
-    text-align: center;
-    z-index: 999;
-    display: none;
+	padding-top: 8px;
+	padding-bottom: 2px;
+	background-color: #5f5f5f;
+	color: #eee;
+	font-size: 17px;
+	text-align: center;
+	z-index: 999;
+	display: none;
 }
 
 .alert {
-    padding: 8px !important;
-    margin-bottom: 0px !important;
-    border: 1px solid transparent;
-    border-radius: 0px !important;
+	padding: 8px !important;
+	margin-bottom: 0px !important;
+	border: 1px solid transparent;
+	border-radius: 0px !important;
 }
 
 .btn-default {
-    background-color: #F0F0F0 !important;
-    border-color: #ccc !important;
-    color: #5F5F5F !important;
-    font-weight: 600 !important;
+	background-color: #f0f0f0 !important;
+	border-color: #ccc !important;
+	color: #5f5f5f !important;
+	font-weight: 600 !important;
 }
 
 .btn-default:hover {
-    background-color: #5F5F5F !important;
-    border-color: #ccc !important;
-    color: #F0F0F0 !important;
-    font-weight: 600 !important;
+	background-color: #5f5f5f !important;
+	border-color: #ccc !important;
+	color: #f0f0f0 !important;
+	font-weight: 600 !important;
 }
 
 .gg-btn-margin {
-    margin-right: 20px;
-    margin-left: 40px;
-    margin-top: 10px;
+	margin-right: 20px;
+	margin-left: 40px;
+	margin-top: 10px;
 }
 
 /* --------------------------
     The Close alert Button 
 -----------------------------*/
 #close_banner {
-    color: white;
-    float: right;
-    font-size: 20px;
-    font-weight: bold;
-    padding-right: 5px;
+	color: white;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	padding-right: 5px;
 }
 
 #close_banner:hover,
 #close_banner:focus {
-    color: #979797;
-    text-decoration: none;
-    cursor: pointer;
+	color: #979797;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /* ========================================
@@ -469,20 +469,15 @@ hr {
 	border: 1px solid #fff;
 	border-radius: 5px;
 	padding: 10px;
-	margin-right: 20px;
-	-webkit-transition: all 0.5s !important;
-	transition: ease-in-out 0.5s !important;
+	margin: 0 10px;
+	display: inline-block !important;
+	white-space: nowrap;
+	-webkit-transition: all 0.3s !important;
+	transition: ease-in-out 0.3s !important;
 }
 .gg-btn-outline-white:hover {
 	color: #fff !important;
-	padding: 10px;
-	margin-right: 20px;
-	font-weight: 700 !important;
-	border: 1px solid #fff;
-	border-radius: 5px;
-	/* background-color: transparent !important; */
 	background-color: var(--gg-blue) !important;
-	/* background-color: var(--gg-green) !important; */
 }
 
 .gg-btn-outline:disabled,

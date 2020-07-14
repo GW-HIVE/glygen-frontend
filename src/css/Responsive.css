@@ -107,6 +107,9 @@
 	.framework h4 {
 		font-size: 18px;
 	}
+	.gg-btn-outline-white {
+		margin: 10px 10px 0;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
@@ -131,6 +134,11 @@
 	.navbar-brand {
 		margin-right: 0 !important;
 		padding-right: 0 !important;
+	}
+	.gg-btn-outline-white {
+		margin: 5px auto;
+		overflow: auto;
+		width: 100% !important;
 	}
 }
 @media (min-width: 600px) {

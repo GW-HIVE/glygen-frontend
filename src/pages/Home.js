@@ -11,14 +11,10 @@ import VersionCard from "../components/cards/VersionCard";
 import StatDBCard from "../components/cards/StatDBCard";
 import TwitterCard from "../components/cards/TwitterCard";
 import { Row } from "react-bootstrap";
-import mainImg from "../images/home/main.png";
-// import card3 from "../images/home/featuredImg-10.jpg";
+import mainImg from "../images/home/main-featured-img.png";
 import feedback from "../images/home/feedback.svg";
 import resources from "../images/home/resources.svg";
-// import glycanImg from '../images/home/glycan-img.svg';
 import proteinImg from "../images/home/glycoprotein-img.svg";
-// import enzymeImg from "../images/home/enzyme.png";
-// import featuredImg from '../images/home/featuredImg-7.jpg';
 import glycanImg from "../images/home/glycan-img.svg";
 import quickSearchImg from "../images/home/quick-search-img.svg";
 import apiImg from "../images/home/api-img.svg";
@@ -32,19 +28,12 @@ import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
 // import BannerHotTopic from "../components/alert/BannerHotTopic";
-import Collaborators from "../components/about/UnivLogos";
+
 const mainFeaturedCard = {
 	title: "Computational and Informatics Resources for Glycoscience",
 	description:
 		"GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This web portal allows exploring this data and performing unique searches that cannot be executed in any of the integrated databases alone.",
 	image: mainImg,
-	linkText: "Learn More…",
-	// linkText: "Our Mission",
-	toAbout: routeConstants.about,
-	// toCite: routeConstants.howToCite,
-	// linkCiteText: "How to cite",
-	// toTryMe: routeConstants.tryMe,
-	// linkTryMeText: "Quick Start",
 };
 const featuredCards = [
 	{
@@ -63,14 +52,6 @@ const featuredCards = [
 		imageText: "Protein",
 		to: routeConstants.proteinSearch,
 	},
-	// {
-	// 	title: "Enzyme",
-	// 	description:
-	// 		"Search for enzymes based on protein accession, gene name, and glycan.",
-	// 	image: enzymeImg,
-	// 	imageText: "Enzyme Function",
-	// 	href: routeConstants.enzymeSearch,
-	// },
 	{
 		title: "Quick Search",
 		description:
@@ -79,14 +60,6 @@ const featuredCards = [
 		imageText: "Quick Search",
 		to: routeConstants.quickSearch,
 	},
-	// {
-	// 	title: "Composition Search",
-	// 	description:
-	// 		"Composition search based on their residue. Add some text here.",
-	// 	image: glycanImg,
-	// 	imageText: "Composition Search",
-	// 	href: routeConstants.glycanCompoSearch,
-	// },
 	{
 		title: "Data",
 		description:
