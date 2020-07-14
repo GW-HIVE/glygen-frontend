@@ -7,7 +7,7 @@ import VerticalHeading from "../components/headings/VerticalHeading";
 import { Row, Col } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useState } from "react";
-import { logActivity } from "../data/logging";
+import { logActivity, logID, doNotLog, isLoggingUserActivity } from "../data/logging";
 
 const PrivacySettings = (props) => {
 	const vertHeadDisclaimer = {
@@ -17,7 +17,7 @@ const PrivacySettings = (props) => {
 		h2textBottomStrongAfter: "Privacy Settings",
 	};
 
-	const [enabled, setEnabled] = useState(false);
+	const [enabled, setEnabled] = useState(isLoggingUserActivity());
 	useEffect(() => {
 		logActivity();
 	}, []);
@@ -87,8 +87,9 @@ const PrivacySettings = (props) => {
 										onstyle="outline-primary"
 										offstyle="outline-secondary"
 										checked={enabled}
-										onChange={(checked: boolean) => {
+										onChange={(checked) => {
 											setEnabled(checked);
+											checked ? logID() : doNotLog();
 										}}
 									/>
 								</Col>

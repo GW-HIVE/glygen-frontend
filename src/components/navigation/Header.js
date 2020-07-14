@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from "../../images/glygen_logos/glygen-logoW.svg";
 import { Link, NavLink } from "react-router-dom";
@@ -11,13 +11,15 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import GlobalSearchControl from "../search/GlobalSearchControl";
+import Button from 'react-bootstrap/Button';
+import { logID, doNotLog, tracking } from "../../data/logging";
 
 import {
 	GLYGEN_API,
 	GLYGEN_BETA,
 	GLYGEN_DATA,
 	GLYGEN_SPARQL,
-	GLYGEN_ENV,
+	GLYGEN_ENV
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
 
@@ -33,9 +35,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
 	const classes = useStyles();
-	return (
+
+	useEffect(() => {
+		tracking();
+	});
+
+		return (
 		<React.Fragment>
 			<CssBaseline />
+			<div class="alert gg-alert" id="tracking_banner">
+				<span>Do you want <strong>GlyGen</strong> to remember your searches for your future use? 
+				This can be changed at any time in the <strong>My GlyGen</strong> section.</span>
+				<br/>
+				<Button type="button" className="btn btn-default gg-btn-margin" onClick={logID}>Allow</Button>
+				<Button type="button" className="btn btn-default gg-btn-margin" onClick={doNotLog}>Don't Allow</Button>
+			</div>
+
 			<Navbar className="gg-top-header" expand="xl">
 				<Container maxWidth="xl">
 					<Row className="justify-content-end">
