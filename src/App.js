@@ -6,11 +6,12 @@ import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import ReactGA from "react-ga";
+import { GLYGEN_ENV, GLYGEN_BETA } from "./envVariables.js";
 
 function initializeReactGA() {
 	if (
-		document.location.hostname.search("glygen.org") === 0 ||
-		document.location.hostname.search("beta.glygen.org") === 0
+		document.location.hostname.search(GLYGEN_ENV) === 0 ||
+		document.location.hostname.search(GLYGEN_BETA) === 0
 	) {
 		ReactGA.initialize("UA-123338976-1");
 		ReactGA.pageview(window.location.pathname + window.location.search);
