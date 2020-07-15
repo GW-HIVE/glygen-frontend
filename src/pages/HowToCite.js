@@ -10,6 +10,7 @@ import howToCiteData from "../data/json/howToCiteData";
 import { Row, Col } from "react-bootstrap";
 import Sidebar from "../components/navigation/Sidebar";
 import { logActivity } from "../data/logging";
+// https://zbib.org/   to generate .RIS file
 
 const HowToCite = (props) => {
 	const vertHeadHowToCite = {
