@@ -265,7 +265,7 @@ const ProteinDetail = props => {
     {
       dataField: "evidence",
       text: "Sources",
-      sort: true,
+
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -361,7 +361,7 @@ const ProteinDetail = props => {
     {
       dataField: "evidence",
       text: "Sources",
-      sort: true,
+
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -465,7 +465,6 @@ const ProteinDetail = props => {
     {
       dataField: "evidence",
       text: "Sources",
-      sort: true,
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -520,7 +519,7 @@ const ProteinDetail = props => {
     {
       dataField: "evidence",
       text: "Sources",
-      sort: true,
+
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -1213,32 +1212,15 @@ const ProteinDetail = props => {
                   <h3 className="gg-green d-inline">Sequence</h3>
                   <div className="float-right">
                     <span className="pr-3">
-                      <a
-                        // eslint-disable-next-line
-                        href="javascript:void(0)"
-                        onClick={() => {
-                          openProtvistaPage(
-                            uniprot && uniprot.uniprot_canonical_ac
-                          );
-                        }}
-                      >
+                      <NavLink to={`${routeConstants.protVista}${id}`}>
                         <Button
                           type="button"
-                          style={{
-                            marginLeft: "5px"
-                          }}
+                          style={{ marginLeft: "5px" }}
                           className="gg-btn-blue"
                         >
-                          <span
-                            style={{
-                              paddingRight: "10px"
-                            }}
-                          >
-                            ProtVista
-                          </span>{" "}
-                          <FaSearchPlus />
+                          <FaSearchPlus /> Protvista
                         </Button>
-                      </a>
+                      </NavLink>
                     </span>
 
                     <Accordion.Toggle
