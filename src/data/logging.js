@@ -9,32 +9,7 @@ import { GLYGEN_BASENAME } from "../envVariables";
 export const logID = () => {
     const url = "/auth/userid";
     console.log(url);
-
-    postTo(url).then((response) => {
-        if (response.data.error_code) {
-                console.log(response.data.error_code);
-            } else {
-                user_id = response.data.user;
-                localStorage.setItem("ID", user_id);     //Store the ID from the webservice
-                console.log(user_id);
-                displayBannerMsg(txt);
-                logActivity("user", null, "Enabled Logging");
-            }
-    })
-    .catch(function (error) {
-        console.log("Log user ID generation failure: " + error);
-    });
-}
-
-/**
- * This is called when the user chooses not to be logged.
- * Stores the ID as "Anonymous" in the localStorage of the browser.
- */
-export const doNotLog = () => {
-    localStorage.setItem("ID", "Anonymous");
-    var txt = "We will not log your actions. You can always change this setting in <strong>My GlyGen</strong>.";
-    displayBannerMsg(txt);
-    logActivity("user", null, "Disabled Logging");
+    return postTo(url);
 }
 
 /**
