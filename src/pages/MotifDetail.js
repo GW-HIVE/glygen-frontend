@@ -165,290 +165,295 @@ const MotifDetail = (props) => {
 				</Col>
 
 				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
-					<div className="content-box-md">
-						<Row>
-							<Grid item xs={12} sm={12} className="text-center">
-								<div className="horizontal-heading">
-									<h5>Look At</h5>
-									<h2>
-										{" "}
-										<span>
-											Motif Details for
-											<strong>
-												{glytoucan && glytoucan.glytoucan_ac && (
-													<> {glytoucan.glytoucan_ac}</>
-												)}
-											</strong>
-										</span>
-									</h2>
-								</div>
-							</Grid>
-						</Row>
-					</div>
-					<div className="gg-download-btn-width">
-						<DownloadButton
-							types={[
-								{
-									display: "Motif Image (*.png)",
-									type: "png",
-									data: "glycan_image",
-								},
-								{
-									display: " Motif data (*.csv)",
-									type: "json",
-									data: "motif_detail",
-								},
-								{
-									display: "Motif data (*.json)",
-									type: "json",
-									data: "motif_detail",
-								},
-							]}
-							dataId={id}
-							dataType="motif_detail"
-						/>
-					</div>
-
-					<React.Fragment>
-						<Helmet>
-							{getTitle("motifDetail", {
-								glytoucan_ac:
-									glytoucan && glytoucan.glytoucan_ac
-										? glytoucan.glytoucan_ac
-										: "",
-							})}
-
-							{getMeta("motifDetail")}
-						</Helmet>
-						<FeedbackWidget />
-						<PageLoader pageLoading={pageLoading} />
-						<DialogAlert
-							alertInput={alertDialogInput}
-							setOpen={(input) => {
-								setAlertDialogInput({ show: input });
-							}}
-						/>
-						<Accordion
-							id="general"
-							defaultActiveKey="0"
-							className="panel-width"
-							style={{ padding: "20px 0" }}>
-							<Card>
-								<Card.Header className="panelHeadBgr">
-									<span className="gg-green d-inline">
-										<HelpTooltip
-											title={DetailTooltips.motif.general.title}
-											text={DetailTooltips.motif.general.text}
-											urlText={DetailTooltips.motif.general.urlText}
-											url={DetailTooltips.motif.general.url}
-											helpIcon="gg-helpicon-detail"
-										/>
-									</span>
-									<h3 className="gg-green d-inline">General</h3>
-									<div className="float-right">
-										<Accordion.Toggle
-											eventKey="0"
-											onClick={() =>
-												toggleCollapse("general", collapsed.general)
-											}
-											className="gg-green arrow-btn">
-											<span>{collapsed.general ? closeIcon : expandIcon}</span>
-										</Accordion.Toggle>
+					<div className="sidebar-page-mb">
+						<div className="content-box-md">
+							<Row>
+								<Grid item xs={12} sm={12} className="text-center">
+									<div className="horizontal-heading">
+										<h5>Look At</h5>
+										<h2>
+											{" "}
+											<span>
+												Motif Details for
+												<strong>
+													{glytoucan && glytoucan.glytoucan_ac && (
+														<> {glytoucan.glytoucan_ac}</>
+													)}
+												</strong>
+											</span>
+										</h2>
 									</div>
-								</Card.Header>
-								<Accordion.Collapse eventKey="0">
-									<Card.Body>
-										<p>
-											{glytoucan && glytoucan.glytoucan_ac && (
-												<>
-													<p>
-														<img
-															className="img-cartoon"
-															src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
-															alt="Cartoon"
-														/>
-													</p>
-													<div>
-														<strong>GlyToucan Accession: </strong>
-														<Link
-															href={glytoucan.glytoucan_url}
-															target="_blank"
-															rel="noopener noreferrer">
-															{glytoucan.glytoucan_ac}
-														</Link>
-													</div>
-													<div>
-														<strong>Monoisotopic Mass: </strong>
-														{mass} Da
-													</div>
-												</>
-											)}
-											{classification &&
-												classification.length > 0 &&
-												classification[0].type.name !== "Other" && (
-													<div>
-														<strong>Glycan Type / Subtype : </strong>
+								</Grid>
+							</Row>
+						</div>
+						<div className="gg-download-btn-width">
+							<DownloadButton
+								types={[
+									{
+										display: "Motif Image (*.png)",
+										type: "png",
+										data: "glycan_image",
+									},
+									{
+										display: " Motif data (*.csv)",
+										type: "json",
+										data: "motif_detail",
+									},
+									{
+										display: "Motif data (*.json)",
+										type: "json",
+										data: "motif_detail",
+									},
+								]}
+								dataId={id}
+								dataType="motif_detail"
+							/>
+						</div>
+						<React.Fragment>
+							<Helmet>
+								{getTitle("motifDetail", {
+									glytoucan_ac:
+										glytoucan && glytoucan.glytoucan_ac
+											? glytoucan.glytoucan_ac
+											: "",
+								})}
 
-														{classification.map((Formatclassification) => (
-															<>
-																<Link
-																	href={Formatclassification.type.url}
-																	target="_blank"
-																	rel="noopener noreferrer">
-																	{Formatclassification.type.name}
-																</Link>
-																&nbsp; <b>/</b> &nbsp;
-																<Link
-																	href={Formatclassification.subtype.url}
-																	target="_blank"
-																	rel="noopener noreferrer">
-																	{Formatclassification.subtype.name}
-																</Link>
-															</>
-														))}
-													</div>
-												)}
-										</p>
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
-						</Accordion>
-						{/* Glycans Containing This Motif */}
-						<Accordion
-							id="glycans"
-							defaultActiveKey="0"
-							className="panel-width"
-							style={{ padding: "20px 0" }}>
-							<Card>
-								<Card.Header className="panelHeadBgr">
-									<span className="gg-green d-inline">
-										<HelpTooltip
-											title={DetailTooltips.motif.glycans.title}
-											text={DetailTooltips.motif.glycans.text}
-											urlText={DetailTooltips.motif.glycans.urlText}
-											url={DetailTooltips.motif.glycans.url}
-											helpIcon="gg-helpicon-detail"
-										/>
-									</span>
-									<h3 className="gg-green d-inline">
-										Glycans Containing This Motif
-									</h3>
-									<div className="float-right">
-										<Accordion.Toggle
-											eventKey="0"
-											onClick={() =>
-												toggleCollapse("glycans", collapsed.glycans)
-											}
-											className="gg-green arrow-btn">
-											<span>{collapsed.glycans ? closeIcon : expandIcon}</span>
-										</Accordion.Toggle>
-									</div>
-								</Card.Header>
-								<Accordion.Collapse eventKey="0">
-									<Card.Body>
-										{selectedColumns && selectedColumns.length !== 0 && (
-											<PaginatedTable
-												trStyle={rowStyleFormat}
-												data={data}
-												columns={selectedColumns}
-												page={page}
-												sizePerPage={sizePerPage}
-												totalSize={totalSize}
-												onTableChange={handleTableChange}
-												defaultSortField="glytoucan_ac"
-												idField="glytoucan_ac"
+								{getMeta("motifDetail")}
+							</Helmet>
+							<FeedbackWidget />
+							<PageLoader pageLoading={pageLoading} />
+							<DialogAlert
+								alertInput={alertDialogInput}
+								setOpen={(input) => {
+									setAlertDialogInput({ show: input });
+								}}
+							/>
+							<Accordion
+								id="general"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.motif.general.title}
+												text={DetailTooltips.motif.general.text}
+												urlText={DetailTooltips.motif.general.urlText}
+												url={DetailTooltips.motif.general.url}
+												helpIcon="gg-helpicon-detail"
 											/>
-										)}
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
-						</Accordion>
-						{/* publication */}
-						<Accordion
-							id="publication"
-							defaultActiveKey="0"
-							className="panel-width"
-							style={{ padding: "20px 0" }}>
-							<Card>
-								<Card.Header className="panelHeadBgr">
-									<span className="gg-green d-inline">
-										<HelpTooltip
-											title={DetailTooltips.motif.publications.title}
-											text={DetailTooltips.motif.publications.text}
-											urlText={DetailTooltips.motif.publications.urlText}
-											url={DetailTooltips.motif.publications.url}
-											helpIcon="gg-helpicon-detail"
-										/>
-									</span>
-									<h3 className="gg-green d-inline">Publications</h3>
-									<div className="float-right">
-										{/* <span className='gg-align-middle card-icon-space'>
+										</span>
+										<h3 className="gg-green d-inline">General</h3>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("general", collapsed.general)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.general ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											<p>
+												{glytoucan && glytoucan.glytoucan_ac && (
+													<>
+														<p>
+															<img
+																className="img-cartoon"
+																src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
+																alt="Cartoon"
+															/>
+														</p>
+														<div>
+															<strong>GlyToucan Accession: </strong>
+															<Link
+																href={glytoucan.glytoucan_url}
+																target="_blank"
+																rel="noopener noreferrer">
+																{glytoucan.glytoucan_ac}
+															</Link>
+														</div>
+														<div>
+															<strong>Monoisotopic Mass: </strong>
+															{mass} Da
+														</div>
+													</>
+												)}
+												{classification &&
+													classification.length > 0 &&
+													classification[0].type.name !== "Other" && (
+														<div>
+															<strong>Glycan Type / Subtype : </strong>
+
+															{classification.map((Formatclassification) => (
+																<>
+																	<Link
+																		href={Formatclassification.type.url}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{Formatclassification.type.name}
+																	</Link>
+																	&nbsp; <b>/</b> &nbsp;
+																	<Link
+																		href={Formatclassification.subtype.url}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{Formatclassification.subtype.name}
+																	</Link>
+																</>
+															))}
+														</div>
+													)}
+											</p>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/* Glycans Containing This Motif */}
+							<Accordion
+								id="glycans"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.motif.glycans.title}
+												text={DetailTooltips.motif.glycans.text}
+												urlText={DetailTooltips.motif.glycans.urlText}
+												url={DetailTooltips.motif.glycans.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h3 className="gg-green d-inline">
+											Glycans Containing This Motif
+										</h3>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("glycans", collapsed.glycans)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.glycans ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{selectedColumns && selectedColumns.length !== 0 && (
+												<PaginatedTable
+													trStyle={rowStyleFormat}
+													data={data}
+													columns={selectedColumns}
+													page={page}
+													sizePerPage={sizePerPage}
+													totalSize={totalSize}
+													onTableChange={handleTableChange}
+													defaultSortField="glytoucan_ac"
+													idField="glytoucan_ac"
+												/>
+											)}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/* publication */}
+							<Accordion
+								id="publication"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.motif.publications.title}
+												text={DetailTooltips.motif.publications.text}
+												urlText={DetailTooltips.motif.publications.urlText}
+												url={DetailTooltips.motif.publications.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h3 className="gg-green d-inline">Publications</h3>
+										<div className="float-right">
+											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
 									</span> */}
-										<Accordion.Toggle
-											// as={Card.Header}
-											eventKey="0"
-											onClick={() =>
-												toggleCollapse("publication", collapsed.publication)
-											}
-											className="gg-green arrow-btn">
-											<span>
-												{collapsed.publication ? closeIcon : expandIcon}
-											</span>
-										</Accordion.Toggle>
-									</div>
-								</Card.Header>
-								<Accordion.Collapse eventKey="0" out={!collapsed.publication}>
-									<Card.Body className="card-padding-zero">
-										<Table hover fluid>
-											{publication && (
-												<tbody className="table-body">
-													{publication.map((pub, pubIndex) => (
-														<tr className="table-row">
-															<td key={pubIndex}>
-																<p>
-																	<div>
-																		<h5 style={{ marginBottom: "3px" }}>
-																			<strong>{pub.title}</strong>
-																		</h5>
-																	</div>
-																	<div>{pub.authors}</div>
-																	<div>
-																		{pub.journal} <span>&nbsp;</span>({pub.date}
-																		)
-																	</div>
-																	<div>
-																		<FiBookOpen />
-																		<span style={{ paddingLeft: "15px" }}>
-																			PMID:
-																		</span>{" "}
-																		<a
-																			href={pub.url}
-																			target="_blank"
-																			rel="noopener noreferrer">
-																			{pub.pmid}
-																		</a>
-																	</div>
-																	<EvidenceList
-																		evidences={groupEvidences(pub.evidence)}
-																	/>
-																</p>
-															</td>
-														</tr>
-													))}
-												</tbody>
-											)}
-											{!publication && (
-												<p className="no-data-msg-publication">
-													No data available.
-												</p>
-											)}
-										</Table>
-									</Card.Body>
-								</Accordion.Collapse>
-							</Card>
-						</Accordion>
-					</React.Fragment>
+											<Accordion.Toggle
+												// as={Card.Header}
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("publication", collapsed.publication)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.publication ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+										<Card.Body className="card-padding-zero">
+											<Table hover fluid>
+												{publication && (
+													<tbody className="table-body">
+														{publication.map((pub, pubIndex) => (
+															<tr className="table-row">
+																<td key={pubIndex}>
+																	<p>
+																		<div>
+																			<h5 style={{ marginBottom: "3px" }}>
+																				<strong>{pub.title}</strong>
+																			</h5>
+																		</div>
+																		<div>{pub.authors}</div>
+																		<div>
+																			{pub.journal} <span>&nbsp;</span>(
+																			{pub.date})
+																		</div>
+																		<div>
+																			<FiBookOpen />
+																			<span style={{ paddingLeft: "15px" }}>
+																				PMID:
+																			</span>{" "}
+																			<a
+																				href={pub.url}
+																				target="_blank"
+																				rel="noopener noreferrer">
+																				{pub.pmid}
+																			</a>
+																		</div>
+																		<EvidenceList
+																			evidences={groupEvidences(pub.evidence)}
+																		/>
+																	</p>
+																</td>
+															</tr>
+														))}
+													</tbody>
+												)}
+												{!publication && (
+													<p className="no-data-msg-publication">
+														No data available.
+													</p>
+												)}
+											</Table>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+						</React.Fragment>
+					</div>
 				</Col>
 			</Row>
 		</>

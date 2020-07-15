@@ -40,736 +40,734 @@ import { getGlycanImageUrl } from "../data/glycan";
 // import { flexbox } from "@material-ui/system";
 
 function addCommas(nStr) {
-  nStr += "";
-  var x = nStr.split(".");
-  var x1 = x[0];
-  var x2 = x.length > 1 ? "." + x[1] : "";
-  var rgx = /(\d+)(\d{3})/;
+	nStr += "";
+	var x = nStr.split(".");
+	var x1 = x[0];
+	var x2 = x.length > 1 ? "." + x[1] : "";
+	var rgx = /(\d+)(\d{3})/;
 
-  while (rgx.test(x1)) {
-    x1 = x1.replace(rgx, "$1" + "," + "$2");
-  }
-  return x1 + x2;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, "$1" + "," + "$2");
+	}
+	return x1 + x2;
 }
 
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-  { label: "General", id: "general" },
+	{ label: "General", id: "general" },
 
-  { label: "Sequence", id: "sequence" },
+	{ label: "Sequence", id: "sequence" },
 
-  { label: "Site-Annotation", id: "annotation" }
+	{ label: "Site-Annotation", id: "annotation" },
 ];
 
-const sortByPosition = function(a, b) {
-  if (a.position < b.position) {
-    return -1;
-  } else if (b.position < a.position) {
-    return 1;
-  }
-  return 0;
+const sortByPosition = function (a, b) {
+	if (a.position < b.position) {
+		return -1;
+	} else if (b.position < a.position) {
+		return 1;
+	}
+	return 0;
 };
 
-const sortByStartPos = function(a, b) {
-  if (a.start_pos < b.start_pos) {
-    return -1;
-  } else if (b.start_pos < a.start_pos) {
-    return 1;
-  }
-  return 0;
+const sortByStartPos = function (a, b) {
+	if (a.start_pos < b.start_pos) {
+		return -1;
+	} else if (b.start_pos < a.start_pos) {
+		return 1;
+	}
+	return 0;
 };
 
 const SequenceLocationViewer = ({
-  sequence,
-  annotations,
-  position,
-  onSelectPosition
+	sequence,
+	annotations,
+	position,
+	onSelectPosition,
 }) => {
-  var taperlength = 3;
-  var taperDelta = 9;
-  var translateDelta = 7;
-  var centerSize = 54;
-  var translateCenter = -22;
+	var taperlength = 3;
+	var taperDelta = 9;
+	var translateDelta = 7;
+	var centerSize = 54;
+	var translateCenter = -22;
 
-  const [styledSequence, setStyledSequence] = useState([]);
-  const currentAnnotation = annotations.find(x => x.position === position);
-  const currentAnnotationIndex = annotations.indexOf(currentAnnotation);
+	const [styledSequence, setStyledSequence] = useState([]);
+	const currentAnnotation = annotations.find((x) => x.position === position);
+	const currentAnnotationIndex = annotations.indexOf(currentAnnotation);
 
-  const getHighlightClassname = position => {
-    const match = annotations.find(
-      annotation => annotation.position === position
-    );
+	const getHighlightClassname = (position) => {
+		const match = annotations.find(
+			(annotation) => annotation.position === position
+		);
 
-    if (match) {
-      if (match.type == "N") {
-        return "highlightN";
-      } else if (match.type == "O") {
-        return "highlightO";
-      } else if (match.type == "M") {
-        return "highlightMutate";
-      }
-    }
-    return "";
-  };
+		if (match) {
+			if (match.type == "N") {
+				return "highlightN";
+			} else if (match.type == "O") {
+				return "highlightO";
+			} else if (match.type == "M") {
+				return "highlightMutate";
+			}
+		}
+		return "";
+	};
 
-  useEffect(() => {
-    const baseValues = sequence.map((character, index) => {
-      const currentPosition = index + 1;
-      return {
-        index,
-        character,
-        highlight: getHighlightClassname(currentPosition),
-        size: null,
-        offset: null
-      };
-    });
+	useEffect(() => {
+		const baseValues = sequence.map((character, index) => {
+			const currentPosition = index + 1;
+			return {
+				index,
+				character,
+				highlight: getHighlightClassname(currentPosition),
+				size: null,
+				offset: null,
+			};
+		});
 
-    if (baseValues && baseValues.length) {
-      for (var i = 1; i <= taperlength; i++) {
-        const element = baseValues[position - 1 - i];
-        if (element) {
-          element.size = centerSize - i * taperDelta;
-          element.offset = translateCenter + i * translateDelta;
-        }
-      }
-      for (var i = 1; i <= taperlength; i++) {
-        const element = baseValues[position - 1 + i];
-        if (element) {
-          element.size = centerSize - i * taperDelta;
-          element.offset = translateCenter + i * translateDelta;
-        }
-      }
+		if (baseValues && baseValues.length) {
+			for (var i = 1; i <= taperlength; i++) {
+				const element = baseValues[position - 1 - i];
+				if (element) {
+					element.size = centerSize - i * taperDelta;
+					element.offset = translateCenter + i * translateDelta;
+				}
+			}
+			for (var i = 1; i <= taperlength; i++) {
+				const element = baseValues[position - 1 + i];
+				if (element) {
+					element.size = centerSize - i * taperDelta;
+					element.offset = translateCenter + i * translateDelta;
+				}
+			}
 
-      const x = baseValues[position - 1];
-      x.size = centerSize;
-      x.offset = translateCenter;
-      x.current = true;
+			const x = baseValues[position - 1];
+			x.size = centerSize;
+			x.offset = translateCenter;
+			x.current = true;
 
-      setTimeout(() => {
-        const zoom = document.querySelector(".zoom-sequence");
-        const currentElement = document.querySelector(".char-current");
-        const offset =
-          currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2 - 50;
-        zoom.scrollLeft = offset;
-      }, 100);
-    }
+			setTimeout(() => {
+				const zoom = document.querySelector(".zoom-sequence");
+				const currentElement = document.querySelector(".char-current");
+				const offset =
+					currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2 - 50;
+				zoom.scrollLeft = offset;
+			}, 100);
+		}
 
-    setStyledSequence(baseValues);
-  }, [sequence, annotations, position]);
+		setStyledSequence(baseValues);
+	}, [sequence, annotations, position]);
 
-  const selectPrevious = () => {
-    if (currentAnnotationIndex > 0) {
-      onSelectPosition(annotations[currentAnnotationIndex - 1].position);
-    }
-  };
+	const selectPrevious = () => {
+		if (currentAnnotationIndex > 0) {
+			onSelectPosition(annotations[currentAnnotationIndex - 1].position);
+		}
+	};
 
-  const selectNext = () => {
-    if (currentAnnotationIndex < annotations.length) {
-      onSelectPosition(annotations[currentAnnotationIndex + 1].position);
-    }
-  };
+	const selectNext = () => {
+		if (currentAnnotationIndex < annotations.length) {
+			onSelectPosition(annotations[currentAnnotationIndex + 1].position);
+		}
+	};
 
-  return (
-    <>
-      <Row>
-        <Grid item xs={8} sm={4}></Grid>
-        <Grid item xs={6} sm={4}>
-          <select
-            value={position}
-            onChange={event => onSelectPosition(event.target.value)}
-          >
-            {annotations.map(annotation => (
-              <option value={annotation.position}>{annotation.key}</option>
-            ))}
-          </select>
-        </Grid>
-      </Row>
-      <Row className="sequenceDisplay">
-        <Grid item>
-          <button onClick={selectPrevious}>{"<<"}</button>
-        </Grid>
-        <Grid item xs={10} sm={10} className="sequence-scroll">
-          <>
-            {/* <pre>{JSON.stringify(annotations, null, 2)}</pre> */}
+	return (
+		<>
+			<Row>
+				<Grid item xs={8} sm={4}></Grid>
+				<Grid item xs={6} sm={4}>
+					<select
+						value={position}
+						onChange={(event) => onSelectPosition(event.target.value)}>
+						{annotations.map((annotation) => (
+							<option value={annotation.position}>{annotation.key}</option>
+						))}
+					</select>
+				</Grid>
+			</Row>
+			<Row className="sequenceDisplay">
+				<Grid item>
+					<button onClick={selectPrevious}>{"<<"}</button>
+				</Grid>
+				<Grid item xs={10} sm={10} className="sequence-scroll">
+					<>
+						{/* <pre>{JSON.stringify(annotations, null, 2)}</pre> */}
 
-            <Grid className="zoom">
-              <div className="zoom-sequence">
-                {styledSequence.map(item => (
-                  <span
-                    key={item.index}
-                    style={{
-                      fontSize: item.size ? `${item.size}px` : "inherit",
-                      transform: item.offset
-                        ? `translateY(${item.offset}px)`
-                        : "none"
-                    }}
-                    className={`${item.highlight}${
-                      item.current ? " char-current" : ""
-                    }`}
-                  >
-                    {item.character}
-                  </span>
-                ))}
-              </div>
-            </Grid>
+						<Grid className="zoom">
+							<div className="zoom-sequence">
+								{styledSequence.map((item) => (
+									<span
+										key={item.index}
+										style={{
+											fontSize: item.size ? `${item.size}px` : "inherit",
+											transform: item.offset
+												? `translateY(${item.offset}px)`
+												: "none",
+										}}
+										className={`${item.highlight}${
+											item.current ? " char-current" : ""
+										}`}>
+										{item.character}
+									</span>
+								))}
+							</div>
+						</Grid>
 
-            {/* <pre>{JSON.stringify(styledSequence, null, 2)}</pre> */}
-          </>
-        </Grid>
-        <Grid item>
-          <button onClick={selectNext}>>></button>
-        </Grid>
-      </Row>
-    </>
-  );
+						{/* <pre>{JSON.stringify(styledSequence, null, 2)}</pre> */}
+					</>
+				</Grid>
+				<Grid item>
+					<button onClick={selectNext}>>></button>
+				</Grid>
+			</Row>
+		</>
+	);
 };
 
-const Siteview = props => {
-  let { id } = useParams();
-  const [detailData, setDetailData] = useState({});
-  const [annotations, setAnnotations] = useState([]);
-  const [allAnnotations, setAllAnnotations] = useState([]);
-  const [sequence, setSequence] = useState([]);
-  const [selectedPosition, setSelectedPosition] = useState();
-  const [positionData, setPositionData] = useState([]);
-  const [pageLoading, setPageLoading] = useState(true);
-  const [alertDialogInput, setAlertDialogInput] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    { show: false, id: "" }
-  );
-  useEffect(() => {
-    setPageLoading(true);
-    logActivity("user", id);
-    const getProteinDetailData = getProteinDetail(id);
-    getProteinDetailData.then(({ data }) => {
-      if (data.code) {
-        let message = "Detail api call";
-        logActivity("user", id, "No results. " + message);
-        setPageLoading(false);
-      } else {
-        setDetailData(data);
-        setPageLoading(false);
-      }
-    });
+const Siteview = (props) => {
+	let { id } = useParams();
+	const [detailData, setDetailData] = useState({});
+	const [annotations, setAnnotations] = useState([]);
+	const [allAnnotations, setAllAnnotations] = useState([]);
+	const [sequence, setSequence] = useState([]);
+	const [selectedPosition, setSelectedPosition] = useState();
+	const [positionData, setPositionData] = useState([]);
+	const [pageLoading, setPageLoading] = useState(true);
+	const [alertDialogInput, setAlertDialogInput] = useReducer(
+		(state, newState) => ({ ...state, ...newState }),
+		{ show: false, id: "" }
+	);
+	useEffect(() => {
+		setPageLoading(true);
+		logActivity("user", id);
+		const getProteinDetailData = getProteinDetail(id);
+		getProteinDetailData.then(({ data }) => {
+			if (data.code) {
+				let message = "Detail api call";
+				logActivity("user", id, "No results. " + message);
+				setPageLoading(false);
+			} else {
+				setDetailData(data);
+				setPageLoading(false);
+			}
+		});
 
-    getProteinDetailData.catch(({ response }) => {
-      let message = "siteview api call";
-      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
-    });
-  }, []);
+		getProteinDetailData.catch(({ response }) => {
+			let message = "siteview api call";
+			axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+		});
+	}, []);
 
-  useEffect(() => {
-    let dataAnnotations = [];
-    /**
-     *  The map() method calls the provided function once for each element in a glycosylation array, in order.
-     *  and sorting with respect to position
-     */
-    if (detailData.glycosylation) {
-      dataAnnotations = [
-        ...dataAnnotations,
-        ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
-          position: glycosylation.position,
-          type: glycosylation.type.split("-")[0],
-          label: glycosylation.residue,
-          glytoucan_ac: glycosylation.glytoucan_ac,
-          position: glycosylation.position,
-          evidence: glycosylation.evidence,
-          typeAnnotate: glycosylation.type.split("-")[0] + "-" + "Glycosylation"
-        }))
-      ];
-    }
+	useEffect(() => {
+		let dataAnnotations = [];
+		/**
+		 *  The map() method calls the provided function once for each element in a glycosylation array, in order.
+		 *  and sorting with respect to position
+		 */
+		if (detailData.glycosylation) {
+			dataAnnotations = [
+				...dataAnnotations,
+				...detailData.glycosylation
+					.sort(sortByPosition)
+					.map((glycosylation) => ({
+						position: glycosylation.position,
+						type: glycosylation.type.split("-")[0],
+						label: glycosylation.residue,
+						glytoucan_ac: glycosylation.glytoucan_ac,
+						position: glycosylation.position,
+						evidence: glycosylation.evidence,
+						typeAnnotate:
+							glycosylation.type.split("-")[0] + "-" + "Glycosylation",
+					})),
+			];
+		}
 
-    /**
-     *  The map() method calls the provided function once for each element in a detailData.site_annotation array, in order.
-     *  and sorting with respect to start_pos
-     */
-    if (detailData.site_annotation) {
-      dataAnnotations = [
-        ...dataAnnotations,
-        ...detailData.site_annotation
-          .sort(sortByStartPos)
-          .map(site_annotation => ({
-            position: site_annotation.start_pos,
-            type: site_annotation.annotation.split("-")[0].toUpperCase(),
-            typeAnnotate: "Sequon"
-          }))
-      ];
-    }
+		/**
+		 *  The map() method calls the provided function once for each element in a detailData.site_annotation array, in order.
+		 *  and sorting with respect to start_pos
+		 */
+		if (detailData.site_annotation) {
+			dataAnnotations = [
+				...dataAnnotations,
+				...detailData.site_annotation
+					.sort(sortByStartPos)
+					.map((site_annotation) => ({
+						position: site_annotation.start_pos,
+						type: site_annotation.annotation.split("-")[0].toUpperCase(),
+						typeAnnotate: "Sequon",
+					})),
+			];
+		}
 
-    /**
-     *  The map() method calls the provided function once for each element in a detailData.mutation array, in order.
-     *  and sorting with respect to start_pos
-     */
-    if (detailData.mutation) {
-      dataAnnotations = [
-        ...dataAnnotations,
-        ...detailData.mutation.sort(sortByStartPos).map(mutation => ({
-          position: mutation.start_pos,
-          type: mutation.type.split(" ")[1][0].toUpperCase(),
-          label: "Mutation",
-          evidence: mutation.evidence,
-          labelForlist: mutation.evidence.sequence_org,
-          typeAnnotate: "Mutation"
-        }))
-      ];
-    }
+		/**
+		 *  The map() method calls the provided function once for each element in a detailData.mutation array, in order.
+		 *  and sorting with respect to start_pos
+		 */
+		if (detailData.mutation) {
+			dataAnnotations = [
+				...dataAnnotations,
+				...detailData.mutation.sort(sortByStartPos).map((mutation) => ({
+					position: mutation.start_pos,
+					type: mutation.type.split(" ")[1][0].toUpperCase(),
+					label: "Mutation",
+					evidence: mutation.evidence,
+					labelForlist: mutation.evidence.sequence_org,
+					typeAnnotate: "Mutation",
+				})),
+			];
+		}
 
-    const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
-      ...annotation,
-      key: `${annotation.type}-${annotation.position}`,
-      id: `${annotation.type}-${annotation.position}-${index}`
-    }));
+		const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
+			...annotation,
+			key: `${annotation.type}-${annotation.position}`,
+			id: `${annotation.type}-${annotation.position}-${index}`,
+		}));
 
-    const uniquePositions = allDataAnnotations.filter((value, index, self) => {
-      const findPosition = self.find(item => item.key === value.key);
-      return self.indexOf(findPosition) === index;
-    });
+		const uniquePositions = allDataAnnotations.filter((value, index, self) => {
+			const findPosition = self.find((item) => item.key === value.key);
+			return self.indexOf(findPosition) === index;
+		});
 
-    setAllAnnotations(allDataAnnotations);
-    setAnnotations(uniquePositions);
-    if (uniquePositions.length) {
-      setSelectedPosition(uniquePositions[0].position);
-    }
+		setAllAnnotations(allDataAnnotations);
+		setAnnotations(uniquePositions);
+		if (uniquePositions.length) {
+			setSelectedPosition(uniquePositions[0].position);
+		}
 
-    if (detailData.sequence) {
-      var originalSequence = detailData.sequence.sequence;
-      // detailData.sequence.sequence = originalSequence.split("");
-      setSequence(originalSequence.split(""));
-    }
-  }, [detailData]);
+		if (detailData.sequence) {
+			var originalSequence = detailData.sequence.sequence;
+			// detailData.sequence.sequence = originalSequence.split("");
+			setSequence(originalSequence.split(""));
+		}
+	}, [detailData]);
 
-  const updateTableData = (annotations, position) => {
-    setPositionData(
-      annotations.filter(
-        annotation => annotation.position === parseInt(position, 10)
-      )
-    );
-  };
+	const updateTableData = (annotations, position) => {
+		setPositionData(
+			annotations.filter(
+				(annotation) => annotation.position === parseInt(position, 10)
+			)
+		);
+	};
 
-  const selectPosition = position => {
-    setSelectedPosition(position);
-    updateTableData(allAnnotations, position);
-  };
+	const selectPosition = (position) => {
+		setSelectedPosition(position);
+		updateTableData(allAnnotations, position);
+	};
 
-  useEffect(() => {
-    updateTableData(allAnnotations, selectedPosition);
-  }, [allAnnotations, selectedPosition]);
+	useEffect(() => {
+		updateTableData(allAnnotations, selectedPosition);
+	}, [allAnnotations, selectedPosition]);
 
-  const annotationColumns = [
-    {
-      dataField: "typeAnnotate",
-      text: "Annotation",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      }
-    },
-    {
-      dataField: "position",
-      text: "Position",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      }
-    },
-    {
-      dataField: "evidence",
-      text: "Sources",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      },
-      formatter: (cell, row) => {
-        return (
-          <EvidenceList
-            key={row.position + row.glytoucan_ac}
-            evidences={groupEvidences(cell)}
-          />
-        );
-      }
-    },
-    {
-      dataField: "glytoucan_ac",
-      text: "Additional Information",
-      sort: false,
-      selected: true,
-      formatter: (value, row) => (
-        <div className="img-wrapper">
-          {row.glytoucan_ac && (
-            <img
-              className="img-cartoon-list-page img-cartoon"
-              src={getGlycanImageUrl(row.glytoucan_ac)}
-              alt="Cartoon"
-            />
-          )}
-        </div>
-      ),
-      headerStyle: (colum, colIndex) => {
-        return {
-          width: "30%",
-          textAlign: "left",
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      }
-    }
-  ];
+	const annotationColumns = [
+		{
+			dataField: "typeAnnotate",
+			text: "Annotation",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+		},
+		{
+			dataField: "position",
+			text: "Position",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+		},
+		{
+			dataField: "evidence",
+			text: "Sources",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+			formatter: (cell, row) => {
+				return (
+					<EvidenceList
+						key={row.position + row.glytoucan_ac}
+						evidences={groupEvidences(cell)}
+					/>
+				);
+			},
+		},
+		{
+			dataField: "glytoucan_ac",
+			text: "Additional Information",
+			sort: false,
+			selected: true,
+			formatter: (value, row) => (
+				<div className="img-wrapper">
+					{row.glytoucan_ac && (
+						<img
+							className="img-cartoon-list-page img-cartoon"
+							src={getGlycanImageUrl(row.glytoucan_ac)}
+							alt="Cartoon"
+						/>
+					)}
+				</div>
+			),
+			headerStyle: (colum, colIndex) => {
+				return {
+					width: "30%",
+					textAlign: "left",
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+		},
+	];
 
-  const { uniprot, mass, recommendedname, gene, refseq } = detailData;
+	const { uniprot, mass, recommendedname, gene, refseq } = detailData;
 
-  // ==================================== //
-  /**
-   * Adding toggle collapse arrow icon to card header individualy.
-   * @param {object} uniprot_canonical_ac- uniprot accession ID.
-   **/
-  const [collapsed, setCollapsed] = useReducer(
-    (state, newState) => ({
-      ...state,
-      ...newState
-    }),
-    {
-      general: true,
-      annotation: true,
-      sequence: true
-    }
-  );
+	// ==================================== //
+	/**
+	 * Adding toggle collapse arrow icon to card header individualy.
+	 * @param {object} uniprot_canonical_ac- uniprot accession ID.
+	 **/
+	const [collapsed, setCollapsed] = useReducer(
+		(state, newState) => ({
+			...state,
+			...newState,
+		}),
+		{
+			general: true,
+			annotation: true,
+			sequence: true,
+		}
+	);
 
-  function toggleCollapse(name, value) {
-    setCollapsed({ [name]: !value });
-  }
-  const expandIcon = <ExpandMoreIcon fontSize="large" />;
-  const closeIcon = <ExpandLessIcon fontSize="large" />;
-  // ===================================== //
+	function toggleCollapse(name, value) {
+		setCollapsed({ [name]: !value });
+	}
+	const expandIcon = <ExpandMoreIcon fontSize="large" />;
+	const closeIcon = <ExpandLessIcon fontSize="large" />;
+	// ===================================== //
 
-  /**
-   * Redirect and opens uniprot_canonical_ac in a GO Term List Page
-   * @param {object} uniprot_canonical_ac- uniprot accession ID.
-   **/
-  function handleOpenGOTermListPage(uniprot_canonical_ac) {
-    var url =
-      "https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=" +
-      uniprot_canonical_ac;
-    window.open(url);
-  }
+	/**
+	 * Redirect and opens uniprot_canonical_ac in a GO Term List Page
+	 * @param {object} uniprot_canonical_ac- uniprot accession ID.
+	 **/
+	function handleOpenGOTermListPage(uniprot_canonical_ac) {
+		var url =
+			"https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=" +
+			uniprot_canonical_ac;
+		window.open(url);
+	}
 
-  return (
-    <>
-      <Row className="gg-baseline">
-        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-          <Sidebar items={items} />
-        </Col>
+	return (
+		<>
+			<Row className="gg-baseline">
+				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
+					<Sidebar items={items} />
+				</Col>
 
-        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
-          <div className="content-box-md">
-            <Row>
-              <Grid item xs={12} sm={12} className="text-center">
-                <div className="horizontal-heading">
-                  <h5>Look At</h5>
-                  <h2>
-                    {" "}
-                    <span>
-                      Siteview for Protein
-                      <strong>
-                        {uniprot && uniprot.uniprot_canonical_ac && (
-                          <> {uniprot.uniprot_canonical_ac}</>
-                        )}
-                      </strong>
-                    </span>
-                  </h2>
-                  <NavLink to={`${routeConstants.proteinDetail}${id}`}>
-                    <Button
-                      type="button"
-                      style={{ marginLeft: "5px" }}
-                      className="gg-btn-blue"
-                    >
-                      Back To details
-                    </Button>
-                  </NavLink>
-                </div>
-              </Grid>
-            </Row>
-          </div>
+				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+					<div className="sidebar-page-mb">
+						<div className="content-box-md">
+							<Row>
+								<Grid item xs={12} sm={12} className="text-center">
+									<div className="horizontal-heading">
+										<h5>Look At</h5>
+										<h2>
+											{" "}
+											<span>
+												Siteview for Protein
+												<strong>
+													{uniprot && uniprot.uniprot_canonical_ac && (
+														<> {uniprot.uniprot_canonical_ac}</>
+													)}
+												</strong>
+											</span>
+										</h2>
+										<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+											<Button
+												type="button"
+												style={{ marginLeft: "5px" }}
+												className="gg-btn-blue">
+												Back To details
+											</Button>
+										</NavLink>
+									</div>
+								</Grid>
+							</Row>
+						</div>
+						<React.Fragment>
+							<Helmet>
+								{getTitle("proteinDetail", {
+									uniprot_canonical_ac:
+										uniprot && uniprot.uniprot_canonical_ac
+											? uniprot.uniprot_canonical_ac
+											: "",
+								})}
+								{getMeta("proteinDetail")}
+							</Helmet>
+							<FeedbackWidget />
+							<PageLoader pageLoading={pageLoading} />
+							<DialogAlert
+								alertInput={alertDialogInput}
+								setOpen={(input) => {
+									setAlertDialogInput({ show: input });
+								}}
+							/>
+							{/* general */}
+							<Accordion
+								id="general"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.general.title}
+												text={DetailTooltips.protein.general.text}
+												urlText={DetailTooltips.protein.general.urlText}
+												url={DetailTooltips.protein.general.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h3 className="gg-green d-inline">General</h3>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("general", collapsed.general)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.general ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											<div
+												style={{
+													marginBottom: "5px",
+												}}>
+												{gene && (
+													<tbody className="table-body">
+														{gene.map((genes, genesname) => (
+															<td key={genesname}>
+																<div>
+																	<strong>
+																		{proteinStrings.gene_name.name}:
+																	</strong>{" "}
+																	<Link
+																		href={genes.url}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{genes.name}
+																	</Link>
+																</div>
 
-          <React.Fragment>
-            <Helmet>
-              {getTitle("proteinDetail", {
-                uniprot_canonical_ac:
-                  uniprot && uniprot.uniprot_canonical_ac
-                    ? uniprot.uniprot_canonical_ac
-                    : ""
-              })}
-              {getMeta("proteinDetail")}
-            </Helmet>
-            <FeedbackWidget />
-            <PageLoader pageLoading={pageLoading} />
-            <DialogAlert
-              alertInput={alertDialogInput}
-              setOpen={input => {
-                setAlertDialogInput({ show: input });
-              }}
-            />
-            {/* general */}
-            <Accordion
-              id="general"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.general.title}
-                      text={DetailTooltips.protein.general.text}
-                      urlText={DetailTooltips.protein.general.urlText}
-                      url={DetailTooltips.protein.general.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">General</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("general", collapsed.general)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>{collapsed.general ? closeIcon : expandIcon}</span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <div
-                      style={{
-                        marginBottom: "5px"
-                      }}
-                    >
-                      {gene && (
-                        <tbody className="table-body">
-                          {gene.map((genes, genesname) => (
-                            <td key={genesname}>
-                              <div>
-                                <strong>
-                                  {proteinStrings.gene_name.name}:
-                                </strong>{" "}
-                                <Link
-                                  href={genes.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {genes.name}
-                                </Link>
-                              </div>
+																<div>
+																	<strong>
+																		{proteinStrings.gene_location.name}:
+																	</strong>{" "}
+																	Chromosome: {""}
+																	{genes.locus.chromosome} {""} (
+																	{genes.locus.start_pos} -{" "}
+																	{genes.locus.end_pos})
+																</div>
 
-                              <div>
-                                <strong>
-                                  {proteinStrings.gene_location.name}:
-                                </strong>{" "}
-                                Chromosome: {""}
-                                {genes.locus.chromosome} {""} (
-                                {genes.locus.start_pos} - {genes.locus.end_pos})
-                              </div>
+																<EvidenceList
+																	evidences={groupEvidences(
+																		genes.locus.evidence
+																	)}
+																/>
+															</td>
+														))}
+													</tbody>
+												)}
+												{!gene && (
+													<p className="no-data-msg-publication">
+														No data available.
+													</p>
+												)}
+											</div>
 
-                              <EvidenceList
-                                evidences={groupEvidences(genes.locus.evidence)}
-                              />
-                            </td>
-                          ))}
-                        </tbody>
-                      )}
-                      {!gene && (
-                        <p className="no-data-msg-publication">
-                          No data available.
-                        </p>
-                      )}
-                    </div>
+											<p>
+												{uniprot && uniprot.uniprot_canonical_ac && (
+													<>
+														<div>
+															<strong>
+																{proteinStrings.uniprot_id.name}:{" "}
+															</strong>
+															<Link
+																href={uniprot.url}
+																target="_blank"
+																rel="noopener noreferrer">
+																{uniprot.uniprot_id}{" "}
+															</Link>
+														</div>
+														<div>
+															<strong>
+																{proteinStrings.uniprot_accession.name}:{" "}
+															</strong>
+															<Link
+																href={uniprot.url}
+																target="_blank"
+																rel="noopener noreferrer">
+																{uniprot.uniprot_canonical_ac}
+															</Link>
+														</div>
+														<div>
+															<strong>
+																{proteinStrings.sequence_length.name}:{" "}
+															</strong>
+															<Link
+																href="https://www.uniprot.org/uniprot/#sequnce"
+																target="_blank"
+																rel="noopener noreferrer">
+																{uniprot.length}
+															</Link>
+														</div>
+														<div>
+															<strong>
+																{proteinStrings.recommendedname.name}:{" "}
+															</strong>{" "}
+															{recommendedname.full}{" "}
+														</div>
+														<div>
+															<strong>
+																{proteinStrings.chemical_mass.name}:{" "}
+															</strong>
+															{addCommas(mass.chemical_mass)} - Da
+														</div>
+														<div>
+															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
+															<Link
+																href={refseq.url}
+																target="_blank"
+																rel="noopener noreferrer">
+																{" "}
+																{refseq.ac}{" "}
+															</Link>{" "}
+														</div>
+														<div>
+															{" "}
+															<strong>
+																{proteinStrings.refSeq_name.name}:{" "}
+															</strong>{" "}
+															{refseq.name}{" "}
+														</div>{" "}
+													</>
+												)}
+											</p>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
 
-                    <p>
-                      {uniprot && uniprot.uniprot_canonical_ac && (
-                        <>
-                          <div>
-                            <strong>{proteinStrings.uniprot_id.name}: </strong>
-                            <Link
-                              href={uniprot.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {uniprot.uniprot_id}{" "}
-                            </Link>
-                          </div>
-                          <div>
-                            <strong>
-                              {proteinStrings.uniprot_accession.name}:{" "}
-                            </strong>
-                            <Link
-                              href={uniprot.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {uniprot.uniprot_canonical_ac}
-                            </Link>
-                          </div>
-                          <div>
-                            <strong>
-                              {proteinStrings.sequence_length.name}:{" "}
-                            </strong>
-                            <Link
-                              href="https://www.uniprot.org/uniprot/#sequnce"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {uniprot.length}
-                            </Link>
-                          </div>
-                          <div>
-                            <strong>
-                              {proteinStrings.recommendedname.name}:{" "}
-                            </strong>{" "}
-                            {recommendedname.full}{" "}
-                          </div>
-                          <div>
-                            <strong>
-                              {proteinStrings.chemical_mass.name}:{" "}
-                            </strong>
-                            {addCommas(mass.chemical_mass)} - Da
-                          </div>
-                          <div>
-                            <strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-                            <Link
-                              href={refseq.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {" "}
-                              {refseq.ac}{" "}
-                            </Link>{" "}
-                          </div>
-                          <div>
-                            {" "}
-                            <strong>
-                              {proteinStrings.refSeq_name.name}:{" "}
-                            </strong>{" "}
-                            {refseq.name}{" "}
-                          </div>{" "}
-                        </>
-                      )}
-                    </p>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
+							<Accordion
+								id="sequence"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.sequence.title}
+												text={DetailTooltips.protein.sequence.text}
+												urlText={DetailTooltips.protein.sequence.urlText}
+												url={DetailTooltips.protein.sequence.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h3 className="gg-green d-inline">Sequence</h3>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("sequence", collapsed.sequence)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.sequence ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											<Row>
+												<Col align="left">
+													<SequenceLocationViewer
+														sequence={sequence}
+														annotations={annotations}
+														position={selectedPosition}
+														onSelectPosition={selectPosition}
+													/>
 
-            <Accordion
-              id="sequence"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.sequence.title}
-                      text={DetailTooltips.protein.sequence.text}
-                      urlText={DetailTooltips.protein.sequence.urlText}
-                      url={DetailTooltips.protein.sequence.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">Sequence</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("sequence", collapsed.sequence)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>{collapsed.sequence ? closeIcon : expandIcon}</span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <Row>
-                      <Col align="left">
-                        <SequenceLocationViewer
-                          sequence={sequence}
-                          annotations={annotations}
-                          position={selectedPosition}
-                          onSelectPosition={selectPosition}
-                        />
-
-                        {/* <pre>{JSON.stringify(positionData, null, 2)}</pre> */}
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-            <Accordion
-              id="annotation"
-              defaultActiveKey="0"
-              className="panel-width"
-              style={{ padding: "20px 0" }}
-            >
-              <Card>
-                <Card.Header className="panelHeadBgr">
-                  <span className="gg-green d-inline">
-                    <HelpTooltip
-                      title={DetailTooltips.protein.annotation.title}
-                      text={DetailTooltips.protein.annotation.text}
-                      urlText={DetailTooltips.protein.annotation.urlText}
-                      url={DetailTooltips.protein.annotation.url}
-                      helpIcon="gg-helpicon-detail"
-                    />
-                  </span>
-                  <h3 className="gg-green d-inline">Annotations</h3>
-                  <div className="float-right">
-                    <Accordion.Toggle
-                      eventKey="0"
-                      onClick={() =>
-                        toggleCollapse("annotation", collapsed.annotation)
-                      }
-                      className="gg-green arrow-btn"
-                    >
-                      <span>
-                        {collapsed.annotation ? closeIcon : expandIcon}
-                      </span>
-                    </Accordion.Toggle>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    {positionData && positionData.length !== 0 && (
-                      <ClientPaginatedTable
-                        data={positionData}
-                        columns={annotationColumns}
-                      />
-                    )}
-                    {!positionData && <p>No data available.</p>}
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-            {/*  Sequence */}
-          </React.Fragment>
-        </Col>
-      </Row>
-    </>
-  );
+													{/* <pre>{JSON.stringify(positionData, null, 2)}</pre> */}
+												</Col>
+											</Row>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							<Accordion
+								id="annotation"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.annotation.title}
+												text={DetailTooltips.protein.annotation.text}
+												urlText={DetailTooltips.protein.annotation.urlText}
+												url={DetailTooltips.protein.annotation.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h3 className="gg-green d-inline">Annotations</h3>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("annotation", collapsed.annotation)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.annotation ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{positionData && positionData.length !== 0 && (
+												<ClientPaginatedTable
+													data={positionData}
+													columns={annotationColumns}
+												/>
+											)}
+											{!positionData && <p>No data available.</p>}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/*  Sequence */}
+						</React.Fragment>
+					</div>
+				</Col>
+			</Row>
+		</>
+	);
 };
 
 export default Siteview;

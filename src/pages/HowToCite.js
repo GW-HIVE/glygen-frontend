@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
-// import Container from '@material-ui/core/Container';
 import VerticalHeadingLogo from "../components/headings/VerticalHeadingLogo";
 import PanelHowToCite from "../components/PanelHowToCite";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,12 +31,9 @@ const HowToCite = (props) => {
 	return (
 		<>
 			<Helmet>
-				{/* <title>{head.nowToCite.title}</title>
-				{getMeta(head.nowToCite)} */}
 				{getTitle("howToCite")}
 				{getMeta("howToCite")}
 			</Helmet>
-
 			<CssBaseline />
 			<div id="top-heading"></div>
 			<Row className="gg-baseline">
@@ -45,20 +41,21 @@ const HowToCite = (props) => {
 					<Sidebar items={items} />
 				</Col>
 				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
-					<VerticalHeadingLogo post={vertHeadHowToCite} />
-					<PanelHowToCite id="howToCite" data={howToCiteData.howToCite} />
-					<PanelHowToCite id="ourPapers" data={howToCiteData.ourPapers} />
-					<PanelHowToCite
-						id="relatedPapers"
-						data={howToCiteData.relatedPapers}
-					/>
-					<PanelHowToCite
-						id="websiteCitation"
-						data={howToCiteData.websiteCitation}
-					/>
+					<div className="sidebar-page-mb">
+						<VerticalHeadingLogo post={vertHeadHowToCite} />
+						<PanelHowToCite id="howToCite" data={howToCiteData.howToCite} />
+						<PanelHowToCite id="ourPapers" data={howToCiteData.ourPapers} />
+						<PanelHowToCite
+							id="relatedPapers"
+							data={howToCiteData.relatedPapers}
+						/>
+						<PanelHowToCite
+							id="websiteCitation"
+							data={howToCiteData.websiteCitation}
+						/>
+					</div>
 				</Col>
 			</Row>
-			{/* </Container> */}
 		</>
 	);
 };
