@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProteinDetail } from "../data/protein";
 import ProtvistaSidebar from "../components/navigation/ProtvistaSidebar";
 import "d3";
+import { NavLink } from "react-router-dom";
 import ProtvistaManager from "protvista-manager";
 import ProtvistaTooltip from "protvista-tooltip";
 import ProtvistaNavigation from "protvista-navigation";
@@ -11,7 +12,6 @@ import ProtvistaTrack from "protvista-track";
 import routeConstants from "../data/json/routeConstants";
 import Button from "react-bootstrap/Button";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "@material-ui/core";
 import "../css/protvista.css";
 import FeedbackWidget from "../components/FeedbackWidget";
 import { logActivity } from "../data/logging";
@@ -270,18 +270,26 @@ const ProtVista = () => {
   return (
     <div className="ProtContainer">
       {/* Back to details button */}
-      <Link href={`${routeConstants.proteinDetail}${id}`}>
+      <NavLink to={`${routeConstants.proteinDetail}${id}`}>
         <Button
           type="button"
-          style={{ marginLeft: "5px" }}
+          style={{ marginLeft: "15px", marginTop: "15px" }}
           className="gg-btn-blue"
         >
           Back To details
         </Button>
-      </Link>
+      </NavLink>
+      <div className="horizontal-heading text-center">
+        <h5>Look At</h5>
+        <br></br>
+        <span>
+          ProtVista view of <strong>{id}</strong>
+        </span>
+      </div>
+
       <Row>
         <>
-          <Col xs="3">
+          <Col xs="2">
             <ProtvistaSidebar
               expanded={expanded}
               handleExpand={() => setExpanded(!expanded)}
@@ -299,7 +307,7 @@ const ProtVista = () => {
           }}
         />
 
-        <Col xs="9" className="maincontent">
+        <Col xs="10" className="maincontent">
           {data && data.sequence && data.sequence.length && (
             <protvista-manager
               attributes="length displaystart displayend highlightstart highlightend variantfilters"
