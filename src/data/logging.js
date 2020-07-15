@@ -3,34 +3,10 @@ import routeConstants from './json/routeConstants';
 import { GLYGEN_BASENAME } from "../envVariables";
 
 /**
- * This basically checks the browser support for Web storage (i.e. localStorage)
- * and also logs the page visit activity.
- */
-export const tracking = () => {
-    var txt = '';
-    var track_banner = document.getElementById("tracking_banner");
-    track_banner.style.display = "none";
-    /* Check browser support */
-    if (typeof (Storage) !== "undefined") {
-        if (!localStorage.getItem("ID")) {
-            /* If nothing in the local storage then give the user a choice. */
-            track_banner.style.display = "block";
-        }
-        logActivity("user");
-    } else {
-        txt = "Please update your browser to the latest version in order to access all our website features.";
-        displayBannerMsg(txt);
-    }
-}
-
-/**
  * This is called when the user selects to be logged.
  * Gets the ID from Web Service and stores in the localStorage of the browser.
  */
 export const logID = () => {
-    var txt = "We will log your actions to improve the user experience. You can always change this setting in <strong>My GlyGen</strong>.";
-    var user_id = "No ID assigned";
-
     const url = "/auth/userid";
     console.log(url);
 
@@ -85,22 +61,6 @@ export const isLoggingUserActivity = () => {
  */
 export const clearLocalStore = () => {
     localStorage.removeItem("ID");
-}
-
-/**
- * Just displays the appropriate message in the banner 
- * and automatically makes it dissapear after the set time.
- * @param {string} txt The message to be displayed in the tracking prompt banner.
- */
-export const displayBannerMsg = (txt) => {
-    var track_banner = document.getElementById("tracking_banner");
-    track_banner.style.display = "block";
-    track_banner.innerHTML = "<span>" + txt + "</span><span id='close_banner' style='float: right'>&times;</span>";
-    var close = function () {
-        track_banner.style.display = "none";
-    };
-    setTimeout(close, 10000);
-    document.getElementById("close_banner").onclick = close;
 }
 
 /**

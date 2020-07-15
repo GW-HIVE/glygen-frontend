@@ -30,7 +30,7 @@ import ProtVista from "./pages/ProtVista";
 import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
 
-const Routes = props => (
+const Routes = (props) => (
   <Switch>
     <Route
       path={`${routeConstants.glycanListEdit}:id`}
@@ -86,7 +86,7 @@ const Routes = props => (
     <Route path={routeConstants.disclaimer} component={Disclaimer} />
     <Route path={routeConstants.privacyPolicy} component={PrivacyPolicy} />
     <Route path={routeConstants.license} component={License} />
-    <Route path={routeConstants.privacySettings} component={PrivacySettings} />
+    <Route path={routeConstants.privacySettings} component={() => <PrivacySettings {...props}  />} />
     <Route path={routeConstants.feedback} component={Feedback} />
     <Route path={routeConstants.tryMe} component={TryMe} />
     <Route path={routeConstants.about} component={About} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Routes from "./Routes";
@@ -38,11 +38,13 @@ const theme = createMuiTheme({
 
 function App() {
 	initializeReactGA();
+	const [userTrackingBannerState, setUserTrackingBannerState] = useState("none");
+
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
-				<Header />
-				<Routes />
+				<Header userTrackingBannerState={userTrackingBannerState} setUserTrackingBannerState={setUserTrackingBannerState} />
+				<Routes userTrackingBannerState={userTrackingBannerState} setUserTrackingBannerState={setUserTrackingBannerState} />
 				<Footer />
 			</ThemeProvider>
 		</div>

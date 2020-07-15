@@ -138,7 +138,6 @@ p {
 	font-size: 17px;
 	text-align: center;
 	z-index: 999;
-	display: none;
 }
 
 .alert {
@@ -171,7 +170,7 @@ p {
 /* --------------------------
     The Close alert Button 
 -----------------------------*/
-#close_banner {
+.close_banner {
 	color: white;
 	float: right;
 	font-size: 20px;
@@ -179,8 +178,8 @@ p {
 	padding-right: 5px;
 }
 
-#close_banner:hover,
-#close_banner:focus {
+.close_banner:hover,
+.close_banner:focus {
 	color: #979797;
 	text-decoration: none;
 	cursor: pointer;

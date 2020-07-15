@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import VerticalHeading from "../components/headings/VerticalHeading";
 import { Row, Col } from "react-bootstrap";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import { useState } from "react";
-import { logActivity, logID, doNotLog, isLoggingUserActivity } from "../data/logging";
+import { logActivity, isLoggingUserActivity } from "../data/logging";
 
 const PrivacySettings = (props) => {
 	const vertHeadDisclaimer = {
@@ -17,7 +18,8 @@ const PrivacySettings = (props) => {
 		h2textBottomStrongAfter: "Privacy Settings",
 	};
 
-	const [enabled, setEnabled] = useState(isLoggingUserActivity());
+	const [enabled, setEnabled] = useState(props.userTrackingBannerState === "track" ? true : props.userTrackingBannerState === "donottrack" ? false : isLoggingUserActivity());
+	
 	useEffect(() => {
 		logActivity();
 	}, []);
@@ -81,7 +83,7 @@ const PrivacySettings = (props) => {
 
 								<Col sm={3} className="text-right">
 									<BootstrapSwitchButton
-										width={60}
+										width={70}
 										onlabel="On"
 										offlabel="Off"
 										onstyle="outline-primary"
@@ -89,7 +91,7 @@ const PrivacySettings = (props) => {
 										checked={enabled}
 										onChange={(checked) => {
 											setEnabled(checked);
-											checked ? logID() : doNotLog();
+											checked ? props.setUserTrackingBannerState("track") : props.setUserTrackingBannerState("donottrack");
 										}}
 									/>
 								</Col>
@@ -102,3 +104,7 @@ const PrivacySettings = (props) => {
 	);
 };
 export default PrivacySettings;
+
+PrivacySettings.propTypes = {
+    userTrackingBannerState: PropTypes.string
+};

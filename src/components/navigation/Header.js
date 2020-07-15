@@ -11,6 +11,8 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import GlobalSearchControl from "../search/GlobalSearchControl";
+import UserTrackingBanner from "../alert/UserTrackingBanner";
+
 import Button from 'react-bootstrap/Button';
 import { logID, doNotLog, tracking } from "../../data/logging";
 
@@ -33,24 +35,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Header() {
+export default function Header(props) {
 	const classes = useStyles();
-
-	useEffect(() => {
-		tracking();
-	});
-
 		return (
 		<React.Fragment>
 			<CssBaseline />
-			<div class="alert gg-alert" id="tracking_banner">
-				<span>Do you want <strong>GlyGen</strong> to remember your searches for your future use? 
-				This can be changed at any time in the <strong>My GlyGen</strong> section.</span>
-				<br/>
-				<Button type="button" className="btn btn-default gg-btn-margin" onClick={logID}>Allow</Button>
-				<Button type="button" className="btn btn-default gg-btn-margin" onClick={doNotLog}>Don't Allow</Button>
-			</div>
-
+			<UserTrackingBanner {...props} />
 			<Navbar className="gg-top-header" expand="xl">
 				<Container maxWidth="xl">
 					<Row className="justify-content-end">
