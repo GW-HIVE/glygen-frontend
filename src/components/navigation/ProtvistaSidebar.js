@@ -1,8 +1,8 @@
 import "../../css/protvista.css";
-
+import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 import React from "react";
 
-const ProtvistaSidebar = ({ data, handleExpand, expanded }) => {
+const ProtvistaSidebar = ({ data, handleExpand, expanded, tracksShown }) => {
   return (
     <div class="main menu">
       <nav class="main-nav sidebarpadding">
@@ -18,8 +18,11 @@ const ProtvistaSidebar = ({ data, handleExpand, expanded }) => {
             </a>
           </li>
           <li className="nav-itemss nav-track nav-combinetrack legendlist">
-            <a class="nav-links" href="#" onClick={handleExpand}>
-              Glycosylation &nbsp;&nbsp;
+            <a class="nav-links " href="#" onClick={handleExpand}>
+              Glycosylation &nbsp;&nbsp;{" "}
+              <span class="sizefor">
+                {expanded ? <FaAngleDown /> : <FaAngleRight />}
+              </span>
             </a>
           </li>
 
@@ -103,16 +106,18 @@ const ProtvistaSidebar = ({ data, handleExpand, expanded }) => {
               N-Glycan-Sequon
             </a>
           </li>
-          <li class="nav-itemss glycotrack legendlist">
-            <a
-              href="#"
-              className="nav-links"
-              data-toggle="tooltip"
-              title="The action or process of mutating."
-            >
-              Mutation
-            </a>
-          </li>
+          {tracksShown && tracksShown.mutation && (
+            <li class="nav-itemss glycotrack legendlist">
+              <a
+                href="#"
+                className="nav-links"
+                data-toggle="tooltip"
+                title="The action or process of mutating."
+              >
+                Mutation
+              </a>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
