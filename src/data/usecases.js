@@ -133,7 +133,7 @@ export const getDiseaseToGlycosyltransferases= (formObject) => {
 }
 
 
-export const ORTHOLOG_COLUMNS = [
+export const ORTHOLOGS_COLUMNS = [
     {
         dataField: proteinStrings.evidence.id,
         text: proteinStrings.evidence.name,
@@ -217,15 +217,15 @@ export const getSpeciesToGlycoproteins = (organism, evidenceType) => {
     return getJson(url);
 }
 
-export const getOrthologList = (
-    orthologListId,
+export const getOrthologsList = (
+    orthologsListId,
     offset = 1,
     limit = 20,
     sort = "uniprot_canonical_ac",
     order = "asc"
   ) => {
     const queryParams = {
-      id: orthologListId,
+      id: orthologsListId,
       offset: offset,
       sort: sort,
       limit: limit,

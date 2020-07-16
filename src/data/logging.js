@@ -13,8 +13,7 @@ export const logID = () => {
 }
 
 /**
- * This is called when the user chooses not to be logged.
- * Stores the ID as "Anonymous" in the localStorage of the browser.
+ * This is called to check if user actitvity is looged with user ID.
  */
 export const isLoggingUserActivity = () => {
     if (typeof (Storage) !== "undefined") {

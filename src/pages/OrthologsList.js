@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ORTHOLOG_COLUMNS, getOrthologList } from '../data/usecases';
+import { ORTHOLOGS_COLUMNS, getOrthologsList } from '../data/usecases';
 import ProteinQuerySummary from "../components/ProteinQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
@@ -18,7 +18,7 @@ import { GLYGEN_BASENAME } from "../envVariables";
 
 const proteinStrings = stringConstants.protein.common;
 
-const OrthologusList = props => {
+const OrthologsList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -26,7 +26,7 @@ const OrthologusList = props => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [pagination, setPagination] = useState([]);
-  const [selectedColumns, setSelectedColumns] = useState(ORTHOLOG_COLUMNS);
+  const [selectedColumns, setSelectedColumns] = useState(ORTHOLOGS_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
@@ -39,7 +39,7 @@ const OrthologusList = props => {
   useEffect(() => {
     setPageLoading(true);
 		logActivity("user", id);
-    getOrthologList(id).then(({ data }) => {
+    getOrthologsList(id).then(({ data }) => {
       if (data.error_code) {
         let message = "list api call";
         logActivity("user", id, "No results. " + message);
@@ -69,7 +69,7 @@ const OrthologusList = props => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getOrthologList(
+    getOrthologsList(
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
@@ -100,8 +100,8 @@ const OrthologusList = props => {
   return (
     <>
       <Helmet>
-        {getTitle("orthologuesList")}
-        {getMeta("orthologuesList")}
+        {getTitle("orthologsList")}
+        {getMeta("orthologsList")}
       </Helmet>
 
       <FeedbackWidget />
@@ -142,4 +142,4 @@ const OrthologusList = props => {
   );
 };
 
-export default OrthologusList;
+export default OrthologsList;

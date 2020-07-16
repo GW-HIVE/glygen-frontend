@@ -422,7 +422,7 @@
         "id": "protein_name_short"
       },
       "protein_name_long": {
-        "name": "Uniprot Name",
+        "name": "UniProt Name",
         "shortName": "protein_name_long",
         "tooltip": {},
         "id": "protein_name_long"
@@ -557,7 +557,7 @@
       "id": "question_3"
     },
     "question_4": {
-      "text": "What are the orthologues of {0} in different species?",
+      "text": "What are the orthologs of {0} in different species?",
       "id": "question_4"
     },
     "question_5": {

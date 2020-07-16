@@ -18,7 +18,7 @@ import {
 	getGlycanToEnzymeGeneLoci,
 	getDiseaseToGlycosyltransferases,
 	getProteinToOrthologs,
-	getOrthologList,
+	getOrthologsList,
 	getBiosynthesisEnzymeToGlycans,
 	getSpeciesToGlycosyltransferases,
 	getSpeciesToGlycohydrolases,
@@ -213,7 +213,7 @@ const QuickSearch = (props) => {
 						message
 					).finally(() => {
 						props.history.push(
-							routeConstants.orthologuesList +
+							routeConstants.orthologsList +
 								response.data["list_id"] +
 								"/" +
 								quickSearch.question_4.id
@@ -464,8 +464,8 @@ const QuickSearch = (props) => {
 		else if ("getProteinList" === listApi) return getProteinList(listId, 1, 1);
 		else if ("getGeneLocusList" === listApi)
 			return getGeneLocusList(listId, 1, 1);
-		else if ("getOrthologList" === listApi)
-			return getOrthologList(listId, 1, 1);
+		else if ("getOrthologsList" === listApi)
+			return getOrthologsList(listId, 1, 1);
 		return undefined;
 	}
 
@@ -506,7 +506,7 @@ const QuickSearch = (props) => {
 		} else if (questionId === quickSearch.question_3.id) {
 			return "getGeneLocusList";
 		} else if (questionId === quickSearch.question_4.id) {
-			return "getOrthologList";
+			return "getOrthologsList";
 		} else if (questionId === quickSearch.question_5.id) {
 			return "getProteinList";
 		} else if (questionId === quickSearch.question_6.id) {

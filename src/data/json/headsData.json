@@ -282,7 +282,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologs."
 			}
 		]
 	},
@@ -295,7 +295,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, human, Homo sapiens, Mus musculus, Rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, predicted N-glycosylation site, synthesized, enzyme, orthologues."
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, human, Homo sapiens, Mus musculus, Rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, predicted N-glycosylation site, synthesized, enzyme, orthologs."
 			}
 		]
 	},
@@ -312,16 +312,16 @@
 			}
 		]
 	},
-	"orthologuesList": {
-		"title": "Orthologues List | Results of an Orthologues Search | glygen.org",
+	"orthologsList": {
+		"title": "Orthologs List | Results of an Orthologs Search | glygen.org",
 		"meta": [
 			{
 				"name": "description",
-				"content": "A list of orthologues conforming to the query parameters. What are the orthologues of UniProt canonical accession in different species?"
+				"content": "A list of orthologs conforming to the query parameters. What are the orthologs of UniProt canonical accession in different species?"
 			},
 			{
 				"name": "keywords",
-				"content": "Orthologues, uniprot canonical accession, query."
+				"content": "Orthologs, uniprot canonical accession, query."
 			}
 		]
 	},
@@ -399,7 +399,7 @@
 			},
 			{
 				"name": "keywords",
-				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologues."
+				"content": "Search by glycan, by protein, by species, by disease, glycosylhydrolases, glycosyltransferases, glycoprotein search, homo sapiens, mus musculus, rattus norvegicus, reported, predicted, glycosylated proteins, N-glycosylation, sequons, synthesized, enzyme, orthologs."
 			}
 		]
 	},

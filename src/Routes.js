@@ -23,7 +23,7 @@ import About from "./pages/About";
 import Frameworks from "./pages/Frameworks";
 import Media from "./pages/Media";
 import LocusList from "./pages/LocusList";
-import OrthologuesList from "./pages/OrthologuesList";
+import OrthologsList from "./pages/OrthologsList";
 import QuickSearch from "./pages/QuickSearch";
 import IsoAlignment from "./pages/ProteinAlignment";
 import ProtVista from "./pages/ProtVista";
@@ -93,8 +93,8 @@ const Routes = (props) => (
     <Route path={routeConstants.frameworks} component={Frameworks} />
     <Route path={routeConstants.media} component={Media} />
     <Route
-      path={`${routeConstants.orthologuesList}:id/:searchId`}
-      component={OrthologuesList}
+      path={`${routeConstants.orthologsList}:id/:searchId`}
+      component={OrthologsList}
     />
     <Route
       path={`${routeConstants.locusList}:id/:searchId`}
