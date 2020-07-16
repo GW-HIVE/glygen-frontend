@@ -223,13 +223,13 @@ const SequenceLocationViewer = ({
 	);
 };
 
-const Siteview = (props) => {
+const Siteview = ({ position }) => {
 	let { id } = useParams();
 	const [detailData, setDetailData] = useState({});
 	const [annotations, setAnnotations] = useState([]);
 	const [allAnnotations, setAllAnnotations] = useState([]);
 	const [sequence, setSequence] = useState([]);
-	const [selectedPosition, setSelectedPosition] = useState();
+	const [selectedPosition, setSelectedPosition] = useState(position);
 	const [positionData, setPositionData] = useState([]);
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
@@ -329,7 +329,8 @@ const Siteview = (props) => {
 
 		setAllAnnotations(allDataAnnotations);
 		setAnnotations(uniquePositions);
-		if (uniquePositions.length) {
+		
+		if (uniquePositions.length && !selectedPosition) {
 			setSelectedPosition(uniquePositions[0].position);
 		}
 
