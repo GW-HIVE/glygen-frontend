@@ -885,15 +885,12 @@ const ProteinDetail = (props) => {
 										<Card.Body>
 											<div>
 												<p>
-													{/* <Row> */}
 													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
 														<Row>
 															{speciesEvidence &&
 																// For every species object
 																Object.keys(speciesEvidence).map((species) => (
 																	// For every database for current species object
-																	// <Col xs={12} sm={12} md={6} lg={6} xl={6}>
-																	// <p>
 																	<>
 																		<Row>
 																			<Col
@@ -915,8 +912,6 @@ const ProteinDetail = (props) => {
 																			</Col>
 																		</Row>
 																	</>
-																	// </p>
-																	// </Col>
 																))}
 															{/* {!species && (
 																<p className="no-data-msg">
@@ -930,9 +925,7 @@ const ProteinDetail = (props) => {
 																	{species.map((species) => (
 																		<>
 																			<Row>
-																				<Col
-																					align="right5"
-																					style={{ whiteSpace: "nowrap" }}>
+																				<Col style={{ whiteSpace: "nowrap" }}>
 																					<strong> Taxonomy ID: </strong>{" "}
 																					{species.taxid}
 																				</Col>
@@ -943,7 +936,6 @@ const ProteinDetail = (props) => {
 															)}
 														</Row>
 													</Col>
-													{/* </Row> */}
 												</p>
 											</div>
 											{!species && (
