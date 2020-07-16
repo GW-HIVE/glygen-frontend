@@ -18,6 +18,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import { display } from "@material-ui/system";
 window.customElements.define("protvista-manager", ProtvistaManager);
 window.customElements.define("protvista-navigation", ProtvistaNavigation);
 window.customElements.define("protvista-sequence", ProtvistaSequence);
@@ -137,21 +138,24 @@ const ProtVista = () => {
       }
     } //);
 
-    for (let mutation of data.mutation) {
-      // $.each(data.mutation, function (i, mutation) {
-      mutations.residues.push({
-        start: mutation.start_pos,
-        end: mutation.end_pos,
-        color: mutations.color,
-        shape: mutations.shape,
-        accession: data.uniprot.uniprot_canonical_ac,
-        type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
-        tooltipContent:
-          "<span className=marker> annotation " +
-          mutation.annotation +
-          "</span>"
-      });
-    } //);
+    if (data.mutation) {
+      for (let mutation of data.mutation) {
+        // $.each(data.mutation, function (i, mutation) {
+        mutations.residues.push({
+          start: mutation.start_pos,
+          end: mutation.end_pos,
+          color: mutations.color,
+          shape: mutations.shape,
+          accession: data.uniprot.uniprot_canonical_ac,
+          type:
+            "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
+          tooltipContent:
+            "<span className=marker> annotation " +
+            mutation.annotation +
+            "</span>"
+        });
+      } //);
+    }
 
     for (let site_annotation of data.site_annotation) {
       // $.each(data.site_annotation, function (i, site_annotation) {
@@ -216,6 +220,16 @@ const ProtVista = () => {
   const mutationsData = useRef(null);
   const allTrack = useRef(null);
 
+  const [tracksShown, setTracksShown] = useReducer(
+    (state, newState) => ({
+      ...state,
+      ...newState
+    }),
+    {
+      mutation: true
+    }
+  );
+
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
@@ -256,6 +270,10 @@ const ProtVista = () => {
         }
         if (mutationsData.current) {
           mutationsData.current.data = formattedData.mutationsData.residues;
+
+          setTracksShown({
+            mutation: formattedData.mutationsData.residues.length > 0
+          });
         }
       }
     });
@@ -291,6 +309,7 @@ const ProtVista = () => {
         <>
           <Col xs="2">
             <ProtvistaSidebar
+              tracksShown={tracksShown}
               expanded={expanded}
               handleExpand={() => setExpanded(!expanded)}
             />
@@ -414,17 +433,19 @@ const ProtVista = () => {
                 ref={nSequon}
               />
 
-              <protvista-track
-                class={
-                  `nav-track glycotrack` +
-                  (highlighted === "mutation" ? " highlight" : "")
-                }
-                length={data.sequence.length}
-                displaystart={1}
-                displayend={data.sequence.length}
-                layout="non-overlapping"
-                ref={mutationsData}
-              />
+              {tracksShown.mutation && (
+                <protvista-track
+                  class={
+                    `nav-track glycotrack` +
+                    (highlighted === "mutation" ? " highlight" : "")
+                  }
+                  length={data.sequence.length}
+                  displaystart={1}
+                  displayend={data.sequence.length}
+                  layout="non-overlapping"
+                  ref={mutationsData}
+                />
+              )}
             </protvista-manager>
           )}
         </Col>
@@ -432,7 +453,7 @@ const ProtVista = () => {
       <div class="main-content">
         <div class="row">
           <div class="col-md-3 col-sm-3">
-            <ol class="legendlist">
+            <ol class="legendlists">
               <li>
                 <span
                   class="super1 hover"
@@ -488,17 +509,19 @@ const ProtVista = () => {
                   </span>
                 </span>
               </li>
-              <li>
-                <span
-                  class="super5 hover"
-                  onMouseEnter={() => setHighlighted("mutation")}
-                >
-                  &#9670;
-                  <span class="superx">
-                    <>Mutation</>
+              {tracksShown && tracksShown.mutation && (
+                <li>
+                  <span
+                    class="super5 hover"
+                    onMouseEnter={() => setHighlighted("mutation")}
+                  >
+                    &#9670;
+                    <span class="superx">
+                      <>Mutation</>
+                    </span>
                   </span>
-                </span>
-              </li>
+                </li>
+              )}
             </ol>
           </div>
         </div>
