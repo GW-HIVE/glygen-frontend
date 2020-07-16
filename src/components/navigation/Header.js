@@ -13,7 +13,7 @@ import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import GlobalSearchControl from "../search/GlobalSearchControl";
 import UserTrackingBanner from "../alert/UserTrackingBanner";
 
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import { logID, doNotLog, tracking } from "../../data/logging";
 
 import {
@@ -21,9 +21,10 @@ import {
 	GLYGEN_BETA,
 	GLYGEN_DATA,
 	GLYGEN_SPARQL,
-	GLYGEN_ENV
+	GLYGEN_ENV,
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
+import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
 
 const useStyles = makeStyles((theme) => ({
 	navbarText: {
@@ -33,15 +34,36 @@ const useStyles = makeStyles((theme) => ({
 			color: "#57affa !important",
 		},
 	},
+	// betaWatermark: {
+	// 	position: "absolute",
+	// 	backgroundSize: "top",
+	// 	backgroundPosition: "center",
+	// 	backgroundRepeat: "space",
+	// },
 }));
 
 export default function Header(props) {
 	const classes = useStyles();
-		return (
+	return (
 		<React.Fragment>
 			<CssBaseline />
 			<UserTrackingBanner {...props} />
-			<Navbar className="gg-top-header" expand="xl">
+
+			<Navbar
+				className="gg-top-header"
+				expand="xl"
+				style={
+					GLYGEN_ENV === "beta"
+						? {
+								backgroundImage: `url(${betaWatermarkImg})`,
+								backgroundRepeat: "space",
+								backgroundPosition: "center",
+						  }
+						: {}
+				}>
+				{/* {GLYGEN_ENV === "beta" && (
+					<img src={betaWatermarkImg} alt="beta watermark img" />
+				)} */}
 				<Container maxWidth="xl">
 					<Row className="justify-content-end">
 						<div className="mr-4">
@@ -100,7 +122,17 @@ export default function Header(props) {
 				</Container>
 			</Navbar>
 
-			<Navbar className="gg-blue" expand="xl">
+			<Navbar className="gg-blue betaWatermark" expand="xl">
+				{/* <div
+					className={classes.betaWatermark}
+					style={{ backgroundImage: `url(${betaWatermarkImg})` }}>
+					<img
+						style={{ dbackgroundRepeat: "space" }}
+						src={betaWatermarkImg}
+						alt="beta watermark img"
+					/> */}
+
+				{/* </div> */}
 				<Col xs={"auto"}>
 					<Navbar.Brand as={Link} to={routeConstants.home}>
 						<img src={logo} alt="Glygen" className="logo-nav" />
@@ -206,6 +238,7 @@ export default function Header(props) {
 						<GlobalSearchControl />
 					</Col>
 				</Navbar.Collapse>
+				{/* </div> */}
 			</Navbar>
 		</React.Fragment>
 	);
