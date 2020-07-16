@@ -1141,7 +1141,7 @@ const ProteinDetail = (props) => {
 																paddingBottom: "30px",
 															}}>
 															{glycosylationWithImage &&
-																glycosylationWithImage.length && (
+																(glycosylationWithImage.length > 0) && (
 																	<ClientPaginatedTable
 																		data={glycosylationWithImage}
 																		columns={glycoSylationColumns}
