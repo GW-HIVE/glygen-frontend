@@ -883,60 +883,71 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											<Row>
-												{speciesEvidence &&
-													// For every species object
-													Object.keys(speciesEvidence).map((species) => (
-														// For every database for current species object
-														<Col xs={12} sm={12} md={6} lg={6} xl={6}>
-															<p>
+											<div>
+												<p>
+													{/* <Row> */}
+													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
+														<Row>
+															{speciesEvidence &&
+																// For every species object
+																Object.keys(speciesEvidence).map((species) => (
+																	// For every database for current species object
+																	// <Col xs={12} sm={12} md={6} lg={6} xl={6}>
+																	// <p>
+																	<>
+																		<Row>
+																			<Col
+																				style={{
+																					paddingTop: "12px",
+																					whiteSpace: "nowrap",
+																				}}>
+																				<strong>{species}:</strong>
+																			</Col>
+																			<Col
+																				align="left"
+																				style={{
+																					paddingLeft: "0",
+																					marginLeft: "0",
+																				}}>
+																				<EvidenceList
+																					evidences={speciesEvidence[species]}
+																				/>
+																			</Col>
+																		</Row>
+																	</>
+																	// </p>
+																	// </Col>
+																))}
+															{!species && (
+																<p className="no-data-msg">
+																	No data available.
+																</p>
+															)}
+														</Row>
+														<Row>
+															{species && (
 																<>
-																	<Row>
-																		<Col
-																			align="right"
-																			style={{
-																				paddingTop: "12px",
-																			}}>
-																			<strong>{species}:</strong>
-																		</Col>
-																		<Col
-																			align="left"
-																			style={{
-																				paddingLeft: "0",
-																				marginLeft: "0",
-																			}}>
-																			<EvidenceList
-																				evidences={speciesEvidence[species]}
-																			/>
-																		</Col>
-																	</Row>
+																	{species.map((species) => (
+																		<>
+																			<Row>
+																				<Col
+																					align="right5"
+																					style={{ whiteSpace: "nowrap" }}>
+																					<strong> Taxonomy ID: </strong>{" "}
+																					{species.taxid}
+																				</Col>
+																			</Row>
+																		</>
+																	))}
 																</>
-															</p>
-														</Col>
-													))}
-												{!species && (
-													<p className="no-data-msg">No data available.</p>
-												)}
-											</Row>
-
-											{species && (
-												<Row>
-													{species.map((species) => (
-														<Col
-															align="left"
-															style={{
-																paddingTop: "12px",
-																paddingLeft: "40px",
-															}}>
-															<strong> Taxonomy ID: </strong> {species.taxid}
-														</Col>
-													))}
-												</Row>
-											)}
-											{!species && (
-												<p className="no-data-msg-publication">
-													No data available.
+															)}
+														</Row>
+													</Col>
+													{/* </Row> */}
 												</p>
+											</div>
+											{!species && (
+												<p className="no-data-msg">No data available.</p>
 											)}
 										</Card.Body>
 									</Accordion.Collapse>
@@ -1198,7 +1209,7 @@ const ProteinDetail = (props) => {
 										</span>
 										<h3 className="gg-green d-inline">Sequence</h3>
 										<div className="float-right">
-											<span className="pr-3">
+											<span>
 												<NavLink to={`${routeConstants.protVista}${id}`}>
 													<Button
 														type="button"
