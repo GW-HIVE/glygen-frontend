@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Routes from "./Routes";
@@ -6,15 +6,26 @@ import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import ReactGA from "react-ga";
-import { GLYGEN_ENV, GLYGEN_BETA } from "./envVariables.js";
+import { GLYGEN_ENV } from "./envVariables.js";
 
 function initializeReactGA() {
-	if (
-		document.location.hostname.search(GLYGEN_ENV) === 0 ||
-		document.location.hostname.search(GLYGEN_BETA) === 0
-	) {
+	if (GLYGEN_ENV === "prod" || GLYGEN_ENV === "beta") {
 		ReactGA.initialize("UA-123338976-1");
 		ReactGA.pageview(window.location.pathname + window.location.search);
+	}
+}
+
+/**
+ * for the pageproofer feedback.
+ */
+function pageProofer(d, t) {
+	if (GLYGEN_ENV === "beta" || GLYGEN_ENV === "test") {
+		var pp = d.createElement(t),
+			s = d.getElementsByTagName(t)[0];
+		pp.src = "//app.pageproofer.com/overlay/js/3502/1801";
+		pp.type = "text/javascript";
+		pp.async = true;
+		s.parentNode.insertBefore(pp, s);
 	}
 }
 
@@ -38,13 +49,22 @@ const theme = createMuiTheme({
 
 function App() {
 	initializeReactGA();
-	const [userTrackingBannerState, setUserTrackingBannerState] = useState("none");
+	pageProofer(document, "script");
+	const [userTrackingBannerState, setUserTrackingBannerState] = useState(
+		"none"
+	);
 
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
-				<Header userTrackingBannerState={userTrackingBannerState} setUserTrackingBannerState={setUserTrackingBannerState} />
-				<Routes userTrackingBannerState={userTrackingBannerState} setUserTrackingBannerState={setUserTrackingBannerState} />
+				<Header
+					userTrackingBannerState={userTrackingBannerState}
+					setUserTrackingBannerState={setUserTrackingBannerState}
+				/>
+				<Routes
+					userTrackingBannerState={userTrackingBannerState}
+					setUserTrackingBannerState={setUserTrackingBannerState}
+				/>
 				<Footer />
 			</ThemeProvider>
 		</div>
