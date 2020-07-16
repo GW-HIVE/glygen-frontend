@@ -918,11 +918,11 @@ const ProteinDetail = (props) => {
 																	// </p>
 																	// </Col>
 																))}
-															{!species && (
+															{/* {!species && (
 																<p className="no-data-msg">
 																	No data available.
 																</p>
-															)}
+															)} */}
 														</Row>
 														<Row>
 															{species && (
