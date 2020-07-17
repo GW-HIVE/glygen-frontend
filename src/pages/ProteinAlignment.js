@@ -108,14 +108,6 @@ const ProteinAlignment = () => {
 												{isIsoform ? "Isoform" : "Homolog"} Alignment of{" "}
 												<strong>{id}</strong>
 											</span>
-											<NavLink to={`${routeConstants.proteinDetail}${id}`}>
-												<Button
-													type="button"
-													style={{ marginLeft: "5px" }}
-													className="gg-btn-blue">
-													Back To details
-												</Button>
-											</NavLink>
 										</h2>
 									</div>
 								</Grid>
@@ -139,7 +131,18 @@ const ProteinAlignment = () => {
 									setAlertDialogInput({ show: input });
 								}}
 							/>
-
+							{/* Button */}
+							<div className="text-right gg-download-btn-width">
+								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+									<Button
+										type="button"
+										style={{ marginLeft: "5px" }}
+										className="gg-btn-blue">
+										Back To details
+									</Button>
+								</NavLink>
+							</div>
+							{/* Alignment */}
 							<Accordion
 								id="alignment"
 								defaultActiveKey="0"
@@ -179,6 +182,7 @@ const ProteinAlignment = () => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
+							{/* Summary */}
 							<Accordion
 								id="summary"
 								defaultActiveKey="0"
@@ -264,6 +268,17 @@ const ProteinAlignment = () => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
+							{/* Button */}
+							<div className="text-right gg-download-btn-width">
+								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+									<Button
+										type="button"
+										style={{ marginLeft: "5px" }}
+										className="gg-btn-blue">
+										Back To details
+									</Button>
+								</NavLink>
+							</div>
 						</React.Fragment>
 					</div>
 				</Col>

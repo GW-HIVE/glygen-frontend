@@ -416,7 +416,7 @@ hr {
 	padding-top: 40px !important;
 }
 .gg-align-right {
-	justify-content: flex-end;
+	justify-content: flex-end !important;
 }
 .gg-align-center {
 	justify-content: center !important;
@@ -425,6 +425,9 @@ hr {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+}
+.nowrap {
+	white-space: nowrap !important;
 }
 /* =========================================
         Buttons

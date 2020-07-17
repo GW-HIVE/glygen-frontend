@@ -10,26 +10,24 @@ import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
-import { Link, Typography, Grid } from "@material-ui/core";
+import { Link, Grid } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { Col, Row, Image } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { groupEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import "../css/detail.css";
 import "../css/siteview.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import Table from "react-bootstrap/Table";
+// import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
-
 import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
@@ -56,9 +54,7 @@ const proteinStrings = stringConstants.protein.common;
 
 const items = [
 	{ label: "General", id: "general" },
-
 	{ label: "Sequence", id: "sequence" },
-
 	{ label: "Site-Annotation", id: "annotation" },
 ];
 
@@ -216,7 +212,7 @@ const SequenceLocationViewer = ({
 					</>
 				</Grid>
 				<Grid item>
-					<button onClick={selectNext}>>></button>
+					<button onClick={selectNext}></button>
 				</Grid>
 			</Row>
 		</>
@@ -273,7 +269,7 @@ const Siteview = ({ position }) => {
 						type: glycosylation.type.split("-")[0],
 						label: glycosylation.residue,
 						glytoucan_ac: glycosylation.glytoucan_ac,
-						position: glycosylation.position,
+						// position: glycosylation.position,
 						evidence: glycosylation.evidence,
 						typeAnnotate:
 							glycosylation.type.split("-")[0] + "-" + "Glycosylation",
@@ -329,7 +325,7 @@ const Siteview = ({ position }) => {
 
 		setAllAnnotations(allDataAnnotations);
 		setAnnotations(uniquePositions);
-		
+
 		if (uniquePositions.length && !selectedPosition) {
 			setSelectedPosition(uniquePositions[0].position);
 		}
@@ -457,12 +453,12 @@ const Siteview = ({ position }) => {
 	 * Redirect and opens uniprot_canonical_ac in a GO Term List Page
 	 * @param {object} uniprot_canonical_ac- uniprot accession ID.
 	 **/
-	function handleOpenGOTermListPage(uniprot_canonical_ac) {
-		var url =
-			"https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=" +
-			uniprot_canonical_ac;
-		window.open(url);
-	}
+	// function handleOpenGOTermListPage(uniprot_canonical_ac) {
+	// 	var url =
+	// 		"https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=" +
+	// 		uniprot_canonical_ac;
+	// 	window.open(url);
+	// }
 
 	return (
 		<>
@@ -482,21 +478,13 @@ const Siteview = ({ position }) => {
 											{" "}
 											<span>
 												Siteview for Protein
-												<strong>
+												<strong className="nowrap">
 													{uniprot && uniprot.uniprot_canonical_ac && (
 														<> {uniprot.uniprot_canonical_ac}</>
 													)}
 												</strong>
 											</span>
 										</h2>
-										<NavLink to={`${routeConstants.proteinDetail}${id}`}>
-											<Button
-												type="button"
-												style={{ marginLeft: "5px" }}
-												className="gg-btn-blue">
-												Back To details
-											</Button>
-										</NavLink>
 									</div>
 								</Grid>
 							</Row>
@@ -519,6 +507,14 @@ const Siteview = ({ position }) => {
 									setAlertDialogInput({ show: input });
 								}}
 							/>
+							{/* Button */}
+							<div className="text-right gg-download-btn-width">
+								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+									<Button type="button" className="gg-btn-blue">
+										Back To details
+									</Button>
+								</NavLink>
+							</div>
 							{/* general */}
 							<Accordion
 								id="general"
@@ -670,7 +666,7 @@ const Siteview = ({ position }) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-
+							{/* Sequence */}
 							<Accordion
 								id="sequence"
 								defaultActiveKey="0"
@@ -719,6 +715,7 @@ const Siteview = ({ position }) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
+							{/* Site-Annotation */}
 							<Accordion
 								id="annotation"
 								defaultActiveKey="0"
@@ -762,7 +759,14 @@ const Siteview = ({ position }) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							{/*  Sequence */}
+							{/* Button */}
+							<div className="text-right gg-download-btn-width">
+								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+									<Button type="button" className="gg-btn-blue">
+										Back To details
+									</Button>
+								</NavLink>
+							</div>
 						</React.Fragment>
 					</div>
 				</Col>
