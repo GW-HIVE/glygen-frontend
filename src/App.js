@@ -19,10 +19,18 @@ function initializeReactGA() {
  * for the pageproofer feedback.
  */
 function pageProofer(d, t) {
+	var url = "";
+
+	if (GLYGEN_ENV === "beta") 
+		url = "//app.pageproofer.com/overlay/js/3502/1801";
+
+	if (GLYGEN_ENV === "test")
+		url = '//app.pageproofer.com/overlay/js/3487/1801';
+
 	if (GLYGEN_ENV === "beta" || GLYGEN_ENV === "test") {
 		var pp = d.createElement(t),
 			s = d.getElementsByTagName(t)[0];
-		pp.src = "//app.pageproofer.com/overlay/js/3502/1801";
+		pp.src = url;
 		pp.type = "text/javascript";
 		pp.async = true;
 		s.parentNode.insertBefore(pp, s);
