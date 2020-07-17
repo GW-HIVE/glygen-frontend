@@ -25,7 +25,7 @@ function pageProofer(d, t) {
 		url = "//app.pageproofer.com/overlay/js/3502/1801";
 
 	if (GLYGEN_ENV === "test")
-		url = '//app.pageproofer.com/overlay/js/3487/1801';
+		url = "//app.pageproofer.com/overlay/js/3487/1801";
 
 	if (GLYGEN_ENV === "beta" || GLYGEN_ENV === "test") {
 		var pp = d.createElement(t),
