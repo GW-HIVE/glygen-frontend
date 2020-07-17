@@ -248,7 +248,7 @@
 		]
 	},
 	"proteinAlignment": {
-		"title": "Protein Alignment| Alignment for Selected Protein | glygen.org",
+		"title": "Protein Alignment | Alignment for protein #uniprot_canonical_ac | glygen.org",
 		"meta": [
 			{
 				"name": "description",
@@ -339,7 +339,7 @@
 		]
 	},
 	"siteView": {
-		"title": "Site View | Sequence View | Site Annotation | glygen.org",
+		"title": "Site View | Siteview for protein #uniprot_canonical_ac | glygen.org",
 		"meta": [
 			{
 				"name": "description",

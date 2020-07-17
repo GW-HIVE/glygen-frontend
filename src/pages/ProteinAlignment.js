@@ -105,8 +105,8 @@ const ProteinAlignment = () => {
 										<h2>
 											{" "}
 											<span>
-												{isIsoform ? "Isoform" : "Homolog"} Alignment of{" "}
-												<strong>{id}</strong>
+												{isIsoform ? "Isoform" : "Homolog"} Alignment for
+												protein <strong className="nowrap">{id}</strong>
 											</span>
 										</h2>
 									</div>
@@ -115,12 +115,9 @@ const ProteinAlignment = () => {
 						</div>
 						<React.Fragment>
 							<Helmet>
-								{/* {getTitle("proteinAlignment", {
-                uniprot_canonical_ac:
-                  uniprot && uniprot.uniprot_canonical_ac
-                    ? uniprot.uniprot_canonical_ac
-                    : ""
-              })} */}
+								{getTitle("proteinAlignment", {
+									uniprot_canonical_ac: id && id ? id : "",
+								})}
 								{getMeta("proteinAlignment")}
 							</Helmet>
 							<FeedbackWidget />

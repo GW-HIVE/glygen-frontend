@@ -491,13 +491,13 @@ const Siteview = ({ position }) => {
 						</div>
 						<React.Fragment>
 							<Helmet>
-								{getTitle("proteinDetail", {
+								{getTitle("siteView", {
 									uniprot_canonical_ac:
 										uniprot && uniprot.uniprot_canonical_ac
 											? uniprot.uniprot_canonical_ac
 											: "",
 								})}
-								{getMeta("proteinDetail")}
+								{getMeta("siteView")}
 							</Helmet>
 							<FeedbackWidget />
 							<PageLoader pageLoading={pageLoading} />
