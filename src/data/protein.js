@@ -8,6 +8,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import routeConstants from "./json/routeConstants";
 import stringConstants from "./json/stringConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
+import { logActivity } from "../data/logging";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -35,6 +36,8 @@ export const getProteinDetail = accessionId => {
   return getJson(url);
 };
 export const getProteinDownload = (id, format, compressed, type, headers) => {
+  let message = "downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
   const query = { id, type, format, compressed };
   const url = `/data/download?query=${JSON.stringify(query)}`;
   return postToAndGetBlob(url, headers);

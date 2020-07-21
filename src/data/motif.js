@@ -7,6 +7,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import routeConstants from "./json/routeConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import stringConstants from "./json/stringConstants";
+import { logActivity } from "../data/logging";
 
 const glycanStrings = stringConstants.glycan.common;
 
@@ -30,6 +31,8 @@ export const getMotifList = (
 };
 
 export const getMotifDownload = (id, format, compressed, type, headers) => {
+  let message = "downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
   const query = { id, type, format, compressed };
   const url = `/data/download?query=${JSON.stringify(query)}`;
   return postToAndGetBlob(url, headers);
