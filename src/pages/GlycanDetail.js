@@ -897,7 +897,7 @@ const GlycanDetail = (props) => {
 														<Row>
 															<Col sm={12} md={12} lg={12} xl={6}>
 																{" "}
-																<strong>Inchi</strong>
+																<strong>InCHI</strong>
 															</Col>{" "}
 															<Col
 																sm={12}
