@@ -34,6 +34,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import Button from "react-bootstrap/Button";
 
 const items = [
 	{ label: "General", id: "general" },
@@ -453,7 +454,26 @@ const GlycanDetail = (props) => {
 										</span>
 										<h3 className="gg-green d-inline">General</h3>
 										<div className="float-right">
-											<span className="pr-3">
+											<span>
+												<Button
+													type="button"
+													className="gg-btn-blue"
+													onClick={() => {
+														handleOpenSubsumptionBrowse(
+															glytoucan && glytoucan.glytoucan_ac
+														);
+													}}>
+													<span>
+														<Image
+															className="pr-2"
+															src={relatedGlycansIcon}
+															alt="Related glycans"
+														/>
+													</span>
+													Related Glycans
+												</Button>
+											</span>
+											{/* <span className="pr-3">
 												<a
 													// eslint-disable-next-line
 													href="javascript:void(0)"
@@ -469,7 +489,7 @@ const GlycanDetail = (props) => {
 														/>
 													</LineTooltip>
 												</a>
-											</span>
+											</span> */}
 											<Accordion.Toggle
 												eventKey="0"
 												onClick={() =>
@@ -663,7 +683,7 @@ const GlycanDetail = (props) => {
 												<>
 													<Row>
 														{motifs.map((motif) => (
-															<Col>
+															<Col sm={"auto"}>
 																<p>
 																	<div key={motif.id} className="img-wrapper">
 																		<img

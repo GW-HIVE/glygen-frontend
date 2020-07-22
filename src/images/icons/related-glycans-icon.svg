@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
-    <title>related-glycans-icon</title>
+    <title>relatedGlycansIcon</title>
     <desc>Created with Sketch.</desc>
-    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="related-glycans-icon" transform="translate(-1.000000, -1.000000)">
-            <g id="shape" transform="translate(2.250000, 2.250000)" stroke="#2F78B7" stroke-width="2">
-                <line x1="11.25" y1="12" x2="11.25" y2="15" id="Line-3"></line>
-                <circle id="Oval" cx="10.875" cy="9.375" r="2.625"></circle>
-                <line x1="15.75" y1="3.75" x2="12" y2="7.5" id="Line"></line>
-                <line x1="8.25" y1="11.25" x2="4.5" y2="14.25" id="Line"></line>
-                <line x1="5.625" y1="4.125" x2="8.625" y2="7.125" id="Line-2"></line>
-                <line x1="13.5" y1="10.5" x2="16.5" y2="12.75" id="Line"></line>
-                <circle id="Oval" cx="17.25" cy="2.25" r="2.25"></circle>
-                <circle id="Oval" cx="2.25" cy="15.75" r="2.25"></circle>
-                <circle id="Oval" cx="11.25" cy="17.25" r="2.25"></circle>
-                <circle id="Oval" cx="17.25" cy="13.5" r="1.5"></circle>
-                <circle id="Oval-Copy-34" cx="4.5" cy="3" r="1.5"></circle>
+    <g id="REACT-Homepage" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-146.000000, -113.000000)" fill-rule="nonzero">
+            <g id="relatedGlycansIcon" transform="translate(144.000000, 111.000000)">
+                <g id="Icon" transform="translate(2.000000, 2.000000)" fill="#FFFFFF">
+                    <path d="M24,20 C23.293741,20.0034512 22.6019656,20.2006072 22,20.57 L18.91,17.47 C20.3835955,15.3913371 20.3835955,12.6086629 18.91,10.53 L22,7.43 C22.6019656,7.79939284 23.293741,7.99654883 24,8 C26.209139,8 28,6.209139 28,4 C28,1.790861 26.209139,0 24,0 C21.790861,0 20,1.790861 20,4 C20.0034512,4.70625898 20.2006072,5.39803439 20.57,6 L17.47,9.09 C15.3913371,7.61640449 12.6086629,7.61640449 10.53,9.09 L7.43,6 C7.79939284,5.39803439 7.99654883,4.70625898 8,4 C8,1.790861 6.209139,0 4,0 C1.790861,0 0,1.790861 0,4 C0,6.209139 1.790861,8 4,8 C4.70625898,7.99654883 5.39803439,7.79939284 6,7.43 L9.09,10.53 C7.61640449,12.6086629 7.61640449,15.3913371 9.09,17.47 L6,20.57 C5.39803439,20.2006072 4.70625898,20.0034512 4,20 C1.790861,20 0,21.790861 0,24 C0,26.209139 1.790861,28 4,28 C6.209139,28 8,26.209139 8,24 C7.99654883,23.293741 7.79939284,22.6019656 7.43,22 L10.53,18.91 C12.6086629,20.3835955 15.3913371,20.3835955 17.47,18.91 L20.57,22 C20.2006072,22.6019656 20.0034512,23.293741 20,24 C20,26.209139 21.790861,28 24,28 C26.209139,28 28,26.209139 28,24 C28,21.790861 26.209139,20 24,20 L24,20 Z M14,18 C11.790861,18 10,16.209139 10,14 C10,11.790861 11.790861,10 14,10 C16.209139,10 18,11.790861 18,14 C18,15.060866 17.5785726,16.0782816 16.8284271,16.8284271 C16.0782816,17.5785726 15.060866,18 14,18 Z" id="Icon-Shape"></path>
+                </g>
+                <rect id="ViewBox" x="0" y="0" width="32" height="32"></rect>
             </g>
-            <rect id="ViewBox" fill-rule="nonzero" x="0" y="0" width="24" height="24"></rect>
         </g>
     </g>
 </svg>
