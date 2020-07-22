@@ -268,16 +268,21 @@ const GlycanDetail = (props) => {
 		},
 
 		{
-			dataField: "position",
+			dataField: "position residue",
 			text: "Position",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
 			},
+			// formatter: (value, row) => (
+			// 	<Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
+			// 		{row.position}{row.residue}
+			// 	</Navbar.Text>
+			// ),
 			formatter: (value, row) => (
-				<Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
-					{row.position}
-				</Navbar.Text>
+				<>
+					{row.residue}{row.position}
+				</>
 			),
 		},
 	];
@@ -365,7 +370,8 @@ const GlycanDetail = (props) => {
 	 **/
 	function handleOpenSubsumptionBrowse(glytoucan_ac) {
 		var url =
-			"https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" +
+			//"https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" +
+			"http://gnome.glyomics.org/restrictions/GlyGen.StructureBrowser.html?focus="+
 			glytoucan_ac;
 		window.open(url);
 	}
