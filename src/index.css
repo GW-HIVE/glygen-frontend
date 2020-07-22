@@ -35,6 +35,9 @@ p {
 	color: #444444 !important;
 	/* color: pink; */
 }
+.table-bordered td {
+	border: 1px solid #ced2d6 !important;
+}
 
 h1,
 h2,
