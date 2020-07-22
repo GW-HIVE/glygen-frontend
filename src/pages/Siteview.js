@@ -98,11 +98,11 @@ const SequenceLocationViewer = ({
 		);
 
 		if (match) {
-			if (match.type == "N") {
+			if (match.type === "N") {
 				return "highlightN";
-			} else if (match.type == "O") {
+			} else if (match.type === "O") {
 				return "highlightO";
-			} else if (match.type == "M") {
+			} else if (match.type === "M") {
 				return "highlightMutate";
 			}
 		}

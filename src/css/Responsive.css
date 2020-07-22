@@ -38,6 +38,10 @@
 	.img-responsive {
 		width: 100% !important;
 	}
+	.gg-protvista-container {
+		width: 92% !important;
+		margin: 0 auto !important;
+	}
 }
 
 /* Extra Small Devices (Landscape Phones & Portrait Tablets) */
@@ -109,6 +113,10 @@
 	}
 	.gg-btn-outline-white {
 		margin: 10px 10px 0;
+	}
+	.gg-protvista-container {
+		width: 92% !important;
+		margin: 0 auto !important;
 	}
 }
 
