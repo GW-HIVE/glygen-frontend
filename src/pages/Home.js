@@ -63,7 +63,7 @@ const featuredCards = [
 	{
 		title: "Data",
 		description:
-			"Data from the different resources can be accessed and downloaded in resource-specific formats (e.g. RDF).",
+			"Data from the different resources can be accessed and downloaded in resource-specific formats (e.g. CSV, RDF).",
 		image: dataImg,
 		imageText: "Data",
 		href: GLYGEN_DATA,
