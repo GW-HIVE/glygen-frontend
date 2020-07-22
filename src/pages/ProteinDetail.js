@@ -745,8 +745,8 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																	{genes.locus.start_pos} -{" "}
-																	{genes.locus.end_pos})
+																		{addCommas(genes.locus.start_pos)} -{" "}
+																		{addCommas(genes.locus.end_pos)}
 																</div>
 
 																<EvidenceList
@@ -1159,7 +1159,7 @@ const ProteinDetail = (props) => {
 														title="Without Reported Glycan">
 														<Container>
 															{glycosylationWithoutImage &&
-																glycosylationWithoutImage.length && (
+																(glycosylationWithoutImage.length>0) && (
 																	<ClientPaginatedTable
 																		data={glycosylationWithoutImage}
 																		columns={glycoSylationColumns.filter(
