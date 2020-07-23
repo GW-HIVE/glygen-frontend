@@ -15,6 +15,7 @@ import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import "../css/detail.css";
+import "../css/Responsive.css";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import DownloadButton from "../components/DownloadButton";
@@ -259,8 +260,9 @@ const ProteinDetail = (props) => {
 		function: functions,
 	} = detailData;
 
-	const speciesid = taxid
-  const speciesUrl="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + speciesid
+	const speciesid = taxid;
+	const speciesUrl =
+		"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + speciesid;
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
 		{
@@ -271,6 +273,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "25%",
 				};
 			},
 			formatter: (cell, row) => {
@@ -329,7 +332,7 @@ const ProteinDetail = (props) => {
 			),
 			headerStyle: (colum, colIndex) => {
 				return {
-					width: "30%",
+					width: "35%",
 					textAlign: "left",
 					backgroundColor: "#4B85B6",
 					color: "white",
@@ -365,6 +368,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "20%",
 				};
 			},
 			formatter: (cell, row) => {
@@ -384,6 +388,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "20%",
 				};
 			},
 		},
@@ -396,15 +401,19 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "16%",
 				};
 			},
 			formatter: (value, row) => (
 				<>
-					{value.name} (DOID:
-					<Navbar.Text as={NavLink} to={value.url}>
-						{value.doid}
-					</Navbar.Text>
-					)
+					{value.name}{" "}
+					<span className="nowrap">
+						(DOID:{" "}
+						<Navbar.Text as={NavLink} to={value.url}>
+							{value.doid}
+						</Navbar.Text>
+						)
+					</span>
 				</>
 			),
 		},
@@ -493,11 +502,14 @@ const ProteinDetail = (props) => {
 			},
 			formatter: (value, row) => (
 				<>
-					{value.name} (UBERON:
-					<Navbar.Text as={NavLink} to={value.url}>
-						{value.uberon}
-					</Navbar.Text>
-					)
+					{value.name}{" "}
+					<span className="nowrap">
+						(UBERON:{" "}
+						<Navbar.Text as={NavLink} to={value.url}>
+							{value.uberon}
+						</Navbar.Text>
+						)
+					</span>
 				</>
 			),
 		},
@@ -547,11 +559,14 @@ const ProteinDetail = (props) => {
 			},
 			formatter: (value, row) => (
 				<>
-					{value.name} (DOID:
-					<Navbar.Text as={NavLink} to={value.url}>
-						{value.doid}
-					</Navbar.Text>
-					)
+					{value.name}{" "}
+					<span className="nowrap">
+						(DOID:{" "}
+						<Navbar.Text as={NavLink} to={value.url}>
+							{value.doid}
+						</Navbar.Text>
+						)
+					</span>
 				</>
 			),
 		},
@@ -632,7 +647,12 @@ const ProteinDetail = (props) => {
 					<Sidebar items={items} />
 				</Col>
 
-				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+				<Col
+					sm={12}
+					md={12}
+					lg={12}
+					xl={9}
+					className="sidebar-page sidebar-page-mb">
 					<div className="sidebar-page-mb">
 						<div className="content-box-md">
 							<Row>
@@ -749,8 +769,8 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																		{addCommas(genes.locus.start_pos)} -{" "}
-																		{addCommas(genes.locus.end_pos)}
+																	{addCommas(genes.locus.start_pos)} -{" "}
+																	{addCommas(genes.locus.end_pos)}
 																</div>
 
 																<EvidenceList
@@ -928,20 +948,20 @@ const ProteinDetail = (props) => {
 																<>
 																	{species.map((species) => (
 																		<>
-																			<Row>
-																				<Col style={{ whiteSpace: "nowrap" }}>
-																					<strong> Taxonomy ID: </strong>{" "}
-																					{species.taxid}
+																			<Row style={{ whiteSpace: "nowrap" }}>
+																				<Col>
+																					<strong> Taxonomy ID: </strong>
+																					{/* {species.taxid} */}
 																				</Col>
+																				{"["}
 																				<Link
-																				href= {speciesUrl}
-																				target="_blank"
-																				rel="noopener noreferrer">
+																					href={speciesUrl}
+																					target="_blank"
+																					rel="noopener noreferrer">
 																					{species.taxid}
-																			</Link>
+																				</Link>
+																				{"]"}
 																			</Row>
-
-																		
 																		</>
 																	))}
 																</>
@@ -1019,7 +1039,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Go Annotation</h3>
+										<h3 className="gg-green d-inline">GO Annotation</h3>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1055,7 +1075,7 @@ const ProteinDetail = (props) => {
 																				href={term.url}
 																				target="_blank"
 																				rel="noopener noreferrer">
-																				{term.name}({term.id})
+																				{term.name} ({term.id})
 																			</Link>
 																		</Col>
 																		<Col sm={6} md={5}>
@@ -1153,7 +1173,7 @@ const ProteinDetail = (props) => {
 																paddingBottom: "30px",
 															}}>
 															{glycosylationWithImage &&
-																(glycosylationWithImage.length > 0) && (
+																glycosylationWithImage.length > 0 && (
 																	<ClientPaginatedTable
 																		data={glycosylationWithImage}
 																		columns={glycoSylationColumns}
@@ -1171,7 +1191,7 @@ const ProteinDetail = (props) => {
 														title="Without Reported Glycan">
 														<Container>
 															{glycosylationWithoutImage &&
-																(glycosylationWithoutImage.length>0) && (
+																glycosylationWithoutImage.length > 0 && (
 																	<ClientPaginatedTable
 																		data={glycosylationWithoutImage}
 																		columns={glycoSylationColumns.filter(
@@ -1288,8 +1308,7 @@ const ProteinDetail = (props) => {
 													{itemsPathway.map((pathway) => (
 														<li>
 															<strong>
-																{pathway.id}
-																{pathway.resource}
+																{pathway.id} {pathway.resource}
 															</strong>
 
 															<ul style={{ marginBottom: "10px" }}>
@@ -1297,7 +1316,7 @@ const ProteinDetail = (props) => {
 																	{pathway.links.map((link) => (
 																		<Col xs={12} sm={12}>
 																			<li>
-																				{link.name}
+																				{link.name}{" "}
 																				<a
 																					href={link.url}
 																					target="_blank"
@@ -1386,15 +1405,13 @@ const ProteinDetail = (props) => {
 																	</Link>
 																</div>
 																{sequence && sequence.length && (
-																<div>
-																	<strong> Isoform length: </strong>
-																	{sequence.length}
+																	<div>
+																		<strong> Isoform length: </strong>
+																		{sequence.length}
 																	</div>
-																	)}
-															
+																)}
 
 																<div>
-								
 																	Chromosome: {""}
 																	{isoformsS.locus.chromosome} {""}(
 																	{isoformsS.locus.start_pos} -{" "}
@@ -1517,12 +1534,12 @@ const ProteinDetail = (props) => {
 																key={orthologsSuniprot_canonical_ac}>
 																<div>
 																	<strong>UniProtKB Isoform Accession: </strong>
-																	<Link
+																	{/* <Link
 																		href={orthologsS.url}
 																		target="_blank"
-																		rel="noopener noreferrer">
-																		{orthologsS.uniprot_canonical_ac}
-																	</Link>
+																		rel="noopener noreferrer"> */}
+																	{orthologsS.uniprot_canonical_ac}
+																	{/* </Link> */}
 																</div>
 																<div>
 																	<strong>Organism: </strong>
