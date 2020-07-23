@@ -478,7 +478,7 @@
         "id": "uniprot_id"
       },
       "sequence_length": {
-        "name": "UniProtKB Accession Length",
+        "name": "Protein Length",
         "shortName": "length",
         "tooltip": {},
         "id": "length"
@@ -500,7 +500,7 @@
       },
       "refseq_ac": {
         "name": "RefSeq Accession",
-        "shortName": "refseq_ac",
+        "shortName": "ac",
         "tooltip": {
           "title": "RefSeq Accession",
           "text": "A distinct accession number format assigned to RefSeq record that begins with two characters followed by an underscore in the NCBI RefSeq database. Enter the RefSeq Accession of your protein.",
@@ -547,12 +547,12 @@
     "question_1": {
       "text": "What are the enzymes involved in the biosynthesis of {0} in human?",
       "id": "question_1"
-		},
-		"question_2": {
+    },
+    "question_2": {
       "text": "Which proteins have been shown to bear {0} and which site is this glycan attached to?",
       "id": "question_2"
-		},
-		"question_3": {
+    },
+    "question_3": {
       "text": "What are the gene locations of the enzymes involved in the biosynthesis of {0} in human?",
       "id": "question_3"
     },
@@ -605,7 +605,7 @@
       "text": "Which glycans might have been synthesized in mouse using Mgat1({0})?",
       "tryMeId": "question_tryMe3",
       "id": "question_6"
-		}
+    }
   },
   "errors": {
     "contactUsMsg": "If the problem persists then you may",
