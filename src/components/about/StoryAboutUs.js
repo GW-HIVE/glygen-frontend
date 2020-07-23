@@ -102,7 +102,7 @@ const StoryAboutUs = (props) => {
 						<Col sm={12} md={12} lg={12}>
 							<VerticalHeading post={vertHeadOurStory} />
 							<Row>
-								<Col xs={12}>
+								<Col xs={12} md={6}>
 									<p>
 										GlyGen is an international project funded by The National
 										Institutes of Health to facilitate glycoscience research by
@@ -111,7 +111,7 @@ const StoryAboutUs = (props) => {
 										biology, developmental biology and biochemistry.
 									</p>
 								</Col>
-								<Col xs={12}>
+								<Col xs={12} md={6}>
 									<p>
 										GlyGen retrieves information from multiple international
 										data sources and integrates and harmonizes this data. GlyGen
@@ -130,9 +130,9 @@ const StoryAboutUs = (props) => {
 				<Container maxWidth="lg" className="gg-container">
 					<HorizontalHeading post={horHeadOurGoal} />
 					<Row>
-						<Col sm={4}>
+						<Col xs={12} lg={4}>
 							{/* Goal item 01 */}
-							<div className="about-item text-center">
+							<div className="about-item card text-center mb-2">
 								<p>
 									The major goal of GlyGen is to develop an integrated,
 									extendable, and cross-disciplinary resource providing tools
@@ -140,9 +140,9 @@ const StoryAboutUs = (props) => {
 								</p>
 							</div>
 						</Col>
-						<Col sm={4}>
+						<Col xs={12} lg={4}>
 							{/* Goal item 02 */}
-							<div class="about-item text-center">
+							<div class="about-item card text-center mb-2">
 								<p>
 									Currently, these questions can be answered only by extensive
 									literature-based research and/or manual collection of data
@@ -150,9 +150,9 @@ const StoryAboutUs = (props) => {
 								</p>
 							</div>
 						</Col>
-						<Col sm={4}>
+						<Col xs={12} lg={4}>
 							{/* Goal item 03 */}
-							<div class="about-item text-center">
+							<div class="about-item card text-center mb-2">
 								<p>
 									The GlyGen project is built using insight gained during
 									workshops which evaluated existing resources and identified
@@ -203,7 +203,7 @@ const StoryAboutUs = (props) => {
 					<Row>
 						<Col sm={6}>
 							{/* Resource item 01 */}
-							<div className="about-item text-center mb-3 border-blue">
+							<div className="about-item card text-center mb-3 border-blue">
 								<p>
 									Ongoing technical advances are accelerating the pace and
 									sophistication of glycoscience data acquisition, the
@@ -213,7 +213,7 @@ const StoryAboutUs = (props) => {
 						</Col>
 						<Col sm={6}>
 							{/* Resource item 02 */}
-							<div class="about-item text-center mb-3 text-blue">
+							<div class="about-item card text-center mb-3 text-blue">
 								<p>
 									Understanding is compromised by the lack of glycoinformatics
 									databases and tools to combine information from related
@@ -223,7 +223,7 @@ const StoryAboutUs = (props) => {
 						</Col>
 						<Col sm={6}>
 							{/* Resource item 03 */}
-							<div class="about-item text-center mb-3 text-blue">
+							<div class="about-item card text-center mb-3 text-blue">
 								<p>
 									Functional and biomedical interpretation of glycobiology data
 									is slowed by our limited ability to integrate it with
@@ -233,7 +233,7 @@ const StoryAboutUs = (props) => {
 						</Col>
 						<Col sm={6}>
 							{/* Resource item 04 */}
-							<div class="about-item text-center mb-3 border-blue">
+							<div class="about-item card text-center mb-3 border-blue">
 								<p>
 									GlyGen addresses these needs as a broadly relevant and
 									sustainable glycoinformatics resource that provides a roadmap
