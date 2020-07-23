@@ -77,6 +77,7 @@ function addCommas(nStr) {
 	}
 	return x1 + x2;
 }
+
 /**
  * This function opens the Sequence page.
  */
@@ -257,6 +258,9 @@ const ProteinDetail = (props) => {
 		site_annotation,
 		function: functions,
 	} = detailData;
+
+	const speciesid = taxid
+  const speciesUrl="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + speciesid
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
 		{
@@ -795,7 +799,7 @@ const ProteinDetail = (props) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href="https://www.uniprot.org/uniprot/#sequnce"
+																href="https://www.uniprot.org/uniprot/+{uniprot_canonical_ac}/#sequences"
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
@@ -929,7 +933,15 @@ const ProteinDetail = (props) => {
 																					<strong> Taxonomy ID: </strong>{" "}
 																					{species.taxid}
 																				</Col>
+																				<Link
+																				href= {speciesUrl}
+																				target="_blank"
+																				rel="noopener noreferrer">
+																					{species.taxid}
+																			</Link>
 																			</Row>
+
+																		
 																		</>
 																	))}
 																</>
@@ -1373,11 +1385,16 @@ const ProteinDetail = (props) => {
 																		{isoformsS.isoform_ac}
 																	</Link>
 																</div>
+																{sequence && sequence.length && (
+																<div>
+																	<strong> Isoform length: </strong>
+																	{sequence.length}
+																	</div>
+																	)}
+															
 
 																<div>
-																	{/* <strong>
-                                  {proteinStrings.isoforms_location.isoform_ac}:
-                                </strong> */}
+								
 																	Chromosome: {""}
 																	{isoformsS.locus.chromosome} {""}(
 																	{isoformsS.locus.start_pos} -{" "}
