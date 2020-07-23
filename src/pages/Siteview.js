@@ -624,7 +624,7 @@ const Siteview = ({ position }) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href="https://www.uniprot.org/uniprot/#sequnce"
+																href="https://www.uniprot.org/uniprot/#sequence"
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
