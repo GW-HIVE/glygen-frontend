@@ -69,10 +69,17 @@ export default function MainFeaturedCard(props) {
 							component="h5"
 							variant="h6"
 							color="inherit"
-							gutterBottom>
+							gutterBottom
+							// style={ { letterSpacing: "1px" } }
+						>
 							{post.title}
 						</Typography>
-						<Typography component="h6" color="inherit" paragraph>
+						<Typography
+							component="h6"
+							color="inherit"
+							paragraph
+							// style={ { letterSpacing: "1px" } }
+						>
 							{post.description}
 						</Typography>
 						{/* <Typography paragraph style={{ marginBottom: "40px" }}>

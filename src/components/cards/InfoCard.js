@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
 		display: "inline-flex",
 		cursor: "pointer !important",
 	},
-	card: {
-		// display: 'flex'
-		// maxWidth: 345
-	},
 	cardTitle: {
 		textAlign: "center",
 	},
@@ -27,11 +23,10 @@ const useStyles = makeStyles((theme) => ({
 		flex: 1,
 	},
 	cardMedia: {
-		height: 180,
 		margin: "0 auto",
 	},
 	divider: {
-		margin: theme.spacing(1, 1),
+		margin: theme.spacing(2, 1),
 	},
 }));
 
@@ -46,14 +41,8 @@ export default function InfoCard(props) {
 				{/* <CardActionArea> */}
 				<Card className="card">
 					<div className={classes.cardDetails}>
-						<CardContent>
-							<h4
-								// gutterBottom
-								// variant='h5'
-								// component='h2'
-								className={classes.cardTitle}>
-								{post.title}
-							</h4>
+						<CardContent style={{ paddingBottom: "0" }}>
+							<h4 className="text-center">{post.title}</h4>
 							{/* <Hidden xsDown> */}
 							<CardMedia
 								component="img"
@@ -62,13 +51,9 @@ export default function InfoCard(props) {
 								title={post.imageTitle}
 							/>
 							{/* </Hidden> */}
-							{/* <Typography variant="p" color="textSecondary" paragraph> */}
 							<p>{post.description}</p>
-							{/* </Typography> */}
 							<Divider className={classes.divider} />
 							<p
-								// variant="subtitle1"
-								// color="primary"
 								className="text-center"
 								style={{ fontWeight: "bold", color: "#2f78b7" }}>
 								{post.button}

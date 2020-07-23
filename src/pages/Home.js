@@ -30,7 +30,7 @@ import { axiosError } from "../data/axiosError";
 // import BannerHotTopic from "../components/alert/BannerHotTopic";
 
 const mainFeaturedCard = {
-	title: "Computational and Informatics Resources for Glycoscience",
+	title: "GlyGen: Computational and Informatics Resources for Glycoscience",
 	description:
 		"GlyGen is a data integration and dissemination project for carbohydrate and glycoconjugate related data. GlyGen retrieves information from multiple international data sources and integrates and harmonizes this data. This web portal allows exploring this data and performing unique searches that cannot be executed in any of the integrated databases alone.",
 	image: mainImg,
@@ -55,7 +55,7 @@ const featuredCards = [
 	{
 		title: "Quick Search",
 		description:
-			"Quick Search option provides complex, multi-domain queries that are based on user requests.",
+			"Quick Search provides multi-domain queries that are based on user requests.",
 		image: quickSearchImg,
 		imageText: "Quick Search",
 		to: routeConstants.quickSearch,

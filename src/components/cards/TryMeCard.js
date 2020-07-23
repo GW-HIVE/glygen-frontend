@@ -28,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
 	cardAction: {
 		display: "inline-flex",
 	},
-	card: {
-		// display: 'flex'
-		// maxWidth: 345
-	},
 	cardTitle: {
 		textAlign: "center",
 		paddingBottom: "8px",
@@ -186,8 +182,9 @@ export default function TryMeCard(props) {
 									{tryMe.question_tryMe1.text.split("{0}")[0]}
 									<span className={classes.selected}>Man5 (G46836GH)</span>
 									{tryMe.question_tryMe1.text.split("{0}")[1]}
-									<div style={{ paddingBottom: "10px" }}></div>
+									{/* <div style={{ paddingBottom: "10px" }}></div> */}
 									<TextAlert
+										style={{ paddingTop: "10px" }}
 										alertInput={
 											alertText.question === quickSearch.question_tryMe1.tryMeId
 												? alertText.input
@@ -201,8 +198,9 @@ export default function TryMeCard(props) {
 										a bi-antennary fully sialylated N-Glycan (G77252PU)
 									</span>
 									{tryMe.question_tryMe2.text.split("{0}")[1]}
-									<div style={{ paddingBottom: "10px" }}></div>
+									{/* <div style={{ paddingBottom: "10px" }}></div> */}
 									<TextAlert
+										style={{ paddingTop: "10px" }}
 										alertInput={
 											alertText.question === quickSearch.question_tryMe2.tryMeId
 												? alertText.input
@@ -214,8 +212,9 @@ export default function TryMeCard(props) {
 									{tryMe.question_tryMe3.text.split("{0}")[0]}
 									<span className={classes.selected}>Mgat1 (P27808-1)</span>
 									{tryMe.question_tryMe3.text.split("{0}")[1]}
-									<div style={{ paddingBottom: "10px" }}></div>
+									{/* <div style={{ paddingBottom: "10px" }}></div> */}
 									<TextAlert
+										style={{ paddingTop: "10px" }}
 										alertInput={
 											alertText.question === quickSearch.question_tryMe3.tryMeId
 												? alertText.input
