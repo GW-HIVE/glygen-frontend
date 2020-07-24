@@ -132,8 +132,8 @@
         "enzyme": {
             "length": 100,
             "errorText": "Entry is too long - max length is 100.",
-            "typeahedID": "gene_name",
-            "placeholder": "Enter the Gene Name of an enzyme",
+            "typeahedID": "enzyme",
+            "placeholder": "Enter the Gene Name or UniProtKB Accession of an enzyme",
             "examples": [
                 {
                     "orderID": 100,
