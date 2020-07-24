@@ -819,7 +819,7 @@ const ProteinDetail = (props) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href="https://www.uniprot.org/uniprot/+{uniprot_canonical_ac}/#sequences"
+																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
