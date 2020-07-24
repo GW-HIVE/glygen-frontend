@@ -245,116 +245,124 @@ const Resources = () => {
 				style={{ backgroundColor: '#fff' }}> */}
 			<Row className="gg-baseline">
 				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-					<Sidebar items={items} />
+					<Sidebar items={items} offset={125}/>
 				</Col>
 				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
-					<VerticalHeading post={verticalHeadingData} id="data" />
-					<BootstrapTable
-						bootstrap4
-						striped
-						hover
-						headerClasses={classes.tableHeader}
-						keyField="id"
-						data={resourcesData.dataResourcesData}
-						columns={dataResourcesCols}
-						defaultSorted={[
-							{
-								dataField: "category",
-								order: "asc",
-							},
-						]}
-					/>
-					<div className="goToTop">
-						<a href="#top-heading">
-							to Top
-							<span>
-								<ArrowUpwardIcon />
-							</span>
-						</a>
+					<div id="data">
+						<VerticalHeading post={verticalHeadingData}/>
+						<BootstrapTable
+							bootstrap4
+							striped
+							hover
+							headerClasses={classes.tableHeader}
+							keyField="id"
+							data={resourcesData.dataResourcesData}
+							columns={dataResourcesCols}
+							defaultSorted={[
+								{
+									dataField: "category",
+									order: "asc",
+								},
+							]}
+						/>
+						<div className="goToTop">
+							<a href="#top-heading">
+								to Top
+								<span>
+									<ArrowUpwardIcon />
+								</span>
+							</a>
+						</div>
 					</div>
 
-					<VerticalHeading post={verticalHeadingTools} id="tools" />
-					<BootstrapTable
-						bootstrap4
-						striped
-						hover
-						headerClasses={classes.tableHeader}
-						keyField="id"
-						data={resourcesData.toolsResourcesData}
-						columns={toolsResourcesCols}
-						defaultSorted={[
-							{
-								dataField: "category",
-								order: "asc",
-							},
-						]}
-					/>
-					<div className="goToTop">
-						<a href="#top-heading">
-							to Top
-							<span>
-								<ArrowUpwardIcon />
-							</span>
-						</a>
+					<div id="tools">
+						<VerticalHeading post={verticalHeadingTools}/>
+						<BootstrapTable
+							bootstrap4
+							striped
+							hover
+							headerClasses={classes.tableHeader}
+							keyField="id"
+							data={resourcesData.toolsResourcesData}
+							columns={toolsResourcesCols}
+							defaultSorted={[
+								{
+									dataField: "category",
+									order: "asc",
+								},
+							]}
+						/>
+						<div className="goToTop">
+							<a href="#top-heading">
+								to Top
+								<span>
+									<ArrowUpwardIcon />
+								</span>
+							</a>
+						</div>
 					</div>
 
-					<VerticalHeading post={verticallHeadingOrganiz} id="organizations" />
-					<BootstrapTable
-						bootstrap4
-						striped
-						hover
-						headerClasses={classes.tableHeader}
-						keyField="id"
-						data={resourcesData.organizResourcesData}
-						columns={organizResourcesCols}
-						defaultSorted={[
-							{
-								dataField: "category",
-								order: "asc",
-							},
-						]}
-					/>
-					<div className="goToTop">
-						<a href="#top-heading">
-							to Top
-							<span>
-								<ArrowUpwardIcon />
-							</span>
-						</a>
+					<div id="organizations">
+						<VerticalHeading post={verticallHeadingOrganiz}/>
+						<BootstrapTable
+							bootstrap4
+							striped
+							hover
+							headerClasses={classes.tableHeader}
+							keyField="id"
+							data={resourcesData.organizResourcesData}
+							columns={organizResourcesCols}
+							defaultSorted={[
+								{
+									dataField: "category",
+									order: "asc",
+								},
+							]}
+						/>
+						<div className="goToTop">
+							<a href="#top-heading">
+								to Top
+								<span>
+									<ArrowUpwardIcon />
+								</span>
+							</a>
+						</div>
+						<p>
+							*** If you want to see your tools and/or data resources on our
+							website, please contact us <a href="/contact_us"> here</a>.***
+						</p>
 					</div>
-					<p>
-						*** If you want to see your tools and/or data resources on our
-						website, please contact us <a href="/contact_us"> here</a>.***
-					</p>
 
-					<VerticalHeading post={verticalHeadingLearn} id="learn" />
-					<BootstrapTable
-						bootstrap4
-						striped
-						hover
-						headerClasses={classes.tableHeader}
-						keyField="id"
-						data={resourcesData.learnResourcesData}
-						columns={learnResourcesCols}
-						defaultSorted={[
-							{
-								dataField: "name",
-								order: "asc",
-							},
-						]}
-					/>
-					<div className="goToTop">
-						<a href="#top-heading">
-							to Top
-							<span>
-								<ArrowUpwardIcon />
-							</span>
-						</a>
+					<div id="learn">
+						<VerticalHeading post={verticalHeadingLearn}/>
+						<BootstrapTable
+							bootstrap4
+							striped
+							hover
+							headerClasses={classes.tableHeader}
+							keyField="id"
+							data={resourcesData.learnResourcesData}
+							columns={learnResourcesCols}
+							defaultSorted={[
+								{
+									dataField: "name",
+									order: "asc",
+								},
+							]}
+						/>
+						<div className="goToTop">
+							<a href="#top-heading">
+								to Top
+								<span>
+									<ArrowUpwardIcon />
+								</span>
+							</a>
+						</div>
+						<p>
+							*** If you want to see your tools and/or data resources on our
+							website, please contact us <a href="/contact_us"> here</a>.***
+						</p>
 					</div>
-					<p>
-						*** If you want to see your tools and/or data resources on our
-						website, please contact us <a href="/contact_us"> here</a>.***
-					</p>
 				</Col>
 			</Row>
 			{/* </Container> */}
