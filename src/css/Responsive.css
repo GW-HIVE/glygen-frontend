@@ -118,6 +118,9 @@
 		width: 92% !important;
 		margin: 0 auto !important;
 	}
+	.contact-univ-address {
+		text-align: center !important;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
@@ -147,6 +150,9 @@
 		margin: 5px auto;
 		overflow: auto;
 		width: 100% !important;
+	}
+	.contact-univ-address {
+		text-align: center !important;
 	}
 }
 @media (min-width: 600px) {

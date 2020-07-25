@@ -1,9 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Link } from '@material-ui/core';
 import '../../css/Sidebar.css';
 
-function Sidebar({ items }) {
+
+function Sidebar({ items, offset=105 }) {
 	const [activeLink, setActiveLink] = useState(items[0].id);
+
+	useLayoutEffect(() => {
+		const handleScrollEvent = e => {
+		  var set = false;
+		  console.log(document.pageYOffset);
+		  items && items.map((item) => {
+			  var element = document.getElementById(item.id);
+			  var elementOffsetTop = element.offsetTop;
+			  var winPageYOffset = window.pageYOffset;
+			  var elementOffsetHeight = element.offsetHeight;
+			  
+			  if (!set && element && ((((parseInt(elementOffsetTop) +  parseInt(elementOffsetHeight) + parseInt(offset)) > (parseInt(winPageYOffset))) && ((parseInt(elementOffsetTop)) < (parseInt(winPageYOffset)))))) {
+				  setActiveLink(item.id)
+				  set = true;
+			  }
+		  });
+		}
+	
+		window.addEventListener("scroll", handleScrollEvent);
+		
+	  }, [])
 
 	return (
 		<div className='sidebar-container sidbar-top-padding'>
