@@ -2,10 +2,12 @@
 	/* width: 90%; */
 	margin: 0 auto !important;
 	overflow: auto;
-	margin-bottom: 400px;
+	margin-bottom: 40px !important;
 	position: relative;
 }
-
+.sidebar-page-mb {
+	margin-bottom: 700px !important;
+}
 .sidebarpages-page {
 	margin: 40px auto !important;
 }
@@ -90,4 +92,12 @@ ul.sidebar-item {
 .active .sidebar-item:focus {
 	background-color: var(--gg-blue) !important;
 	color: #ffffff !important;
+}
+@media (min-width: 280px) and (max-width: 1199px) {
+	.gg-baseline {
+		margin: 0 auto !important;
+	}
+	.sidebar-page-mb {
+		margin-bottom: 0 !important;
+	}
 }
