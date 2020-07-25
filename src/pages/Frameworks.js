@@ -17,7 +17,7 @@ import {
 import { IoLogoJavascript } from "react-icons/io";
 import { AiOutlineApi, AiFillDatabase } from "react-icons/ai";
 import { DiMongodb } from "react-icons/di";
-import { ReactComponent as MaterialUi } from "../images/icons/icon-:material-ui.svg";
+import { ReactComponent as MaterialUi } from "../images/icons/icon-material-ui.svg";
 import { ReactComponent as JsonIcon } from "../images/icons/jsonIcon.svg";
 import { ReactComponent as Swagger } from "../images/icons/swagger.svg";
 import { ReactComponent as Flask } from "../images/icons/flask.svg";
