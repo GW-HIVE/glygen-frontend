@@ -88,12 +88,26 @@ const SequenceLocationViewer = ({
 	var centerSize = 54;
 	var translateCenter = -22;
 
+	const reducedAnnotations = annotations/*.reduce((all, current) => {
+		const atPosition = all.find(x => (x.position === current.position))
+
+		if (!atPosition) {
+			all.push(current)
+		}
+
+		return all
+	}, [])*/
+	reducedAnnotations.sort(sortByPosition)
+
 	const [styledSequence, setStyledSequence] = useState([]);
-	const currentAnnotation = annotations.find((x) => x.position === position);
-	const currentAnnotationIndex = annotations.indexOf(currentAnnotation);
+	const currentAnnotation = reducedAnnotations.find((x) => x.position === position);
+
+	
+
+	const currentAnnotationIndex = reducedAnnotations.indexOf(currentAnnotation);
 
 	const getHighlightClassname = (position) => {
-		const match = annotations.find(
+		const match = reducedAnnotations.find(
 			(annotation) => annotation.position === position
 		);
 
@@ -152,17 +166,17 @@ const SequenceLocationViewer = ({
 		}
 
 		setStyledSequence(baseValues);
-	}, [sequence, annotations, position]);
+	}, [sequence, reducedAnnotations, position]);
 
 	const selectPrevious = () => {
 		if (currentAnnotationIndex > 0) {
-			onSelectPosition(annotations[currentAnnotationIndex - 1].position);
+			onSelectPosition(reducedAnnotations[currentAnnotationIndex - 1].position);
 		}
 	};
 
 	const selectNext = () => {
-		if (currentAnnotationIndex < annotations.length) {
-			onSelectPosition(annotations[currentAnnotationIndex + 1].position);
+		if (currentAnnotationIndex < reducedAnnotations.length) {
+			onSelectPosition(reducedAnnotations[currentAnnotationIndex + 1].position);
 		}
 	};
 
@@ -174,7 +188,7 @@ const SequenceLocationViewer = ({
 					<select
 						value={position}
 						onChange={(event) => onSelectPosition(event.target.value)}>
-						{annotations.map((annotation) => (
+						{reducedAnnotations.map((annotation) => (
 							<option value={annotation.position}>{annotation.key}</option>
 						))}
 					</select>
@@ -186,7 +200,7 @@ const SequenceLocationViewer = ({
 				</Grid>
 				<Grid item xs={10} sm={10} className="sequence-scroll">
 					<>
-						{/* <pre>{JSON.stringify(annotations, null, 2)}</pre> */}
+						{/* <pre>{JSON.stringify(reducedAnnotations, null, 2)}</pre> */}
 
 						<Grid className="zoom">
 							<div className="zoom-sequence">
@@ -212,7 +226,7 @@ const SequenceLocationViewer = ({
 					</>
 				</Grid>
 				<Grid item>
-					<button onClick={selectNext}></button>
+					<button onClick={selectNext}>{">>"}</button>
 				</Grid>
 			</Row>
 		</>
