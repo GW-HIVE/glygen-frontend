@@ -281,7 +281,8 @@ const GlycanDetail = (props) => {
 			// ),
 			formatter: (value, row) => (
 				<>
-					{row.residue}{row.position}
+					{row.residue}
+					{row.position}
 				</>
 			),
 		},
@@ -371,7 +372,7 @@ const GlycanDetail = (props) => {
 	function handleOpenSubsumptionBrowse(glytoucan_ac) {
 		var url =
 			//"https://raw.githack.com/glygen-glycan-data/GNOme/GlyGen_DEV/restrictions/GNOme_GlyGen.browser.html?focus=" +
-			"http://gnome.glyomics.org/restrictions/GlyGen.StructureBrowser.html?focus="+
+			"http://gnome.glyomics.org/restrictions/GlyGen.StructureBrowser.html?focus=" +
 			glytoucan_ac;
 		window.open(url);
 	}
@@ -620,32 +621,23 @@ const GlycanDetail = (props) => {
 											<Row>
 												{speciesEvidence &&
 													// For every species object
-													Object.keys(speciesEvidence).map((species) => (
+													Object.keys(speciesEvidence).map((speEvi) => (
 														// For every database for current species object
-														<Col xs={12} sm={12} md={6} lg={6} xl={6}>
-															<p>
-																<>
-																	<Row>
-																		<Col
-																			align="right"
-																			style={{
-																				paddingTop: "12px",
-																			}}>
-																			<strong>{species}:</strong>
-																		</Col>
-																		<Col
-																			align="left"
-																			style={{
-																				paddingLeft: "0",
-																				marginLeft: "0",
-																			}}>
-																			<EvidenceList
-																				evidences={speciesEvidence[species]}
-																			/>
-																		</Col>
-																	</Row>
-																</>
-															</p>
+														<Col xs={12} sm={12} md={4} lg={4} xl={4}>
+															<>
+																<strong className="nowrap">{speEvi}</strong>{" "}
+																{"["}
+																<a
+																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{speciesEvidence[speEvi].taxid}
+																</a>
+																{"]"}
+																<EvidenceList
+																	evidences={speciesEvidence[speEvi].evidence}
+																/>
+															</>
 														</Col>
 													))}
 												{!species && (

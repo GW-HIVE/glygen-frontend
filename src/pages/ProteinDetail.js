@@ -814,7 +814,7 @@ const ProteinDetail = (props) => {
 															<strong>
 																{proteinStrings.chemical_mass.name}:{" "}
 															</strong>
-															{addCommas(mass.chemical_mass)} - Da
+															{addCommas(mass.chemical_mass)} Da
 														</div>
 
 														{refseq && refseq.length && (
@@ -886,72 +886,32 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											<div>
-												<p>
-													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
-														<Row>
-															{speciesEvidence &&
-																// For every species object
-																Object.keys(speciesEvidence).map((species) => (
-																	// For every database for current species object
-																	<>
-																		<Row>
-																			<Col
-																				style={{
-																					paddingTop: "12px",
-																					whiteSpace: "nowrap",
-																				}}>
-																				<strong>{species}:</strong>
-																			</Col>
-																			<Col
-																				align="left"
-																				style={{
-																					paddingLeft: "0",
-																					marginLeft: "0",
-																				}}>
-																				<EvidenceList
-																					evidences={speciesEvidence[species]}
-																				/>
-																			</Col>
-																		</Row>
-																	</>
-																))}
-															{/* {!species && (
-																<p className="no-data-msg">
-																	No data available.
-																</p>
-															)} */}
-														</Row>
-														<Row>
-															{species && (
-																<>
-																	{species.map((species) => (
-																		<>
-																			<Row style={{ whiteSpace: "nowrap" }}>
-																				<Col>
-																					<strong> Taxonomy ID: </strong>
-																					{/* {species.taxid} */}
-																				</Col>
-																				{"["}
-																				<a
-																					href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${species.taxid}`}
-																					target="_blank"
-																					rel="noopener noreferrer">
-																					{species.taxid}
-																				</a>
-																				{"]"}
-																			</Row>
-																		</>
-																	))}
-																</>
-															)}
-														</Row>
-													</Col>
-												</p>
-											</div>
-											{!species && (
-												<p className="no-data-msg">No data available.</p>
-											)}
+											<Row>
+												{speciesEvidence &&
+													// For every species object
+													Object.keys(speciesEvidence).map((speEvi) => (
+														// For every database for current species object
+														<Col xs={12} sm={12} md={4} lg={4} xl={4}>
+															<>
+																<strong className="nowrap">{speEvi}</strong>{" "}
+																{"["}
+																<a
+																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{speciesEvidence[speEvi].taxid}
+																</a>
+																{"]"}
+																<EvidenceList
+																	evidences={speciesEvidence[speEvi].evidence}
+																/>
+															</>
+														</Col>
+													))}
+												{!species && (
+													<p className="no-data-msg">No data available.</p>
+												)}
+											</Row>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
