@@ -314,8 +314,10 @@ const ProteinDetail = (props) => {
 					{" "}
 					{row.glytoucan_ac}{" "}
 				</Navbar.Text>
+				// Test
 			),
 		},
+
 		{
 			dataField: "glytoucan_ac",
 			text: "Glycan Image",
