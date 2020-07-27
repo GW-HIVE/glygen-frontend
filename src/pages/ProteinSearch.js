@@ -130,7 +130,7 @@ const ProteinSearch = (props) => {
 									proteinId:
 										data.query.uniprot_canonical_ac === undefined
 											? ""
-											: data.query.uniprot_canonical_ac,
+											: data.query.uniprot_canonical_ac + ",",
 									proRefSeqId:
 										data.query.refseq_ac === undefined
 											? ""

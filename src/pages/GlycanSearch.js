@@ -224,7 +224,7 @@ const GlycanSearch = (props) => {
 							glycanId:
 								data.query.glytoucan_ac === undefined
 									? ''
-									: data.query.glytoucan_ac,
+									: data.query.glytoucan_ac + ",",
 							glyMassType:
 								data.query.mass_type === undefined
 									? initData.glycan_mass.native.name

@@ -13,7 +13,7 @@ export default function MultilineAutoTextInput(props) {
   inputValueRef.current = props.inputValue;
 
   const handleChange = (event, value, reason) => {
-    if (!(event === null && value === "" && reason === "reset")){
+    if (event !== null && !(value === "" && reason === "reset")){
       props.setInputValue(value);
     }
   };
@@ -35,7 +35,7 @@ export default function MultilineAutoTextInput(props) {
     <>
     <Autocomplete
       freeSolo
-      getOptionLabel={option => props.inputValue.substring(0, props.inputValue.lastIndexOf(",") + 1) + option}
+      getOptionLabel={option => props.inputValue.substring(0, props.inputValue.lastIndexOf(",") + 1) + option + ","}
       options={options}
       filterOptions={(options) => options}
       classes={{
