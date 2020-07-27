@@ -405,18 +405,14 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID:{" "}
-						<Navbar.Text as={NavLink} to={value.url}>
-							{value.doid}
-						</Navbar.Text>
-						)
+					(DOID: <Link to={value.url}>{value.doid}</Link>)
 					</span>
 				</>
 			),
 		},
 		{
 			dataField: "start_pos",
-			text: "Start pos",
+			text: "Start Pos.",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -427,7 +423,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "end_pos",
-			text: "End pos",
+			text: "End Pos.",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -501,11 +497,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(UBERON:{" "}
-						<Navbar.Text as={NavLink} to={value.url}>
-							{value.uberon}
-						</Navbar.Text>
-						)
+					(UBERON: <Link to={value.url}>{value.uberon}</Link>)
 					</span>
 				</>
 			),
@@ -558,11 +550,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID:{" "}
-						<Navbar.Text as={NavLink} to={value.url}>
-							{value.doid}
-						</Navbar.Text>
-						)
+					(DOID: <Link to={value.url}>{value.doid}</Link>)
 					</span>
 				</>
 			),
@@ -644,12 +632,7 @@ const ProteinDetail = (props) => {
 					<Sidebar items={items} />
 				</Col>
 
-				<Col
-					sm={12}
-					md={12}
-					lg={12}
-					xl={9}
-					className="sidebar-page sidebar-page-mb">
+				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
 					<div className="sidebar-page-mb">
 						<div className="content-box-md">
 							<Row>
@@ -724,7 +707,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">General</h3>
+										<h4 className="gg-green d-inline">General</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -752,12 +735,12 @@ const ProteinDetail = (props) => {
 																	<strong>
 																		{proteinStrings.gene_name.name}:
 																	</strong>{" "}
-																	<Link
+																	<a
 																		href={genes.url}
 																		target="_blank"
 																		rel="noopener noreferrer">
 																		{genes.name}
-																	</Link>
+																	</a>
 																</div>
 
 																<div>
@@ -793,35 +776,35 @@ const ProteinDetail = (props) => {
 															<strong>
 																{proteinStrings.uniprot_id.name}:{" "}
 															</strong>
-															<Link
+															<a
 																href={uniprot.url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.uniprot_id}{" "}
-															</Link>
+															</a>
 														</div>
 														<div>
 															<strong>
 																{proteinStrings.uniprot_accession.name}:{" "}
 															</strong>
-															<Link
+															<a
 																href={uniprot.url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.uniprot_canonical_ac}
-															</Link>
+															</a>
 														</div>
 														<div>
 															<strong>
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
-															<Link
+															<a
 																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
 									
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
-															</Link>
+															</a>
 														</div>
 														<div>
 															<strong>
@@ -837,13 +820,13 @@ const ProteinDetail = (props) => {
 														</div>
 														<div>
 															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-															<Link
+															<a
 																href={refseq.url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{" "}
 																{refseq.ac}{" "}
-															</Link>{" "}
+															</a>{" "}
 														</div>
 														<div>
 															{" "}
@@ -876,7 +859,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Species</h3>
+										<h4 className="gg-green d-inline">Species</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -939,7 +922,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Function</h3>
+										<h4 className="gg-green d-inline">Function</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -984,7 +967,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">GO Annotation</h3>
+										<h4 className="gg-green d-inline">GO Annotation</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1016,12 +999,12 @@ const ProteinDetail = (props) => {
 																			sm={6}
 																			md={6}
 																			style={{ paddingTop: "15px" }}>
-																			<Link
+																			<a
 																				href={term.url}
 																				target="_blank"
 																				rel="noopener noreferrer">
 																				{term.name} ({term.id})
-																			</Link>
+																			</a>
 																		</Col>
 																		<Col sm={6} md={5}>
 																			<EvidenceList
@@ -1081,7 +1064,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Glycosylation</h3>
+										<h4 className="gg-green d-inline">Glycosylation</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1181,7 +1164,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Sequence</h3>
+										<h4 className="gg-green d-inline">Sequence</h4>
 										<div className="float-right">
 											<span>
 												<NavLink to={`${routeConstants.protVista}${id}`}>
@@ -1237,7 +1220,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Pathway</h3>
+										<h4 className="gg-green d-inline">Pathway</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1305,7 +1288,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Isoforms</h3>
+										<h4 className="gg-green d-inline">Isoforms</h4>
 										<div className="float-right">
 											<NavLink
 												to={`${routeConstants.isoAlignment}${id}/isoformset-uniprotkb`}>
@@ -1347,12 +1330,12 @@ const ProteinDetail = (props) => {
 															<Grid item xs={12} key={isoformIndex}>
 																<div>
 																	<strong>UniProtKB Isoform Accession: </strong>
-																	<Link
+																	<a
 																		href={isoformsS.url}
 																		target="_blank"
 																		rel="noopener noreferrer">
 																		{isoformsS.isoform_ac}
-																	</Link>
+																	</a>
 																</div>
 																{sequence && sequence.length && (
 																	<div>
@@ -1423,7 +1406,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Homologs</h3>
+										<h4 className="gg-green d-inline">Homologs</h4>
 										<div className="float-right">
 											{orthologs && orthologs.length && (
 												<>
@@ -1549,7 +1532,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Disease</h3>
+										<h4 className="gg-green d-inline">Disease</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1576,12 +1559,12 @@ const ProteinDetail = (props) => {
 																	<p>
 																		{" "}
 																		(ICD10: {diseaseS.icd10} DOID:
-																		<Link
+																		<a
 																			href={diseaseS.url}
 																			target="_blank"
 																			rel="noopener noreferrer">
 																			{diseaseS.doid})
-																		</Link>
+																		</a>
 																	</p>
 																</div>
 
@@ -1624,7 +1607,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Mutation</h3>
+										<h4 className="gg-green d-inline">Mutation</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1672,7 +1655,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline"> Expression Tissue</h3>
+										<h4 className="gg-green d-inline"> Expression Tissue</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1723,7 +1706,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline"> Expression Disease</h3>
+										<h4 className="gg-green d-inline"> Expression Disease</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1775,7 +1758,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Cross References</h3>
+										<h4 className="gg-green d-inline">Cross References</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1843,7 +1826,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Publications</h3>
+										<h4 className="gg-green d-inline">Publications</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
@@ -1871,12 +1854,12 @@ const ProteinDetail = (props) => {
 																<td key={pubIndex}>
 																	<p>
 																		<div>
-																			<h5
+																			<h6
 																				style={{
 																					marginBottom: "3px",
 																				}}>
 																				<strong>{pub.title}</strong>
-																			</h5>
+																			</h6>
 																		</div>
 																		<div>{pub.authors}</div>
 																		<div>
