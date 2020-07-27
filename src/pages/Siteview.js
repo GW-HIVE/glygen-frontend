@@ -88,25 +88,12 @@ const SequenceLocationViewer = ({
 	var centerSize = 54;
 	var translateCenter = -22;
 
-	const reducedAnnotations = annotations/*.reduce((all, current) => {
-		const atPosition = all.find(x => (x.position === current.position))
-
-		if (!atPosition) {
-			all.push(current)
-		}
-
-		return all
-	}, [])*/
-	reducedAnnotations.sort(sortByPosition)
-
+	const [filteredAnnotations, setFilteredAnnotations] = useState([]);
 	const [styledSequence, setStyledSequence] = useState([]);
-	const currentAnnotation = reducedAnnotations.find((x) => x.position === position);
+	const [currentAnnotation, setCurrentAnnotation] = useState()
+	const [currentAnnotationIndex, setCurrentAnnotationIndex] = useState()
 
-	
-
-	const currentAnnotationIndex = reducedAnnotations.indexOf(currentAnnotation);
-
-	const getHighlightClassname = (position) => {
+	const getHighlightClassname = (reducedAnnotations, position) => {
 		const match = reducedAnnotations.find(
 			(annotation) => annotation.position === position
 		);
@@ -124,12 +111,30 @@ const SequenceLocationViewer = ({
 	};
 
 	useEffect(() => {
+		const reducedAnnotations = annotations.reduce((all, current) => {
+			const result = [...all]
+			const atPosition = all.find(x => (x.position === current.position))
+	
+			if (!atPosition) {
+				result.push(current)
+			}
+	
+			return result
+		}, [])
+		reducedAnnotations.sort(sortByPosition)
+		setFilteredAnnotations(reducedAnnotations)
+
+
+
+		setCurrentAnnotation(reducedAnnotations.find((x) => x.position === position))
+		setCurrentAnnotationIndex(reducedAnnotations.indexOf(currentAnnotation))
+
 		const baseValues = sequence.map((character, index) => {
 			const currentPosition = index + 1;
 			return {
 				index,
 				character,
-				highlight: getHighlightClassname(currentPosition),
+				highlight: getHighlightClassname(reducedAnnotations, currentPosition),
 				size: null,
 				offset: null,
 			};
@@ -166,17 +171,17 @@ const SequenceLocationViewer = ({
 		}
 
 		setStyledSequence(baseValues);
-	}, [sequence, reducedAnnotations, position]);
+	}, [sequence, annotations, position]);
 
 	const selectPrevious = () => {
 		if (currentAnnotationIndex > 0) {
-			onSelectPosition(reducedAnnotations[currentAnnotationIndex - 1].position);
+			onSelectPosition(filteredAnnotations[currentAnnotationIndex - 1].position);
 		}
 	};
 
 	const selectNext = () => {
-		if (currentAnnotationIndex < reducedAnnotations.length) {
-			onSelectPosition(reducedAnnotations[currentAnnotationIndex + 1].position);
+		if (currentAnnotationIndex < filteredAnnotations.length) {
+			onSelectPosition(filteredAnnotations[currentAnnotationIndex + 1].position);
 		}
 	};
 
@@ -188,7 +193,7 @@ const SequenceLocationViewer = ({
 					<select
 						value={position}
 						onChange={(event) => onSelectPosition(event.target.value)}>
-						{reducedAnnotations.map((annotation) => (
+						{filteredAnnotations.map((annotation) => (
 							<option value={annotation.position}>{annotation.key}</option>
 						))}
 					</select>
@@ -226,7 +231,7 @@ const SequenceLocationViewer = ({
 					</>
 				</Grid>
 				<Grid item>
-					<button onClick={selectNext}>{">>"}</button>
+					<button onClick={selectNext}>>></button>
 				</Grid>
 			</Row>
 		</>
@@ -381,6 +386,27 @@ const Siteview = ({ position }) => {
 			},
 		},
 		{
+			dataField: "glytoucan_ac",
+			text: "GlytouCan_ac",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+			
+			formatter: (value, row) => (
+				
+				<Link
+					to={routeConstants.glycanDetail + row.glytoucan_ac}>
+					{" "}
+					{row.glytoucan_ac}{" "}
+				</Link>	
+			)
+			
+		},
+		{
 			dataField: "position",
 			text: "Position",
 			sort: true,
@@ -525,7 +551,7 @@ const Siteview = ({ position }) => {
 							<div className="text-right gg-download-btn-width">
 								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
 									<Button type="button" className="gg-btn-blue">
-										Back To details
+									Back To Protein Details
 									</Button>
 								</NavLink>
 							</div>
@@ -777,7 +803,7 @@ const Siteview = ({ position }) => {
 							<div className="text-right gg-download-btn-width">
 								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
 									<Button type="button" className="gg-btn-blue">
-										Back To details
+									Back To Protein Details
 									</Button>
 								</NavLink>
 							</div>
