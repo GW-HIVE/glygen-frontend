@@ -136,7 +136,7 @@ const ProteinAlignment = () => {
                     style={{ marginLeft: "5px" }}
                     className="gg-btn-blue"
                   >
-                    Back To details
+                    Back To Protein Details
                   </Button>
                 </NavLink>
               </div>
@@ -274,7 +274,7 @@ const ProteinAlignment = () => {
                     style={{ marginLeft: "5px" }}
                     className="gg-btn-blue"
                   >
-                    Back To details
+                    Back To Protein Details
                   </Button>
                 </NavLink>
               </div>
