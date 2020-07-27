@@ -218,10 +218,6 @@ const ProteinDetail = (props) => {
 			);
 			setGlycosylationWithImage(withImage);
 			setGlycosylationWithoutImage(withoutImage);
-
-			setGlycosylationTabSelected(
-				(withImage.length > 0) ? "with_glycanId" : 'without_glycanId'
-			)
 		}
 	}, [detailData]);
 
@@ -262,8 +258,7 @@ const ProteinDetail = (props) => {
 		go_annotation,
 		site_annotation,
 		function: functions,
-	} 
-	= detailData;
+	} = detailData;
 
 	const speciesid = taxid;
 	const speciesUrl =
@@ -774,8 +769,8 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																	{genes.locus.start_pos} -{" "}
-																	{genes.locus.end_pos})
+																	{addCommas(genes.locus.start_pos)} -{" "}
+																	{addCommas(genes.locus.end_pos)}
 																</div>
 
 																<EvidenceList
@@ -824,7 +819,7 @@ const ProteinDetail = (props) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href="https://www.uniprot.org/uniprot/#sequence"
+																href="https://www.uniprot.org/uniprot/+{uniprot_canonical_ac}/#sequences"
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
@@ -842,23 +837,36 @@ const ProteinDetail = (props) => {
 															</strong>
 															{addCommas(mass.chemical_mass)} - Da
 														</div>
-														<div>
-															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-															<Link
-																href={refseq.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{" "}
-																{refseq.ac}{" "}
-															</Link>{" "}
-														</div>
-														<div>
-															{" "}
-															<strong>
-																{proteinStrings.refSeq_name.name}:{" "}
-															</strong>{" "}
-															{refseq.name}{" "}
-														</div>{" "}
+
+														{refseq && refseq.length && (
+															<>
+																<div>
+																	<strong>
+																		{proteinStrings.refseq_ac.name}:{" "}
+																	</strong>
+																	<Link
+																		href={refseq.url}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{" "}
+																		{refseq.ac}
+																	</Link>{" "}
+																</div>
+
+																<div>
+																	<strong>
+																		{proteinStrings.refSeq_name.name}:
+																	</strong>
+																	{refseq.name}
+																</div>
+																<div>
+																	<strong>
+																		{proteinStrings.refSeq_summary.name}:
+																	</strong>
+																	{refseq.summary}
+																</div>
+															</>
+														)}
 													</>
 												)}
 											</p>
@@ -866,7 +874,7 @@ const ProteinDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							{/* Species */}
+							{/*  species */}
 							<Accordion
 								id="species"
 								defaultActiveKey="0"
@@ -945,15 +953,14 @@ const ProteinDetail = (props) => {
 																					<strong> Taxonomy ID: </strong>
 																					{/* {species.taxid} */}
 																				</Col>
-																			
+																				{"["}
 																				<Link
-																			
-																					href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${species.taxid}`}
+																					href={speciesUrl}
 																					target="_blank"
 																					rel="noopener noreferrer">
 																					{species.taxid}
 																				</Link>
-																				
+																				{"]"}
 																			</Row>
 																		</>
 																	))}
@@ -1150,7 +1157,7 @@ const ProteinDetail = (props) => {
 										<Card.Body>
 											{glycosylation && glycosylation.length && (
 												<Tabs
-													defaultActiveKey={(glycosylationWithImage && (glycosylationWithImage.length > 0)) ? "with_glycanId" : 'without_glycanId'}
+													defaultActiveKey="with_glycanId"
 													transition={false}
 													activeKey={glycosylationTabSelected}
 													mountOnEnter={true}
@@ -1159,9 +1166,7 @@ const ProteinDetail = (props) => {
 													<Tab
 														eventKey="with_glycanId"
 														// className='tab-content-padding'
-														title="With Reported Glycan"
-														//disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
-													>
+														title="With Reported Glycan">
 														<Container
 															style={{
 																paddingTop: "20px",
@@ -1183,10 +1188,7 @@ const ProteinDetail = (props) => {
 													<Tab
 														eventKey="without_glycanId"
 														className="tab-content-padding"
-														title="Without Reported Glycan"
-														// disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
-														>
-
+														title="Without Reported Glycan">
 														<Container>
 															{glycosylationWithoutImage &&
 																glycosylationWithoutImage.length > 0 && (
