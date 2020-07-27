@@ -6,11 +6,9 @@ function Sidebar({ items, offset = 105 }) {
   const [activeLink, setActiveLink] = useState(items[0].id);
 
   useLayoutEffect(() => {
-    const handleScrollEvent = e => {
-      var set = false;
-      console.log(document.pageYOffset);
+    const handleScrollEvent = () => {
       items &&
-        items.map(item => {
+        items.map((item) => {
           var element = document.getElementById(item.id);
           if (element) {
             var elementOffsetTop = element.offsetTop;
@@ -18,23 +16,21 @@ function Sidebar({ items, offset = 105 }) {
             var elementOffsetHeight = element.offsetHeight;
 
             if (
-              !set &&
-              element &&
               parseInt(elementOffsetTop) +
                 parseInt(elementOffsetHeight) +
                 parseInt(offset) >
                 parseInt(winPageYOffset) &&
-                parseInt(elementOffsetTop) < parseInt(winPageYOffset)
+              parseInt(elementOffsetTop) + parseInt(offset) <
+                parseInt(winPageYOffset)
             ) {
               setActiveLink(item.id);
-              set = true;
             }
           }
         });
     };
 
     window.addEventListener("scroll", handleScrollEvent);
-  }, []);
+  }, [items, offset]);
 
   return (
     <div className="sidebar-container sidbar-top-padding">
