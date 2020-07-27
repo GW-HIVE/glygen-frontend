@@ -221,8 +221,8 @@ const ProteinDetail = (props) => {
 			setGlycosylationWithoutImage(withoutImage);
 
 			setGlycosylationTabSelected(
-				(withImage.length > 0) ? "with_glycanId" : 'without_glycanId'
-			)
+				withImage.length > 0 ? "with_glycanId" : "without_glycanId"
+			);
 		}
 	}, [detailData]);
 
@@ -263,10 +263,8 @@ const ProteinDetail = (props) => {
 		go_annotation,
 		site_annotation,
 		function: functions,
-	} 
-	= detailData;
+	} = detailData;
 
-	
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
 		{
@@ -300,7 +298,7 @@ const ProteinDetail = (props) => {
 				};
 			},
 		},
-		
+
 		{
 			dataField: "glytoucan_ac",
 			text: "GlyTouCan Accession",
@@ -313,10 +311,10 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
-					</Link>
+				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}></Link>
 			),
 		},
+
 		{
 			dataField: "glytoucan_ac",
 			text: "Glycan Image",
@@ -351,8 +349,7 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-					</Link>
+				<Link to={`${routeConstants.siteview}${id}/${row.position}`}></Link>
 			),
 		},
 	];
@@ -800,7 +797,6 @@ const ProteinDetail = (props) => {
 															</strong>
 															<a
 																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
-									
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
@@ -875,7 +871,7 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-										<Row>
+											<Row>
 												{speciesEvidence &&
 													// For every species object
 													Object.keys(speciesEvidence).map((speEvi) => (
@@ -1085,7 +1081,12 @@ const ProteinDetail = (props) => {
 										<Card.Body>
 											{glycosylation && glycosylation.length && (
 												<Tabs
-													defaultActiveKey={(glycosylationWithImage && (glycosylationWithImage.length > 0)) ? "with_glycanId" : 'without_glycanId'}
+													defaultActiveKey={
+														glycosylationWithImage &&
+														glycosylationWithImage.length > 0
+															? "with_glycanId"
+															: "without_glycanId"
+													}
 													transition={false}
 													activeKey={glycosylationTabSelected}
 													mountOnEnter={true}
@@ -1120,8 +1121,7 @@ const ProteinDetail = (props) => {
 														className="tab-content-padding"
 														title="Without Reported Glycan"
 														// disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
-														>
-
+													>
 														<Container>
 															{glycosylationWithoutImage &&
 																glycosylationWithoutImage.length > 0 && (
