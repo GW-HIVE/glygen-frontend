@@ -9,7 +9,7 @@ import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
-import { Navbar, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
 import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -39,7 +39,7 @@ import stringConstants from "../data/json/stringConstants";
 import { getGlycanImageUrl } from "../data/glycan";
 import Button from "react-bootstrap/Button";
 import AlignmentDropdown from "../components/AlignmentDropdown";
-import ProtvistaNav from "../components/navigation/ProtvistaNav";
+// import ProtvistaNav from "../components/navigation/ProtvistaNav";
 import { FaSearchPlus } from "react-icons/fa";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
@@ -313,6 +313,7 @@ const ProteinDetail = (props) => {
 			formatter: (value, row) => (
 				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}></Link>
 			),
+			//testing
 		},
 
 		{
@@ -402,7 +403,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-					(DOID: <Link to={value.url}>{value.doid}</Link>)
+						(DOID: <Link to={value.url}>{value.doid}</Link>)
 					</span>
 				</>
 			),
@@ -494,7 +495,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-					(UBERON: <Link to={value.url}>{value.uberon}</Link>)
+						(UBERON: <Link to={value.url}>{value.uberon}</Link>)
 					</span>
 				</>
 			),
@@ -547,7 +548,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-					(DOID: <Link to={value.url}>{value.doid}</Link>)
+						(DOID: <Link to={value.url}>{value.doid}</Link>)
 					</span>
 				</>
 			),
