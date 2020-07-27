@@ -9,7 +9,7 @@ import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
-import { Col, Row } from "react-bootstrap";
+import { Navbar,Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
 import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -311,13 +311,11 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
+				<Link
 					to={routeConstants.glycanDetail + row.glytoucan_ac}>
 					{" "}
 					{row.glytoucan_ac}{" "}
-				</Navbar.Text>
-				//< Link to={routeConstants.glycanDetail + row.glytoucan_ac}></Link>
+				</Link>	
 			),
 			//testing
 		},
@@ -356,13 +354,12 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
+				<Link	
 					to={`${routeConstants.siteview}${id}/${row.position}`}>
 					{" "}
 					{row.residue} {row.position}
-				</Navbar.Text>
-				//<Link to={`${routeConstants.siteview}${id}/${row.position}`}></Link>
+				</Link>
+				
 			),
 		},
 	];
@@ -415,9 +412,13 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID: <Link to={value.url}>{value.doid}</Link>)
-					</span>
+					<a href={value.url}>
+							{value.doid}
+						</a>
+						)	</span>
 				</>
+
+
 			),
 		},
 		{
@@ -507,7 +508,13 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(UBERON: <Link to={value.url}>{value.uberon}</Link>)
+
+					
+					(UBERON:{" "}
+						<a  href={value.url}>
+							{value.uberon}
+						</a>
+						)
 					</span>
 				</>
 			),
@@ -560,7 +567,11 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID: <Link to={value.url}>{value.doid}</Link>)
+					{value.name} (DOID:
+					<a href={value.url}>
+						{value.doid}
+					</a>
+					)
 					</span>
 				</>
 			),
@@ -1571,7 +1582,7 @@ const ProteinDetail = (props) => {
 
 																	<p>
 																		{" "}
-																		(ICD10: {diseaseS.icd10} DOID:
+																		(ICD10: {diseaseS.icd10} DOID:{" "} 
 																		<a
 																			href={diseaseS.url}
 																			target="_blank"
