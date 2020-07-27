@@ -311,7 +311,13 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}></Link>
+				<Navbar.Text
+					as={NavLink}
+					to={routeConstants.glycanDetail + row.glytoucan_ac}>
+					{" "}
+					{row.glytoucan_ac}{" "}
+				</Navbar.Text>
+				//< Link to={routeConstants.glycanDetail + row.glytoucan_ac}></Link>
 			),
 			//testing
 		},
@@ -350,7 +356,13 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={`${routeConstants.siteview}${id}/${row.position}`}></Link>
+				<Navbar.Text
+					as={NavLink}
+					to={`${routeConstants.siteview}${id}/${row.position}`}>
+					{" "}
+					{row.residue} {row.position}
+				</Navbar.Text>
+				//<Link to={`${routeConstants.siteview}${id}/${row.position}`}></Link>
 			),
 		},
 	];
