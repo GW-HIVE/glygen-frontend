@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
-import { Link, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Navbar, Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
 import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
@@ -45,6 +45,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import { Link } from "react-router-dom";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -218,6 +219,10 @@ const ProteinDetail = (props) => {
 			);
 			setGlycosylationWithImage(withImage);
 			setGlycosylationWithoutImage(withoutImage);
+
+			setGlycosylationTabSelected(
+				(withImage.length > 0) ? "with_glycanId" : 'without_glycanId'
+			)
 		}
 	}, [detailData]);
 
@@ -258,11 +263,10 @@ const ProteinDetail = (props) => {
 		go_annotation,
 		site_annotation,
 		function: functions,
-	} = detailData;
+	} 
+	= detailData;
 
-	const speciesid = taxid;
-	const speciesUrl =
-		"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + speciesid;
+	
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
 		{
@@ -296,9 +300,10 @@ const ProteinDetail = (props) => {
 				};
 			},
 		},
+		
 		{
 			dataField: "glytoucan_ac",
-			text: "GlyToucan Accession",
+			text: "GlyTouCan Accession",
 			defaultSortField: "glytoucan_ac",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -308,12 +313,8 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={routeConstants.glycanDetail + row.glytoucan_ac}>
-					{" "}
-					{row.glytoucan_ac}{" "}
-				</Navbar.Text>
+				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+					</Link>
 			),
 		},
 		{
@@ -350,12 +351,8 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={`${routeConstants.siteview}${id}/${row.position}`}>
-					{" "}
-					{row.residue} {row.position}
-				</Navbar.Text>
+				<Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+					</Link>
 			),
 		},
 	];
@@ -769,8 +766,8 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																	{addCommas(genes.locus.start_pos)} -{" "}
-																	{addCommas(genes.locus.end_pos)}
+																	{genes.locus.start_pos} -{" "}
+																	{genes.locus.end_pos})
 																</div>
 
 																<EvidenceList
@@ -819,7 +816,8 @@ const ProteinDetail = (props) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href="https://www.uniprot.org/uniprot/+{uniprot_canonical_ac}/#sequences"
+																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
+									
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
@@ -835,38 +833,25 @@ const ProteinDetail = (props) => {
 															<strong>
 																{proteinStrings.chemical_mass.name}:{" "}
 															</strong>
-															{addCommas(mass.chemical_mass)} - Da
+															{addCommas(mass.chemical_mass)} Da
 														</div>
-
-														{refseq && refseq.length && (
-															<>
-																<div>
-																	<strong>
-																		{proteinStrings.refseq_ac.name}:{" "}
-																	</strong>
-																	<Link
-																		href={refseq.url}
-																		target="_blank"
-																		rel="noopener noreferrer">
-																		{" "}
-																		{refseq.ac}
-																	</Link>{" "}
-																</div>
-
-																<div>
-																	<strong>
-																		{proteinStrings.refSeq_name.name}:
-																	</strong>
-																	{refseq.name}
-																</div>
-																<div>
-																	<strong>
-																		{proteinStrings.refSeq_summary.name}:
-																	</strong>
-																	{refseq.summary}
-																</div>
-															</>
-														)}
+														<div>
+															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
+															<Link
+																href={refseq.url}
+																target="_blank"
+																rel="noopener noreferrer">
+																{" "}
+																{refseq.ac}{" "}
+															</Link>{" "}
+														</div>
+														<div>
+															{" "}
+															<strong>
+																{proteinStrings.refSeq_name.name}:{" "}
+															</strong>{" "}
+															{refseq.name}{" "}
+														</div>{" "}
 													</>
 												)}
 											</p>
@@ -874,7 +859,7 @@ const ProteinDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							{/*  species */}
+							{/* Species */}
 							<Accordion
 								id="species"
 								defaultActiveKey="0"
@@ -907,72 +892,32 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											<div>
-												<p>
-													<Col xs={12} sm={12} md={6} lg={6} xl={6}>
-														<Row>
-															{speciesEvidence &&
-																// For every species object
-																Object.keys(speciesEvidence).map((species) => (
-																	// For every database for current species object
-																	<>
-																		<Row>
-																			<Col
-																				style={{
-																					paddingTop: "12px",
-																					whiteSpace: "nowrap",
-																				}}>
-																				<strong>{species}:</strong>
-																			</Col>
-																			<Col
-																				align="left"
-																				style={{
-																					paddingLeft: "0",
-																					marginLeft: "0",
-																				}}>
-																				<EvidenceList
-																					evidences={speciesEvidence[species]}
-																				/>
-																			</Col>
-																		</Row>
-																	</>
-																))}
-															{/* {!species && (
-																<p className="no-data-msg">
-																	No data available.
-																</p>
-															)} */}
-														</Row>
-														<Row>
-															{species && (
-																<>
-																	{species.map((species) => (
-																		<>
-																			<Row style={{ whiteSpace: "nowrap" }}>
-																				<Col>
-																					<strong> Taxonomy ID: </strong>
-																					{/* {species.taxid} */}
-																				</Col>
-																				{"["}
-																				<Link
-																					href={speciesUrl}
-																					target="_blank"
-																					rel="noopener noreferrer">
-																					{species.taxid}
-																				</Link>
-																				{"]"}
-																			</Row>
-																		</>
-																	))}
-																</>
-															)}
-														</Row>
-													</Col>
-												</p>
-											</div>
-											{!species && (
-												<p className="no-data-msg">No data available.</p>
-											)}
+										<Row>
+												{speciesEvidence &&
+													// For every species object
+													Object.keys(speciesEvidence).map((speEvi) => (
+														// For every database for current species object
+														<Col xs={12} sm={12} md={4} lg={4} xl={4}>
+															<>
+																<strong className="nowrap">{speEvi}</strong>{" "}
+																{"["}
+																<a
+																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{speciesEvidence[speEvi].taxid}
+																</a>
+																{"]"}
+																<EvidenceList
+																	evidences={speciesEvidence[speEvi].evidence}
+																/>
+															</>
+														</Col>
+													))}
+												{!species && (
+													<p className="no-data-msg">No data available.</p>
+												)}
+											</Row>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
@@ -1157,7 +1102,7 @@ const ProteinDetail = (props) => {
 										<Card.Body>
 											{glycosylation && glycosylation.length && (
 												<Tabs
-													defaultActiveKey="with_glycanId"
+													defaultActiveKey={(glycosylationWithImage && (glycosylationWithImage.length > 0)) ? "with_glycanId" : 'without_glycanId'}
 													transition={false}
 													activeKey={glycosylationTabSelected}
 													mountOnEnter={true}
@@ -1166,7 +1111,9 @@ const ProteinDetail = (props) => {
 													<Tab
 														eventKey="with_glycanId"
 														// className='tab-content-padding'
-														title="With Reported Glycan">
+														title="With Reported Glycan"
+														//disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
+													>
 														<Container
 															style={{
 																paddingTop: "20px",
@@ -1188,7 +1135,10 @@ const ProteinDetail = (props) => {
 													<Tab
 														eventKey="without_glycanId"
 														className="tab-content-padding"
-														title="Without Reported Glycan">
+														title="Without Reported Glycan"
+														// disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
+														>
+
 														<Container>
 															{glycosylationWithoutImage &&
 																glycosylationWithoutImage.length > 0 && (
