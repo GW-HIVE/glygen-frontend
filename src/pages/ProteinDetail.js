@@ -265,7 +265,9 @@ const ProteinDetail = (props) => {
 	} 
 	= detailData;
 
-	
+	const speciesid = taxid;
+	const speciesUrl =
+		"https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=" + speciesid;
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
 		{
@@ -822,8 +824,7 @@ const ProteinDetail = (props) => {
 																{proteinStrings.sequence_length.name}:{" "}
 															</strong>
 															<Link
-																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
-																
+																href="https://www.uniprot.org/uniprot/#sequence"
 																target="_blank"
 																rel="noopener noreferrer">
 																{uniprot.length}
