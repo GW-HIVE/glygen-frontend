@@ -22,7 +22,7 @@ export const getProteinList = (
   const queryParams = {
     id: protienListId,
     offset: offset,
-    sort: sort,
+    // sort: sort,
     limit: limit,
     order: order
   };
