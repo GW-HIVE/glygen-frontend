@@ -42,12 +42,20 @@ const PaginatedTable = ({
         value: 20
       },
       {
-        text: "40",
-        value: 40
+        text: "50",
+        value: 50
       },
       {
-        text: "60",
-        value: 60
+        text: "100",
+        value: 100
+      },
+      {
+        text: "150",
+        value: 150
+      },
+      {
+        text: "200",
+        value: 200
       }
     ] // A numeric array is also available. the purpose of above example is custom the text
   };
