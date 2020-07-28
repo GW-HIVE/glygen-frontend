@@ -193,10 +193,10 @@ const ProteinAlignment = () => {
                   <Card.Header className="panelHeadBgr">
                     <span className="gg-green d-inline">
                       <HelpTooltip
-                        title={DetailTooltips.alignment.Isoalignment.title}
-                        text={DetailTooltips.alignment.Isoalignment.text}
-                        urlText={DetailTooltips.alignment.Isoalignment.urlText}
-                        url={DetailTooltips.alignment.Isoalignment.url}
+                        title={DetailTooltips.alignment.summary.title}
+                        text={DetailTooltips.alignment.summary.text}
+                        urlText={DetailTooltips.alignment.summary.urlText}
+                        url={DetailTooltips.alignment.summary.url}
                         helpIcon="gg-helpicon-detail"
                       />
                     </span>
