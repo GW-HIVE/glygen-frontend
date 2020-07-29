@@ -90,7 +90,14 @@ function openProtvistaPage(uniprot_canonical_ac) {
 	var url = "https://www.uniprot.org/uniprot/" + str + "/protvista";
 	window.open(url);
 }
-
+const sortByPosition = function (a, b) {
+	if (a.position < b.position) {
+		return -1;
+	} else if (b.position < a.position) {
+		return 1;
+	}
+	return 0;
+};
 const getItemsPathway = (data) => {
 	let itemspathway = [];
 
@@ -733,9 +740,9 @@ const ProteinDetail = (props) => {
 													marginBottom: "5px",
 												}}>
 												{gene && (
-													<tbody className="table-body">
+													<p>
 														{gene.map((genes, genesname) => (
-															<td key={genesname}>
+															<span key={genesname}>
 																<div>
 																	<strong>
 																		{proteinStrings.gene_name.name}:
@@ -754,8 +761,9 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																	{genes.locus.start_pos} -{" "}
-																	{genes.locus.end_pos})
+																		{addCommas(genes.locus.start_pos)} -{" "}
+																		{addCommas(genes.locus.end_pos)})
+																
 																</div>
 
 																<EvidenceList
@@ -763,9 +771,9 @@ const ProteinDetail = (props) => {
 																		genes.locus.evidence
 																	)}
 																/>
-															</td>
+															</span>
 														))}
-													</tbody>
+													</p>
 												)}
 												{!gene && (
 													<p className="no-data-msg-publication">
