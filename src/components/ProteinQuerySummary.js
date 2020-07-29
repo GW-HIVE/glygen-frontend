@@ -112,7 +112,7 @@ const ProteinQuerySummary = props => {
             {!props.question && uniprot_canonical_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Protein Id:
+                  UniProtKB Accession:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {formatProtein(uniprot_canonical_ac)}
@@ -165,7 +165,7 @@ const ProteinQuerySummary = props => {
             {sequence && sequence.aa_sequence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Sequence
+                  Sequence:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   <abbr
@@ -191,7 +191,7 @@ const ProteinQuerySummary = props => {
             {go_id && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Go ID:
+                  GO ID:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {go_id}
@@ -231,7 +231,7 @@ const ProteinQuerySummary = props => {
             {!props.question && organism && organism.name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Organism :
+                  Organism:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {organism.name}
@@ -252,7 +252,7 @@ const ProteinQuerySummary = props => {
             {go_term && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Go Term:
+                  GO Name:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {go_term}
