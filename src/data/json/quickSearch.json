@@ -20,16 +20,7 @@
 			"text": "What are the enzymes involved in the biosynthesis of glycan X in human?"
 		},
 		"question_2": {
-			"text": "Which proteins have been shown to bear glycan X and which site is this glycan attached to?",
-			"examples": [
-				{
-					"orderID": 100,
-					"example": {
-						"name": "Example",
-						"id": "G57789QC"
-					}
-				}
-			]
+			"text": "Which proteins have been shown to bear glycan X and which site is this glycan attached to?"
 		},
 		"question_3": {
 			"text": "What are the gene locations of the enzymes involved in the biosynthesis of glycan X in human?"

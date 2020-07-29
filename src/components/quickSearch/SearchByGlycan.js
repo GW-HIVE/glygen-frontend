@@ -102,7 +102,7 @@ const SearchByGlycan = (props) => {
 									/>
 									<ExampleExploreControl
 										setInputValue={(input)=> props.setInputValue({question_2: input})}
-										inputValue={searchByGlycan.question_2.examples}
+										inputValue={searchByGlycan.common.examples}
 									/>
 								</FormControl>
 								</Grid>
