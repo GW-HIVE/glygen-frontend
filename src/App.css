@@ -673,18 +673,32 @@ ul.office-details {
   color: var(--gg-blue) !important;
 }
 
+.route-lnk-disabled-bkg {
+  background-color: #6B6B6B !important;
+}
+
+.route-lnk-disabled-clr {
+  color: #333 !important;
+}
+
 .route-lnk-disabled {
   text-decoration: none !important;
-  color: var(--gg-blue) !important;
   border-width: 0 !important;
-  padding: 0 !important;
+  padding: 3 !important;
   font-size: inherit !important;
   vertical-align: inherit !important;
   display: inline-block !important;
   cursor: no-drop !important;
-  opacity: 0.65;
 }
 
+.route-lnk {
+  text-decoration: none !important;
+  border-width: 0 !important;
+  padding: 3 !important;
+  font-size: inherit !important;
+  vertical-align: inherit !important;
+  display: inline-block !important;
+}
 /* =========================================
                 Subscript
 ============================================ */

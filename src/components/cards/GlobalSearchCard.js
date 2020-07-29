@@ -21,7 +21,8 @@ export default function GlobalSearchCard(props) {
                             <TableCell align="center" colSpan={2}>
                                 <h4><strong>
                                     <RouteLink
-                                        text={props.allCount + "\u00a0" + props.cardTitle}
+                                        text1={String(props.allCount)}
+                                        text2={props.cardTitle}
                                         disabled={Number(props.allCount) === 0}
                                         link={props.route + props.allListId + "/" + props.routeTerm}
                                     />
@@ -46,7 +47,7 @@ export default function GlobalSearchCard(props) {
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <RouteLink
-                                    text={String(items.count)}
+                                    text1={String(items.count)}
                                     disabled={Number(items.count) === 0}
                                     link={props.route + items.list_id + "/" + props.routeTerm}
                                 />

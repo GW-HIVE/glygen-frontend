@@ -21,13 +21,15 @@ export default function GlobalSearchDualCard(props) {
                             <TableCell align="center" colSpan={3}>
                                 <h4><strong>
                                     <RouteLink
-                                        text={props.allCount1 + "\u00a0" + props.cardTitle1}
+                                        text1={String(props.allCount1)}
+                                        text2= {props.cardTitle1}
                                         disabled={Number(props.allCount1) === 0}
                                         link={props.route + props.allListId1 + "/" + props.routeTerm}
                                     />
                                     <span> / </span>
                                     <RouteLink
-                                        text={props.allCount2 + "\u00a0" + props.cardTitle2}
+                                        text1={String(props.allCount2)}
+                                        text2={props.cardTitle2}
                                         disabled={Number(props.allCount2) === 0}
                                         link={props.route + props.allListId2 + "/" + props.routeTerm}
                                     />
@@ -55,14 +57,14 @@ export default function GlobalSearchDualCard(props) {
                                 </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <RouteLink
-                                    text={String(items.count1)}
+                                    text1={String(items.count1)}
                                     disabled={Number(items.count1) === 0}
                                     link={props.route + items.list_id1 + "/" + props.routeTerm}
                                 />
                             </TableCell>
                             <TableCell className={"gs-cell-center"} classes={{body: "gs-cell"}}>
                                 <RouteLink
-                                    text={String(items.count2)}
+                                    text1={String(items.count2)}
                                     disabled={Number(items.count2) === 0}
                                     link={props.route + items.list_id2 + "/" + props.routeTerm}
                                 />

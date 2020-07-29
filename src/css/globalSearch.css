@@ -86,3 +86,10 @@
     min-width: 60px   !important;
     text-align: center   !important;
 }
+
+.head-result-count{
+    background-color: #2E78B7;
+    color: white !important;
+    border-radius: 3px;
+    padding: 3px;
+}
