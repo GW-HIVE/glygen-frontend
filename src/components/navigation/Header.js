@@ -67,56 +67,58 @@ export default function Header(props) {
 				<Container maxWidth="xl">
 					<Row className="justify-content-end">
 						<div className="mr-4">
-							<Navbar.Text
-								as={Link}
+							{/* <Navbar.Text
+								as={Link} */}
+							<Link
 								to={routeConstants.privacySettings}
 								className={classes.navbarText}>
 								<span>
 									<PersonIcon />
 								</span>{" "}
 								MY GLYGEN
-							</Navbar.Text>
+							</Link>
+							{/* </Navbar.Text> */}
 						</div>
 						{GLYGEN_ENV !== "beta" && (
 							<div className="mr-4">
-								<Navbar.Text>
-									<a
-										href={GLYGEN_BETA}
-										target="_blank"
-										rel="noopener noreferrer"
-										className={classes.navbarText}>
-										<span>
-											<DeveloperBoardIcon />
-										</span>{" "}
-										BETA TESTING
-									</a>
-								</Navbar.Text>{" "}
+								{/* <Navbar.Text> */}
+								<a
+									href={GLYGEN_BETA}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={classes.navbarText}>
+									<span>
+										<DeveloperBoardIcon />
+									</span>{" "}
+									BETA TESTING
+								</a>
+								{/* </Navbar.Text> */}{" "}
 							</div>
 						)}
 						<div>
-							<Navbar.Text>
-								<a
-									href="https://twitter.com/gly_gen"
-									target="_blank"
-									rel="noopener noreferrer"
-									className={classes.navbarText}>
-									<TwitterIcon className="mr-3" />
-								</a>
-								<a
-									href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
-									target="_blank"
-									rel="noopener noreferrer"
-									className={classes.navbarText}>
-									<YouTubeIcon className="mr-3" />
-								</a>
-								<a
-									href="https://github.com/glygener"
-									target="_blank"
-									rel="noopener noreferrer"
-									className={classes.navbarText}>
-									<GitHubIcon className="mr-3" />
-								</a>
-							</Navbar.Text>
+							{/* <Navbar.Text> */}
+							<a
+								href="https://twitter.com/gly_gen"
+								target="_blank"
+								rel="noopener noreferrer"
+								className={classes.navbarText}>
+								<TwitterIcon className="mr-3" />
+							</a>
+							<a
+								href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
+								target="_blank"
+								rel="noopener noreferrer"
+								className={classes.navbarText}>
+								<YouTubeIcon className="mr-3" />
+							</a>
+							<a
+								href="https://github.com/glygener"
+								target="_blank"
+								rel="noopener noreferrer"
+								className={classes.navbarText}>
+								<GitHubIcon className="mr-3" />
+							</a>
+							{/* </Navbar.Text> */}
 						</div>
 					</Row>
 				</Container>
