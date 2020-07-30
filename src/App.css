@@ -103,7 +103,13 @@ p {
 	font-weight: 600;
 	letter-spacing: 0.4px;
 }
-
+.logo-nav {
+	width: 80% !important;
+}
+.navbar-brand {
+	margin-right: 0 !important;
+	padding-right: 0 !important;
+}
 .gg-blue {
 	background-color: var(--gg-blue) !important;
 }

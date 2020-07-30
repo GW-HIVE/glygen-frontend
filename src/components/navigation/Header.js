@@ -122,28 +122,19 @@ export default function Header(props) {
 				</Container>
 			</Navbar>
 
-			<Navbar className="gg-blue betaWatermark" expand="xl">
-				{/* <div
-					className={classes.betaWatermark}
-					style={{ backgroundImage: `url(${betaWatermarkImg})` }}>
-					<img
-						style={{ dbackgroundRepeat: "space" }}
-						src={betaWatermarkImg}
-						alt="beta watermark img"
-					/> */}
-
-				{/* </div> */}
-				<Col xs={"auto"}>
-					<Navbar.Brand as={Link} to={routeConstants.home}>
-						<img src={logo} alt="Glygen" className="logo-nav" />
-					</Navbar.Brand>
-				</Col>
+			<Navbar
+				className="gg-blue"
+				expand="xl"
+				style={{ position: "relative", overflowX: "hidden" }}>
+				<Navbar.Brand as={Link} to={routeConstants.home}>
+					<img src={logo} alt="Glygen" className="logo-nav" />
+				</Navbar.Brand>
 				<Navbar.Toggle
 					aria-controls="basic-navbar-nav"
 					className="navbar-dark"
 				/>
 				<Navbar.Collapse className="gg-blue" id="basic-navbar-nav">
-					<Col>
+					<Col xs={12} sm={12} md={12} xl={8}>
 						<Nav>
 							<Nav.Link
 								className="gg-nav-link"
@@ -173,9 +164,7 @@ export default function Header(props) {
 							<Nav.Link
 								className="gg-nav-link"
 								as={NavLink}
-								to={routeConstants.tryMe}
-								// href='#try-me'
-							>
+								to={routeConstants.tryMe}>
 								TRY&nbsp;ME
 							</Nav.Link>
 							<NavDropdown
@@ -234,11 +223,10 @@ export default function Header(props) {
 							</NavDropdown>
 						</Nav>
 					</Col>
-					<Col md={3}>
+					<Col xs={12} sm={12} md={12} xl={4}>
 						<GlobalSearchControl />
 					</Col>
 				</Navbar.Collapse>
-				{/* </div> */}
 			</Navbar>
 		</React.Fragment>
 	);
