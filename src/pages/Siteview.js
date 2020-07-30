@@ -420,7 +420,7 @@ const Siteview = ({ position }) => {
 		{
 			dataField: "evidence",
 			text: "Sources",
-			sort: true,
+		
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
@@ -485,6 +485,15 @@ const Siteview = ({ position }) => {
 	function toggleCollapse(name, value) {
 		setCollapsed({ [name]: !value });
 	}
+
+	const sortByPosition = function (a, b) {
+		if (a.position < b.position) {
+			return -1;
+		} else if (b.position < a.position) {
+			return 1;
+		}
+		return 0;
+	};
 	const expandIcon = <ExpandMoreIcon fontSize="large" />;
 	const closeIcon = <ExpandLessIcon fontSize="large" />;
 	// ===================================== //
@@ -593,19 +602,19 @@ const Siteview = ({ position }) => {
 													marginBottom: "5px",
 												}}>
 												{gene && (
-													<tbody className="table-body">
+													<p>
 														{gene.map((genes, genesname) => (
-															<td key={genesname}>
+															<span key={genesname}>
 																<div>
 																	<strong>
 																		{proteinStrings.gene_name.name}:
 																	</strong>{" "}
-																	<Link
+																	<a
 																		href={genes.url}
 																		target="_blank"
 																		rel="noopener noreferrer">
 																		{genes.name}
-																	</Link>
+																	</a>
 																</div>
 
 																<div>
@@ -614,8 +623,9 @@ const Siteview = ({ position }) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																	{genes.locus.start_pos} -{" "}
-																	{genes.locus.end_pos})
+																		{addCommas(genes.locus.start_pos)} -{" "}
+																		{addCommas(genes.locus.end_pos)})
+																
 																</div>
 
 																<EvidenceList
@@ -623,9 +633,9 @@ const Siteview = ({ position }) => {
 																		genes.locus.evidence
 																	)}
 																/>
-															</td>
+															</span>
 														))}
-													</tbody>
+													</p>
 												)}
 												{!gene && (
 													<p className="no-data-msg-publication">
@@ -680,7 +690,7 @@ const Siteview = ({ position }) => {
 															<strong>
 																{proteinStrings.chemical_mass.name}:{" "}
 															</strong>
-															{addCommas(mass.chemical_mass)} - Da
+															{addCommas(mass.chemical_mass)}  Da
 														</div>
 														<div>
 															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
