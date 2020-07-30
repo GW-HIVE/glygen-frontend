@@ -124,10 +124,7 @@ export default function Header(props) {
 				</Container>
 			</Navbar>
 
-			<Navbar
-				className="gg-blue"
-				expand="xl"
-				style={{ position: "relative", overflowX: "hidden" }}>
+			<Navbar className="gg-blue" expand="xl">
 				<Navbar.Brand as={Link} to={routeConstants.home}>
 					<img src={logo} alt="Glygen" className="logo-nav" />
 				</Navbar.Brand>
