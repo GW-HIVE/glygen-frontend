@@ -42,6 +42,14 @@
 		width: 92% !important;
 		margin: 0 auto !important;
 	}
+	.btn-outline-white-col {
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
+	}
+	.btn-outline-white {
+		display: inline-block !important;
+	}
 }
 
 /* Extra Small Devices (Landscape Phones & Portrait Tablets) */
@@ -121,6 +129,14 @@
 	.contact-univ-address {
 		text-align: center !important;
 	}
+	.btn-outline-white-col {
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
+	}
+	.btn-outline-white {
+		display: inline-flex !important;
+	}
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
@@ -153,6 +169,14 @@
 	}
 	.contact-univ-address {
 		text-align: center !important;
+	}
+	.btn-outline-white-col {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+	.btn-outline-white {
+		display: inline-flex !important;
 	}
 }
 @media (min-width: 600px) {
