@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 import PersonPinCircleOutlinedIcon from "@material-ui/icons/PersonPinCircleOutlined";
+// import FormatQuoteOutlinedIcon from "@material-ui/icons/FormatQuoteOutlined";
 import quoteIcon from "../../images/icons/quote-open-outline-white.svg";
 import routeConstants from "../../data/json/routeConstants.json";
 import { Link } from "react-router-dom";
@@ -74,7 +75,7 @@ export default function MainFeaturedCard(props) {
 			{/* <Grid container className="gg-align-center"> */}
 			<Grid container>
 				{/* <Grid item sm={ 12 } lg={ 8 }> */}
-				<Grid item sm={12} md={6} className="text-left">
+				<Grid item sm={12} md={8} lg={6} className="text-left">
 					<div
 						className={classes.mainFeaturedCardContent}
 						style={{ letterSpacing: "1px" }}>
@@ -91,19 +92,27 @@ export default function MainFeaturedCard(props) {
 					</div>
 				</Grid>
 				{/* <Grid item sm={12} md={2} lg={2} className="text-right"></Grid> */}
-				<Grid item sm={12} md={6} className="btn-outline-white-col">
+				<Grid item sm={12} md={4} lg={6} className="btn-outline-white-col">
 					<div className={classes.mainFeaturedCardButtons}>
 						<div className="btn-outline-white">
 							<Link
-								style={{ margin: "5px 15px" }}
 								to={routeConstants.howToCite}
 								className="gg-btn-outline-white">
-								<span>
+								<span
+									style={{
+										paddingRight: "15px",
+										paddingLeft: "5px",
+									}}>
+									{/* <FormatQuoteOutlinedIcon
+										style={{
+											fontSize: "26px",
+										}}
+									/> */}
 									<img
 										component="img"
 										style={{
-											paddingRight: "15px",
-											marginTop: "-5px",
+											paddingBottom: "4px",
+											paddingTop: "4px",
 										}}
 										src={quoteIcon}
 										alt="quote icon"
@@ -113,27 +122,17 @@ export default function MainFeaturedCard(props) {
 							</Link>
 						</div>
 						<div className="btn-outline-white">
-							<Link
-								style={{ margin: "5px 15px" }}
-								to={routeConstants.tryMe}
-								className="gg-btn-outline-white">
-								<span>
-									<HourglassEmptyIcon
-										style={{ paddingRight: "5px", marginTop: "-5px" }}
-									/>
+							<Link to={routeConstants.tryMe} className="gg-btn-outline-white">
+								<span style={{ paddingRight: "10px" }}>
+									<HourglassEmptyIcon style={{ fontSize: "24px" }} />
 								</span>
 								Quick Start
 							</Link>
 						</div>
 						<div className="btn-outline-white">
-							<Link
-								style={{ margin: "5px 15px" }}
-								to={routeConstants.about}
-								className="gg-btn-outline-white">
-								<span>
-									<PersonPinCircleOutlinedIcon
-										style={{ paddingRight: "10px", marginTop: "-5px" }}
-									/>
+							<Link to={routeConstants.about} className="gg-btn-outline-white">
+								<span style={{ paddingRight: "10px" }}>
+									<PersonPinCircleOutlinedIcon style={{ fontSize: "24px" }} />
 								</span>
 								Our Mission
 							</Link>

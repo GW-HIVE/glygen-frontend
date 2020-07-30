@@ -475,7 +475,7 @@ hr {
 	border: 1px solid #fff;
 	border-radius: 5px;
 	padding: 10px;
-	/* margin: 0 10px; */
+	margin: 5px 10px !important;
 	display: block !important;
 	white-space: nowrap;
 	-webkit-transition: all 0.3s !important;
