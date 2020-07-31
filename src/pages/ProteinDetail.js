@@ -1125,6 +1125,7 @@ const ProteinDetail = (props) => {
 																		data={glycosylationWithImage}
 																		columns={glycoSylationColumns}
 																		onClickTarget={"#glycosylation"}
+																		defaultSortField="position"
 																	/>
 																)}
 															{!glycosylationWithImage.length && (
@@ -1148,6 +1149,7 @@ const ProteinDetail = (props) => {
 																				column.dataField !== "glytoucan_ac"
 																		)}
 																		onClickTarget={"#glycosylation"}
+																		defaultSortField="position"
 																	/>
 																)}
 															{!glycosylationWithoutImage.length && (

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import stringConstants from '../data/json/stringConstants';
+import stringConstants from "../data/json/stringConstants";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { getProteinInit } from "../data/protein";
 
 function getDateTime() {
   var now = new Date();
@@ -70,6 +71,31 @@ const ProteinQuerySummary = props => {
     return ProteinAc.split(",").join(", ");
   }
 
+  const [aminoAcidLookup, setAminoAcidLookup] = useState({});
+
+  useEffect(() => {
+    getProteinInit().then(data => {
+      const lookup = data.data.aa_list
+        .map(({ name, key }) => {
+          const tokens = name.split(" - ");
+          return {
+            key,
+            short: tokens[1],
+            long: tokens[0]
+          };
+        })
+        .reduce(
+          (ind, { key, short, long }) => ({
+            ...ind,
+            [key]: { short, long }
+          }),
+          {}
+        );
+
+      setAminoAcidLookup(lookup);
+    });
+  }, []);
+
   return (
     <>
       {/* <pre>Test: {JSON.stringify(data, null, 2)}</pre> */}
@@ -85,27 +111,35 @@ const ProteinQuerySummary = props => {
           </Card.Title>
           <Card.Text>
             {props.question && data.glytoucan_ac && (
-                <>
-								  {props.question.text.split("{0}")[0]}<strong>{data.glytoucan_ac}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{data.glytoucan_ac}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
 
             {props.question && uniprot_canonical_ac && (
-                <>
-                  {props.question.text.split("{0}")[0]}<strong>{uniprot_canonical_ac}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{uniprot_canonical_ac}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
 
             {props.question && data.do_name && (
-                <>
-								  {props.question.text.split("{0}")[0]}<strong>{data.do_name}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{data.do_name}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
 
             {props.question && organism && props.question.organism && (
-                <>
-                  {props.question.text.split("{0}")[0]}<strong>{organism.name}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{organism.name}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
 
             {/*  Protein typeahead */}
@@ -143,12 +177,12 @@ const ProteinQuerySummary = props => {
             {glycosylated_aa && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycosylated:
+                  Glycosylated Residue:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {glycosylated_aa.aa_list.join(
-                    ` ${glycosylated_aa.operation} `
-                  )}
+                  {glycosylated_aa.aa_list
+                    .map(key => aminoAcidLookup[key].short || "")
+                    .join(` ${glycosylated_aa.operation} `)}
                 </Col>
               </Row>
             )}
