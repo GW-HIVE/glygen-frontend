@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
-// import Container from '@material-ui/core/Container';
 import CssBaseline from "@material-ui/core/CssBaseline";
-// import MainFeaturedCard from '../components/cards/MainFeaturedCard';
 import VerticalHeading from "../components/headings/VerticalHeading";
-// import HorizontalHeading from '../components/headings/HorizontalHeading';
-// import featuredImg from '../images/home/featuredImg-7.jpg';
 import BootstrapTable from "react-bootstrap-table-next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -27,14 +23,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// const mainFeaturedCard = {
-// 	pageName: 'Resources',
-// 	title: "GlyGen's online resources for glycobiology research.",
-// 	description:
-// 		' A library of Glycobiology resources, including databases, informatics tools, learning material and tutorials are provided.',
-// 	image: featuredImg,
-// 	imgText: 'main image description',
-// };
 const verticalHeadingData = {
 	h5VerticalText: "LOOK AT",
 	h2textTopStrongAfter: "Data",
@@ -71,9 +59,7 @@ const Resources = () => {
 		{ label: "Organizations", id: "organizations" },
 		{ label: "Learn", id: "learn" },
 	];
-	// data.sort((a, b) =>
-	// 	a.col1 > b.col1 ? 1 : a.col1 === b.col1 ? (a.col2 > b.col2 ? 1 : -1) : -1
-	// );
+
 	const dataResourcesCols = [
 		{
 			dataField: "category",
@@ -89,9 +75,6 @@ const Resources = () => {
 					{cell.name}
 				</Link>
 			),
-			// onSort: (field, order) => {
-			// 	// a.col1 > b.col1 ? 1 : a.col1 === b.col1 ? (a.col2 > b.col2 ? 1 : -1) : -1
-			// },
 		},
 		{
 			dataField: "description",
@@ -245,11 +228,16 @@ const Resources = () => {
 				style={{ backgroundColor: '#fff' }}> */}
 			<Row className="gg-baseline">
 				<Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-					<Sidebar items={items} offset={125}/>
+					<Sidebar items={items} offset={125} />
 				</Col>
-				<Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+				<Col
+					sm={12}
+					md={12}
+					lg={12}
+					xl={9}
+					className="sidebar-page sidebar-page-mb">
 					<div id="data">
-						<VerticalHeading post={verticalHeadingData}/>
+						<VerticalHeading post={verticalHeadingData} />
 						<BootstrapTable
 							bootstrap4
 							striped
@@ -276,7 +264,7 @@ const Resources = () => {
 					</div>
 
 					<div id="tools">
-						<VerticalHeading post={verticalHeadingTools}/>
+						<VerticalHeading post={verticalHeadingTools} />
 						<BootstrapTable
 							bootstrap4
 							striped
@@ -303,7 +291,7 @@ const Resources = () => {
 					</div>
 
 					<div id="organizations">
-						<VerticalHeading post={verticallHeadingOrganiz}/>
+						<VerticalHeading post={verticallHeadingOrganiz} />
 						<BootstrapTable
 							bootstrap4
 							striped
@@ -334,7 +322,7 @@ const Resources = () => {
 					</div>
 
 					<div id="learn">
-						<VerticalHeading post={verticalHeadingLearn}/>
+						<VerticalHeading post={verticalHeadingLearn} />
 						<BootstrapTable
 							bootstrap4
 							striped
