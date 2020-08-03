@@ -296,7 +296,7 @@ const ProteinQuerySummary = props => {
             {pathway_id && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Pathway ID:
+                  {proteinStrings.pathway_id.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {pathway_id}
@@ -306,7 +306,7 @@ const ProteinQuerySummary = props => {
             {pmid && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  PMID:
+                  {proteinStrings.pathway_id.name}: PMID:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {pmid}
