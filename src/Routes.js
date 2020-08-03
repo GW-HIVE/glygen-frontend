@@ -60,15 +60,10 @@ const Routes = props => (
       path={`${routeConstants.glycanDetail}:id`}
       component={GlycanDetail}
     />
-    <Route path={routeConstants.glycanDetail} component={GlycanDetail} />
     <Route path={`${routeConstants.motifDetail}:id`} component={MotifDetail} />
     <Route path={routeConstants.motifDetail} component={MotifDetail} />
     <Route
-      path={`${routeConstants.proteinDetail}:id/:select`}
-      component={ProteinDetail}
-    />
-    <Route
-      path={`${routeConstants.proteinDetail}:id`}
+      path={`${routeConstants.proteinDetail}:id/:select?`}
       component={ProteinDetail}
     />
     <Route
@@ -88,7 +83,6 @@ const Routes = props => (
       path={`${routeConstants.globalSearchResult}:id`}
       component={GlobalSearchResult}
     />
-    <Route path={routeConstants.proteinDetail} component={ProteinDetail} />
     <Route path={routeConstants.resources} component={Resources} />
     <Route path={routeConstants.howToCite} component={HowToCite} />
     <Route path={routeConstants.contactUs} component={ContactUs} />
