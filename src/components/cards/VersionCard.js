@@ -55,7 +55,7 @@ export default function VersionCard(props) {
 								<strong>Portal:</strong>
 							</span>{" "}
 							<Link
-								href="https://github.com/glygener/glygen-frontend/wiki/Release-notes"
+								href="https://wiki.glygen.org/index.php/Portal_release_notes"
 								target="_blank"
 								rel="noopener noreferrer">
 								{versionData.software && versionData.software.version}
@@ -66,20 +66,28 @@ export default function VersionCard(props) {
 							<span>
 								<strong>Webservice:</strong>
 							</span>{" "}
+							<Link
+								href="https://wiki.glygen.org/index.php/API_release_notes"
+								target="_blank"
+								rel="noopener noreferrer">
+								{versionData.api && versionData.api.version}
+							</Link>{" "}
 							{versionData.api &&
-								versionData.api.version +
-									" (" +
-									getDateMMDDYYYY(versionData.api.releaseDate) +
-									")"}
+								// versionData.api.version +
+								" (" + getDateMMDDYYYY(versionData.api.releaseDate) + ")"}
 							<br />
 							<span>
 								<strong>Data:</strong>
 							</span>{" "}
+							<Link
+								href="https://wiki.glygen.org/index.php/Data_release_notes"
+								target="_blank"
+								rel="noopener noreferrer">
+								{versionData.data && versionData.data.version}
+							</Link>{" "}
 							{versionData.data &&
-								versionData.data.version +
-									" (" +
-									getDateMMDDYYYY(versionData.data.releaseDate) +
-									")"}
+								// versionData.data.version +
+								" (" + getDateMMDDYYYY(versionData.data.releaseDate) + ")"}
 						</Typography>
 					</CardContent>
 				</div>
