@@ -32,6 +32,7 @@
       "number_monosaccharides": {
         "name": "No of Sugars",
         "shortName": "No of Sugars",
+        "queryName": "Sugar",
         "tooltip": {
           "title": "No of Sugars",
           "text": "Use the sliders to select Number of Sugars range for your glycan(s)."

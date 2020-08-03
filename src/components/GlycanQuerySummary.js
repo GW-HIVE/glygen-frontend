@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
+import stringConstants from "../data/json/stringConstants";
 import Button from "react-bootstrap/Button";
-
+const glycanStrings = stringConstants.glycan.common;
 function getDateTime() {
   var now = new Date();
   var year = now.getFullYear();
@@ -86,15 +87,19 @@ const GlycanQuerySummary = props => {
           </Card.Title>
           <Card.Text>
             {props.question && data.uniprot_canonical_ac && (
-                <>
-                  {props.question.text.split("{0}")[0]}<strong>{data.uniprot_canonical_ac}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{data.uniprot_canonical_ac}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
 
             {props.question && organism && props.question.organism && (
-                <>
-                  {props.question.text.split("{0}")[0]}<strong>{organism.name}</strong>{props.question.text.split("{0}")[1]}
-                </>
+              <>
+                {props.question.text.split("{0}")[0]}
+                <strong>{organism.name}</strong>
+                {props.question.text.split("{0}")[1]}
+              </>
             )}
             {composition &&
               composition.map((compItem, index) => (
@@ -111,7 +116,7 @@ const GlycanQuerySummary = props => {
             {glytoucan_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycan Id:
+                  {glycanStrings.glytoucan_ac.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {formatGlycans(glytoucan_ac)}
@@ -152,7 +157,7 @@ const GlycanQuerySummary = props => {
             {number_monosaccharides && number_monosaccharides.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Sugar:
+                  {glycanStrings.mass.queryName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {number_monosaccharides.min}&#8209;
