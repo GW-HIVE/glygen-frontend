@@ -135,19 +135,15 @@ const ProteinSequenceDisplay = ({
   sequenceObject,
   glycosylation = [],
   mutation,
-  siteAnnotation
+  siteAnnotation,
+  selectedHighlights, 
+  setSelectedHighlights
 }) => {
   const [nLinkGlycan, setNLinkGlycan] = useState([]);
   const [oLinkGlycan, setOLinkGlycan] = useState([]);
   const [mutationHighlights, setMutationHighlights] = useState([]);
   const [siteAnnotationHighlights, setSiteAnnotationHighlights] = useState([]);
   const [sequenceData, setSequenceData] = useState([]);
-  const [selectedHighlights, setSelectedHighlights] = useState({
-    mutation: false,
-    site_annotation: false,
-    n_link_glycosylation: false,
-    o_link_glycosylation: false
-  });
 
   useEffect(() => {
     if (glycosylation) {

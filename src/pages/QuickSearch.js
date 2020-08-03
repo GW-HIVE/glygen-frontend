@@ -301,7 +301,7 @@ const QuickSearch = (props) => {
 				basename +
 				routeConstants.proteinDetail +
 				inputValue.question_7 +
-				"#sequence";
+				"/site_annotation#sequence";
 		});
 	};
 

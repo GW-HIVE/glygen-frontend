@@ -64,6 +64,10 @@ const Routes = props => (
     <Route path={`${routeConstants.motifDetail}:id`} component={MotifDetail} />
     <Route path={routeConstants.motifDetail} component={MotifDetail} />
     <Route
+      path={`${routeConstants.proteinDetail}:id/:select`}
+      component={ProteinDetail}
+    />
+    <Route
       path={`${routeConstants.proteinDetail}:id`}
       component={ProteinDetail}
     />

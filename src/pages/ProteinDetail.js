@@ -166,6 +166,7 @@ const getItemsCrossRef = (data) => {
 
 const ProteinDetail = (props) => {
 	let { id } = useParams();
+	let { select } = useParams();
 
 	const [detailData, setDetailData] = useState({});
 	const [itemsCrossRef, setItemsCrossRef] = useState([]);
@@ -184,10 +185,25 @@ const ProteinDetail = (props) => {
 		(state, newState) => ({ ...state, ...newState }),
 		{ show: false, id: "" }
 	);
+	const [selectedHighlights, setSelectedHighlights] = useState({
+		mutation: false,
+		site_annotation: false,
+		n_link_glycosylation: false,
+		o_link_glycosylation: false
+	  });
 
 	useEffect(() => {
 		setPageLoading(true);
 		logActivity("user", id);
+		setSelectedHighlights(
+			{
+				mutation : "mutation" === select, 
+				site_annotation : "site_annotation" === select,
+				n_link_glycosylation : "n_link_glycosylation" === select,
+				o_link_glycosylation : "o_link_glycosylation" === select
+			}
+		);
+
 		const getProteinDetailData = getProteinDetail(id);
 
 		getProteinDetailData.then(({ data }) => {
@@ -1213,6 +1229,8 @@ const ProteinDetail = (props) => {
 													glycosylation={glycosylation}
 													mutation={mutation}
 													siteAnnotation={site_annotation}
+													selectedHighlights={selectedHighlights}
+													setSelectedHighlights={setSelectedHighlights}
 												/>
 											</div>
 										</Card.Body>
