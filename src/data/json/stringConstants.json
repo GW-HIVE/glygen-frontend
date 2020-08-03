@@ -38,6 +38,24 @@
         },
         "id": "number_monosaccharides"
       },
+      "number_proteins": {
+        "name": "On How Many GlycoProteins",
+        "shortName": "GlycoProteins",
+        "tooltip": {
+          "title": "GlycoProteins",
+          "text": "how many glycoproteins GlycoProteins"
+        },
+        "id": "number_proteins"
+      },
+      "number_enzymes": {
+        "name": "How Many Enzymes",
+        "shortName": "How Many Enzymes",
+        "tooltip": {
+          "title": " Enzymes",
+          "text": "How Many Enzymes are on glycan"
+        },
+        "id": "number_enzymes"
+      },
       "organism": {
         "name": "Organisms",
         "shortName": "Organisms",
@@ -73,6 +91,7 @@
         },
         "id": "glycan_subtype"
       },
+
       "protein_identifier": {
         "name": "Glycosylated Protein",
         "shortName": "Glycosylated Protein",

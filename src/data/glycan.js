@@ -90,8 +90,8 @@ export const GLYCAN_COLUMNS = [
   },
 
   {
-    dataField: "mass",
-    text: "Monoisotopic Mass (Da)",
+    dataField: glycanStrings.mass.id,
+    text: glycanStrings.mass.shortName,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
@@ -134,24 +134,24 @@ export const GLYCAN_COLUMNS = [
     }
   },
   {
-    dataField: "number_monosaccharides",
-    text: "No of Sugars      ",
+    dataField: glycanStrings.number_monosaccharides.id,
+    text: glycanStrings.number_monosaccharides.shortName,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     }
   },
   {
-    dataField: "number_proteins",
-    text: "On How Many GlycoProteins",
+    dataField: glycanStrings.number_proteins.id,
+    text: glycanStrings.number_proteins.shortName,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     }
   },
   {
-    dataField: "number_enzymes",
-    text: "How Many Enzymes",
+    dataField: glycanStrings.number_enzymes.id,
+    text: glycanStrings.number_enzymes.shortName,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
