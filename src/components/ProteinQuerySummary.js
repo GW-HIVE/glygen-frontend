@@ -41,7 +41,7 @@ const ProteinQuerySummary = props => {
   let quickSearch = stringConstants.quick_search;
 
   const { data, onModifySearch } = props;
-
+  const proteinStrings = stringConstants.protein.common;
   const {
     uniprot_canonical_ac,
     refseq_ac,
@@ -146,7 +146,7 @@ const ProteinQuerySummary = props => {
             {!props.question && uniprot_canonical_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  UniProtKB Accession:
+                  {proteinStrings.uniprot_canonical_ac.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {formatProtein(uniprot_canonical_ac)}
@@ -167,7 +167,7 @@ const ProteinQuerySummary = props => {
             {gene_name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Gene Name:
+                  {proteinStrings.gene_name.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {gene_name}
@@ -199,7 +199,7 @@ const ProteinQuerySummary = props => {
             {sequence && sequence.aa_sequence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Sequence:
+                  {proteinStrings.sequence.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   <abbr
@@ -214,7 +214,7 @@ const ProteinQuerySummary = props => {
             {protein_name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Protein Name:
+                  {proteinStrings.protein_name.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {protein_name}
@@ -225,7 +225,7 @@ const ProteinQuerySummary = props => {
             {go_id && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  GO ID:
+                  {proteinStrings.go_id.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {go_id}
@@ -265,7 +265,7 @@ const ProteinQuerySummary = props => {
             {!props.question && organism && organism.name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Organism:
+                  {proteinStrings.organism.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {organism.name}
@@ -275,7 +275,7 @@ const ProteinQuerySummary = props => {
             {refseq_ac && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Refseq Ac:
+                  {proteinStrings.refseq_ac.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {refseq_ac}
@@ -286,7 +286,7 @@ const ProteinQuerySummary = props => {
             {go_term && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  GO Name:
+                  {proteinStrings.go_term.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {go_term}
