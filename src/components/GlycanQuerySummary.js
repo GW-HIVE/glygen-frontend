@@ -116,7 +116,8 @@ const GlycanQuerySummary = props => {
             {glytoucan_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {glycanStrings.glytoucan_ac.shortName}:
+                  Interacting Glycan:{" "}
+                  {/* {glycanStrings.glytoucan_ac.shortName}: */}
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {formatGlycans(glytoucan_ac)}
@@ -200,7 +201,7 @@ const GlycanQuerySummary = props => {
             {protein_identifier && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Protein Identifier:
+                  {glycanStrings.protein_identifier.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {protein_identifier}
