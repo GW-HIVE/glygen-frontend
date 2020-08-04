@@ -157,7 +157,7 @@ const GlycanQuerySummary = props => {
             {number_monosaccharides && number_monosaccharides.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {glycanStrings.mass.queryName}:
+                  Sugar:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {number_monosaccharides.min}&#8209;
@@ -170,7 +170,7 @@ const GlycanQuerySummary = props => {
             {!props.question && organism && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Organism:
+                  {glycanStrings.organism.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {formatOrganisms(organism)}
@@ -180,7 +180,7 @@ const GlycanQuerySummary = props => {
             {glycan_type && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycan Type:
+                  {glycanStrings.glycan_type.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycan_type}
@@ -190,7 +190,7 @@ const GlycanQuerySummary = props => {
             {glycan_subtype && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycan SubType:
+                  {glycanStrings.glycan_subtype.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycan_subtype}
