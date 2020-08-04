@@ -459,7 +459,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">General</h3>
+										<h4 className="gg-green d-inline">General</h4>
 										<div className="float-right">
 											<span>
 												<Button
@@ -602,7 +602,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Species</h3>
+										<h4 className="gg-green d-inline">Species</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -665,7 +665,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Motif</h3>
+										<h4 className="gg-green d-inline">Motif</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -728,9 +728,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">
+										<h4 className="gg-green d-inline">
 											Associated Glycoproteins
-										</h3>
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -778,7 +778,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Biosynthetic Enzyme</h3>
+										<h4 className="gg-green d-inline">Biosynthetic Enzyme</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -824,7 +824,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Digital Sequence</h3>
+										<h4 className="gg-green d-inline">Digital Sequence</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -998,7 +998,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Cross References</h3>
+										<h4 className="gg-green d-inline">Cross References</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1066,7 +1066,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Publications</h3>
+										<h4 className="gg-green d-inline">Publications</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
@@ -1094,9 +1094,9 @@ const GlycanDetail = (props) => {
 																<td key={pubIndex}>
 																	<p>
 																		<div>
-																			<h5 style={{ marginBottom: "3px" }}>
+																			<h6 style={{ marginBottom: "3px" }}>
 																				<strong>{pub.title}</strong>
-																			</h5>
+																			</h6>
 																		</div>
 																		<div>{pub.authors}</div>
 																		<div>

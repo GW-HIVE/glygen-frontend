@@ -22,7 +22,7 @@ const PanelHowToCite = (props) => {
 						className="panelHeadBgr"
 						style={{ borderBottom: "none" }}>
 						{props.data.map((json) => (
-							<h3 className="gg-green">{json.title}</h3>
+							<h4 className="gg-green">{json.title}</h4>
 						))}
 					</Card.Header>
 					<Card.Body className="card-padding-zero">
@@ -35,9 +35,9 @@ const PanelHowToCite = (props) => {
 											<p>
 												{json.comingSoon}
 												<div>
-													<h5 style={{ marginBottom: "3px" }}>
+													<h6 style={{ marginBottom: "3px" }}>
 														<strong>{json.heading}</strong>
-													</h5>
+													</h6>
 												</div>
 												{json.authors}
 												<div
