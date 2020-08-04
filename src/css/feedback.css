@@ -1,8 +1,8 @@
-body {
+/* body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-}
+} */
 
 .rotate {
 	/* Safari */
@@ -25,9 +25,9 @@ body {
 	z-index: 1500;
 	position: fixed;
 	top: 50%;
-	right: -350px;
+	right: -380px;
 	transform: translateY(-50%);
-	width: 350px;
+	width: 380px;
 	height: auto;
 	padding: 40px;
 	background: #fff;
@@ -38,7 +38,7 @@ body {
 .sidebar-contact.active {
 	right: 0;
 }
-.sidebar-contact input,
+/* .sidebar-contact input, */
 /* .sidebar-contact textarea {
   width: 100%;
   height: 36px;
@@ -48,8 +48,8 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.5);
   outline: none;
 } */
-.sidebar-contact h2 {
-}
+/* .sidebar-contact h2 {
+} */
 /* .sidebar-contact textarea {
   height: 60px;
   resize: none;
@@ -64,14 +64,13 @@ body {
 .toggle {
 	position: absolute;
 	height: 50px;
-	width: 85px;
+	width: 100px;
 	text-align: center;
 	cursor: pointer;
 	background: #337ab7;
-	left: -68px;
+	left: -76px;
 	line-height: 48px;
 }
-
 .toggle:before {
 	font-family: fontAwesome;
 	font-size: 16px;
@@ -86,6 +85,12 @@ body {
 .toggle.active span {
 	display: none;
 }
+.sidebar-contact .toggle {
+	top: 10%;
+	/* transform:translateY(-50%); */
+	transition: 0.5s;
+}
+
 @media (max-width: 768px) {
 	.sidebar-contact {
 		width: 100%;
@@ -93,15 +98,15 @@ body {
 		right: -100%;
 	}
 	.sidebar-contact .toggle {
-		top: 120%;
+		top: 20%;
 		/* transform:translateY(-50%); */
 		transition: 0.5s;
 	}
 	.sidebar-contact.active .toggle {
-		top: 10;
-		right: 10;
-		left: 0;
-		transform: translatex(0);
+		top: 10%;
+		right: 0;
+		left: 87% !important;
+		/* transform: translatex(0); */
 	}
 	.scroll {
 		width: 100%;
@@ -112,9 +117,19 @@ body {
 		padding: 50px 50px;
 	}
 }
+@media (max-width: 480px) {
+	.sidebar-contact.active .toggle {
+		top: 15%;
+		left: 80% !important;
+	}
+	.sidebar-contact .toggle {
+		top: 40%;
+		/* transform:translateY(-50%); */
+		transition: 0.5s;
+	}
+}
 .feedback_ {
 	background: #fff;
-
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -163,7 +178,7 @@ body {
 }
 .feedback_ div.feedbbacktype span {
 	background: #f1f1f1;
-	padding: 5px;
+	padding: 5px 10px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -173,6 +188,7 @@ body {
 .feedback_ .feedbbacktype span:hover {
 	background: #336699;
 	color: white;
+	cursor: pointer;
 }
 .feedback_ div.feedbbacktype span i {
 	margin-right: 2px;
@@ -225,7 +241,7 @@ ol {
 }
 .feedbbacktype {
 	padding: 0px;
-	margin: "5px 0 15px 0";
+	margin: 5px 0 15px 0;
 }
 
 .feedback_ div.feedbbacktype span.active {
