@@ -797,7 +797,6 @@ const ProteinDetail = (props) => {
 													</p>
 												)}
 											</div>
-
 											<p>
 												{uniprot && uniprot.uniprot_canonical_ac && (
 													<>
@@ -846,7 +845,11 @@ const ProteinDetail = (props) => {
 															</strong>
 															{addCommas(mass.chemical_mass)} Da
 														</div>
-														<div>
+													
+											
+											{refseq &&  (
+											<div>
+												<>
 															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
 															<a
 																href={refseq.url}
@@ -855,7 +858,7 @@ const ProteinDetail = (props) => {
 																{" "}
 																{refseq.ac}{" "}
 															</a>{" "}
-														</div>
+														
 														<div>
 															{" "}
 															<strong>
@@ -863,7 +866,12 @@ const ProteinDetail = (props) => {
 															</strong>{" "}
 															{refseq.name}{" "}
 														</div>{" "}
-													</>
+														</>
+												
+											</div>
+													
+												)}
+														</>
 												)}
 											</p>
 										</Card.Body>
