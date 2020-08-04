@@ -415,7 +415,7 @@ const GlycanDetail = (props) => {
 										data: "glycan_image",
 									},
 									{
-										display: " Glycan data (*.csv)",
+										display: " Glycan data (*.json)",
 										type: "json",
 										data: "glycan_detail",
 									},
