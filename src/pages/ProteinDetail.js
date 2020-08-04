@@ -622,14 +622,14 @@ const ProteinDetail = (props) => {
 			function: true,
 			go_annotation: true,
 			glycosylation: true,
-			seqence: true,
+			sequence: true,
 			pathway: true,
 			isoforms: true,
-			homomlogs: true,
+			homologs: true,
 			disease: true,
 			mutation: true,
-			expressionT: true,
-			expressionD: true,
+			expression_tissue: true,
+			expression_disease: true,
 			crossref: true,
 			publication: true,
 		}
@@ -1490,11 +1490,11 @@ const ProteinDetail = (props) => {
 											<Accordion.Toggle
 												eventKey="0"
 												onClick={() =>
-													toggleCollapse("orthologs", collapsed.orthologs)
+													toggleCollapse("homologs", collapsed.homologs)
 												}
 												className="gg-green arrow-btn">
 												<span>
-													{collapsed.orthologs ? closeIcon : expandIcon}
+													{collapsed.homologs ? closeIcon : expandIcon}
 												</span>
 											</Accordion.Toggle>
 										</div>
