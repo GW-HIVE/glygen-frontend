@@ -157,7 +157,7 @@ const ProteinQuerySummary = props => {
             {mass && mass.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Mass:
+                  {proteinStrings.mass.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
@@ -177,7 +177,7 @@ const ProteinQuerySummary = props => {
             {glycosylated_aa && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycosylated Residue:
+                  {proteinStrings.glycosylated_aa.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylated_aa.aa_list
@@ -189,7 +189,7 @@ const ProteinQuerySummary = props => {
             {glycosylation_evidence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Glycosylation Evidence:
+                  {proteinStrings.glycosylation_evidence.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylation_evidence}
@@ -235,7 +235,7 @@ const ProteinQuerySummary = props => {
             {glycan && glycan.glytoucan_ac && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Interacting Glycan:
+                  {proteinStrings.glytoucan_ac.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycan.glytoucan_ac}
@@ -306,7 +306,7 @@ const ProteinQuerySummary = props => {
             {pmid && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {proteinStrings.pathway_id.name}: PMID:
+                  {proteinStrings.pmid.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {pmid}

@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import stringConstants from "../data/json/stringConstants";
 import Button from "react-bootstrap/Button";
 const glycanStrings = stringConstants.glycan.common;
+
 function getDateTime() {
   var now = new Date();
   var year = now.getFullYear();
@@ -116,7 +117,7 @@ const GlycanQuerySummary = props => {
             {glytoucan_ac && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Interacting Glycan:{" "}
+                  {glycanStrings.glycan_id.name}:
                   {/* {glycanStrings.glytoucan_ac.shortName}: */}
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
@@ -147,7 +148,7 @@ const GlycanQuerySummary = props => {
             {mass && mass.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Mass:
+                  {glycanStrings.mass.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
@@ -158,7 +159,7 @@ const GlycanQuerySummary = props => {
             {number_monosaccharides && number_monosaccharides.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Sugar:
+                  {glycanStrings.number_monosaccharides.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {number_monosaccharides.min}&#8209;
@@ -211,7 +212,7 @@ const GlycanQuerySummary = props => {
             {enzyme && enzyme.id && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Synthesizing Enzyme:
+                  {glycanStrings.enzyme.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {enzyme.id}
@@ -221,7 +222,7 @@ const GlycanQuerySummary = props => {
             {glycan_motif && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  Motif:
+                  {glycanStrings.glycan_motif.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycan_motif}
@@ -231,7 +232,7 @@ const GlycanQuerySummary = props => {
             {pmid && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  PMID:
+                  {glycanStrings.pmid.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {pmid}

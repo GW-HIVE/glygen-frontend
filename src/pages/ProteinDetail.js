@@ -1056,7 +1056,7 @@ const ProteinDetail = (props) => {
 																	Total{" "}
 																	<a
 																		// eslint-disable-next-line
-																		href="javascript:void(0)"
+																		//href="javascript:void(0)"
 																		onClick={() => {
 																			handleOpenGOTermListPage(
 																				uniprot &&
