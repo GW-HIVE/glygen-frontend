@@ -211,7 +211,9 @@ p {
 }
 
 .table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
+.table-hover tbody tr:hover th,
+.table-body > .table-row:hover,
+.table-body > .table-row:nth-child(2n):hover {
 	background-color: #e2e8ef;
 }
 .table {
@@ -1015,5 +1017,5 @@ sub {
 }
 /* MuiPaper-root MuiExpansionPanel-root MuiExpansionPanel-rounded MuiPaper-elevation1 MuiPaper-rounded */
 .trclass {
-	padding: 10px;
+	padding: 10px 20px;
 }
