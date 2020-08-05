@@ -263,7 +263,7 @@ const GlycanDetail = (props) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			formatter: (value, row) => (
-				<LineTooltip text="See details">
+				<LineTooltip text="View details">
 					<Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 						{row.uniprot_canonical_ac}
 					</Link>
@@ -301,7 +301,7 @@ const GlycanDetail = (props) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			formatter: (value, row) => (
-				<LineTooltip text="See details">
+				<LineTooltip text="View details">
 					<Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 						{row.uniprot_canonical_ac}
 					</Link>
@@ -318,7 +318,7 @@ const GlycanDetail = (props) => {
 			},
 
 			formatter: (value, row) => (
-				<LineTooltip text="See details on UniProt">
+				<LineTooltip text="View details on UniProt">
 					<a href={row.gene_link} target="_blank" rel="noopener noreferrer">
 						{value}
 					</a>
@@ -634,7 +634,7 @@ const GlycanDetail = (props) => {
 															<>
 																<strong className="nowrap">{speEvi}</strong>{" "}
 																{"["}
-																<LineTooltip text="See details on NCBI">
+																<LineTooltip text="View details on NCBI">
 																	<a
 																		href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
 																		target="_blank"
@@ -700,7 +700,7 @@ const GlycanDetail = (props) => {
 																		/>
 																	</div>
 																	<span>
-																		<LineTooltip text="See details">
+																		<LineTooltip text="View details">
 																			<Link
 																				to={
 																					routeConstants.motifDetail + motif.id
