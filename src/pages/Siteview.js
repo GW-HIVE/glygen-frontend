@@ -10,8 +10,8 @@ import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
-import { Link, Grid } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import { groupEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -34,6 +34,7 @@ import FeedbackWidget from "../components/FeedbackWidget";
 import routeConstants from "../data/json/routeConstants";
 import stringConstants from "../data/json/stringConstants";
 import { getGlycanImageUrl } from "../data/glycan";
+import LineTooltip from "../components/tooltip/LineTooltip";
 // import { size } from "lodash-es";
 // import { flexbox } from "@material-ui/system";
 
@@ -90,8 +91,8 @@ const SequenceLocationViewer = ({
 
 	const [filteredAnnotations, setFilteredAnnotations] = useState([]);
 	const [styledSequence, setStyledSequence] = useState([]);
-	const [currentAnnotation, setCurrentAnnotation] = useState()
-	const [currentAnnotationIndex, setCurrentAnnotationIndex] = useState()
+	const [currentAnnotation, setCurrentAnnotation] = useState();
+	const [currentAnnotationIndex, setCurrentAnnotationIndex] = useState();
 
 	const getHighlightClassname = (reducedAnnotations, position) => {
 		const match = reducedAnnotations.find(
@@ -112,22 +113,22 @@ const SequenceLocationViewer = ({
 
 	useEffect(() => {
 		const reducedAnnotations = annotations.reduce((all, current) => {
-			const result = [...all]
-			const atPosition = all.find(x => (x.position === current.position))
-	
+			const result = [...all];
+			const atPosition = all.find((x) => x.position === current.position);
+
 			if (!atPosition) {
-				result.push(current)
+				result.push(current);
 			}
-	
-			return result
-		}, [])
-		reducedAnnotations.sort(sortByPosition)
-		setFilteredAnnotations(reducedAnnotations)
 
+			return result;
+		}, []);
+		reducedAnnotations.sort(sortByPosition);
+		setFilteredAnnotations(reducedAnnotations);
 
-
-		setCurrentAnnotation(reducedAnnotations.find((x) => x.position === position))
-		setCurrentAnnotationIndex(reducedAnnotations.indexOf(currentAnnotation))
+		setCurrentAnnotation(
+			reducedAnnotations.find((x) => x.position === position)
+		);
+		setCurrentAnnotationIndex(reducedAnnotations.indexOf(currentAnnotation));
 
 		const baseValues = sequence.map((character, index) => {
 			const currentPosition = index + 1;
@@ -175,13 +176,17 @@ const SequenceLocationViewer = ({
 
 	const selectPrevious = () => {
 		if (currentAnnotationIndex > 0) {
-			onSelectPosition(filteredAnnotations[currentAnnotationIndex - 1].position);
+			onSelectPosition(
+				filteredAnnotations[currentAnnotationIndex - 1].position
+			);
 		}
 	};
 
 	const selectNext = () => {
 		if (currentAnnotationIndex < filteredAnnotations.length) {
-			onSelectPosition(filteredAnnotations[currentAnnotationIndex + 1].position);
+			onSelectPosition(
+				filteredAnnotations[currentAnnotationIndex + 1].position
+			);
 		}
 	};
 
@@ -231,7 +236,7 @@ const SequenceLocationViewer = ({
 					</>
 				</Grid>
 				<Grid item>
-					<button onClick={selectNext}>>></button>
+					<button onClick={selectNext}>{">>"}</button>
 				</Grid>
 			</Row>
 		</>
@@ -382,6 +387,7 @@ const Siteview = ({ position }) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "20%",
 				};
 			},
 		},
@@ -393,18 +399,17 @@ const Siteview = ({ position }) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "15%",
 				};
 			},
-			
+
 			formatter: (value, row) => (
-				
-				<Link
-					to={routeConstants.glycanDetail + row.glytoucan_ac}>
-					{" "}
-					{row.glytoucan_ac}{" "}
-				</Link>	
-			)
-			
+				<LineTooltip text="View glycan details">
+					<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+						{row.glytoucan_ac}
+					</Link>
+				</LineTooltip>
+			),
 		},
 		{
 			dataField: "position",
@@ -414,17 +419,19 @@ const Siteview = ({ position }) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "12%",
 				};
 			},
 		},
 		{
 			dataField: "evidence",
 			text: "Sources",
-		
+
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "23%",
 				};
 			},
 			formatter: (cell, row) => {
@@ -447,7 +454,7 @@ const Siteview = ({ position }) => {
 						<img
 							className="img-cartoon-list-page img-cartoon"
 							src={getGlycanImageUrl(row.glytoucan_ac)}
-							alt="Cartoon"
+							alt="Glycan img"
 						/>
 					)}
 				</div>
@@ -558,11 +565,11 @@ const Siteview = ({ position }) => {
 							/>
 							{/* Button */}
 							<div className="text-right gg-download-btn-width">
-								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+								<Link to={`${routeConstants.proteinDetail}${id}`}>
 									<Button type="button" className="gg-btn-blue">
-									Back To Protein Details
+										Back To Protein Details
 									</Button>
-								</NavLink>
+								</Link>
 							</div>
 							{/* general */}
 							<Accordion
@@ -581,7 +588,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">General</h3>
+										<h4 className="gg-green d-inline">General</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -602,7 +609,7 @@ const Siteview = ({ position }) => {
 													marginBottom: "5px",
 												}}>
 												{gene && (
-													<p>
+													<>
 														{gene.map((genes, genesname) => (
 															<span key={genesname}>
 																<div>
@@ -623,9 +630,8 @@ const Siteview = ({ position }) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																		{addCommas(genes.locus.start_pos)} -{" "}
-																		{addCommas(genes.locus.end_pos)})
-																
+																	{addCommas(genes.locus.start_pos)} -{" "}
+																	{addCommas(genes.locus.end_pos)})
 																</div>
 
 																<EvidenceList
@@ -635,7 +641,7 @@ const Siteview = ({ position }) => {
 																/>
 															</span>
 														))}
-													</p>
+													</>
 												)}
 												{!gene && (
 													<p className="no-data-msg-publication">
@@ -643,75 +649,66 @@ const Siteview = ({ position }) => {
 													</p>
 												)}
 											</div>
-
-											<p>
-												{uniprot && uniprot.uniprot_canonical_ac && (
-													<>
-														<div>
-															<strong>
-																{proteinStrings.uniprot_id.name}:{" "}
-															</strong>
-															<Link
-																href={uniprot.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.uniprot_id}{" "}
-															</Link>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.uniprot_accession.name}:{" "}
-															</strong>
-															<Link
-																href={uniprot.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.uniprot_canonical_ac}
-															</Link>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.sequence_length.name}:{" "}
-															</strong>
-															<Link
-																href="https://www.uniprot.org/uniprot/#sequence"
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.length}
-															</Link>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.recommendedname.name}:{" "}
-															</strong>{" "}
-															{recommendedname.full}{" "}
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.chemical_mass.name}:{" "}
-															</strong>
-															{addCommas(mass.chemical_mass)}  Da
-														</div>
-														<div>
-															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-															<Link
-																href={refseq.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{" "}
-																{refseq.ac}{" "}
-															</Link>{" "}
-														</div>
-														<div>
-															{" "}
-															<strong>
-																{proteinStrings.refSeq_name.name}:{" "}
-															</strong>{" "}
-															{refseq.name}{" "}
-														</div>{" "}
-													</>
-												)}
-											</p>
+											{uniprot && uniprot.uniprot_canonical_ac && (
+												<>
+													<div>
+														<strong>{proteinStrings.uniprot_id.name}: </strong>
+														<a
+															href={uniprot.url}
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.uniprot_id}{" "}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.uniprot_accession.name}:{" "}
+														</strong>
+														<a
+															href={uniprot.url}
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.uniprot_canonical_ac}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.sequence_length.name}:{" "}
+														</strong>
+														<a
+															href="https://www.uniprot.org/uniprot/#sequence"
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.length}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.recommendedname.name}:{" "}
+														</strong>{" "}
+														{recommendedname.full}{" "}
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.chemical_mass.name}:{" "}
+														</strong>
+														{addCommas(mass.chemical_mass)} Da
+													</div>
+													<div>
+														<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
+														<a
+															href={refseq.url}
+															target="_blank"
+															rel="noopener noreferrer">
+															{refseq.ac}
+														</a>
+													</div>
+													<div>
+														<strong>{proteinStrings.refSeq_name.name}: </strong>
+														{refseq.name}
+													</div>
+												</>
+											)}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
@@ -733,7 +730,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Sequence</h3>
+										<h4 className="gg-green d-inline">Sequence</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -782,7 +779,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Annotations</h3>
+										<h4 className="gg-green d-inline">Annotations</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -811,11 +808,11 @@ const Siteview = ({ position }) => {
 							</Accordion>
 							{/* Button */}
 							<div className="text-right gg-download-btn-width">
-								<NavLink to={`${routeConstants.proteinDetail}${id}`}>
+								<Link to={`${routeConstants.proteinDetail}${id}`}>
 									<Button type="button" className="gg-btn-blue">
-									Back To Protein Details
+										Back To Protein Details
 									</Button>
-								</NavLink>
+								</Link>
 							</div>
 						</React.Fragment>
 					</div>

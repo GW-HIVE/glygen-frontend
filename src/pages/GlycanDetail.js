@@ -263,7 +263,7 @@ const GlycanDetail = (props) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			formatter: (value, row) => (
-				<LineTooltip text="View details">
+				<LineTooltip text="View protein details">
 					<Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
 						{row.uniprot_canonical_ac}
 					</Link>
