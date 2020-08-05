@@ -770,14 +770,4 @@
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     }
   }
-  // "sidebarname": {
-  //   "General": {
-  //     "id": "general",
-  //     "title": "General"
-  //   },
-  //   "species": {
-  //     "id": "species",
-  //     "title": "Species"
-  //   }
-  // }
 }
