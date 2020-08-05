@@ -148,7 +148,7 @@ const GlycanQuerySummary = props => {
             {mass && mass.min && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {glycanStrings.mass.shortName}:
+                  {glycanStrings.mass.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})

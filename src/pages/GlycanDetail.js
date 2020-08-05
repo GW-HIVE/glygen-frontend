@@ -35,6 +35,10 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
+import stringConstants from "../data/json/stringConstants";
+
+const glycanStrings = stringConstants.glycan.common;
+const proteinStrings = stringConstants.protein.common;
 
 const items = [
 	{ label: "General", id: "general" },
@@ -198,7 +202,7 @@ const GlycanDetail = (props) => {
 			} else if (detailData.composition[i].residue === "neugc") {
 				detailData.composition[i].residue = "NeuGc";
 			} else if (detailData.composition[i].residue === "other") {
-				detailData.composition[i].residue = "(+x other residues)";
+				detailData.composition[i].residue = "Other";
 			}
 		}
 	}
@@ -227,7 +231,7 @@ const GlycanDetail = (props) => {
 	const glycoProtienColumns = [
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -243,7 +247,7 @@ const GlycanDetail = (props) => {
 		},
 		{
 			dataField: "protein_name",
-			text: "Protein Name",
+			text: proteinStrings.Protein_ShortName.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -251,7 +255,7 @@ const GlycanDetail = (props) => {
 		},
 		{
 			dataField: "uniprot_canonical_ac",
-			text: "UniprotKB Accession",
+			text: proteinStrings.uniprot_canonical_ac.name,
 			defaultSortField: "uniprot_canonical_ac",
 			sort: true,
 
@@ -269,7 +273,7 @@ const GlycanDetail = (props) => {
 
 		{
 			dataField: "position residue",
-			text: "Position",
+			text: proteinStrings.position.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -290,7 +294,7 @@ const GlycanDetail = (props) => {
 	const bioEnzymeColumns = [
 		{
 			dataField: "uniprot_canonical_ac",
-			text: "UniProtKB Accession",
+			 text: proteinStrings.uniprot_canonical_ac.name,
 			sort: true,
 
 			headerStyle: () => {
@@ -306,7 +310,7 @@ const GlycanDetail = (props) => {
 		},
 		{
 			dataField: "gene",
-			text: "Gene Name",
+			text: proteinStrings.gene_name.name,
 			defaultSortField: "gene",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
@@ -322,7 +326,7 @@ const GlycanDetail = (props) => {
 
 		{
 			dataField: "protein_name",
-			text: "Protein Name",
+			text: proteinStrings.Protein_ShortName.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -331,7 +335,7 @@ const GlycanDetail = (props) => {
 
 		{
 			dataField: "tax_name",
-			text: "Species",
+			text: glycanStrings.organism.shortName,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white" };
@@ -531,8 +535,8 @@ const GlycanDetail = (props) => {
 															</Link>
 														</div>
 														<div>
-															<strong>Monoisotopic Mass: </strong>
-															{mass} Da <strong>(Permethylated Mass: </strong>
+															<strong>   {glycanStrings.mass.shortName}: </strong>
+															{mass} Da <strong>({glycanStrings.mass_pme.name}: </strong>
 															{mass_pme} Da)
 														</div>
 													</>
