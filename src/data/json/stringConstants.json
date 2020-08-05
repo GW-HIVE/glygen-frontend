@@ -24,6 +24,15 @@
         },
         "id": "mass"
       },
+      "mass_pme": {
+        "name": "Permethylated Mass",
+        "shortName": "Permethylated Mass",
+        "tooltip": {
+          "title": "Permethylated Mass",
+          "text": "The Permethylated Mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
+        },
+        "id": "mass_pme"
+      },
       "mass_type": {
         "name": "Mass Type",
         "shortName": "Mass Type",
@@ -59,7 +68,7 @@
       },
       "organism": {
         "name": "Organisms",
-        "shortName": "Organisms",
+        "shortName": "Species",
         "tooltip": {
           "title": "Organism",
           "text": "An individual animal, plant, or single-celled life form. Click to select one or multiple Organisms that makes your glycan(s)."
@@ -436,10 +445,16 @@
         "id": "glycosylation_evidence"
       },
       "Protein_ShortName": {
-        "name": "Protein_Name",
-        "shortName": "protein_name_short",
+        "name": "Protein Name",
+        "shortName": "protein_name",
         "tooltip": {},
         "id": "protein_name_short"
+      },
+      "position": {
+        "name": "Position",
+        "shortName": "position",
+        "tooltip": {},
+        "id": "position"
       },
       "protein_name_long": {
         "name": "UniProt Name",
@@ -755,4 +770,14 @@
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     }
   }
+  // "sidebarname": {
+  //   "General": {
+  //     "id": "general",
+  //     "title": "General"
+  //   },
+  //   "species": {
+  //     "id": "species",
+  //     "title": "Species"
+  //   }
+  // }
 }
