@@ -4,7 +4,7 @@ import { getProteinDetail } from "../data/protein";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
@@ -45,7 +45,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
-import { Link } from "react-router-dom";
+import LineTooltip from "../components/tooltip/LineTooltip";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -189,20 +189,18 @@ const ProteinDetail = (props) => {
 		mutation: false,
 		site_annotation: false,
 		n_link_glycosylation: false,
-		o_link_glycosylation: false
-	  });
+		o_link_glycosylation: false,
+	});
 
 	useEffect(() => {
 		setPageLoading(true);
 		logActivity("user", id);
-		setSelectedHighlights(
-			{
-				mutation : "mutation" === select, 
-				site_annotation : "site_annotation" === select,
-				n_link_glycosylation : "n_link_glycosylation" === select,
-				o_link_glycosylation : "o_link_glycosylation" === select
-			}
-		);
+		setSelectedHighlights({
+			mutation: "mutation" === select,
+			site_annotation: "site_annotation" === select,
+			n_link_glycosylation: "n_link_glycosylation" === select,
+			o_link_glycosylation: "o_link_glycosylation" === select,
+		});
 
 		const getProteinDetailData = getProteinDetail(id);
 
@@ -331,13 +329,15 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "15%",
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
-					{" "}
-					{row.glytoucan_ac}{" "}
-				</Link>
+				<LineTooltip text="View glycan details">
+					<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+						{row.glytoucan_ac}
+					</Link>
+				</LineTooltip>
 			),
 			//testing
 		},
@@ -352,7 +352,7 @@ const ProteinDetail = (props) => {
 					<img
 						className="img-cartoon-list-page img-cartoon"
 						src={getGlycanImageUrl(row.glytoucan_ac)}
-						alt="Cartoon"
+						alt="Glycan img"
 					/>
 				</div>
 			),
@@ -376,10 +376,11 @@ const ProteinDetail = (props) => {
 				};
 			},
 			formatter: (value, row) => (
-				<Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-					{" "}
-					{row.residue} {row.position}
-				</Link>
+				<LineTooltip text="View siteview details">
+					<Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+						{row.residue} {row.position}
+					</Link>
+				</LineTooltip>
 			),
 		},
 	];
@@ -432,7 +433,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID: <a href={value.url}>{value.doid}</a>){" "}
+						(DOID: <a href={value.url}>{value.doid}</a>)
 					</span>
 				</>
 			),
@@ -497,6 +498,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "25%",
 				};
 			},
 			formatter: (cell, row) => {
@@ -538,6 +540,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "15%",
 				};
 			},
 		},
@@ -551,6 +554,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "25%",
 				};
 			},
 			formatter: (cell, row) => {
@@ -577,8 +581,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID:
-						<a href={value.url}>{value.doid}</a>)
+						(DOID: <a href={value.url}>{value.doid}</a>)
 					</span>
 				</>
 			),
@@ -591,6 +594,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "15%",
 				};
 			},
 		},
@@ -602,6 +606,7 @@ const ProteinDetail = (props) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
+					width: "15%",
 				};
 			},
 		},
@@ -756,7 +761,7 @@ const ProteinDetail = (props) => {
 													marginBottom: "5px",
 												}}>
 												{gene && (
-													<p>
+													<>
 														{gene.map((genes, genesname) => (
 															<span key={genesname}>
 																<div>
@@ -777,9 +782,8 @@ const ProteinDetail = (props) => {
 																	</strong>{" "}
 																	Chromosome: {""}
 																	{genes.locus.chromosome} {""} (
-																		{addCommas(genes.locus.start_pos)} -{" "}
-																		{addCommas(genes.locus.end_pos)})
-																
+																	{addCommas(genes.locus.start_pos)} -{" "}
+																	{addCommas(genes.locus.end_pos)})
 																</div>
 
 																<EvidenceList
@@ -789,7 +793,7 @@ const ProteinDetail = (props) => {
 																/>
 															</span>
 														))}
-													</p>
+													</>
 												)}
 												{!gene && (
 													<p className="no-data-msg-publication">
@@ -797,83 +801,78 @@ const ProteinDetail = (props) => {
 													</p>
 												)}
 											</div>
-											<p>
-												{uniprot && uniprot.uniprot_canonical_ac && (
-													<>
-														<div>
-															<strong>
-																{proteinStrings.uniprot_id.name}:{" "}
-															</strong>
-															<a
-																href={uniprot.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.uniprot_id}{" "}
-															</a>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.uniprot_accession.name}:{" "}
-															</strong>
-															<a
-																href={uniprot.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.uniprot_canonical_ac}
-															</a>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.sequence_length.name}:{" "}
-															</strong>
-															<a
-																href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
-																target="_blank"
-																rel="noopener noreferrer">
-																{uniprot.length}
-															</a>
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.recommendedname.name}:{" "}
-															</strong>{" "}
-															{recommendedname.full}{" "}
-														</div>
-														<div>
-															<strong>
-																{proteinStrings.chemical_mass.name}:{" "}
-															</strong>
-															{addCommas(mass.chemical_mass)} Da
-														</div>
-													
-											
-											{refseq &&  (
-											<div>
+
+											{uniprot && uniprot.uniprot_canonical_ac && (
 												<>
-															<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-															<a
-																href={refseq.url}
-																target="_blank"
-																rel="noopener noreferrer">
-																{" "}
-																{refseq.ac}{" "}
-															</a>{" "}
-														
+													<div>
+														<strong>{proteinStrings.uniprot_id.name}: </strong>
+														<a
+															href={uniprot.url}
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.uniprot_id}{" "}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.uniprot_accession.name}:{" "}
+														</strong>
+														<a
+															href={uniprot.url}
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.uniprot_canonical_ac}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.sequence_length.name}:{" "}
+														</strong>
+														<a
+															href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
+															target="_blank"
+															rel="noopener noreferrer">
+															{uniprot.length}
+														</a>
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.recommendedname.name}:{" "}
+														</strong>{" "}
+														{recommendedname.full}{" "}
+													</div>
+													<div>
+														<strong>
+															{proteinStrings.chemical_mass.name}:{" "}
+														</strong>
+														{addCommas(mass.chemical_mass)} Da
+													</div>
+
+													{refseq && (
 														<div>
-															{" "}
-															<strong>
-																{proteinStrings.refSeq_name.name}:{" "}
-															</strong>{" "}
-															{refseq.name}{" "}
-														</div>{" "}
-														</>
-												
-											</div>
-													
-												)}
-														</>
-												)}
-											</p>
+															<>
+																<strong>
+																	{proteinStrings.refseq_ac.name}:{" "}
+																</strong>{" "}
+																<a
+																	href={refseq.url}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{" "}
+																	{refseq.ac}{" "}
+																</a>{" "}
+																<div>
+																	{" "}
+																	<strong>
+																		{proteinStrings.refSeq_name.name}:{" "}
+																	</strong>{" "}
+																	{refseq.name}{" "}
+																</div>{" "}
+															</>
+														</div>
+													)}
+												</>
+											)}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
@@ -920,12 +919,14 @@ const ProteinDetail = (props) => {
 															<>
 																<strong className="nowrap">{speEvi}</strong>{" "}
 																{"["}
-																<a
-																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
-																	target="_blank"
-																	rel="noopener noreferrer">
-																	{speciesEvidence[speEvi].taxid}
-																</a>
+																<LineTooltip text="View details on NCBI">
+																	<a
+																		href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{speciesEvidence[speEvi].taxid}
+																	</a>
+																</LineTooltip>
 																{"]"}
 																<EvidenceList
 																	evidences={speciesEvidence[speEvi].evidence}
@@ -986,7 +987,7 @@ const ProteinDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							{/*  goannotation */}
+							{/*  GO annotation */}
 							<Accordion
 								id="go_annotation"
 								defaultActiveKey="0"
@@ -1055,8 +1056,8 @@ const ProteinDetail = (props) => {
 																<p className="go-annotation-total">
 																	Total{" "}
 																	<a
+																		style={{ cursor: "pointer" }}
 																		// eslint-disable-next-line
-																		//href="javascript:void(0)"
 																		onClick={() => {
 																			handleOpenGOTermListPage(
 																				uniprot &&
@@ -1209,14 +1210,14 @@ const ProteinDetail = (props) => {
 										<h4 className="gg-green d-inline">Sequence</h4>
 										<div className="float-right">
 											<span>
-												<NavLink to={`${routeConstants.protVista}${id}`}>
+												<Link to={`${routeConstants.protVista}${id}`}>
 													<Button
 														type="button"
 														style={{ marginLeft: "5px" }}
 														className="gg-btn-blue">
 														<FaSearchPlus /> Protvista
 													</Button>
-												</NavLink>
+												</Link>
 											</span>
 
 											<Accordion.Toggle
@@ -1334,12 +1335,12 @@ const ProteinDetail = (props) => {
 										</span>
 										<h4 className="gg-green d-inline">Isoforms</h4>
 										<div className="float-right">
-											<NavLink
+											<Link
 												to={`${routeConstants.isoAlignment}${id}/isoformset-uniprotkb`}>
 												<Button type="button" className="gg-btn-blue">
 													Alignment
 												</Button>
-											</NavLink>
+											</Link>
 											<Button
 												type="button"
 												style={{
