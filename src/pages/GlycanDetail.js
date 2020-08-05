@@ -4,12 +4,11 @@ import { getGlycanDetail, getGlycanImageUrl } from "../data/glycan";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import { NavLink } from "react-router-dom";
 import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
-import { Link, Grid } from "@material-ui/core";
-import { Navbar, Col, Row, Image } from "react-bootstrap";
+import { Grid } from "@material-ui/core";
+import { Col, Row, Image } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
 import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -36,6 +35,7 @@ import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
+import { Link } from "react-router-dom";
 
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
@@ -172,7 +172,7 @@ const GlycanDetail = (props) => {
 		detailData.mass_pme = addCommas(detailData.mass_pme);
 	}
 	if (detailData.glycoct) {
-		detailData.glycoct = detailData.glycoct.replace(/\\n/g, "\n");
+		detailData.glycoct = detailData.glycoct.replace(/ /g, "\r\n");
 	}
 
 	if (detailData.composition) {
@@ -234,7 +234,7 @@ const GlycanDetail = (props) => {
 			text: proteinStrings.evidence.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
 			},
 			formatter: (cell, row) => {
 				return (
@@ -260,14 +260,14 @@ const GlycanDetail = (props) => {
 			sort: true,
 
 			headerStyle: (column, colIndex) => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
-					{row.uniprot_canonical_ac}
-				</Navbar.Text>
+				<LineTooltip text="See details">
+					<Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+						{row.uniprot_canonical_ac}
+					</Link>
+				</LineTooltip>
 			),
 		},
 
@@ -276,7 +276,7 @@ const GlycanDetail = (props) => {
 			text: proteinStrings.position.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			// formatter: (value, row) => (
 			// 	<Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
@@ -294,18 +294,18 @@ const GlycanDetail = (props) => {
 	const bioEnzymeColumns = [
 		{
 			dataField: "uniprot_canonical_ac",
-			 text: proteinStrings.uniprot_canonical_ac.name,
+			text: proteinStrings.uniprot_canonical_ac.name,
 			sort: true,
 
 			headerStyle: () => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
 			formatter: (value, row) => (
-				<Navbar.Text
-					as={NavLink}
-					to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
-					{row.uniprot_canonical_ac}
-				</Navbar.Text>
+				<LineTooltip text="See details">
+					<Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+						{row.uniprot_canonical_ac}
+					</Link>
+				</LineTooltip>
 			),
 		},
 		{
@@ -314,13 +314,15 @@ const GlycanDetail = (props) => {
 			defaultSortField: "gene",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
 			},
 
 			formatter: (value, row) => (
-				<a href={row.gene_link} target="_blank" rel="noopener noreferrer">
-					{value}
-				</a>
+				<LineTooltip text="See details on UniProt">
+					<a href={row.gene_link} target="_blank" rel="noopener noreferrer">
+						{value}
+					</a>
+				</LineTooltip>
 			),
 		},
 
@@ -338,7 +340,7 @@ const GlycanDetail = (props) => {
 			text: glycanStrings.organism.shortName,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { backgroundColor: "#4B85B6", color: "white" };
+				return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
 			},
 		},
 	];
@@ -527,16 +529,17 @@ const GlycanDetail = (props) => {
 														</p>
 														<div>
 															<strong>GlyToucan Accession: </strong>
-															<Link
+															<a
 																href={glytoucan.glytoucan_url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{glytoucan.glytoucan_ac}
-															</Link>
+															</a>
 														</div>
 														<div>
-															<strong>   {glycanStrings.mass.shortName}: </strong>
-															{mass} Da <strong>({glycanStrings.mass_pme.name}: </strong>
+															<strong> {glycanStrings.mass.shortName}: </strong>
+															{mass} Da{" "}
+															<strong>({glycanStrings.mass_pme.name}: </strong>
 															{mass_pme} Da)
 														</div>
 													</>
@@ -554,19 +557,19 @@ const GlycanDetail = (props) => {
 
 														{classification.map((Formatclassification) => (
 															<>
-																<Link
+																<a
 																	href={Formatclassification.type.url}
 																	target="_blank"
 																	rel="noopener noreferrer">
 																	{Formatclassification.type.name}
-																</Link>
+																</a>
 																&nbsp; <b>/</b> &nbsp;
-																<Link
+																<a
 																	href={Formatclassification.subtype.url}
 																	target="_blank"
 																	rel="noopener noreferrer">
 																	{Formatclassification.subtype.name}
-																</Link>
+																</a>
 															</>
 														))}
 													</div>
@@ -575,12 +578,12 @@ const GlycanDetail = (props) => {
 													<>
 														<div>
 															<strong>InCHI Key: </strong>
-															<Link
+															<a
 																href={inchi_key.url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{inchi_key.key}
-															</Link>
+															</a>
 														</div>
 													</>
 												)}
@@ -631,12 +634,14 @@ const GlycanDetail = (props) => {
 															<>
 																<strong className="nowrap">{speEvi}</strong>{" "}
 																{"["}
-																<a
-																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
-																	target="_blank"
-																	rel="noopener noreferrer">
-																	{speciesEvidence[speEvi].taxid}
-																</a>
+																<LineTooltip text="See details on NCBI">
+																	<a
+																		href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																		target="_blank"
+																		rel="noopener noreferrer">
+																		{speciesEvidence[speEvi].taxid}
+																	</a>
+																</LineTooltip>
 																{"]"}
 																<EvidenceList
 																	evidences={speciesEvidence[speEvi].evidence}
@@ -691,18 +696,18 @@ const GlycanDetail = (props) => {
 																		<img
 																			className="img-cartoon"
 																			src={getGlycanImageUrl(motif.id)}
-																			alt="Cartoon"
+																			alt="Glycan img"
 																		/>
 																	</div>
 																	<span>
-																		{/* <a href={""}>{motif.name}</a> */}
-																		<Navbar.Text
-																			as={NavLink}
-																			to={
-																				routeConstants.motifDetail + motif.id
-																			}>
-																			{motif.id} {motif.name}
-																		</Navbar.Text>
+																		<LineTooltip text="See details">
+																			<Link
+																				to={
+																					routeConstants.motifDetail + motif.id
+																				}>
+																				{motif.id} {motif.name}
+																			</Link>
+																		</LineTooltip>
 																	</span>
 																</p>
 															</Col>
@@ -848,18 +853,13 @@ const GlycanDetail = (props) => {
 												{iupac ? (
 													<>
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
+															<Col xs={6} sm={6}>
 																{" "}
 																<strong>IUPAC</strong>
 															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={iupac} />{" "}
-															</Col>{" "}
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={iupac} />
+															</Col>
 														</Row>
 														<p className="text-overflow">{iupac} </p>
 													</>
@@ -870,20 +870,15 @@ const GlycanDetail = (props) => {
 												{wurcs ? (
 													<>
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
+															<Col xs={6} sm={6}>
 																{" "}
 																<strong>WURCS</strong>
 															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={wurcs} />{" "}
-															</Col>{" "}
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={wurcs} />
+															</Col>
 														</Row>
-														<p className="text-overflow">{wurcs} </p>{" "}
+														<p className="text-overflow">{wurcs} </p>
 													</>
 												) : (
 													<p> </p>
@@ -892,22 +887,17 @@ const GlycanDetail = (props) => {
 												{glycoct ? (
 													<>
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
+															<Col xs={6} sm={6}>
 																{" "}
 																<strong>GlycoCT</strong>
 															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={glycoct} />{" "}
-															</Col>{" "}
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={glycoct} />
+															</Col>
 														</Row>
 														<p id="text_element" className="text-overflow">
-															{glycoct}{" "}
-														</p>{" "}
+															{glycoct}
+														</p>
 													</>
 												) : (
 													<p></p>
@@ -915,22 +905,15 @@ const GlycanDetail = (props) => {
 
 												{inchi ? (
 													<>
-														{" "}
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
-																{" "}
+															<Col xs={6} sm={6}>
 																<strong>InCHI</strong>
-															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={inchi} />{" "}
-															</Col>{" "}
+															</Col>
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={inchi} />
+															</Col>
 														</Row>
-														<p className="text-overflow">{inchi}</p>{" "}
+														<p className="text-overflow">{inchi}</p>
 													</>
 												) : (
 													<p></p>
@@ -938,22 +921,15 @@ const GlycanDetail = (props) => {
 
 												{glycam ? (
 													<>
-														{" "}
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
-																{" "}
+															<Col xs={6} sm={6}>
 																<strong>GLYCAM IUPAC</strong>
-															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={glycam} />{" "}
-															</Col>{" "}
+															</Col>
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={glycam} />
+															</Col>
 														</Row>
-														<p className="text-overflow">{glycam}</p>{" "}
+														<p className="text-overflow">{glycam}</p>
 													</>
 												) : (
 													<p></p>
@@ -962,20 +938,14 @@ const GlycanDetail = (props) => {
 												{smiles_isomeric ? (
 													<>
 														<Row>
-															<Col sm={12} md={12} lg={12} xl={6}>
-																{" "}
+															<Col xs={6} sm={6}>
 																<strong>Isomeric SMILES</strong>
-															</Col>{" "}
-															<Col
-																sm={12}
-																md={12}
-																lg={12}
-																xl={6}
-																style={{ textAlign: "right" }}>
-																<ReactCopyClipboard value={smiles_isomeric} />{" "}
-															</Col>{" "}
-														</Row>{" "}
-														<p className="text-overflow">{smiles_isomeric}</p>{" "}
+															</Col>
+															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
+																<ReactCopyClipboard value={smiles_isomeric} />
+															</Col>
+														</Row>
+														<p className="text-overflow">{smiles_isomeric}</p>
 													</>
 												) : (
 													<p></p>
