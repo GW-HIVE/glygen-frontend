@@ -10,7 +10,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
-import { Link, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
 import { groupEvidences } from "../data/data-format";
@@ -228,6 +228,7 @@ const MotifDetail = (props) => {
 									setAlertDialogInput({ show: input });
 								}}
 							/>
+							{/* General */}
 							<Accordion
 								id="general"
 								defaultActiveKey="0"
@@ -244,7 +245,7 @@ const MotifDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">General</h3>
+										<h4 className="gg-green d-inline">General</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -272,12 +273,12 @@ const MotifDetail = (props) => {
 														</p>
 														<div>
 															<strong>GlyToucan Accession: </strong>
-															<Link
+															<a
 																href={glytoucan.glytoucan_url}
 																target="_blank"
 																rel="noopener noreferrer">
 																{glytoucan.glytoucan_ac}
-															</Link>
+															</a>
 														</div>
 														<div>
 															<strong>Monoisotopic Mass: </strong>
@@ -293,19 +294,19 @@ const MotifDetail = (props) => {
 
 															{classification.map((Formatclassification) => (
 																<>
-																	<Link
+																	<a
 																		href={Formatclassification.type.url}
 																		target="_blank"
 																		rel="noopener noreferrer">
 																		{Formatclassification.type.name}
-																	</Link>
+																	</a>
 																	&nbsp; <b>/</b> &nbsp;
-																	<Link
+																	<a
 																		href={Formatclassification.subtype.url}
 																		target="_blank"
 																		rel="noopener noreferrer">
 																		{Formatclassification.subtype.name}
-																	</Link>
+																	</a>
 																</>
 															))}
 														</div>
@@ -332,9 +333,9 @@ const MotifDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">
+										<h4 className="gg-green d-inline">
 											Glycans Containing This Motif
-										</h3>
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -384,7 +385,7 @@ const MotifDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h3 className="gg-green d-inline">Publications</h3>
+										<h4 className="gg-green d-inline">Publications</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
@@ -412,9 +413,9 @@ const MotifDetail = (props) => {
 																<td key={pubIndex}>
 																	<p>
 																		<div>
-																			<h5 style={{ marginBottom: "3px" }}>
+																			<h6 style={{ marginBottom: "3px" }}>
 																				<strong>{pub.title}</strong>
-																			</h5>
+																			</h6>
 																		</div>
 																		<div>{pub.authors}</div>
 																		<div>
