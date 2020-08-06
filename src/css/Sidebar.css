@@ -4,7 +4,6 @@
 	overflow: auto;
 	margin-bottom: 40px !important;
 	position: relative;
-	z-index: -1;
 }
 .sidebar-page-mb {
 	margin-bottom: 700px !important;
