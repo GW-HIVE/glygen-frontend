@@ -65,7 +65,11 @@ const CompositionDisplay = (props) => {
 							{"  "}
 						</>
 					) : (
-						<sub>{item.count} </sub>
+						<>
+							{item.residue}
+							<sub>{item.count}</sub>
+							{"  "}
+						</>
 					)}
 				</>
 			))}
