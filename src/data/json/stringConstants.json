@@ -580,7 +580,7 @@
   },
   "quick_search": {
     "question_1": {
-      "text": "What are the enzymes involved in the biosynthesis of {0} in human?",
+      "text": "What are the glycosyltransferases used to add the residues contained in {0} in human?",
       "id": "question_1"
     },
     "question_2": {
@@ -627,7 +627,7 @@
       "id": "question_11"
     },
     "question_tryMe1": {
-      "text": "What are the enzymes involved in the biosynthesis of Man5({0}) in human?",
+      "text": "What are the glycosyltransferases used to add  the residues contained in the lipid-linked N-glycan precursor GlcNAc2Man9Glc3({0}) in human?",
       "tryMeId": "question_tryMe1",
       "id": "question_1"
     },

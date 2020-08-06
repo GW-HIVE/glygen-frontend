@@ -1,6 +1,6 @@
 {
 	"question_tryMe1":{
-	 	"text": "What are the enzymes involved in the biosynthesis of {0} in human?"
+		"text": "What are the glycosyltransferases used to add the residues contained in {0} in human?"
 	},
 	"question_tryMe2":{
 		"text": "Which proteins have been shown to bear {0} and which site is this glycan attached to?"

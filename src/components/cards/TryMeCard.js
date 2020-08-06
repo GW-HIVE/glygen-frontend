@@ -65,7 +65,7 @@ export default function TryMeCard(props) {
 		setPageLoading(true);
 		logActivity("user", "", "Performing Try Me Search");
 		let message = "Try Me Search Question_1 = /9606/G46836GH";
-		getGlycanToBiosynthesisEnzymes(9606, "G46836GH")
+		getGlycanToBiosynthesisEnzymes(9606, "G72079JG")
 			.then((response) => {
 				if (response.data["list_id"] !== "") {
 					setPageLoading(false);
@@ -180,7 +180,9 @@ export default function TryMeCard(props) {
 							<ListGroup as="p">
 								<ListGroup.Item action onClick={searchQuestion1}>
 									{tryMe.question_tryMe1.text.split("{0}")[0]}
-									<span className={classes.selected}>Man5 (G46836GH)</span>
+									<span className={classes.selected}>
+										the lipid-linked N-glycan precursor GlcNAc2Man9Glc3(G72079JG)
+									</span>
 									{tryMe.question_tryMe1.text.split("{0}")[1]}
 									{/* <div style={{ paddingBottom: "10px" }}></div> */}
 									<TextAlert
@@ -195,7 +197,7 @@ export default function TryMeCard(props) {
 								<ListGroup.Item action onClick={searchQuestion2}>
 									{tryMe.question_tryMe2.text.split("{0}")[0]}
 									<span className={classes.selected}>
-										a bi-antennary fully sialylated N-Glycan (G77252PU)
+										a bi-antennary fully sialylated N-Glycan(G77252PU)
 									</span>
 									{tryMe.question_tryMe2.text.split("{0}")[1]}
 									{/* <div style={{ paddingBottom: "10px" }}></div> */}
@@ -210,7 +212,7 @@ export default function TryMeCard(props) {
 								</ListGroup.Item>
 								<ListGroup.Item action onClick={searchQuestion3}>
 									{tryMe.question_tryMe3.text.split("{0}")[0]}
-									<span className={classes.selected}>Mgat1 (P27808-1)</span>
+									<span className={classes.selected}>Mgat1(P27808-1)</span>
 									{tryMe.question_tryMe3.text.split("{0}")[1]}
 									{/* <div style={{ paddingBottom: "10px" }}></div> */}
 									<TextAlert
