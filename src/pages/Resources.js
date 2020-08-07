@@ -18,8 +18,7 @@ import { logActivity } from "../data/logging";
 const useStyles = makeStyles((theme) => ({
 	tableHeader: {
 		backgroundColor: "#4B85B6",
-		color: theme.palette.common.white,
-		height: "60px",
+		color: "white",
 	},
 }));
 
@@ -64,12 +63,19 @@ const Resources = () => {
 		{
 			dataField: "category",
 			text: "Category",
+			defaultSortField: "category",
 			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "15%" };
+			},
 		},
 		{
 			dataField: "website",
 			text: "Website",
 			// sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "13%" };
+			},
 			formatter: (cell) => (
 				<Link href={cell.url} target="_blank" rel="noopener noreferrer">
 					{cell.name}
@@ -81,7 +87,7 @@ const Resources = () => {
 			text: "Description",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { width: "40%" };
+				return { width: "30%" };
 			},
 		},
 		{
@@ -140,6 +146,9 @@ const Resources = () => {
 			dataField: "category",
 			text: "Category",
 			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "20%" };
+			},
 		},
 		{
 			dataField: "website",
@@ -156,7 +165,7 @@ const Resources = () => {
 			text: "Description",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { width: "40%" };
+				return { width: "50%" };
 			},
 		},
 		{
@@ -175,6 +184,9 @@ const Resources = () => {
 			dataField: "type",
 			text: "Type",
 			// sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "10%" };
+			},
 			formatter: (cell) => (
 				<Link href={cell.url} target="_blank" rel="noopener noreferrer">
 					{cell.name}
@@ -186,18 +198,24 @@ const Resources = () => {
 			text: "Description",
 			sort: true,
 			headerStyle: (colum, colIndex) => {
-				return { width: "40%" };
+				return { width: "35%" };
 			},
 		},
 		{
 			dataField: "glycan",
 			text: "Glycan",
 			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "11%" };
+			},
 		},
 		{
 			dataField: "protein",
 			text: "Protein",
 			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { width: "11%" };
+			},
 		},
 		{
 			dataField: "glycoprotein",
