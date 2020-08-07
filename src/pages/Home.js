@@ -17,13 +17,20 @@ import resources from "../images/home/resources.svg";
 import proteinImg from "../images/home/glycoprotein-img.svg";
 import glycanImg from "../images/home/glycan-img.svg";
 import quickSearchImg from "../images/home/quick-search-img.svg";
+import compositionSearchImg from "../images/home/composition-img.svg";
+import gnomeBrowserImg from "../images/home/gnome-browser-img.svg";
 import apiImg from "../images/home/api-img.svg";
 import dataImg from "../images/home/data-img.svg";
 import sparqlImg from "../images/home/sparql-img.svg";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { getSystemData } from "../data";
-import { GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL } from "../envVariables";
+import {
+	GLYGEN_API,
+	GLYGEN_DATA,
+	GLYGEN_SPARQL,
+	GNOME_BROWSER,
+} from "../envVariables";
 import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
@@ -41,7 +48,7 @@ const featuredCards = [
 		description:
 			"Search for glycan structures based on their chemical and structural properties.",
 		image: glycanImg,
-		imageText: "Glycan",
+		imageText: "Glycan Search",
 		to: routeConstants.glycanSearch,
 	},
 	{
@@ -49,7 +56,7 @@ const featuredCards = [
 		description:
 			"Search for proteins based on their sequences, accessions, and annotations.",
 		image: proteinImg,
-		imageText: "Protein",
+		imageText: "Protein Search",
 		to: routeConstants.proteinSearch,
 	},
 	{
@@ -59,6 +66,23 @@ const featuredCards = [
 		image: quickSearchImg,
 		imageText: "Quick Search",
 		to: routeConstants.quickSearch,
+	},
+	{
+		title: "Composition Search",
+		description:
+			"A search to find glycan(s) with specific monosaccharide composition in GlyGen.",
+		image: compositionSearchImg,
+		imageText: "Composition Search",
+		to: routeConstants.glycanSearch,
+	},
+	{
+		title: "Glycan Composition Browser (GNOme)",
+		description:
+			"Find glycan structures interactively by composition and topology.",
+		image: gnomeBrowserImg,
+		imageText: "GNOme Browser",
+		href: GNOME_BROWSER,
+		target: "_blank",
 	},
 	{
 		title: "Data",
