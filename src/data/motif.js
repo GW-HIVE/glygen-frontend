@@ -51,7 +51,7 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) =>
 export const MOTIF_COLUMNS = [
   {
     dataField: glycanStrings.glycan_id.id,
-    text: glycanStrings.glycan_id.shortName,
+    text: glycanStrings.glycan_id.name,
     sort: true,
     selected: true,
     headerStyle: (colum, colIndex) => {
@@ -70,7 +70,7 @@ export const MOTIF_COLUMNS = [
     )
   },
   {
-    text: "Glycan Image",
+    text: glycanStrings.glycan_image.name,
     sort: false,
     selected: true,
     formatter: (value, row) => (
