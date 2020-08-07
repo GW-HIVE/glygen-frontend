@@ -52,11 +52,12 @@ function addCommas(nStr) {
 }
 
 const proteinStrings = stringConstants.protein.common;
+const glycanStrings = stringConstants.glycan.common;
 
 const items = [
-	{ label: "General", id: "general" },
-	{ label: "Sequence", id: "sequence" },
-	{ label: "Site-Annotation", id: "annotation" },
+	{ label: stringConstants.sidebar_name.general.displayname, id: "general" },
+	{ label: stringConstants.sidebar_name.sequence.displayname, id: "sequence" },
+	{ label: stringConstants.sidebar_name.site_annotation.displayname, id: "annotation" },
 ];
 
 const sortByPosition = function (a, b) {
@@ -393,7 +394,7 @@ const Siteview = ({ position }) => {
 		},
 		{
 			dataField: "glytoucan_ac",
-			text: "GlytouCan_ac",
+			text: glycanStrings.glycan_id.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -413,7 +414,7 @@ const Siteview = ({ position }) => {
 		},
 		{
 			dataField: "position",
-			text: "Position",
+			text: proteinStrings.position.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -425,7 +426,7 @@ const Siteview = ({ position }) => {
 		},
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
 
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -588,7 +589,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">General</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.general.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -628,7 +629,7 @@ const Siteview = ({ position }) => {
 																	<strong>
 																		{proteinStrings.gene_location.name}:
 																	</strong>{" "}
-																	Chromosome: {""}
+																	 {proteinStrings.chromosome.name}: {""}
 																	{genes.locus.chromosome} {""} (
 																	{addCommas(genes.locus.start_pos)} -{" "}
 																	{addCommas(genes.locus.end_pos)})
@@ -730,7 +731,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Sequence</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.sequence.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -779,7 +780,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Annotations</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.site_annotation.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"

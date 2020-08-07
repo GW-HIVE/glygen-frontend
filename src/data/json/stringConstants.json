@@ -769,5 +769,112 @@
       "title": "Search Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     }
+  },
+  "sidebar_name": {
+    "general": {
+      "id": "general",
+      "displayname": "General",
+      "tooltip": " General Information for selected accession"
+    },
+    "species": {
+      "id": "species",
+      "displayname": "Species",
+      "tooltip": " Species Information for selected accession"
+    },
+    "motifs": {
+      "id": "motifs",
+      "displayname": "Motifs",
+      "tooltip": " Motifs Information for selected accession"
+    },
+    "associated_glycan": {
+      "id": "associated_glycan",
+      "displayname": "Associated_glycan",
+      "tooltip": " Associated_glycan Information for selected accession"
+    },
+    "Bio_Enzymes": {
+      "id": "Bio_Enzymes",
+      "displayname": "Biosynthetic Enzymes",
+      "tooltip": " Biosynthetic Enzymes Information for selected accession"
+    },
+    "Digital_seq": {
+      "id": "Digital_seq",
+      "displayname": "Digital Sequence",
+      "tooltip": " Digital Sequence Information for selected accession"
+    },
+    "Cross_ref": {
+      "id": "Digital_seq",
+      "displayname": "Cross References",
+      "tooltip": " Cross Reference Information for selected accession"
+    },
+    "publication": {
+      "id": "publication",
+      "displayname": "Publication",
+      "tooltip": " publication record for selected accession"
+    },
+    "function": {
+      "id": "function",
+      "displayname": "Function",
+      "tooltip": " function Information for selected Protein accession"
+    },
+    "go_annotation": {
+      "id": "go_annotation",
+      "displayname": "Go Annotation",
+      "tooltip": " go_annotation Information for selected Protein accession"
+    },
+    "glycosylation": {
+      "id": "glycosylation",
+      "displayname": "Glycosylation",
+      "tooltip": " glycosylation Information for selected Protein accession"
+    },
+    "sequence": {
+      "id": "sequence",
+      "displayname": "Sequence",
+      "tooltip": " sequence Information for selected Protein accession"
+    },
+    "pathway": {
+      "id": "pathway",
+      "displayname": "Pathway",
+      "tooltip": " pathway Information for selected Protein accession"
+    },
+    "Isoforms": {
+      "id": "Isoforms",
+      "displayname": "Isoforms",
+      "tooltip": " Isoforms Information for selected Protein accession"
+    },
+    "Homologs": {
+      "id": "Homologs",
+      "displayname": "Homologs",
+      "tooltip": " Homologs Information for selected Protein accession"
+    },
+    "Disease": {
+      "id": "Disease",
+      "displayname": "Disease",
+      "tooltip": " Disease Information for selected Protein accession"
+    },
+    "Mutation": {
+      "id": "Mutation",
+      "displayname": "Mutation",
+      "tooltip": " Mutation Information for selected Protein accession"
+    },
+    "Expression Tissue": {
+      "id": "Expression Tissue",
+      "displayname": "Expression Tissue",
+      "tooltip": " Expression Tissue Information for selected Protein accession"
+    },
+    "Expression Disease": {
+      "id": "Expression Disease",
+      "displayname": "Expression Disease",
+      "tooltip": " Expression Disease Information for selected Protein accession"
+    },
+    "Glycans": {
+      "id": "Glycans",
+      "displayname": "Glycans",
+      "tooltip": " Glycans Information for selected Motif Id"
+    },
+    "site_annotation": {
+      "id": "site annotation",
+      "displayname": "Site Annotation",
+      "tooltip": " site annotation Information for selected Protein accession"
+    }
   }
 }
