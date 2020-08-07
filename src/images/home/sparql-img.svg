@@ -5,8 +5,8 @@
     <desc>Created with Sketch.</desc>
     <g id="sparql-img" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="SPARQL" transform="translate(83.000000, 25.000000)">
-            <rect id="Rectangle" stroke="#000000" stroke-width="5.31914894" x="0" y="15.9574468" width="234.042553" height="234.042553"></rect>
-            <rect id="Rectangle" fill="#000000" x="0" y="178.191489" width="234.042553" height="71.8085106"></rect>
+            <rect id="Rectangle" stroke="#5F5F5F" stroke-width="5.31914894" x="0" y="15.9574468" width="234.042553" height="234.042553"></rect>
+            <rect id="Rectangle" fill="#5F5F5F" x="0" y="178.191489" width="234.042553" height="71.8085106"></rect>
             <text font-family="Tahoma-Bold, Tahoma" font-size="47.8723404" font-weight="bold" letter-spacing="1.9946807" fill="#FFFFFF">
                 <tspan x="13.2978723" y="231.510638">SPARQL</tspan>
             </text>
