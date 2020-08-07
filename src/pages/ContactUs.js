@@ -117,7 +117,7 @@ const ContactUs = (props) => {
 					<div
 						style={univNameFooter}
 						className="gg-align-center gg-align-middle">
-						<h4>UGA Athens Georgia</h4>
+						<h4 className="color-white">UGA Athens Georgia</h4>
 					</div>
 				</Col>
 				<Col sm={6}>
@@ -133,7 +133,7 @@ const ContactUs = (props) => {
 					<div
 						style={univNameFooter}
 						className="gg-align-center gg-align-middle">
-						<h4>GW Washington DC</h4>
+						<h4 className="color-white">GW Washington DC</h4>
 					</div>
 				</Col>
 

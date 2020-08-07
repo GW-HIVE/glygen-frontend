@@ -54,6 +54,9 @@
   height: 60px;
   resize: none;
 } */
+.type {
+	padding-left: 15px !important;
+}
 .sidebar-contact input[type="submit"] {
 	background: #00bcd4;
 	color: #fff;
@@ -68,7 +71,7 @@
 	text-align: center;
 	cursor: pointer;
 	background: #337ab7;
-	left: -76px;
+	left: -75px;
 	line-height: 48px;
 }
 .toggle:before {
@@ -139,15 +142,12 @@
 	box-shadow: 0 0 3px #555;
 	padding: 15px;
 }
-.feedback_ h1 {
-	font-size: 1.2em;
-	color: #336699;
-	font-weight: 500;
+.feedback_ h5 {
+	color: #336699 !important;
 	line-height: 1;
 	margin-bottom: 10px;
 }
 .feedback_ p {
-	font-size: 0.75em;
 	margin-bottom: 5px;
 }
 .feedback_ div.feedbbacktype span {

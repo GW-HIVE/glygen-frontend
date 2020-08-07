@@ -109,14 +109,12 @@ const FeedbackWidget = (props) => {
 								<CloseIcon style={{ fill: "white" }} />
 							) : (
 								<span className="name">
-									<b>Feedback</b>
+									<b className="color-white">Feedback</b>
 								</span>
 							)}
 						</div>
 						<div className="scroll">
-							<h1>
-								<b>Feedback</b>
-							</h1>
+							<h5>Feedback</h5>
 							<p>
 								<b>What would you like to share with us?</b>
 							</p>

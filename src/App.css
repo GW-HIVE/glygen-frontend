@@ -37,6 +37,9 @@
 .gg-blue-color {
 	color: var(--gg-blue) !important;
 }
+.color-white {
+	color: #ffffff !important;
+}
 .gg-container {
 	margin-bottom: 40px;
 }
