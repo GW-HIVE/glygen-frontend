@@ -32,7 +32,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_8.text.split("{0}")[0]}<strong>{searchBySpecies.common.label}</strong>{quickSearch.question_8.text.split("{0}")[1]}
+									{quickSearch.question_8.text.split("{0}")[0]}<strong className="gg-blue-color">{searchBySpecies.common.label}</strong>{quickSearch.question_8.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -78,7 +78,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel2bh-content"
 								id="panel2bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_9.text.split("{0}")[0]}<strong>{searchBySpecies.common.label}</strong>{quickSearch.question_9.text.split("{0}")[1]}
+									{quickSearch.question_9.text.split("{0}")[0]}<strong className="gg-blue-color">{searchBySpecies.common.label}</strong>{quickSearch.question_9.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -124,7 +124,7 @@ const SearchBySpecies = (props) => {
 								aria-controls="panel3bh-content"
 								id="panel3bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_10.text.split("{0}")[0]}<strong>{searchBySpecies.common.label}</strong>{quickSearch.question_10.text.split("{0}")[1]}
+									{quickSearch.question_10.text.split("{0}")[0]}<strong className="gg-blue-color">{searchBySpecies.common.label}</strong>{quickSearch.question_10.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -182,7 +182,7 @@ const SearchBySpecies = (props) => {
 									</Grid>
 									<Grid item xs={12} sm={12}>
 										<Typography align="left" className="small-text">
-												** Select both options <strong>Species</strong> and{" "}
+												** Select both options <strong className="gg-blue-color">Species</strong> and{" "}
 												<strong>Type.</strong>
 										</Typography>
 									</Grid>

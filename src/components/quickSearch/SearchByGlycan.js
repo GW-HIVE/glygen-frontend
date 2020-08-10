@@ -31,7 +31,7 @@ const SearchByGlycan = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_1.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_1.text.split("{0}")[1]}
+									{quickSearch.question_1.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByGlycan.common.label}</strong>{quickSearch.question_1.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -79,7 +79,7 @@ const SearchByGlycan = (props) => {
 								aria-controls="panel2bh-content"
 								id="panel2bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_2.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_2.text.split("{0}")[1]}
+									{quickSearch.question_2.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByGlycan.common.label}</strong>{quickSearch.question_2.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -127,7 +127,7 @@ const SearchByGlycan = (props) => {
 								aria-controls="panel3bh-content"
 								id="panel3bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_3.text.split("{0}")[0]}<strong>{searchByGlycan.common.label}</strong>{quickSearch.question_3.text.split("{0}")[1]}
+									{quickSearch.question_3.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByGlycan.common.label}</strong>{quickSearch.question_3.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
