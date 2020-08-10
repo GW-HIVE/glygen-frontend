@@ -123,7 +123,12 @@ const ProteinSearch = (props) => {
 									data.query.term_category ? data.query.term_category : "any"
 								);
 								setProSimpleSearchTerm(data.query.term ? data.query.term : "");
-								setProActTabKey("simple_search");
+								const anchorElement = props.history.location.hash;
+								if (anchorElement) {
+									setProActTabKey(anchorElement.substr(1));	
+								} else {
+									setProActTabKey("simple_search");
+								}
 								setPageLoading(false);
 							} else {
 								setProAdvSearchData({

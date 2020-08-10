@@ -3,6 +3,7 @@
 	"glycanList": "/glycan-list/",
 	"proteinList": "/protein-list/",
 	"glycanSearch": "/glycan-search/",
+	"compositionSearch": "/glycan-search#composition_search",
 	"proteinSearch": "/protein-search/",
 	"enzymeSearch": "/enzyme-search/",
 	"glycanDetail": "/glycan/",

@@ -73,7 +73,7 @@ const featuredCards = [
 			"A search to find glycan(s) with specific monosaccharide composition in GlyGen.",
 		image: compositionSearchImg,
 		imageText: "Composition Search",
-		to: routeConstants.glycanSearch,
+		to: routeConstants.compositionSearch,
 	},
 	{
 		title: "Glycan Composition Browser (GNOme)",

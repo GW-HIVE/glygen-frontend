@@ -186,7 +186,12 @@ const GlycanSearch = (props) => {
 			});
 			setGlyCompData(compStateData);
 			setInitData(initData);
-			setGlyActTabKey("simple_search");
+			const anchorElement = props.history.location.hash;
+			if (anchorElement) {
+				setGlyActTabKey(anchorElement.substr(1));	
+			} else {
+				setGlyActTabKey("simple_search");
+			}
 			if (id === undefined) setPageLoading(false);
 
 			id &&
