@@ -146,6 +146,72 @@
         },
         "id": "pmid"
       },
+      "inchi_key": {
+        "name": "InCHI Key",
+        "shortName": "InCHI ",
+        "tooltip": {
+          "title": "InCHI Key",
+          "text": "A InCHI Key is the unique identifier number used in InCHI Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "inchi key"
+      },
+      "IUPAC": {
+        "name": "IUPAC ",
+        "shortName": "IUPAC ",
+        "tooltip": {
+          "title": "IUPAC ",
+          "text": "A IUPAC  is the unique identifier number used in IUPAC Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "iupac"
+      },
+      "WURCS": {
+        "name": "WURCS ",
+        "shortName": "WURCS ",
+        "tooltip": {
+          "title": "WURCS ",
+          "text": "A WURCS  is the unique identifier number used in WURCS Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "wurcs"
+      },
+      "GlycoCT": {
+        "name": "GlycoCT ",
+        "shortName": "GlycoCT ",
+        "tooltip": {
+          "title": "GlycoCT ",
+          "text": "A GlycoCT  is the unique identifier number used in GlycoCT Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "GlycoCT"
+      },
+      "GLYCAM_IUPAC": {
+        "name": "GLYCAM IUPAC ",
+        "shortName": "GLYCAM IUPAC ",
+        "tooltip": {
+          "title": "GLYCAM IUPAC ",
+          "text": "A GLYCAM IUPAC  is the unique identifier number used in GLYCAM IUPAC Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "GLYCAM IUPAC"
+      },
+      "Isomeric_SMILES": {
+        "name": "Isomeric SMILES ",
+        "shortName": "Isomeric SMILES ",
+        "tooltip": {
+          "title": "Isomeric SMILES ",
+          "text": "A Isomeric SMILES  is the unique identifier number used in Isomeric SMILES Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "smiles_isomeric"
+      },
       "composition": {
         "id": "composition",
         "hex": {
@@ -788,7 +854,7 @@
     },
     "associated_glycan": {
       "id": "associated_glycan",
-      "displayname": "Associated_glycan",
+      "displayname": "Associated Glycan",
       "tooltip": " Associated_glycan Information for selected accession"
     },
     "Bio_Enzymes": {
