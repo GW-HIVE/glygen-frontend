@@ -62,18 +62,24 @@ function App() {
 		"none"
 	);
 
+	const [showHeaderFooter, setShowHeaderFooter] = useState(
+		true
+	);
+
 	return (
 		<div className="App">
 			<ThemeProvider theme={theme}>
-				<Header
+				{showHeaderFooter && <Header
 					userTrackingBannerState={userTrackingBannerState}
 					setUserTrackingBannerState={setUserTrackingBannerState}
-				/>
+				/>}
 				<Routes
 					userTrackingBannerState={userTrackingBannerState}
 					setUserTrackingBannerState={setUserTrackingBannerState}
+					showHeaderFooter={showHeaderFooter}
+					setShowHeaderFooter={setShowHeaderFooter}
 				/>
-				<Footer />
+				{showHeaderFooter && <Footer />}
 			</ThemeProvider>
 		</div>
 	);

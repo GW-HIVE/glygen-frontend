@@ -20,6 +20,8 @@ import Feedback from "./pages/Feedback";
 import routeConstants from "./data/json/routeConstants.json";
 import TryMe from "./pages/TryMe";
 import About from "./pages/About";
+import ProteinDetailViewer from "./pages/ProteinDetailViewer";
+import GlycanDetaillViewer from "./pages/GlycanDetaillViewer";
 import Frameworks from "./pages/Frameworks";
 import Media from "./pages/Media";
 import LocusList from "./pages/LocusList";
@@ -57,11 +59,19 @@ const Routes = props => (
     />
     <Route path={routeConstants.proteinSearch} component={ProteinSearch} />
     <Route
+      path={`${routeConstants.glycanDetail}:id.:extension`}
+      component={() => <GlycanDetaillViewer {...props} />}
+    />
+    <Route
       path={`${routeConstants.glycanDetail}:id`}
       component={GlycanDetail}
     />
     <Route path={`${routeConstants.motifDetail}:id`} component={MotifDetail} />
     <Route path={routeConstants.motifDetail} component={MotifDetail} />
+    <Route
+      path={`${routeConstants.proteinDetail}:id.:extension`}
+      component={() => <ProteinDetailViewer {...props} />}
+    />
     <Route
       path={`${routeConstants.proteinDetail}:id/:select?`}
       component={ProteinDetail}
