@@ -41,14 +41,14 @@ const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-	{ label: "General", id: "general" },
-	{ label: "Species", id: "species" },
-	{ label: "Motif", id: "motif" },
-	{ label: "Associated Glycoproteins", id: "glycoprotein" },
-	{ label: "Biosynthetic Enzymes", id: "biosyntheticenzymes" },
-	{ label: "Digital Sequence", id: "Dseqence" },
-	{ label: "Cross References", id: "crossref" },
-	{ label: "Publication", id: "publication" },
+	{ label: stringConstants.sidebar_name.general.displayname, id: "general" },
+	{ label: stringConstants.sidebar_name.species.displayname, id: "species" },
+	{ label: stringConstants.sidebar_name.motifs.displayname, id: "motif" },
+	{ label: stringConstants.sidebar_name.associated_glycan.displayname, id: "glycoprotein" },
+	{ label: stringConstants.sidebar_name.Bio_Enzymes.displayname, id: "biosyntheticenzymes" },
+	{ label: stringConstants.sidebar_name.Digital_seq.displayname, id: "Dseqence" },
+	{ label: stringConstants.sidebar_name.Cross_ref.displayname, id: "crossref" },
+	{ label: stringConstants.sidebar_name.publication.displayname, id: "publication" },
 ];
 
 const CompositionDisplay = (props) => {
@@ -469,7 +469,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">General</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.general.displayname}</h4>
 										<div className="float-right">
 											<span>
 												<Button
@@ -532,7 +532,7 @@ const GlycanDetail = (props) => {
 															/>
 														</p>
 														<div>
-															<strong>GlyToucan Accession: </strong>
+															<strong>{proteinStrings.glytoucan_ac.shortName}: </strong>
 															<a
 																href={glytoucan.glytoucan_url}
 																target="_blank"
@@ -557,7 +557,7 @@ const GlycanDetail = (props) => {
 
 												{classification && classification.length && (
 													<div>
-														<strong>Glycan Type / Subtype : </strong>
+														<strong>{glycanStrings.glycan_type.name} / {glycanStrings.glycan_subtype.name}: </strong>
 
 														{classification.map((Formatclassification) => (
 															<>
@@ -581,7 +581,7 @@ const GlycanDetail = (props) => {
 												{inchi_key && inchi_key.key && (
 													<>
 														<div>
-															<strong>InCHI Key: </strong>
+															<strong>{glycanStrings.inchi_key.name}: </strong>
 															<a
 																href={inchi_key.url}
 																target="_blank"
@@ -613,7 +613,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Species</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.species.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -678,7 +678,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Motif</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.motifs.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -742,7 +742,7 @@ const GlycanDetail = (props) => {
 											/>
 										</span>
 										<h4 className="gg-green d-inline">
-											Associated Glycoproteins
+										{stringConstants.sidebar_name.associated_glycan.displayname}
 										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
@@ -791,7 +791,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Biosynthetic Enzyme</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Bio_Enzymes.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -837,7 +837,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Digital Sequence</h4>
+											<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Digital_seq.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -859,7 +859,7 @@ const GlycanDetail = (props) => {
 														<Row>
 															<Col xs={6} sm={6}>
 																{" "}
-																<strong>IUPAC</strong>
+																<strong>{glycanStrings.inchi_key.name}</strong>
 															</Col>{" "}
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={iupac} />
@@ -876,7 +876,7 @@ const GlycanDetail = (props) => {
 														<Row>
 															<Col xs={6} sm={6}>
 																{" "}
-																<strong>WURCS</strong>
+																<strong>{glycanStrings.WURCS.name}</strong>
 															</Col>{" "}
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={wurcs} />
@@ -893,7 +893,7 @@ const GlycanDetail = (props) => {
 														<Row>
 															<Col xs={6} sm={6}>
 																{" "}
-																<strong>GlycoCT</strong>
+																<strong>{glycanStrings.GlycoCT.name}</strong>
 															</Col>{" "}
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={glycoct} />
@@ -911,7 +911,7 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong>InCHI</strong>
+																<strong>{glycanStrings.inchi_key.shortName}</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={inchi} />
@@ -927,7 +927,7 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong>GLYCAM IUPAC</strong>
+																<strong> {glycanStrings.GLYCAM_IUPAC.shortName}</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={glycam} />
@@ -943,7 +943,7 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong>Isomeric SMILES</strong>
+																<strong>{glycanStrings.Isomeric_SMILES.shortName}</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={smiles_isomeric} />
@@ -976,7 +976,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Cross References</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Cross_ref.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1044,7 +1044,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Publications</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.publication.displayname}</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
