@@ -31,7 +31,7 @@ const SearchByGlycan = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-								{quickSearch.question_11.text.split("{0}")[0]}<strong>{searchByDisease.common.label}</strong>{quickSearch.question_11.text.split("{0}")[1]}
+								{quickSearch.question_11.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByDisease.common.label}</strong>{quickSearch.question_11.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>

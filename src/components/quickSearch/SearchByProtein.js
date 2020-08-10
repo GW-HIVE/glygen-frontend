@@ -31,7 +31,7 @@ const SearchByProtein = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_4.text.split("{0}")[0]}<strong>{searchByProtein.common.label}</strong>{quickSearch.question_4.text.split("{0}")[1]}
+									{quickSearch.question_4.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByProtein.common.label}</strong>{quickSearch.question_4.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -79,7 +79,7 @@ const SearchByProtein = (props) => {
 								aria-controls="panel2bh-content"
 								id="panel2bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_5.text.split("{0}")[0]}<strong>{searchByProtein.common.label}</strong>{quickSearch.question_5.text.split("{0}")[1]}
+									{quickSearch.question_5.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByProtein.common.label}</strong>{quickSearch.question_5.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -127,7 +127,7 @@ const SearchByProtein = (props) => {
 								aria-controls="panel3bh-content"
 								id="panel3bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_6.text.split("{0}")[0]}<strong>{searchByProtein.question_6.label}</strong>{quickSearch.question_6.text.split("{0}")[1]}
+									{quickSearch.question_6.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByProtein.question_6.label}</strong>{quickSearch.question_6.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
@@ -175,7 +175,7 @@ const SearchByProtein = (props) => {
 								aria-controls="panel1bh-content"
 								id="panel1bh-header">
 								<Typography className="gg-blue-color">
-									{quickSearch.question_7.text.split("{0}")[0]}<strong>{searchByProtein.common.label}</strong>{quickSearch.question_7.text.split("{0}")[1]}
+									{quickSearch.question_7.text.split("{0}")[0]}<strong className="gg-blue-color">{searchByProtein.common.label}</strong>{quickSearch.question_7.text.split("{0}")[1]}
 								</Typography>
 							</ExpansionPanelSummary>
 							<ExpansionPanelDetails>
