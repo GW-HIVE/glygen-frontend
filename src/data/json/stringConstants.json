@@ -137,7 +137,7 @@
       },
       "pmid": {
         "name": "Pubmed ID",
-        "shortName": "Pubmed ID",
+        "shortName": "PMID",
         "tooltip": {
           "title": "Pubmed ID",
           "text": "A PMID is the unique identifier number used in PubMed for each article. The PMID is assigned to each article record when it enters the PubMed system.",
@@ -441,7 +441,7 @@
       },
       "glytoucan_ac": {
         "name": "Interacting Glycan",
-        "shortName": "Interacting Glycan",
+        "shortName": "GlyTouCan Accession",
         "tooltip": {
           "title": "Interacting Glycan",
           "text": "Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s). Select Interaction Type.",
@@ -874,7 +874,7 @@
     },
     "publication": {
       "id": "publication",
-      "displayname": "Publication",
+      "displayname": "Publications",
       "tooltip": " publication record for selected accession"
     },
     "function": {
@@ -934,7 +934,7 @@
     },
     "Glycans": {
       "id": "Glycans",
-      "displayname": "Glycans",
+      "displayname": "Glycans with this motifs",
       "tooltip": " Glycans Information for selected Motif Id"
     },
     "site_annotation": {
