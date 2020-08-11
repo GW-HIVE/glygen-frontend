@@ -55,9 +55,9 @@ const proteinStrings = stringConstants.protein.common;
 const glycanStrings = stringConstants.glycan.common;
 
 const items = [
-	{ label: stringConstants.sidebar_name.general.displayname, id: "general" },
-	{ label: stringConstants.sidebar_name.sequence.displayname, id: "sequence" },
-	{ label: stringConstants.sidebar_name.site_annotation.displayname, id: "annotation" },
+	{ label: stringConstants.sidebar.general.displayname, id: "general" },
+	{ label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
+	{ label: stringConstants.sidebar.site_annotation.displayname, id: "annotation" },
 ];
 
 const sortByPosition = function (a, b) {
@@ -589,7 +589,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.general.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.general.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -731,7 +731,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.sequence.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.sequence.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -780,7 +780,7 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.site_annotation.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.site_annotation.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"

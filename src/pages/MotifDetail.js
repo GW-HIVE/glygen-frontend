@@ -36,10 +36,10 @@ import stringConstants from "../data/json/stringConstants";
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 const items = [
-  { label: stringConstants.sidebar_name.general.displayname, id: "general" },
-  { label: stringConstants.sidebar_name.Glycans.displayname, id: "glycans" },
+  { label: stringConstants.sidebar.general.displayname, id: "general" },
+  { label: stringConstants.sidebar.glycans.displayname, id: "glycans" },
   {
-    label: stringConstants.sidebar_name.publication.displayname,
+    label: stringConstants.sidebar.publication.displayname,
     id: "publication"
   }
 ];
@@ -253,7 +253,7 @@ const MotifDetail = props => {
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar_name.general.displayname}
+                      {stringConstants.sidebar.general.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle
@@ -353,7 +353,7 @@ const MotifDetail = props => {
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar_name.Glycans.displayname}
+                      {stringConstants.sidebar.glycans.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle
@@ -407,7 +407,7 @@ const MotifDetail = props => {
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar_name.publication.displayname}
+                      {stringConstants.sidebar.publication.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle

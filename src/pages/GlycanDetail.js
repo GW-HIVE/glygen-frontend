@@ -41,14 +41,14 @@ const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-	{ label: stringConstants.sidebar_name.general.displayname, id: "general" },
-	{ label: stringConstants.sidebar_name.species.displayname, id: "species" },
-	{ label: stringConstants.sidebar_name.motifs.displayname, id: "motif" },
-	{ label: stringConstants.sidebar_name.associated_glycan.displayname, id: "glycoprotein" },
-	{ label: stringConstants.sidebar_name.Bio_Enzymes.displayname, id: "biosyntheticenzymes" },
-	{ label: stringConstants.sidebar_name.Digital_seq.displayname, id: "Dseqence" },
-	{ label: stringConstants.sidebar_name.Cross_ref.displayname, id: "crossref" },
-	{ label: stringConstants.sidebar_name.publication.displayname, id: "publication" },
+	{ label: stringConstants.sidebar.general.displayname, id: "general" },
+	{ label: stringConstants.sidebar.species.displayname, id: "species" },
+	{ label: stringConstants.sidebar.motifs.displayname, id: "motif" },
+	{ label: stringConstants.sidebar.associated_glycan.displayname, id: "glycoprotein" },
+	{ label: stringConstants.sidebar.bio_Enzymes.displayname, id: "biosyntheticenzymes" },
+	{ label: stringConstants.sidebar.digital_seq.displayname, id: "Dseqence" },
+	{ label: stringConstants.sidebar.cross_ref.displayname, id: "crossref" },
+	{ label: stringConstants.sidebar.publication.displayname, id: "publication" },
 ];
 
 const CompositionDisplay = (props) => {
@@ -469,7 +469,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.general.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.general.displayname}</h4>
 										<div className="float-right">
 											<span>
 												<Button
@@ -613,7 +613,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.species.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.species.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -678,7 +678,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.motifs.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.motifs.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -742,7 +742,7 @@ const GlycanDetail = (props) => {
 											/>
 										</span>
 										<h4 className="gg-green d-inline">
-										{stringConstants.sidebar_name.associated_glycan.displayname}
+										{stringConstants.sidebar.associated_glycan.displayname}
 										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
@@ -791,7 +791,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Bio_Enzymes.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.bio_Enzymes.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -837,7 +837,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-											<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Digital_seq.displayname}</h4>
+											<h4 className="gg-green d-inline">{stringConstants.sidebar.digital_seq.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -976,7 +976,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Cross_ref.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.cross_ref.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1044,7 +1044,7 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.publication.displayname}</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar.publication.displayname}</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />

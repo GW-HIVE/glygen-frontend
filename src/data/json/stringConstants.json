@@ -910,7 +910,7 @@
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     }
   },
-  "sidebar_name": {
+  "sidebar": {
     "general": {
       "id": "general",
       "displayname": "General",
@@ -931,18 +931,18 @@
       "displayname": "Associated Glycan",
       "tooltip": " Associated_glycan Information for selected accession"
     },
-    "Bio_Enzymes": {
+    "bio_Enzymes": {
       "id": "Bio_Enzymes",
       "displayname": "Biosynthetic Enzymes",
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
     },
-    "Digital_seq": {
-      "id": "Digital_seq",
+    "digital_seq": {
+      "id": "digital_seq",
       "displayname": "Digital Sequence",
       "tooltip": " Digital Sequence Information for selected accession"
     },
-    "Cross_ref": {
-      "id": "Digital_seq",
+    "cross_ref": {
+      "id": "cross_ref",
       "displayname": "Cross References",
       "tooltip": " Cross Reference Information for selected accession"
     },
@@ -976,38 +976,38 @@
       "displayname": "Pathway",
       "tooltip": " pathway Information for selected Protein accession"
     },
-    "Isoforms": {
-      "id": "Isoforms",
+    "isoforms": {
+      "id": "isoforms",
       "displayname": "Isoforms",
       "tooltip": " Isoforms Information for selected Protein accession"
     },
-    "Homologs": {
-      "id": "Homologs",
+    "homologs": {
+      "id": "homologs",
       "displayname": "Homologs",
       "tooltip": " Homologs Information for selected Protein accession"
     },
-    "Disease": {
-      "id": "Disease",
+    "disease": {
+      "id": "disease",
       "displayname": "Disease",
       "tooltip": " Disease Information for selected Protein accession"
     },
-    "Mutation": {
-      "id": "Mutation",
+    "mutation": {
+      "id": "mutation",
       "displayname": "Mutation",
       "tooltip": " Mutation Information for selected Protein accession"
     },
-    "Expression_Tissue": {
-      "id": "Expression Tissue",
+    "expression_Tissue": {
+      "id": "expression Tissue",
       "displayname": "Expression Tissue",
       "tooltip": " Expression Tissue Information for selected Protein accession"
     },
-    "Expression_Disease": {
-      "id": "Expression Disease",
+    "expression_Disease": {
+      "id": "expression Disease",
       "displayname": "Expression Disease",
       "tooltip": " Expression Disease Information for selected Protein accession"
     },
-    "Glycans": {
-      "id": "Glycans",
+    "glycans": {
+      "id": "glycans",
       "displayname": "Glycans with this motifs",
       "tooltip": " Glycans Information for selected Motif Id"
     },
