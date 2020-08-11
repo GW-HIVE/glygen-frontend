@@ -76,9 +76,9 @@ const featuredCards = [
 		to: routeConstants.compositionSearch,
 	},
 	{
-		title: "Glycan Composition Browser (GNOme)",
+		title: "Structure Browser",
 		description:
-			"Find glycan structures interactively by composition and topology.",
+			"Find glycan structures interactively by composition and topology via GNOme.",
 		image: gnomeBrowserImg,
 		imageText: "GNOme Browser",
 		href: GNOME_BROWSER,
