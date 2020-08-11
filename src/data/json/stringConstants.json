@@ -433,11 +433,85 @@
         },
         "id": "go_id"
       },
+      "isoform_length": {
+        "name": "Isoform length",
+        "shortName": "Isoform length",
+        "tooltip": {},
+        "id": "Isoform length"
+      },
+      "isoform_acc": {
+        "name": "UniProtKB Isoform Accession",
+        "shortName": "UniProtKB Isoform Accession",
+        "tooltip": {},
+        "id": "isoform_accession"
+      },
+
       "glycan": {
         "name": "Glycan",
         "shortName": "Glycan",
         "tooltip": {},
-        "id": "glycan"
+        "id": "glycans"
+      },
+      "type": {
+        "name": "Type",
+        "shortName": "Type",
+        "tooltip": {},
+        "id": "gtype"
+      },
+      "startpos": {
+        "name": "Start Pos.",
+        "shortName": "start_pos",
+        "tooltip": {},
+        "id": "start_position"
+      },
+      "endpos": {
+        "name": "End Pos.",
+        "shortName": "End_pos",
+        "tooltip": {},
+        "id": "endposition"
+      },
+      "uberonN": {
+        "name": "UBERON.",
+        "shortName": "UBERON",
+        "tooltip": {},
+        "id": "uberon"
+      },
+      "doid": {
+        "name": "DOID.",
+        "shortName": "DOID",
+        "tooltip": {},
+        "id": "doidd"
+      },
+      "significantt": {
+        "name": "Significant.",
+        "shortName": "Significant",
+        "tooltip": {},
+        "id": "significant"
+      },
+      "expression_trend": {
+        "name": "Expression Trend.",
+        "shortName": "Expression Trend",
+        "tooltip": {},
+        "id": "trend"
+      },
+
+      "tissue": {
+        "name": "Tissue",
+        "shortName": "Tissue",
+        "tooltip": {},
+        "id": "Tissue"
+      },
+      "present": {
+        "name": "Present",
+        "shortName": "Present",
+        "tooltip": {},
+        "id": "Present"
+      },
+      "annotationn ": {
+        "name": "Annotation Name",
+        "shortName": "Annotation Name",
+        "tooltip": {},
+        "id": "annotationsss"
       },
       "glytoucan_ac": {
         "name": "Interacting Glycan",
@@ -922,12 +996,12 @@
       "displayname": "Mutation",
       "tooltip": " Mutation Information for selected Protein accession"
     },
-    "Expression Tissue": {
+    "Expression_Tissue": {
       "id": "Expression Tissue",
       "displayname": "Expression Tissue",
       "tooltip": " Expression Tissue Information for selected Protein accession"
     },
-    "Expression Disease": {
+    "Expression_Disease": {
       "id": "Expression Disease",
       "displayname": "Expression Disease",
       "tooltip": " Expression Disease Information for selected Protein accession"

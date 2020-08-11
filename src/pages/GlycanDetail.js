@@ -1084,7 +1084,7 @@ const GlycanDetail = (props) => {
 																		<div>
 																			<FiBookOpen />
 																			<span style={{ paddingLeft: "15px" }}>
-																			{glycanStrings.pmid.name}:
+																			{glycanStrings.pmid.shortName}:
 																			</span>{" "}
 																			<a
 																				href={pub.url}

@@ -46,25 +46,25 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import LineTooltip from "../components/tooltip/LineTooltip";
-
+const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-	{ label: "General", id: "general" },
-	{ label: "Species", id: "species" },
-	{ label: "Function", id: "function" },
-	{ label: "Go Annotation", id: "go_annotation" },
-	{ label: "Glycosylation", id: "glycosylation" },
-	{ label: "Sequence", id: "sequence" },
-	{ label: "Pathway", id: "pathway" },
-	{ label: "Isoforms", id: "isoforms" },
-	{ label: "Homologs", id: "homologs" },
-	{ label: "Disease", id: "disease" },
-	{ label: "Mutation", id: "mutation" },
-	{ label: "Expression Tissue", id: "expressionT" },
-	{ label: "Expression Disease", id: "expressionD" },
-	{ label: "Cross References", id: "crossRef" },
-	{ label: "Publications", id: "publication" },
+	{ label: stringConstants.sidebar_name.general.displayname, id: "general" },
+	{ label: stringConstants.sidebar_name.species.displayname, id: "species" },
+	{ label: stringConstants.sidebar_name.function.displayname, id: "function" },
+	{ label: stringConstants.sidebar_name.go_annotation.displayname, id: "go_annotation" },
+	{ label: stringConstants.sidebar_name.glycosylation.displayname, id: "glycosylation" },
+	{ label: stringConstants.sidebar_name.sequence.displayname, id: "sequence" },
+	{ label: stringConstants.sidebar_name.pathway.displayname, id: "pathway" },
+	{ label: stringConstants.sidebar_name.Isoforms.displayname, id: "isoforms" },
+	{ label: stringConstants.sidebar_name.Homologs.displayname, id: "homologs" },
+	{ label: stringConstants.sidebar_name.Disease.displayname, id: "disease" },
+	{ label: stringConstants.sidebar_name.Mutation.displayname, id: "mutation" },
+	{ label: stringConstants.sidebar_name.Expression_Tissue.displayname, id: "expressionT" },
+	{ label: stringConstants.sidebar_name.Expression_Disease.displayname, id: "expressionD" },
+	{ label: stringConstants.sidebar_name.Cross_ref.displayname, id: "crossRef" },
+	{ label: stringConstants.sidebar_name.publication.displayname, id: "publication" },
 ];
 
 function addCommas(nStr) {
@@ -290,7 +290,7 @@ const ProteinDetail = (props) => {
 	const glycoSylationColumns = [
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
 
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -310,7 +310,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "type",
-			text: "Type",
+			text: proteinStrings.type.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -322,7 +322,7 @@ const ProteinDetail = (props) => {
 
 		{
 			dataField: "glytoucan_ac",
-			text: "GlyTouCan Accession",
+			text: proteinStrings.glytoucan_ac.shortName,
 			defaultSortField: "glytoucan_ac",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -344,7 +344,7 @@ const ProteinDetail = (props) => {
 
 		{
 			dataField: "glytoucan_ac",
-			text: "Glycan Image",
+			text: glycanStrings.glycan_image.name,
 			sort: false,
 			selected: true,
 			formatter: (value, row) => (
@@ -367,7 +367,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "position",
-			text: "Position",
+			text: proteinStrings.position.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -387,7 +387,7 @@ const ProteinDetail = (props) => {
 	const mutationColumns = [
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
 
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -419,7 +419,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "disease",
-			text: "Disease",
+			text: stringConstants.sidebar_name.Disease.displayname,
 			defaultSortField: "disease",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -440,7 +440,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "start_pos",
-			text: "Start Pos.",
+			text: proteinStrings.startpos.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -451,7 +451,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "end_pos",
-			text: "End Pos.",
+			text: proteinStrings.endpos.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -463,7 +463,7 @@ const ProteinDetail = (props) => {
 
 		{
 			dataField: "sequence",
-			text: "Sequence",
+			text: stringConstants.sidebar_name.sequence.displayname,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -480,7 +480,7 @@ const ProteinDetail = (props) => {
 
 		{
 			dataField: "type",
-			text: "Type",
+			text: proteinStrings.type.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -493,7 +493,8 @@ const ProteinDetail = (props) => {
 	const expressionTissueColumns = [
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
+
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
@@ -513,7 +514,7 @@ const ProteinDetail = (props) => {
 
 		{
 			dataField: "tissue",
-			text: "Tissue",
+			text: proteinStrings.tissue.name,
 			defaultSortField: "tissue",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -526,7 +527,7 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(UBERON: <a href={value.url}>{value.uberon}</a>)
+						({proteinStrings.uberonN.name}: <a href={value.url}>{value.uberon}</a>)
 					</span>
 				</>
 			),
@@ -548,7 +549,8 @@ const ProteinDetail = (props) => {
 	const expressionDiseaseColumns = [
 		{
 			dataField: "evidence",
-			text: "Sources",
+			text: proteinStrings.evidence.name,
+
 
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -568,7 +570,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "disease",
-			text: "Disease",
+			text: stringConstants.sidebar_name.Disease.displayname,
 			defaultSortField: "disease",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -581,14 +583,14 @@ const ProteinDetail = (props) => {
 				<>
 					{value.name}{" "}
 					<span className="nowrap">
-						(DOID: <a href={value.url}>{value.doid}</a>)
+						({proteinStrings.doid.name}: <a href={value.url}>{value.doid}</a>)
 					</span>
 				</>
 			),
 		},
 		{
 			dataField: "trend",
-			text: "Expression Trend",
+			text: proteinStrings.expression_trend.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -600,7 +602,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "significant",
-			text: "Significant",
+			text: proteinStrings.significantt.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -740,7 +742,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">General</h4>
+							<h4 className="gg-green d-inline">{stringConstants.sidebar_name.general.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -780,7 +782,7 @@ const ProteinDetail = (props) => {
 																	<strong>
 																		{proteinStrings.gene_location.name}:
 																	</strong>{" "}
-																	Chromosome: {""}
+																	{proteinStrings.chromosome.name}: {""}
 																	{genes.locus.chromosome} {""} (
 																	{addCommas(genes.locus.start_pos)} -{" "}
 																	{addCommas(genes.locus.end_pos)})
@@ -894,7 +896,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Species</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.species.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -959,7 +961,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Function</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.function.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1004,7 +1006,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">GO Annotation</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.go_annotation.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1101,7 +1103,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Glycosylation</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.glycosylation.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1207,7 +1209,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Sequence</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.sequence.displayname}</h4>
 										<div className="float-right">
 											<span>
 												<Link to={`${routeConstants.protVista}${id}`}>
@@ -1265,7 +1267,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Pathway</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.pathway.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1333,7 +1335,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Isoforms</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Isoforms.displayname}</h4>
 										<div className="float-right">
 											<Link
 												to={`${routeConstants.isoAlignment}${id}/isoformset-uniprotkb`}>
@@ -1374,7 +1376,7 @@ const ProteinDetail = (props) => {
 														{isoforms.map((isoformsS, isoformIndex) => (
 															<Grid item xs={12} key={isoformIndex}>
 																<div>
-																	<strong>UniProtKB Isoform Accession: </strong>
+																	<strong>{proteinStrings.isoform_acc.name}: </strong>
 																	<a
 																		href={isoformsS.url}
 																		target="_blank"
@@ -1384,13 +1386,13 @@ const ProteinDetail = (props) => {
 																</div>
 																{sequence && sequence.length && (
 																	<div>
-																		<strong> Isoform length: </strong>
+																		<strong> {proteinStrings.isoform_length.name}:</strong>
 																		{sequence.length}
 																	</div>
 																)}
 
 																<div>
-																	Chromosome: {""}
+																{proteinStrings.chromosome.name}: {""}
 																	{isoformsS.locus.chromosome} {""}(
 																	{isoformsS.locus.start_pos} -{" "}
 																	{isoformsS.locus.end_pos})
@@ -1451,7 +1453,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Homologs</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Homologs.displayname}</h4>
 										<div className="float-right">
 											{orthologs && orthologs.length && (
 												<>
@@ -1520,7 +1522,7 @@ const ProteinDetail = (props) => {
 																	{/* </Link> */}
 																</div>
 																<div>
-																	<strong>Organism: </strong>
+																	<strong>{glycanStrings.organism.name}: </strong>
 																	{orthologsS.organism}
 																</div>
 
@@ -1577,7 +1579,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Disease</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Disease.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1652,7 +1654,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Mutation</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Mutation.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1700,7 +1702,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline"> Expression Tissue</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Expression_Tissue.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1751,7 +1753,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline"> Expression Disease</h4>
+										<h4 className="gg-green d-inline"> {stringConstants.sidebar_name.Expression_Disease.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1803,7 +1805,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Cross References</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.Cross_ref.displayname}</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1871,7 +1873,7 @@ const ProteinDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">Publications</h4>
+										<h4 className="gg-green d-inline">{stringConstants.sidebar_name.publication.displayname}</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
