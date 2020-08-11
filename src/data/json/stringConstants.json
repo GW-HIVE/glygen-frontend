@@ -910,6 +910,7 @@
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     }
   },
+
   "sidebar": {
     "general": {
       "id": "general",
@@ -1016,6 +1017,17 @@
       "displayname": "Site Annotation",
       "tooltip": " site annotation Information for selected Protein accession"
     },
+    "alignment": {
+      "id": "alignment",
+      "displayname": "Alignment",
+      "tooltip": " alignment Information for selected Protein accession"
+    },
+    "summary": {
+      "id": "summary",
+      "displayname": "Summary",
+      "tooltip": " summary Information for selected Protein accession"
+    },
+
     "search_by_glycan": {
       "id": "search_by_glycan",
       "displayname": "Search By Glycan",
@@ -1035,6 +1047,48 @@
       "id": "search_by_disease",
       "displayname": "Search By Disease",
       "tooltip": " ssearch_by_disease"
+    }
+  },
+  "download": {
+    "glycan_image": {
+      "id": "glycan_image",
+      "displayname": "Glycan Image (*.png)",
+      "tooltip": " glycan_image Information for selected accession"
+    },
+    "glycan_jsondata": {
+      "id": "glycan_jsondata",
+      "displayname": "Glycan data (*.json)",
+      "tooltip": " glycan_jsondata Information for selected accession"
+    },
+    "glycan_csvdata": {
+      "id": "glycan_csvdata",
+      "displayname": "Glycan data (*.csv)",
+      "tooltip": " glycan_csvdata Information for selected accession"
+    },
+    "protein_jsondata": {
+      "id": "protein_jsondata",
+      "displayname": "Protein data (*.json)",
+      "tooltip": " protein_jsondata Information for selected accession"
+    },
+    "protein_csvdata": {
+      "id": "protein_csvdata",
+      "displayname": "Protein data (*.csv)",
+      "tooltip": " protein_csvdata Information for selected accession"
+    },
+    "protein_fastadata": {
+      "id": "protein_fastadata",
+      "displayname": "Protein data (*.FASTA)",
+      "tooltip": " protein_fastadata Information for selected accession"
+    },
+    "motif_jsondata": {
+      "id": "motif_jsondata",
+      "displayname": "Glycan data (*.json)",
+      "tooltip": " motif_jsondata Information for selected accession"
+    },
+    "motif_image": {
+      "id": "motif_image",
+      "displayname": "Motif Image (*.png)",
+      "tooltip": " motif_image Information for selected accession"
     }
   }
 }

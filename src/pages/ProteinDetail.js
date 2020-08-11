@@ -419,7 +419,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "disease",
-			text: stringConstants.sidebar.Disease.displayname,
+			text: stringConstants.sidebar.disease.displayname,
 			defaultSortField: "disease",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -570,7 +570,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "disease",
-			text: stringConstants.sidebar.Disease.displayname,
+			text: stringConstants.sidebar.disease.displayname,
 			defaultSortField: "disease",
 			sort: true,
 			headerStyle: (column, colIndex) => {
@@ -693,12 +693,12 @@ const ProteinDetail = (props) => {
 							<DownloadButton
 								types={[
 									{
-										display: " Protein data (*.json)",
+										display: stringConstants.download.protein_jsondata.displayname,
 										type: "json",
 										data: "protein_detail",
 									},
 									{
-										display: " Protein data (*.FASTA)",
+										display: stringConstants.download.protein_fastadata.displayname,
 										type: "fasta",
 										data: "protein_detail",
 									},

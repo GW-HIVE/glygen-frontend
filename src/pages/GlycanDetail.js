@@ -420,12 +420,12 @@ const GlycanDetail = (props) => {
 							<DownloadButton
 								types={[
 									{
-										display: "Glycan Image (*.png)",
+										display: stringConstants.download.glycan_image.displayname,
 										type: "png",
 										data: "glycan_image",
 									},
 									{
-										display: " Glycan data (*.json)",
+										display: stringConstants.download.glycan_jsondata.displayname,
 										type: "json",
 										data: "glycan_detail",
 									},

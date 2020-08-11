@@ -127,7 +127,14 @@ const GlycanList = props => {
       props.history.push(routeConstants.globalSearchResult + query.term);
     } else if (quickSearch[searchId] !== undefined) {
       const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
-      window.location = basename + routeConstants.quickSearch + id + "/" + quickSearch[searchId].id +  "#" + quickSearch[searchId].id;
+      window.location =
+        basename +
+        routeConstants.quickSearch +
+        id +
+        "/" +
+        quickSearch[searchId].id +
+        "#" +
+        quickSearch[searchId].id;
     } else {
       props.history.push(routeConstants.glycanSearch + id);
     }
@@ -160,12 +167,12 @@ const GlycanList = props => {
           <DownloadButton
             types={[
               {
-                display: "Glycan data (*.csv)",
+                display: stringConstants.download.glycan_csvdata.displayname,
                 type: "csv",
                 data: "glycan_list"
               },
               {
-                display: "Glycan data (*.json)",
+                display: stringConstants.download.glycan_jsondata.displayname,
                 type: "json",
                 data: "glycan_list"
               }

@@ -93,7 +93,14 @@ const ProteinList = props => {
       props.history.push(routeConstants.globalSearchResult + query.term);
     } else if (quickSearch[searchId] !== undefined) {
       const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
-      window.location = basename + routeConstants.quickSearch + id + "/" + quickSearch[searchId].id + "#" + quickSearch[searchId].id;
+      window.location =
+        basename +
+        routeConstants.quickSearch +
+        id +
+        "/" +
+        quickSearch[searchId].id +
+        "#" +
+        quickSearch[searchId].id;
     } else {
       props.history.push(routeConstants.proteinSearch + id);
     }
@@ -132,17 +139,17 @@ const ProteinList = props => {
           <DownloadButton
             types={[
               {
-                display: "Protein data (*.csv)",
+                display: stringConstants.download.protein_csvdata.displayname,
                 type: "csv",
                 data: "protein_list"
               },
               {
-                display: "Protein  data (*.json)",
+                display: stringConstants.download.protein_jsondata.displayname,
                 type: "json",
                 data: "protein_list"
               },
               {
-                display: " Protein data (*.FASTA)",
+                display: stringConstants.download.protein_fastadata.displayname,
                 type: "fasta",
                 data: "protein_list"
               }
