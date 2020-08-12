@@ -260,6 +260,7 @@ const Resources = () => {
 							bootstrap4
 							striped
 							hover
+							wrapperClasses="table-responsive"
 							headerClasses={classes.tableHeader}
 							keyField="id"
 							data={resourcesData.dataResourcesData}
@@ -287,6 +288,7 @@ const Resources = () => {
 							bootstrap4
 							striped
 							hover
+							wrapperClasses="table-responsive"
 							headerClasses={classes.tableHeader}
 							keyField="id"
 							data={resourcesData.toolsResourcesData}
@@ -314,6 +316,7 @@ const Resources = () => {
 							bootstrap4
 							striped
 							hover
+							wrapperClasses="table-responsive"
 							headerClasses={classes.tableHeader}
 							keyField="id"
 							data={resourcesData.organizResourcesData}
@@ -345,6 +348,7 @@ const Resources = () => {
 							bootstrap4
 							striped
 							hover
+							wrapperClasses="table-responsive"
 							headerClasses={classes.tableHeader}
 							keyField="id"
 							data={resourcesData.learnResourcesData}

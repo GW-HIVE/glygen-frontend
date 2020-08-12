@@ -164,6 +164,7 @@ const License = () => {
 								// responsive='xl'
 								striped
 								hover
+								wrapperClasses="table-responsive"
 								// condensed
 								headerClasses={classes.tableHeader}
 								keyField="id"

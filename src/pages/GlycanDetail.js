@@ -44,8 +44,14 @@ const items = [
 	{ label: stringConstants.sidebar.general.displayname, id: "general" },
 	{ label: stringConstants.sidebar.species.displayname, id: "species" },
 	{ label: stringConstants.sidebar.motifs.displayname, id: "motif" },
-	{ label: stringConstants.sidebar.associated_glycan.displayname, id: "glycoprotein" },
-	{ label: stringConstants.sidebar.bio_Enzymes.displayname, id: "biosyntheticenzymes" },
+	{
+		label: stringConstants.sidebar.associated_glycan.displayname,
+		id: "glycoprotein",
+	},
+	{
+		label: stringConstants.sidebar.bio_Enzymes.displayname,
+		id: "biosyntheticenzymes",
+	},
 	{ label: stringConstants.sidebar.digital_seq.displayname, id: "Dseqence" },
 	{ label: stringConstants.sidebar.cross_ref.displayname, id: "crossref" },
 	{ label: stringConstants.sidebar.publication.displayname, id: "publication" },
@@ -425,7 +431,8 @@ const GlycanDetail = (props) => {
 										data: "glycan_image",
 									},
 									{
-										display: stringConstants.download.glycan_jsondata.displayname,
+										display:
+											stringConstants.download.glycan_jsondata.displayname,
 										type: "json",
 										data: "glycan_detail",
 									},
@@ -469,7 +476,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.general.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.general.displayname}
+										</h4>
 										<div className="float-right">
 											<span>
 												<Button
@@ -528,11 +537,13 @@ const GlycanDetail = (props) => {
 															<img
 																className="img-cartoon"
 																src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
-																alt="Cartoon"
+																alt="Glycan img"
 															/>
 														</p>
 														<div>
-															<strong>{proteinStrings.glytoucan_ac.shortName}: </strong>
+															<strong>
+																{proteinStrings.glytoucan_ac.shortName}:{" "}
+															</strong>
 															<a
 																href={glytoucan.glytoucan_url}
 																target="_blank"
@@ -557,7 +568,10 @@ const GlycanDetail = (props) => {
 
 												{classification && classification.length && (
 													<div>
-														<strong>{glycanStrings.glycan_type.name} / {glycanStrings.glycan_subtype.name}: </strong>
+														<strong>
+															{glycanStrings.glycan_type.name} /{" "}
+															{glycanStrings.glycan_subtype.name}:{" "}
+														</strong>
 
 														{classification.map((Formatclassification) => (
 															<>
@@ -613,7 +627,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.species.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.species.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -678,7 +694,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.motifs.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.motifs.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -704,12 +722,14 @@ const GlycanDetail = (props) => {
 																		/>
 																	</div>
 																	<span>
-																		<LineTooltip text="View details">
+																		<LineTooltip text="View motif details">
 																			<Link
 																				to={
 																					routeConstants.motifDetail + motif.id
 																				}>
-																				{motif.id} {motif.name}
+																				{motif.id}
+																				<br />
+																				{motif.name}
 																			</Link>
 																		</LineTooltip>
 																	</span>
@@ -742,7 +762,7 @@ const GlycanDetail = (props) => {
 											/>
 										</span>
 										<h4 className="gg-green d-inline">
-										{stringConstants.sidebar.associated_glycan.displayname}
+											{stringConstants.sidebar.associated_glycan.displayname}
 										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
@@ -791,7 +811,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.bio_Enzymes.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.bio_Enzymes.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -837,7 +859,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-											<h4 className="gg-green d-inline">{stringConstants.sidebar.digital_seq.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.digital_seq.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -911,7 +935,9 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong>{glycanStrings.inchi_key.shortName}</strong>
+																<strong>
+																	{glycanStrings.inchi_key.shortName}
+																</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={inchi} />
@@ -927,7 +953,9 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong> {glycanStrings.GLYCAM_IUPAC.shortName}</strong>
+																<strong>
+																	{glycanStrings.GLYCAM_IUPAC.shortName}
+																</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={glycam} />
@@ -943,7 +971,9 @@ const GlycanDetail = (props) => {
 													<>
 														<Row>
 															<Col xs={6} sm={6}>
-																<strong>{glycanStrings.Isomeric_SMILES.shortName}</strong>
+																<strong>
+																	{glycanStrings.Isomeric_SMILES.shortName}
+																</strong>
 															</Col>
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={smiles_isomeric} />
@@ -976,7 +1006,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.cross_ref.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.cross_ref.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -1044,7 +1076,9 @@ const GlycanDetail = (props) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.publication.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.publication.displayname}
+										</h4>
 										<div className="float-right">
 											{/* <span className='gg-align-middle card-icon-space'>
 										<PublicationsMenu />
@@ -1084,7 +1118,7 @@ const GlycanDetail = (props) => {
 																		<div>
 																			<FiBookOpen />
 																			<span style={{ paddingLeft: "15px" }}>
-																			{glycanStrings.pmid.shortName}:
+																				{glycanStrings.pmid.shortName}:
 																			</span>{" "}
 																			<a
 																				href={pub.url}
