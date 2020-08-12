@@ -72,30 +72,25 @@ legend {
 .img-wrapper {
 	overflow: hidden;
 	z-index: -1000;
-	padding: 0.5em;
-	margin-top: 20px;
-	margin-bottom: 0px;
-	/* width: 500px; */
 }
 .img-cartoon {
 	/* display: block; */
-	/* max-width: 500px; */
-	/* max-height: 160px; */
 	width: auto;
 	height: auto;
-	-webkit-transform: scale(1);
-	transform: scale(0.8);
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
 	-webkit-transition: 0.3s ease-in-out;
 	transition: 0.3s ease-in-out;
 	box-shadow: 10px 10px 5px #ddd;
 }
 .img-cartoon:hover,
 .img-cartoon:focus {
-	-webkit-transform: scale(1.2);
+	-webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: 0.3s ease-in-out;
 	transition: 0.3s ease-in-out;
 	z-index: 1000;
+	box-shadow: none !important;
 }
 .no-data-msg {
 	margin-left: 15px;
@@ -109,4 +104,10 @@ legend {
 
 .badge-grid {
 	padding-bottom: 20px;
+}
+@media (max-width: 480px) {
+	.img-cartoon {
+		width: 100% !important;
+		margin: 0 auto !important;
+	}
 }
