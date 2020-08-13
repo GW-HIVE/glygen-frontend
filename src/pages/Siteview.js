@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import Sidebar from "../components/navigation/Sidebar";
-import {} from "react-router-dom";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
@@ -57,7 +56,10 @@ const glycanStrings = stringConstants.glycan.common;
 const items = [
 	{ label: stringConstants.sidebar.general.displayname, id: "general" },
 	{ label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
-	{ label: stringConstants.sidebar.site_annotation.displayname, id: "annotation" },
+	{
+		label: stringConstants.sidebar.site_annotation.displayname,
+		id: "annotation",
+	},
 ];
 
 const sortByPosition = function (a, b) {
@@ -589,7 +591,9 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.general.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.general.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -629,7 +633,7 @@ const Siteview = ({ position }) => {
 																	<strong>
 																		{proteinStrings.gene_location.name}:
 																	</strong>{" "}
-																	 {proteinStrings.chromosome.name}: {""}
+																	{proteinStrings.chromosome.name}: {""}
 																	{genes.locus.chromosome} {""} (
 																	{addCommas(genes.locus.start_pos)} -{" "}
 																	{addCommas(genes.locus.end_pos)})
@@ -731,7 +735,9 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.sequence.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.sequence.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
@@ -780,7 +786,9 @@ const Siteview = ({ position }) => {
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
-										<h4 className="gg-green d-inline">{stringConstants.sidebar.site_annotation.displayname}</h4>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.site_annotation.displayname}
+										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
 												eventKey="0"
