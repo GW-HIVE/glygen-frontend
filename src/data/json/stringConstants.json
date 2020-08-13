@@ -26,7 +26,7 @@
       },
       "mass_pme": {
         "name": "Permethylated Mass",
-        "shortName": "Permethylated Mass",
+        "shortName": "Monoisotopic Mass-pMe (Da)",
         "tooltip": {
           "title": "Permethylated Mass",
           "text": "The Permethylated Mass is the sum of the masses of the atoms in a molecule. Use the sliders to select a Monoisotopic Mass range for your glycan(s)."
@@ -507,7 +507,50 @@
         "tooltip": {},
         "id": "Present"
       },
-      "annotationn ": {
+      "date:": {
+        "name": "date",
+        "shortName": "Date",
+        "tooltip": {},
+        "id": "date"
+      },
+      " algorithm:": {
+        "name": " algorithm",
+        "shortName": " Algorithm",
+        "tooltip": {},
+        "id": " algorithm"
+      },
+      " homolog-oma:": {
+        "name": " Homolog-oma",
+        "shortName": " Homolog-oma",
+        "tooltip": {},
+        "id": " homolog-oma"
+      },
+
+      " identical_positions:": {
+        "name": "identical_positions",
+        "shortName": "Identity Position",
+        "tooltip": {},
+        "id": " identical_positions"
+      },
+      " similar_positions:": {
+        "name": "similar_positions",
+        "shortName": "Similar Position",
+        "tooltip": {},
+        "id": " similar_positions"
+      },
+      " cluster_ID:": {
+        "name": "cluster ID",
+        "shortName": "Cluster ID",
+        "tooltip": {},
+        "id": " Cluster ID"
+      },
+      " identity:": {
+        "name": "Identity",
+        "shortName": "Identity",
+        "tooltip": {},
+        "id": " identity"
+      },
+      "annotationn": {
         "name": "Annotation Name",
         "shortName": "Annotation Name",
         "tooltip": {},
