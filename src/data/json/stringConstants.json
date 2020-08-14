@@ -507,44 +507,43 @@
         "tooltip": {},
         "id": "Present"
       },
-      "date:": {
-        "name": "date",
+      "date": {
+        "name": "Date",
         "shortName": "Date",
         "tooltip": {},
         "id": "date"
       },
-      " algorithm:": {
-        "name": " algorithm",
+      "algorithm": {
+        "name": "Algorithm",
         "shortName": " Algorithm",
         "tooltip": {},
         "id": " algorithm"
       },
-      " homolog-oma:": {
-        "name": " Homolog-oma",
+      "homolog_oma": {
+        "name": "Homolog-oma",
         "shortName": " Homolog-oma",
         "tooltip": {},
-        "id": " homolog-oma"
+        "id": "homolog-oma"
       },
-
-      " identical_positions:": {
-        "name": "identical_positions",
+      "identical_positions": {
+        "name": "Identity Position",
         "shortName": "Identity Position",
         "tooltip": {},
         "id": " identical_positions"
       },
-      " similar_positions:": {
-        "name": "similar_positions",
+      "similar_positions": {
+        "name": "Similar Position",
         "shortName": "Similar Position",
         "tooltip": {},
         "id": " similar_positions"
       },
-      " cluster_ID:": {
-        "name": "cluster ID",
+      "cluster_id": {
+        "name": "Cluster ID",
         "shortName": "Cluster ID",
         "tooltip": {},
         "id": " Cluster ID"
       },
-      " identity:": {
+      "identity": {
         "name": "Identity",
         "shortName": "Identity",
         "tooltip": {},
@@ -738,6 +737,12 @@
         "shortName": "refseq_name",
         "tooltip": {},
         "id": "refseq_name"
+      },
+      "annotation_site": {
+        "name": "Annotation",
+        "id": "annotation",
+        "shortName": "Annotation Name",
+        "tooltip": " site annotation Information for selected Protein accession"
       },
 
       "term": {
@@ -1060,6 +1065,7 @@
       "displayname": "Site Annotation",
       "tooltip": " site annotation Information for selected Protein accession"
     },
+
     "alignment": {
       "id": "alignment",
       "displayname": "Alignment",
