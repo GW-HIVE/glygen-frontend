@@ -9,6 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 // import Hidden from '@material-ui/core/Hidden';
 import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
+import { GLYGEN_BASENAME } from "../../envVariables";
 
 const useStyles = makeStyles((theme) => ({
 	cardAction: {
@@ -60,11 +61,16 @@ export default function FeaturedCard(props) {
 	return (
 		<Grid item xs={12} sm={6} md={6} lg={4}>
 			{post.to && (
-				<Link to={post.to} className={classes.cardAction}>
+				<a 
+						GLYGEN_BASENAME === "/" 
+						?  post.to
+						: GLYGEN_BASENAME + post.to
+				 	}
+					className={classes.cardAction}>
 					{/* <CardActionArea> */}
 					<CardFeatured />
 					{/* </CardActionArea> */}
-				</Link>
+				</a>
 			)}
 			{post.href && (
 				<a
