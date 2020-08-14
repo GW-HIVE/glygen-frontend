@@ -420,7 +420,7 @@ const ProteinDetail = (props) => {
 		},
 		{
 			dataField: "annotation",
-			text: "Annotation Name",
+			text: proteinStrings.annotation_site.shortName,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {
@@ -461,6 +461,13 @@ const ProteinDetail = (props) => {
 					color: "white",
 				};
 			},
+			formatter: (value, row) => (
+				<LineTooltip text="View siteview details">
+					<Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+						 {row.start_pos}
+					</Link>
+				</LineTooltip>
+			),
 		},
 		{
 			dataField: "end_pos",
@@ -472,6 +479,13 @@ const ProteinDetail = (props) => {
 					color: "white",
 				};
 			},
+			formatter: (value, row) => (
+				<LineTooltip text="View siteview details">
+					<Link to={`${routeConstants.siteview}${id}/${row.end_pos}`}>
+						 {row.end_pos}
+					</Link>
+				</LineTooltip>
+			),
 		},
 
 		{

@@ -384,7 +384,7 @@ const Siteview = ({ position }) => {
 	const annotationColumns = [
 		{
 			dataField: "typeAnnotate",
-			text: "Annotation",
+			text: proteinStrings.annotation_site.name,
 			sort: true,
 			headerStyle: (colum, colIndex) => {
 				return {

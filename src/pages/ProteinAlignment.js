@@ -156,7 +156,9 @@ const ProteinAlignment = () => {
                         helpIcon="gg-helpicon-detail"
                       />
                     </span>
-                    <h4 className="gg-green d-inline">Alignment</h4>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.alignment.displayname}:
+                    </h4>
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
@@ -198,7 +200,9 @@ const ProteinAlignment = () => {
                         helpIcon="gg-helpicon-detail"
                       />
                     </span>
-                    <h4 className="gg-green d-inline">Summary</h4>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.summary.displayname}:
+                    </h4>
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
@@ -219,14 +223,16 @@ const ProteinAlignment = () => {
                         <tbody className="table-body">
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>Date: </strong>
+                              <strong>{proteinStrings.date.name}: </strong>
                               {data.date}
                             </div>
                           </tr>
                           {data && data.algorithm && (
                             <tr className="table-row">
                               <div className="trclass">
-                                <strong>Algorithm: </strong>
+                                <strong>
+                                  {proteinStrings.algorithm.name}:
+                                </strong>
                                 <a
                                   href={data.algorithm.url}
                                   target="_blank"
@@ -239,24 +245,35 @@ const ProteinAlignment = () => {
                           )}
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>Identity Position: </strong>{" "}
+                              <strong>
+                                {" "}
+                                {proteinStrings.identical_positions.name}:
+                              </strong>{" "}
                               {data.identical_positions}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>Similar Position: </strong>{" "}
+                              <strong>
+                                {" "}
+                                {proteinStrings.similar_positions.name}:
+                              </strong>{" "}
                               {data.similar_positions}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>Cluster ID: </strong> {data.cls_id}
+                              <strong>
+                                {" "}
+                                {proteinStrings.cluster_id.name}:
+                              </strong>{" "}
+                              {data.cls_id}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>Identity: </strong> {data.identity}
+                              <strong>{proteinStrings.identity.name}:</strong>{" "}
+                              {data.identity}
                             </div>
                           </tr>
                         </tbody>
