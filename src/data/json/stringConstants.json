@@ -221,7 +221,7 @@
           "shortName": "Hex",
           "tooltip": {
             "title": "Hexose",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/206"
           }
@@ -233,7 +233,7 @@
           "shortName": "HexNAc",
           "tooltip": {
             "title": "N-Acetyl-Hexosamine",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/899"
           }
@@ -245,7 +245,7 @@
           "shortName": "HexN",
           "tooltip": {
             "title": "Hexosamine",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/739"
           }
@@ -257,7 +257,7 @@
           "shortName": "dHex",
           "tooltip": {
             "title": "Deoxy-Hexose",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/840"
           }
@@ -269,7 +269,7 @@
           "shortName": "NeuAc",
           "tooltip": {
             "title": "N-Acetyl-Neuraminic acid",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/439197"
           }
@@ -281,7 +281,7 @@
           "shortName": "NeuGc",
           "tooltip": {
             "title": "N-Glycolyl-Neuraminic acid",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/440001"
           }
@@ -293,7 +293,7 @@
           "shortName": "UA",
           "tooltip": {
             "title": "Uronic acid",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/610"
           }
@@ -306,7 +306,7 @@
           "shortName": "PO<sub>3</sub>",
           "tooltip": {
             "title": "Phosphate",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1061"
           }
@@ -318,7 +318,7 @@
           "shortName": "SO<sub>3</sub>",
           "tooltip": {
             "title": "Sulfate",
-            "text": "Add some unique text here.",
+            "text1": "Add some unique text here.",
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1117"
           }

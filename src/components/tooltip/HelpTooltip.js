@@ -19,7 +19,7 @@ const HelpTooltip = (props) => {
 						<strong>{props.title + ":"}</strong>
 					</h5>
 					{props.text}
-					<br />
+					{props.text && <br />}
 					<a href={props.url} target="_blank" rel="noopener noreferrer">
 						{props.urlText}
 					</a>
