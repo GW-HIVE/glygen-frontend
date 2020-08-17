@@ -90,7 +90,7 @@ const ProtVista = () => {
             shape: glycos[0].shape,
             accession: data.uniprot.uniprot_canonical_ac,
             type: glyco.residue,
-            title: glyco.residue,
+            title: glyco.residue + "-" + glyco.position,
             tooltipContent:
               "<img src='https://api.glygen.org/glycan/image/" +
               glyco.glytoucan_ac +
@@ -104,7 +104,7 @@ const ProtVista = () => {
             shape: glycos[1].shape,
             accession: data.uniprot.uniprot_canonical_ac,
             type: glyco.residue,
-            title: glyco.residue,
+            title: glyco.residue + "-" + glyco.position,
             tooltipContent:
               "<span className=marker>Glycosylation site without reported glycan at " +
               glyco.position +
@@ -121,7 +121,7 @@ const ProtVista = () => {
             shape: glycos[2].shape,
             accession: data.uniprot.uniprot_canonical_ac,
             type: glyco.residue,
-            title: glyco.residue,
+            title: glyco.residue + "-" + glyco.position,
             tooltipContent:
               "<img src='https://api.glygen.org/glycan/image/" +
               glyco.glytoucan_ac +
@@ -135,7 +135,7 @@ const ProtVista = () => {
             shape: glycos[3].shape,
             accession: data.uniprot.uniprot_canonical_ac,
             type: glyco.residue,
-            title: glyco.residue,
+            title: glyco.residue + "-" + glyco.position,
             tooltipContent:
               "<span className=marker>Glycosylation site without reported glycan at " +
               glyco.position +
@@ -176,7 +176,7 @@ const ProtVista = () => {
         shape: glycos[4].shape,
         accession: data.uniprot.uniprot_canonical_ac,
         type: "N-Glycan-Sequon",
-        title: "N-Glycan-Sequon",
+        title: site_annotation.start_pos + "-" + site_annotation.end_pos,
         tooltipContent:
           "<span className=marker>" + site_annotation.annotation + "</span>"
       });
