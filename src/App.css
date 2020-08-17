@@ -122,9 +122,10 @@ p {
 /* -----------------------------------------------
 /* ! Important 
 /* Remove this in ver 1.7 to start showing help icon and tooltips  */
-.panelHeadBgr span {
+.panelHeadBgr span.d-inline {
 	display: none !important;
 }
+
 /* ----------------------------------------------- */
 .gg-top-header {
 	background-color: #f5f5f5 !important;
