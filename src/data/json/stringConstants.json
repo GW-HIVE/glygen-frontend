@@ -450,7 +450,7 @@
         "name": "Glycan",
         "shortName": "Glycan",
         "tooltip": {},
-        "id": "glycans"
+        "id": "glycan"
       },
       "type": {
         "name": "Type",
