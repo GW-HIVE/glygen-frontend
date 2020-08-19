@@ -464,7 +464,7 @@ const ProteinDetail = (props) => {
 			formatter: (value, row) => (
 				<LineTooltip text="View siteview details">
 					<Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-						 {row.start_pos}
+						{row.start_pos}
 					</Link>
 				</LineTooltip>
 			),
@@ -482,7 +482,7 @@ const ProteinDetail = (props) => {
 			formatter: (value, row) => (
 				<LineTooltip text="View siteview details">
 					<Link to={`${routeConstants.siteview}${id}/${row.end_pos}`}>
-						 {row.end_pos}
+						{row.end_pos}
 					</Link>
 				</LineTooltip>
 			),
@@ -906,73 +906,34 @@ const ProteinDetail = (props) => {
 													)}
 												</>
 											)}
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
-							{/* Species */}
-							<Accordion
-								id="species"
-								defaultActiveKey="0"
-								className="panel-width"
-								style={{ padding: "20px 0" }}>
-								<Card>
-									<Card.Header className="panelHeadBgr">
-										<span className="gg-green d-inline">
-											<HelpTooltip
-												title={DetailTooltips.protein.species.title}
-												text={DetailTooltips.protein.species.text}
-												urlText={DetailTooltips.protein.species.urlText}
-												url={DetailTooltips.protein.species.url}
-												helpIcon="gg-helpicon-detail"
-											/>
-										</span>
-										<h4 className="gg-green d-inline">
-											{stringConstants.sidebar.species.displayname}
-										</h4>
-										<div className="float-right">
-											<Accordion.Toggle
-												eventKey="0"
-												onClick={() =>
-													toggleCollapse("species", collapsed.species)
-												}
-												className="gg-green arrow-btn">
-												<span>
-													{collapsed.species ? closeIcon : expandIcon}
-												</span>
-											</Accordion.Toggle>
-										</div>
-									</Card.Header>
-									<Accordion.Collapse eventKey="0">
-										<Card.Body>
-											<Row>
+											<div>
 												{speciesEvidence &&
 													// For every species object
 													Object.keys(speciesEvidence).map((speEvi) => (
 														// For every database for current species object
-														<Col xs={12} sm={12} md={4} lg={4} xl={4}>
+														<div>
 															<>
-																<strong className="nowrap">{speEvi}</strong>{" "}
-																{"["}
-																<LineTooltip text="View details on NCBI">
-																	<a
-																		href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
-																		target="_blank"
-																		rel="noopener noreferrer">
-																		{speciesEvidence[speEvi].taxid}
-																	</a>
-																</LineTooltip>
+																<strong>{proteinStrings.species.name}: </strong>
+																{speEvi} {"["}
+																{/* <LineTooltip text="View details on NCBI"> */}
+																<a
+																	href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+																	target="_blank"
+																	rel="noopener noreferrer">
+																	{speciesEvidence[speEvi].taxid}
+																</a>
+																{/* </LineTooltip> */}
 																{"]"}
 																<EvidenceList
 																	evidences={speciesEvidence[speEvi].evidence}
 																/>
 															</>
-														</Col>
+														</div>
 													))}
-												{!species && (
+												{/* {!species && (
 													<p className="no-data-msg">No data available.</p>
-												)}
-											</Row>
+												)} */}
+											</div>
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
