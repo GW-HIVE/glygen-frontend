@@ -51,16 +51,16 @@ const proteinStrings = stringConstants.protein.common;
 
 const items = [
 	{ label: stringConstants.sidebar.general.displayname, id: "general" },
-	{ label: stringConstants.sidebar.species.displayname, id: "species" },
+	{
+		label: stringConstants.sidebar.glycosylation.displayname,
+		id: "glycosylation",
+	},
 	{ label: stringConstants.sidebar.function.displayname, id: "function" },
 	{
 		label: stringConstants.sidebar.go_annotation.displayname,
 		id: "go_annotation",
 	},
-	{
-		label: stringConstants.sidebar.glycosylation.displayname,
-		id: "glycosylation",
-	},
+
 	{ label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
 	{ label: stringConstants.sidebar.pathway.displayname, id: "pathway" },
 	{ label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
@@ -282,7 +282,6 @@ const ProteinDetail = (props) => {
 		uniprot,
 		gene,
 		species,
-		taxid,
 		publication,
 		isoforms,
 		orthologs,
@@ -938,6 +937,114 @@ const ProteinDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
+							{/*  Glycosylation */}
+							<Accordion
+								id="glycosylation"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.glycosylations.title}
+												text={DetailTooltips.protein.glycosylations.text}
+												urlText={DetailTooltips.protein.glycosylations.urlText}
+												url={DetailTooltips.protein.glycosylations.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.glycosylation.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse(
+														"glycosylation",
+														collapsed.glycosylation
+													)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.glycosylation ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{glycosylation && glycosylation.length && (
+												<Tabs
+													defaultActiveKey={
+														glycosylationWithImage &&
+														glycosylationWithImage.length > 0
+															? "with_glycanId"
+															: "without_glycanId"
+													}
+													transition={false}
+													activeKey={glycosylationTabSelected}
+													mountOnEnter={true}
+													unmountOnExit={true}
+													onSelect={(key) => setGlycosylationTabSelected(key)}>
+													<Tab
+														eventKey="with_glycanId"
+														// className='tab-content-padding'
+														title="With Reported Glycan"
+														//disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
+													>
+														<Container
+															style={{
+																paddingTop: "20px",
+																paddingBottom: "30px",
+															}}>
+															{glycosylationWithImage &&
+																glycosylationWithImage.length > 0 && (
+																	<ClientPaginatedTable
+																		data={glycosylationWithImage}
+																		columns={glycoSylationColumns}
+																		onClickTarget={"#glycosylation"}
+																		defaultSortField="position"
+																	/>
+																)}
+															{!glycosylationWithImage.length && (
+																<p>No data available.</p>
+															)}
+														</Container>
+													</Tab>
+													<Tab
+														eventKey="without_glycanId"
+														className="tab-content-padding"
+														title="Without Reported Glycan"
+														// disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
+													>
+														<Container>
+															{glycosylationWithoutImage &&
+																glycosylationWithoutImage.length > 0 && (
+																	<ClientPaginatedTable
+																		data={glycosylationWithoutImage}
+																		columns={glycoSylationColumns.filter(
+																			(column) =>
+																				column.dataField !== "glytoucan_ac"
+																		)}
+																		onClickTarget={"#glycosylation"}
+																		defaultSortField="position"
+																	/>
+																)}
+															{!glycosylationWithoutImage.length && (
+																<p>No data available.</p>
+															)}
+														</Container>
+													</Tab>
+												</Tabs>
+											)}
+
+											{!glycosylation && <p>No data available.</p>}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
 							{/*  function */}
 							<Accordion
 								id="function"
@@ -1080,114 +1187,6 @@ const ProteinDetail = (props) => {
 													<p className="no-data-msg">No data available.</p>
 												)}
 											</div>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
-							{/*  Glycosylation */}
-							<Accordion
-								id="glycosylation"
-								defaultActiveKey="0"
-								className="panel-width"
-								style={{ padding: "20px 0" }}>
-								<Card>
-									<Card.Header className="panelHeadBgr">
-										<span className="gg-green d-inline">
-											<HelpTooltip
-												title={DetailTooltips.protein.glycosylations.title}
-												text={DetailTooltips.protein.glycosylations.text}
-												urlText={DetailTooltips.protein.glycosylations.urlText}
-												url={DetailTooltips.protein.glycosylations.url}
-												helpIcon="gg-helpicon-detail"
-											/>
-										</span>
-										<h4 className="gg-green d-inline">
-											{stringConstants.sidebar.glycosylation.displayname}
-										</h4>
-										<div className="float-right">
-											<Accordion.Toggle
-												eventKey="0"
-												onClick={() =>
-													toggleCollapse(
-														"glycosylation",
-														collapsed.glycosylation
-													)
-												}
-												className="gg-green arrow-btn">
-												<span>
-													{collapsed.glycosylation ? closeIcon : expandIcon}
-												</span>
-											</Accordion.Toggle>
-										</div>
-									</Card.Header>
-									<Accordion.Collapse eventKey="0">
-										<Card.Body>
-											{glycosylation && glycosylation.length && (
-												<Tabs
-													defaultActiveKey={
-														glycosylationWithImage &&
-														glycosylationWithImage.length > 0
-															? "with_glycanId"
-															: "without_glycanId"
-													}
-													transition={false}
-													activeKey={glycosylationTabSelected}
-													mountOnEnter={true}
-													unmountOnExit={true}
-													onSelect={(key) => setGlycosylationTabSelected(key)}>
-													<Tab
-														eventKey="with_glycanId"
-														// className='tab-content-padding'
-														title="With Reported Glycan"
-														//disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
-													>
-														<Container
-															style={{
-																paddingTop: "20px",
-																paddingBottom: "30px",
-															}}>
-															{glycosylationWithImage &&
-																glycosylationWithImage.length > 0 && (
-																	<ClientPaginatedTable
-																		data={glycosylationWithImage}
-																		columns={glycoSylationColumns}
-																		onClickTarget={"#glycosylation"}
-																		defaultSortField="position"
-																	/>
-																)}
-															{!glycosylationWithImage.length && (
-																<p>No data available.</p>
-															)}
-														</Container>
-													</Tab>
-													<Tab
-														eventKey="without_glycanId"
-														className="tab-content-padding"
-														title="Without Reported Glycan"
-														// disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
-													>
-														<Container>
-															{glycosylationWithoutImage &&
-																glycosylationWithoutImage.length > 0 && (
-																	<ClientPaginatedTable
-																		data={glycosylationWithoutImage}
-																		columns={glycoSylationColumns.filter(
-																			(column) =>
-																				column.dataField !== "glytoucan_ac"
-																		)}
-																		onClickTarget={"#glycosylation"}
-																		defaultSortField="position"
-																	/>
-																)}
-															{!glycosylationWithoutImage.length && (
-																<p>No data available.</p>
-															)}
-														</Container>
-													</Tab>
-												</Tabs>
-											)}
-
-											{!glycosylation && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
