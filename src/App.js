@@ -5,15 +5,15 @@ import Routes from "./Routes";
 import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import ReactGA from "react-ga";
+// import ReactGA from "react-ga";
 import { GLYGEN_ENV } from "./envVariables.js";
 
-function initializeReactGA() {
-	if (GLYGEN_ENV === "prod" || GLYGEN_ENV === "beta") {
-		ReactGA.initialize("UA-123338976-1");
-		ReactGA.pageview(window.location.pathname + window.location.search);
-	}
-}
+// function initializeReactGA() {
+// 	if (GLYGEN_ENV === "prod" || GLYGEN_ENV === "beta") {
+// 		ReactGA.initialize("UA-123338976-1");
+// 		ReactGA.pageview(window.location.pathname + window.location.search);
+// 	}
+// }
 
 /**
  * for the pageproofer feedback.
@@ -21,11 +21,9 @@ function initializeReactGA() {
 function pageProofer(d, t) {
 	var url = "";
 
-	if (GLYGEN_ENV === "beta") 
-		url = "//app.pageproofer.com/overlay/js/3502/1801";
+	if (GLYGEN_ENV === "beta") url = "//app.pageproofer.com/overlay/js/3502/1801";
 
-	if (GLYGEN_ENV === "test")
-		url = "//app.pageproofer.com/overlay/js/3487/1801";
+	if (GLYGEN_ENV === "test") url = "//app.pageproofer.com/overlay/js/3487/1801";
 
 	if (GLYGEN_ENV === "beta" || GLYGEN_ENV === "test") {
 		var pp = d.createElement(t),
@@ -56,7 +54,7 @@ const theme = createMuiTheme({
 });
 
 function App() {
-	initializeReactGA();
+	// initializeReactGA();
 	pageProofer(document, "script");
 	const [userTrackingBannerState, setUserTrackingBannerState] = useState(
 		"none"
