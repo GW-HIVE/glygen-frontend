@@ -60,7 +60,10 @@ const items = [
 		label: stringConstants.sidebar.go_annotation.displayname,
 		id: "go_annotation",
 	},
-
+	{
+		label: stringConstants.sidebar.ptm_annotation.displayname,
+		id: "ptm_annotation",
+	},
 	{ label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
 	{ label: stringConstants.sidebar.pathway.displayname, id: "pathway" },
 	{ label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
@@ -293,6 +296,7 @@ const ProteinDetail = (props) => {
 		disease,
 		sequence,
 		go_annotation,
+		ptm_annotation,
 		site_annotation,
 		function: functions,
 	} = detailData;
@@ -654,6 +658,7 @@ const ProteinDetail = (props) => {
 			species: true,
 			function: true,
 			go_annotation: true,
+			ptm_annotation: true,
 			glycosylation: true,
 			sequence: true,
 			pathway: true,
@@ -1187,6 +1192,57 @@ const ProteinDetail = (props) => {
 													<p className="no-data-msg">No data available.</p>
 												)}
 											</div>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/*  PTM annotation */}
+							<Accordion
+								id="ptm_annotation"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.mutation.title}
+												text={DetailTooltips.protein.mutation.text}
+												urlText={DetailTooltips.protein.mutation.urlText}
+												url={DetailTooltips.protein.mutation.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.ptm_annotation.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse(
+														"ptm_annotation",
+														collapsed.ptm_annotation
+													)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.ptm_annotation ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{/* {mutation && mutation.length !== 0 && (
+												<ClientPaginatedTable
+													data={mutation}
+													defaultSortField={"annotation"}
+													columns={mutationColumns}
+													onClickTarget={"#mutation"}
+												/>
+											)}
+											{!mutation && <p>No data available.</p>} */}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>

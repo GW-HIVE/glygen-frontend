@@ -1003,7 +1003,7 @@
 		"publication": {
 			"id": "publication",
 			"displayname": "Publications",
-			"tooltip": " publication record for selected accession"
+			"tooltip": " Publication record for selected accession"
 		},
 		"function": {
 			"id": "function",
@@ -1014,6 +1014,11 @@
 			"id": "go_annotation",
 			"displayname": "Go Annotation",
 			"tooltip": " go_annotation Information for selected Protein accession"
+		},
+		"ptm_annotation": {
+			"id": "ptm_annotation",
+			"displayname": "PTM Annotation",
+			"tooltip": " ptm_annotation Information for selected Protein accession"
 		},
 		"glycosylation": {
 			"id": "glycosylation",
