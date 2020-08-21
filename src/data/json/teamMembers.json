@@ -76,6 +76,16 @@
 				"image": "/team/Nicolle-Packer.png",
 				"imageText": "Nicolle Packer image",
 				"url": "https://researchers.mq.edu.au/en/persons/nicki-packer"
+			},
+			{
+				"name": "Michael Cherry",
+				"position": "",
+				"department": "Cherry Lab",
+				"institution": "The Stanford University",
+				"location": "Palo Alto, CA",
+				"image": "/team/Michael-Cherry.jpg",
+				"imageText": "Michael-Cherry image",
+				"url": "https://cherrylab.stanford.edu/"
 			}
 		]
 	},
