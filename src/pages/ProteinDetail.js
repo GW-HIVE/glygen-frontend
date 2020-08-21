@@ -1206,10 +1206,10 @@ const ProteinDetail = (props) => {
 									<Card.Header className="panelHeadBgr">
 										<span className="gg-green d-inline">
 											<HelpTooltip
-												title={DetailTooltips.protein.mutation.title}
-												text={DetailTooltips.protein.mutation.text}
-												urlText={DetailTooltips.protein.mutation.urlText}
-												url={DetailTooltips.protein.mutation.url}
+												title={DetailTooltips.protein.ptmannotation.title}
+												text={DetailTooltips.protein.ptmannotation.text}
+												urlText={DetailTooltips.protein.ptmannotation.urlText}
+												url={DetailTooltips.protein.ptmannotation.url}
 												helpIcon="gg-helpicon-detail"
 											/>
 										</span>
