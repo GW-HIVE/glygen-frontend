@@ -110,12 +110,6 @@ const ProteinAdvancedSearch = (props) => {
 		props.setProAdvSearchData({ proPubId: inputProPubId, proAdvSearchValError: valArr });
 	}
 
-	const PubmedIdChange = (event) => {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[9] = event.target.value.length > advancedSearch.pmid.length;
-		props.setProAdvSearchData({ proPubId: event.target.value, proAdvSearchValError: valArr });
-	}
-
 	const proGlyEvidenceOnChange = (value) => {
 		props.setProAdvSearchData({ proGlyEvidence: value });
 	}

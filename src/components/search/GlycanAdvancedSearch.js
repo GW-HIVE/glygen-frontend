@@ -141,12 +141,6 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyPubId: inputGlyPubId, glyAdvSearchValError: valArr });
 	}
 
-	const PubmedIdChange = (event) => {
-		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[4] = event.target.value.length > advancedSearch.pmid.length;
-		props.setGlyAdvSearchData({ glyPubId: event.target.value, glyAdvSearchValError: valArr });
-	};
-
 	const clearGlycan = () => {
 		props.setGlyAdvSearchData({
 			glycanId: '',
