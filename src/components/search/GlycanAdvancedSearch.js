@@ -506,23 +506,14 @@ const GlycanAdvancedSearch = (props) => {
                             />
                             {commonGlycanData.pmid.name}
 						</Typography>
-						<OutlinedInput
+						<AutoTextInput
+							inputValue={props.inputValue.glyPubId}
+                        	setInputValue={glyPubIdChange}
                             placeholder={advancedSearch.pmid.placeholder}
-                            margin='dense'
-                            value={props.inputValue.glyPubId}
-                            onChange={PubmedIdChange}
-                            error={props.inputValue.glyPubId.length > advancedSearch.pmid.length}
+							typeahedID={advancedSearch.pmid.typeahedID}
+							length={advancedSearch.pmid.length}
+							errorText={advancedSearch.pmid.errorText}
 						/>
-						{props.inputValue.glyPubId.length > advancedSearch.pmid.length && (
-							<FormHelperText className={"error-text"} error>
-								{advancedSearch.pmid.errorText}
-							</FormHelperText>
-						)}
-						{/* <AutoTextInput
-                        inputValue={glyPubId} setInputValue={glycPubIdChange}
-                        placeholder="Enter the Pubmed ID"
-                        typeahedID = "glycan_pmid"
-                        /> */}
                         <ExampleExploreControl
 							setInputValue={glyPubIdChange}
 							inputValue={advancedSearch.pmid.examples}

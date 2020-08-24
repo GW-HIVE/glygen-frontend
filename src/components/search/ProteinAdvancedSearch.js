@@ -545,23 +545,14 @@ const ProteinAdvancedSearch = (props) => {
                             />
                             {commonProteinData.pmid.name}
 						</Typography>
-						<OutlinedInput
+						<AutoTextInput
+							inputValue={props.inputValue.proPubId}
+                            setInputValue={proPubIdChange}
                             placeholder={advancedSearch.pmid.placeholder}
-                            margin='dense'
-                            value={props.inputValue.proPubId}
-                            onChange={PubmedIdChange}
-                            error={props.inputValue.proPubId.length > advancedSearch.pmid.length}
+							typeahedID={advancedSearch.pmid.typeahedID}
+							length={advancedSearch.pmid.length}
+							errorText={advancedSearch.pmid.errorText}
 						/>
-						{props.inputValue.proPubId.length > advancedSearch.pmid.length && (
-							<FormHelperText className={"error-text"} error>
-								{advancedSearch.pmid.errorText}
-							</FormHelperText>
-						)}
-						{/* <AutoTextInput
-                        inputValue={glyPubId} setInputValue={glycPubIdChange}
-                        placeholder="Enter the Pubmed ID"
-                        typeahedID = "glycan_pmid"
-                        /> */}
                         <ExampleExploreControl
 							setInputValue={proPubIdChange}
 							inputValue={advancedSearch.pmid.examples}

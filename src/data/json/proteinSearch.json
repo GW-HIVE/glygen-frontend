@@ -247,6 +247,7 @@
         "pmid": {
             "length": 100,
             "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "protein_pmid",
             "placeholder": "Enter the Pubmed ID",
             "examples": [
                 {
