@@ -977,8 +977,8 @@
     },
     "associated_glycan": {
       "id": "associated_glycan",
-      "displayname": "Associated Glycan",
-      "tooltip": " Associated_glycan Information for selected accession"
+      "displayname": "Associated Protein",
+      "tooltip": " Associated_Protein Information for selected accession"
     },
     "bio_Enzymes": {
       "id": "Bio_Enzymes",
