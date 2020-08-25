@@ -55,6 +55,11 @@ const items = [
 		label: stringConstants.sidebar.glycosylation.displayname,
 		id: "glycosylation",
 	},
+	{
+		label: stringConstants.sidebar.names_synonyms.displayname,
+		id: "names_synonyms",
+	},
+
 	{ label: stringConstants.sidebar.function.displayname, id: "function" },
 	{
 		label: stringConstants.sidebar.go_annotation.displayname,
@@ -66,6 +71,10 @@ const items = [
 	},
 	{ label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
 	{ label: stringConstants.sidebar.pathway.displayname, id: "pathway" },
+	{
+		label: stringConstants.sidebar.synthesized_glycans.displayname,
+		id: "synthesized_glycans",
+	},
 	{ label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
 	{ label: stringConstants.sidebar.homologs.displayname, id: "homologs" },
 	{ label: stringConstants.sidebar.disease.displayname, id: "disease" },
@@ -655,13 +664,14 @@ const ProteinDetail = (props) => {
 		}),
 		{
 			general: true,
-			species: true,
+			names_synonyms: true,
 			function: true,
 			go_annotation: true,
 			ptm_annotation: true,
 			glycosylation: true,
 			sequence: true,
 			pathway: true,
+			synthesized_glycans: true,
 			isoforms: true,
 			homologs: true,
 			disease: true,
@@ -876,7 +886,7 @@ const ProteinDetail = (props) => {
 														<strong>
 															{proteinStrings.recommendedname.name}:{" "}
 														</strong>{" "}
-														{recommendedname.full}{" "}
+														{/* {recommendedname.full}{" "} */}
 													</div>
 													<div>
 														<strong>
@@ -1047,6 +1057,47 @@ const ProteinDetail = (props) => {
 
 											{!glycosylation && <p>No data available.</p>}
 										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/*  names_synonyms */}
+							<Accordion
+								id="names_synonyms"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.names_synonyms.title}
+												text={DetailTooltips.protein.names_synonyms.text}
+												urlText={DetailTooltips.protein.names_synonyms.urlText}
+												url={DetailTooltips.protein.names_synonyms.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.names_synonyms.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse(
+														"names_synonyms",
+														collapsed.names_synonyms
+													)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.names_synonyms ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body></Card.Body>
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
@@ -1377,6 +1428,61 @@ const ProteinDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
+							{/*  synthesized glycans */}
+							<Accordion
+								id="synthesized_glycans"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.synthesized_glycans.title}
+												text={DetailTooltips.protein.synthesized_glycans.text}
+												urlText={
+													DetailTooltips.protein.synthesized_glycans.urlText
+												}
+												url={DetailTooltips.protein.synthesized_glycans.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.synthesized_glycans.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse(
+														"synthesized_glycans",
+														collapsed.synthesized_glycans
+													)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.synthesized_glycans
+														? closeIcon
+														: expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{/* {mutation && mutation.length !== 0 && (
+												<ClientPaginatedTable
+													data={mutation}
+													defaultSortField={"annotation"}
+													columns={mutationColumns}
+													onClickTarget={"#mutation"}
+												/>
+											)}
+											{!mutation && <p>No data available.</p>} */}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
 							{/*  isoforms */}
 							<Accordion
 								id="isoforms"
@@ -1451,7 +1557,7 @@ const ProteinDetail = (props) => {
 																	<div>
 																		<strong>
 																			{" "}
-																			{proteinStrings.isoform_length.name}:
+																			{proteinStrings.isoform_length.name}:{" "}
 																		</strong>
 																		{sequence.length}
 																	</div>

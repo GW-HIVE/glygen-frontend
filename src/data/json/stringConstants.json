@@ -970,6 +970,11 @@
 			"displayname": "General",
 			"tooltip": " General Information for selected accession"
 		},
+		"names_synonyms": {
+			"id": "names_synonyms",
+			"displayname": "Names",
+			"tooltip": "Names Information for selected accession"
+		},
 		"species": {
 			"id": "species",
 			"displayname": "Species",
@@ -1034,6 +1039,11 @@
 			"id": "pathway",
 			"displayname": "Pathway",
 			"tooltip": " pathway Information for selected Protein accession"
+		},
+		"synthesized_glycans": {
+			"id": "synthesized_glycans",
+			"displayname": "Synthesized Glycans",
+			"tooltip": " Synthesized Glycans Information for selected Protein accession"
 		},
 		"isoforms": {
 			"id": "isoforms",
