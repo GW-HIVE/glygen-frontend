@@ -61,8 +61,8 @@ export const PROTEIN_COLUMNS = [
     )
   },
   {
-    dataField: proteinStrings.gene_names_uniprotkb.shortName,
-    text: proteinStrings.gene_names_uniprotkb.name,
+    dataField: proteinStrings.gene_name.shortName,
+    text: proteinStrings.gene_name.name,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };

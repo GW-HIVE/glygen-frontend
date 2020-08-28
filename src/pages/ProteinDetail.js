@@ -312,9 +312,9 @@ const ProteinDetail = (props) => {
 	} = detailData;
 
 	const uniprotNames = (protein_names || [])
-		.filter((x) => (x.resource === 'uniprotkb'))
+		.filter((x) => (x.type === 'recommended'))
 		.map(x => x.name)
-		.join('; ')
+		
 
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [

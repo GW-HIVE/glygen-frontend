@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { getGlycanImageUrl } from "../data/glycan";
 import { useParams } from "react-router-dom";
-import { getMotifList } from "../data/motif";
+import { getMotifDetail } from "../data/motif";
 import PaginatedTable from "../components/PaginatedTable";
 import { MOTIF_COLUMNS } from "../data/motif";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -80,8 +80,8 @@ const MotifDetail = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    const getMotifListdata = getMotifList(id);
-    getMotifList(id).then(({ data }) => {
+    const getMotifDetaildata = getMotifDetail(id);
+    getMotifDetaildata.then(({ data }) => {
       if (data.code) {
         let message = "Motif Detail api call";
         logActivity("user", id, "No results. " + message);
@@ -96,7 +96,7 @@ const MotifDetail = props => {
         setPageLoading(false);
       }
     });
-    getMotifListdata.catch(({ response }) => {
+    getMotifDetaildata.catch(({ response }) => {
       let message = "motif api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
@@ -109,7 +109,7 @@ const MotifDetail = props => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getMotifList(
+    getMotifDetail(
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
@@ -124,12 +124,12 @@ const MotifDetail = props => {
       setPagination(data.pagination);
       setMass(data.mass);
       setMotif(data.motif);
-      setClassification(
-        data.classification.filter(
-          classif =>
-            !(classif.type.name === "Other" && classif.subtype.name === "Other")
-        )
-      );
+      // setClassification(
+      //   data.classification.filter(
+      //     classif =>
+      //       !(classif.type.name === "Other" && classif.subtype.name === "Other")
+      //   )
+      // );
 
       //   setSizePerPage()
       setTotalSize(data.pagination.total_length);
@@ -182,9 +182,7 @@ const MotifDetail = props => {
                       <span>
                         Motif Details for
                         <strong>
-                          {glytoucan && glytoucan.glytoucan_ac && (
-                            <> {glytoucan.glytoucan_ac}</>
-                          )}
+                          {motif && motif.accession && <> {motif.accession}</>}
                         </strong>
                       </span>
                     </h2>
@@ -268,25 +266,23 @@ const MotifDetail = props => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       <p>
-                        {glytoucan && glytoucan.glytoucan_ac && (
+                        {motif && motif.accession && (
                           <>
                             <p>
                               <img
                                 className="img-cartoon"
-                                src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
+                                src={getGlycanImageUrl(motif.accession)}
                                 alt="Cartoon"
                               />
                             </p>
                             <div>
-                              <strong>
-                                {proteinStrings.glytoucan_ac.shortName}:{" "}
-                              </strong>
+                              <strong>Motif ID: </strong>
                               <a
-                                href={glytoucan.glytoucan_url}
+                                href={motif.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
-                                {glytoucan.glytoucan_ac}
+                                {motif.accession}
                               </a>
                             </div>
                             <div>
@@ -440,17 +436,22 @@ const MotifDetail = props => {
                                       {pub.date})
                                     </div>
                                     <div>
-                                      <FiBookOpen />
-                                      <span style={{ paddingLeft: "15px" }}>
-                                        {glycanStrings.pmid.shortName}:
-                                      </span>{" "}
-                                      <a
-                                        href={pub.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                      >
-                                        {pub.pmid}
-                                      </a>
+                                      {pub.reference.map(ref => (
+                                        <>
+                                          <FiBookOpen />
+                                          <span style={{ paddingLeft: "15px" }}>
+                                            {glycanStrings.pmid.shortName}:
+                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
+                                          </span>{" "}
+                                          <a
+                                            href={ref.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            <>{ref.id}</>
+                                          </a>
+                                        </>
+                                      ))}
                                     </div>
                                     <EvidenceList
                                       evidences={groupEvidences(pub.evidence)}
