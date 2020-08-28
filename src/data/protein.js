@@ -70,8 +70,8 @@ export const PROTEIN_COLUMNS = [
   },
 
   {
-    dataField: proteinStrings.protein_names_uniprotkb.shortName,
-    text: proteinStrings.protein_names_uniprotkb.name,
+    dataField: proteinStrings.protein_names.shortName,
+    text: proteinStrings.protein_names.name,
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
