@@ -400,6 +400,28 @@
 				},
 				"id": "gene_name"
 			},
+			"gene_names_uniprotkb": {
+				"name": "Gene Name",
+				"shortName": "gene_names_uniprotkb",
+				"tooltip": {
+					"title": "Gene Name",
+					"text": "Name/Symbol of the gene officially assigned by the Gene Nomenclature Committees (HGNC, ICSGNM, RGNC etc). Enter the Name of the Gene encoding your protein.",
+					"urlText": "Read more...",
+					"url": "https://www.ncbi.nlm.nih.gov/gene"
+				},
+				"id": "gene_names_uniprotkb"
+			},
+			"protein_names_uniprotkb": {
+				"name": "uniprot Name",
+				"shortName": "protein_names_uniprotkb",
+				"tooltip": {
+					"title": "uniprot Name",
+					"text": "Name/Symbol of the gene officially assigned by the Gene Nomenclature Committees (HGNC, ICSGNM, RGNC etc). Enter the Name of the Gene encoding your protein.",
+					"urlText": "Read more...",
+					"url": "https://www.ncbi.nlm.nih.gov/gene"
+				},
+				"id": "protein_names_uniprotkb"
+			},
 			"gene_url": {
 				"name": "URL",
 				"shortName": "url",

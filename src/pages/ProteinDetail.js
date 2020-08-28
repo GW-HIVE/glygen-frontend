@@ -307,8 +307,14 @@ const ProteinDetail = (props) => {
 		go_annotation,
 		ptm_annotation,
 		site_annotation,
+		protein_names,
 		function: functions,
 	} = detailData;
+
+	const uniprotNames = (protein_names || [])
+		.filter((x) => (x.resource === 'uniprotkb'))
+		.map(x => x.name)
+		.join('; ')
 
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
@@ -886,7 +892,8 @@ const ProteinDetail = (props) => {
 														<strong>
 															{proteinStrings.recommendedname.name}:{" "}
 														</strong>{" "}
-														{/* {recommendedname.full}{" "} */}
+														{/* {proteinStrings.protein_names_uniprotkb.shortName} */}
+														{uniprotNames}
 													</div>
 													<div>
 														<strong>
@@ -1774,29 +1781,31 @@ const ProteinDetail = (props) => {
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
 											<p>
-												{disease && (
+												{disease && disease.length && (
 													<Grid container classorthologs_ac="table-body">
-														{disease.map((diseaseS, diseaseSdoid) => (
-															<Grid item xs={12} key={diseaseSdoid}>
+														{disease.map(thisDisease => (
+															<Grid item xs={12} >
 																<div>
-																	<strong> {diseaseS.name}</strong>
+																	<strong> {thisDisease.recommended_name.name}</strong>
 
 																	<p>
 																		{" "}
-																		(ICD10: {diseaseS.icd10} DOID:{" "}
+																		{/* ICD10: {disease.recommended_name.id} DOID:{" "} */}
+																		(
 																		<a
-																			href={diseaseS.url}
+																			href={thisDisease.recommended_name.url}
 																			target="_blank"
 																			rel="noopener noreferrer">
-																			{diseaseS.doid})
+																			{thisDisease.recommended_name.resource} {thisDisease.recommended_name.id}
 																		</a>
+																		)
 																	</p>
 																</div>
 
 																<Grid xs={9}>
 																	<EvidenceList
 																		evidences={groupEvidences(
-																			diseaseS.evidence
+																			thisDisease.evidence
 																		)}
 																	/>
 																</Grid>
