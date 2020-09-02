@@ -423,6 +423,7 @@
 				"id": "protein_names"
 			},
 
+
 			"gene_url": {
 				"name": "URL",
 				"shortName": "url",
@@ -522,6 +523,8 @@
 				"tooltip": {},
 				"id": "trend"
 			},
+
+   
 
 			"tissue": {
 				"name": "Tissue",

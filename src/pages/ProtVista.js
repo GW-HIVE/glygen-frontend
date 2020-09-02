@@ -178,7 +178,12 @@ const ProtVista = () => {
         type: "N-Glycan-Sequon",
         title: site_annotation.start_pos + "-" + site_annotation.end_pos,
         tooltipContent:
-          "<span className=marker>" + site_annotation.annotation + "</span>"
+          "<span className=marker>" +
+          "N-Sequon at " +
+          site_annotation.start_pos +
+          "-" +
+          site_annotation.end_pos +
+          "</span>"
       });
     } //);
 
@@ -284,13 +289,12 @@ const ProtVista = () => {
 
         closeButton.addEventListener("click", onCloseButton);
         currentTooltip.appendChild(closeButton);
+      } else if (eventtype === "mouseout") {
+        if (currentTooltip) {
+          document.body.removeChild(currentTooltip);
+          currentTooltip = null;
+        }
       }
-      // else if (eventtype === "mouseout") {
-      //   if (currentTooltip) {
-      //     document.body.removeChild(currentTooltip);
-      //     currentTooltip = null;
-      //   }
-      // }
     });
   };
 
