@@ -1061,92 +1061,97 @@ const GlycanDetail = (props) => {
 							</Accordion>
 							{/* publication */}
 							<Accordion
-								id="publication"
-								defaultActiveKey="0"
-								className="panel-width"
-								style={{ padding: "20px 0" }}>
-								<Card>
-									<Card.Header className="panelHeadBgr">
-										<span className="gg-green d-inline">
-											<HelpTooltip
-												title={DetailTooltips.glycan.publications.title}
-												text={DetailTooltips.glycan.publications.text}
-												urlText={DetailTooltips.glycan.publications.urlText}
-												url={DetailTooltips.glycan.publications.url}
-												helpIcon="gg-helpicon-detail"
-											/>
-										</span>
-										<h4 className="gg-green d-inline">
-											{stringConstants.sidebar.publication.displayname}
-										</h4>
-										<div className="float-right">
-											{/* <span className='gg-align-middle card-icon-space'>
-										<PublicationsMenu />
-									</span> */}
-											<Accordion.Toggle
-												// as={Card.Header}
-												eventKey="0"
-												onClick={() =>
-													toggleCollapse("publication", collapsed.publication)
-												}
-												className="gg-green arrow-btn">
-												<span>
-													{collapsed.publication ? closeIcon : expandIcon}
-												</span>
-											</Accordion.Toggle>
-										</div>
-									</Card.Header>
-									<Accordion.Collapse eventKey="0" out={!collapsed.publication}>
-										<Card.Body className="card-padding-zero">
-											<Table hover fluid>
-												{publication && (
-													<tbody className="table-body">
-														{publication.map((pub, pubIndex) => (
-															<tr className="table-row">
-																<td key={pubIndex}>
-																	<p>
-																		<div>
-																			<h6 style={{ marginBottom: "3px" }}>
-																				<strong>{pub.title}</strong>
-																			</h6>
-																		</div>
-																		<div>{pub.authors}</div>
-																		<div>
-																			{pub.journal} <span>&nbsp;</span>(
-																			{pub.date})
-																		</div>
-																		<div>
-																			<FiBookOpen />
-																			<span style={{ paddingLeft: "15px" }}>
-																				{glycanStrings.pmid.shortName}:
-																			</span>{" "}
-																			<a
-																				href={pub.url}
-																				target="_blank"
-																				rel="noopener noreferrer">
-																				{pub.pmid}
-																			</a>
-																		</div>
-																		<EvidenceList
-																			evidences={groupEvidences(pub.evidence)}
-																		/>
-																	</p>
-																</td>
-															</tr>
-														))}
-													</tbody>
-												)}
-												{!publication && (
-													<p className="no-data-msg-publication">
-														No data available.
-													</p>
-												)}
-											</Table>
-										</Card.Body>
-									</Accordion.Collapse>
-								</Card>
-							</Accordion>
-						</React.Fragment>
+                id="publication"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.motif.publications.title}
+                        text={DetailTooltips.motif.publications.text}
+                        urlText={DetailTooltips.motif.publications.urlText}
+                        url={DetailTooltips.motif.publications.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.publication.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        // as={Card.Header}
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("publication", collapsed.publication)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.publication ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+                    <Card.Body className="card-padding-zero">
+                      <Table hover fluid>
+                        {publication && (
+                          <tbody className="table-body">
+                            {publication.map((pub, pubIndex) => (
+                              <tr className="table-row">
+                                <td key={pubIndex}>
+                                  <p>
+                                    <div>
+                                      <h6 style={{ marginBottom: "3px" }}>
+                                        <strong>{pub.title}</strong>
+                                      </h6>
+                                    </div>
+                                    <div>{pub.authors}</div>
+                                    <div>
+                                      {pub.journal} <span>&nbsp;</span>(
+                                      {pub.date})
+                                    </div>
+                                    <div>
+                                      {pub.reference.map(ref => (
+                                        <>
+                                          <FiBookOpen />
+                                          <span style={{ paddingLeft: "15px" }}>
+                                            {glycanStrings.pmid.shortName}:
+                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
+                                          </span>{" "}
+                                          <a
+                                            href={ref.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            <>{ref.id}</>
+                                          </a>
+                                        </>
+                                      ))}
+                                    </div>
+                                    <EvidenceList
+                                      evidences={groupEvidences(pub.evidence)}
+                                    />
+                                  </p>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        )}
+                        {!publication && (
+                          <p className="no-data-msg-publication">
+                            No data available.
+                          </p>
+                        )}
+                      </Table>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+			  </React.Fragment>
 					</div>
 				</Col>
 			</Row>
