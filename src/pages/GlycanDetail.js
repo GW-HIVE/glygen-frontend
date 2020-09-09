@@ -354,7 +354,53 @@ const GlycanDetail = (props) => {
 			},
 		},
 	];
+	const motifColumns = [
+		{
+			dataField: "id",
+			text: glycanStrings.glycan_image.name,
+			sort: false,
+			selected: true,
+			formatter: (value, row) => (
+				<div className="img-wrapper">
+					<img
+						className="img-cartoon-list-page img-cartoon"
+						src={getGlycanImageUrl(row.id)}
+						alt="Glycan img"
+					/>
+				</div>
+			),
+			headerStyle: (colum, colIndex) => {
+				return {
+					width: "35%",
+					textAlign: "left",
+					backgroundColor: "#4B85B6",
+					color: "white",
+					whiteSpace: "nowrap",
+				};
+			},
+		},
+		{
+			dataField: "id",
+			text: "Motif ID",
+			sort: true,
 
+			headerStyle: () => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+			},
+			
+		},
+		{
+			dataField: "name",
+			text: "Motif Name",
+			defaultSortField: "name",
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+			},
+
+			
+		}
+	];
 	// ==================================== //
 	/**
 	 * Adding toggle collapse arrow icon to card header individualy.
@@ -677,8 +723,10 @@ const GlycanDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-							{/* motif */}
-							<Accordion
+							
+							
+							{/* Motif */}
+						<Accordion
 								id="motif"
 								defaultActiveKey="0"
 								className="panel-width"
@@ -708,36 +756,13 @@ const GlycanDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											{motifs && (
-												<>
-													<Row>
-														{motifs.map((motif) => (
-															<Col sm={"auto"}>
-																<p>
-																	<div key={motif.id} className="img-wrapper">
-																		<img
-																			className="img-cartoon"
-																			src={getGlycanImageUrl(motif.id)}
-																			alt="Glycan img"
-																		/>
-																	</div>
-																	<span>
-																		<LineTooltip text="View motif details">
-																			<Link
-																				to={
-																					routeConstants.motifDetail + motif.id
-																				}>
-																				{motif.id}
-																				<br />
-																				{motif.name}
-																			</Link>
-																		</LineTooltip>
-																	</span>
-																</p>
-															</Col>
-														))}
-													</Row>
-												</>
+											{motifs && motifs.length !== 0 && (
+												<ClientPaginatedTable
+													data={motifs}
+													columns={motifColumns}
+													defaultSortField={"name"}
+													onClickTarget={"#motif"}
+												/>
 											)}
 											{!motifs && <p>No data available.</p>}
 										</Card.Body>
