@@ -898,17 +898,18 @@ const ProteinDetail = (props) => {
 																	<strong>
 																		{proteinStrings.gene_location.name}:
 																	</strong>{" "}
-																	{/* {proteinStrings.chromosome.name}: {""}
-																	{genes.locus.chromosome} {""} (
-																	{addCommas(genes.locus.start_pos)} -{" "}
-																	{addCommas(genes.locus.end_pos)}) */}
-																</div>
 
-																{/* <EvidenceList
-																	evidences={groupEvidences(
-																		genes.locus.evidence
-																	)}
-																/> */}
+															{proteinStrings.chromosome.name}: {""}
+															{genes.locus ? genes.locus.chromosome:"NA"} {""}(
+																	{genes.locus ? addCommas(genes.locus.start_pos):"NA"} -{" "}
+																	{genes.locus ? addCommas(genes.locus.end_pos):"NA"})
+																	</div>
+
+																	<EvidenceList
+																		evidences={groupEvidences(
+																			genes.locus ?genes.locus.evidence:[]
+																		)}
+																	/>
 															</span>
 														))}
 													</>
@@ -1684,17 +1685,17 @@ const ProteinDetail = (props) => {
 																)}
 
 																<div>
-																	{/* {proteinStrings.chromosome.name}: {""}
-																	{isoformsS.locus.chromosome} {""}(
-																	{isoformsS.locus.start_pos} -{" "}
-																	{isoformsS.locus.end_pos}) */}
+																	{proteinStrings.chromosome.name}: {""}
+																	{isoformsS.locus ? isoformsS.locus.chromosome:"NA"} {""}(
+																	{isoformsS.locus ? isoformsS.locus.start_pos:"NA"} -{" "}
+																	{isoformsS.locus ? isoformsS.locus.end_pos:"NA"})
 																</div>
 																<Grid className="badge-grid" xs={12}>
-																	{/* <EvidenceList
+																	<EvidenceList
 																		evidences={groupEvidences(
-																			isoformsS.locus.evidence
+																			isoformsS.locus ?isoformsS.locus.evidence:[]
 																		)}
-																	/> */}
+																	/>
 																</Grid>
 																{showIsoformSequences && (
 																	<Grid style={{ paddingBottom: "40px" }}>

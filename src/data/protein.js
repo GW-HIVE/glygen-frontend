@@ -8,6 +8,7 @@ import routeConstants from "./json/routeConstants";
 import stringConstants from "./json/stringConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { logActivity } from "../data/logging";
+import { positions } from "@material-ui/system";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -27,6 +28,16 @@ export const getProteinList = (
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/protein/list?query=${queryParamString}`;
+  return getJson(url);
+};
+
+export const getProteinsiteDetail = (protienId, position) => {
+  const queryParamString = JSON.stringify({
+    uniprot_canonical_ac: protienId,
+    start_pos: parseInt(position),
+    end_pos: parseInt(position)
+  });
+  const url = `/proteinsite/detail?query=${queryParamString}`;
   return getJson(url);
 };
 
