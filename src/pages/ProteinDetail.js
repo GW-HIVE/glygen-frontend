@@ -204,6 +204,13 @@ const ProteinDetail = (props) => {
 	const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
 		[]
 	);
+	const [mutataionTabSelected, setmutataionTabSelected] = useState(
+		"with_disease"
+	);
+	const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
+	const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState(
+		[]
+	);
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -269,7 +276,22 @@ const ProteinDetail = (props) => {
 				withImage.length > 0 ? "with_glycanId" : "without_glycanId"
 			);
 		}
+		if (detailData.mutation) {
+			const WithDisease = detailData.mutation.filter(
+				(item) => item.keywords.includes('disease')
+			);
+			const Withoutdisease = detailData.mutation.filter(
+				(item) => !item.keywords.includes('disease')
+			);
+			setMutataionWithdisease(WithDisease);
+			setGlycosylationWithoutImage(Withoutdisease);
+
+			setGlycosylationTabSelected(
+				WithDisease.length > 0 ? "with_disease" : "without_disease"
+			);
+		}
 	}, [detailData]);
+	
 
 	useEffect(() => {
 		// Need to call it second time due to glycosylationWithImage and glycosylationWithoutImage table loading time.
@@ -1641,7 +1663,7 @@ const ProteinDetail = (props) => {
 												<>
 													<AlignmentDropdown
 														types={[
-															{
+															/*{
 																display: " Homolog-oma",
 																type: "Homolog-oma",
 																data: "protein_detail",
@@ -1650,7 +1672,7 @@ const ProteinDetail = (props) => {
 																display: " Homolog-mgi",
 																type: "homolog-mgi",
 																data: "protein_detail",
-															},
+															},*/
 														]}
 														dataType="protein_detail"
 														dataId={id}
@@ -1860,14 +1882,73 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											{mutation && mutation.length !== 0 && (
-												<ClientPaginatedTable
-													data={mutation}
-													defaultSortField={"annotation"}
-													columns={mutationColumns}
-													onClickTarget={"#mutation"}
-												/>
+								{mutation && mutation.length !== 0 && (
+												<Tabs
+													defaultActiveKey={
+														mutataionWithdisease &&
+														mutataionWithdisease.length > 0
+															? "with_disease"
+															: "without_disease"
+													}
+													transition={false}
+													activeKey={mutataionTabSelected}
+													mountOnEnter={true}
+													unmountOnExit={true}
+													onSelect={(key) => setmutataionTabSelected(key)}>
+													<Tab
+														eventKey="with_disease"
+														// className='tab-content-padding'
+														title="Disease associated
+														Mutations"
+														//disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
+													>
+														<Container
+															style={{
+																paddingTop: "20px",
+																paddingBottom: "30px",
+															}}>
+															{mutataionWithdisease &&
+																mutataionWithdisease.length > 0 && (
+																	<ClientPaginatedTable
+																		data={mutataionWithdisease}
+																		columns={mutationColumns}
+																		onClickTarget={"#mutation"}
+																		defaultSortField="position"
+																	/>
+																)}
+															{!mutataionWithdisease.length && (
+																<p>No data available.</p>
+															)}
+														</Container>
+													</Tab>
+													<Tab
+														eventKey="without_disease"
+														className="tab-content-padding"
+														title="Non-disease associated
+														Mutations "
+														// disabled={(!mutataionWithoutdisease || (mutataionWithoutdisease.length === 0))}
+													>
+														<Container>
+															{mutataionWithoutdisease &&
+																mutataionWithoutdisease.length > 0 && (
+																	<ClientPaginatedTable
+																		data={mutataionWithoutdisease}
+																		columns={mutationColumns.filter(
+																			(column) =>
+																				column.dataField !== "disease"
+																		)}
+																		onClickTarget={"#mutation"}
+																		defaultSortField="position"
+																	/>
+																)}
+															{!mutataionWithoutdisease.length && (
+																<p>No data available.</p>
+															)}
+														</Container>
+													</Tab>
+												</Tabs>
 											)}
+
 											{!mutation && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
