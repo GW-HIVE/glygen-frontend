@@ -49,6 +49,10 @@ const items = [
 		id: "glycoprotein",
 	},
 	{
+		label: stringConstants.sidebar.glycan_binding_protein.displayname,
+		id: "glycanBindingProtein",
+	},
+	{
 		label: stringConstants.sidebar.bio_Enzymes.displayname,
 		id: "biosyntheticenzymes",
 	},
@@ -229,6 +233,7 @@ const GlycanDetail = (props) => {
 		inchi,
 		classification,
 		glycoprotein,
+		interactions,
 		glycoct,
 		publication,
 		wurcs,
@@ -301,6 +306,49 @@ const GlycanDetail = (props) => {
 			),
 		},
 	];
+	const glycanBindingProteinColumns = [
+		{
+			dataField: "evidence",
+			text: proteinStrings.evidence.name,
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+			},
+			formatter: (cell, row) => {
+				return (
+					<EvidenceList
+						key={row.interactor_id}
+						evidences={groupEvidences(cell)}
+					/>
+				);
+			},
+		},
+		{
+			dataField: "interactor_name",
+			text: proteinStrings.protein_name.name,
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white" };
+			},
+		},
+		{
+			dataField: "interactor_id",
+			text: proteinStrings.uniprot_canonical_ac.name,
+			defaultSortField: "interactor_id",
+			sort: true,
+
+			headerStyle: (column, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+			},
+			formatter: (value, row) => (
+				<LineTooltip text="View protein details">
+					<Link to={routeConstants.proteinDetail + row.interactor_id}>
+						{row.interactor_id}
+					</Link>
+				</LineTooltip>
+			),
+		}
+	];
 	const bioEnzymeColumns = [
 		{
 			dataField: "uniprot_canonical_ac",
@@ -367,6 +415,7 @@ const GlycanDetail = (props) => {
 			species: true,
 			motif: true,
 			glycoprotein: true,
+			glycanBindingProtein: true,
 			bioEnzyme: true,
 			digitalSeq: true,
 			crossref: true,
@@ -788,6 +837,54 @@ const GlycanDetail = (props) => {
 												/>
 											)}
 											{!glycoprotein && <p>No data available.</p>}
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/* Glycan Binding Protein */}
+							<Accordion
+								id="glycanBindingProtein"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.glycan.glycan_binding_protein.title}
+												text={DetailTooltips.glycan.glycan_binding_protein.text}
+												urlText={DetailTooltips.glycan.glycan_binding_protein.urlText}
+												url={DetailTooltips.glycan.glycan_binding_protein.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.glycan_binding_protein.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("glycanBindingProtein", collapsed.glycanBindingProtein)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.glycanBindingProtein ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{interactions && interactions.length !== 0 && (
+												<ClientPaginatedTable
+													data={interactions}
+													columns={glycanBindingProteinColumns}
+													defaultSortField={"interactor_id"}
+													onClickTarget={"#glycanBindingProtein"}
+												/>
+											)}
+											{!interactions && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>

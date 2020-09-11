@@ -24,6 +24,12 @@
 			"urlText": "Read more...",
 			"url": "https://wiki.glygen.org/index.php/Main_Page"
 		},
+		"glycan_binding_protein": {
+			"title": "Binding Protein",
+			"text": "Add some unique text here.",
+			"urlText": "Read more...",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
 		"biosyntheticEnzyme": {
 			"title": "Biosynthetic Enzyme",
 			"text": "Add some unique text here.",
@@ -104,6 +110,12 @@
 		},
 		"function": {
 			"title": "Function",
+			"text": "Add some unique text here.",
+			"urlText": "Read more...",
+			"url": "https://wiki.glygen.org/index.php/Main_Page"
+		},
+		"glycan_ligands": {
+			"title": "Glycan Ligands",
 			"text": "Add some unique text here.",
 			"urlText": "Read more...",
 			"url": "https://wiki.glygen.org/index.php/Main_Page"

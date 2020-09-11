@@ -62,6 +62,10 @@ const items = [
 
 	{ label: stringConstants.sidebar.function.displayname, id: "function" },
 	{
+		label: stringConstants.sidebar.glycan_ligands.displayname,
+		id: "glycanLigands",
+	},
+	{
 		label: stringConstants.sidebar.go_annotation.displayname,
 		id: "go_annotation",
 	},
@@ -298,6 +302,7 @@ const ProteinDetail = (props) => {
 		isoforms,
 		orthologs,
 		glycosylation,
+		interactions,
 		expression_tissue,
 		expression_disease,
 		mutation,
@@ -413,6 +418,65 @@ const ProteinDetail = (props) => {
 					</Link>
 				</LineTooltip>
 			),
+		},
+	];
+	const glycanLigandsColumns = [
+		{
+			dataField: "evidence",
+			text: proteinStrings.evidence.name,
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+			},
+			formatter: (cell, row) => {
+				return (
+					<EvidenceList
+						key={row.interactor_id}
+						evidences={groupEvidences(cell)}
+					/>
+				);
+			},
+		},
+		{
+			dataField: "interactor_id",
+			text: proteinStrings.glytoucan_ac.shortName,
+			defaultSortField: "interactor_id",
+			sort: true,
+
+			headerStyle: (column, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+			},
+			formatter: (value, row) => (
+				<LineTooltip text="View glycan details">
+					<Link to={routeConstants.glycanDetail + row.interactor_id}>
+						{row.interactor_id}
+					</Link>
+				</LineTooltip>
+			),
+		},
+		{
+			dataField: "interactor_id",
+			text: glycanStrings.glycan_image.name,
+			sort: false,
+			selected: true,
+			formatter: (value, row) => (
+				<div className="img-wrapper">
+					<img
+						className="img-cartoon-list-page img-cartoon"
+						src={getGlycanImageUrl(row.interactor_id)}
+						alt="Glycan img"
+					/>
+				</div>
+			),
+			headerStyle: (colum, colIndex) => {
+				return {
+					width: "35%",
+					textAlign: "left",
+					backgroundColor: "#4B85B6",
+					color: "white",
+					whiteSpace: "nowrap",
+				};
+			},
 		},
 	];
 	const mutationColumns = [
@@ -672,6 +736,7 @@ const ProteinDetail = (props) => {
 			general: true,
 			names_synonyms: true,
 			function: true,
+			glycanLigands: true,
 			go_annotation: true,
 			ptm_annotation: true,
 			glycosylation: true,
@@ -1151,6 +1216,54 @@ const ProteinDetail = (props) => {
 													</p>
 												)}
 											</Table>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+							{/* Glycan Ligands */}
+							<Accordion
+								id="glycanLigands"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.protein.glycan_ligands.title}
+												text={DetailTooltips.protein.glycan_ligands.text}
+												urlText={DetailTooltips.protein.glycan_ligands.urlText}
+												url={DetailTooltips.protein.glycan_ligands.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.glycan_ligands.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("glycanLigands", collapsed.glycanLigands)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.glycanLigands ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0">
+										<Card.Body>
+											{interactions && interactions.length !== 0 && (
+												<ClientPaginatedTable
+													data={interactions}
+													columns={glycanLigandsColumns}
+													defaultSortField={"interactor_id"}
+													onClickTarget={"#glycanLigands"}
+												/>
+											)}
+											{!interactions && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>

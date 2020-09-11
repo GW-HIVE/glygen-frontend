@@ -479,7 +479,7 @@
 				"name": "Glycan",
 				"shortName": "Glycan",
 				"tooltip": {},
-				"id": "glycans"
+				"id": "glycan"
 			},
 			"type": {
 				"name": "Type",
@@ -775,7 +775,6 @@
 				"shortName": "Annotation Name",
 				"tooltip": " site annotation Information for selected Protein accession"
 			},
-
 			"term": {
 				"id": "term"
 			},
@@ -1016,6 +1015,11 @@
 			"displayname": "Associated Glycan",
 			"tooltip": " Associated_glycan Information for selected accession"
 		},
+		"glycan_binding_protein": {
+			"id": "glycan_binding_protein",
+			"displayname": "Glycan Binding Protein",
+			"tooltip": ""
+		},
 		"bio_Enzymes": {
 			"id": "Bio_Enzymes",
 			"displayname": "Biosynthetic Enzymes",
@@ -1040,6 +1044,11 @@
 			"id": "function",
 			"displayname": "Function",
 			"tooltip": " function Information for selected Protein accession"
+		},
+		"glycan_ligands": {
+			"id": "glycan_ligands",
+			"displayname": "Glycan Ligands",
+			"tooltip": ""
 		},
 		"go_annotation": {
 			"id": "go_annotation",
