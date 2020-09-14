@@ -498,6 +498,12 @@
 				"tooltip": {},
 				"id": "gtype"
 			},
+			"subtype": {
+				"name": "Subtype",
+				"shortName": "Subtype",
+				"tooltip": {},
+				"id": "gsubtype"
+			},
 			"startpos": {
 				"name": "Start Pos.",
 				"shortName": "start_pos",

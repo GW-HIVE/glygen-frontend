@@ -345,6 +345,7 @@ const ProteinDetail = (props) => {
 		sequence,
 		go_annotation,
 		ptm_annotation,
+		synthesized_glycans,
 		site_annotation,
 		protein_names,
 		function: functions,
@@ -551,6 +552,71 @@ const ProteinDetail = (props) => {
 					backgroundColor: "#4B85B6",
 					color: "white",
 					whiteSpace: "nowrap",
+				};
+			},
+		},
+	];
+	const synthesizedGlycansColumns = [
+		{
+			dataField: "glytoucan_ac",
+			text: proteinStrings.glytoucan_ac.shortName,
+			defaultSortField: "glytoucan_ac",
+			sort: true,
+
+			headerStyle: (column, colIndex) => {
+				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+			},
+			formatter: (value, row) => (
+				<LineTooltip text="View glycan details">
+					<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+						{row.glytoucan_ac}
+					</Link>
+				</LineTooltip>
+			),
+		},
+		{
+			dataField: "glytoucan_ac",
+			text: glycanStrings.glycan_image.name,
+			sort: false,
+			selected: true,
+			formatter: (value, row) => (
+				<div className="img-wrapper">
+					<img
+						className="img-cartoon-list-page img-cartoon"
+						src={getGlycanImageUrl(row.glytoucan_ac)}
+						alt="Glycan img"
+					/>
+				</div>
+			),
+			headerStyle: (colum, colIndex) => {
+				return {
+					width: "35%",
+					textAlign: "left",
+					backgroundColor: "#4B85B6",
+					color: "white",
+					whiteSpace: "nowrap",
+				};
+			},
+		},
+		{
+			dataField: "type",
+			text: proteinStrings.type.name,
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+				};
+			},
+		},
+		{
+			dataField: "subtype",
+			text: proteinStrings.subtype.name,
+			sort: true,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
 				};
 			},
 		},
@@ -1712,15 +1778,19 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											{/* {mutation && mutation.length !== 0 && (
-												<ClientPaginatedTable
-													data={mutation}
-													defaultSortField={"annotation"}
-													columns={mutationColumns}
-													onClickTarget={"#mutation"}
-												/>
+											{synthesized_glycans &&
+												synthesized_glycans.length !== 0 && (
+													<ClientPaginatedTable
+														data={synthesized_glycans}
+														columns={synthesizedGlycansColumns}
+														defaultSortField={"glytoucan_ac"}
+														onClickTarget={"#synthesized_glycans"}
+													/>
+												)}
+											{/* {!synthesized_glycans && <p>No data available.</p>} */}
+											{!synthesized_glycans && (
+												<p>Data is not applicable for this ID.</p>
 											)}
-											{!mutation && <p>No data available.</p>} */}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
