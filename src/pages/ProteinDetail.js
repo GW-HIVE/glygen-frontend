@@ -192,6 +192,8 @@ const getItemsCrossRef = (data) => {
 	return itemscrossRef;
 };
 
+const TYPE_RECOMMENDED = "recommended";
+
 const ProteinDetail = (props) => {
 	let { id } = useParams();
 	let { select } = useParams();
@@ -212,9 +214,7 @@ const ProteinDetail = (props) => {
 		"with_disease"
 	);
 	const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
-	const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState(
-		[]
-	);
+	const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState([]);
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -226,6 +226,13 @@ const ProteinDetail = (props) => {
 		n_link_glycosylation: false,
 		o_link_glycosylation: false,
 	});
+	const [geneNames, setGeneName] = useState([]);
+	const [proteinNames, setProteinNames] = useState([]);
+
+	const recommendedGeneRows = geneNames.map(getRecommendedRows);
+	const synonymGeneRows = geneNames.map(getSynonymRows);
+	const recommendedProteinRows = proteinNames.map(getRecommendedRows);
+	const synonymProteinRows = proteinNames.map(getSynonymRows);
 
 	useEffect(() => {
 		setPageLoading(true);
@@ -266,6 +273,13 @@ const ProteinDetail = (props) => {
 	}, []);
 
 	useEffect(() => {
+		if (detailData.gene_names) {
+			setGeneName(formatNamesData(detailData.gene_names));
+		}
+		if (detailData.protein_names) {
+			setProteinNames(formatNamesData(detailData.protein_names));
+		}
+
 		if (detailData.glycosylation) {
 			const withImage = detailData.glycosylation.filter(
 				(item) => item.glytoucan_ac
@@ -281,11 +295,11 @@ const ProteinDetail = (props) => {
 			);
 		}
 		if (detailData.mutation) {
-			const WithDisease = detailData.mutation.filter(
-				(item) => item.keywords.includes('disease')
+			const WithDisease = detailData.mutation.filter((item) =>
+				item.keywords.includes("disease")
 			);
 			const Withoutdisease = detailData.mutation.filter(
-				(item) => !item.keywords.includes('disease')
+				(item) => !item.keywords.includes("disease")
 			);
 			setMutataionWithdisease(WithDisease);
 			setGlycosylationWithoutImage(Withoutdisease);
@@ -295,7 +309,6 @@ const ProteinDetail = (props) => {
 			);
 		}
 	}, [detailData]);
-	
 
 	useEffect(() => {
 		// Need to call it second time due to glycosylationWithImage and glycosylationWithoutImage table loading time.
@@ -316,7 +329,6 @@ const ProteinDetail = (props) => {
 
 	const {
 		mass,
-		recommendedname,
 		uniprot,
 		gene,
 		species,
@@ -339,9 +351,51 @@ const ProteinDetail = (props) => {
 	} = detailData;
 
 	const uniprotNames = (protein_names || [])
-		.filter((x) => (x.type === 'recommended'))
-		.map(x => x.name)
-		
+		.filter((x) => x.type === "recommended")
+		.map((x) => x.name);
+
+	function formatNamesData(data) {
+		let items = [];
+		data.forEach(({ resource, name, type, url }) => {
+			let found = false;
+			for (let resourceItem of items) {
+				if (resourceItem.resource === resource) {
+					found = true;
+					resourceItem.links.push({ name, type, url });
+				}
+			}
+			if (!found) {
+				items.push({
+					resource,
+					links: [{ name, type, url }],
+				});
+			}
+		});
+		return items;
+	}
+
+	function getRecommendedRows({ links, resource }) {
+		return links
+			.filter(({ type }) => type === TYPE_RECOMMENDED)
+			.map(({ name }, index) => (
+				<li key={index}>
+					<span className="text-capitalize">{resource}:</span> {name}
+				</li>
+			));
+	}
+
+	function getSynonymRows({ links, resource }, index) {
+		const name = links
+			.filter(({ type }) => type !== TYPE_RECOMMENDED)
+			.map(({ name }) => name)
+			.join("; ");
+		if (!name) return null;
+		return (
+			<li key={index}>
+				<span className="text-capitalize">{resource}:</span> {name}
+			</li>
+		);
+	}
 
 	const speciesEvidence = groupSpeciesEvidences(species);
 	const glycoSylationColumns = [
@@ -920,18 +974,26 @@ const ProteinDetail = (props) => {
 																	<strong>
 																		{proteinStrings.gene_location.name}:
 																	</strong>{" "}
+																	{proteinStrings.chromosome.name}: {""}
+																	{genes.locus
+																		? genes.locus.chromosome
+																		: "NA"}{" "}
+																	{""}(
+																	{genes.locus
+																		? addCommas(genes.locus.start_pos)
+																		: "NA"}{" "}
+																	-{" "}
+																	{genes.locus
+																		? addCommas(genes.locus.end_pos)
+																		: "NA"}
+																	)
+																</div>
 
-															{proteinStrings.chromosome.name}: {""}
-															{genes.locus ? genes.locus.chromosome:"NA"} {""}(
-																	{genes.locus ? addCommas(genes.locus.start_pos):"NA"} -{" "}
-																	{genes.locus ? addCommas(genes.locus.end_pos):"NA"})
-																	</div>
-
-																	<EvidenceList
-																		evidences={groupEvidences(
-																			genes.locus ?genes.locus.evidence:[]
-																		)}
-																	/>
+																<EvidenceList
+																	evidences={groupEvidences(
+																		genes.locus ? genes.locus.evidence : []
+																	)}
+																/>
 															</span>
 														))}
 													</>
@@ -1192,7 +1254,41 @@ const ProteinDetail = (props) => {
 										</div>
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
-										<Card.Body></Card.Body>
+										<Card.Body>
+											{geneNames &&
+											geneNames.length &&
+											proteinNames &&
+											proteinNames.length ? (
+												<ul className="list-style-none">
+													<li>
+														<strong>
+															{proteinStrings.gene_name_recommended.name}
+														</strong>
+														<ul>{recommendedGeneRows}</ul>
+													</li>
+													<li>
+														<strong>
+															{proteinStrings.gene_name_synonym.name}
+														</strong>
+														<ul>{synonymGeneRows}</ul>
+													</li>
+													<li>
+														<strong>
+															{proteinStrings.protein_name_recommended.name}
+														</strong>
+														<ul>{recommendedProteinRows}</ul>
+													</li>
+													<li>
+														<strong>
+															{proteinStrings.protein_name_synonym.name}
+														</strong>
+														<ul>{synonymProteinRows}</ul>
+													</li>
+												</ul>
+											) : (
+												<p>No data available.</p>
+											)}
+										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
@@ -1267,7 +1363,10 @@ const ProteinDetail = (props) => {
 											<Accordion.Toggle
 												eventKey="0"
 												onClick={() =>
-													toggleCollapse("glycanLigands", collapsed.glycanLigands)
+													toggleCollapse(
+														"glycanLigands",
+														collapsed.glycanLigands
+													)
 												}
 												className="gg-green arrow-btn">
 												<span>
@@ -1708,14 +1807,25 @@ const ProteinDetail = (props) => {
 
 																<div>
 																	{proteinStrings.chromosome.name}: {""}
-																	{isoformsS.locus ? isoformsS.locus.chromosome:"NA"} {""}(
-																	{isoformsS.locus ? isoformsS.locus.start_pos:"NA"} -{" "}
-																	{isoformsS.locus ? isoformsS.locus.end_pos:"NA"})
+																	{isoformsS.locus
+																		? isoformsS.locus.chromosome
+																		: "NA"}{" "}
+																	{""}(
+																	{isoformsS.locus
+																		? isoformsS.locus.start_pos
+																		: "NA"}{" "}
+																	-{" "}
+																	{isoformsS.locus
+																		? isoformsS.locus.end_pos
+																		: "NA"}
+																	)
 																</div>
 																<Grid className="badge-grid" xs={12}>
 																	<EvidenceList
 																		evidences={groupEvidences(
-																			isoformsS.locus ?isoformsS.locus.evidence:[]
+																			isoformsS.locus
+																				? isoformsS.locus.evidence
+																				: []
 																		)}
 																	/>
 																</Grid>
@@ -1775,8 +1885,9 @@ const ProteinDetail = (props) => {
 											{orthologs && orthologs.length && (
 												<>
 													<AlignmentDropdown
-														types={[
-															/*{
+														types={
+															[
+																/*{
 																display: " Homolog-oma",
 																type: "Homolog-oma",
 																data: "protein_detail",
@@ -1786,7 +1897,8 @@ const ProteinDetail = (props) => {
 																type: "homolog-mgi",
 																data: "protein_detail",
 															},*/
-														]}
+															]
+														}
 														dataType="protein_detail"
 														dataId={id}
 													/>
@@ -1919,10 +2031,13 @@ const ProteinDetail = (props) => {
 											<p>
 												{disease && disease.length && (
 													<Grid container classorthologs_ac="table-body">
-														{disease.map(thisDisease => (
-															<Grid item xs={12} >
+														{disease.map((thisDisease) => (
+															<Grid item xs={12}>
 																<div>
-																	<strong> {thisDisease.recommended_name.name}</strong>
+																	<strong>
+																		{" "}
+																		{thisDisease.recommended_name.name}
+																	</strong>
 
 																	<p>
 																		{" "}
@@ -1932,7 +2047,8 @@ const ProteinDetail = (props) => {
 																			href={thisDisease.recommended_name.url}
 																			target="_blank"
 																			rel="noopener noreferrer">
-																			{thisDisease.recommended_name.resource} {thisDisease.recommended_name.id}
+																			{thisDisease.recommended_name.resource}{" "}
+																			{thisDisease.recommended_name.id}
 																		</a>
 																		)
 																	</p>
@@ -1995,7 +2111,7 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-								{mutation && mutation.length !== 0 && (
+											{mutation && mutation.length !== 0 && (
 												<Tabs
 													defaultActiveKey={
 														mutataionWithdisease &&
@@ -2047,8 +2163,7 @@ const ProteinDetail = (props) => {
 																	<ClientPaginatedTable
 																		data={mutataionWithoutdisease}
 																		columns={mutationColumns.filter(
-																			(column) =>
-																				column.dataField !== "disease"
+																			(column) => column.dataField !== "disease"
 																		)}
 																		onClickTarget={"#mutation"}
 																		defaultSortField="position"
@@ -2249,97 +2364,94 @@ const ProteinDetail = (props) => {
 							</Accordion>
 							{/* publication */}
 							<Accordion
-                id="publication"
-                defaultActiveKey="0"
-                className="panel-width"
-                style={{ padding: "20px 0" }}
-              >
-                <Card>
-                  <Card.Header className="panelHeadBgr">
-                    <span className="gg-green d-inline">
-                      <HelpTooltip
-                        title={DetailTooltips.motif.publications.title}
-                        text={DetailTooltips.motif.publications.text}
-                        urlText={DetailTooltips.motif.publications.urlText}
-                        url={DetailTooltips.motif.publications.url}
-                        helpIcon="gg-helpicon-detail"
-                      />
-                    </span>
-                    <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar.publication.displayname}
-                    </h4>
-                    <div className="float-right">
-                      <Accordion.Toggle
-                        // as={Card.Header}
-                        eventKey="0"
-                        onClick={() =>
-                          toggleCollapse("publication", collapsed.publication)
-                        }
-                        className="gg-green arrow-btn"
-                      >
-                        <span>
-                          {collapsed.publication ? closeIcon : expandIcon}
-                        </span>
-                      </Accordion.Toggle>
-                    </div>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
-                    <Card.Body className="card-padding-zero">
-                      <Table hover fluid>
-                        {publication && (
-                          <tbody className="table-body">
-                            {publication.map((pub, pubIndex) => (
-                              <tr className="table-row">
-                                <td key={pubIndex}>
-                                  <p>
-                                    <div>
-                                      <h6 style={{ marginBottom: "3px" }}>
-                                        <strong>{pub.title}</strong>
-                                      </h6>
-                                    </div>
-                                    <div>{pub.authors}</div>
-                                    <div>
-                                      {pub.journal} <span>&nbsp;</span>(
-                                      {pub.date})
-                                    </div>
-                                    <div>
-                                      {pub.reference.map(ref => (
-                                        <>
-                                          <FiBookOpen />
-                                          <span style={{ paddingLeft: "15px" }}>
-                                            {glycanStrings.pmid.shortName}:
-                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
-                                          </span>{" "}
-                                          <a
-                                            href={ref.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                          >
-                                            <>{ref.id}</>
-                                          </a>
-                                        </>
-                                      ))}
-                                    </div>
-                                    <EvidenceList
-                                      evidences={groupEvidences(pub.evidence)}
-                                    />
-                                  </p>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        )}
-                        {!publication && (
-                          <p className="no-data-msg-publication">
-                            No data available.
-                          </p>
-                        )}
-                      </Table>
-                    </Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-			  </React.Fragment>
+								id="publication"
+								defaultActiveKey="0"
+								className="panel-width"
+								style={{ padding: "20px 0" }}>
+								<Card>
+									<Card.Header className="panelHeadBgr">
+										<span className="gg-green d-inline">
+											<HelpTooltip
+												title={DetailTooltips.motif.publications.title}
+												text={DetailTooltips.motif.publications.text}
+												urlText={DetailTooltips.motif.publications.urlText}
+												url={DetailTooltips.motif.publications.url}
+												helpIcon="gg-helpicon-detail"
+											/>
+										</span>
+										<h4 className="gg-green d-inline">
+											{stringConstants.sidebar.publication.displayname}
+										</h4>
+										<div className="float-right">
+											<Accordion.Toggle
+												// as={Card.Header}
+												eventKey="0"
+												onClick={() =>
+													toggleCollapse("publication", collapsed.publication)
+												}
+												className="gg-green arrow-btn">
+												<span>
+													{collapsed.publication ? closeIcon : expandIcon}
+												</span>
+											</Accordion.Toggle>
+										</div>
+									</Card.Header>
+									<Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+										<Card.Body className="card-padding-zero">
+											<Table hover fluid>
+												{publication && (
+													<tbody className="table-body">
+														{publication.map((pub, pubIndex) => (
+															<tr className="table-row">
+																<td key={pubIndex}>
+																	<p>
+																		<div>
+																			<h6 style={{ marginBottom: "3px" }}>
+																				<strong>{pub.title}</strong>
+																			</h6>
+																		</div>
+																		<div>{pub.authors}</div>
+																		<div>
+																			{pub.journal} <span>&nbsp;</span>(
+																			{pub.date})
+																		</div>
+																		<div>
+																			{pub.reference.map((ref) => (
+																				<>
+																					<FiBookOpen />
+																					<span style={{ paddingLeft: "15px" }}>
+																						{glycanStrings.pmid.shortName}:
+																						{/* {glycanStrings.referenceType[ref.type].shortName}: */}
+																					</span>{" "}
+																					<a
+																						href={ref.url}
+																						target="_blank"
+																						rel="noopener noreferrer">
+																						<>{ref.id}</>
+																					</a>
+																				</>
+																			))}
+																		</div>
+																		<EvidenceList
+																			evidences={groupEvidences(pub.evidence)}
+																		/>
+																	</p>
+																</td>
+															</tr>
+														))}
+													</tbody>
+												)}
+												{!publication && (
+													<p className="no-data-msg-publication">
+														No data available.
+													</p>
+												)}
+											</Table>
+										</Card.Body>
+									</Accordion.Collapse>
+								</Card>
+							</Accordion>
+						</React.Fragment>
 					</div>
 				</Col>
 			</Row>

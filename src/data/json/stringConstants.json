@@ -423,7 +423,6 @@
 				"id": "protein_names"
 			},
 
-
 			"gene_url": {
 				"name": "URL",
 				"shortName": "url",
@@ -434,6 +433,18 @@
 					"url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
 				},
 				"id": "gene_url"
+			},
+			"gene_name_recommended": {
+				"name": "Gene Name (Recommended)"
+			},
+			"gene_name_synonym": {
+				"name": "Gene Name Synonyms"
+			},
+			"protein_name_recommended": {
+				"name": "Protein Name (Recommended)"
+			},
+			"protein_name_synonym": {
+				"name": "Protein Name (Alternative or Synonyms)"
 			},
 			"go_term": {
 				"name": "GO Name",
@@ -523,9 +534,6 @@
 				"tooltip": {},
 				"id": "trend"
 			},
-
-   
-
 			"tissue": {
 				"name": "Tissue",
 				"shortName": "Tissue",
