@@ -613,6 +613,9 @@ const ProteinDetail = (props) => {
 			dataField: "subtype",
 			text: proteinStrings.subtype.name,
 			sort: true,
+			formatter: (value, row) => (
+				<span className="text-capitalize"> {row.subtype}</span>
+			),
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
