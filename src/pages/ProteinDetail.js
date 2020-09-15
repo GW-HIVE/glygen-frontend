@@ -302,9 +302,9 @@ const ProteinDetail = (props) => {
 				(item) => !item.keywords.includes("disease")
 			);
 			setMutataionWithdisease(WithDisease);
-			setGlycosylationWithoutImage(Withoutdisease);
+			setMutataionWithoutdisease(Withoutdisease);
 
-			setGlycosylationTabSelected(
+			setmutataionTabSelected(
 				WithDisease.length > 0 ? "with_disease" : "without_disease"
 			);
 		}
