@@ -1790,10 +1790,7 @@ const ProteinDetail = (props) => {
 														onClickTarget={"#synthesized_glycans"}
 													/>
 												)}
-											{/* {!synthesized_glycans && <p>No data available.</p>} */}
-											{!synthesized_glycans && (
-												<p>Data is not applicable for this ID.</p>
-											)}
+											{!synthesized_glycans && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
