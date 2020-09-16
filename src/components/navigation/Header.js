@@ -153,6 +153,9 @@ export default function Header(props) {
 									to={routeConstants.proteinSearch}>
 									Protein Search
 								</NavDropdown.Item>
+								<NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
+									Motif List
+								</NavDropdown.Item>
 							</NavDropdown>
 							<Nav.Link
 								className="gg-nav-link"

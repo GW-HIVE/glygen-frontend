@@ -101,7 +101,6 @@
 				},
 				"id": "glycan_subtype"
 			},
-
 			"protein_identifier": {
 				"name": "Glycosylated Protein",
 				"shortName": "Glycosylated Protein",
@@ -422,7 +421,6 @@
 				},
 				"id": "protein_names"
 			},
-
 			"gene_url": {
 				"name": "URL",
 				"shortName": "url",
@@ -810,6 +808,19 @@
 			}
 		}
 	},
+	"motif": {
+		"common": {
+			"motif_id": {
+				"name": "Motif ID"
+			},
+			"motif_name": {
+				"name": "Motif Name"
+			},
+			"glycan_count": {
+				"name": "No of Glycans"
+			}
+		}
+	},
 	"quick_search": {
 		"question_1": {
 			"text": "What are the glycosyltransferases used to add the residues contained in {0} in human?",
@@ -1002,7 +1013,6 @@
 			"message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
 		}
 	},
-
 	"sidebar": {
 		"general": {
 			"id": "general",
@@ -1139,7 +1149,6 @@
 			"displayname": "Site Annotation",
 			"tooltip": " site annotation Information for selected Protein accession"
 		},
-
 		"alignment": {
 			"id": "alignment",
 			"displayname": "Alignment",
@@ -1150,7 +1159,6 @@
 			"displayname": "Summary",
 			"tooltip": " summary Information for selected Protein accession"
 		},
-
 		"search_by_glycan": {
 			"id": "search_by_glycan",
 			"displayname": "Search By Glycan",
@@ -1203,15 +1211,20 @@
 			"displayname": "Protein data (*.FASTA)",
 			"tooltip": " protein_fastadata Information for selected accession"
 		},
-		"motif_jsondata": {
-			"id": "motif_jsondata",
-			"displayname": "Glycan data (*.json)",
-			"tooltip": " motif_jsondata Information for selected accession"
-		},
 		"motif_image": {
 			"id": "motif_image",
 			"displayname": "Motif Image (*.png)",
 			"tooltip": " motif_image Information for selected accession"
+		},
+		"motif_jsondata": {
+			"id": "motif_jsondata",
+			"displayname": "Motif data (*.json)",
+			"tooltip": " motif_jsondata Information for selected accession"
+		},
+		"motif_csvdata": {
+			"id": "motif_csvdata",
+			"displayname": "Motif data (*.csv)",
+			"tooltip": "motif_csvdata Information for selected accession"
 		}
 	}
 }

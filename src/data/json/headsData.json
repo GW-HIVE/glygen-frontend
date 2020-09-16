@@ -208,6 +208,19 @@
 			}
 		]
 	},
+	"motifList": {
+		"title": "Motif List | List of Motifs | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "List of motifs available in GlyGen. Each motif includes detailed information and it's associated metadata."
+			},
+			{
+				"name": "keywords",
+				"content": "glycan, motif ID, motif accession, Image of Glycan Structure, motif name, Number of Glycans, GlyTouCan accession, motif synonyms, pmid list."
+			}
+		]
+	},
 	"motifDetail": {
 		"title": "Motif Details | Details for #glytoucan_ac | glygen.org",
 		"meta": [

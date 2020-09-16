@@ -27,6 +27,7 @@
 	"isoAlignment": "/alignment/",
 	"protVista": "/protVista/",
 	"siteview": "/Siteview/",
+	"motifList": "/motif-list/",
 	"motifDetail": "/motif/",
 	"home": "/home/",
 	"default": "/"
