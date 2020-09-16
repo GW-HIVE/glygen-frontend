@@ -52,6 +52,10 @@ function databasecolor(name) {
       return "#ebbd34";
     case "subsumption":
       return "#33b8ff";
+    case "topmed":
+      return "#33b4gf";
+    case "gnomad":
+      return "#33bbgf";
   }
   return "#9033ff";
 }

@@ -1114,6 +1114,11 @@
 			"displayname": "Mutation",
 			"tooltip": " Mutation Information for selected Protein accession"
 		},
+		"snv": {
+			"id": "snv",
+			"displayname": "SNV",
+			"tooltip": " Mutation Information for selected Protein accession"
+		},
 		"expression_Tissue": {
 			"id": "expression Tissue",
 			"displayname": "Expression Tissue",

@@ -82,7 +82,7 @@ const items = [
 	{ label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
 	{ label: stringConstants.sidebar.homologs.displayname, id: "homologs" },
 	{ label: stringConstants.sidebar.disease.displayname, id: "disease" },
-	{ label: stringConstants.sidebar.mutation.displayname, id: "mutation" },
+	{ label: stringConstants.sidebar.snv.displayname, id: "snv" },
 	{
 		label: stringConstants.sidebar.expression_Tissue.displayname,
 		id: "expressionT",
@@ -2151,7 +2151,7 @@ const ProteinDetail = (props) => {
 							</Accordion>
 							{/*  Mutation */}
 							<Accordion
-								id="mutation"
+								id="snv"
 								defaultActiveKey="0"
 								className="panel-width"
 								style={{ padding: "20px 0" }}>
@@ -2167,7 +2167,7 @@ const ProteinDetail = (props) => {
 											/>
 										</span>
 										<h4 className="gg-green d-inline">
-											{stringConstants.sidebar.mutation.displayname}
+											{stringConstants.sidebar.snv.displayname}
 										</h4>
 										<div className="float-right">
 											<Accordion.Toggle
