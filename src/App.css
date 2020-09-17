@@ -932,12 +932,12 @@ sub {
 	border-radius: 50%;
 	border: 2px solid #ccc;
 	/* by changing margin 35px (to < 38px) below you control how many team members cards will fitt in one row */
-	margin: 0 35px 10px;
+	margin: 10px;
 }
-.team-member-item {
+/* .team-member-item {
 	overflow: hidden;
 	position: relative;
-}
+} */
 
 /* =========================================
               Frameworks
