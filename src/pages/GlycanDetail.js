@@ -883,7 +883,7 @@ const GlycanDetail = (props) => {
 														<Row>
 															<Col xs={6} sm={6}>
 																{" "}
-																<strong>{glycanStrings.inchi_key.name}</strong>
+																<strong>{glycanStrings.IUPAC.name}</strong>
 															</Col>{" "}
 															<Col xs={6} sm={6} style={{ textAlign: "right" }}>
 																<ReactCopyClipboard value={iupac} />
