@@ -386,11 +386,11 @@ const Siteview = ({ position }) => {
 			dataField: "typeAnnotate",
 			text: proteinStrings.annotation_site.name,
 			sort: true,
+			style: { whiteSpace: "nowrap" },
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
-					width: "20%",
 					whiteSpace: "nowrap",
 				};
 			},
@@ -399,11 +399,12 @@ const Siteview = ({ position }) => {
 			dataField: "glytoucan_ac",
 			text: glycanStrings.glycan_id.name,
 			sort: true,
+			style: { whiteSpace: "nowrap" },
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
-					width: "15%",
+					// width: "15%",
 					whiteSpace: "nowrap",
 				};
 			},
