@@ -330,7 +330,7 @@ const Siteview = ({ position }) => {
 				...dataAnnotations,
 				...detailData.mutation.sort(sortByStartPos).map((mutation) => ({
 					position: mutation.start_pos,
-					type: mutation.type.split(" ")[1][0].toUpperCase(),
+					// type: mutation.type.split(" ")[1][0].toUpperCase(),
 					label: "Mutation",
 					evidence: mutation.evidence,
 					labelForlist: mutation.evidence.sequence_org,
@@ -391,6 +391,7 @@ const Siteview = ({ position }) => {
 					backgroundColor: "#4B85B6",
 					color: "white",
 					width: "20%",
+					whiteSpace: "nowrap",
 				};
 			},
 		},
@@ -403,9 +404,9 @@ const Siteview = ({ position }) => {
 					backgroundColor: "#4B85B6",
 					color: "white",
 					width: "15%",
+					whiteSpace: "nowrap",
 				};
 			},
-
 			formatter: (value, row) => (
 				<LineTooltip text="View glycan details">
 					<Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
@@ -422,19 +423,20 @@ const Siteview = ({ position }) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
-					width: "12%",
+					// width: "12%",
+					whiteSpace: "nowrap",
 				};
 			},
 		},
 		{
 			dataField: "evidence",
 			text: proteinStrings.evidence.name,
-
 			headerStyle: (colum, colIndex) => {
 				return {
 					backgroundColor: "#4B85B6",
 					color: "white",
-					width: "23%",
+					// width: "23%",
+					whiteSpace: "nowrap",
 				};
 			},
 			formatter: (cell, row) => {
@@ -464,16 +466,21 @@ const Siteview = ({ position }) => {
 			),
 			headerStyle: (colum, colIndex) => {
 				return {
-					width: "30%",
+					// width: "30%",
 					textAlign: "left",
 					backgroundColor: "#4B85B6",
 					color: "white",
+					whiteSpace: "nowrap",
 				};
 			},
 		},
 	];
 
-	const { uniprot, mass, recommendedname, gene, refseq } = detailData;
+	const { uniprot, mass, protein_names, gene, refseq } = detailData;
+
+	const uniprotNames = (protein_names || [])
+		.filter((x) => x.type === "recommended")
+		.map((x) => x.name);
 
 	// ==================================== //
 	/**
@@ -691,7 +698,8 @@ const Siteview = ({ position }) => {
 														<strong>
 															{proteinStrings.recommendedname.name}:{" "}
 														</strong>{" "}
-														{recommendedname.full}{" "}
+														{/* {recommendedname.full}{" "} */}
+														{uniprotNames}
 													</div>
 													<div>
 														<strong>
