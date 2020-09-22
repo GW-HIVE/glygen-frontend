@@ -278,6 +278,7 @@ const ProteinDetail = (props) => {
 		if (detailData.gene_names) {
 			setGeneName(formatNamesData(detailData.gene_names));
 		}
+
 		if (detailData.protein_names) {
 			setProteinNames(formatNamesData(detailData.protein_names));
 		}
@@ -296,6 +297,7 @@ const ProteinDetail = (props) => {
 				withImage.length > 0 ? "with_glycanId" : "without_glycanId"
 			);
 		}
+
 		if (detailData.snv) {
 			const WithDisease = detailData.snv.filter((item) =>
 				item.keywords.includes("disease")
@@ -370,6 +372,7 @@ const ProteinDetail = (props) => {
 			if (!found) {
 				items.push({
 					resource,
+					url,
 					links: [{ name, type, url }],
 				});
 			}
@@ -380,14 +383,17 @@ const ProteinDetail = (props) => {
 	function getRecommendedRows({ links, resource }) {
 		return links
 			.filter(({ type }) => type === TYPE_RECOMMENDED)
-			.map(({ name }, index) => (
+			.map(({ name, url }, index) => (
 				<li key={index}>
-					<span className="text-capitalize">{resource}:</span> {name}
+					<span>{resource}:</span>{" "}
+					<a href={url} target="_blank" rel="noopener noreferrer">
+						{name}
+					</a>
 				</li>
 			));
 	}
 
-	function getSynonymRows({ links, resource }, index) {
+	function getSynonymRows({ links, resource, url }, index) {
 		const name = links
 			.filter(({ type }) => type !== TYPE_RECOMMENDED)
 			.map(({ name }) => name)
@@ -395,7 +401,10 @@ const ProteinDetail = (props) => {
 		if (!name) return null;
 		return (
 			<li key={index}>
-				<span className="text-capitalize">{resource}:</span> {name}
+				<span>{resource}:</span>{" "}
+				<a href={url} target="_blank" rel="noopener noreferrer">
+					{name}
+				</a>
 			</li>
 		);
 	}
@@ -433,7 +442,6 @@ const ProteinDetail = (props) => {
 				};
 			},
 		},
-
 		{
 			dataField: "glytoucan_ac",
 			text: proteinStrings.glytoucan_ac.shortName,
@@ -455,7 +463,6 @@ const ProteinDetail = (props) => {
 			),
 			//testing
 		},
-
 		{
 			dataField: "glytoucan_ac",
 			text: glycanStrings.glycan_image.name,
@@ -733,8 +740,6 @@ const ProteinDetail = (props) => {
 				</>
 			),
 		},
-
-		
 	];
 	const expressionTissueColumns = [
 		{
@@ -1587,17 +1592,7 @@ const ProteinDetail = (props) => {
 										</div>
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
-										<Card.Body>
-											{/* {mutation && mutation.length !== 0 && (
-												<ClientPaginatedTable
-													data={mutation}
-													defaultSortField={"annotation"}
-													columns={mutationColumns}
-													onClickTarget={"#mutation"}
-												/>
-											)}
-											{!mutation && <p>No data available.</p>} */}
-										</Card.Body>
+										<Card.Body></Card.Body>
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>

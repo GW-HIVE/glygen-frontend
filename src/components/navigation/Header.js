@@ -154,7 +154,7 @@ export default function Header(props) {
 									Protein Search
 								</NavDropdown.Item>
 								<NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
-									Motif List
+									List of Motifs
 								</NavDropdown.Item>
 							</NavDropdown>
 							<Nav.Link
