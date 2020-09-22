@@ -206,6 +206,8 @@ const ProteinDetail = (props) => {
 	const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
 		"with_glycanId"
 	);
+	// const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
+	// const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
 	const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
 	const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
 		[]
@@ -294,11 +296,11 @@ const ProteinDetail = (props) => {
 				withImage.length > 0 ? "with_glycanId" : "without_glycanId"
 			);
 		}
-		if (detailData.mutation) {
-			const WithDisease = detailData.mutation.filter((item) =>
+		if (detailData.snv) {
+			const WithDisease = detailData.snv.filter((item) =>
 				item.keywords.includes("disease")
 			);
-			const Withoutdisease = detailData.mutation.filter(
+			const Withoutdisease = detailData.snv.filter(
 				(item) => !item.keywords.includes("disease")
 			);
 			setMutataionWithdisease(WithDisease);
@@ -339,7 +341,7 @@ const ProteinDetail = (props) => {
 		interactions,
 		expression_tissue,
 		expression_disease,
-		mutation,
+		snv,
 		refseq,
 		disease,
 		sequence,
@@ -732,17 +734,7 @@ const ProteinDetail = (props) => {
 			),
 		},
 
-		{
-			dataField: "type",
-			text: proteinStrings.type.name,
-			sort: true,
-			headerStyle: (colum, colIndex) => {
-				return {
-					backgroundColor: "#4B85B6",
-					color: "white",
-				};
-			},
-		},
+		
 	];
 	const expressionTissueColumns = [
 		{
@@ -1636,7 +1628,7 @@ const ProteinDetail = (props) => {
 														type="button"
 														style={{ marginLeft: "5px" }}
 														className="gg-btn-blue">
-														<FaSearchPlus /> Protvista
+														<FaSearchPlus /> ProtVista
 													</Button>
 												</Link>
 											</span>
@@ -1659,7 +1651,7 @@ const ProteinDetail = (props) => {
 												<ProteinSequenceDisplay
 													sequenceObject={sequence}
 													glycosylation={glycosylation}
-													mutation={mutation}
+													mutation={snv}
 													siteAnnotation={site_annotation}
 													selectedHighlights={selectedHighlights}
 													setSelectedHighlights={setSelectedHighlights}
@@ -2181,7 +2173,7 @@ const ProteinDetail = (props) => {
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-											{mutation && mutation.length !== 0 && (
+											{snv && snv.length !== 0 && (
 												<Tabs
 													defaultActiveKey={
 														mutataionWithdisease &&
@@ -2247,7 +2239,7 @@ const ProteinDetail = (props) => {
 												</Tabs>
 											)}
 
-											{!mutation && <p>No data available.</p>}
+											{!snv && <p>No data available.</p>}
 										</Card.Body>
 									</Accordion.Collapse>
 								</Card>

@@ -784,7 +784,7 @@
 			"annotation_site": {
 				"name": "Annotation",
 				"id": "annotation",
-				"shortName": "Annotation Name",
+				"shortName": "Annotation",
 				"tooltip": " site annotation Information for selected Protein accession"
 			},
 			"term": {
@@ -1126,7 +1126,7 @@
 		},
 		"snv": {
 			"id": "snv",
-			"displayname": "SNV",
+			"displayname": "Single Nucleotide Variation",
 			"tooltip": " Mutation Information for selected Protein accession"
 		},
 		"expression_Tissue": {
