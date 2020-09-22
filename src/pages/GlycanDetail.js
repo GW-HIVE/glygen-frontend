@@ -106,12 +106,9 @@ const getItemsCrossRef = (data) => {
 
 	//check data.
 	if (data.crossref) {
-		// for (let i = 0; i < data.crossref.length; i++) {
-		// let crossrefitem = data.crossref[i];
+	
 		for (let crossrefitem of data.crossref) {
 			let found = "";
-			// for (let j = 0; j < itemscrossRef.length; j++) {
-			//   let databaseitem = itemscrossRef[j];
 			for (let databaseitem of itemscrossRef) {
 				if (databaseitem.database === crossrefitem.database) {
 					found = true;
@@ -294,11 +291,6 @@ const GlycanDetail = (props) => {
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
-			// formatter: (value, row) => (
-			// 	<Navbar.Text as={NavLink} to={`/site-specific/${row.position}`}>
-			// 		{row.position}{row.residue}
-			// 	</Navbar.Text>
-			// ),
 			formatter: (value, row) => (
 				<>
 					{row.residue}
@@ -436,6 +428,13 @@ const GlycanDetail = (props) => {
 			headerStyle: () => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
 			},
+			formatter: (value, row) => (
+				<LineTooltip text="View details">
+				  <Link to={routeConstants.motifDetail+row.id}>
+					{row.id}
+				  </Link>
+				</LineTooltip>
+			  )
 		},
 		{
 			dataField: "name",
@@ -445,6 +444,13 @@ const GlycanDetail = (props) => {
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
 			},
+			formatter: (value, row) => (
+				<LineTooltip text="View details">
+				  <Link to={routeConstants.motifDetail + row.id}>
+					{row.name}
+				  </Link>
+				</LineTooltip>
+			  )
 		},
 	];
 	// ==================================== //

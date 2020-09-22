@@ -91,7 +91,6 @@ const SequenceLocationViewer = ({
 
   const [filteredAnnotations, setFilteredAnnotations] = useState([]);
   const [styledSequence, setStyledSequence] = useState([]);
-  //  const [currentAnnotation, setCurrentAnnotation] = useState();
   const [currentAnnotationIndex, setCurrentAnnotationIndex] = useState();
 
   const getHighlightClassname = (reducedAnnotations, position) => {
@@ -128,7 +127,7 @@ const SequenceLocationViewer = ({
     const current = reducedAnnotations.find(
       x => x.position === parseInt(position, 10)
     );
-    //  setCurrentAnnotation(current);
+
     setCurrentAnnotationIndex(reducedAnnotations.indexOf(current));
 
     const baseValues = sequence.map((character, index) => {
@@ -329,7 +328,7 @@ const Siteview = ({ position }) => {
           position: mutation.start_pos,
           label: "Mutation",
           evidence: mutation.evidence,
-          // labelForlist: mutation.evidence.sequence_org,
+
           typeAnnotate: "Mutation"
         }))
       ];
@@ -340,11 +339,6 @@ const Siteview = ({ position }) => {
       key: `${annotation.type}-${annotation.position}`,
       id: `${annotation.type}-${annotation.position}-${index}`
     }));
-
-    // const uniquePositions = allDataAnnotations.filter((value, index, self) => {
-    //   const findPosition = self.find(item => item.key === value.key);
-    //   return self.indexOf(findPosition) === index;
-    // });
 
     const pickLabel = type => {
       switch (type) {
@@ -370,16 +364,10 @@ const Siteview = ({ position }) => {
             position: site.start_pos,
             type: pickLabel(siteType.type),
             key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
-            // key: `${site.start_pos}`,
             character: getSequenceCharacter(site.start_pos)
           }))
         )
         .flat();
-      // .filter((value, index, self) => {
-      //   const findPosition = self.find((item) => item.position === value.position);
-      //   return self.indexOf(findPosition) === index;
-      // })
-      // .sort(sortByPosition)
 
       setAnnotations(uniquePositions);
 
@@ -389,15 +377,9 @@ const Siteview = ({ position }) => {
     }
 
     setAllAnnotations(allDataAnnotations);
-    // setAnnotations(uniquePositions);
-
-    // if (uniquePositions.length && !selectedPosition) {
-    // 	setSelectedPosition(uniquePositions[0].position);
-    // }
 
     if (detailData.sequence) {
       var originalSequence = detailData.sequence.sequence;
-      // detailData.sequence.sequence = originalSequence.split("");
       setSequence(originalSequence.split(""));
     }
   }, [detailData]);
@@ -411,9 +393,6 @@ const Siteview = ({ position }) => {
   };
 
   const selectPosition = position => {
-    // setSelectedPosition(position);
-    // updateTableData(allAnnotations, position);
-
     window.location = `/Siteview/${id}/${position}`;
   };
 
@@ -431,7 +410,6 @@ const Siteview = ({ position }) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white"
-          //width: "20%"
         };
       }
     },
@@ -444,7 +422,6 @@ const Siteview = ({ position }) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white"
-          //width: "15%"
         };
       },
 
@@ -549,17 +526,6 @@ const Siteview = ({ position }) => {
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   // ===================================== //
-
-  /**
-   * Redirect and opens uniprot_canonical_ac in a GO Term List Page
-   * @param {object} uniprot_canonical_ac- uniprot accession ID.
-   **/
-  // function handleOpenGOTermListPage(uniprot_canonical_ac) {
-  // 	var url =
-  // 		"https://www.ebi.ac.uk/QuickGO/annotations?geneProductId=" +
-  // 		uniprot_canonical_ac;
-  // 	window.open(url);
-  // }
 
   return (
     <>
