@@ -699,7 +699,7 @@ const Siteview = ({ position }) => {
 														</strong>
 														{addCommas(mass.chemical_mass)} Da
 													</div>
-													<div>
+													{refseq && <div>
 														<strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
 														<a
 															href={refseq.url}
@@ -707,11 +707,11 @@ const Siteview = ({ position }) => {
 															rel="noopener noreferrer">
 															{refseq.ac}
 														</a>
-													</div>
-													<div>
+													</div>}
+													{ refseq && <div>
 														<strong>{proteinStrings.refSeq_name.name}: </strong>
 														{refseq.name}
-													</div>
+													</div>}
 												</>
 											)}
 										</Card.Body>

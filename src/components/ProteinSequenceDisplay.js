@@ -133,7 +133,7 @@ const HiglightSelecter = ({
 
 const ProteinSequenceDisplay = ({
   sequenceObject,
-  glycosylation = [],
+  glycosylation,
   mutation,
   siteAnnotation,
   selectedHighlights, 
@@ -146,7 +146,7 @@ const ProteinSequenceDisplay = ({
   const [sequenceData, setSequenceData] = useState([]);
 
   useEffect(() => {
-    if (glycosylation) {
+    if (glycosylation && glycosylation.length) {
       //distinct
       const distinctGlycanPositions = (value, index, self) => {
         const findPosition = self.find(

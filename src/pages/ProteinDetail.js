@@ -1279,10 +1279,10 @@ const ProteinDetail = (props) => {
 										<Card.Body>
 											<div>
 												<ProteinSequenceDisplay
-													sequenceObject={sequence}
-													glycosylation={glycosylation}
-													mutation={mutation}
-													siteAnnotation={site_annotation}
+													sequenceObject={sequence ? sequence : {}}
+													glycosylation={glycosylation ? glycosylation : []}
+													mutation={mutation ? mutation : []}
+													siteAnnotation={site_annotation ? site_annotation : []}
 													selectedHighlights={selectedHighlights}
 													setSelectedHighlights={setSelectedHighlights}
 												/>
@@ -1450,7 +1450,7 @@ const ProteinDetail = (props) => {
 																<Grid className="badge-grid" xs={12}>
 																	<EvidenceList
 																		evidences={groupEvidences(
-																			isoformsS.locus.evidence
+																			isoformsS.locus && isoformsS.locus.evidence ? isoformsS.locus.evidence : []
 																		)}
 																	/>
 																</Grid>
@@ -1661,7 +1661,7 @@ const ProteinDetail = (props) => {
 
 																	<p>
 																		{" "}
-																		(ICD10: {diseaseS.icd10} DOID:{" "}
+																		(ICD10: {diseaseS.icd10 ? diseaseS.icd10 : "N/A" } DOID:{" "}
 																		<a
 																			href={diseaseS.url}
 																			target="_blank"
