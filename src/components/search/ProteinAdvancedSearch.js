@@ -405,6 +405,7 @@ const ProteinAdvancedSearch = (props) => {
                                 url={commonProteinData.glytoucan_ac.tooltip.url}
                             />
                             {commonProteinData.glytoucan_ac.name}
+							gutterBottom
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.proGlytoucanAc}

@@ -769,6 +769,28 @@
 				},
 				"id": "refseq_ac"
 			},
+			"disease_name": {
+				"name": "Disease Name",
+				"shortName": "Disease Name",
+				"tooltip": {
+					"title": "Disease Name",
+					"text": "",
+					"urlText": "Read more...",
+					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+				},
+				"id": "disease_name"
+			},
+			"disease_id": {
+				"name": "Disease ID",
+				"shortName": "Disease ID",
+				"tooltip": {
+					"title": "Disease ID",
+					"text": "",
+					"urlText": "Read more...",
+					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+				},
+				"id": "disease_id"
+			},
 			"refSeq_summary": {
 				"name": "RefSeq Summary",
 				"shortName": "refSeq_summary",

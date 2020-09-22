@@ -281,6 +281,44 @@
                     "name": "Predicted"
                 }
             ]
+        },
+        "disease_name": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "disease_name",
+            "placeholder": "Enter the Disease Name of your protein",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "Deafness"
+                    },
+                    "explore": {
+                        "id": "Disease Name",
+                        "url": ""
+                    }
+                }
+            ]
+        },
+        "disease_id": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "disease_id",
+            "placeholder": "Enter the Disease ID of your protein",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "0050968"
+                    },
+                    "explore": {
+                        "id": "Disease ID",
+                        "url": ""
+                    }
+                }
+            ]
         }
     },
     "tutorial": {

@@ -53,6 +53,8 @@ const ProteinSearch = (props) => {
 			proPathwayId: "",
 			proPubId: "",
 			proGlyEvidence: "",
+			proDiseaseName: "",
+			proDiseaseId: "",
 			proAdvSearchValError: [
 				false,
 				false,
@@ -224,6 +226,14 @@ const ProteinSearch = (props) => {
 										data.query.glycosylation_evidence === undefined
 											? advancedSearch.glycosylation_evidence.placeholderId
 											: data.query.glycosylation_evidence,
+									proDiseaseName:
+										data.query.disease_name === undefined
+											? ""
+											: data.query.disease_name,
+									proDiseaseId:
+										data.query.disease_id === undefined
+										? ""
+										: data.query.disease_id,
 								});
 
 								setProActTabKey("advanced_search");
@@ -299,6 +309,8 @@ const ProteinSearch = (props) => {
 	 * @param {string} input_pathway_id user input
 	 * @param {string} input_pmid user input
 	 * @param {string} input_relation user input
+	 * @param {string} input_disease_name user input
+	 * @param {string} input_disease_id user input
 	 * @return {string} returns json
 	 */
 	function searchJson(
@@ -319,7 +331,9 @@ const ProteinSearch = (props) => {
 		input_sequence,
 		input_pathway_id,
 		input_pmid,
-		input_glycosylation_evidence
+		input_glycosylation_evidence,
+		input_disease_name,
+		input_disease_id
 	) {
 		var uniprot_id = input_protein_id;
 		if (uniprot_id) {
@@ -408,6 +422,8 @@ const ProteinSearch = (props) => {
 				.id]: input_glycosylation_evidence
 				? input_glycosylation_evidence
 				: undefined,
+			[commonProteinData.disease_name.id]: input_disease_name ? input_disease_name : undefined,
+			[commonProteinData.disease_id.id]: input_disease_id ? input_disease_id : undefined,
 		};
 		return formjson;
 	}
@@ -433,7 +449,9 @@ const ProteinSearch = (props) => {
 			proAdvSearchData.proSequence,
 			proAdvSearchData.proPathwayId,
 			proAdvSearchData.proPubId,
-			proAdvSearchData.proGlyEvidence
+			proAdvSearchData.proGlyEvidence,
+			proAdvSearchData.proDiseaseName,
+			proAdvSearchData.proDiseaseId,
 		);
 		logActivity("user", id, "Performing Advanced Search");
 		let message = "Advanced Search query=" + JSON.stringify(formObject);

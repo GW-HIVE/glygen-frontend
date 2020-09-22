@@ -59,7 +59,9 @@ const ProteinQuerySummary = props => {
     glycosylation_evidence,
     pmid,
     term,
-    term_category
+    term_category,
+    disease_name,
+    disease_id
   } = data;
 
   const executionTime = data.execution_time
@@ -310,6 +312,26 @@ const ProteinQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {pmid}
+                </Col>
+              </Row>
+            )}
+            {disease_name && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {proteinStrings.disease_name.name}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {disease_name}
+                </Col>
+              </Row>
+            )}
+            {disease_id && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {proteinStrings.disease_id.name}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {disease_id}
                 </Col>
               </Row>
             )}
