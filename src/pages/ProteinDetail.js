@@ -215,6 +215,7 @@ const ProteinDetail = (props) => {
 	const [mutataionTabSelected, setmutataionTabSelected] = useState(
 		"with_disease"
 	);
+	const [ptmAnnotation, setPtmAnnotation] = useState([]);
 	const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
 	const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState([]);
 	const [pageLoading, setPageLoading] = useState(true);
@@ -281,6 +282,13 @@ const ProteinDetail = (props) => {
 
 		if (detailData.protein_names) {
 			setProteinNames(formatNamesData(detailData.protein_names));
+		}
+
+		if (detailData.ptm_annotation) {
+			const ptmEvidence = detailData.ptm_annotation.filter(
+				(item) => item.annotation
+			);
+			setPtmAnnotation(ptmEvidence);
 		}
 
 		if (detailData.glycosylation) {
@@ -860,6 +868,37 @@ const ProteinDetail = (props) => {
 					backgroundColor: "#4B85B6",
 					color: "white",
 					width: "15%",
+				};
+			},
+		},
+	];
+	const ptmAnnotationColumns = [
+		{
+			dataField: "evidence",
+			text: proteinStrings.evidence.name,
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
+					width: "20%",
+				};
+			},
+			formatter: (cell, row) => {
+				return (
+					<EvidenceList key={row.annotation} evidences={groupEvidences(cell)} />
+				);
+			},
+		},
+		{
+			dataField: "annotation",
+			text: proteinStrings.annotation_site.shortName,
+			sort: true,
+			// selected: true,
+			// defaultSortField: "annotation",
+			headerStyle: (colum, colIndex) => {
+				return {
+					backgroundColor: "#4B85B6",
+					color: "white",
 				};
 			},
 		},
@@ -1592,7 +1631,17 @@ const ProteinDetail = (props) => {
 										</div>
 									</Card.Header>
 									<Accordion.Collapse eventKey="0">
-										<Card.Body></Card.Body>
+										<Card.Body>
+											{ptm_annotation && ptm_annotation.length !== 0 && (
+												<ClientPaginatedTable
+													data={ptmAnnotation}
+													columns={ptmAnnotationColumns}
+													onClickTarget={"#ptm_annotation"}
+													// defaultSortField={"annotation"}
+												/>
+											)}
+											{!ptm_annotation && <p>No data available.</p>}
+										</Card.Body>
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
