@@ -168,8 +168,8 @@ const MotifList = (props) => {
 							sizePerPage={sizePerPage}
 							totalSize={totalSize}
 							onTableChange={handleTableChange}
-							defaultSortField="motif_ac"
-							idField="motif_ac"
+							defaultSortField="glycan_count"
+							defaultSortOrder="desc"
 						/>
 					)}
 				</section>
