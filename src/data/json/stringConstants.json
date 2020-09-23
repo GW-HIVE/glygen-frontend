@@ -1106,6 +1106,11 @@
 			"displayname": "PTM Annotation",
 			"tooltip": " ptm_annotation Information for selected Protein accession"
 		},
+		"mutagenesis": {
+			"id": "mutagenesis",
+			"displayname": "Mutagenesis",
+			"tooltip": " mutagenesis Information for selected Protein accession"
+		},
 		"glycosylation": {
 			"id": "glycosylation",
 			"displayname": "Glycosylation",
