@@ -106,7 +106,6 @@ const getItemsCrossRef = (data) => {
 
 	//check data.
 	if (data.crossref) {
-	
 		for (let crossrefitem of data.crossref) {
 			let found = "";
 			for (let databaseitem of itemscrossRef) {
@@ -430,11 +429,9 @@ const GlycanDetail = (props) => {
 			},
 			formatter: (value, row) => (
 				<LineTooltip text="View details">
-				  <Link to={routeConstants.motifDetail+row.id}>
-					{row.id}
-				  </Link>
+					<Link to={routeConstants.motifDetail + row.id}>{row.id}</Link>
 				</LineTooltip>
-			  )
+			),
 		},
 		{
 			dataField: "name",
@@ -446,11 +443,9 @@ const GlycanDetail = (props) => {
 			},
 			formatter: (value, row) => (
 				<LineTooltip text="View details">
-				  <Link to={routeConstants.motifDetail + row.id}>
-					{row.name}
-				  </Link>
+					<Link to={routeConstants.motifDetail + row.id}>{row.name}</Link>
 				</LineTooltip>
-			  )
+			),
 		},
 	];
 	// ==================================== //
@@ -749,7 +744,13 @@ const GlycanDetail = (props) => {
 													// For every species object
 													Object.keys(speciesEvidence).map((speEvi) => (
 														// For every database for current species object
-														<Col xs={12} sm={12} md={4} lg={4} xl={4}>
+														<Col
+															xs={12}
+															sm={12}
+															md={4}
+															lg={4}
+															xl={4}
+															style={{ marginBottom: "10px" }}>
 															<>
 																<strong className="nowrap">{speEvi}</strong>{" "}
 																{"["}
@@ -776,7 +777,6 @@ const GlycanDetail = (props) => {
 									</Accordion.Collapse>
 								</Card>
 							</Accordion>
-
 							{/* Motif */}
 							<Accordion
 								id="motif"
@@ -1240,9 +1240,9 @@ const GlycanDetail = (props) => {
 																<td key={pubIndex}>
 																	<p>
 																		<div>
-																			<h6 style={{ marginBottom: "3px" }}>
+																			<h5 style={{ marginBottom: "3px" }}>
 																				<strong>{pub.title}</strong>
-																			</h6>
+																			</h5>
 																		</div>
 																		<div>{pub.authors}</div>
 																		<div>
