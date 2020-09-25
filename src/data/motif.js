@@ -125,6 +125,13 @@ export const MOTIF_LIST_COLUMNS = [
 		headerStyle: (colum, colIndex) => {
 			return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
 		},
+		formatter: (value, row) => (
+			<LineTooltip text="View details">
+				<Link to={routeConstants.motifDetail + row.motif_ac}>
+					{row.glycan_count}
+				</Link>
+			</LineTooltip>
+		),
 	},
 	// {
 	// 	dataField: "glytoucan_ac",
