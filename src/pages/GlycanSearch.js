@@ -44,6 +44,7 @@ const GlycanSearch = (props) => {
 		(state, newState) => ({ ...state, ...newState }),
 		{
 			glycanId: '',
+			glycanIdSubsumption: 'none',
 			glyMassType: 'Native',
 			glyMass: [150, 6751],
 			glyMassInput: [Number(150).toLocaleString('en-US'), Number(6751).toLocaleString('en-US')],
@@ -52,6 +53,7 @@ const GlycanSearch = (props) => {
 			glyNumSugarsRange: [1, 37],
 			glyNumSugarsInput: [Number(1).toLocaleString('en-US'), Number(37).toLocaleString('en-US')],
 			glyOrganisms: [],
+			glyOrgAnnotationCat: '',
 			glyOrgOperation: 'or',
 			glyType: '',
 			glySubType: '',
@@ -227,9 +229,13 @@ const GlycanSearch = (props) => {
 					} else {
 						setGlyAdvSearchData({
 							glycanId:
-								data.query.glytoucan_ac === undefined
+								data.query.glycan_identifier === undefined
 									? ''
-									: data.query.glytoucan_ac + ",",
+									: data.query.glycan_identifier.glycan_id + ",",
+							glycanIdSubsumption:
+								data.query.glycan_identifier === undefined
+									? 'none'
+									: data.query.glycan_identifier.subsumption,
 							glyMassType:
 								data.query.mass_type === undefined
 									? initData.glycan_mass.native.name
@@ -291,6 +297,10 @@ const GlycanSearch = (props) => {
 											Number(data.query.number_monosaccharides.min).toLocaleString('en-US'),
 											Number(data.query.number_monosaccharides.max).toLocaleString('en-US'),
 									  ],
+							glyOrgAnnotationCat:
+								data.query.organism === undefined
+									? ''
+									: data.query.organism.annotation_category,
 							glyOrgOperation:
 								data.query.organism === undefined
 									? 'or'
@@ -341,12 +351,14 @@ const GlycanSearch = (props) => {
 	function searchjson(
 		input_query_type,
 		input_glycan_id,
+		input_glycan_id_subsumption,
 		input_mass_type,
 		input_mass_min,
 		input_mass_max,
 		input_sugar_min,
 		input_sugar_max,
 		input_organism,
+		input_organism_annotation_cat,
 		input_organism_operation,
 		input_glycantype,
 		input_glycansubtype,
@@ -406,10 +418,12 @@ const GlycanSearch = (props) => {
 		if (input_organism && input_organism.length > 0) {
 			organisms = {
 				organism_list: input_organism,
-				operation: input_organism_operation,
+				annotation_category: input_organism_annotation_cat,
+				operation: input_organism_operation
 			};
 		}
 
+		var glycan_identifier = undefined;
 		var glycan_id = input_glycan_id;
 		if (glycan_id) {
 			glycan_id = glycan_id.trim();
@@ -421,6 +435,10 @@ const GlycanSearch = (props) => {
 			if (index > -1 && index + 1 === glycan_id.length) {
 				glycan_id = glycan_id.substr(0, index);
 			}
+			glycan_identifier = {
+				glycan_id: glycan_id,
+				subsumption: input_glycan_id_subsumption 
+			}
 		}
 
 		var formjson = {
@@ -430,7 +448,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.mass.id]: input_mass,
 			[commonGlycanData.number_monosaccharides.id]: monosaccharides,
 			[commonGlycanData.enzyme.id]: enzymes,
-			[commonGlycanData.glycan_id.id]: glycan_id,
+			[commonGlycanData.glycan_identifier.id]: glycan_identifier,
 			[commonGlycanData.organism.id]: organisms,
 			[commonGlycanData.glycan_type.id]: input_glycantype,
 			[commonGlycanData.glycan_subtype.id]: input_glycansubtype,
@@ -475,12 +493,14 @@ const GlycanSearch = (props) => {
 		let formObject = searchjson(
 			glycanData.advanced_search.query_type.name,
 			glyAdvSearchData.glycanId,
+			glyAdvSearchData.glycanIdSubsumption,
 			glyAdvSearchData.glyMassType,
 			glyAdvSearchData.glyMass[0],
 			glyAdvSearchData.glyMass[1],
 			glyAdvSearchData.glyNumSugars[0],
 			glyAdvSearchData.glyNumSugars[1],
 			glyAdvSearchData.glyOrganisms,
+			glyAdvSearchData.glyOrgAnnotationCat,
 			glyAdvSearchData.glyOrgOperation,
 			glyAdvSearchData.glyType,
 			glyAdvSearchData.glySubType,
@@ -527,6 +547,8 @@ const GlycanSearch = (props) => {
 
 		let formObject = searchjson(
 			glycanData.composition_search.query_type.name,
+			undefined,
+			undefined,
 			undefined,
 			undefined,
 			undefined,

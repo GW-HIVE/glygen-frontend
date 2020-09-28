@@ -8,10 +8,8 @@ import HelpTooltip from '../tooltip/HelpTooltip';
 import ExampleExploreControl from '../example/ExampleExploreControl';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
@@ -31,6 +29,10 @@ const GlycanAdvancedSearch = (props) => {
 
 	const glyOrgOperationOnChange = (value) => {
 		props.setGlyAdvSearchData({ glyOrgOperation: value });
+	}
+
+	const glyOrgAnnotationCatChange = (value) => {
+		props.setGlyAdvSearchData({ glyOrgAnnotationCat: value });
 	}
 
 	const glyMassTypeOnChange = (value) => {
@@ -117,6 +119,10 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glycanId: inputGlycanId, glyAdvSearchValError: valArr });
 	}
 
+	function glycanIdSubsumtionChange(inputGlycanIdSubsumption) {
+		props.setGlyAdvSearchData({ glycanIdSubsumption: inputGlycanIdSubsumption });
+	}
+
 	function glyProtChange(inputGlyProt) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[1] = inputGlyProt.length > advancedSearch.protein_identifier.length;
@@ -144,6 +150,7 @@ const GlycanAdvancedSearch = (props) => {
 	const clearGlycan = () => {
 		props.setGlyAdvSearchData({
 			glycanId: '',
+			glycanIdSubsumption: 'none',
 			glyMassType: props.initData.glycan_mass.native.name,
 			glyMass: [
 				Math.floor(props.initData.glycan_mass.native.min),
@@ -170,6 +177,7 @@ const GlycanAdvancedSearch = (props) => {
 				Number(props.initData.number_monosaccharides.max).toLocaleString('en-US'),
 			],
 			glyOrganisms: [],
+			glyOrgAnnotationCat: '',
 			glyOrgOperation: 'or',
 			glyType: advancedSearch.glycan_type.placeholderId,
 			glySubType: advancedSearch.glycan_subtype.placeholderId,
@@ -210,28 +218,50 @@ const GlycanAdvancedSearch = (props) => {
 				{/* Glycan Id */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
+					<Grid container spacing={2} >
+							<Grid item xs={12} sm={9}>
 						<Typography className={'search-lbl'} gutterBottom>
 							<HelpTooltip
-                                title={commonGlycanData.glycan_id.tooltip.title}
-                                text={commonGlycanData.glycan_id.tooltip.text}
-                                urlText={commonGlycanData.glycan_id.tooltip.urlText}
-                                url={commonGlycanData.glycan_id.tooltip.url}
+                                title={commonGlycanData.glycan_identifier.tooltip.title}
+                                text={commonGlycanData.glycan_identifier.tooltip.text}
+                                urlText={commonGlycanData.glycan_identifier.tooltip.urlText}
+                                url={commonGlycanData.glycan_identifier.tooltip.url}
                             />
-                            {commonGlycanData.glycan_id.name}
+                            {commonGlycanData.glycan_identifier.name}
 						</Typography>
 						<MultilineAutoTextInput
 							fullWidth
 							inputValue={props.inputValue.glycanId}
                             setInputValue={glycanIdChange}
-                            placeholder={advancedSearch.glycan_id.placeholder}
-							typeahedID={advancedSearch.glycan_id.typeahedID}
-							length={advancedSearch.glycan_id.length}
-							errorText={advancedSearch.glycan_id.errorText}
+                            placeholder={advancedSearch.glycan_identifier.placeholder}
+							typeahedID={advancedSearch.glycan_identifier.typeahedID}
+							length={advancedSearch.glycan_identifier.length}
+							errorText={advancedSearch.glycan_identifier.errorText}
 						/>
                         <ExampleExploreControl
 							setInputValue={glycanIdChange}
-							inputValue={advancedSearch.glycan_id.examples}
+							inputValue={advancedSearch.glycan_identifier.examples}
 						/>
+							</Grid>
+
+							{/* Subsumption */}
+							<Grid item xs={12} sm={3}>
+									<Typography className={'search-lbl'} gutterBottom>
+									&nbsp;
+								</Typography>
+                                <FormControl 
+                                    variant='outlined' 
+                                    fullWidth
+                                >
+									<SelectControl
+										inputValue={props.inputValue.glycanIdSubsumption}
+										menu={advancedSearch.glycan_identifier.subsumption}
+										setInputValue={glycanIdSubsumtionChange}
+									/>
+								</FormControl>
+							</Grid>
+							</Grid>
+
 					</FormControl>
 				</Grid>
 				{/* Monoisotopic Mass */}
@@ -311,7 +341,7 @@ const GlycanAdvancedSearch = (props) => {
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth>
 						<Grid container spacing={2} alignItems='center'>
-							<Grid item xs={9} sm={9}>
+							<Grid item xs={6} sm={6}>
 								<Typography
 									className={'search-lbl'}
 									gutterBottom
@@ -328,6 +358,22 @@ const GlycanAdvancedSearch = (props) => {
 									setInputValue={glyOrgChange}
 									placeholder={advancedSearch.organism.placeholder}
 								/>}
+							</Grid>
+							{/* Subsumption */}
+							<Grid item xs={3} sm={3}>
+									<Typography className={'search-lbl'} gutterBottom>
+									&nbsp;
+								</Typography>
+                                <FormControl 
+                                    variant='outlined' 
+                                    fullWidth
+                                >
+									<SelectControl
+										inputValue={props.inputValue.glyOrgAnnotationCat}
+										menu={advancedSearch.organism.annotation_category}
+										setInputValue={glyOrgAnnotationCatChange}
+									/>
+								</FormControl>
 							</Grid>
 							<Grid item xs={3} sm={3}>
                                 <Typography className={'search-lbl'} gutterBottom>
@@ -412,6 +458,36 @@ const GlycanAdvancedSearch = (props) => {
                                 url={commonGlycanData.protein_identifier.tooltip.url}
                             />
                             {commonGlycanData.protein_identifier.name}
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.glyProt}
+                            setInputValue={glyProtChange}
+                            placeholder={advancedSearch.protein_identifier.placeholder}
+							typeahedID={advancedSearch.protein_identifier.typeahedID}
+							length={advancedSearch.protein_identifier.length}
+							errorText={advancedSearch.protein_identifier.errorText}
+						/>
+                        <ExampleExploreControl
+							setInputValue={glyProtChange}
+							inputValue={advancedSearch.protein_identifier.examples}
+						/>
+					</FormControl>
+				</Grid>
+
+				{/* Binding Protein */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined'>
+						<Typography
+							className={'search-lbl'}
+							gutterBottom
+						>
+							<HelpTooltip
+                                title={commonGlycanData.protein_identifier.tooltip.title}
+                                text={commonGlycanData.protein_identifier.tooltip.text}
+                                urlText={commonGlycanData.protein_identifier.tooltip.urlText}
+                                url={commonGlycanData.protein_identifier.tooltip.url}
+                            />
+                            Binding Protein
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.glyProt}

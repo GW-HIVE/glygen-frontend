@@ -42,7 +42,7 @@
     },
     "advanced_search": {
         "tabTitle": "Advanced Search",
-        "glycan_id": {
+        "glycan_identifier": {
             "length": 2500,
             "errorText": "Entry is too long - max length is 2500.",
             "typeahedID": "glytoucan_ac",
@@ -66,6 +66,16 @@
                         "id": "G10716"
                     }
                 }
+            ],
+            "subsumption": [
+                {
+                    "id": "any",
+                    "name": "Related Glycans"
+                }, 
+                {
+                    "id": "none",
+                    "name": "Exact Match"
+                }
             ]
         },
         "organism": {
@@ -78,6 +88,20 @@
                 {
                     "id": "and",
                     "name": "And"
+                }
+            ],
+            "annotation_category": [
+                {
+                    "id": "",
+                    "name": "Any"
+                }, 
+                {
+                    "id": "subsumption",
+                    "name": "Inferred"
+                },
+                {
+                    "id": "direct",
+                    "name": "Annotated"
                 }
             ]
         },
