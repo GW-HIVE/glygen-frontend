@@ -692,6 +692,19 @@ const ProteinDetail = props => {
         };
       }
     },
+
+    {
+      dataField: "annotation",
+      text: proteinStrings.annotation_site.shortName,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white",
+          width: "20%"
+        };
+      }
+    },
     {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
@@ -706,10 +719,18 @@ const ProteinDetail = props => {
       },
       formatter: (value, row) => (
         <>
-          {value.name}{" "}
-          <span className="nowrap">
-            (DOID: <a href={value.url}>{value.doid}</a>)
-          </span>
+          {value.map(disease => (
+            <span key={disease.recommended_name.id}>
+              {disease.recommended_name.name}{" "}
+              <span className="nowrap">
+                (DOID:{" "}
+                <a href={disease.recommended_name.url}>
+                  {disease.recommended_name.id}
+                </a>
+                )
+              </span>
+            </span>
+          ))}
         </>
       )
     },
@@ -2103,22 +2124,23 @@ const ProteinDetail = props => {
                                     {sequence.length}
                                   </div>
                                 )}
-
-                                <div>
-                                  {proteinStrings.chromosome.name}: {""}
-                                  {isoformsS.locus
-                                    ? isoformsS.locus.chromosome
-                                    : "NA"}{" "}
-                                  {""}(
-                                  {isoformsS.locus
-                                    ? isoformsS.locus.start_pos
-                                    : "NA"}{" "}
-                                  -{" "}
-                                  {isoformsS.locus
-                                    ? isoformsS.locus.end_pos
-                                    : "NA"}
-                                  )
-                                </div>
+                                {isoformsS.locus && (
+                                  <div>
+                                    {proteinStrings.chromosome.name}: {""}
+                                    {isoformsS.locus
+                                      ? isoformsS.locus.chromosome
+                                      : "NA"}{" "}
+                                    {""}(
+                                    {isoformsS.locus
+                                      ? isoformsS.locus.start_pos
+                                      : "NA"}{" "}
+                                    -{" "}
+                                    {isoformsS.locus
+                                      ? isoformsS.locus.end_pos
+                                      : "NA"}
+                                    )
+                                  </div>
+                                )}
                                 <Grid className="badge-grid" xs={12}>
                                   <EvidenceList
                                     evidences={groupEvidences(
