@@ -709,7 +709,6 @@ const ProteinDetail = props => {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
       defaultSortField: "disease",
-      sort: true,
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -720,7 +719,7 @@ const ProteinDetail = props => {
       formatter: (value, row) => (
         <>
           {value.map(disease => (
-            <span key={disease.recommended_name.id}>
+            <li key={disease.recommended_name.id}>
               {disease.recommended_name.name}{" "}
               <span className="nowrap">
                 (DOID:{" "}
@@ -729,7 +728,7 @@ const ProteinDetail = props => {
                 </a>
                 )
               </span>
-            </span>
+            </li>
           ))}
         </>
       )
@@ -1015,8 +1014,6 @@ const ProteinDetail = props => {
       dataField: "annotation",
       text: proteinStrings.annotation_site.shortName,
       sort: true,
-      // selected: true,
-      // defaultSortField: "annotation",
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
