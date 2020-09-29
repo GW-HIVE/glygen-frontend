@@ -20,7 +20,7 @@
 				"shortName": "Glycan ID",
 				"tooltip": {
 					"title": "Glycan ID",
-					"text": "You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. By selecting 'Exact match' only glycans with the provided IDs will be found. When selecting 'Related Glycans also glycans that have the same structure but more structural information and glycans with less structural information (up to compositions) will be included in the search result.",
+					"text": "You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. By selecting 'Exact match' only glycans with the provided IDs will be found. When selecting 'Related Glycans' also glycans that have the same structure but more structural information and glycans with less structural information (up to compositions) will be included in the search result.",
 					"urlText": "Read more...",
 					"url": "https://glytoucan.org/Structures"
 				},
@@ -807,9 +807,7 @@
 				"shortName": "Disease Name",
 				"tooltip": {
 					"title": "Disease Name",
-					"text": "Search for protein(s) that have been associated with a disease. Specify the disease name. A proposal system will assist in choosing the right name while typing.",
-					"urlText": "Read more...",
-					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+					"text": "Search for protein(s) that have been associated with a disease. Specify the disease name. A proposal system will assist in choosing the right name while typing."
 				},
 				"id": "disease_name"
 			},
@@ -818,9 +816,7 @@
 				"shortName": "Disease ID",
 				"tooltip": {
 					"title": "Disease ID",
-					"text": "Search for protein(s) that have been associated with a disease. Specify the disase using MONDO, DOID or MIM.",
-					"urlText": "Read more...",
-					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+					"text": "Search for protein(s) that have been associated with a disease. Specify the disase using MONDO, DOID or MIM."
 				},
 				"id": "disease_id"
 			},

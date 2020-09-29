@@ -115,7 +115,7 @@ const GlycanAdvancedSearch = (props) => {
 
 	function glycanIdChange(inputGlycanId) {
 		let valArr = props.inputValue.glyAdvSearchValError;
-		valArr[0] = inputGlycanId.length > advancedSearch.glycan_id.length;
+		valArr[0] = inputGlycanId.length > advancedSearch.glycan_identifier.length;
 		props.setGlyAdvSearchData({ glycanId: inputGlycanId, glyAdvSearchValError: valArr });
 	}
 

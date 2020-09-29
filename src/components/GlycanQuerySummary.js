@@ -132,7 +132,7 @@ const GlycanQuerySummary = props => {
                   {glycanStrings.glycan_id_subsumption.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {advancedSearch.glycan_id.subsumption.filter(subsumption => subsumption.id === glycan_identifier.subsumption)[0].name}
+                  {advancedSearch.glycan_identifier.subsumption.filter(subsumption => subsumption.id === glycan_identifier.subsumption)[0].name}
                 </Col>
               </Row>
             )}
