@@ -15,6 +15,39 @@
 				},
 				"id": "glytoucan_ac"
 			},
+			"glycan_identifier": {
+				"name": "Glycan ID",
+				"shortName": "Glycan ID",
+				"tooltip": {
+					"title": "Glycan ID",
+					"text": "You can search Glycan ID by single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) ID. By selecting 'Exact match' only glycans with the provided IDs will be found. When selecting 'Related Glycans' also glycans that have the same structure but more structural information and glycans with less structural information (up to compositions) will be included in the search result.",
+					"urlText": "Read more...",
+					"url": "https://glytoucan.org/Structures"
+				},
+				"id": "glycan_identifier"
+			},
+			"glycan_id_subsumption": {
+				"name": "Glycan ID Subsumption",
+				"shortName": "Glycan ID Subsumption",
+				"tooltip": {
+					"title": "Glycan ID Subsumption",
+					"text": "",
+					"urlText": "Read more...",
+					"url": ""
+				},
+				"id": "glycan_id_subsumption"
+			},
+			"organism_annotation": {
+				"name": "Organism Annotation",
+				"shortName": "Species Annotation",
+				"tooltip": {
+					"title": "Organism Annotation",
+					"text": "",
+					"urlText": "Read more...",
+					"url": ""
+				},
+				"id": "organism_annotation"
+			},
 			"mass": {
 				"name": "Monoisotopic Mass",
 				"shortName": "Monoisotopic Mass",
@@ -71,7 +104,7 @@
 				"shortName": "Species",
 				"tooltip": {
 					"title": "Organism",
-					"text": "An individual animal, plant, or single-celled life form. Click to select one or multiple Organisms that makes your glycan(s)."
+					"text": "Search for glycan(s) that can be made by an Organism. It is possible to specify multiple organisms and combine the search results. If 'Or' is selected the search result will be a union of all glycans made in any of the organisms. If 'AND' is selected only glycans that are present in each of organisms will be included in the result set. If 'Annotated' is selected only glycans with the organism annotation coming from one of the source databases will be included. If 'Infered' is selected, in addition to the glycans with the annotation also glycans that received the annotation because they are related will be included. For example: the composition of glycan X will also receive the organism annotation from glycan X. However the composition will only be included if 'Infered' is selected."
 				},
 				"id": "organism"
 			},
@@ -527,13 +560,13 @@
 				"id": "doidd"
 			},
 			"significantt": {
-				"name": "Significant.",
+				"name": "Significant",
 				"shortName": "Significant",
 				"tooltip": {},
 				"id": "significant"
 			},
 			"expression_trend": {
-				"name": "Expression Trend.",
+				"name": "Expression Trend",
 				"shortName": "Expression Trend",
 				"tooltip": {},
 				"id": "trend"
@@ -774,9 +807,7 @@
 				"shortName": "Disease Name",
 				"tooltip": {
 					"title": "Disease Name",
-					"text": "",
-					"urlText": "Read more...",
-					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+					"text": "Search for protein(s) that have been associated with a disease. Specify the disease name. A proposal system will assist in choosing the right name while typing."
 				},
 				"id": "disease_name"
 			},
@@ -785,9 +816,7 @@
 				"shortName": "Disease ID",
 				"tooltip": {
 					"title": "Disease ID",
-					"text": "",
-					"urlText": "Read more...",
-					"url": "https://www.ncbi.nlm.nih.gov/refseq/"
+					"text": "Search for protein(s) that have been associated with a disease. Specify the disase using MONDO, DOID or MIM."
 				},
 				"id": "disease_id"
 			},
@@ -1098,7 +1127,7 @@
 		},
 		"go_annotation": {
 			"id": "go_annotation",
-			"displayname": "Go Annotation",
+			"displayname": "GO Annotation",
 			"tooltip": " go_annotation Information for selected Protein accession"
 		},
 		"ptm_annotation": {

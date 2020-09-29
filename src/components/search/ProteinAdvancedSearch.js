@@ -113,6 +113,18 @@ const ProteinAdvancedSearch = (props) => {
 	const proGlyEvidenceOnChange = (value) => {
 		props.setProAdvSearchData({ proGlyEvidence: value });
 	}
+
+	function proDiseaseNameChange(inputProDiseaseName) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[10] = inputProDiseaseName.length > advancedSearch.disease_name.length;
+		props.setProAdvSearchData({ proDiseaseName: inputProDiseaseName, proAdvSearchValError: valArr });
+	}
+
+	function proDiseaseIdChange(inputProDiseaseId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[11] = inputProDiseaseId.length > advancedSearch.disease_id.length;
+		props.setProAdvSearchData({ proDiseaseId: inputProDiseaseId, proAdvSearchValError: valArr });
+	}
 	 
 	const clearProtein = () => {
 		props.setProAdvSearchData({
@@ -143,8 +155,10 @@ const ProteinAdvancedSearch = (props) => {
 			proPathwayId: '',
 			proPubId: '',
 			proGlyEvidence: advancedSearch.glycosylation_evidence.placeholderId,
+			proDiseaseName: '',
+			proDiseaseId: '',
 			proAdvSearchValError: [false, false, false, false, false,
-				false, false, false, false, false]
+				false, false, false, false, false, false, false]
 		});
 	};
 
@@ -404,8 +418,38 @@ const ProteinAdvancedSearch = (props) => {
                                 urlText={commonProteinData.glytoucan_ac.tooltip.urlText}
                                 url={commonProteinData.glytoucan_ac.tooltip.url}
                             />
-                            {commonProteinData.glytoucan_ac.name}
+                            {/* {commonProteinData.glytoucan_ac.name} */}
+							Covalently Attached Glycan
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.proGlytoucanAc}
+                            setInputValue={proGlytoucanAcChange}
+                            placeholder={advancedSearch.glytoucan_ac.placeholder}
+							typeahedID={advancedSearch.glytoucan_ac.typeahedID}
+							length={advancedSearch.glytoucan_ac.length}
+							errorText={advancedSearch.glytoucan_ac.errorText}
+						/>
+                        <ExampleExploreControl
+							setInputValue={proGlytoucanAcChange}
+							inputValue={advancedSearch.glytoucan_ac.examples}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Binding Glycan */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined'>
+						<Typography
+							className={'search-lbl'}
 							gutterBottom
+						>
+							<HelpTooltip
+                                title={commonProteinData.glytoucan_ac.tooltip.title}
+                                text={commonProteinData.glytoucan_ac.tooltip.text}
+                                urlText={commonProteinData.glytoucan_ac.tooltip.urlText}
+                                url={commonProteinData.glytoucan_ac.tooltip.url}
+                            />
+                            {/* {commonProteinData.glytoucan_ac.name} */}
+							Bound Glycan
 						</Typography>
 						<AutoTextInput
 							inputValue={props.inputValue.proGlytoucanAc}
@@ -522,6 +566,64 @@ const ProteinAdvancedSearch = (props) => {
                         <ExampleExploreControl
 							setInputValue={proPathwayIdChange}
 							inputValue={advancedSearch.pathway_id.examples}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Disease Name */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined'>
+						<Typography
+							className={'search-lbl'}
+							gutterBottom
+						>
+							<HelpTooltip
+                                title={commonProteinData.disease_name.tooltip.title}
+                                text={commonProteinData.disease_name.tooltip.text}
+                                urlText={commonProteinData.disease_name.tooltip.urlText}
+                                url={commonProteinData.disease_name.tooltip.url}
+                            />
+                            {commonProteinData.disease_name.name}
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.proDiseaseName}
+                            setInputValue={proDiseaseNameChange}
+                            placeholder={advancedSearch.disease_name.placeholder}
+							typeahedID={advancedSearch.disease_name.typeahedID}
+							length={advancedSearch.disease_name.length}
+							errorText={advancedSearch.disease_name.errorText}
+						/>
+                        <ExampleExploreControl
+							setInputValue={proDiseaseNameChange}
+							inputValue={advancedSearch.disease_name.examples}
+						/>
+					</FormControl>
+				</Grid>
+				{/* Disease ID */}
+				<Grid item xs={12} sm={10}>
+					<FormControl fullWidth variant='outlined'>
+						<Typography
+							className={'search-lbl'}
+							gutterBottom
+						>
+							<HelpTooltip
+                                title={commonProteinData.disease_id.tooltip.title}
+                                text={commonProteinData.disease_id.tooltip.text}
+                                urlText={commonProteinData.disease_id.tooltip.urlText}
+                                url={commonProteinData.disease_id.tooltip.url}
+                            />
+                            {commonProteinData.disease_id.name}
+						</Typography>
+						<AutoTextInput
+							inputValue={props.inputValue.proDiseaseId}
+                            setInputValue={proDiseaseIdChange}
+                            placeholder={advancedSearch.disease_id.placeholder}
+							typeahedID={advancedSearch.disease_id.typeahedID}
+							length={advancedSearch.disease_id.length}
+							errorText={advancedSearch.disease_id.errorText}
+						/>
+                        <ExampleExploreControl
+							setInputValue={proDiseaseIdChange}
+							inputValue={advancedSearch.disease_id.examples}
 						/>
 					</FormControl>
 				</Grid>

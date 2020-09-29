@@ -682,7 +682,7 @@ const ProteinDetail = props => {
     },
     {
       dataField: "annotation",
-      text: "Filter Annotations",
+      text: proteinStrings.annotation_site.shortName,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
@@ -692,9 +692,10 @@ const ProteinDetail = props => {
         };
       }
     },
+
     {
-      dataField: "chr_id",
-      text: "Genomic Locus",
+      dataField: "annotation",
+      text: proteinStrings.annotation_site.shortName,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
@@ -702,29 +703,7 @@ const ProteinDetail = props => {
           color: "white",
           width: "20%"
         };
-      },
-      formatter: (value, row) => (
-        <>
-          Chr{row.chr_id}:{row.chr_pos}
-        </>
-      )
-    },
-
-    {
-      dataField: "sequence",
-      text: "Sequence",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      },
-      formatter: (value, row) => (
-        <>
-          {row.ref_nt} > {row.alt_nt}
-        </>
-      )
+      }
     },
     {
       dataField: "disease",
@@ -806,18 +785,6 @@ const ProteinDetail = props => {
           {row.sequence_org} → {row.sequence_mut}
         </>
       )
-    },
-    {
-      dataField: "frequency",
-      text: "MAF",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white",
-          width: "20%"
-        };
-      }
     }
   ];
   const mutagenesisColumns = [
@@ -985,27 +952,19 @@ const ProteinDetail = props => {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
       defaultSortField: "disease",
+      sort: true,
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
-          color: "white",
-          width: "16%"
+          color: "white"
         };
       },
       formatter: (value, row) => (
         <>
-          {value.map(disease => (
-            <li key={disease.recommended_name.id}>
-              {disease.recommended_name.name}{" "}
-              <span className="nowrap">
-                (DOID:{" "}
-                <a href={disease.recommended_name.url}>
-                  {disease.recommended_name.id}
-                </a>
-                )
-              </span>
-            </li>
-          ))}
+          {value.name}{" "}
+          <span className="nowrap">
+            ({proteinStrings.doid.name}: <a href={value.url}>{value.doid}</a>)
+          </span>
         </>
       )
     },
@@ -1239,26 +1198,25 @@ const ProteinDetail = props => {
                                     {genes.name}
                                   </a>
                                 </div>
-                                {gene.locus && (
-                                  <div>
-                                    <strong>
-                                      {proteinStrings.gene_location.name}:
-                                    </strong>{" "}
-                                    {proteinStrings.chromosome.name}: {""}
-                                    {genes.locus
-                                      ? genes.locus.chromosome
-                                      : "NA"}{" "}
-                                    {""}(
-                                    {genes.locus
-                                      ? addCommas(genes.locus.start_pos)
-                                      : "NA"}{" "}
-                                    -{" "}
-                                    {genes.locus
-                                      ? addCommas(genes.locus.end_pos)
-                                      : "NA"}
-                                    )
-                                  </div>
-                                )}
+
+                                <div>
+                                  <strong>
+                                    {proteinStrings.gene_location.name}:
+                                  </strong>{" "}
+                                  {proteinStrings.chromosome.name}: {""}
+                                  {genes.locus
+                                    ? genes.locus.chromosome
+                                    : "NA"}{" "}
+                                  {""}(
+                                  {genes.locus
+                                    ? addCommas(genes.locus.start_pos)
+                                    : "NA"}{" "}
+                                  -{" "}
+                                  {genes.locus
+                                    ? addCommas(genes.locus.end_pos)
+                                    : "NA"}
+                                  )
+                                </div>
 
                                 <EvidenceList
                                   evidences={groupEvidences(
@@ -2154,18 +2112,15 @@ const ProteinDetail = props => {
                                     {isoformsS.isoform_ac}
                                   </a>
                                 </div>
-                                {isoformsS.sequence &&
-                                  isoformsS.sequence.length && (
-                                    <div>
-                                      <strong>
-                                        {" "}
-                                        {
-                                          proteinStrings.isoform_length.name
-                                        }:{" "}
-                                      </strong>
-                                      {isoformsS.sequence.length}
-                                    </div>
-                                  )}
+                                {sequence && sequence.length && (
+                                  <div>
+                                    <strong>
+                                      {" "}
+                                      {proteinStrings.isoform_length.name}:{" "}
+                                    </strong>
+                                    {sequence.length}
+                                  </div>
+                                )}
                                 {isoformsS.locus && (
                                   <div>
                                     {proteinStrings.chromosome.name}: {""}
@@ -2310,13 +2265,13 @@ const ProteinDetail = props => {
                               >
                                 <div>
                                   <strong>UniProtKB Homolog Accession: </strong>
-                                  <a
-                                    href={orthologsS.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {orthologsS.uniprot_canonical_ac}
-                                  </a>
+
+                                  {/* <Link
+																		href={orthologsS.url}
+																		target="_blank"
+																		rel="noopener noreferrer"> */}
+                                  {orthologsS.uniprot_canonical_ac}
+                                  {/* </Link> */}
                                 </div>
                                 <div>
                                   <strong>

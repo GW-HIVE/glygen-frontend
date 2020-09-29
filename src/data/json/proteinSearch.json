@@ -293,10 +293,6 @@
                     "example": {
                         "name": "Example",
                         "id": "Deafness"
-                    },
-                    "explore": {
-                        "id": "Disease Name",
-                        "url": ""
                     }
                 }
             ]
@@ -312,10 +308,6 @@
                     "example": {
                         "name": "Example",
                         "id": "0050968"
-                    },
-                    "explore": {
-                        "id": "Disease ID",
-                        "url": ""
                     }
                 }
             ]
