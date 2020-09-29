@@ -969,19 +969,27 @@ const ProteinDetail = props => {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
       defaultSortField: "disease",
-      sort: true,
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
-          color: "white"
+          color: "white",
+          width: "16%"
         };
       },
       formatter: (value, row) => (
         <>
-          {value.name}{" "}
-          <span className="nowrap">
-            ({proteinStrings.doid.name}: <a href={value.url}>{value.doid}</a>)
-          </span>
+          {value.map(disease => (
+            <li key={disease.recommended_name.id}>
+              {disease.recommended_name.name}{" "}
+              <span className="nowrap">
+                (DOID:{" "}
+                <a href={disease.recommended_name.url}>
+                  {disease.recommended_name.id}
+                </a>
+                )
+              </span>
+            </li>
+          ))}
         </>
       )
     },
