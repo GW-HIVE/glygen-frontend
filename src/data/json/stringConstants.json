@@ -560,13 +560,13 @@
 				"id": "doidd"
 			},
 			"significantt": {
-				"name": "Significant.",
+				"name": "Significant",
 				"shortName": "Significant",
 				"tooltip": {},
 				"id": "significant"
 			},
 			"expression_trend": {
-				"name": "Expression Trend.",
+				"name": "Expression Trend",
 				"shortName": "Expression Trend",
 				"tooltip": {},
 				"id": "trend"
@@ -1139,7 +1139,7 @@
 		},
 		"go_annotation": {
 			"id": "go_annotation",
-			"displayname": "Go Annotation",
+			"displayname": "GO Annotation",
 			"tooltip": " go_annotation Information for selected Protein accession"
 		},
 		"ptm_annotation": {

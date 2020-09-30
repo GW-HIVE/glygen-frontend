@@ -355,7 +355,7 @@ const ProtVista = () => {
     });
 
     getData.catch(({ response }) => {
-      let message = "Protvista Detail api call";
+      let message = "ProtVista Detail api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
     // eslint-disable-next-line
