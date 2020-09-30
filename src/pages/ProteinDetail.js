@@ -232,6 +232,7 @@ const ProteinDetail = props => {
   });
   const [geneNames, setGeneName] = useState([]);
   const [proteinNames, setProteinNames] = useState([]);
+  const [diseaseData, setDiseaseData] = useState([]);
 
   const recommendedGeneRows = geneNames.map(getRecommendedRows);
   const synonymGeneRows = geneNames.map(getSynonymRows);
@@ -335,6 +336,31 @@ const ProteinDetail = props => {
       setmutataionTabSelected(
         WithDisease.length > 0 ? "with_disease" : "without_disease"
       );
+    }
+
+    if (detailData.disease) {
+      setDiseaseData(diseaseDataRearrangement());
+
+      function diseaseDataRearrangement() {  
+        var disease = detailData.disease.slice();
+        for (var j = 0; j < disease.length; j++){
+          var synTemp = [];
+          var synonyms = disease[j].synonyms.slice();
+          for (var i = 0; 0 < synonyms.length; i++){
+            synTemp[i] = synonyms.reduce((synVal, curVal, ind, arr) => {
+              synVal.name = curVal.name;
+              synVal.resource = arr.filter((syn)=> 
+                    syn.name === curVal.name);
+                    return synVal;
+                    }, {});
+          
+            synonyms = synonyms.filter((syn)=> 
+            syn.name !== synTemp[i].name);
+          }
+            disease[j].synonyms = synTemp;        
+         }
+         return disease;
+        }
     }
   }, [detailData]);
 
@@ -2351,52 +2377,81 @@ const ProteinDetail = props => {
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                      <p>
-                        {disease && disease.length && (
-                          <Grid container classorthologs_ac="table-body">
-                            {disease.map(thisDisease => (
-                              <Grid item xs={12}>
-                                <div>
-                                  <strong>
-                                    {" "}
-                                    {thisDisease.recommended_name.name}
-                                  </strong>
+                    <Card.Body className="card-padding-zero">
+                      <Table hover fluid>                          
+                          {diseaseData && diseaseData.length && (
+                            <tbody className="table-body">
+                              {diseaseData.map(thisDisease => (
+                                <tr className="table-row">
+                                  <td>
+                                    <p>
+                                      <Grid item xs={12}>
+                                        <div>
+                                          <p>
+                                          <strong>{" "}{proteinStrings.name.name}: </strong> {thisDisease.recommended_name.name}
+                                            {" "}
+                                            (
+                                            <a
+                                              href={thisDisease.recommended_name.url}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {thisDisease.recommended_name.resource}{":"}
+                                              {thisDisease.recommended_name.id}
+                                            </a>
+                                            )
+                                          </p>
+                                          {thisDisease.synonyms && thisDisease.synonyms.length && (
+                                            <p>
+                                              <strong>{" "}{proteinStrings.synonyms.name}: </strong>
+                                              <ul style={{ marginLeft: "-40px" }}>
+                                                <ul>
+                                                  {thisDisease.synonyms.map(synonyms => (
+                                                    <li>
+                                                        {" "}{synonyms.name}{" "}
+                                                        [{synonyms.resource.map((res, ind, arr) => {
+                                                          return (
+                                                            <>
+                                                              <a href={res.url} target="_blank" rel="noopener noreferrer">{res.resource + ":" + res.id}</a>
+                                                              {ind < (arr.length - 1) ? ", " : ""}
+                                                            </>
+                                                          )})}]
+                                                    </li>
+                                                  ))}
+                                                </ul>
+                                              </ul>
+                                            </p>
+                                          )}
+                                          {thisDisease.recommended_name.description && (
+                                            <p>
+                                              <strong>
+                                                {" "}
+                                                {proteinStrings.description.name}: </strong>{thisDisease.recommended_name.description}{" "}
+                                            </p>
+                                          )}
+                                        </div>
 
-                                  <p>
-                                    {" "}
-                                    {/* ICD10: {disease.recommended_name.id} DOID:{" "} */}
-                                    (
-                                    <a
-                                      href={thisDisease.recommended_name.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      {thisDisease.recommended_name.resource}{" "}
-                                      {thisDisease.recommended_name.id}
-                                    </a>
-                                    )
-                                  </p>
-                                </div>
+                                        <Grid xs={9}>
+                                          <EvidenceList
+                                            evidences={groupEvidences(
+                                              thisDisease.evidence
+                                            )}
+                                          />
+                                        </Grid>
+                                      </Grid>
+                                    </p>   
+                                  </td>
+                                </tr>   
+                              ))}
+                            </tbody>
+                          )}
 
-                                <Grid xs={9}>
-                                  <EvidenceList
-                                    evidences={groupEvidences(
-                                      thisDisease.evidence
-                                    )}
-                                  />
-                                </Grid>
-                              </Grid>
-                            ))}
-                          </Grid>
-                        )}
-
-                        {!disease && (
-                          <p classorthologs_ac="no-data-msg-publication">
-                            No data available.
-                          </p>
-                        )}
-                      </p>
+                          {!diseaseData &&  (
+                            <p className="no-data-msg-publication">
+                              No data available.
+                            </p>
+                          )}
+                        </Table>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

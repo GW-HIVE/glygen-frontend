@@ -844,6 +844,18 @@
 			"term_category": {
 				"id": "term_category",
 				"name": "Category"
+			},
+			"name": {
+				"id": "name",
+				"name": "Name"
+			},
+			"synonyms": {
+				"id": "synonyms",
+				"name": "Synonyms"
+			},
+			"description": {
+				"id": "description",
+				"name": "Description"
 			}
 		},
 		"advanced_search": {
