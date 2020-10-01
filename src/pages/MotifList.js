@@ -7,7 +7,7 @@ import { getMotifList } from "../data";
 import { MOTIF_LIST_COLUMNS } from "../data/motif";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
-import DownloadButton from "../components/DownloadButton";
+// import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
 import ReactHtmlParser from "react-html-parser";
@@ -144,7 +144,7 @@ const MotifList = (props) => {
 							</Grid>
 						</Row>
 					</div>
-					<DownloadButton
+					{/* <DownloadButton
 						types={[
 							{
 								display: stringConstants.download.motif_csvdata.displayname,
@@ -158,7 +158,7 @@ const MotifList = (props) => {
 							},
 						]}
 						dataId={id}
-					/>
+					/> */}
 					{motifListColumns && motifListColumns.length !== 0 && (
 						<PaginatedTable
 							trStyle={rowStyleFormat}
