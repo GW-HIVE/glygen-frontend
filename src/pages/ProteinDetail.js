@@ -2371,7 +2371,7 @@ const ProteinDetail = (props) => {
 									<Accordion.Collapse eventKey="0">
 										<Card.Body className="card-padding-zero">
 											<Table hover fluid>
-												{diseaseData && diseaseData.length && (
+												{diseaseData && diseaseData.length > 0 && (
 													<tbody className="table-body">
 														{diseaseData.map((thisDisease) => (
 															<tr className="table-row">
@@ -2492,7 +2492,7 @@ const ProteinDetail = (props) => {
 													</tbody>
 												)}
 
-												{!diseaseData && (
+												{diseaseData && diseaseData.length === 0 && (
 													<p className="no-data-msg-publication">
 														No data available.
 													</p>
