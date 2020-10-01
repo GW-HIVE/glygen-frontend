@@ -145,6 +145,17 @@
 				},
 				"id": "protein_identifier"
 			},
+			"binding_protein_id": {
+				"name": "Binding Protein",
+				"shortName": "Binding Protein",
+				"tooltip": {
+					"title": "Binding Protein",
+					"text": "Search for all glycans that have been reported to bind to a protein. The UniProtKB accession is used to identify the protein.",
+					"urlText": "Read more...",
+					"url": "https://www.uniprot.org/"
+				},
+				"id": "binding_protein_id"
+			},
 			"glycan_motif": {
 				"name": "Glycan Motif",
 				"shortName": "Glycan Motif",
@@ -632,24 +643,37 @@
 				"id": "annotationsss"
 			},
 			"glytoucan_ac": {
-				"name": "Interacting Glycan",
+				"name": "GlyTouCan Glycan",
 				"shortName": "GlyTouCan Accession",
 				"tooltip": {
-					"title": "Interacting Glycan",
-					"text": "Enter the GlyTouCan Accession of a glycan that is covalently attached to or non-covalently binds to your protein(s). Select Interaction Type.",
+					"title": "GlyTouCan Glycan",
+					"text": "",
 					"urlText": "Read more...",
 					"url": "https://glytoucan.org/"
 				},
 				"id": "glytoucan_ac"
 			},
-			"relation": {
-				"name": "Relation",
-				"shortName": "Relation",
+			"attached_glycan_id": {
+				"name": "Covalently Attached Glycan",
+				"shortName": "Covalently Attached Glycan",
 				"tooltip": {
-					"title": "Relation",
-					"text": "Click to select Relation."
+					"title": "Covalently Attached Glycan",
+					"text": "Search for proteins that have a certain glycan covalently attached (e.g. glycosylation or glycation). The glycan has to be specified by a GlyTouCan accession number.",
+					"urlText": "Read more...",
+					"url": "https://glytoucan.org/"
 				},
-				"id": "relation"
+				"id": "attached_glycan_id"
+			},
+			"binding_glycan_id": {
+				"name": "Bound Glycan",
+				"shortName": "Bound Glycan",
+				"tooltip": {
+					"title": "Bound Glycan",
+					"text": "Search for proteins that bind a certain glycan. The glycan is specified by a GlyTouCan accession number.",
+					"urlText": "Read more...",
+					"url": "https://glytoucan.org/"
+				},
+				"id": "binding_glycan_id"
 			},
 			"glycosylated_aa": {
 				"name": "Glycosylated Amino Acid",

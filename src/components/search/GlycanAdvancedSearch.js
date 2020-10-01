@@ -147,6 +147,12 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyPubId: inputGlyPubId, glyAdvSearchValError: valArr });
 	}
 
+	function glyBindingProteinIdChange(inputGlyBindingIdProtein) {
+		let valArr = props.inputValue.glyAdvSearchValError;
+		valArr[5] = inputGlyBindingIdProtein.length > advancedSearch.binding_protein_id.length;
+		props.setGlyAdvSearchData({ glyBindingProteinId: inputGlyBindingIdProtein, glyAdvSearchValError: valArr });
+	}
+
 	const clearGlycan = () => {
 		props.setGlyAdvSearchData({
 			glycanId: '',
@@ -186,7 +192,8 @@ const GlycanAdvancedSearch = (props) => {
 			glyMotif: '',
 			glyBioEnz: '',
 			glyPubId: '',
-			glyAdvSearchValError: [false, false, false, false, false],
+			glyBindingProteinId: '',
+			glyAdvSearchValError: [false, false, false, false, false, false],
 		});
 	};
 
@@ -482,24 +489,24 @@ const GlycanAdvancedSearch = (props) => {
 							gutterBottom
 						>
 							<HelpTooltip
-                                title={commonGlycanData.protein_identifier.tooltip.title}
-                                text={commonGlycanData.protein_identifier.tooltip.text}
-                                urlText={commonGlycanData.protein_identifier.tooltip.urlText}
-                                url={commonGlycanData.protein_identifier.tooltip.url}
+                                title={commonGlycanData.binding_protein_id.tooltip.title}
+                                text={commonGlycanData.binding_protein_id.tooltip.text}
+                                urlText={commonGlycanData.binding_protein_id.tooltip.urlText}
+                                url={commonGlycanData.binding_protein_id.tooltip.url}
                             />
-                            Binding Protein
+                            {commonGlycanData.binding_protein_id.name}
 						</Typography>
 						<AutoTextInput
-							inputValue={props.inputValue.glyProt}
-                            setInputValue={glyProtChange}
-                            placeholder={advancedSearch.protein_identifier.placeholder}
-							typeahedID={advancedSearch.protein_identifier.typeahedID}
-							length={advancedSearch.protein_identifier.length}
-							errorText={advancedSearch.protein_identifier.errorText}
+							inputValue={props.inputValue.glyBindingProteinId}
+                            setInputValue={glyBindingProteinIdChange}
+                            placeholder={advancedSearch.binding_protein_id.placeholder}
+							typeahedID={advancedSearch.binding_protein_id.typeahedID}
+							length={advancedSearch.binding_protein_id.length}
+							errorText={advancedSearch.binding_protein_id.errorText}
 						/>
                         <ExampleExploreControl
-							setInputValue={glyProtChange}
-							inputValue={advancedSearch.protein_identifier.examples}
+							setInputValue={glyBindingProteinIdChange}
+							inputValue={advancedSearch.binding_protein_id.examples}
 						/>
 					</FormControl>
 				</Grid>
