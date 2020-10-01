@@ -72,12 +72,6 @@ const ProteinAdvancedSearch = (props) => {
 		props.setProAdvSearchData({ proGOId: inputProGOId, proAdvSearchValError: valArr });
 	}
 
-	function proGlytoucanAcChange(inputGlytoucanAc) {
-		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[6] = inputGlytoucanAc.length > advancedSearch.glytoucan_ac.length;
-		props.setProAdvSearchData({ proGlytoucanAc: inputGlytoucanAc, proAdvSearchValError: valArr });
-	}
-
 	function proAminoAcidChange(inputProAminoAcid) {
 		props.setProAdvSearchData({ proAminoAcid: inputProAminoAcid });
 	}
@@ -88,25 +82,25 @@ const ProteinAdvancedSearch = (props) => {
 
 	function proSequenceChange(inputProSequence) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[7] = inputProSequence.length > advancedSearch.sequence.length;
+		valArr[6] = inputProSequence.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: inputProSequence, proAdvSearchValError: valArr });
 	}
 
 	const SequenceChange = (event) => {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[7] = event.target.value.length > advancedSearch.sequence.length;
+		valArr[6] = event.target.value.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: event.target.value, proAdvSearchValError: valArr });
 	}
 	
 	function proPathwayIdChange(inputProPathwayId) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[8] = inputProPathwayId.length > advancedSearch.pathway_id.length;
+		valArr[7] = inputProPathwayId.length > advancedSearch.pathway_id.length;
 		props.setProAdvSearchData({ proPathwayId: inputProPathwayId, proAdvSearchValError: valArr });
 	}
 
 	function proPubIdChange(inputProPubId) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[9] = inputProPubId.length > advancedSearch.pmid.length;
+		valArr[8] = inputProPubId.length > advancedSearch.pmid.length;
 		props.setProAdvSearchData({ proPubId: inputProPubId, proAdvSearchValError: valArr });
 	}
 
@@ -116,14 +110,26 @@ const ProteinAdvancedSearch = (props) => {
 
 	function proDiseaseNameChange(inputProDiseaseName) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[10] = inputProDiseaseName.length > advancedSearch.disease_name.length;
+		valArr[9] = inputProDiseaseName.length > advancedSearch.disease_name.length;
 		props.setProAdvSearchData({ proDiseaseName: inputProDiseaseName, proAdvSearchValError: valArr });
 	}
 
 	function proDiseaseIdChange(inputProDiseaseId) {
 		let valArr = props.inputValue.proAdvSearchValError;
-		valArr[11] = inputProDiseaseId.length > advancedSearch.disease_id.length;
+		valArr[10] = inputProDiseaseId.length > advancedSearch.disease_id.length;
 		props.setProAdvSearchData({ proDiseaseId: inputProDiseaseId, proAdvSearchValError: valArr });
+	}
+
+	function proAttachedGlycanIdChange(inputProAttachedGlycanId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[11] = inputProAttachedGlycanId.length > advancedSearch.attached_glycan_id.length;
+		props.setProAdvSearchData({ proAttachedGlycanId: inputProAttachedGlycanId, proAdvSearchValError: valArr });
+	}
+
+	function proBindingGlycanIdChange(inputProBindingGlycanId) {
+		let valArr = props.inputValue.proAdvSearchValError;
+		valArr[12] = inputProBindingGlycanId.length > advancedSearch.binding_glycan_id.length;
+		props.setProAdvSearchData({ proBindingGlycanId: inputProBindingGlycanId, proAdvSearchValError: valArr });
 	}
 	 
 	const clearProtein = () => {
@@ -147,8 +153,6 @@ const ProteinAdvancedSearch = (props) => {
 			proGeneName: '',
 			proGOName: '',
 			proGOId: '',
-			proGlytoucanAc: '',
-			proRelation: 'attached',
 			proAminoAcid: [],
 			proAminoAcidOperation: 'or',
 			proSequence: '',
@@ -157,8 +161,10 @@ const ProteinAdvancedSearch = (props) => {
 			proGlyEvidence: advancedSearch.glycosylation_evidence.placeholderId,
 			proDiseaseName: '',
 			proDiseaseId: '',
+			proAttachedGlycanId: '',
+			proBindingGlycanId: '',
 			proAdvSearchValError: [false, false, false, false, false,
-				false, false, false, false, false, false, false]
+				false, false, false, false, false, false, false, false]
 		});
 	};
 
@@ -405,7 +411,7 @@ const ProteinAdvancedSearch = (props) => {
 						/>
 					</FormControl>
 				</Grid>
-				{/* Interacting Glycan */}
+				{/* Covalently Attached Glycan */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
@@ -413,29 +419,28 @@ const ProteinAdvancedSearch = (props) => {
 							gutterBottom
 						>
 							<HelpTooltip
-                                title={commonProteinData.glytoucan_ac.tooltip.title}
-                                text={commonProteinData.glytoucan_ac.tooltip.text}
-                                urlText={commonProteinData.glytoucan_ac.tooltip.urlText}
-                                url={commonProteinData.glytoucan_ac.tooltip.url}
+                                title={commonProteinData.attached_glycan_id.tooltip.title}
+                                text={commonProteinData.attached_glycan_id.tooltip.text}
+                                urlText={commonProteinData.attached_glycan_id.tooltip.urlText}
+                                url={commonProteinData.attached_glycan_id.tooltip.url}
                             />
-                            {/* {commonProteinData.glytoucan_ac.name} */}
-							Covalently Attached Glycan
+                            {commonProteinData.attached_glycan_id.name}
 						</Typography>
 						<AutoTextInput
-							inputValue={props.inputValue.proGlytoucanAc}
-                            setInputValue={proGlytoucanAcChange}
-                            placeholder={advancedSearch.glytoucan_ac.placeholder}
-							typeahedID={advancedSearch.glytoucan_ac.typeahedID}
-							length={advancedSearch.glytoucan_ac.length}
-							errorText={advancedSearch.glytoucan_ac.errorText}
+							inputValue={props.inputValue.proAttachedGlycanId}
+                            setInputValue={proAttachedGlycanIdChange}
+                            placeholder={advancedSearch.attached_glycan_id.placeholder}
+							typeahedID={advancedSearch.attached_glycan_id.typeahedID}
+							length={advancedSearch.attached_glycan_id.length}
+							errorText={advancedSearch.attached_glycan_id.errorText}
 						/>
                         <ExampleExploreControl
-							setInputValue={proGlytoucanAcChange}
-							inputValue={advancedSearch.glytoucan_ac.examples}
+							setInputValue={proAttachedGlycanIdChange}
+							inputValue={advancedSearch.attached_glycan_id.examples}
 						/>
 					</FormControl>
 				</Grid>
-				{/* Binding Glycan */}
+				{/* Bound Glycan */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
 						<Typography
@@ -443,25 +448,24 @@ const ProteinAdvancedSearch = (props) => {
 							gutterBottom
 						>
 							<HelpTooltip
-                                title={commonProteinData.glytoucan_ac.tooltip.title}
-                                text={commonProteinData.glytoucan_ac.tooltip.text}
-                                urlText={commonProteinData.glytoucan_ac.tooltip.urlText}
-                                url={commonProteinData.glytoucan_ac.tooltip.url}
+                                title={commonProteinData.binding_glycan_id.tooltip.title}
+                                text={commonProteinData.binding_glycan_id.tooltip.text}
+                                urlText={commonProteinData.binding_glycan_id.tooltip.urlText}
+                                url={commonProteinData.binding_glycan_id.tooltip.url}
                             />
-                            {/* {commonProteinData.glytoucan_ac.name} */}
-							Bound Glycan
+                            {commonProteinData.binding_glycan_id.name}
 						</Typography>
 						<AutoTextInput
-							inputValue={props.inputValue.proGlytoucanAc}
-                            setInputValue={proGlytoucanAcChange}
-                            placeholder={advancedSearch.glytoucan_ac.placeholder}
-							typeahedID={advancedSearch.glytoucan_ac.typeahedID}
-							length={advancedSearch.glytoucan_ac.length}
-							errorText={advancedSearch.glytoucan_ac.errorText}
+							inputValue={props.inputValue.proBindingGlycanId}
+                            setInputValue={proBindingGlycanIdChange}
+                            placeholder={advancedSearch.binding_glycan_id.placeholder}
+							typeahedID={advancedSearch.binding_glycan_id.typeahedID}
+							length={advancedSearch.binding_glycan_id.length}
+							errorText={advancedSearch.binding_glycan_id.errorText}
 						/>
                         <ExampleExploreControl
-							setInputValue={proGlytoucanAcChange}
-							inputValue={advancedSearch.glytoucan_ac.examples}
+							setInputValue={proBindingGlycanIdChange}
+							inputValue={advancedSearch.binding_glycan_id.examples}
 						/>
 					</FormControl>
 				</Grid>

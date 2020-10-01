@@ -62,6 +62,7 @@ const GlycanSearch = (props) => {
 			glyMotif: '',
 			glyBioEnz: '',
 			glyPubId: '',
+			glyBindingProteinId: '',
 			glyAdvSearchValError: [false, false, false, false, false],
 		}
 	);
@@ -330,7 +331,11 @@ const GlycanSearch = (props) => {
 							glyBioEnz:
 								data.query.enzyme === undefined ? '' : data.query.enzyme.id,
 							glyPubId: data.query.pmid === undefined ? '' : data.query.pmid,
-							glyAdvSearchValError: [false, false, false, false, false],
+							glyBindingProteinId:
+							data.query.binding_protein_id === undefined
+								? ''
+								: data.query.binding_protein_id,
+							glyAdvSearchValError: [false, false, false, false, false, false],
 						});
 
 						setGlyActTabKey("advanced_search");
@@ -366,6 +371,7 @@ const GlycanSearch = (props) => {
 		input_proteinid,
 		input_motif,
 		input_pmid,
+		input_binding_protein_id,
 		input_residue_comp
 	) {
 		var enzymes = {};
@@ -455,6 +461,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.protein_identifier.id]: input_proteinid,
 			[commonGlycanData.glycan_motif.id]: input_motif,
 			[commonGlycanData.pmid.id]: input_pmid,
+			[commonGlycanData.binding_protein_id.id]: input_binding_protein_id,
 			[commonGlycanData.composition.id]: input_residue_comp,
 		};
 		return formjson;
@@ -508,6 +515,7 @@ const GlycanSearch = (props) => {
 			glyAdvSearchData.glyProt,
 			glyAdvSearchData.glyMotif,
 			glyAdvSearchData.glyPubId,
+			glyAdvSearchData.glyBindingProteinId,
 			undefined
 		);
 		logActivity("user", id, "Performing Advanced Search");
@@ -547,6 +555,7 @@ const GlycanSearch = (props) => {
 
 		let formObject = searchjson(
 			glycanData.composition_search.query_type.name,
+			undefined,
 			undefined,
 			undefined,
 			undefined,

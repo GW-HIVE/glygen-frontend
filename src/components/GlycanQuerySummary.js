@@ -58,7 +58,8 @@ const GlycanQuerySummary = props => {
     pmid,
     term,
     term_category,
-    composition
+    composition,
+    binding_protein_id
   } = data;
 
   const formatOrganisms = organism => {
@@ -230,6 +231,16 @@ const GlycanQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {protein_identifier}
+                </Col>
+              </Row>
+            )}
+            {binding_protein_id && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {glycanStrings.binding_protein_id.shortName}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {binding_protein_id}
                 </Col>
               </Row>
             )}

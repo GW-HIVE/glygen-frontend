@@ -134,6 +134,25 @@
                 }
             ]
         },
+        "binding_protein_id": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "uniprot_canonical_ac",
+            "placeholder": "Enter the UniProtKB Accession of your protein",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "P14210"
+                    },
+                    "explore": {
+                        "id": "UniProtKB Accession",
+                        "url": "https://www.uniprot.org/help/accession_numbers"
+                    }
+                }
+            ]
+        },
         "glycan_motif": {
             "length": 1000,
             "errorText": "Entry is too long - max length is 1000.",

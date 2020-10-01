@@ -168,7 +168,7 @@
                 }
             ]
         },
-        "glytoucan_ac": {
+        "attached_glycan_id": {
             "length": 100,
             "errorText": "Entry is too long - max length is 100.",
             "typeahedID": "glytoucan_ac",
@@ -179,6 +179,29 @@
                     "example": {
                         "name": "Example",
                         "id": "G17689DH"
+                    },
+                    "explore": {
+                        "id": "GlyTouCan Accession",
+                        "url": "https://glytoucan.org/Structures"
+                    }
+                }
+            ]
+        },
+        "binding_glycan_id": {
+            "length": 100,
+            "errorText": "Entry is too long - max length is 100.",
+            "typeahedID": "glytoucan_ac",
+            "placeholder": "Enter the GlyTouCan Accession",
+            "examples": [
+                {
+                    "orderID": 100,
+                    "example": {
+                        "name": "Example",
+                        "id": "G19059PI"
+                    },
+                    "explore": {
+                        "id": "GlyTouCan Accession",
+                        "url": "https://glytoucan.org/Structures"
                     }
                 }
             ]
