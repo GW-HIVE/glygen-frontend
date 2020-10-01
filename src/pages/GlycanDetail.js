@@ -236,6 +236,7 @@ const GlycanDetail = (props) => {
 		wurcs,
 		enzyme,
 		mass_pme,
+		tool_support,
 	} = detailData;
 
 	const speciesEvidence = groupSpeciesEvidences(species);
@@ -578,6 +579,7 @@ const GlycanDetail = (props) => {
 												<Button
 													type="button"
 													className="gg-btn-blue"
+													disabled={tool_support && tool_support.gnome === "yes" ? false : true}
 													onClick={() => {
 														handleOpenSubsumptionBrowse(
 															glytoucan && glytoucan.glytoucan_ac
