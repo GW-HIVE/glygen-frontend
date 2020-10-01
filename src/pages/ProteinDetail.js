@@ -343,21 +343,23 @@ const ProteinDetail = props => {
 
       function diseaseDataRearrangement() {  
         var disease = detailData.disease.slice();
-        for (var j = 0; j < disease.length; j++){
+        for (var i = 0; i < disease.length; i++){
           var synTemp = [];
-          var synonyms = disease[j].synonyms.slice();
-          for (var i = 0; 0 < synonyms.length; i++){
-            synTemp[i] = synonyms.reduce((synVal, curVal, ind, arr) => {
-              synVal.name = curVal.name;
-              synVal.resource = arr.filter((syn)=> 
-                    syn.name === curVal.name);
-                    return synVal;
-                    }, {});
-          
-            synonyms = synonyms.filter((syn)=> 
-            syn.name !== synTemp[i].name);
+          var synonyms = disease[i].synonyms.slice();
+          for (var j = 0, k = 0; j < disease[i].synonyms.length; j++){
+            var temp = synonyms.filter((syn)=> 
+                    syn.name ===  disease[i].synonyms[j].name);
+            if (temp && temp.length) {
+              synTemp[k] = {
+                name: disease[i].synonyms[j].name,
+                resource: temp
+              }
+              synonyms = synonyms.filter((syn)=> 
+              syn.name !== synTemp[k].name);
+              k++;
+            }
           }
-            disease[j].synonyms = synTemp;        
+            disease[i].synonyms = synTemp;        
          }
          return disease;
         }
@@ -2443,13 +2445,13 @@ const ProteinDetail = props => {
                                                   {thisDisease.synonyms.map(synonyms => (
                                                     <li>
                                                         {" "}{synonyms.name}{" "}
-                                                        [{synonyms.resource.map((res, ind, arr) => {
+                                                        {synonyms.resource && synonyms.resource.length !== 0 && (<> [{synonyms.resource.map((res, ind, arr) => {
                                                           return (
                                                             <>
                                                               <a href={res.url} target="_blank" rel="noopener noreferrer">{res.resource + ":" + res.id}</a>
                                                               {ind < (arr.length - 1) ? ", " : ""}
                                                             </>
-                                                          )})}]
+                                                          )})}]</>)}
                                                     </li>
                                                   ))}
                                                 </ul>
