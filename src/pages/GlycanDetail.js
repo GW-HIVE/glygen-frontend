@@ -393,6 +393,13 @@ const GlycanDetail = (props) => {
 			headerStyle: (colum, colIndex) => {
 				return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
 			},
+			formatter: (value, row) => (
+				<>
+					{row.tax_name} {"("}
+					<span className="text-capitalize">{row.tax_common_name}</span>
+					{")"}
+				</>
+			),
 		},
 	];
 	const motifColumns = [

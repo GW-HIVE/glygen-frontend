@@ -2296,7 +2296,12 @@ const ProteinDetail = (props) => {
 																	<strong>
 																		{glycanStrings.organism.name}:{" "}
 																	</strong>
-																	{orthologsS.organism}
+																	{orthologsS.organism}{" "}
+																	<span className="text-capitalize">
+																		{"("}
+																		{orthologsS.common_name}
+																		{")"}
+																	</span>
 																</div>
 
 																<Grid className="badge-grid" xs={12}>
