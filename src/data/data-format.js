@@ -6,7 +6,11 @@ export function groupSpeciesEvidences(values) {
 	}
 
 	for (const s of values) {
-		groupedEvidences[s.name] = { taxid: s.taxid, evidence: [] };
+		groupedEvidences[s.name] = {
+			taxid: s.taxid,
+			common_name: s.common_name,
+			evidence: [],
+		};
 		for (const e of s.evidence) {
 			if (e.database in groupedEvidences[s.name].evidence) {
 				groupedEvidences[s.name]["evidence"][e.database].push({

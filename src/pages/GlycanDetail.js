@@ -579,7 +579,11 @@ const GlycanDetail = (props) => {
 												<Button
 													type="button"
 													className="gg-btn-blue"
-													disabled={tool_support && tool_support.gnome === "yes" ? false : true}
+													disabled={
+														tool_support && tool_support.gnome === "yes"
+															? false
+															: true
+													}
 													onClick={() => {
 														handleOpenSubsumptionBrowse(
 															glytoucan && glytoucan.glytoucan_ac
@@ -755,7 +759,11 @@ const GlycanDetail = (props) => {
 															style={{ marginBottom: "10px" }}>
 															<>
 																<strong className="nowrap">{speEvi}</strong>{" "}
-																{"["}
+																{"("}
+																<span className="text-capitalize">
+																	{speciesEvidence[speEvi].common_name}
+																</span>
+																{")"} {"["}
 																<LineTooltip text="View details on NCBI">
 																	<a
 																		href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
