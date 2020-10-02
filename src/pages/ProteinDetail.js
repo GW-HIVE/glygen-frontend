@@ -234,7 +234,6 @@ const ProteinDetail = props => {
   const [geneNames, setGeneName] = useState([]);
   const [proteinNames, setProteinNames] = useState([]);
   const [diseaseData, setDiseaseData] = useState([]);
-
   const recommendedGeneRows = geneNames.map(getRecommendedRows);
   const synonymGeneRows = geneNames.map(getSynonymRows);
   const recommendedProteinRows = proteinNames.map(getRecommendedRows);
@@ -377,6 +376,8 @@ const ProteinDetail = props => {
   }, [
     detailData,
     glycosylationWithImage,
+    glycosylationMining,
+    glycosylationPredicted,
     glycosylationWithoutImage,
     props.history.location.hash
   ]);
@@ -1524,7 +1525,7 @@ const ProteinDetail = props => {
                           </Tab>
                           <Tab
                             eventKey="predicted"
-                            // className='tab-content-padding'
+                            className="tab-content-padding"
                             title="Predicted Sites"
                             //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
                           >
@@ -1553,7 +1554,7 @@ const ProteinDetail = props => {
                           </Tab>
                           <Tab
                             eventKey="mining"
-                            // className='tab-content-padding'
+                            className="tab-content-padding"
                             title="Text Mining"
                             // disabled={
                             //   !glycosylationMining ||
@@ -1566,8 +1567,8 @@ const ProteinDetail = props => {
                                 paddingBottom: "30px"
                               }}
                             >
-                              {glycosylationPredicted &&
-                                glycosylationPredicted.length > 0 && (
+                              {glycosylationMining &&
+                                glycosylationMining.length > 0 && (
                                   <ClientPaginatedTable
                                     data={glycosylationMining}
                                     columns={glycoSylationColumns.filter(
@@ -1578,7 +1579,7 @@ const ProteinDetail = props => {
                                     defaultSortField="position"
                                   />
                                 )}
-                              {!glycosylationPredicted.length && (
+                              {!glycosylationMining.length && (
                                 <p>No data available.</p>
                               )}
                             </Container>
