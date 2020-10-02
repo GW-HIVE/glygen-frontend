@@ -51,19 +51,12 @@
                 {
                     "orderID": 100,
                     "example": {
-                        "name": "GlyTouCan Accession Example",
+                        "name": "Example",
                         "id": "G17689DH"
                     },
                     "explore": {
                         "id": "GlyTouCan Accession",
                         "url": "https://glytoucan.org/Structures"
-                    }
-                },
-                {
-                    "orderID": 200,
-                    "example": {
-                        "name": "Cross References ID Example",
-                        "id": "G10716"
                     }
                 }
             ],
@@ -144,7 +137,7 @@
                     "orderID": 100,
                     "example": {
                         "name": "Example",
-                        "id": "P14210"
+                        "id": "Q15113-1"
                     },
                     "explore": {
                         "id": "UniProtKB Accession",
