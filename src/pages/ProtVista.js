@@ -79,7 +79,13 @@ const ProtVista = () => {
       color: "green",
       shape: "diamond"
     };
-    
+    var mutagenesisS = {
+      type: "MutagenesisS",
+      residues: [],
+      color: "red",
+      shape: "rectangle"
+    };
+
     if (data.glycosylation) {
       for (let glyco of data.glycosylation) {
         // $.each(data.glycosylation, function (i, glyco) {
@@ -149,8 +155,8 @@ const ProtVista = () => {
       } //);
     }
 
-    if (data.mutation) {
-      for (let mutation of data.mutation) {
+    if (data.snv) {
+      for (let mutation of data.snv) {
         // $.each(data.mutation, function (i, mutation) {
         mutations.residues.push({
           start: mutation.start_pos,
@@ -165,6 +171,35 @@ const ProtVista = () => {
           tooltipContent:
             "<span className=marker> annotation " +
             mutation.annotation +
+            "</span>"
+        });
+      } //);
+    }
+
+    if (data.mutagenesis) {
+      for (let mutagenesis of data.mutagenesis) {
+        // $.each(data.mutation, function (i, mutation) {
+        mutagenesisS.residues.push({
+          start: mutagenesis.start_pos,
+          end: mutagenesis.end_pos,
+          color: mutagenesisS.color,
+          shape: mutagenesisS.shape,
+          accession: data.uniprot.uniprot_canonical_ac,
+          type:
+            "(" +
+            mutagenesis.sequence_org +
+            " → " +
+            mutagenesis.sequence_mut +
+            ")",
+          title:
+            "(" +
+            mutagenesis.sequence_org +
+            " → " +
+            mutagenesis.sequence_mut +
+            ")",
+          tooltipContent:
+            "<span className=marker> annotation " +
+            mutagenesis.annotation +
             "</span>"
         });
       } //);
@@ -226,7 +261,8 @@ const ProtVista = () => {
       oGlycanWithImage: glycosCombined[2],
       oGlycanWithoutImage: glycosCombined[3],
       nSequon: glycosCombined[4],
-      mutationsData: mutations
+      mutationsData: mutations,
+      mutagenesisData: mutagenesisS
     };
   }
 
@@ -239,6 +275,7 @@ const ProtVista = () => {
   const oGlycanWithoutImage = useRef(null);
   const nSequon = useRef(null);
   const mutationsData = useRef(null);
+  const mutagenesisData = useRef(null);
   const allTrack = useRef(null);
 
   const [tracksShown, setTracksShown] = useReducer(
@@ -253,54 +290,55 @@ const ProtVista = () => {
 
   const addTooltipToReference = ref => {
     let currentTooltip;
-    ref.current && ref.current.addEventListener("change", event => {
-      const { eventtype, feature, coords } = event.detail;
+    ref.current &&
+      ref.current.addEventListener("change", event => {
+        const { eventtype, feature, coords } = event.detail;
 
-      if (eventtype === "click") {
-        const route =
-          routeConstants.siteview + id + "/" + event.detail.feature.start;
-        history.push(route);
-      }
-      if (eventtype === "mouseover") {
-        if (currentTooltip) {
-          document.body.removeChild(currentTooltip);
-          currentTooltip = null;
+        if (eventtype === "click") {
+          const route =
+            routeConstants.siteview + id + "/" + event.detail.feature.start;
+          history.push(route);
         }
-
-        currentTooltip = document.createElement("protvista-tooltip");
-        // set attributes
-        currentTooltip.title = feature.title;
-        currentTooltip.visible = true;
-        const [x, y] = coords;
-        currentTooltip.x = x;
-        currentTooltip.y = y;
-        currentTooltip.innerHTML = feature.tooltipContent;
-        // add the component to the document
-        document.body.appendChild(currentTooltip);
-        const closeButton = document.createElement("button");
-        closeButton.innerHTML = "X";
-        closeButton.className = "tooltip-close";
-
-        const onCloseButton = () => {
-          // remove the click listener
-          closeButton.removeEventListener("click", onCloseButton);
-
-          //cleanup tooltip
+        if (eventtype === "mouseover") {
           if (currentTooltip) {
             document.body.removeChild(currentTooltip);
             currentTooltip = null;
           }
-        };
 
-        closeButton.addEventListener("click", onCloseButton);
-        currentTooltip.appendChild(closeButton);
-      } else if (eventtype === "mouseout") {
-        if (currentTooltip) {
-          document.body.removeChild(currentTooltip);
-          currentTooltip = null;
+          currentTooltip = document.createElement("protvista-tooltip");
+          // set attributes
+          currentTooltip.title = feature.title;
+          currentTooltip.visible = true;
+          const [x, y] = coords;
+          currentTooltip.x = x;
+          currentTooltip.y = y;
+          currentTooltip.innerHTML = feature.tooltipContent;
+          // add the component to the document
+          document.body.appendChild(currentTooltip);
+          const closeButton = document.createElement("button");
+          closeButton.innerHTML = "X";
+          closeButton.className = "tooltip-close";
+
+          const onCloseButton = () => {
+            // remove the click listener
+            closeButton.removeEventListener("click", onCloseButton);
+
+            //cleanup tooltip
+            if (currentTooltip) {
+              document.body.removeChild(currentTooltip);
+              currentTooltip = null;
+            }
+          };
+
+          closeButton.addEventListener("click", onCloseButton);
+          currentTooltip.appendChild(closeButton);
+        } else if (eventtype === "mouseout") {
+          if (currentTooltip) {
+            document.body.removeChild(currentTooltip);
+            currentTooltip = null;
+          }
         }
-      }
-    });
+      });
   };
 
   useEffect(() => {
@@ -348,6 +386,13 @@ const ProtVista = () => {
             mutation: formattedData.mutationsData.residues.length > 0
           });
         }
+        if (mutagenesisData.current) {
+          mutagenesisData.current.data = formattedData.mutagenesisData.residues;
+
+          setTracksShown({
+            mutagenesisData: formattedData.mutagenesisData.residues.length > 0
+          });
+        }
 
         addTooltipToReference(allTrack);
         addTooltipToReference(nGlycanWithImage);
@@ -356,6 +401,7 @@ const ProtVista = () => {
         addTooltipToReference(oGlycanWithoutImage);
         addTooltipToReference(nSequon);
         addTooltipToReference(mutationsData);
+        addTooltipToReference(mutagenesisData);
       }
     });
 
@@ -528,19 +574,32 @@ const ProtVista = () => {
                   ref={nSequon}
                 />
 
-                {tracksShown.mutation && (
-                  <protvista-track
-                    class={
-                      `nav-track glycotrack` +
-                      (highlighted === "mutation" ? " highlight" : "")
-                    }
-                    length={data.sequence.length}
-                    displaystart={1}
-                    displayend={data.sequence.length}
-                    layout="non-overlapping"
-                    ref={mutationsData}
-                  />
-                )}
+                {/* {tracksShown.mutation && ( */}
+                <protvista-track
+                  class={
+                    `nav-track glycotrack` +
+                    (highlighted === "mutation" ? " highlight" : "")
+                  }
+                  length={data.sequence.length}
+                  displaystart={1}
+                  displayend={data.sequence.length}
+                  layout="non-overlapping"
+                  ref={mutationsData}
+                />
+                {/* )} */}
+
+                <protvista-track
+                  class={
+                    `nav-track glycotrack` +
+                    (highlighted === "mutegenesis" ? " highlight" : "")
+                  }
+                  length={data.sequence.length}
+                  displaystart={1}
+                  displayend={data.sequence.length}
+                  layout="non-overlapping"
+                  ref={mutagenesisData}
+                />
+                {/* )} */}
               </protvista-manager>
             )}
           </Col>
@@ -613,6 +672,16 @@ const ProtVista = () => {
                       &#9670;
                       <span className="superx">
                         <>Mutation</>
+                      </span>
+                    </span>
+                  </li>
+                )}
+                {tracksShown && tracksShown.mutagenesis && (
+                  <li>
+                    <span onMouseEnter={() => setHighlighted("mutagenesis")}>
+                      &#9670;
+                      <span className="superx">
+                        <>Mutagenesis</>
                       </span>
                     </span>
                   </li>
