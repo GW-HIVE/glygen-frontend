@@ -669,7 +669,14 @@ const GlycanDetail = (props) => {
 												{composition && (
 													<div>
 														<strong>Composition</strong>:{" "}
-														<CompositionDisplay composition={composition} />
+														<CompositionDisplay 
+															composition={composition.map((comp) => { 
+																if(comp.residue === "s") { comp.residue = "S"; return comp }
+																if(comp.residue === "p") { comp.residue = "P"; return comp }
+																if(comp.residue === "hexa") { comp.residue = "HexA"; return comp }
+																return comp;
+															})} 
+														/>
 													</div>
 												)}
 
