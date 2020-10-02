@@ -157,7 +157,7 @@ const ProteinAlignment = () => {
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar.alignment.displayname}:
+                      {stringConstants.sidebar.alignment.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle
