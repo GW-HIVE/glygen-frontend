@@ -92,3 +92,7 @@
 .cd-faq {
   max-width: 1400px;
 }
+
+#sequncealign {
+  overflow-x: scroll;
+}

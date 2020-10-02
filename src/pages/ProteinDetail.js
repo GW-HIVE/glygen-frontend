@@ -73,6 +73,7 @@ const items = [
     label: stringConstants.sidebar.ptm_annotation.displayname,
     id: "ptm_annotation"
   },
+  { label: stringConstants.sidebar.snv.displayname, id: "snv" },
   { label: stringConstants.sidebar.mutagenesis.displayname, id: "mutagenesis" },
   { label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
   { label: stringConstants.sidebar.pathway.displayname, id: "pathway" },
@@ -83,7 +84,7 @@ const items = [
   { label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
   { label: stringConstants.sidebar.homologs.displayname, id: "homologs" },
   { label: stringConstants.sidebar.disease.displayname, id: "disease" },
-  { label: stringConstants.sidebar.snv.displayname, id: "snv" },
+
   {
     label: stringConstants.sidebar.expression_Tissue.displayname,
     id: "expressionT"
@@ -920,7 +921,7 @@ const ProteinDetail = props => {
         return {
           backgroundColor: "#4B85B6",
           color: "white",
-          width: "20%"
+          width: "35%"
         };
       }
     }
@@ -1991,6 +1992,117 @@ const ProteinDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+              {/*  SNV */}
+              <Accordion
+                id="snv"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.protein.mutation.title}
+                        text={DetailTooltips.protein.mutation.text}
+                        urlText={DetailTooltips.protein.mutation.urlText}
+                        url={DetailTooltips.protein.mutation.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.snv.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("mutation", collapsed.mutation)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.mutation ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {snv && snv.length !== 0 && (
+                        <Tabs
+                          defaultActiveKey={
+                            mutataionWithdisease &&
+                            mutataionWithdisease.length > 0
+                              ? "with_disease"
+                              : "without_disease"
+                          }
+                          transition={false}
+                          activeKey={mutataionTabSelected}
+                          mountOnEnter={true}
+                          unmountOnExit={true}
+                          onSelect={key => setmutataionTabSelected(key)}
+                        >
+                          <Tab
+                            eventKey="with_disease"
+                            // className='tab-content-padding'
+                            title="Disease associated
+														Mutations"
+                            //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
+                          >
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px"
+                              }}
+                            >
+                              {mutataionWithdisease &&
+                                mutataionWithdisease.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={mutataionWithdisease}
+                                    columns={mutationColumns}
+                                    onClickTarget={"#mutation"}
+                                    defaultSortField="position"
+                                  />
+                                )}
+                              {!mutataionWithdisease.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                          <Tab
+                            eventKey="without_disease"
+                            className="tab-content-padding"
+                            title="Non-disease associated
+														Mutations "
+                            // disabled={(!mutataionWithoutdisease || (mutataionWithoutdisease.length === 0))}
+                          >
+                            <Container>
+                              {mutataionWithoutdisease &&
+                                mutataionWithoutdisease.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={mutataionWithoutdisease}
+                                    columns={mutationColumns.filter(
+                                      column => column.dataField !== "disease"
+                                    )}
+                                    onClickTarget={"#mutation"}
+                                    defaultSortField="position"
+                                  />
+                                )}
+                              {!mutataionWithoutdisease.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                        </Tabs>
+                      )}
+
+                      {!snv && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/*  Mutagenesis */}
               <Accordion
                 id="mutagenesis"
@@ -2632,116 +2744,6 @@ const ProteinDetail = props => {
                           </p>
                         )}
                       </Table>
-                    </Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-              {/*  Mutation */}
-              <Accordion
-                id="snv"
-                defaultActiveKey="0"
-                className="panel-width"
-                style={{ padding: "20px 0" }}
-              >
-                <Card>
-                  <Card.Header className="panelHeadBgr">
-                    <span className="gg-green d-inline">
-                      <HelpTooltip
-                        title={DetailTooltips.protein.mutation.title}
-                        text={DetailTooltips.protein.mutation.text}
-                        urlText={DetailTooltips.protein.mutation.urlText}
-                        url={DetailTooltips.protein.mutation.url}
-                        helpIcon="gg-helpicon-detail"
-                      />
-                    </span>
-                    <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar.snv.displayname}
-                    </h4>
-                    <div className="float-right">
-                      <Accordion.Toggle
-                        eventKey="0"
-                        onClick={() =>
-                          toggleCollapse("mutation", collapsed.mutation)
-                        }
-                        className="gg-green arrow-btn"
-                      >
-                        <span>
-                          {collapsed.mutation ? closeIcon : expandIcon}
-                        </span>
-                      </Accordion.Toggle>
-                    </div>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>
-                      {snv && snv.length !== 0 && (
-                        <Tabs
-                          defaultActiveKey={
-                            mutataionWithdisease &&
-                            mutataionWithdisease.length > 0
-                              ? "with_disease"
-                              : "without_disease"
-                          }
-                          transition={false}
-                          activeKey={mutataionTabSelected}
-                          mountOnEnter={true}
-                          unmountOnExit={true}
-                          onSelect={key => setmutataionTabSelected(key)}
-                        >
-                          <Tab
-                            eventKey="with_disease"
-                            // className='tab-content-padding'
-                            title="Disease associated
-														Mutations"
-                            //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
-                          >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px"
-                              }}
-                            >
-                              {mutataionWithdisease &&
-                                mutataionWithdisease.length > 0 && (
-                                  <ClientPaginatedTable
-                                    data={mutataionWithdisease}
-                                    columns={mutationColumns}
-                                    onClickTarget={"#mutation"}
-                                    defaultSortField="position"
-                                  />
-                                )}
-                              {!mutataionWithdisease.length && (
-                                <p>No data available.</p>
-                              )}
-                            </Container>
-                          </Tab>
-                          <Tab
-                            eventKey="without_disease"
-                            className="tab-content-padding"
-                            title="Non-disease associated
-														Mutations "
-                            // disabled={(!mutataionWithoutdisease || (mutataionWithoutdisease.length === 0))}
-                          >
-                            <Container>
-                              {mutataionWithoutdisease &&
-                                mutataionWithoutdisease.length > 0 && (
-                                  <ClientPaginatedTable
-                                    data={mutataionWithoutdisease}
-                                    columns={mutationColumns.filter(
-                                      column => column.dataField !== "disease"
-                                    )}
-                                    onClickTarget={"#mutation"}
-                                    defaultSortField="position"
-                                  />
-                                )}
-                              {!mutataionWithoutdisease.length && (
-                                <p>No data available.</p>
-                              )}
-                            </Container>
-                          </Tab>
-                        </Tabs>
-                      )}
-
-                      {!snv && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
