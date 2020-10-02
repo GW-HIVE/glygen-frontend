@@ -13,7 +13,7 @@ services:
         - REACT_APP_DATA=https://data.glygen.org
         - REACT_APP_SPARQL=https://sparql.glygen.org
         - REACT_APP_BASENAME=/frontend
-        - GENERATE_SOURCEMAP_FILES=false
+        - GENERATE_SOURCEMAP_FILES=true
         - PORT=80
     ports:
       - '80:80'
