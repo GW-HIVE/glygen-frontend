@@ -13,6 +13,7 @@ services:
         - REACT_APP_DATA=https://beta-data.glygen.org
         - REACT_APP_SPARQL=https://beta-sparql.glygen.org
         - REACT_APP_BASENAME=/
+        - GENERATE_SOURCEMAP_FILES=false
         - PORT=5050
     ports:
       - '5050:80'
