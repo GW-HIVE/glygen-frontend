@@ -1,5 +1,8 @@
 .aln-block {
   display: table;
+  padding-top: 15px;
+  padding-right: 20px;
+  overflow-y: scroll;
 }
 
 .aln-line {
@@ -12,9 +15,6 @@
   padding: 0 0.25em;
 }
 
-.aln-block {
-  padding-top: 15px;
-}
 .aln-line-link {
   display: inline-block;
   width: 13rem;
