@@ -119,7 +119,7 @@ const ProtvistaSidebar = ({ data, handleExpand, expanded, tracksShown }) => {
           {/* )} */}
           <li class="nav-item1 nav-nav  legendlist glycotrack">
             <a class="nav-links" href="#">
-              mutagenesis
+              Mutagenesis
             </a>
           </li>
         </ul>
