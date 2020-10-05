@@ -671,9 +671,10 @@ const GlycanDetail = (props) => {
 														<strong>Composition</strong>:{" "}
 														<CompositionDisplay 
 															composition={composition.map((comp) => { 
-																if(comp.residue === "s") { comp.residue = "S"; return comp }
-																if(comp.residue === "p") { comp.residue = "P"; return comp }
-																if(comp.residue === "hexa") { comp.residue = "HexA"; return comp }
+																if(glycanStrings.composition[comp.residue.toLowerCase()]) 
+																{ 
+																	comp.residue = glycanStrings.composition[comp.residue.toLowerCase()].shortName; return comp 
+																}
 																return comp;
 															})} 
 														/>

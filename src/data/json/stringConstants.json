@@ -333,7 +333,7 @@
 					"orderID": 700,
 					"name": "Uronic acid",
 					"subtext": "UA, e.g., GlcA, GalA",
-					"shortName": "UA",
+					"shortName": "HexA",
 					"tooltip": {
 						"title": "Uronic acid",
 						"text1": "Add some unique text here.",
@@ -346,7 +346,7 @@
 					"name": "Phosphate",
 					"max": 2,
 					"subtext": "PO<sub>3</sub>",
-					"shortName": "PO<sub>3</sub>",
+					"shortName": "P",
 					"tooltip": {
 						"title": "Phosphate",
 						"text1": "Add some unique text here.",
@@ -358,7 +358,7 @@
 					"orderID": 900,
 					"name": "Sulfate",
 					"subtext": "SO<sub>3</sub>",
-					"shortName": "SO<sub>3</sub>",
+					"shortName": "S",
 					"tooltip": {
 						"title": "Sulfate",
 						"text1": "Add some unique text here.",
