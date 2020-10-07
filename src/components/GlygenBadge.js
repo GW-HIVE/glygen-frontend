@@ -66,6 +66,8 @@ function databasecolor(name) {
       return "#649093";
     case "uniref":
       return "#358C92";
+    case "rcsb pdb":
+      return "#7e8a97";
   }
   return "#9033ff";
 }

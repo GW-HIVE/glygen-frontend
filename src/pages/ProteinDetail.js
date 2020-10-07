@@ -51,51 +51,51 @@ const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
 const items = [
-  { label: stringConstants.sidebar.general.displayname, id: "general" },
+  { label: stringConstants.sidebar.general.displayname, id: "General" },
   {
     label: stringConstants.sidebar.glycosylation.displayname,
-    id: "glycosylation",
+    id: "Glycosylation",
   },
   {
     label: stringConstants.sidebar.names_synonyms.displayname,
-    id: "names_synonyms",
+    id: "Names",
   },
 
-  { label: stringConstants.sidebar.function.displayname, id: "function" },
+  { label: stringConstants.sidebar.function.displayname, id: "Function" },
   {
     label: stringConstants.sidebar.glycan_ligands.displayname,
-    id: "glycanLigands",
+    id: "Glycan-Ligands",
   },
   {
     label: stringConstants.sidebar.go_annotation.displayname,
-    id: "go_annotation",
+    id: "GO-Annotation",
   },
   {
     label: stringConstants.sidebar.ptm_annotation.displayname,
-    id: "ptm_annotation",
+    id: "PTM-Annotation",
   },
-  { label: stringConstants.sidebar.snv.displayname, id: "snv" },
-  { label: stringConstants.sidebar.mutagenesis.displayname, id: "mutagenesis" },
-  { label: stringConstants.sidebar.sequence.displayname, id: "sequence" },
-  { label: stringConstants.sidebar.pathway.displayname, id: "pathway" },
+  { label: stringConstants.sidebar.snv.displayname, id: "Single-Nucleotide-Variation" },
+  { label: stringConstants.sidebar.mutagenesis.displayname, id: "Mutagenesis" },
+  { label: stringConstants.sidebar.sequence.displayname, id: "Sequence" },
+  { label: stringConstants.sidebar.pathway.displayname, id: "Pathway" },
   {
     label: stringConstants.sidebar.synthesized_glycans.displayname,
-    id: "synthesized_glycans",
+    id: "Synthesized-Glycans",
   },
-  { label: stringConstants.sidebar.isoforms.displayname, id: "isoforms" },
-  { label: stringConstants.sidebar.homologs.displayname, id: "homologs" },
-  { label: stringConstants.sidebar.disease.displayname, id: "disease" },
+  { label: stringConstants.sidebar.isoforms.displayname, id: "Isoforms" },
+  { label: stringConstants.sidebar.homologs.displayname, id: "Homologs" },
+  { label: stringConstants.sidebar.disease.displayname, id: "Disease" },
 
   {
     label: stringConstants.sidebar.expression_Tissue.displayname,
-    id: "expressionT",
+    id: "Expression-Tissue",
   },
   {
     label: stringConstants.sidebar.expression_Disease.displayname,
-    id: "expressionD",
+    id: "Expression-Disease",
   },
-  { label: stringConstants.sidebar.cross_ref.displayname, id: "crossRef" },
-  { label: stringConstants.sidebar.publication.displayname, id: "publication" },
+  { label: stringConstants.sidebar.cross_ref.displayname, id: "Cross-References" },
+  { label: stringConstants.sidebar.publication.displayname, id: "Publications" },
 ];
 
 function addCommas(nStr) {
@@ -713,7 +713,7 @@ const ProteinDetail = (props) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white",
-          width: "16%",
+          width: "25%",
         };
       },
       formatter: (value, row) => (
@@ -786,7 +786,6 @@ const ProteinDetail = (props) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white",
-          width: "20%",
         };
       },
     },
@@ -1132,7 +1131,7 @@ const ProteinDetail = (props) => {
               />
               {/* general */}
               <Accordion
-                id="general"
+                id="General"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1289,7 +1288,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  Glycosylation */}
               <Accordion
-                id="glycosylation"
+                id="Glycosylation"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1439,9 +1438,9 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              {/*  names_synonyms */}
+              {/*  Names */}
               <Accordion
-                id="names_synonyms"
+                id="Names"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1498,9 +1497,9 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              {/*  function */}
+              {/*  Function */}
               <Accordion
-                id="function"
+                id="Function"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1543,7 +1542,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/* Glycan Ligands */}
               <Accordion
-                id="glycanLigands"
+                id="Glycan-Ligands"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1589,7 +1588,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  GO annotation */}
               <Accordion
-                id="go_annotation"
+                id="GO-Annotation"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1676,7 +1675,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  PTM annotation */}
               <Accordion
-                id="ptm_annotation"
+                id="PTM-Annotation"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1722,7 +1721,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  Sequence */}
               <Accordion
-                id="sequence"
+                id="Sequence"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1779,9 +1778,9 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              {/*  SNV */}
+              {/*  SNV (Single-Nucleotide-Variation)*/}
               <Accordion
-                id="snv"
+                id="Single-Nucleotide-Variation"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1876,10 +1875,9 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/*  Mutagenesis */}
               <Accordion
-                id="mutagenesis"
+                id="Mutagenesis"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1924,10 +1922,9 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/*  Pathway */}
               <Accordion
-                id="pathway"
+                id="Pathway"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1996,7 +1993,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  synthesized glycans */}
               <Accordion
-                id="synthesized_glycans"
+                id="Synthesized-Glycans"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2044,7 +2041,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  isoforms */}
               <Accordion
-                id="isoforms"
+                id="Isoforms"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2154,7 +2151,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/* Homologs / orthologs */}
               <Accordion
-                id="homologs"
+                id="Homologs"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2273,7 +2270,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  disease */}
               <Accordion
-                id="disease"
+                id="Disease"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2397,7 +2394,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  Expression Tissue */}
               <Accordion
-                id="expressionT"
+                id="Expression-Tissue"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2445,7 +2442,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/*  Expression Disease */}
               <Accordion
-                id="expressionD"
+                id="Expression-Disease"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2494,7 +2491,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/* crossref */}
               <Accordion
-                id="crossRef"
+                id="Cross-References"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -2563,7 +2560,7 @@ const ProteinDetail = (props) => {
               </Accordion>
               {/* publication */}
               <Accordion
-                id="publication"
+                id="Publications"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
