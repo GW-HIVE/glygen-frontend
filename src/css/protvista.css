@@ -83,6 +83,12 @@
   margin-left: 10px !important;
   cursor: pointer;
 }
+.super7 {
+  font-size: 30px;
+  color: red;
+  cursor: pointer;
+  line-height: 20px !important;
+}
 
 #glycotrack,
 #glycotrack1 {
