@@ -133,6 +133,11 @@ p {
 .gg-dropdown-navbar .dropdown-menu {
   background-color: var(--gg-blue) !important;
 }
+.gg-dropdown-navbar-active {
+  color: var(--white) !important;
+  border-bottom: 4px solid var(--gg-light-blue) !important;
+  padding-bottom: 0 !important;
+}
 .dropdown-item {
   color: white !important;
 }

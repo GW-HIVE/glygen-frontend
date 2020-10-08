@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import GlobalSearchControl from "../search/GlobalSearchControl";
 import UserTrackingBanner from "../alert/UserTrackingBanner";
+import { useLocation } from 'react-router-dom'
 
 import Button from "react-bootstrap/Button";
 import { logID, doNotLog, tracking } from "../../data/logging";
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
 	const classes = useStyles();
+	const location = useLocation();
+
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -142,7 +145,9 @@ export default function Header(props) {
 								HOME
 							</Nav.Link>
 							<NavDropdown
-								className="gg-dropdown-navbar"
+								className={location.pathname === routeConstants.glycanSearch  || location.pathname === routeConstants.proteinSearch 
+									|| location.pathname === routeConstants.motifList ? 
+									"gg-dropdown-navbar gg-dropdown-navbar-active" :"gg-dropdown-navbar"}
 								title="EXPLORE"
 								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.glycanSearch}>
@@ -193,7 +198,9 @@ export default function Header(props) {
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown
-								className="gg-dropdown-navbar"
+								className={location.pathname === routeConstants.about  || location.pathname === routeConstants.contactUs 
+									|| location.pathname === routeConstants.feedback || location.pathname === routeConstants.howToCite ? 
+									"gg-dropdown-navbar gg-dropdown-navbar-active" :"gg-dropdown-navbar"}
 								title="HELP"
 								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.about}>
@@ -210,7 +217,9 @@ export default function Header(props) {
 								</NavDropdown.Item>
 							</NavDropdown>
 							<NavDropdown
-								className="gg-dropdown-navbar"
+								className={location.pathname === routeConstants.media  || location.pathname === routeConstants.resources 
+									|| location.pathname === routeConstants.frameworks ? 
+									"gg-dropdown-navbar gg-dropdown-navbar-active" :"gg-dropdown-navbar"}
 								title="MORE"
 								id="basic-nav-dropdown">
 								<NavDropdown.Item as={NavLink} to={routeConstants.media}>
