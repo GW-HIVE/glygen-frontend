@@ -842,7 +842,7 @@ const ProteinDetail = props => {
       )
     },
     {
-      dataField: "frequency",
+      dataField: "minor_allelic_frequency",
       text: "MAF",
       sort: true,
       headerStyle: (colum, colIndex) => {
