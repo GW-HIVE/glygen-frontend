@@ -70,14 +70,14 @@ const CompositionDisplay = (props) => {
           {item.url ? (
             <>
               <a href={item.url} target="_blank" rel="noopener noreferrer">
-                {item.residue}
+                {item.name}
               </a>
               <sub>{item.count} </sub>
               {"  "}
             </>
           ) : (
             <>
-              {item.residue}
+              {item.name}
               <sub>{item.count}</sub>
               {"  "}
             </>
@@ -185,35 +185,21 @@ const GlycanDetail = (props) => {
   }
 
   if (detailData.composition) {
-    var mapComp = { hex: 1, hexnac: 2, dhex: 3, neuac: 4, neugc: 5, other: 7 };
-
-    detailData.composition = detailData.composition.sort(function (a, b) {
-      var resVal1 = mapComp[a.residue.toLowerCase()];
-      var resVal2 = mapComp[b.residue.toLowerCase()];
-
-      if (!resVal1) resVal1 = 6;
-
-      if (!resVal2) resVal2 = 6;
-
-      return resVal1 - resVal2;
-    });
-
-    // Replacing residue names with the ones to be displayed.
-    for (var i = 0; i < detailData.composition.length; i++) {
-      if (detailData.composition[i].residue === "hex") {
-        detailData.composition[i].residue = "Hex";
-      } else if (detailData.composition[i].residue === "hexnac") {
-        detailData.composition[i].residue = "HexNAc";
-      } else if (detailData.composition[i].residue === "dhex") {
-        detailData.composition[i].residue = "dHex";
-      } else if (detailData.composition[i].residue === "neuac") {
-        detailData.composition[i].residue = "NeuAc";
-      } else if (detailData.composition[i].residue === "neugc") {
-        detailData.composition[i].residue = "NeuGc";
-      } else if (detailData.composition[i].residue === "other") {
-        detailData.composition[i].residue = "Other";
+    detailData.composition = detailData.composition.map((res, ind, arr) => {
+      if (glycanStrings.composition[res.residue.toLowerCase()]) {
+        res.name = glycanStrings.composition[res.residue.toLowerCase()].shortName;
+        res.orderID = glycanStrings.composition[res.residue.toLowerCase()].orderID;
+        return res;
+      } else {
+        let message = "New residue in Composition: " + res.residue;
+        logActivity("user", id, message);
+        res.name = res.residue;
+        res.orderID = parseInt(glycanStrings.composition["other"].orderID) - (parseInt(arr.length) - parseInt(ind));
+        return res;
       }
-    }
+    }).sort(function (res1, res2) {
+      return parseInt(res1.orderID) - parseInt(res2.orderID);
+    });;
   }
   const {
     mass,
@@ -642,14 +628,7 @@ const GlycanDetail = (props) => {
                           <div>
                             <strong>Composition</strong>:{" "}
                             <CompositionDisplay
-                              composition={composition.map((comp) => {
-                                if (glycanStrings.composition[comp.residue.toLowerCase()]) {
-                                  comp.residue =
-                                    glycanStrings.composition[comp.residue.toLowerCase()].shortName;
-                                  return comp;
-                                }
-                                return comp;
-                              })}
+                              composition={composition}
                             />
                           </div>
                         )}
