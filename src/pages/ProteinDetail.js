@@ -569,18 +569,18 @@ const ProteinDetail = props => {
           </Link>
         </LineTooltip>
       )
-    },
-    {
-      dataField: "type",
-      text: "Note",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      }
     }
+    // {
+    //   dataField: "type",
+    //   text: "Note",
+    //   sort: true,
+    //   headerStyle: (colum, colIndex) => {
+    //     return {
+    //       backgroundColor: "#4B85B6",
+    //       color: "white"
+    //     };
+    //   }
+    // }
   ];
   const glycanLigandsColumns = [
     {
