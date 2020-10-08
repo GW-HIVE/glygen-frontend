@@ -1452,6 +1452,17 @@ const ProteinDetail = props => {
                       {stringConstants.sidebar.glycosylation.displayname}
                     </h4>
                     <div className="float-right">
+                      <span>
+                        <Link to={`${routeConstants.protVista}${id}`}>
+                          <Button
+                            type="button"
+                            style={{ marginLeft: "5px" }}
+                            className="gg-btn-blue"
+                          >
+                            <FaSearchPlus /> ProtVista
+                          </Button>
+                        </Link>
+                      </span>
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() =>
@@ -2069,6 +2080,17 @@ const ProteinDetail = props => {
                       {stringConstants.sidebar.snv.displayname}
                     </h4>
                     <div className="float-right">
+                      <span>
+                        <Link to={`${routeConstants.protVista}${id}`}>
+                          <Button
+                            type="button"
+                            style={{ marginLeft: "5px" }}
+                            className="gg-btn-blue"
+                          >
+                            <FaSearchPlus /> ProtVista
+                          </Button>
+                        </Link>
+                      </span>
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() =>
@@ -2180,6 +2202,17 @@ const ProteinDetail = props => {
                       {stringConstants.sidebar.mutagenesis.displayname}
                     </h4>
                     <div className="float-right">
+                      <span>
+                        <Link to={`${routeConstants.protVista}${id}`}>
+                          <Button
+                            type="button"
+                            style={{ marginLeft: "5px" }}
+                            className="gg-btn-blue"
+                          >
+                            <FaSearchPlus /> ProtVista
+                          </Button>
+                        </Link>
+                      </span>
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() =>
