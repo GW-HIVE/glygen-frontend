@@ -554,7 +554,7 @@ const ProteinDetail = props => {
     },
     {
       dataField: "position",
-      text: proteinStrings.position.name,
+      text: proteinStrings.residue.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
@@ -763,7 +763,6 @@ const ProteinDetail = props => {
     {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
-      defaultSortField: "disease",
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -791,6 +790,7 @@ const ProteinDetail = props => {
     {
       dataField: "start_pos",
       text: proteinStrings.startpos.name,
+
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
@@ -874,6 +874,7 @@ const ProteinDetail = props => {
       dataField: "start_pos",
       text: proteinStrings.startpos.name,
       sort: true,
+      defaultSortField: "start_pos",
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -2116,7 +2117,7 @@ const ProteinDetail = props => {
                                     data={mutataionWithdisease}
                                     columns={mutationColumns}
                                     onClickTarget={"#mutation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
                                   />
                                 )}
                               {!mutataionWithdisease.length && (

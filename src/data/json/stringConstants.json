@@ -738,6 +738,12 @@
         "tooltip": {},
         "id": "position"
       },
+      "residue": {
+        "name": "Residue",
+        "shortName": "Residue",
+        "tooltip": {},
+        "id": "residue"
+      },
       "protein_name_long": {
         "name": "UniProt Name",
         "shortName": "protein_name_long",
