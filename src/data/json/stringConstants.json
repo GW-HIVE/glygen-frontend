@@ -200,7 +200,7 @@
         },
         "id": "inchi key"
       },
-      "IUPAC": {
+      "iupac": {
         "name": "IUPAC ",
         "shortName": "IUPAC ",
         "tooltip": {
