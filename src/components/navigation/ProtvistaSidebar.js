@@ -113,7 +113,7 @@ const ProtvistaSidebar = ({ data, handleExpand, expanded, tracksShown }) => {
               data-toggle="tooltip"
               title="The action or process of mutating."
             >
-              Mutation
+              Single Nucleotide Variation
             </a>
           </li>
           {/* )} */}

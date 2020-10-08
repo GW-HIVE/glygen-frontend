@@ -200,7 +200,7 @@
         },
         "id": "inchi key"
       },
-      "IUPAC": {
+      "iupac": {
         "name": "IUPAC ",
         "shortName": "IUPAC ",
         "tooltip": {
@@ -737,6 +737,12 @@
         "shortName": "position",
         "tooltip": {},
         "id": "position"
+      },
+      "residue": {
+        "name": "Residue",
+        "shortName": "Residue",
+        "tooltip": {},
+        "id": "residue"
       },
       "protein_name_long": {
         "name": "UniProt Name",

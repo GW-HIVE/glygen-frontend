@@ -29,7 +29,7 @@ const proteinStrings = stringConstants.protein.common;
 
 const items = [
   { label: stringConstants.sidebar.alignment.displayname, id: "Alignment" },
-  { label: stringConstants.sidebar.summary.displayname, id: "Summary" },
+  { label: stringConstants.sidebar.summary.displayname, id: "Summary" }
 ];
 
 const ProteinAlignment = () => {
@@ -37,7 +37,7 @@ const ProteinAlignment = () => {
 
   const [data, setData] = useState({});
 
-  const isIsoform = alignment === "isoformset-uniprotkb";
+  const isIsoform = alignment === "isoformset.uniprotkb";
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -71,10 +71,13 @@ const ProteinAlignment = () => {
    * Adding toggle collapse arrow icon to card header individualy.
    * @param {object} uniprot_canonical_ac- uniprot accession ID.
    **/
-  const [collapsed, setCollapsed] = useReducer((state, newState) => ({ ...state, ...newState }), {
-    alignment: true,
-    summary: true,
-  });
+  const [collapsed, setCollapsed] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      alignment: true,
+      summary: true
+    }
+  );
 
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
@@ -100,8 +103,8 @@ const ProteinAlignment = () => {
                     <h2>
                       {" "}
                       <span>
-                        {isIsoform ? "Isoform" : "Homolog"} Alignment for Protein{" "}
-                        <strong className="nowrap">{id}</strong>
+                        {isIsoform ? "Isoform" : "Homolog"} Alignment for
+                        Protein <strong className="nowrap">{id}</strong>
                       </span>
                     </h2>
                   </div>
@@ -111,7 +114,7 @@ const ProteinAlignment = () => {
             <React.Fragment>
               <Helmet>
                 {getTitle("proteinAlignment", {
-                  uniprot_canonical_ac: id && id ? id : "",
+                  uniprot_canonical_ac: id && id ? id : ""
                 })}
                 {getMeta("proteinAlignment")}
               </Helmet>
@@ -119,14 +122,18 @@ const ProteinAlignment = () => {
               <PageLoader pageLoading={pageLoading} />
               <DialogAlert
                 alertInput={alertDialogInput}
-                setOpen={(input) => {
+                setOpen={input => {
                   setAlertDialogInput({ show: input });
                 }}
               />
               {/* Button */}
               <div className="text-right gg-download-btn-width">
                 <Link to={`${routeConstants.proteinDetail}${id}`}>
-                  <Button type="button" style={{ marginLeft: "5px" }} className="gg-btn-blue">
+                  <Button
+                    type="button"
+                    style={{ marginLeft: "5px" }}
+                    className="gg-btn-blue"
+                  >
                     Back To Protein Details
                   </Button>
                 </Link>
@@ -155,10 +162,14 @@ const ProteinAlignment = () => {
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("alignment", collapsed.alignment)}
+                        onClick={() =>
+                          toggleCollapse("alignment", collapsed.alignment)
+                        }
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.alignment ? closeIcon : expandIcon}</span>
+                        <span>
+                          {collapsed.alignment ? closeIcon : expandIcon}
+                        </span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
@@ -195,10 +206,14 @@ const ProteinAlignment = () => {
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("summary", collapsed.summary)}
+                        onClick={() =>
+                          toggleCollapse("summary", collapsed.summary)
+                        }
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.summary ? closeIcon : expandIcon}</span>
+                        <span>
+                          {collapsed.summary ? closeIcon : expandIcon}
+                        </span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
@@ -215,7 +230,9 @@ const ProteinAlignment = () => {
                           {data && data.algorithm && (
                             <tr className="table-row">
                               <div className="trclass">
-                                <strong>{proteinStrings.algorithm.name}: </strong>
+                                <strong>
+                                  {proteinStrings.algorithm.name}:{" "}
+                                </strong>
                                 <a
                                   href={data.algorithm.url}
                                   target="_blank"
@@ -228,24 +245,35 @@ const ProteinAlignment = () => {
                           )}
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong> {proteinStrings.identical_positions.name}:</strong>{" "}
+                              <strong>
+                                {" "}
+                                {proteinStrings.identical_positions.name}:
+                              </strong>{" "}
                               {data.identical_positions}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong> {proteinStrings.similar_positions.name}:</strong>{" "}
+                              <strong>
+                                {" "}
+                                {proteinStrings.similar_positions.name}:
+                              </strong>{" "}
                               {data.similar_positions}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong> {proteinStrings.cluster_id.name}:</strong> {data.cls_id}
+                              <strong>
+                                {" "}
+                                {proteinStrings.cluster_id.name}:
+                              </strong>{" "}
+                              {data.cls_id}
                             </div>
                           </tr>
                           <tr className="table-row">
                             <div className="trclass">
-                              <strong>{proteinStrings.identity.name}:</strong> {data.identity}
+                              <strong>{proteinStrings.identity.name}:</strong>{" "}
+                              {data.identity}
                             </div>
                           </tr>
                         </tbody>
@@ -257,7 +285,11 @@ const ProteinAlignment = () => {
               {/* Button */}
               <div className="text-right gg-download-btn-width">
                 <Link to={`${routeConstants.proteinDetail}${id}`}>
-                  <Button type="button" style={{ marginLeft: "5px" }} className="gg-btn-blue">
+                  <Button
+                    type="button"
+                    style={{ marginLeft: "5px" }}
+                    className="gg-btn-blue"
+                  >
                     Back To Protein Details
                   </Button>
                 </Link>
