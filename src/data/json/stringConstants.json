@@ -486,7 +486,7 @@
         "name": "Protein Name (Recommended)"
       },
       "protein_name_synonym": {
-        "name": "Protein Name (Alternative or Synonyms)"
+        "name": "Protein Name (Synonyms)"
       },
       "go_term": {
         "name": "GO Name",
