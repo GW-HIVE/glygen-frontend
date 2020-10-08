@@ -2513,12 +2513,12 @@ const ProteinDetail = props => {
                               types={[
                                 {
                                   display: " Homolog-oma",
-                                  type: "Homolog-oma",
+                                  type: "Homolog.oma",
                                   data: "protein_detail"
                                 },
                                 {
                                   display: " Homolog-mgi",
-                                  type: "homolog-mgi",
+                                  type: "homolog.mgi",
                                   data: "protein_detail"
                                 }
                               ]}
@@ -2572,7 +2572,7 @@ const ProteinDetail = props => {
                                   <strong>UniProtKB Homolog Accession: </strong>
 
                                   <a
-                                    href={orthologsS.url}
+                                    href={uniprot.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
