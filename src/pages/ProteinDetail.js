@@ -453,13 +453,13 @@ const ProteinDetail = (props) => {
   }
 
   function setDiseaseDataSynonyms(diseaseName) {
-    let diseaseDataTemp = diseaseData.map(disData => { 
-        if (disData.recommended_name.name === diseaseName) { 
-          disData.synShowMore = disData.synShowMore ? false : true;
-        }
-        return disData
-      })
-      setDiseaseData(diseaseDataTemp);
+    let diseaseDataTemp = diseaseData.map((disData) => {
+      if (disData.recommended_name.name === diseaseName) {
+        disData.synShowMore = disData.synShowMore ? false : true;
+      }
+      return disData;
+    });
+    setDiseaseData(diseaseDataTemp);
   }
 
   const speciesEvidence = groupSpeciesEvidences(species);
@@ -480,24 +480,6 @@ const ProteinDetail = (props) => {
           <EvidenceList key={row.position + row.glytoucan_ac} evidences={groupEvidences(cell)} />
         );
       },
-    },
-    {
-      dataField: "position",
-      text: proteinStrings.residue.name,
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white",
-        };
-      },
-      formatter: (value, row) => (
-        <LineTooltip text="View siteview details">
-          <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-            {row.residue} {row.position}
-          </Link>
-        </LineTooltip>
-      ),
     },
     {
       dataField: "type",
@@ -547,6 +529,24 @@ const ProteinDetail = (props) => {
           whiteSpace: "nowrap",
         };
       },
+    },
+    {
+      dataField: "position",
+      text: proteinStrings.residue.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white",
+        };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View siteview details">
+          <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+            {row.residue} {row.position}
+          </Link>
+        </LineTooltip>
+      ),
     },
     // {
     //   dataField: "type",
@@ -723,6 +723,7 @@ const ProteinDetail = (props) => {
     {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
+      style: { whiteSpace: "nowrap" },
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -2400,113 +2401,88 @@ const ProteinDetail = (props) => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
-                                            {
-                                              thisDisease.recommended_name
-                                                .resource
-                                            }
+                                            {thisDisease.recommended_name.resource}
                                             {": "}
                                             {thisDisease.recommended_name.id}
                                           </a>
                                           )
                                           <EvidenceList
-                                            evidences={groupEvidences(
-                                              thisDisease.evidence
-                                            )}
+                                            evidences={groupEvidences(thisDisease.evidence)}
                                           />
                                         </p>
-                                        {thisDisease.recommended_name
-                                          .description && (
+                                        {thisDisease.recommended_name.description && (
                                           <p>
-                                            <strong>
-                                              {" "}
-                                              {
-                                                proteinStrings.description.name
-                                              }:{" "}
-                                            </strong>
-                                            {
-                                              thisDisease.recommended_name
-                                                .description
-                                            }{" "}
+                                            <strong> {proteinStrings.description.name}: </strong>
+                                            {thisDisease.recommended_name.description}{" "}
                                           </p>
                                         )}
-                                        {thisDisease.synonyms &&
-                                          thisDisease.synonyms.length && (
-                                            <p>
-                                              <strong>
-                                                {" "}
-                                                {
-                                                  proteinStrings.synonyms.name
-                                                }:{" "}
-                                              </strong>
-                                              <ul
-                                                style={{ marginLeft: "-40px" }}
-                                              >
-                                                <ul>
-                                                  {thisDisease.synonyms.slice(0, thisDisease.synShowMore ?  thisDisease.synShortLen : thisDisease.synLen).map(
-                                                    synonyms => (
-                                                      <li>
-                                                        {" "}
-                                                        {synonyms.name}{" "}
-                                                        {synonyms.resource &&
-                                                          synonyms.resource
-                                                            .length !== 0 && (
-                                                            <>
-                                                              {" "}
-                                                              [
-                                                              {synonyms.resource.map(
-                                                                (
-                                                                  res,
-                                                                  ind,
-                                                                  arr
-                                                                ) => {
-                                                                  return (
-                                                                    <>
-                                                                      <a
-                                                                        href={
-                                                                          res.url
-                                                                        }
-                                                                        target="_blank"
-                                                                        rel="noopener noreferrer"
-                                                                      >
-                                                                        {res.resource +
-                                                                          ": " +
-                                                                          res.id}
-                                                                      </a>
-                                                                      {ind <
-                                                                      arr.length -
-                                                                        1
-                                                                        ? ", "
-                                                                        : ""}
-                                                                    </>
-                                                                  );
-                                                                }
-                                                              )}
-                                                              ]
-                                                            </>
-                                                          )}
-                                                      </li>
-                                                    )
-                                                  )}
-                                                </ul>
-                                                {thisDisease.synBtnDisplay && <Button
-                                                style={{
-                                                  marginLeft: "20px",
-                                                  marginTop: "5px"
-                                                }}
-                                                type="button"
-                                                className="gg-btn-blue"
-                                                onClick={() => {
-                                                 setDiseaseDataSynonyms(thisDisease.recommended_name.name);
-                                                }
-                                                }
+                                        {thisDisease.synonyms && thisDisease.synonyms.length && (
+                                          <p>
+                                            <strong> {proteinStrings.synonyms.name}: </strong>
+                                            <ul style={{ marginLeft: "-40px" }}>
+                                              <ul>
+                                                {thisDisease.synonyms
+                                                  .slice(
+                                                    0,
+                                                    thisDisease.synShowMore
+                                                      ? thisDisease.synShortLen
+                                                      : thisDisease.synLen
+                                                  )
+                                                  .map((synonyms) => (
+                                                    <li>
+                                                      {" "}
+                                                      {synonyms.name}{" "}
+                                                      {synonyms.resource &&
+                                                        synonyms.resource.length !== 0 && (
+                                                          <>
+                                                            {" "}
+                                                            [
+                                                            {synonyms.resource.map(
+                                                              (res, ind, arr) => {
+                                                                return (
+                                                                  <>
+                                                                    <a
+                                                                      href={res.url}
+                                                                      target="_blank"
+                                                                      rel="noopener noreferrer"
+                                                                    >
+                                                                      {res.resource + ": " + res.id}
+                                                                    </a>
+                                                                    {ind < arr.length - 1
+                                                                      ? ", "
+                                                                      : ""}
+                                                                  </>
+                                                                );
+                                                              }
+                                                            )}
+                                                            ]
+                                                          </>
+                                                        )}
+                                                    </li>
+                                                  ))}
+                                              </ul>
+                                              {thisDisease.synBtnDisplay && (
+                                                <Button
+                                                  style={{
+                                                    marginLeft: "20px",
+                                                    marginTop: "5px",
+                                                  }}
+                                                  type="button"
+                                                  className="gg-btn-blue"
+                                                  onClick={() => {
+                                                    setDiseaseDataSynonyms(
+                                                      thisDisease.recommended_name.name
+                                                    );
+                                                  }}
                                                 >
                                                   {thisDisease.synShowMore
                                                     ? "Show More"
                                                     : "Show Less"}
-                                                </Button>}
-                                              </ul>
-                                            </p>
-                                          )}
+                                                </Button>
+                                              )}
+                                            </ul>
+                                          </p>
+                                        )}
                                       </div>
                                     </Grid>
                                   </p>

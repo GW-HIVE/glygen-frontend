@@ -748,7 +748,7 @@ const GlycanDetail = (props) => {
                               style={{ marginBottom: "10px" }}
                             >
                               <>
-                                <strong className="nowrap">{speEvi}</strong> {"("}
+                                <strong>{speEvi}</strong> {"("}
                                 <span className="text-capitalize">
                                   {speciesEvidence[speEvi].common_name}
                                 </span>
