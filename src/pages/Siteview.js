@@ -443,7 +443,7 @@ const Siteview = ({ position }) => {
         <div className="img-wrapper">
           {row.glytoucan_ac && (
             <img
-              className="img-cartoon-list-page img-cartoon"
+              className="img-cartoon"
               src={getGlycanImageUrl(row.glytoucan_ac)}
               alt="Glycan img"
             />

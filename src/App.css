@@ -249,9 +249,7 @@ p {
   overflow: auto;
   margin-bottom: 20px;
 }
-.img-cartoon-list-page {
-  width: 100% !important;
-}
+
 /* ========================================
             Panels
 ==========================================*/
@@ -1037,4 +1035,8 @@ sub {
 }
 .react-bootstrap-table table {
   table-layout: auto !important;
+}
+.table-height {
+  max-height: 600px;
+  margin-bottom: 20px;
 }
