@@ -199,7 +199,7 @@ const GlycanDetail = (props) => {
           return res;
         } else {
           let message = "New residue in Composition: " + res.residue;
-          logActivity("user", id, message);
+          logActivity("error", id, message);
           res.name = res.residue;
           res.orderID =
             parseInt(glycanStrings.composition["other"].orderID) -
