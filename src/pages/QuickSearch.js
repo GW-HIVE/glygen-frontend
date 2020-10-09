@@ -228,7 +228,7 @@ const QuickSearch = (props) => {
     logActivity("user", (id || "") + ">" + inputValue.question_5, message).finally(() => {
       const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
       window.location =
-        basename + routeConstants.proteinDetail + inputValue.question_5 + "#function";
+        basename + routeConstants.proteinDetail + inputValue.question_5 + "#Function";
     });
   };
 
@@ -270,7 +270,7 @@ const QuickSearch = (props) => {
         basename +
         routeConstants.proteinDetail +
         inputValue.question_7 +
-        "/site_annotation#sequence";
+        "/site_annotation#Sequence";
     });
   };
 
