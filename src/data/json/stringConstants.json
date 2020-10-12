@@ -332,7 +332,7 @@
         "hexa": {
           "orderID": 700,
           "name": "Uronic acid",
-          "subtext": "UA, e.g., GlcA, GalA",
+          "subtext": "HexA, UA, e.g., GlcA, GalA",
           "shortName": "HexA",
           "tooltip": {
             "title": "Uronic acid",
