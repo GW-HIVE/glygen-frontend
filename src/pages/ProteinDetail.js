@@ -378,6 +378,10 @@ const ProteinDetail = props => {
             }
           }
           disease[i].synonyms = synTemp;
+          disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
+          disease[i].synLen = synTemp.length;
+          disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
+          disease[i].synShowMore = true;
         }
         return disease;
       }
@@ -484,6 +488,16 @@ const ProteinDetail = props => {
     );
   }
 
+  function setDiseaseDataSynonyms(diseaseName) {
+    let diseaseDataTemp = diseaseData.map(disData => {
+      if (disData.recommended_name.name === diseaseName) {
+        disData.synShowMore = disData.synShowMore ? false : true;
+      }
+      return disData;
+    });
+    setDiseaseData(diseaseDataTemp);
+  }
+
   const speciesEvidence = groupSpeciesEvidences(species);
   const glycoSylationColumns = [
     {
@@ -505,24 +519,6 @@ const ProteinDetail = props => {
           />
         );
       }
-    },
-    {
-      dataField: "position",
-      text: proteinStrings.residue.name,
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white"
-        };
-      },
-      formatter: (value, row) => (
-        <LineTooltip text="View siteview details">
-          <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-            {row.residue} {row.position}
-          </Link>
-        </LineTooltip>
-      )
     },
     {
       dataField: "type",
@@ -578,6 +574,24 @@ const ProteinDetail = props => {
           whiteSpace: "nowrap"
         };
       }
+    },
+    {
+      dataField: "position",
+      text: proteinStrings.residue.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View siteview details">
+          <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+            {row.residue} {row.position}
+          </Link>
+        </LineTooltip>
+      )
     }
     // {
     //   dataField: "type",
@@ -772,6 +786,7 @@ const ProteinDetail = props => {
     {
       dataField: "disease",
       text: stringConstants.sidebar.disease.displayname,
+      style: { whiteSpace: "nowrap" },
       headerStyle: (column, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -2734,11 +2749,31 @@ const ProteinDetail = props => {
                                               thisDisease.recommended_name
                                                 .resource
                                             }
-                                            {":"}
+                                            {": "}
                                             {thisDisease.recommended_name.id}
                                           </a>
                                           )
+                                          <EvidenceList
+                                            evidences={groupEvidences(
+                                              thisDisease.evidence
+                                            )}
+                                          />
                                         </p>
+                                        {thisDisease.recommended_name
+                                          .description && (
+                                          <p>
+                                            <strong>
+                                              {" "}
+                                              {
+                                                proteinStrings.description.name
+                                              }:{" "}
+                                            </strong>
+                                            {
+                                              thisDisease.recommended_name
+                                                .description
+                                            }{" "}
+                                          </p>
+                                        )}
                                         {thisDisease.synonyms &&
                                           thisDisease.synonyms.length && (
                                             <p>
@@ -2752,8 +2787,14 @@ const ProteinDetail = props => {
                                                 style={{ marginLeft: "-40px" }}
                                               >
                                                 <ul>
-                                                  {thisDisease.synonyms.map(
-                                                    synonyms => (
+                                                  {thisDisease.synonyms
+                                                    .slice(
+                                                      0,
+                                                      thisDisease.synShowMore
+                                                        ? thisDisease.synShortLen
+                                                        : thisDisease.synLen
+                                                    )
+                                                    .map(synonyms => (
                                                       <li>
                                                         {" "}
                                                         {synonyms.name}{" "}
@@ -2779,7 +2820,7 @@ const ProteinDetail = props => {
                                                                         rel="noopener noreferrer"
                                                                       >
                                                                         {res.resource +
-                                                                          ":" +
+                                                                          ": " +
                                                                           res.id}
                                                                       </a>
                                                                       {ind <
@@ -2795,36 +2836,32 @@ const ProteinDetail = props => {
                                                             </>
                                                           )}
                                                       </li>
-                                                    )
-                                                  )}
+                                                    ))}
                                                 </ul>
+                                                {thisDisease.synBtnDisplay && (
+                                                  <Button
+                                                    style={{
+                                                      marginLeft: "20px",
+                                                      marginTop: "5px"
+                                                    }}
+                                                    type="button"
+                                                    className="gg-btn-blue"
+                                                    onClick={() => {
+                                                      setDiseaseDataSynonyms(
+                                                        thisDisease
+                                                          .recommended_name.name
+                                                      );
+                                                    }}
+                                                  >
+                                                    {thisDisease.synShowMore
+                                                      ? "Show More"
+                                                      : "Show Less"}
+                                                  </Button>
+                                                )}
                                               </ul>
                                             </p>
                                           )}
-                                        {thisDisease.recommended_name
-                                          .description && (
-                                          <p>
-                                            <strong>
-                                              {" "}
-                                              {
-                                                proteinStrings.description.name
-                                              }:{" "}
-                                            </strong>
-                                            {
-                                              thisDisease.recommended_name
-                                                .description
-                                            }{" "}
-                                          </p>
-                                        )}
                                       </div>
-
-                                      <Grid xs={9}>
-                                        <EvidenceList
-                                          evidences={groupEvidences(
-                                            thisDisease.evidence
-                                          )}
-                                        />
-                                      </Grid>
                                     </Grid>
                                   </p>
                                 </td>
@@ -2832,7 +2869,6 @@ const ProteinDetail = props => {
                             ))}
                           </tbody>
                         )}
-
                         {diseaseData && diseaseData.length === 0 && (
                           <p className="no-data-msg-publication">
                             No data available.
