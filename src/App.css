@@ -1036,3 +1036,7 @@ sub {
 .react-bootstrap-table table {
   table-layout: auto !important;
 }
+.table-height {
+  max-height: 600px;
+  margin-bottom: 20px;
+}
