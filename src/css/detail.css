@@ -61,6 +61,11 @@
   margin: 10px 0 0 !important;
   margin-left: 2px;
 }
+
+.inline-evidence:nth-child(n+4) {
+  margin-top: 5px !important;
+}
+
 legend {
   all: unset;
 }

@@ -16,7 +16,7 @@ const EvidenceList = props => {
             md={4}
             lg={4}
             xl={4}
-            style={{ marginBottom: "10px" }}
+            className={"inline-evidence"}
           >
             <GlygenBadge key={index} text={db} expandList={evidences[db]} />
           </Col>
