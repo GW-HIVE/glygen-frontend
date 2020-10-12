@@ -1235,7 +1235,7 @@ const GlycanDetail = (props) => {
                                         </>
                                       ))}
                                     </div>
-                                    <EvidenceList evidences={groupEvidences(pub.evidence)} />
+                                    <EvidenceList inline={true} evidences={groupEvidences(pub.evidence)} />
                                   </p>
                                 </td>
                               </tr>

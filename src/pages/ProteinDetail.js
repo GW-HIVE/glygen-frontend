@@ -2502,6 +2502,7 @@ const ProteinDetail = props => {
                                 )}
                                 <Grid className="badge-grid" xs={12}>
                                   <EvidenceList
+                                    inline={true}
                                     evidences={groupEvidences(
                                       isoformsS.locus
                                         ? isoformsS.locus.evidence
@@ -2652,6 +2653,7 @@ const ProteinDetail = props => {
 
                                 <Grid className="badge-grid" xs={12}>
                                   <EvidenceList
+                                    inline={true}
                                     evidences={groupEvidences(
                                       orthologsS.evidence
                                     )}
@@ -2749,6 +2751,7 @@ const ProteinDetail = props => {
                                           </a>
                                           )
                                           <EvidenceList
+                                            inline={true}
                                             evidences={groupEvidences(
                                               thisDisease.evidence
                                             )}
@@ -3129,6 +3132,7 @@ const ProteinDetail = props => {
                                       ))}
                                     </div>
                                     <EvidenceList
+                                      inline={true}
                                       evidences={groupEvidences(pub.evidence)}
                                     />
                                   </p>
