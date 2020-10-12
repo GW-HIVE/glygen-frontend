@@ -2400,11 +2400,6 @@ const ProteinDetail = (props) => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
-                                            {
-                                              thisDisease.recommended_name
-                                                .resource
-                                            }
-                                            {": "}
                                             {thisDisease.recommended_name.id}
                                           </a>
                                           )
@@ -2468,9 +2463,7 @@ const ProteinDetail = (props) => {
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
                                                                       >
-                                                                        {res.resource +
-                                                                          ": " +
-                                                                          res.id}
+                                                                        {res.id}
                                                                       </a>
                                                                       {ind <
                                                                       arr.length -
@@ -2493,16 +2486,16 @@ const ProteinDetail = (props) => {
                                                   marginLeft: "20px",
                                                   marginTop: "5px"
                                                 }}
-                                                type="button"
-                                                className="gg-btn-blue"
+                                                className={"lnk-btn"}
+                                                variant="link"
                                                 onClick={() => {
                                                  setDiseaseDataSynonyms(thisDisease.recommended_name.name);
                                                 }
                                                 }
                                                 >
                                                   {thisDisease.synShowMore
-                                                    ? "Show More"
-                                                    : "Show Less"}
+                                                    ? "Show More..."
+                                                    : "Show Less..."}
                                                 </Button>}
                                               </ul>
                                             </p>
