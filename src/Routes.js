@@ -45,6 +45,7 @@ const Routes = (props) => (
     <Route path={`${routeConstants.glycanDetail}:id`} component={GlycanDetail} />
     <Route path={routeConstants.motifList} component={MotifList} />
     <Route path={`${routeConstants.motifDetail}:namespace.:ac`} component={MotifDetail} />
+    <Route path={`${routeConstants.motifDetail}:namespace`} component={MotifDetail} />
     <Route path={routeConstants.motifDetail} component={MotifDetail} />
     <Route path={`${routeConstants.proteinDetail}:id/:select?`} component={ProteinDetail} />
     <Route path={`${routeConstants.isoAlignment}:id/:alignment`} component={IsoAlignment} />
