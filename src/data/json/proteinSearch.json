@@ -50,8 +50,8 @@
     "advanced_search": {
         "tabTitle": "Advanced Search",
         "uniprot_canonical_ac": {
-            "length": 2500,
-            "errorText": "Entry is too long - max length is 2500.",
+            "length": 10000,
+            "errorText": "Entry is too long - max length is 10000.",
             "typeahedID": "uniprot_canonical_ac",
             "placeholder": "Enter single or multiple comma-separated UniProtKB Accession(s)",
             "examples": [
@@ -330,7 +330,7 @@
                     "orderID": 100,
                     "example": {
                         "name": "Example",
-                        "id": "0050968"
+                        "id": "DOID:0050968"
                     }
                 }
             ]

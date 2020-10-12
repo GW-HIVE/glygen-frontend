@@ -43,8 +43,8 @@
     "advanced_search": {
         "tabTitle": "Advanced Search",
         "glycan_identifier": {
-            "length": 2500,
-            "errorText": "Entry is too long - max length is 2500.",
+            "length": 10000,
+            "errorText": "Entry is too long - max length is 10000.",
             "typeahedID": "glytoucan_ac",
             "placeholder": "Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id",
             "examples": [
