@@ -2419,7 +2419,7 @@ const ProteinDetail = props => {
                     </h4>
                     <div className="float-right">
                       <Link
-                        to={`${routeConstants.isoAlignment}${id}/isoformset-uniprotkb`}
+                        to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}
                       >
                         <Button type="button" className="gg-btn-blue">
                           Alignment
@@ -2571,12 +2571,12 @@ const ProteinDetail = props => {
                               types={[
                                 {
                                   display: " Homolog-oma",
-                                  type: "Homolog.oma",
+                                  type: "homologset.oma",
                                   data: "protein_detail"
                                 },
                                 {
                                   display: " Homolog-mgi",
-                                  type: "homolog.mgi",
+                                  type: "homologset.mgi",
                                   data: "protein_detail"
                                 }
                               ]}
@@ -2834,22 +2834,26 @@ const ProteinDetail = props => {
                                                       </li>
                                                     ))}
                                                 </ul>
-                                                {thisDisease.synBtnDisplay && <Button
-                                                style={{
-                                                  marginLeft: "20px",
-                                                  marginTop: "5px"
-                                                }}
-                                                className={"lnk-btn"}
-                                                variant="link"
-                                                onClick={() => {
-                                                 setDiseaseDataSynonyms(thisDisease.recommended_name.name);
-                                                }
-                                                }
-                                                >
-                                                  {thisDisease.synShowMore
-                                                    ? "Show More..."
-                                                    : "Show Less..."}
-                                                </Button>}
+                                                {thisDisease.synBtnDisplay && (
+                                                  <Button
+                                                    style={{
+                                                      marginLeft: "20px",
+                                                      marginTop: "5px"
+                                                    }}
+                                                    className={"lnk-btn"}
+                                                    variant="link"
+                                                    onClick={() => {
+                                                      setDiseaseDataSynonyms(
+                                                        thisDisease
+                                                          .recommended_name.name
+                                                      );
+                                                    }}
+                                                  >
+                                                    {thisDisease.synShowMore
+                                                      ? "Show More..."
+                                                      : "Show Less..."}
+                                                  </Button>
+                                                )}
                                               </ul>
                                             </p>
                                           )}
