@@ -58,9 +58,10 @@ function addCommas(nStr) {
 }
 
 const MotifDetail = (props) => {
-  let { namespace } = useParams();
-  let { ac } = useParams();
-  const id = namespace + "." + ac;
+  let { id } = useParams();
+  // let { namespace } = useParams();
+  // let { ac } = useParams();
+  // const id = namespace + "." + ac;
 
   const [data, setData] = useState([]);
   const [publication, setPublication] = useState([]);

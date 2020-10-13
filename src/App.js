@@ -11,9 +11,11 @@ import { GLYGEN_ENV } from "./envVariables.js";
 function initializeReactGA() {
   if (GLYGEN_ENV === "prod" || GLYGEN_ENV === "beta" || GLYGEN_ENV === "test") {
     ReactGA.initialize("UA-123338976-1");
-    ReactGA.pageview(
-      window.location.pathname === Routes.default ? Routes.home : window.location.pathname
-    );
+    ReactGA.pageview(window.location.pathname);
+    // ReactGA.pageview(window.location.pathname + window.location.search);
+    // ReactGA.pageview(
+    //   window.location.pathname === Routes.default ? Routes.home : window.location.pathname
+    // );
   }
 }
 
