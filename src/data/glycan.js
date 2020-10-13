@@ -22,7 +22,7 @@ export const getGlycanList = (
     offset: offset,
     sort: sort,
     limit: limit,
-    order: order,
+    order: order
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/glycan/list?query=${queryParamString}`;
@@ -37,7 +37,7 @@ export const getGlycanDownload = (id, format, compressed, type, headers) => {
   return postToAndGetBlob(url, headers);
 };
 
-export const getGlycanDetail = (accessionId) => {
+export const getGlycanDetail = accessionId => {
   const url = `/glycan/detail/${accessionId}`;
   return getJson(url);
 };
@@ -54,15 +54,17 @@ export const GLYCAN_COLUMNS = [
       return {
         backgroundColor: "#4B85B6",
         color: "white",
-        width: "15% !important",
+        width: "15% !important"
       };
     },
 
     formatter: (value, row) => (
       <LineTooltip text="View details">
-        <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>{row.glytoucan_ac}</Link>
+        <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+          {row.glytoucan_ac}
+        </Link>
       </LineTooltip>
-    ),
+    )
   },
   {
     text: glycanStrings.glycan_image.name,
@@ -70,7 +72,11 @@ export const GLYCAN_COLUMNS = [
     selected: true,
     formatter: (value, row) => (
       <div className="img-wrapper">
-        <img className="img-cartoon" src={getGlycanImageUrl(row.glytoucan_ac)} alt="Glycan img" />
+        <img
+          className="img-cartoon"
+          src={getGlycanImageUrl(row.glytoucan_ac)}
+          alt="Glycan img"
+        />
       </div>
     ),
     headerStyle: (colum, colIndex) => {
@@ -79,9 +85,9 @@ export const GLYCAN_COLUMNS = [
         textAlign: "left",
         backgroundColor: "#4B85B6",
         color: "white",
-        whiteSpace: "nowrap",
+        whiteSpace: "nowrap"
       };
-    },
+    }
   },
 
   {
@@ -91,7 +97,7 @@ export const GLYCAN_COLUMNS = [
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
-    selected: true,
+    selected: true
   },
   // {
   //   dataField: "iupac",
@@ -126,7 +132,7 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    }
   },
   {
     dataField: glycanStrings.number_monosaccharides.id,
@@ -134,7 +140,7 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    }
   },
   {
     dataField: glycanStrings.number_proteins.id,
@@ -143,6 +149,7 @@ export const GLYCAN_COLUMNS = [
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
+    formatter: value => (value ? value : "N/A")
   },
   {
     dataField: glycanStrings.number_enzymes.id,
@@ -150,15 +157,17 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    },
-  },
+    }
+  }
 ];
 
 const glycanColumnsStorageKey = "glycan-columns";
 
 export const getUserSelectedColumns = () => {
   if (localStorage.getItem(glycanColumnsStorageKey) === null) {
-    const defaultSelectedCols = GLYCAN_COLUMNS.filter((col) => col.selected).map((col) => col.text);
+    const defaultSelectedCols = GLYCAN_COLUMNS.filter(col => col.selected).map(
+      col => col.text
+    );
     localStorage.setItem(glycanColumnsStorageKey, defaultSelectedCols);
     return defaultSelectedCols;
   }
@@ -178,17 +187,17 @@ export const getUserSelectedColumns = () => {
   return selectedFields;
 };
 
-export const setUserSelectedColumns = (arr) => {
+export const setUserSelectedColumns = arr => {
   localStorage.setItem(glycanColumnsStorageKey, arr);
 };
 
-export const getGlycanSearch = (formObject) => {
+export const getGlycanSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/glycan/search?" + json;
   return getJson(url);
 };
 
-export const getGlycanSimpleSearch = (formObject) => {
+export const getGlycanSimpleSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/glycan/search_simple?" + json;
   return getJson(url);
@@ -199,6 +208,6 @@ export const getGlycanInit = () => {
   return getJson(url);
 };
 
-export const getGlycanImageUrl = (glytoucan_id) => {
+export const getGlycanImageUrl = glytoucan_id => {
   return glycanImageUrl + glytoucan_id;
 };
