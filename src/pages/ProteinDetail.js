@@ -1056,7 +1056,7 @@ const ProteinDetail = props => {
             <li key={disease.recommended_name.id}>
               {disease.recommended_name.name}{" "}
               <span className="nowrap">
-                (DOID:{" "}
+                (
                 <a href={disease.recommended_name.url}>
                   {disease.recommended_name.id}
                 </a>
