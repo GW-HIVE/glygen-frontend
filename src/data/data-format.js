@@ -1,4 +1,4 @@
-export function groupSpeciesEvidences(values) {
+export function groupOrganismEvidences(values) {
 	var groupedEvidences = {};
 
 	if (!values) {

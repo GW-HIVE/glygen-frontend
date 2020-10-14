@@ -11,7 +11,7 @@ import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
 import { Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
-import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
+import { groupEvidences, groupOrganismEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import "../css/detail.css";
@@ -498,7 +498,7 @@ const ProteinDetail = props => {
     setDiseaseData(diseaseDataTemp);
   }
 
-  const speciesEvidence = groupSpeciesEvidences(species);
+  const organismEvidence = groupOrganismEvidences(species);
   const glycoSylationColumns = [
     {
       dataField: "evidence",
@@ -1418,30 +1418,30 @@ const ProteinDetail = props => {
                         </>
                       )}
                       <div>
-                        {speciesEvidence &&
-                          // For every species object
-                          Object.keys(speciesEvidence).map(speEvi => (
-                            // For every database for current species object
+                        {organismEvidence &&
+                          // For every organism object
+                          Object.keys(organismEvidence).map(orgEvi => (
+                            // For every database for current organism object
                             <div>
                               <>
-                                <strong>{proteinStrings.species.name}: </strong>
-                                {speEvi} {"("}
+                                <strong>{proteinStrings.organism.name}: </strong>
+                                {orgEvi} {"("}
                                 <span className="text-capitalize">
-                                  {speciesEvidence[speEvi].common_name}
+                                  {organismEvidence[orgEvi].common_name}
                                 </span>
                                 {")"} {"["}
                                 {/* <LineTooltip text="View details on NCBI"> */}
                                 <a
-                                  href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+                                  href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${organismEvidence[orgEvi].taxid}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
-                                  {speciesEvidence[speEvi].taxid}
+                                  {organismEvidence[orgEvi].taxid}
                                 </a>
                                 {/* </LineTooltip> */}
                                 {"]"}
                                 <EvidenceList
-                                  evidences={speciesEvidence[speEvi].evidence}
+                                  evidences={organismEvidence[orgEvi].evidence}
                                 />
                               </>
                             </div>

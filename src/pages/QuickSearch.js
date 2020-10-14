@@ -20,9 +20,9 @@ import {
   getProteinToOrthologs,
   getOrthologsList,
   getBiosynthesisEnzymeToGlycans,
-  getSpeciesToGlycosyltransferases,
-  getSpeciesToGlycohydrolases,
-  getSpeciesToGlycoproteins,
+  getOrganismToGlycosyltransferases,
+  getOrganismToGlycohydrolases,
+  getOrganismToGlycoproteins,
   getGeneLocusList,
 } from "../data/usecases";
 import { axiosError } from "../data/axiosError";
@@ -30,7 +30,7 @@ import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
 import SearchByGlycan from "../components/quickSearch/SearchByGlycan";
 import SearchByProtein from "../components/quickSearch/SearchByProtein";
-import SearchBySpecies from "../components/quickSearch/SearchBySpecies";
+import SearchByOrganism from "../components/quickSearch/SearchByOrganism";
 import SearchByDisease from "../components/quickSearch/SearchByDisease";
 import { getProteinList } from "../data/protein";
 import { getGlycanList } from "../data/glycan";
@@ -58,8 +58,8 @@ const QuickSearch = (props) => {
       id: "Search-by-Protein",
     },
     {
-      label: stringConstants.sidebar.search_by_species.displayname,
-      id: "Search-by-Species",
+      label: stringConstants.sidebar.search_by_organism.displayname,
+      id: "Search-by-Organism",
     },
     {
       label: stringConstants.sidebar.search_by_disease.displayname,
@@ -278,7 +278,7 @@ const QuickSearch = (props) => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
     let message = "Quick Search Question_8 = /" + inputValue.question_8;
-    getSpeciesToGlycosyltransferases(inputValue.question_8)
+    getOrganismToGlycosyltransferases(inputValue.question_8)
       .then((response) => {
         if (response.data["list_id"] !== "") {
           setPageLoading(false);
@@ -311,7 +311,7 @@ const QuickSearch = (props) => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
     let message = "Quick Search Question_9 = /" + inputValue.question_9;
-    getSpeciesToGlycohydrolases(inputValue.question_9)
+    getOrganismToGlycohydrolases(inputValue.question_9)
       .then((response) => {
         if (response.data["list_id"] !== "") {
           setPageLoading(false);
@@ -344,7 +344,7 @@ const QuickSearch = (props) => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
     let message = "Quick Search Question_10 = /9606/" + inputValue.question_10;
-    getSpeciesToGlycoproteins(
+    getOrganismToGlycoproteins(
       inputValue.question_10.organism,
       inputValue.question_10.glycosylation_evidence
     )
@@ -555,7 +555,7 @@ const QuickSearch = (props) => {
               alertText={alertText}
               id="Search-by-Protein"
             />
-            <SearchBySpecies
+            <SearchByOrganism
               setInputValue={setInputValue}
               inputValue={inputValue}
               glycanInitData={glycanInitData}
@@ -564,7 +564,7 @@ const QuickSearch = (props) => {
               searchQuestion10={searchQuestion10}
               questionId={questionId}
               alertText={alertText}
-              id="Search-by-Species"
+              id="Search-by-Organism"
             />
             <SearchByDisease
               setInputValue={setInputValue}
