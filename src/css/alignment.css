@@ -33,6 +33,7 @@
   font-family: monospace;
   display: inline-block;
   word-break: break-all;
+  padding-left: 15px;
 }
 
 .aln-line-consensus {
@@ -40,6 +41,7 @@
   font-family: monospace;
   display: inline-block;
   word-break: break-all;
+  padding-left: 15px;
 }
 .boldd {
   font-weight: bold;
