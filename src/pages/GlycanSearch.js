@@ -164,11 +164,11 @@ const GlycanSearch = (props) => {
 					min: compositionData[x].min,
 					selectValue: getSelectionValue(
 						compositionData[x].min,
-						compositionData[x].max,
+						compositionData[x].min,
 						compositionData[x].min,
 						compositionData[x].max
 					),
-					max: compositionData[x].max,
+					max: compositionData[x].min,
 				};
 			}
 			initData.glycan_mass.native.min = Math.floor(

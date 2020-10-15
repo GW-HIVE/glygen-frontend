@@ -39,7 +39,7 @@
       },
       "organism_annotation": {
         "name": "Organism Annotation",
-        "shortName": "Species Annotation",
+        "shortName": "Organism Annotation",
         "tooltip": {
           "title": "Organism Annotation",
           "text": "",
@@ -100,8 +100,8 @@
         "id": "number_enzymes"
       },
       "organism": {
-        "name": "Organisms",
-        "shortName": "Species",
+        "name": "Organism",
+        "shortName": "Organism",
         "tooltip": {
           "title": "Organism",
           "text": "Search for glycan(s) that can be made by an Organism. It is possible to specify multiple organisms and combine the search results. If 'Or' is selected the search result will be a union of all glycans made in any of the organisms. If 'AND' is selected only glycans that are present in each of organisms will be included in the result set. If 'Annotated' is selected only glycans with the organism annotation coming from one of the source databases will be included. If 'Infered' is selected, in addition to the glycans with the annotation also glycans that received the annotation because they are related will be included. For example: the composition of glycan X will also receive the organism annotation from glycan X. However the composition will only be included if 'Infered' is selected."
@@ -522,12 +522,6 @@
         "tooltip": {},
         "id": "isoform_accession"
       },
-      "species": {
-        "name": "Species",
-        "shortName": "Species",
-        "tooltip": {},
-        "id": "species"
-      },
       "glycan": {
         "name": "Glycan",
         "shortName": "Glycan",
@@ -928,7 +922,7 @@
       "id": "question_3"
     },
     "question_4": {
-      "text": "What are the orthologs of {0} in different species?",
+      "text": "What are the orthologs of {0} in different organism?",
       "id": "question_4"
     },
     "question_5": {
@@ -1117,10 +1111,10 @@
       "displayname": "Names",
       "tooltip": "Names Information for selected accession"
     },
-    "species": {
-      "id": "species",
-      "displayname": "Species",
-      "tooltip": " Species Information for selected accession"
+    "organism": {
+      "id": "organism",
+      "displayname": "Organism",
+      "tooltip": " Organism Information for selected accession"
     },
     "motifs": {
       "id": "motifs",
@@ -1267,10 +1261,10 @@
       "displayname": "Search By Protein",
       "tooltip": " ssearch_by_protein"
     },
-    "search_by_species": {
-      "id": "search_by_species",
-      "displayname": "Search By Species",
-      "tooltip": " ssearch_by_species"
+    "search_by_organism": {
+      "id": "search_by_organism",
+      "displayname": "Search By Organism",
+      "tooltip": " ssearch_by_organism"
     },
     "search_by_disease": {
       "id": "search_by_disease",

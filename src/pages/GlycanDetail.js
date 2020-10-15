@@ -10,7 +10,7 @@ import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
 import { Col, Row, Image } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
-import { groupEvidences, groupSpeciesEvidences } from "../data/data-format";
+import { groupEvidences, groupOrganismEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import "../css/detail.css";
@@ -43,7 +43,7 @@ const motifStrings = stringConstants.motif.common;
 
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
-  { label: stringConstants.sidebar.species.displayname, id: "Species" },
+  { label: stringConstants.sidebar.organism.displayname, id: "Organism" },
   { label: stringConstants.sidebar.motifs.displayname, id: "Motifs" },
   {
     label: stringConstants.sidebar.associated_glycan.displayname,
@@ -233,7 +233,7 @@ const GlycanDetail = (props) => {
     tool_support,
   } = detailData;
 
-  const speciesEvidence = groupSpeciesEvidences(species);
+  const organismEvidence = groupOrganismEvidences(species);
 
   const glycoProtienColumns = [
     {
@@ -445,7 +445,7 @@ const GlycanDetail = (props) => {
    **/
   const [collapsed, setCollapsed] = useReducer((state, newState) => ({ ...state, ...newState }), {
     general: true,
-    species: true,
+    organism: true,
     motif: true,
     glycoprotein: true,
     glycanBindingProtein: true,
@@ -703,7 +703,7 @@ const GlycanDetail = (props) => {
               </Accordion>
               {/*  species */}
               <Accordion
-                id="Species"
+                id="Organism"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -712,33 +712,33 @@ const GlycanDetail = (props) => {
                   <Card.Header className="panelHeadBgr">
                     <span className="gg-green d-inline">
                       <HelpTooltip
-                        title={DetailTooltips.glycan.species.title}
-                        text={DetailTooltips.glycan.species.text}
-                        urlText={DetailTooltips.glycan.species.urlText}
-                        url={DetailTooltips.glycan.species.url}
+                        title={DetailTooltips.glycan.organism.title}
+                        text={DetailTooltips.glycan.organism.text}
+                        urlText={DetailTooltips.glycan.organism.urlText}
+                        url={DetailTooltips.glycan.organism.url}
                         helpIcon="gg-helpicon-detail"
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar.species.displayname}
+                      {stringConstants.sidebar.organism.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("species", collapsed.species)}
+                        onClick={() => toggleCollapse("organism", collapsed.organism)}
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.species ? closeIcon : expandIcon}</span>
+                        <span>{collapsed.organism ? closeIcon : expandIcon}</span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       <Row>
-                        {speciesEvidence &&
-                          // For every species object
-                          Object.keys(speciesEvidence).map((speEvi) => (
-                            // For every database for current species object
+                        {organismEvidence &&
+                          // For every organism object
+                          Object.keys(organismEvidence).map((orgEvi) => (
+                            // For every database for current organism object
                             <Col
                               xs={12}
                               sm={12}
@@ -748,22 +748,22 @@ const GlycanDetail = (props) => {
                               style={{ marginBottom: "10px" }}
                             >
                               <>
-                                <strong>{speEvi}</strong> {"("}
+                                <strong>{orgEvi}</strong> {"("}
                                 <span className="text-capitalize">
-                                  {speciesEvidence[speEvi].common_name}
+                                  {organismEvidence[orgEvi].common_name}
                                 </span>
                                 {")"} {"["}
                                 <LineTooltip text="View details on NCBI">
                                   <a
-                                    href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${speciesEvidence[speEvi].taxid}`}
+                                    href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${organismEvidence[orgEvi].taxid}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                   >
-                                    {speciesEvidence[speEvi].taxid}
+                                    {organismEvidence[orgEvi].taxid}
                                   </a>
                                 </LineTooltip>
                                 {"]"}
-                                <EvidenceList evidences={speciesEvidence[speEvi].evidence} />
+                                <EvidenceList evidences={organismEvidence[orgEvi].evidence} />
                               </>
                             </Col>
                           ))}
