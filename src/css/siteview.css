@@ -47,6 +47,14 @@
   color: green;
   /* transform: translateY(-10px); */
 }
+.zoom-sequence span.highlightMutagenesis {
+  color: purple;
+  /* transform: translateY(-10px); */
+}
+.zoom-sequence span.highlightGlycation {
+  color: olive;
+  /* transform: translateY(-10px); */
+}
 
 #label {
   font-size: 24px;

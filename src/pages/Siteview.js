@@ -12,7 +12,8 @@ import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
-import { groupEvidences } from "../data/data-format";
+
+import { groupEvidences, groupOrganismEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import "../css/detail.css";
 import "../css/siteview.css";
@@ -103,8 +104,12 @@ const SequenceLocationViewer = ({
         return "highlightN";
       } else if (match.type === "O") {
         return "highlightO";
+      } else if (match.type === "L") {
+        return "highlightMutagenesis";
       } else if (match.type === "M") {
         return "highlightMutate";
+      } else if (match.type === "G") {
+        return "highlightGlycation";
       }
     }
     return "";
@@ -321,15 +326,27 @@ const Siteview = ({ position }) => {
      *  The map() method calls the provided function once for each element in a detailData.mutation array, in order.
      *  and sorting with respect to start_pos
      */
-    if (detailData.mutation) {
+    if (detailData.snv) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.mutation.sort(sortByStartPos).map(mutation => ({
-          position: mutation.start_pos,
+        ...detailData.snv.sort(sortByStartPos).map(snv => ({
+          position: snv.start_pos,
           label: "Mutation",
-          evidence: mutation.evidence,
+          evidence: snv.evidence,
 
           typeAnnotate: "Mutation"
+        }))
+      ];
+    }
+
+    if (detailData.mutagenesis) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
+          position: mutagenesis.start_pos,
+          label: "Mutagenesis",
+          evidence: mutagenesis.evidence,
+          typeAnnotate: "Mutagenesis"
         }))
       ];
     }
@@ -346,8 +363,10 @@ const Siteview = ({ position }) => {
           return "M";
         case "glycosylation":
           return "N";
+        case "mutagenesis":
+          return "L";
         case "glycation":
-          return "?";
+          return "G";
         default:
       }
       return "";
@@ -498,8 +517,20 @@ const Siteview = ({ position }) => {
     }
   ];
 
-  const { uniprot, mass } = detailData;
+  const {
+    uniprot,
+    mass,
+    refseq,
+    gene,
+    gene_name,
+    species,
+    protein_names
+  } = detailData;
+  const uniprotNames = (protein_names || [])
+    .filter(x => x.type === "recommended")
+    .map(x => x.name);
 
+  const organismEvidence = groupOrganismEvidences(species);
   // ==================================== //
   /**
    * Adding toggle collapse arrow icon to card header individualy.
@@ -625,6 +656,65 @@ const Siteview = ({ position }) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
+                      <div
+                        style={{
+                          marginBottom: "5px"
+                        }}
+                      >
+                        {gene && (
+                          <>
+                            {gene.map((genes, genesname) => (
+                              <span key={genesname}>
+                                <div>
+                                  <strong>
+                                    {proteinStrings.gene_name.name}:
+                                  </strong>{" "}
+                                  <a
+                                    href={genes.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {genes.name}
+                                  </a>
+                                </div>
+
+                                {gene.locus && (
+                                  <div>
+                                    <strong>
+                                      {proteinStrings.gene_location.name}:
+                                    </strong>{" "}
+                                    {proteinStrings.chromosome.name}: {""}
+                                    {genes.locus
+                                      ? genes.locus.chromosome
+                                      : "NA"}{" "}
+                                    {""}(
+                                    {genes.locus
+                                      ? addCommas(genes.locus.start_pos)
+                                      : "NA"}{" "}
+                                    -{" "}
+                                    {genes.locus
+                                      ? addCommas(genes.locus.end_pos)
+                                      : "NA"}
+                                    )
+                                  </div>
+                                )}
+
+                                <EvidenceList
+                                  evidences={groupEvidences(
+                                    genes.locus ? genes.locus.evidence : []
+                                  )}
+                                />
+                              </span>
+                            ))}
+                          </>
+                        )}
+                        {!gene && (
+                          <p className="no-data-msg-publication">
+                            No data available.
+                          </p>
+                        )}
+                      </div>
+
                       {uniprot && uniprot.uniprot_canonical_ac && (
                         <>
                           <div>
@@ -654,22 +744,88 @@ const Siteview = ({ position }) => {
                               {proteinStrings.sequence_length.name}:{" "}
                             </strong>
                             <a
-                              href="https://www.uniprot.org/uniprot/#sequence"
+                              href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
                               {uniprot.length}
                             </a>
                           </div>
-
+                          <div>
+                            <strong>
+                              {proteinStrings.recommendedname.name}:{" "}
+                            </strong>{" "}
+                            {/* {proteinStrings.protein_names_uniprotkb.shortName} */}
+                            {uniprotNames}
+                          </div>
                           <div>
                             <strong>
                               {proteinStrings.chemical_mass.name}:{" "}
                             </strong>
                             {addCommas(mass.chemical_mass)} Da
                           </div>
+
+                          {refseq && (
+                            <div>
+                              <>
+                                <strong>
+                                  {proteinStrings.refseq_ac.name}:{" "}
+                                </strong>{" "}
+                                <a
+                                  href={refseq.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {" "}
+                                  {refseq.ac}{" "}
+                                </a>{" "}
+                                <div>
+                                  {" "}
+                                  <strong>
+                                    {proteinStrings.refSeq_name.name}:{" "}
+                                  </strong>{" "}
+                                  {refseq.name}{" "}
+                                </div>{" "}
+                              </>
+                            </div>
+                          )}
                         </>
                       )}
+                      <div>
+                        {organismEvidence &&
+                          // For every organism object
+                          Object.keys(organismEvidence).map(orgEvi => (
+                            // For every database for current organism object
+                            <div>
+                              <>
+                                <strong>
+                                  {proteinStrings.organism.name}:{" "}
+                                </strong>
+                                {orgEvi} {"("}
+                                <span className="text-capitalize">
+                                  {organismEvidence[orgEvi].common_name}
+                                </span>
+                                {")"} {"["}
+                                {/* <LineTooltip text="View details on NCBI"> */}
+                                <a
+                                  href={`https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${organismEvidence[orgEvi].taxid}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {organismEvidence[orgEvi].taxid}
+                                </a>
+                                {/* </LineTooltip> */}
+                                {"]"}
+                                <EvidenceList
+                                  evidences={organismEvidence[orgEvi].evidence}
+                                />
+                              </>
+                            </div>
+                          ))}
+                        {/* {!species && (
+													<p className="no-data-msg">No data available.</p>
+												)} */}
+                      </div>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
