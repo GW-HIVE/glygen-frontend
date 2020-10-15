@@ -82,8 +82,8 @@ const ProtVista = () => {
     var mutagenesisS = {
       type: "MutagenesisS",
       residues: [],
-      color: "red",
-      shape: "bridge"
+      color: "purple",
+      shape: "square"
     };
 
     if (data.glycosylation) {
@@ -663,26 +663,26 @@ const ProtVista = () => {
                     </span>
                   </span>
                 </li>
-                {tracksShown && tracksShown.mutation && (
-                  <li>
-                    <span
-                      className="super5 hover"
-                      onMouseEnter={() => setHighlighted("mutation")}
-                    >
-                      &#9670;
-                      <span className="superx">
-                        <>Single Nucleotide Variation</>
-                      </span>
+                {/* {tracksShown && tracksShown.snv && ( */}
+                <li>
+                  <span
+                    className="super5 hover"
+                    onMouseEnter={() => setHighlighted("mutation")}
+                  >
+                    &#9670;
+                    <span className="superx">
+                      <>Single Nucleotide Variation</>
                     </span>
-                  </li>
-                )}
+                  </span>
+                </li>
+                {/* )} */}
 
                 <li>
                   <span
                     className="super7 hover"
                     onMouseEnter={() => setHighlighted("mutagenesis")}
                   >
-                    &#9670;
+                    &#9646;
                     <span className="superx">
                       <>Mutagenesis</>
                     </span>
