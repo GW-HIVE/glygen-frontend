@@ -1040,3 +1040,29 @@ sub {
   max-height: 600px;
   margin-bottom: 20px;
 }
+
+/*! does not work on Firefox */
+
+/*! Other Browser */
+/* width */
+/* .table-height::-webkit-scrollbar {
+  width: 20px;
+  background: #e3e1e1;
+} */
+
+/* Track */
+/* .table-height::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+} */
+
+/* Handle */
+/* .table-height::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+} */
+
+/* Handle on hover */
+/* .table-height::-webkit-scrollbar-thumb:hover {
+  background: #609fd3;
+} */
