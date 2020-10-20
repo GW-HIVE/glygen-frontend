@@ -34,7 +34,8 @@ import { axiosError } from "../data/axiosError";
 import stringConstants from "../data/json/stringConstants";
 
 const glycanStrings = stringConstants.glycan.common;
-const proteinStrings = stringConstants.protein.common;
+const motifStrings = stringConstants.motif.common;
+
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
   { label: stringConstants.sidebar.glycans.displayname, id: "Glycans-With-This-Motifs" },
@@ -68,6 +69,7 @@ const MotifDetail = (props) => {
   const [glytoucan, setGlytoucan] = useState([]);
   const [motif, setMotif] = useState([]);
   const [mass, setMass] = useState([]);
+  const [motifName, setMotifName] = useState([]);
   const [classification, setClassification] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(MOTIF_COLUMNS);
@@ -119,6 +121,7 @@ const MotifDetail = (props) => {
         setPagination(data.pagination);
         setMass(data.mass);
         setMotif(data.motif);
+        setMotifName(data.name);
         // setClassification(
         //   data.classification.filter(
         //     classif =>
@@ -259,9 +262,15 @@ const MotifDetail = (props) => {
                               />
                             </p>
                             <div>
-                              <strong>Motif ID: </strong>
+                              <strong>{motifStrings.motif_id.name}: </strong>
                               <a href={motif.url} target="_blank" rel="noopener noreferrer">
                                 {motif.accession}
+                              </a>
+                            </div>
+                            <div>
+                              <strong>{motifStrings.motif_name.name}: </strong>
+                              <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                {motifName}
                               </a>
                             </div>
                             <div>
