@@ -388,25 +388,25 @@
     "global_search_results": {
       "identifiers": {
         "name": "identifiers"
-      }, 
+      },
       "subtype": {
         "name": "subtype"
-      }, 
+      },
       "enzyme": {
         "name": "enzyme"
-      }, 
+      },
       "motifs": {
         "name": "motifs"
-      }, 
+      },
       "sequences": {
         "name": "sequences"
-      }, 
+      },
       "glycoproteins": {
         "name": "glycoproteins"
-      }, 
+      },
       "type": {
         "name": "type"
-      }, 
+      },
       "species": {
         "name": "organism"
       }
@@ -914,20 +914,20 @@
       },
       "identifiers": {
         "name": "identifiers"
-      }, 
+      },
       "disease": {
         "name": "disease"
-      }, 
+      },
       "names": {
         "name": "names"
-      }, 
+      },
       "gene": {
         "name": "gene"
-      }, 
+      },
       "species": {
         "name": "organism"
       }
-  },
+    },
     "advanced_search": {
       "query_type": {
         "id": "query_type",
@@ -948,6 +948,9 @@
       },
       "motif_name": {
         "name": "Motif Name"
+      },
+      "motif_synonym": {
+        "synonym": "Motif Synonym"
       },
       "glycan_count": {
         "name": "No of Glycans"

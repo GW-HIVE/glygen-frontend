@@ -70,6 +70,7 @@ const MotifDetail = (props) => {
   const [motif, setMotif] = useState([]);
   const [mass, setMass] = useState([]);
   const [motifName, setMotifName] = useState([]);
+  const [motifSynonym, setMotifSynonym] = useState([]);
   const [classification, setClassification] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(MOTIF_COLUMNS);
@@ -122,6 +123,7 @@ const MotifDetail = (props) => {
         setMass(data.mass);
         setMotif(data.motif);
         setMotifName(data.name);
+        setMotifSynonym(data.synonym);
         // setClassification(
         //   data.classification.filter(
         //     classif =>
@@ -271,6 +273,12 @@ const MotifDetail = (props) => {
                               <strong>{motifStrings.motif_name.name}: </strong>
                               <a href={motif.url} target="_blank" rel="noopener noreferrer">
                                 {motifName}
+                              </a>
+                            </div>
+                            <div>
+                              <strong>{motifStrings.motif_synonym.synonym}: </strong>
+                              <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                {motifSynonym}
                               </a>
                             </div>
                             <div>
