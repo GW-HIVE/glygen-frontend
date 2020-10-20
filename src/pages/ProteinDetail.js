@@ -879,7 +879,8 @@ const ProteinDetail = (props) => {
       },
       formatter: (value, row) => (
         <>
-          {row.sequence_org} → {row.sequence_mut}
+          {row.sequence_org} {row.sequence_org ? " → " : ""}
+          {row.sequence_mut}
         </>
       ),
     },
