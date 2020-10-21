@@ -37,7 +37,7 @@ function Sidebar({ items, offset = 105 }) {
       <div className="sidebar">
         {items.map(({ label, id }) => (
           <>
-            <Link to={"#" + id}>
+            <a href={"#" + id}>
               <ul
                 key={id}
                 button
@@ -48,7 +48,7 @@ function Sidebar({ items, offset = 105 }) {
               >
                 <li className="sidebar-item-text">{label}</li>
               </ul>
-            </Link>
+            </a>
           </>
         ))}
       </div>
