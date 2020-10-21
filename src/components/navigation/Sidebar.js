@@ -36,7 +36,7 @@ function Sidebar({ items, offset = 105 }) {
       <div className="sidebar">
         {items.map(({ label, id }) => (
           <>
-            <a href="javascript:void(0)">
+            <a href={"#" + id}>
               <ul
                 key={id}
                 button
