@@ -132,7 +132,8 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
+    formatter: value => (value ? value : "N/A")
   },
   {
     dataField: glycanStrings.number_monosaccharides.id,
@@ -140,7 +141,8 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
+    formatter: value => (value ? value : "N/A")
   },
   {
     dataField: glycanStrings.number_proteins.id,
@@ -149,7 +151,7 @@ export const GLYCAN_COLUMNS = [
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
-    formatter: value => (value ? value : "N/A")
+    formatter: value => (value ? value : " ")
   },
   {
     dataField: glycanStrings.number_enzymes.id,
@@ -157,7 +159,8 @@ export const GLYCAN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
+    formatter: value => (value ? value : " ")
   }
 ];
 
