@@ -1,5 +1,4 @@
 import React, { useState, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
 import "../../css/Sidebar.css";
 
 function Sidebar({ items, offset = 105 }) {
@@ -37,11 +36,13 @@ function Sidebar({ items, offset = 105 }) {
       <div className="sidebar">
         {items.map(({ label, id }) => (
           <>
-            <a href={"#" + id}>
+            <a href="javascript:void(0)">
               <ul
                 key={id}
                 button
-                onClick={() => setActiveLink(id)}
+                onClick={() => {setActiveLink(id)         
+                  document.getElementById(id).scrollIntoView({ behavior: "auto" })
+                }}
                 className={
                   "sidebar-item" + (activeLink === id ? " active" : "")
                 }
