@@ -45,9 +45,7 @@ function Sidebar({ items, offset = 105 }) {
               <ul
                 key={id}
                 button
-                onClick={() => {setActiveLink(id)         
-                  // document.getElementById(id).scrollIntoView({ behavior: "auto" })
-                }}
+                onClick={() => setActiveLink(id)}         
                 className={
                   "sidebar-item" + (activeLink === id ? " active" : "")
                 }
