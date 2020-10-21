@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import { Link } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import "../../css/Sidebar.css";
 
 function Sidebar({ items, offset = 105 }) {
@@ -37,7 +37,7 @@ function Sidebar({ items, offset = 105 }) {
       <div className="sidebar">
         {items.map(({ label, id }) => (
           <>
-            <Link href={"#" + id}>
+            <Link to={"#" + id}>
               <ul
                 key={id}
                 button
