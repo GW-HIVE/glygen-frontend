@@ -489,6 +489,8 @@ const QuickSearch = (props) => {
         const anchorElement = props.history.location.hash;
         if (anchorElement && document.getElementById(anchorElement.substr(1))) {
           document.getElementById(anchorElement.substr(1)).scrollIntoView({ behavior: "auto" });
+        } else {
+          document.getElementById(items[0].id).scrollIntoView({ behavior: "auto" });
         }
         if (!id || !question) setPageLoading(false);
       })
