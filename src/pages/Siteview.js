@@ -252,7 +252,7 @@ const SequenceLocationViewer = ({
   );
 };
 
-const Siteview = ({ position, history }) => {
+const Siteview = ({ position }) => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
@@ -276,18 +276,6 @@ const Siteview = ({ position, history }) => {
       } else {
         setDetailData(data);
       }
-      setTimeout(() => {
-        const anchorElement = history.location.hash;
-        if (anchorElement && document.getElementById(anchorElement.substr(1))) {
-          document
-            .getElementById(anchorElement.substr(1))
-            .scrollIntoView({ behavior: "auto" });
-        } else {
-          document
-            .getElementById(items[0].id)
-            .scrollIntoView({ behavior: "auto" });
-        }
-      }, 500);
     });
 
     getProteinsiteDetailData.catch(({ response }) => {

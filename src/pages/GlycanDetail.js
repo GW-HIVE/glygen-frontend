@@ -172,10 +172,6 @@ const GlycanDetail = props => {
           document
             .getElementById(anchorElement.substr(1))
             .scrollIntoView({ behavior: "auto" });
-        } else {
-          document
-            .getElementById(items[0].id)
-            .scrollIntoView({ behavior: "auto" });
         }
       }, 500);
     });
