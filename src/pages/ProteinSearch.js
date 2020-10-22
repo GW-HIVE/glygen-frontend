@@ -72,7 +72,7 @@ const ProteinSearch = (props) => {
 			],
 		}
 	);
-	const [proActTabKey, setProActTabKey] = useState("simple_search");
+	const [proActTabKey, setProActTabKey] = useState("Simple-Search");
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertTextInput, setAlertTextInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -113,7 +113,12 @@ const ProteinSearch = (props) => {
 				});
 
 				setInitData(initData);
-				setProActTabKey("simple_search");
+				const anchorElement = props.history.location.hash;
+				if (anchorElement) {
+					setProActTabKey(anchorElement.substr(1));	
+				} else {
+					setProActTabKey("Simple-Search");
+				}
 				if (id === undefined) setPageLoading(false);
 
 				id &&
@@ -128,12 +133,7 @@ const ProteinSearch = (props) => {
 									data.query.term_category ? data.query.term_category : "any"
 								);
 								setProSimpleSearchTerm(data.query.term ? data.query.term : "");
-								const anchorElement = props.history.location.hash;
-								if (anchorElement) {
-									setProActTabKey(anchorElement.substr(1));	
-								} else {
-									setProActTabKey("simple_search");
-								}
+								setProActTabKey("Simple-Search");
 								setPageLoading(false);
 							} else {
 								setProAdvSearchData({
@@ -239,7 +239,7 @@ const ProteinSearch = (props) => {
 										: data.query.binding_glycan_id,
 								});
 
-								setProActTabKey("advanced_search");
+								setProActTabKey("Advanced-Search");
 								setPageLoading(false);
 							}
 						})
@@ -513,14 +513,14 @@ const ProteinSearch = (props) => {
 						<h1 className="page-heading">{proteinSearchData.pageTitle}</h1>
 					</div>
 					<Tabs
-						defaultActiveKey="advanced_search"
+						defaultActiveKey="Advanced-Search"
 						transition={false}
 						activeKey={proActTabKey}
 						mountOnEnter={true}
 						unmountOnExit={true}
 						onSelect={(key) => setProActTabKey(key)}>
 						<Tab
-							eventKey="simple_search"
+							eventKey="Simple-Search"
 							className="tab-content-padding"
 							title={simpleSearch.tabTitle}>
 							<TextAlert alertInput={alertTextInput} />
@@ -545,7 +545,7 @@ const ProteinSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab
-							eventKey="advanced_search"
+							eventKey="Advanced-Search"
 							className="tab-content-padding"
 							title={advancedSearch.tabTitle}>
 							<TextAlert alertInput={alertTextInput} />
@@ -561,7 +561,7 @@ const ProteinSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab
-							eventKey="tutorial"
+							eventKey="Tutorial"
 							title={proteinSearchData.tutorial.tabTitle}
 							className="tab-content-padding">
 							<Container className="tab-content-border">

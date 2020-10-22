@@ -70,7 +70,7 @@ const GlycanSearch = (props) => {
 		(state, newState) => ({ ...state, ...newState }),
 		{}
 	);
-	const [glyActTabKey, setGlyActTabKey] = useState('simple_search');
+	const [glyActTabKey, setGlyActTabKey] = useState('Simple-Search');
 	const [pageLoading, setPageLoading] = useState(true);
 	const [alertTextInput, setAlertTextInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -193,7 +193,7 @@ const GlycanSearch = (props) => {
 			if (anchorElement) {
 				setGlyActTabKey(anchorElement.substr(1));	
 			} else {
-				setGlyActTabKey("simple_search");
+				setGlyActTabKey("Simple-Search");
 			}
 			if (id === undefined) setPageLoading(false);
 
@@ -218,14 +218,14 @@ const GlycanSearch = (props) => {
 							};
 						}
 						setGlyCompData(queryCompData);
-						setGlyActTabKey("composition_search");
+						setGlyActTabKey("Composition-Search");
 						setPageLoading(false);
 					} else if (data.query.query_type === glycanData.simple_search.query_type.name) {
 						setGlySimpleSearchCategory(
 							data.query.term_category ? data.query.term_category : 'any'
 						);
 						setGlySimpleSearchTerm(data.query.term ? data.query.term : '');
-						setGlyActTabKey("simple_search");
+						setGlyActTabKey("Simple-Search");
 						setPageLoading(false);
 					} else {
 						setGlyAdvSearchData({
@@ -338,7 +338,7 @@ const GlycanSearch = (props) => {
 							glyAdvSearchValError: [false, false, false, false, false, false],
 						});
 
-						setGlyActTabKey("advanced_search");
+						setGlyActTabKey("Advanced-Search");
 						setPageLoading(false);
 					}
 				})
@@ -632,14 +632,14 @@ const GlycanSearch = (props) => {
 						<h1 className='page-heading'>{glycanSearchData.pageTitle}</h1>
 					</div>
 					<Tabs
-						defaultActiveKey='advanced_search'
+						defaultActiveKey='Advanced-Search'
 						transition={false}
 						activeKey={glyActTabKey}
 						mountOnEnter={true}
 						unmountOnExit={true}
 						onSelect={(key) => setGlyActTabKey(key)}>
 						<Tab
-							eventKey='simple_search'
+							eventKey='Simple-Search'
 							className='tab-content-padding'
 							title={simpleSearch.tabTitle}>
 							<TextAlert
@@ -664,7 +664,7 @@ const GlycanSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab
-							eventKey='advanced_search'
+							eventKey='Advanced-Search'
 							className='tab-content-padding'
 							title={advancedSearch.tabTitle}>
 							<TextAlert
@@ -682,7 +682,7 @@ const GlycanSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab
-							eventKey='composition_search'
+							eventKey='Composition-Search'
 							title={compositionSearch.tabTitle}
 							className='tab-content-padding'>
 							<TextAlert
@@ -702,7 +702,7 @@ const GlycanSearch = (props) => {
 							</Container>
 						</Tab>
 						<Tab
-							eventKey='tutorial'
+							eventKey='Tutorial'
 							title={glycanSearchData.tutorial.tabTitle}
 							className='tab-content-padding'>
 							<Container className='tab-content-border'>

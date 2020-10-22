@@ -50,6 +50,9 @@
 	.btn-outline-white {
 		display: inline-block !important;
 	}
+	.inline-evidence:nth-child(n+4) {
+		margin-top: 5px !important;
+	}
 }
 
 /* Extra Small Devices (Landscape Phones & Portrait Tablets) */

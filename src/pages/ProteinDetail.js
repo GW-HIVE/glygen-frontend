@@ -365,26 +365,29 @@ const ProteinDetail = props => {
       function diseaseDataRearrangement() {
         var disease = detailData.disease.slice();
         for (var i = 0; i < disease.length; i++) {
-          var synTemp = [];
-          var synonyms = disease[i].synonyms.slice();
-          for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
-            var temp = synonyms.filter(
-              syn => syn.name === disease[i].synonyms[j].name
-            );
-            if (temp && temp.length) {
-              synTemp[k] = {
-                name: disease[i].synonyms[j].name,
-                resource: temp
-              };
-              synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
-              k++;
+          if (disease[i].synonyms) {
+            var synTemp = [];
+            var synonyms = disease[i].synonyms.slice();
+            for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
+              var temp = synonyms.filter(
+                syn => syn.name === disease[i].synonyms[j].name
+              );
+              if (temp && temp.length) {
+                synTemp[k] = {
+                  name: disease[i].synonyms[j].name,
+                  resource: temp
+                };
+                synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
+                k++;
+              }
             }
+
+            disease[i].synonyms = synTemp;
+            disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
+            disease[i].synLen = synTemp.length;
+            disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
+            disease[i].synShowMore = true;
           }
-          disease[i].synonyms = synTemp;
-          disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
-          disease[i].synLen = synTemp.length;
-          disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
-          disease[i].synShowMore = true;
         }
         return disease;
       }
@@ -1907,8 +1910,8 @@ const ProteinDetail = props => {
                                 category.go_terms.map(term => (
                                   <Row>
                                     <Col
-                                      sm={6}
-                                      md={6}
+                                      sm={9}
+                                      md={9}
                                       style={{ paddingTop: "15px" }}
                                     >
                                       <a
@@ -1919,7 +1922,7 @@ const ProteinDetail = props => {
                                         {term.name} ({term.id})
                                       </a>
                                     </Col>
-                                    <Col sm={6} md={5}>
+                                    <Col sm={3} md={3}>
                                       <EvidenceList
                                         evidences={groupEvidences(
                                           term.evidence
