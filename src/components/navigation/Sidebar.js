@@ -6,7 +6,6 @@ function Sidebar({ items, offset = 105 }) {
   const [activeLink, setActiveLink] = useState(items[0].id);
 
   useEffect(() => {
-    setActiveLink(items[0].id);
   }, [items])
 
   useLayoutEffect(() => {
