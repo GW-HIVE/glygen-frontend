@@ -910,14 +910,14 @@ const ProteinDetail = props => {
           backgroundColor: "#4B85B6",
           color: "white"
         };
-      },
-      formatter: (value, row) => (
-        <LineTooltip text="View siteview details">
-          <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-            {row.start_pos}
-          </Link>
-        </LineTooltip>
-      )
+      }
+      // formatter: (value, row) => (
+      //   <LineTooltip text="View siteview details">
+      //     <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+      //       {row.start_pos}
+      //     </Link>
+      //   </LineTooltip>
+      // )
     },
     {
       dataField: "end_pos",
