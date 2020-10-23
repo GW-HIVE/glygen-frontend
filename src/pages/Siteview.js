@@ -206,7 +206,7 @@ const SequenceLocationViewer = ({
           >
             {filteredAnnotations.map(annotation => (
               <option key={annotation.key} value={annotation.position}>
-                {annotation.key}
+                {annotation.key} {annotation.typeAnnotate}
               </option>
             ))}
           </select>
@@ -296,7 +296,7 @@ const Siteview = ({ position }) => {
         ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
           position: glycosylation.position,
           type: glycosylation.type.split("-")[0],
-          label: glycosylation.residue,
+          label: glycosylation.residue + "Glycosylation",
           glytoucan_ac: glycosylation.glytoucan_ac,
 
           evidence: glycosylation.evidence,
@@ -333,8 +333,7 @@ const Siteview = ({ position }) => {
           position: snv.start_pos,
           label: "Mutation",
           evidence: snv.evidence,
-
-          typeAnnotate: "Mutation"
+          typeAnnotate: "SNV"
         }))
       ];
     }
@@ -359,7 +358,7 @@ const Siteview = ({ position }) => {
 
     const pickLabel = type => {
       switch (type) {
-        case "mutation":
+        case "snv":
           return "M";
         case "glycosylation":
           return "N";
@@ -382,6 +381,7 @@ const Siteview = ({ position }) => {
           siteType.site_list.map(site => ({
             position: site.start_pos,
             type: pickLabel(siteType.type),
+            typeAnnotate: siteType.type,
             key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
             character: getSequenceCharacter(site.start_pos)
           }))
