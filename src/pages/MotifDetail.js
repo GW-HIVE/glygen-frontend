@@ -276,10 +276,16 @@ const MotifDetail = (props) => {
                               </a>
                             </div>
                             <div>
-                              <strong>{motifStrings.motif_synonym.synonym}: </strong>
-                              <a href={motif.url} target="_blank" rel="noopener noreferrer">
-                                {motifSynonym}
-                              </a>
+                              {motifSynonym && motifSynonym.length > 0 ? (
+                                <>
+                                  <strong>{motifStrings.motif_synonym.synonym}: </strong>
+                                  <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                    {motifSynonym}
+                                  </a>
+                                </>
+                              ) : (
+                                <>{""}</>
+                              )}
                             </div>
                             <div>
                               <strong>{glycanStrings.mass.shortName}: </strong>
@@ -407,7 +413,7 @@ const MotifDetail = (props) => {
                   <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
                     <Card.Body className="card-padding-zero">
                       <Table hover fluid>
-                        {publication && (
+                        {publication && publication.length > 0 ? (
                           <tbody className="table-body">
                             {publication.map((pub, pubIndex) => (
                               <tr className="table-row">
@@ -446,8 +452,7 @@ const MotifDetail = (props) => {
                               </tr>
                             ))}
                           </tbody>
-                        )}
-                        {!publication && (
+                        ) : (
                           <p className="no-data-msg-publication">No data available.</p>
                         )}
                       </Table>
