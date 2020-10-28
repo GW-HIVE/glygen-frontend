@@ -315,7 +315,7 @@ const ProteinDetail = props => {
     if (detailData.glycosylation) {
       const mapOfGlycosylationCategories = detailData.glycosylation.reduce(
         (collection, item) => {
-          const category = item.site_category || "no_reported";
+          const category = item.site_category || logActivity("No results. ");
 
           return {
             ...collection,
@@ -330,7 +330,7 @@ const ProteinDetail = props => {
       const predicted = mapOfGlycosylationCategories.predicted || [];
       const mining =
         mapOfGlycosylationCategories.automatic_literature_mining || [];
-      const no_reported = mapOfGlycosylationCategories.no_reported || [];
+      // const no_reported = mapOfGlycosylationCategories.no_reported || [];
 
       const selectTab = Object.keys(mapOfGlycosylationCategories).find(
         category => mapOfGlycosylationCategories[category].length > 0
@@ -340,7 +340,7 @@ const ProteinDetail = props => {
       setGlycosylationWithoutImage(withoutImage);
       setGlycosylationPredicted(predicted);
       setGlycosylationMining(mining);
-      setGlycosylationNotReported(no_reported);
+      // setGlycosylationNotReported(no_reported);
       setGlycosylationTabSelected(selectTab);
     }
 
@@ -591,13 +591,22 @@ const ProteinDetail = props => {
           color: "white"
         };
       },
-      formatter: (value, row) => (
-        <LineTooltip text="View siteview details">
-          <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-            {row.residue} {row.position}
-          </Link>
-        </LineTooltip>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+              {row.residue} {row.position}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
+      // formatter: (value, row) => (
+      //   <LineTooltip text="View siteview details">
+      //     <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+      //       {row.residue} {row.position}
+      //     </Link>
+      //   </LineTooltip>
     }
     // {
     //   dataField: "type",
@@ -905,6 +914,13 @@ const ProteinDetail = props => {
       text: proteinStrings.startpos.name,
       sort: true,
       defaultSortField: "start_pos",
+      sortFunc: (a, b, order, start_pos) => {
+        if (order === "asc") {
+          return b - a;
+        }
+
+        return a - b; // desc
+      },
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
@@ -1635,35 +1651,6 @@ const ProteinDetail = props => {
                               )}
                             </Container>
                           </Tab>
-                          <Tab
-                            eventKey="no_reported"
-                            className="tab-content-padding"
-                            title="Not reported"
-                            //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
-                          >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px"
-                              }}
-                            >
-                              {glycosylationNotReported &&
-                                glycosylationNotReported.length > 0 && (
-                                  <ClientPaginatedTable
-                                    data={glycosylationNotReported}
-                                    columns={glycoSylationColumns.filter(
-                                      column =>
-                                        column.dataField !== "glytoucan_ac"
-                                    )}
-                                    onClickTarget={"#glycosylation"}
-                                    defaultSortField="position"
-                                  />
-                                )}
-                              {!glycosylationNotReported.length && (
-                                <p>No data available.</p>
-                              )}
-                            </Container>
-                          </Tab>
                         </Tabs>
                       )}
 
@@ -2261,7 +2248,7 @@ const ProteinDetail = props => {
                           data={mutagenesis}
                           columns={mutagenesisColumns}
                           onClickTarget={"#mutagenesis"}
-                          defaultSortField={"disease"}
+                          defaultSortField={"start_pos"}
                         />
                       )}
                       {!mutagenesis && <p>No data available.</p>}
