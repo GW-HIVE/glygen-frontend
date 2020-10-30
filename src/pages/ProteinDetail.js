@@ -1223,7 +1223,7 @@ const ProteinDetail = (props) => {
                           marginBottom: "5px",
                         }}
                       >
-                        {gene && (
+                        {gene && gene.length > 0 && (
                           <>
                             {gene.map((genes, genesname) => (
                               <span key={genesname}>
