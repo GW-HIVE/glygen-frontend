@@ -34,7 +34,8 @@ import { axiosError } from "../data/axiosError";
 import stringConstants from "../data/json/stringConstants";
 
 const glycanStrings = stringConstants.glycan.common;
-const proteinStrings = stringConstants.protein.common;
+const motifStrings = stringConstants.motif.common;
+
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
   { label: stringConstants.sidebar.glycans.displayname, id: "Glycans-With-This-Motifs" },
@@ -68,6 +69,8 @@ const MotifDetail = (props) => {
   const [glytoucan, setGlytoucan] = useState([]);
   const [motif, setMotif] = useState([]);
   const [mass, setMass] = useState([]);
+  const [motifName, setMotifName] = useState([]);
+  const [motifSynonym, setMotifSynonym] = useState([]);
   const [classification, setClassification] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(MOTIF_COLUMNS);
@@ -119,6 +122,8 @@ const MotifDetail = (props) => {
         setPagination(data.pagination);
         setMass(data.mass);
         setMotif(data.motif);
+        setMotifName(data.name);
+        setMotifSynonym(data.synonym);
         // setClassification(
         //   data.classification.filter(
         //     classif =>
@@ -259,10 +264,28 @@ const MotifDetail = (props) => {
                               />
                             </p>
                             <div>
-                              <strong>Motif ID: </strong>
+                              <strong>{motifStrings.motif_id.name}: </strong>
                               <a href={motif.url} target="_blank" rel="noopener noreferrer">
                                 {motif.accession}
                               </a>
+                            </div>
+                            <div>
+                              <strong>{motifStrings.motif_name.name}: </strong>
+                              <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                {motifName}
+                              </a>
+                            </div>
+                            <div>
+                              {motifSynonym && motifSynonym.length > 0 ? (
+                                <>
+                                  <strong>{motifStrings.motif_synonym.synonym}: </strong>
+                                  <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                    {motifSynonym}
+                                  </a>
+                                </>
+                              ) : (
+                                <>{""}</>
+                              )}
                             </div>
                             <div>
                               <strong>{glycanStrings.mass.shortName}: </strong>
@@ -390,7 +413,7 @@ const MotifDetail = (props) => {
                   <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
                     <Card.Body className="card-padding-zero">
                       <Table hover fluid>
-                        {publication && (
+                        {publication && publication.length > 0 ? (
                           <tbody className="table-body">
                             {publication.map((pub, pubIndex) => (
                               <tr className="table-row">
@@ -429,8 +452,7 @@ const MotifDetail = (props) => {
                               </tr>
                             ))}
                           </tbody>
-                        )}
-                        {!publication && (
+                        ) : (
                           <p className="no-data-msg-publication">No data available.</p>
                         )}
                       </Table>

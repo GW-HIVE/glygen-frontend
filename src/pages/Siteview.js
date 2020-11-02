@@ -104,9 +104,11 @@ const SequenceLocationViewer = ({
         return "highlightN";
       } else if (match.type === "O") {
         return "highlightO";
-      } else if (match.type === "L") {
-        return "highlightMutagenesis";
-      } else if (match.type === "M") {
+      }
+      //  else if (match.type === "L") {
+      //   return "highlightMutagenesis";
+      // }
+      else if (match.type === "M") {
         return "highlightMutate";
       } else if (match.type === "G") {
         return "highlightGlycation";
@@ -206,7 +208,7 @@ const SequenceLocationViewer = ({
           >
             {filteredAnnotations.map(annotation => (
               <option key={annotation.key} value={annotation.position}>
-                {annotation.key}
+                {annotation.key}: {annotation.typeAnnotate}....
               </option>
             ))}
           </select>
@@ -296,7 +298,7 @@ const Siteview = ({ position }) => {
         ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
           position: glycosylation.position,
           type: glycosylation.type.split("-")[0],
-          label: glycosylation.residue,
+          label: glycosylation.residue + "Glycosylation",
           glytoucan_ac: glycosylation.glytoucan_ac,
 
           evidence: glycosylation.evidence,
@@ -333,23 +335,22 @@ const Siteview = ({ position }) => {
           position: snv.start_pos,
           label: "Mutation",
           evidence: snv.evidence,
-
-          typeAnnotate: "Mutation"
+          typeAnnotate: "SNV"
         }))
       ];
     }
 
-    if (detailData.mutagenesis) {
-      dataAnnotations = [
-        ...dataAnnotations,
-        ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
-          position: mutagenesis.start_pos,
-          label: "Mutagenesis",
-          evidence: mutagenesis.evidence,
-          typeAnnotate: "Mutagenesis"
-        }))
-      ];
-    }
+    // if (detailData.mutagenesis) {
+    //   dataAnnotations = [
+    //     ...dataAnnotations,
+    //     ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
+    //       position: mutagenesis.start_pos,
+    //       label: "Mutagenesis",
+    //       evidence: mutagenesis.evidence,
+    //       typeAnnotate: "Mutagenesis"
+    //     }))
+    //   ];
+    // }
 
     const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
       ...annotation,
@@ -359,12 +360,12 @@ const Siteview = ({ position }) => {
 
     const pickLabel = type => {
       switch (type) {
-        case "mutation":
+        case "snv":
           return "M";
         case "glycosylation":
           return "N";
-        case "mutagenesis":
-          return "L";
+        // case "mutagenesis":
+        //   return "L";
         case "glycation":
           return "G";
         default:
@@ -377,11 +378,15 @@ const Siteview = ({ position }) => {
         detailData.sequence.sequence[position - 1];
 
       const uniquePositions = detailData.all_sites
-        .filter(siteType => siteType.type !== "site_annotation")
+        .filter(
+          siteType =>
+            !["mutagenesis", "site_annotation"].includes(siteType.type)
+        )
         .map(siteType =>
           siteType.site_list.map(site => ({
             position: site.start_pos,
             type: pickLabel(siteType.type),
+            typeAnnotate: siteType.type,
             key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
             character: getSequenceCharacter(site.start_pos)
           }))
