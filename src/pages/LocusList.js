@@ -18,6 +18,9 @@ import { GLYGEN_BASENAME } from "../envVariables";
 
 const proteinStrings = stringConstants.protein.common;
 
+/**
+ * Locus list page component for showing list table.
+ */
 const LocusList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
@@ -36,6 +39,9 @@ const LocusList = props => {
 		{show: false, id: ""}
   );
 
+  /**
+	 * useEffect for retriving data from api and showing page loading effects.
+	 */
   useEffect(() => {
     setPageLoading(true);
 		logActivity("user", id);
@@ -62,6 +68,11 @@ const LocusList = props => {
 
   }, []);
 
+   /**
+	 * Function to handle table change event. Retrives data from api to reflect new state of table.
+   * @param {string} type - event type.
+   * @param {object} {} - object specifying new state of table.
+   */
   const handleTableChange = (
     type,
     { page, sizePerPage, sortField, sortOrder }
@@ -84,6 +95,10 @@ const LocusList = props => {
       }
     });
   };
+
+  /**
+	 * Function to handle modify search button click.
+   */
   const handleModifySearch = () => {
     if (quickSearch[searchId] !== undefined) {
       const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
@@ -93,6 +108,11 @@ const LocusList = props => {
     }
   };
 
+  /**
+	 * Function to define row style format.
+   * @param {object} row - row.
+   * @param {number} rowIdx - row index.
+   */
   function rowStyleFormat(row, rowIdx) {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
   }

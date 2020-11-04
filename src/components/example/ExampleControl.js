@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import LineTooltip from "../tooltip/LineTooltip";
 import Button from "react-bootstrap/Button";
 
+/**
+ * Component to show examples under input component like simple search control.
+ **/
 const ExampleControl = (props) => {
-	let firstEx = true;
 
 	return (
 		<div

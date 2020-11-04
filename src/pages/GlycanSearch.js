@@ -19,7 +19,9 @@ import {axiosError} from '../data/axiosError';
 import { getGlycanSearch, getGlycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
 import FeedbackWidget from "../components/FeedbackWidget";
 
-
+/**
+ * Glycan search component for showing glycan search tabs.
+ */
 const GlycanSearch = (props) => {
 	let { id } = useParams("");
 	const [initData, setInitData] = useState({
@@ -87,6 +89,10 @@ const GlycanSearch = (props) => {
 	let glycanData = stringConstants.glycan;
 	let commonGlycanData = glycanData.common;
 
+	/**
+	 * Sets composition data.
+	 * @param {object} glyComp - glycan composition data.
+	 */
 	function glyCompChange(glyComp) {
 		setGlyCompData(glyComp);
 	}
@@ -112,6 +118,9 @@ const GlycanSearch = (props) => {
 		return selection;
 	}
 
+	/**
+	 * useEffect for retriving data from api and showing page loading effects.
+	 */
 	useEffect(() => {
 		setPageLoading(true);
 		logActivity();
@@ -353,6 +362,28 @@ const GlycanSearch = (props) => {
 		});
 	}, [id, glycanData]);
 
+	/**
+	 * Function to generate glycan search json object.
+	 * @param {string} input_query_type - input_query_type value.
+	 * @param {string} input_glycan_id - input_glycan_id value.
+	 * @param {string} input_glycan_id_subsumption - input_glycan_id_subsumption value.
+	 * @param {string} input_mass_type - input_mass_type value.
+	 * @param {number} input_mass_min - input_mass_min value.
+	 * @param {number} input_mass_max - input_mass_max value.
+	 * @param {number} input_sugar_min - input_sugar_min value.
+	 * @param {number} input_sugar_max - input_sugar_max value.
+	 * @param {array} input_organism - input_organism value.
+	 * @param {string} input_organism_annotation_cat - input_organism_annotation_cat value.
+	 * @param {string} input_organism_operation - input_organism_operation value.
+	 * @param {string} input_glycantype - input_glycantype value.
+	 * @param {string} input_glycansubtype - input_glycansubtype value.
+	 * @param {string} input_enzyme - input_enzyme value.
+	 * @param {string} input_proteinid - input_proteinid value.
+	 * @param {string} input_motif - input_motif value.
+	 * @param {string} input_pmid - input_pmid value.
+	 * @param {string} input_binding_protein_id - input_binding_protein_id value.
+	 * @param {object} input_residue_comp - input_residue_comp value.
+	 **/
 	function searchjson(
 		input_query_type,
 		input_glycan_id,
@@ -467,6 +498,9 @@ const GlycanSearch = (props) => {
 		return formjson;
 	}
 
+	/**
+	 * Function to handle glycan simple search.
+	 **/
 	const glycanSimpleSearch = () => {
 		var formjsonSimple = {
 			[commonGlycanData.operation.id]: 'AND',
@@ -496,6 +530,9 @@ const GlycanSearch = (props) => {
 		});
 	};
 
+	/**
+	 * Function to handle glycan advanced search.
+	 **/
 	const glycanAdvSearch = () => {
 		let formObject = searchjson(
 			glycanData.advanced_search.query_type.name,
@@ -540,6 +577,9 @@ const GlycanSearch = (props) => {
 			});
 	};
 
+	/**
+	 * Function to handle glycan composition search.
+	 **/
 	const glycanCompSearch = () => {
 		let compSearchData = [];
 
@@ -597,16 +637,25 @@ const GlycanSearch = (props) => {
 			});
 		};
 
+	/**
+	 * Function to handle click event for glycan advanced search.
+	 **/
 	const searchGlycanAdvClick = () => {
 		setPageLoading(true);
 		glycanAdvSearch();
 	};
 
+	/**
+	 * Function to handle click event for glycan composition search.
+	 **/
 	const searchGlycanCompClick = () => {
 		setPageLoading(true);
 		glycanCompSearch();
 	};
 
+	/**
+	 * Function to handle click event for glycan simple search.
+	 **/
 	const searchGlycanSimpleClick = () => {
 		setPageLoading(true);
 		glycanSimpleSearch();

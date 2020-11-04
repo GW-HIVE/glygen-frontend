@@ -122,18 +122,29 @@ export const PROTEIN_COLUMNS = [
   }
 ];
 
+/**
+ * Gets JSON for protein search.
+ * @param {object} formObject - protein search JSON query object.
+ */
 export const getProteinSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search?" + json;
   return getJson(url);
 };
 
+/**
+ * Gets JSON for protein simple search.
+ * @param {object} formObject - protein simple search JSON query object.
+ */
 export const getProteinSimpleSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search_simple?" + json;
   return getJson(url);
 };
 
+/**
+ * Gets JSON for protein search init.
+ */
 export const getProteinInit = () => {
   const url = `/protein/search_init`;
   return getJson(url);

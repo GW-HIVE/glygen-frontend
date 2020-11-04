@@ -5,8 +5,16 @@ import PropTypes from 'prop-types';
 import {sortDropdown} from '../../utils/common';
 import '../../css/Search.css';
 
+/**
+ * Select control component.
+ */
 export default function SelectControl(props) {
 
+    /**
+	 * Function to handle onchange event for select control.
+	 * @param {object} event - event object.
+     * @param {object} child - child object.
+	 **/
     const handleChange = (event, child) => {
 		props.setInputValue(child.props.value, child.props.name, event.target.name);
 	}

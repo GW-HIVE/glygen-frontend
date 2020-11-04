@@ -3,6 +3,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import PropTypes from "prop-types";
 
+/**
+ * HelpTooltip component for showing text, link.
+ */
 const HelpTooltip = (props) => {
 	return (
 		<Tooltip

@@ -13,6 +13,9 @@ import stringConstants from "../../data/json/stringConstants";
 import proteinSearchData from "../../data/json/proteinSearch";
 import TextAlert from "../alert/TextAlert";
 
+/**
+ * Quick search control for organism usecases.
+ */
 const SearchByOrganism = props => {
   let quickSearch = stringConstants.quick_search;
   let searchByOrganism = quickSearchData.searchByOrganism;

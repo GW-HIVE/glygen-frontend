@@ -194,18 +194,29 @@ export const setUserSelectedColumns = arr => {
   localStorage.setItem(glycanColumnsStorageKey, arr);
 };
 
+/**
+ * Gets JSON for glycan search.
+ * @param {object} formObject - glycan search JSON query object.
+ */
 export const getGlycanSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/glycan/search?" + json;
   return getJson(url);
 };
 
+/**
+ * Gets JSON for glycan simple search.
+ * @param {object} formObject - glycan simple search JSON query object.
+ */
 export const getGlycanSimpleSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/glycan/search_simple?" + json;
   return getJson(url);
 };
 
+/**
+ * Gets JSON for glycan search init.
+ */
 export const getGlycanInit = () => {
   const url = `/glycan/search_init`;
   return getJson(url);

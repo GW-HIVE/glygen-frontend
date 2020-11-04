@@ -31,6 +31,10 @@ import MotifList from "./pages/MotifList";
 import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
 
+/**
+ * Defines route path for Glygen. Use routeConstants from routeConstants.json.
+ * Do not use direct url paths.
+ */
 const Routes = (props) => (
   <Switch>
     <Route path={`${routeConstants.glycanListEdit}:id`} component={GlycanListEditColumns} />

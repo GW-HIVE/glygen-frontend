@@ -94,6 +94,9 @@ const QuickSearch = (props) => {
     question_11: "",
   });
 
+  /**
+   * Function to handle glycan to biosynthesis enzymes question.
+   */
   const searchQuestion1 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -127,6 +130,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle glycan to glycoproteins question.
+   */
   const searchQuestion2 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -160,6 +166,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle glycan to enzyme gene loci question.
+   */
   const searchQuestion3 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -190,6 +199,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle protein to orthologs question.
+   */
   const searchQuestion4 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -223,6 +235,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle protein detail function question.
+   */
   const searchQuestion5 = () => {
     let message = `Quick Search Question_5 =/${inputValue.question_5} function`;
     logActivity("user", (id || "") + ">" + inputValue.question_5, message).finally(() => {
@@ -232,6 +247,9 @@ const QuickSearch = (props) => {
     });
   };
 
+  /**
+   * Function to handle biosynthesis enzyme to glycans question.
+   */
   const searchQuestion6 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -262,6 +280,9 @@ const QuickSearch = (props) => {
       });
   };
 
+   /**
+   * Function to handle protein detail site_annotation question.
+   */
   const searchQuestion7 = () => {
     let message = `Quick Search Question_7 =/${inputValue.question_7} sequence`;
     logActivity("user", (id || "") + ">" + inputValue.question_7, message).finally(() => {
@@ -274,6 +295,9 @@ const QuickSearch = (props) => {
     });
   };
 
+  /**
+   * Function to handle organism to glycosyltransferases question.
+   */
   const searchQuestion8 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -307,6 +331,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle organism to glycohydrolases question.
+   */
   const searchQuestion9 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -340,6 +367,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle organism to glycoproteins question.
+   */
   const searchQuestion10 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -376,6 +406,9 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * Function to handle disease to glycosyltransferases question.
+   */
   const searchQuestion11 = () => {
     setPageLoading(true);
     logActivity("user", id, "Performing Quick Search");
@@ -410,6 +443,10 @@ const QuickSearch = (props) => {
       });
   };
 
+  /**
+   * getListData returns list api response based on list id.
+   * @param {string} listId list id
+   */
   function getListData(listId) {
     let listApi = getListApi(questionId);
     if ("getGlycanList" === listApi) return getGlycanList(listId, 1, 1);
@@ -419,6 +456,11 @@ const QuickSearch = (props) => {
     return undefined;
   }
 
+   /**
+   * getListApiResponse returns input field value based on question id and response.
+   * @param {string} questionId question id
+   * @param {object} response response object
+   */
   function getListApiResponse(questionId, response) {
     if (questionId === quickSearch.question_1.id) {
       return response.query.glytoucan_ac;
@@ -448,6 +490,10 @@ const QuickSearch = (props) => {
     }
   }
 
+  /**
+   * getListApi returns list api name based on question id.
+   * @param {string} questionId question id
+   */
   function getListApi(questionId) {
     if (questionId === quickSearch.question_1.id) {
       return "getProteinList";
@@ -474,6 +520,9 @@ const QuickSearch = (props) => {
     }
   }
 
+  /**
+	 * useEffect for retriving data from api and showing page loading effects.
+	 */
   useEffect(() => {
     setPageLoading(true);
     logActivity();

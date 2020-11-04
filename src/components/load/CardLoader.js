@@ -4,6 +4,9 @@ import LoadingImage from "../../images/page_loading.gif";
 import Fade from "@material-ui/core/Fade";
 import { Row } from "react-bootstrap";
 
+/**
+ * Component to display loading image on card while data is being retrieved.
+ **/
 export default function CardLoader(props) {
 
   return (

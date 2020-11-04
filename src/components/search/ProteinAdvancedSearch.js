@@ -20,118 +20,207 @@ import '../../css/Search.css';
 import proteinSearchData from '../../data/json/proteinSearch';
 import stringConstants from '../../data/json/stringConstants';
 
+/**
+ * Protein advanced search control.
+ */
 const ProteinAdvancedSearch = (props) => {
     let commonProteinData = stringConstants.protein.common;
     let advancedSearch = proteinSearchData.advanced_search;
 
+	/**
+	 * Function to set protein id value.
+	 * @param {string} inputProteinId - input protein id value.
+	 **/
 	function proteinIdChange(inputProteinId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[0] = inputProteinId.length > advancedSearch.uniprot_canonical_ac.length;
 		props.setProAdvSearchData({ proteinId: inputProteinId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set RefSeq id value.
+	 * @param {string} inputProRefSeqId - input RefSeq id value value.
+	 **/
 	function proRefSeqIdChange(inputProRefSeqId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[1] = inputProRefSeqId.length > advancedSearch.refseq_ac.length;
 		props.setProAdvSearchData({ proRefSeqId: inputProRefSeqId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set mass value.
+	 * @param {array} inputMass - input min, max mass value.
+	 **/
 	function proMassInputChange(inputMass) {
         props.setProAdvSearchData({ proMassInput: inputMass })
     }
     
+	/**
+	 * Function to set slider mass value.
+	 * @param {array} inputMass - input min, max mass value.
+	 **/
     function proMassSliderChange(inputMass) {
         props.setProAdvSearchData({ proMass: inputMass })
 	}
 
+	/**
+	 * Function to set organism value.
+	 * @param {string} value - input organism id value.
+	 * @param {string} name - input organism name value.
+	 **/
 	const proOrganismOnChange = (value, name) => {
 		props.setProAdvSearchData({ proOrganism: {id: value, name: name} });
 	}
 
+	/**
+	 * Function to set protein name value.
+	 * @param {string} inputProteinName - input protein name value.
+	 **/
 	function proteinNameChange(inputProteinName) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[2] = inputProteinName.length > advancedSearch.protein_name.length;
 		props.setProAdvSearchData({ proteinName: inputProteinName, proAdvSearchValError: valArr });	
 	}
 
+	/**
+	 * Function to set gene name value.
+	 * @param {string} inputGeneName - input gene name value.
+	 **/
 	function proGeneNameChange(inputGeneName) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[3] = inputGeneName.length > advancedSearch.gene_name.length;
 		props.setProAdvSearchData({ proGeneName: inputGeneName, proAdvSearchValError: valArr });	
 	}
 
+	/**
+	 * Function to set GO name value.
+	 * @param {string} inputProGOName - input GO name value.
+	 **/
 	function proGONameChange(inputProGOName) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[4] = inputProGOName.length > advancedSearch.go_term.length;
 		props.setProAdvSearchData({ proGOName: inputProGOName, proAdvSearchValError: valArr });
 	}
 
+
+	/**
+	 * Function to set GO id value.
+	 * @param {string} inputProGOId - input GO id value.
+	 **/
 	function proGOIdChange(inputProGOId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[5] = inputProGOId.length > advancedSearch.go_id.length;
 		props.setProAdvSearchData({ proGOId: inputProGOId, proAdvSearchValError: valArr });
 	}
 
+
+	/**
+	 * Function to set input amino acid value.
+	 * @param {string} inputProAminoAcid - input amino acid value.
+	 **/
 	function proAminoAcidChange(inputProAminoAcid) {
 		props.setProAdvSearchData({ proAminoAcid: inputProAminoAcid });
 	}
 
+	/**
+	 * Function to set input amino acid operation value.
+	 * @param {string} value - input amino acid operation value.
+	 **/
 	const proAminoAcidOperationOnChange = (value) => {
 		props.setProAdvSearchData({ proAminoAcidOperation: value });
 	}
 
+	/**
+	 * Function to set protein or peptide sequence value.
+	 * @param {string} inputProSequence - input protein or peptide sequence value.
+	 **/
 	function proSequenceChange(inputProSequence) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[6] = inputProSequence.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: inputProSequence, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to handle onchange event for protein or peptide sequence.
+	 * @param {object} event - event object.
+	 **/
 	const SequenceChange = (event) => {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[6] = event.target.value.length > advancedSearch.sequence.length;
 		props.setProAdvSearchData({ proSequence: event.target.value, proAdvSearchValError: valArr });
 	}
 	
+	/**
+	 * Function to set pathway id value.
+	 * @param {string} inputProPathwayId - input pathway id value.
+	 **/
 	function proPathwayIdChange(inputProPathwayId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[7] = inputProPathwayId.length > advancedSearch.pathway_id.length;
 		props.setProAdvSearchData({ proPathwayId: inputProPathwayId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set pubmed id value.
+	 * @param {string} inputProPubId - input pubmed id value.
+	 **/
 	function proPubIdChange(inputProPubId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[8] = inputProPubId.length > advancedSearch.pmid.length;
 		props.setProAdvSearchData({ proPubId: inputProPubId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set glycosylation evidence type value.
+	 * @param {string} value - input glycosylation evidence type value.
+	 **/
 	const proGlyEvidenceOnChange = (value) => {
 		props.setProAdvSearchData({ proGlyEvidence: value });
 	}
 
+	/**
+	 * Function to set disease name value.
+	 * @param {string} inputProDiseaseName - input disease name value.
+	 **/
 	function proDiseaseNameChange(inputProDiseaseName) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[9] = inputProDiseaseName.length > advancedSearch.disease_name.length;
 		props.setProAdvSearchData({ proDiseaseName: inputProDiseaseName, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set disease id value.
+	 * @param {string} inputProDiseaseId - input disease id value.
+	 **/
 	function proDiseaseIdChange(inputProDiseaseId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[10] = inputProDiseaseId.length > advancedSearch.disease_id.length;
 		props.setProAdvSearchData({ proDiseaseId: inputProDiseaseId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set attached glycan id value.
+	 * @param {string} inputProAttachedGlycanId - input attached glycan id value.
+	 **/
 	function proAttachedGlycanIdChange(inputProAttachedGlycanId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[11] = inputProAttachedGlycanId.length > advancedSearch.attached_glycan_id.length;
 		props.setProAdvSearchData({ proAttachedGlycanId: inputProAttachedGlycanId, proAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set binding glycan id value.
+	 * @param {string} inputProBindingGlycanId - input binding glycan id value.
+	 **/
 	function proBindingGlycanIdChange(inputProBindingGlycanId) {
 		let valArr = props.inputValue.proAdvSearchValError;
 		valArr[12] = inputProBindingGlycanId.length > advancedSearch.binding_glycan_id.length;
 		props.setProAdvSearchData({ proBindingGlycanId: inputProBindingGlycanId, proAdvSearchValError: valArr });
 	}
 	 
+	/**
+	 * Function to clear input field values.
+	 **/
 	const clearProtein = () => {
 		props.setProAdvSearchData({
 			proteinId: '',

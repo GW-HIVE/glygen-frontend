@@ -33,6 +33,11 @@ export function validateEmail(email) {
 	return false;
 }
 
+/**
+ * Function to sort dropdown.
+ * @param {object} a input value.
+ * @param {object} b input value.
+ **/
 export function sortDropdown(a, b) {
 	if (a.name < b.name) {
 		return -1;
