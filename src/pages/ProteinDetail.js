@@ -1605,7 +1605,7 @@ const ProteinDetail = props => {
                           <Tab
                             eventKey="predicted"
                             className="tab-content-padding"
-                            title="Predicted Sites"
+                            title="Predicted Only"
                             //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
                           >
                             <Container
