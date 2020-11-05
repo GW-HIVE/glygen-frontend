@@ -78,8 +78,8 @@ export const LOCUS_COLUMNS = [
 
     formatter: (value, row) => (
       <>
-        Chr {row.chromosome}: {addCommas(row.start_pos)} -{" "}
-        {addCommas(row.end_pos)}
+        {row.chromosome ? <>Chr {row.chromosome}: {addCommas(row.start_pos)} -{" "}
+        {addCommas(row.end_pos)}</> : "N/A"}
       </>
     )
   },
