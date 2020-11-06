@@ -222,23 +222,16 @@ const ProteinDetail = props => {
   const [itemsPathway, setItemsPathway] = useState([]);
   const [showIsoformSequences, setShowIsoformSequences] = useState(false);
   const [showhomologSequences, setShowhomologSequences] = useState(false);
-  const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
-    "reported_with_glycan"
-  );
-  const [glycosylationPredicted, setGlycosylationPredicted] = useState([]);
-  const [glycosylationNotReported, setGlycosylationNotReported] = useState([]);
-  const [glycosylationMining, setGlycosylationMining] = useState([]);
-  const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
-  const [glycosylationWithoutImage, setGlycosylationWithoutImage] = useState(
-    []
-  );
 
-  const [mutataionTabSelected, setmutataionTabSelected] = useState(
-    "with_disease"
-  );
-  const [ptmAnnotation, setPtmAnnotation] = useState([]);
-  const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
-  const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState([]);
+  let glycosylationTabSelected = "reported_with_glycan";
+  let glycosylationPredicted;
+  let glycosylationMining;
+  let glycosylationWithImage;
+  let glycosylationWithoutImage;
+  let mutataionTabSelected;
+  let ptmAnnotation;
+  let mutataionWithdisease;
+  let mutataionWithoutdisease;
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -250,21 +243,14 @@ const ProteinDetail = props => {
     n_link_glycosylation: false,
     o_link_glycosylation: false
   });
-  const [geneNames, setGeneName] = useState([]);
-  const [proteinNames, setProteinNames] = useState([]);
-  const [diseaseData, setDiseaseData] = useState([]);
-  const recommendedGeneRows = geneNames
-    .map(getRecommendedRows)
-    .filter(arg => arg !== null);
-  const synonymGeneRows = geneNames
-    .map(getSynonymRows)
-    .filter(arg => arg !== null);
-  const recommendedProteinRows = proteinNames
-    .map(getRecommendedRows)
-    .filter(arg => arg !== null);
-  const synonymProteinRows = proteinNames
-    .map(getSynonymRows)
-    .filter(arg => arg !== null);
+
+  let geneNames;
+  let proteinNames;
+  let diseaseData;
+  let recommendedGeneRows;
+  let synonymGeneRows;
+  let recommendedProteinRows;
+  let synonymProteinRows;
 
   useEffect(() => {
     setPageLoading(true);
@@ -302,107 +288,6 @@ const ProteinDetail = props => {
       let message = "list api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
-  }, []);
-
-  useEffect(() => {
-    if (detailData.gene_names) {
-      setGeneName(formatNamesData(detailData.gene_names));
-    }
-
-    if (detailData.protein_names) {
-      setProteinNames(formatNamesData(detailData.protein_names));
-    }
-
-    if (detailData.ptm_annotation) {
-      const ptmEvidence = detailData.ptm_annotation.filter(
-        item => item.annotation
-      );
-      setPtmAnnotation(ptmEvidence);
-    }
-
-    if (detailData.glycosylation) {
-      const mapOfGlycosylationCategories = detailData.glycosylation.reduce(
-        (collection, item) => {
-          const category = item.site_category || logActivity("No results. ");
-
-          return {
-            ...collection,
-            [category]: [...(collection[category] || []), item]
-          };
-        },
-        {}
-      );
-
-      const withImage = mapOfGlycosylationCategories.reported_with_glycan || [];
-      const withoutImage = mapOfGlycosylationCategories.reported || [];
-      const predicted = mapOfGlycosylationCategories.predicted || [];
-      const mining =
-        mapOfGlycosylationCategories.automatic_literature_mining || [];
-      // const no_reported = mapOfGlycosylationCategories.no_reported || [];
-
-      const selectTab = Object.keys(mapOfGlycosylationCategories).find(
-        category => mapOfGlycosylationCategories[category].length > 0
-      );
-
-      setGlycosylationWithImage(withImage);
-      setGlycosylationWithoutImage(withoutImage);
-      setGlycosylationPredicted(predicted);
-      setGlycosylationMining(mining);
-      // setGlycosylationNotReported(no_reported);
-      setGlycosylationTabSelected(selectTab);
-    }
-
-    if (detailData.snv) {
-      const WithDisease = detailData.snv.filter(item =>
-        item.keywords.includes("disease")
-      );
-      const Withoutdisease = detailData.snv.filter(
-        item => !item.keywords.includes("disease")
-      );
-      setMutataionWithdisease(WithDisease);
-      setMutataionWithoutdisease(Withoutdisease);
-
-      setmutataionTabSelected(
-        WithDisease.length > 0 ? "with_disease" : "without_disease"
-      );
-    }
-
-    if (detailData.disease) {
-      setDiseaseData(diseaseDataRearrangement());
-
-      function diseaseDataRearrangement() {
-        var disease = detailData.disease.slice();
-        for (var i = 0; i < disease.length; i++) {
-          if (disease[i].synonyms) {
-            var synTemp = [];
-            var synonyms = disease[i].synonyms.slice();
-            for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
-              var temp = synonyms.filter(
-                syn => syn.name === disease[i].synonyms[j].name
-              );
-              if (temp && temp.length) {
-                synTemp[k] = {
-                  name: disease[i].synonyms[j].name,
-                  resource: temp
-                };
-                synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
-                k++;
-              }
-            }
-
-            disease[i].synonyms = synTemp;
-            disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
-            disease[i].synLen = synTemp.length;
-            disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
-            disease[i].synShowMore = true;
-          }
-        }
-        return disease;
-      }
-    }
-  }, [detailData]);
-
-  useEffect(() => {
     // Need to call it second time due to glycosylationWithImage and glycosylationWithoutImage table loading time.
     setTimeout(() => {
       const anchorElement = props.history.location.hash;
@@ -412,15 +297,104 @@ const ProteinDetail = props => {
           .scrollIntoView({ behavior: "auto" });
       }
     }, 1000);
-  }, [
-    detailData,
-    glycosylationWithImage,
-    glycosylationMining,
-    glycosylationPredicted,
-    glycosylationNotReported,
-    glycosylationWithoutImage,
-    props.history.location.hash
-  ]);
+  }, []);
+
+  if (detailData.gene_nameslData) {
+    geneNames = formatNamesData(detailData.gene_names);
+    recommendedGeneRows = geneNames
+      .map(getRecommendedRows)
+      .filter(arg => arg !== null);
+    synonymGeneRows = geneNames.map(getSynonymRows).filter(arg => arg !== null);
+  }
+  if (detailData.protein_names) {
+    proteinNames = formatNamesData(detailData.protein_names);
+    recommendedProteinRows = proteinNames
+      .map(getRecommendedRows)
+      .filter(arg => arg !== null);
+    synonymProteinRows = proteinNames
+      .map(getSynonymRows)
+      .filter(arg => arg !== null);
+  }
+
+  if (detailData.glycosylation) {
+    const mapOfGlycosylationCategories = detailData.glycosylation.reduce(
+      (collection, item) => {
+        const category = item.site_category || logActivity("No results. ");
+
+        return {
+          ...collection,
+          [category]: [...(collection[category] || []), item]
+        };
+      },
+      {}
+    );
+
+    const withImage = mapOfGlycosylationCategories.reported_with_glycan || [];
+    const withoutImage = mapOfGlycosylationCategories.reported || [];
+    const predicted = mapOfGlycosylationCategories.predicted || [];
+    const mining =
+      mapOfGlycosylationCategories.automatic_literature_mining || [];
+
+    const selectTab = Object.keys(mapOfGlycosylationCategories).find(
+      category => mapOfGlycosylationCategories[category].length > 0
+    );
+
+    glycosylationWithImage = withImage;
+    glycosylationWithoutImage = withoutImage;
+    glycosylationPredicted = predicted;
+    glycosylationMining = mining;
+    glycosylationTabSelected = selectTab;
+  }
+  if (detailData.disease) {
+    diseaseData = diseaseDataRearrangement();
+    function diseaseDataRearrangement() {
+      var disease = detailData.disease.slice();
+      for (var i = 0; i < disease.length; i++) {
+        if (disease[i].synonyms) {
+          var synTemp = [];
+          var synonyms = disease[i].synonyms.slice();
+          for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
+            var temp = synonyms.filter(
+              syn => syn.name === disease[i].synonyms[j].name
+            );
+            if (temp && temp.length) {
+              synTemp[k] = {
+                name: disease[i].synonyms[j].name,
+                resource: temp
+              };
+              synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
+              k++;
+            }
+          }
+          disease[i].synonyms = synTemp;
+          disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
+          disease[i].synLen = synTemp.length;
+          disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
+          disease[i].synShowMore = true;
+        }
+      }
+      return disease;
+    }
+  }
+  if (detailData.snv) {
+    const WithDisease = detailData.snv.filter(item =>
+      item.keywords.includes("disease")
+    );
+    const Withoutdisease = detailData.snv.filter(
+      item => !item.keywords.includes("disease")
+    );
+    mutataionWithdisease = WithDisease;
+    mutataionWithoutdisease = Withoutdisease;
+
+    mutataionTabSelected =
+      WithDisease.length > 0 ? "with_disease" : "without_disease";
+  }
+  if (detailData.ptm_annotation) {
+    const ptmEvidence = detailData.ptm_annotation.filter(
+      item => item.annotation
+    );
+    ptmAnnotation(ptmEvidence);
+  }
 
   const {
     mass,
@@ -509,7 +483,7 @@ const ProteinDetail = props => {
       }
       return disData;
     });
-    setDiseaseData(diseaseDataTemp);
+    diseaseData(diseaseDataTemp);
   }
 
   const organismEvidence = groupOrganismEvidences(species);
@@ -1546,10 +1520,12 @@ const ProteinDetail = props => {
                         <Tabs
                           defaultActiveKey={glycosylationTabSelected}
                           transition={false}
-                          activeKey={glycosylationTabSelected}
+                          // activeKey={glycosylationTabSelected}
                           mountOnEnter={true}
                           unmountOnExit={true}
-                          onSelect={key => setGlycosylationTabSelected(key)}
+                          onSelect={key => {
+                            glycosylationTabSelected = key;
+                          }}
                         >
                           <Tab
                             eventKey="reported_with_glycan"
@@ -2169,10 +2145,8 @@ const ProteinDetail = props => {
                               : "without_disease"
                           }
                           transition={false}
-                          activeKey={mutataionTabSelected}
                           mountOnEnter={true}
                           unmountOnExit={true}
-                          onSelect={key => setmutataionTabSelected(key)}
                         >
                           <Tab
                             eventKey="with_disease"
