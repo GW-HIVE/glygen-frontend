@@ -1069,6 +1069,20 @@ sub {
   margin-bottom: 20px;
 }
 
+/* =========================================
+                ID Mapping 
+============================================ */
+.id-mapping-content {
+  background-color: #fff;
+  border: 1px solid #ddd !important;
+  /* min-width: inherit; */
+  margin-bottom: 40px;
+  padding: 40px 140px !important;
+}
+.select-type {
+  justify-content: space-between;
+}
+
 /*! does not work on Firefox */
 
 /*! Other Browser */

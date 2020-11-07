@@ -1,0 +1,22 @@
+{
+  "pageSubtitle": "Our Tool",
+  "pageTitle": "ID",
+  "pageTitleBold": "Mapping",
+  "molecule":{
+    "placeholder": "Select Molecule"
+  },
+  "from_id_type": {
+    "placeholder": "Select From ID Type"
+  },
+  "to_id_type": {
+    "placeholder": "Select To ID Type"
+  },
+  "id_entry": {
+    "placeholder": "Enter one or multiple IDs, separate IDs using space bar, comma or return key example: \n P14210 \n Q08048 \n P17945 \n P14210,Q08048,P17945 \n P14210 Q08048 P17945"
+  },
+   "file_selection":{
+    "placeholder": "Select File Type",
+    "upload_text": "Or Upload your own text file",
+    "no_file_selected": "No file selected"
+  }
+}

@@ -227,6 +227,9 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.frameworks}>
                   Frameworks
                 </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
+                  ID Mapping
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Col>

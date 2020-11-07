@@ -30,6 +30,7 @@ import ProtVista from "./pages/ProtVista";
 import MotifList from "./pages/MotifList";
 import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
+import IdMapping from "./pages/IdMapping";
 
 const Routes = (props) => (
   <Switch>
@@ -72,6 +73,7 @@ const Routes = (props) => (
     <Route path={`${routeConstants.locusList}:id/:searchId`} component={LocusList} />
     <Route path={`${routeConstants.quickSearch}:id/:questionId`} component={QuickSearch} />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
+    <Route path={routeConstants.idMapping} component={IdMapping} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
     <Route path={routeConstants.default} component={Home} />

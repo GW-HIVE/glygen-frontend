@@ -29,6 +29,7 @@
   "siteview": "/Siteview/",
   "motifList": "/list-of-motifs/",
   "motifDetail": "/motif/",
+  "idMapping": "/id-mapping",
   "home": "/home/",
   "default": "/"
 }

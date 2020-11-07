@@ -53,6 +53,9 @@
   .inline-evidence:nth-child(n + 4) {
     margin-top: 5px !important;
   }
+  .id-mapping-content {
+    padding: 40px 60px 40px 80px !important;
+  }
 }
 
 /* Extra Small Devices (Landscape Phones & Portrait Tablets) */
@@ -144,6 +147,9 @@
   .inline-evidence:nth-child(n + 2) {
     margin-top: 5px !important;
   }
+  .id-mapping-content {
+    padding: 40px 60px 40px 80px !important;
+  }
 }
 
 /* Extra Small Devices (Portrait Phones & Smaller Devices) */
@@ -182,6 +188,9 @@
   }
   .inline-evidence:nth-child(n + 2) {
     margin-top: 5px !important;
+  }
+  .id-mapping-content {
+    padding: 40px 40px 40px 50px !important;
   }
 }
 @media (min-width: 600px) {
