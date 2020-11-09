@@ -1523,9 +1523,9 @@ const ProteinDetail = props => {
                           // activeKey={glycosylationTabSelected}
                           mountOnEnter={true}
                           unmountOnExit={true}
-                          onSelect={key => {
-                            glycosylationTabSelected = key;
-                          }}
+                          // onSelect={key => {
+                          //   glycosylationTabSelected = key;
+                          // }}
                         >
                           <Tab
                             eventKey="reported_with_glycan"
