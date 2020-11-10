@@ -3,16 +3,24 @@
   "pageTitle": "ID",
   "pageTitleBold": "Mapping",
   "molecule":{
-    "placeholder": "Select Molecule"
+    "placeholder": "Select Molecule",
+    "placeholderName": "Any",
+    "placeholderId": "any"
   },
   "from_id_type": {
-    "placeholder": "Select From ID Type"
+    "placeholder": "Select From ID Type",
+    "placeholderName": "Any",
+    "placeholderId": "any"
   },
   "to_id_type": {
-    "placeholder": "Select To ID Type"
+    "placeholder": "Select To ID Type",
+    "placeholderName": "Any",
+    "placeholderId": "any"
   },
   "id_entry": {
-    "placeholder": "Enter one or multiple IDs, separate IDs using space bar, comma or return key example: \n P14210 \n Q08048 \n P17945 \n P14210,Q08048,P17945 \n P14210 Q08048 P17945"
+    "placeholder": "Enter one or multiple IDs, separate IDs using space bar, comma or return key example: \n P14210 \n Q08048 \n P17945 \n P14210,Q08048,P17945 \n P14210 Q08048 P17945",
+    "length": 100,
+    "errorText": "Entry is too long - max length is 100."
   },
    "file_selection":{
     "placeholder": "Select File Type",

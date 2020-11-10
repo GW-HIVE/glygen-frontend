@@ -5,6 +5,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import { axiosError } from "../data/axiosError";
 import { getSystemData } from "../data";
+import { getMappingInit } from "../data/mapping";
 import { Row } from "react-bootstrap";
 import { Grid, Typography } from "@material-ui/core";
 import { Container } from "react-bootstrap";
@@ -23,12 +24,32 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 
 const IdMapping = (props) => {
   const [pageLoading, setPageLoading] = React.useState(true);
+  const [initData, setInitData] = useState({});
+  const [idMapMolecule, setIdMapMolecule] = useState("any");
+  const [idMapFromIdType, setIdMapFromIdType] = useState("any");
+  const [idMapToIdType, setIdMapToIdType] = useState("any");
+  const [idMapEnterId, setIdMapEnterId] = useState("");
+
+  const idMapMoleculeOnChange = (value) => {
+    setIdMapMolecule(value);
+  };
+  const idMapFromIdTypeOnChange = (value) => {
+    setIdMapFromIdType({ value });
+  };
+  const idMapToIdTypeOnChange = (value) => {
+    setIdMapToIdType(value);
+  };
+  const idMapEnterIdOnChange = (value) => {
+    setIdMapEnterId(value);
+  };
 
   useEffect(() => {
     setPageLoading(true);
     logActivity();
-    getSystemData()
+    getMappingInit()
       .then((response) => {
+        let initData = response.data;
+        setInitData(initData);
         setPageLoading(false);
       })
       .catch(function (error) {
@@ -66,7 +87,19 @@ const IdMapping = (props) => {
               />
               {commonIdMappingData.molecule.name}
             </Typography>
-            <SelectControl placeholder={idMappingData.molecule.placeholder} />
+            <SelectControl
+              placeholder={idMappingData.molecule.placeholder}
+              placeholderId={idMappingData.molecule.placeholderId}
+              placeholderName={idMappingData.molecule.placeholderName}
+              inputValue={idMapMolecule}
+              menu={Object.keys(initData).map((moleculeType) => {
+                return {
+                  id: initData[moleculeType].id,
+                  name: initData[moleculeType].label,
+                };
+              })}
+              setInputValue={idMapMoleculeOnChange}
+            />
           </FormControl>
         </Grid>
         {/* 2 */}
@@ -82,7 +115,19 @@ const IdMapping = (props) => {
                 />
                 {commonIdMappingData.from_id_type.name}
               </Typography>
-              <SelectControl placeholder={idMappingData.from_id_type.placeholder} />
+              <SelectControl
+                placeholder={idMappingData.from_id_type.placeholder}
+                placeholderId={idMappingData.from_id_type.placeholderId}
+                placeholderName={idMappingData.from_id_type.placeholderName}
+                inputValue={idMapFromIdType}
+                menu={Object.keys(initData).map((fromIdType) => {
+                  return {
+                    id: initData[fromIdType].id,
+                    name: initData[fromIdType].namespace,
+                  };
+                })}
+                setInputValue={idMapFromIdTypeOnChange}
+              />
             </FormControl>
           </Grid>
           {/* To ID Type */}
@@ -95,7 +140,19 @@ const IdMapping = (props) => {
                 />
                 {commonIdMappingData.to_id_type.name}
               </Typography>
-              <SelectControl placeholder={idMappingData.to_id_type.placeholder} />
+              <SelectControl
+                placeholder={idMappingData.to_id_type.placeholder}
+                placeholderId={idMappingData.to_id_type.placeholderId}
+                placeholderName={idMappingData.to_id_type.placeholderName}
+                inputValue={idMapToIdType}
+                menu={Object.keys(initData).map((toIdType) => {
+                  return {
+                    id: initData[toIdType].id,
+                    name: initData[toIdType].namespace,
+                  };
+                })}
+                setInputValue={idMapToIdTypeOnChange}
+              />
             </FormControl>
           </Grid>
         </Grid>
@@ -120,9 +177,13 @@ const IdMapping = (props) => {
                 input: "input-auto",
               }}
               placeholder={idMappingData.id_entry.placeholder}
+              setInputValue={idMapEnterId}
+
+              // error={props.inputValue.proSequence.length > advancedSearch.sequence.length}
             ></OutlinedInput>
           </FormControl>
         </Grid>
+
         {/* Select Files */}
         <Grid className="pt-2">
           <Typography className="mb-1">
