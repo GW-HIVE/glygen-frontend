@@ -17,10 +17,6 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import Button from "react-bootstrap/Button";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import MultilineAutoTextInput from "../components/input/MultilineAutoTextInput";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import FormHelperText from "@material-ui/core/FormHelperText";
 
 const IdMapping = (props) => {
   const [pageLoading, setPageLoading] = React.useState(true);
@@ -188,7 +184,7 @@ const IdMapping = (props) => {
               }}
               placeholder={idMappingData.id_entry.placeholder}
               setInputValue={idMapEnterId}
-
+              onChange={idMapEnterIdOnChange}
               // error={props.inputValue.proSequence.length > advancedSearch.sequence.length}
             ></OutlinedInput>
           </FormControl>
