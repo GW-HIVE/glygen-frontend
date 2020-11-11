@@ -32,9 +32,11 @@ const IdMapping = (props) => {
 
   const idMapMoleculeOnChange = (value) => {
     setIdMapMolecule(value);
+    idMapFromIdTypeOnChange("any");
+    idMapToIdTypeOnChange("any");
   };
   const idMapFromIdTypeOnChange = (value) => {
-    setIdMapFromIdType({ value });
+    setIdMapFromIdType(value);
   };
   const idMapToIdTypeOnChange = (value) => {
     setIdMapToIdType(value);
@@ -120,13 +122,17 @@ const IdMapping = (props) => {
                 placeholderId={idMappingData.from_id_type.placeholderId}
                 placeholderName={idMappingData.from_id_type.placeholderName}
                 inputValue={idMapFromIdType}
-                menu={Object.keys(initData).map((fromIdType) => {
-                  return {
-                    id: initData[fromIdType].id,
-                    name: initData[fromIdType].namespace,
-                  };
-                })}
                 setInputValue={idMapFromIdTypeOnChange}
+                menu={
+                  idMapMolecule === "any"
+                    ? []
+                    : initData[idMapMolecule].namespace.map((fromId) => {
+                        return {
+                          id: fromId,
+                          name: fromId,
+                        };
+                      })
+                }
               />
             </FormControl>
           </Grid>
@@ -145,13 +151,17 @@ const IdMapping = (props) => {
                 placeholderId={idMappingData.to_id_type.placeholderId}
                 placeholderName={idMappingData.to_id_type.placeholderName}
                 inputValue={idMapToIdType}
-                menu={Object.keys(initData).map((toIdType) => {
-                  return {
-                    id: initData[toIdType].id,
-                    name: initData[toIdType].namespace,
-                  };
-                })}
                 setInputValue={idMapToIdTypeOnChange}
+                menu={
+                  idMapMolecule === "any"
+                    ? []
+                    : initData[idMapMolecule].namespace.map((toId) => {
+                        return {
+                          id: toId,
+                          name: toId,
+                        };
+                      })
+                }
               />
             </FormControl>
           </Grid>

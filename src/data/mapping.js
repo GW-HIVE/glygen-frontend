@@ -8,19 +8,16 @@ import stringConstants from "./json/stringConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { logActivity } from "../data/logging";
 
+// Performs dropdown selections like Molecules, From ID Type, To ID Type
 export const getMappingInit = () => {
   const url = `/idmapping/search_init?query={}`;
   return getJson(url);
 };
 
-// /idmapping/search?query={"recordtype":"glycan","input_namespace":"PubChem Compound","output_namespace":"ChEBI","input_idlist":["aaa","91859018","91845230","91845682"]}
-export const getIdMappingSearch = (molecule, fromIdType, toIdType, mappingID) => {
-  const queryParamString = JSON.stringify({
-    recordtype: molecule,
-    input_namespace: fromIdType,
-    output_namespace: toIdType,
-    input_idlist: mappingID,
-  });
-  const url = `/idmapping/search?query=${queryParamString}`;
+// Forms objects and displays data in a results (list) page
+// Takes selections and inputs in search page and performs search on submit btn
+export const getIdMappingSearch = (formObject) => {
+  var json = "query=" + JSON.stringify(formObject);
+  const url = "/idmapping/search?" + json;
   return getJson(url);
 };
