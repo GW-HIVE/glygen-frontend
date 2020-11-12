@@ -1371,7 +1371,7 @@
   "id_mapping": {
     "common": {
        "molecule": {
-        "name": "Molecule",
+        "name": "Molecule *",
         "tooltip": {
           "title": "Molecule",
           "text": "If Glycan is selected then whole id mapping will be related to glycan. Same for protein/glycoprotein."
@@ -1379,7 +1379,7 @@
         "id": "molecule"
       },
        "from_id_type": {
-        "name": "From ID Type",
+        "name": "From ID Type *",
         "tooltip": {
           "title": "From ID Type",
           "text": "From ID field gives a list of resources that can be ID mapped."
@@ -1387,7 +1387,7 @@
         "id": "from_id_type"
       },
        "to_id_type": {
-        "name": "To ID Type",
+        "name": "To ID Type *",
         "tooltip": {
           "title": "To ID Type",
           "text": "To ID field gives a list of resources that can be ID mapped."
@@ -1395,7 +1395,7 @@
         "id": "to_id_type"
       },
       "id_entry": {
-         "name": "Enter IDs",
+         "name": "Enter IDs *",
           "tooltip": {
             "title": "Enter IDs",
             "text": "Takes the input or text file (csv, txt, etc.) and the dropdowns information and performs the mapping."

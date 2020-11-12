@@ -25,6 +25,9 @@ const IdMapping = (props) => {
   const [idMapFromIdType, setIdMapFromIdType] = useState("any");
   const [idMapToIdType, setIdMapToIdType] = useState("any");
   const [idMapEnterId, setIdMapEnterId] = useState("");
+  const [idMapFileSelect, setIdMapFileSelect] = useState("any");
+
+  let commonIdMappingData = stringConstants.id_mapping.common;
 
   const idMapMoleculeOnChange = (value) => {
     setIdMapMolecule(value);
@@ -39,6 +42,16 @@ const IdMapping = (props) => {
   };
   const idMapEnterIdOnChange = (value) => {
     setIdMapEnterId(value);
+  };
+  const idMapFileSelectOnChange = (value) => {
+    setIdMapFileSelect(value);
+  };
+  const clearMappingFields = () => {
+    idMapMoleculeOnChange("any");
+    idMapFromIdTypeOnChange("any");
+    idMapToIdTypeOnChange("any");
+    idMapFileSelectOnChange("any");
+    idMapEnterIdOnChange("");
   };
 
   useEffect(() => {
@@ -55,8 +68,6 @@ const IdMapping = (props) => {
         axiosError(error, "", message, setPageLoading);
       });
   }, []);
-
-  let commonIdMappingData = stringConstants.id_mapping.common;
 
   return (
     <React.Fragment>
@@ -90,13 +101,14 @@ const IdMapping = (props) => {
               placeholderId={idMappingData.molecule.placeholderId}
               placeholderName={idMappingData.molecule.placeholderName}
               inputValue={idMapMolecule}
+              setInputValue={idMapMoleculeOnChange}
               menu={Object.keys(initData).map((moleculeType) => {
                 return {
                   id: initData[moleculeType].id,
                   name: initData[moleculeType].label,
                 };
               })}
-              setInputValue={idMapMoleculeOnChange}
+              // required={true}
             />
           </FormControl>
         </Grid>
@@ -129,6 +141,7 @@ const IdMapping = (props) => {
                         };
                       })
                 }
+                // required={true}
               />
             </FormControl>
           </Grid>
@@ -158,6 +171,7 @@ const IdMapping = (props) => {
                         };
                       })
                 }
+                // required={true}
               />
             </FormControl>
           </Grid>
@@ -177,19 +191,19 @@ const IdMapping = (props) => {
               fullWidth
               multiline
               rows="6"
+              // required={true}
               classes={{
                 option: "auto-option",
                 inputRoot: "auto-input-root",
                 input: "input-auto",
               }}
               placeholder={idMappingData.id_entry.placeholder}
-              setInputValue={idMapEnterId}
+              value={idMapEnterId}
               onChange={idMapEnterIdOnChange}
               // error={props.inputValue.proSequence.length > advancedSearch.sequence.length}
             ></OutlinedInput>
           </FormControl>
         </Grid>
-
         {/* Select Files */}
         <Grid className="pt-2">
           <Typography className="mb-1">
@@ -198,7 +212,13 @@ const IdMapping = (props) => {
           {/* Text file dropdown */}
           <Grid item xs={12} sm={12} md={5}>
             <FormControl fullWidth variant="outlined">
-              <SelectControl placeholder={idMappingData.file_selection.placeholder} />
+              <SelectControl
+                placeholder={idMappingData.file_selection.placeholder}
+                placeholderId={idMappingData.file_selection.placeholderId}
+                placeholderName={idMappingData.file_selection.placeholderName}
+                inputValue={idMapFileSelect}
+                setInputValue={idMapFileSelectOnChange}
+              />
             </FormControl>
           </Grid>
         </Grid>
@@ -210,7 +230,9 @@ const IdMapping = (props) => {
         {/*  Buttons */}
         <Grid item xs={12} sm={12}>
           <Row className="gg-align-center pt-5">
-            <Button className="gg-btn-outline mr-4">Clear Fields</Button>
+            <Button className="gg-btn-outline mr-4" onClick={clearMappingFields}>
+              Clear Fields
+            </Button>
             <Button className="gg-btn-blue">Submit</Button>
           </Row>
         </Grid>

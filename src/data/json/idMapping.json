@@ -23,7 +23,9 @@
     "errorText": "Entry is too long - max length is 100."
   },
    "file_selection":{
-    "placeholder": "Select File Type",
+		"placeholder": "Select File Type",
+		"placeholderName": "Any",
+    "placeholderId": "any",
     "upload_text": "Or Upload your own text file",
     "no_file_selected": "No file selected"
   }
