@@ -4,8 +4,7 @@ import { getTitle, getMeta } from "../utils/head";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import { axiosError } from "../data/axiosError";
-import { getSystemData } from "../data";
-import { getMappingInit } from "../data/mapping";
+import { getMappingInit, getMappingSearch } from "../data/mapping";
 import { Row } from "react-bootstrap";
 import { Grid, Typography } from "@material-ui/core";
 import { Container } from "react-bootstrap";
@@ -46,7 +45,7 @@ const IdMapping = (props) => {
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
   };
-  const clearMappingFields = () => {
+  const clearMapFields = () => {
     idMapMoleculeOnChange("any");
     idMapFromIdTypeOnChange("any");
     idMapToIdTypeOnChange("any");
@@ -230,7 +229,7 @@ const IdMapping = (props) => {
         {/*  Buttons */}
         <Grid item xs={12} sm={12}>
           <Row className="gg-align-center pt-5">
-            <Button className="gg-btn-outline mr-4" onClick={clearMappingFields}>
+            <Button className="gg-btn-outline mr-4" onClick={clearMapFields}>
               Clear Fields
             </Button>
             <Button className="gg-btn-blue">Submit</Button>

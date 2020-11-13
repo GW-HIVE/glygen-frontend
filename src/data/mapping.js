@@ -16,8 +16,19 @@ export const getMappingInit = () => {
 
 // Forms objects and displays data in a results (list) page
 // Takes selections and inputs in search page and performs search on submit btn
-export const getIdMappingSearch = (formObject) => {
+export const getMappingSearch = (formObject) => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/idmapping/search?" + json;
   return getJson(url);
 };
+
+// export const getIdMappingSearch = (moleculeId, inputNamespace, outputNNamespace, inputIdList) => {
+//   const queryParamString = JSON.stringify({
+//     recordtype: moleculeId,
+//     input_namespace: inputNamespace,
+//     output_namespace: outputNNamespace,
+//     input_idlist: inputIdList,
+//   });
+//   const url = `/idmapping/search?query=${queryParamString}`;
+//   return getJson(url);
+// };
