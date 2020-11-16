@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useParams } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { logActivity } from "../data/logging";
@@ -16,6 +16,7 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import Button from "react-bootstrap/Button";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const IdMapping = (props) => {
   const [pageLoading, setPageLoading] = React.useState(true);
@@ -25,7 +26,7 @@ const IdMapping = (props) => {
   const [idMapToIdType, setIdMapToIdType] = useState("any");
   const [idMapEnterId, setIdMapEnterId] = useState("");
   const [idMapFileSelect, setIdMapFileSelect] = useState("any");
-
+  // let { id } = useParams("");
   let commonIdMappingData = stringConstants.id_mapping.common;
 
   const idMapMoleculeOnChange = (value) => {
@@ -39,8 +40,11 @@ const IdMapping = (props) => {
   const idMapToIdTypeOnChange = (value) => {
     setIdMapToIdType(value);
   };
-  const idMapEnterIdOnChange = (value) => {
-    setIdMapEnterId(value);
+  // const idMapEnterIdOnChange = (value) => {
+  //   setIdMapEnterId(value);
+  // };
+  const idMapEnterIdOnChange = (event) => {
+    setIdMapEnterId({ enterId: event.target.value });
   };
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
@@ -50,9 +54,12 @@ const IdMapping = (props) => {
     idMapFromIdTypeOnChange("any");
     idMapToIdTypeOnChange("any");
     idMapFileSelectOnChange("any");
-    idMapEnterIdOnChange("");
+    // idMapEnterIdOnChange("");
   };
 
+  // const idMapSearch = () => {
+  //   let formObject = searchJson();
+  // };
   useEffect(() => {
     setPageLoading(true);
     logActivity();
@@ -199,8 +206,13 @@ const IdMapping = (props) => {
               placeholder={idMappingData.id_entry.placeholder}
               value={idMapEnterId}
               onChange={idMapEnterIdOnChange}
-              // error={props.inputValue.proSequence.length > advancedSearch.sequence.length}
+              // error={idMapEnterId.length > idMapEnterId.id_entry.length}
             ></OutlinedInput>
+            {/* {idMapEnterId.length > idMapEnterId.id_entry.length && (
+              <FormHelperText className={"error-text"} error>
+                {idMapEnterId.id_entry.errorText}
+              </FormHelperText>
+            )} */}
           </FormControl>
         </Grid>
         {/* Select Files */}
