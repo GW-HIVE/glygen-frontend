@@ -136,7 +136,7 @@ const ProteinSequenceDisplay = ({
   glycosylation,
   mutation,
   siteAnnotation,
-  selectedHighlights, 
+  selectedHighlights,
   setSelectedHighlights
 }) => {
   const [nLinkGlycan, setNLinkGlycan] = useState([]);
@@ -273,7 +273,7 @@ const ProteinSequenceDisplay = ({
               count={mutationHighlights.length}
               selectedHighlights={selectedHighlights}
               type="mutation"
-              label="Mutations"
+              label="Variation from mutation "
               className={"sequnce3"}
               onSelect={handleSelectHighlight}
             />
