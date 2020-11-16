@@ -74,12 +74,13 @@ const items = [
     label: stringConstants.sidebar.ptm_annotation.displayname,
     id: "PTM-Annotation"
   },
+  { label: stringConstants.sidebar.sequence.displayname, id: "Sequence" },
   {
     label: stringConstants.sidebar.snv.displayname,
     id: "Single-Nucleotide-Variation"
   },
   { label: stringConstants.sidebar.mutagenesis.displayname, id: "Mutagenesis" },
-  { label: stringConstants.sidebar.sequence.displayname, id: "Sequence" },
+
   { label: stringConstants.sidebar.pathway.displayname, id: "Pathway" },
   {
     label: stringConstants.sidebar.synthesized_glycans.displayname,
