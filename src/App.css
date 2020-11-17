@@ -1068,7 +1068,10 @@ sub {
   max-height: 600px;
   margin-bottom: 20px;
 }
-
+.mapping-reason-tbl {
+  max-width: 60%;
+  margin: 0 auto;
+}
 /* =========================================
                 ID Mapping 
 ============================================ */

@@ -30,6 +30,7 @@
   "motifList": "/list-of-motifs/",
   "motifDetail": "/motif/",
   "idMapping": "/id-mapping",
+  "idMappingResult": "/id-mapping-result",
   "home": "/home/",
   "default": "/"
 }

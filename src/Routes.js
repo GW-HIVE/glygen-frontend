@@ -31,6 +31,7 @@ import MotifList from "./pages/MotifList";
 import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
 import IdMapping from "./pages/IdMapping";
+import idMappingResult from "./pages/IdMappingResult";
 
 const Routes = (props) => (
   <Switch>
@@ -74,6 +75,7 @@ const Routes = (props) => (
     <Route path={`${routeConstants.quickSearch}:id/:questionId`} component={QuickSearch} />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
     <Route path={routeConstants.idMapping} component={IdMapping} />
+    <Route path={routeConstants.idMappingResult} component={idMappingResult} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
     <Route path={routeConstants.default} component={Home} />

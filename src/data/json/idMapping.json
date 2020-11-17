@@ -1,7 +1,10 @@
 {
   "pageSubtitle": "Our Tool",
   "pageTitle": "ID",
-  "pageTitleBold": "Mapping",
+	"pageTitleBold": "Mapping",
+	"pageTitleIdMapResult": "ID Mapping",
+	"pageTitleIdMapResultBold": "Result",
+	"pageTitleIdMapReason": "Reason why certain entries could not be mapped",
   "molecule":{
     "placeholder": "Select Molecule",
     "placeholderName": "Any",

@@ -17,6 +17,8 @@ import stringConstants from "../data/json/stringConstants";
 import Button from "react-bootstrap/Button";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import routeConstants from "../data/json/routeConstants";
+import { Link } from "react-router-dom";
 
 const IdMapping = (props) => {
   const [pageLoading, setPageLoading] = React.useState(true);
@@ -44,17 +46,21 @@ const IdMapping = (props) => {
   //   setIdMapEnterId(value);
   // };
   const idMapEnterIdOnChange = (event) => {
-    setIdMapEnterId({ enterId: event.target.value });
+    setIdMapEnterId(event.target.value);
   };
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
   };
   const clearMapFields = () => {
-    idMapMoleculeOnChange("any");
-    idMapFromIdTypeOnChange("any");
-    idMapToIdTypeOnChange("any");
-    idMapFileSelectOnChange("any");
-    // idMapEnterIdOnChange("");
+    // idMapMoleculeOnChange("any");
+    // idMapFromIdTypeOnChange("any");
+    // idMapToIdTypeOnChange("any");
+    // idMapFileSelectOnChange("any");
+    setIdMapMolecule("any");
+    setIdMapFromIdType("any");
+    setIdMapToIdType("any");
+    setIdMapEnterId("");
+    setIdMapFileSelect("any");
   };
 
   // const idMapSearch = () => {
@@ -244,7 +250,11 @@ const IdMapping = (props) => {
             <Button className="gg-btn-outline mr-4" onClick={clearMapFields}>
               Clear Fields
             </Button>
-            <Button className="gg-btn-blue">Submit</Button>
+            {/* <Button className="gg-btn-blue">Submit</Button> */}
+            <Link to={routeConstants.idMappingResult}>
+              {" "}
+              <Button className="gg-btn-blue">Submit</Button>
+            </Link>
           </Row>
         </Grid>
       </Container>

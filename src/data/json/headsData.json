@@ -416,12 +416,25 @@
 			}
 		]
 	},
-		"idMapping": {
-		"title": "ID Mapping | Mapping IDs by Protein/Glycoprotein or Glycan | glygen.org",
+	"idMapping": {
+		"title": "ID Mapping | Mapping IDs by Glycan or Protein/Glycoprotein | glygen.org",
 		"meta": [
 			{
 				"name": "description",
 				"content": "Mapping by Glycan or Protein/Glycoprotein. Users select the step wise option. If Glycan is selected then whole id mapping will be related to glycan. Same for protein/glycoprotein."
+			},
+			{
+				"name": "keywords",
+				"content": "glycan search, glycoprotein, glycosyltransferase, glycan, glycosylation, data integration, carbohydrate, database, glycoinformatics, glycobiology, glycan draw, glycan mass, glycan structure, glycoconjugate, data standardization, database integration."
+			}
+		]
+	},
+	"idMappingResult": {
+		"title": "Result of ID Mapping | Mapping IDs by Glycan or Protein/Glycoprotein | glygen.org",
+		"meta": [
+			{
+				"name": "description",
+				"content": "Result of Glycan or Protein/Glycoprotein Mapping. Users select the step wise option. If Glycan is selected then whole id mapping will be related to glycan. Same for protein/glycoprotein."
 			},
 			{
 				"name": "keywords",
