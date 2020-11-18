@@ -1,14 +1,13 @@
-import React from "react";
 import { getJson } from "./api";
-import { Link } from "react-router-dom";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import routeConstants from "./json/routeConstants";
-import stringConstants from "./json/stringConstants";
-import LineTooltip from "../components/tooltip/LineTooltip";
-import { logActivity } from "../data/logging";
+// import stringConstants from "./json/stringConstants";
+// import { logActivity } from "../data/logging";
 
-// Performs dropdown selections like Molecules, From ID Type, To ID Type
+// const mapStrings = stringConstants.mapping.common;
+
+// Performs dropdown selections: Molecules, From ID Type, To ID Type
 export const getMappingInit = () => {
   const url = `/idmapping/search_init?query={}`;
   return getJson(url);
@@ -22,28 +21,29 @@ export const getMappingSearch = (formObject) => {
   return getJson(url);
 };
 
-export const getIdMappingResult = (
-  motifListId,
+export const getIdMappingList = (
+  mappingListId,
   offset = 1,
   limit = 20,
-  sort = "input_idlist",
-  order = "desc"
+  sort = undefined,
+  order = "asc"
 ) => {
   const queryParams = {
-    id: motifListId,
+    id: mappingListId,
     offset: offset,
     sort: sort,
     limit: limit,
     order: order,
   };
   const queryParamString = JSON.stringify(queryParams);
-  const url = `/motif/list?query=${queryParamString}`;
+  const url = `/protein/list?query=${queryParamString}`;
   return getJson(url);
 };
 
 export const ID_MAPPING_RESULT = [
   {
-    // dataField: "motif_ac",
+    // dataField: mapStrings.shortName,
+    // text: mapStrings.input_idlist.name,
     dataField: "input_idlist",
     text: "From ID",
     sort: true,
@@ -51,11 +51,6 @@ export const ID_MAPPING_RESULT = [
     headerStyle: () => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
-    // formatter: (value, row) => (
-    //   <LineTooltip text="View details">
-    //     <Link to={routeConstants.motifDetail + row.motif_ac}>{row.motif_ac}</Link>
-    //   </LineTooltip>
-    // ),
   },
   {
     dataField: "input_idlist2",
@@ -64,11 +59,6 @@ export const ID_MAPPING_RESULT = [
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
-    // formatter: (value, row) => (
-    //   <LineTooltip text="View details">
-    //     <Link to={routeConstants.motifDetail + row.motif_ac}>{row.motif_name}</Link>
-    //   </LineTooltip>
-    // ),
   },
   {
     // dataField: "glycan_count",
@@ -78,11 +68,6 @@ export const ID_MAPPING_RESULT = [
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     },
-    // formatter: (value, row) => (
-    //   <LineTooltip text="View details">
-    //     <Link to={routeConstants.motifDetail + row.motif_ac}>{row.glycan_count}</Link>
-    //   </LineTooltip>
-    // ),
   },
 ];
 export const ID_MAP_REASON = [
@@ -105,13 +90,3 @@ export const ID_MAP_REASON = [
     },
   },
 ];
-// export const getIdMappingSearch = (moleculeId, inputNamespace, outputNNamespace, inputIdList) => {
-//   const queryParamString = JSON.stringify({
-//     recordtype: moleculeId,
-//     input_namespace: inputNamespace,
-//     output_namespace: outputNNamespace,
-//     input_idlist: inputIdList,
-//   });
-//   const url = `/idmapping/search?query=${queryParamString}`;
-//   return getJson(url);
-// };

@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getIdMappingResult } from "../data";
+import { getIdMappingList } from "../data";
 import { ID_MAPPING_RESULT, ID_MAP_REASON } from "../data/mapping";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
@@ -41,34 +41,10 @@ const IdMappingResult = (props) => {
     { show: false, id: "" }
   );
 
-  // const fixResidueToShortNames = (query) => {
-  //   const residueMap = stringConstants.glycan.common.composition;
-  //   const result = { ...query };
-
-  //   if (result.composition) {
-  //     result.composition = result.composition
-  //       .sort((a, b) => {
-  //         if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
-  //           return -1;
-  //         } else if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
-  //           return 1;
-  //         }
-  //         return 0;
-  //       })
-  //       .map((item) => ({
-  //         ...item,
-  //         residue: ReactHtmlParser(residueMap[item.residue].name.bold()),
-  //       }));
-  //   }
-
-  //   return result;
-  // };
-
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-
-    getIdMappingResult(id)
+    getIdMappingList(id)
       .then(({ data }) => {
         if (data.error_code) {
           let message = "list api call";
@@ -76,7 +52,7 @@ const IdMappingResult = (props) => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          // setQuery(fixResidueToShortNames(data.query));
+          // setQuery(data.query);
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -94,16 +70,14 @@ const IdMappingResult = (props) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getIdMappingResult(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
+    getIdMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
       ({ data }) => {
         // place to change values before rendering
-
-        setData(data.results);
-        // setQuery(fixResidueToShortNames(data.query));
-        setPagination(data.pagination);
-
-        //   setSizePerPage()
-        setTotalSize(data.pagination.total_length);
+        if (!data.error_code) {
+          setData(data.results);
+          setPagination(data.pagination);
+          setTotalSize(data.pagination.total_length);
+        }
       }
     );
   };
@@ -166,6 +140,7 @@ const IdMappingResult = (props) => {
               // defaultSortField="glycan_count"
               defaultSortField="input_idlist"
               defaultSortOrder="desc"
+              // idField="input_idlist"
             />
           )}
           {/* Button */}

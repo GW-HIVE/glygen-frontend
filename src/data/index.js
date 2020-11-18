@@ -6,4 +6,4 @@ export { getSystemData } from "./system";
 
 export { getMotifList } from "./motif";
 
-export { getIdMappingResult } from "./mapping";
+export { getIdMappingList } from "./mapping";
