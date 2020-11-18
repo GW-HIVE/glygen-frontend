@@ -21,7 +21,7 @@ export const getMappingSearch = (formObject) => {
   return getJson(url);
 };
 
-export const getIdMappingList = (
+export const getMappingList = (
   mappingListId,
   offset = 1,
   limit = 20,

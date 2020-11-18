@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getIdMappingList } from "../data";
+import { getMappingList } from "../data";
 import { ID_MAPPING_RESULT, ID_MAP_REASON } from "../data/mapping";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
@@ -44,7 +44,7 @@ const IdMappingResult = (props) => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    getIdMappingList(id)
+    getMappingList(id)
       .then(({ data }) => {
         if (data.error_code) {
           let message = "list api call";
@@ -70,7 +70,7 @@ const IdMappingResult = (props) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getIdMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
+    getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
       ({ data }) => {
         // place to change values before rendering
         if (!data.error_code) {
