@@ -8,28 +8,33 @@
   "molecule":{
     "placeholder": "Select Molecule",
     "placeholderName": "Any",
-    "placeholderId": "any"
+		"placeholderId": "any",
+		"required": "This field is required."
   },
   "from_id_type": {
     "placeholder": "Select From ID Type",
     "placeholderName": "Any",
-    "placeholderId": "any"
+		"placeholderId": "any",
+		"required": "This field is required."
   },
   "to_id_type": {
     "placeholder": "Select To ID Type",
     "placeholderName": "Any",
-    "placeholderId": "any"
+		"placeholderId": "any",
+		"required": "This field is required."
   },
   "id_entry": {
     "placeholder": "Enter one or multiple IDs, separate IDs using space bar, comma or return key example: \n P14210 \n Q08048 \n P17945 \n P14210,Q08048,P17945 \n P14210 Q08048 P17945",
     "length": 2500,
-    "errorText": "Entry is too long - max length is 2500."
+		"errorText": "Entry is too long - max length is 2500.",
+		"required": "This field is required."
   },
    "file_selection":{
 		"placeholder": "Select File Type",
 		"placeholderName": "Any",
     "placeholderId": "any",
     "upload_text": "Or Upload your own text file",
-    "no_file_selected": "No file selected"
+		"no_file_selected": "No file selected",
+		"required": "This field is required."
   }
 }
