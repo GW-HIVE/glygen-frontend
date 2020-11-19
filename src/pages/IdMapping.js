@@ -61,6 +61,11 @@ const IdMapping = (props) => {
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
   };
+  // const SequenceChange = (event) => {
+  //   let valArr = props.inputValue.proAdvSearchValError;
+  //   valArr[6] = event.target.value.length > advancedSearch.sequence.length;
+  //   props.setProAdvSearchData({ proSequence: event.target.value, proAdvSearchValError: valArr });
+  // };
   const clearMapFields = () => {
     setIdMapMolecule("any");
     setIdMapFromIdType("any");
@@ -118,7 +123,7 @@ const IdMapping = (props) => {
     return formJson;
   }
 
-  const idMapSearch = () => {
+  const idMapSearchOnClick = () => {
     let formObject = searchJson();
     logActivity("user", id, "Performing ID Mapping Search");
     let message = "ID Mapping Search query=" + JSON.stringify(formObject);
@@ -281,13 +286,13 @@ const IdMapping = (props) => {
               placeholder={idMappingData.id_entry.placeholder}
               value={idMapEnterId}
               onChange={idMapEnterIdOnChange}
-              // error={idMapEnterId.length > idMapEnterId.id_entry.length}
+              error={idMapEnterId.length > idMappingData.id_entry.length}
             ></OutlinedInput>
-            {/* {idMapEnterId.length > idMapEnterId.id_entry.length && (
+            {idMapEnterId.length > idMappingData.id_entry.length && (
               <FormHelperText className={"error-text"} error>
-                {idMapEnterId.id_entry.errorText}
+                {idMappingData.id_entry.errorText}
               </FormHelperText>
-            )} */}
+            )}
           </FormControl>
         </Grid>
         {/* Select Files */}
@@ -322,7 +327,7 @@ const IdMapping = (props) => {
             {/* <Button className="gg-btn-blue">Submit</Button> */}
             <Link to={routeConstants.idMappingResult}>
               {" "}
-              <Button className="gg-btn-blue" onClick={idMapSearch}>
+              <Button className="gg-btn-blue" onClick={idMapSearchOnClick}>
                 Submit
               </Button>
             </Link>
