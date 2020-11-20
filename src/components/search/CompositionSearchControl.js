@@ -14,6 +14,9 @@ import SelectControl from '../select/SelectControl';
 import glycanSearchData from '../../data/json/glycanSearch';
 import '../../css/Search.css';
 
+/**
+ * Composition search control for glycan search.
+ */
 export default function CompositionSearchControl(props) {
 	let compositionSearch = glycanSearchData.composition_search;
 
@@ -24,6 +27,9 @@ export default function CompositionSearchControl(props) {
 	const [undoDisabled, setUndoDisabled] = useState(true);
 	const [searchDisabled, setSearchDisabled] = useState(true);
 
+	/**
+	 * Function to handle min input change event.
+	 */
 	const minInputChange = (event) => {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		let comp = {
@@ -34,6 +40,9 @@ export default function CompositionSearchControl(props) {
 		props.setInputValue({ [event.target.name]: comp });
 	};
 
+	/**
+	 * Function to handle max input change event.
+	 */
 	const maxInputChange = (event) => {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		let comp = {
@@ -50,7 +59,7 @@ export default function CompositionSearchControl(props) {
 	 * @param {object} min_val - min value control.
 	 * @param {object} max_val - max value control.
 	 * @param {string} residue - residue id.
-	 * */
+	 **/
 	function onSelControlChange(sel_control_value, min_val, max_val, residue) {
 		compSearchRedoReset();
 		saveResidueStateToUndoList(
@@ -107,7 +116,7 @@ export default function CompositionSearchControl(props) {
 	 * @param {object} inputMax - max value.
 	 * @param {object} selOption - select option.
 	 * @param {string} residue - residue.
-	 * */
+	 **/
 	function onResidueMinMoveOut(
 		inputMin,
 		inputMax,
@@ -185,7 +194,7 @@ export default function CompositionSearchControl(props) {
 	 * @param {string} inputMin - min value.
 	 * @param {string} selOption - select value.
 	 * @param {string} residue - residue.
-	 * */
+	 **/
 	function onResidueMaxMoveOut(
 		inputMax,
 		inputMin,
@@ -264,9 +273,10 @@ export default function CompositionSearchControl(props) {
 	/**
 	 * saveResidueStateToUndoList saves residue state to undo list.
 	 * @param {string} residue - residue id.
+	 * @param {string} selOption - select option.
 	 * @param {int} min - min value.
 	 * @param {int} max - max value.
-	 * */
+	 **/
 	function saveResidueStateToUndoList(residue, selOption, min, max) {
 		var sel_residue = props.compositionInitMap.filter(function (res) {
 			return residue === res.residue;
@@ -295,7 +305,7 @@ export default function CompositionSearchControl(props) {
 	/**
 	 * saveCurrentResidueStatesToUndoList saves current residue states to undo list.
 	 *  * @param {array} updated_res_list - residue list.
-	 */
+	 **/
 	function saveCurrentResidueStatesToUndoList(updated_res_list) {
 		let compositionStateData = JSON.parse(JSON.stringify(props.inputValue));
 		let undoResStack = undoStack;
@@ -312,7 +322,7 @@ export default function CompositionSearchControl(props) {
 	 * @param {object} minVal - min value.
 	 * @param {object} maxVal - max value.
 	 * @param {string} residue - residue id.
-	 * */
+	 **/
 	function onMinMaxFocus(selOption, minVal, maxVal, residue) {
 		let undoResidue = {
 			residue: residue,
@@ -326,7 +336,7 @@ export default function CompositionSearchControl(props) {
 	/**
 	 * compSearchUndoRedo undo or redo button handler.
 	 * @param {string} option specifies "undo" or "redo" option.
-	 */
+	 **/
 	function compSearchUndoRedo(option) {
 		var pre_state = undefined;
 		var cur_state = undefined;
@@ -374,7 +384,7 @@ export default function CompositionSearchControl(props) {
 
 	/**
 	 * compSearchRedoReset resets redo list.
-	 */
+	 **/
 	function compSearchRedoReset() {
 		while (redoStack.length > 0) {
 			redoStack.pop();
@@ -387,8 +397,9 @@ export default function CompositionSearchControl(props) {
 
 	/**
 	 * compSearchStateChanged checks if current residue states are changed compared to values in residue list.
-	 * @param {array} residue_state_list - residue list.
-	 * */
+	 * @param {array} compositionData - new residue list.
+	 * @param {array} inputCompStateData - current residue list.
+	 **/
 	function compSearchStateChanged(compositionData, inputCompStateData) {
 		var stateChanged = false;
 
@@ -419,6 +430,9 @@ export default function CompositionSearchControl(props) {
 		return stateChanged;
 	}
 
+	/**
+	 * Sets all options to yes.
+	 **/
 	const allYes = () => {
 		var compositionData = JSON.parse(JSON.stringify(props.inputValue));
 
@@ -436,6 +450,9 @@ export default function CompositionSearchControl(props) {
 		setSearchDisabled(false);
 	};
 
+	/**
+	 * Sets all options to no.
+	 **/
 	const allNo = () => {
 		var compositionData = JSON.parse(JSON.stringify(props.inputValue));
 
@@ -453,6 +470,9 @@ export default function CompositionSearchControl(props) {
 		setSearchDisabled(true);
 	};
 
+	/**
+	 * Returns true if all options are no.
+	 **/
 	const allNoTrue = (inputCompStateData) => {
 		var compositionData = JSON.parse(JSON.stringify(props.inputValue));
 
@@ -468,6 +488,9 @@ export default function CompositionSearchControl(props) {
 		return true;
 	};
 
+	/**
+	 * Sets all options to maybe.
+	 **/
 	const allMaybe = () => {
 		var compositionData = JSON.parse(JSON.stringify(props.inputValue));
 

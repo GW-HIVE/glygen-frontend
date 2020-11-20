@@ -33,6 +33,10 @@ import Siteview from "./pages/Siteview";
 import IdMapping from "./pages/IdMapping";
 import idMappingResult from "./pages/IdMappingResult";
 
+/**
+ * Defines route path for Glygen. Use routeConstants from routeConstants.json.
+ * Do not use direct url paths.
+ */
 const Routes = (props) => (
   <Switch>
     <Route path={`${routeConstants.glycanListEdit}:id`} component={GlycanListEditColumns} />

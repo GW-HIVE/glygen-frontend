@@ -18,28 +18,51 @@ import '../../css/Search.css';
 import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
 
-
+/**
+ * Glycan advanced search control.
+ **/
 const GlycanAdvancedSearch = (props) => {
     let commonGlycanData = stringConstants.glycan.common;
     let advancedSearch = glycanSearchData.advanced_search;
 
+	/**
+	 * Function to set organism value.
+	 * @param {string} org - organism value.
+	 **/
 	function glyOrgChange(org) {
 		props.setGlyAdvSearchData({ glyOrganisms: org });
 	}
 
+	/**
+	 * Function to set organism operation value.
+	 * @param {string} value - operation value.
+	 **/
 	const glyOrgOperationOnChange = (value) => {
 		props.setGlyAdvSearchData({ glyOrgOperation: value });
 	}
 
+	/**
+	 * Function to set organism annotation category value.
+	 * @param {string} value - organism annotation category value.
+	 **/
 	const glyOrgAnnotationCatChange = (value) => {
 		props.setGlyAdvSearchData({ glyOrgAnnotationCat: value });
 	}
 
+	/**
+	 * Function to set mass type value.
+	 * @param {string} value - mass type value.
+	 **/
 	const glyMassTypeOnChange = (value) => {
 		props.setGlyAdvSearchData({ glyMassType: value });
 		setMassValues(value, props.inputValue.glyMass);
 	}
 
+	/**
+	 * Function to set mass values based on mass type and given mass values.
+	 * @param {string} massType - mass type value.
+	 * @param {array} massValues - min and max mass values.
+	 **/
 	const setMassValues = (massType, massValues) => {
 		var perMet_mass_min = Math.floor(
 			props.initData.glycan_mass.permethylated.min
@@ -84,22 +107,42 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyMass: [minval, maxval] });
     };
 
+	/**
+	 * Function to set min, max mass values.
+	 * @param {array} inputMass - input mass values.
+	 **/
     function glyMassInputChange(inputMass) {
         props.setGlyAdvSearchData({ glyMassInput: inputMass })
     }
-    
+	
+	/**
+	 * Function to set min, max mass values based on slider position.
+	 * @param {array} inputMass - input mass values.
+	 **/
     function glyMassSliderChange(inputMass) {
         props.setGlyAdvSearchData({ glyMass: inputMass })
     }
-    
+	
+	/**
+	 * Function to set min, max sugar values.
+	 * @param {array} inputNumSugars - input sugar values.
+	 **/
     function glyNumSugarsInputChange(inputNumSugars) {
         props.setGlyAdvSearchData({ glyNumSugarsInput: inputNumSugars })
     }
-    
+	
+	/**
+	 * Function to set min, max sugar values based on slider position.
+	 * @param {array} inputNumSugars - input sugar values.
+	 **/
     function glyNumSugarsSliderChange(inputNumSugars) {
         props.setGlyAdvSearchData({ glyNumSugars: inputNumSugars })
     }
 
+	/**
+	 * Function to set glycan type value.
+	 * @param {string} value - input glycan type value.
+	 **/
 	const glyTypeOnChange = (value) => {
 		if (value === '')
 			props.setGlyAdvSearchData({ glySubTypeIsHidden: true });
@@ -109,50 +152,85 @@ const GlycanAdvancedSearch = (props) => {
 		props.setGlyAdvSearchData({ glyType: value });
 	}
 
+	/**
+	 * Function to set glycan sub type value.
+	 * @param {string} value - input glycan sub type value.
+	 **/
 	const glySubTypeOnChange = (value) => {
 		props.setGlyAdvSearchData({ glySubType: value });
 	}
 
+	/**
+	 * Function to set glycan id value.
+	 * @param {string} inputGlycanId - input glycan id value.
+	 **/
 	function glycanIdChange(inputGlycanId) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[0] = inputGlycanId.length > advancedSearch.glycan_identifier.length;
 		props.setGlyAdvSearchData({ glycanId: inputGlycanId, glyAdvSearchValError: valArr });
 	}
 
-	function glycanIdSubsumtionChange(inputGlycanIdSubsumption) {
+	/**
+	 * Function to set glycan id subsumption value.
+	 * @param {string} inputGlycanIdSubsumption - input glycan id subsumption value.
+	 **/
+	function glycanIdSubsumptionChange(inputGlycanIdSubsumption) {
 		props.setGlyAdvSearchData({ glycanIdSubsumption: inputGlycanIdSubsumption });
 	}
 
+	/**
+	 * Function to set glycosylated protein id value.
+	 * @param {string} inputGlyProt - input glycosylated protein id value.
+	 **/
 	function glyProtChange(inputGlyProt) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[1] = inputGlyProt.length > advancedSearch.protein_identifier.length;
 		props.setGlyAdvSearchData({ glyProt: inputGlyProt, glyAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set motif value.
+	 * @param {string} inputGlyMotif - input motif value.
+	 **/
 	function glyMotifChange(inputGlyMotif) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[2] = inputGlyMotif.length > advancedSearch.glycan_motif.length;
 		props.setGlyAdvSearchData({ glyMotif: inputGlyMotif, glyAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set biosynthetic enzyme value.
+	 * @param {string} inputGlyBioEnz - input biosynthetic enzyme value.
+	 **/
 	function glyBioEnzChange(inputGlyBioEnz) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[3] = inputGlyBioEnz.length > advancedSearch.enzyme.length;
 		props.setGlyAdvSearchData({ glyBioEnz: inputGlyBioEnz, glyAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set pubmed id value.
+	 * @param {string} inputGlyPubId - input pubmed id value.
+	 **/
 	function glyPubIdChange(inputGlyPubId) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[4] = inputGlyPubId.length > advancedSearch.pmid.length;
 		props.setGlyAdvSearchData({ glyPubId: inputGlyPubId, glyAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to set binding protein id value.
+	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 **/
 	function glyBindingProteinIdChange(inputGlyBindingIdProtein) {
 		let valArr = props.inputValue.glyAdvSearchValError;
 		valArr[5] = inputGlyBindingIdProtein.length > advancedSearch.binding_protein_id.length;
 		props.setGlyAdvSearchData({ glyBindingProteinId: inputGlyBindingIdProtein, glyAdvSearchValError: valArr });
 	}
 
+	/**
+	 * Function to clear input field values.
+	 **/
 	const clearGlycan = () => {
 		props.setGlyAdvSearchData({
 			glycanId: '',
@@ -263,7 +341,7 @@ const GlycanAdvancedSearch = (props) => {
 									<SelectControl
 										inputValue={props.inputValue.glycanIdSubsumption}
 										menu={advancedSearch.glycan_identifier.subsumption}
-										setInputValue={glycanIdSubsumtionChange}
+										setInputValue={glycanIdSubsumptionChange}
 									/>
 								</FormControl>
 							</Grid>

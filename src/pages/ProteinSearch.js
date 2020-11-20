@@ -23,6 +23,9 @@ import {
 import FeedbackWidget from "../components/FeedbackWidget";
 import ProteinTutorial from "../components/tutorial/ProteinTutorial";
 
+/**
+ * Protein search component for showing protein search tabs.
+ */
 const ProteinSearch = (props) => {
 	let { id } = useParams("");
 	const [initData, setInitData] = useState({});
@@ -88,6 +91,9 @@ const ProteinSearch = (props) => {
 	let proteinData = stringConstants.protein;
 	let commonProteinData = proteinData.common;
 
+	/**
+	 * useEffect for retriving data from api and showing page loading effects.
+	 */
 	useEffect(() => {
 		setPageLoading(true);
 		logActivity();
@@ -254,6 +260,9 @@ const ProteinSearch = (props) => {
 			});
 	}, [id, proteinData]);
 
+	/**
+	 * Function to handle protein simple search.
+	 **/
 	const proteinSimpleSearch = () => {
 		var formjsonSimple = {
 			[commonProteinData.operation.id]: "AND",
@@ -298,8 +307,8 @@ const ProteinSearch = (props) => {
 	 * @param {string} input_query_type query search
 	 * @param {string} input_protein_id user protein input
 	 * @param {string} input_refseq_id user input
-	 * @param {string} input_mass_min user mass min input
-	 * @param {string} input_mass_max user mass max input
+	 * @param {number} input_mass_min user mass min input
+	 * @param {number} input_mass_max user mass max input
 	 * @param {string} input_organism organism input
 	 * @param {string} input_protein_name user input
 	 * @param {string} input_gene_name user input
@@ -427,6 +436,9 @@ const ProteinSearch = (props) => {
 		return formjson;
 	}
 
+	/**
+	 * Function to handle protein advanced search.
+	 **/
 	const proteinAdvSearch = () => {
 		let formObject = searchJson(
 			proteinData.advanced_search.query_type.name,
@@ -483,11 +495,17 @@ const ProteinSearch = (props) => {
 			});
 	};
 
+	/**
+	 * Function to handle click event for protein advanced search.
+	 **/
 	const searchProteinAdvClick = () => {
 		setPageLoading(true);
 		proteinAdvSearch();
 	};
 
+	/**
+	 * Function to handle click event for protein simple search.
+	 **/
 	const searchProteinSimpleClick = () => {
 		setPageLoading(true);
 		proteinSimpleSearch();

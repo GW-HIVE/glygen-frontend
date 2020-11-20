@@ -1,6 +1,12 @@
 import axios from "axios";
 import { GLYGEN_API } from "../envVariables";
 
+
+/**
+ * Gets JSON from REST api call.
+ * @param {string} url - url for REST api call.
+ * @param {string} headers - header for REST api call.
+ */
 export const getJson = (url, headers = {}) => {
   return axios.get(GLYGEN_API + url, {
     headers

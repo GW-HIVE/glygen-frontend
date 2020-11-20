@@ -13,6 +13,9 @@ import Button from "react-bootstrap/Button";
 import ExampleExploreControl from "../example/ExampleExploreControl";
 import stringConstants from "../../data/json/stringConstants";
 
+/**
+ * Quick search control for protein usecases.
+ */
 const SearchByProtein = props => {
   let quickSearch = stringConstants.quick_search;
   let searchByProtein = quickSearchData.searchByProtein;

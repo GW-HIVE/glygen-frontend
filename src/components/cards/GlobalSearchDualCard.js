@@ -10,6 +10,9 @@ import RouteLink from '../Link/RouteLink.js'
 import {sortDropdown} from '../../utils/common';
 import "../../css/Search.css";
 
+/**
+ * Global search card component to show two types of search results on the card.
+ */
 export default function GlobalSearchDualCard(props) {
 
 	return (

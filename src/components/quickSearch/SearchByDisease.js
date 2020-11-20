@@ -13,6 +13,9 @@ import TextAlert from "../alert/TextAlert";
 import ExampleExploreControl from "../example/ExampleExploreControl";
 import stringConstants from "../../data/json/stringConstants";
 
+/**
+ * Quick search control for disease usecases.
+ */
 const SearchByGlycan = props => {
   let quickSearch = stringConstants.quick_search;
   let searchByDisease = quickSearchData.searchByDisease;

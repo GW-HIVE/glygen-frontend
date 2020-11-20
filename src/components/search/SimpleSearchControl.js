@@ -10,12 +10,23 @@ import ExampleControl from "../example/ExampleControl";
 import SelectControl from '../select/SelectControl';
 import '../../css/Search.css';
 
+/**
+ * Simple search control for protein search and glycan search
+ */
 export default function SimpleSearchControl(props) {
 
+	/**
+	 * Function to set simple search term value.
+	 * @param {string} value - input simple search term value.
+	 **/
 	const simpleSearchCategoryOnChange = (value) => {
 		props.setSimpleSearchCategory(value);
 	}
 
+	/**
+	 * Function to handle onchange event for simple search term.
+	 * @param {object} event - event object.
+	 **/
 	const simpleSearchTermOnChange = (event) => {
 		props.setSimpleSearchTerm(event.target.value);
 	}

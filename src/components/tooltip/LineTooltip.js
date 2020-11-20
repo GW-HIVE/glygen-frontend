@@ -3,6 +3,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 
+/**
+ * LineTooltip component for showing one line text.
+ */
 const LineTooltip = (props) => {
     return(
     <Tooltip

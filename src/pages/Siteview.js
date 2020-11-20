@@ -123,7 +123,10 @@ const SequenceLocationViewer = ({
       const atPosition = all.find(x => x.position === current.position);
 
       if (!atPosition) {
-        result.push(current);
+        const item = { ...current, allTypes: [current.typeAnnotate] };
+        result.push(item);
+      } else if (!atPosition.allTypes.includes(current.typeAnnotate)) {
+        atPosition.allTypes.push(current.typeAnnotate);
       }
 
       return result;
@@ -208,7 +211,7 @@ const SequenceLocationViewer = ({
           >
             {filteredAnnotations.map(annotation => (
               <option key={annotation.key} value={annotation.position}>
-                {annotation.key}: {annotation.typeAnnotate}....
+                {annotation.key}: {annotation.allTypes.join(", ")}
               </option>
             ))}
           </select>

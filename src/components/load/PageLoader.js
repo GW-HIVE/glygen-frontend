@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Backdrop from "@material-ui/core/Backdrop";
 import LoadingImage from "../../images/page_loading.gif";
 
+/**
+ * Component to display loading image on page while data is being retrieved.
+ **/
 export default function PageLoader(props) {
 
   return (
