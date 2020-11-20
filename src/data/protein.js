@@ -16,7 +16,7 @@ export const getProteinList = (
   protienListId,
   offset = 1,
   limit = 20,
-  sort = undefined,
+  sort = "hit_score",
   order = "asc"
 ) => {
   const queryParams = {
@@ -83,6 +83,14 @@ export const PROTEIN_COLUMNS = [
   {
     dataField: proteinStrings.protein_names.shortName,
     text: proteinStrings.protein_names.name,
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
+  {
+    dataField: "hit_score",
+    text: "Hit Score",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
