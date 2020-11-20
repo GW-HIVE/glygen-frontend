@@ -491,6 +491,15 @@
         },
         "id": "protein_names"
       },
+      "glycosylation_type": {
+        "name": "Glycosylation Type",
+        "shortName": "Glycosylation Type",
+        "tooltip": {
+          "title": "Glycosylation Type",
+          "text": "Click to select Glycosylation Type."
+        },
+        "id": "glycosylation_type"
+      },
       "gene_url": {
         "name": "URL",
         "shortName": "url",
