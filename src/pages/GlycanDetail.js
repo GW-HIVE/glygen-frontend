@@ -36,6 +36,7 @@ import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
@@ -143,7 +144,7 @@ const GlycanDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
-  const [recordHistory, setRecordHistory] = useState(null);
+  const [nonExistent, setNonExistent] = useState(null);
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
@@ -186,11 +187,13 @@ const GlycanDetail = props => {
         response.data.error_list &&
         response.data.error_list.length &&
         response.data.error_list[0].error_code &&
-        response.data.error_list[0].error_code === "non-existent-record" &&
-        response.data.history
+        response.data.error_list[0].error_code === "non-existent-record"
       ) {
         // history = response.data.history;
-        setRecordHistory(response.data.history);
+        setNonExistent({
+          error_code: response.data.error_list[0].error_code,
+          history: response.data.history
+        });
       } else {
         let message = "Glycan Detail api call";
         axiosError(response, id, message, setPageLoading, setAlertDialogInput);
@@ -495,6 +498,8 @@ const GlycanDetail = props => {
   }
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
+
+  // const ToggleIcon = ({open}) => open ? <ExpandLessIcon fontSize="large" /> : <ExpandMoreIcon fontSize="large" />
   // ===================================== //
 
   /**
@@ -509,13 +514,20 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
-  if (recordHistory) {
+  if (nonExistent) {
     return (
-      <>
-        {recordHistory.map(item => (
-          <p>{item} Click here </p>
-        ))}
-      </>
+      <Alert severity="error">
+        <AlertTitle>This Glycan Record is Non existent</AlertTitle>
+        {nonExistent.history && nonExistent.history.length && (
+          <ul>
+            {nonExistent.history.map(item => (
+              <span className="recordInfo">
+                <li>{item.description}</li>
+              </span>
+            ))}
+          </ul>
+        )}
+      </Alert>
     );
   }
 
