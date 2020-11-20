@@ -82,11 +82,11 @@
         "id": "number_monosaccharides"
       },
       "number_proteins": {
-        "name": "On How Many GlycoProteins",
-        "shortName": "GlycoProteins",
+        "name": "On How Many Glycoproteins",
+        "shortName": "Glycoproteins",
         "tooltip": {
-          "title": "GlycoProteins",
-          "text": "how many glycoproteins GlycoProteins"
+          "title": "Glycoproteins",
+          "text": "how many glycoproteins Glycoproteins"
         },
         "id": "number_proteins"
       },
