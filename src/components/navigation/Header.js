@@ -161,6 +161,9 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.proteinSearch}>
                   Protein Search
                 </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={routeConstants.superSearch}>
+                  Super Search
+                </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
                   List of Motifs
                 </NavDropdown.Item>

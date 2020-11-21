@@ -1,0 +1,233 @@
+{
+	"nodes": [
+        {
+			"id": "id_Organism",
+			"name": "Organism",
+			"group": 1,
+			"x": 50,
+			"y": 50,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+        },
+        {
+			"id": "id_Gene",
+			"name": "Gene",
+			"group": 1,
+			"x": 50,
+			"y": 150,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+        },
+        {	
+			"id": "id_Glycan",
+			"name": "Glycan",
+			"group": 1,
+			"x": 330,
+			"y": 150,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+        },
+        {
+			"id": "id_Protein",
+			"name": "Protein",
+			"group": 1,
+			"x": 330,
+			"y": 250,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+        },
+        {
+			"id": "id_Disease",
+			"name": "Disease",
+			"group": 1,
+			"x": 50,
+			"y": 250,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+		},
+		{
+			"id": "id_Motif",
+			"name": "Motif",
+			"group": 1,
+			"x": 330,
+			"y": 50,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+		},
+		{
+			"id": "id_Enzyme",
+			"name": "Enzyme",
+			"group": 1,
+			"x": 610,
+			"y": 250,
+			"fixed": true,
+            "nodecol": "#0F9D58"
+		},
+		{
+			"id": "id_Site",
+			"name": "Site",
+			"group": 1,
+			"x": 610,
+			"y": 150,
+			"fixed": true,
+			"nodecol": "#0F9D58"
+		}
+	],
+	"links": [{
+			"source": "id_Organism",
+			"target": "id_Gene",
+			"value": 6,
+			"group": 3,
+            "linkName": "has",
+            "x": 90,
+            "y": 94,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "id_Gene",
+			"target": "id_Disease",
+			"value": 10,
+			"group": 3,
+            "linkName": "related",
+            "x": 90,
+            "y": 204,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "id_Protein",
+			"target": "id_Glycan",
+			"value": 10,
+			"group": 3,
+            "linkName": "binding",
+            "x": 370,
+            "y": 200,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+        {
+			"source": "id_Organism",
+			"target": "id_Protein",
+			"value": 6,
+			"group": 3,
+            "linkName": "has",
+            "x": 245,
+            "y": 120,
+            "rotate": 35,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "id_Organism",
+			"target": "id_Glycan",
+			"value": 6,
+			"group": 3,
+            "linkName": "is-in",
+            "x": 245,
+            "y": 80,
+            "rotate": 20,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0 
+        },
+        {
+			"source": "id_Disease",
+			"target": "id_Protein",
+			"value": 10,
+			"group": 3,
+            "linkName": "related",
+            "x": 250,
+            "y": 235,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "id_Gene",
+			"target": "id_Protein",
+			"value": 10,
+			"group": 3,
+            "linkName": "encodes",
+            "x": 245,
+            "y": 180,
+            "rotate": 20,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+		{
+			"source": "id_Glycan",
+			"target": "id_Motif",
+			"value": 10,
+			"group": 3,
+            "linkName": "has",
+            "x": 370,
+            "y": 94,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+			"source": "id_Glycan",
+			"target": "id_Site",
+			"value": 10,
+			"group": 3,
+            "linkName": "may-have",
+            "x": 550,
+            "y": 135,
+            "rotate": 0,
+            "dasharray": 10,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+            "source": "id_Enzyme",
+			"target": "id_Glycan",
+			"value": 10,
+			"group": 3,
+            "linkName": "synthesizes",
+            "x": 520,
+            "y": 175,
+            "rotate": 20,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": -10
+        },
+        {
+			"source": "id_Protein",
+			"target": "id_Enzyme",
+			"value": 10,
+			"group": 3,
+            "linkName": "is-a",
+            "x": 550,
+            "y": 235,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+            "source": "id_Protein",
+			"target": "id_Site",
+			"value": 10,
+			"group": 3,
+            "linkName": "has",
+            "x": 575,
+            "y": 170,
+            "rotate": -20,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": -5
+        }
+	]
+  }

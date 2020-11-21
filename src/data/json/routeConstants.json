@@ -29,6 +29,7 @@
   "siteview": "/Siteview/",
   "motifList": "/list-of-motifs/",
   "motifDetail": "/motif/",
+  "superSearch": "/super-search/",
   "home": "/home/",
   "default": "/"
 }

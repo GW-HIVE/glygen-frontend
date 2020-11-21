@@ -156,3 +156,8 @@ input[type="number"] {
 .qs-search-lbl {
   font-weight: bold !important;
 }
+
+.node, .node-text {
+  cursor: pointer  !important;
+}
+
