@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import '../../css/Search.css';
 import stringConstants from '../../data/json/stringConstants';
 import { load } from 'data-loader';
-import global_var from '../../data/json/data';
 import {select, selectAll, forceSimulation, forceManyBody, forceLink } from 'd3';
 
 
