@@ -36,6 +36,7 @@ import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
@@ -143,12 +144,16 @@ const GlycanDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
+  const [nonExistent, setNonExistent] = useState(null);
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+
+  let history;
+
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
@@ -163,6 +168,7 @@ const GlycanDetail = props => {
         setItemsCrossRef(getItemsCrossRef(data));
 
         setDetailData(data);
+
         setPageLoading(false);
       }
 
@@ -176,8 +182,22 @@ const GlycanDetail = props => {
       }, 500);
     });
     getGlycanDetailData.catch(({ response }) => {
-      let message = "Glycan Detail api call";
-      axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+      if (
+        response.data &&
+        response.data.error_list &&
+        response.data.error_list.length &&
+        response.data.error_list[0].error_code &&
+        response.data.error_list[0].error_code === "non-existent-record"
+      ) {
+        // history = response.data.history;
+        setNonExistent({
+          error_code: response.data.error_list[0].error_code,
+          history: response.data.history
+        });
+      } else {
+        let message = "Glycan Detail api call";
+        axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+      }
     });
     // eslint-disable-next-line
   }, []);
@@ -478,6 +498,8 @@ const GlycanDetail = props => {
   }
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
+
+  // const ToggleIcon = ({open}) => open ? <ExpandLessIcon fontSize="large" /> : <ExpandMoreIcon fontSize="large" />
   // ===================================== //
 
   /**
@@ -492,8 +514,26 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
+  if (nonExistent) {
+    return (
+      <Alert severity="error">
+        <AlertTitle>This Glycan Record is Non existent</AlertTitle>
+        {nonExistent.history && nonExistent.history.length && (
+          <ul>
+            {nonExistent.history.map(item => (
+              <span className="recordInfo">
+                <li>{item.description}</li>
+              </span>
+            ))}
+          </ul>
+        )}
+      </Alert>
+    );
+  }
+
   return (
     <>
+      {}
       <Row className="gg-baseline">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
           <Sidebar items={items} />
