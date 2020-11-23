@@ -115,6 +115,16 @@
 					"url": "https://www.ebi.ac.uk/about/people/preethi-vasudev"
 				},
 				{
+					"name": "Gareth Owen",
+					"position": "Technical Expert",
+					"department": "Protein Function Development",
+					"institution": "EMBL-EBI",
+					"location": "Hinxton, Cambridgeshire, UK",
+					"image": "/team/Gareth-Owen.jpg",
+					"imageText": "Gareth Owen image",
+					"url": "https://www.ebi.ac.uk/about/people/gareth-owen"
+				},
+				{
 					"name": "Evan Bolton",
 					"position": "",
 					"department": "",
