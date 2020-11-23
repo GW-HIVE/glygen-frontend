@@ -17,7 +17,7 @@
   .gg-footer {
     padding: 15px 0;
   }
-  .img-responsive {
+  .img-fluid {
     width: 100% !important;
   }
 }
@@ -35,7 +35,7 @@
   .gg-footer {
     padding: 15px 0;
   }
-  .img-responsive {
+  .img-fluid {
     width: 100% !important;
   }
   .gg-protvista-container {
@@ -106,7 +106,7 @@
     padding: 55px 30px;
     margin-bottom: 35px;
   }
-  .img-responsive {
+  .img-fluid {
     width: 100% !important;
   }
   .framework,
