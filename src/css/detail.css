@@ -15,7 +15,9 @@
   overflow-x: "scroll";
   white-space: pre-line;
 }
-
+.tab-content-border2 {
+  padding-top: 30px;
+}
 .page-item.active .page-link {
   background-color: white;
 }

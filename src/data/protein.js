@@ -22,9 +22,9 @@ export const getProteinList = (
   const queryParams = {
     id: protienListId,
     offset: offset,
-    // sort: sort,
     limit: limit,
-    order: order
+    order: order,
+    sort: sort
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/protein/list?query=${queryParamString}`;

@@ -8,7 +8,7 @@ const ClientPaginatedTable = props => {
     columns,
     defaultSizePerPage = 20,
     defaultSortField = "",
-    defaultSortOrder = "asc",
+    defaultSortOrder = "desc",
     onClickTarget,
     idField
   } = props;

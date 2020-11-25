@@ -188,7 +188,7 @@ const GlycanList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              defaultSortField="glytoucan_ac"
+              defaultSortField="hit_score"
               idField="glytoucan_ac"
             />
           )}

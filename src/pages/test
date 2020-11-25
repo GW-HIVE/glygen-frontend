@@ -37,7 +37,7 @@ import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import { Tab, Tabs, Container } from "react-bootstrap";
+
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 const motifStrings = stringConstants.motif.common;
@@ -516,20 +516,18 @@ const GlycanDetail = props => {
 
   if (nonExistent) {
     return (
-      <Container className="tab-content-border2">
-        <Alert className="erroralert" severity="error">
-          <AlertTitle>This Glycan {id} Record is No longer valid</AlertTitle>
-          {nonExistent.history && nonExistent.history.length && (
-            <ul>
-              {nonExistent.history.map(item => (
-                <span className="recordInfo">
-                  <li>{item.description}</li>
-                </span>
-              ))}
-            </ul>
-          )}
-        </Alert>
-      </Container>
+      <Alert severity="error">
+        <AlertTitle>This Glycan Record is Non existent</AlertTitle>
+        {nonExistent.history && nonExistent.history.length && (
+          <ul>
+            {nonExistent.history.map(item => (
+              <span className="recordInfo">
+                <li>{item.description}</li>
+              </span>
+            ))}
+          </ul>
+        )}
+      </Alert>
     );
   }
 
