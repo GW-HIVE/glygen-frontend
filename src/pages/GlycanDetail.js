@@ -514,19 +514,35 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
+  // <CustomAlert title={`This Glycan ${id} Record is nonExistent`}>
+  //   <ul>
+  //     {nonExistent.history.map(item => (
+  //       <span className="recordInfo">
+  //         <li>{item.description}</li>
+  //       </span>
+  //     ))}
+  //   </ul>
+  // </CustomAlert>
+
   if (nonExistent) {
     return (
       <Container className="tab-content-border2">
         <Alert className="erroralert" severity="error">
-          <AlertTitle>This Glycan {id} Record is No longer valid</AlertTitle>
-          {nonExistent.history && nonExistent.history.length && (
-            <ul>
-              {nonExistent.history.map(item => (
-                <span className="recordInfo">
-                  <li>{item.description}</li>
-                </span>
-              ))}
-            </ul>
+          {nonExistent.history && nonExistent.history.length ? (
+            <>
+              <AlertTitle>This Glycan {id} Record is Nonexistent</AlertTitle>
+              <ul>
+                {nonExistent.history.map(item => (
+                  <span className="recordInfo">
+                    <li>{item.description}</li>
+                  </span>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <AlertTitle>This Glycan {id} Record is not valid</AlertTitle>
+            </>
           )}
         </Alert>
       </Container>
