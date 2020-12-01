@@ -53,9 +53,9 @@ const WorldMapImg = (props) => {
               <span>
                 <strong>Australia</strong>
                 <br />
-                Gold Coast, Queensland
+                Sydney,
                 <br />
-                Sydney, Australia
+                Queensland (Gold Coast)
               </span>
             </a>
           </li>
