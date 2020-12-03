@@ -80,6 +80,10 @@ const items = [
     label: stringConstants.sidebar.ptm_annotation.displayname,
     id: "PTM-Annotation"
   },
+  {
+    label: stringConstants.sidebar.pro_annotation.displayname,
+    id: "Proteoform-Annotation"
+  },
   { label: stringConstants.sidebar.pathway.displayname, id: "Pathway" },
   {
     label: stringConstants.sidebar.synthesized_glycans.displayname,
@@ -230,6 +234,7 @@ const ProteinDetail = props => {
   let glycosylationWithoutImage;
   let mutataionTabSelected;
   let ptmAnnotation;
+  let proAnnotation;
   let mutataionWithdisease;
   let mutataionWithoutdisease;
   const [pageLoading, setPageLoading] = useState(true);
@@ -413,6 +418,12 @@ const ProteinDetail = props => {
     );
     ptmAnnotation(ptmEvidence);
   }
+  if (detailData.pro_annotation) {
+    const proEvidence = detailData.pro_annotation.filter(
+      item => item.annotation
+    );
+    proAnnotation(proEvidence);
+  }
 
   const {
     mass,
@@ -433,6 +444,7 @@ const ProteinDetail = props => {
     sequence,
     go_annotation,
     ptm_annotation,
+    pro_annotation,
     synthesized_glycans,
     site_annotation,
     protein_names,
@@ -1148,6 +1160,47 @@ const ProteinDetail = props => {
       }
     }
   ];
+
+  const proAnnotationColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white",
+          width: "20%"
+        };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList key={row.annotation} evidences={groupEvidences(cell)} />
+        );
+      }
+    },
+    {
+      dataField: "name",
+      text: proteinStrings.annotation_site.shortName,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    },
+    {
+      dataField: "definition",
+      text: proteinStrings.annotation_site.shortName,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      }
+    }
+  ];
   // ==================================== //
   /**
    * Adding toggle collapse arrow icon to card header individualy.
@@ -1165,6 +1218,7 @@ const ProteinDetail = props => {
       glycanLigands: true,
       go_annotation: true,
       ptm_annotation: true,
+      pro_annotation: true,
       glycosylation: true,
       sequence: true,
       pathway: true,
@@ -2304,6 +2358,60 @@ const ProteinDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+              {/*  Proteoform-Annotation */}
+              <Accordion
+                id="Proteoform-Annotation"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.protein.proannotation.title}
+                        text={DetailTooltips.protein.proannotation.text}
+                        urlText={DetailTooltips.protein.proannotation.urlText}
+                        url={DetailTooltips.protein.proannotation.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.pro_annotation.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse(
+                            "ptm_annotation",
+                            collapsed.ptm_annotation
+                          )
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.pro_annotation ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {pro_annotation && pro_annotation.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={proAnnotation}
+                          columns={proAnnotationColumns}
+                          onClickTarget={"#pro_annotation"}
+                          // defaultSortField={"annotation"}
+                        />
+                      )}
+                      {!pro_annotation && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/*  Pathway */}
               <Accordion
                 id="Pathway"
