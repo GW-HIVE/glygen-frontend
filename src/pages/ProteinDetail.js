@@ -234,7 +234,6 @@ const ProteinDetail = props => {
   let glycosylationWithoutImage;
   let mutataionTabSelected;
   let ptmAnnotation;
-  let proAnnotation;
   let mutataionWithdisease;
   let mutataionWithoutdisease;
   const [pageLoading, setPageLoading] = useState(true);
@@ -418,12 +417,6 @@ const ProteinDetail = props => {
     );
     ptmAnnotation(ptmEvidence);
   }
-  if (detailData.pro_annotation) {
-    const proEvidence = detailData.pro_annotation.filter(
-      item => item.annotation
-    );
-    proAnnotation(proEvidence);
-  }
 
   const {
     mass,
@@ -513,7 +506,7 @@ const ProteinDetail = props => {
       }
       return disData;
     });
-    diseaseData(diseaseDataTemp);
+    diseaseData = diseaseDataTemp;
   }
 
   const organismEvidence = groupOrganismEvidences(species);
@@ -2400,7 +2393,7 @@ const ProteinDetail = props => {
                     <Card.Body>
                       {pro_annotation && pro_annotation.length !== 0 && (
                         <ClientPaginatedTable
-                          data={proAnnotation}
+                          data={pro_annotation}
                           columns={proAnnotationColumns}
                           onClickTarget={"#pro_annotation"}
                           // defaultSortField={"annotation"}

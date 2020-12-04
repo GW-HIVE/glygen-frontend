@@ -45,6 +45,11 @@ const motifStrings = stringConstants.motif.common;
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
   { label: stringConstants.sidebar.organism.displayname, id: "Organism" },
+
+  {
+    label: stringConstants.sidebar.names_synonyms.displayname,
+    id: "Names"
+  },
   { label: stringConstants.sidebar.motifs.displayname, id: "Motifs" },
   {
     label: stringConstants.sidebar.associated_glycan.displayname,
@@ -254,6 +259,7 @@ const GlycanDetail = props => {
     wurcs,
     enzyme,
     mass_pme,
+    names,
     tool_support
   } = detailData;
 
@@ -489,7 +495,8 @@ const GlycanDetail = props => {
       bioEnzyme: true,
       digitalSeq: true,
       crossref: true,
-      publication: true
+      publication: true,
+      names: true
     }
   );
 
@@ -616,6 +623,8 @@ const GlycanDetail = props => {
                   setAlertDialogInput({ show: input });
                 }}
               />
+
+              {/*  Function */}
               {/* general */}
               <Accordion
                 id="General"
@@ -876,6 +885,62 @@ const GlycanDetail = props => {
                           <p className="no-data-msg">No data available.</p>
                         )}
                       </Row>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
+              {/*  Names */}
+              <Accordion
+                id="Names"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.protein.names_synonyms.title}
+                        text={DetailTooltips.protein.names_synonyms.text}
+                        urlText={DetailTooltips.protein.names_synonyms.urlText}
+                        url={DetailTooltips.protein.names_synonyms.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.names_synonyms.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse(
+                            "names_synonyms",
+                            collapsed.names_synonyms
+                          )
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.names_synonyms ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {names && names.length ? (
+                        <ul>
+                          {names.map(nameObject => (
+                            <li>
+                              <b>{nameObject.domain}</b>:{nameObject.name}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>No data available.</p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
