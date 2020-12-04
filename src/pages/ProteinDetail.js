@@ -415,7 +415,7 @@ const ProteinDetail = props => {
     const ptmEvidence = detailData.ptm_annotation.filter(
       item => item.annotation
     );
-    ptmAnnotation(ptmEvidence);
+    ptmAnnotation = ptmEvidence;
   }
 
   const {
