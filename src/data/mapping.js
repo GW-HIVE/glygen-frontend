@@ -36,7 +36,7 @@ export const getMappingList = (
     order: order,
   };
   const queryParamString = JSON.stringify(queryParams);
-  const url = `/protein/list?query=${queryParamString}`;
+  const url = `/idmapping/list/?query=${queryParamString}`;
   return getJson(url);
 };
 
@@ -44,7 +44,7 @@ export const ID_MAPPING_RESULT = [
   {
     // dataField: mapStrings.shortName,
     // text: mapStrings.input_idlist.name,
-    dataField: "input_idlist",
+    dataField: "from",
     text: "From ID",
     sort: true,
     selected: true,
@@ -53,7 +53,7 @@ export const ID_MAPPING_RESULT = [
     },
   },
   {
-    dataField: "input_idlist2",
+    dataField: "anchor",
     text: "From ID",
     sort: true,
     headerStyle: (colum, colIndex) => {
@@ -62,7 +62,7 @@ export const ID_MAPPING_RESULT = [
   },
   {
     // dataField: "glycan_count",
-    dataField: "output_namespace",
+    dataField: "to",
     text: "To ID",
     sort: true,
     headerStyle: (colum, colIndex) => {
@@ -73,7 +73,7 @@ export const ID_MAPPING_RESULT = [
 export const ID_MAP_REASON = [
   {
     // dataField: "motif_ac",
-    dataField: "input_idlist",
+    dataField: "input_id",
     text: "IDs",
     sort: true,
     selected: true,
@@ -82,7 +82,7 @@ export const ID_MAP_REASON = [
     },
   },
   {
-    dataField: "input_idlist2",
+    dataField: "reason",
     text: "Reason",
     sort: true,
     headerStyle: (colum, colIndex) => {

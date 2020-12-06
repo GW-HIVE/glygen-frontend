@@ -1375,7 +1375,7 @@
   },
   "id_mapping": {
     "common": {
-       "molecule": {
+       "recordtype": {
         "name": "Molecule *",
         "tooltip": {
           "title": "Molecule",
@@ -1383,7 +1383,7 @@
         },
         "id": "recordtype"
       },
-       "from_id_type": {
+       "input_namespace": {
         "name": "From ID Type *",
         "tooltip": {
           "title": "From ID Type",
@@ -1391,7 +1391,7 @@
         },
         "id": "input_namespace"
       },
-       "to_id_type": {
+       "output_namespace": {
         "name": "To ID Type *",
         "tooltip": {
           "title": "To ID Type",
@@ -1399,7 +1399,7 @@
         },
         "id": "output_namespace"
       },
-      "id_entry": {
+      "input_idlist": {
          "name": "Enter IDs *",
           "tooltip": {
             "title": "Enter IDs",
@@ -1407,6 +1407,18 @@
           },
         "id": "input_idlist"
       } 
+    },
+    "category_mapped": {
+      "category": {
+        "id": "category",
+        "name": "mapped"
+      }
+    },
+     "category_unmapped": {
+      "category": {
+        "id": "category",
+        "name": "unmapped"
+      }
     }
   }
 }

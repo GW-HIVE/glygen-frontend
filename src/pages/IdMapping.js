@@ -26,12 +26,21 @@ import { Col } from "react-bootstrap";
 
 const IdMapping = (props) => {
   let { id } = useParams("");
+  // let { category } = useParams("");
   const [initData, setInitData] = useState({});
-  const [idMapMolecule, setIdMapMolecule] = useState("any");
-  const [idMapFromIdType, setIdMapFromIdType] = useState("any");
-  const [idMapToIdType, setIdMapToIdType] = useState("any");
-  const [idMapEnterId, setIdMapEnterId] = useState("");
   const [idMapFileSelect, setIdMapFileSelect] = useState("any");
+  const [idMapSearchData, setIdMapSearchData] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      recordType: "any",
+      inputNamespace: "any",
+      outputNamespace: "any",
+      inputIdlist: "",
+      idMapSearchValError: [false, false, false, false],
+    }
+  );
+  const [idMapCategoryMapped, setIdMapCategoryMapped] = useState("any");
+  const [idMapCategoryUnmapped, setIdMapCategoryUnmapped] = useState("any");
 
   const [moleculeValidated, setMoleculeValidated] = useState(false);
   const [fromIdTypeValidated, setFromIdTypeValidated] = useState(false);
@@ -50,31 +59,37 @@ const IdMapping = (props) => {
     { show: false, id: "" }
   );
 
+  let idMapData = stringConstants.id_mapping;
   let commonIdMappingData = stringConstants.id_mapping.common;
 
-  const idMapMoleculeOnChange = (value) => {
-    setIdMapMolecule(value);
-    idMapFromIdTypeOnChange("any");
-    idMapToIdTypeOnChange("any");
+  const idMapRecordTypeOnChange = (value) => {
+    setIdMapSearchData({ recordType: value });
+    idMapInputNamespaceOnChange("any");
+    idMapOutputNamespaceOnChange("any");
   };
-  const idMapFromIdTypeOnChange = (value) => {
-    setIdMapFromIdType(value);
+
+  const idMapInputNamespaceOnChange = (value) => {
+    setIdMapSearchData({ inputNamespace: value });
   };
-  const idMapToIdTypeOnChange = (value) => {
-    setIdMapToIdType(value);
+  const idMapOutputNamespaceOnChange = (value) => {
+    setIdMapSearchData({ outputNamespace: value });
   };
-  const idMapEnterIdOnChange = (event) => {
-    setIdMapEnterId(event.target.value);
+  const idMapInputIdlistOnChange = (event) => {
+    setIdMapSearchData({ inputIdlist: event.target.value });
   };
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
   };
 
   const clearMapFields = () => {
-    setIdMapMolecule("any");
-    setIdMapFromIdType("any");
-    setIdMapToIdType("any");
-    setIdMapEnterId("");
+    setIdMapSearchData({
+      recordType: "any",
+      inputNamespace: "any",
+      outputNamespace: "any",
+      inputIdlist: "",
+      idMapSearchValError: [false, false, false, false],
+    });
+
     setIdMapFileSelect("any");
     setFormValidated(false);
     setMoleculeValidated(false);
@@ -94,11 +109,16 @@ const IdMapping = (props) => {
       .then((response) => {
         let initData = response.data;
         setInitData(initData);
-        if (id === undefined) setPageLoading(false);
+        // if (id === undefined) setPageLoading(false);
         id &&
-          getMappingList(id, 1)
+          getMappingList(id)
             .then(({ data }) => {
               logActivity("user", id, "Search modification initiated");
+              // if (
+              //   data.category === idMapData.category_mapped.name) {
+              //   setIdMapCategoryMapped(data.category)
+              //   }
+              // )
             })
             .catch(function (error) {
               let message = "list api call";
@@ -118,24 +138,32 @@ const IdMapping = (props) => {
     input_inputidlist
   ) {
     var selected_recordtype = undefined;
-    if (input_recordtype && input_recordtype.id !== idMappingData.molecule.placeholderId) {
+    // line below means that if glycan/protein !== "any" then glycan/protein is selected
+    if (input_recordtype && input_recordtype.id !== idMappingData.recordtype.placeholderId) {
       selected_recordtype = {
         id: input_recordtype.id,
         name: input_recordtype.label,
       };
     }
     var formJson = {
-      [commonIdMappingData.molecule.id]: selected_recordtype,
-      [commonIdMappingData.from_id_type.id]: input_inputnamespace,
-      [commonIdMappingData.to_id_type.id]: input_outputnamespace,
-      [commonIdMappingData.id_entry.id]: input_inputidlist ? input_inputidlist : undefined,
+      [commonIdMappingData.recordtype.id]: selected_recordtype,
+      [commonIdMappingData.input_namespace.id]: input_inputnamespace,
+      [commonIdMappingData.output_namespace.id]: input_outputnamespace,
+      [commonIdMappingData.input_idlist.id]: input_inputidlist ? input_inputidlist : undefined,
     };
     return formJson;
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let formObject = searchJson();
+    console.log("submit");
+    // e.preventDefault();
+    alert("alert");
+    let formObject = searchJson(
+      idMapSearchData.recordType,
+      idMapSearchData.inputNamespace,
+      idMapSearchData.outputNamespace,
+      idMapSearchData.inputIdlist
+    );
     logActivity("user", id, "Performing ID Mapping Search");
     let message = "ID Mapping Search query=" + JSON.stringify(formObject);
     getMappingSearch(formObject)
@@ -163,7 +191,6 @@ const IdMapping = (props) => {
     // setIdMapToIdType("any");
     // setIdMapEnterId("");
     // setIdMapFileSelect("any");
-
     setFormValidated(false);
     setMoleculeValidated(false);
     setFromIdTypeValidated(false);
@@ -194,232 +221,236 @@ const IdMapping = (props) => {
           }}
         />
         <TextAlert alertInput={alertTextInput} />
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          {/* 1 Select Molecule */}
-          <Grid item xs={12} sm={12} md={12}>
+        {/* <form autoComplete="off" onSubmit={handleSubmit}> */}
+        {/* 1 recordtype Select Molecule */}
+        <Grid item xs={12} sm={12} md={12}>
+          <FormControl
+            fullWidth
+            variant="outlined"
+            // error={(formValidated || moleculeValidated) && idMapSearchData.recordType === "any"}
+          >
+            <Typography className={"search-lbl"} gutterBottom>
+              <span>1.</span>{" "}
+              <HelpTooltip
+                title={commonIdMappingData.recordtype.tooltip.title}
+                text={commonIdMappingData.recordtype.tooltip.text}
+              />
+              {commonIdMappingData.recordtype.name}
+            </Typography>
+            <SelectControl
+              placeholder={idMappingData.recordtype.placeholder}
+              placeholderId={idMappingData.recordtype.placeholderId}
+              placeholderName={idMappingData.recordtype.placeholderName}
+              inputValue={idMapSearchData.recordType}
+              setInputValue={idMapRecordTypeOnChange}
+              onBlur={() => setMoleculeValidated(true)}
+              menu={Object.keys(initData).map((moleculeType) => {
+                return {
+                  id: initData[moleculeType].id,
+                  name: initData[moleculeType].label,
+                };
+              })}
+              required={true}
+            />
+          </FormControl>
+          {(formValidated || moleculeValidated) && idMapSearchData.recordType === "any" && (
+            <FormHelperText className={"error-text"} error>
+              {idMappingData.recordtype.required}
+            </FormHelperText>
+          )}
+        </Grid>
+        {/* 2 */}
+        <Grid container className="select-type">
+          {/* input_namespace From ID Type */}
+          <Grid item xs={12} sm={12} md={5} className="pt-3">
             <FormControl
               fullWidth
               variant="outlined"
-              error={(formValidated || moleculeValidated) && idMapMolecule === "any"}
+              // error={
+              //   (formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any"
+              // }
             >
               <Typography className={"search-lbl"} gutterBottom>
-                <span>1.</span>{" "}
+                <span>2.</span>{" "}
                 <HelpTooltip
-                  title={commonIdMappingData.molecule.tooltip.title}
-                  text={commonIdMappingData.molecule.tooltip.text}
+                  title={commonIdMappingData.input_namespace.tooltip.title}
+                  text={commonIdMappingData.input_namespace.tooltip.text}
                 />
-                {commonIdMappingData.molecule.name}
+                {commonIdMappingData.input_namespace.name}
               </Typography>
               <SelectControl
-                placeholder={idMappingData.molecule.placeholder}
-                placeholderId={idMappingData.molecule.placeholderId}
-                placeholderName={idMappingData.molecule.placeholderName}
-                inputValue={idMapMolecule}
-                setInputValue={idMapMoleculeOnChange}
-                onBlur={() => setMoleculeValidated(true)}
-                menu={Object.keys(initData).map((moleculeType) => {
-                  return {
-                    id: initData[moleculeType].id,
-                    name: initData[moleculeType].label,
-                  };
-                })}
+                placeholder={idMappingData.input_namespace.placeholder}
+                placeholderId={idMappingData.input_namespace.placeholderId}
+                placeholderName={idMappingData.input_namespace.placeholderName}
+                inputValue={idMapSearchData.inputNamespace}
+                setInputValue={idMapInputNamespaceOnChange}
+                onBlur={() => setFromIdTypeValidated(true)}
+                menu={
+                  idMapSearchData.recordType === "any"
+                    ? []
+                    : initData[idMapSearchData.recordType].namespace.map((fromId) => {
+                        return {
+                          id: fromId,
+                          name: fromId,
+                        };
+                      })
+                }
                 required={true}
               />
             </FormControl>
-            {(formValidated || moleculeValidated) && idMapMolecule === "any" && (
+            {(formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any" && (
               <FormHelperText className={"error-text"} error>
-                {idMappingData.molecule.required}
+                {idMappingData.input_namespace.required}
               </FormHelperText>
             )}
           </Grid>
-          {/* 2 */}
-          <Grid container className="select-type">
-            {/* From ID Type */}
-            <Grid item xs={12} sm={12} md={5} className="pt-3">
-              <FormControl
-                fullWidth
-                variant="outlined"
-                error={(formValidated || fromIdTypeValidated) && idMapFromIdType === "any"}
-              >
-                <Typography className={"search-lbl"} gutterBottom>
-                  <span>2.</span>{" "}
-                  <HelpTooltip
-                    title={commonIdMappingData.from_id_type.tooltip.title}
-                    text={commonIdMappingData.from_id_type.tooltip.text}
-                  />
-                  {commonIdMappingData.from_id_type.name}
-                </Typography>
-                <SelectControl
-                  placeholder={idMappingData.from_id_type.placeholder}
-                  placeholderId={idMappingData.from_id_type.placeholderId}
-                  placeholderName={idMappingData.from_id_type.placeholderName}
-                  inputValue={idMapFromIdType}
-                  setInputValue={idMapFromIdTypeOnChange}
-                  onBlur={() => setFromIdTypeValidated(true)}
-                  menu={
-                    idMapMolecule === "any"
-                      ? []
-                      : initData[idMapMolecule].namespace.map((fromId) => {
-                          return {
-                            id: fromId,
-                            name: fromId,
-                          };
-                        })
-                  }
-                  required={true}
-                />
-              </FormControl>
-              {(formValidated || fromIdTypeValidated) && idMapFromIdType === "any" && (
-                <FormHelperText className={"error-text"} error>
-                  {idMappingData.from_id_type.required}
-                </FormHelperText>
-              )}
-            </Grid>
-            {/* To ID Type */}
-            <Grid item xs={12} sm={12} md={5} className="pt-3">
-              <FormControl
-                fullWidth
-                variant="outlined"
-                error={(formValidated || toIdTypeValidated) && idMapToIdType === "any"}
-              >
-                <Typography className={"search-lbl"} gutterBottom>
-                  <HelpTooltip
-                    title={commonIdMappingData.to_id_type.tooltip.title}
-                    text={commonIdMappingData.to_id_type.tooltip.text}
-                  />
-                  {commonIdMappingData.to_id_type.name}
-                </Typography>
-                <SelectControl
-                  placeholder={idMappingData.to_id_type.placeholder}
-                  placeholderId={idMappingData.to_id_type.placeholderId}
-                  placeholderName={idMappingData.to_id_type.placeholderName}
-                  inputValue={idMapToIdType}
-                  setInputValue={idMapToIdTypeOnChange}
-                  onBlur={() => setToIdTypeValidated(true)}
-                  menu={
-                    idMapMolecule === "any"
-                      ? []
-                      : initData[idMapMolecule].namespace.map((toId) => {
-                          return {
-                            id: toId,
-                            name: toId,
-                          };
-                        })
-                  }
-                  required={true}
-                />
-              </FormControl>
-              {(formValidated || toIdTypeValidated) && idMapToIdType === "any" && (
-                <FormHelperText className={"error-text"} error>
-                  {idMappingData.to_id_type.required}
-                </FormHelperText>
-              )}
-            </Grid>
-          </Grid>
-          {/* 3 Enter IDs */}
-          <Grid item xs={12} sm={12} md={12} className="pt-3">
-            <FormControl fullWidth variant="outlined">
+          {/* output_namespace To ID Type */}
+          <Grid item xs={12} sm={12} md={5} className="pt-3">
+            <FormControl
+              fullWidth
+              variant="outlined"
+              // error={
+              //   (formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any"
+              // }
+            >
               <Typography className={"search-lbl"} gutterBottom>
-                <span>3.</span>{" "}
                 <HelpTooltip
-                  title={commonIdMappingData.id_entry.tooltip.title}
-                  text={commonIdMappingData.id_entry.tooltip.text}
+                  title={commonIdMappingData.output_namespace.tooltip.title}
+                  text={commonIdMappingData.output_namespace.tooltip.text}
                 />
-                {commonIdMappingData.id_entry.name}
+                {commonIdMappingData.output_namespace.name}
               </Typography>
-              <OutlinedInput
-                fullWidth
-                multiline
-                rows="6"
-                required={true}
-                classes={{
-                  option: "auto-option",
-                  inputRoot: "auto-input-root",
-                  input: "input-auto",
-                }}
-                placeholder={idMappingData.id_entry.placeholder}
-                value={idMapEnterId}
-                onChange={idMapEnterIdOnChange}
-                onBlur={() => setEnterIdValidated(true)}
-                error={
-                  idMapEnterId.length > idMappingData.id_entry.length ||
-                  ((formValidated || enterIdValidated) &&
-                    idMapEnterId === "" &&
-                    idMapFileSelect === "any")
+              <SelectControl
+                placeholder={idMappingData.output_namespace.placeholder}
+                placeholderId={idMappingData.output_namespace.placeholderId}
+                placeholderName={idMappingData.output_namespace.placeholderName}
+                inputValue={idMapSearchData.outputNamespace}
+                setInputValue={idMapOutputNamespaceOnChange}
+                onBlur={() => setToIdTypeValidated(true)}
+                menu={
+                  idMapSearchData.recordType === "any"
+                    ? []
+                    : initData[idMapSearchData.recordType].namespace.map((toId) => {
+                        return {
+                          id: toId,
+                          name: toId,
+                        };
+                      })
                 }
-              ></OutlinedInput>
-              {idMapEnterId.length > idMappingData.id_entry.length && (
+                required={true}
+              />
+            </FormControl>
+            {(formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any" && (
+              <FormHelperText className={"error-text"} error>
+                {idMappingData.output_namespace.required}
+              </FormHelperText>
+            )}
+          </Grid>
+        </Grid>
+        {/* 3 Enter IDs */}
+        <Grid item xs={12} sm={12} md={12} className="pt-3">
+          <FormControl fullWidth variant="outlined">
+            <Typography className={"search-lbl"} gutterBottom>
+              <span>3.</span>{" "}
+              <HelpTooltip
+                title={commonIdMappingData.input_idlist.tooltip.title}
+                text={commonIdMappingData.input_idlist.tooltip.text}
+              />
+              {commonIdMappingData.input_idlist.name}
+            </Typography>
+            <OutlinedInput
+              fullWidth
+              multiline
+              rows="6"
+              required={true}
+              classes={{
+                option: "auto-option",
+                inputRoot: "auto-input-root",
+                input: "input-auto",
+              }}
+              placeholder={idMappingData.input_idlist.placeholder}
+              value={idMapSearchData.inputIdlist}
+              onChange={idMapInputIdlistOnChange}
+              onBlur={() => setEnterIdValidated(true)}
+              // error={
+              //   idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
+              //   ((formValidated || enterIdValidated) &&
+              //     idMapSearchData.inputIdlist === "" &&
+              //     idMapFileSelect === "any")
+              // }
+            ></OutlinedInput>
+            {idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length && (
+              <FormHelperText className={"error-text"} error>
+                {idMappingData.input_idlist.errorText}
+              </FormHelperText>
+            )}
+            {(formValidated || enterIdValidated) &&
+              idMapSearchData.inputIdlist === "" &&
+              idMapFileSelect === "any" && (
                 <FormHelperText className={"error-text"} error>
-                  {idMappingData.id_entry.errorText}
+                  {idMappingData.input_idlist.required}
                 </FormHelperText>
               )}
-              {(formValidated || enterIdValidated) &&
-                idMapEnterId === "" &&
-                idMapFileSelect === "any" && (
-                  <FormHelperText className={"error-text"} error>
-                    {idMappingData.id_entry.required}
-                  </FormHelperText>
-                )}
+          </FormControl>
+        </Grid>
+        {/* Select Files */}
+        <Grid className="pt-2">
+          <Typography className="mb-1">
+            <strong>{idMappingData.file_selection.upload_text}</strong>
+          </Typography>
+          {/* Text file dropdown */}
+          <Grid item xs={12} sm={12} md={5}>
+            <FormControl
+              fullWidth
+              variant="outlined"
+              // error={
+              //   (formValidated || fileSelectValidated) &&
+              //   idMapFileSelect === "any" &&
+              //   idMapSearchData.inputIdlist !== ""
+              // }
+            >
+              <SelectControl
+                placeholder={idMappingData.file_selection.placeholder}
+                placeholderId={idMappingData.file_selection.placeholderId}
+                placeholderName={idMappingData.file_selection.placeholderName}
+                inputValue={idMapFileSelect}
+                setInputValue={idMapFileSelectOnChange}
+              />
             </FormControl>
-          </Grid>
-          {/* Select Files */}
-          <Grid className="pt-2">
-            <Typography className="mb-1">
-              <strong>{idMappingData.file_selection.upload_text}</strong>
-            </Typography>
-            {/* Text file dropdown */}
-            <Grid item xs={12} sm={12} md={5}>
-              <FormControl
-                fullWidth
-                variant="outlined"
-                // error={
-                //   (formValidated || fileSelectValidated) &&
-                //   idMapFileSelect === "any" &&
-                //   idMapEnterId !== ""
-                // }
-              >
-                <SelectControl
-                  placeholder={idMappingData.file_selection.placeholder}
-                  placeholderId={idMappingData.file_selection.placeholderId}
-                  placeholderName={idMappingData.file_selection.placeholderName}
-                  inputValue={idMapFileSelect}
-                  setInputValue={idMapFileSelectOnChange}
-                />
-              </FormControl>
-              {/* {(formValidated || fileSelectValidated) &&
+            {/* {(formValidated || fileSelectValidated) &&
                 idMapFileSelect === "any" &&
-                idMapEnterId !== "" && (
+                idMapSearchData.inputIdlist !== "" && (
                   <FormHelperText className={"error-text"} error>
                     {idMappingData.file_selection.required}
                   </FormHelperText>
                 )} */}
-            </Grid>
           </Grid>
-          {/* Browse Files */}
-          <Grid container className="pt-2">
-            <Button className="gg-btn-outline mr-4">Browse</Button>
-            <Typography>{idMappingData.file_selection.no_file_selected}</Typography>
-          </Grid>
+        </Grid>
+        {/* Browse Files */}
+        <Grid container className="pt-2">
+          <Button className="gg-btn-outline mr-4">Browse</Button>
+          <Typography>{idMappingData.file_selection.no_file_selected}</Typography>
+        </Grid>
 
-          {/*  Buttons */}
-          <Grid item xs={12} sm={12}>
-            <Row className="gg-align-center pt-5">
-              <Button className="gg-btn-outline mr-4" onClick={clearMapFields}>
-                Clear Fields
-              </Button>
-              {/* <Button className="gg-btn-blue">Submit</Button> */}
-              {/* <Link to={routeConstants.idMappingResult}> */}{" "}
+        {/*  Buttons */}
+        <Grid item xs={12} sm={12}>
+          <Row className="gg-align-center pt-5">
+            <Button className="gg-btn-outline mr-4" onClick={clearMapFields}>
+              Clear Fields
+            </Button>
+            {/* <Link to={routeConstants.idMappingResult}> */}
+            <Link to={`${routeConstants.idMappingResult}${id}`}>
               <Button
                 className="gg-btn-blue"
-                onClick={() => setFormValidated(true)}
-                // onClick={ handleSubmit }
+                // onClick={() => setFormValidated(true)}
+                onClick={handleSubmit}
               >
                 Submit
               </Button>
-              {/* </Link> */}
-            </Row>
-          </Grid>
-        </form>
+            </Link>
+          </Row>
+        </Grid>
+        {/* </form> */}
         <Row>
           <Col>
             <p className="text-muted mt-2">
