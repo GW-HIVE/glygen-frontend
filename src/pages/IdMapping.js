@@ -1,33 +1,30 @@
 import React, { useEffect, useState, useReducer } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
-import { logActivity } from "../data/logging";
-import PageLoader from "../components/load/PageLoader";
-import { axiosError } from "../data/axiosError";
-import { getMappingInit, getMappingSearch, getMappingList } from "../data/mapping";
-import { Row } from "react-bootstrap";
-import { Grid, Typography } from "@material-ui/core";
-import { Container } from "react-bootstrap";
-import HelpTooltip from "../components/tooltip/HelpTooltip";
-import FormControl from "@material-ui/core/FormControl";
-import SelectControl from "../components/select/SelectControl";
-import "../css/Search.css";
-import idMappingData from "../data/json/idMapping";
-import stringConstants from "../data/json/stringConstants";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { Link, useParams } from "react-router-dom";
+import { Grid, Typography } from "@material-ui/core";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import routeConstants from "../data/json/routeConstants";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import FormControl from "@material-ui/core/FormControl";
+import SelectControl from "../components/select/SelectControl";
+import HelpTooltip from "../components/tooltip/HelpTooltip";
+import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import TextAlert from "../components/alert/TextAlert";
-import { Col } from "react-bootstrap";
+import "../css/Search.css";
+import { logActivity } from "../data/logging";
+import { axiosError } from "../data/axiosError";
+import idMappingData from "../data/json/idMapping";
+import stringConstants from "../data/json/stringConstants";
+import routeConstants from "../data/json/routeConstants";
+import { getMappingInit, getMappingSearch, getMappingList } from "../data/mapping";
 
 const IdMapping = (props) => {
   let { id } = useParams("");
-  // let { category } = useParams("");
   const [initData, setInitData] = useState({});
+
   const [idMapFileSelect, setIdMapFileSelect] = useState("any");
   const [idMapSearchData, setIdMapSearchData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -39,8 +36,6 @@ const IdMapping = (props) => {
       idMapSearchValError: [false, false, false, false],
     }
   );
-  const [idMapCategoryMapped, setIdMapCategoryMapped] = useState("any");
-  const [idMapCategoryUnmapped, setIdMapCategoryUnmapped] = useState("any");
 
   const [moleculeValidated, setMoleculeValidated] = useState(false);
   const [fromIdTypeValidated, setFromIdTypeValidated] = useState(false);
@@ -59,7 +54,7 @@ const IdMapping = (props) => {
     { show: false, id: "" }
   );
 
-  let idMapData = stringConstants.id_mapping;
+  // let idMapData = stringConstants.id_mapping;
   let commonIdMappingData = stringConstants.id_mapping.common;
 
   const idMapRecordTypeOnChange = (value) => {
@@ -98,7 +93,9 @@ const IdMapping = (props) => {
     setEnterIdValidated(false);
     setFileSelectValidated(false);
   };
-
+  /**
+   * useEffect for retriving data from api and showing page loading effects.
+   */
   useEffect(() => {
     setPageLoading(true);
     logActivity();
@@ -109,16 +106,20 @@ const IdMapping = (props) => {
       .then((response) => {
         let initData = response.data;
         setInitData(initData);
-        // if (id === undefined) setPageLoading(false);
+        if (id === undefined) setPageLoading(false);
         id &&
           getMappingList(id)
             .then(({ data }) => {
               logActivity("user", id, "Search modification initiated");
-              // if (
-              //   data.category === idMapData.category_mapped.name) {
-              //   setIdMapCategoryMapped(data.category)
-              //   }
-              // )
+              setIdMapSearchData({
+                recordType: data.query.recordtype === undefined ? "any" : data.query.recordtype,
+                inputNamespace:
+                  data.query.input_namespace === undefined ? "any" : data.query.input_namespace,
+                outputNamespace:
+                  data.query.output_namespace === undefined ? "any" : data.query.output_namespace,
+                inputIdlist: data.query.input_idlist === undefined ? "" : data.query.input_idlist,
+              });
+              setPageLoading(false);
             })
             .catch(function (error) {
               let message = "list api call";
@@ -154,10 +155,10 @@ const IdMapping = (props) => {
     return formJson;
   }
 
-  const handleSubmit = (e) => {
-    console.log("submit");
+  const idMapHandleSubmit = () => {
+    // console.log("submit");
     // e.preventDefault();
-    alert("alert");
+    // alert("alert");
     let formObject = searchJson(
       idMapSearchData.recordType,
       idMapSearchData.inputNamespace,
@@ -198,6 +199,15 @@ const IdMapping = (props) => {
     setEnterIdValidated(false);
     setFileSelectValidated(false);
   };
+
+  /**
+   * Function to handle click event for protein advanced search.
+   **/
+  const searchIdMapClick = () => {
+    setPageLoading(true);
+    idMapHandleSubmit();
+  };
+
   return (
     <React.Fragment>
       <Helmet>
@@ -221,7 +231,7 @@ const IdMapping = (props) => {
           }}
         />
         <TextAlert alertInput={alertTextInput} />
-        {/* <form autoComplete="off" onSubmit={handleSubmit}> */}
+        {/* <form autoComplete="off" onSubmit={idMapHandleSubmit}> */}
         {/* 1 recordtype Select Molecule */}
         <Grid item xs={12} sm={12} md={12}>
           <FormControl
@@ -443,7 +453,8 @@ const IdMapping = (props) => {
               <Button
                 className="gg-btn-blue"
                 // onClick={() => setFormValidated(true)}
-                onClick={handleSubmit}
+                // onClick={idMapHandleSubmit}
+                onClick={searchIdMapClick}
               >
                 Submit
               </Button>

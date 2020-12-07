@@ -24,11 +24,12 @@ import BootstrapTable from "react-bootstrap-table-next";
 import idMappingData from "../data/json/idMapping";
 
 const IdMappingResult = (props) => {
-  let { id } = useParams();
+  let { id, category } = useParams();
 
   const [data, setData] = useState([]);
+  const [cachInfo, setCachInfo] = useState([]);
   const [dataReason, setDataReason] = useState([]);
-  // const [query, setQuery] = useState([]);
+  const [legends, setLegends] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [idMappingResult, setIdMappingResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
@@ -44,26 +45,29 @@ const IdMappingResult = (props) => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    getMappingList(id)
-      .then(({ data }) => {
-        if (data.error_code) {
-          let message = "list api call";
-          logActivity("user", id, "No results. " + message);
-          setPageLoading(false);
-        } else {
-          setData(data.results);
-          // setQuery(data.query);
-          setPagination(data.pagination);
-          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-          setPage(currentPage);
-          setTotalSize(data.pagination.total_length);
-          setPageLoading(false);
-        }
-      })
-      .catch(function (error) {
+    const getData = getMappingList(id, category);
+    getData.then(({ data }) => {
+      if (data.error_code) {
         let message = "list api call";
-        axiosError(error, id, message, setPageLoading, setAlertDialogInput);
-      });
+        logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
+      } else {
+        // setCachInfo(data.cache_info);
+        setData(data.results);
+        setLegends(data.legends);
+        // setQuery(data.query);
+        setPagination(data.pagination);
+        const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+        setPage(currentPage);
+        setTotalSize(data.pagination.total_length);
+        setPageLoading(false);
+      }
+    });
+    getData.catch(function (error) {
+      let message = "list api call";
+      axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+    });
+    // eslint-disable-next-line
   }, []);
 
   const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
@@ -74,6 +78,7 @@ const IdMappingResult = (props) => {
       ({ data }) => {
         // place to change values before rendering
         if (!data.error_code) {
+          // setCachInfo(data.cache_info);
           setData(data.results);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
@@ -121,11 +126,11 @@ const IdMappingResult = (props) => {
         <section>
           {/* Button */}
           <div className="text-right mb-4">
-            <Link to={routeConstants.idMapping}>
-              <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
-                Modify Search
-              </Button>
-            </Link>
+            {/* <Link to={routeConstants.idMapping}> */}
+            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
+              Modify Search
+            </Button>
+            {/* </Link> */}
           </div>
 
           {idMappingResult && idMappingResult.length !== 0 && (
@@ -137,8 +142,7 @@ const IdMappingResult = (props) => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              // defaultSortField="glycan_count"
-              defaultSortField="input_idlist"
+              defaultSortField="from"
               defaultSortOrder="desc"
               // idField="input_idlist"
             />
