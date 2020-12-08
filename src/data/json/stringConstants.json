@@ -1231,7 +1231,7 @@
     },
     "pro_annotation": {
       "id": "pro_annotation",
-      "displayname": "Proteoform-Annotation",
+      "displayname": "Proteoform Annotation",
       "tooltip": " pro_annotation Information for selected Protein accession"
     },
     "mutagenesis": {

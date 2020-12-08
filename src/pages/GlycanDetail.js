@@ -537,7 +537,9 @@ const GlycanDetail = props => {
         <Alert className="erroralert" severity="error">
           {nonExistent.history && nonExistent.history.length ? (
             <>
-              <AlertTitle>This Glycan {id} Record is Nonexistent</AlertTitle>
+              <AlertTitle>
+                This Glycan <b>{id} </b>Record is Nonexistent
+              </AlertTitle>
               <ul>
                 {nonExistent.history.map(item => (
                   <span className="recordInfo">
@@ -548,7 +550,9 @@ const GlycanDetail = props => {
             </>
           ) : (
             <>
-              <AlertTitle>This Glycan {id} Record is not valid</AlertTitle>
+              <AlertTitle>
+                This Glycan <b>{id} </b> Record is not valid
+              </AlertTitle>
             </>
           )}
         </Alert>
@@ -934,7 +938,8 @@ const GlycanDetail = props => {
                         <ul>
                           {names.map(nameObject => (
                             <li>
-                              <b>{nameObject.domain}</b>:{nameObject.name}
+                              <b>{nameObject.domain}</b>:{""}
+                              {nameObject.name}
                             </li>
                           ))}
                         </ul>

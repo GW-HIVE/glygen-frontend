@@ -1173,7 +1173,7 @@ const ProteinDetail = props => {
     },
     {
       dataField: "name",
-      text: proteinStrings.annotation_site.shortName,
+      text: "Proteoform/Glycoform",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
@@ -1184,7 +1184,7 @@ const ProteinDetail = props => {
     },
     {
       dataField: "definition",
-      text: proteinStrings.annotation_site.shortName,
+      text: "Description",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
