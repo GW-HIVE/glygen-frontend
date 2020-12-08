@@ -9,8 +9,6 @@ import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 // import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
-import stringConstants from "../data/json/stringConstants.json";
-import ReactHtmlParser from "react-html-parser";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
@@ -25,12 +23,12 @@ import idMappingData from "../data/json/idMapping";
 
 const IdMappingResult = (props) => {
   let { id } = useParams();
+  // let { searchId } = useParams();
 
   const [data, setData] = useState([]);
-  const [cachInfo, setCachInfo] = useState([]);
   const [dataReason, setDataReason] = useState([]);
   const [legends, setLegends] = useState([]);
-  const [query, setQuery] = useState([]);
+  const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [idMappingResult, setIdMappingResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
@@ -46,9 +44,6 @@ const IdMappingResult = (props) => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    // const getData = getMappingList(id, category);
-    // getData.then(({ data }) => {
-
     getMappingList(id, "mapped")
       .then(({ data }) => {
         if (data.error_code) {
@@ -69,7 +64,22 @@ const IdMappingResult = (props) => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
-
+    getMappingList(id, "unmapped")
+      .then(({ data }) => {
+        if (data.error_code) {
+          let message = "list api call";
+          logActivity("user", id, "No results. " + message);
+          setPageLoading(false);
+        } else {
+          setDataReason(data.results);
+          setLegendsReason(data.legends);
+          setPageLoading(false);
+        }
+      })
+      .catch(function (error) {
+        let message = "list api call";
+        axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+      });
     // eslint-disable-next-line
   }, []);
 
@@ -85,13 +95,17 @@ const IdMappingResult = (props) => {
           setLegends(data.legends);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
+          // setDataReason(data.results);
+          // setLegendsReason(data.legends);
         }
       }
     );
   };
-  const handleModifySearch = () => {
-    props.history.push(routeConstants.idMapping + id);
-  };
+  // const handleModifySearch = () => {
+  //   if (searchId !== undefined) {
+  //     props.history.push(routeConstants.idMapping + id);
+  //   }
+  // };
 
   function rowStyleFormat(row, rowIdx) {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
@@ -130,7 +144,11 @@ const IdMappingResult = (props) => {
           {/* Button */}
           <div className="text-right mb-4">
             {/* <Link to={routeConstants.idMapping}> */}
-            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
+            <Button
+              type="button"
+              className="gg-btn-blue"
+              // onClick={ handleModifySearch }
+            >
               Modify Search
             </Button>
             {/* </Link> */}
@@ -153,7 +171,11 @@ const IdMappingResult = (props) => {
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Link to={routeConstants.idMapping}>
-              <Button type="button" className="gg-btn-blue">
+              <Button
+                type="button"
+                className="gg-btn-blue"
+                // onClick={ handleModifySearch }
+              >
                 Modify Search
               </Button>
             </Link>
@@ -175,8 +197,8 @@ const IdMappingResult = (props) => {
               columns={idMapReason}
               defaultSorted={[
                 {
-                  dataField: "input_idlist",
-                  order: "asc",
+                  dataField: "input_id",
+                  order: "desc",
                 },
               ]}
             />

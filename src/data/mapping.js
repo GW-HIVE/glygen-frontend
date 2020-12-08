@@ -74,7 +74,6 @@ export const ID_MAPPING_RESULT = [
 ];
 export const ID_MAP_REASON = [
   {
-    // dataField: "motif_ac",
     dataField: "input_id",
     text: "IDs",
     sort: true,
