@@ -24,12 +24,13 @@ import BootstrapTable from "react-bootstrap-table-next";
 import idMappingData from "../data/json/idMapping";
 
 const IdMappingResult = (props) => {
-  let { id, category } = useParams();
+  let { id } = useParams();
 
   const [data, setData] = useState([]);
   const [cachInfo, setCachInfo] = useState([]);
   const [dataReason, setDataReason] = useState([]);
   const [legends, setLegends] = useState([]);
+  const [query, setQuery] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [idMappingResult, setIdMappingResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
@@ -45,28 +46,30 @@ const IdMappingResult = (props) => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    const getData = getMappingList(id, category);
-    getData.then(({ data }) => {
-      if (data.error_code) {
+    // const getData = getMappingList(id, category);
+    // getData.then(({ data }) => {
+
+    getMappingList(id, "mapped")
+      .then(({ data }) => {
+        if (data.error_code) {
+          let message = "list api call";
+          logActivity("user", id, "No results. " + message);
+          setPageLoading(false);
+        } else {
+          setData(data.results);
+          setLegends(data.legends);
+          setPagination(data.pagination);
+          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+          setPage(currentPage);
+          setTotalSize(data.pagination.total_length);
+          setPageLoading(false);
+        }
+      })
+      .catch(function (error) {
         let message = "list api call";
-        logActivity("user", id, "No results. " + message);
-        setPageLoading(false);
-      } else {
-        // setCachInfo(data.cache_info);
-        setData(data.results);
-        setLegends(data.legends);
-        // setQuery(data.query);
-        setPagination(data.pagination);
-        const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-        setPage(currentPage);
-        setTotalSize(data.pagination.total_length);
-        setPageLoading(false);
-      }
-    });
-    getData.catch(function (error) {
-      let message = "list api call";
-      axiosError(error, id, message, setPageLoading, setAlertDialogInput);
-    });
+        axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+      });
+
     // eslint-disable-next-line
   }, []);
 
@@ -78,8 +81,8 @@ const IdMappingResult = (props) => {
       ({ data }) => {
         // place to change values before rendering
         if (!data.error_code) {
-          // setCachInfo(data.cache_info);
           setData(data.results);
+          setLegends(data.legends);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
         }

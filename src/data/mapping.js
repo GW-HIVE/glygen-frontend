@@ -22,18 +22,20 @@ export const getMappingSearch = (formObject) => {
 };
 
 export const getMappingList = (
-  mappingListId,
-  offset = 1,
-  limit = 20,
-  sort = undefined,
-  order = "asc"
+  mappingId,
+  category
+  // offset = 1,
+  // limit = 20,
+  // sort = undefined,
+  // order = "asc"
 ) => {
   const queryParams = {
-    id: mappingListId,
-    offset: offset,
-    sort: sort,
-    limit: limit,
-    order: order,
+    id: mappingId,
+    category: category,
+    // sort: sort,
+    // offset: offset,
+    // limit: limit,
+    // order: order,
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/idmapping/list/?query=${queryParamString}`;

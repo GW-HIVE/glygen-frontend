@@ -33,7 +33,7 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      idMapSearchValError: [false, false, false, false],
+      // idMapSearchValError: [false, false, false, false],
     }
   );
 
@@ -57,21 +57,40 @@ const IdMapping = (props) => {
   // let idMapData = stringConstants.id_mapping;
   let commonIdMappingData = stringConstants.id_mapping.common;
 
-  const idMapRecordTypeOnChange = (value) => {
+  /**
+   * Function to set recordtype (molecule) name value.
+   * @param {string} value - input recordtype (molecule) name value.
+   **/
+  const recordTypeOnChange = (value) => {
     setIdMapSearchData({ recordType: value });
-    idMapInputNamespaceOnChange("any");
-    idMapOutputNamespaceOnChange("any");
+    inputNamespaceOnChange("any");
+    outputNamespaceOnChange("any");
   };
-
-  const idMapInputNamespaceOnChange = (value) => {
+  /**
+   * Function to set inputNamespace (From ID Type) name value.
+   * @param {string} value - input inputNamespace (From ID Type) name value.
+   **/
+  const inputNamespaceOnChange = (value) => {
     setIdMapSearchData({ inputNamespace: value });
   };
-  const idMapOutputNamespaceOnChange = (value) => {
+  /**
+   * Function to set outputNamespace (To ID Type) name value.
+   * @param {string} value - input outputNamespace (To ID Type) name value.
+   **/
+  const outputNamespaceOnChange = (value) => {
     setIdMapSearchData({ outputNamespace: value });
   };
-  const idMapInputIdlistOnChange = (event) => {
+  /**
+   * Function to set inputIdlist (Enter IDs) name value.
+   * @param {string} value - input inputIdlist (Enter IDs) name value.
+   **/
+  const inputIdlistOnChange = (event) => {
     setIdMapSearchData({ inputIdlist: event.target.value });
   };
+  /**
+   * Function to set ... (Select File) name value.
+   * @param {string} value - input ... (Select File) name value.
+   **/
   const idMapFileSelectOnChange = (value) => {
     setIdMapFileSelect(value);
   };
@@ -82,7 +101,7 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      idMapSearchValError: [false, false, false, false],
+      // idMapSearchValError: [false, false, false, false],
     });
 
     setIdMapFileSelect("any");
@@ -138,16 +157,16 @@ const IdMapping = (props) => {
     input_outputnamespace,
     input_inputidlist
   ) {
-    var selected_recordtype = undefined;
+    // var selected_recordtype = undefined;
     // line below means that if glycan/protein !== "any" then glycan/protein is selected
-    if (input_recordtype && input_recordtype.id !== idMappingData.recordtype.placeholderId) {
-      selected_recordtype = {
-        id: input_recordtype.id,
-        name: input_recordtype.label,
-      };
-    }
+    // if (input_recordtype && input_recordtype.id !== idMappingData.recordtype.placeholderId) {
+    //   selected_recordtype = {
+    //     id: input_recordtype.id,
+    //     name: input_recordtype.label,
+    //   };
+    // }
     var formJson = {
-      [commonIdMappingData.recordtype.id]: selected_recordtype,
+      [commonIdMappingData.recordtype.id]: input_recordtype,
       [commonIdMappingData.input_namespace.id]: input_inputnamespace,
       [commonIdMappingData.output_namespace.id]: input_outputnamespace,
       [commonIdMappingData.input_idlist.id]: input_inputidlist ? input_inputidlist : undefined,
@@ -156,9 +175,6 @@ const IdMapping = (props) => {
   }
 
   const idMapHandleSubmit = () => {
-    // console.log("submit");
-    // e.preventDefault();
-    // alert("alert");
     let formObject = searchJson(
       idMapSearchData.recordType,
       idMapSearchData.inputNamespace,
@@ -174,6 +190,7 @@ const IdMapping = (props) => {
             props.history.push(routeConstants.idMappingResult + response.data["list_id"]);
           });
           setPageLoading(false);
+          console.log("submit");
         } else {
           logActivity("user", "", "No results. " + message);
           setPageLoading(false);
@@ -206,6 +223,7 @@ const IdMapping = (props) => {
   const searchIdMapClick = () => {
     setPageLoading(true);
     idMapHandleSubmit();
+    setFormValidated(true);
   };
 
   return (
@@ -237,7 +255,7 @@ const IdMapping = (props) => {
           <FormControl
             fullWidth
             variant="outlined"
-            // error={(formValidated || moleculeValidated) && idMapSearchData.recordType === "any"}
+            error={(formValidated || moleculeValidated) && idMapSearchData.recordType === "any"}
           >
             <Typography className={"search-lbl"} gutterBottom>
               <span>1.</span>{" "}
@@ -252,7 +270,7 @@ const IdMapping = (props) => {
               placeholderId={idMappingData.recordtype.placeholderId}
               placeholderName={idMappingData.recordtype.placeholderName}
               inputValue={idMapSearchData.recordType}
-              setInputValue={idMapRecordTypeOnChange}
+              setInputValue={recordTypeOnChange}
               onBlur={() => setMoleculeValidated(true)}
               menu={Object.keys(initData).map((moleculeType) => {
                 return {
@@ -276,9 +294,9 @@ const IdMapping = (props) => {
             <FormControl
               fullWidth
               variant="outlined"
-              // error={
-              //   (formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any"
-              // }
+              error={
+                (formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any"
+              }
             >
               <Typography className={"search-lbl"} gutterBottom>
                 <span>2.</span>{" "}
@@ -293,7 +311,7 @@ const IdMapping = (props) => {
                 placeholderId={idMappingData.input_namespace.placeholderId}
                 placeholderName={idMappingData.input_namespace.placeholderName}
                 inputValue={idMapSearchData.inputNamespace}
-                setInputValue={idMapInputNamespaceOnChange}
+                setInputValue={inputNamespaceOnChange}
                 onBlur={() => setFromIdTypeValidated(true)}
                 menu={
                   idMapSearchData.recordType === "any"
@@ -319,9 +337,9 @@ const IdMapping = (props) => {
             <FormControl
               fullWidth
               variant="outlined"
-              // error={
-              //   (formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any"
-              // }
+              error={
+                (formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any"
+              }
             >
               <Typography className={"search-lbl"} gutterBottom>
                 <HelpTooltip
@@ -335,7 +353,7 @@ const IdMapping = (props) => {
                 placeholderId={idMappingData.output_namespace.placeholderId}
                 placeholderName={idMappingData.output_namespace.placeholderName}
                 inputValue={idMapSearchData.outputNamespace}
-                setInputValue={idMapOutputNamespaceOnChange}
+                setInputValue={outputNamespaceOnChange}
                 onBlur={() => setToIdTypeValidated(true)}
                 menu={
                   idMapSearchData.recordType === "any"
@@ -380,14 +398,14 @@ const IdMapping = (props) => {
               }}
               placeholder={idMappingData.input_idlist.placeholder}
               value={idMapSearchData.inputIdlist}
-              onChange={idMapInputIdlistOnChange}
+              onChange={inputIdlistOnChange}
               onBlur={() => setEnterIdValidated(true)}
-              // error={
-              //   idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
-              //   ((formValidated || enterIdValidated) &&
-              //     idMapSearchData.inputIdlist === "" &&
-              //     idMapFileSelect === "any")
-              // }
+              error={
+                idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
+                ((formValidated || enterIdValidated) &&
+                  idMapSearchData.inputIdlist === "" &&
+                  idMapFileSelect === "any")
+              }
             ></OutlinedInput>
             {idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length && (
               <FormHelperText className={"error-text"} error>
@@ -449,16 +467,16 @@ const IdMapping = (props) => {
               Clear Fields
             </Button>
             {/* <Link to={routeConstants.idMappingResult}> */}
-            <Link to={`${routeConstants.idMappingResult}${id}`}>
-              <Button
-                className="gg-btn-blue"
-                // onClick={() => setFormValidated(true)}
-                // onClick={idMapHandleSubmit}
-                onClick={searchIdMapClick}
-              >
-                Submit
-              </Button>
-            </Link>
+            {/* <Link to={ `${ routeConstants.idMappingResult }${ id }` } */}
+            <Button
+              className="gg-btn-blue"
+              // onClick={() => setFormValidated(true)}
+              // onClick={idMapHandleSubmit}
+              onClick={searchIdMapClick}
+            >
+              Submit
+            </Button>
+            {/* </Link> */}
           </Row>
         </Grid>
         {/* </form> */}
