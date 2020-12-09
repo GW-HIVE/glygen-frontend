@@ -27,7 +27,7 @@ export const getMappingList = (
   // offset = 1,
   // limit = 20,
   // sort = undefined,
-  // order = "asc"
+  // order = "desc"
 ) => {
   const queryParams = {
     id: mappingId,
@@ -63,7 +63,6 @@ export const ID_MAPPING_RESULT = [
     },
   },
   {
-    // dataField: "glycan_count",
     dataField: "to",
     text: "To ID",
     sort: true,

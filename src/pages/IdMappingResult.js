@@ -51,8 +51,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setData(data.results);
           setLegends(data.legends);
+          setData(data.results);
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -71,8 +71,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setDataReason(data.results);
           setLegendsReason(data.legends);
+          setDataReason(data.results);
           setPageLoading(false);
         }
       })
@@ -80,32 +80,34 @@ const IdMappingResult = (props) => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
-    // eslint-disable-next-line
   }, []);
 
   const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
-    setPage(page);
-    setSizePerPage(sizePerPage);
+    // setPage(page);
+    // setSizePerPage(sizePerPage);
+    data.sort((a, b) => {
+      if (a[sortField] > b[sortField]) {
+        return sortOrder === "asc" ? 1 : -1;
+      } else if (a[sortField] < b[sortField]) {
+        return sortOrder === "asc" ? -1 : 1;
+      }
+      return 0;
+    });
 
     getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
       ({ data }) => {
         // place to change values before rendering
-        if (!data.error_code) {
-          setData(data.results);
-          setLegends(data.legends);
-          setPagination(data.pagination);
-          setTotalSize(data.pagination.total_length);
-          // setDataReason(data.results);
-          // setLegendsReason(data.legends);
-        }
+        setLegends(data.legends);
+        setData(data.results);
+        setPagination(data.pagination);
+        setTotalSize(data.pagination.total_length);
       }
     );
   };
-  // const handleModifySearch = () => {
-  //   if (searchId !== undefined) {
-  //     props.history.push(routeConstants.idMapping + id);
-  //   }
-  // };
+
+  const handleModifySearch = () => {
+    props.history.push(routeConstants.idMapping + id);
+  };
 
   function rowStyleFormat(row, rowIdx) {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
@@ -140,15 +142,11 @@ const IdMappingResult = (props) => {
             </Grid>
           </Row>
         </div>
-        <section>
+        <section style={{ width: "95%", margin: "0 auto" }}>
           {/* Button */}
           <div className="text-right mb-4">
             {/* <Link to={routeConstants.idMapping}> */}
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              // onClick={ handleModifySearch }
-            >
+            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
               Modify Search
             </Button>
             {/* </Link> */}
@@ -164,8 +162,8 @@ const IdMappingResult = (props) => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="from"
-              defaultSortOrder="desc"
-              // idField="input_idlist"
+              defaultSortOrder="asc"
+              // idField="from"
             />
           )}
           {/* Button */}
@@ -198,7 +196,7 @@ const IdMappingResult = (props) => {
               defaultSorted={[
                 {
                   dataField: "input_id",
-                  order: "desc",
+                  order: "asc",
                 },
               ]}
             />
