@@ -132,37 +132,37 @@ const ProteinSearch = props => {
             .then(({ data }) => {
               logActivity("user", id, "Search modification initiated");
               if (
-                data.query.query_type ===
+                data.cache_info.query.query_type ===
                 proteinData.simple_search.query_type.name
               ) {
                 setProSimpleSearchCategory(
-                  data.query.term_category ? data.query.term_category : "any"
+                  data.cache_info.query.term_category ? data.cache_info.query.term_category : "any"
                 );
-                setProSimpleSearchTerm(data.query.term ? data.query.term : "");
+                setProSimpleSearchTerm(data.cache_info.query.term ? data.cache_info.query.term : "");
                 setProActTabKey("Simple-Search");
                 setPageLoading(false);
               } else {
                 setProAdvSearchData({
                   proteinId:
-                    data.query.uniprot_canonical_ac === undefined
+                    data.cache_info.query.uniprot_canonical_ac === undefined
                       ? ""
-                      : data.query.uniprot_canonical_ac + ",",
+                      : data.cache_info.query.uniprot_canonical_ac + ",",
                   proRefSeqId:
-                    data.query.refseq_ac === undefined
+                    data.cache_info.query.refseq_ac === undefined
                       ? ""
-                      : data.query.refseq_ac,
+                      : data.cache_info.query.refseq_ac,
                   proMass:
-                    data.query.mass === undefined
+                    data.cache_info.query.mass === undefined
                       ? [
                           Math.floor(initData.protein_mass.min),
                           Math.ceil(initData.protein_mass.max)
                         ]
                       : [
-                          Math.floor(data.query.mass.min),
-                          Math.ceil(data.query.mass.max)
+                          Math.floor(data.cache_info.query.mass.min),
+                          Math.ceil(data.cache_info.query.mass.max)
                         ],
                   proMassInput:
-                    data.query.mass === undefined
+                    data.cache_info.query.mass === undefined
                       ? [
                           Math.floor(initData.protein_mass.min).toLocaleString(
                             "en-US"
@@ -172,79 +172,79 @@ const ProteinSearch = props => {
                           )
                         ]
                       : [
-                          Math.floor(data.query.mass.min).toLocaleString(
+                          Math.floor(data.cache_info.query.mass.min).toLocaleString(
                             "en-US"
                           ),
-                          Math.ceil(data.query.mass.max).toLocaleString("en-US")
+                          Math.ceil(data.cache_info.query.mass.max).toLocaleString("en-US")
                         ],
                   proOrganism:
-                    data.query.organism === undefined
+                    data.cache_info.query.organism === undefined
                       ? {
                           id: advancedSearch.organism.placeholderId,
                           name: advancedSearch.organism.placeholderName
                         }
                       : {
-                          id: data.query.organism.id,
-                          name: data.query.organism.name
+                          id: data.cache_info.query.organism.id,
+                          name: data.cache_info.query.organism.name
                         },
                   proteinName:
-                    data.query.protein_name === undefined
+                    data.cache_info.query.protein_name === undefined
                       ? ""
-                      : data.query.protein_name,
+                      : data.cache_info.query.protein_name,
                   proGeneName:
-                    data.query.gene_name === undefined
+                    data.cache_info.query.gene_name === undefined
                       ? ""
-                      : data.query.gene_name,
+                      : data.cache_info.query.gene_name,
                   proGOName:
-                    data.query.go_term === undefined ? "" : data.query.go_term,
+                    data.cache_info.query.go_term === undefined ? "" : data.cache_info.query.go_term,
                   proGOId:
-                    data.query.go_id === undefined ? "" : data.query.go_id,
+                    data.cache_info.query.go_id === undefined ? "" : data.cache_info.query.go_id,
                   proAminoAcid:
-                    data.query.glycosylated_aa === undefined
+                    data.cache_info.query.glycosylated_aa === undefined
                       ? []
-                      : data.query.glycosylated_aa.aa_list.map(aminoAcid => {
+                      : data.cache_info.query.glycosylated_aa.aa_list.map(aminoAcid => {
                           return initData.aa_list.find(aa => {
                             return aa.key === aminoAcid;
                           });
                         }),
                   proAminoAcidOperation:
-                    data.query.glycosylated_aa === undefined
+                    data.cache_info.query.glycosylated_aa === undefined
                       ? "or"
-                      : data.query.glycosylated_aa.operation,
+                      : data.cache_info.query.glycosylated_aa.operation,
                   proSequence:
-                    data.query.sequence === undefined
+                    data.cache_info.query.sequence === undefined
                       ? ""
-                      : data.query.sequence.aa_sequence,
+                      : data.cache_info.query.sequence.aa_sequence,
                   proPathwayId:
-                    data.query.pathway_id === undefined
+                    data.cache_info.query.pathway_id === undefined
                       ? ""
-                      : data.query.pathway_id,
+                      : data.cache_info.query.pathway_id,
                   proPubId:
-                    data.query.pmid === undefined ? "" : data.query.pmid,
+                    data.cache_info.query.pmid === undefined ? "" : data.cache_info.query.pmid,
                   proGlyEvidence:
-                    data.query.glycosylation_evidence === undefined
+                    data.cache_info.query.glycosylation_evidence === undefined
                       ? advancedSearch.glycosylation_evidence.placeholderId
-                      : data.query.glycosylation_evidence,
+                      : data.cache_info.query.glycosylation_evidence,
                   proGlycosylationType:
-                    data.query.glycosylation_type === undefined
+                    data.cache_info.query.glycosylation_type === undefined
                       ? "" //advancedSearch.glycosylation_type.placeholderId
-                      : data.query.glycosylation_type,
+                      : data.cache_info.query.glycosylation_type,
                   proDiseaseName:
-                    data.query.disease_name === undefined
+                    data.cache_info.query.disease_name === undefined
                       ? ""
-                      : data.query.disease_name,
+                      : data.cache_info.query.disease_name,
                   proDiseaseId:
-                    data.query.disease_id === undefined
+                    data.cache_info.query.disease_id === undefined
                       ? ""
-                      : data.query.disease_id,
+                      : data.cache_info.query.disease_id,
                   proAttachedGlycanId:
-                    data.query.attached_glycan_id === undefined
+                    data.cache_info.query.attached_glycan_id === undefined
                       ? ""
-                      : data.query.attached_glycan_id,
+                      : data.cache_info.query.attached_glycan_id,
                   proBindingGlycanId:
-                    data.query.binding_glycan_id === undefined
+                    data.cache_info.query.binding_glycan_id === undefined
                       ? ""
-                      : data.query.binding_glycan_id
+                      : data.cache_info.query.binding_glycan_id
                 });
 
                 setProActTabKey("Advanced-Search");
@@ -352,6 +352,7 @@ const ProteinSearch = props => {
     input_pmid,
     input_glycosylation_evidence,
     input_glycosylation_type,
+    input_gly,
     input_disease_name,
     input_disease_id,
     input_attached_glycan_id,

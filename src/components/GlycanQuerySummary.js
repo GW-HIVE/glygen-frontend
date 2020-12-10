@@ -175,7 +175,7 @@ const GlycanQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {number_monosaccharides.min}&#8209;
-                  {number_monosaccharides.max}&nbsp;Da&nbsp;
+                  {number_monosaccharides.max}
                 </Col>
               </Row>
             )}

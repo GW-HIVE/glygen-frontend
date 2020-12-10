@@ -163,7 +163,7 @@ const ProteinQuerySummary = props => {
                   {proteinStrings.mass.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
+                  {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;
                 </Col>
               </Row>
             )}

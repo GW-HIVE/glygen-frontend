@@ -79,7 +79,7 @@ const GlycanList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          setQuery(fixResidueToShortNames(data.query));
+          setQuery(fixResidueToShortNames(data.cache_info.query));
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -111,7 +111,7 @@ const GlycanList = props => {
       // place to change values before rendering
 
       setData(data.results);
-      setQuery(fixResidueToShortNames(data.query));
+      setQuery(fixResidueToShortNames(data.cache_info.query));
       setPagination(data.pagination);
 
       //   setSizePerPage()

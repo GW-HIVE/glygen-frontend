@@ -49,7 +49,7 @@ const ProteinList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          setQuery(data.query);
+          setQuery(data.cache_info.query);
 
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
