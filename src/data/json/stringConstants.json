@@ -1194,6 +1194,11 @@
       "displayname": "Biosynthetic Enzymes",
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
     },
+    "expression": {
+      "id": "expression",
+      "displayname": "Expression",
+      "tooltip": "Expression Information for selected accession"
+    },
     "digital_seq": {
       "id": "digital_seq",
       "displayname": "Digital Sequence",

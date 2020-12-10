@@ -64,6 +64,10 @@ const items = [
     id: "Biosynthetic-Enzymes"
   },
   {
+    label: stringConstants.sidebar.expression.displayname,
+    id: "Expression"
+  },
+  {
     label: stringConstants.sidebar.digital_seq.displayname,
     id: "Digital-Sequence"
   },
@@ -258,6 +262,7 @@ const GlycanDetail = props => {
     publication,
     wurcs,
     enzyme,
+    expression,
     mass_pme,
     names,
     tool_support
@@ -424,6 +429,92 @@ const GlycanDetail = props => {
           {")"}
         </>
       )
+    }
+  ];
+  const expressionColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Site",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.position}</>
+    },
+    {
+      dataField: "residue",
+      text: "Amino Acid",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.residue}</>
+    },
+    {
+      dataField: "tissue.name",
+      text: "Tissue Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "tissue.uberon_id",
+      text: "Uberon ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.name",
+      text: "Cell Line Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.cellosaurus_id",
+      text: "Cellosaurus ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
     }
   ];
   const motifColumns = [
@@ -935,11 +1026,10 @@ const GlycanDetail = props => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {names && names.length ? (
-                        <ul>
+                        <ul className="list-style-none">
                           {names.map(nameObject => (
                             <li>
-                              <b>{nameObject.domain}</b>:{""}
-                              {nameObject.name}
+                              <b>{nameObject.domain}</b>: {nameObject.name}
                             </li>
                           ))}
                         </ul>
@@ -1160,6 +1250,58 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/* Biosynthetic Enzymes */}
+              <Accordion
+                id="expression"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.expression.title}
+                        text={DetailTooltips.glycan.expression.text}
+                        urlText={DetailTooltips.glycan.expression.urlText}
+                        url={DetailTooltips.glycan.expression.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.expression.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("expression", collapsed.expression)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.expression ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {expression && expression.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={expression}
+                          columns={expressionColumns}
+                          defaultSortField={"position"}
+                          onClickTarget={"#expression"}
+                        />
+                      )}
+                      {!expression && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/* Digital Sequence */}
               <Accordion
                 id="Digital-Sequence"
