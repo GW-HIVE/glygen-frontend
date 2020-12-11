@@ -30,7 +30,7 @@ const IdMappingResult = (props) => {
   const [legends, setLegends] = useState([]);
   const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
-  const [idMappingResult, setIdMappingResult] = useState(ID_MAPPING_RESULT);
+  const [idMapResult, setIdMapResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
@@ -51,8 +51,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setLegends(data.legends);
           setData(data.results);
+          setLegends(data.cache_info.legends);
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -71,8 +71,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setLegendsReason(data.legends);
           setDataReason(data.results);
+          setLegendsReason(data.cache_info.legends);
           setPageLoading(false);
         }
       })
@@ -80,6 +80,7 @@ const IdMappingResult = (props) => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
+    // eslint-disable-next-line
   }, []);
 
   const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
@@ -97,10 +98,12 @@ const IdMappingResult = (props) => {
     getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
       ({ data }) => {
         // place to change values before rendering
-        setLegends(data.legends);
-        setData(data.results);
-        setPagination(data.pagination);
-        setTotalSize(data.pagination.total_length);
+        if (!data.error_code) {
+          setLegends(data.legends);
+          setData(data.results);
+          setPagination(data.pagination);
+          setTotalSize(data.pagination.total_length);
+        }
       }
     );
   };
@@ -152,31 +155,28 @@ const IdMappingResult = (props) => {
             {/* </Link> */}
           </div>
 
-          {idMappingResult && idMappingResult.length !== 0 && (
+          {idMapResult && idMapResult.length !== 0 && (
             <PaginatedTable
               trStyle={rowStyleFormat}
               data={data}
-              columns={idMappingResult}
+              columns={idMapResult}
               page={page}
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
+              pagination={pagination}
               defaultSortField="from"
               defaultSortOrder="asc"
-              // idField="from"
             />
           )}
+          {!idMapResult && <p>No data available.</p>}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
-            <Link to={routeConstants.idMapping}>
-              <Button
-                type="button"
-                className="gg-btn-blue"
-                // onClick={ handleModifySearch }
-              >
-                Modify Search
-              </Button>
-            </Link>
+            {/* <Link to={routeConstants.idMapping}> */}
+            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
+              Modify Search
+            </Button>
+            {/* </Link> */}
           </div>
         </section>
         <div className="content-box-md">
@@ -201,6 +201,7 @@ const IdMappingResult = (props) => {
               ]}
             />
           )}
+          {!idMapReason && <p>No data available.</p>}
         </section>
       </Container>
     </>
