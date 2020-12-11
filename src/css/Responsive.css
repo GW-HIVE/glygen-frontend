@@ -17,9 +17,6 @@
   .gg-footer {
     padding: 15px 0;
   }
-  .img-responsive {
-    width: 100% !important;
-  }
 }
 
 /* Small Devices (Portrait Tablets & Small Desktops) */
@@ -34,9 +31,6 @@
   }
   .gg-footer {
     padding: 15px 0;
-  }
-  .img-responsive {
-    width: 100% !important;
   }
   .gg-protvista-container {
     width: 92% !important;
@@ -108,9 +102,6 @@
   .about-item {
     padding: 55px 30px;
     margin-bottom: 35px;
-  }
-  .img-responsive {
-    width: 100% !important;
   }
   .framework,
   .framework .icon,

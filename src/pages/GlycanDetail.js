@@ -36,7 +36,8 @@ import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
-
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { Tab, Tabs, Container } from "react-bootstrap";
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 const motifStrings = stringConstants.motif.common;
@@ -44,6 +45,11 @@ const motifStrings = stringConstants.motif.common;
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
   { label: stringConstants.sidebar.organism.displayname, id: "Organism" },
+
+  {
+    label: stringConstants.sidebar.names_synonyms.displayname,
+    id: "Names"
+  },
   { label: stringConstants.sidebar.motifs.displayname, id: "Motifs" },
   {
     label: stringConstants.sidebar.associated_glycan.displayname,
@@ -56,6 +62,10 @@ const items = [
   {
     label: stringConstants.sidebar.bio_Enzymes.displayname,
     id: "Biosynthetic-Enzymes"
+  },
+  {
+    label: stringConstants.sidebar.expression.displayname,
+    id: "Expression"
   },
   {
     label: stringConstants.sidebar.digital_seq.displayname,
@@ -143,7 +153,7 @@ const GlycanDetail = props => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
-  const [recordHistory, setRecordHistory] = useState(null);
+  const [nonExistent, setNonExistent] = useState(null);
   const [itemsCrossRef, setItemsCrossRef] = useState([]);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
@@ -186,11 +196,13 @@ const GlycanDetail = props => {
         response.data.error_list &&
         response.data.error_list.length &&
         response.data.error_list[0].error_code &&
-        response.data.error_list[0].error_code === "non-existent-record" &&
-        response.data.history
+        response.data.error_list[0].error_code === "non-existent-record"
       ) {
         // history = response.data.history;
-        setRecordHistory(response.data.history);
+        setNonExistent({
+          error_code: response.data.error_list[0].error_code,
+          history: response.data.history
+        });
       } else {
         let message = "Glycan Detail api call";
         axiosError(response, id, message, setPageLoading, setAlertDialogInput);
@@ -250,7 +262,9 @@ const GlycanDetail = props => {
     publication,
     wurcs,
     enzyme,
+    expression,
     mass_pme,
+    names,
     tool_support
   } = detailData;
 
@@ -417,6 +431,92 @@ const GlycanDetail = props => {
       )
     }
   ];
+  const expressionColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Site",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.position}</>
+    },
+    {
+      dataField: "residue",
+      text: "Amino Acid",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.residue}</>
+    },
+    {
+      dataField: "tissue.name",
+      text: "Tissue Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "tissue.uberon_id",
+      text: "Uberon ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.name",
+      text: "Cell Line Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.cellosaurus_id",
+      text: "Cellosaurus ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    }
+  ];
   const motifColumns = [
     {
       dataField: "id",
@@ -486,7 +586,8 @@ const GlycanDetail = props => {
       bioEnzyme: true,
       digitalSeq: true,
       crossref: true,
-      publication: true
+      publication: true,
+      names: true
     }
   );
 
@@ -495,6 +596,8 @@ const GlycanDetail = props => {
   }
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
+
+  // const ToggleIcon = ({open}) => open ? <ExpandLessIcon fontSize="large" /> : <ExpandMoreIcon fontSize="large" />
   // ===================================== //
 
   /**
@@ -509,13 +612,42 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
-  if (recordHistory) {
+  // <CustomAlert title={`This Glycan ${id} Record is nonExistent`}>
+  //   <ul>
+  //     {nonExistent.history.map(item => (
+  //       <span className="recordInfo">
+  //         <li>{item.description}</li>
+  //       </span>
+  //     ))}
+  //   </ul>
+  // </CustomAlert>
+
+  if (nonExistent) {
     return (
-      <>
-        {recordHistory.map(item => (
-          <p>{item} Click here </p>
-        ))}
-      </>
+      <Container className="tab-content-border2">
+        <Alert className="erroralert" severity="error">
+          {nonExistent.history && nonExistent.history.length ? (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b>Record is Nonexistent
+              </AlertTitle>
+              <ul>
+                {nonExistent.history.map(item => (
+                  <span className="recordInfo">
+                    <li>{item.description}</li>
+                  </span>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b> Record is not valid
+              </AlertTitle>
+            </>
+          )}
+        </Alert>
+      </Container>
     );
   }
 
@@ -586,6 +718,8 @@ const GlycanDetail = props => {
                   setAlertDialogInput({ show: input });
                 }}
               />
+
+              {/*  Function */}
               {/* general */}
               <Accordion
                 id="General"
@@ -850,6 +984,62 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/*  Names */}
+              <Accordion
+                id="Names"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.protein.names_synonyms.title}
+                        text={DetailTooltips.protein.names_synonyms.text}
+                        urlText={DetailTooltips.protein.names_synonyms.urlText}
+                        url={DetailTooltips.protein.names_synonyms.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.names_synonyms.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse(
+                            "names_synonyms",
+                            collapsed.names_synonyms
+                          )
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.names_synonyms ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {names && names.length ? (
+                        <ul className="list-style-none">
+                          {names.map(nameObject => (
+                            <li>
+                              <b>{nameObject.domain}</b>: {nameObject.name}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>No data available.</p>
+                      )}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
               {/* Motif */}
               <Accordion
                 id="Motifs"
@@ -1060,6 +1250,58 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/* Biosynthetic Enzymes */}
+              <Accordion
+                id="expression"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.expression.title}
+                        text={DetailTooltips.glycan.expression.text}
+                        urlText={DetailTooltips.glycan.expression.urlText}
+                        url={DetailTooltips.glycan.expression.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.expression.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("expression", collapsed.expression)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.expression ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {expression && expression.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={expression}
+                          columns={expressionColumns}
+                          defaultSortField={"position"}
+                          onClickTarget={"#expression"}
+                        />
+                      )}
+                      {!expression && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/* Digital Sequence */}
               <Accordion
                 id="Digital-Sequence"

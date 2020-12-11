@@ -14,8 +14,8 @@ export const getGlycanList = (
   glycanListId,
   offset = 1,
   limit = 20,
-  sort = undefined,
-  order = "asc"
+  sort = "hit_score",
+  order = "desc"
 ) => {
   const queryParams = {
     id: glycanListId,
@@ -89,7 +89,14 @@ export const GLYCAN_COLUMNS = [
       };
     }
   },
-
+  {
+    dataField: "hit_score",
+    text: "Hit Score",
+    sort: true,
+    headerStyle: (colum, colIndex) => {
+      return { backgroundColor: "#4B85B6", color: "white" };
+    }
+  },
   {
     dataField: glycanStrings.mass.id,
     text: glycanStrings.mass.shortName,
@@ -99,33 +106,7 @@ export const GLYCAN_COLUMNS = [
     },
     selected: true
   },
-  // {
-  //   dataField: "iupac",
-  //   text: "IUPAC",
-  //   sort: true,
-  //   headerStyle: (colum, colIndex) => {
-  //     return { backgroundColor: "#4B85B6", color: "white" };
-  //   }
-  // },
-  // {
-  //   dataField: "glycoct",
-  //   text: "Glycoct",
-  //   sort: true,
-  //   headerStyle: (colum, colIndex) => {
-  //     return { backgroundColor: "#4B85B6", color: "white" };
-  //   },
-  //   formatter: (value, row, rowIdx) => {
-  //     const txt = value.replace(/\\n/g, "\n");
-  //     return (
-  //       <CustomPopover
-  //         id={rowIdx}
-  //         key={rowIdx}
-  //         displayText={txt.substring(0, 10) + " ..."}
-  //         popOverText={txt}
-  //       ></CustomPopover>
-  //     );
-  //   }
-  // },
+
   {
     dataField: "mass_pme",
     text: glycanStrings.mass_pme.shortName,

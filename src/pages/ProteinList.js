@@ -49,7 +49,7 @@ const ProteinList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          setQuery(data.query);
+          setQuery(data.cache_info.query);
 
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
@@ -166,7 +166,7 @@ const ProteinList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              defaultSortField="uniprot_canonical_ac"
+              defaultSortField="hit_score"
               idField="uniprot_canonical_ac"
             />
           )}

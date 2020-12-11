@@ -491,6 +491,15 @@
         },
         "id": "protein_names"
       },
+      "glycosylation_type": {
+        "name": "Glycosylation Type",
+        "shortName": "Glycosylation Type",
+        "tooltip": {
+          "title": "Glycosylation Type",
+          "text": "Click to select Glycosylation Type."
+        },
+        "id": "glycosylation_type"
+      },
       "gene_url": {
         "name": "URL",
         "shortName": "url",
@@ -1190,6 +1199,11 @@
       "displayname": "Biosynthetic Enzymes",
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
     },
+    "expression": {
+      "id": "expression",
+      "displayname": "Expression",
+      "tooltip": "Expression Information for selected accession"
+    },
     "digital_seq": {
       "id": "digital_seq",
       "displayname": "Digital Sequence",
@@ -1224,6 +1238,11 @@
       "id": "ptm_annotation",
       "displayname": "PTM Annotation",
       "tooltip": " ptm_annotation Information for selected Protein accession"
+    },
+    "pro_annotation": {
+      "id": "pro_annotation",
+      "displayname": "Proteoform Annotation",
+      "tooltip": " pro_annotation Information for selected Protein accession"
     },
     "mutagenesis": {
       "id": "mutagenesis",

@@ -146,7 +146,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={triFold1Img} title="Tri-Fold Brochure June 2019">
-                  <Image src={triFold1Img} className="img-responsive" alt="tri-fold brochure" />
+                  <Image src={triFold1Img} className="img-fluid" alt="tri-fold brochure" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -174,7 +174,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={poster1Img} title="GlyGen BioCuration April 2019">
-                  <Image src={poster1Img} className="img-responsive" alt="Poster Biocuration" />
+                  <Image src={poster1Img} className="img-fluid" alt="Poster Biocuration" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -202,11 +202,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={onePageBrochurImg} title="GlyGen One Page Brochure June 2019">
-                  <Image
-                    src={onePageBrochurImg}
-                    className="img-responsive"
-                    alt="One Page Brochure"
-                  />
+                  <Image src={onePageBrochurImg} className="img-fluid" alt="One Page Brochure" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -234,7 +230,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={poster2Img} title="GlyGen SFG-Data November 2019">
-                  <Image src={poster2Img} className="img-responsive" alt="Poster SFG Data" />
+                  <Image src={poster2Img} className="img-fluid" alt="Poster SFG Data" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -265,7 +261,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={logos} title="GlyGen logo">
-                  <Image src={logos} className="img-responsive" alt="Logo" />
+                  <Image src={logos} className="img-fluid" alt="Logo" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -293,7 +289,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={poster3Img} title="GlyGen SFG-Data November 2019">
-                  <Image src={poster3Img} className="img-responsive" alt="Poster SFG Data" />
+                  <Image src={poster3Img} className="img-fluid" alt="Poster SFG Data" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -321,11 +317,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={onePageBrochureImg} title="GlyGen One Page Brochure December 2019">
-                  <Image
-                    src={onePageBrochureImg}
-                    className="img-responsive"
-                    alt="One Page Brochure"
-                  />
+                  <Image src={onePageBrochureImg} className="img-fluid" alt="One Page Brochure" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -355,7 +347,7 @@ const Portfolio = (props) => {
                 <a href={poster4GlycoTreeImg} title="SFG GlyGen GlycoTree November 2020">
                   <Image
                     src={poster4GlycoTreeImg}
-                    className="img-responsive"
+                    className="img-fluid"
                     alt="Poster SFG GlycoTree"
                   />
                   <div className="portfolio-item-overlay">
@@ -385,11 +377,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={stickersLogoImg} title="GlyGen logo stickers">
-                  <Image
-                    src={stickersLogoImg}
-                    className="img-responsive"
-                    alt="GlyGen logo stickers"
-                  />
+                  <Image src={stickersLogoImg} className="img-fluid" alt="GlyGen logo stickers" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}
@@ -417,11 +405,7 @@ const Portfolio = (props) => {
               </div>
               <div className="portfolio-item">
                 <a href={poster5NCBIImg} title="SFG GlyGen NCBI November 2020">
-                  <Image
-                    src={poster5NCBIImg}
-                    className="img-responsive"
-                    alt="Poster SFG GlyGen NCBI"
-                  />
+                  <Image src={poster5NCBIImg} className="img-fluid" alt="Poster SFG GlyGen NCBI" />
                   <div className="portfolio-item-overlay">
                     <div className="portfolio-item-details text-center">
                       {/* Item Header  */}

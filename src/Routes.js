@@ -48,10 +48,11 @@ const Routes = (props) => (
     <Route path={routeConstants.glycanSearch} component={GlycanSearch} />
     <Route path={`${routeConstants.proteinSearch}:id`} component={ProteinSearch} />
     <Route path={routeConstants.proteinSearch} component={ProteinSearch} />
-    <Route path={`${routeConstants.glycanDetail}:id`} component={GlycanDetail} />
+
     <Route path={routeConstants.motifList} component={MotifList} />
     <Route path={`${routeConstants.motifDetail}:id`} component={MotifDetail} />
     <Route path={routeConstants.motifDetail} component={MotifDetail} />
+    <Route path={`${routeConstants.glycanDetail}:id`} component={GlycanDetail} />
     <Route path={`${routeConstants.proteinDetail}:id/:select?`} component={ProteinDetail} />
     <Route path={`${routeConstants.isoAlignment}:id/:alignment`} component={IsoAlignment} />
     <Route path={`${routeConstants.protVista}:id`} component={ProtVista} />
