@@ -166,7 +166,7 @@ const ProteinList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              defaultSortField="uniprot_canonical_ac"
+              defaultSortField="gene"
               idField="uniprot_canonical_ac"
             />
           )}
