@@ -255,7 +255,7 @@ const ProteinAdvancedSearch = (props) => {
 			proPathwayId: '',
 			proPubId: '',
 			proGlyEvidence: advancedSearch.glycosylation_evidence.placeholderId,
-			//proGlycosylationType: advancedSearch.glycosylation_type.placeholderId,
+			proGlycosylationType: advancedSearch.glycosylation_type.placeholderId,
 			proDiseaseName: '',
 			proDiseaseId: '',
 			proAttachedGlycanId: '',
@@ -770,16 +770,17 @@ const ProteinAdvancedSearch = (props) => {
                             />
                             {commonProteinData.glycosylation_type.name}
 						</Typography>
-						{advancedSearch.glycosylation_type && (
+						{/* {advancedSearch.glycosylation_type && ( */}
 							<SelectControl
 								inputValue={props.inputValue.proGlycosylationType}
 								placeholder={advancedSearch.glycosylation_type.placeholder}
 								placeholderId={advancedSearch.glycosylation_type.placeholderId}
 								placeholderName={advancedSearch.glycosylation_type.placeholderName}
-								menu={advancedSearch.glycosylation_type.menu}
+								// menu={advancedSearch.glycosylation_type.menu}
+								menu={props.initData.glycosylation_types.map(a => ({name:a, id:a}))}
 								setInputValue={proGlycosylationTypeOnChange}
 							/>
-						)}
+						{/* )} */}
 					</FormControl>
 				</Grid>
 				{/* Glycosylation Evidence Type */}

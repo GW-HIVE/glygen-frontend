@@ -136,9 +136,13 @@ const ProteinSearch = props => {
                 proteinData.simple_search.query_type.name
               ) {
                 setProSimpleSearchCategory(
-                  data.cache_info.query.term_category ? data.cache_info.query.term_category : "any"
+                  data.cache_info.query.term_category
+                    ? data.cache_info.query.term_category
+                    : "any"
                 );
-                setProSimpleSearchTerm(data.cache_info.query.term ? data.cache_info.query.term : "");
+                setProSimpleSearchTerm(
+                  data.cache_info.query.term ? data.cache_info.query.term : ""
+                );
                 setProActTabKey("Simple-Search");
                 setPageLoading(false);
               } else {
@@ -172,10 +176,12 @@ const ProteinSearch = props => {
                           )
                         ]
                       : [
-                          Math.floor(data.cache_info.query.mass.min).toLocaleString(
-                            "en-US"
-                          ),
-                          Math.ceil(data.cache_info.query.mass.max).toLocaleString("en-US")
+                          Math.floor(
+                            data.cache_info.query.mass.min
+                          ).toLocaleString("en-US"),
+                          Math.ceil(
+                            data.cache_info.query.mass.max
+                          ).toLocaleString("en-US")
                         ],
                   proOrganism:
                     data.cache_info.query.organism === undefined
@@ -196,17 +202,23 @@ const ProteinSearch = props => {
                       ? ""
                       : data.cache_info.query.gene_name,
                   proGOName:
-                    data.cache_info.query.go_term === undefined ? "" : data.cache_info.query.go_term,
+                    data.cache_info.query.go_term === undefined
+                      ? ""
+                      : data.cache_info.query.go_term,
                   proGOId:
-                    data.cache_info.query.go_id === undefined ? "" : data.cache_info.query.go_id,
+                    data.cache_info.query.go_id === undefined
+                      ? ""
+                      : data.cache_info.query.go_id,
                   proAminoAcid:
                     data.cache_info.query.glycosylated_aa === undefined
                       ? []
-                      : data.cache_info.query.glycosylated_aa.aa_list.map(aminoAcid => {
-                          return initData.aa_list.find(aa => {
-                            return aa.key === aminoAcid;
-                          });
-                        }),
+                      : data.cache_info.query.glycosylated_aa.aa_list.map(
+                          aminoAcid => {
+                            return initData.aa_list.find(aa => {
+                              return aa.key === aminoAcid;
+                            });
+                          }
+                        ),
                   proAminoAcidOperation:
                     data.cache_info.query.glycosylated_aa === undefined
                       ? "or"
@@ -220,14 +232,16 @@ const ProteinSearch = props => {
                       ? ""
                       : data.cache_info.query.pathway_id,
                   proPubId:
-                    data.cache_info.query.pmid === undefined ? "" : data.cache_info.query.pmid,
+                    data.cache_info.query.pmid === undefined
+                      ? ""
+                      : data.cache_info.query.pmid,
                   proGlyEvidence:
                     data.cache_info.query.glycosylation_evidence === undefined
                       ? advancedSearch.glycosylation_evidence.placeholderId
                       : data.cache_info.query.glycosylation_evidence,
                   proGlycosylationType:
                     data.cache_info.query.glycosylation_type === undefined
-                      ? "" //advancedSearch.glycosylation_type.placeholderId
+                      ? advancedSearch.glycosylation_type.placeholderId
                       : data.cache_info.query.glycosylation_type,
                   proDiseaseName:
                     data.cache_info.query.disease_name === undefined

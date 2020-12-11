@@ -357,8 +357,15 @@ const ProteinDetail = props => {
     const mining =
       mapOfGlycosylationCategories.automatic_literature_mining || [];
 
-    const selectTab = Object.keys(mapOfGlycosylationCategories).find(
-      category => mapOfGlycosylationCategories[category].length > 0
+    const selectTab = [
+      "reported_with_glycan",
+      "reported",
+      "predicted",
+      "automatic_literature_mining"
+    ].find(
+      category =>
+        mapOfGlycosylationCategories[category] &&
+        mapOfGlycosylationCategories[category].length > 0
     );
 
     glycosylationWithImage = withImage;
