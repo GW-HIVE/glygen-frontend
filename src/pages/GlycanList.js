@@ -26,6 +26,7 @@ const GlycanList = props => {
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
+  const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(GLYCAN_COLUMNS);
   const [page, setPage] = useState(1);
@@ -80,6 +81,7 @@ const GlycanList = props => {
         } else {
           setData(data.results);
           setQuery(fixResidueToShortNames(data.cache_info.query));
+          setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -112,6 +114,7 @@ const GlycanList = props => {
 
       setData(data.results);
       setQuery(fixResidueToShortNames(data.cache_info.query));
+      setTimeStamp(data.cache_info.ts);
       setPagination(data.pagination);
 
       //   setSizePerPage()
@@ -160,6 +163,7 @@ const GlycanList = props => {
           <GlycanQuerySummary
             data={query}
             question={quickSearch[searchId]}
+            timestamp={timestamp}
             onModifySearch={handleModifySearch}
           />
         </section>

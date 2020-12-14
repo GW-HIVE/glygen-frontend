@@ -28,6 +28,7 @@ const OrthologsList = props => {
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
+  const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(ORTHOLOGS_COLUMNS);
   const [page, setPage] = useState(1);
@@ -53,6 +54,7 @@ const OrthologsList = props => {
       } else {
       setData(data.results);
       setQuery(data.query);
+      setTimeStamp(data.query.execution_time);
 
       setPagination(data.pagination);
       const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
@@ -92,6 +94,7 @@ const OrthologsList = props => {
       if (!data.error_code) {
         setData(data.results);
         setPagination(data.pagination);
+        setTimeStamp(data.query.execution_time);
         setTotalSize(data.pagination.total_length);
       }
     });
@@ -139,6 +142,7 @@ const OrthologsList = props => {
             <ProteinQuerySummary
               data={query}
               question={quickSearch[searchId]}
+              timestamp={timestamp}
               onModifySearch={handleModifySearch}
             />
           )}

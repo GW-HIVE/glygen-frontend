@@ -39,10 +39,10 @@ function getDateTime() {
 const GlycanQuerySummary = props => {
   const title = "Glycan Search Summary";
 
-  const { data, onModifySearch } = props;
+  const { data, onModifySearch, timestamp } = props;
 
-  const executionTime = data.execution_time
-    ? getDateTime(data.execution_time)
+  const executionTime = timestamp
+    ? getDateTime(timestamp)
     : "";
   const {
     glycan_identifier,
