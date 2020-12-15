@@ -25,7 +25,7 @@
   },
   "input_idlist": {
     "placeholder": "Enter one or multiple IDs, separate IDs using space bar, comma or return key example: \n P14210 \n Q08048 \n P17945 \n P14210,Q08048,P17945 \n P14210 Q08048 P17945",
-    "length": 2500,
+    "length": 100000,
 		"errorText": "Entry is too long - max length is 2500.",
 		"required": "This field is required."
   },

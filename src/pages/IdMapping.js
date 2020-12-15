@@ -131,12 +131,16 @@ const IdMapping = (props) => {
             .then(({ data }) => {
               logActivity("user", id, "Search modification initiated");
               // setIdMapSearchData({
-              //   recordType: data.query.recordtype === undefined ? "any" : data.query.recordtype,
+              //   recordType:
+              //     data.cache_info.query.recordtype === undefined ? "any" : data.query.recordtype,
               //   inputNamespace:
-              //     data.query.input_namespace === undefined ? "any" : data.query.input_namespace,
+              //     data.cache_info.query.input_namespace === undefined
+              //       ? "any"
+              //       : data.cache_info.query.input_namespace,
               //   outputNamespace:
-              //     data.query.output_namespace === undefined ? "any" : data.query.output_namespace,
-              //   inputIdlist: data.query.input_idlist === undefined ? "" : data.query.input_idlist,
+              //     data.cache_info.query.output_namespace === undefined ? "any" : data.query.output_namespace,
+              //   inputIdlist:
+              //     data.cache_info.query.input_idlist === undefined ? "" : data.query.input_idlist,
               // });
               setPageLoading(false);
             })

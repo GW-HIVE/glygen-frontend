@@ -56,7 +56,7 @@ export const ID_MAPPING_RESULT = [
   },
   {
     dataField: "anchor",
-    text: "From ID",
+    text: "Internal ID",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
@@ -74,7 +74,7 @@ export const ID_MAPPING_RESULT = [
 export const ID_MAP_REASON = [
   {
     dataField: "input_id",
-    text: "IDs",
+    text: "Input ID",
     sort: true,
     selected: true,
     headerStyle: () => {
@@ -83,7 +83,7 @@ export const ID_MAP_REASON = [
   },
   {
     dataField: "reason",
-    text: "Reason",
+    text: "Reason Not Mapped",
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
