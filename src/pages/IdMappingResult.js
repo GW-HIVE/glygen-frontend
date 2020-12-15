@@ -71,8 +71,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setDataReason(data.results);
           setLegendsReason(data.cache_info.legends);
+          setDataReason(data.results);
           setPaginationReason(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -101,7 +101,7 @@ const IdMappingResult = (props) => {
       ({ data }) => {
         // place to change values before rendering
         if (!data.error_code) {
-          setLegends(data.legends);
+          setLegends(data.cache_info.legends);
           setData(data.results);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
@@ -128,8 +128,8 @@ const IdMappingResult = (props) => {
       ({ data }) => {
         // place to change values before rendering
         if (!data.error_code) {
-          setDataReason(data.results);
           setLegendsReason(data.cache_info.legends);
+          setDataReason(data.results);
           setPaginationReason(data.pagination);
           setTotalSizeReason(data.pagination.total_length);
           setPage(page);
@@ -141,6 +141,18 @@ const IdMappingResult = (props) => {
 
   const handleModifySearch = () => {
     props.history.push(routeConstants.idMapping + id);
+  };
+
+  const rowStyle = (row, rowIndex) => {
+    const style = {};
+    // if (row.from < 1) {
+    //   style.backgroundColor = "yellow";
+    // }
+    if (rowIndex < 1) {
+      style.fontWeight = "bold";
+      style.color = "#2f78b7";
+    }
+    return style;
   };
 
   return (
@@ -193,9 +205,10 @@ const IdMappingResult = (props) => {
               pagination={pagination}
               defaultSortField="from"
               defaultSortOrder="asc"
+              noDataIndication={"No data available."}
+              rowStyle={rowStyle}
             />
           )}
-          {!idMapResult && <p>No data available.</p>}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             {/* <Link to={routeConstants.idMapping}> */}
@@ -208,7 +221,7 @@ const IdMappingResult = (props) => {
         <div className="content-box-md">
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
-        <section className="mapping-reason-tbl">
+        <section>
           {idMapReason && idMapReason.length !== 0 && (
             <PaginatedTable
               data={dataReason}
@@ -220,9 +233,9 @@ const IdMappingResult = (props) => {
               pagination={paginationReason}
               defaultSortField="input_id"
               defaultSortOrder="asc"
+              noDataIndication={"No data available."}
             />
           )}
-          {/* {!idMapReason && <p>No data available.</p>} */}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>

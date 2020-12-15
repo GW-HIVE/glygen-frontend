@@ -22,6 +22,8 @@ const PaginatedTable = ({
   defaultSortField = "",
   defaultSortOrder = "asc",
   onClickTarget,
+  noDataIndication,
+  rowStyle,
 }) => {
   const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total Paginationtext">
@@ -115,6 +117,8 @@ const PaginatedTable = ({
               columns={columns}
               onTableChange={handleTableChange}
               {...paginationTableProps}
+              noDataIndication={noDataIndication}
+              rowStyle={rowStyle}
             />
             <div>
               <PaginationTotalStandalone {...paginationProps} />
