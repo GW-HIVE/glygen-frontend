@@ -522,7 +522,7 @@ const GlycanAdvancedSearch = (props) => {
 								placeholderId={advancedSearch.glycan_subtype.placeholderId}
 								placeholderName={advancedSearch.glycan_subtype.placeholderName}
 								menu={props.initData.glycan_type.find((type) => {return type.name === props.inputValue.glyType})
-										.subtype.map((subtype) => {return {id: subtype, name: subtype}})}
+								.subtype.map((subtype) => {return {id: subtype, name: subtype}})}
 								setInputValue={glySubTypeOnChange}
 							/>
 						</FormControl>

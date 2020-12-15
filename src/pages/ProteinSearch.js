@@ -452,7 +452,7 @@ const ProteinSearch = props => {
         ? input_glycosylation_evidence
         : undefined,
       [commonProteinData.glycosylation_type]: input_glycosylation_type
-        ? input_glycosylation_type
+        ? input_glycosylation_type.id
         : undefined,
 
       [commonProteinData.disease_name.id]: input_disease_name
