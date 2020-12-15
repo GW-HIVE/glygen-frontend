@@ -16,9 +16,7 @@ import { axiosError } from "../data/axiosError";
 import { Row } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 import routeConstants from "../data/json/routeConstants";
-import BootstrapTable from "react-bootstrap-table-next";
 import idMappingData from "../data/json/idMapping";
 
 const IdMappingResult = (props) => {
@@ -30,11 +28,13 @@ const IdMappingResult = (props) => {
   const [legends, setLegends] = useState([]);
   const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
+  const [paginationReason, setPaginationReason] = useState([]);
   const [idMapResult, setIdMapResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState();
+  const [totalSizeReason, setTotalSizeReason] = useState();
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -73,6 +73,10 @@ const IdMappingResult = (props) => {
         } else {
           setDataReason(data.results);
           setLegendsReason(data.cache_info.legends);
+          setPaginationReason(data.pagination);
+          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+          setPage(currentPage);
+          setTotalSizeReason(data.pagination.total_length);
           setPageLoading(false);
         }
       })
@@ -84,8 +88,6 @@ const IdMappingResult = (props) => {
   }, []);
 
   const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
-    // setPage(page);
-    // setSizePerPage(sizePerPage);
     data.sort((a, b) => {
       if (a[sortField] > b[sortField]) {
         return sortOrder === "asc" ? 1 : -1;
@@ -103,6 +105,35 @@ const IdMappingResult = (props) => {
           setData(data.results);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
+          setPage(page);
+          setSizePerPage(sizePerPage);
+        }
+      }
+    );
+  };
+
+  const handleTableChangeReason = (type, { page, sizePerPage, sortField, sortOrder }) => {
+    // setPage(page);
+    // setSizePerPage(sizePerPage);
+    dataReason.sort((a, b) => {
+      if (a[sortField] > b[sortField]) {
+        return sortOrder === "asc" ? 1 : -1;
+      } else if (a[sortField] < b[sortField]) {
+        return sortOrder === "asc" ? -1 : 1;
+      }
+      return 0;
+    });
+
+    getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
+      ({ data }) => {
+        // place to change values before rendering
+        if (!data.error_code) {
+          setDataReason(data.results);
+          setLegendsReason(data.cache_info.legends);
+          setPaginationReason(data.pagination);
+          setTotalSizeReason(data.pagination.total_length);
+          setPage(page);
+          setSizePerPage(sizePerPage);
         }
       }
     );
@@ -111,10 +142,6 @@ const IdMappingResult = (props) => {
   const handleModifySearch = () => {
     props.history.push(routeConstants.idMapping + id);
   };
-
-  function rowStyleFormat(row, rowIdx) {
-    return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
-  }
 
   return (
     <>
@@ -145,7 +172,7 @@ const IdMappingResult = (props) => {
             </Grid>
           </Row>
         </div>
-        <section style={{ width: "95%", margin: "0 auto" }}>
+        <section>
           {/* Button */}
           <div className="text-right mb-4">
             {/* <Link to={routeConstants.idMapping}> */}
@@ -157,7 +184,6 @@ const IdMappingResult = (props) => {
 
           {idMapResult && idMapResult.length !== 0 && (
             <PaginatedTable
-              trStyle={rowStyleFormat}
               data={data}
               columns={idMapResult}
               page={page}
@@ -182,26 +208,27 @@ const IdMappingResult = (props) => {
         <div className="content-box-md">
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
-        <section>
+        <section className="mapping-reason-tbl">
           {idMapReason && idMapReason.length !== 0 && (
-            <BootstrapTable
-              bootstrap4
-              striped
-              hover
-              wrapperClasses="table-responsive mapping-reason-tbl"
-              // headerClasses={classes.tableHeader}
-              keyField="id"
+            <PaginatedTable
               data={dataReason}
               columns={idMapReason}
-              defaultSorted={[
-                {
-                  dataField: "input_id",
-                  order: "asc",
-                },
-              ]}
+              page={page}
+              sizePerPage={sizePerPage}
+              totalSize={totalSizeReason}
+              onTableChange={handleTableChangeReason}
+              pagination={paginationReason}
+              defaultSortField="input_id"
+              defaultSortOrder="asc"
             />
           )}
-          {!idMapReason && <p>No data available.</p>}
+          {/* {!idMapReason && <p>No data available.</p>} */}
+          {/* Button */}
+          <div className="text-right" style={{ marginTop: "48px" }}>
+            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
+              Modify Search
+            </Button>
+          </div>
         </section>
       </Container>
     </>
