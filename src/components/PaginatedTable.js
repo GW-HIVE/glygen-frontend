@@ -1,6 +1,6 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-
+import { makeStyles } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import paginationFactory, {
@@ -73,6 +73,14 @@ const PaginatedTable = ({
     // }
     onTableChange(type, values);
   };
+  const useStyles = makeStyles((theme) => ({
+    tableHeader: {
+      backgroundColor: "#4B85B6",
+      color: theme.palette.common.white,
+      height: "50px",
+    },
+  }));
+  const classes = useStyles();
 
   return (
     <div>
@@ -119,6 +127,7 @@ const PaginatedTable = ({
               {...paginationTableProps}
               noDataIndication={noDataIndication}
               rowStyle={rowStyle}
+              headerClasses={classes.tableHeader}
             />
             <div>
               <PaginationTotalStandalone {...paginationProps} />

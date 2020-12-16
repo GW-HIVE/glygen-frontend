@@ -47,28 +47,28 @@ export const ID_MAPPING_RESULT = [
     // dataField: mapStrings.shortName,
     // text: mapStrings.input_idlist.name,
     dataField: "from",
+    formatter: (value, row) => {
+      return value + " " + row.data.cache_info.legends.from;
+    },
     text: "From ID",
     sort: true,
     selected: true,
-    headerStyle: () => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
   },
   {
     dataField: "anchor",
+    formatter: (value, row) => {
+      return value + " " + row.data.cache_info.legends.anchor;
+    },
     text: "Internal ID",
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
   },
   {
     dataField: "to",
+    formatter: (value, row) => {
+      return value + " " + row.data.cache_info.legends.to;
+    },
     text: "To ID",
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
   },
 ];
 export const ID_MAP_REASON = [
@@ -77,16 +77,10 @@ export const ID_MAP_REASON = [
     text: "Input ID",
     sort: true,
     selected: true,
-    headerStyle: () => {
-      return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
-    },
   },
   {
     dataField: "reason",
     text: "Reason Not Mapped",
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
-    },
   },
 ];

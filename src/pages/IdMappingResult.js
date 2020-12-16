@@ -29,7 +29,7 @@ const IdMappingResult = (props) => {
   const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [paginationReason, setPaginationReason] = useState([]);
-  const [idMapResult, setIdMapResult] = useState(ID_MAPPING_RESULT);
+  // const [idMapResult, setIdMapResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
@@ -143,17 +143,62 @@ const IdMappingResult = (props) => {
     props.history.push(routeConstants.idMapping + id);
   };
 
-  const rowStyle = (row, rowIndex) => {
-    const style = {};
-    // if (row.from < 1) {
-    //   style.backgroundColor = "yellow";
-    // }
-    if (rowIndex < 1) {
-      style.fontWeight = "bold";
-      style.color = "#2f78b7";
-    }
-    return style;
-  };
+  const idMapResultColumns = [
+    {
+      // dataField: mapStrings.shortName,
+      // text: mapStrings.input_idlist.name,
+      dataField: "from",
+      text: "From ID",
+      sort: true,
+      selected: true,
+      headerStyle: (colum, colIndex) => {
+        return { width: "33%" };
+      },
+      headerFormatter: (column, colIndex, { sortElement }) => {
+        return (
+          <div>
+            {column.text}
+            {sortElement}
+            <span style={{ float: "right", color: "lightgreen" }}>{legends.from} </span>
+          </div>
+        );
+      },
+    },
+    {
+      dataField: "anchor",
+      text: "Internal ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { width: "33%" };
+      },
+      headerFormatter: (column, colIndex, { sortElement }) => {
+        return (
+          <div>
+            {column.text}
+            {sortElement}
+            <span style={{ float: "right", color: "lightgreen" }}>{legends.anchor} </span>
+          </div>
+        );
+      },
+    },
+    {
+      dataField: "to",
+      text: "To ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { width: "33%" };
+      },
+      headerFormatter: (column, colIndex, { sortElement }) => {
+        return (
+          <div>
+            {column.text}
+            {sortElement}
+            <span style={{ float: "right", color: "lightgreen" }}>{legends.to} </span>
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <>
@@ -194,21 +239,22 @@ const IdMappingResult = (props) => {
             {/* </Link> */}
           </div>
 
-          {idMapResult && idMapResult.length !== 0 && (
-            <PaginatedTable
-              data={data}
-              columns={idMapResult}
-              page={page}
-              sizePerPage={sizePerPage}
-              totalSize={totalSize}
-              onTableChange={handleTableChange}
-              pagination={pagination}
-              defaultSortField="from"
-              defaultSortOrder="asc"
-              noDataIndication={"No data available."}
-              rowStyle={rowStyle}
-            />
-          )}
+          {/* {idMapResult && idMapResult.length !== 0 && ( */}
+          <PaginatedTable
+            data={data}
+            // columns={idMapResult}
+            columns={idMapResultColumns}
+            page={page}
+            sizePerPage={sizePerPage}
+            totalSize={totalSize}
+            onTableChange={handleTableChange}
+            pagination={pagination}
+            defaultSortField="from"
+            defaultSortOrder="asc"
+            noDataIndication={"No data available."}
+            // rowStyle={rowStyle}
+          />
+          {/* )} */}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             {/* <Link to={routeConstants.idMapping}> */}
@@ -222,20 +268,20 @@ const IdMappingResult = (props) => {
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
         <section>
-          {idMapReason && idMapReason.length !== 0 && (
-            <PaginatedTable
-              data={dataReason}
-              columns={idMapReason}
-              page={page}
-              sizePerPage={sizePerPage}
-              totalSize={totalSizeReason}
-              onTableChange={handleTableChangeReason}
-              pagination={paginationReason}
-              defaultSortField="input_id"
-              defaultSortOrder="asc"
-              noDataIndication={"No data available."}
-            />
-          )}
+          {/* {idMapReason && idMapReason.length !== 0 && ( */}
+          <PaginatedTable
+            data={dataReason}
+            columns={idMapReason}
+            page={page}
+            sizePerPage={sizePerPage}
+            totalSize={totalSizeReason}
+            onTableChange={handleTableChangeReason}
+            pagination={paginationReason}
+            defaultSortField="input_id"
+            defaultSortOrder="asc"
+            noDataIndication={"No data available."}
+          />
+          {/* )} */}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
