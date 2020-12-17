@@ -650,6 +650,7 @@ const GlycanDetail = props => {
       glycoprotein: true,
       glycanBindingProtein: true,
       bioEnzyme: true,
+      expression: true,
       digitalSeq: true,
       crossref: true,
       publication: true,

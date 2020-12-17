@@ -63,6 +63,7 @@ const GlycanSearch = (props) => {
 			glyProt: '',
 			glyMotif: '',
 			glyBioEnz: '',
+			glyGlyName: '',
 			glyPubId: '',
 			glyBindingProteinId: '',
 			glyAdvSearchValError: [false, false, false, false, false],
@@ -341,6 +342,10 @@ const GlycanSearch = (props) => {
 									: data.cache_info.query.glycan_motif,
 							glyBioEnz:
 								data.cache_info.query.enzyme === undefined ? '' : data.cache_info.query.enzyme.id,
+								glyGlyName:data.cache_info.query.glycan_name === undefined
+								? advancedSearch.glycan_name.placeholderId
+								: data.cache_info.query.glycan_name,
+								
 							glyPubId: data.cache_info.query.pmid === undefined ? '' : data.cache_info.query.pmid,
 							glyBindingProteinId:
 							data.cache_info.query.binding_protein_id === undefined
@@ -399,6 +404,7 @@ const GlycanSearch = (props) => {
 		input_organism_annotation_cat,
 		input_organism_operation,
 		input_glycantype,
+		input_glycan_name,
 		input_glycansubtype,
 		input_enzyme,
 		input_proteinid,
@@ -427,7 +433,7 @@ const GlycanSearch = (props) => {
 				};
 			}
 		}
-
+        var glycan_name=undefined;
 		var input_mass = undefined;
 		var mass_type = undefined;
 		if (input_mass_min && input_mass_max) {
@@ -490,6 +496,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.mass.id]: input_mass,
 			[commonGlycanData.number_monosaccharides.id]: monosaccharides,
 			[commonGlycanData.enzyme.id]: enzymes,
+			[commonGlycanData.glycan_name.id]: glycan_name,
 			[commonGlycanData.glycan_identifier.id]: glycan_identifier,
 			[commonGlycanData.organism.id]: organisms,
 			[commonGlycanData.glycan_type.id]: input_glycantype !== "" ? input_glycantype : undefined,
@@ -555,6 +562,7 @@ const GlycanSearch = (props) => {
 			glyAdvSearchData.glyType,
 			glyAdvSearchData.glySubType,
 			glyAdvSearchData.glyBioEnz,
+			glyAdvSearchData.glyGlyName,
 			glyAdvSearchData.glyProt,
 			glyAdvSearchData.glyMotif,
 			glyAdvSearchData.glyPubId,
@@ -588,7 +596,6 @@ const GlycanSearch = (props) => {
 	 **/
 	const glycanCompSearch = () => {
 		let compSearchData = [];
-
 		var count = 0;
 		for (let residue in glyCompData) {
 			compSearchData[count] = {
