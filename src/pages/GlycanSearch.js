@@ -345,7 +345,7 @@ const GlycanSearch = (props) => {
 								glyGlyName:data.cache_info.query.glycan_name === undefined
 								? advancedSearch.glycan_name.placeholderId
 								: data.cache_info.query.glycan_name,
-								
+	
 							glyPubId: data.cache_info.query.pmid === undefined ? '' : data.cache_info.query.pmid,
 							glyBindingProteinId:
 							data.cache_info.query.binding_protein_id === undefined
@@ -433,7 +433,7 @@ const GlycanSearch = (props) => {
 				};
 			}
 		}
-        var glycan_name=undefined;
+   
 		var input_mass = undefined;
 		var mass_type = undefined;
 		if (input_mass_min && input_mass_max) {
@@ -496,7 +496,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.mass.id]: input_mass,
 			[commonGlycanData.number_monosaccharides.id]: monosaccharides,
 			[commonGlycanData.enzyme.id]: enzymes,
-			[commonGlycanData.glycan_name.id]: glycan_name,
+			[commonGlycanData.glycan_name.id]: input_glycan_name,
 			[commonGlycanData.glycan_identifier.id]: glycan_identifier,
 			[commonGlycanData.organism.id]: organisms,
 			[commonGlycanData.glycan_type.id]: input_glycantype !== "" ? input_glycantype : undefined,
@@ -560,9 +560,9 @@ const GlycanSearch = (props) => {
 			glyAdvSearchData.glyOrgAnnotationCat,
 			glyAdvSearchData.glyOrgOperation,
 			glyAdvSearchData.glyType,
+			glyAdvSearchData.glyGlyName,
 			glyAdvSearchData.glySubType,
 			glyAdvSearchData.glyBioEnz,
-			glyAdvSearchData.glyGlyName,
 			glyAdvSearchData.glyProt,
 			glyAdvSearchData.glyMotif,
 			glyAdvSearchData.glyPubId,
