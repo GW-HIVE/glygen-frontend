@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -12,6 +12,7 @@ import quickSearchData from "../../data/json/quickSearch.json";
 import stringConstants from "../../data/json/stringConstants";
 import proteinSearchData from "../../data/json/proteinSearch";
 import TextAlert from "../alert/TextAlert";
+import { getUsecaseInit } from "../../data/usecases";
 
 /**
  * Quick search control for organism usecases.
@@ -20,6 +21,21 @@ const SearchByOrganism = props => {
   let quickSearch = stringConstants.quick_search;
   let searchByOrganism = quickSearchData.searchByOrganism;
   let advancedSearch = proteinSearchData.advanced_search;
+
+  const [useCaseInitData, setUseCaseInitData] = useState({});
+  const [selectedOrganism, setSelectedOrganism] = useState(null);
+
+  useEffect(() => {
+    getUsecaseInit().then(({ data }) => {
+      setUseCaseInitData(data);
+    });
+  }, []);
+
+  const {
+    species_to_glycoproteins,
+    species_to_glycosyltransferases,
+    species_to_glycohydrolases
+  } = useCaseInitData;
 
   return (
     <>
@@ -74,11 +90,10 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycosyltransferases &&
+                          species_to_glycosyltransferases.organism
+                            ? species_to_glycosyltransferases.organism
+                            : []
                         }
                         setInputValue={input =>
                           props.setInputValue({ question_8: input })
@@ -143,11 +158,10 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycohydrolases &&
+                          species_to_glycohydrolases.organism
+                            ? species_to_glycohydrolases.organism
+                            : []
                         }
                         setInputValue={input =>
                           props.setInputValue({ question_9: input })
@@ -212,22 +226,26 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycoproteins &&
+                          species_to_glycoproteins.organism
+                            ? species_to_glycoproteins.organism
+                            : []
                         }
-                        setInputValue={input =>
+                        setInputValue={organismId => {
+                          const thisOrganism = species_to_glycoproteins.organism.find(
+                            organism => organism.id === organismId
+                          );
+                          setSelectedOrganism(thisOrganism);
+
                           props.setInputValue({
                             question_10: {
-                              organism: input,
+                              organism: organismId,
                               glycosylation_evidence:
                                 props.inputValue.question_10
                                   .glycosylation_evidence
                             }
-                          })
-                        }
+                          });
+                        }}
                       />
                     </FormControl>
                   </Grid>
@@ -247,7 +265,14 @@ const SearchByOrganism = props => {
                         placeholderName={
                           advancedSearch.glycosylation_evidence.placeholderName
                         }
-                        menu={advancedSearch.glycosylation_evidence.menu}
+                        menu={
+                          selectedOrganism
+                            ? selectedOrganism.evidence_type.map(type => ({
+                                id: type,
+                                name: type
+                              }))
+                            : []
+                        }
                         setInputValue={input =>
                           props.setInputValue({
                             question_10: {

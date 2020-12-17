@@ -321,7 +321,7 @@ const QuickSearch = props => {
       });
   };
 
-   /**
+  /**
    * Function to handle protein detail site_annotation question.
    */
   const searchQuestion7 = () => {
@@ -520,7 +520,7 @@ const QuickSearch = props => {
     return undefined;
   }
 
-   /**
+  /**
    * getListApiResponse returns input field value based on question id and response.
    * @param {string} questionId question id
    * @param {object} response response object
@@ -585,8 +585,8 @@ const QuickSearch = props => {
   }
 
   /**
-	 * useEffect for retriving data from api and showing page loading effects.
-	 */
+   * useEffect for retriving data from api and showing page loading effects.
+   */
   useEffect(() => {
     setPageLoading(true);
     logActivity();
