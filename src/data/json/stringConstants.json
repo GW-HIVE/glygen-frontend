@@ -167,6 +167,15 @@
         },
         "id": "glycan_motif"
       },
+      "glycan_name": {
+        "name": "Glycan Name",
+        "shortName": "Glycan Name",
+        "tooltip": {
+          "title": "Glycan Name",
+          "text": "Click to select Glycan Name."
+        },
+        "id": "glycan_name"
+      },
       "enzyme": {
         "name": "Biosynthetic Enzyme",
         "shortName": "Biosynthetic Enzyme",
@@ -500,6 +509,7 @@
         },
         "id": "glycosylation_type"
       },
+
       "gene_url": {
         "name": "URL",
         "shortName": "url",

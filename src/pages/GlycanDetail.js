@@ -162,6 +162,9 @@ const GlycanDetail = props => {
   );
 
   let history;
+  let expressionTabSelected;
+  let expressionWithtissue;
+  let expressionWithcell;
 
   useEffect(() => {
     setPageLoading(true);
@@ -210,7 +213,15 @@ const GlycanDetail = props => {
     });
     // eslint-disable-next-line
   }, []);
+  if (detailData.expression) {
+    const WithTissue = detailData.expression.filter(item => item.tissue);
+    const WithCellline = detailData.expression.filter(item => item.cell_line);
+    expressionWithtissue = WithTissue;
+    expressionWithcell = WithCellline;
 
+    expressionTabSelected =
+      WithTissue.length > 0 ? "with_tissue" : "with_cellline";
+  }
   if (detailData.mass) {
     detailData.mass = addCommas(detailData.mass);
   }
@@ -431,7 +442,78 @@ const GlycanDetail = props => {
       )
     }
   ];
-  const expressionColumns = [
+  const expressionCellColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Site",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.position}</>
+    },
+    {
+      dataField: "residue",
+      text: "Amino Acid",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.residue}</>
+    },
+
+    {
+      dataField: "cell_line.name",
+      text: "Cell Line Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.cellosaurus_id",
+      text: "Cellosaurus ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    }
+  ];
+  const expressionTissueColumns = [
     {
       dataField: "evidence",
       text: proteinStrings.evidence.name,
@@ -495,22 +577,6 @@ const GlycanDetail = props => {
     {
       dataField: "tissue.uberon_id",
       text: "Uberon ID",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-    },
-    {
-      dataField: "cell_line.name",
-      text: "Cell Line Name",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-    },
-    {
-      dataField: "cell_line.cellosaurus_id",
-      text: "Cellosaurus ID",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
@@ -584,6 +650,7 @@ const GlycanDetail = props => {
       glycoprotein: true,
       glycanBindingProtein: true,
       bioEnzyme: true,
+      expression: true,
       digitalSeq: true,
       crossref: true,
       publication: true,
@@ -1289,13 +1356,66 @@ const GlycanDetail = props => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {expression && expression.length !== 0 && (
-                        <ClientPaginatedTable
-                          data={expression}
-                          columns={expressionColumns}
-                          defaultSortField={"position"}
-                          onClickTarget={"#expression"}
-                        />
+                        <Tabs
+                          defaultActiveKey={
+                            expressionWithtissue &&
+                            expressionWithtissue.length > 0
+                              ? "with_tissue"
+                              : "with_cellline"
+                          }
+                          transition={false}
+                          mountOnEnter={true}
+                          unmountOnExit={true}
+                        >
+                          <Tab
+                            eventKey="with_tissue"
+                            // className='tab-content-padding'
+                            title="Tissue Expression"
+                            //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
+                          >
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px"
+                              }}
+                            >
+                              {expressionWithtissue &&
+                                expressionWithtissue.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={expressionWithtissue}
+                                    columns={expressionTissueColumns}
+                                    onClickTarget={"#expression"}
+                                    defaultSortField="start_pos"
+                                  />
+                                )}
+                              {!expressionWithtissue.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                          <Tab
+                            eventKey="with_cellline"
+                            className="tab-content-padding"
+                            title="CellLine Expression "
+                          >
+                            <Container>
+                              {expressionWithtissue &&
+                                expressionWithtissue.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={expressionWithtissue}
+                                    columns={expressionCellColumns}
+                                    onClickTarget={"#expression"}
+                                    defaultSortField="position"
+                                  />
+                                )}
+                              {!expressionWithtissue.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                        </Tabs>
                       )}
+
                       {!expression && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
