@@ -18,6 +18,8 @@ import proteinImg from "../images/home/glycoprotein-img.svg";
 import glycanImg from "../images/home/glycan-img.svg";
 import quickSearchImg from "../images/home/quick-search-img.svg";
 import compositionSearchImg from "../images/home/composition-img.svg";
+import listOfMotifsImg from "../images/home/list-of-motifs-img.svg";
+// list - of - motifs - img.svg
 import gnomeBrowserImg from "../images/home/gnome-browser-img.svg";
 import apiImg from "../images/home/api-img.svg";
 import dataImg from "../images/home/data-img.svg";
@@ -73,6 +75,13 @@ const featuredCards = [
     imageText: "GNOme Browser",
     href: GNOME_BROWSER,
     target: "_blank",
+  },
+  {
+    title: "List of Motifs",
+    description: "List of motifs includes detailed information and it's associated metadata.",
+    image: listOfMotifsImg,
+    imageText: "List of Motifs",
+    to: routeConstants.motifList,
   },
   {
     title: "Data",
