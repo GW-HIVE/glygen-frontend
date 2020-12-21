@@ -157,9 +157,8 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text}
+            {column.text} / {legends.from}
             {sortElement}
-            <span style={{ float: "right", color: "lightgreen" }}>{legends.from} </span>
           </div>
         );
       },
@@ -174,9 +173,8 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text}
+            {column.text} / {legends.anchor}
             {sortElement}
-            <span style={{ float: "right", color: "lightgreen" }}>{legends.anchor} </span>
           </div>
         );
       },
@@ -191,9 +189,8 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text}
+            {column.text} / {legends.to}
             {sortElement}
-            <span style={{ float: "right", color: "lightgreen" }}>{legends.to} </span>
           </div>
         );
       },
