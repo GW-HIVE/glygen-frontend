@@ -53,8 +53,8 @@ const LocusList = props => {
         setPageLoading(false);
       } else {
         setData(data.results);
-        setQuery(data.query);
-        setTimeStamp(data.query.execution_time);
+        setQuery(data.cache_info.query);
+        setTimeStamp(data.cache_info.ts);
         setPagination(data.pagination);
         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
         setPage(currentPage);
@@ -91,7 +91,7 @@ const LocusList = props => {
       // place to change values before rendering
       if (!data.error_code) {
         setData(data.results);
-        setTimeStamp(data.query.execution_time);
+        setTimeStamp(data.cache_info.ts);
         setPagination(data.pagination);
         setTotalSize(data.pagination.total_length);
       }
