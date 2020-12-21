@@ -527,30 +527,30 @@ const QuickSearch = props => {
    */
   function getListApiResponse(questionId, response) {
     if (questionId === quickSearch.question_1.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_2.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_3.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_4.id) {
-      return response.query.uniprot_canonical_ac;
+      return response.cache_info.query.uniprot_canonical_ac;
     } else if (questionId === quickSearch.question_5.id) {
       return "";
     } else if (questionId === quickSearch.question_6.id) {
-      return response.query.uniprot_canonical_ac;
+      return response.cache_info.query.uniprot_canonical_ac;
     } else if (questionId === quickSearch.question_7.id) {
       return "";
     } else if (questionId === quickSearch.question_8.id) {
-      return response.query.organism.id;
+      return response.cache_info.query.organism.id;
     } else if (questionId === quickSearch.question_9.id) {
-      return response.query.organism.id;
+      return response.cache_info.query.organism.id;
     } else if (questionId === quickSearch.question_10.id) {
       return {
-        organism: response.query.organism.id,
-        glycosylation_evidence: response.query.evidence_type
+        organism: response.cache_info.query.organism.id,
+        glycosylation_evidence: response.cache_info.query.evidence_type
       };
     } else if (questionId === quickSearch.question_11.id) {
-      return response.query.do_name;
+      return response.cache_info.query.do_name;
     }
   }
 
