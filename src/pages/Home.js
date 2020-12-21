@@ -19,7 +19,7 @@ import glycanImg from "../images/home/glycan-img.svg";
 import quickSearchImg from "../images/home/quick-search-img.svg";
 import compositionSearchImg from "../images/home/composition-img.svg";
 import listOfMotifsImg from "../images/home/list-of-motifs-img.svg";
-// list - of - motifs - img.svg
+import idMappingImg from "../images/home/id-mapping-img.svg";
 import gnomeBrowserImg from "../images/home/gnome-browser-img.svg";
 import apiImg from "../images/home/api-img.svg";
 import dataImg from "../images/home/data-img.svg";
@@ -109,6 +109,14 @@ const featuredCards = [
     imageText: "SPARQL",
     href: GLYGEN_SPARQL,
     target: "_blank",
+  },
+  {
+    title: "ID Mapping",
+    description:
+      "Users select the step wise option. If Glycan is selected then whole id mapping will be related to glycan. Same for protein/glycoprotein.",
+    image: idMappingImg,
+    imageText: "ID Mapping",
+    to: routeConstants.idMapping,
   },
 ];
 const feedbackCard = {
