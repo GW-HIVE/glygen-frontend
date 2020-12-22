@@ -19,11 +19,20 @@ export const getMappingSearch = (formObject) => {
   return postTo(url);
 };
 
-export const getMappingList = (mappingId, category) => {
+export const getMappingList = (mappingId) => {
   const queryParams = {
     id: mappingId,
-    category: category,
-    // category: ("mapped", "unmapped"),
+    category: "mapped",
+  };
+  const queryParamString = JSON.stringify(queryParams);
+  const url = `/idmapping/list/?query=${queryParamString}`;
+  return postTo(url);
+};
+
+export const getMappingListUnmapped = (mappingId) => {
+  const queryParams = {
+    id: mappingId,
+    category: "unmapped",
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/idmapping/list/?query=${queryParamString}`;

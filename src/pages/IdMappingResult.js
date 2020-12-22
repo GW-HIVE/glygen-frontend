@@ -3,8 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getMappingList } from "../data";
-import { ID_MAPPING_RESULT, ID_MAP_REASON } from "../data/mapping";
+import { ID_MAP_REASON, getMappingList, getMappingListUnmapped } from "../data/mapping";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 // import DownloadButton from "../components/DownloadButton";
@@ -23,7 +22,6 @@ const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
   let { id } = useParams();
-  // let { searchId } = useParams();
 
   const [data, setData] = useState([]);
   const [dataReason, setDataReason] = useState([]);
@@ -31,7 +29,6 @@ const IdMappingResult = (props) => {
   const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [paginationReason, setPaginationReason] = useState([]);
-  // const [idMapResult, setIdMapResult] = useState(ID_MAPPING_RESULT);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
@@ -66,7 +63,7 @@ const IdMappingResult = (props) => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
-    getMappingList(id, "unmapped")
+    getMappingListUnmapped(id, "unmapped")
       .then(({ data }) => {
         if (data.error_code) {
           let message = "list api call";
@@ -115,8 +112,6 @@ const IdMappingResult = (props) => {
   };
 
   const handleTableChangeReason = (type, { page, sizePerPage, sortField, sortOrder }) => {
-    // setPage(page);
-    // setSizePerPage(sizePerPage);
     dataReason.sort((a, b) => {
       if (a[sortField] > b[sortField]) {
         return sortOrder === "asc" ? 1 : -1;
@@ -126,19 +121,23 @@ const IdMappingResult = (props) => {
       return 0;
     });
 
-    getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        // place to change values before rendering
-        if (!data.error_code) {
-          setLegendsReason(data.cache_info.legends);
-          setDataReason(data.results);
-          setPaginationReason(data.pagination);
-          setTotalSizeReason(data.pagination.total_length);
-          setPage(page);
-          setSizePerPage(sizePerPage);
-        }
+    getMappingListUnmapped(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
+      if (!data.error_code) {
+        setLegendsReason(data.cache_info.legends);
+        setDataReason(data.results);
+        setPaginationReason(data.pagination);
+        setTotalSizeReason(data.pagination.total_length);
+        setPage(page);
+        setSizePerPage(sizePerPage);
       }
-    );
+    });
   };
 
   const handleModifySearch = () => {
@@ -147,8 +146,6 @@ const IdMappingResult = (props) => {
 
   const idMapResultColumns = [
     {
-      // dataField: mapStrings.shortName,
-      // text: mapStrings.input_idlist.name,
       dataField: mappedStrings.from.shortName,
       text: mappedStrings.from.name,
       sort: true,
@@ -231,17 +228,13 @@ const IdMappingResult = (props) => {
         <section>
           {/* Button */}
           <div className="text-right mb-4">
-            {/* <Link to={routeConstants.idMapping}> */}
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
               Modify Search
             </Button>
-            {/* </Link> */}
           </div>
 
-          {/* {idMapResult && idMapResult.length !== 0 && ( */}
           <PaginatedTable
             data={data}
-            // columns={idMapResult}
             columns={idMapResultColumns}
             page={page}
             sizePerPage={sizePerPage}
@@ -253,21 +246,17 @@ const IdMappingResult = (props) => {
             noDataIndication={"No data available."}
             // rowStyle={rowStyle}
           />
-          {/* )} */}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
-            {/* <Link to={routeConstants.idMapping}> */}
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
               Modify Search
             </Button>
-            {/* </Link> */}
           </div>
         </section>
         <div className="content-box-md">
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
         <section>
-          {/* {idMapReason && idMapReason.length !== 0 && ( */}
           <PaginatedTable
             data={dataReason}
             columns={idMapReason}
@@ -280,7 +269,6 @@ const IdMappingResult = (props) => {
             defaultSortOrder="asc"
             noDataIndication={"No data available."}
           />
-          {/* )} */}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
