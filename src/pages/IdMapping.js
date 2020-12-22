@@ -25,7 +25,7 @@ const IdMapping = (props) => {
   let { id } = useParams("");
   const [initData, setInitData] = useState({});
 
-  const [idMapFileSelect, setIdMapFileSelect] = useState("any");
+  // const [idMapFileSelect, setIdMapFileSelect] = useState("any");
   const [idMapSearchData, setIdMapSearchData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -33,7 +33,7 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      // idMapSearchValError: [false, false, false, false],
+      uploadFromFile: "any",
     }
   );
 
@@ -92,7 +92,7 @@ const IdMapping = (props) => {
    * @param {string} value - input ... (Select File) name value.
    **/
   const idMapFileSelectOnChange = (value) => {
-    setIdMapFileSelect(value);
+    setIdMapSearchData({ uploadFromFile: value });
   };
 
   const clearMapFields = () => {
@@ -101,10 +101,10 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      // idMapSearchValError: [false, false, false, false],
+      uploadFromFile: "any",
     });
 
-    setIdMapFileSelect("any");
+    // setIdMapFileSelect("any");
     setFormValidated(false);
     setMoleculeValidated(false);
     setFromIdTypeValidated(false);
@@ -130,18 +130,24 @@ const IdMapping = (props) => {
           getMappingList(id)
             .then(({ data }) => {
               logActivity("user", id, "Search modification initiated");
-              // setIdMapSearchData({
-              //   recordType:
-              //     data.cache_info.query.recordtype === undefined ? "any" : data.query.recordtype,
-              //   inputNamespace:
-              //     data.cache_info.query.input_namespace === undefined
-              //       ? "any"
-              //       : data.cache_info.query.input_namespace,
-              //   outputNamespace:
-              //     data.cache_info.query.output_namespace === undefined ? "any" : data.query.output_namespace,
-              //   inputIdlist:
-              //     data.cache_info.query.input_idlist === undefined ? "" : data.query.input_idlist,
-              // });
+              setIdMapSearchData({
+                recordType:
+                  data.cache_info.query.recordtype === undefined
+                    ? "any"
+                    : data.cache_info.query.recordtype,
+                inputNamespace:
+                  data.cache_info.query.input_namespace === undefined
+                    ? "any"
+                    : data.cache_info.query.input_namespace,
+                outputNamespace:
+                  data.cache_info.query.output_namespace === undefined
+                    ? "any"
+                    : data.cache_info.query.output_namespace,
+                inputIdlist:
+                  data.cache_info.query.input_idlist === undefined
+                    ? ""
+                    : data.cache_info.query.input_idlist,
+              });
               setPageLoading(false);
             })
             .catch(function (error) {
@@ -194,7 +200,7 @@ const IdMapping = (props) => {
             props.history.push(routeConstants.idMappingResult + response.data["list_id"]);
           });
           setPageLoading(false);
-          console.log("submit");
+          // console.log("submit");
         } else {
           logActivity("user", "", "No results. " + message);
           setPageLoading(false);
@@ -408,7 +414,7 @@ const IdMapping = (props) => {
                 idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
                 ((formValidated || enterIdValidated) &&
                   idMapSearchData.inputIdlist === "" &&
-                  idMapFileSelect === "any")
+                  idMapSearchData.uploadFromFile === "any")
               }
             ></OutlinedInput>
             {idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length && (
@@ -418,7 +424,7 @@ const IdMapping = (props) => {
             )}
             {(formValidated || enterIdValidated) &&
               idMapSearchData.inputIdlist === "" &&
-              idMapFileSelect === "any" && (
+              idMapSearchData.uploadFromFile === "any" && (
                 <FormHelperText className={"error-text"} error>
                   {idMappingData.input_idlist.required}
                 </FormHelperText>
@@ -438,7 +444,7 @@ const IdMapping = (props) => {
               variant="outlined"
               // error={
               //   (formValidated || fileSelectValidated) &&
-              //   idMapFileSelect === "any" &&
+              //   idMapSearchData.uploadFromFile === "any" &&
               //   idMapSearchData.inputIdlist !== ""
               // }
             >
@@ -446,17 +452,17 @@ const IdMapping = (props) => {
                 placeholder={idMappingData.file_selection.placeholder}
                 placeholderId={idMappingData.file_selection.placeholderId}
                 placeholderName={idMappingData.file_selection.placeholderName}
-                inputValue={idMapFileSelect}
+                inputValue={idMapSearchData.uploadFromFile}
                 setInputValue={idMapFileSelectOnChange}
               />
             </FormControl>
             {/* {(formValidated || fileSelectValidated) &&
-                idMapFileSelect === "any" &&
-                idMapSearchData.inputIdlist !== "" && (
-                  <FormHelperText className={"error-text"} error>
-                    {idMappingData.file_selection.required}
-                  </FormHelperText>
-                )} */}
+              idMapSearchData.uploadFromFile === "any" &&
+              idMapSearchData.inputIdlist !== "" && (
+                <FormHelperText className={"error-text"} error>
+                  {idMappingData.file_selection.required}
+                </FormHelperText>
+              )} */}
           </Grid>
         </Grid>
         {/* Browse Files */}

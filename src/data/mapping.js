@@ -32,6 +32,7 @@ export const getMappingList = (
   const queryParams = {
     id: mappingId,
     category: category,
+    // category: ("mapped", "unmapped"),
     // sort: sort,
     // offset: offset,
     // limit: limit,
@@ -42,35 +43,35 @@ export const getMappingList = (
   return getJson(url);
 };
 
-export const ID_MAPPING_RESULT = [
-  {
-    // dataField: mapStrings.shortName,
-    // text: mapStrings.input_idlist.name,
-    dataField: "from",
-    formatter: (value, row) => {
-      return value + " " + row.data.cache_info.legends.from;
-    },
-    text: "From ID",
-    sort: true,
-    selected: true,
-  },
-  {
-    dataField: "anchor",
-    formatter: (value, row) => {
-      return value + " " + row.data.cache_info.legends.anchor;
-    },
-    text: "Internal ID",
-    sort: true,
-  },
-  {
-    dataField: "to",
-    formatter: (value, row) => {
-      return value + " " + row.data.cache_info.legends.to;
-    },
-    text: "To ID",
-    sort: true,
-  },
-];
+// export const ID_MAPPING_RESULT = [
+//   {
+//     // dataField: mapStrings.shortName,
+//     // text: mapStrings.input_idlist.name,
+//     dataField: "from",
+//     formatter: (value, row) => {
+//       return value + " " + row.data.cache_info.legends.from;
+//     },
+//     text: "From ID",
+//     sort: true,
+//     selected: true,
+//   },
+//   {
+//     dataField: "anchor",
+//     formatter: (value, row) => {
+//       return value + " " + row.data.cache_info.legends.anchor;
+//     },
+//     text: "Internal ID",
+//     sort: true,
+//   },
+//   {
+//     dataField: "to",
+//     formatter: (value, row) => {
+//       return value + " " + row.data.cache_info.legends.to;
+//     },
+//     text: "To ID",
+//     sort: true,
+//   },
+// ];
 export const ID_MAP_REASON = [
   {
     dataField: "input_id",
