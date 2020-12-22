@@ -1435,18 +1435,30 @@
             "text": "Takes the input or text file (csv, txt, etc.) and the dropdowns information and performs the mapping."
           },
         "id": "input_idlist"
-      } 
-    },
-    "category_mapped": {
-      "category": {
-        "id": "category",
-        "name": "mapped"
-      }
-    },
-     "category_unmapped": {
-      "category": {
-        "id": "category",
-        "name": "unmapped"
+      },
+      "mapped": {
+        "from": {
+          "shortName": "from",
+          "name": "From ID"
+        },
+         "anchor": {
+          "shortName": "anchor",
+          "name": "Internal ID"
+        },
+         "to": {
+          "shortName": "to",
+          "name": "To ID"
+        }
+      },
+      "unmapped": {
+        "input_id": {
+          "shortName": "input_id",
+          "name": "Input ID"
+        },
+         "reason": {
+          "shortName": "reason",
+          "name": "Reason Not Mapped"
+        }
       }
     }
   }

@@ -18,6 +18,8 @@ import { Grid } from "@material-ui/core";
 import Button from "react-bootstrap/Button";
 import routeConstants from "../data/json/routeConstants";
 import idMappingData from "../data/json/idMapping";
+import stringConstants from "../data/json/stringConstants";
+const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
   let { id } = useParams();
@@ -147,8 +149,8 @@ const IdMappingResult = (props) => {
     {
       // dataField: mapStrings.shortName,
       // text: mapStrings.input_idlist.name,
-      dataField: "from",
-      text: "From ID",
+      dataField: mappedStrings.from.shortName,
+      text: mappedStrings.from.name,
       sort: true,
       selected: true,
       headerStyle: (colum, colIndex) => {
@@ -164,8 +166,8 @@ const IdMappingResult = (props) => {
       },
     },
     {
-      dataField: "anchor",
-      text: "Internal ID",
+      dataField: mappedStrings.anchor.shortName,
+      text: mappedStrings.anchor.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { width: "33%" };
@@ -180,8 +182,8 @@ const IdMappingResult = (props) => {
       },
     },
     {
-      dataField: "to",
-      text: "To ID",
+      dataField: mappedStrings.to.shortName,
+      text: mappedStrings.to.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { width: "33%" };

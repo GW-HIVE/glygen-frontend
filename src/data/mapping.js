@@ -1,16 +1,14 @@
-import { getJson } from "./api";
+import { postTo } from "./api";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-// import stringConstants from "./json/stringConstants";
-// import { logActivity } from "../data/logging";
-
-// const mapStrings = stringConstants.mapping.common;
+import stringConstants from "./json/stringConstants";
+const unmappedStrings = stringConstants.id_mapping.common.unmapped;
 
 // Performs dropdown selections: Molecules, From ID Type, To ID Type
 export const getMappingInit = () => {
   const url = `/idmapping/search_init?query={}`;
-  return getJson(url);
+  return postTo(url);
 };
 
 // Forms objects and displays data in a results (list) page
@@ -18,70 +16,30 @@ export const getMappingInit = () => {
 export const getMappingSearch = (formObject) => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/idmapping/search?" + json;
-  return getJson(url);
+  return postTo(url);
 };
 
-export const getMappingList = (
-  mappingId,
-  category
-  // offset = 1,
-  // limit = 20,
-  // sort = undefined,
-  // order = "desc"
-) => {
+export const getMappingList = (mappingId, category) => {
   const queryParams = {
     id: mappingId,
     category: category,
     // category: ("mapped", "unmapped"),
-    // sort: sort,
-    // offset: offset,
-    // limit: limit,
-    // order: order,
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/idmapping/list/?query=${queryParamString}`;
-  return getJson(url);
+  return postTo(url);
 };
 
-// export const ID_MAPPING_RESULT = [
-//   {
-//     // dataField: mapStrings.shortName,
-//     // text: mapStrings.input_idlist.name,
-//     dataField: "from",
-//     formatter: (value, row) => {
-//       return value + " " + row.data.cache_info.legends.from;
-//     },
-//     text: "From ID",
-//     sort: true,
-//     selected: true,
-//   },
-//   {
-//     dataField: "anchor",
-//     formatter: (value, row) => {
-//       return value + " " + row.data.cache_info.legends.anchor;
-//     },
-//     text: "Internal ID",
-//     sort: true,
-//   },
-//   {
-//     dataField: "to",
-//     formatter: (value, row) => {
-//       return value + " " + row.data.cache_info.legends.to;
-//     },
-//     text: "To ID",
-//     sort: true,
-//   },
-// ];
 export const ID_MAP_REASON = [
   {
-    dataField: "input_id",
-    text: "Input ID",
+    dataField: unmappedStrings.input_id.shortName,
+    text: unmappedStrings.input_id.name,
     sort: true,
     selected: true,
   },
   {
-    dataField: "reason",
-    text: "Reason Not Mapped",
+    dataField: unmappedStrings.reason.shortName,
+    text: unmappedStrings.reason.name,
     sort: true,
   },
 ];
