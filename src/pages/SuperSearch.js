@@ -17,20 +17,23 @@ import stringConstants from '../data/json/stringConstants';
 import routeConstants from '../data/json/routeConstants';
 import {logActivity} from '../data/logging';
 import {axiosError} from '../data/axiosError';
-import { getGlycanSearch, getGlycanSimpleSearch,  getGlycanList, getGlycanInit} from '../data/glycan';
+import { getSuperSearch, getSuperSearchList, getSuperSearchInit} from '../data/supersearch';
 import FeedbackWidget from "../components/FeedbackWidget";
 import { load } from 'data-loader';
 import global_var from '../data/json/superSearchSVGData';
 import {select, selectAll, forceSimulation, forceManyBody, forceLink } from 'd3';
 import SuperSearchSVG from '../components/search/SuperSearchSVG';
 import SuperSearchControl from '../components/search/SuperSearchControl';
+import { Row, Col } from 'react-bootstrap';
 
 /**
  * Glycan search component for showing glycan search tabs.
  */
 const SuperSearch = (props) => {
+  let { id } = useParams("");
 
   const [nodeData, setNodeData] = useState([]);
+  const [initData, setInitData] = useState([]);
   const [svgData, setSVGData] = useState([]);
   const [selectedNode, setSelectedNode] = useState("");
 
@@ -43,8 +46,34 @@ const SuperSearch = (props) => {
 
   useEffect(() => {
     console.log("SuperSearch");
-    setNodeData([1,2]);
-    setPageLoading(false);
+    //setNodeData([1,2]);
+	setPageLoading(false);
+	setInitData([{id:"glycan"}]);
+
+	
+	getSuperSearchInit().then((response) => {
+		let initData = response.data;
+		setInitData(initData);
+		setNodeData(initData);
+		
+		if (id === undefined) setPageLoading(false);
+
+		id &&
+		getSuperSearchList(id, 1).then(({ data }) => {
+				logActivity("user", id, "Search modification initiated");
+				
+					setPageLoading(false);
+			})
+			.catch(function (error) {
+				let message = "list api call";
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+			});
+	})
+	.catch(function (error) {
+		let message = "search_init api call";
+		axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+	});
+
   }, [])
 
     return (
@@ -56,7 +85,7 @@ const SuperSearch = (props) => {
 			<FeedbackWidget />
 			<div className='lander'>
       {/* <Container> */}
-        <div style={{height:"600px", width:"1200px"}}>
+        <div style={{height:"600px", width:"2000px"}}>
 
 					<PageLoader pageLoading={pageLoading} />
 					<DialogAlert
@@ -66,17 +95,31 @@ const SuperSearch = (props) => {
 						}}
 					/>
 
-          <Grid
-						container
+          {/* <Grid
+						// container
 						style={{ margin: '0  auto' }}
 						justify='center'>
-							<Grid item md={8}>
-                <SuperSearchSVG nodeData={nodeData} setSelectedNode={setSelectedNode}></SuperSearchSVG>
-              </Grid>
-						  <Grid item md={4}>
-                <SuperSearchControl selectedNode={selectedNode}></SuperSearchControl>
-              </Grid>
-					</Grid>
+							<Grid item 
+							// md={8}
+							> */}
+							<Row>
+								<div style={{height:"800px", width:"1000px"}}>
+                {nodeData.length !== 0 && <SuperSearchSVG nodeData={nodeData} setSelectedNode={setSelectedNode}></SuperSearchSVG>}
+				</div>
+			  {/* </Grid> */}
+						  {/* <Grid item 
+						//   md={8}
+						  > */}
+				<div style={{height:"600px", width:"1200px"}}>
+
+				<SuperSearchControl data={initData.filter((value) => value.id === selectedNode)[0] ? initData.filter((value) => value.id === selectedNode)[0] : []} 
+					selectedNode={selectedNode} setSelectedNode={setSelectedNode}
+					></SuperSearchControl>
+				</div>
+
+				</Row>
+			  {/* </Grid>
+					</Grid> */}
         </div>
         {/* </Container> */}
       </div>
