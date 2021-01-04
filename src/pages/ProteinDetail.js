@@ -344,7 +344,7 @@ const ProteinDetail = props => {
         "predicted",
         "automatic_literature_mining"
       ].find(
-        category => mapOfGlycosylationCategories[category].length > 0
+        category => (mapOfGlycosylationCategories[category] || []).length > 0
       );
      
       setGlycosylationWithImage(withImage);
