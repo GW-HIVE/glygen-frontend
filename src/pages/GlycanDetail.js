@@ -214,8 +214,12 @@ const GlycanDetail = props => {
     // eslint-disable-next-line
   }, []);
   if (detailData.expression) {
-    const WithTissue = detailData.expression.filter(item => item.tissue);
-    const WithCellline = detailData.expression.filter(item => item.cell_line);
+    const WithTissue = detailData.expression.filter(
+      item => item.tissue !== undefined
+    );
+    const WithCellline = detailData.expression.filter(
+      item => item.cell_line !== undefined
+    );
     expressionWithtissue = WithTissue;
     expressionWithcell = WithCellline;
 
@@ -1399,16 +1403,16 @@ const GlycanDetail = props => {
                             title="CellLine Expression "
                           >
                             <Container>
-                              {expressionWithtissue &&
-                                expressionWithtissue.length > 0 && (
+                              {expressionWithcell &&
+                                expressionWithcell.length > 0 && (
                                   <ClientPaginatedTable
-                                    data={expressionWithtissue}
+                                    data={expressionWithcell}
                                     columns={expressionCellColumns}
                                     onClickTarget={"#expression"}
                                     defaultSortField="position"
                                   />
                                 )}
-                              {!expressionWithtissue.length && (
+                              {!expressionWithcell.length && (
                                 <p>No data available.</p>
                               )}
                             </Container>
