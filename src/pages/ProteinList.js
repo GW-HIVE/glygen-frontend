@@ -75,17 +75,17 @@ const ProteinList = props => {
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
-      sortField,
+      sortField == null ? "uniprot_canonical_ac" : sortField,
       sortOrder
     ).then(({ data }) => {
       // place to change values before rendering
-      if (!data.error_code) {
-        setData(data.results);
+      // if (!data.error_code) {
+      setData(data.results);
 
-        setPagination(data.pagination);
+      setPagination(data.pagination);
 
-        setTotalSize(data.pagination.total_length);
-      }
+      setTotalSize(data.pagination.total_length);
+      // }
     });
   };
   const handleModifySearch = () => {
@@ -166,7 +166,7 @@ const ProteinList = props => {
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}
-              defaultSortField="gene"
+              defaultSortField="uniprot_canonical_ac"
               idField="uniprot_canonical_ac"
             />
           )}
