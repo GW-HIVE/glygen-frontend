@@ -20,6 +20,7 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
 import { getMappingInit, getMappingSearch, getMappingList } from "../data/mapping";
+import UploadForm from "../components/UploadForm";
 
 const IdMapping = (props) => {
   let { id } = useParams("");
@@ -167,6 +168,19 @@ const IdMapping = (props) => {
     input_outputnamespace,
     input_inputidlist
   ) {
+    if (input_inputidlist) {
+      input_inputidlist = input_inputidlist.trim();
+      input_inputidlist = input_inputidlist.replace(/\u200B/g, "");
+      input_inputidlist = input_inputidlist.replace(/\u2011/g, "-");
+      input_inputidlist = input_inputidlist + ",";
+      input_inputidlist = input_inputidlist.replace(/\s+/g, ",");
+      input_inputidlist = input_inputidlist.replace(/,+/g, ",");
+
+      var index = input_inputidlist.lastIndexOf(",");
+      if (index > -1 && index + 1 === input_inputidlist.length) {
+        input_inputidlist = input_inputidlist.substr(0, index);
+      }
+    }
     // var selected_recordtype = undefined;
     // line below means that if glycan/protein !== "any" then glycan/protein is selected
     // if (input_recordtype && input_recordtype.id !== idMappingData.recordtype.placeholderId) {
@@ -431,14 +445,20 @@ const IdMapping = (props) => {
               )}
           </FormControl>
           <Typography>91859018,91845230,91845682,439177,XYZ</Typography>
+          <Typography>91846235, 252277270, 11375554, 252288623, 91857678, 252290930</Typography>
+          <Typography>5288428 252293186 91859643 252293273 5288347 252294787</Typography>
+          <Typography>G00023MO G00023MO G00024MO G00024MO G00025AJ G00025AJ</Typography>
         </Grid>
         {/* Select Files */}
         <Grid className="pt-2">
           <Typography className="mb-1">
+            <strong>OR</strong>
+          </Typography>
+          <Typography className="mb-1">
             <strong>{idMappingData.file_selection.upload_text}</strong>
           </Typography>
           {/* Text file dropdown */}
-          <Grid item xs={12} sm={12} md={5}>
+          {/* <Grid item xs={12} sm={12} md={5}>
             <FormControl
               fullWidth
               variant="outlined"
@@ -455,42 +475,42 @@ const IdMapping = (props) => {
                 inputValue={idMapSearchData.uploadFromFile}
                 setInputValue={idMapFileSelectOnChange}
               />
-            </FormControl>
-            {/* {(formValidated || fileSelectValidated) &&
+            </FormControl> */}
+          {/* {(formValidated || fileSelectValidated) &&
               idMapSearchData.uploadFromFile === "any" &&
               idMapSearchData.inputIdlist !== "" && (
                 <FormHelperText className={"error-text"} error>
                   {idMappingData.file_selection.required}
                 </FormHelperText>
               )} */}
-          </Grid>
+          {/* </Grid> */}
         </Grid>
         {/* Browse Files */}
-        <Grid container className="pt-2">
+        {/* <Grid container className="pt-2">
           <Button className="gg-btn-outline mr-4">Browse</Button>
           <Typography>{idMappingData.file_selection.no_file_selected}</Typography>
-        </Grid>
-
+        </Grid> */}
+        <UploadForm
+          error={
+            (formValidated || fileSelectValidated) &&
+            idMapSearchData.uploadFromFile === "any" &&
+            idMapSearchData.inputIdlist !== ""
+          }
+        />
+        <Typography>
+          <i>Accepted File Types: .txt, .rtf, .pdf</i>
+        </Typography>
         {/*  Buttons */}
         <Grid item xs={12} sm={12}>
           <Row className="gg-align-center pt-5">
             <Button className="gg-btn-outline mr-4" onClick={clearMapFields}>
               Clear Fields
             </Button>
-            {/* <Link to={routeConstants.idMappingResult}> */}
-            {/* <Link to={ `${ routeConstants.idMappingResult }${ id }` } */}
-            <Button
-              className="gg-btn-blue"
-              // onClick={() => setFormValidated(true)}
-              // onClick={idMapHandleSubmit}
-              onClick={searchIdMapClick}
-            >
+            <Button className="gg-btn-blue" onClick={searchIdMapClick}>
               Submit
             </Button>
-            {/* </Link> */}
           </Row>
         </Grid>
-        {/* </form> */}
         <Row>
           <Col>
             <p className="text-muted mt-2">

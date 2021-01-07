@@ -33,7 +33,7 @@
 		"placeholder": "Select File Type",
 		"placeholderName": "Any",
     "placeholderId": "any",
-    "upload_text": "Or Upload your own text file",
+    "upload_text": "Upload your own text file (one ID per line)",
 		"no_file_selected": "No file selected",
 		"required": "This field is required."
   }
