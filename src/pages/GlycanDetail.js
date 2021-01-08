@@ -65,7 +65,7 @@ const items = [
   },
   {
     label: stringConstants.sidebar.expression.displayname,
-    id: "Expression"
+    id: "expression"
   },
   {
     label: stringConstants.sidebar.digital_seq.displayname,
@@ -329,18 +329,22 @@ const GlycanDetail = props => {
     },
 
     {
-      dataField: "position residue",
+      dataField: "position",
       text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
-      formatter: (value, row) => (
-        <>
-          {row.residue}
-          {row.position}
-        </>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+              {row.residue} {row.position}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     }
   ];
   const glycanBindingProteinColumns = [
