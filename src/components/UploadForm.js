@@ -4,17 +4,23 @@ const UploadForm = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
 
-  const types = ["rtf"];
+  const types = [
+    "text/plain",
+    // "text/rtf",
+    // "application/pdf",
+    // "application/msword",
+    // "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ];
 
   const handleChange = (e) => {
     let selected = e.target.files[0];
 
     if (selected && types.includes(selected.type)) {
-      setFile(selected);
+      // setFile(selected);
       setError("");
     } else {
       setFile(null);
-      setError("Please select the txt file (simple text file one ID per line)");
+      setError("Please select accepted file type (.txt)");
     }
   };
 
@@ -24,7 +30,11 @@ const UploadForm = () => {
         <input className="mt-2" type="file" onChange={handleChange} />
       </label>
       <div className="output">
-        {error && <div className="error">{error}</div>}
+        {error && (
+          <div className="error" style={{ color: "red" }}>
+            {error}
+          </div>
+        )}
         {file && <div>{file.name}</div>}
       </div>
     </form>

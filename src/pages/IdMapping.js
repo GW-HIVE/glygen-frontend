@@ -311,7 +311,7 @@ const IdMapping = (props) => {
             </FormHelperText>
           )}
         </Grid>
-        {/* 2 */}
+        {/* 2 From ID / To ID */}
         <Grid container className="select-type">
           {/* input_namespace From ID Type */}
           <Grid item xs={12} sm={12} md={5} className="pt-3">
@@ -498,7 +498,8 @@ const IdMapping = (props) => {
           }
         />
         <Typography>
-          <i>Accepted File Types: .txt, .rtf, .pdf</i>
+          <i>Accepted File Type: .txt</i>
+          {/* <i>Accepted File Types: .txt, .rtf, .pdf, .doc, .docx</i> */}
         </Typography>
         {/*  Buttons */}
         <Grid item xs={12} sm={12}>
