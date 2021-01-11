@@ -23,7 +23,6 @@ const SearchByOrganism = props => {
   let advancedSearch = proteinSearchData.advanced_search;
 
   const [useCaseInitData, setUseCaseInitData] = useState({});
-  const [selectedOrganism, setSelectedOrganism] = useState(null);
 
   useEffect(() => {
     getUsecaseInit().then(({ data }) => {
@@ -232,17 +231,10 @@ const SearchByOrganism = props => {
                             : []
                         }
                         setInputValue={organismId => {
-                          const thisOrganism = species_to_glycoproteins.organism.find(
-                            organism => organism.id === organismId
-                          );
-                          setSelectedOrganism(thisOrganism);
-
                           props.setInputValue({
                             question_10: {
                               organism: organismId,
-                              glycosylation_evidence:
-                                props.inputValue.question_10
-                                  .glycosylation_evidence
+                              glycosylation_evidence: advancedSearch.glycosylation_evidence.placeholderId
                             }
                           });
                         }}
@@ -266,11 +258,16 @@ const SearchByOrganism = props => {
                           advancedSearch.glycosylation_evidence.placeholderName
                         }
                         menu={
-                          selectedOrganism
-                            ? selectedOrganism.evidence_type.map(type => ({
-                                id: type,
-                                name: type
-                              }))
+                          species_to_glycoproteins &&
+                          species_to_glycoproteins.organism &&
+                          props.inputValue.question_10.organism !== searchByOrganism.common.organism.placeholderId
+                            ? 
+                            species_to_glycoproteins.organism.filter(
+                              organism => organism.id === props.inputValue.question_10.organism
+                            )[0].evidence_type.map(type => ({
+                                      id: type,
+                                      name: type
+                                    }))
                             : []
                         }
                         setInputValue={input =>
@@ -300,7 +297,7 @@ const SearchByOrganism = props => {
                   <Grid item xs={12} sm={12}>
                     <Typography align="left" className="small-text">
                       ** Select both options{" "}
-                      <strong className="gg-blue-color">Species</strong> and{" "}
+                      <strong className="gg-blue-color">Organism</strong> and{" "}
                       <strong>Type.</strong>
                     </Typography>
                   </Grid>
