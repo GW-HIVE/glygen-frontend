@@ -18,6 +18,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import '../../css/Search.css';
 import glycanSearchData from '../../data/json/glycanSearch';
 import stringConstants from '../../data/json/stringConstants';
+import superSearchSVGData from '../../data/json/superSearchSVGData';
 import plusIcon from "../../images/icons/plus.svg";
 import deleteIcon from "../../images/icons/delete.svg";
 import downArrowIcon from "../../images/icons/down-arrow.svg";
@@ -29,7 +30,11 @@ import { Image } from "react-bootstrap";
  **/
 const GlycanAdvancedSearch = (props) => {
     let commonGlycanData = stringConstants.glycan.common;
-    let advancedSearch = glycanSearchData.advanced_search;
+	let advancedSearch = glycanSearchData.advanced_search;
+	let operationList = superSearchSVGData.oplist;
+	let aggregatorList = superSearchSVGData.aggregators;
+
+
 
 	const [selectInput, setSelectInput] = useState("");
 	const [operationEnum, setOperationEnum] = useState([]);
@@ -315,18 +320,9 @@ const GlycanAdvancedSearch = (props) => {
                                     // class='svg-input-item'
                                 >
 									<SelectControl
-										// inputValue={props.inputValue.glyOrgAnnotationCat}
-										menu={[
-                                            {
-                                                "id": "or",
-                                                "name": "Or"
-                                            },
-                                            {
-                                                "id": "and",
-                                                "name": "And"
-                                            }
-                                        ]}
-										setInputValue={()=>{}}
+										inputValue={props.query.aggregator}
+										menu={aggregatorList}
+										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "aggregator", input)}}
 									/>
 								</FormControl>
 							</Grid>
@@ -337,11 +333,15 @@ const GlycanAdvancedSearch = (props) => {
                                     // class='svg-input-item'
                                 >
 									<SelectControl
-										inputValue={selectInput}
+										inputValue={props.query.field}
 										menu={props.data.fields ? props.data.fields.map((value)=> { return {id:value.id, name:value.label}}) : []}
-										setInputValue={(input)=>{setSelectInput(input)
-										setOperationEnum(props.data.fields.filter((value)=> value.id === input)[0].oplist)
-										setSelectEnum(props.data.fields.filter((value)=> value.id === input)[0].enum)
+										setInputValue={(input)=>{
+											props.supSearchUpdateQuery(props.query.order, "field", input)
+											props.supSearchUpdateQuery(props.query.order, "fieldType", props.data.fields.filter((value)=> value.id === input)[0].type)
+											//setOperationEnum(props.data.fields.filter((value)=> value.id === input)[0].oplist)
+											props.supSearchUpdateQuery(props.query.order, "operationEnum", props.data.fields.filter((value)=> value.id === input)[0].oplist)
+											props.supSearchUpdateQuery(props.query.order, "selectEnum", props.data.fields.filter((value)=> value.id === input)[0].enum)
+											//setSelectEnum(props.data.fields.filter((value)=> value.id === input)[0].enum)
 										}}
 									/>
 								</FormControl>
@@ -352,14 +352,14 @@ const GlycanAdvancedSearch = (props) => {
                                     fullWidth
                                 >
 									<SelectControl
-										// inputValue={props.inputValue.glyOrgOperation}
-                                        menu={operationEnum.map((value)=> { return {id:value, name:value}})}
-										setInputValue={()=>{}}
+										inputValue={props.query.operation}
+										menu={props.query.operationEnum.map((value)=> { return {id:value, name:operationList.find((oper)=> value === oper.id).name}})}
+										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "operation", input)}}
 									/>
 								</FormControl>
 							</Grid>
                             <Grid item xs={4} sm={4} className={'svg-input-item'}>
-                                {selectEnum.length === 0 && 
+                                {props.query.selectEnum.length === 0 && 
 								
 								<FormControl 
 								variant='outlined' 
@@ -369,9 +369,10 @@ const GlycanAdvancedSearch = (props) => {
 								<OutlinedInput
                                 //className='svg-input-item'
                                 className={'svg-input'}
-                                value={props.query.order + " " + props.query.value}
+                                value={props.query.value}
                                 margin='dense'
-                                // onChange={minInputChange}
+								// onChange={minInputChange}
+								onChange={(event)=>{props.supSearchUpdateQuery(props.query.order, "value", event.target.value)}}
                                 // onBlur={onMinMoveOut}
                                 // labelWidth={40}
                                 // inputProps={{
@@ -380,14 +381,14 @@ const GlycanAdvancedSearch = (props) => {
                                 // }}
                             	/>
 								</FormControl>}
-								{selectEnum.length > 0 && <FormControl 
+								{props.query.selectEnum.length > 0 && <FormControl 
 									variant='outlined' 
 									fullWidth
 									>
 									<SelectControl
-										// inputValue={props.inputValue.glyOrgOperation}
-										menu={selectEnum.map((value)=> { return {id:value, name:value}})}
-										setInputValue={()=>{}}
+										inputValue={props.query.value}
+										menu={props.query.selectEnum.map((value)=> { return {id:value, name:value}})}
+										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "value", input)}}
 									/>
 									</FormControl>
 								}

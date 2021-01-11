@@ -32,10 +32,11 @@ import { Row, Col } from 'react-bootstrap';
 const SuperSearch = (props) => {
   let { id } = useParams("");
 
-  const [nodeData, setNodeData] = useState([]);
+//   const [nodeData, setNodeData] = useState([]);
   const [initData, setInitData] = useState([]);
   const [svgData, setSVGData] = useState([]);
   const [selectedNode, setSelectedNode] = useState("");
+  const [queryData, setQueryData] = useState([]);
 
 
   const [pageLoading, setPageLoading] = useState(true);
@@ -48,14 +49,33 @@ const SuperSearch = (props) => {
     console.log("SuperSearch");
     //setNodeData([1,2]);
 	setPageLoading(false);
-	setInitData([{id:"glycan"}]);
+	// setInitData([{id:"glycan"}]);
 
 	
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
+
+		// Setting node.id from init data to lowercase.
+		initData = initData.map((node) => { 
+				node.id = node.id.toLowerCase();
+				return node;
+			});
+
 		setInitData(initData);
-		setNodeData(initData);
-		
+		// setNodeData(initData);
+
+
+		var initSvgData = initData.map((node) => {
+			return {
+				description: node.description,
+				record_count: node.record_count,
+				id: node.id,
+				label: node.label,
+				list_id: node.list_id ? node.list_id : "",
+			}
+		  });
+
+		setSVGData(initSvgData);
 		if (id === undefined) setPageLoading(false);
 
 		id &&
@@ -75,6 +95,39 @@ const SuperSearch = (props) => {
 	});
 
   }, [])
+
+  function updateNodeData(searchData){
+	  var tempData = svgData.slice();
+	  var updatedData = tempData.map((node) => {
+		let id = node.id;
+		node.record_count = searchData[id] ? searchData[id].result_count : 0;
+		node.list_id = searchData[id] ? searchData[id].list_id : "";
+		return node;
+	  });
+	  setSVGData(updatedData);
+  }
+
+  function goToListPage(listID, currentNode){
+	let message = "Super Search " + currentNode + " list page. query=" + JSON.stringify(queryData);
+	logActivity(
+		"user",
+		(id || "") + ">" + listID,
+		message
+	)
+	props.history.push(
+		getListPageRoute(currentNode) + listID
+	);
+  }
+
+  function getListPageRoute(currentNode) {
+	if (currentNode === "glycan") {
+		return routeConstants.glycanList;
+	} else if (currentNode === "protein") {
+		return routeConstants.proteinList;
+	} else if (currentNode === "site") {
+		return routeConstants.siteList;
+	}
+  }
 
     return (
 		<>
@@ -104,7 +157,9 @@ const SuperSearch = (props) => {
 							> */}
 							<Row>
 								<div style={{height:"800px", width:"1000px"}}>
-                {nodeData.length !== 0 && <SuperSearchSVG nodeData={nodeData} setSelectedNode={setSelectedNode}></SuperSearchSVG>}
+				{svgData.length !== 0 && <SuperSearchSVG svgData={svgData} setSelectedNode={setSelectedNode}
+										  goToListPage={goToListPage}
+				></SuperSearchSVG>}
 				</div>
 			  {/* </Grid> */}
 						  {/* <Grid item 
@@ -113,7 +168,8 @@ const SuperSearch = (props) => {
 				<div style={{height:"600px", width:"1200px"}}>
 
 				<SuperSearchControl data={initData.filter((value) => value.id === selectedNode)[0] ? initData.filter((value) => value.id === selectedNode)[0] : []} 
-					selectedNode={selectedNode} setSelectedNode={setSelectedNode}
+					selectedNode={selectedNode} setSelectedNode={setSelectedNode} setPageLoading={setPageLoading} setAlertDialogInput={setAlertDialogInput}
+					updateNodeData={updateNodeData} queryData={queryData} setQueryData={setQueryData}
 					></SuperSearchControl>
 				</div>
 

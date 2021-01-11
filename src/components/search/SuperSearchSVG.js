@@ -5,6 +5,7 @@ import '../../css/Search.css';
 import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
 import {select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
+import { ModeComment } from '@material-ui/icons';
 
 /**
  * Glycan search component for showing glycan search tabs.
@@ -22,19 +23,21 @@ const SuperSearchSVG = (props) => {
   var node2Height = (nodeHeight/2);
 
   useEffect(() => {
-    loadSVG(props.nodeData);
-    console.log("SuperSearchSVG" + props.nodeData);
-  }, [props.nodeData])
+    loadSVG(props.svgData);
+    console.log("SuperSearchSVG" + JSON.stringify(props.svgData));
+  }, [])
 
   useEffect(() => {
-    updateNumnodesSVG(props.nodeData);
-    console.log("SuperSearchSVG" + props.nodeData);
-  }, [props.countData])
+    updateNumnodesSVG(props.svgData);
+    console.log("SuperSearchSVG" + props.svgData);
+  }, [props.svgData])
 
   function updateNumnodesSVG(nodeData) {
     select("#mapSVG").selectAll(".svg-numnode").remove();
-    var nodes = svgNodes.map((node)=> {var nodeTemp =  nodeData.find((n) => node.id === n.id);  
-                                        node.name = nodeTemp.label; node.count = Number(nodeTemp.record_count).toLocaleString('en-US'); 
+    var nodes = svgNodes.map((node)=> { var nodeTemp =  nodeData.find((n) => node.id === n.id);  
+                                        node.name = nodeTemp.label; 
+                                        node.count = Number(nodeTemp.record_count).toLocaleString('en-US'); 
+                                        node.list_id = nodeTemp.list_id;
                                         return node;});
     var svg = select("#mapSVG")
 
@@ -47,11 +50,19 @@ const SuperSearchSVG = (props) => {
         .on("mouseout",mouseout)
         .attr("transform", function(d) {
             return "translate(" + ((d.xCord)+1.8*node2Width) +"," + ((d.yCord)-0.5*node2Height) + ")";
-        });
+        })
+        //go to the list page
+        .on("click", function(d) {
+          if (d.list_id !== "") {
+            var data = select(this).select("rect").data();
+            props.goToListPage(data[0].list_id, data[0].id);
+            console.log(data[0].list_id);
+          }
+      });
 
         numnodes
         .append("rect")
-        .attr("class", ((d) => d.listID === 1 ? "svg-numnode" : "svg-numnode-nl"))
+        .attr("class", ((d) => d.list_id !== "" ? "svg-numnode" : "svg-numnode-nl"))
         .attr("width", node2Width)
         .attr("height", node2Height)
         .attr("rx", 5)
@@ -63,13 +74,13 @@ const SuperSearchSVG = (props) => {
           .text(function(d) {
             return d.count;
           })
-          .attr("class", ((d) => d.listID  === 1 ? "svg-numnode-text" : "svg-numnode-text-nl"))
+          .attr("class", ((d) => d.list_id  !== "" ? "svg-numnode-text" : "svg-numnode-text-nl"))
           .attr("x", node2Width/2)
           .attr("y", node2Height/2)
           .attr("dy", "0.35em")
 
       function mouseover(d) {
-        if (d.listID === 1) {
+        if (d.list_id !== "") {
           console.log(d)
             let tooltip = document.getElementById("tooltip"); 
             let tooltipText = document.getElementById("tooltip-text");
@@ -81,7 +92,7 @@ const SuperSearchSVG = (props) => {
       }
 
       function mouseout(d) {
-        if (d.listID === 1) {
+        if (d.list_id !== "") {
             var tooltip = document.getElementById("tooltip");
             tooltip.style.display = "none";
         }
@@ -91,7 +102,9 @@ const SuperSearchSVG = (props) => {
   function loadSVG(nodeData){
     // Empty svg
     select("#mapSVG").selectAll("*").remove();
-    var nodes = svgNodes.map((node)=> {node.name =  nodeData.find((n) => node.id === n.id).label; return node});
+    var nodes = svgNodes.map((node)=> {
+      node.name =  nodeData.find((n) => node.id === n.id).label; 
+      return node});
     var edges = svgLinks.map((e) => { 
                 // Get the source and target nodes
                 var linkName = e.linkName;

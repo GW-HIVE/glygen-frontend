@@ -1,64 +1,56 @@
 {
 	"nodes": [
         {
-			"id": "species",
+			"id": "organism",
 			"name": "Organism",
-			"listID": 0,
 			"xCord": 50,
 			"yCord": 50
         },
         {
 			"id": "gene",
 			"name": "Gene",
-			"listID": 0,
 			"xCord": 50,
 			"yCord": 250
         },
         {	
 			"id": "glycan",
 			"name": "Glycan",
-			"listID": 1,
 			"xCord": 430,
 			"yCord": 250
         },
         {
 			"id": "protein",
 			"name": "Protein",
-			"listID": 1,
 			"xCord": 430,
 			"yCord": 450
         },
         {
 			"id": "disease",
 			"name": "Disease",
-			"listID": 0,
 			"xCord": 50,
 			"yCord": 450
 		},
 		{
 			"id": "motif",
 			"name": "Motif",
-			"listID": 0,
 			"xCord": 430,
 			"yCord": 50
 		},
 		{
 			"id": "enzyme",
 			"name": "Enzyme",
-			"listID": 0,
 			"xCord": 810,
 			"yCord": 450
 		},
 		{
 			"id": "site",
 			"name": "Site",
-			"listID": 1,
 			"xCord": 810,
 			"yCord": 250
 		}
 	],
 	"links": [{
-			"source": "species",
+			"source": "organism",
 			"target": "gene",
             "linkName": "has",
             "xCord": 90,
@@ -91,7 +83,7 @@
             "targetOffset": 0
 		},
         {
-			"source": "species",
+			"source": "organism",
 			"target": "protein",
             "linkName": "has",
             "xCord": 325,
@@ -102,7 +94,7 @@
             "targetOffset": 0
         },
         {
-			"source": "species",
+			"source": "organism",
 			"target": "glycan",
             "linkName": "has",
             "xCord": 345,
@@ -189,5 +181,57 @@
             "sourceOffset": 5,
             "targetOffset": -5
         }
-	]
+    ],
+    "oplist": [
+        {
+            "id": "$eq",
+			"name": "="
+        },
+        {
+            "id": "$gt",
+			"name": ">"
+        },
+        {
+            "id": "$gte",
+			"name": ">="
+        },
+        {
+            "id": "$lt",
+			"name": "<"
+        },
+        {
+            "id": "$lte",
+			"name": "<="
+        },
+        {
+            "id": "$ne",
+			"name": "!="
+        },
+        {
+            "id": "$regex",
+			"name": "regex"
+        }
+    ],
+    "aggregators": [
+        {
+            "id": "$and",
+            "name": "And"
+        },
+        {
+            "id": "$or",
+            "name": "Or"
+        },
+        {
+            "id": "$nand",
+            "name": "Nand"
+        },
+        {
+            "id": "$nor",
+            "name": "Nor"
+        }
+    ],
+    "fieldTypes":{
+        "string": "string_value",
+        "number": "numeric_value"
+    }
   }
