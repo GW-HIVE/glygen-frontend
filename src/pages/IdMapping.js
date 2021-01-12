@@ -33,11 +33,11 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      fileUpload: "any",
+      fileUpload: "",
     }
   );
 
-  const [fileUpload, setFileUpload] = useState(null);
+  const [fileUploadForm, setFileUploadForm] = useState(null);
   const [errorFileUpload, setErrorFileUpload] = useState(null);
 
   const [moleculeValidated, setMoleculeValidated] = useState(false);
@@ -104,7 +104,7 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      fileUpload: "any",
+      fileUpload: "",
     });
 
     // setIdMapFileSelect("any");
@@ -152,7 +152,7 @@ const IdMapping = (props) => {
                     : data.cache_info.query.input_idlist,
                 // fileUpload:
                 //   data.cache_info.query.input_idlist === undefined
-                //     ? "any"
+                //     ? ""
                 //     : data.cache_info.query.input_idlist,
               });
               setPageLoading(false);
@@ -271,7 +271,7 @@ const IdMapping = (props) => {
       // setFile(selected);
       setErrorFileUpload("");
     } else {
-      setFileUpload(null);
+      setFileUploadForm(null);
       setErrorFileUpload("Please select accepted file type (.txt)");
     }
   };
@@ -454,7 +454,7 @@ const IdMapping = (props) => {
                 idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
                 ((formValidated || inputIdListValidated) &&
                   idMapSearchData.inputIdlist === "" &&
-                  idMapSearchData.fileUpload === "any")
+                  idMapSearchData.fileUpload === "")
               }
             ></OutlinedInput>
             {idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length && (
@@ -464,7 +464,7 @@ const IdMapping = (props) => {
             )}
             {(formValidated || inputIdListValidated) &&
               idMapSearchData.inputIdlist === "" &&
-              idMapSearchData.fileUpload === "any" && (
+              idMapSearchData.fileUpload === "" && (
                 <FormHelperText className={"error-text"} error>
                   {idMappingData.input_idlist.required}
                 </FormHelperText>
@@ -490,7 +490,7 @@ const IdMapping = (props) => {
               variant="outlined"
               // error={
               //   (formValidated || fileUploadValidated) &&
-              //   idMapSearchData.fileUpload === "any" &&
+              //   idMapSearchData.fileUpload === "" &&
               //   idMapSearchData.inputIdlist !== ""
               // }
             >
@@ -503,7 +503,7 @@ const IdMapping = (props) => {
               />
             </FormControl> */}
           {/* {(formValidated || fileUploadValidated) &&
-              idMapSearchData.fileUpload === "any" &&
+              idMapSearchData.fileUpload === "" &&
               idMapSearchData.inputIdlist !== "" && (
                 <FormHelperText className={"error-text"} error>
                   {idMappingData.file_upload.required}
@@ -519,7 +519,7 @@ const IdMapping = (props) => {
           onBlur={() => setFileUploadValidated(true)}
           error={
             (formValidated || fileUploadValidated) &&
-            idMapSearchData.fileUpload === "any" &&
+            idMapSearchData.fileUpload === "" &&
             idMapSearchData.inputIdlist !== ""
           }
         >
@@ -532,11 +532,11 @@ const IdMapping = (props) => {
                 {errorFileUpload}
               </div>
             )}
-            {fileUpload && <div>{fileUpload.name}</div>}
+            {fileUploadForm && <div>{fileUploadForm.name}</div>}
           </div>
         </form>
         {(formValidated || fileUploadValidated) &&
-          idMapSearchData.fileUpload === "any" &&
+          idMapSearchData.fileUpload === "" &&
           idMapSearchData.inputIdlist !== "" && (
             <FormHelperText className={"error-text"} error>
               {idMappingData.file_upload.required}
