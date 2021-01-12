@@ -29,7 +29,7 @@
 		"errorText": "Entry is too long - max length is 2500.",
 		"required": "This field is required."
   },
-   "file_selection":{
+   "file_upload":{
 		"placeholder": "Select File Type",
 		"placeholderName": "Any",
     "placeholderId": "any",
