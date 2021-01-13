@@ -28,6 +28,7 @@ const LocusList = props => {
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
+  const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(LOCUS_COLUMNS);
   const [page, setPage] = useState(1);
@@ -52,8 +53,8 @@ const LocusList = props => {
         setPageLoading(false);
       } else {
         setData(data.results);
-        setQuery(data.query);
-  
+        setQuery(data.cache_info.query);
+        setTimeStamp(data.cache_info.ts);
         setPagination(data.pagination);
         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
         setPage(currentPage);
@@ -90,6 +91,7 @@ const LocusList = props => {
       // place to change values before rendering
       if (!data.error_code) {
         setData(data.results);
+        setTimeStamp(data.cache_info.ts);
         setPagination(data.pagination);
         setTotalSize(data.pagination.total_length);
       }
@@ -138,6 +140,7 @@ const LocusList = props => {
             <ProteinQuerySummary
               data={query}
               question={quickSearch[searchId]}
+              timestamp={timestamp}
               onModifySearch={handleModifySearch}
             />
           )}

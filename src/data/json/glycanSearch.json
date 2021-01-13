@@ -1,227 +1,237 @@
 {
-    "pageTitle": "Glycan Search",
-    "simple_search": {
-        "tabTitle": "Simple Search",
-        "length": 100,
-        "errorText":"Entry is too long - max length is 100.",
-        "categories": {
-            "enzyme": {
-                "examples": [
-                    "B4GALT1"
-                ],
-                "placeholder": "Enter the enzyme"
-            },
-            "glycan": {
-                "examples": [
-                    "G17689DH"
-                ],
-                "placeholder": "Enter the GlyTouCan Accession"
-            },
-            "organism": {
-                "examples": [
-                    "Homo sapiens"
-                ],
-                "placeholder": "Enter the organism"
-            },
-            "protein": {
-                "examples": [
-                    "P14210"
-                ],
-                "placeholder": "Enter the UniProtKB Accession"
-            },
-            "any": {
-                "examples": [
-                    "G17689DH",
-                    "P14210",
-                    "B4GALT1",
-                    "Homo sapiens"
-                ],
-                "placeholder": "Enter the search term"
-            }
-        }
-    },
-    "advanced_search": {
-        "tabTitle": "Advanced Search",
-        "glycan_identifier": {
-            "length": 10000,
-            "errorText": "Entry is too long - max length is 10000.",
-            "typeahedID": "glytoucan_ac",
-            "placeholder": "Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "G17689DH"
-                    },
-                    "explore": {
-                        "id": "GlyTouCan Accession",
-                        "url": "https://glytoucan.org/Structures"
-                    }
-                }
-            ],
-            "subsumption": [
-                {
-                    "id": "any",
-                    "name": "Related Glycans"
-                }, 
-                {
-                    "id": "none",
-                    "name": "Exact Match"
-                }
-            ]
-        },
-        "organism": {
-            "placeholder": "Click to select one or multiple Organisms",
-            "operations": [
-                {
-                    "id": "or",
-                    "name": "Or"
-                },
-                {
-                    "id": "and",
-                    "name": "And"
-                }
-            ],
-            "annotation_category": [
-                {
-                    "id": "",
-                    "name": "Any"
-                }, 
-                {
-                    "id": "subsumption",
-                    "name": "Inferred"
-                },
-                {
-                    "id": "direct",
-                    "name": "Annotated"
-                }
-            ]
-        },
-        "glycan_type": {
-            "placeholder": "Select Glycan Type",
-            "placeholderName": "",
-            "placeholderId": ""
-        },
-        "glycan_subtype": {
-            "placeholder": "Select Glycan Subtype",
-            "placeholderName": "",
-            "placeholderId": ""
-        },
-        "protein_identifier": {
-            "length": 100,
-            "errorText": "Entry is too long - max length is 100.",
-            "typeahedID": "uniprot_canonical_ac",
-            "placeholder": "Enter the UniProtKB Accession of your protein",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "P14210"
-                    },
-                    "explore": {
-                        "id": "UniProtKB Accession",
-                        "url": "https://www.uniprot.org/help/accession_numbers"
-                    }
-                }
-            ]
-        },
-        "binding_protein_id": {
-            "length": 100,
-            "errorText": "Entry is too long - max length is 100.",
-            "typeahedID": "uniprot_canonical_ac",
-            "placeholder": "Enter the UniProtKB Accession of your protein",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "Q15113-1"
-                    },
-                    "explore": {
-                        "id": "UniProtKB Accession",
-                        "url": "https://www.uniprot.org/help/accession_numbers"
-                    }
-                }
-            ]
-        },
-        "glycan_motif": {
-            "length": 1000,
-            "errorText": "Entry is too long - max length is 1000.",
-            "typeahedID": "motif_name",
-            "placeholder": "Enter the name of a Glycan Motif contained in your glycan",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "Lewis x"
-                    },
-                    "explore": {
-                        "id": "Glycan Motif",
-                        "url": "https://www.uniprot.org/help/carbohyd"
-                    }
-                }
-            ]
-        },
-        "enzyme": {
-            "length": 100,
-            "errorText": "Entry is too long - max length is 100.",
-            "typeahedID": "enzyme",
-            "placeholder": "Enter the Gene Name or UniProtKB Accession of an enzyme",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "B4GALT1"
-                    },
-                    "explore": {
-                        "id": "Biosynthetic Enzyme",
-                        "url": "https://enzyme.expasy.org/"
-                    }
-                }
-            ]
-        },
-        "pmid": {
-            "length": 100,
-            "errorText": "Entry is too long - max length is 100.",
-            "typeahedID": "glycan_pmid",
-            "placeholder": "Enter the Pubmed ID",
-            "examples": [
-                {
-                    "orderID": 100,
-                    "example": {
-                        "name": "Example",
-                        "id": "9449027"
-                    },
-                    "explore": {
-                        "id": "Pubmed ID",
-                        "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
-                    }
-                }
-            ]
-        }
-    },
-    "composition_search": {
-        "tabTitle": "Composition Search",
-        "contains": [
-            {
-                "id": "maybe",
-                "name": "Maybe"
-            },
-            {
-                "id": "yes",
-                "name": "Yes"
-            },
-            {
-                "id": "no",
-                "name": "No"
-            }
-        ]
-    },
-    "tutorial": {
-        "tabTitle": "Tutorial"
+  "pageTitle": "Glycan Search",
+  "simple_search": {
+    "tabTitle": "Simple Search",
+    "length": 100,
+    "errorText": "Entry is too long - max length is 100.",
+    "categories": {
+      "enzyme": {
+        "examples": ["B4GALT1"],
+        "placeholder": "Enter the enzyme"
+      },
+      "Glycan_name": {
+        "examples": ["HexNAc(1)Hex(3)Fuc(3)"],
+        "placeholder": "Enter the Glycan_name"
+      },
+      "glycan": {
+        "examples": ["G17689DH"],
+        "placeholder": "Enter the GlyTouCan Accession"
+      },
+      "organism": {
+        "examples": ["Homo sapiens"],
+        "placeholder": "Enter the organism"
+      },
+      "protein": {
+        "examples": ["P14210"],
+        "placeholder": "Enter the UniProtKB Accession"
+      },
+      "any": {
+        "examples": ["G17689DH", "P14210", "B4GALT1", "Homo sapiens"],
+        "placeholder": "Enter the search term"
+      }
     }
+  },
+  "advanced_search": {
+    "tabTitle": "Advanced Search",
+    "glycan_identifier": {
+      "length": 10000,
+      "errorText": "Entry is too long - max length is 10000.",
+      "typeahedID": "glytoucan_ac",
+      "placeholder": "Enter single or multiple comma-separated GlyTouCan Accession(s) or Cross Reference(s) Id",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "G17689DH"
+          },
+          "explore": {
+            "id": "GlyTouCan Accession",
+            "url": "https://glytoucan.org/Structures"
+          }
+        }
+      ],
+      "subsumption": [
+        {
+          "id": "any",
+          "name": "Related Glycans"
+        },
+        {
+          "id": "none",
+          "name": "Exact Match"
+        }
+      ]
+    },
+    "organism": {
+      "placeholder": "Click to select one or multiple Organisms",
+      "operations": [
+        {
+          "id": "or",
+          "name": "Or"
+        },
+        {
+          "id": "and",
+          "name": "And"
+        }
+      ],
+      "annotation_category": [
+        {
+          "id": "",
+          "name": "Any"
+        },
+        {
+          "id": "subsumption",
+          "name": "Inferred"
+        },
+        {
+          "id": "direct",
+          "name": "Annotated"
+        }
+      ]
+    },
+    "glycan_type": {
+      "placeholder": "Select Glycan Type",
+      "placeholderName": "",
+      "placeholderId": ""
+    },
+    "glycan_subtype": {
+      "placeholder": "Select Glycan Subtype",
+      "placeholderName": "",
+      "placeholderId": ""
+    },
+    "protein_identifier": {
+      "length": 100,
+      "errorText": "Entry is too long - max length is 100.",
+      "typeahedID": "uniprot_canonical_ac",
+      "placeholder": "Enter the UniProtKB Accession of your protein",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "P14210"
+          },
+          "explore": {
+            "id": "UniProtKB Accession",
+            "url": "https://www.uniprot.org/help/accession_numbers"
+          }
+        }
+      ]
+    },
+    "binding_protein_id": {
+      "length": 100,
+      "errorText": "Entry is too long - max length is 100.",
+      "typeahedID": "uniprot_canonical_ac",
+      "placeholder": "Enter the UniProtKB Accession of your protein",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "Q15113-1"
+          },
+          "explore": {
+            "id": "UniProtKB Accession",
+            "url": "https://www.uniprot.org/help/accession_numbers"
+          }
+        }
+      ]
+    },
+    "glycan_motif": {
+      "length": 1000,
+      "errorText": "Entry is too long - max length is 1000.",
+      "typeahedID": "motif_name",
+      "placeholder": "Enter the name of a Glycan Motif contained in your glycan",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "Lewis x"
+          },
+          "explore": {
+            "id": "Glycan Motif",
+            "url": "https://www.uniprot.org/help/carbohyd"
+          }
+        }
+      ]
+    },
+    "enzyme": {
+      "length": 100,
+      "errorText": "Entry is too long - max length is 100.",
+      "typeahedID": "enzyme",
+      "placeholder": "Enter the Gene Name or UniProtKB Accession of an enzyme",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "B4GALT1"
+          },
+          "explore": {
+            "id": "Biosynthetic Enzyme",
+            "url": "https://enzyme.expasy.org/"
+          }
+        }
+      ]
+    },
+    "glycan_name": {
+      "length": 100,
+      "errorText": "Entry is too long - max length is 100.",
+      "typeahedID": "glycan_name",
+      "placeholder": "Enter the Glycan Name",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "HexNAc(1)Hex(3)Fuc(3)"
+          },
+          "explore": {
+            "id": "Glycan Name",
+            "url": "https://enzyme.expasy.org/"
+          }
+        }
+      ]
+    },
+    "pmid": {
+      "length": 100,
+      "errorText": "Entry is too long - max length is 100.",
+      "typeahedID": "glycan_pmid",
+      "placeholder": "Enter the Pubmed ID",
+      "examples": [
+        {
+          "orderID": 100,
+          "example": {
+            "name": "Example",
+            "id": "9449027"
+          },
+          "explore": {
+            "id": "Pubmed ID",
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/pmctopmid/"
+          }
+        }
+      ]
+    }
+  },
+  "composition_search": {
+    "tabTitle": "Composition Search",
+    "contains": [
+      {
+        "id": "maybe",
+        "name": "Maybe"
+      },
+      {
+        "id": "yes",
+        "name": "Yes"
+      },
+      {
+        "id": "no",
+        "name": "No"
+      }
+    ]
+  },
+  "tutorial": {
+    "tabTitle": "Tutorial"
+  }
 }

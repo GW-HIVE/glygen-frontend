@@ -37,7 +37,7 @@ import Button from "react-bootstrap/Button";
 import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
-
+import { Tab, Tabs, Container } from "react-bootstrap";
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 const motifStrings = stringConstants.motif.common;
@@ -45,6 +45,11 @@ const motifStrings = stringConstants.motif.common;
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
   { label: stringConstants.sidebar.organism.displayname, id: "Organism" },
+
+  {
+    label: stringConstants.sidebar.names_synonyms.displayname,
+    id: "Names"
+  },
   { label: stringConstants.sidebar.motifs.displayname, id: "Motifs" },
   {
     label: stringConstants.sidebar.associated_glycan.displayname,
@@ -57,6 +62,14 @@ const items = [
   {
     label: stringConstants.sidebar.bio_Enzymes.displayname,
     id: "Biosynthetic-Enzymes"
+  },
+  {
+    label: stringConstants.sidebar.subsumption.displayname,
+    id: "subsumption"
+  },
+  {
+    label: stringConstants.sidebar.expression.displayname,
+    id: "expression"
   },
   {
     label: stringConstants.sidebar.digital_seq.displayname,
@@ -153,6 +166,9 @@ const GlycanDetail = props => {
   );
 
   let history;
+  let expressionTabSelected;
+  let expressionWithtissue;
+  let expressionWithcell;
 
   useEffect(() => {
     setPageLoading(true);
@@ -201,7 +217,19 @@ const GlycanDetail = props => {
     });
     // eslint-disable-next-line
   }, []);
+  if (detailData.expression) {
+    const WithTissue = detailData.expression.filter(
+      item => item.tissue !== undefined
+    );
+    const WithCellline = detailData.expression.filter(
+      item => item.cell_line !== undefined
+    );
+    expressionWithtissue = WithTissue;
+    expressionWithcell = WithCellline;
 
+    expressionTabSelected =
+      WithTissue.length > 0 ? "with_tissue" : "with_cellline";
+  }
   if (detailData.mass) {
     detailData.mass = addCommas(detailData.mass);
   }
@@ -253,7 +281,10 @@ const GlycanDetail = props => {
     publication,
     wurcs,
     enzyme,
+    subsumption,
+    expression,
     mass_pme,
+    names,
     tool_support
   } = detailData;
 
@@ -303,18 +334,22 @@ const GlycanDetail = props => {
     },
 
     {
-      dataField: "position residue",
+      dataField: "position",
       text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
-      formatter: (value, row) => (
-        <>
-          {row.residue}
-          {row.position}
-        </>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+              {row.residue} {row.position}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     }
   ];
   const glycanBindingProteinColumns = [
@@ -420,6 +455,178 @@ const GlycanDetail = props => {
       )
     }
   ];
+  const subsumptionColumns = [
+    {
+      dataField: "id",
+      text: "GlyToucan_ac",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View details">
+          <Link to={routeConstants.glycanDetail + row.id}>{row.id}</Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "type",
+      text: "Type",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "relationship",
+      text: "Relationship",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    }
+  ];
+  const expressionCellColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Site",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.position}</>
+    },
+    {
+      dataField: "residue",
+      text: "Amino Acid",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.residue}</>
+    },
+
+    {
+      dataField: "cell_line.name",
+      text: "Cell Line Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "cell_line.cellosaurus_id",
+      text: "Cellosaurus ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    }
+  ];
+  const expressionTissueColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.position + row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "position",
+      text: "Site",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.position}</>
+    },
+    {
+      dataField: "residue",
+      text: "Amino Acid",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) => <>{row.residue}</>
+    },
+    {
+      dataField: "tissue.name",
+      text: "Tissue Name",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    },
+    {
+      dataField: "tissue.uberon_id",
+      text: "Uberon ID",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      }
+    }
+  ];
   const motifColumns = [
     {
       dataField: "id",
@@ -487,9 +694,12 @@ const GlycanDetail = props => {
       glycoprotein: true,
       glycanBindingProtein: true,
       bioEnzyme: true,
+      subsumption: true,
+      expression: true,
       digitalSeq: true,
       crossref: true,
-      publication: true
+      publication: true,
+      names: true
     }
   );
 
@@ -514,20 +724,42 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
+  // <CustomAlert title={`This Glycan ${id} Record is nonExistent`}>
+  //   <ul>
+  //     {nonExistent.history.map(item => (
+  //       <span className="recordInfo">
+  //         <li>{item.description}</li>
+  //       </span>
+  //     ))}
+  //   </ul>
+  // </CustomAlert>
+
   if (nonExistent) {
     return (
-      <Alert severity="error">
-        <AlertTitle>This Glycan Record is Non existent</AlertTitle>
-        {nonExistent.history && nonExistent.history.length && (
-          <ul>
-            {nonExistent.history.map(item => (
-              <span className="recordInfo">
-                <li>{item.description}</li>
-              </span>
-            ))}
-          </ul>
-        )}
-      </Alert>
+      <Container className="tab-content-border2">
+        <Alert className="erroralert" severity="error">
+          {nonExistent.history && nonExistent.history.length ? (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b>Record is Nonexistent
+              </AlertTitle>
+              <ul>
+                {nonExistent.history.map(item => (
+                  <span className="recordInfo">
+                    <li>{item.description}</li>
+                  </span>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b> Record is not valid
+              </AlertTitle>
+            </>
+          )}
+        </Alert>
+      </Container>
     );
   }
 
@@ -598,6 +830,8 @@ const GlycanDetail = props => {
                   setAlertDialogInput({ show: input });
                 }}
               />
+
+              {/*  Function */}
               {/* general */}
               <Accordion
                 id="General"
@@ -862,6 +1096,62 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/*  Names */}
+              <Accordion
+                id="Names"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.protein.names_synonyms.title}
+                        text={DetailTooltips.protein.names_synonyms.text}
+                        urlText={DetailTooltips.protein.names_synonyms.urlText}
+                        url={DetailTooltips.protein.names_synonyms.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.names_synonyms.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse(
+                            "names_synonyms",
+                            collapsed.names_synonyms
+                          )
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.names_synonyms ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {names && names.length ? (
+                        <ul className="list-style-none">
+                          {names.map(nameObject => (
+                            <li>
+                              <b>{nameObject.domain}</b>: {nameObject.name}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p>No data available.</p>
+                      )}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
               {/* Motif */}
               <Accordion
                 id="Motifs"
@@ -1020,6 +1310,7 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
               {/* Biosynthetic Enzymes */}
               <Accordion
                 id="Biosynthetic-Enzymes"
@@ -1072,6 +1363,162 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/* Subsumption*/}
+              <Accordion
+                id="subsumption"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.subsumption.title}
+                        text={DetailTooltips.glycan.subsumption.text}
+                        urlText={DetailTooltips.glycan.subsumption.urlText}
+                        url={DetailTooltips.glycan.subsumption.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.subsumption.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("subsumption", collapsed.subsumption)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.subsumption ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {subsumption && subsumption.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={subsumption}
+                          columns={subsumptionColumns}
+                          defaultSortField={"id"}
+                          onClickTarget={"#subsumption"}
+                        />
+                      )}
+                      {!subsumption && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
+              {/* Expression */}
+              <Accordion
+                id="expression"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.expression.title}
+                        text={DetailTooltips.glycan.expression.text}
+                        urlText={DetailTooltips.glycan.expression.urlText}
+                        url={DetailTooltips.glycan.expression.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.expression.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("expression", collapsed.expression)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.expression ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {expression && expression.length !== 0 && (
+                        <Tabs
+                          defaultActiveKey={
+                            expressionWithtissue &&
+                            expressionWithtissue.length > 0
+                              ? "with_tissue"
+                              : "with_cellline"
+                          }
+                          transition={false}
+                          mountOnEnter={true}
+                          unmountOnExit={true}
+                        >
+                          <Tab
+                            eventKey="with_tissue"
+                            // className='tab-content-padding'
+                            title="Tissue Expression"
+                            //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
+                          >
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px"
+                              }}
+                            >
+                              {expressionWithtissue &&
+                                expressionWithtissue.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={expressionWithtissue}
+                                    columns={expressionTissueColumns}
+                                    onClickTarget={"#expression"}
+                                    defaultSortField="start_pos"
+                                  />
+                                )}
+                              {!expressionWithtissue.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                          <Tab
+                            eventKey="with_cellline"
+                            className="tab-content-padding"
+                            title="CellLine Expression "
+                          >
+                            <Container>
+                              {expressionWithcell &&
+                                expressionWithcell.length > 0 && (
+                                  <ClientPaginatedTable
+                                    data={expressionWithcell}
+                                    columns={expressionCellColumns}
+                                    onClickTarget={"#expression"}
+                                    defaultSortField="position"
+                                  />
+                                )}
+                              {!expressionWithcell.length && (
+                                <p>No data available.</p>
+                              )}
+                            </Container>
+                          </Tab>
+                        </Tabs>
+                      )}
+
+                      {!expression && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/* Digital Sequence */}
               <Accordion
                 id="Digital-Sequence"

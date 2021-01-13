@@ -935,10 +935,10 @@ sub {
 } */
 
 .univ-logo {
-  padding: 10px 20px;
-  max-width: 150px;
-  margin: 0 auto;
-  line-height: 100px;
+  padding: 5px 20px;
+  max-width: 230px;
+  max-height: 100px;
+  margin: 10px auto;
 }
 .univ-logo image {
   display: inline-block !important;

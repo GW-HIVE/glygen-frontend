@@ -102,8 +102,14 @@ export const LOCUS_COLUMNS = [
 
     formatter: (value, row) => (
       <>
-        {row.chromosome ? <>Chr {row.chromosome}: {addCommas(row.start_pos)} -{" "}
-        {addCommas(row.end_pos)}</> : "N/A"}
+        {row.chromosome ? (
+          <>
+            Chr {row.chromosome}: {addCommas(row.start_pos)} -{" "}
+            {addCommas(row.end_pos)}
+          </>
+        ) : (
+          "N/A"
+        )}
       </>
     )
   },
@@ -310,5 +316,13 @@ export const getOrthologsList = (
 export const getBiosynthesisEnzymeToGlycans = (organism, proteinId) => {
   const url =
     "/usecases/biosynthesis_enzyme_to_glycans/" + organism + "/" + proteinId;
+  return getJson(url);
+};
+
+/**
+ * Gets JSON for glycan search init.
+ */
+export const getUsecaseInit = () => {
+  const url = `/usecases/search_init`;
   return getJson(url);
 };

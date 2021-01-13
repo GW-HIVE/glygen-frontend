@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -12,6 +12,7 @@ import quickSearchData from "../../data/json/quickSearch.json";
 import stringConstants from "../../data/json/stringConstants";
 import proteinSearchData from "../../data/json/proteinSearch";
 import TextAlert from "../alert/TextAlert";
+import { getUsecaseInit } from "../../data/usecases";
 
 /**
  * Quick search control for organism usecases.
@@ -20,6 +21,20 @@ const SearchByOrganism = props => {
   let quickSearch = stringConstants.quick_search;
   let searchByOrganism = quickSearchData.searchByOrganism;
   let advancedSearch = proteinSearchData.advanced_search;
+
+  const [useCaseInitData, setUseCaseInitData] = useState({});
+
+  useEffect(() => {
+    getUsecaseInit().then(({ data }) => {
+      setUseCaseInitData(data);
+    });
+  }, []);
+
+  const {
+    species_to_glycoproteins,
+    species_to_glycosyltransferases,
+    species_to_glycohydrolases
+  } = useCaseInitData;
 
   return (
     <>
@@ -74,11 +89,10 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycosyltransferases &&
+                          species_to_glycosyltransferases.organism
+                            ? species_to_glycosyltransferases.organism
+                            : []
                         }
                         setInputValue={input =>
                           props.setInputValue({ question_8: input })
@@ -143,11 +157,10 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycohydrolases &&
+                          species_to_glycohydrolases.organism
+                            ? species_to_glycohydrolases.organism
+                            : []
                         }
                         setInputValue={input =>
                           props.setInputValue({ question_9: input })
@@ -212,22 +225,19 @@ const SearchByOrganism = props => {
                           searchByOrganism.common.organism.placeholderName
                         }
                         menu={
-                          props.glycanInitData.organism
-                            ? props.glycanInitData.organism.map(type => {
-                                return { id: type.id, name: type.name };
-                              })
-                            : props.glycanInitData.organism
+                          species_to_glycoproteins &&
+                          species_to_glycoproteins.organism
+                            ? species_to_glycoproteins.organism
+                            : []
                         }
-                        setInputValue={input =>
+                        setInputValue={organismId => {
                           props.setInputValue({
                             question_10: {
-                              organism: input,
-                              glycosylation_evidence:
-                                props.inputValue.question_10
-                                  .glycosylation_evidence
+                              organism: organismId,
+                              glycosylation_evidence: advancedSearch.glycosylation_evidence.placeholderId
                             }
-                          })
-                        }
+                          });
+                        }}
                       />
                     </FormControl>
                   </Grid>
@@ -247,7 +257,19 @@ const SearchByOrganism = props => {
                         placeholderName={
                           advancedSearch.glycosylation_evidence.placeholderName
                         }
-                        menu={advancedSearch.glycosylation_evidence.menu}
+                        menu={
+                          species_to_glycoproteins &&
+                          species_to_glycoproteins.organism &&
+                          props.inputValue.question_10.organism !== searchByOrganism.common.organism.placeholderId
+                            ? 
+                            species_to_glycoproteins.organism.filter(
+                              organism => organism.id === props.inputValue.question_10.organism
+                            )[0].evidence_type.map(type => ({
+                                      id: type,
+                                      name: type
+                                    }))
+                            : []
+                        }
                         setInputValue={input =>
                           props.setInputValue({
                             question_10: {
@@ -275,7 +297,7 @@ const SearchByOrganism = props => {
                   <Grid item xs={12} sm={12}>
                     <Typography align="left" className="small-text">
                       ** Select both options{" "}
-                      <strong className="gg-blue-color">Species</strong> and{" "}
+                      <strong className="gg-blue-color">Organism</strong> and{" "}
                       <strong>Type.</strong>
                     </Typography>
                   </Grid>

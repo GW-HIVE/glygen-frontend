@@ -107,33 +107,6 @@ export const GLYCAN_COLUMNS = [
     selected: true
   },
 
-  // {
-  //   dataField: "iupac",
-  //   text: "IUPAC",
-  //   sort: true,
-  //   headerStyle: (colum, colIndex) => {
-  //     return { backgroundColor: "#4B85B6", color: "white" };
-  //   }
-  // },
-  // {
-  //   dataField: "glycoct",
-  //   text: "Glycoct",
-  //   sort: true,
-  //   headerStyle: (colum, colIndex) => {
-  //     return { backgroundColor: "#4B85B6", color: "white" };
-  //   },
-  //   formatter: (value, row, rowIdx) => {
-  //     const txt = value.replace(/\\n/g, "\n");
-  //     return (
-  //       <CustomPopover
-  //         id={rowIdx}
-  //         key={rowIdx}
-  //         displayText={txt.substring(0, 10) + " ..."}
-  //         popOverText={txt}
-  //       ></CustomPopover>
-  //     );
-  //   }
-  // },
   {
     dataField: "mass_pme",
     text: glycanStrings.mass_pme.shortName,

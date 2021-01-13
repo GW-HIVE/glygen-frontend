@@ -19,21 +19,18 @@ network-test:
 	@docker network ls --format='{{ .Name }}' | grep ^${GLYGEN_NETWORK_TEST}$$ > /dev/null 2>&1 || docker network create ${GLYGEN_NETWORK_TEST};
 
 prod: network
-	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml --project-name glygen-frontend stop
 	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml --project-name glygen-frontend rm --force
-	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml --project-name glygen-frontend up -d --build
+	@docker-compose -f docker-compose.yml -f docker-compose.prod.yml --project-name glygen-frontend up --no-start --build
 	@docker image prune --force
 
 beta: network-beta
-	@docker-compose -f docker-compose.yml -f docker-compose.beta.yml --project-name glygen-frontend-beta stop
 	@docker-compose -f docker-compose.yml -f docker-compose.beta.yml --project-name glygen-frontend-beta rm --force
-	@docker-compose -f docker-compose.yml -f docker-compose.beta.yml --project-name glygen-frontend-beta up -d --build
+	@docker-compose -f docker-compose.yml -f docker-compose.beta.yml --project-name glygen-frontend-beta up --no-start --build
 	@docker image prune --force
 
 test: network-test
-	@docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name glygen-frontend-test stop
 	@docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name glygen-frontend-test rm --force
-	@docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name glygen-frontend-test up -d --build
+	@docker-compose -f docker-compose.yml -f docker-compose.test.yml --project-name glygen-frontend-test up --no-start --build
 	@docker image prune --force
 
 dev: network-dev

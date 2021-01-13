@@ -179,6 +179,13 @@ const ProteinAdvancedSearch = (props) => {
 	}
 
 	/**
+	 * Function to set glycosylation  type value.
+	 * @param {string} value - input glycosylation evidence type value.
+	 **/
+	const proGlycosylationTypeOnChange = (value) => {
+		props.setProAdvSearchData({ proGlycosylationType: value });
+	}
+	/**
 	 * Function to set disease name value.
 	 * @param {string} inputProDiseaseName - input disease name value.
 	 **/
@@ -248,6 +255,7 @@ const ProteinAdvancedSearch = (props) => {
 			proPathwayId: '',
 			proPubId: '',
 			proGlyEvidence: advancedSearch.glycosylation_evidence.placeholderId,
+			proGlycosylationType: advancedSearch.glycosylation_type.placeholderId,
 			proDiseaseName: '',
 			proDiseaseId: '',
 			proAttachedGlycanId: '',
@@ -747,6 +755,32 @@ const ProteinAdvancedSearch = (props) => {
 							setInputValue={proPubIdChange}
 							inputValue={advancedSearch.pmid.examples}
 						/>
+					</FormControl>
+				</Grid>
+				{/* Glycosylation  Type */}
+				<Grid item xs={12} sm={10}>
+					<FormControl
+						fullWidth
+						variant='outlined'
+					>
+						<Typography className={'search-lbl'} gutterBottom>
+							<HelpTooltip
+                                title={commonProteinData.glycosylation_type.tooltip.title}
+                                text={commonProteinData.glycosylation_type.tooltip.text}
+                            />
+                            {commonProteinData.glycosylation_type.name}
+						</Typography>
+						{/* {advancedSearch.glycosylation_type && ( */}
+							<SelectControl
+								inputValue={props.inputValue.proGlycosylationType}
+								placeholder={advancedSearch.glycosylation_type.placeholder}
+								placeholderId={advancedSearch.glycosylation_type.placeholderId}
+								placeholderName={advancedSearch.glycosylation_type.placeholderName}
+								// menu={advancedSearch.glycosylation_type.menu}
+								menu={props.initData.glycosylation_types.map(a => ({name:a, id:a}))}
+								setInputValue={proGlycosylationTypeOnChange}
+							/>
+						{/* )} */}
 					</FormControl>
 				</Grid>
 				{/* Glycosylation Evidence Type */}

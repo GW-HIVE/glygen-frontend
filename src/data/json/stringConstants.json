@@ -37,6 +37,17 @@
         },
         "id": "glycan_id_subsumption"
       },
+      "subsumption": {
+        "name": "Subsumption",
+        "shortName": "Subsumption",
+        "tooltip": {
+          "title": "Subsumption",
+          "text": "",
+          "urlText": "Read more...",
+          "url": ""
+        },
+        "id": "subsumption"
+      },
       "organism_annotation": {
         "name": "Organism Annotation",
         "shortName": "Organism Annotation",
@@ -167,6 +178,15 @@
         },
         "id": "glycan_motif"
       },
+      "glycan_name": {
+        "name": "Glycan Name",
+        "shortName": "Glycan Name",
+        "tooltip": {
+          "title": "Glycan Name",
+          "text": "Click to select Glycan Name."
+        },
+        "id": "glycan_name"
+      },
       "enzyme": {
         "name": "Biosynthetic Enzyme",
         "shortName": "Biosynthetic Enzyme",
@@ -177,6 +197,17 @@
           "url": "https://enzyme.expasy.org/"
         },
         "id": "enzyme"
+      },
+      "subsumption": {
+        "name": "Subsumption",
+        "shortName": "subsumption",
+        "tooltip": {
+          "title": "subsumption",
+          "text": "subsumption are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s).",
+          "urlText": "Read more...",
+          "url": ""
+        },
+        "id": "subsumption"
       },
       "pmid": {
         "name": "Pubmed ID",
@@ -500,6 +531,7 @@
         },
         "id": "glycosylation_type"
       },
+
       "gene_url": {
         "name": "URL",
         "shortName": "url",
@@ -1194,6 +1226,16 @@
       "displayname": "Biosynthetic Enzymes",
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
     },
+    "subsumption": {
+      "id": "Subsumption",
+      "displayname": "Subsumption",
+      "tooltip": " subsumption Information for selected accession"
+    },
+    "expression": {
+      "id": "expression",
+      "displayname": "Expression",
+      "tooltip": "Expression Information for selected accession"
+    },
     "digital_seq": {
       "id": "digital_seq",
       "displayname": "Digital Sequence",
@@ -1228,6 +1270,11 @@
       "id": "ptm_annotation",
       "displayname": "PTM Annotation",
       "tooltip": " ptm_annotation Information for selected Protein accession"
+    },
+    "pro_annotation": {
+      "id": "pro_annotation",
+      "displayname": "Proteoform Annotation",
+      "tooltip": " pro_annotation Information for selected Protein accession"
     },
     "mutagenesis": {
       "id": "mutagenesis",

@@ -25,7 +25,6 @@ export default function CompositionSearchControl(props) {
 	const [undoVal, setUndoVal] = useState({});
 	const [redoDisabled, setRedoDisabled] = useState(true);
 	const [undoDisabled, setUndoDisabled] = useState(true);
-	const [searchDisabled, setSearchDisabled] = useState(true);
 
 	/**
 	 * Function to handle min input change event.
@@ -104,9 +103,9 @@ export default function CompositionSearchControl(props) {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		compositionData[residue] = comp;
 		if (allNoTrue(compositionData)) {
-			setSearchDisabled(true);
+			props.setCompSearchDisabled(true);
 		} else {
-			setSearchDisabled(false);
+			props.setCompSearchDisabled(false);
 		}
 	}
 
@@ -182,9 +181,9 @@ export default function CompositionSearchControl(props) {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		compositionData[residue] = comp;
 		if (allNoTrue(compositionData)) {
-			setSearchDisabled(true);
+			props.setCompSearchDisabled(true);
 		} else {
-			setSearchDisabled(false);
+			props.setCompSearchDisabled(false);
 		}
 	}
 
@@ -264,9 +263,9 @@ export default function CompositionSearchControl(props) {
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		compositionData[residue] = comp;
 		if (allNoTrue(compositionData)) {
-			setSearchDisabled(true);
+			props.setCompSearchDisabled(true);
 		} else {
-			setSearchDisabled(false);
+			props.setCompSearchDisabled(false);
 		}
 	}
 
@@ -376,9 +375,9 @@ export default function CompositionSearchControl(props) {
 		}
 
 		if (allNoTrue(compositionData)) {
-			setSearchDisabled(true);
+			props.setCompSearchDisabled(true);
 		} else {
-			setSearchDisabled(false);
+			props.setCompSearchDisabled(false);
 		}
 	}
 
@@ -447,7 +446,7 @@ export default function CompositionSearchControl(props) {
 			saveCurrentResidueStatesToUndoList(compositionData);
 		}
 		props.setInputValue(compositionData);
-		setSearchDisabled(false);
+		props.setCompSearchDisabled(false);
 	};
 
 	/**
@@ -467,7 +466,7 @@ export default function CompositionSearchControl(props) {
 			saveCurrentResidueStatesToUndoList(compositionData);
 		}
 		props.setInputValue(compositionData);
-		setSearchDisabled(true);
+		props.setCompSearchDisabled(true);
 	};
 
 	/**
@@ -508,7 +507,7 @@ export default function CompositionSearchControl(props) {
 			saveCurrentResidueStatesToUndoList(compositionData);
 		}
 		props.setInputValue(compositionData);
-		setSearchDisabled(false);
+		props.setCompSearchDisabled(false);
 	};
 
 	return (
@@ -685,7 +684,7 @@ export default function CompositionSearchControl(props) {
 				</Button>
 				<Button
 					className='gg-btn-blue mb-3'
-					disabled={searchDisabled}
+					disabled={props.compSearchDisabled}
 					onClick={props.searchGlycanCompClick}>
 					Search Glycan
 				</Button>

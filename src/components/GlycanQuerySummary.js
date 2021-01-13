@@ -4,7 +4,7 @@ import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import stringConstants from "../data/json/stringConstants";
-import glycanSearchData from '../data/json/glycanSearch';
+import glycanSearchData from "../data/json/glycanSearch";
 import Button from "react-bootstrap/Button";
 const glycanStrings = stringConstants.glycan.common;
 const advancedSearch = glycanSearchData.advanced_search;
@@ -39,11 +39,9 @@ function getDateTime() {
 const GlycanQuerySummary = props => {
   const title = "Glycan Search Summary";
 
-  const { data, onModifySearch } = props;
+  const { data, onModifySearch, timestamp } = props;
 
-  const executionTime = data.execution_time
-    ? getDateTime(data.execution_time)
-    : "";
+  const executionTime = timestamp ? getDateTime(timestamp) : "";
   const {
     glycan_identifier,
     mass,
@@ -51,6 +49,7 @@ const GlycanQuerySummary = props => {
     number_monosaccharides,
     organism,
     glycan_type,
+    glycan_name,
     glycan_subtype,
     protein_identifier,
     glycan_motif,
@@ -126,14 +125,19 @@ const GlycanQuerySummary = props => {
               </Row>
             )}
 
-              {/* glycan id subsumption */}
-              {glycan_identifier && (
+            {/* glycan id subsumption */}
+            {glycan_identifier && (
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {glycanStrings.glycan_id_subsumption.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {advancedSearch.glycan_identifier.subsumption.filter(subsumption => subsumption.id === glycan_identifier.subsumption)[0].name}
+                  {
+                    advancedSearch.glycan_identifier.subsumption.filter(
+                      subsumption =>
+                        subsumption.id === glycan_identifier.subsumption
+                    )[0].name
+                  }
                 </Col>
               </Row>
             )}
@@ -175,7 +179,7 @@ const GlycanQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {number_monosaccharides.min}&#8209;
-                  {number_monosaccharides.max}&nbsp;Da&nbsp;
+                  {number_monosaccharides.max}
                 </Col>
               </Row>
             )}
@@ -191,7 +195,7 @@ const GlycanQuerySummary = props => {
                 </Col>
               </Row>
             )}
-              
+
             {/* Organism Annotation */}
             {!props.question && organism && (
               <Row className="summary-table-col" sm={12}>
@@ -199,7 +203,12 @@ const GlycanQuerySummary = props => {
                   {glycanStrings.organism_annotation.shortName}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {advancedSearch.organism.annotation_category.filter(annotation => annotation.id === organism.annotation_category)[0].name}
+                  {
+                    advancedSearch.organism.annotation_category.filter(
+                      annotation =>
+                        annotation.id === organism.annotation_category
+                    )[0].name
+                  }
                 </Col>
               </Row>
             )}
@@ -221,6 +230,17 @@ const GlycanQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycan_subtype}
+                </Col>
+              </Row>
+            )}
+
+            {glycan_name && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {glycanStrings.glycan_name.shortName}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {glycan_name}
                 </Col>
               </Row>
             )}

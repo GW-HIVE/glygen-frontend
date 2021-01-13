@@ -40,7 +40,7 @@ const ProteinQuerySummary = props => {
   const title = "Protein Search Summary";
   let quickSearch = stringConstants.quick_search;
 
-  const { data, onModifySearch } = props;
+  const { data, onModifySearch, timestamp } = props;
   const proteinStrings = stringConstants.protein.common;
   const {
     uniprot_canonical_ac,
@@ -65,8 +65,8 @@ const ProteinQuerySummary = props => {
     binding_glycan_id,
   } = data;
 
-  const executionTime = data.execution_time
-    ? getDateTime(data.execution_time)
+  const executionTime = timestamp
+    ? getDateTime(timestamp)
     : "";
 
   function formatProtein() {
@@ -163,7 +163,7 @@ const ProteinQuerySummary = props => {
                   {proteinStrings.mass.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;({mass_type})
+                  {mass.min}&#8209;{mass.max}&nbsp;Da&nbsp;
                 </Col>
               </Row>
             )}

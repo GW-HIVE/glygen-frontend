@@ -321,7 +321,7 @@ const QuickSearch = props => {
       });
   };
 
-   /**
+  /**
    * Function to handle protein detail site_annotation question.
    */
   const searchQuestion7 = () => {
@@ -520,37 +520,37 @@ const QuickSearch = props => {
     return undefined;
   }
 
-   /**
+  /**
    * getListApiResponse returns input field value based on question id and response.
    * @param {string} questionId question id
    * @param {object} response response object
    */
   function getListApiResponse(questionId, response) {
     if (questionId === quickSearch.question_1.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_2.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_3.id) {
-      return response.query.glytoucan_ac;
+      return response.cache_info.query.glytoucan_ac;
     } else if (questionId === quickSearch.question_4.id) {
-      return response.query.uniprot_canonical_ac;
+      return response.cache_info.query.uniprot_canonical_ac;
     } else if (questionId === quickSearch.question_5.id) {
       return "";
     } else if (questionId === quickSearch.question_6.id) {
-      return response.query.uniprot_canonical_ac;
+      return response.cache_info.query.uniprot_canonical_ac;
     } else if (questionId === quickSearch.question_7.id) {
       return "";
     } else if (questionId === quickSearch.question_8.id) {
-      return response.query.organism.id;
+      return response.cache_info.query.organism.id;
     } else if (questionId === quickSearch.question_9.id) {
-      return response.query.organism.id;
+      return response.cache_info.query.organism.id;
     } else if (questionId === quickSearch.question_10.id) {
       return {
-        organism: response.query.organism.id,
-        glycosylation_evidence: response.query.evidence_type
+        organism: response.cache_info.query.organism.id,
+        glycosylation_evidence: response.cache_info.query.evidence_type
       };
     } else if (questionId === quickSearch.question_11.id) {
-      return response.query.do_name;
+      return response.cache_info.query.do_name;
     }
   }
 
@@ -585,8 +585,8 @@ const QuickSearch = props => {
   }
 
   /**
-	 * useEffect for retriving data from api and showing page loading effects.
-	 */
+   * useEffect for retriving data from api and showing page loading effects.
+   */
   useEffect(() => {
     setPageLoading(true);
     logActivity();
