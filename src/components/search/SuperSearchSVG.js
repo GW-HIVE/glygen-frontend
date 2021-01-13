@@ -6,6 +6,9 @@ import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
 import {select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
 import { ModeComment } from '@material-ui/icons';
+import searchPng from "../../images/icons/search.png";
+import noSearchPng from "../../images/icons/nosearch.png";
+
 
 /**
  * Glycan search component for showing glycan search tabs.
@@ -19,7 +22,7 @@ const SuperSearchSVG = (props) => {
   //initializing the values so that it can be changed in future of needed
   var nodeWidth = 140;  //width of node
   var nodeHeight = 40; //height of node
-  var node2Width = 60;
+  var node2Width = 90;
   var node2Height = (nodeHeight/2);
 
   useEffect(() => {
@@ -49,7 +52,7 @@ const SuperSearchSVG = (props) => {
         .on("mouseover", mouseover)
         .on("mouseout",mouseout)
         .attr("transform", function(d) {
-            return "translate(" + ((d.xCord)+1.8*node2Width) +"," + ((d.yCord)-0.5*node2Height) + ")";
+            return "translate(" + ((d.xCord)+1.0*node2Width) +"," + ((d.yCord)-0.5*node2Height) + ")";
         })
         //go to the list page
         .on("click", function(d) {
@@ -72,6 +75,7 @@ const SuperSearchSVG = (props) => {
         numnodes.append("text")
         .data(nodes)
           .text(function(d) {
+            // return d.count + (d.list_id !== "" ? "\xa0\xa0\uD83D\uDD0D" : "");
             return d.count;
           })
           .attr("class", ((d) => d.list_id  !== "" ? "svg-numnode-text" : "svg-numnode-text-nl"))
@@ -79,13 +83,24 @@ const SuperSearchSVG = (props) => {
           .attr("y", node2Height/2)
           .attr("dy", "0.35em")
 
+          //appending text on numeric nodes
+          numnodes.append("image")
+          .data(nodes)
+          .attr("xlink:href", ((d) => d.list_id  !== "" ? searchPng : noSearchPng))
+            .attr("class", ((d) => d.list_id  !== "" ? "svg-numnode-text" : "svg-numnode-text-nl"))
+            .attr("x", node2Width - 18)
+            .attr("y", node2Height/6)
+            .attr("height", "15px")
+            .attr("width", "15px")
+            .attr("dy", "0.35em")
+
       function mouseover(d) {
         if (d.list_id !== "") {
           console.log(d)
             let tooltip = document.getElementById("tooltip"); 
             let tooltipText = document.getElementById("tooltip-text");
             tooltipText.innerHTML = "Click to see list page.";
-            tooltip.style.left = Number(d.xCord + 2.6 * node2Width + 2) + 'px';
+            tooltip.style.left = Number(d.xCord + 1.82 * node2Width + 2) + 'px';
             tooltip.style.top = Number(d.yCord + 3 * node2Height) + 'px';
             tooltip.style.display = "inline";
         }

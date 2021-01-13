@@ -186,14 +186,14 @@ input[type="number"] {
 }
 
 .svg-numnode {
-  fill: #fff;
+  fill: #ffff99;
   stroke: #2F78B7;
   stroke-width: 1.5px;
   cursor: pointer  !important;
 }
 
 .svg-numnode-nl {
-  fill: #fff;
+  fill:#DCDCDC;
   stroke: #2F78B7;
   stroke-width: 1.5px;
   cursor: no-drop  !important;
