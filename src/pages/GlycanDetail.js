@@ -64,6 +64,10 @@ const items = [
     id: "Biosynthetic-Enzymes"
   },
   {
+    label: stringConstants.sidebar.subsumption.displayname,
+    id: "Subsumption"
+  },
+  {
     label: stringConstants.sidebar.expression.displayname,
     id: "expression"
   },
@@ -277,6 +281,7 @@ const GlycanDetail = props => {
     publication,
     wurcs,
     enzyme,
+    subsumption,
     expression,
     mass_pme,
     names,
@@ -448,6 +453,32 @@ const GlycanDetail = props => {
           {")"}
         </>
       )
+    }
+  ];
+  const subsumptionColumns = [
+    {
+      dataField: "id",
+      text: "GlyToucan_ac",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "type",
+      text: "Type",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "relationship",
+      text: "Relationship",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
     }
   ];
   const expressionCellColumns = [
@@ -658,6 +689,7 @@ const GlycanDetail = props => {
       glycoprotein: true,
       glycanBindingProtein: true,
       bioEnzyme: true,
+      subsumption: true,
       expression: true,
       digitalSeq: true,
       crossref: true,
@@ -1273,6 +1305,7 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
               {/* Biosynthetic Enzymes */}
               <Accordion
                 id="Biosynthetic-Enzymes"
@@ -1326,7 +1359,58 @@ const GlycanDetail = props => {
                 </Card>
               </Accordion>
 
-              {/* Biosynthetic Enzymes */}
+              {/* Subsumption*/}
+              <Accordion
+                id="subsumption"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.subsumption.title}
+                        text={DetailTooltips.glycan.subsumption.text}
+                        urlText={DetailTooltips.glycan.subsumption.urlText}
+                        url={DetailTooltips.glycan.subsumption.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.subsumption.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("subsumption", collapsed.subsumption)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.subsumption ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {subsumption && subsumption.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={subsumption}
+                          columns={subsumptionColumns}
+                          defaultSortField={"id"}
+                          onClickTarget={"#subsumption"}
+                        />
+                      )}
+                      {!subsumption && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
+              {/* Expression */}
               <Accordion
                 id="expression"
                 defaultActiveKey="0"
