@@ -65,7 +65,7 @@ const items = [
   },
   {
     label: stringConstants.sidebar.subsumption.displayname,
-    id: "Subsumption"
+    id: "subsumption"
   },
   {
     label: stringConstants.sidebar.expression.displayname,
@@ -462,7 +462,12 @@ const GlycanDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
-      }
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View details">
+          <Link to={routeConstants.glycanDetail + row.id}>{row.id}</Link>
+        </LineTooltip>
+      )
     },
     {
       dataField: "type",

@@ -1227,7 +1227,7 @@
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
     },
     "subsumption": {
-      "id": "subsumption",
+      "id": "Subsumption",
       "displayname": "Subsumption",
       "tooltip": " subsumption Information for selected accession"
     },
