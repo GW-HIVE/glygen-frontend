@@ -30,14 +30,14 @@ export const getSuperSearch = formObject => {
 
 
 export const getSuperSearchList = (
-    glycanListId,
+    superSearchListId,
     offset = 1,
     limit = 20,
     sort = "hit_score",
     order = "desc"
   ) => {
     const queryParams = {
-      id: glycanListId,
+      id: superSearchListId,
       offset: offset,
       sort: sort,
       limit: limit,

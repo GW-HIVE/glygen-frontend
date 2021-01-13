@@ -4,6 +4,7 @@ import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import TextAlert from '../components/alert/TextAlert';
 import DialogAlert from '../components/alert/DialogAlert';
+import SuperSearchQueryDisplay from '../components/alert/SuperSearchQueryDisplay';
 import GlycanAdvancedSearch from '../components/search/GlycanAdvancedSearch';
 import CompositionSearchControl from '../components/search/CompositionSearchControl';
 import SimpleSearchControl from '../components/search/SimpleSearchControl';
@@ -25,6 +26,7 @@ import {select, selectAll, forceSimulation, forceManyBody, forceLink } from 'd3'
 import SuperSearchSVG from '../components/search/SuperSearchSVG';
 import SuperSearchControl from '../components/search/SuperSearchControl';
 import { Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
 /**
  * Glycan search component for showing glycan search tabs.
@@ -37,7 +39,7 @@ const SuperSearch = (props) => {
   const [svgData, setSVGData] = useState([]);
   const [selectedNode, setSelectedNode] = useState("");
   const [queryData, setQueryData] = useState([]);
-
+  const [supSearchShowQuery, setSupSearchShowQuery] = useState(false);
 
   const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
@@ -47,10 +49,7 @@ const SuperSearch = (props) => {
 
   useEffect(() => {
     console.log("SuperSearch");
-    //setNodeData([1,2]);
-	setPageLoading(false);
-	// setInitData([{id:"glycan"}]);
-
+	setPageLoading(true);
 	
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
@@ -81,8 +80,9 @@ const SuperSearch = (props) => {
 		id &&
 		getSuperSearchList(id, 1).then(({ data }) => {
 				logActivity("user", id, "Search modification initiated");
-				
-					setPageLoading(false);
+				setQueryData(data.cache_info.query);
+				updateNodeData(data.cache_info.result_summary, initSvgData);
+				setPageLoading(false);
 			})
 			.catch(function (error) {
 				let message = "list api call";
@@ -96,10 +96,10 @@ const SuperSearch = (props) => {
 
   }, [])
 
-  function updateNodeData(searchData){
-	  var tempData = svgData.slice();
+  function updateNodeData(searchData, initSvgData){
+	  var tempData = initSvgData ? initSvgData.slice() : svgData.slice();
 	  var updatedData = tempData.map((node) => {
-		let id = node.id;
+		let id = (node.id === "organism" ? "species" : node.id);
 		node.record_count = searchData[id] ? searchData[id].result_count : 0;
 		node.list_id = searchData[id] ? searchData[id].list_id : "";
 		return node;
@@ -115,7 +115,7 @@ const SuperSearch = (props) => {
 		message
 	)
 	props.history.push(
-		getListPageRoute(currentNode) + listID
+		getListPageRoute(currentNode) + listID + "/sups"
 	);
   }
 
@@ -137,8 +137,7 @@ const SuperSearch = (props) => {
 			</Helmet>
 			<FeedbackWidget />
 			<div className='lander'>
-      {/* <Container> */}
-        <div style={{height:"600px", width:"2000px"}}>
+      			<Container>
 
 					<PageLoader pageLoading={pageLoading} />
 					<DialogAlert
@@ -148,36 +147,38 @@ const SuperSearch = (props) => {
 						}}
 					/>
 
-          {/* <Grid
-						// container
-						style={{ margin: '0  auto' }}
-						justify='center'>
-							<Grid item 
-							// md={8}
-							> */}
-							<Row>
-								<div style={{height:"800px", width:"1000px"}}>
+						<h5 style={{ marginTop: "20px" }}><center>Click on a node to get its properties</center><br></br></h5>
+
 				{svgData.length !== 0 && <SuperSearchSVG svgData={svgData} setSelectedNode={setSelectedNode}
 										  goToListPage={goToListPage}
 				></SuperSearchSVG>}
-				</div>
-			  {/* </Grid> */}
-						  {/* <Grid item 
-						//   md={8}
-						  > */}
-				<div style={{height:"600px", width:"1200px"}}>
 
 				<SuperSearchControl data={initData.filter((value) => value.id === selectedNode)[0] ? initData.filter((value) => value.id === selectedNode)[0] : []} 
 					selectedNode={selectedNode} setSelectedNode={setSelectedNode} setPageLoading={setPageLoading} setAlertDialogInput={setAlertDialogInput}
 					updateNodeData={updateNodeData} queryData={queryData} setQueryData={setQueryData}
 					></SuperSearchControl>
-				</div>
 
-				</Row>
-			  {/* </Grid>
-					</Grid> */}
-        </div>
-        {/* </Container> */}
+				<SuperSearchQueryDisplay
+					show={supSearchShowQuery}
+					query={queryData}
+					title={"Super Search Query"}
+					setOpen={(input) => {
+						setSupSearchShowQuery(input)
+					}}
+				/>	
+
+				<div>
+				  	<Button
+                        className='gg-btn-outline'
+						style={{ marginRight:"20px", marginBottom:"20px",  float: "right" }}
+						disabled={queryData.length <= 0}
+                        onClick={() => setSupSearchShowQuery(true)}
+                        >
+                        Show Query
+                    </Button>
+                </div>
+
+        	</Container>
       </div>
         </>
 	);

@@ -6,8 +6,9 @@ import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
 import {select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
 import { ModeComment } from '@material-ui/icons';
-import searchPng from "../../images/icons/search.png";
+import searchPng from "../../images/icons/search3.png";
 import noSearchPng from "../../images/icons/nosearch.png";
+import { Container } from 'react-bootstrap';
 
 
 /**
@@ -75,7 +76,6 @@ const SuperSearchSVG = (props) => {
         numnodes.append("text")
         .data(nodes)
           .text(function(d) {
-            // return d.count + (d.list_id !== "" ? "\xa0\xa0\uD83D\uDD0D" : "");
             return d.count;
           })
           .attr("class", ((d) => d.list_id  !== "" ? "svg-numnode-text" : "svg-numnode-text-nl"))
@@ -227,29 +227,19 @@ const SuperSearchSVG = (props) => {
           tooltip.style.display = "none";
       }
 
-      // setNodeData(node);
-      // setSVGData(svg);
     }
 
     return (
 		<>    
-            <div className="row" style={{height:"600px", width:"1300px", textAlign:"center"}}>    
-              <div style={{height:"550px", width:"300px", textAlign:"center"}}/>    
-              <div className="col">
-                <div style={{height:"50px", width:"1000px", textAlign:"center"}}>       
-                  <h3><center>Click on a node to get its properties</center><br></br></h3>
-                </div>
-
+              <div style={{ alignContent:"center", textAlign:"center"}}>
                 <div id="tooltip" className="svg-tooltip" style={{position: "absolute", display: "none"}}>
                   <div id="svg-arrow" className="svg-arrow-up"/>
                   <div id="tooltip-text" className="svg-tooltip-text"/>
                 </div>
-
-                <div style={{height:"550px", width:"1000px", textAlign:"center"}} id= "first">
-                    <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1000 550"} ></svg>
+                <div  id= "first">
+                    <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1050 550"} ></svg>
                 </div>
-              </div>
-            </div> 
+                </div>
         </>
 	);
 };

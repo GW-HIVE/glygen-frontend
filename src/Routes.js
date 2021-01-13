@@ -119,6 +119,7 @@ const Routes = props => (
       component={QuickSearch}
     />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
+    <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
     <Route path={routeConstants.superSearch} component={SuperSearch} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />

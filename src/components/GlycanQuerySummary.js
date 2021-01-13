@@ -8,6 +8,7 @@ import glycanSearchData from "../data/json/glycanSearch";
 import Button from "react-bootstrap/Button";
 const glycanStrings = stringConstants.glycan.common;
 const advancedSearch = glycanSearchData.advanced_search;
+const superSearchStrings = stringConstants.super_search.common;
 
 function getDateTime() {
   var now = new Date();
@@ -39,7 +40,7 @@ function getDateTime() {
 const GlycanQuerySummary = props => {
   const title = "Glycan Search Summary";
 
-  const { data, onModifySearch, timestamp } = props;
+  const { data, onModifySearch, timestamp, searchId } = props;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
   const {
@@ -101,6 +102,13 @@ const GlycanQuerySummary = props => {
                 {props.question.text.split("{0}")[1]}
               </>
             )}
+
+            {searchId && searchId === "sups" &&
+                <>
+                {superSearchStrings.query}
+                </>
+            }
+
             {composition &&
               composition.map((compItem, index) => (
                 <Row className="summary-table-col" key={index}>
@@ -160,6 +168,7 @@ const GlycanQuerySummary = props => {
                 </Col>
               </Row>
             )}
+
             {/* glycan mass */}
             {mass && mass.min && (
               <Row className="summary-table-col">
