@@ -178,3 +178,14 @@ export const getHomoAlignment = (protienId, alignment) => {
   const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);
 };
+
+/**
+ * Gets JSON for site  search.
+ * @param {object} formObject - site search JSON query object.
+ */
+export const getSiteSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  // const url = "/supersearch/search?" + json;
+  const url = "";
+  return getJson(url);
+};

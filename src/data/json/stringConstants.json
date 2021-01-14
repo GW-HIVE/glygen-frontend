@@ -483,12 +483,36 @@
         },
         "id": "uniprot_canonical_ac"
       },
+      "site": {
+        "name": "Site",
+        "shortName": "Site",
+        "tooltip": {
+          "title": "Site",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "site"
+      },
+      "site_range": {
+        "name": "Range",
+        "shortName": "Range",
+        "tooltip": {
+          "title": "Site",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "site_range"
+      },
+
       "chemical_mass": {
         "name": "Chemical Mass",
         "shortName": "chemical_mass",
         "tooltip": {},
         "id": "chemical_mass"
       },
+
       "gene_name": {
         "name": "Gene Name",
         "shortName": "gene_name",
@@ -786,6 +810,15 @@
           "text": "Click to select Glycosylation Evidence Type."
         },
         "id": "glycosylation_evidence"
+      },
+      "annotation": {
+        "name": "Annotation",
+        "shortName": "Annotation",
+        "tooltip": {
+          "title": "Annotation",
+          "text": "Click to select Annotation."
+        },
+        "id": "annotation"
       },
       "Protein_ShortName": {
         "name": "Protein Name",
