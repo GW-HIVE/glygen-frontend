@@ -137,8 +137,7 @@ const SuperSearch = (props) => {
 			</Helmet>
 			<FeedbackWidget />
 			<div className='lander'>
-      			<Container>
-
+				<Container>
 					<PageLoader pageLoading={pageLoading} />
 					<DialogAlert
 						alertInput={alertDialogInput}
@@ -170,14 +169,13 @@ const SuperSearch = (props) => {
 				<div>
 				  	<Button
                         className='gg-btn-outline'
-						style={{ marginRight:"20px", marginBottom:"20px",  float: "right" }}
+						style={{ marginRight:"60px", marginBottom:"20px",  float: "right" }}
 						disabled={queryData.length <= 0}
                         onClick={() => setSupSearchShowQuery(true)}
                         >
                         Show Query
                     </Button>
                 </div>
-
         	</Container>
       </div>
         </>

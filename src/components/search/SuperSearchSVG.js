@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../../css/Search.css';
 import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
-import {select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
+import {event, select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
 import { ModeComment } from '@material-ui/icons';
 import searchPng from "../../images/icons/search3.png";
 import noSearchPng from "../../images/icons/nosearch.png";
@@ -50,6 +50,7 @@ const SuperSearchSVG = (props) => {
         .enter()
         .append("g")
         .attr("class", "svg-numnode")
+        .attr("id", ((d) => "svg-numnode-" + d.id))
         .on("mouseover", mouseover)
         .on("mouseout",mouseout)
         .attr("transform", function(d) {
@@ -96,13 +97,16 @@ const SuperSearchSVG = (props) => {
 
       function mouseover(d) {
         if (d.list_id !== "") {
-          console.log(d)
+            let element = document.getElementById("svg-numnode-" + d.id);
+            var bcr = element.getBoundingClientRect();
             let tooltip = document.getElementById("tooltip"); 
             let tooltipText = document.getElementById("tooltip-text");
             tooltipText.innerHTML = "Click to see list page.";
-            tooltip.style.left = Number(d.xCord + 1.82 * node2Width + 2) + 'px';
-            tooltip.style.top = Number(d.yCord + 3 * node2Height) + 'px';
+            tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+            tooltip.style.top = bcr.y + bcr.height + event.pageY - event.clientY + 'px';
             tooltip.style.display = "inline";
+            console.log(event.clientX - event.pageX);
+            console.log(event.pageY - event.clientY);
         }
       }
 
@@ -173,6 +177,7 @@ const SuperSearchSVG = (props) => {
                 .enter()
                 .append("g")
                 .attr("class", "svg-node")
+                .attr("id", ((d) => "svg-node-" + d.id))
                 .attr("transform", function(d) {
                     return "translate(" + d.xCord + "," + d.yCord + ")";
                 })
@@ -214,11 +219,13 @@ const SuperSearchSVG = (props) => {
         updateNumnodesSVG(nodeData);
 
       function mouseover(d) {
+        let element = document.getElementById("svg-node-" + d.id);
+        var bcr = element.getBoundingClientRect();
         let tooltip = document.getElementById("tooltip"); 
         let tooltipText = document.getElementById("tooltip-text");
         tooltipText.innerHTML = "Click to see search properties.";
-        tooltip.style.left = Number(d.xCord + 0.9 * nodeWidth) + 'px';
-        tooltip.style.top = Number(d.yCord + 2.25 * nodeHeight) + 'px';
+        tooltip.style.left =  bcr.x + 0.85 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+        tooltip.style.top = bcr.y + bcr.height + event.pageY - event.clientY + 'px';
         tooltip.style.display = "inline";
       }
 
@@ -231,16 +238,14 @@ const SuperSearchSVG = (props) => {
 
     return (
 		<>    
-              <div style={{ alignContent:"center", textAlign:"center"}}>
-                <div id="tooltip" className="svg-tooltip" style={{position: "absolute", display: "none"}}>
-                  <div id="svg-arrow" className="svg-arrow-up"/>
-                  <div id="tooltip-text" className="svg-tooltip-text"/>
-                </div>
-                <div  id= "first">
-                    <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1050 550"} ></svg>
-                </div>
-                </div>
-        </>
+          <div>
+            <div id="tooltip" className="svg-tooltip" style={{position: "absolute", display: "none"}}>
+              <div id="svg-arrow" className="svg-arrow-up"/>
+              <div id="tooltip-text" className="svg-tooltip-text"/>
+            </div>
+              <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1050 550"} ></svg>
+          </div>
+    </>
 	);
 };
 
