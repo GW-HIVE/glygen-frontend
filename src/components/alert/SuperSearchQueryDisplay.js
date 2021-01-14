@@ -22,14 +22,14 @@ export default function SuperSearchQueryDisplay(props) {
         >    
             <div 
             id="contents"
-            style={{margin:40, content:'center', height: '500px', width: '600' }}
+            style={{margin:40, content:'center'}}
              class = "gf-content-div"
              >
             <h5 className= "alert-dialog-title">{props.title}</h5>
             <div className="alert-dialog-content">
                 <div 
                     // className="alert-dialog-content-text"
-                    style={{overflow: 'scroll', content:'center', height: '400px', width: '500px' }}
+                    style={{overflow: 'scroll', paddingRight:40, content:'center', maxHeight: '400px' }}
                 >
                         <div><pre>{JSON.stringify(props.query, null, 2)}</pre></div>
                 </div>
