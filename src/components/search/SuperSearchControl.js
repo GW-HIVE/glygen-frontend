@@ -225,11 +225,9 @@ const SuperSearchControl = (props) => {
         let finalSearchQuery = props.queryData.filter((query) => query.concept !== props.selectedNode);
 
         finalSearchQuery.push(searchQuery);
-        alert(JSON.stringify(searchQuery));
         getSuperSearch(finalSearchQuery).then((response) => {
             let searchData = response.data;
             props.setPageLoading(false);
-            alert(JSON.stringify(searchData));
             props.updateNodeData(searchData.results_summary);
             props.setQueryData(finalSearchQuery);
             props.setSelectedNode(undefined)
