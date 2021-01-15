@@ -53,13 +53,6 @@ const SuperSearch = (props) => {
 	
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
-
-		// Setting node.id from init data to lowercase.
-		initData = initData.map((node) => { 
-				node.id = node.id.toLowerCase();
-				return node;
-			});
-
 		setInitData(initData);
 		// setNodeData(initData);
 
@@ -99,7 +92,7 @@ const SuperSearch = (props) => {
   function updateNodeData(searchData, initSvgData){
 	  var tempData = initSvgData ? initSvgData.slice() : svgData.slice();
 	  var updatedData = tempData.map((node) => {
-		let id = (node.id === "organism" ? "species" : node.id);
+		let id = node.id;
 		node.record_count = searchData[id] ? searchData[id].result_count : 0;
 		node.list_id = searchData[id] ? searchData[id].list_id : "";
 		return node;

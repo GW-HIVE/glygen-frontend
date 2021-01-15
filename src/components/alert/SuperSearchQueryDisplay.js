@@ -29,7 +29,7 @@ export default function SuperSearchQueryDisplay(props) {
             <div className="alert-dialog-content">
                 <div 
                     // className="alert-dialog-content-text"
-                    style={{overflow: 'scroll', paddingRight:40, content:'center', maxHeight: '400px' }}
+                    style={{overflow: 'scroll', paddingRight:40, content:'center', maxHeight: '400px', minWidth: '500px' }}
                 >
                         <div><pre>{JSON.stringify(props.query, null, 2)}</pre></div>
                 </div>

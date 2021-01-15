@@ -180,10 +180,8 @@ const SuperSearchControl = (props) => {
         for (var i = 0; i < tempArray1.length; i++){
             if (i === 0){
                 currentQuery.aggregator = tempArray1[i].aggregator;
-                //let pathArr = tempArray1[i].field.split(".");
 
                 let temp = {
-                    //path: pathArr[pathArr.length - 1],
                     path: tempArray1[i].field,
                     operator: tempArray1[i].operation,
                     [fieldTypes[tempArray1[i].fieldType]]: tempArray1[i].fieldType === "number" ? Number(tempArray1[i].value) : tempArray1[i].value, 
@@ -191,10 +189,8 @@ const SuperSearchControl = (props) => {
                 currentQuery.unaggregated_list.push(temp);
             } else {
                 if (currentQuery.aggregator === tempArray1[i].aggregator) {
-                    //let pathArr = tempArray1[i].field.split(".");
 
                     let temp = {
-                        //path: pathArr[pathArr.length - 1],
                         path: tempArray1[i].field,
                         operator: tempArray1[i].operation,
                         [fieldTypes[tempArray1[i].fieldType]]: tempArray1[i].fieldType === "number" ? Number(tempArray1[i].value) : tempArray1[i].value, 
@@ -207,10 +203,7 @@ const SuperSearchControl = (props) => {
                         unaggregated_list: []
                     } 
 
-                    //let pathArr = tempArray1[i].field.split(".");
-
                     let temp = {
-                        //path: pathArr[pathArr.length - 1],
                         path: tempArray1[i].field,
                         operator: tempArray1[i].operation,
                         [fieldTypes[tempArray1[i].fieldType]]: tempArray1[i].fieldType === "number" ? Number(tempArray1[i].value) : tempArray1[i].value
@@ -257,7 +250,7 @@ const SuperSearchControl = (props) => {
             style={{margin:40, content:'center', height: '400px', width: '1200px' }}
              class = "gf-content-div"
              >
-                <h5 className= "alert-dialog-title"><center>Add {props.data.id} properties to search</center></h5>
+                <h5 className= "alert-dialog-title"><center>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</center></h5>
                 {/* <label><center>Selected node: {props.data.id}</center></label> */}
                 <p><span id='display'></span></p>
                 <form id ="queryForm">

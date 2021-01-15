@@ -1,7 +1,7 @@
 {
 	"nodes": [
         {
-			"id": "organism",
+			"id": "species",
 			"name": "Organism",
 			"xCord": 50,
 			"yCord": 50
@@ -50,7 +50,7 @@
 		}
 	],
 	"links": [{
-			"source": "organism",
+			"source": "species",
 			"target": "gene",
             "linkName": "has",
             "xCord": 90,
@@ -83,7 +83,7 @@
             "targetOffset": 0
 		},
         {
-			"source": "organism",
+			"source": "species",
 			"target": "protein",
             "linkName": "has",
             "xCord": 325,
@@ -94,7 +94,7 @@
             "targetOffset": 0
         },
         {
-			"source": "organism",
+			"source": "species",
 			"target": "glycan",
             "linkName": "has",
             "xCord": 345,
