@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import MultilineAutoTextInput from "../input/MultilineAutoTextInput";
-import RangeInputSlider from "../input/RangeInputSlider";
 import AutoTextInput from "../input/AutoTextInput";
 import SelectControl from "../select/SelectControl";
 import CategorizedAutoTextInput from "../input/CategorizedAutoTextInput";
@@ -17,69 +16,64 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "react-bootstrap/Button";
 import { sortDropdown } from "../../utils/common";
 import "../../css/Search.css";
-import siteSearchData from "../../data/json/siteSearch";
+import siteData from "../../data/json/siteData";
 import stringConstants from "../../data/json/stringConstants";
+import { InputLabel, Radio } from "@material-ui/core";
 
 /**
  * Protein advanced search control.
  */
 const SiteSearchControl = props => {
+  const [positionOrRange, setPositionOrRange] = useState("");
+  const [proteinId, setproteinId] = useState("");
+  const [siteId, setsiteId] = useState("");
+  const [annotation, setAnnotation] = useState("annotation");
+  // const [rangeInput, setRangeInput] = useState("rangeInput");
+
   let commonProteinData = stringConstants.protein.common;
-  let siteSearch = siteSearchData.site_search;
+  let sitesData = siteData.site_search;
+  // const [siteSearchData, setSiteSearchData] = useState({
+  //   proteinId: "",
+  //   siteId: "",
+  //   annotion: "",
+  //   proRangeInput: ["", ""],
+  //   position: ""
+  // });
+  // cosnt handleSubmitSearch = () => {
+  //   const json = {
+  //     proteinId,
+  //     siteId,
+  //     annotion,
+  //     proRangeInput
+  //   }
+  //   callServer(json)
+  //     .then()
+  //     .then(catch)
+  // }
 
-  /**
-   * Function to set protein id value.
-   * @param {string} inputProteinId - input protein id value.
-   **/
-  function proteinIdChange(inputProteinId) {
-    let valArr = props.inputValue.proSiteSearchValError;
-    valArr[0] = inputProteinId.length > siteSearch.uniprot_canonical_ac.length;
-    props.setSiteSearchData({
-      proteinId: inputProteinId,
-      proSiteSearchValError: valArr
-    });
-  }
-  /**
-   * Function to set protein id value.
-   * @param {string} inputSiteId - input protein id value.
-   **/
-  function siteIdChange(inputSiteId) {
-    let valArr = props.inputValue.proSiteSearchValError;
-    valArr[0] = inputSiteId.length > siteSearch.uniprot_canonical_ac.length;
-    props.setSiteSearchData({
-      siteId: inputSiteId,
-      proSiteSearchValError: valArr
-    });
-  }
-  /**
-   * Function to set mass value.
-   * @param {array} inputsite - input min, max mass value.
-   **/
-  function proRangeInputChange(inputRange) {
-    props.setSiteSearchData({ proRangeInput: inputRange });
-  }
+  // /**
+  //  * Function to handle click event for protein simple search.
+  //  **/
+  // const searchSiteClick = () => {
+  //   setPageLoading(true);
+  //   loadSiteData();
+  // };
 
-  /**
-   * Function to set glycosylation evidence type value.
-   * @param {string} value - input glycosylation evidence type value.
-   **/
-  const proAnnotationOnChange = value => {
-    props.setSiteSearchData({ proAnnotation: value });
-  };
   /**
    * Function to clear input field values.
    **/
   const clearSite = () => {
     props.setSiteSearchData({
-      proteinId: "",
-      siteId: "",
-      proRangeInput: [
-        Math.floor(props.initData.protein_mass.min).toLocaleString("en-US"),
-        Math.ceil(props.initData.protein_mass.max).toLocaleString("en-US")
-      ],
-      proAnnotation: siteSearch.annotation.placeholderId
+      proteinId: " ",
+      siteId: " ",
+      proRangeInput: [" ", " "],
+      proAnnotation: " "
     });
   };
+
+  // const handlePostionOrRangeChange = event => {
+  //   setPositionOrRange(event.target.value);
+  // };
 
   return (
     <>
@@ -122,12 +116,12 @@ const SiteSearchControl = props => {
             </Typography>
             <MultilineAutoTextInput
               fullWidth
-              inputValue={props.inputValue.proteinId}
-              setInputValue={proteinIdChange}
-              placeholder={siteSearch.uniprot_canonical_ac.placeholder}
-              typeahedID={siteSearch.uniprot_canonical_ac.typeahedID}
-              length={siteSearch.uniprot_canonical_ac.length}
-              errorText={siteSearch.uniprot_canonical_ac.errorText}
+              inputValue={proteinId}
+              setInputValue={setproteinId}
+              placeholder={sitesData.uniprot_canonical_ac.placeholder}
+              typeahedID={sitesData.uniprot_canonical_ac.typeahedID}
+              length={sitesData.uniprot_canonical_ac.length}
+              errorText={sitesData.uniprot_canonical_ac.errorText}
             />
             {/* <ExampleExploreControl
               setInputValue={proteinIdChange}
@@ -135,31 +129,23 @@ const SiteSearchControl = props => {
             /> */}
           </FormControl>
         </Grid>
-
-        {/* Site Id */}
+        {/* Amino Acid Type */}
         <Grid item xs={12} sm={10}>
           <FormControl fullWidth variant="outlined">
             <Typography className={"search-lbl"} gutterBottom>
               <HelpTooltip
                 title={commonProteinData.site.tooltip.title}
                 text={commonProteinData.site.tooltip.text}
-                urlText={commonProteinData.site.tooltip.urlText}
-                url={commonProteinData.site.tooltip.url}
               />
               {commonProteinData.site.name}
             </Typography>
-            <MultilineAutoTextInput
-              fullWidth
-              inputValue={props.inputValue.siteId}
-              setInputValue={siteIdChange}
-              placeholder={siteSearch.site.placeholder}
-              typeahedID={siteSearch.site.typeahedID}
-              length={siteSearch.site.length}
-              errorText={siteSearch.site.errorText}
-            />
-            <ExampleExploreControl
-              setInputValue={siteIdChange}
-              inputValue={siteSearch.site.examples}
+            <SelectControl
+              inputValue={siteId}
+              placeholder={sitesData.site_id.placeholder}
+              placeholderId={sitesData.site_id.placeholderId}
+              placeholderName={sitesData.site_id.placeholderName}
+              menu={sitesData.site_id.menu}
+              setInputValue={setsiteId}
             />
           </FormControl>
         </Grid>
@@ -175,15 +161,120 @@ const SiteSearchControl = props => {
               {commonProteinData.annotation.name}
             </Typography>
             <SelectControl
-              inputValue={props.inputValue.proAnnotation}
-              placeholder={siteSearch.annotation.placeholder}
-              placeholderId={siteSearch.annotation.placeholderId}
-              placeholderName={siteSearch.annotation.placeholderName}
-              menu={siteSearch.annotation.menu}
-              setInputValue={proAnnotationOnChange}
+              inputValue={annotation}
+              placeholder={sitesData.annotation.placeholder}
+              placeholderId={sitesData.annotation.placeholderId}
+              placeholderName={sitesData.annotation.placeholderName}
+              menu={sitesData.annotation.menu}
+              setInputValue={setAnnotation}
             />
           </FormControl>
         </Grid>
+        {/* Position */}
+        <Grid item xs={12} sm={10}>
+          <Radio
+            checked={positionOrRange === "position"}
+            // onChange={handlePostionOrRangeChange}
+            value="position"
+            name="position-or-range"
+          />
+          <FormControl fullWidth variant="outlined">
+            <Typography className={"search-lbl"} gutterBottom>
+              <HelpTooltip
+                title={commonProteinData.annotation.tooltip.title}
+                text={commonProteinData.annotation.tooltip.text}
+              />
+              Position
+            </Typography>
+            {positionOrRange === "position" && (
+              <FormControl fullWidth variant="outlined">
+                <InputLabel className={"select-lbl-inline"}>
+                  Position
+                </InputLabel>
+                <OutlinedInput
+                  className={props.inputClass}
+                  // value={props.inputValue[0]}
+                  margin="dense"
+                  // onChange={minInputChange}
+                  // onBlur={onMinMoveOut}
+                  labelWidth={40}
+                  // inputProps={{
+                  //   min: props.min,
+                  //   max: props.max
+                  // }}
+                  disabled={positionOrRange !== "position"}
+                />
+              </FormControl>
+            )}
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={10}>
+          <Radio
+            checked={positionOrRange === "range"}
+            // onChange={handlePostionOrRangeChange}
+            value="range"
+            name="position-or-range"
+          />
+
+          <FormControl fullWidth>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} sm={9}>
+                <Typography className={"search-lbl"} gutterBottom>
+                  <HelpTooltip
+                    title={commonProteinData.number_range.tooltip.title}
+                    text={commonProteinData.number_range.tooltip.text}
+                  />
+                  {commonProteinData.number_range.name}
+                </Typography>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel className={"select-lbl-inline"}>
+                        Min
+                      </InputLabel>
+                      <OutlinedInput
+                        className={props.inputClass}
+                        // value={props.inputValue[0]}
+                        margin="dense"
+                        // onChange={minInputChange}
+                        // onBlur={onMinMoveOut}
+                        labelWidth={40}
+                        inputProps={{
+                          min: props.min,
+                          max: props.max
+                        }}
+                        disabled={positionOrRange !== "range"}
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel className={"select-lbl-inline"}>
+                        Max
+                      </InputLabel>
+                      <OutlinedInput
+                        className={props.inputClass}
+                        // value={props.inputValue[1]}
+                        margin="dense"
+                        // onChange={maxInputChange}
+                        // onBlur={onMaxMoveOut}
+                        labelWidth={40}
+                        inputProps={{
+                          min: props.min,
+                          max: props.max
+                        }}
+                        disabled={positionOrRange !== "range"}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </FormControl>
+        </Grid>
+        {/* Organisms */}
+
         {/* Buttons Buttom */}
         <Grid item xs={12} sm={10}>
           <Row className="gg-align-right pt-3 mb-2 mr-1">
@@ -211,8 +302,5 @@ const SiteSearchControl = props => {
 export default SiteSearchControl;
 
 SiteSearchControl.propTypes = {
-  initData: PropTypes.object,
-  inputValue: PropTypes.object,
-  searchProteinAdvClick: PropTypes.func,
-  setProAdvSearchData: PropTypes.func
+  // initData: PropTypes.object
 };
