@@ -31,7 +31,9 @@ const IdMappingResult = (props) => {
   const [paginationReason, setPaginationReason] = useState([]);
   const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
   const [page, setPage] = useState(1);
+  const [pageUnmap, setPageUnmap] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
+  const [sizePerPageUnmap, setSizePerPageUnmap] = useState(20);
   const [totalSize, setTotalSize] = useState();
   const [totalSizeReason, setTotalSizeReason] = useState();
   const [pageLoading, setPageLoading] = useState(true);
@@ -73,8 +75,8 @@ const IdMappingResult = (props) => {
           setLegendsReason(data.cache_info.legends);
           setDataReason(data.results);
           setPaginationReason(data.pagination);
-          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-          setPage(currentPage);
+          const currentPage = (data.pagination.offset - 1) / sizePerPageUnmap + 1;
+          setPageUnmap(currentPage);
           setTotalSizeReason(data.pagination.total_length);
           setPageLoading(false);
         }
@@ -111,7 +113,10 @@ const IdMappingResult = (props) => {
     );
   };
 
-  const handleTableChangeReason = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChangeUnmapped = (
+    type,
+    { pageUnmap, sizePerPageUnmap, sortField, sortOrder }
+  ) => {
     dataReason.sort((a, b) => {
       if (a[sortField] > b[sortField]) {
         return sortOrder === "asc" ? 1 : -1;
@@ -123,8 +128,8 @@ const IdMappingResult = (props) => {
 
     getMappingListUnmapped(
       id,
-      (page - 1) * sizePerPage + 1,
-      sizePerPage,
+      (pageUnmap - 1) * sizePerPageUnmap + 1,
+      sizePerPageUnmap,
       sortField,
       sortOrder
     ).then(({ data }) => {
@@ -134,8 +139,8 @@ const IdMappingResult = (props) => {
         setDataReason(data.results);
         setPaginationReason(data.pagination);
         setTotalSizeReason(data.pagination.total_length);
-        setPage(page);
-        setSizePerPage(sizePerPage);
+        setPageUnmap(pageUnmap);
+        setSizePerPageUnmap(sizePerPageUnmap);
       }
     });
   };
@@ -229,10 +234,10 @@ const IdMappingResult = (props) => {
           {/* Button */}
           <div className="text-right mb-4">
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
-              Modify Search
+              Modify Request
             </Button>
           </div>
-
+          {/* Mapped Table */}
           <PaginatedTable
             data={data}
             columns={idMapResultColumns}
@@ -249,7 +254,7 @@ const IdMappingResult = (props) => {
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
-              Modify Search
+              Modify Request
             </Button>
           </div>
         </section>
@@ -257,13 +262,14 @@ const IdMappingResult = (props) => {
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
         <section>
+          {/* Unmapped Table */}
           <PaginatedTable
             data={dataReason}
             columns={idMapReason}
-            page={page}
-            sizePerPage={sizePerPage}
+            page={pageUnmap}
+            sizePerPage={sizePerPageUnmap}
             totalSize={totalSizeReason}
-            onTableChange={handleTableChangeReason}
+            onTableChange={handleTableChangeUnmapped}
             pagination={paginationReason}
             defaultSortField="input_id"
             defaultSortOrder="asc"
@@ -272,7 +278,7 @@ const IdMappingResult = (props) => {
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
-              Modify Search
+              Modify Request
             </Button>
           </div>
         </section>
