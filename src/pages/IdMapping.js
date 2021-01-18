@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useRef } from "react";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { Container, Row, Col } from "react-bootstrap";
@@ -25,6 +25,7 @@ const IdMapping = (props) => {
   let { id } = useParams("");
   const [initData, setInitData] = useState({});
 
+  const fileInputRef = useRef();
   const [idMapSearchData, setIdMapSearchData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -32,9 +33,16 @@ const IdMapping = (props) => {
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      fileUpload: "",
     }
   );
+
+  const [isInputTouched, setInputTouched] = useState({
+    recordTypeInput: false,
+    fromIdInput: false,
+    toIdInput: false,
+    idListInput: false,
+    fileInput: false,
+  });
 
   const [fileUploadForm, setFileUploadForm] = useState(null);
   const [errorFileUpload, setErrorFileUpload] = useState(null);
@@ -44,13 +52,13 @@ const IdMapping = (props) => {
   const [toIdTypeValidated, setToIdTypeValidated] = useState(false);
   const [inputIdListValidated, setInputIdListValidated] = useState(false);
   const [fileUploadValidated, setFileUploadValidated] = useState(false);
-  const [formValidated, setFormValidated] = useState(false);
 
   const [pageLoading, setPageLoading] = React.useState(true);
   const [alertTextInput, setAlertTextInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
@@ -64,56 +72,119 @@ const IdMapping = (props) => {
    * @param {string} value - input recordtype (molecule) name value.
    **/
   const recordTypeOnChange = (value) => {
+    setInputTouched((state) => ({ ...state, recordTypeInput: true }));
     setIdMapSearchData({ recordType: value });
-    inputNamespaceOnChange("any");
-    outputNamespaceOnChange("any");
+    setIdMapSearchData({ inputNamespace: "any" });
+    setIdMapSearchData({ outputNamespace: "any" });
+    if (value && value !== "any") {
+      setMoleculeValidated(true);
+    } else {
+      setMoleculeValidated(false);
+    }
   };
   /**
    * Function to set inputNamespace (From ID Type) name value.
    * @param {string} value - input inputNamespace (From ID Type) name value.
    **/
   const inputNamespaceOnChange = (value) => {
+    setInputTouched((state) => ({ ...state, fromIdInput: true }));
     setIdMapSearchData({ inputNamespace: value });
+    if (value && value !== "any") {
+      setFromIdTypeValidated(true);
+    } else {
+      setFromIdTypeValidated(false);
+    }
   };
+
   /**
    * Function to set outputNamespace (To ID Type) name value.
    * @param {string} value - input outputNamespace (To ID Type) name value.
    **/
   const outputNamespaceOnChange = (value) => {
+    setInputTouched((state) => ({ ...state, toIdInput: true }));
     setIdMapSearchData({ outputNamespace: value });
+    if (value && value !== "any") {
+      setToIdTypeValidated(true);
+    } else {
+      setToIdTypeValidated(false);
+    }
   };
+
   /**
    * Function to set inputIdlist (Enter IDs) name value.
    * @param {string} value - input inputIdlist (Enter IDs) name value.
    **/
   const inputIdlistOnChange = (event) => {
-    // alert(event.target.value);
+    setInputTouched((state) => ({ ...state, idListInput: true }));
+    fileInputRef.current.value = "";
     setIdMapSearchData({ inputIdlist: event.target.value });
+    if (event.target.value) {
+      setInputIdListValidated(true);
+      setFileUploadValidated(true);
+      setErrorFileUpload("");
+    } else {
+      setInputIdListValidated(false);
+    }
   };
-  /**
-   * Function to set fileUpload (Select File) name value.
-   * @param {string} value - input fileUpload (Select File) name value.
-   **/
-  const fileUploadOnChange = (event) => {
-    setIdMapSearchData({ fileUpload: event.target.value });
+
+  const fileOnChangeHandler = () => {
+    const typesFileUpload = ["text/plain"];
+    const fileElem = fileInputRef.current;
+
+    if (fileElem.files.length > 0) {
+      const file = fileElem.files[0];
+      if (fileElem && typesFileUpload.includes(file.type)) {
+        setIdMapSearchData({ inputIdlist: "" });
+        setFileUploadValidated(true);
+        setInputIdListValidated(true);
+        setErrorFileUpload("");
+      } else {
+        setFileUploadForm(null);
+        setErrorFileUpload(idMappingData.file_upload.errorFileUpload);
+        setFileUploadValidated(false);
+      }
+    }
   };
 
   const clearMapFields = () => {
+    fileInputRef.current.value = "";
+    setErrorFileUpload("");
     setIdMapSearchData({
       recordType: "any",
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
-      fileUpload: "",
     });
 
-    // setIdMapFileSelect("any");
-    setFormValidated(false);
     setMoleculeValidated(false);
     setFromIdTypeValidated(false);
     setToIdTypeValidated(false);
     setInputIdListValidated(false);
     setFileUploadValidated(false);
+
+    setInputTouched({
+      recordTypeInput: false,
+      fromIdInput: false,
+      toIdInput: false,
+      idListInput: false,
+      fileInput: false,
+    });
+  };
+
+  const onFetchDataByIdFormValidation = () => {
+    setMoleculeValidated(true);
+    setFromIdTypeValidated(true);
+    setToIdTypeValidated(true);
+    setInputIdListValidated(true);
+    setFileUploadValidated(true);
+
+    setInputTouched({
+      recordTypeInput: false,
+      fromIdInput: false,
+      toIdInput: false,
+      idListInput: false,
+      fileInput: false,
+    });
   };
   /**
    * useEffect for retriving data from api and showing page loading effects.
@@ -132,7 +203,7 @@ const IdMapping = (props) => {
         id &&
           getMappingList(id)
             .then(({ data }) => {
-              logActivity("user", id, "Search modification initiated");
+              logActivity("user", id, "IdMapping modification initiated");
               setIdMapSearchData({
                 recordType:
                   data.cache_info.query.recordtype === undefined
@@ -150,12 +221,13 @@ const IdMapping = (props) => {
                   data.cache_info.query.input_idlist === undefined
                     ? ""
                     : data.cache_info.query.input_idlist + ",",
-                // fileUpload:
-                //   data.cache_info.query.input_idlist === undefined
-                //     ? ""
-                //     : data.cache_info.query.input_idlist,
+                userfile:
+                  data.cache_info.query.userfile === undefined
+                    ? ""
+                    : data.cache_info.query.userfile,
               });
               setPageLoading(false);
+              onFetchDataByIdFormValidation();
             })
             .catch(function (error) {
               let message = "list api call";
@@ -172,45 +244,30 @@ const IdMapping = (props) => {
     input_recordtype,
     input_inputnamespace,
     input_outputnamespace,
-    input_inputidlist
-    // input_fileupload
+    input_inputidlist,
+    input_userfile
   ) {
     if (input_inputidlist) {
       input_inputidlist = input_inputidlist.trim();
       input_inputidlist = input_inputidlist.replace(/\u200B/g, "");
       input_inputidlist = input_inputidlist.replace(/\u2011/g, "-");
-      input_inputidlist = input_inputidlist + ",";
       input_inputidlist = input_inputidlist.replace(/\s+/g, ",");
       input_inputidlist = input_inputidlist.replace(/,+/g, ",");
-
       var index = input_inputidlist.lastIndexOf(",");
       if (index > -1 && index + 1 === input_inputidlist.length) {
         input_inputidlist = input_inputidlist.substr(0, index);
       }
     }
-    // if (input_fileupload) {
-    //   input_inputidlist = input_inputidlist.trim();
-    //   input_inputidlist = input_inputidlist.replace(/\u200B/g, "");
-    //   input_inputidlist = input_inputidlist.replace(/\u2011/g, "-");
-    //   input_inputidlist = input_inputidlist + ",";
-    //   input_inputidlist = input_inputidlist.replace(/\s+/g, ",");
-    //   input_inputidlist = input_inputidlist.replace(/,+/g, ",");
-
-    //   var indexFU = input_inputidlist.lastIndexOf(",");
-    //   if (indexFU > -1 && indexFU + 1 === input_inputidlist.length) {
-    //     input_inputidlist = input_inputidlist.substr(0, indexFU);
-    //   }
-    // }
     var formJson = {
       [commonIdMappingData.recordtype.id]: input_recordtype,
       [commonIdMappingData.input_namespace.id]: input_inputnamespace,
       [commonIdMappingData.output_namespace.id]: input_outputnamespace,
-      [commonIdMappingData.input_idlist.id]: input_inputidlist ? input_inputidlist : undefined,
-      //   || input_fileupload
-      // ? input_fileupload
-      // : undefined,
-      // [commonIdMappingData.input_idlist.id]: input_fileupload ? input_fileupload : undefined,
     };
+    if (input_inputidlist) {
+      formJson = { ...formJson, [commonIdMappingData.input_idlist.id]: input_inputidlist };
+    } else {
+      formJson = { ...formJson, [commonIdMappingData.userfile.id]: input_userfile };
+    }
     return formJson;
   }
 
@@ -220,10 +277,10 @@ const IdMapping = (props) => {
       idMapSearchData.inputNamespace,
       idMapSearchData.outputNamespace,
       idMapSearchData.inputIdlist,
-      idMapSearchData.fileUpload
+      fileInputRef.current.files[0]
     );
     logActivity("user", id, "Performing ID Mapping Search");
-    let message = "ID Mapping Search query=" + JSON.stringify(formObject);
+    let message = "ID Mapping Search quercy=" + JSON.stringify(formObject);
     getMappingSearch(formObject)
       .then((response) => {
         if (response.data["list_id"] !== "") {
@@ -231,7 +288,6 @@ const IdMapping = (props) => {
             props.history.push(routeConstants.idMappingResult + response.data["list_id"]);
           });
           setPageLoading(false);
-          // console.log("submit");
         } else {
           logActivity("user", "", "No results. " + message);
           setPageLoading(false);
@@ -245,35 +301,14 @@ const IdMapping = (props) => {
       .catch(function (error) {
         axiosError(error, "", message, setPageLoading, setAlertDialogInput);
       });
-    setFormValidated(false);
-    setMoleculeValidated(false);
-    setFromIdTypeValidated(false);
-    setToIdTypeValidated(false);
-    setInputIdListValidated(false);
-    setFileUploadValidated(false);
   };
 
   /**
-   * Function to handle click event for protein advanced search.
+   * Function to handle click event for ID mapping.
    **/
   const searchIdMapClick = () => {
     setPageLoading(true);
     idMapHandleSubmit();
-    // setFormValidated(true);
-  };
-
-  const typesFileUpload = ["text/plain"];
-
-  const handleChangeFileUpload = (e) => {
-    let selected = e.target.files[0];
-
-    if (selected && typesFileUpload.includes(selected.type)) {
-      // setFile(selected);
-      setErrorFileUpload("");
-    } else {
-      setFileUploadForm(null);
-      setErrorFileUpload("Please select accepted file type (.txt)");
-    }
   };
 
   return (
@@ -299,13 +334,13 @@ const IdMapping = (props) => {
           }}
         />
         <TextAlert alertInput={alertTextInput} />
-        {/* <form autoComplete="off" onSubmit={idMapHandleSubmit}> */}
+
         {/* 1 recordtype Select Molecule */}
         <Grid item xs={12} sm={12} md={12}>
           <FormControl
             fullWidth
             variant="outlined"
-            error={(formValidated || moleculeValidated) && idMapSearchData.recordType === "any"}
+            error={isInputTouched.recordTypeInput && !moleculeValidated}
           >
             <Typography className={"search-lbl"} gutterBottom>
               <span>1.</span>{" "}
@@ -321,7 +356,10 @@ const IdMapping = (props) => {
               placeholderName={idMappingData.recordtype.placeholderName}
               inputValue={idMapSearchData.recordType}
               setInputValue={recordTypeOnChange}
-              onBlur={() => setMoleculeValidated(true)}
+              Value={recordTypeOnChange}
+              onBlur={() => {
+                setInputTouched((state) => ({ ...state, recordTypeInput: true }));
+              }}
               menu={Object.keys(initData).map((moleculeType) => {
                 return {
                   id: initData[moleculeType].id,
@@ -331,7 +369,7 @@ const IdMapping = (props) => {
               required={true}
             />
           </FormControl>
-          {(formValidated || moleculeValidated) && idMapSearchData.recordType === "any" && (
+          {isInputTouched.recordTypeInput && !moleculeValidated && (
             <FormHelperText className={"error-text"} error>
               {idMappingData.recordtype.required}
             </FormHelperText>
@@ -344,9 +382,7 @@ const IdMapping = (props) => {
             <FormControl
               fullWidth
               variant="outlined"
-              error={
-                (formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any"
-              }
+              error={isInputTouched.fromIdInput && !fromIdTypeValidated}
             >
               <Typography className={"search-lbl"} gutterBottom>
                 <span>2.</span>{" "}
@@ -362,7 +398,9 @@ const IdMapping = (props) => {
                 placeholderName={idMappingData.input_namespace.placeholderName}
                 inputValue={idMapSearchData.inputNamespace}
                 setInputValue={inputNamespaceOnChange}
-                onBlur={() => setFromIdTypeValidated(true)}
+                onBlur={() => {
+                  setInputTouched((state) => ({ ...state, fromIdInput: true }));
+                }}
                 menu={
                   idMapSearchData.recordType === "any"
                     ? []
@@ -376,7 +414,7 @@ const IdMapping = (props) => {
                 required={true}
               />
             </FormControl>
-            {(formValidated || fromIdTypeValidated) && idMapSearchData.inputNamespace === "any" && (
+            {isInputTouched.fromIdInput && !fromIdTypeValidated && (
               <FormHelperText className={"error-text"} error>
                 {idMappingData.input_namespace.required}
               </FormHelperText>
@@ -387,9 +425,7 @@ const IdMapping = (props) => {
             <FormControl
               fullWidth
               variant="outlined"
-              error={
-                (formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any"
-              }
+              error={isInputTouched.toIdInput && !toIdTypeValidated}
             >
               <Typography className={"search-lbl"} gutterBottom>
                 <HelpTooltip
@@ -404,7 +440,6 @@ const IdMapping = (props) => {
                 placeholderName={idMappingData.output_namespace.placeholderName}
                 inputValue={idMapSearchData.outputNamespace}
                 setInputValue={outputNamespaceOnChange}
-                onBlur={() => setToIdTypeValidated(true)}
                 menu={
                   idMapSearchData.recordType === "any"
                     ? []
@@ -418,7 +453,7 @@ const IdMapping = (props) => {
                 required={true}
               />
             </FormControl>
-            {(formValidated || toIdTypeValidated) && idMapSearchData.outputNamespace === "any" && (
+            {isInputTouched.toIdInput && !toIdTypeValidated && (
               <FormHelperText className={"error-text"} error>
                 {idMappingData.output_namespace.required}
               </FormHelperText>
@@ -449,55 +484,69 @@ const IdMapping = (props) => {
               placeholder={idMappingData.input_idlist.placeholder}
               value={idMapSearchData.inputIdlist}
               onChange={inputIdlistOnChange}
-              onBlur={() => setInputIdListValidated(true)}
               error={
-                idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length ||
-                ((formValidated || inputIdListValidated) &&
-                  idMapSearchData.inputIdlist === "" &&
-                  idMapSearchData.fileUpload === "")
+                (isInputTouched.idListInput && !inputIdListValidated) ||
+                idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length
               }
+              onBlur={(e) => {
+                setInputTouched((state) => ({ ...state, idListInput: true }));
+              }}
             ></OutlinedInput>
+
             {idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length && (
               <FormHelperText className={"error-text"} error>
                 {idMappingData.input_idlist.errorText}
               </FormHelperText>
             )}
-            {(formValidated || inputIdListValidated) &&
-              idMapSearchData.inputIdlist === "" &&
-              idMapSearchData.fileUpload === "" && (
-                <FormHelperText className={"error-text"} error>
-                  {idMappingData.input_idlist.required}
-                </FormHelperText>
-              )}
+            {isInputTouched.idListInput && !inputIdListValidated && (
+              <FormHelperText className={"error-text"} error>
+                {idMappingData.input_idlist.required}
+              </FormHelperText>
+            )}
+
+            {/* <Typography>{JSON.stringify(isInputTouched)}</Typography>
+            {inputIdListValidated && <Typography>Input id list IS Validated</Typography>}
+            {!inputIdListValidated && <Typography>Input id list NOT Validated</Typography>}
+
+            {fileUploadValidated && <Typography>File upload IS Validated</Typography>}
+            {!fileUploadValidated && <Typography>File upload NOT Validated</Typography>}
+
+            {moleculeValidated && <Typography>Molecule IS Validated</Typography>}
+            {!moleculeValidated && <Typography>Molecule NOT Validated</Typography>}
+
+            {fromIdTypeValidated && <Typography>From Id IS Validated</Typography>}
+            {!fromIdTypeValidated && <Typography>From Id NOT Validated</Typography>}
+
+            {toIdTypeValidated && <Typography>To Id IS Validated</Typography>}
+            {!toIdTypeValidated && <Typography>To Id NOT Validated</Typography>} */}
           </FormControl>
-          <Typography>91859018,91845230,91845682,439177,XYZ</Typography>
-          <Typography>91846235, 252277270, 11375554, 252288623, 91857678, 252290930</Typography>
+          <Typography>91859018,91845230,91845682,439177,1234567,XYZ</Typography>
+          {/* <Typography>91846235, 252277270, 11375554, 252288623, 91857678, 252290930</Typography>
           <Typography>5288428 252293186 91859643 252293273 5288347 252294787</Typography>
-          <Typography>G00023MO G00023MO G00024MO G00024MO G00025AJ G00025AJ</Typography>
+          <Typography>G00023MO G00023MO G00024MO G00024MO G00025AJ G00025AJ</Typography> */}
         </Grid>
-        {/* Select Files */}
+
+        {/* File Upload */}
         <Grid className="pt-2">
           <Typography className="mb-1">
             <strong>OR</strong>
           </Typography>
           <Typography className="mb-1">
-            <strong>{idMappingData.file_upload.upload_text}</strong>
+            <i>{idMappingData.file_upload.upload_text}</i>
           </Typography>
         </Grid>
 
-        {/* <UploadForm /> */}
-        <form
-          value={idMapSearchData.fileUpload}
-          onChange={fileUploadOnChange}
-          onBlur={() => setFileUploadValidated(true)}
-          error={
-            (formValidated || fileUploadValidated) &&
-            idMapSearchData.fileUpload === "" &&
-            idMapSearchData.inputIdlist !== ""
-          }
-        >
+        <form>
           <label>
-            <input className="mt-2" type="file" onChange={handleChangeFileUpload} />
+            <input
+              className="mt-2"
+              type="file"
+              ref={fileInputRef}
+              onChange={fileOnChangeHandler}
+              onBlur={() => {
+                setInputTouched((state) => ({ ...state, fileInput: true }));
+              }}
+            />
           </label>
           <div className="output">
             {errorFileUpload && (
@@ -508,16 +557,8 @@ const IdMapping = (props) => {
             {fileUploadForm && <div>{fileUploadForm.name}</div>}
           </div>
         </form>
-        {(formValidated || fileUploadValidated) &&
-          idMapSearchData.fileUpload === "" &&
-          idMapSearchData.inputIdlist !== "" && (
-            <FormHelperText className={"error-text"} error>
-              {idMappingData.file_upload.required}
-            </FormHelperText>
-          )}
         <Typography>
-          <i>Accepted File Type: .txt</i>
-          {/* <i>Accepted File Types: .txt, .rtf, .pdf, .doc, .docx</i> */}
+          <i>{idMappingData.file_upload.acceptedFileTypeText}</i>
         </Typography>
         {/*  Buttons */}
         <Grid item xs={12} sm={12}>
@@ -527,8 +568,16 @@ const IdMapping = (props) => {
             </Button>
             <Button
               className="gg-btn-blue"
+              disabled={
+                !(
+                  moleculeValidated &&
+                  toIdTypeValidated &&
+                  fromIdTypeValidated &&
+                  inputIdListValidated &&
+                  fileUploadValidated
+                ) || idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length
+              }
               onClick={searchIdMapClick}
-              // disabled={!props.inputValue.proAdvSearchValError.every((err) => err === false)}
             >
               Submit
             </Button>

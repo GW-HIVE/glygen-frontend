@@ -1436,6 +1436,9 @@
           },
         "id": "input_idlist"
       },
+      "userfile": {
+        "id": "userfile"
+      },
       "mapped": {
         "from": {
           "shortName": "from",
