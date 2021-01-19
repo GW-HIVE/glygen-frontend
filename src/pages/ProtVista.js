@@ -83,7 +83,7 @@ const ProtVista = () => {
       type: "MutagenesisS",
       residues: [],
       color: "purple",
-      shape: "square"
+      shape: "bridge"
     };
 
     if (data.glycosylation) {
@@ -194,9 +194,14 @@ const ProtVista = () => {
           title:
             "(" +
             mutagenesis.sequence_org +
+            "-" +
+            mutagenesis.start_pos +
             " → " +
             mutagenesis.sequence_mut +
+            "-" +
+            mutagenesis.end_pos +
             ")",
+
           tooltipContent:
             "<span className=marker> annotation " +
             mutagenesis.annotation +

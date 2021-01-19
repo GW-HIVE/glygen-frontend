@@ -1,173 +1,173 @@
 {
-	"home": {
-		"title": "GlyGen Home | Informatics Resources for Glycoscience | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "GlyGen is a database and dissemination project for carbohydrate and glycoconjugate related data."
-			},
-			{
-				"name": "keywords",
-				"content": "glycan search, glycoprotein, glycosyltransferase, glycan, glycosylation, data integration, carbohydrate, database, glycoinformatics, glycobiology, glycan draw, glycan mass, glycan structure, glycoconjugate, data standardization, database integration."
-			}
-		]
-	},
-	"resources": {
-		"title": "Resources | Glycoinformatics | Glycomics | Glycoproteomics | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "List of glycoinformatics, glycomics, and glycoproteomics resources useful for researchers. Resources include data resources, carbohydrate tools, organizations."
-			},
-			{
-				"name": "keywords",
-				"content": "data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, glycobiology 101, glycobiology 501, tool collection, video, e-book, glycomics, glycoproteomics."
-			}
-		]
-	},
-	"howToCite": {
-		"title": "How To Cite | Publications and Citations | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "How to cite GlyGen paper. MLA GlyGen Website Citation. GlyGen papers. Glycobiology journal."
-			},
-			{
-				"name": "keywords",
-				"content": "publications, citations, how to cite, GlyGen citation, GlyGen paper citation, MLA GlyGen citation, author, glycobiology, journal."
-			}
-		]
-	},
-	"about": {
-		"title": "About GlyGen | Mission | Vision | Team | Resource | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "GlyGen is an international project funded by the NIH to facilitate glycoscience research by retrieving, integrating and harmonizing diverse kinds of information."
-			},
-			{
-				"name": "keywords",
-				"content": "Mission, people, story, goal, effort, resource, funding, team, principal investigators, advocates, key collaborators, co-investigators, development, data integration, array database partners, data management team, web developers."
-			}
-		]
-	},
-	"contactUs": {
-		"title": "Contact Us | Get In Touch | Send Message | Share Data | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "We always welcome questions, comments, and suggestions regarding our website and the information we provide in general."
-			},
-			{
-				"name": "keywords",
-				"content": "Email, address, location, map, get in touch, send message, UGA Athens Georgia, GW Washington DC, university, technical issue, need help, request, new quick search."
-			}
-		]
-	},
-	"disclaimer": {
-		"title": "Disclaimer | No Warranties | Limitations of Liability | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "GlyGen disclaimer provides a set of statements that specify or delimit the scope of rights and obligations."
-			},
-			{
-				"name": "keywords",
-				"content": "Disclaimer, warranty, limitations of liability, external links, reasonableness, agreement."
-			}
-		]
-	},
-	"feedback": {
-		"title": "Feedback | Your Opinion Matters | Leave Us Your Feedback | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "Leave feedback and help us improve our website. We are committed to providing world-class service to you and your frank feedback is a very important part of it."
-			},
-			{
-				"name": "keywords",
-				"content": "Feedback, critique, satisfaction, service, questions, answers."
-			}
-		]
-	},
-	"frameworks": {
-		"title": "Frameworks | Programming Libraries and Frameworks | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "Programming libraries and frameworks used to develop GlyGen. React.js, HTML5, CSS3, Axios, Bootstrap, Python, ProtVista, d3.js, JavaScript, React.js, Mustache."
-			},
-			{
-				"name": "keywords",
-				"content": "Programming languages, Web Design, Web Development, Responsive website, libraries, frameworks."
-			}
-		]
-	},
-	"globalSearchResult": {
-		"title": "Global Search | Glycans | Proteins | Glycoproteins | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "Search the entire GlyGen database for the specified term."
-			},
-			{
-				"name": "keywords",
-				"content": "Database, global search, glycans, proteins, glycoproteins."
-			}
-		]
-	},
-	"license": {
-		"title": "License | Creative Commons | GNU General Public License | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "Creative Commons license to all our database sets. The source code of the project is released under GNU General Public License v3."
-			},
-			{
-				"name": "keywords",
-				"content": "Databases, license, license type, Creative Commons, General Public License, free to copy, GlyGen GitHub repository, source code, data, accessibility."
-			}
-		]
-	},
-	"media": {
-		"title": "GlyGen Media | Presentations | Brochures | Posters | Logo | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "GlyGen media include presentations, posters, brochures, power points presentations, one-page brochures, tri-fold brochures, letter templates, and logos."
-			},
-			{
-				"name": "keywords",
-				"content": "Power points, presentations, posters, brochures, logos, one page brochure, tri-fold, template, letter template."
-			}
-		]
-	},
-	"privacyPolicy": {
-		"title": "Privacy Policy | Discloses | Data Privacy Statement | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "This privacy notice discloses the privacy practices for GlyGen data and websites. Information collection, use, and sharing, user activities logging, and links."
-			},
-			{
-				"name": "keywords",
-				"content": "Privacy policy, discloses, data privacy statement, privacy practices, information collection, data use, data sharing, user activities, logging, links."
-			}
-		]
-	},
-	"privacySettings": {
-		"title": "GlyGen Privacy Settings | User Settings | Manage Settings | glygen.org",
-		"meta": [
-			{
-				"name": "description",
-				"content": "Privacy settings allow you to improve your searches by allowing GlyGen to monitor your interaction with our system."
-			},
-			{
-				"name": "keywords",
-				"content": "Manage settings, customization, privacy settings, user settings, GlyGen settings, monitor, enable, disable, allow, improve."
-			}
-		]
-	},
+  "home": {
+    "title": "GlyGen Home | Informatics Resources for Glycoscience | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "GlyGen is a database and dissemination project for carbohydrate and glycoconjugate related data."
+      },
+      {
+        "name": "keywords",
+        "content": "glycan search, glycoprotein, glycosyltransferase, glycan, glycosylation, data integration, carbohydrate, database, glycoinformatics, glycobiology, glycan draw, glycan mass, glycan structure, glycoconjugate, data standardization, database integration."
+      }
+    ]
+  },
+  "resources": {
+    "title": "Resources | Glycoinformatics | Glycomics | Glycoproteomics | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "List of glycoinformatics, glycomics, and glycoproteomics resources useful for researchers. Resources include data resources, carbohydrate tools, organizations."
+      },
+      {
+        "name": "keywords",
+        "content": "data resources, tools, organizations, learn glycobiology, database, knowledgebase, repository, glycobiology 101, glycobiology 501, tool collection, video, e-book, glycomics, glycoproteomics."
+      }
+    ]
+  },
+  "howToCite": {
+    "title": "How To Cite | Publications and Citations | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "How to cite GlyGen paper. MLA GlyGen Website Citation. GlyGen papers. Glycobiology journal."
+      },
+      {
+        "name": "keywords",
+        "content": "publications, citations, how to cite, GlyGen citation, GlyGen paper citation, MLA GlyGen citation, author, glycobiology, journal."
+      }
+    ]
+  },
+  "about": {
+    "title": "About GlyGen | Mission | Vision | Team | Resource | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "GlyGen is an international project funded by the NIH to facilitate glycoscience research by retrieving, integrating and harmonizing diverse kinds of information."
+      },
+      {
+        "name": "keywords",
+        "content": "Mission, people, story, goal, effort, resource, funding, team, principal investigators, advocates, key collaborators, co-investigators, development, data integration, array database partners, data management team, web developers."
+      }
+    ]
+  },
+  "contactUs": {
+    "title": "Contact Us | Get In Touch | Send Message | Share Data | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "We always welcome questions, comments, and suggestions regarding our website and the information we provide in general."
+      },
+      {
+        "name": "keywords",
+        "content": "Email, address, location, map, get in touch, send message, UGA Athens Georgia, GW Washington DC, university, technical issue, need help, request, new quick search."
+      }
+    ]
+  },
+  "disclaimer": {
+    "title": "Disclaimer | No Warranties | Limitations of Liability | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "GlyGen disclaimer provides a set of statements that specify or delimit the scope of rights and obligations."
+      },
+      {
+        "name": "keywords",
+        "content": "Disclaimer, warranty, limitations of liability, external links, reasonableness, agreement."
+      }
+    ]
+  },
+  "feedback": {
+    "title": "Feedback | Your Opinion Matters | Leave Us Your Feedback | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Leave feedback and help us improve our website. We are committed to providing world-class service to you and your frank feedback is a very important part of it."
+      },
+      {
+        "name": "keywords",
+        "content": "Feedback, critique, satisfaction, service, questions, answers."
+      }
+    ]
+  },
+  "frameworks": {
+    "title": "Frameworks | Programming Libraries and Frameworks | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Programming libraries and frameworks used to develop GlyGen. React.js, HTML5, CSS3, Axios, Bootstrap, Python, ProtVista, d3.js, JavaScript, React.js, Mustache."
+      },
+      {
+        "name": "keywords",
+        "content": "Programming languages, Web Design, Web Development, Responsive website, libraries, frameworks."
+      }
+    ]
+  },
+  "globalSearchResult": {
+    "title": "Global Search | Glycans | Proteins | Glycoproteins | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Search the entire GlyGen database for the specified term."
+      },
+      {
+        "name": "keywords",
+        "content": "Database, global search, glycans, proteins, glycoproteins."
+      }
+    ]
+  },
+  "license": {
+    "title": "License | Creative Commons | GNU General Public License | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Creative Commons license to all our database sets. The source code of the project is released under GNU General Public License v3."
+      },
+      {
+        "name": "keywords",
+        "content": "Databases, license, license type, Creative Commons, General Public License, free to copy, GlyGen GitHub repository, source code, data, accessibility."
+      }
+    ]
+  },
+  "media": {
+    "title": "GlyGen Media | Presentations | Brochures | Posters | Logo | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "GlyGen media include presentations, posters, brochures, power points presentations, one-page brochures, tri-fold brochures, letter templates, and logos."
+      },
+      {
+        "name": "keywords",
+        "content": "Power points, presentations, posters, brochures, logos, one page brochure, tri-fold, template, letter template."
+      }
+    ]
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy | Discloses | Data Privacy Statement | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "This privacy notice discloses the privacy practices for GlyGen data and websites. Information collection, use, and sharing, user activities logging, and links."
+      },
+      {
+        "name": "keywords",
+        "content": "Privacy policy, discloses, data privacy statement, privacy practices, information collection, data use, data sharing, user activities, logging, links."
+      }
+    ]
+  },
+  "privacySettings": {
+    "title": "GlyGen Privacy Settings | User Settings | Manage Settings | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Privacy settings allow you to improve your searches by allowing GlyGen to monitor your interaction with our system."
+      },
+      {
+        "name": "keywords",
+        "content": "Manage settings, customization, privacy settings, user settings, GlyGen settings, monitor, enable, disable, allow, improve."
+      }
+    ]
+  },
 
 	"glycanList": {
 		"title": "Glycan List | Summary of Your Glycan Search | glygen.org",
@@ -350,7 +350,20 @@
 				"content": "Gene, locus, locations, enzymes, involved, biosynthesis, glytoucan accession, human, gene mapping, UniProtKB Accession, human, gene mapping, UniProtKB Accession, Gene Name, Gene location, Protein Name, Organism, Tax Id."
 			}
 		]
-	},
+  },
+  "proteinSiteSearch": {
+    "title": "Protein Site Search | Search for Protein Site | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Search for Protein Site Search based on their UniProtKB accession, RefSeq accession, Chemical Mass, Organism, Protein Name, Gene Name, GO Name, Protein."
+      },
+      {
+        "name": "keywords",
+        "content": "protein, Protein Site Search, UniProtKB accession, RefSeq accession, Chemical Mass, Organism, Protein Name, Gene Name, GO Name, Protein Sequence, Peptide Sequence, Pathway ID."
+      }
+    ]
+  },
 	"siteView": {
 		"title": "Site View | Siteview for protein #uniprot_canonical_ac | glygen.org",
 		"meta": [

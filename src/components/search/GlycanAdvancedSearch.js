@@ -376,33 +376,7 @@ const GlycanAdvancedSearch = props => {
                   inputValue={advancedSearch.glycan_identifier.examples}
                 />
               </Grid>
-              {/* Glycan Name */}
-              <Grid item xs={12} sm={10}>
-                <FormControl fullWidth variant="outlined">
-                  <Typography className={"search-lbl"} gutterBottom>
-                    <HelpTooltip
-                      title={commonGlycanData.glycan_name.tooltip.title}
-                      text={commonGlycanData.glycan_name.tooltip.text}
-                      urlText={commonGlycanData.glycan_name.tooltip.urlText}
-                      url={commonGlycanData.glycan_name.tooltip.url}
-                    />
-                    {commonGlycanData.glycan_name.name}
-                  </Typography>
-                  <AutoTextInput
-                    inputValue={props.inputValue.glyGlyName}
-                    setInputValue={glyGlyNameChange}
-                    placeholder={advancedSearch.glycan_name.placeholder}
-                    typeahedID={advancedSearch.glycan_name.typeahedID}
-                    length={advancedSearch.glycan_name.length}
-                    errorText={advancedSearch.glycan_name.errorText}
-                  />
-                  <ExampleExploreControl
-                    setInputValue={glyGlyNameChange}
-                    inputValue={advancedSearch.glycan_name.examples}
-                  />
-                </FormControl>
-              </Grid>
-              {/* Subsumption */}
+
               <Grid item xs={12} sm={3}>
                 <Typography className={"search-lbl"} gutterBottom>
                   &nbsp;
@@ -596,6 +570,32 @@ const GlycanAdvancedSearch = props => {
             </FormControl>
           </Grid>
         )}
+        {/* Glycan Name */}
+        <Grid item xs={12} sm={10}>
+          <FormControl fullWidth variant="outlined">
+            <Typography className={"search-lbl"} gutterBottom>
+              <HelpTooltip
+                title={commonGlycanData.glycan_name.tooltip.title}
+                text={commonGlycanData.glycan_name.tooltip.text}
+                urlText={commonGlycanData.glycan_name.tooltip.urlText}
+                url={commonGlycanData.glycan_name.tooltip.url}
+              />
+              {commonGlycanData.glycan_name.name}
+            </Typography>
+            <AutoTextInput
+              inputValue={props.inputValue.glyGlyName}
+              setInputValue={glyGlyNameChange}
+              placeholder={advancedSearch.glycan_name.placeholder}
+              typeahedID={advancedSearch.glycan_name.typeahedID}
+              length={advancedSearch.glycan_name.length}
+              errorText={advancedSearch.glycan_name.errorText}
+            />
+            <ExampleExploreControl
+              setInputValue={glyGlyNameChange}
+              inputValue={advancedSearch.glycan_name.examples}
+            />
+          </FormControl>
+        </Grid>
 
         {/* Glycosylated Protein */}
         <Grid item xs={12} sm={10}>

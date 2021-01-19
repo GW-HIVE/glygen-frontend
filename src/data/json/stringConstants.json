@@ -37,6 +37,17 @@
         },
         "id": "glycan_id_subsumption"
       },
+      "subsumption": {
+        "name": "Subsumption",
+        "shortName": "Subsumption",
+        "tooltip": {
+          "title": "Subsumption",
+          "text": "",
+          "urlText": "Read more...",
+          "url": ""
+        },
+        "id": "subsumption"
+      },
       "organism_annotation": {
         "name": "Organism Annotation",
         "shortName": "Organism Annotation",
@@ -186,6 +197,17 @@
           "url": "https://enzyme.expasy.org/"
         },
         "id": "enzyme"
+      },
+      "subsumption": {
+        "name": "Subsumption",
+        "shortName": "subsumption",
+        "tooltip": {
+          "title": "subsumption",
+          "text": "subsumption are enzymes involved in metabolism pathways that convert and modify simple compounds to complex coumpounds and macromolecules. Enter the Gene Name of an enzyme that particpates in the biosynthesis of your glycan(s).",
+          "urlText": "Read more...",
+          "url": ""
+        },
+        "id": "subsumption"
       },
       "pmid": {
         "name": "Pubmed ID",
@@ -461,12 +483,47 @@
         },
         "id": "uniprot_canonical_ac"
       },
+      "site": {
+        "name": "Site",
+        "shortName": "Site",
+        "tooltip": {
+          "title": "Site",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "site"
+      },
+      "site_range": {
+        "name": "Range",
+        "shortName": "Range",
+        "tooltip": {
+          "title": "Site",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "site_range"
+      },
+      "number_range": {
+        "name": "Range",
+        "shortName": "Range",
+        "tooltip": {
+          "title": "Site",
+          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
+          "urlText": "Read more...",
+          "url": "https://www.uniprot.org/"
+        },
+        "id": "number_range"
+      },
+
       "chemical_mass": {
         "name": "Chemical Mass",
         "shortName": "chemical_mass",
         "tooltip": {},
         "id": "chemical_mass"
       },
+
       "gene_name": {
         "name": "Gene Name",
         "shortName": "gene_name",
@@ -764,6 +821,15 @@
           "text": "Click to select Glycosylation Evidence Type."
         },
         "id": "glycosylation_evidence"
+      },
+      "annotation": {
+        "name": "Annotation",
+        "shortName": "Annotation",
+        "tooltip": {
+          "title": "Annotation",
+          "text": "Click to select Annotation."
+        },
+        "id": "annotation"
       },
       "Protein_ShortName": {
         "name": "Protein Name",
@@ -1208,6 +1274,11 @@
       "id": "Bio_Enzymes",
       "displayname": "Biosynthetic Enzymes",
       "tooltip": " Biosynthetic Enzymes Information for selected accession"
+    },
+    "subsumption": {
+      "id": "Subsumption",
+      "displayname": "Subsumption",
+      "tooltip": " subsumption Information for selected accession"
     },
     "expression": {
       "id": "expression",

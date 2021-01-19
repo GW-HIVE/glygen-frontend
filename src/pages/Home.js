@@ -55,6 +55,13 @@ const featuredCards = [
     to: routeConstants.proteinSearch,
   },
   {
+    title: "Site Search",
+    description: "Search for proteins based on their site, accessions, and annotations.",
+    image: proteinImg,
+    imageText: "Site Search",
+    to: routeConstants.proteinSearch,
+  },
+  {
     title: "Quick Search",
     description: "Quick Search provides multi-domain queries that are based on user requests.",
     image: quickSearchImg,

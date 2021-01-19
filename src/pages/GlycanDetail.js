@@ -64,8 +64,12 @@ const items = [
     id: "Biosynthetic-Enzymes"
   },
   {
+    label: stringConstants.sidebar.subsumption.displayname,
+    id: "subsumption"
+  },
+  {
     label: stringConstants.sidebar.expression.displayname,
-    id: "Expression"
+    id: "expression"
   },
   {
     label: stringConstants.sidebar.digital_seq.displayname,
@@ -214,8 +218,12 @@ const GlycanDetail = props => {
     // eslint-disable-next-line
   }, []);
   if (detailData.expression) {
-    const WithTissue = detailData.expression.filter(item => item.tissue);
-    const WithCellline = detailData.expression.filter(item => item.cell_line);
+    const WithTissue = detailData.expression.filter(
+      item => item.tissue !== undefined
+    );
+    const WithCellline = detailData.expression.filter(
+      item => item.cell_line !== undefined
+    );
     expressionWithtissue = WithTissue;
     expressionWithcell = WithCellline;
 
@@ -273,6 +281,7 @@ const GlycanDetail = props => {
     publication,
     wurcs,
     enzyme,
+    subsumption,
     expression,
     mass_pme,
     names,
@@ -325,18 +334,22 @@ const GlycanDetail = props => {
     },
 
     {
-      dataField: "position residue",
+      dataField: "position",
       text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
-      formatter: (value, row) => (
-        <>
-          {row.residue}
-          {row.position}
-        </>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+              {row.residue} {row.position}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     }
   ];
   const glycanBindingProteinColumns = [
@@ -440,6 +453,37 @@ const GlycanDetail = props => {
           {")"}
         </>
       )
+    }
+  ];
+  const subsumptionColumns = [
+    {
+      dataField: "id",
+      text: "GlyToucan_ac",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View details">
+          <Link to={routeConstants.glycanDetail + row.id}>{row.id}</Link>
+        </LineTooltip>
+      )
+    },
+    {
+      dataField: "type",
+      text: "Type",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
+    },
+    {
+      dataField: "relationship",
+      text: "Relationship",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white" };
+      }
     }
   ];
   const expressionCellColumns = [
@@ -650,6 +694,7 @@ const GlycanDetail = props => {
       glycoprotein: true,
       glycanBindingProtein: true,
       bioEnzyme: true,
+      subsumption: true,
       expression: true,
       digitalSeq: true,
       crossref: true,
@@ -1265,6 +1310,7 @@ const GlycanDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
               {/* Biosynthetic Enzymes */}
               <Accordion
                 id="Biosynthetic-Enzymes"
@@ -1318,7 +1364,58 @@ const GlycanDetail = props => {
                 </Card>
               </Accordion>
 
-              {/* Biosynthetic Enzymes */}
+              {/* Subsumption*/}
+              <Accordion
+                id="subsumption"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.subsumption.title}
+                        text={DetailTooltips.glycan.subsumption.text}
+                        urlText={DetailTooltips.glycan.subsumption.urlText}
+                        url={DetailTooltips.glycan.subsumption.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.subsumption.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("subsumption", collapsed.subsumption)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.subsumption ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                      {subsumption && subsumption.length !== 0 && (
+                        <ClientPaginatedTable
+                          data={subsumption}
+                          columns={subsumptionColumns}
+                          defaultSortField={"id"}
+                          onClickTarget={"#subsumption"}
+                        />
+                      )}
+                      {!subsumption && <p>No data available.</p>}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
+              {/* Expression */}
               <Accordion
                 id="expression"
                 defaultActiveKey="0"
@@ -1399,16 +1496,16 @@ const GlycanDetail = props => {
                             title="CellLine Expression "
                           >
                             <Container>
-                              {expressionWithtissue &&
-                                expressionWithtissue.length > 0 && (
+                              {expressionWithcell &&
+                                expressionWithcell.length > 0 && (
                                   <ClientPaginatedTable
-                                    data={expressionWithtissue}
+                                    data={expressionWithcell}
                                     columns={expressionCellColumns}
                                     onClickTarget={"#expression"}
                                     defaultSortField="position"
                                   />
                                 )}
-                              {!expressionWithtissue.length && (
+                              {!expressionWithcell.length && (
                                 <p>No data available.</p>
                               )}
                             </Container>

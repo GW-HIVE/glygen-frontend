@@ -32,13 +32,16 @@ export const getProteinList = (
 };
 
 export const getProteinsiteDetail = (protienId, position) => {
-  const queryParamString = JSON.stringify({
-    uniprot_canonical_ac: protienId,
-    start_pos: parseInt(position),
-    end_pos: parseInt(position)
-  });
-  const url = `/proteinsite/detail?query=${queryParamString}`;
+  // const queryParamString = JSON.stringify({
+  //   uniprot_canonical_ac: protienId,
+  //   start_pos: parseInt(position),
+  //   end_pos: parseInt(position)
+  // });
+
+  const url = `/site/detail/${protienId}.${position}.${position}`;
   return getJson(url);
+  // const url = `/proteinsite/detail?query=${queryParamString}`;
+  // return getJson(url);
 };
 
 export const getProteinDetail = accessionId => {
@@ -173,5 +176,16 @@ export const getHomoAlignment = (protienId, alignment) => {
     cluster_type: alignment
   });
   const url = `/protein/alignment?query=${queryParamString}`;
+  return getJson(url);
+};
+
+/**
+ * Gets JSON for site  search.
+ * @param {object} formObject - site search JSON query object.
+ */
+export const getSiteSearch = formObject => {
+  var json = "query=" + JSON.stringify(formObject);
+  // const url = "/supersearch/search?" + json;
+  const url = "";
   return getJson(url);
 };
