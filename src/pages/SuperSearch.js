@@ -54,19 +54,7 @@ const SuperSearch = (props) => {
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
 		setInitData(initData);
-		// setNodeData(initData);
-
-
-		var initSvgData = initData.map((node) => {
-			return {
-				description: node.description,
-				record_count: node.record_count,
-				id: node.id,
-				label: node.label,
-				list_id: node.list_id ? node.list_id : "",
-			}
-		  });
-
+		var initSvgData = getInitSVGData(initData);
 		setSVGData(initSvgData);
 		if (id === undefined) setPageLoading(false);
 
@@ -89,14 +77,32 @@ const SuperSearch = (props) => {
 
   }, [])
 
-  function updateNodeData(searchData, initSvgData){
-	  var tempData = initSvgData ? initSvgData.slice() : svgData.slice();
-	  var updatedData = tempData.map((node) => {
-		let id = node.id;
-		node.record_count = searchData[id] ? searchData[id].result_count : 0;
-		node.list_id = searchData[id] ? searchData[id].list_id : "";
-		return node;
+  function getInitSVGData(initData) {
+	var initSvgData = initData.map((node) => {
+		return {
+			description: node.description,
+			record_count: node.record_count,
+			id: node.id,
+			label: node.label,
+			list_id: node.list_id ? node.list_id : "",
+		}
 	  });
+	  return initSvgData;
+  }
+
+  function updateNodeData(searchData, initSvgData){
+	  var updatedData = [];
+	  if (searchData) {
+		let tempData = initSvgData ? initSvgData.slice() : svgData.slice();
+		updatedData = tempData.map((node) => {
+			let id = node.id;
+			node.record_count = searchData[id] ? searchData[id].result_count : 0;
+			node.list_id = searchData[id] ? searchData[id].list_id : "";
+			return node;
+		});
+	} else {
+		updatedData = getInitSVGData(initData);
+	}
 	  setSVGData(updatedData);
   }
 
@@ -107,7 +113,7 @@ const SuperSearch = (props) => {
 		(id || "") + ">" + listID,
 		message
 	)
-	props.history.push(
+	currentNode !== "site" && props.history.push(
 		getListPageRoute(currentNode) + listID + "/sups"
 	);
   }
@@ -120,6 +126,11 @@ const SuperSearch = (props) => {
 	} else if (currentNode === "site") {
 		return routeConstants.siteList;
 	}
+  }
+
+  function resetSuperSearchQuery() {
+	updateNodeData();
+	setQueryData([]);
   }
 
     return (
@@ -167,6 +178,14 @@ const SuperSearch = (props) => {
                         onClick={() => setSupSearchShowQuery(true)}
                         >
                         Show Query
+                    </Button>
+					<Button
+                        className='gg-btn-outline'
+						style={{ marginRight:"20px", marginBottom:"20px",  float: "right" }}
+						disabled={queryData.length <= 0}
+                        onClick={resetSuperSearchQuery}
+                        >
+                        Reset Query
                     </Button>
                 </div>
         	</Container>

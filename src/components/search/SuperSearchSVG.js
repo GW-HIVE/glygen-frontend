@@ -6,8 +6,8 @@ import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
 import {event, select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
 import { ModeComment } from '@material-ui/icons';
-import searchPng from "../../images/icons/search3.png";
-import noSearchPng from "../../images/icons/nosearch.png";
+import searchIcon from "../../images/icons/search.svg";
+import noSearchIcon from "../../images/icons/nosearch.svg";
 import { Container } from 'react-bootstrap';
 
 
@@ -87,7 +87,7 @@ const SuperSearchSVG = (props) => {
           //appending text on numeric nodes
           numnodes.append("image")
           .data(nodes)
-          .attr("xlink:href", ((d) => d.list_id  !== "" ? searchPng : noSearchPng))
+          .attr("xlink:href", ((d) => d.list_id  !== "" ? searchIcon : noSearchIcon))
             .attr("class", ((d) => d.list_id  !== "" ? "svg-numnode-text" : "svg-numnode-text-nl"))
             .attr("x", node2Width - 18)
             .attr("y", node2Height/6)
@@ -103,7 +103,7 @@ const SuperSearchSVG = (props) => {
             let tooltipText = document.getElementById("tooltip-text");
             tooltipText.innerHTML = "Click to see list page.";
             tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
-            tooltip.style.top = bcr.y + bcr.height + event.pageY - event.clientY + 'px';
+            tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
             tooltip.style.display = "inline";
             console.log(event.clientX - event.pageX);
             console.log(event.pageY - event.clientY);
@@ -225,7 +225,7 @@ const SuperSearchSVG = (props) => {
         let tooltipText = document.getElementById("tooltip-text");
         tooltipText.innerHTML = "Click to see search properties.";
         tooltip.style.left =  bcr.x + 0.85 * bcr.width + event.clientX - event.pageX - 10 + 'px';
-        tooltip.style.top = bcr.y + bcr.height + event.pageY - event.clientY + 'px';
+        tooltip.style.top = bcr.y + 1.1 * bcr.height + event.pageY - event.clientY + 'px';
         tooltip.style.display = "inline";
       }
 
