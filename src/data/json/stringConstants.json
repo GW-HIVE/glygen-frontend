@@ -1222,6 +1222,11 @@
       "title": "Try Me Search Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please try again after some time."
     },
+    "superSearchError": {
+      "id": "superSearchError",
+      "title": "Super Search Error - Enter Valid Input",
+      "message": "Sorry, we couldn't process search request. Please enter valid input."
+    },
     "defaultTextAlert": {
       "id": "defaultTextAlert",
       "title": "Search Error - No Results Found",
