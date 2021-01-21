@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MultilineAutoTextInput from "../input/MultilineAutoTextInput";
 import AutoTextInput from "../input/AutoTextInput";
 import SelectControl from "../select/SelectControl";
-import CategorizedAutoTextInput from "../input/CategorizedAutoTextInput";
-import MultiselectTextInput from "../input/MultiselectTextInput";
 import HelpTooltip from "../tooltip/HelpTooltip";
 import ExampleExploreControl from "../example/ExampleExploreControl";
 import Grid from "@material-ui/core/Grid";
@@ -19,45 +17,31 @@ import "../../css/Search.css";
 import siteData from "../../data/json/siteData";
 import stringConstants from "../../data/json/stringConstants";
 import { InputLabel, Radio } from "@material-ui/core";
+import { grid, positions } from "@material-ui/system";
+
+const commonProteinData = stringConstants.protein.common;
+const sitesData = siteData.site_search;
 
 /**
  * Protein advanced search control.
  */
 const SiteSearchControl = props => {
-  const [positionOrRange, setPositionOrRange] = useState("");
+  // const [positionOrRange, setPositionOrRange] = useState("");
+  const [position, setPosition] = useState("");
+  const [minRange, setMinRange] = useState("");
+  const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
+  // const [queryObject, setQueryObject] = useState({});
   const [siteId, setsiteId] = useState("");
   const [annotation, setAnnotation] = useState("annotation");
-  // const [rangeInput, setRangeInput] = useState("rangeInput");
 
-  let commonProteinData = stringConstants.protein.common;
-  let sitesData = siteData.site_search;
-  // const [siteSearchData, setSiteSearchData] = useState({
-  //   proteinId: "",
-  //   siteId: "",
-  //   annotion: "",
-  //   proRangeInput: ["", ""],
-  //   position: ""
-  // });
-  // cosnt handleSubmitSearch = () => {
-  //   const json = {
-  //     proteinId,
-  //     siteId,
-  //     annotion,
-  //     proRangeInput
-  //   }
-  //   callServer(json)
-  //     .then()
-  //     .then(catch)
-  // }
-
-  // /**
-  //  * Function to handle click event for protein simple search.
-  //  **/
-  // const searchSiteClick = () => {
-  //   setPageLoading(true);
-  //   loadSiteData();
-  // };
+  // useEffect(() => {
+  //   setQueryObject({
+  //     position,
+  //     minRange,
+  //     maxRange
+  //   });
+  // }, [position, minRange, maxRange]);
 
   /**
    * Function to clear input field values.
@@ -71,9 +55,26 @@ const SiteSearchControl = props => {
     });
   };
 
-  // const handlePostionOrRangeChange = event => {
-  //   setPositionOrRange(event.target.value);
-  // };
+  const handlePositionChange = event => {
+    setPosition(event.target.value);
+
+    setMinRange("");
+    setMaxRange("");
+  };
+
+  const handleMinRangeChange = event => {
+    setMinRange(event.target.value);
+
+    setPosition("");
+  };
+
+  const handleMaxRangeChange = event => {
+    setMaxRange(event.target.value);
+
+    setPosition("");
+  };
+
+  const handlePostionOrRangeChange = () => {};
 
   return (
     <>
@@ -102,6 +103,89 @@ const SiteSearchControl = props => {
             </Button>
           </Row>
         </Grid>
+        {/* <Grid item>
+          <pre>{JSON.stringify(queryObject)}</pre>
+        </Grid> */}
+        <Grid item xs={12} sm={10}>
+          <FormControl fullWidth>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={6} sm={6}>
+                <Typography className={"search-lbl"} gutterBottom>
+                  <HelpTooltip
+                    title={commonProteinData.site.tooltip.title}
+                    text={commonProteinData.site.tooltip.text}
+                  />
+                  {commonProteinData.site.tooltip.title}
+                </Typography>
+
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel className={"select-lbl-inline"}>
+                    Position
+                  </InputLabel>
+                  <OutlinedInput
+                    className={props.inputClass}
+                    value={position}
+                    margin="dense"
+                    onChange={handlePositionChange}
+                    // onBlur={onMinMoveOut}
+                    labelWidth={40}
+                    // disabled={positionOrRange !== "position"}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={3} sm={3}>
+                <Typography className={"search-lbl"} gutterBottom>
+                  <HelpTooltip
+                    title={commonProteinData.site_range.tooltip.title}
+                    text={commonProteinData.site_range.tooltip.text}
+                  />
+                  {commonProteinData.site_range.tooltip.title}
+                </Typography>
+
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel className={"select-lbl-inline"}>Min</InputLabel>
+                  <OutlinedInput
+                    className={props.inputClass}
+                    value={minRange}
+                    margin="dense"
+                    onChange={handleMinRangeChange}
+                    // onBlur={onMinMoveOut}
+                    labelWidth={40}
+                    inputProps={{
+                      min: props.min,
+                      max: props.max
+                    }}
+                    // disabled={positionOrRange !== "range"}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={3} sm={3}>
+                <Typography className={"search-lbl"} gutterBottom>
+                  &nbsp;
+                </Typography>
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel className={"select-lbl-inline"}>Max</InputLabel>
+                  <OutlinedInput
+                    className={props.inputClass}
+                    value={maxRange}
+                    margin="dense"
+                    onChange={handleMaxRangeChange}
+                    // onBlur={onMaxMoveOut}
+                    labelWidth={40}
+                    inputProps={{
+                      min: props.min,
+                      max: props.max
+                    }}
+                    // disabled={positionOrRange !== "range"}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+          </FormControl>
+        </Grid>
+
         {/* Protein Id */}
         <Grid item xs={12} sm={10}>
           <FormControl fullWidth variant="outlined">
@@ -150,7 +234,7 @@ const SiteSearchControl = props => {
           </FormControl>
         </Grid>
 
-        {/* Glycosylation Evidence Type */}
+        {/* Position */}
         <Grid item xs={12} sm={10}>
           <FormControl fullWidth variant="outlined">
             <Typography className={"search-lbl"} gutterBottom>
@@ -172,12 +256,12 @@ const SiteSearchControl = props => {
         </Grid>
         {/* Position */}
         <Grid item xs={12} sm={10}>
-          <Radio
+          {/* <Radio
             checked={positionOrRange === "position"}
-            // onChange={handlePostionOrRangeChange}
+            onChange={handlePostionOrRangeChange}
             value="position"
             name="position-or-range"
-          />
+          /> */}
           <FormControl fullWidth variant="outlined">
             <Typography className={"search-lbl"} gutterBottom>
               <HelpTooltip
@@ -186,45 +270,39 @@ const SiteSearchControl = props => {
               />
               Position
             </Typography>
-            {positionOrRange === "position" && (
-              <FormControl fullWidth variant="outlined">
-                <InputLabel className={"select-lbl-inline"}>
-                  Position
-                </InputLabel>
-                <OutlinedInput
-                  className={props.inputClass}
-                  // value={props.inputValue[0]}
-                  margin="dense"
-                  // onChange={minInputChange}
-                  // onBlur={onMinMoveOut}
-                  labelWidth={40}
-                  // inputProps={{
-                  //   min: props.min,
-                  //   max: props.max
-                  // }}
-                  disabled={positionOrRange !== "position"}
-                />
-              </FormControl>
-            )}
+            {/* {positionOrRange === "position" && ( */}
+            <FormControl fullWidth variant="outlined">
+              <InputLabel className={"select-lbl-inline"}>Position</InputLabel>
+              <OutlinedInput
+                className={props.inputClass}
+                // value={props.inputValue[0]}
+                margin="dense"
+                onChange={handlePostionOrRangeChange}
+                // onBlur={onMinMoveOut}
+                labelWidth={40}
+                // disabled={positionOrRange !== "position"}
+              />
+            </FormControl>
+            {/* )} */}
           </FormControl>
         </Grid>
         <Grid item xs={12} sm={10}>
-          <Radio
+          {/* <Radio
             checked={positionOrRange === "range"}
-            // onChange={handlePostionOrRangeChange}
+            onChange={handlePostionOrRangeChange}
             value="range"
             name="position-or-range"
-          />
+          /> */}
 
           <FormControl fullWidth>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={12} sm={9}>
                 <Typography className={"search-lbl"} gutterBottom>
                   <HelpTooltip
-                    title={commonProteinData.number_range.tooltip.title}
-                    text={commonProteinData.number_range.tooltip.text}
+                    title={commonProteinData.site_range.tooltip.title}
+                    text={commonProteinData.site_range.tooltip.text}
                   />
-                  {commonProteinData.number_range.name}
+                  {commonProteinData.site.name}
                 </Typography>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item>
@@ -236,14 +314,14 @@ const SiteSearchControl = props => {
                         className={props.inputClass}
                         // value={props.inputValue[0]}
                         margin="dense"
-                        // onChange={minInputChange}
+                        onChange={handlePostionOrRangeChange}
                         // onBlur={onMinMoveOut}
                         labelWidth={40}
                         inputProps={{
                           min: props.min,
                           max: props.max
                         }}
-                        disabled={positionOrRange !== "range"}
+                        // disabled={positionOrRange !== "range"}
                       />
                     </FormControl>
                   </Grid>
@@ -257,14 +335,14 @@ const SiteSearchControl = props => {
                         className={props.inputClass}
                         // value={props.inputValue[1]}
                         margin="dense"
-                        // onChange={maxInputChange}
+                        onChange={handlePostionOrRangeChange}
                         // onBlur={onMaxMoveOut}
                         labelWidth={40}
                         inputProps={{
                           min: props.min,
                           max: props.max
                         }}
-                        disabled={positionOrRange !== "range"}
+                        // disabled={positionOrRange !== "range"}
                       />
                     </FormControl>
                   </Grid>
