@@ -91,6 +91,8 @@ const ProteinList = props => {
   const handleModifySearch = () => {
     if (searchId === "gs") {
       props.history.push(routeConstants.globalSearchResult + query.term);
+    } else if (searchId === "sups") {
+      props.history.push(routeConstants.superSearch + id);
     } else if (quickSearch[searchId] !== undefined) {
       const basename = GLYGEN_BASENAME === "/" ? "" : GLYGEN_BASENAME;
       window.location =
@@ -131,6 +133,7 @@ const ProteinList = props => {
             <ProteinQuerySummary
               data={query}
               question={quickSearch[searchId]}
+              searchId={searchId}
               timestamp={timestamp}
               onModifySearch={handleModifySearch}
             />

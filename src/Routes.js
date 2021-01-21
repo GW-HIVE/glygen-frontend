@@ -31,6 +31,7 @@ import ProtVista from "./pages/ProtVista";
 import MotifList from "./pages/MotifList";
 import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
+import SuperSearch from "./pages/SuperSearch";
 
 /**
  * Defines route path for Glygen. Use routeConstants from routeConstants.json.
@@ -121,6 +122,8 @@ const Routes = props => (
       component={QuickSearch}
     />
     <Route path={routeConstants.quickSearch} component={QuickSearch} />
+    <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
+    <Route path={routeConstants.superSearch} component={SuperSearch} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
     <Route path={routeConstants.default} component={Home} />
