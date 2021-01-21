@@ -485,9 +485,9 @@
       },
       "site": {
         "name": "Site",
-        "shortName": "Site",
+        "shortName": "Position",
         "tooltip": {
-          "title": "Site",
+          "title": "Position",
           "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
           "urlText": "Read more...",
           "url": "https://www.uniprot.org/"
@@ -498,23 +498,12 @@
         "name": "Range",
         "shortName": "Range",
         "tooltip": {
-          "title": "Site",
+          "title": "Range",
           "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
           "urlText": "Read more...",
           "url": "https://www.uniprot.org/"
         },
         "id": "site_range"
-      },
-      "number_range": {
-        "name": "Range",
-        "shortName": "Range",
-        "tooltip": {
-          "title": "Site",
-          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
-          "urlText": "Read more...",
-          "url": "https://www.uniprot.org/"
-        },
-        "id": "number_range"
       },
 
       "chemical_mass": {
