@@ -48,8 +48,8 @@ const SuperSearch = (props) => {
 	);
 
   useEffect(() => {
-    console.log("SuperSearch");
 	setPageLoading(true);
+	logActivity();
 	
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
@@ -136,8 +136,8 @@ const SuperSearch = (props) => {
     return (
 		<>
       <Helmet>
-				{getTitle('glycanSearch')}
-				{getMeta('glycanSearch')}
+				{getTitle('superSearch')}
+				{getMeta('superSearch')}
 			</Helmet>
 			<FeedbackWidget />
 			<div className='lander'>
