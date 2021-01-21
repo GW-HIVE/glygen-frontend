@@ -1042,6 +1042,11 @@
       }
     }
   },
+  "super_search": {
+    "common": {
+      "query": "Super search query."
+      }
+  },
   "quick_search": {
     "question_1": {
       "text": "What are the glycosyltransferases used to add the residues contained in {0} in human?",

@@ -40,8 +40,10 @@ const ProteinQuerySummary = props => {
   const title = "Protein Search Summary";
   let quickSearch = stringConstants.quick_search;
 
-  const { data, onModifySearch, timestamp } = props;
+  const { data, onModifySearch, timestamp, searchId } = props;
   const proteinStrings = stringConstants.protein.common;
+  const superSearchStrings = stringConstants.super_search.common;
+
   const {
     uniprot_canonical_ac,
     refseq_ac,
@@ -156,6 +158,12 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
+
+            {searchId && searchId === "sups" &&
+                <>
+                {superSearchStrings.query}
+                </>
+            }
 
             {mass && mass.min && (
               <Row className="summary-table-col">
