@@ -139,11 +139,6 @@ const MotifList = (props) => {
           <DownloadButton
             types={[
               {
-                display: stringConstants.download.motif_image.displayname,
-                type: "png",
-                data: "glycan_image",
-              },
-              {
                 display: stringConstants.download.motif_jsondata.displayname,
                 type: "json",
                 data: "motif_list",
