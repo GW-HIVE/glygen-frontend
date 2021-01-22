@@ -485,9 +485,9 @@
       },
       "site": {
         "name": "Site",
-        "shortName": "Site",
+        "shortName": "Position",
         "tooltip": {
-          "title": "Site",
+          "title": "Position",
           "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
           "urlText": "Read more...",
           "url": "https://www.uniprot.org/"
@@ -498,23 +498,12 @@
         "name": "Range",
         "shortName": "Range",
         "tooltip": {
-          "title": "Site",
+          "title": "Range",
           "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
           "urlText": "Read more...",
           "url": "https://www.uniprot.org/"
         },
         "id": "site_range"
-      },
-      "number_range": {
-        "name": "Range",
-        "shortName": "Range",
-        "tooltip": {
-          "title": "Site",
-          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
-          "urlText": "Read more...",
-          "url": "https://www.uniprot.org/"
-        },
-        "id": "number_range"
       },
 
       "chemical_mass": {
@@ -1042,6 +1031,11 @@
       }
     }
   },
+  "super_search": {
+    "common": {
+      "query": "Super search query."
+      }
+  },
   "quick_search": {
     "question_1": {
       "text": "What are the glycosyltransferases used to add the residues contained in {0} in human?",
@@ -1232,6 +1226,11 @@
       "id": "idMappingError",
       "title": "ID Mapping Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+    },
+      "superSearchError": {
+      "id": "superSearchError",
+      "title": "Super Search Error - Enter Valid Input",
+      "message": "Sorry, we couldn't process search request. Please enter valid input."
     },
     "defaultTextAlert": {
       "id": "defaultTextAlert",

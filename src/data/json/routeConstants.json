@@ -32,6 +32,7 @@
   "motifDetail": "/motif/",
   "idMapping": "/id-mapping/",
   "idMappingResult": "/id-mapping-result/",
+  "superSearch": "/super-search/",
   "home": "/home/",
   "default": "/"
 }

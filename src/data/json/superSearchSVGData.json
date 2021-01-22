@@ -1,0 +1,237 @@
+{
+	"nodes": [
+        {
+			"id": "species",
+			"name": "Organism",
+			"xCord": 50,
+			"yCord": 50
+        },
+        {
+			"id": "gene",
+			"name": "Gene",
+			"xCord": 50,
+			"yCord": 250
+        },
+        {	
+			"id": "glycan",
+			"name": "Glycan",
+			"xCord": 430,
+			"yCord": 250
+        },
+        {
+			"id": "protein",
+			"name": "Protein",
+			"xCord": 430,
+			"yCord": 450
+        },
+        {
+			"id": "disease",
+			"name": "Disease",
+			"xCord": 50,
+			"yCord": 450
+		},
+		{
+			"id": "motif",
+			"name": "Motif",
+			"xCord": 430,
+			"yCord": 50
+		},
+		{
+			"id": "enzyme",
+			"name": "Enzyme",
+			"xCord": 810,
+			"yCord": 450
+		},
+		{
+			"id": "site",
+			"name": "Site",
+			"xCord": 810,
+			"yCord": 250
+		}
+	],
+	"links": [{
+			"source": "species",
+			"target": "gene",
+            "linkName": "has",
+            "xCord": 90,
+            "yCord": 144,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "gene",
+			"target": "disease",
+            "linkName": "related",
+            "xCord": 90,
+            "yCord": 344,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "protein",
+			"target": "glycan",
+            "linkName": "binding",
+            "xCord": 470,
+            "yCord": 344,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+        {
+			"source": "species",
+			"target": "protein",
+            "linkName": "has",
+            "xCord": 325,
+            "yCord": 240,
+            "rotate": 45,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "species",
+			"target": "glycan",
+            "linkName": "has",
+            "xCord": 345,
+            "yCord": 152,
+            "rotate": 25,
+            "dasharray": 0,
+            "sourceOffset": -10,
+            "targetOffset": 10 
+        },
+        {
+			"source": "disease",
+			"target": "protein",
+            "linkName": "related",
+            "xCord": 300,
+            "yCord": 435,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+        },
+        {
+			"source": "gene",
+			"target": "protein",
+            "linkName": "encodes",
+            "xCord": 315,
+            "yCord": 334,
+            "rotate": 30,
+            "dasharray": 0,
+            "sourceOffset": -10,
+            "targetOffset": 10
+        },
+		{
+			"source": "glycan",
+			"target": "motif",
+            "linkName": "has",
+            "xCord": 470,
+            "yCord": 144,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+			"source": "glycan",
+			"target": "site",
+            "linkName": "may-have",
+            "xCord": 680,
+            "yCord": 235,
+            "rotate": 0,
+            "dasharray": 10,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+            "source": "enzyme",
+			"target": "glycan",
+            "linkName": "synthesizes",
+            "xCord": 645,
+            "yCord": 305,
+            "rotate": 28,
+            "dasharray": 0,
+            "sourceOffset": 10,
+            "targetOffset": -10
+        },
+        {
+			"source": "protein",
+			"target": "enzyme",
+            "linkName": "is-a",
+            "xCord": 680,
+            "yCord": 435,
+            "rotate": 0,
+            "dasharray": 0,
+            "sourceOffset": 0,
+            "targetOffset": 0
+		},
+		{
+            "source": "protein",
+			"target": "site",
+            "linkName": "has",
+            "xCord": 735,
+            "yCord": 305,
+            "rotate": -28,
+            "dasharray": 0,
+            "sourceOffset": 5,
+            "targetOffset": -5
+        }
+    ],
+    "oplist": [
+        {
+            "id": "$eq",
+			"name": "="
+        },
+        {
+            "id": "$gt",
+			"name": ">"
+        },
+        {
+            "id": "$gte",
+			"name": ">="
+        },
+        {
+            "id": "$lt",
+			"name": "<"
+        },
+        {
+            "id": "$lte",
+			"name": "<="
+        },
+        {
+            "id": "$ne",
+			"name": "!="
+        },
+        {
+            "id": "$regex",
+			"name": "regex"
+        }
+    ],
+    "aggregators": [
+        {
+            "id": "$and",
+            "name": "And"
+        },
+        {
+            "id": "$or",
+            "name": "Or"
+        },
+        {
+            "id": "$nand",
+            "name": "Nand"
+        },
+        {
+            "id": "$nor",
+            "name": "Nor"
+        }
+    ],
+    "fieldTypes":{
+        "string": "string_value",
+        "number": "numeric_value"
+    }
+  }

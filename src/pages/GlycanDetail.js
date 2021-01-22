@@ -334,7 +334,7 @@ const GlycanDetail = props => {
     },
 
     {
-      dataField: "position",
+      dataField: "start_pos",
       text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
@@ -343,8 +343,13 @@ const GlycanDetail = props => {
       formatter: (value, row) =>
         value ? (
           <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-              {row.residue} {row.position}
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue} {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue} {row.end_pos}
+                </>
+              )}
             </Link>
           </LineTooltip>
         ) : (

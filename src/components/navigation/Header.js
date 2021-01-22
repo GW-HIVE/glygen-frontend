@@ -177,6 +177,9 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.siteSearch}>
                   Site Search
                 </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={routeConstants.superSearch}>
+                  Super Search
+                </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
                   List of Motifs
                 </NavDropdown.Item>

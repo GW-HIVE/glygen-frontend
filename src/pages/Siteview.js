@@ -96,7 +96,7 @@ const SequenceLocationViewer = ({
 
   const getHighlightClassname = (reducedAnnotations, position) => {
     const match = reducedAnnotations.find(
-      annotation => annotation.position === position
+      annotation => annotation.start_pos === position
     );
 
     if (match) {
@@ -120,7 +120,7 @@ const SequenceLocationViewer = ({
   useEffect(() => {
     const reducedAnnotations = annotations.reduce((all, current) => {
       const result = [...all];
-      const atPosition = all.find(x => x.position === current.position);
+      const atPosition = all.find(x => x.position === current.start_pos);
 
       if (!atPosition) {
         const item = { ...current, allTypes: [current.typeAnnotate] };
@@ -299,7 +299,7 @@ const Siteview = ({ position }) => {
       dataAnnotations = [
         ...dataAnnotations,
         ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
-          position: glycosylation.position,
+          position: detailData.start_pos,
           type: glycosylation.type.split("-")[0],
           label: glycosylation.residue + "Glycosylation",
           glytoucan_ac: glycosylation.glytoucan_ac,
@@ -320,7 +320,7 @@ const Siteview = ({ position }) => {
         ...detailData.site_annotation
           .sort(sortByStartPos)
           .map(site_annotation => ({
-            position: site_annotation.start_pos,
+            position: detailData.start_pos,
             type: site_annotation.annotation.split("-")[0].toUpperCase(),
             typeAnnotate: "Sequon"
           }))
@@ -335,7 +335,7 @@ const Siteview = ({ position }) => {
       dataAnnotations = [
         ...dataAnnotations,
         ...detailData.snv.sort(sortByStartPos).map(snv => ({
-          position: snv.start_pos,
+          position: detailData.start_pos,
           label: "Mutation",
           evidence: snv.evidence,
           typeAnnotate: "SNV"

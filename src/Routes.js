@@ -33,6 +33,7 @@ import MotifDetail from "./pages/MotifDetail";
 import Siteview from "./pages/Siteview";
 import IdMapping from "./pages/IdMapping";
 import idMappingResult from "./pages/IdMappingResult";
+import SuperSearch from "./pages/SuperSearch";
 
 /**
  * Defines route path for Glygen. Use routeConstants from routeConstants.json.
@@ -85,6 +86,8 @@ const Routes = (props) => (
     <Route path={routeConstants.idMapping} component={IdMapping} />
     <Route path={`${routeConstants.idMappingResult}:id`} component={idMappingResult} />
     <Route path={routeConstants.idMappingResult} component={idMappingResult} />
+    <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
+    <Route path={routeConstants.superSearch} component={SuperSearch} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
     <Route path={routeConstants.default} component={Home} />
