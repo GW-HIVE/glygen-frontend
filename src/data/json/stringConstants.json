@@ -1471,6 +1471,16 @@
       "id": "motif_csvdata",
       "displayname": "Motif data (*.csv)",
       "tooltip": "motif_csvdata Information for selected accession"
+    },
+    "idmapping_mapped_csvdata": {
+      "id": "mapped_csvdata",
+      "displayname": "Mapped data (*.csv)",
+      "tooltip": "mapped_csvdata ID mapping information for mapped ID"
+    },
+    "idmapping_unmapped_csvdata": {
+      "id": "unmapped_csvdata",
+      "displayname": "Unmapped data (*.csv)",
+      "tooltip": "unmapped_csvdata ID mapping information for unmapped ID"
     }
   },
   "id_mapping": {

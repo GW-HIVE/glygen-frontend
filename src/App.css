@@ -462,6 +462,11 @@ hr {
   align-items: center;
   flex-wrap: wrap;
 }
+.gg-align-middle-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .nowrap {
   white-space: nowrap !important;
 }
@@ -472,6 +477,10 @@ hr {
   float: right;
   padding-right: 5%;
   padding-left: 5%;
+  color: #2e78b7;
+}
+.id-mapping-go-to-top {
+  float: right;
   color: #2e78b7;
 }
 

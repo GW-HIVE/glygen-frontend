@@ -1,8 +1,10 @@
-import { postTo, postFormDataTo } from "./api";
+import { postTo, postFormDataTo, postToAndGetBlob } from "./api";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import stringConstants from "./json/stringConstants";
+import { logActivity } from "../data/logging";
+
 const unmappedStrings = stringConstants.id_mapping.common.unmapped;
 
 // Performs dropdown selections: Molecules, From ID Type, To ID Type
@@ -13,30 +15,45 @@ export const getMappingInit = () => {
 
 // Forms objects and displays data in a results (list) page
 // Takes selections and inputs in search page and performs search on submit btn
-export const getMappingSearch = formObject => {
+export const getMappingSearch = (formObject) => {
   // var json = "query=" + JSON.stringify(formObject);
   const url = "/idmapping/search"; //+ json;
   return postFormDataTo(url, formObject);
 };
 
-export const getMappingList = mappingId => {
+export const getMappingList = (mappingId) => {
   const queryParams = {
     id: mappingId,
-    category: "mapped"
+    category: "mapped",
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/idmapping/list/?query=${queryParamString}`;
   return postTo(url);
 };
 
-export const getMappingListUnmapped = mappingId => {
+export const getMappingListUnmapped = (mappingId) => {
   const queryParams = {
     id: mappingId,
-    category: "unmapped"
+    category: "unmapped",
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/idmapping/list/?query=${queryParamString}`;
   return postTo(url);
+};
+
+export const getIdMappingMappedDownload = (id, format, compressed, type, headers) => {
+  let message = "idMapping mapped downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
+};
+export const getIdMappingUnmappedDownload = (id, format, compressed, type, headers) => {
+  let message = "idMapping unmapped downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
 };
 
 export const ID_MAP_REASON = [
@@ -44,11 +61,11 @@ export const ID_MAP_REASON = [
     dataField: unmappedStrings.input_id.shortName,
     text: unmappedStrings.input_id.name,
     sort: true,
-    selected: true
+    selected: true,
   },
   {
     dataField: unmappedStrings.reason.shortName,
     text: unmappedStrings.reason.name,
-    sort: true
-  }
+    sort: true,
+  },
 ];

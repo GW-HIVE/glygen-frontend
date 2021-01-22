@@ -6,36 +6,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ID_MAP_REASON, getMappingList, getMappingListUnmapped } from "../data/mapping";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
-// import DownloadButton from "../components/DownloadButton";
+import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
-import { Row } from "react-bootstrap";
-import { Grid } from "@material-ui/core";
 import Button from "react-bootstrap/Button";
 import routeConstants from "../data/json/routeConstants";
 import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
+import IdMappingQuerySummary from "../components/IdMappingQuerySummary";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+
 const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
   let { id } = useParams();
 
   const [data, setData] = useState([]);
-  const [dataReason, setDataReason] = useState([]);
+  const [dataUnmap, setDataUnmap] = useState([]);
   const [legends, setLegends] = useState([]);
-  const [legendsReason, setLegendsReason] = useState([]);
   const [pagination, setPagination] = useState([]);
-  const [paginationReason, setPaginationReason] = useState([]);
-  const [idMapReason, setIdMapReason] = useState(ID_MAP_REASON);
+  const [paginationUnmap, setPaginationUnmap] = useState([]);
+  const [idMapUnmap, setIdMapUnmap] = useState(ID_MAP_REASON);
+  const [query, setQuery] = useState([]);
+  const [timestamp, setTimeStamp] = useState();
   const [page, setPage] = useState(1);
   const [pageUnmap, setPageUnmap] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [sizePerPageUnmap, setSizePerPageUnmap] = useState(20);
   const [totalSize, setTotalSize] = useState();
-  const [totalSizeReason, setTotalSizeReason] = useState();
+  const [totalSizeUnmap, setTotalSizeUnmap] = useState();
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -54,6 +56,8 @@ const IdMappingResult = (props) => {
         } else {
           setData(data.results);
           setLegends(data.cache_info.legends);
+          setQuery(data.cache_info.query);
+          setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
@@ -72,12 +76,13 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setLegendsReason(data.cache_info.legends);
-          setDataReason(data.results);
-          setPaginationReason(data.pagination);
+          setDataUnmap(data.results);
+          setQuery(data.cache_info.query);
+          setTimeStamp(data.cache_info.ts);
+          setPaginationUnmap(data.pagination);
           const currentPage = (data.pagination.offset - 1) / sizePerPageUnmap + 1;
           setPageUnmap(currentPage);
-          setTotalSizeReason(data.pagination.total_length);
+          setTotalSizeUnmap(data.pagination.total_length);
           setPageLoading(false);
         }
       })
@@ -104,6 +109,7 @@ const IdMappingResult = (props) => {
         if (!data.error_code) {
           setLegends(data.cache_info.legends);
           setData(data.results);
+          setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);
           setTotalSize(data.pagination.total_length);
           setPage(page);
@@ -117,7 +123,7 @@ const IdMappingResult = (props) => {
     type,
     { pageUnmap, sizePerPageUnmap, sortField, sortOrder }
   ) => {
-    dataReason.sort((a, b) => {
+    dataUnmap.sort((a, b) => {
       if (a[sortField] > b[sortField]) {
         return sortOrder === "asc" ? 1 : -1;
       } else if (a[sortField] < b[sortField]) {
@@ -135,10 +141,10 @@ const IdMappingResult = (props) => {
     ).then(({ data }) => {
       // place to change values before rendering
       if (!data.error_code) {
-        setLegendsReason(data.cache_info.legends);
-        setDataReason(data.results);
-        setPaginationReason(data.pagination);
-        setTotalSizeReason(data.pagination.total_length);
+        setDataUnmap(data.results);
+        setTimeStamp(data.cache_info.ts);
+        setPaginationUnmap(data.pagination);
+        setTotalSizeUnmap(data.pagination.total_length);
         setPageUnmap(pageUnmap);
         setSizePerPageUnmap(sizePerPageUnmap);
       }
@@ -217,26 +223,34 @@ const IdMappingResult = (props) => {
             setAlertDialogInput({ show: input });
           }}
         />
-
-        <div className="content-box-md">
-          <Row>
-            <Grid item xs={12} sm={12} className="text-center">
-              <div className="horizontal-heading">
-                <h2>
-                  {idMappingData.pageTitleIdMapResult}{" "}
-                  <strong>{idMappingData.pageTitleIdMapResultBold}</strong>
-                </h2>
-              </div>
-            </Grid>
-          </Row>
-        </div>
+        <div id="To-Top"></div>
+        <section className="content-box-md">
+          {query && (
+            <IdMappingQuerySummary
+              data={query}
+              totalSize={totalSize}
+              totalSizeUnmap={totalSizeUnmap}
+              timestamp={timestamp}
+              onModifySearch={handleModifySearch}
+            />
+          )}
+        </section>
+        <div id="Mapped-Table"></div>
         <section>
-          {/* Button */}
-          <div className="text-right mb-4">
-            <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
-              Modify Request
-            </Button>
-          </div>
+          <DownloadButton
+            types={[
+              {
+                display: stringConstants.download.idmapping_mapped_csvdata.displayname,
+                type: "csv",
+                data: "idmapping_list_mapped",
+              },
+            ]}
+            dataId={id}
+            itemType="idMappingMapped"
+          />
+        </section>
+
+        <section>
           {/* Mapped Table */}
           <PaginatedTable
             data={data}
@@ -257,20 +271,43 @@ const IdMappingResult = (props) => {
               Modify Request
             </Button>
           </div>
+          <br />
+          <div className="id-mapping-go-to-top">
+            <a href="#To-Top">
+              to Top
+              <span>
+                <ArrowUpwardIcon />
+              </span>
+            </a>
+          </div>
         </section>
-        <div className="content-box-md">
+        <div id="Unmapped-Table"></div>
+        <div className="content-box-sm">
           <h1 className="page-heading">{idMappingData.pageTitleIdMapReason}</h1>
         </div>
         <section>
+          <DownloadButton
+            types={[
+              {
+                display: stringConstants.download.idmapping_unmapped_csvdata.displayname,
+                type: "csv",
+                data: "idmapping_list_unmapped",
+              },
+            ]}
+            dataId={id}
+            itemType="idMappingUnmapped"
+          />
+        </section>
+        <section>
           {/* Unmapped Table */}
           <PaginatedTable
-            data={dataReason}
-            columns={idMapReason}
+            data={dataUnmap}
+            columns={idMapUnmap}
             page={pageUnmap}
             sizePerPage={sizePerPageUnmap}
-            totalSize={totalSizeReason}
+            totalSize={totalSizeUnmap}
             onTableChange={handleTableChangeUnmapped}
-            pagination={paginationReason}
+            pagination={paginationUnmap}
             defaultSortField="input_id"
             defaultSortOrder="asc"
             noDataIndication={"No data available."}
@@ -282,6 +319,15 @@ const IdMappingResult = (props) => {
             </Button>
           </div>
         </section>
+        <br />
+        <div className="id-mapping-go-to-top">
+          <a href="#To-Top">
+            to Top
+            <span>
+              <ArrowUpwardIcon />
+            </span>
+          </a>
+        </div>
       </Container>
     </>
   );

@@ -14,22 +14,24 @@ import SelectControl from "./select/SelectControl";
 import { getProteinDownload } from "../data/protein";
 import { getGlycanDownload } from "../data/glycan";
 import { getMotifDownload } from "../data/motif";
+import { getIdMappingMappedDownload } from "../data/mapping";
+import { getIdMappingUnmappedDownload } from "../data/mapping";
 
-const BootstrapInput = withStyles(theme => ({
+const BootstrapInput = withStyles((theme) => ({
   root: {
     "label + &": {
-      marginTop: theme.spacing(3)
-    }
+      marginTop: theme.spacing(3),
+    },
   },
   input: {
     borderRadius: 4,
     minWidth: "40px",
     border: "1px solid #ced4da",
-    padding: "7px 26px 7px 12px"
-  }
+    padding: "7px 26px 7px 12px",
+  },
 }))(InputBase);
 
-const DownloadButton = props => {
+const DownloadButton = (props) => {
   const { types, dataId, itemType = "glycan" } = props;
 
   const [itemTypeResolver] = useState(() => {
@@ -40,6 +42,10 @@ const DownloadButton = props => {
         return getMotifDownload;
       case "protein":
         return getProteinDownload;
+      case "idMappingMapped":
+        return getIdMappingMappedDownload;
+      case "idMappingUnmapped":
+        return getIdMappingUnmappedDownload;
       default:
     }
     return null;
@@ -51,15 +57,9 @@ const DownloadButton = props => {
   const [compressed, setCompressed] = useState(props.compressed || false);
 
   const handleDownload = async () => {
-    const dataType = types.find(typeItem => typeItem.type === format).data;
+    const dataType = types.find((typeItem) => typeItem.type === format).data;
 
-    await downloadFromServer(
-      dataId,
-      format,
-      compressed,
-      dataType,
-      itemTypeResolver
-    );
+    await downloadFromServer(dataId, format, compressed, dataType, itemTypeResolver);
 
     setShow(false);
   };
@@ -89,9 +89,7 @@ const DownloadButton = props => {
       </Link>
       <div
         style={{ padding: "15px" }}
-        className={
-          "dropdown-menu dropdown-menu-right" + (show ? " open show" : "")
-        }
+        className={"dropdown-menu dropdown-menu-right" + (show ? " open show" : "")}
         aria-labelledby="download"
       >
         <Row>
@@ -103,7 +101,7 @@ const DownloadButton = props => {
                 float: "right",
                 border: "none",
                 backgroundColor: "inherit",
-                padding: "0"
+                padding: "0",
               }}
               onClick={() => {
                 clearForm();
@@ -131,10 +129,10 @@ const DownloadButton = props => {
                   <SelectControl
                     fullWidth
                     inputValue={format}
-                    menu={types.map(typeItem => {
+                    menu={types.map((typeItem) => {
                       return { id: typeItem.type, name: typeItem.display };
                     })}
-                    setInputValue={value => {
+                    setInputValue={(value) => {
                       setFormat(value);
                     }}
                   />
@@ -147,9 +145,7 @@ const DownloadButton = props => {
           <Col
           // xs={ 7 } sm={ 7 }
           >
-            <strong style={{ whiteSpace: "nowrap" }}>
-              Compress file (*.gzip):
-            </strong>
+            <strong style={{ whiteSpace: "nowrap" }}>Compress file (*.gzip):</strong>
           </Col>
           <Col
             // xs={ 5 } sm={ 5 }
@@ -160,7 +156,7 @@ const DownloadButton = props => {
               type="checkbox"
               id="download_compression"
               checked={compressed}
-              onClick={e => {
+              onClick={(e) => {
                 setCompressed(e.target.checked);
               }}
             />
