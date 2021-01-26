@@ -120,7 +120,7 @@ const SequenceLocationViewer = ({
   useEffect(() => {
     const reducedAnnotations = annotations.reduce((all, current) => {
       const result = [...all];
-      const atPosition = all.find(x => x.position === current.start_pos);
+      const atPosition = all.find(x => x.position === current.position);
 
       if (!atPosition) {
         const item = { ...current, allTypes: [current.typeAnnotate] };
@@ -135,7 +135,8 @@ const SequenceLocationViewer = ({
     setFilteredAnnotations(reducedAnnotations);
 
     const current = reducedAnnotations.find(
-      x => x.position === parseInt(position, 10)
+      x => parseInt(x.position, 10) === parseInt(position, 10)
+      //x => x.position === parseInt(position, 10)
     );
 
     setCurrentAnnotationIndex(reducedAnnotations.indexOf(current));
@@ -303,8 +304,8 @@ const Siteview = ({ position }) => {
           type: glycosylation.type.split("-")[0],
           label: glycosylation.residue + "Glycosylation",
           glytoucan_ac: glycosylation.glytoucan_ac,
-
           evidence: glycosylation.evidence,
+          residue: glycosylation.residue,
           typeAnnotate: glycosylation.type.split("-")[0] + "-" + "Glycosylation"
         }))
       ];
@@ -322,7 +323,8 @@ const Siteview = ({ position }) => {
           .map(site_annotation => ({
             position: detailData.start_pos,
             type: site_annotation.annotation.split("-")[0].toUpperCase(),
-            typeAnnotate: "Sequon"
+            typeAnnotate: "Sequon",
+            residue: site_annotation.residue
           }))
       ];
     }
@@ -336,24 +338,25 @@ const Siteview = ({ position }) => {
         ...dataAnnotations,
         ...detailData.snv.sort(sortByStartPos).map(snv => ({
           position: detailData.start_pos,
-          label: "Mutation",
+          label: "SNV",
           evidence: snv.evidence,
+          residue: snv.residue,
           typeAnnotate: "SNV"
         }))
       ];
     }
 
-    // if (detailData.mutagenesis) {
-    //   dataAnnotations = [
-    //     ...dataAnnotations,
-    //     ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
-    //       position: mutagenesis.start_pos,
-    //       label: "Mutagenesis",
-    //       evidence: mutagenesis.evidence,
-    //       typeAnnotate: "Mutagenesis"
-    //     }))
-    //   ];
-    // }
+    if (detailData.mutagenesis) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
+          position: mutagenesis.start_pos,
+          label: "Mutagenesis",
+          evidence: mutagenesis.evidence,
+          typeAnnotate: "Mutagenesis"
+        }))
+      ];
+    }
 
     const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
       ...annotation,
@@ -390,6 +393,7 @@ const Siteview = ({ position }) => {
             position: site.start_pos,
             type: pickLabel(siteType.type),
             typeAnnotate: siteType.type,
+
             key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
             character: getSequenceCharacter(site.start_pos)
           }))
@@ -476,7 +480,18 @@ const Siteview = ({ position }) => {
           color: "white",
           width: "12%"
         };
-      }
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+              {row.residue}
+              {row.position}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     },
     {
       dataField: "evidence",
