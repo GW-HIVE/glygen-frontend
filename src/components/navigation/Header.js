@@ -20,19 +20,22 @@ import {
   GLYGEN_BETA,
   GLYGEN_DATA,
   GLYGEN_SPARQL,
-  GLYGEN_ENV
+  GNOME_BROWSER,
+  GLYCOMOTIF_WIKI,
+  GLYGEN_SANDBOX,
+  GLYGEN_ENV,
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
 import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   navbarText: {
     color: "#2f78b7 !important",
     fontWeight: "600",
     "&:hover": {
-      color: "#57affa !important"
-    }
-  }
+      color: "#57affa !important",
+    },
+  },
   // betaWatermark: {
   // 	position: "absolute",
   // 	backgroundSize: "top",
@@ -58,7 +61,7 @@ export default function Header(props) {
             ? {
                 backgroundImage: `url(${betaWatermarkImg})`,
                 backgroundRepeat: "space",
-                backgroundPosition: "center"
+                backgroundPosition: "center",
               }
             : {}
         }
@@ -71,10 +74,7 @@ export default function Header(props) {
             <div className="mr-4">
               {/* <Navbar.Text
 								as={Link} */}
-              <Link
-                to={routeConstants.privacySettings}
-                className={classes.navbarText}
-              >
+              <Link to={routeConstants.privacySettings} className={classes.navbarText}>
                 <span>
                   <PersonIcon />
                 </span>{" "}
@@ -140,18 +140,11 @@ export default function Header(props) {
         <Navbar.Brand as={Link} to={routeConstants.home}>
           <img src={logo} alt="Glygen" className="logo-nav" />
         </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          className="navbar-dark"
-        />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-dark" />
         <Navbar.Collapse className="gg-blue" id="basic-navbar-nav">
-          <Col xs={12} sm={12} md={12} xl={8}>
+          <Col xs={12} sm={12} md={12} lg={12} xl={8} className="mr-3">
             <Nav>
-              <Nav.Link
-                className="gg-nav-link"
-                as={NavLink}
-                to={routeConstants.home}
-              >
+              <Nav.Link className="gg-nav-link" as={NavLink} to={routeConstants.home}>
                 HOME
               </Nav.Link>
               <NavDropdown
@@ -168,10 +161,7 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.glycanSearch}>
                   Glycan Search
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={NavLink}
-                  to={routeConstants.proteinSearch}
-                >
+                <NavDropdown.Item as={NavLink} to={routeConstants.proteinSearch}>
                   Protein Search
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.siteSearch}>
@@ -184,45 +174,43 @@ export default function Header(props) {
                   List of Motifs
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link
-                className="gg-nav-link"
-                as={NavLink}
-                to={routeConstants.quickSearch}
-              >
+              <Nav.Link className="gg-nav-link" as={NavLink} to={routeConstants.quickSearch}>
                 QUICK&nbsp;SEARCH
               </Nav.Link>
-              <Nav.Link
-                className="gg-nav-link"
-                as={NavLink}
-                to={routeConstants.tryMe}
-              >
+              <Nav.Link className="gg-nav-link" as={NavLink} to={routeConstants.tryMe}>
                 TRY&nbsp;ME
               </Nav.Link>
-              <NavDropdown
-                className="gg-dropdown-navbar"
-                title="DATA"
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item
-                  href={GLYGEN_DATA}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              <NavDropdown className="gg-dropdown-navbar" title="DATA" id="basic-nav-dropdown">
+                <NavDropdown.Item href={GLYGEN_DATA} target="_blank" rel="noopener noreferrer">
                   Data
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  href={GLYGEN_API}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <NavDropdown.Item href={GLYGEN_API} target="_blank" rel="noopener noreferrer">
                   API
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  href={GLYGEN_SPARQL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <NavDropdown.Item href={GLYGEN_SPARQL} target="_blank" rel="noopener noreferrer">
                   SPARQL
+                </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown
+                className={
+                  location.pathname === routeConstants.idMapping
+                    ? "gg-dropdown-navbar gg-dropdown-navbar-active"
+                    : "gg-dropdown-navbar"
+                }
+                title="TOOLS"
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item href={GLYCOMOTIF_WIKI} target="_blank" rel="noopener noreferrer">
+                  GlycoMotif Wiki
+                </NavDropdown.Item>
+                <NavDropdown.Item href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
+                  GlyGen SandBox
+                </NavDropdown.Item>
+                <NavDropdown.Item href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
+                  GNOME Subsumption Browser
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
+                  ID Mapping
                 </NavDropdown.Item>
               </NavDropdown>
               <NavDropdown
@@ -270,13 +258,10 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.frameworks}>
                   Frameworks
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
-                  ID Mapping
-                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Col>
-          <Col xs={12} sm={12} md={12} xl={4}>
+          <Col xs={12} sm={12} md={12} lg={12} xl={4}>
             <GlobalSearchControl />
           </Col>
         </Navbar.Collapse>
