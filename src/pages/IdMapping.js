@@ -280,7 +280,7 @@ const IdMapping = (props) => {
       fileInputRef.current.files[0]
     );
     logActivity("user", id, "Performing ID Mapping Search");
-    let message = "ID Mapping Search quercy=" + JSON.stringify(formObject);
+    let message = "ID Mapping Search query=" + JSON.stringify(formObject);
     getMappingSearch(formObject)
       .then((response) => {
         if (response.data["list_id"] !== "") {
