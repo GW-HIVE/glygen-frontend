@@ -2,6 +2,7 @@
   "glycanListEdit": "/glycan-list-edit/",
   "glycanList": "/glycan-list/",
   "proteinList": "/protein-list/",
+  "siteList": "/site-list/",
   "glycanSearch": "/glycan-search/",
   "compositionSearch": "/glycan-search#Composition-Search",
   "proteinSearch": "/protein-search/",

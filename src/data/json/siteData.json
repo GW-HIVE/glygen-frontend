@@ -143,18 +143,24 @@
           "name": "Glycosylation"
         },
         {
-          "id": "mutation",
-          "name": "Mutation"
+          "id": "snv",
+          "name": "SNV"
         },
         {
           "id": "phosporylation",
           "name": "Phosporylation"
+        },
+        {
+          "id": "mutagenesis",
+          "name": "Mutagenesis"
         }
       ]
     },
     "operator_list": {
       "placeholder": "Click to select one or multiple Amino Acids",
-      "operations": [
+      "placeholderId": "",
+      "placeholderName": "",
+      "menu": [
         {
           "id": "or",
           "name": "Or"

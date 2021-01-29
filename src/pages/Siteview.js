@@ -275,6 +275,7 @@ const Siteview = ({ position }) => {
   useEffect(() => {
     logActivity("user", id);
     const getProteinsiteDetailData = getProteinsiteDetail(id, selectedPosition);
+
     getProteinsiteDetailData.then(({ data }) => {
       if (data.code) {
         let message = "Detail api call";

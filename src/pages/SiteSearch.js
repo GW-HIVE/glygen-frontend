@@ -8,6 +8,7 @@ import SiteSearchControl from "../components/search/SiteSearchControl";
 import { Tab, Tabs, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import "../css/Search.css";
+import { getSuperSearch, getSuperSearchList } from "../data/supersearch";
 import siteData from "../data/json/siteData";
 import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
@@ -24,6 +25,7 @@ const SiteSearch = props => {
   let { id } = useParams("");
   const [proActTabKey, setProActTabKey] = useState("Site-Search");
   const [pageLoading, setPageLoading] = useState(false);
+  const [queryData, setQueryData] = useState([]);
   const [alertTextInput, setAlertTextInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
@@ -32,6 +34,24 @@ const SiteSearch = props => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+
+  // useEffect(() => {
+  //   console.log("SuperSearch");
+  //   setPageLoading(true);
+
+  //   getSuperSearchList(id, 1)
+  //     .then(({ data }) => {
+  //       logActivity("user", id, "Search modification initiated");
+  //       setQueryData(data.cache_info.query);
+
+  //       setPageLoading(false);
+  //     })
+  //     .catch(function(error) {
+  //       let message = "list api call";
+  //       axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+  //     });
+  // }, []);
+
   return (
     <>
       <Helmet>
@@ -60,6 +80,7 @@ const SiteSearch = props => {
             onSelect={key => setProActTabKey(key)}
           >
             <Tab
+              key="tutorial"
               eventKey="Tutorial"
               title={siteData.tutorial.tabTitle}
               className="tab-content-padding"
@@ -69,9 +90,10 @@ const SiteSearch = props => {
               </Container>
             </Tab>
             <Tab
+              key="search"
               eventKey="Site-Search"
               className="tab-content-padding"
-              title={siteData.tabTitle}
+              title={siteData.site_search.tabTitle}
             >
               <TextAlert alertInput={alertTextInput} />
               <Container className="tab-content-border">

@@ -92,8 +92,8 @@
           "name": "Glycosylation"
         },
         {
-          "id": "mutation",
-          "name": "Mutation"
+          "id": "snv",
+          "name": "SNV"
         },
         {
           "id": "phosporylation",
