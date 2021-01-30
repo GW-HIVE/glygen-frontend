@@ -62,7 +62,7 @@ const IdMappingQuerySummary = (props) => {
               <Col align="left" xs={6} sm={6} md={6} lg={6}>
                 <LineTooltip text="Mapped ID Table">
                   <a className="media-wiki-icon" href="#Mapped-Table">
-                    {totalSize} <TableArowDown className="ml-1" />
+                    {totalSize ? totalSize : "0"} <TableArowDown className="ml-1" />
                   </a>
                 </LineTooltip>
               </Col>
@@ -74,7 +74,7 @@ const IdMappingQuerySummary = (props) => {
               <Col align="left" xs={6} sm={6} md={6} lg={6}>
                 <LineTooltip text="Unmapped ID Table">
                   <a className="media-wiki-icon" href="#Unmapped-Table">
-                    {totalSizeUnmap} <TableArowDown className="ml-1" />
+                    {totalSizeUnmap ? totalSizeUnmap : "0"} <TableArowDown className="ml-1" />
                   </a>
                 </LineTooltip>
               </Col>
