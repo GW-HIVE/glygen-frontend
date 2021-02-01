@@ -23,7 +23,6 @@ const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
   let { id } = useParams();
-
   const [data, setData] = useState([]);
   const [dataUnmap, setDataUnmap] = useState([]);
   const [legends, setLegends] = useState([]);
@@ -69,7 +68,7 @@ const IdMappingResult = (props) => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
-    getMappingListUnmapped(id, "unmapped")
+    getMappingList(id, "unmapped", 1, 20, "input_id")
       .then(({ data }) => {
         if (data.error_code) {
           let message = "list api call";
@@ -80,8 +79,8 @@ const IdMappingResult = (props) => {
           setQuery(data.cache_info.query);
           setTimeStamp(data.cache_info.ts);
           setPaginationUnmap(data.pagination);
-          const currentPage = (data.pagination.offset - 1) / sizePerPageUnmap + 1;
-          setPageUnmap(currentPage);
+          const currentPageUnmap = (data.pagination.offset - 1) / sizePerPageUnmap + 1;
+          setPageUnmap(currentPageUnmap);
           setTotalSizeUnmap(data.pagination.total_length);
           setPageLoading(false);
         }
@@ -91,51 +90,40 @@ const IdMappingResult = (props) => {
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
-    data.sort((a, b) => {
-      if (a[sortField] > b[sortField]) {
-        return sortOrder === "asc" ? 1 : -1;
-      } else if (a[sortField] < b[sortField]) {
-        return sortOrder === "asc" ? -1 : 1;
-      }
-      return 0;
-    });
+  function handleTableChange(type, { page, sizePerPage, sortField, sortOrder }) {
+    setPage(page);
+    setSizePerPage(sizePerPage);
 
-    getMappingList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        // place to change values before rendering
-        if (!data.error_code) {
-          setLegends(data.cache_info.legends);
-          setData(data.results);
-          setTimeStamp(data.cache_info.ts);
-          setPagination(data.pagination);
-          setTotalSize(data.pagination.total_length);
-          setPage(page);
-          setSizePerPage(sizePerPage);
-        }
-      }
-    );
-  };
-
-  const handleTableChangeUnmapped = (
-    type,
-    { pageUnmap, sizePerPageUnmap, sortField, sortOrder }
-  ) => {
-    dataUnmap.sort((a, b) => {
-      if (a[sortField] > b[sortField]) {
-        return sortOrder === "asc" ? 1 : -1;
-      } else if (a[sortField] < b[sortField]) {
-        return sortOrder === "asc" ? -1 : 1;
-      }
-      return 0;
-    });
-
-    getMappingListUnmapped(
+    getMappingList(
       id,
-      (pageUnmap - 1) * sizePerPageUnmap + 1,
-      sizePerPageUnmap,
+      "mapped",
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
+      // if (!data.error_code) {
+      setLegends(data.cache_info.legends);
+      setData(data.results);
+      setTimeStamp(data.cache_info.ts);
+      setPagination(data.pagination);
+      setTotalSize(data.pagination.total_length);
+      // }
+    });
+  }
+
+  function handleTableChangeUnmapped(type, { page, sizePerPage, sortField, sortOrder }) {
+    setPageUnmap(page);
+    setSizePerPageUnmap(sizePerPage);
+
+    getMappingList(
+      id,
+      "unmapped",
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
       sortField,
       sortOrder
     ).then(({ data }) => {
@@ -145,11 +133,9 @@ const IdMappingResult = (props) => {
         setTimeStamp(data.cache_info.ts);
         setPaginationUnmap(data.pagination);
         setTotalSizeUnmap(data.pagination.total_length);
-        setPageUnmap(pageUnmap);
-        setSizePerPageUnmap(sizePerPageUnmap);
       }
     });
-  };
+  }
 
   const handleModifySearch = () => {
     props.history.push(routeConstants.idMapping + id);
@@ -252,19 +238,21 @@ const IdMappingResult = (props) => {
 
         <section>
           {/* Mapped Table */}
-          <PaginatedTable
-            data={data}
-            columns={idMapResultColumns}
-            page={page}
-            sizePerPage={sizePerPage}
-            totalSize={totalSize}
-            onTableChange={handleTableChange}
-            pagination={pagination}
-            defaultSortField="from"
-            defaultSortOrder="asc"
-            noDataIndication={"No data available."}
-            // rowStyle={rowStyle}
-          />
+          {idMapResultColumns && idMapResultColumns.length !== 0 && (
+            <PaginatedTable
+              data={data}
+              columns={idMapResultColumns}
+              page={page}
+              sizePerPage={sizePerPage}
+              totalSize={totalSize}
+              onTableChange={handleTableChange}
+              pagination={pagination}
+              defaultSortField="from"
+              defaultSortOrder="asc"
+              noDataIndication={"No data available."}
+            />
+          )}
+
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
@@ -300,18 +288,20 @@ const IdMappingResult = (props) => {
         </section>
         <section>
           {/* Unmapped Table */}
-          <PaginatedTable
-            data={dataUnmap}
-            columns={idMapUnmap}
-            page={pageUnmap}
-            sizePerPage={sizePerPageUnmap}
-            totalSize={totalSizeUnmap}
-            onTableChange={handleTableChangeUnmapped}
-            pagination={paginationUnmap}
-            defaultSortField="input_id"
-            defaultSortOrder="asc"
-            noDataIndication={"No data available."}
-          />
+          {idMapUnmap && idMapUnmap.length !== 0 && (
+            <PaginatedTable
+              data={dataUnmap}
+              columns={idMapUnmap}
+              page={pageUnmap}
+              sizePerPage={sizePerPageUnmap}
+              totalSize={totalSizeUnmap}
+              onTableChange={handleTableChangeUnmapped}
+              pagination={paginationUnmap}
+              defaultSortField="input_id"
+              defaultSortOrder="asc"
+              noDataIndication={"No data available."}
+            />
+          )}
           {/* Button */}
           <div className="text-right" style={{ marginTop: "48px" }}>
             <Button type="button" className="gg-btn-blue" onClick={handleModifySearch}>
