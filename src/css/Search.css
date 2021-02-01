@@ -222,17 +222,6 @@ input[type="number"] {
 }
 
 .svg-input-container {
-  width: 100%;
-  display: flex;
-  /* flex-wrap: wrap; */
-  box-sizing: border-box;
-}
-
-
-.svg-input-container1 {
-  /* width: 100%; */
-  /* display: flex; */
-  /* flex-wrap: wrap; */
   box-sizing: border-box;
   padding-bottom: 10px;
 }

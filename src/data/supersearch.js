@@ -1,14 +1,21 @@
-import { getJson, postToAndGetBlob, glycanImageUrl } from "./api";
+import { getJson } from "./api";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import routeConstants from "./json/routeConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import stringConstants from "./json/stringConstants";
-import { logActivity } from "../data/logging";
 import { Link } from "react-router-dom";
 const proteinStrings = stringConstants.protein.common;
 
+/**
+ * Gets JSON for super search list.
+ * @param {string} superSearchListId - list id.
+ * @param {number} offset - offset value.
+ * @param {number} limit - limit value.
+ * @param {string} sort - sort field.
+ * @param {string} order - order value - asc/desc.
+ */
 export const getSuperSearchList = (
   superSearchListId,
   offset = 1,
@@ -27,6 +34,7 @@ export const getSuperSearchList = (
   const url = `/supersearch/list?query=${queryParamString}`;
   return getJson(url);
 };
+
 /**
  * Gets JSON for super search init.
  */
@@ -37,7 +45,7 @@ export const getSuperSearchInit = () => {
 
 /**
  * Gets JSON for super search.
- * @param {object} formObject - glycan search JSON query object.
+ * @param {object} formObject - super search JSON query object.
  */
 export const getSuperSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);

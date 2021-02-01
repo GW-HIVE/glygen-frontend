@@ -46,3 +46,12 @@ export function sortDropdown(a, b) {
 	}
 	return 0;
 }
+
+/**
+ * Function to sort based on order.
+ * @param {object} a input value.
+ * @param {object} b input value.
+ **/
+export function sortByOrder(a, b) {
+	return a.order - b.order;
+}

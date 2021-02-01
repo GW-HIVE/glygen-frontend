@@ -26,6 +26,8 @@ export default function SelectControl(props) {
                 displayEmpty
                 name={props.name}
                 onChange={handleChange}
+                onBlur={props.onBlur}
+                error={props.error}
                 margin={props.margin}
                 variant={props.variant}
                 defaultValue={props.defaultValue}
@@ -36,7 +38,7 @@ export default function SelectControl(props) {
                 {props.placeholder && <MenuItem key={props.placeholderId} value={props.placeholderId} name={props.placeholderName}>{props.placeholder}</MenuItem>}
                 {props.menu &&
                     props.menu
-                        .sort(sortDropdown)
+                        .sort(props.sortFunction ? props.sortFunction : sortDropdown)
                         .map((item) => (
                             <MenuItem key={item.id} value={item.id} name={item.name}>{item.name}</MenuItem>
                         ))}
@@ -56,5 +58,6 @@ SelectControl.propTypes = {
     labelWidth: PropTypes.number,
     defaultValue: PropTypes.string,
     menu: PropTypes.array,
-	setInputValue: PropTypes.func,
+    setInputValue: PropTypes.func,
+    sortFunction: PropTypes.func,
 };

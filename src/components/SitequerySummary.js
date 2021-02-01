@@ -107,7 +107,7 @@ const SiteQuerySummary = props => {
           <Card.Text>
             {/*  Protein typeahead */}
 
-            {data && data.length && (
+            {data && data.length > 0 && (
               <>
                 {data.map(querySection => (
                   <>

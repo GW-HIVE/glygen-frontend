@@ -1,24 +1,18 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import Helmet from 'react-helmet';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import '../../css/Search.css';
-import stringConstants from '../../data/json/stringConstants';
 import global_var from '../../data/json/superSearchSVGData';
-import {event, select, selectAll, forceSimulation, forceManyBody, forceLink, scaleLinear } from 'd3';
-import { ModeComment } from '@material-ui/icons';
+import {event, select, selectAll, forceSimulation, forceManyBody, forceLink } from 'd3';
 import searchIcon from "../../images/icons/search.svg";
 import noSearchIcon from "../../images/icons/nosearch.svg";
-import { Container } from 'react-bootstrap';
-
+import PropTypes from "prop-types";
 
 /**
- * Glycan search component for showing glycan search tabs.
+ * Super search svg component for displaying svg image.
  */
 const SuperSearchSVG = (props) => {
 
-  //saving values from the ajax into the var below
   var svgNodes = global_var.nodes; //stores the data of nodes
-  var svgLinks = global_var.links;//stores the data of the links
+  var svgLinks = global_var.links; //stores the data of the links
   
   //initializing the values so that it can be changed in future of needed
   var nodeWidth = 140;  //width of node
@@ -26,16 +20,24 @@ const SuperSearchSVG = (props) => {
   var node2Width = 90;
   var node2Height = (nodeHeight/2);
 
+  /**
+	* useEffect for loadiing svg data and displaying it.
+  */
   useEffect(() => {
     loadSVG(props.svgData);
-    console.log("SuperSearchSVG" + JSON.stringify(props.svgData));
   }, [])
 
+  /**
+	* useEffect for updating svg number data and displaying it.
+  */
   useEffect(() => {
     updateNumnodesSVG(props.svgData);
-    console.log("SuperSearchSVG" + props.svgData);
   }, [props.svgData])
 
+ /**
+  * Function for updating svg number data and displaying it.
+  * @param {array} nodeData - node data.
+  */
   function updateNumnodesSVG(nodeData) {
     select("#mapSVG").selectAll(".svg-numnode").remove();
     var nodes = svgNodes.map((node)=> { var nodeTemp =  nodeData.find((n) => node.id === n.id);  
@@ -61,7 +63,6 @@ const SuperSearchSVG = (props) => {
           if (d.list_id !== "") {
             var data = select(this).select("rect").data();
             props.goToListPage(data[0].list_id, data[0].id);
-            console.log(data[0].list_id);
           }
       });
 
@@ -95,6 +96,10 @@ const SuperSearchSVG = (props) => {
             .attr("width", "15px")
             .attr("dy", "0.35em")
 
+      /**
+      * Function for showing tooltip on mouseover.
+      * @param {object} d - node data.
+      */
       function mouseover(d) {
         if (d.list_id !== "") {
             let element = document.getElementById("svg-numnode-" + d.id);
@@ -105,11 +110,13 @@ const SuperSearchSVG = (props) => {
             tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
             tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
             tooltip.style.display = "inline";
-            console.log(event.clientX - event.pageX);
-            console.log(event.pageY - event.clientY);
         }
       }
 
+      /**
+      * Function for hiding tooltip on mouseout.
+      * @param {object} d - node data.
+      */
       function mouseout(d) {
         if (d.list_id !== "") {
             var tooltip = document.getElementById("tooltip");
@@ -118,6 +125,10 @@ const SuperSearchSVG = (props) => {
       }
   }
 
+  /**
+  * Function for loading svg data and displaying it.
+  * @param {array} nodeData - node data.
+  */
   function loadSVG(nodeData){
     // Empty svg
     select("#mapSVG").selectAll("*").remove();
@@ -191,7 +202,6 @@ const SuperSearchSVG = (props) => {
 
         var data = select(this).select("rect").data();
         props.setSelectedNode(data[0].id);
-        console.log(data[0].name);
     });
     
     //appending the node
@@ -218,6 +228,10 @@ const SuperSearchSVG = (props) => {
 
         updateNumnodesSVG(nodeData);
 
+      /**
+      * Function for showing tooltip on mouseover.
+      * @param {object} d - node data.
+      */
       function mouseover(d) {
         let element = document.getElementById("svg-node-" + d.id);
         var bcr = element.getBoundingClientRect();
@@ -229,6 +243,10 @@ const SuperSearchSVG = (props) => {
         tooltip.style.display = "inline";
       }
 
+      /**
+      * Function for hiding tooltip on mouseout.
+      * @param {object} d - node data.
+      */
       function mouseout(d) {
           var tooltip = document.getElementById("tooltip");
           tooltip.style.display = "none";
@@ -243,10 +261,16 @@ const SuperSearchSVG = (props) => {
               <div id="svg-arrow" className="svg-arrow-up"/>
               <div id="tooltip-text" className="svg-tooltip-text"/>
             </div>
-              <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1050 550"} ></svg>
+            <svg id="mapSVG" height={"100%"} width={"100%"} viewBox={"0 0 1050 550"} ></svg>
           </div>
     </>
 	);
 };
 
 export default SuperSearchSVG;
+
+SuperSearchSVG.propTypes = {
+  svgData: PropTypes.array,
+  setSelectedNode: PropTypes.func,
+  goToListPage: PropTypes.func,
+};

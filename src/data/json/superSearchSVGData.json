@@ -181,57 +181,5 @@
             "sourceOffset": 5,
             "targetOffset": -5
         }
-    ],
-    "oplist": [
-        {
-            "id": "$eq",
-			"name": "="
-        },
-        {
-            "id": "$gt",
-			"name": ">"
-        },
-        {
-            "id": "$gte",
-			"name": ">="
-        },
-        {
-            "id": "$lt",
-			"name": "<"
-        },
-        {
-            "id": "$lte",
-			"name": "<="
-        },
-        {
-            "id": "$ne",
-			"name": "!="
-        },
-        {
-            "id": "$regex",
-			"name": "regex"
-        }
-    ],
-    "aggregators": [
-        {
-            "id": "$and",
-            "name": "And"
-        },
-        {
-            "id": "$or",
-            "name": "Or"
-        },
-        {
-            "id": "$nand",
-            "name": "Nand"
-        },
-        {
-            "id": "$nor",
-            "name": "Nor"
-        }
-    ],
-    "fieldTypes":{
-        "string": "string_value",
-        "number": "numeric_value"
-    }
+    ]
   }

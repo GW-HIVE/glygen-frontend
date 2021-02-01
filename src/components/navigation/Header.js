@@ -149,8 +149,10 @@ export default function Header(props) {
               </Nav.Link>
               <NavDropdown
                 className={
-                  location.pathname === routeConstants.glycanSearch ||
-                  location.pathname === routeConstants.proteinSearch ||
+                  location.pathname.includes(routeConstants.glycanSearch) ||
+                  location.pathname.includes(routeConstants.proteinSearch) ||
+                  location.pathname.includes(routeConstants.siteSearch) ||
+                  location.pathname.includes(routeConstants.superSearch) ||
                   location.pathname === routeConstants.motifList
                     ? "gg-dropdown-navbar gg-dropdown-navbar-active"
                     : "gg-dropdown-navbar"
