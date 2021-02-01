@@ -454,7 +454,20 @@
 				"content": "glycan search, glycoprotein, glycosyltransferase, glycan, glycosylation, data integration, carbohydrate, database, glycoinformatics, glycobiology, glycan draw, glycan mass, glycan structure, glycoconjugate, data standardization, database integration."
 			}
 		]
-	},
+  },
+  "superSearch": {
+    "title": "Super Search | Search for Glycan, Protein Structures | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Search for protein and glycan structures based on their UniProtKB accession, RefSeq accession, Chemical Mass, Organism, Protein Name, Gene Name, GO Name, Protein, GlyTouCan accession, monoisotopic mass, sugars, organism, glycan type, glycosylated protein, motif, or enzyme."
+      },
+      {
+        "name": "keywords",
+        "content": "super search, protein, protein search, UniProtKB accession, RefSeq accession, Chemical Mass, Organism, Protein Name, Gene Name, GO Name, Protein Sequence, Peptide Sequence, Pathway ID, glycan, glycan search, monoisotopic mass, GlyTouCan accession, number of sugars, organism, glycan type, glycosylated protein, glycan motif, biosynthetic enzyme."
+      }
+    ]
+  },
 	"newPage": {
 		"title": "",
 		"meta": [

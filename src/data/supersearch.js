@@ -8,18 +8,17 @@ import stringConstants from "./json/stringConstants";
 import { logActivity } from "../data/logging";
 import { Link } from "react-router-dom";
 
-const glycanStrings = stringConstants.glycan.common;
 
 /**
- * Gets JSON for glycan search init.
+ * Gets JSON for super search init.
  */
 export const getSuperSearchInit = () => {
     const url = `/supersearch/search_init?query={}`;
     return getJson(url);
   };
 
-  /**
- * Gets JSON for glycan search.
+/**
+ * Gets JSON for super search.
  * @param {object} formObject - glycan search JSON query object.
  */
 export const getSuperSearch = formObject => {
