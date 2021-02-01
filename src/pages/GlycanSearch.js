@@ -63,10 +63,10 @@ const GlycanSearch = (props) => {
 			glyProt: '',
 			glyMotif: '',
 			glyBioEnz: '',
-			glyGlyName: '',
 			glyPubId: '',
 			glyBindingProteinId: '',
-			glyAdvSearchValError: [false, false, false, false, false],
+			glyGlyName: '',
+			glyAdvSearchValError: [false, false, false, false, false, false, false],
 		}
 	);
 	const [glyCompData, setGlyCompData] = useReducer(
@@ -158,7 +158,7 @@ const GlycanSearch = (props) => {
 					Number(initData.number_monosaccharides.max).toLocaleString('en-US'),
 				],
 				glySubTypeIsHidden: true,
-				glyAdvSearchValError: [false, false, false, false, false],
+				glyAdvSearchValError: [false, false, false, false, false, false, false],
 			});
 
 			let compositionData = initData.composition;
@@ -342,16 +342,16 @@ const GlycanSearch = (props) => {
 									: data.cache_info.query.glycan_motif,
 							glyBioEnz:
 								data.cache_info.query.enzyme === undefined ? '' : data.cache_info.query.enzyme.id,
-								glyGlyName:data.cache_info.query.glycan_name === undefined
-								? advancedSearch.glycan_name.placeholderId
-								: data.cache_info.query.glycan_name,
-	
 							glyPubId: data.cache_info.query.pmid === undefined ? '' : data.cache_info.query.pmid,
 							glyBindingProteinId:
 							data.cache_info.query.binding_protein_id === undefined
 								? ''
 								: data.cache_info.query.binding_protein_id,
-							glyAdvSearchValError: [false, false, false, false, false, false],
+							glyGlyName:
+								data.cache_info.query.glycan_name === undefined
+									? ''
+									: data.cache_info.query.glycan_name,
+							glyAdvSearchValError: [false, false, false, false, false, false, false],
 						});
 
 						setGlyActTabKey("Advanced-Search");
@@ -529,7 +529,7 @@ const GlycanSearch = (props) => {
 				logActivity("user", (id || "") + ">" + response.data['list_id'], message)
 				.finally(() => {	
 					props.history.push(routeConstants.glycanList + response.data['list_id']);
-				});;
+				});
 				setPageLoading(false);
 			} else {
 				logActivity("user", "", "No results. " + message);

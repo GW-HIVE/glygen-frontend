@@ -227,19 +227,6 @@ const GlycanAdvancedSearch = props => {
   }
 
   /**
-   * Function to set glycan name value.
-   * @param {string} inputGlyName - input glycan name value.
-   **/
-  function glyGlyNameChange(inputGlyName) {
-    let valArr = props.inputValue.glyAdvSearchValError;
-    valArr[3] = inputGlyName.length > advancedSearch.glycan_name.length;
-    props.setGlyAdvSearchData({
-      glyGlyName: inputGlyName,
-      glyAdvSearchValError: valArr
-    });
-  }
-
-  /**
    * Function to set pubmed id value.
    * @param {string} inputGlyPubId - input pubmed id value.
    **/
@@ -263,6 +250,19 @@ const GlycanAdvancedSearch = props => {
       advancedSearch.binding_protein_id.length;
     props.setGlyAdvSearchData({
       glyBindingProteinId: inputGlyBindingIdProtein,
+      glyAdvSearchValError: valArr
+    });
+  }
+
+  /**
+   * Function to set glycan name value.
+   * @param {string} inputGlyName - input glycan name value.
+   **/
+  function glyGlyNameChange(inputGlyName) {
+    let valArr = props.inputValue.glyAdvSearchValError;
+    valArr[6] = inputGlyName.length > advancedSearch.glycan_name.length;
+    props.setGlyAdvSearchData({
+      glyGlyName: inputGlyName,
       glyAdvSearchValError: valArr
     });
   }
@@ -317,7 +317,7 @@ const GlycanAdvancedSearch = props => {
       glyGlyName: "",
       glyPubId: "",
       glyBindingProteinId: "",
-      glyAdvSearchValError: [false, false, false, false, false, false]
+      glyAdvSearchValError: [false, false, false, false, false, false, false]
     });
   };
 
