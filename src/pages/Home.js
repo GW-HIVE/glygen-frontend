@@ -15,8 +15,10 @@ import mainImg from "../images/home/main-featured-img.png";
 import feedback from "../images/home/feedback.svg";
 import resources from "../images/home/resources.svg";
 import proteinImg from "../images/home/glycoprotein-img.svg";
+import siteSearchImg from "../images/home/protein-img.svg";
 import glycanImg from "../images/home/glycan-img.svg";
 import quickSearchImg from "../images/home/quick-search-img.svg";
+import superSearchImg from "../images/home/super-search-img.svg";
 import compositionSearchImg from "../images/home/composition-img.svg";
 import listOfMotifsImg from "../images/home/list-of-motifs-img.svg";
 import idMappingImg from "../images/home/id-mapping-img.svg";
@@ -24,10 +26,17 @@ import gnomeBrowserImg from "../images/home/gnome-browser-img.svg";
 import apiImg from "../images/home/api-img.svg";
 import dataImg from "../images/home/data-img.svg";
 import sparqlImg from "../images/home/sparql-img.svg";
+import glygenSandBoxlImg from "../images/home/GlyGen-SandBox-img.svg";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { getSystemData } from "../data";
-import { GLYGEN_API, GLYGEN_DATA, GLYGEN_SPARQL, GNOME_BROWSER } from "../envVariables";
+import {
+  GLYGEN_API,
+  GLYGEN_DATA,
+  GLYGEN_SPARQL,
+  GNOME_BROWSER,
+  GLYGEN_SANDBOX,
+} from "../envVariables";
 import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
@@ -57,9 +66,9 @@ const featuredCards = [
   {
     title: "Site Search",
     description: "Search for proteins based on their site, accessions, and annotations.",
-    image: proteinImg,
+    image: siteSearchImg,
     imageText: "Site Search",
-    to: routeConstants.proteinSearch,
+    to: routeConstants.siteSearch,
   },
   {
     title: "Quick Search",
@@ -67,6 +76,21 @@ const featuredCards = [
     image: quickSearchImg,
     imageText: "Quick Search",
     to: routeConstants.quickSearch,
+  },
+  {
+    title: "Super Search",
+    description: "Super search Lorem ipsum dolor sit amet, consectetuer adipiscing elit commodo.",
+    image: superSearchImg,
+    imageText: "Super Search",
+    to: routeConstants.superSearch,
+  },
+  {
+    title: "ID Mapping",
+    description:
+      "ID mapping related to glycan, protein / glycoprotein and based on the user input.",
+    image: idMappingImg,
+    imageText: "ID Mapping",
+    to: routeConstants.idMapping,
   },
   {
     title: "Composition Search",
@@ -118,12 +142,12 @@ const featuredCards = [
     target: "_blank",
   },
   {
-    title: "ID Mapping",
-    description:
-      "Users select the step wise option. If Glycan is selected then whole id mapping will be related to glycan. Same for protein/glycoprotein.",
-    image: idMappingImg,
-    imageText: "ID Mapping",
-    to: routeConstants.idMapping,
+    title: "GlyGen SandBox",
+    description: "GlyGen SandBox Lorem ipsum dolor sit amet, consectetuer adipiscing elit commodo.",
+    image: glygenSandBoxlImg,
+    imageText: "GlyGen SandBox",
+    href: GLYGEN_SANDBOX,
+    target: "_blank",
   },
 ];
 const feedbackCard = {
