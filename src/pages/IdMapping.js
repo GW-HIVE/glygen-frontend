@@ -441,14 +441,16 @@ const IdMapping = (props) => {
                 inputValue={idMapSearchData.outputNamespace}
                 setInputValue={outputNamespaceOnChange}
                 menu={
-                  idMapSearchData.recordType === "any"
+                  idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
-                    : initData[idMapSearchData.recordType].namespace.map((toId) => {
-                        return {
-                          id: toId,
-                          name: toId,
-                        };
-                      })
+                    : initData[idMapSearchData.recordType].namespace
+                        .filter((toid) => toid !== idMapSearchData.inputNamespace)
+                        .map((toId) => {
+                          return {
+                            id: toId,
+                            name: toId,
+                          };
+                        })
                 }
                 required={true}
               />
