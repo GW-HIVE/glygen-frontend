@@ -35,11 +35,10 @@ const StoryAboutUs = (props) => {
     h2textBottom: "Our",
     h2textBottomStrongAfter: "Story",
   };
-  const horHeadOurGoal = {
-    h5VerticalText: "find out goal",
+  const shorHeadOurGoal = {
+    h5VerticalText: "discover",
     h2textTop: "Our",
-    h2textBottom: "Amazing",
-    h2textBottomStrongAfter: "Goal",
+    h2textTopStrongAfter: "Goals",
   };
   const vertHeadEffort = {
     h5VerticalText: "who we are",
@@ -47,7 +46,7 @@ const StoryAboutUs = (props) => {
     h2textBottom: "Global",
     h2textBottomStrongAfter: "Effort",
   };
-  const horHeadResource = {
+  const shorHeadResource = {
     h5VerticalText: "what we do",
     h2textTop: "GlyGen as",
     h2textBottom: "the",
@@ -119,7 +118,7 @@ const StoryAboutUs = (props) => {
       {/* Our Goal */}
       <section className="content-box-md about-section-bg">
         <Container maxWidth="lg" className="gg-container">
-          <HorizontalHeading post={horHeadOurGoal} />
+          <HorizontalHeading post={shorHeadOurGoal} />
           <Row>
             <Col xs={12} lg={4}>
               {/* Goal item 01 */}
@@ -179,7 +178,7 @@ const StoryAboutUs = (props) => {
       {/* Resource */}
       <section className="content-box-md about-section-bg">
         <Container maxWidth="lg" className="gg-container">
-          <HorizontalHeading post={horHeadResource} />
+          <HorizontalHeading post={shorHeadResource} />
           <Row>
             <Col sm={6}>
               {/* Resource item 01 */}
