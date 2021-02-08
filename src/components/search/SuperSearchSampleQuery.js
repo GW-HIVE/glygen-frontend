@@ -65,7 +65,7 @@ export default function SuperSearchSampleQuery(props) {
 
                         <Grid item xs={11} sm={11} className="pl-3 pr-4">  
                             <Button
-                                className= "gg-btn-outline"
+                                className= "gg-btn-blue"
                                 style={{marginTop: "20px", float: "right" }}
                                 onClick={() => {
                                     props.executeSuperSearchQuery(superSearchQuerySelect === superSearchJSONData.query_select.placeholderId ? [] 
