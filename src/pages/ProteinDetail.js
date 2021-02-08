@@ -449,10 +449,12 @@ const ProteinDetail = props => {
     site_annotation,
     protein_names,
     keywords,
+    cluster_types,
     function: functions
   } = detailData;
 
   const uniprotNames = (protein_names || [])
+
     .filter(x => x.type === "recommended")
     .map(x => x.name);
 
@@ -608,7 +610,7 @@ const ProteinDetail = props => {
           <LineTooltip text="View siteview details">
             <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
               {row.residue} {row.start_pos}
-              {(row.start_pos !== row.end_pos) && (
+              {row.start_pos !== row.end_pos && (
                 <>
                   to {row.residue} {row.end_pos}
                 </>
@@ -944,13 +946,6 @@ const ProteinDetail = props => {
           color: "white"
         };
       }
-      // formatter: (value, row) => (
-      //   <LineTooltip text="View siteview details">
-      //     <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-      //       {row.start_pos}
-      //     </Link>
-      //   </LineTooltip>
-      // )
     },
     {
       dataField: "end_pos",
@@ -2720,18 +2715,7 @@ const ProteinDetail = props => {
                         <>
                           {showAlignmentOptions && (
                             <AlignmentDropdown
-                              types={[
-                                {
-                                  display: " Homolog-oma",
-                                  type: "homologset.oma",
-                                  data: "protein_detail"
-                                },
-                                {
-                                  display: " Homolog-mgi",
-                                  type: "homologset.mgi",
-                                  data: "protein_detail"
-                                }
-                              ]}
+                              types={cluster_types}
                               dataType="protein_detail"
                               dataId={id}
                             />
