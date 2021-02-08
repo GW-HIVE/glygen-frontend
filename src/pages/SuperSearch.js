@@ -231,7 +231,7 @@ const SuperSearch = (props) => {
 					<SuperSearchSampleQuery
 						show={supSearchSampleQuery}
 						executeSuperSearchQuery={executeSuperSearchQuery}
-						title={superSearchCommonData.queryDialog.title}
+						title={superSearchCommonData.sampleQueryDialog.title}
 						setOpen={(input) => {
 							setSupSearchSampleQuery(input)
 						}}
@@ -239,7 +239,7 @@ const SuperSearch = (props) => {
 					<SuperSearchQueryDisplay
 						show={supSearchShowQuery}
 						query={queryData}
-						title={superSearchCommonData.sampleQueryDialog.title}
+						title={superSearchCommonData.queryDialog.title}
 						setOpen={(input) => {
 							setSupSearchShowQuery(input)
 						}}
