@@ -75,7 +75,6 @@ const items = [
     label: stringConstants.sidebar.glycan_ligands.displayname,
     id: "Glycan-Ligands"
   },
-  { label: stringConstants.sidebar.sequence.displayname, id: "Sequence" },
   {
     label: stringConstants.sidebar.ptm_annotation.displayname,
     id: "PTM-Annotation"
@@ -226,6 +225,7 @@ const ProteinDetail = props => {
   const [itemsPathway, setItemsPathway] = useState([]);
   const [showIsoformSequences, setShowIsoformSequences] = useState(false);
   const [showhomologSequences, setShowhomologSequences] = useState(false);
+  const [diseaseData, setDiseaseData] = useState([]);
 
   let glycosylationTabSelected = "reported_with_glycan";
   let glycosylationPredicted;
@@ -250,7 +250,6 @@ const ProteinDetail = props => {
 
   let geneNames;
   let proteinNames;
-  let diseaseData;
   let recommendedGeneRows;
   let synonymGeneRows;
   let recommendedProteinRows;
@@ -277,6 +276,40 @@ const ProteinDetail = props => {
         setItemsCrossRef(getItemsCrossRef(data));
         setItemsPathway(getItemsPathway(data));
         setDetailData(data);
+
+        if (data.disease) {
+          let diseaseDataTemp = diseaseDataRearrangement();
+          setDiseaseData(diseaseDataTemp);
+          function diseaseDataRearrangement() {
+            var disease = data.disease.slice();
+            for (var i = 0; i < disease.length; i++) {
+              if (disease[i].synonyms) {
+                var synTemp = [];
+                var synonyms = disease[i].synonyms.slice();
+                for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
+                  var temp = synonyms.filter(
+                    syn => syn.name === disease[i].synonyms[j].name
+                  );
+                  if (temp && temp.length) {
+                    synTemp[k] = {
+                      name: disease[i].synonyms[j].name,
+                      resource: temp
+                    };
+                    synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
+                    k++;
+                  }
+                }
+                disease[i].synonyms = synTemp;
+                disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
+                disease[i].synLen = synTemp.length;
+                disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
+                disease[i].synShowMore = true;
+              }
+            }
+            return disease;
+          }
+        }
+
         setPageLoading(false);
       }
 
@@ -320,6 +353,7 @@ const ProteinDetail = props => {
       }
     });
   }, []);
+
 
   if (detailData.gene_nameslData) {
     geneNames = formatNamesData(detailData.gene_names);
@@ -374,37 +408,7 @@ const ProteinDetail = props => {
     glycosylationMining = mining;
     glycosylationTabSelected = selectTab;
   }
-  if (detailData.disease) {
-    diseaseData = diseaseDataRearrangement();
-    function diseaseDataRearrangement() {
-      var disease = detailData.disease.slice();
-      for (var i = 0; i < disease.length; i++) {
-        if (disease[i].synonyms) {
-          var synTemp = [];
-          var synonyms = disease[i].synonyms.slice();
-          for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
-            var temp = synonyms.filter(
-              syn => syn.name === disease[i].synonyms[j].name
-            );
-            if (temp && temp.length) {
-              synTemp[k] = {
-                name: disease[i].synonyms[j].name,
-                resource: temp
-              };
-              synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
-              k++;
-            }
-          }
-          disease[i].synonyms = synTemp;
-          disease[i].synShortLen = synTemp.length > 2 ? 2 : synTemp.length;
-          disease[i].synLen = synTemp.length;
-          disease[i].synBtnDisplay = synTemp.length <= 2 ? false : true;
-          disease[i].synShowMore = true;
-        }
-      }
-      return disease;
-    }
-  }
+
   if (detailData.snv) {
     const WithDisease = detailData.snv.filter(item =>
       item.keywords.includes("disease")
@@ -513,7 +517,7 @@ const ProteinDetail = props => {
       }
       return disData;
     });
-    diseaseData = diseaseDataTemp;
+    setDiseaseData(diseaseDataTemp);
   }
 
   const organismEvidence = groupOrganismEvidences(species);

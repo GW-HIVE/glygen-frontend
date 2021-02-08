@@ -8,7 +8,6 @@ import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import '../css/Search.css';
 import Grid from '@material-ui/core/Grid';
-import glycanSearchData from '../data/json/glycanSearch';
 import superSearchData from '../data/json/superSearchData';
 import routeConstants from '../data/json/routeConstants';
 import {logActivity} from '../data/logging';
@@ -19,6 +18,12 @@ import SuperSearchSVG from '../components/search/SuperSearchSVG';
 import SuperSearchControl from '../components/search/SuperSearchControl';
 import { Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Typography from '@material-ui/core/Typography';
+import SelectControl from '../components/select/SelectControl';
+import stringConstants from '../data/json/stringConstants';
+import HelpTooltip from '../components/tooltip/HelpTooltip';
+import { getSuperSearch } from '../data/supersearch';
 
 /**
  * Super search component for showing super search tabs.
@@ -27,7 +32,11 @@ const SuperSearch = (props) => {
   let superSearchJSONData = superSearchData.super_search;
   let superSearchTutorialData = superSearchData.tutorial;
   let superSearchCommonData = superSearchData.common;
+  let commonSuperSearchData = stringConstants.super_search.common;
+
+
   let { id } = useParams("");
+  let { searchId } = useParams();
 
   const [initData, setInitData] = useState([]);
   const [svgData, setSVGData] = useState([]);
@@ -35,6 +44,7 @@ const SuperSearch = (props) => {
   const [queryData, setQueryData] = useState([]);
   const [supSearchShowQuery, setSupSearchShowQuery] = useState(false);
   const [supSearchActTabKey, setSupSearchActTabKey] = useState('Super-Search');
+  const [superSearchQuerySelect, setSuperSearchQuerySelect] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
@@ -47,7 +57,6 @@ const SuperSearch = (props) => {
   useEffect(() => {
 	setPageLoading(true);
 	logActivity();
-	
 	getSuperSearchInit().then((response) => {
 		let initData = response.data;
 		setInitData(initData);
@@ -64,6 +73,13 @@ const SuperSearch = (props) => {
 		id &&
 		getSuperSearchList(id, 1).then(({ data }) => {
 				logActivity("user", id, "Super Search modification initiated");
+				// Keep this above updateNodeData function so that all the state variables are assigned values before svg is rendered/generated.
+				// Otherwise svg function goToListPage will have old value of superSearchQuerySelect.
+				let queryID = searchId && searchId.includes("_") ? searchId.replace("sups_", "") : "";
+				if (queryID && queryID !== "") {
+					let selQuery = superSearchJSONData.query_select.query_list.find(option => option.id === queryID);
+					setSuperSearchQuerySelect(selQuery && selQuery.id ? selQuery.id : "");
+				}
 				setQueryData(data.cache_info.query);
 				updateNodeData(data.cache_info.result_summary, initSvgData);
 				setSupSearchActTabKey("Super-Search");
@@ -79,7 +95,9 @@ const SuperSearch = (props) => {
 		axiosError(error, "", message, setPageLoading, setAlertDialogInput);
 	});
 
-  }, [])
+  }, [id, searchId])
+
+ 
 
   /**
     * Function to get svg init data.
@@ -158,6 +176,38 @@ const SuperSearch = (props) => {
   function resetSuperSearchQuery() {
 	updateNodeData();
 	setQueryData([]);
+	setSuperSearchQuerySelect("");
+  }
+
+  /**
+    * Function to execute super search query.
+	* @param {array} superSearchQuery - query object.
+	* @param {boolean} selected - true if sample query is executed.
+  **/
+ function executeSuperSearchQuery(superSearchQuery) {
+
+	if (superSearchQuery.length === 0) {
+		setQueryData(superSearchQuery);
+		updateNodeData();
+		setSelectedNode("");
+	}
+
+	if (superSearchQuery.length > 0){
+		setPageLoading(true);
+		setSuperSearchQuerySelect("");
+		let message = "Super Search query=" + JSON.stringify(superSearchQuery);
+		logActivity("user", "", "Performing Super Search. " + message);
+		getSuperSearch(superSearchQuery).then((response) => {
+			let searchData = response.data;
+			setPageLoading(false);
+			setQueryData(superSearchQuery);
+			updateNodeData(searchData.results_summary);
+			setSelectedNode("");
+		})
+		.catch(function (error) {
+			axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+		});
+	}
   }
 
     return (
@@ -177,8 +227,10 @@ const SuperSearch = (props) => {
 						}}
 					/>
 					<SuperSearchControl data={initData.filter((value) => value.id === selectedNode)[0] ? initData.filter((value) => value.id === selectedNode)[0] : []} 
-							selectedNode={selectedNode} setSelectedNode={setSelectedNode} setPageLoading={setPageLoading} setAlertDialogInput={setAlertDialogInput}
-							updateNodeData={updateNodeData} queryData={queryData} setQueryData={setQueryData}
+						selectedNode={selectedNode} 
+						executeSuperSearchQuery={executeSuperSearchQuery}
+						setSelectedNode={setSelectedNode} 
+						queryData={queryData} 
 					/>
 					<SuperSearchQueryDisplay
 						show={supSearchShowQuery}
@@ -203,16 +255,51 @@ const SuperSearch = (props) => {
 							className='tab-content-padding'
 							title={superSearchJSONData.tabTitle}>
 							<Container className='tab-content-border'>
-								<h4><center>{superSearchData.super_search.message}</center><br></br></h4>
+							<Grid
+								container
+								style={{ margin: '0  auto' }}
+								spacing={3}
+								justify='center'>
+								<div style={{ paddingBottom: "20px" }}></div>
+								<Grid item xs={11} sm={11} className="pl-3 pr-4">
+									<FormControl
+										fullWidth
+										variant='outlined'
+									>
+										<Typography className={'search-lbl'} gutterBottom>
+											<HelpTooltip
+												title={commonSuperSearchData.query_select.tooltip.title}
+												text={commonSuperSearchData.query_select.tooltip.text}
+											/>
+											{commonSuperSearchData.query_select.name}
+										</Typography>
+										<SelectControl
+											inputValue={superSearchQuerySelect}
+											placeholder={superSearchJSONData.query_select.placeholder}
+											placeholderId={superSearchJSONData.query_select.placeholderId}
+											placeholderName={superSearchJSONData.query_select.placeholderName}
+											menu={superSearchJSONData.query_select.query_list}
+											onBlur={() => executeSuperSearchQuery(superSearchQuerySelect === superSearchJSONData.query_select.placeholderId ? [] 
+												: superSearchJSONData.query_select.query_list.find(option => option.id === superSearchQuerySelect).query)
+												}
+											setInputValue={(value) => setSuperSearchQuerySelect(value)}
+										/>
+									</FormControl>
+								</Grid>
 
-								{svgData.length !== 0 && <SuperSearchSVG 
-									svgData={svgData} setSelectedNode={setSelectedNode}
-									goToListPage={goToListPage}
-								/>}
+								{/* <h4><center>{superSearchData.super_search.message}</center><br></br></h4> */}
+
+								<Grid item xs={12} sm={12}>
+								<h5><br></br><center>{superSearchData.super_search.message}</center></h5>
+									{svgData.length !== 0 && <SuperSearchSVG 
+										svgData={svgData} setSelectedNode={setSelectedNode}
+										goToListPage={goToListPage}
+									/>}
+								</Grid>
 
 								{/* Buttons */}
-								<Grid item>
-									<Row className="gg-align-right pt-3 mb-2 mr-1">
+								<Grid item xs={11} sm={11}>
+									<Row className="gg-align-right mr-3">
 										<Button className="gg-btn-outline mr-4"
 										disabled={queryData.length <= 0}
 										onClick={resetSuperSearchQuery}
@@ -220,13 +307,13 @@ const SuperSearch = (props) => {
 											Reset Query
 										</Button>
 										<Button className="gg-btn-outline" 
-											style={{ marginRight:"55px" }}
 											disabled={queryData.length <= 0}
 											onClick={() => setSupSearchShowQuery(true)}			
 										>
 											Show Query
 										</Button>
 									</Row>
+								</Grid>
 								</Grid>
 							</Container>
 						</Tab>

@@ -14,6 +14,8 @@ import downArrowIcon from "../../images/icons/down-arrow.svg";
 import upArrowIcon from "../../images/icons/up-arrow.svg";
 import { Image } from "react-bootstrap";
 import {sortByOrder} from '../../utils/common';
+import AutoTextInput from '../input/AutoTextInput';
+
 
 /**
  * Super search input control.
@@ -82,6 +84,7 @@ const SuperSearchInputcontrol = (props) => {
 									let curfield = props.data.fields.filter((value)=> value.id === input)[0];
 									props.supSearchUpdateQuery(props.query.order, "fieldType", curfield.type);
 									props.supSearchUpdateQuery(props.query.order, "value", "");
+									props.supSearchUpdateQuery(props.query.order, "typeaheadID", curfield.typeahead);
 									props.supSearchUpdateQuery(props.query.order, "error", false);
 									props.supSearchUpdateQuery(props.query.order, "operationEnum", curfield.oplist);
 									props.supSearchUpdateQuery(props.query.order, "selectEnum", curfield.enum);
@@ -137,7 +140,7 @@ const SuperSearchInputcontrol = (props) => {
 									</FormHelperText>
 								)}								
 							</>}
-							{props.query.fieldType === "string" && <>
+							{(!props.query.typeaheadID || props.query.typeaheadID === "") && props.query.fieldType === "string" && <>
 								<OutlinedInput
 									className={'svg-input'}
 									value={props.query.value}
@@ -156,6 +159,27 @@ const SuperSearchInputcontrol = (props) => {
 											{superSearchTextData.errorText1 + props.query.maxlength + "."}
 										</FormHelperText>
 									)}
+									{(props.query.error && props.query.value === "") 
+									&& (
+										<FormHelperText className={"error-text"} error>
+											{superSearchTextData.errorText2}
+										</FormHelperText>
+									)}								
+							</>}
+							{props.query.typeaheadID && props.query.typeaheadID !== "" && props.query.fieldType === "string" && <>
+								<AutoTextInput
+									inputValue={props.query.value}
+									setInputValue={(value)=>{
+										props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false);
+										props.supSearchUpdateQuery(props.query.order, "value", value);
+									}}
+									onBlur={(event) => onTextMoveOut(event, props.query.order)}
+									error={props.query.error}
+									placeholder={superSearchTextData.placeholder}
+									typeahedID={props.query.typeaheadID}
+									length={props.query.maxlength}
+									errorText={superSearchTextData.errorText1 + props.query.maxlength + "."}
+								/>
 									{(props.query.error && props.query.value === "") 
 									&& (
 										<FormHelperText className={"error-text"} error>

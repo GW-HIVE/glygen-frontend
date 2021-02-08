@@ -776,7 +776,6 @@ const ProteinAdvancedSearch = (props) => {
 								placeholder={advancedSearch.glycosylation_type.placeholder}
 								placeholderId={advancedSearch.glycosylation_type.placeholderId}
 								placeholderName={advancedSearch.glycosylation_type.placeholderName}
-								// menu={advancedSearch.glycosylation_type.menu}
 								menu={props.initData.glycosylation_types.map(a => ({name:a, id:a}))}
 								setInputValue={proGlycosylationTypeOnChange}
 							/>

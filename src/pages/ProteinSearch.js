@@ -366,7 +366,6 @@ const ProteinSearch = props => {
     input_pmid,
     input_glycosylation_evidence,
     input_glycosylation_type,
-    input_gly,
     input_disease_name,
     input_disease_id,
     input_attached_glycan_id,
@@ -451,8 +450,8 @@ const ProteinSearch = props => {
         .id]: input_glycosylation_evidence
         ? input_glycosylation_evidence
         : undefined,
-      [commonProteinData.glycosylation_type]: input_glycosylation_type
-        ? input_glycosylation_type.id
+      [commonProteinData.glycosylation_type.id]: input_glycosylation_type
+        ? input_glycosylation_type
         : undefined,
 
       [commonProteinData.disease_name.id]: input_disease_name
@@ -495,7 +494,6 @@ const ProteinSearch = props => {
       proAdvSearchData.proPubId,
       proAdvSearchData.proGlyEvidence,
       proAdvSearchData.proGlycosylationType,
-      proAdvSearchData.proGly,
       proAdvSearchData.proDiseaseName,
       proAdvSearchData.proDiseaseId,
       proAdvSearchData.proAttachedGlycanId,

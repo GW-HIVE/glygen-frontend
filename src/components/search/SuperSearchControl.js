@@ -27,6 +27,7 @@ const SuperSearchControl = (props) => {
             "fieldType":"",
             "operation":"",
             "value":"",
+            "typeaheadID":"",
             "maxlength":100,
             "error":false,
             "operationEnum":[],
@@ -76,6 +77,7 @@ const SuperSearchControl = (props) => {
                     fieldType:"",
                     operation:"",
                     value:"",
+                    typeaheadID:"",
                     maxlength:100,
                     error:false,
                     operationEnum:[],
@@ -109,6 +111,7 @@ const SuperSearchControl = (props) => {
                         fieldType: curfield.type,
                         operation: query.operator,
                         value: query[fieldTypes[curfield.type]],
+                        typeaheadID:curfield.typeahead,
                         maxlength: curfield.maxlength,
                         error:false,
                         operationEnum: curfield.oplist,
@@ -153,6 +156,7 @@ const SuperSearchControl = (props) => {
             fieldType:"",
             operation:"",
             value:"",
+            typeaheadID:"",
             maxlength:100,
             error:false,
             operationEnum:[],
@@ -229,8 +233,6 @@ const SuperSearchControl = (props) => {
 	function supSearchSubmitQuery(event) {
         event.preventDefault(true);
 
-        props.setPageLoading(true);
-
         var tempArray = controlArray.slice();
         var concept = props.selectedNode;
         var searchQuery = {
@@ -252,7 +254,6 @@ const SuperSearchControl = (props) => {
             })
             setControlArray(tempArray3);
             setAlertTextInput({"show": true, "id": stringConstants.errors.superSearchError.id});
-            props.setPageLoading(false);
             return;
         }
         
@@ -309,27 +310,7 @@ const SuperSearchControl = (props) => {
             finalSearchQuery.push(searchQuery);
         }
 
-        if (finalSearchQuery.length === 0) {
-            props.setPageLoading(false);
-            props.setQueryData(finalSearchQuery);
-            props.updateNodeData(undefined);
-            props.setSelectedNode(undefined)
-        }
-
-        if (finalSearchQuery.length > 0){
-            let message = "Super Search query=" + JSON.stringify(finalSearchQuery);
-            logActivity("user", "", "Performing Super Search. " + message);
-            getSuperSearch(finalSearchQuery).then((response) => {
-                let searchData = response.data;
-                props.setPageLoading(false);
-                props.setQueryData(finalSearchQuery);
-                props.updateNodeData(searchData.results_summary);
-                props.setSelectedNode(undefined);
-            })
-            .catch(function (error) {
-                axiosError(error, "", message, props.setPageLoading, props.setAlertDialogInput);
-            });
-        }
+        props.executeSuperSearchQuery(finalSearchQuery);
     }
 
     /**
@@ -344,6 +325,7 @@ const SuperSearchControl = (props) => {
             tempArray[i].fieldType = "";
             tempArray[i].operation = "";
             tempArray[i].value = "";
+            tempArray[i].typeaheadID = "";
             tempArray[i].maxlength = 100;
             tempArray[i].error = false;
             tempArray[i].operationEnum = [];
@@ -355,11 +337,11 @@ const SuperSearchControl = (props) => {
     return (
 		<>            
             <Dialog
-                open={props.data.id !== undefined}
+                open={props.selectedNode !== ""}
                 style={{margin:40}}
                 maxWidth={'lg'}
                 disableScrollLock
-                onClose={() => props.setSelectedNode(undefined)} 
+                onClose={() => props.setSelectedNode("")} 
             >  
                 <div 
                     style={{padding:40, content:'center', minHeight: '520px', width: '1200px' }}
@@ -406,7 +388,7 @@ const SuperSearchControl = (props) => {
                         <Button
                             className='gg-btn-outline mr-3 mb-3'
                             style={{ float: "right" }}
-                            onClick={() => props.setSelectedNode(undefined)}
+                            onClick={() => props.setSelectedNode("")}
                             >
                             Cancel
                         </Button>
@@ -423,9 +405,6 @@ SuperSearchControl.propTypes = {
     data: PropTypes.array,
     queryData: PropTypes.array,
 	selectedNode: PropTypes.string,
-    updateNodeData: PropTypes.func,
 	setSelectedNode: PropTypes.func,
-	setPageLoading: PropTypes.func,
-	setAlertDialogInput: PropTypes.func,
-	setQueryData: PropTypes.func
+	executeSuperSearchQuery: PropTypes.func
 };

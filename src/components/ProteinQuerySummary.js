@@ -49,7 +49,6 @@ const ProteinQuerySummary = props => {
     refseq_ac,
     go_id,
     mass,
-    mass_type,
     go_term,
     organism,
     gene_name,
@@ -58,6 +57,7 @@ const ProteinQuerySummary = props => {
     sequence,
     glycosylated_aa,
     glycosylation_evidence,
+    glycosylation_type,
     pmid,
     term,
     term_category,
@@ -204,6 +204,16 @@ const ProteinQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylation_evidence}
+                </Col>
+              </Row>
+            )}
+            {glycosylation_type && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {proteinStrings.glycosylation_type.name}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {glycosylation_type}
                 </Col>
               </Row>
             )}

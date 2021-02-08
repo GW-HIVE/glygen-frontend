@@ -1,22 +1,71 @@
 {
     "pageTitle": "Super Search",
     "super_search": {
-      "tabTitle": "Super Search",
-      "message": "Click on a node to get its properties.",
-      "glycan":{
-        "id": "glycan"
-      },
-      "protein":{
-        "id": "protein"
-      },
-      "site":{
-        "id": "site"
-      }
+        "tabTitle": "Super Search",
+        "message": "Click on a node to get its properties.",
+        "glycan": {
+            "id": "glycan"
+        },
+        "protein": {
+            "id": "protein"
+        },
+        "site": {
+            "id": "site"
+        },
+        "query_select":{
+            "placeholder": "Select sample super search query",
+            "placeholderName": "",
+            "placeholderId": "",
+            "query_list": [
+                {
+                    "name": "Protein with UniProtKB accesssion P14210",
+                    "id": "query_1",
+                    "query": [
+                        {
+                          "concept": "protein",
+                          "query": {
+                            "aggregator": "$and",
+                            "unaggregated_list": [
+                              {
+                                "order": 0,
+                                "path": "uniprot_ac",
+                                "operator": "$eq",
+                                "string_value": "P14210"
+                              }
+                            ],
+                            "aggregated_list": []
+                          }
+                        }
+                    ]
+                },
+                {
+                    "name": "Glycan with GlyToucan accesssion G17689DH",
+                    "id": "query_2",
+                    "query": [
+                        {
+                          "concept": "glycan",
+                          "query": {
+                            "aggregator": "$and",
+                            "unaggregated_list": [
+                              {
+                                "order": 0,
+                                "path": "glytoucan_ac",
+                                "operator": "$eq",
+                                "string_value": "G17689DH"
+                              }
+                            ],
+                            "aggregated_list": []
+                          }
+                        }
+                    ]
+                }
+            ]
+        }
     },
     "tutorial": {
-      "tabTitle": "Tutorial"
+        "tabTitle": "Tutorial"
     },
-    "common":{
+    "common": {
         "oplist": [
             {
                 "id": "$eq",
@@ -51,7 +100,7 @@
             {
                 "id": "$and",
                 "name": "And",
-                 "order": 1
+                "order": 1
             },
             {
                 "id": "$or",
@@ -69,28 +118,27 @@
                 "order": 4
             }
         ],
-        "fieldTypes":{
+        "fieldTypes": {
             "string": "string_value",
             "number": "numeric_value"
         },
-        "text":{
+        "text": {
             "placeholder": "Enter the value",
             "errorText1": "Entry is too long - max length is ",
             "errorText2": "Enter the value."
         },
-        "number":{
+        "number": {
             "placeholder": "Enter the value",
             "errorText1": "Enter a valid number."
         },
-        "select":{
+        "select": {
             "placeholder": "Select Value",
             "placeholderId": "",
             "placeholderName": "",
             "errorText1": "Select a value."
         },
-        "queryDialog":{
+        "queryDialog": {
             "title": "Super Search Query"
         }
     }
-  }
-  
+}

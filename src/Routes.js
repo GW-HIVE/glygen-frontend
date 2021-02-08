@@ -136,6 +136,7 @@ const Routes = props => (
       component={idMappingResult}
     />
     <Route path={routeConstants.idMappingResult} component={idMappingResult} />
+    <Route path={`${routeConstants.superSearch}:id/:searchId`} component={SuperSearch} />
     <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
     <Route path={routeConstants.superSearch} component={SuperSearch} />
     {/* Keep path='/' at the bottom */}

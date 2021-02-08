@@ -57,6 +57,7 @@ export default function AutoTextInput(props) {
 				autoHighlight={true}
 				inputValue={props.inputValue}
 				onInputChange={handleChange}
+				onBlur={props.onBlur}
 				onClose={(event, reason) => setOptions([])}
 				renderInput={(params) => (
 					<TextField
@@ -64,7 +65,7 @@ export default function AutoTextInput(props) {
 						variant='outlined'
 						required={props.required}
 						placeholder={props.placeholder}
-						error={props.inputValue.length > props.length}
+						error={props.inputValue.length > props.length || props.error}
 					/>
 				)}
 			/>

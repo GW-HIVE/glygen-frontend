@@ -193,15 +193,9 @@ const SuperSearchSVG = (props) => {
                     return "translate(" + d.xCord + "," + d.yCord + ")";
                 })
     
-    //highlghts the node and iterates the list to append the accession
+    //sets the id of the selected node.
     .on("click", function(d) {
-        selectAll(".svg-node")
-        .style("stroke-width", "0px")
-        select(this).select("rect")
-        .style("stroke-width", "3px")
-
-        var data = select(this).select("rect").data();
-        props.setSelectedNode(data[0].id);
+        props.setSelectedNode(d.id);
     });
     
     //appending the node
