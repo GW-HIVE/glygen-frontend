@@ -139,6 +139,9 @@
         },
         "queryDialog": {
             "title": "Super Search Query"
+        },
+        "sampleQueryDialog": {
+            "title": "Super Search Sample Query"
         }
     }
 }

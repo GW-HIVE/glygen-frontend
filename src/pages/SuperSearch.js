@@ -4,6 +4,7 @@ import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import DialogAlert from '../components/alert/DialogAlert';
 import SuperSearchQueryDisplay from '../components/alert/SuperSearchQueryDisplay';
+import SuperSearchSampleQuery from '../components/search/SuperSearchSampleQuery';
 import { Tab, Tabs, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import '../css/Search.css';
@@ -18,11 +19,6 @@ import SuperSearchSVG from '../components/search/SuperSearchSVG';
 import SuperSearchControl from '../components/search/SuperSearchControl';
 import { Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import FormControl from '@material-ui/core/FormControl';
-import Typography from '@material-ui/core/Typography';
-import SelectControl from '../components/select/SelectControl';
-import stringConstants from '../data/json/stringConstants';
-import HelpTooltip from '../components/tooltip/HelpTooltip';
 import { getSuperSearch } from '../data/supersearch';
 
 /**
@@ -32,7 +28,6 @@ const SuperSearch = (props) => {
   let superSearchJSONData = superSearchData.super_search;
   let superSearchTutorialData = superSearchData.tutorial;
   let superSearchCommonData = superSearchData.common;
-  let commonSuperSearchData = stringConstants.super_search.common;
 
 
   let { id } = useParams("");
@@ -43,6 +38,7 @@ const SuperSearch = (props) => {
   const [selectedNode, setSelectedNode] = useState("");
   const [queryData, setQueryData] = useState([]);
   const [supSearchShowQuery, setSupSearchShowQuery] = useState(false);
+  const [supSearchSampleQuery, setSupSearchSampleQuery] = useState(false);
   const [supSearchActTabKey, setSupSearchActTabKey] = useState('Super-Search');
   const [superSearchQuerySelect, setSuperSearchQuerySelect] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
@@ -232,10 +228,18 @@ const SuperSearch = (props) => {
 						setSelectedNode={setSelectedNode} 
 						queryData={queryData} 
 					/>
+					<SuperSearchSampleQuery
+						show={supSearchSampleQuery}
+						executeSuperSearchQuery={executeSuperSearchQuery}
+						title={superSearchCommonData.queryDialog.title}
+						setOpen={(input) => {
+							setSupSearchSampleQuery(input)
+						}}
+					/>
 					<SuperSearchQueryDisplay
 						show={supSearchShowQuery}
 						query={queryData}
-						title={superSearchCommonData.queryDialog.title}
+						title={superSearchCommonData.sampleQueryDialog.title}
 						setOpen={(input) => {
 							setSupSearchShowQuery(input)
 						}}
@@ -255,65 +259,41 @@ const SuperSearch = (props) => {
 							className='tab-content-padding'
 							title={superSearchJSONData.tabTitle}>
 							<Container className='tab-content-border'>
-							<Grid
-								container
-								style={{ margin: '0  auto' }}
-								spacing={3}
-								justify='center'>
-								<div style={{ paddingBottom: "20px" }}></div>
-								<Grid item xs={11} sm={11} className="pl-3 pr-4">
-									<FormControl
-										fullWidth
-										variant='outlined'
-									>
-										<Typography className={'search-lbl'} gutterBottom>
-											<HelpTooltip
-												title={commonSuperSearchData.query_select.tooltip.title}
-												text={commonSuperSearchData.query_select.tooltip.text}
-											/>
-											{commonSuperSearchData.query_select.name}
-										</Typography>
-										<SelectControl
-											inputValue={superSearchQuerySelect}
-											placeholder={superSearchJSONData.query_select.placeholder}
-											placeholderId={superSearchJSONData.query_select.placeholderId}
-											placeholderName={superSearchJSONData.query_select.placeholderName}
-											menu={superSearchJSONData.query_select.query_list}
-											onBlur={() => executeSuperSearchQuery(superSearchQuerySelect === superSearchJSONData.query_select.placeholderId ? [] 
-												: superSearchJSONData.query_select.query_list.find(option => option.id === superSearchQuerySelect).query)
-												}
-											setInputValue={(value) => setSuperSearchQuerySelect(value)}
-										/>
-									</FormControl>
-								</Grid>
+								<Grid
+									container
+									style={{ margin: '0  auto' }}
+									spacing={3}
+									justify='center'>
+									<Grid item xs={12} sm={12}>
+									<h5><br></br><center>{superSearchData.super_search.message}</center></h5>
+										{svgData.length !== 0 && <SuperSearchSVG 
+											svgData={svgData} setSelectedNode={setSelectedNode}
+											goToListPage={goToListPage}
+										/>}
+									</Grid>
 
-								{/* <h4><center>{superSearchData.super_search.message}</center><br></br></h4> */}
-
-								<Grid item xs={12} sm={12}>
-								<h5><br></br><center>{superSearchData.super_search.message}</center></h5>
-									{svgData.length !== 0 && <SuperSearchSVG 
-										svgData={svgData} setSelectedNode={setSelectedNode}
-										goToListPage={goToListPage}
-									/>}
-								</Grid>
-
-								{/* Buttons */}
-								<Grid item xs={11} sm={11}>
-									<Row className="gg-align-right mr-3">
-										<Button className="gg-btn-outline mr-4"
-										disabled={queryData.length <= 0}
-										onClick={resetSuperSearchQuery}
-										>
-											Reset Query
-										</Button>
-										<Button className="gg-btn-outline" 
-											disabled={queryData.length <= 0}
-											onClick={() => setSupSearchShowQuery(true)}			
-										>
-											Show Query
-										</Button>
-									</Row>
-								</Grid>
+									{/* Buttons */}
+									<Grid item xs={11} sm={11}>
+										<Row className="gg-align-right mr-3">
+											<Button className="gg-btn-outline mr-4" 
+												onClick={() => setSupSearchSampleQuery(true)}			
+											>
+												Try Sample Query
+											</Button>
+											<Button className="gg-btn-outline mr-4"
+												disabled={queryData.length <= 0}
+												onClick={resetSuperSearchQuery}
+											>
+												Reset Query
+											</Button>
+											<Button className="gg-btn-outline" 
+												disabled={queryData.length <= 0}
+												onClick={() => setSupSearchShowQuery(true)}			
+											>
+												Show Query
+											</Button>
+										</Row>
+									</Grid>
 								</Grid>
 							</Container>
 						</Tab>

@@ -1038,7 +1038,7 @@
         "name": "Super Search Sample Query List",
         "tooltip": {
           "title": "Super Search Sample Query List",
-          "text": "Select sample super search query and click outside select control to execute. This will execute sample query and prefill the results. You can click on respective node(s) to see properties used to perform search."
+          "text": "Select sample super search query and click on search to execute. This will execute sample query and prefill the results. You can click on respective node(s) to see properties used to perform search."
         }
       }
     }

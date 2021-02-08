@@ -343,56 +343,57 @@ const SuperSearchControl = (props) => {
                 disableScrollLock
                 onClose={() => props.setSelectedNode("")} 
             >  
-                <div 
-                    style={{padding:40, content:'center', minHeight: '520px', width: '1200px' }}
-                    className = "gf-content-div"
-                >
+                <div className = "gf-content-div">
                     <h5 className= "alert-dialog-title"><center>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</center></h5>
-                    <p><span id='display'></span></p>
-                    <TextAlert
-                        alertInput={alertTextInput}
-                    />
-                    <div style={{paddingTop: '20px', overflow: 'scroll', content:'center', height: '290px', width: '1120px' }}>
-                        {controlArray.sort(sortByOrder).map((query, index, cntArr ) =>
-                            <SuperSearchInputcontrol 
-                                key={query.order}
-                                query={query} 
-                                prevOrderId={index - 1 === -1 ? undefined : cntArr[index - 1].order} 
-                                nextOrderId={index + 1 === controlArray.length ? undefined : cntArr[index + 1].order}
-                                supSearchDeleteQuery={supSearchDeleteQuery} supSearchAddQuery={supSearchAddQuery}
-                                supSearchMoveUpQuery={supSearchMoveUpQuery} supSearchMoveDownQuery={supSearchMoveDownQuery}
-                                supSearchUpdateQuery={supSearchUpdateQuery}
-                                data={props.data} selectedNode={props.selectedNode}
-                        />)}
-                    </div>
-                    <div style={{ marginTop: "20px", marginRight: "15px" }}>
-                        <Button
-                            className='gg-btn-blue mb-3'
-                            style={{ float: "right" }}
-                            onClick={supSearchSubmitQuery}
-                            disabled={
-                                !controlArray.every(
-                                    ({error}) => error === false
-                                )
-                                }
-                            >
-                            Search
-                        </Button>
-                        <Button
-                            className='gg-btn-outline mr-3 mb-3'
-                            style={{ float: "right" }}
-                            onClick={clearSuperSearchFields}
-                            >
-                            Clear Fields
-                        </Button>
-                        <Button
-                            className='gg-btn-outline mr-3 mb-3'
-                            style={{ float: "right" }}
-                            onClick={() => props.setSelectedNode("")}
-                            >
-                            Cancel
-                        </Button>
-                    </div>
+                    <div 
+                        style={{paddingRight:40, paddingLeft:40, paddingTop:40, content:'center', minHeight: '430px', width: '1200px' }}
+                    >
+                        <p><span id='display'></span></p>
+                        <TextAlert
+                            alertInput={alertTextInput}
+                        />
+                        <div style={{paddi1ngTop: '20px', overflow: 'scroll', content:'center', height: '270px', width: '1120px' }}>
+                            {controlArray.sort(sortByOrder).map((query, index, cntArr ) =>
+                                <SuperSearchInputcontrol 
+                                    key={query.order}
+                                    query={query} 
+                                    prevOrderId={index - 1 === -1 ? undefined : cntArr[index - 1].order} 
+                                    nextOrderId={index + 1 === controlArray.length ? undefined : cntArr[index + 1].order}
+                                    supSearchDeleteQuery={supSearchDeleteQuery} supSearchAddQuery={supSearchAddQuery}
+                                    supSearchMoveUpQuery={supSearchMoveUpQuery} supSearchMoveDownQuery={supSearchMoveDownQuery}
+                                    supSearchUpdateQuery={supSearchUpdateQuery}
+                                    data={props.data} selectedNode={props.selectedNode}
+                            />)}
+                        </div>
+                        <div style={{ marginTop: "20px", marginRight: "15px" }}>
+                            <Button
+                                className='gg-btn-blue mb-3'
+                                style={{ float: "right" }}
+                                onClick={supSearchSubmitQuery}
+                                disabled={
+                                    !controlArray.every(
+                                        ({error}) => error === false
+                                    )
+                                    }
+                                >
+                                Search
+                            </Button>
+                            <Button
+                                className='gg-btn-outline mr-3 mb-3'
+                                style={{ float: "right" }}
+                                onClick={clearSuperSearchFields}
+                                >
+                                Clear Fields
+                            </Button>
+                            <Button
+                                className='gg-btn-outline mr-3 mb-3'
+                                style={{ float: "right" }}
+                                onClick={() => props.setSelectedNode("")}
+                                >
+                                Cancel
+                            </Button>
+                        </div>
+                    </div>  
                 </div>
             </Dialog>
         </>
