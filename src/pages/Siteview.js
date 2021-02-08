@@ -12,7 +12,8 @@ import { getTitle, getMeta } from "../utils/head";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
-
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { Tab, Tabs, Container } from "react-bootstrap";
 import { groupEvidences, groupOrganismEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
 import "../css/detail.css";
@@ -104,11 +105,7 @@ const SequenceLocationViewer = ({
         return "highlightN";
       } else if (match.type === "O") {
         return "highlightO";
-      }
-      //  else if (match.type === "L") {
-      //   return "highlightMutagenesis";
-      // }
-      else if (match.type === "M") {
+      } else if (match.type === "M") {
         return "highlightMutate";
       } else if (match.type === "G") {
         return "highlightGlycation";
@@ -267,6 +264,7 @@ const Siteview = ({ position }) => {
   const [sequence, setSequence] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState(position);
   const [positionData, setPositionData] = useState([]);
+  const [nonExistent, setNonExistent] = useState(null);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -275,19 +273,33 @@ const Siteview = ({ position }) => {
   useEffect(() => {
     logActivity("user", id);
     const getProteinsiteDetailData = getProteinsiteDetail(id, selectedPosition);
-
     getProteinsiteDetailData.then(({ data }) => {
       if (data.code) {
         let message = "Detail api call";
         logActivity("user", id, "No results. " + message);
+        setPageLoading(false);
       } else {
         setDetailData(data);
+        setPageLoading(false);
       }
     });
 
     getProteinsiteDetailData.catch(({ response }) => {
-      let message = "siteview api call";
-      axiosError(response, id, message);
+      if (
+        response.data &&
+        response.data.error_list &&
+        response.data.error_list.length &&
+        response.data.error_list[0].error_code &&
+        response.data.error_list[0].error_code === "non-existent-record"
+      ) {
+        setNonExistent({
+          error_code: response.data.error_list[0].error_code,
+          history: response.data.history
+        });
+      } else {
+        let message = "Site Detail api call";
+        axiosError(response, id, message, setPageLoading, setAlertDialogInput);
+      }
     });
   }, [selectedPosition]);
 
@@ -588,6 +600,34 @@ const Siteview = ({ position }) => {
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   // ===================================== //
 
+  if (nonExistent) {
+    return (
+      <Container className="tab-content-border2">
+        <Alert className="erroralert" severity="error">
+          {nonExistent.history && nonExistent.history.length ? (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b>Record is Nonexistent
+              </AlertTitle>
+              <ul>
+                {nonExistent.history.map(item => (
+                  <span className="recordInfo">
+                    <li>{item.description}</li>
+                  </span>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <>
+              <AlertTitle>
+                This Glycan <b>{id} </b> Record is not valid
+              </AlertTitle>
+            </>
+          )}
+        </Alert>
+      </Container>
+    );
+  }
   return (
     <>
       <Row className="gg-baseline">
