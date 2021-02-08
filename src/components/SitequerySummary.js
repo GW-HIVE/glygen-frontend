@@ -31,44 +31,36 @@ function getDateTime() {
   if (second.toString().length == 1) {
     second = "0" + second;
   }
-  var dateTime =
-    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
   return dateTime;
 }
 
-const SiteQuerySummary = props => {
+const SiteQuerySummary = (props) => {
   const title = "Site Search Summary";
   const { data, onModifySearch, timestamp, searchId } = props;
   const proteinStrings = stringConstants.protein.common;
   const superSearchStrings = stringConstants.super_search.common;
 
-  const {
-    uniprot_ac,
-    start_pos,
-    end_pos,
-    annotation,
-    aa_list,
-    glycosylated_aa
-  } = data;
+  const { uniprot_ac, start_pos, end_pos, annotation, aa_list, glycosylated_aa } = data;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
   const [aminoAcidLookup, setAminoAcidLookup] = useState({});
 
   useEffect(() => {
-    getSuperSearchList().then(data => {
+    getSuperSearchList().then((data) => {
       const lookup = data.data.aa_list
         .map(({ name, key }) => {
           const tokens = name.split(" - ");
           return {
             key,
             short: tokens[1],
-            long: tokens[0]
+            long: tokens[0],
           };
         })
         .reduce(
           (ind, { key, short, long }) => ({
             ...ind,
-            [key]: { short, long }
+            [key]: { short, long },
           }),
           {}
         );
@@ -77,7 +69,7 @@ const SiteQuerySummary = props => {
     });
   }, []);
 
-  const getSummaryData = query => {
+  const getSummaryData = (query) => {
     let result = {};
 
     for (let querySection of query) {
@@ -101,7 +93,7 @@ const SiteQuerySummary = props => {
         <Card.Body>
           <Card.Title>
             <p>
-              <strong>Performed on: {executionTime} (EST)</strong>
+              <strong>Performed on: {executionTime}</strong>
             </p>
           </Card.Title>
           <Card.Text>
@@ -109,7 +101,7 @@ const SiteQuerySummary = props => {
 
             {searchId !== "sups" && data && data.length > 0 && (
               <>
-                {data.map(querySection => (
+                {data.map((querySection) => (
                   <>
                     {querySection.concept === "protein" && (
                       <Row className="summary-table-col" sm={12}>
@@ -135,7 +127,7 @@ const SiteQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylated_aa.aa_list
-                    .map(key => aminoAcidLookup[key].short || "")
+                    .map((key) => aminoAcidLookup[key].short || "")
                     .join(` ${glycosylated_aa.operation} `)}
                 </Col>
               </Row>
@@ -161,17 +153,13 @@ const SiteQuerySummary = props => {
             >
               Update Results
             </Button>
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              onClick={onModifySearch}
-            >
+            <Button type="button" className="gg-btn-blue" onClick={onModifySearch}>
               Modify Search
             </Button>
           </div>
           <Card.Text>
-            ** To perform the same search again using the current version of the
-            database, click <strong>“Update Results”</strong>.
+            ** To perform the same search again using the current version of the database, click{" "}
+            <strong>“Update Results”</strong>.
           </Card.Text>
         </Card.Body>
       </Card>

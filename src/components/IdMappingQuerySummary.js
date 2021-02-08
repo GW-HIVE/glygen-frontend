@@ -51,7 +51,7 @@ const IdMappingQuerySummary = (props) => {
         <Card.Body>
           <Card.Title>
             <p>
-              <strong>Performed on: {executionTime} (EST)</strong>
+              <strong>Performed on: {executionTime}</strong>
             </p>
           </Card.Title>
           <Card.Text>
