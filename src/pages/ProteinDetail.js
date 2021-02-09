@@ -287,15 +287,13 @@ const ProteinDetail = (props) => {
                 var synTemp = [];
                 var synonyms = disease[i].synonyms.slice();
                 for (var j = 0, k = 0; j < disease[i].synonyms.length; j++) {
-                  var temp = synonyms.filter(
-                    syn => syn.name === disease[i].synonyms[j].name
-                  );
+                  var temp = synonyms.filter((syn) => syn.name === disease[i].synonyms[j].name);
                   if (temp && temp.length) {
                     synTemp[k] = {
                       name: disease[i].synonyms[j].name,
-                      resource: temp
+                      resource: temp,
                     };
-                    synonyms = synonyms.filter(syn => syn.name !== synTemp[k].name);
+                    synonyms = synonyms.filter((syn) => syn.name !== synTemp[k].name);
                     k++;
                   }
                 }
@@ -350,8 +348,7 @@ const ProteinDetail = (props) => {
     });
   }, []);
 
-
-  if (detailData.gene_nameslData) {
+  if (detailData.gene_names) {
     geneNames = formatNamesData(detailData.gene_names);
     recommendedGeneRows = geneNames.map(getRecommendedRows).filter((arg) => arg !== null);
     synonymGeneRows = geneNames.map(getSynonymRows).filter((arg) => arg !== null);
