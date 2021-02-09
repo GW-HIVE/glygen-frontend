@@ -20,7 +20,7 @@ export default function SuperSearchQueryDisplay(props) {
             onClose={() => props.setOpen(false)} 
         >    
             <div id="contents" class = "gf-content-div">
-                <h5 className= "alert-dialog-title">{props.title}</h5>
+                <h5 className= "alert-dialog-title" style={{minWidth: '500px' }}>{props.title}</h5>
                 <div clas1sName="alert-dialog-content"
                     style={{padding:40, content:'center'}}
                 >

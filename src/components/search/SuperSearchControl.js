@@ -338,13 +338,16 @@ const SuperSearchControl = (props) => {
 		<>            
             <Dialog
                 open={props.selectedNode !== ""}
+                classes= {{
+                    paper: "alert-dialog",
+                }}
                 style={{margin:40}}
                 maxWidth={'lg'}
                 disableScrollLock
                 onClose={() => props.setSelectedNode("")} 
             >  
                 <div className = "gf-content-div">
-                    <h5 className= "alert-dialog-title"><center>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</center></h5>
+                    <h5 className= "alert-dialog-title" style={{width: '1200px' }}><center>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</center></h5>
                     <div 
                         style={{paddingRight:40, paddingLeft:40, paddingTop:40, content:'center', minHeight: '430px', width: '1200px' }}
                     >

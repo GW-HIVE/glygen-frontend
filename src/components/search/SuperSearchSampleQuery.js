@@ -23,7 +23,10 @@ export default function SuperSearchSampleQuery(props) {
         <Dialog
             open={props.show}
             maxWidth={'lg'}
-            style={{padding:40}}
+            classes= {{
+                paper: "alert-dialog",
+            }}
+            style={{margin:40}}
             disableScrollLock
             onClose={() => props.setOpen(false)} 
         >    
@@ -31,16 +34,15 @@ export default function SuperSearchSampleQuery(props) {
                 id="contents"
                 class = "gf-content-div"
              >
-            <h5 className= "alert-dialog-title">{props.title}</h5>
+            <h5 className= "alert-dialog-title" style={{minWidth: '800px' }}>{props.title}</h5>
             <div className="alert-dialog-content"
                 style={{minWidth: '800px' }}
             >
                 <Grid
                     container
                     style={{ margin: '0  auto' }}
-                    spacing={3}
                     justify='center'>
-                        <Grid item xs={11} sm={11} className="pl-3 pr-4">
+                        <Grid item xs={11} sm={11} className="pl-3 pr-4 pb-4 pt-2">
                             <FormControl
                                 fullWidth
                                 variant='outlined'
@@ -63,10 +65,10 @@ export default function SuperSearchSampleQuery(props) {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={11} sm={11} className="pl-3 pr-4">  
+                        <Grid item xs={11} sm={11} className="pl-3 pr-4 pb-4 pt-2">  
                             <Button
                                 className= "gg-btn-blue"
-                                style={{marginTop: "20px", float: "right" }}
+                                style={{ float: "right" }}
                                 onClick={() => {
                                     props.executeSuperSearchQuery(superSearchQuerySelect === superSearchJSONData.query_select.placeholderId ? [] 
                                     : superSearchJSONData.query_select.query_list.find(option => option.id === superSearchQuerySelect).query);
@@ -77,7 +79,7 @@ export default function SuperSearchSampleQuery(props) {
                             </Button> 
                             <Button
                                 className= "gg-btn-outline mr-4"
-                                style={{marginTop: "20px", float: "right" }}
+                                style={{ float: "right" }}
                                 onClick={() => props.setOpen(false)}
                             >
                                 Cancel
