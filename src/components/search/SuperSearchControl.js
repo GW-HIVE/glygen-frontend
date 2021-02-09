@@ -349,12 +349,13 @@ const SuperSearchControl = (props) => {
                 <div className = "gf-content-div">
                     <h5 className= "sups-dialog-title" style={{width: '1200px' }}>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</h5>
                     <div 
-                        style={{paddingRight:40, paddingLeft:40, paddingTop:40, content:'center', minHeight: '430px', width: '1200px' }}
+                        style={{paddingRight:40, paddingLeft:40, content:'center', width: '1200px' }}
                     >
                         <p><span id='display'></span></p>
                         <TextAlert
                             alertInput={alertTextInput}
                         />
+                        <div style={{height: alertTextInput.show ? '15px' : '30px'}}></div>
                         <div style={{paddingTop: '2px', overflow: 'scroll', content:'center', height: '270px', width: '1120px' }}>
                             {controlArray.sort(sortByOrder).map((query, index, cntArr ) =>
                                 <SuperSearchInputcontrol 
@@ -370,7 +371,7 @@ const SuperSearchControl = (props) => {
                         </div>
                         <div style={{ marginTop: "20px", marginRight: "15px" }}>
                             <Button
-                                className='gg-btn-blue mb-3'
+                                className='gg-btn-blue mb-5'
                                 style={{ float: "right" }}
                                 onClick={supSearchSubmitQuery}
                                 disabled={
@@ -382,14 +383,14 @@ const SuperSearchControl = (props) => {
                                 Search
                             </Button>
                             <Button
-                                className='gg-btn-outline mr-3 mb-3'
+                                className='gg-btn-outline mr-3 mb-5'
                                 style={{ float: "right" }}
                                 onClick={clearSuperSearchFields}
                                 >
                                 Clear Fields
                             </Button>
                             <Button
-                                className='gg-btn-outline mr-3 mb-3'
+                                className='gg-btn-outline mr-3 mb-5'
                                 style={{ float: "right" }}
                                 onClick={() => props.setSelectedNode("")}
                                 >
