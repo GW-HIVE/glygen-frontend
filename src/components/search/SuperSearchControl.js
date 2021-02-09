@@ -355,7 +355,7 @@ const SuperSearchControl = (props) => {
                         <TextAlert
                             alertInput={alertTextInput}
                         />
-                        <div style={{paddi1ngTop: '20px', overflow: 'scroll', content:'center', height: '270px', width: '1120px' }}>
+                        <div style={{paddingTop: '2px', overflow: 'scroll', content:'center', height: '270px', width: '1120px' }}>
                             {controlArray.sort(sortByOrder).map((query, index, cntArr ) =>
                                 <SuperSearchInputcontrol 
                                     key={query.order}
