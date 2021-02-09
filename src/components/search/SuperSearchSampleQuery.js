@@ -42,7 +42,7 @@ export default function SuperSearchSampleQuery(props) {
                     container
                     style={{ margin: '0  auto' }}
                     justify='center'>
-                        <Grid item xs={11} sm={11} className="pl-3 pr-4 pb-4 pt-2">
+                        <Grid item xs={11} sm={11} className="pl-3 pr-3 pb-4 pt-2">
                             <FormControl
                                 fullWidth
                                 variant='outlined'
@@ -65,7 +65,7 @@ export default function SuperSearchSampleQuery(props) {
                             </FormControl>
                         </Grid>
 
-                        <Grid item xs={11} sm={11} className="pl-3 pr-4 pb-4 pt-2">  
+                        <Grid item xs={11} sm={11} className="pl-3 pr-3 pb-4 pt-4">  
                             <Button
                                 className= "gg-btn-blue"
                                 style={{ float: "right" }}
