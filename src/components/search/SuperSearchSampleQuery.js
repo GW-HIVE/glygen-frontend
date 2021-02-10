@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import Button from 'react-bootstrap/Button';
 import { Dialog } from "@material-ui/core";
@@ -19,6 +19,10 @@ export default function SuperSearchSampleQuery(props) {
   let commonSuperSearchData = stringConstants.super_search.common;
   const [superSearchQuerySelect, setSuperSearchQuerySelect] = useState("");
 
+  useEffect(() => {
+    setSuperSearchQuerySelect(props.superSearchQuerySelect);
+  }, [props.superSearchQuerySelect]);
+
   return (
         <Dialog
             open={props.show}
@@ -28,7 +32,10 @@ export default function SuperSearchSampleQuery(props) {
             }}
             style={{margin:40}}
             disableScrollLock
-            onClose={() => props.setOpen(false)} 
+            onClose={() => {
+                setSuperSearchQuerySelect(props.superSearchQuerySelect);
+                props.setOpen(false);
+            }} 
         >    
             <div 
                 id="contents"
@@ -70,8 +77,9 @@ export default function SuperSearchSampleQuery(props) {
                                 className= "gg-btn-blue"
                                 style={{ float: "right" }}
                                 onClick={() => {
+                                    props.setSuperSearchQuerySelect(superSearchQuerySelect);
                                     props.executeSuperSearchQuery(superSearchQuerySelect === superSearchJSONData.query_select.placeholderId ? [] 
-                                    : superSearchJSONData.query_select.query_list.find(option => option.id === superSearchQuerySelect).query);
+                                    : superSearchJSONData.query_select.query_list.find(option => option.id === superSearchQuerySelect).query, true);
                                     props.setOpen(false);
                                 }}
                             >
@@ -80,7 +88,10 @@ export default function SuperSearchSampleQuery(props) {
                             <Button
                                 className= "gg-btn-outline mr-4"
                                 style={{ float: "right" }}
-                                onClick={() => props.setOpen(false)}
+                                onClick={() => {
+                                    setSuperSearchQuerySelect(props.superSearchQuerySelect);
+                                    props.setOpen(false);
+                                }}
                             >
                                 Cancel
                             </Button>

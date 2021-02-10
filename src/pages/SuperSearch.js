@@ -69,13 +69,6 @@ const SuperSearch = (props) => {
 		id &&
 		getSuperSearchList(id, 1).then(({ data }) => {
 				logActivity("user", id, "Super Search modification initiated");
-				// Keep this above updateNodeData function so that all the state variables are assigned values before svg is rendered/generated.
-				// Otherwise svg function goToListPage will have old value of superSearchQuerySelect.
-				let queryID = searchId && searchId.includes("_") ? searchId.replace("sups_", "") : "";
-				if (queryID && queryID !== "") {
-					let selQuery = superSearchJSONData.query_select.query_list.find(option => option.id === queryID);
-					setSuperSearchQuerySelect(selQuery && selQuery.id ? selQuery.id : "");
-				}
 				setQueryData(data.cache_info.query);
 				updateNodeData(data.cache_info.result_summary, initSvgData);
 				setSupSearchActTabKey("Super-Search");
@@ -180,17 +173,18 @@ const SuperSearch = (props) => {
 	* @param {array} superSearchQuery - query object.
 	* @param {boolean} selected - true if sample query is executed.
   **/
- function executeSuperSearchQuery(superSearchQuery) {
+ function executeSuperSearchQuery(superSearchQuery, selected) {
 
 	if (superSearchQuery.length === 0) {
 		setQueryData(superSearchQuery);
 		updateNodeData();
 		setSelectedNode("");
+		setSuperSearchQuerySelect("");
 	}
 
 	if (superSearchQuery.length > 0){
 		setPageLoading(true);
-		setSuperSearchQuerySelect("");
+		!selected && setSuperSearchQuerySelect("");
 		let message = "Super Search query=" + JSON.stringify(superSearchQuery);
 		logActivity("user", "", "Performing Super Search. " + message);
 		getSuperSearch(superSearchQuery).then((response) => {
@@ -231,6 +225,8 @@ const SuperSearch = (props) => {
 					<SuperSearchSampleQuery
 						show={supSearchSampleQuery}
 						executeSuperSearchQuery={executeSuperSearchQuery}
+						setSuperSearchQuerySelect={setSuperSearchQuerySelect}
+						superSearchQuerySelect={superSearchQuerySelect}
 						title={superSearchCommonData.sampleQueryDialog.title}
 						setOpen={(input) => {
 							setSupSearchSampleQuery(input)
