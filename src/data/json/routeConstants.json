@@ -31,8 +31,8 @@
   "siteview": "/Siteview/",
   "motifList": "/list-of-motifs/",
   "motifDetail": "/motif/",
-  "idMapping": "/id-mapping/",
-  "idMappingResult": "/id-mapping-result/",
+  "idMapping": "/mapper/",
+  "idMappingResult": "/mapper-result/",
   "superSearch": "/super-search/",
   "home": "/home/",
   "default": "/"

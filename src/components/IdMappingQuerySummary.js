@@ -37,7 +37,7 @@ function getDateTime() {
 }
 
 const IdMappingQuerySummary = (props) => {
-  const title = "ID Mapping Summary";
+  const title = "GlyGen Mapper Summary";
   const { onModifySearch, timestamp, totalSize, totalSizeUnmap } = props;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";

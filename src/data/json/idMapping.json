@@ -1,7 +1,7 @@
 {
   "pageSubtitle": "Our Tool",
-  "pageTitle": "ID",
-	"pageTitleBold": "Mapping",
+  "pageTitle": "GlyGen",
+	"pageTitleBold": "Mapper",
 	"pageTitleIdMapResult": "ID Mapping",
 	"pageTitleIdMapResultBold": "Result",
 	"pageTitleIdMapReason": "Reason why certain entries could not be mapped",
@@ -30,7 +30,7 @@
         "orderID": 100,
         "example": {
           "name": "Example",
-          "id": "91859018, 91845230, 91845682, 439177, 1234567, XYZ"
+          "id": "91859018, 91845230, 91845682, 439177, 1234567, 9876543"
         }
       }
     ],
