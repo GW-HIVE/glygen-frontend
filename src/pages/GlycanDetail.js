@@ -165,10 +165,11 @@ const GlycanDetail = (props) => {
     { show: false, id: "" }
   );
 
+  const [expressionTabSelected, setExpressionTabSelected] = useState("");
+  const [expressionWithtissue, setExpressionWithtissue] = useState([]);
+  const [expressionWithcell, setExpressionWithcell] = useState([]);
+
   let history;
-  let expressionTabSelected;
-  let expressionWithtissue;
-  let expressionWithcell;
 
   useEffect(() => {
     setPageLoading(true);
@@ -181,10 +182,50 @@ const GlycanDetail = (props) => {
         logActivity("user", id, "No results. " + message);
         setPageLoading(false);
       } else {
-        setItemsCrossRef(getItemsCrossRef(data));
 
-        setDetailData(data);
+        let detailDataTemp = data;
 
+        if (detailDataTemp.expression) {
+          const WithTissue = detailDataTemp.expression.filter((item) => item.tissue !== undefined);
+          const WithCellline = detailDataTemp.expression.filter((item) => item.cell_line !== undefined);
+          setExpressionWithtissue(WithTissue);
+          setExpressionWithcell(WithCellline);
+          setExpressionTabSelected(WithTissue.length > 0 ? "with_tissue" : "with_cellline");
+        }
+        if (detailDataTemp.mass) {
+          detailDataTemp.mass = addCommas(detailDataTemp.mass);
+        }
+        if (detailDataTemp.mass_pme) {
+          detailDataTemp.mass_pme = addCommas(detailDataTemp.mass_pme);
+        }
+        if (detailDataTemp.glycoct) {
+          detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\r\n");
+        }
+      
+        if (detailDataTemp.composition) {
+          detailDataTemp.composition = detailDataTemp.composition
+            .map((res, ind, arr) => {
+              if (glycanStrings.composition[res.residue.toLowerCase()]) {
+                res.name = glycanStrings.composition[res.residue.toLowerCase()].shortName;
+                res.orderID = glycanStrings.composition[res.residue.toLowerCase()].orderID;
+                return res;
+              } else {
+                let message = "New residue in Composition: " + res.residue;
+                logActivity("error", id, message);
+                res.name = res.residue;
+                res.orderID =
+                  parseInt(glycanStrings.composition["other"].orderID) -
+                  (parseInt(arr.length) - parseInt(ind));
+                return res;
+              }
+            })
+            .sort(function (res1, res2) {
+              return parseInt(res1.orderID) - parseInt(res2.orderID);
+            });
+        }
+
+        setItemsCrossRef(getItemsCrossRef(detailDataTemp));
+        setDetailData(detailDataTemp);
         setPageLoading(false);
       }
 
@@ -208,6 +249,7 @@ const GlycanDetail = (props) => {
           error_code: response.data.error_list[0].error_code,
           history: response.data.history,
         });
+        setPageLoading(false);
       } else {
         let message = "Glycan Detail api call";
         axiosError(response, id, message, setPageLoading, setAlertDialogInput);
@@ -215,45 +257,7 @@ const GlycanDetail = (props) => {
     });
     // eslint-disable-next-line
   }, []);
-  if (detailData.expression) {
-    const WithTissue = detailData.expression.filter((item) => item.tissue !== undefined);
-    const WithCellline = detailData.expression.filter((item) => item.cell_line !== undefined);
-    expressionWithtissue = WithTissue;
-    expressionWithcell = WithCellline;
 
-    expressionTabSelected = WithTissue.length > 0 ? "with_tissue" : "with_cellline";
-  }
-  if (detailData.mass) {
-    detailData.mass = addCommas(detailData.mass);
-  }
-  if (detailData.mass_pme) {
-    detailData.mass_pme = addCommas(detailData.mass_pme);
-  }
-  if (detailData.glycoct) {
-    detailData.glycoct = detailData.glycoct.replace(/ /g, "\r\n");
-  }
-
-  if (detailData.composition) {
-    detailData.composition = detailData.composition
-      .map((res, ind, arr) => {
-        if (glycanStrings.composition[res.residue.toLowerCase()]) {
-          res.name = glycanStrings.composition[res.residue.toLowerCase()].shortName;
-          res.orderID = glycanStrings.composition[res.residue.toLowerCase()].orderID;
-          return res;
-        } else {
-          let message = "New residue in Composition: " + res.residue;
-          logActivity("error", id, message);
-          res.name = res.residue;
-          res.orderID =
-            parseInt(glycanStrings.composition["other"].orderID) -
-            (parseInt(arr.length) - parseInt(ind));
-          return res;
-        }
-      })
-      .sort(function (res1, res2) {
-        return parseInt(res1.orderID) - parseInt(res2.orderID);
-      });
-  }
   const {
     mass,
     glytoucan,
