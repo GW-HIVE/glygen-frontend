@@ -45,7 +45,7 @@ export const getSuperSearch = formObject => {
   return getJson(url);
 };
 
-export const getSiteSearch = async queryObject => {
+const constructSiteSearchObject = queryObject => {
   const {
     proteinId,
     aminoId,
@@ -56,31 +56,28 @@ export const getSiteSearch = async queryObject => {
     maxRange
   } = queryObject;
 
+  let min = minRange || position || maxRange;
+  let max = maxRange || position || minRange;
+
   const formObject = [];
 
-  if (proteinId) {
+  if (proteinId && proteinId.length) {
     formObject.push({
       concept: "protein",
       query: {
         aggregator: "$and",
         aggregated_list: [],
-        unaggregated_list: [
-          {
-            path: "uniprot_ac",
-            order: 0,
-            operator: "$eq",
-            string_value: proteinId
-          }
-        ]
+        unaggregated_list: proteinId.map((protein, index) => ({
+          path: "uniprot_ac",
+          order: index,
+          operator: "$eq",
+          string_value: protein
+        }))
       }
     });
   }
 
-  if (
-    (minRange && maxRange) ||
-    position ||
-    (annotations && annotations.length)
-  ) {
+  if (min || max || (annotations && annotations.length)) {
     const siteQuery = {
       concept: "site",
       query: {
@@ -91,12 +88,12 @@ export const getSiteSearch = async queryObject => {
     };
     let order = 0;
 
-    if ((minRange && maxRange) || position) {
+    if (min || max) {
       siteQuery.query.unaggregated_list.push({
         path: "start_pos",
         order,
         operator: "$eq",
-        numeric_value: minRange ? minRange : position
+        numeric_value: min
       });
 
       order++;
@@ -105,16 +102,29 @@ export const getSiteSearch = async queryObject => {
         path: "end_pos",
         order,
         operator: "$eq",
-        numeric_value: maxRange ? maxRange : position
+        numeric_value: max
       });
 
       order++;
     }
 
     if (annotations && annotations.length) {
+      let targetList = siteQuery.query.unaggregated_list;
+
+      if (annotationOperation === "or") {
+        const aggregator = {
+          aggregator: "$or",
+          unaggregated_list: []
+        };
+
+        siteQuery.query.aggregated_list.push(aggregator);
+
+        targetList = aggregator.unaggregated_list;
+      }
+
       for (let annotation of annotations) {
-        siteQuery.query.unaggregated_list.push({
-          path: annotation.id.toLowerCase(),
+        targetList.push({
+          path: annotation,
           order,
           operator: "$gt",
           string_value: []
@@ -126,6 +136,11 @@ export const getSiteSearch = async queryObject => {
     formObject.push(siteQuery);
   }
 
+  return formObject;
+};
+
+export const getSiteSearch = async queryObject => {
+  const formObject = constructSiteSearchObject(queryObject);
   const superSearchData = await getSuperSearch(formObject);
   const listId = superSearchData.data.results_summary.site.list_id;
   // const listLookupData = await getSuperSearchList(listId);
@@ -166,6 +181,7 @@ export const SITE_COLUMNS = [
   {
     dataField: "start_pos",
     text: "Start_Pos",
+    sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     }
@@ -173,6 +189,7 @@ export const SITE_COLUMNS = [
   {
     dataField: "end_pos",
     text: "End_Pos",
+    sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
     }
@@ -218,3 +235,27 @@ export const SITE_COLUMNS = [
     formatter: yesNoFormater
   }
 ];
+
+export const createSiteQuerySummary = query => {
+  let result = {};
+
+  for (let querySection of query) {
+    // for (let listItem of querySection.query.unaggregated_list) {
+    //   if (listItem.path === "uniprot_ac") {
+    //     if (!result.proteinId) {
+    //       result.proteinId = [];
+    //     }
+    //     result.proteinId.push(listItem.string_value);
+    //   } else if (
+    //     ["glycosylation", "snv", "mutagenesis"].includes(listItem.path)
+    //   ) {
+    //     if (!result.annotations) {
+    //       result.annotations = [];
+    //     }
+    //     result.annotations.push(listItem.path);
+    //   }
+    // }
+  }
+
+  return result;
+};

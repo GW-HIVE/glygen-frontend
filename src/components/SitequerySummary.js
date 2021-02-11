@@ -5,7 +5,10 @@ import stringConstants from "../data/json/stringConstants";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { getSuperSearchList } from "../data/supersearch";
+import {
+  getSuperSearchList,
+  createSiteQuerySummary
+} from "../data/supersearch";
 
 function getDateTime() {
   var now = new Date();
@@ -77,19 +80,7 @@ const SiteQuerySummary = props => {
     });
   }, []);
 
-  const getSummaryData = query => {
-    let result = {};
-
-    for (let querySection of query) {
-      for (let listItem of querySection.query.unaggregated_list) {
-        if (listItem.path === "uniprot_ac") {
-          result.protein = listItem.string_value;
-        }
-      }
-    }
-
-    return result;
-  };
+  const querySummary = createSiteQuerySummary(data);
 
   return (
     <>
@@ -118,6 +109,28 @@ const SiteQuerySummary = props => {
                         </Col>
                         <Col align="left" xs={6} sm={6} md={6} lg={6}>
                           {querySection.query.unaggregated_list[0].string_value}
+                        </Col>
+                      </Row>
+                    )}
+                  </>
+                ))}
+              </>
+            )}
+            {data && data.length && (
+              <>
+                {data.map(querySection => (
+                  <>
+                    {querySection.concept === "site" && (
+                      <Row className="summary-table-col" sm={12}>
+                        <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                          Path
+                        </Col>
+                        <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                          {querySummary.annotations &&
+                            querySummary.annotations.join(",")}
+                          {/* {querySection.query.unaggregated_list[0].path},
+                          {querySection.query.unaggregated_list[1].path} */}
+                          {/* <pre>{JSON.stringify(querySummary, null, 2)}</pre> */}
                         </Col>
                       </Row>
                     )}
