@@ -88,6 +88,9 @@ const ProtVista = () => {
 
     if (data.glycosylation) {
       for (let glyco of data.glycosylation) {
+
+        if (glyco.position === undefined)
+          continue;
         // $.each(data.glycosylation, function (i, glyco) {
         if (glyco.type === "N-linked") {
           if (glyco.glytoucan_ac) {

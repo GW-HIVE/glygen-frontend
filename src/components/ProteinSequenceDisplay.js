@@ -141,6 +141,7 @@ const ProteinSequenceDisplay = ({
       };
       const nLink = glycosylation
         .filter((item) => item.type === "N-linked")
+        .filter((item) => item.position === "undefined")
         .filter(distinctGlycanPositions)
         .map((item) => ({
           start: item.position,
@@ -148,6 +149,7 @@ const ProteinSequenceDisplay = ({
         }));
       const oLink = glycosylation
         .filter((item) => item.type === "O-linked")
+        .filter((item) => item.position === "undefined")
         .filter(distinctGlycanPositions)
         .map((item) => ({
           start: item.position,
