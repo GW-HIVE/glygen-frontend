@@ -16,6 +16,7 @@ import { getGlycanDownload } from "../data/glycan";
 import { getMotifDownload } from "../data/motif";
 import { getIdMappingMappedDownload } from "../data/mapping";
 import { getIdMappingUnmappedDownload } from "../data/mapping";
+import { getOrthologDownload, getLocusDownload } from "../data/usecases";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -46,6 +47,10 @@ const DownloadButton = (props) => {
         return getIdMappingMappedDownload;
       case "idMappingUnmapped":
         return getIdMappingUnmappedDownload;
+      case "ortholog":
+        return getOrthologDownload;
+      case "locus":
+        return getLocusDownload;
       default:
     }
     return null;

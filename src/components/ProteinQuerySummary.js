@@ -31,12 +31,11 @@ function getDateTime() {
   if (second.toString().length == 1) {
     second = "0" + second;
   }
-  var dateTime =
-    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
   return dateTime;
 }
 
-const ProteinQuerySummary = props => {
+const ProteinQuerySummary = (props) => {
   const title = "Protein Search Summary";
   let quickSearch = stringConstants.quick_search;
 
@@ -49,7 +48,6 @@ const ProteinQuerySummary = props => {
     refseq_ac,
     go_id,
     mass,
-    mass_type,
     go_term,
     organism,
     gene_name,
@@ -58,6 +56,7 @@ const ProteinQuerySummary = props => {
     sequence,
     glycosylated_aa,
     glycosylation_evidence,
+    glycosylation_type,
     pmid,
     term,
     term_category,
@@ -67,9 +66,7 @@ const ProteinQuerySummary = props => {
     binding_glycan_id,
   } = data;
 
-  const executionTime = timestamp
-    ? getDateTime(timestamp)
-    : "";
+  const executionTime = timestamp ? getDateTime(timestamp) : "";
 
   function formatProtein() {
     const ProteinAc = data.uniprot_canonical_ac;
@@ -79,20 +76,20 @@ const ProteinQuerySummary = props => {
   const [aminoAcidLookup, setAminoAcidLookup] = useState({});
 
   useEffect(() => {
-    getProteinInit().then(data => {
+    getProteinInit().then((data) => {
       const lookup = data.data.aa_list
         .map(({ name, key }) => {
           const tokens = name.split(" - ");
           return {
             key,
             short: tokens[1],
-            long: tokens[0]
+            long: tokens[0],
           };
         })
         .reduce(
           (ind, { key, short, long }) => ({
             ...ind,
-            [key]: { short, long }
+            [key]: { short, long },
           }),
           {}
         );
@@ -111,7 +108,7 @@ const ProteinQuerySummary = props => {
         <Card.Body>
           <Card.Title>
             <p>
-              <strong>Performed on: {executionTime} (EST)</strong>
+              <strong>Performed on: {executionTime}</strong>
             </p>
           </Card.Title>
           <Card.Text>
@@ -159,11 +156,7 @@ const ProteinQuerySummary = props => {
               </Row>
             )}
 
-            {searchId && searchId === "sups" &&
-                <>
-                {superSearchStrings.query}
-                </>
-            }
+            {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
 
             {mass && mass.min && (
               <Row className="summary-table-col">
@@ -192,7 +185,7 @@ const ProteinQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylated_aa.aa_list
-                    .map(key => aminoAcidLookup[key].short || "")
+                    .map((key) => aminoAcidLookup[key].short || "")
                     .join(` ${glycosylated_aa.operation} `)}
                 </Col>
               </Row>
@@ -207,16 +200,23 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
+            {glycosylation_type && (
+              <Row className="summary-table-col">
+                <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                  {proteinStrings.glycosylation_type.name}:
+                </Col>
+                <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                  {glycosylation_type}
+                </Col>
+              </Row>
+            )}
             {sequence && sequence.aa_sequence && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {proteinStrings.sequence.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  <abbr
-                    className="limit-text-size"
-                    title="{{sequence.aa_sequence}}"
-                  >
+                  <abbr className="limit-text-size" title="{{sequence.aa_sequence}}">
                     {sequence.aa_sequence}{" "}
                   </abbr>
                 </Col>
@@ -283,7 +283,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-            
+
             {go_id && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
@@ -327,7 +327,7 @@ const ProteinQuerySummary = props => {
                 </Col>
               </Row>
             )}
-             {disease_name && (
+            {disease_name && (
               <Row className="summary-table-col">
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {proteinStrings.disease_name.name}:
@@ -368,17 +368,13 @@ const ProteinQuerySummary = props => {
             >
               Update Results
             </Button>
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              onClick={onModifySearch}
-            >
+            <Button type="button" className="gg-btn-blue" onClick={onModifySearch}>
               Modify Search
             </Button>
           </div>
           <Card.Text>
-            ** To perform the same search again using the current version of the
-            database, click <strong>“Update Results”</strong>.
+            ** To perform the same search again using the current version of the database, click{" "}
+            <strong>“Update Results”</strong>.
           </Card.Text>
         </Card.Body>
       </Card>

@@ -20,6 +20,7 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
 import { getMappingInit, getMappingSearch, getMappingList } from "../data/mapping";
+import ExampleExploreControl from "../components/example/ExampleExploreControl";
 
 const IdMapping = (props) => {
   let { id } = useParams("");
@@ -112,7 +113,7 @@ const IdMapping = (props) => {
 
   /**
    * Function to set inputIdlist (Enter IDs) name value.
-   * @param {string} value - input inputIdlist (Enter IDs) name value.
+   * @param {string} event - input inputIdlist (Enter IDs) name value.
    **/
   const inputIdlistOnChange = (event) => {
     setInputTouched((state) => ({ ...state, idListInput: true }));
@@ -126,6 +127,23 @@ const IdMapping = (props) => {
       setInputIdListValidated(false);
     }
   };
+
+  /**
+   * Function to set id mapping input ID list value.
+   * @param {string} inputFuncInputIdlist - id mapping input ID list value.
+   **/
+  function funcInputIdlistOnChange(inputFuncInputIdlist) {
+    setInputTouched((state) => ({ ...state, idListInput: true }));
+    fileInputRef.current.value = "";
+    setIdMapSearchData({ inputIdlist: inputFuncInputIdlist });
+    if (inputFuncInputIdlist) {
+      setInputIdListValidated(true);
+      setFileUploadValidated(true);
+      setErrorFileUpload("");
+    } else {
+      setInputIdListValidated(false);
+    }
+  }
 
   const fileOnChangeHandler = () => {
     const typesFileUpload = ["text/plain"];
@@ -441,14 +459,16 @@ const IdMapping = (props) => {
                 inputValue={idMapSearchData.outputNamespace}
                 setInputValue={outputNamespaceOnChange}
                 menu={
-                  idMapSearchData.recordType === "any"
+                  idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
-                    : initData[idMapSearchData.recordType].namespace.map((toId) => {
-                        return {
-                          id: toId,
-                          name: toId,
-                        };
-                      })
+                    : initData[idMapSearchData.recordType].namespace
+                        .filter((toid) => toid !== idMapSearchData.inputNamespace)
+                        .map((toId) => {
+                          return {
+                            id: toId,
+                            name: toId,
+                          };
+                        })
                 }
                 required={true}
               />
@@ -503,27 +523,11 @@ const IdMapping = (props) => {
                 {idMappingData.input_idlist.required}
               </FormHelperText>
             )}
-
-            {/* <Typography>{JSON.stringify(isInputTouched)}</Typography>
-            {inputIdListValidated && <Typography>Input id list IS Validated</Typography>}
-            {!inputIdListValidated && <Typography>Input id list NOT Validated</Typography>}
-
-            {fileUploadValidated && <Typography>File upload IS Validated</Typography>}
-            {!fileUploadValidated && <Typography>File upload NOT Validated</Typography>}
-
-            {moleculeValidated && <Typography>Molecule IS Validated</Typography>}
-            {!moleculeValidated && <Typography>Molecule NOT Validated</Typography>}
-
-            {fromIdTypeValidated && <Typography>From Id IS Validated</Typography>}
-            {!fromIdTypeValidated && <Typography>From Id NOT Validated</Typography>}
-
-            {toIdTypeValidated && <Typography>To Id IS Validated</Typography>}
-            {!toIdTypeValidated && <Typography>To Id NOT Validated</Typography>} */}
+            <ExampleExploreControl
+              setInputValue={funcInputIdlistOnChange}
+              inputValue={idMappingData.input_idlist.examples}
+            />
           </FormControl>
-          <Typography>91859018,91845230,91845682,439177,1234567,XYZ</Typography>
-          {/* <Typography>91846235, 252277270, 11375554, 252288623, 91857678, 252290930</Typography>
-          <Typography>5288428 252293186 91859643 252293273 5288347 252294787</Typography>
-          <Typography>G00023MO G00023MO G00024MO G00024MO G00025AJ G00025AJ</Typography> */}
         </Grid>
 
         {/* File Upload */}

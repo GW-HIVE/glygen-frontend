@@ -22,6 +22,7 @@ const proteinStrings = stringConstants.protein.common;
 
 const SiteList = props => {
   let { id } = useParams();
+  let { searchId } = useParams();
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [timestamp, setTimeStamp] = useState();
@@ -87,7 +88,11 @@ const SiteList = props => {
   };
 
   const handleModifySearch = () => {
-    props.history.push(routeConstants.siteSearch + id);
+    if (searchId === "sups") {
+      props.history.push(routeConstants.superSearch + id);
+    } else {
+      props.history.push(routeConstants.siteSearch + id);
+    }
   };
 
   function rowStyleFormat(row, rowIdx) {
@@ -115,6 +120,7 @@ const SiteList = props => {
             <SitequerySummary
               data={query}
               timestamp={timestamp}
+              searchId={searchId}
               onModifySearch={handleModifySearch}
             />
           )}

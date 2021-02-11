@@ -19,6 +19,8 @@ import {
   GLYGEN_DATA,
   GLYGEN_SPARQL,
   GNOME_BROWSER,
+  GLYCOMOTIF_WIKI,
+  GLYGEN_SANDBOX,
 } from "../../envVariables";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,12 +66,6 @@ export default function Header() {
               <div>
                 <Link to={routeConstants.compositionSearch}>Composition&nbsp;Search</Link>
               </div>
-
-              <div>
-                <a href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
-                  GNOme&nbsp;Browser
-                </a>
-              </div>
             </Col>
             <Col xs={6} md={"auto"} className="text-left sitemap-item">
               <h6 className="text-uppercase">Explore</h6>
@@ -78,6 +74,12 @@ export default function Header() {
               </div>
               <div>
                 <Link to={routeConstants.proteinSearch}>Protein&nbsp;Search</Link>
+              </div>
+              <div>
+                <Link to={routeConstants.siteSearch}>Site&nbsp;Search</Link>
+              </div>
+              <div>
+                <Link to={routeConstants.superSearch}>Super&nbsp;Search</Link>
               </div>
               <div>
                 <Link to={routeConstants.motifList}>List&nbsp;of&nbsp;Motifs</Link>
@@ -99,6 +101,27 @@ export default function Header() {
                 <a href={GLYGEN_SPARQL} target="_blank" rel="noopener noreferrer">
                   SPARQL
                 </a>
+              </div>
+            </Col>
+            <Col xs={6} md={"auto"} className="text-left sitemap-item">
+              <h6 className="text-uppercase">Tools</h6>
+              <div>
+                <a href={GLYCOMOTIF_WIKI} target="_blank" rel="noopener noreferrer">
+                  GlycoMotif&nbsp;Wiki
+                </a>
+              </div>
+              <div>
+                <a href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
+                  GlyGen&nbsp;SandBox
+                </a>
+              </div>
+              <div>
+                <a href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
+                  GNOme&nbsp;Browser
+                </a>
+              </div>
+              <div>
+                <Link to={routeConstants.idMapping}>ID&nbsp;Mapping</Link>
               </div>
             </Col>
             <Col xs={6} md={"auto"} className="text-left sitemap-item">

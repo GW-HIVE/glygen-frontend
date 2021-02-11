@@ -1,25 +1,23 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import Helmet from 'react-helmet';
-import { useParams } from 'react-router-dom';
 import '../../css/Search.css';
 import stringConstants from '../../data/json/stringConstants';
-import superSearchSVGData from '../../data/json/superSearchSVGData';
-import { load } from 'data-loader';
+import superSearchData from '../../data/json/superSearchData';
 import { getSuperSearch } from '../../data/supersearch';
-import {select, selectAll, forceSimulation, forceManyBody, forceLink } from 'd3';
 import SuperSearchInputcontrol from '../input/SuperSearchInputcontrol';
 import { Dialog } from "@material-ui/core";
 import Button from 'react-bootstrap/Button';
 import {logActivity} from '../../data/logging';
 import {axiosError} from '../../data/axiosError';
-
+import TextAlert from '../../components/alert/TextAlert';
+import {sortByOrder} from '../../utils/common';
+import PropTypes from "prop-types";
 
 /**
- * Glycan search component for showing glycan search tabs.
+ * Super search component for showing dialog box with input controls.
  */
 const SuperSearchControl = (props) => {
 
-    let fieldTypes = superSearchSVGData.fieldTypes;
+    let fieldTypes = superSearchData.common.fieldTypes;
 
     const [controlArray, setControlArray] = useState([
         {
@@ -29,20 +27,35 @@ const SuperSearchControl = (props) => {
             "fieldType":"",
             "operation":"",
             "value":"",
+            "typeaheadID":"",
             "maxlength":100,
+            "error":false,
             "operationEnum":[],
             "selectEnum":[]
         }]);
 
+    const [alertTextInput, setAlertTextInput] = useReducer(
+        (state, newState) => ({ ...state, ...newState }),
+        {show: false, id: ""}
+    );
+
+    /**
+	 * useEffect for populating query data into array and set the respective state variable.
+	 */
     useEffect(() => {
         setControlArray([]);
+
+        document.addEventListener('click', (event) => {
+			!event.defaultPrevented && setAlertTextInput({"show": false})
+        });
+        
         var tempArray = [];
 
         let queryDataTemp = props.queryData.filter((value) => value.concept === props.selectedNode);
 
         queryDataTemp && supSearchQueryDataToArray(queryDataTemp, tempArray)
 
-        tempArray.sort((que1, que2) => que1.order - que2.order);
+        tempArray.sort(sortByOrder);
 
         let lastOrder = 0;
         if  (tempArray.length > 0){
@@ -64,7 +77,9 @@ const SuperSearchControl = (props) => {
                     fieldType:"",
                     operation:"",
                     value:"",
+                    typeaheadID:"",
                     maxlength:100,
+                    error:false,
                     operationEnum:[],
                     selectEnum:[]
                 })
@@ -73,6 +88,11 @@ const SuperSearchControl = (props) => {
     }, [props.selectedNode])
 
 
+    /**
+	 * Function to convert query data into array.
+	 * @param {array} queryData - complex query data used in search.
+     * @param {array} tempArray - query data will be converted into array - out param.
+	 **/
     function supSearchQueryDataToArray(queryData, tempArray) {
 
         for (let i = 0; queryData && i < queryData.length && props.data.fields && props.data.fields.length > 0 ; i++){
@@ -91,7 +111,9 @@ const SuperSearchControl = (props) => {
                         fieldType: curfield.type,
                         operation: query.operator,
                         value: query[fieldTypes[curfield.type]],
+                        typeaheadID:curfield.typeahead,
                         maxlength: curfield.maxlength,
+                        error:false,
                         operationEnum: curfield.oplist,
                         selectEnum: curfield.enum
                     })
@@ -101,8 +123,8 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
-	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 * Function to delete query.
+	 * @param {number} order - query order number.
 	 **/
 	function supSearchDeleteQuery(order) {
         var tempArray = controlArray.filter(query => query.order !== order);
@@ -116,8 +138,8 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
-	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 * Function to add query.
+	 * @param {number} order - query order number.
 	 **/
 	function supSearchAddQuery(order) {
         var tempArray = controlArray.slice();
@@ -134,7 +156,9 @@ const SuperSearchControl = (props) => {
             fieldType:"",
             operation:"",
             value:"",
+            typeaheadID:"",
             maxlength:100,
+            error:false,
             operationEnum:[],
             selectEnum:[]
         });
@@ -142,8 +166,9 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
-	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 * Function to move query up.
+	 * @param {number} currOrder - current query order number.
+     * @param {number} prevOrder - previous query order number.
 	 **/
 	function supSearchMoveUpQuery(currOrder, prevOrder) {
         var tempArray = controlArray.slice();
@@ -162,8 +187,9 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
-	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 * Function to move query down.
+	 * @param {number} currOrder - current query order number.
+     * @param {number} nextOrder - next query order number.
 	 **/
 	function supSearchMoveDownQuery(currOrder, nextOrder) {
         var tempArray = controlArray.slice();
@@ -182,8 +208,10 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
-	 * @param {string} inputGlyBindingIdProtein - input binding protein id value.
+	 * Function to update query data.
+	 * @param {number} currOrder - current query order number.
+     * @param {string} field - value type.
+	 * @param {var} value - value of the field.
 	 **/
 	function supSearchUpdateQuery(currOrder, field, value) {
         var tempArray = controlArray.slice();
@@ -199,10 +227,11 @@ const SuperSearchControl = (props) => {
     }
 
     /**
-	 * Function to set binding protein id value.
+	 * Function to perform super search query and update result count.
+     * @param {object} event - event object.
 	 **/
-	function supSearchSubmitQuery() {
-        props.setPageLoading(true);
+	function supSearchSubmitQuery(event) {
+        event.preventDefault(true);
 
         var tempArray = controlArray.slice();
         var concept = props.selectedNode;
@@ -212,8 +241,21 @@ const SuperSearchControl = (props) => {
         };
 
         var tempArray1 = tempArray.filter((query) => query.field !== "")
-                        .sort((que1, que2) => que1.order - que2.order);
+                        .sort(sortByOrder);
         var currentQuery;
+
+        var tempArray2 = tempArray1.filter((query) => query.value === "" || query.error);
+        if (tempArray2.length > 0) {
+           let tempArray3 = controlArray.map((query) => {
+                if (query.value === "" && query.field !== ""){
+                    query.error = true;
+                }
+                return query;
+            })
+            setControlArray(tempArray3);
+            setAlertTextInput({"show": true, "id": stringConstants.errors.superSearchError.id});
+            return;
+        }
         
         for (var i = 0; i < tempArray1.length; i++){
             if (i === 0){
@@ -268,24 +310,7 @@ const SuperSearchControl = (props) => {
             finalSearchQuery.push(searchQuery);
         }
 
-        if (finalSearchQuery.length === 0) {
-            props.setPageLoading(false);
-            props.setQueryData(finalSearchQuery);
-            props.updateNodeData(undefined);
-            props.setSelectedNode(undefined)
-        }
-
-        finalSearchQuery.length > 0 && getSuperSearch(finalSearchQuery).then((response) => {
-            let searchData = response.data;
-            props.setPageLoading(false);
-            props.setQueryData(finalSearchQuery);
-            props.updateNodeData(searchData.results_summary);
-            props.setSelectedNode(undefined)
-        })
-        .catch(function (error) {
-            let message = "supersearch api call";
-            axiosError(error, "", message, props.setPageLoading, props.setAlertDialogInput);
-        });
+        props.executeSuperSearchQuery(finalSearchQuery);
     }
 
     /**
@@ -300,7 +325,9 @@ const SuperSearchControl = (props) => {
             tempArray[i].fieldType = "";
             tempArray[i].operation = "";
             tempArray[i].value = "";
+            tempArray[i].typeaheadID = "";
             tempArray[i].maxlength = 100;
+            tempArray[i].error = false;
             tempArray[i].operationEnum = [];
             tempArray[i].selectEnum = [];
         }
@@ -309,65 +336,80 @@ const SuperSearchControl = (props) => {
 
     return (
 		<>            
-                <Dialog
-            open={props.data.id !== undefined}
-            // open={open}
-            // fullWidth={true}
-            style={{margin:40}}
-            maxWidth={'lg'}
-            // classes= {{
-            //     paper: "alert-dialog",
-            //     root: "alert-dialog-root"
-            // }}
-            disableScrollLock
-            onClose={() => props.setSelectedNode(undefined)} 
-        >  
-            <div 
-            id="contents"
-            style={{padding:40, content:'center', height: '520px', width: '1200px' }}
-             class = "gf-content-div"
-             >
-                <h5 className= "alert-dialog-title"><center>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</center></h5>
-                <p><span id='display'></span></p>
-                <form id ="queryForm">
-                    <div style={{paddingTop: '20px', overflow: 'scroll', content:'center', height: '290px', width: '1120px' }}>
-                    {controlArray.sort((query1, query2) => query1.order - query2.order).map((query, index, cntArr ) =>
-                        <SuperSearchInputcontrol query={query} prevOrderId={index - 1 === -1 ? undefined : cntArr[index - 1].order} nextOrderId={index + 1 === controlArray.length ? undefined : cntArr[index + 1].order}
-                        supSearchDeleteQuery={supSearchDeleteQuery} supSearchAddQuery={supSearchAddQuery}
-                        supSearchMoveUpQuery={supSearchMoveUpQuery} supSearchMoveDownQuery={supSearchMoveDownQuery}
-                        supSearchUpdateQuery={supSearchUpdateQuery}
-                        data={props.data} selectedNode={props.selectedNode}/>
-                    )}
-                    </div>
-                    <div style={{ marginTop: "20px" }}>
-                    <Button
-                        className='gg-btn-blue mr-3 mb-3'
-                        style={{ float: "right" }}
-                        onClick={supSearchSubmitQuery}
-                        >
-                        Search
-                    </Button>
-                    <Button
-                        className='gg-btn-outline mr-3 mb-3'
-                        style={{ float: "right" }}
-                        onClick={clearSuperSearchFields}
-                        >
-                        Clear Fields
-                    </Button>
-                    <Button
-                        className='gg-btn-outline mr-3 mb-3'
-                        style={{ float: "right" }}
-                        onClick={() => props.setSelectedNode(undefined)}
-                        >
-                        Cancel
-                    </Button>
+            <Dialog
+                open={props.selectedNode !== ""}
+                classes= {{
+                    paper: "alert-dialog",
+                }}
+                style={{margin:40}}
+                maxWidth={'lg'}
+                disableScrollLock
+                onClose={() => props.setSelectedNode("")} 
+            >  
+                <div className = "gf-content-div">
+                    <h5 className= "sups-dialog-title" style={{width: '1200px' }}>Add {props.data.label ? props.data.label.toLowerCase() : props.data.label} properties to search</h5>
+                    <div 
+                        style={{paddingRight:40, paddingLeft:40, content:'center', width: '1200px' }}
+                    >
+                        <p><span id='display'></span></p>
+                        <TextAlert
+                            alertInput={alertTextInput}
+                        />
+                        <div style={{height: alertTextInput.show ? '15px' : '30px'}}></div>
+                        <div style={{paddingTop: '2px', overflow: 'scroll', content:'center', height: '270px', width: '1120px' }}>
+                            {controlArray.sort(sortByOrder).map((query, index, cntArr ) =>
+                                <SuperSearchInputcontrol 
+                                    key={query.order}
+                                    query={query} 
+                                    prevOrderId={index - 1 === -1 ? undefined : cntArr[index - 1].order} 
+                                    nextOrderId={index + 1 === controlArray.length ? undefined : cntArr[index + 1].order}
+                                    supSearchDeleteQuery={supSearchDeleteQuery} supSearchAddQuery={supSearchAddQuery}
+                                    supSearchMoveUpQuery={supSearchMoveUpQuery} supSearchMoveDownQuery={supSearchMoveDownQuery}
+                                    supSearchUpdateQuery={supSearchUpdateQuery}
+                                    data={props.data} selectedNode={props.selectedNode}
+                            />)}
+                        </div>
+                        <div style={{ marginTop: "20px", marginRight: "15px" }}>
+                            <Button
+                                className='gg-btn-blue mb-5'
+                                style={{ float: "right" }}
+                                onClick={supSearchSubmitQuery}
+                                disabled={
+                                    !controlArray.every(
+                                        ({error}) => error === false
+                                    )
+                                    }
+                                >
+                                Search
+                            </Button>
+                            <Button
+                                className='gg-btn-outline mr-3 mb-5'
+                                style={{ float: "right" }}
+                                onClick={clearSuperSearchFields}
+                                >
+                                Clear Fields
+                            </Button>
+                            <Button
+                                className='gg-btn-outline mr-3 mb-5'
+                                style={{ float: "right" }}
+                                onClick={() => props.setSelectedNode("")}
+                                >
+                                Cancel
+                            </Button>
+                        </div>
+                    </div>  
                 </div>
-                </form><br/>
-                <p><span id='display2'></span></p>
-            </div>
             </Dialog>
         </>
 	);
 };
 
 export default SuperSearchControl;
+
+SuperSearchControl.propTypes = {
+    data: PropTypes.array,
+    queryData: PropTypes.array,
+	selectedNode: PropTypes.string,
+	setSelectedNode: PropTypes.func,
+	executeSuperSearchQuery: PropTypes.func
+};

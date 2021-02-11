@@ -92,13 +92,13 @@ const SiteQuerySummary = props => {
         <Card.Body>
           <Card.Title>
             <p>
-              <strong>Performed on: {executionTime} (EST)</strong>
+              <strong>Performed on: {executionTime}</strong>
             </p>
           </Card.Title>
           <Card.Text>
             {/*  Protein typeahead */}
 
-            {data && data.length && (
+            {searchId !== "sups" && data && data.length > 0 && (
               <>
                 {data.map(querySection => (
                   <>

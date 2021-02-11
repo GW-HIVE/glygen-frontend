@@ -33,11 +33,10 @@ function getDateTime() {
   if (second.toString().length == 1) {
     second = "0" + second;
   }
-  var dateTime =
-    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
   return dateTime;
 }
-const GlycanQuerySummary = props => {
+const GlycanQuerySummary = (props) => {
   const title = "Glycan Search Summary";
 
   const { data, onModifySearch, timestamp, searchId } = props;
@@ -59,12 +58,12 @@ const GlycanQuerySummary = props => {
     term,
     term_category,
     composition,
-    binding_protein_id
+    binding_protein_id,
   } = data;
 
-  const formatOrganisms = organism => {
+  const formatOrganisms = (organism) => {
     if (organism.organism_list) {
-      const organismNames = organism.organism_list.map(item => item.name);
+      const organismNames = organism.organism_list.map((item) => item.name);
       const OrganiOperation = organism.operation.toUpperCase();
       return organismNames.join(` ${OrganiOperation} `);
     }
@@ -83,7 +82,7 @@ const GlycanQuerySummary = props => {
         <Card.Body>
           <Card.Title>
             <p>
-              <strong>Performed on: {executionTime} (EST)</strong>
+              <strong>Performed on: {executionTime}</strong>
             </p>
           </Card.Title>
           <Card.Text>
@@ -103,11 +102,7 @@ const GlycanQuerySummary = props => {
               </>
             )}
 
-            {searchId && searchId === "sups" &&
-                <>
-                {superSearchStrings.query}
-                </>
-            }
+            {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
 
             {composition &&
               composition.map((compItem, index) => (
@@ -142,8 +137,7 @@ const GlycanQuerySummary = props => {
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {
                     advancedSearch.glycan_identifier.subsumption.filter(
-                      subsumption =>
-                        subsumption.id === glycan_identifier.subsumption
+                      (subsumption) => subsumption.id === glycan_identifier.subsumption
                     )[0].name
                   }
                 </Col>
@@ -214,8 +208,7 @@ const GlycanQuerySummary = props => {
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {
                     advancedSearch.organism.annotation_category.filter(
-                      annotation =>
-                        annotation.id === organism.annotation_category
+                      (annotation) => annotation.id === organism.annotation_category
                     )[0].name
                   }
                 </Col>
@@ -314,17 +307,13 @@ const GlycanQuerySummary = props => {
             >
               Update Results
             </Button>
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              onClick={onModifySearch}
-            >
+            <Button type="button" className="gg-btn-blue" onClick={onModifySearch}>
               Modify Search
             </Button>
           </div>
           <Card.Text>
-            ** To perform the same search again using the current version of the
-            database, click <strong>“Update Results”</strong>.
+            ** To perform the same search again using the current version of the database, click{" "}
+            <strong>“Update Results”</strong>.
           </Card.Text>
         </Card.Body>
       </Card>

@@ -8,6 +8,7 @@ import ProteinQuerySummary from "../components/ProteinQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import FeedbackWidget from "../components/FeedbackWidget";
+import DownloadButton from "../components/DownloadButton";
 import stringConstants from "../data/json/stringConstants.json";
 import routeConstants from "../data/json/routeConstants";
 import { logActivity } from "../data/logging";
@@ -148,6 +149,27 @@ const OrthologsList = props => {
           )}
         </section>
         <section>
+          <DownloadButton
+              types={[
+                {
+                  display: stringConstants.download.ortholog_csvdata.displayname,
+                  type: "csv",
+                  data: "ortholog_list"
+                },
+                {
+                  display: stringConstants.download.ortholog_jsondata.displayname,
+                  type: "json",
+                  data: "ortholog_list"
+                },
+                {
+                  display: stringConstants.download.ortholog_fastadata.displayname,
+                  type: "fasta",
+                  data: "ortholog_list"
+                }
+              ]}
+              dataId={id}
+              itemType="ortholog"
+          />
           {selectedColumns && selectedColumns.length !== 0 && (
             <PaginatedTable
               trStyle={rowStyleFormat}

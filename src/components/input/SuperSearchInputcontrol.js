@@ -1,233 +1,266 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import MultilineAutoTextInput from '../input/MultilineAutoTextInput';
-import RangeInputSlider from '../input/RangeInputSlider';
-import AutoTextInput from '../input/AutoTextInput';
-import MultiselectTextInput from '../input/MultiselectTextInput';
+import React from 'react';
 import SelectControl from '../select/SelectControl';
-import HelpTooltip from '../tooltip/HelpTooltip';
-import ExampleExploreControl from '../example/ExampleExploreControl';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-import { Row } from 'react-bootstrap';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from 'react-bootstrap/Button';
-import {sortDropdown} from '../../utils/common';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from "@material-ui/core/FormHelperText";
 import '../../css/Search.css';
-import glycanSearchData from '../../data/json/glycanSearch';
-import stringConstants from '../../data/json/stringConstants';
-import superSearchSVGData from '../../data/json/superSearchSVGData';
+import superSearchData from '../../data/json/superSearchData';
 import plusIcon from "../../images/icons/plus.svg";
 import deleteIcon from "../../images/icons/delete.svg";
 import downArrowIcon from "../../images/icons/down-arrow.svg";
 import upArrowIcon from "../../images/icons/up-arrow.svg";
 import { Image } from "react-bootstrap";
+import {sortByOrder} from '../../utils/common';
+import AutoTextInput from '../input/AutoTextInput';
+
 
 /**
- * Glycan advanced search control.
+ * Super search input control.
  **/
 const SuperSearchInputcontrol = (props) => {
-	let operationList = superSearchSVGData.oplist;
-	let aggregatorList = superSearchSVGData.aggregators;
+	let superSearchCommonData = superSearchData.common;
+	let operationList = superSearchCommonData.oplist;
+	let aggregatorList = superSearchCommonData.aggregators;
+	let superSearchNumberData = superSearchCommonData.number;
+	let superSearchTextData = superSearchCommonData.text;
+	let superSearchSelectData = superSearchCommonData.select;
+
+	/**
+	 * Function to validate number input.
+	 * @param {object} event - event object.
+     * @param {number} order - order number.
+	 **/
+	function onNumberMoveOut(event, order){
+		if (event.target.value !== "" && isNaN(Number(event.target.value))){
+			props.supSearchUpdateQuery(order, "error", true);
+		} else {
+			props.query.error && props.supSearchUpdateQuery(order, "error", false);
+		}
+	}
+
+	/**
+	 * Function to validate text input.
+	 * @param {object} event - event object.
+     * @param {number} order - order number.
+	 **/
+	function onTextMoveOut(event, order){
+		if (event.target.value.length > props.query.maxlength){
+			props.supSearchUpdateQuery(order, "error", true);
+		} else {
+			props.query.error && props.supSearchUpdateQuery(order, "error", false);
+		}
+	}
 
 	return (
 		<>
-			<Grid
-                container
-                class='svg-input-container1'
-				// style={{ margin: '0  auto' }}
-                // spacing={3}
-                // xs={15} sm={15}
-				>
-				
-				{/* Organisms */}
-				<Grid item>
-                {/* <Grid item > */}
-					<FormControl fullWidth>
-                        <Grid 
-                            container 
-                        class='svg-input-container'
-                        // xs={15} sm={15}
-                        // spacing={2} 
-                        // alignItems='center'
-						// justify='center'
+			<div className={'svg-input-container'}>
+				<Grid container justify="center">
+					<Grid item style={{width: "110px"}} className={'svg-input-item'}>
+						<FormControl 
+							variant='outlined'
+							fullWidth
 						>
-                            {/* Subsumption */}
-                            <Grid item xs={1} sm={1} className={'svg-input-item'}>
-                                <FormControl 
-                                    variant='outlined' 
-                                    fullWidth
-                                    // class='svg-input-item'
-                                >
-									{props.query.order !== 0 && <SelectControl
-										inputValue={props.query.aggregator}
-										menu={aggregatorList}
-										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "aggregator", input)}}
-									/>}
-								</FormControl>
-							</Grid>
-							<Grid item xs={3} sm={3} className={'svg-input-item'}>
-                                <FormControl 
-                                    variant='outlined' 
-                                    fullWidth
-                                    // class='svg-input-item'
-                                >
-									<SelectControl
-										inputValue={props.query.field}
-										menu={props.data.fields ? props.data.fields.map((value)=> { return {id:value.id, name:value.label}}) : []}
-										setInputValue={(input)=>{
-											props.supSearchUpdateQuery(props.query.order, "field", input)
-											let curfield = props.data.fields.filter((value)=> value.id === input)[0];
-											props.supSearchUpdateQuery(props.query.order, "fieldType", curfield.type)
-											//setOperationEnum(props.data.fields.filter((value)=> value.id === input)[0].oplist)
-											props.supSearchUpdateQuery(props.query.order, "operationEnum", curfield.oplist)
-											props.supSearchUpdateQuery(props.query.order, "selectEnum", curfield.enum)
-											props.supSearchUpdateQuery(props.query.order, "operation", "$eq");
-											props.supSearchUpdateQuery(props.query.order, "maxlength", curfield.maxlength ? curfield.maxlength : 100 );
-											if (props.query.aggregator === "")
-											 	props.supSearchUpdateQuery(props.query.order, "aggregator", "$and");
-											//setSelectEnum(props.data.fields.filter((value)=> value.id === input)[0].enum)
-										}}
-									/>
-								</FormControl>
-							</Grid>
-                            <Grid item xs={1} sm={1} className={'svg-input-item'}>
-                                <FormControl 
-                                    variant='outlined' 
-                                    fullWidth
-                                >
-									<SelectControl
-										inputValue={props.query.operation}
-										menu={props.query.operationEnum.map((value)=> { return {id:value, name:operationList.find((oper)=> value === oper.id).name}})}
-										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "operation", input)}}
-									/>
-								</FormControl>
-							</Grid>
-                            <Grid item xs={4} sm={4} className={'svg-input-item'}>
-                                {props.query.selectEnum.length === 0 && 
-								
-								<FormControl 
-								variant='outlined' 
-								fullWidth
-								// class='svg-input-item'
-							>
-								{/* {props.query.fieldType === "number" && <OutlinedInput
-                                //className='svg-input-item'
-                                className={'svg-input'}
-                                value={props.query.value}
-                                margin='dense'
-								// onChange={minInputChange}
-								onChange={(event)=>{props.supSearchUpdateQuery(props.query.order, "value", event.target.value)}}
-								// onBlur={onMinMoveOut}
-                                // labelWidth={40}
-                                // inputProps={{
-                                // 	min: props.min,
-                                // 	max: props.max,
-								// }}
-								inputProps={{
-									type: 'number'
+							{props.prevOrderId !== undefined && <SelectControl
+								inputValue={props.query.aggregator}
+								sortFunction={sortByOrder}
+								menu={aggregatorList}
+								setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "aggregator", input)}}
+							/>}
+						</FormControl>
+					</Grid>
+					<Grid item style={{width: "280px"}} className={'svg-input-item'}>
+						<FormControl 
+							variant='outlined' 
+							fullWidth
+						>
+							<SelectControl
+								inputValue={props.query.field}
+								menu={props.data.fields ? props.data.fields.reverse().map((value)=> { return {id:value.id, name:value.label}}) : []}
+								setInputValue={(input)=>{
+									props.supSearchUpdateQuery(props.query.order, "field", input);
+									let curfield = props.data.fields.filter((value)=> value.id === input)[0];
+									props.supSearchUpdateQuery(props.query.order, "fieldType", curfield.type);
+									props.supSearchUpdateQuery(props.query.order, "value", "");
+									props.supSearchUpdateQuery(props.query.order, "typeaheadID", curfield.typeahead);
+									props.supSearchUpdateQuery(props.query.order, "error", false);
+									props.supSearchUpdateQuery(props.query.order, "operationEnum", curfield.oplist);
+									props.supSearchUpdateQuery(props.query.order, "selectEnum", curfield.enum);
+									props.supSearchUpdateQuery(props.query.order, "operation", "$eq");
+									props.supSearchUpdateQuery(props.query.order, "maxlength", curfield.maxlength ? curfield.maxlength : 100 );
+									if (props.query.aggregator === "")
+										props.supSearchUpdateQuery(props.query.order, "aggregator", "$and");
 								}}
-                            	/>} */}
-								{/* {props.query.fieldType !== "number" &&  */}
+							/>
+						</FormControl>
+					</Grid>
+					<Grid item style={{width: "110px"}} className={'svg-input-item'}>
+						<FormControl 
+							variant='outlined' 
+							fullWidth
+						>
+							<SelectControl
+								inputValue={props.query.operation}
+								menu={props.query.operationEnum.map((value)=> { return {id:value, name:operationList.find((oper)=> value === oper.id).name}})}
+								setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "operation", input)}}
+							/>
+						</FormControl>
+					</Grid>
+					<Grid item style={{width: "350px"}} className={'svg-input-item'}>
+						{props.query.selectEnum.length === 0 && 
+						<FormControl 
+							variant='outlined' 
+							fullWidth
+						>
+							{props.query.fieldType === "number" && <>
 								<OutlinedInput
-                                //className='svg-input-item'
-                                className={'svg-input'}
-                                value={props.query.value}
-                                margin='dense'
-								// onChange={minInputChange}
-								onChange={(event)=>{props.supSearchUpdateQuery(props.query.order, "value", event.target.value)}}
-								// onBlur={onMinMoveOut}
-                                // labelWidth={40}
-                                // inputProps={{
-                                // 	min: props.min,
-                                // 	max: props.max,
-								// }}
-								// inputProps={{
-								// 	type: 'text'
-								// }}
-								//error={props.query.value.length > props.query.maxlength}
-                            	/>
-								{/* } */}
-								</FormControl>
-								}
-								{/* {
-								props.query.value.length > props.query.maxlength 
+									className={'svg-input'}
+									value={props.query.value}
+									margin='dense'
+									onChange={(event)=>{
+										props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false);
+										props.supSearchUpdateQuery(props.query.order, "value", event.target.value);
+									}}
+									onBlur={(event) => onNumberMoveOut(event, props.query.order)}
+									placeholder={superSearchNumberData.placeholder}
+									error={(props.query.value !== "" && props.query.value !== "." && isNaN(Number(props.query.value))) || props.query.error }
+								/>	
+								{(props.query.value !== "" && (props.query.value !== "." || props.query.error) && isNaN(Number(props.query.value)))								
 								&& (
 									<FormHelperText className={"error-text"} error>
-									{"Entry is too long - max length is" + props.query.maxlength + "."}
+										{superSearchNumberData.errorText1}
 									</FormHelperText>
-								)} */}
-								{props.query.selectEnum.length > 0 && <FormControl 
-									variant='outlined' 
-									fullWidth
-									>
-									<SelectControl
-										inputValue={props.query.value}
-										// placeholder={"Select Value"}
-										// placeholderId={""}
-										// placeholderName={""}
-										menu={props.query.selectEnum.map((value)=> { return {id:value, name:value}})}
-										setInputValue={(input)=>{props.supSearchUpdateQuery(props.query.order, "value", input)}}
-									/>
-									</FormControl>
-								}
-							</Grid>
-                            <Grid 
-                            item 
-                            // xs={4} sm={4}
-                            >
-                                {/* <FormControl 
-                                    variant='outlined' 
-                                    fullWidth
-                                > */}
-                            <Button 
-                            className='gg-btn-outline mr-3 mb-3' 
-                            onClick={() => props.supSearchAddQuery(props.query.order + 1)}
-                            >
-						<Image
-						src={plusIcon}
-						alt="Related glycans"
-						// style={{ marginBottom: "5px" }}
-					/>
-				</Button>
-                {props.prevOrderId !== undefined && <Button className='gg-btn-outline mr-3 mb-3' 
-                onClick={() => props.supSearchDeleteQuery(props.query.order)}
-                >
-						<Image
-						src={deleteIcon}
-						alt="Related glycans"
-						// style={{ marginBottom: "5px" }}
-					/>
-				</Button>}
-                {props.prevOrderId !== undefined && <Button className='gg-btn-outline mr-3 mb-3' 
-                onClick={() => props.supSearchMoveUpQuery(props.query.order, props.prevOrderId)}
-                >
-						<Image
-						src={upArrowIcon}
-						alt="Related glycans"
-						// style={{ marginBottom: "5px" }}
-					/>
-				</Button>}
-				{props.nextOrderId !== undefined && <Button
-					className='gg-btn-outline mr-3 mb-3'
-					// disabled={undoDisabled}
-					onClick={() => props.supSearchMoveDownQuery(props.query.order, props.nextOrderId)}
-                    >
-						<Image
-						src={downArrowIcon}
-						alt="Related glycans"
-						// style={{ marginBottom: "5px" }}
-					/>
-				</Button>}
-								{/* </FormControl> */}
-							</Grid>
-						</Grid>
-					</FormControl>
+								)}
+								{(props.query.error && props.query.value === "")
+								&& (
+									<FormHelperText className={"error-text"} error>
+										{superSearchNumberData.errorText1}
+									</FormHelperText>
+								)}								
+							</>}
+							{(!props.query.typeaheadID || props.query.typeaheadID === "") && props.query.fieldType === "string" && <>
+								<OutlinedInput
+									className={'svg-input'}
+									value={props.query.value}
+									margin='dense'
+									onChange={(event)=>{
+										props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false);
+										props.supSearchUpdateQuery(props.query.order, "value", event.target.value);
+									}}
+									onBlur={(event) => onTextMoveOut(event, props.query.order)}
+									placeholder={superSearchTextData.placeholder}
+									error={props.query.value.length > props.query.maxlength  || props.query.error }
+								/>
+									{(props.query.value.length > props.query.maxlength)
+									&& (
+										<FormHelperText className={"error-text"} error>
+											{superSearchTextData.errorText1 + props.query.maxlength + "."}
+										</FormHelperText>
+									)}
+									{(props.query.error && props.query.value === "") 
+									&& (
+										<FormHelperText className={"error-text"} error>
+											{superSearchTextData.errorText2}
+										</FormHelperText>
+									)}								
+							</>}
+							{props.query.typeaheadID && props.query.typeaheadID !== "" && props.query.fieldType === "string" && <>
+								<AutoTextInput
+									inputValue={props.query.value}
+									setInputValue={(value)=>{
+										props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false);
+										props.supSearchUpdateQuery(props.query.order, "value", value);
+									}}
+									onBlur={(event) => onTextMoveOut(event, props.query.order)}
+									error={props.query.error}
+									placeholder={superSearchTextData.placeholder}
+									typeahedID={props.query.typeaheadID}
+									length={props.query.maxlength}
+									errorText={superSearchTextData.errorText1 + props.query.maxlength + "."}
+								/>
+									{(props.query.error && props.query.value === "") 
+									&& (
+										<FormHelperText className={"error-text"} error>
+											{superSearchTextData.errorText2}
+										</FormHelperText>
+									)}								
+							</>}
+							{props.query.fieldType === "" &&
+								<OutlinedInput
+									className={'svg-input'}
+									value={props.query.value}
+									margin='dense'
+									onChange={(event)=>{props.supSearchUpdateQuery(props.query.order, "value", event.target.value)}}
+								/>
+							}
+						</FormControl>
+						}
+						{props.query.selectEnum.length > 0 && <FormControl 
+							variant='outlined' 
+							fullWidth
+						>
+							<SelectControl
+								inputValue={props.query.value}
+								placeholder={superSearchSelectData.placeholder}
+								placeholderId={superSearchSelectData.placeholderId}
+								placeholderName={superSearchSelectData.placeholderName}
+								onBlur={() => props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false)}
+								menu={props.query.selectEnum.map((value)=> { return {id:value, name:value}})}
+								setInputValue={(input)=>{
+									props.query.error && props.supSearchUpdateQuery(props.query.order, "error", false);
+									props.supSearchUpdateQuery(props.query.order, "value", input);
+								}}
+								error={props.query.error}
+							/>
+							{props.query.error 
+							&& (
+								<FormHelperText className={"error-text"} error>
+									{superSearchSelectData.errorText1}
+								</FormHelperText>
+							)}					
+							</FormControl>
+						}
+					</Grid>
+					<Grid item style={{width: "240px"}}>
+						<Button 
+							className='gg-btn-outline mr-3 mb-3' 
+							onClick={() => props.supSearchAddQuery(props.query.order + 1)}
+						>
+							<Image
+								src={plusIcon}
+								alt="plus button"
+							/>
+						</Button>
+							{!(props.prevOrderId === undefined && props.nextOrderId === undefined) && <Button className='gg-btn-outline mr-3 mb-3' 
+							onClick={() => props.supSearchDeleteQuery(props.query.order)}
+						>
+							<Image
+								src={deleteIcon}
+								alt="delete button"
+							/>
+						</Button>}
+							{props.prevOrderId !== undefined && <Button className='gg-btn-outline mr-3 mb-3' 
+							onClick={() => props.supSearchMoveUpQuery(props.query.order, props.prevOrderId)}
+						>
+							<Image
+								src={upArrowIcon}
+								alt="up arrow button"
+							/>
+						</Button>}
+						{props.nextOrderId !== undefined && <Button
+							className='gg-btn-outline mb-3'
+							onClick={() => props.supSearchMoveDownQuery(props.query.order, props.nextOrderId)}
+						>
+							<Image
+								src={downArrowIcon}
+								alt="down arrow button"
+							/>
+						</Button>}
+					</Grid>
 				</Grid>
-			</Grid>
+			</div>
 		</>
 	);
 };
@@ -235,5 +268,14 @@ const SuperSearchInputcontrol = (props) => {
 export default SuperSearchInputcontrol;
 
 SuperSearchInputcontrol.propTypes = {
-
+	query: PropTypes.object,
+	prevOrderId: PropTypes.number,
+	nextOrderId: PropTypes.number,
+	data: PropTypes.array,
+	selectedNode: PropTypes.string,
+	supSearchDeleteQuery: PropTypes.func,
+	supSearchAddQuery: PropTypes.func,
+	supSearchMoveUpQuery: PropTypes.func,
+	supSearchMoveDownQuery: PropTypes.func,
+	supSearchUpdateQuery: PropTypes.func
 };

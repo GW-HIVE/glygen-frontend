@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
-import { getJson } from "./api";
+import { getJson, postToAndGetBlob } from "./api";
 import routeConstants from "./json/routeConstants";
 import stringConstants from "./json/stringConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { groupEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
+import { logActivity } from "../data/logging";
 import Nav from "react-bootstrap/Nav";
 
 const proteinStrings = stringConstants.protein.common;
@@ -167,6 +168,22 @@ export const getGeneLocusList = (
 };
 
 /**
+ * Downloads data for gene locus list.
+ * @param {string} id - list id.
+ * @param {string} format - download format.
+ * @param {boolean} compressed - compressed - true, false.
+ * @param {string} type - download type.
+ * @param {object} headers - headers.
+ */
+export const getLocusDownload = (id, format, compressed, type, headers) => {
+  let message = "downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
+};
+
+/**
  * Gets JSON for disease to glycosyltransferases usecase.
  * @param {object} formObject - formObject value.
  */
@@ -306,6 +323,22 @@ export const getOrthologsList = (
   const queryParamString = JSON.stringify(queryParams);
   const url = `/usecases/ortholog_list?query=${queryParamString}`;
   return getJson(url);
+};
+
+/**
+ * Downloads data for ortholog list.
+ * @param {string} id - list id.
+ * @param {string} format - download format.
+ * @param {boolean} compressed - compressed - true, false.
+ * @param {string} type - download type.
+ * @param {object} headers - headers.
+ */
+export const getOrthologDownload = (id, format, compressed, type, headers) => {
+  let message = "downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
 };
 
 /**
