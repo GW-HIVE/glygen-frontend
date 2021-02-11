@@ -8,6 +8,7 @@ import ProteinQuerySummary from "../components/ProteinQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import FeedbackWidget from "../components/FeedbackWidget";
+import DownloadButton from "../components/DownloadButton";
 import stringConstants from "../data/json/stringConstants.json";
 import routeConstants from "../data/json/routeConstants";
 import { logActivity } from "../data/logging";
@@ -146,6 +147,27 @@ const LocusList = props => {
           )}
         </section>
         <section>
+          <DownloadButton
+            types={[
+              {
+                display: stringConstants.download.locus_csvdata.displayname,
+                type: "csv",
+                data: "genelocus_list"
+              },
+              {
+                display: stringConstants.download.locus_jsondata.displayname,
+                type: "json",
+                data: "genelocus_list"
+              },
+              {
+                display: stringConstants.download.locus_fastadata.displayname,
+                type: "fasta",
+                data: "genelocus_list"
+              }
+            ]}
+            dataId={id}
+            itemType="locus"
+          />
           {selectedColumns && selectedColumns.length !== 0 && (
             <PaginatedTable
               trStyle={rowStyleFormat}

@@ -1463,6 +1463,36 @@
       "displayname": "Protein data (*.FASTA)",
       "tooltip": " protein_fastadata Information for selected accession"
     },
+    "ortholog_jsondata": {
+      "id": "ortholog_jsondata",
+      "displayname": "Ortholog data (*.json)",
+      "tooltip": " ortholog_jsondata Information for selected accession"
+    },
+    "ortholog_csvdata": {
+      "id": "ortholog_csvdata",
+      "displayname": "Ortholog data (*.csv)",
+      "tooltip": " ortholog_csvdata Information for selected accession"
+    },
+    "ortholog_fastadata": {
+      "id": "ortholog_fastadata",
+      "displayname": "Ortholog data (*.FASTA)",
+      "tooltip": " ortholog_fastadata Information for selected accession"
+    },
+    "locus_jsondata": {
+      "id": "locus_jsondata",
+      "displayname": "Locus data (*.json)",
+      "tooltip": " locus_jsondata Information for selected accession"
+    },
+    "locus_csvdata": {
+      "id": "locus_csvdata",
+      "displayname": "Locus data (*.csv)",
+      "tooltip": " locus_csvdata Information for selected accession"
+    },
+    "locus_fastadata": {
+      "id": "locus_fastadata",
+      "displayname": "Locus data (*.FASTA)",
+      "tooltip": " locus_fastadata Information for selected accession"
+    },
     "motif_image": {
       "id": "motif_image",
       "displayname": "Motif Image (*.png)",
