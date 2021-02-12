@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import logo from "../../images/glygen_logos/glygen-logoW.svg";
 import { Link, NavLink } from "react-router-dom";
@@ -24,6 +24,7 @@ import {
   GLYCOMOTIF_WIKI,
   GLYGEN_SANDBOX,
   GLYGEN_ENV,
+  GLYCAN_SEQ_LOOKUP,
 } from "../../envVariables";
 import routeConstants from "../../data/json/routeConstants.json";
 import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
@@ -36,12 +37,6 @@ const useStyles = makeStyles((theme) => ({
       color: "#57affa !important",
     },
   },
-  // betaWatermark: {
-  // 	position: "absolute",
-  // 	backgroundSize: "top",
-  // 	backgroundPosition: "center",
-  // 	backgroundRepeat: "space",
-  // },
 }));
 
 export default function Header(props) {
@@ -66,25 +61,18 @@ export default function Header(props) {
             : {}
         }
       >
-        {/* {GLYGEN_ENV === "beta" && (
-					<img src={betaWatermarkImg} alt="beta watermark img" />
-				)} */}
         <Container maxWidth="xl">
           <Row className="justify-content-end">
             <div className="mr-4">
-              {/* <Navbar.Text
-								as={Link} */}
               <Link to={routeConstants.privacySettings} className={classes.navbarText}>
                 <span>
                   <PersonIcon />
                 </span>{" "}
                 MY GLYGEN
               </Link>
-              {/* </Navbar.Text> */}
             </div>
             {GLYGEN_ENV !== "beta" && (
               <div className="mr-4">
-                {/* <Navbar.Text> */}
                 <a
                   href={GLYGEN_BETA}
                   target="_blank"
@@ -212,7 +200,14 @@ export default function Header(props) {
                   GNOME Subsumption Browser
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
-                  ID Mapping
+                  GlyGen Mapper
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  href={GLYCAN_SEQ_LOOKUP}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Glycan Sequence Lookup
                 </NavDropdown.Item>
               </NavDropdown>
               <NavDropdown
