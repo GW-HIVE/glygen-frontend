@@ -18,7 +18,8 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import IdMappingQuerySummary from "../components/IdMappingQuerySummary";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-
+import { Row, Col } from "react-bootstrap";
+import DownloadAllButton from "../components/DownloadAllButton";
 const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
@@ -221,20 +222,31 @@ const IdMappingResult = (props) => {
             />
           )}
         </section>
+
+        <DownloadAllButton
+          types={[
+            {
+              display: stringConstants.download.idmapping_list_all_csvdata.displayname,
+              type: "csv",
+              data: "idmapping_list_all",
+            },
+          ]}
+          dataId={id}
+          itemType="idMappingDownloadAll"
+        />
+
         <div id="Mapped-Table"></div>
-        <section>
-          <DownloadButton
-            types={[
-              {
-                display: stringConstants.download.idmapping_mapped_csvdata.displayname,
-                type: "csv",
-                data: "idmapping_list_mapped",
-              },
-            ]}
-            dataId={id}
-            itemType="idMappingMapped"
-          />
-        </section>
+        <DownloadButton
+          types={[
+            {
+              display: stringConstants.download.idmapping_mapped_csvdata.displayname,
+              type: "csv",
+              data: "idmapping_list_mapped",
+            },
+          ]}
+          dataId={id}
+          itemType="idMappingMapped"
+        />
 
         <section>
           {/* Mapped Table */}

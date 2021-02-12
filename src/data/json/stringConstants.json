@@ -1517,6 +1517,11 @@
       "id": "unmapped_csvdata",
       "displayname": "Unmapped data (*.csv)",
       "tooltip": "unmapped_csvdata ID mapping information for unmapped ID"
+    },
+      "idmapping_list_all_csvdata": {
+      "id": "list_all_csvdata",
+      "displayname": "Two tables data (*.csv)",
+      "tooltip": "list_all_csvdata ID mapping information for both mapped and unmapped IDs"
     }
   },
   "id_mapping": {
