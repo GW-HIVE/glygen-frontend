@@ -21,6 +21,7 @@ import {
   GNOME_BROWSER,
   GLYCOMOTIF_WIKI,
   GLYGEN_SANDBOX,
+  GLYCAN_SEQ_LOOKUP,
 } from "../../envVariables";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+export default function Footer() {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -122,6 +123,11 @@ export default function Header() {
               </div>
               <div>
                 <Link to={routeConstants.idMapping}>ID&nbsp;Mapping</Link>
+              </div>
+              <div>
+                <a href={GLYCAN_SEQ_LOOKUP} target="_blank" rel="noopener noreferrer">
+                  Glycan Sequence Lookup
+                </a>
               </div>
             </Col>
             <Col xs={6} md={"auto"} className="text-left sitemap-item">
