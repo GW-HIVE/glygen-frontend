@@ -38,6 +38,8 @@ import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Tab, Tabs, Container } from "react-bootstrap";
+// import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
+
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 const motifStrings = stringConstants.motif.common;
@@ -182,12 +184,13 @@ const GlycanDetail = (props) => {
         logActivity("user", id, "No results. " + message);
         setPageLoading(false);
       } else {
-
         let detailDataTemp = data;
 
         if (detailDataTemp.expression) {
           const WithTissue = detailDataTemp.expression.filter((item) => item.tissue !== undefined);
-          const WithCellline = detailDataTemp.expression.filter((item) => item.cell_line !== undefined);
+          const WithCellline = detailDataTemp.expression.filter(
+            (item) => item.cell_line !== undefined
+          );
           setExpressionWithtissue(WithTissue);
           setExpressionWithcell(WithCellline);
           setExpressionTabSelected(WithTissue.length > 0 ? "with_tissue" : "with_cellline");
@@ -201,7 +204,7 @@ const GlycanDetail = (props) => {
         if (detailDataTemp.glycoct) {
           detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\r\n");
         }
-      
+
         if (detailDataTemp.composition) {
           detailDataTemp.composition = detailDataTemp.composition
             .map((res, ind, arr) => {
@@ -906,6 +909,11 @@ const GlycanDetail = (props) => {
                                 <>
                                   <strong> {glycanStrings.mass.shortName}: </strong>
                                   {mass} Da{" "}
+                                  {/* <LineTooltip text="Find all glycans with the same Mass">
+                                    <Link>
+                                      <SearchIcon className="ml-3 custom-icon-blue" />
+                                    </Link>
+                                  </LineTooltip> */}
                                 </>
                               ) : (
                                 <> </>
@@ -916,6 +924,11 @@ const GlycanDetail = (props) => {
                                 <>
                                   <strong> {glycanStrings.mass_pme.shortName}: </strong>
                                   {mass_pme} Da{" "}
+                                  {/* <LineTooltip text="Find all glycans with the same Mass-pMe">
+                                    <Link>
+                                      <SearchIcon className="ml-3 custom-icon-blue" />
+                                    </Link>
+                                  </LineTooltip> */}
                                 </>
                               ) : (
                                 <> </>
@@ -926,7 +939,12 @@ const GlycanDetail = (props) => {
                         {composition && (
                           <div>
                             <strong>Composition</strong>:{" "}
-                            <CompositionDisplay composition={composition} />
+                            <CompositionDisplay composition={composition} />{" "}
+                            {/* <LineTooltip text="Find all glycans with the same Composition">
+                              <Link>
+                                <SearchIcon className="ml-3 custom-icon-blue" />
+                              </Link>
+                            </LineTooltip> */}
                           </div>
                         )}
 
@@ -936,7 +954,6 @@ const GlycanDetail = (props) => {
                               {glycanStrings.glycan_type.name} / {glycanStrings.glycan_subtype.name}
                               :{" "}
                             </strong>
-
                             {classification.map((Formatclassification) => (
                               <>
                                 <a
@@ -955,7 +972,12 @@ const GlycanDetail = (props) => {
                                   {Formatclassification.subtype.name}
                                 </a>
                               </>
-                            ))}
+                            ))}{" "}
+                            {/* <LineTooltip text="Find all glycans with the same Type/Subtype">
+                              <Link>
+                                <SearchIcon className="ml-3 custom-icon-blue" />
+                              </Link>
+                            </LineTooltip> */}
                           </div>
                         )}
                         {inchi_key && inchi_key.key && (
@@ -1034,7 +1056,12 @@ const GlycanDetail = (props) => {
                                     {organismEvidence[orgEvi].taxid}
                                   </a>
                                 </LineTooltip>
-                                {"]"}
+                                {"]"}{" "}
+                                {/* <LineTooltip text="Find all glycans with the same Organism">
+                                  <Link>
+                                    <SearchIcon className="ml-3 custom-icon-blue" />
+                                  </Link>
+                                </LineTooltip> */}
                                 <EvidenceList evidences={organismEvidence[orgEvi].evidence} />
                               </>
                             </Col>
@@ -1673,7 +1700,7 @@ const GlycanDetail = (props) => {
                                   <p>
                                     <div>
                                       <h5 style={{ marginBottom: "3px" }}>
-                                        <strong>{pub.title}</strong>
+                                        <strong>{pub.title}</strong>{" "}
                                       </h5>
                                     </div>
                                     <div>{pub.authors}</div>
@@ -1694,7 +1721,12 @@ const GlycanDetail = (props) => {
                                             rel="noopener noreferrer"
                                           >
                                             <>{ref.id}</>
-                                          </a>
+                                          </a>{" "}
+                                          {/* <LineTooltip text="Find all glycans with the same PMID">
+                                            <Link>
+                                              <SearchIcon className="ml-3 custom-icon-blue" />
+                                            </Link>
+                                          </LineTooltip> */}
                                         </>
                                       ))}
                                     </div>
