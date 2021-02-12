@@ -190,24 +190,24 @@ export default function Header(props) {
                 title="TOOLS"
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href={GLYCOMOTIF_WIKI} target="_blank" rel="noopener noreferrer">
-                  GlycoMotif Wiki
-                </NavDropdown.Item>
-                <NavDropdown.Item href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
-                  GlyGen SandBox
-                </NavDropdown.Item>
-                <NavDropdown.Item href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
-                  GNOME Subsumption Browser
-                </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
-                  GlyGen Mapper
-                </NavDropdown.Item>
                 <NavDropdown.Item
                   href={GLYCAN_SEQ_LOOKUP}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Glycan Sequence Lookup
+                </NavDropdown.Item>
+                <NavDropdown.Item href={GLYCOMOTIF_WIKI} target="_blank" rel="noopener noreferrer">
+                  GlycoMotif Wiki
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
+                  GlyGen Mapper
+                </NavDropdown.Item>
+                <NavDropdown.Item href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
+                  GlyGen SandBox
+                </NavDropdown.Item>
+                <NavDropdown.Item href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
+                  Structure Browser
                 </NavDropdown.Item>
               </NavDropdown>
               <NavDropdown

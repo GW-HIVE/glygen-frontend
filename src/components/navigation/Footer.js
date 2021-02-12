@@ -107,9 +107,17 @@ export default function Footer() {
             <Col xs={6} md={"auto"} className="text-left sitemap-item">
               <h6 className="text-uppercase">Tools</h6>
               <div>
+                <a href={GLYCAN_SEQ_LOOKUP} target="_blank" rel="noopener noreferrer">
+                  Glycan Sequence Lookup
+                </a>
+              </div>
+              <div>
                 <a href={GLYCOMOTIF_WIKI} target="_blank" rel="noopener noreferrer">
                   GlycoMotif&nbsp;Wiki
                 </a>
+              </div>
+              <div>
+                <Link to={routeConstants.idMapping}>GlyGen&nbsp;Mapper</Link>
               </div>
               <div>
                 <a href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
@@ -118,15 +126,7 @@ export default function Footer() {
               </div>
               <div>
                 <a href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
-                  GNOme&nbsp;Browser
-                </a>
-              </div>
-              <div>
-                <Link to={routeConstants.idMapping}>ID&nbsp;Mapping</Link>
-              </div>
-              <div>
-                <a href={GLYCAN_SEQ_LOOKUP} target="_blank" rel="noopener noreferrer">
-                  Glycan Sequence Lookup
+                  Structure&nbsp;Browser
                 </a>
               </div>
             </Col>
