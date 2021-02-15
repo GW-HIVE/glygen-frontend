@@ -27,10 +27,11 @@ const HelpTooltip = (props) => {
 					{props.imageArray && props.imageArray.length > 0 && <>
 						{props.imageArray.map((value, index) => (
 							<Grid
-							key={index}
-							container
-							style={{ margin: '0  auto' }}
-							spacing={1}>
+								key={index}
+								container
+								style={{ margin: '0  auto' }}
+								spacing={1}
+							>
 								<Grid item xs={8} sm={8}>
 									{value.imageTitle}
 								</Grid>
