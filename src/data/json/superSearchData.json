@@ -106,16 +106,6 @@
                 "id": "$or",
                 "name": "Or",
                 "order": 2
-            },
-            {
-                "id": "$nand",
-                "name": "Nand",
-                "order": 3
-            },
-            {
-                "id": "$nor",
-                "name": "Nor",
-                "order": 4
             }
         ],
         "fieldTypes": {
