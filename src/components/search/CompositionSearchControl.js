@@ -562,6 +562,7 @@ export default function CompositionSearchControl(props) {
 									text = {key.tooltip.text}
 									urlText = {key.tooltip.urlText}
 									url = {key.tooltip.url}
+									imageArray = {key.tooltip.imageArray}
 								/>
 								<strong>{key.name}</strong>
 							</Typography>

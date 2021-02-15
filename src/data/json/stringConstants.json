@@ -296,6 +296,24 @@
           "tooltip": {
             "title": "Hexose",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "Hex",
+                "imagePath": "/icons/Hexose.jpg"
+              },
+              {
+                "imageTitle": "Glc",
+                "imagePath": "/icons/Glc.jpg"
+              },
+              {
+                "imageTitle": "Gal",
+                "imagePath": "/icons/Gal.jpg"
+              },
+              {
+                "imageTitle": "Man",
+                "imagePath": "/icons/Man.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/206"
           }
@@ -308,6 +326,20 @@
           "tooltip": {
             "title": "N-Acetyl-Hexosamine",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "HexNAc",
+                "imagePath": "/icons/HexNAc.jpg"
+              },
+              {
+                "imageTitle": "GlcNAc",
+                "imagePath": "/icons/GlcNAc.jpg"
+              },
+              {
+                "imageTitle": "GalNAc",
+                "imagePath": "/icons/GalNAc.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/899"
           }
@@ -320,6 +352,16 @@
           "tooltip": {
             "title": "Hexosamine",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "HexN",
+                "imagePath": "/icons/HexN.jpg"
+              },
+              {
+                "imageTitle": "GlcN",
+                "imagePath": "/icons/GlcN.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/739"
           }
@@ -332,6 +374,16 @@
           "tooltip": {
             "title": "Deoxy-Hexose",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "dHex",
+                "imagePath": "/icons/dHex.jpg"
+              },
+              {
+                "imageTitle": "Fuc",
+                "imagePath": "/icons/Fuc.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/840"
           }
@@ -344,6 +396,12 @@
           "tooltip": {
             "title": "N-Acetyl-Neuraminic acid",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "NeuAc",
+                "imagePath": "/icons/NeuAc.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/439197"
           }
@@ -356,6 +414,12 @@
           "tooltip": {
             "title": "N-Glycolyl-Neuraminic acid",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "NeuGc",
+                "imagePath": "/icons/NeuGc.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/440001"
           }
@@ -368,6 +432,20 @@
           "tooltip": {
             "title": "Uronic acid",
             "text1": "Add some unique text here.",
+            "imageArray": [
+              {
+                "imageTitle": "HexA",
+                "imagePath": "/icons/HexA.jpg"
+              },
+              {
+                "imageTitle": "GlcA",
+                "imagePath": "/icons/GlcA.jpg"
+              },
+              {
+                "imageTitle": "GalA",
+                "imagePath": "/icons/GalA.jpg"
+              }
+            ],
             "urlText": "Read more...",
             "url": "https://pubchem.ncbi.nlm.nih.gov/compound/610"
           }
