@@ -1234,7 +1234,7 @@
       "title": "ID Mapping Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     },
-      "superSearchError": {
+    "superSearchError": {
       "id": "superSearchError",
       "title": "Super Search Error - Enter Valid Input",
       "message": "Sorry, we couldn't process search request. Please enter valid input."
@@ -1250,6 +1250,11 @@
       "id": "general",
       "displayname": "General",
       "tooltip": " General Information for selected accession"
+    },
+    "history": {
+      "id": "history",
+      "displayname": "History",
+      "tooltip": " history Information for selected accession"
     },
     "names_synonyms": {
       "id": "names_synonyms",
@@ -1521,7 +1526,7 @@
   },
   "id_mapping": {
     "common": {
-       "recordtype": {
+      "recordtype": {
         "name": "Molecule *",
         "tooltip": {
           "title": "Molecule",
@@ -1529,7 +1534,7 @@
         },
         "id": "recordtype"
       },
-       "input_namespace": {
+      "input_namespace": {
         "name": "From ID Type *",
         "tooltip": {
           "title": "From ID Type",
@@ -1537,7 +1542,7 @@
         },
         "id": "input_namespace"
       },
-       "output_namespace": {
+      "output_namespace": {
         "name": "To ID Type *",
         "tooltip": {
           "title": "To ID Type",
@@ -1546,11 +1551,11 @@
         "id": "output_namespace"
       },
       "input_idlist": {
-         "name": "Enter IDs *",
-          "tooltip": {
-            "title": "Enter IDs",
-            "text": "Takes the input or text file (csv, txt, etc.) and the dropdowns information and performs the mapping."
-          },
+        "name": "Enter IDs *",
+        "tooltip": {
+          "title": "Enter IDs",
+          "text": "Takes the input or text file (csv, txt, etc.) and the dropdowns information and performs the mapping."
+        },
         "id": "input_idlist"
       },
       "userfile": {
@@ -1561,11 +1566,11 @@
           "shortName": "from",
           "name": "From ID"
         },
-         "anchor": {
+        "anchor": {
           "shortName": "anchor",
           "name": "Internal ID"
         },
-         "to": {
+        "to": {
           "shortName": "to",
           "name": "To ID"
         }
@@ -1575,7 +1580,7 @@
           "shortName": "input_id",
           "name": "Input ID"
         },
-         "reason": {
+        "reason": {
           "shortName": "reason",
           "name": "Reason Not Mapped"
         }

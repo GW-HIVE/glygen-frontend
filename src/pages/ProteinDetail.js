@@ -103,6 +103,7 @@ const items = [
     label: stringConstants.sidebar.cross_ref.displayname,
     id: "Cross-References"
   },
+  { label: stringConstants.sidebar.history.displayname, id: "History" },
   { label: stringConstants.sidebar.publication.displayname, id: "Publications" }
 ];
 
@@ -427,7 +428,7 @@ const ProteinDetail = props => {
         // history = response.data.history;
         setNonExistent({
           error_code: response.data.error_list[0].error_code,
-          history: response.data.history
+          reason: response.data.reason
         });
         setPageLoading(false);
       } else {
@@ -462,12 +463,17 @@ const ProteinDetail = props => {
     protein_names,
     keywords,
     function: functions,
-    cluster_types
+    cluster_types,
+    history
   } = detailData;
 
   const uniprotNames = (protein_names || [])
     .filter(x => x.type === "recommended")
     .map(x => x.name);
+
+  const clusterType = (cluster_types || []).filter(
+    x => x.name !== "isoformset.uniprotkb"
+  );
 
   function formatNamesData(data) {
     let items = [];
@@ -1249,6 +1255,7 @@ const ProteinDetail = props => {
       expression_tissue: true,
       expression_disease: true,
       crossref: true,
+      history: true,
       publication: true
     }
   );
@@ -1279,18 +1286,30 @@ const ProteinDetail = props => {
 
   if (nonExistent) {
     return (
-      <Alert severity="error">
-        <AlertTitle>This Protein Record is Non existent</AlertTitle>
-        {nonExistent.history && nonExistent.history.length && (
-          <ul>
-            {nonExistent.history.map(item => (
-              <span className="recordInfo">
-                <li>{item.description}</li>
-              </span>
-            ))}
-          </ul>
-        )}
-      </Alert>
+      <Container className="tab-content-border2">
+        <Alert className="erroralert" severity="error">
+          <AlertTitle>This Protein Record is No longer valid</AlertTitle>
+          {nonExistent.reason && nonExistent.reason.length && (
+            <ul>
+              {nonExistent.reason.map(item => (
+                <span>
+                  <li>
+                    {item.description}
+                    {item.replacement_id && (
+                      <Link
+                        to={routeConstants.proteinDetail + item.replacement_id}
+                      >
+                        {" "}
+                        {item.replacement_id}
+                      </Link>
+                    )}
+                  </li>
+                </span>
+              ))}
+            </ul>
+          )}
+        </Alert>
+      </Container>
     );
   }
 
@@ -2730,7 +2749,7 @@ const ProteinDetail = props => {
                         <>
                           {showAlignmentOptions && (
                             <AlignmentDropdown
-                              types={cluster_types}
+                              types={clusterType}
                               dataType="protein_detail"
                               dataId={id}
                             />
@@ -3213,6 +3232,57 @@ const ProteinDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
+              {/* history */}
+              <Accordion
+                id="history"
+                defaultActiveKey="0"
+                className="panel-width"
+                style={{ padding: "20px 0" }}
+              >
+                <Card>
+                  <Card.Header className="panelHeadBgr">
+                    <span className="gg-green d-inline">
+                      <HelpTooltip
+                        title={DetailTooltips.glycan.history.title}
+                        text={DetailTooltips.glycan.history.text}
+                        urlText={DetailTooltips.glycan.history.urlText}
+                        url={DetailTooltips.glycan.history.url}
+                        helpIcon="gg-helpicon-detail"
+                      />
+                    </span>
+                    <h4 className="gg-green d-inline">
+                      {stringConstants.sidebar.history.displayname}
+                    </h4>
+                    <div className="float-right">
+                      <Accordion.Toggle
+                        // as={Card.Header}
+                        eventKey="0"
+                        onClick={() =>
+                          toggleCollapse("history", collapsed.history)
+                        }
+                        className="gg-green arrow-btn"
+                      >
+                        <span>
+                          {collapsed.history ? closeIcon : expandIcon}
+                        </span>
+                      </Accordion.Toggle>
+                    </div>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0" out={!collapsed.history}>
+                      <Card.Body>
+                    {history && history.length && (
+                        <>
+                          {history.map(historyItem => (
+                            <div>{historyItem.description}</div>
+                          ))}
+                        </>
+                    )}
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+
               {/* publication */}
               <Accordion
                 id="Publications"
