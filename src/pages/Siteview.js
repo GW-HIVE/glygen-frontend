@@ -62,9 +62,9 @@ const items = [
 ];
 
 const sortByPosition = function(a, b) {
-  if (a.position < b.position) {
+  if (parseInt(a.position) < parseInt(b.position)) {
     return -1;
-  } else if (b.position < a.position) {
+  } else if (parseInt(b.position) < parseInt(a.position)) {
     return 1;
   }
   return 0;
@@ -97,7 +97,7 @@ const SequenceLocationViewer = ({
 
   const getHighlightClassname = (reducedAnnotations, position) => {
     const match = reducedAnnotations.find(
-      annotation => annotation.start_pos === position
+      annotation => parseInt(annotation.position) === parseInt(position)
     );
 
     if (match) {
@@ -207,7 +207,7 @@ const SequenceLocationViewer = ({
             value={position}
             onChange={event => onSelectPosition(event.target.value)}
           >
-            {filteredAnnotations.map(annotation => (
+            {filteredAnnotations.sort(sortByPosition).map(annotation => (
               <option key={annotation.key} value={annotation.position}>
                 {annotation.key}: {annotation.allTypes.join(", ")}
               </option>
@@ -312,7 +312,7 @@ const Siteview = ({ position }) => {
     if (detailData.glycosylation) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.glycosylation.sort(sortByPosition).map(glycosylation => ({
+        ...detailData.glycosylation.sort(sortByStartPos).map(glycosylation => ({
           position: detailData.start_pos,
           type: glycosylation.type.split("-")[0],
           label: glycosylation.residue + "Glycosylation",
@@ -396,22 +396,20 @@ const Siteview = ({ position }) => {
       const getSequenceCharacter = position =>
         detailData.sequence.sequence[position - 1];
 
-      const uniquePositions = detailData.all_sites
-        .filter(
-          siteType =>
-            !["mutagenesis", "site_annotation"].includes(siteType.type)
-        )
-        .map(siteType =>
-          siteType.site_list.map(site => ({
-            position: site.start_pos,
-            type: pickLabel(siteType.type),
-            typeAnnotate: siteType.type,
+      const filteredSites = detailData.all_sites.filter(
+        siteType => !["mutagenesis", "site_annotation"].includes(siteType.type)
+      );
+      const mappedFilterSites = filteredSites.map(siteType =>
+        siteType.site_list.map(site => ({
+          position: site.start_pos,
+          type: pickLabel(siteType.type),
+          typeAnnotate: siteType.type,
 
-            key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
-            character: getSequenceCharacter(site.start_pos)
-          }))
-        )
-        .flat();
+          key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
+          character: getSequenceCharacter(site.start_pos)
+        }))
+      );
+      const uniquePositions = mappedFilterSites.flat();
 
       setAnnotations(uniquePositions);
 
@@ -588,14 +586,14 @@ const Siteview = ({ position }) => {
     setCollapsed({ [name]: !value });
   }
 
-  const sortByPosition = function(a, b) {
-    if (a.position < b.position) {
-      return -1;
-    } else if (b.position < a.position) {
-      return 1;
-    }
-    return 0;
-  };
+  // const sortByPosition = function(a, b) {
+  //   if (a.position < b.position) {
+  //     return -1;
+  //   } else if (b.position < a.position) {
+  //     return 1;
+  //   }
+  //   return 0;
+  // };
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   // ===================================== //
@@ -607,7 +605,7 @@ const Siteview = ({ position }) => {
           {nonExistent.history && nonExistent.history.length ? (
             <>
               <AlertTitle>
-                This Glycan <b>{id} </b>Record is Nonexistent
+                This Protein <b>{id} </b>Record is Nonexistent
               </AlertTitle>
               <ul>
                 {nonExistent.history.map(item => (
@@ -620,7 +618,7 @@ const Siteview = ({ position }) => {
           ) : (
             <>
               <AlertTitle>
-                This Glycan <b>{id} </b> Record is not valid
+                This Protein <b>{id} </b> Record is not valid
               </AlertTitle>
             </>
           )}

@@ -105,7 +105,7 @@ const SiteQuerySummary = props => {
                     {querySection.concept === "protein" && (
                       <Row className="summary-table-col" sm={12}>
                         <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                          protein
+                          Protein
                         </Col>
                         <Col align="left" xs={6} sm={6} md={6} lg={6}>
                           {querySection.query.unaggregated_list[0].string_value}
