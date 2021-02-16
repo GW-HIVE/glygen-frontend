@@ -105,7 +105,7 @@ const items = [
     label: stringConstants.sidebar.cross_ref.displayname,
     id: "Cross-References"
   },
-  { label: stringConstants.sidebar.history.displayname, id: "History" },
+  { label: stringConstants.sidebar.history.displayname, id: "history" },
   { label: stringConstants.sidebar.publication.displayname, id: "Publications" }
 ];
 
@@ -1285,6 +1285,9 @@ const ProteinDetail = props => {
     window.open(url);
   }
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   const showAlignmentOptions = detailData.orthologs
     ? detailData.orthologs.find(orth =>
         orth.evidence.find(evid => ["MGI", "OMA"].includes(evid.database))
@@ -1295,24 +1298,29 @@ const ProteinDetail = props => {
     return (
       <Container className="tab-content-border2">
         <Alert className="erroralert" severity="error">
-          <AlertTitle>This Protein Record is No longer valid</AlertTitle>
+          <AlertTitle> {id} is no longer valid Id</AlertTitle>
           {nonExistent.reason && nonExistent.reason.length && (
             <ul>
-              {nonExistent.reason.map(item => (
-                <span>
+              {/* {nonExistent.reason.map(item => ( */}
+              <span>
+                <li>
+                  {capitalizeFirstLetter(nonExistent.reason[0].description)}
+                </li>
+                {nonExistent.reason[1].replacement_id && (
                   <li>
-                    {item.description}
-                    {item.replacement_id && (
-                      <Link
-                        to={routeConstants.proteinDetail + item.replacement_id}
-                      >
-                        {" "}
-                        {item.replacement_id}
-                      </Link>
-                    )}
+                    <Link
+                      to={
+                        routeConstants.proteinDetail +
+                        nonExistent.reason[1].replacement_id
+                      }
+                    >
+                      {" "}
+                      {capitalizeFirstLetter(nonExistent.reason[1].description)}
+                    </Link>
                   </li>
-                </span>
-              ))}
+                )}
+              </span>
+              {/* ))} */}
             </ul>
           )}
         </Alert>
@@ -3300,7 +3308,11 @@ const ProteinDetail = props => {
                       {history && history.length && (
                         <>
                           {history.map(historyItem => (
-                            <div>{historyItem.description}</div>
+                            <div>
+                              <b>{id}</b> :{" "}
+                              {capitalizeFirstLetter(historyItem.type)} /{" "}
+                              {capitalizeFirstLetter(historyItem.description)}{" "}
+                            </div>
                           ))}
                         </>
                       )}
