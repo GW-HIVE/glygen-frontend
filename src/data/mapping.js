@@ -56,6 +56,13 @@ export const getIdMappingUnmappedDownload = (id, format, compressed, type, heade
   const url = `/data/download?query=${JSON.stringify(query)}`;
   return postToAndGetBlob(url, headers);
 };
+export const getIdMappingDownloadAll = (id, format, compressed, collapsed, type, headers) => {
+  let message = "idMapping unmapped downloaded successfully ";
+  logActivity("user", id, format, compressed, collapsed, "No results. " + message);
+  const query = { id, type, format, compressed, collapsed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
+};
 
 export const ID_MAP_REASON = [
   {

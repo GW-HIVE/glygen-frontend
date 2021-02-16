@@ -79,7 +79,8 @@ const featuredCards = [
   },
   {
     title: "Super Search",
-    description: "Super search Lorem ipsum dolor sit amet, consectetuer adipiscing elit commodo.",
+    description:
+      "Super search is a graphical interface to build queries across all GlyGen datasets.",
     image: superSearchImg,
     imageText: "Super Search",
     to: routeConstants.superSearch,

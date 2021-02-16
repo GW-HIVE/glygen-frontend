@@ -86,7 +86,7 @@ const SuperSearchInputcontrol = (props) => {
 									props.supSearchUpdateQuery(props.query.order, "value", "");
 									props.supSearchUpdateQuery(props.query.order, "typeaheadID", curfield.typeahead);
 									props.supSearchUpdateQuery(props.query.order, "error", false);
-									props.supSearchUpdateQuery(props.query.order, "operationEnum", curfield.oplist);
+									props.supSearchUpdateQuery(props.query.order, "operationEnum", (curfield.enum && curfield.enum.length > 0 ? curfield.oplist.filter(val => val !== "$regex") : curfield.oplist));
 									props.supSearchUpdateQuery(props.query.order, "selectEnum", curfield.enum);
 									props.supSearchUpdateQuery(props.query.order, "operation", "$eq");
 									props.supSearchUpdateQuery(props.query.order, "maxlength", curfield.maxlength ? curfield.maxlength : 100 );
@@ -197,7 +197,7 @@ const SuperSearchInputcontrol = (props) => {
 							}
 						</FormControl>
 						}
-						{props.query.selectEnum.length > 0 && <FormControl 
+						{props.query.selectEnum && props.query.selectEnum.length > 0 && <FormControl 
 							variant='outlined' 
 							fullWidth
 						>

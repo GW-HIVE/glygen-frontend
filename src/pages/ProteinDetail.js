@@ -47,6 +47,8 @@ import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
+
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
@@ -909,7 +911,12 @@ const ProteinDetail = props => {
                 <a href={disease.recommended_name.url}>
                   {disease.recommended_name.id}
                 </a>
-                )
+                ){" "}
+                {/* <LineTooltip text="Find all proteins / glycoproteins with the same SNV Disease">
+                  <Link>
+                    <SearchIcon className="ml-3 custom-icon-blue" />
+                  </Link>
+                </LineTooltip> */}
               </span>
             </li>
           ))}
@@ -1520,7 +1527,12 @@ const ProteinDetail = props => {
                             <strong>
                               {proteinStrings.chemical_mass.name}:{" "}
                             </strong>
-                            {addCommas(mass.chemical_mass)} Da
+                            {addCommas(mass.chemical_mass)} Da{" "}
+                            {/* <LineTooltip text="Find all proteins / glycoproteins with the same Chemical Mass">
+                              <Link>
+                                <SearchIcon className="ml-3 custom-icon-blue" />
+                              </Link>
+                            </LineTooltip> */}
                           </div>
 
                           {refseq && (
@@ -2237,6 +2249,11 @@ const ProteinDetail = props => {
                                       >
                                         {term.name} ({term.id})
                                       </a>
+                                      {/* <LineTooltip text="Find all proteins / glycoproteins with the same GO Annotation">
+                                        <Link>
+                                          <SearchIcon className="ml-3 custom-icon-blue" />
+                                        </Link>
+                                      </LineTooltip> */}
                                     </Col>
                                     <Col sm={3} md={3}>
                                       <EvidenceList
@@ -2445,7 +2462,6 @@ const ProteinDetail = props => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/*  Pathway */}
               <Accordion
                 id="Pathway"
@@ -2504,6 +2520,11 @@ const ProteinDetail = props => {
                                         >
                                           {link.id}
                                         </a>
+                                        {/* <LineTooltip text="Find all proteins / glycoproteins with the same Pathway ID">
+                                          <Link>
+                                            <SearchIcon className="ml-3 custom-icon-blue" />
+                                          </Link>
+                                        </LineTooltip> */}
                                       </li>
                                     </Col>
                                   ))}
@@ -2920,6 +2941,11 @@ const ProteinDetail = props => {
                                             {thisDisease.recommended_name.id}
                                           </a>
                                           )
+                                          {/* <LineTooltip text="Find all proteins / glycoproteins with the same Disease">
+                                            <Link>
+                                              <SearchIcon className="ml-3 custom-icon-blue" />
+                                            </Link>
+                                          </LineTooltip> */}
                                           <EvidenceList
                                             inline={true}
                                             evidences={groupEvidences(
@@ -3270,14 +3296,14 @@ const ProteinDetail = props => {
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0" out={!collapsed.history}>
-                      <Card.Body>
-                    {history && history.length && (
+                    <Card.Body>
+                      {history && history.length && (
                         <>
                           {history.map(historyItem => (
                             <div>{historyItem.description}</div>
                           ))}
                         </>
-                    )}
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -3353,6 +3379,11 @@ const ProteinDetail = props => {
                                           >
                                             <>{ref.id}</>
                                           </a>
+                                          {/* <LineTooltip text="Find all proteins / glycoproteins with the same PMID">
+                                            <Link>
+                                              <SearchIcon className="ml-3 custom-icon-blue" />
+                                            </Link>
+                                          </LineTooltip> */}
                                         </>
                                       ))}
                                     </div>

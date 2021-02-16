@@ -333,7 +333,17 @@ p {
 .badge-button {
   text-transform: none !important;
 }
-
+.custom-icon-blue {
+  font-size: 42px !important;
+  margin: 0;
+  -webkit-transition: all 400ms linear;
+  transition: all 400ms linear;
+  /* SVG color converter https://codepen.io/sosuke/pen/Pjoqqp */
+  filter: invert(37%) sepia(87%) saturate(410%) hue-rotate(163deg) brightness(93%) contrast(98%);
+}
+.custom-icon-blue:hover {
+  filter: invert(60%) sepia(85%) saturate(1641%) hue-rotate(182deg) brightness(102%) contrast(96%);
+}
 /* ========================================
              Cards
 ==========================================*/
