@@ -779,6 +779,13 @@ const GlycanDetail = (props) => {
                 </Grid>
               </Row>
             </div>
+            {props.history && props.history.length > 1 && <div className="text-right gg-download-btn-width pb-3">
+              <Button type="button" className="gg-btn-blue"
+                onClick={() => { props.history.goBack()} }
+              >
+                Back
+              </Button>
+            </div>}
             <div className="gg-download-btn-width">
               <DownloadButton
                 types={[
