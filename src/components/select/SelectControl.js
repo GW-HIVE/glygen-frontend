@@ -31,6 +31,7 @@ export default function SelectControl(props) {
                 margin={props.margin}
                 variant={props.variant}
                 defaultValue={props.defaultValue}
+                MenuProps={{ disablePortal: true }}
                 classes={{
                     root: props.rootClass ? props.rootClass : 'select-menu-adv',
                 }}

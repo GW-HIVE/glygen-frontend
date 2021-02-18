@@ -116,7 +116,7 @@ const SiteQuerySummary = props => {
                 ))}
               </>
             )}
-            {data && data.length && (
+            {data && data.length  > 0 && (
               <>
                 {data.map(querySection => (
                   <>

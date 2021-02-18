@@ -32,6 +32,7 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import stringConstants from "../data/json/stringConstants";
+import Button from "react-bootstrap/Button";
 
 const glycanStrings = stringConstants.glycan.common;
 const motifStrings = stringConstants.motif.common;
@@ -186,6 +187,13 @@ const MotifDetail = (props) => {
                 </Grid>
               </Row>
             </div>
+            {props.history && props.history.length > 1 && <div className="text-right gg-download-btn-width pb-3">
+              <Button type="button" className="gg-btn-blue"
+                onClick={() => { props.history.goBack()} }
+              >
+                Back
+              </Button>
+            </div>}
             <div className="gg-download-btn-width">
               <DownloadButton
                 types={[

@@ -86,11 +86,11 @@ const featuredCards = [
     to: routeConstants.superSearch,
   },
   {
-    title: "ID Mapping",
+    title: "GlyGen Mapper",
     description:
       "ID mapping related to glycan, protein / glycoprotein and based on the user input.",
     image: idMappingImg,
-    imageText: "ID Mapping",
+    imageText: "GlyGen Mapper",
     to: routeConstants.idMapping,
   },
   {
@@ -144,7 +144,8 @@ const featuredCards = [
   },
   {
     title: "GlyGen SandBox",
-    description: "GlyGen SandBox Lorem ipsum dolor sit amet, consectetuer adipiscing elit commodo.",
+    description:
+      "The GlyGen Sandbox allows detailed exploration of glycan structure and biosynthesis.",
     image: glygenSandBoxlImg,
     imageText: "GlyGen SandBox",
     href: GLYGEN_SANDBOX,
