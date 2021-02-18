@@ -1267,6 +1267,8 @@ const ProteinDetail = props => {
     }
   );
 
+  // const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
+    
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
   }
@@ -1298,7 +1300,7 @@ const ProteinDetail = props => {
     return (
       <Container className="tab-content-border2">
         <Alert className="erroralert" severity="error">
-          <AlertTitle> {id} is no longer valid Id</AlertTitle>
+          <AlertTitle> {id} is no longer valid Protein Id</AlertTitle>
           {nonExistent.reason && nonExistent.reason.length && (
             <ul>
               {/* {nonExistent.reason.map(item => ( */}
@@ -3308,11 +3310,9 @@ const ProteinDetail = props => {
                       {history && history.length && (
                         <>
                           {history.map(historyItem => (
-                            <div>
-                              <b>{id}</b> :{" "}
-                              {capitalizeFirstLetter(historyItem.type)} /{" "}
+                            <li>
                               {capitalizeFirstLetter(historyItem.description)}{" "}
-                            </div>
+                            </li>
                           ))}
                         </>
                       )}

@@ -585,15 +585,6 @@ const Siteview = ({ position }) => {
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
   }
-
-  // const sortByPosition = function(a, b) {
-  //   if (a.position < b.position) {
-  //     return -1;
-  //   } else if (b.position < a.position) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // };
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   // ===================================== //

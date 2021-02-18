@@ -8,10 +8,12 @@ import SiteSearchControl from "../components/search/SiteSearchControl";
 import { Tab, Tabs, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import "../css/Search.css";
-import { getSuperSearch, getSuperSearchList } from "../data/supersearch";
+import {
+  getSuperSearch,
+  getSuperSearchList,
+  createSiteQuerySummary
+} from "../data/supersearch";
 import siteData from "../data/json/siteData";
-import stringConstants from "../data/json/stringConstants";
-import routeConstants from "../data/json/routeConstants";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
 import { getSiteSearch } from "../data/protein";
@@ -35,22 +37,24 @@ const SiteSearch = props => {
     { show: false, id: "" }
   );
 
-  // useEffect(() => {
-  //   console.log("SuperSearch");
-  //   setPageLoading(true);
+  useEffect(() => {
+    if (id) {
+      console.log("SuperSearch");
+      setPageLoading(true);
+      getSuperSearchList(id, 1)
+        .then(({ data }) => {
+          logActivity("user", id, "Search modification initiated");
+          setQueryData(data.cache_info.query);
+          setPageLoading(false);
+        })
+        .catch(function(error) {
+          let message = "list api call";
+          axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+        });
+    }
+  }, []);
 
-  //   getSuperSearchList(id, 1)
-  //     .then(({ data }) => {
-  //       logActivity("user", id, "Search modification initiated");
-  //       setQueryData(data.cache_info.query);
-
-  //       setPageLoading(false);
-  //     })
-  //     .catch(function(error) {
-  //       let message = "list api call";
-  //       axiosError(error, "", message, setPageLoading, setAlertDialogInput);
-  //     });
-  // }, []);
+  const querySummary = createSiteQuerySummary(queryData);
 
   return (
     <>
@@ -71,6 +75,7 @@ const SiteSearch = props => {
           <div className="content-box-md">
             <h1 className="page-heading">{siteData.pageTitle}</h1>
           </div>
+          {/* <pre>${JSON.stringify(querySummary, null, 2)}</pre> */}
           <Tabs
             defaultActiveKey="Site-Search"
             transition={false}
@@ -99,6 +104,7 @@ const SiteSearch = props => {
               <Container className="tab-content-border">
                 <SiteSearchControl
                   searchId={id}
+                  defaults={querySummary}
                   // searchsiteClick={searchSiteClick}
                   // inputValue={SiteSearchData}
                   // setProAdvSearchData={setSiteSearchData}
