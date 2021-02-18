@@ -45,6 +45,7 @@ const ProteinQuerySummary = (props) => {
 
   const {
     uniprot_canonical_ac,
+    uniprot_canonical_ac_short,
     refseq_ac,
     go_id,
     mass,
@@ -68,12 +69,12 @@ const ProteinQuerySummary = (props) => {
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
 
-  function formatProtein() {
-    const ProteinAc = data.uniprot_canonical_ac;
-    return ProteinAc.split(",").join(", ");
+  function formatProtein(proteinAc) {
+    return proteinAc.split(",").join(", ");
   }
 
   const [aminoAcidLookup, setAminoAcidLookup] = useState({});
+  const [uniprotCanonicalACShowMore, setUniprotCanonicalACShowMore] = useState(true);
 
   useEffect(() => {
     getProteinInit().then((data) => {
@@ -146,14 +147,40 @@ const ProteinQuerySummary = (props) => {
 
             {/*  Protein typeahead */}
             {!props.question && uniprot_canonical_ac && (
+              <>
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {proteinStrings.uniprot_canonical_ac.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {formatProtein(uniprot_canonical_ac)}
+                  {formatProtein(uniprotCanonicalACShowMore && uniprot_canonical_ac_short === "" ? uniprot_canonical_ac : 
+                  (uniprotCanonicalACShowMore ? uniprot_canonical_ac_short : uniprot_canonical_ac))}
                 </Col>
               </Row>
+              <Row>
+                <Col align="right" xs={12} sm={12} md={12} lg={12}>
+                  {uniprot_canonical_ac_short && uniprot_canonical_ac_short !== "" && (
+                      <Button
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "5px"
+                        }}
+                        className={"lnk-btn"}
+                        variant="link"
+                        onClick={() => {
+                          setUniprotCanonicalACShowMore(
+                            !uniprotCanonicalACShowMore
+                          );
+                        }}
+                      >
+                        {uniprotCanonicalACShowMore
+                          ? "Show More..."
+                          : "Show Less..."}
+                      </Button>
+                    )}
+                </Col>
+              </Row>
+              </>
             )}
 
             {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}

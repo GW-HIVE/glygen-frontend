@@ -50,6 +50,11 @@ const ProteinList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
+          if (data.cache_info.query.uniprot_canonical_ac){
+            data.cache_info.query.uniprot_canonical_ac_short = 
+            data.cache_info.query.uniprot_canonical_ac.split(",").length > 9 ? 
+            data.cache_info.query.uniprot_canonical_ac.split(",").slice(0,9).join(",") : "";
+          }
           setQuery(data.cache_info.query);
           setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
@@ -61,6 +61,8 @@ const GlycanQuerySummary = (props) => {
     binding_protein_id,
   } = data;
 
+  const [glycanIdentifierShowMore, setGlycanIdentifierShowMore] = useState(true);
+
   const formatOrganisms = (organism) => {
     if (organism.organism_list) {
       const organismNames = organism.organism_list.map((item) => item.name);
@@ -118,14 +120,40 @@ const GlycanQuerySummary = (props) => {
 
             {/* glycan id */}
             {glycan_identifier && (
+              <>
               <Row className="summary-table-col" sm={12}>
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {glycanStrings.glycan_identifier.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {formatGlycans(glycan_identifier.glycan_id)}
+                  {formatGlycans(glycanIdentifierShowMore && glycan_identifier.glycan_id_short === "" ? glycan_identifier.glycan_id : 
+                  (glycanIdentifierShowMore ? glycan_identifier.glycan_id_short : glycan_identifier.glycan_id))}
                 </Col>
               </Row>
+              <Row>
+                <Col align="right" xs={12} sm={12} md={12} lg={12}>
+                  {glycan_identifier.glycan_id_short && glycan_identifier.glycan_id_short !== "" && (
+                      <Button
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "5px"
+                        }}
+                        className={"lnk-btn"}
+                        variant="link"
+                        onClick={() => {
+                          setGlycanIdentifierShowMore(
+                            !glycanIdentifierShowMore
+                          );
+                        }}
+                      >
+                        {glycanIdentifierShowMore
+                          ? "Show More..."
+                          : "Show Less..."}
+                      </Button>
+                    )}
+                </Col>
+              </Row>
+              </>
             )}
 
             {/* glycan id subsumption */}
