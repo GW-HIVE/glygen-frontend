@@ -17,7 +17,7 @@ import { getGlycanDownload } from "../data/glycan";
 // import { getIdMappingMappedDownload } from "../data/mapping";
 // import { getIdMappingUnmappedDownload } from "../data/mapping";
 import { getIdMappingDownloadAll } from "../data/mapping";
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 // const BootstrapInput = withStyles((theme) => ({
 //   root: {
@@ -62,7 +62,7 @@ const DownloadAllButton = (props) => {
 
   const handleDownload = async () => {
     const dataType = types.find((typeItem) => typeItem.type === format).data;
-    await downloadFromServer(dataId, format, compressed, collapsed, dataType, itemTypeResolver);
+    await downloadFromServer(dataId, format, compressed, dataType, itemTypeResolver);
     setShow(false);
   };
   const clearForm = () => {
@@ -72,7 +72,7 @@ const DownloadAllButton = (props) => {
   };
 
   const handleClickOutside = (event) => {
-      setShow(false);
+    setShow(false);
   };
 
   return (
