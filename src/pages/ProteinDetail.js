@@ -1267,8 +1267,8 @@ const ProteinDetail = props => {
     }
   );
 
-   const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
-    
+  //const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
+
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
   }
@@ -1360,13 +1360,19 @@ const ProteinDetail = props => {
                 </Grid>
               </Row>
             </div>
-            {props.history && props.history.length > 1 && <div className="text-right gg-download-btn-width pb-3">
-              <Button type="button" className="gg-btn-blue"
-                onClick={() => { props.history.goBack()} }
-              >
-                Back
-              </Button>
-            </div>}
+            {props.history && props.history.length > 1 && (
+              <div className="text-right gg-download-btn-width pb-3">
+                <Button
+                  type="button"
+                  className="gg-btn-blue"
+                  onClick={() => {
+                    props.history.goBack();
+                  }}
+                >
+                  Back
+                </Button>
+              </div>
+            )}
             <div className="gg-download-btn-width">
               <DownloadButton
                 types={[
@@ -3316,7 +3322,7 @@ const ProteinDetail = props => {
                     <Card.Body>
                       {history && history.length && (
                         <>
-                          {history.sort(sortedHistory).map(historyItem => (
+                          {history.map(historyItem => (
                             <li>
                               {capitalizeFirstLetter(historyItem.description)}{" "}
                             </li>
