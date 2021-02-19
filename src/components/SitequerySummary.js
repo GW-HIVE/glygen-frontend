@@ -49,36 +49,18 @@ const SiteQuerySummary = props => {
     uniprot_ac,
     start_pos,
     end_pos,
+    site_seq,
     annotation,
     aa_list,
     glycosylated_aa
   } = data;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
-  const [aminoAcidLookup, setAminoAcidLookup] = useState({});
 
-  useEffect(() => {
-    getSuperSearchList().then(data => {
-      const lookup = data.data.aa_list
-        .map(({ name, key }) => {
-          const tokens = name.split(" - ");
-          return {
-            key,
-            short: tokens[1],
-            long: tokens[0]
-          };
-        })
-        .reduce(
-          (ind, { key, short, long }) => ({
-            ...ind,
-            [key]: { short, long }
-          }),
-          {}
-        );
-
-      setAminoAcidLookup(lookup);
-    });
-  }, []);
+  function formatProtein() {
+    const ProteinAc = data.uniprot_ac;
+    return ProteinAc.split(",").join(", ");
+  }
 
   const querySummary = createSiteQuerySummary(data);
 
@@ -98,70 +80,59 @@ const SiteQuerySummary = props => {
           <Card.Text>
             {/*  Protein typeahead */}
 
-            {searchId !== "sups" && data && data.length > 0 && (
+            {data && data.length > 0 && (
               <>
-                {data.map(querySection => (
-                  <>
-                    {querySection.concept === "protein" && (
-                      <Row className="summary-table-col" sm={12}>
-                        <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                          Protein
-                        </Col>
-                        <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                          {querySection.query.unaggregated_list[0].string_value}
-                        </Col>
-                      </Row>
-                    )}
-                  </>
-                ))}
+                {querySummary.proteinId && (
+                  <Row className="summary-table-col" sm={12}>
+                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                      Protein:
+                    </Col>
+                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                      {querySummary.proteinId.join(", ")}
+                    </Col>
+                  </Row>
+                )}
+                {querySummary.annotations && (
+                  <Row className="summary-table-col" sm={12}>
+                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                      Annotations:
+                    </Col>
+                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                      {querySummary.annotations.join(", ")}
+                    </Col>
+                  </Row>
+                )}
+                {querySummary.aminoType && (
+                  <Row className="summary-table-col" sm={12}>
+                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                      Amino_Acid
+                    </Col>
+                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                      {querySummary.aminoType}
+                    </Col>
+                  </Row>
+                )}
+                {querySummary.position && (
+                  <Row className="summary-table-col" sm={12}>
+                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                      Position
+                    </Col>
+                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                      {querySummary.position}
+                    </Col>
+                  </Row>
+                )}
+                {querySummary.min && querySummary.max && (
+                  <Row className="summary-table-col" sm={12}>
+                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                      Range
+                    </Col>
+                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                      {querySummary.min} to {querySummary.max}
+                    </Col>
+                  </Row>
+                )}
               </>
-            )}
-            {data && data.length  > 0 && (
-              <>
-                {data.map(querySection => (
-                  <>
-                    {querySection.concept === "site" && (
-                      <Row className="summary-table-col" sm={12}>
-                        <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                          Path
-                        </Col>
-                        <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                          {querySummary.annotations &&
-                            querySummary.annotations.join(",")}
-                          {/* {querySection.query.unaggregated_list[0].path},
-                          {querySection.query.unaggregated_list[1].path} */}
-                          {/* <pre>{JSON.stringify(querySummary, null, 2)}</pre> */}
-                        </Col>
-                      </Row>
-                    )}
-                  </>
-                ))}
-              </>
-            )}
-
-            {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
-
-            {glycosylated_aa && (
-              <Row className="summary-table-col">
-                <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {proteinStrings.glycosylated_aa.shortName}:
-                </Col>
-                <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {glycosylated_aa.aa_list
-                    .map(key => aminoAcidLookup[key].short || "")
-                    .join(` ${glycosylated_aa.operation} `)}
-                </Col>
-              </Row>
-            )}
-            {annotation && (
-              <Row className="summary-table-col">
-                <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {proteinStrings.glycosylation_evidence.name}:
-                </Col>
-                <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {annotation}
-                </Col>
-              </Row>
             )}
           </Card.Text>
           <div className="pb-3">

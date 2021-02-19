@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
-
 import SequenceDisplay from "./SequenceDisplay";
-
 import "../css/proteinsequence.css";
 
 /**
@@ -19,7 +17,7 @@ function getMutationHighlightData(mutationData) {
       positions[mutationData[x].start_pos] = true;
       result.push({
         start: mutationData[x].start_pos,
-        length: mutationData[x].end_pos - mutationData[x].start_pos + 1,
+        length: mutationData[x].end_pos - mutationData[x].start_pos + 1
       });
     }
   }
@@ -34,6 +32,7 @@ function getMutationHighlightData(mutationData) {
  */
 function getSequonHighlightData(sequonData) {
   var result = [];
+
   var positions = {};
 
   for (var x = 0; x < sequonData.length; x++) {
@@ -41,7 +40,7 @@ function getSequonHighlightData(sequonData) {
       positions[sequonData[x].start_pos] = true;
       result.push({
         start: sequonData[x].start_pos,
-        length: sequonData[x].end_pos - sequonData[x].start_pos + 1,
+        length: sequonData[x].end_pos - sequonData[x].start_pos + 1
       });
     }
   }
@@ -84,10 +83,16 @@ function buildHighlightData(sequence, highlightData) {
       var position = x + 1;
       result.push({
         character: sequence[x],
-        n_link_glycosylation: isHighlighted(position, highlightData.n_link_glycosylation),
-        o_link_glycosylation: isHighlighted(position, highlightData.o_link_glycosylation),
+        n_link_glycosylation: isHighlighted(
+          position,
+          highlightData.n_link_glycosylation
+        ),
+        o_link_glycosylation: isHighlighted(
+          position,
+          highlightData.o_link_glycosylation
+        ),
         mutation: isHighlighted(position, highlightData.mutation),
-        site_annotation: isHighlighted(position, highlightData.site_annotation),
+        site_annotation: isHighlighted(position, highlightData.site_annotation)
       });
     }
     return result;
@@ -101,7 +106,14 @@ function buildHighlightData(sequence, highlightData) {
 //  * @return {string}
 //  */
 
-const HiglightSelecter = ({ count = 0, selectedHighlights, type, label, onSelect, className }) => {
+const HiglightSelecter = ({
+  count = 0,
+  selectedHighlights,
+  type,
+  label,
+  onSelect,
+  className
+}) => {
   return (
     <label>
       <input
@@ -124,7 +136,7 @@ const ProteinSequenceDisplay = ({
   mutation,
   siteAnnotation,
   selectedHighlights,
-  setSelectedHighlights,
+  setSelectedHighlights
 }) => {
   const [nLinkGlycan, setNLinkGlycan] = useState([]);
   const [oLinkGlycan, setOLinkGlycan] = useState([]);
@@ -132,30 +144,36 @@ const ProteinSequenceDisplay = ({
   const [siteAnnotationHighlights, setSiteAnnotationHighlights] = useState([]);
   const [sequenceData, setSequenceData] = useState([]);
 
+  //const hasStartPos = item => typeof item.start_pos === "undefined";
+  //const hasStartPos = item => item.start_pos === "undefined";
+
   useEffect(() => {
     if (glycosylation) {
       //distinct
       const distinctGlycanPositions = (value, index, self) => {
-        const findPosition = self.find((item) => item.position === value.position);
+        const findPosition = self.find(
+          item => item.start_pos === value.start_pos
+        );
         return self.indexOf(findPosition) === index;
       };
       const nLink = glycosylation
-        .filter((item) => item.type === "N-linked")
-        .filter((item) => item.position === "undefined")
+        .filter(item => item.type === "N-linked")
+        //.filter(hasStartPos)
         .filter(distinctGlycanPositions)
-        .map((item) => ({
-          start: item.position,
-          length: 1,
+        .map(item => ({
+          start: item.start_pos,
+          length: 1
         }));
       const oLink = glycosylation
-        .filter((item) => item.type === "O-linked")
-        .filter((item) => item.position === "undefined")
+        .filter(item => item.type === "O-linked")
+        //.filter(hasStartPos)
         .filter(distinctGlycanPositions)
-        .map((item) => ({
-          start: item.position,
-          length: 1,
+        .map(item => ({
+          start: item.start_pos,
+          length: 1
         }));
 
+      // debugger;
       setNLinkGlycan(nLink);
       setOLinkGlycan(oLink);
     }
@@ -182,16 +200,22 @@ const ProteinSequenceDisplay = ({
           mutation: mutationHighlights,
           site_annotation: siteAnnotationHighlights,
           n_link_glycosylation: nLinkGlycan,
-          o_link_glycosylation: oLinkGlycan,
+          o_link_glycosylation: oLinkGlycan
         })
       );
     }
-  }, [sequenceObject, mutationHighlights, siteAnnotationHighlights, nLinkGlycan, oLinkGlycan]);
+  }, [
+    sequenceObject,
+    mutationHighlights,
+    siteAnnotationHighlights,
+    nLinkGlycan,
+    oLinkGlycan
+  ]);
 
-  const handleSelectHighlight = (type) => {
+  const handleSelectHighlight = type => {
     setSelectedHighlights({
       ...selectedHighlights,
-      [type]: !selectedHighlights[type],
+      [type]: !selectedHighlights[type]
     });
   };
 
@@ -204,7 +228,10 @@ const ProteinSequenceDisplay = ({
       <Grid item className="sequnce_highlight">
         <div>
           {sequenceObject && (
-            <SequenceDisplay sequenceData={sequenceData} selectedHighlights={selectedHighlights} />
+            <SequenceDisplay
+              sequenceData={sequenceData}
+              selectedHighlights={selectedHighlights}
+            />
           )}
         </div>
       </Grid>

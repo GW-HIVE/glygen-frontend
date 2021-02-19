@@ -56,7 +56,7 @@ export const getSuperSearch = formObject => {
 const constructSiteSearchObject = queryObject => {
   const {
     proteinId,
-    aminoId,
+    aminoType,
     annotationOperation,
     annotations,
     position,
@@ -85,7 +85,12 @@ const constructSiteSearchObject = queryObject => {
     });
   }
 
-  if (min || max || (annotations && annotations.length)) {
+  if (
+    min ||
+    max ||
+    (annotations && annotations.length) ||
+    (aminoType && aminoType.length)
+  ) {
     const siteQuery = {
       concept: "site",
       query: {
@@ -95,6 +100,15 @@ const constructSiteSearchObject = queryObject => {
       }
     };
     let order = 0;
+
+    if (aminoType && aminoType.length) {
+      siteQuery.query.unaggregated_list.push({
+        path: "site_seq",
+        order,
+        operator: "$gt",
+        string_value: aminoType
+      });
+    }
 
     if (min || max) {
       siteQuery.query.unaggregated_list.push({
@@ -126,7 +140,6 @@ const constructSiteSearchObject = queryObject => {
         };
 
         siteQuery.query.aggregated_list.push(aggregator);
-
         targetList = aggregator.unaggregated_list;
       }
 
@@ -246,23 +259,40 @@ export const SITE_COLUMNS = [
 
 export const createSiteQuerySummary = query => {
   let result = {};
+  let start;
+  let end;
 
   for (let querySection of query) {
-    // for (let listItem of querySection.query.unaggregated_list) {
-    //   if (listItem.path === "uniprot_ac") {
-    //     if (!result.proteinId) {
-    //       result.proteinId = [];
-    //     }
-    //     result.proteinId.push(listItem.string_value);
-    //   } else if (
-    //     ["glycosylation", "snv", "mutagenesis"].includes(listItem.path)
-    //   ) {
-    //     if (!result.annotations) {
-    //       result.annotations = [];
-    //     }
-    //     result.annotations.push(listItem.path);
-    //   }
-    // }
+    for (let listItem of querySection.query.unaggregated_list) {
+      if (listItem.path === "uniprot_ac") {
+        if (!result.proteinId) {
+          result.proteinId = [];
+        }
+        result.proteinId.push(listItem.string_value);
+      } else if (listItem.path === "site_seq") {
+        result.aminoType = listItem.string_value;
+      } else if (
+        ["glycosylation", "snv", "mutagenesis"].includes(listItem.path)
+      ) {
+        if (!result.annotations) {
+          result.annotations = [];
+        }
+        result.annotations.push(listItem.path);
+      } else if (listItem.path === "start_pos") {
+        start = listItem.numeric_value;
+      } else if (listItem.path === "end_pos") {
+        end = listItem.numeric_value;
+      }
+    }
+  }
+
+  if (start && end) {
+    if (start === end) {
+      result.position = start;
+    } else {
+      result.min = start;
+      result.max = end;
+    }
   }
 
   return result;

@@ -127,17 +127,20 @@ const SiteList = props => {
         </section>
         <section>
           {/* {selectedColumns && selectedColumns.length !== 0 && ( */}
-          <PaginatedTable
-            trStyle={rowStyleFormat}
-            data={data}
-            columns={selectedColumns}
-            page={page}
-            sizePerPage={sizePerPage}
-            totalSize={totalSize}
-            onTableChange={handleTableChange}
-            defaultSortField="hit_score"
-            idField="uniprot_canonical_ac"
-          />
+          {data && data.length && (
+            <PaginatedTable
+              trStyle={rowStyleFormat}
+              data={data}
+              columns={selectedColumns}
+              page={page}
+              sizePerPage={sizePerPage}
+              totalSize={totalSize}
+              onTableChange={handleTableChange}
+              defaultSortField="hit_score"
+              defaultSortOrder="asc"
+              idField="uniprot_canonical_ac"
+            />
+          )}
           {/* )} */}
         </section>
       </Container>

@@ -1267,7 +1267,7 @@ const ProteinDetail = props => {
     }
   );
 
-  // const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
+   const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
     
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
@@ -3316,7 +3316,7 @@ const ProteinDetail = props => {
                     <Card.Body>
                       {history && history.length && (
                         <>
-                          {history.map(historyItem => (
+                          {history.sort(sortedHistory).map(historyItem => (
                             <li>
                               {capitalizeFirstLetter(historyItem.description)}{" "}
                             </li>

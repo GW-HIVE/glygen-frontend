@@ -41,94 +41,94 @@
         }
       ]
     },
-    "site_id": {
-      "placeholder": "Select Annotation Type",
+    "amino_type": {
+      "placeholder": "Select Residue Type",
       "placeholderId": "",
       "placeholderName": "",
       "menu": [
         {
-          "id": "ala",
+          "id": "Ala",
           "name": "Alanine (Ale)"
         },
         {
-          "id": "arg",
-          "name": "Arginine (Arg)"
+          "id": "Arg",
+          "name": "arginine (Arg)"
         },
         {
-          "id": "asn",
-          "name": "asparagine"
+          "id": "Asn",
+          "name": "asparagine (Asn)"
         },
         {
-          "id": "asp",
-          "name": "aspartic"
+          "id": "Asp",
+          "name": "aspartic (Asp)"
         },
         {
-          "id": "cys",
-          "name": "cysteine (cys)"
+          "id": "Cys",
+          "name": "cysteine (Cys)"
         },
         {
-          "id": "gln",
-          "name": "Glutamine (gln)"
+          "id": "Gln",
+          "name": "glutamine (Gln)"
         },
         {
-          "id": "glu",
-          "name": "glutamic (glu)"
+          "id": "Glu",
+          "name": "glutamic (Glu)"
         },
         {
-          "id": "gly",
-          "name": "glycine - (gly)"
+          "id": "Gly",
+          "name": "glycine (Gly)"
         },
         {
-          "id": "his",
-          "name": "histidine (his)"
+          "id": "His",
+          "name": "histidine (His)"
         },
         {
-          "id": "ile",
-          "name": "isoleucine (ile)"
+          "id": "Ile",
+          "name": "isoleucine (Ile)"
         },
         {
-          "id": "leu",
-          "name": "leucine (leu)"
+          "id": "Leu",
+          "name": "leucine (Leu)"
         },
         {
-          "id": "lys",
-          "name": "lysine (lys)"
+          "id": "Lys",
+          "name": "lysine (Lys)"
         },
         {
-          "id": "met",
-          "name": "methionine (met)"
+          "id": "Met",
+          "name": "methionine (Met)"
         },
         {
-          "id": "phe",
-          "name": "phenylalanine (phe)"
+          "id": "Phe",
+          "name": "phenylalanine (Phe)"
         },
         {
-          "id": "pro",
-          "name": "proline - (pro)"
+          "id": "Pro",
+          "name": "proline (Pro)"
         },
         {
-          "id": "ser",
-          "name": "serine (ser)"
+          "id": "Ser",
+          "name": "serine (Ser)"
         },
         {
-          "id": "his",
-          "name": "histidine (his)"
+          "id": "His",
+          "name": "histidine (His)"
         },
         {
-          "id": "thr",
-          "name": "threonine - (thr)"
+          "id": "Thr",
+          "name": "threonine (Thr)"
         },
         {
-          "id": "trp",
-          "name": "tryptophan - (trp)"
+          "id": "Trp",
+          "name": "tryptophan (Trp)"
         },
         {
-          "id": "tyr",
-          "name": "tyrosine - (tyr)"
+          "id": "Tyr",
+          "name": "tyrosine (Tyr)"
         },
         {
-          "id": "val",
-          "name": "valine - (val)"
+          "id": "Val",
+          "name": "valine (Val)"
         }
       ]
     },

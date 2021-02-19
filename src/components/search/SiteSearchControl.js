@@ -31,15 +31,41 @@ let siteListRoute = routeConstants.siteList;
  * Protein advanced search control.
  */
 const SiteSearchControl = props => {
+  const { defaults } = props;
   // const [positionOrRange, setPositionOrRange] = useState("");
   const [position, setPosition] = useState("");
   const [minRange, setMinRange] = useState("");
   const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
-  const [aminoId, setAminoId] = useState("");
+  const [aminoType, setAminoType] = useState("");
   const [annotationOperation, setAnnotationOperation] = useState("");
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
+  const [pageLoading, setPageLoading] = useState(true);
+  useEffect(() => {
+    if (defaults.proteinId) {
+      setproteinId(defaults.proteinId.join(","));
+    }
+    if (defaults.annotations) {
+      setAnnotations(
+        defaults.annotations.map(x => ({
+          id: x,
+          name: x
+        }))
+      );
+    }
+    if (defaults.aminoType) {
+      setAminoType(defaults.aminoType);
+    }
+    // if (defaults.aminoType) {
+    //   setAminoType(
+    //     defaults.aminoType.map(x => ({
+    //       id: x,
+    //       name: x
+    //     }))
+    //   );
+    // }
+  }, [defaults]);
 
   // const validateMinRange = (minRange) => true;
 
@@ -48,7 +74,7 @@ const SiteSearchControl = props => {
   useEffect(() => {
     setQueryObject({
       proteinId,
-      aminoId,
+      aminoType,
       annotations,
       annotationOperation,
       position,
@@ -57,7 +83,7 @@ const SiteSearchControl = props => {
     });
   }, [
     proteinId,
-    aminoId,
+    aminoType,
     annotations,
     annotationOperation,
     position,
@@ -74,7 +100,7 @@ const SiteSearchControl = props => {
     setPosition("");
     setMaxRange("");
     setAnnotations([]);
-    setAminoId("");
+    setAminoType("");
     setAnnotationOperation("");
   };
 
@@ -95,9 +121,22 @@ const SiteSearchControl = props => {
   };
 
   const handleSearch = () => {
-    getSiteSearch(queryObject).then(listId => {
-      window.location = siteListRoute + listId;
-    });
+    setPageLoading(true);
+    getSiteSearch({
+      ...queryObject,
+      proteinId: queryObject.proteinId.split(",").filter(x => x !== ""),
+      aminoType: queryObject.aminoType,
+      annotations: queryObject.annotations.map(x => x.id.toLowerCase())
+    })
+      .then(listId => {
+        if (listId) {
+          window.location = siteListRoute + listId;
+        } else {
+        }
+      })
+      .finally(() => {
+        setPageLoading(false);
+      });
   };
 
   return (
@@ -124,7 +163,7 @@ const SiteSearchControl = props => {
           </Row>
         </Grid>
         {/* <Grid item>
-          <pre>{JSON.stringify(queryObject)}</pre>
+          <pre>{JSON.stringify(defaults)}</pre>
         </Grid> */}
 
         <Grid item xs={12} sm={10}>
@@ -164,12 +203,12 @@ const SiteSearchControl = props => {
               {commonProteinData.glycosylated_aa.name}
             </Typography>
             <SelectControl
-              inputValue={aminoId}
-              placeholder={sitesData.site_id.placeholder}
-              placeholderId={sitesData.site_id.placeholderId}
-              placeholderName={sitesData.site_id.placeholderName}
-              menu={sitesData.site_id.menu}
-              setInputValue={setAminoId}
+              inputValue={aminoType}
+              placeholder={sitesData.amino_type.placeholder}
+              placeholderId={sitesData.amino_type.placeholderId}
+              placeholderName={sitesData.amino_type.placeholderName}
+              menu={sitesData.amino_type.menu}
+              setInputValue={setAminoType}
             />
           </FormControl>
         </Grid>
