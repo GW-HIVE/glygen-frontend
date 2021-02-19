@@ -22,7 +22,8 @@ import { grid, positions } from "@material-ui/system";
 import { getSiteSearch } from "../../data/supersearch";
 import proteinSearchData from "../../data/json/proteinSearch";
 import * as routeConstants from "../../data/json/routeConstants";
-
+import { logActivity } from "../../data/logging";
+import { axiosError } from "../../data/axiosError";
 const commonProteinData = stringConstants.protein.common;
 const sitesData = siteData.site_search;
 let advancedSearch = proteinSearchData.advanced_search;
@@ -43,6 +44,8 @@ const SiteSearchControl = props => {
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
   useEffect(() => {
+    setPageLoading(true);
+    logActivity();
     if (defaults.proteinId) {
       setproteinId(defaults.proteinId.join(","));
     }
@@ -57,14 +60,6 @@ const SiteSearchControl = props => {
     if (defaults.aminoType) {
       setAminoType(defaults.aminoType);
     }
-    // if (defaults.aminoType) {
-    //   setAminoType(
-    //     defaults.aminoType.map(x => ({
-    //       id: x,
-    //       name: x
-    //     }))
-    //   );
-    // }
   }, [defaults]);
 
   // const validateMinRange = (minRange) => true;
@@ -132,6 +127,13 @@ const SiteSearchControl = props => {
         if (listId) {
           window.location = siteListRoute + listId;
         } else {
+          logActivity("user", "", "No results. ");
+          setPageLoading(false);
+          // setAlertTextInput({
+          //   show: true,
+          //   id: stringConstants.errors.simpleSerarchError.id
+          // });
+          window.scrollTo(0, 0);
         }
       })
       .finally(() => {

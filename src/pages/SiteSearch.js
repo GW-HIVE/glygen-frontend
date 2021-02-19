@@ -39,7 +39,7 @@ const SiteSearch = props => {
 
   useEffect(() => {
     if (id) {
-      console.log("SuperSearch");
+      // console.log("SuperSearch");
       setPageLoading(true);
       getSuperSearchList(id, 1)
         .then(({ data }) => {
