@@ -1102,10 +1102,7 @@ const ProteinDetail = props => {
       },
       formatter: (cell, row) => {
         return (
-          <EvidenceList
-            key={row.disease.doid}
-            evidences={groupEvidences(cell)}
-          />
+          <EvidenceList key={row.disease} evidences={groupEvidences(cell)} />
         );
       }
     },
@@ -1120,7 +1117,7 @@ const ProteinDetail = props => {
           width: "16%"
         };
       },
-      formatter: (value, row) => (
+      formatter: value => (value, row) =>
         <>
           {value.map(disease => (
             <li key={disease.recommended_name.id}>
@@ -1134,8 +1131,11 @@ const ProteinDetail = props => {
               </span>
             </li>
           ))}
-        </>
-      )
+        </> ? (
+          value
+        ) : (
+          "N/A"
+        )
     },
     {
       dataField: "trend",
