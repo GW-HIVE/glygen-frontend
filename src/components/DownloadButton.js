@@ -17,6 +17,7 @@ import { getMotifDownload } from "../data/motif";
 import { getIdMappingMappedDownload } from "../data/mapping";
 import { getIdMappingUnmappedDownload } from "../data/mapping";
 import { getOrthologDownload, getLocusDownload } from "../data/usecases";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -63,14 +64,15 @@ const DownloadButton = (props) => {
 
   const handleDownload = async () => {
     const dataType = types.find((typeItem) => typeItem.type === format).data;
-
     await downloadFromServer(dataId, format, compressed, dataType, itemTypeResolver);
-
     setShow(false);
   };
   const clearForm = () => {
     setFormat(props.format || props.types[0].type);
     setCompressed(props.compressed || false);
+  };
+  const handleClickOutside = (event) => {
+    setShow(false);
   };
 
   return (
@@ -92,94 +94,100 @@ const DownloadButton = (props) => {
           <span className="caret mr-1"></span>
         </button>
       </Link>
-      <div
-        style={{ padding: "15px" }}
-        className={"dropdown-menu dropdown-menu-right" + (show ? " open show" : "")}
-        aria-labelledby="download"
-      >
-        <Row>
-          <Col>
-            <button
-              type="button"
-              className="gg-blue-color"
-              style={{
-                float: "right",
-                border: "none",
-                backgroundColor: "inherit",
-                padding: "0",
-              }}
-              onClick={() => {
-                clearForm();
-                setShow(!show);
-              }}
+      {show && (
+        <>
+          <ClickAwayListener onClickAway={handleClickOutside}>
+            <div
+              style={{ padding: "15px" }}
+              className={"dropdown-menu dropdown-menu-right" + (show ? " open show" : "")}
+              aria-labelledby="download"
             >
-              <CloseIcon />
-            </button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <FormControl margin="dense" variant="outlined" fullWidth>
               <Row>
-                <Col xs={3} sm={3} style={{ paddingTop: "6px" }}>
-                  <strong>Format:</strong>
+                <Col>
+                  <button
+                    type="button"
+                    className="gg-blue-color"
+                    style={{
+                      float: "right",
+                      border: "none",
+                      backgroundColor: "inherit",
+                      padding: "0",
+                    }}
+                    onClick={() => {
+                      clearForm();
+                      setShow(!show);
+                    }}
+                  >
+                    <CloseIcon />
+                  </button>
                 </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormControl margin="dense" variant="outlined" fullWidth>
+                    <Row>
+                      <Col xs={3} sm={3} style={{ paddingTop: "6px" }}>
+                        <strong>Format:</strong>
+                      </Col>
 
+                      <Col
+                        xs={9}
+                        sm={9}
+                        // align="right !important"
+                        className="text-right"
+                      >
+                        <SelectControl
+                          fullWidth
+                          inputValue={format}
+                          menu={types.map((typeItem) => {
+                            return { id: typeItem.type, name: typeItem.display };
+                          })}
+                          setInputValue={(value) => {
+                            setFormat(value);
+                          }}
+                        />
+                      </Col>
+                    </Row>
+                  </FormControl>
+                </Col>
+              </Row>
+              <Row style={{ paddingTop: "10px" }}>
                 <Col
-                  xs={9}
-                  sm={9}
-                  // align="right !important"
-                  className="text-right"
+                // xs={ 7 } sm={ 7 }
                 >
-                  <SelectControl
-                    fullWidth
-                    inputValue={format}
-                    menu={types.map((typeItem) => {
-                      return { id: typeItem.type, name: typeItem.display };
-                    })}
-                    setInputValue={(value) => {
-                      setFormat(value);
+                  <strong style={{ whiteSpace: "nowrap" }}>Compress file (*.gzip):</strong>
+                </Col>
+                <Col
+                  // xs={ 5 } sm={ 5 }
+                  align="right"
+                >
+                  <input
+                    // style={{ fontSize: 'xx-large' }}
+                    type="checkbox"
+                    id="download_compression"
+                    checked={compressed}
+                    onClick={(e) => {
+                      setCompressed(e.target.checked);
                     }}
                   />
                 </Col>
               </Row>
-            </FormControl>
-          </Col>
-        </Row>
-        <Row style={{ paddingTop: "10px" }}>
-          <Col
-          // xs={ 7 } sm={ 7 }
-          >
-            <strong style={{ whiteSpace: "nowrap" }}>Compress file (*.gzip):</strong>
-          </Col>
-          <Col
-            // xs={ 5 } sm={ 5 }
-            align="right"
-          >
-            <input
-              // style={{ fontSize: 'xx-large' }}
-              type="checkbox"
-              id="download_compression"
-              checked={compressed}
-              onClick={(e) => {
-                setCompressed(e.target.checked);
-              }}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button
-              type="button"
-              style={{ marginTop: "15px", float: "right" }}
-              className="gg-btn-outline"
-              onClick={handleDownload}
-            >
-              OK
-            </Button>
-          </Col>
-        </Row>
-      </div>
+              <Row>
+                <Col>
+                  <Button
+                    type="button"
+                    style={{ marginTop: "15px", float: "right" }}
+                    className="gg-btn-outline"
+                    onClick={handleDownload}
+                  >
+                    OK
+                  </Button>
+                </Col>
+              </Row>
+            </div>
+          </ClickAwayListener>
+        </>
+      )}
     </div>
   );
 };
