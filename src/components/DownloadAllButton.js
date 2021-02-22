@@ -4,34 +4,16 @@ import { Row, Col } from "react-bootstrap";
 import { downloadFromServer } from "../utils/download";
 import FormControl from "@material-ui/core/FormControl";
 // import InputLabel from '@material-ui/core/InputLabel';
-// import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import Button from "react-bootstrap/Button";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import { Link } from "@material-ui/core";
-// import InputBase from "@material-ui/core/InputBase";
+import InputBase from "@material-ui/core/InputBase";
 import CloseIcon from "@material-ui/icons/Close";
 import SelectControl from "./select/SelectControl";
-// import { getProteinDownload } from "../data/protein";
 import { getGlycanDownload } from "../data/glycan";
-// import { getMotifDownload } from "../data/motif";
-// import { getIdMappingMappedDownload } from "../data/mapping";
-// import { getIdMappingUnmappedDownload } from "../data/mapping";
-import { getIdMappingDownloadAll } from "../data/mapping";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-
-// const BootstrapInput = withStyles((theme) => ({
-//   root: {
-//     "label + &": {
-//       marginTop: theme.spacing(3),
-//     },
-//   },
-//   input: {
-//     borderRadius: 4,
-//     minWidth: "40px",
-//     border: "1px solid #ced4da",
-//     padding: "7px 26px 7px 12px",
-//   },
-// }))(InputBase);
+import { getIdMappingDownloadAll } from "../data/mapping";
 
 const DownloadAllButton = (props) => {
   const { types, dataId, itemType = "glycan" } = props;
@@ -40,25 +22,19 @@ const DownloadAllButton = (props) => {
     switch (itemType) {
       case "glycan":
         return getGlycanDownload;
-      // case "motif":
-      //   return getMotifDownload;
-      // case "protein":
-      //   return getProteinDownload;
-      // case "idMappingMapped":
-      //   return getIdMappingMappedDownload;
-      case "idMappingDownloadAll":
+      case "idMappingAll":
         return getIdMappingDownloadAll;
+
       default:
     }
     return null;
   });
-  // const [isComponentVisible, setIsComponentVisible] = useState(true);
 
   const [show, setShow] = useState(false);
   const [format, setFormat] = useState(props.format || props.types[0].type);
   // const [displayformat, setDisplayFormat] = useState(display);
   const [compressed, setCompressed] = useState(props.compressed || false);
-  const [collapsed, setCollapsed] = useState(props.collapsed || false);
+  const [collapsed, setCollapsed] = useState("idmapping_list_all_collapsed");
 
   const handleDownload = async () => {
     const dataType = types.find((typeItem) => typeItem.type === format).data;
@@ -68,9 +44,8 @@ const DownloadAllButton = (props) => {
   const clearForm = () => {
     setFormat(props.format || props.types[0].type);
     setCompressed(props.compressed || false);
-    setCollapsed(props.collapsed || false);
+    setCollapsed("");
   };
-
   const handleClickOutside = (event) => {
     setShow(false);
   };
@@ -155,8 +130,12 @@ const DownloadAllButton = (props) => {
                 <Col>
                   <strong style={{ whiteSpace: "nowrap" }}>Compress file (*.gzip):</strong>
                 </Col>
-                <Col align="right">
+                <Col
+                  // xs={ 5 } sm={ 5 }
+                  align="right"
+                >
                   <input
+                    // style={{ fontSize: 'xx-large' }}
                     type="checkbox"
                     id="download_compression"
                     checked={compressed}
@@ -173,8 +152,12 @@ const DownloadAllButton = (props) => {
                 <Col align="right">
                   <input
                     type="checkbox"
-                    id="idmapping_list_all_collapsed"
                     checked={collapsed}
+                    // checked={types.map((typeItem) => {
+                    //   return { id: typeItem.type, name: typeItem.display };
+                    // })}
+                    // id="download_compression"
+                    // checked={compressed}
                     onClick={(e) => {
                       setCollapsed(e.target.checked);
                     }}

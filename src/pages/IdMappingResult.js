@@ -232,7 +232,7 @@ const IdMappingResult = (props) => {
             },
           ]}
           dataId={id}
-          itemType="idMappingDownloadAll"
+          itemType="idMappingAll"
         />
 
         <div id="Mapped-Table"></div>

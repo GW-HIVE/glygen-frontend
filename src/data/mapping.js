@@ -56,10 +56,10 @@ export const getIdMappingUnmappedDownload = (id, format, compressed, type, heade
   const url = `/data/download?query=${JSON.stringify(query)}`;
   return postToAndGetBlob(url, headers);
 };
-export const getIdMappingDownloadAll = (id, format, compressed, collapsed, type, headers) => {
-  let message = "idMapping unmapped downloaded successfully ";
-  logActivity("user", id, format, compressed, collapsed, "No results. " + message);
-  const query = { id, type, format, compressed, collapsed };
+export const getIdMappingDownloadAll = (id, format, compressed, type, headers) => {
+  let message = "idMapping all downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
   const url = `/data/download?query=${JSON.stringify(query)}`;
   return postToAndGetBlob(url, headers);
 };
