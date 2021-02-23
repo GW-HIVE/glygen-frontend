@@ -836,8 +836,8 @@ sub {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .page-loader-image {
-  width: 75px;
-  height: 75px;
+  width: 150px;
+  height: 150px;
 }
 
 /* =========================================
