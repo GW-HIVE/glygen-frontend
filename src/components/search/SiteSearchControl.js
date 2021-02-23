@@ -24,6 +24,9 @@ import proteinSearchData from "../../data/json/proteinSearch";
 import * as routeConstants from "../../data/json/routeConstants";
 import { logActivity } from "../../data/logging";
 import { axiosError } from "../../data/axiosError";
+import { getTitle, getMeta } from "../../utils/head";
+import PageLoader from "../load/PageLoader";
+import FeedbackWidget from "../FeedbackWidget";
 const commonProteinData = stringConstants.protein.common;
 const sitesData = siteData.site_search;
 let advancedSearch = proteinSearchData.advanced_search;
@@ -42,7 +45,7 @@ const SiteSearchControl = props => {
   const [annotationOperation, setAnnotationOperation] = useState("");
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
-  const [pageLoading, setPageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(false);
   useEffect(() => {
     setPageLoading(true);
     logActivity();
@@ -67,6 +70,7 @@ const SiteSearchControl = props => {
   // const minRangeError = validateMinRange(minRange)
 
   useEffect(() => {
+    setPageLoading(false);
     setQueryObject({
       proteinId,
       aminoType,
@@ -122,23 +126,22 @@ const SiteSearchControl = props => {
       proteinId: queryObject.proteinId.split(",").filter(x => x !== ""),
       aminoType: queryObject.aminoType,
       annotations: queryObject.annotations.map(x => x.id.toLowerCase())
-    })
-      .then(listId => {
-        if (listId) {
-          window.location = siteListRoute + listId;
-        } else {
-          logActivity("user", "", "No results. ");
-          setPageLoading(false);
-          // setAlertTextInput({
-          //   show: true,
-          //   id: stringConstants.errors.simpleSerarchError.id
-          // });
-          window.scrollTo(0, 0);
-        }
-      })
-      .finally(() => {
+    }).then(listId => {
+      if (listId) {
+        window.location = siteListRoute + listId;
+      } else {
+        logActivity("user", "", "No results. ");
         setPageLoading(false);
-      });
+        // setAlertTextInput({
+        //   show: true,
+        //   id: stringConstants.errors.simpleSerarchError.id
+        // });
+        window.scrollTo(0, 0);
+      }
+    });
+    // .finally(() => {
+    //   setPageLoading(false);
+    // });
   };
 
   return (
@@ -149,6 +152,7 @@ const SiteSearchControl = props => {
         spacing={3}
         justify="center"
       >
+        <PageLoader pageLoading={pageLoading} />
         {/* Buttons Top */}
         <Grid item xs={12} sm={10}>
           <Row className="gg-align-right pt-2 pb-2 mr-1">
