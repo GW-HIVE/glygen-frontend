@@ -134,6 +134,7 @@ const SiteQuerySummary = props => {
                 )}
               </>
             )}
+            {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
           </Card.Text>
           <div className="pb-3">
             <Button

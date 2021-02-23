@@ -11,6 +11,7 @@ import '../css/Search.css';
 import Grid from '@material-ui/core/Grid';
 import superSearchData from '../data/json/superSearchData';
 import routeConstants from '../data/json/routeConstants';
+import edgerules from '../data/json/edgerules';
 import {logActivity} from '../data/logging';
 import {axiosError} from '../data/axiosError';
 import { getSuperSearchList, getSuperSearchInit} from '../data/supersearch';
@@ -20,6 +21,7 @@ import SuperSearchControl from '../components/search/SuperSearchControl';
 import { Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { getSuperSearch } from '../data/supersearch';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 /**
  * Super search component for showing super search tabs.
@@ -37,6 +39,7 @@ const SuperSearch = (props) => {
   const [svgData, setSVGData] = useState([]);
   const [selectedNode, setSelectedNode] = useState("");
   const [queryData, setQueryData] = useState([]);
+  const [queryDataDirect, setQueryDataDirect] = useState(JSON.stringify(edgerules, null, 2));
   const [supSearchShowQuery, setSupSearchShowQuery] = useState(false);
   const [supSearchSampleQuery, setSupSearchSampleQuery] = useState(false);
   const [supSearchActTabKey, setSupSearchActTabKey] = useState('Super-Search');
@@ -54,7 +57,7 @@ const SuperSearch = (props) => {
 	setPageLoading(true);
 	logActivity();
 	getSuperSearchInit().then((response) => {
-		let initData = response.data;
+		var initData = response.data;
 		setInitData(initData);
 		var initSvgData = getInitSVGData(initData);
 		setSVGData(initSvgData);
@@ -70,7 +73,9 @@ const SuperSearch = (props) => {
 		getSuperSearchList(id, 1).then(({ data }) => {
 				logActivity("user", id, "Super Search modification initiated");
 				setQueryData(data.cache_info.query);
-				updateNodeData(data.cache_info.result_summary, initSvgData);
+				if (data.cache_info.result_summary !== undefined) {
+					updateNodeData(data.cache_info.result_summary, initSvgData, initData);
+				}
 				setSupSearchActTabKey("Super-Search");
 				setPageLoading(false);
 			})
@@ -94,13 +99,20 @@ const SuperSearch = (props) => {
   **/
   function getInitSVGData(initData) {
 	var initSvgData = initData.map((node) => {
-		return {
+		let tempNode =  {
 			description: node.description,
 			record_count: node.record_count,
 			id: node.id,
 			label: node.label,
 			list_id: node.list_id ? node.list_id : "",
+		};
+		if (node.bylinkage !== undefined) {
+			for (let key in node.bylinkage) {
+				tempNode[node.id + "_" + key + "_record_count"] = node.bylinkage[key].result_count;
+				tempNode[node.id + "_" + key + "_list_id"] = node.bylinkage[key].list_id;
+			}
 		}
+		return tempNode;
 	  });
 	  return initSvgData;
   }
@@ -110,14 +122,21 @@ const SuperSearch = (props) => {
 	* @param {object} searchData - search data.
 	* @param {array} initSvgData - init svg data.
   **/
-  function updateNodeData(searchData, initSvgData){
+  function updateNodeData(searchData, initSvgData, initDataTemp){
 	  var updatedData = [];
-	  if (searchData) {
-		let tempData = initSvgData ? initSvgData.slice() : svgData.slice();
+	  if (searchData !== undefined) {
+		let tempData = initSvgData ? JSON.parse(JSON.stringify(initSvgData)) : JSON.parse(JSON.stringify(svgData));
 		updatedData = tempData.map((node) => {
 			let id = node.id;
 			node.record_count = searchData[id] ? searchData[id].result_count : 0;
 			node.list_id = searchData[id] ? searchData[id].list_id : "";
+			const initNode = initDataTemp ? initDataTemp.find((node) => node.id === id) : initData.find((node) => node.id === id);
+			if (initNode !== undefined && initNode.bylinkage !== undefined) {
+				for (let key in initNode.bylinkage) {
+					node[id + "_" + key + "_record_count"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].result_count ? searchData[id].bylinkage[key].result_count : undefined;
+					node[id + "_" + key + "_list_id"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].list_id ? searchData[id].bylinkage[key].list_id : undefined;
+				}
+			}
 			return node;
 		});
 	} else {
@@ -166,14 +185,16 @@ const SuperSearch = (props) => {
 	updateNodeData();
 	setQueryData([]);
 	setSuperSearchQuerySelect("");
+	setQueryDataDirect("");
   }
 
   /**
     * Function to execute super search query.
 	* @param {array} superSearchQuery - query object.
 	* @param {boolean} selected - true if sample query is executed.
+	* @param {boolean} selected - true if sample query is executed.
   **/
- function executeSuperSearchQuery(superSearchQuery, selected) {
+ function executeSuperSearchQuery(superSearchQuery, selected, direct) {
 
 	if (superSearchQuery.length === 0) {
 		setQueryData(superSearchQuery);
@@ -287,6 +308,30 @@ const SuperSearch = (props) => {
 												onClick={() => setSupSearchShowQuery(true)}			
 											>
 												Show Query
+											</Button>
+										</Row>
+									</Grid>
+
+									{/* Buttons */}
+									<Grid item xs={11} sm={11}>
+										<Row className="mt-4 mr-3 ml-1">											
+											<OutlinedInput
+												className={'svg-input'}
+												value={queryDataDirect}
+												fullWidth
+												multiline
+												margin='dense'
+												placeholder='Enter Query'
+												rows={5}
+												onChange={(event)=>{setQueryDataDirect(event.target.value)}}
+											/>
+										</Row>
+										<Row className="gg-align-right mt-4 mr-3">											
+											<Button className="gg-btn-outline" 
+												disabled={queryDataDirect.length <= 0}
+												onClick={() => executeSuperSearchQuery(JSON.parse(queryDataDirect), false, true)}			
+											>
+												Execute
 											</Button>
 										</Row>
 									</Grid>

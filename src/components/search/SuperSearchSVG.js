@@ -31,7 +31,7 @@ const SuperSearchSVG = (props) => {
 	* useEffect for updating svg number data and displaying it.
   */
   useEffect(() => {
-    updateNumnodesSVG(props.svgData);
+    loadSVG(props.svgData);
   }, [props.svgData])
 
  /**
@@ -135,14 +135,25 @@ const SuperSearchSVG = (props) => {
     var nodes = svgNodes.map((node)=> {
       node.name =  nodeData.find((n) => node.id === n.id).label; 
       return node});
-    var edges = svgLinks.map((e) => { 
-                // Get the source and target nodes
-                var linkName = e.linkName;
-                var sourceNode = nodes.filter(function(n) { return n.id === e.source; })[0],
-                    targetNode = nodes.filter(function(n) { return n.id === e.target; })[0];
-                return {sourceOffset: e.sourceOffset, targetOffset: e.targetOffset, dasharray: e.dasharray, rotate: e.rotate, 
-                        xCord: e.xCord, yCord: e.yCord, linkid: e.linkid, source: sourceNode, target: targetNode, linkName: linkName};
-            });
+      var edges = svgLinks.map((e) => { 
+        // Get the source and target nodes
+        var linkName = e.linkName;
+        var sourceNode = nodes.filter(function(n) { return n.id === e.source; })[0],
+            targetNode = nodes.filter(function(n) { return n.id === e.target; })[0];
+
+        var svgSource =  nodeData.find((n) => sourceNode.id === n.id);
+        var svgTarget =  nodeData.find((n) => targetNode.id === n.id);
+
+        return {sourceOffset: e.sourceOffset, targetOffset: e.targetOffset, dasharray: e.dasharray, rotate: e.rotate, 
+                xCord: e.xCord, yCord: e.yCord, linkid: sourceNode.id + "_" + targetNode.id, source: sourceNode, target: targetNode, linkName: linkName,
+                sourceNumber: svgSource[sourceNode.id + "_" + targetNode.id + "_record_count"] !== undefined ? Number(svgSource[sourceNode.id + "_" + targetNode.id + "_record_count"]).toLocaleString('en-US') : "", 
+                sourceListID: svgSource[sourceNode.id + "_" + targetNode.id + "_list_id"] !== undefined ? svgSource[sourceNode.id + "_" + targetNode.id + "_list_id"] : "",
+                sourcexCord: e.source_xCord, sourceyCord: e.source_yCord, 
+                targetNumber: svgTarget[targetNode.id + "_" + sourceNode.id + "_record_count"] !== undefined ? Number(svgTarget[targetNode.id + "_" + sourceNode.id + "_record_count"]).toLocaleString('en-US') : "", 
+                targetListID: svgTarget[targetNode.id + "_" + sourceNode.id + "_list_id"] !== undefined ? svgTarget[targetNode.id + "_" + sourceNode.id + "_list_id"] : "",
+                targetxCord: e.target_xCord, targetyCord: e.target_yCord
+              };
+    });
 
     //setting basic d3 properties
     var force = forceSimulation()
@@ -180,6 +191,34 @@ const SuperSearchSVG = (props) => {
                         var trans = "translate(" + d.xCord + "," + d.yCord + ")" + " rotate(" +  d.rotate + ")";
                         return trans;
                     })
+
+                    var linkText1 = svg.selectAll(".svg-link")
+                    .data(edges)           
+                    .append("text")
+                    .attr("class", "svg-link-text-number")
+                    .attr("id", ((d) => "svg-link-source" + d.linkid))
+                    .attr("dy", "1.8em")
+                    .text(function(d) {
+                        return d.sourceNumber;
+                    })
+                    .attr("transform", function(d) {
+                        var trans = "translate(" + d.sourcexCord + "," + d.sourceyCord + ")" + " rotate(" +  d.rotate + ")";
+                        return trans;
+                    })
+
+      var linkText2 = svg.selectAll(".svg-link")
+      .data(edges)           
+      .append("text")
+      .attr("class", "svg-link-text-number")
+      .attr("id", ((d) => "svg-link-target" + d.linkid))
+      .attr("dy", "1.8em")
+      .text(function(d) {
+          return d.targetNumber;
+      })
+      .attr("transform", function(d) {
+          var trans = "translate(" + d.targetxCord + "," + d.targetyCord + ")" + " rotate(" +  d.rotate + ")";
+          return trans;
+      })
 
 
     //appending the regular nodes

@@ -235,8 +235,10 @@ const SuperSearchControl = (props) => {
 
         var tempArray = controlArray.slice();
         var concept = props.selectedNode;
+        let currentQueryData = props.queryData.find((query) => query.concept === props.selectedNode);
         var searchQuery = {
             concept: concept, 
+            ignored_edges: currentQueryData ? currentQueryData.ignored_edges : undefined,
             query:{} 
         };
 
@@ -407,7 +409,7 @@ const SuperSearchControl = (props) => {
 export default SuperSearchControl;
 
 SuperSearchControl.propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.object,
     queryData: PropTypes.array,
 	selectedNode: PropTypes.string,
 	setSelectedNode: PropTypes.func,

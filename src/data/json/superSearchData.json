@@ -58,6 +58,53 @@
                           }
                         }
                     ]
+                },
+                {
+                    "name": "Protein with UniProtKB accesssion P14210 with edge constraints",
+                    "id": "query_3",
+                    "query": [
+                        {
+                          "concept": "protein",
+                          "query": {
+                            "aggregator": "$and",
+                            "unaggregated_list": [
+                              {
+                                "order": 0,
+                                "path": "uniprot_ac",
+                                "operator": "$eq",
+                                "string_value": "P14210"
+                              }
+                            ],
+                            "aggregated_list": []
+                          },
+                          "ignored_edges": [
+                            {
+                              "source": "species",
+                              "target": "glycan",
+                              "direction": "both"
+                            },
+                            {
+                              "source": "gene",
+                              "target": "species",
+                              "direction": "both"
+                            },
+                            {
+                              "source": "gene",
+                              "target": "disease",
+                              "direction": "both"
+                            },
+                            {
+                              "source": "disease",
+                              "target": "site",
+                              "direction": "both"
+                            },
+                            {
+                              "source": "glycan",
+                              "target": "site"
+                            }
+                          ]
+                        }
+                    ]
                 }
             ]
         }

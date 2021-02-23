@@ -39,7 +39,7 @@ export default function SuperSearchSampleQuery(props) {
         >    
             <div 
                 id="contents"
-                class = "gf-content-div"
+                className="gf-content-div"
              >
             <h5 className= "alert-dialog-title" style={{minWidth: '800px' }}>{props.title}</h5>
             <div className="alert-dialog-content"

@@ -271,7 +271,7 @@ SuperSearchInputcontrol.propTypes = {
 	query: PropTypes.object,
 	prevOrderId: PropTypes.number,
 	nextOrderId: PropTypes.number,
-	data: PropTypes.array,
+	data: PropTypes.object,
 	selectedNode: PropTypes.string,
 	supSearchDeleteQuery: PropTypes.func,
 	supSearchAddQuery: PropTypes.func,

@@ -185,6 +185,15 @@ input[type="number"] {
   stroke-width: 0.8;
 }
 
+.svg-link-text-number {
+  font-size: 10px;
+  font-weight: 200;
+  fill: #000;
+  stroke: #2F78B7;
+  text-anchor: middle;
+  stroke-width: 0.8;
+}
+
 .svg-numnode {
   fill: #ffff99;
   stroke: #2F78B7;
