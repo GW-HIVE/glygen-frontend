@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import MultilineAutoTextInput from "../input/MultilineAutoTextInput";
 import AutoTextInput from "../input/AutoTextInput";
+import DialogAlert from "../alert/DialogAlert";
 import SelectControl from "../select/SelectControl";
 import HelpTooltip from "../tooltip/HelpTooltip";
 import ExampleExploreControl from "../example/ExampleExploreControl";
@@ -42,10 +43,18 @@ const SiteSearchControl = props => {
   const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
   const [aminoType, setAminoType] = useState("");
-  const [annotationOperation, setAnnotationOperation] = useState("");
+  const [annotationOperation, setAnnotationOperation] = useState("and");
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(false);
+  const [alertTextInput, setAlertTextInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
+  const [alertDialogInput, setAlertDialogInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
   useEffect(() => {
     setPageLoading(true);
     logActivity();
@@ -121,27 +130,32 @@ const SiteSearchControl = props => {
 
   const handleSearch = () => {
     setPageLoading(true);
+    logActivity("user", "Performing Site Search");
+    let message = "Site Search query=" + JSON.stringify(queryObject);
+    console.log(message);
+
     getSiteSearch({
       ...queryObject,
       proteinId: queryObject.proteinId.split(",").filter(x => x !== ""),
       aminoType: queryObject.aminoType,
       annotations: queryObject.annotations.map(x => x.id.toLowerCase())
-    }).then(listId => {
-      if (listId) {
-        window.location = siteListRoute + listId;
-      } else {
-        logActivity("user", "", "No results. ");
-        setPageLoading(false);
-        // setAlertTextInput({
-        //   show: true,
-        //   id: stringConstants.errors.simpleSerarchError.id
-        // });
-        window.scrollTo(0, 0);
-      }
-    });
-    // .finally(() => {
-    //   setPageLoading(false);
-    // });
+    })
+      .then(listId => {
+        if (listId) {
+          window.location = siteListRoute + listId;
+        } else {
+          logActivity("user", "", "No results. ");
+          setPageLoading(false);
+          // setAlertTextInput({
+          //   show: true,
+          //   id: stringConstants.errors.simpleSerarchError.id
+          // });
+          window.scrollTo(0, 0);
+        }
+      })
+      .catch(function(error) {
+        axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+      });
   };
 
   return (
@@ -153,6 +167,12 @@ const SiteSearchControl = props => {
         justify="center"
       >
         <PageLoader pageLoading={pageLoading} />
+        <DialogAlert
+          alertInput={alertDialogInput}
+          setOpen={input => {
+            setAlertDialogInput({ show: input });
+          }}
+        />
         {/* Buttons Top */}
         <Grid item xs={12} sm={10}>
           <Row className="gg-align-right pt-2 pb-2 mr-1">

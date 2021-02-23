@@ -238,6 +238,7 @@ const ProteinDetail = props => {
   );
   const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
     "reported_with_glycan"
+
   );
   const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
   const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState([]);
@@ -1117,26 +1118,28 @@ const ProteinDetail = props => {
           width: "16%"
         };
       },
-      formatter: value => (value, row) =>
-        <>
-          {value.map(disease => (
-            <li key={disease.recommended_name.id}>
-              {disease.recommended_name.name}{" "}
-              <span className="nowrap">
-                (
-                <a href={disease.recommended_name.url}>
-                  {disease.recommended_name.id}
-                </a>
-                )
-              </span>
-            </li>
-          ))}
-        </> ? (
-          value
+
+      formatter: (value, row) =>
+        value ? (
+          <>
+            {value.map(disease => (
+              <li key={disease.recommended_name.id}>
+                {disease.recommended_name.name}{" "}
+                <span className="nowrap">
+                  (
+                  <a href={disease.recommended_name.url}>
+                    {disease.recommended_name.id}
+                  </a>
+                  ){" "}
+                </span>
+              </li>
+            ))}
+          </>
         ) : (
           "N/A"
         )
     },
+
     {
       dataField: "trend",
       text: proteinStrings.expression_trend.name,
@@ -1678,7 +1681,6 @@ const ProteinDetail = props => {
                         <Tabs
                           defaultActiveKey={glycosylationTabSelected}
                           transition={false}
-                          // activeKey={glycosylationTabSelected}
                           mountOnEnter={true}
                           unmountOnExit={true}
                           // onSelect={key => {
