@@ -195,8 +195,10 @@ const SuperSearchSVG = (props) => {
                     var linkText1 = svg.selectAll(".svg-link")
                     .data(edges)           
                     .append("text")
-                    .attr("class", "svg-link-text-number")
+                    .attr("class", ((d) => d.sourceListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
                     .attr("id", ((d) => "svg-link-source" + d.linkid))
+                    .on("mouseover", mouseoverSource)
+                    .on("mouseout",mouseoutSource)
                     .attr("dy", "1.8em")
                     .text(function(d) {
                         return d.sourceNumber;
@@ -205,12 +207,47 @@ const SuperSearchSVG = (props) => {
                         var trans = "translate(" + d.sourcexCord + "," + d.sourceyCord + ")" + " rotate(" +  d.rotate + ")";
                         return trans;
                     })
+                    //go to the list page
+                    .on("click", function(d) {
+                      if (d.sourceListID !== "") {
+                        props.goToListPage(d.sourceListID, d.source.id);
+                      }
+                  });
+                          /**
+      * Function for showing tooltip on mouseover.
+      * @param {object} d - node data.
+      */
+      function mouseoverSource(d) {
+        if (d.sourceListID !== "") {
+            let element = document.getElementById("svg-link-source" + d.linkid);
+            var bcr = element.getBoundingClientRect();
+            let tooltip = document.getElementById("tooltip"); 
+            let tooltipText = document.getElementById("tooltip-text");
+            tooltipText.innerHTML = "Click to see list page.";
+            tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+            tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
+            tooltip.style.display = "inline";
+        }
+      }
+
+      /**
+      * Function for hiding tooltip on mouseout.
+      * @param {object} d - node data.
+      */
+      function mouseoutSource(d) {
+        if (d.sourceListID !== "") {
+            var tooltip = document.getElementById("tooltip");
+            tooltip.style.display = "none";
+        }
+      }
 
       var linkText2 = svg.selectAll(".svg-link")
       .data(edges)           
       .append("text")
-      .attr("class", "svg-link-text-number")
+      .attr("class", ((d) => d.targetListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
       .attr("id", ((d) => "svg-link-target" + d.linkid))
+      .on("mouseover", mouseoverTarget)
+      .on("mouseout",mouseoutTarget)
       .attr("dy", "1.8em")
       .text(function(d) {
           return d.targetNumber;
@@ -219,7 +256,39 @@ const SuperSearchSVG = (props) => {
           var trans = "translate(" + d.targetxCord + "," + d.targetyCord + ")" + " rotate(" +  d.rotate + ")";
           return trans;
       })
+      //go to the list page
+      .on("click", function(d) {
+        if (d.targetListID !== "") {
+          props.goToListPage(d.targetListID, d.target.id);
+        }
+      });
 
+      /* Function for showing tooltip on mouseover.
+      * @param {object} d - node data.
+      */
+      function mouseoverTarget(d) {
+        if (d.targetListID !== "") {
+            let element = document.getElementById("svg-link-target" + d.linkid);
+            var bcr = element.getBoundingClientRect();
+            let tooltip = document.getElementById("tooltip"); 
+            let tooltipText = document.getElementById("tooltip-text");
+            tooltipText.innerHTML = "Click to see list page.";
+            tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+            tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
+            tooltip.style.display = "inline";
+        }
+      }
+
+      /**
+      * Function for hiding tooltip on mouseout.
+      * @param {object} d - node data.
+      */
+      function mouseoutTarget(d) {
+        if (d.targetListID !== "") {
+            var tooltip = document.getElementById("tooltip");
+            tooltip.style.display = "none";
+        }
+      }
 
     //appending the regular nodes
     var node = svg.selectAll(".svg-node")

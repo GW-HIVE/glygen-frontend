@@ -191,6 +191,17 @@ input[type="number"] {
   fill: #000;
   stroke: #2F78B7;
   text-anchor: middle;
+  cursor: pointer  !important;
+  stroke-width: 0.8;
+}
+
+.svg-link-text-number-nl {
+  font-size: 10px;
+  font-weight: 200;
+  fill: #000;
+  stroke: gray;
+  text-anchor: middle;
+  cursor: no-drop  !important;
   stroke-width: 0.8;
 }
 

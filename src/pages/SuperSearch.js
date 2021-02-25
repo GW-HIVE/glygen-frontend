@@ -38,7 +38,7 @@ const SuperSearch = (props) => {
   const [initData, setInitData] = useState([]);
   const [svgData, setSVGData] = useState([]);
   const [selectedNode, setSelectedNode] = useState("");
-  const [queryData, setQueryData] = useState([]);
+  const [queryData, setQueryData] = useState({});
   const [queryDataDirect, setQueryDataDirect] = useState(JSON.stringify(edgerules, null, 2));
   const [supSearchShowQuery, setSupSearchShowQuery] = useState(false);
   const [supSearchSampleQuery, setSupSearchSampleQuery] = useState(false);
@@ -133,8 +133,8 @@ const SuperSearch = (props) => {
 			const initNode = initDataTemp ? initDataTemp.find((node) => node.id === id) : initData.find((node) => node.id === id);
 			if (initNode !== undefined && initNode.bylinkage !== undefined) {
 				for (let key in initNode.bylinkage) {
-					node[id + "_" + key + "_record_count"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].result_count ? searchData[id].bylinkage[key].result_count : undefined;
-					node[id + "_" + key + "_list_id"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].list_id ? searchData[id].bylinkage[key].list_id : undefined;
+					node[id + "_" + key + "_record_count"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].result_count !== undefined ? searchData[id].bylinkage[key].result_count : undefined;
+					node[id + "_" + key + "_list_id"] = searchData[id] && searchData[id].bylinkage && searchData[id].bylinkage[key] && searchData[id].bylinkage[key].list_id !== undefined ? searchData[id].bylinkage[key].list_id : undefined;
 				}
 			}
 			return node;
@@ -183,7 +183,7 @@ const SuperSearch = (props) => {
   **/
   function resetSuperSearchQuery() {
 	updateNodeData();
-	setQueryData([]);
+	setQueryData({});
 	setSuperSearchQuerySelect("");
 	setQueryDataDirect("");
   }
@@ -196,14 +196,20 @@ const SuperSearch = (props) => {
   **/
  function executeSuperSearchQuery(superSearchQuery, selected, direct) {
 
-	if (superSearchQuery.length === 0) {
-		setQueryData(superSearchQuery);
+	if (!selected && !direct){
+		superSearchQuery = {
+			concept_query_list : superSearchQuery
+		};
+	}
+
+	if (JSON.stringify(superSearchQuery) === JSON.stringify({})) {
+		setQueryData({});
 		updateNodeData();
 		setSelectedNode("");
 		setSuperSearchQuerySelect("");
 	}
 
-	if (superSearchQuery.length > 0){
+	if (JSON.stringify(superSearchQuery) !== JSON.stringify({})){
 		setPageLoading(true);
 		!selected && setSuperSearchQuerySelect("");
 		let message = "Super Search query=" + JSON.stringify(superSearchQuery);
@@ -241,7 +247,7 @@ const SuperSearch = (props) => {
 						selectedNode={selectedNode} 
 						executeSuperSearchQuery={executeSuperSearchQuery}
 						setSelectedNode={setSelectedNode} 
-						queryData={queryData} 
+						queryData={JSON.stringify(queryData) === JSON.stringify({}) ? [] : queryData.concept_query_list} 
 					/>
 					<SuperSearchSampleQuery
 						show={supSearchSampleQuery}
@@ -298,13 +304,13 @@ const SuperSearch = (props) => {
 												Try Sample Query
 											</Button>
 											<Button className="gg-btn-outline mr-4"
-												disabled={queryData.length <= 0}
+												disabled={JSON.stringify(queryData) === JSON.stringify({})}
 												onClick={resetSuperSearchQuery}
 											>
 												Reset Query
 											</Button>
 											<Button className="gg-btn-outline" 
-												disabled={queryData.length <= 0}
+												disabled={JSON.stringify(queryData) === JSON.stringify({})}
 												onClick={() => setSupSearchShowQuery(true)}			
 											>
 												Show Query
