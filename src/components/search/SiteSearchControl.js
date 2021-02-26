@@ -46,7 +46,7 @@ const SiteSearchControl = props => {
   const [annotationOperation, setAnnotationOperation] = useState("and");
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
-  const [pageLoading, setPageLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const [alertTextInput, setAlertTextInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }

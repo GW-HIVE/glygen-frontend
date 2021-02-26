@@ -238,7 +238,6 @@ const ProteinDetail = props => {
   );
   const [glycosylationTabSelected, setGlycosylationTabSelected] = useState(
     "reported_with_glycan"
-
   );
   const [mutataionWithdisease, setMutataionWithdisease] = useState([]);
   const [mutataionWithoutdisease, setMutataionWithoutdisease] = useState([]);
@@ -373,7 +372,7 @@ const ProteinDetail = props => {
               mapOfGlycosylationCategories[category] &&
               mapOfGlycosylationCategories[category].length > 0
           );
-
+          debugger;
           setGlycosylationWithImage(withImage);
           setGlycosylationWithoutImage(withoutImage);
           setGlycosylationPredicted(predicted);
@@ -1270,7 +1269,9 @@ const ProteinDetail = props => {
     }
   );
 
-  //const sortedHistory = history.sort((a, b) => b.timestamp - a.timestamp);
+  const sortedHistory = (a, b) => {
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+  };
 
   function toggleCollapse(name, value) {
     setCollapsed({ [name]: !value });
@@ -1679,13 +1680,14 @@ const ProteinDetail = props => {
                     <Card.Body>
                       {glycosylation && glycosylation.length && (
                         <Tabs
-                          defaultActiveKey={glycosylationTabSelected}
+                          activeKey={glycosylationTabSelected}
+                          // defaultActiveKey={glycosylationTabSelected}
                           transition={false}
                           mountOnEnter={true}
                           unmountOnExit={true}
-                          // onSelect={key => {
-                          //   glycosylationTabSelected = key;
-                          // }}
+                          onSelect={key => {
+                            setGlycosylationTabSelected(key);
+                          }}
                         >
                           <Tab
                             eventKey="reported_with_glycan"
@@ -3324,7 +3326,7 @@ const ProteinDetail = props => {
                     <Card.Body>
                       {history && history.length && (
                         <>
-                          {history.map(historyItem => (
+                          {history.sort(sortedHistory).map(historyItem => (
                             <li>
                               {capitalizeFirstLetter(historyItem.description)}{" "}
                             </li>

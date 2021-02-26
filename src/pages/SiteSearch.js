@@ -38,8 +38,8 @@ const SiteSearch = props => {
   );
 
   useEffect(() => {
-    setPageLoading(false);
-    if (id) {
+    if (id === undefined) setPageLoading(false);
+    else if (id) {
       // console.log("SuperSearch");
       setPageLoading(true);
       getSuperSearchList(id, 1)
@@ -53,7 +53,7 @@ const SiteSearch = props => {
           axiosError(error, "", message, setPageLoading, setAlertDialogInput);
         });
     }
-  }, []);
+  }, [id]);
 
   const querySummary = createSiteQuerySummary(queryData);
 

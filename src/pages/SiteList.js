@@ -127,7 +127,7 @@ const SiteList = props => {
         </section>
         <section>
           {/* {selectedColumns && selectedColumns.length !== 0 && ( */}
-          {data && data.length && (
+          {!!(data && data.length) && (
             <PaginatedTable
               trStyle={rowStyleFormat}
               data={data}

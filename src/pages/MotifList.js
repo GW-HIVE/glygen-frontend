@@ -18,7 +18,7 @@ import { axiosError } from "../data/axiosError";
 import { Row } from "react-bootstrap";
 import { Grid } from "@material-ui/core";
 
-const MotifList = (props) => {
+const MotifList = props => {
   let { id } = useParams();
 
   const [data, setData] = useState([]);
@@ -34,7 +34,7 @@ const MotifList = (props) => {
     { show: false, id: "" }
   );
 
-  const fixResidueToShortNames = (query) => {
+  const fixResidueToShortNames = query => {
     const residueMap = stringConstants.glycan.common.composition;
     const result = { ...query };
 
@@ -43,14 +43,16 @@ const MotifList = (props) => {
         .sort((a, b) => {
           if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
             return -1;
-          } else if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
+          } else if (
+            residueMap[a.residue].orderID < residueMap[b.residue].orderID
+          ) {
             return 1;
           }
           return 0;
         })
-        .map((item) => ({
+        .map(item => ({
           ...item,
-          residue: ReactHtmlParser(residueMap[item.residue].name.bold()),
+          residue: ReactHtmlParser(residueMap[item.residue].name.bold())
         }));
     }
 
@@ -77,28 +79,35 @@ const MotifList = (props) => {
           setPageLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
   }, []);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getMotifList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        // place to change values before rendering
+    getMotifList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
 
-        setData(data.results);
-        setQuery(fixResidueToShortNames(data.cache_info.query));
-        setPagination(data.pagination);
+      setData(data.results);
+      setQuery(fixResidueToShortNames(data.cache_info.query));
+      setPagination(data.pagination);
 
-        //   setSizePerPage()
-        setTotalSize(data.pagination.total_length);
-      }
-    );
+      //   setSizePerPage()
+      setTotalSize(data.pagination.total_length);
+    });
   };
 
   function rowStyleFormat(row, rowIdx) {
@@ -117,7 +126,7 @@ const MotifList = (props) => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={(input) => {
+          setOpen={input => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -141,8 +150,8 @@ const MotifList = (props) => {
               {
                 display: stringConstants.download.motif_jsondata.displayname,
                 type: "json",
-                data: "motif_list",
-              },
+                data: "motif_list"
+              }
             ]}
             dataId={""}
             dataType="motif_list"
@@ -158,7 +167,7 @@ const MotifList = (props) => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="glycan_count"
-              defaultSortOrder="desc"
+              defaultSortOrder="asc"
             />
           )}
         </section>

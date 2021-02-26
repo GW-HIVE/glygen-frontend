@@ -45,16 +45,6 @@ const SiteQuerySummary = props => {
   const proteinStrings = stringConstants.protein.common;
   const superSearchStrings = stringConstants.super_search.common;
 
-  const {
-    uniprot_ac,
-    start_pos,
-    end_pos,
-    site_seq,
-    annotation,
-    aa_list,
-    glycosylated_aa
-  } = data;
-
   const executionTime = timestamp ? getDateTime(timestamp) : "";
 
   function formatProtein() {
@@ -80,7 +70,7 @@ const SiteQuerySummary = props => {
           <Card.Text>
             {/*  Protein typeahead */}
 
-            {data && data.length > 0 && (
+            {!!Object.keys(querySummary).length && (
               <>
                 {querySummary.proteinId && (
                   <Row className="summary-table-col" sm={12}>
