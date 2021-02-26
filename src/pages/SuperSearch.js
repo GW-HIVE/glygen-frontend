@@ -202,11 +202,13 @@ const SuperSearch = (props) => {
 		};
 	}
 
-	if (JSON.stringify(superSearchQuery) === JSON.stringify({})) {
+	if (JSON.stringify(superSearchQuery) === JSON.stringify({}) && 
+	!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)){
 		setQueryData({});
 		updateNodeData();
 		setSelectedNode("");
 		setSuperSearchQuerySelect("");
+		return;
 	}
 
 	if (JSON.stringify(superSearchQuery) !== JSON.stringify({})){
@@ -304,13 +306,15 @@ const SuperSearch = (props) => {
 												Try Sample Query
 											</Button>
 											<Button className="gg-btn-outline mr-4"
-												disabled={JSON.stringify(queryData) === JSON.stringify({})}
+												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
+												(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
 												onClick={resetSuperSearchQuery}
 											>
 												Reset Query
 											</Button>
 											<Button className="gg-btn-outline" 
-												disabled={JSON.stringify(queryData) === JSON.stringify({})}
+												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
+														(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
 												onClick={() => setSupSearchShowQuery(true)}			
 											>
 												Show Query
