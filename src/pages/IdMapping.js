@@ -216,6 +216,7 @@ const IdMapping = (props) => {
     getMappingInit()
       .then((response) => {
         let initData = response.data;
+
         setInitData(initData);
         if (id === undefined) setPageLoading(false);
         id &&
@@ -383,6 +384,7 @@ const IdMapping = (props) => {
                   id: initData[moleculeType].id,
                   name: initData[moleculeType].label,
                 };
+                // alert(moleculeType);
               })}
               required={true}
             />
@@ -422,12 +424,16 @@ const IdMapping = (props) => {
                 menu={
                   idMapSearchData.recordType === "any"
                     ? []
-                    : initData[idMapSearchData.recordType].namespace.map((fromId) => {
-                        return {
-                          id: fromId,
-                          name: fromId,
-                        };
-                      })
+                    : [
+                        ...Object.keys(initData[idMapSearchData.recordType].namespace).map(
+                          (fromId) => {
+                            return {
+                              id: fromId,
+                              name: fromId,
+                            };
+                          }
+                        ),
+                      ]
                 }
                 required={true}
               />
@@ -461,15 +467,29 @@ const IdMapping = (props) => {
                 menu={
                   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
-                    : initData[idMapSearchData.recordType].namespace
-                        .filter((toid) => toid !== idMapSearchData.inputNamespace)
-                        .map((toId) => {
-                          return {
-                            id: toId,
-                            name: toId,
-                          };
-                        })
+                    : initData[idMapSearchData.recordType].namespace[
+                        idMapSearchData.inputNamespace
+                      ].map((toId) => {
+                        return {
+                          id: toId,
+                          name: toId,
+                        };
+                      })
                 }
+                // menu={
+                //   idMapSearchData.recordType === "any"
+                //     ? []
+                //     : [
+                //         ...Object.keys(initData[idMapSearchData.recordType].namespace)
+                //           .filter((toId) => toId !== idMapSearchData.inputNamespace)
+                //           .map((toId) => {
+                //             return {
+                //               id: toId,
+                //               name: toId,
+                //             };
+                //           }),
+                //       ]
+                // }
                 required={true}
               />
             </FormControl>
