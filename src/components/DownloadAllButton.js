@@ -34,17 +34,18 @@ const DownloadAllButton = (props) => {
   const [format, setFormat] = useState(props.format || props.types[0].type);
   // const [displayformat, setDisplayFormat] = useState(display);
   const [compressed, setCompressed] = useState(props.compressed || false);
-  const [collapsed, setCollapsed] = useState("idmapping_list_all_collapsed");
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleDownload = async () => {
-    const dataType = types.find((typeItem) => typeItem.type === format).data;
+    let dataType = types.find((typeItem) => typeItem.type === format).data;
+    if (collapsed) dataType = "idmapping_list_all_collapsed";
     await downloadFromServer(dataId, format, compressed, dataType, itemTypeResolver);
     setShow(false);
   };
   const clearForm = () => {
     setFormat(props.format || props.types[0].type);
     setCompressed(props.compressed || false);
-    setCollapsed("");
+    setCollapsed(false);
   };
   const handleClickOutside = (event) => {
     setShow(false);
@@ -153,11 +154,6 @@ const DownloadAllButton = (props) => {
                   <input
                     type="checkbox"
                     checked={collapsed}
-                    // checked={types.map((typeItem) => {
-                    //   return { id: typeItem.type, name: typeItem.display };
-                    // })}
-                    // id="download_compression"
-                    // checked={compressed}
                     onClick={(e) => {
                       setCollapsed(e.target.checked);
                     }}
