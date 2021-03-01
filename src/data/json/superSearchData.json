@@ -107,7 +107,8 @@
               },
               {
                 "source": "glycan",
-                "target": "site"
+                "target": "site",
+                "direction": "single"
               }
             ]
           }

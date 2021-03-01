@@ -45,6 +45,8 @@ const SuperSearch = (props) => {
   const [supSearchActTabKey, setSupSearchActTabKey] = useState('Super-Search');
   const [superSearchQuerySelect, setSuperSearchQuerySelect] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
+  const [enableDebug, setEnableDebug] = useState(false);
+  const [showData, setShowData] = useState(true);
 	const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{show: false, id: ""}
@@ -185,7 +187,7 @@ const SuperSearch = (props) => {
 	updateNodeData();
 	setQueryData({});
 	setSuperSearchQuerySelect("");
-	setQueryDataDirect("");
+	setQueryDataDirect(JSON.stringify(edgerules, null, 2));
   }
 
   /**
@@ -293,26 +295,37 @@ const SuperSearch = (props) => {
 									<h5><br></br><center>{superSearchData.super_search.message}</center></h5>
 										{svgData.length !== 0 && <SuperSearchSVG 
 											svgData={svgData} setSelectedNode={setSelectedNode}
+											showData={showData}
 											goToListPage={goToListPage}
 										/>}
 									</Grid>
 
 									{/* Buttons */}
-									<Grid item xs={11} sm={11}>
-										<Row className="gg-align-right mr-3">
-											<Button className="gg-btn-outline mr-4" 
+									<Grid item xs={12} sm={12}>
+										<Row className="gg-align-right mt-n4 mr-4 pr-2">
+											<Button className="gg-btn-outline mt-4 mr-4" 
+												onClick={() => setEnableDebug(!enableDebug)}			
+											>
+												{enableDebug ? "Disable Debug" : "Enable Debug"}
+											</Button>
+											<Button className="gg-btn-outline mt-4 mr-4" 
+												onClick={() => setShowData(!showData)}			
+											>
+												{showData ? "Hide Data" : "Show Data"}
+											</Button>
+											<Button className="gg-btn-outline mt-4 mr-4" 
 												onClick={() => setSupSearchSampleQuery(true)}			
 											>
 												Try Sample Query
 											</Button>
-											<Button className="gg-btn-outline mr-4"
+											<Button className="gg-btn-outline mt-4 mr-4"
 												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
 												(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
 												onClick={resetSuperSearchQuery}
 											>
 												Reset Query
 											</Button>
-											<Button className="gg-btn-outline" 
+											<Button className="gg-btn-outline mt-4 mr-4" 
 												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
 														(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
 												onClick={() => setSupSearchShowQuery(true)}			
@@ -323,8 +336,8 @@ const SuperSearch = (props) => {
 									</Grid>
 
 									{/* Buttons */}
-									<Grid item xs={11} sm={11}>
-										<Row className="mt-4 mr-3 ml-1">											
+									{enableDebug && <Grid item xs={12} sm={12}>
+										<Row className="mt-4 mr-5 ml-4 pr-2 pl-4">											
 											<OutlinedInput
 												className={'svg-input'}
 												value={queryDataDirect}
@@ -336,7 +349,7 @@ const SuperSearch = (props) => {
 												onChange={(event)=>{setQueryDataDirect(event.target.value)}}
 											/>
 										</Row>
-										<Row className="gg-align-right mt-4 mr-3">											
+										<Row className="gg-align-right mt-4 mr-5 pr-2">											
 											<Button className="gg-btn-outline" 
 												disabled={queryDataDirect.length <= 0}
 												onClick={() => executeSuperSearchQuery(JSON.parse(queryDataDirect), false, true)}			
@@ -344,7 +357,7 @@ const SuperSearch = (props) => {
 												Execute
 											</Button>
 										</Row>
-									</Grid>
+									</Grid>}
 								</Grid>
 							</Container>
 						</Tab>

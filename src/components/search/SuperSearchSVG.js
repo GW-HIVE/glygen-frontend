@@ -32,7 +32,7 @@ const SuperSearchSVG = (props) => {
   */
   useEffect(() => {
     loadSVG(props.svgData);
-  }, [props.svgData])
+  }, [props.svgData, props.showData])
 
  /**
   * Function for updating svg number data and displaying it.
@@ -195,7 +195,7 @@ const SuperSearchSVG = (props) => {
                     var linkText1 = svg.selectAll(".svg-link")
                     .data(edges)           
                     .append("text")
-                    .attr("class", ((d) => d.sourceListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
+                    .attr("class", !props.showData ? "svg-link-text-number-disabled" : ((d) => d.sourceListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
                     .attr("id", ((d) => "svg-link-source" + d.linkid))
                     .on("mouseover", mouseoverSource)
                     .on("mouseout",mouseoutSource)
@@ -244,7 +244,7 @@ const SuperSearchSVG = (props) => {
       var linkText2 = svg.selectAll(".svg-link")
       .data(edges)           
       .append("text")
-      .attr("class", ((d) => d.targetListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
+      .attr("class", !props.showData ? "svg-link-text-number-disabled" : ((d) => d.targetListID  !== "" ? "svg-link-text-number" : "svg-link-text-number-nl"))
       .attr("id", ((d) => "svg-link-target" + d.linkid))
       .on("mouseover", mouseoverTarget)
       .on("mouseout",mouseoutTarget)
@@ -373,6 +373,7 @@ export default SuperSearchSVG;
 
 SuperSearchSVG.propTypes = {
   svgData: PropTypes.array,
+  showData: PropTypes.bool,
   setSelectedNode: PropTypes.func,
   goToListPage: PropTypes.func,
 };

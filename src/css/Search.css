@@ -205,6 +205,10 @@ input[type="number"] {
   stroke-width: 0.8;
 }
 
+.svg-link-text-number-disabled {
+  display: none;
+}
+
 .svg-numnode {
   fill: #ffff99;
   stroke: #2F78B7;
