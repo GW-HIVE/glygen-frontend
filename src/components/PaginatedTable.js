@@ -13,6 +13,7 @@ import paginationFactory, {
 const PaginatedTable = ({
   data,
   idField = "id",
+
   page,
   columns,
   sizePerPage,

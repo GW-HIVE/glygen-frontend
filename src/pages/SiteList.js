@@ -69,7 +69,7 @@ const SiteList = props => {
   ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
-
+    setPageLoading(true);
     getSuperSearchList(
       id,
       (page - 1) * sizePerPage + 1,
@@ -77,7 +77,7 @@ const SiteList = props => {
       sortField,
       sortOrder
     ).then(({ data }) => {
-      // place to change values before rendering
+      setPageLoading(false);
       if (!data.error_code) {
         setData(data.results);
         setTimeStamp(data.cache_info.ts);
@@ -138,7 +138,6 @@ const SiteList = props => {
               onTableChange={handleTableChange}
               defaultSortField="hit_score"
               defaultSortOrder="asc"
-              idField="uniprot_canonical_ac"
             />
           )}
           {/* )} */}
