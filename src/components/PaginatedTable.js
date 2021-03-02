@@ -63,15 +63,15 @@ const PaginatedTable = ({
     ] // A numeric array is also available. the purpose of above example is custom the text
   };
 
-  const scrollToElement = elementSelector => {
-    const elmnt = document.querySelector(elementSelector);
-    elmnt.scrollIntoView();
-  };
+  // const scrollToElement = elementSelector => {
+  //   const elmnt = document.querySelector(elementSelector);
+  //   elmnt.scrollIntoView();
+  // };
 
   const handleTableChange = (type, values) => {
-    if (onClickTarget) {
-      scrollToElement(onClickTarget);
-    }
+    // if (onClickTarget) {
+    //   scrollToElement(onClickTarget);
+    // }
     onTableChange(type, values);
   };
   const useStyles = makeStyles(theme => ({
