@@ -17,7 +17,7 @@ export const getProteinList = (
   offset = 1,
   limit = 20,
   sort = "hit_score",
-  order = "asc"
+  order = "desc"
 ) => {
   const queryParams = {
     id: protienListId,
