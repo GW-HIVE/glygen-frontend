@@ -12,6 +12,7 @@ import routeConstants from "../../data/json/routeConstants.json";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import PinterestIcon from "@material-ui/icons/Pinterest";
 import { ReactComponent as MediaWikiIcon } from "../../images/icons/mediaWikiIcon.svg";
 import {
   GLYGEN_API,
@@ -39,13 +40,6 @@ const useStyles = makeStyles((theme) => ({
   },
   footerUnivLogo: {
     padding: "20px 10px 0 10px",
-  },
-  icons: {
-    color: "#2f78b7 !important",
-    fontWeight: "600",
-    "&:hover": {
-      color: "#57affa !important",
-    },
   },
 }));
 
@@ -121,7 +115,7 @@ export default function Footer() {
               </div>
               <div>
                 <a href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
-                  GlyGen&nbsp;SandBox
+                  GlyGen&nbsp;Sand Box
                 </a>
               </div>
               <div>
@@ -183,7 +177,7 @@ export default function Footer() {
                   href="https://twitter.com/gly_gen"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={classes.icons}
+                  className="gg-link"
                 >
                   <TwitterIcon className="mr-2" />
                 </a>
@@ -191,7 +185,7 @@ export default function Footer() {
                   href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={classes.icons}
+                  className="gg-link"
                 >
                   <YouTubeIcon className="mr-2" />
                 </a>
@@ -199,7 +193,7 @@ export default function Footer() {
                   href="https://github.com/glygener"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={classes.icons}
+                  className="gg-link"
                 >
                   <GitHubIcon className="mr-2" size="14px" />
                 </a>
@@ -209,7 +203,15 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="media-wiki-icon"
                 >
-                  <MediaWikiIcon />
+                  <MediaWikiIcon className="mr-2" />
+                </a>
+                <a
+                  href="https://www.pinterest.com/myGlyGen/glygen-portal/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gg-link"
+                >
+                  <PinterestIcon />
                 </a>
               </div>
 

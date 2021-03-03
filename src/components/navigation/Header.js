@@ -4,10 +4,10 @@ import logo from "../../images/glygen_logos/glygen-logoW.svg";
 import { Link, NavLink } from "react-router-dom";
 import { NavDropdown, Navbar, Nav, Row, Col } from "react-bootstrap";
 import PersonIcon from "@material-ui/icons/Person";
-import { makeStyles } from "@material-ui/core/styles";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import PinterestIcon from "@material-ui/icons/Pinterest";
 import Container from "@material-ui/core/Container";
 import DeveloperBoardIcon from "@material-ui/icons/DeveloperBoard";
 import GlobalSearchControl from "../search/GlobalSearchControl";
@@ -29,18 +29,7 @@ import {
 import routeConstants from "../../data/json/routeConstants.json";
 import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
 
-const useStyles = makeStyles((theme) => ({
-  navbarText: {
-    color: "#2f78b7 !important",
-    fontWeight: "600",
-    "&:hover": {
-      color: "#57affa !important",
-    },
-  },
-}));
-
 export default function Header(props) {
-  const classes = useStyles();
   const location = useLocation();
 
   return (
@@ -64,7 +53,7 @@ export default function Header(props) {
         <Container maxWidth="xl">
           <Row className="justify-content-end">
             <div className="mr-4">
-              <Link to={routeConstants.privacySettings} className={classes.navbarText}>
+              <Link to={routeConstants.privacySettings} className="gg-link">
                 <span>
                   <PersonIcon />
                 </span>{" "}
@@ -73,12 +62,7 @@ export default function Header(props) {
             </div>
             {GLYGEN_ENV !== "beta" && (
               <div className="mr-4">
-                <a
-                  href={GLYGEN_BETA}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={classes.navbarText}
-                >
+                <a href={GLYGEN_BETA} target="_blank" rel="noopener noreferrer" className="gg-link">
                   <span>
                     <DeveloperBoardIcon />
                   </span>{" "}
@@ -91,7 +75,7 @@ export default function Header(props) {
                 href="https://twitter.com/gly_gen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={classes.navbarText}
+                className="gg-link"
               >
                 <TwitterIcon className="mr-3" />
               </a>
@@ -99,7 +83,7 @@ export default function Header(props) {
                 href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={classes.navbarText}
+                className="gg-link"
               >
                 <YouTubeIcon className="mr-3" />
               </a>
@@ -107,7 +91,7 @@ export default function Header(props) {
                 href="https://github.com/glygener"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={classes.navbarText}
+                className="gg-link"
               >
                 <GitHubIcon className="mr-3" />
               </a>
@@ -118,6 +102,14 @@ export default function Header(props) {
                 className="media-wiki-icon"
               >
                 <MediaWikiIcon className="mr-3" />
+              </a>
+              <a
+                href="https://www.pinterest.com/myGlyGen/glygen-portal/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gg-link"
+              >
+                <PinterestIcon className="mr-3" />
               </a>
             </div>
           </Row>
@@ -204,7 +196,7 @@ export default function Header(props) {
                   GlyGen Mapper
                 </NavDropdown.Item>
                 <NavDropdown.Item href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
-                  GlyGen SandBox
+                  GlyGen Sand Box
                 </NavDropdown.Item>
                 <NavDropdown.Item href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
                   Structure Browser
