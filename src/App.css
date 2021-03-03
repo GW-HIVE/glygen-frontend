@@ -54,6 +54,13 @@
 /* ========================================
         Main Attributes & Typography
 ==========================================*/
+.gg-link {
+  color: #2f78b7 !important;
+  font-weight: 600 !important;
+}
+.gg-link:hover {
+  color: #57affa !important;
+}
 a {
   text-decoration: none !important;
   color: var(--gg-blue) !important;
@@ -881,6 +888,8 @@ sub {
 }
 .alert-banner-icon {
   font-size: 40px !important;
+  margin-right: 20px !important;
+  color:#2e78b7 !important;
 }
 .alert-banner-message a {
   font-weight: 700 !important;
@@ -903,6 +912,10 @@ sub {
 .alert-banner-darkgrey a:hover {
   color: #bf0101 !important;
   /* font-weight: 200 !important; */
+}
+.event-alerts {
+  margin-bottom: 35px !important;
+  border-top: 5px solid #2e78b7 !important;
 }
 .banner-bg {
   background-color: #555 !important;

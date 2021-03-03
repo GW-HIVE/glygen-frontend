@@ -41,6 +41,7 @@ import routeConstants from "../data/json/routeConstants.json";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
 // import BannerHotTopic from "../components/alert/BannerHotTopic";
+import EventAlerts from "../components/alert/EventAlerts";
 
 const mainFeaturedCard = {
   title: "GlyGen: Computational and Informatics Resources for Glycoscience",
@@ -143,11 +144,11 @@ const featuredCards = [
     target: "_blank",
   },
   {
-    title: "GlyGen SandBox",
+    title: "GlyGen Sand Box",
     description:
       "The GlyGen Sandbox allows detailed exploration of glycan structure and biosynthesis.",
     image: glygenSandBoxlImg,
-    imageText: "GlyGen SandBox",
+    imageText: "GlyGen Sand Box",
     href: GLYGEN_SANDBOX,
     target: "_blank",
   },
@@ -171,7 +172,7 @@ const resourcesCard = {
 };
 
 export default function Home() {
-  const [homeData, setHomeData] = useState({ statistics: [], version: [] });
+  const [homeData, setHomeData] = useState({ statistics: [], version: [], events: [] });
   const [pageLoading, setPageLoading] = React.useState(true);
 
   useEffect(() => {
@@ -196,13 +197,9 @@ export default function Home() {
       </Helmet>
 
       <CssBaseline />
-      {/* <BannerHotTopic /> */}
       <MainFeaturedCard post={mainFeaturedCard} />
-      {/* <Container maxWidth="xl">
-				<BannerHotTopic />
-			</Container> */}
       <Container maxWidth="xl" className="gg-container" style={{ width: "97%" }}>
-        {/* <BannerHotTopic /> */}
+        <EventAlerts data={homeData.events} pageLoading={pageLoading} />
         <Row className="show-grid">
           <Grid container spacing={4}>
             <Grid item xs={12} md={8} lg={9}>
