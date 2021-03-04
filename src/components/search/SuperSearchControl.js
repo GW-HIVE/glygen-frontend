@@ -407,7 +407,7 @@ const SuperSearchControl = (props) => {
 export default SuperSearchControl;
 
 SuperSearchControl.propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.array,
     queryData: PropTypes.array,
 	selectedNode: PropTypes.string,
 	setSelectedNode: PropTypes.func,

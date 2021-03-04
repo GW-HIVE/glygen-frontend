@@ -46,7 +46,7 @@ export default function SuperSearchQueryDisplay(props) {
 
 SuperSearchQueryDisplay.propTypes = {
   show: PropTypes.bool,
-  query: PropTypes.array,
+  query: PropTypes.object,
   title: PropTypes.string,
   setOpen: PropTypes.func
 };

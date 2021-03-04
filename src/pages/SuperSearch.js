@@ -311,7 +311,7 @@ const SuperSearch = (props) => {
 											<Button className="gg-btn-outline mt-4 mr-4" 
 												onClick={() => setShowData(!showData)}			
 											>
-												{showData ? "Hide Data" : "Show Data"}
+												{showData ? "Simple View" : "Advanced View"}
 											</Button>
 											<Button className="gg-btn-outline mt-4 mr-4" 
 												onClick={() => setSupSearchSampleQuery(true)}			

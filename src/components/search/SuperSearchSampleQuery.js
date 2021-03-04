@@ -19,6 +19,9 @@ export default function SuperSearchSampleQuery(props) {
   let commonSuperSearchData = stringConstants.super_search.common;
   const [superSearchQuerySelect, setSuperSearchQuerySelect] = useState("");
 
+  /**
+   * useEffect for setting select value.
+  */
   useEffect(() => {
     setSuperSearchQuerySelect(props.superSearchQuerySelect);
   }, [props.superSearchQuerySelect]);
@@ -106,6 +109,8 @@ export default function SuperSearchSampleQuery(props) {
 SuperSearchSampleQuery.propTypes = {
   show: PropTypes.bool,
   executeSuperSearchQuery: PropTypes.func,
+  superSearchQuerySelect: PropTypes.string,
+  setSuperSearchQuerySelect: PropTypes.func,
   title: PropTypes.string,
   setOpen: PropTypes.func
 };
