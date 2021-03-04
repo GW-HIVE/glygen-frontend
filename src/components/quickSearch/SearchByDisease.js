@@ -31,6 +31,8 @@ const SearchByGlycan = props => {
             <ExpansionPanel
               id={quickSearch.question_11.id}
               defaultExpanded={props.questionId === quickSearch.question_11.id}
+              expanded={props.panelExpanded.question_11}
+              onChange={()=> props.togglePanelExpansion(quickSearch.question_11.id)}
             >
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon className="gg-blue-color" />}

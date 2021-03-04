@@ -102,6 +102,32 @@ const QuickSearch = props => {
     }
   );
 
+  const [panelExpanded, setPanelExpanded] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      question_1: false,
+      question_2: false,
+      question_3: false,
+      question_4: false,
+      question_5: false,
+      question_6: false,
+      question_7: false,
+      question_8: false,
+      question_9: false,
+      question_10: false,
+      question_11: false
+    }
+  );
+
+  /** 
+    * Function to toggle Panel Expansion.
+  */
+  const togglePanelExpansion = (questionID) => {
+    setPanelExpanded({
+      [questionID]: !panelExpanded[questionID]
+    });
+  }
+
   /**
    * Function to handle glycan to biosynthesis enzymes question.
    */
@@ -604,6 +630,7 @@ const QuickSearch = props => {
           document
             .getElementById(anchorElement.substr(1))
             .scrollIntoView({ behavior: "auto" });
+            togglePanelExpansion(anchorElement.substr(1));
         }
         if (!id || !question) setPageLoading(false);
       })
@@ -660,6 +687,8 @@ const QuickSearch = props => {
               searchQuestion2={searchQuestion2}
               searchQuestion3={searchQuestion3}
               questionId={questionId}
+              panelExpanded={panelExpanded}
+              togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
               id="Search-by-Glycan"
             />
@@ -671,6 +700,8 @@ const QuickSearch = props => {
               searchQuestion6={searchQuestion6}
               searchQuestion7={searchQuestion7}
               questionId={questionId}
+              panelExpanded={panelExpanded}
+              togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
               id="Search-by-Protein"
             />
@@ -682,6 +713,8 @@ const QuickSearch = props => {
               searchQuestion9={searchQuestion9}
               searchQuestion10={searchQuestion10}
               questionId={questionId}
+              panelExpanded={panelExpanded}
+              togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
               id="Search-by-Organism"
             />
@@ -690,6 +723,8 @@ const QuickSearch = props => {
               inputValue={inputValue}
               searchQuestion11={searchQuestion11}
               questionId={questionId}
+              panelExpanded={panelExpanded}
+              togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
               id="Search-by-Disease"
             />

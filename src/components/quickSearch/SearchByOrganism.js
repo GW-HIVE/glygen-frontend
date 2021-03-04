@@ -47,6 +47,8 @@ const SearchByOrganism = props => {
             <ExpansionPanel
               id={quickSearch.question_8.id}
               defaultExpanded={props.questionId === quickSearch.question_8.id}
+              expanded={props.panelExpanded.question_8}
+              onChange={()=> props.togglePanelExpansion(quickSearch.question_8.id)}
             >
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
@@ -115,6 +117,8 @@ const SearchByOrganism = props => {
             <ExpansionPanel
               id={quickSearch.question_9.id}
               defaultExpanded={props.questionId === quickSearch.question_9.id}
+              expanded={props.panelExpanded.question_9}
+              onChange={()=> props.togglePanelExpansion(quickSearch.question_9.id)}
             >
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
@@ -183,6 +187,8 @@ const SearchByOrganism = props => {
             <ExpansionPanel
               id={quickSearch.question_10.id}
               defaultExpanded={props.questionId === quickSearch.question_10.id}
+              expanded={props.panelExpanded.question_10}
+              onChange={()=> props.togglePanelExpansion(quickSearch.question_10.id)}
             >
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon className="gg-blue-color" />}
@@ -297,7 +303,7 @@ const SearchByOrganism = props => {
                   <Grid item xs={12} sm={12}>
                     <Typography align="left" className="small-text">
                       ** Select both options{" "}
-                      <strong className="gg-blue-color">Organism</strong> and{" "}
+                      <strong>Organism</strong> and{" "}
                       <strong>Type.</strong>
                     </Typography>
                   </Grid>
