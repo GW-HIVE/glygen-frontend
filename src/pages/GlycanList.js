@@ -80,10 +80,18 @@ const GlycanList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          if (data.cache_info.query.glycan_identifier && data.cache_info.query.glycan_identifier.glycan_id){
-            data.cache_info.query.glycan_identifier.glycan_id_short = 
-            data.cache_info.query.glycan_identifier.glycan_id.split(",").length > 9 ? 
-            data.cache_info.query.glycan_identifier.glycan_id.split(",").slice(0,9).join(",") : "";
+          if (
+            data.cache_info.query.glycan_identifier &&
+            data.cache_info.query.glycan_identifier.glycan_id
+          ) {
+            data.cache_info.query.glycan_identifier.glycan_id_short =
+              data.cache_info.query.glycan_identifier.glycan_id.split(",")
+                .length > 9
+                ? data.cache_info.query.glycan_identifier.glycan_id
+                    .split(",")
+                    .slice(0, 9)
+                    .join(",")
+                : "";
           }
           setQuery(fixResidueToShortNames(data.cache_info.query));
           setTimeStamp(data.cache_info.ts);
@@ -200,6 +208,7 @@ const GlycanList = props => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="hit_score"
+              defaultSortOrder="desc"
               idField="glytoucan_ac"
             />
           )}

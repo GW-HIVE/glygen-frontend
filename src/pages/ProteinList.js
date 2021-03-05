@@ -180,7 +180,7 @@ const ProteinList = props => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="hit_score"
-              defaultSortOrder="asc"
+              defaultSortOrder="desc"
               idField="uniprot_canonical_ac"
             />
           )}
