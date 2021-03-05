@@ -621,10 +621,10 @@
         "id": "gene_names_uniprotkb"
       },
       "protein_names": {
-        "name": "Uniprot Name",
+        "name": "UniProt Name",
         "shortName": "protein_name",
         "tooltip": {
-          "title": "uniprot Name",
+          "title": "UniProt Name",
           "text": "Name/Symbol of the gene officially assigned by the Gene Nomenclature Committees (HGNC, ICSGNM, RGNC etc). Enter the Name of the Gene encoding your protein.",
           "urlText": "Read more...",
           "url": "https://www.ncbi.nlm.nih.gov/gene"
@@ -1608,7 +1608,7 @@
       "displayname": "Unmapped data (*.csv)",
       "tooltip": "unmapped_csvdata ID mapping information for unmapped ID"
     },
-      "idmapping_list_all_csvdata": {
+    "idmapping_list_all_csvdata": {
       "id": "list_all_csvdata",
       "displayname": "Two tables data (*.csv)",
       "tooltip": "list_all_csvdata ID mapping information for both mapped and unmapped IDs"
