@@ -184,7 +184,7 @@ export default function CompositionSearchControl(props) {
 
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 
-		if (Number(compositionData[residue].min) !== Number(comp.min)){
+		if (parseInt(undoVal.min) !== parseInt(comp.min)){
 			resetTemplateSelection();
 		}
 		compositionData[residue] = comp;
@@ -270,7 +270,7 @@ export default function CompositionSearchControl(props) {
 
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
 		
-		if (Number(compositionData[residue].max) !== Number(comp.max)){
+		if (parseInt(undoVal.max) !== parseInt(comp.max)){
 			resetTemplateSelection();
 		}
 		compositionData[residue] = comp;
