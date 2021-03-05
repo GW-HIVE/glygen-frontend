@@ -70,7 +70,7 @@ const SiteQuerySummary = props => {
           <Card.Text>
             {/*  Protein typeahead */}
 
-            {!!Object.keys(querySummary).length && (
+            {searchId !== "sups" && !!Object.keys(querySummary).length && (
               <>
                 {querySummary.proteinId && (
                   <Row className="summary-table-col" sm={12}>
