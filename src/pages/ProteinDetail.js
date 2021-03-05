@@ -49,6 +49,19 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
 
+const SimpleHelpTooltip = props => {
+  const { data } = props;
+  return (
+    <HelpTooltip
+      title={data.title}
+      text={data.text}
+      urlText={data.urlText}
+      url={data.url}
+      helpIcon="gg-helpicon-detail"
+    />
+  );
+};
+
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
 
@@ -105,7 +118,7 @@ const items = [
     label: stringConstants.sidebar.cross_ref.displayname,
     id: "Cross-References"
   },
-  { label: stringConstants.sidebar.history.displayname, id: "history" },
+  { label: stringConstants.sidebar.history.displayname, id: "History" },
   { label: stringConstants.sidebar.publication.displayname, id: "Publications" }
 ];
 
@@ -203,6 +216,7 @@ const getItemsCrossRef = data => {
         });
       }
     }
+
     itemscrossRef.sort(function(a, b) {
       if (a.database.toLowerCase() > b.database.toLowerCase()) {
         return 1;
@@ -213,10 +227,67 @@ const getItemsCrossRef = data => {
       return 0;
     });
   }
+
   return itemscrossRef;
 };
 
 const TYPE_RECOMMENDED = "recommended";
+
+const CollapsableReference = props => {
+  const { database, links, maxItems = 9 } = props;
+  const [open, setOpen] = useState(links.length <= maxItems);
+
+  const displayedItems = open ? links : links.slice(0, maxItems);
+
+  return (
+    <>
+      <strong>{database}:</strong>
+      <ul style={{ marginBottom: "10px" }}>
+        <Row>
+          {displayedItems.map(link => (
+            <Col xs={12} sm={4} key={link.id}>
+              <li>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.id}
+                </a>
+              </li>
+            </Col>
+          ))}
+        </Row>
+
+        {links.length > maxItems && (
+          <>
+            {open ? (
+              <Button
+                style={{
+                  marginLeft: "20px",
+                  marginTop: "5px"
+                }}
+                className={"lnk-btn"}
+                variant="link"
+                onClick={() => setOpen(false)}
+              >
+                Show Less...
+              </Button>
+            ) : (
+              <Button
+                style={{
+                  marginLeft: "20px",
+                  marginTop: "5px"
+                }}
+                className={"lnk-btn"}
+                variant="link"
+                onClick={() => setOpen(true)}
+              >
+                Show More...
+              </Button>
+            )}
+          </>
+        )}
+      </ul>
+    </>
+  );
+};
 
 const ProteinDetail = props => {
   let { id } = useParams();
@@ -1637,13 +1708,17 @@ const ProteinDetail = props => {
                 <Card>
                   <Card.Header className="panelHeadBgr">
                     <span className="gg-green d-inline">
-                      <HelpTooltip
+                      <SimpleHelpTooltip
+                        data={DetailTooltips.protein.glycosylations}
+                      />
+
+                      {/* <HelpTooltip
                         title={DetailTooltips.protein.glycosylations.title}
                         text={DetailTooltips.protein.glycosylations.text}
                         urlText={DetailTooltips.protein.glycosylations.urlText}
                         url={DetailTooltips.protein.glycosylations.url}
                         helpIcon="gg-helpicon-detail"
-                      />
+                      /> */}
                     </span>
                     <h4 className="gg-green d-inline">
                       {stringConstants.sidebar.glycosylation.displayname}
@@ -3255,25 +3330,10 @@ const ProteinDetail = props => {
                             {/* <Row> */}
                             {itemsCrossRef.map(crossRef => (
                               <li>
-                                {/* <Col> */}
-                                <strong>{crossRef.database}:</strong>
-                                <ul style={{ marginBottom: "10px" }}>
-                                  <Row>
-                                    {crossRef.links.map(link => (
-                                      <Col xs={12} sm={4}>
-                                        <li>
-                                          <a
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                          >
-                                            {link.id}
-                                          </a>
-                                        </li>
-                                      </Col>
-                                    ))}
-                                  </Row>
-                                </ul>
+                                <CollapsableReference
+                                  database={crossRef.database}
+                                  links={crossRef.links}
+                                />
                               </li>
                             ))}
                           </ul>
@@ -3288,7 +3348,7 @@ const ProteinDetail = props => {
 
               {/* history */}
               <Accordion
-                id="history"
+                id="History"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
