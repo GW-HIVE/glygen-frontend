@@ -524,6 +524,13 @@
       "query_type": {
         "id": "query_type",
         "name": "search_glycan"
+      },
+      "template_select": {
+        "name": "Composition Search Template List",
+        "tooltip": {
+          "title": "Composition Search Template List",
+          "text": "Select composition template and click on load to pre-fill template composition values."
+        }
       }
     },
     "advanced_search": {

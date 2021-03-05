@@ -625,6 +625,7 @@ const GlycanSearch = (props) => {
 			undefined,
 			undefined,
 			undefined,
+			undefined,
 			compSearchData
 		);
 

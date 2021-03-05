@@ -11,6 +11,7 @@ import { Row } from 'react-bootstrap';
 import ReactHtmlParser from "react-html-parser";
 import HelpTooltip from "../tooltip/HelpTooltip";
 import SelectControl from '../select/SelectControl';
+import CompositionSearchTemplate from './CompositionSearchTemplate';
 import glycanSearchData from '../../data/json/glycanSearch';
 import '../../css/Search.css';
 
@@ -25,6 +26,8 @@ export default function CompositionSearchControl(props) {
 	const [undoVal, setUndoVal] = useState({});
 	const [redoDisabled, setRedoDisabled] = useState(true);
 	const [undoDisabled, setUndoDisabled] = useState(true);
+	const [compositionSearchTemplateSelect, setCompositionSearchTemplateSelect] = useState("");
+	const [compositionSearchTemplate, setCompositionSearchTemplate] = useState(false);
 
 	/**
 	 * Function to handle min input change event.
@@ -107,6 +110,7 @@ export default function CompositionSearchControl(props) {
 		} else {
 			props.setCompSearchDisabled(false);
 		}
+		resetTemplateSelection();
 	}
 
 	/**
@@ -179,6 +183,10 @@ export default function CompositionSearchControl(props) {
 		props.setInputValue({ [residue]: comp });
 
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+		if (Number(compositionData[residue].min) !== Number(comp.min)){
+			resetTemplateSelection();
+		}
 		compositionData[residue] = comp;
 		if (allNoTrue(compositionData)) {
 			props.setCompSearchDisabled(true);
@@ -261,6 +269,10 @@ export default function CompositionSearchControl(props) {
 		props.setInputValue({ [residue]: comp });
 
 		let compositionData = JSON.parse(JSON.stringify(props.inputValue));
+		
+		if (Number(compositionData[residue].max) !== Number(comp.max)){
+			resetTemplateSelection();
+		}
 		compositionData[residue] = comp;
 		if (allNoTrue(compositionData)) {
 			props.setCompSearchDisabled(true);
@@ -379,6 +391,7 @@ export default function CompositionSearchControl(props) {
 		} else {
 			props.setCompSearchDisabled(false);
 		}
+		resetTemplateSelection();
 	}
 
 	/**
@@ -444,6 +457,7 @@ export default function CompositionSearchControl(props) {
 		if (compSearchStateChanged(compositionData)) {
 			compSearchRedoReset();
 			saveCurrentResidueStatesToUndoList(compositionData);
+			resetTemplateSelection();
 		}
 		props.setInputValue(compositionData);
 		props.setCompSearchDisabled(false);
@@ -464,6 +478,7 @@ export default function CompositionSearchControl(props) {
 		if (compSearchStateChanged(compositionData)) {
 			compSearchRedoReset();
 			saveCurrentResidueStatesToUndoList(compositionData);
+			resetTemplateSelection();
 		}
 		props.setInputValue(compositionData);
 		props.setCompSearchDisabled(true);
@@ -505,13 +520,57 @@ export default function CompositionSearchControl(props) {
 		if (compSearchStateChanged(compositionData)) {
 			compSearchRedoReset();
 			saveCurrentResidueStatesToUndoList(compositionData);
+			resetTemplateSelection();
+		}
+		props.setInputValue(compositionData);
+		props.setCompSearchDisabled(false);
+	};
+	
+	/**
+	 * Loads template composition data.
+	 **/
+	const loadCompositionSearchData = (compositionTemplateData) => {
+		var compositionData = JSON.parse(JSON.stringify(props.inputValue));
+
+		for (var x = 0; x < props.compositionInitMap.length; x++) {
+			compositionData[props.compositionInitMap[x].residue].min =
+				compositionTemplateData[props.compositionInitMap[x].residue] ? 
+				compositionTemplateData[props.compositionInitMap[x].residue].min : 0;
+			compositionData[props.compositionInitMap[x].residue].selectValue =
+				compositionTemplateData[props.compositionInitMap[x].residue] ?
+				compositionTemplateData[props.compositionInitMap[x].residue].selectValue : "no";
+			compositionData[props.compositionInitMap[x].residue].max =
+				compositionTemplateData[props.compositionInitMap[x].residue] ? 
+				compositionTemplateData[props.compositionInitMap[x].residue].max : 0;
+		}
+
+		if (compSearchStateChanged(compositionData)) {
+			compSearchRedoReset();
+			saveCurrentResidueStatesToUndoList(compositionData);
 		}
 		props.setInputValue(compositionData);
 		props.setCompSearchDisabled(false);
 	};
 
+	/**
+	 * Resets template selection.
+	 **/
+	const resetTemplateSelection = () => {
+		setCompositionSearchTemplateSelect("");
+	}
+
 	return (
 		<div>
+			<CompositionSearchTemplate
+				show={compositionSearchTemplate}
+				loadCompositionSearchData={loadCompositionSearchData}
+				setCompositionSearchTemplateSelect={setCompositionSearchTemplateSelect}
+				compositionSearchTemplateSelect={compositionSearchTemplateSelect}
+				title={compositionSearch.templateDialog.title}
+				setOpen={(input) => {
+					setCompositionSearchTemplate(input)
+				}}
+			/>
 			<Grid
 				container
 				style={{ margin: 0 }}
@@ -662,6 +721,11 @@ export default function CompositionSearchControl(props) {
 				))}
 
 			<Row className='gg-align-center pt-5'>
+				<Button className='gg-btn-outline mr-4 mb-3' 
+					onClick={() => setCompositionSearchTemplate(true)}
+				>
+					Load Template
+				</Button>
 				<Button className='gg-btn-outline mr-4 mb-3' onClick={allYes}>
 					All Yes
 				</Button>
