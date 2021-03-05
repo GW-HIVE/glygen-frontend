@@ -44,6 +44,14 @@ export const getSuperSearchInit = () => {
 };
 
 /**
+ * Gets JSON for super search init.
+ */
+export const getSiteSearchInit = () => {
+  const url = `/site/search_init?query={}`;
+  return getJson(url);
+};
+
+/**
  * Gets JSON for super search.
  * @param {object} formObject - super search JSON query object.
  */

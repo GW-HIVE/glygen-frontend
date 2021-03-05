@@ -117,6 +117,10 @@
   },
   "advanced_search": {
     "tabTitle": "Advanced Search",
+    "cluster_type": {
+      "placeholder": " Select"
+    },
+
     "uniprot_canonical_ac": {
       "length": 10000,
       "errorText": "Entry is too long - max length is 10000.",
@@ -287,6 +291,7 @@
         }
       ]
     },
+
     "sequence": {
       "length": 2500,
       "errorText": "Entry is too long - max length is 2500.",
