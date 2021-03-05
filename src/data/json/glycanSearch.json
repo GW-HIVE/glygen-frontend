@@ -252,7 +252,7 @@
       "template_list": [
         {
           "id": "template_1",
-          "name": "N-glycan high mannose",
+          "name": "N-glycan high mannose (Man9)",
           "order": 100,
           "template": {
             "hex": {
@@ -309,7 +309,7 @@
         },
         {
           "id": "template_2",
-          "name": "N-glycan trimannosyl core",
+          "name": "N-glycan trimannosyl core (Man3)",
           "order": 200,
           "template": {
             "hex": {
