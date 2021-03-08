@@ -16,7 +16,6 @@ import { Image } from "react-bootstrap";
 import {sortByOrder} from '../../utils/common';
 import AutoTextInput from '../input/AutoTextInput';
 
-
 /**
  * Super search input control.
  **/
@@ -78,7 +77,8 @@ const SuperSearchInputcontrol = (props) => {
 						>
 							<SelectControl
 								inputValue={props.query.field}
-								menu={props.data.fields ? props.data.fields.reverse().map((value)=> { return {id:value.id, name:value.label}}) : []}
+								menu={props.data.fields ? props.data.fields.map((value)=> { return {id:value.id, name:value.label, order:value.order}}) : []}
+								sortFunction={sortByOrder}
 								setInputValue={(input)=>{
 									props.supSearchUpdateQuery(props.query.order, "field", input);
 									let curfield = props.data.fields.filter((value)=> value.id === input)[0];
