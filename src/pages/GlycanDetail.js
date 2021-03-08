@@ -23,6 +23,7 @@ import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import relatedGlycansIcon from "../images/icons/related-glycans-icon.svg";
+import sandBox from "../images/icons/sand-box.svg";
 import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import LineTooltip from "../components/tooltip/LineTooltip";
@@ -747,6 +748,17 @@ const GlycanDetail = props => {
     window.open(url);
   }
 
+  /**
+   * Redirect and opens glytoucan_ac in a sand box
+   * @param {object} glytoucan_ac- glytoucan accession ID.
+   **/
+   function handleOpenSandbox(glytoucan_ac) {
+    var url =
+      "https://glygen.ccrc.uga.edu/sandbox/explore.html?" +
+      glytoucan_ac;
+    window.open(url);
+  }
+
   if (nonExistent) {
     return (
       <Container className="tab-content-border2">
@@ -874,10 +886,38 @@ const GlycanDetail = props => {
                       {stringConstants.sidebar.general.displayname}
                     </h4>
                     <div className="float-right">
+                    <span>
+                        <Button
+                          type="button"
+                          className="gg-btn-blue"
+                          disabled={
+                            tool_support && tool_support.sandbox === "yes"
+                              ? false
+                              : true
+                          }
+                          onClick={() => {
+                            handleOpenSandbox(
+                              glytoucan && glytoucan.glytoucan_ac
+                            );
+                          }}
+                        >
+                          <span>
+                            <Image
+                              className="pr-2"
+                              src={sandBox}
+                              alt="Sand Box"
+                            />
+                          </span>
+                          Sand Box
+                        </Button>
+                      </span>
                       <span>
                         <Button
                           type="button"
                           className="gg-btn-blue"
+                          style={{
+                            marginLeft: "10px"
+                          }}
                           disabled={
                             tool_support && tool_support.gnome === "yes"
                               ? false
