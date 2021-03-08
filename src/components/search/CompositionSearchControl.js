@@ -571,6 +571,19 @@ export default function CompositionSearchControl(props) {
 					setCompositionSearchTemplate(input)
 				}}
 			/>
+			<Row className='gg-align-center ml-1 pt-3 pb-4'>
+					<Typography
+						className={'search-lbl pt-1'}
+						gutterBottom
+						align='center'>
+						{"Show templates to load pre-defined compositions"}
+					</Typography>
+				<Button className='gg-btn-outline ml-4' 
+					onClick={() => setCompositionSearchTemplate(true)}
+				>
+					Load Template
+				</Button>
+			</Row>
 			<Grid
 				container
 				style={{ margin: 0 }}
