@@ -568,6 +568,13 @@
         },
         "id": "uniprot_canonical_ac"
       },
+
+      "annotation_type": {
+        "name": "Annotation Type",
+        "shortName": "Annotation Type",
+        "tooltip": {},
+        "id": "annotation_type"
+      },
       "site": {
         "name": "Site",
         "shortName": "Position",
@@ -848,11 +855,22 @@
       "glycosylated_aa": {
         "name": "Glycosylated Amino Acid",
         "shortName": "Glycosylated Residue",
+        "site_form": "Amino Acid",
         "tooltip": {
           "title": "Glycosylated Amino Acid",
           "text": "Amino acids are organic compounds containing amine (-NH2) and carboxyl (-COOH) functional groups, along with a side chain (R group) specific to each amino acid. Click to highlight multiple selections for Glycosylated Amino Acid."
         },
         "id": "glycosylated_aa"
+      },
+
+      "glycosylated_aa1": {
+        "name": " Amino Acid",
+        "shortName": "Amino Residue",
+        "tooltip": {
+          "title": "Glycosylated Amino Acid",
+          "text": "Amino acids are organic compounds containing amine (-NH2) and carboxyl (-COOH) functional groups, along with a side chain (R group) specific to each amino acid. Click to highlight multiple selections for Glycosylated Amino Acid."
+        },
+        "id": "glycosylated_aa1"
       },
       "sequence": {
         "name": "Protein or Peptide Sequence",

@@ -55,6 +55,7 @@ const SiteSearchControl = props => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+  const proteinStrings = stringConstants.protein.common;
   useEffect(() => {
     setPageLoading(true);
     logActivity();
@@ -235,7 +236,7 @@ const SiteSearchControl = props => {
                     title={commonProteinData.glycosylated_aa.tooltip.title}
                     text={commonProteinData.glycosylated_aa.tooltip.text}
                   />
-                  Amino Acid
+                  {proteinStrings.glycosylated_aa.site_form}:
                 </Typography>
                 <SelectControl
                   inputValue={aminoType}
@@ -261,7 +262,7 @@ const SiteSearchControl = props => {
                         title={commonProteinData.annotation.tooltip.title}
                         text={commonProteinData.annotation.tooltip.text}
                       />
-                      Annotation Type
+                      {proteinStrings.annotation_type.name}:
                     </Typography>
                     <MultiselectTextInput
                       inputValue={annotations}

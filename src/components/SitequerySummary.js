@@ -5,6 +5,7 @@ import stringConstants from "../data/json/stringConstants";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+
 import {
   getSuperSearchList,
   createSiteQuerySummary
@@ -75,7 +76,7 @@ const SiteQuerySummary = props => {
                 {querySummary.proteinId && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Protein:
+                      {proteinStrings.uniprot_canonical_ac.name}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.proteinId.join(", ")}
@@ -85,7 +86,7 @@ const SiteQuerySummary = props => {
                 {querySummary.annotations && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Annotations:
+                      {proteinStrings.annotation_type.name}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.annotations.join(", ")}
@@ -95,7 +96,7 @@ const SiteQuerySummary = props => {
                 {querySummary.aminoType && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Amino Acid:
+                      {proteinStrings.glycosylated_aa.site_form}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.aminoType}
@@ -105,7 +106,7 @@ const SiteQuerySummary = props => {
                 {querySummary.position && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Position:
+                      {proteinStrings.position.shortname}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.position}
@@ -115,7 +116,7 @@ const SiteQuerySummary = props => {
                 {querySummary.min && querySummary.max && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Range:
+                      {proteinStrings.range.shortname}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.min} to {querySummary.max}
