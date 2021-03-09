@@ -86,16 +86,6 @@ const SiteSearch = props => {
             onSelect={key => setProActTabKey(key)}
           >
             <Tab
-              key="tutorial"
-              eventKey="Tutorial"
-              title={siteData.tutorial.tabTitle}
-              className="tab-content-padding"
-            >
-              <Container className="tab-content-border">
-                <ProteinTutorial />
-              </Container>
-            </Tab>
-            <Tab
               key="search"
               eventKey="Site-Search"
               className="tab-content-padding"
@@ -110,6 +100,18 @@ const SiteSearch = props => {
                   // inputValue={SiteSearchData}
                   // setProAdvSearchData={setSiteSearchData}
                 />
+              </Container>
+            </Tab>
+            <Tab
+              key="tutorial"
+              eventKey="Tutorial"
+              title={siteData.tutorial.tabTitle}
+              className="tab-content-padding"
+            >
+              <Container className="tab-content-border">
+                <h2>
+                  <center>Coming Soon...</center>
+                </h2>
               </Container>
             </Tab>
           </Tabs>
