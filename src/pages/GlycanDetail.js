@@ -1555,7 +1555,7 @@ const GlycanDetail = props => {
                         >
                           <Tab
                             eventKey="with_tissue"
-                            // className='tab-content-padding'
+                            className="tab-content-padding"
                             title="Tissue Expression"
                             //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
                           >
@@ -1581,10 +1581,15 @@ const GlycanDetail = props => {
                           </Tab>
                           <Tab
                             eventKey="with_cellline"
-                            //className="tab-content-padding"
+                            className="tab-content-padding"
                             title="CellLine Expression "
                           >
-                            <Container>
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px"
+                              }}
+                            >
                               {expressionWithcell &&
                                 expressionWithcell.length > 0 && (
                                   <ClientPaginatedTable
