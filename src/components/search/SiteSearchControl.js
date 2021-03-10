@@ -59,6 +59,9 @@ const SiteSearchControl = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity();
+    document.addEventListener("click", () => {
+      setAlertTextInput({ show: false });
+    });
     getSiteSearchInit().then(response => {
       setInitData(response.data);
 
