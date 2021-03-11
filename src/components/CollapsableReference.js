@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 const CollapsableReference = props => {
   const { database, links, maxItems = 9 } = props;
   const [open, setOpen] = useState(links.length <= maxItems);
-
   const displayedItems = open ? links : links.slice(0, maxItems);
 
   return (

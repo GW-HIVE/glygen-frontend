@@ -1588,7 +1588,7 @@ const GlycanDetail = props => {
                           <Tab
                             eventKey="with_cellline"
                             className="tab-content-padding"
-                            title="CellLine Expression "
+                            title="Cell Line Expression "
                           >
                             <Container
                               style={{
