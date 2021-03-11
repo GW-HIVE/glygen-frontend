@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import Sidebar from "../components/navigation/Sidebar";
+import SidebarCategory from "../components/navigation/SidebarCategory";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { logActivity } from "../data/logging";
@@ -52,20 +52,25 @@ const QuickSearch = props => {
 
   const items = [
     {
+      label: stringConstants.sidebar.search_category.displayname,
+      id: "Search-Category",
+      category: true
+    },
+    {
       label: stringConstants.sidebar.search_by_glycan.displayname,
-      id: "Search-by-Glycan"
+      id: "Glycan"
     },
     {
       label: stringConstants.sidebar.search_by_protein.displayname,
-      id: "Search-by-Protein"
+      id: "Protein"
     },
     {
       label: stringConstants.sidebar.search_by_organism.displayname,
-      id: "Search-by-Organism"
+      id: "Organism"
     },
     {
       label: stringConstants.sidebar.search_by_disease.displayname,
-      id: "Search-by-Disease"
+      id: "Disease"
     }
   ];
 
@@ -665,14 +670,16 @@ const QuickSearch = props => {
       <div id="top-heading"></div>
       <Row className="gg-baseline">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-          <Sidebar items={items} />
+          <SidebarCategory items={items} />
         </Col>
         <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
           <Container maxWidth="md" className="sidebar-page-mb">
-            <VerticalHeading
-              post={vertHeadQuickSearch}
-              style={{ margin: "0 auto" }}
-            />
+            <div id="Search-Category">
+              <VerticalHeading
+                post={vertHeadQuickSearch}
+                style={{ margin: "0 auto" }}
+              />
+            </div>
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
               alertInput={alertDialogInput}
@@ -690,7 +697,7 @@ const QuickSearch = props => {
               panelExpanded={panelExpanded}
               togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
-              id="Search-by-Glycan"
+              id="Glycan"
             />
             <SearchByProtein
               setInputValue={setInputValue}
@@ -703,7 +710,7 @@ const QuickSearch = props => {
               panelExpanded={panelExpanded}
               togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
-              id="Search-by-Protein"
+              id="Protein"
             />
             <SearchByOrganism
               setInputValue={setInputValue}
@@ -716,7 +723,7 @@ const QuickSearch = props => {
               panelExpanded={panelExpanded}
               togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
-              id="Search-by-Organism"
+              id="Organism"
             />
             <SearchByDisease
               setInputValue={setInputValue}
@@ -726,7 +733,7 @@ const QuickSearch = props => {
               panelExpanded={panelExpanded}
               togglePanelExpansion={togglePanelExpansion}
               alertText={alertText}
-              id="Search-by-Disease"
+              id="Disease"
             />
           </Container>
         </Col>

@@ -1519,24 +1519,29 @@
       "displayname": "Summary",
       "tooltip": " summary Information for selected Protein accession"
     },
+    "search_category": {
+      "id": "search_category",
+      "displayname": "Search Category",
+      "tooltip": " search_category"
+    },
     "search_by_glycan": {
       "id": "search_by_glycan",
-      "displayname": "Search By Glycan",
+      "displayname": "Glycan",
       "tooltip": " ssearch_by_glycan"
     },
     "search_by_protein": {
       "id": "search_by_protein",
-      "displayname": "Search By Protein",
+      "displayname": "Protein",
       "tooltip": " ssearch_by_protein"
     },
     "search_by_organism": {
       "id": "search_by_organism",
-      "displayname": "Search By Organism",
+      "displayname": "Organism",
       "tooltip": " ssearch_by_organism"
     },
     "search_by_disease": {
       "id": "search_by_disease",
-      "displayname": "Search By Disease",
+      "displayname": "Disease",
       "tooltip": " ssearch_by_disease"
     }
   },
