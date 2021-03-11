@@ -241,6 +241,11 @@ const GlycanDetail = props => {
             });
         }
 
+        if (detailDataTemp.publication) {
+          detailDataTemp.publication = detailDataTemp.publication.sort(
+            (a, b) => parseInt(b.date) - parseInt(a.date)
+          );
+        }
         setItemsCrossRef(getItemsCrossRef(detailDataTemp));
         setDetailData(detailDataTemp);
         setPageLoading(false);
@@ -1947,7 +1952,6 @@ const GlycanDetail = props => {
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
                                             {glycanStrings.pmid.shortName}:
-                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
                                           </span>{" "}
                                           <a
                                             href={ref.url}

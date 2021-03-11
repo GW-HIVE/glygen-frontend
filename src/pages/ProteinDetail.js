@@ -390,6 +390,12 @@ const ProteinDetail = props => {
           }
         }
 
+        if (data.publication) {
+          data.publication = data.publication.sort(
+            (a, b) => parseInt(b.date) - parseInt(a.date)
+          );
+        }
+
         if (data.gene_names) {
           let geneNamesTemp = formatNamesData(data.gene_names);
           setGeneNames(geneNamesTemp);
