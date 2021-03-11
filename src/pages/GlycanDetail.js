@@ -39,6 +39,7 @@ import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Tab, Tabs, Container } from "react-bootstrap";
+import CollapsableReference from "../components/CollapsableReference";
 // import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
 
 const glycanStrings = stringConstants.glycan.common;
@@ -241,6 +242,11 @@ const GlycanDetail = props => {
             });
         }
 
+        if (detailDataTemp.publication) {
+          detailDataTemp.publication = detailDataTemp.publication.sort(
+            (a, b) => parseInt(b.date) - parseInt(a.date)
+          );
+        }
         setItemsCrossRef(getItemsCrossRef(detailDataTemp));
         setDetailData(detailDataTemp);
         setPageLoading(false);
@@ -752,10 +758,9 @@ const GlycanDetail = props => {
    * Redirect and opens glytoucan_ac in a sand box
    * @param {object} glytoucan_ac- glytoucan accession ID.
    **/
-   function handleOpenSandbox(glytoucan_ac) {
+  function handleOpenSandbox(glytoucan_ac) {
     var url =
-      "https://glygen.ccrc.uga.edu/sandbox/explore.html?" +
-      glytoucan_ac;
+      "https://glygen.ccrc.uga.edu/sandbox/explore.html?" + glytoucan_ac;
     window.open(url);
   }
 
@@ -818,13 +823,19 @@ const GlycanDetail = props => {
                 </Grid>
               </Row>
             </div>
-            {props.history && props.history.length > 1 && <div className="text-right gg-download-btn-width pb-3">
-              <Button type="button" className="gg-btn-blue"
-                onClick={() => { props.history.goBack()} }
-              >
-                Back
-              </Button>
-            </div>}
+            {props.history && props.history.length > 1 && (
+              <div className="text-right gg-download-btn-width pb-3">
+                <Button
+                  type="button"
+                  className="gg-btn-blue"
+                  onClick={() => {
+                    props.history.goBack();
+                  }}
+                >
+                  Back
+                </Button>
+              </div>
+            )}
             <div className="gg-download-btn-width">
               <DownloadButton
                 types={[
@@ -886,7 +897,7 @@ const GlycanDetail = props => {
                       {stringConstants.sidebar.general.displayname}
                     </h4>
                     <div className="float-right">
-                    <span>
+                      <span>
                         <Button
                           type="button"
                           className="gg-btn-blue"
@@ -1559,7 +1570,7 @@ const GlycanDetail = props => {
                         >
                           <Tab
                             eventKey="with_tissue"
-                            // className='tab-content-padding'
+                            className="tab-content-padding"
                             title="Tissue Expression"
                             //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
                           >
@@ -1586,9 +1597,14 @@ const GlycanDetail = props => {
                           <Tab
                             eventKey="with_cellline"
                             className="tab-content-padding"
-                            title="CellLine Expression "
+                            title="Cell Line Expression "
                           >
-                            <Container>
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px"
+                              }}
+                            >
                               {expressionWithcell &&
                                 expressionWithcell.length > 0 && (
                                   <ClientPaginatedTable
@@ -1804,25 +1820,10 @@ const GlycanDetail = props => {
                             {/* <Row> */}
                             {itemsCrossRef.map(crossRef => (
                               <li>
-                                {/* <Col> */}
-                                <strong>{crossRef.database}:</strong>
-                                <ul>
-                                  <Row>
-                                    {crossRef.links.map(link => (
-                                      <Col xs={12} sm={4}>
-                                        <li>
-                                          <a
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                          >
-                                            {link.id}
-                                          </a>
-                                        </li>
-                                      </Col>
-                                    ))}
-                                  </Row>
-                                </ul>
+                                <CollapsableReference
+                                  database={crossRef.database}
+                                  links={crossRef.links}
+                                />
                               </li>
                             ))}
                           </ul>
@@ -1946,7 +1947,6 @@ const GlycanDetail = props => {
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
                                             {glycanStrings.pmid.shortName}:
-                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
                                           </span>{" "}
                                           <a
                                             href={ref.url}

@@ -48,6 +48,7 @@ import { axiosError } from "../data/axiosError";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
+import CollapsableReference from "../components/CollapsableReference";
 
 const SimpleHelpTooltip = props => {
   const { data } = props;
@@ -233,61 +234,61 @@ const getItemsCrossRef = data => {
 
 const TYPE_RECOMMENDED = "recommended";
 
-const CollapsableReference = props => {
-  const { database, links, maxItems = 9 } = props;
-  const [open, setOpen] = useState(links.length <= maxItems);
+// const CollapsableReference = props => {
+//   const { database, links, maxItems = 9 } = props;
+//   const [open, setOpen] = useState(links.length <= maxItems);
 
-  const displayedItems = open ? links : links.slice(0, maxItems);
+//   const displayedItems = open ? links : links.slice(0, maxItems);
 
-  return (
-    <>
-      <strong>{database}:</strong>
-      <ul style={{ marginBottom: "10px" }}>
-        <Row>
-          {displayedItems.map(link => (
-            <Col xs={12} sm={4} key={link.id}>
-              <li>
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.id}
-                </a>
-              </li>
-            </Col>
-          ))}
-        </Row>
+//   return (
+//     <>
+//       <strong>{database}:</strong>
+//       <ul style={{ marginBottom: "10px" }}>
+//         <Row>
+//           {displayedItems.map(link => (
+//             <Col xs={12} sm={4} key={link.id}>
+//               <li>
+//                 <a href={link.url} target="_blank" rel="noopener noreferrer">
+//                   {link.id}
+//                 </a>
+//               </li>
+//             </Col>
+//           ))}
+//         </Row>
 
-        {links.length > maxItems && (
-          <>
-            {open ? (
-              <Button
-                style={{
-                  marginLeft: "20px",
-                  marginTop: "5px"
-                }}
-                className={"lnk-btn"}
-                variant="link"
-                onClick={() => setOpen(false)}
-              >
-                Show Less...
-              </Button>
-            ) : (
-              <Button
-                style={{
-                  marginLeft: "20px",
-                  marginTop: "5px"
-                }}
-                className={"lnk-btn"}
-                variant="link"
-                onClick={() => setOpen(true)}
-              >
-                Show More...
-              </Button>
-            )}
-          </>
-        )}
-      </ul>
-    </>
-  );
-};
+//         {links.length > maxItems && (
+//           <>
+//             {open ? (
+//               <Button
+//                 style={{
+//                   marginLeft: "20px",
+//                   marginTop: "5px"
+//                 }}
+//                 className={"lnk-btn"}
+//                 variant="link"
+//                 onClick={() => setOpen(false)}
+//               >
+//                 Show Less...
+//               </Button>
+//             ) : (
+//               <Button
+//                 style={{
+//                   marginLeft: "20px",
+//                   marginTop: "5px"
+//                 }}
+//                 className={"lnk-btn"}
+//                 variant="link"
+//                 onClick={() => setOpen(true)}
+//               >
+//                 Show More...
+//               </Button>
+//             )}
+//           </>
+//         )}
+//       </ul>
+//     </>
+//   );
+// };
 
 const ProteinDetail = props => {
   let { id } = useParams();
@@ -388,6 +389,12 @@ const ProteinDetail = props => {
             }
             return disease;
           }
+        }
+
+        if (data.publication) {
+          data.publication = data.publication.sort(
+            (a, b) => parseInt(b.date) - parseInt(a.date)
+          );
         }
 
         if (data.gene_names) {

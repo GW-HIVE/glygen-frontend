@@ -42,6 +42,7 @@
 }
 .gg-container {
   margin-bottom: 40px;
+  max-width: 97% !important;
 }
 .gg-baseline {
   width: 98%;

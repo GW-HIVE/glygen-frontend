@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import PaginatedTable from "./PaginatedTable";
 
-const ClientPaginatedTable = props => {
+const ClientPaginatedTable = (props) => {
   const {
     data,
     columns,
@@ -10,7 +10,7 @@ const ClientPaginatedTable = props => {
     defaultSortField = "",
     defaultSortOrder = "desc",
     onClickTarget,
-    idField
+    idField,
   } = props;
 
   const [page, setPage] = useState(1);
@@ -26,10 +26,7 @@ const ClientPaginatedTable = props => {
     setPageContents(pageData);
   }, [data, page, currentSort, currentSortOrder, sizePerPage]);
 
-  const handleTableChange = (
-    type,
-    { page, sizePerPage, sortField, sortOrder }
-  ) => {
+  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
     data.sort((a, b) => {
       if (a[sortField] > b[sortField]) {
         return sortOrder === "asc" ? 1 : -1;
@@ -56,6 +53,7 @@ const ClientPaginatedTable = props => {
       defaultSortField={defaultSortField}
       defaultSortOrder={defaultSortOrder}
       idField={idField}
+      wrapperClasses="table-responsive table-height"
     />
   );
 };
