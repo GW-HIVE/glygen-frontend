@@ -822,6 +822,9 @@
         }
       ]
     },
+    "templateDialogLabel": {
+      "title": "Load starting compositions from pre-defined templates"
+    },
     "templateDialog": {
       "title": "Composition Search Template"
     }

@@ -576,7 +576,7 @@ export default function CompositionSearchControl(props) {
 						className={'search-lbl pt-1'}
 						gutterBottom
 						align='center'>
-						{"Show templates to load pre-defined compositions"}
+						{compositionSearch.templateDialogLabel.title}
 					</Typography>
 				<Button className='gg-btn-outline ml-4' 
 					onClick={() => setCompositionSearchTemplate(true)}
