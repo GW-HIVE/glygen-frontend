@@ -39,6 +39,7 @@ import stringConstants from "../data/json/stringConstants";
 import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Tab, Tabs, Container } from "react-bootstrap";
+import CollapsableReference from "../components/CollapsableReference";
 // import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
 
 const glycanStrings = stringConstants.glycan.common;
@@ -1810,25 +1811,10 @@ const GlycanDetail = props => {
                             {/* <Row> */}
                             {itemsCrossRef.map(crossRef => (
                               <li>
-                                {/* <Col> */}
-                                <strong>{crossRef.database}:</strong>
-                                <ul>
-                                  <Row>
-                                    {crossRef.links.map(link => (
-                                      <Col xs={12}>
-                                        <li>
-                                          <a
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                          >
-                                            {link.id}
-                                          </a>
-                                        </li>
-                                      </Col>
-                                    ))}
-                                  </Row>
-                                </ul>
+                                <CollapsableReference
+                                  database={crossRef.database}
+                                  links={crossRef.links}
+                                />
                               </li>
                             ))}
                           </ul>
