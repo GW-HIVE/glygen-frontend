@@ -1046,34 +1046,43 @@ const GlycanDetail = props => {
 
                         {classification && classification.length && (
                           <div>
-                            <strong>
-                              {glycanStrings.glycan_type.name} /{" "}
-                              {glycanStrings.glycan_subtype.name}:{" "}
-                            </strong>
-                            {classification.map(Formatclassification => (
-                              <>
-                                <a
-                                  href={Formatclassification.type.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {Formatclassification.type.name}
-                                </a>
-                                &nbsp; <b>/</b> &nbsp;
-                                <a
-                                  href={Formatclassification.subtype.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {Formatclassification.subtype.name}
-                                </a>
-                              </>
-                            ))}{" "}
-                            {/* <LineTooltip text="Find all glycans with the same Type/Subtype">
-                              <Link>
-                                <SearchIcon className="ml-3 custom-icon-blue" />
-                              </Link>
-                            </LineTooltip> */}
+                            <Row>
+                              <Col md="auto" className="pr-0">
+                                <strong>
+                                  {glycanStrings.glycan_type.name} /{" "}
+                                  {glycanStrings.glycan_subtype.name}:{" "}
+                                </strong>
+                              </Col>
+                              <Col className="pl-0">
+                                {classification.map(Formatclassification => (
+                                  <>
+                                    <span>
+                                      <a
+                                        href={Formatclassification.type.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        &nbsp;{Formatclassification.type.name}
+                                      </a>
+                                      &nbsp; <b>/</b> &nbsp;
+                                      <a
+                                        href={Formatclassification.subtype.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        {Formatclassification.subtype.name}
+                                      </a>
+                                    </span>
+                                    {<br/>}
+                                  </>
+                                ))}{" "}
+                              </Col>
+                              {/* <LineTooltip text="Find all glycans with the same Type/Subtype">
+                                <Link>
+                                  <SearchIcon className="ml-3 custom-icon-blue" />
+                                </Link>
+                              </LineTooltip> */}
+                            </Row>
                           </div>
                         )}
                         {inchi_key && inchi_key.key && (
