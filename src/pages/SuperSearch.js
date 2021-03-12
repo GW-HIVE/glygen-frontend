@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { getTitle, getMeta } from '../utils/head';
 import PageLoader from '../components/load/PageLoader';
 import DialogAlert from '../components/alert/DialogAlert';
+import UserPermission from '../components/alert/UserPermission';
 import SuperSearchQueryDisplay from '../components/alert/SuperSearchQueryDisplay';
 import SuperSearchSampleQuery from '../components/search/SuperSearchSampleQuery';
 import { Tab, Tabs, Container } from 'react-bootstrap';
@@ -47,10 +48,11 @@ const SuperSearch = (props) => {
   const [pageLoading, setPageLoading] = useState(true);
   const [enableDebug, setEnableDebug] = useState(false);
   const [showData, setShowData] = useState(true);
-	const [alertDialogInput, setAlertDialogInput] = useReducer(
+  const [alertDialogInput, setAlertDialogInput] = useReducer(
 		(state, newState) => ({ ...state, ...newState }),
 		{show: false, id: ""}
 	);
+  const [userPermission, setUserPermission] = useState(false);
 
   /**
 	* useEffect for retriving data from api and showing page loading effects.
@@ -231,6 +233,20 @@ const SuperSearch = (props) => {
 	}
   }
 
+  /**
+    * Function to handle node click.
+	* @param {string} currentNode - current node id.
+  **/
+	 function nodeClickSuperSearchQuery(currentNode) {
+		if (queryData.concept_query_list){
+			let finalSearchQuery = queryData.concept_query_list.filter((query) => query.concept !== currentNode);
+			if (finalSearchQuery.length > 0){
+				setUserPermission(true);
+			}
+		}
+		setSelectedNode(currentNode);
+	  }
+
     return (
 		<>
       <Helmet>
@@ -247,8 +263,27 @@ const SuperSearch = (props) => {
 							setAlertDialogInput({"show": input})
 						}}
 					/>
+					<UserPermission
+						userPermission={userPermission}
+						title={superSearchCommonData.userPermisssionDialog.title}
+						message={superSearchCommonData.userPermisssionDialog.message}
+						setOpen={(input) => {
+							if (input) {
+								let currentNode = selectedNode;
+								setSelectedNode("");
+								setUserPermission(!input)
+								setTimeout(() => {
+									setSelectedNode(currentNode);
+								},500);
+							} else {
+								setSelectedNode("");
+								setUserPermission(input)
+							}
+						}}
+					/>
 					<SuperSearchControl data={initData.filter((value) => value.id === selectedNode)[0] ? initData.filter((value) => value.id === selectedNode)[0] : []} 
 						selectedNode={selectedNode} 
+						userPermission={userPermission}
 						executeSuperSearchQuery={executeSuperSearchQuery}
 						setSelectedNode={setSelectedNode} 
 						queryData={JSON.stringify(queryData) === JSON.stringify({}) ? [] : queryData.concept_query_list} 
@@ -294,7 +329,8 @@ const SuperSearch = (props) => {
 									<Grid item xs={12} sm={12}>
 									<h5><br></br><center>{superSearchData.super_search.message}</center></h5>
 										{svgData.length !== 0 && <SuperSearchSVG 
-											svgData={svgData} setSelectedNode={setSelectedNode}
+											svgData={svgData} 
+											nodeClickSuperSearchQuery={nodeClickSuperSearchQuery}
 											showData={showData}
 											goToListPage={goToListPage}
 										/>}
