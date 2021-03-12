@@ -155,8 +155,8 @@ const constructSiteSearchObject = queryObject => {
         targetList.push({
           path: annotation,
           order,
-          operator: "$gt",
-          string_value: []
+          operator: "$eq",
+          string_value: "true"
         });
         order++;
       }
