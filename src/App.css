@@ -40,6 +40,13 @@
 .color-white {
   color: #ffffff !important;
 }
+.gg-new-feature {
+  color: #ff0000;
+  /* color: #fff;
+  background-color: #FF0000;
+  padding: 5px 10px;
+  border-radius: 30%; */
+}
 .gg-container {
   margin-bottom: 40px;
   max-width: 97% !important;

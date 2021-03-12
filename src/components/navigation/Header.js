@@ -147,10 +147,16 @@ export default function Header(props) {
                   Protein Search
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.siteSearch}>
-                  Site Search
+                  Site Search{" "}
+                  <span className="gg-new-feature ml-1">
+                    <strong>NEW</strong>
+                  </span>
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.superSearch}>
-                  Super Search
+                  Super Search{" "}
+                  <span className="gg-new-feature ml-1">
+                    <strong>NEW</strong>
+                  </span>
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
                   List of Motifs
@@ -194,9 +200,15 @@ export default function Header(props) {
                 </NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} to={routeConstants.idMapping}>
                   GlyGen Mapper
+                  <span className="gg-new-feature ml-2">
+                    <strong>NEW</strong>
+                  </span>
                 </NavDropdown.Item>
                 <NavDropdown.Item href={GLYGEN_SANDBOX} target="_blank" rel="noopener noreferrer">
-                  GlyGen Sand Box
+                  GlyGen Sand Box{" "}
+                  <span className="gg-new-feature ml-1">
+                    <strong>NEW</strong>
+                  </span>
                 </NavDropdown.Item>
                 <NavDropdown.Item href={GNOME_BROWSER} target="_blank" rel="noopener noreferrer">
                   Structure Browser
