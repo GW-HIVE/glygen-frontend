@@ -304,7 +304,10 @@ const SuperSearchControl = (props) => {
             }
         }
 
-        let finalSearchQuery = props.queryData.filter((query) => query.concept !== props.selectedNode);
+        // Commented to block second query execution.
+        // let finalSearchQuery = props.queryData.filter((query) => query.concept !== props.selectedNode);
+
+        let finalSearchQuery = [];
 
         if (tempArray1.length > 0) {
             finalSearchQuery.push(searchQuery);
@@ -337,7 +340,7 @@ const SuperSearchControl = (props) => {
     return (
 		<>            
             <Dialog
-                open={props.selectedNode !== ""}
+                open={props.selectedNode !== "" && !props.userPermission}
                 classes= {{
                     paper: "alert-dialog",
                 }}

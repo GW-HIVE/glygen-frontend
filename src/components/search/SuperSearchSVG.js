@@ -303,7 +303,7 @@ const SuperSearchSVG = (props) => {
     
     //sets the id of the selected node.
     .on("click", function(d) {
-        props.setSelectedNode(d.id);
+        props.nodeClickSuperSearchQuery(d.id);
     });
     
     //appending the node
@@ -374,6 +374,6 @@ export default SuperSearchSVG;
 SuperSearchSVG.propTypes = {
   svgData: PropTypes.array,
   showData: PropTypes.bool,
-  setSelectedNode: PropTypes.func,
+  nodeClickSuperSearchQuery: PropTypes.func,
   goToListPage: PropTypes.func,
 };
