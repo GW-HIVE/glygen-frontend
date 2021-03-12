@@ -1277,6 +1277,11 @@
       "title": "Unexpected Error",
       "message": "Input error occurred. Please provide input a term to search for."
     },
+    "no-result-found": {
+      "id": "no-result-found",
+      "title": "no-result-found",
+      "message": "Input error occurred. Please provide input a term to search for."
+    },
     "timeout": {
       "id": "timeout",
       "title": "TimeOut Error",

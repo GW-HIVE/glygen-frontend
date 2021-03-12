@@ -160,7 +160,7 @@ const SiteSearchControl = props => {
           setPageLoading(false);
           setAlertDialogInput({
             show: true,
-            id: "invalid-parameter-value-length"
+            id: "no-result-found"
           });
           window.scrollTo(0, 0);
         }
