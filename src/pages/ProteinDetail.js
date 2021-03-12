@@ -450,7 +450,7 @@ const ProteinDetail = props => {
               mapOfGlycosylationCategories[category] &&
               mapOfGlycosylationCategories[category].length > 0
           );
-          debugger;
+          // debugger;
           setGlycosylationWithImage(withImage);
           setGlycosylationWithoutImage(withoutImage);
           setGlycosylationPredicted(predicted);

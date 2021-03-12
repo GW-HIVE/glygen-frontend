@@ -47,10 +47,10 @@ const SiteSearchControl = props => {
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
-  const [alertTextInput, setAlertTextInput] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    { show: false, id: "" }
-  );
+  // const [alertTextInput, setAlertTextInput] = useReducer(
+  //   (state, newState) => ({ ...state, ...newState }),
+  //   { show: false, id: "" }
+  // );
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
@@ -59,9 +59,9 @@ const SiteSearchControl = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity();
-    document.addEventListener("click", () => {
-      setAlertTextInput({ show: false });
-    });
+    // document.addEventListener("click", () => {
+    //   setAlertTextInput({ show: false });
+    // });
     getSiteSearchInit().then(response => {
       setInitData(response.data);
 
@@ -69,10 +69,14 @@ const SiteSearchControl = props => {
         setproteinId(defaults.proteinId.join(","));
       }
       if (defaults.annotations) {
+        const anno = response.data.annotation_type_list.filter(annotation => {
+          return defaults.annotations.includes(annotation.id);
+        });
+
         setAnnotations(
-          defaults.annotations.map(x => ({
-            id: x,
-            label: x
+          anno.map(x => ({
+            ...x,
+            name: x.label
           }))
         );
       }
@@ -154,10 +158,10 @@ const SiteSearchControl = props => {
         } else {
           logActivity("user", "", "No results. ");
           setPageLoading(false);
-          // setAlertTextInput({
-          //   show: true,
-          //   id: stringConstants.errors.simpleSerarchError.id
-          // });
+          setAlertDialogInput({
+            show: true,
+            id: "invalid-parameter-value-length"
+          });
           window.scrollTo(0, 0);
         }
       })
@@ -203,7 +207,7 @@ const SiteSearchControl = props => {
           <pre>{JSON.stringify(defaults)}</pre>
         </Grid> */}
 
-            <Grid item xs={12} sm={10}>
+            {/* <Grid item xs={12} sm={10}>
               <FormControl fullWidth variant="outlined">
                 <Typography className={"search-lbl"} gutterBottom>
                   <HelpTooltip
@@ -230,7 +234,7 @@ const SiteSearchControl = props => {
                   inputValue={advancedSearch.uniprot_canonical_ac.examples}
                 />
               </FormControl>
-            </Grid>
+            </Grid> */}
             {/* Amino Acid */}
             <Grid item xs={12} sm={10}>
               <FormControl fullWidth variant="outlined">
@@ -246,10 +250,15 @@ const SiteSearchControl = props => {
                   placeholder={sitesData.amino_type.placeholder}
                   placeholderId={sitesData.amino_type.placeholderId}
                   placeholderName={sitesData.amino_type.placeholderName}
-                  menu={initData.aa_type_list.map(a => ({
-                    ...a,
-                    name: a.label
-                  }))}
+                  menu={initData.aa_type_list
+                    .map(a => ({
+                      ...a,
+                      name: a.label
+                        .split(" - ")
+                        .reverse()
+                        .join(" - ")
+                    }))
+                    .sort(sortDropdown)}
                   setInputValue={setAminoType}
                 />
               </FormControl>
@@ -277,6 +286,7 @@ const SiteSearchControl = props => {
                           ...a,
                           name: a.label
                         }))
+
                         .sort(sortDropdown)}
                       setInputValue={setAnnotations}
                     ></MultiselectTextInput>

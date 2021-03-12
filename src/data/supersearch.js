@@ -113,7 +113,7 @@ const constructSiteSearchObject = queryObject => {
       siteQuery.query.unaggregated_list.push({
         path: "site_seq",
         order,
-        operator: "$gt",
+        operator: "$eq",
         string_value: aminoType
       });
     }
