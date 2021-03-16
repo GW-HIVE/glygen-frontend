@@ -149,6 +149,10 @@ const ProteinSequenceDisplay = ({
 
   useEffect(() => {
     if (glycosylation) {
+      const tempGlycosylation = glycosylation.filter(
+        item => item.start_pos !== undefined
+      );
+
       //distinct
       const distinctGlycanPositions = (value, index, self) => {
         const findPosition = self.find(
@@ -156,7 +160,7 @@ const ProteinSequenceDisplay = ({
         );
         return self.indexOf(findPosition) === index;
       };
-      const nLink = glycosylation
+      const nLink = tempGlycosylation
         .filter(item => item.type === "N-linked")
         //.filter(hasStartPos)
         .filter(distinctGlycanPositions)
@@ -164,7 +168,7 @@ const ProteinSequenceDisplay = ({
           start: item.start_pos,
           length: 1
         }));
-      const oLink = glycosylation
+      const oLink = tempGlycosylation
         .filter(item => item.type === "O-linked")
         //.filter(hasStartPos)
         .filter(distinctGlycanPositions)
