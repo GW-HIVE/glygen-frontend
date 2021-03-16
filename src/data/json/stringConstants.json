@@ -1127,7 +1127,7 @@
         "name": "Motif Name"
       },
       "motif_synonym": {
-        "synonym": "Motif Synonym"
+        "synonym": "Motif Synonym(s)"
       },
       "glycan_count": {
         "name": "No of Glycans"
