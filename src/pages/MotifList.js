@@ -167,7 +167,7 @@ const MotifList = props => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="glycan_count"
-              defaultSortOrder="asc"
+              defaultSortOrder="desc"
             />
           )}
         </section>
