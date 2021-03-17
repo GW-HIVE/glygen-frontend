@@ -7,6 +7,7 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import stringConstants from "./json/stringConstants";
 import { logActivity } from "../data/logging";
 import { Link } from "react-router-dom";
+import { Col } from "react-bootstrap";
 
 const glycanStrings = stringConstants.glycan.common;
 const motifStrings = stringConstants.motif.common;
@@ -114,9 +115,15 @@ export const MOTIF_LIST_COLUMNS = [
       return { width: "20%" };
     },
     formatter: (value, row) => (
-      <LineTooltip text="View details">
-        <Link to={routeConstants.motifDetail + row.motif_ac}>{row.synonyms}</Link>
-      </LineTooltip>
+      <>
+        {value.map((synonyms) => (
+          <Col className="nowrap">
+            <LineTooltip text="View details">
+              <Link to={routeConstants.motifDetail + row.motif_ac}>{synonyms}</Link>
+            </LineTooltip>
+          </Col>
+        ))}
+      </>
     ),
   },
   {

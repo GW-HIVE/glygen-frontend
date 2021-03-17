@@ -292,13 +292,20 @@ const MotifDetail = (props) => {
                             <div>
                               {motifSynonym && motifSynonym.length > 0 ? (
                                 <>
+                                  {/* <Col> */}
                                   <strong>{motifStrings.motif_synonym.synonym}: </strong>
-                                  <a href={motif.url} target="_blank" rel="noopener noreferrer">
-                                    {motifSynonym}
-                                  </a>
+                                  {/* </Col> */}
+
+                                  {motifSynonym.map((synonym) => (
+                                    <Col className="nowrap d-inline pl-0">
+                                      <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                        {synonym}
+                                      </a>
+                                    </Col>
+                                  ))}
                                 </>
                               ) : (
-                                <>{""}</>
+                                <></>
                               )}
                             </div>
                             <div>
