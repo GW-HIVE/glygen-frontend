@@ -1131,6 +1131,9 @@
       },
       "glycan_count": {
         "name": "No of Glycans"
+      },
+      "glytoucan_ac": {
+        "name": "GlyTouCan Accession"
       }
     }
   },
