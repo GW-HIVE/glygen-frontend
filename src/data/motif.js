@@ -117,7 +117,7 @@ export const MOTIF_LIST_COLUMNS = [
     formatter: (value, row) => (
       <>
         {value.map((synonyms) => (
-          <Col className="nowrap">
+          <Col className="nowrap pl-0">
             <LineTooltip text="View details">
               <Link to={routeConstants.motifDetail + row.motif_ac}>{synonyms}</Link>
             </LineTooltip>
