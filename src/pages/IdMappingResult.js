@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ID_MAP_REASON, getMappingList, getMappingListUnmapped } from "../data/mapping";
+import { ID_MAP_REASON, getMappingList } from "../data/mapping";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import DownloadButton from "../components/DownloadButton";
@@ -18,7 +18,6 @@ import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import IdMappingQuerySummary from "../components/IdMappingQuerySummary";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import { Row, Col } from "react-bootstrap";
 import DownloadAllButton from "../components/DownloadAllButton";
 const mappedStrings = stringConstants.id_mapping.common.mapped;
 
@@ -154,7 +153,7 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text} / {legends.from}
+            {column.text} {legends.from}
             {sortElement}
           </div>
         );
@@ -170,7 +169,7 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text} / {legends.anchor}
+            {column.text} {legends.anchor}
             {sortElement}
           </div>
         );
@@ -186,7 +185,7 @@ const IdMappingResult = (props) => {
       headerFormatter: (column, colIndex, { sortElement }) => {
         return (
           <div>
-            {column.text} / {legends.to}
+            {column.text} {legends.to}
             {sortElement}
           </div>
         );

@@ -1682,15 +1682,15 @@
       "mapped": {
         "from": {
           "shortName": "from",
-          "name": "From ID"
+          "name": "From ID:"
         },
         "anchor": {
           "shortName": "anchor",
-          "name": "Internal ID"
+          "name": "Format-Internal ID:"
         },
         "to": {
           "shortName": "to",
-          "name": "To ID"
+          "name": "To ID:"
         }
       },
       "unmapped": {
