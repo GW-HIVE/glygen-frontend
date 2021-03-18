@@ -497,6 +497,29 @@ const GlycanDetail = props => {
       )
     },
     {
+      dataField: "id",
+      text: glycanStrings.glycan_image.name,
+      sort: false,
+      selected: true,
+      formatter: (value, row) => (
+        <div className="img-wrapper">
+          <img
+            className="img-cartoon"
+            src={getGlycanImageUrl(row.id)}
+            alt="Glycan img"
+          />
+        </div>
+      ),
+      headerStyle: (colum, colIndex) => {
+        return {
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white",
+          whiteSpace: "nowrap"
+        };
+      }
+    },
+    {
       dataField: "type",
       text: "Type",
       sort: true,
@@ -549,7 +572,7 @@ const GlycanDetail = props => {
       )
     },
     {
-      dataField: "start",
+      dataField: "start_pos",
       text: "Site",
       sort: true,
       headerStyle: (colum, colIndex) => {
@@ -1089,14 +1112,25 @@ const GlycanDetail = props => {
                                       >
                                         &nbsp;{Formatclassification.type.name}
                                       </a>
-                                      {Formatclassification.subtype && Formatclassification.subtype.name !== "Other" && <>&nbsp; <b>/</b> &nbsp;
-                                      <a
-                                        href={Formatclassification.subtype.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                      >
-                                        {Formatclassification.subtype.name}
-                                      </a></>}
+                                      {Formatclassification.subtype &&
+                                        Formatclassification.subtype.name !==
+                                          "Other" && (
+                                          <>
+                                            &nbsp; <b>/</b> &nbsp;
+                                            <a
+                                              href={
+                                                Formatclassification.subtype.url
+                                              }
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {
+                                                Formatclassification.subtype
+                                                  .name
+                                              }
+                                            </a>
+                                          </>
+                                        )}
                                     </span>
                                     {<br />}
                                   </>
