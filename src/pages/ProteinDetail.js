@@ -147,9 +147,9 @@ function openProtvistaPage(uniprot_canonical_ac) {
   window.open(url);
 }
 const sortByPosition = function(a, b) {
-  if (a.position < b.position) {
+  if (a.start_pos < b.start_pos) {
     return -1;
-  } else if (b.position < a.position) {
+  } else if (b.start_pos < a.start_pos) {
     return 1;
   }
   return 0;
@@ -575,7 +575,7 @@ const ProteinDetail = props => {
       formatter: (cell, row) => {
         return (
           <EvidenceList
-            key={row.position + row.glytoucan_ac}
+            key={row.start_pos + row.glytoucan_ac}
             evidences={groupEvidences(cell)}
           />
         );
@@ -663,8 +663,8 @@ const ProteinDetail = props => {
         )
       // formatter: (value, row) => (
       //   <LineTooltip text="View siteview details">
-      //     <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
-      //       {row.residue} {row.position}
+      //     <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+      //       {row.residue} {row.start_pos}
       //     </Link>
       //   </LineTooltip>
     }
@@ -1709,7 +1709,8 @@ const ProteinDetail = props => {
                                     data={glycosylationWithImage}
                                     columns={glycoSylationColumns}
                                     onClickTarget={"#glycosylation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!glycosylationWithImage.length && (
@@ -1734,7 +1735,8 @@ const ProteinDetail = props => {
                                         column.dataField !== "glytoucan_ac"
                                     )}
                                     onClickTarget={"#glycosylation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!glycosylationWithoutImage.length && (
@@ -1763,7 +1765,8 @@ const ProteinDetail = props => {
                                         column.dataField !== "glytoucan_ac"
                                     )}
                                     onClickTarget={"#glycosylation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!glycosylationPredicted.length && (
@@ -1795,7 +1798,8 @@ const ProteinDetail = props => {
                                         column.dataField !== "glytoucan_ac"
                                     )}
                                     onClickTarget={"#glycosylation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!glycosylationMining.length && (
@@ -2108,6 +2112,7 @@ const ProteinDetail = props => {
                                     columns={mutationColumns}
                                     onClickTarget={"#mutation"}
                                     defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!mutataionWithdisease.length && (
@@ -2131,7 +2136,8 @@ const ProteinDetail = props => {
                                       column => column.dataField !== "disease"
                                     )}
                                     onClickTarget={"#mutation"}
-                                    defaultSortField="position"
+                                    defaultSortField="start_pos"
+                                    defaultSortOrder="asc"
                                   />
                                 )}
                               {!mutataionWithoutdisease.length && (
