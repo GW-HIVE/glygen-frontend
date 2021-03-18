@@ -94,7 +94,7 @@
       },
       "number_proteins": {
         "name": "On How Many Glycoproteins",
-        "shortName": "Glycoproteins",
+        "shortName": "No of Glycoproteins",
         "tooltip": {
           "title": "Glycoproteins",
           "text": "how many glycoproteins Glycoproteins"
