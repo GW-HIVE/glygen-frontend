@@ -187,13 +187,19 @@ const MotifDetail = (props) => {
                 </Grid>
               </Row>
             </div>
-            {props.history && props.history.length > 1 && <div className="text-right gg-download-btn-width pb-3">
-              <Button type="button" className="gg-btn-blue"
-                onClick={() => { props.history.goBack()} }
-              >
-                Back
-              </Button>
-            </div>}
+            {props.history && props.history.length > 1 && (
+              <div className="text-right gg-download-btn-width pb-3">
+                <Button
+                  type="button"
+                  className="gg-btn-blue"
+                  onClick={() => {
+                    props.history.goBack();
+                  }}
+                >
+                  Back
+                </Button>
+              </div>
+            )}
             <div className="gg-download-btn-width">
               <DownloadButton
                 types={[
@@ -286,14 +292,27 @@ const MotifDetail = (props) => {
                             <div>
                               {motifSynonym && motifSynonym.length > 0 ? (
                                 <>
+                                  {/* <Col> */}
                                   <strong>{motifStrings.motif_synonym.synonym}: </strong>
-                                  <a href={motif.url} target="_blank" rel="noopener noreferrer">
-                                    {motifSynonym}
-                                  </a>
+                                  {/* </Col> */}
+
+                                  {motifSynonym.map((synonym) => (
+                                    <Col className="nowrap d-inline pl-0">
+                                      <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                        {synonym}
+                                      </a>
+                                    </Col>
+                                  ))}
                                 </>
                               ) : (
-                                <>{""}</>
+                                <></>
                               )}
+                            </div>
+                            <div>
+                              <strong>{motifStrings.glytoucan_ac.name}: </strong>
+                              <a href={motif.url} target="_blank" rel="noopener noreferrer">
+                                {motif.glytoucan_ac}
+                              </a>
                             </div>
                             <div>
                               <strong>{glycanStrings.mass.shortName}: </strong>
