@@ -1075,14 +1075,14 @@ const GlycanDetail = props => {
                                       >
                                         &nbsp;{Formatclassification.type.name}
                                       </a>
-                                      &nbsp; <b>/</b> &nbsp;
+                                      {Formatclassification.subtype && Formatclassification.subtype.name !== "Other" && <>&nbsp; <b>/</b> &nbsp;
                                       <a
                                         href={Formatclassification.subtype.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                       >
                                         {Formatclassification.subtype.name}
-                                      </a>
+                                      </a></>}
                                     </span>
                                     {<br/>}
                                   </>
