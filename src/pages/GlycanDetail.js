@@ -549,13 +549,13 @@ const GlycanDetail = props => {
       )
     },
     {
-      dataField: "position",
+      dataField: "start",
       text: "Site",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      },
-      formatter: (value, row) => <>{row.position}</>
+      }
+      // formatter: (value, row) => <>{row.start}</>
     },
     {
       dataField: "residue",
@@ -563,8 +563,8 @@ const GlycanDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      },
-      formatter: (value, row) => <>{row.residue}</>
+      }
+      // formatter: (value, row) => <>{row.residue}</>
     },
 
     {
@@ -581,7 +581,14 @@ const GlycanDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View details on expasy">
+          <a href={row.cell_line.url} target="_blank" rel="noopener noreferrer">
+            {value}
+          </a>
+        </LineTooltip>
+      )
     }
   ];
   const expressionTissueColumns = [
@@ -620,13 +627,13 @@ const GlycanDetail = props => {
       )
     },
     {
-      dataField: "position",
+      dataField: "start_pos",
       text: "Site",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      },
-      formatter: (value, row) => <>{row.position}</>
+      }
+      // formatter: (value, row) => <>{row.start_pos}</>
     },
     {
       dataField: "residue",
@@ -634,8 +641,8 @@ const GlycanDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      },
-      formatter: (value, row) => <>{row.residue}</>
+      }
+      // formatter: (value, row) => <>{row.residue}</>
     },
     {
       dataField: "tissue.name",
@@ -651,7 +658,14 @@ const GlycanDetail = props => {
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View details on expasy">
+          <a href={row.tissue.url} target="_blank" rel="noopener noreferrer">
+            {value}
+          </a>
+        </LineTooltip>
+      )
     }
   ];
   const motifColumns = [
@@ -1084,7 +1098,7 @@ const GlycanDetail = props => {
                                         {Formatclassification.subtype.name}
                                       </a>
                                     </span>
-                                    {<br/>}
+                                    {<br />}
                                   </>
                                 ))}{" "}
                               </Col>

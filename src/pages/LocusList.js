@@ -185,7 +185,7 @@ const LocusList = props => {
               totalSize={totalSize}
               onTableChange={handleTableChange}
               defaultSortField="uniprot_canonical_ac"
-              defaultSortOrder="asc"
+              defaultSortOrder="desc"
               idField="uniprot_canonical_ac"
             />
           )}
