@@ -1689,7 +1689,7 @@
         },
         "anchor": {
           "shortName": "anchor",
-          "name": "Format-Internal ID:"
+          "name": "Internal ID:"
         },
         "to": {
           "shortName": "to",
