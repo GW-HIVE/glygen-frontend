@@ -2701,13 +2701,14 @@ const ProteinDetail = props => {
                                   <strong>
                                     {proteinStrings.isoform_acc.name}:{" "}
                                   </strong>
-                                  <a
-                                    href={isoformsS.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                  <Link
+                                    to={
+                                      routeConstants.proteinDetail +
+                                      isoformsS.isoform_ac
+                                    }
                                   >
                                     {isoformsS.isoform_ac}
-                                  </a>
+                                  </Link>
                                 </div>
                                 {isoformsS.sequence &&
                                   isoformsS.sequence.length && (
@@ -2855,16 +2856,14 @@ const ProteinDetail = props => {
                               >
                                 <div>
                                   <strong>UniProtKB Homolog Accession: </strong>
-
-                                  <a
-                                    href={uniprot.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                  <Link
+                                    to={
+                                      routeConstants.proteinDetail +
+                                      orthologsS.uniprot_canonical_ac
+                                    }
                                   >
                                     {orthologsS.uniprot_canonical_ac}
-                                  </a>
-
-                                  {/* </Link> */}
+                                  </Link>
                                 </div>
                                 <div>
                                   <strong>
