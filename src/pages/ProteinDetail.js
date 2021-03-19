@@ -2701,14 +2701,14 @@ const ProteinDetail = props => {
                                   <strong>
                                     {proteinStrings.isoform_acc.name}:{" "}
                                   </strong>
-                                  <Link
-                                    to={
-                                      routeConstants.proteinDetail +
-                                      isoformsS.isoform_ac
-                                    }
+
+                                  <a
+                                    href={isoformsS.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                   >
                                     {isoformsS.isoform_ac}
-                                  </Link>
+                                  </a>
                                 </div>
                                 {isoformsS.sequence &&
                                   isoformsS.sequence.length && (
