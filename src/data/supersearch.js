@@ -123,7 +123,7 @@ const constructSiteSearchObject = queryObject => {
         path: "start_pos",
         order,
         operator: "$eq",
-        numeric_value: min
+        numeric_value: parseInt(min)
       });
 
       order++;
@@ -132,7 +132,7 @@ const constructSiteSearchObject = queryObject => {
         path: "end_pos",
         order,
         operator: "$eq",
-        numeric_value: max
+        numeric_value: parseInt(max)
       });
 
       order++;

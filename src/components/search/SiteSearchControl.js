@@ -56,35 +56,46 @@ const SiteSearchControl = props => {
     { show: false, id: "" }
   );
   const proteinStrings = stringConstants.protein.common;
+
   useEffect(() => {
     setPageLoading(true);
     logActivity();
-    // document.addEventListener("click", () => {
-    //   setAlertTextInput({ show: false });
-    // });
     getSiteSearchInit().then(response => {
       setInitData(response.data);
-
-      if (defaults.proteinId) {
-        setproteinId(defaults.proteinId.join(","));
-      }
-      if (defaults.annotations) {
-        const anno = response.data.annotation_type_list.filter(annotation => {
-          return defaults.annotations.includes(annotation.id);
-        });
-
-        setAnnotations(
-          anno.map(x => ({
-            ...x,
-            name: x.label
-          }))
-        );
-      }
-      if (defaults.aminoType) {
-        setAminoType(defaults.aminoType);
-      }
+      setPageLoading(false);
     });
-  }, [defaults]);
+  }, []);
+
+  useEffect(() => {
+    if (defaults.proteinId) {
+      setproteinId(defaults.proteinId.join(","));
+    }
+    if (defaults.annotations) {
+      const anno = initData.annotation_type_list.filter(annotation => {
+        return defaults.annotations.includes(annotation.id);
+      });
+
+      setAnnotations(
+        anno.map(x => ({
+          ...x,
+          name: x.label
+        }))
+      );
+    }
+    if (defaults.aminoType) {
+      setAminoType(defaults.aminoType);
+    }
+    if (defaults.min) {
+      setMinRange(defaults.min);
+    }
+    if (defaults.max) {
+      setMaxRange(defaults.max);
+    }
+    if (defaults.position) {
+      setPosition(defaults.position);
+    }
+    console.log("defaults", defaults);
+  }, [initData, defaults]);
 
   // const validateMinRange = (minRange) => true;
 
