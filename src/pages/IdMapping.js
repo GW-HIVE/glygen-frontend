@@ -21,6 +21,7 @@ import stringConstants from "../data/json/stringConstants";
 import routeConstants from "../data/json/routeConstants";
 import { getMappingInit, getMappingSearch, getMappingList } from "../data/mapping";
 import ExampleExploreControl from "../components/example/ExampleExploreControl";
+import { sortDropdownIgnoreCase } from "../utils/common";
 
 const IdMapping = (props) => {
   let { id } = useParams("");
@@ -30,7 +31,7 @@ const IdMapping = (props) => {
   const [idMapSearchData, setIdMapSearchData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      recordType: "any",
+      recordType: "glycan",
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
@@ -48,7 +49,7 @@ const IdMapping = (props) => {
   const [fileUploadForm, setFileUploadForm] = useState(null);
   const [errorFileUpload, setErrorFileUpload] = useState(null);
 
-  const [moleculeValidated, setMoleculeValidated] = useState(false);
+  const [moleculeValidated, setMoleculeValidated] = useState(true);
   const [fromIdTypeValidated, setFromIdTypeValidated] = useState(false);
   const [toIdTypeValidated, setToIdTypeValidated] = useState(false);
   const [inputIdListValidated, setInputIdListValidated] = useState(false);
@@ -76,7 +77,9 @@ const IdMapping = (props) => {
     setInputTouched((state) => ({ ...state, recordTypeInput: true }));
     setIdMapSearchData({ recordType: value });
     setIdMapSearchData({ inputNamespace: "any" });
+    setFromIdTypeValidated(false);
     setIdMapSearchData({ outputNamespace: "any" });
+    setToIdTypeValidated(false);
     if (value && value !== "any") {
       setMoleculeValidated(true);
     } else {
@@ -168,7 +171,7 @@ const IdMapping = (props) => {
     fileInputRef.current.value = "";
     setErrorFileUpload("");
     setIdMapSearchData({
-      recordType: "any",
+      recordType: "glycan",
       inputNamespace: "any",
       outputNamespace: "any",
       inputIdlist: "",
@@ -216,7 +219,6 @@ const IdMapping = (props) => {
     getMappingInit()
       .then((response) => {
         let initData = response.data;
-
         setInitData(initData);
         if (id === undefined) setPageLoading(false);
         id &&
@@ -421,8 +423,9 @@ const IdMapping = (props) => {
                 onBlur={() => {
                   setInputTouched((state) => ({ ...state, fromIdInput: true }));
                 }}
+                sortFunction={sortDropdownIgnoreCase}
                 menu={
-                  idMapSearchData.recordType === "any"
+                  idMapSearchData.recordType === "any" || !Object.keys(initData).length
                     ? []
                     : [
                         ...Object.keys(initData[idMapSearchData.recordType].namespace).map(
@@ -464,6 +467,7 @@ const IdMapping = (props) => {
                 placeholderName={idMappingData.output_namespace.placeholderName}
                 inputValue={idMapSearchData.outputNamespace}
                 setInputValue={outputNamespaceOnChange}
+                sortFunction={sortDropdownIgnoreCase}
                 menu={
                   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
