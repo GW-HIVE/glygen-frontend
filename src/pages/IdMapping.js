@@ -38,13 +38,16 @@ const IdMapping = (props) => {
     }
   );
 
-  const [isInputTouched, setInputTouched] = useState({
-    recordTypeInput: false,
-    fromIdInput: false,
-    toIdInput: false,
-    idListInput: false,
-    fileInput: false,
-  });
+  const [isInputTouched, setInputTouched] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      recordTypeInput: false,
+      fromIdInput: false,
+      toIdInput: false,
+      idListInput: false,
+      fileInput: false,
+    }
+  );
 
   const [fileUploadForm, setFileUploadForm] = useState(null);
   const [errorFileUpload, setErrorFileUpload] = useState(null);
@@ -74,7 +77,7 @@ const IdMapping = (props) => {
    * @param {string} value - input recordtype (molecule) name value.
    **/
   const recordTypeOnChange = (value) => {
-    setInputTouched((state) => ({ ...state, recordTypeInput: true }));
+    setInputTouched({ recordTypeInput: true });
     setIdMapSearchData({ recordType: value });
     setIdMapSearchData({ inputNamespace: "any" });
     setFromIdTypeValidated(false);
@@ -91,7 +94,7 @@ const IdMapping = (props) => {
    * @param {string} value - input inputNamespace (From ID Type) name value.
    **/
   const inputNamespaceOnChange = (value) => {
-    setInputTouched((state) => ({ ...state, fromIdInput: true }));
+    setInputTouched({ fromIdInput: true });
     setIdMapSearchData({ inputNamespace: value });
     if (value && value !== "any") {
       setFromIdTypeValidated(true);
@@ -105,7 +108,7 @@ const IdMapping = (props) => {
    * @param {string} value - input outputNamespace (To ID Type) name value.
    **/
   const outputNamespaceOnChange = (value) => {
-    setInputTouched((state) => ({ ...state, toIdInput: true }));
+    setInputTouched({ toIdInput: true });
     setIdMapSearchData({ outputNamespace: value });
     if (value && value !== "any") {
       setToIdTypeValidated(true);
@@ -119,7 +122,7 @@ const IdMapping = (props) => {
    * @param {string} event - input inputIdlist (Enter IDs) name value.
    **/
   const inputIdlistOnChange = (event) => {
-    setInputTouched((state) => ({ ...state, idListInput: true }));
+    setInputTouched({ idListInput: true });
     fileInputRef.current.value = "";
     setIdMapSearchData({ inputIdlist: event.target.value });
     if (event.target.value) {
@@ -136,7 +139,7 @@ const IdMapping = (props) => {
    * @param {string} inputFuncInputIdlist - id mapping input ID list value.
    **/
   function funcInputIdlistOnChange(inputFuncInputIdlist) {
-    setInputTouched((state) => ({ ...state, idListInput: true }));
+    setInputTouched({ idListInput: true });
     fileInputRef.current.value = "";
     setIdMapSearchData({ inputIdlist: inputFuncInputIdlist });
     if (inputFuncInputIdlist) {
@@ -379,7 +382,7 @@ const IdMapping = (props) => {
               setInputValue={recordTypeOnChange}
               Value={recordTypeOnChange}
               onBlur={() => {
-                setInputTouched((state) => ({ ...state, recordTypeInput: true }));
+                setInputTouched({ recordTypeInput: true });
               }}
               menu={Object.keys(initData).map((moleculeType) => {
                 return {
@@ -421,7 +424,7 @@ const IdMapping = (props) => {
                 inputValue={idMapSearchData.inputNamespace}
                 setInputValue={inputNamespaceOnChange}
                 onBlur={() => {
-                  setInputTouched((state) => ({ ...state, fromIdInput: true }));
+                  setInputTouched({ fromIdInput: true });
                 }}
                 sortFunction={sortDropdownIgnoreCase}
                 menu={
@@ -533,7 +536,7 @@ const IdMapping = (props) => {
                 idMapSearchData.inputIdlist.length > idMappingData.input_idlist.length
               }
               onBlur={(e) => {
-                setInputTouched((state) => ({ ...state, idListInput: true }));
+                setInputTouched({ idListInput: true });
               }}
             ></OutlinedInput>
 
@@ -572,7 +575,7 @@ const IdMapping = (props) => {
               ref={fileInputRef}
               onChange={fileOnChangeHandler}
               onBlur={() => {
-                setInputTouched((state) => ({ ...state, fileInput: true }));
+                setInputTouched({ fileInput: true });
               }}
             />
           </label>
