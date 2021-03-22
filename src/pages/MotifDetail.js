@@ -213,6 +213,11 @@ const MotifDetail = (props) => {
                     type: "json",
                     data: "motif_detail",
                   },
+                  {
+                    display: stringConstants.download.motif_csvdata.displayname,
+                    type: "csv",
+                    data: "motif_detail",
+                  },
                 ]}
                 dataId={id}
                 dataType="motif_detail"

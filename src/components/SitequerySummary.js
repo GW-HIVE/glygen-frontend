@@ -106,7 +106,7 @@ const SiteQuerySummary = props => {
                 {querySummary.position && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      {proteinStrings.position.shortname}:
+                      Position:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.position}
@@ -116,7 +116,7 @@ const SiteQuerySummary = props => {
                 {querySummary.min && querySummary.max && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      {proteinStrings.range.shortname}:
+                      Range:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {querySummary.min} to {querySummary.max}

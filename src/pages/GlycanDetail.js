@@ -69,11 +69,11 @@ const items = [
   },
   {
     label: stringConstants.sidebar.subsumption.displayname,
-    id: "subsumption"
+    id: "Subsumption"
   },
   {
     label: stringConstants.sidebar.expression.displayname,
-    id: "expression"
+    id: "Expression"
   },
   {
     label: stringConstants.sidebar.digital_seq.displayname,
@@ -83,7 +83,7 @@ const items = [
     label: stringConstants.sidebar.cross_ref.displayname,
     id: "Cross-References"
   },
-  { label: stringConstants.sidebar.history.displayname, id: "history" },
+  { label: stringConstants.sidebar.history.displayname, id: "History" },
 
   { label: stringConstants.sidebar.publication.displayname, id: "Publications" }
 ];
@@ -606,7 +606,7 @@ const GlycanDetail = props => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
       formatter: (value, row) => (
-        <LineTooltip text="View details on expasy">
+        <LineTooltip text="View Cell Line details ">
           <a href={row.cell_line.url} target="_blank" rel="noopener noreferrer">
             {value}
           </a>
@@ -683,7 +683,7 @@ const GlycanDetail = props => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
       formatter: (value, row) => (
-        <LineTooltip text="View details on expasy">
+        <LineTooltip text="View Tissue details">
           <a href={row.tissue.url} target="_blank" rel="noopener noreferrer">
             {value}
           </a>
@@ -1524,7 +1524,7 @@ const GlycanDetail = props => {
 
               {/* Subsumption*/}
               <Accordion
-                id="subsumption"
+                id="Subsumption"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1575,7 +1575,7 @@ const GlycanDetail = props => {
 
               {/* Expression */}
               <Accordion
-                id="expression"
+                id="Expression"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -1891,7 +1891,7 @@ const GlycanDetail = props => {
               </Accordion>
               {/* history */}
               <Accordion
-                id="history"
+                id="History"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}

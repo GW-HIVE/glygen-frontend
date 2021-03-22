@@ -1626,7 +1626,7 @@
     },
     "motif_csvdata": {
       "id": "motif_csvdata",
-      "displayname": "Motif data (*.csv)",
+      "displayname": "Glycan list (*.csv)",
       "tooltip": "motif_csvdata Information for selected accession"
     },
     "idmapping_mapped_csvdata": {
@@ -1689,7 +1689,7 @@
         },
         "anchor": {
           "shortName": "anchor",
-          "name": "Format-Internal ID:"
+          "name": "Internal ID:"
         },
         "to": {
           "shortName": "to",
