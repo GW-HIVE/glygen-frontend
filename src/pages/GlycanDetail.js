@@ -1105,19 +1105,22 @@ const GlycanDetail = props => {
                                 {classification.map(Formatclassification => (
                                   <>
                                     <span>
-                                      <a
+                                      {Formatclassification.type.url && <a
                                         href={Formatclassification.type.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                       >
                                         &nbsp;{Formatclassification.type.name}
-                                      </a>
+                                      </a>}
+                                      {!Formatclassification.type.url && <>
+                                        &nbsp;{Formatclassification.type.name}
+                                      </>}
                                       {Formatclassification.subtype &&
                                         Formatclassification.subtype.name !==
                                           "Other" && (
                                           <>
                                             &nbsp; <b>/</b> &nbsp;
-                                            <a
+                                            {Formatclassification.subtype.url && <a
                                               href={
                                                 Formatclassification.subtype.url
                                               }
@@ -1128,7 +1131,10 @@ const GlycanDetail = props => {
                                                 Formatclassification.subtype
                                                   .name
                                               }
-                                            </a>
+                                            </a>}
+                                            {!Formatclassification.subtype.url && <>
+                                              {Formatclassification.subtype.name}
+                                            </>}
                                           </>
                                         )}
                                     </span>
