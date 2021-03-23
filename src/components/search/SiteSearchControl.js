@@ -337,7 +337,6 @@ const SiteSearchControl = props => {
                         value={position}
                         margin="dense"
                         onChange={handlePositionChange}
-                        labelWidth={40}
                       />
                     </FormControl>
                   </Grid>
