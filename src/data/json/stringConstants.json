@@ -580,9 +580,8 @@
         "shortName": "Position",
         "tooltip": {
           "title": "Position",
-          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
-          "urlText": "Read more...",
-          "url": "https://www.uniprot.org/"
+          "text": "You can search site by entering annotation Position.",
+          "urlText": "Read more..."
         },
         "id": "site"
       },
@@ -591,9 +590,8 @@
         "shortName": "Range",
         "tooltip": {
           "title": "Range",
-          "text": "You can search UniProtKB Accession by single or multiple comma-separated UniProtKB Accession(s). Accession assigned to the protein isoform chosen to be the canonical sequence to which all positional annotation refers in UniProtKB database.",
-          "urlText": "Read more...",
-          "url": "https://www.uniprot.org/"
+          "text": "You can search site by entering annotation Start Position and End Position .",
+          "urlText": "Read more..."
         },
         "id": "site_range"
       },
