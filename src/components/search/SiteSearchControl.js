@@ -28,6 +28,7 @@ import { axiosError } from "../../data/axiosError";
 import { getTitle, getMeta } from "../../utils/head";
 import PageLoader from "../load/PageLoader";
 import FeedbackWidget from "../FeedbackWidget";
+import TextAlert from "../alert/TextAlert";
 const commonProteinData = stringConstants.protein.common;
 const sitesData = siteData.site_search;
 let advancedSearch = proteinSearchData.advanced_search;
@@ -47,10 +48,10 @@ const SiteSearchControl = props => {
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
-  // const [alertTextInput, setAlertTextInput] = useReducer(
-  //   (state, newState) => ({ ...state, ...newState }),
-  //   { show: false, id: "" }
-  // );
+  const [alertTextInput, setAlertTextInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { show: false, id: "" }
+  );
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
@@ -60,6 +61,7 @@ const SiteSearchControl = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity();
+    setAlertTextInput({ show: false });
     getSiteSearchInit().then(response => {
       setInitData(response.data);
       setPageLoading(false);
@@ -126,6 +128,7 @@ const SiteSearchControl = props => {
    * Function to clear input field values.
    **/
   const clearSite = () => {
+    setAlertTextInput({ show: false });
     setproteinId("");
     setMinRange("");
     setPosition("");
@@ -169,9 +172,9 @@ const SiteSearchControl = props => {
         } else {
           logActivity("user", "", "No results. ");
           setPageLoading(false);
-          setAlertDialogInput({
+          setAlertTextInput({
             show: true,
-            id: "no-result-found"
+            id: stringConstants.errors.siteSerarchError.id
           });
           window.scrollTo(0, 0);
         }
@@ -190,12 +193,7 @@ const SiteSearchControl = props => {
         justify="center"
       >
         <PageLoader pageLoading={pageLoading} />
-        <DialogAlert
-          alertInput={alertDialogInput}
-          setOpen={input => {
-            setAlertDialogInput({ show: input });
-          }}
-        />
+        <TextAlert alertInput={alertTextInput} />
 
         {initData && (
           <>
