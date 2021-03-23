@@ -1330,6 +1330,11 @@
       "title": "Advanced Search Error - No Results Found",
       "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
     },
+    "siteSerarchError": {
+      "id": "siteSerarchError",
+      "title": "Site Search Error - No Results Found",
+      "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+    },
     "quickSerarchError": {
       "id": "quickSerarchError",
       "title": "Quick Search Error - No Results Found",

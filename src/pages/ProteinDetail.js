@@ -2866,6 +2866,10 @@ const ProteinDetail = props => {
                                   </Link>
                                 </div>
                                 <div>
+                                  <strong>Protein Name: </strong>
+                                  {orthologsS.protein_name}
+                                </div>
+                                <div>
                                   <strong>
                                     {glycanStrings.organism.name}:{" "}
                                   </strong>
