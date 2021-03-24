@@ -95,7 +95,7 @@ const ContactForm = props => {
     getJson(url)
       .then(response => {
         logActivity("user", "", "Message sent from contact us page.");
-        setContactUsResponseMessage(response.data.message); //decodeURIComponent()
+        setContactUsResponseMessage(decodeURIComponent(response.data.message)); //decodeURIComponent()
       })
       .catch(error => {
         setContactUsErrorMessage(

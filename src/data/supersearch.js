@@ -122,7 +122,7 @@ const constructSiteSearchObject = queryObject => {
       siteQuery.query.unaggregated_list.push({
         path: "start_pos",
         order,
-        operator: "$eq",
+        operator: "$gte",
         numeric_value: parseInt(min)
       });
 
@@ -131,7 +131,7 @@ const constructSiteSearchObject = queryObject => {
       siteQuery.query.unaggregated_list.push({
         path: "end_pos",
         order,
-        operator: "$eq",
+        operator: "$lte",
         numeric_value: parseInt(max)
       });
 

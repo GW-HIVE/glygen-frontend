@@ -485,7 +485,7 @@ const GlycanDetail = props => {
   const subsumptionColumns = [
     {
       dataField: "id",
-      text: "GlyToucan_ac",
+      text: glycanStrings.glycan_id.shortName,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
@@ -1105,36 +1105,50 @@ const GlycanDetail = props => {
                                 {classification.map(Formatclassification => (
                                   <>
                                     <span>
-                                      {Formatclassification.type.url && <a
-                                        href={Formatclassification.type.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                      >
-                                        &nbsp;{Formatclassification.type.name}
-                                      </a>}
-                                      {!Formatclassification.type.url && <>
-                                        &nbsp;{Formatclassification.type.name}
-                                      </>}
+                                      {Formatclassification.type.url && (
+                                        <a
+                                          href={Formatclassification.type.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                        >
+                                          &nbsp;{Formatclassification.type.name}
+                                        </a>
+                                      )}
+                                      {!Formatclassification.type.url && (
+                                        <>
+                                          &nbsp;{Formatclassification.type.name}
+                                        </>
+                                      )}
                                       {Formatclassification.subtype &&
                                         Formatclassification.subtype.name !==
                                           "Other" && (
                                           <>
                                             &nbsp; <b>/</b> &nbsp;
-                                            {Formatclassification.subtype.url && <a
-                                              href={
-                                                Formatclassification.subtype.url
-                                              }
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                            >
-                                              {
-                                                Formatclassification.subtype
-                                                  .name
-                                              }
-                                            </a>}
-                                            {!Formatclassification.subtype.url && <>
-                                              {Formatclassification.subtype.name}
-                                            </>}
+                                            {Formatclassification.subtype
+                                              .url && (
+                                              <a
+                                                href={
+                                                  Formatclassification.subtype
+                                                    .url
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                              >
+                                                {
+                                                  Formatclassification.subtype
+                                                    .name
+                                                }
+                                              </a>
+                                            )}
+                                            {!Formatclassification.subtype
+                                              .url && (
+                                              <>
+                                                {
+                                                  Formatclassification.subtype
+                                                    .name
+                                                }
+                                              </>
+                                            )}
                                           </>
                                         )}
                                     </span>
