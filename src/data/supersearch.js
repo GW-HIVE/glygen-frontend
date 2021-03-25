@@ -271,6 +271,7 @@ export const createSiteQuerySummary = query => {
   let result = {};
   let start;
   let end;
+
   if (query.concept_query_list) {
     for (let querySection of query.concept_query_list) {
       if (querySection && querySection.query.unaggregated_list) {
@@ -283,7 +284,9 @@ export const createSiteQuerySummary = query => {
           } else if (listItem.path === "site_seq") {
             result.aminoType = listItem.string_value;
           } else if (
-            ["glycosylation", "snv", "mutagenesis"].includes(listItem.path)
+            ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(
+              listItem.path
+            )
           ) {
             if (!result.annotations) {
               result.annotations = [];

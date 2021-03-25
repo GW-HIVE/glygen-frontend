@@ -56,6 +56,20 @@ export const getProteinDownload = (id, format, compressed, type, headers) => {
   return postToAndGetBlob(url, headers);
 };
 
+export const getProteinSiteDownload = (
+  id,
+  format,
+  compressed,
+  type,
+  headers
+) => {
+  let message = "downloaded successfully ";
+  logActivity("user", id, format, compressed, "No results. " + message);
+  const query = { id, type, format, compressed };
+  const url = `/data/download?query=${JSON.stringify(query)}`;
+  return postToAndGetBlob(url, headers);
+};
+
 export const PROTEIN_COLUMNS = [
   {
     dataField: proteinStrings.shortName,

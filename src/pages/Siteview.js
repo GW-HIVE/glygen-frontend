@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect, useReducer } from "react";
 import { getProteinsiteDetail } from "../data/protein";
+import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -13,6 +14,7 @@ import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import DownloadButton from "../components/DownloadButton";
 import { Tab, Tabs, Container } from "react-bootstrap";
 import { groupEvidences, groupOrganismEvidences } from "../data/data-format";
 import EvidenceList from "../components/EvidenceList";
@@ -646,6 +648,34 @@ const Siteview = ({ position }) => {
                 </Grid>
               </Row>
             </div>
+            {position.history && position.history.length > 1 && (
+              <div className="text-right gg-download-btn-width pb-3">
+                <Button
+                  type="button"
+                  className="gg-btn-blue"
+                  onClick={() => {
+                    position.history.goBack();
+                  }}
+                >
+                  Back
+                </Button>
+              </div>
+            )}
+            <div className="gg-download-btn-width">
+              <DownloadButton
+                types={[
+                  {
+                    display:
+                      stringConstants.download.proteinsite_jsondata.displayname,
+                    type: "json",
+                    data: "site_detail"
+                  }
+                ]}
+                dataType="site_detail"
+                dataId={`${id}.${position}.${position}`}
+              />
+            </div>
+
             <React.Fragment>
               <Helmet>
                 {getTitle("siteView", {

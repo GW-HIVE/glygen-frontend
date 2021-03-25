@@ -424,6 +424,21 @@ const GlycanDetail = props => {
   ];
   const bioEnzymeColumns = [
     {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "25%" };
+      },
+      formatter: (cell, row) => {
+        return (
+          <EvidenceList
+            key={row.uniprot_canonical_ac}
+            evidences={groupEvidences(cell)}
+          />
+        );
+      }
+    },
+    {
       dataField: "uniprot_canonical_ac",
       text: proteinStrings.uniprot_canonical_ac.name,
       sort: true,
@@ -892,6 +907,7 @@ const GlycanDetail = props => {
                 dataId={id}
               />
             </div>
+
             <React.Fragment>
               <Helmet>
                 {getTitle("glycanDetail", {

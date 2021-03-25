@@ -1577,6 +1577,11 @@
       "displayname": "Protein data (*.json)",
       "tooltip": " protein_jsondata Information for selected accession"
     },
+    "proteinsite_jsondata": {
+      "id": "proteinsite_jsondata",
+      "displayname": "ProteinSite data (*.json)",
+      "tooltip": " proteinsite_jsondata Information for selected accession"
+    },
     "protein_csvdata": {
       "id": "protein_csvdata",
       "displayname": "Protein data (*.csv)",
