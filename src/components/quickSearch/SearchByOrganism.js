@@ -93,7 +93,12 @@ const SearchByOrganism = props => {
                         menu={
                           species_to_glycosyltransferases &&
                           species_to_glycosyltransferases.organism
-                            ? species_to_glycosyltransferases.organism
+                            ? Object.keys(species_to_glycohydrolases.organism).map((org) => (
+                             {
+                               id : species_to_glycohydrolases.organism[org].id,
+                               name : species_to_glycohydrolases.organism[org].name
+                             }
+                           ))
                             : []
                         }
                         setInputValue={input =>
@@ -163,7 +168,12 @@ const SearchByOrganism = props => {
                         menu={
                           species_to_glycohydrolases &&
                           species_to_glycohydrolases.organism
-                            ? species_to_glycohydrolases.organism
+                            ? Object.keys(species_to_glycohydrolases.organism).map((org) => (
+                             {
+                               id : species_to_glycohydrolases.organism[org].id,
+                               name : species_to_glycohydrolases.organism[org].name
+                             }
+                           ))
                             : []
                         }
                         setInputValue={input =>
@@ -233,7 +243,12 @@ const SearchByOrganism = props => {
                         menu={
                           species_to_glycoproteins &&
                           species_to_glycoproteins.organism
-                            ? species_to_glycoproteins.organism
+                            ? Object.keys(species_to_glycoproteins.organism).map((org) => (
+                              {
+                                id : species_to_glycoproteins.organism[org].id,
+                                name : species_to_glycoproteins.organism[org].name
+                              }
+                            ))
                             : []
                         }
                         setInputValue={organismId => {
@@ -268,9 +283,8 @@ const SearchByOrganism = props => {
                           species_to_glycoproteins.organism &&
                           props.inputValue.question_10.organism !== searchByOrganism.common.organism.placeholderId
                             ? 
-                            species_to_glycoproteins.organism.filter(
-                              organism => organism.id === props.inputValue.question_10.organism
-                            )[0].evidence_type.map(type => ({
+                            species_to_glycoproteins.organism[props.inputValue.question_10.organism]
+                              .evidence_type.map(type => ({
                                       id: type,
                                       name: type
                                     }))
