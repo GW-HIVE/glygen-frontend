@@ -73,6 +73,8 @@ const MotifDetail = (props) => {
   const [motifName, setMotifName] = useState([]);
   const [motifSynonym, setMotifSynonym] = useState([]);
   const [classification, setClassification] = useState([]);
+  const [motifKeywords, setMotifKeywords] = useState([]);
+  const [reducingEnd, setReducingEnd] = useState([]);
   const [pagination, setPagination] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(MOTIF_COLUMNS);
   const [page, setPage] = useState(1);
@@ -125,6 +127,8 @@ const MotifDetail = (props) => {
         setMotif(data.motif);
         setMotifName(data.name);
         setMotifSynonym(data.synonym);
+        setMotifKeywords(data.keywords);
+        setReducingEnd(data.reducing_end);
         // setClassification(
         //   data.classification.filter(
         //     classif =>
@@ -241,7 +245,7 @@ const MotifDetail = (props) => {
               />
               {/* General */}
               <Accordion
-                id="general"
+                id="General"
                 defaultActiveKey="0"
                 className="panel-width"
                 style={{ padding: "20px 0" }}
@@ -297,17 +301,28 @@ const MotifDetail = (props) => {
                             <div>
                               {motifSynonym && motifSynonym.length > 0 ? (
                                 <>
-                                  {/* <Col> */}
-                                  <strong>{motifStrings.motif_synonym.synonym}: </strong>
-                                  {/* </Col> */}
-
-                                  {motifSynonym.map((synonym) => (
-                                    <Col className="nowrap d-inline pl-0">
-                                      <a href={motif.url} target="_blank" rel="noopener noreferrer">
-                                        {synonym}
-                                      </a>
+                                  <Row>
+                                    <Col Col md="auto" className="pr-0">
+                                      <strong>{motifStrings.motif_synonym.synonym}: </strong>
                                     </Col>
-                                  ))}
+                                    <Col className="nowrap d-inline5 pl-1">
+                                      {motifSynonym.map((synonym) => (
+                                        // <Col className="nowrap5 d-inline5 pl-0">
+                                        <>
+                                          <span>
+                                            <a
+                                              href={motif.url}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                            >
+                                              {synonym}
+                                            </a>
+                                          </span>
+                                          {<br />}
+                                        </>
+                                      ))}
+                                    </Col>
+                                  </Row>
                                 </>
                               ) : (
                                 <></>
@@ -355,6 +370,47 @@ const MotifDetail = (props) => {
                               ))}
                             </div>
                           )}
+                        <div>
+                          {motifKeywords && motifKeywords.length > 0 ? (
+                            <>
+                              <Row>
+                                <Col Col md="auto" className="pr-0">
+                                  <strong>{motifStrings.motif_keywords.name}: </strong>
+                                </Col>
+                                <Col className="nowrap d-inline5 pl-1">
+                                  {motifKeywords.map((keywords) => (
+                                    <>
+                                      <span>
+                                        <a
+                                          href={keywords.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                        >
+                                          {keywords.label}
+                                        </a>
+                                      </span>
+                                      {<br />}
+                                    </>
+                                  ))}
+                                </Col>
+                              </Row>
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div>
+                          {reducingEnd && reducingEnd.length > 0 ? (
+                            <>
+                              <strong>{motifStrings.reducing_end.name}: </strong>
+                              {/* <a href={motif.url} target="_blank" rel="noopener noreferrer"> */}
+                              {reducingEnd}
+                              {/* </a> */}
+                            </>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
                       </p>
                     </Card.Body>
                   </Accordion.Collapse>
