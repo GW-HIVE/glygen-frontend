@@ -218,16 +218,14 @@ const SuperSearchSVG = (props) => {
       * @param {object} d - node data.
       */
       function mouseoverSource(d) {
-        if (d.sourceListID !== "") {
-            let element = document.getElementById("svg-link-source" + d.linkid);
-            var bcr = element.getBoundingClientRect();
-            let tooltip = document.getElementById("tooltip"); 
-            let tooltipText = document.getElementById("tooltip-text");
-            tooltipText.innerHTML = "Click to see list page.";
-            tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
-            tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
-            tooltip.style.display = "inline";
-        }
+          let element = document.getElementById("svg-link-source" + d.linkid);
+          var bcr = element.getBoundingClientRect();
+          let tooltip = document.getElementById("tooltip"); 
+          let tooltipText = document.getElementById("tooltip-text");
+          tooltipText.innerHTML = d.target.name  + " to " + d.source.name + " edge numbers." + (d.sourceListID !== "" ? "<br/>Click to see list page." : "");
+          tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+          tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
+          tooltip.style.display = "inline";
       }
 
       /**
@@ -235,10 +233,8 @@ const SuperSearchSVG = (props) => {
       * @param {object} d - node data.
       */
       function mouseoutSource(d) {
-        if (d.sourceListID !== "") {
-            var tooltip = document.getElementById("tooltip");
-            tooltip.style.display = "none";
-        }
+          var tooltip = document.getElementById("tooltip");
+          tooltip.style.display = "none";
       }
 
       var linkText2 = svg.selectAll(".svg-link")
@@ -267,16 +263,14 @@ const SuperSearchSVG = (props) => {
       * @param {object} d - node data.
       */
       function mouseoverTarget(d) {
-        if (d.targetListID !== "") {
-            let element = document.getElementById("svg-link-target" + d.linkid);
-            var bcr = element.getBoundingClientRect();
-            let tooltip = document.getElementById("tooltip"); 
-            let tooltipText = document.getElementById("tooltip-text");
-            tooltipText.innerHTML = "Click to see list page.";
-            tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
-            tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
-            tooltip.style.display = "inline";
-        }
+          let element = document.getElementById("svg-link-target" + d.linkid);
+          var bcr = element.getBoundingClientRect();
+          let tooltip = document.getElementById("tooltip"); 
+          let tooltipText = document.getElementById("tooltip-text");
+          tooltipText.innerHTML = d.source.name  + " to " + d.target.name + " edge numbers." + (d.targetListID !== "" ? "<br/>Click to see list page." : "");
+          tooltip.style.left = bcr.x + 0.8 * bcr.width + event.clientX - event.pageX - 10 + 'px';
+          tooltip.style.top = bcr.y + 1.25 * bcr.height + event.pageY - event.clientY + 'px';
+          tooltip.style.display = "inline";
       }
 
       /**
@@ -284,10 +278,8 @@ const SuperSearchSVG = (props) => {
       * @param {object} d - node data.
       */
       function mouseoutTarget(d) {
-        if (d.targetListID !== "") {
-            var tooltip = document.getElementById("tooltip");
-            tooltip.style.display = "none";
-        }
+          var tooltip = document.getElementById("tooltip");
+          tooltip.style.display = "none";
       }
 
     //appending the regular nodes

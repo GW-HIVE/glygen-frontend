@@ -201,7 +201,7 @@ input[type="number"] {
   fill: #000;
   stroke: gray;
   text-anchor: middle;
-  cursor: no-drop  !important;
+  cursor: default  !important;
   stroke-width: 0.8;
 }
 
