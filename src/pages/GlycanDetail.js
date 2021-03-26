@@ -534,14 +534,14 @@ const GlycanDetail = props => {
         };
       }
     },
-    {
-      dataField: "type",
-      text: "Type",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white" };
-      }
-    },
+    // {
+    //   dataField: "type",
+    //   text: "Type",
+    //   sort: true,
+    //   headerStyle: (colum, colIndex) => {
+    //     return { backgroundColor: "#4B85B6", color: "white" };
+    //   }
+    // },
     {
       dataField: "relationship",
       text: "Relationship",
