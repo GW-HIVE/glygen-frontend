@@ -66,7 +66,7 @@ const featuredCards = [
   },
   {
     title: "Site Search",
-    description: "Search for proteins based on their site, accessions, and annotations.",
+    description: "Search for proteins based on their site and site annotations.",
     image: siteSearchImg,
     imageText: "Site Search",
     to: routeConstants.siteSearch,
