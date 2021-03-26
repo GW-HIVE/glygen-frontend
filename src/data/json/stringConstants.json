@@ -1132,6 +1132,12 @@
       },
       "glytoucan_ac": {
         "name": "GlyTouCan Accession"
+      },
+       "motif_keywords": {
+        "name": "Motif Group"
+      },
+       "reducing_end": {
+        "name": "Reducing End"
       }
     }
   },
