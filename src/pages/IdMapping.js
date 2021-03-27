@@ -96,6 +96,10 @@ const IdMapping = (props) => {
   const inputNamespaceOnChange = (value) => {
     setInputTouched({ fromIdInput: true });
     setIdMapSearchData({ inputNamespace: value });
+    setIdMapSearchData({ outputNamespace: "any" });
+    setToIdTypeValidated(false);
+    setIdMapSearchData({ inputIdlist: "" });
+    setInputIdListValidated(false);
     if (value && value !== "any") {
       setFromIdTypeValidated(true);
     } else {
@@ -180,7 +184,7 @@ const IdMapping = (props) => {
       inputIdlist: "",
     });
 
-    setMoleculeValidated(false);
+    setMoleculeValidated(true);
     setFromIdTypeValidated(false);
     setToIdTypeValidated(false);
     setInputIdListValidated(false);
@@ -389,7 +393,6 @@ const IdMapping = (props) => {
                   id: initData[moleculeType].id,
                   name: initData[moleculeType].label,
                 };
-                // alert(moleculeType);
               })}
               required={true}
             />
@@ -474,29 +477,17 @@ const IdMapping = (props) => {
                 menu={
                   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
-                    : initData[idMapSearchData.recordType].namespace[
-                        idMapSearchData.inputNamespace
-                      ].map((toId) => {
-                        return {
-                          id: toId,
-                          name: toId,
-                        };
-                      })
+                    : [
+                        ...initData[idMapSearchData.recordType].namespace[
+                          idMapSearchData.inputNamespace
+                        ].target_list.map((toId) => {
+                          return {
+                            id: toId,
+                            name: toId,
+                          };
+                        }),
+                      ]
                 }
-                // menu={
-                //   idMapSearchData.recordType === "any"
-                //     ? []
-                //     : [
-                //         ...Object.keys(initData[idMapSearchData.recordType].namespace)
-                //           .filter((toId) => toId !== idMapSearchData.inputNamespace)
-                //           .map((toId) => {
-                //             return {
-                //               id: toId,
-                //               name: toId,
-                //             };
-                //           }),
-                //       ]
-                // }
                 required={true}
               />
             </FormControl>
@@ -552,11 +543,24 @@ const IdMapping = (props) => {
             )}
             <ExampleExploreControl
               setInputValue={funcInputIdlistOnChange}
-              inputValue={idMappingData.input_idlist.examples}
+              inputValue={
+                idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
+                  ? []
+                  : [
+                      {
+                        orderID: 100,
+                        example: {
+                          name: `Example ${idMapSearchData.inputNamespace}: `,
+                          id: initData[idMapSearchData.recordType].namespace[
+                            idMapSearchData.inputNamespace
+                          ].example_id_list.join(", "),
+                        },
+                      },
+                    ]
+              }
             />
           </FormControl>
         </Grid>
-
         {/* File Upload */}
         <Grid className="pt-2">
           <Typography className="mb-1">
@@ -566,7 +570,6 @@ const IdMapping = (props) => {
             <i>{idMappingData.file_upload.upload_text}</i>
           </Typography>
         </Grid>
-
         <form>
           <label>
             <input
