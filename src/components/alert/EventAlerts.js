@@ -9,13 +9,13 @@ import { Card, Col, Row } from "react-bootstrap";
 
 export default function EventAlerts(props) {
   const [open, setOpen] = React.useState(true);
-  const [style, setStyle] = React.useState("gg-tooltip event-alerts");
+  const [style, setStyle] = React.useState("gg-tooltip event-alerts-mb");
 
   return (
     <div>
       {props.data.map((obj) => (
         <Collapse in={open} className={style}>
-          <Card>
+          <Card className="event-alerts-border">
             <CardLoader pageLoading={props.pageLoading} />
             <Alert
               classes={{
