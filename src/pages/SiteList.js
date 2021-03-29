@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getSuperSearchList } from "../data/supersearch";
+import { getSuperSearchList, getSiteSearchInit } from "../data/supersearch";
 import SitequerySummary from "../components/SitequerySummary";
 import { SITE_COLUMNS } from "../data/supersearch";
 import PaginatedTable from "../components/PaginatedTable";
@@ -37,31 +37,71 @@ const SiteList = props => {
     { show: false, id: "" }
   );
 
+  const [configData, setConfigData] = useState({});
+
   useEffect(() => {
     setPageLoading(true);
+
     logActivity("user", id);
-    getSuperSearchList(id)
-      .then(({ data }) => {
-        if (data.error_code) {
-          let message = "list api call";
-          logActivity("user", id, "No results. " + message);
-          setPageLoading(false);
-        } else {
-          setData(data.results);
-          setQuery(data.cache_info.query);
-          setTimeStamp(data.cache_info.ts);
-          setPagination(data.pagination);
-          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-          setPage(currentPage);
-          setTotalSize(data.pagination.total_length);
-          setPageLoading(false);
-        }
-      })
-      .catch(function(error) {
+
+    // const dataPromise = getSuperSearchList(id);
+    const dataPromise = Promise.all([
+      getSiteSearchInit(),
+      getSuperSearchList(id)
+    ]);
+
+    dataPromise.then(([{ data: initData }, { data }]) => {
+      if (data.error_code) {
         let message = "list api call";
-        axiosError(error, id, message, setPageLoading, setAlertDialogInput);
-      });
+        logActivity("user", id, "No results. " + message);
+      } else {
+        setData(data.results);
+        setQuery(data.cache_info.query);
+        setTimeStamp(data.cache_info.ts);
+        setPagination(data.pagination);
+        const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+        setPage(currentPage);
+        setTotalSize(data.pagination.total_length);
+
+        setConfigData(initData);
+      }
+    });
+
+    dataPromise.catch(function(error) {
+      let message = "list api call";
+      axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+    });
+
+    dataPromise.finally(() => {
+      setPageLoading(false);
+    });
   }, []);
+
+  // useEffect(() => {
+  //   setPageLoading(true);
+  //   logActivity("user", id);
+  //   getSuperSearchList(id)
+  //     .then(({ data }) => {
+  //       if (data.error_code) {
+  //         let message = "list api call";
+  //         logActivity("user", id, "No results. " + message);
+  //         setPageLoading(false);
+  //       } else {
+  //         setData(data.results);
+  //         setQuery(data.cache_info.query);
+  //         setTimeStamp(data.cache_info.ts);
+  //         setPagination(data.pagination);
+  //         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+  //         setPage(currentPage);
+  //         setTotalSize(data.pagination.total_length);
+  //         setPageLoading(false);
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       let message = "list api call";
+  //       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+  //     });
+  // }, []);
 
   const handleTableChange = (
     type,
@@ -122,6 +162,7 @@ const SiteList = props => {
               timestamp={timestamp}
               searchId={searchId}
               onModifySearch={handleModifySearch}
+              initData={configData}
             />
           )}
         </section>

@@ -292,6 +292,8 @@ export const createSiteQuerySummary = query => {
               result.annotations = [];
             }
             result.annotations.push(listItem.path);
+
+            result.annotationOperator = querySection.query.aggregator;
           } else if (listItem.path === "start_pos") {
             start = listItem.numeric_value;
           } else if (listItem.path === "end_pos") {
@@ -303,12 +305,12 @@ export const createSiteQuerySummary = query => {
   }
 
   if (start && end) {
-    if (start === end) {
-      result.position = start;
-    } else {
-      result.min = start;
-      result.max = end;
-    }
+    // if (start === end) {
+    //   result.position = start;
+    // }
+
+    result.min = start;
+    result.max = end;
   }
 
   return result;

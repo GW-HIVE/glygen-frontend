@@ -96,6 +96,9 @@ const SiteSearchControl = props => {
     if (defaults.position) {
       setPosition(defaults.position);
     }
+    if (defaults.annotationOperation) {
+      setAnnotationOperation(defaults.annotationOperation);
+    }
     console.log("defaults", defaults);
   }, [initData, defaults]);
 
@@ -323,25 +326,6 @@ const SiteSearchControl = props => {
                   <Grid item xs={6} sm={6}>
                     <Typography className={"search-lbl"} gutterBottom>
                       <HelpTooltip
-                        title={commonProteinData.site.tooltip.title}
-                        text={commonProteinData.site.tooltip.text}
-                      />
-                      {commonProteinData.site.tooltip.title}
-                    </Typography>
-                    <FormControl fullWidth variant="outlined">
-                      <InputLabel className={"select-lbl-inline"}></InputLabel>
-                      <OutlinedInput
-                        className={props.inputClass}
-                        value={position}
-                        margin="dense"
-                        onChange={handlePositionChange}
-                      />
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item xs={3} sm={3}>
-                    <Typography className={"search-lbl"} gutterBottom>
-                      <HelpTooltip
                         title={commonProteinData.site_range.tooltip.title}
                         text={commonProteinData.site_range.tooltip.text}
                       />
@@ -366,7 +350,7 @@ const SiteSearchControl = props => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item xs={3} sm={3}>
+                  <Grid item xs={6} sm={6}>
                     <Typography className={"search-lbl"} gutterBottom>
                       &nbsp;
                     </Typography>

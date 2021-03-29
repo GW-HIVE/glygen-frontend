@@ -42,7 +42,7 @@ function getDateTime() {
 
 const SiteQuerySummary = props => {
   const title = "Site Search Summary";
-  const { data, onModifySearch, timestamp, searchId } = props;
+  const { data, onModifySearch, timestamp, searchId, initData } = props;
   const proteinStrings = stringConstants.protein.common;
   const superSearchStrings = stringConstants.super_search.common;
 
@@ -54,6 +54,23 @@ const SiteQuerySummary = props => {
   }
 
   const querySummary = createSiteQuerySummary(data);
+
+  let annotations = [];
+  if (
+    initData &&
+    initData.annotation_type_list &&
+    initData.annotation_type_list.length &&
+    querySummary.annotations
+  ) {
+    annotations = initData.annotation_type_list.filter(annotation => {
+      return querySummary.annotations.includes(annotation.id);
+    });
+  }
+  let annotationOperator = "";
+  if (querySummary.annotationOperator) {
+    annotationOperator =
+      querySummary.annotationOperator === "$and" ? "and" : "or";
+  }
 
   return (
     <>
@@ -83,13 +100,15 @@ const SiteQuerySummary = props => {
                     </Col>
                   </Row>
                 )}
-                {querySummary.annotations && (
+                {annotations && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
                       {proteinStrings.annotation_type.name}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {querySummary.annotations.join(", ")}
+                      {annotations
+                        .map(anno => anno.label)
+                        .join(` ${annotationOperator} `)}
                     </Col>
                   </Row>
                 )}
