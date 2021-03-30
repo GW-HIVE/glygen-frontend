@@ -97,7 +97,7 @@
       },
       {
         "id": "$regex",
-        "name": "regex"
+        "name": "Match"
       }
     ],
     "aggregators": [
