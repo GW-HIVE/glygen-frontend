@@ -572,7 +572,11 @@
       "annotation_type": {
         "name": "Annotation Type",
         "shortName": "Annotation Type",
-        "tooltip": {},
+        "tooltip": {
+          "title": "Annotation Type",
+          "text": "You can search site by entering Annotation Type.",
+          "urlText": "Read more..."
+        },
         "id": "annotation_type"
       },
       "site": {
@@ -1133,10 +1137,10 @@
       "glytoucan_ac": {
         "name": "GlyTouCan Accession"
       },
-       "motif_keywords": {
+      "motif_keywords": {
         "name": "Motif Group"
       },
-       "reducing_end": {
+      "reducing_end": {
         "name": "Reducing End"
       }
     }
@@ -1585,7 +1589,7 @@
     },
     "proteinsite_jsondata": {
       "id": "proteinsite_jsondata",
-      "displayname": "ProteinSite data (*.json)",
+      "displayname": "Site data (*.json)",
       "tooltip": " proteinsite_jsondata Information for selected accession"
     },
     "protein_csvdata": {

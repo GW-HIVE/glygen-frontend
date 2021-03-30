@@ -44,7 +44,6 @@ const SiteList = props => {
 
     logActivity("user", id);
 
-    // const dataPromise = getSuperSearchList(id);
     const dataPromise = Promise.all([
       getSiteSearchInit(),
       getSuperSearchList(id)
@@ -62,7 +61,6 @@ const SiteList = props => {
         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
         setPage(currentPage);
         setTotalSize(data.pagination.total_length);
-
         setConfigData(initData);
       }
     });

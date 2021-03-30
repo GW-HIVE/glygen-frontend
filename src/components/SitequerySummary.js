@@ -48,11 +48,6 @@ const SiteQuerySummary = props => {
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
 
-  function formatProtein() {
-    const ProteinAc = data.uniprot_ac;
-    return ProteinAc.split(",").join(", ");
-  }
-
   const querySummary = createSiteQuerySummary(data);
 
   let annotations = [];
@@ -69,7 +64,7 @@ const SiteQuerySummary = props => {
   let annotationOperator = "";
   if (querySummary.annotationOperator) {
     annotationOperator =
-      querySummary.annotationOperator === "$and" ? "and" : "or";
+      querySummary.annotationOperator === "$and" ? "And" : "Or";
   }
 
   return (

@@ -255,7 +255,7 @@ const SiteSearchControl = props => {
                     title={commonProteinData.glycosylated_aa.tooltip.title}
                     text={commonProteinData.glycosylated_aa.tooltip.text}
                   />
-                  {proteinStrings.glycosylated_aa.site_form}:
+                  {proteinStrings.glycosylated_aa.site_form}
                 </Typography>
                 <SelectControl
                   inputValue={aminoType}
@@ -286,7 +286,7 @@ const SiteSearchControl = props => {
                         title={commonProteinData.annotation.tooltip.title}
                         text={commonProteinData.annotation.tooltip.text}
                       />
-                      {proteinStrings.annotation_type.name}:
+                      {proteinStrings.annotation_type.name}
                     </Typography>
                     <MultiselectTextInput
                       inputValue={annotations}
