@@ -550,7 +550,7 @@ const IdMapping = (props) => {
                       {
                         orderID: 100,
                         example: {
-                          name: `Example ${idMapSearchData.inputNamespace}: `,
+                          name: `Example for ${idMapSearchData.inputNamespace}: `,
                           id: initData[idMapSearchData.recordType].namespace[
                             idMapSearchData.inputNamespace
                           ].example_id_list.join(", "),
