@@ -23,6 +23,8 @@ import { Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { getSuperSearch } from '../data/supersearch';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import LineTooltip from "../components/tooltip/LineTooltip";
+import stringConstants from "../data/json/stringConstants";
 
 /**
  * Super search component for showing super search tabs.
@@ -31,6 +33,7 @@ const SuperSearch = (props) => {
   let superSearchJSONData = superSearchData.super_search;
   let superSearchTutorialData = superSearchData.tutorial;
   let superSearchCommonData = superSearchData.common;
+  let superSearchStringCommonData = stringConstants.super_search.common;
 
 
   let { id } = useParams("");
@@ -339,35 +342,53 @@ const SuperSearch = (props) => {
 									{/* Buttons */}
 									<Grid item xs={12} sm={12}>
 										<Row className="gg-align-right mt-n4 mr-4 pr-2">
-											<Button className="gg-btn-outline mt-4 mr-4" 
-												onClick={() => setEnableDebug(!enableDebug)}			
+											<LineTooltip text={superSearchStringCommonData.enable_debug.tooltip.text}>
+												<Button className="gg-btn-outline mt-4 mr-4" 
+													onClick={() => setEnableDebug(!enableDebug)}			
+												>
+													{enableDebug ? superSearchStringCommonData.enable_debug.disable_name : superSearchStringCommonData.enable_debug.enable_name}
+												</Button>
+											</LineTooltip>
+											<LineTooltip text={superSearchStringCommonData.simple_view.tooltip.text}>
+												<Button className="gg-btn-outline mt-4 mr-4" 
+													onClick={() => setShowData(!showData)}			
+												>
+													{showData ? superSearchStringCommonData.simple_view.simple_name : superSearchStringCommonData.simple_view.advanced_name}
+												</Button>
+											</LineTooltip>
+											<LineTooltip text={superSearchStringCommonData.try_sample_query.tooltip.text}>
+												<Button className="gg-btn-outline mt-4 mr-4" 
+													onClick={() => setSupSearchSampleQuery(true)}			
+												>
+													{superSearchStringCommonData.try_sample_query.sample_query_name}
+												</Button>
+											</LineTooltip>
+											<LineTooltip text={JSON.stringify(queryData) === JSON.stringify({}) ? ""
+												: (!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) ? "" 
+												: superSearchStringCommonData.reset_query.tooltip.text}
 											>
-												{enableDebug ? "Disable Debug" : "Enable Debug"}
-											</Button>
-											<Button className="gg-btn-outline mt-4 mr-4" 
-												onClick={() => setShowData(!showData)}			
+												<Button className="gg-btn-outline mt-4 mr-4"
+													disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
+													(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
+													onClick={resetSuperSearchQuery}
+													title={""}		
+												>
+													{superSearchStringCommonData.reset_query.reset_query_name}
+												</Button>
+											</LineTooltip>
+											<LineTooltip text={JSON.stringify(queryData) === JSON.stringify({}) ? ""
+													: (!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) ? "" 
+													: superSearchStringCommonData.show_query.tooltip.text}
 											>
-												{showData ? "Simple View" : "Advanced View"}
-											</Button>
-											<Button className="gg-btn-outline mt-4 mr-4" 
-												onClick={() => setSupSearchSampleQuery(true)}			
-											>
-												Try Sample Query
-											</Button>
-											<Button className="gg-btn-outline mt-4 mr-4"
-												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
-												(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
-												onClick={resetSuperSearchQuery}
-											>
-												Reset Query
-											</Button>
-											<Button className="gg-btn-outline mt-4 mr-4" 
-												disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
-														(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
-												onClick={() => setSupSearchShowQuery(true)}			
-											>
-												Show Query
-											</Button>
+												<Button className="gg-btn-outline mt-4 mr-4" 
+													disabled={JSON.stringify(queryData) === JSON.stringify({}) ? true :
+															(!(queryData.ignored_edges && queryData.ignored_edges.length > 0) && !(queryData.concept_query_list && queryData.concept_query_list.length > 0)) }
+													onClick={() => setSupSearchShowQuery(true)}	
+													title={""}		
+												>
+													{superSearchStringCommonData.show_query.show_query_name}
+												</Button>
+											</LineTooltip>
 										</Row>
 									</Grid>
 

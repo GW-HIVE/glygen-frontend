@@ -1154,6 +1154,38 @@
           "title": "Super Search Sample Query List",
           "text": "Select sample super search query and click on search to execute. This will execute sample query and prefill the results. You can click on respective node(s) to see properties used to perform search."
         }
+      },
+      "enable_debug": {
+        "enable_name": "Enable Debug",
+        "disable_name": "Disable Debug",
+        "tooltip": {
+          "text": "Enable/Disable expert mode that allows to create user defined JSON queries."
+        }
+      },
+      "simple_view": {
+        "simple_name": "Simple View",
+        "advanced_name": "Advanced View",
+        "tooltip": {
+          "text": "Switching between simple and advanced mode allows to show and hide edge specific search results."
+        }
+      },
+      "try_sample_query": {
+        "sample_query_name": "Try Sample Query",
+        "tooltip": {
+          "text": "Allows performing predefined queries to get you started with supersearch."
+        }
+      },
+      "reset_query": {
+        "reset_query_name": "Reset Query",
+        "tooltip": {
+          "text": "Remove all applied search filters and revert back to the initial overview."
+        }
+      },
+      "show_query": {
+        "show_query_name": "Show Query",
+        "tooltip": {
+          "text": "Show last executed query in JSON format. Can be used in combination with Debug mode or when reporting problems."
+        }
       }
     }
   },

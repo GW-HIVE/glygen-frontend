@@ -8,17 +8,22 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
  */
 const LineTooltip = (props) => {
     return(
-    <Tooltip
-        disableTouchListener
-        arrow
-        placement={props.placement ? props.placement : 'bottom-start'}
-        classes={{
-            tooltip : 'gg-tooltip'
-        }}
-        title={props.text}
-    >
-        {props.children ? props.children : <HelpOutline className= {props.helpIcon ? props.helpIcon : "gg-helpicon"}/>}
-    </Tooltip>
+        <>
+            {props.text && props.text !== "" && <Tooltip
+                disableTouchListener
+                arrow
+                placement={props.placement ? props.placement : 'bottom-start'}
+                classes={{
+                    tooltip : 'gg-tooltip'
+                }}
+                title={props.text}
+            >
+                {props.children ? props.children : <HelpOutline className= {props.helpIcon ? props.helpIcon : "gg-helpicon"}/>}
+            </Tooltip>}
+            {(props.text === undefined || props.text === "") && 
+                <div>{props.children}</div>
+            }
+        </>
     );
 }
 
