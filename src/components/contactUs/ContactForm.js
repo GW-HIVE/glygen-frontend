@@ -9,7 +9,7 @@ import Select from "@material-ui/core/Select";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 // import { getJson } from '../data/api';
-import { getJson } from "../../data/api";
+import { postTo } from "../../data/api";
 import { validateEmail } from "../../utils/common";
 import { Typography } from "@material-ui/core";
 import { axiosError } from "../../data/axiosError";
@@ -91,8 +91,10 @@ const ContactForm = props => {
     };
     const url = `/auth/contact?query=${JSON.stringify(formData)}`;
     // const url = `/auth/contact?query=${JSON.stringify(contactUsData)}`;
-
-    getJson(url)
+		const myHeaders = {
+			"Content-Type": "application/x-www-form-urlencoded",
+		  };
+    postTo(url, myHeaders)
       .then(response => {
         logActivity("user", "", "Message sent from contact us page.");
         setContactUsResponseMessage(decodeURIComponent(response.data.message)); //decodeURIComponent()
