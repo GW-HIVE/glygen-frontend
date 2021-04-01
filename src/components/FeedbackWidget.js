@@ -61,7 +61,7 @@ const FeedbackWidget = (props) => {
 		const myHeaders = {
 			"Content-Type": "application/x-www-form-urlencoded",
 		  };
-		  postTo(url, myHeaders)
+		postTo(url, myHeaders)
 			.then((response) => {
 				setContactUsResponseMessage(response.data.message);
 			})
