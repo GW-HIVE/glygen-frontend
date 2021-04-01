@@ -304,7 +304,7 @@ export const createSiteQuerySummary = query => {
             }
             result.annotations.push(listItem.path);
 
-            result.annotationOperator = querySection.query.aggregator;
+            result.annotationOperation = querySection.query.aggregator;
           } else if (listItem.path === "start_pos") {
             start = listItem.numeric_value;
           } else if (listItem.path === "end_pos") {

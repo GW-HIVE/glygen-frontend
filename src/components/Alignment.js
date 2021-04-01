@@ -32,13 +32,13 @@ function formatSequenceBlocks(sequenceObject, perLine, index) {
       sequences: sequenceObject.sequences.map(function(aln) {
         return {
           start: x,
-
           id: aln.id,
           // tax_id: aln.tax_id,
           uniprot_id: aln.uniprot_id,
           // tax_name: aln.tax_name,
           name: aln.name,
-          string: aln.aln.substr(x, perLine)
+          string: aln.aln.substr(x, perLine),
+          clickThruUrl: aln.clickThruUrl ? aln.clickThruUrl : ""
         };
       }),
       // consensus data for block
@@ -71,7 +71,7 @@ const Alignment = ({ alignmentData, perLine, start }) => {
                   className="aln-line-header"
                   style={{ paddingLeft: "10px" }}
                 >
-                  <a href={routeConstants.proteinDetail}>{aln.id}</a>
+                  <a href={aln.clickThruUrl}>{aln.id}</a>
                 </div>
                 <div className="aln-line-header">{aln.uniprot_id}</div>
                 <div

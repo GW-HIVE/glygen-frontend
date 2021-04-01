@@ -61,10 +61,10 @@ const SiteQuerySummary = props => {
       return querySummary.annotations.includes(annotation.id);
     });
   }
-  let annotationOperator = "";
-  if (querySummary.annotationOperator) {
-    annotationOperator =
-      querySummary.annotationOperator === "$and" ? "And" : "Or";
+  let annotationOperation = "";
+  if (querySummary.annotationOperation) {
+    annotationOperation =
+      querySummary.annotationOperation === "$and" ? "And" : "Or";
   }
 
   return (
@@ -95,7 +95,7 @@ const SiteQuerySummary = props => {
                     </Col>
                   </Row>
                 )}
-                {annotations && (
+                {annotations && !!annotations.length && (
                   <Row className="summary-table-col" sm={12}>
                     <Col align="right" xs={6} sm={6} md={6} lg={6}>
                       {proteinStrings.annotation_type.name}:
@@ -103,7 +103,7 @@ const SiteQuerySummary = props => {
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
                       {annotations
                         .map(anno => anno.label)
-                        .join(` ${annotationOperator} `)}
+                        .join(` ${annotationOperation} `)}
                     </Col>
                   </Row>
                 )}
