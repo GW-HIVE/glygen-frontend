@@ -310,7 +310,7 @@ const SiteSearchControl = props => {
                     <FormControl fullWidth variant="outlined">
                       <SelectControl
                         inputValue={annotationOperation}
-                        menu={advancedSearch.aa_list.operations}
+                        menu={advancedSearch.aa_listforsite.operations}
                         setInputValue={setAnnotationOperation}
                       />
                     </FormControl>

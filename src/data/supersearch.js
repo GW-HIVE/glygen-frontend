@@ -87,18 +87,29 @@ const constructSiteSearchObject = queryObject => {
           path: "uniprot_ac",
           order: index,
           operator: "$eq",
-          string_value: protein
+          string_value: []
         }))
       }
     });
   }
 
-  if (
-    min ||
-    max ||
-    (annotations && annotations.length) ||
-    (aminoType && aminoType.length)
-  ) {
+  if (annotations && annotations.length) {
+    formObject.push({
+      concept: "site",
+      query: {
+        aggregator: annotationOperation,
+        aggregated_list: [],
+        unaggregated_list: annotations.map((annotation, index) => ({
+          path: annotation,
+          order: index,
+          operator: "$eq",
+          string_value: true
+        }))
+      }
+    });
+  }
+
+  if (min || max || (aminoType && aminoType.length)) {
     const siteQuery = {
       concept: "site",
       query: {
