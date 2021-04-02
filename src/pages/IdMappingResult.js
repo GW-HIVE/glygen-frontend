@@ -55,7 +55,8 @@ const IdMappingResult = (props) => {
           logActivity("user", id, "No results. " + message);
           setPageLoading(false);
         } else {
-          setData(data.results);
+          setData(data.results.map((row) =>  { row.link = data.cache_info.query.recordtype === "glycan" ? routeConstants.glycanDetail : routeConstants.proteinDetail
+                                              return row; }));
           setLegends(data.cache_info.legends);
           setQuery(data.cache_info.query);
           setTimeStamp(data.cache_info.ts);
@@ -109,7 +110,8 @@ const IdMappingResult = (props) => {
       // place to change values before rendering
       // if (!data.error_code) {
       setLegends(data.cache_info.legends);
-      setData(data.results);
+      setData(data.results.map((row) =>  { row.link = data.cache_info.query.recordtype === "glycan" ? routeConstants.glycanDetail : routeConstants.proteinDetail
+                                          return row; }));
       setTimeStamp(data.cache_info.ts);
       setPagination(data.pagination);
       setTotalSize(data.pagination.total_length);
@@ -181,9 +183,7 @@ const IdMappingResult = (props) => {
           <LineTooltip text="View details">
             <Link
               to={
-                legends.anchor === "GlyTouCan Ac"
-                  ? routeConstants.glycanDetail + row.anchor
-                  : routeConstants.proteinDetail + row.anchor
+                  row.link + row.anchor
               }
             >
               {row.anchor}
