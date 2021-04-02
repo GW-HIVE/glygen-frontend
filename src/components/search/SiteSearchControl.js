@@ -44,7 +44,7 @@ const SiteSearchControl = props => {
   const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
   const [aminoType, setAminoType] = useState("");
-  const [annotationOperation, setAnnotationOperation] = useState("and");
+  const [annotationOperation, setAnnotationOperation] = useState("$and");
   const [annotations, setAnnotations] = useState([]);
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
