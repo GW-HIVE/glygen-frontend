@@ -19,6 +19,8 @@ import stringConstants from "../data/json/stringConstants";
 import IdMappingQuerySummary from "../components/IdMappingQuerySummary";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import DownloadAllButton from "../components/DownloadAllButton";
+import { Link } from "react-router-dom";
+import LineTooltip from "../components/tooltip/LineTooltip";
 const mappedStrings = stringConstants.id_mapping.common.mapped;
 
 const IdMappingResult = (props) => {
@@ -174,6 +176,22 @@ const IdMappingResult = (props) => {
           </div>
         );
       },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View details">
+            <Link
+              to={
+                legends.anchor === "GlyTouCan Ac"
+                  ? routeConstants.glycanDetail + row.anchor
+                  : routeConstants.proteinDetail + row.anchor
+              }
+            >
+              {row.anchor}
+            </Link>
+          </LineTooltip>
+        ) : (
+          ""
+        ),
     },
     {
       dataField: mappedStrings.to.shortName,
