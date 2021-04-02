@@ -93,8 +93,8 @@ const ProteinAlignment = () => {
       sequences: data.sequences.map(seq => ({
         ...seq,
         clickThruUrl: isIsoform
-          ? `${routeConstants.proteinDetail}${seq.id}#Isoforms`
-          : `${routeConstants.proteinDetail}${id}`
+          ? `${routeConstants.proteinDetail}${id}#Isoforms`
+          : `${routeConstants.proteinDetail}${seq.id}`
       }))
     };
   }
