@@ -1159,7 +1159,7 @@
         "enable_name": "Enable Debug",
         "disable_name": "Disable Debug",
         "tooltip": {
-          "text": "Enable/Disable expert mode that allows to create user defined JSON queries."
+          "text": "Enable/Disable expert mode that allows creation of user defined JSON queries."
         }
       },
       "simple_view": {
