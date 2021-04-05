@@ -103,7 +103,7 @@ const constructSiteSearchObject = queryObject => {
           path: annotation,
           order: index,
           operator: "$eq",
-          string_value: true
+          string_value: "true"
         }))
       }
     });
