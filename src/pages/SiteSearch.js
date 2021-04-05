@@ -16,7 +16,6 @@ import {
 import siteData from "../data/json/siteData";
 import { logActivity } from "../data/logging";
 import { axiosError } from "../data/axiosError";
-import { getSiteSearch } from "../data/protein";
 import FeedbackWidget from "../components/FeedbackWidget";
 import ProteinTutorial from "../components/tutorial/ProteinTutorial";
 

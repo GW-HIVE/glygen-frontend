@@ -60,6 +60,9 @@ const SiteSearchControl = props => {
 
   useEffect(() => {
     setPageLoading(true);
+    document.addEventListener('click', () => {
+			setAlertTextInput({"show": false})
+		});
     logActivity();
     setAlertTextInput({ show: false });
     getSiteSearchInit().then(response => {
@@ -138,7 +141,7 @@ const SiteSearchControl = props => {
     setMaxRange("");
     setAnnotations([]);
     setAminoType("");
-    setAnnotationOperation("");
+    setAnnotationOperation("$and");
   };
 
   const handlePositionChange = event => {
@@ -169,7 +172,12 @@ const SiteSearchControl = props => {
       aminoType: queryObject.aminoType,
       annotations: queryObject.annotations.map(x => x.id.toLowerCase())
     })
-      .then(listId => {
+      .then((response) => {
+        let listId = undefined;
+        
+        if (response.data && response.data.results_summary && response.data.results_summary.site && response.data.results_summary.site.list_id)
+          listId = response.data.results_summary.site.list_id;
+
         if (listId) {
           window.location = siteListRoute + listId;
         } else {
@@ -197,7 +205,12 @@ const SiteSearchControl = props => {
       >
         <PageLoader pageLoading={pageLoading} />
         <TextAlert alertInput={alertTextInput} />
-
+        <DialogAlert
+						alertInput={alertDialogInput}
+						setOpen={(input) => {
+							setAlertDialogInput({"show": input})
+						}}
+					/>					
         {initData && (
           <>
             {/* Buttons Top */}

@@ -93,23 +93,7 @@ const constructSiteSearchObject = queryObject => {
     });
   }
 
-  if (annotations && annotations.length) {
-    formObject.push({
-      concept: "site",
-      query: {
-        aggregator: annotationOperation,
-        aggregated_list: [],
-        unaggregated_list: annotations.map((annotation, index) => ({
-          path: annotation,
-          order: index,
-          operator: "$eq",
-          string_value: "true"
-        }))
-      }
-    });
-  }
-
-  if (min || max || (aminoType && aminoType.length)) {
+  if (min || max || (aminoType && aminoType.length) || (annotations && annotations.length)) {
     const siteQuery = {
       concept: "site",
       query: {
@@ -127,7 +111,9 @@ const constructSiteSearchObject = queryObject => {
         operator: "$eq",
         string_value: aminoType
       });
+      order++;
     }
+
 
     if (min || max) {
       siteQuery.query.unaggregated_list.push({
@@ -151,25 +137,38 @@ const constructSiteSearchObject = queryObject => {
 
     if (annotations && annotations.length) {
       let targetList = siteQuery.query.unaggregated_list;
-
-      if (annotationOperation === "or") {
+      if (annotationOperation === "$or" && annotations.length > 1) {
         const aggregator = {
           aggregator: "$or",
+          aggregated_list: [],
           unaggregated_list: []
         };
 
-        siteQuery.query.aggregated_list.push(aggregator);
-        targetList = aggregator.unaggregated_list;
-      }
+        for (let annotation of annotations) {
+          aggregator.unaggregated_list.push({
+            path: annotation,
+            order,
+            operator: "$eq",
+            string_value: "true"
+          });
+          order++;
+        }
 
-      for (let annotation of annotations) {
-        targetList.push({
-          path: annotation,
-          order,
-          operator: "$eq",
-          string_value: "true"
-        });
-        order++;
+        if (siteQuery.query.unaggregated_list.length > 0) {
+          siteQuery.query.aggregated_list.push(aggregator);
+        } else {
+          siteQuery.query = aggregator;
+        }
+      } else {
+        for (let annotation of annotations) {
+          targetList.push({
+            path: annotation,
+            order,
+            operator: "$eq",
+            string_value: "true"
+          });
+          order++;
+        }
       }
     }
 
@@ -183,11 +182,7 @@ const constructSiteSearchObject = queryObject => {
 
 export const getSiteSearch = async queryObject => {
   const formObject = constructSiteSearchObject(queryObject);
-  const superSearchData = await getSuperSearch(formObject);
-  const listId = superSearchData.data.results_summary.site.list_id;
-  // const listLookupData = await getSuperSearchList(listId);
-  // return listLookupData.data;
-  return listId;
+  return getSuperSearch(formObject);
 };
 
 const yesNoFormater = (value, row) => {
