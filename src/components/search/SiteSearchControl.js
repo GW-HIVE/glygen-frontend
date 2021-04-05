@@ -204,13 +204,17 @@ const SiteSearchControl = props => {
         justify="center"
       >
         <PageLoader pageLoading={pageLoading} />
-        <TextAlert alertInput={alertTextInput} />
         <DialogAlert
 						alertInput={alertDialogInput}
 						setOpen={(input) => {
 							setAlertDialogInput({"show": input})
 						}}
 					/>					
+
+        <Grid item xs={12} sm={10}>
+          <TextAlert alertInput={alertTextInput} /> 
+        </Grid>
+
         {initData && (
           <>
             {/* Buttons Top */}
