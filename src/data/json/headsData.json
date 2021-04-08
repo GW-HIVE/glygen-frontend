@@ -482,6 +482,19 @@
       }
     ]
   },
+  "publicationDetail": {
+    "title": "Publication | Specific Detail | glygen.org",
+    "meta": [
+      {
+        "name": "description",
+        "content": "Publication Specific Detail that include title, authors, journal, publication date, pmid, and other information."
+      },
+      {
+        "name": "keywords",
+        "content": "title, authors, journal, publication date, pmid, gleneral, Glycosylation, Cell Line / Tissue, Abundance, Referenced Proteins, Referenced Glycans."
+      }
+    ]
+  },
   "newPage": {
     "title": "",
     "meta": [
