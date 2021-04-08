@@ -254,7 +254,7 @@ export default function Footer() {
                   </a>
                   under the grant #{" "}
                   <a
-                    href="https://reporter.nih.gov/project-details/9391499"
+                    href="https://reporter.nih.gov/search/21XOU9VcTUKlP1QkVHmzog/project-details/9942478"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={classes.link}
