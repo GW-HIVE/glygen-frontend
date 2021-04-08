@@ -737,6 +737,18 @@
         "tooltip": {},
         "id": "endposition"
       },
+       "kinase_uniprot_canonical_ac": {
+        "name": "Kinase UniProt Canonical Accession",
+        "shortName": "",
+        "tooltip": {},
+        "id": "kinase_uniprot_canonical_ac"
+      },
+       "kinase_gene_name": {
+        "name": "Kinase Gene Name",
+        "shortName": "",
+        "tooltip": {},
+        "id": "kinase_gene_name"
+      },
       "uberonN": {
         "name": "UBERON.",
         "shortName": "UBERON",
@@ -1502,6 +1514,11 @@
       "displayname": "Glycosylation",
       "tooltip": " glycosylation Information for selected Protein accession"
     },
+      "phosphorylation": {
+      "id": "phosphorylation",
+      "displayname": "Phosphorylation",
+      "tooltip": ""
+    },
     "sequence": {
       "id": "sequence",
       "displayname": "Sequence",
@@ -1596,6 +1613,22 @@
       "id": "search_by_disease",
       "displayname": "Disease",
       "tooltip": " ssearch_by_disease"
+    },
+    "cell_line_tissue": {
+      "id": "cell_line_tissue",
+      "displayname": "Cell Line/Tissue"
+    },
+    "abundance": {
+      "id": "abundance",
+      "displayname": "Abundance"
+    },
+    "referenced_proteins": {
+      "id": "referenced_proteins",
+      "displayname": "Referenced Proteins"
+    },
+     "referenced_glycans": {
+      "id": "referenced_glycans",
+      "displayname": "Referenced Glycans"
     }
   },
   "download": {
@@ -1693,6 +1726,16 @@
       "id": "list_all_csvdata",
       "displayname": "Two tables data (*.csv)",
       "tooltip": "list_all_csvdata ID mapping information for both mapped and unmapped IDs"
+    },
+    "publication_csvdata": {
+      "id": "publication_csvdata",
+      "displayname": "Publication data (*.csv)",
+      "tooltip": "publication_csvdata Information for publication specific detail"
+    },
+     "publication_jsondata": {
+      "id": "publication_jsondata",
+      "displayname": "Publication data (*.json)",
+      "tooltip": "publication_jsondata Information for publication specific detail"
     }
   },
   "id_mapping": {
