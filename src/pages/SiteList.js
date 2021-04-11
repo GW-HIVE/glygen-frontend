@@ -15,7 +15,6 @@ import routeConstants from "../data/json/routeConstants";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
-import DownloadButton from "../components/DownloadButton";
 import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
 
@@ -75,6 +74,32 @@ const SiteList = props => {
       setPageLoading(false);
     });
   }, []);
+
+  // useEffect(() => {
+  //   setPageLoading(true);
+  //   logActivity("user", id);
+  //   getSuperSearchList(id)
+  //     .then(({ data }) => {
+  //       if (data.error_code) {
+  //         let message = "list api call";
+  //         logActivity("user", id, "No results. " + message);
+  //         setPageLoading(false);
+  //       } else {
+  //         setData(data.results);
+  //         setQuery(data.cache_info.query);
+  //         setTimeStamp(data.cache_info.ts);
+  //         setPagination(data.pagination);
+  //         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+  //         setPage(currentPage);
+  //         setTotalSize(data.pagination.total_length);
+  //         setPageLoading(false);
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       let message = "list api call";
+  //       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
+  //     });
+  // }, []);
 
   const handleTableChange = (
     type,
@@ -140,24 +165,6 @@ const SiteList = props => {
           )}
         </section>
         <section>
-          <DownloadButton
-            types={[
-              {
-                display:
-                  stringConstants.download.proteinsite_csvdata.displayname,
-                type: "csv",
-                data: "site_list"
-              },
-              {
-                display:
-                  stringConstants.download.proteinsite_jsondata.displayname,
-                type: "json",
-                data: "site_list"
-              }
-            ]}
-            dataId={id}
-            itemType="site"
-          />
           {/* {selectedColumns && selectedColumns.length !== 0 && ( */}
           {!!(data && data.length) && (
             <PaginatedTable
