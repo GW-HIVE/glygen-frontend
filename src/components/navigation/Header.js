@@ -14,7 +14,8 @@ import GlobalSearchControl from "../search/GlobalSearchControl";
 import UserTrackingBanner from "../alert/UserTrackingBanner";
 import { useLocation } from "react-router-dom";
 import { ReactComponent as MediaWikiIcon } from "../../images/icons/mediaWikiIcon.svg";
-
+import routeConstants from "../../data/json/routeConstants.json";
+import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
 import {
   GLYGEN_API,
   GLYGEN_BETA,
@@ -25,9 +26,12 @@ import {
   GLYGEN_SANDBOX,
   GLYGEN_ENV,
   GLYCAN_SEQ_LOOKUP,
+  TWITTER,
+  YOUTUBE,
+  GITHUB,
+  WIKI,
+  PINTEREST,
 } from "../../envVariables";
-import routeConstants from "../../data/json/routeConstants.json";
-import betaWatermarkImg from "../../images/icons/beta-watermark.svg";
 
 export default function Header(props) {
   const location = useLocation();
@@ -71,44 +75,19 @@ export default function Header(props) {
               </div>
             )}
             <div>
-              <a
-                href="https://twitter.com/gly_gen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gg-link"
-              >
+              <a href={TWITTER} target="_blank" rel="noopener noreferrer" className="gg-link">
                 <TwitterIcon className="mr-3" />
               </a>
-              <a
-                href="https://www.youtube.com/channel/UCqfvlu86I7n71iqCG5yx8bg/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gg-link"
-              >
+              <a href={YOUTUBE} target="_blank" rel="noopener noreferrer" className="gg-link">
                 <YouTubeIcon className="mr-3" />
               </a>
-              <a
-                href="https://github.com/glygener"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gg-link"
-              >
+              <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="gg-link">
                 <GitHubIcon className="mr-3" />
               </a>
-              <a
-                href="https://wiki.glygen.org/index.php/Main_Page"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="media-wiki-icon"
-              >
+              <a href={WIKI} target="_blank" rel="noopener noreferrer" className="media-wiki-icon">
                 <MediaWikiIcon className="mr-3" />
               </a>
-              <a
-                href="https://www.pinterest.com/myGlyGen/glygen-portal/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gg-link"
-              >
+              <a href={PINTEREST} target="_blank" rel="noopener noreferrer" className="gg-link">
                 <PinterestIcon className="mr-3" />
               </a>
             </div>
