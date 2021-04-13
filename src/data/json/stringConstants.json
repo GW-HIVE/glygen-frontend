@@ -737,13 +737,13 @@
         "tooltip": {},
         "id": "endposition"
       },
-       "kinase_uniprot_canonical_ac": {
+      "kinase_uniprot_canonical_ac": {
         "name": "Kinase UniProt Canonical Accession",
         "shortName": "",
         "tooltip": {},
         "id": "kinase_uniprot_canonical_ac"
       },
-       "kinase_gene_name": {
+      "kinase_gene_name": {
         "name": "Kinase Gene Name",
         "shortName": "",
         "tooltip": {},
@@ -1514,7 +1514,7 @@
       "displayname": "Glycosylation",
       "tooltip": " glycosylation Information for selected Protein accession"
     },
-      "phosphorylation": {
+    "phosphorylation": {
       "id": "phosphorylation",
       "displayname": "Phosphorylation",
       "tooltip": ""
@@ -1626,7 +1626,7 @@
       "id": "referenced_proteins",
       "displayname": "Referenced Proteins"
     },
-     "referenced_glycans": {
+    "referenced_glycans": {
       "id": "referenced_glycans",
       "displayname": "Referenced Glycans"
     }
@@ -1636,6 +1636,11 @@
       "id": "glycan_image",
       "displayname": "Glycan Image (*.png)",
       "tooltip": " glycan_image Information for selected accession"
+    },
+    "proteinsite_csvdata": {
+      "id": "proteinsite_jsondata",
+      "displayname": "Site data (*.csv)",
+      "tooltip": " proteinsite_jsondata Information for selected accession"
     },
     "glycan_jsondata": {
       "id": "glycan_jsondata",
@@ -1732,7 +1737,7 @@
       "displayname": "Publication data (*.csv)",
       "tooltip": "publication_csvdata Information for publication specific detail"
     },
-     "publication_jsondata": {
+    "publication_jsondata": {
       "id": "publication_jsondata",
       "displayname": "Publication data (*.json)",
       "tooltip": "publication_jsondata Information for publication specific detail"
