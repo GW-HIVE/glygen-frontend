@@ -737,14 +737,14 @@
         "tooltip": {},
         "id": "endposition"
       },
-      "kinase_uniprot_canonical_ac": {
-        "name": "Kinase UniProt Canonical Accession",
+      "kinase_protein": {
+        "name": "Kinase Protein",
         "shortName": "",
         "tooltip": {},
         "id": "kinase_uniprot_canonical_ac"
       },
       "kinase_gene_name": {
-        "name": "Kinase Gene Name",
+        "name": "Kinase Gene",
         "shortName": "",
         "tooltip": {},
         "id": "kinase_gene_name"

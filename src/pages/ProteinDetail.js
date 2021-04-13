@@ -1168,46 +1168,65 @@ const ProteinDetail = (props) => {
     },
     {
       dataField: "kinase_uniprot_canonical_ac",
-      text: proteinStrings.kinase_uniprot_canonical_ac.name,
+      text: proteinStrings.kinase_protein.name,
       sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          width: "17%",
-        };
-      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View protein details">
+            <Link to={routeConstants.proteinDetail + row.kinase_uniprot_canonical_ac}>
+              {row.kinase_uniprot_canonical_ac}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "No data available"
+        ),
     },
     {
       dataField: "kinase_gene_name",
       text: proteinStrings.kinase_gene_name.name,
       sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          width: "17%",
-        };
-      },
+      formatter: (value, row) => (value ? <>{row.kinase_gene_name}</> : "No data available"),
     },
     {
       dataField: "start_pos",
-      text: proteinStrings.startpos.name,
-      sort: true,
-      defaultSortField: "start_pos",
-      sortFunc: (a, b, order, start_pos) => {
-        if (order === "asc") {
-          return b - a;
-        }
-        return a - b; // desc
-      },
-    },
-    {
-      dataField: "end_pos",
-      text: proteinStrings.endpos.name,
-      sort: true,
-    },
-    {
-      dataField: "residue",
       text: proteinStrings.residue.name,
+      // text: proteinStrings.startpos.name,
       sort: true,
+      // defaultSortField: "start_pos",
+      // sortFunc: (a, b, order, start_pos) => {
+      //   if (order === "asc") {
+      //     return b - a;
+      //   }
+      //   return a - b; // desc
+      // },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        ),
     },
+    // {
+    //   dataField: "end_pos",
+    //   text: proteinStrings.endpos.name,
+    //   sort: true,
+    // },
+    // {
+    //   dataField: "residue",
+    //   text: proteinStrings.residue.name,
+    //   sort: true,
+    // },
   ];
   // ==================================== //
   /**
