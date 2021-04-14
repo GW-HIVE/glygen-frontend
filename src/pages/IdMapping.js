@@ -480,14 +480,22 @@ const IdMapping = (props) => {
                   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
                     : [
-                        ...initData[idMapSearchData.recordType].namespace[
-                          idMapSearchData.inputNamespace
-                        ].target_list.map((toId) => {
-                          return {
-                            id: toId,
-                            name: toId,
-                          };
-                        }),
+                        ...Object.keys(initData[idMapSearchData.recordType].namespace).map(
+                          (toId) => {
+                            return {
+                              id: toId,
+                              name: toId,
+                            };
+                          }
+                        ),
+                        // ...initData[idMapSearchData.recordType].namespace[
+                        //   idMapSearchData.inputNamespace
+                        // ].target_list.map((toId) => {
+                        //   return {
+                        //     id: toId,
+                        //     name: toId,
+                        //   };
+                        // }),
                       ]
                 }
                 required={true}
