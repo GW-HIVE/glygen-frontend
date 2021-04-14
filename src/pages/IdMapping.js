@@ -446,6 +446,20 @@ const IdMapping = (props) => {
                         ),
                       ]
                 }
+                // menu={
+                //   idMapSearchData.recordType === "any" || !Object.keys(initData).length
+                //     ? []
+                //     : [
+                //         ...Object.keys(initData[idMapSearchData.recordType].namespace).map(
+                //           (fromId) => {
+                //             return {
+                //               id: fromId,
+                //               name: fromId,
+                //             };
+                //           }
+                //         ),
+                //       ]
+                // }
                 required={true}
               />
             </FormControl>
@@ -480,16 +494,30 @@ const IdMapping = (props) => {
                   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
                     ? []
                     : [
-                        ...initData[idMapSearchData.recordType].namespace[
-                          idMapSearchData.inputNamespace
-                        ].target_list.map((toId) => {
-                          return {
-                            id: toId,
-                            name: toId,
-                          };
-                        }),
+                        ...Object.keys(initData[idMapSearchData.recordType].namespace).map(
+                          (toId) => {
+                            return {
+                              id: toId,
+                              name: toId,
+                            };
+                          }
+                        ),
                       ]
                 }
+                // menu={
+                //   idMapSearchData.recordType === "any" || idMapSearchData.inputNamespace === "any"
+                //     ? []
+                //     : [
+                //         ...initData[idMapSearchData.recordType].namespace[
+                //           idMapSearchData.inputNamespace
+                //         ].target_list.map((toId) => {
+                //           return {
+                //             id: toId,
+                //             name: toId,
+                //           };
+                //         }),
+                //       ]
+                // }
                 required={true}
               />
             </FormControl>
