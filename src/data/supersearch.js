@@ -93,7 +93,12 @@ const constructSiteSearchObject = queryObject => {
     });
   }
 
-  if (min || max || (aminoType && aminoType.length) || (annotations && annotations.length)) {
+  if (
+    min ||
+    max ||
+    (aminoType && aminoType.length) ||
+    (annotations && annotations.length)
+  ) {
     const siteQuery = {
       concept: "site",
       query: {
@@ -113,7 +118,6 @@ const constructSiteSearchObject = queryObject => {
       });
       order++;
     }
-
 
     if (min || max) {
       siteQuery.query.unaggregated_list.push({
@@ -273,40 +277,34 @@ export const SITE_COLUMNS = [
   }
 ];
 
-export const createSiteQuerySummary = query => {
-  let result = {};
+const getDataFromUnaggregatedList = (unaggregatedList, aggregator) => {
+  const result = {};
   let start;
   let end;
 
-  if (query.concept_query_list) {
-    for (let querySection of query.concept_query_list) {
-      if (querySection && querySection.query.unaggregated_list) {
-        for (let listItem of querySection.query.unaggregated_list) {
-          if (listItem.path === "uniprot_ac") {
-            if (!result.proteinId) {
-              result.proteinId = [];
-            }
-            result.proteinId.push(listItem.string_value);
-          } else if (listItem.path === "site_seq") {
-            result.aminoType = listItem.string_value;
-          } else if (
-            ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(
-              listItem.path
-            )
-          ) {
-            if (!result.annotations) {
-              result.annotations = [];
-            }
-            result.annotations.push(listItem.path);
-
-            result.annotationOperation = querySection.query.aggregator;
-          } else if (listItem.path === "start_pos") {
-            start = listItem.numeric_value;
-          } else if (listItem.path === "end_pos") {
-            end = listItem.numeric_value;
-          }
-        }
+  for (let listItem of unaggregatedList) {
+    if (listItem.path === "uniprot_ac") {
+      if (!result.proteinId) {
+        result.proteinId = [];
       }
+      result.proteinId.push(listItem.string_value);
+    } else if (listItem.path === "site_seq") {
+      result.aminoType = listItem.string_value;
+    } else if (
+      ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(
+        listItem.path
+      )
+    ) {
+      if (!result.annotations) {
+        result.annotations = [];
+      }
+      result.annotations.push(listItem.path);
+
+      result.annotationOperation = aggregator;
+    } else if (listItem.path === "start_pos") {
+      start = listItem.numeric_value;
+    } else if (listItem.path === "end_pos") {
+      end = listItem.numeric_value;
     }
   }
 
@@ -317,6 +315,48 @@ export const createSiteQuerySummary = query => {
 
     result.min = start;
     result.max = end;
+  }
+
+  return result;
+};
+
+export const createSiteQuerySummary = query => {
+  let result = {};
+
+  if (query.concept_query_list) {
+    for (let querySection of query.concept_query_list) {
+      if (
+        querySection &&
+        querySection.query &&
+        querySection.query.unaggregated_list
+      ) {
+        const dataFromUnaggregated = getDataFromUnaggregatedList(
+          querySection.query.unaggregated_list,
+          querySection.query.aggregator
+        );
+
+        result = {
+          ...dataFromUnaggregated
+        };
+      }
+
+      if (
+        querySection &&
+        querySection.query &&
+        querySection.query.aggregated_list &&
+        querySection.query.aggregated_list.length
+      ) {
+        const dataFromUnaggregated = getDataFromUnaggregatedList(
+          querySection.query.aggregated_list[0].unaggregated_list,
+          querySection.query.aggregated_list[0].aggregator
+        );
+
+        result = {
+          ...result,
+          ...dataFromUnaggregated
+        };
+      }
+    }
   }
 
   return result;

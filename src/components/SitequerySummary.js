@@ -69,7 +69,7 @@ const SiteQuerySummary = props => {
 
   return (
     <>
-      {/* <pre>Test: {JSON.stringify(data, null, 2)}</pre> */}
+      {/* <pre>Test: {JSON.stringify(querySummary, null, 2)}</pre> */}
       <Card className="text-center summary-panel">
         <Card.Header as="h3" className="panelHeadBgr panelHeadText">
           {title}
