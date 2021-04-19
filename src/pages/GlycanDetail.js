@@ -40,7 +40,8 @@ import { Link } from "react-router-dom";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { Tab, Tabs, Container } from "react-bootstrap";
 import CollapsableReference from "../components/CollapsableReference";
-// import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
+import DirectSearch from "../components/search/DirectSearch.js";
+import { getGlycanSearch } from '../data/glycan';
 
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
@@ -781,6 +782,32 @@ const GlycanDetail = (props) => {
     window.open(url);
   }
 
+  /**
+	 * Function to handle glycan direct search.
+	 **/
+	const glycanSearch = (formObject) => {
+		logActivity("user", id, "Performing Direct Search");
+		let message = "Direct Search query=" + JSON.stringify(formObject);
+		getGlycanSearch(formObject)
+			.then((response) => {
+				if (response.data['list_id'] !== '') {
+					logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+					.finally(() => {	
+						props.history.push(routeConstants.glycanList + response.data['list_id']);
+					});;
+					setPageLoading(false);
+				} else {
+					logActivity("user", "", "No results. " + message);
+					setPageLoading(false);
+					// setAlertTextInput({"show": true, "id": stringConstants.errors.advSerarchError.id})
+					window.scrollTo(0, 0);
+				}
+			})
+			.catch(function (error) {
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+			});
+	};
+
   if (nonExistent) {
     return (
       <Container className="tab-content-border2">
@@ -998,11 +1025,13 @@ const GlycanDetail = (props) => {
                                 <>
                                   <strong> {glycanStrings.mass.shortName}: </strong>
                                   {mass} Da{" "}
-                                  {/* <LineTooltip text="Find all glycans with the same Mass">
-                                    <Link>
-                                      <SearchIcon className="ml-3 custom-icon-blue" />
-                                    </Link>
-                                  </LineTooltip> */}
+                                  <DirectSearch
+                                    text="Find all glycans with the same mass"
+                                    searchType={"glycan"}
+                                    fieldType={glycanStrings.mass.id}
+                                    fieldValue={mass}
+                                    executeSearch={glycanSearch}
+                                  />
                                 </>
                               ) : (
                                 <> </>
@@ -1013,11 +1042,13 @@ const GlycanDetail = (props) => {
                                 <>
                                   <strong> {glycanStrings.mass_pme.shortName}: </strong>
                                   {mass_pme} Da{" "}
-                                  {/* <LineTooltip text="Find all glycans with the same Mass-pMe">
-                                    <Link>
-                                      <SearchIcon className="ml-3 custom-icon-blue" />
-                                    </Link>
-                                  </LineTooltip> */}
+                                  <DirectSearch
+                                    text="Find all glycans with the same permethylated mass"
+                                    searchType={"glycan"}
+                                    fieldType={glycanStrings.mass_pme.id}
+                                    fieldValue={mass_pme}
+                                    executeSearch={glycanSearch}
+                                  />
                                 </>
                               ) : (
                                 <> </>
@@ -1029,11 +1060,13 @@ const GlycanDetail = (props) => {
                           <div>
                             <strong>Composition</strong>:{" "}
                             <CompositionDisplay composition={composition} />{" "}
-                            {/* <LineTooltip text="Find all glycans with the same Composition">
-                              <Link>
-                                <SearchIcon className="ml-3 custom-icon-blue" />
-                              </Link>
-                            </LineTooltip> */}
+                            <DirectSearch
+                              text="Find all glycans with the same composition"
+                              searchType={"glycan"}
+                              fieldType={glycanStrings.composition.id}
+                              fieldValue={composition}
+                              executeSearch={glycanSearch}
+                            />
                           </div>
                         )}
 
@@ -1081,15 +1114,22 @@ const GlycanDetail = (props) => {
                                           </>
                                         )}
                                     </span>
+                                    <span>
+                                    <DirectSearch
+                                      text="Find all glycans with the same type/subtype"
+                                      searchType={"glycan"}
+                                      fieldType={glycanStrings.glycan_type.id}
+                                      fieldValue={{
+                                        type : Formatclassification.type.name,
+                                        subtype : Formatclassification.subtype && Formatclassification.subtype.name  !== "Other" ? Formatclassification.subtype.name : ""
+                                      }}
+                                      executeSearch={glycanSearch}
+                                    />
+                                    </span>
                                     {<br />}
                                   </>
                                 ))}{" "}
                               </Col>
-                              {/* <LineTooltip text="Find all glycans with the same Type/Subtype">
-                                <Link>
-                                  <SearchIcon className="ml-3 custom-icon-blue" />
-                                </Link>
-                              </LineTooltip> */}
                             </Row>
                           </div>
                         )}
@@ -1170,11 +1210,19 @@ const GlycanDetail = (props) => {
                                   </a>
                                 </LineTooltip>
                                 {"]"}{" "}
-                                {/* <LineTooltip text="Find all glycans with the same Organism">
-                                  <Link>
-                                    <SearchIcon className="ml-3 custom-icon-blue" />
-                                  </Link>
-                                </LineTooltip> */}
+                                <DirectSearch
+                                  text="Find all glycans with the same organism"
+                                  searchType={"glycan"}
+                                  fieldType={glycanStrings.organism.id}
+                                  fieldValue={
+                                    {
+                                      organism_list: [{name: orgEvi, id: organismEvidence[orgEvi].taxid}],
+                                      annotation_category: "",
+                                      operation: "or"
+                                    }
+                                  }
+                                  executeSearch={glycanSearch}
+                                />
                                 <EvidenceList evidences={organismEvidence[orgEvi].evidence} />
                               </>
                             </Col>
@@ -1871,11 +1919,13 @@ const GlycanDetail = (props) => {
                                           >
                                             <>{ref.id}</>
                                           </a>{" "}
-                                          {/* <LineTooltip text="Find all glycans with the same PMID">
-                                            <Link>
-                                              <SearchIcon className="ml-3 custom-icon-blue" />
-                                            </Link>
-                                          </LineTooltip> */}
+                                          <DirectSearch
+                                            text={"Find all glycans with the same pmid"}
+                                            searchType={"glycan"}
+                                            fieldType={glycanStrings.pmid.id}
+                                            fieldValue={ref.id}
+                                            executeSearch={glycanSearch}
+                                          />
                                         </>
                                       ))}
                                     </div>

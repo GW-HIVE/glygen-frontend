@@ -47,8 +47,9 @@ import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { Alert, AlertTitle } from "@material-ui/lab";
-// import { ReactComponent as SearchIcon } from "../images/icons/search.svg";
 import CollapsableReference from "../components/CollapsableReference";
+import DirectSearch from "../components/search/DirectSearch.js";
+import { getProteinSearch } from "../data/protein";
 
 const SimpleHelpTooltip = props => {
   const { data } = props;
@@ -935,11 +936,6 @@ const ProteinDetail = props => {
                     {disease.recommended_name.id}
                   </a>
                   ){" "}
-                  {/* <LineTooltip text="Find all proteins / glycoproteins with the same SNV Disease">
-                  <Link>
-                    <SearchIcon className="ml-3 custom-icon-blue" />
-                  </Link>
-                </LineTooltip> */}
                 </span>
               </li>
             </ul>
@@ -1302,6 +1298,32 @@ const ProteinDetail = props => {
       )
     : false;
 
+  /**
+	 * Function to handle protein direct search.
+	 **/
+	const proteinSearch = (formObject) => {
+		logActivity("user", id, "Performing Direct Search");
+		let message = "Direct Search query=" + JSON.stringify(formObject);
+		getProteinSearch(formObject)
+			.then((response) => {
+				if (response.data['list_id'] !== '') {
+					logActivity("user", (id || "") + ">" + response.data['list_id'], message)
+					.finally(() => {	
+						props.history.push(routeConstants.proteinList + response.data['list_id']);
+					});;
+					setPageLoading(false);
+				} else {
+					logActivity("user", "", "No results. " + message);
+					setPageLoading(false);
+					// setAlertTextInput({"show": true, "id": stringConstants.errors.advSerarchError.id})
+					window.scrollTo(0, 0);
+				}
+			})
+			.catch(function (error) {
+				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+			});
+	};
+
   if (nonExistent) {
     return (
       <Container className="tab-content-border2">
@@ -1557,11 +1579,13 @@ const ProteinDetail = props => {
                               {proteinStrings.chemical_mass.name}:{" "}
                             </strong>
                             {addCommas(mass.chemical_mass)} Da{" "}
-                            {/* <LineTooltip text="Find all proteins / glycoproteins with the same Chemical Mass">
-                              <Link>
-                                <SearchIcon className="ml-3 custom-icon-blue" />
-                              </Link>
-                            </LineTooltip> */}
+                            <DirectSearch
+                              text="Find all proteins / glycoproteins with the same chemical mass"
+                              searchType={"protein"}
+                              fieldType={proteinStrings.chemical_mass.id}
+                              fieldValue={mass.chemical_mass}
+                              executeSearch={proteinSearch}
+                            />
                           </div>
 
                           {refseq && (
@@ -2290,11 +2314,13 @@ const ProteinDetail = props => {
                                       >
                                         {term.name} ({term.id})
                                       </a>
-                                      {/* <LineTooltip text="Find all proteins / glycoproteins with the same GO Annotation">
-                                        <Link>
-                                          <SearchIcon className="ml-3 custom-icon-blue" />
-                                        </Link>
-                                      </LineTooltip> */}
+                                      <DirectSearch
+                                        text="Find all proteins / glycoproteins with the same go annotation"
+                                        searchType={"protein"}
+                                        fieldType={proteinStrings.go_id.id}
+                                        fieldValue={term.id}
+                                        executeSearch={proteinSearch}
+                                      />                        
                                     </Col>
                                     <Col sm={3} md={3}>
                                       <EvidenceList
@@ -2561,11 +2587,13 @@ const ProteinDetail = props => {
                                         >
                                           {link.id}
                                         </a>
-                                        {/* <LineTooltip text="Find all proteins / glycoproteins with the same Pathway ID">
-                                          <Link>
-                                            <SearchIcon className="ml-3 custom-icon-blue" />
-                                          </Link>
-                                        </LineTooltip> */}
+                                        <DirectSearch
+                                          text="Find all proteins / glycoproteins with the same pathway"
+                                          searchType={"protein"}
+                                          fieldType={proteinStrings.pathway_id.id}
+                                          fieldValue={link.id}
+                                          executeSearch={proteinSearch}
+                                        />
                                       </li>
                                     </Col>
                                   ))}
@@ -2989,11 +3017,13 @@ const ProteinDetail = props => {
                                             {thisDisease.recommended_name.id}
                                           </a>
                                           )
-                                          {/* <LineTooltip text="Find all proteins / glycoproteins with the same Disease">
-                                            <Link>
-                                              <SearchIcon className="ml-3 custom-icon-blue" />
-                                            </Link>
-                                          </LineTooltip> */}
+                                          <DirectSearch
+                                            text="Find all proteins / glycoproteins with the same disease"
+                                            searchType={"protein"}
+                                            fieldType={proteinStrings.disease_id.id}
+                                            fieldValue={thisDisease.recommended_name.id}
+                                            executeSearch={proteinSearch}
+                                          />
                                           <EvidenceList
                                             inline={true}
                                             evidences={groupEvidences(
@@ -3416,11 +3446,13 @@ const ProteinDetail = props => {
                                           >
                                             <>{ref.id}</>
                                           </a>
-                                          {/* <LineTooltip text="Find all proteins / glycoproteins with the same PMID">
-                                            <Link>
-                                              <SearchIcon className="ml-3 custom-icon-blue" />
-                                            </Link>
-                                          </LineTooltip> */}
+                                          <DirectSearch
+                                            text={"Find all proteins / glycoproteins with the same pmid"}
+                                            searchType={"protein"}
+                                            fieldType={proteinStrings.pmid.id}
+                                            fieldValue={ref.id}
+                                            executeSearch={proteinSearch}
+                                          />
                                         </>
                                       ))}
                                     </div>
