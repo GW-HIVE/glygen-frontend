@@ -8,20 +8,19 @@ import "../../css/Sidebar.css";
 function Sidebar({ items, offset = 105 }) {
   const [activeLink, setActiveLink] = useState(items[0].id);
 
- /**
- * useEffect Hack to handle mozilla back button issue. 
- * Issue - Protein details page - site page - click browser back button and then click on sidebar link - user goes back to site page.
- **/
-  useEffect(() => {
-  }, [items])
+  /**
+   * useEffect Hack to handle mozilla back button issue.
+   * Issue - Protein details page - site page - click browser back button and then click on sidebar link - user goes back to site page.
+   **/
+  useEffect(() => {}, [items]);
 
-   /**
+  /**
    * useLayoutEffect to handle page scroll event and set active side bar link.
    **/
   useLayoutEffect(() => {
     const handleScrollEvent = () => {
       items &&
-        items.map((item) => {
+        items.map(item => {
           var element = document.getElementById(item.id);
           if (element) {
             var elementOffsetTop = element.offsetTop;
@@ -48,21 +47,22 @@ function Sidebar({ items, offset = 105 }) {
   return (
     <div className="sidebar-container sidbar-top-padding">
       <div className="sidebar">
-        {items.map(({ label, id }) => (
-          <>
-            <Link to={"#" + id}>
-              <ul
-                key={id}
-                button
-                onClick={() => setActiveLink(id)}         
-                className={
-                  "sidebar-item" + (activeLink === id ? " active" : "")
-                }
-              >
-                <li className="sidebar-item-text">{label}</li>
-              </ul>
-            </Link>
-          </>
+        {items.map(({ label, id, disabled }) => (
+          <Link to={"#" + id} key={id}>
+            <ul
+              button
+              onClick={() => setActiveLink(id)}
+              className={
+                "sidebar-item" +
+                (activeLink === id ? " active" : "") +
+                (disabled === true ? " disabled" : "")
+              }
+            >
+              <li className={disabled === true ? "" : "sidebar-item-text"}>
+                {label}
+              </li>
+            </ul>
+          </Link>
         ))}
       </div>
     </div>

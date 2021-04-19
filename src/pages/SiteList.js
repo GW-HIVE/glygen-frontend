@@ -16,6 +16,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import DownloadButton from "../components/DownloadButton";
 import { GLYGEN_BASENAME } from "../envVariables";
 
 const proteinStrings = stringConstants.protein.common;
@@ -165,6 +166,25 @@ const SiteList = props => {
           )}
         </section>
         <section>
+          <DownloadButton
+            types={[
+              {
+                display:
+                  stringConstants.download.proteinsite_csvdata.displayname,
+                type: "csv",
+                data: "site_list"
+              },
+              {
+                display:
+                  stringConstants.download.proteinsite_jsondata.displayname,
+                type: "json",
+                data: "site_list"
+              }
+            ]}
+            dataId={id}
+            itemType="site"
+          />
+
           {/* {selectedColumns && selectedColumns.length !== 0 && ( */}
           {!!(data && data.length) && (
             <PaginatedTable
