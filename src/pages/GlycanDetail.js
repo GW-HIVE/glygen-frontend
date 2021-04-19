@@ -252,10 +252,30 @@ const GlycanDetail = props => {
         setPageLoading(false);
         //new side bar
         let newSidebarData = sideBarData;
+        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "General", true);
+        }
         if (!detailDataTemp.species || detailDataTemp.species.length === 0) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
             "Organism",
+            true
+          );
+        }
+        if (!detailDataTemp.names || detailDataTemp.names.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Names", true);
+        }
+        if (!detailDataTemp.motifs || detailDataTemp.motifs.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Motifs", true);
+        }
+
+        if (
+          !detailDataTemp.associated_glycan ||
+          detailDataTemp.associated_glycan.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Associated-Protein",
             true
           );
         }
@@ -269,8 +289,68 @@ const GlycanDetail = props => {
             true
           );
         }
-        if (!detailDataTemp.names || detailDataTemp.names.length === 0) {
-          newSidebarData = setSidebarItemState(newSidebarData, "Names", true);
+        if (
+          !detailDataTemp.bio_Enzymes ||
+          detailDataTemp.bio_Enzymes.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Biosynthetic-Enzymes",
+            true
+          );
+        }
+        if (
+          !detailDataTemp.subsumption ||
+          detailDataTemp.subsumption.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Subsumption",
+            true
+          );
+        }
+        if (
+          !detailDataTemp.expression ||
+          detailDataTemp.expression.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Expression",
+            true
+          );
+        }
+        if (
+          !detailDataTemp.digital_seq ||
+          detailDataTemp.digital_seq.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Digital-Sequence",
+            true
+          );
+        }
+        if (
+          !detailDataTemp.cross_ref ||
+          detailDataTemp.cross_ref.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Cross-References",
+            true
+          );
+        }
+        if (!detailDataTemp.history || detailDataTemp.history.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "History", true);
+        }
+        if (
+          !detailDataTemp.publication ||
+          detailDataTemp.publication.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(
+            newSidebarData,
+            "Publications",
+            true
+          );
         }
         setSidebarData(newSidebarData);
       }
