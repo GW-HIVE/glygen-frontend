@@ -442,7 +442,10 @@ const ProteinDetail = props => {
             true
           );
         }
-        if (!detailDataTemp.homologs || detailDataTemp.homologs.length === 0) {
+        if (
+          !detailDataTemp.orthologs ||
+          detailDataTemp.orthologs.length === 0
+        ) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
             "Homologs",
@@ -453,8 +456,8 @@ const ProteinDetail = props => {
           newSidebarData = setSidebarItemState(newSidebarData, "Disease", true);
         }
         if (
-          !detailDataTemp.expression_Tissue ||
-          detailDataTemp.expression_Tissue.length === 0
+          !detailDataTemp.expression_tissue ||
+          detailDataTemp.expression_tissue.length === 0
         ) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
@@ -463,8 +466,8 @@ const ProteinDetail = props => {
           );
         }
         if (
-          !detailDataTemp.expression_Disease ||
-          detailDataTemp.expression_Disease.length === 0
+          !detailDataTemp.expression_disease ||
+          detailDataTemp.expression_disease.length === 0
         ) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
@@ -2434,6 +2437,7 @@ const ProteinDetail = props => {
                     <h4 className="gg-green d-inline">
                       {stringConstants.sidebar.snv.displayname}
                     </h4>
+
                     <div className="float-right">
                       <span>
                         <Link to={`${routeConstants.protVista}${id}`}>
@@ -2446,6 +2450,7 @@ const ProteinDetail = props => {
                           </Button>
                         </Link>
                       </span>
+
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() =>
