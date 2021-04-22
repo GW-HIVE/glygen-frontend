@@ -132,6 +132,12 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
+     "glycation": {
+      "title": "Glycation",
+      "text": "Glycation description text here.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
     "function": {
       "title": "Function",
       "text": "Add some unique text here.",

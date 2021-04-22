@@ -749,6 +749,12 @@
         "tooltip": {},
         "id": "kinase_gene_name"
       },
+        "relation": {
+        "name": "Relation",
+        "shortName": "",
+        "tooltip": {},
+        "id": "relation"
+      },
       "uberonN": {
         "name": "UBERON.",
         "shortName": "UBERON",
@@ -1517,7 +1523,12 @@
     "phosphorylation": {
       "id": "phosphorylation",
       "displayname": "Phosphorylation",
-      "tooltip": ""
+      "tooltip": "Phosphorylation information"
+    },
+     "glycation": {
+      "id": "glycation",
+      "displayname": "Glycation",
+      "tooltip": "Glycation information"
     },
     "sequence": {
       "id": "sequence",
