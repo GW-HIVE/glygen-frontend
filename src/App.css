@@ -779,6 +779,27 @@ ul.office-details {
   color: var(--gg-blue) !important;
 }
 
+.search-btn {
+  text-decoration: none !important;
+  color: var(--gg-blue) !important;
+  border-width: 0px !important;
+  padding: 0px !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  margin-left: 4px  !important;
+}
+
+.search-btn:hover {
+  color: var(--gg-dark-hover) !important;
+}
+
+.search-btn:disabled:hover,
+.search-btn:disabled {
+  pointer-events: auto !important;
+  cursor: no-drop !important;
+  color: var(--gg-blue) !important;
+}
+
 .route-lnk-disabled-bkg {
   background-color: #6b6b6b !important;
 }

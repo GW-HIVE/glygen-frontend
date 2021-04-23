@@ -46,14 +46,14 @@ return (
     <>
         <LineTooltip text={props.text}>
             <Button
-                className={"lnk-btn"}
+                className={"search-btn"}
                 variant="link"
                 onClick={() => {
                     let dq = new DirectQueries(props.searchType, props.executeSearch);
                     dq.execute(props.fieldType, props.fieldValue);
                 }}
               >
-                <SearchIcon title className="ml-3 custom-icon-blue" />
+                <SearchIcon title className="ml-1 mr-1 custom-icon-blue" />
             </Button>
         </LineTooltip>
     </>

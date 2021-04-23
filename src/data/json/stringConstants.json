@@ -544,6 +544,26 @@
         "id": "query_type",
         "name": "glycan_search_simple"
       }
+    },
+    "direct_search": {
+      "mass": {
+        "text": "Find all glycans with the same mass."
+      },
+      "mass_pme": {
+        "text": "Find all glycans with the same permethylated mass."
+      },
+      "composition": {
+        "text": "Find all glycans with the same composition."
+      },
+      "glycan_type": {
+        "text": "Find all glycans with the same type/subtype."
+      },
+      "organism": {
+        "text": "Find all glycans with the same organism."
+      },
+      "pmid": {
+        "text": "Find all glycans with the same PMID."
+      }
     }
   },
   "protein": {
@@ -1129,6 +1149,23 @@
       "query_type": {
         "id": "query_type",
         "name": "protein_search_simple"
+      }
+    },
+    "direct_search": {
+      "chemical_mass": {
+        "text": "Find all proteins / glycoproteins with the same chemical mass."
+      },
+      "go_id": {
+        "text": "Find all proteins / glycoproteins with the same GO annotation."
+      },
+      "pathway_id": {
+        "text": "Find all proteins / glycoproteins with the same pathway."
+      },
+      "disease_id": {
+        "text": "Find all proteins / glycoproteins with the same disease."
+      },
+      "pmid": {
+        "text": "Find all proteins / glycoproteins with the same PMID."
       }
     }
   },

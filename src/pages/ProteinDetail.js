@@ -66,6 +66,7 @@ const SimpleHelpTooltip = props => {
 
 const glycanStrings = stringConstants.glycan.common;
 const proteinStrings = stringConstants.protein.common;
+const proteinDirectSearch = stringConstants.protein.direct_search;
 
 const items = [
   { label: stringConstants.sidebar.general.displayname, id: "General" },
@@ -1589,6 +1590,7 @@ const ProteinDetail = props => {
    * Function to handle protein direct search.
    **/
   const proteinSearch = formObject => {
+    setPageLoading(true);
     logActivity("user", id, "Performing Direct Search");
     let message = "Direct Search query=" + JSON.stringify(formObject);
     getProteinSearch(formObject)
@@ -1605,10 +1607,12 @@ const ProteinDetail = props => {
           });
           setPageLoading(false);
         } else {
-          logActivity("user", "", "No results. " + message);
-          setPageLoading(false);
-          // setAlertTextInput({"show": true, "id": stringConstants.errors.advSerarchError.id})
-          window.scrollTo(0, 0);
+          let error = {
+            response : {
+              status : stringConstants.errors.defaultDialogAlert.id
+            }
+          };
+          axiosError(error, "", "No results. " + message, setPageLoading, setAlertDialogInput);
         }
       })
       .catch(function(error) {
@@ -1873,7 +1877,7 @@ const ProteinDetail = props => {
                             </strong>
                             {addCommas(mass.chemical_mass)} Da{" "}
                             <DirectSearch
-                              text="Find all proteins / glycoproteins with the same chemical mass"
+                              text={proteinDirectSearch.chemical_mass.text}
                               searchType={"protein"}
                               fieldType={proteinStrings.chemical_mass.id}
                               fieldValue={mass.chemical_mass}
@@ -2674,7 +2678,7 @@ const ProteinDetail = props => {
                                         {term.name} ({term.id})
                                       </a>
                                       <DirectSearch
-                                        text="Find all proteins / glycoproteins with the same go annotation"
+                                        text={proteinDirectSearch.go_id.text}
                                         searchType={"protein"}
                                         fieldType={proteinStrings.go_id.id}
                                         fieldValue={term.id}
@@ -2947,7 +2951,7 @@ const ProteinDetail = props => {
                                           {link.id}
                                         </a>
                                         <DirectSearch
-                                          text="Find all proteins / glycoproteins with the same pathway"
+                                          text={proteinDirectSearch.pathway_id.text}
                                           searchType={"protein"}
                                           fieldType={
                                             proteinStrings.pathway_id.id
@@ -3053,7 +3057,7 @@ const ProteinDetail = props => {
                       <Link
                         to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}
                       >
-                        <Button type="button" className="gg-btn-blue">
+                        <Button type="button" className="gg-btn-blue" disabled={(!isoforms) || (isoforms && isoforms.length <= 1)}>
                           Alignment
                         </Button>
                       </Link>
@@ -3379,7 +3383,7 @@ const ProteinDetail = props => {
                                           </a>
                                           )
                                           <DirectSearch
-                                            text="Find all proteins / glycoproteins with the same disease"
+                                            text={proteinDirectSearch.disease_id.text}
                                             searchType={"protein"}
                                             fieldType={
                                               proteinStrings.disease_id.id
@@ -3812,9 +3816,7 @@ const ProteinDetail = props => {
                                             <>{ref.id}</>
                                           </a>
                                           <DirectSearch
-                                            text={
-                                              "Find all proteins / glycoproteins with the same pmid"
-                                            }
+                                            text={proteinDirectSearch.pmid.text}
                                             searchType={"protein"}
                                             fieldType={proteinStrings.pmid.id}
                                             fieldValue={ref.id}

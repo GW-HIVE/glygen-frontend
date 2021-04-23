@@ -44,6 +44,7 @@ import DirectSearch from "../components/search/DirectSearch.js";
 import { getGlycanSearch } from '../data/glycan';
 
 const glycanStrings = stringConstants.glycan.common;
+const glycanDirectSearch = stringConstants.glycan.direct_search;
 const proteinStrings = stringConstants.protein.common;
 const motifStrings = stringConstants.motif.common;
 
@@ -931,6 +932,7 @@ const GlycanDetail = props => {
 	 * Function to handle glycan direct search.
 	 **/
 	const glycanSearch = (formObject) => {
+    setPageLoading(true);
 		logActivity("user", id, "Performing Direct Search");
 		let message = "Direct Search query=" + JSON.stringify(formObject);
 		getGlycanSearch(formObject)
@@ -942,10 +944,12 @@ const GlycanDetail = props => {
 					});;
 					setPageLoading(false);
 				} else {
-					logActivity("user", "", "No results. " + message);
-					setPageLoading(false);
-					// setAlertTextInput({"show": true, "id": stringConstants.errors.advSerarchError.id})
-					window.scrollTo(0, 0);
+          let error = {
+            response : {
+              status : stringConstants.errors.defaultDialogAlert.id
+            }
+          };
+          axiosError(error, "", "No results. " + message, setPageLoading, setAlertDialogInput);
 				}
 			})
 			.catch(function (error) {
@@ -1205,7 +1209,7 @@ const GlycanDetail = props => {
                                   </strong>
                                   {mass} Da{" "}
                                   <DirectSearch
-                                    text="Find all glycans with the same mass"
+                                    text={glycanDirectSearch.mass.text}
                                     searchType={"glycan"}
                                     fieldType={glycanStrings.mass.id}
                                     fieldValue={mass}
@@ -1225,7 +1229,7 @@ const GlycanDetail = props => {
                                   </strong>
                                   {mass_pme} Da{" "}
                                   <DirectSearch
-                                    text="Find all glycans with the same permethylated mass"
+                                    text={glycanDirectSearch.mass_pme.text}
                                     searchType={"glycan"}
                                     fieldType={glycanStrings.mass_pme.id}
                                     fieldValue={mass_pme}
@@ -1243,7 +1247,7 @@ const GlycanDetail = props => {
                             <strong>Composition</strong>:{" "}
                             <CompositionDisplay composition={composition} />{" "}
                             <DirectSearch
-                              text="Find all glycans with the same composition"
+                              text={glycanDirectSearch.composition.text}
                               searchType={"glycan"}
                               fieldType={glycanStrings.composition.id}
                               fieldValue={composition}
@@ -1314,7 +1318,7 @@ const GlycanDetail = props => {
                                     </span>
                                     <span>
                                     <DirectSearch
-                                      text="Find all glycans with the same type/subtype"
+                                      text={glycanDirectSearch.glycan_type.text}
                                       searchType={"glycan"}
                                       fieldType={glycanStrings.glycan_type.id}
                                       fieldValue={{
@@ -1417,7 +1421,7 @@ const GlycanDetail = props => {
                                 </LineTooltip>
                                 {"]"}{" "}
                                 <DirectSearch
-                                  text="Find all glycans with the same organism"
+                                  text={glycanDirectSearch.organism.text}
                                   searchType={"glycan"}
                                   fieldType={glycanStrings.organism.id}
                                   fieldValue={
@@ -2199,7 +2203,7 @@ const GlycanDetail = props => {
                                             <>{ref.id}</>
                                           </a>{" "}
                                           <DirectSearch
-                                            text={"Find all glycans with the same pmid"}
+                                            text={glycanDirectSearch.pmid.text}
                                             searchType={"glycan"}
                                             fieldType={glycanStrings.pmid.id}
                                             fieldValue={ref.id}
