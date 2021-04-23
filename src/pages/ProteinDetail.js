@@ -2664,7 +2664,7 @@ const ProteinDetail = props => {
                       <Link
                         to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}
                       >
-                        <Button type="button" className="gg-btn-blue">
+                        <Button type="button" className="gg-btn-blue" disabled={(!isoforms) || (isoforms && isoforms.length <= 1)}>
                           Alignment
                         </Button>
                       </Link>
