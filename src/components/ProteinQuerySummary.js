@@ -17,29 +17,28 @@ function getDateTime() {
   var minute = now.getMinutes();
   var second = now.getSeconds();
 
-  if (month.toString().length == 1) {
+  if (month.toString().length === 1) {
     month = "0" + month;
   }
-  if (day.toString().length == 1) {
+  if (day.toString().length === 1) {
     day = "0" + day;
   }
-  if (hour.toString().length == 1) {
+  if (hour.toString().length === 1) {
     hour = "0" + hour;
   }
-  if (minute.toString().length == 1) {
+  if (minute.toString().length === 1) {
     minute = "0" + minute;
   }
-  if (second.toString().length == 1) {
+  if (second.toString().length === 1) {
     second = "0" + second;
   }
-  var dateTime =
-    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
   return dateTime;
 }
 
-const ProteinQuerySummary = props => {
+const ProteinQuerySummary = (props) => {
   const title = "Protein Search Summary";
-  let quickSearch = stringConstants.quick_search;
+  // let quickSearch = stringConstants.quick_search;
 
   const { data, onModifySearch, timestamp, searchId } = props;
   const proteinStrings = stringConstants.protein.common;
@@ -66,7 +65,7 @@ const ProteinQuerySummary = props => {
     disease_name,
     disease_id,
     attached_glycan_id,
-    binding_glycan_id
+    binding_glycan_id,
   } = data;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
@@ -76,25 +75,23 @@ const ProteinQuerySummary = props => {
   }
 
   const [aminoAcidLookup, setAminoAcidLookup] = useState({});
-  const [uniprotCanonicalACShowMore, setUniprotCanonicalACShowMore] = useState(
-    true
-  );
+  const [uniprotCanonicalACShowMore, setUniprotCanonicalACShowMore] = useState(true);
 
   useEffect(() => {
-    getProteinInit().then(data => {
+    getProteinInit().then((data) => {
       const lookup = data.data.aa_list
         .map(({ name, key }) => {
           const tokens = name.split(" - ");
           return {
             key,
             short: tokens[1],
-            long: tokens[0]
+            long: tokens[0],
           };
         })
         .reduce(
           (ind, { key, short, long }) => ({
             ...ind,
-            [key]: { short, long }
+            [key]: { short, long },
           }),
           {}
         );
@@ -158,8 +155,7 @@ const ProteinQuerySummary = props => {
                   </Col>
                   <Col align="left" xs={6} sm={6} md={6} lg={6}>
                     {formatProtein(
-                      uniprotCanonicalACShowMore &&
-                        uniprot_canonical_ac_short === ""
+                      uniprotCanonicalACShowMore && uniprot_canonical_ac_short === ""
                         ? uniprot_canonical_ac
                         : uniprotCanonicalACShowMore
                         ? uniprot_canonical_ac_short
@@ -169,26 +165,21 @@ const ProteinQuerySummary = props => {
                 </Row>
                 <Row>
                   <Col align="right" xs={12} sm={12} md={12} lg={12}>
-                    {uniprot_canonical_ac_short &&
-                      uniprot_canonical_ac_short !== "" && (
-                        <Button
-                          style={{
-                            marginLeft: "20px",
-                            marginTop: "5px"
-                          }}
-                          className={"lnk-btn"}
-                          variant="link"
-                          onClick={() => {
-                            setUniprotCanonicalACShowMore(
-                              !uniprotCanonicalACShowMore
-                            );
-                          }}
-                        >
-                          {uniprotCanonicalACShowMore
-                            ? "Show More..."
-                            : "Show Less..."}
-                        </Button>
-                      )}
+                    {uniprot_canonical_ac_short && uniprot_canonical_ac_short !== "" && (
+                      <Button
+                        style={{
+                          marginLeft: "20px",
+                          marginTop: "5px",
+                        }}
+                        className={"lnk-btn"}
+                        variant="link"
+                        onClick={() => {
+                          setUniprotCanonicalACShowMore(!uniprotCanonicalACShowMore);
+                        }}
+                      >
+                        {uniprotCanonicalACShowMore ? "Show More..." : "Show Less..."}
+                      </Button>
+                    )}
                   </Col>
                 </Row>
               </>
@@ -223,7 +214,7 @@ const ProteinQuerySummary = props => {
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
                   {glycosylated_aa.aa_list
-                    .map(key => aminoAcidLookup[key].short || "")
+                    .map((key) => aminoAcidLookup[key].short || "")
                     .join(` ${glycosylated_aa.operation} `)}
                 </Col>
               </Row>
@@ -233,14 +224,7 @@ const ProteinQuerySummary = props => {
                 <Col align="right" xs={6} sm={6} md={6} lg={6}>
                   {proteinStrings.glycosylation_evidence.name}:
                 </Col>
-                <Col
-                  xs={6}
-                  sm={6}
-                  md={6}
-                  lg={6}
-                  className="evidencetype"
-                  align="left"
-                >
+                <Col xs={6} sm={6} md={6} lg={6} className="evidencetype" align="left">
                   {glycosylation_evidence}
                 </Col>
               </Row>
@@ -261,10 +245,7 @@ const ProteinQuerySummary = props => {
                   {proteinStrings.sequence.name}:
                 </Col>
                 <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  <abbr
-                    className="limit-text-size"
-                    title="{{sequence.aa_sequence}}"
-                  >
+                  <abbr className="limit-text-size" title="{{sequence.aa_sequence}}">
                     {sequence.aa_sequence}{" "}
                   </abbr>
                 </Col>
@@ -416,17 +397,13 @@ const ProteinQuerySummary = props => {
             >
               Update Results
             </Button>
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              onClick={onModifySearch}
-            >
+            <Button type="button" className="gg-btn-blue" onClick={onModifySearch}>
               Modify Search
             </Button>
           </div>
           <Card.Text>
-            ** To perform the same search again using the current version of the
-            database, click <strong>“Update Results”</strong>.
+            ** To perform the same search again using the current version of the database, click{" "}
+            <strong>“Update Results”</strong>.
           </Card.Text>
         </Card.Body>
       </Card>

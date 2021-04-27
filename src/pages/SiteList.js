@@ -10,18 +10,18 @@ import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
-import ReactHtmlParser from "react-html-parser";
+// import ReactHtmlParser from "react-html-parser";
 import routeConstants from "../data/json/routeConstants";
 import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import DownloadButton from "../components/DownloadButton";
-import { GLYGEN_BASENAME } from "../envVariables";
+// import { GLYGEN_BASENAME } from "../envVariables";
 
-const proteinStrings = stringConstants.protein.common;
+// const proteinStrings = stringConstants.protein.common;
 
-const SiteList = props => {
+const SiteList = (props) => {
   let { id } = useParams();
   let { searchId } = useParams();
   const [data, setData] = useState([]);
@@ -45,10 +45,7 @@ const SiteList = props => {
 
     logActivity("user", id);
 
-    const dataPromise = Promise.all([
-      getSiteSearchInit(),
-      getSuperSearchList(id)
-    ]);
+    const dataPromise = Promise.all([getSiteSearchInit(), getSuperSearchList(id)]);
 
     dataPromise.then(([{ data: initData }, { data }]) => {
       if (data.error_code) {
@@ -66,7 +63,7 @@ const SiteList = props => {
       }
     });
 
-    dataPromise.catch(function(error) {
+    dataPromise.catch(function (error) {
       let message = "list api call";
       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
     });
@@ -74,7 +71,7 @@ const SiteList = props => {
     dataPromise.finally(() => {
       setPageLoading(false);
     });
-  }, []);
+  }, [id, sizePerPage]);
 
   // useEffect(() => {
   //   setPageLoading(true);
@@ -102,28 +99,21 @@ const SiteList = props => {
   //     });
   // }, []);
 
-  const handleTableChange = (
-    type,
-    { page, sizePerPage, sortField, sortOrder }
-  ) => {
+  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     setPageLoading(true);
-    getSuperSearchList(
-      id,
-      (page - 1) * sizePerPage + 1,
-      sizePerPage,
-      sortField,
-      sortOrder
-    ).then(({ data }) => {
-      setPageLoading(false);
-      if (!data.error_code) {
-        setData(data.results);
-        setTimeStamp(data.cache_info.ts);
-        setPagination(data.pagination);
-        setTotalSize(data.pagination.total_length);
+    getSuperSearchList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
+      ({ data }) => {
+        setPageLoading(false);
+        if (!data.error_code) {
+          setData(data.results);
+          setTimeStamp(data.cache_info.ts);
+          setPagination(data.pagination);
+          setTotalSize(data.pagination.total_length);
+        }
       }
-    });
+    );
   };
 
   const handleModifySearch = () => {
@@ -150,7 +140,7 @@ const SiteList = props => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={input => {
+          setOpen={(input) => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -169,17 +159,15 @@ const SiteList = props => {
           <DownloadButton
             types={[
               {
-                display:
-                  stringConstants.download.proteinsite_csvdata.displayname,
+                display: stringConstants.download.proteinsite_csvdata.displayname,
                 type: "csv",
-                data: "site_list"
+                data: "site_list",
               },
               {
-                display:
-                  stringConstants.download.proteinsite_jsondata.displayname,
+                display: stringConstants.download.proteinsite_jsondata.displayname,
                 type: "json",
-                data: "site_list"
-              }
+                data: "site_list",
+              },
             ]}
             dataId={id}
             itemType="site"
@@ -192,6 +180,7 @@ const SiteList = props => {
               data={data}
               columns={selectedColumns}
               page={page}
+              pagination={pagination}
               sizePerPage={sizePerPage}
               totalSize={totalSize}
               onTableChange={handleTableChange}

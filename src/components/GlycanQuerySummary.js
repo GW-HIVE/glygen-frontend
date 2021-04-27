@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
@@ -18,19 +18,19 @@ function getDateTime() {
   var hour = now.getHours();
   var minute = now.getMinutes();
   var second = now.getSeconds();
-  if (month.toString().length == 1) {
+  if (month.toString().length === 1) {
     month = "0" + month;
   }
-  if (day.toString().length == 1) {
+  if (day.toString().length === 1) {
     day = "0" + day;
   }
-  if (hour.toString().length == 1) {
+  if (hour.toString().length === 1) {
     hour = "0" + hour;
   }
-  if (minute.toString().length == 1) {
+  if (minute.toString().length === 1) {
     minute = "0" + minute;
   }
-  if (second.toString().length == 1) {
+  if (second.toString().length === 1) {
     second = "0" + second;
   }
   var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
@@ -121,38 +121,39 @@ const GlycanQuerySummary = (props) => {
             {/* glycan id */}
             {glycan_identifier && (
               <>
-              <Row className="summary-table-col" sm={12}>
-                <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                  {glycanStrings.glycan_identifier.name}:
-                </Col>
-                <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                  {formatGlycans(glycanIdentifierShowMore && glycan_identifier.glycan_id_short === "" ? glycan_identifier.glycan_id : 
-                  (glycanIdentifierShowMore ? glycan_identifier.glycan_id_short : glycan_identifier.glycan_id))}
-                </Col>
-              </Row>
-              <Row>
-                <Col align="right" xs={12} sm={12} md={12} lg={12}>
-                  {glycan_identifier.glycan_id_short && glycan_identifier.glycan_id_short !== "" && (
+                <Row className="summary-table-col" sm={12}>
+                  <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                    {glycanStrings.glycan_identifier.name}:
+                  </Col>
+                  <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                    {formatGlycans(
+                      glycanIdentifierShowMore && glycan_identifier.glycan_id_short === ""
+                        ? glycan_identifier.glycan_id
+                        : glycanIdentifierShowMore
+                        ? glycan_identifier.glycan_id_short
+                        : glycan_identifier.glycan_id
+                    )}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col align="right" xs={12} sm={12} md={12} lg={12}>
+                    {glycan_identifier.glycan_id_short && glycan_identifier.glycan_id_short !== "" && (
                       <Button
                         style={{
                           marginLeft: "20px",
-                          marginTop: "5px"
+                          marginTop: "5px",
                         }}
                         className={"lnk-btn"}
                         variant="link"
                         onClick={() => {
-                          setGlycanIdentifierShowMore(
-                            !glycanIdentifierShowMore
-                          );
+                          setGlycanIdentifierShowMore(!glycanIdentifierShowMore);
                         }}
                       >
-                        {glycanIdentifierShowMore
-                          ? "Show More..."
-                          : "Show Less..."}
+                        {glycanIdentifierShowMore ? "Show More..." : "Show Less..."}
                       </Button>
                     )}
-                </Col>
-              </Row>
+                  </Col>
+                </Row>
               </>
             )}
 

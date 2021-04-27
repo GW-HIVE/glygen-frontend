@@ -1,46 +1,40 @@
 import React from "react";
 import { groupEvidences } from "../data/data-format";
-import { Grid } from "@material-ui/core";
 import EvidenceList from "./EvidenceList";
 import Table from "react-bootstrap/Table";
 
-const formatFunctions = functions => {
-  const formattedEvidences = functions.map(func => {
+const formatFunctions = (functions) => {
+  const formattedEvidences = functions.map((func) => {
     return {
       ...func,
-      evidence: groupEvidences(func.evidence)
+      evidence: groupEvidences(func.evidence),
     };
   });
 
-  const groupedFunctions = formattedEvidences.reduce(
-    (results, { evidence, url, annotation }) => {
-      // find if a given db already exists
-      const [database] = Object.keys(evidence);
-      let existingEvidence = results.find(
-        existing => existing.evidence[database]
-      );
+  const groupedFunctions = formattedEvidences.reduce((results, { evidence, url, annotation }) => {
+    // find if a given db already exists
+    const [database] = Object.keys(evidence);
+    let existingEvidence = results.find((existing) => existing.evidence[database]);
 
-      // if notexists, create new functions
-      if (!existingEvidence) {
-        // create new function entry
-        existingEvidence = {
-          functions: [],
-          evidence
-        };
+    // if notexists, create new functions
+    if (!existingEvidence) {
+      // create new function entry
+      existingEvidence = {
+        functions: [],
+        evidence,
+      };
 
-        results.push(existingEvidence);
-      }
+      results.push(existingEvidence);
+    }
 
-      // add function to list
-      existingEvidence.functions.push({
-        url,
-        annotation
-      });
+    // add function to list
+    existingEvidence.functions.push({
+      url,
+      annotation,
+    });
 
-      return results;
-    },
-    []
-  );
+    return results;
+  }, []);
 
   return groupedFunctions;
 };
@@ -69,7 +63,7 @@ const FunctionList = ({ functions }) => {
         <tbody className="table-body">
           <tr className="table-row">
             <td key={funIndex}>
-              {group.functions.map(func => (
+              {group.functions.map((func) => (
                 <p>{func.annotation}</p>
               ))}
               <EvidenceList evidences={group.evidence} />

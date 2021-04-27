@@ -20,7 +20,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
-import { display } from "@material-ui/system";
+// import { display } from "@material-ui/system";
 import { useHistory } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 window.customElements.define("protvista-manager", ProtvistaManager);
@@ -45,45 +45,45 @@ const ProtVista = () => {
         type: "N-Linked-With-Image",
         residues: [],
         color: "red",
-        shape: "circle"
+        shape: "circle",
       },
       {
         type: "N-Linked-No-Image",
         residues: [],
         color: "red",
-        shape: "triangle"
+        shape: "triangle",
       },
       {
         type: "O-Linked-With-Image",
         residues: [],
         color: "blue",
-        shape: "circle"
+        shape: "circle",
       },
       {
         type: "O-Linked-No-Image",
         residues: [],
         color: "blue",
-        shape: "triangle"
+        shape: "triangle",
       },
       {
         type: "Annotations",
         residues: [],
         color: "orange",
-        shape: "square"
-      }
+        shape: "square",
+      },
     ];
 
     var mutations = {
       type: "Mutations",
       residues: [],
       color: "green",
-      shape: "diamond"
+      shape: "diamond",
     };
     var mutagenesisS = {
       type: "MutagenesisS",
       residues: [],
       color: "purple",
-      shape: "bridge"
+      shape: "bridge",
     };
 
     if (data.glycosylation) {
@@ -103,7 +103,7 @@ const ProtVista = () => {
               tooltipContent:
                 "<img src='https://api.glygen.org/glycan/image/" +
                 glyco.glytoucan_ac +
-                "' /><br/></br>"
+                "' /><br/></br>",
             });
           } else {
             glycos[1].residues.push({
@@ -118,7 +118,7 @@ const ProtVista = () => {
                 "<span className=marker>Glycosylation site without reported glycan at " +
                 glyco.start_pos +
                 "," +
-                " Click to see site details. </span>"
+                " Click to see site details. </span>",
             });
           }
         } else if (glyco.type === "O-linked") {
@@ -134,7 +134,7 @@ const ProtVista = () => {
               tooltipContent:
                 "<img src='https://api.glygen.org/glycan/image/" +
                 glyco.glytoucan_ac +
-                "' /><br/><br/><span className=marker>Click marker show more</span>"
+                "' /><br/><br/><span className=marker>Click marker show more</span>",
             });
           } else {
             glycos[3].residues.push({
@@ -149,7 +149,7 @@ const ProtVista = () => {
                 "<span className=marker>Glycosylation site without reported glycan at " +
                 glyco.start_pos +
                 "," +
-                " Click to see site details. </span>"
+                " Click to see site details. </span>",
             });
           }
         }
@@ -165,14 +165,9 @@ const ProtVista = () => {
           color: mutations.color,
           shape: mutations.shape,
           accession: data.uniprot.uniprot_canonical_ac,
-          type:
-            "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
-          title:
-            "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
-          tooltipContent:
-            "<span className=marker> annotation " +
-            mutation.annotation +
-            "</span>"
+          type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
+          title: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
+          tooltipContent: "<span className=marker> annotation " + mutation.annotation + "</span>",
         });
       } //);
     }
@@ -186,12 +181,7 @@ const ProtVista = () => {
           color: mutagenesisS.color,
           shape: mutagenesisS.shape,
           accession: data.uniprot.uniprot_canonical_ac,
-          type:
-            "(" +
-            mutagenesis.sequence_org +
-            " → " +
-            mutagenesis.sequence_mut +
-            ")",
+          type: "(" + mutagenesis.sequence_org + " → " + mutagenesis.sequence_mut + ")",
           title:
             "(" +
             mutagenesis.sequence_org +
@@ -204,9 +194,7 @@ const ProtVista = () => {
             ")",
 
           tooltipContent:
-            "<span className=marker> annotation " +
-            mutagenesis.annotation +
-            "</span>"
+            "<span className=marker> annotation " + mutagenesis.annotation + "</span>",
         });
       } //);
     }
@@ -228,7 +216,7 @@ const ProtVista = () => {
             site_annotation.start_pos +
             "-" +
             site_annotation.end_pos +
-            "</span>"
+            "</span>",
         });
       } //);
     }
@@ -249,7 +237,7 @@ const ProtVista = () => {
         }
       } //);
       glycosCombined.push(
-        Object.values(combinedResiduesMap).map(function(v) {
+        Object.values(combinedResiduesMap).map(function (v) {
           v["tooltipContent"] +=
             v["count"] > 1
               ? "<span className=marker>Click marker to show " +
@@ -268,7 +256,7 @@ const ProtVista = () => {
       oGlycanWithoutImage: glycosCombined[3],
       nSequon: glycosCombined[4],
       mutationsData: mutations,
-      mutagenesisData: mutagenesisS
+      mutagenesisData: mutagenesisS,
     };
   }
 
@@ -287,22 +275,21 @@ const ProtVista = () => {
   const [tracksShown, setTracksShown] = useReducer(
     (state, newState) => ({
       ...state,
-      ...newState
+      ...newState,
     }),
     {
-      mutation: true
+      mutation: true,
     }
   );
 
-  const addTooltipToReference = ref => {
+  const addTooltipToReference = (ref) => {
     let currentTooltip;
     ref.current &&
-      ref.current.addEventListener("change", event => {
+      ref.current.addEventListener("change", (event) => {
         const { eventtype, feature, coords } = event.detail;
 
         if (eventtype === "click") {
-          const route =
-            routeConstants.siteview + id + "/" + event.detail.feature.start;
+          const route = routeConstants.siteview + id + "/" + event.detail.feature.start;
           history.push(route);
         }
         if (eventtype === "mouseover") {
@@ -382,21 +369,21 @@ const ProtVista = () => {
             ...formattedData.nGlycanWithoutImage,
             ...formattedData.oGlycanWithImage,
             ...formattedData.oGlycanWithoutImage,
-            ...formattedData.nSequon
+            ...formattedData.nSequon,
           ];
         }
         if (mutationsData.current) {
           mutationsData.current.data = formattedData.mutationsData.residues;
 
           setTracksShown({
-            mutation: formattedData.mutationsData.residues.length > 0
+            mutation: formattedData.mutationsData.residues.length > 0,
           });
         }
         if (mutagenesisData.current) {
           mutagenesisData.current.data = formattedData.mutagenesisData.residues;
 
           setTracksShown({
-            mutagenesisData: formattedData.mutagenesisData.residues.length > 0
+            mutagenesisData: formattedData.mutagenesisData.residues.length > 0,
           });
         }
 
@@ -428,8 +415,7 @@ const ProtVista = () => {
               <h2>
                 {" "}
                 <span>
-                  ProtVista View of Protein{" "}
-                  <strong className="nowrap">{id}</strong>
+                  ProtVista View of Protein <strong className="nowrap">{id}</strong>
                 </span>
               </h2>
             </div>
@@ -438,7 +424,7 @@ const ProtVista = () => {
       </div>
       <Helmet>
         {getTitle("protvista", {
-          uniprot_canonical_ac: id
+          uniprot_canonical_ac: id,
         })}
         {getMeta("protvista")}
       </Helmet>
@@ -446,7 +432,7 @@ const ProtVista = () => {
       <PageLoader pageLoading={pageLoading} />
       <DialogAlert
         alertInput={alertDialogInput}
-        setOpen={input => {
+        setOpen={(input) => {
           setAlertDialogInput({ show: input });
         }}
       />
@@ -497,10 +483,7 @@ const ProtVista = () => {
 
                 {/* Blank Track */}
                 <protvista-track
-                  class={
-                    `nav-track glycotrack emptytrack` +
-                    (expanded ? "" : " hidden")
-                  }
+                  class={`nav-track glycotrack emptytrack` + (expanded ? "" : " hidden")}
                   length={data.sequence.length}
                   displaystart={1}
                   displayend={data.sequence.length}
@@ -582,10 +565,7 @@ const ProtVista = () => {
 
                 {/* {tracksShown.mutation && ( */}
                 <protvista-track
-                  class={
-                    `nav-track glycotrack` +
-                    (highlighted === "mutation" ? " highlight" : "")
-                  }
+                  class={`nav-track glycotrack` + (highlighted === "mutation" ? " highlight" : "")}
                   length={data.sequence.length}
                   displaystart={1}
                   displayend={data.sequence.length}
@@ -596,8 +576,7 @@ const ProtVista = () => {
 
                 <protvista-track
                   class={
-                    `nav-track glycotrack` +
-                    (highlighted === "mutegenesis" ? " highlight" : "")
+                    `nav-track glycotrack` + (highlighted === "mutegenesis" ? " highlight" : "")
                   }
                   length={data.sequence.length}
                   displaystart={1}
@@ -659,10 +638,7 @@ const ProtVista = () => {
                   </span>
                 </li>
                 <li>
-                  <span
-                    className="super6 hover"
-                    onMouseEnter={() => setHighlighted("SEQUON")}
-                  >
+                  <span className="super6 hover" onMouseEnter={() => setHighlighted("SEQUON")}>
                     &#9646;
                     <span className="superx">
                       <>N-Glycan-Sequon</>
@@ -671,10 +647,7 @@ const ProtVista = () => {
                 </li>
                 {/* {tracksShown && tracksShown.snv && ( */}
                 <li>
-                  <span
-                    className="super5 hover"
-                    onMouseEnter={() => setHighlighted("mutation")}
-                  >
+                  <span className="super5 hover" onMouseEnter={() => setHighlighted("mutation")}>
                     &#9670;
                     <span className="superx">
                       <>Single Nucleotide Variation</>
@@ -684,10 +657,7 @@ const ProtVista = () => {
                 {/* )} */}
 
                 <li>
-                  <span
-                    className="super7 hover"
-                    onMouseEnter={() => setHighlighted("mutagenesis")}
-                  >
+                  <span className="super7 hover" onMouseEnter={() => setHighlighted("mutagenesis")}>
                     &#9646;
                     <span className="superx">
                       <>Mutagenesis</>

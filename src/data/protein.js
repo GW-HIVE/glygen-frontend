@@ -8,7 +8,7 @@ import routeConstants from "./json/routeConstants";
 import stringConstants from "./json/stringConstants";
 import LineTooltip from "../components/tooltip/LineTooltip";
 import { logActivity } from "../data/logging";
-import { positions } from "@material-ui/system";
+// import { positions } from "@material-ui/system";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -24,7 +24,7 @@ export const getProteinList = (
     offset: offset,
     limit: limit,
     order: order,
-    sort: sort
+    sort: sort,
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/protein/list?query=${queryParamString}`;
@@ -44,7 +44,7 @@ export const getProteinsiteDetail = (protienId, position) => {
   // return getJson(url);
 };
 
-export const getProteinDetail = accessionId => {
+export const getProteinDetail = (accessionId) => {
   const url = `/protein/detail/${accessionId}`;
   return getJson(url);
 };
@@ -56,13 +56,7 @@ export const getProteinDownload = (id, format, compressed, type, headers) => {
   return postToAndGetBlob(url, headers);
 };
 
-export const getProteinSiteDownload = (
-  id,
-  format,
-  compressed,
-  type,
-  headers
-) => {
+export const getProteinSiteDownload = (id, format, compressed, type, headers) => {
   let message = "downloaded successfully ";
   logActivity("user", id, format, compressed, "No results. " + message);
   const query = { id, type, format, compressed };
@@ -86,7 +80,7 @@ export const PROTEIN_COLUMNS = [
           {row.uniprot_canonical_ac}
         </Link>
       </LineTooltip>
-    )
+    ),
   },
   {
     dataField: proteinStrings.gene_name.shortName,
@@ -94,7 +88,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
 
   {
@@ -103,7 +97,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
   {
     dataField: "hit_score",
@@ -111,7 +105,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
   {
     dataField: proteinStrings.mass.shortName,
@@ -119,7 +113,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
   {
     dataField: proteinStrings.organism.shortName,
@@ -127,7 +121,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
   {
     dataField: proteinStrings.refSeq_name.shortName,
@@ -135,7 +129,7 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
+    },
   },
   {
     dataField: proteinStrings.refseq_ac.shortName,
@@ -143,15 +137,15 @@ export const PROTEIN_COLUMNS = [
     sort: true,
     headerStyle: (colum, colIndex) => {
       return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  }
+    },
+  },
 ];
 
 /**
  * Gets JSON for protein search.
  * @param {object} formObject - protein search JSON query object.
  */
-export const getProteinSearch = formObject => {
+export const getProteinSearch = (formObject) => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search?" + json;
   return getJson(url);
@@ -161,7 +155,7 @@ export const getProteinSearch = formObject => {
  * Gets JSON for protein simple search.
  * @param {object} formObject - protein simple search JSON query object.
  */
-export const getProteinSimpleSearch = formObject => {
+export const getProteinSimpleSearch = (formObject) => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search_simple?" + json;
   return getJson(url);
@@ -178,7 +172,7 @@ export const getProteinInit = () => {
 export const getIsoAlignment = (protienId, alignment) => {
   const queryParamString = JSON.stringify({
     uniprot_canonical_ac: protienId,
-    cluster_type: alignment
+    cluster_type: alignment,
   });
   const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);
@@ -187,9 +181,8 @@ export const getIsoAlignment = (protienId, alignment) => {
 export const getHomoAlignment = (protienId, alignment) => {
   const queryParamString = JSON.stringify({
     uniprot_canonical_ac: protienId,
-    cluster_type: alignment
+    cluster_type: alignment,
   });
   const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);
 };
-

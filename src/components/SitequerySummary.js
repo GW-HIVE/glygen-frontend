@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import stringConstants from "../data/json/stringConstants";
@@ -7,8 +7,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 import {
-  getSuperSearchList,
-  createSiteQuerySummary
+  // getSuperSearchList,
+  createSiteQuerySummary,
 } from "../data/supersearch";
 
 function getDateTime() {
@@ -20,27 +20,26 @@ function getDateTime() {
   var minute = now.getMinutes();
   var second = now.getSeconds();
 
-  if (month.toString().length == 1) {
+  if (month.toString().length === 1) {
     month = "0" + month;
   }
-  if (day.toString().length == 1) {
+  if (day.toString().length === 1) {
     day = "0" + day;
   }
-  if (hour.toString().length == 1) {
+  if (hour.toString().length === 1) {
     hour = "0" + hour;
   }
-  if (minute.toString().length == 1) {
+  if (minute.toString().length === 1) {
     minute = "0" + minute;
   }
-  if (second.toString().length == 1) {
+  if (second.toString().length === 1) {
     second = "0" + second;
   }
-  var dateTime =
-    year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+  var dateTime = year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
   return dateTime;
 }
 
-const SiteQuerySummary = props => {
+const SiteQuerySummary = (props) => {
   const title = "Site Search Summary";
   const { data, onModifySearch, timestamp, searchId, initData } = props;
   const proteinStrings = stringConstants.protein.common;
@@ -57,14 +56,13 @@ const SiteQuerySummary = props => {
     initData.annotation_type_list.length &&
     querySummary.annotations
   ) {
-    annotations = initData.annotation_type_list.filter(annotation => {
+    annotations = initData.annotation_type_list.filter((annotation) => {
       return querySummary.annotations.includes(annotation.id);
     });
   }
   let annotationOperation = "";
   if (querySummary.annotationOperation) {
-    annotationOperation =
-      querySummary.annotationOperation === "$and" ? "And" : "Or";
+    annotationOperation = querySummary.annotationOperation === "$and" ? "And" : "Or";
   }
 
   return (
@@ -101,9 +99,7 @@ const SiteQuerySummary = props => {
                       {proteinStrings.annotation_type.name}:
                     </Col>
                     <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {annotations
-                        .map(anno => anno.label)
-                        .join(` ${annotationOperation} `)}
+                      {annotations.map((anno) => anno.label).join(` ${annotationOperation} `)}
                     </Col>
                   </Row>
                 )}
@@ -151,17 +147,13 @@ const SiteQuerySummary = props => {
             >
               Update Results
             </Button>
-            <Button
-              type="button"
-              className="gg-btn-blue"
-              onClick={onModifySearch}
-            >
+            <Button type="button" className="gg-btn-blue" onClick={onModifySearch}>
               Modify Search
             </Button>
           </div>
           <Card.Text>
-            ** To perform the same search again using the current version of the
-            database, click <strong>“Update Results”</strong>.
+            ** To perform the same search again using the current version of the database, click{" "}
+            <strong>“Update Results”</strong>.
           </Card.Text>
         </Card.Body>
       </Card>

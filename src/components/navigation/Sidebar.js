@@ -20,7 +20,7 @@ function Sidebar({ items, offset = 105 }) {
   useLayoutEffect(() => {
     const handleScrollEvent = () => {
       items &&
-        items.map(item => {
+        items.map((item) => {
           var element = document.getElementById(item.id);
           if (element) {
             var elementOffsetTop = element.offsetTop;
@@ -28,16 +28,14 @@ function Sidebar({ items, offset = 105 }) {
             var elementOffsetHeight = element.offsetHeight;
 
             if (
-              parseInt(elementOffsetTop) +
-                parseInt(elementOffsetHeight) +
-                parseInt(offset) >
+              parseInt(elementOffsetTop) + parseInt(elementOffsetHeight) + parseInt(offset) >
                 parseInt(winPageYOffset) &&
-              parseInt(elementOffsetTop) + parseInt(offset) <
-                parseInt(winPageYOffset)
+              parseInt(elementOffsetTop) + parseInt(offset) < parseInt(winPageYOffset)
             ) {
               setActiveLink(item.id);
             }
           }
+          return items;
         });
     };
 
@@ -58,9 +56,7 @@ function Sidebar({ items, offset = 105 }) {
                 (disabled === true ? " disabled" : "")
               }
             >
-              <li className={disabled === true ? "" : "sidebar-item-text"}>
-                {label}
-              </li>
+              <li className={disabled === true ? "" : "sidebar-item-text"}>{label}</li>
             </ul>
           </Link>
         ))}

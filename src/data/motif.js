@@ -1,14 +1,12 @@
 import { getJson, postToAndGetBlob, glycanImageUrl } from "./api";
-import React from "react";
+// import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import routeConstants from "./json/routeConstants";
-import LineTooltip from "../components/tooltip/LineTooltip";
-import stringConstants from "./json/stringConstants";
+// import routeConstants from "./json/routeConstants";
+// import LineTooltip from "../components/tooltip/LineTooltip";
+// import stringConstants from "./json/stringConstants";
 import { logActivity } from "../data/logging";
-import { Link } from "react-router-dom";
-
-const glycanStrings = stringConstants.glycan.common;
+// import { Link } from "react-router-dom";
 
 export const getMotifList = (
   motifListId,
@@ -59,37 +57,3 @@ export const getMotifDetail = (
 export const getGlycanImageUrl = (glytoucan_id) => {
   return glycanImageUrl + glytoucan_id;
 };
-
-export const MOTIF_COLUMNS = [
-  {
-    dataField: glycanStrings.glycan_id.id,
-    text: glycanStrings.glycan_id.name,
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: (value, row) => (
-      <LineTooltip text="View glycan details">
-        <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>{row.glytoucan_ac}</Link>
-      </LineTooltip>
-    ),
-  },
-  {
-    text: glycanStrings.glycan_image.name,
-    sort: false,
-    selected: true,
-    formatter: (value, row) => (
-      <div className="img-wrapper">
-        <img className="img-cartoon" src={getGlycanImageUrl(row.glytoucan_ac)} alt="Glycan img" />
-      </div>
-    ),
-    headerStyle: (colum, colIndex) => {
-      return {
-        textAlign: "left",
-        backgroundColor: "#4B85B6",
-        color: "white",
-        whiteSpace: "nowrap",
-      };
-    },
-  },
-];
