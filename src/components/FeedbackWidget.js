@@ -203,8 +203,8 @@ const FeedbackWidget = (props) => {
                     margin="normal"
                     variant="outlined"
                     inputProps={{
-                      minlength: 5,
-                      maxlength: messageMaxLen,
+                      minLength: 5,
+                      maxLength: messageMaxLen,
                     }}
                   />
                   {/* {(message.length < 5 || message.length > messageMaxLen) && (

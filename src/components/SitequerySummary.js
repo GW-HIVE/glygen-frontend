@@ -73,71 +73,70 @@ const SiteQuerySummary = (props) => {
           {title}
         </Card.Header>
         <Card.Body>
-          <Card.Title>
-            <p>
-              <strong>Performed on: {executionTime}</strong>
-            </p>
-          </Card.Title>
           <Card.Text>
-            {/*  Protein typeahead */}
-
-            {searchId !== "sups" && !!Object.keys(querySummary).length && (
-              <>
-                {querySummary.proteinId && (
-                  <Row className="summary-table-col" sm={12}>
-                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      {proteinStrings.uniprot_canonical_ac.name}:
-                    </Col>
-                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {querySummary.proteinId.join(", ")}
-                    </Col>
-                  </Row>
-                )}
-                {annotations && !!annotations.length && (
-                  <Row className="summary-table-col" sm={12}>
-                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      {proteinStrings.annotation_type.name}:
-                    </Col>
-                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {annotations.map((anno) => anno.label).join(` ${annotationOperation} `)}
-                    </Col>
-                  </Row>
-                )}
-                {querySummary.aminoType && (
-                  <Row className="summary-table-col" sm={12}>
-                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      {proteinStrings.glycosylated_aa.site_form}:
-                    </Col>
-                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {querySummary.aminoType}
-                    </Col>
-                  </Row>
-                )}
-                {querySummary.position && (
-                  <Row className="summary-table-col" sm={12}>
-                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Position:
-                    </Col>
-                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {querySummary.position}
-                    </Col>
-                  </Row>
-                )}
-                {querySummary.min && querySummary.max && (
-                  <Row className="summary-table-col" sm={12}>
-                    <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                      Range:
-                    </Col>
-                    <Col align="left" xs={6} sm={6} md={6} lg={6}>
-                      {querySummary.min} to {querySummary.max}
-                    </Col>
-                  </Row>
-                )}
-              </>
-            )}
-            {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
+            <strong>Performed on: {executionTime}</strong>
           </Card.Text>
-          <div className="pb-3">
+          <Row>
+            <Col>
+              {/*  Protein typeahead */}
+              {searchId !== "sups" && !!Object.keys(querySummary).length && (
+                <>
+                  {querySummary.proteinId && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        {proteinStrings.uniprot_canonical_ac.name}:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {querySummary.proteinId.join(", ")}
+                      </Col>
+                    </Row>
+                  )}
+                  {annotations && !!annotations.length && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        {proteinStrings.annotation_type.name}:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {annotations.map((anno) => anno.label).join(` ${annotationOperation} `)}
+                      </Col>
+                    </Row>
+                  )}
+                  {querySummary.aminoType && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        {proteinStrings.glycosylated_aa.site_form}:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {querySummary.aminoType}
+                      </Col>
+                    </Row>
+                  )}
+                  {querySummary.position && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        Position:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {querySummary.position}
+                      </Col>
+                    </Row>
+                  )}
+                  {querySummary.min && querySummary.max && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        Range:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {querySummary.min} to {querySummary.max}
+                      </Col>
+                    </Row>
+                  )}
+                </>
+              )}
+              {searchId && searchId === "sups" && <>{superSearchStrings.query}</>}
+            </Col>
+          </Row>
+          <div className="pb-3 pt-3">
             <Button
               type="button"
               className="gg-btn-outline mr-4"

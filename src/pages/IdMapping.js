@@ -544,11 +544,11 @@ const IdMapping = (props) => {
               multiline
               rows="6"
               required={true}
-              classes={{
-                option: "auto-option",
-                inputRoot: "auto-input-root",
-                input: "input-auto",
-              }}
+              // classes={{
+              //   option: "auto-option",
+              //   inputRoot: "auto-input-root",
+              //   input: "input-auto",
+              // }}
               placeholder={idMappingData.input_idlist.placeholder}
               value={idMapSearchData.inputIdlist}
               onChange={inputIdlistOnChange}
