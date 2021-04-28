@@ -275,6 +275,8 @@ const ProteinDetail = (props) => {
     site_annotation: false,
     n_link_glycosylation: false,
     o_link_glycosylation: false,
+    phosphorylation: false,
+    glycation: false,
   });
   const [geneNames, setGeneNames] = useState([]);
   const [recommendedGeneRows, setRecommendedGeneRows] = useState([]);
@@ -291,6 +293,8 @@ const ProteinDetail = (props) => {
       site_annotation: "site_annotation" === select,
       n_link_glycosylation: "n_link_glycosylation" === select,
       o_link_glycosylation: "o_link_glycosylation" === select,
+      phosphorylation: "phosphorylation" === select,
+      glycation: "glycation" === select,
     });
 
     const getProteinDetailData = getProteinDetail(id);
@@ -319,7 +323,7 @@ const ProteinDetail = (props) => {
           newSidebarData = setSidebarItemState(newSidebarData, "Phosphorylation", true);
         }
         if (!detailDataTemp.glycation || detailDataTemp.glycation.length === 0) {
-          newSidebarData = setSidebarItemState(newSidebarData, "Phosphorylation", true);
+          newSidebarData = setSidebarItemState(newSidebarData, "Glycation", true);
         }
         if (!detailDataTemp.names_synonyms || detailDataTemp.names_synonyms.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "General", true);
@@ -1419,7 +1423,7 @@ const ProteinDetail = (props) => {
   /**
    * Function to handle protein direct search.
    **/
-  const proteinSearch = formObject => {
+  const proteinSearch = (formObject) => {
     setPageLoading(true);
     logActivity("user", id, "Performing Direct Search");
     let message = "Direct Search query=" + JSON.stringify(formObject);
@@ -1432,9 +1436,9 @@ const ProteinDetail = (props) => {
           setPageLoading(false);
         } else {
           let error = {
-            response : {
-              status : stringConstants.errors.defaultDialogAlert.id
-            }
+            response: {
+              status: stringConstants.errors.defaultDialogAlert.id,
+            },
           };
           axiosError(error, "", "No results. " + message, setPageLoading, setAlertDialogInput);
         }
@@ -1897,6 +1901,17 @@ const ProteinDetail = (props) => {
                       {stringConstants.sidebar.phosphorylation.displayname}
                     </h4>
                     <div className="float-right">
+                      <span>
+                        <Link to={`${routeConstants.protVista}${id}`}>
+                          <Button
+                            type="button"
+                            style={{ marginLeft: "5px" }}
+                            className="gg-btn-blue"
+                          >
+                            <FaSearchPlus /> ProtVista
+                          </Button>
+                        </Link>
+                      </span>
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() => toggleCollapse("phosphorylation", collapsed.phosphorylation)}
@@ -1954,6 +1969,17 @@ const ProteinDetail = (props) => {
                       {stringConstants.sidebar.glycation.displayname}
                     </h4>
                     <div className="float-right">
+                      <span>
+                        <Link to={`${routeConstants.protVista}${id}`}>
+                          <Button
+                            type="button"
+                            style={{ marginLeft: "5px" }}
+                            className="gg-btn-blue"
+                          >
+                            <FaSearchPlus /> ProtVista
+                          </Button>
+                        </Link>
+                      </span>
                       <Accordion.Toggle
                         eventKey="0"
                         onClick={() => toggleCollapse("glycation", collapsed.glycation)}
@@ -2162,6 +2188,8 @@ const ProteinDetail = (props) => {
                           glycosylation={glycosylation}
                           mutation={snv}
                           siteAnnotation={site_annotation}
+                          phosphorylationObj={phosphorylation}
+                          glycationObj={glycation}
                           selectedHighlights={selectedHighlights}
                           setSelectedHighlights={setSelectedHighlights}
                         />
@@ -2726,10 +2754,12 @@ const ProteinDetail = (props) => {
                       {stringConstants.sidebar.isoforms.displayname}
                     </h4>
                     <div className="float-right">
-                      <Link
-                        to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}
-                      >
-                        <Button type="button" className="gg-btn-blue" disabled={(!isoforms) || (isoforms && isoforms.length <= 1)}>
+                      <Link to={`${routeConstants.isoAlignment}${id}/isoformset.uniprotkb`}>
+                        <Button
+                          type="button"
+                          className="gg-btn-blue"
+                          disabled={!isoforms || (isoforms && isoforms.length <= 1)}
+                        >
                           Alignment
                         </Button>
                       </Link>

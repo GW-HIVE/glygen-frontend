@@ -41,7 +41,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { Tab, Tabs, Container } from "react-bootstrap";
 import CollapsableReference from "../components/CollapsableReference";
 import DirectSearch from "../components/search/DirectSearch.js";
-import { getGlycanSearch } from '../data/glycan';
+import { getGlycanSearch } from "../data/glycan";
 
 const glycanStrings = stringConstants.glycan.common;
 const glycanDirectSearch = stringConstants.glycan.direct_search;
@@ -929,33 +929,44 @@ const GlycanDetail = props => {
   }
 
   /**
-	 * Function to handle glycan direct search.
-	 **/
-	const glycanSearch = (formObject) => {
+   * Function to handle glycan direct search.
+   **/
+  const glycanSearch = formObject => {
     setPageLoading(true);
-		logActivity("user", id, "Performing Direct Search");
-		let message = "Direct Search query=" + JSON.stringify(formObject);
-		getGlycanSearch(formObject)
-			.then((response) => {
-				if (response.data['list_id'] !== '') {
-					logActivity("user", (id || "") + ">" + response.data['list_id'], message)
-					.finally(() => {	
-						props.history.push(routeConstants.glycanList + response.data['list_id']);
-					});;
-					setPageLoading(false);
-				} else {
+    logActivity("user", id, "Performing Direct Search");
+    let message = "Direct Search query=" + JSON.stringify(formObject);
+    getGlycanSearch(formObject)
+      .then(response => {
+        if (response.data["list_id"] !== "") {
+          logActivity(
+            "user",
+            (id || "") + ">" + response.data["list_id"],
+            message
+          ).finally(() => {
+            props.history.push(
+              routeConstants.glycanList + response.data["list_id"]
+            );
+          });
+          setPageLoading(false);
+        } else {
           let error = {
-            response : {
-              status : stringConstants.errors.defaultDialogAlert.id
+            response: {
+              status: stringConstants.errors.defaultDialogAlert.id
             }
           };
-          axiosError(error, "", "No results. " + message, setPageLoading, setAlertDialogInput);
-				}
-			})
-			.catch(function (error) {
-				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
-			});
-	};
+          axiosError(
+            error,
+            "",
+            "No results. " + message,
+            setPageLoading,
+            setAlertDialogInput
+          );
+        }
+      })
+      .catch(function(error) {
+        axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+      });
+  };
 
   if (nonExistent) {
     return (
@@ -1177,16 +1188,16 @@ const GlycanDetail = props => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <p>
+                      <div>
                         {glytoucan && glytoucan.glytoucan_ac && (
                           <>
-                            <p>
+                            <span>
                               <img
                                 className="img-cartoon"
                                 src={getGlycanImageUrl(glytoucan.glytoucan_ac)}
                                 alt="Glycan img"
                               />
-                            </p>
+                            </span>
                             <div>
                               <strong>
                                 {proteinStrings.glytoucan_ac.shortName}:{" "}
@@ -1317,16 +1328,24 @@ const GlycanDetail = props => {
                                         )}
                                     </span>
                                     <span>
-                                    <DirectSearch
-                                      text={glycanDirectSearch.glycan_type.text}
-                                      searchType={"glycan"}
-                                      fieldType={glycanStrings.glycan_type.id}
-                                      fieldValue={{
-                                        type : Formatclassification.type.name,
-                                        subtype : Formatclassification.subtype && Formatclassification.subtype.name  !== "Other" ? Formatclassification.subtype.name : ""
-                                      }}
-                                      executeSearch={glycanSearch}
-                                    />
+                                      <DirectSearch
+                                        text={
+                                          glycanDirectSearch.glycan_type.text
+                                        }
+                                        searchType={"glycan"}
+                                        fieldType={glycanStrings.glycan_type.id}
+                                        fieldValue={{
+                                          type: Formatclassification.type.name,
+                                          subtype:
+                                            Formatclassification.subtype &&
+                                            Formatclassification.subtype
+                                              .name !== "Other"
+                                              ? Formatclassification.subtype
+                                                  .name
+                                              : ""
+                                        }}
+                                        executeSearch={glycanSearch}
+                                      />
                                     </span>
                                     {<br />}
                                   </>
@@ -1349,7 +1368,7 @@ const GlycanDetail = props => {
                             </div>
                           </>
                         )}
-                      </p>
+                      </div>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -1424,16 +1443,21 @@ const GlycanDetail = props => {
                                   text={glycanDirectSearch.organism.text}
                                   searchType={"glycan"}
                                   fieldType={glycanStrings.organism.id}
-                                  fieldValue={
-                                    {
-                                      organism_list: [{name: orgEvi, id: organismEvidence[orgEvi].taxid}],
-                                      annotation_category: "",
-                                      operation: "or"
-                                    }
-                                  }
+                                  fieldValue={{
+                                    organism_list: [
+                                      {
+                                        name: orgEvi,
+                                        id: organismEvidence[orgEvi].taxid
+                                      }
+                                    ],
+                                    annotation_category: "",
+                                    operation: "or"
+                                  }}
                                   executeSearch={glycanSearch}
                                 />
-                                <EvidenceList evidences={organismEvidence[orgEvi].evidence} />
+                                <EvidenceList
+                                  evidences={organismEvidence[orgEvi].evidence}
+                                />
                               </>
                             </Col>
                           ))}
@@ -1922,10 +1946,10 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={iupac} />
                               </Col>
                             </Row>
-                            <p className="text-overflow">{iupac} </p>
+                            <span className="text-overflow">{iupac} </span>
                           </>
                         ) : (
-                          <p> </p>
+                          <span> </span>
                         )}
 
                         {wurcs ? (
@@ -1939,10 +1963,10 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={wurcs} />
                               </Col>
                             </Row>
-                            <p className="text-overflow">{wurcs} </p>
+                            <span className="text-overflow">{wurcs} </span>
                           </>
                         ) : (
-                          <p> </p>
+                          <span> </span>
                         )}
 
                         {glycoct ? (
@@ -1956,12 +1980,12 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={glycoct} />
                               </Col>
                             </Row>
-                            <p id="text_element" className="text-overflow">
+                            <span id="text_element" className="text-overflow">
                               {glycoct}
-                            </p>
+                            </span>
                           </>
                         ) : (
-                          <p></p>
+                          <span> </span>
                         )}
 
                         {inchi ? (
@@ -1976,10 +2000,10 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={inchi} />
                               </Col>
                             </Row>
-                            <p className="text-overflow">{inchi}</p>
+                            <span className="text-overflow">{inchi}</span>
                           </>
                         ) : (
-                          <p></p>
+                          <span> </span>
                         )}
 
                         {glycam ? (
@@ -1994,10 +2018,10 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={glycam} />
                               </Col>
                             </Row>
-                            <p className="text-overflow">{glycam}</p>
+                            <span className="text-overflow">{glycam}</span>
                           </>
                         ) : (
-                          <p></p>
+                          <span> </span>
                         )}
 
                         {smiles_isomeric ? (
@@ -2012,10 +2036,12 @@ const GlycanDetail = props => {
                                 <ReactCopyClipboard value={smiles_isomeric} />
                               </Col>
                             </Row>
-                            <p className="text-overflow">{smiles_isomeric}</p>
+                            <span className="text-overflow">
+                              {smiles_isomeric}
+                            </span>
                           </>
                         ) : (
-                          <p></p>
+                          <span> </span>
                         )}
                       </p>
                     </Card.Body>
@@ -2060,7 +2086,7 @@ const GlycanDetail = props => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {itemsCrossRef && itemsCrossRef.length ? (
-                        <p>
+                        <div>
                           <ul className="list-style-none">
                             {/* <Row> */}
                             {itemsCrossRef.map(crossRef => (
@@ -2072,9 +2098,9 @@ const GlycanDetail = props => {
                               </li>
                             ))}
                           </ul>
-                        </p>
+                        </div>
                       ) : (
-                        <p>No data available.</p>
+                        <span>No data available.</span>
                       )}
                     </Card.Body>
                   </Accordion.Collapse>
@@ -2116,7 +2142,10 @@ const GlycanDetail = props => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.history}>
+                  <Accordion.Collapse
+                    eventKey="0"
+                    out={(collapsed.history = "false")}
+                  >
                     <Card.Body>
                       {history && history.length && (
                         <>
@@ -2169,15 +2198,18 @@ const GlycanDetail = props => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+                  <Accordion.Collapse
+                    eventKey="0"
+                    out={(collapsed.publication = "false")}
+                  >
                     <Card.Body className="card-padding-zero">
-                      <Table hover fluid>
+                      <Table hover fluid="true">
                         {publication && (
                           <tbody className="table-body">
                             {publication.map((pub, pubIndex) => (
                               <tr className="table-row">
                                 <td key={pubIndex}>
-                                  <p>
+                                  <div>
                                     <div>
                                       <h5 style={{ marginBottom: "3px" }}>
                                         <strong>{pub.title}</strong>{" "}
@@ -2216,18 +2248,18 @@ const GlycanDetail = props => {
                                       inline={true}
                                       evidences={groupEvidences(pub.evidence)}
                                     />
-                                  </p>
+                                  </div>
                                 </td>
                               </tr>
                             ))}
                           </tbody>
                         )}
-                        {!publication && (
-                          <p className="no-data-msg-publication">
-                            No data available.
-                          </p>
-                        )}
                       </Table>
+                      {!publication && (
+                        <p className="no-data-msg-publication">
+                          No data available.
+                        </p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

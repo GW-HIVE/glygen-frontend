@@ -65,7 +65,7 @@ const Publication = (props) => {
     // setPageLoading(true);
     setPageLoading(false);
     logActivity("user", id);
-  }, []);
+  }, [id]);
 
   /**
    * Adding toggle collapse arrow icon to card header individualy.
