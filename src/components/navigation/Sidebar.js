@@ -50,7 +50,7 @@ function Sidebar({ items, offset = 105 }) {
         {items.map(({ label, id, disabled }) => (
           <Link to={"#" + id} key={id}>
             <ul
-              button
+              button="true"
               onClick={() => setActiveLink(id)}
               className={
                 "sidebar-item" +

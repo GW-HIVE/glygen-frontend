@@ -679,10 +679,9 @@ const ProteinDetail = (props) => {
       //testing
     },
     {
-      dataField: "glytoucan_ac",
+      dataField: "image",
       text: glycanStrings.glycan_image.name,
       sort: false,
-      selected: true,
       formatter: (value, row) => (
         <div className="img-wrapper">
           <img className="img-cartoon" src={getGlycanImageUrl(row.glytoucan_ac)} alt="Glycan img" />
@@ -769,7 +768,7 @@ const ProteinDetail = (props) => {
       ),
     },
     {
-      dataField: "interactor_id",
+      dataField: "image",
       text: glycanStrings.glycan_image.name,
       sort: false,
       selected: true,
@@ -2102,12 +2101,12 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body className="card-padding-zero">
-                      <Table hover fluid>
+                      <Table hover fluid="true">
                         <FunctionList functions={functions} />
-                        {!functions && (
-                          <p className="no-data-msg-publication">No data available.</p>
-                        )}
                       </Table>
+                      {!functions && (
+                          <p className="no-data-msg-publication">No data available.</p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2810,11 +2809,10 @@ const ProteinDetail = (props) => {
                             ))}
                           </Grid>
                         )}
-
-                        {!isoforms && (
-                          <p classisoforms_ac="no-data-msg-publication">No data available.</p>
-                        )}
                       </p>
+                      {!isoforms && (
+                          <p classisoforms_ac="no-data-msg-publication">No data available.</p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2972,7 +2970,7 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body className="card-padding-zero">
-                      <Table hover fluid>
+                      <Table hover fluid="true">
                         {diseaseData && diseaseData.length > 0 && (
                           <tbody className="table-body">
                             {diseaseData.map((thisDisease) => (
@@ -3327,7 +3325,7 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
                     <Card.Body className="card-padding-zero">
-                      <Table hover fluid>
+                      <Table hover fluid="true">
                         {publication && (
                           <tbody className="table-body">
                             {publication.map((pub, pubIndex) => (
