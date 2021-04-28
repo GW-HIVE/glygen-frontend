@@ -624,7 +624,7 @@ const GlycanDetail = props => {
       )
     },
     {
-      dataField: "id",
+      dataField: "image",
       text: glycanStrings.glycan_image.name,
       sort: false,
       selected: true,
@@ -820,7 +820,7 @@ const GlycanDetail = props => {
   ];
   const motifColumns = [
     {
-      dataField: "id",
+      dataField: "image",
       text: glycanStrings.glycan_image.name,
       sort: false,
       selected: true,
