@@ -59,11 +59,11 @@ const items = [
   { label: stringConstants.sidebar.sequence.displayname, id: "Sequence" },
   {
     label: stringConstants.sidebar.site_annotation.displayname,
-    id: "Site-Annotation",
-  },
+    id: "Site-Annotation"
+  }
 ];
 
-const sortByPosition = function (a, b) {
+const sortByPosition = function(a, b) {
   if (parseInt(a.position) < parseInt(b.position)) {
     return -1;
   } else if (parseInt(b.position) < parseInt(a.position)) {
@@ -72,7 +72,7 @@ const sortByPosition = function (a, b) {
   return 0;
 };
 
-const sortByStartPos = function (a, b) {
+const sortByStartPos = function(a, b) {
   if (a.start_pos < b.start_pos) {
     return -1;
   } else if (b.start_pos < a.start_pos) {
@@ -81,7 +81,12 @@ const sortByStartPos = function (a, b) {
   return 0;
 };
 
-const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosition }) => {
+const SequenceLocationViewer = ({
+  sequence,
+  annotations,
+  position,
+  onSelectPosition
+}) => {
   var taperlength = 3;
   var taperDelta = 9;
   var translateDelta = 7;
@@ -94,7 +99,7 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
 
   const getHighlightClassname = (reducedAnnotations, position) => {
     const match = reducedAnnotations.find(
-      (annotation) => parseInt(annotation.position) === parseInt(position)
+      annotation => parseInt(annotation.position) === parseInt(position)
     );
 
     if (match) {
@@ -114,7 +119,7 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
   useEffect(() => {
     const reducedAnnotations = annotations.reduce((all, current) => {
       const result = [...all];
-      const atPosition = all.find((x) => x.position === current.position);
+      const atPosition = all.find(x => x.position === current.position);
 
       if (!atPosition) {
         const item = { ...current, allTypes: [current.typeAnnotate] };
@@ -129,7 +134,7 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
     setFilteredAnnotations(reducedAnnotations);
 
     const current = reducedAnnotations.find(
-      (x) => parseInt(x.position, 10) === parseInt(position, 10)
+      x => parseInt(x.position, 10) === parseInt(position, 10)
       //x => x.position === parseInt(position, 10)
     );
 
@@ -142,7 +147,7 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
         character,
         highlight: getHighlightClassname(reducedAnnotations, currentPosition),
         size: null,
-        offset: null,
+        offset: null
       };
     });
 
@@ -170,7 +175,8 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
       setTimeout(() => {
         const zoom = document.querySelector(".zoom-sequence");
         const currentElement = document.querySelector(".char-current");
-        const offset = currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2 - 50;
+        const offset =
+          currentElement.offsetLeft - (zoom.offsetWidth - 100) / 2 - 50;
         zoom.scrollLeft = offset;
       }, 100);
     }
@@ -180,13 +186,17 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
   // React Hook useEffect has missing dependencies: 'centerSize', 'taperDelta', 'taperlength', 'translateCenter', and 'translateDelta'. Either include them or remove the dependency array
   const selectPrevious = () => {
     if (currentAnnotationIndex > 0) {
-      onSelectPosition(filteredAnnotations[currentAnnotationIndex - 1].position);
+      onSelectPosition(
+        filteredAnnotations[currentAnnotationIndex - 1].position
+      );
     }
   };
 
   const selectNext = () => {
     if (currentAnnotationIndex < filteredAnnotations.length - 1) {
-      onSelectPosition(filteredAnnotations[currentAnnotationIndex + 1].position);
+      onSelectPosition(
+        filteredAnnotations[currentAnnotationIndex + 1].position
+      );
     }
   };
 
@@ -195,8 +205,11 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
       <Row>
         <Grid item xs={8} sm={4}></Grid>
         <Grid item xs={6} sm={4}>
-          <select value={position} onChange={(event) => onSelectPosition(event.target.value)}>
-            {filteredAnnotations.sort(sortByPosition).map((annotation) => (
+          <select
+            value={position}
+            onChange={event => onSelectPosition(event.target.value)}
+          >
+            {filteredAnnotations.sort(sortByPosition).map(annotation => (
               <option key={annotation.key} value={annotation.position}>
                 {annotation.key}: {annotation.allTypes.join(", ")}
               </option>
@@ -214,14 +227,18 @@ const SequenceLocationViewer = ({ sequence, annotations, position, onSelectPosit
 
             <Grid className="zoom">
               <div className="zoom-sequence">
-                {styledSequence.map((item) => (
+                {styledSequence.map(item => (
                   <span
                     key={item.index}
                     style={{
                       fontSize: item.size ? `${item.size}px` : "inherit",
-                      transform: item.offset ? `translateY(${item.offset}px)` : "none",
+                      transform: item.offset
+                        ? `translateY(${item.offset}px)`
+                        : "none"
                     }}
-                    className={`${item.highlight}${item.current ? " char-current" : ""}`}
+                    className={`${item.highlight}${
+                      item.current ? " char-current" : ""
+                    }`}
                   >
                     {item.character}
                   </span>
@@ -279,7 +296,7 @@ const Siteview = ({ position }) => {
       ) {
         setNonExistent({
           error_code: response.data.error_list[0].error_code,
-          history: response.data.history,
+          history: response.data.history
         });
       } else {
         let message = "Site Detail api call";
@@ -297,15 +314,15 @@ const Siteview = ({ position }) => {
     if (detailData.glycosylation) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.glycosylation.sort(sortByStartPos).map((glycosylation) => ({
+        ...detailData.glycosylation.sort(sortByStartPos).map(glycosylation => ({
           position: detailData.start_pos,
           type: glycosylation.type.split("-")[0],
           label: glycosylation.residue + "Glycosylation",
           glytoucan_ac: glycosylation.glytoucan_ac,
           evidence: glycosylation.evidence,
           residue: glycosylation.residue,
-          typeAnnotate: glycosylation.type.split("-")[0] + "-" + "Glycosylation",
-        })),
+          typeAnnotate: glycosylation.type.split("-")[0] + "-" + "Glycosylation"
+        }))
       ];
     }
 
@@ -316,12 +333,14 @@ const Siteview = ({ position }) => {
     if (detailData.site_annotation) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.site_annotation.sort(sortByStartPos).map((site_annotation) => ({
-          position: detailData.start_pos,
-          type: site_annotation.annotation.split("-")[0].toUpperCase(),
-          typeAnnotate: "Sequon",
-          residue: site_annotation.residue,
-        })),
+        ...detailData.site_annotation
+          .sort(sortByStartPos)
+          .map(site_annotation => ({
+            position: detailData.start_pos,
+            type: site_annotation.annotation.split("-")[0].toUpperCase(),
+            typeAnnotate: "Sequon",
+            residue: site_annotation.residue
+          }))
       ];
     }
 
@@ -332,35 +351,35 @@ const Siteview = ({ position }) => {
     if (detailData.snv) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.snv.sort(sortByStartPos).map((snv) => ({
+        ...detailData.snv.sort(sortByStartPos).map(snv => ({
           position: detailData.start_pos,
           label: "SNV",
           evidence: snv.evidence,
           residue: snv.residue,
-          typeAnnotate: "SNV",
-        })),
+          typeAnnotate: "SNV"
+        }))
       ];
     }
 
     if (detailData.mutagenesis) {
       dataAnnotations = [
         ...dataAnnotations,
-        ...detailData.mutagenesis.sort(sortByStartPos).map((mutagenesis) => ({
+        ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
           position: mutagenesis.start_pos,
           label: "Mutagenesis",
           evidence: mutagenesis.evidence,
-          typeAnnotate: "Mutagenesis",
-        })),
+          typeAnnotate: "Mutagenesis"
+        }))
       ];
     }
 
     const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
       ...annotation,
       key: `${annotation.type}-${annotation.position}`,
-      id: `${annotation.type}-${annotation.position}-${index}`,
+      id: `${annotation.type}-${annotation.position}-${index}`
     }));
 
-    const pickLabel = (type) => {
+    const pickLabel = type => {
       switch (type) {
         case "snv":
           return "M";
@@ -376,19 +395,20 @@ const Siteview = ({ position }) => {
     };
 
     if (detailData.all_sites && detailData.sequence) {
-      const getSequenceCharacter = (position) => detailData.sequence.sequence[position - 1];
+      const getSequenceCharacter = position =>
+        detailData.sequence.sequence[position - 1];
 
       const filteredSites = detailData.all_sites.filter(
-        (siteType) => !["mutagenesis", "site_annotation"].includes(siteType.type)
+        siteType => !["mutagenesis", "site_annotation"].includes(siteType.type)
       );
-      const mappedFilterSites = filteredSites.map((siteType) =>
-        siteType.site_list.map((site) => ({
+      const mappedFilterSites = filteredSites.map(siteType =>
+        siteType.site_list.map(site => ({
           position: site.start_pos,
           type: pickLabel(siteType.type),
           typeAnnotate: siteType.type,
 
           key: `${getSequenceCharacter(site.start_pos)}-${site.start_pos}`,
-          character: getSequenceCharacter(site.start_pos),
+          character: getSequenceCharacter(site.start_pos)
         }))
       );
       const uniquePositions = mappedFilterSites.flat();
@@ -410,13 +430,19 @@ const Siteview = ({ position }) => {
 
   const updateTableData = (annotations, position) => {
     setPositionData(
-      annotations.filter((annotation) => annotation.position === parseInt(position, 10))
+      annotations.filter(
+        annotation => annotation.position === parseInt(position, 10)
+      )
     );
   };
 
-  const selectPosition = (position) => {
+  const selectPosition = position => {
     setSelectedPosition(position);
-    window.history.pushState(null, `Selected Position ${position}`, `/Siteview/${id}/${position}`);
+    window.history.pushState(
+      null,
+      `Selected Position ${position}`,
+      `/Siteview/${id}/${position}`
+    );
     // window.location = `/Siteview/${id}/${position}`;
   };
 
@@ -433,9 +459,9 @@ const Siteview = ({ position }) => {
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
-          color: "white",
+          color: "white"
         };
-      },
+      }
     },
     {
       dataField: "glytoucan_ac",
@@ -445,15 +471,17 @@ const Siteview = ({ position }) => {
       headerStyle: (colum, colIndex) => {
         return {
           backgroundColor: "#4B85B6",
-          color: "white",
+          color: "white"
         };
       },
 
       formatter: (value, row) => (
         <LineTooltip text="View glycan details">
-          <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>{row.glytoucan_ac}</Link>
+          <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+            {row.glytoucan_ac}
+          </Link>
         </LineTooltip>
-      ),
+      )
     },
     {
       dataField: "position",
@@ -463,7 +491,7 @@ const Siteview = ({ position }) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white",
-          width: "12%",
+          width: "12%"
         };
       },
       formatter: (value, row) =>
@@ -476,7 +504,7 @@ const Siteview = ({ position }) => {
           </LineTooltip>
         ) : (
           "Not Reported"
-        ),
+        )
     },
     {
       dataField: "evidence",
@@ -486,17 +514,20 @@ const Siteview = ({ position }) => {
         return {
           backgroundColor: "#4B85B6",
           color: "white",
-          width: "23%",
+          width: "23%"
         };
       },
       formatter: (cell, row) => {
         return (
-          <EvidenceList key={row.position + row.glytoucan_ac} evidences={groupEvidences(cell)} />
+          <EvidenceList
+            key={row.position + row.glytoucan_ac}
+            evidences={groupEvidences(cell)}
+          />
         );
-      },
+      }
     },
     {
-      dataField: "glytoucan_ac",
+      dataField: "image",
       text: "Additional Information",
       sort: false,
       selected: true,
@@ -516,16 +547,24 @@ const Siteview = ({ position }) => {
           width: "30%",
           textAlign: "left",
           backgroundColor: "#4B85B6",
-          color: "white",
+          color: "white"
         };
-      },
-    },
+      }
+    }
   ];
 
-  const { uniprot, mass, refseq, gene, gene_name, species, protein_names } = detailData;
+  const {
+    uniprot,
+    mass,
+    refseq,
+    gene,
+    gene_name,
+    species,
+    protein_names
+  } = detailData;
   const uniprotNames = (protein_names || [])
-    .filter((x) => x.type === "recommended")
-    .map((x) => x.name);
+    .filter(x => x.type === "recommended")
+    .map(x => x.name);
 
   const organismEvidence = groupOrganismEvidences(species);
   // ==================================== //
@@ -536,12 +575,12 @@ const Siteview = ({ position }) => {
   const [collapsed, setCollapsed] = useReducer(
     (state, newState) => ({
       ...state,
-      ...newState,
+      ...newState
     }),
     {
       general: true,
       annotation: true,
-      sequence: true,
+      sequence: true
     }
   );
 
@@ -562,7 +601,7 @@ const Siteview = ({ position }) => {
                 This Protein <b>{id} </b>Record is Nonexistent
               </AlertTitle>
               <ul>
-                {nonExistent.history.map((item) => (
+                {nonExistent.history.map(item => (
                   <span className="recordInfo">
                     <li>{item.description}</li>
                   </span>
@@ -626,10 +665,11 @@ const Siteview = ({ position }) => {
               <DownloadButton
                 types={[
                   {
-                    display: stringConstants.download.proteinsite_jsondata.displayname,
+                    display:
+                      stringConstants.download.proteinsite_jsondata.displayname,
                     type: "json",
-                    data: "site_detail",
-                  },
+                    data: "site_detail"
+                  }
                 ]}
                 dataType="site_detail"
                 dataId={`${id}.${position}.${position}`}
@@ -640,7 +680,9 @@ const Siteview = ({ position }) => {
               <Helmet>
                 {getTitle("siteView", {
                   uniprot_canonical_ac:
-                    uniprot && uniprot.uniprot_canonical_ac ? uniprot.uniprot_canonical_ac : "",
+                    uniprot && uniprot.uniprot_canonical_ac
+                      ? uniprot.uniprot_canonical_ac
+                      : ""
                 })}
                 {getMeta("siteView")}
               </Helmet>
@@ -648,7 +690,7 @@ const Siteview = ({ position }) => {
               {/* <PageLoader pageLoading={pageLoading} /> */}
               <DialogAlert
                 alertInput={alertDialogInput}
-                setOpen={(input) => {
+                setOpen={input => {
                   setAlertDialogInput({ show: input });
                 }}
               />
@@ -684,10 +726,14 @@ const Siteview = ({ position }) => {
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("general", collapsed.general)}
+                        onClick={() =>
+                          toggleCollapse("general", collapsed.general)
+                        }
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.general ? closeIcon : expandIcon}</span>
+                        <span>
+                          {collapsed.general ? closeIcon : expandIcon}
+                        </span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
@@ -695,7 +741,7 @@ const Siteview = ({ position }) => {
                     <Card.Body>
                       <div
                         style={{
-                          marginBottom: "5px",
+                          marginBottom: "5px"
                         }}
                       >
                         {gene && (
@@ -703,19 +749,36 @@ const Siteview = ({ position }) => {
                             {gene.map((genes, genesname) => (
                               <span key={genesname}>
                                 <div>
-                                  <strong>{proteinStrings.gene_name.name}:</strong>{" "}
-                                  <a href={genes.url} target="_blank" rel="noopener noreferrer">
+                                  <strong>
+                                    {proteinStrings.gene_name.name}:
+                                  </strong>{" "}
+                                  <a
+                                    href={genes.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
                                     {genes.name}
                                   </a>
                                 </div>
 
                                 {gene.locus && (
                                   <div>
-                                    <strong>{proteinStrings.gene_location.name}:</strong>{" "}
+                                    <strong>
+                                      {proteinStrings.gene_location.name}:
+                                    </strong>{" "}
                                     {proteinStrings.chromosome.name}: {""}
-                                    {genes.locus ? genes.locus.chromosome : "NA"} {""}(
-                                    {genes.locus ? addCommas(genes.locus.start_pos) : "NA"} -{" "}
-                                    {genes.locus ? addCommas(genes.locus.end_pos) : "NA"})
+                                    {genes.locus
+                                      ? genes.locus.chromosome
+                                      : "NA"}{" "}
+                                    {""}(
+                                    {genes.locus
+                                      ? addCommas(genes.locus.start_pos)
+                                      : "NA"}{" "}
+                                    -{" "}
+                                    {genes.locus
+                                      ? addCommas(genes.locus.end_pos)
+                                      : "NA"}
+                                    )
                                   </div>
                                 )}
 
@@ -728,25 +791,41 @@ const Siteview = ({ position }) => {
                             ))}
                           </>
                         )}
-                        {!gene && <p className="no-data-msg-publication">No data available.</p>}
+                        {!gene && (
+                          <p className="no-data-msg-publication">
+                            No data available.
+                          </p>
+                        )}
                       </div>
 
                       {uniprot && uniprot.uniprot_canonical_ac && (
                         <>
                           <div>
                             <strong>{proteinStrings.uniprot_id.name}: </strong>
-                            <a href={uniprot.url} target="_blank" rel="noopener noreferrer">
+                            <a
+                              href={uniprot.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               {uniprot.uniprot_id}{" "}
                             </a>
                           </div>
                           <div>
-                            <strong>{proteinStrings.uniprot_accession.name}: </strong>
-                            <a href={uniprot.url} target="_blank" rel="noopener noreferrer">
+                            <strong>
+                              {proteinStrings.uniprot_accession.name}:{" "}
+                            </strong>
+                            <a
+                              href={uniprot.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
                               {uniprot.uniprot_canonical_ac}
                             </a>
                           </div>
                           <div>
-                            <strong>{proteinStrings.sequence_length.name}: </strong>
+                            <strong>
+                              {proteinStrings.sequence_length.name}:{" "}
+                            </strong>
                             <a
                               href={`https://www.uniprot.org/uniprot/${uniprot.uniprot_canonical_ac}/#sequences`}
                               target="_blank"
@@ -756,26 +835,39 @@ const Siteview = ({ position }) => {
                             </a>
                           </div>
                           <div>
-                            <strong>{proteinStrings.recommendedname.name}: </strong>{" "}
+                            <strong>
+                              {proteinStrings.recommendedname.name}:{" "}
+                            </strong>{" "}
                             {/* {proteinStrings.protein_names_uniprotkb.shortName} */}
                             {uniprotNames}
                           </div>
                           <div>
-                            <strong>{proteinStrings.chemical_mass.name}: </strong>
+                            <strong>
+                              {proteinStrings.chemical_mass.name}:{" "}
+                            </strong>
                             {addCommas(mass.chemical_mass)} Da
                           </div>
 
                           {refseq && (
                             <div>
                               <>
-                                <strong>{proteinStrings.refseq_ac.name}: </strong>{" "}
-                                <a href={refseq.url} target="_blank" rel="noopener noreferrer">
+                                <strong>
+                                  {proteinStrings.refseq_ac.name}:{" "}
+                                </strong>{" "}
+                                <a
+                                  href={refseq.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
                                   {" "}
                                   {refseq.ac}{" "}
                                 </a>{" "}
                                 <div>
                                   {" "}
-                                  <strong>{proteinStrings.refSeq_name.name}: </strong> {refseq.name}{" "}
+                                  <strong>
+                                    {proteinStrings.refSeq_name.name}:{" "}
+                                  </strong>{" "}
+                                  {refseq.name}{" "}
                                 </div>{" "}
                               </>
                             </div>
@@ -785,11 +877,13 @@ const Siteview = ({ position }) => {
                       <div>
                         {organismEvidence &&
                           // For every organism object
-                          Object.keys(organismEvidence).map((orgEvi) => (
+                          Object.keys(organismEvidence).map(orgEvi => (
                             // For every database for current organism object
-                            <div>
+                            <div key={orgEvi}>
                               <>
-                                <strong>{proteinStrings.organism.name}: </strong>
+                                <strong>
+                                  {proteinStrings.organism.name}:{" "}
+                                </strong>
                                 {orgEvi} {"("}
                                 <span className="text-capitalize">
                                   {organismEvidence[orgEvi].common_name}
@@ -805,7 +899,9 @@ const Siteview = ({ position }) => {
                                 </a>
                                 {/* </LineTooltip> */}
                                 {"]"}
-                                <EvidenceList evidences={organismEvidence[orgEvi].evidence} />
+                                <EvidenceList
+                                  evidences={organismEvidence[orgEvi].evidence}
+                                />
                               </>
                             </div>
                           ))}
@@ -841,10 +937,14 @@ const Siteview = ({ position }) => {
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("sequence", collapsed.sequence)}
+                        onClick={() =>
+                          toggleCollapse("sequence", collapsed.sequence)
+                        }
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.sequence ? closeIcon : expandIcon}</span>
+                        <span>
+                          {collapsed.sequence ? closeIcon : expandIcon}
+                        </span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
@@ -890,17 +990,24 @@ const Siteview = ({ position }) => {
                     <div className="float-right">
                       <Accordion.Toggle
                         eventKey="0"
-                        onClick={() => toggleCollapse("annotation", collapsed.annotation)}
+                        onClick={() =>
+                          toggleCollapse("annotation", collapsed.annotation)
+                        }
                         className="gg-green arrow-btn"
                       >
-                        <span>{collapsed.annotation ? closeIcon : expandIcon}</span>
+                        <span>
+                          {collapsed.annotation ? closeIcon : expandIcon}
+                        </span>
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {positionData && positionData.length !== 0 && (
-                        <ClientPaginatedTable data={positionData} columns={annotationColumns} />
+                        <ClientPaginatedTable
+                          data={positionData}
+                          columns={annotationColumns}
+                        />
                       )}
                       {!positionData && <p>No data available.</p>}
                     </Card.Body>
