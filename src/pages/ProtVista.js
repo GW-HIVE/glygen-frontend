@@ -72,7 +72,18 @@ const ProtVista = () => {
         shape: "square",
       },
     ];
-
+    var phosphorylationP = {
+      type: "PhosphorylationP",
+      residues: [],
+      color: "#8480F3",
+      shape: "circle",
+    };
+    var glycationG = {
+      type: "GlycationG",
+      residues: [],
+      color: "#42C2C2",
+      shape: "circle",
+    };
     var mutations = {
       type: "Mutations",
       residues: [],
@@ -154,6 +165,39 @@ const ProtVista = () => {
           }
         }
       } //);
+    }
+
+    if (data.phosphorylation) {
+      for (let phosphorylation of data.phosphorylation) {
+        // $.each(data.mutation, function (i, mutation) {
+        phosphorylationP.residues.push({
+          start: phosphorylation.start_pos,
+          end: phosphorylation.end_pos,
+          color: phosphorylationP.color,
+          shape: phosphorylationP.shape,
+          accession: data.uniprot.uniprot_canonical_ac,
+          type: "(" + phosphorylation.sequence_org + " → " + phosphorylation.sequence_mut + ")",
+          title: "(" + phosphorylation.sequence_org + " → " + phosphorylation.sequence_mut + ")",
+          tooltipContent:
+            "<span className=marker> annotation " + phosphorylation.annotation + "</span>",
+        });
+      }
+    }
+
+    if (data.glycation) {
+      for (let glycation of data.glycation) {
+        // $.each(data.mutation, function (i, mutation) {
+        glycationG.residues.push({
+          start: glycation.start_pos,
+          end: glycation.end_pos,
+          color: glycationG.color,
+          shape: glycationG.shape,
+          accession: data.uniprot.uniprot_canonical_ac,
+          type: "(" + glycation.sequence_org + " → " + glycation.sequence_mut + ")",
+          title: "(" + glycation.sequence_org + " → " + glycation.sequence_mut + ")",
+          tooltipContent: "<span className=marker> annotation " + glycation.annotation + "</span>",
+        });
+      }
     }
 
     if (data.snv) {
@@ -255,6 +299,8 @@ const ProtVista = () => {
       oGlycanWithImage: glycosCombined[2],
       oGlycanWithoutImage: glycosCombined[3],
       nSequon: glycosCombined[4],
+      phosphorylationData: phosphorylationP,
+      glycationData: glycationG,
       mutationsData: mutations,
       mutagenesisData: mutagenesisS,
     };
@@ -268,6 +314,8 @@ const ProtVista = () => {
   const oGlycanWithImage = useRef(null);
   const oGlycanWithoutImage = useRef(null);
   const nSequon = useRef(null);
+  const phosphorylationData = useRef(null);
+  const glycationData = useRef(null);
   const mutationsData = useRef(null);
   const mutagenesisData = useRef(null);
   const allTrack = useRef(null);
@@ -372,6 +420,20 @@ const ProtVista = () => {
             ...formattedData.nSequon,
           ];
         }
+        if (phosphorylationData.current) {
+          phosphorylationData.current.data = formattedData.phosphorylationData.residues;
+
+          setTracksShown({
+            phosphorylationData: formattedData.phosphorylationData.residues.length > 0,
+          });
+        }
+        if (glycationData.current) {
+          glycationData.current.data = formattedData.glycationData.residues;
+
+          setTracksShown({
+            glycationData: formattedData.glycationData.residues.length > 0,
+          });
+        }
         if (mutationsData.current) {
           mutationsData.current.data = formattedData.mutationsData.residues;
 
@@ -393,6 +455,8 @@ const ProtVista = () => {
         addTooltipToReference(oGlycanWithImage);
         addTooltipToReference(oGlycanWithoutImage);
         addTooltipToReference(nSequon);
+        addTooltipToReference(phosphorylationData);
+        addTooltipToReference(glycationData);
         addTooltipToReference(mutationsData);
         addTooltipToReference(mutagenesisData);
       }
@@ -471,7 +535,6 @@ const ProtVista = () => {
                   displaystart={1}
                   displayend={data.sequence.length}
                 />
-
                 <protvista-sequence
                   id="seq1"
                   class="nav-track"
@@ -480,7 +543,6 @@ const ProtVista = () => {
                   displayend={data.sequence.length}
                   sequence={data.sequence.sequence}
                 />
-
                 {/* Blank Track */}
                 <protvista-track
                   class={`nav-track glycotrack emptytrack` + (expanded ? "" : " hidden")}
@@ -500,7 +562,6 @@ const ProtVista = () => {
                   layout="non-overlapping"
                   ref={allTrack}
                 />
-
                 <protvista-track
                   class={
                     `nav-track glycotrack ` +
@@ -537,7 +598,6 @@ const ProtVista = () => {
                   layout="non-overlapping"
                   ref={oGlycanWithImage}
                 />
-
                 <protvista-track
                   class={
                     `nav-track glycotrack` +
@@ -562,6 +622,24 @@ const ProtVista = () => {
                   layout="non-overlapping"
                   ref={nSequon}
                 />
+                <protvista-track
+                  class={
+                    `nav-track glycotrack` + (highlighted === "phosphorylation" ? " highlight" : "")
+                  }
+                  length={data.sequence.length}
+                  displaystart={1}
+                  displayend={data.sequence.length}
+                  layout="non-overlapping"
+                  ref={phosphorylationData}
+                />
+                <protvista-track
+                  class={`nav-track glycotrack` + (highlighted === "glycation" ? " highlight" : "")}
+                  length={data.sequence.length}
+                  displaystart={1}
+                  displayend={data.sequence.length}
+                  layout="non-overlapping"
+                  ref={glycationData}
+                />
 
                 {/* {tracksShown.mutation && ( */}
                 <protvista-track
@@ -573,7 +651,6 @@ const ProtVista = () => {
                   ref={mutationsData}
                 />
                 {/* )} */}
-
                 <protvista-track
                   class={
                     `nav-track glycotrack` + (highlighted === "mutegenesis" ? " highlight" : "")
@@ -645,6 +722,25 @@ const ProtVista = () => {
                     </span>
                   </span>
                 </li>
+                <li>
+                  <span
+                    className="super8 hover"
+                    onMouseEnter={() => setHighlighted("phosphorylation")}
+                  >
+                    &#9679;
+                    <span className="superx">
+                      <>Phosphorylation</>
+                    </span>
+                  </span>
+                </li>
+                <li>
+                  <span className="super9 hover" onMouseEnter={() => setHighlighted("glycation")}>
+                    &#9679;
+                    <span className="superx">
+                      <>Glycation</>
+                    </span>
+                  </span>
+                </li>
                 {/* {tracksShown && tracksShown.snv && ( */}
                 <li>
                   <span className="super5 hover" onMouseEnter={() => setHighlighted("mutation")}>
@@ -655,7 +751,6 @@ const ProtVista = () => {
                   </span>
                 </li>
                 {/* )} */}
-
                 <li>
                   <span className="super7 hover" onMouseEnter={() => setHighlighted("mutagenesis")}>
                     &#9646;
