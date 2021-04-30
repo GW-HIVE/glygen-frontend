@@ -266,18 +266,6 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "cell_line_tissue": {
-      "title": "Cell Line/Tissue",
-      "text": "Cell Line/Tissue information about publication specific detail.",
-      "urlText": "Read more...",
-      "url": "https://wiki.glygen.org/index.php/Main_Page"
-    },
-    "abundance": {
-      "title": "Abundance",
-      "text": "Abundance information about publication specific detail.",
-      "urlText": "Read more...",
-      "url": "https://wiki.glygen.org/index.php/Main_Page"
-    },
     "referenced_proteins": {
       "title": "Referenced Proteins",
       "text": "Referenced Proteins information about publication specific detail.",

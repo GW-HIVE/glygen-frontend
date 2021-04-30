@@ -2130,9 +2130,7 @@ const ProteinDetail = (props) => {
                       <Table hover fluid="true">
                         <FunctionList functions={functions} />
                       </Table>
-                      {!functions && (
-                          <p className="no-data-msg-publication">No data available.</p>
-                      )}
+                      {!functions && <p className="no-data-msg-publication">No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2841,7 +2839,7 @@ const ProteinDetail = (props) => {
                         )}
                       </p>
                       {!isoforms && (
-                          <p classisoforms_ac="no-data-msg-publication">No data available.</p>
+                        <p classisoforms_ac="no-data-msg-publication">No data available.</p>
                       )}
                     </Card.Body>
                   </Accordion.Collapse>
@@ -3379,13 +3377,16 @@ const ProteinDetail = (props) => {
                                             {glycanStrings.pmid.shortName}:
                                             {/* {glycanStrings.referenceType[ref.type].shortName}: */}
                                           </span>{" "}
-                                          <a
+                                          <Link to={`${routeConstants.publication}${ref.id}/pmid`}>
+                                            <>{ref.id}</>
+                                          </Link>
+                                          {/* <a
                                             href={ref.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
                                             <>{ref.id}</>
-                                          </a>
+                                          </a> */}{" "}
                                           <DirectSearch
                                             text={proteinDirectSearch.pmid.text}
                                             searchType={"protein"}

@@ -112,8 +112,7 @@ export default function Header(props) {
                   location.pathname.includes(routeConstants.proteinSearch) ||
                   location.pathname.includes(routeConstants.siteSearch) ||
                   location.pathname.includes(routeConstants.superSearch) ||
-                  location.pathname.includes(routeConstants.motifList) ||
-                  location.pathname === routeConstants.publication
+                  location.pathname === routeConstants.motifList
                     ? "gg-dropdown-navbar gg-dropdown-navbar-active"
                     : "gg-dropdown-navbar"
                 }
@@ -135,12 +134,12 @@ export default function Header(props) {
                 <NavDropdown.Item as={NavLink} to={routeConstants.motifList}>
                   List of Motifs
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to={routeConstants.publication}>
+                {/* <NavDropdown.Item as={NavLink} to={routeConstants.publication}>
                   Publication{" "}
                   <span className="gg-new-feature ml-1">
                     <strong>NEW</strong>
                   </span>
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
               </NavDropdown>
               <Nav.Link className="gg-nav-link" as={NavLink} to={routeConstants.quickSearch}>
                 QUICK&nbsp;SEARCH
