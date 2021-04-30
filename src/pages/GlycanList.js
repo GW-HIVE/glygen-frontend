@@ -18,7 +18,7 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
-import CheckBox from "../components/CheckBox";
+// import CheckBox from "../components/CheckBox";
 import { Checkbox } from "@material-ui/core";
 
 const GlycanList = props => {
