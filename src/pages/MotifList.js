@@ -23,7 +23,7 @@ import { Col } from "react-bootstrap";
 const glycanStrings = stringConstants.glycan.common;
 const motifStrings = stringConstants.motif.common;
 
-const MotifList = (props) => {
+const MotifList = props => {
   let { id } = useParams();
 
   const [data, setData] = useState([]);
@@ -32,7 +32,7 @@ const MotifList = (props) => {
   // const [motifListColumns, setMotifListColumns] = useState(MOTIF_LIST_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
-  const [totalSize, setTotalSize] = useState();
+  const [totalSize, setTotalSize] = useState(0);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -59,28 +59,35 @@ const MotifList = (props) => {
           setPageLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
   }, [id, sizePerPage]);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getMotifList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        // place to change values before rendering
+    getMotifList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
 
-        setData(data.results);
-        // setQuery(data.cache_info.query);
-        setPagination(data.pagination);
+      setData(data.results);
+      // setQuery(data.cache_info.query);
+      setPagination(data.pagination);
 
-        //   setSizePerPage()
-        setTotalSize(data.pagination.total_length);
-      }
-    );
+      //   setSizePerPage()
+      setTotalSize(data.pagination.total_length);
+    });
   };
 
   function rowStyleFormat(row, rowIdx) {
@@ -95,14 +102,18 @@ const MotifList = (props) => {
       selected: true,
       formatter: (value, row) => (
         <div className="img-wrapper">
-          <img className="img-cartoon" src={getGlycanImageUrl(row.motif_ac)} alt="Glycan img" />
+          <img
+            className="img-cartoon"
+            src={getGlycanImageUrl(row.motif_ac)}
+            alt="Glycan img"
+          />
         </div>
       ),
       headerStyle: (colum, colIndex) => {
         return {
-          whiteSpace: "nowrap",
+          whiteSpace: "nowrap"
         };
-      },
+      }
     },
     {
       dataField: "motif_ac",
@@ -114,9 +125,11 @@ const MotifList = (props) => {
       },
       formatter: (value, row) => (
         <LineTooltip text="View details">
-          <Link to={routeConstants.motifDetail + row.motif_ac}>{row.motif_ac}</Link>
+          <Link to={routeConstants.motifDetail + row.motif_ac}>
+            {row.motif_ac}
+          </Link>
         </LineTooltip>
-      ),
+      )
     },
     {
       dataField: "motif_name",
@@ -127,9 +140,11 @@ const MotifList = (props) => {
       },
       formatter: (value, row) => (
         <LineTooltip text="View details">
-          <Link to={routeConstants.motifDetail + row.motif_ac}>{row.motif_name}</Link>
+          <Link to={routeConstants.motifDetail + row.motif_ac}>
+            {row.motif_name}
+          </Link>
         </LineTooltip>
-      ),
+      )
     },
     {
       dataField: "synonyms",
@@ -140,15 +155,17 @@ const MotifList = (props) => {
       },
       formatter: (value, row) => (
         <>
-          {value.map((synonyms) => (
+          {value.map(synonyms => (
             <Col className="nowrap pl-0">
               <LineTooltip text="View details">
-                <Link to={routeConstants.motifDetail + row.motif_ac}>{synonyms}</Link>
+                <Link to={routeConstants.motifDetail + row.motif_ac}>
+                  {synonyms}
+                </Link>
               </LineTooltip>
             </Col>
           ))}
         </>
-      ),
+      )
     },
     {
       dataField: "glycan_count",
@@ -159,10 +176,12 @@ const MotifList = (props) => {
       },
       formatter: (value, row) => (
         <LineTooltip text="View details">
-          <Link to={routeConstants.motifDetail + row.motif_ac}>{row.glycan_count}</Link>
+          <Link to={routeConstants.motifDetail + row.motif_ac}>
+            {row.glycan_count}
+          </Link>
         </LineTooltip>
-      ),
-    },
+      )
+    }
   ];
 
   return (
@@ -177,7 +196,7 @@ const MotifList = (props) => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={(input) => {
+          setOpen={input => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -200,8 +219,8 @@ const MotifList = (props) => {
               {
                 display: stringConstants.download.motif_jsondata.displayname,
                 type: "json",
-                data: "motif_list",
-              },
+                data: "motif_list"
+              }
             ]}
             dataId={""}
             dataType="motif_list"
