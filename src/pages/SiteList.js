@@ -21,7 +21,7 @@ import DownloadButton from "../components/DownloadButton";
 
 // const proteinStrings = stringConstants.protein.common;
 
-const SiteList = (props) => {
+const SiteList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   const [data, setData] = useState([]);
@@ -45,7 +45,10 @@ const SiteList = (props) => {
 
     logActivity("user", id);
 
-    const dataPromise = Promise.all([getSiteSearchInit(), getSuperSearchList(id)]);
+    const dataPromise = Promise.all([
+      getSiteSearchInit(),
+      getSuperSearchList(id)
+    ]);
 
     dataPromise.then(([{ data: initData }, { data }]) => {
       if (data.error_code) {
@@ -63,7 +66,7 @@ const SiteList = (props) => {
       }
     });
 
-    dataPromise.catch(function (error) {
+    dataPromise.catch(function(error) {
       let message = "list api call";
       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
     });
@@ -99,21 +102,28 @@ const SiteList = (props) => {
   //     });
   // }, []);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     setPageLoading(true);
-    getSuperSearchList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        setPageLoading(false);
-        if (!data.error_code) {
-          setData(data.results);
-          setTimeStamp(data.cache_info.ts);
-          setPagination(data.pagination);
-          setTotalSize(data.pagination.total_length);
-        }
+    getSuperSearchList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      setPageLoading(false);
+      if (!data.error_code) {
+        setData(data.results);
+        setTimeStamp(data.cache_info.ts);
+        setPagination(data.pagination);
+        setTotalSize(data.pagination.total_length);
       }
-    );
+    });
   };
 
   const handleModifySearch = () => {
@@ -140,7 +150,7 @@ const SiteList = (props) => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={(input) => {
+          setOpen={input => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -159,15 +169,17 @@ const SiteList = (props) => {
           <DownloadButton
             types={[
               {
-                display: stringConstants.download.proteinsite_csvdata.displayname,
+                display:
+                  stringConstants.download.proteinsite_csvdata.displayname,
                 type: "csv",
-                data: "site_list",
+                data: "site_list"
               },
               {
-                display: stringConstants.download.proteinsite_jsondata.displayname,
+                display:
+                  stringConstants.download.proteinsite_jsondata.displayname,
                 type: "json",
-                data: "site_list",
-              },
+                data: "site_list"
+              }
             ]}
             dataId={id}
             itemType="site"

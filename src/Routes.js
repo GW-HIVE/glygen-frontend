@@ -93,6 +93,8 @@ const Routes = (props) => (
     <Route path={`${routeConstants.superSearch}:id/:searchId`} component={SuperSearch} />
     <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
     <Route path={routeConstants.superSearch} component={SuperSearch} />
+    <Route path={`${routeConstants.publication}:id/:publType`} component={Publication} />
+    <Route path={`${routeConstants.publication}:id`} component={Publication} />
     <Route path={routeConstants.publication} component={Publication} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />

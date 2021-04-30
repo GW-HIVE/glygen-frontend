@@ -94,7 +94,7 @@ const CompositionDisplay = props => {
   return (
     <>
       {props.composition.map(item => (
-        <>
+        <React.Fragment key={item.name}>
           {item.url ? (
             <>
               <a href={item.url} target="_blank" rel="noopener noreferrer">
@@ -110,7 +110,7 @@ const CompositionDisplay = props => {
               {"  "}
             </>
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   );
@@ -272,8 +272,8 @@ const GlycanDetail = props => {
         }
 
         if (
-          !detailDataTemp.associated_glycan ||
-          detailDataTemp.associated_glycan.length === 0
+          !detailDataTemp.glycoprotein ||
+          detailDataTemp.glycoprotein.length === 0
         ) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
@@ -321,9 +321,11 @@ const GlycanDetail = props => {
             true
           );
         }
+
         if (
-          !detailDataTemp.digital_seq ||
-          detailDataTemp.digital_seq.length === 0
+          !detailDataTemp.iupac &&
+          !detailDataTemp.wurcs &&
+          !detailDataTemp.glycoct
         ) {
           newSidebarData = setSidebarItemState(
             newSidebarData,
@@ -401,7 +403,6 @@ const GlycanDetail = props => {
     smiles_isomeric,
     inchi,
     classification,
-    glycoprotein,
     interactions,
     glycoct,
     publication,
@@ -414,6 +415,15 @@ const GlycanDetail = props => {
     tool_support,
     history
   } = detailData;
+
+  let glycoprotein = [];
+  if (detailData.glycoprotein) {
+    glycoprotein = detailData.glycoprotein.map((glycoprotein, index) => ({
+      ...glycoprotein,
+      id: `${glycoprotein.uniprot_canonical_ac}-${index}`
+    }));
+  }
+
   const setSidebarItemState = (items, itemId, disabledState) => {
     return items.map(item => {
       return {
@@ -1278,7 +1288,9 @@ const GlycanDetail = props => {
                               </Col>
                               <Col className="pl-0">
                                 {classification.map(Formatclassification => (
-                                  <>
+                                  <React.Fragment
+                                    key={`${Formatclassification.type.name}-${Formatclassification.subtype.name}`}
+                                  >
                                     <span>
                                       {Formatclassification.type.url && (
                                         <a
@@ -1348,7 +1360,7 @@ const GlycanDetail = props => {
                                       />
                                     </span>
                                     {<br />}
-                                  </>
+                                  </React.Fragment>
                                 ))}{" "}
                               </Col>
                             </Row>
@@ -1422,6 +1434,7 @@ const GlycanDetail = props => {
                               lg={4}
                               xl={4}
                               style={{ marginBottom: "10px" }}
+                              key={orgEvi}
                             >
                               <>
                                 <strong>{orgEvi}</strong> {"("}
@@ -1725,6 +1738,7 @@ const GlycanDetail = props => {
                     <Card.Body>
                       {enzyme && enzyme.length !== 0 && (
                         <ClientPaginatedTable
+                          idField={"uniprot_canonical_ac"}
                           data={enzyme}
                           columns={bioEnzymeColumns}
                           defaultSortField={"gene"}
@@ -1852,12 +1866,16 @@ const GlycanDetail = props => {
                               {expressionWithtissue &&
                                 expressionWithtissue.length > 0 && (
                                   <ClientPaginatedTable
+                                    idField={"start_pos"}
                                     data={expressionWithtissue}
                                     columns={expressionTissueColumns}
                                     onClickTarget={"#expression"}
                                     defaultSortField="start_pos"
                                   />
                                 )}
+                              {!expressionWithtissue.length && (
+                                <p>No data available.</p>
+                              )}
                               {!expressionWithtissue.length && (
                                 <p>No data available.</p>
                               )}
@@ -1934,7 +1952,7 @@ const GlycanDetail = props => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body className="text-responsive">
-                      <p>
+                      <div>
                         {iupac ? (
                           <>
                             <Row>
@@ -2043,7 +2061,7 @@ const GlycanDetail = props => {
                         ) : (
                           <span> </span>
                         )}
-                      </p>
+                      </div>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2089,8 +2107,9 @@ const GlycanDetail = props => {
                         <div>
                           <ul className="list-style-none">
                             {/* <Row> */}
-                            {itemsCrossRef.map(crossRef => (
-                              <li>
+
+                            {itemsCrossRef.map((crossRef, index) => (
+                              <li key={`${crossRef.database}-${index}`}>
                                 <CollapsableReference
                                   database={crossRef.database}
                                   links={crossRef.links}
@@ -2150,7 +2169,7 @@ const GlycanDetail = props => {
                       {history && history.length && (
                         <>
                           {history.map(historyItem => (
-                            <ul className="pl-3">
+                            <ul className="pl-3" key={historyItem.description}>
                               <li>
                                 {capitalizeFirstLetter(historyItem.description)}{" "}
                               </li>
@@ -2227,13 +2246,18 @@ const GlycanDetail = props => {
                                           <span style={{ paddingLeft: "15px" }}>
                                             {glycanStrings.pmid.shortName}:
                                           </span>{" "}
-                                          <a
+                                          <Link
+                                            to={`${routeConstants.publication}${ref.id}/pmid`}
+                                          >
+                                            <>{ref.id}</>
+                                          </Link>{" "}
+                                          {/* <a
                                             href={ref.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
                                             <>{ref.id}</>
-                                          </a>{" "}
+                                          </a>{" "} */}
                                           <DirectSearch
                                             text={glycanDirectSearch.pmid.text}
                                             searchType={"glycan"}

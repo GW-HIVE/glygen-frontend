@@ -4,7 +4,7 @@ import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
-import { GLYCAN_COLUMNS, getUserSelectedColumns } from "../data/glycan";
+import { GLYCAN_COLUMNS } from "../data/glycan";
 import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
@@ -18,12 +18,13 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
+// import CheckBox from "../components/CheckBox";
+import { Checkbox } from "@material-ui/core";
 
 const GlycanList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
-
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [timestamp, setTimeStamp] = useState();
@@ -165,6 +166,7 @@ const GlycanList = props => {
       </Helmet>
 
       <FeedbackWidget />
+
       <Container maxWidth="xl" className="gg-container">
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
@@ -182,6 +184,7 @@ const GlycanList = props => {
             onModifySearch={handleModifySearch}
           />
         </section>
+
         <section>
           <DownloadButton
             types={[

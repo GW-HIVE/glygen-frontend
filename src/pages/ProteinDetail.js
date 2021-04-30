@@ -2844,7 +2844,7 @@ const ProteinDetail = (props) => {
                         )}
                       </div>
                       {!isoforms && (
-                          <p classisoforms_ac="no-data-msg-publication">No data available.</p>
+                        <p classisoforms_ac="no-data-msg-publication">No data available.</p>
                       )}
                     </Card.Body>
                   </Accordion.Collapse>
@@ -3382,13 +3382,16 @@ const ProteinDetail = (props) => {
                                             {glycanStrings.pmid.shortName}:
                                             {/* {glycanStrings.referenceType[ref.type].shortName}: */}
                                           </span>{" "}
-                                          <a
+                                          <Link to={`${routeConstants.publication}${ref.id}/pmid`}>
+                                            <>{ref.id}</>
+                                          </Link>
+                                          {/* <a
                                             href={ref.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
                                             <>{ref.id}</>
-                                          </a>
+                                          </a> */}{" "}
                                           <DirectSearch
                                             text={proteinDirectSearch.pmid.text}
                                             searchType={"protein"}
