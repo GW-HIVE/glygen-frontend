@@ -24,7 +24,7 @@ export const getProteinList = (
     offset: offset,
     limit: limit,
     order: order,
-    sort: sort,
+    sort: sort
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/protein/list?query=${queryParamString}`;
@@ -44,7 +44,7 @@ export const getProteinsiteDetail = (protienId, position) => {
   // return getJson(url);
 };
 
-export const getProteinDetail = (accessionId) => {
+export const getProteinDetail = accessionId => {
   const url = `/protein/detail/${accessionId}`;
   return getJson(url);
 };
@@ -56,7 +56,13 @@ export const getProteinDownload = (id, format, compressed, type, headers) => {
   return postToAndGetBlob(url, headers);
 };
 
-export const getProteinSiteDownload = (id, format, compressed, type, headers) => {
+export const getProteinSiteDownload = (
+  id,
+  format,
+  compressed,
+  type,
+  headers
+) => {
   let message = "downloaded successfully ";
   logActivity("user", id, format, compressed, "No results. " + message);
   const query = { id, type, format, compressed };
@@ -64,15 +70,17 @@ export const getProteinSiteDownload = (id, format, compressed, type, headers) =>
   return postToAndGetBlob(url, headers);
 };
 
+function HeaderwithsameStyle(colum, colIndex) {
+  return { backgroundColor: "#4B85B6", color: "white" };
+}
+
 export const PROTEIN_COLUMNS = [
   {
     dataField: proteinStrings.shortName,
     text: proteinStrings.uniprot_accession.name,
     sort: true,
     selected: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle,
 
     formatter: (value, row) => (
       <LineTooltip text="View details">
@@ -80,72 +88,58 @@ export const PROTEIN_COLUMNS = [
           {row.uniprot_canonical_ac}
         </Link>
       </LineTooltip>
-    ),
+    )
   },
   {
     dataField: proteinStrings.gene_name.shortName,
     text: proteinStrings.gene_name.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
 
   {
     dataField: proteinStrings.protein_names.shortName,
     text: proteinStrings.protein_names.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
   {
-    dataField: "hit_score",
-    text: "Hit Score",
+    dataField: proteinStrings.hit_score.shortName,
+    text: proteinStrings.hit_score.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
   {
     dataField: proteinStrings.mass.shortName,
     text: proteinStrings.mass.name + " (Da)",
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
   {
     dataField: proteinStrings.organism.shortName,
     text: proteinStrings.organism.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
   {
     dataField: proteinStrings.refSeq_name.shortName,
     text: proteinStrings.refSeq_name.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
+    headerStyle: HeaderwithsameStyle
   },
   {
     dataField: proteinStrings.refseq_ac.shortName,
     text: proteinStrings.refseq_ac.name,
     sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-  },
+    headerStyle: HeaderwithsameStyle
+  }
 ];
 
 /**
  * Gets JSON for protein search.
  * @param {object} formObject - protein search JSON query object.
  */
-export const getProteinSearch = (formObject) => {
+export const getProteinSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search?" + json;
   return getJson(url);
@@ -155,7 +149,7 @@ export const getProteinSearch = (formObject) => {
  * Gets JSON for protein simple search.
  * @param {object} formObject - protein simple search JSON query object.
  */
-export const getProteinSimpleSearch = (formObject) => {
+export const getProteinSimpleSearch = formObject => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/protein/search_simple?" + json;
   return getJson(url);
@@ -172,7 +166,7 @@ export const getProteinInit = () => {
 export const getIsoAlignment = (protienId, alignment) => {
   const queryParamString = JSON.stringify({
     uniprot_canonical_ac: protienId,
-    cluster_type: alignment,
+    cluster_type: alignment
   });
   const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);
@@ -181,7 +175,7 @@ export const getIsoAlignment = (protienId, alignment) => {
 export const getHomoAlignment = (protienId, alignment) => {
   const queryParamString = JSON.stringify({
     uniprot_canonical_ac: protienId,
-    cluster_type: alignment,
+    cluster_type: alignment
   });
   const url = `/protein/alignment?query=${queryParamString}`;
   return getJson(url);

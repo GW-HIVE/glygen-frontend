@@ -15,6 +15,7 @@
         },
         "id": "glytoucan_ac"
       },
+
       "glycan_identifier": {
         "name": "Glycan ID",
         "shortName": "Glycan ID",
@@ -660,6 +661,11 @@
         },
         "id": "protein_names"
       },
+      "hit_score": {
+        "name": "Hit Score",
+        "shortName": "Hit Score",
+        "id": "hit_score"
+      },
       "glycosylation_type": {
         "name": "Glycosylation Type",
         "shortName": "Glycosylation Type",
@@ -769,7 +775,7 @@
         "tooltip": {},
         "id": "kinase_gene_name"
       },
-        "relation": {
+      "relation": {
         "name": "Relation",
         "shortName": "",
         "tooltip": {},
@@ -1562,7 +1568,7 @@
       "displayname": "Phosphorylation",
       "tooltip": "Phosphorylation information"
     },
-     "glycation": {
+    "glycation": {
       "id": "glycation",
       "displayname": "Glycation",
       "tooltip": "Glycation information"
