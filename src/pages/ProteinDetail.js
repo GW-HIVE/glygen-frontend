@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/navigation/Sidebar";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
+import { addIndex } from "../utils/common";
 import { Grid } from "@material-ui/core";
 import { Col, Row } from "react-bootstrap";
 import { FiBookOpen } from "react-icons/fi";
@@ -967,8 +968,8 @@ const ProteinDetail = (props) => {
       },
       formatter: (value, row) => (
         <>
-          {value.map((disease) => (
-            <ul className="pl-3">
+          {value.map((disease, index) => (
+            <ul key={index} className="pl-3">
               <li key={disease.recommended_name.id}>
                 {disease.recommended_name.name}{" "}
                 <span className="nowrap">
@@ -1143,8 +1144,8 @@ const ProteinDetail = (props) => {
       formatter: (value, row) =>
         value ? (
           <>
-            {value.map((disease) => (
-              <ul className="pl-3">
+            {value.map((disease, index) => (
+              <ul key={index} className="pl-3">
                 <li key={disease.recommended_name.id}>
                   {disease.recommended_name.name}{" "}
                   <span className="nowrap">
@@ -1682,7 +1683,7 @@ const ProteinDetail = (props) => {
                           // For every organism object
                           Object.keys(organismEvidence).map((orgEvi) => (
                             // For every database for current organism object
-                            <div>
+                            <div key={organismEvidence[orgEvi].taxid}>
                               <>
                                 <strong>{proteinStrings.organism.name}: </strong>
                                 {orgEvi} {"("}
@@ -1783,8 +1784,9 @@ const ProteinDetail = (props) => {
                             >
                               {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                                 <ClientPaginatedTable
-                                  data={glycosylationWithImage}
+                                  data={addIndex(glycosylationWithImage)}
                                   columns={glycoSylationColumns}
+                                  idField={"index"}
                                   onClickTarget={"#glycosylation"}
                                   defaultSortField="start_pos"
                                   defaultSortOrder="asc"
@@ -2127,10 +2129,10 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body className="card-padding-zero">
-                      <Table hover fluid="true">
+                      <div hover="true" fluid="true">
                         <FunctionList functions={functions} />
-                      </Table>
-                      {!functions && (
+                      </div>
+                      {functions && (
                           <p className="no-data-msg-publication">No data available.</p>
                       )}
                     </Card.Body>
@@ -2356,8 +2358,9 @@ const ProteinDetail = (props) => {
                     <Card.Body>
                       {mutagenesis && mutagenesis.length !== 0 && (
                         <ClientPaginatedTable
-                          data={mutagenesis}
+                          data={addIndex(mutagenesis)}
                           columns={mutagenesisColumns}
+                          idField={"index"}
                           onClickTarget={"#mutagenesis"}
                           defaultSortField={"start_pos"}
                           defaultSortOrder="asc"
@@ -2417,8 +2420,8 @@ const ProteinDetail = (props) => {
                                 </h5>
                               </b>
                               {category.go_terms &&
-                                category.go_terms.map((term) => (
-                                  <Row>
+                                category.go_terms.map((term, index) => (
+                                  <Row key={index}>
                                     <Col sm={9} md={9} style={{ paddingTop: "15px" }}>
                                       <a href={term.url} target="_blank" rel="noopener noreferrer">
                                         {term.name} ({term.id})
@@ -2643,16 +2646,16 @@ const ProteinDetail = (props) => {
                     <Card.Body>
                       {itemsPathway && itemsPathway.length ? (
                         <ul className="list-style-none">
-                          {itemsPathway.map((pathway) => (
-                            <li>
+                          {itemsPathway.map((pathway, pathIndex) => (
+                            <li key={pathIndex}>
                               <strong>
                                 {pathway.id} {pathway.resource}
                               </strong>
 
                               <ul style={{ marginBottom: "10px" }}>
                                 <Row>
-                                  {pathway.links.map((link) => (
-                                    <Col xs={12} sm={12}>
+                                  {pathway.links.map((link, lnkIndex) => (
+                                    <Col key={lnkIndex} xs={12} sm={12}>
                                       <li>
                                         {link.name}{" "}
                                         <a
@@ -2784,7 +2787,7 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <p>
+                      <div className="mb-3">
                         {isoforms && (
                           <Grid container className="table-body">
                             {isoforms.map((isoformsS, isoformIndex) => (
@@ -2810,7 +2813,7 @@ const ProteinDetail = (props) => {
                                     {isoformsS.locus ? isoformsS.locus.end_pos : "NA"})
                                   </div>
                                 )}
-                                <Grid className="badge-grid" xs={12}>
+                                <Grid item className="badge-grid" xs={12}>
                                   <EvidenceList
                                     inline={true}
                                     evidences={groupEvidences(
@@ -2819,7 +2822,7 @@ const ProteinDetail = (props) => {
                                   />
                                 </Grid>
                                 {showIsoformSequences && (
-                                  <Grid style={{ paddingBottom: "40px" }}>
+                                  <Grid item style={{ paddingBottom: "40px" }}>
                                     {/* <IsoformSequenceDisplay
                                     sequenceData={isoformsS.sequence}
                                   /> */}
@@ -2839,7 +2842,7 @@ const ProteinDetail = (props) => {
                             ))}
                           </Grid>
                         )}
-                      </p>
+                      </div>
                       {!isoforms && (
                           <p classisoforms_ac="no-data-msg-publication">No data available.</p>
                       )}
@@ -2935,14 +2938,14 @@ const ProteinDetail = (props) => {
                                 </span>
                               </div>
 
-                              <Grid className="badge-grid" xs={12}>
+                              <Grid item className="badge-grid" xs={12}>
                                 <EvidenceList
                                   inline={true}
                                   evidences={groupEvidences(orthologsS.evidence)}
                                 />
                               </Grid>
                               {showhomologSequences && (
-                                <Grid style={{ paddingBottom: "40px" }}>
+                                <Grid item style={{ paddingBottom: "40px" }}>
                                   <div className="sequnce_highlight">
                                     {" "}
                                     <SequenceDisplay
@@ -3006,10 +3009,10 @@ const ProteinDetail = (props) => {
                             {diseaseData.map((thisDisease) => (
                               <tr className="table-row">
                                 <td>
-                                  <p>
+                                  <div className="mb-3">
                                     <Grid item xs={12}>
                                       <div>
-                                        <p>
+                                        <div className="mb-3">
                                           <strong> {proteinStrings.name.name}: </strong>{" "}
                                           {thisDisease.recommended_name.name} (
                                           <a
@@ -3031,15 +3034,15 @@ const ProteinDetail = (props) => {
                                             inline={true}
                                             evidences={groupEvidences(thisDisease.evidence)}
                                           />
-                                        </p>
+                                        </div>
                                         {thisDisease.recommended_name.description && (
-                                          <p>
+                                          <div className="mb-3">
                                             <strong> {proteinStrings.description.name}: </strong>
                                             {thisDisease.recommended_name.description}{" "}
-                                          </p>
+                                          </div>
                                         )}
                                         {thisDisease.synonyms && thisDisease.synonyms.length && (
-                                          <p>
+                                          <div className="mb-3">
                                             <strong> {proteinStrings.synonyms.name}: </strong>
                                             <ul style={{ marginLeft: "-40px" }}>
                                               <ul>
@@ -3103,20 +3106,20 @@ const ProteinDetail = (props) => {
                                                 </Button>
                                               )}
                                             </ul>
-                                          </p>
+                                          </div>
                                         )}
                                       </div>
                                     </Grid>
-                                  </p>
+                                  </div>
                                 </td>
                               </tr>
                             ))}
                           </tbody>
                         )}
-                        {diseaseData && diseaseData.length === 0 && (
-                          <p className="no-data-msg-publication">No data available.</p>
-                        )}
                       </Table>
+                      {diseaseData && diseaseData.length === 0 && (
+                        <p className="no-data-msg-publication">No data available.</p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -3252,11 +3255,11 @@ const ProteinDetail = (props) => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {itemsCrossRef && itemsCrossRef.length ? (
-                        <p>
+                        <div className="mb-3">
                           <ul className="list-style-none">
                             {/* <Row> */}
-                            {itemsCrossRef.map((crossRef) => (
-                              <li>
+                            {itemsCrossRef.map((crossRef, index) => (
+                              <li key={index}>
                                 <CollapsableReference
                                   database={crossRef.database}
                                   links={crossRef.links}
@@ -3264,7 +3267,7 @@ const ProteinDetail = (props) => {
                               </li>
                             ))}
                           </ul>
-                        </p>
+                        </div>
                       ) : (
                         <p>No data available.</p>
                       )}
@@ -3305,7 +3308,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.history}>
+                  <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {history && history.length && (
                         <>
@@ -3353,7 +3356,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.publication}>
+                  <Accordion.Collapse eventKey="0">
                     <Card.Body className="card-padding-zero">
                       <Table hover fluid="true">
                         {publication && (
@@ -3361,7 +3364,7 @@ const ProteinDetail = (props) => {
                             {publication.map((pub, pubIndex) => (
                               <tr className="table-row">
                                 <td key={pubIndex}>
-                                  <p>
+                                  <div className="mb-3">
                                     <div>
                                       <h5 style={{ marginBottom: "3px" }}>
                                         <strong>{pub.title}</strong>
@@ -3400,16 +3403,16 @@ const ProteinDetail = (props) => {
                                       inline={true}
                                       evidences={groupEvidences(pub.evidence)}
                                     />
-                                  </p>
+                                  </div>
                                 </td>
                               </tr>
                             ))}
                           </tbody>
                         )}
-                        {!publication && (
-                          <p className="no-data-msg-publication">No data available.</p>
-                        )}
                       </Table>
+                      {!publication && (
+                          <p className="no-data-msg-publication">No data available.</p>
+                      )}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

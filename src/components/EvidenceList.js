@@ -11,7 +11,7 @@ const EvidenceList = (props) => {
       {props.inline && (
         <Row>
           {Object.keys(evidences).map((db, index) => (
-            <Col xs={12} sm={"auto"} className={"inline-evidence"}>
+            <Col key={"col" + index} xs={12} sm={"auto"} className={"inline-evidence"}>
               <GlygenBadge key={index} text={db} expandList={evidences[db]} />
             </Col>
           ))}

@@ -62,3 +62,12 @@ export function sortDropdownIgnoreCase(a, b) {
 export function sortByOrder(a, b) {
   return a.order - b.order;
 }
+
+/**
+ * Function to to add "index" to each row in the array.
+ * @param {Array} data input value.
+ * @param {string} key input value.
+ **/
+ export function addIndex(data, key="index") {
+  return data.map((row, index) => {row[key] = index + 1; return row;} );
+}

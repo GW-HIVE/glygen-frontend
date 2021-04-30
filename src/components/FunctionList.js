@@ -58,13 +58,13 @@ const FunctionList = ({ functions }) => {
   });
 
   return (
-    <Table hover fluid>
+    <Table hover fluid="true">
       {formattedFunctions.map((group, funIndex) => (
-        <tbody className="table-body">
+        <tbody key={"body" + funIndex} className="table-body">
           <tr className="table-row">
             <td key={funIndex}>
-              {group.functions.map((func) => (
-                <p>{func.annotation}</p>
+              {group.functions.map((func, index) => (
+                <p key={index}>{func.annotation}</p>
               ))}
               <EvidenceList evidences={group.evidence} />
             </td>
