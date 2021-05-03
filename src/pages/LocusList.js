@@ -22,7 +22,7 @@ import { GLYGEN_BASENAME } from "../envVariables";
 /**
  * Locus list page component for showing list table.
  */
-const LocusList = (props) => {
+const LocusList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -34,7 +34,7 @@ const LocusList = (props) => {
   const [selectedColumns, setSelectedColumns] = useState(LOCUS_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
-  const [totalSize, setTotalSize] = useState();
+  const [totalSize, setTotalSize] = useState(0);
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -64,7 +64,7 @@ const LocusList = (props) => {
           setPageLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
@@ -75,21 +75,28 @@ const LocusList = (props) => {
    * @param {string} type - event type.
    * @param {object} {} - object specifying new state of table.
    */
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
 
-    getGeneLocusList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        // place to change values before rendering
-        if (!data.error_code) {
-          setData(data.results);
-          setTimeStamp(data.cache_info.ts);
-          setPagination(data.pagination);
-          setTotalSize(data.pagination.total_length);
-        }
+    getGeneLocusList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      // place to change values before rendering
+      if (!data.error_code) {
+        setData(data.results);
+        setTimeStamp(data.cache_info.ts);
+        setPagination(data.pagination);
+        setTotalSize(data.pagination.total_length);
       }
-    );
+    });
   };
 
   /**
@@ -132,7 +139,7 @@ const LocusList = (props) => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={(input) => {
+          setOpen={input => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -152,18 +159,18 @@ const LocusList = (props) => {
               {
                 display: stringConstants.download.locus_csvdata.displayname,
                 type: "csv",
-                data: "genelocus_list",
+                data: "genelocus_list"
               },
               {
                 display: stringConstants.download.locus_jsondata.displayname,
                 type: "json",
-                data: "genelocus_list",
+                data: "genelocus_list"
               },
               {
                 display: stringConstants.download.locus_fastadata.displayname,
                 type: "fasta",
-                data: "genelocus_list",
-              },
+                data: "genelocus_list"
+              }
             ]}
             dataId={id}
             itemType="locus"
