@@ -4,7 +4,6 @@ import { useParams, Link } from "react-router-dom";
 import Helmet from "react-helmet";
 import { getTitle, getMeta } from "../utils/head";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import { Row, Col } from "react-bootstrap";
@@ -23,10 +22,19 @@ import FeedbackWidget from "../components/FeedbackWidget";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
-import EvidenceList from "../components/EvidenceList";
-import { groupEvidences } from "../data/data-format";
 import Button from "react-bootstrap/Button";
 import { FiBookOpen } from "react-icons/fi";
+import { Tab, Tabs, Container } from "react-bootstrap";
+import { groupEvidences } from "../data/data-format";
+import EvidenceList from "../components/EvidenceList";
+import ClientPaginatedTable from "../components/ClientPaginatedTable";
+import "../css/detail.css";
+import "../css/Responsive.css";
+import LineTooltip from "../components/tooltip/LineTooltip";
+import routeConstants from "../data/json/routeConstants";
+import { getGlycanImageUrl } from "../data/glycan";
+import { FaSearchPlus } from "react-icons/fa";
+import { addIndex } from "../utils/common";
 
 const items = [
   { label: "Gleneral", id: "General" },
@@ -39,9 +47,10 @@ const Publication = (props) => {
   let { id } = useParams();
   let { publType } = useParams();
 
+  const proteinStrings = stringConstants.protein.common;
+  const glycanStrings = stringConstants.glycan.common;
+
   const [detailData, setDetailData] = useState({});
-  const [refProteins, setRefProteins] = useState([]);
-  const [refGlycans, setRefGlycans] = useState([]);
 
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
@@ -60,8 +69,6 @@ const Publication = (props) => {
         setPageLoading(false);
       } else {
         setDetailData(data);
-        setRefProteins(data);
-        setRefGlycans(data);
         setPageLoading(false);
       }
     });
@@ -79,6 +86,7 @@ const Publication = (props) => {
     authors,
     record_id,
     abstract,
+    phosphorylation,
     referenced_proteins,
     referenced_glycans,
   } = detailData;
@@ -110,6 +118,64 @@ const Publication = (props) => {
   }
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
+  const phosphorylationColumns = [
+    {
+      dataField: "evidence",
+      text: proteinStrings.evidence.name,
+      headerStyle: (colum, colIndex) => {
+        return {
+          // width: "15%",
+        };
+      },
+      formatter: (cell, row) => {
+        return <EvidenceList evidences={groupEvidences(cell)} />;
+      },
+    },
+    {
+      dataField: "kinase_uniprot_canonical_ac",
+      text: proteinStrings.kinase_protein.name,
+      sort: true,
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View protein details">
+            <Link to={routeConstants.proteinDetail + row.kinase_uniprot_canonical_ac}>
+              {row.kinase_uniprot_canonical_ac}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "No data available"
+        ),
+    },
+    {
+      dataField: "kinase_gene_name",
+      text: proteinStrings.kinase_gene_name.name,
+      sort: true,
+      formatter: (value, row) => (value ? <>{row.kinase_gene_name}</> : "No data available"),
+    },
+    {
+      dataField: "start_pos",
+      text: proteinStrings.residue.name,
+      sort: true,
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        ),
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -311,7 +377,28 @@ const Publication = (props) => {
                   </div>
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
-                  <Card.Body>Phosphorylation Data</Card.Body>
+                  <Card.Body>
+                    {phosphorylation && phosphorylation.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={phosphorylation
+                          .map((x) => ({
+                            ...x,
+                            start_pos: parseInt(x.start_pos),
+                            end_pos: parseInt(x.end_pos),
+                          }))
+                          .sort((a, b) => {
+                            if (a.start_pos < b.start_pos) return -1;
+                            if (b.start_pos < a.start_pos) return 1;
+                            return 0;
+                          })}
+                        columns={phosphorylationColumns}
+                        onClickTarget={"#phosphorylation"}
+                        defaultSortField={"start_pos"}
+                        defaultSortOrder="asc"
+                      />
+                    )}
+                    {!phosphorylation && <p>No data available.</p>}
+                  </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
