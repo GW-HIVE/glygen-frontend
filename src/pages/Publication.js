@@ -350,21 +350,22 @@ const Publication = (props) => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    {refProteins && (
-                      <div>
-                        <ul className="list-style-none">
-                          <Row>
-                            <Col xs={12} sm={4}>
-                              <li>{referenced_proteins}</li>
-                            </Col>
-                          </Row>
-                          {/* {refProteins.map((refProt) => (
-                            <li>{refProt.referenced_proteins}</li>
-                          ))} */}
-                        </ul>
-                      </div>
+                    {referenced_proteins && (
+                      <>
+                        <div>
+                          <ul className="list-style-none">
+                            <Row>
+                              {referenced_proteins.map((refProt) => (
+                                <Col key={refProt} className="nowrap" xs={6} sm={4} lg={3} xl={2}>
+                                  <li>{refProt}</li>
+                                </Col>
+                              ))}
+                            </Row>
+                          </ul>
+                        </div>
+                      </>
                     )}
-                    {!refProteins && <span>No data available.</span>}
+                    {!referenced_proteins && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -405,18 +406,19 @@ const Publication = (props) => {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     {referenced_glycans && (
-                      <div>
-                        <ul className="list-style-none">
-                          <Row>
-                            <Col xs={12} sm={4}>
-                              <li>{referenced_glycans}</li>
-                            </Col>
-                          </Row>
-                          {/* {refProteins.map((refProt) => (
-                            <li>{refProt.referenced_proteins}</li>
-                          ))} */}
-                        </ul>
-                      </div>
+                      <>
+                        <div>
+                          <ul className="list-style-none">
+                            <Row>
+                              {referenced_glycans.map((refGlyc) => (
+                                <Col key={refGlyc} className="nowrap" xs={6} sm={4} lg={3} xl={2}>
+                                  <li>{refGlyc}</li>
+                                </Col>
+                              ))}
+                            </Row>
+                          </ul>
+                        </div>
+                      </>
                     )}
                     {!referenced_glycans && <span>No data available.</span>}
                   </Card.Body>
