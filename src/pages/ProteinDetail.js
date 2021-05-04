@@ -3308,7 +3308,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0">
+                  <Accordion.Collapse eventKey="0" out={(collapsed.history ? "false" : "true")}>
                     <Card.Body>
                       {history && history.length && (
                         <>
@@ -3356,7 +3356,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0">
+                  <Accordion.Collapse eventKey="0" out={(collapsed.publication ? "false" : "true")}>
                     <Card.Body className="card-padding-zero">
                       <Table hover fluid="true">
                         {publication && (
