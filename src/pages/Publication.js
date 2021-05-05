@@ -59,6 +59,16 @@ const Publication = (props) => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+
+  const textRef = React.useRef();
+
+  const maxItems = 30;
+  const [allItems, setAllItems] = useState([]);
+  // alert(JSON.stringify(allItems, null, 2));
+  const [open, setOpen] = useState(false);
+  const displayedItems = open ? allItems : allItems?.slice(0, maxItems);
+  const [displayText, setDisplayText] = useState(false);
+
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
@@ -71,6 +81,7 @@ const Publication = (props) => {
         setPageLoading(false);
       } else {
         setDetailData(data);
+        setAllItems(data.referenced_proteins);
         setPageLoading(false);
         if (data.glycosylation) {
           const mapOfGlycosylationCategories = data.glycosylation.reduce((collection, item) => {
@@ -448,11 +459,49 @@ const Publication = (props) => {
                         {/* <Link to={`${routeConstants.publication}${ref.id}/pmid`}>
                           <>{ref.id}</>
                         </Link> */}
-                        <EvidenceList inline={true} evidences={groupEvidences(evidence)} />
-                        <div className={"mt-2"}>
-                          <strong>Abstract:</strong>
+                        {abstract && (
+                          <div className={"mt-2"}>
+                            <strong>Abstract:</strong>
+                          </div>
+                        )}
+                        <div
+                          ref={textRef}
+                          style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            display: displayText ? "block" : "-webkit-box",
+                            WebkitLineClamp: 5,
+                            WebkitBoxOrient: "vertical",
+                          }}
+                        >
+                          {abstract}
                         </div>
-                        <div>{abstract}</div>
+                        {abstract && displayText && (
+                          <Button
+                            style={{
+                              // marginLeft: "20px",
+                              marginTop: "5px",
+                            }}
+                            className={"lnk-btn"}
+                            variant="link"
+                            onClick={() => setDisplayText(false)}
+                          >
+                            Show Less...
+                          </Button>
+                        )}
+                        {abstract && !displayText && (
+                          <Button
+                            style={{
+                              // marginLeft: "20px",
+                              marginTop: "5px",
+                            }}
+                            className={"lnk-btn"}
+                            variant="link"
+                            onClick={() => setDisplayText(true)}
+                          >
+                            Show More...
+                          </Button>
+                        )}
                       </>
                     )}
                     {!detailData && <p className="no-data-msg-publication">No data available.</p>}
@@ -671,12 +720,12 @@ const Publication = (props) => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    {referenced_proteins && (
+                    {displayedItems && (
                       <>
                         <div>
                           <ul className="list-style-none">
                             <Row>
-                              {referenced_proteins.sort(sortIgnoreCase).map((refProt) => (
+                              {displayedItems.sort(sortIgnoreCase).map((refProt) => (
                                 <Col key={refProt} className="nowrap" xs={6} sm={4} lg={3} xl={2}>
                                   <LineTooltip text="View protein details">
                                     <Link to={`${routeConstants.proteinDetail}${refProt}`}>
@@ -686,6 +735,35 @@ const Publication = (props) => {
                                 </Col>
                               ))}
                             </Row>
+                            {allItems.length > maxItems && (
+                              <>
+                                {open ? (
+                                  <Button
+                                    style={{
+                                      // marginLeft: "20px",
+                                      marginTop: "5px",
+                                    }}
+                                    className={"lnk-btn"}
+                                    variant="link"
+                                    onClick={() => setOpen(false)}
+                                  >
+                                    Show Less...
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    style={{
+                                      // marginLeft: "20px",
+                                      marginTop: "5px",
+                                    }}
+                                    className={"lnk-btn"}
+                                    variant="link"
+                                    onClick={() => setOpen(true)}
+                                  >
+                                    Show More...
+                                  </Button>
+                                )}
+                              </>
+                            )}
                           </ul>
                         </div>
                       </>
