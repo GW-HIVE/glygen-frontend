@@ -75,7 +75,6 @@ const Publication = (props) => {
         if (data.glycosylation) {
           const mapOfGlycosylationCategories = data.glycosylation.reduce((collection, item) => {
             const category = item.site_category || logActivity("No results. ");
-
             return {
               ...collection,
               [category]: [...(collection[category] || []), item],
@@ -84,20 +83,17 @@ const Publication = (props) => {
 
           const withImage = mapOfGlycosylationCategories.reported_with_glycan || [];
           const withoutImage = mapOfGlycosylationCategories.reported || [];
-          const predicted = mapOfGlycosylationCategories.predicted || [];
           const mining = mapOfGlycosylationCategories.automatic_literature_mining || [];
 
           const selectTab = [
             "reported_with_glycan",
             "reported",
-            "predicted",
             "automatic_literature_mining",
           ].find(
             (category) =>
               mapOfGlycosylationCategories[category] &&
               mapOfGlycosylationCategories[category].length > 0
           );
-          // debugger;
           setGlycosylationWithImage(withImage);
           setGlycosylationWithoutImage(withoutImage);
           setGlycosylationMining(mining);
@@ -153,23 +149,6 @@ const Publication = (props) => {
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   const glycoSylationColumns = [
-    // {
-    //   dataField: "evidence",
-    //   text: proteinStrings.evidence.name,
-
-    //   headerStyle: (colum, colIndex) => {
-    //     return {
-    //       backgroundColor: "#4B85B6",
-    //       color: "white",
-    //       width: "25%",
-    //     };
-    //   },
-    //   formatter: (cell, row) => {
-    //     return (
-    //       <EvidenceList key={row.start_pos + row.glytoucan_ac} evidences={groupEvidences(cell)} />
-    //     );
-    //   },
-    // },
     {
       dataField: "type",
       text: proteinStrings.type.name,
@@ -188,8 +167,6 @@ const Publication = (props) => {
       sort: true,
       headerStyle: (column, colIndex) => {
         return {
-          backgroundColor: "#4B85B6",
-          color: "white",
           width: "15%",
         };
       },
@@ -198,7 +175,6 @@ const Publication = (props) => {
           <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>{row.glytoucan_ac}</Link>
         </LineTooltip>
       ),
-      //testing
     },
     {
       dataField: "image",
@@ -232,10 +208,12 @@ const Publication = (props) => {
         value ? (
           <LineTooltip text="View siteview details">
             <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-              {row.residue} {row.start_pos}
+              {row.residue}
+              {row.start_pos}
               {row.start_pos !== row.end_pos && (
                 <>
-                  to {row.residue} {row.end_pos}
+                  to {row.residue}
+                  {row.end_pos}
                 </>
               )}
             </Link>
@@ -243,24 +221,7 @@ const Publication = (props) => {
         ) : (
           "Not Reported"
         ),
-      // formatter: (value, row) => (
-      //   <LineTooltip text="View siteview details">
-      //     <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-      //       {row.residue} {row.start_pos}
-      //     </Link>
-      //   </LineTooltip>
     },
-    // {
-    //   dataField: "type",
-    //   text: "Note",
-    //   sort: true,
-    //   headerStyle: (colum, colIndex) => {
-    //     return {
-    //       backgroundColor: "#4B85B6",
-    //       color: "white"
-    //     };
-    //   }
-    // }
   ];
   const phosphorylationColumns = [
     {
@@ -319,7 +280,45 @@ const Publication = (props) => {
         ),
     },
   ];
-  function sortProtIgnoreCase(a, b) {
+  const refGlycansColumns = [
+    {
+      dataField: "refGlyc",
+      text: proteinStrings.glytoucan_ac.shortName,
+      defaultSortField: "refGlyc",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "30%",
+          whiteSpace: "nowrap",
+        };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View glycan details">
+          <Link to={`${routeConstants.glycanDetail}${row.refGlyc}`}>{row.refGlyc}</Link>
+        </LineTooltip>
+      ),
+    },
+    {
+      dataField: "image",
+      text: glycanStrings.glycan_image.name,
+      sort: false,
+      formatter: (value, row) => (
+        <div className="img-wrapper">
+          <img className="img-cartoon" src={getGlycanImageUrl(row.refGlyc)} alt="Glycan img" />
+        </div>
+      ),
+      headerStyle: (colum, colIndex) => {
+        return {
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white",
+          whiteSpace: "nowrap",
+        };
+      },
+    },
+  ];
+
+  function sortIgnoreCase(a, b) {
     if (a.toLowerCase() > b.toLowerCase()) {
       return 1;
     }
@@ -497,7 +496,6 @@ const Publication = (props) => {
                     {glycosylation && glycosylation.length && (
                       <Tabs
                         activeKey={glycosylationTabSelected}
-                        // defaultActiveKey={glycosylationTabSelected}
                         transition={false}
                         mountOnEnter={true}
                         unmountOnExit={true}
@@ -505,12 +503,7 @@ const Publication = (props) => {
                           setGlycosylationTabSelected(key);
                         }}
                       >
-                        <Tab
-                          eventKey="reported_with_glycan"
-                          // className='tab-content-padding'
-                          title="Reported Sites with Glycan"
-                          //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
-                        >
+                        <Tab eventKey="reported_with_glycan" title="Reported Sites with Glycan">
                           <Container
                             style={{
                               paddingTop: "20px",
@@ -521,21 +514,16 @@ const Publication = (props) => {
                               <ClientPaginatedTable
                                 data={addIndex(glycosylationWithImage)}
                                 columns={glycoSylationColumns}
-                                idField={"index"}
                                 onClickTarget={"#glycosylation"}
                                 defaultSortField="start_pos"
                                 defaultSortOrder="asc"
+                                idField={"index"}
                               />
                             )}
                             {!glycosylationWithImage.length && <p>No data available.</p>}
                           </Container>
                         </Tab>
-                        <Tab
-                          eventKey="reported"
-                          title="Reported Sites"
-
-                          // disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
-                        >
+                        <Tab eventKey="reported" title="Reported Sites">
                           <Container
                             style={{
                               paddingTop: "20px",
@@ -544,27 +532,22 @@ const Publication = (props) => {
                           >
                             {glycosylationWithoutImage && glycosylationWithoutImage.length > 0 && (
                               <ClientPaginatedTable
-                                data={glycosylationWithoutImage}
+                                data={addIndex(glycosylationWithoutImage)}
                                 columns={glycoSylationColumns.filter(
-                                  (column) => column.dataField !== "glytoucan_ac"
+                                  (column) =>
+                                    column.dataField !== "glytoucan_ac" &&
+                                    column.dataField !== "image"
                                 )}
-                                idField={"index"}
                                 onClickTarget={"#glycosylation"}
                                 defaultSortField="start_pos"
                                 defaultSortOrder="asc"
+                                idField={"index"}
                               />
                             )}
                             {!glycosylationWithoutImage.length && <p>No data available.</p>}
                           </Container>
                         </Tab>
-                        <Tab
-                          eventKey="automatic_literature_mining"
-                          title="Text Mining"
-                          // disabled={
-                          //   !glycosylationMining ||
-                          //   glycosylationMining.length === 0
-                          // }
-                        >
+                        <Tab eventKey="automatic_literature_mining" title="Text Mining">
                           <Container
                             style={{
                               paddingTop: "20px",
@@ -573,13 +556,16 @@ const Publication = (props) => {
                           >
                             {glycosylationMining && glycosylationMining.length > 0 && (
                               <ClientPaginatedTable
-                                data={glycosylationMining}
+                                data={addIndex(glycosylationMining)}
                                 columns={glycoSylationColumns.filter(
-                                  (column) => column.dataField !== "glytoucan_ac"
+                                  (column) =>
+                                    column.dataField !== "glytoucan_ac" &&
+                                    column.dataField !== "image"
                                 )}
                                 onClickTarget={"#glycosylation"}
                                 defaultSortField="start_pos"
                                 defaultSortOrder="asc"
+                                idField={"index"}
                               />
                             )}
                             {!glycosylationMining.length && <p>No data available.</p>}
@@ -690,9 +676,13 @@ const Publication = (props) => {
                         <div>
                           <ul className="list-style-none">
                             <Row>
-                              {referenced_proteins.sort(sortProtIgnoreCase).map((refProt) => (
+                              {referenced_proteins.sort(sortIgnoreCase).map((refProt) => (
                                 <Col key={refProt} className="nowrap" xs={6} sm={4} lg={3} xl={2}>
-                                  <li>{refProt}</li>
+                                  <LineTooltip text="View protein details">
+                                    <Link to={`${routeConstants.proteinDetail}${refProt}`}>
+                                      <li>{refProt}</li>
+                                    </Link>
+                                  </LineTooltip>
                                 </Col>
                               ))}
                             </Row>
@@ -741,19 +731,16 @@ const Publication = (props) => {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     {referenced_glycans && (
-                      <>
-                        <div>
-                          <ul className="list-style-none">
-                            <Row>
-                              {referenced_glycans.map((refGlyc) => (
-                                <Col key={refGlyc} className="nowrap" xs={6} sm={4} lg={3} xl={2}>
-                                  <li>{refGlyc}</li>
-                                </Col>
-                              ))}
-                            </Row>
-                          </ul>
-                        </div>
-                      </>
+                      <ClientPaginatedTable
+                        data={referenced_glycans
+                          .sort(sortIgnoreCase)
+                          .map((refGlyc) => ({ refGlyc }))}
+                        columns={refGlycansColumns}
+                        onClickTarget={"#referenced-glycans"}
+                        defaultSortField="refGlyc"
+                        defaultSortOrder="asc"
+                        idField={"refGlyc"}
+                      />
                     )}
                     {!referenced_glycans && <span>No data available.</span>}
                   </Card.Body>
