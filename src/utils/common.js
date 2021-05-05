@@ -46,6 +46,11 @@ export function sortDropdown(a, b) {
   }
   return 0;
 }
+/**
+ * Function to sort based on order.
+ * @param {object} a input value.
+ * @param {object} b input value.
+ **/
 export function sortDropdownIgnoreCase(a, b) {
   if (a.name.toLowerCase() < b.name.toLowerCase()) {
     return -1;
@@ -54,6 +59,22 @@ export function sortDropdownIgnoreCase(a, b) {
   }
   return 0;
 }
+
+/**
+ * Function to sort based on order.
+ * @param {object} a input value.
+ * @param {object} b input value.
+ **/
+export function sortIgnoreCase(a, b) {
+  if (a.toLowerCase() > b.toLowerCase()) {
+    return 1;
+  }
+  if (b.toLowerCase() > a.toLowerCase()) {
+    return -1;
+  }
+  return 0;
+}
+
 /**
  * Function to sort based on order.
  * @param {object} a input value.
@@ -68,6 +89,9 @@ export function sortByOrder(a, b) {
  * @param {Array} data input value.
  * @param {string} key input value.
  **/
- export function addIndex(data, key="index") {
-  return data.map((row, index) => {row[key] = index + 1; return row;} );
+export function addIndex(data, key = "index") {
+  return data.map((row, index) => {
+    row[key] = index + 1;
+    return row;
+  });
 }
