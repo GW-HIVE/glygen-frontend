@@ -116,9 +116,9 @@ const CompositionDisplay = props => {
   );
 };
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+// function capitalizeFirstLetter(string) {
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// }
 function addCommas(nStr) {
   nStr += "";
   var x = nStr.split(".");
@@ -1573,6 +1573,7 @@ const GlycanDetail = props => {
                     <Card.Body>
                       {motifs && motifs.length !== 0 && (
                         <ClientPaginatedTable
+                          idField={"name"}
                           data={motifs}
                           columns={motifColumns}
                           defaultSortField={"name"}
@@ -1685,6 +1686,7 @@ const GlycanDetail = props => {
                     <Card.Body>
                       {interactions && interactions.length !== 0 && (
                         <ClientPaginatedTable
+                          idField={"interactor_id"}
                           data={interactions}
                           columns={glycanBindingProteinColumns}
                           defaultSortField={"interactor_id"}
@@ -1790,6 +1792,7 @@ const GlycanDetail = props => {
                     <Card.Body>
                       {subsumption && subsumption.length !== 0 && (
                         <ClientPaginatedTable
+                          idField={"id"}
                           data={subsumption}
                           columns={subsumptionColumns}
                           defaultSortField={"id"}
@@ -1895,6 +1898,7 @@ const GlycanDetail = props => {
                               {expressionWithcell &&
                                 expressionWithcell.length > 0 && (
                                   <ClientPaginatedTable
+                                    idField={"position"}
                                     data={expressionWithcell}
                                     columns={expressionCellColumns}
                                     onClickTarget={"#expression"}
