@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useRef } from "react";
 import { getPublicationDetail } from "../data/publication";
 import { useParams, Link } from "react-router-dom";
 import Helmet from "react-helmet";
@@ -25,8 +25,8 @@ import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import { FiBookOpen } from "react-icons/fi";
 import { Tab, Tabs, Container } from "react-bootstrap";
-import { groupEvidences } from "../data/data-format";
-import EvidenceList from "../components/EvidenceList";
+// import { groupEvidences } from "../data/data-format";
+// import EvidenceList from "../components/EvidenceList";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import "../css/detail.css";
 import "../css/Responsive.css";
@@ -34,6 +34,46 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import routeConstants from "../data/json/routeConstants";
 import { getGlycanImageUrl } from "../data/glycan";
 import { addIndex } from "../utils/common";
+
+const CollapsibleText = ({ text, lines = 5 }) => {
+  const textRef = useRef();
+  const [overflow, setOverflow] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
+  useEffect(() => {
+    const scrollHeight = textRef.current.scrollHeight;
+    const clientHeight = textRef.current.clientHeight;
+    const scrollWidth = textRef.current.scrollWidth;
+    const clientWidth = textRef.current.clientWidth;
+
+    const isOverflow = scrollHeight > clientHeight || scrollWidth > clientWidth;
+    setOverflow(isOverflow);
+  }, [text]);
+  return (
+    <>
+      <p
+        ref={textRef}
+        style={{
+          display: "-webkit-box",
+          WebkitLineClamp: collapsed ? lines : "unset",
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+        }}
+      >
+        {text}
+      </p>
+      {overflow && collapsed && (
+        <Button className={"lnk-btn"} variant="link" onClick={() => setCollapsed(false)}>
+          Show More...
+        </Button>
+      )}
+      {overflow && !collapsed && (
+        <Button className={"lnk-btn"} variant="link" onClick={() => setCollapsed(true)}>
+          Show Less...
+        </Button>
+      )}
+    </>
+  );
+};
 
 const items = [
   { label: "Gleneral", id: "General" },
@@ -60,14 +100,11 @@ const Publication = (props) => {
     { show: false, id: "" }
   );
 
-  const textRef = React.useRef();
-
   const maxItems = 30;
   const [allItems, setAllItems] = useState([]);
   // alert(JSON.stringify(allItems, null, 2));
   const [open, setOpen] = useState(false);
   const displayedItems = open ? allItems : allItems?.slice(0, maxItems);
-  const [displayText, setDisplayText] = useState(false);
 
   useEffect(() => {
     setPageLoading(true);
@@ -122,9 +159,9 @@ const Publication = (props) => {
     date,
     title,
     journal,
-    evidence,
+    reference,
     authors,
-    record_id,
+    // record_id,
     abstract,
     glycosylation,
     phosphorylation,
@@ -161,15 +198,27 @@ const Publication = (props) => {
   const closeIcon = <ExpandLessIcon fontSize="large" />;
   const glycoSylationColumns = [
     {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_accession.name,
+      // defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "15%",
+        };
+      },
+      formatter: (value, row) => (
+        <LineTooltip text="View protein details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      ),
+    },
+    {
       dataField: "type",
       text: proteinStrings.type.name,
       sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white",
-        };
-      },
     },
     {
       dataField: "glytoucan_ac",
@@ -218,7 +267,7 @@ const Publication = (props) => {
       formatter: (value, row) =>
         value ? (
           <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+            <Link to={`${routeConstants.siteview}${row.uniprot_canonical_ac}/${row.start_pos}`}>
               {row.residue}
               {row.start_pos}
               {row.start_pos !== row.end_pos && (
@@ -235,18 +284,18 @@ const Publication = (props) => {
     },
   ];
   const phosphorylationColumns = [
-    {
-      dataField: "evidence",
-      text: proteinStrings.evidence.name,
-      headerStyle: (colum, colIndex) => {
-        return {
-          // width: "15%",
-        };
-      },
-      formatter: (cell, row) => {
-        return <EvidenceList evidences={groupEvidences(cell)} />;
-      },
-    },
+    // {
+    //   dataField: "evidence",
+    //   text: proteinStrings.evidence.name,
+    //   headerStyle: (colum, colIndex) => {
+    //     return {
+    //       // width: "15%",
+    //     };
+    //   },
+    //   formatter: (cell, row) => {
+    //     return <EvidenceList evidences={groupEvidences(cell)} />;
+    //   },
+    // },
     {
       dataField: "kinase_uniprot_canonical_ac",
       text: proteinStrings.kinase_protein.name,
@@ -275,7 +324,7 @@ const Publication = (props) => {
       formatter: (value, row) =>
         value ? (
           <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+            <Link to={`${routeConstants.siteview}${row.uniprot_canonical_ac}/${row.start_pos}`}>
               {row.residue}
               {row.start_pos}
               {row.start_pos !== row.end_pos && (
@@ -359,8 +408,12 @@ const Publication = (props) => {
                     <h5>Look At</h5>
                     <h2>
                       <span>
-                        <strong className="nowrap">Publication</strong> Specific Detail
-                        <strong className="nowrap"> {record_id}</strong>
+                        <strong className="nowrap">Publication</strong> Specific Detail for
+                        {reference && (
+                          <div>
+                            {reference.type} <strong className="nowrap">{reference.id}</strong>
+                          </div>
+                        )}
                       </span>
                     </h2>
                   </div>
@@ -448,63 +501,35 @@ const Publication = (props) => {
                         </div>
                         <div>{authors}</div>
                         <div>
-                          {journal} <span>&nbsp;</span>({date})
+                          {journal} <span>&nbsp;</span>
+                          {date && (
+                            <>
+                              {"("}
+                              {date}
+                              {")"}
+                            </>
+                          )}
                         </div>
-                        <FiBookOpen />
-                        <span style={{ paddingLeft: "15px" }}>
-                          {record_id}
-                          {/* {glycanStrings.pmid.shortName}: */}
-                          {/* {glycanStrings.referenceType[ref.type].shortName}: */}
-                        </span>{" "}
-                        {/* <Link to={`${routeConstants.publication}${ref.id}/pmid`}>
-                          <>{ref.id}</>
-                        </Link> */}
+                        {reference && (
+                          <div>
+                            <FiBookOpen />
+                            <span style={{ paddingLeft: "15px" }}>
+                              {glycanStrings.pmid.shortName}:
+                            </span>{" "}
+                            <a href={reference.url} target="_blank" rel="noopener noreferrer">
+                              <>{reference.id}</>
+                            </a>{" "}
+                          </div>
+                        )}
                         {abstract && (
                           <div className={"mt-2"}>
                             <strong>Abstract:</strong>
                           </div>
                         )}
-                        <div
-                          ref={textRef}
-                          style={{
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            display: displayText ? "block" : "-webkit-box",
-                            WebkitLineClamp: 5,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {abstract}
-                        </div>
-                        {abstract && displayText && (
-                          <Button
-                            style={{
-                              // marginLeft: "20px",
-                              marginTop: "5px",
-                            }}
-                            className={"lnk-btn"}
-                            variant="link"
-                            onClick={() => setDisplayText(false)}
-                          >
-                            Show Less...
-                          </Button>
-                        )}
-                        {abstract && !displayText && (
-                          <Button
-                            style={{
-                              // marginLeft: "20px",
-                              marginTop: "5px",
-                            }}
-                            className={"lnk-btn"}
-                            variant="link"
-                            onClick={() => setDisplayText(true)}
-                          >
-                            Show More...
-                          </Button>
-                        )}
+                        <CollapsibleText text={abstract} />
                       </>
                     )}
-                    {!detailData && <p className="no-data-msg-publication">No data available.</p>}
+                    {!title && <p className="no-data-msg-publication">No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -561,7 +586,13 @@ const Publication = (props) => {
                           >
                             {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                               <ClientPaginatedTable
-                                data={addIndex(glycosylationWithImage)}
+                                data={addIndex(
+                                  glycosylationWithImage.sort((a, b) => {
+                                    if (a.start_pos < b.start_pos) return -1;
+                                    if (b.start_pos < a.start_pos) return 1;
+                                    return 0;
+                                  })
+                                )}
                                 columns={glycoSylationColumns}
                                 onClickTarget={"#glycosylation"}
                                 defaultSortField="start_pos"
@@ -663,7 +694,7 @@ const Publication = (props) => {
                   <Card.Body>
                     {phosphorylation && phosphorylation.length !== 0 && (
                       <ClientPaginatedTable
-                        data={phosphorylation
+                        data={addIndex(phosphorylation)
                           .map((x) => ({
                             ...x,
                             start_pos: parseInt(x.start_pos),
@@ -678,6 +709,7 @@ const Publication = (props) => {
                         onClickTarget={"#phosphorylation"}
                         defaultSortField={"start_pos"}
                         defaultSortOrder="asc"
+                        idField={"index"}
                       />
                     )}
                     {!phosphorylation && <p>No data available.</p>}
