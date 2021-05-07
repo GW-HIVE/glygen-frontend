@@ -441,11 +441,6 @@ const Publication = (props) => {
                     type: "json",
                     data: "publication_detail",
                   },
-                  {
-                    display: stringConstants.download.publication_csvdata.displayname,
-                    type: "csv",
-                    data: "publication_detail",
-                  },
                 ]}
                 dataId={id}
                 itemType="publication"
