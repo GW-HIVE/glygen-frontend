@@ -2132,9 +2132,7 @@ const ProteinDetail = (props) => {
                       <div hover="true" fluid="true">
                         <FunctionList functions={functions} />
                       </div>
-                      {functions && (
-                          <p className="no-data-msg-publication">No data available.</p>
-                      )}
+                      {functions && <p className="no-data-msg-publication">No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -3308,7 +3306,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={(collapsed.history ? "false" : "true")}>
+                  <Accordion.Collapse eventKey="0" out={collapsed.history ? "false" : "true"}>
                     <Card.Body>
                       {history && history.length && (
                         <>
@@ -3356,7 +3354,7 @@ const ProteinDetail = (props) => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={(collapsed.publication ? "false" : "true")}>
+                  <Accordion.Collapse eventKey="0" out={collapsed.publication ? "false" : "true"}>
                     <Card.Body className="card-padding-zero">
                       <Table hover fluid="true">
                         {publication && (
@@ -3382,7 +3380,9 @@ const ProteinDetail = (props) => {
                                             {glycanStrings.pmid.shortName}:
                                             {/* {glycanStrings.referenceType[ref.type].shortName}: */}
                                           </span>{" "}
-                                          <Link to={`${routeConstants.publication}${ref.id}/pmid`}>
+                                          <Link
+                                            to={`${routeConstants.publication}${ref.id}/${ref.type}`}
+                                          >
                                             <>{ref.id}</>
                                           </Link>
                                           {/* <a
@@ -3414,7 +3414,7 @@ const ProteinDetail = (props) => {
                         )}
                       </Table>
                       {!publication && (
-                          <p className="no-data-msg-publication">No data available.</p>
+                        <p className="no-data-msg-publication">No data available.</p>
                       )}
                     </Card.Body>
                   </Accordion.Collapse>

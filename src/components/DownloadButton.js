@@ -16,6 +16,7 @@ import { getMotifDownload } from "../data/motif";
 import { getIdMappingMappedDownload } from "../data/mapping";
 import { getIdMappingUnmappedDownload } from "../data/mapping";
 import { getOrthologDownload, getLocusDownload } from "../data/usecases";
+import { getPublicationDownload } from "../data/publication";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const DownloadButton = (props) => {
@@ -39,6 +40,8 @@ const DownloadButton = (props) => {
         return getOrthologDownload;
       case "locus":
         return getLocusDownload;
+      case "publication":
+        return getPublicationDownload;
       default:
     }
     return null;
@@ -156,7 +159,7 @@ const DownloadButton = (props) => {
                     type="checkbox"
                     id="download_compression"
                     checked={compressed}
-                    onClick={(e) => {
+                    onChange={(e) => {
                       setCompressed(e.target.checked);
                     }}
                   />
