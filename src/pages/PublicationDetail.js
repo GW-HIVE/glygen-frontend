@@ -42,7 +42,7 @@ const items = [
   { label: "Referenced Proteins", id: "Referenced-Proteins" },
   { label: "Referenced Glycans", id: "Referenced-Glycans" },
 ];
-const Publication = (props) => {
+const PublicationDetail = (props) => {
   let { id } = useParams();
   let { publType } = useParams();
   let { doi } = useParams();
@@ -954,4 +954,4 @@ const Publication = (props) => {
     </>
   );
 };
-export default Publication;
+export default PublicationDetail;

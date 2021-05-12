@@ -34,7 +34,7 @@
   "idMapping": "/mapper/",
   "idMappingResult": "/mapper-result/",
   "superSearch": "/super-search/",
-  "publication": "/publication/",
+  "publicationDetail": "/publication/",
   "home": "/home/",
   "default": "/"
 }
