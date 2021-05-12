@@ -60,16 +60,13 @@ const Publication = (props) => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+  const [sideBarData, setSidebarData] = useState(items);
 
   const maxItems = 30;
   const [allItems, setAllItems] = useState([]);
   // alert(JSON.stringify(allItems, null, 2));
   const [open, setOpen] = useState(false);
   const displayedItems = open ? allItems : allItems?.slice(0, maxItems);
-
-  // /a/: id / b -> Page A
-  //   / a / 26487628 / b
-  // /a/
 
   useEffect(() => {
     setPageLoading(true);
@@ -81,8 +78,6 @@ const Publication = (props) => {
     }
 
     logActivity("user", publId);
-
-    // console.log(id, doi, publType);
 
     const getPublData = getPublicationDetail(publId, publType);
 
@@ -122,6 +117,32 @@ const Publication = (props) => {
           setGlycosylationMining(mining);
           setGlycosylationTabSelected(selectTab);
         }
+        let detailDataTemp = data;
+        //new side bar
+        let newSidebarData = sideBarData;
+        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "General", true);
+        }
+        if (!detailDataTemp.glycosylation || detailDataTemp.glycosylation.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Glycosylation", true);
+        }
+        if (!detailDataTemp.phosphorylation || detailDataTemp.phosphorylation.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Phosphorylation", true);
+        }
+        if (!detailDataTemp.mutagenesis || detailDataTemp.mutagenesis.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Mutagenesis", true);
+        }
+        if (
+          !detailDataTemp.referenced_proteins ||
+          detailDataTemp.referenced_proteins.length === 0
+        ) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Referenced-Proteins", true);
+        }
+        if (!detailDataTemp.referenced_glycans || detailDataTemp.referenced_glycans.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Referenced-Glycans", true);
+        }
+
+        setSidebarData(newSidebarData);
       }
     });
 
@@ -129,7 +150,9 @@ const Publication = (props) => {
       let message = "Publication api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
+    // eslint-disable-next-line
   }, [id, doi, publType]);
+
   const {
     date,
     title,
@@ -143,6 +166,7 @@ const Publication = (props) => {
     referenced_proteins,
     referenced_glycans,
   } = detailData;
+
   /**
    * Adding toggle collapse arrow icon to card header individualy.
    * @param {object} uniprot_canonical_ac- uniprot accession ID.
@@ -161,7 +185,6 @@ const Publication = (props) => {
       referenced_glycans: true,
     }
   );
-
   /**
    * Adding toggle collapse arrow icon to card header individualy.
    * @param {object} name
@@ -385,6 +408,14 @@ const Publication = (props) => {
       formatter: (value, row) => <CollapsibleText text={row.annotation} lines={2} />,
     },
   ];
+  const setSidebarItemState = (items, itemId, disabledState) => {
+    return items.map((item) => {
+      return {
+        ...item,
+        disabled: item.id === itemId ? disabledState : item.disabled,
+      };
+    });
+  };
   function sortIgnoreCase(a, b) {
     if (a.toLowerCase() > b.toLowerCase()) {
       return 1;
@@ -397,14 +428,23 @@ const Publication = (props) => {
   return (
     <>
       <Helmet>
-        {getTitle("publicationDetail")}
+        {getTitle("publicationDetail", {
+          id:
+            reference && `${reference.id}/${reference.type}`
+              ? `${reference.id}/${reference.type}`
+              : "",
+          // reference && reference.id ? reference.id : "",
+          // reference && `${reference.type}:${reference.id}`
+          //   ? `${reference.type}: ${reference.id}`
+          //   : "",
+        })}
         {getMeta("publicationDetail")}
       </Helmet>
       <CssBaseline />
       <div id="top-heading"></div>
       <Row className="gg-baseline">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
-          <Sidebar items={items} />
+          <Sidebar items={sideBarData} />
         </Col>
         <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
           <div className="sidebar-page-mb">
@@ -419,7 +459,7 @@ const Publication = (props) => {
                         {reference && (
                           <div>
                             <strong className="nowrap">
-                              {reference.type} {reference.id}
+                              {reference.type}: {reference.id}
                             </strong>
                           </div>
                         )}
