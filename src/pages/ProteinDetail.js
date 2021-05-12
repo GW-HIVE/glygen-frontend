@@ -51,6 +51,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import CollapsableReference from "../components/CollapsableReference";
 import DirectSearch from "../components/search/DirectSearch.js";
 import { getProteinSearch } from "../data/protein";
+import CollapsibleText from "../components/CollapsibleText";
 
 const SimpleHelpTooltip = (props) => {
   const { data } = props;
@@ -733,17 +734,17 @@ const ProteinDetail = (props) => {
       //     </Link>
       //   </LineTooltip>
     },
-    // {
-    //   dataField: "type",
-    //   text: "Note",
-    //   sort: true,
-    //   headerStyle: (colum, colIndex) => {
-    //     return {
-    //       backgroundColor: "#4B85B6",
-    //       color: "white"
-    //     };
-    //   }
-    // }
+    {
+      dataField: "comment",
+      text: "Note",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "20%",
+        };
+      },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
+    },
   ];
   const glycanLigandsColumns = [
     {
@@ -1060,6 +1061,7 @@ const ProteinDetail = (props) => {
           width: "35%",
         };
       },
+      formatter: (value, row) => <CollapsibleText text={row.annotation} lines={2} />,
     },
   ];
   const expressionTissueColumns = [
@@ -1353,6 +1355,17 @@ const ProteinDetail = (props) => {
         ) : (
           "Not Reported"
         ),
+    },
+    {
+      dataField: "comment",
+      text: "Note",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "20%",
+        };
+      },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
   ];
   // ==================================== //
@@ -3377,8 +3390,9 @@ const ProteinDetail = (props) => {
                                         <>
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
-                                            {glycanStrings.pmid.shortName}:
+                                            {/* {glycanStrings.pmid.shortName}: */}
                                             {/* {glycanStrings.referenceType[ref.type].shortName}: */}
+                                            {ref.type}:{" "}
                                           </span>{" "}
                                           <Link
                                             to={`${routeConstants.publication}${ref.id}/${ref.type}`}

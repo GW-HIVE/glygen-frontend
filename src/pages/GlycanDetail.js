@@ -1626,7 +1626,7 @@ const GlycanDetail = (props) => {
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+                    <Card.Body>
                       {expression && expression.length !== 0 && (
                         <Tabs
                           defaultActiveKey={
@@ -1990,7 +1990,8 @@ const GlycanDetail = (props) => {
                                         <>
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
-                                            {glycanStrings.pmid.shortName}:
+                                            {/* {glycanStrings.pmid.shortName}: */}
+                                            {ref.type}:
                                           </span>{" "}
                                           <Link
                                             to={`${routeConstants.publication}${ref.id}/${ref.type}`}

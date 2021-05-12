@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer, useRef } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { getPublicationDetail } from "../data/publication";
 import { useParams, Link } from "react-router-dom";
 import Helmet from "react-helmet";
@@ -25,8 +25,6 @@ import { axiosError } from "../data/axiosError";
 import Button from "react-bootstrap/Button";
 import { FiBookOpen } from "react-icons/fi";
 import { Tab, Tabs, Container } from "react-bootstrap";
-// import { groupEvidences } from "../data/data-format";
-// import EvidenceList from "../components/EvidenceList";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
 import "../css/detail.css";
 import "../css/Responsive.css";
@@ -34,57 +32,20 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import routeConstants from "../data/json/routeConstants";
 import { getGlycanImageUrl } from "../data/glycan";
 import { addIndex } from "../utils/common";
-
-const CollapsibleText = ({ text, lines = 5 }) => {
-  const textRef = useRef();
-  const [overflow, setOverflow] = useState(false);
-  const [collapsed, setCollapsed] = useState(true);
-  useEffect(() => {
-    const scrollHeight = textRef.current.scrollHeight;
-    const clientHeight = textRef.current.clientHeight;
-    const scrollWidth = textRef.current.scrollWidth;
-    const clientWidth = textRef.current.clientWidth;
-
-    const isOverflow = scrollHeight > clientHeight || scrollWidth > clientWidth;
-    setOverflow(isOverflow);
-  }, [text]);
-  return (
-    <>
-      <p
-        ref={textRef}
-        style={{
-          display: "-webkit-box",
-          WebkitLineClamp: collapsed ? lines : "unset",
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-        }}
-      >
-        {text}
-      </p>
-      {overflow && collapsed && (
-        <Button className={"lnk-btn"} variant="link" onClick={() => setCollapsed(false)}>
-          Show More...
-        </Button>
-      )}
-      {overflow && !collapsed && (
-        <Button className={"lnk-btn"} variant="link" onClick={() => setCollapsed(true)}>
-          Show Less...
-        </Button>
-      )}
-    </>
-  );
-};
+import CollapsibleText from "../components/CollapsibleText";
 
 const items = [
   { label: "Gleneral", id: "General" },
   { label: "Glycosylation", id: "Glycosylation" },
   { label: "Phosphorylation", id: "Phosphorylation" },
+  { label: stringConstants.sidebar.mutagenesis.displayname, id: "Mutagenesis" },
   { label: "Referenced Proteins", id: "Referenced-Proteins" },
   { label: "Referenced Glycans", id: "Referenced-Glycans" },
 ];
 const Publication = (props) => {
   let { id } = useParams();
   let { publType } = useParams();
+  let { doi } = useParams();
 
   const proteinStrings = stringConstants.protein.common;
   const glycanStrings = stringConstants.glycan.common;
@@ -106,10 +67,24 @@ const Publication = (props) => {
   const [open, setOpen] = useState(false);
   const displayedItems = open ? allItems : allItems?.slice(0, maxItems);
 
+  // /a/: id / b -> Page A
+  //   / a / 26487628 / b
+  // /a/
+
   useEffect(() => {
     setPageLoading(true);
-    logActivity("user", id);
-    const getPublData = getPublicationDetail(id, publType);
+    let publId = "";
+    if (id && doi && publType) {
+      publId = `${id}/${doi}`;
+    } else {
+      publId = id;
+    }
+
+    logActivity("user", publId);
+
+    // console.log(id, doi, publType);
+
+    const getPublData = getPublicationDetail(publId, publType);
 
     getPublData.then(({ data }) => {
       if (data.code) {
@@ -154,17 +129,17 @@ const Publication = (props) => {
       let message = "Publication api call";
       axiosError(response, id, message, setPageLoading, setAlertDialogInput);
     });
-  }, [id, publType]);
+  }, [id, doi, publType]);
   const {
     date,
     title,
     journal,
     reference,
     authors,
-    // record_id,
     abstract,
     glycosylation,
     phosphorylation,
+    mutagenesis,
     referenced_proteins,
     referenced_glycans,
   } = detailData;
@@ -181,6 +156,7 @@ const Publication = (props) => {
       general: true,
       glycosylation: true,
       phosphorylation: true,
+      mutagenesis: true,
       referenced_proteins: true,
       referenced_glycans: true,
     }
@@ -284,18 +260,6 @@ const Publication = (props) => {
     },
   ];
   const phosphorylationColumns = [
-    // {
-    //   dataField: "evidence",
-    //   text: proteinStrings.evidence.name,
-    //   headerStyle: (colum, colIndex) => {
-    //     return {
-    //       // width: "15%",
-    //     };
-    //   },
-    //   formatter: (cell, row) => {
-    //     return <EvidenceList evidences={groupEvidences(cell)} />;
-    //   },
-    // },
     {
       dataField: "kinase_uniprot_canonical_ac",
       text: proteinStrings.kinase_protein.name,
@@ -377,7 +341,50 @@ const Publication = (props) => {
       },
     },
   ];
-
+  const mutagenesisColumns = [
+    {
+      dataField: "start_pos",
+      text: proteinStrings.startpos.name,
+      sort: true,
+      defaultSortField: "start_pos",
+      sortFunc: (a, b, order, start_pos) => {
+        if (order === "asc") {
+          return b - a;
+        }
+        return a - b; // desc
+      },
+    },
+    {
+      dataField: "end_pos",
+      text: proteinStrings.endpos.name,
+      sort: true,
+    },
+    {
+      dataField: "sequence",
+      text: stringConstants.sidebar.sequence.displayname,
+      sort: true,
+      formatter: (value, row) => (
+        <>
+          {row.sequence_org && <span className="wrapword">{row.sequence_org}</span>}
+          {!row.sequence_org && <span> (insertion)</span>}
+          {row.sequence_org && row.sequence_mut && <> → </>}
+          {row.sequence_mut && <>{row.sequence_mut}</>}
+          {!row.sequence_mut && <span> (deletion)</span>}
+        </>
+      ),
+    },
+    {
+      dataField: "annotation",
+      text: "Note",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "35%",
+        };
+      },
+      formatter: (value, row) => <CollapsibleText text={row.annotation} lines={2} />,
+    },
+  ];
   function sortIgnoreCase(a, b) {
     if (a.toLowerCase() > b.toLowerCase()) {
       return 1;
@@ -411,7 +418,9 @@ const Publication = (props) => {
                         <strong className="nowrap">Publication</strong> Specific Detail for
                         {reference && (
                           <div>
-                            {reference.type} <strong className="nowrap">{reference.id}</strong>
+                            <strong className="nowrap">
+                              {reference.type} {reference.id}
+                            </strong>
                           </div>
                         )}
                       </span>
@@ -508,9 +517,7 @@ const Publication = (props) => {
                         {reference && (
                           <div>
                             <FiBookOpen />
-                            <span style={{ paddingLeft: "15px" }}>
-                              {glycanStrings.pmid.shortName}:
-                            </span>{" "}
+                            <span style={{ paddingLeft: "15px" }}>{reference.type}:</span>{" "}
                             <a href={reference.url} target="_blank" rel="noopener noreferrer">
                               <>{reference.id}</>
                             </a>{" "}
@@ -708,6 +715,55 @@ const Publication = (props) => {
                       />
                     )}
                     {!phosphorylation && <p>No data available.</p>}
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+            {/*  Mutagenesis */}
+            <Accordion
+              id="Mutagenesis"
+              defaultActiveKey="0"
+              className="panel-width"
+              style={{ padding: "20px 0" }}
+            >
+              <Card>
+                <Card.Header className="panelHeadBgr">
+                  <span className="gg-green d-inline">
+                    <HelpTooltip
+                      title={DetailTooltips.protein.mutagenesis.title}
+                      text={DetailTooltips.protein.mutagenesis.text}
+                      urlText={DetailTooltips.protein.mutagenesis.urlText}
+                      url={DetailTooltips.protein.mutagenesis.url}
+                      helpIcon="gg-helpicon-detail"
+                    />
+                  </span>
+                  <h4 className="gg-green d-inline">
+                    {" "}
+                    {stringConstants.sidebar.mutagenesis.displayname}
+                  </h4>
+                  <div className="float-right">
+                    <Accordion.Toggle
+                      eventKey="0"
+                      onClick={() => toggleCollapse("mutagenesis", collapsed.mutagenesis)}
+                      className="gg-green arrow-btn"
+                    >
+                      <span>{collapsed.mutagenesis ? closeIcon : expandIcon}</span>
+                    </Accordion.Toggle>
+                  </div>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    {mutagenesis && mutagenesis.length !== 0 && (
+                      <ClientPaginatedTable
+                        data={addIndex(mutagenesis)}
+                        columns={mutagenesisColumns}
+                        idField={"index"}
+                        onClickTarget={"#mutagenesis"}
+                        defaultSortField={"start_pos"}
+                        defaultSortOrder="asc"
+                      />
+                    )}
+                    {!mutagenesis && <p>No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
