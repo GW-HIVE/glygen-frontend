@@ -21,6 +21,20 @@
 .page-item.active .page-link {
   background-color: white;
 }
+.filterlist {
+  list-style-type: none;
+  color: white;
+}
+.sidebar-left {
+  width: 25%;
+  float: left;
+}
+.labeltype {
+  width: 70%;
+  word-wrap: break-word;
+  list-style-type: none;
+  color: black;
+}
 .badge {
   display: inline-block;
   padding: 0.25em 0.6em;
@@ -66,6 +80,16 @@
 .evidencetype {
   text-transform: capitalize;
 }
+.parentElement {
+  word-break: break-all;
+  background: #4b85b6;
+  padding: 10px;
+  margin-top: 0px;
+  color: white;
+  list-style-type: none;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
 .badge-div + .badge-div {
   margin: 10px 0 0 !important;
   margin-left: 2px;
@@ -106,9 +130,53 @@ legend {
   z-index: 1000;
   box-shadow: none !important;
 }
+
 .no-data-msg {
   margin-left: 15px;
 }
+.checkboxCss.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #2f78b7;
+}
+.dropdownx {
+  color: white;
+  /* width: 500px; */
+  font-size: 21px;
+  overflow-y: scroll;
+  position: relative;
+  /* margin-left: 40px;
+  padding: 10px;
+  margin-top: 10px; */
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
+
+ul.filterlist {
+  padding: 0;
+  margin: 0;
+}
+label.labeltype {
+  display: flex;
+  align-items: start;
+}
+.CollapsableSidebarContainer {
+  display: flex;
+}
+.CollapsableSidebarContainer__sidebar {
+  width: 500px;
+  transition: width 0.5s;
+}
+.CollapsableSidebarContainer__sidebar.closed {
+  width: 0;
+}
+.CollapsableSidebarContainer__main {
+  flex: 1;
+}
+.CollapsableSidebarContainer__opener {
+  background: pink;
+  min-width: 10px;
+}
+
 .no-data-msg-publication {
   margin: 20px 0 36px 20px;
 }
