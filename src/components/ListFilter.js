@@ -3,6 +3,7 @@ import { Checkbox, Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Row, Col, div } from "react-bootstrap";
 import "../css/detail.css";
+
 const ListFilterOptionGroup = ({ type, onFilterChange }) => {
   // sort by order field
   type.options.sort((a, b) => {
@@ -25,7 +26,7 @@ const ListFilterOptionGroup = ({ type, onFilterChange }) => {
       <div className="dropdownx">
         <h6 className="parentElement">{type.label}</h6>
         {/* <div className="parentElement">{type.label}</div> */}
-        <ul className="filterlist">
+        <ul className="filterlist" rlist left-side-nav__upper>
           {type.options.map(option => (
             <li key={option.id}>
               <label className="labeltype">

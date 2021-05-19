@@ -21,7 +21,10 @@ import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
 // import CheckBox from "../components/CheckBox";
 import { Checkbox } from "@material-ui/core";
+import { Col, Row } from "react-bootstrap";
 import ListFilter from "../components/ListFilter";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -207,24 +210,32 @@ const GlycanList = props => {
       </Helmet>
 
       <FeedbackWidget />
-      <Container maxWidth="xl" className="gg-container">
-        <div class="CollapsableSidebarContainer">
-          <div
-            class={
-              "CollapsableSidebarContainer__sidebar" +
-              (sidebar ? "" : " closed")
-            }
-          >
-            <ListFilter
-              availableOptions={availableFilters}
-              selectedOptions={appliedFilters}
-              onFilterChange={handleFilterChange}
-            />
+      {/* <Container maxWidth="xl" className="gg-container5"> */}
+      <Row className="gg-container">
+        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage">
+          <div className="CollapsableSidebarContainer">
+            <div
+              className={
+                "CollapsableSidebarContainer__sidebar" +
+                (sidebar ? "" : " closed")
+              }
+            >
+              <ListFilter
+                availableOptions={availableFilters}
+                selectedOptions={appliedFilters}
+                onFilterChange={handleFilterChange}
+              />
+            </div>
+            <div
+              className="CollapsableSidebarContainer__opener"
+              onClick={() => setSidebar(!sidebar)}
+            >
+              {/* <ArrowLeftIcon className="gg-align-middle" fontSize="large" /> */}
+            </div>
           </div>
-          <div
-            class="CollapsableSidebarContainer__opener"
-            onClick={() => setSidebar(!sidebar)}
-          ></div>
+        </Col>
+
+        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
           <div class="CollapsableSidebarContainer__main">
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
@@ -278,8 +289,9 @@ const GlycanList = props => {
               )}
             </section>
           </div>
-        </div>
-      </Container>
+        </Col>
+      </Row>
+      {/* </Container> */}
     </>
   );
 };
