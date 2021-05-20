@@ -169,11 +169,11 @@ label.labeltype {
   display: flex;
   width: 500px;
   transition: width 0.5s;
-  overflow-x: scroll !important;
 }
 .CollapsableSidebarContainer__sidebar.closed {
   width: 0;
 }
+
 .CollapsableSidebarContainer__main {
   flex: 1;
 }
