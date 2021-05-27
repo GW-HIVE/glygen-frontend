@@ -1053,7 +1053,7 @@ const ProteinDetail = (props) => {
       ),
     },
     {
-      dataField: "annotation",
+      dataField: "comment",
       text: "Note",
       sort: true,
       headerStyle: (colum, colIndex) => {
@@ -1061,7 +1061,7 @@ const ProteinDetail = (props) => {
           width: "35%",
         };
       },
-      formatter: (value, row) => <CollapsibleText text={row.annotation} lines={2} />,
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
   ];
   const expressionTissueColumns = [
@@ -1307,6 +1307,17 @@ const ProteinDetail = (props) => {
         ) : (
           "Not Reported"
         ),
+    },
+    {
+      dataField: "comment",
+      text: "Note",
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return {
+          width: "20%",
+        };
+      },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
   ];
   const glycationColumns = [
@@ -1736,15 +1747,15 @@ const ProteinDetail = (props) => {
                 <Card>
                   <Card.Header className="panelHeadBgr">
                     <span className="gg-green d-inline">
-                      <SimpleHelpTooltip data={DetailTooltips.protein.glycosylations} />
+                      <SimpleHelpTooltip data={DetailTooltips.protein.glycosylation} />
 
-                      {/* <HelpTooltip
-                        title={DetailTooltips.protein.glycosylations.title}
-                        text={DetailTooltips.protein.glycosylations.text}
-                        urlText={DetailTooltips.protein.glycosylations.urlText}
-                        url={DetailTooltips.protein.glycosylations.url}
+                      <HelpTooltip
+                        title={DetailTooltips.protein.glycosylation.title}
+                        text={DetailTooltips.protein.glycosylation.text}
+                        urlText={DetailTooltips.protein.glycosylation.urlText}
+                        url={DetailTooltips.protein.glycosylation.url}
                         helpIcon="gg-helpicon-detail"
-                      /> */}
+                      />
                     </span>
                     <h4 className="gg-green d-inline">
                       {stringConstants.sidebar.glycosylation.displayname}
@@ -2222,10 +2233,10 @@ const ProteinDetail = (props) => {
                   <Card.Header className="panelHeadBgr">
                     <span className="gg-green d-inline">
                       <HelpTooltip
-                        title={DetailTooltips.protein.mutation.title}
-                        text={DetailTooltips.protein.mutation.text}
-                        urlText={DetailTooltips.protein.mutation.urlText}
-                        url={DetailTooltips.protein.mutation.url}
+                        title={DetailTooltips.protein.snv.title}
+                        text={DetailTooltips.protein.snv.text}
+                        urlText={DetailTooltips.protein.snv.urlText}
+                        url={DetailTooltips.protein.snv.url}
                         helpIcon="gg-helpicon-detail"
                       />
                     </span>
@@ -2322,6 +2333,7 @@ const ProteinDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
+
               {/*  Mutagenesis */}
               <Accordion
                 id="Mutagenesis"

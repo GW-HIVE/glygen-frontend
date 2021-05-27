@@ -1670,11 +1670,18 @@
     },
     "referenced_proteins": {
       "id": "referenced_proteins",
-      "displayname": "Referenced Proteins"
+      "displayname": "Referenced Proteins",
+      "tooltip": "Referenced Proteins information"
     },
     "referenced_glycans": {
       "id": "referenced_glycans",
-      "displayname": "Referenced Glycans"
+      "displayname": "Referenced Glycans",
+      "tooltip": "Referenced Glycans information"
+    },
+      "cell_line": {
+      "id": "cell_lLine",
+      "displayname": "Cell Line",
+      "tooltip": "Cell Line information"
     }
   },
   "download": {
