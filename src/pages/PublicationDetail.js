@@ -724,14 +724,6 @@ const PublicationDetail = (props) => {
     }
     return 0;
   }
-  function sortDropdown(a, b) {
-    if (a.name < b.name) {
-      return -1;
-    } else if (b.name < a.name) {
-      return 1;
-    }
-    return 0;
-  }
 
   return (
     <>
@@ -754,7 +746,7 @@ const PublicationDetail = (props) => {
           <div className="sidebar-page-mb">
             <div>
               <Row>
-                <Grid item xs={12} sm={12} className="text-center">
+                <Grid item xs={12} sm={12} className="text-center mt-4">
                   <div className="horizontal-heading">
                     <h5>Look At</h5>
                     <h2>
