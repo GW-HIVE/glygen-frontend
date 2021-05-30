@@ -3,6 +3,8 @@ import React from "react";
 import "../css/alignment.css";
 // import { Grid } from "@material-ui/core";
 // import routeConstants from "../data/json/routeConstants";
+import SequenceViewer from "../components/sequence/SequenceViewer";
+
 
 // finds the max length of all sequences or consensus
 function findMaxSequenceLength(sequenceObject) {
@@ -64,7 +66,6 @@ const Alignment = ({ alignmentData, perLine, start }) => {
           <div className="aln-block">
             {sequenceObject.sequences.map((aln) => (
               <div className="aln-line row">
-                {/* <Grid item xs={12} md={1}> */}
                 <div className="aln-line-header">{aln.tax_id}</div>
                 <div className="aln-line-header">{aln.tax_name}</div>
                 <div className="aln-line-header" style={{ paddingLeft: "10px" }}>

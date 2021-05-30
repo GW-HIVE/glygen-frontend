@@ -16,6 +16,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import DetailTooltips from "../data/json/detailTooltips.json";
 import HelpTooltip from "../components/tooltip/HelpTooltip";
 import FeedbackWidget from "../components/FeedbackWidget";
+import SequenceDashboard from "../components/sequence/SequenceDashboard";
 import routeConstants from "../data/json/routeConstants";
 import stringConstants from "../data/json/stringConstants";
 import Alignment from "../components/Alignment";
@@ -24,6 +25,7 @@ import { logActivity } from "../data/logging";
 import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
+import SequenceViewer from "../components/sequence/SequenceViewer";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -37,12 +39,23 @@ const ProteinAlignment = () => {
 
   const [data, setData] = useState({});
 
+
   const isIsoform = alignment === "isoformset.uniprotkb";
   const [pageLoading, setPageLoading] = useState(true);
   const [alertDialogInput, setAlertDialogInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+  const [selectedHighlights, setSelectedHighlights] = useState({
+    mutation: false,
+    site_annotation: false,
+    n_link_glycosylation: false,
+    o_link_glycosylation: false,
+    phosphorylation: false,
+    glycation: false,
+  });
+  const [sequenceSearchText, setSequenceSearchText] = useState("");
+
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
@@ -99,6 +112,12 @@ const ProteinAlignment = () => {
     };
   }
 
+  const {
+    sequences,
+    details,
+    consensus
+  } = newData;
+
   return (
     <>
       <Row className="gg-baseline">
@@ -131,6 +150,15 @@ const ProteinAlignment = () => {
                 })}
                 {getMeta("proteinAlignment")}
               </Helmet>
+              <SequenceDashboard 
+                  details={details}
+                  sequenceObject={sequences}
+                  selectedHighlights={selectedHighlights}
+                  setSelectedHighlights={setSelectedHighlights}
+                  sequenceSearchText={sequenceSearchText}
+                  setSequenceSearchText={setSequenceSearchText}
+                  showNumbers={isIsoform}
+              />
               <FeedbackWidget />
               <PageLoader pageLoading={pageLoading} />
               <DialogAlert
@@ -188,9 +216,18 @@ const ProteinAlignment = () => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0" out={!collapsed.alignment}>
                     <Card.Body className="card-padding-zero">
-                      {newData && newData.sequences && (
+                      {/* {newData && newData.sequences && (
                         <Alignment alignmentData={newData} perLine={perLine} />
-                      )}
+                      )} */}
+                        {data && <SequenceViewer
+                          details={details}
+                          consensus={consensus}
+                          sequenceObject={sequences}
+                          selectedHighlights={selectedHighlights}
+                          setSelectedHighlights={setSelectedHighlights}
+                          sequenceSearchText={sequenceSearchText}
+                          multiSequence={true}
+                        />}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

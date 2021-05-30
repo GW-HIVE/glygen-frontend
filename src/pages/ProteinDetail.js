@@ -51,6 +51,8 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import CollapsableReference from "../components/CollapsableReference";
 import DirectSearch from "../components/search/DirectSearch.js";
 import { getProteinSearch } from "../data/protein";
+import SequenceHighlighter from "../components/sequence/SequenceHighlighter";
+import SequenceViewer from "../components/sequence/SequenceViewer";
 
 const SimpleHelpTooltip = (props) => {
   const { data } = props;
@@ -278,6 +280,7 @@ const ProteinDetail = (props) => {
     o_link_glycosylation: false,
     phosphorylation: false,
     glycation: false,
+    text_search: false
   });
   const [geneNames, setGeneNames] = useState([]);
   const [recommendedGeneRows, setRecommendedGeneRows] = useState([]);
@@ -285,6 +288,8 @@ const ProteinDetail = (props) => {
   const [proteinNames, setProteinNames] = useState([]);
   const [recommendedProteinRows, setRecommendedProteinRows] = useState([]);
   const [synonymProteinRows, setSynonymProteinRows] = useState([]);
+  const [sequenceSearchText, setSequenceSearchText] = useState("");
+
 
   useEffect(() => {
     setPageLoading(true);
@@ -296,6 +301,7 @@ const ProteinDetail = (props) => {
       o_link_glycosylation: "o_link_glycosylation" === select,
       phosphorylation: "phosphorylation" === select,
       glycation: "glycation" === select,
+      text_search: false
     });
 
     const getProteinDetailData = getProteinDetail(id);
@@ -559,6 +565,7 @@ const ProteinDetail = (props) => {
     cluster_types,
     history,
   } = detailData;
+  // alert(detailData.sequence)
   const setSidebarItemState = (items, itemId, disabledState) => {
     return items.map((item) => {
       return {
@@ -2183,17 +2190,38 @@ const ProteinDetail = (props) => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       <div>
-                        <ProteinSequenceDisplay
-                          sequenceObject={sequence}
-                          glycosylation={glycosylation}
-                          mutation={snv}
-                          siteAnnotation={site_annotation}
-                          phosphorylationObj={phosphorylation}
-                          glycationObj={glycation}
+                        {detailData.sequence && <SequenceViewer
+                          sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
+                          details={[{
+                            uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
+                            glycosylation : detailData.glycosylation,
+                            snv : detailData.snv,
+                            site_annotation : detailData.site_annotation,
+                            phosphorylation : detailData.phosphorylation,
+                            glycation : detailData.glycation,
+                          }]}
+                          multiSequence={false}
                           selectedHighlights={selectedHighlights}
                           setSelectedHighlights={setSelectedHighlights}
-                        />
-                      </div>
+                          sequenceSearchText={sequenceSearchText}
+                        />}
+                        {detailData.sequence && <SequenceHighlighter 
+                          sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
+                          details={[{
+                            uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
+                            glycosylation : detailData.glycosylation,
+                            snv : detailData.snv,
+                            site_annotation : detailData.site_annotation,
+                            phosphorylation : detailData.phosphorylation,
+                            glycation : detailData.glycation,
+                          }]}
+                          showNumbers={true}
+                          selectedHighlights={selectedHighlights}
+                          setSelectedHighlights={setSelectedHighlights}
+                          sequenceSearchText={sequenceSearchText}
+                          setSequenceSearchText={setSequenceSearchText}
+                        />}
+                    </div>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
