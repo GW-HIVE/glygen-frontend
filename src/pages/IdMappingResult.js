@@ -17,7 +17,6 @@ import routeConstants from "../data/json/routeConstants";
 import idMappingData from "../data/json/idMapping";
 import stringConstants from "../data/json/stringConstants";
 import IdMappingQuerySummary from "../components/IdMappingQuerySummary";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import DownloadAllButton from "../components/DownloadAllButton";
 import { Link } from "react-router-dom";
 import LineTooltip from "../components/tooltip/LineTooltip";
@@ -310,15 +309,6 @@ const IdMappingResult = (props) => {
               Modify Request
             </Button>
           </div>
-          <br />
-          <div className="id-mapping-go-to-top">
-            <a href="#To-Top">
-              to Top
-              <span>
-                <ArrowUpwardIcon />
-              </span>
-            </a>
-          </div>
         </section>
         <div id="Unmapped-Table"></div>
         <div className="content-box-sm">
@@ -360,15 +350,6 @@ const IdMappingResult = (props) => {
             </Button>
           </div>
         </section>
-        <br />
-        <div className="id-mapping-go-to-top">
-          <a href="#To-Top">
-            to Top
-            <span>
-              <ArrowUpwardIcon />
-            </span>
-          </a>
-        </div>
       </Container>
     </>
   );

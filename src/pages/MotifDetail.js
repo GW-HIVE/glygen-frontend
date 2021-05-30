@@ -558,16 +558,21 @@ const MotifDetail = (props) => {
                                         <>
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
-                                            {glycanStrings.pmid.shortName}:
-                                            {/* {glycanStrings.referenceType[ref.type].shortName}: */}
+                                            {/* {glycanStrings.pmid.shortName}: */}
+                                            {ref.type}:
                                           </span>{" "}
-                                          <a
+                                          <Link
+                                            to={`${routeConstants.publicationDetail}${ref.id}/${ref.type}`}
+                                          >
+                                            <>{ref.id}</>
+                                          </Link>{" "}
+                                          {/* <a
                                             href={ref.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                           >
                                             <>{ref.id}</>
-                                          </a>
+                                          </a> */}
                                         </>
                                       ))}
                                     </div>

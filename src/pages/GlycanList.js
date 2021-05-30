@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Helmet from "react-helmet";
+import { Div } from "react-bootstrap";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,6 +21,10 @@ import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
 // import CheckBox from "../components/CheckBox";
 import { Checkbox } from "@material-ui/core";
+import { Col, Row } from "react-bootstrap";
+import ListFilter from "../components/ListFilter";
+import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const GlycanList = props => {
   let { id } = useParams();
@@ -29,6 +34,8 @@ const GlycanList = props => {
   const [query, setQuery] = useState([]);
   const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
+  const [appliedFilters, setAppliedFilters] = useState([]);
+  const [availableFilters, setAvailableFilters] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState(GLYCAN_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
@@ -67,13 +74,14 @@ const GlycanList = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity("user", id);
-    // const selected = getUserSelectedColumns();
-    // const userSelectedColumn = GLYCAN_COLUMNS.filter(column =>
-    //   selected.includes(column.dataField)
-    // );
-    // setSelectedColumns(userSelectedColumn);
-
-    getGlycanList(id)
+    getGlycanList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      "hit_score",
+      "desc",
+      appliedFilters
+    )
       .then(({ data }) => {
         if (data.error_code) {
           let message = "list api call";
@@ -97,9 +105,9 @@ const GlycanList = props => {
           setQuery(fixResidueToShortNames(data.cache_info.query));
           setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);
+          setAvailableFilters(data.filters.available);
           const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
           setPage(currentPage);
-          //   setSizePerPage()
           setTotalSize(data.pagination.total_length);
           setPageLoading(false);
         }
@@ -108,7 +116,7 @@ const GlycanList = props => {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
-  }, []);
+  }, [appliedFilters]);
 
   const handleTableChange = (
     type,
@@ -116,23 +124,57 @@ const GlycanList = props => {
   ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
-
     getGlycanList(
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
       sortField,
-      sortOrder
+      sortOrder,
+      appliedFilters
     ).then(({ data }) => {
       // place to change values before rendering
 
       setData(data.results);
       setTimeStamp(data.cache_info.ts);
       setPagination(data.pagination);
-
-      //   setSizePerPage()
+      setAvailableFilters(data.filters.available);
       setTotalSize(data.pagination.total_length);
     });
+  };
+
+  const handleFilterChange = (type, option, selected) => {
+    console.log(type, option, selected);
+
+    // find if a filter exists for this type
+    const existingFilter = appliedFilters.find(filter => filter.id === type);
+
+    // if no filter exists
+    if (!existingFilter && selected) {
+      // add a new filter of this type
+      setAppliedFilters([
+        ...appliedFilters,
+        {
+          id: type,
+          selected: [option]
+        }
+      ]);
+    } else if (existingFilter) {
+      // list of all the other filters
+      const otherFilters = appliedFilters.filter(
+        filter => filter.id !== existingFilter.id
+      );
+
+      // for this existing filter, make sure we remove this option if it existed
+      existingFilter.selected = existingFilter.selected.filter(
+        value => value !== option
+      );
+
+      // if the option should selected, add it to the filter
+      if (selected) {
+        existingFilter.selected.push(option);
+      }
+      setAppliedFilters([...otherFilters, existingFilter]);
+    }
   };
 
   function rowStyleFormat(row, rowIdx) {
@@ -158,6 +200,8 @@ const GlycanList = props => {
     }
   };
 
+  const [sidebar, setSidebar] = useState(true);
+
   return (
     <>
       <Helmet>
@@ -166,57 +210,88 @@ const GlycanList = props => {
       </Helmet>
 
       <FeedbackWidget />
-
-      <Container maxWidth="xl" className="gg-container">
-        <PageLoader pageLoading={pageLoading} />
-        <DialogAlert
-          alertInput={alertDialogInput}
-          setOpen={input => {
-            setAlertDialogInput({ show: input });
-          }}
-        />
-        <section className="content-box-md">
-          <GlycanQuerySummary
-            data={query}
-            question={quickSearch[searchId]}
-            searchId={searchId}
-            timestamp={timestamp}
-            onModifySearch={handleModifySearch}
-          />
-        </section>
-
-        <section>
-          <DownloadButton
-            types={[
-              {
-                display: stringConstants.download.glycan_csvdata.displayname,
-                type: "csv",
-                data: "glycan_list"
-              },
-              {
-                display: stringConstants.download.glycan_jsondata.displayname,
-                type: "json",
-                data: "glycan_list"
+      {/* <Container maxWidth="xl" className="gg-container5"> */}
+      <Row className="gg-container">
+        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage">
+          <div className="CollapsableSidebarContainer">
+            <div
+              className={
+                "CollapsableSidebarContainer__sidebar" +
+                (sidebar ? "" : " closed")
               }
-            ]}
-            dataId={id}
-          />
-          {selectedColumns && selectedColumns.length !== 0 && (
-            <PaginatedTable
-              trStyle={rowStyleFormat}
-              data={data}
-              columns={selectedColumns}
-              page={page}
-              sizePerPage={sizePerPage}
-              totalSize={totalSize}
-              onTableChange={handleTableChange}
-              defaultSortField="hit_score"
-              defaultSortOrder="desc"
-              idField="glytoucan_ac"
+            >
+              <ListFilter
+                availableOptions={availableFilters}
+                selectedOptions={appliedFilters}
+                onFilterChange={handleFilterChange}
+              />
+            </div>
+            <div
+              className="CollapsableSidebarContainer__opener"
+              onClick={() => setSidebar(!sidebar)}
+            >
+              {/* <ArrowLeftIcon className="gg-align-middle" fontSize="large" /> */}
+            </div>
+          </div>
+        </Col>
+
+        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+          <div class="CollapsableSidebarContainer__main">
+            <PageLoader pageLoading={pageLoading} />
+            <DialogAlert
+              alertInput={alertDialogInput}
+              setOpen={input => {
+                setAlertDialogInput({ show: input });
+              }}
             />
-          )}
-        </section>
-      </Container>
+
+            <section className="content-box-md">
+              <GlycanQuerySummary
+                data={query}
+                question={quickSearch[searchId]}
+                searchId={searchId}
+                timestamp={timestamp}
+                onModifySearch={handleModifySearch}
+              />
+            </section>
+
+            <section>
+              <DownloadButton
+                types={[
+                  {
+                    display:
+                      stringConstants.download.glycan_csvdata.displayname,
+                    type: "csv",
+                    data: "glycan_list"
+                  },
+                  {
+                    display:
+                      stringConstants.download.glycan_jsondata.displayname,
+                    type: "json",
+                    data: "glycan_list"
+                  }
+                ]}
+                dataId={id}
+              />
+              {data && data.length !== 0 && (
+                <PaginatedTable
+                  trStyle={rowStyleFormat}
+                  data={data}
+                  columns={selectedColumns}
+                  page={page}
+                  sizePerPage={sizePerPage}
+                  totalSize={totalSize}
+                  onTableChange={handleTableChange}
+                  defaultSortField="hit_score"
+                  defaultSortOrder="desc"
+                  idField="glytoucan_ac"
+                />
+              )}
+            </section>
+          </div>
+        </Col>
+      </Row>
+      {/* </Container> */}
     </>
   );
 };

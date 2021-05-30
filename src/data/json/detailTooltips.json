@@ -121,7 +121,7 @@
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
     "names_synonyms": {
-      "title": "Names Synonyms",
+      "title": "Names",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
@@ -151,19 +151,19 @@
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
     "goannotation": {
-      "title": "Go Annotations",
+      "title": "GO Annotation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
     "ptmannotation": {
-      "title": "PTM Annotations",
+      "title": "PTM Annotation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
     "proannotation": {
-      "title": "Proteoform-Annotation",
+      "title": "Proteoform Annotation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
@@ -174,7 +174,7 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "glycosylations": {
+    "glycosylation": {
       "title": "Glycosylation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
@@ -216,8 +216,8 @@
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     },
-    "mutation": {
-      "title": " Mutation",
+    "snv": {
+      "title": "Single Nucleotide Variation",
       "text": "Add some unique text here.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
@@ -275,6 +275,12 @@
     "referenced_glycans": {
       "title": "Referenced Glycans",
       "text": "Referenced Glycans information about publication specific detail.",
+      "urlText": "Read more...",
+      "url": "https://wiki.glygen.org/index.php/Main_Page"
+    },
+     "cell_line": {
+      "title": "Cell Line",
+      "text": "Cell Line information about publication specific detail.",
       "urlText": "Read more...",
       "url": "https://wiki.glygen.org/index.php/Main_Page"
     }

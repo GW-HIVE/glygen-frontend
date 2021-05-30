@@ -128,8 +128,8 @@ const ProtVista = () => {
               tooltipContent:
                 "<span className=marker>Glycosylation site without reported glycan at " +
                 glyco.start_pos +
-                "," +
-                " Click to see site details. </span>",
+                "." +
+                "</br>Click on the Node to see site details. </span>",
             });
           }
         } else if (glyco.type === "O-linked") {
@@ -159,8 +159,8 @@ const ProtVista = () => {
               tooltipContent:
                 "<span className=marker>Glycosylation site without reported glycan at " +
                 glyco.start_pos +
-                "," +
-                " Click to see site details. </span>",
+                "." +
+                "</br>Click on the Node to see site details. </span>",
             });
           }
         }
@@ -176,10 +176,13 @@ const ProtVista = () => {
           color: phosphorylationP.color,
           shape: phosphorylationP.shape,
           accession: data.uniprot.uniprot_canonical_ac,
-          type: "(" + phosphorylation.sequence_org + " → " + phosphorylation.sequence_mut + ")",
-          title: "(" + phosphorylation.sequence_org + " → " + phosphorylation.sequence_mut + ")",
+          type: phosphorylation.residue,
+          title: phosphorylation.residue + "-" + phosphorylation.start_pos,
           tooltipContent:
-            "<span className=marker> annotation " + phosphorylation.annotation + "</span>",
+            "<br className=marker>Phosphorylation site without reported glycan at " +
+            phosphorylation.start_pos +
+            "." +
+            "</br>Click on the Node to see site details. </span>",
         });
       }
     }
@@ -193,9 +196,13 @@ const ProtVista = () => {
           color: glycationG.color,
           shape: glycationG.shape,
           accession: data.uniprot.uniprot_canonical_ac,
-          type: "(" + glycation.sequence_org + " → " + glycation.sequence_mut + ")",
-          title: "(" + glycation.sequence_org + " → " + glycation.sequence_mut + ")",
-          tooltipContent: "<span className=marker> annotation " + glycation.annotation + "</span>",
+          type: glycation.residue,
+          title: glycation.residue + "-" + glycation.start_pos,
+          tooltipContent:
+            "<span className=marker>Glycation site without reported glycan at " +
+            glycation.start_pos +
+            "." +
+            "</br>Click on the Node to see site details. </span>",
         });
       }
     }
@@ -211,7 +218,7 @@ const ProtVista = () => {
           accession: data.uniprot.uniprot_canonical_ac,
           type: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
           title: "(" + mutation.sequence_org + " → " + mutation.sequence_mut + ")",
-          tooltipContent: "<span className=marker> annotation " + mutation.annotation + "</span>",
+          tooltipContent: "<span className=marker> annotation " + mutation.comment + "</span>",
         });
       } //);
     }
@@ -237,8 +244,7 @@ const ProtVista = () => {
             mutagenesis.end_pos +
             ")",
 
-          tooltipContent:
-            "<span className=marker> annotation " + mutagenesis.annotation + "</span>",
+          tooltipContent: "<span className=marker> annotation " + mutagenesis.comment + "</span>",
         });
       } //);
     }

@@ -180,6 +180,9 @@ const GlycanDetail = (props) => {
   const [expressionWithtissue, setExpressionWithtissue] = useState([]);
   const [expressionWithcell, setExpressionWithcell] = useState([]);
   const [sideBarData, setSidebarData] = useState(items);
+  const [subsumptionAncestor, setSubsumptionAncestor] = useState([]);
+  const [subsumptionDescendant, setSubsumptionDescendant] = useState([]);
+  const [subsumptionTabSelected, setSubsumptionTabSelected] = useState(["ancestor"]);
   // let history;
 
   useEffect(() => {
@@ -194,7 +197,27 @@ const GlycanDetail = (props) => {
         setPageLoading(false);
       } else {
         let detailDataTemp = data;
+        if (data.subsumption) {
+          const mapOfSubsumptionCategories = data.subsumption.reduce((collection, item) => {
+            const category = item.relationship || logActivity("No results. ");
+            return {
+              ...collection,
+              [category]: [...(collection[category] || []), item],
+            };
+          }, {});
 
+          const withAncestor = mapOfSubsumptionCategories.ancestor || [];
+          const withDescendant = mapOfSubsumptionCategories.descendant || [];
+
+          const selectTab = ["ancestor", "descendant"].find(
+            (category) =>
+              mapOfSubsumptionCategories[category] &&
+              mapOfSubsumptionCategories[category].length > 0
+          );
+          setSubsumptionAncestor(withAncestor);
+          setSubsumptionDescendant(withDescendant);
+          setSubsumptionTabSelected(selectTab);
+        }
         if (detailDataTemp.expression) {
           const WithTissue = detailDataTemp.expression.filter((item) => item.tissue !== undefined);
           const WithCellline = detailDataTemp.expression.filter(
@@ -204,6 +227,7 @@ const GlycanDetail = (props) => {
           setExpressionWithcell(WithCellline);
           setExpressionTabSelected(WithTissue.length > 0 ? "with_tissue" : "with_cellline");
         }
+
         if (detailDataTemp.mass) {
           detailDataTemp.mass = addCommas(detailDataTemp.mass);
         }
@@ -569,22 +593,22 @@ const GlycanDetail = (props) => {
         };
       },
     },
-    // {
-    //   dataField: "type",
-    //   text: "Type",
-    //   sort: true,
-    //   headerStyle: (colum, colIndex) => {
-    //     return { backgroundColor: "#4B85B6", color: "white" };
-    //   }
-    // },
     {
-      dataField: "relationship",
-      text: "Relationship",
+      dataField: "type",
+      text: "Type",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white" };
       },
     },
+    // {
+    //   dataField: "relationship",
+    //   text: "Relationship",
+    //   sort: true,
+    //   headerStyle: (colum, colIndex) => {
+    //     return { backgroundColor: "#4B85B6", color: "white" };
+    //   },
+    // },
   ];
   const expressionCellColumns = [
     {
@@ -973,8 +997,6 @@ const GlycanDetail = (props) => {
                   setAlertDialogInput({ show: input });
                 }}
               />
-
-              {/*  Function */}
               {/* general */}
               <Accordion
                 id="General"
@@ -1306,7 +1328,6 @@ const GlycanDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/*  Names */}
               <Accordion
                 id="Names"
@@ -1343,7 +1364,7 @@ const GlycanDetail = (props) => {
                       {names && names.length ? (
                         <ul className="list-style-none">
                           {names.map((nameObject) => (
-                            <li>
+                            <li key={nameObject.domain}>
                               <b>{nameObject.domain}</b>: {nameObject.name}
                             </li>
                           ))}
@@ -1497,7 +1518,6 @@ const GlycanDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/* Biosynthetic Enzymes */}
               <Accordion
                 id="Biosynthetic-Enzymes"
@@ -1545,7 +1565,6 @@ const GlycanDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/* Subsumption*/}
               <Accordion
                 id="Subsumption"
@@ -1580,20 +1599,59 @@ const GlycanDetail = (props) => {
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
                       {subsumption && subsumption.length !== 0 && (
-                        <ClientPaginatedTable
-                          idField={"id"}
-                          data={subsumption}
-                          columns={subsumptionColumns}
-                          defaultSortField={"id"}
-                          onClickTarget={"#subsumption"}
-                        />
+                        <Tabs
+                          activeKey={subsumptionTabSelected}
+                          transition={false}
+                          mountOnEnter={true}
+                          unmountOnExit={true}
+                          onSelect={(key) => {
+                            setSubsumptionTabSelected(key);
+                          }}
+                        >
+                          <Tab eventKey="ancestor" title="Ancestor">
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px",
+                              }}
+                            >
+                              {subsumptionAncestor && subsumptionAncestor.length > 0 && (
+                                <ClientPaginatedTable
+                                  idField={"id"}
+                                  data={subsumptionAncestor}
+                                  columns={subsumptionColumns}
+                                  defaultSortField={"id"}
+                                  onClickTarget={"#subsumption"}
+                                />
+                              )}
+                              {!subsumptionAncestor.length && <p>No data available.</p>}
+                            </Container>
+                          </Tab>
+                          <Tab eventKey="descendant" title="Descendant">
+                            <Container
+                              style={{
+                                paddingTop: "20px",
+                                paddingBottom: "30px",
+                              }}
+                            >
+                              {subsumptionDescendant && subsumptionDescendant.length > 0 && (
+                                <ClientPaginatedTable
+                                  idField={"id"}
+                                  data={subsumptionDescendant}
+                                  columns={subsumptionColumns}
+                                  defaultSortField={"id"}
+                                  onClickTarget={"#subsumption"}
+                                />
+                              )}
+                              {!subsumptionDescendant.length && <p>No data available.</p>}
+                            </Container>
+                          </Tab>
+                        </Tabs>
                       )}
-                      {!subsumption && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/* Expression */}
               <Accordion
                 id="Expression"
@@ -1626,7 +1684,7 @@ const GlycanDetail = (props) => {
                     </div>
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+                    <Card.Body>
                       {expression && expression.length !== 0 && (
                         <Tabs
                           defaultActiveKey={
@@ -1693,7 +1751,6 @@ const GlycanDetail = (props) => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-
               {/* Digital Sequence */}
               <Accordion
                 id="Digital-Sequence"
@@ -1990,10 +2047,11 @@ const GlycanDetail = (props) => {
                                         <>
                                           <FiBookOpen />
                                           <span style={{ paddingLeft: "15px" }}>
-                                            {glycanStrings.pmid.shortName}:
+                                            {/* {glycanStrings.pmid.shortName}: */}
+                                            {ref.type}:
                                           </span>{" "}
                                           <Link
-                                            to={`${routeConstants.publication}${ref.id}/${ref.type}`}
+                                            to={`${routeConstants.publicationDetail}${ref.id}/${ref.type}`}
                                           >
                                             <>{ref.id}</>
                                           </Link>{" "}

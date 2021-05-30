@@ -35,7 +35,7 @@ import Siteview from "./pages/Siteview";
 import IdMapping from "./pages/IdMapping";
 import idMappingResult from "./pages/IdMappingResult";
 import SuperSearch from "./pages/SuperSearch";
-import Publication from "./pages/Publication";
+import PublicationDetail from "./pages/PublicationDetail";
 
 /**
  * Defines route path for Glygen. Use routeConstants from routeConstants.json.
@@ -93,9 +93,16 @@ const Routes = (props) => (
     <Route path={`${routeConstants.superSearch}:id/:searchId`} component={SuperSearch} />
     <Route path={`${routeConstants.superSearch}:id`} component={SuperSearch} />
     <Route path={routeConstants.superSearch} component={SuperSearch} />
-    <Route path={`${routeConstants.publication}:id/:publType`} component={Publication} />
-    <Route path={`${routeConstants.publication}:id`} component={Publication} />
-    <Route path={routeConstants.publication} component={Publication} />
+    <Route
+      path={`${routeConstants.publicationDetail}:id/:doi/:publType`}
+      component={PublicationDetail}
+    />
+    <Route
+      path={`${routeConstants.publicationDetail}:id/:publType`}
+      component={PublicationDetail}
+    />
+    <Route path={`${routeConstants.publicationDetail}:id`} component={PublicationDetail} />
+    <Route path={routeConstants.publicationDetail} component={PublicationDetail} />
     {/* Keep path='/' at the bottom */}
     <Route path={routeConstants.home} component={Home} />
     <Route path={routeConstants.default} component={Home} />
