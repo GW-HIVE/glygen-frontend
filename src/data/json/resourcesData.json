@@ -45,6 +45,17 @@
 			"curated": ""
 		},
 		{
+			"category": "Database",
+			"website": {
+				"name": "GPTWiki",
+				"url": "https://gptwiki.glyomics.org/"
+			},
+			"description": "The GPTWiki glycopeptide transition resource provides direct site-specific experimental evidence of glycans attached to proteins. The glycopeptide fragmentation spectra are used in the design of targeted LC-MS quantitation assays and in DIA/SWATH transition libraries for large-scale glycopeptide quantitation.",
+			"contains_publ": "",
+			"experimental_data": "MS/MS",
+			"curated": ""
+		},
+		{
 			"category": "Knowledgebase",
 			"website": {
 				"name": "CAZypedia",
@@ -135,7 +146,7 @@
 			"category": "Tool collection",
 			"website": {
 				"name": "ISOGlyP",
-				"url": "http://isoglyp.utep.edu/index.php"
+				"url": "https://isoglyp.utep.edu/"
 			},
 			"description": "ISOGlyP is an Isoform Specific O-Glycosylation Prediction. This tool allows you to analyze the sequence either by uploading a file with the sequences in FASTA format or by copy and paste the sequence(s) inside the text area.",
 			"experimental_data": "",
