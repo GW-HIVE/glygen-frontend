@@ -1,40 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox, Collapse } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Row, Col, div } from "react-bootstrap";
 import "../css/detail.css";
+import proteinSearchData from "../data/json/proteinSearch";
+import SelectControl from "../components/select/SelectControl";
+import Iframe from "react-iframe";
 
+let advancedSearch = proteinSearchData.advanced_search;
 const ListFilterOptionGroup = ({ type, onFilterChange }) => {
+  const [optionState, setOptionState] = useState(type.options);
+  const [annotationOperation, setAnnotationOperation] = useState(
+    type.operator || "OR"
+  );
   // sort by order field
-  type.options.sort((a, b) => {
+  optionState.sort((a, b) => {
     if (a.order < b.order) return -1;
     if (b.order < a.order) return 1;
     return 0;
   });
 
-  const handleChange = event => {
+  const handleOptionChange = event => {
     // get the value (which option) and checked state
     const { checked, value } = event.target;
-
-    // tell the containing page which group and option changed, and what state its in now
-    onFilterChange(type.id, value, checked);
+    const newOptionState = [...optionState];
+    newOptionState.filter(item => item.id === value).selected = checked;
+    setOptionState(newOptionState);
+    // if (newOptionState) {
+    //   setAnnotationOperation();
+    // }
   };
+
+  useEffect(() => {
+    if (!(annotationOperation && optionState)) {
+      return;
+    }
+
+    const filter = {
+      id: type.id,
+      operator: annotationOperation,
+      selected: optionState.filter(item => item.selected).map(item => item.id)
+    };
+
+    onFilterChange(filter);
+  }, [annotationOperation, optionState]);
 
   return (
     <>
       {/* <div className="leftCol"> */}
       <div className="dropdownx">
-        <h6 className="parentElement">{type.label}</h6>
+        <h6 className="parentElement">
+          {type.label}{" "}
+          <select
+            class="select-dropdown"
+            value={annotationOperation}
+            onChange={event => setAnnotationOperation(event.target.value)}
+          >
+            <option value="OR">OR</option>
+            <option value="AND">AND</option>
+          </select>
+        </h6>
         {/* <div className="parentElement">{type.label}</div> */}
-        <ul className="filterlist" rlist left-side-nav__upper>
-          {type.options.map(option => (
+        <ul className="filterlist">
+          {optionState.map(option => (
             <li key={option.id}>
               <label className="labeltype">
                 <Checkbox
                   className="checkboxCss"
-                  value={option.id}
+                  // value={option.id}
                   checked={option.selected}
-                  onChange={handleChange}
+                  onChange={handleOptionChange}
                 />
                 {option.label}({option.count})
               </label>

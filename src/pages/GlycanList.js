@@ -142,38 +142,32 @@ const GlycanList = props => {
     });
   };
 
-  const handleFilterChange = (type, option, selected) => {
-    console.log(type, option, selected);
+  const handleFilterChange = newFilter => {
+    debugger;
+    console.log(newFilter);
 
-    // find if a filter exists for this type
-    const existingFilter = appliedFilters.find(filter => filter.id === type);
+    const existingFilter = appliedFilters.find(
+      filter => filter.id === newFilter.id
+    );
 
-    // if no filter exists
-    if (!existingFilter && selected) {
-      // add a new filter of this type
-      setAppliedFilters([
-        ...appliedFilters,
-        {
-          id: type,
-          selected: [option]
-        }
-      ]);
-    } else if (existingFilter) {
-      // list of all the other filters
+    if (
+      existingFilter &&
+      existingFilter.selected &&
+      newFilter &&
+      newFilter.selected &&
+      (newFilter.selected.length || existingFilter.selected.length)
+    ) {
       const otherFilters = appliedFilters.filter(
-        filter => filter.id !== existingFilter.id
+        filter => filter.id !== newFilter.id
       );
 
-      // for this existing filter, make sure we remove this option if it existed
-      existingFilter.selected = existingFilter.selected.filter(
-        value => value !== option
-      );
-
-      // if the option should selected, add it to the filter
-      if (selected) {
-        existingFilter.selected.push(option);
+      if (newFilter.selected.length) {
+        setAppliedFilters([...otherFilters, newFilter]);
+      } else {
+        setAppliedFilters(otherFilters);
       }
-      setAppliedFilters([...otherFilters, existingFilter]);
+    } else if (newFilter.selected.length) {
+      setAppliedFilters([...appliedFilters, newFilter]);
     }
   };
 
@@ -213,7 +207,7 @@ const GlycanList = props => {
       {/* <Container maxWidth="xl" className="gg-container5"> */}
       <Row className="gg-container">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage">
-          <div className="CollapsableSidebarContainer">
+          <div className="CollapsableSidebarContainer ">
             <div
               className={
                 "CollapsableSidebarContainer__sidebar" +
