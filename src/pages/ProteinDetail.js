@@ -2213,39 +2213,45 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <div>
-                        {detailData.sequence && <SequenceViewer
-                          sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
-                          details={[{
-                            uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
-                            glycosylation : detailData.glycosylation,
-                            snv : detailData.snv,
-                            site_annotation : detailData.site_annotation,
-                            phosphorylation : detailData.phosphorylation,
-                            glycation : detailData.glycation,
-                          }]}
-                          multiSequence={false}
-                          selectedHighlights={selectedHighlights}
-                          setSelectedHighlights={setSelectedHighlights}
-                          sequenceSearchText={sequenceSearchText}
-                        />}
-                        {detailData.sequence && <SequenceHighlighter 
-                          sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
-                          details={[{
-                            uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
-                            glycosylation : detailData.glycosylation,
-                            snv : detailData.snv,
-                            site_annotation : detailData.site_annotation,
-                            phosphorylation : detailData.phosphorylation,
-                            glycation : detailData.glycation,
-                          }]}
-                          showNumbers={true}
-                          selectedHighlights={selectedHighlights}
-                          setSelectedHighlights={setSelectedHighlights}
-                          sequenceSearchText={sequenceSearchText}
-                          setSequenceSearchText={setSequenceSearchText}
-                        />}
-                    </div>
+                    <Grid container className="content-box">
+                        <Grid item>
+                          <div>
+                            {detailData.sequence && <SequenceViewer
+                              sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
+                              details={[{
+                                uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
+                                glycosylation : detailData.glycosylation,
+                                snv : detailData.snv,
+                                site_annotation : detailData.site_annotation,
+                                phosphorylation : detailData.phosphorylation,
+                                glycation : detailData.glycation,
+                              }]}
+                              multiSequence={false}
+                              selectedHighlights={selectedHighlights}
+                              setSelectedHighlights={setSelectedHighlights}
+                              sequenceSearchText={sequenceSearchText}
+                            />}
+                            </div>
+                          </Grid>
+                          <Grid item className="content-active">
+                            {detailData.sequence && <SequenceHighlighter 
+                                sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
+                                details={[{
+                                  uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
+                                  glycosylation : detailData.glycosylation,
+                                  snv : detailData.snv,
+                                  site_annotation : detailData.site_annotation,
+                                  phosphorylation : detailData.phosphorylation,
+                                  glycation : detailData.glycation,
+                                }]}
+                                showNumbers={true}
+                                selectedHighlights={selectedHighlights}
+                                setSelectedHighlights={setSelectedHighlights}
+                                sequenceSearchText={sequenceSearchText}
+                                setSequenceSearchText={setSequenceSearchText}
+                              />}
+                          </Grid>
+                        </Grid>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

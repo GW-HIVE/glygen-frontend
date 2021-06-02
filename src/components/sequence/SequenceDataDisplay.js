@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../../css/proteinsequence.css";
 
 const SEQUENCE_ROW_RUN_LENGTH = 10;
@@ -10,9 +11,14 @@ const SEQUENCE_ROW_RUN_LENGTH = 10;
  */
 function buildRowText(rowData) {
   var text = [];
+  var len = rowData.length;
 
-  for (var x = 0; x < rowData.length; x++) {
-    text.push(rowData[x].character);
+  if (len > 0 && rowData[rowData.length-1] && rowData[rowData.length-1].character === "&nbsp;"){
+    len = rowData.length - 1;
+  }
+
+  for (var x = 0; x < len; x++) {
+      text.push(rowData[x].character);
   }
   return text.join("");
 }
@@ -49,62 +55,94 @@ const RowHighlight = ({ rowData, type, selectedHighlights }) => {
  * @param {array} rowData
  * @returns jquery object of the row
  */
-const SequenceRow = ({ uniprot_id, uniprot_ac, rowData, start, selectedHighlights, multiSequence, tax_name, consensus }) => {
+const SequenceRow = ({ uniprot_id, uniprot_ac, clickThruUrl, rowData, start, selectedHighlights, multiSequence, tax_name, consensus, header }) => {
+  
+  const space = "           ";
+  const space1 = "       ";
+  const space2 = "          ";
+
+  
   return (
-    <div className="highlight-row">
-      <span className="highlight-line-number">{(start === -1 ? ("     ") : ("     " + (start + 1)).slice(-5) + " ")}</span>
-      {multiSequence && start !== -1 && <span className="ac-header">{(uniprot_ac + " ")}</span>}
-      {multiSequence && start !== -1 && <span className="id-header">{(uniprot_id + " ")}</span>}
-      {/* {multiSequence && start !== -1 && <span className="id-header">{(tax_name + " ")}</span>} */}
-      {/* {consensus && start !== -1 && <span class1Name="id-header">{" "}</span>} */}
+    <div className="highlight-row aln-line sequncealign">
 
+      {header && <>    
+        {multiSequence && <>
+          <span></span>
+          <span></span>
+        </>}
+      
+        {start === 0 && <>
+          <span></span>
+          <span><pre className="sequencePreClass">
+          {space}+10{space1} +20{space1} +30{space1} +40 {space1}+50
+          </pre></span> </>}
 
-      <span className="highlight-section">
-        <span
-          className="highlight-text"
-          dangerouslySetInnerHTML={{ __html: buildRowText(rowData) }}
-        ></span>
+          {start === 1 && <>
+          <span></span>
+          <span>
+          <pre className="sequencePreClass">
+          {space}|{space2}|{space2}|{space2}|{space2}|
+          </pre> </span></>}
 
-        {selectedHighlights && (
-          <>
-            <RowHighlight
-              rowData={rowData}
-              type="mutation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="site_annotation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="n_link_glycosylation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="o_link_glycosylation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="phosphorylation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="glycation"
-              selectedHighlights={selectedHighlights}
-            />
-            <RowHighlight
-              rowData={rowData}
-              type="text_search"
-              selectedHighlights={selectedHighlights}
-            />
-          </>
-        )}
-      </span>
+        {multiSequence && <>
+            <span></span>
+          </>}
+        
+      </>}
+      
+      {!header && <>
+        {multiSequence && <span className="aln-line-header"><Link to={clickThruUrl}>{uniprot_ac}</Link></span>}
+        {multiSequence && <span className="aln-line-header">{uniprot_id}</span>}
+        <span className="highlight-line-number aln-line-header">{(start === -1 ? ("  ") : (start + 1))}</span>
+
+        <span className="highlight-section">
+          <span
+            className="highlight-text"
+            dangerouslySetInnerHTML={{ __html: buildRowText(rowData) }}
+          ></span>
+
+          {selectedHighlights && (
+            <>
+              <RowHighlight
+                rowData={rowData}
+                type="mutation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="site_annotation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="n_link_glycosylation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="o_link_glycosylation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="phosphorylation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="glycation"
+                selectedHighlights={selectedHighlights}
+              />
+              <RowHighlight
+                rowData={rowData}
+                type="text_search"
+                selectedHighlights={selectedHighlights}
+              />
+            </>
+          )}
+        </span>
+        {multiSequence && <span className="highlight-line-number aln-line-header">{(start === -1 ? ('\xa0') : (start + 60))}</span>}
+      </>}
     </div>
   );
 };
@@ -140,16 +178,16 @@ const sliceRowBlock = (sequence, size) => {
     for (let y = 0; y < sequenceObject.sequences.length; y++) {
 
       if (sequenceObject.sequences[y].consensus) {
-        result.push({consensus : sequenceObject.sequences[y].consensus, uniprot_id : "             ", uniprot_ac: "            ", index : -1, seq : sequenceObject.sequences[y].seq.slice(x, x + size)});
+        result.push({consensus : sequenceObject.sequences[y].consensus, clickThruUrl : "", uniprot_id : "", uniprot_ac: "", index : -1, seq : sequenceObject.sequences[y].seq.slice(x, x + size)});
       } else {
         result.push({consensus : sequenceObject.sequences[y].consensus, uniprot_id : sequenceObject.sequences[y].uniprot_id, 
-          uniprot_ac: sequenceObject.sequences[y].uniprot_ac, index : x, tax_name : sequenceObject.sequences[y].tax_name,
+          uniprot_ac: sequenceObject.sequences[y].uniprot_ac, clickThruUrl : sequenceObject.sequences[y].clickThruUrl, index : x, tax_name : sequenceObject.sequences[y].tax_name,
           seq : sequenceObject.sequences[y].seq.slice(x, x + size)});
       }
     }
 
     if (sequenceObject.sequences.length > 1)
-      result.push({uniprot_id : "", uniprot_ac: "", index : -1, seq : []});
+      result.push({consensus : false, uniprot_id : "", uniprot_ac: "", index : -1, seq : []});
   }
   return result;
 };
@@ -173,37 +211,6 @@ function findMaxSequenceLength(sequenceObject) {
   return Math.max(alignmentLength, maxSequenceLength);
 }
 
-function formatSequenceBlocks(sequenceObject, perLine, index) {
-  var sequenceBlocks = [];
-  var maxSequenceLength = findMaxSequenceLength(sequenceObject);
-  for (var x = 0; x < maxSequenceLength; x += perLine) {
-    var sequenceBlock = {
-      // holds each aln peice for the block
-      sequences: sequenceObject.sequences.map(function (aln) {
-        return {
-          start: x,
-          id: aln.id,
-          // tax_id: aln.tax_id,
-          uniprot_id: aln.uniprot_id,
-          // tax_name: aln.tax_name,
-          name: aln.name,
-          string: aln.aln.substr(x, perLine),
-          clickThruUrl: aln.clickThruUrl ? aln.clickThruUrl : "",
-        };
-      }),
-      // consensus data for block
-      consensus: {
-        start: x,
-        string: sequenceObject.consensus.substr(x, perLine),
-      },
-    };
-
-    sequenceBlocks.push(sequenceBlock);
-  }
-
-  return sequenceBlocks;
-}
-
 /**
  * creating UI perline
  * @param {object} sequenceData
@@ -213,8 +220,7 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
   const [rows, setRows] = useState([]);
   const perLine = window.innerWidth <= 500 ? 10 : 60;
 
-  const space = "                 ";
-  const spaceMulti = "                                    ";
+  const space = "             ";
   const space1 = "       ";
   const space2 = "          ";
 
@@ -223,7 +229,7 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
       const rows = sliceRowBlock(sequenceData, perLine);
       const byChunks = rows.map((row) => {return {uniprot_id : row.uniprot_id, uniprot_ac : row.uniprot_ac, 
         index: row.index, seq: sliceBy(row.seq, SEQUENCE_ROW_RUN_LENGTH),
-        tax_name: row.tax_name, consensus : row.consensus}});
+        tax_name: row.tax_name, consensus : row.consensus, clickThruUrl: row.clickThruUrl}});
       const reducedToRows = byChunks.map((row) =>
        {return {
         index : row.index, 
@@ -231,6 +237,7 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
         uniprot_ac : row.uniprot_ac,
         tax_name : row.tax_name,
         consensus : row.consensus,
+        clickThruUrl : row.clickThruUrl,
         seq: row.seq.reduce(
           (all, chunk) => [
             ...all,
@@ -249,32 +256,32 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
         )
        }}
       );
-      // console.log(JSON.stringify(byChunks));
-
       setRows(reducedToRows);
     }
   }, [sequenceData, perLine]);
 
-  // useEffect({
-
-  // }, [selectedHighlights]);
-
   return (
-    <div className="highlight-display">
-      <pre className="sequencePreClass">
-        {multiSequence ? spaceMulti : space} +10{space1} +20{space1} +30{space1} +40 {space1}+50
-      </pre>
-      <pre className="sequencePreClass">
-        {multiSequence ? spaceMulti : space}|{space2}|{space2}|{space2}|{space2}|
-      </pre>
+      <div className="aln-block">
+      <SequenceRow
+          header={true}
+          multiSequence={multiSequence}
+          start={0}
+      />
+        <SequenceRow
+          header={true}
+          multiSequence={multiSequence}
+          start={1}
+      />
       {rows.map((row, index) => (
         <>
         <SequenceRow
           key={index}
+          header={false}
           multiSequence={multiSequence}
           consensus={row.consensus}
           uniprot_id={row.uniprot_id}
           uniprot_ac={row.uniprot_ac}
+          clickThruUrl={row.clickThruUrl}
           tax_name={row.tax_name}
           rowData={row.seq}
           start={row.index}
@@ -282,7 +289,7 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
         />
     </>
       ))}
-    </div>
+      </div>
   );
 };
 

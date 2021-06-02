@@ -26,6 +26,7 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import SequenceViewer from "../components/sequence/SequenceViewer";
+import "../css/proteinsequence.css";
 
 const proteinStrings = stringConstants.protein.common;
 
@@ -216,18 +217,17 @@ const ProteinAlignment = () => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0" out={!collapsed.alignment}>
                     <Card.Body className="card-padding-zero">
-                      {/* {newData && newData.sequences && (
-                        <Alignment alignmentData={newData} perLine={perLine} />
-                      )} */}
-                        {data && <SequenceViewer
-                          details={details}
-                          consensus={consensus}
-                          sequenceObject={sequences}
-                          selectedHighlights={selectedHighlights}
-                          setSelectedHighlights={setSelectedHighlights}
-                          sequenceSearchText={sequenceSearchText}
-                          multiSequence={true}
-                        />}
+                        <div className="m-3">
+                          {newData && <SequenceViewer
+                            details={details}
+                            consensus={consensus}
+                            sequenceObject={sequences}
+                            selectedHighlights={selectedHighlights}
+                            setSelectedHighlights={setSelectedHighlights}
+                            sequenceSearchText={sequenceSearchText}
+                            multiSequence={true}
+                          />}
+                        </div>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>

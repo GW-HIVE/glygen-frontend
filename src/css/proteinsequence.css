@@ -7,6 +7,7 @@
 
 .highlight-line-number {
 	white-space: pre;
+	text-align: right
 }
 
 .highlight-section {
@@ -17,6 +18,7 @@
 	top: 0;
 	left: 0;
 	position: absolute;
+	padding-left: 0.25em;
 }
 
 .highlight-highlight[data-type="mutation"] .highlight-highlight-area {
@@ -146,12 +148,21 @@
 .sequence-panel {
 	margin-left: 5%;
 }
+
+.content-box {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	overflow: auto;
+}
+
 @media (max-width: 1345px) {
 	/* @media (max-width: 757px) { */
 	.content-box {
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
+		overflow: auto;
 	}
 	.content-active {
 		order: -1;
@@ -172,12 +183,4 @@
 	font-size: 14px;
 	position: relative;
 	z-index: 10;
-}
-
-.ac-header {
-	width: 40px;
-}
-
-.id-header {
-	width: 40px;
 }

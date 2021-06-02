@@ -26,8 +26,6 @@ const SequenceViewer = ({
   const [oLinkGlycanMapHighlights, setOLinkGlycanMapHighlights] = useState(new Map());
   const [searchTextHighlights, setSearchTextHighlights] = useState(new Map());
 
-
-
 /**
  * checking is highlighted or not
  * @param {number} position
@@ -36,6 +34,7 @@ const SequenceViewer = ({
  */
 function isHighlighted(position, selection) {
   var result = false;
+
   if (selection) {
     for (var x = 0; x < selection.length; x++) {
       var start = selection[x].start;
@@ -60,6 +59,7 @@ function buildHighlightData(sequences, consensus) {
           var uniprot_ac = sequences[y].uniprot_ac;
           var uniprot_id = sequences[y].uniprot_id;
           var tax_name = sequences[y].tax_name;
+          var clickThruUrl = sequences[y].clickThruUrl;
           var result1 = [];
           var site_annotation = siteAnnotationMapHighlights[uniprot_ac];
           var glycation = glycationMapHighlights[uniprot_ac];
@@ -86,7 +86,7 @@ function buildHighlightData(sequences, consensus) {
               text_search: isHighlighted(x, searchTextArr),
             });
           }
-          result.push({consensus : false, uniprot_ac : uniprot_ac, uniprot_id : uniprot_id, tax_name : tax_name, seq: result1});
+          result.push({consensus : false, uniprot_ac : uniprot_ac, clickThruUrl : clickThruUrl, uniprot_id : uniprot_id, tax_name : tax_name, seq: result1});
         }
 
         if (consensus && consensus !== "") {
@@ -94,7 +94,7 @@ function buildHighlightData(sequences, consensus) {
           for (var x = 0; x < consensus.length; x++) {
             var position = x + 1;
             result1.push({
-              character: consensus[x],
+              character: consensus[x] === " " ? "&nbsp;" : consensus[x],
               n_link_glycosylation: false,
               o_link_glycosylation: false,
               mutation: false,
@@ -156,8 +156,15 @@ function buildHighlightData(sequences, consensus) {
     if (sequenceObject) {
       let searchMap = new Map();
       let searchText = sequenceSearchText;
-      searchText = searchText.replaceAll(/x/ig, '\\w')
-      let re = new RegExp(searchText, 'ig');
+      var re;
+      try {
+        searchText = searchText.replaceAll(/x/ig, '\\w')
+        re = new RegExp(searchText, 'ig');
+      } catch(e){
+        searchText = "";
+        re = new RegExp(searchText, 'ig');
+      }
+      
       for (let y = 0; y < sequenceObject.length; y++){
         var result = [];
         var sequence = sequenceObject[y].aln;
@@ -183,7 +190,7 @@ function buildHighlightData(sequences, consensus) {
 
   return (
     <Grid container className="content-box">
-      <Grid item className="sequnce_highlight">
+       <Grid item className="sequnce_highlight">
         <div>
           {sequenceObject && (
             <SequenceDataDisplay sequenceData={sequenceData} selectedHighlights={selectedHighlights} 
@@ -191,7 +198,7 @@ function buildHighlightData(sequences, consensus) {
           )}
         </div>
       </Grid>
-    </Grid>
+     </Grid>
   );
 };
 
