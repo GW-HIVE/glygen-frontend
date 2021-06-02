@@ -88,11 +88,17 @@
     return result;
   }
   
-    //distinct
-    const distinctGlycanPositions = (value, index, self) => {
-      const findPosition = self.find((item) => item.start_pos === value.start_pos);
-      return self.indexOf(findPosition) === index;
-    };
+/**
+   * Getting distinct glycan posittions
+   * @param {object} value
+   * @param {int} index
+   * @param {array} self
+   * @return boolean value.
+  */  
+ const distinctGlycanPositions = (value, index, self) => {
+  const findPosition = self.find((item) => item.start_pos === value.start_pos);
+    return self.indexOf(findPosition) === index;
+  };
   
   
   /**
