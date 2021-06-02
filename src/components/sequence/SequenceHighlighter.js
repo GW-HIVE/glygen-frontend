@@ -62,7 +62,6 @@ const SequenceHighlighter = ({
   showNumbers
 }) => {
 
-  const [sequenceData, setSequenceData] = useState([]);
   const [highlightsCount, setHighlightsCount] = useState({});
 
   const handleSelectHighlight = (type) => {

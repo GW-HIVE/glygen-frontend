@@ -42,8 +42,6 @@ const SequenceDashboard = (props) => {
                 sequenceObject={props.sequences}
                 selectedHighlights={props.selectedHighlights}
                 setSelectedHighlights={props.setSelectedHighlights}
-                highlightsCount={props.highlightsCount}
-                setHighlightsCount={props.setHighlightsCount}
                 sequenceSearchText={props.sequenceSearchText}
                 setSequenceSearchText={props.setSequenceSearchText}
                 showNumbers={props.showNumbers}
