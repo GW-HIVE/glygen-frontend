@@ -11,7 +11,6 @@ const SequenceViewer = ({
   consensus,
   sequenceObject,
   selectedHighlights,
-  setSelectedHighlights,
   multiSequence,
   sequenceSearchText
 }) => {

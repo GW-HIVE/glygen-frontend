@@ -2228,7 +2228,6 @@ const ProteinDetail = (props) => {
                               }]}
                               multiSequence={false}
                               selectedHighlights={selectedHighlights}
-                              setSelectedHighlights={setSelectedHighlights}
                               sequenceSearchText={sequenceSearchText}
                             />}
                             </div>

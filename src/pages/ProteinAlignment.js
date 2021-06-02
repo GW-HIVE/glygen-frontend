@@ -223,7 +223,6 @@ const ProteinAlignment = () => {
                             consensus={consensus}
                             sequenceObject={sequences}
                             selectedHighlights={selectedHighlights}
-                            setSelectedHighlights={setSelectedHighlights}
                             sequenceSearchText={sequenceSearchText}
                             multiSequence={true}
                           />}
