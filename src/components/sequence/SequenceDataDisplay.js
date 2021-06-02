@@ -25,9 +25,7 @@ function buildRowText(rowData) {
 
 /**
  * building rowhighlight
- * @param {array} rowData
- * @param {string}type
- * @returns string of sequence
+ * @param {object} input props
  */
 const RowHighlight = ({ rowData, type, selectedHighlights }) => {
   const isSelected = selectedHighlights[type];
@@ -51,9 +49,7 @@ const RowHighlight = ({ rowData, type, selectedHighlights }) => {
 
 /**
  * creating row
- * @param {number} start
- * @param {array} rowData
- * @returns jquery object of the row
+ * @param {object} input props
  */
 const SequenceRow = ({ uniprot_id, uniprot_ac, clickThruUrl, rowData, start, selectedHighlights, multiSequence, tax_name, consensus, header }) => {
   
@@ -146,6 +142,14 @@ const SequenceRow = ({ uniprot_id, uniprot_ac, clickThruUrl, rowData, start, sel
     </div>
   );
 };
+
+
+/**
+ * slice sequence row into chuncks 
+ * @param {array} array
+ * @param {int} size
+ * @returns chunks of sequence rows
+ */
 const sliceBy = (array, size) => {
   const result = [];
   for (let x = 0; x < array.length; x += size) {
@@ -154,67 +158,55 @@ const sliceBy = (array, size) => {
   return result;
 };
 
-const sliceRowBlock = (sequence, size) => {
-  var sequenceBlocks = [];
-  let sequenceObject = {}
 
-  if (sequence.consensus !== undefined) {
-   sequenceObject = {
-    consensus: "",
-    sequences: [sequence]
-  }
-} else {
-  sequenceObject = {
-    consensus: "",
-    sequences: sequence.map(function (aln) {
-      return aln;
-    })
-  }
-}
-
-  var maxSequenceLength = findMaxSequenceLength(sequenceObject);
+/**
+ * slice sequences by size and block 
+ * @param {array} sequences
+ * @param {int} size
+ * @returns array of sequences
+ */
+const sliceRowBlock = (sequences, size) => {
+  var maxSequenceLength = findMaxSequenceLength(sequences);
   const result = [];
   for (let x = 0; x < maxSequenceLength; x += size) {
-    for (let y = 0; y < sequenceObject.sequences.length; y++) {
+    for (let y = 0; y < sequences.length; y++) {
 
-      if (sequenceObject.sequences[y].consensus) {
-        result.push({consensus : sequenceObject.sequences[y].consensus, clickThruUrl : "", uniprot_id : "", uniprot_ac: "", index : -1, seq : sequenceObject.sequences[y].seq.slice(x, x + size)});
+      if (sequences[y].consensus) {
+        result.push({consensus : sequences[y].consensus, clickThruUrl : "", uniprot_id : "", uniprot_ac: "", index : -1, seq : sequences[y].seq.slice(x, x + size)});
       } else {
-        result.push({consensus : sequenceObject.sequences[y].consensus, uniprot_id : sequenceObject.sequences[y].uniprot_id, 
-          uniprot_ac: sequenceObject.sequences[y].uniprot_ac, clickThruUrl : sequenceObject.sequences[y].clickThruUrl, index : x, tax_name : sequenceObject.sequences[y].tax_name,
-          seq : sequenceObject.sequences[y].seq.slice(x, x + size)});
+        result.push({consensus : sequences[y].consensus, uniprot_id : sequences[y].uniprot_id, 
+          uniprot_ac: sequences[y].uniprot_ac, clickThruUrl : sequences[y].clickThruUrl, index : x, tax_name : sequences[y].tax_name,
+          seq : sequences[y].seq.slice(x, x + size)});
       }
     }
 
-    if (sequenceObject.sequences.length > 1)
+    if (sequences.length > 1)
       result.push({consensus : false, uniprot_id : "", uniprot_ac: "", index : -1, seq : []});
   }
   return result;
 };
 
-// finds the max length of all sequences or consensus
-function findMaxSequenceLength(sequenceObject) {
-  // get length of consensus
-  var alignmentLength = sequenceObject.consensus.length;
+/**
+ * Finds the max length of all sequences or consensus
+ * @param {array} sequences
+ * @returns max length
+ */
+function findMaxSequenceLength(sequences) {
   // get length of all sequences
-  var sequenceLengths = sequenceObject.sequences.map(function (aln) {
+  var sequenceLengths = sequences.map(function (aln) {
      return aln.seq.length;
   });
   // sort aln length, from smallest to largest
   sequenceLengths.sort();
   // get the largest aln length
   var maxSequenceLength = sequenceLengths[sequenceLengths.length - 1];
-  //   var uniprot_canonical_ac = getParameterByName("uniprot_canonical_ac");
-  //log if consensus not equal to the longest sequence
-  // activityTracker("error", uniprot_canonical_ac, "Longest seq length=" + maxSequenceLength + ", Consensus length=" + alignmentLength);
-  // return whichever is larger
-  return Math.max(alignmentLength, maxSequenceLength);
+
+  return maxSequenceLength;
 }
 
 /**
- * creating UI perline
- * @param {object} sequenceData
- * @param {object} selectedHighlights
+ * Sequence display control
+ * @param {object} input props
  */
 const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }) => {
   const [rows, setRows] = useState([]);
@@ -224,6 +216,9 @@ const SequenceDataDisplay = ({ sequenceData, selectedHighlights, multiSequence }
   const space1 = "       ";
   const space2 = "          ";
 
+  /**
+  * useEffect to slice sequences
+  */
   useEffect(() => {
     if (sequenceData ) {
       const rows = sliceRowBlock(sequenceData, perLine);

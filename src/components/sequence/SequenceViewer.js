@@ -5,7 +5,9 @@ import { getPhosphorylationHighlightData, getNLinkGlycanMapHighlights, getOLinkG
   getSequonHighlightData, getMutationHighlightData, getGlycationHighlightData } from "../../data/sequenceHighlighter";
 import "../../css/proteinsequence.css";
 
-
+/**
+ * Sequence viewer control.
+ */
 const SequenceViewer = ({
   details,
   consensus,
@@ -26,10 +28,10 @@ const SequenceViewer = ({
   const [searchTextHighlights, setSearchTextHighlights] = useState(new Map());
 
 /**
- * checking is highlighted or not
+ * checking if position is highlighted or not
  * @param {number} position
  * @param {array} selection
- * @return:boolean if position in the ranges
+ * @return: true {boolean} if position in the range
  */
 function isHighlighted(position, selection) {
   var result = false;
@@ -49,6 +51,12 @@ function isHighlighted(position, selection) {
   return false;
 }
 
+/**
+ * builds highlight data for sequences and consensus.
+ * @param {array} sequences
+ * @param {string} consensus
+ * @return: array
+ */
 function buildHighlightData(sequences, consensus) {
   var result = [];
 
@@ -110,6 +118,9 @@ function buildHighlightData(sequences, consensus) {
   return [];
 }
 
+ /**
+ * useEffect to build highlight data maps.
+ */
   useEffect(() => {
     let glycoNMap = new Map();
     let glycoOMap = new Map();
@@ -136,6 +147,9 @@ function buildHighlightData(sequences, consensus) {
 
   }, [details]);
 
+  /**
+  * useEffect to set sequence data.
+  */
   useEffect(() => {
     setSequenceData(buildHighlightData(sequenceObject, consensus));
   }, [
@@ -150,8 +164,10 @@ function buildHighlightData(sequences, consensus) {
     searchTextHighlights
   ]);
 
+  /**
+  * useEffect to build text search highlight map.
+  */
   useEffect(() => {
-
     if (sequenceObject) {
       let searchMap = new Map();
       let searchText = sequenceSearchText;
