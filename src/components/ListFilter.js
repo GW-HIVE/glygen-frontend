@@ -24,7 +24,7 @@ const ListFilterOptionGroup = ({ type, onFilterChange }) => {
     // get the value (which option) and checked state
     const { checked, value } = event.target;
     const newOptionState = [...optionState];
-    newOptionState.filter(item => item.id === value).selected = checked;
+    newOptionState.find(item => item.id === value).selected = checked;
     setOptionState(newOptionState);
     // if (newOptionState) {
     //   setAnnotationOperation();
@@ -67,7 +67,7 @@ const ListFilterOptionGroup = ({ type, onFilterChange }) => {
               <label className="labeltype">
                 <Checkbox
                   className="checkboxCss"
-                  // value={option.id}
+                  value={option.id}
                   checked={option.selected}
                   onChange={handleOptionChange}
                 />
