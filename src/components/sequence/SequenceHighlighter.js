@@ -5,12 +5,9 @@ import { getPhosphorylationHighlightData, getNLinkGlycanMapHighlights, getOLinkG
   getSequonHighlightData, getMutationHighlightData, getGlycationHighlightData } from "../../data/sequenceHighlighter";
 import "../../css/proteinsequence.css";
 
-// /**
-//  * Sequence formatting Function
-//  * @param {string} sequenceString
-//  * @return {string}
-//  */
-
+/**
+ * Higlight selecter control for highlighting protein sequence sites.
+ */
 const HiglightSelecter = ({ count = 0, selectedHighlights, type, label, onSelect, className, showNumbers }) => {
   return (
     <label>
@@ -28,18 +25,20 @@ const HiglightSelecter = ({ count = 0, selectedHighlights, type, label, onSelect
   );
 };
 
+
+/**
+ * Higlight input control for highlighting protein sequence text.
+ */
 const HiglightInput = ({ selectedHighlights, type, label, onSelect, className, input, onInput }) => {
   return (
     <label>
       <input
         type="checkbox"
         name="checkbox"
-        // disabled={count < 1}
         checked={selectedHighlights[type]}
         onClick={() => onSelect(type)}
       />
       &nbsp;
-      {/* <span className={className}>{label}</span> */}
       <input
         className={className}
         type="text"
@@ -51,6 +50,9 @@ const HiglightInput = ({ selectedHighlights, type, label, onSelect, className, i
 };
 
 
+/**
+ * Protein sequence highlighter control.
+ */
 const SequenceHighlighter = ({
   details,
   selectedHighlights,
@@ -70,10 +72,9 @@ const SequenceHighlighter = ({
     });
   };
 
-  // const handleSearchText = (input) => {
-  //   setSequenceSearchText(input);
-  // };
-
+  /**
+   * useEffect for counting sites.
+  */
   useEffect(() => {
 
     let glycoNArr = [];
