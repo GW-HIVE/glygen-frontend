@@ -353,6 +353,7 @@ const GlycanDetail = (props) => {
     motifs,
     iupac,
     glycam,
+    byonic,
     smiles_isomeric,
     inchi,
     classification,
@@ -1869,7 +1870,21 @@ const GlycanDetail = (props) => {
                         ) : (
                           <span> </span>
                         )}
-
+                        {byonic ? (
+                          <>
+                            <Row>
+                              <Col xs={6} sm={6}>
+                                <strong>{glycanStrings.byonic.shortName}</strong>
+                              </Col>
+                              <Col xs={6} sm={6} style={{ textAlign: "right" }}>
+                                <ReactCopyClipboard value={byonic} />
+                              </Col>
+                            </Row>
+                            <span className="text-overflow">{byonic}</span>
+                          </>
+                        ) : (
+                          <span> </span>
+                        )}
                         {smiles_isomeric ? (
                           <>
                             <Row>

@@ -38,17 +38,6 @@
         },
         "id": "glycan_id_subsumption"
       },
-      "subsumption": {
-        "name": "Subsumption",
-        "shortName": "Subsumption",
-        "tooltip": {
-          "title": "Subsumption",
-          "text": "",
-          "urlText": "Read more...",
-          "url": ""
-        },
-        "id": "subsumption"
-      },
       "organism_annotation": {
         "name": "Organism Annotation",
         "shortName": "Organism Annotation",
@@ -271,6 +260,17 @@
         "tooltip": {
           "title": "GLYCAM IUPAC ",
           "text": "A GLYCAM IUPAC  is the unique identifier number used in GLYCAM IUPAC Key for each article. ",
+          "urlText": "Read more...",
+          "url": "https://"
+        },
+        "id": "GLYCAM IUPAC"
+      },
+      "byonic": {
+        "name": "Byonic™",
+        "shortName": "Byonic™",
+        "tooltip": {
+          "title": "Byonic™",
+          "text": "A Byonic™ is the unique identifier number used in Byonic™ Key for each article. ",
           "urlText": "Read more...",
           "url": "https://"
         },
