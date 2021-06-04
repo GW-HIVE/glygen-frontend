@@ -30,13 +30,15 @@
     var result = [];
     var positions = {};
   
-    for (var x = 0; x < sequonData.length; x++) {
-      if (!positions[sequonData[x].start_pos]) {
-        positions[sequonData[x].start_pos] = true;
-        result.push({
-          start: sequonData[x].start_pos,
-          length: sequonData[x].end_pos - sequonData[x].start_pos + 1,
-        });
+    if (sequonData){
+      for (var x = 0; x < sequonData.length; x++) {
+        if (!positions[sequonData[x].start_pos]) {
+          positions[sequonData[x].start_pos] = true;
+          result.push({
+            start: sequonData[x].start_pos,
+            length: sequonData[x].end_pos - sequonData[x].start_pos + 1,
+          });
+        }
       }
     }
     return result;
@@ -107,18 +109,20 @@
    * @return an array of highlight info.
    */
    export function getNLinkGlycanMapHighlights(glycosylationData) {
-    const tempGlycosylation = glycosylationData.filter((item) => item.start_pos !== undefined);
-  
-    const nLink = tempGlycosylation
-      .filter((item) => item.type === "N-linked")
-      //.filter(hasStartPos)
-      .filter(distinctGlycanPositions)
-      .map((item) => ({
-        start: item.start_pos,
-        length: 1,
-      }));
-  
-      return nLink;
+    if (glycosylationData) {
+      const tempGlycosylation = glycosylationData.filter((item) => item.start_pos !== undefined);    
+      const nLink = tempGlycosylation
+        .filter((item) => item.type === "N-linked")
+        //.filter(hasStartPos)
+        .filter(distinctGlycanPositions)
+        .map((item) => ({
+          start: item.start_pos,
+          length: 1,
+        }));
+        return nLink;
+    }
+
+    return [];
   }
   
   /**
@@ -126,17 +130,19 @@
    * @param {array} glycosylationData
    * @return an array of highlight info.
    */
-   export function getOLinkGlycanMapHighlights(glycosylationData) {
-    const tempGlycosylation = glycosylationData.filter((item) => item.start_pos !== undefined);
-  
-    const oLink = tempGlycosylation
-      .filter((item) => item.type === "O-linked")
-      //.filter(hasStartPos)
-      .filter(distinctGlycanPositions)
-      .map((item) => ({
-        start: item.start_pos,
-        length: 1,
-      }));
-  
-      return oLink;
+   export function getOLinkGlycanMapHighlights(glycosylationData) {    
+    if (glycosylationData){
+      const tempGlycosylation = glycosylationData.filter((item) => item.start_pos !== undefined);    
+      const oLink = tempGlycosylation
+        .filter((item) => item.type === "O-linked")
+        //.filter(hasStartPos)
+        .filter(distinctGlycanPositions)
+        .map((item) => ({
+          start: item.start_pos,
+          length: 1,
+        }));
+    
+        return oLink;
+    }
+    return [];
   }
