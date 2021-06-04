@@ -22,7 +22,7 @@ import { Col, Row } from "react-bootstrap";
 import ListFilter from "../components/ListFilter";
 const proteinStrings = stringConstants.protein.common;
 
-const ProteinList = props => {
+const ProteinList = (props) => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -63,10 +63,7 @@ const ProteinList = props => {
           if (data.cache_info.query.uniprot_canonical_ac) {
             data.cache_info.query.uniprot_canonical_ac_short =
               data.cache_info.query.uniprot_canonical_ac.split(",").length > 9
-                ? data.cache_info.query.uniprot_canonical_ac
-                    .split(",")
-                    .slice(0, 9)
-                    .join(",")
+                ? data.cache_info.query.uniprot_canonical_ac.split(",").slice(0, 9).join(",")
                 : "";
           }
           setQuery(data.cache_info.query);
@@ -79,16 +76,13 @@ const ProteinList = props => {
           setPageLoading(false);
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
   }, [appliedFilters]);
 
-  const handleTableChange = (
-    type,
-    { page, sizePerPage, sortField, sortOrder }
-  ) => {
+  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     getProteinList(
@@ -110,12 +104,10 @@ const ProteinList = props => {
     });
   };
 
-  const handleFilterChange = newFilter => {
+  const handleFilterChange = (newFilter) => {
     console.log(newFilter);
     // find if a filter exists for this type
-    const existingFilter = appliedFilters.find(
-      filter => filter.id === newFilter.id
-    );
+    const existingFilter = appliedFilters.find((filter) => filter.id === newFilter.id);
     // if no filter exists
     if (
       existingFilter &&
@@ -126,9 +118,7 @@ const ProteinList = props => {
     ) {
       // list of all the other filters
       // add a new filter of this type
-      const otherFilters = appliedFilters.filter(
-        filter => filter.id !== newFilter.id
-      );
+      const otherFilters = appliedFilters.filter((filter) => filter.id !== newFilter.id);
 
       if (newFilter.selected.length) {
         // for this existing filter, make sure we remove this option if it existed
@@ -174,15 +164,10 @@ const ProteinList = props => {
       </Helmet>
 
       <FeedbackWidget />
-      <Row className="gg-container">
-        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage">
+      <Row className="gg-baseline">
+        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage5">
           <div className="CollapsableSidebarContainer">
-            <div
-              className={
-                "CollapsableSidebarContainer__sidebar" +
-                (sidebar ? "" : " closed")
-              }
-            >
+            <div className={"CollapsableSidebarContainer__sidebar5" + (sidebar ? "" : " closed")}>
               <ListFilter
                 availableOptions={availableFilters}
                 selectedOptions={appliedFilters}
@@ -198,12 +183,12 @@ const ProteinList = props => {
           </div>
         </Col>
 
-        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page">
+        <Col sm={12} md={12} lg={12} xl={9} className="sidebar-page5">
           <div class="CollapsableSidebarContainer__main">
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
               alertInput={alertDialogInput}
-              setOpen={input => {
+              setOpen={(input) => {
                 setAlertDialogInput({ show: input });
               }}
             />
@@ -222,23 +207,20 @@ const ProteinList = props => {
               <DownloadButton
                 types={[
                   {
-                    display:
-                      stringConstants.download.protein_csvdata.displayname,
+                    display: stringConstants.download.protein_csvdata.displayname,
                     type: "csv",
-                    data: "protein_list"
+                    data: "protein_list",
                   },
                   {
-                    display:
-                      stringConstants.download.protein_jsondata.displayname,
+                    display: stringConstants.download.protein_jsondata.displayname,
                     type: "json",
-                    data: "protein_list"
+                    data: "protein_list",
                   },
                   {
-                    display:
-                      stringConstants.download.protein_fastadata.displayname,
+                    display: stringConstants.download.protein_fastadata.displayname,
                     type: "fasta",
-                    data: "protein_list"
-                  }
+                    data: "protein_list",
+                  },
                 ]}
                 dataId={id}
                 itemType="protein"
