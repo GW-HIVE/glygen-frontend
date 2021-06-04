@@ -17,14 +17,16 @@ export const getProteinList = (
   offset = 1,
   limit = 20,
   sort = "hit_score",
-  order = "desc"
+  order = "desc",
+  filters = []
 ) => {
   const queryParams = {
     id: protienListId,
     offset: offset,
     limit: limit,
     order: order,
-    sort: sort
+    sort: sort,
+    filters: filters
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/protein/list?query=${queryParamString}`;
