@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox, Collapse } from "@material-ui/core";
-// import CloseIcon from "@material-ui/icons/Close";
-// import { Row, Col, div } from "react-bootstrap";
 import "../css/detail.css";
-// import proteinSearchData from "../data/json/proteinSearch";
-// import SelectControl from "../components/select/SelectControl";
-// import Iframe from "react-iframe";
 import { withStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 const BlueCheckbox = withStyles({
@@ -33,19 +28,12 @@ const ListFilterOptionGroup = props => {
     return 0;
   });
 
-  // useEffect(() => {
-  //   setOptionState([...props.type.options]);
-  // }, [props.type.options]);
-
   const handleOptionChange = event => {
     // get the value (which option) and checked state
     const { checked, value } = event.target;
     const newOptionState = [...optionState];
     newOptionState.find(item => item.id === value).selected = checked;
     setOptionState(newOptionState);
-    // if (newOptionState) {
-    //   setAnnotationOperation();
-    // }
   };
 
   useEffect(() => {
@@ -101,15 +89,6 @@ const ListFilterOptionGroup = props => {
                   }
                   label={`${option.label} (${option.count})`}
                 />
-                {/* <BlueCheckbox
-                // className="checkboxCss"
-                value={option.id}
-                checked={option.selected}
-                onChange={handleOptionChange}
-              />
-              <label>
-                {option.label}{" "}({option.count})
-              </label> */}
               </li>
             ))}
         </ul>
