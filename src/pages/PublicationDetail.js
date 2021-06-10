@@ -145,7 +145,7 @@ const PublicationDetail = (props) => {
         let detailDataTemp = data;
         //new side bar
         let newSidebarData = sideBarData;
-        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+        if (!detailDataTemp.title || detailDataTemp.title.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "General", true);
         }
         if (!detailDataTemp.species || detailDataTemp.species.length === 0) {
@@ -799,7 +799,7 @@ const PublicationDetail = (props) => {
                 setAlertDialogInput({ show: input });
               }}
             />
-            {/* General */}
+            {/* general */}
             <Accordion
               id="General"
               defaultActiveKey="0"
@@ -832,42 +832,38 @@ const PublicationDetail = (props) => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    {detailData && (
-                      <>
-                        <div>
-                          <h5 style={{ marginBottom: "3px" }}>
-                            <strong>{title}</strong>
-                          </h5>
-                        </div>
-                        <div>{authors}</div>
-                        <div>
-                          {journal} <span>&nbsp;</span>
-                          {date && (
-                            <>
-                              {"("}
-                              {date}
-                              {")"}
-                            </>
-                          )}
-                        </div>
-                        {reference && (
-                          <div>
-                            <FiBookOpen />
-                            <span style={{ paddingLeft: "15px" }}>{reference.type}:</span>{" "}
-                            <a href={reference.url} target="_blank" rel="noopener noreferrer">
-                              <>{reference.id}</>
-                            </a>{" "}
-                          </div>
-                        )}
-                        {abstract && (
-                          <div className={"mt-2"}>
-                            <strong>Abstract:</strong>
-                          </div>
-                        )}
-                        <CollapsibleText text={abstract} />
-                      </>
+                    {title && (
+                      <div>
+                        <h5 style={{ marginBottom: "3px" }}>
+                          <strong>{title}</strong>
+                        </h5>
+                      </div>
                     )}
-                    {!title && <p className="no-data-msg-publication">No data available.</p>}
+                    {authors && <div>{authors}</div>}
+                    {journal && (
+                      <div>
+                        {journal} <span>&nbsp;</span>
+                        {"("}
+                        {date}
+                        {")"}
+                      </div>
+                    )}
+                    {reference && (
+                      <div>
+                        <FiBookOpen />
+                        <span style={{ paddingLeft: "15px" }}>{reference.type}:</span>{" "}
+                        <a href={reference.url} target="_blank" rel="noopener noreferrer">
+                          <>{reference.id}</>
+                        </a>{" "}
+                      </div>
+                    )}
+                    {abstract && (
+                      <div className={"mt-2"}>
+                        <strong>Abstract:</strong>
+                        <CollapsibleText text={abstract} />
+                      </div>
+                    )}
+                    {!title && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -1007,7 +1003,7 @@ const PublicationDetail = (props) => {
                                 idField={"index"}
                               />
                             )}
-                            {!glycosylationWithImage.length && <p>No data available.</p>}
+                            {!glycosylationWithImage.length && <span>No data available.</span>}
                           </Container>
                         </Tab>
                         <Tab eventKey="reported" title="Reported Sites">
@@ -1031,7 +1027,7 @@ const PublicationDetail = (props) => {
                                 idField={"index"}
                               />
                             )}
-                            {!glycosylationWithoutImage.length && <p>No data available.</p>}
+                            {!glycosylationWithoutImage.length && <span>No data available.</span>}
                           </Container>
                         </Tab>
                         <Tab eventKey="automatic_literature_mining" title="Text Mining">
@@ -1055,13 +1051,12 @@ const PublicationDetail = (props) => {
                                 idField={"index"}
                               />
                             )}
-                            {!glycosylationMining.length && <p>No data available.</p>}
+                            {!glycosylationMining.length && <span>No data available.</span>}
                           </Container>
                         </Tab>
                       </Tabs>
                     )}
-
-                    {!glycosylation && <p>No data available.</p>}
+                    {!glycosylation && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -1119,7 +1114,7 @@ const PublicationDetail = (props) => {
                         idField={"index"}
                       />
                     )}
-                    {!phosphorylation && <p>No data available.</p>}
+                    {!phosphorylation && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -1176,7 +1171,7 @@ const PublicationDetail = (props) => {
                         defaultSortOrder="asc"
                       />
                     )}
-                    {!glycation && <p>No data available.</p>}
+                    {!glycation && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -1227,10 +1222,8 @@ const PublicationDetail = (props) => {
                       >
                         <Tab
                           eventKey="with_disease"
-                          // className='tab-content-padding'
                           title="Disease associated
 														Mutations"
-                          //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
                         >
                           <Container
                             style={{
@@ -1247,7 +1240,7 @@ const PublicationDetail = (props) => {
                                 defaultSortOrder="asc"
                               />
                             )}
-                            {!mutataionWithdisease.length && <p>No data available.</p>}
+                            {!mutataionWithdisease.length && <span>No data available.</span>}
                           </Container>
                         </Tab>
                         <Tab
@@ -1255,7 +1248,6 @@ const PublicationDetail = (props) => {
                           className="tab-content-padding"
                           title="Non-disease associated
 														Mutations "
-                          // disabled={(!mutataionWithoutdisease || (mutataionWithoutdisease.length === 0))}
                         >
                           <Container>
                             {mutataionWithoutdisease && mutataionWithoutdisease.length > 0 && (
@@ -1269,13 +1261,13 @@ const PublicationDetail = (props) => {
                                 defaultSortOrder="asc"
                               />
                             )}
-                            {!mutataionWithoutdisease.length && <p>No data available.</p>}
+                            {!mutataionWithoutdisease.length && <span>No data available.</span>}
                           </Container>
                         </Tab>
                       </Tabs>
                     )}
 
-                    {!snv && <p>No data available.</p>}
+                    {!snv && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -1324,7 +1316,7 @@ const PublicationDetail = (props) => {
                         defaultSortOrder="asc"
                       />
                     )}
-                    {!mutagenesis && <p>No data available.</p>}
+                    {!mutagenesis && <span>No data available.</span>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
