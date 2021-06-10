@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox, Collapse } from "@material-ui/core";
 import "../css/detail.css";
+import Button from "react-bootstrap/Button";
 import { withStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 const BlueCheckbox = withStyles({
@@ -58,7 +59,6 @@ const ListFilterOptionGroup = props => {
 
   return (
     <>
-      {/* <div className="leftCol"> */}
       <div className="pb-1">
         <div className="sidebar-header">
           <h6 className="color-white nowrap d-inline-block">{type.label}</h6>

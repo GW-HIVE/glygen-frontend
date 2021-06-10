@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Helmet from "react-helmet";
+import Button from "react-bootstrap/Button";
+
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -175,11 +177,20 @@ const ProteinList = props => {
 
       <FeedbackWidget />
       <Row className="gg-baseline">
-        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage5">
+        <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col-listpage">
+          <Button
+            type="button"
+            className="gg-btn-blue resetfilter"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Reset Filters
+          </Button>
           <div className="CollapsableSidebarContainer">
             <div
               className={
-                "CollapsableSidebarContainer__sidebar5" +
+                "CollapsableSidebarContainer__sidebar" +
                 (sidebar ? "" : " closed")
               }
             >
@@ -190,7 +201,7 @@ const ProteinList = props => {
               />
             </div>
             <div
-              className="CollapsableSidebarContainer__opener"
+              className="CollapsableSidebarContainer__opener sidebar-arrow-center"
               onClick={() => setSidebar(!sidebar)}
             >
               {/* <ArrowLeftIcon className="gg-align-middle" fontSize="large" /> */}
