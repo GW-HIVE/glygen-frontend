@@ -32,7 +32,7 @@ const proteinStrings = stringConstants.protein.common;
 
 const items = [
   { label: stringConstants.sidebar.alignment.displayname, id: "Alignment" },
-  { label: stringConstants.sidebar.summary.displayname, id: "Summary" },
+  { label: stringConstants.sidebar.summary.displayname, id: "Summary" }
 ];
 
 const ProteinAlignment = () => {
@@ -104,7 +104,7 @@ const ProteinAlignment = () => {
         ...seq,
         clickThruUrl: isIsoform
           ? `${routeConstants.proteinDetail}${id}#Isoforms`
-          : `${routeConstants.proteinDetail}${seq.id}`,
+          : `${routeConstants.proteinDetail}${seq.id}`
       })),
     };
   }
@@ -139,7 +139,7 @@ const ProteinAlignment = () => {
             <React.Fragment>
               <Helmet>
                 {getTitle("proteinAlignment", {
-                  uniprot_canonical_ac: id && id ? id : "",
+                  uniprot_canonical_ac: id && id ? id : ""
                 })}
                 {getMeta("proteinAlignment")}
               </Helmet>
@@ -153,11 +153,10 @@ const ProteinAlignment = () => {
                 setSequenceSearchText={setSequenceSearchText}
                 showNumbers={isIsoform}
               />
-
               <PageLoader pageLoading={pageLoading} />
               <DialogAlert
                 alertInput={alertDialogInput}
-                setOpen={(input) => {
+                setOpen={input => {
                   setAlertDialogInput({ show: input });
                 }}
               />
@@ -203,7 +202,7 @@ const ProteinAlignment = () => {
                   <Accordion.Collapse eventKey="0" out={collapsed.alignment ? "false" : "true"}>
                     <Card.Body className="card-padding-zero">
                       <div className="m-3">
-                        {newData && (
+                        {newData &&
                           <SequenceViewer
                             details={details}
                             consensus={consensus}
@@ -212,7 +211,7 @@ const ProteinAlignment = () => {
                             sequenceSearchText={sequenceSearchText}
                             multiSequence={true}
                           />
-                        )}
+                        }
                       </div>
                     </Card.Body>
                   </Accordion.Collapse>
