@@ -22,7 +22,7 @@ import ListFilter from "../components/ListFilter";
 import { ReactComponent as ArrowRightIcon } from "../images/icons/arrowRightIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../images/icons/arrowLeftIcon.svg";
 
-const GlycanList = (props) => {
+const GlycanList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -42,7 +42,7 @@ const GlycanList = (props) => {
     { show: false, id: "" }
   );
 
-  const fixResidueToShortNames = (query) => {
+  const fixResidueToShortNames = query => {
     const residueMap = stringConstants.glycan.common.composition;
     const result = { ...query };
 
@@ -51,14 +51,16 @@ const GlycanList = (props) => {
         .sort((a, b) => {
           if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
             return -1;
-          } else if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
+          } else if (
+            residueMap[a.residue].orderID < residueMap[b.residue].orderID
+          ) {
             return 1;
           }
           return 0;
         })
-        .map((item) => ({
+        .map(item => ({
           ...item,
-          residue: ReactHtmlParser(residueMap[item.residue].name.bold()),
+          residue: ReactHtmlParser(residueMap[item.residue].name.bold())
         }));
     }
 
@@ -82,8 +84,12 @@ const GlycanList = (props) => {
             data.cache_info.query.glycan_identifier.glycan_id
           ) {
             data.cache_info.query.glycan_identifier.glycan_id_short =
-              data.cache_info.query.glycan_identifier.glycan_id.split(",").length > 9
-                ? data.cache_info.query.glycan_identifier.glycan_id.split(",").slice(0, 9).join(",")
+              data.cache_info.query.glycan_identifier.glycan_id.split(",")
+                .length > 9
+                ? data.cache_info.query.glycan_identifier.glycan_id
+                    .split(",")
+                    .slice(0, 9)
+                    .join(",")
                 : "";
           }
           setQuery(fixResidueToShortNames(data.cache_info.query));
@@ -101,14 +107,17 @@ const GlycanList = (props) => {
           setPageLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
     // eslint-disable-next-line
   }, [appliedFilters]);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     if (pageLoading) {
       return;
     }
@@ -116,12 +125,11 @@ const GlycanList = (props) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     setPageLoading(true);
-
     getGlycanList(
       id,
       (page - 1) * sizePerPage + 1,
       sizePerPage,
-      sortField,
+      sortField || "hit_score",
       sortOrder,
       appliedFilters
     ).then(({ data }) => {
@@ -140,16 +148,18 @@ const GlycanList = (props) => {
     if (data && data.length === 0) {
       setAlertDialogInput({
         show: true,
-        id: "no-result-found",
+        id: "no-result-found"
       });
     }
   }, [data]);
 
-  const handleFilterChange = (newFilter) => {
+  const handleFilterChange = newFilter => {
     // debugger;
     console.log(newFilter);
 
-    const existingFilter = appliedFilters.find((filter) => filter.id === newFilter.id);
+    const existingFilter = appliedFilters.find(
+      filter => filter.id === newFilter.id
+    );
 
     if (
       existingFilter &&
@@ -158,7 +168,9 @@ const GlycanList = (props) => {
       newFilter.selected &&
       (newFilter.selected.length || existingFilter.selected.length)
     ) {
-      const otherFilters = appliedFilters.filter((filter) => filter.id !== newFilter.id);
+      const otherFilters = appliedFilters.filter(
+        filter => filter.id !== newFilter.id
+      );
 
       if (newFilter.selected.length) {
         setAppliedFilters([...otherFilters, newFilter]);
@@ -249,7 +261,7 @@ const GlycanList = (props) => {
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
               alertInput={alertDialogInput}
-              setOpen={(input) => {
+              setOpen={input => {
                 setAlertDialogInput({ show: input });
               }}
             />
@@ -268,15 +280,17 @@ const GlycanList = (props) => {
               <DownloadButton
                 types={[
                   {
-                    display: stringConstants.download.glycan_csvdata.displayname,
+                    display:
+                      stringConstants.download.glycan_csvdata.displayname,
                     type: "csv",
-                    data: "glycan_list",
+                    data: "glycan_list"
                   },
                   {
-                    display: stringConstants.download.glycan_jsondata.displayname,
+                    display:
+                      stringConstants.download.glycan_jsondata.displayname,
                     type: "json",
-                    data: "glycan_list",
-                  },
+                    data: "glycan_list"
+                  }
                 ]}
                 dataId={id}
               />

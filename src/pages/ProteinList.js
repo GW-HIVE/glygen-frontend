@@ -21,7 +21,7 @@ import ListFilter from "../components/ListFilter";
 import { ReactComponent as ArrowRightIcon } from "../images/icons/arrowRightIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../images/icons/arrowLeftIcon.svg";
 
-const ProteinList = (props) => {
+const ProteinList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -43,7 +43,7 @@ const ProteinList = (props) => {
 
   useEffect(() => {
     setPageLoading(true);
-
+    setPage(1);
     logActivity("user", id);
     getProteinList(
       id,
@@ -63,27 +63,38 @@ const ProteinList = (props) => {
           if (data.cache_info.query.uniprot_canonical_ac) {
             data.cache_info.query.uniprot_canonical_ac_short =
               data.cache_info.query.uniprot_canonical_ac.split(",").length > 9
-                ? data.cache_info.query.uniprot_canonical_ac.split(",").slice(0, 9).join(",")
+                ? data.cache_info.query.uniprot_canonical_ac
+                    .split(",")
+                    .slice(0, 9)
+                    .join(",")
                 : "";
           }
           setQuery(data.cache_info.query);
           setTimeStamp(data.cache_info.ts);
           setPagination(data.pagination);
           setAvailableFilters(data.filters.available);
-          const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
-          setPage(currentPage);
-          setTotalSize(data.pagination.total_length);
+          if (data.pagination) {
+            const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+            setPage(currentPage);
+            setTotalSize(data.pagination.total_length);
+          } else {
+            setPage(1);
+            setTotalSize(0);
+          }
           setPageLoading(false);
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
     // eslint-disable-next-line
   }, [appliedFilters]);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     if (pageLoading) {
       return;
     }
@@ -98,29 +109,30 @@ const ProteinList = (props) => {
       appliedFilters
     ).then(({ data }) => {
       // place to change values before rendering
-      if (!data.error_code) {
-        setData(data.results);
-        setTimeStamp(data.cache_info.ts);
-        setPagination(data.pagination);
-        setAvailableFilters(data.filters.available);
-        setTotalSize(data.pagination.total_length);
-        setPageLoading(false);
-      }
+
+      setData(data.results);
+      setTimeStamp(data.cache_info.ts);
+      setPagination(data.pagination);
+      setAvailableFilters(data.filters.available);
+      setTotalSize(data.pagination.total_length);
+      setPageLoading(false);
     });
   };
   useEffect(() => {
-    if (data && data.length === 0) {
+    if (data.results && data.results.length === 0) {
       setAlertDialogInput({
         show: true,
-        id: "no-result-found",
+        id: "no-result-found"
       });
     }
   }, [data]);
 
-  const handleFilterChange = (newFilter) => {
+  const handleFilterChange = newFilter => {
     console.log(newFilter);
     // find if a filter exists for this type
-    const existingFilter = appliedFilters.find((filter) => filter.id === newFilter.id);
+    const existingFilter = appliedFilters.find(
+      filter => filter.id === newFilter.id
+    );
     // if no filter exists
     if (
       existingFilter &&
@@ -131,7 +143,9 @@ const ProteinList = (props) => {
     ) {
       // list of all the other filters
       // add a new filter of this type
-      const otherFilters = appliedFilters.filter((filter) => filter.id !== newFilter.id);
+      const otherFilters = appliedFilters.filter(
+        filter => filter.id !== newFilter.id
+      );
 
       if (newFilter.selected.length) {
         // for this existing filter, make sure we remove this option if it existed
@@ -222,7 +236,7 @@ const ProteinList = (props) => {
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
               alertInput={alertDialogInput}
-              setOpen={(input) => {
+              setOpen={input => {
                 setAlertDialogInput({ show: input });
               }}
             />
@@ -241,20 +255,23 @@ const ProteinList = (props) => {
               <DownloadButton
                 types={[
                   {
-                    display: stringConstants.download.protein_csvdata.displayname,
+                    display:
+                      stringConstants.download.protein_csvdata.displayname,
                     type: "csv",
-                    data: "protein_list",
+                    data: "protein_list"
                   },
                   {
-                    display: stringConstants.download.protein_jsondata.displayname,
+                    display:
+                      stringConstants.download.protein_jsondata.displayname,
                     type: "json",
-                    data: "protein_list",
+                    data: "protein_list"
                   },
                   {
-                    display: stringConstants.download.protein_fastadata.displayname,
+                    display:
+                      stringConstants.download.protein_fastadata.displayname,
                     type: "fasta",
-                    data: "protein_list",
-                  },
+                    data: "protein_list"
+                  }
                 ]}
                 dataId={id}
                 itemType="protein"
