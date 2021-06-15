@@ -20,7 +20,11 @@ const SequenceDashboard = (props) => {
 
   return (
     <form autoComplete="off" className="form">
-      <div className={"sidebar-contact feedback_ protvistaicon" + (isOpen ? " active" : "")}>
+      <div
+        className={
+          "sidebar-contact feedback_ protvistaicon sequence-dashboard" + (isOpen ? " active" : "")
+        }
+      >
         <Row>
           <Col sm={12} md={12} lg={12}>
             <div
@@ -37,7 +41,7 @@ const SequenceDashboard = (props) => {
             </div>
             <div className="scroll">
               <h5>Site Feature</h5>
-              <SequenceHighlighter 
+              <SequenceHighlighter
                 details={props.details}
                 sequenceObject={props.sequences}
                 selectedHighlights={props.selectedHighlights}

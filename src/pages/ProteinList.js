@@ -91,6 +91,9 @@ const ProteinList = props => {
     type,
     { page, sizePerPage, sortField, sortOrder }
   ) => {
+    if (pageLoading) {
+      return;
+    }
     setPage(page);
     setSizePerPage(sizePerPage);
     getProteinList(
@@ -108,9 +111,18 @@ const ProteinList = props => {
         setPagination(data.pagination);
         setAvailableFilters(data.filters.available);
         setTotalSize(data.pagination.total_length);
+        setPageLoading(false);
       }
     });
   };
+  useEffect(() => {
+    if (data && data.length === 0) {
+      setAlertDialogInput({
+        show: true,
+        id: "no-result-found"
+      });
+    }
+  }, [data]);
 
   const handleFilterChange = newFilter => {
     console.log(newFilter);
