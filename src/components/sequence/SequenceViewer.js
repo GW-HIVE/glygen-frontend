@@ -60,60 +60,60 @@ function isHighlighted(position, selection) {
 function buildHighlightData(sequences, consensus) {
   var result = [];
 
-    if (sequences) {
-        for (let y = 0; y < sequences.length; y++){
-          var sequence = sequences[y].aln;
-          var uniprot_ac = sequences[y].uniprot_ac;
-          var uniprot_id = sequences[y].uniprot_id;
-          var tax_name = sequences[y].tax_name;
-          var clickThruUrl = sequences[y].clickThruUrl;
-          var result1 = [];
-          var site_annotation = siteAnnotationMapHighlights[uniprot_ac];
-          var glycation = glycationMapHighlights[uniprot_ac];
-          var mutation = mutationMapHighlights[uniprot_ac];
-          var phosphorylation = phosphorylationMapHighlights[uniprot_ac];
-          var nLinkGlycan = nLinkGlycanMapHighlights[uniprot_ac];
-          var oLinkGlycan = oLinkGlycanMapHighlights[uniprot_ac];
-          var searchTextArr = searchTextHighlights[uniprot_ac];
+  if (sequences) {
+      for (let y = 0; y < sequences.length; y++){
+        var sequence = sequences[y].aln;
+        var uniprot_ac = sequences[y].uniprot_ac;
+        var uniprot_id = sequences[y].uniprot_id;
+        var tax_name = sequences[y].tax_name;
+        var clickThruUrl = sequences[y].clickThruUrl;
+        var result1 = [];
+        var site_annotation = siteAnnotationMapHighlights[uniprot_ac];
+        var glycation = glycationMapHighlights[uniprot_ac];
+        var mutation = mutationMapHighlights[uniprot_ac];
+        var phosphorylation = phosphorylationMapHighlights[uniprot_ac];
+        var nLinkGlycan = nLinkGlycanMapHighlights[uniprot_ac];
+        var oLinkGlycan = oLinkGlycanMapHighlights[uniprot_ac];
+        var searchTextArr = searchTextHighlights[uniprot_ac];
 
-          var count = 0;
-          for (var x = 0; x < sequence.length; x++) {
-            if (sequence[x] === '-'){
-              count--;
-            }
-            var position = x + count + 1;
-            result1.push({
-              character: sequence[x],
-              n_link_glycosylation: isHighlighted(position, nLinkGlycan),
-              o_link_glycosylation: isHighlighted(position, oLinkGlycan),
-              mutation: isHighlighted(position, mutation),
-              site_annotation: isHighlighted(position, site_annotation),
-              phosphorylation: isHighlighted(position, phosphorylation),
-              glycation: isHighlighted(position, glycation),
-              text_search: isHighlighted(x, searchTextArr),
-            });
+        var count = 0;
+        for (var x = 0; x < sequence.length; x++) {
+          if (sequence[x] === '-'){
+            count--;
           }
-          result.push({consensus : false, uniprot_ac : uniprot_ac, clickThruUrl : clickThruUrl, uniprot_id : uniprot_id, tax_name : tax_name, seq: result1});
+          var position = x + count + 1;
+          result1.push({
+            character: sequence[x],
+            n_link_glycosylation: isHighlighted(position, nLinkGlycan),
+            o_link_glycosylation: isHighlighted(position, oLinkGlycan),
+            mutation: isHighlighted(position, mutation),
+            site_annotation: isHighlighted(position, site_annotation),
+            phosphorylation: isHighlighted(position, phosphorylation),
+            glycation: isHighlighted(position, glycation),
+            text_search: isHighlighted(x, searchTextArr),
+          });
         }
+        result.push({consensus : false, uniprot_ac : uniprot_ac, clickThruUrl : clickThruUrl, uniprot_id : uniprot_id, tax_name : tax_name, seq: result1});
+      }
 
-        if (consensus && consensus !== "") {
-          var result1 = [];
-          for (var x = 0; x < consensus.length; x++) {
-            var position = x + 1;
-            result1.push({
-              character: consensus[x] === " " ? "&nbsp;" : consensus[x],
-              n_link_glycosylation: false,
-              o_link_glycosylation: false,
-              mutation: false,
-              site_annotation: false,
-              phosphorylation: false,
-              glycation: false,
-              text_search: false
-            });
-          }
-          result.push({consensus : true, seq: result1});
+      if (consensus && consensus !== "") {
+        var result1 = [];
+        for (var x = 0; x < consensus.length; x++) {
+          var position = x + 1;
+          result1.push({
+            character: consensus[x] === " " ? "&nbsp;" : consensus[x],
+            n_link_glycosylation: false,
+            o_link_glycosylation: false,
+            mutation: false,
+            site_annotation: false,
+            phosphorylation: false,
+            glycation: false,
+            text_search: false
+          });
         }
-    return result;
+        result.push({consensus : true, seq: result1});
+      }  
+      return result;
   }
   return [];
 }
@@ -154,14 +154,8 @@ function buildHighlightData(sequences, consensus) {
     setSequenceData(buildHighlightData(sequenceObject, consensus));
   }, [
     sequenceObject,
-    consensus,
-    siteAnnotationMapHighlights,
-    glycationMapHighlights,
-    mutationMapHighlights,
-    phosphorylationMapHighlights,
-    nLinkGlycanMapHighlights,
-    oLinkGlycanMapHighlights,
-    searchTextHighlights
+    selectedHighlights,
+    sequenceSearchText
   ]);
 
   /**

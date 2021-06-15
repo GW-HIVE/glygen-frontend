@@ -215,7 +215,7 @@ const ProteinAlignment = () => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.alignment}>
+                  <Accordion.Collapse eventKey="0" out={collapsed.alignment ? "false" : "true"}>
                     <Card.Body className="card-padding-zero">
                         <div className="m-3">
                           {newData && <SequenceViewer
@@ -266,19 +266,19 @@ const ProteinAlignment = () => {
                       </Accordion.Toggle>
                     </div>
                   </Card.Header>
-                  <Accordion.Collapse eventKey="0" out={!collapsed.summary}>
+                  <Accordion.Collapse eventKey="0" out={collapsed.summary ? "false" : "true"}>
                     <Card.Body className="card-padding-zero">
                       <Table hover>
                         <tbody className="table-body">
                           <tr className="table-row">
-                            <div className="trclass">
+                            <td className="trclass">
                               <strong>{proteinStrings.date.name}: </strong>
                               {data.date}
-                            </div>
+                            </td>
                           </tr>
                           {data && data.algorithm && (
                             <tr className="table-row">
-                              <div className="trclass">
+                              <td className="trclass">
                                 <strong>
                                   {proteinStrings.algorithm.name}:{" "}
                                 </strong>
@@ -289,41 +289,41 @@ const ProteinAlignment = () => {
                                 >
                                   {data.algorithm.name}
                                 </a>
-                              </div>
+                              </td>
                             </tr>
                           )}
                           <tr className="table-row">
-                            <div className="trclass">
+                            <td className="trclass">
                               <strong>
                                 {" "}
                                 {proteinStrings.identical_positions.name}:
                               </strong>{" "}
                               {data.identical_positions}
-                            </div>
+                            </td>
                           </tr>
                           <tr className="table-row">
-                            <div className="trclass">
+                            <td className="trclass">
                               <strong>
                                 {" "}
                                 {proteinStrings.similar_positions.name}:
                               </strong>{" "}
                               {data.similar_positions}
-                            </div>
+                            </td>
                           </tr>
                           <tr className="table-row">
-                            <div className="trclass">
+                            <td className="trclass">
                               <strong>
                                 {" "}
                                 {proteinStrings.cluster_id.name}:
                               </strong>{" "}
                               {data.cls_id}
-                            </div>
+                            </td>
                           </tr>
                           <tr className="table-row">
-                            <div className="trclass">
+                            <td className="trclass">
                               <strong>{proteinStrings.identity.name}:</strong>{" "}
                               {data.identity}
-                            </div>
+                            </td>
                           </tr>
                         </tbody>
                       </Table>
