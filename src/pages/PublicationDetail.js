@@ -981,12 +981,7 @@ const PublicationDetail = (props) => {
                         }}
                       >
                         <Tab eventKey="reported_with_glycan" title="Reported Sites with Glycan">
-                          <Container
-                            style={{
-                              paddingTop: "20px",
-                              paddingBottom: "30px",
-                            }}
-                          >
+                          <Container className="tab-content-padding">
                             {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                               <ClientPaginatedTable
                                 data={addIndex(
@@ -1007,12 +1002,7 @@ const PublicationDetail = (props) => {
                           </Container>
                         </Tab>
                         <Tab eventKey="reported" title="Reported Sites">
-                          <Container
-                            style={{
-                              paddingTop: "20px",
-                              paddingBottom: "30px",
-                            }}
-                          >
+                          <Container className="tab-content-padding">
                             {glycosylationWithoutImage && glycosylationWithoutImage.length > 0 && (
                               <ClientPaginatedTable
                                 data={addIndex(glycosylationWithoutImage)}
@@ -1031,12 +1021,7 @@ const PublicationDetail = (props) => {
                           </Container>
                         </Tab>
                         <Tab eventKey="automatic_literature_mining" title="Text Mining">
-                          <Container
-                            style={{
-                              paddingTop: "20px",
-                              paddingBottom: "30px",
-                            }}
-                          >
+                          <Container className="tab-content-padding">
                             {glycosylationMining && glycosylationMining.length > 0 && (
                               <ClientPaginatedTable
                                 data={addIndex(glycosylationMining)}
@@ -1225,12 +1210,7 @@ const PublicationDetail = (props) => {
                           title="Disease associated
 														Mutations"
                         >
-                          <Container
-                            style={{
-                              paddingTop: "20px",
-                              paddingBottom: "30px",
-                            }}
-                          >
+                          <Container className="tab-content-padding">
                             {mutataionWithdisease && mutataionWithdisease.length > 0 && (
                               <ClientPaginatedTable
                                 data={mutataionWithdisease}
@@ -1245,11 +1225,10 @@ const PublicationDetail = (props) => {
                         </Tab>
                         <Tab
                           eventKey="without_disease"
-                          className="tab-content-padding"
                           title="Non-disease associated
 														Mutations "
                         >
-                          <Container>
+                          <Container className="tab-content-padding">
                             {mutataionWithoutdisease && mutataionWithoutdisease.length > 0 && (
                               <ClientPaginatedTable
                                 data={mutataionWithoutdisease}
