@@ -21,22 +21,6 @@
 .page-item.active .page-link {
   background-color: white;
 }
-/* .filterlist {
-  list-style-type: none;
-  color: white;
-  padding: 0;
-  margin: 0;
-}
-.sidebar-left {
-  width: 25%;
-  float: left;
-} */
-/* .labeltype {
-  width: 70%;
-  word-wrap: break-word;
-  list-style-type: none;
-  color: black;
-} */
 .badge {
   display: inline-block;
   padding: 0.25em 0.6em;
@@ -82,16 +66,6 @@
 .evidencetype {
   text-transform: capitalize;
 }
-/* .parentElement {
-  word-break: break-all;
-  background: #4b85b6;
-  padding: 10px;
-  margin-top: 0px;
-  color: white;
-  list-style-type: none;
-  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
-} */
 .badge-div + .badge-div {
   margin: 10px 0 0 !important;
   margin-left: 2px;
@@ -103,10 +77,6 @@
 
 legend {
   all: unset;
-}
-
-.Organism {
-  row-count: 3;
 }
 
 .img-wrapper {
@@ -136,14 +106,6 @@ legend {
 .no-data-msg {
   margin-left: 15px;
 }
-/* .checkboxCss.MuiCheckbox-colorSecondary.Mui-checked {
-  color: #2f78b7;
-} */
-
-/* ul.filterlist {
-  padding: 0;
-  margin: 0;
-} */
 
 .no-data-msg-publication {
   margin: 20px 0 36px 20px;
@@ -160,105 +122,4 @@ legend {
     width: 100% !important;
     margin: 0 auto !important;
   }
-}
-/* .triangle {
-  background: #e7e7e7;
-  min-width: 20px;
-  position: relative;
-  margin: 3em;
-  padding: 1em;
-  box-sizing: border-box;
-  background: #bada55;
-  box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.4);
-  border-right: 10px solid blue;
-}
-.triangle::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  margin-left: -0.5em;
-  bottom: -16em;
-  left: 50%;
-  box-sizing: border-box;
-  border: 1em solid black;
-  border-color: transparent transparent #bada55 #bada55;
-  transform-origin: 0 0;
-  transform: rotate(0deg);
-
-  box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.4);
-} */
-
-/* .triangle--problem {
-  position: relative;
-  margin: 5em;
-  padding: 1em;
-  box-sizing: border-box;
-
-  background: #bada55;
-
-  box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.4);
-}
-.triangle--problem::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  margin-left: -0.75em;
-  bottom: -3em;
-  left: 50%;
-  box-sizing: border-box;
-
-  border: 1.5em solid black;
-  border-color: #bada55 transparent transparent transparent;
-
-  box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.4);
-} */
-
-/* ========================================
-              List page sidebar
-==========================================*/
-.sidebar-header {
-  /* word-break: break-all; */
-  background-color: #2f78b7 !important;
-  padding: 10px 10px !important;
-  color: white;
-}
-.select-dropdown {
-  padding: 5px;
-}
-/* label.labeltype {
-  display: flex;
-  align-items: start;
-} */
-.CollapsableSidebarContainer {
-  display: flex;
-  padding-top: 5px;
-}
-.CollapsableSidebarContainer__sidebar {
-  display: flex;
-  width: 320px;
-  transition: width 0.5s;
-  overflow: hidden;
-}
-.CollapsableSidebarContainer__sidebar.closed {
-  width: 0;
-}
-
-.CollapsableSidebarContainer__main {
-  flex: 1;
-}
-.CollapsableSidebarContainer__opener {
-  background: #e7e7e7;
-  min-width: 20px;
-}
-.sidebar-arrow-center {
-  display: flex;
-  align-items: center;
-  float: left;
-}
-
-.ClickArrow {
-  font-size: "large";
-  align-content: center;
 }

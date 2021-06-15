@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
-import { Div } from "react-bootstrap";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,7 +8,6 @@ import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS } from "../data/glycan";
 import GlycanQuerySummary from "../components/GlycanQuerySummary";
 import PaginatedTable from "../components/PaginatedTable";
-import Container from "@material-ui/core/Container";
 import DownloadButton from "../components/DownloadButton";
 import FeedbackWidget from "../components/FeedbackWidget";
 import stringConstants from "../data/json/stringConstants.json";
@@ -20,14 +18,11 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import { GLYGEN_BASENAME } from "../envVariables";
-// import CheckBox from "../components/CheckBox";
-import { Checkbox } from "@material-ui/core";
-import { Col, Row } from "react-bootstrap";
 import ListFilter from "../components/ListFilter";
-import ArrowLeftIcon from "@material-ui/icons/ArrowLeft";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import { ReactComponent as ArrowRightIcon } from "../images/icons/arrowRightIcon.svg";
+import { ReactComponent as ArrowLeftIcon } from "../images/icons/arrowLeftIcon.svg";
 
-const GlycanList = props => {
+const GlycanList = (props) => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
@@ -47,7 +42,7 @@ const GlycanList = props => {
     { show: false, id: "" }
   );
 
-  const fixResidueToShortNames = query => {
+  const fixResidueToShortNames = (query) => {
     const residueMap = stringConstants.glycan.common.composition;
     const result = { ...query };
 
@@ -56,16 +51,14 @@ const GlycanList = props => {
         .sort((a, b) => {
           if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
             return -1;
-          } else if (
-            residueMap[a.residue].orderID < residueMap[b.residue].orderID
-          ) {
+          } else if (residueMap[a.residue].orderID < residueMap[b.residue].orderID) {
             return 1;
           }
           return 0;
         })
-        .map(item => ({
+        .map((item) => ({
           ...item,
-          residue: ReactHtmlParser(residueMap[item.residue].name.bold())
+          residue: ReactHtmlParser(residueMap[item.residue].name.bold()),
         }));
     }
 
@@ -89,12 +82,8 @@ const GlycanList = props => {
             data.cache_info.query.glycan_identifier.glycan_id
           ) {
             data.cache_info.query.glycan_identifier.glycan_id_short =
-              data.cache_info.query.glycan_identifier.glycan_id.split(",")
-                .length > 9
-                ? data.cache_info.query.glycan_identifier.glycan_id
-                    .split(",")
-                    .slice(0, 9)
-                    .join(",")
+              data.cache_info.query.glycan_identifier.glycan_id.split(",").length > 9
+                ? data.cache_info.query.glycan_identifier.glycan_id.split(",").slice(0, 9).join(",")
                 : "";
           }
           setQuery(fixResidueToShortNames(data.cache_info.query));
@@ -112,16 +101,14 @@ const GlycanList = props => {
           setPageLoading(false);
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         let message = "list api call";
         axiosError(error, id, message, setPageLoading, setAlertDialogInput);
       });
+    // eslint-disable-next-line
   }, [appliedFilters]);
 
-  const handleTableChange = (
-    type,
-    { page, sizePerPage, sortField, sortOrder }
-  ) => {
+  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
     if (pageLoading) {
       return;
     }
@@ -153,18 +140,16 @@ const GlycanList = props => {
     if (data && data.length === 0) {
       setAlertDialogInput({
         show: true,
-        id: "no-result-found"
+        id: "no-result-found",
       });
     }
   }, [data]);
 
-  const handleFilterChange = newFilter => {
+  const handleFilterChange = (newFilter) => {
     // debugger;
     console.log(newFilter);
 
-    const existingFilter = appliedFilters.find(
-      filter => filter.id === newFilter.id
-    );
+    const existingFilter = appliedFilters.find((filter) => filter.id === newFilter.id);
 
     if (
       existingFilter &&
@@ -173,9 +158,7 @@ const GlycanList = props => {
       newFilter.selected &&
       (newFilter.selected.length || existingFilter.selected.length)
     ) {
-      const otherFilters = appliedFilters.filter(
-        filter => filter.id !== newFilter.id
-      );
+      const otherFilters = appliedFilters.filter((filter) => filter.id !== newFilter.id);
 
       if (newFilter.selected.length) {
         setAppliedFilters([...otherFilters, newFilter]);
@@ -221,47 +204,52 @@ const GlycanList = props => {
 
       <FeedbackWidget />
       {/* <Container maxWidth="xl" className="gg-container5"> */}
-      <Row className="gg-baseline">
-        <Col xs={12} sm={12} md={3} className="sidebar-col-listpage">
-          {/* <div className="leftCol"> */}
-          {data && data.length !== 0 && (
-            <Button
-              type="button"
-              className="gg-btn-blue resetfilter"
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              Reset Filters
-            </Button>
-          )}
-          <div className="CollapsableSidebarContainer">
-            <div
-              className={
-                "CollapsableSidebarContainer__sidebar" +
-                (sidebar ? "" : " closed")
-              }
-            >
+      <div className="gg-baseline list-page-container">
+        {data && data.length !== 0 && (
+          <div className="list-sidebar-container">
+            <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
+              <div className="reset-filter-btn-container">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
               <ListFilter
                 availableOptions={availableFilters}
                 selectedOptions={appliedFilters}
                 onFilterChange={handleFilterChange}
               />
+              <div className="reset-filter-btn-container ">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
             </div>
             <div
-              className="CollapsableSidebarContainer__opener sidebar-arrow-center"
+              className="list-sidebar-opener sidebar-arrow-center"
               onClick={() => setSidebar(!sidebar)}
             >
-              {/* <ArrowLeftIcon /> */}
+              {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
             </div>
           </div>
-        </Col>
-        <Col xs={12} sm={12} md={9} className="sidebar-page5">
-          <div class="CollapsableSidebarContainer__main">
+        )}
+        <div className="sidebar-page">
+          <div class="list-mainpage-container">
             <PageLoader pageLoading={pageLoading} />
             <DialogAlert
               alertInput={alertDialogInput}
-              setOpen={input => {
+              setOpen={(input) => {
                 setAlertDialogInput({ show: input });
               }}
             />
@@ -280,17 +268,15 @@ const GlycanList = props => {
               <DownloadButton
                 types={[
                   {
-                    display:
-                      stringConstants.download.glycan_csvdata.displayname,
+                    display: stringConstants.download.glycan_csvdata.displayname,
                     type: "csv",
-                    data: "glycan_list"
+                    data: "glycan_list",
                   },
                   {
-                    display:
-                      stringConstants.download.glycan_jsondata.displayname,
+                    display: stringConstants.download.glycan_jsondata.displayname,
                     type: "json",
-                    data: "glycan_list"
-                  }
+                    data: "glycan_list",
+                  },
                 ]}
                 dataId={id}
               />
@@ -311,9 +297,8 @@ const GlycanList = props => {
               {/* {data && data.length === 0 && <p>No data.</p>} */}
             </section>
           </div>
-        </Col>
-      </Row>
-      {/* </Container> */}
+        </div>
+      </div>
     </>
   );
 };
