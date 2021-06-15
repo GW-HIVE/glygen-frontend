@@ -257,7 +257,7 @@ const SequenceLocationViewer = ({
   );
 };
 
-const Siteview = ({ position }) => {
+const Siteview = ({ position, history }) => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
@@ -648,13 +648,14 @@ const Siteview = ({ position }) => {
                 </Grid>
               </Row>
             </div>
-            {position.history && position.history.length > 1 && (
+            {/* back button */}
+            {history && history.length > 1 && (
               <div className="text-right gg-download-btn-width pb-3">
                 <Button
                   type="button"
                   className="gg-btn-blue"
                   onClick={() => {
-                    position.history.goBack();
+                    history.goBack();
                   }}
                 >
                   Back
@@ -694,14 +695,6 @@ const Siteview = ({ position }) => {
                   setAlertDialogInput({ show: input });
                 }}
               />
-              {/* Button */}
-              <div className="text-right gg-download-btn-width">
-                <Link to={`${routeConstants.proteinDetail}${id}`}>
-                  <Button type="button" className="gg-btn-blue">
-                    Back To Protein Details
-                  </Button>
-                </Link>
-              </div>
               {/* general */}
               <Accordion
                 id="General"
