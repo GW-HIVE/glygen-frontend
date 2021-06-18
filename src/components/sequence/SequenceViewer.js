@@ -155,7 +155,7 @@ function buildHighlightData(sequences, consensus) {
   }, [
     sequenceObject,
     selectedHighlights,
-    sequenceSearchText
+    searchTextHighlights
   ]);
 
   /**
