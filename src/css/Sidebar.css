@@ -79,7 +79,7 @@ ul.sidebar-item {
 }
 
 .sidbar-top-padding {
-  padding-top: 5px;
+  padding-top: 1px;
 }
 
 .sidebar .active,
@@ -145,6 +145,7 @@ ul.sidebar-item {
 
 .list-sidebar-container {
   display: flex;
+  padding-top: 1px;
 }
 .list-sidebar {
   /* display: flex; */
