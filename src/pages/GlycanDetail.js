@@ -302,7 +302,7 @@ const GlycanDetail = (props) => {
         if (!detailDataTemp.iupac && !detailDataTemp.wurcs && !detailDataTemp.glycoct) {
           newSidebarData = setSidebarItemState(newSidebarData, "Digital-Sequence", true);
         }
-        if (!detailDataTemp.cross_ref || detailDataTemp.cross_ref.length === 0) {
+        if (!detailDataTemp.crossref || detailDataTemp.crossref.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Cross-References", true);
         }
         if (!detailDataTemp.history || detailDataTemp.history.length === 0) {

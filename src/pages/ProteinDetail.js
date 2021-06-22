@@ -353,7 +353,7 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.go_annotation || detailDataTemp.go_annotation.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "GO-Annotation", true);
         }
-        if (!detailDataTemp.glycan_ligands || detailDataTemp.glycan_ligands.length === 0) {
+        if (!detailDataTemp.interactions || detailDataTemp.interactions.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Glycan-Ligands", true);
         }
         if (!detailDataTemp.ptm_annotation || detailDataTemp.ptm_annotation.length === 0) {
@@ -389,7 +389,7 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.expression_disease || detailDataTemp.expression_disease.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Expression-Disease", true);
         }
-        if (!detailDataTemp.cross_ref || detailDataTemp.cross_ref.length === 0) {
+        if (!detailDataTemp.crossref || detailDataTemp.crossref.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Cross-References", true);
         }
         if (!detailDataTemp.history || detailDataTemp.history.length === 0) {
