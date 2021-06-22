@@ -65,11 +65,12 @@ const featuredCards = [
     to: routeConstants.proteinSearch,
   },
   {
-    title: "Site Search",
-    description: "Search for proteins based on their site and site annotations.",
-    image: siteSearchImg,
-    imageText: "Site Search",
-    to: routeConstants.siteSearch,
+    title: "Super Search",
+    description:
+      "Super search is a graphical interface to build queries across all GlyGen datasets.",
+    image: superSearchImg,
+    imageText: "Super Search",
+    to: routeConstants.superSearch,
   },
   {
     title: "Quick Search",
@@ -79,12 +80,11 @@ const featuredCards = [
     to: routeConstants.quickSearch,
   },
   {
-    title: "Super Search",
-    description:
-      "Super search is a graphical interface to build queries across all GlyGen datasets.",
-    image: superSearchImg,
-    imageText: "Super Search",
-    to: routeConstants.superSearch,
+    title: "Site Search",
+    description: "Search for proteins based on their site and site annotations.",
+    image: siteSearchImg,
+    imageText: "Site Search",
+    to: routeConstants.siteSearch,
   },
   {
     title: "GlyGen Mapper",
