@@ -163,7 +163,7 @@ const feedbackCard = {
   to: routeConstants.feedback,
 };
 const resourcesCard = {
-  title: "Explore Other Resources",
+  title: "Other Resources",
   description: "GlyGen is pleased to provide users with a variety of resources in glycobiology.",
   image: resources,
   imageText: "Resources",
@@ -215,9 +215,9 @@ export default function Home() {
             <Grid item xs={12} md={4} lg={3}>
               <Grid container spacing={4} style={{ justifyContent: "center" }}>
                 <VersionCard data={homeData.version} pageLoading={pageLoading} />
-                <InfoCard post={feedbackCard} />
-                <StatDBCard data={homeData.statistics} pageLoading={pageLoading} />
                 <InfoCard post={resourcesCard} />
+                <StatDBCard data={homeData.statistics} pageLoading={pageLoading} />
+                <InfoCard post={feedbackCard} />
                 <TwitterCard />
               </Grid>
             </Grid>

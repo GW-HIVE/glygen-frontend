@@ -1467,7 +1467,7 @@ const GlycanDetail = (props) => {
                           onClickTarget={"#glycoprotein"}
                         />
                       )}
-                      {!glycoprotein && <p>No data available.</p>}
+                      {!glycoprotein.length && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -1641,6 +1641,7 @@ const GlycanDetail = (props) => {
                           </Tab>
                         </Tabs>
                       )}
+                      {!subsumption && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
