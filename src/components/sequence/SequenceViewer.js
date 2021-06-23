@@ -33,9 +33,11 @@ const SequenceViewer = ({
  * @param {array} selection
  * @return: true {boolean} if position in the range
  */
-function isHighlighted(position, selection) {
+function isHighlighted(position, selection, character) {
   var result = false;
 
+  if (character === '-')
+    return result;
   if (selection) {
     for (var x = 0; x < selection.length; x++) {
       var start = selection[x].start;
@@ -84,13 +86,13 @@ function buildHighlightData(sequences, consensus) {
           var position = x + count + 1;
           result1.push({
             character: sequence[x],
-            n_link_glycosylation: isHighlighted(position, nLinkGlycan),
-            o_link_glycosylation: isHighlighted(position, oLinkGlycan),
-            mutation: isHighlighted(position, mutation),
-            site_annotation: isHighlighted(position, site_annotation),
-            phosphorylation: isHighlighted(position, phosphorylation),
-            glycation: isHighlighted(position, glycation),
-            text_search: isHighlighted(x, searchTextArr),
+            n_link_glycosylation: isHighlighted(position, nLinkGlycan, sequence[x]),
+            o_link_glycosylation: isHighlighted(position, oLinkGlycan, sequence[x]),
+            mutation: isHighlighted(position, mutation, sequence[x]),
+            site_annotation: isHighlighted(position, site_annotation, sequence[x]),
+            phosphorylation: isHighlighted(position, phosphorylation, sequence[x]),
+            glycation: isHighlighted(position, glycation, sequence[x]),
+            text_search: isHighlighted(x, searchTextArr, sequence[x]),
           });
         }
         result.push({consensus : false, uniprot_ac : uniprot_ac, clickThruUrl : clickThruUrl, uniprot_id : uniprot_id, tax_name : tax_name, seq: result1});
@@ -162,7 +164,7 @@ function buildHighlightData(sequences, consensus) {
   * useEffect to build text search highlight map.
   */
   useEffect(() => {
-    if (sequenceObject) {
+    if (sequenceObject && selectedHighlights.text_search) {
       let searchMap = new Map();
       let searchText = sequenceSearchText;
       var re;
@@ -178,13 +180,32 @@ function buildHighlightData(sequences, consensus) {
         var result = [];
         var sequence = sequenceObject[y].aln;
         var uniprot_ac = sequenceObject[y].uniprot_ac;
-        var textMatchArr =  sequence.matchAll(re);
-        for (const match of textMatchArr) {
-          result.push({
-            start: match.index,
-            length: match[0].length,
-          });
+        var seqModArr = [];
+        var dashCount = 0;
+        for (let x = 0; x < sequence.length; x++) {
+          if (sequence[x] === '-') {
+            dashCount++;
+          } else {
+            seqModArr[x - dashCount] = x;
+          }
         }
+
+        var sequenceMod;
+        if (sequenceObject[y].alnMod){
+          sequenceMod = sequenceObject[y].alnMod ;
+        }  else {
+          sequenceMod = sequence.replaceAll(/-/ig, '');
+          sequenceObject[y].alnMod = sequenceMod;
+        }
+        var textMatchArr =  sequenceMod.matchAll(re);
+        for (const match of textMatchArr) {
+          if (match[0].length !== 0) {
+            result.push({
+              start: seqModArr[match.index],
+              length: seqModArr[match.index + match[0].length - 1] + 1 - seqModArr[match.index],
+            });
+          }
+        } 
         searchMap[uniprot_ac] = result;
       }
       setSearchTextHighlights(searchMap);
