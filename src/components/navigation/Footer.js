@@ -180,7 +180,7 @@ export default function Footer() {
                 </a>
               </div>
             </Col>
-            <Col xs={12} md={"auto"} className="sitemap-item">
+            <Col xs={6} md={"auto"} className="text-left sitemap-item">
               <div>
                 <a href={TWITTER} target="_blank" rel="noopener noreferrer" className="gg-link">
                   <TwitterIcon className="mr-2" />
@@ -204,7 +204,7 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div className="text-center">
+              <div className="text-center5">
                 <a href={CCRC_UGA} target="_blank" rel="noopener noreferrer">
                   <Image src={ugaLogo} className={classes.footerUnivLogo} />
                 </a>

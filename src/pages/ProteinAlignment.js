@@ -32,7 +32,7 @@ const proteinStrings = stringConstants.protein.common;
 
 const items = [
   { label: stringConstants.sidebar.alignment.displayname, id: "Alignment" },
-  { label: stringConstants.sidebar.summary.displayname, id: "Summary" }
+  { label: stringConstants.sidebar.summary.displayname, id: "Summary" },
 ];
 
 const ProteinAlignment = () => {
@@ -104,7 +104,7 @@ const ProteinAlignment = () => {
         ...seq,
         clickThruUrl: isIsoform
           ? `${routeConstants.proteinDetail}${id}#Isoforms`
-          : `${routeConstants.proteinDetail}${seq.id}`
+          : `${routeConstants.proteinDetail}${seq.id}`,
       })),
     };
   }
@@ -139,7 +139,7 @@ const ProteinAlignment = () => {
             <React.Fragment>
               <Helmet>
                 {getTitle("proteinAlignment", {
-                  uniprot_canonical_ac: id && id ? id : ""
+                  uniprot_canonical_ac: id && id ? id : "",
                 })}
                 {getMeta("proteinAlignment")}
               </Helmet>
@@ -156,7 +156,7 @@ const ProteinAlignment = () => {
               <PageLoader pageLoading={pageLoading} />
               <DialogAlert
                 alertInput={alertDialogInput}
-                setOpen={input => {
+                setOpen={(input) => {
                   setAlertDialogInput({ show: input });
                 }}
               />
@@ -202,7 +202,7 @@ const ProteinAlignment = () => {
                   <Accordion.Collapse eventKey="0" out={collapsed.alignment ? "false" : "true"}>
                     <Card.Body className="card-padding-zero">
                       <div className="m-3">
-                        {newData &&
+                        {newData && (
                           <SequenceViewer
                             details={details}
                             consensus={consensus}
@@ -211,7 +211,7 @@ const ProteinAlignment = () => {
                             sequenceSearchText={sequenceSearchText}
                             multiSequence={true}
                           />
-                        }
+                        )}
                       </div>
                     </Card.Body>
                   </Accordion.Collapse>
@@ -236,7 +236,7 @@ const ProteinAlignment = () => {
                       />
                     </span>
                     <h4 className="gg-green d-inline">
-                      {stringConstants.sidebar.summary.displayname}:
+                      {stringConstants.sidebar.summary.displayname}
                     </h4>
                     <div className="float-right">
                       <Accordion.Toggle
@@ -261,9 +261,7 @@ const ProteinAlignment = () => {
                           {data && data.algorithm && (
                             <tr className="table-row">
                               <td className="trclass">
-                                <strong>
-                                  {proteinStrings.algorithm.name}:{" "}
-                                </strong>
+                                <strong>{proteinStrings.algorithm.name}: </strong>
                                 <a
                                   href={data.algorithm.url}
                                   target="_blank"
@@ -276,35 +274,24 @@ const ProteinAlignment = () => {
                           )}
                           <tr className="table-row">
                             <td className="trclass">
-                              <strong>
-                                {" "}
-                                {proteinStrings.identical_positions.name}:
-                              </strong>{" "}
+                              <strong> {proteinStrings.identical_positions.name}:</strong>{" "}
                               {data.identical_positions}
                             </td>
                           </tr>
                           <tr className="table-row">
                             <td className="trclass">
-                              <strong>
-                                {" "}
-                                {proteinStrings.similar_positions.name}:
-                              </strong>{" "}
+                              <strong> {proteinStrings.similar_positions.name}:</strong>{" "}
                               {data.similar_positions}
                             </td>
                           </tr>
                           <tr className="table-row">
                             <td className="trclass">
-                              <strong>
-                                {" "}
-                                {proteinStrings.cluster_id.name}:
-                              </strong>{" "}
-                              {data.cls_id}
+                              <strong> {proteinStrings.cluster_id.name}:</strong> {data.cls_id}
                             </td>
                           </tr>
                           <tr className="table-row">
                             <td className="trclass">
-                              <strong>{proteinStrings.identity.name}:</strong>{" "}
-                              {data.identity}
+                              <strong>{proteinStrings.identity.name}:</strong> {data.identity}
                             </td>
                           </tr>
                         </tbody>

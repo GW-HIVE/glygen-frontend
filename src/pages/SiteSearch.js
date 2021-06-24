@@ -37,6 +37,12 @@ const SiteSearch = (props) => {
   );
 
   useEffect(() => {
+    const anchorElement = props.history.location.hash;
+    if (anchorElement) {
+      setProActTabKey(anchorElement.substr(1));
+    } else {
+      setProActTabKey("Site-Search");
+    }
     if (id === undefined) setPageLoading(false);
     else if (id) {
       // console.log("SuperSearch");
