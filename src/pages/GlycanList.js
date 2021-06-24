@@ -144,14 +144,14 @@ const GlycanList = props => {
     });
   };
 
-  useEffect(() => {
-    if (data && data.length === 0) {
-      setAlertDialogInput({
-        show: true,
-        id: "no-result-found"
-      });
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.length === 0) {
+  //     setAlertDialogInput({
+  //       show: true,
+  //       id: "no-result-found"
+  //     });
+  //   }
+  // }, [data]);
 
   const handleFilterChange = newFilter => {
     // debugger;
@@ -217,45 +217,45 @@ const GlycanList = props => {
       <FeedbackWidget />
       {/* <Container maxWidth="xl" className="gg-container5"> */}
       <div className="gg-baseline list-page-container">
-        {data && data.length !== 0 && (
-          <div className="list-sidebar-container">
-            <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
-              <div className="reset-filter-btn-container">
-                <Button
-                  type="button"
-                  className="gg-btn-blue reset-filter-btn"
-                  onClick={() => {
-                    window.location.reload();
-                  }}
-                >
-                  Reset Filters
-                </Button>
-              </div>
-              <ListFilter
-                availableOptions={availableFilters}
-                selectedOptions={appliedFilters}
-                onFilterChange={handleFilterChange}
-              />
-              <div className="reset-filter-btn-container ">
-                <Button
-                  type="button"
-                  className="gg-btn-blue reset-filter-btn"
-                  onClick={() => {
-                    window.location.reload();
-                  }}
-                >
-                  Reset Filters
-                </Button>
-              </div>
+        {/* {dataz && dataz.length !== 0 && ( */}
+        <div className="list-sidebar-container">
+          <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
+            <div className="reset-filter-btn-container">
+              <Button
+                type="button"
+                className="gg-btn-blue reset-filter-btn"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                Reset Filters
+              </Button>
             </div>
-            <div
-              className="list-sidebar-opener sidebar-arrow-center"
-              onClick={() => setSidebar(!sidebar)}
-            >
-              {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+            <ListFilter
+              availableOptions={availableFilters}
+              selectedOptions={appliedFilters}
+              onFilterChange={handleFilterChange}
+            />
+            <div className="reset-filter-btn-container ">
+              <Button
+                type="button"
+                className="gg-btn-blue reset-filter-btn"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                Reset Filters
+              </Button>
             </div>
           </div>
-        )}
+          <div
+            className="list-sidebar-opener sidebar-arrow-center"
+            onClick={() => setSidebar(!sidebar)}
+          >
+            {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+          </div>
+        </div>
+        {/* )} */}
         <div className="sidebar-page">
           <div class="list-mainpage-container">
             <PageLoader pageLoading={pageLoading} />
@@ -308,7 +308,7 @@ const GlycanList = props => {
                   idField="glytoucan_ac"
                 />
               )}
-              {/* {data && data.length === 0 && <p>No data.</p>} */}
+              {data && data.length === 0 && <p>No data.</p>}
             </section>
           </div>
         </div>
