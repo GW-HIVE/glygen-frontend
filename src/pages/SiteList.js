@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getSuperSearchList, getSiteSearchInit } from "../data/supersearch";
 import SitequerySummary from "../components/SitequerySummary";
-import { SITE_COLUMNS } from "../data/supersearch";
+// import { SITE_COLUMNS } from "../data/supersearch";
 import PaginatedTable from "../components/PaginatedTable";
 import Container from "@material-ui/core/Container";
 import FeedbackWidget from "../components/FeedbackWidget";
@@ -17,18 +17,22 @@ import PageLoader from "../components/load/PageLoader";
 import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import DownloadButton from "../components/DownloadButton";
+import LineTooltip from "../components/tooltip/LineTooltip";
+import { Link } from "react-router-dom";
+const proteinStrings = stringConstants.protein.common;
+
 // import { GLYGEN_BASENAME } from "../envVariables";
 
 // const proteinStrings = stringConstants.protein.common;
 
-const SiteList = props => {
+const SiteList = (props) => {
   let { id } = useParams();
   let { searchId } = useParams();
   const [data, setData] = useState([]);
   const [query, setQuery] = useState([]);
   const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
-  const [selectedColumns, setSelectedColumns] = useState(SITE_COLUMNS);
+  // const [selectedColumns, setSelectedColumns] = useState(SITE_COLUMNS);
   const [page, setPage] = useState(1);
   const [sizePerPage, setSizePerPage] = useState(20);
   const [totalSize, setTotalSize] = useState(0);
@@ -45,10 +49,7 @@ const SiteList = props => {
 
     logActivity("user", id);
 
-    const dataPromise = Promise.all([
-      getSiteSearchInit(),
-      getSuperSearchList(id)
-    ]);
+    const dataPromise = Promise.all([getSiteSearchInit(), getSuperSearchList(id)]);
 
     dataPromise.then(([{ data: initData }, { data }]) => {
       if (data.error_code) {
@@ -66,7 +67,7 @@ const SiteList = props => {
       }
     });
 
-    dataPromise.catch(function(error) {
+    dataPromise.catch(function (error) {
       let message = "list api call";
       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
     });
@@ -102,28 +103,21 @@ const SiteList = props => {
   //     });
   // }, []);
 
-  const handleTableChange = (
-    type,
-    { page, sizePerPage, sortField, sortOrder }
-  ) => {
+  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     setPageLoading(true);
-    getSuperSearchList(
-      id,
-      (page - 1) * sizePerPage + 1,
-      sizePerPage,
-      sortField,
-      sortOrder
-    ).then(({ data }) => {
-      setPageLoading(false);
-      if (!data.error_code) {
-        setData(data.results);
-        setTimeStamp(data.cache_info.ts);
-        setPagination(data.pagination);
-        setTotalSize(data.pagination.total_length);
+    getSuperSearchList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
+      ({ data }) => {
+        setPageLoading(false);
+        if (!data.error_code) {
+          setData(data.results);
+          setTimeStamp(data.cache_info.ts);
+          setPagination(data.pagination);
+          setTotalSize(data.pagination.total_length);
+        }
       }
-    });
+    );
   };
 
   const handleModifySearch = () => {
@@ -138,6 +132,86 @@ const SiteList = props => {
     return { backgroundColor: rowIdx % 2 === 0 ? "red" : "blue" };
   }
 
+  const yesNoFormater = (value, row) => {
+    return value && value.length ? "YES" : "NO";
+  };
+
+  const siteColumns = [
+    {
+      dataField: proteinStrings.shortName,
+      text: proteinStrings.uniprot_accession.name,
+      sort: true,
+      selected: true,
+      formatter: (value, row) => (
+        <LineTooltip text="View details">
+          <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+            {row.uniprot_canonical_ac}
+          </Link>
+        </LineTooltip>
+      ),
+    },
+    {
+      dataField: "hit_score",
+      text: "Hit Score",
+      sort: true,
+    },
+    {
+      dataField: "start_pos",
+      text: "Start Pos",
+      sort: true,
+      formatter: (value, row) =>
+        row.start_pos === row.end_pos ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${row.start_pos}`}>
+              {row.start_pos}
+            </Link>
+          </LineTooltip>
+        ) : (
+          value
+        ),
+    },
+    {
+      dataField: "end_pos",
+      text: "End Pos",
+      sort: true,
+      formatter: (value, row) =>
+        row.start_pos === row.end_pos ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${row.end_pos}`}>
+              {row.end_pos}
+            </Link>
+          </LineTooltip>
+        ) : (
+          value
+        ),
+    },
+    {
+      dataField: "snv",
+      text: "SNV",
+      formatter: yesNoFormater,
+    },
+    {
+      dataField: "glycosylation",
+      text: "Glycosylation",
+      formatter: yesNoFormater,
+    },
+    {
+      dataField: "mutagenesis",
+      text: "Mutagenesis",
+      formatter: yesNoFormater,
+    },
+    {
+      dataField: "glycation",
+      text: "Glycation",
+      formatter: yesNoFormater,
+    },
+    {
+      dataField: "phosphorylation",
+      text: "Phosphorylation",
+      formatter: yesNoFormater,
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -150,7 +224,7 @@ const SiteList = props => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={input => {
+          setOpen={(input) => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -169,28 +243,26 @@ const SiteList = props => {
           <DownloadButton
             types={[
               {
-                display:
-                  stringConstants.download.proteinsite_csvdata.displayname,
+                display: stringConstants.download.proteinsite_csvdata.displayname,
                 type: "csv",
-                data: "site_list"
+                data: "site_list",
               },
               {
-                display:
-                  stringConstants.download.proteinsite_jsondata.displayname,
+                display: stringConstants.download.proteinsite_jsondata.displayname,
                 type: "json",
-                data: "site_list"
-              }
+                data: "site_list",
+              },
             ]}
             dataId={id}
             itemType="site"
           />
 
-          {/* {selectedColumns && selectedColumns.length !== 0 && ( */}
+          {/* {siteColumns && siteColumns.length !== 0 && ( */}
           {!!(data && data.length) && (
             <PaginatedTable
               trStyle={rowStyleFormat}
               data={data}
-              columns={selectedColumns}
+              columns={siteColumns}
               page={page}
               pagination={pagination}
               sizePerPage={sizePerPage}

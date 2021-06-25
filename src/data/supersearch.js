@@ -28,7 +28,7 @@ export const getSuperSearchList = (
     offset: offset,
     sort: sort,
     limit: limit,
-    order: order
+    order: order,
   };
   const queryParamString = JSON.stringify(queryParams);
   const url = `/supersearch/list?query=${queryParamString}`;
@@ -55,22 +55,15 @@ export const getSiteSearchInit = () => {
  * Gets JSON for super search.
  * @param {object} formObject - super search JSON query object.
  */
-export const getSuperSearch = formObject => {
+export const getSuperSearch = (formObject) => {
   var json = "query=" + JSON.stringify(formObject);
   const url = "/supersearch/search?" + json;
   return getJson(url);
 };
 
-const constructSiteSearchObject = queryObject => {
-  const {
-    proteinId,
-    aminoType,
-    annotationOperation,
-    annotations,
-    position,
-    minRange,
-    maxRange
-  } = queryObject;
+const constructSiteSearchObject = (queryObject) => {
+  const { proteinId, aminoType, annotationOperation, annotations, position, minRange, maxRange } =
+    queryObject;
 
   let min = minRange || position || maxRange;
   let max = maxRange || position || minRange;
@@ -87,9 +80,9 @@ const constructSiteSearchObject = queryObject => {
           path: "uniprot_ac",
           order: index,
           operator: "$eq",
-          string_value: []
-        }))
-      }
+          string_value: [],
+        })),
+      },
     });
   }
 
@@ -99,8 +92,8 @@ const constructSiteSearchObject = queryObject => {
       query: {
         aggregator: "$and",
         aggregated_list: [],
-        unaggregated_list: []
-      }
+        unaggregated_list: [],
+      },
     };
     let order = 0;
 
@@ -109,18 +102,17 @@ const constructSiteSearchObject = queryObject => {
         path: "site_seq",
         order,
         operator: "$eq",
-        string_value: aminoType
+        string_value: aminoType,
       });
       order++;
     }
-
 
     if (min || max) {
       siteQuery.query.unaggregated_list.push({
         path: "start_pos",
         order,
         operator: "$gte",
-        numeric_value: parseInt(min)
+        numeric_value: parseInt(min),
       });
 
       order++;
@@ -129,7 +121,7 @@ const constructSiteSearchObject = queryObject => {
         path: "end_pos",
         order,
         operator: "$lte",
-        numeric_value: parseInt(max)
+        numeric_value: parseInt(max),
       });
 
       order++;
@@ -141,7 +133,7 @@ const constructSiteSearchObject = queryObject => {
         const aggregator = {
           aggregator: "$or",
           aggregated_list: [],
-          unaggregated_list: []
+          unaggregated_list: [],
         };
 
         for (let annotation of annotations) {
@@ -149,7 +141,7 @@ const constructSiteSearchObject = queryObject => {
             path: annotation,
             order,
             operator: "$eq",
-            string_value: "true"
+            string_value: "true",
           });
           order++;
         }
@@ -165,7 +157,7 @@ const constructSiteSearchObject = queryObject => {
             path: annotation,
             order,
             operator: "$eq",
-            string_value: "true"
+            string_value: "true",
           });
           order++;
         }
@@ -176,104 +168,16 @@ const constructSiteSearchObject = queryObject => {
   }
 
   return {
-    concept_query_list: formObject
+    concept_query_list: formObject,
   };
 };
 
-export const getSiteSearch = async queryObject => {
+export const getSiteSearch = async (queryObject) => {
   const formObject = constructSiteSearchObject(queryObject);
   return getSuperSearch(formObject);
 };
 
-const yesNoFormater = (value, row) => {
-  return value && value.length ? "YES" : "NO";
-};
-
-export const SITE_COLUMNS = [
-  {
-    dataField: proteinStrings.shortName,
-    text: proteinStrings.uniprot_accession.name,
-    sort: true,
-    selected: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-
-    formatter: (value, row) => (
-      <LineTooltip text="View details">
-        <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
-          {row.uniprot_canonical_ac}
-        </Link>
-      </LineTooltip>
-    )
-  },
-  {
-    dataField: "hit_score",
-    text: "Hit Score",
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  },
-  {
-    dataField: "start_pos",
-    text: "Start Pos",
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  },
-  {
-    dataField: "end_pos",
-    text: "End Pos",
-    sort: true,
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    }
-  },
-  {
-    dataField: "snv",
-    text: "SNV",
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: yesNoFormater
-  },
-  {
-    dataField: "glycosylation",
-    text: "Glycosylation",
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: yesNoFormater
-  },
-  {
-    dataField: "mutagenesis",
-    text: "Mutagenesis",
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: yesNoFormater
-  },
-  {
-    dataField: "glycation",
-    text: "Glycation",
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: yesNoFormater
-  },
-  {
-    dataField: "phosphorylation",
-    text: "Phosphorylation",
-    headerStyle: (colum, colIndex) => {
-      return { backgroundColor: "#4B85B6", color: "white" };
-    },
-    formatter: yesNoFormater
-  }
-];
-
-export const createSiteQuerySummary = query => {
+export const createSiteQuerySummary = (query) => {
   let result = {};
   let start;
   let end;
@@ -290,9 +194,7 @@ export const createSiteQuerySummary = query => {
           } else if (listItem.path === "site_seq") {
             result.aminoType = listItem.string_value;
           } else if (
-            ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(
-              listItem.path
-            )
+            ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(listItem.path)
           ) {
             if (!result.annotations) {
               result.annotations = [];
