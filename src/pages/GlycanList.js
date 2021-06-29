@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useReducer } from "react";
+
 import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS } from "../data/glycan";
@@ -69,6 +71,7 @@ const GlycanList = props => {
 
   useEffect(() => {
     setPageLoading(true);
+
     setPage(1);
     logActivity("user", id);
     getGlycanList(id, 1, sizePerPage, "hit_score", "desc", appliedFilters)
@@ -139,7 +142,6 @@ const GlycanList = props => {
       setPagination(data.pagination);
       setAvailableFilters(data.filters.available);
       setTotalSize(data.pagination.total_length);
-
       setPageLoading(false);
     });
   };
@@ -217,45 +219,46 @@ const GlycanList = props => {
       <FeedbackWidget />
       {/* <Container maxWidth="xl" className="gg-container5"> */}
       <div className="gg-baseline list-page-container">
-        {/* {dataz && dataz.length !== 0 && ( */}
-        <div className="list-sidebar-container">
-          <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
-            <div className="reset-filter-btn-container">
-              <Button
-                type="button"
-                className="gg-btn-blue reset-filter-btn"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Reset Filters
-              </Button>
+        {availableFilters && availableFilters.length !== 0 && (
+          <div className="list-sidebar-container">
+            <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
+              <div className="reset-filter-btn-container">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
+
+              <ListFilter
+                availableOptions={availableFilters}
+                selectedOptions={appliedFilters}
+                onFilterChange={handleFilterChange}
+              />
+              <div className="reset-filter-btn-container ">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
             </div>
-            <ListFilter
-              availableOptions={availableFilters}
-              selectedOptions={appliedFilters}
-              onFilterChange={handleFilterChange}
-            />
-            <div className="reset-filter-btn-container ">
-              <Button
-                type="button"
-                className="gg-btn-blue reset-filter-btn"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Reset Filters
-              </Button>
+            <div
+              className="list-sidebar-opener sidebar-arrow-center"
+              onClick={() => setSidebar(!sidebar)}
+            >
+              {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
             </div>
           </div>
-          <div
-            className="list-sidebar-opener sidebar-arrow-center"
-            onClick={() => setSidebar(!sidebar)}
-          >
-            {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-          </div>
-        </div>
-        {/* )} */}
+        )}
         <div className="sidebar-page">
           <div class="list-mainpage-container">
             <PageLoader pageLoading={pageLoading} />
@@ -294,7 +297,7 @@ const GlycanList = props => {
                 ]}
                 dataId={id}
               />
-              {data && data.length !== 0 && (
+              {data && (
                 <PaginatedTable
                   trStyle={rowStyleFormat}
                   data={data}
@@ -306,9 +309,10 @@ const GlycanList = props => {
                   defaultSortField="hit_score"
                   defaultSortOrder="desc"
                   idField="glytoucan_ac"
+                  noDataIndication={"No data available."}
                 />
               )}
-              {data && data.length === 0 && <p>No data.</p>}
+              {/* {data && data.length === 0 && <p>No data.</p>} */}
             </section>
           </div>
         </div>

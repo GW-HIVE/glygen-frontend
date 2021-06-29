@@ -22,7 +22,6 @@ const ListFilterOptionGroup = props => {
   const [annotationOperation, setAnnotationOperation] = useState(
     type.operator || "OR"
   );
-
   // sort by order field
   const sortedOptions = [...type.options].sort((a, b) => {
     if (a.order < b.order) return -1;
@@ -126,6 +125,13 @@ const ListFilter = ({
           : false
       }))
     };
+  });
+
+  // sort by order field
+  filterGroupData.sort((a, b) => {
+    if (a.order < b.order) return -1;
+    if (b.order < a.order) return 1;
+    return 0;
   });
 
   return (
