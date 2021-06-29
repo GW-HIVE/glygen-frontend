@@ -191,45 +191,45 @@ const ProteinList = props => {
 
       <FeedbackWidget />
       <div className="gg-baseline list-page-container">
-        {/* {data && data.length !== 0 && ( */}
-        <div className="list-sidebar-container">
-          <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
-            <div className="reset-filter-btn-container">
-              <Button
-                type="button"
-                className="gg-btn-blue reset-filter-btn"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Reset Filters
-              </Button>
+        {availableFilters && availableFilters.length !== 0 && (
+          <div className="list-sidebar-container">
+            <div className={"list-sidebar" + (sidebar ? "" : " closed")}>
+              <div className="reset-filter-btn-container">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
+              <ListFilter
+                availableOptions={availableFilters}
+                selectedOptions={appliedFilters}
+                onFilterChange={handleFilterChange}
+              />
+              <div className="reset-filter-btn-container ">
+                <Button
+                  type="button"
+                  className="gg-btn-blue reset-filter-btn"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Reset Filters
+                </Button>
+              </div>
             </div>
-            <ListFilter
-              availableOptions={availableFilters}
-              selectedOptions={appliedFilters}
-              onFilterChange={handleFilterChange}
-            />
-            <div className="reset-filter-btn-container ">
-              <Button
-                type="button"
-                className="gg-btn-blue reset-filter-btn"
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
-                Reset Filters
-              </Button>
+            <div
+              className="list-sidebar-opener sidebar-arrow-center"
+              onClick={() => setSidebar(!sidebar)}
+            >
+              {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
             </div>
           </div>
-          <div
-            className="list-sidebar-opener sidebar-arrow-center"
-            onClick={() => setSidebar(!sidebar)}
-          >
-            {sidebar ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-          </div>
-        </div>
-        {/* )} */}
+        )}
         <div className="sidebar-page">
           <div class="list-mainpage-container list-mainpage-container">
             <PageLoader pageLoading={pageLoading} />
@@ -275,7 +275,7 @@ const ProteinList = props => {
                 dataId={id}
                 itemType="protein"
               />
-              {data && data.length !== 0 && (
+              {data && (
                 <PaginatedTable
                   trStyle={rowStyleFormat}
                   data={data}
@@ -287,6 +287,7 @@ const ProteinList = props => {
                   defaultSortField="hit_score"
                   defaultSortOrder="desc"
                   idField="uniprot_canonical_ac"
+                  noDataIndication={"No data available."}
                 />
               )}
             </section>
