@@ -885,16 +885,15 @@ const ProteinDetail = (props) => {
       },
     },
     {
-      dataField: "annotation",
+      dataField: "comment",
       text: "Filter Annotations",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
-          backgroundColor: "#4B85B6",
-          color: "white",
           width: "20%",
         };
       },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
 
     {
@@ -1201,25 +1200,18 @@ const ProteinDetail = (props) => {
       text: proteinStrings.evidence.name,
       headerStyle: (colum, colIndex) => {
         return {
-          backgroundColor: "#4B85B6",
-          color: "white",
           width: "20%",
         };
       },
       formatter: (cell, row) => {
-        return <EvidenceList key={row.annotation} evidences={groupEvidences(cell)} />;
+        return <EvidenceList key={row.comment} evidences={groupEvidences(cell)} />;
       },
     },
     {
-      dataField: "annotation",
+      dataField: "comment",
       text: proteinStrings.annotation_site.shortName,
       sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white",
-        };
-      },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
   ];
   const proAnnotationColumns = [
@@ -1234,7 +1226,7 @@ const ProteinDetail = (props) => {
         };
       },
       formatter: (cell, row) => {
-        return <EvidenceList key={row.annotation} evidences={groupEvidences(cell)} />;
+        return <EvidenceList key={row.comment} evidences={groupEvidences(cell)} />;
       },
     },
     {
@@ -2610,7 +2602,7 @@ const ProteinDetail = (props) => {
                           data={ptmAnnotation}
                           columns={ptmAnnotationColumns}
                           onClickTarget={"#ptm_annotation"}
-                          // defaultSortField={"annotation"}
+                          // defaultSortField={"comment"}
                         />
                       )}
                       {!ptm_annotation && <p>No data available.</p>}
@@ -2656,7 +2648,7 @@ const ProteinDetail = (props) => {
                           data={pro_annotation}
                           columns={proAnnotationColumns}
                           onClickTarget={"#pro_annotation"}
-                          // defaultSortField={"annotation"}
+                          // defaultSortField={"comment"}
                         />
                       )}
                       {!pro_annotation && <p>No data available.</p>}
