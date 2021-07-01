@@ -109,7 +109,7 @@ const SequenceLocationViewer = ({
         return "highlightO";
       } else if (match.type === "M") {
         return "highlightMutate";
-      } else if (match.type === "G") {
+      } else if (match.type === "L") {
         return "highlightGlycation";
       }
     }
@@ -385,8 +385,8 @@ const Siteview = ({ position, history }) => {
           return "M";
         case "glycosylation":
           return "N";
-        // case "mutagenesis":
-        //   return "L";
+        case "mutagenesis":
+          return "L";
         case "glycation":
           return "G";
         default:
@@ -399,7 +399,8 @@ const Siteview = ({ position, history }) => {
         detailData.sequence.sequence[position - 1];
 
       const filteredSites = detailData.all_sites.filter(
-        siteType => !["mutagenesis", "site_annotation"].includes(siteType.type)
+        siteType =>
+          !["phosphorylation", "site_annotation"].includes(siteType.type)
       );
       const mappedFilterSites = filteredSites.map(siteType =>
         siteType.site_list.map(site => ({
