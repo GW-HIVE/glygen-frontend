@@ -25,7 +25,7 @@ const proteinStrings = stringConstants.protein.common;
 
 // const proteinStrings = stringConstants.protein.common;
 
-const SiteList = (props) => {
+const SiteList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   const [data, setData] = useState([]);
@@ -49,7 +49,10 @@ const SiteList = (props) => {
 
     logActivity("user", id);
 
-    const dataPromise = Promise.all([getSiteSearchInit(), getSuperSearchList(id)]);
+    const dataPromise = Promise.all([
+      getSiteSearchInit(),
+      getSuperSearchList(id)
+    ]);
 
     dataPromise.then(([{ data: initData }, { data }]) => {
       if (data.error_code) {
@@ -67,7 +70,7 @@ const SiteList = (props) => {
       }
     });
 
-    dataPromise.catch(function (error) {
+    dataPromise.catch(function(error) {
       let message = "list api call";
       axiosError(error, id, message, setPageLoading, setAlertDialogInput);
     });
@@ -103,21 +106,28 @@ const SiteList = (props) => {
   //     });
   // }, []);
 
-  const handleTableChange = (type, { page, sizePerPage, sortField, sortOrder }) => {
+  const handleTableChange = (
+    type,
+    { page, sizePerPage, sortField, sortOrder }
+  ) => {
     setPage(page);
     setSizePerPage(sizePerPage);
     setPageLoading(true);
-    getSuperSearchList(id, (page - 1) * sizePerPage + 1, sizePerPage, sortField, sortOrder).then(
-      ({ data }) => {
-        setPageLoading(false);
-        if (!data.error_code) {
-          setData(data.results);
-          setTimeStamp(data.cache_info.ts);
-          setPagination(data.pagination);
-          setTotalSize(data.pagination.total_length);
-        }
+    getSuperSearchList(
+      id,
+      (page - 1) * sizePerPage + 1,
+      sizePerPage,
+      sortField,
+      sortOrder
+    ).then(({ data }) => {
+      setPageLoading(false);
+      if (!data.error_code) {
+        setData(data.results);
+        setTimeStamp(data.cache_info.ts);
+        setPagination(data.pagination);
+        setTotalSize(data.pagination.total_length);
       }
-    );
+    });
   };
 
   const handleModifySearch = () => {
@@ -133,7 +143,7 @@ const SiteList = (props) => {
   }
 
   const yesNoFormater = (value, row) => {
-    return value && value.length ? "YES" : "NO";
+    return value.charAt(0).toUpperCase() + value.slice(1);
   };
 
   const siteColumns = [
@@ -148,12 +158,12 @@ const SiteList = (props) => {
             {row.uniprot_canonical_ac}
           </Link>
         </LineTooltip>
-      ),
+      )
     },
     {
       dataField: "hit_score",
       text: "Hit Score",
-      sort: true,
+      sort: true
     },
     {
       dataField: "start_pos",
@@ -162,13 +172,17 @@ const SiteList = (props) => {
       formatter: (value, row) =>
         row.start_pos === row.end_pos ? (
           <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${row.start_pos}`}>
+            <Link
+              to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${
+                row.start_pos
+              }`}
+            >
               {row.start_pos}
             </Link>
           </LineTooltip>
         ) : (
           value
-        ),
+        )
     },
     {
       dataField: "end_pos",
@@ -177,39 +191,43 @@ const SiteList = (props) => {
       formatter: (value, row) =>
         row.start_pos === row.end_pos ? (
           <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${row.end_pos}`}>
+            <Link
+              to={`${routeConstants.siteview + row.uniprot_canonical_ac}/${
+                row.end_pos
+              }`}
+            >
               {row.end_pos}
             </Link>
           </LineTooltip>
         ) : (
           value
-        ),
+        )
     },
     {
       dataField: "snv",
       text: "SNV",
-      formatter: yesNoFormater,
+      formatter: yesNoFormater
     },
     {
       dataField: "glycosylation",
       text: "Glycosylation",
-      formatter: yesNoFormater,
+      formatter: yesNoFormater
     },
     {
       dataField: "mutagenesis",
       text: "Mutagenesis",
-      formatter: yesNoFormater,
-    },
-    {
-      dataField: "glycation",
-      text: "Glycation",
-      formatter: yesNoFormater,
-    },
-    {
-      dataField: "phosphorylation",
-      text: "Phosphorylation",
-      formatter: yesNoFormater,
-    },
+      formatter: yesNoFormater
+    }
+    // {
+    //   dataField: "glycation",
+    //   text: "Glycation",
+    //   formatter: yesNoFormater
+    // },
+    // {
+    //   dataField: "phosphorylation",
+    //   text: "Phosphorylation",
+    //   formatter: yesNoFormater
+    // }
   ];
 
   return (
@@ -224,7 +242,7 @@ const SiteList = (props) => {
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
           alertInput={alertDialogInput}
-          setOpen={(input) => {
+          setOpen={input => {
             setAlertDialogInput({ show: input });
           }}
         />
@@ -243,15 +261,17 @@ const SiteList = (props) => {
           <DownloadButton
             types={[
               {
-                display: stringConstants.download.proteinsite_csvdata.displayname,
+                display:
+                  stringConstants.download.proteinsite_csvdata.displayname,
                 type: "csv",
-                data: "site_list",
+                data: "site_list"
               },
               {
-                display: stringConstants.download.proteinsite_jsondata.displayname,
+                display:
+                  stringConstants.download.proteinsite_jsondata.displayname,
                 type: "json",
-                data: "site_list",
-              },
+                data: "site_list"
+              }
             ]}
             dataId={id}
             itemType="site"
