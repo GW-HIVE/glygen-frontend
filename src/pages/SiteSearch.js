@@ -24,7 +24,7 @@ import FeedbackWidget from "../components/FeedbackWidget";
  */
 const SiteSearch = (props) => {
   let { id } = useParams("");
-  const [proActTabKey, setProActTabKey] = useState("Site-Search");
+  const [siteActTabKey, setSiteActTabKey] = useState("Site-Search");
   const [pageLoading, setPageLoading] = useState(false);
   const [queryData, setQueryData] = useState([]);
   const [alertTextInput, setAlertTextInput] = useReducer(
@@ -39,10 +39,16 @@ const SiteSearch = (props) => {
   useEffect(() => {
     const anchorElement = props.history.location.hash;
     if (anchorElement) {
-      setProActTabKey(anchorElement.substr(1));
+      var hash = anchorElement.substr(1);
+      if (hash ===  "Site-Search" || hash ===  "Tutorial") {
+        setSiteActTabKey(hash);	
+      } else {
+        setSiteActTabKey("Site-Search");
+      }
     } else {
-      setProActTabKey("Site-Search");
+      setSiteActTabKey("Site-Search");
     }
+
     if (id === undefined) setPageLoading(false);
     else if (id) {
       // console.log("SuperSearch");
@@ -85,10 +91,10 @@ const SiteSearch = (props) => {
           <Tabs
             defaultActiveKey="Site-Search"
             transition={false}
-            activeKey={proActTabKey}
+            activeKey={siteActTabKey}
             mountOnEnter={true}
             unmountOnExit={true}
-            onSelect={(key) => setProActTabKey(key)}
+            onSelect={(key) => setSiteActTabKey(key)}
           >
             <Tab
               key="search"
