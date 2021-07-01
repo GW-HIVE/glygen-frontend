@@ -235,7 +235,7 @@ const GlycanDetail = (props) => {
           detailDataTemp.mass_pme = addCommas(detailDataTemp.mass_pme);
         }
         if (detailDataTemp.glycoct) {
-          detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\r\n");
+          detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\n");
         }
 
         if (detailDataTemp.composition) {
