@@ -365,7 +365,7 @@ const Siteview = ({ position, history }) => {
       dataAnnotations = [
         ...dataAnnotations,
         ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
-          position: mutagenesis.start_pos,
+          position: detailData.start_pos,
           label: "Mutagenesis",
           evidence: mutagenesis.evidence,
           typeAnnotate: "Mutagenesis"
@@ -430,6 +430,7 @@ const Siteview = ({ position, history }) => {
   }, [selectedPosition, detailData]);
 
   const updateTableData = (annotations, position) => {
+    debugger;
     setPositionData(
       annotations.filter(
         annotation => annotation.position === parseInt(position, 10)
