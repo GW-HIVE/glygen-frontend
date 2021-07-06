@@ -430,7 +430,6 @@ const Siteview = ({ position, history }) => {
   }, [selectedPosition, detailData]);
 
   const updateTableData = (annotations, position) => {
-    debugger;
     setPositionData(
       annotations.filter(
         annotation => annotation.position === parseInt(position, 10)
