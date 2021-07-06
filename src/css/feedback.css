@@ -97,7 +97,7 @@
   transition: 0.5s;
 }
  .sidebar-contact.active {
-   z-index: 11 !important;
+   z-index: 100 !important;
  }
 /* @media (min-width: 768px) and (max-width: 991px) {
   .sequence-dashboard .toggle {
