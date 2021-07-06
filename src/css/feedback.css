@@ -21,7 +21,7 @@
 }
 
 .sidebar-contact {
-  z-index: 1500;
+  z-index: 2;
   position: fixed;
   top: 50%;
   right: -380px;
@@ -91,13 +91,14 @@
   top: 2.7%;
   /* transform:translateY(-50%); */
   transition: 0.5s;
-  z-index: 10 !important;
 }
 .sequence-dashboard .toggle {
   top: 3%;
   transition: 0.5s;
-  z-index: -10 !important;
 }
+ .sidebar-contact.active {
+   z-index: 11 !important;
+ }
 /* @media (min-width: 768px) and (max-width: 991px) {
   .sequence-dashboard .toggle {
   top: 2%;
@@ -122,7 +123,6 @@
     top: 10%;
     right: 0;
     left: 87% !important;
-    z-index: 10 !important;
     /* transform: translatex(0); */
   }
   .scroll {
