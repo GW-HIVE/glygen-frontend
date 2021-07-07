@@ -21,7 +21,7 @@
 }
 
 .sidebar-contact {
-  z-index: 2;
+  z-index: 80;
   position: fixed;
   top: 50%;
   right: -380px;
