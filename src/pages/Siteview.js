@@ -373,6 +373,30 @@ const Siteview = ({ position, history }) => {
       ];
     }
 
+    if (detailData.phosphorylation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.phosphorylation
+          .sort(sortByStartPos)
+          .map(phosphorylation => ({
+            position: detailData.start_pos,
+            label: "Phosphorylation",
+            // evidence: phosphorylation.evidence,
+            typeAnnotate: "Phosphorylation"
+          }))
+      ];
+    }
+    if (detailData.glycation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.glycation.sort(sortByStartPos).map(glycation => ({
+          position: detailData.start_pos,
+          label: "Glycation",
+          // evidence: phosphorylation.evidence,
+          typeAnnotate: "Glycation"
+        }))
+      ];
+    }
     const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
       ...annotation,
       key: `${annotation.type}-${annotation.position}`,
@@ -389,6 +413,8 @@ const Siteview = ({ position, history }) => {
           return "L";
         case "glycation":
           return "G";
+        case "phosphorylation":
+          return "P";
         default:
       }
       return "";
@@ -399,8 +425,7 @@ const Siteview = ({ position, history }) => {
         detailData.sequence.sequence[position - 1];
 
       const filteredSites = detailData.all_sites.filter(
-        siteType =>
-          !["phosphorylation", "site_annotation"].includes(siteType.type)
+        siteType => !["site_annotation"].includes(siteType.type)
       );
       const mappedFilterSites = filteredSites.map(siteType =>
         siteType.site_list.map(site => ({
