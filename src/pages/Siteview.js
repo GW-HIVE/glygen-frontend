@@ -110,7 +110,11 @@ const SequenceLocationViewer = ({
       } else if (match.type === "M") {
         return "highlightMutate";
       } else if (match.type === "L") {
+        return "highlightMutagenesis ";
+      } else if (match.type === "G") {
         return "highlightGlycation";
+      } else if (match.type === "P") {
+        return "highlightPhosphorylation";
       }
     }
     return "";
@@ -381,7 +385,7 @@ const Siteview = ({ position, history }) => {
           .map(phosphorylation => ({
             position: detailData.start_pos,
             label: "Phosphorylation",
-            // evidence: phosphorylation.evidence,
+            evidence: phosphorylation.evidence,
             typeAnnotate: "Phosphorylation"
           }))
       ];
@@ -392,7 +396,7 @@ const Siteview = ({ position, history }) => {
         ...detailData.glycation.sort(sortByStartPos).map(glycation => ({
           position: detailData.start_pos,
           label: "Glycation",
-          // evidence: phosphorylation.evidence,
+          evidence: glycation.evidence,
           typeAnnotate: "Glycation"
         }))
       ];
