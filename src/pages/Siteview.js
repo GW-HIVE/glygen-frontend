@@ -109,8 +109,12 @@ const SequenceLocationViewer = ({
         return "highlightO";
       } else if (match.type === "M") {
         return "highlightMutate";
+      } else if (match.type === "L") {
+        return "highlightMutagenesis ";
       } else if (match.type === "G") {
         return "highlightGlycation";
+      } else if (match.type === "P") {
+        return "highlightPhosphorylation";
       }
     }
     return "";
@@ -257,7 +261,7 @@ const SequenceLocationViewer = ({
   );
 };
 
-const Siteview = ({ position }) => {
+const Siteview = ({ position, history }) => {
   let { id } = useParams();
 
   const [detailData, setDetailData] = useState({});
@@ -365,7 +369,7 @@ const Siteview = ({ position }) => {
       dataAnnotations = [
         ...dataAnnotations,
         ...detailData.mutagenesis.sort(sortByStartPos).map(mutagenesis => ({
-          position: mutagenesis.start_pos,
+          position: detailData.start_pos,
           label: "Mutagenesis",
           evidence: mutagenesis.evidence,
           typeAnnotate: "Mutagenesis"
@@ -373,6 +377,30 @@ const Siteview = ({ position }) => {
       ];
     }
 
+    if (detailData.phosphorylation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.phosphorylation
+          .sort(sortByStartPos)
+          .map(phosphorylation => ({
+            position: detailData.start_pos,
+            label: "Phosphorylation",
+            evidence: phosphorylation.evidence,
+            typeAnnotate: "Phosphorylation"
+          }))
+      ];
+    }
+    if (detailData.glycation) {
+      dataAnnotations = [
+        ...dataAnnotations,
+        ...detailData.glycation.sort(sortByStartPos).map(glycation => ({
+          position: detailData.start_pos,
+          label: "Glycation",
+          evidence: glycation.evidence,
+          typeAnnotate: "Glycation"
+        }))
+      ];
+    }
     const allDataAnnotations = dataAnnotations.map((annotation, index) => ({
       ...annotation,
       key: `${annotation.type}-${annotation.position}`,
@@ -385,10 +413,12 @@ const Siteview = ({ position }) => {
           return "M";
         case "glycosylation":
           return "N";
-        // case "mutagenesis":
-        //   return "L";
+        case "mutagenesis":
+          return "L";
         case "glycation":
           return "G";
+        case "phosphorylation":
+          return "P";
         default:
       }
       return "";
@@ -399,7 +429,7 @@ const Siteview = ({ position }) => {
         detailData.sequence.sequence[position - 1];
 
       const filteredSites = detailData.all_sites.filter(
-        siteType => !["mutagenesis", "site_annotation"].includes(siteType.type)
+        siteType => !["site_annotation"].includes(siteType.type)
       );
       const mappedFilterSites = filteredSites.map(siteType =>
         siteType.site_list.map(site => ({
@@ -648,13 +678,19 @@ const Siteview = ({ position }) => {
                 </Grid>
               </Row>
             </div>
-            {position.history && position.history.length > 1 && (
+            {/* back button */}
+            {history && history.length > 1 && (
               <div className="text-right gg-download-btn-width pb-3">
+                <Link to={`${routeConstants.proteinDetail}${id}`}>
+                  <Button type="button" className="gg-btn-blue mr-3">
+                    To Protein Details
+                  </Button>
+                </Link>
                 <Button
                   type="button"
                   className="gg-btn-blue"
                   onClick={() => {
-                    position.history.goBack();
+                    history.goBack();
                   }}
                 >
                   Back
@@ -694,14 +730,6 @@ const Siteview = ({ position }) => {
                   setAlertDialogInput({ show: input });
                 }}
               />
-              {/* Button */}
-              <div className="text-right gg-download-btn-width">
-                <Link to={`${routeConstants.proteinDetail}${id}`}>
-                  <Button type="button" className="gg-btn-blue">
-                    Back To Protein Details
-                  </Button>
-                </Link>
-              </div>
               {/* general */}
               <Accordion
                 id="General"
@@ -950,18 +978,20 @@ const Siteview = ({ position }) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <Row>
-                        <Col align="left">
-                          <SequenceLocationViewer
-                            sequence={sequence}
-                            annotations={annotations}
-                            position={selectedPosition}
-                            onSelectPosition={selectPosition}
-                          />
-
-                          {/* <pre>{JSON.stringify(positionData, null, 2)}</pre> */}
-                        </Col>
-                      </Row>
+                      {sequence && sequence.length !== 0 && (
+                        <Row>
+                          <Col align="left">
+                            <SequenceLocationViewer
+                              sequence={sequence}
+                              annotations={annotations}
+                              position={selectedPosition}
+                              onSelectPosition={selectPosition}
+                            />
+                            {/* <pre>{JSON.stringify(positionData, null, 2)}</pre> */}
+                          </Col>
+                        </Row>
+                      )}
+                      {!sequence.length && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -1009,19 +1039,30 @@ const Siteview = ({ position }) => {
                           columns={annotationColumns}
                         />
                       )}
-                      {!positionData && <p>No data available.</p>}
+                      {!positionData.length && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              {/* Button */}
-              <div className="text-right gg-download-btn-width">
-                <Link to={`${routeConstants.proteinDetail}${id}`}>
-                  <Button type="button" className="gg-btn-blue">
-                    Back To Protein Details
+              {/* back button */}
+              {history && history.length > 1 && (
+                <div className="text-right gg-download-btn-width pb-3">
+                  <Link to={`${routeConstants.proteinDetail}${id}`}>
+                    <Button type="button" className="gg-btn-blue mr-3">
+                      To Protein Details
+                    </Button>
+                  </Link>
+                  <Button
+                    type="button"
+                    className="gg-btn-blue"
+                    onClick={() => {
+                      history.goBack();
+                    }}
+                  >
+                    Back
                   </Button>
-                </Link>
-              </div>
+                </div>
+              )}
             </React.Fragment>
           </div>
         </Col>

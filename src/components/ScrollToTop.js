@@ -34,8 +34,6 @@ export default function ScrollToTop() {
           <Button className="gg-btn-outline">
             <VerticalAlignTopIcon fontSize="large" />
           </Button>
-
-          {/* <img src="https://i.postimg.cc/44Ytsk8Z/top-arrow-emoj.png" alt="Go to top" /> */}
         </div>
       )}
     </div>

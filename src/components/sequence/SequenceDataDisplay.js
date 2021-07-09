@@ -87,7 +87,7 @@ const SequenceRow = ({ uniprot_id, uniprot_ac, clickThruUrl, rowData, start, sel
       </>}
       
       {!header && <>
-        {multiSequence && <span className="aln-line-header"><Link to={clickThruUrl}>{uniprot_ac}</Link></span>}
+        {multiSequence && <span className="aln-line-header"><Link to={clickThruUrl ? clickThruUrl : "#"}>{uniprot_ac}</Link></span>}
         {multiSequence && <span className="aln-line-header">{uniprot_id}</span>}
         <span className="highlight-line-number aln-line-header">{(start === -1 ? ("  ") : (start + 1))}</span>
 

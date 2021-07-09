@@ -281,7 +281,7 @@ const ProteinDetail = (props) => {
     o_link_glycosylation: false,
     phosphorylation: false,
     glycation: false,
-    text_search: false
+    text_search: false,
   });
   const [geneNames, setGeneNames] = useState([]);
   const [recommendedGeneRows, setRecommendedGeneRows] = useState([]);
@@ -290,7 +290,6 @@ const ProteinDetail = (props) => {
   const [recommendedProteinRows, setRecommendedProteinRows] = useState([]);
   const [synonymProteinRows, setSynonymProteinRows] = useState([]);
   const [sequenceSearchText, setSequenceSearchText] = useState("");
-
 
   useEffect(() => {
     setPageLoading(true);
@@ -302,7 +301,7 @@ const ProteinDetail = (props) => {
       o_link_glycosylation: "o_link_glycosylation" === select,
       phosphorylation: "phosphorylation" === select,
       glycation: "glycation" === select,
-      text_search: false
+      text_search: false,
     });
 
     const getProteinDetailData = getProteinDetail(id);
@@ -318,7 +317,7 @@ const ProteinDetail = (props) => {
         setItemsPathway(getItemsPathway(data));
         setDetailData(data);
         let newSidebarData = sideBarData;
-        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+        if (!detailDataTemp.uniprot || detailDataTemp.uniprot.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "General", true);
         }
         if (!detailDataTemp.species || detailDataTemp.species.length === 0) {
@@ -333,10 +332,10 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.glycation || detailDataTemp.glycation.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Glycation", true);
         }
-        if (!detailDataTemp.names_synonyms || detailDataTemp.names_synonyms.length === 0) {
-          newSidebarData = setSidebarItemState(newSidebarData, "General", true);
+        if (!detailDataTemp.gene || detailDataTemp.gene.length === 0) {
+          newSidebarData = setSidebarItemState(newSidebarData, "Names", true);
         }
-        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+        if (!detailDataTemp.protein_names || detailDataTemp.protein_names.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Names", true);
         }
         if (!detailDataTemp.function || detailDataTemp.function.length === 0) {
@@ -354,7 +353,7 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.go_annotation || detailDataTemp.go_annotation.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "GO-Annotation", true);
         }
-        if (!detailDataTemp.glycan_ligands || detailDataTemp.glycan_ligands.length === 0) {
+        if (!detailDataTemp.interactions || detailDataTemp.interactions.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Glycan-Ligands", true);
         }
         if (!detailDataTemp.ptm_annotation || detailDataTemp.ptm_annotation.length === 0) {
@@ -375,9 +374,13 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.isoforms || detailDataTemp.isoforms.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Isoforms", true);
         }
-        if (!detailDataTemp.homologs || detailDataTemp.homologs.length === 0) {
-          newSidebarData = setSidebarItemState(newSidebarData, "Homologs", true);
-        }
+        // if (!detailDataTemp.homologs || detailDataTemp.homologs.length === 0) {
+        //   newSidebarData = setSidebarItemState(
+        //     newSidebarData,
+        //     "Homologs",
+        //     true
+        //   );
+        // }
         if (!detailDataTemp.orthologs || detailDataTemp.orthologs.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Homologs", true);
         }
@@ -390,7 +393,7 @@ const ProteinDetail = (props) => {
         if (!detailDataTemp.expression_disease || detailDataTemp.expression_disease.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Expression-Disease", true);
         }
-        if (!detailDataTemp.cross_ref || detailDataTemp.cross_ref.length === 0) {
+        if (!detailDataTemp.crossref || detailDataTemp.crossref.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Cross-References", true);
         }
         if (!detailDataTemp.history || detailDataTemp.history.length === 0) {
@@ -723,10 +726,12 @@ const ProteinDetail = (props) => {
         value ? (
           <LineTooltip text="View siteview details">
             <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-              {row.residue} {row.start_pos}
+              {row.residue}
+              {row.start_pos}
               {row.start_pos !== row.end_pos && (
                 <>
-                  to {row.residue} {row.end_pos}
+                  to {row.residue}
+                  {row.end_pos}
                 </>
               )}
             </Link>
@@ -884,16 +889,15 @@ const ProteinDetail = (props) => {
       },
     },
     {
-      dataField: "annotation",
+      dataField: "comment",
       text: "Filter Annotations",
       sort: true,
       headerStyle: (colum, colIndex) => {
         return {
-          backgroundColor: "#4B85B6",
-          color: "white",
           width: "20%",
         };
       },
+      formatter: (value, row) => <CollapsibleText text={row.comment} lines={2} />,
     },
 
     {
@@ -1200,8 +1204,6 @@ const ProteinDetail = (props) => {
       text: proteinStrings.evidence.name,
       headerStyle: (colum, colIndex) => {
         return {
-          backgroundColor: "#4B85B6",
-          color: "white",
           width: "20%",
         };
       },
@@ -1213,12 +1215,7 @@ const ProteinDetail = (props) => {
       dataField: "annotation",
       text: proteinStrings.annotation_site.shortName,
       sort: true,
-      headerStyle: (colum, colIndex) => {
-        return {
-          backgroundColor: "#4B85B6",
-          color: "white",
-        };
-      },
+      formatter: (value, row) => <CollapsibleText text={row.annotation} lines={2} />,
     },
   ];
   const proAnnotationColumns = [
@@ -1803,16 +1800,10 @@ const ProteinDetail = (props) => {
                         >
                           <Tab
                             eventKey="reported_with_glycan"
-                            // className='tab-content-padding'
                             title="Reported Sites with Glycan"
                             //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
                           >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                                 <ClientPaginatedTable
                                   data={addIndex(glycosylationWithImage)}
@@ -1839,7 +1830,9 @@ const ProteinDetail = (props) => {
                                   <ClientPaginatedTable
                                     data={glycosylationWithoutImage}
                                     columns={glycoSylationColumns.filter(
-                                      (column) => column.dataField !== "glytoucan_ac"
+                                      (column) =>
+                                        column.dataField !== "image" &&
+                                        column.dataField !== "glytoucan_ac"
                                     )}
                                     onClickTarget={"#glycosylation"}
                                     defaultSortField="start_pos"
@@ -1851,21 +1844,17 @@ const ProteinDetail = (props) => {
                           </Tab>
                           <Tab
                             eventKey="predicted"
-                            className="tab-content-padding"
                             title="Predicted Only"
                             //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
                           >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {glycosylationPredicted && glycosylationPredicted.length > 0 && (
                                 <ClientPaginatedTable
                                   data={glycosylationPredicted}
                                   columns={glycoSylationColumns.filter(
-                                    (column) => column.dataField !== "glytoucan_ac"
+                                    (column) =>
+                                      column.dataField !== "image" &&
+                                      column.dataField !== "glytoucan_ac"
                                   )}
                                   onClickTarget={"#glycosylation"}
                                   defaultSortField="start_pos"
@@ -1877,24 +1866,20 @@ const ProteinDetail = (props) => {
                           </Tab>
                           <Tab
                             eventKey="automatic_literature_mining"
-                            className="tab-content-padding"
                             title="Text Mining"
                             // disabled={
                             //   !glycosylationMining ||
                             //   glycosylationMining.length === 0
                             // }
                           >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {glycosylationMining && glycosylationMining.length > 0 && (
                                 <ClientPaginatedTable
                                   data={glycosylationMining}
                                   columns={glycoSylationColumns.filter(
-                                    (column) => column.dataField !== "glytoucan_ac"
+                                    (column) =>
+                                      column.dataField !== "image" &&
+                                      column.dataField !== "glytoucan_ac"
                                   )}
                                   onClickTarget={"#glycosylation"}
                                   defaultSortField="start_pos"
@@ -2163,7 +2148,7 @@ const ProteinDetail = (props) => {
                       <div hover="true" fluid="true">
                         <FunctionList functions={functions} />
                       </div>
-                      {functions && <p className="no-data-msg-publication">No data available.</p>}
+                      {!functions && <p className="no-data-msg-publication">No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2213,44 +2198,64 @@ const ProteinDetail = (props) => {
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                    <Grid container className="content-box">
+                      <Grid container className="content-box">
                         <Grid item>
                           <div>
-                            {detailData.sequence && <SequenceViewer
-                              sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
-                              details={[{
-                                uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
-                                glycosylation : detailData.glycosylation,
-                                snv : detailData.snv,
-                                site_annotation : detailData.site_annotation,
-                                phosphorylation : detailData.phosphorylation,
-                                glycation : detailData.glycation,
-                              }]}
-                              multiSequence={false}
-                              selectedHighlights={selectedHighlights}
-                              sequenceSearchText={sequenceSearchText}
-                            />}
-                            </div>
-                          </Grid>
-                          <Grid item className="content-active">
-                            {detailData.sequence && <SequenceHighlighter 
-                                sequenceObject={[{aln : sequence.sequence, uniprot_ac : uniprot.uniprot_canonical_ac, uniprot_id: ""}]}
-                                details={[{
-                                  uniprot_canonical_ac : uniprot.uniprot_canonical_ac,
-                                  glycosylation : detailData.glycosylation,
-                                  snv : detailData.snv,
-                                  site_annotation : detailData.site_annotation,
-                                  phosphorylation : detailData.phosphorylation,
-                                  glycation : detailData.glycation,
-                                }]}
-                                showNumbers={true}
+                            {detailData.sequence && (
+                              <SequenceViewer
+                                sequenceObject={[
+                                  {
+                                    aln: sequence.sequence,
+                                    uniprot_ac: uniprot.uniprot_canonical_ac,
+                                    uniprot_id: "",
+                                  },
+                                ]}
+                                details={[
+                                  {
+                                    uniprot_canonical_ac: uniprot.uniprot_canonical_ac,
+                                    glycosylation: detailData.glycosylation,
+                                    snv: detailData.snv,
+                                    site_annotation: detailData.site_annotation,
+                                    phosphorylation: detailData.phosphorylation,
+                                    glycation: detailData.glycation,
+                                  },
+                                ]}
+                                multiSequence={false}
                                 selectedHighlights={selectedHighlights}
-                                setSelectedHighlights={setSelectedHighlights}
                                 sequenceSearchText={sequenceSearchText}
-                                setSequenceSearchText={setSequenceSearchText}
-                              />}
-                          </Grid>
+                              />
+                            )}
+                          </div>
                         </Grid>
+                        <Grid item className="content-active">
+                          {detailData.sequence && (
+                            <SequenceHighlighter
+                              sequenceObject={[
+                                {
+                                  aln: sequence.sequence,
+                                  uniprot_ac: uniprot.uniprot_canonical_ac,
+                                  uniprot_id: "",
+                                },
+                              ]}
+                              details={[
+                                {
+                                  uniprot_canonical_ac: uniprot.uniprot_canonical_ac,
+                                  glycosylation: detailData.glycosylation,
+                                  snv: detailData.snv,
+                                  site_annotation: detailData.site_annotation,
+                                  phosphorylation: detailData.phosphorylation,
+                                  glycation: detailData.glycation,
+                                },
+                              ]}
+                              showNumbers={true}
+                              selectedHighlights={selectedHighlights}
+                              setSelectedHighlights={setSelectedHighlights}
+                              sequenceSearchText={sequenceSearchText}
+                              setSequenceSearchText={setSequenceSearchText}
+                            />
+                          )}
+                        </Grid>
+                      </Grid>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -2313,17 +2318,11 @@ const ProteinDetail = (props) => {
                         >
                           <Tab
                             eventKey="with_disease"
-                            // className='tab-content-padding'
                             title="Disease associated
 														Mutations"
                             //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
                           >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {mutataionWithdisease && mutataionWithdisease.length > 0 && (
                                 <ClientPaginatedTable
                                   data={mutataionWithdisease}

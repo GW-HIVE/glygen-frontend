@@ -651,7 +651,7 @@
         "id": "gene_names_uniprotkb"
       },
       "protein_names": {
-        "name": "UniProt Name",
+        "name": "UniProtKB Name",
         "shortName": "protein_name",
         "tooltip": {
           "title": "UniProt Name",
@@ -1678,7 +1678,7 @@
       "displayname": "Referenced Glycans",
       "tooltip": "Referenced Glycans information"
     },
-      "cell_line": {
+    "cell_line": {
       "id": "cell_lLine",
       "displayname": "Cell Line",
       "tooltip": "Cell Line information"

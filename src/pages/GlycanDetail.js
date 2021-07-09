@@ -235,7 +235,7 @@ const GlycanDetail = (props) => {
           detailDataTemp.mass_pme = addCommas(detailDataTemp.mass_pme);
         }
         if (detailDataTemp.glycoct) {
-          detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\r\n");
+          detailDataTemp.glycoct = detailDataTemp.glycoct.replace(/ /g, "\n");
         }
 
         if (detailDataTemp.composition) {
@@ -270,7 +270,7 @@ const GlycanDetail = (props) => {
         setPageLoading(false);
         //new side bar
         let newSidebarData = sideBarData;
-        if (!detailDataTemp.general || detailDataTemp.general.length === 0) {
+        if (!detailDataTemp.glytoucan || detailDataTemp.glytoucan.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "General", true);
         }
         if (!detailDataTemp.species || detailDataTemp.species.length === 0) {
@@ -289,7 +289,7 @@ const GlycanDetail = (props) => {
         if (!detailDataTemp.interactions || detailDataTemp.interactions.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Glycan-Binding-Protein", true);
         }
-        if (!detailDataTemp.bio_Enzymes || detailDataTemp.bio_Enzymes.length === 0) {
+        if (!detailDataTemp.enzyme || detailDataTemp.enzyme.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Biosynthetic-Enzymes", true);
         }
         if (!detailDataTemp.subsumption || detailDataTemp.subsumption.length === 0) {
@@ -302,7 +302,7 @@ const GlycanDetail = (props) => {
         if (!detailDataTemp.iupac && !detailDataTemp.wurcs && !detailDataTemp.glycoct) {
           newSidebarData = setSidebarItemState(newSidebarData, "Digital-Sequence", true);
         }
-        if (!detailDataTemp.cross_ref || detailDataTemp.cross_ref.length === 0) {
+        if (!detailDataTemp.crossref || detailDataTemp.crossref.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Cross-References", true);
         }
         if (!detailDataTemp.history || detailDataTemp.history.length === 0) {
@@ -442,10 +442,12 @@ const GlycanDetail = (props) => {
         value ? (
           <LineTooltip text="View siteview details">
             <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-              {row.residue} {row.start_pos}
+              {row.residue}
+              {row.start_pos}
               {row.start_pos !== row.end_pos && (
                 <>
-                  to {row.residue} {row.end_pos}
+                  to {row.residue}
+                  {row.end_pos}
                 </>
               )}
             </Link>
@@ -1465,7 +1467,7 @@ const GlycanDetail = (props) => {
                           onClickTarget={"#glycoprotein"}
                         />
                       )}
-                      {!glycoprotein && <p>No data available.</p>}
+                      {!glycoprotein.length && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -1610,12 +1612,7 @@ const GlycanDetail = (props) => {
                           }}
                         >
                           <Tab eventKey="ancestor" title="Ancestor">
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {subsumptionAncestor && subsumptionAncestor.length > 0 && (
                                 <ClientPaginatedTable
                                   idField={"id"}
@@ -1629,12 +1626,7 @@ const GlycanDetail = (props) => {
                             </Container>
                           </Tab>
                           <Tab eventKey="descendant" title="Descendant">
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {subsumptionDescendant && subsumptionDescendant.length > 0 && (
                                 <ClientPaginatedTable
                                   idField={"id"}
@@ -1649,6 +1641,7 @@ const GlycanDetail = (props) => {
                           </Tab>
                         </Tabs>
                       )}
+                      {!subsumption && <p>No data available.</p>}
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
@@ -1699,16 +1692,10 @@ const GlycanDetail = (props) => {
                         >
                           <Tab
                             eventKey="with_tissue"
-                            className="tab-content-padding"
                             title="Tissue Expression"
                             //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
                           >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                            <Container className="tab-content-padding">
                               {expressionWithtissue && expressionWithtissue.length > 0 && (
                                 <ClientPaginatedTable
                                   idField={"start_pos"}
@@ -1722,17 +1709,8 @@ const GlycanDetail = (props) => {
                               {!expressionWithtissue.length && <p>No data available.</p>}
                             </Container>
                           </Tab>
-                          <Tab
-                            eventKey="with_cellline"
-                            className="tab-content-padding"
-                            title="Cell Line Expression "
-                          >
-                            <Container
-                              style={{
-                                paddingTop: "20px",
-                                paddingBottom: "30px",
-                              }}
-                            >
+                          <Tab eventKey="with_cellline" title="Cell Line Expression ">
+                            <Container className="tab-content-padding">
                               {expressionWithcell && expressionWithcell.length > 0 && (
                                 <ClientPaginatedTable
                                   data={expressionWithcell}

@@ -106,7 +106,7 @@ export const PROTEIN_COLUMNS = [
     headerStyle: HeaderwithsameStyle
   },
   {
-    dataField: proteinStrings.hit_score.shortName,
+    dataField: proteinStrings.hit_score.id,
     text: proteinStrings.hit_score.name,
     sort: true,
     headerStyle: HeaderwithsameStyle
