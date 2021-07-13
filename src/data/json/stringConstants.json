@@ -38,6 +38,15 @@
         },
         "id": "glycan_id_subsumption"
       },
+      "id_namespace": {
+        "name": "Glycan ID Namespace",
+        "shortName": "Glycan ID Namespace",
+        "tooltip": {
+          "title": "Glycan ID Namespace",
+          "text": "Click to select a Glycan ID Namespace."
+        },
+        "id": "id_namespace"
+      },
       "organism_annotation": {
         "name": "Organism Annotation",
         "shortName": "Organism Annotation",

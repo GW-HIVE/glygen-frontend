@@ -104,6 +104,11 @@
         }
       ]
     },
+    "id_namespace": {
+      "placeholder": "Select Glycan ID Namespace",
+      "placeholderName": "",
+      "placeholderId": ""
+    },
     "glycan_type": {
       "placeholder": "Select Glycan Type",
       "placeholderName": "",

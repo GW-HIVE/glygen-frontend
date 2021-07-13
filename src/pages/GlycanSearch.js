@@ -66,6 +66,7 @@ const GlycanSearch = (props) => {
 			glyPubId: '',
 			glyBindingProteinId: '',
 			glyGlyName: '',
+			glyIDNamespace: '',
 			glyAdvSearchValError: [false, false, false, false, false, false, false],
 		}
 	);
@@ -358,6 +359,10 @@ const GlycanSearch = (props) => {
 								data.cache_info.query.glycan_name === undefined
 									? ''
 									: data.cache_info.query.glycan_name,
+							glyIDNamespace:
+								data.cache_info.query.id_namespace === undefined
+									? advancedSearch.id_namespace.placeholderId
+									: data.cache_info.query.id_namespace,
 							glyAdvSearchValError: [false, false, false, false, false, false, false],
 						});
 
@@ -396,6 +401,7 @@ const GlycanSearch = (props) => {
 	 * @param {string} input_motif - input_motif value.
 	 * @param {string} input_pmid - input_pmid value.
 	 * @param {string} input_binding_protein_id - input_binding_protein_id value.
+	 * @param {string} input_id_namespace - input_id_namespace value.
 	 * @param {object} input_residue_comp - input_residue_comp value.
 	 **/
 	function searchjson(
@@ -418,6 +424,7 @@ const GlycanSearch = (props) => {
 		input_motif,
 		input_pmid,
 		input_binding_protein_id,
+		input_id_namespace,
 		input_residue_comp
 	) {
 		var enzymes = undefined;
@@ -512,6 +519,7 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.glycan_motif.id]: input_motif !== "" ? input_motif : undefined,
 			[commonGlycanData.pmid.id]: input_pmid !== "" ? input_pmid : undefined,
 			[commonGlycanData.binding_protein_id.id]: input_binding_protein_id !== "" ? input_binding_protein_id : undefined,
+			[commonGlycanData.id_namespace.id]: input_id_namespace !== "" ? input_id_namespace : undefined,
 			[commonGlycanData.composition.id]: input_residue_comp,
 		};
 		return formjson;
@@ -574,6 +582,7 @@ const GlycanSearch = (props) => {
 			glyAdvSearchData.glyMotif,
 			glyAdvSearchData.glyPubId,
 			glyAdvSearchData.glyBindingProteinId,
+			glyAdvSearchData.glyIDNamespace,
 			undefined
 		);
 		logActivity("user", id, "Performing Advanced Search");
@@ -615,6 +624,7 @@ const GlycanSearch = (props) => {
 
 		let formObject = searchjson(
 			glycanData.composition_search.query_type.name,
+			undefined,
 			undefined,
 			undefined,
 			undefined,

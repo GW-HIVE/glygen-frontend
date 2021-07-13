@@ -59,6 +59,7 @@ const GlycanQuerySummary = (props) => {
     term_category,
     composition,
     binding_protein_id,
+    id_namespace,
   } = data;
 
   const [glycanIdentifierShowMore, setGlycanIdentifierShowMore] = useState(true);
@@ -322,6 +323,16 @@ const GlycanQuerySummary = (props) => {
                   </Col>
                   <Col align="left" xs={6} sm={6} md={6} lg={6}>
                     {pmid}
+                  </Col>
+                </Row>
+              )}
+              {id_namespace && (
+                <Row className="summary-table-col">
+                  <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                    {glycanStrings.id_namespace.shortName}:
+                  </Col>
+                  <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                    {id_namespace}
                   </Col>
                 </Row>
               )}
