@@ -185,7 +185,8 @@ const GlycanDetail = props => {
   const [subsumptionTabSelected, setSubsumptionTabSelected] = useState([
     "ancestor"
   ]);
-  const [publicationSort, setPublicationSort] = useState("title");
+  const [publicationSort, setPublicationSort] = useState("date");
+  const [publicationDirection, setPublicationDirection] = useState("desc");
   // let history;
 
   useEffect(() => {
@@ -465,11 +466,10 @@ const GlycanDetail = props => {
     ? [...publication]
     : []
   ).sort((a, b) => {
-    // if (publicationSort === 'reference')
-    //   return sortReference(a,b)
-
-    if (a[publicationSort] < b[publicationSort]) return -1;
-    if (b[publicationSort] < a[publicationSort]) return 1;
+    if (a[publicationSort] < b[publicationSort])
+      return publicationDirection === "asc" ? -1 : 1;
+    if (b[publicationSort] < a[publicationSort])
+      return publicationDirection === "asc" ? 1 : -1;
     return 0;
   });
   const glycoProtienColumns = [
@@ -2280,8 +2280,9 @@ const GlycanDetail = props => {
                       {stringConstants.sidebar.publication.displayname}
                     </h4>
                     <div className="float-right">
-                    <select
-                        className="select-dropdown pt-0"
+                    <span className="Sorted">Sort By</span>
+                      <select
+                        className="select-dropdown pt-0 pubselect"
                         value={publicationSort}
                         onChange={event =>
                           setPublicationSort(event.target.value)
@@ -2290,6 +2291,17 @@ const GlycanDetail = props => {
                         <option value="title">Title</option>
                         <option value="date">Date</option>
                         <option value="journal">Journal</option>
+                        <option value="author">Author List</option>
+                      </select>{" "}
+                      <select
+                        className="select-dropdown pt-0"
+                        value={publicationDirection}
+                        onChange={event =>
+                          setPublicationDirection(event.target.value)
+                        }
+                      >
+                        <option value="asc">Asc</option>
+                        <option value="desc">Desc</option>
                       </select>
                       <Accordion.Toggle
                         // as={Card.Header}
