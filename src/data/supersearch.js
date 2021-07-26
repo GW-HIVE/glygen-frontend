@@ -248,9 +248,13 @@ export const createSiteQuerySummary = query => {
     } else if (listItem.path === "site_seq") {
       result.aminoType = listItem.string_value;
     } else if (
-      ["glycosylation_flag", "snv_flag", "mutagenesis_flag"].includes(
-        listItem.path
-      )
+      [
+        "glycosylation_flag",
+        "snv_flag",
+        "mutagenesis_flag",
+        "phosphorylation_flag",
+        "glycation_flag"
+      ].includes(listItem.path)
     ) {
       if (!result.annotations) {
         result.annotations = [];
