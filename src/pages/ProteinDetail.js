@@ -1754,7 +1754,8 @@ const ProteinDetail = props => {
     return [
       `${totalSites} Sites`,
       Object.keys(info).map(
-        key => `${info[key].count} ${key} (${info[key].sites.length} sites)`
+        key =>
+          `${info[key].count} ${key} (${info[key].sites.length} glycans sites  )`
       )
     ].join(", ");
     //15 sites, 31 N-linked glycans (14 sites), 1 O-linked glycan (1 site)
@@ -2148,8 +2149,7 @@ const ProteinDetail = props => {
                       {glycosylation && glycosylation.length && (
                         <>
                           <div className="Glycosummary">
-                            Glycosylation Summary:{" "}
-                            {createGlycosylationSummary(glycosylation)}
+                            Summary: {createGlycosylationSummary(glycosylation)}
                           </div>
                           <Tabs
                             className="Tabcss"

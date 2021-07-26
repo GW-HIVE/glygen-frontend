@@ -750,21 +750,28 @@ const GlycanDetail = props => {
     },
     {
       dataField: "start_pos",
-      text: "Site",
+      text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-      // formatter: (value, row) => <>{row.start}</>
-    },
-    {
-      dataField: "residue",
-      text: "Amino Acid",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-      // formatter: (value, row) => <>{row.residue}</>
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     },
 
     {
@@ -828,21 +835,28 @@ const GlycanDetail = props => {
     },
     {
       dataField: "start_pos",
-      text: "Site",
+      text: proteinStrings.position.name,
       sort: true,
       headerStyle: (colum, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-      // formatter: (value, row) => <>{row.start_pos}</>
-    },
-    {
-      dataField: "residue",
-      text: "Amino Acid",
-      sort: true,
-      headerStyle: (colum, colIndex) => {
-        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-      }
-      // formatter: (value, row) => <>{row.residue}</>
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     },
     {
       dataField: "tissue.name",
@@ -2280,7 +2294,7 @@ const GlycanDetail = props => {
                       {stringConstants.sidebar.publication.displayname}
                     </h4>
                     <div className="float-right">
-                    <span className="Sorted">Sort By</span>
+                      <span className="Sorted">Sort By</span>
                       <select
                         className="select-dropdown pt-0 pubselect"
                         value={publicationSort}
