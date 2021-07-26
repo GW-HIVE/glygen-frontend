@@ -419,8 +419,8 @@ const GlycanAdvancedSearch = props => {
               placeholderName={advancedSearch.id_namespace.placeholderName}
               menu={[ { id: "unicarb", name: "UniCarb" }, { id: "carbbank", name: "CarbBank" }, { id: "cfg", name: "CFG" }]
                 }
-              // menu={props.initData.glycan_type.map(type => {
-              //   return { id: type.id, name: type.name };
+              // menu={props.initData.id_namespace.map(type => {
+              //   return { id: type, name: type };
               // })}
               setInputValue={glyIDNamespaceOnChange}
             />

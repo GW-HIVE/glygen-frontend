@@ -836,5 +836,59 @@
   },
   "tutorial": {
     "tabTitle": "Tutorial"
+  },
+  "query_search": {
+    "queryProps":["mass","masstype","tolerance","comp","acc","subsumption"],
+    "massType":
+    {
+      "native": {
+        "id": "Native"
+      },
+      "permethylated": {
+        "id": "Permethylated"
+      }
+    },
+    "subsumption":
+    {
+      "none": {
+        "id": "none"
+      },
+      "any": {
+        "id": "any"
+      }
+    },
+    "composition":
+    {
+      "hex": {
+        "id": "hex"
+      },
+      "hexnac": {
+        "id": "hexnac"
+      },
+      "hexn": {
+        "id": "hexn"
+      },
+      "dhex": {
+        "id": "dhex"
+      },
+      "neuac": {
+        "id": "neuac"
+      },
+      "neugc": {
+        "id": "neugc"
+      },
+      "hexa": {
+        "id": "hexa"
+      },
+      "p": {
+        "id": "p"
+      },
+      "s": {
+        "id": "s"
+      },
+      "o": {
+        "id": "other"
+      }
+    }
   }
 }

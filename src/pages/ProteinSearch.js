@@ -77,6 +77,7 @@ const ProteinSearch = props => {
   );
   const [proActTabKey, setProActTabKey] = useState("Simple-Search");
   const [pageLoading, setPageLoading] = useState(true);
+  const [searchStarted, setSearchStarted] = useState(false);
   const [alertTextInput, setAlertTextInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
@@ -88,8 +89,134 @@ const ProteinSearch = props => {
 
   let simpleSearch = proteinSearchData.simple_search;
   let advancedSearch = proteinSearchData.advanced_search;
+  let querySearch = proteinSearchData.query_search;
   let proteinData = stringConstants.protein;
   let commonProteinData = proteinData.common;
+  const queryString = require('query-string');
+
+  /**
+	 * getSelectionValue returns selection control value based on min, max.
+	 * @param {object} queryObject - queryObject value.
+   * @param {object} qryObjOut - qryObjOut value.
+	 **/
+	function executeQuery(queryObject, qryObjOut) {
+    let queryProps = Object.keys(queryObject);
+    let queryPropArr = querySearch.queryProps;
+    let unkProps = [];
+    let nullValueProps = [];
+    let isError = false;
+    qryObjOut.selectedTab = "Advanced-Search";
+    let mass = undefined;
+    let tolerance = undefined;
+    let acc = [];
+
+    for (let i = 0; i < queryProps.length; i++){
+      let isPropPresent = queryPropArr.includes(queryProps[i].toLowerCase());
+      if (!isPropPresent){
+        unkProps.push(queryProps[i]);
+        continue;
+      }
+      if (queryObject[queryProps[i]] === null){
+				nullValueProps.push(queryProps[i]);
+				continue;
+			}
+      var value = undefined;
+      if (queryProps[i].toLowerCase() === "acc"){
+        acc.push(queryObject[queryProps[i]]);
+      } else {
+        if (typeof(queryObject[queryProps[i]]) === "string") {
+					value = queryObject[queryProps[i]];
+				} else {
+					value = queryObject[queryProps[i]][0];
+				}
+      }
+      if (queryProps[i].toLowerCase() === "mass"){
+        mass = value;
+      }
+      if (queryProps[i].toLowerCase() === "tolerance"){
+        tolerance = value;
+      }
+    }
+    
+    if (unkProps.length > 0){
+      qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
+      qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown parameter(s): " + unkProps.join(', ')
+      isError = true;
+    }
+
+    if (nullValueProps.length > 0){
+			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
+			if (qryObjOut.alertMessage === "")
+				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + " Null value parameter(s): " + nullValueProps.join(', ')
+			else
+				qryObjOut.alertMessage += "\n Null value parameter(s): " + nullValueProps.join(', ')
+			isError = true;
+		}
+
+		var uniprot_id = undefined;
+    if (acc.length > 0) {
+      uniprot_id = acc.join(',');
+      uniprot_id = uniprot_id.trim();
+      uniprot_id = uniprot_id.replace(/\u200B/g, "");
+      uniprot_id = uniprot_id.replace(/\u2011/g, "-");
+      uniprot_id = uniprot_id.replace(/\s+/g, ",");
+      uniprot_id = uniprot_id.replace(/,+/g, ",");
+      var index = uniprot_id.lastIndexOf(",");
+      if (index > -1 && index + 1 === uniprot_id.length) {
+        uniprot_id = uniprot_id.substr(0, index);
+      }
+    }
+
+		var tol = tolerance ? parseInt(tolerance) : 1;
+
+    var formjson = {
+      [commonProteinData.operation.id]: "AND",
+      [proteinData.advanced_search.query_type.id]: proteinData.advanced_search.query_type.name,
+      [commonProteinData.uniprot_canonical_ac.id]: uniprot_id
+        ? uniprot_id
+        : undefined,
+      [commonProteinData.mass.id]: mass ? {
+				min: parseInt(mass) - tol,
+				max: parseInt(mass) + tol,
+			} : undefined,
+    };
+
+    if (searchStarted) {
+			qryObjOut.logMessage = "";
+			qryObjOut.alertMessage = "";
+			qryObjOut.selectedTab = "";
+			return false;
+		}
+
+		if (isError) return isError;
+
+    logActivity("user", id, "Performing Protein Query Search");
+    let message = "Query Search query=" + JSON.stringify(formjson);
+    getProteinSearch(formjson)
+      .then(response => {
+        if (response.data["list_id"] !== "") {
+          logActivity(
+            "user",
+            (id || "") + ">" + response.data["list_id"],
+            message
+          ).finally(() => {
+            props.history.push(
+              routeConstants.proteinList + response.data["list_id"]
+            );
+          });
+        } else {
+          qryObjOut.logMessage = "No results. Query Search query=" + JSON.stringify(formjson);
+					isError = true;
+					qryObjOut.alertMessage = stringConstants.errors.querySerarcApiError.message;
+        }
+      })
+      .catch(function(error) {
+        axiosError(error, "", message, setPageLoading, setAlertDialogInput);
+        isError = true;
+      });
+
+    return isError;
+	}
 
   /**
    * useEffect for retriving data from api and showing page loading effects.
@@ -97,8 +224,17 @@ const ProteinSearch = props => {
   useEffect(() => {
     setPageLoading(true);
     logActivity();
+		var qryObjOut = {
+			logMessage : "",
+			alertMessage : "",
+			selectedTab : ""
+		};
+		var queryError = false;
+    if (props.location.search){
+			queryError = executeQuery(queryString.parse(props.location.search), qryObjOut);
+		}
     document.addEventListener("click", () => {
-      setAlertTextInput({ show: false });
+      setAlertTextInput({ show: false, message: ""});
     });
     getProteinInit()
       .then(response => {
@@ -128,10 +264,20 @@ const ProteinSearch = props => {
             setProActTabKey("Simple-Search");
           }
         } else {
-          setProActTabKey("Simple-Search");
+          if (qryObjOut.selectedTab !== ""){
+            setProActTabKey(qryObjOut.selectedTab);
+          } else {
+            setProActTabKey("Simple-Search");
+          }
+        }
+
+        if (queryError && qryObjOut.logMessage !== ""){
+          logActivity("user", "", qryObjOut.logMessage);
+          setAlertTextInput({"show": true, "id": stringConstants.errors.querySerarchError.id, "message": qryObjOut.alertMessage})
+          window.scrollTo(0, 0);
         }
       
-        if (id === undefined) setPageLoading(false);
+        if ((id === undefined && (props.location.search === undefined || props.location.search === "")) || (props.location.search && queryError)) setPageLoading(false);
 
         id &&
           getProteinList(id, 1)
@@ -539,6 +685,7 @@ const ProteinSearch = props => {
    * Function to handle click event for protein advanced search.
    **/
   const searchProteinAdvClick = () => {
+    setSearchStarted(true);
     setPageLoading(true);
     proteinAdvSearch();
   };
@@ -547,6 +694,7 @@ const ProteinSearch = props => {
    * Function to handle click event for protein simple search.
    **/
   const searchProteinSimpleClick = () => {
+    setSearchStarted(true);
     setPageLoading(true);
     proteinSimpleSearch();
   };
