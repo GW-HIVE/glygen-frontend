@@ -249,7 +249,7 @@ const GlycanSearch = (props) => {
 		if (comp || comp === ""){
 			qryObjOut.selectedTab = "Composition-Search";
 			composition = parseComposition(comp, unknownComp);
-			if (queryArr.length > 1){
+			if (queryArr.length > 1 || unkProps.length > 0){
 				qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
 				if (qryObjOut.alertMessage === "")
 					qryObjOut.alertMessage = "'comp' can not be combined with other query parameter(s)."
