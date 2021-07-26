@@ -289,7 +289,7 @@ const GlycanSearch = (props) => {
 			if (qryObjOut.alertMessage === "")
 				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown massType value: " + massType;
 			else
-				qryObjOut.alertMessage = "\n Unknown massType value: " + massType;
+				qryObjOut.alertMessage += "\n Unknown massType value: " + massType;
 			isError = true;
 		}
 
