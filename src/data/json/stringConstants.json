@@ -1465,6 +1465,16 @@
       "title": "Super Search Error - Enter Valid Input",
       "message": "Sorry, we couldn't process search request. Please enter valid input."
     },
+    "querySerarchError": {
+      "id": "querySerarchError",
+      "title": "Query Search Error - Invalid Query Parameters",
+      "message": "Please provide valid query parameters. "
+    },
+    "querySerarcApiError": {
+      "id": "querySerarcApiError",
+      "title": "Query Search Error - No Results Found",
+      "message": "Sorry, we couldn't find any data matching your input. Please change your search term and try again."
+    },
     "defaultTextAlert": {
       "id": "defaultTextAlert",
       "title": "Search Error - No Results Found",

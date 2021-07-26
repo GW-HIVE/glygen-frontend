@@ -431,5 +431,8 @@
   },
   "tutorial": {
     "tabTitle": "Tutorial"
+  },
+  "query_search": {
+    "queryProps":["mass","tolerance","acc"]
   }
 }
