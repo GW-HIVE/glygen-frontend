@@ -1690,7 +1690,8 @@
     "cell_line": {
       "id": "cell_lLine",
       "displayname": "Cell Line",
-      "tooltip": "Cell Line information"
+      "tooltip": "Cell Line information",
+      "name": "Cell Line Name"
     }
   },
   "download": {
