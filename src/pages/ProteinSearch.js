@@ -116,15 +116,14 @@ const ProteinSearch = props => {
         unkProps.push(queryProps[i]);
         continue;
       }
-      if (queryObject[queryProps[i]] === null){
+      if (queryObject[queryProps[i]] === null || queryObject[queryProps[i]] === ""){
 				nullValueProps.push(queryProps[i]);
-				continue;
 			}
       var value = undefined;
       if (queryProps[i].toLowerCase() === "acc"){
         acc.push(queryObject[queryProps[i]]);
       } else {
-        if (typeof(queryObject[queryProps[i]]) === "string") {
+        if (queryObject[queryProps[i]] === null || queryObject[queryProps[i]] === "" || typeof(queryObject[queryProps[i]]) === "string") {
 					value = queryObject[queryProps[i]];
 				} else {
 					value = queryObject[queryProps[i]][0];
@@ -140,18 +139,28 @@ const ProteinSearch = props => {
     
     if (unkProps.length > 0){
       qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
-      qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown parameter(s): " + unkProps.join(', ')
+      qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown parameter(s): " + unkProps.join(', ') + "."
       isError = true;
     }
 
     if (nullValueProps.length > 0){
 			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
 			if (qryObjOut.alertMessage === "")
-				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + " Null value parameter(s): " + nullValueProps.join(', ')
+				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + " Null or empty value parameter(s): " + nullValueProps.join(', ') + "."
 			else
-				qryObjOut.alertMessage += "\n Null value parameter(s): " + nullValueProps.join(', ')
-			isError = true;
+				qryObjOut.alertMessage += "\n Null or empty value parameter(s): " + nullValueProps.join(', ') + "."
+			
+      isError = true;
 		}
+
+    if (searchStarted) {
+			qryObjOut.logMessage = "";
+			qryObjOut.alertMessage = "";
+			qryObjOut.selectedTab = "";
+			return false;
+		}
+
+		if (isError) return isError;
 
 		var uniprot_id = undefined;
     if (acc.length > 0) {
@@ -181,15 +190,6 @@ const ProteinSearch = props => {
 			} : undefined,
     };
 
-    if (searchStarted) {
-			qryObjOut.logMessage = "";
-			qryObjOut.alertMessage = "";
-			qryObjOut.selectedTab = "";
-			return false;
-		}
-
-		if (isError) return isError;
-
     logActivity("user", id, "Performing Protein Query Search");
     let message = "Query Search query=" + JSON.stringify(formjson);
     getProteinSearch(formjson)
@@ -205,14 +205,16 @@ const ProteinSearch = props => {
             );
           });
         } else {
-          qryObjOut.logMessage = "No results. Query Search query=" + JSON.stringify(formjson);
-					isError = true;
-					qryObjOut.alertMessage = stringConstants.errors.querySerarcApiError.message;
+          let message = "No results. Query Search query=" + JSON.stringify(formjson);
+					let altMessage = stringConstants.errors.querySerarcApiError.message;
+					logActivity("user", "", message);
+					setAlertTextInput({"show": true, "id": stringConstants.errors.querySerarchError.id, "message": altMessage});
+					window.scrollTo(0, 0);
+					setPageLoading(false);
         }
       })
       .catch(function(error) {
         axiosError(error, "", message, setPageLoading, setAlertDialogInput);
-        isError = true;
       });
 
     return isError;

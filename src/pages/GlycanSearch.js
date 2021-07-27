@@ -129,6 +129,8 @@ const GlycanSearch = (props) => {
 	 * @param {object} composition - composition value.
 	 **/
 	function parseComposition(composition, unknownComp){
+		if (composition === undefined || composition === null || composition === "") return [];
+
 		let compArr = composition.split(')');
 		let compTemplate = Object.keys(querySearch.composition);
 		let addComp = compTemplate;
@@ -197,15 +199,14 @@ const GlycanSearch = (props) => {
 				unkProps.push(queryProps[i]);
 				continue;
 			}
-			if (queryObject[queryProps[i]] === null){
+			if (queryObject[queryProps[i]] === null || queryObject[queryProps[i]] === ""){
 				nullValueProps.push(queryProps[i]);
-				continue;
 			}
 			var value = undefined;
 			if (queryProps[i].toLowerCase() === "acc"){
 				acc.push(queryObject[queryProps[i]]);
 			} else {
-				if (typeof(queryObject[queryProps[i]]) === "string") {
+				if (queryObject[queryProps[i]] === null || queryObject[queryProps[i]] === "" || typeof(queryObject[queryProps[i]]) === "string") {
 					value = queryObject[queryProps[i]];
 				} else {
 					value = queryObject[queryProps[i]][0];
@@ -231,22 +232,23 @@ const GlycanSearch = (props) => {
 		}
 		if (unkProps.length > 0){
 			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
-			qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown parameter(s): " + unkProps.join(', ')
+			qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown parameter(s): " + unkProps.join(', ') + "."
 			isError = true;
 		}
 
 		if (nullValueProps.length > 0){
 			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
 			if (qryObjOut.alertMessage === "")
-				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + " Null value parameter(s): " + nullValueProps.join(', ')
+				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Null or empty value parameter(s): " + nullValueProps.join(', ') + "."
 			else
-				qryObjOut.alertMessage += "\n Null value parameter(s): " + nullValueProps.join(', ')
+				qryObjOut.alertMessage += "\n Null or empty value parameter(s): " + nullValueProps.join(', ') + "."
+
 			isError = true;
 		}
 
 		var composition = undefined;
 		let unknownComp = [];
-		if (comp || comp === ""){
+		if (comp || comp === "" || comp === null){
 			qryObjOut.selectedTab = "Composition-Search";
 			composition = parseComposition(comp, unknownComp);
 			if (queryArr.length > 1 || unkProps.length > 0){
@@ -267,9 +269,9 @@ const GlycanSearch = (props) => {
 						qryObjOut.alertMessage += "\n Composition string needs to be in proper format."
 				} else {
 					if (qryObjOut.alertMessage === "")
-						qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown composition(s): " + unknownComp.join(', ')
+						qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown composition(s): " + unknownComp.join(', ') + "."
 					else
-						qryObjOut.alertMessage += "\n Unknown composition(s): " + unknownComp.join(', ')
+						qryObjOut.alertMessage += "\n Unknown composition(s): " + unknownComp.join(', ') + "."
 				}
 				
 				isError = true;
@@ -280,27 +282,39 @@ const GlycanSearch = (props) => {
 					qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Composition string needs to be in proper format."
 				else 
 					qryObjOut.alertMessage += "\n Composition string needs to be in proper format."
+
 				isError = true;
 			}
 		}
 
-		if (massType && !querySearch.massType[massType.toLowerCase()]){
+		if (massType && querySearch.massType[massType.toLowerCase()] === undefined){
 			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
 			if (qryObjOut.alertMessage === "")
-				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown massType value: " + massType;
+				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown massType value: " + massType  + ".";
 			else
-				qryObjOut.alertMessage += "\n Unknown massType value: " + massType;
+				qryObjOut.alertMessage += "\n Unknown massType value: " + massType + ".";
+
 			isError = true;
 		}
 
-		if (subsumption && !querySearch.subsumption[subsumption.toLowerCase()]){
+		if (subsumption && querySearch.subsumption[subsumption.toLowerCase()] === undefined){
 			qryObjOut.logMessage = "Query parameter error. Query Search query parameters=" + JSON.stringify(queryObject);
 			if(qryObjOut.alertMessage === "")
-				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown subsumption value: " + subsumption;
+				qryObjOut.alertMessage = stringConstants.errors.querySerarchError.message + "Unknown subsumption value: " + subsumption  + ".";
 			else
-				qryObjOut.alertMessage +=  "\n Unknown subsumption value: " + subsumption;
+				qryObjOut.alertMessage +=  "\n Unknown subsumption value: " + subsumption + ".";
+
 			isError = true;
 		}
+
+		if (searchStarted) {
+			qryObjOut.logMessage = "";
+			qryObjOut.alertMessage = "";
+			qryObjOut.selectedTab = "";
+			return false;
+		}
+
+		if (isError) return isError;
 
 		var glycan_identifier = undefined;
 		var glycan_id = undefined;
@@ -334,15 +348,6 @@ const GlycanSearch = (props) => {
 			[commonGlycanData.composition.id]: composition,
 		};
 
-		if (searchStarted) {
-			qryObjOut.logMessage = "";
-			qryObjOut.alertMessage = "";
-			qryObjOut.selectedTab = "";
-			return false;
-		}
-
-		if (isError) return isError;
-
 		logActivity("user", id, "Performing Glycan Query Search");
 		let message = "Query Search query=" + JSON.stringify(formjson);
 		getGlycanSearch(formjson)
@@ -353,14 +358,16 @@ const GlycanSearch = (props) => {
 						props.history.push(routeConstants.glycanList + response.data['list_id']);
 					});;
 				} else {
-					qryObjOut.logMessage = "No results. Query Search query=" + JSON.stringify(formjson);
-					isError = true;
-					qryObjOut.alertMessage = stringConstants.errors.querySerarcApiError.message;
+					let message = "No results. Query Search query=" + JSON.stringify(formjson);
+					let altMessage = stringConstants.errors.querySerarcApiError.message;
+					logActivity("user", "", message);
+					setAlertTextInput({"show": true, "id": stringConstants.errors.querySerarchError.id, "message": altMessage});
+					window.scrollTo(0, 0);
+					setPageLoading(false);
 				}
 			})
 			.catch(function (error) {
 				axiosError(error, "", message, setPageLoading, setAlertDialogInput);
-				isError = true;
 			});
 
 		return isError;
