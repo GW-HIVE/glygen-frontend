@@ -217,17 +217,17 @@ const SiteList = props => {
       dataField: "mutagenesis",
       text: "Mutagenesis",
       formatter: yesNoFormater
+    },
+    {
+      dataField: "glycation",
+      text: "Glycation",
+      formatter: yesNoFormater
+    },
+    {
+      dataField: "phosphorylation",
+      text: "Phosphorylation",
+      formatter: yesNoFormater
     }
-    // {
-    //   dataField: "glycation",
-    //   text: "Glycation",
-    //   formatter: yesNoFormater
-    // },
-    // {
-    //   dataField: "phosphorylation",
-    //   text: "Phosphorylation",
-    //   formatter: yesNoFormater
-    // }
   ];
 
   return (
