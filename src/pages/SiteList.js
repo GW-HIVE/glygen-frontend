@@ -64,6 +64,7 @@ const SiteList = props => {
         setTimeStamp(data.cache_info.ts);
         setPagination(data.pagination);
         const currentPage = (data.pagination.offset - 1) / sizePerPage + 1;
+
         setPage(currentPage);
         setTotalSize(data.pagination.total_length);
         setConfigData(initData);
@@ -217,17 +218,17 @@ const SiteList = props => {
       dataField: "mutagenesis",
       text: "Mutagenesis",
       formatter: yesNoFormater
+    },
+    {
+      dataField: "glycation",
+      text: "Glycation",
+      formatter: yesNoFormater
+    },
+    {
+      dataField: "phosphorylation",
+      text: "Phosphorylation",
+      formatter: yesNoFormater
     }
-    // {
-    //   dataField: "glycation",
-    //   text: "Glycation",
-    //   formatter: yesNoFormater
-    // },
-    // {
-    //   dataField: "phosphorylation",
-    //   text: "Phosphorylation",
-    //   formatter: yesNoFormater
-    // }
   ];
 
   return (
@@ -276,8 +277,7 @@ const SiteList = props => {
             dataId={id}
             itemType="site"
           />
-
-          {/* {siteColumns && siteColumns.length !== 0 && ( */}
+          {/* {data && data.length !== 0 && ( */}
           {!!(data && data.length) && (
             <PaginatedTable
               trStyle={rowStyleFormat}
@@ -292,7 +292,6 @@ const SiteList = props => {
               defaultSortOrder="desc"
             />
           )}
-          {/* )} */}
         </section>
       </Container>
     </>

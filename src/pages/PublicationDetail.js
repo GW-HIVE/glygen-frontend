@@ -75,7 +75,9 @@ const PublicationDetail = props => {
 
   const proteinStrings = stringConstants.protein.common;
   const glycanStrings = stringConstants.glycan.common;
-
+  const [expressionTabSelected, setExpressionTabSelected] = useState("");
+  const [expressionWithtissue, setExpressionWithtissue] = useState([]);
+  const [expressionWithcell, setExpressionWithcell] = useState([]);
   const [detailData, setDetailData] = useState({});
   const [glycosylationMining, setGlycosylationMining] = useState([]);
   const [glycosylationWithImage, setGlycosylationWithImage] = useState([]);
@@ -142,6 +144,20 @@ const PublicationDetail = props => {
             },
             {}
           );
+
+          if (data.expression) {
+            const WithTissue = data.expression.filter(
+              item => item.tissue !== undefined
+            );
+            const WithCellline = data.expression.filter(
+              item => item.cell_line !== undefined
+            );
+            setExpressionWithtissue(WithTissue);
+            setExpressionWithcell(WithCellline);
+            setExpressionTabSelected(
+              WithTissue.length > 0 ? "with_tissue" : "with_cellline"
+            );
+          }
 
           const withImage =
             mapOfGlycosylationCategories.reported_with_glycan || [];
@@ -300,11 +316,6 @@ const PublicationDetail = props => {
 
   const createGlycosylationSummary = data => {
     const info = {};
-
-    // console.table(data);
-
-    // debugger
-
     for (let x = 0; x < data.length; x++) {
       if (!info[data[x].type]) {
         info[data[x].type] = {
@@ -328,7 +339,8 @@ const PublicationDetail = props => {
     return [
       `${totalSites} Sites`,
       Object.keys(info).map(
-        key => `${info[key].count} ${key} (${info[key].sites.length} sites)`
+        key =>
+          `${info[key].count} ${key} (${info[key].sites.length} Glycan sites)`
       )
     ].join(", ");
     //15 sites, 31 N-linked glycans (14 sites), 1 O-linked glycan (1 site)
@@ -367,49 +379,27 @@ const PublicationDetail = props => {
   const expandIcon = <ExpandMoreIcon fontSize="large" />;
   const closeIcon = <ExpandLessIcon fontSize="large" />;
 
-  const expressionColumns = [
+  const expressionTissueColumns = [
     {
-      dataField: "referenced_proteins",
+      dataField: "uniprot_canonical_ac",
       text: proteinStrings.uniprot_canonical_ac.name,
-      defaultSortField: "referenced_proteins",
+      defaultSortField: "uniprot_canonical_ac",
       sort: true,
-
       headerStyle: (column, colIndex) => {
         return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
       },
-      formatter: (value, row) => (
-        <LineTooltip text="View protein details">
-          <Link to={routeConstants.proteinDetail + row.referenced_proteins}>
-            {row.referenced_proteins}
-          </Link>
-        </LineTooltip>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View protein details">
+            <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+              <>{row.uniprot_canonical_ac}</>
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     },
-    // {
-    //   dataField: "start_pos",
-    //   text: proteinStrings.position.name,
-    //   sort: true,
-    //   headerStyle: (colum, colIndex) => {
-    //     return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
-    //   },
-    //   formatter: (value, row) =>
-    //     value ? (
-    //       <LineTooltip text="View siteview details">
-    //         <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
-    //           {row.residue}
-    //           {row.start_pos}
-    //           {row.start_pos !== row.end_pos && (
-    //             <>
-    //               to {row.residue}
-    //               {row.end_pos}
-    //             </>
-    //           )}
-    //         </Link>
-    //       </LineTooltip>
-    //     ) : (
-    //       "Not Reported"
-    //     )
-    // },
+
     {
       dataField: "glytoucan_ac",
       text: proteinStrings.glytoucan_ac.shortName,
@@ -420,36 +410,203 @@ const PublicationDetail = props => {
           width: "15%"
         };
       },
-      formatter: (value, row) => (
-        <LineTooltip text="View glycan details">
-          <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
-            {row.glytoucan_ac}
-          </Link>
-        </LineTooltip>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View glycan details">
+            <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+              <>{row.glytoucan_ac}</>
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
+    },
+    {
+      dataField: "image",
+      text: glycanStrings.glycan_image.name,
+      sort: false,
+      headerStyle: (colum, colIndex) => {
+        return {
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white",
+          whiteSpace: "nowrap"
+        };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <div className="img-wrapper">
+            <>
+              <img
+                className="img-cartoon"
+                src={getGlycanImageUrl(row.glytoucan_ac)}
+                alt="Glycan img"
+              />
+            </>
+          </div>
+        ) : (
+          "Not Reported"
+        )
+    },
+    {
+      dataField: "start_pos",
+      text: proteinStrings.position.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
     },
 
-    // {
-    //   dataField: "tissue",
-    //   text: proteinStrings.tissue.name,
-    //   defaultSortField: "tissue",
-    //   sort: true,
-    //   headerStyle: (column, colIndex) => {
-    //     return {
-    //       backgroundColor: "#4B85B6",
-    //       color: "white"
-    //     };
-    //   },
-    //   formatter: (value, row) => (
-    //     <>
-    //       {value.name}{" "}
-    //       <span className="nowrap">
-    //         ({proteinStrings.uberonN.name}:{" "}
-    //         <a href={value.url}>{value.uberon}</a>)
-    //       </span>
-    //     </>
-    //   )
-    // },
+    {
+      dataField: "tissue",
+      text: proteinStrings.tissue.name,
+      defaultSortField: "tissue",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          backgroundColor: "#4B85B6",
+          color: "white"
+        };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <>
+            <span className="nowrap">
+              ({proteinStrings.uberonN.name}:{" "}
+              <a href={value.url}>{value.uberon}</a>)
+            </span>
+          </>
+        ) : (
+          "Not Reported"
+        )
+    },
+
+    {
+      dataField: "abundance",
+      text: "Abundance",
+      defaultSortField: "abundance",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "15%"
+        };
+      }
+    }
+  ];
+
+  const expressionCellColumns = [
+    {
+      dataField: "uniprot_canonical_ac",
+      text: proteinStrings.uniprot_canonical_ac.name,
+      defaultSortField: "uniprot_canonical_ac",
+      sort: true,
+
+      headerStyle: (column, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View protein details">
+            <Link to={routeConstants.proteinDetail + row.uniprot_canonical_ac}>
+              <> {row.uniprot_canonical_ac}</>
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
+    },
+
+    {
+      dataField: "glytoucan_ac",
+      text: proteinStrings.glytoucan_ac.shortName,
+      defaultSortField: "glytoucan_ac",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "15%"
+        };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View glycan details">
+            <Link to={routeConstants.glycanDetail + row.glytoucan_ac}>
+              <>{row.glytoucan_ac}</>
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
+    },
+    {
+      dataField: "image",
+      text: glycanStrings.glycan_image.name,
+      sort: false,
+      headerStyle: (colum, colIndex) => {
+        return {
+          textAlign: "left",
+          backgroundColor: "#4B85B6",
+          color: "white",
+          whiteSpace: "nowrap"
+        };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <div className="img-wrapper">
+            <>
+              <img
+                className="img-cartoon"
+                src={getGlycanImageUrl(row.glytoucan_ac)}
+                alt="Glycan img"
+              />
+            </>
+          </div>
+        ) : (
+          "Not Reported"
+        )
+    },
+    {
+      dataField: "start_pos",
+      text: proteinStrings.position.name,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "15%" };
+      },
+      formatter: (value, row) =>
+        value ? (
+          <LineTooltip text="View siteview details">
+            <Link to={`${routeConstants.siteview}${id}/${row.start_pos}`}>
+              {row.residue}
+              {row.start_pos}
+              {row.start_pos !== row.end_pos && (
+                <>
+                  to {row.residue}
+                  {row.end_pos}
+                </>
+              )}
+            </Link>
+          </LineTooltip>
+        ) : (
+          "Not Reported"
+        )
+    },
+
     {
       dataField: "cell_line",
       text: "Cell Line Name",
@@ -461,16 +618,19 @@ const PublicationDetail = props => {
           color: "white"
         };
       },
-      formatter: (value, row) => (
-        <>
-          <span className="nowrap">
-            <a href={value.url}>
-              {" "}
-              {value.name} {value.cellosaurus_id}
-            </a>
-          </span>
-        </>
-      )
+      formatter: (value, row) =>
+        value ? (
+          <>
+            <span className="nowrap">
+              <a href={value.url}>
+                {" "}
+                {value.name} {value.cellosaurus_id}
+              </a>
+            </span>
+          </>
+        ) : (
+          "Not Reported"
+        )
     },
     {
       dataField: "abundance",
@@ -484,6 +644,7 @@ const PublicationDetail = props => {
       }
     }
   ];
+
   const glycoSylationColumns = [
     {
       dataField: "uniprot_canonical_ac",
@@ -1700,20 +1861,67 @@ const PublicationDetail = props => {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
                     {expression && expression.length !== 0 && (
-                      <ClientPaginatedTable
-                        idField={"name"}
-                        data={expression}
-                        columns={expressionColumns}
-                        defaultSortField={"name"}
-                        onClickTarget={"#motif"}
-                      />
+                      <Tabs
+                        defaultActiveKey={
+                          expressionWithtissue &&
+                          expressionWithtissue.length > 0
+                            ? "with_tissue"
+                            : "with_cellline"
+                        }
+                        transition={false}
+                        mountOnEnter={true}
+                        unmountOnExit={true}
+                      >
+                        <Tab
+                          eventKey="with_tissue"
+                          title="Tissue Expression"
+                          //disabled={(!mutataionWithdisease || (mutataionWithdisease.length === 0))}
+                        >
+                          <Container className="tab-content-padding">
+                            {expressionWithtissue &&
+                              expressionWithtissue.length > 0 && (
+                                <ClientPaginatedTable
+                                  idField={"start_pos"}
+                                  data={expressionWithtissue}
+                                  columns={expressionTissueColumns}
+                                  onClickTarget={"#expression"}
+                                  defaultSortField="start_pos"
+                                />
+                              )}
+                            {!expressionWithtissue.length && (
+                              <p>No data available.</p>
+                            )}
+                          </Container>
+                        </Tab>
+                        <Tab
+                          eventKey="with_cellline"
+                          title="Cell Line Expression "
+                        >
+                          <Container className="tab-content-padding">
+                            {expressionWithcell &&
+                              expressionWithcell.length > 0 && (
+                                <ClientPaginatedTable
+                                  data={expressionWithcell}
+                                  columns={expressionCellColumns}
+                                  onClickTarget={"#expression"}
+                                  defaultSortField="position"
+                                />
+                              )}
+                            {!expressionWithcell.length && (
+                              <p>No data available.</p>
+                            )}
+                          </Container>
+                        </Tab>
+                      </Tabs>
                     )}
+
                     {!expression && <p>No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
             </Accordion>
-            {/* Digital Sequence */} {/* Referenced-Proteins */}
+
+            {/* Referenced-Proteins */}
             <Accordion
               id="Referenced-Proteins"
               defaultActiveKey="0"
