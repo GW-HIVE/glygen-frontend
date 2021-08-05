@@ -23,12 +23,14 @@ import { GLYGEN_BASENAME } from "../envVariables";
 import ListFilter from "../components/ListFilter";
 import { ReactComponent as ArrowRightIcon } from "../images/icons/arrowRightIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../images/icons/arrowLeftIcon.svg";
+import ClientPaginatedTable from "../components/ClientPaginatedTable";
 
 const GlycanList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
   let quickSearch = stringConstants.quick_search;
   const [data, setData] = useState(null);
+  const [dataUnmap, setDataUnmap] = useState([]);
   const [query, setQuery] = useState([]);
   const [timestamp, setTimeStamp] = useState();
   const [pagination, setPagination] = useState([]);
@@ -43,6 +45,8 @@ const GlycanList = props => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
+
+  const unmappedStrings = stringConstants.glycan.common.unmapped;
 
   const fixResidueToShortNames = query => {
     const residueMap = stringConstants.glycan.common.composition;
@@ -82,6 +86,7 @@ const GlycanList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
+          setDataUnmap(data.cache_info.batch_info && data.cache_info.batch_info.unmapped ? data.cache_info.batch_info.unmapped : []);
           if (
             data.cache_info.query.glycan_identifier &&
             data.cache_info.query.glycan_identifier.glycan_id
@@ -209,6 +214,20 @@ const GlycanList = props => {
 
   const [sidebar, setSidebar] = useState(true);
 
+  const unmapIDColumns = [
+    {
+      dataField: unmappedStrings.input_id.shortName,
+      text: unmappedStrings.input_id.name,
+      sort: true,
+      selected: true,
+    },
+    {
+      dataField: unmappedStrings.reason.shortName,
+      text: unmappedStrings.reason.name,
+      sort: true,
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -275,6 +294,7 @@ const GlycanList = props => {
                 question={quickSearch[searchId]}
                 searchId={searchId}
                 timestamp={timestamp}
+                dataUnmap={dataUnmap}
                 onModifySearch={handleModifySearch}
               />
             </section>
@@ -314,6 +334,23 @@ const GlycanList = props => {
               )}
               {/* {data && data.length === 0 && <p>No data.</p>} */}
             </section>
+            {dataUnmap && dataUnmap.length > 0 && (<>
+              <div id="Unmapped-Table"></div>
+                <div className="content-box-sm">
+                  <h1 className="page-heading">{unmappedStrings.title}</h1>
+                </div>
+              <section>
+                {/* Unmapped Table */}
+                {unmapIDColumns && unmapIDColumns.length !== 0 && (
+                  <ClientPaginatedTable
+                    data={dataUnmap}
+                    columns={unmapIDColumns}
+                    defaultSortField={"input_id"}
+                    onClickTarget={"#Unmapped-Table"}
+                />
+                )}
+              </section>
+            </>)}
           </div>
         </div>
       </div>

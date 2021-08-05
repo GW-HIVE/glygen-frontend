@@ -502,6 +502,17 @@
       "term_category": {
         "id": "term_category",
         "name": "Category"
+      },
+      "unmapped": {
+        "input_id": {
+          "shortName": "input_id",
+          "name": "Input ID"
+        },
+        "reason": {
+          "shortName": "reason",
+          "name": "Reason Not Mapped"
+        },
+        "title": "Reason why certain entries could not be mapped"
       }
     },
     "global_search_results": {
@@ -1138,6 +1149,17 @@
       "description": {
         "id": "description",
         "name": "Description"
+      },
+      "unmapped": {
+        "input_id": {
+          "shortName": "input_id",
+          "name": "Input ID"
+        },
+        "reason": {
+          "shortName": "reason",
+          "name": "Reason Not Mapped"
+        },
+        "title": "Reason why certain entries could not be mapped"
       }
     },
     "global_search_results": {

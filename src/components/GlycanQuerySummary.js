@@ -6,6 +6,8 @@ import Card from "react-bootstrap/Card";
 import stringConstants from "../data/json/stringConstants";
 import glycanSearchData from "../data/json/glycanSearch";
 import Button from "react-bootstrap/Button";
+import LineTooltip from "../components/tooltip/LineTooltip";
+
 const glycanStrings = stringConstants.glycan.common;
 const advancedSearch = glycanSearchData.advanced_search;
 const superSearchStrings = stringConstants.super_search.common;
@@ -39,7 +41,7 @@ function getDateTime() {
 const GlycanQuerySummary = (props) => {
   const title = "Glycan Search Summary";
 
-  const { data, onModifySearch, timestamp, searchId } = props;
+  const { data, onModifySearch, timestamp, searchId, dataUnmap } = props;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
   const {
@@ -356,6 +358,13 @@ const GlycanQuerySummary = (props) => {
             ** To perform the same search again using the current version of the database, click{" "}
             <strong>“Update Results”</strong>.
           </Card.Text>
+          {dataUnmap && dataUnmap.length > 0 && (<Card.Text>
+            ** To see the reason why certain entries could not be mapped,{" "}
+            <LineTooltip text="Unmapped ID Table">
+              <a href="#Unmapped-Table">click here</a>
+            </LineTooltip>
+            .
+          </Card.Text>)}
         </Card.Body>
       </Card>
     </>
