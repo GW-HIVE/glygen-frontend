@@ -323,6 +323,7 @@ const ProteinList = props => {
                     data={dataUnmap}
                     columns={unmapIDColumns}
                     defaultSortField={"input_id"}
+                    defaultSortOrder="asc"
                     onClickTarget={"#Unmapped-Table"}
                 />
                 )}

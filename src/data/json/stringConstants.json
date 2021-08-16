@@ -510,9 +510,9 @@
         },
         "reason": {
           "shortName": "reason",
-          "name": "Reason Not Mapped"
+          "name": "Reason"
         },
-        "title": "Reason why certain entries could not be mapped"
+        "title": "Reason why certain entries could not be found"
       }
     },
     "global_search_results": {
@@ -524,6 +524,9 @@
       },
       "enzyme": {
         "name": "enzyme"
+      },
+      "publications": {
+        "name": "publications"
       },
       "motifs": {
         "name": "motifs"
@@ -1157,20 +1160,26 @@
         },
         "reason": {
           "shortName": "reason",
-          "name": "Reason Not Mapped"
+          "name": "Reason"
         },
-        "title": "Reason why certain entries could not be mapped"
+        "title": "Reason why certain entries could not be found"
       }
     },
     "global_search_results": {
       "function": {
         "name": "function"
       },
+      "glycosylation": {
+        "name": "glycosylation"
+      },
       "identifiers": {
         "name": "identifiers"
       },
       "disease": {
         "name": "disease"
+      },
+      "publications": {
+        "name": "publications"
       },
       "names": {
         "name": "names"
