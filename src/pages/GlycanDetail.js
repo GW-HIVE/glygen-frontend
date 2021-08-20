@@ -1329,6 +1329,24 @@ const GlycanDetail = props => {
                           </div>
                         )}
 
+                        {byonic && (
+                          <div>
+                            <Row>
+                              <Col md="auto" className="pr-0">
+                                <strong>
+                                  {glycanStrings.byonic.shortName}
+                                </strong>:&nbsp;
+                              </Col>
+                              <Col md="auto" className="pl-0 pr-0">
+                                  {byonic.split('%')[0].trim()}
+                              </Col>
+                              <Col md="auto" className="pl-0 ml-2">
+                                <ReactCopyClipboard value={byonic} />
+                              </Col>
+                            </Row>
+                          </div>
+                        )}
+
                         {classification && classification.length && (
                           <div>
                             <Row>
@@ -2112,23 +2130,6 @@ const GlycanDetail = props => {
                               </Col>
                             </Row>
                             <span className="text-overflow">{glycam}</span>
-                          </>
-                        ) : (
-                          <span> </span>
-                        )}
-                        {byonic ? (
-                          <>
-                            <Row>
-                              <Col xs={6} sm={6}>
-                                <strong>
-                                  {glycanStrings.byonic.shortName}
-                                </strong>
-                              </Col>
-                              <Col xs={6} sm={6} style={{ textAlign: "right" }}>
-                                <ReactCopyClipboard value={byonic} />
-                              </Col>
-                            </Row>
-                            <span className="text-overflow">{byonic}</span>
                           </>
                         ) : (
                           <span> </span>
