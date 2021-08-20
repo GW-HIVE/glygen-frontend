@@ -45,10 +45,21 @@ const FeedbackWidget = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setContactUsResponseMessage();
+    setContactUsErrorMessage();
 
+    let firstName = fname;
+    let lastName = "not given";
+
+    let temp = fname.trim();
+    let index = temp.indexOf(" ");
+    if (index > 0){
+      firstName = temp.substring(0, index);
+      lastName = temp.substring(index+1).trim();
+    }
     const formData = {
-      fname: fname,
-      lname: "not given",
+      fname: firstName,
+      lname: lastName,
       email: email,
       page: window.location.href,
       // page: window.location.href.split("?")[0],
@@ -63,14 +74,13 @@ const FeedbackWidget = (props) => {
     postTo(url, myHeaders)
       .then((response) => {
         setContactUsResponseMessage(response.data.message);
+        resetForm();
       })
       .catch((error) => {
         setContactUsErrorMessage(
           "Oops, something went wrong! We did not receive your message. Please try again later."
         );
       });
-
-    resetForm();
   };
 
   const resetForm = () => {
@@ -93,7 +103,7 @@ const FeedbackWidget = (props) => {
   };
 
   const onlyText = (e) => {
-    e.target.value = e.target.value.replace(/[^a-zA-Z-]/g, "");
+    e.target.value = e.target.value.replace(/[^a-zA-Z- ]/g, "");
   };
 
   return (
@@ -182,7 +192,7 @@ const FeedbackWidget = (props) => {
                     placeholder="Your Feedback."
                     error={
                       (formValidated || messageValidated) &&
-                      (message === "" || message.length < 5 || message.length > messageMaxLen)
+                      (message.trim() === "" || message.length < 5 || message.length > messageMaxLen)
                     }
                     onChange={(e) => {
                       setMessage(e.target.value);
@@ -193,7 +203,7 @@ const FeedbackWidget = (props) => {
                     onBlur={() => setMessageValidated(true)}
                     helperText={
                       (formValidated || messageValidated) &&
-                      ((message === "" && "Please leave us a message.") ||
+                      ((message.trim() === "" && "Please leave us a message.") ||
                         ((message.length < 5 || message.length > messageMaxLen) &&
                           `Message should be between 5 to ${messageMaxLen} characters`))
                     }
@@ -228,7 +238,7 @@ const FeedbackWidget = (props) => {
                     name="fname"
                     value={fname}
                     placeholder="Your Name (will not be published)"
-                    error={(formValidated || fNameValidated) && fname === ""}
+                    error={(formValidated || fNameValidated) && fname.trim() === ""}
                     onChange={(e) => {
                       setFName(e.target.value);
                       setContactUsResponseMessage();
@@ -236,7 +246,7 @@ const FeedbackWidget = (props) => {
                     }}
                     onBlur={() => setFNameValidated(true)}
                     helperText={
-                      (formValidated || fNameValidated) && fname === "" && "First name is required."
+                      (formValidated || fNameValidated) && fname.trim() === "" && "Name is required."
                     }
                     onInput={(e) => onlyText(e)}
                     style={{ margin: "5px 0 15px 0" }}
