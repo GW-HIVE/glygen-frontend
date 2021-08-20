@@ -30,7 +30,6 @@ export default function GlobalSearchCard(props) {
                                         link={props.route + props.allListId + "/" + props.routeTerm}
                                     />
                                 </strong></h4>
-                                <h5><strong>{'match for'}{' "'}{props.term}{'"'}</strong></h5>
                             </TableCell>
                         </TableRow>
                         <TableRow hover className="card-row">
