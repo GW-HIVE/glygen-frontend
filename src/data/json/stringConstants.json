@@ -517,27 +517,27 @@
       "contributions": {
         "glycan_has_enzyme": {
           "id": "glycan_has_enzyme",
-          "name": "glycan_has_enzyme"
+          "name": "Enzyme annotations"
         },
         "glycan_has_species": {
           "id": "glycan_has_species",
-          "name": "glycan_has_species"
+          "name": "Species annotations"
         },
         "glycan_fully_determined": {
           "id": "glycan_fully_determined",
-          "name": "glycan_fully_determined"
+          "name": "Is a fully defined glycan"
         },
         "glycan_has_publication": {
           "id": "glycan_has_publication",
-          "name": "glycan_has_publication"
+          "name": "Papers"
         },
         "glycan_exact_match": {
           "id": "glycan_exact_match",
-          "name": "glycan_exact_match"
+          "name": "Matching names/IDs"
         },
         "glycan_has_glycoprotein": {
           "id": "glycan_has_glycoprotein",
-          "name": "glycan_has_glycoprotein"
+          "name": "Protein annotations"
         }
       }
     },
@@ -1193,53 +1193,53 @@
       "contributions": {
         "protein_reported_n_glycosites": {
           "id": "protein_reported_n_glycosites",
-          "name": "protein_reported_n_glycosites"
+          "name": "N-Glycosylation sites"
         },
         "protein_reported_o_glycosites": {
           "id": "protein_reported_o_glycosites",
-          "name": "protein_reported_o_glycosites"
+          "name": "O-Glycosylation sites"
         },
         "protein_reported_o_glycosites_with_glycan": {
           "id": "protein_reported_o_glycosites_with_glycan",
-          "name": "protein_reported_o_glycosites_with_glycan"
+          "name": "O-Glycosylation sites (with glycan structure)"
         },
         "protein_exact_match": {
           "id": "protein_exact_match",
-          "name": "protein_exact_match"
+          "name": "Matching names/IDs"
         },
         "protein_predicted_glycosites": {
           "id": "protein_predicted_glycosites",
-          "name": "protein_predicted_glycosites"
+          "name": "Predicted glycosylation sites"
         },
         "protein_publication_count": {
           "id": "protein_publication_count",
-          "name": "protein_publication_count"
+          "name": "Papers"
         },
         "protein_reported_n_glycosites_with_glycan": {
           "id": "protein_reported_n_glycosites_with_glycan",
-          "name": "protein_reported_n_glycosites_with_glycan"
+          "name": "N-Glycosylation sites (with glycan structure)"
         }
       },
       "site_contributions": {
         "site_has_phosphorylation": {
           "id": "site_has_phosphorylation",
-          "name": "site_has_phosphorylation"
+          "name": "Phosphorylation annotations"
         },
         "site_has_mutagenesis": {
           "id": "site_has_mutagenesis",
-          "name": "site_has_mutagenesis"
+          "name": "Metagenesis annotations"
         },
         "site_has_glycosylation": {
           "id": "site_has_glycosylation",
-          "name": "site_has_glycosylation"
+          "name": "Glycosylation annotations"
         },
         "site_has_snv": {
           "id": "site_has_snv",
-          "name": "site_has_snv"
+          "name": "SVN annotations"
         },
         "site_has_glycation": {
           "id": "site_has_glycation",
-          "name": "site_has_glycation"
+          "name": "Glycation annotations"
         }
       }
     },
