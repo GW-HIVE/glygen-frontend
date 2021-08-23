@@ -18,6 +18,7 @@ import DialogAlert from "../components/alert/DialogAlert";
 import { axiosError } from "../data/axiosError";
 import DownloadButton from "../components/DownloadButton";
 import LineTooltip from "../components/tooltip/LineTooltip";
+import HitScoreTooltip from "../components/tooltip/HitScoreTooltip";
 import { Link } from "react-router-dom";
 const proteinStrings = stringConstants.protein.common;
 
@@ -164,7 +165,18 @@ const SiteList = props => {
     {
       dataField: "hit_score",
       text: "Hit Score",
-      sort: true
+      sort: true,
+      formatter: (value, row) => (
+        <>
+          <HitScoreTooltip
+            title={"Hit Score"}
+            text={"Hit Score Formula"}
+            formula={"0.1 + ∑ (Weight + 0.01 * Frequency)"}
+            contributions={row.score_info.contributions.map((item) => {return {c:proteinStrings.site_contributions[item.c] ? proteinStrings.site_contributions[item.c].name: item.c, w: item.w, f: item.f}})}
+          />
+          {row.hit_score}
+        </>
+      )
     },
     {
       dataField: "start_pos",
