@@ -47,6 +47,18 @@
 		{
 			"category": "Database",
 			"website": {
+				"name": "Glycowork",
+				"url": "https://bojarlab.github.io/glycowork/"
+			},
+			"description": "Glycowork is a Python package for glycan-focused data science and machine learning. This platform allows users to engage in an array of accessible as well as advanced analyses, both on stored datasets as well as user-provided data, to discover trends or associations in glycan-related data.",
+			"contains_publ": "Yes",
+			"experimental_data": "",
+			"curated": ""
+		},
+		
+		{
+			"category": "Database",
+			"website": {
 				"name": "GPTWiki",
 				"url": "https://gptwiki.glyomics.org/"
 			},
