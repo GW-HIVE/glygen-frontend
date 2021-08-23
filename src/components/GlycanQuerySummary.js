@@ -359,7 +359,7 @@ const GlycanQuerySummary = (props) => {
             <strong>“Update Results”</strong>.
           </Card.Text>
           {dataUnmap && dataUnmap.length > 0 && (<Card.Text>
-            ** {dataUnmap.length} IDs could not be found. To see the reason please,{" "}
+            ** {dataUnmap.length} ID(s) could not be found. To see the reason please,{" "}
             <LineTooltip text="Unmapped ID Table">
               <a href="#Unmapped-Table">click here</a>
             </LineTooltip>
