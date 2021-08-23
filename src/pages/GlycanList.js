@@ -320,12 +320,12 @@ const GlycanList = props => {
                     type: "byonic",
                     data: "glycan_list"
                   },
-                  {
-                    display: 
-                      stringConstants.download.glycan_gritsdata.displayname,
-                    type: "grits",
-                    data: "glycan_list"
-                  }
+                  // {
+                  //   display: 
+                  //     stringConstants.download.glycan_gritsdata.displayname,
+                  //   type: "grits",
+                  //   data: "glycan_list"
+                  // }
                 ]}
                 dataId={id}
               />
