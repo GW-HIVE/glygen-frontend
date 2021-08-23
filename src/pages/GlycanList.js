@@ -313,6 +313,18 @@ const GlycanList = props => {
                       stringConstants.download.glycan_jsondata.displayname,
                     type: "json",
                     data: "glycan_list"
+                  },
+                  {
+                    display:
+                     stringConstants.download.glycan_byonicdata.displayname,
+                    type: "byonic",
+                    data: "glycan_list"
+                  },
+                  {
+                    display: 
+                      stringConstants.download.glycan_gritsdata.displayname,
+                    type: "grits",
+                    data: "glycan_list"
                   }
                 ]}
                 dataId={id}

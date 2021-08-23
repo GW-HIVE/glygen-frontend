@@ -513,6 +513,32 @@
           "name": "Reason"
         },
         "title": "Reason why certain entries could not be found"
+      },
+      "contributions": {
+        "glycan_has_enzyme": {
+          "id": "glycan_has_enzyme",
+          "name": "glycan_has_enzyme"
+        },
+        "glycan_has_species": {
+          "id": "glycan_has_species",
+          "name": "glycan_has_species"
+        },
+        "glycan_fully_determined": {
+          "id": "glycan_fully_determined",
+          "name": "glycan_fully_determined"
+        },
+        "glycan_has_publication": {
+          "id": "glycan_has_publication",
+          "name": "glycan_has_publication"
+        },
+        "glycan_exact_match": {
+          "id": "glycan_exact_match",
+          "name": "glycan_exact_match"
+        },
+        "glycan_has_glycoprotein": {
+          "id": "glycan_has_glycoprotein",
+          "name": "glycan_has_glycoprotein"
+        }
       }
     },
     "global_search_results": {
@@ -1163,6 +1189,58 @@
           "name": "Reason"
         },
         "title": "Reason why certain entries could not be found"
+      },
+      "contributions": {
+        "protein_reported_n_glycosites": {
+          "id": "protein_reported_n_glycosites",
+          "name": "protein_reported_n_glycosites"
+        },
+        "protein_reported_o_glycosites": {
+          "id": "protein_reported_o_glycosites",
+          "name": "protein_reported_o_glycosites"
+        },
+        "protein_reported_o_glycosites_with_glycan": {
+          "id": "protein_reported_o_glycosites_with_glycan",
+          "name": "protein_reported_o_glycosites_with_glycan"
+        },
+        "protein_exact_match": {
+          "id": "protein_exact_match",
+          "name": "protein_exact_match"
+        },
+        "protein_predicted_glycosites": {
+          "id": "protein_predicted_glycosites",
+          "name": "protein_predicted_glycosites"
+        },
+        "protein_publication_count": {
+          "id": "protein_publication_count",
+          "name": "protein_publication_count"
+        },
+        "protein_reported_n_glycosites_with_glycan": {
+          "id": "protein_reported_n_glycosites_with_glycan",
+          "name": "protein_reported_n_glycosites_with_glycan"
+        }
+      },
+      "site_contributions": {
+        "site_has_phosphorylation": {
+          "id": "site_has_phosphorylation",
+          "name": "site_has_phosphorylation"
+        },
+        "site_has_mutagenesis": {
+          "id": "site_has_mutagenesis",
+          "name": "site_has_mutagenesis"
+        },
+        "site_has_glycosylation": {
+          "id": "site_has_glycosylation",
+          "name": "site_has_glycosylation"
+        },
+        "site_has_snv": {
+          "id": "site_has_snv",
+          "name": "site_has_snv"
+        },
+        "site_has_glycation": {
+          "id": "site_has_glycation",
+          "name": "site_has_glycation"
+        }
       }
     },
     "global_search_results": {
@@ -1755,6 +1833,16 @@
       "id": "glycan_csvdata",
       "displayname": "Glycan data (*.csv)",
       "tooltip": " glycan_csvdata Information for selected accession"
+    },
+    "glycan_byonicdata": {
+      "id": "glycan_byonicata",
+      "displayname": "Glycan data (*.byonic)",
+      "tooltip": " glycan_byonicdata Information for selected accession"
+    },
+    "glycan_gritsdata": {
+      "id": "glycan_gritsdata",
+      "displayname": "Glycan data (*.grits)",
+      "tooltip": " glycan_gritsdata Information for selected accession"
     },
     "protein_jsondata": {
       "id": "protein_jsondata",
