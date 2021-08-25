@@ -670,6 +670,37 @@
         "id": "site_range"
       },
 
+      "position_site": {
+        "name": "Position",
+        "shortName": "Position",
+        "tooltip": {
+          "title": "Position",
+          "text": "You can  enter site position to get more annotation information .",
+          "urlText": "Read more..."
+        },
+        "id": "position_site"
+      },
+      "pattern": {
+        "name": "Pattern",
+        "shortName": "Pattern",
+        "tooltip": {
+          "title": "Pattern",
+          "text": "You can  enter site pattern to get more annotation information .",
+          "urlText": "Read more..."
+        },
+        "id": "pattern"
+      },
+      "neighbours": {
+        "name": "Neighbours",
+        "shortName": "Neighbours",
+        "tooltip": {
+          "title": "Neighbours",
+          "text": "You can search neighbouring site by entering annotation information .",
+          "urlText": "Read more..."
+        },
+        "id": "neighbours"
+      },
+
       "chemical_mass": {
         "name": "Chemical Mass",
         "shortName": "chemical_mass",
