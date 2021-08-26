@@ -44,8 +44,13 @@ const SiteSearchControl = props => {
   const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
   const [aminoType, setAminoType] = useState("");
+  const [pattern, setPattern] = useState("");
+  const [distance, setDistance] = useState("0");
   const [annotationOperation, setAnnotationOperation] = useState("$and");
+  const [operator, setOperator] = useState("$lte");
+  const [updownoperator, setUpDownOperator] = useState("down_seq");
   const [annotations, setAnnotations] = useState([]);
+  const [singleannotations, setSingleAnnotations] = useState("");
   const [queryObject, setQueryObject] = useState({});
   const [pageLoading, setPageLoading] = useState(true);
   const [alertTextInput, setAlertTextInput] = useReducer(
@@ -60,9 +65,9 @@ const SiteSearchControl = props => {
 
   useEffect(() => {
     setPageLoading(true);
-    document.addEventListener('click', () => {
-			setAlertTextInput({"show": false})
-		});
+    document.addEventListener("click", () => {
+      setAlertTextInput({ show: false });
+    });
     logActivity();
     setAlertTextInput({ show: false });
     getSiteSearchInit().then(response => {
@@ -87,6 +92,19 @@ const SiteSearchControl = props => {
         }))
       );
     }
+
+    if (defaults.annotations) {
+      const anno = initData.annotation_type_list.filter(annotation => {
+        return defaults.annotations.includes(annotation.id);
+      });
+
+      setSingleAnnotations(
+        anno.map(x => ({
+          ...x,
+          name: x.label
+        }))
+      );
+    }
     if (defaults.aminoType) {
       setAminoType(defaults.aminoType);
     }
@@ -102,29 +120,54 @@ const SiteSearchControl = props => {
     if (defaults.annotationOperation) {
       setAnnotationOperation(defaults.annotationOperation);
     }
+    if (defaults.operator) {
+      setOperator(defaults.operator);
+    }
+    if (defaults.updownoperator) {
+      setOperator(defaults.updownoperator);
+    }
+    if (defaults.distance) {
+      setDistance(defaults.distance);
+    }
+    if (defaults.pattern) {
+      setPattern(defaults.pattern);
+    }
+
     console.log("defaults", defaults);
   }, [initData, defaults]);
 
-  // const validateMinRange = (minRange) => true;
-
-  // const minRangeError = validateMinRange(minRange)
-
   useEffect(() => {
+    let currentPosition = parseInt(position) || 0;
+
+    currentPosition = Math.min(currentPosition, 8);
+    currentPosition = Math.max(currentPosition, 0);
+
+    setPosition(currentPosition.toString());
+
     setPageLoading(false);
     setQueryObject({
       proteinId,
       aminoType,
       annotations,
       annotationOperation,
-      position,
+      singleannotations,
+      operator,
+      updownoperator,
+      distance,
       minRange,
-      maxRange
+      maxRange,
+      combinedPattern: `^[A-Z]{${parseInt(currentPosition)}}${pattern}`
     });
   }, [
     proteinId,
     aminoType,
     annotations,
     annotationOperation,
+    singleannotations,
+    operator,
+    updownoperator,
+    pattern,
+    distance,
     position,
     minRange,
     maxRange
@@ -137,11 +180,14 @@ const SiteSearchControl = props => {
     setAlertTextInput({ show: false });
     setproteinId("");
     setMinRange("");
+    setSingleAnnotations([]);
+    setOperator("$lte");
     setPosition("");
     setMaxRange("");
     setAnnotations([]);
     setAminoType("");
     setAnnotationOperation("$and");
+    setUpDownOperator("down_seq");
   };
 
   const handlePositionChange = event => {
@@ -150,15 +196,15 @@ const SiteSearchControl = props => {
     setMaxRange("");
   };
 
-  const handleMinRangeChange = event => {
-    setMinRange(event.target.value);
-    setPosition("");
-  };
+  // const handleMinRangeChange = event => {
+  //   setMinRange(event.target.value);
+  //   setPosition("");
+  // };
 
-  const handleMaxRangeChange = event => {
-    setMaxRange(event.target.value);
-    setPosition("");
-  };
+  // const handleMaxRangeChange = event => {
+  //   setMaxRange(event.target.value);
+  //   setPosition("");
+  // };
 
   const handleSearch = () => {
     setPageLoading(true);
@@ -172,10 +218,15 @@ const SiteSearchControl = props => {
       aminoType: queryObject.aminoType,
       annotations: queryObject.annotations.map(x => x.id.toLowerCase())
     })
-      .then((response) => {
+      .then(response => {
         let listId = undefined;
-        
-        if (response.data && response.data.results_summary && response.data.results_summary.site && response.data.results_summary.site.list_id)
+
+        if (
+          response.data &&
+          response.data.results_summary &&
+          response.data.results_summary.site &&
+          response.data.results_summary.site.list_id
+        )
           listId = response.data.results_summary.site.list_id;
 
         if (listId) {
@@ -205,14 +256,14 @@ const SiteSearchControl = props => {
       >
         <PageLoader pageLoading={pageLoading} />
         <DialogAlert
-						alertInput={alertDialogInput}
-						setOpen={(input) => {
-							setAlertDialogInput({"show": input})
-						}}
-					/>					
+          alertInput={alertDialogInput}
+          setOpen={input => {
+            setAlertDialogInput({ show: input });
+          }}
+        />
 
         <Grid item xs={12} sm={10}>
-          <TextAlert alertInput={alertTextInput} /> 
+          <TextAlert alertInput={alertTextInput} />
         </Grid>
 
         {initData && (
@@ -236,34 +287,6 @@ const SiteSearchControl = props => {
           <pre>{JSON.stringify(defaults)}</pre>
         </Grid> */}
 
-            {/* <Grid item xs={12} sm={10}>
-              <FormControl fullWidth variant="outlined">
-                <Typography className={"search-lbl"} gutterBottom>
-                  <HelpTooltip
-                    title={commonProteinData.uniprot_canonical_ac.tooltip.title}
-                    text={commonProteinData.uniprot_canonical_ac.tooltip.text}
-                    urlText={
-                      commonProteinData.uniprot_canonical_ac.tooltip.urlText
-                    }
-                    url={commonProteinData.uniprot_canonical_ac.tooltip.url}
-                  />
-                  {commonProteinData.uniprot_canonical_ac.name}
-                </Typography>
-                <MultilineAutoTextInput
-                  fullWidth
-                  inputValue={proteinId}
-                  setInputValue={setproteinId}
-                  placeholder={sitesData.uniprot_canonical_ac.placeholder}
-                  typeahedID={sitesData.uniprot_canonical_ac.typeahedID}
-                  length={sitesData.uniprot_canonical_ac.length}
-                  errorText={sitesData.uniprot_canonical_ac.errorText}
-                />
-                <ExampleExploreControl
-                  setInputValue={setproteinId}
-                  inputValue={advancedSearch.uniprot_canonical_ac.examples}
-                />
-              </FormControl>
-            </Grid> */}
             {/* Amino Acid */}
             <Grid item xs={12} sm={10}>
               <FormControl fullWidth variant="outlined">
@@ -336,56 +359,103 @@ const SiteSearchControl = props => {
               </FormControl>
             </Grid>
 
-            {/* Position */}
+            {/* Neighbours */}
             <Grid item xs={12} sm={10}>
               <FormControl fullWidth>
                 <Grid container spacing={2} alignItems="center">
                   <Grid item xs={6} sm={6}>
                     <Typography className={"search-lbl"} gutterBottom>
                       <HelpTooltip
-                        title={commonProteinData.site_range.tooltip.title}
-                        text={commonProteinData.site_range.tooltip.text}
+                        title={commonProteinData.neighbours.tooltip.title}
+                        text={commonProteinData.neighbours.tooltip.text}
                       />
-                      {commonProteinData.site_range.tooltip.title}
+                      {commonProteinData.neighbours.tooltip.title}
                     </Typography>
 
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel className={"select-lbl-inline"}>
-                        Min
-                      </InputLabel>
-                      <OutlinedInput
-                        className={props.inputClass}
-                        value={minRange}
-                        margin="dense"
-                        onChange={handleMinRangeChange}
-                        labelWidth={40}
-                        inputProps={{
-                          min: props.min,
-                          max: props.max
-                        }}
+                      <SelectControl
+                        inputValue={singleannotations}
+                        placeholder={sitesData.annotation.placeholder}
+                        placeholderId={sitesData.annotation.placeholderId}
+                        placeholderName={sitesData.annotation.placeholderName}
+                        menu={initData.annotation_type_list
+                          .map(a => ({
+                            ...a,
+                            name: a.label,
+                            id: a.id.replace("_flag", "")
+                          }))
+                          .sort(sortDropdown)}
+                        setInputValue={setSingleAnnotations}
                       />
                     </FormControl>
                   </Grid>
+                  <Grid item xs={3} sm={3}>
+                    <Typography className={"search-lbl"} gutterBottom>
+                      &nbsp;
+                    </Typography>
 
-                  <Grid item xs={6} sm={6}>
+                    <FormControl fullWidth variant="outlined">
+                      <AutoTextInput
+                        inputValue={distance}
+                        setInputValue={setDistance}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={3} sm={3}>
                     <Typography className={"search-lbl"} gutterBottom>
                       &nbsp;
                     </Typography>
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel className={"select-lbl-inline"}>
-                        Max
-                      </InputLabel>
-                      <OutlinedInput
-                        className={props.inputClass}
-                        value={maxRange}
-                        margin="dense"
-                        onChange={handleMaxRangeChange}
-                        labelWidth={40}
-                        inputProps={{
-                          min: props.min,
-                          max: props.max
-                        }}
-                        // disabled={positionOrRange !== "range"}
+                      <SelectControl
+                        inputValue={operator}
+                        menu={advancedSearch.operatorforsite.operations}
+                        setInputValue={setOperator}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+              </FormControl>
+            </Grid>
+
+            {/* Pattern */}
+            <Grid item xs={12} sm={10}>
+              <FormControl fullWidth>
+                <Grid container spacing={2} alignItems="center">
+                  <Grid item xs={4} sm={4}>
+                    <Typography className={"search-lbl"} gutterBottom>
+                      <HelpTooltip
+                        title={commonProteinData.pattern.tooltip.title}
+                        text={commonProteinData.pattern.tooltip.text}
+                      />
+                      {commonProteinData.pattern.tooltip.title}
+                    </Typography>
+                    <FormControl fullWidth variant="outlined">
+                      <SelectControl
+                        inputValue={updownoperator}
+                        menu={advancedSearch.updownstreamforsite.operations}
+                        setInputValue={setUpDownOperator}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={4} sm={4}>
+                    <Typography className={"search-lbl"} gutterBottom>
+                      &nbsp;
+                    </Typography>
+                    <FormControl fullWidth variant="outlined">
+                      <AutoTextInput
+                        inputValue={position}
+                        setInputValue={setPosition}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={4} sm={4}>
+                    <Typography className={"search-lbl"} gutterBottom>
+                      &nbsp;
+                    </Typography>
+                    <FormControl fullWidth variant="outlined">
+                      <AutoTextInput
+                        inputValue={pattern}
+                        setInputValue={setPattern}
                       />
                     </FormControl>
                   </Grid>
