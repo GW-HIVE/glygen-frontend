@@ -306,6 +306,36 @@
       ]
     },
 
+    "operatorforsite": {
+      "placeholder": "Click to select one or multiple Amino Acids",
+      "operations": [
+        {
+          "id": "$gte",
+          "name": ">="
+        },
+        {
+          "id": "$eq",
+          "name": "="
+        },
+        {
+          "id": "$lte",
+          "name": "<="
+        }
+      ]
+    },
+    "updownstreamforsite": {
+      "placeholder": "Click to select one or multiple Amino Acids",
+      "operations": [
+        {
+          "id": "down_seq",
+          "name": "Down stream"
+        },
+        {
+          "id": "up_seq",
+          "name": "Up stream"
+        }
+      ]
+    },
     "sequence": {
       "length": 2500,
       "errorText": "Entry is too long - max length is 2500.",
@@ -433,6 +463,6 @@
     "tabTitle": "Tutorial"
   },
   "query_search": {
-    "queryProps":["mass","tolerance","acc"]
+    "queryProps": ["mass", "tolerance", "acc"]
   }
 }
