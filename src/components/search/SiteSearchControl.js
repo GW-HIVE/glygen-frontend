@@ -40,12 +40,12 @@ const SiteSearchControl = props => {
   const { defaults } = props;
   const [initData, setInitData] = useState(null);
   const [position, setPosition] = useState("");
-  const [minRange, setMinRange] = useState("");
-  const [maxRange, setMaxRange] = useState("");
+  // const [minRange, setMinRange] = useState("");
+  // const [maxRange, setMaxRange] = useState("");
   const [proteinId, setproteinId] = useState("");
   const [aminoType, setAminoType] = useState("");
   const [pattern, setPattern] = useState("");
-  const [distance, setDistance] = useState("0");
+  const [distance, setDistance] = useState("");
   const [annotationOperation, setAnnotationOperation] = useState("$and");
   const [operator, setOperator] = useState("$lte");
   const [updownoperator, setUpDownOperator] = useState("down_seq");
@@ -108,12 +108,12 @@ const SiteSearchControl = props => {
     if (defaults.aminoType) {
       setAminoType(defaults.aminoType);
     }
-    if (defaults.min) {
-      setMinRange(defaults.min);
-    }
-    if (defaults.max) {
-      setMaxRange(defaults.max);
-    }
+    // if (defaults.min) {
+    //   setMinRange(defaults.min);
+    // }
+    // if (defaults.max) {
+    //   setMaxRange(defaults.max);
+    // }
     if (defaults.position) {
       setPosition(defaults.position);
     }
@@ -140,7 +140,7 @@ const SiteSearchControl = props => {
     let currentPosition = parseInt(position) || 0;
 
     currentPosition = Math.min(currentPosition, 8);
-    currentPosition = Math.max(currentPosition, 0);
+    // currentPosition = Math.max(currentPosition, 0);
 
     setPosition(currentPosition.toString());
 
@@ -154,9 +154,11 @@ const SiteSearchControl = props => {
       operator,
       updownoperator,
       distance,
-      minRange,
-      maxRange,
-      combinedPattern: `^[A-Z]{${parseInt(currentPosition)}}${pattern}`
+      // minRange,
+      // maxRange,
+      combinedPattern: `^[A-Z]{${parseInt(
+        currentPosition
+      )}}${pattern.toUpperCase()}`
     });
   }, [
     proteinId,
@@ -168,9 +170,9 @@ const SiteSearchControl = props => {
     updownoperator,
     pattern,
     distance,
-    position,
-    minRange,
-    maxRange
+    position
+    // minRange,
+    // maxRange
   ]);
 
   /**
@@ -179,11 +181,13 @@ const SiteSearchControl = props => {
   const clearSite = () => {
     setAlertTextInput({ show: false });
     setproteinId("");
-    setMinRange("");
+    // setMinRange("");
     setSingleAnnotations([]);
     setOperator("$lte");
-    setPosition("");
-    setMaxRange("");
+    setPosition(" ");
+    setPattern("");
+    setDistance("");
+    // setMaxRange("");
     setAnnotations([]);
     setAminoType("");
     setAnnotationOperation("$and");
@@ -364,8 +368,8 @@ const SiteSearchControl = props => {
                         menu={initData.annotation_type_list
                           .map(a => ({
                             ...a,
-                            name: a.label
-                            // id: a.id.replace("_flag", "")
+                            name: a.label,
+                            id: a.id.replace("_flag", "")
                           }))
                           .sort(sortDropdown)}
                         setInputValue={setSingleAnnotations}
