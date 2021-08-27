@@ -4,7 +4,6 @@ import Helmet from "react-helmet";
 import Button from "react-bootstrap/Button";
 import { getTitle, getMeta } from "../utils/head";
 import { useParams } from "react-router-dom";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getGlycanList } from "../data";
 import { GLYCAN_COLUMNS } from "../data/glycan";
@@ -24,7 +23,6 @@ import ListFilter from "../components/ListFilter";
 import { ReactComponent as ArrowRightIcon } from "../images/icons/arrowRightIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../images/icons/arrowLeftIcon.svg";
 import ClientPaginatedTable from "../components/ClientPaginatedTable";
-
 const GlycanList = props => {
   let { id } = useParams();
   let { searchId } = useParams();
@@ -86,7 +84,11 @@ const GlycanList = props => {
           setPageLoading(false);
         } else {
           setData(data.results);
-          setDataUnmap(data.cache_info.batch_info && data.cache_info.batch_info.unmapped ? data.cache_info.batch_info.unmapped : []);
+          setDataUnmap(
+            data.cache_info.batch_info && data.cache_info.batch_info.unmapped
+              ? data.cache_info.batch_info.unmapped
+              : []
+          );
           if (
             data.cache_info.query.glycan_identifier &&
             data.cache_info.query.glycan_identifier.glycan_id
@@ -151,17 +153,7 @@ const GlycanList = props => {
     });
   };
 
-  // useEffect(() => {
-  //   if (data && data.length === 0) {
-  //     setAlertDialogInput({
-  //       show: true,
-  //       id: "no-result-found"
-  //     });
-  //   }
-  // }, [data]);
-
   const handleFilterChange = newFilter => {
-    // debugger;
     console.log(newFilter);
 
     const existingFilter = appliedFilters.find(
@@ -219,13 +211,13 @@ const GlycanList = props => {
       dataField: unmappedStrings.input_id.shortName,
       text: unmappedStrings.input_id.name,
       sort: true,
-      selected: true,
+      selected: true
     },
     {
       dataField: unmappedStrings.reason.shortName,
       text: unmappedStrings.reason.name,
-      sort: true,
-    },
+      sort: true
+    }
   ];
 
   return (
@@ -316,12 +308,12 @@ const GlycanList = props => {
                   },
                   {
                     display:
-                     stringConstants.download.glycan_byonicdata.displayname,
+                      stringConstants.download.glycan_byonicdata.displayname,
                     type: "byonic",
                     data: "glycan_list"
-                  },
+                  }
                   // {
-                  //   display: 
+                  //   display:
                   //     stringConstants.download.glycan_gritsdata.displayname,
                   //   type: "grits",
                   //   data: "glycan_list"
@@ -346,24 +338,26 @@ const GlycanList = props => {
               )}
               {/* {data && data.length === 0 && <p>No data.</p>} */}
             </section>
-            {dataUnmap && dataUnmap.length > 0 && (<>
-              <div id="Unmapped-Table"></div>
+            {dataUnmap && dataUnmap.length > 0 && (
+              <>
+                <div id="Unmapped-Table"></div>
                 <div className="content-box-sm">
                   <h1 className="page-heading">{unmappedStrings.title}</h1>
                 </div>
-              <section>
-                {/* Unmapped Table */}
-                {unmapIDColumns && unmapIDColumns.length !== 0 && (
-                  <ClientPaginatedTable
-                    data={dataUnmap}
-                    columns={unmapIDColumns}
-                    defaultSortField={"input_id"}
-                    defaultSortOrder="asc"
-                    onClickTarget={"#Unmapped-Table"}
-                />
-                )}
-              </section>
-            </>)}
+                <section>
+                  {/* Unmapped Table */}
+                  {unmapIDColumns && unmapIDColumns.length !== 0 && (
+                    <ClientPaginatedTable
+                      data={dataUnmap}
+                      columns={unmapIDColumns}
+                      defaultSortField={"input_id"}
+                      defaultSortOrder="asc"
+                      onClickTarget={"#Unmapped-Table"}
+                    />
+                  )}
+                </section>
+              </>
+            )}
           </div>
         </div>
       </div>

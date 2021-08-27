@@ -190,20 +190,10 @@ const SiteSearchControl = props => {
     setUpDownOperator("down_seq");
   };
 
-  const handlePositionChange = event => {
-    setPosition(event.target.value);
-    setMinRange("");
-    setMaxRange("");
-  };
-
-  // const handleMinRangeChange = event => {
-  //   setMinRange(event.target.value);
-  //   setPosition("");
-  // };
-
-  // const handleMaxRangeChange = event => {
-  //   setMaxRange(event.target.value);
-  //   setPosition("");
+  // const handlePositionChange = event => {
+  //   setPosition(event.target.value);
+  //   setMinRange("");
+  //   setMaxRange("");
   // };
 
   const handleSearch = () => {
@@ -274,18 +264,11 @@ const SiteSearchControl = props => {
                 <Button className="gg-btn-outline mr-4" onClick={clearSite}>
                   Clear Fields
                 </Button>
-                <Button
-                  className="gg-btn-blue"
-                  onClick={handleSearch}
-                  // disabled={!SiteSearchValError.every(err => err === false)}
-                >
+                <Button className="gg-btn-blue" onClick={handleSearch}>
                   Search Protein Site
                 </Button>
               </Row>
             </Grid>
-            {/* <Grid item>
-          <pre>{JSON.stringify(defaults)}</pre>
-        </Grid> */}
 
             {/* Amino Acid */}
             <Grid item xs={12} sm={10}>
@@ -381,8 +364,8 @@ const SiteSearchControl = props => {
                         menu={initData.annotation_type_list
                           .map(a => ({
                             ...a,
-                            name: a.label,
-                            id: a.id.replace("_flag", "")
+                            name: a.label
+                            // id: a.id.replace("_flag", "")
                           }))
                           .sort(sortDropdown)}
                         setInputValue={setSingleAnnotations}
@@ -483,6 +466,4 @@ const SiteSearchControl = props => {
 
 export default SiteSearchControl;
 
-SiteSearchControl.propTypes = {
-  // initData: PropTypes.object
-};
+SiteSearchControl.propTypes = {};

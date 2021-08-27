@@ -35,16 +35,8 @@ export const getProteinList = (
 };
 
 export const getProteinsiteDetail = (protienId, position) => {
-  // const queryParamString = JSON.stringify({
-  //   uniprot_canonical_ac: protienId,
-  //   start_pos: parseInt(position),
-  //   end_pos: parseInt(position)
-  // });
-
   const url = `/site/detail/${protienId}.${position}.${position}`;
   return getJson(url);
-  // const url = `/proteinsite/detail?query=${queryParamString}`;
-  // return getJson(url);
 };
 
 export const getProteinDetail = accessionId => {
@@ -117,7 +109,15 @@ export const PROTEIN_COLUMNS = [
           title={"Hit Score"}
           text={"Hit Score Formula"}
           formula={"0.1 + ∑ (Weight + 0.01 * Frequency)"}
-          contributions={row.score_info.contributions.map((item) => {return {c:proteinStrings.contributions[item.c] ? proteinStrings.contributions[item.c].name: item.c, w: item.w, f: item.f}})}
+          contributions={row.score_info.contributions.map(item => {
+            return {
+              c: proteinStrings.contributions[item.c]
+                ? proteinStrings.contributions[item.c].name
+                : item.c,
+              w: item.w,
+              f: item.f
+            };
+          })}
         />
         {row.hit_score}
       </>

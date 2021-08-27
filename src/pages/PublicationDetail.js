@@ -422,7 +422,7 @@ const PublicationDetail = props => {
         )
     },
     {
-      dataField: "image",
+      dataField: "glytoucan_ac",
       text: glycanStrings.glycan_image.name,
       sort: false,
       headerStyle: (colum, colIndex) => {
