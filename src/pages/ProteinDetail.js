@@ -1751,13 +1751,11 @@ const ProteinDetail = props => {
     }, 0);
 
     // use info to make a string
-    return [
-      `${totalSites} Sites`,
-      Object.keys(info).map(
-        key =>
-          `${info[key].count} ${key} (${info[key].sites.length} glycans sites  )`
-      )
-    ].join(", ");
+    return [`${totalSites} Sites`].concat(Object.keys(info).map(
+      key =>
+        `${info[key].count} ${key} (${info[key].sites.length} glycans sites)`
+    )).join(", ");
+    
     //15 sites, 31 N-linked glycans (14 sites), 1 O-linked glycan (1 site)
   };
 
