@@ -1329,7 +1329,7 @@ const GlycanDetail = props => {
                           </div>
                         )}
 
-                        {byonic && (
+                        {byonic && byonic.length > 0 && byonic !== "%" && (
                           <div>
                             <Row>
                               <Col md="auto" className="pr-0">
