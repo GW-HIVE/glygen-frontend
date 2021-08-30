@@ -62,7 +62,7 @@ const HitScoreTooltip = (props) => {
 					{props.contributions && props.contributions.length > 0 && <>
 
 						<ClientTable
-							data={props.contributions.map((item)=> {return { cond:item.c, wt: item.w, fq: item.f, contr:Math.round((item.w + item.f * 0.01 +  Number.EPSILON) * 100) / 100}})}
+							data={props.contributions.map((item)=> {return { cond:item.c, wt: item.w, fq: item.f, contr:Math.round((item.w + item.f * 0.01 +  Number.EPSILON) * 100) / 100}}).sort((item1, item2) => item1.cond >= item2.cond ? 1 : -1)}
 							columns={hitScoreColumns}
 							totalName={"Hit Score (Total + 0.1)"}
 							totalColspan={3}
