@@ -1317,7 +1317,7 @@ const GlycanDetail = props => {
                         )}
                         {composition && (
                           <div>
-                            <strong>Composition</strong>:{" "}
+                            <strong>Composition:{" "}</strong>
                             <CompositionDisplay composition={composition} />{" "}
                             <DirectSearch
                               text={glycanDirectSearch.composition.text}
@@ -1334,8 +1334,8 @@ const GlycanDetail = props => {
                             <Row>
                               <Col md="auto" className="pr-0">
                                 <strong>
-                                  {glycanStrings.byonic.shortName}
-                                </strong>:&nbsp;
+                                  {glycanStrings.byonic.shortName}:&nbsp;
+                                </strong>
                               </Col>
                               <Col md="auto" className="pl-0 pr-0">
                                   {byonic.split('%')[0].trim()}
