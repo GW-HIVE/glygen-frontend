@@ -600,7 +600,13 @@ const GlycanSearch = (props) => {
 							glyOrganisms:
 								data.cache_info.query.organism === undefined
 									? []
-									: data.cache_info.query.organism.organism_list,
+									: data.cache_info.query.organism.organism_list.map(
+										org => {
+											return initData.organism.find(initOrg => {
+												return initOrg.id === org.id;
+											});
+										}
+									),
 							glyType:
 								data.cache_info.query.glycan_type === undefined
 									? advancedSearch.glycan_type.placeholderId
