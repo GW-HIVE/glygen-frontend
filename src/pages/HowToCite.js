@@ -36,7 +36,6 @@ const HowToCite = (props) => {
         {getMeta("howToCite")}
       </Helmet>
       <CssBaseline />
-      <div id="top-heading"></div>
       <Row className="gg-baseline">
         <Col sm={12} md={12} lg={12} xl={3} className="sidebar-col">
           <Sidebar items={items} />
