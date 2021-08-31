@@ -240,16 +240,6 @@
 					"url": "https://www.ccrc.uga.edu/personnel/index.php?uid=32&personnel=Tenure-Track%20Faculty"
 				},
 				{
-					"name": "Wenjin Zhang",
-					"position": "",
-					"department": "",
-					"institution": "The Georgetown University",
-					"location": "Washington, DC",
-					"image": "/team/Wenjin-Zhang.png",
-					"imageText": "Wenjin Zhang image",
-					"url": "https://www.linkedin.com/in/wenjinzhang/"
-				},
-				{
 					"name": "Vijay Shanker",
 					"position": "",
 					"department": "",
@@ -535,6 +525,17 @@
 				"image": "/team/Rahi-Navelkar.png",
 				"imageText": "Rahi Navelkar image",
 				"url": "https://www.linkedin.com/in/rahi-navelkar-b24b08131/",
+				"dateLeft": "Left project August 2021"
+			},
+			{
+				"name": "Wenjin Zhang",
+				"position": "",
+				"department": "",
+				"institution": "The Georgetown University",
+				"location": "Washington, DC",
+				"image": "/team/Wenjin-Zhang.png",
+				"imageText": "Wenjin Zhang image",
+				"url": "https://www.linkedin.com/in/wenjinzhang/",
 				"dateLeft": "Left project August 2021"
 			}
 		]
