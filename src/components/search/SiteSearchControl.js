@@ -71,6 +71,7 @@ const SiteSearchControl = props => {
     logActivity();
     setAlertTextInput({ show: false });
     getSiteSearchInit().then(response => {
+      response.data.annotation_type_list = response.data.annotation_type_list.map((item) => {return {id: item.id, name: item.label}});
       setInitData(response.data);
       setPageLoading(false);
     });
@@ -84,26 +85,14 @@ const SiteSearchControl = props => {
       const anno = initData.annotation_type_list.filter(annotation => {
         return defaults.annotations.includes(annotation.id);
       });
-
-      setAnnotations(
-        anno.map(x => ({
-          ...x,
-          name: x.label
-        }))
-      );
+      setAnnotations(anno);
     }
 
     if (defaults.annotations) {
       const anno = initData.annotation_type_list.filter(annotation => {
         return defaults.annotations.includes(annotation.id);
       });
-
-      setSingleAnnotations(
-        anno.map(x => ({
-          ...x,
-          name: x.label
-        }))
-      );
+      setSingleAnnotations(anno);
     }
     if (defaults.aminoType) {
       setAminoType(defaults.aminoType);
@@ -320,13 +309,7 @@ const SiteSearchControl = props => {
                       placeholder={sitesData.annotation.placeholder}
                       placeholderId={sitesData.annotation.placeholderId}
                       placeholderName={sitesData.annotation.placeholderName}
-                      options={initData.annotation_type_list
-                        .map(a => ({
-                          ...a,
-                          name: a.label
-                        }))
-
-                        .sort(sortDropdown)}
+                      options={initData.annotation_type_list.sort(sortDropdown)}
                       setInputValue={setAnnotations}
                     ></MultiselectTextInput>
                   </Grid>
@@ -367,8 +350,7 @@ const SiteSearchControl = props => {
                         placeholderName={sitesData.annotation.placeholderName}
                         menu={initData.annotation_type_list
                           .map(a => ({
-                            ...a,
-                            name: a.label,
+                            name: a.name,
                             id: a.id.replace("_flag", "")
                           }))
                           .sort(sortDropdown)}
