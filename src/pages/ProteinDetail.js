@@ -1854,7 +1854,6 @@ const ProteinDetail = (props) => {
                             }}
                           >
                             <Tab
-                              className="singleTabcss"
                               eventKey="reported_with_glycan"
                               title="Reported Sites with Glycan"
                               //disabled={(!glycosylationWithImage || (glycosylationWithImage.length === 0))}
@@ -1865,7 +1864,7 @@ const ProteinDetail = (props) => {
                                   {createGlycosylationSummary(glycosylationWithImage)}
                                 </div>
                               )}
-                              <Container className="tab-content-padding">
+                              <Container>
                                 {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                                   <ClientPaginatedTable
                                     data={addIndex(glycosylationWithImage)}
@@ -1876,13 +1875,14 @@ const ProteinDetail = (props) => {
                                     defaultSortOrder="asc"
                                   />
                                 )}
-                                {!glycosylationWithImage.length && <p>No data available.</p>}
+                                {!glycosylationWithImage.length && (
+                                  <div className="tab-content-padding">No data available.</div>
+                                )}
                               </Container>
                             </Tab>
 
                             <Tab
                               eventKey="reported"
-                              className="tab-content-padding"
                               title="Reported Sites"
                               // disabled={(!glycosylationWithoutImage || (glycosylationWithoutImage.length === 0))}
                             >
@@ -1907,7 +1907,9 @@ const ProteinDetail = (props) => {
                                       defaultSortOrder="asc"
                                     />
                                   )}
-                                {!glycosylationWithoutImage.length && <p>No data available.</p>}
+                                {!glycosylationWithoutImage.length && (
+                                  <div className="tab-content-padding">No data available.</div>
+                                )}
                               </Container>
                             </Tab>
                             <Tab
@@ -1921,8 +1923,7 @@ const ProteinDetail = (props) => {
                                   {createGlycosylationSummary(glycosylationPredicted)}
                                 </div>
                               )}
-
-                              <Container className="tab-content-padding">
+                              <Container>
                                 {glycosylationPredicted && glycosylationPredicted.length > 0 && (
                                   <ClientPaginatedTable
                                     data={glycosylationPredicted}
@@ -1936,7 +1937,9 @@ const ProteinDetail = (props) => {
                                     defaultSortOrder="asc"
                                   />
                                 )}
-                                {!glycosylationPredicted.length && <p>No data available.</p>}
+                                {!glycosylationPredicted.length && (
+                                  <div className="tab-content-padding">No data available.</div>
+                                )}
                               </Container>
                             </Tab>
                             <Tab
@@ -1953,7 +1956,7 @@ const ProteinDetail = (props) => {
                                   {createGlycosylationSummary(glycosylationMining)}
                                 </div>
                               )}
-                              <Container className="tab-content-padding">
+                              <Container>
                                 {glycosylationMining && glycosylationMining.length > 0 && (
                                   <ClientPaginatedTable
                                     data={glycosylationMining}
@@ -1967,7 +1970,9 @@ const ProteinDetail = (props) => {
                                     defaultSortOrder="asc"
                                   />
                                 )}
-                                {!glycosylationMining.length && <p>No data available.</p>}
+                                {!glycosylationMining.length && (
+                                  <div className="tab-content-padding">No data available.</div>
+                                )}
                               </Container>
                             </Tab>
                           </Tabs>

@@ -1310,7 +1310,7 @@ const PublicationDetail = (props) => {
                               </div>
                             )}
 
-                            <Container className="tab-content-padding">
+                            <Container>
                               <ClientPaginatedTable
                                 data={addIndex(
                                   glycosylationWithImage.sort((a, b) => {
@@ -1325,12 +1325,19 @@ const PublicationDetail = (props) => {
                                 defaultSortOrder="asc"
                                 idField={"index"}
                               />
-                              {/* )} */}
-                              {!glycosylationWithImage.length && <span>No data available.</span>}
+                              {!glycosylationWithImage.length && (
+                                <div className="tab-content-padding">No data available.</div>
+                              )}
                             </Container>
                           </Tab>
                           <Tab eventKey="reported" title="Reported Sites">
-                            <Container className="tab-content-padding">
+                            {glycosylationWithoutImage && glycosylationWithoutImage.length !== 0 && (
+                              <div className="Glycosummary">
+                                <strong>Summary:</strong>{" "}
+                                {createGlycosylationSummary(glycosylationWithoutImage)}
+                              </div>
+                            )}
+                            <Container>
                               {glycosylationWithoutImage &&
                                 glycosylationWithoutImage.length > 0 && (
                                   <ClientPaginatedTable
@@ -1346,7 +1353,9 @@ const PublicationDetail = (props) => {
                                     idField={"index"}
                                   />
                                 )}
-                              {!glycosylationWithoutImage.length && <span>No data available.</span>}
+                              {!glycosylationWithoutImage.length && (
+                                <div className="tab-content-padding">No data available.</div>
+                              )}
                             </Container>
                           </Tab>
                           <Tab eventKey="automatic_literature_mining" title="Text Mining">
@@ -1356,7 +1365,7 @@ const PublicationDetail = (props) => {
                                 {createGlycosylationSummary(glycosylationMining)}
                               </div>
                             )}
-                            <Container className="tab-content-padding">
+                            <Container>
                               {glycosylationMining && glycosylationMining.length > 0 && (
                                 <ClientPaginatedTable
                                   data={addIndex(glycosylationMining)}
@@ -1371,7 +1380,9 @@ const PublicationDetail = (props) => {
                                   idField={"index"}
                                 />
                               )}
-                              {!glycosylationMining.length && <span>No data available.</span>}
+                              {!glycosylationMining.length && (
+                                <div className="tab-content-padding">No data available.</div>
+                              )}
                             </Container>
                           </Tab>
                         </Tabs>
