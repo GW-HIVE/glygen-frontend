@@ -148,9 +148,9 @@ const SiteSearchControl = props => {
       distance,
       // minRange,
       // maxRange,
-      combinedPattern: `^[A-Z]{${parseInt(
+      combinedPattern: updownoperator === 'up_seq' ? `${pattern.toUpperCase()}{${parseInt(
         currentPosition
-      )}}${pattern.toUpperCase()}`
+      )}}[A-Z]$` : `^[A-Z]{${parseInt(currentPosition)}}${pattern.toUpperCase()}`
     });
   }, [
     proteinId,
