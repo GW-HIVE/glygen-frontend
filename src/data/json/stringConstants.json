@@ -1281,6 +1281,9 @@
       "glycosylation": {
         "name": "glycosylation"
       },
+      "interactions": {
+        "name": "interactions"
+      },
       "identifiers": {
         "name": "identifiers"
       },
