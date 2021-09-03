@@ -43,6 +43,7 @@ const SiteQuerySummary = (props) => {
   const title = "Site Search Summary";
   const { data, onModifySearch, timestamp, searchId, initData } = props;
   const proteinStrings = stringConstants.protein.common;
+  const siteStrings = stringConstants.site.common;
   const superSearchStrings = stringConstants.super_search.common;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
@@ -94,7 +95,7 @@ const SiteQuerySummary = (props) => {
                   {annotations && !!annotations.length && (
                     <Row className="summary-table-col" sm={12}>
                       <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                        {proteinStrings.annotation_type.name}:
+                        {siteStrings.annotation_type.name}:
                       </Col>
                       <Col align="left" xs={6} sm={6} md={6} lg={6}>
                         {annotations.map((anno) => anno.label).join(` ${annotationOperation} `)}
@@ -104,7 +105,7 @@ const SiteQuerySummary = (props) => {
                   {querySummary.aminoType && (
                     <Row className="summary-table-col" sm={12}>
                       <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                        {proteinStrings.glycosylated_aa.site_form}:
+                        {siteStrings.glycosylated_aa.name}:
                       </Col>
                       <Col align="left" xs={6} sm={6} md={6} lg={6}>
                         {querySummary.aminoType}

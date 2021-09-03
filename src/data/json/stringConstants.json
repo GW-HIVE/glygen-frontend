@@ -638,17 +638,6 @@
         },
         "id": "uniprot_canonical_ac"
       },
-
-      "annotation_type": {
-        "name": "Annotation Type",
-        "shortName": "Annotation Type",
-        "tooltip": {
-          "title": "Annotation Type",
-          "text": "You can search site by entering Annotation Type.",
-          "urlText": "Read more..."
-        },
-        "id": "annotation_type"
-      },
       "site": {
         "name": "Site",
         "shortName": "Position",
@@ -659,55 +648,12 @@
         },
         "id": "site"
       },
-      "site_range": {
-        "name": "Range",
-        "shortName": "Range",
-        "tooltip": {
-          "title": "Range",
-          "text": "You can search site by entering annotation Start Position and End Position .",
-          "urlText": "Read more..."
-        },
-        "id": "site_range"
-      },
-
-      "position_site": {
-        "name": "Position",
-        "shortName": "Position",
-        "tooltip": {
-          "title": "Position",
-          "text": "You can  enter site position to get more annotation information .",
-          "urlText": "Read more..."
-        },
-        "id": "position_site"
-      },
-      "pattern": {
-        "name": "Pattern",
-        "shortName": "Pattern",
-        "tooltip": {
-          "title": "Pattern",
-          "text": "You can  enter site pattern to get more annotation information .",
-          "urlText": "Read more..."
-        },
-        "id": "pattern"
-      },
-      "neighbours": {
-        "name": "Neighbours",
-        "shortName": "Neighbours",
-        "tooltip": {
-          "title": "Neighbours",
-          "text": "You can search neighbouring site by entering annotation information .",
-          "urlText": "Read more..."
-        },
-        "id": "neighbours"
-      },
-
       "chemical_mass": {
         "name": "Chemical Mass",
         "shortName": "chemical_mass",
         "tooltip": {},
         "id": "chemical_mass"
       },
-
       "gene_name": {
         "name": "Gene Name",
         "shortName": "gene_name",
@@ -755,7 +701,6 @@
         },
         "id": "glycosylation_type"
       },
-
       "gene_url": {
         "name": "URL",
         "shortName": "url",
@@ -939,12 +884,6 @@
         "tooltip": {},
         "id": " identity"
       },
-      "annotationn": {
-        "name": "Annotation Name",
-        "shortName": "Annotation Name",
-        "tooltip": {},
-        "id": "annotationsss"
-      },
       "glytoucan_ac": {
         "name": "GlyTouCan Glycan",
         "shortName": "GlyTouCan Accession",
@@ -988,16 +927,6 @@
         },
         "id": "glycosylated_aa"
       },
-
-      "glycosylated_aa1": {
-        "name": " Amino Acid",
-        "shortName": "Amino Residue",
-        "tooltip": {
-          "title": "Glycosylated Amino Acid",
-          "text": "Amino acids are organic compounds containing amine (-NH2) and carboxyl (-COOH) functional groups, along with a side chain (R group) specific to each amino acid. Click to highlight multiple selections for Glycosylated Amino Acid."
-        },
-        "id": "glycosylated_aa1"
-      },
       "sequence": {
         "name": "Protein or Peptide Sequence",
         "shortName": "Protein or Peptide Sequence",
@@ -1039,15 +968,6 @@
           "text": "Click to select Glycosylation Evidence Type."
         },
         "id": "glycosylation_evidence"
-      },
-      "annotation": {
-        "name": "Annotation",
-        "shortName": "Annotation",
-        "tooltip": {
-          "title": "Annotation",
-          "text": "Click to select Annotation."
-        },
-        "id": "annotation"
       },
       "Protein_ShortName": {
         "name": "Protein Name",
@@ -1250,28 +1170,6 @@
           "id": "protein_reported_n_glycosites_with_glycan",
           "name": "N-Glycosylation sites (with glycan structure)"
         }
-      },
-      "site_contributions": {
-        "site_has_phosphorylation": {
-          "id": "site_has_phosphorylation",
-          "name": "Phosphorylation annotations"
-        },
-        "site_has_mutagenesis": {
-          "id": "site_has_mutagenesis",
-          "name": "Metagenesis annotations"
-        },
-        "site_has_glycosylation": {
-          "id": "site_has_glycosylation",
-          "name": "Glycosylation annotations"
-        },
-        "site_has_snv": {
-          "id": "site_has_snv",
-          "name": "SVN annotations"
-        },
-        "site_has_glycation": {
-          "id": "site_has_glycation",
-          "name": "Glycation annotations"
-        }
       }
     },
     "global_search_results": {
@@ -1330,6 +1228,115 @@
       },
       "pmid": {
         "text": "Find all proteins / glycoproteins with the same PMID."
+      }
+    }
+  },
+  "site": {
+    "common": {
+      "annotation_type": {
+        "name": "Annotation Type",
+        "shortName": "Annotation Type",
+        "tooltip": {
+          "title": "Annotation Type",
+          "text": "Click to select Annotation Type."
+        },
+        "id": "annotation_type"
+      },
+      "annotation": {
+        "name": "Annotation",
+        "shortName": "Annotation",
+        "tooltip": {
+          "title": "Annotation",
+          "text": "Click to select Annotation."
+        },
+        "id": "annotation"
+      },
+      "site": {
+        "name": "Site",
+        "shortName": "Position",
+        "tooltip": {
+          "title": "Position",
+          "text": "You can search site by entering annotation Position.",
+          "urlText": "Read more..."
+        },
+        "id": "site"
+      },
+      "site_range": {
+        "name": "Range",
+        "shortName": "Range",
+        "tooltip": {
+          "title": "Range",
+          "text": "You can search site by entering annotation Start Position and End Position.",
+          "urlText": "Read more..."
+        },
+        "id": "site_range"
+      },
+      "position_site": {
+        "name": "Position",
+        "shortName": "Position",
+        "tooltip": {
+          "title": "Position",
+          "text": "You can  enter site position to get more annotation information.",
+          "urlText": "Read more..."
+        },
+        "id": "position_site"
+      },
+      "pattern": {
+        "name": "Pattern",
+        "shortName": "Pattern",
+        "tooltip": {
+          "title": "Pattern",
+          "text": "You can  enter site pattern to get more annotation information.",
+          "urlText": "Read more..."
+        },
+        "id": "pattern"
+      },
+      "neighbors": {
+        "name": "Neighbors",
+        "shortName": "Neighbors",
+        "tooltip": {
+          "title": "Neighbors",
+          "text": "You can search neighboring site by entering annotation information.",
+          "urlText": "Read more..."
+        },
+        "id": "neighbors"
+      },
+      "hit_score": {
+        "name": "Hit Score",
+        "shortName": "Hit Score",
+        "id": "hit_score"
+      },
+      "glycosylated_aa": {
+        "name": "Amino Acid",
+        "shortName": "Glycosylated Residue",
+        "site_form": "Amino Acid",
+        "tooltip": {
+          "title": "Glycosylated Amino Acid",
+          "text": "Amino acids are organic compounds containing amine (-NH2) and carboxyl (-COOH) functional groups, along with a side chain (R group) specific to each amino acid. Click to highlight multiple selections for Glycosylated Amino Acid."
+        },
+        "id": "glycosylated_aa"
+      },
+      "contributions": {
+        "site_has_phosphorylation": {
+          "id": "site_has_phosphorylation",
+          "name": "Phosphorylation annotations"
+        },
+        "site_has_mutagenesis": {
+          "id": "site_has_mutagenesis",
+          "name": "Metagenesis annotations"
+        },
+        "site_has_glycosylation": {
+          "id": "site_has_glycosylation",
+          "name": "Glycosylation annotations"
+        },
+        "site_has_snv": {
+          "id": "site_has_snv",
+          "name": "SVN annotations"
+        },
+        "site_has_glycation": {
+          "id": "site_has_glycation",
+          "name": "Glycation annotations"
+        }
       }
     }
   },

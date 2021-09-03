@@ -21,6 +21,8 @@ import LineTooltip from "../components/tooltip/LineTooltip";
 import HitScoreTooltip from "../components/tooltip/HitScoreTooltip";
 import { Link } from "react-router-dom";
 const proteinStrings = stringConstants.protein.common;
+const siteStrings = stringConstants.site.common;
+
 
 // import { GLYGEN_BASENAME } from "../envVariables";
 
@@ -172,7 +174,7 @@ const SiteList = props => {
             title={"Hit Score"}
             text={"Hit Score Formula"}
             formula={"0.1 + ∑ (Weight + 0.01 * Frequency)"}
-            contributions={row.score_info.contributions.map((item) => {return {c:proteinStrings.site_contributions[item.c] ? proteinStrings.site_contributions[item.c].name: item.c, w: item.w, f: item.f}})}
+            contributions={row.score_info.contributions.map((item) => {return {c:siteStrings.contributions[item.c] ? siteStrings.contributions[item.c].name: item.c, w: item.w, f: item.f}})}
           />
           {row.hit_score}
         </>

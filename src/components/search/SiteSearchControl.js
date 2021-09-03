@@ -21,7 +21,6 @@ import stringConstants from "../../data/json/stringConstants";
 import { InputLabel, Radio } from "@material-ui/core";
 import { grid, positions } from "@material-ui/system";
 import { getSiteSearch, getSiteSearchInit } from "../../data/supersearch";
-import proteinSearchData from "../../data/json/proteinSearch";
 import * as routeConstants from "../../data/json/routeConstants";
 import { logActivity } from "../../data/logging";
 import { axiosError } from "../../data/axiosError";
@@ -29,9 +28,8 @@ import { getTitle, getMeta } from "../../utils/head";
 import PageLoader from "../load/PageLoader";
 import FeedbackWidget from "../FeedbackWidget";
 import TextAlert from "../alert/TextAlert";
-const commonProteinData = stringConstants.protein.common;
+const siteStrings = stringConstants.site.common;
 const sitesData = siteData.site_search;
-let advancedSearch = proteinSearchData.advanced_search;
 let siteListRoute = routeConstants.siteList;
 /**
  * Protein advanced search control.
@@ -52,6 +50,10 @@ const SiteSearchControl = props => {
   const [annotations, setAnnotations] = useState([]);
   const [singleannotations, setSingleAnnotations] = useState("");
   const [queryObject, setQueryObject] = useState({});
+  const [siteError, setSiteError] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { neighbors: false, pattern: false }
+  );
   const [pageLoading, setPageLoading] = useState(true);
   const [alertTextInput, setAlertTextInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -61,7 +63,6 @@ const SiteSearchControl = props => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
-  const proteinStrings = stringConstants.protein.common;
 
   useEffect(() => {
     setPageLoading(true);
@@ -71,7 +72,9 @@ const SiteSearchControl = props => {
     logActivity();
     setAlertTextInput({ show: false });
     getSiteSearchInit().then(response => {
-      response.data.annotation_type_list = response.data.annotation_type_list.map((item) => {return {id: item.id, name: item.label}});
+      if (response.data && response.data.annotation_type_list){
+        response.data.annotation_type_list = response.data.annotation_type_list.map((item) => {return {id: item.id, name: item.label}});
+      }
       setInitData(response.data);
       setPageLoading(false);
     });
@@ -126,12 +129,12 @@ const SiteSearchControl = props => {
   }, [initData, defaults]);
 
   useEffect(() => {
-    let currentPosition = parseInt(position) || 0;
+    let currentPosition = position;
 
     currentPosition = Math.min(currentPosition, 8);
-    // currentPosition = Math.max(currentPosition, 0);
+    currentPosition = Math.max(currentPosition, 0);
 
-    setPosition(currentPosition.toString());
+    //setPosition(currentPosition);
 
     setPageLoading(false);
     setQueryObject({
@@ -190,6 +193,29 @@ const SiteSearchControl = props => {
   // };
 
   const handleSearch = () => {
+
+    let errorTemp = siteError;
+    let error = false;
+    if (position !== "" || pattern !== ""){
+      if (!(pattern !== "" && position !== "")){
+        errorTemp.pattern = true;
+        error = true;
+      }
+    }
+
+    if (distance !== "" || singleannotations !== ""){
+      if (!(singleannotations !== "" && distance !== "")){
+        errorTemp.neighbors = true;
+        error = true;
+      }
+    }
+
+    if (error){
+      setSiteError(errorTemp);
+      return;
+    }
+
+
     setPageLoading(true);
     logActivity("user", "Performing Site Search");
     let message = "Site Search query=" + JSON.stringify(queryObject);
@@ -257,7 +283,13 @@ const SiteSearchControl = props => {
                 <Button className="gg-btn-outline mr-4" onClick={clearSite}>
                   Clear Fields
                 </Button>
-                <Button className="gg-btn-blue" onClick={handleSearch}>
+                <Button 
+                  className="gg-btn-blue" 
+                  onClick={handleSearch}
+                  disabled={!Object.keys(siteError).every(
+                    err => siteError[err] === false)
+                  }
+                >
                   Search Protein Site
                 </Button>
               </Row>
@@ -268,10 +300,10 @@ const SiteSearchControl = props => {
               <FormControl fullWidth variant="outlined">
                 <Typography className={"search-lbl"} gutterBottom>
                   <HelpTooltip
-                    title={commonProteinData.glycosylated_aa.tooltip.title}
-                    text={commonProteinData.glycosylated_aa.tooltip.text}
+                    title={siteStrings.glycosylated_aa.tooltip.title}
+                    text={siteStrings.glycosylated_aa.tooltip.text}
                   />
-                  {proteinStrings.glycosylated_aa.site_form}
+                  {siteStrings.glycosylated_aa.name}
                 </Typography>
                 <SelectControl
                   inputValue={aminoType}
@@ -299,10 +331,10 @@ const SiteSearchControl = props => {
                   <Grid item xs={9} sm={9}>
                     <Typography className={"search-lbl"} gutterBottom>
                       <HelpTooltip
-                        title={commonProteinData.annotation.tooltip.title}
-                        text={commonProteinData.annotation.tooltip.text}
+                        title={siteStrings.annotation.tooltip.title}
+                        text={siteStrings.annotation.tooltip.text}
                       />
-                      {proteinStrings.annotation_type.name}
+                      {siteStrings.annotation_type.name}
                     </Typography>
                     <MultiselectTextInput
                       inputValue={annotations}
@@ -320,7 +352,7 @@ const SiteSearchControl = props => {
                     <FormControl fullWidth variant="outlined">
                       <SelectControl
                         inputValue={annotationOperation}
-                        menu={advancedSearch.aa_listforsite.operations}
+                        menu={sitesData.aa_listforsite.operations}
                         setInputValue={setAnnotationOperation}
                       />
                     </FormControl>
@@ -329,17 +361,17 @@ const SiteSearchControl = props => {
               </FormControl>
             </Grid>
 
-            {/* Neighbours */}
+            {/* Neighbors */}
             <Grid item xs={12} sm={10}>
-              <FormControl fullWidth>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={6} sm={6}>
+              {/* <FormControl fullWidth> */}
+                <Grid container spacing={2} style={{paddingBottom:"0px"}} alignItems="center">
+                  <Grid item xs={6} sm={6} style={{paddingBottom:"0px"}}>
                     <Typography className={"search-lbl"} gutterBottom>
                       <HelpTooltip
-                        title={commonProteinData.neighbours.tooltip.title}
-                        text={commonProteinData.neighbours.tooltip.text}
+                        title={siteStrings.neighbors.tooltip.title}
+                        text={siteStrings.neighbors.tooltip.text}
                       />
-                      {commonProteinData.neighbours.tooltip.title}
+                      {siteStrings.neighbors.tooltip.title}
                     </Typography>
 
                     <FormControl fullWidth variant="outlined">
@@ -348,89 +380,167 @@ const SiteSearchControl = props => {
                         placeholder={sitesData.annotation.placeholder}
                         placeholderId={sitesData.annotation.placeholderId}
                         placeholderName={sitesData.annotation.placeholderName}
-                        menu={initData.annotation_type_list
-                          .map(a => ({
-                            name: a.name,
-                            id: a.id.replace("_flag", "")
-                          }))
-                          .sort(sortDropdown)}
-                        setInputValue={setSingleAnnotations}
+                        menu={initData.annotation_type_list.sort(sortDropdown)}
+                        setInputValue={(input) => {
+                          if (siteError.neighbors && ((input !== "" && distance !== "") || (input === "" && distance === ""))){
+                            let errorTemp = siteError;
+                            errorTemp.neighbors = false;
+                            setSiteError(errorTemp);
+                          }
+                          setSingleAnnotations(input);
+                        }}
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={3} sm={3}>
+                  <Grid item xs={3} sm={3} style={{paddingBottom:"0px"}}>
                     <Typography className={"search-lbl"} gutterBottom>
                       &nbsp;
                     </Typography>
 
                     <FormControl fullWidth variant="outlined">
-                      <AutoTextInput
-                        inputValue={distance}
-                        setInputValue={setDistance}
+                      <OutlinedInput
+                        fullWidth
+                        margin='dense'
+                        placeholder={"Specify distance"}
+                        value={distance}
+                        onChange={(event) => {
+                          if (siteError.neighbors && ((event.target.value !== "" && singleannotations !== "") || (event.target.value === "" && singleannotations === ""))){
+                            let errorTemp = siteError;
+                            errorTemp.neighbors = false;
+                            setSiteError(errorTemp);
+                          }
+                          setDistance(event.target.value)}}
+                        onBlur={() =>{
+                          let currentDistance = distance;
+                          if (currentDistance !== ""){
+                            currentDistance = Math.max(currentDistance, 1);
+                            setDistance(currentDistance);
+                          }
+                        }}
+                        inputProps={{
+                          step: 1,
+                          min: 1,
+                          type: "number",
+                        }}
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={3} sm={3}>
+                  <Grid item xs={3} sm={3} style={{paddingBottom:"0px"}}>
                     <Typography className={"search-lbl"} gutterBottom>
                       &nbsp;
                     </Typography>
                     <FormControl fullWidth variant="outlined">
                       <SelectControl
                         inputValue={operator}
-                        menu={advancedSearch.operatorforsite.operations}
+                        menu={sitesData.operatorforsite.operations}
                         setInputValue={setOperator}
                       />
                     </FormControl>
                   </Grid>
+                  <Grid item xs={12} sm={10} style={{paddingTop:"0px"}}>
+                     {(siteError.neighbors) && (
+                        <FormHelperText className={"error-text"} error>
+                          {"Specify both options - Annotation Type and Distance."}
+                        </FormHelperText>
+                      )}
+                  </Grid>
                 </Grid>
-              </FormControl>
+              {/* </FormControl> */}
             </Grid>
 
             {/* Pattern */}
             <Grid item xs={12} sm={10}>
-              <FormControl fullWidth>
-                <Grid container spacing={2} alignItems="center">
-                  <Grid item xs={4} sm={4}>
+              {/* <FormControl fullWidth> */}
+                <Grid container spacing={2} style={{paddingBottom:"0px"}} alignItems="center">
+                  <Grid item xs={4} sm={4} style={{paddingBottom:"0px"}}>
                     <Typography className={"search-lbl"} gutterBottom>
                       <HelpTooltip
-                        title={commonProteinData.pattern.tooltip.title}
-                        text={commonProteinData.pattern.tooltip.text}
+                        title={siteStrings.pattern.tooltip.title}
+                        text={siteStrings.pattern.tooltip.text}
                       />
-                      {commonProteinData.pattern.tooltip.title}
+                      {siteStrings.pattern.tooltip.title}
                     </Typography>
                     <FormControl fullWidth variant="outlined">
                       <SelectControl
                         inputValue={updownoperator}
-                        menu={advancedSearch.updownstreamforsite.operations}
+                        menu={sitesData.updownstreamforsite.operations}
                         setInputValue={setUpDownOperator}
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={4} sm={4}>
+                  <Grid item xs={4} sm={4} style={{paddingBottom:"0px"}}>
+                    <Typography className={"search-lbl"} gutterBottom>
+                      &nbsp;
+                    </Typography>
+                    {/* <FormControl fullWidth variant="outlined"> */}
+                      <OutlinedInput
+                        fullWidth
+                        margin='dense'
+                        placeholder={"Specify position"}
+                        value={position}
+                        onChange={(event) => {
+                          if (siteError.pattern && ((event.target.value !== "" && pattern !== "") || (event.target.value === "" && pattern === ""))){
+                              let errorTemp = siteError;
+                              errorTemp.pattern = false;
+                              setSiteError(errorTemp);
+                          }
+                          setPosition(event.target.value)
+                        }}
+                        onBlur={() =>{
+                          let currentPosition = position;
+                          if (currentPosition !== ""){
+                            currentPosition = Math.min(currentPosition, 12);
+                            currentPosition = Math.max(currentPosition, 1);
+                            setPosition(currentPosition);
+                          }
+                        }}
+                        inputProps={{
+                          step: 1,
+                          min: 1,
+                          max: 12,
+                          type: "number",
+                        }}
+                        error={siteError.pattern}
+                      />
+                    {/* </FormControl> */}
+                  </Grid>
+                  <Grid item xs={4} sm={4} style={{paddingBottom:"0px"}}>
                     <Typography className={"search-lbl"} gutterBottom>
                       &nbsp;
                     </Typography>
                     <FormControl fullWidth variant="outlined">
-                      <AutoTextInput
-                        inputValue={position}
-                        setInputValue={setPosition}
+                      <OutlinedInput
+                        fullWidth
+                        required
+                        margin='dense'
+                        placeholder={"Peptide (eg : NPT)"}
+                        value={pattern}
+                        onChange={(event) => {
+                          if (siteError.pattern && ((event.target.value !== "" && position !== "") || (event.target.value === "" && position === ""))){
+                            let errorTemp = siteError;
+                            errorTemp.pattern = false;
+                            setSiteError(errorTemp);
+                         }
+                          setPattern(event.target.value)}}
+                        error={pattern.length > 8 || siteError.pattern}
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={4} sm={4}>
-                    <Typography className={"search-lbl"} gutterBottom>
-                      &nbsp;
-                    </Typography>
-                    <FormControl fullWidth variant="outlined">
-                      <AutoTextInput
-                        inputValue={pattern}
-                        setInputValue={setPattern}
-                      />
-                    </FormControl>
+                  <Grid item xs={12} sm={10} style={{paddingTop:"0px"}}>
+                    {(pattern.length > 8) && (
+                        <FormHelperText className={"error-text"} error>
+                          {"Peptide Sequence entry is too long - max length is 9."}
+                        </FormHelperText>
+                      )}
+                     {(siteError.pattern) && (
+                        <FormHelperText className={"error-text"} error>
+                          {"Specify both options - Position Type and Peptide Sequence."}
+                        </FormHelperText>
+                      )}
                   </Grid>
                 </Grid>
-              </FormControl>
-            </Grid>
+              {/* </FormControl> */}
+             </Grid>
 
             {/* Buttons Buttom */}
             <Grid item xs={12} sm={10}>
@@ -438,7 +548,15 @@ const SiteSearchControl = props => {
                 <Button className="gg-btn-outline mr-4" onClick={clearSite}>
                   Clear Fields
                 </Button>
-                <Button className="gg-btn-blue" onClick={handleSearch}>
+                <Button 
+                  className="gg-btn-blue" 
+                  onClick={handleSearch}
+                  disabled={
+                    !Object.keys(siteError).every(
+                      err => siteError[err] === false
+                    )
+                  }
+                >
                   Search Protein Site
                 </Button>
               </Row>

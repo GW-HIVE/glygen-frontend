@@ -44,117 +44,12 @@
     "amino_type": {
       "placeholder": "Select Residue Type",
       "placeholderId": "",
-      "placeholderName": "",
-      "menu": [
-        {
-          "id": "Ala",
-          "name": "Alanine (Ale)"
-        },
-        {
-          "id": "Arg",
-          "name": "arginine (Arg)"
-        },
-        {
-          "id": "Asn",
-          "name": "asparagine (Asn)"
-        },
-        {
-          "id": "Asp",
-          "name": "aspartic (Asp)"
-        },
-        {
-          "id": "Cys",
-          "name": "cysteine (Cys)"
-        },
-        {
-          "id": "Gln",
-          "name": "glutamine (Gln)"
-        },
-        {
-          "id": "Glu",
-          "name": "glutamic (Glu)"
-        },
-        {
-          "id": "Gly",
-          "name": "glycine (Gly)"
-        },
-        {
-          "id": "His",
-          "name": "histidine (His)"
-        },
-        {
-          "id": "Ile",
-          "name": "isoleucine (Ile)"
-        },
-        {
-          "id": "Leu",
-          "name": "leucine (Leu)"
-        },
-        {
-          "id": "Lys",
-          "name": "lysine (Lys)"
-        },
-        {
-          "id": "Met",
-          "name": "methionine (Met)"
-        },
-        {
-          "id": "Phe",
-          "name": "phenylalanine (Phe)"
-        },
-        {
-          "id": "Pro",
-          "name": "proline (Pro)"
-        },
-        {
-          "id": "Ser",
-          "name": "serine (Ser)"
-        },
-        {
-          "id": "His",
-          "name": "histidine (His)"
-        },
-        {
-          "id": "Thr",
-          "name": "threonine (Thr)"
-        },
-        {
-          "id": "Trp",
-          "name": "tryptophan (Trp)"
-        },
-        {
-          "id": "Tyr",
-          "name": "tyrosine (Tyr)"
-        },
-        {
-          "id": "Val",
-          "name": "valine (Val)"
-        }
-      ]
+      "placeholderName": ""
     },
-
     "annotation": {
       "placeholder": "Select Annotation Type",
       "placeholderId": "",
-      "placeholderName": "",
-      "menu": [
-        {
-          "id": "glycosylation",
-          "name": "Glycosylation"
-        },
-        {
-          "id": "snv",
-          "name": "SNV"
-        },
-        {
-          "id": "phosporylation",
-          "name": "Phosporylation"
-        },
-        {
-          "id": "mutagenesis",
-          "name": "Mutagenesis"
-        }
-      ]
+      "placeholderName": ""
     },
     "operator_list": {
       "placeholder": "Click to select one or multiple Amino Acids",
@@ -170,9 +65,51 @@
           "name": "And"
         }
       ]
+    },
+    "aa_listforsite": {
+      "placeholder": "Click to select one or multiple Amino Acids",
+      "operations": [
+        {
+          "id": "$or",
+          "name": "Or"
+        },
+        {
+          "id": "$and",
+          "name": "And"
+        }
+      ]
+    },
+    "operatorforsite": {
+      "placeholder": "Click to select one or multiple Amino Acids",
+      "operations": [
+        {
+          "id": "$gte",
+          "name": ">="
+        },
+        {
+          "id": "$eq",
+          "name": "="
+        },
+        {
+          "id": "$lte",
+          "name": "<="
+        }
+      ]
+    },
+    "updownstreamforsite": {
+      "placeholder": "Click to select one or multiple Amino Acids",
+      "operations": [
+        {
+          "id": "down_seq",
+          "name": "Down stream (C-term)"
+        },
+        {
+          "id": "up_seq",
+          "name": "Up stream (N-term)"
+        }
+      ]
     }
   },
-
   "tutorial": {
     "tabTitle": "Tutorial"
   }

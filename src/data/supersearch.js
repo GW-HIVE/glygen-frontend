@@ -147,6 +147,34 @@ const constructSiteSearchObject = queryObject => {
       order++;
     }
 
+    if (parseInt(distance) && operator && singleannotations && singleannotations.length){
+      siteQuery.query.unaggregated_list.push({
+        path: "neighbors.categories",
+        order,
+        operator: "$eq",
+        string_value: singleannotations
+      });
+      order++;
+    
+      siteQuery.query.unaggregated_list.push({
+        path: "neighbors.distance",
+        order,
+        operator: operator,
+        numeric_value: parseInt(distance)
+      });
+      order++;
+  }
+
+    if (combinedPattern && combinedPattern.length > 9 && updownoperator) {
+      siteQuery.query.unaggregated_list.push({
+        path: updownoperator,
+        order,
+        operator: "$regex",
+        string_value: combinedPattern
+      });
+      order++;
+    }
+
     if (annotations && annotations.length) {
       let targetList = siteQuery.query.unaggregated_list;
       if (annotationOperation === "$or" && annotations.length > 1) {
@@ -182,36 +210,6 @@ const constructSiteSearchObject = queryObject => {
           order++;
         }
       }
-    }
-
-    if (singleannotations && singleannotations.length) {
-      siteQuery.query.unaggregated_list.push({
-        path: "neighbors.categories",
-        order,
-        operator: "$eq",
-        string_value: singleannotations
-      });
-      order++;
-    }
-
-    if (parseInt(distance) && operator) {
-      siteQuery.query.unaggregated_list.push({
-        path: "neighbors.distance",
-        order,
-        operator: operator,
-        numeric_value: parseInt(distance)
-      });
-      order++;
-    }
-
-    if (combinedPattern && updownoperator) {
-      siteQuery.query.unaggregated_list.push({
-        path: updownoperator,
-        order,
-        operator: "$regex",
-        string_value: combinedPattern
-      });
-      order++;
     }
 
     formObject.push(siteQuery);
