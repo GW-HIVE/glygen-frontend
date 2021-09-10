@@ -1180,7 +1180,7 @@
         "name": "glycosylation"
       },
       "interactions": {
-        "name": "interactions"
+        "name": "Glycan Ligands"
       },
       "identifiers": {
         "name": "identifiers"
@@ -1293,7 +1293,7 @@
       },
       "neighbors": {
         "name": "Neighbors",
-        "shortName": "Neighbors",
+        "shortName": "Neighbor Annotation",
         "tooltip": {
           "title": "Neighbors",
           "text": "You can search neighboring site by entering annotation information.",

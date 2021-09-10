@@ -7,7 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableCell from '@material-ui/core/TableCell';
 import RouteLink from '../Link/RouteLink.js'
-import {sortDropdown} from '../../utils/common';
+import {sortDropdownIgnoreCase} from '../../utils/common';
 import "../../css/Search.css";
 
 /**
@@ -42,7 +42,7 @@ export default function GlobalSearchCard(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.searchItems.sort(sortDropdown).map( items => 
+                        {props.searchItems.sort(sortDropdownIgnoreCase).map( items => 
                         (items.name !== "all" && <TableRow key={items.name} hover className="card-row">
                             <TableCell className={"gs-cell-left"} classes={{body: "gs-cell"}}>
                                 <span>{items.name[0].toUpperCase() + items.name.slice(1)}</span>
