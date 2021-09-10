@@ -115,7 +115,7 @@ const constructSiteSearchObject = queryObject => {
         aggregated_list: []
       }
     };
-    let order = 1;
+    let order = 0;
 
     if (aminoType && aminoType.length) {
       siteQuery.query.unaggregated_list.push({
@@ -165,7 +165,7 @@ const constructSiteSearchObject = queryObject => {
       order++;
   }
 
-    if (combinedPattern && combinedPattern.length > 9 && updownoperator) {
+    if (combinedPattern && combinedPattern.length && updownoperator) {
       siteQuery.query.unaggregated_list.push({
         path: updownoperator,
         order,
@@ -175,6 +175,7 @@ const constructSiteSearchObject = queryObject => {
       order++;
     }
 
+    // Added in the bottom of site concept to handle or conditions.
     if (annotations && annotations.length) {
       let targetList = siteQuery.query.unaggregated_list;
       if (annotationOperation === "$or" && annotations.length > 1) {
@@ -253,6 +254,15 @@ export const createSiteQuerySummary = query => {
       result.min = listItem.numeric_value;
     } else if (listItem.path === "end_pos") {
       result.max = listItem.numeric_value;
+    } else if (listItem.path === "neighbors.categories") {
+      result.neighborsCat = listItem.string_value;
+    } else if (listItem.path === "neighbors.distance") {
+      result.neighborsDist = listItem.numeric_value;
+      result.neighborsDistOper = listItem.operator;
+    } else if (listItem.path === "down_seq" || listItem.path === "up_seq") {
+      result.patternTerminal = listItem.path;
+      result.patternPosition = listItem.string_value.split("|")[0];
+      result.patternPeptide = listItem.string_value.split("|")[1];
     }
   };
 

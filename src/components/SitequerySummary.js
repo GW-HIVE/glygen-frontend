@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import stringConstants from "../data/json/stringConstants";
+import siteData from "../data/json/siteData";
 import { Row, Col } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -45,6 +46,7 @@ const SiteQuerySummary = (props) => {
   const proteinStrings = stringConstants.protein.common;
   const siteStrings = stringConstants.site.common;
   const superSearchStrings = stringConstants.super_search.common;
+  const siteSearch = siteData.site_search;
 
   const executionTime = timestamp ? getDateTime(timestamp) : "";
 
@@ -60,6 +62,18 @@ const SiteQuerySummary = (props) => {
     annotations = initData.annotation_type_list.filter((annotation) => {
       return querySummary.annotations.includes(annotation.id);
     });
+  }
+
+  let annoNeighbor = "";
+  if (
+    initData &&
+    initData.annotation_type_list &&
+    initData.annotation_type_list.length &&
+    querySummary.neighborsCat
+  ) {
+    annoNeighbor = initData.annotation_type_list.filter((annotation) => {
+       return querySummary.neighborsCat === annotation.id}
+    )[0].label;
   }
   let annotationOperation = "";
   if (querySummary.annotationOperation) {
@@ -115,7 +129,7 @@ const SiteQuerySummary = (props) => {
                   {querySummary.position && (
                     <Row className="summary-table-col" sm={12}>
                       <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                        Position:
+                        {siteStrings.position_site.shortName}:
                       </Col>
                       <Col align="left" xs={6} sm={6} md={6} lg={6}>
                         {querySummary.position}
@@ -125,10 +139,30 @@ const SiteQuerySummary = (props) => {
                   {querySummary.min && querySummary.max && (
                     <Row className="summary-table-col" sm={12}>
                       <Col align="right" xs={6} sm={6} md={6} lg={6}>
-                        Range:
+                        {siteStrings.site_range.shortName}:
                       </Col>
                       <Col align="left" xs={6} sm={6} md={6} lg={6}>
                         {querySummary.min} to {querySummary.max}
+                      </Col>
+                    </Row>
+                  )}
+                  {annoNeighbor && annoNeighbor !== "" && querySummary.neighborsDist && querySummary.neighborsDistOper && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        {siteStrings.neighbors.shortName}:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {annoNeighbor}{" (Distance "}{siteSearch.operatorforsite.operations.filter((item) => item.id === querySummary.neighborsDistOper)[0].name}{" "}{querySummary.neighborsDist})
+                      </Col>
+                    </Row>
+                  )}
+                  {querySummary.patternTerminal && querySummary.patternPeptide && querySummary.patternPosition && (
+                    <Row className="summary-table-col" sm={12}>
+                      <Col align="right" xs={6} sm={6} md={6} lg={6}>
+                        {siteStrings.pattern.shortName}:
+                      </Col>
+                      <Col align="left" xs={6} sm={6} md={6} lg={6}>
+                        {querySummary.patternPeptide}{" ("}{querySummary.patternPosition}{" Amino Acids towards "}{siteSearch.updownstreamforsite.operations.filter((item) => item.id === querySummary.patternTerminal)[0].shortName}{")"}
                       </Col>
                     </Row>
                   )}

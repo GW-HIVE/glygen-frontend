@@ -30,7 +30,6 @@ import FeedbackWidget from "../FeedbackWidget";
 import TextAlert from "../alert/TextAlert";
 const siteStrings = stringConstants.site.common;
 const sitesData = siteData.site_search;
-let siteListRoute = routeConstants.siteList;
 /**
  * Protein advanced search control.
  */
@@ -49,10 +48,9 @@ const SiteSearchControl = props => {
   const [updownoperator, setUpDownOperator] = useState("down_seq");
   const [annotations, setAnnotations] = useState([]);
   const [singleannotations, setSingleAnnotations] = useState("");
-  const [queryObject, setQueryObject] = useState({});
   const [siteError, setSiteError] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
-    { neighbors: false, pattern: false }
+    { neighbors: false, pattern: false, peptideInvalid: false, peptideLength: false, upstreamPosition: false }
   );
   const [pageLoading, setPageLoading] = useState(true);
   const [alertTextInput, setAlertTextInput] = useReducer(
@@ -63,7 +61,8 @@ const SiteSearchControl = props => {
     (state, newState) => ({ ...state, ...newState }),
     { show: false, id: "" }
   );
-
+  const amAcidPattern = /[^rhkdestnqcugpavilmfywxRHKDESTNQCUGPAVILMFYWX]/g;
+  
   useEffect(() => {
     setPageLoading(true);
     document.addEventListener("click", () => {
@@ -91,11 +90,8 @@ const SiteSearchControl = props => {
       setAnnotations(anno);
     }
 
-    if (defaults.annotations) {
-      const anno = initData.annotation_type_list.filter(annotation => {
-        return defaults.annotations.includes(annotation.id);
-      });
-      setSingleAnnotations(anno);
+    if (defaults.neighborsCat) {
+      setSingleAnnotations(defaults.neighborsCat);
     }
     if (defaults.aminoType) {
       setAminoType(defaults.aminoType);
@@ -106,66 +102,27 @@ const SiteSearchControl = props => {
     // if (defaults.max) {
     //   setMaxRange(defaults.max);
     // }
-    if (defaults.position) {
-      setPosition(defaults.position);
+    if (defaults.patternPosition) {
+      setPosition(defaults.patternPosition);
     }
     if (defaults.annotationOperation) {
       setAnnotationOperation(defaults.annotationOperation);
     }
-    if (defaults.operator) {
-      setOperator(defaults.operator);
+    if (defaults.neighborsDistOper) {
+      setOperator(defaults.neighborsDistOper);
     }
-    if (defaults.updownoperator) {
-      setOperator(defaults.updownoperator);
+    if (defaults.patternTerminal) {
+      setUpDownOperator(defaults.patternTerminal);
     }
-    if (defaults.distance) {
-      setDistance(defaults.distance);
+    if (defaults.neighborsDist) {
+      setDistance(defaults.neighborsDist);
     }
-    if (defaults.pattern) {
-      setPattern(defaults.pattern);
+    if (defaults.patternPeptide) {
+      setPattern(defaults.patternPeptide);
     }
 
-    console.log("defaults", defaults);
   }, [initData, defaults]);
 
-  useEffect(() => {
-    let currentPosition = position;
-
-    currentPosition = Math.min(currentPosition, 8);
-    currentPosition = Math.max(currentPosition, 0);
-
-    //setPosition(currentPosition);
-
-    setPageLoading(false);
-    setQueryObject({
-      proteinId,
-      aminoType,
-      annotations,
-      annotationOperation,
-      singleannotations,
-      operator,
-      updownoperator,
-      distance,
-      // minRange,
-      // maxRange,
-      combinedPattern: updownoperator === 'up_seq' ? `${pattern.toUpperCase()}{${parseInt(
-        currentPosition
-      )}}[A-Z]$` : `^[A-Z]{${parseInt(currentPosition)}}${pattern.toUpperCase()}`
-    });
-  }, [
-    proteinId,
-    aminoType,
-    annotations,
-    annotationOperation,
-    singleannotations,
-    operator,
-    updownoperator,
-    pattern,
-    distance,
-    position
-    // minRange,
-    // maxRange
-  ]);
 
   /**
    * Function to clear input field values.
@@ -174,9 +131,9 @@ const SiteSearchControl = props => {
     setAlertTextInput({ show: false });
     setproteinId("");
     // setMinRange("");
-    setSingleAnnotations([]);
+    setSingleAnnotations("");
     setOperator("$lte");
-    setPosition(" ");
+    setPosition("");
     setPattern("");
     setDistance("");
     // setMaxRange("");
@@ -184,6 +141,12 @@ const SiteSearchControl = props => {
     setAminoType("");
     setAnnotationOperation("$and");
     setUpDownOperator("down_seq");
+    let errorTemp = {};
+    let errorKeys = Object.keys(siteError);
+    for(let i = 0; i < errorKeys.length; i++){
+      errorTemp[errorKeys[i]] = false;
+    }
+    setSiteError(errorTemp);
   };
 
   // const handlePositionChange = event => {
@@ -196,18 +159,19 @@ const SiteSearchControl = props => {
 
     let errorTemp = siteError;
     let error = false;
-    if (position !== "" || pattern !== ""){
-      if (!(pattern !== "" && position !== "")){
+    if ((position !== "" || pattern !== "") && !(pattern !== "" && position !== "")){
         errorTemp.pattern = true;
         error = true;
-      }
     }
 
-    if (distance !== "" || singleannotations !== ""){
-      if (!(singleannotations !== "" && distance !== "")){
+    if (updownoperator === "up_seq" && pattern !== "" && position !== ""){
+      errorTemp.upstreamPosition = pattern.length >= position;
+      error = pattern.length >= position;
+    }
+
+    if ((distance !== "" || singleannotations !== "") && !(singleannotations !== "" && distance !== "")){
         errorTemp.neighbors = true;
         error = true;
-      }
     }
 
     if (error){
@@ -215,18 +179,25 @@ const SiteSearchControl = props => {
       return;
     }
 
+    let queryObject = {
+      proteinId : proteinId.split(",").filter(x => x !== ""),
+      aminoType,
+      annotations : annotations.map(x => x.id.toLowerCase()),
+      annotationOperation,
+      singleannotations,
+      operator,
+      updownoperator,
+      distance,
+      // minRange,
+      // maxRange,
+      combinedPattern: position === "" || pattern === "" ?  "" : `${parseInt(position)}|${pattern}`
+    };
 
     setPageLoading(true);
-    logActivity("user", "Performing Site Search");
+    logActivity("user", props.searchId, "Performing Site Search");
     let message = "Site Search query=" + JSON.stringify(queryObject);
-    console.log(message);
 
-    getSiteSearch({
-      ...queryObject,
-      proteinId: queryObject.proteinId.split(",").filter(x => x !== ""),
-      aminoType: queryObject.aminoType,
-      annotations: queryObject.annotations.map(x => x.id.toLowerCase())
-    })
+    getSiteSearch(queryObject)
       .then(response => {
         let listId = undefined;
 
@@ -239,7 +210,10 @@ const SiteSearchControl = props => {
           listId = response.data.results_summary.site.list_id;
 
         if (listId) {
-          window.location = siteListRoute + listId;
+          logActivity("user", (props.searchId || "") + ">" + listId, message)
+					.finally(() => {	
+            window.location = routeConstants.siteList + listId;
+					});
         } else {
           logActivity("user", "", "No results. ");
           setPageLoading(false);
@@ -389,6 +363,7 @@ const SiteSearchControl = props => {
                           }
                           setSingleAnnotations(input);
                         }}
+                        error={siteError.neighbors}
                       />
                     </FormControl>
                   </Grid>
@@ -401,7 +376,7 @@ const SiteSearchControl = props => {
                       <OutlinedInput
                         fullWidth
                         margin='dense'
-                        placeholder={"Specify distance"}
+                        placeholder={sitesData.neighborDistance.placeholder}
                         value={distance}
                         onChange={(event) => {
                           if (siteError.neighbors && ((event.target.value !== "" && singleannotations !== "") || (event.target.value === "" && singleannotations === ""))){
@@ -413,15 +388,16 @@ const SiteSearchControl = props => {
                         onBlur={() =>{
                           let currentDistance = distance;
                           if (currentDistance !== ""){
-                            currentDistance = Math.max(currentDistance, 1);
+                            currentDistance = Math.max(currentDistance, sitesData.neighborDistance.min);
                             setDistance(currentDistance);
                           }
                         }}
                         inputProps={{
                           step: 1,
-                          min: 1,
+                          min: sitesData.neighborDistance.min,
                           type: "number",
                         }}
+                        error={siteError.neighbors}
                       />
                     </FormControl>
                   </Grid>
@@ -437,10 +413,10 @@ const SiteSearchControl = props => {
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={12} sm={10} style={{paddingTop:"0px"}}>
+                  <Grid item style={{paddingTop:"0px"}}>
                      {(siteError.neighbors) && (
                         <FormHelperText className={"error-text"} error>
-                          {"Specify both options - Annotation Type and Distance."}
+                          {sitesData.neighborDistance.errorText}
                         </FormHelperText>
                       )}
                   </Grid>
@@ -464,7 +440,12 @@ const SiteSearchControl = props => {
                       <SelectControl
                         inputValue={updownoperator}
                         menu={sitesData.updownstreamforsite.operations}
-                        setInputValue={setUpDownOperator}
+                        setInputValue={(input) => {
+                          let errorTemp = siteError;
+                          errorTemp.upstreamPosition = false;
+                          setSiteError(errorTemp);
+                          setUpDownOperator(input);
+                        }}
                       />
                     </FormControl>
                   </Grid>
@@ -476,31 +457,35 @@ const SiteSearchControl = props => {
                       <OutlinedInput
                         fullWidth
                         margin='dense'
-                        placeholder={"Specify position"}
+                        placeholder={sitesData.patternPosition.placeholder}
                         value={position}
                         onChange={(event) => {
+                          let errorTemp = siteError;
                           if (siteError.pattern && ((event.target.value !== "" && pattern !== "") || (event.target.value === "" && pattern === ""))){
-                              let errorTemp = siteError;
                               errorTemp.pattern = false;
-                              setSiteError(errorTemp);
                           }
+
+                          if (siteError.upstreamPosition && ((event.target.value === "" || pattern === "") || (event.target.value > pattern.length))){
+                            errorTemp.upstreamPosition = false;
+                          }
+                          setSiteError(errorTemp);
                           setPosition(event.target.value)
                         }}
                         onBlur={() =>{
                           let currentPosition = position;
                           if (currentPosition !== ""){
-                            currentPosition = Math.min(currentPosition, 12);
-                            currentPosition = Math.max(currentPosition, 1);
+                            currentPosition = Math.min(currentPosition, sitesData.patternPosition.max);
+                            currentPosition = Math.max(currentPosition, sitesData.patternPosition.min);
                             setPosition(currentPosition);
                           }
                         }}
                         inputProps={{
                           step: 1,
-                          min: 1,
-                          max: 12,
+                          min: sitesData.patternPosition.min,
+                          max: sitesData.patternPosition.max,
                           type: "number",
                         }}
-                        error={siteError.pattern}
+                        error={siteError.pattern || siteError.upstreamPosition}
                       />
                     {/* </FormControl> */}
                   </Grid>
@@ -513,30 +498,47 @@ const SiteSearchControl = props => {
                         fullWidth
                         required
                         margin='dense'
-                        placeholder={"Peptide (eg : NPT)"}
+                        placeholder={sitesData.patternPeptide.placeholder}
                         value={pattern}
                         onChange={(event) => {
+                          let errorTemp = siteError;
                           if (siteError.pattern && ((event.target.value !== "" && position !== "") || (event.target.value === "" && position === ""))){
-                            let errorTemp = siteError;
                             errorTemp.pattern = false;
-                            setSiteError(errorTemp);
-                         }
-                          setPattern(event.target.value)}}
-                        error={pattern.length > 8 || siteError.pattern}
+                          }
+
+                          if (siteError.upstreamPosition && ((event.target.value === "" || position === "") || (position > event.target.value.length))){
+                            errorTemp.upstreamPosition = false;
+                          }
+                          errorTemp.peptideInvalid = (event.target.value.search(amAcidPattern, "") + 1) > 0;
+                          errorTemp.peptideLength = event.target.value.length > sitesData.patternPeptide.length;
+                          setSiteError(errorTemp);
+                          setPattern(event.target.value)}
+                        }
+                        error={siteError.peptideInvalid || siteError.peptideLength || siteError.pattern || siteError.upstreamPosition}
                       />
                     </FormControl>
                   </Grid>
-                  <Grid item xs={12} sm={10} style={{paddingTop:"0px"}}>
-                    {(pattern.length > 8) && (
+                  <Grid item style={{paddingTop:"0px"}}>
+                    {(siteError.peptideInvalid) && (
                         <FormHelperText className={"error-text"} error>
-                          {"Peptide Sequence entry is too long - max length is 9."}
+                          {sitesData.patternPeptide.errorText}
                         </FormHelperText>
-                      )}
+                    )}
+                    {(siteError.peptideLength) && (
+                        <FormHelperText className={"error-text"} error>
+                          {sitesData.patternPeptide.errorText1}
+                        </FormHelperText>
+                    )}
                      {(siteError.pattern) && (
                         <FormHelperText className={"error-text"} error>
-                          {"Specify both options - Position Type and Peptide Sequence."}
+                          {sitesData.patternPeptide.errorText2}
                         </FormHelperText>
-                      )}
+                    )}
+                    {(siteError.upstreamPosition) && (
+                        <FormHelperText className={"error-text"} error>
+                          {sitesData.patternPeptide.errorText3}
+                        </FormHelperText>
+                    )}
                   </Grid>
                 </Grid>
               {/* </FormControl> */}

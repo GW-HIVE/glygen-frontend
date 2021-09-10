@@ -101,13 +101,33 @@
       "operations": [
         {
           "id": "down_seq",
-          "name": "Down stream (C-term)"
+          "name": "C-terminal (Downstream)",
+          "shortName": "C-terminal"
         },
         {
           "id": "up_seq",
-          "name": "Up stream (N-term)"
+          "name": "N-terminal (Upstream)",
+          "shortName": "N-terminal"
         }
       ]
+    },
+    "neighborDistance":{
+      "min": 1,
+      "errorText": "Specify both options - Annotation Type and Distance.",
+      "placeholder": "Specify distance"
+    },
+    "patternPosition":{
+      "min": 1,
+      "max": 12,
+      "placeholder": "Specify position"
+    },
+    "patternPeptide":{
+      "length": 8,
+      "errorText": "Invalid Peptide Sequence entry.",
+      "errorText1": "Peptide Sequence entry is too long - max length is 8.",
+      "errorText2": "Specify both options - Position and Peptide Sequence.",
+      "errorText3": "For N-terminal (Upstream) option Peptide Sequence length can not be greater or equal to Position.",
+      "placeholder": "Peptide (eg : NPT)"
     }
   },
   "tutorial": {
