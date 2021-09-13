@@ -190,7 +190,7 @@ const SiteSearchControl = props => {
       distance,
       // minRange,
       // maxRange,
-      combinedPattern: position === "" || pattern === "" ?  "" : `${parseInt(position)}|${pattern}`
+      combinedPattern: position === "" || pattern === "" ?  "" : `${parseInt(position)}|${pattern.toUpperCase()}`
     };
 
     setPageLoading(true);
