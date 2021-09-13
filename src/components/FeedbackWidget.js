@@ -73,7 +73,7 @@ const FeedbackWidget = (props) => {
     };
     postTo(url, myHeaders)
       .then((response) => {
-        setContactUsResponseMessage(response.data.message);
+        setContactUsResponseMessage("We have received your message and will make every effort to respond to you within a reasonable amount of time.");
         resetForm();
       })
       .catch((error) => {

@@ -97,7 +97,7 @@ const ContactForm = (props) => {
     postTo(url, myHeaders)
       .then((response) => {
         logActivity("user", "", "Message sent from contact us page.");
-        setContactUsResponseMessage(decodeURIComponent(response.data.message)); //decodeURIComponent()
+        setContactUsResponseMessage("We have received your message and will make every effort to respond to you within a reasonable amount of time."); //decodeURIComponent()
       })
       .catch((error) => {
         setContactUsErrorMessage(
