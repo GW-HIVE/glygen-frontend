@@ -9,7 +9,7 @@ import { FaRegLightbulb } from "react-icons/fa";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { AiFillBug } from "react-icons/ai";
 import { postTo } from "../data/api";
-import { validateEmail } from "../utils/common";
+import { validateEmail, replaceSpecialCharacters } from "../utils/common";
 import { Typography } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -57,14 +57,15 @@ const FeedbackWidget = (props) => {
       firstName = temp.substring(0, index);
       lastName = temp.substring(index+1).trim();
     }
+
     const formData = {
       fname: firstName,
       lname: lastName,
       email: email,
-      page: window.location.href,
+      page:  escape(replaceSpecialCharacters(window.location.href)),
       // page: window.location.href.split("?")[0],
       subject: "Feedback Form " + subject,
-      message: message,
+      message:  escape(replaceSpecialCharacters(message)),
     };
 
     const url = `/auth/contact?query=${JSON.stringify(formData)}`;
@@ -139,7 +140,11 @@ const FeedbackWidget = (props) => {
                 >
                   <span
                     className={subject === "Problem" ? "active" : ""}
-                    onClick={() => setSubject("Problem")}
+                    onClick={() => {
+                      setSubject("Problem")
+                      setContactUsResponseMessage();
+                      setContactUsErrorMessage();
+                    }}
                   >
                     <AiFillBug /> Problem{" "}
                   </span>
@@ -155,7 +160,11 @@ const FeedbackWidget = (props) => {
                 >
                   <span
                     className={subject === "Question" ? "active" : ""}
-                    onClick={() => setSubject("Question")}
+                    onClick={() => {
+                      setSubject("Question")
+                      setContactUsResponseMessage();
+                      setContactUsErrorMessage();
+                    }}
                   >
                     <AiFillQuestionCircle /> Question
                   </span>
@@ -170,7 +179,11 @@ const FeedbackWidget = (props) => {
                 >
                   <span
                     className={subject === "Suggestion" ? "active" : " "}
-                    onClick={() => setSubject("Suggestion")}
+                    onClick={() => {
+                      setSubject("Suggestion")
+                      setContactUsResponseMessage();
+                      setContactUsErrorMessage();
+                    }}
                   >
                     <FaRegLightbulb /> Suggestion
                   </span>
