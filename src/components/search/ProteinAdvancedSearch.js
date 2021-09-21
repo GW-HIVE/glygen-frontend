@@ -537,6 +537,31 @@ const ProteinAdvancedSearch = (props) => {
 						/>
 					</FormControl>
 				</Grid>
+				{/* Glycosylation  Type */}
+				<Grid item xs={12} sm={10}>
+					<FormControl
+						fullWidth
+						variant='outlined'
+					>
+						<Typography className={'search-lbl'} gutterBottom>
+							<HelpTooltip
+                                title={commonProteinData.glycosylation_type.tooltip.title}
+                                text={commonProteinData.glycosylation_type.tooltip.text}
+                            />
+                            {commonProteinData.glycosylation_type.name}
+						</Typography>
+						{/* {advancedSearch.glycosylation_type && ( */}
+							<SelectControl
+								inputValue={props.inputValue.proGlycosylationType}
+								placeholder={advancedSearch.glycosylation_type.placeholder}
+								placeholderId={advancedSearch.glycosylation_type.placeholderId}
+								placeholderName={advancedSearch.glycosylation_type.placeholderName}
+								menu={props.initData.glycosylation_types.map(a => ({name:a, id:a}))}
+								setInputValue={proGlycosylationTypeOnChange}
+							/>
+						{/* )} */}
+					</FormControl>
+				</Grid>
 				{/* Covalently Attached Glycan */}
 				<Grid item xs={12} sm={10}>
 					<FormControl fullWidth variant='outlined'>
@@ -604,31 +629,6 @@ const ProteinAdvancedSearch = (props) => {
 								</FormControl>
 							</Grid>
 						</Grid>
-					</FormControl>
-				</Grid>
-				{/* Glycosylation  Type */}
-				<Grid item xs={12} sm={10}>
-					<FormControl
-						fullWidth
-						variant='outlined'
-					>
-						<Typography className={'search-lbl'} gutterBottom>
-							<HelpTooltip
-                                title={commonProteinData.glycosylation_type.tooltip.title}
-                                text={commonProteinData.glycosylation_type.tooltip.text}
-                            />
-                            {commonProteinData.glycosylation_type.name}
-						</Typography>
-						{/* {advancedSearch.glycosylation_type && ( */}
-							<SelectControl
-								inputValue={props.inputValue.proGlycosylationType}
-								placeholder={advancedSearch.glycosylation_type.placeholder}
-								placeholderId={advancedSearch.glycosylation_type.placeholderId}
-								placeholderName={advancedSearch.glycosylation_type.placeholderName}
-								menu={props.initData.glycosylation_types.map(a => ({name:a, id:a}))}
-								setInputValue={proGlycosylationTypeOnChange}
-							/>
-						{/* )} */}
 					</FormControl>
 				</Grid>
 				{/* Glycosylation Evidence Type */}
