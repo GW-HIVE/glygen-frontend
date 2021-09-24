@@ -221,26 +221,31 @@ const SiteList = props => {
     {
       dataField: "snv",
       text: "SNV",
+      sort: true,
       formatter: yesNoFormater
     },
     {
       dataField: "glycosylation",
       text: "Glycosylation",
+      sort: true,
       formatter: yesNoFormater
     },
     {
       dataField: "mutagenesis",
       text: "Mutagenesis",
+      sort: true,
       formatter: yesNoFormater
     },
     {
       dataField: "glycation",
       text: "Glycation",
+      sort: true,
       formatter: yesNoFormater
     },
     {
       dataField: "phosphorylation",
       text: "Phosphorylation",
+      sort: true,
       formatter: yesNoFormater
     }
   ];
