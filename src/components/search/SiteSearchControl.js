@@ -165,8 +165,8 @@ const SiteSearchControl = props => {
     }
 
     if (updownoperator === "up_seq" && pattern !== "" && position !== ""){
-      errorTemp.upstreamPosition = pattern.length >= position;
-      error = pattern.length >= position;
+      errorTemp.upstreamPosition = pattern.length > position;
+      error = pattern.length > position;
     }
 
     if ((distance !== "" || singleannotations !== "") && !(singleannotations !== "" && distance !== "")){
@@ -388,6 +388,7 @@ const SiteSearchControl = props => {
                         onBlur={() =>{
                           let currentDistance = distance;
                           if (currentDistance !== ""){
+                            currentDistance = Math.min(currentDistance, sitesData.neighborDistance.max);
                             currentDistance = Math.max(currentDistance, sitesData.neighborDistance.min);
                             setDistance(currentDistance);
                           }
@@ -395,6 +396,7 @@ const SiteSearchControl = props => {
                         inputProps={{
                           step: 1,
                           min: sitesData.neighborDistance.min,
+                          max: sitesData.neighborDistance.max,
                           type: "number",
                         }}
                         error={siteError.neighbors}

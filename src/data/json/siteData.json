@@ -113,6 +113,7 @@
     },
     "neighborDistance":{
       "min": 1,
+      "max": 20,
       "errorText": "Specify both options - Annotation Type and Distance.",
       "placeholder": "Specify distance"
     },
