@@ -2393,12 +2393,10 @@ const ProteinDetail = (props) => {
                     <Card.Body>
                       {snv && snv.length !== 0 && (
                         <Tabs
-                          // activeKey={mutataionTabSelected}
-                          defaultActiveKey={
-                            mutataionWithdisease && mutataionWithdisease.length > 0
-                              ? "without_disease"
-                              : "with_disease"
-                          }
+                          activeKey={mutataionTabSelected}
+                          onSelect={(key) => {
+                            setMutataionTabSelected(key);
+                          }}
                           transition={false}
                           mountOnEnter={true}
                           unmountOnExit={true}
