@@ -539,6 +539,20 @@ const GlycanDetail = props => {
         ) : (
           "Not Reported"
         )
+    },
+
+    {
+      dataField: "tax_name",
+      text: glycanStrings.organism.shortName,
+      sort: true,
+      headerStyle: (colum, colIndex) => {
+        return { backgroundColor: "#4B85B6", color: "white", width: "20%" };
+      },
+      formatter: (value, row) => (
+        <>
+          {row.tax_name}
+        </>
+      )
     }
   ];
   const glycanBindingProteinColumns = [
@@ -1973,9 +1987,6 @@ const GlycanDetail = props => {
                                     defaultSortField="start_pos"
                                   />
                                 )}
-                              {!expressionWithtissue.length && (
-                                <p>No data available.</p>
-                              )}
                               {!expressionWithtissue.length && (
                                 <p>No data available.</p>
                               )}
