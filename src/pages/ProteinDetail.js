@@ -1488,9 +1488,8 @@ const ProteinDetail = (props) => {
       });
   };
 
-  const createGlycosylationSummary = (data) => {
+  const createGlycosylationSummary = (data, glycan = false) => {
     const info = {};
-
     // console.table(data);
 
     // debugger
@@ -1514,11 +1513,12 @@ const ProteinDetail = (props) => {
       return total + info[key].sites.length;
     }, 0);
 
+    let glycans = (glycan ? 'glycans' : '');
     // use info to make a string
     return [`${totalSites} Sites`]
       .concat(
         Object.keys(info).map(
-          (key) => `${info[key].count} ${key} (${info[key].sites.length} glycans sites)`
+          (key) => `${info[key].count} ${key} (${info[key].sites.length} ${glycans} sites)`
         )
       )
       .join(", ");
@@ -1861,7 +1861,7 @@ const ProteinDetail = (props) => {
                               {glycosylationWithImage && glycosylationWithImage.length !== 0 && (
                                 <div className="Glycosummary">
                                   <strong>Summary:</strong>{" "}
-                                  {createGlycosylationSummary(glycosylationWithImage)}
+                                  {createGlycosylationSummary(glycosylationWithImage, true)}
                                 </div>
                               )}
                               <Container>
