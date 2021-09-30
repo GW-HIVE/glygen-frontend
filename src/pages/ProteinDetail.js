@@ -1517,7 +1517,7 @@ const ProteinDetail = (props) => {
     // use info to make a string
     return [`${totalSites} Sites`]
       .concat(
-        Object.keys(info).map(
+        Object.keys(info).sort((a, b) => a.localeCompare(b)).map(
           (key) => `${info[key].count} ${key} (${info[key].sites.length} ${glycans} sites)`
         )
       )
