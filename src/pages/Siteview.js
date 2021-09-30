@@ -529,12 +529,10 @@ const Siteview = ({ position, history }) => {
       },
       formatter: (value, row) =>
         value ? (
-          <LineTooltip text="View siteview details">
-            <Link to={`${routeConstants.siteview}${id}/${row.position}`}>
+          <span>
               {row.residue}
               {row.position}
-            </Link>
-          </LineTooltip>
+          </span>
         ) : (
           "Not Reported"
         )
