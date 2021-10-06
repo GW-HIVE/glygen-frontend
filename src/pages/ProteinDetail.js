@@ -1522,7 +1522,7 @@ const ProteinDetail = (props) => {
 
     let glycans = (glycan ? 'glycans' : 'annotations');
     // use info to make a string
-    return [`${totalSites} Sites total`]
+    return [`${totalSites} site(s) total`]
       .concat(
         Object.keys(info).sort((a, b) => a.localeCompare(b)).map(
           (key) => `${glycan ? info[key].glycans.length : info[key].count} ${key} ${glycans} at ${info[key].sites.length} site(s)`
