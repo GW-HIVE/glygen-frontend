@@ -1499,26 +1499,33 @@ const ProteinDetail = (props) => {
         info[data[x].type] = {
           count: 0,
           sites: [],
+          glycans: []
         };
       }
       info[data[x].type].count = info[data[x].type].count + 1;
 
+       // count sites
       if (info[data[x].type].sites.indexOf(data[x].start_pos) < 0) {
         info[data[x].type].sites.push(data[x].start_pos);
       }
-      // count sites
+     
+      // count glycans
+      if (glycan && info[data[x].type].glycans.indexOf(data[x].glytoucan_ac) < 0) {
+        info[data[x].type].glycans.push(data[x].glytoucan_ac);
+      }
+
     }
 
     const totalSites = Object.keys(info).reduce((total, key) => {
       return total + info[key].sites.length;
     }, 0);
 
-    let glycans = (glycan ? 'glycans' : '');
+    let glycans = (glycan ? 'glycans' : 'annotations');
     // use info to make a string
-    return [`${totalSites} Sites`]
+    return [`${totalSites} Sites total`]
       .concat(
         Object.keys(info).sort((a, b) => a.localeCompare(b)).map(
-          (key) => `${info[key].count} ${key} (${info[key].sites.length} ${glycans} sites)`
+          (key) => `${glycan ? info[key].glycans.length : info[key].count} ${key} ${glycans} at ${info[key].sites.length} site(s)`
         )
       )
       .join(", ");
