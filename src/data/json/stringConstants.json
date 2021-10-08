@@ -807,7 +807,7 @@
         "id": "relation"
       },
       "uberonN": {
-        "name": "UBERON.",
+        "name": "UBERON",
         "shortName": "UBERON",
         "tooltip": {},
         "id": "uberon"
