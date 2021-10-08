@@ -1520,7 +1520,7 @@ const ProteinDetail = (props) => {
       return total + info[key].sites.length;
     }, 0);
 
-    let glycans = (glycan ? 'glycans' : 'annotations');
+    let glycans = (glycan ? 'glycan(s)' : 'annotation(s)');
     // use info to make a string
     return [`${totalSites} site(s) total`]
       .concat(

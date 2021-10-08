@@ -209,6 +209,14 @@ const PublicationDetail = (props) => {
           setMutataionTabSelected(WithDisease.length > 0 ? "with_disease" : "without_disease");
         }
       }
+      setTimeout(() => {
+        const anchorElement = props.history.location.hash;
+        if (anchorElement && document.getElementById(anchorElement.substr(1))) {
+          document
+            .getElementById(anchorElement.substr(1))
+            .scrollIntoView({ behavior: "auto" });
+        }
+      }, 500);
     });
 
     getPublData.catch(({ response }) => {
@@ -236,36 +244,51 @@ const PublicationDetail = (props) => {
     referenced_glycans,
   } = detailData;
 
-  const createGlycosylationSummary = (data) => {
+  const createGlycosylationSummary = (data, glycan = false) => {
     const info = {};
+    // console.table(data);
+
+    // debugger
+
     for (let x = 0; x < data.length; x++) {
       if (!info[data[x].type]) {
         info[data[x].type] = {
           count: 0,
           sites: [],
+          glycans: []
         };
       }
       info[data[x].type].count = info[data[x].type].count + 1;
 
+       // count sites
       if (info[data[x].type].sites.indexOf(data[x].start_pos) < 0) {
         info[data[x].type].sites.push(data[x].start_pos);
       }
-      // count sites
+     
+      // count glycans
+      if (glycan && info[data[x].type].glycans.indexOf(data[x].glytoucan_ac) < 0) {
+        info[data[x].type].glycans.push(data[x].glytoucan_ac);
+      }
+
     }
 
     const totalSites = Object.keys(info).reduce((total, key) => {
       return total + info[key].sites.length;
     }, 0);
 
+    let glycans = (glycan ? 'glycan(s)' : 'annotation(s)');
     // use info to make a string
-    return [
-      `${totalSites} Sites`,
-      Object.keys(info).map(
-        (key) => `${info[key].count} ${key} (${info[key].sites.length} Glycan sites)`
-      ),
-    ].join(", ");
+    return [`${totalSites} site(s) total`]
+      .concat(
+        Object.keys(info).sort((a, b) => a.localeCompare(b)).map(
+          (key) => `${glycan ? info[key].glycans.length : info[key].count} ${key} ${glycans} at ${info[key].sites.length} site(s)`
+        )
+      )
+      .join(", ");
+
     //15 sites, 31 N-linked glycans (14 sites), 1 O-linked glycan (1 site)
   };
+
   /**
    * Adding toggle collapse arrow icon to card header individualy.
    * @param {object} uniprot_canonical_ac- uniprot accession ID.
@@ -1306,7 +1329,7 @@ const PublicationDetail = (props) => {
                             {glycosylationWithImage && glycosylationWithImage.length > 0 && (
                               <div className="Glycosummary">
                                 <strong>Summary:</strong>{" "}
-                                {createGlycosylationSummary(glycosylationWithImage)}
+                                {createGlycosylationSummary(glycosylationWithImage, true)}
                               </div>
                             )}
 
@@ -1682,11 +1705,10 @@ const PublicationDetail = (props) => {
                   <Card.Body>
                     {expression && expression.length !== 0 && (
                       <Tabs
-                        defaultActiveKey={
-                          expressionWithtissue && expressionWithtissue.length > 0
-                            ? "with_tissue"
-                            : "with_cellline"
-                        }
+                        activeKey={expressionTabSelected}
+                        onSelect={(key) => {
+                          setExpressionTabSelected(key);
+                        }}
                         transition={false}
                         mountOnEnter={true}
                         unmountOnExit={true}
