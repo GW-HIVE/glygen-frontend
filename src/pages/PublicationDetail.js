@@ -1334,20 +1334,22 @@ const PublicationDetail = (props) => {
                             )}
 
                             <Container>
-                              <ClientPaginatedTable
-                                data={addIndex(
-                                  glycosylationWithImage.sort((a, b) => {
-                                    if (a.start_pos < b.start_pos) return -1;
-                                    if (b.start_pos < a.start_pos) return 1;
-                                    return 0;
-                                  })
-                                )}
-                                columns={glycoSylationColumns}
-                                onClickTarget={"#glycosylation"}
-                                defaultSortField="start_pos"
-                                defaultSortOrder="asc"
-                                idField={"index"}
-                              />
+                              {glycosylationWithImage && glycosylationWithImage.length > 0 && (
+                                <ClientPaginatedTable
+                                  data={addIndex(
+                                    glycosylationWithImage.sort((a, b) => {
+                                      if (a.start_pos < b.start_pos) return -1;
+                                      if (b.start_pos < a.start_pos) return 1;
+                                      return 0;
+                                    })
+                                  )}
+                                  columns={glycoSylationColumns}
+                                  onClickTarget={"#glycosylation"}
+                                  defaultSortField="start_pos"
+                                  defaultSortOrder="asc"
+                                  idField={"index"}
+                                />
+                              )}
                               {!glycosylationWithImage.length && (
                                 <div className="tab-content-padding">No data available.</div>
                               )}
