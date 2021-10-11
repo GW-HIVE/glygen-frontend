@@ -164,7 +164,7 @@ const ProteinList = props => {
 
   const handleModifySearch = () => {
     if (searchId === "gs") {
-      props.history.push(routeConstants.globalSearchResult + query.term);
+      window.location = routeConstants.globalSearchResult + encodeURIComponent(query.term);
     } else if (searchId === "sups") {
       props.history.push(routeConstants.superSearch + id);
     } else if (quickSearch[searchId] !== undefined) {
