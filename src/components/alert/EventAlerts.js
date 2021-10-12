@@ -45,9 +45,6 @@ export default function EventAlerts(props) {
                       <h5 className={"gg-blue-color"}>{obj.title}</h5>
                     </AlertTitle>
                     <div>
-                      {obj.start_date} EST -  {obj.end_date} EST
-                    </div>
-                    <div>
                       {obj.description}
                     </div>
                     {obj.url && obj.url_name &&
