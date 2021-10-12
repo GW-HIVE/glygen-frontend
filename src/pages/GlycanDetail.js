@@ -2317,7 +2317,7 @@ const GlycanDetail = props => {
                         <option value="title">Title</option>
                         <option value="date">Date</option>
                         <option value="journal">Journal</option>
-                        <option value="author">Author List</option>
+                        <option value="authors">Author List</option>
                       </select>{" "}
                       <select
                         className="select-dropdown pt-0"
