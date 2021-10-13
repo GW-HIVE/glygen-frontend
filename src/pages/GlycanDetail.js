@@ -881,7 +881,7 @@ const GlycanDetail = props => {
       }
     },
     {
-      dataField: "tissue.uberon_id",
+      dataField: "tissue.uberon",
       text: "Uberon ID",
       sort: true,
       headerStyle: (colum, colIndex) => {

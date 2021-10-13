@@ -135,9 +135,9 @@ const PublicationDetail = (props) => {
             };
           }, {});
 
-          if (data.expression) {
-            const WithTissue = data.expression.filter((item) => item.tissue !== undefined);
-            const WithCellline = data.expression.filter((item) => item.cell_line !== undefined);
+          if (data.glycan_expression) {
+            const WithTissue = data.glycan_expression.filter((item) => item.tissue !== undefined);
+            const WithCellline = data.glycan_expression.filter((item) => item.cell_line !== undefined);
             setExpressionWithtissue(WithTissue);
             setExpressionWithcell(WithCellline);
             setExpressionTabSelected(WithTissue.length > 0 ? "with_tissue" : "with_cellline");
@@ -187,7 +187,7 @@ const PublicationDetail = (props) => {
           newSidebarData = setSidebarItemState(newSidebarData, "Mutagenesis", true);
         }
 
-        if (!detailDataTemp.expression || detailDataTemp.expression.length === 0) {
+        if (!detailDataTemp.glycan_expression || detailDataTemp.glycan_expression.length === 0) {
           newSidebarData = setSidebarItemState(newSidebarData, "Expression", true);
         }
         if (
@@ -239,7 +239,7 @@ const PublicationDetail = (props) => {
     glycation,
     snv,
     mutagenesis,
-    expression,
+    glycan_expression,
     referenced_proteins,
     referenced_glycans,
   } = detailData;
@@ -1705,7 +1705,7 @@ const PublicationDetail = (props) => {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    {expression && expression.length !== 0 && (
+                    {glycan_expression && glycan_expression.length !== 0 && (
                       <Tabs
                         activeKey={expressionTabSelected}
                         onSelect={(key) => {
@@ -1749,7 +1749,7 @@ const PublicationDetail = (props) => {
                       </Tabs>
                     )}
 
-                    {!expression && <p>No data available.</p>}
+                    {!glycan_expression && <p>No data available.</p>}
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
