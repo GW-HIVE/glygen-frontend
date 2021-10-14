@@ -112,7 +112,7 @@ const MotifDetail = (props) => {
             .getElementById(anchorElement.substr(1))
             .scrollIntoView({ behavior: "auto" });
         }
-      }, 500);
+      }, 1000);
     });
     getMotifDetaildata.catch(({ response }) => {
       let message = "motif api call";
