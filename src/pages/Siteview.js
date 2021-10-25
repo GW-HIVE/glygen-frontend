@@ -496,11 +496,11 @@ const Siteview = ({ position, history }) => {
       dataField: "image",
       text: glycanStrings.glycan_image.name,
       sort: false,
-      formatter: (value, row) => (
+      formatter: (value, row) => row.glytoucan_ac ? (
         <div className="img-wrapper">
           <img className="img-cartoon" src={getGlycanImageUrl(row.glytoucan_ac)} alt="Glycan img" />
-        </div>
-      ),
+        </div>) : ( <></>
+        ),
       headerStyle: (colum, colIndex) => {
         return {
           textAlign: "left",
